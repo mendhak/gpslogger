@@ -10,7 +10,7 @@
 
 	<EditTextPreference android:key="distance_before_logging"
 		android:title="Distance before logging"
-		android:summary="Distance traveled before logging the next point. Use 0 for maximum frequency."
+		android:summary="Distance before logging. Use 0 for maximum frequency."
 		android:dialogTitle="Distance in meters" android:numeric="integer"
 		android:maxLength="4" android:hint="Enter distance (max 9999)" />
 	<EditTextPreference android:key="time_before_logging"
@@ -18,4 +18,12 @@
 		android:summary="Number of seconds before logging. Use 0 for maximum frequency."
 		android:dialogTitle="Time in seconds" android:numeric="integer"
 		android:maxLength="4" android:hint="Enter seconds (max 9999)" />
+		<ListPreference
+		android:title="New file creation"
+		android:summary="Whether to create a new file once a day or each time you start."
+		android:key="new_file_creation"
+		android:entries="@array/entries"
+		android:defaultValue="onceaday"
+		android:entryValues="@array/values" />
+		
 </PreferenceScreen>

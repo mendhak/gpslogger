@@ -23,7 +23,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -57,6 +56,8 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 	boolean notificationVisible;
 	int minimumDistance;
 	int minimumSeconds;
+	String newFileCreation;
+	boolean newFileOnceADay;
 
 	double currentLatitude;
 	double currentLongitude;
@@ -113,19 +114,12 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 		// What happens when the notification item is clicked
 		Intent contentIntent = new Intent(this, GpsMainActivity.class);
 
-		String tickerText = null;
-
 		PendingIntent pending = PendingIntent.getActivity(getBaseContext(), 0,
 				contentIntent, android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		Notification nfc = new Notification(R.drawable.gpsstatus, null, System
 				.currentTimeMillis());
 		nfc.flags |= Notification.FLAG_ONGOING_EVENT;
-
-		// nfc.ledARGB = 0;
-		// nfc.ledOffMS = 0;
-		// nfc.ledOnMS = 0;
-		// nfc.defaults |= Notification.FLAG_SHOW_LIGHTS;
 
 		NumberFormat nf = new DecimalFormat("###.####");
 
@@ -154,6 +148,12 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 				"distance_before_logging", "10"));
 		minimumSeconds = Integer.valueOf(prefs.getString("time_before_logging",
 				"60"));
+		newFileCreation = prefs.getString("new_file_creation", "onceaday");
+		if (newFileCreation.equals("onceaday")) {
+			newFileOnceADay = true;
+		} else {
+			newFileOnceADay = false;
+		}
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -290,9 +290,16 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 
 	private void ResetCurrentFileName() {
 
-		// 20100114183329.gpx
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		currentFileName = sdf.format(new Date());
+		if (newFileOnceADay) {
+			// 20100114.gpx
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			currentFileName = sdf.format(new Date());
+		} else {
+			// 20100114183329.gpx
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			currentFileName = sdf.format(new Date());
+		}
 
 	}
 
@@ -336,10 +343,10 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 		try {
 
 			long currentTimeStamp = System.currentTimeMillis();
-			if ((currentTimeStamp - latestTimeStamp) < (minimumSeconds*1000)) {
+			if ((currentTimeStamp - latestTimeStamp) < (minimumSeconds * 1000)) {
 				return;
 			}
-			
+
 			latestTimeStamp = System.currentTimeMillis();
 
 			Notify();
@@ -468,6 +475,91 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 				brandNewFile = true;
 			}
 
+			if (logToGpx) {
+				WriteToGpxFile(loc, gpxFolder, brandNewFile);
+			}
+
+			if (logToKml) {
+				WriteToKmlFile(loc, gpxFolder, brandNewFile);
+
+			}
+
+		} catch (Exception e) {
+			Log.e("Main", "Could not write file " + e.getMessage());
+			SetStatus("Could not write to file. " + e.getMessage());
+		}
+
+	}
+
+	private void WriteToKmlFile(Location loc, File gpxFolder,
+			boolean brandNewFile) {
+		// TODO Auto-generated method stub
+		try {
+			File kmlFile = new File(gpxFolder.getPath(), currentFileName
+					+ ".kml");
+
+			if (!kmlFile.exists()) {
+				kmlFile.createNewFile();
+				brandNewFile = true;
+			}
+
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+			String dateTimeString = sdf.format(now);
+
+			if (brandNewFile) {
+				FileOutputStream initialWriter = new FileOutputStream(kmlFile,
+						true);
+				BufferedOutputStream initialOutput = new BufferedOutputStream(
+						initialWriter);
+
+				/*<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Placemark>
+    <name>Simple placemark</name>
+    <description>Attached to the ground. Intelligently places itself 
+       at the height of the underlying terrain.</description>
+    <Point>
+      <coordinates>-122.0822035425683,37.42228990140251,0</coordinates>
+    </Point>
+  </Placemark>
+</kml>*/
+				
+				String initialXml = "<?xml version=\"1.0\"?>"
+						+ "<kml xmlns=\"http://www.opengis.net/kml/2.2\">"
+						+ "</kml>";
+				initialOutput.write(initialXml.getBytes());
+				// initialOutput.write("\n".getBytes());
+				initialOutput.flush();
+				initialOutput.close();
+			}
+
+			long startPosition = kmlFile.length() - 6;
+		
+
+			String placemark = "<Placemark><name>" + now.toLocaleString() 
+			        + "</name><description>" + now.toLocaleString() + "</description>" 
+			        + "<Point><coordinates>" + String.valueOf(loc.getLongitude()) + "," 
+			        + String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getAltitude())
+			        + "</coordinates></Point></Placemark></kml>";
+
+			RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
+			raf.seek(startPosition);
+			raf.write(placemark.getBytes());
+			raf.close();
+
+		} catch (IOException e) {
+			Log.e("Main", "Could not write file " + e.getMessage());
+			SetStatus("Could not write to file. " + e.getMessage());
+		}
+
+		
+	}
+
+	private void WriteToGpxFile(Location loc, File gpxFolder,
+			boolean brandNewFile) {
+
+		try {
 			File gpxFile = new File(gpxFolder.getPath(), currentFileName
 					+ ".gpx");
 
