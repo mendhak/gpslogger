@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent" 
+              android:layout_height="fill_parent"
+              android:orientation="vertical" >
+   
+        
+       <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+       android:layout_height="wrap_content">
+    		<Button android:id="@+id/buttonStart"
+            android:layout_width="120px"
+            android:layout_height="wrap_content"
+            android:tag="Start"
+            android:text="Start" />
+            <Button android:id="@+id/buttonStop"
+            android:layout_width="120px"
+            android:layout_height="wrap_content"
+            android:tag="Stop"
+            android:text="Stop" />
+     </LinearLayout>
+     
+      <TextView android:id="@+id/textStatus"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              
+               />
+           
+          	
+    <TableLayout
+    	android:id="@+id/TableGPS"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:stretchColumns="1">
+	    <TableRow>
+	    <TextView></TextView>
+	    <TextView></TextView>
+	    </TableRow>
+
+	    <TableRow>
+	    	<TextView
+	    		android:id="@+id/txtDateTimeAndProvider"
+	    		android:gravity="left"
+	    		android:textStyle="bold"
+	    		android:padding="3dip"
+	    		android:layout_span="2"
+	    		 />
+	    </TableRow>
+	    <TableRow>
+	        <TextView
+	        android:textStyle="bold"
+	            android:text="Latitude:"
+	            android:padding="3dip" />
+	        <TextView
+	        	android:id="@+id/txtLatitude"
+	            android:gravity="left"
+	            android:padding="3dip" />
+	    </TableRow>
+	
+	    <TableRow>
+	        <TextView
+	        android:textStyle="bold"
+	            android:text="Longitude:"
+	            android:padding="3dip" />
+	        <TextView
+	            android:id="@+id/txtLongitude"
+	            android:gravity="left"
+	            android:padding="3dip" />
+	    </TableRow>
+	    
+	    <TableRow android:id="@+id/trAltitude" >
+	        <TextView
+	        android:id="@+id/lblAltitude"
+	        android:textStyle="bold"
+	            android:text="Altitude:"
+	            android:padding="3dip" />
+	        <TextView
+	            android:id="@+id/txtAltitude"
+	            android:gravity="left"
+	            android:padding="3dip" />
+	    </TableRow>
+	    
+	    <TableRow android:id="@+id/trSpeed" >
+	        <TextView
+	        android:id="@+id/lblSpeed"
+	        android:textStyle="bold"
+	            android:text="Speed:"
+	            android:padding="3dip" />
+	        <TextView
+	            android:id="@+id/txtSpeed"
+	            android:gravity="left"
+	            android:padding="3dip" />
+	    </TableRow>
+	    
+	    <TableRow android:id="@+id/trDirection" >
+	        <TextView
+	        android:id="@+id/lblDirection"
+	        android:textStyle="bold"
+	            android:text="Direction:"
+	            android:padding="3dip" />
+	        <TextView
+	            android:id="@+id/txtDirection"
+	            android:gravity="left"
+	            android:padding="3dip" />
+	    </TableRow>
+	    
+	    <TableRow android:id="@+id/trSatellites" >
+	        <TextView
+	        android:id="@+id/lblSatellites"
+	        android:textStyle="bold"
+	            android:text="Satellites:"
+	            android:padding="3dip" />
+	        <TextView
+	            android:id="@+id/txtSatellites"
+	            android:gravity="left"
+	            android:padding="3dip" />
+	    </TableRow>
+	    
+	    <TableRow android:id="@+id/trAccuracy" >
+	        <TextView
+	        android:id="@+id/lblAccuracy"
+	        android:textStyle="bold"
+	            android:text="Accuracy:"
+	            android:padding="3dip" />
+	        <TextView
+	            android:id="@+id/txtAccuracy"
+	            android:gravity="left"
+	            android:padding="3dip" />
+	    </TableRow>	   	    
+	</TableLayout>
+   
+        
+          
+</LinearLayout>
+
