@@ -23,6 +23,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -32,10 +33,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class GpsMainActivity extends Activity implements OnClickListener {
+public class GpsMainActivity extends Activity implements
+		OnCheckedChangeListener {
 	GeneralLocationListener gpsLocationListener;
 	GeneralLocationListener towerLocationListener;
 	LocationManager gpsLocationManager;
@@ -69,13 +74,40 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 
 		setContentView(R.layout.main);
 
-		Button buttonStart = (Button) findViewById(R.id.buttonStart);
-		buttonStart.setOnClickListener(this);
-
-		Button buttonStop = (Button) findViewById(R.id.buttonStop);
-		buttonStop.setOnClickListener(this);
+		ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
+		buttonOnOff.setOnCheckedChangeListener(this);
 
 		GetPreferences();
+
+	}
+
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		// 
+
+		try {
+
+			if (isChecked) {
+				if (isStarted) {
+					return;
+				}
+
+				isStarted = true;
+				GetPreferences();
+				Notify();
+				ResetCurrentFileName();
+				ClearForm();
+				StartGpsManager();
+
+			} else {
+
+				isStarted = false;
+				RemoveNotification();
+				StopGpsManager();
+			}
+
+		} catch (Exception ex) {
+			SetStatus("Button click error: " + ex.getMessage());
+		}
 
 	}
 
@@ -94,7 +126,7 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 	}
 
 	private void RemoveNotification() {
-		// gpsNotifyManager.cancel(NOTIFICATION_ID);
+
 		try {
 
 			if (notificationVisible) {
@@ -144,16 +176,169 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 		logToKml = prefs.getBoolean("log_kml", false);
 		logToGpx = prefs.getBoolean("log_gpx", false);
 		showInNotificationBar = prefs.getBoolean("show_notification", true);
-		minimumDistance = Integer.valueOf(prefs.getString(
-				"distance_before_logging", "10"));
-		minimumSeconds = Integer.valueOf(prefs.getString("time_before_logging",
-				"60"));
+
+		String minimumDistanceString = prefs.getString(
+				"distance_before_logging", "0");
+
+		if (minimumDistanceString != null && minimumDistanceString.length() > 0) {
+			minimumDistance = Integer.valueOf(minimumDistanceString);
+		} else {
+			minimumDistance = 0;
+		}
+
+		String minimumSecondsString = prefs.getString("time_before_logging",
+				"60");
+
+		if (minimumSecondsString != null && minimumSecondsString.length() > 0) {
+			minimumSeconds = Integer.valueOf(minimumSecondsString);
+		} else {
+			minimumSeconds = 60;
+		}
+
 		newFileCreation = prefs.getString("new_file_creation", "onceaday");
 		if (newFileCreation.equals("onceaday")) {
 			newFileOnceADay = true;
 		} else {
 			newFileOnceADay = false;
 		}
+
+		try {
+			ShowPreferencesSummary();
+		} catch (Exception ex) {
+			/* Do nothing, displaying a summary should not prevent logging. */
+
+		}
+
+	}
+
+	private void ShowPreferencesSummary() {
+
+		TextView lblSummary = (TextView) findViewById(R.id.lblSummary);
+		String summarySentence = "";
+		if (!logToKml && !logToGpx) {
+			summarySentence = "Logging only to screen,";
+		} else if (logToGpx && logToKml) {
+			summarySentence = "Logging to both GPX and KML,";
+		} else {
+			summarySentence = "Logging to " + (logToGpx ? "GPX," : "KML,");
+		}
+
+		if (minimumSeconds > 0) {
+			String descriptiveTime = GetDescriptiveTimeString(minimumSeconds);
+
+			summarySentence = summarySentence + " every " + descriptiveTime;
+		} else {
+			summarySentence = summarySentence + " as frequently as possible";
+		}
+
+		if (minimumDistance > 0) {
+
+			summarySentence = summarySentence
+					+ " and roughly every "
+					+ ((minimumDistance == 1) ? " meter." : String
+							.valueOf(minimumDistance)
+							+ " meters.");
+		} else {
+			summarySentence = summarySentence
+					+ ", regardless of distance traveled.";
+		}
+
+		if ((logToGpx || logToKml)
+				&& (currentFileName != null && currentFileName.length() > 0)) {
+			summarySentence = summarySentence
+					+ " The current file name is "
+					+ currentFileName
+					+ ", which you will find in the GPSLogger folder on your SD card.";
+		}
+
+		lblSummary.setText(summarySentence);
+	}
+
+	private String GetDescriptiveTimeString(int numberOfSeconds) {
+
+		String descriptive = "";
+		int hours = 0;
+		int minutes = 0;
+		int seconds = 0;
+
+		int remainingSeconds = 0;
+
+		// Special cases
+		if (numberOfSeconds == 1) {
+			return "second";
+		}
+
+		if (numberOfSeconds == 30) {
+			return "half a minute";
+		}
+
+		if (numberOfSeconds == 60) {
+			return "minute";
+		}
+
+		if (numberOfSeconds == 900) {
+			return "quarter hour";
+		}
+
+		if (numberOfSeconds == 1800) {
+			return "half an hour";
+		}
+
+		if (numberOfSeconds == 3600) {
+			return "hour";
+		}
+
+		if (numberOfSeconds == 4800) {
+			return "1½ hours";
+		}
+
+		if (numberOfSeconds == 9000) {
+			return "2½ hours";
+		}
+
+		// For all other cases, calculate
+
+		hours = numberOfSeconds / 3600;
+		remainingSeconds = numberOfSeconds % 3600;
+		minutes = remainingSeconds / 60;
+		seconds = remainingSeconds % 60;
+
+		if (hours == 1) {
+			descriptive = String.valueOf(hours) + " hour";
+		} else if (hours > 1) {
+			descriptive = String.valueOf(hours) + " hours";
+		}
+
+		if (minutes >= 0 && hours > 0) {
+			String joiner = (seconds > 0) ? ", " : " and ";
+			String minuteWord = (minutes == 1) ? " minute" : " minutes";
+			descriptive = descriptive + joiner + String.valueOf(minutes)
+					+ minuteWord;
+			// 4 hours, 2 minutes
+			// 1 hours, 0 minutes
+			// 2 hours, 0 minutes
+			// 3 hours and 35 minutes
+			// 1 hour and 8 minutes
+		} else if (minutes > 0 && hours == 0) {
+			String minuteWord = (minutes == 1) ? " minute" : " minutes";
+			descriptive = String.valueOf(minutes) + minuteWord;
+			// 45 minutes
+		}
+
+		if ((hours > 0 || minutes > 0) && seconds > 0) {
+			String secondsWord = (seconds == 1) ? " second" : " seconds";
+
+			descriptive = descriptive + " and " + String.valueOf(seconds)
+					+ secondsWord;
+			// 2 hours, 0 minutes and 5 seconds
+			// 1 hour, 12 minutes and 9 seconds
+		} else if (hours == 0 && minutes == 0 && seconds > 0) {
+			String secondsWord = (seconds == 1) ? " second" : " second";
+			descriptive = String.valueOf(seconds) + secondsWord;
+		}
+
+		return descriptive;
+
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -177,7 +362,7 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 
 	}
 
-	/* Handles item selections */
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		if (item.getTitle().equals("Settings")) {
@@ -255,37 +440,6 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 		}
 
 		SetStatus("Stopped");
-	}
-
-	public void onClick(View v) {
-		// 
-
-		String buttonId = (String) v.getTag();
-
-		try {
-
-			if (buttonId.equalsIgnoreCase("Start")) {
-				if (isStarted) {
-					return;
-				}
-
-				isStarted = true;
-				GetPreferences();
-				Notify();
-				ResetCurrentFileName();
-				ClearForm();
-				StartGpsManager();
-
-			} else if (buttonId.equalsIgnoreCase("Stop")) {
-
-				isStarted = false;
-				RemoveNotification();
-				StopGpsManager();
-			}
-
-		} catch (Exception ex) {
-			SetStatus("Button click error: " + ex.getMessage());
-		}
 	}
 
 	private void ResetCurrentFileName() {
@@ -376,7 +530,8 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 			tvLongitude.setText(String.valueOf(loc.getLongitude()));
 
 			if (loc.hasAltitude()) {
-				tvAltitude.setText(String.valueOf(loc.getAltitude()));
+				tvAltitude.setText(String.valueOf(loc.getAltitude())
+						+ " meters");
 			} else {
 				tvAltitude.setText("n/a");
 			}
@@ -441,7 +596,7 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 
 			if (loc.hasAccuracy()) {
 				txtAccuracy.setText("within "
-						+ String.valueOf(loc.getAccuracy()) + "m");
+						+ String.valueOf(loc.getAccuracy()) + " meters");
 			} else {
 				txtAccuracy.setText("n/a");
 			}
@@ -451,7 +606,7 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 			ResetManagersIfRequired();
 
 		} catch (Exception ex) {
-			SetStatus("Error in displaylocationinfo: " + ex.getMessage());
+			SetStatus("Error in displaying location info: " + ex.getMessage());
 		}
 
 	}
@@ -466,7 +621,9 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 
 			boolean brandNewFile = false;
 			// if (root.canWrite()){
-			File gpxFolder = new File("/sdcard/GPSLogger");
+			// File gpxFolder = new File("/sdcard/GPSLogger");
+			File gpxFolder = new File(
+					Environment.getExternalStorageDirectory(), "GPSLogger");
 
 			Log.i("MAIN", String.valueOf(gpxFolder.canWrite()));
 
@@ -513,18 +670,6 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 				BufferedOutputStream initialOutput = new BufferedOutputStream(
 						initialWriter);
 
-				/*<?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2">
-  <Placemark>
-    <name>Simple placemark</name>
-    <description>Attached to the ground. Intelligently places itself 
-       at the height of the underlying terrain.</description>
-    <Point>
-      <coordinates>-122.0822035425683,37.42228990140251,0</coordinates>
-    </Point>
-  </Placemark>
-</kml>*/
-				
 				String initialXml = "<?xml version=\"1.0\"?>"
 						+ "<kml xmlns=\"http://www.opengis.net/kml/2.2\">"
 						+ "</kml>";
@@ -535,13 +680,14 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 			}
 
 			long startPosition = kmlFile.length() - 6;
-		
 
-			String placemark = "<Placemark><name>" + now.toLocaleString() 
-			        + "</name><description>" + now.toLocaleString() + "</description>" 
-			        + "<Point><coordinates>" + String.valueOf(loc.getLongitude()) + "," 
-			        + String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getAltitude())
-			        + "</coordinates></Point></Placemark></kml>";
+			String placemark = "<Placemark><name>" + now.toLocaleString()
+					+ "</name><description>" + now.toLocaleString()
+					+ "</description>" + "<Point><coordinates>"
+					+ String.valueOf(loc.getLongitude()) + ","
+					+ String.valueOf(loc.getLatitude()) + ","
+					+ String.valueOf(loc.getAltitude())
+					+ "</coordinates></Point></Placemark></kml>";
 
 			RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
 			raf.seek(startPosition);
@@ -553,7 +699,6 @@ public class GpsMainActivity extends Activity implements OnClickListener {
 			SetStatus("Could not write to file. " + e.getMessage());
 		}
 
-		
 	}
 
 	private void WriteToGpxFile(Location loc, File gpxFolder,
