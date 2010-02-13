@@ -149,7 +149,7 @@ public class GpsMainActivity extends Activity implements
 		PendingIntent pending = PendingIntent.getActivity(getBaseContext(), 0,
 				contentIntent, android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Notification nfc = new Notification(R.drawable.gpsstatus, null, System
+		Notification nfc = new Notification(R.drawable.gpsstatus3, null, System
 				.currentTimeMillis());
 		nfc.flags |= Notification.FLAG_ONGOING_EVENT;
 
