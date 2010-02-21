@@ -671,15 +671,15 @@ public class GpsMainActivity extends Activity implements
 						initialWriter);
 
 				String initialXml = "<?xml version=\"1.0\"?>"
-						+ "<kml xmlns=\"http://www.opengis.net/kml/2.2\">"
-						+ "</kml>";
+						+ "<kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document>"
+						+ "</Document></kml>";
 				initialOutput.write(initialXml.getBytes());
 				// initialOutput.write("\n".getBytes());
 				initialOutput.flush();
 				initialOutput.close();
 			}
 
-			long startPosition = kmlFile.length() - 6;
+			long startPosition = kmlFile.length() - 17;
 
 			String placemark = "<Placemark><name>" + now.toLocaleString()
 					+ "</name><description>" + now.toLocaleString()
@@ -687,7 +687,7 @@ public class GpsMainActivity extends Activity implements
 					+ String.valueOf(loc.getLongitude()) + ","
 					+ String.valueOf(loc.getLatitude()) + ","
 					+ String.valueOf(loc.getAltitude())
-					+ "</coordinates></Point></Placemark></kml>";
+					+ "</coordinates></Point></Placemark></Document></kml>";
 
 			RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
 			raf.seek(startPosition);
