@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.mendhak.gpslogger" android:versionCode="2"
-	android:versionName="1.0.1">
-	<application android:icon="@drawable/gpsloggericon1" android:label="@string/app_name"
-		android:debuggable="false">
+	package="com.mendhak.gpslogger" android:versionCode="1"
+	android:versionName="1.0">
+	<application android:icon="@drawable/gpsloggericon1"
+		android:label="@string/app_name" android:debuggable="true">
 		<activity android:name=".GpsMainActivity" android:label="@string/app_name"
-			android:screenOrientation="portrait" 
-			android:launchMode="singleTask">
+			android:screenOrientation="portrait" android:launchMode="singleTask">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
 		<activity android:name=".GpsSettingsActivity" android:label="@string/settings_screen_name"
-			android:screenOrientation="portrait" >
+			android:screenOrientation="portrait">
+		</activity>
+		<activity android:name=".SeeMyMapSetupActivity"
+			android:label="SeeMyMap setup" android:screenOrientation="portrait">
+			<intent-filter>
+				<category android:name="android.intent.category.DEFAULT" />
+
+				<action android:name="com.mendhak.gpslogger.SEEMYMAP_SETUP" />
+
+			</intent-filter>
+
 		</activity>
 
 
@@ -22,5 +31,6 @@
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.INTERNET" />
 
 </manifest> 

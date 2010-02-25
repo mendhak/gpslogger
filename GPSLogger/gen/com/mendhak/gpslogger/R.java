@@ -24,15 +24,19 @@ public final class R {
     }
     public static final class id {
         public static final int TableGPS=0x7f080001;
+        public static final int btnCheck=0x7f080015;
         public static final int buttonOnOff=0x7f08000f;
         public static final int lblAccuracy=0x7f08000d;
         public static final int lblAltitude=0x7f080005;
         public static final int lblDirection=0x7f080009;
+        public static final int lblRequestPassword=0x7f080013;
+        public static final int lblRequestUrl=0x7f080011;
         public static final int lblSatellites=0x7f08000b;
         public static final int lblSpeed=0x7f080007;
         public static final int lblSummary=0x7f080010;
-        public static final int mnuExit=0x7f080012;
-        public static final int mnuSettings=0x7f080011;
+        public static final int mnuExit=0x7f080018;
+        public static final int mnuSettings=0x7f080016;
+        public static final int mnuShare=0x7f080017;
         public static final int textStatus=0x7f080000;
         public static final int txtAccuracy=0x7f08000e;
         public static final int txtAltitude=0x7f080006;
@@ -40,11 +44,14 @@ public final class R {
         public static final int txtDirection=0x7f08000a;
         public static final int txtLatitude=0x7f080003;
         public static final int txtLongitude=0x7f080004;
+        public static final int txtPassword=0x7f080014;
+        public static final int txtRequestUrl=0x7f080012;
         public static final int txtSatellites=0x7f08000c;
         public static final int txtSpeed=0x7f080008;
     }
     public static final class layout {
         public static final int main=0x7f030000;
+        public static final int seemymapsetup=0x7f030001;
     }
     public static final class menu {
         public static final int optionsmenu=0x7f070000;

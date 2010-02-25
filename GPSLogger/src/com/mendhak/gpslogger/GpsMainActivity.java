@@ -1,39 +1,46 @@
 package com.mendhak.gpslogger;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader; //import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
+import android.location.LocationManager; //import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -64,9 +71,16 @@ public class GpsMainActivity extends Activity implements
 	String newFileCreation;
 	boolean newFileOnceADay;
 
+	String seeMyMapUrl;
+	String seeMyMapGuid;
+
 	double currentLatitude;
 	double currentLongitude;
 	long latestTimeStamp;
+
+	String subdomain;
+
+	boolean addNewTrackSegment = true;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +97,8 @@ public class GpsMainActivity extends Activity implements
 
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		// 
+
+		addNewTrackSegment = true;
 
 		try {
 
@@ -177,6 +193,8 @@ public class GpsMainActivity extends Activity implements
 		logToGpx = prefs.getBoolean("log_gpx", false);
 		showInNotificationBar = prefs.getBoolean("show_notification", true);
 
+		subdomain = prefs.getString("subdomain", "where");
+
 		String minimumDistanceString = prefs.getString(
 				"distance_before_logging", "0");
 
@@ -201,6 +219,9 @@ public class GpsMainActivity extends Activity implements
 		} else {
 			newFileOnceADay = false;
 		}
+
+		seeMyMapUrl = prefs.getString("seemymap_URL", "");
+		seeMyMapGuid = prefs.getString("seemymap_GUID", "");
 
 		try {
 			ShowPreferencesSummary();
@@ -358,10 +379,14 @@ public class GpsMainActivity extends Activity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.optionsmenu, menu);
+
+		if (!Utilities.Flag()) {
+			menu.getItem(1).setVisible(false);
+		}
+
 		return true;
 
 	}
-
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -371,6 +396,9 @@ public class GpsMainActivity extends Activity implements
 			startActivity(settingsActivity);
 			return false;
 
+		} else if (item.getTitle().equals("Send")) {
+			SendLocation();
+			return false;
 		} else {
 			RemoveNotification();
 			StopGpsManager();
@@ -379,6 +407,103 @@ public class GpsMainActivity extends Activity implements
 			// finish();
 
 			return false;
+		}
+
+	}
+
+	final Handler handler = new Handler();
+	final Runnable updateResults = new Runnable() {
+		public void run() {
+			AddedToMap();
+		}
+
+	};
+
+	private void AddedToMap() {
+
+		Utilities.MsgBox("Sent", "Location sent to server", this);
+
+	}
+
+	private String CleanString(String input) {
+
+		input = input.replace(":", "");
+
+		input = Utilities.EncodeHTML(input);
+
+		input = URLEncoder.encode(input);
+		return input;
+	}
+
+	private void SendToServer(String input) {
+
+		input = CleanString(input);
+
+		String whereUrl = "http://192.168.1.5:8101/SeeMyMapService.svc/savepoint/?guid="
+				+ seeMyMapGuid
+				+ "&lat="
+				+ String.valueOf(currentLatitude)
+				+ "&lon=" + String.valueOf(currentLongitude) + "&des=" + input;
+
+		String response = Utilities.GetUrl(whereUrl);
+
+	}
+
+	private void SendLocation() {
+
+		if (seeMyMapUrl == null || seeMyMapUrl.length() == 0
+				|| seeMyMapGuid == null || seeMyMapGuid.length() == 0) {
+			startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
+		} else {
+
+			if (currentLatitude != 0 && currentLongitude != 0) {
+
+				final ProgressDialog pd = ProgressDialog.show(
+						GpsMainActivity.this, "Sending...",
+						"Sending to server", true, true);
+
+				AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+				alert.setTitle("Add a description");
+				alert.setMessage("Use only letters and numbers");
+
+				// Set an EditText view to get user input
+				final EditText input = new EditText(this);
+				alert.setView(input);
+
+				alert.setPositiveButton("Ok",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								final String desc = input.getText().toString();
+
+								Thread t = new Thread() {
+									public void run() {
+										SendToServer(input.getText().toString());
+										pd.dismiss();
+										handler.post(updateResults);
+									}
+								};
+								t.start();
+
+							}
+						});
+				alert.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								// Canceled.
+							}
+						});
+
+				alert.show();
+
+			}
+
+			else {
+				Utilities.MsgBox("Not yet", "Nothing to send yet", this);
+
+			}
 		}
 
 	}
@@ -661,8 +786,9 @@ public class GpsMainActivity extends Activity implements
 			}
 
 			Date now = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-			String dateTimeString = sdf.format(now);
+			// SimpleDateFormat sdf = new
+			// SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+			// String dateTimeString = sdf.format(now);
 
 			if (brandNewFile) {
 				FileOutputStream initialWriter = new FileOutputStream(kmlFile,
@@ -726,46 +852,57 @@ public class GpsMainActivity extends Activity implements
 				String initialXml = "<?xml version=\"1.0\"?>"
 						+ "<gpx version=\"1.0\" creator=\"GPSLogger - http://gpslogger.mendhak.com/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">"
 						+ "<time>" + dateTimeString + "</time>" + "<bounds />"
-						+ "</gpx>";
+						+ "<trk></trk></gpx>";
 				initialOutput.write(initialXml.getBytes());
 				// initialOutput.write("\n".getBytes());
 				initialOutput.flush();
 				initialOutput.close();
 			}
 
-			long startPosition = gpxFile.length() - 6;
+			int offsetFromEnd = (addNewTrackSegment) ? 12 : 21;
 
-			String waypoint = "<wpt lat=\"" + String.valueOf(loc.getLatitude())
-					+ "\" lon=\"" + String.valueOf(loc.getLongitude()) + "\">"
-					+ "<time>" + dateTimeString + "</time>";
+			long startPosition = gpxFile.length() - offsetFromEnd;
 
-			if (loc.hasAltitude()) {
-				waypoint = waypoint + "<ele>"
-						+ String.valueOf(loc.getAltitude()) + "</ele>";
-			}
+			String trackPoint = GetTrackPointXml(loc, dateTimeString);
+			
+			addNewTrackSegment = false;
 
-			if (loc.hasBearing()) {
-				waypoint = waypoint + "<course>"
-						+ String.valueOf(loc.getBearing()) + "</course>";
-			}
-
-			if (loc.hasSpeed()) {
-				waypoint = waypoint + "<speed>"
-						+ String.valueOf(loc.getSpeed()) + "</speed>";
-			}
-
-			waypoint = waypoint + "<src>" + loc.getProvider() + "</src>";
-
-			if (satellites > 0) {
-				waypoint = waypoint + "<sat>" + String.valueOf(satellites)
-						+ "</sat>";
-			}
-
-			waypoint = waypoint + "</wpt></gpx>";
+			// Leaving this commented code in - may want to give user the choice
+			// to
+			// pick between WPT and TRK. Choice is good.
+			//
+			// String waypoint = "<wpt lat=\"" +
+			// String.valueOf(loc.getLatitude())
+			// + "\" lon=\"" + String.valueOf(loc.getLongitude()) + "\">"
+			// + "<time>" + dateTimeString + "</time>";
+			//
+			// if (loc.hasAltitude()) {
+			// waypoint = waypoint + "<ele>"
+			// + String.valueOf(loc.getAltitude()) + "</ele>";
+			// }
+			//
+			// if (loc.hasBearing()) {
+			// waypoint = waypoint + "<course>"
+			// + String.valueOf(loc.getBearing()) + "</course>";
+			// }
+			//
+			// if (loc.hasSpeed()) {
+			// waypoint = waypoint + "<speed>"
+			// + String.valueOf(loc.getSpeed()) + "</speed>";
+			// }
+			//
+			// waypoint = waypoint + "<src>" + loc.getProvider() + "</src>";
+			//
+			// if (satellites > 0) {
+			// waypoint = waypoint + "<sat>" + String.valueOf(satellites)
+			// + "</sat>";
+			// }
+			//
+			// waypoint = waypoint + "</wpt></gpx>";
 
 			RandomAccessFile raf = new RandomAccessFile(gpxFile, "rw");
 			raf.seek(startPosition);
-			raf.write(waypoint.getBytes());
+			raf.write(trackPoint.getBytes());
 			raf.close();
 
 		} catch (IOException e) {
@@ -773,6 +910,45 @@ public class GpsMainActivity extends Activity implements
 			SetStatus("Could not write to file. " + e.getMessage());
 		}
 
+	}
+
+	private String GetTrackPointXml(Location loc, String dateTimeString) {
+		String track = "";
+		if (addNewTrackSegment) {
+			track = track + "<trkseg>";
+		}
+
+		track = track + "<trkpt lat=\"" + String.valueOf(loc.getLatitude())
+				+ "\" lon=\"" + String.valueOf(loc.getLongitude()) + "\">";
+
+		if (loc.hasAltitude()) {
+			track = track + "<ele>" + String.valueOf(loc.getAltitude())
+					+ "</ele>";
+		}
+
+		if (loc.hasBearing()) {
+			track = track + "<course>" + String.valueOf(loc.getBearing())
+					+ "</course>";
+		}
+
+		if (loc.hasSpeed()) {
+			track = track + "<speed>" + String.valueOf(loc.getSpeed())
+					+ "</speed>";
+		}
+
+		track = track + "<src>" + loc.getProvider() + "</src>";
+		
+		if (satellites > 0) {
+			track = track + "<sat>" + String.valueOf(satellites) + "</sat>";
+		}
+
+		track = track + "<time>" + dateTimeString + "</time>";
+
+		track = track + "</trkpt>";
+
+		track = track + "</trkseg></trk></gpx>";
+		
+		return track;
 	}
 
 	public void RestartGpsManagers() {

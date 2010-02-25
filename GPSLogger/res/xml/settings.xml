@@ -25,7 +25,17 @@
 		android:key="new_file_creation" android:entries="@array/entries"
 		android:defaultValue="onceaday" android:entryValues="@array/values" />
 
+	<Preference android:title="Your SeeMyMap.com"
+		android:summary="Set up your seemymap.com website" android:key="seemymap_setup">
+		<intent android:action="com.mendhak.gpslogger.SEEMYMAP_SETUP" />
+
+	</Preference>
+
+
+
+
 	<Preference android:title="Enable/Disable GPS"
-		android:summary="Go to the phone settings to enable or disable the providers." android:key="enableDisableGps" />
+		android:summary="Go to the phone settings to enable or disable the providers."
+		android:key="enableDisableGps" />
 
 </PreferenceScreen>
