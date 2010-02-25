@@ -10,11 +10,14 @@ import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.channels.FileLock;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.concurrent.locks.Lock;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
@@ -53,6 +56,9 @@ public class GpsMainActivity extends Activity implements
 	LocationManager gpsLocationManager;
 	LocationManager towerLocationManager;
 
+	FileLock gpxLock;
+	FileLock kmlLock;
+
 	boolean towerEnabled;
 	boolean gpsEnabled;
 
@@ -70,6 +76,7 @@ public class GpsMainActivity extends Activity implements
 	int minimumSeconds;
 	String newFileCreation;
 	boolean newFileOnceADay;
+	boolean preferCellTower;
 
 	String seeMyMapUrl;
 	String seeMyMapGuid;
@@ -81,6 +88,7 @@ public class GpsMainActivity extends Activity implements
 	String subdomain;
 
 	boolean addNewTrackSegment = true;
+	boolean allowDescription = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -193,6 +201,7 @@ public class GpsMainActivity extends Activity implements
 		logToGpx = prefs.getBoolean("log_gpx", false);
 		showInNotificationBar = prefs.getBoolean("show_notification", true);
 
+		preferCellTower = prefs.getBoolean("prefer_celltower", false);
 		subdomain = prefs.getString("subdomain", "where");
 
 		String minimumDistanceString = prefs.getString(
@@ -399,6 +408,11 @@ public class GpsMainActivity extends Activity implements
 		} else if (item.getTitle().equals("Send")) {
 			SendLocation();
 			return false;
+		} else if (item.getTitle().equals("Annotate")) {
+
+			Annotate();
+			return false;
+
 		} else {
 			RemoveNotification();
 			StopGpsManager();
@@ -408,6 +422,121 @@ public class GpsMainActivity extends Activity implements
 
 			return false;
 		}
+
+	}
+
+	private void Annotate() {
+
+		
+		if(!allowDescription)
+		{
+			Utilities.MsgBox("Not yet", "You can't add a description until the next point has been logged.", this);
+			return;
+		}
+		
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+		alert.setTitle("Add a description");
+		alert.setMessage("Use only letters and numbers");
+
+		// Set an EditText view to get user input
+		final EditText input = new EditText(this);
+		alert.setView(input);
+
+		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+
+				if (!logToGpx && !logToKml) {
+					return;
+				}
+
+				final String desc = input.getText().toString();
+				File gpxFolder = new File(Environment
+						.getExternalStorageDirectory(), "GPSLogger");
+
+				if (!gpxFolder.exists()) {
+					return;
+				}
+
+				int offsetFromEnd;
+				String description;
+				long startPosition;
+
+				if (logToGpx) {
+
+					File gpxFile = new File(gpxFolder.getPath(),
+							currentFileName + ".gpx");
+
+					if (!gpxFile.exists()) {
+						return;
+					}
+					offsetFromEnd = 29;
+
+					startPosition = gpxFile.length() - offsetFromEnd;
+
+					description = "<name>" + desc + "</name><desc>" + desc
+							+ "</desc></trkpt></trkseg></trk></gpx>";
+					RandomAccessFile raf = null;
+					try {
+						raf = new RandomAccessFile(gpxFile, "rw");
+						gpxLock = raf.getChannel().lock();
+						raf.seek(startPosition);
+						raf.write(description.getBytes());
+						gpxLock.release();
+						raf.close();
+						
+						SetStatus("Description added to point.");
+						allowDescription = false;
+
+					} catch (Exception e) {
+						SetStatus("Couldn't write description to GPX file.");
+					}
+
+				}
+
+				if (logToKml) {
+
+					File kmlFile = new File(gpxFolder.getPath(),
+							currentFileName + ".kml");
+
+					if (!kmlFile.exists()) {
+						return;
+					}
+
+					offsetFromEnd = 37;
+
+					description = "<name>" + desc
+							+ "</name></Point></Placemark></Document></kml>";
+
+					startPosition = kmlFile.length() - offsetFromEnd;
+					try {
+						RandomAccessFile raf = new RandomAccessFile(kmlFile,
+								"rw");
+						kmlLock = raf.getChannel().lock();
+						raf.seek(startPosition);
+						raf.write(description.getBytes());
+						raf.close();
+
+						kmlLock.release();
+						allowDescription = false;
+					} catch (Exception e) {
+						SetStatus("Couldn't write description to KML file.");
+					}
+
+				}
+
+				// </Point></Placemark></Document></kml>
+
+			}
+		});
+		alert.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						// Canceled.
+					}
+				});
+
+		alert.show();
 
 	}
 
@@ -520,7 +649,7 @@ public class GpsMainActivity extends Activity implements
 
 		CheckTowerAndGpsStatus();
 
-		if (gpsEnabled) {
+		if (gpsEnabled && !preferCellTower) {
 			// gps satellite based
 			gpsLocationManager.requestLocationUpdates(
 					LocationManager.GPS_PROVIDER, minimumSeconds * 1000,
@@ -765,6 +894,8 @@ public class GpsMainActivity extends Activity implements
 				WriteToKmlFile(loc, gpxFolder, brandNewFile);
 
 			}
+			
+			allowDescription = true;
 
 		} catch (Exception e) {
 			Log.e("Main", "Could not write file " + e.getMessage());
@@ -807,8 +938,7 @@ public class GpsMainActivity extends Activity implements
 
 			long startPosition = kmlFile.length() - 17;
 
-			String placemark = "<Placemark><name>" + now.toLocaleString()
-					+ "</name><description>" + now.toLocaleString()
+			String placemark = "<Placemark><description>" + now.toLocaleString()
 					+ "</description>" + "<Point><coordinates>"
 					+ String.valueOf(loc.getLongitude()) + ","
 					+ String.valueOf(loc.getLatitude()) + ","
@@ -816,10 +946,12 @@ public class GpsMainActivity extends Activity implements
 					+ "</coordinates></Point></Placemark></Document></kml>";
 
 			RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
+			kmlLock = raf.getChannel().lock();
 			raf.seek(startPosition);
 			raf.write(placemark.getBytes());
 			raf.close();
 
+			kmlLock.release();
 		} catch (IOException e) {
 			Log.e("Main", "Could not write file " + e.getMessage());
 			SetStatus("Could not write to file. " + e.getMessage());
@@ -864,7 +996,7 @@ public class GpsMainActivity extends Activity implements
 			long startPosition = gpxFile.length() - offsetFromEnd;
 
 			String trackPoint = GetTrackPointXml(loc, dateTimeString);
-			
+
 			addNewTrackSegment = false;
 
 			// Leaving this commented code in - may want to give user the choice
@@ -901,8 +1033,10 @@ public class GpsMainActivity extends Activity implements
 			// waypoint = waypoint + "</wpt></gpx>";
 
 			RandomAccessFile raf = new RandomAccessFile(gpxFile, "rw");
+			gpxLock = raf.getChannel().lock();
 			raf.seek(startPosition);
 			raf.write(trackPoint.getBytes());
+			gpxLock.release();
 			raf.close();
 
 		} catch (IOException e) {
@@ -937,7 +1071,7 @@ public class GpsMainActivity extends Activity implements
 		}
 
 		track = track + "<src>" + loc.getProvider() + "</src>";
-		
+
 		if (satellites > 0) {
 			track = track + "<sat>" + String.valueOf(satellites) + "</sat>";
 		}
@@ -947,7 +1081,7 @@ public class GpsMainActivity extends Activity implements
 		track = track + "</trkpt>";
 
 		track = track + "</trkseg></trk></gpx>";
-		
+
 		return track;
 	}
 
@@ -955,14 +1089,20 @@ public class GpsMainActivity extends Activity implements
 
 		StopGpsManager();
 		StartGpsManager();
+
 	}
 
 	public void ResetManagersIfRequired() {
 		CheckTowerAndGpsStatus();
 
-		// If GPS is enabled
-		if (gpsEnabled) {
-			// But we're not currently using GPS
+		
+		if(isUsingGps && preferCellTower)
+		{
+			RestartGpsManagers();
+		}
+		// If GPS is enabled and user doesn't prefer celltowers
+		else if (gpsEnabled && !preferCellTower) {
+			// But we're not *already* using GPS
 			if (!isUsingGps) {
 				RestartGpsManagers();
 			}

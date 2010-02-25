@@ -11,6 +11,10 @@
 		android:summary="Displays a reminder along with coordinates in the notification bar."
 		android:title="Show Notification" />
 
+	<CheckBoxPreference android:key="prefer_celltower"
+		android:summary="Uses celltowers rather than satellites. Less accurate, but saves more battery."
+		android:title="Prefer celltowers" />
+
 	<EditTextPreference android:key="distance_before_logging"
 		android:title="Distance before logging" android:summary="Distance before logging. Use 0 for maximum frequency."
 		android:dialogTitle="Distance in meters" android:numeric="integer"

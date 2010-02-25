@@ -34,7 +34,8 @@ public final class R {
         public static final int lblSatellites=0x7f08000b;
         public static final int lblSpeed=0x7f080007;
         public static final int lblSummary=0x7f080010;
-        public static final int mnuExit=0x7f080018;
+        public static final int mnuAnnotate=0x7f080018;
+        public static final int mnuExit=0x7f080019;
         public static final int mnuSettings=0x7f080016;
         public static final int mnuShare=0x7f080017;
         public static final int textStatus=0x7f080000;
