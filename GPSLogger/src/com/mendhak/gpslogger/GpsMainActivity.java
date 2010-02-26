@@ -430,7 +430,7 @@ public class GpsMainActivity extends Activity implements
 		
 		if(!allowDescription)
 		{
-			Utilities.MsgBox("Not yet", "You can't add a description until the next point has been logged.", this);
+			Utilities.MsgBox("Not yet", "You can't add a description until the next point has been logged to a file.", this);
 			return;
 		}
 		
