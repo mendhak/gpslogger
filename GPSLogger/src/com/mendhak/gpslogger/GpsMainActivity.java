@@ -172,7 +172,7 @@ public class GpsMainActivity extends Activity implements
 				.currentTimeMillis());
 		nfc.flags |= Notification.FLAG_ONGOING_EVENT;
 
-		NumberFormat nf = new DecimalFormat("###.####");
+		NumberFormat nf = new DecimalFormat("###.######");
 
 		String contentText = "GPSLogger is still running.";
 		if (currentLatitude != 0 && currentLongitude != 0) {

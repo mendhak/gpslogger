@@ -28,14 +28,14 @@
 			<TextView android:textStyle="bold" android:text="Latitude:"
 				android:padding="3dip" />
 			<TextView android:id="@+id/txtLatitude" android:gravity="left"
-				android:padding="3dip" android:textColor="#e8a317" />
+				android:padding="3dip" android:textColor="#e8a317" android:textStyle="bold" />
 		</TableRow>
 
 		<TableRow android:background="#333333" android:layout_margin="1dip">
 			<TextView android:textStyle="bold" android:text="Longitude:"
 				android:padding="3dip" />
 			<TextView android:id="@+id/txtLongitude" android:gravity="left"
-				android:padding="3dip" android:textColor="#e8a317" />
+				android:padding="3dip" android:textColor="#e8a317" android:textStyle="bold" />
 		</TableRow>
 
 		<TableRow android:background="#333333" android:layout_margin="1dip">

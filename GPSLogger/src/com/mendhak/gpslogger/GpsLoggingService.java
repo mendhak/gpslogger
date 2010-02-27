@@ -23,7 +23,7 @@ public class GpsLoggingService extends Service {
 	@Override 
 	public void onCreate()
 	{
-		
+		//comment
 	}
 
 }
