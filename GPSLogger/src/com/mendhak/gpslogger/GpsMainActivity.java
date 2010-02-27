@@ -1,14 +1,10 @@
 package com.mendhak.gpslogger;
 
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader; //import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.channels.FileLock;
 import java.text.DecimalFormat;
@@ -16,8 +12,6 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.concurrent.locks.Lock;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
@@ -47,6 +41,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import android.widget.AutoCompleteTextView.Validator;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class GpsMainActivity extends Activity implements
@@ -427,18 +422,24 @@ public class GpsMainActivity extends Activity implements
 
 	private void Annotate() {
 
-		
-		if(!allowDescription)
-		{
-			Utilities.MsgBox("Not yet", "You can't add a description until the next point has been logged to a file.", this);
+		if (!allowDescription) {
+			Utilities
+					.MsgBox(
+							"Not yet",
+							"You can't add a description until the next point has been logged to a file.",
+							this);
 			return;
 		}
+
+		
+		
 		
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 		alert.setTitle("Add a description");
 		alert.setMessage("Use only letters and numbers");
 
+				
 		// Set an EditText view to get user input
 		final EditText input = new EditText(this);
 		alert.setView(input);
@@ -450,84 +451,12 @@ public class GpsMainActivity extends Activity implements
 					return;
 				}
 
-				final String desc = input.getText().toString();
-				File gpxFolder = new File(Environment
-						.getExternalStorageDirectory(), "GPSLogger");
-
-				if (!gpxFolder.exists()) {
-					return;
-				}
-
-				int offsetFromEnd;
-				String description;
-				long startPosition;
-
-				if (logToGpx) {
-
-					File gpxFile = new File(gpxFolder.getPath(),
-							currentFileName + ".gpx");
-
-					if (!gpxFile.exists()) {
-						return;
-					}
-					offsetFromEnd = 29;
-
-					startPosition = gpxFile.length() - offsetFromEnd;
-
-					description = "<name>" + desc + "</name><desc>" + desc
-							+ "</desc></trkpt></trkseg></trk></gpx>";
-					RandomAccessFile raf = null;
-					try {
-						raf = new RandomAccessFile(gpxFile, "rw");
-						gpxLock = raf.getChannel().lock();
-						raf.seek(startPosition);
-						raf.write(description.getBytes());
-						gpxLock.release();
-						raf.close();
-						
-						SetStatus("Description added to point.");
-						allowDescription = false;
-
-					} catch (Exception e) {
-						SetStatus("Couldn't write description to GPX file.");
-					}
-
-				}
-
-				if (logToKml) {
-
-					File kmlFile = new File(gpxFolder.getPath(),
-							currentFileName + ".kml");
-
-					if (!kmlFile.exists()) {
-						return;
-					}
-
-					offsetFromEnd = 37;
-
-					description = "<name>" + desc
-							+ "</name></Point></Placemark></Document></kml>";
-
-					startPosition = kmlFile.length() - offsetFromEnd;
-					try {
-						RandomAccessFile raf = new RandomAccessFile(kmlFile,
-								"rw");
-						kmlLock = raf.getChannel().lock();
-						raf.seek(startPosition);
-						raf.write(description.getBytes());
-						raf.close();
-
-						kmlLock.release();
-						allowDescription = false;
-					} catch (Exception e) {
-						SetStatus("Couldn't write description to KML file.");
-					}
-
-				}
-
-				// </Point></Placemark></Document></kml>
+				final String desc = Utilities.CleanDescription(input.getText().toString());
+				
+				AddNoteToLastPoint(desc);
 
 			}
+			
 		});
 		alert.setNegativeButton("Cancel",
 				new DialogInterface.OnClickListener() {
@@ -540,6 +469,86 @@ public class GpsMainActivity extends Activity implements
 
 	}
 
+	
+	private void AddNoteToLastPoint(String desc)
+	{
+		File gpxFolder = new File(Environment
+				.getExternalStorageDirectory(), "GPSLogger");
+
+		if (!gpxFolder.exists()) {
+			return;
+		}
+
+		int offsetFromEnd;
+		String description;
+		long startPosition;
+
+		if (logToGpx) {
+
+			File gpxFile = new File(gpxFolder.getPath(),
+					currentFileName + ".gpx");
+
+			if (!gpxFile.exists()) {
+				return;
+			}
+			offsetFromEnd = 29;
+
+			startPosition = gpxFile.length() - offsetFromEnd;
+
+			description = "<name>" + desc + "</name><desc>" + desc
+					+ "</desc></trkpt></trkseg></trk></gpx>";
+			RandomAccessFile raf = null;
+			try {
+				raf = new RandomAccessFile(gpxFile, "rw");
+				gpxLock = raf.getChannel().lock();
+				raf.seek(startPosition);
+				raf.write(description.getBytes());
+				gpxLock.release();
+				raf.close();
+
+				SetStatus("Description added to point.");
+				allowDescription = false;
+
+			} catch (Exception e) {
+				SetStatus("Couldn't write description to GPX file.");
+			}
+
+		}
+
+		if (logToKml) {
+
+			File kmlFile = new File(gpxFolder.getPath(),
+					currentFileName + ".kml");
+
+			if (!kmlFile.exists()) {
+				return;
+			}
+
+			offsetFromEnd = 37;
+
+			description = "<name>" + desc
+					+ "</name></Point></Placemark></Document></kml>";
+
+			startPosition = kmlFile.length() - offsetFromEnd;
+			try {
+				RandomAccessFile raf = new RandomAccessFile(kmlFile,
+						"rw");
+				kmlLock = raf.getChannel().lock();
+				raf.seek(startPosition);
+				raf.write(description.getBytes());
+				kmlLock.release();
+				raf.close();
+
+				allowDescription = false;
+			} catch (Exception e) {
+				SetStatus("Couldn't write description to KML file.");
+			}
+
+		}
+
+		// </Point></Placemark></Document></kml>
+	}
+	
 	final Handler handler = new Handler();
 	final Runnable updateResults = new Runnable() {
 		public void run() {
@@ -604,11 +613,13 @@ public class GpsMainActivity extends Activity implements
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int whichButton) {
-								final String desc = input.getText().toString();
-
+								
 								Thread t = new Thread() {
 									public void run() {
+										//Send to server
 										SendToServer(input.getText().toString());
+										//Also add to the file being logged
+										AddNoteToLastPoint(input.getText().toString());
 										pd.dismiss();
 										handler.post(updateResults);
 									}
@@ -894,7 +905,7 @@ public class GpsMainActivity extends Activity implements
 				WriteToKmlFile(loc, gpxFolder, brandNewFile);
 
 			}
-			
+
 			allowDescription = true;
 
 		} catch (Exception e) {
@@ -938,8 +949,9 @@ public class GpsMainActivity extends Activity implements
 
 			long startPosition = kmlFile.length() - 17;
 
-			String placemark = "<Placemark><description>" + now.toLocaleString()
-					+ "</description>" + "<Point><coordinates>"
+			String placemark = "<Placemark><description>"
+					+ now.toLocaleString() + "</description>"
+					+ "<Point><coordinates>"
 					+ String.valueOf(loc.getLongitude()) + ","
 					+ String.valueOf(loc.getLatitude()) + ","
 					+ String.valueOf(loc.getAltitude())
@@ -949,9 +961,9 @@ public class GpsMainActivity extends Activity implements
 			kmlLock = raf.getChannel().lock();
 			raf.seek(startPosition);
 			raf.write(placemark.getBytes());
+			kmlLock.release();
 			raf.close();
 
-			kmlLock.release();
 		} catch (IOException e) {
 			Log.e("Main", "Could not write file " + e.getMessage());
 			SetStatus("Could not write to file. " + e.getMessage());
@@ -1095,9 +1107,7 @@ public class GpsMainActivity extends Activity implements
 	public void ResetManagersIfRequired() {
 		CheckTowerAndGpsStatus();
 
-		
-		if(isUsingGps && preferCellTower)
-		{
+		if (isUsingGps && preferCellTower) {
 			RestartGpsManagers();
 		}
 		// If GPS is enabled and user doesn't prefer celltowers
