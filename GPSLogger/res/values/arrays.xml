@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="entries">
+   <item>Once a day</item>
+   <item>Every start</item>
+   
+</string-array>
+
+<string-array name="values">
+   <item>onceaday</item>
+   <item>everystart</item>
+
+</string-array>
+
+</resources> 
