@@ -8,9 +8,10 @@
 		<CheckBoxPreference android:key="log_kml"
 			android:summary="Creates a KML file in the GPSLogger folder on the SD card."
 			android:title="Log to KML" />
-		<CheckBoxPreference android:key="show_notification"
-			android:summary="Displays a reminder along with coordinates in the notification bar."
-			android:title="Show Notification" android:defaultValue="true" />
+
+		<CheckBoxPreference android:key="satellite_time"
+			android:summary="Use satellite time instead of local phone time, it's more accurate."
+			android:title="Use satellite time" android:defaultValue="false" />
 		<ListPreference android:title="New file creation"
 			android:summary="Whether to create a new file once a day or each time you start."
 			android:key="new_file_creation" android:entries="@array/entries"
@@ -34,6 +35,12 @@
 
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Extras">
+		<CheckBoxPreference android:title="Use Imperial units"
+			android:summary="Use feet, miles and pints, none of that newfangled metric stuff."
+			android:key="useImperial" />
+		<CheckBoxPreference android:key="show_notification"
+			android:summary="Displays a reminder along with coordinates in the notification bar."
+			android:title="Show Notification" android:defaultValue="true" />
 		<Preference android:title="Your SeeMyMap.com"
 			android:summary="Set up your seemymap.com website" android:key="seemymap_setup">
 			<intent android:action="com.mendhak.gpslogger.SEEMYMAP_SETUP" />

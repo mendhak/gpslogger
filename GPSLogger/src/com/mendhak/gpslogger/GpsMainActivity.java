@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.text.AlteredCharSequence;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -72,6 +73,7 @@ public class GpsMainActivity extends Activity implements
 	String newFileCreation;
 	boolean newFileOnceADay;
 	boolean preferCellTower;
+	boolean useSatelliteTime;
 
 	String seeMyMapUrl;
 	String seeMyMapGuid;
@@ -84,6 +86,8 @@ public class GpsMainActivity extends Activity implements
 
 	boolean addNewTrackSegment = true;
 	boolean allowDescription = false;
+
+	boolean useImperial = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -192,6 +196,10 @@ public class GpsMainActivity extends Activity implements
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
 
+		useImperial = prefs.getBoolean("useImperial", false);
+
+		useSatelliteTime = prefs.getBoolean("satellite_time", false);
+
 		logToKml = prefs.getBoolean("log_kml", false);
 		logToGpx = prefs.getBoolean("log_gpx", false);
 		showInNotificationBar = prefs.getBoolean("show_notification", true);
@@ -206,6 +214,10 @@ public class GpsMainActivity extends Activity implements
 			minimumDistance = Integer.valueOf(minimumDistanceString);
 		} else {
 			minimumDistance = 0;
+		}
+
+		if (useImperial) {
+			minimumDistance = Utilities.FeetToMeters(minimumDistance);
 		}
 
 		String minimumSecondsString = prefs.getString("time_before_logging",
@@ -226,6 +238,8 @@ public class GpsMainActivity extends Activity implements
 
 		seeMyMapUrl = prefs.getString("seemymap_URL", "");
 		seeMyMapGuid = prefs.getString("seemymap_GUID", "");
+
+		useImperial = prefs.getBoolean("useImperial", false);
 
 		try {
 			ShowPreferencesSummary();
@@ -258,11 +272,22 @@ public class GpsMainActivity extends Activity implements
 
 		if (minimumDistance > 0) {
 
-			summarySentence = summarySentence
-					+ " and roughly every "
-					+ ((minimumDistance == 1) ? " meter." : String
-							.valueOf(minimumDistance)
-							+ " meters.");
+			if (useImperial) {
+				int minimumDistanceInFeet = Utilities
+						.MetersToFeet(minimumDistance);
+				summarySentence = summarySentence
+						+ " and roughly every "
+						+ ((minimumDistanceInFeet == 1) ? " foot." : String
+								.valueOf(minimumDistanceInFeet)
+								+ " feet.");
+			} else {
+				summarySentence = summarySentence
+						+ " and roughly every "
+						+ ((minimumDistance == 1) ? " meter." : String
+								.valueOf(minimumDistance)
+								+ " meters.");
+			}
+
 		} else {
 			summarySentence = summarySentence
 					+ ", regardless of distance traveled.";
@@ -431,15 +456,11 @@ public class GpsMainActivity extends Activity implements
 			return;
 		}
 
-		
-		
-		
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 		alert.setTitle("Add a description");
 		alert.setMessage("Use only letters and numbers");
 
-				
 		// Set an EditText view to get user input
 		final EditText input = new EditText(this);
 		alert.setView(input);
@@ -451,12 +472,13 @@ public class GpsMainActivity extends Activity implements
 					return;
 				}
 
-				final String desc = Utilities.CleanDescription(input.getText().toString());
-				
+				final String desc = Utilities.CleanDescription(input.getText()
+						.toString());
+
 				AddNoteToLastPoint(desc);
 
 			}
-			
+
 		});
 		alert.setNegativeButton("Cancel",
 				new DialogInterface.OnClickListener() {
@@ -469,11 +491,9 @@ public class GpsMainActivity extends Activity implements
 
 	}
 
-	
-	private void AddNoteToLastPoint(String desc)
-	{
-		File gpxFolder = new File(Environment
-				.getExternalStorageDirectory(), "GPSLogger");
+	private void AddNoteToLastPoint(String desc) {
+		File gpxFolder = new File(Environment.getExternalStorageDirectory(),
+				"GPSLogger");
 
 		if (!gpxFolder.exists()) {
 			return;
@@ -485,8 +505,8 @@ public class GpsMainActivity extends Activity implements
 
 		if (logToGpx) {
 
-			File gpxFile = new File(gpxFolder.getPath(),
-					currentFileName + ".gpx");
+			File gpxFile = new File(gpxFolder.getPath(), currentFileName
+					+ ".gpx");
 
 			if (!gpxFile.exists()) {
 				return;
@@ -517,8 +537,8 @@ public class GpsMainActivity extends Activity implements
 
 		if (logToKml) {
 
-			File kmlFile = new File(gpxFolder.getPath(),
-					currentFileName + ".kml");
+			File kmlFile = new File(gpxFolder.getPath(), currentFileName
+					+ ".kml");
 
 			if (!kmlFile.exists()) {
 				return;
@@ -531,8 +551,7 @@ public class GpsMainActivity extends Activity implements
 
 			startPosition = kmlFile.length() - offsetFromEnd;
 			try {
-				RandomAccessFile raf = new RandomAccessFile(kmlFile,
-						"rw");
+				RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
 				kmlLock = raf.getChannel().lock();
 				raf.seek(startPosition);
 				raf.write(description.getBytes());
@@ -548,7 +567,7 @@ public class GpsMainActivity extends Activity implements
 
 		// </Point></Placemark></Document></kml>
 	}
-	
+
 	final Handler handler = new Handler();
 	final Runnable updateResults = new Runnable() {
 		public void run() {
@@ -577,11 +596,10 @@ public class GpsMainActivity extends Activity implements
 
 		input = CleanString(input);
 
-		String whereUrl = "http://192.168.1.5:8101/SeeMyMapService.svc/savepoint/?guid="
-				+ seeMyMapGuid
-				+ "&lat="
-				+ String.valueOf(currentLatitude)
-				+ "&lon=" + String.valueOf(currentLongitude) + "&des=" + input;
+		//
+
+		String whereUrl = Utilities.GetSeeMyMapAddLocationUrl(seeMyMapGuid,
+				currentLatitude, currentLongitude, input);
 
 		String response = Utilities.GetUrl(whereUrl);
 
@@ -596,10 +614,6 @@ public class GpsMainActivity extends Activity implements
 
 			if (currentLatitude != 0 && currentLongitude != 0) {
 
-				final ProgressDialog pd = ProgressDialog.show(
-						GpsMainActivity.this, "Sending...",
-						"Sending to server", true, true);
-
 				AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 				alert.setTitle("Add a description");
@@ -609,17 +623,23 @@ public class GpsMainActivity extends Activity implements
 				final EditText input = new EditText(this);
 				alert.setView(input);
 
+				final ProgressDialog pd = ProgressDialog.show(
+						GpsMainActivity.this, "Sending...",
+						"Sending to server", true, true);
+
 				alert.setPositiveButton("Ok",
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int whichButton) {
-								
+
 								Thread t = new Thread() {
 									public void run() {
-										//Send to server
+
+										// Send to server
 										SendToServer(input.getText().toString());
-										//Also add to the file being logged
-										AddNoteToLastPoint(input.getText().toString());
+										// Also add to the file being logged
+										AddNoteToLastPoint(input.getText()
+												.toString());
 										pd.dismiss();
 										handler.post(updateResults);
 									}
@@ -632,7 +652,7 @@ public class GpsMainActivity extends Activity implements
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int whichButton) {
-								// Canceled.
+								pd.dismiss();
 							}
 						});
 
@@ -795,14 +815,32 @@ public class GpsMainActivity extends Activity implements
 			tvLongitude.setText(String.valueOf(loc.getLongitude()));
 
 			if (loc.hasAltitude()) {
-				tvAltitude.setText(String.valueOf(loc.getAltitude())
-						+ " meters");
+
+				double altitude = loc.getAltitude();
+
+				if (useImperial) {
+					tvAltitude.setText(String.valueOf(Utilities
+							.MetersToFeet(altitude))
+							+ " feet");
+				} else {
+					tvAltitude.setText(String.valueOf(altitude) + " meters");
+				}
+
 			} else {
 				tvAltitude.setText("n/a");
 			}
 
 			if (loc.hasSpeed()) {
-				txtSpeed.setText(String.valueOf(loc.getSpeed()) + " m/s");
+
+				float speed = loc.getSpeed();
+				if (useImperial) {
+					txtSpeed.setText(String.valueOf(Utilities
+							.MetersToFeet(speed))
+							+ " ft/s");
+				} else {
+					txtSpeed.setText(String.valueOf(speed) + " m/s");
+				}
+
 			} else {
 				txtSpeed.setText("n/a");
 			}
@@ -860,8 +898,18 @@ public class GpsMainActivity extends Activity implements
 			}
 
 			if (loc.hasAccuracy()) {
-				txtAccuracy.setText("within "
-						+ String.valueOf(loc.getAccuracy()) + " meters");
+
+				float accuracy = loc.getAccuracy();
+
+				if (useImperial) {
+					txtAccuracy.setText("within "
+							+ String.valueOf(Utilities.MetersToFeet(accuracy))
+							+ " feet");
+				} else {
+					txtAccuracy.setText("within " + String.valueOf(accuracy)
+							+ " meters");
+				}
+
 			} else {
 				txtAccuracy.setText("n/a");
 			}
@@ -983,9 +1031,18 @@ public class GpsMainActivity extends Activity implements
 				brandNewFile = true;
 			}
 
-			Date now = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-			String dateTimeString = sdf.format(now);
+			Date now;
+			
+			if(useSatelliteTime)
+			{
+			  now = new Date(loc.getTime());	
+			}
+			else
+			{
+				now = new Date();
+			}
+
+			String dateTimeString = Utilities.GetIsoDateTime(now);
 
 			if (brandNewFile) {
 				FileOutputStream initialWriter = new FileOutputStream(gpxFile,

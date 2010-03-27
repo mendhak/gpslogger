@@ -56,8 +56,7 @@ public class SeeMyMapSetupActivity extends Activity implements OnClickListener {
 	private void checkMap(String requestedUrl, String password) {
 
 		String getMapResponse = Utilities
-				.GetUrl("http://192.168.1.5:8101/SeeMyMapService.svc/requestmap/"
-						+ requestedUrl + "/" + password);
+				.GetUrl(Utilities.GetSeeMyMapRequestUrl(requestedUrl, password));
 
 		if (getMapResponse == null || getMapResponse.length() == 0) {
 			guid = "ERROR";

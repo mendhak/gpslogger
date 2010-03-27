@@ -19,19 +19,15 @@
 			android:label="SeeMyMap setup" android:screenOrientation="portrait">
 			<intent-filter>
 				<category android:name="android.intent.category.DEFAULT" />
-
 				<action android:name="com.mendhak.gpslogger.SEEMYMAP_SETUP" />
-
 			</intent-filter>
-
 		</activity>
-
 
 	</application>
 	<uses-sdk android:minSdkVersion="3" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+	 
 
 </manifest> 
