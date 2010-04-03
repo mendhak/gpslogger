@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -45,6 +46,93 @@ public class Utilities {
 	}
 	
 	
+	public static String GetDescriptiveTimeString(int numberOfSeconds) {
+
+		String descriptive = "";
+		int hours = 0;
+		int minutes = 0;
+		int seconds = 0;
+
+		int remainingSeconds = 0;
+
+		// Special cases
+		if (numberOfSeconds == 1) {
+			return "second";
+		}
+
+		if (numberOfSeconds == 30) {
+			return "half a minute";
+		}
+
+		if (numberOfSeconds == 60) {
+			return "minute";
+		}
+
+		if (numberOfSeconds == 900) {
+			return "quarter hour";
+		}
+
+		if (numberOfSeconds == 1800) {
+			return "half an hour";
+		}
+
+		if (numberOfSeconds == 3600) {
+			return "hour";
+		}
+
+		if (numberOfSeconds == 4800) {
+			return "1� hours";
+		}
+
+		if (numberOfSeconds == 9000) {
+			return "2� hours";
+		}
+
+		// For all other cases, calculate
+
+		hours = numberOfSeconds / 3600;
+		remainingSeconds = numberOfSeconds % 3600;
+		minutes = remainingSeconds / 60;
+		seconds = remainingSeconds % 60;
+
+		if (hours == 1) {
+			descriptive = String.valueOf(hours) + " hour";
+		} else if (hours > 1) {
+			descriptive = String.valueOf(hours) + " hours";
+		}
+
+		if (minutes >= 0 && hours > 0) {
+			String joiner = (seconds > 0) ? ", " : " and ";
+			String minuteWord = (minutes == 1) ? " minute" : " minutes";
+			descriptive = descriptive + joiner + String.valueOf(minutes)
+					+ minuteWord;
+			// 4 hours, 2 minutes
+			// 1 hours, 0 minutes
+			// 2 hours, 0 minutes
+			// 3 hours and 35 minutes
+			// 1 hour and 8 minutes
+		} else if (minutes > 0 && hours == 0) {
+			String minuteWord = (minutes == 1) ? " minute" : " minutes";
+			descriptive = String.valueOf(minutes) + minuteWord;
+			// 45 minutes
+		}
+
+		if ((hours > 0 || minutes > 0) && seconds > 0) {
+			String secondsWord = (seconds == 1) ? " second" : " seconds";
+
+			descriptive = descriptive + " and " + String.valueOf(seconds)
+					+ secondsWord;
+			// 2 hours, 0 minutes and 5 seconds
+			// 1 hour, 12 minutes and 9 seconds
+		} else if (hours == 0 && minutes == 0 && seconds > 0) {
+			String secondsWord = (seconds == 1) ? " second" : " second";
+			descriptive = String.valueOf(seconds) + secondsWord;
+		}
+
+		return descriptive;
+
+	}
+	
 	static String CleanDescription(String desc)
 	{
 		desc = desc.replace("<","");
@@ -55,7 +143,7 @@ public class Utilities {
 		return desc;
 	}
 	
-	static String GetUrl(String url)
+	static String GetUrl(String url) throws Exception
 	{
 		URL serverAddress = null;
 		HttpURLConnection connection = null;
@@ -92,6 +180,7 @@ public class Utilities {
 			return sb.toString();
 
 		} catch(Exception e) {
+			throw e;
 			//Swallow
 		} finally {
 			// close the connection, set all objects
@@ -103,13 +192,11 @@ public class Utilities {
 			connection = null;
 		}
 		
-		return "";
+		
 
 	}
 	
-	public static boolean Flag(){
-		return false;
-	}
+
 
 	public static String GetIsoDateTime(Date dateToFormat) {
 			
@@ -146,23 +233,50 @@ public class Utilities {
 	public static String GetSeeMyMapAddLocationUrl(String seeMyMapGuid,
 			double currentLatitude, double currentLongitude, String input) {
 		
-		String whereUrl = "http://www.example.com/savepoint/?guid="
+		String whereUrl = GetSeeMyMapBaseUrl() + "/savepoint/?guid="
 			+ seeMyMapGuid
 			+ "&lat="
 			+ String.valueOf(currentLatitude)
-			+ "&lon=" + String.valueOf(currentLongitude) + "&des=" + input;
+			+ "&lon=" + String.valueOf(currentLongitude) + "&des=" + URLEncoder.encode(input);
 		return whereUrl;
 		
+	}
+	
+	public static String GetSeeMyMapAddLocationWithDateUrl(String seeMyMapGuid,
+			double currentLatitude, double currentLongitude, String input, String dateTime)
+	{
+		String whereUrl = GetSeeMyMapBaseUrl() + "/savepointwithdate/?guid="
+		+ seeMyMapGuid
+		+ "&lat="
+		+ String.valueOf(currentLatitude)
+		+ "&lon=" + String.valueOf(currentLongitude) + "&des=" + URLEncoder.encode(input) + "&date=" + URLEncoder.encode(dateTime);
+		
+		return whereUrl;
+	    
 	}
 
 	public static String GetSeeMyMapRequestUrl(String requestedUrl,
 			String password) {
 		
-		String requestUrl = "http://www.example.com/requestmap/"
+		String requestUrl =  GetSeeMyMapBaseUrl() + "/requestmap/"
 		+ requestedUrl + "/" + password;
 		
 		return requestUrl;
 	}
-
+	
+	public static String GetSeeMyMapClearMapUrl(String seeMyMapGuid)
+	{
+		String clearUrl = GetSeeMyMapBaseUrl() + "/clearmap/" + seeMyMapGuid;
+		return clearUrl;
+	}
+	
+	public static String GetSeeMyMapBaseUrl()
+	{
+	 return	"http://127.0.0.1:8888";
+	}
+	
+	public static boolean Flag(){
+		return false;
+	}
 
 }

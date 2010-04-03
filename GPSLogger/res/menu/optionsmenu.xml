@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:id="@+id/mnuSettings" android:title="Settings" android:icon="@android:drawable/ic_menu_preferences" />
-	<item android:id="@+id/mnuShare" android:title="Send" android:icon="@android:drawable/ic_menu_share" />
-	<item android:id="@+id/mnuAnnotate" android:title="Annotate" android:icon="@android:drawable/ic_menu_edit" />
-	<item android:id="@+id/mnuExit" android:title="Exit" android:icon="@android:drawable/ic_menu_close_clear_cancel" />
+	<item android:id="@+id/mnuSettings" android:title="Settings"
+		android:icon="@android:drawable/ic_menu_preferences" />
+	<item android:id="@+id/mnuSeeMyMap" android:title="SeeMyMap"
+		android:icon="@android:drawable/ic_menu_mapmode">
+		<menu>
+			<item android:id="@+id/mnuShareLatest" android:title="Send new point"
+				android:icon="@android:drawable/ic_menu_share" />
+			<item android:id="@+id/mnuShareAnnotated" android:title="Send points since..."
+				android:icon="@android:drawable/ic_menu_share"  />
+			<item android:id="@+id/mnuClearMap" android:title="Clear Map" />
+			
+		</menu>
+	</item>
+
+	<item android:id="@+id/mnuAnnotate" android:title="Annotate"
+		android:icon="@android:drawable/ic_menu_edit" />
+	<item android:id="@+id/mnuExit" android:title="Exit"
+		android:icon="@android:drawable/ic_menu_close_clear_cancel" />
 
 </menu>

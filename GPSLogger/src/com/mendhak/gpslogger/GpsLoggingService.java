@@ -8,7 +8,7 @@ import android.os.IBinder;
 public class GpsLoggingService extends Service {
 
 	public static Activity Parent;
-	public String testString;
+	
 	
 	@Override
 	public IBinder onBind(Intent arg0) {

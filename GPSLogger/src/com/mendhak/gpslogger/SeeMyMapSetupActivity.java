@@ -55,8 +55,15 @@ public class SeeMyMapSetupActivity extends Activity implements OnClickListener {
 
 	private void checkMap(String requestedUrl, String password) {
 
-		String getMapResponse = Utilities
-				.GetUrl(Utilities.GetSeeMyMapRequestUrl(requestedUrl, password));
+		String getMapResponse = null;
+		
+		try {
+			getMapResponse = Utilities
+					.GetUrl(Utilities.GetSeeMyMapRequestUrl(requestedUrl, password));
+		} catch (Exception e) {
+
+			guid = "ERROR";
+		}
 
 		if (getMapResponse == null || getMapResponse.length() == 0) {
 			guid = "ERROR";

@@ -10,10 +10,23 @@ import java.nio.channels.FileLock;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
+
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.XMLReaderFactory;
+
+import com.mendhak.gpslogger.model.GpxPoint;
+import com.mendhak.gpslogger.providers.GpxSaxHandler;
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -27,6 +40,7 @@ import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager; //import android.os.AsyncTask;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -38,6 +52,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -89,6 +104,10 @@ public class GpsMainActivity extends Activity implements
 
 	boolean useImperial = false;
 
+	private NotificationManager gpsNotifyManager;
+	private int NOTIFICATION_ID;
+	static final int DATEPICKER_ID = 0;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -133,9 +152,6 @@ public class GpsMainActivity extends Activity implements
 		}
 
 	}
-
-	private NotificationManager gpsNotifyManager;
-	private int NOTIFICATION_ID;
 
 	private void Notify() {
 
@@ -263,7 +279,8 @@ public class GpsMainActivity extends Activity implements
 		}
 
 		if (minimumSeconds > 0) {
-			String descriptiveTime = GetDescriptiveTimeString(minimumSeconds);
+			String descriptiveTime = Utilities
+					.GetDescriptiveTimeString(minimumSeconds);
 
 			summarySentence = summarySentence + " every " + descriptiveTime;
 		} else {
@@ -304,93 +321,6 @@ public class GpsMainActivity extends Activity implements
 		lblSummary.setText(summarySentence);
 	}
 
-	private String GetDescriptiveTimeString(int numberOfSeconds) {
-
-		String descriptive = "";
-		int hours = 0;
-		int minutes = 0;
-		int seconds = 0;
-
-		int remainingSeconds = 0;
-
-		// Special cases
-		if (numberOfSeconds == 1) {
-			return "second";
-		}
-
-		if (numberOfSeconds == 30) {
-			return "half a minute";
-		}
-
-		if (numberOfSeconds == 60) {
-			return "minute";
-		}
-
-		if (numberOfSeconds == 900) {
-			return "quarter hour";
-		}
-
-		if (numberOfSeconds == 1800) {
-			return "half an hour";
-		}
-
-		if (numberOfSeconds == 3600) {
-			return "hour";
-		}
-
-		if (numberOfSeconds == 4800) {
-			return "1½ hours";
-		}
-
-		if (numberOfSeconds == 9000) {
-			return "2½ hours";
-		}
-
-		// For all other cases, calculate
-
-		hours = numberOfSeconds / 3600;
-		remainingSeconds = numberOfSeconds % 3600;
-		minutes = remainingSeconds / 60;
-		seconds = remainingSeconds % 60;
-
-		if (hours == 1) {
-			descriptive = String.valueOf(hours) + " hour";
-		} else if (hours > 1) {
-			descriptive = String.valueOf(hours) + " hours";
-		}
-
-		if (minutes >= 0 && hours > 0) {
-			String joiner = (seconds > 0) ? ", " : " and ";
-			String minuteWord = (minutes == 1) ? " minute" : " minutes";
-			descriptive = descriptive + joiner + String.valueOf(minutes)
-					+ minuteWord;
-			// 4 hours, 2 minutes
-			// 1 hours, 0 minutes
-			// 2 hours, 0 minutes
-			// 3 hours and 35 minutes
-			// 1 hour and 8 minutes
-		} else if (minutes > 0 && hours == 0) {
-			String minuteWord = (minutes == 1) ? " minute" : " minutes";
-			descriptive = String.valueOf(minutes) + minuteWord;
-			// 45 minutes
-		}
-
-		if ((hours > 0 || minutes > 0) && seconds > 0) {
-			String secondsWord = (seconds == 1) ? " second" : " seconds";
-
-			descriptive = descriptive + " and " + String.valueOf(seconds)
-					+ secondsWord;
-			// 2 hours, 0 minutes and 5 seconds
-			// 1 hour, 12 minutes and 9 seconds
-		} else if (hours == 0 && minutes == 0 && seconds > 0) {
-			String secondsWord = (seconds == 1) ? " second" : " second";
-			descriptive = String.valueOf(seconds) + secondsWord;
-		}
-
-		return descriptive;
-
-	}
-
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			moveTaskToBack(true);
@@ -419,31 +349,184 @@ public class GpsMainActivity extends Activity implements
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 
-		if (item.getTitle().equals("Settings")) {
+		int itemId = item.getItemId();
+
+		switch (itemId) {
+		case R.id.mnuSettings:
 			Intent settingsActivity = new Intent(getBaseContext(),
 					GpsSettingsActivity.class);
 			startActivity(settingsActivity);
-			return false;
-
-		} else if (item.getTitle().equals("Send")) {
+			break;
+		case R.id.mnuShareLatest:
 			SendLocation();
-			return false;
-		} else if (item.getTitle().equals("Annotate")) {
-
+			break;
+		case R.id.mnuClearMap:
+			ClearMap();
+			break;
+		case R.id.mnuShareAnnotated:
+			showDialog(DATEPICKER_ID);
+			// Datetime picker
+			// Get files since
+			// parse
+			break;
+		case R.id.mnuAnnotate:
 			Annotate();
-			return false;
-
-		} else {
+			break;
+		case R.id.mnuExit:
 			RemoveNotification();
 			StopGpsManager();
 			// super.onStop();
 			System.exit(0);
 			// finish();
-
-			return false;
+			break;
 		}
+		return false;
+
+		// Intent sendIntent = new Intent(Intent.ACTION_SEND);
+		// sendIntent.putExtra(Intent.EXTRA_TEXT, "email text");
+		// sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+		// sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new
+		// File
+		// ("file:///sdcard/GPSLogger/20100317")));
+		// sendIntent.setType("application/gpx+xml");
+		// startActivity(Intent.createChooser(sendIntent, "Title:"));
+		// return false;
+		// }
 
 	}
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		Calendar c = Calendar.getInstance();
+		int cyear = c.get(Calendar.YEAR);
+		int cmonth = c.get(Calendar.MONTH);
+		int cday = c.get(Calendar.DAY_OF_MONTH);
+		switch (id) {
+		case DATEPICKER_ID:
+			return new DatePickerDialog(this, dateSetListener, cyear, cmonth,
+					cday);
+		}
+		return null;
+	}
+
+	private DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+		// onDateSet method
+		public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+
+			final ArrayList<GpxPoint> points = new ArrayList<GpxPoint>();
+
+			// Date chosenDate = new Date(year, monthOfYear , dayOfMonth);
+
+			final Date chosenDate = new Date((new GregorianCalendar(year,
+					monthOfYear, dayOfMonth)).getTimeInMillis());
+
+			Date today = new Date();
+
+			final long difference = today.getTime() - chosenDate.getTime();
+
+			if (difference > 0) {
+
+				final ProgressDialog pd = ProgressDialog
+						.show(
+								GpsMainActivity.this,
+								"Sending...",
+								"Reading and sending points, if there are a lot of files, this could take a few minutes.",
+								true, true);
+
+				Thread t = new Thread(new Runnable() {
+					public void run() {
+						int days = 1;
+						days = (int) (difference / (1000 * 60 * 60 * 24));
+
+						for (int i = 0; i <= days; i++) {
+
+							Date newDate = new Date(chosenDate.getTime()
+									+ ((long) i * 1000 * 60 * 60 * 24));
+
+							DecimalFormat leadingZero = new DecimalFormat("00");
+
+							String dateFile = String
+									.valueOf(newDate.getYear() + 1900)
+									+ leadingZero
+											.format(newDate.getMonth() + 1)
+									+ leadingZero.format(newDate.getDate());
+
+							XMLReader parser;
+
+							try {
+
+								File gpxFolder = new File(Environment
+										.getExternalStorageDirectory(),
+										"GPSLogger");
+
+								if (!gpxFolder.exists()) {
+									continue;
+								}
+
+								File gpxFile = new File(gpxFolder, dateFile
+										+ ".gpx");
+
+								if (gpxFile.exists()) {
+									System.setProperty("org.xml.sax.driver",
+											"org.xmlpull.v1.sax2.Driver");
+									GpxSaxHandler gsh = new GpxSaxHandler();
+									parser = XMLReaderFactory.createXMLReader();
+									parser.setContentHandler(gsh);
+
+									parser.parse("/sdcard/GPSLogger/"
+											+ dateFile + ".gpx");
+
+									points.addAll(gsh.GetPoints());
+								}
+
+							} catch (SAXException e) {
+
+								e.printStackTrace();
+							} catch (IOException e) {
+
+								e.printStackTrace();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+						}
+
+						for (GpxPoint p : points) {
+
+							String addLocationUrl = Utilities
+									.GetSeeMyMapAddLocationWithDateUrl(
+											seeMyMapGuid, Double.valueOf(p
+													.getLatitude()), Double
+													.valueOf(p.getLongitude()),
+											p.getDescription(), p.getDateTime());
+							try {
+								Utilities.GetUrl(addLocationUrl);
+								handler.post(updateResultsSentPoints);
+
+							} catch (Exception e) {
+
+								handler.post(updateResultsConnectionError);
+								break;
+							}
+						}
+
+						pd.dismiss();
+
+					}
+				});
+				t.start();
+
+			} else {
+				Utilities
+						.MsgBox(
+								"Marty McFly?",
+								"This application does not support futuristic time travel.",
+								GpsMainActivity.this);
+			}
+
+		}
+	};
 
 	private void Annotate() {
 
@@ -569,6 +652,14 @@ public class GpsMainActivity extends Activity implements
 	}
 
 	final Handler handler = new Handler();
+
+	final Runnable updateResultsConnectionError = new Runnable() {
+		public void run() {
+			ThereWasAConnectionError();
+		}
+
+	};
+
 	final Runnable updateResults = new Runnable() {
 		public void run() {
 			AddedToMap();
@@ -576,10 +667,36 @@ public class GpsMainActivity extends Activity implements
 
 	};
 
+	final Runnable updateResultsClearMap = new Runnable() {
+		public void run() {
+			MapCleared();
+		}
+	};
+
+	final Runnable updateResultsSentPoints = new Runnable() {
+		public void run() {
+			PointsSent();
+		}
+	};
+
+	private void ThereWasAConnectionError() {
+		Utilities.MsgBox("Error",
+				"Connection Error. Please check your phone settings.", this);
+
+	}
+
+	private void PointsSent() {
+		Utilities.MsgBox("Sent", "Points sent to the server", this);
+	}
+
 	private void AddedToMap() {
 
 		Utilities.MsgBox("Sent", "Location sent to server", this);
 
+	}
+
+	private void MapCleared() {
+		Utilities.MsgBox("Cleared", "The map has been cleared", this);
 	}
 
 	private String CleanString(String input) {
@@ -592,7 +709,7 @@ public class GpsMainActivity extends Activity implements
 		return input;
 	}
 
-	private void SendToServer(String input) {
+	private void SendToServer(String input) throws Exception {
 
 		input = CleanString(input);
 
@@ -601,11 +718,50 @@ public class GpsMainActivity extends Activity implements
 		String whereUrl = Utilities.GetSeeMyMapAddLocationUrl(seeMyMapGuid,
 				currentLatitude, currentLongitude, input);
 
-		String response = Utilities.GetUrl(whereUrl);
+		try {
+			Utilities.GetUrl(whereUrl);
+		} catch (Exception e) {
+			throw e;
+		}
+
+	}
+
+	private void ClearMap() {
+		GetPreferences();
+
+		if (seeMyMapUrl == null || seeMyMapUrl.length() == 0
+				|| seeMyMapGuid == null || seeMyMapGuid.length() == 0) {
+			startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
+		} else {
+
+			final ProgressDialog pd = ProgressDialog.show(GpsMainActivity.this,
+					"Clearing...", "Clearing Map", true, true);
+
+			Thread t = new Thread() {
+				public void run() {
+
+					// Send to server
+					try {
+						Utilities.GetUrl(Utilities
+								.GetSeeMyMapClearMapUrl(seeMyMapGuid));
+						handler.post(updateResultsClearMap);
+					} catch (Exception e) {
+						handler.post(updateResultsConnectionError);
+					}
+
+					pd.dismiss();
+
+				}
+			};
+			t.start();
+
+		}
 
 	}
 
 	private void SendLocation() {
+
+		GetPreferences();
 
 		if (seeMyMapUrl == null || seeMyMapUrl.length() == 0
 				|| seeMyMapGuid == null || seeMyMapGuid.length() == 0) {
@@ -636,12 +792,20 @@ public class GpsMainActivity extends Activity implements
 									public void run() {
 
 										// Send to server
-										SendToServer(input.getText().toString());
+										try {
+											SendToServer(input.getText()
+													.toString());
+											handler.post(updateResults);
+										} catch (Exception e) {
+
+											handler
+													.post(updateResultsConnectionError);
+										}
 										// Also add to the file being logged
 										AddNoteToLastPoint(input.getText()
 												.toString());
 										pd.dismiss();
-										handler.post(updateResults);
+
 									}
 								};
 								t.start();
@@ -887,7 +1051,7 @@ public class GpsMainActivity extends Activity implements
 				}
 
 				txtDirection.setText(direction + "("
-						+ String.valueOf(Math.round(bearingDegrees)) + "°)");
+						+ String.valueOf(Math.round(bearingDegrees)) + "ï¿½)");
 			} else {
 				txtDirection.setText("n/a");
 			}
@@ -965,7 +1129,7 @@ public class GpsMainActivity extends Activity implements
 
 	private void WriteToKmlFile(Location loc, File gpxFolder,
 			boolean brandNewFile) {
-		// TODO Auto-generated method stub
+
 		try {
 			File kmlFile = new File(gpxFolder.getPath(), currentFileName
 					+ ".kml");
@@ -1032,13 +1196,10 @@ public class GpsMainActivity extends Activity implements
 			}
 
 			Date now;
-			
-			if(useSatelliteTime)
-			{
-			  now = new Date(loc.getTime());	
-			}
-			else
-			{
+
+			if (useSatelliteTime) {
+				now = new Date(loc.getTime());
+			} else {
 				now = new Date();
 			}
 
