@@ -7,9 +7,10 @@
 		<menu>
 			<item android:id="@+id/mnuShareLatest" android:title="Send new point"
 				android:icon="@android:drawable/ic_menu_share" />
-			<item android:id="@+id/mnuShareAnnotated" android:title="Send points since..."
+			<item android:id="@+id/mnuShareAnnotated" android:title="Send points since"
 				android:icon="@android:drawable/ic_menu_share"  />
 			<item android:id="@+id/mnuClearMap" android:title="Clear Map" />
+			<item android:id="@+id/mnuSeeMyMapMore" android:title="More actions" />
 			
 		</menu>
 	</item>
@@ -18,5 +19,6 @@
 		android:icon="@android:drawable/ic_menu_edit" />
 	<item android:id="@+id/mnuExit" android:title="Exit"
 		android:icon="@android:drawable/ic_menu_close_clear_cancel" />
+		
 
 </menu>

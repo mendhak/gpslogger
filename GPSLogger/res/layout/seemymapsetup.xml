@@ -3,6 +3,7 @@
 	android:layout_width="fill_parent" android:layout_height="wrap_content">
 
 
+
 	<TableLayout android:id="@+id/TableGPS"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:stretchColumns="1" android:background="#000000">
@@ -13,13 +14,15 @@
 				android:textSize="14dip" />
 		</TableRow>
 		<TableRow>
-		
-		<LinearLayout>
-			<EditText android:id="@+id/txtRequestUrl" android:hint="pick a name"
-				android:textSize="17dip" android:layout_height="wrap_content" android:layout_width="wrap_content"
-				 android:width="200dip" android:height="19dip" />
-				<TextView android:textSize="13dip" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text=".seemymap.com" />
-				</LinearLayout>
+
+			<LinearLayout>
+				<EditText android:id="@+id/txtRequestUrl" android:hint="pick a name"
+					android:textSize="17dip" android:layout_height="wrap_content"
+					android:layout_width="wrap_content" android:width="200dip"
+					android:height="19dip" />
+				<TextView android:textSize="13dip" android:layout_height="wrap_content"
+					android:layout_width="wrap_content" android:text=".seemymap.com" />
+			</LinearLayout>
 		</TableRow>
 		<TableRow>
 			<TextView android:id="@+id/lblRequestPassword" android:text="Password:"
@@ -28,15 +31,41 @@
 		</TableRow>
 		<TableRow>
 
-			<EditText android:id="@+id/txtPassword" 
+			<EditText android:id="@+id/txtPassword"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:textSize="19dip" android:inputType="textPassword" />
 		</TableRow>
+
 		<TableRow>
-		<Button android:id="@+id/btnCheck" android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:text="Check" />
+			<Button android:id="@+id/btnCheck" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="Check and Register" />
+		</TableRow>
+
+		<TableRow>
+		</TableRow>
+		<TableRow>
+			<TextView android:id="@+id/txtSeeMyMapSummary"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:textSize="14dip" android:text="Summary goes here" />
+		</TableRow>
+
+		<TableRow>
+			<View android:layout_width="fill_parent" android:layout_height="1dip"
+				android:background="#CCCCCC" />
+		</TableRow>
+
+		<TableRow>
+				<Button android:id="@+id/btnClearFirstPoint" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="Delete First Point" />
+		</TableRow>
+		
+		<TableRow>
+			<Button android:id="@+id/btnClearLastPoint" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="Delete Last Point" />
 		</TableRow>
 	</TableLayout>
+
+
 
 
 </LinearLayout>

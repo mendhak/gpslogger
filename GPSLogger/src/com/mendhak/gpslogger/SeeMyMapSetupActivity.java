@@ -1,7 +1,8 @@
 package com.mendhak.gpslogger;
 
+import com.mendhak.gpslogger.helpers.SeeMyMapSetupHelper;
+
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,75 +11,73 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-public class SeeMyMapSetupActivity extends Activity implements OnClickListener {
+public class SeeMyMapSetupActivity extends Activity implements OnClickListener
+{
 
-	String guid;
-	final Handler handler = new Handler();
-	final Runnable updateResults = new Runnable() {
-		public void run() {
+	public String guid;
+	public final Handler handler = new Handler();
+
+	public final Runnable updateResultsConnectionFailure = new Runnable()
+	{
+		public void run()
+		{
+			ThereWasAnError();
+		}
+	};
+
+	public final Runnable updateResultsNotAvailable = new Runnable()
+	{
+		public void run()
+		{
+			NotAvailable();
+		}
+	};
+
+	public final Runnable updateResultsUrlRequest = new Runnable()
+	{
+		public void run()
+		{
 			SaveSubdomainInfo();
 		}
 
 	};
 
-	private void SaveSubdomainInfo() {
+	private void NotAvailable()
+	{
+		EditText txtRequestUrl = (EditText) findViewById(R.id.txtRequestUrl);
+		txtRequestUrl.setText("");
+
+		Utilities.MsgBox("Sorry", "That name isn't available, try another.", this);
+	}
+
+	private void ThereWasAnError()
+	{
+		Utilities.MsgBox("Can't connect", "Couldn't connect to the server. Try again later.", this);
+	}
+
+	private void SaveSubdomainInfo()
+	{
 		EditText txtRequestUrl = (EditText) findViewById(R.id.txtRequestUrl);
 		EditText txtPassword = (EditText) findViewById(R.id.txtPassword);
 
-		if (guid.equalsIgnoreCase("")) {
+		Utilities.MsgBox("Yay!", "It's yours.", this);
 
-			txtRequestUrl.setText("");
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putString("seemymap_GUID", guid);
+		editor.putString("seemymap_URL", txtRequestUrl.getText().toString());
+		editor.putString("seemymap_Password", txtPassword.getText().toString());
+		editor.commit();
 
-			Utilities.MsgBox("Sorry",
-					"That name isn't available, try another.", this);
-
-		} else if (guid.equalsIgnoreCase("ERROR")) {
-			Utilities.MsgBox("Can't connect",
-					"Couldn't connect to the server. Try again later.", this);
-
-		} else {
-			Utilities.MsgBox("Yay!", "It's yours.", this);
-
-			SharedPreferences prefs = PreferenceManager
-					.getDefaultSharedPreferences(getBaseContext());
-			SharedPreferences.Editor editor = prefs.edit();
-			editor.putString("seemymap_GUID", guid);
-			editor
-					.putString("seemymap_URL", txtRequestUrl.getText()
-							.toString());
-			editor.putString("seemymap_Password", txtPassword.getText()
-					.toString());
-			editor.commit();
-		}
-	}
-
-	private void checkMap(String requestedUrl, String password) {
-
-		String getMapResponse = null;
-		
-		try {
-			getMapResponse = Utilities
-					.GetUrl(Utilities.GetSeeMyMapRequestUrl(requestedUrl, password));
-		} catch (Exception e) {
-
-			guid = "ERROR";
-		}
-
-		if (getMapResponse == null || getMapResponse.length() == 0) {
-			guid = "ERROR";
-		} else if (getMapResponse.endsWith("/>")) {
-			// Already taken or connection timed out
-			guid = "";
-		} else {
-			guid = getMapResponse.substring(getMapResponse.indexOf('>') + 1,
-					getMapResponse.lastIndexOf('<'));
-		}
+		ShowSummary();
 
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.seemymapsetup);
@@ -86,60 +85,44 @@ public class SeeMyMapSetupActivity extends Activity implements OnClickListener {
 		Button btnCheck = (Button) findViewById(R.id.btnCheck);
 		btnCheck.setOnClickListener(this);
 
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(getBaseContext());
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
 		EditText txtRequestUrl = (EditText) findViewById(R.id.txtRequestUrl);
 		EditText txtPassword = (EditText) findViewById(R.id.txtPassword);
 
-		txtRequestUrl.setText(prefs.getString("seemymap_URL", ""));
+		String seeMyMapUrl = prefs.getString("seemymap_URL", "");
+
+		txtRequestUrl.setText(seeMyMapUrl);
 		txtPassword.setText(prefs.getString("seemymap_Password", ""));
 		guid = prefs.getString("seemymap_GUID", "");
 
-	}
-
-	public void onClick(View v) {
-
-		EditText txtRequestUrl = (EditText) findViewById(R.id.txtRequestUrl);
-		final String requestedUrl = txtRequestUrl.getText().toString();
-
-		EditText txtPassword = (EditText) findViewById(R.id.txtPassword);
-		final String password = txtPassword.getText().toString();
-
-		if (ValidUrlAndPassword(requestedUrl, password)) {
-			final ProgressDialog pd = ProgressDialog.show(
-					SeeMyMapSetupActivity.this, "Checking...",
-					"Checking availability of " + requestedUrl
-							+ ".seemymap.com", true, true);
-
-			Thread t = new Thread() {
-				public void run() {
-					checkMap(requestedUrl, password);
-					pd.dismiss();
-					handler.post(updateResults);
-				}
-			};
-			t.start();
-		} else {
-			Utilities
-					.MsgBox(
-							"Cat got your keyboard?",
-							"Please limit the website name and password to numbers and letters, nothing else.",
-							this);
-		}
+		ShowSummary();
 
 	}
 
-	private boolean ValidUrlAndPassword(String requestedUrl, String password) {
+	public void ShowSummary()
+	{
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		String seeMyMapUrl = prefs.getString("seemymap_URL", "");
+		TextView txtSummary = (TextView) findViewById(R.id.txtSeeMyMapSummary);
 
-		requestedUrl = requestedUrl.trim();
-		if (requestedUrl != null && requestedUrl.length() > 0
-				&& requestedUrl.matches("[a-zA-Z0-9]+") && password != null
-				&& password.length() > 0 && password.matches("[a-zA-Z0-9]+")) {
-			return true;
+		if (seeMyMapUrl.length() > 0)
+		{
+
+			txtSummary.setText("You've currently registered " + seeMyMapUrl + ".seemymap.com");
 		}
+		else
+		{
+			txtSummary.setText("Use the textboxes above to register a SeeMyMap URL. You can always change your mind and register another.  Don't forget the password, as you'll need it if you want to retrieve it some day.");
+		}
+	}
 
-		return false;
+	public void onClick(View v)
+	{
+
+		SeeMyMapSetupHelper helper = new SeeMyMapSetupHelper(this);
+		helper.RequestUrl();
+
 	}
 
 }

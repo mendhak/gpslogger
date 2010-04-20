@@ -1,116 +1,110 @@
 package com.mendhak.gpslogger;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.net.URLEncoder;
-import java.nio.channels.FileLock;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Iterator;
-
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
-
-import com.mendhak.gpslogger.model.GpxPoint;
-import com.mendhak.gpslogger.providers.GpxSaxHandler;
-
+import com.mendhak.gpslogger.helpers.FileLoggingHelper;
+import com.mendhak.gpslogger.helpers.GeneralLocationListener;
+import com.mendhak.gpslogger.helpers.SeeMyMapHelper;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.GpsSatellite;
-import android.location.GpsStatus;
+import android.content.pm.Signature;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager; //import android.os.AsyncTask;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.text.AlteredCharSequence;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-import android.widget.AutoCompleteTextView.Validator;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class GpsMainActivity extends Activity implements
-		OnCheckedChangeListener {
-	GeneralLocationListener gpsLocationListener;
-	GeneralLocationListener towerLocationListener;
-	LocationManager gpsLocationManager;
-	LocationManager towerLocationManager;
+public class GpsMainActivity extends Activity implements OnCheckedChangeListener
+{
 
-	FileLock gpxLock;
-	FileLock kmlLock;
-
-	boolean towerEnabled;
-	boolean gpsEnabled;
-
-	boolean isStarted;
-	boolean isUsingGps;
-
-	String currentFileName;
-	int satellites;
-
-	boolean logToKml;
-	boolean logToGpx;
+	// ---------------------------------------------------
+	// User Preferences
+	// ---------------------------------------------------
+	boolean useImperial = false;
+	boolean newFileOnceADay;
+	boolean preferCellTower;
+	public boolean useSatelliteTime;
+	public boolean logToKml;
+	public boolean logToGpx;
 	boolean showInNotificationBar;
-	boolean notificationVisible;
+	String subdomain;
 	int minimumDistance;
 	int minimumSeconds;
 	String newFileCreation;
-	boolean newFileOnceADay;
-	boolean preferCellTower;
-	boolean useSatelliteTime;
+	public String seeMyMapUrl;
+	public String seeMyMapGuid;
+	// ---------------------------------------------------
 
-	String seeMyMapUrl;
-	String seeMyMapGuid;
+	/**
+	 * General all purpose handler used for updating the UI from threads.
+	 */
+	public final Handler handler = new Handler();
 
-	double currentLatitude;
-	double currentLongitude;
+	// ---------------------------------------------------
+	// Helpers and managers
+	// ---------------------------------------------------
+	GeneralLocationListener gpsLocationListener;
+	GeneralLocationListener towerLocationListener;
+	SeeMyMapHelper seeMyMapHelper;
+	FileLoggingHelper fileHelper;
+	public LocationManager gpsLocationManager;
+	public LocationManager towerLocationManager;
+	// ---------------------------------------------------
+
+	// ---------------------------------------------------
+	// Others
+	// ---------------------------------------------------
+	boolean towerEnabled;
+	boolean gpsEnabled;
+	boolean isStarted;
+	boolean isUsingGps;
+	public String currentFileName;
+	public int satellites;
+	boolean notificationVisible;
+
+	public double currentLatitude;
+	public double currentLongitude;
 	long latestTimeStamp;
 
-	String subdomain;
-
-	boolean addNewTrackSegment = true;
-	boolean allowDescription = false;
-
-	boolean useImperial = false;
+	public boolean addNewTrackSegment = true;
 
 	private NotificationManager gpsNotifyManager;
 	private int NOTIFICATION_ID;
 	static final int DATEPICKER_ID = 0;
 
+	// ---------------------------------------------------
+
+	/**
+	 * Event raised when the form is created for the first time
+	 */
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
+
+		seeMyMapHelper = new SeeMyMapHelper(this);
+		fileHelper = new FileLoggingHelper(this);
 
 		setContentView(R.layout.main);
 
@@ -118,18 +112,36 @@ public class GpsMainActivity extends Activity implements
 		buttonOnOff.setOnCheckedChangeListener(this);
 
 		GetPreferences();
+		
+		try
+		{
+			Signature[] sigs =
+				getBaseContext().getPackageManager().getPackageInfo("com.mendhak.gpslogger",
+				64).signatures;
+			
+			Signature sig0 = sigs[0];
+		}
+		catch (NameNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 
 	}
 
-	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		// 
-
+	/**
+	 * Called when the toggle button is clicked
+	 */
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+	{
 		addNewTrackSegment = true;
 
-		try {
-
-			if (isChecked) {
-				if (isStarted) {
+		try
+		{
+			if (isChecked)
+			{
+				if (isStarted)
+				{
 					return;
 				}
 
@@ -140,77 +152,104 @@ public class GpsMainActivity extends Activity implements
 				ClearForm();
 				StartGpsManager();
 
-			} else {
+			}
+			else
+			{
 
 				isStarted = false;
 				RemoveNotification();
 				StopGpsManager();
 			}
 
-		} catch (Exception ex) {
+		}
+		catch (Exception ex)
+		{
 			SetStatus("Button click error: " + ex.getMessage());
 		}
 
 	}
 
-	private void Notify() {
+	/**
+	 * Manages the notification in the status bar
+	 */
+	private void Notify()
+	{
 
-		if (showInNotificationBar) {
+		if (showInNotificationBar)
+		{
 			gpsNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
 			ShowNotification();
-		} else {
+		}
+		else
+		{
 			RemoveNotification();
 		}
 	}
 
-	private void RemoveNotification() {
+	/**
+	 * Hides the notification icon in the status bar if it's visible.
+	 */
+	private void RemoveNotification()
+	{
 
-		try {
+		try
+		{
 
-			if (notificationVisible) {
+			if (notificationVisible)
+			{
 				gpsNotifyManager.cancelAll();
 			}
-		} catch (Exception ex) {
+		}
+		catch (Exception ex)
+		{
 			// nothing
 
-		} finally {
+		}
+		finally
+		{
 			notificationVisible = false;
 		}
 
 	}
 
-	private void ShowNotification() {
+	/**
+	 * Shows a notification icon in the status bar for GPS Logger
+	 */
+	private void ShowNotification()
+	{
 
 		// What happens when the notification item is clicked
 		Intent contentIntent = new Intent(this, GpsMainActivity.class);
 
-		PendingIntent pending = PendingIntent.getActivity(getBaseContext(), 0,
-				contentIntent, android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+		PendingIntent pending = PendingIntent.getActivity(getBaseContext(), 0, contentIntent,
+				android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Notification nfc = new Notification(R.drawable.gpsstatus5, null, System
-				.currentTimeMillis());
+		Notification nfc = new Notification(R.drawable.gpsstatus5, null, System.currentTimeMillis());
 		nfc.flags |= Notification.FLAG_ONGOING_EVENT;
 
 		NumberFormat nf = new DecimalFormat("###.######");
 
 		String contentText = "GPSLogger is still running.";
-		if (currentLatitude != 0 && currentLongitude != 0) {
-			contentText = nf.format(currentLatitude) + ","
-					+ nf.format(currentLongitude);
+		if (currentLatitude != 0 && currentLongitude != 0)
+		{
+			contentText = nf.format(currentLatitude) + "," + nf.format(currentLongitude);
 		}
 
-		nfc.setLatestEventInfo(getBaseContext(), "GPSLogger is running",
-				contentText, pending);
+		nfc.setLatestEventInfo(getBaseContext(), "GPSLogger is running", contentText, pending);
 
 		gpsNotifyManager.notify(NOTIFICATION_ID, nfc);
 		notificationVisible = true;
 
 	}
 
-	private void GetPreferences() {
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(getBaseContext());
+	/**
+	 * Gets preferences chosen by the user
+	 */
+	public void GetPreferences()
+	{
+
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
 		useImperial = prefs.getBoolean("useImperial", false);
 
@@ -223,32 +262,40 @@ public class GpsMainActivity extends Activity implements
 		preferCellTower = prefs.getBoolean("prefer_celltower", false);
 		subdomain = prefs.getString("subdomain", "where");
 
-		String minimumDistanceString = prefs.getString(
-				"distance_before_logging", "0");
+		String minimumDistanceString = prefs.getString("distance_before_logging", "0");
 
-		if (minimumDistanceString != null && minimumDistanceString.length() > 0) {
+		if (minimumDistanceString != null && minimumDistanceString.length() > 0)
+		{
 			minimumDistance = Integer.valueOf(minimumDistanceString);
-		} else {
+		}
+		else
+		{
 			minimumDistance = 0;
 		}
 
-		if (useImperial) {
+		if (useImperial)
+		{
 			minimumDistance = Utilities.FeetToMeters(minimumDistance);
 		}
 
-		String minimumSecondsString = prefs.getString("time_before_logging",
-				"60");
+		String minimumSecondsString = prefs.getString("time_before_logging", "60");
 
-		if (minimumSecondsString != null && minimumSecondsString.length() > 0) {
+		if (minimumSecondsString != null && minimumSecondsString.length() > 0)
+		{
 			minimumSeconds = Integer.valueOf(minimumSecondsString);
-		} else {
+		}
+		else
+		{
 			minimumSeconds = 60;
 		}
 
 		newFileCreation = prefs.getString("new_file_creation", "onceaday");
-		if (newFileCreation.equals("onceaday")) {
+		if (newFileCreation.equals("onceaday"))
+		{
 			newFileOnceADay = true;
-		} else {
+		}
+		else
+		{
 			newFileOnceADay = false;
 		}
 
@@ -257,128 +304,150 @@ public class GpsMainActivity extends Activity implements
 
 		useImperial = prefs.getBoolean("useImperial", false);
 
-		try {
+		try
+		{
 			ShowPreferencesSummary();
-		} catch (Exception ex) {
-			/* Do nothing, displaying a summary should not prevent logging. */
-
 		}
-
+		catch (Exception ex)
+		{
+			/* Do nothing, displaying a summary should not prevent logging. */
+		}
 	}
 
-	private void ShowPreferencesSummary() {
+	/**
+	 * Displays a human readable summary of the preferences chosen by the user
+	 * on the main form
+	 */
+	private void ShowPreferencesSummary()
+	{
 
 		TextView lblSummary = (TextView) findViewById(R.id.lblSummary);
 		String summarySentence = "";
-		if (!logToKml && !logToGpx) {
+		if (!logToKml && !logToGpx)
+		{
 			summarySentence = "Logging only to screen,";
-		} else if (logToGpx && logToKml) {
+		}
+		else if (logToGpx && logToKml)
+		{
 			summarySentence = "Logging to both GPX and KML,";
-		} else {
+		}
+		else
+		{
 			summarySentence = "Logging to " + (logToGpx ? "GPX," : "KML,");
 		}
 
-		if (minimumSeconds > 0) {
-			String descriptiveTime = Utilities
-					.GetDescriptiveTimeString(minimumSeconds);
+		if (minimumSeconds > 0)
+		{
+			String descriptiveTime = Utilities.GetDescriptiveTimeString(minimumSeconds);
 
 			summarySentence = summarySentence + " every " + descriptiveTime;
-		} else {
+		}
+		else
+		{
 			summarySentence = summarySentence + " as frequently as possible";
 		}
 
-		if (minimumDistance > 0) {
+		if (minimumDistance > 0)
+		{
 
-			if (useImperial) {
-				int minimumDistanceInFeet = Utilities
-						.MetersToFeet(minimumDistance);
+			if (useImperial)
+			{
+				int minimumDistanceInFeet = Utilities.MetersToFeet(minimumDistance);
 				summarySentence = summarySentence
 						+ " and roughly every "
-						+ ((minimumDistanceInFeet == 1) ? " foot." : String
-								.valueOf(minimumDistanceInFeet)
-								+ " feet.");
-			} else {
+						+ ((minimumDistanceInFeet == 1)
+							? " foot."
+							: String.valueOf(minimumDistanceInFeet) + " feet.");
+			}
+			else
+			{
 				summarySentence = summarySentence
 						+ " and roughly every "
-						+ ((minimumDistance == 1) ? " meter." : String
-								.valueOf(minimumDistance)
+						+ ((minimumDistance == 1) ? " meter." : String.valueOf(minimumDistance)
 								+ " meters.");
 			}
 
-		} else {
-			summarySentence = summarySentence
-					+ ", regardless of distance traveled.";
+		}
+		else
+		{
+			summarySentence = summarySentence + ", regardless of distance traveled.";
 		}
 
-		if ((logToGpx || logToKml)
-				&& (currentFileName != null && currentFileName.length() > 0)) {
-			summarySentence = summarySentence
-					+ " The current file name is "
-					+ currentFileName
+		if ((logToGpx || logToKml) && (currentFileName != null && currentFileName.length() > 0))
+		{
+			summarySentence = summarySentence + " The current file name is " + currentFileName
 					+ ", which you will find in the GPSLogger folder on your SD card.";
 		}
 
 		lblSummary.setText(summarySentence);
 	}
 
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
+	/**
+	 * Handles the hardware back-button press
+	 */
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		if (keyCode == KeyEvent.KEYCODE_BACK)
+		{
 			moveTaskToBack(true);
-			Toast
-					.makeText(
-							getBaseContext(),
-							"GPSLogger is still running. You can exit the application from the menu options.",
-							Toast.LENGTH_LONG).show();
+			Toast.makeText(getBaseContext(),
+					"GPSLogger is still running. You can exit the application from the menu options.",
+					Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
 	}
 
+	/**
+	 * Called when the menu is created.
+	 */
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.optionsmenu, menu);
 
-		if (!Utilities.Flag()) {
+		if (!Utilities.Flag())
+		{
 			menu.getItem(1).setVisible(false);
 		}
+	
 
 		return true;
 
 	}
 
-	public boolean onOptionsItemSelected(MenuItem item) {
+	/**
+	 * Called when one of the menu items is selected.
+	 */
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
 
 		int itemId = item.getItemId();
 
-		switch (itemId) {
-		case R.id.mnuSettings:
-			Intent settingsActivity = new Intent(getBaseContext(),
-					GpsSettingsActivity.class);
-			startActivity(settingsActivity);
-			break;
-		case R.id.mnuShareLatest:
-			SendLocation();
-			break;
-		case R.id.mnuClearMap:
-			ClearMap();
-			break;
-		case R.id.mnuShareAnnotated:
-			showDialog(DATEPICKER_ID);
-			// Datetime picker
-			// Get files since
-			// parse
-			break;
-		case R.id.mnuAnnotate:
-			Annotate();
-			break;
-		case R.id.mnuExit:
-			RemoveNotification();
-			StopGpsManager();
-			// super.onStop();
-			System.exit(0);
-			// finish();
-			break;
+		switch (itemId)
+		{
+			case R.id.mnuSettings:
+				Intent settingsActivity = new Intent(getBaseContext(), GpsSettingsActivity.class);
+				startActivity(settingsActivity);
+				break;
+			case R.id.mnuShareLatest:
+				SendLocation();
+				break;
+			case R.id.mnuClearMap:
+				ClearMap();
+				break;
+			case R.id.mnuShareAnnotated:
+				showDialog(DATEPICKER_ID);
+				break;
+			case R.id.mnuAnnotate:
+				Annotate();
+				break;
+			case R.id.mnuExit:
+				RemoveNotification();
+				StopGpsManager();
+				System.exit(0);
+				break;
 		}
 		return false;
 
@@ -395,472 +464,196 @@ public class GpsMainActivity extends Activity implements
 
 	}
 
+	/**
+	 * Called when the date picker dialog is asked for
+	 */
 	@Override
-	protected Dialog onCreateDialog(int id) {
+	protected Dialog onCreateDialog(int id)
+	{
 		Calendar c = Calendar.getInstance();
 		int cyear = c.get(Calendar.YEAR);
 		int cmonth = c.get(Calendar.MONTH);
 		int cday = c.get(Calendar.DAY_OF_MONTH);
-		switch (id) {
-		case DATEPICKER_ID:
-			return new DatePickerDialog(this, dateSetListener, cyear, cmonth,
-					cday);
+		switch (id)
+		{
+			case DATEPICKER_ID:
+				return new DatePickerDialog(this, dateSetListener, cyear, cmonth, cday);
 		}
 		return null;
 	}
 
-	private DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+	/**
+	 * Handles the 'set' button click in the date picker, and calls SeeMyMap
+	 * functionality
+	 */
+	private DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
+	{
 		// onDateSet method
-		public void onDateSet(DatePicker view, int year, int monthOfYear,
-				int dayOfMonth) {
+		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+		{
 
-			final ArrayList<GpxPoint> points = new ArrayList<GpxPoint>();
-
-			// Date chosenDate = new Date(year, monthOfYear , dayOfMonth);
-
-			final Date chosenDate = new Date((new GregorianCalendar(year,
-					monthOfYear, dayOfMonth)).getTimeInMillis());
-
-			Date today = new Date();
-
-			final long difference = today.getTime() - chosenDate.getTime();
-
-			if (difference > 0) {
-
-				final ProgressDialog pd = ProgressDialog
-						.show(
-								GpsMainActivity.this,
-								"Sending...",
-								"Reading and sending points, if there are a lot of files, this could take a few minutes.",
-								true, true);
-
-				Thread t = new Thread(new Runnable() {
-					public void run() {
-						int days = 1;
-						days = (int) (difference / (1000 * 60 * 60 * 24));
-
-						for (int i = 0; i <= days; i++) {
-
-							Date newDate = new Date(chosenDate.getTime()
-									+ ((long) i * 1000 * 60 * 60 * 24));
-
-							DecimalFormat leadingZero = new DecimalFormat("00");
-
-							String dateFile = String
-									.valueOf(newDate.getYear() + 1900)
-									+ leadingZero
-											.format(newDate.getMonth() + 1)
-									+ leadingZero.format(newDate.getDate());
-
-							XMLReader parser;
-
-							try {
-
-								File gpxFolder = new File(Environment
-										.getExternalStorageDirectory(),
-										"GPSLogger");
-
-								if (!gpxFolder.exists()) {
-									continue;
-								}
-
-								File gpxFile = new File(gpxFolder, dateFile
-										+ ".gpx");
-
-								if (gpxFile.exists()) {
-									System.setProperty("org.xml.sax.driver",
-											"org.xmlpull.v1.sax2.Driver");
-									GpxSaxHandler gsh = new GpxSaxHandler();
-									parser = XMLReaderFactory.createXMLReader();
-									parser.setContentHandler(gsh);
-
-									parser.parse("/sdcard/GPSLogger/"
-											+ dateFile + ".gpx");
-
-									points.addAll(gsh.GetPoints());
-								}
-
-							} catch (SAXException e) {
-
-								e.printStackTrace();
-							} catch (IOException e) {
-
-								e.printStackTrace();
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-
-						}
-
-						for (GpxPoint p : points) {
-
-							String addLocationUrl = Utilities
-									.GetSeeMyMapAddLocationWithDateUrl(
-											seeMyMapGuid, Double.valueOf(p
-													.getLatitude()), Double
-													.valueOf(p.getLongitude()),
-											p.getDescription(), p.getDateTime());
-							try {
-								Utilities.GetUrl(addLocationUrl);
-								handler.post(updateResultsSentPoints);
-
-							} catch (Exception e) {
-
-								handler.post(updateResultsConnectionError);
-								break;
-							}
-						}
-
-						pd.dismiss();
-
-					}
-				});
-				t.start();
-
-			} else {
-				Utilities
-						.MsgBox(
-								"Marty McFly?",
-								"This application does not support futuristic time travel.",
-								GpsMainActivity.this);
-			}
-
+			seeMyMapHelper.SendAnnotatedPointsSince(year, monthOfYear, dayOfMonth);
 		}
 	};
 
-	private void Annotate() {
+	/**
+	 * Prompts user for input, then adds text to log file
+	 */
+	private void Annotate()
+	{
 
-		if (!allowDescription) {
-			Utilities
-					.MsgBox(
-							"Not yet",
-							"You can't add a description until the next point has been logged to a file.",
-							this);
-			return;
-		}
-
-		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
-		alert.setTitle("Add a description");
-		alert.setMessage("Use only letters and numbers");
-
-		// Set an EditText view to get user input
-		final EditText input = new EditText(this);
-		alert.setView(input);
-
-		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int whichButton) {
-
-				if (!logToGpx && !logToKml) {
-					return;
-				}
-
-				final String desc = Utilities.CleanDescription(input.getText()
-						.toString());
-
-				AddNoteToLastPoint(desc);
-
-			}
-
-		});
-		alert.setNegativeButton("Cancel",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-						// Canceled.
-					}
-				});
-
-		alert.show();
-
+		fileHelper.Annotate();
 	}
 
-	private void AddNoteToLastPoint(String desc) {
-		File gpxFolder = new File(Environment.getExternalStorageDirectory(),
-				"GPSLogger");
+	/**
+	 * Directly adds the given description to the log file
+	 * 
+	 * @param desc
+	 */
+	public void AddNoteToLastPoint(String desc)
+	{
 
-		if (!gpxFolder.exists()) {
-			return;
-		}
-
-		int offsetFromEnd;
-		String description;
-		long startPosition;
-
-		if (logToGpx) {
-
-			File gpxFile = new File(gpxFolder.getPath(), currentFileName
-					+ ".gpx");
-
-			if (!gpxFile.exists()) {
-				return;
-			}
-			offsetFromEnd = 29;
-
-			startPosition = gpxFile.length() - offsetFromEnd;
-
-			description = "<name>" + desc + "</name><desc>" + desc
-					+ "</desc></trkpt></trkseg></trk></gpx>";
-			RandomAccessFile raf = null;
-			try {
-				raf = new RandomAccessFile(gpxFile, "rw");
-				gpxLock = raf.getChannel().lock();
-				raf.seek(startPosition);
-				raf.write(description.getBytes());
-				gpxLock.release();
-				raf.close();
-
-				SetStatus("Description added to point.");
-				allowDescription = false;
-
-			} catch (Exception e) {
-				SetStatus("Couldn't write description to GPX file.");
-			}
-
-		}
-
-		if (logToKml) {
-
-			File kmlFile = new File(gpxFolder.getPath(), currentFileName
-					+ ".kml");
-
-			if (!kmlFile.exists()) {
-				return;
-			}
-
-			offsetFromEnd = 37;
-
-			description = "<name>" + desc
-					+ "</name></Point></Placemark></Document></kml>";
-
-			startPosition = kmlFile.length() - offsetFromEnd;
-			try {
-				RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
-				kmlLock = raf.getChannel().lock();
-				raf.seek(startPosition);
-				raf.write(description.getBytes());
-				kmlLock.release();
-				raf.close();
-
-				allowDescription = false;
-			} catch (Exception e) {
-				SetStatus("Couldn't write description to KML file.");
-			}
-
-		}
-
-		// </Point></Placemark></Document></kml>
+		fileHelper.AddNoteToLastPoint(desc);
 	}
 
-	final Handler handler = new Handler();
-
-	final Runnable updateResultsConnectionError = new Runnable() {
-		public void run() {
+	/**
+	 * Update the UI: There was a connection error
+	 */
+	public final Runnable updateResultsConnectionError = new Runnable()
+	{
+		public void run()
+		{
 			ThereWasAConnectionError();
 		}
-
 	};
 
-	final Runnable updateResults = new Runnable() {
-		public void run() {
+	/**
+	 * Update the UI: The point has been added to the map
+	 */
+	public final Runnable updateResults = new Runnable()
+	{
+		public void run()
+		{
 			AddedToMap();
 		}
-
 	};
 
-	final Runnable updateResultsClearMap = new Runnable() {
-		public void run() {
+	/**
+	 * Update the UI: The map has been cleared
+	 */
+	public final Runnable updateResultsClearMap = new Runnable()
+	{
+		public void run()
+		{
 			MapCleared();
 		}
 	};
 
-	final Runnable updateResultsSentPoints = new Runnable() {
-		public void run() {
+	/**
+	 * Update the UI: The points have been read and sent to the map
+	 */
+	public final Runnable updateResultsSentPoints = new Runnable()
+	{
+		public void run()
+		{
 			PointsSent();
 		}
 	};
 
-	private void ThereWasAConnectionError() {
-		Utilities.MsgBox("Error",
-				"Connection Error. Please check your phone settings.", this);
+	/**
+	 * MessageBox: There was a connection error.
+	 */
+	private void ThereWasAConnectionError()
+	{
+		Utilities.MsgBox("Error", "Connection Error. Please check your phone settings.", this);
 
 	}
 
-	private void PointsSent() {
+	/**
+	 * MessageBox: the points have been read and sent to the server
+	 */
+	private void PointsSent()
+	{
 		Utilities.MsgBox("Sent", "Points sent to the server", this);
 	}
 
-	private void AddedToMap() {
+	/**
+	 * MessageBox: The point has been sent to the server
+	 */
+	private void AddedToMap()
+	{
 
 		Utilities.MsgBox("Sent", "Location sent to server", this);
 
 	}
 
-	private void MapCleared() {
+	/**
+	 * MessageBox: The map has been cleared
+	 */
+	private void MapCleared()
+	{
 		Utilities.MsgBox("Cleared", "The map has been cleared", this);
 	}
 
-	private String CleanString(String input) {
+	/**
+	 * Clears the user's SeeMyMap map
+	 */
+	private void ClearMap()
+	{
 
-		input = input.replace(":", "");
-
-		input = Utilities.EncodeHTML(input);
-
-		input = URLEncoder.encode(input);
-		return input;
+		seeMyMapHelper.ClearMap();
 	}
 
-	private void SendToServer(String input) throws Exception {
+	/**
+	 * Sends the user input to his SeeMyMap map
+	 */
+	private void SendLocation()
+	{
 
-		input = CleanString(input);
-
-		//
-
-		String whereUrl = Utilities.GetSeeMyMapAddLocationUrl(seeMyMapGuid,
-				currentLatitude, currentLongitude, input);
-
-		try {
-			Utilities.GetUrl(whereUrl);
-		} catch (Exception e) {
-			throw e;
-		}
-
+		seeMyMapHelper.SendAnnotatedPoint();
 	}
 
-	private void ClearMap() {
-		GetPreferences();
-
-		if (seeMyMapUrl == null || seeMyMapUrl.length() == 0
-				|| seeMyMapGuid == null || seeMyMapGuid.length() == 0) {
-			startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
-		} else {
-
-			final ProgressDialog pd = ProgressDialog.show(GpsMainActivity.this,
-					"Clearing...", "Clearing Map", true, true);
-
-			Thread t = new Thread() {
-				public void run() {
-
-					// Send to server
-					try {
-						Utilities.GetUrl(Utilities
-								.GetSeeMyMapClearMapUrl(seeMyMapGuid));
-						handler.post(updateResultsClearMap);
-					} catch (Exception e) {
-						handler.post(updateResultsConnectionError);
-					}
-
-					pd.dismiss();
-
-				}
-			};
-			t.start();
-
-		}
-
-	}
-
-	private void SendLocation() {
+	/**
+	 * Starts the location manager. There are two location managers - GPS and
+	 * Cell Tower. This code determines which manager to request updates from
+	 * based on user preference and whichever is enabled. If GPS is enabled on
+	 * the phone, that is used. But if the user has also specified that they
+	 * prefer cell towers, then cell towers are used. If neither is enabled,
+	 * then nothing is requested.
+	 */
+	public void StartGpsManager()
+	{
 
 		GetPreferences();
 
-		if (seeMyMapUrl == null || seeMyMapUrl.length() == 0
-				|| seeMyMapGuid == null || seeMyMapGuid.length() == 0) {
-			startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
-		} else {
-
-			if (currentLatitude != 0 && currentLongitude != 0) {
-
-				AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
-				alert.setTitle("Add a description");
-				alert.setMessage("Use only letters and numbers");
-
-				// Set an EditText view to get user input
-				final EditText input = new EditText(this);
-				alert.setView(input);
-
-				final ProgressDialog pd = ProgressDialog.show(
-						GpsMainActivity.this, "Sending...",
-						"Sending to server", true, true);
-
-				alert.setPositiveButton("Ok",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-
-								Thread t = new Thread() {
-									public void run() {
-
-										// Send to server
-										try {
-											SendToServer(input.getText()
-													.toString());
-											handler.post(updateResults);
-										} catch (Exception e) {
-
-											handler
-													.post(updateResultsConnectionError);
-										}
-										// Also add to the file being logged
-										AddNoteToLastPoint(input.getText()
-												.toString());
-										pd.dismiss();
-
-									}
-								};
-								t.start();
-
-							}
-						});
-				alert.setNegativeButton("Cancel",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								pd.dismiss();
-							}
-						});
-
-				alert.show();
-
-			}
-
-			else {
-				Utilities.MsgBox("Not yet", "Nothing to send yet", this);
-
-			}
-		}
-
-	}
-
-	public void StartGpsManager() {
-
-		GetPreferences();
-
-		gpsLocationListener = new GeneralLocationListener();
-		towerLocationListener = new GeneralLocationListener();
+		gpsLocationListener = new GeneralLocationListener(this);
+		towerLocationListener = new GeneralLocationListener(this);
 
 		gpsLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		towerLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
 		CheckTowerAndGpsStatus();
 
-		if (gpsEnabled && !preferCellTower) {
+		if (gpsEnabled && !preferCellTower)
+		{
 			// gps satellite based
-			gpsLocationManager.requestLocationUpdates(
-					LocationManager.GPS_PROVIDER, minimumSeconds * 1000,
-					minimumDistance, gpsLocationListener);
+			gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+					minimumSeconds * 1000, minimumDistance, gpsLocationListener);
 
 			gpsLocationManager.addGpsStatusListener(gpsLocationListener);
 
 			isUsingGps = true;
-		} else if (towerEnabled) {
+		}
+		else if (towerEnabled)
+		{
 			isUsingGps = false;
 			// Cell tower and wifi based
-			towerLocationManager.requestLocationUpdates(
-					LocationManager.NETWORK_PROVIDER, minimumSeconds * 1000,
-					minimumDistance, towerLocationListener);
+			towerLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+					minimumSeconds * 1000, minimumDistance, towerLocationListener);
 
-		} else {
+		}
+		else
+		{
 			isUsingGps = false;
 			SetStatus("No GPS provider available");
 			return;
@@ -869,21 +662,31 @@ public class GpsMainActivity extends Activity implements
 		SetStatus("Started");
 	}
 
-	private void CheckTowerAndGpsStatus() {
-		towerEnabled = towerLocationManager
-				.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-		gpsEnabled = gpsLocationManager
-				.isProviderEnabled(LocationManager.GPS_PROVIDER);
+	/**
+	 * This method is called periodically to determine whether the cell tower /
+	 * gps providers have been enabled, and sets class level variables to those
+	 * values.
+	 */
+	private void CheckTowerAndGpsStatus()
+	{
+		towerEnabled = towerLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+		gpsEnabled = gpsLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
 	}
 
-	public void StopGpsManager() {
+	/**
+	 * Stops the location managers
+	 */
+	public void StopGpsManager()
+	{
 
-		if (towerLocationListener != null) {
+		if (towerLocationListener != null)
+		{
 			towerLocationManager.removeUpdates(towerLocationListener);
 		}
 
-		if (gpsLocationListener != null) {
+		if (gpsLocationListener != null)
+		{
 			gpsLocationManager.removeUpdates(gpsLocationListener);
 			gpsLocationManager.removeGpsStatusListener(gpsLocationListener);
 		}
@@ -891,22 +694,32 @@ public class GpsMainActivity extends Activity implements
 		SetStatus("Stopped");
 	}
 
-	private void ResetCurrentFileName() {
+	/**
+	 * Sets the current file name based on user preference.
+	 */
+	private void ResetCurrentFileName()
+	{
 
-		if (newFileOnceADay) {
+		if (newFileOnceADay)
+		{
 			// 20100114.gpx
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			currentFileName = sdf.format(new Date());
-		} else {
+		}
+		else
+		{
 			// 20100114183329.gpx
-
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 			currentFileName = sdf.format(new Date());
 		}
 
 	}
 
-	private void ClearForm() {
+	/**
+	 * Clears the table, removes all values.
+	 */
+	private void ClearForm()
+	{
 
 		TextView tvLatitude = (TextView) findViewById(R.id.txtLatitude);
 		TextView tvLongitude = (TextView) findViewById(R.id.txtLongitude);
@@ -931,22 +744,43 @@ public class GpsMainActivity extends Activity implements
 
 	}
 
-	public void SetStatus(String message) {
+	/**
+	 * Sets the message in the top status label.
+	 * 
+	 * @param message
+	 */
+	public void SetStatus(String message)
+	{
 		TextView tvStatus = (TextView) findViewById(R.id.textStatus);
 		tvStatus.setText(message);
 	}
 
-	public void SetSatelliteInfo(int number) {
+	/**
+	 * Sets the number of satellites in the satellite row in the table.
+	 * 
+	 * @param number
+	 */
+	public void SetSatelliteInfo(int number)
+	{
 		satellites = number;
 		TextView txtSatellites = (TextView) findViewById(R.id.txtSatellites);
 		txtSatellites.setText(String.valueOf(number));
 	}
 
-	public void DisplayLocationInfo(Location loc) {
-		try {
+	/**
+	 * Given a location fix, processes it and displays it in the table on the
+	 * form.
+	 * 
+	 * @param loc
+	 */
+	public void DisplayLocationInfo(Location loc)
+	{
+		try
+		{
 
 			long currentTimeStamp = System.currentTimeMillis();
-			if ((currentTimeStamp - latestTimeStamp) < (minimumSeconds * 1000)) {
+			if ((currentTimeStamp - latestTimeStamp) < (minimumSeconds * 1000))
+			{
 				return;
 			}
 
@@ -967,114 +801,98 @@ public class GpsMainActivity extends Activity implements
 			TextView txtAccuracy = (TextView) findViewById(R.id.txtAccuracy);
 			String providerName = loc.getProvider();
 
-			if (providerName.equalsIgnoreCase("gps")) {
+			if (providerName.equalsIgnoreCase("gps"))
+			{
 				providerName = "GPS";
-			} else {
+			}
+			else
+			{
 				providerName = "cell towers";
 			}
 
-			tvDateTime.setText(new Date().toLocaleString() + "    (Using "
-					+ providerName + ")");
+			tvDateTime.setText(new Date().toLocaleString() + "    (Using " + providerName + ")");
 			tvLatitude.setText(String.valueOf(loc.getLatitude()));
 			tvLongitude.setText(String.valueOf(loc.getLongitude()));
 
-			if (loc.hasAltitude()) {
+			if (loc.hasAltitude())
+			{
 
 				double altitude = loc.getAltitude();
 
-				if (useImperial) {
-					tvAltitude.setText(String.valueOf(Utilities
-							.MetersToFeet(altitude))
-							+ " feet");
-				} else {
+				if (useImperial)
+				{
+					tvAltitude.setText(String.valueOf(Utilities.MetersToFeet(altitude)) + " feet");
+				}
+				else
+				{
 					tvAltitude.setText(String.valueOf(altitude) + " meters");
 				}
 
-			} else {
+			}
+			else
+			{
 				tvAltitude.setText("n/a");
 			}
 
-			if (loc.hasSpeed()) {
+			if (loc.hasSpeed())
+			{
 
 				float speed = loc.getSpeed();
-				if (useImperial) {
-					txtSpeed.setText(String.valueOf(Utilities
-							.MetersToFeet(speed))
-							+ " ft/s");
-				} else {
+				if (useImperial)
+				{
+					txtSpeed.setText(String.valueOf(Utilities.MetersToFeet(speed)) + " ft/s");
+				}
+				else
+				{
 					txtSpeed.setText(String.valueOf(speed) + " m/s");
 				}
 
-			} else {
+			}
+			else
+			{
 				txtSpeed.setText("n/a");
 			}
 
-			if (loc.hasBearing()) {
+			if (loc.hasBearing())
+			{
 
 				float bearingDegrees = loc.getBearing();
 				String direction = "unknown";
 
-				if (bearingDegrees > 348.75 || bearingDegrees <= 11.25) {
-					direction = "Roughly North";
-				} else if (bearingDegrees > 11.25 && bearingDegrees <= 33.75) {
-					direction = "Roughly North-NorthEast";
-				} else if (bearingDegrees > 33.75 && bearingDegrees <= 56.25) {
-					direction = "Roughly NorthEast";
-				} else if (bearingDegrees > 56.25 && bearingDegrees <= 78.75) {
-					direction = "Roughly East-NorthEast";
-				} else if (bearingDegrees > 78.75 && bearingDegrees <= 101.25) {
-					direction = "Roughly East";
-				} else if (bearingDegrees > 101.25 && bearingDegrees <= 123.75) {
-					direction = "Roughly East-SouthEast";
-				} else if (bearingDegrees > 123.75 && bearingDegrees <= 146.26) {
-					direction = "Roughly SouthEast";
-				} else if (bearingDegrees > 146.25 && bearingDegrees <= 168.75) {
-					direction = "Roughly South-SouthEast";
-				} else if (bearingDegrees > 168.75 && bearingDegrees <= 191.25) {
-					direction = "Roughly South";
-				} else if (bearingDegrees > 191.25 && bearingDegrees <= 213.75) {
-					direction = "Roughly South-SouthWest";
-				} else if (bearingDegrees > 213.75 && bearingDegrees <= 236.25) {
-					direction = "Roughly SouthWest";
-				} else if (bearingDegrees > 236.25 && bearingDegrees <= 258.75) {
-					direction = "Roughly West-SouthWest";
-				} else if (bearingDegrees > 258.75 && bearingDegrees <= 281.25) {
-					direction = "Roughly West";
-				} else if (bearingDegrees > 281.25 && bearingDegrees <= 303.75) {
-					direction = "Roughly West-NorthWest";
-				} else if (bearingDegrees > 303.75 && bearingDegrees <= 326.25) {
-					direction = "Roughly NorthWest";
-				} else if (bearingDegrees > 326.25 && bearingDegrees <= 348.75) {
-					direction = "Roughly North-NorthWest";
-				} else {
-					direction = "Unknown";
-				}
+				direction = Utilities.GetBearingDescription(bearingDegrees);
 
-				txtDirection.setText(direction + "("
-						+ String.valueOf(Math.round(bearingDegrees)) + "�)");
-			} else {
+				txtDirection.setText(direction + "(" + String.valueOf(Math.round(bearingDegrees))
+						+ "\00B0)");
+			}
+			else
+			{
 				txtDirection.setText("n/a");
 			}
 
-			if (!isUsingGps) {
+			if (!isUsingGps)
+			{
 				txtSatellites.setText("n/a");
 				satellites = 0;
 			}
 
-			if (loc.hasAccuracy()) {
+			if (loc.hasAccuracy())
+			{
 
 				float accuracy = loc.getAccuracy();
 
-				if (useImperial) {
-					txtAccuracy.setText("within "
-							+ String.valueOf(Utilities.MetersToFeet(accuracy))
+				if (useImperial)
+				{
+					txtAccuracy.setText("within " + String.valueOf(Utilities.MetersToFeet(accuracy))
 							+ " feet");
-				} else {
-					txtAccuracy.setText("within " + String.valueOf(accuracy)
-							+ " meters");
+				}
+				else
+				{
+					txtAccuracy.setText("within " + String.valueOf(accuracy) + " meters");
 				}
 
-			} else {
+			}
+			else
+			{
 				txtAccuracy.setText("n/a");
 			}
 
@@ -1082,350 +900,53 @@ public class GpsMainActivity extends Activity implements
 			GetPreferences();
 			ResetManagersIfRequired();
 
-		} catch (Exception ex) {
+		}
+		catch (Exception ex)
+		{
 			SetStatus("Error in displaying location info: " + ex.getMessage());
 		}
 
 	}
 
-	private void WriteToFile(Location loc) {
+	private void WriteToFile(Location loc)
+	{
 
-		if (!logToGpx && !logToKml) {
-			return;
-		}
-
-		try {
-
-			boolean brandNewFile = false;
-			// if (root.canWrite()){
-			// File gpxFolder = new File("/sdcard/GPSLogger");
-			File gpxFolder = new File(
-					Environment.getExternalStorageDirectory(), "GPSLogger");
-
-			Log.i("MAIN", String.valueOf(gpxFolder.canWrite()));
-
-			if (!gpxFolder.exists()) {
-				gpxFolder.mkdirs();
-				brandNewFile = true;
-			}
-
-			if (logToGpx) {
-				WriteToGpxFile(loc, gpxFolder, brandNewFile);
-			}
-
-			if (logToKml) {
-				WriteToKmlFile(loc, gpxFolder, brandNewFile);
-
-			}
-
-			allowDescription = true;
-
-		} catch (Exception e) {
-			Log.e("Main", "Could not write file " + e.getMessage());
-			SetStatus("Could not write to file. " + e.getMessage());
-		}
+		fileHelper.WriteToFile(loc);
 
 	}
 
-	private void WriteToKmlFile(Location loc, File gpxFolder,
-			boolean brandNewFile) {
-
-		try {
-			File kmlFile = new File(gpxFolder.getPath(), currentFileName
-					+ ".kml");
-
-			if (!kmlFile.exists()) {
-				kmlFile.createNewFile();
-				brandNewFile = true;
-			}
-
-			Date now = new Date();
-			// SimpleDateFormat sdf = new
-			// SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-			// String dateTimeString = sdf.format(now);
-
-			if (brandNewFile) {
-				FileOutputStream initialWriter = new FileOutputStream(kmlFile,
-						true);
-				BufferedOutputStream initialOutput = new BufferedOutputStream(
-						initialWriter);
-
-				String initialXml = "<?xml version=\"1.0\"?>"
-						+ "<kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document>"
-						+ "</Document></kml>";
-				initialOutput.write(initialXml.getBytes());
-				// initialOutput.write("\n".getBytes());
-				initialOutput.flush();
-				initialOutput.close();
-			}
-
-			long startPosition = kmlFile.length() - 17;
-
-			String placemark = "<Placemark><description>"
-					+ now.toLocaleString() + "</description>"
-					+ "<Point><coordinates>"
-					+ String.valueOf(loc.getLongitude()) + ","
-					+ String.valueOf(loc.getLatitude()) + ","
-					+ String.valueOf(loc.getAltitude())
-					+ "</coordinates></Point></Placemark></Document></kml>";
-
-			RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
-			kmlLock = raf.getChannel().lock();
-			raf.seek(startPosition);
-			raf.write(placemark.getBytes());
-			kmlLock.release();
-			raf.close();
-
-		} catch (IOException e) {
-			Log.e("Main", "Could not write file " + e.getMessage());
-			SetStatus("Could not write to file. " + e.getMessage());
-		}
-
-	}
-
-	private void WriteToGpxFile(Location loc, File gpxFolder,
-			boolean brandNewFile) {
-
-		try {
-			File gpxFile = new File(gpxFolder.getPath(), currentFileName
-					+ ".gpx");
-
-			if (!gpxFile.exists()) {
-				gpxFile.createNewFile();
-				brandNewFile = true;
-			}
-
-			Date now;
-
-			if (useSatelliteTime) {
-				now = new Date(loc.getTime());
-			} else {
-				now = new Date();
-			}
-
-			String dateTimeString = Utilities.GetIsoDateTime(now);
-
-			if (brandNewFile) {
-				FileOutputStream initialWriter = new FileOutputStream(gpxFile,
-						true);
-				BufferedOutputStream initialOutput = new BufferedOutputStream(
-						initialWriter);
-
-				String initialXml = "<?xml version=\"1.0\"?>"
-						+ "<gpx version=\"1.0\" creator=\"GPSLogger - http://gpslogger.mendhak.com/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">"
-						+ "<time>" + dateTimeString + "</time>" + "<bounds />"
-						+ "<trk></trk></gpx>";
-				initialOutput.write(initialXml.getBytes());
-				// initialOutput.write("\n".getBytes());
-				initialOutput.flush();
-				initialOutput.close();
-			}
-
-			int offsetFromEnd = (addNewTrackSegment) ? 12 : 21;
-
-			long startPosition = gpxFile.length() - offsetFromEnd;
-
-			String trackPoint = GetTrackPointXml(loc, dateTimeString);
-
-			addNewTrackSegment = false;
-
-			// Leaving this commented code in - may want to give user the choice
-			// to
-			// pick between WPT and TRK. Choice is good.
-			//
-			// String waypoint = "<wpt lat=\"" +
-			// String.valueOf(loc.getLatitude())
-			// + "\" lon=\"" + String.valueOf(loc.getLongitude()) + "\">"
-			// + "<time>" + dateTimeString + "</time>";
-			//
-			// if (loc.hasAltitude()) {
-			// waypoint = waypoint + "<ele>"
-			// + String.valueOf(loc.getAltitude()) + "</ele>";
-			// }
-			//
-			// if (loc.hasBearing()) {
-			// waypoint = waypoint + "<course>"
-			// + String.valueOf(loc.getBearing()) + "</course>";
-			// }
-			//
-			// if (loc.hasSpeed()) {
-			// waypoint = waypoint + "<speed>"
-			// + String.valueOf(loc.getSpeed()) + "</speed>";
-			// }
-			//
-			// waypoint = waypoint + "<src>" + loc.getProvider() + "</src>";
-			//
-			// if (satellites > 0) {
-			// waypoint = waypoint + "<sat>" + String.valueOf(satellites)
-			// + "</sat>";
-			// }
-			//
-			// waypoint = waypoint + "</wpt></gpx>";
-
-			RandomAccessFile raf = new RandomAccessFile(gpxFile, "rw");
-			gpxLock = raf.getChannel().lock();
-			raf.seek(startPosition);
-			raf.write(trackPoint.getBytes());
-			gpxLock.release();
-			raf.close();
-
-		} catch (IOException e) {
-			Log.e("Main", "Could not write file " + e.getMessage());
-			SetStatus("Could not write to file. " + e.getMessage());
-		}
-
-	}
-
-	private String GetTrackPointXml(Location loc, String dateTimeString) {
-		String track = "";
-		if (addNewTrackSegment) {
-			track = track + "<trkseg>";
-		}
-
-		track = track + "<trkpt lat=\"" + String.valueOf(loc.getLatitude())
-				+ "\" lon=\"" + String.valueOf(loc.getLongitude()) + "\">";
-
-		if (loc.hasAltitude()) {
-			track = track + "<ele>" + String.valueOf(loc.getAltitude())
-					+ "</ele>";
-		}
-
-		if (loc.hasBearing()) {
-			track = track + "<course>" + String.valueOf(loc.getBearing())
-					+ "</course>";
-		}
-
-		if (loc.hasSpeed()) {
-			track = track + "<speed>" + String.valueOf(loc.getSpeed())
-					+ "</speed>";
-		}
-
-		track = track + "<src>" + loc.getProvider() + "</src>";
-
-		if (satellites > 0) {
-			track = track + "<sat>" + String.valueOf(satellites) + "</sat>";
-		}
-
-		track = track + "<time>" + dateTimeString + "</time>";
-
-		track = track + "</trkpt>";
-
-		track = track + "</trkseg></trk></gpx>";
-
-		return track;
-	}
-
-	public void RestartGpsManagers() {
+	/**
+	 * Stops location manager, then starts it.
+	 */
+	public void RestartGpsManagers()
+	{
 
 		StopGpsManager();
 		StartGpsManager();
 
 	}
 
-	public void ResetManagersIfRequired() {
+	/**
+	 * Checks to see if providers have been enabled and switches providers based
+	 * on user preferences.
+	 */
+	public void ResetManagersIfRequired()
+	{
 		CheckTowerAndGpsStatus();
 
-		if (isUsingGps && preferCellTower) {
+		if (isUsingGps && preferCellTower)
+		{
 			RestartGpsManagers();
 		}
 		// If GPS is enabled and user doesn't prefer celltowers
-		else if (gpsEnabled && !preferCellTower) {
+		else if (gpsEnabled && !preferCellTower)
+		{
 			// But we're not *already* using GPS
-			if (!isUsingGps) {
+			if (!isUsingGps)
+			{
 				RestartGpsManagers();
 			}
 			// Else do nothing
-		}
-
-	}
-
-	public class GeneralLocationListener implements LocationListener,
-			GpsStatus.Listener {
-
-		public void onLocationChanged(Location loc) {
-
-			try {
-				if (loc != null) {
-
-					Latitude = loc.getLatitude();
-					Longitude = loc.getLongitude();
-
-					currentLatitude = loc.getLatitude();
-					currentLongitude = loc.getLongitude();
-
-					DisplayLocationInfo(loc);
-
-				}
-
-			} catch (Exception ex) {
-				SetStatus(ex.getMessage());
-			}
-
-		}
-
-		public boolean GotLocation;
-		public double Latitude;
-		public double Longitude;
-
-		public void onProviderDisabled(String provider) {
-
-			RestartGpsManagers();
-
-			// Toast.makeText(getBaseContext(),
-			// provider + "Disabled",
-			// Toast.LENGTH_SHORT).show();
-		}
-
-		public void onProviderEnabled(String provider) {
-			// Toast.makeText(getBaseContext(),
-			// provider + "Enabled",
-			// Toast.LENGTH_SHORT).show();
-
-			RestartGpsManagers();
-		}
-
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-			// TODO Auto-generated method stub
-
-			// Toast.makeText(getBaseContext(),
-			// provider + " status " + String.valueOf(status),
-			// Toast.LENGTH_SHORT);
-		}
-
-		public void onGpsStatusChanged(int event) {
-
-			switch (event) {
-			case GpsStatus.GPS_EVENT_FIRST_FIX:
-				SetStatus("Fix obtained");
-				break;
-
-			case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
-
-				GpsStatus status = gpsLocationManager.getGpsStatus(null);
-
-				Iterator<GpsSatellite> it = status.getSatellites().iterator();
-				int count = 0;
-				while (it.hasNext()) {
-					count++;
-					GpsSatellite oSat = (GpsSatellite) it.next();
-					Log.i("Main",
-							"LocationActivity - onGpsStatusChange: Satellites:"
-									+ oSat.getSnr());
-				}
-
-				SetSatelliteInfo(count);
-				break;
-
-			case GpsStatus.GPS_EVENT_STARTED:
-				SetStatus("GPS Started, waiting for fix");
-				break;
-
-			case GpsStatus.GPS_EVENT_STOPPED:
-				SetStatus("GPS Stopped");
-				break;
-
-			}
-
 		}
 
 	}
