@@ -445,12 +445,25 @@ public class Utilities
 
 	}
 
-	public static String GetSeeMyMapRequestUrl(String requestedUrl, String password)
+	public static String GetSeeMyMapRequestUrl(String requestedUrl, String password, String personId)
 	{
 
-		String requestUrl = GetSeeMyMapBaseUrl() + "/requestmap/" + requestedUrl + "/" + password;
+		String requestUrl = GetSeeMyMapBaseUrl() + "/requestmap/" + requestedUrl + "/" + password + "/" + personId;
 
 		return requestUrl;
+	}
+	
+	public static String GetDeleteFirstPointUrl(String seeMyMapGuid)
+	{
+		String deleteUrl = GetSeeMyMapBaseUrl() + "/clearfirstpoint/" + seeMyMapGuid;
+		
+		return deleteUrl;
+	}
+	
+	public static String GetDeleteLastPointUrl(String seeMyMapGuid)
+	{
+		String deleteUrl = GetSeeMyMapBaseUrl() + "/clearlastpoint/" + seeMyMapGuid;
+		return deleteUrl;
 	}
 
 	public static String GetSeeMyMapClearMapUrl(String seeMyMapGuid)
@@ -481,5 +494,7 @@ public class Utilities
 	{
 		return false;
 	}
+
+
 
 }

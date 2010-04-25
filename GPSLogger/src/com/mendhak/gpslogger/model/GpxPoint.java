@@ -51,5 +51,6 @@ public class GpxPoint
 	{
 		description = value;
 	}
+	
 
 }

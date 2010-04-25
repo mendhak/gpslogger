@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, GpsMainActivity!</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name">GPSLogger Pro</string>
     <string name="settings_screen_name">GPSLogger Settings</string>
 </resources>

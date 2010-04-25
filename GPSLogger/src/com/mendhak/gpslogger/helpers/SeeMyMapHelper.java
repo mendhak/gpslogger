@@ -12,14 +12,18 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.widget.EditText;
 
 import com.mendhak.gpslogger.GpsMainActivity;
+import com.mendhak.gpslogger.SeeMyMapSetupActivity;
 import com.mendhak.gpslogger.Utilities;
 import com.mendhak.gpslogger.interfaces.IGpsLoggerSaxHandler;
 import com.mendhak.gpslogger.model.GpxPoint;
@@ -34,21 +38,74 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 {
 
 	static GpsMainActivity mainActivity;
+	static SeeMyMapSetupActivity setupActivity;
 	ProgressDialog annotatedPointsProgressDialog;
 	ProgressDialog singlePointProgressDialog;
 	ProgressDialog clearMapProgressDialog;
+	ProgressDialog deleteLastPointProgressDialog;
+	ProgressDialog deleteFirstPointProgressDialog;
 
 	/**
 	 * This constructor requires the GpsMainActivity form passed in
 	 * 
 	 * @param activity
 	 */
-	public SeeMyMapHelper(GpsMainActivity activity)
+	public SeeMyMapHelper(Activity activity)
 	{
-		mainActivity = activity;
-
+		if(activity instanceof GpsMainActivity)
+		{
+			mainActivity = (GpsMainActivity) activity;	
+		}
+		else if(activity instanceof SeeMyMapSetupActivity)
+		{
+			setupActivity = (SeeMyMapSetupActivity)activity;
+		}
+			
 	}
 
+	public void DeleteFirstPoint()
+	{
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(setupActivity.getBaseContext());
+		String seeMyMapUrl = prefs.getString("seemymap_URL", "");
+		String seeMyMapGuid = prefs.getString("seemymap_GUID", "");
+		
+		if(seeMyMapUrl.length() == 0 || seeMyMapGuid.length() == 0)
+		{
+			Utilities.MsgBox("Can't delete point", "You haven't set up a SeeMyMap URL yet", setupActivity);
+		}
+		else
+		{
+			deleteFirstPointProgressDialog = ProgressDialog.show(mainActivity, "Deleting...",
+					"Deleting point", true, true);
+			
+			Thread t = new Thread(new DeleteFirstPointHandler(seeMyMapGuid, this));
+			t.start();
+		}
+		
+		
+	}
+	
+	public void DeleteLastPoint()
+	{
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(setupActivity.getBaseContext());
+		String seeMyMapUrl = prefs.getString("seemymap_URL", "");
+		String seeMyMapGuid = prefs.getString("seemymap_GUID", "");
+		
+		if(seeMyMapUrl.length() == 0 || seeMyMapGuid.length() == 0)
+		{
+			Utilities.MsgBox("Can't delete point", "You haven't set up a SeeMyMap URL yet", setupActivity);
+		}
+		else
+		{
+			deleteLastPointProgressDialog = ProgressDialog.show(mainActivity, "Deleting...",
+					"Deleting point", true, true);
+			
+			Thread t = new Thread(new DeleteLastPointHandler(seeMyMapGuid, this));
+			t.start();
+		}
+	}
+	
+	
 	/**
 	 * Prompts the user for input, sends the text along with location to the
 	 * server, adds the point to the current log file.
@@ -240,11 +297,55 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 		clearMapProgressDialog.dismiss();
 	}
 
+	public void OnFirstPointDeleted(boolean success)
+	{
+		if(success)
+		{
+			setupActivity.handler.post(setupActivity.updateResultsPointDeleted);
+		}
+		else
+		{
+			setupActivity.handler.post(setupActivity.updateResultsConnectionFailure);
+		}
+		
+		deleteFirstPointProgressDialog.dismiss();
+		
+	}
+
+	public void OnLastPointDeleted(boolean success)
+	{
+		if(success)
+		{
+			setupActivity.handler.post(setupActivity.updateResultsPointDeleted);
+		}
+		else
+		{
+			setupActivity.handler.post(setupActivity.updateResultsConnectionFailure);
+		}
+		
+		deleteLastPointProgressDialog.dismiss();
+		
+	}
+
 }
 
 interface ISeeMyMapHelper
 {
 
+	/**
+	 * Event raised when the first point on the map has been deleted.
+	 * @param success
+	 * indicates whether the point was deleted successfully
+	 */
+	public void OnFirstPointDeleted(boolean success);
+	
+	/**
+	 * Event raised when the last point on the map has been deleted.
+	 * @param success
+	 * indicates whether the point was deleted successfully
+	 */
+	public void OnLastPointDeleted(boolean success);
+	
 	/**
 	 * Event raised when the sending of multiple points to SeeMyMap is done.
 	 * 
@@ -474,5 +575,68 @@ class MultipleAnnotatedPointsHandler implements Runnable
 
 		helper.OnMultipleAnnotatedPointsCompleted(success);
 
+	}
+}
+
+
+class DeleteLastPointHandler implements Runnable
+{
+
+	String seeMyMapGuid;
+	ISeeMyMapHelper helper;
+	
+	public DeleteLastPointHandler(String seeMyMapGuid, ISeeMyMapHelper helper)
+	{
+		this.seeMyMapGuid = seeMyMapGuid;
+		this.helper = helper;
+	}
+	
+	public void run()
+	{
+				
+		boolean success = true;
+		String deleteLastPointUrl = Utilities.GetDeleteLastPointUrl(seeMyMapGuid);
+		
+		try
+		{
+			Utilities.GetUrl(deleteLastPointUrl);
+		}
+		catch (Exception e)
+		{
+			success = false;
+		}
+
+		helper.OnLastPointDeleted(success);
+		
+	}
+	
+}
+
+class DeleteFirstPointHandler implements Runnable
+{
+	String seeMyMapGuid;
+	ISeeMyMapHelper helper;
+	
+	public DeleteFirstPointHandler(String seeMyMapGuid, ISeeMyMapHelper helper)
+	{
+		this.seeMyMapGuid = seeMyMapGuid;
+		this.helper = helper;
+	}
+	
+	public void run()
+	{
+		boolean success = true;
+		String deleteFirstPointUrl = Utilities.GetDeleteFirstPointUrl(seeMyMapGuid);
+		try
+		{
+			Utilities.GetUrl(deleteFirstPointUrl);
+		}
+		catch(Exception e)
+		{
+			success = false;
+		}
+		
+		helper.OnFirstPointDeleted(success);
+		
 	}
 }

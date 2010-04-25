@@ -1,10 +1,16 @@
 package com.mendhak.gpslogger;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+
 import com.mendhak.gpslogger.helpers.FileLoggingHelper;
 import com.mendhak.gpslogger.helpers.GeneralLocationListener;
 import com.mendhak.gpslogger.helpers.SeeMyMapHelper;
@@ -21,18 +27,27 @@ import android.content.pm.Signature;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.location.Location;
 import android.location.LocationManager; //import android.os.AsyncTask;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class GpsMainActivity extends Activity implements OnCheckedChangeListener
@@ -112,20 +127,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		buttonOnOff.setOnCheckedChangeListener(this);
 
 		GetPreferences();
-		
-		try
-		{
-			Signature[] sigs =
-				getBaseContext().getPackageManager().getPackageInfo("com.mendhak.gpslogger",
-				64).signatures;
-			
-			Signature sig0 = sigs[0];
-		}
-		catch (NameNotFoundException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
 
 	}
 
@@ -411,7 +412,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		{
 			menu.getItem(1).setVisible(false);
 		}
-	
 
 		return true;
 
@@ -427,6 +427,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		switch (itemId)
 		{
+			case R.id.mnuSeeMyMap:
+				break;
 			case R.id.mnuSettings:
 				Intent settingsActivity = new Intent(getBaseContext(), GpsSettingsActivity.class);
 				startActivity(settingsActivity);
@@ -437,11 +439,17 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			case R.id.mnuClearMap:
 				ClearMap();
 				break;
+			case R.id.mnuSeeMyMapMore:
+				startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
+				break;
 			case R.id.mnuShareAnnotated:
 				showDialog(DATEPICKER_ID);
 				break;
 			case R.id.mnuAnnotate:
 				Annotate();
+				break;
+			case R.id.mnuShare:
+				Share();
 				break;
 			case R.id.mnuExit:
 				RemoveNotification();
@@ -461,6 +469,87 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		// startActivity(Intent.createChooser(sendIntent, "Title:"));
 		// return false;
 		// }
+
+	}
+
+	/**
+	 * Allows user to send a GPX/KML file along with location, or location only using a provider. 'Provider' means 
+	 * any application that can accept such an intent (Facebook, SMS, Twitter, Email, K-9, Bluetooth)
+	 */
+	private void Share()
+	{
+
+		try
+		{
+			final String locationOnly = "Location only";
+			final File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+			if (gpxFolder.exists())
+			{
+				String[] enumeratedFiles = gpxFolder.list();
+				List<String> fileList = new ArrayList<String>(Arrays.asList(enumeratedFiles));
+				Collections.reverse(fileList);
+				fileList.add(0, locationOnly);
+				final String[] files = fileList.toArray(new String[0]);
+
+				final Dialog dialog = new Dialog(this);
+				dialog.setTitle("Pick a file to share");
+				dialog.setContentView(R.layout.filelist);
+				ListView thelist = (ListView) dialog.findViewById(R.id.listViewFiles);
+
+				thelist.setAdapter(new ArrayAdapter<String>(getBaseContext(),
+						android.R.layout.simple_list_item_single_choice, files));
+
+				thelist.setOnItemClickListener(new OnItemClickListener()
+				{
+
+					public void onItemClick(AdapterView av, View v, int index, long arg)
+					{
+						dialog.dismiss();
+						String chosenFileName = files[index];
+
+						final Intent intent = new Intent(Intent.ACTION_SEND);
+
+						// intent.setType("text/plain");
+						// intent.setType("application/gpx+xml");
+						intent.setType("*/*");
+
+						if (chosenFileName.equalsIgnoreCase(locationOnly))
+						{
+							intent.setType("text/plain");
+						}
+
+						intent.putExtra(Intent.EXTRA_SUBJECT, "My location");
+						if (currentLatitude != 0 && currentLongitude != 0)
+						{
+							String bodyText = "Lat:" + String.valueOf(currentLatitude) + ", " + "Long:"
+									+ String.valueOf(currentLongitude);
+							intent.putExtra(Intent.EXTRA_TEXT, bodyText);
+							intent.putExtra("sms_body", bodyText);
+						}
+
+						if (chosenFileName != null && chosenFileName.length() > 0
+								&& !chosenFileName.equalsIgnoreCase(locationOnly))
+						{
+							intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(gpxFolder,
+									chosenFileName)));
+						}
+
+						startActivity(Intent.createChooser(intent, "Share via"));
+
+					}
+				});
+				dialog.show();
+			}
+
+			// startActivity(new Intent("com.mendhak.gpslogger.FILELISTVIEW"));
+			// Intent settingsActivity = new
+			// Intent(getBaseContext(),FileListViewActivity.class);
+			// startActivity(settingsActivity);
+		}
+		catch (Exception ex)
+		{
+			System.out.println(ex.getMessage());
+		}
 
 	}
 

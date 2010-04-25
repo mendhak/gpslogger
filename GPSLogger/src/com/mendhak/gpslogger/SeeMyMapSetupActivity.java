@@ -1,5 +1,8 @@
 package com.mendhak.gpslogger;
 
+import java.util.UUID;
+
+import com.mendhak.gpslogger.helpers.SeeMyMapHelper;
 import com.mendhak.gpslogger.helpers.SeeMyMapSetupHelper;
 
 import android.app.Activity;
@@ -16,8 +19,17 @@ import android.widget.TextView;
 public class SeeMyMapSetupActivity extends Activity implements OnClickListener
 {
 
+	public String personId;
 	public String guid;
 	public final Handler handler = new Handler();
+	
+	public final Runnable updateResultsPointDeleted = new Runnable()
+	{
+		public void run()
+		{
+			PointDeleted();
+		}
+	};
 
 	public final Runnable updateResultsConnectionFailure = new Runnable()
 	{
@@ -44,6 +56,11 @@ public class SeeMyMapSetupActivity extends Activity implements OnClickListener
 
 	};
 
+	private void PointDeleted()
+	{
+		Utilities.MsgBox("Deleted", "Point deleted", this);
+	}
+	
 	private void NotAvailable()
 	{
 		EditText txtRequestUrl = (EditText) findViewById(R.id.txtRequestUrl);
@@ -84,11 +101,27 @@ public class SeeMyMapSetupActivity extends Activity implements OnClickListener
 
 		Button btnCheck = (Button) findViewById(R.id.btnCheck);
 		btnCheck.setOnClickListener(this);
+		
+		Button btnDeleteFirstPoint = (Button)findViewById(R.id.btnClearFirstPoint);
+		btnDeleteFirstPoint.setOnClickListener(this);
+		
+		Button btnDeleteLastPoint = (Button)findViewById(R.id.btnClearLastPoint);
+		btnDeleteLastPoint.setOnClickListener(this);
 
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
 		EditText txtRequestUrl = (EditText) findViewById(R.id.txtRequestUrl);
 		EditText txtPassword = (EditText) findViewById(R.id.txtPassword);
+		
+		personId = prefs.getString("personId","");
+		
+		if(personId == null || personId == "" || personId.length() == 0)
+		{
+			personId = String.valueOf(UUID.randomUUID());
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.putString("personId", personId);
+			editor.commit();
+		}
 
 		String seeMyMapUrl = prefs.getString("seemymap_URL", "");
 
@@ -120,8 +153,23 @@ public class SeeMyMapSetupActivity extends Activity implements OnClickListener
 	public void onClick(View v)
 	{
 
-		SeeMyMapSetupHelper helper = new SeeMyMapSetupHelper(this);
-		helper.RequestUrl();
+		int buttonId = v.getId();
+		
+		if(buttonId == R.id.btnClearFirstPoint)
+		{
+			SeeMyMapHelper helper = new SeeMyMapHelper(this);
+			helper.DeleteFirstPoint();
+		}
+		else if(buttonId == R.id.btnClearLastPoint)
+		{
+			SeeMyMapHelper helper = new SeeMyMapHelper(this);
+			helper.DeleteLastPoint();
+		}
+		else
+		{
+			SeeMyMapSetupHelper helper = new SeeMyMapSetupHelper(this);
+			helper.RequestUrl();	
+		}
 
 	}
 

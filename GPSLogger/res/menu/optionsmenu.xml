@@ -8,17 +8,20 @@
 			<item android:id="@+id/mnuShareLatest" android:title="Send new point"
 				android:icon="@android:drawable/ic_menu_share" />
 			<item android:id="@+id/mnuShareAnnotated" android:title="Send points since"
-				android:icon="@android:drawable/ic_menu_share"  />
+				android:icon="@android:drawable/ic_menu_share" />
 			<item android:id="@+id/mnuClearMap" android:title="Clear Map" />
-			<item android:id="@+id/mnuSeeMyMapMore" android:title="More actions" />
-			
+			<item android:id="@+id/mnuSeeMyMapMore" android:title="Setup" />
+
 		</menu>
 	</item>
 
 	<item android:id="@+id/mnuAnnotate" android:title="Annotate"
 		android:icon="@android:drawable/ic_menu_edit" />
+	<item android:id="@+id/mnuShare" android:title="Share"
+		android:icon="@android:drawable/ic_menu_share" />
 	<item android:id="@+id/mnuExit" android:title="Exit"
 		android:icon="@android:drawable/ic_menu_close_clear_cancel" />
-		
+
+
 
 </menu>

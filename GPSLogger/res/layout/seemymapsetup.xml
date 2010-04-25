@@ -54,6 +54,15 @@
 				android:background="#CCCCCC" />
 		</TableRow>
 
+			<TableRow>
+			<TextView></TextView>
+		</TableRow>
+		<TableRow>
+			<TextView android:id="@+id/txtMoreActions"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textSize="14dip" android:gravity="center_horizontal" android:text="More actions" />
+		</TableRow>
+
 		<TableRow>
 				<Button android:id="@+id/btnClearFirstPoint" android:layout_width="fill_parent"
 				android:layout_height="wrap_content" android:text="Delete First Point" />

@@ -15,6 +15,7 @@
 		<activity android:name=".GpsSettingsActivity" android:label="@string/settings_screen_name"
 			android:screenOrientation="portrait">
 		</activity>
+		
 		<activity android:name=".SeeMyMapSetupActivity"
 			android:label="SeeMyMap setup" android:screenOrientation="portrait">
 			<intent-filter>

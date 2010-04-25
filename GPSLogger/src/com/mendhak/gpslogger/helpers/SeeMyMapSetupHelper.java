@@ -1,6 +1,7 @@
 package com.mendhak.gpslogger.helpers;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.widget.EditText;
 
 import com.mendhak.gpslogger.R;
@@ -25,6 +26,8 @@ public class SeeMyMapSetupHelper implements ISeeMyMapSetupHelper
 	public void RequestUrl()
 	{
 
+		String personId = setupActivity.personId;
+		
 		EditText txtRequestUrl = (EditText) setupActivity.findViewById(R.id.txtRequestUrl);
 		final String requestedUrl = txtRequestUrl.getText().toString();
 
@@ -36,7 +39,7 @@ public class SeeMyMapSetupHelper implements ISeeMyMapSetupHelper
 			pd = ProgressDialog.show(setupActivity, "Checking...", "Checking availability of "
 					+ requestedUrl + ".seemymap.com", true, true);
 
-			Thread t = new Thread(new RequestUrlHandler(requestedUrl, password, this));
+			Thread t = new Thread(new RequestUrlHandler(requestedUrl, password, personId, this));
 			t.start();
 		}
 		else
@@ -84,12 +87,14 @@ class RequestUrlHandler implements Runnable
 	ISeeMyMapSetupHelper events;
 	String requestedUrl;
 	String password;
+	String personId;
 
-	public RequestUrlHandler(String requestedUrl, String password, ISeeMyMapSetupHelper events)
+	public RequestUrlHandler(String requestedUrl, String password, String personId, ISeeMyMapSetupHelper events)
 	{
 		this.events = events;
 		this.requestedUrl = requestedUrl;
 		this.password = password;
+		this.personId = personId;
 	}
 
 	public void run()
@@ -101,7 +106,7 @@ class RequestUrlHandler implements Runnable
 
 		try
 		{
-			getMapResponse = Utilities.GetUrl(Utilities.GetSeeMyMapRequestUrl(requestedUrl, password));
+			getMapResponse = Utilities.GetUrl(Utilities.GetSeeMyMapRequestUrl(requestedUrl, password, personId));
 			success = true;
 		}
 		catch (Exception e)
