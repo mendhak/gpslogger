@@ -13,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
+import com.mendhak.gpslogger.R;
 
 public class GpsSettingsActivity extends PreferenceActivity
 {

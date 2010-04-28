@@ -2,8 +2,8 @@ package com.mendhak.gpslogger;
 
 import java.util.UUID;
 
-import com.mendhak.gpslogger.helpers.SeeMyMapHelper;
-import com.mendhak.gpslogger.helpers.SeeMyMapSetupHelper;
+import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.helpers.*;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -146,7 +146,7 @@ public class SeeMyMapSetupActivity extends Activity implements OnClickListener
 		}
 		else
 		{
-			txtSummary.setText("Use the textboxes above to register a SeeMyMap URL. You can always change your mind and register another.  Don't forget the password, as you'll need it if you want to retrieve it some day.");
+			txtSummary.setText("Use the textboxes above to register a SeeMyMap URL. You can always change your mind and register another.  Don't forget the password, as you'll need it if you want to retrieve your URL some day.");
 		}
 	}
 

@@ -11,9 +11,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import com.mendhak.gpslogger.helpers.FileLoggingHelper;
-import com.mendhak.gpslogger.helpers.GeneralLocationListener;
-import com.mendhak.gpslogger.helpers.SeeMyMapHelper;
+import com.mendhak.gpslogger.helpers.*;
+import com.mendhak.gpslogger.R;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -442,6 +441,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			case R.id.mnuSeeMyMapMore:
 				startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
 				break;
+			case R.id.mnuViewInBrowser:
+				ViewInBrowser();
+				break;
 			case R.id.mnuShareAnnotated:
 				showDialog(DATEPICKER_ID);
 				break;
@@ -472,15 +474,33 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 	}
 
+	private void ViewInBrowser()
+	{
+		
+		
+		seeMyMapHelper.ViewInBrowser();
+		
+		
+	}
+
 	/**
-	 * Allows user to send a GPX/KML file along with location, or location only using a provider. 'Provider' means 
-	 * any application that can accept such an intent (Facebook, SMS, Twitter, Email, K-9, Bluetooth)
+	 * Allows user to send a GPX/KML file along with location, or location only
+	 * using a provider. 'Provider' means any application that can accept such
+	 * an intent (Facebook, SMS, Twitter, Email, K-9, Bluetooth)
 	 */
 	private void Share()
 	{
 
 		try
 		{
+
+			if (!Utilities.Flag())
+			{
+				Utilities.MsgBox("Sharing",
+						"You can share locations in the Pro version of GPS Logger.", this);
+				return;
+			}
+
 			final String locationOnly = "Location only";
 			final File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
 			if (gpxFolder.exists())

@@ -18,6 +18,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.widget.EditText;
@@ -52,15 +53,15 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 	 */
 	public SeeMyMapHelper(Activity activity)
 	{
-		if(activity instanceof GpsMainActivity)
+		if (activity instanceof GpsMainActivity)
 		{
-			mainActivity = (GpsMainActivity) activity;	
+			mainActivity = (GpsMainActivity) activity;
 		}
-		else if(activity instanceof SeeMyMapSetupActivity)
+		else if (activity instanceof SeeMyMapSetupActivity)
 		{
-			setupActivity = (SeeMyMapSetupActivity)activity;
+			setupActivity = (SeeMyMapSetupActivity) activity;
 		}
-			
+
 	}
 
 	public void DeleteFirstPoint()
@@ -68,44 +69,44 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(setupActivity.getBaseContext());
 		String seeMyMapUrl = prefs.getString("seemymap_URL", "");
 		String seeMyMapGuid = prefs.getString("seemymap_GUID", "");
-		
-		if(seeMyMapUrl.length() == 0 || seeMyMapGuid.length() == 0)
+
+		if (seeMyMapUrl.length() == 0 || seeMyMapGuid.length() == 0)
 		{
-			Utilities.MsgBox("Can't delete point", "You haven't set up a SeeMyMap URL yet", setupActivity);
+			Utilities.MsgBox("Can't delete point", "You haven't set up a SeeMyMap URL yet",
+					setupActivity);
 		}
 		else
 		{
 			deleteFirstPointProgressDialog = ProgressDialog.show(mainActivity, "Deleting...",
 					"Deleting point", true, true);
-			
+
 			Thread t = new Thread(new DeleteFirstPointHandler(seeMyMapGuid, this));
 			t.start();
 		}
-		
-		
+
 	}
-	
+
 	public void DeleteLastPoint()
 	{
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(setupActivity.getBaseContext());
 		String seeMyMapUrl = prefs.getString("seemymap_URL", "");
 		String seeMyMapGuid = prefs.getString("seemymap_GUID", "");
-		
-		if(seeMyMapUrl.length() == 0 || seeMyMapGuid.length() == 0)
+
+		if (seeMyMapUrl.length() == 0 || seeMyMapGuid.length() == 0)
 		{
-			Utilities.MsgBox("Can't delete point", "You haven't set up a SeeMyMap URL yet", setupActivity);
+			Utilities.MsgBox("Can't delete point", "You haven't set up a SeeMyMap URL yet",
+					setupActivity);
 		}
 		else
 		{
 			deleteLastPointProgressDialog = ProgressDialog.show(mainActivity, "Deleting...",
 					"Deleting point", true, true);
-			
+
 			Thread t = new Thread(new DeleteLastPointHandler(seeMyMapGuid, this));
 			t.start();
 		}
 	}
-	
-	
+
 	/**
 	 * Prompts the user for input, sends the text along with location to the
 	 * server, adds the point to the current log file.
@@ -187,7 +188,6 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 	{
 
 		mainActivity.GetPreferences();
-		
 
 		if (mainActivity.seeMyMapUrl == null || mainActivity.seeMyMapUrl.length() == 0
 				|| mainActivity.seeMyMapGuid == null || mainActivity.seeMyMapGuid.length() == 0)
@@ -224,9 +224,26 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 			{
 				Utilities.MsgBox("Marty McFly?",
 						"This application does not support futuristic time travel.", mainActivity);
-			}	
+			}
 		}
-		
+
+	}
+
+	public void ViewInBrowser()
+	{
+		mainActivity.GetPreferences();
+		if (mainActivity.seeMyMapUrl == null || mainActivity.seeMyMapUrl.length() == 0
+				|| mainActivity.seeMyMapGuid == null || mainActivity.seeMyMapGuid.length() == 0)
+		{
+			mainActivity.startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
+		}
+		else
+		{
+			Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://"
+					+ mainActivity.seeMyMapUrl + ".seemymap.com/"));
+			mainActivity.startActivity(myIntent);
+		}
+
 	}
 
 	/**
@@ -299,7 +316,7 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 
 	public void OnFirstPointDeleted(boolean success)
 	{
-		if(success)
+		if (success)
 		{
 			setupActivity.handler.post(setupActivity.updateResultsPointDeleted);
 		}
@@ -307,14 +324,14 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 		{
 			setupActivity.handler.post(setupActivity.updateResultsConnectionFailure);
 		}
-		
+
 		deleteFirstPointProgressDialog.dismiss();
-		
+
 	}
 
 	public void OnLastPointDeleted(boolean success)
 	{
-		if(success)
+		if (success)
 		{
 			setupActivity.handler.post(setupActivity.updateResultsPointDeleted);
 		}
@@ -322,9 +339,9 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 		{
 			setupActivity.handler.post(setupActivity.updateResultsConnectionFailure);
 		}
-		
+
 		deleteLastPointProgressDialog.dismiss();
-		
+
 	}
 
 }
@@ -334,18 +351,20 @@ interface ISeeMyMapHelper
 
 	/**
 	 * Event raised when the first point on the map has been deleted.
+	 * 
 	 * @param success
-	 * indicates whether the point was deleted successfully
+	 *            indicates whether the point was deleted successfully
 	 */
 	public void OnFirstPointDeleted(boolean success);
-	
+
 	/**
 	 * Event raised when the last point on the map has been deleted.
+	 * 
 	 * @param success
-	 * indicates whether the point was deleted successfully
+	 *            indicates whether the point was deleted successfully
 	 */
 	public void OnLastPointDeleted(boolean success);
-	
+
 	/**
 	 * Event raised when the sending of multiple points to SeeMyMap is done.
 	 * 
@@ -507,7 +526,7 @@ class MultipleAnnotatedPointsHandler implements Runnable
 				int year = Integer.valueOf(fileName.substring(0, 4));
 				int month = Integer.valueOf(fileName.substring(4, 6));
 				int day = Integer.valueOf(fileName.substring(6, 8));
-				Date fileDate = new Date(year-1900, month-1, day);
+				Date fileDate = new Date(year - 1900, month - 1, day);
 
 				long fileDifference = fileDate.getTime() - chosenDate.getTime();
 
@@ -578,25 +597,24 @@ class MultipleAnnotatedPointsHandler implements Runnable
 	}
 }
 
-
 class DeleteLastPointHandler implements Runnable
 {
 
 	String seeMyMapGuid;
 	ISeeMyMapHelper helper;
-	
+
 	public DeleteLastPointHandler(String seeMyMapGuid, ISeeMyMapHelper helper)
 	{
 		this.seeMyMapGuid = seeMyMapGuid;
 		this.helper = helper;
 	}
-	
+
 	public void run()
 	{
-				
+
 		boolean success = true;
 		String deleteLastPointUrl = Utilities.GetDeleteLastPointUrl(seeMyMapGuid);
-		
+
 		try
 		{
 			Utilities.GetUrl(deleteLastPointUrl);
@@ -607,22 +625,22 @@ class DeleteLastPointHandler implements Runnable
 		}
 
 		helper.OnLastPointDeleted(success);
-		
+
 	}
-	
+
 }
 
 class DeleteFirstPointHandler implements Runnable
 {
 	String seeMyMapGuid;
 	ISeeMyMapHelper helper;
-	
+
 	public DeleteFirstPointHandler(String seeMyMapGuid, ISeeMyMapHelper helper)
 	{
 		this.seeMyMapGuid = seeMyMapGuid;
 		this.helper = helper;
 	}
-	
+
 	public void run()
 	{
 		boolean success = true;
@@ -631,12 +649,12 @@ class DeleteFirstPointHandler implements Runnable
 		{
 			Utilities.GetUrl(deleteFirstPointUrl);
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			success = false;
 		}
-		
+
 		helper.OnFirstPointDeleted(success);
-		
+
 	}
 }
