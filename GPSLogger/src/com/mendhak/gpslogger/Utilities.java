@@ -11,10 +11,52 @@ import java.util.Date;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 
 public class Utilities
 {
 
+	
+	public static void LogInfo(String message)
+	{
+		Log.i("GPSLogger",message);
+	}
+	
+	public static void LogError(String methodName, Exception ex)
+	{
+		try
+		{
+			LogError(methodName + ":" + ex.getMessage());
+		}
+		catch(Exception e)
+		{
+			/**/
+		}
+	}
+	
+	private static void LogError(String message)
+	{
+		Log.e("GPSLogger",message);
+		
+	}
+	
+	public static void LogDebug(String message)
+	{
+		Log.d("GPSLogger",message);
+	}
+	
+	public static void LogWarning(String message)
+	{
+		Log.w("GPSLogger", message);
+	}
+	
+	public static void LogVerbose(String message)
+	{
+		Log.v("GPSLogger", message);
+	}
+	
+	
+	
 	/**
 	 * Displays a message box to the user with an OK button.
 	 * 

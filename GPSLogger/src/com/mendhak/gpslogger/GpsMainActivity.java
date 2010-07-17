@@ -113,6 +113,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	{
 		super.onCreate(savedInstanceState);
 
+		Utilities.LogInfo("GPSLogger started");
+
 		seeMyMapHelper = new SeeMyMapHelper(this);
 		fileHelper = new FileLoggingHelper(this);
 
@@ -120,6 +122,20 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
 		buttonOnOff.setOnCheckedChangeListener(this);
+		
+		Intent i = getIntent();
+		Bundle bundle = i.getExtras();
+
+		if (bundle != null)
+		{
+			boolean startRightNow = bundle.getBoolean("immediate");
+			if (startRightNow)
+			{
+				Utilities.LogInfo("Auto starting logging");
+				buttonOnOff.setChecked(true);
+				onCheckedChanged(buttonOnOff, true);
+			}
+		}
 
 		GetPreferences();
 
@@ -141,6 +157,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 					return;
 				}
 
+				Utilities.LogInfo("Starting logging procedures");
 				isStarted = true;
 				GetPreferences();
 				Notify();
@@ -151,7 +168,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			}
 			else
 			{
-
+				Utilities.LogInfo("Stopping logging");
 				isStarted = false;
 				RemoveNotification();
 				StopGpsManager();
@@ -160,6 +177,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 		catch (Exception ex)
 		{
+			Utilities.LogError("onCheckedChanged",ex);
 			SetStatus(getString(R.string.button_click_error) + ex.getMessage());
 		}
 
@@ -199,7 +217,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 		catch (Exception ex)
 		{
-			// nothing
+
+			Utilities.LogError("RemoveNotification",ex);
 
 		}
 		finally
@@ -307,7 +326,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 		catch (Exception ex)
 		{
-			/* Do nothing, displaying a summary should not prevent logging. */
+			Utilities.LogError("GetPreferences", ex);
 		}
 	}
 
@@ -318,16 +337,16 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	private void ShowPreferencesSummary()
 	{
 
-		//TextView lblSummary = (TextView) findViewById(R.id.lblSummary);
-		TextView txtLoggingTo = (TextView)findViewById(R.id.txtLoggingTo);
-		TextView txtFrequency = (TextView)findViewById(R.id.txtFrequency);
-		TextView txtDistance = (TextView)findViewById(R.id.txtDistance);
-		TextView txtFilename = (TextView)findViewById(R.id.txtFileName);
-		
+		// TextView lblSummary = (TextView) findViewById(R.id.lblSummary);
+		TextView txtLoggingTo = (TextView) findViewById(R.id.txtLoggingTo);
+		TextView txtFrequency = (TextView) findViewById(R.id.txtFrequency);
+		TextView txtDistance = (TextView) findViewById(R.id.txtDistance);
+		TextView txtFilename = (TextView) findViewById(R.id.txtFileName);
+
 		if (!logToKml && !logToGpx)
 		{
 			txtLoggingTo.setText(R.string.summary_loggingto_screen);
-			
+
 		}
 		else if (logToGpx && logToKml)
 		{
@@ -336,7 +355,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		else
 		{
 			txtLoggingTo.setText((logToGpx ? "GPX" : "KML"));
-			
+
 		}
 
 		if (minimumSeconds > 0)
@@ -348,7 +367,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		else
 		{
 			txtFrequency.setText(R.string.summary_freq_max);
-			
+
 		}
 
 		if (minimumDistance > 0)
@@ -357,26 +376,26 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			if (useImperial)
 			{
 				int minimumDistanceInFeet = Utilities.MetersToFeet(minimumDistance);
-				txtDistance.setText( ((minimumDistanceInFeet == 1)
-							? getString(R.string.foot)
-							: String.valueOf(minimumDistanceInFeet) + getString(R.string.feet)));
+				txtDistance.setText(((minimumDistanceInFeet == 1)
+					? getString(R.string.foot)
+					: String.valueOf(minimumDistanceInFeet) + getString(R.string.feet)));
 			}
 			else
 			{
-				txtDistance.setText( ((minimumDistance == 1)
-							? getString(R.string.meter)
-							: String.valueOf(minimumDistance) + getString(R.string.meters)));
+				txtDistance.setText(((minimumDistance == 1)
+					? getString(R.string.meter)
+					: String.valueOf(minimumDistance) + getString(R.string.meters)));
 			}
 
 		}
 		else
 		{
-			 txtDistance.setText(R.string.summary_dist_regardless);
+			txtDistance.setText(R.string.summary_dist_regardless);
 		}
 
 		if ((logToGpx || logToKml) && (currentFileName != null && currentFileName.length() > 0))
 		{
-			txtFilename.setText(getString(R.string.summary_current_filename_format,currentFileName));
+			txtFilename.setText(getString(R.string.summary_current_filename_format, currentFileName));
 		}
 	}
 
@@ -385,6 +404,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
+		Utilities.LogInfo("KeyDown - " + String.valueOf(keyCode));
+		
 		if (keyCode == KeyEvent.KEYCODE_BACK)
 		{
 			moveTaskToBack(true);
@@ -419,7 +440,10 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
 
+		
+		
 		int itemId = item.getItemId();
+		Utilities.LogInfo("Option item selected - " + String.valueOf(item.getTitle()) );
 
 		switch (itemId)
 		{
@@ -562,7 +586,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 		catch (Exception ex)
 		{
-			System.out.println(ex.getMessage());
+			Utilities.LogError("Share",ex);
 		}
 
 	}
@@ -969,10 +993,10 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 				float bearingDegrees = loc.getBearing();
 				String direction = getString(R.string.unknown_direction);
 
-				direction = Utilities.GetBearingDescription(bearingDegrees,getBaseContext());
+				direction = Utilities.GetBearingDescription(bearingDegrees, getBaseContext());
 
 				txtDirection.setText(direction + "(" + String.valueOf(Math.round(bearingDegrees))
-					+getString(R.string.degree_symbol)	+ ")");
+						+ getString(R.string.degree_symbol) + ")");
 			}
 			else
 			{
@@ -998,8 +1022,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 				}
 				else
 				{
-					txtAccuracy.setText(getString(R.string.accuracy_within,
-							String.valueOf(accuracy), getString(R.string.meters)));
+					txtAccuracy.setText(getString(R.string.accuracy_within, String.valueOf(accuracy),
+							getString(R.string.meters)));
 				}
 
 			}
@@ -1015,7 +1039,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 		catch (Exception ex)
 		{
-			SetStatus(getString(R.string.error_displaying,ex.getMessage()));
+			SetStatus(getString(R.string.error_displaying, ex.getMessage()));
 		}
 
 	}
@@ -1033,6 +1057,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	public void RestartGpsManagers()
 	{
 
+		Utilities.LogInfo("Restarting GPS Managers");
 		StopGpsManager();
 		StartGpsManager();
 

@@ -172,6 +172,7 @@
     <string name="enabledisablegps_title">Enable/Disable GPS</string>
     <string name="enabledisablegps_summary">Go to the phone settings to enable or disable the providers.</string>
     
-    
+    <string name="startonbootup_title">Start on bootup</string>
+    <string name="startonbootup_summary">Launch app and start logging when phone starts</string>
     
 </resources>
