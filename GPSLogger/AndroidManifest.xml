@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.mendhak.gpslogger" android:versionCode="5"
 	android:versionName="1.0.5">
-	<application android:icon="@drawable/gpsloggericon2"
-		android:label="GPS Logger" android:debuggable="false">
-		<activity android:name="com.mendhak.gpslogger.GpsMainActivity" android:label="GPS Logger"
+	<application android:icon="@drawable/gpsloggericon2" android:name="@string/app_name"
+		android:label="@string/app_name" android:debuggable="false">
+		<activity android:name="com.mendhak.gpslogger.GpsMainActivity" android:label="@string/app_name"
 			android:screenOrientation="portrait" android:launchMode="singleTask">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

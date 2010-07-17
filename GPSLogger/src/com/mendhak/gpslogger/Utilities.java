@@ -11,6 +11,7 @@ import java.util.Date;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.GetChars;
 
 public class Utilities
 {
@@ -26,10 +27,11 @@ public class Utilities
 	 */
 	public static void MsgBox(String title, String message, Context className)
 	{
+
 		AlertDialog alertDialog = new AlertDialog.Builder(className).create();
 		alertDialog.setTitle(title);
 		alertDialog.setMessage(message);
-		alertDialog.setButton("OK", new DialogInterface.OnClickListener()
+		alertDialog.setButton(className.getString(R.string.ok), new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int which)
 			{
@@ -104,7 +106,7 @@ public class Utilities
 	 * @param numberOfSeconds
 	 * @return
 	 */
-	public static String GetDescriptiveTimeString(int numberOfSeconds)
+	public static String GetDescriptiveTimeString(int numberOfSeconds, Context context)
 	{
 
 		String descriptive = "";
@@ -117,42 +119,42 @@ public class Utilities
 		// Special cases
 		if (numberOfSeconds == 1)
 		{
-			return "second";
+			return context.getString(R.string.time_onesecond);
 		}
 
 		if (numberOfSeconds == 30)
 		{
-			return "half a minute";
+			return context.getString(R.string.time_halfminute);
 		}
 
 		if (numberOfSeconds == 60)
 		{
-			return "minute";
+			return context.getString(R.string.time_oneminute);
 		}
 
 		if (numberOfSeconds == 900)
 		{
-			return "quarter hour";
+			return context.getString(R.string.time_quarterhour);
 		}
 
 		if (numberOfSeconds == 1800)
 		{
-			return "half an hour";
+			return context.getString(R.string.time_halfhour);
 		}
 
 		if (numberOfSeconds == 3600)
 		{
-			return "hour";
+			return context.getString(R.string.time_onehour);
 		}
 
 		if (numberOfSeconds == 4800)
 		{
-			return "1\u00BD hours";
+			return context.getString(R.string.time_oneandhalfhours);
 		}
 
 		if (numberOfSeconds == 9000)
 		{
-			return "2\u00BD hours";
+			return context.getString(R.string.time_twoandhalfhours);
 		}
 
 		// For all other cases, calculate
@@ -162,46 +164,11 @@ public class Utilities
 		minutes = remainingSeconds / 60;
 		seconds = remainingSeconds % 60;
 
-		if (hours == 1)
-		{
-			descriptive = String.valueOf(hours) + " hour";
-		}
-		else if (hours > 1)
-		{
-			descriptive = String.valueOf(hours) + " hours";
-		}
+		// Every 5 hours and 2 minutes
+		// XYZ-5*2*20*
 
-		if (minutes >= 0 && hours > 0)
-		{
-			String joiner = (seconds > 0) ? ", " : " and ";
-			String minuteWord = (minutes == 1) ? " minute" : " minutes";
-			descriptive = descriptive + joiner + String.valueOf(minutes) + minuteWord;
-			// 4 hours, 2 minutes
-			// 1 hours, 0 minutes
-			// 2 hours, 0 minutes
-			// 3 hours and 35 minutes
-			// 1 hour and 8 minutes
-		}
-		else if (minutes > 0 && hours == 0)
-		{
-			String minuteWord = (minutes == 1) ? " minute" : " minutes";
-			descriptive = String.valueOf(minutes) + minuteWord;
-			// 45 minutes
-		}
-
-		if ((hours > 0 || minutes > 0) && seconds > 0)
-		{
-			String secondsWord = (seconds == 1) ? " second" : " seconds";
-
-			descriptive = descriptive + " and " + String.valueOf(seconds) + secondsWord;
-			// 2 hours, 0 minutes and 5 seconds
-			// 1 hour, 12 minutes and 9 seconds
-		}
-		else if (hours == 0 && minutes == 0 && seconds > 0)
-		{
-			String secondsWord = (seconds == 1) ? " second" : " second";
-			descriptive = String.valueOf(seconds) + secondsWord;
-		}
+		descriptive = context.getString(R.string.time_hms_format, String.valueOf(hours),
+				String.valueOf(minutes), String.valueOf(seconds));
 
 		return descriptive;
 
@@ -214,80 +181,83 @@ public class Utilities
 	 * @param bearingDegrees
 	 * @return
 	 */
-	public static String GetBearingDescription(float bearingDegrees)
+	public static String GetBearingDescription(float bearingDegrees, Context context)
 	{
 
 		String direction;
+		String cardinal;
 
 		if (bearingDegrees > 348.75 || bearingDegrees <= 11.25)
 		{
-			direction = "Roughly North";
+			cardinal = context.getString(R.string.direction_north);
 		}
 		else if (bearingDegrees > 11.25 && bearingDegrees <= 33.75)
 		{
-			direction = "Roughly North-NorthEast";
+			cardinal = context.getString(R.string.direction_northnortheast);
 		}
 		else if (bearingDegrees > 33.75 && bearingDegrees <= 56.25)
 		{
-			direction = "Roughly NorthEast";
+			cardinal = context.getString(R.string.direction_northeast);
 		}
 		else if (bearingDegrees > 56.25 && bearingDegrees <= 78.75)
 		{
-			direction = "Roughly East-NorthEast";
+			cardinal = context.getString(R.string.direction_eastnortheast);
 		}
 		else if (bearingDegrees > 78.75 && bearingDegrees <= 101.25)
 		{
-			direction = "Roughly East";
+			cardinal = context.getString(R.string.direction_east);
 		}
 		else if (bearingDegrees > 101.25 && bearingDegrees <= 123.75)
 		{
-			direction = "Roughly East-SouthEast";
+			cardinal = context.getString(R.string.direction_eastsoutheast);
 		}
 		else if (bearingDegrees > 123.75 && bearingDegrees <= 146.26)
 		{
-			direction = "Roughly SouthEast";
+			cardinal = context.getString(R.string.direction_southeast);
 		}
 		else if (bearingDegrees > 146.25 && bearingDegrees <= 168.75)
 		{
-			direction = "Roughly South-SouthEast";
+			cardinal = context.getString(R.string.direction_southsoutheast);
 		}
 		else if (bearingDegrees > 168.75 && bearingDegrees <= 191.25)
 		{
-			direction = "Roughly South";
+			cardinal = context.getString(R.string.direction_south);
 		}
 		else if (bearingDegrees > 191.25 && bearingDegrees <= 213.75)
 		{
-			direction = "Roughly South-SouthWest";
+			cardinal = context.getString(R.string.direction_southsouthwest);
 		}
 		else if (bearingDegrees > 213.75 && bearingDegrees <= 236.25)
 		{
-			direction = "Roughly SouthWest";
+			cardinal = context.getString(R.string.direction_southwest);
 		}
 		else if (bearingDegrees > 236.25 && bearingDegrees <= 258.75)
 		{
-			direction = "Roughly West-SouthWest";
+			cardinal = context.getString(R.string.direction_westsouthwest);
 		}
 		else if (bearingDegrees > 258.75 && bearingDegrees <= 281.25)
 		{
-			direction = "Roughly West";
+			cardinal = context.getString(R.string.direction_west);
 		}
 		else if (bearingDegrees > 281.25 && bearingDegrees <= 303.75)
 		{
-			direction = "Roughly West-NorthWest";
+			cardinal = context.getString(R.string.direction_westnorthwest);
 		}
 		else if (bearingDegrees > 303.75 && bearingDegrees <= 326.25)
 		{
-			direction = "Roughly NorthWest";
+			cardinal = context.getString(R.string.direction_northwest);
 		}
 		else if (bearingDegrees > 326.25 && bearingDegrees <= 348.75)
 		{
-			direction = "Roughly North-NorthWest";
+			cardinal = context.getString(R.string.direction_northnorthwest);
 		}
 		else
 		{
-			direction = "Unknown";
+			direction = context.getString(R.string.unknown_direction);
+			return direction;
 		}
 
+		direction = context.getString(R.string.direction_roughly, cardinal);
 		return direction;
 
 	}
@@ -448,18 +418,19 @@ public class Utilities
 	public static String GetSeeMyMapRequestUrl(String requestedUrl, String password, String personId)
 	{
 
-		String requestUrl = GetSeeMyMapBaseUrl() + "/requestmap/" + requestedUrl + "/" + password + "/" + personId;
+		String requestUrl = GetSeeMyMapBaseUrl() + "/requestmap/" + requestedUrl + "/" + password + "/"
+				+ personId;
 
 		return requestUrl;
 	}
-	
+
 	public static String GetDeleteFirstPointUrl(String seeMyMapGuid)
 	{
 		String deleteUrl = GetSeeMyMapBaseUrl() + "/clearfirstpoint/" + seeMyMapGuid;
-		
+
 		return deleteUrl;
 	}
-	
+
 	public static String GetDeleteLastPointUrl(String seeMyMapGuid)
 	{
 		String deleteUrl = GetSeeMyMapBaseUrl() + "/clearlastpoint/" + seeMyMapGuid;
@@ -494,7 +465,5 @@ public class Utilities
 	{
 		return false;
 	}
-
-
 
 }

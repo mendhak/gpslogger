@@ -25,50 +25,52 @@
 				android:layout_span="2" />
 		</TableRow>
 		<TableRow android:background="#333333" android:layout_margin="1dip">
-			<TextView android:textStyle="bold" android:text="Latitude:"
+			<TextView android:textStyle="bold" android:text="@string/txt_latitude"
 				android:padding="3dip" />
 			<TextView android:id="@+id/txtLatitude" android:gravity="left"
-				android:padding="3dip" android:textColor="#e8a317" android:textStyle="bold" />
+				android:padding="3dip" android:textColor="#e8a317"
+				android:textStyle="bold" />
 		</TableRow>
 
 		<TableRow android:background="#333333" android:layout_margin="1dip">
-			<TextView android:textStyle="bold" android:text="Longitude:"
+			<TextView android:textStyle="bold" android:text="@string/txt_longitude"
 				android:padding="3dip" />
 			<TextView android:id="@+id/txtLongitude" android:gravity="left"
-				android:padding="3dip" android:textColor="#e8a317" android:textStyle="bold" />
+				android:padding="3dip" android:textColor="#e8a317"
+				android:textStyle="bold" />
 		</TableRow>
 
 		<TableRow android:background="#333333" android:layout_margin="1dip">
 			<TextView android:id="@+id/lblAltitude" android:textStyle="bold"
-				android:text="Altitude:" android:padding="3dip" />
+				android:text="@string/txt_altitude" android:padding="3dip" />
 			<TextView android:id="@+id/txtAltitude" android:gravity="left"
 				android:padding="3dip" />
 		</TableRow>
 
 		<TableRow android:background="#333333" android:layout_margin="1dip">
 			<TextView android:id="@+id/lblSpeed" android:textStyle="bold"
-				android:text="Speed:" android:padding="3dip" />
+				android:text="@string/txt_speed" android:padding="3dip" />
 			<TextView android:id="@+id/txtSpeed" android:gravity="left"
 				android:padding="3dip" />
 		</TableRow>
 
 		<TableRow android:background="#333333" android:layout_margin="1dip">
 			<TextView android:id="@+id/lblDirection" android:textStyle="bold"
-				android:text="Direction:" android:padding="3dip" />
+				android:text="@string/txt_direction" android:padding="3dip" />
 			<TextView android:id="@+id/txtDirection" android:gravity="left"
 				android:padding="3dip" />
 		</TableRow>
 
 		<TableRow android:background="#333333" android:layout_margin="1dip">
 			<TextView android:id="@+id/lblSatellites" android:textStyle="bold"
-				android:text="Satellites:" android:padding="3dip" />
+				android:text="@string/txt_satellites" android:padding="3dip" />
 			<TextView android:id="@+id/txtSatellites" android:gravity="left"
 				android:padding="3dip" />
 		</TableRow>
 
 		<TableRow android:background="#333333" android:layout_margin="1dip">
 			<TextView android:id="@+id/lblAccuracy" android:textStyle="bold"
-				android:text="Accuracy:" android:padding="3dip" />
+				android:text="@string/txt_accuracy" android:padding="3dip" />
 			<TextView android:id="@+id/txtAccuracy" android:gravity="left"
 				android:padding="3dip" />
 		</TableRow>
@@ -86,11 +88,56 @@
 		-->
 		<ToggleButton android:id="@+id/buttonOnOff"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:textOn="Stop logging" android:textOff="Start logging" />
+			android:textOn="@string/btn_stop_logging" android:textOff="@string/btn_start_logging" />
 	</LinearLayout>
 
-	<TextView android:id="@+id/lblSummary" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:textStyle="italic" android:textSize="11dip" />
+	<TableLayout android:id="@+id/TableSummary"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:background="#222222">
+		<TableRow android:layout_width="fill_parent" android:layout_height="fill_parent">
+			<TextView android:id="@+id/lblLoggingTo" android:layout_width="wrap_content"
+				android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
+				android:paddingLeft="8dip" android:text="@string/summary_loggingto"></TextView>
+			<TextView android:id="@+id/txtLoggingTo" android:layout_width="wrap_content"
+				android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
+				android:layout_height="fill_parent" ></TextView>
+
+		</TableRow>
+		<TableRow android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+			<TextView android:id="@+id/lblFrequency" android:layout_width="wrap_content"
+				android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
+				android:paddingLeft="8dip" android:text="@string/summary_freq_every"></TextView>
+			<TextView android:id="@+id/txtFrequency" android:layout_width="wrap_content"
+				android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
+				android:layout_height="fill_parent"></TextView>
+		</TableRow>
+		<TableRow android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+			<TextView android:id="@+id/lblDistance" android:layout_width="wrap_content"
+				android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
+				android:paddingLeft="8dip" android:text="@string/summary_dist"></TextView>
+			<TextView android:id="@+id/txtDistance" android:layout_width="wrap_content"
+				android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
+				android:layout_height="fill_parent"></TextView>
+		</TableRow>
+		<TableRow android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+			<TextView android:id="@+id/lblFileName" android:layout_width="wrap_content"
+				android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
+				android:paddingLeft="8dip" android:text="@string/summary_current_filename"></TextView>
+			<TextView android:id="@+id/txtFileName" android:layout_width="wrap_content"
+				android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
+				android:layout_height="fill_parent"></TextView>
+
+		</TableRow>
+
+
+	</TableLayout>
+
+<!-- 	<TextView android:id="@+id/lblSummary" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:textStyle="italic"
+		android:textSize="11dip" /> -->
 
 
 

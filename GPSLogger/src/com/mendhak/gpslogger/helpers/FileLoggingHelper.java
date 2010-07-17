@@ -16,6 +16,7 @@ import android.util.Log;
 import android.widget.EditText;
 
 import com.mendhak.gpslogger.GpsMainActivity;
+import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.Utilities;
 
 public class FileLoggingHelper
@@ -70,7 +71,7 @@ public class FileLoggingHelper
 		catch (Exception e)
 		{
 			Log.e("Main", "Could not write file " + e.getMessage());
-			mainActivity.SetStatus("Could not write to file. " + e.getMessage());
+			mainActivity.SetStatus(mainActivity.getString(R.string.could_not_write_to_file) + e.getMessage());
 		}
 
 	}
@@ -142,8 +143,8 @@ public class FileLoggingHelper
 		}
 		catch (IOException e)
 		{
-			Log.e("Main", "Could not write file " + e.getMessage());
-			mainActivity.SetStatus("Could not write to file. " + e.getMessage());
+			Log.e("Main", mainActivity.getString(R.string.could_not_write_to_file) + e.getMessage());
+			mainActivity.SetStatus(mainActivity.getString(R.string.could_not_write_to_file) + e.getMessage());
 		}
 
 	}
@@ -244,8 +245,8 @@ public class FileLoggingHelper
 		}
 		catch (IOException e)
 		{
-			Log.e("Main", "Could not write file " + e.getMessage());
-			mainActivity.SetStatus("Could not write to file. " + e.getMessage());
+			Log.e("Main", mainActivity.getString(R.string.could_not_write_to_file) + e.getMessage());
+			mainActivity.SetStatus(mainActivity.getString(R.string.could_not_write_to_file) + e.getMessage());
 		}
 
 	}
@@ -301,23 +302,25 @@ public class FileLoggingHelper
 
 		if (!allowDescription)
 		{
+			
 			Utilities.MsgBox(
-					"Not yet",
-					"You can't add a description until the next point has been logged to a file.",
+					mainActivity.getBaseContext().getString(R.string.not_yet),
+					mainActivity.getString(R.string.cant_add_description_until_next_point),
 					mainActivity);
 			return;
 		}
 
 		AlertDialog.Builder alert = new AlertDialog.Builder(mainActivity);
 
-		alert.setTitle("Add a description");
-		alert.setMessage("Use only letters and numbers");
+		alert.setTitle(R.string.add_description);
+		alert.setMessage(R.string.letters_numbers);
 
 		// Set an EditText view to get user input
 		final EditText input = new EditText(mainActivity);
 		alert.setView(input);
 
-		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+		
+		alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int whichButton)
 			{
@@ -334,7 +337,7 @@ public class FileLoggingHelper
 			}
 
 		});
-		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+		alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int whichButton)
 			{
@@ -387,13 +390,13 @@ public class FileLoggingHelper
 				gpxLock.release();
 				raf.close();
 
-				mainActivity.SetStatus("Description added to point.");
+				mainActivity.SetStatus(R.string.description_added);
 				allowDescription = false;
 
 			}
 			catch (Exception e)
 			{
-				mainActivity.SetStatus("Couldn't write description to GPX file.");
+				mainActivity.SetStatus(R.string.could_not_write_to_file);
 			}
 
 		}
@@ -428,7 +431,7 @@ public class FileLoggingHelper
 			}
 			catch (Exception e)
 			{
-				mainActivity.SetStatus("Couldn't write description to KML file.");
+				mainActivity.SetStatus(R.string.could_not_write_to_file);
 			}
 
 		}

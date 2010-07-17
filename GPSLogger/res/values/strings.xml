@@ -2,4 +2,176 @@
 <resources>
     <string name="app_name">GPSLogger Pro</string>
     <string name="settings_screen_name">GPSLogger Settings</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="could_not_write_to_file">Could not write to file </string>
+    <string name="description_added">Description added to file</string>
+    <string name="not_yet">Not Yet</string>
+    <string name="cant_add_description_until_next_point">You can\'t add a description until the next point has been logged to a file.</string>
+    <string name="add_description">Add a description</string>
+    <string name="letters_numbers">Use only letters and numbers</string>
+    
+    <!-- menu strings -->
+    <string name="menu_settings">Settings</string>
+    <string name="menu_seemymap">SeeMyMap</string>
+    <string name="menu_share_latest">Send new point</string>
+    <string name="menu_send_annotated">Send points since</string>
+    <string name="menu_clear_map">Clear Map</string>
+    <string name="menu_view_in_browser">Show map</string>
+    <string name="menu_seemymap_more">More</string>
+    <string name="menu_annotate">Annotate</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_exit">Exit</string>
+    
+    <!-- main form labels -->
+    <string name="txt_latitude">Latitude:</string>
+    <string name="txt_longitude">Longitude:</string>
+    <string name="txt_altitude">Altitude:</string>
+    <string name="txt_speed">Speed:</string>
+    <string name="txt_direction">Direction:</string>
+    <string name="txt_satellites">Satellites:</string>
+    <string name="txt_accuracy">Accuracy:</string>
+    <string name="btn_start_logging">Start Logging</string>
+    <string name="btn_stop_logging">Stop Logging</string>
+    
+    <string name="button_click_error">Button click error: </string>
+    <string name="gpslogger_still_running">GPSLogger is still running.</string>
+    <string name="toast_gpslogger_stillrunning">GPSLogger is still running. You can exit the application from the menu options.</string>
+    <string name="summary_loggingto">Logging to:</string>
+    <string name="summary_loggingto_screen">screen only</string>
+    <string name="summary_loggingto_both">Both GPX and KML</string>
+    <string name="summary_freq_every">Frequency:</string>
+    <string name="summary_freq_max">maximum</string>
+    <string name="summary_dist">Distance:</string>
+    <string name="summary_dist_regardless">maximum</string>
+    <string name="summary_current_filename">File:</string>
+    <string name="summary_current_filename_format">%s (in your GPSLogger folder)</string>
+
+    <string name="sharing">Sharing</string>
+    <string name="sharing_pro">You can share locations in the Pro version of GPS Logger.</string>
+    <string name="sharing_location_only">Location only</string>
+    <string name="sharing_pick_file">Pick a file to share</string>
+    <string name="sharing_mylocation">My location</string>
+    <string name="sharing_latlong_text">Lat: %s, Long: %s</string>
+    <string name="sharing_via">Share via</string>
+    
+    <!-- general -->
+    <string name="foot">&#160;foot</string>
+    <string name="feet">&#160;feet</string>
+    <string name="meter">&#160;meter</string>
+    <string name="meters">&#160;meters</string>
+    <string name="error">Error</string>
+    <string name="error_connection">Connection Error. Please check your phone settings.</string>
+    <string name="sent">Sent</string>
+    <string name="sent_server">Points sent to server.</string>
+    <string name="sent_location">Location sent to server.</string>
+    <string name="cleared">Cleared</string>
+    <string name="cleared_map">The map has been cleared.</string>
+    <string name="gpsprovider_unavailable">No GPS provider available.</string>
+    <string name="started">Started</string>
+    <string name="providername_using">&#160;&#160;&#160;&#160;(Using %s)</string>
+    <string name="providername_gps">GPS satellites</string>
+    <string name="providername_celltower">cell towers</string>
+    <string name="not_applicable">n/a</string>
+    <string name="meters_per_second">&#160;m/s</string>
+    <string name="feet_per_second">&#160;ft/s</string>
+    <string name="unknown_direction">unknown</string>
+    <string name="deleted">Deleted</string>
+    <string name="point_deleted">Point deleted</string>
+    <string name="sorry">Sorry</string>
+    <string name="success">Yay!</string>
+
+    
+    
+    <string name="direction_roughly">Roughly %s</string>
+    <string name="direction_north">North</string>
+    <string name="direction_northnortheast">North by Northeast</string>
+    <string name="direction_northeast">Northeast</string>
+    <string name="direction_eastnortheast">East by Northeast</string>
+    <string name="direction_east">East</string>
+    <string name="direction_eastsoutheast">East by Southeast</string>
+    <string name="direction_southeast">Southeast</string>
+    <string name="direction_southsoutheast">South by Southeast</string>
+    <string name="direction_south">South</string>
+    <string name="direction_southsouthwest">South by Southwest</string>
+    <string name="direction_southwest">Southwest</string>
+    <string name="direction_westsouthwest">West by Southwest</string>
+    <string name="direction_west">West</string>
+    <string name="direction_westnorthwest">West by Northwest</string>
+    <string name="direction_northwest">Northwest</string>
+    <string name="direction_northnorthwest">North by Northwest</string>
+    
+    <string name="time_onesecond">second</string>
+    <string name="time_halfminute">half a minute</string>
+    <string name="time_oneminute">minute</string>
+    <string name="time_onehour">hour</string>
+    <string name="time_quarterhour">quarter hour</string>
+    <string name="time_halfhour">half an hour</string>
+    <string name="time_oneandhalfhours">1&#189; hours</string>
+    <string name="time_twoandhalfhours">2&#189; hours</string>
+    <string name="time_hms_format">%sh %sm %ss</string>
+    <string name="accuracy_within">within %s %s</string>
+    <string name="error_displaying">Error in displaying location info: %s</string>
+    <string name="degree_symbol">&#176;</string>
+    
+    <!-- seemymap activity -->
+    <string name="lbl_request_url">Your map website:</string>
+    <string name="txt_request_url_hint">pick a name</string>
+    <string name="lbl_seemymapcom">.seemymap.com</string>
+    <string name="lbl_password">Password:</string>
+    <string name="lbl_check_register">Check and Register</string>
+    <string name="lbl_seemymap_summary">Summary goes here</string>
+    <string name="lbl_more_actions">More actions</string>
+    <string name="lbl_delete_first_point">Delete First Point</string>
+    <string name="lbl_delete_last_point">Delete Last Point</string>
+    <string name="name_available">It\'s yours</string>
+    <string name="name_unavailable">That name isn\'t available, try another.</string>
+    <string name="seemymap_currenturl">You\'ve currently registered %s.seemymap.com</string>
+    <string name="seemymap_introduction">Use the textboxes above to register a SeeMyMap URL. You can always change your mind and register another.  Don\'t forget the password, as you\'ll need it if you want to retrieve your URL some day.</string>
+    
+    <!-- Settings activity -->
+    <string name="settings_in_pro_version">Available in GPSLogger Pro</string>
+    <string name="settings_distance_in_feet">Distance in feet</string>
+    <string name="settings_enter_feet">Enter feet(max 9999)</string>
+    <string name="settings_distance_in_meters">Distance in meters</string>
+    <string name="settings_enter_meters">Enter meters(max 9999)</string>
+    <string name="settings_converting_title">Converting...</string>
+    <string name="settings_converting_description">Converting minimum distance units. Values above 9999 are reset to 9999. The settings screen will now reload.</string>
+    
+    <!-- Settings -->
+    <string name="pref_logging_title">Logging details</string>
+    <string name="log_gpx_title">Log to GPX</string>
+    <string name="log_gpx_summary">Creates a GPX file in the GPSLogger folder on the SD card.</string>
+    <string name="log_kml_title">Log to KML</string>
+    <string name="log_kml_summary">Creates a KML file in the GPSLogger folder on the SD card.</string>
+    <string name="satellite_time_title">Use satellite time</string>
+    <string name="satellite_time_summary">Use satellite time instead of local phone time, it\'s more accurate.</string>
+    <string name="new_file_creation_title">New file creation</string>
+    <string name="new_file_creation_summary">Whether to create a new file once a day or each time you start.</string>
+    <string name="new_file_creation_onceaday">Once a day</string>
+    <string name="new_file_creation_everystart">Every time I start</string>
+    
+    <string name="pref_performance_title">Performance</string>
+    <string name="prefer_celltower_title">Prefer celltowers</string>
+    <string name="prefer_celltower_summary">Uses celltowers rather than satellites. Less accurate, but saves more battery.</string>
+    <string name="time_before_logging_title">Time before logging</string>
+    <string name="time_before_logging_summary">Use 0 for maximum frequency, but slower is better for battery life.</string>
+    <string name="time_before_logging_dialog_title">Time in seconds</string>
+    <string name="time_before_logging_hint">Enter seconds (max 9999)</string>
+    <string name="distance_before_logging_title">Distance before logging</string>
+    <string name="distance_before_logging_summary">Use 0 for maximum frequency, but a higher number is better for battery life.</string>
+    
+    <string name="pref_extras_title">Extras</string>
+    <string name="useimperial_title">Use Imperial units</string>
+    <string name="useimperial_summary">Use feet, miles and pints, none of that newfangled metric stuff.</string>
+    <string name="show_notification_title">Show Notification</string>
+    <string name="show_notification_summary">Displays a reminder along with coordinates in the notification bar.</string>
+    
+    <string name="seemymap_setup_title">Your SeeMyMap.com</string>
+    <string name="seemymap_setup_summary">Set up your seemymap.com website</string>
+    <string name="enabledisablegps_title">Enable/Disable GPS</string>
+    <string name="enabledisablegps_summary">Go to the phone settings to enable or disable the providers.</string>
+    
+    
+    
 </resources>

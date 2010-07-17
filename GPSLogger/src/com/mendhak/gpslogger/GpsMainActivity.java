@@ -20,6 +20,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.Signature;
@@ -164,7 +165,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 		catch (Exception ex)
 		{
-			SetStatus("Button click error: " + ex.getMessage());
+			SetStatus(getString(R.string.button_click_error) + ex.getMessage());
 		}
 
 	}
@@ -230,13 +231,14 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		NumberFormat nf = new DecimalFormat("###.######");
 
-		String contentText = "GPSLogger is still running.";
+		String contentText = getString(R.string.gpslogger_still_running);
 		if (currentLatitude != 0 && currentLongitude != 0)
 		{
 			contentText = nf.format(currentLatitude) + "," + nf.format(currentLongitude);
 		}
 
-		nfc.setLatestEventInfo(getBaseContext(), "GPSLogger is running", contentText, pending);
+		nfc.setLatestEventInfo(getBaseContext(), getString(R.string.gpslogger_still_running),
+				contentText, pending);
 
 		gpsNotifyManager.notify(NOTIFICATION_ID, nfc);
 		notificationVisible = true;
@@ -310,6 +312,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 		catch (Exception ex)
 		{
+			String x = ex.getMessage();
+			String b = x;
 			/* Do nothing, displaying a summary should not prevent logging. */
 		}
 	}
@@ -321,30 +325,39 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	private void ShowPreferencesSummary()
 	{
 
-		TextView lblSummary = (TextView) findViewById(R.id.lblSummary);
+		//TextView lblSummary = (TextView) findViewById(R.id.lblSummary);
+		TextView txtLoggingTo = (TextView)findViewById(R.id.txtLoggingTo);
+		TextView txtFrequency = (TextView)findViewById(R.id.txtFrequency);
+		TextView txtDistance = (TextView)findViewById(R.id.txtDistance);
+		TextView txtFilename = (TextView)findViewById(R.id.txtFileName);
+		
 		String summarySentence = "";
+		String loggingTo = "";
 		if (!logToKml && !logToGpx)
 		{
-			summarySentence = "Logging only to screen,";
+			txtLoggingTo.setText(R.string.summary_loggingto_screen);
+			
 		}
 		else if (logToGpx && logToKml)
 		{
-			summarySentence = "Logging to both GPX and KML,";
+			txtLoggingTo.setText(R.string.summary_loggingto_both);
 		}
 		else
 		{
-			summarySentence = "Logging to " + (logToGpx ? "GPX," : "KML,");
+			txtLoggingTo.setText((logToGpx ? "GPX" : "KML"));
+			
 		}
 
 		if (minimumSeconds > 0)
 		{
-			String descriptiveTime = Utilities.GetDescriptiveTimeString(minimumSeconds);
+			String descriptiveTime = Utilities.GetDescriptiveTimeString(minimumSeconds, getBaseContext());
 
-			summarySentence = summarySentence + " every " + descriptiveTime;
+			txtFrequency.setText(descriptiveTime);
 		}
 		else
 		{
-			summarySentence = summarySentence + " as frequently as possible";
+			txtFrequency.setText(R.string.summary_freq_max);
+			
 		}
 
 		if (minimumDistance > 0)
@@ -353,33 +366,27 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			if (useImperial)
 			{
 				int minimumDistanceInFeet = Utilities.MetersToFeet(minimumDistance);
-				summarySentence = summarySentence
-						+ " and roughly every "
-						+ ((minimumDistanceInFeet == 1)
-							? " foot."
-							: String.valueOf(minimumDistanceInFeet) + " feet.");
+				txtDistance.setText( ((minimumDistanceInFeet == 1)
+							? getString(R.string.foot)
+							: String.valueOf(minimumDistanceInFeet) + getString(R.string.feet)));
 			}
 			else
 			{
-				summarySentence = summarySentence
-						+ " and roughly every "
-						+ ((minimumDistance == 1) ? " meter." : String.valueOf(minimumDistance)
-								+ " meters.");
+				txtDistance.setText( ((minimumDistance == 1)
+							? getString(R.string.meter)
+							: String.valueOf(minimumDistance) + getString(R.string.meters)));
 			}
 
 		}
 		else
 		{
-			summarySentence = summarySentence + ", regardless of distance traveled.";
+			 txtDistance.setText(R.string.summary_dist_regardless);
 		}
 
 		if ((logToGpx || logToKml) && (currentFileName != null && currentFileName.length() > 0))
 		{
-			summarySentence = summarySentence + " The current file name is " + currentFileName
-					+ ", which you will find in the GPSLogger folder on your SD card.";
+			txtFilename.setText(getString(R.string.summary_current_filename_format,currentFileName));
 		}
-
-		lblSummary.setText(summarySentence);
 	}
 
 	/**
@@ -390,8 +397,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		if (keyCode == KeyEvent.KEYCODE_BACK)
 		{
 			moveTaskToBack(true);
-			Toast.makeText(getBaseContext(),
-					"GPSLogger is still running. You can exit the application from the menu options.",
+			Toast.makeText(getBaseContext(), getString(R.string.toast_gpslogger_stillrunning),
 					Toast.LENGTH_LONG).show();
 			return true;
 		}
@@ -476,11 +482,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 	private void ViewInBrowser()
 	{
-		
-		
+
 		seeMyMapHelper.ViewInBrowser();
-		
-		
+
 	}
 
 	/**
@@ -496,12 +500,11 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 			if (!Utilities.Flag())
 			{
-				Utilities.MsgBox("Sharing",
-						"You can share locations in the Pro version of GPS Logger.", this);
+				Utilities.MsgBox(getString(R.string.sharing), getString(R.string.sharing_pro), this);
 				return;
 			}
 
-			final String locationOnly = "Location only";
+			final String locationOnly = getString(R.string.sharing_location_only);
 			final File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
 			if (gpxFolder.exists())
 			{
@@ -512,7 +515,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 				final String[] files = fileList.toArray(new String[0]);
 
 				final Dialog dialog = new Dialog(this);
-				dialog.setTitle("Pick a file to share");
+				dialog.setTitle(R.string.sharing_pick_file);
 				dialog.setContentView(R.layout.filelist);
 				ListView thelist = (ListView) dialog.findViewById(R.id.listViewFiles);
 
@@ -538,11 +541,11 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 							intent.setType("text/plain");
 						}
 
-						intent.putExtra(Intent.EXTRA_SUBJECT, "My location");
+						intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing_mylocation));
 						if (currentLatitude != 0 && currentLongitude != 0)
 						{
-							String bodyText = "Lat:" + String.valueOf(currentLatitude) + ", " + "Long:"
-									+ String.valueOf(currentLongitude);
+							String bodyText = getString(R.string.sharing_latlong_text,
+									String.valueOf(currentLatitude), String.valueOf(currentLongitude));
 							intent.putExtra(Intent.EXTRA_TEXT, bodyText);
 							intent.putExtra("sms_body", bodyText);
 						}
@@ -554,7 +557,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 									chosenFileName)));
 						}
 
-						startActivity(Intent.createChooser(intent, "Share via"));
+						startActivity(Intent.createChooser(intent, getString(R.string.sharing_via)));
 
 					}
 				});
@@ -674,7 +677,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	private void ThereWasAConnectionError()
 	{
-		Utilities.MsgBox("Error", "Connection Error. Please check your phone settings.", this);
+		Utilities.MsgBox(getString(R.string.error), getString(R.string.error_connection), this);
 
 	}
 
@@ -683,7 +686,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	private void PointsSent()
 	{
-		Utilities.MsgBox("Sent", "Points sent to the server", this);
+		Utilities.MsgBox(getString(R.string.sent), getString(R.string.sent_server), this);
 	}
 
 	/**
@@ -691,9 +694,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	private void AddedToMap()
 	{
-
-		Utilities.MsgBox("Sent", "Location sent to server", this);
-
+		Utilities.MsgBox(getString(R.string.sent), getString(R.string.sent_location), this);
 	}
 
 	/**
@@ -701,7 +702,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	private void MapCleared()
 	{
-		Utilities.MsgBox("Cleared", "The map has been cleared", this);
+		Utilities.MsgBox(getString(R.string.cleared), getString(R.string.cleared_map), this);
 	}
 
 	/**
@@ -764,11 +765,11 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		else
 		{
 			isUsingGps = false;
-			SetStatus("No GPS provider available");
+			SetStatus(R.string.gpsprovider_unavailable);
 			return;
 		}
 
-		SetStatus("Started");
+		SetStatus(R.string.started);
 	}
 
 	/**
@@ -853,6 +854,12 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 	}
 
+	public void SetStatus(int stringId)
+	{
+		String s = getString(stringId);
+		SetStatus(s);
+	}
+
 	/**
 	 * Sets the message in the top status label.
 	 * 
@@ -912,14 +919,15 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 			if (providerName.equalsIgnoreCase("gps"))
 			{
-				providerName = "GPS";
+				providerName = getString(R.string.providername_gps);
 			}
 			else
 			{
-				providerName = "cell towers";
+				providerName = getString(R.string.providername_celltower);
 			}
 
-			tvDateTime.setText(new Date().toLocaleString() + "    (Using " + providerName + ")");
+			tvDateTime.setText(new Date().toLocaleString()
+					+ getString(R.string.providername_using, providerName));
 			tvLatitude.setText(String.valueOf(loc.getLatitude()));
 			tvLongitude.setText(String.valueOf(loc.getLongitude()));
 
@@ -930,17 +938,18 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 				if (useImperial)
 				{
-					tvAltitude.setText(String.valueOf(Utilities.MetersToFeet(altitude)) + " feet");
+					tvAltitude.setText(String.valueOf(Utilities.MetersToFeet(altitude))
+							+ getString(R.string.feet));
 				}
 				else
 				{
-					tvAltitude.setText(String.valueOf(altitude) + " meters");
+					tvAltitude.setText(String.valueOf(altitude) + getString(R.string.meters));
 				}
 
 			}
 			else
 			{
-				tvAltitude.setText("n/a");
+				tvAltitude.setText(R.string.not_applicable);
 			}
 
 			if (loc.hasSpeed())
@@ -949,38 +958,39 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 				float speed = loc.getSpeed();
 				if (useImperial)
 				{
-					txtSpeed.setText(String.valueOf(Utilities.MetersToFeet(speed)) + " ft/s");
+					txtSpeed.setText(String.valueOf(Utilities.MetersToFeet(speed))
+							+ getString(R.string.feet_per_second));
 				}
 				else
 				{
-					txtSpeed.setText(String.valueOf(speed) + " m/s");
+					txtSpeed.setText(String.valueOf(speed) + getString(R.string.meters_per_second));
 				}
 
 			}
 			else
 			{
-				txtSpeed.setText("n/a");
+				txtSpeed.setText(R.string.not_applicable);
 			}
 
 			if (loc.hasBearing())
 			{
 
 				float bearingDegrees = loc.getBearing();
-				String direction = "unknown";
+				String direction = getString(R.string.unknown_direction);
 
-				direction = Utilities.GetBearingDescription(bearingDegrees);
+				direction = Utilities.GetBearingDescription(bearingDegrees,getBaseContext());
 
 				txtDirection.setText(direction + "(" + String.valueOf(Math.round(bearingDegrees))
-						+ "\00B0)");
+					+getString(R.string.degree_symbol)	+ ")");
 			}
 			else
 			{
-				txtDirection.setText("n/a");
+				txtDirection.setText(R.string.not_applicable);
 			}
 
 			if (!isUsingGps)
 			{
-				txtSatellites.setText("n/a");
+				txtSatellites.setText(R.string.not_applicable);
 				satellites = 0;
 			}
 
@@ -991,18 +1001,20 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 				if (useImperial)
 				{
-					txtAccuracy.setText("within " + String.valueOf(Utilities.MetersToFeet(accuracy))
-							+ " feet");
+					txtAccuracy.setText(getString(R.string.accuracy_within,
+							String.valueOf(Utilities.MetersToFeet(accuracy)), getString(R.string.feet)));
+
 				}
 				else
 				{
-					txtAccuracy.setText("within " + String.valueOf(accuracy) + " meters");
+					txtAccuracy.setText(getString(R.string.accuracy_within,
+							String.valueOf(accuracy), getString(R.string.meters)));
 				}
 
 			}
 			else
 			{
-				txtAccuracy.setText("n/a");
+				txtAccuracy.setText(R.string.not_applicable);
 			}
 
 			WriteToFile(loc);
@@ -1012,7 +1024,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 		catch (Exception ex)
 		{
-			SetStatus("Error in displaying location info: " + ex.getMessage());
+			SetStatus(getString(R.string.error_displaying,ex.getMessage()));
 		}
 
 	}

@@ -30,7 +30,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 		if (!Utilities.Flag())
 		{
 			Preference seemymapSetup = (Preference) findPreference("seemymap_setup");
-			seemymapSetup.setSummary("Available in the Pro version, coming soon");
+			seemymapSetup.setSummary(R.string.settings_in_pro_version);
 			seemymapSetup.setEnabled(false);
 		}
 
@@ -38,13 +38,13 @@ public class GpsSettingsActivity extends PreferenceActivity
 
 		if (useImperial)
 		{
-			distanceBeforeLogging.setDialogTitle("Distance in feet");
-			distanceBeforeLogging.getEditText().setHint("Enter feet (max 9999)");
+			distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_feet);
+			distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_feet);
 		}
 		else
 		{
-			distanceBeforeLogging.setDialogTitle("Distance in meters");
-			distanceBeforeLogging.getEditText().setHint("Enter meters (max 9999)");
+			distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_meters);
+			distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
 		}
 
 		CheckBoxPreference imperialCheckBox = (CheckBoxPreference) findPreference("useImperial");
@@ -56,8 +56,8 @@ public class GpsSettingsActivity extends PreferenceActivity
 
 				final ProgressDialog pd = ProgressDialog.show(
 						GpsSettingsActivity.this,
-						"Converting...",
-						"Converting minimum distance units. Values above 9999 are reset to 9999. The settings screen will now reload.",
+						getString(R.string.settings_converting_title),
+						getString(R.string.settings_converting_description),
 						true, true);
 
 				new Thread()
@@ -95,8 +95,8 @@ public class GpsSettingsActivity extends PreferenceActivity
 
 						if (useImp == true)
 						{
-							distanceBeforeLogging.setDialogTitle("Distance in feet");
-							distanceBeforeLogging.getEditText().setHint("Enter feet (max 9999)");
+							distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_feet);
+							distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_feet);
 
 							minimumDistance = Utilities.MetersToFeet(minimumDistance);
 
@@ -104,8 +104,8 @@ public class GpsSettingsActivity extends PreferenceActivity
 						else
 						{
 							minimumDistance = Utilities.FeetToMeters(minimumDistance);
-							distanceBeforeLogging.setDialogTitle("Distance in meters");
-							distanceBeforeLogging.getEditText().setHint("Enter meters (max 9999)");
+							distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_meters);
+							distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
 
 						}
 

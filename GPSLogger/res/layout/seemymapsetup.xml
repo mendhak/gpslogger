@@ -9,23 +9,23 @@
 		android:stretchColumns="1" android:background="#000000">
 		<TableRow></TableRow>
 		<TableRow>
-			<TextView android:id="@+id/lblRequestUrl" android:text="Your map website:"
+			<TextView android:id="@+id/lblRequestUrl" android:text="@string/lbl_request_url"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:textSize="14dip" />
 		</TableRow>
 		<TableRow>
 
 			<LinearLayout>
-				<EditText android:id="@+id/txtRequestUrl" android:hint="pick a name"
+				<EditText android:id="@+id/txtRequestUrl" android:hint="@string/txt_request_url_hint"
 					android:textSize="17dip" android:layout_height="wrap_content"
 					android:layout_width="wrap_content" android:width="200dip"
 					android:height="19dip" />
 				<TextView android:textSize="13dip" android:layout_height="wrap_content"
-					android:layout_width="wrap_content" android:text=".seemymap.com" />
+					android:layout_width="wrap_content" android:text="@string/lbl_seemymapcom" />
 			</LinearLayout>
 		</TableRow>
 		<TableRow>
-			<TextView android:id="@+id/lblRequestPassword" android:text="Password:"
+			<TextView android:id="@+id/lblRequestPassword" android:text="@string/lbl_password"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:textSize="14dip" />
 		</TableRow>
@@ -38,7 +38,7 @@
 
 		<TableRow>
 			<Button android:id="@+id/btnCheck" android:layout_width="fill_parent"
-				android:layout_height="wrap_content" android:text="Check and Register" />
+				android:layout_height="wrap_content" android:text="@string/lbl_check_register" />
 		</TableRow>
 
 		<TableRow>
@@ -46,7 +46,7 @@
 		<TableRow>
 			<TextView android:id="@+id/txtSeeMyMapSummary"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:textSize="14dip" android:text="Summary goes here" />
+				android:textSize="14dip" android:text="@string/lbl_seemymap_summary" />
 		</TableRow>
 
 		<TableRow>
@@ -60,17 +60,17 @@
 		<TableRow>
 			<TextView android:id="@+id/txtMoreActions"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:textSize="14dip" android:gravity="center_horizontal" android:text="More actions" />
+			android:textSize="14dip" android:gravity="center_horizontal" android:text="@string/lbl_more_actions" />
 		</TableRow>
 
 		<TableRow>
 				<Button android:id="@+id/btnClearFirstPoint" android:layout_width="fill_parent"
-				android:layout_height="wrap_content" android:text="Delete First Point" />
+				android:layout_height="wrap_content" android:text="@string/lbl_delete_first_point" />
 		</TableRow>
 		
 		<TableRow>
 			<Button android:id="@+id/btnClearLastPoint" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:text="Delete Last Point" />
+			android:layout_height="wrap_content" android:text="@string/lbl_delete_last_point" />
 		</TableRow>
 	</TableLayout>
 

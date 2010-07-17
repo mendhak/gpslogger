@@ -58,7 +58,7 @@ public class SeeMyMapSetupActivity extends Activity implements OnClickListener
 
 	private void PointDeleted()
 	{
-		Utilities.MsgBox("Deleted", "Point deleted", this);
+		Utilities.MsgBox(getString(R.string.deleted), getString(R.string.point_deleted), this);
 	}
 	
 	private void NotAvailable()
@@ -66,12 +66,12 @@ public class SeeMyMapSetupActivity extends Activity implements OnClickListener
 		EditText txtRequestUrl = (EditText) findViewById(R.id.txtRequestUrl);
 		txtRequestUrl.setText("");
 
-		Utilities.MsgBox("Sorry", "That name isn't available, try another.", this);
+		Utilities.MsgBox(getString(R.string.sorry), getString(R.string.name_unavailable), this);
 	}
 
 	private void ThereWasAnError()
 	{
-		Utilities.MsgBox("Can't connect", "Couldn't connect to the server. Try again later.", this);
+		Utilities.MsgBox(getString(R.string.error), getString(R.string.error_connection), this);
 	}
 
 	private void SaveSubdomainInfo()
@@ -79,7 +79,7 @@ public class SeeMyMapSetupActivity extends Activity implements OnClickListener
 		EditText txtRequestUrl = (EditText) findViewById(R.id.txtRequestUrl);
 		EditText txtPassword = (EditText) findViewById(R.id.txtPassword);
 
-		Utilities.MsgBox("Yay!", "It's yours.", this);
+		Utilities.MsgBox(getString(R.string.success), getString(R.string.name_available), this);
 
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		SharedPreferences.Editor editor = prefs.edit();
@@ -142,11 +142,12 @@ public class SeeMyMapSetupActivity extends Activity implements OnClickListener
 		if (seeMyMapUrl.length() > 0)
 		{
 
-			txtSummary.setText("You've currently registered " + seeMyMapUrl + ".seemymap.com");
+			txtSummary.setText(getString(R.string.seemymap_currenturl, seeMyMapUrl));
+			//txtSummary.setText("You've currently registered " + seeMyMapUrl + ".seemymap.com");
 		}
 		else
 		{
-			txtSummary.setText("Use the textboxes above to register a SeeMyMap URL. You can always change your mind and register another.  Don't forget the password, as you'll need it if you want to retrieve your URL some day.");
+			txtSummary.setText(getString(R.string.seemymap_introduction));
 		}
 	}
 

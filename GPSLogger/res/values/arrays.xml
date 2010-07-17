@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string-array name="entries">
-   <item>Once a day</item>
-   <item>Every start</item>
+   <item>@string/new_file_creation_onceaday</item>
+   <item>@string/new_file_creation_everystart</item>
    
 </string-array>
 

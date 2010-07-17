@@ -13,7 +13,6 @@ public class GpsLoggingService extends Service
 	@Override
 	public IBinder onBind(Intent arg0)
 	{
-
 		return null;
 	}
 
