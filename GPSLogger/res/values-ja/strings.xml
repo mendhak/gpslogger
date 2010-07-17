@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+ <resources>
+  <string name="app_name">GPSロガー（全体）</string> 
+  <string name="settings_screen_name">GPSロガーの設定</string> 
+  <string name="ok">OK</string> 
+  <string name="cancel">キャンセル</string> 
+  <string name="could_not_write_to_file">ファイルを書くことは不可能です。</string> 
+  <string name="description_added">ファイルにメモを追加しました。</string> 
+  <string name="not_yet">不可能</string> 
+  <string name="cant_add_description_until_next_point">最初のポイントをログした後でメモの追加は可能です。</string> 
+  <string name="add_description">メモの追加</string> 
+  <string name="letters_numbers">アルファベット A～Z a～zと数字 0～9をお使いください。</string> 
+
+ <!--  menu strings   --> 
+  <string name="menu_settings">設定</string> 
+  <string name="menu_seemymap">SeeMyMapの機能</string> 
+  <string name="menu_share_latest">ポイントのシェア</string> 
+  <string name="menu_send_annotated">以前からのポイントのアップロード</string> 
+  <string name="menu_clear_map">マップのクリア</string> 
+  <string name="menu_view_in_browser">マップの展示</string> 
+  <string name="menu_seemymap_more">より多く</string> 
+  <string name="menu_annotate">メモの追加</string> 
+  <string name="menu_share">シェア</string> 
+  <string name="menu_exit">出口</string> 
+
+ <!--  main form labels   --> 
+  <string name="txt_latitude">緯度:</string> 
+  <string name="txt_longitude">経度:</string> 
+  <string name="txt_altitude">高度:</string> 
+  <string name="txt_speed">速度:</string> 
+  <string name="txt_direction">方向:</string> 
+  <string name="txt_satellites">衛星:</string> 
+  <string name="txt_accuracy">正確さ:</string> 
+  <string name="btn_start_logging">ログ開始</string> 
+  <string name="btn_stop_logging">ログ終了</string> 
+  <string name="button_click_error">ボタンをご押しのエラー:</string> 
+  <string name="gpslogger_still_running">GPSロガーを実行中</string> 
+  <string name="toast_gpslogger_stillrunning">GPSロガーを実行中です。完了する場合、メニューの設定で出口することができます。</string> 
+    <string name="summary_loggingto">Logging to:</string>
+    <string name="summary_loggingto_screen">screen only</string>
+    <string name="summary_loggingto_both">Both GPX and KML</string>
+    <string name="summary_freq_every">Frequency:</string>
+    <string name="summary_freq_max">maximum</string>
+    <string name="summary_dist">Distance:</string>
+    <string name="summary_dist_regardless">maximum</string>
+    <string name="summary_current_filename">File:</string>
+    <string name="summary_current_filename_format">%s (in your GPSLogger folder)</string>
+
+    <string name="sharing">シェアの設定</string>
+    <string name="sharing_pro">GPSロガー（全体）で位置をシェアすることができます。</string>
+    <string name="sharing_location_only">位置のみ</string>
+    <string name="sharing_pick_file">シェアのためにファイルを選んでください。</string>
+    <string name="sharing_mylocation">私の位置</string>
+    <string name="sharing_latlong_text">緯度： %s、 経度：　%s</string>
+    <string name="sharing_via">～でシェア</string>
+    
+    <!-- general -->
+    <string name="foot">&#160;フィート。</string>
+    <string name="feet">&#160;フィート。</string>
+    <string name="meter">&#160;メートル。</string>
+    <string name="meters">&#160;メートル。</string>
+    <string name="error">エラー</string>
+    <string name="error_connection">接続のエラー。携帯電話の設定をチェックしてください。</string>
+    <string name="sent">発信しました。</string>
+    <string name="sent_server">サーバーにポイントを発信しました。</string>
+    <string name="sent_location">サーバーに位置を発信しました。</string>
+    <string name="cleared">クリアしました。</string>
+    <string name="cleared_map">マップはクリアされました。</string>
+    <string name="gpsprovider_unavailable">GPSプロバイダーがありません。</string>
+    <string name="started">開始しました。</string>
+    <string name="providername_using">&#160;&#160;&#160;&#160;（%sを使います）</string>
+    <string name="providername_gps">GPS衛星</string>
+    <string name="providername_celltower">細胞塔</string>
+    <string name="not_applicable">不適用</string>
+    <string name="meters_per_second">&#160;m/s</string>
+    <string name="feet_per_second">&#160;ft/s</string>
+    <string name="unknown_direction">未知</string>
+    <string name="deleted">削除しました。</string>
+    <string name="point_deleted">ポイントを削除しました。</string>
+    <string name="sorry">申し訳ありません。</string>
+    <string name="success">成功</string>    
+    
+    <string name="direction_roughly">約%s</string>
+    <string name="direction_north">北</string>
+    <string name="direction_northnortheast">北北東</string>
+    <string name="direction_northeast">北東</string>
+    <string name="direction_eastnortheast">東北東</string>
+    <string name="direction_east">東</string>
+    <string name="direction_eastsoutheast">東南東</string>
+    <string name="direction_southeast">南東</string>
+    <string name="direction_southsoutheast">南南東</string>
+    <string name="direction_south">南</string>
+    <string name="direction_southsouthwest">南南西</string>
+    <string name="direction_southwest">南西</string>
+    <string name="direction_westsouthwest">西南西</string>
+    <string name="direction_west">西</string>
+    <string name="direction_westnorthwest">西北西</string>
+    <string name="direction_northwest">北西</string>
+    <string name="direction_northnorthwest">北北西</string>
+    
+    <string name="time_onesecond">秒</string>
+    <string name="time_halfminute">半分</string>
+    <string name="time_oneminute">分</string>
+    <string name="time_onehour">時</string>
+    <string name="time_quarterhour">15分</string>
+    <string name="time_halfhour">一時半</string>
+    <string name="time_oneandhalfhours">1&#189; 時間</string>
+    <string name="time_twoandhalfhours">2&#189; 時間</string>
+    <string name="time_hms_format">%s時 %s分 %s秒</string>
+    <string name="accuracy_within">%s %sの限り</string>
+    <string name="error_displaying">位置の情報を表現のエラー： %s</string>
+    <string name="degree_symbol">&#176;</string>
+    
+    <!-- seemymap activity -->
+    <string name="lbl_request_url">お客さんのマップのウェッブサイト：</string>
+    <string name="txt_request_url_hint">名を選んでください。</string>
+    <string name="lbl_seemymapcom">.seemymap.com</string>
+    <string name="lbl_password">パスワード：</string>
+    <string name="lbl_check_register">チェックそして登録</string>
+    <string name="lbl_seemymap_summary">要約はここへ</string>
+    <string name="lbl_more_actions">もっと行動</string>
+    <string name="lbl_delete_first_point">最初のポイントの削除</string>
+    <string name="lbl_delete_last_point">最後のポイントの削除</string>
+    <string name="name_available">ウェブサイトを手に入れている</string>
+    <string name="name_unavailable">That name isn\'t available, try another.</string>
+    <string name="seemymap_currenturl">You\'ve currently registered %s.seemymap.com</string>
+    <string name="seemymap_introduction">Use the textboxes above to register a SeeMyMap URL. You can always change your mind and register another.  Don\'t forget the password, as you\'ll need it if you want to retrieve your URL some day.</string>
+    
+    <!-- Settings activity -->
+    <string name="settings_in_pro_version">Available in GPSLogger Pro</string>
+    <string name="settings_distance_in_feet">Distance in feet</string>
+    <string name="settings_enter_feet">Enter feet(max 9999)</string>
+    <string name="settings_distance_in_meters">Distance in meters</string>
+    <string name="settings_enter_meters">Enter meters(max 9999)</string>
+    <string name="settings_converting_title">Converting...</string>
+    <string name="settings_converting_description">Converting minimum distance units. Values above 9999 are reset to 9999. The settings screen will now reload.</string>
+    
+    <!-- Settings -->
+    <string name="pref_logging_title">Logging details</string>
+    <string name="log_gpx_title">Log to GPX</string>
+    <string name="log_gpx_summary">Creates a GPX file in the GPSLogger folder on the SD card.</string>
+    <string name="log_kml_title">Log to KML</string>
+    <string name="log_kml_summary">Creates a KML file in the GPSLogger folder on the SD card.</string>
+    <string name="satellite_time_title">Use satellite time</string>
+    <string name="satellite_time_summary">Use satellite time instead of local phone time, it\'s more accurate.</string>
+    <string name="new_file_creation_title">New file creation</string>
+    <string name="new_file_creation_summary">Whether to create a new file once a day or each time you start.</string>
+    <string name="new_file_creation_onceaday">Once a day</string>
+    <string name="new_file_creation_everystart">Every time I start</string>
+    
+    <string name="pref_performance_title">Performance</string>
+    <string name="prefer_celltower_title">Prefer celltowers</string>
+    <string name="prefer_celltower_summary">Uses celltowers rather than satellites. Less accurate, but saves more battery.</string>
+    <string name="time_before_logging_title">Time before logging</string>
+    <string name="time_before_logging_summary">Use 0 for maximum frequency, but slower is better for battery life.</string>
+    <string name="time_before_logging_dialog_title">Time in seconds</string>
+    <string name="time_before_logging_hint">Enter seconds (max 9999)</string>
+    <string name="distance_before_logging_title">Distance before logging</string>
+    <string name="distance_before_logging_summary">Use 0 for maximum frequency, but a higher number is better for battery life.</string>
+    
+    <string name="pref_extras_title">Extras</string>
+    <string name="useimperial_title">Use Imperial units</string>
+    <string name="useimperial_summary">Use feet, miles and pints, none of that newfangled metric stuff.</string>
+    <string name="show_notification_title">Show Notification</string>
+    <string name="show_notification_summary">Displays a reminder along with coordinates in the notification bar.</string>
+    
+    <string name="seemymap_setup_title">Your SeeMyMap.com</string>
+    <string name="seemymap_setup_summary">Set up your seemymap.com website</string>
+    <string name="enabledisablegps_title">Enable/Disable GPS</string>
+    <string name="enabledisablegps_summary">Go to the phone settings to enable or disable the providers.</string>
+    
+    
+    
+</resources>
