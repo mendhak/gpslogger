@@ -80,7 +80,7 @@ public class GeneralLocationListener implements LocationListener, GpsStatus.List
 				while (it.hasNext())
 				{
 					count++;
-					GpsSatellite oSat = (GpsSatellite) it.next();
+					//GpsSatellite oSat = (GpsSatellite) it.next();
 
 					// Log.i("Main",
 					// "LocationActivity - onGpsStatusChange: Satellites:"

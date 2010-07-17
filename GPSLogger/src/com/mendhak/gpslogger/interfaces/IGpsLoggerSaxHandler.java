@@ -1,7 +1,6 @@
 package com.mendhak.gpslogger.interfaces;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import org.xml.sax.ContentHandler;
 

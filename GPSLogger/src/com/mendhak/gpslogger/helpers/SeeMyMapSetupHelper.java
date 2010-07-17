@@ -1,7 +1,6 @@
 package com.mendhak.gpslogger.helpers;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.widget.EditText;
 
 import com.mendhak.gpslogger.R;

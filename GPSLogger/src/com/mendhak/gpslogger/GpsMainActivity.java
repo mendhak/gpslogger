@@ -20,11 +20,8 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.Signature;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.location.Location;
 import android.location.LocationManager; //import android.os.AsyncTask;
 import android.net.Uri;
@@ -37,12 +34,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -312,8 +307,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 		catch (Exception ex)
 		{
-			String x = ex.getMessage();
-			String b = x;
 			/* Do nothing, displaying a summary should not prevent logging. */
 		}
 	}
@@ -331,8 +324,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		TextView txtDistance = (TextView)findViewById(R.id.txtDistance);
 		TextView txtFilename = (TextView)findViewById(R.id.txtFileName);
 		
-		String summarySentence = "";
-		String loggingTo = "";
 		if (!logToKml && !logToGpx)
 		{
 			txtLoggingTo.setText(R.string.summary_loggingto_screen);
@@ -525,7 +516,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 				thelist.setOnItemClickListener(new OnItemClickListener()
 				{
 
-					public void onItemClick(AdapterView av, View v, int index, long arg)
+					public void onItemClick(AdapterView<?> av, View v, int index, long arg)
 					{
 						dialog.dismiss();
 						String chosenFileName = files[index];

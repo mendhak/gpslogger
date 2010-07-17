@@ -2,12 +2,10 @@ package com.mendhak.gpslogger.helpers;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;

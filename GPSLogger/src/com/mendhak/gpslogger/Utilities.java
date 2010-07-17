@@ -11,7 +11,6 @@ import java.util.Date;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.text.GetChars;
 
 public class Utilities
 {

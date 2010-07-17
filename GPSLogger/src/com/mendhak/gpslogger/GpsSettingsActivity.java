@@ -119,6 +119,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 						editor.commit();
 
 						handler.post(updateResults);
+						pd.dismiss();
 					};
 				}.start();
 
