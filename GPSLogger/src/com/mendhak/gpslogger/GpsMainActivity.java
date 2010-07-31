@@ -10,7 +10,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
 import com.mendhak.gpslogger.helpers.*;
 import com.mendhak.gpslogger.R;
 import android.app.Activity;
@@ -96,12 +95,16 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	public double currentLatitude;
 	public double currentLongitude;
 	long latestTimeStamp;
+	long autoEmailTimeStamp;
 
 	public boolean addNewTrackSegment = true;
 
 	private NotificationManager gpsNotifyManager;
 	private int NOTIFICATION_ID;
 	static final int DATEPICKER_ID = 0;
+
+	private long autoEmailDelay = 0;
+	private boolean autoEmailEnabled = false;
 
 	// ---------------------------------------------------
 
@@ -122,7 +125,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
 		buttonOnOff.setOnCheckedChangeListener(this);
-		
+
 		Intent i = getIntent();
 		Bundle bundle = i.getExtras();
 
@@ -138,7 +141,75 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 
 		GetPreferences();
+		SetupAutoEmailTimers();
+	}
 
+	Handler autoEmailHandler = new Handler();
+
+	/**
+	 * Sets up the auto email timers based on user preferences.
+	 */
+	private void SetupAutoEmailTimers()
+	{
+		if (autoEmailEnabled && autoEmailDelay > 0)
+		{
+			autoEmailHandler.removeCallbacks(autoEmailTimeTask);
+			autoEmailHandler.postDelayed(autoEmailTimeTask, autoEmailDelay );
+			
+		}
+	}
+
+	/**
+	 * Runnable which can be called from timers, use to auto email and reapply
+	 * timer
+	 */
+	private Runnable autoEmailTimeTask = new Runnable()
+	{
+		public void run()
+		{
+			if (autoEmailEnabled && autoEmailDelay > 0)
+			{
+				AutoEmailLogFile();
+				autoEmailHandler.postDelayed(autoEmailTimeTask, autoEmailDelay );
+			}
+
+		}
+	};
+
+	/**
+	 * Method to be called if user has chosen to auto email log files when he
+	 * stops logging
+	 */
+	private void AutoEmailLogFileOnStop()
+	{
+		// autoEmailDelay 0 means send it when you stop logging.
+		if (autoEmailEnabled && autoEmailDelay == 0)
+		{
+			AutoEmailLogFile();
+		}
+	}
+
+	/**
+	 * Calls the Auto Email Helper which processes the file and sends it.
+	 */
+	private void AutoEmailLogFile()
+	{
+		// Check that auto emailing is enabled, there's a valid location and
+		// file name.
+		if (autoEmailEnabled && currentLatitude != 0 && currentLongitude != 0 && currentFileName != null
+				&& currentFileName.length() > 0)
+		{
+			// Ensure that a point has been logged since the last time we did
+			// this.
+			// And that we're writing to a file.
+			if (latestTimeStamp > autoEmailTimeStamp && (logToGpx || logToKml))
+			{
+				Utilities.LogInfo("Auto Email Log File");
+				AutoEmailHelper aeh = new AutoEmailHelper(GpsMainActivity.this);
+				aeh.SendLogFile(currentFileName, Utilities.GetPersonId(getBaseContext()));
+				autoEmailTimeStamp = System.currentTimeMillis();
+			}
+		}
 	}
 
 	/**
@@ -170,6 +241,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			{
 				Utilities.LogInfo("Stopping logging");
 				isStarted = false;
+				AutoEmailLogFileOnStop();
 				RemoveNotification();
 				StopGpsManager();
 			}
@@ -177,7 +249,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 		catch (Exception ex)
 		{
-			Utilities.LogError("onCheckedChanged",ex);
+			Utilities.LogError("onCheckedChanged", ex);
 			SetStatus(getString(R.string.button_click_error) + ex.getMessage());
 		}
 
@@ -189,6 +261,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	private void Notify()
 	{
 
+		Utilities.LogInfo("Notification");
 		if (showInNotificationBar)
 		{
 			gpsNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -206,10 +279,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	private void RemoveNotification()
 	{
-
+		Utilities.LogInfo("Remove notification");
 		try
 		{
-
 			if (notificationVisible)
 			{
 				gpsNotifyManager.cancelAll();
@@ -217,15 +289,12 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 		catch (Exception ex)
 		{
-
-			Utilities.LogError("RemoveNotification",ex);
-
+			Utilities.LogError("RemoveNotification", ex);
 		}
 		finally
 		{
 			notificationVisible = false;
 		}
-
 	}
 
 	/**
@@ -233,7 +302,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	private void ShowNotification()
 	{
-
 		// What happens when the notification item is clicked
 		Intent contentIntent = new Intent(this, GpsMainActivity.class);
 
@@ -256,7 +324,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		gpsNotifyManager.notify(NOTIFICATION_ID, nfc);
 		notificationVisible = true;
-
 	}
 
 	/**
@@ -264,7 +331,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	public void GetPreferences()
 	{
-
+		Utilities.LogInfo("Getting preferences");
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
 		useImperial = prefs.getBoolean("useImperial", false);
@@ -319,6 +386,14 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		seeMyMapGuid = prefs.getString("seemymap_GUID", "");
 
 		useImperial = prefs.getBoolean("useImperial", false);
+
+		autoEmailEnabled = prefs.getBoolean("autoemail_enabled", false);
+		int newAutoEmailDelay =Integer.valueOf(prefs.getString("autoemail_frequency", "0")); 
+		if(autoEmailDelay != newAutoEmailDelay)
+		{
+			autoEmailDelay = newAutoEmailDelay * 3600000;
+			SetupAutoEmailTimers();
+		}
 
 		try
 		{
@@ -405,7 +480,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
 		Utilities.LogInfo("KeyDown - " + String.valueOf(keyCode));
-		
+
 		if (keyCode == KeyEvent.KEYCODE_BACK)
 		{
 			moveTaskToBack(true);
@@ -440,10 +515,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
 
-		
-		
 		int itemId = item.getItemId();
-		Utilities.LogInfo("Option item selected - " + String.valueOf(item.getTitle()) );
+		Utilities.LogInfo("Option item selected - " + String.valueOf(item.getTitle()));
 
 		switch (itemId)
 		{
@@ -481,18 +554,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 				break;
 		}
 		return false;
-
-		// Intent sendIntent = new Intent(Intent.ACTION_SEND);
-		// sendIntent.putExtra(Intent.EXTRA_TEXT, "email text");
-		// sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-		// sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new
-		// File
-		// ("file:///sdcard/GPSLogger/20100317")));
-		// sendIntent.setType("application/gpx+xml");
-		// startActivity(Intent.createChooser(sendIntent, "Title:"));
-		// return false;
-		// }
-
 	}
 
 	private void ViewInBrowser()
@@ -586,7 +647,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 		catch (Exception ex)
 		{
-			Utilities.LogError("Share",ex);
+			Utilities.LogError("Share", ex);
 		}
 
 	}
@@ -643,6 +704,22 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		fileHelper.AddNoteToLastPoint(desc);
 	}
 
+	public final Runnable updateResultsEmailSendError = new Runnable()
+	{
+		public void run()
+		{
+			AutoEmailTooManySentError();
+		}
+	};
+
+	public final Runnable updateResultsBadGPX = new Runnable()
+	{
+		public void run()
+		{
+			AutoEmailBadGPXError();
+		}
+	};
+
 	/**
 	 * Update the UI: There was a connection error
 	 */
@@ -686,6 +763,20 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			PointsSent();
 		}
 	};
+
+	private void AutoEmailBadGPXError()
+	{
+		Utilities.LogWarning("Could not send email, invalid GPS data.");
+		// Utilities.MsgBox(getString(R.string.error),
+		// "GPS data sent is invalid.", this);
+	}
+
+	private void AutoEmailTooManySentError()
+	{
+		Utilities.LogWarning("Could not send email, user has exceeded the daily limit.");
+		// Utilities.MsgBox(getString(R.string.error),
+		// "You have sent too many emails today", this);
+	}
 
 	/**
 	 * MessageBox: There was a connection error.
@@ -749,6 +840,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	public void StartGpsManager()
 	{
 
+		Utilities.LogInfo("Starting GPS Manager");
+		
 		GetPreferences();
 
 		gpsLocationListener = new GeneralLocationListener(this);
@@ -761,6 +854,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		if (gpsEnabled && !preferCellTower)
 		{
+			Utilities.LogInfo("Requesting GPS location updates");
 			// gps satellite based
 			gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
 					minimumSeconds * 1000, minimumDistance, gpsLocationListener);
@@ -771,6 +865,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 		else if (towerEnabled)
 		{
+			Utilities.LogInfo("Requesting tower location updates");
 			isUsingGps = false;
 			// Cell tower and wifi based
 			towerLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
@@ -779,6 +874,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 		else
 		{
+			Utilities.LogInfo("No provider available");
 			isUsingGps = false;
 			SetStatus(R.string.gpsprovider_unavailable);
 			return;
@@ -804,6 +900,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	public void StopGpsManager()
 	{
+		Utilities.LogInfo("Stopping GPS managers");
 
 		if (towerLocationListener != null)
 		{
@@ -816,7 +913,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			gpsLocationManager.removeGpsStatusListener(gpsLocationListener);
 		}
 
-		SetStatus("Stopped");
+		SetStatus(getString(R.string.stopped));
 	}
 
 	/**

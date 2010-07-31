@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string-array name="entries">
+<string-array name="filecreation_entries">
    <item>@string/new_file_creation_onceaday</item>
    <item>@string/new_file_creation_everystart</item>
    
 </string-array>
 
-<string-array name="values">
+<string-array name="filecreation_values">
    <item>onceaday</item>
    <item>everystart</item>
+</string-array>
 
+<string-array name="autosend_frequencies">
+	<item>@string/autoemail_frequency_whenistop</item>
+	<item>@string/autoemail_frequency_24</item>
+	<item>@string/autoemail_frequency_12</item>
+	<item>@string/autoemail_frequency_8</item>
+</string-array>
+
+<string-array name="autosend_values">
+	<item>0</item>
+	<item>24</item>
+	<item>12</item>
+	<item>8</item>
 </string-array>
 
 </resources> 

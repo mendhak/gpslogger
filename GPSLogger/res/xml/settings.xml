@@ -2,8 +2,10 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	android:key="gpslogger_preferences">
 	<PreferenceCategory android:title="@string/pref_logging_title">
+
 		<CheckBoxPreference android:key="log_gpx"
 			android:title="@string/log_gpx_title" android:summary="@string/log_gpx_summary" />
+
 		<CheckBoxPreference android:key="log_kml"
 			android:summary="@string/log_kml_summary" android:title="@string/log_kml_title" />
 
@@ -12,8 +14,8 @@
 			android:defaultValue="false" />
 		<ListPreference android:key="new_file_creation"
 			android:title="@string/new_file_creation_title" android:summary="@string/new_file_creation_summary"
-			android:entries="@array/entries" android:defaultValue="onceaday"
-			android:entryValues="@array/values" />
+			android:entries="@array/filecreation_entries" android:defaultValue="onceaday"
+			android:entryValues="@array/filecreation_values" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/pref_performance_title">
 		<CheckBoxPreference android:key="prefer_celltower"
@@ -33,22 +35,27 @@
 
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/pref_extras_title">
-		<CheckBoxPreference android:title="@string/useimperial_title"
-			android:summary="@string/useimperial_summary" android:key="useImperial" />
+
 		<CheckBoxPreference android:key="show_notification"
 			android:summary="@string/show_notification_summary" android:title="@string/show_notification_title"
 			android:defaultValue="true" />
+		<Preference android:title="@string/autoemail_title"
+			android:summary="@string/autoemail_summary" android:key="autoemail_setup">
+			<intent android:action="com.mendhak.gpslogger.AUTOEMAIL_SETUP" />
+		</Preference>
 		<Preference android:title="@string/seemymap_setup_title"
 			android:summary="@string/seemymap_setup_summary" android:key="seemymap_setup">
 			<intent android:action="com.mendhak.gpslogger.SEEMYMAP_SETUP" />
-
 		</Preference>
-
 		<CheckBoxPreference android:title="@string/startonbootup_title"
 			android:summary="@string/startonbootup_summary" android:key="startonbootup" />
-
+		<CheckBoxPreference android:title="@string/useimperial_title"
+			android:summary="@string/useimperial_summary" android:key="useImperial" />
 		<Preference android:title="@string/enabledisablegps_title"
 			android:summary="@string/enabledisablegps_summary" android:key="enableDisableGps"
 			android:defaultValue="false" />
+
+
 	</PreferenceCategory>
+
 </PreferenceScreen>

@@ -26,7 +26,7 @@ public class SeeMyMapSetupHelper implements ISeeMyMapSetupHelper
 	{
 
 		String personId = setupActivity.personId;
-		
+
 		EditText txtRequestUrl = (EditText) setupActivity.findViewById(R.id.txtRequestUrl);
 		final String requestedUrl = txtRequestUrl.getText().toString();
 
@@ -35,19 +35,18 @@ public class SeeMyMapSetupHelper implements ISeeMyMapSetupHelper
 
 		if (Utilities.IsValidUrlAndPassword(requestedUrl, password))
 		{
-			pd = ProgressDialog.show(setupActivity, "Checking...", "Checking availability of "
-					+ requestedUrl + ".seemymap.com", true, true);
+			pd = ProgressDialog.show(setupActivity, setupActivity.getString(R.string.seemymap_checking),
+					setupActivity.getString(R.string.seemymap_checking_website, requestedUrl), true,
+					true);
 
 			Thread t = new Thread(new RequestUrlHandler(requestedUrl, password, personId, this));
 			t.start();
 		}
 		else
 		{
-			Utilities.MsgBox("Cat got your keyboard?",
-					"Please limit the website name and password to numbers and letters, nothing else.",
-					setupActivity);
+			Utilities.MsgBox(setupActivity.getString(R.string.seemymap_mistyped),
+					setupActivity.getString(R.string.seemymap_limit_website), setupActivity);
 		}
-
 	}
 
 	public void OnUrlRequested(boolean connectionSuccess, String guid)
@@ -88,7 +87,8 @@ class RequestUrlHandler implements Runnable
 	String password;
 	String personId;
 
-	public RequestUrlHandler(String requestedUrl, String password, String personId, ISeeMyMapSetupHelper events)
+	public RequestUrlHandler(String requestedUrl, String password, String personId,
+			ISeeMyMapSetupHelper events)
 	{
 		this.events = events;
 		this.requestedUrl = requestedUrl;
@@ -105,7 +105,8 @@ class RequestUrlHandler implements Runnable
 
 		try
 		{
-			getMapResponse = Utilities.GetUrl(Utilities.GetSeeMyMapRequestUrl(requestedUrl, password, personId));
+			getMapResponse = Utilities.GetUrl(Utilities.GetSeeMyMapRequestUrl(requestedUrl, password,
+					personId));
 			success = true;
 		}
 		catch (Exception e)
@@ -115,7 +116,7 @@ class RequestUrlHandler implements Runnable
 
 		if (getMapResponse != null && getMapResponse.length() > 0)
 		{
-			if(getMapResponse.indexOf("/>") > 0)
+			if (getMapResponse.indexOf("/>") > 0)
 			{
 				success = true;
 				guid = "";
@@ -124,9 +125,9 @@ class RequestUrlHandler implements Runnable
 			{
 				success = true;
 				guid = getMapResponse.substring(getMapResponse.indexOf('>') + 1,
-						getMapResponse.lastIndexOf('<'));	
+						getMapResponse.lastIndexOf('<'));
 			}
-			
+
 		}
 
 		events.OnUrlRequested(success, guid);

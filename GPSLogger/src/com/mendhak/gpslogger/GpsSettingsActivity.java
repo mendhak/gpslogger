@@ -32,6 +32,10 @@ public class GpsSettingsActivity extends PreferenceActivity
 			Preference seemymapSetup = (Preference) findPreference("seemymap_setup");
 			seemymapSetup.setSummary(R.string.settings_in_pro_version);
 			seemymapSetup.setEnabled(false);
+			
+			Preference autoEmailSetup = (Preference) findPreference("autoemail_setup");
+			autoEmailSetup.setSummary(R.string.settings_in_pro_version);
+			autoEmailSetup.setEnabled(false);
 		}
 
 		final EditTextPreference distanceBeforeLogging = (EditTextPreference) findPreference("distance_before_logging");

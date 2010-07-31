@@ -1,62 +1,87 @@
 package com.mendhak.gpslogger;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
+
+import com.mendhak.gpslogger.helpers.Base64;
+import com.mendhak.gpslogger.interfaces.IMessageBoxCallback;
+import com.mendhak.gpslogger.R;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class Utilities
 {
 
-	
+	private static final int LOGLEVEL = 2;
+
 	public static void LogInfo(String message)
 	{
-		Log.i("GPSLogger",message);
+		if (LOGLEVEL >= 3)
+		{
+			Log.i("GPSLogger", message);
+		}
+
 	}
-	
+
 	public static void LogError(String methodName, Exception ex)
 	{
 		try
 		{
 			LogError(methodName + ":" + ex.getMessage());
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			/**/
 		}
 	}
-	
+
 	private static void LogError(String message)
 	{
-		Log.e("GPSLogger",message);
-		
+		Log.e("GPSLogger", message);
+
 	}
-	
+
 	public static void LogDebug(String message)
 	{
-		Log.d("GPSLogger",message);
+		if (LOGLEVEL >= 4)
+		{
+			Log.d("GPSLogger", message);
+		}
 	}
-	
+
 	public static void LogWarning(String message)
 	{
-		Log.w("GPSLogger", message);
+		if (LOGLEVEL >= 2)
+		{
+			Log.w("GPSLogger", message);
+		}
 	}
-	
+
 	public static void LogVerbose(String message)
 	{
-		Log.v("GPSLogger", message);
+		if (LOGLEVEL >= 5)
+		{
+			Log.v("GPSLogger", message);
+		}
 	}
-	
-	
-	
+
 	/**
 	 * Displays a message box to the user with an OK button.
 	 * 
@@ -68,7 +93,24 @@ public class Utilities
 	 */
 	public static void MsgBox(String title, String message, Context className)
 	{
+		MsgBox(title, message, className, null);
+	}
 
+	/**
+	 * Displays a message box to the user with an OK button.
+	 * 
+	 * @param title
+	 * @param message
+	 * @param className
+	 *            The calling class, such as GpsMainActivity.this or
+	 *            mainActivity.
+	 * @param callback
+	 *            An object which implements IHasACallBack so that the click
+	 *            event can call the callback method.
+	 */
+	public static void MsgBox(String title, String message, Context className,
+			final IMessageBoxCallback msgCallback)
+	{
 		AlertDialog alertDialog = new AlertDialog.Builder(className).create();
 		alertDialog.setTitle(title);
 		alertDialog.setMessage(message);
@@ -76,7 +118,10 @@ public class Utilities
 		{
 			public void onClick(DialogInterface dialog, int which)
 			{
-				return;
+				if (msgCallback != null)
+				{
+					msgCallback.MessageBoxResult(which);
+				}
 			}
 		});
 		alertDialog.show();
@@ -123,7 +168,7 @@ public class Utilities
 	 * @param s
 	 * @return
 	 */
-	static String EncodeHTML(String s)
+	public static String EncodeHTML(String s)
 	{
 		StringBuffer out = new StringBuffer();
 		for (int i = 0; i < s.length(); i++)
@@ -304,6 +349,114 @@ public class Utilities
 	}
 
 	/**
+	 * Checks if a person ID exists and if it doesn't, creates one and returns
+	 * it.
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public static String GetPersonId(Context context)
+	{
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		String personId = prefs.getString("personId", "");
+
+		if (personId == null || personId == "" || personId.length() == 0)
+		{
+			personId = String.valueOf(UUID.randomUUID());
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.putString("personId", personId);
+			editor.commit();
+		}
+
+		return personId;
+	}
+
+	/**
+	 * Returns the contents of the file in a byte array
+	 * 
+	 * @param file
+	 *            File this method should read
+	 * @return byte[] Returns a byte[] array of the contents of the file
+	 */
+	public static byte[] GetBytesFromFile(File file)
+	{
+
+		InputStream is;
+		try
+		{
+			is = new FileInputStream(file);
+		}
+		catch (FileNotFoundException e)
+		{
+			return null;
+		}
+
+		System.out.println("\nDEBUG: FileInputStream is " + file);
+
+		// Get the size of the file
+		long length = file.length();
+		System.out.println("DEBUG: Length of " + file + " is " + length + "\n");
+
+		/*
+		 * You cannot create an array using a long type. It needs to be an int
+		 * type. Before converting to an int type, check to ensure that file is
+		 * not larger than Integer.MAX_VALUE;
+		 */
+		if (length > Integer.MAX_VALUE)
+		{
+			System.out.println("File is too large to process");
+			return null;
+		}
+
+		// Create the byte array to hold the data
+		byte[] bytes = new byte[(int) length];
+
+		// Read in the bytes
+		int offset = 0;
+		int numRead = 0;
+		try
+		{
+			while ((offset < bytes.length)
+					&& ((numRead = is.read(bytes, offset, bytes.length - offset)) >= 0))
+			{
+
+				offset += numRead;
+
+			}
+		}
+		catch (IOException e1)
+		{
+			e1.printStackTrace();
+		}
+
+		// Ensure all the bytes have been read in
+		if (offset < bytes.length)
+		{
+			// throw new IOException("Could not completely read file " +
+			// file.getName());
+			return null;
+		}
+
+		try
+		{
+			is.close();
+		}
+		catch (IOException e)
+		{
+
+		}
+		return bytes;
+
+	}
+	
+	public static String GetStringFromByteArray(byte[] content)
+	{
+		return Base64.encodeBytes(content);
+		//return new String(content);
+
+	}
+
+	/**
 	 * Performs a web request on a given URL and returns the response as a
 	 * string.
 	 * 
@@ -366,6 +519,54 @@ public class Utilities
 			connection = null;
 		}
 
+	}
+
+	public static String PostUrl(String url, String body, String soapAction)
+	{
+		StringBuilder sb = new StringBuilder();
+		try
+		{
+			String data = body;
+
+			// Send data
+			URL targetUrl = new URL(url);
+			HttpURLConnection conn = (HttpURLConnection) targetUrl.openConnection();
+			conn.addRequestProperty("SOAPAction", soapAction);
+			conn.addRequestProperty("Content-Type", "text/xml; charset=utf-8");
+			conn.setDoOutput(true);
+
+			OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+			wr.write(data);
+			wr.flush();
+			// Get the response
+
+			InputStream iStream;
+			if (conn.getResponseCode() >= 400)
+			{
+				iStream = conn.getErrorStream();
+			}
+			else
+			{
+				iStream = conn.getInputStream();
+			}
+
+			BufferedReader rd = new BufferedReader(new InputStreamReader(iStream));
+
+			String line;
+			while ((line = rd.readLine()) != null)
+			{
+				sb.append(line);
+			}
+			wr.close();
+			rd.close();
+		}
+		catch (Exception ex)
+		{
+
+			sb.append(ex.getMessage());
+		}
+
+		return sb.toString();
 	}
 
 	/**
@@ -434,6 +635,12 @@ public class Utilities
 		return FeetToMeters((int) f);
 	}
 
+	public static String GetRegisterSettingUrl(String personId, String target)
+	{
+		String regUrl = GetEmailBaseUrl() + "/registersetting/" + personId + "/" + target;
+		return regUrl;
+	}
+
 	public static String GetSeeMyMapAddLocationUrl(String seeMyMapGuid, double currentLatitude,
 			double currentLongitude, String input)
 	{
@@ -484,6 +691,24 @@ public class Utilities
 		return clearUrl;
 	}
 
+	public static boolean IsValidEmailAddress(String email)
+	{
+		if (email == null || email.length() == 0)
+		{
+			return false;
+		}
+
+		email = email.trim().toUpperCase();
+		if (email.matches("[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}"))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	public static boolean IsValidUrlAndPassword(String requestedUrl, String password)
 	{
 
@@ -497,9 +722,15 @@ public class Utilities
 		return false;
 	}
 
+	public static String GetEmailBaseUrl()
+	{
+		return "http://192.168.1.8/";
+	}
+
 	public static String GetSeeMyMapBaseUrl()
 	{
-		return "http://www.example.com";
+		
+		return "http://192.168.1.8/";
 	}
 
 	public static boolean Flag()

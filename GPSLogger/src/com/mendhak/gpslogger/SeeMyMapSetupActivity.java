@@ -1,7 +1,5 @@
 package com.mendhak.gpslogger;
 
-import java.util.UUID;
-
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.helpers.*;
 
@@ -113,15 +111,17 @@ public class SeeMyMapSetupActivity extends Activity implements OnClickListener
 		EditText txtRequestUrl = (EditText) findViewById(R.id.txtRequestUrl);
 		EditText txtPassword = (EditText) findViewById(R.id.txtPassword);
 		
-		personId = prefs.getString("personId","");
+		personId = Utilities.GetPersonId(getBaseContext());
 		
-		if(personId == null || personId == "" || personId.length() == 0)
-		{
-			personId = String.valueOf(UUID.randomUUID());
-			SharedPreferences.Editor editor = prefs.edit();
-			editor.putString("personId", personId);
-			editor.commit();
-		}
+//		personId = prefs.getString("personId","");
+//		
+//		if(personId == null || personId == "" || personId.length() == 0)
+//		{
+//			personId = String.valueOf(UUID.randomUUID());
+//			SharedPreferences.Editor editor = prefs.edit();
+//			editor.putString("personId", personId);
+//			editor.commit();
+//		}
 
 		String seeMyMapUrl = prefs.getString("seemymap_URL", "");
 

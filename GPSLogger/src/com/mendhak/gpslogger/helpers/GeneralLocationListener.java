@@ -3,6 +3,8 @@ package com.mendhak.gpslogger.helpers;
 import java.util.Iterator;
 
 import com.mendhak.gpslogger.GpsMainActivity;
+import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.Utilities;
 
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
@@ -26,6 +28,7 @@ public class GeneralLocationListener implements LocationListener, GpsStatus.List
 	public void onLocationChanged(Location loc)
 	{
 
+		Utilities.LogInfo("Location changed");
 		try
 		{
 			if (loc != null)
@@ -47,39 +50,49 @@ public class GeneralLocationListener implements LocationListener, GpsStatus.List
 
 	public void onProviderDisabled(String provider)
 	{
-
+		Utilities.LogInfo("Provider disabled");
 		mainActivity.RestartGpsManagers();
 	}
 
 	public void onProviderEnabled(String provider)
 	{
 
+		Utilities.LogInfo("Provider enabled");
 		mainActivity.RestartGpsManagers();
 	}
 
 	public void onStatusChanged(String provider, int status, Bundle extras)
 	{
-
+		Utilities.LogInfo("Status changed");
 	}
 
 	public void onGpsStatusChanged(int event)
 	{
 
+		Utilities.LogInfo("GPS Status Changed");
 		switch (event)
 		{
 			case GpsStatus.GPS_EVENT_FIRST_FIX:
-				mainActivity.SetStatus("Fix obtained");
+				Utilities.LogInfo("GPS Event First Fix");
+				mainActivity.SetStatus(mainActivity.getString(R.string.fix_obtained));
 				break;
 
 			case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
 
+				Utilities.LogInfo("GPS Satellite status obtained");
 				GpsStatus status = mainActivity.gpsLocationManager.getGpsStatus(null);
+
+				int maxSatellites = status.getMaxSatellites();
 
 				Iterator<GpsSatellite> it = status.getSatellites().iterator();
 				int count = 0;
-				while (it.hasNext())
+				while (it.hasNext() && count <= maxSatellites)
 				{
-					count++;
+					//GpsSatellite s = it.next();
+//					if (s.usedInFix())
+//					{
+						count++;
+//					}
 					//GpsSatellite oSat = (GpsSatellite) it.next();
 
 					// Log.i("Main",
@@ -91,11 +104,13 @@ public class GeneralLocationListener implements LocationListener, GpsStatus.List
 				break;
 
 			case GpsStatus.GPS_EVENT_STARTED:
-				mainActivity.SetStatus("GPS Started, waiting for fix");
+				Utilities.LogInfo("GPS started, waiting for fix");
+				mainActivity.SetStatus(mainActivity.getString(R.string.started_waiting));
 				break;
 
 			case GpsStatus.GPS_EVENT_STOPPED:
-				mainActivity.SetStatus("GPS Stopped");
+				Utilities.LogInfo("GPS Stopped");
+				mainActivity.SetStatus(mainActivity.getString(R.string.gps_stopped));
 				break;
 
 		}
