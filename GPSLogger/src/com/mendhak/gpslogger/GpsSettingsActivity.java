@@ -36,6 +36,10 @@ public class GpsSettingsActivity extends PreferenceActivity
 			Preference autoEmailSetup = (Preference) findPreference("autoemail_setup");
 			autoEmailSetup.setSummary(R.string.settings_in_pro_version);
 			autoEmailSetup.setEnabled(false);
+			
+			Preference startOnBootSetup = (Preference) findPreference("startonbootup");
+			startOnBootSetup.setSummary(R.string.settings_in_pro_version);
+			startOnBootSetup.setEnabled(false);
 		}
 
 		final EditTextPreference distanceBeforeLogging = (EditTextPreference) findPreference("distance_before_logging");

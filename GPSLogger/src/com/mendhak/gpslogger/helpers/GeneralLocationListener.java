@@ -86,9 +86,10 @@ public class GeneralLocationListener implements LocationListener, GpsStatus.List
 
 				Iterator<GpsSatellite> it = status.getSatellites().iterator();
 				int count = 0;
+				//while (it.hasNext() && count <= maxSatellites)
 				while (it.hasNext() && count <= maxSatellites)
 				{
-					//GpsSatellite s = it.next();
+					GpsSatellite s = it.next();
 //					if (s.usedInFix())
 //					{
 						count++;

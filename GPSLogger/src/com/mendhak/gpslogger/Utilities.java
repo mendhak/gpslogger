@@ -724,13 +724,13 @@ public class Utilities
 
 	public static String GetEmailBaseUrl()
 	{
-		return "http://192.168.1.8/";
+		return "http://";
 	}
 
 	public static String GetSeeMyMapBaseUrl()
 	{
 		
-		return "http://192.168.1.8/";
+		return "http://";
 	}
 
 	public static boolean Flag()
