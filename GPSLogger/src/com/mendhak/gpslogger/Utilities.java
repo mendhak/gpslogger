@@ -735,7 +735,7 @@ public class Utilities
 
 	public static boolean Flag()
 	{
-		return false;
+		return true;
 	}
 
 }

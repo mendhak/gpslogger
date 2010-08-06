@@ -10,6 +10,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 import com.mendhak.gpslogger.helpers.*;
 import com.mendhak.gpslogger.R;
 import android.app.Activity;
@@ -21,6 +23,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.location.Location;
 import android.location.LocationManager; //import android.os.AsyncTask;
 import android.net.Uri;
@@ -114,6 +117,21 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
+	    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+	    String lang = prefs.getString("locale_override", "");
+
+	    if(!lang.equalsIgnoreCase(""))
+	    {
+	    	Locale locale = new Locale(lang);
+			Locale.setDefault(locale);
+			Configuration config = new Configuration();
+			config.locale = locale;
+			getBaseContext().getResources().updateConfiguration
+				(config, getBaseContext().getResources().getDisplayMetrics());
+	    }
+		
+		
+		
 		super.onCreate(savedInstanceState);
 
 		Utilities.LogInfo("GPSLogger started");
@@ -142,6 +160,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		GetPreferences();
 		SetupAutoEmailTimers();
+		
+
+
 	}
 
 	Handler autoEmailHandler = new Handler();

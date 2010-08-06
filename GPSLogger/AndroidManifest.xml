@@ -7,12 +7,11 @@
 		android:debuggable="false">
 		<activity android:name="com.mendhak.gpslogger.GpsMainActivity"
 			android:label="@string/app_name" android:screenOrientation="portrait"
-			android:launchMode="singleTask">
+			android:launchMode="singleTask" android:configChanges="locale">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
-
 		</activity>
 
 		<activity android:name="com.mendhak.gpslogger.GpsSettingsActivity"
@@ -21,19 +20,20 @@
 		</activity>
 
 		<activity android:name="com.mendhak.gpslogger.SeeMyMapSetupActivity"
-			android:label="@string/seemymap_setup_title" android:screenOrientation="portrait">
+			android:label="@string/seemymap_setup_title"
+			android:screenOrientation="portrait">
 			<intent-filter>
 				<category android:name="android.intent.category.DEFAULT" />
 				<action android:name="com.mendhak.gpslogger.SEEMYMAP_SETUP" />
 			</intent-filter>
 		</activity>
-		
-	
+
+
 		<activity android:name="com.mendhak.gpslogger.AutoEmailActivity"
-		android:label="@string/autoemail_title" android:screenOrientation="portrait">
+			android:label="@string/autoemail_title" android:screenOrientation="portrait">
 			<intent-filter>
-				<category android:name="android.intent.category.DEFAULT"/>
-				<action android:name="com.mendhak.gpslogger.AUTOEMAIL_SETUP"/>
+				<category android:name="android.intent.category.DEFAULT" />
+				<action android:name="com.mendhak.gpslogger.AUTOEMAIL_SETUP" />
 			</intent-filter>
 		</activity>
 
@@ -50,13 +50,16 @@
 
 
 	</application>
-	<uses-sdk android:minSdkVersion="3" />
+	<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="4" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-	<uses-permission android:name="android.permission.INTERNET" /> 
+	<uses-permission android:name="android.permission.INTERNET" />
 
-	
+		<supports-screens android:smallScreens="true"
+			android:normalScreens="true" android:largeScreens="true"
+			android:anyDensity="true" />
 
 </manifest> 
+

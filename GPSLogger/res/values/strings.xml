@@ -207,4 +207,7 @@
     <string name="gps_stopped">GPS stopped</string>
     <string name="stopped">Stopped</string>
     
+    <string name="language">Language</string>
+    <string name="language_summary">You will need to restart the application</string>
+    
 </resources>

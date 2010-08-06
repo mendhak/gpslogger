@@ -1,8 +1,12 @@
 package com.mendhak.gpslogger;
 
+import java.util.Locale;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
@@ -135,6 +139,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 			}
 
 		});
+
 
 		Preference enableDisablePref = (Preference) findPreference("enableDisableGps");
 
