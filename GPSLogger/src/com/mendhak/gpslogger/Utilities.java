@@ -729,13 +729,12 @@ public class Utilities
 
 	public static String GetSeeMyMapBaseUrl()
 	{
-		
 		return "http://";
 	}
 
 	public static boolean Flag()
 	{
-		return true;
+		return false;
 	}
 
 }

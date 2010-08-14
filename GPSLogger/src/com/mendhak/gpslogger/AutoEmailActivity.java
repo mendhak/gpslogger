@@ -1,5 +1,7 @@
 package com.mendhak.gpslogger;
 
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,7 +12,9 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.view.KeyEvent;
+import android.widget.TimePicker;
 
 import com.mendhak.gpslogger.helpers.AutoEmailSetupHelper;
 import com.mendhak.gpslogger.interfaces.IMessageBoxCallback;
@@ -22,6 +26,7 @@ public class AutoEmailActivity extends PreferenceActivity implements OnPreferenc
 
 	String initialEmailAddress;
 	public final Handler handler = new Handler();
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -37,6 +42,8 @@ public class AutoEmailActivity extends PreferenceActivity implements OnPreferenc
 		EditTextPreference txtTarget = (EditTextPreference) findPreference("autoemail_target");
 		initialEmailAddress = txtTarget.getText();
 	}
+	
+	
 
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
@@ -108,7 +115,7 @@ public class AutoEmailActivity extends PreferenceActivity implements OnPreferenc
 		EditTextPreference txtTarget = (EditTextPreference) findPreference("autoemail_target");
 		txtTarget.setEnabled(enabled);
 
-		ListPreference lstFrequency = (ListPreference) findPreference("autoemail_frequency");
+		Preference lstFrequency = (Preference) findPreference("autoemail_frequency");
 		lstFrequency.setEnabled(enabled);
 	}
 

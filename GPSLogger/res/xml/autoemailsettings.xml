@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	android:key="autoemail_preferences">
-	
+
 	<CheckBoxPreference android:key="autoemail_enabled"
-			android:title="@string/autoemail_autosend" android:summary="@string/autoemail_autosend_summary" />
-	
+		android:title="@string/autoemail_autosend" android:summary="@string/autoemail_autosend_summary" />
+
 	<EditTextPreference android:key="autoemail_target"
-			android:title="@string/autoemail_target" 
-			android:summary="@string/autoemail_target_summary"
-			android:dialogTitle="@string/autoemail_target"
-			android:hint="@string/autoemail_sendto" />
-			
+		android:title="@string/autoemail_target" android:summary="@string/autoemail_target_summary"
+		android:dialogTitle="@string/autoemail_target" android:hint="@string/autoemail_sendto" />
+	
 		<ListPreference android:key="autoemail_frequency"
-			android:title="@string/autoemail_frequency" 
-			android:summary="@string/autoemail_frequency_summary"
-			android:entries="@array/autosend_frequencies" android:defaultValue="0"
-			android:entryValues="@array/autosend_values" />
-			
-	</PreferenceScreen>
+		android:title="@string/autoemail_frequency"
+		android:summary="@string/autoemail_frequency_summary"
+		android:entries="@array/autosend_frequencies" android:defaultValue="0"
+		android:entryValues="@array/autosend_values" />
+</PreferenceScreen>

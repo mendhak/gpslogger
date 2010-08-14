@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.mendhak.gpslogger" android:versionCode="7"
-	android:versionName="1.0.7">
+	package="com.mendhak.gpslogger" android:versionCode="8"
+	android:versionName="1.0.8">
 	<application android:icon="@drawable/gpsloggericon2"
 		android:name="@string/app_name" android:label="@string/app_name"
 		android:debuggable="false">
@@ -27,8 +27,6 @@
 				<action android:name="com.mendhak.gpslogger.SEEMYMAP_SETUP" />
 			</intent-filter>
 		</activity>
-
-
 		<activity android:name="com.mendhak.gpslogger.AutoEmailActivity"
 			android:label="@string/autoemail_title" android:screenOrientation="portrait">
 			<intent-filter>

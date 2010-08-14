@@ -16,6 +16,13 @@
 	<item>@string/autoemail_frequency_24</item>
 	<item>@string/autoemail_frequency_12</item>
 	<item>@string/autoemail_frequency_8</item>
+	<item>@string/autoemail_frequency_6</item>
+	<item>@string/autoemail_frequency_5</item>
+	<item>@string/autoemail_frequency_4</item>
+	<item>@string/autoemail_frequency_3</item>
+	<item>@string/autoemail_frequency_2</item>
+	<item>@string/autoemail_frequency_1</item>
+	<item>@string/autoemail_frequency_05</item>
 </string-array>
 
 <string-array name="autosend_values">
@@ -23,6 +30,13 @@
 	<item>24</item>
 	<item>12</item>
 	<item>8</item>
+	<item>6</item>
+	<item>5</item>
+	<item>4</item>
+	<item>3</item>
+	<item>2</item>
+	<item>1</item>
+	<item>0.5</item>
 </string-array>
 
 <string-array name="language_choices">

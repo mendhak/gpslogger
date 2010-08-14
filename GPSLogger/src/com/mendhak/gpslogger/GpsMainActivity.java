@@ -409,10 +409,11 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		useImperial = prefs.getBoolean("useImperial", false);
 
 		autoEmailEnabled = prefs.getBoolean("autoemail_enabled", false);
-		int newAutoEmailDelay =Integer.valueOf(prefs.getString("autoemail_frequency", "0")); 
-		if(autoEmailDelay != newAutoEmailDelay)
+		float newAutoEmailDelay =Float.valueOf(prefs.getString("autoemail_frequency", "0")); 
+		
+		if(autoEmailDelay != newAutoEmailDelay*3600000)
 		{
-			autoEmailDelay = newAutoEmailDelay * 3600000;
+			autoEmailDelay = (long)(newAutoEmailDelay * 3600000);
 			SetupAutoEmailTimers();
 		}
 
