@@ -2,7 +2,7 @@ package com.mendhak.gpslogger.helpers;
 
 import java.util.Iterator;
 
-import com.mendhak.gpslogger.GpsMainActivity;
+import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.Utilities;
 
@@ -15,9 +15,9 @@ import android.os.Bundle;
 public class GeneralLocationListener implements LocationListener, GpsStatus.Listener
 {
 
-	static GpsMainActivity mainActivity;
+	static GpsLoggingService mainActivity;
 
-	public GeneralLocationListener(GpsMainActivity activity)
+	public GeneralLocationListener(GpsLoggingService activity)
 	{
 		mainActivity = activity;
 	}
@@ -37,7 +37,7 @@ public class GeneralLocationListener implements LocationListener, GpsStatus.List
 				mainActivity.currentLatitude = loc.getLatitude();
 				mainActivity.currentLongitude = loc.getLongitude();
 
-				mainActivity.DisplayLocationInfo(loc);
+				mainActivity.OnLocationChanged(loc);
 			}
 
 		}

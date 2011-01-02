@@ -1,21 +1,15 @@
 package com.mendhak.gpslogger;
 
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.view.KeyEvent;
-import android.widget.TimePicker;
-
 import com.mendhak.gpslogger.helpers.AutoEmailSetupHelper;
 import com.mendhak.gpslogger.interfaces.IMessageBoxCallback;
 import com.mendhak.gpslogger.R;

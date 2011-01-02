@@ -4,7 +4,7 @@ import java.io.File;
 import android.app.ProgressDialog;
 import android.os.Environment;
 
-import com.mendhak.gpslogger.GpsMainActivity;
+import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.Utilities;
 
@@ -12,9 +12,9 @@ public class AutoEmailHelper implements IAutoSendHelper
 {
 
 	ProgressDialog pd;
-	GpsMainActivity mainActivity;
+	GpsLoggingService mainActivity;
 
-	public AutoEmailHelper(GpsMainActivity activity)
+	public AutoEmailHelper(GpsLoggingService activity)
 	{
 		this.mainActivity = activity;
 	}

@@ -1,9 +1,7 @@
 package com.mendhak.gpslogger;
 
 import java.io.File;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -13,15 +11,16 @@ import java.util.List;
 import java.util.Locale;
 
 import com.mendhak.gpslogger.helpers.*;
+import com.mendhak.gpslogger.interfaces.IGpsLoggerServiceClient;
 import com.mendhak.gpslogger.R;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
+
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.location.Location;
@@ -30,6 +29,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -42,12 +42,11 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class GpsMainActivity extends Activity implements OnCheckedChangeListener
+public class GpsMainActivity extends Activity implements OnCheckedChangeListener, IGpsLoggerServiceClient
 {
 
 	// ---------------------------------------------------
@@ -102,15 +101,46 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 	public boolean addNewTrackSegment = true;
 
-	private NotificationManager gpsNotifyManager;
-	private int NOTIFICATION_ID;
+	
 	static final int DATEPICKER_ID = 0;
 
 	private long autoEmailDelay = 0;
-	private boolean autoEmailEnabled = false;
+
 
 	// ---------------------------------------------------
 
+	boolean isBound;
+	private GpsLoggingService loggingService;
+	
+	
+	private ServiceConnection gpsServiceConnection =  new ServiceConnection()
+	{
+		
+		public void onServiceDisconnected(ComponentName name)
+		{
+			
+			loggingService = null;
+		
+		}
+		
+		public void onServiceConnected(ComponentName name, IBinder service)
+		{
+			loggingService = ((GpsLoggingService.GpsLoggingBinder)service).getService();
+			GpsLoggingService.SetParent(GpsMainActivity.this);
+			
+			ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
+
+			if(loggingService.IsRunning())
+			{
+				buttonOnOff.setChecked(true);
+				
+			}
+			
+			buttonOnOff.setOnCheckedChangeListener(GpsMainActivity.this);
+			
+		}
+	};
+	
 	/**
 	 * Event raised when the form is created for the first time
 	 */
@@ -131,221 +161,112 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	    }
 		
 		
+	    
+	    
+		Intent serviceIntent = new Intent(this, GpsLoggingService.class);
+		
+		startService(serviceIntent);
+		
+		//Now bind to service
+	    bindService(serviceIntent, gpsServiceConnection, Context.BIND_AUTO_CREATE);
+	    isBound = true;
+	    
+	    
 		
 		super.onCreate(savedInstanceState);
 
 		Utilities.LogInfo("GPSLogger started");
 
 		seeMyMapHelper = new SeeMyMapHelper(this);
-		fileHelper = new FileLoggingHelper(this);
+		//fileHelper = new FileLoggingHelper(this);
 
 		setContentView(R.layout.main);
 
-		ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
-		buttonOnOff.setOnCheckedChangeListener(this);
+	
 
-		Intent i = getIntent();
-		Bundle bundle = i.getExtras();
-
-		if (bundle != null)
-		{
-			boolean startRightNow = bundle.getBoolean("immediate");
-			if (startRightNow)
-			{
-				Utilities.LogInfo("Auto starting logging");
-				buttonOnOff.setChecked(true);
-				onCheckedChanged(buttonOnOff, true);
-			}
-		}
+//		Intent i = getIntent();
+//		Bundle bundle = i.getExtras();
+//
+//		if (bundle != null)
+//		{
+//			boolean startRightNow = bundle.getBoolean("immediate");
+//			if (startRightNow)
+//			{
+//				Utilities.LogInfo("Auto starting logging");
+//				buttonOnOff.setChecked(true);
+//				onCheckedChanged(buttonOnOff, true);
+//			}
+//		}
 
 		GetPreferences();
-		SetupAutoEmailTimers();
+//		SetupAutoEmailTimers();
 		
 
 
 	}
 
-	Handler autoEmailHandler = new Handler();
 
-	/**
-	 * Sets up the auto email timers based on user preferences.
-	 */
-	private void SetupAutoEmailTimers()
-	{
-		if (autoEmailEnabled && autoEmailDelay > 0)
-		{
-			autoEmailHandler.removeCallbacks(autoEmailTimeTask);
-			autoEmailHandler.postDelayed(autoEmailTimeTask, autoEmailDelay );
-			
-		}
-	}
 
-	/**
-	 * Runnable which can be called from timers, use to auto email and reapply
-	 * timer
-	 */
-	private Runnable autoEmailTimeTask = new Runnable()
-	{
-		public void run()
-		{
-			if (autoEmailEnabled && autoEmailDelay > 0)
-			{
-				AutoEmailLogFile();
-				autoEmailHandler.postDelayed(autoEmailTimeTask, autoEmailDelay );
-			}
 
-		}
-	};
 
-	/**
-	 * Method to be called if user has chosen to auto email log files when he
-	 * stops logging
-	 */
-	private void AutoEmailLogFileOnStop()
-	{
-		// autoEmailDelay 0 means send it when you stop logging.
-		if (autoEmailEnabled && autoEmailDelay == 0)
-		{
-			AutoEmailLogFile();
-		}
-	}
 
-	/**
-	 * Calls the Auto Email Helper which processes the file and sends it.
-	 */
-	private void AutoEmailLogFile()
-	{
-		// Check that auto emailing is enabled, there's a valid location and
-		// file name.
-		if (autoEmailEnabled && currentLatitude != 0 && currentLongitude != 0 && currentFileName != null
-				&& currentFileName.length() > 0)
-		{
-			// Ensure that a point has been logged since the last time we did
-			// this.
-			// And that we're writing to a file.
-			if (latestTimeStamp > autoEmailTimeStamp && (logToGpx || logToKml))
-			{
-				Utilities.LogInfo("Auto Email Log File");
-				AutoEmailHelper aeh = new AutoEmailHelper(GpsMainActivity.this);
-				aeh.SendLogFile(currentFileName, Utilities.GetPersonId(getBaseContext()));
-				autoEmailTimeStamp = System.currentTimeMillis();
-			}
-		}
-	}
 
 	/**
 	 * Called when the toggle button is clicked
 	 */
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 	{
-		addNewTrackSegment = true;
-
-		try
+		
+		if(isChecked)
 		{
-			if (isChecked)
-			{
-				if (isStarted)
-				{
-					return;
-				}
-
-				Utilities.LogInfo("Starting logging procedures");
-				isStarted = true;
-				GetPreferences();
-				Notify();
-				ResetCurrentFileName();
-				ClearForm();
-				StartGpsManager();
-
-			}
-			else
-			{
-				Utilities.LogInfo("Stopping logging");
-				isStarted = false;
-				AutoEmailLogFileOnStop();
-				RemoveNotification();
-				StopGpsManager();
-			}
-
-		}
-		catch (Exception ex)
-		{
-			Utilities.LogError("onCheckedChanged", ex);
-			SetStatus(getString(R.string.button_click_error) + ex.getMessage());
-		}
-
-	}
-
-	/**
-	 * Manages the notification in the status bar
-	 */
-	private void Notify()
-	{
-
-		Utilities.LogInfo("Notification");
-		if (showInNotificationBar)
-		{
-			gpsNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-			ShowNotification();
+			loggingService.StartLogging();
 		}
 		else
 		{
-			RemoveNotification();
+			loggingService.StopLogging();
 		}
+		
+//		addNewTrackSegment = true;
+//
+//		try
+//		{
+//			if (isChecked)
+//			{
+//				if (isStarted)
+//				{
+//					return;
+//				}
+//
+//				Utilities.LogInfo("Starting logging procedures");
+//				isStarted = true;
+//				GetPreferences();
+//				Notify();
+//				ResetCurrentFileName();
+//				ClearForm();
+//				StartGpsManager();
+//
+//			}
+//			else
+//			{
+//				Utilities.LogInfo("Stopping logging");
+//				isStarted = false;
+//				AutoEmailLogFileOnStop();
+//				RemoveNotification();
+//				StopGpsManager();
+//			}
+//
+//		}
+//		catch (Exception ex)
+//		{
+//			Utilities.LogError("onCheckedChanged", ex);
+//			SetStatus(getString(R.string.button_click_error) + ex.getMessage());
+//		}
+
 	}
 
-	/**
-	 * Hides the notification icon in the status bar if it's visible.
-	 */
-	private void RemoveNotification()
-	{
-		Utilities.LogInfo("Remove notification");
-		try
-		{
-			if (notificationVisible)
-			{
-				gpsNotifyManager.cancelAll();
-			}
-		}
-		catch (Exception ex)
-		{
-			Utilities.LogError("RemoveNotification", ex);
-		}
-		finally
-		{
-			notificationVisible = false;
-		}
-	}
 
-	/**
-	 * Shows a notification icon in the status bar for GPS Logger
-	 */
-	private void ShowNotification()
-	{
-		// What happens when the notification item is clicked
-		Intent contentIntent = new Intent(this, GpsMainActivity.class);
 
-		PendingIntent pending = PendingIntent.getActivity(getBaseContext(), 0, contentIntent,
-				android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
-
-		Notification nfc = new Notification(R.drawable.gpsstatus5, null, System.currentTimeMillis());
-		nfc.flags |= Notification.FLAG_ONGOING_EVENT;
-
-		NumberFormat nf = new DecimalFormat("###.######");
-
-		String contentText = getString(R.string.gpslogger_still_running);
-		if (currentLatitude != 0 && currentLongitude != 0)
-		{
-			contentText = nf.format(currentLatitude) + "," + nf.format(currentLongitude);
-		}
-
-		nfc.setLatestEventInfo(getBaseContext(), getString(R.string.gpslogger_still_running),
-				contentText, pending);
-
-		gpsNotifyManager.notify(NOTIFICATION_ID, nfc);
-		notificationVisible = true;
-	}
+	
 
 	/**
 	 * Gets preferences chosen by the user
@@ -408,13 +329,11 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		useImperial = prefs.getBoolean("useImperial", false);
 
-		autoEmailEnabled = prefs.getBoolean("autoemail_enabled", false);
 		float newAutoEmailDelay =Float.valueOf(prefs.getString("autoemail_frequency", "0")); 
 		
 		if(autoEmailDelay != newAutoEmailDelay*3600000)
 		{
 			autoEmailDelay = (long)(newAutoEmailDelay * 3600000);
-			SetupAutoEmailTimers();
 		}
 
 		try
@@ -502,14 +421,19 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
 		Utilities.LogInfo("KeyDown - " + String.valueOf(keyCode));
-
-		if (keyCode == KeyEvent.KEYCODE_BACK)
+		
+		if(keyCode == KeyEvent.KEYCODE_BACK && isBound)
 		{
-			moveTaskToBack(true);
-			Toast.makeText(getBaseContext(), getString(R.string.toast_gpslogger_stillrunning),
-					Toast.LENGTH_LONG).show();
-			return true;
+			unbindService(gpsServiceConnection);
 		}
+
+//		if (keyCode == KeyEvent.KEYCODE_BACK)
+//		{
+//			moveTaskToBack(true);
+//			Toast.makeText(getBaseContext(), getString(R.string.toast_gpslogger_stillrunning),
+//					Toast.LENGTH_LONG).show();
+//			return true;
+//		}
 		return super.onKeyDown(keyCode, event);
 	}
 
@@ -570,8 +494,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 				Share();
 				break;
 			case R.id.mnuExit:
-				RemoveNotification();
-				StopGpsManager();
+				loggingService.StopLogging();
+				loggingService.stopSelf();
 				System.exit(0);
 				break;
 		}
@@ -866,8 +790,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		
 		GetPreferences();
 
-		gpsLocationListener = new GeneralLocationListener(this);
-		towerLocationListener = new GeneralLocationListener(this);
+		//gpsLocationListener = new GeneralLocationListener(this);
+		//towerLocationListener = new GeneralLocationListener(this);
 
 		gpsLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		towerLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -918,51 +842,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	}
 
 	/**
-	 * Stops the location managers
-	 */
-	public void StopGpsManager()
-	{
-		Utilities.LogInfo("Stopping GPS managers");
-
-		if (towerLocationListener != null)
-		{
-			towerLocationManager.removeUpdates(towerLocationListener);
-		}
-
-		if (gpsLocationListener != null)
-		{
-			gpsLocationManager.removeUpdates(gpsLocationListener);
-			gpsLocationManager.removeGpsStatusListener(gpsLocationListener);
-		}
-
-		SetStatus(getString(R.string.stopped));
-	}
-
-	/**
-	 * Sets the current file name based on user preference.
-	 */
-	private void ResetCurrentFileName()
-	{
-
-		if (newFileOnceADay)
-		{
-			// 20100114.gpx
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			currentFileName = sdf.format(new Date());
-		}
-		else
-		{
-			// 20100114183329.gpx
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-			currentFileName = sdf.format(new Date());
-		}
-
-	}
-
-	/**
 	 * Clears the table, removes all values.
 	 */
-	private void ClearForm()
+	public void ClearForm()
 	{
 
 		TextView tvLatitude = (TextView) findViewById(R.id.txtLatitude);
@@ -1036,7 +918,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 			latestTimeStamp = System.currentTimeMillis();
 
-			Notify();
+			
 
 			TextView tvLatitude = (TextView) findViewById(R.id.txtLatitude);
 			TextView tvLongitude = (TextView) findViewById(R.id.txtLongitude);
@@ -1151,9 +1033,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 				txtAccuracy.setText(R.string.not_applicable);
 			}
 
-			WriteToFile(loc);
-			GetPreferences();
-			ResetManagersIfRequired();
+
 
 		}
 		catch (Exception ex)
@@ -1163,48 +1043,37 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 	}
 
-	private void WriteToFile(Location loc)
+	
+
+	public void OnBeginGpsLogging()
 	{
 
-		fileHelper.WriteToFile(loc);
-
+		
 	}
-
-	/**
-	 * Stops location manager, then starts it.
-	 */
-	public void RestartGpsManagers()
+	
+	public void OnStopGpsLogging()
 	{
 
-		Utilities.LogInfo("Restarting GPS Managers");
-		StopGpsManager();
-		StartGpsManager();
-
+		
 	}
 
-	/**
-	 * Checks to see if providers have been enabled and switches providers based
-	 * on user preferences.
-	 */
-	public void ResetManagersIfRequired()
+	public void OnLocationUpdate(Location loc)
 	{
-		CheckTowerAndGpsStatus();
-
-		if (isUsingGps && preferCellTower)
-		{
-			RestartGpsManagers();
-		}
-		// If GPS is enabled and user doesn't prefer celltowers
-		else if (gpsEnabled && !preferCellTower)
-		{
-			// But we're not *already* using GPS
-			if (!isUsingGps)
-			{
-				RestartGpsManagers();
-			}
-			// Else do nothing
-		}
-
+		DisplayLocationInfo(loc);
+		
 	}
+
+	public void OnSatelliteCount(int count)
+	{
+		SetSatelliteInfo(count);
+		
+	}
+
+	public void OnStatusMessage(String message)
+	{
+		SetStatus(message);
+	}
+
+
 
 }
