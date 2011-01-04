@@ -25,7 +25,9 @@ import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.SeeMyMapSetupActivity;
 import com.mendhak.gpslogger.Utilities;
 import com.mendhak.gpslogger.interfaces.IGpsLoggerSaxHandler;
+import com.mendhak.gpslogger.model.AppSettings;
 import com.mendhak.gpslogger.model.GpxPoint;
+import com.mendhak.gpslogger.model.Session;
 
 /**
  * Class for SeeMyMap.com functionality
@@ -114,15 +116,15 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 
 		mainActivity.GetPreferences();
 
-		if (mainActivity.seeMyMapUrl == null || mainActivity.seeMyMapUrl.length() == 0
-				|| mainActivity.seeMyMapGuid == null || mainActivity.seeMyMapGuid.length() == 0)
+		if (AppSettings.getSeeMyMapUrl() == null || AppSettings.getSeeMyMapUrl().length() == 0
+				|| AppSettings.getSeeMyMapGuid() == null || AppSettings.getSeeMyMapGuid().length() == 0)
 		{
 			mainActivity.startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
 		}
 		else
 		{
 
-			if (mainActivity.currentLatitude != 0 && mainActivity.currentLongitude != 0)
+			if (Session.hasValidLocation())
 			{
 
 				AlertDialog.Builder alert = new AlertDialog.Builder(mainActivity);
@@ -143,8 +145,8 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 					{
 
 						Thread t = new Thread(new SingleAnnotatedPointHandler(
-								input.getText().toString(), mainActivity.currentLatitude,
-								mainActivity.currentLongitude, mainActivity.seeMyMapGuid,
+								input.getText().toString(), Session.getCurrentLatitude(),
+								Session.getCurrentLongitude(), AppSettings.getSeeMyMapGuid(),
 								SeeMyMapHelper.this));
 						t.start();
 
@@ -187,8 +189,8 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 
 		mainActivity.GetPreferences();
 
-		if (mainActivity.seeMyMapUrl == null || mainActivity.seeMyMapUrl.length() == 0
-				|| mainActivity.seeMyMapGuid == null || mainActivity.seeMyMapGuid.length() == 0)
+		if (AppSettings.getSeeMyMapUrl() == null || AppSettings.getSeeMyMapUrl().length() == 0
+				|| AppSettings.getSeeMyMapGuid() == null || AppSettings.getSeeMyMapGuid().length() == 0)
 		{
 			mainActivity.startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
 		}
@@ -214,7 +216,7 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 						true, true);
 
 				Thread t = new Thread(new MultipleAnnotatedPointsHandler(difference, chosenDate,
-						mainActivity.seeMyMapGuid, points, this));
+						AppSettings.getSeeMyMapGuid(), points, this));
 				t.start();
 
 			}
@@ -230,15 +232,15 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 	public void ViewInBrowser()
 	{
 		mainActivity.GetPreferences();
-		if (mainActivity.seeMyMapUrl == null || mainActivity.seeMyMapUrl.length() == 0
-				|| mainActivity.seeMyMapGuid == null || mainActivity.seeMyMapGuid.length() == 0)
+		if (AppSettings.getSeeMyMapUrl() == null || AppSettings.getSeeMyMapUrl().length() == 0
+				|| AppSettings.getSeeMyMapGuid() == null || AppSettings.getSeeMyMapGuid().length() == 0)
 		{
 			mainActivity.startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
 		}
 		else
 		{
 			Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://"
-					+ mainActivity.seeMyMapUrl + ".seemymap.com/"));
+					+ AppSettings.getSeeMyMapUrl() + ".seemymap.com/"));
 			mainActivity.startActivity(myIntent);
 		}
 
@@ -252,8 +254,8 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 
 		mainActivity.GetPreferences();
 
-		if (mainActivity.seeMyMapUrl == null || mainActivity.seeMyMapUrl.length() == 0
-				|| mainActivity.seeMyMapGuid == null || mainActivity.seeMyMapGuid.length() == 0)
+		if (AppSettings.getSeeMyMapUrl() == null || AppSettings.getSeeMyMapUrl().length() == 0
+				|| AppSettings.getSeeMyMapGuid() == null || AppSettings.getSeeMyMapGuid().length() == 0)
 		{
 			mainActivity.startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
 		}
@@ -263,7 +265,7 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 			clearMapProgressDialog = ProgressDialog.show(mainActivity, "Clearing...", "Clearing Map",
 					true, true);
 
-			Thread t = new Thread(new ClearMapHandler(mainActivity.seeMyMapGuid, this));
+			Thread t = new Thread(new ClearMapHandler(AppSettings.getSeeMyMapGuid(), this));
 			t.start();
 		}
 	}

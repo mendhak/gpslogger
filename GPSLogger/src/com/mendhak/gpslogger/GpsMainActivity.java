@@ -11,7 +11,10 @@ import java.util.List;
 import java.util.Locale;
 
 import com.mendhak.gpslogger.helpers.*;
+import com.mendhak.gpslogger.interfaces.IFileLoggingHelperCallback;
 import com.mendhak.gpslogger.interfaces.IGpsLoggerServiceClient;
+import com.mendhak.gpslogger.model.AppSettings;
+import com.mendhak.gpslogger.model.Session;
 import com.mendhak.gpslogger.R;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -46,31 +49,15 @@ import android.widget.ToggleButton;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class GpsMainActivity extends Activity implements OnCheckedChangeListener, IGpsLoggerServiceClient
+public class GpsMainActivity extends Activity 
+implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperCallback
 {
-
-	// ---------------------------------------------------
-	// User Preferences
-	// ---------------------------------------------------
-	boolean useImperial = false;
-	boolean newFileOnceADay;
-	boolean preferCellTower;
-	public boolean useSatelliteTime;
-	public boolean logToKml;
-	public boolean logToGpx;
-	boolean showInNotificationBar;
-	String subdomain;
-	int minimumDistance;
-	int minimumSeconds;
-	String newFileCreation;
-	public String seeMyMapUrl;
-	public String seeMyMapGuid;
-	// ---------------------------------------------------
 
 	/**
 	 * General all purpose handler used for updating the UI from threads.
 	 */
 	public final Handler handler = new Handler();
+	static final int DATEPICKER_ID = 0;
 
 	// ---------------------------------------------------
 	// Helpers and managers
@@ -83,61 +70,34 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	public LocationManager towerLocationManager;
 	// ---------------------------------------------------
 
-	// ---------------------------------------------------
-	// Others
-	// ---------------------------------------------------
-	boolean towerEnabled;
-	boolean gpsEnabled;
-	boolean isStarted;
-	boolean isUsingGps;
-	public String currentFileName;
-	public int satellites;
-	boolean notificationVisible;
-
-	public double currentLatitude;
-	public double currentLongitude;
-	long latestTimeStamp;
-	long autoEmailTimeStamp;
-
-	public boolean addNewTrackSegment = true;
-
-	
-	static final int DATEPICKER_ID = 0;
-
-	private long autoEmailDelay = 0;
-
-
-	// ---------------------------------------------------
-
-	boolean isBound;
 	private GpsLoggingService loggingService;
 	
-	
+	/**
+	 * Provides a connection to the GPS Logging Service
+	 */
 	private ServiceConnection gpsServiceConnection =  new ServiceConnection()
 	{
 		
 		public void onServiceDisconnected(ComponentName name)
 		{
-			
 			loggingService = null;
-		
 		}
 		
 		public void onServiceConnected(ComponentName name, IBinder service)
 		{
 			loggingService = ((GpsLoggingService.GpsLoggingBinder)service).getService();
-			GpsLoggingService.SetParent(GpsMainActivity.this);
+			GpsLoggingService.SetServiceClient(GpsMainActivity.this);
 			
+			//Form setup - toggle button, display existing location info
 			ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
-
+			
 			if(loggingService.IsRunning())
 			{
 				buttonOnOff.setChecked(true);
-				
+				DisplayLocationInfo(Session.getCurrentLocationInfo());
 			}
 			
 			buttonOnOff.setOnCheckedChangeListener(GpsMainActivity.this);
-			
 		}
 	};
 	
@@ -159,56 +119,25 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			getBaseContext().getResources().updateConfiguration
 				(config, getBaseContext().getResources().getDisplayMetrics());
 	    }
-		
-		
-	    
-	    
-		Intent serviceIntent = new Intent(this, GpsLoggingService.class);
-		
-		startService(serviceIntent);
-		
-		//Now bind to service
-	    bindService(serviceIntent, gpsServiceConnection, Context.BIND_AUTO_CREATE);
-	    isBound = true;
-	    
-	    
-		
+			    
 		super.onCreate(savedInstanceState);
 
 		Utilities.LogInfo("GPSLogger started");
 
 		seeMyMapHelper = new SeeMyMapHelper(this);
-		//fileHelper = new FileLoggingHelper(this);
+		fileHelper = new FileLoggingHelper(this);
 
 		setContentView(R.layout.main);
 
-	
-
-//		Intent i = getIntent();
-//		Bundle bundle = i.getExtras();
-//
-//		if (bundle != null)
-//		{
-//			boolean startRightNow = bundle.getBoolean("immediate");
-//			if (startRightNow)
-//			{
-//				Utilities.LogInfo("Auto starting logging");
-//				buttonOnOff.setChecked(true);
-//				onCheckedChanged(buttonOnOff, true);
-//			}
-//		}
-
 		GetPreferences();
-//		SetupAutoEmailTimers();
 		
-
-
+		Intent serviceIntent = new Intent(this, GpsLoggingService.class);
+		//Start the service in case it isn't already running
+		startService(serviceIntent);
+		//Now bind to service
+	    bindService(serviceIntent, gpsServiceConnection, Context.BIND_AUTO_CREATE);
+	    Session.setBoundToService(true);
 	}
-
-
-
-
-
 
 
 	/**
@@ -216,6 +145,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 	{
+		GetPreferences();
 		
 		if(isChecked)
 		{
@@ -225,125 +155,17 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		{
 			loggingService.StopLogging();
 		}
-		
-//		addNewTrackSegment = true;
-//
-//		try
-//		{
-//			if (isChecked)
-//			{
-//				if (isStarted)
-//				{
-//					return;
-//				}
-//
-//				Utilities.LogInfo("Starting logging procedures");
-//				isStarted = true;
-//				GetPreferences();
-//				Notify();
-//				ResetCurrentFileName();
-//				ClearForm();
-//				StartGpsManager();
-//
-//			}
-//			else
-//			{
-//				Utilities.LogInfo("Stopping logging");
-//				isStarted = false;
-//				AutoEmailLogFileOnStop();
-//				RemoveNotification();
-//				StopGpsManager();
-//			}
-//
-//		}
-//		catch (Exception ex)
-//		{
-//			Utilities.LogError("onCheckedChanged", ex);
-//			SetStatus(getString(R.string.button_click_error) + ex.getMessage());
-//		}
-
 	}
 
-
-
-	
 
 	/**
 	 * Gets preferences chosen by the user
 	 */
 	public void GetPreferences()
 	{
-		Utilities.LogInfo("Getting preferences");
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		Utilities.PopulateAppSettings(getBaseContext());
+		ShowPreferencesSummary();
 
-		useImperial = prefs.getBoolean("useImperial", false);
-
-		useSatelliteTime = prefs.getBoolean("satellite_time", false);
-
-		logToKml = prefs.getBoolean("log_kml", false);
-		logToGpx = prefs.getBoolean("log_gpx", false);
-		showInNotificationBar = prefs.getBoolean("show_notification", true);
-
-		preferCellTower = prefs.getBoolean("prefer_celltower", false);
-		subdomain = prefs.getString("subdomain", "where");
-
-		String minimumDistanceString = prefs.getString("distance_before_logging", "0");
-
-		if (minimumDistanceString != null && minimumDistanceString.length() > 0)
-		{
-			minimumDistance = Integer.valueOf(minimumDistanceString);
-		}
-		else
-		{
-			minimumDistance = 0;
-		}
-
-		if (useImperial)
-		{
-			minimumDistance = Utilities.FeetToMeters(minimumDistance);
-		}
-
-		String minimumSecondsString = prefs.getString("time_before_logging", "60");
-
-		if (minimumSecondsString != null && minimumSecondsString.length() > 0)
-		{
-			minimumSeconds = Integer.valueOf(minimumSecondsString);
-		}
-		else
-		{
-			minimumSeconds = 60;
-		}
-
-		newFileCreation = prefs.getString("new_file_creation", "onceaday");
-		if (newFileCreation.equals("onceaday"))
-		{
-			newFileOnceADay = true;
-		}
-		else
-		{
-			newFileOnceADay = false;
-		}
-
-		seeMyMapUrl = prefs.getString("seemymap_URL", "");
-		seeMyMapGuid = prefs.getString("seemymap_GUID", "");
-
-		useImperial = prefs.getBoolean("useImperial", false);
-
-		float newAutoEmailDelay =Float.valueOf(prefs.getString("autoemail_frequency", "0")); 
-		
-		if(autoEmailDelay != newAutoEmailDelay*3600000)
-		{
-			autoEmailDelay = (long)(newAutoEmailDelay * 3600000);
-		}
-
-		try
-		{
-			ShowPreferencesSummary();
-		}
-		catch (Exception ex)
-		{
-			Utilities.LogError("GetPreferences", ex);
-		}
 	}
 
 	/**
@@ -359,24 +181,24 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		TextView txtDistance = (TextView) findViewById(R.id.txtDistance);
 		TextView txtFilename = (TextView) findViewById(R.id.txtFileName);
 
-		if (!logToKml && !logToGpx)
+		if (!AppSettings.shouldLogToKml() && !AppSettings.shouldLogToGpx())
 		{
 			txtLoggingTo.setText(R.string.summary_loggingto_screen);
 
 		}
-		else if (logToGpx && logToKml)
+		else if (AppSettings.shouldLogToGpx() && AppSettings.shouldLogToKml())
 		{
 			txtLoggingTo.setText(R.string.summary_loggingto_both);
 		}
 		else
 		{
-			txtLoggingTo.setText((logToGpx ? "GPX" : "KML"));
+			txtLoggingTo.setText((AppSettings.shouldLogToGpx() ? "GPX" : "KML"));
 
 		}
 
-		if (minimumSeconds > 0)
+		if (AppSettings.getMinimumSeconds() > 0)
 		{
-			String descriptiveTime = Utilities.GetDescriptiveTimeString(minimumSeconds, getBaseContext());
+			String descriptiveTime = Utilities.GetDescriptiveTimeString(AppSettings.getMinimumSeconds(), getBaseContext());
 
 			txtFrequency.setText(descriptiveTime);
 		}
@@ -386,21 +208,21 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		}
 
-		if (minimumDistance > 0)
+		if (AppSettings.getMinimumDistance() > 0)
 		{
 
-			if (useImperial)
+			if (AppSettings.shouldUseImperial())
 			{
-				int minimumDistanceInFeet = Utilities.MetersToFeet(minimumDistance);
+				int minimumDistanceInFeet = Utilities.MetersToFeet(AppSettings.getMinimumDistance());
 				txtDistance.setText(((minimumDistanceInFeet == 1)
 					? getString(R.string.foot)
 					: String.valueOf(minimumDistanceInFeet) + getString(R.string.feet)));
 			}
 			else
 			{
-				txtDistance.setText(((minimumDistance == 1)
+				txtDistance.setText(((AppSettings.getMinimumDistance() == 1)
 					? getString(R.string.meter)
-					: String.valueOf(minimumDistance) + getString(R.string.meters)));
+					: String.valueOf(AppSettings.getMinimumDistance()) + getString(R.string.meters)));
 			}
 
 		}
@@ -409,9 +231,10 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			txtDistance.setText(R.string.summary_dist_regardless);
 		}
 
-		if ((logToGpx || logToKml) && (currentFileName != null && currentFileName.length() > 0))
+		if ((AppSettings.shouldLogToGpx() || AppSettings.shouldLogToKml()) 
+				&& (Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0))
 		{
-			txtFilename.setText(getString(R.string.summary_current_filename_format, currentFileName));
+			txtFilename.setText(getString(R.string.summary_current_filename_format, Session.getCurrentFileName()));
 		}
 	}
 
@@ -422,7 +245,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	{
 		Utilities.LogInfo("KeyDown - " + String.valueOf(keyCode));
 		
-		if(keyCode == KeyEvent.KEYCODE_BACK && isBound)
+		if(keyCode == KeyEvent.KEYCODE_BACK && Session.isBoundToService())
 		{
 			unbindService(gpsServiceConnection);
 		}
@@ -504,9 +327,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 	private void ViewInBrowser()
 	{
-
 		seeMyMapHelper.ViewInBrowser();
-
 	}
 
 	/**
@@ -516,10 +337,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	private void Share()
 	{
-
 		try
 		{
-
 			if (!Utilities.Flag())
 			{
 				Utilities.MsgBox(getString(R.string.sharing), getString(R.string.sharing_pro), this);
@@ -564,10 +383,10 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 						}
 
 						intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing_mylocation));
-						if (currentLatitude != 0 && currentLongitude != 0)
+						if (Session.hasValidLocation())
 						{
 							String bodyText = getString(R.string.sharing_latlong_text,
-									String.valueOf(currentLatitude), String.valueOf(currentLongitude));
+									String.valueOf(Session.getCurrentLatitude()), String.valueOf(Session.getCurrentLongitude()));
 							intent.putExtra(Intent.EXTRA_TEXT, bodyText);
 							intent.putExtra("sms_body", bodyText);
 						}
@@ -650,22 +469,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		fileHelper.AddNoteToLastPoint(desc);
 	}
 
-	public final Runnable updateResultsEmailSendError = new Runnable()
-	{
-		public void run()
-		{
-			AutoEmailTooManySentError();
-		}
-	};
-
-	public final Runnable updateResultsBadGPX = new Runnable()
-	{
-		public void run()
-		{
-			AutoEmailBadGPXError();
-		}
-	};
-
+	
 	/**
 	 * Update the UI: There was a connection error
 	 */
@@ -710,19 +514,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 	};
 
-	private void AutoEmailBadGPXError()
-	{
-		Utilities.LogWarning("Could not send email, invalid GPS data.");
-		// Utilities.MsgBox(getString(R.string.error),
-		// "GPS data sent is invalid.", this);
-	}
-
-	private void AutoEmailTooManySentError()
-	{
-		Utilities.LogWarning("Could not send email, user has exceeded the daily limit.");
-		// Utilities.MsgBox(getString(R.string.error),
-		// "You have sent too many emails today", this);
-	}
 
 	/**
 	 * MessageBox: There was a connection error.
@@ -775,71 +566,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		seeMyMapHelper.SendAnnotatedPoint();
 	}
 
-	/**
-	 * Starts the location manager. There are two location managers - GPS and
-	 * Cell Tower. This code determines which manager to request updates from
-	 * based on user preference and whichever is enabled. If GPS is enabled on
-	 * the phone, that is used. But if the user has also specified that they
-	 * prefer cell towers, then cell towers are used. If neither is enabled,
-	 * then nothing is requested.
-	 */
-	public void StartGpsManager()
-	{
+	
 
-		Utilities.LogInfo("Starting GPS Manager");
-		
-		GetPreferences();
-
-		//gpsLocationListener = new GeneralLocationListener(this);
-		//towerLocationListener = new GeneralLocationListener(this);
-
-		gpsLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		towerLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-		CheckTowerAndGpsStatus();
-
-		if (gpsEnabled && !preferCellTower)
-		{
-			Utilities.LogInfo("Requesting GPS location updates");
-			// gps satellite based
-			gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-					minimumSeconds * 1000, minimumDistance, gpsLocationListener);
-
-			gpsLocationManager.addGpsStatusListener(gpsLocationListener);
-
-			isUsingGps = true;
-		}
-		else if (towerEnabled)
-		{
-			Utilities.LogInfo("Requesting tower location updates");
-			isUsingGps = false;
-			// Cell tower and wifi based
-			towerLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-					minimumSeconds * 1000, minimumDistance, towerLocationListener);
-
-		}
-		else
-		{
-			Utilities.LogInfo("No provider available");
-			isUsingGps = false;
-			SetStatus(R.string.gpsprovider_unavailable);
-			return;
-		}
-
-		SetStatus(R.string.started);
-	}
-
-	/**
-	 * This method is called periodically to determine whether the cell tower /
-	 * gps providers have been enabled, and sets class level variables to those
-	 * values.
-	 */
-	private void CheckTowerAndGpsStatus()
-	{
-		towerEnabled = towerLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-		gpsEnabled = gpsLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-	}
 
 	/**
 	 * Clears the table, removes all values.
@@ -870,6 +598,10 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 	}
 
+	/**
+	 * Sets the message in the top status label.
+	 * @param stringId
+	 */
 	public void SetStatus(int stringId)
 	{
 		String s = getString(stringId);
@@ -894,7 +626,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	public void SetSatelliteInfo(int number)
 	{
-		satellites = number;
+		Session.setSatelliteCount(number);
 		TextView txtSatellites = (TextView) findViewById(R.id.txtSatellites);
 		txtSatellites.setText(String.valueOf(number));
 	}
@@ -910,15 +642,13 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		try
 		{
 
-			long currentTimeStamp = System.currentTimeMillis();
-			if ((currentTimeStamp - latestTimeStamp) < (minimumSeconds * 1000))
+			if(loc==null)
 			{
 				return;
 			}
-
-			latestTimeStamp = System.currentTimeMillis();
-
 			
+
+			Session.setLatestTimeStamp(System.currentTimeMillis());
 
 			TextView tvLatitude = (TextView) findViewById(R.id.txtLatitude);
 			TextView tvLongitude = (TextView) findViewById(R.id.txtLongitude);
@@ -952,7 +682,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 				double altitude = loc.getAltitude();
 
-				if (useImperial)
+				if (AppSettings.shouldUseImperial())
 				{
 					tvAltitude.setText(String.valueOf(Utilities.MetersToFeet(altitude))
 							+ getString(R.string.feet));
@@ -972,7 +702,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			{
 
 				float speed = loc.getSpeed();
-				if (useImperial)
+				if (AppSettings.shouldUseImperial())
 				{
 					txtSpeed.setText(String.valueOf(Utilities.MetersToFeet(speed))
 							+ getString(R.string.feet_per_second));
@@ -1004,10 +734,10 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 				txtDirection.setText(R.string.not_applicable);
 			}
 
-			if (!isUsingGps)
+			if(!Session.isUsingGps())
 			{
 				txtSatellites.setText(R.string.not_applicable);
-				satellites = 0;
+				Session.setSatelliteCount(0);
 			}
 
 			if (loc.hasAccuracy())
@@ -1015,7 +745,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 				float accuracy = loc.getAccuracy();
 
-				if (useImperial)
+				if (AppSettings.shouldUseImperial())
 				{
 					txtAccuracy.setText(getString(R.string.accuracy_within,
 							String.valueOf(Utilities.MetersToFeet(accuracy)), getString(R.string.feet)));
@@ -1073,6 +803,20 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	{
 		SetStatus(message);
 	}
+
+	public Activity GetActivity()
+	{
+		return this;
+	}
+
+
+	public Context GetContext()
+	{
+		return getBaseContext();
+	}
+
+
+
 
 
 

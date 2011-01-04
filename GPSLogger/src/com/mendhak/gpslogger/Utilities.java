@@ -17,6 +17,7 @@ import java.util.UUID;
 
 import com.mendhak.gpslogger.helpers.Base64;
 import com.mendhak.gpslogger.interfaces.IMessageBoxCallback;
+import com.mendhak.gpslogger.model.AppSettings;
 import com.mendhak.gpslogger.R;
 
 import android.app.AlertDialog;
@@ -82,6 +83,80 @@ public class Utilities
 		}
 	}
 
+	/**
+	 * Gets user preferences, populates the AppSettings class. 
+	 * @param context
+	 * @return
+	 */
+	public static void PopulateAppSettings(Context context)
+	{
+			
+		Utilities.LogInfo("Getting preferences");
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+		AppSettings.setUseImperial(prefs.getBoolean("useImperial", false));
+		AppSettings.setUseSatelliteTime(prefs.getBoolean("satellite_time", false));
+
+		AppSettings.setLogToKml(prefs.getBoolean("log_kml", false));
+
+		AppSettings.setLogToGpx(prefs.getBoolean("log_gpx", false));
+		
+		AppSettings.setShowInNotificationBar(prefs.getBoolean("show_notification", true));
+
+		AppSettings.setPreferCellTower(prefs.getBoolean("prefer_celltower", false));
+		AppSettings.setSubdomain(prefs.getString("subdomain", "where"));
+		
+		String minimumDistanceString = prefs.getString("distance_before_logging", "0");
+
+		if (minimumDistanceString != null && minimumDistanceString.length() > 0)
+		{
+			AppSettings.setMinimumDistance(Integer.valueOf(minimumDistanceString));
+			//appSettings.minimumDistance = Integer.valueOf(minimumDistanceString);
+		}
+		else
+		{
+			AppSettings.setMinimumDistance(Integer.valueOf(0));
+			//appSettings.minimumDistance = 0;
+		}
+
+		if (AppSettings.shouldUseImperial())
+		{
+			AppSettings.setMinimumDistance(Utilities.FeetToMeters(AppSettings.getMinimumDistance()));
+		}
+
+		String minimumSecondsString = prefs.getString("time_before_logging", "60");
+
+		if (minimumSecondsString != null && minimumSecondsString.length() > 0)
+		{
+			AppSettings.setMinimumSeconds(Integer.valueOf(minimumSecondsString));
+		}
+		else
+		{
+			AppSettings.setMinimumSeconds(60);
+		}
+
+		AppSettings.setNewFileCreation(prefs.getString("new_file_creation", "onceaday"));
+
+		if (AppSettings.getNewFileCreation().equals("onceaday"))
+		{
+			AppSettings.setNewFileOnceADay(true);
+		}
+		else
+		{
+			AppSettings.setNewFileOnceADay(false);
+		}
+
+		AppSettings.setSeeMyMapUrl(prefs.getString("seemymap_URL", ""));
+
+		AppSettings.setSeeMyMapGuid(prefs.getString("seemymap_GUID", ""));
+
+
+		AppSettings.setAutoEmailEnabled(prefs.getBoolean("autoemail_enabled", false));
+
+		AppSettings.setAutoEmailDelay(Float.valueOf(prefs.getString("autoemail_frequency", "0")));
+	
+	}
+	
 	/**
 	 * Displays a message box to the user with an OK button.
 	 * 
@@ -734,7 +809,7 @@ public class Utilities
 
 	public static boolean Flag()
 	{
-		return false;
+		return true;
 	}
 
 }

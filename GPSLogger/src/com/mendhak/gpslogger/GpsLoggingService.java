@@ -10,8 +10,12 @@ import com.mendhak.gpslogger.helpers.AutoEmailHelper;
 import com.mendhak.gpslogger.helpers.FileLoggingHelper;
 import com.mendhak.gpslogger.helpers.GeneralLocationListener;
 import com.mendhak.gpslogger.helpers.SeeMyMapHelper;
+import com.mendhak.gpslogger.interfaces.IFileLoggingHelperCallback;
 import com.mendhak.gpslogger.interfaces.IGpsLoggerServiceClient;
+import com.mendhak.gpslogger.model.AppSettings;
+import com.mendhak.gpslogger.model.Session;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -20,40 +24,29 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.location.Address;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Binder;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 
 
-public class GpsLoggingService extends Service
+public class GpsLoggingService extends Service implements IFileLoggingHelperCallback
 {
-
-	// ---------------------------------------------------
-	// User Preferences
-	// ---------------------------------------------------
-	boolean useImperial = false;
-	boolean newFileOnceADay;
-	boolean preferCellTower;
-	public boolean useSatelliteTime;
-	public boolean logToKml;
-	public boolean logToGpx;
-	boolean showInNotificationBar;
-	String subdomain;
-	int minimumDistance;
-	int minimumSeconds;
-	String newFileCreation;
-	public String seeMyMapUrl;
-	public String seeMyMapGuid;
-	// ---------------------------------------------------
+	private static NotificationManager gpsNotifyManager;
+	private static int NOTIFICATION_ID;
 
 	/**
 	 * General all purpose handler used for updating the UI from threads.
 	 */
 	public final Handler handler = new Handler();
-
+	Handler autoEmailHandler = new Handler();
+	private final IBinder mBinder = new GpsLoggingBinder();
+	public static IGpsLoggerServiceClient mainServiceClient;
+	
 	// ---------------------------------------------------
 	// Helpers and managers
 	// ---------------------------------------------------
@@ -65,35 +58,6 @@ public class GpsLoggingService extends Service
 	public LocationManager towerLocationManager;
 	// ---------------------------------------------------
 
-	// ---------------------------------------------------
-	// Others
-	// ---------------------------------------------------
-	boolean towerEnabled;
-	boolean gpsEnabled;
-	boolean isStarted;
-	boolean isUsingGps;
-	public String currentFileName;
-	public int satellites;
-	boolean notificationVisible;
-
-	public double currentLatitude;
-	public double currentLongitude;
-	long latestTimeStamp;
-	long autoEmailTimeStamp;
-
-	public boolean addNewTrackSegment = true;
-
-	private NotificationManager gpsNotifyManager;
-	private int NOTIFICATION_ID;
-	static final int DATEPICKER_ID = 0;
-
-	private long autoEmailDelay = 0;
-	private boolean autoEmailEnabled = false;
-
-	// ---------------------------------------------------
-
-	private final IBinder mBinder = new GpsLoggingBinder();
-	public static IGpsLoggerServiceClient MainForm;
 
 	@Override
 	public IBinder onBind(Intent arg0)
@@ -104,6 +68,7 @@ public class GpsLoggingService extends Service
 	@Override
 	public void onCreate()
 	{
+		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		String lang = prefs.getString("locale_override", "");
 
@@ -118,7 +83,7 @@ public class GpsLoggingService extends Service
 		}
 
 		fileHelper = new FileLoggingHelper(this);
-
+	
 		Utilities.LogInfo("GPSLogger started");
 	}
 
@@ -127,20 +92,42 @@ public class GpsLoggingService extends Service
 	{
 		GetPreferences();
 		SetupAutoEmailTimers();
+		
+		Bundle bundle = intent.getExtras();
+
+		if (bundle != null)
+		{
+			boolean startRightNow = bundle.getBoolean("immediate");
+			if (startRightNow)
+			{
+				Utilities.LogInfo("Auto starting logging");
+				StartLogging();
+			}
+		}
 
 	}
-	
-	Handler autoEmailHandler = new Handler();
+
+	/**
+	 * Can be used from calling classes as the go-between for methods and properties.
+	 *
+	 */
+	public class GpsLoggingBinder extends Binder
+	{
+		GpsLoggingService getService()
+		{
+			return GpsLoggingService.this;
+		}
+	}
 
 	/**
 	 * Sets up the auto email timers based on user preferences.
 	 */
 	private void SetupAutoEmailTimers()
 	{
-		if (autoEmailEnabled && autoEmailDelay > 0)
+		if (AppSettings.isAutoEmailEnabled() && Session.getAutoEmailDelay() > 0)
 		{
 			autoEmailHandler.removeCallbacks(autoEmailTimeTask);
-			autoEmailHandler.postDelayed(autoEmailTimeTask, autoEmailDelay );
+			autoEmailHandler.postDelayed(autoEmailTimeTask, Session.getAutoEmailDelay() );
 			
 		}
 	}
@@ -153,10 +140,10 @@ public class GpsLoggingService extends Service
 	{
 		public void run()
 		{
-			if (autoEmailEnabled && autoEmailDelay > 0)
+			if (AppSettings.isAutoEmailEnabled() && Session.getAutoEmailDelay() > 0)
 			{
 				AutoEmailLogFile();
-				autoEmailHandler.postDelayed(autoEmailTimeTask, autoEmailDelay );
+				autoEmailHandler.postDelayed(autoEmailTimeTask, Session.getAutoEmailDelay() );
 			}
 
 		}
@@ -169,7 +156,7 @@ public class GpsLoggingService extends Service
 	private void AutoEmailLogFileOnStop()
 	{
 		// autoEmailDelay 0 means send it when you stop logging.
-		if (autoEmailEnabled && autoEmailDelay == 0)
+		if (AppSettings.isAutoEmailEnabled() && Session.getAutoEmailDelay() == 0)
 		{
 			AutoEmailLogFile();
 		}
@@ -182,18 +169,20 @@ public class GpsLoggingService extends Service
 	{
 		// Check that auto emailing is enabled, there's a valid location and
 		// file name.
-		if (autoEmailEnabled && currentLatitude != 0 && currentLongitude != 0 && currentFileName != null
-				&& currentFileName.length() > 0)
+		if (AppSettings.isAutoEmailEnabled() && Session.hasValidLocation()
+				&& Session.getCurrentFileName() != null
+				&& Session.getCurrentFileName().length() > 0)
 		{
 			// Ensure that a point has been logged since the last time we did
 			// this.
 			// And that we're writing to a file.
-			if (latestTimeStamp > autoEmailTimeStamp && (logToGpx || logToKml))
+			if (Session.getLatestTimeStamp() > Session.getAutoEmailTimeStamp() 
+					&& (AppSettings.shouldLogToGpx() || AppSettings.shouldLogToKml()))
 			{
 				Utilities.LogInfo("Auto Email Log File");
 				AutoEmailHelper aeh = new AutoEmailHelper(GpsLoggingService.this);
-				aeh.SendLogFile(currentFileName, Utilities.GetPersonId(getBaseContext()));
-				autoEmailTimeStamp = System.currentTimeMillis();
+				aeh.SendLogFile(Session.getCurrentFileName(), Utilities.GetPersonId(getBaseContext()));
+				Session.setAutoEmailTimeStamp(System.currentTimeMillis());
 			}
 		}
 	}
@@ -228,131 +217,81 @@ public class GpsLoggingService extends Service
 		// "You have sent too many emails today", this);
 	}
 
-
-	public class GpsLoggingBinder extends Binder
-	{
-		GpsLoggingService getService()
-		{
-			return GpsLoggingService.this;
-		}
-	}
-
+	/**
+	 * Returns whether the service is currently logging.
+	 * @return
+	 */
 	public boolean IsRunning()
 	{
-		return isStarted;
-	}
-
-	public static void SetParent(IGpsLoggerServiceClient mainForm)
-	{
-		MainForm = mainForm;
+		return Session.isStarted();
 	}
 
 	/**
-	 * Gets preferences chosen by the user
+	 * Sets the activity form for this service. The activity form needs to implement IGpsLoggerServiceClient.
+	 * @param mainForm
+	 */
+	public static void SetServiceClient(IGpsLoggerServiceClient mainForm)
+	{
+		mainServiceClient = mainForm;
+	}
+
+	/**
+	 * Gets preferences chosen by the user and populates the AppSettings object.
+	 * Also sets up email timers if required.
 	 */
 	public void GetPreferences()
 	{
-		Utilities.LogInfo("Getting preferences");
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
-		useImperial = prefs.getBoolean("useImperial", false);
-
-		useSatelliteTime = prefs.getBoolean("satellite_time", false);
-
-		logToKml = prefs.getBoolean("log_kml", false);
-		logToGpx = prefs.getBoolean("log_gpx", false);
-		showInNotificationBar = prefs.getBoolean("show_notification", true);
-
-		preferCellTower = prefs.getBoolean("prefer_celltower", false);
-		subdomain = prefs.getString("subdomain", "where");
-
-		String minimumDistanceString = prefs.getString("distance_before_logging", "0");
-
-		if (minimumDistanceString != null && minimumDistanceString.length() > 0)
+		Utilities.PopulateAppSettings(getBaseContext());
+		
+		if (Session.getAutoEmailDelay() != AppSettings.getAutoEmailDelay() * 3600000)
 		{
-			minimumDistance = Integer.valueOf(minimumDistanceString);
-		}
-		else
-		{
-			minimumDistance = 0;
-		}
-
-		if (useImperial)
-		{
-			minimumDistance = Utilities.FeetToMeters(minimumDistance);
-		}
-
-		String minimumSecondsString = prefs.getString("time_before_logging", "60");
-
-		if (minimumSecondsString != null && minimumSecondsString.length() > 0)
-		{
-			minimumSeconds = Integer.valueOf(minimumSecondsString);
-		}
-		else
-		{
-			minimumSeconds = 60;
-		}
-
-		newFileCreation = prefs.getString("new_file_creation", "onceaday");
-		if (newFileCreation.equals("onceaday"))
-		{
-			newFileOnceADay = true;
-		}
-		else
-		{
-			newFileOnceADay = false;
-		}
-
-		seeMyMapUrl = prefs.getString("seemymap_URL", "");
-		seeMyMapGuid = prefs.getString("seemymap_GUID", "");
-
-		useImperial = prefs.getBoolean("useImperial", false);
-
-		autoEmailEnabled = prefs.getBoolean("autoemail_enabled", false);
-		float newAutoEmailDelay = Float.valueOf(prefs.getString("autoemail_frequency", "0"));
-
-		if (autoEmailDelay != newAutoEmailDelay * 3600000)
-		{
-			autoEmailDelay = (long) (newAutoEmailDelay * 3600000);
+			Session.setAutoEmailDelay((long) (AppSettings.getAutoEmailDelay() * 3600000));
 			SetupAutoEmailTimers();
 		}
-
 	}
 
+	/**
+	 * Resets the form, resets file name if required, reobtains preferences
+	 */
 	public void StartLogging()
 	{
-		addNewTrackSegment = true;
+		Session.setAddNewTrackSegment(true);
 
-		if (isStarted)
+		if (Session.isStarted())
 		{
 			return;
 		}
 
 		Utilities.LogInfo("Starting logging procedures");
-		isStarted = true;
+		Session.setStarted(true);
 		GetPreferences();
 		Notify();
 		ResetCurrentFileName();
 		ClearForm();
 		StartGpsManager();
-
 	}
 
+	/**
+	 * Asks the main service client to clear its form.
+	 */
 	private void ClearForm()
 	{
-		if (MainForm != null)
+		if (mainServiceClient != null)
 		{
-			MainForm.ClearForm();
+			mainServiceClient.ClearForm();
 		}
-
 	}
 
+	/**
+	 * Stops logging, removes notification, stops GPS manager, stops email timer
+	 */
 	public void StopLogging()
 	{
-		addNewTrackSegment = true;
+		Session.setAddNewTrackSegment(true);
 
 		Utilities.LogInfo("Stopping logging");
-		isStarted = false;
+		Session.setStarted(false);
+		Session.setCurrentLocationInfo(null);
 		AutoEmailLogFileOnStop();
 		RemoveNotification();
 		StopGpsManager();
@@ -365,7 +304,7 @@ public class GpsLoggingService extends Service
 	{
 
 		Utilities.LogInfo("Notification");
-		if (showInNotificationBar)
+		if (AppSettings.shouldShowInNotificationBar())
 		{
 			gpsNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
@@ -385,7 +324,7 @@ public class GpsLoggingService extends Service
 		Utilities.LogInfo("Remove notification");
 		try
 		{
-			if (notificationVisible)
+			if (Session.isNotificationVisible())
 			{
 				gpsNotifyManager.cancelAll();
 			}
@@ -396,7 +335,8 @@ public class GpsLoggingService extends Service
 		}
 		finally
 		{
-			notificationVisible = false;
+			//notificationVisible = false;
+			Session.setNotificationVisible(false);
 		}
 	}
 
@@ -417,16 +357,17 @@ public class GpsLoggingService extends Service
 		NumberFormat nf = new DecimalFormat("###.######");
 
 		String contentText = getString(R.string.gpslogger_still_running);
-		if (currentLatitude != 0 && currentLongitude != 0)
+		if(Session.hasValidLocation())
+		//if (currentLatitude != 0 && currentLongitude != 0)
 		{
-			contentText = nf.format(currentLatitude) + "," + nf.format(currentLongitude);
+			contentText = nf.format(Session.getCurrentLatitude()) + "," + nf.format(Session.getCurrentLongitude());
 		}
 
 		nfc.setLatestEventInfo(getBaseContext(), getString(R.string.gpslogger_still_running),
 				contentText, pending);
 
 		gpsNotifyManager.notify(NOTIFICATION_ID, nfc);
-		notificationVisible = true;
+		Session.setNotificationVisible(true);
 	}
 
 	/**
@@ -452,30 +393,31 @@ public class GpsLoggingService extends Service
 
 		CheckTowerAndGpsStatus();
 
-		if (gpsEnabled && !preferCellTower)
+		if (Session.isGpsEnabled() && !AppSettings.shouldPreferCellTower())
 		{
 			Utilities.LogInfo("Requesting GPS location updates");
 			// gps satellite based
 			gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-					minimumSeconds * 1000, minimumDistance, gpsLocationListener);
+					AppSettings.getMinimumSeconds() * 1000, AppSettings.getMinimumDistance(), gpsLocationListener);
 
 			gpsLocationManager.addGpsStatusListener(gpsLocationListener);
 
-			isUsingGps = true;
+			Session.setUsingGps(true);
 		}
-		else if (towerEnabled)
+		else if (Session.isTowerEnabled())
 		{
 			Utilities.LogInfo("Requesting tower location updates");
-			isUsingGps = false;
+			Session.setUsingGps(false);
+			//isUsingGps = false;
 			// Cell tower and wifi based
 			towerLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-					minimumSeconds * 1000, minimumDistance, towerLocationListener);
+					AppSettings.getMinimumSeconds() * 1000, AppSettings.getMinimumDistance(), towerLocationListener);
 
 		}
 		else
 		{
 			Utilities.LogInfo("No provider available");
-			isUsingGps = false;
+			Session.setUsingGps(false);
 			SetStatus(R.string.gpsprovider_unavailable);
 			return;
 		}
@@ -490,9 +432,8 @@ public class GpsLoggingService extends Service
 	 */
 	private void CheckTowerAndGpsStatus()
 	{
-		towerEnabled = towerLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-		gpsEnabled = gpsLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
+		Session.setTowerEnabled(towerLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
+		Session.setGpsEnabled(gpsLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
 	}
 
 	/**
@@ -523,29 +464,36 @@ public class GpsLoggingService extends Service
 	private void ResetCurrentFileName()
 	{
 
-		if (newFileOnceADay)
+		if (AppSettings.shouldCreateNewFileOnceADay())
 		{
 			// 20100114.gpx
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			currentFileName = sdf.format(new Date());
+			Session.setCurrentFileName(sdf.format(new Date()));
 		}
 		else
 		{
 			// 20100114183329.gpx
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-			currentFileName = sdf.format(new Date());
+			Session.setCurrentFileName(sdf.format(new Date()));
 		}
 
 	}
 
+	/**
+	 * Gives a status message to the main service client to display
+	 */
 	public void SetStatus(String status)
 	{
-		if (MainForm != null)
+		if (mainServiceClient != null)
 		{
-			MainForm.OnStatusMessage(status);
+			mainServiceClient.OnStatusMessage(status);
 		}
 	}
 
+	/**
+	 * Gets string from given resource ID, passes to SetStatus(String)
+	 * @param stringId
+	 */
 	public void SetStatus(int stringId)
 	{
 		String s = getString(stringId);
@@ -557,11 +505,9 @@ public class GpsLoggingService extends Service
 	 */
 	public void RestartGpsManagers()
 	{
-
 		Utilities.LogInfo("Restarting GPS Managers");
 		StopGpsManager();
 		StartGpsManager();
-
 	}
 
 	/**
@@ -572,51 +518,80 @@ public class GpsLoggingService extends Service
 	{
 		CheckTowerAndGpsStatus();
 
-		if (isUsingGps && preferCellTower)
+		if (Session.isUsingGps() && AppSettings.shouldPreferCellTower())
 		{
 			RestartGpsManagers();
 		}
 		// If GPS is enabled and user doesn't prefer celltowers
-		else if (gpsEnabled && !preferCellTower)
+		else if (Session.isGpsEnabled() && !AppSettings.shouldPreferCellTower())
 		{
 			// But we're not *already* using GPS
-			if (!isUsingGps)
+			if(!Session.isUsingGps())
 			{
 				RestartGpsManagers();
 			}
 			// Else do nothing
 		}
-
 	}
 
+	/**
+	 * This event is raised when the GeneralLocationListener has a new location.
+	 * This method in turn updates notification, writes to file, reobtains preferences, notifies main service client and resets location managers.
+	 * @param loc
+	 */
 	public void OnLocationChanged(Location loc)
 	{
 
+		//Don't do anything until the proper time has elapsed
+		long currentTimeStamp = System.currentTimeMillis();
+		if ((currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 1000))
+		{
+			return;
+		}
+		
+		Session.setLatestTimeStamp(System.currentTimeMillis());
+		
+		Session.setCurrentLocationInfo(loc);
 		Notify();
 		WriteToFile(loc);
 		GetPreferences();
 		ResetManagersIfRequired();
 
-		if (MainForm != null)
+		if (mainServiceClient != null)
 		{
-			MainForm.OnLocationUpdate(loc);
+			mainServiceClient.OnLocationUpdate(loc);
 		}
-
 	}
 
+	/**
+	 * Calls file helper to write a given location to a file.
+	 * @param loc
+	 */
 	private void WriteToFile(Location loc)
 	{
 		fileHelper.WriteToFile(loc);
-
 	}
 
+	/**
+	 * Informs the main service client of the number of visible satellites.
+	 * @param count
+	 */
 	public void SetSatelliteInfo(int count)
 	{
-		if (MainForm != null)
+		if (mainServiceClient != null)
 		{
-			MainForm.OnSatelliteCount(count);
+			mainServiceClient.OnSatelliteCount(count);
 		}
+	}
 
+	public Activity GetActivity()
+	{
+		return null;
+	}
+
+	public Context GetContext()
+	{
+		return getBaseContext();
 	}
 
 }

@@ -1,6 +1,6 @@
 package com.mendhak.gpslogger.helpers;
 
-import com.mendhak.gpslogger.GpsMainActivity;
+import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.Utilities;
 
 import android.content.BroadcastReceiver;
@@ -26,11 +26,10 @@ public class StartupReceiver extends BroadcastReceiver
 
 			if (startImmediately)
 			{
-				Utilities.LogInfo("Launching GPSMainActivity");
-				Intent startActivity = new Intent(context, GpsMainActivity.class);
-				startActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				startActivity.putExtra("immediate", true);
-				context.startActivity(startActivity);
+				Utilities.LogInfo("Launching GPSLoggingService");
+				Intent serviceIntent = new Intent(context, GpsLoggingService.class);
+				serviceIntent.putExtra("immediate", true);
+				context.startService(serviceIntent);
 			}
 		}
 		catch (Exception ex)

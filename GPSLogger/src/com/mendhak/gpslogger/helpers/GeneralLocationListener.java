@@ -5,6 +5,7 @@ import java.util.Iterator;
 import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.Utilities;
+import com.mendhak.gpslogger.model.Session;
 
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
@@ -33,10 +34,6 @@ public class GeneralLocationListener implements LocationListener, GpsStatus.List
 		{
 			if (loc != null)
 			{
-
-				mainActivity.currentLatitude = loc.getLatitude();
-				mainActivity.currentLongitude = loc.getLongitude();
-
 				mainActivity.OnLocationChanged(loc);
 			}
 
@@ -89,6 +86,7 @@ public class GeneralLocationListener implements LocationListener, GpsStatus.List
 				//while (it.hasNext() && count <= maxSatellites)
 				while (it.hasNext() && count <= maxSatellites)
 				{
+					@SuppressWarnings("unused")
 					GpsSatellite s = it.next();
 //					if (s.usedInFix())
 //					{

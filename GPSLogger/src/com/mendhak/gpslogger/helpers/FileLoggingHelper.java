@@ -15,27 +15,29 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.EditText;
 
-import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.Utilities;
+import com.mendhak.gpslogger.interfaces.IFileLoggingHelperCallback;
+import com.mendhak.gpslogger.model.AppSettings;
+import com.mendhak.gpslogger.model.Session;
 
 public class FileLoggingHelper
 {
 
-	static GpsLoggingService mainService;
+	IFileLoggingHelperCallback callingClient;
 	FileLock gpxLock;
 	FileLock kmlLock;
-	public boolean allowDescription = false;
+	public static boolean allowDescription = false;
 
-	public FileLoggingHelper(GpsLoggingService activity)
+	public FileLoggingHelper(IFileLoggingHelperCallback callback)
 	{
-		mainService = activity;
+		callingClient = callback;
 	}
 
 	public void WriteToFile(Location loc)
 	{
 
-		if (!mainService.logToGpx && !mainService.logToKml)
+		if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml())
 		{
 			return;
 		}
@@ -45,8 +47,7 @@ public class FileLoggingHelper
 
 			boolean brandNewFile = false;
 
-			File gpxFolder = new File(
-					Environment.getExternalStorageDirectory(), "GPSLogger");
+			File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
 
 			if (!gpxFolder.exists())
 			{
@@ -54,12 +55,12 @@ public class FileLoggingHelper
 				brandNewFile = true;
 			}
 
-			if (mainService.logToGpx)
+			if (AppSettings.shouldLogToGpx())
 			{
 				WriteToGpxFile(loc, gpxFolder, brandNewFile);
 			}
 
-			if (mainService.logToKml)
+			if (AppSettings.shouldLogToKml())
 			{
 				WriteToKmlFile(loc, gpxFolder, brandNewFile);
 
@@ -71,19 +72,18 @@ public class FileLoggingHelper
 		catch (Exception e)
 		{
 			Log.e("Main", "Could not write file " + e.getMessage());
-			mainService.SetStatus(mainService.getString(R.string.could_not_write_to_file) + e.getMessage());
+			callingClient.SetStatus(callingClient.getString(R.string.could_not_write_to_file)
+					+ e.getMessage());
 		}
 
 	}
 
-	public void WriteToKmlFile(Location loc, File gpxFolder,
-			boolean brandNewFile)
+	public void WriteToKmlFile(Location loc, File gpxFolder, boolean brandNewFile)
 	{
 
 		try
 		{
-			File kmlFile = new File(gpxFolder.getPath(),
-					mainService.currentFileName + ".kml");
+			File kmlFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".kml");
 
 			if (!kmlFile.exists())
 			{
@@ -93,7 +93,7 @@ public class FileLoggingHelper
 
 			Date now;
 
-			if (mainService.useSatelliteTime)
+			if (AppSettings.shouldUseSatelliteTime())
 			{
 				now = new Date(loc.getTime());
 			}
@@ -109,10 +109,8 @@ public class FileLoggingHelper
 
 			if (brandNewFile)
 			{
-				FileOutputStream initialWriter = new FileOutputStream(kmlFile,
-						true);
-				BufferedOutputStream initialOutput = new BufferedOutputStream(
-						initialWriter);
+				FileOutputStream initialWriter = new FileOutputStream(kmlFile, true);
+				BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
 
 				String initialXml = "<?xml version=\"1.0\"?>"
 						+ "<kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document>"
@@ -126,11 +124,9 @@ public class FileLoggingHelper
 			long startPosition = kmlFile.length() - 17;
 
 			String placemark = "<Placemark><description>" + dateTimeString
-					+ "</description><TimeStamp><when>" + dateTimeString
-					+ "</when></TimeStamp>" + "<Point><coordinates>"
-					+ String.valueOf(loc.getLongitude()) + ","
-					+ String.valueOf(loc.getLatitude()) + ","
-					+ String.valueOf(loc.getAltitude())
+					+ "</description><TimeStamp><when>" + dateTimeString + "</when></TimeStamp>"
+					+ "<Point><coordinates>" + String.valueOf(loc.getLongitude()) + ","
+					+ String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getAltitude())
 					+ "</coordinates></Point></Placemark></Document></kml>";
 
 			RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
@@ -143,20 +139,19 @@ public class FileLoggingHelper
 		}
 		catch (IOException e)
 		{
-			Log.e("Main", mainService.getString(R.string.could_not_write_to_file) + e.getMessage());
-			mainService.SetStatus(mainService.getString(R.string.could_not_write_to_file) + e.getMessage());
+			Log.e("Main", callingClient.getString(R.string.could_not_write_to_file) + e.getMessage());
+			callingClient.SetStatus(callingClient.getString(R.string.could_not_write_to_file)
+					+ e.getMessage());
 		}
 
 	}
 
-	public void WriteToGpxFile(Location loc, File gpxFolder,
-			boolean brandNewFile)
+	public void WriteToGpxFile(Location loc, File gpxFolder, boolean brandNewFile)
 	{
 
 		try
 		{
-			File gpxFile = new File(gpxFolder.getPath(),
-					mainService.currentFileName + ".gpx");
+			File gpxFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".gpx");
 
 			if (!gpxFile.exists())
 			{
@@ -166,7 +161,7 @@ public class FileLoggingHelper
 
 			Date now;
 
-			if (mainService.useSatelliteTime)
+			if (AppSettings.shouldUseSatelliteTime())
 			{
 				now = new Date(loc.getTime());
 			}
@@ -179,28 +174,25 @@ public class FileLoggingHelper
 
 			if (brandNewFile)
 			{
-				FileOutputStream initialWriter = new FileOutputStream(gpxFile,
-						true);
-				BufferedOutputStream initialOutput = new BufferedOutputStream(
-						initialWriter);
+				FileOutputStream initialWriter = new FileOutputStream(gpxFile, true);
+				BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
 
 				String initialXml = "<?xml version=\"1.0\"?>"
 						+ "<gpx version=\"1.0\" creator=\"GPSLogger - http://gpslogger.mendhak.com/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">"
-						+ "<time>" + dateTimeString + "</time>" + "<bounds />"
-						+ "<trk></trk></gpx>";
+						+ "<time>" + dateTimeString + "</time>" + "<bounds />" + "<trk></trk></gpx>";
 				initialOutput.write(initialXml.getBytes());
 				// initialOutput.write("\n".getBytes());
 				initialOutput.flush();
 				initialOutput.close();
 			}
 
-			int offsetFromEnd = (mainService.addNewTrackSegment) ? 12 : 21;
+			int offsetFromEnd = (Session.shouldAddNewTrackSegment()) ? 12 : 21;
 
 			long startPosition = gpxFile.length() - offsetFromEnd;
 
 			String trackPoint = GetTrackPointXml(loc, dateTimeString);
 
-			mainService.addNewTrackSegment = false;
+			Session.setAddNewTrackSegment(false);
 
 			// Leaving this commented code in - may want to give user the choice
 			// to
@@ -245,8 +237,9 @@ public class FileLoggingHelper
 		}
 		catch (IOException e)
 		{
-			Log.e("Main", mainService.getString(R.string.could_not_write_to_file) + e.getMessage());
-			mainService.SetStatus(mainService.getString(R.string.could_not_write_to_file) + e.getMessage());
+			Log.e("Main", callingClient.getString(R.string.could_not_write_to_file) + e.getMessage());
+			callingClient.SetStatus(callingClient.getString(R.string.could_not_write_to_file)
+					+ e.getMessage());
 		}
 
 	}
@@ -254,38 +247,34 @@ public class FileLoggingHelper
 	public String GetTrackPointXml(Location loc, String dateTimeString)
 	{
 		String track = "";
-		if (mainService.addNewTrackSegment)
+		if (Session.shouldAddNewTrackSegment())
 		{
 			track = track + "<trkseg>";
 		}
 
-		track = track + "<trkpt lat=\"" + String.valueOf(loc.getLatitude())
-				+ "\" lon=\"" + String.valueOf(loc.getLongitude()) + "\">";
+		track = track + "<trkpt lat=\"" + String.valueOf(loc.getLatitude()) + "\" lon=\""
+				+ String.valueOf(loc.getLongitude()) + "\">";
 
 		if (loc.hasAltitude())
 		{
-			track = track + "<ele>" + String.valueOf(loc.getAltitude())
-					+ "</ele>";
+			track = track + "<ele>" + String.valueOf(loc.getAltitude()) + "</ele>";
 		}
 
 		if (loc.hasBearing())
 		{
-			track = track + "<course>" + String.valueOf(loc.getBearing())
-					+ "</course>";
+			track = track + "<course>" + String.valueOf(loc.getBearing()) + "</course>";
 		}
 
 		if (loc.hasSpeed())
 		{
-			track = track + "<speed>" + String.valueOf(loc.getSpeed())
-					+ "</speed>";
+			track = track + "<speed>" + String.valueOf(loc.getSpeed()) + "</speed>";
 		}
 
 		track = track + "<src>" + loc.getProvider() + "</src>";
 
-		if (mainService.satellites > 0)
+		if(Session.getSatelliteCount()>0)
 		{
-			track = track + "<sat>" + String.valueOf(mainService.satellites)
-					+ "</sat>";
+			track = track + "<sat>" + String.valueOf(Session.getSatelliteCount()) + "</sat>";
 		}
 
 		track = track + "<time>" + dateTimeString + "</time>";
@@ -302,30 +291,29 @@ public class FileLoggingHelper
 
 		if (!allowDescription)
 		{
-			
-			Utilities.MsgBox(
-					mainService.getBaseContext().getString(R.string.not_yet),
-					mainService.getString(R.string.cant_add_description_until_next_point),
-					mainService);
+			Utilities.MsgBox(callingClient.GetContext().getString(R.string.not_yet),
+					callingClient.getString(R.string.cant_add_description_until_next_point),
+					callingClient.GetActivity());
+
 			return;
+
 		}
 
-		AlertDialog.Builder alert = new AlertDialog.Builder(mainService);
+		AlertDialog.Builder alert = new AlertDialog.Builder(callingClient.GetActivity());
 
 		alert.setTitle(R.string.add_description);
 		alert.setMessage(R.string.letters_numbers);
 
 		// Set an EditText view to get user input
-		final EditText input = new EditText(mainService);
+		final EditText input = new EditText(callingClient.GetContext());
 		alert.setView(input);
 
-		
 		alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int whichButton)
 			{
 
-				if (!mainService.logToGpx && !mainService.logToKml)
+				if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml())
 				{
 					return;
 				}
@@ -352,8 +340,7 @@ public class FileLoggingHelper
 	public void AddNoteToLastPoint(String desc)
 	{
 
-		File gpxFolder = new File(Environment.getExternalStorageDirectory(),
-				"GPSLogger");
+		File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
 
 		if (!gpxFolder.exists())
 		{
@@ -364,11 +351,11 @@ public class FileLoggingHelper
 		String description;
 		long startPosition;
 
-		if (mainService.logToGpx)
+		if (AppSettings.shouldLogToGpx())
 		{
 
-			File gpxFile = new File(gpxFolder.getPath(),
-					mainService.currentFileName + ".gpx");
+			File gpxFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".gpx");
+			//File gpxFile = new File(gpxFolder.getPath(), callingClient.GetCurrentFileName() + ".gpx");
 
 			if (!gpxFile.exists())
 			{
@@ -390,22 +377,21 @@ public class FileLoggingHelper
 				gpxLock.release();
 				raf.close();
 
-				mainService.SetStatus(R.string.description_added);
+				callingClient.SetStatus(callingClient.getString(R.string.description_added));
 				allowDescription = false;
 
 			}
 			catch (Exception e)
 			{
-				mainService.SetStatus(R.string.could_not_write_to_file);
+				callingClient.SetStatus(callingClient.getString(R.string.could_not_write_to_file));
 			}
 
 		}
 
-		if (mainService.logToKml)
+		if (AppSettings.shouldLogToKml())
 		{
 
-			File kmlFile = new File(gpxFolder.getPath(),
-					mainService.currentFileName + ".kml");
+			File kmlFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".kml");
 
 			if (!kmlFile.exists())
 			{
@@ -414,8 +400,7 @@ public class FileLoggingHelper
 
 			offsetFromEnd = 37;
 
-			description = "<name>" + desc
-					+ "</name></Point></Placemark></Document></kml>";
+			description = "<name>" + desc + "</name></Point></Placemark></Document></kml>";
 
 			startPosition = kmlFile.length() - offsetFromEnd;
 			try
@@ -431,7 +416,7 @@ public class FileLoggingHelper
 			}
 			catch (Exception e)
 			{
-				mainService.SetStatus(R.string.could_not_write_to_file);
+				callingClient.SetStatus(callingClient.getString(R.string.could_not_write_to_file));
 			}
 
 		}
