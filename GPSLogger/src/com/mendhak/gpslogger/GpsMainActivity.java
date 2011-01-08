@@ -107,6 +107,7 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
+		
 	    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 	    String lang = prefs.getString("locale_override", "");
 

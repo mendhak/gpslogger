@@ -24,7 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.location.Address;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Binder;
@@ -32,7 +31,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-
 
 public class GpsLoggingService extends Service implements IFileLoggingHelperCallback
 {
@@ -46,7 +44,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	Handler autoEmailHandler = new Handler();
 	private final IBinder mBinder = new GpsLoggingBinder();
 	public static IGpsLoggerServiceClient mainServiceClient;
-	
+
 	// ---------------------------------------------------
 	// Helpers and managers
 	// ---------------------------------------------------
@@ -56,24 +54,26 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	FileLoggingHelper fileHelper;
 	public LocationManager gpsLocationManager;
 	public LocationManager towerLocationManager;
-	// ---------------------------------------------------
 
+	// ---------------------------------------------------
 
 	@Override
 	public IBinder onBind(Intent arg0)
 	{
+		Utilities.LogVerbose("GpsLoggingService.onBind called");
 		return mBinder;
 	}
 
 	@Override
 	public void onCreate()
 	{
-		
+		Utilities.LogVerbose("GpsLoggingService.onCreate called");
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		String lang = prefs.getString("locale_override", "");
 
 		if (!lang.equalsIgnoreCase(""))
 		{
+			Utilities.LogVerbose("Setting app to a user specified locale");
 			Locale locale = new Locale(lang);
 			Locale.setDefault(locale);
 			Configuration config = new Configuration();
@@ -83,38 +83,68 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		}
 
 		fileHelper = new FileLoggingHelper(this);
-	
+		startForeground(NOTIFICATION_ID, null);
+
 		Utilities.LogInfo("GPSLogger started");
 	}
 
 	@Override
 	public void onStart(Intent intent, int startId)
 	{
+		Utilities.LogVerbose("GpsLoggingService.onStart called");
+		HandleIntent(intent);
+	}
+
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId)
+	{
+		Utilities.LogVerbose("GpsLoggingService.onStartCommand called");
+		HandleIntent(intent);
+		return START_STICKY;
+	}
+
+	public void HandleIntent(Intent intent)
+	{
+		Utilities.LogVerbose("GpsLoggingService.handleIntent called");
 		GetPreferences();
 		SetupAutoEmailTimers();
-		
-		Bundle bundle = intent.getExtras();
 
-		if (bundle != null)
+		if (intent != null)
 		{
-			boolean startRightNow = bundle.getBoolean("immediate");
-			if (startRightNow)
+			Bundle bundle = intent.getExtras();
+
+			if (bundle != null)
 			{
-				Utilities.LogInfo("Auto starting logging");
+				boolean startRightNow = bundle.getBoolean("immediate");
+				if (startRightNow)
+				{
+					Utilities.LogInfo("Auto starting logging");
+					StartLogging();
+				}
+			}
+		}
+		else
+		{
+			//A null intent is passed in if the service has been killed and restarted.
+			Utilities.LogInfo("Service restarted with null intent.");
+			if(AppSettings.getWasRunning())
+			{
+				Utilities.LogInfo("App was last known to be running.");
 				StartLogging();
 			}
 		}
-
 	}
 
 	/**
-	 * Can be used from calling classes as the go-between for methods and properties.
-	 *
+	 * Can be used from calling classes as the go-between for methods and
+	 * properties.
+	 * 
 	 */
 	public class GpsLoggingBinder extends Binder
 	{
 		GpsLoggingService getService()
 		{
+			Utilities.LogVerbose("GpsLoggingBinder.getService called.");
 			return GpsLoggingService.this;
 		}
 	}
@@ -127,8 +157,8 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		if (AppSettings.isAutoEmailEnabled() && Session.getAutoEmailDelay() > 0)
 		{
 			autoEmailHandler.removeCallbacks(autoEmailTimeTask);
-			autoEmailHandler.postDelayed(autoEmailTimeTask, Session.getAutoEmailDelay() );
-			
+			autoEmailHandler.postDelayed(autoEmailTimeTask, Session.getAutoEmailDelay());
+
 		}
 	}
 
@@ -143,7 +173,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 			if (AppSettings.isAutoEmailEnabled() && Session.getAutoEmailDelay() > 0)
 			{
 				AutoEmailLogFile();
-				autoEmailHandler.postDelayed(autoEmailTimeTask, Session.getAutoEmailDelay() );
+				autoEmailHandler.postDelayed(autoEmailTimeTask, Session.getAutoEmailDelay());
 			}
 
 		}
@@ -170,13 +200,12 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		// Check that auto emailing is enabled, there's a valid location and
 		// file name.
 		if (AppSettings.isAutoEmailEnabled() && Session.hasValidLocation()
-				&& Session.getCurrentFileName() != null
-				&& Session.getCurrentFileName().length() > 0)
+				&& Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0)
 		{
 			// Ensure that a point has been logged since the last time we did
 			// this.
 			// And that we're writing to a file.
-			if (Session.getLatestTimeStamp() > Session.getAutoEmailTimeStamp() 
+			if (Session.getLatestTimeStamp() > Session.getAutoEmailTimeStamp()
 					&& (AppSettings.shouldLogToGpx() || AppSettings.shouldLogToKml()))
 			{
 				Utilities.LogInfo("Auto Email Log File");
@@ -186,7 +215,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 			}
 		}
 	}
-	
+
 	public final Runnable updateResultsEmailSendError = new Runnable()
 	{
 		public void run()
@@ -202,7 +231,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 			AutoEmailBadGPXError();
 		}
 	};
-	
+
 	private void AutoEmailBadGPXError()
 	{
 		Utilities.LogWarning("Could not send email, invalid GPS data.");
@@ -219,6 +248,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 
 	/**
 	 * Returns whether the service is currently logging.
+	 * 
 	 * @return
 	 */
 	public boolean IsRunning()
@@ -227,7 +257,9 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	}
 
 	/**
-	 * Sets the activity form for this service. The activity form needs to implement IGpsLoggerServiceClient.
+	 * Sets the activity form for this service. The activity form needs to
+	 * implement IGpsLoggerServiceClient.
+	 * 
 	 * @param mainForm
 	 */
 	public static void SetServiceClient(IGpsLoggerServiceClient mainForm)
@@ -241,8 +273,9 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 */
 	public void GetPreferences()
 	{
+		Utilities.LogVerbose("GpsLoggingService.GetPreferences called");
 		Utilities.PopulateAppSettings(getBaseContext());
-		
+
 		if (Session.getAutoEmailDelay() != AppSettings.getAutoEmailDelay() * 3600000)
 		{
 			Session.setAutoEmailDelay((long) (AppSettings.getAutoEmailDelay() * 3600000));
@@ -263,12 +296,29 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		}
 
 		Utilities.LogInfo("Starting logging procedures");
-		Session.setStarted(true);
+		SetGpsWasRunning(true);
+	
 		GetPreferences();
 		Notify();
 		ResetCurrentFileName();
 		ClearForm();
 		StartGpsManager();
+	}
+
+	/**
+	 * Sets Session isStarted to true and stores the value in user preferences. It is stored in 
+	 * user preferences in case it needs to be retrieved later when the service is restarted by the OS.
+	 * @param wasRunning
+	 */
+	private void SetGpsWasRunning(boolean wasRunning)
+	{
+		Session.setStarted(wasRunning);
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putBoolean("wasRunning", wasRunning);
+		editor.commit();
+		
 	}
 
 	/**
@@ -290,7 +340,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		Session.setAddNewTrackSegment(true);
 
 		Utilities.LogInfo("Stopping logging");
-		Session.setStarted(false);
+		SetGpsWasRunning(false);
 		Session.setCurrentLocationInfo(null);
 		AutoEmailLogFileOnStop();
 		RemoveNotification();
@@ -335,7 +385,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		}
 		finally
 		{
-			//notificationVisible = false;
+			// notificationVisible = false;
 			Session.setNotificationVisible(false);
 		}
 	}
@@ -357,10 +407,11 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		NumberFormat nf = new DecimalFormat("###.######");
 
 		String contentText = getString(R.string.gpslogger_still_running);
-		if(Session.hasValidLocation())
-		//if (currentLatitude != 0 && currentLongitude != 0)
+		if (Session.hasValidLocation())
+		// if (currentLatitude != 0 && currentLongitude != 0)
 		{
-			contentText = nf.format(Session.getCurrentLatitude()) + "," + nf.format(Session.getCurrentLongitude());
+			contentText = nf.format(Session.getCurrentLatitude()) + ","
+					+ nf.format(Session.getCurrentLongitude());
 		}
 
 		nfc.setLatestEventInfo(getBaseContext(), getString(R.string.gpslogger_still_running),
@@ -398,7 +449,8 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 			Utilities.LogInfo("Requesting GPS location updates");
 			// gps satellite based
 			gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-					AppSettings.getMinimumSeconds() * 1000, AppSettings.getMinimumDistance(), gpsLocationListener);
+					AppSettings.getMinimumSeconds() * 1000, AppSettings.getMinimumDistance(),
+					gpsLocationListener);
 
 			gpsLocationManager.addGpsStatusListener(gpsLocationListener);
 
@@ -408,10 +460,11 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		{
 			Utilities.LogInfo("Requesting tower location updates");
 			Session.setUsingGps(false);
-			//isUsingGps = false;
+			// isUsingGps = false;
 			// Cell tower and wifi based
 			towerLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-					AppSettings.getMinimumSeconds() * 1000, AppSettings.getMinimumDistance(), towerLocationListener);
+					AppSettings.getMinimumSeconds() * 1000, AppSettings.getMinimumDistance(),
+					towerLocationListener);
 
 		}
 		else
@@ -492,6 +545,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 
 	/**
 	 * Gets string from given resource ID, passes to SetStatus(String)
+	 * 
 	 * @param stringId
 	 */
 	public void SetStatus(int stringId)
@@ -526,7 +580,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		else if (Session.isGpsEnabled() && !AppSettings.shouldPreferCellTower())
 		{
 			// But we're not *already* using GPS
-			if(!Session.isUsingGps())
+			if (!Session.isUsingGps())
 			{
 				RestartGpsManagers();
 			}
@@ -536,21 +590,23 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 
 	/**
 	 * This event is raised when the GeneralLocationListener has a new location.
-	 * This method in turn updates notification, writes to file, reobtains preferences, notifies main service client and resets location managers.
+	 * This method in turn updates notification, writes to file, reobtains
+	 * preferences, notifies main service client and resets location managers.
+	 * 
 	 * @param loc
 	 */
 	public void OnLocationChanged(Location loc)
 	{
 
-		//Don't do anything until the proper time has elapsed
+		// Don't do anything until the proper time has elapsed
 		long currentTimeStamp = System.currentTimeMillis();
 		if ((currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 1000))
 		{
 			return;
 		}
-		
+
 		Session.setLatestTimeStamp(System.currentTimeMillis());
-		
+
 		Session.setCurrentLocationInfo(loc);
 		Notify();
 		WriteToFile(loc);
@@ -565,6 +621,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 
 	/**
 	 * Calls file helper to write a given location to a file.
+	 * 
 	 * @param loc
 	 */
 	private void WriteToFile(Location loc)
@@ -574,6 +631,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 
 	/**
 	 * Informs the main service client of the number of visible satellites.
+	 * 
 	 * @param count
 	 */
 	public void SetSatelliteInfo(int count)

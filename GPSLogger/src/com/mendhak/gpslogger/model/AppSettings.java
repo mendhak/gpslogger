@@ -1,6 +1,8 @@
 package com.mendhak.gpslogger.model;
 
-public class AppSettings
+import android.app.Application;
+
+public class AppSettings extends Application
 {
 	// ---------------------------------------------------
 	// User Preferences
@@ -20,6 +22,7 @@ public class AppSettings
 	private static String seeMyMapGuid;
 	private static Float autoEmailDelay = 0f;
 	private static boolean autoEmailEnabled = false;
+	private static boolean wasRunning = false;
 	/**
 	 * @return the useImperial
 	 */
@@ -229,6 +232,24 @@ public class AppSettings
 	public static void setAutoEmailEnabled(boolean autoEmailEnabled)
 	{
 		AppSettings.autoEmailEnabled = autoEmailEnabled;
+	}
+	
+	/**
+	 * Sets whether the app is running to be persisted.
+	 * @param wasRunning
+	 */
+	public static void setWasRunning(boolean wasRunning)
+	{
+		AppSettings.wasRunning = wasRunning;
+	}
+	
+	/**
+	 * Gets whether the app was last known to be running
+	 * @return
+	 */
+	public static boolean getWasRunning()
+	{
+		return wasRunning;
 	}
 	
 

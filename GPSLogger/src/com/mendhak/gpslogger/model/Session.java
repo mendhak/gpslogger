@@ -1,8 +1,9 @@
 package com.mendhak.gpslogger.model;
 
+import android.app.Application;
 import android.location.Location;
 
-public class Session
+public class Session extends Application
 {
 
 	// ---------------------------------------------------
@@ -72,6 +73,7 @@ public class Session
 	public static void setStarted(boolean isStarted)
 	{
 		Session.isStarted = isStarted;
+		
 	}
 
 	/**

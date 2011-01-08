@@ -13,6 +13,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.UUID;
 
 import com.mendhak.gpslogger.helpers.Base64;
@@ -30,7 +31,7 @@ import android.util.Log;
 public class Utilities
 {
 
-	private static final int LOGLEVEL = 2;
+	private static final int LOGLEVEL = 5;
 
 	public static void LogInfo(String message)
 	{
@@ -155,6 +156,8 @@ public class Utilities
 
 		AppSettings.setAutoEmailDelay(Float.valueOf(prefs.getString("autoemail_frequency", "0")));
 	
+		AppSettings.setWasRunning(prefs.getBoolean("wasRunning",false));
+		
 	}
 	
 	/**
@@ -645,8 +648,8 @@ public class Utilities
 	}
 
 	/**
-	 * Given a Date object, returns an ISO 8601 date time string. Examples:
-	 * 2010-03-23T05:17:22Z or 2010-03-23T05:17:22+04:00
+	 * Given a Date object, returns an ISO 8601 date time string in UTC. Example:
+	 * 2010-03-23T05:17:22Z but not 2010-03-23T05:17:22+04:00
 	 * 
 	 * @param dateToFormat
 	 *            The Date object to format.
@@ -654,11 +657,15 @@ public class Utilities
 	 */
 	public static String GetIsoDateTime(Date dateToFormat)
 	{
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+	
+		//GPX specs say that time given should be in UTC, no local time. 
+		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 		String dateTimeString = sdf.format(dateToFormat);
-		dateTimeString = dateTimeString.replaceAll("\\+0000$", "Z");
-		dateTimeString = dateTimeString.replaceAll("(\\d\\d)$", ":$1");
+		
+		//dateTimeString = dateTimeString.replaceAll("\\+0000$", "Z");
+		//dateTimeString = dateTimeString.replaceAll("(\\d\\d)$", ":$1");
 		// Because the Z in SimpleDateFormat gives you '+0900', so we need to
 		// add the colon ourselves
 
@@ -809,7 +816,7 @@ public class Utilities
 
 	public static boolean Flag()
 	{
-		return true;
+		return false;
 	}
 
 }

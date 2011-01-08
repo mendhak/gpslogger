@@ -40,6 +40,7 @@ public class GeneralLocationListener implements LocationListener, GpsStatus.List
 		}
 		catch (Exception ex)
 		{
+			Utilities.LogError("GeneralLocationListener.onLocationChanged", ex);
 			mainActivity.SetStatus(ex.getMessage());
 		}
 
