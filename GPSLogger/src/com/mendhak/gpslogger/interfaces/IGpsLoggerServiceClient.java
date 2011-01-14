@@ -1,5 +1,6 @@
 package com.mendhak.gpslogger.interfaces;
 
+import android.content.Context;
 import android.location.Location;
 
 public interface IGpsLoggerServiceClient
@@ -37,6 +38,12 @@ public interface IGpsLoggerServiceClient
 	 * Asking the calling activity form to clear itself.
 	 */
 	public void ClearForm();
+	
+	/**
+	 * Returns the base context 
+	 * @return
+	 */
+	public Context GetContext();
 
 	
 

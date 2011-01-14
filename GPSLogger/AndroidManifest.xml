@@ -59,6 +59,9 @@
 			</intent-filter>
 
 		</receiver>
+		
+		<receiver  android:name="com.mendhak.gpslogger.helpers.AlarmReceiver">
+		</receiver>
 
 
 	</application>

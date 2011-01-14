@@ -91,7 +91,8 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 			//Form setup - toggle button, display existing location info
 			ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
 			
-			if(loggingService.IsRunning())
+			//if(loggingService.IsRunning())
+			if(Session.isStarted())
 			{
 				buttonOnOff.setChecked(true);
 				DisplayLocationInfo(Session.getCurrentLocationInfo());
@@ -791,6 +792,7 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 	public void OnLocationUpdate(Location loc)
 	{
 		DisplayLocationInfo(loc);
+		ShowPreferencesSummary();
 		
 	}
 

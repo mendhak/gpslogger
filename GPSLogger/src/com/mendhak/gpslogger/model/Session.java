@@ -1,5 +1,7 @@
 package com.mendhak.gpslogger.model;
 
+import com.mendhak.gpslogger.Utilities;
+
 import android.app.Application;
 import android.location.Location;
 
@@ -16,12 +18,13 @@ public class Session extends Application
 	private static String currentFileName;
 	private static int satellites;
 	private static boolean notificationVisible;
-	private static long autoEmailDelay;
+	private static float autoEmailDelay;
 	private static long latestTimeStamp;
 	private static long autoEmailTimeStamp;
 	private static boolean addNewTrackSegment = true;
 	private static Location currentLocationInfo;
 	private static boolean isBound;
+	private static boolean emailReadyToBeSent=false;
 
 	// ---------------------------------------------------
 	/**
@@ -73,7 +76,7 @@ public class Session extends Application
 	public static void setStarted(boolean isStarted)
 	{
 		Session.isStarted = isStarted;
-		
+
 	}
 
 	/**
@@ -107,6 +110,7 @@ public class Session extends Application
 	 */
 	public static void setCurrentFileName(String currentFileName)
 	{
+		Utilities.LogInfo("Setting file name - " + currentFileName);
 		Session.currentFileName = currentFileName;
 	}
 
@@ -158,16 +162,15 @@ public class Session extends Application
 			return 0;
 		}
 	}
+
 	/**
 	 * Determines whether a valid location is available
 	 */
 	public static boolean hasValidLocation()
 	{
-		return (getCurrentLocationInfo() != null 
-				&& getCurrentLatitude() != 0 
-				&& getCurrentLongitude() != 0);
+		return (getCurrentLocationInfo() != null && getCurrentLatitude() != 0 && getCurrentLongitude() != 0);
 	}
-	
+
 	/**
 	 * @return the currentLongitude
 	 */
@@ -238,7 +241,7 @@ public class Session extends Application
 	 * @param autoEmailDelay
 	 *            the autoEmailDelay to set
 	 */
-	public static void setAutoEmailDelay(long autoEmailDelay)
+	public static void setAutoEmailDelay(float autoEmailDelay)
 	{
 		Session.autoEmailDelay = autoEmailDelay;
 	}
@@ -246,7 +249,7 @@ public class Session extends Application
 	/**
 	 * @return the autoEmailDelay to use for the timer
 	 */
-	public static long getAutoEmailDelay()
+	public static float getAutoEmailDelay()
 	{
 		return autoEmailDelay;
 	}
@@ -283,6 +286,24 @@ public class Session extends Application
 	public static boolean isBoundToService()
 	{
 		return isBound;
+	}
+
+	/**
+	 * Sets whether an email is ready to be sent
+	 * @param emailReadyToBeSent
+	 */
+	public static void setEmailReadyToBeSent(boolean emailReadyToBeSent)
+	{
+		Session.emailReadyToBeSent = emailReadyToBeSent;
+	}
+
+	/**
+	 * Gets whether an email is waiting to be sent
+	 * @return
+	 */
+	public static boolean isEmailReadyToBeSent()
+	{
+		return emailReadyToBeSent;
 	}
 
 }

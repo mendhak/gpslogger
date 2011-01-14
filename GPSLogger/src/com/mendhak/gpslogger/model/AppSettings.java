@@ -23,6 +23,7 @@ public class AppSettings extends Application
 	private static Float autoEmailDelay = 0f;
 	private static boolean autoEmailEnabled = false;
 	private static boolean wasRunning = false;
+
 	/**
 	 * @return the useImperial
 	 */
@@ -30,13 +31,16 @@ public class AppSettings extends Application
 	{
 		return useImperial;
 	}
+
 	/**
-	 * @param useImperial the useImperial to set
+	 * @param useImperial
+	 *            the useImperial to set
 	 */
 	public static void setUseImperial(boolean useImperial)
 	{
 		AppSettings.useImperial = useImperial;
 	}
+
 	/**
 	 * @return the newFileOnceADay
 	 */
@@ -44,13 +48,16 @@ public class AppSettings extends Application
 	{
 		return newFileOnceADay;
 	}
+
 	/**
-	 * @param newFileOnceADay the newFileOnceADay to set
+	 * @param newFileOnceADay
+	 *            the newFileOnceADay to set
 	 */
 	public static void setNewFileOnceADay(boolean newFileOnceADay)
 	{
 		AppSettings.newFileOnceADay = newFileOnceADay;
 	}
+
 	/**
 	 * @return the preferCellTower
 	 */
@@ -58,13 +65,16 @@ public class AppSettings extends Application
 	{
 		return preferCellTower;
 	}
+
 	/**
-	 * @param preferCellTower the preferCellTower to set
+	 * @param preferCellTower
+	 *            the preferCellTower to set
 	 */
 	public static void setPreferCellTower(boolean preferCellTower)
 	{
 		AppSettings.preferCellTower = preferCellTower;
 	}
+
 	/**
 	 * @return the useSatelliteTime
 	 */
@@ -72,13 +82,16 @@ public class AppSettings extends Application
 	{
 		return useSatelliteTime;
 	}
+
 	/**
-	 * @param useSatelliteTime the useSatelliteTime to set
+	 * @param useSatelliteTime
+	 *            the useSatelliteTime to set
 	 */
 	public static void setUseSatelliteTime(boolean useSatelliteTime)
 	{
 		AppSettings.useSatelliteTime = useSatelliteTime;
 	}
+
 	/**
 	 * @return the logToKml
 	 */
@@ -86,13 +99,16 @@ public class AppSettings extends Application
 	{
 		return logToKml;
 	}
+
 	/**
-	 * @param logToKml the logToKml to set
+	 * @param logToKml
+	 *            the logToKml to set
 	 */
 	public static void setLogToKml(boolean logToKml)
 	{
 		AppSettings.logToKml = logToKml;
 	}
+
 	/**
 	 * @return the logToGpx
 	 */
@@ -100,13 +116,16 @@ public class AppSettings extends Application
 	{
 		return logToGpx;
 	}
+
 	/**
-	 * @param logToGpx the logToGpx to set
+	 * @param logToGpx
+	 *            the logToGpx to set
 	 */
 	public static void setLogToGpx(boolean logToGpx)
 	{
 		AppSettings.logToGpx = logToGpx;
 	}
+
 	/**
 	 * @return the showInNotificationBar
 	 */
@@ -114,13 +133,16 @@ public class AppSettings extends Application
 	{
 		return showInNotificationBar;
 	}
+
 	/**
-	 * @param showInNotificationBar the showInNotificationBar to set
+	 * @param showInNotificationBar
+	 *            the showInNotificationBar to set
 	 */
 	public static void setShowInNotificationBar(boolean showInNotificationBar)
 	{
 		AppSettings.showInNotificationBar = showInNotificationBar;
 	}
+
 	/**
 	 * @return the subdomain
 	 */
@@ -128,13 +150,16 @@ public class AppSettings extends Application
 	{
 		return subdomain;
 	}
+
 	/**
-	 * @param subdomain the subdomain to set
+	 * @param subdomain
+	 *            the subdomain to set
 	 */
 	public static void setSubdomain(String subdomain)
 	{
 		AppSettings.subdomain = subdomain;
 	}
+
 	/**
 	 * @return the minimumDistance
 	 */
@@ -142,13 +167,16 @@ public class AppSettings extends Application
 	{
 		return minimumDistance;
 	}
+
 	/**
-	 * @param minimumDistance the minimumDistance to set
+	 * @param minimumDistance
+	 *            the minimumDistance to set
 	 */
 	public static void setMinimumDistance(int minimumDistance)
 	{
 		AppSettings.minimumDistance = minimumDistance;
 	}
+
 	/**
 	 * @return the minimumSeconds
 	 */
@@ -156,13 +184,16 @@ public class AppSettings extends Application
 	{
 		return minimumSeconds;
 	}
+
 	/**
-	 * @param minimumSeconds the minimumSeconds to set
+	 * @param minimumSeconds
+	 *            the minimumSeconds to set
 	 */
 	public static void setMinimumSeconds(int minimumSeconds)
 	{
 		AppSettings.minimumSeconds = minimumSeconds;
 	}
+
 	/**
 	 * @return the newFileCreation
 	 */
@@ -170,13 +201,16 @@ public class AppSettings extends Application
 	{
 		return newFileCreation;
 	}
+
 	/**
-	 * @param newFileCreation the newFileCreation to set
+	 * @param newFileCreation
+	 *            the newFileCreation to set
 	 */
 	public static void setNewFileCreation(String newFileCreation)
 	{
 		AppSettings.newFileCreation = newFileCreation;
 	}
+
 	/**
 	 * @return the seeMyMapUrl
 	 */
@@ -184,13 +218,16 @@ public class AppSettings extends Application
 	{
 		return seeMyMapUrl;
 	}
+
 	/**
-	 * @param seeMyMapUrl the seeMyMapUrl to set
+	 * @param seeMyMapUrl
+	 *            the seeMyMapUrl to set
 	 */
 	public static void setSeeMyMapUrl(String seeMyMapUrl)
 	{
 		AppSettings.seeMyMapUrl = seeMyMapUrl;
 	}
+
 	/**
 	 * @return the seeMyMapGuid
 	 */
@@ -198,27 +235,34 @@ public class AppSettings extends Application
 	{
 		return seeMyMapGuid;
 	}
+
 	/**
-	 * @param seeMyMapGuid the seeMyMapGuid to set
+	 * @param seeMyMapGuid
+	 *            the seeMyMapGuid to set
 	 */
 	public static void setSeeMyMapGuid(String seeMyMapGuid)
 	{
 		AppSettings.seeMyMapGuid = seeMyMapGuid;
 	}
+
 	/**
 	 * @return the autoEmailDelay
 	 */
 	public static Float getAutoEmailDelay()
 	{
 		return autoEmailDelay;
+
 	}
+
 	/**
-	 * @param autoEmailDelay the autoEmailDelay to set
+	 * @param autoEmailDelay
+	 *            the autoEmailDelay to set
 	 */
 	public static void setAutoEmailDelay(Float autoEmailDelay)
 	{
 		AppSettings.autoEmailDelay = autoEmailDelay;
 	}
+
 	/**
 	 * @return the autoEmailEnabled
 	 */
@@ -226,31 +270,14 @@ public class AppSettings extends Application
 	{
 		return autoEmailEnabled;
 	}
+
 	/**
-	 * @param autoEmailEnabled the autoEmailEnabled to set
+	 * @param autoEmailEnabled
+	 *            the autoEmailEnabled to set
 	 */
 	public static void setAutoEmailEnabled(boolean autoEmailEnabled)
 	{
 		AppSettings.autoEmailEnabled = autoEmailEnabled;
 	}
-	
-	/**
-	 * Sets whether the app is running to be persisted.
-	 * @param wasRunning
-	 */
-	public static void setWasRunning(boolean wasRunning)
-	{
-		AppSettings.wasRunning = wasRunning;
-	}
-	
-	/**
-	 * Gets whether the app was last known to be running
-	 * @return
-	 */
-	public static boolean getWasRunning()
-	{
-		return wasRunning;
-	}
-	
 
 }

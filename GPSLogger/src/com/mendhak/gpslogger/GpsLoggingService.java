@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import com.mendhak.gpslogger.helpers.AlarmReceiver;
 import com.mendhak.gpslogger.helpers.AutoEmailHelper;
 import com.mendhak.gpslogger.helpers.FileLoggingHelper;
 import com.mendhak.gpslogger.helpers.GeneralLocationListener;
@@ -16,6 +17,7 @@ import com.mendhak.gpslogger.model.AppSettings;
 import com.mendhak.gpslogger.model.Session;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -55,25 +57,27 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	public LocationManager gpsLocationManager;
 	public LocationManager towerLocationManager;
 
+	Intent alarmIntent;
+
 	// ---------------------------------------------------
 
 	@Override
 	public IBinder onBind(Intent arg0)
 	{
-		Utilities.LogVerbose("GpsLoggingService.onBind called");
+		Utilities.LogDebug("GpsLoggingService.onBind called");
 		return mBinder;
 	}
 
 	@Override
 	public void onCreate()
 	{
-		Utilities.LogVerbose("GpsLoggingService.onCreate called");
+		Utilities.LogDebug("GpsLoggingService.onCreate called");
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		String lang = prefs.getString("locale_override", "");
 
 		if (!lang.equalsIgnoreCase(""))
 		{
-			Utilities.LogVerbose("Setting app to a user specified locale");
+			Utilities.LogVerbose("Setting app to user specified locale: " + lang);
 			Locale locale = new Locale(lang);
 			Locale.setDefault(locale);
 			Configuration config = new Configuration();
@@ -83,31 +87,45 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		}
 
 		fileHelper = new FileLoggingHelper(this);
-		startForeground(NOTIFICATION_ID, null);
 
-		Utilities.LogInfo("GPSLogger started");
+		Utilities.LogInfo("GPSLoggerService created");
 	}
 
 	@Override
 	public void onStart(Intent intent, int startId)
 	{
-		Utilities.LogVerbose("GpsLoggingService.onStart called");
+		Utilities.LogDebug("GpsLoggingService.onStart called");
 		HandleIntent(intent);
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId)
 	{
-		Utilities.LogVerbose("GpsLoggingService.onStartCommand called");
+		Utilities.LogDebug("GpsLoggingService.onStartCommand called");
 		HandleIntent(intent);
 		return START_STICKY;
 	}
 
+	@Override
+	public void onDestroy()
+	{
+		Utilities.LogWarning("GpsLoggingService is being destroyed by Android OS.");
+		mainServiceClient = null;
+		super.onDestroy();
+	}
+
+	@Override
+	public void onLowMemory()
+	{
+		Utilities.LogWarning("Android OS is low on memory.");
+		super.onLowMemory();
+	}
+
 	public void HandleIntent(Intent intent)
 	{
-		Utilities.LogVerbose("GpsLoggingService.handleIntent called");
+		Utilities.LogDebug("GpsLoggingService.handleIntent called");
 		GetPreferences();
-		SetupAutoEmailTimers();
+		// SetupAutoEmailTimers();
 
 		if (intent != null)
 		{
@@ -116,22 +134,30 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 			if (bundle != null)
 			{
 				boolean startRightNow = bundle.getBoolean("immediate");
+				boolean alarmWentOff = bundle.getBoolean("alarmWentOff");
 				if (startRightNow)
 				{
 					Utilities.LogInfo("Auto starting logging");
 					StartLogging();
 				}
+
+				if (alarmWentOff)
+				{
+					Utilities.LogDebug("setEmailReadyToBeSent = true");
+					
+					Session.setEmailReadyToBeSent(true);
+					AutoEmailLogFile();
+				}
 			}
 		}
 		else
 		{
-			//A null intent is passed in if the service has been killed and restarted.
-			Utilities.LogInfo("Service restarted with null intent.");
-			if(AppSettings.getWasRunning())
-			{
-				Utilities.LogInfo("App was last known to be running.");
-				StartLogging();
-			}
+			// A null intent is passed in if the service has been killed and
+			// restarted.
+			Utilities.LogDebug("Service restarted with null intent. Restarting logging.");
+
+			StartLogging();
+
 		}
 	}
 
@@ -142,9 +168,9 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 */
 	public class GpsLoggingBinder extends Binder
 	{
-		GpsLoggingService getService()
+		public GpsLoggingService getService()
 		{
-			Utilities.LogVerbose("GpsLoggingBinder.getService called.");
+			Utilities.LogDebug("GpsLoggingBinder.getService called.");
 			return GpsLoggingService.this;
 		}
 	}
@@ -152,32 +178,47 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	/**
 	 * Sets up the auto email timers based on user preferences.
 	 */
-	private void SetupAutoEmailTimers()
+	public void SetupAutoEmailTimers()
 	{
+		Utilities.LogDebug("GpsLoggingService.SetupAutoEmailTimers called.");
+		Utilities.LogDebug("isAutoEmailEnabled - " + String.valueOf(AppSettings.isAutoEmailEnabled()));
+		Utilities.LogDebug("Session.getAutoEmailDelay - " + String.valueOf(Session.getAutoEmailDelay()));
 		if (AppSettings.isAutoEmailEnabled() && Session.getAutoEmailDelay() > 0)
 		{
-			autoEmailHandler.removeCallbacks(autoEmailTimeTask);
-			autoEmailHandler.postDelayed(autoEmailTimeTask, Session.getAutoEmailDelay());
+			Utilities.LogDebug("Setting up email alarm");
+			long triggerTime = System.currentTimeMillis()
+					+ (long) (Session.getAutoEmailDelay() * 60 * 60 * 1000);
 
+			alarmIntent = new Intent(getBaseContext(), AlarmReceiver.class);
+
+			PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent,
+					PendingIntent.FLAG_UPDATE_CURRENT);
+
+			AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+			am.set(AlarmManager.RTC_WAKEUP, triggerTime, sender);
+
+		}
+		else
+		{
+			Utilities.LogDebug("Checking if alarmIntent is null");
+			if (alarmIntent != null)
+			{
+				Utilities.LogDebug("alarmIntent was null, canceling alarm");
+				CancelAlarm();
+			}
 		}
 	}
 
-	/**
-	 * Runnable which can be called from timers, use to auto email and reapply
-	 * timer
-	 */
-	private Runnable autoEmailTimeTask = new Runnable()
+	private void CancelAlarm()
 	{
-		public void run()
-		{
-			if (AppSettings.isAutoEmailEnabled() && Session.getAutoEmailDelay() > 0)
-			{
-				AutoEmailLogFile();
-				autoEmailHandler.postDelayed(autoEmailTimeTask, Session.getAutoEmailDelay());
-			}
+		Utilities.LogDebug("GpsLoggingService.CancelAlarm called");
+		AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+		PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent,
+				PendingIntent.FLAG_UPDATE_CURRENT);
+		Utilities.LogDebug("Alarm intent was null? " + String.valueOf(sender==null));
+		am.cancel(sender);
+	}
 
-		}
-	};
 
 	/**
 	 * Method to be called if user has chosen to auto email log files when he
@@ -188,6 +229,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		// autoEmailDelay 0 means send it when you stop logging.
 		if (AppSettings.isAutoEmailEnabled() && Session.getAutoEmailDelay() == 0)
 		{
+			Session.setEmailReadyToBeSent(true);
 			AutoEmailLogFile();
 		}
 	}
@@ -195,24 +237,26 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	/**
 	 * Calls the Auto Email Helper which processes the file and sends it.
 	 */
-	private void AutoEmailLogFile()
+	public void AutoEmailLogFile()
 	{
+
+		Utilities.LogDebug("GpsLoggingService.AutoEmailLogFile called.");
+		Utilities.LogVerbose("isEmailReadyToBeSent - " + Session.isEmailReadyToBeSent());
+
+
 		// Check that auto emailing is enabled, there's a valid location and
 		// file name.
-		if (AppSettings.isAutoEmailEnabled() && Session.hasValidLocation()
-				&& Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0)
+		// if (AppSettings.isAutoEmailEnabled() && Session.hasValidLocation()
+		// && Session.getCurrentFileName() != null &&
+		// Session.getCurrentFileName().length() > 0)
+		if (Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0
+				&& Session.isEmailReadyToBeSent())
 		{
-			// Ensure that a point has been logged since the last time we did
-			// this.
-			// And that we're writing to a file.
-			if (Session.getLatestTimeStamp() > Session.getAutoEmailTimeStamp()
-					&& (AppSettings.shouldLogToGpx() || AppSettings.shouldLogToKml()))
-			{
-				Utilities.LogInfo("Auto Email Log File");
-				AutoEmailHelper aeh = new AutoEmailHelper(GpsLoggingService.this);
-				aeh.SendLogFile(Session.getCurrentFileName(), Utilities.GetPersonId(getBaseContext()));
-				Session.setAutoEmailTimeStamp(System.currentTimeMillis());
-			}
+			Utilities.LogInfo("Emailing Log File");
+			AutoEmailHelper aeh = new AutoEmailHelper(GpsLoggingService.this);
+			aeh.SendLogFile(Session.getCurrentFileName(), Utilities.GetPersonId(getBaseContext()));
+
+			SetupAutoEmailTimers();
 		}
 	}
 
@@ -235,25 +279,11 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	private void AutoEmailBadGPXError()
 	{
 		Utilities.LogWarning("Could not send email, invalid GPS data.");
-		// Utilities.MsgBox(getString(R.string.error),
-		// "GPS data sent is invalid.", this);
 	}
 
 	private void AutoEmailTooManySentError()
 	{
 		Utilities.LogWarning("Could not send email, user has exceeded the daily limit.");
-		// Utilities.MsgBox(getString(R.string.error),
-		// "You have sent too many emails today", this);
-	}
-
-	/**
-	 * Returns whether the service is currently logging.
-	 * 
-	 * @return
-	 */
-	public boolean IsRunning()
-	{
-		return Session.isStarted();
 	}
 
 	/**
@@ -273,12 +303,17 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 */
 	public void GetPreferences()
 	{
-		Utilities.LogVerbose("GpsLoggingService.GetPreferences called");
+		Utilities.LogDebug("GpsLoggingService.GetPreferences called");
 		Utilities.PopulateAppSettings(getBaseContext());
 
-		if (Session.getAutoEmailDelay() != AppSettings.getAutoEmailDelay() * 3600000)
+		Utilities.LogDebug("Session.getAutoEmailDelay: " + Session.getAutoEmailDelay());
+		Utilities.LogDebug("AppSettings.getAutoEmailDelay: " + AppSettings.getAutoEmailDelay());
+		
+		if (Session.getAutoEmailDelay() != AppSettings.getAutoEmailDelay())
 		{
-			Session.setAutoEmailDelay((long) (AppSettings.getAutoEmailDelay() * 3600000));
+			Utilities.LogDebug("Old autoEmailDelay - " + String.valueOf(Session.getAutoEmailDelay())
+					+ "; New -" + String.valueOf(AppSettings.getAutoEmailDelay()));
+			Session.setAutoEmailDelay(AppSettings.getAutoEmailDelay());
 			SetupAutoEmailTimers();
 		}
 	}
@@ -288,6 +323,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 */
 	public void StartLogging()
 	{
+		Utilities.LogDebug("GpsLoggingService.StartLogging called");
 		Session.setAddNewTrackSegment(true);
 
 		if (Session.isStarted())
@@ -296,29 +332,15 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		}
 
 		Utilities.LogInfo("Starting logging procedures");
-		SetGpsWasRunning(true);
-	
+		startForeground(NOTIFICATION_ID, null);
+		Session.setStarted(true);
+
 		GetPreferences();
 		Notify();
 		ResetCurrentFileName();
 		ClearForm();
 		StartGpsManager();
-	}
 
-	/**
-	 * Sets Session isStarted to true and stores the value in user preferences. It is stored in 
-	 * user preferences in case it needs to be retrieved later when the service is restarted by the OS.
-	 * @param wasRunning
-	 */
-	private void SetGpsWasRunning(boolean wasRunning)
-	{
-		Session.setStarted(wasRunning);
-		
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		SharedPreferences.Editor editor = prefs.edit();
-		editor.putBoolean("wasRunning", wasRunning);
-		editor.commit();
-		
 	}
 
 	/**
@@ -326,7 +348,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 */
 	private void ClearForm()
 	{
-		if (mainServiceClient != null)
+		if (IsMainFormVisible())
 		{
 			mainServiceClient.ClearForm();
 		}
@@ -337,12 +359,17 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 */
 	public void StopLogging()
 	{
+		Utilities.LogDebug("GpsLoggingService.StopLogging called");
 		Session.setAddNewTrackSegment(true);
 
 		Utilities.LogInfo("Stopping logging");
-		SetGpsWasRunning(false);
-		Session.setCurrentLocationInfo(null);
+		Session.setStarted(false);
+		// Email log file before setting location info to null
 		AutoEmailLogFileOnStop();
+		CancelAlarm();
+		Session.setCurrentLocationInfo(null);
+		stopForeground(true);
+
 		RemoveNotification();
 		StopGpsManager();
 	}
@@ -353,7 +380,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	private void Notify()
 	{
 
-		Utilities.LogInfo("Notification");
+		Utilities.LogDebug("GpsLoggingService.Notify called");
 		if (AppSettings.shouldShowInNotificationBar())
 		{
 			gpsNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -371,7 +398,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 */
 	private void RemoveNotification()
 	{
-		Utilities.LogInfo("Remove notification");
+		Utilities.LogDebug("GpsLoggingService.RemoveNotification called");
 		try
 		{
 			if (Session.isNotificationVisible())
@@ -395,6 +422,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 */
 	private void ShowNotification()
 	{
+		Utilities.LogDebug("GpsLoggingService.ShowNotification called");
 		// What happens when the notification item is clicked
 		Intent contentIntent = new Intent(this, GpsMainActivity.class);
 
@@ -431,8 +459,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 */
 	public void StartGpsManager()
 	{
-
-		Utilities.LogInfo("Starting GPS Manager");
+		Utilities.LogDebug("GpsLoggingService.StartGpsManager");
 
 		GetPreferences();
 
@@ -495,7 +522,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	public void StopGpsManager()
 	{
 
-		Utilities.LogInfo("Stopping GPS managers");
+		Utilities.LogDebug("GpsLoggingService.StopGpsManager");
 
 		if (towerLocationListener != null)
 		{
@@ -517,6 +544,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	private void ResetCurrentFileName()
 	{
 
+		Utilities.LogDebug("GpsLoggingService.ResetCurrentFileName called");
 		if (AppSettings.shouldCreateNewFileOnceADay())
 		{
 			// 20100114.gpx
@@ -537,7 +565,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 */
 	public void SetStatus(String status)
 	{
-		if (mainServiceClient != null)
+		if (IsMainFormVisible())
 		{
 			mainServiceClient.OnStatusMessage(status);
 		}
@@ -559,7 +587,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 */
 	public void RestartGpsManagers()
 	{
-		Utilities.LogInfo("Restarting GPS Managers");
+		Utilities.LogDebug("GpsLoggingService.RestartGpsManagers");
 		StopGpsManager();
 		StartGpsManager();
 	}
@@ -605,15 +633,16 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 			return;
 		}
 
+		Utilities.LogInfo("New location obtained");
 		Session.setLatestTimeStamp(System.currentTimeMillis());
-
 		Session.setCurrentLocationInfo(loc);
 		Notify();
 		WriteToFile(loc);
+		AutoEmailLogFile();
 		GetPreferences();
 		ResetManagersIfRequired();
 
-		if (mainServiceClient != null)
+		if (IsMainFormVisible())
 		{
 			mainServiceClient.OnLocationUpdate(loc);
 		}
@@ -636,7 +665,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 */
 	public void SetSatelliteInfo(int count)
 	{
-		if (mainServiceClient != null)
+		if (IsMainFormVisible())
 		{
 			mainServiceClient.OnSatelliteCount(count);
 		}
@@ -650,6 +679,18 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	public Context GetContext()
 	{
 		return getBaseContext();
+	}
+
+	public boolean IsMainFormVisible()
+	{
+		return mainServiceClient != null;
+	}
+
+	public Context GetMainFormContext()
+	{
+
+		return mainServiceClient.GetContext();
+
 	}
 
 }

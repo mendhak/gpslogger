@@ -5,12 +5,12 @@ import java.util.Iterator;
 import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.Utilities;
-import com.mendhak.gpslogger.model.Session;
 
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationProvider;
 import android.os.Bundle;
 
 public class GeneralLocationListener implements LocationListener, GpsStatus.Listener
@@ -20,6 +20,7 @@ public class GeneralLocationListener implements LocationListener, GpsStatus.List
 
 	public GeneralLocationListener(GpsLoggingService activity)
 	{
+		Utilities.LogDebug("GeneralLocationListener constructor");
 		mainActivity = activity;
 	}
 
@@ -29,11 +30,12 @@ public class GeneralLocationListener implements LocationListener, GpsStatus.List
 	public void onLocationChanged(Location loc)
 	{
 
-		Utilities.LogInfo("Location changed");
+		
 		try
 		{
 			if (loc != null)
 			{
+				Utilities.LogVerbose("GeneralLocationListener.onLocationChanged");
 				mainActivity.OnLocationChanged(loc);
 			}
 
@@ -49,6 +51,7 @@ public class GeneralLocationListener implements LocationListener, GpsStatus.List
 	public void onProviderDisabled(String provider)
 	{
 		Utilities.LogInfo("Provider disabled");
+		Utilities.LogDebug(provider);
 		mainActivity.RestartGpsManagers();
 	}
 
@@ -56,28 +59,41 @@ public class GeneralLocationListener implements LocationListener, GpsStatus.List
 	{
 
 		Utilities.LogInfo("Provider enabled");
+		Utilities.LogDebug(provider);
 		mainActivity.RestartGpsManagers();
 	}
 
 	public void onStatusChanged(String provider, int status, Bundle extras)
 	{
-		Utilities.LogInfo("Status changed");
+		if(status == LocationProvider.OUT_OF_SERVICE)
+		{
+			Utilities.LogDebug(provider + " is out of service");
+		}
+		
+		if(status == LocationProvider.AVAILABLE)
+		{
+			Utilities.LogDebug(provider + " is available");
+		}
+		
+		if(status == LocationProvider.TEMPORARILY_UNAVAILABLE)
+		{
+			Utilities.LogDebug(provider + " is temporarily unavailable");
+		}
 	}
 
 	public void onGpsStatusChanged(int event)
 	{
 
-		Utilities.LogInfo("GPS Status Changed");
 		switch (event)
 		{
 			case GpsStatus.GPS_EVENT_FIRST_FIX:
-				Utilities.LogInfo("GPS Event First Fix");
+				Utilities.LogDebug("GPS Event First Fix");
 				mainActivity.SetStatus(mainActivity.getString(R.string.fix_obtained));
 				break;
 
 			case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
 
-				Utilities.LogInfo("GPS Satellite status obtained");
+				Utilities.LogDebug("GPS Satellite status obtained");
 				GpsStatus status = mainActivity.gpsLocationManager.getGpsStatus(null);
 
 				int maxSatellites = status.getMaxSatellites();
@@ -114,7 +130,5 @@ public class GeneralLocationListener implements LocationListener, GpsStatus.List
 				break;
 
 		}
-
 	}
-
 }

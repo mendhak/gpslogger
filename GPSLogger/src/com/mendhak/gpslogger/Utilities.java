@@ -31,7 +31,7 @@ import android.util.Log;
 public class Utilities
 {
 
-	private static final int LOGLEVEL = 5;
+	private static final int LOGLEVEL = 3;
 
 	public static void LogInfo(String message)
 	{
@@ -156,8 +156,7 @@ public class Utilities
 
 		AppSettings.setAutoEmailDelay(Float.valueOf(prefs.getString("autoemail_frequency", "0")));
 	
-		AppSettings.setWasRunning(prefs.getBoolean("wasRunning",false));
-		
+	
 	}
 	
 	/**
@@ -806,12 +805,13 @@ public class Utilities
 
 	public static String GetEmailBaseUrl()
 	{
-		return "http://";
+		return "";
+		
 	}
 
 	public static String GetSeeMyMapBaseUrl()
 	{
-		return "http://";
+		return "";	
 	}
 
 	public static boolean Flag()
