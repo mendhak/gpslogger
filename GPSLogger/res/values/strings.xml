@@ -52,7 +52,7 @@
     <string name="sharing_location_only">Location only</string>
     <string name="sharing_pick_file">Pick a file to share</string>
     <string name="sharing_mylocation">My location</string>
-    <string name="sharing_latlong_text">Lat: %s, Long: %s</string>
+    <string name="sharing_latlong_text" formatted="false">Lat: %s, Long: %s</string>
     <string name="sharing_via">Share via</string>
     
     <!-- general -->
@@ -109,8 +109,8 @@
     <string name="time_halfhour">&#189; hour</string>
     <string name="time_oneandhalfhours">1&#189; hours</string>
     <string name="time_twoandhalfhours">2&#189; hours</string>
-    <string name="time_hms_format">%sh %sm %ss</string>
-    <string name="accuracy_within">within %s %s</string>
+    <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
+    <string name="accuracy_within" formatted="false">within %s %s</string>
     <string name="error_displaying">Error in displaying location info: %s</string>
     <string name="degree_symbol">&#176;</string>
     

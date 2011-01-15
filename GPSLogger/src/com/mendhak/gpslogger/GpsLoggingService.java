@@ -117,7 +117,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	@Override
 	public void onLowMemory()
 	{
-		Utilities.LogWarning("Android OS is low on memory.");
+		Utilities.LogWarning("Android is low on memory.");
 		super.onLowMemory();
 	}
 
@@ -144,7 +144,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 				if (alarmWentOff)
 				{
 					Utilities.LogDebug("setEmailReadyToBeSent = true");
-					
+
 					Session.setEmailReadyToBeSent(true);
 					AutoEmailLogFile();
 				}
@@ -212,13 +212,18 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	private void CancelAlarm()
 	{
 		Utilities.LogDebug("GpsLoggingService.CancelAlarm called");
-		AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-		PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent,
-				PendingIntent.FLAG_UPDATE_CURRENT);
-		Utilities.LogDebug("Alarm intent was null? " + String.valueOf(sender==null));
-		am.cancel(sender);
-	}
 
+		if (alarmIntent != null)
+		{
+			Utilities.LogDebug("GpsLoggingService.CancelAlarm called");
+			AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+			PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent,
+					PendingIntent.FLAG_UPDATE_CURRENT);
+			Utilities.LogDebug("Pending alarm intent was null? " + String.valueOf(sender == null));
+			am.cancel(sender);
+		}
+
+	}
 
 	/**
 	 * Method to be called if user has chosen to auto email log files when he
@@ -242,7 +247,6 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 
 		Utilities.LogDebug("GpsLoggingService.AutoEmailLogFile called.");
 		Utilities.LogVerbose("isEmailReadyToBeSent - " + Session.isEmailReadyToBeSent());
-
 
 		// Check that auto emailing is enabled, there's a valid location and
 		// file name.
@@ -308,7 +312,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 
 		Utilities.LogDebug("Session.getAutoEmailDelay: " + Session.getAutoEmailDelay());
 		Utilities.LogDebug("AppSettings.getAutoEmailDelay: " + AppSettings.getAutoEmailDelay());
-		
+
 		if (Session.getAutoEmailDelay() != AppSettings.getAutoEmailDelay())
 		{
 			Utilities.LogDebug("Old autoEmailDelay - " + String.valueOf(Session.getAutoEmailDelay())

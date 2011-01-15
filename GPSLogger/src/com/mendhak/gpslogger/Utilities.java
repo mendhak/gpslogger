@@ -33,6 +33,7 @@ public class Utilities
 
 	private static final int LOGLEVEL = 3;
 
+	
 	public static void LogInfo(String message)
 	{
 		if (LOGLEVEL >= 3)
@@ -42,6 +43,7 @@ public class Utilities
 
 	}
 
+	
 	public static void LogError(String methodName, Exception ex)
 	{
 		try
@@ -54,12 +56,14 @@ public class Utilities
 		}
 	}
 
+	
 	private static void LogError(String message)
 	{
 		Log.e("GPSLogger", message);
 
 	}
 
+	@SuppressWarnings("unused")
 	public static void LogDebug(String message)
 	{
 		if (LOGLEVEL >= 4)
@@ -76,6 +80,7 @@ public class Utilities
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public static void LogVerbose(String message)
 	{
 		if (LOGLEVEL >= 5)
@@ -112,12 +117,10 @@ public class Utilities
 		if (minimumDistanceString != null && minimumDistanceString.length() > 0)
 		{
 			AppSettings.setMinimumDistance(Integer.valueOf(minimumDistanceString));
-			//appSettings.minimumDistance = Integer.valueOf(minimumDistanceString);
 		}
 		else
 		{
 			AppSettings.setMinimumDistance(Integer.valueOf(0));
-			//appSettings.minimumDistance = 0;
 		}
 
 		if (AppSettings.shouldUseImperial())
@@ -509,8 +512,6 @@ public class Utilities
 		// Ensure all the bytes have been read in
 		if (offset < bytes.length)
 		{
-			// throw new IOException("Could not completely read file " +
-			// file.getName());
 			return null;
 		}
 
@@ -529,7 +530,6 @@ public class Utilities
 	public static String GetStringFromByteArray(byte[] content)
 	{
 		return Base64.encodeBytes(content);
-		//return new String(content);
 
 	}
 

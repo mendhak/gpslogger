@@ -52,7 +52,7 @@
     <string name="sharing_location_only">僅位置</string>
     <string name="sharing_pick_file">選取一個要分享的檔案</string>
     <string name="sharing_mylocation">我的位置</string>
-    <string name="sharing_latlong_text">緯度：%s，經度：%s</string>
+    <string name="sharing_latlong_text" formatted="false">緯度：%s，經度：%s</string>
     <string name="sharing_via">分享方式</string>
     
     <!-- general -->
@@ -109,8 +109,8 @@
     <string name="time_halfhour">½ 小時</string>
     <string name="time_oneandhalfhours">1½ 小時</string>
     <string name="time_twoandhalfhours">2½ 小時</string>
-    <string name="time_hms_format">%s小時 %s分鐘 %s秒</string>
-    <string name="accuracy_within">%s %s內</string>
+    <string name="time_hms_format" formatted="false">%s小時 %s分鐘 %s秒</string>
+    <string name="accuracy_within" formatted="false">%s %s內</string>
     <string name="error_displaying">顯示位置訊息時錯誤： %s</string>
     <string name="degree_symbol">°</string>
     

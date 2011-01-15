@@ -51,7 +51,7 @@
     <string name="sharing_location_only">位置のみ</string>
     <string name="sharing_pick_file">シェアのためにファイルを選んでください。</string>
     <string name="sharing_mylocation">私の位置</string>
-    <string name="sharing_latlong_text">緯度： %s、 経度：　%s</string>
+    <string name="sharing_latlong_text" formatted="false">緯度： %s、 経度：　%s</string>
     <string name="sharing_via">～でシェア</string>
     
     <!-- general -->
@@ -106,8 +106,8 @@
     <string name="time_halfhour">一時半</string>
     <string name="time_oneandhalfhours">1&#189; 時間</string>
     <string name="time_twoandhalfhours">2&#189; 時間</string>
-    <string name="time_hms_format">%s時 %s分 %s秒</string>
-    <string name="accuracy_within">%s %sの限り</string>
+    <string name="time_hms_format" formatted="false">%s時 %s分 %s秒</string>
+    <string name="accuracy_within" formatted="false">%s %sの限り</string>
     <string name="error_displaying">位置の情報を表現のエラー： %s</string>
     <string name="degree_symbol">&#176;</string>
     

@@ -22,7 +22,6 @@ public class AppSettings extends Application
 	private static String seeMyMapGuid;
 	private static Float autoEmailDelay = 0f;
 	private static boolean autoEmailEnabled = false;
-	private static boolean wasRunning = false;
 
 	/**
 	 * @return the useImperial

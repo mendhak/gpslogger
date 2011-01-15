@@ -32,7 +32,7 @@ public class AutoEmailHelper implements IAutoSendHelper
 				pd.setMax(100);
 				pd.setIndeterminate(true);
 
-				pd = ProgressDialog.show((GpsMainActivity) mainActivity.mainServiceClient,
+				pd = ProgressDialog.show((GpsMainActivity) GpsLoggingService.mainServiceClient,
 						mainActivity.getString(R.string.autoemail_sending),
 						mainActivity.getString(R.string.please_wait), true, true);
 

@@ -24,7 +24,7 @@ public class AlarmReceiver extends BroadcastReceiver
 		}
 		catch(Exception ex)
 		{
-			String b = ex.getMessage();
+
 		}
 		
 

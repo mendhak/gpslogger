@@ -49,8 +49,8 @@ import android.widget.ToggleButton;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class GpsMainActivity extends Activity 
-implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperCallback
+public class GpsMainActivity extends Activity implements OnCheckedChangeListener,
+		IGpsLoggerServiceClient, IFileLoggingHelperCallback
 {
 
 	/**
@@ -71,57 +71,56 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 	// ---------------------------------------------------
 
 	private GpsLoggingService loggingService;
-	
+
 	/**
 	 * Provides a connection to the GPS Logging Service
 	 */
-	private ServiceConnection gpsServiceConnection =  new ServiceConnection()
+	private ServiceConnection gpsServiceConnection = new ServiceConnection()
 	{
-		
+
 		public void onServiceDisconnected(ComponentName name)
 		{
 			loggingService = null;
 		}
-		
+
 		public void onServiceConnected(ComponentName name, IBinder service)
 		{
-			loggingService = ((GpsLoggingService.GpsLoggingBinder)service).getService();
+			loggingService = ((GpsLoggingService.GpsLoggingBinder) service).getService();
 			GpsLoggingService.SetServiceClient(GpsMainActivity.this);
-			
-			//Form setup - toggle button, display existing location info
+
+			// Form setup - toggle button, display existing location info
 			ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
-			
-			//if(loggingService.IsRunning())
-			if(Session.isStarted())
+
+			if (Session.isStarted())
 			{
 				buttonOnOff.setChecked(true);
 				DisplayLocationInfo(Session.getCurrentLocationInfo());
 			}
-			
+
 			buttonOnOff.setOnCheckedChangeListener(GpsMainActivity.this);
 		}
 	};
-	
+
 	/**
 	 * Event raised when the form is created for the first time
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
-		
-	    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-	    String lang = prefs.getString("locale_override", "");
 
-	    if(!lang.equalsIgnoreCase(""))
-	    {
-	    	Locale locale = new Locale(lang);
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		String lang = prefs.getString("locale_override", "");
+
+		if (!lang.equalsIgnoreCase(""))
+		{
+			Locale locale = new Locale(lang);
 			Locale.setDefault(locale);
 			Configuration config = new Configuration();
 			config.locale = locale;
-			getBaseContext().getResources().updateConfiguration
-				(config, getBaseContext().getResources().getDisplayMetrics());
-	    }
-			    
+			getBaseContext().getResources().updateConfiguration(config,
+					getBaseContext().getResources().getDisplayMetrics());
+		}
+
 		super.onCreate(savedInstanceState);
 
 		Utilities.LogInfo("GPSLogger started");
@@ -132,15 +131,14 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 		setContentView(R.layout.main);
 
 		GetPreferences();
-		
-		Intent serviceIntent = new Intent(this, GpsLoggingService.class);
-		//Start the service in case it isn't already running
-		startService(serviceIntent);
-		//Now bind to service
-	    bindService(serviceIntent, gpsServiceConnection, Context.BIND_AUTO_CREATE);
-	    Session.setBoundToService(true);
-	}
 
+		Intent serviceIntent = new Intent(this, GpsLoggingService.class);
+		// Start the service in case it isn't already running
+		startService(serviceIntent);
+		// Now bind to service
+		bindService(serviceIntent, gpsServiceConnection, Context.BIND_AUTO_CREATE);
+		Session.setBoundToService(true);
+	}
 
 	/**
 	 * Called when the toggle button is clicked
@@ -148,8 +146,8 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 	{
 		GetPreferences();
-		
-		if(isChecked)
+
+		if (isChecked)
 		{
 			loggingService.StartLogging();
 		}
@@ -158,7 +156,6 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 			loggingService.StopLogging();
 		}
 	}
-
 
 	/**
 	 * Gets preferences chosen by the user
@@ -200,7 +197,8 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 
 		if (AppSettings.getMinimumSeconds() > 0)
 		{
-			String descriptiveTime = Utilities.GetDescriptiveTimeString(AppSettings.getMinimumSeconds(), getBaseContext());
+			String descriptiveTime = Utilities.GetDescriptiveTimeString(AppSettings.getMinimumSeconds(),
+					getBaseContext());
 
 			txtFrequency.setText(descriptiveTime);
 		}
@@ -233,10 +231,11 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 			txtDistance.setText(R.string.summary_dist_regardless);
 		}
 
-		if ((AppSettings.shouldLogToGpx() || AppSettings.shouldLogToKml()) 
+		if ((AppSettings.shouldLogToGpx() || AppSettings.shouldLogToKml())
 				&& (Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0))
 		{
-			txtFilename.setText(getString(R.string.summary_current_filename_format, Session.getCurrentFileName()));
+			txtFilename.setText(getString(R.string.summary_current_filename_format,
+					Session.getCurrentFileName()));
 		}
 	}
 
@@ -246,19 +245,12 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
 		Utilities.LogInfo("KeyDown - " + String.valueOf(keyCode));
-		
-		if(keyCode == KeyEvent.KEYCODE_BACK && Session.isBoundToService())
+
+		if (keyCode == KeyEvent.KEYCODE_BACK && Session.isBoundToService())
 		{
 			unbindService(gpsServiceConnection);
 		}
 
-//		if (keyCode == KeyEvent.KEYCODE_BACK)
-//		{
-//			moveTaskToBack(true);
-//			Toast.makeText(getBaseContext(), getString(R.string.toast_gpslogger_stillrunning),
-//					Toast.LENGTH_LONG).show();
-//			return true;
-//		}
 		return super.onKeyDown(keyCode, event);
 	}
 
@@ -376,7 +368,6 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 						final Intent intent = new Intent(Intent.ACTION_SEND);
 
 						// intent.setType("text/plain");
-						// intent.setType("application/gpx+xml");
 						intent.setType("*/*");
 
 						if (chosenFileName.equalsIgnoreCase(locationOnly))
@@ -388,7 +379,8 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 						if (Session.hasValidLocation())
 						{
 							String bodyText = getString(R.string.sharing_latlong_text,
-									String.valueOf(Session.getCurrentLatitude()), String.valueOf(Session.getCurrentLongitude()));
+									String.valueOf(Session.getCurrentLatitude()),
+									String.valueOf(Session.getCurrentLongitude()));
 							intent.putExtra(Intent.EXTRA_TEXT, bodyText);
 							intent.putExtra("sms_body", bodyText);
 						}
@@ -396,8 +388,8 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 						if (chosenFileName != null && chosenFileName.length() > 0
 								&& !chosenFileName.equalsIgnoreCase(locationOnly))
 						{
-							intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(gpxFolder,
-									chosenFileName)));
+							intent.putExtra(Intent.EXTRA_STREAM,
+									Uri.fromFile(new File(gpxFolder, chosenFileName)));
 						}
 
 						startActivity(Intent.createChooser(intent, getString(R.string.sharing_via)));
@@ -406,11 +398,6 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 				});
 				dialog.show();
 			}
-
-			// startActivity(new Intent("com.mendhak.gpslogger.FILELISTVIEW"));
-			// Intent settingsActivity = new
-			// Intent(getBaseContext(),FileListViewActivity.class);
-			// startActivity(settingsActivity);
 		}
 		catch (Exception ex)
 		{
@@ -471,7 +458,6 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 		fileHelper.AddNoteToLastPoint(desc);
 	}
 
-	
 	/**
 	 * Update the UI: There was a connection error
 	 */
@@ -515,7 +501,6 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 			PointsSent();
 		}
 	};
-
 
 	/**
 	 * MessageBox: There was a connection error.
@@ -568,9 +553,6 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 		seeMyMapHelper.SendAnnotatedPoint();
 	}
 
-	
-
-
 	/**
 	 * Clears the table, removes all values.
 	 */
@@ -602,6 +584,7 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 
 	/**
 	 * Sets the message in the top status label.
+	 * 
 	 * @param stringId
 	 */
 	public void SetStatus(int stringId)
@@ -644,11 +627,10 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 		try
 		{
 
-			if(loc==null)
+			if (loc == null)
 			{
 				return;
 			}
-			
 
 			Session.setLatestTimeStamp(System.currentTimeMillis());
 
@@ -736,7 +718,7 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 				txtDirection.setText(R.string.not_applicable);
 			}
 
-			if(!Session.isUsingGps())
+			if (!Session.isUsingGps())
 			{
 				txtSatellites.setText(R.string.not_applicable);
 				Session.setSatelliteCount(0);
@@ -765,8 +747,6 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 				txtAccuracy.setText(R.string.not_applicable);
 			}
 
-
-
 		}
 		catch (Exception ex)
 		{
@@ -775,31 +755,27 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 
 	}
 
-	
-
 	public void OnBeginGpsLogging()
 	{
 
-		
 	}
-	
+
 	public void OnStopGpsLogging()
 	{
 
-		
 	}
 
 	public void OnLocationUpdate(Location loc)
 	{
 		DisplayLocationInfo(loc);
 		ShowPreferencesSummary();
-		
+
 	}
 
 	public void OnSatelliteCount(int count)
 	{
 		SetSatelliteInfo(count);
-		
+
 	}
 
 	public void OnStatusMessage(String message)
@@ -812,15 +788,9 @@ implements OnCheckedChangeListener, IGpsLoggerServiceClient, IFileLoggingHelperC
 		return this;
 	}
 
-
 	public Context GetContext()
 	{
 		return getBaseContext();
 	}
-
-
-
-
-
 
 }
