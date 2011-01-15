@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SwitchProLite" default="ProToLite" basedir=".">
+	<description>
+        switch between different targets
+    </description>
+
+	<!-- set global properties for this build -->
+	<property name="src" location="src" />
+	<property name="res" location="res" />
+
+
+	<target name="ProToLite" description="Switch to GPSLogger">
+		<!-- change the import in all Java source files -->
+		<replaceregexp flags="g" byline="false">
+			<regexp pattern="import com.mendhak.gpsloggerpro.R;" />
+			<substitution expression="import com.mendhak.gpslogger.R;" />
+			<fileset dir="src" includes="**/*.java" />
+		</replaceregexp>
+		<!-- change the package name in AndroidManifest -->
+		<replaceregexp flags="g" byline="false">
+			<regexp pattern="package=&quot;com.mendhak.gpsloggerpro&quot;" />
+			<substitution expression="package=&quot;com.mendhak.gpslogger&quot;" />
+			<fileset dir="" includes="AndroidManifest.xml" />
+		</replaceregexp>
+		<replaceregexp flags="g" byline="false">
+			<regexp pattern="&gt;GPSLogger Pro&lt;" />
+			<substitution expression="&gt;GPSLogger&lt;"/>
+			<fileset dir="" includes="**/values/strings.xml"/>
+		</replaceregexp>
+		<replaceregexp flags="g" byline="false">
+			<regexp pattern="&gt;GPSロガー（全体）&lt;" />
+			<substitution expression="&gt;GPSロガー&lt;"/>
+			<fileset dir="" includes="**/values-ja/strings.xml"/>
+		</replaceregexp>
+		<replaceregexp flags="g" byline="false">
+			<regexp pattern="label=&quot;GPS Logger Pro&quot;" />
+			<substitution expression="label=&quot;GPS Logger&quot;" />
+			<fileset dir="" includes="AndroidManifest.xml" />
+		</replaceregexp>
+	</target>
+
+	<target name="LiteToPro" depends="ProToLite" description="Switch to GPSLoggerPro">
+
+		<replaceregexp flags="g" byline="false">
+			<regexp pattern="import com.mendhak.gpslogger.R;" />
+			<substitution expression="import com.mendhak.gpsloggerpro.R;" />
+			<fileset dir="src" includes="**/*.java" />
+		</replaceregexp>
+		<replaceregexp flags="g" byline="false">
+			<regexp pattern="package=&quot;com.mendhak.gpslogger&quot;" />
+			<substitution expression="package=&quot;com.mendhak.gpsloggerpro&quot;" />
+			<fileset dir="" includes="AndroidManifest.xml" />
+		</replaceregexp>
+		<replaceregexp flags="g" byline="false">
+			<regexp pattern="&gt;GPSLogger&lt;" />
+			<substitution expression="&gt;GPSLogger Pro&lt;"/>
+			<fileset dir="" includes="**/values/strings.xml"/>
+		</replaceregexp>
+		<replaceregexp flags="g" byline="false">
+			<regexp pattern="&gt;GPSロガー&lt;" />
+			<substitution expression="&gt;GPSロガー（全体）&lt;"/>
+			<fileset dir="" includes="**/values-ja/strings.xml"/>
+		</replaceregexp>
+		<replaceregexp flags="g" byline="false">
+			<regexp pattern="label=&quot;GPS Logger&quot;" />
+			<substitution expression="label=&quot;GPS Logger Pro&quot;" />
+			<fileset dir="" includes="AndroidManifest.xml" />
+		</replaceregexp>
+	</target>
+</project>
