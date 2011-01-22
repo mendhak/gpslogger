@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
  <resources>
-  <string name="app_name">GPSロガー（全体）</string> 
+  <string name="app_name">GPSロガー</string> 
   <string name="settings_screen_name">GPSロガーの設定</string> 
   <string name="ok">OK</string> 
   <string name="cancel">キャンセル</string> 
@@ -45,6 +45,7 @@
     <string name="summary_dist_regardless">maximum</string>
     <string name="summary_current_filename">File:</string>
     <string name="summary_current_filename_format">%s (in your GPSLogger folder)</string>
+    <string name="summary_autoemail">Emails:</string>
 
     <string name="sharing">シェアの設定</string>
     <string name="sharing_pro">GPSロガー（全体）で位置をシェアすることができます。</string>

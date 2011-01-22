@@ -1,7 +1,7 @@
 package com.mendhak.gpslogger;
 
-import java.io.File;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -44,6 +44,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.AdapterView.OnItemClickListener;
@@ -174,11 +175,10 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	private void ShowPreferencesSummary()
 	{
 
-		// TextView lblSummary = (TextView) findViewById(R.id.lblSummary);
 		TextView txtLoggingTo = (TextView) findViewById(R.id.txtLoggingTo);
 		TextView txtFrequency = (TextView) findViewById(R.id.txtFrequency);
 		TextView txtDistance = (TextView) findViewById(R.id.txtDistance);
-		TextView txtFilename = (TextView) findViewById(R.id.txtFileName);
+		TextView txtAutoEmail = (TextView) findViewById(R.id.txtAutoEmail);
 
 		if (!AppSettings.shouldLogToKml() && !AppSettings.shouldLogToGpx())
 		{
@@ -231,12 +231,32 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			txtDistance.setText(R.string.summary_dist_regardless);
 		}
 
-		if ((AppSettings.shouldLogToGpx() || AppSettings.shouldLogToKml())
-				&& (Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0))
+		if (AppSettings.isAutoEmailEnabled())
 		{
-			txtFilename.setText(getString(R.string.summary_current_filename_format,
-					Session.getCurrentFileName()));
+			String autoEmailResx = "";
+
+			if (AppSettings.getAutoEmailDelay() == 0)
+			{
+				autoEmailResx = "autoemail_frequency_whenistop";
+			}
+			else
+			{
+				
+				autoEmailResx = "autoemail_frequency_"
+						+ String.valueOf(AppSettings.getAutoEmailDelay()).replace(".0", "").replace(".", "");
+			}
+
+			String autoEmailDesc = getString(getResources().getIdentifier(
+					Utilities.GetNamespace() +  ".string/" + autoEmailResx, null, null));
+
+			txtAutoEmail.setText(autoEmailDesc);
 		}
+		else
+		{
+			TableRow trAutoEmail = (TableRow) findViewById(R.id.trAutoEmail);
+			trAutoEmail.setVisibility(View.INVISIBLE);
+		}
+
 	}
 
 	/**
@@ -296,7 +316,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 				ClearMap();
 				break;
 			case R.id.mnuSeeMyMapMore:
-				startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
+				startActivity(new Intent(Utilities.GetNamespace() + ".SEEMYMAP_SETUP"));
 				break;
 			case R.id.mnuViewInBrowser:
 				ViewInBrowser();
@@ -775,6 +795,15 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	public void OnSatelliteCount(int count)
 	{
 		SetSatelliteInfo(count);
+
+	}
+
+	public void onFileName(String newFileName)
+	{
+		TextView txtFilename = (TextView) findViewById(R.id.txtFileName);
+
+		txtFilename.setText(getString(R.string.summary_current_filename_format,
+				Session.getCurrentFileName()));
 
 	}
 

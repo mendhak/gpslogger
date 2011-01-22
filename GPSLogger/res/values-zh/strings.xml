@@ -46,6 +46,7 @@
     <string name="summary_dist_regardless">最大值</string>
     <string name="summary_current_filename">文件：</string>
     <string name="summary_current_filename_format">%s (在你的 GPSLogger 文件夹中)</string>
+    <string name="summary_autoemail">Emails:</string>
 
     <string name="sharing">共享</string>
     <string name="sharing_pro">在 GPS Logger 的专业版中你可以使用分享位置的功能。</string>

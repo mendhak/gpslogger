@@ -33,7 +33,6 @@ public class Utilities
 
 	private static final int LOGLEVEL = 3;
 
-	
 	public static void LogInfo(String message)
 	{
 		if (LOGLEVEL >= 3)
@@ -43,7 +42,6 @@ public class Utilities
 
 	}
 
-	
 	public static void LogError(String methodName, Exception ex)
 	{
 		try
@@ -56,7 +54,6 @@ public class Utilities
 		}
 	}
 
-	
 	private static void LogError(String message)
 	{
 		Log.e("GPSLogger", message);
@@ -90,13 +87,14 @@ public class Utilities
 	}
 
 	/**
-	 * Gets user preferences, populates the AppSettings class. 
+	 * Gets user preferences, populates the AppSettings class.
+	 * 
 	 * @param context
 	 * @return
 	 */
 	public static void PopulateAppSettings(Context context)
 	{
-			
+
 		Utilities.LogInfo("Getting preferences");
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
@@ -106,12 +104,12 @@ public class Utilities
 		AppSettings.setLogToKml(prefs.getBoolean("log_kml", false));
 
 		AppSettings.setLogToGpx(prefs.getBoolean("log_gpx", false));
-		
+
 		AppSettings.setShowInNotificationBar(prefs.getBoolean("show_notification", true));
 
 		AppSettings.setPreferCellTower(prefs.getBoolean("prefer_celltower", false));
 		AppSettings.setSubdomain(prefs.getString("subdomain", "where"));
-		
+
 		String minimumDistanceString = prefs.getString("distance_before_logging", "0");
 
 		if (minimumDistanceString != null && minimumDistanceString.length() > 0)
@@ -154,14 +152,19 @@ public class Utilities
 
 		AppSettings.setSeeMyMapGuid(prefs.getString("seemymap_GUID", ""));
 
-
 		AppSettings.setAutoEmailEnabled(prefs.getBoolean("autoemail_enabled", false));
 
+		if (Float.valueOf(prefs.getString("autoemail_frequency", "0")) >= 8f)
+		{
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.putString("autoemail_frequency", "8");
+			editor.commit();
+		}
+
 		AppSettings.setAutoEmailDelay(Float.valueOf(prefs.getString("autoemail_frequency", "0")));
-	
-	
+
 	}
-	
+
 	/**
 	 * Displays a message box to the user with an OK button.
 	 * 
@@ -526,7 +529,7 @@ public class Utilities
 		return bytes;
 
 	}
-	
+
 	public static String GetStringFromByteArray(byte[] content)
 	{
 		return Base64.encodeBytes(content);
@@ -647,8 +650,8 @@ public class Utilities
 	}
 
 	/**
-	 * Given a Date object, returns an ISO 8601 date time string in UTC. Example:
-	 * 2010-03-23T05:17:22Z but not 2010-03-23T05:17:22+04:00
+	 * Given a Date object, returns an ISO 8601 date time string in UTC.
+	 * Example: 2010-03-23T05:17:22Z but not 2010-03-23T05:17:22+04:00
 	 * 
 	 * @param dateToFormat
 	 *            The Date object to format.
@@ -656,15 +659,16 @@ public class Utilities
 	 */
 	public static String GetIsoDateTime(Date dateToFormat)
 	{
-	
-		//GPX specs say that time given should be in UTC, no local time. 
-		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+
+		// GPX specs say that time given should be in UTC, no local time.
+		// SimpleDateFormat sdf = new
+		// SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 		String dateTimeString = sdf.format(dateToFormat);
-		
-		//dateTimeString = dateTimeString.replaceAll("\\+0000$", "Z");
-		//dateTimeString = dateTimeString.replaceAll("(\\d\\d)$", ":$1");
+
+		// dateTimeString = dateTimeString.replaceAll("\\+0000$", "Z");
+		// dateTimeString = dateTimeString.replaceAll("(\\d\\d)$", ":$1");
 		// Because the Z in SimpleDateFormat gives you '+0900', so we need to
 		// add the colon ourselves
 
@@ -806,12 +810,17 @@ public class Utilities
 	public static String GetEmailBaseUrl()
 	{
 		return "";
-		
+
 	}
 
 	public static String GetSeeMyMapBaseUrl()
 	{
-		return "";	
+		return "";
+	}
+	
+	public static String GetNamespace()
+	{
+		return "com.mendhak.gpslogger";
 	}
 
 	public static boolean Flag()

@@ -19,6 +19,7 @@
     <string name="menu_clear_map">Clear Map</string>
     <string name="menu_view_in_browser">Show map</string>
     <string name="menu_seemymap_more">More</string>
+    <string name="menu_emailnow">Email now</string>
     <string name="menu_annotate">Annotate</string>
     <string name="menu_share">Share</string>
     <string name="menu_exit">Exit</string>
@@ -46,9 +47,11 @@
     <string name="summary_dist_regardless">maximum</string>
     <string name="summary_current_filename">File:</string>
     <string name="summary_current_filename_format">%s (in your GPSLogger folder)</string>
+    <string name="summary_autoemail">Emails:</string>
+    
 
     <string name="sharing">Sharing</string>
-    <string name="sharing_pro">You can share locations in the Pro version of GPS Logger.</string>
+    <string name="sharing_pro">You can share locations and send emails in the Pro version of GPS Logger.</string>
     <string name="sharing_location_only">Location only</string>
     <string name="sharing_pick_file">Pick a file to share</string>
     <string name="sharing_mylocation">My location</string>

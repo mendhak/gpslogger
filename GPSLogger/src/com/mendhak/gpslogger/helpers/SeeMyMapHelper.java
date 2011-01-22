@@ -119,7 +119,7 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 		if (AppSettings.getSeeMyMapUrl() == null || AppSettings.getSeeMyMapUrl().length() == 0
 				|| AppSettings.getSeeMyMapGuid() == null || AppSettings.getSeeMyMapGuid().length() == 0)
 		{
-			mainActivity.startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
+			mainActivity.startActivity(new Intent(Utilities.GetNamespace() + ".SEEMYMAP_SETUP"));
 		}
 		else
 		{
@@ -192,7 +192,7 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 		if (AppSettings.getSeeMyMapUrl() == null || AppSettings.getSeeMyMapUrl().length() == 0
 				|| AppSettings.getSeeMyMapGuid() == null || AppSettings.getSeeMyMapGuid().length() == 0)
 		{
-			mainActivity.startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
+			mainActivity.startActivity(new Intent(Utilities.GetNamespace() + ".SEEMYMAP_SETUP"));
 		}
 		else
 		{
@@ -235,7 +235,7 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 		if (AppSettings.getSeeMyMapUrl() == null || AppSettings.getSeeMyMapUrl().length() == 0
 				|| AppSettings.getSeeMyMapGuid() == null || AppSettings.getSeeMyMapGuid().length() == 0)
 		{
-			mainActivity.startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
+			mainActivity.startActivity(new Intent(Utilities.GetNamespace() + ".SEEMYMAP_SETUP"));
 		}
 		else
 		{
@@ -257,7 +257,7 @@ public class SeeMyMapHelper implements ISeeMyMapHelper
 		if (AppSettings.getSeeMyMapUrl() == null || AppSettings.getSeeMyMapUrl().length() == 0
 				|| AppSettings.getSeeMyMapGuid() == null || AppSettings.getSeeMyMapGuid().length() == 0)
 		{
-			mainActivity.startActivity(new Intent("com.mendhak.gpslogger.SEEMYMAP_SETUP"));
+			mainActivity.startActivity(new Intent(Utilities.GetNamespace() + ".SEEMYMAP_SETUP"));
 		}
 		else
 		{

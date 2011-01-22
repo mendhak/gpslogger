@@ -1,6 +1,7 @@
 package com.mendhak.gpslogger;
 
 import com.mendhak.gpslogger.R;
+
 import com.mendhak.gpslogger.helpers.*;
 
 import android.app.Activity;

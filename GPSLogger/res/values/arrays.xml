@@ -13,8 +13,6 @@
 
 <string-array name="autosend_frequencies">
 	<item>@string/autoemail_frequency_whenistop</item>
-	<item>@string/autoemail_frequency_24</item>
-	<item>@string/autoemail_frequency_12</item>
 	<item>@string/autoemail_frequency_8</item>
 	<item>@string/autoemail_frequency_6</item>
 	<item>@string/autoemail_frequency_5</item>
@@ -27,8 +25,6 @@
 
 <string-array name="autosend_values">
 	<item>0</item>
-	<item>24</item>
-	<item>12</item>
 	<item>8</item>
 	<item>6</item>
 	<item>5</item>

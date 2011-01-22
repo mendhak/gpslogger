@@ -6,15 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import com.mendhak.gpslogger.helpers.AlarmReceiver;
-import com.mendhak.gpslogger.helpers.AutoEmailHelper;
-import com.mendhak.gpslogger.helpers.FileLoggingHelper;
-import com.mendhak.gpslogger.helpers.GeneralLocationListener;
-import com.mendhak.gpslogger.helpers.SeeMyMapHelper;
-import com.mendhak.gpslogger.interfaces.IFileLoggingHelperCallback;
-import com.mendhak.gpslogger.interfaces.IGpsLoggerServiceClient;
-import com.mendhak.gpslogger.model.AppSettings;
-import com.mendhak.gpslogger.model.Session;
+import com.mendhak.gpslogger.helpers.*;
+import com.mendhak.gpslogger.interfaces.*;
+import com.mendhak.gpslogger.model.*;
+import com.mendhak.gpslogger.*;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -549,17 +544,26 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	{
 
 		Utilities.LogDebug("GpsLoggingService.ResetCurrentFileName called");
+
+		String newFileName;
 		if (AppSettings.shouldCreateNewFileOnceADay())
 		{
 			// 20100114.gpx
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			Session.setCurrentFileName(sdf.format(new Date()));
+			newFileName = sdf.format(new Date());
+			Session.setCurrentFileName(newFileName);
 		}
 		else
 		{
 			// 20100114183329.gpx
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-			Session.setCurrentFileName(sdf.format(new Date()));
+			newFileName = sdf.format(new Date());
+			Session.setCurrentFileName(newFileName);
+		}
+
+		if (IsMainFormVisible())
+		{
+			mainServiceClient.onFileName(newFileName);
 		}
 
 	}

@@ -132,6 +132,17 @@
 
 		</TableRow>
 
+		<TableRow android:layout_width="fill_parent"
+			android:layout_height="fill_parent" android:id="@+id/trAutoEmail">
+			<TextView android:id="@+id/lblAutoEmail" android:layout_width="wrap_content"
+				android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
+				android:paddingLeft="8dip" android:text="@string/summary_autoemail"></TextView>
+			<TextView android:id="@+id/txtAutoEmail" android:layout_width="wrap_content"
+				android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
+				android:layout_height="fill_parent"></TextView>
+
+		</TableRow>
+
 
 	</TableLayout>
 

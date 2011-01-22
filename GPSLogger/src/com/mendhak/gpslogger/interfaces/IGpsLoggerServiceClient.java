@@ -45,6 +45,12 @@ public interface IGpsLoggerServiceClient
 	 */
 	public Context GetContext();
 
+	/**
+	 * A new current file name is available.
+	 * @param newFileName
+	 */
+	public void onFileName(String newFileName);
+
 	
 
 }

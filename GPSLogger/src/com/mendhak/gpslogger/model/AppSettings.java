@@ -249,7 +249,15 @@ public class AppSettings extends Application
 	 */
 	public static Float getAutoEmailDelay()
 	{
-		return autoEmailDelay;
+		if(autoEmailDelay >= 8f)
+		{
+			return 8f;
+		}
+		else
+		{
+			return autoEmailDelay;	
+		}
+		
 
 	}
 
@@ -259,7 +267,17 @@ public class AppSettings extends Application
 	 */
 	public static void setAutoEmailDelay(Float autoEmailDelay)
 	{
-		AppSettings.autoEmailDelay = autoEmailDelay;
+		
+		if(autoEmailDelay >= 8f)
+		{
+			AppSettings.autoEmailDelay = 8f;
+		}
+		else
+		{
+			AppSettings.autoEmailDelay = autoEmailDelay;	
+		}
+		
+		
 	}
 
 	/**

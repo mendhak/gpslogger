@@ -17,7 +17,7 @@ public class AlarmReceiver extends BroadcastReceiver
 		try
 		{
 			Utilities.LogInfo("Email alarm received");
-			Intent serviceIntent = new Intent("com.mendhak.gpslogger.GpsLoggingService");
+			Intent serviceIntent = new Intent(Utilities.GetNamespace() + ".GpsLoggingService");
 			serviceIntent.putExtra("alarmWentOff", true);
 			// Start the service in case it isn't already running
 			context.startService(serviceIntent);
