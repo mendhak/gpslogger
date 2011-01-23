@@ -221,4 +221,7 @@
     <string name="language">Language</string>
     <string name="language_summary">You will need to restart the application</string>
     
+    <string name="SMMSU">88F6B44D4785553A28114A7AE5E3503E85F15B98E51F28AED08BFBA8B677B6BE9D434CC4211C8369625E89D7554C6405</string>
+    <string name="EMSU">88F6B44D4785553A28114A7AE5E3503E876B52F327D15367F6678D61B7BA432AF26ED9E781608A80F553251940DA3E9D</string>
+    
 </resources>

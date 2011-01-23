@@ -35,6 +35,7 @@ public class AutoEmailActivity extends PreferenceActivity implements OnPreferenc
 
 		EditTextPreference txtTarget = (EditTextPreference) findPreference("autoemail_target");
 		initialEmailAddress = txtTarget.getText();
+		
 	}
 	
 	

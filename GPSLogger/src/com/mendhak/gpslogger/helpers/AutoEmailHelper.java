@@ -8,6 +8,7 @@ import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.Utilities;
+import com.mendhak.gpslogger.model.AppSettings;
 import com.mendhak.gpslogger.model.Session;
 
 public class AutoEmailHelper implements IAutoSendHelper
@@ -167,7 +168,7 @@ class AutoSendHandler implements Runnable
 					+ "</a:XmlBody></body></RelayFile></s:Body></s:Envelope>";
 
 			Utilities.LogInfo("Posting...");
-			String result = Utilities.PostUrl(Utilities.GetEmailBaseUrl() + "/basic", postBody,
+			String result = Utilities.PostUrl(AppSettings.getEmsu() + "/basic", postBody,
 					"http://tempuri.org/IEmailService/RelayFile");
 
 			helper.OnRelay(true, result);

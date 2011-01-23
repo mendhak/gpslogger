@@ -11,12 +11,21 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.TimeZone;
 import java.util.UUID;
 
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+
 import com.mendhak.gpslogger.helpers.Base64;
+import com.mendhak.gpslogger.helpers.SimpleCrypto;
 import com.mendhak.gpslogger.interfaces.IMessageBoxCallback;
 import com.mendhak.gpslogger.model.AppSettings;
 import com.mendhak.gpslogger.R;
@@ -25,6 +34,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -162,6 +173,18 @@ public class Utilities
 		}
 
 		AppSettings.setAutoEmailDelay(Float.valueOf(prefs.getString("autoemail_frequency", "0")));
+
+		if (AppSettings.getEmsu() == null)
+		{
+			AppSettings.setEmsu(GetEMSU(context));
+		}
+
+		if (AppSettings.getSmmsu() == null)
+		{
+			AppSettings.setSmmsu(GetSMMSU(context));
+		}
+
+		AppSettings.setProVersion(IsProVersion(context));
 
 	}
 
@@ -722,7 +745,7 @@ public class Utilities
 
 	public static String GetRegisterSettingUrl(String personId, String target)
 	{
-		String regUrl = GetEmailBaseUrl() + "/registersetting/" + personId + "/" + target;
+		String regUrl = AppSettings.getEmsu() + "/registersetting/" + personId + "/" + target;
 		return regUrl;
 	}
 
@@ -730,7 +753,7 @@ public class Utilities
 			double currentLongitude, String input)
 	{
 
-		String whereUrl = GetSeeMyMapBaseUrl() + "/savepoint/?guid=" + seeMyMapGuid + "&lat="
+		String whereUrl = AppSettings.getSmmsu() + "/savepoint/?guid=" + seeMyMapGuid + "&lat="
 				+ String.valueOf(currentLatitude) + "&lon=" + String.valueOf(currentLongitude) + "&des="
 				+ URLEncoder.encode(input);
 		return whereUrl;
@@ -740,7 +763,7 @@ public class Utilities
 	public static String GetSeeMyMapAddLocationWithDateUrl(String seeMyMapGuid, double currentLatitude,
 			double currentLongitude, String input, String dateTime)
 	{
-		String whereUrl = GetSeeMyMapBaseUrl() + "/savepointwithdate/?guid=" + seeMyMapGuid + "&lat="
+		String whereUrl = AppSettings.getSmmsu() + "/savepointwithdate/?guid=" + seeMyMapGuid + "&lat="
 				+ String.valueOf(currentLatitude) + "&lon=" + String.valueOf(currentLongitude) + "&des="
 				+ URLEncoder.encode(input) + "&date=" + URLEncoder.encode(dateTime);
 
@@ -751,28 +774,28 @@ public class Utilities
 	public static String GetSeeMyMapRequestUrl(String requestedUrl, String password, String personId)
 	{
 
-		String requestUrl = GetSeeMyMapBaseUrl() + "/requestmap/" + requestedUrl + "/" + password + "/"
-				+ personId;
+		String requestUrl = AppSettings.getSmmsu() + "/requestmap/" + requestedUrl + "/" + password
+				+ "/" + personId;
 
 		return requestUrl;
 	}
 
 	public static String GetDeleteFirstPointUrl(String seeMyMapGuid)
 	{
-		String deleteUrl = GetSeeMyMapBaseUrl() + "/clearfirstpoint/" + seeMyMapGuid;
+		String deleteUrl = AppSettings.getSmmsu() + "/clearfirstpoint/" + seeMyMapGuid;
 
 		return deleteUrl;
 	}
 
 	public static String GetDeleteLastPointUrl(String seeMyMapGuid)
 	{
-		String deleteUrl = GetSeeMyMapBaseUrl() + "/clearlastpoint/" + seeMyMapGuid;
+		String deleteUrl = AppSettings.getSmmsu() + "/clearlastpoint/" + seeMyMapGuid;
 		return deleteUrl;
 	}
 
 	public static String GetSeeMyMapClearMapUrl(String seeMyMapGuid)
 	{
-		String clearUrl = GetSeeMyMapBaseUrl() + "/clearmap/" + seeMyMapGuid;
+		String clearUrl = AppSettings.getSmmsu() + "/clearmap/" + seeMyMapGuid;
 		return clearUrl;
 	}
 
@@ -807,25 +830,74 @@ public class Utilities
 		return false;
 	}
 
-	public static String GetEmailBaseUrl()
-	{
-		return "";
+//	public static String GetNamespace()
+//	{
+//		return "com.mendhak.gpslogger";
+//	}
 
+	public static String GetEMSU(Context ctx)
+	{
+		String emsu = "";
+		int testResId = ctx.getResources().getIdentifier("test1", "string", ctx.getPackageName());
+
+		if (testResId > 0)
+		{
+			try
+			{
+				emsu = SimpleCrypto.decrypt(ctx.getString(testResId), ctx.getString(R.string.EMSU));
+
+			}
+			catch (Exception e)
+			{
+			}
+		}
+
+		return emsu;
 	}
 
-	public static String GetSeeMyMapBaseUrl()
+	public static String GetSMMSU(Context ctx)
 	{
-		return "";
-	}
-	
-	public static String GetNamespace()
-	{
-		return "com.mendhak.gpslogger";
+
+		String smmsu = "";
+		int testResId = ctx.getResources().getIdentifier("test1", "string", ctx.getPackageName());
+
+		if (testResId > 0)
+		{
+			try
+			{
+				smmsu = SimpleCrypto.decrypt(ctx.getString(testResId), ctx.getString(R.string.SMMSU));
+
+			}
+			catch (Exception e)
+			{
+			}
+		}
+
+		return smmsu;
 	}
 
-	public static boolean Flag()
+	private static boolean IsProVersion(Context ctx)
 	{
+		String proPackage = "com.mendhak.gpsloggerpro";
+
+		final PackageManager pm = ctx.getPackageManager();
+
+		List<PackageInfo> list = pm.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
+
+		Iterator<PackageInfo> i = list.iterator();
+		while (i.hasNext())
+		{
+			PackageInfo p = i.next();
+
+			if ((p.packageName.equals(proPackage))
+					&& (pm.checkSignatures(ctx.getPackageName(), p.packageName) == PackageManager.SIGNATURE_MATCH))
+			{
+				return true;
+			}
+
+		}
 		return false;
 	}
+
 
 }

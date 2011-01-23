@@ -14,6 +14,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.model.AppSettings;
 
 public class GpsSettingsActivity extends PreferenceActivity
 {
@@ -27,7 +28,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		boolean useImperial = prefs.getBoolean("useImperial", false);
 
-		if (!Utilities.Flag())
+		if (!AppSettings.isProVersion())
 		{
 			Preference seemymapSetup = (Preference) findPreference("seemymap_setup");
 			seemymapSetup.setSummary(R.string.settings_in_pro_version);

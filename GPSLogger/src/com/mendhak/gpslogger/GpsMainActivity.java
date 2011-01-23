@@ -108,7 +108,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
-
+		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		String lang = prefs.getString("locale_override", "");
 
@@ -247,7 +247,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			}
 
 			String autoEmailDesc = getString(getResources().getIdentifier(
-					Utilities.GetNamespace() +  ".string/" + autoEmailResx, null, null));
+					getPackageName() +  ".string/" + autoEmailResx, null, null));
 
 			txtAutoEmail.setText(autoEmailDesc);
 		}
@@ -283,7 +283,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.optionsmenu, menu);
 
-		if (!Utilities.Flag())
+		if (!AppSettings.isProVersion())
 		{
 			menu.getItem(1).setVisible(false);
 		}
@@ -316,7 +316,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 				ClearMap();
 				break;
 			case R.id.mnuSeeMyMapMore:
-				startActivity(new Intent(Utilities.GetNamespace() + ".SEEMYMAP_SETUP"));
+				startActivity(new Intent(getPackageName() + ".SEEMYMAP_SETUP"));
 				break;
 			case R.id.mnuViewInBrowser:
 				ViewInBrowser();
@@ -353,7 +353,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	{
 		try
 		{
-			if (!Utilities.Flag())
+			if (!AppSettings.isProVersion())
 			{
 				Utilities.MsgBox(getString(R.string.sharing), getString(R.string.sharing_pro), this);
 				return;
@@ -801,9 +801,19 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	public void onFileName(String newFileName)
 	{
 		TextView txtFilename = (TextView) findViewById(R.id.txtFileName);
+		
+		if(AppSettings.shouldLogToGpx() || AppSettings.shouldLogToKml())
+		{
+			
 
-		txtFilename.setText(getString(R.string.summary_current_filename_format,
-				Session.getCurrentFileName()));
+			txtFilename.setText(getString(R.string.summary_current_filename_format,
+					Session.getCurrentFileName()));	
+		}
+		else
+		{
+			txtFilename.setText("");
+		}
+		
 
 	}
 

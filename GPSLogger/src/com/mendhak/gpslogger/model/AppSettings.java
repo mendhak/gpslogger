@@ -22,6 +22,9 @@ public class AppSettings extends Application
 	private static String seeMyMapGuid;
 	private static Float autoEmailDelay = 0f;
 	private static boolean autoEmailEnabled = false;
+	private static String emsu;
+	private static String smmsu;
+	private static boolean proVersion = false;
 
 	/**
 	 * @return the useImperial
@@ -296,5 +299,37 @@ public class AppSettings extends Application
 	{
 		AppSettings.autoEmailEnabled = autoEmailEnabled;
 	}
+
+	public static void setEmsu(String emsu)
+	{
+		AppSettings.emsu = emsu;
+	}
+
+	public static String getEmsu()
+	{
+		return emsu;
+	}
+
+	public static void setSmmsu(String smmsu)
+	{
+		AppSettings.smmsu = smmsu;
+	}
+
+	public static String getSmmsu()
+	{
+		return smmsu;
+	}
+
+	public static void setProVersion(boolean proVersion)
+	{
+		AppSettings.proVersion = proVersion;
+	}
+
+	public static boolean isProVersion()
+	{
+		return proVersion;
+	}
+
+
 
 }
