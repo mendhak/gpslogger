@@ -9,7 +9,7 @@ import java.util.Locale;
 import com.mendhak.gpslogger.helpers.*;
 import com.mendhak.gpslogger.interfaces.*;
 import com.mendhak.gpslogger.model.*;
-import com.mendhak.gpslogger.*;
+
 
 import android.app.Activity;
 import android.app.AlarmManager;

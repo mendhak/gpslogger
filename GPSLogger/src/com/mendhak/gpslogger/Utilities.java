@@ -11,18 +11,12 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.UUID;
-
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 
 import com.mendhak.gpslogger.helpers.Base64;
 import com.mendhak.gpslogger.helpers.SimpleCrypto;
@@ -830,10 +824,6 @@ public class Utilities
 		return false;
 	}
 
-//	public static String GetNamespace()
-//	{
-//		return "com.mendhak.gpslogger";
-//	}
 
 	public static String GetEMSU(Context ctx)
 	{

@@ -246,8 +246,11 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 						+ String.valueOf(AppSettings.getAutoEmailDelay()).replace(".0", "").replace(".", "");
 			}
 
-			String autoEmailDesc = getString(getResources().getIdentifier(
-					getPackageName() +  ".string/" + autoEmailResx, null, null));
+			
+			String autoEmailDesc = getString(getResources().getIdentifier(autoEmailResx, "string", getPackageName()));
+			
+//			String autoEmailDesc = getString(getResources().getIdentifier(
+//					getPackageName() +  ":string/" + autoEmailResx, null, null));
 
 			txtAutoEmail.setText(autoEmailDesc);
 		}
