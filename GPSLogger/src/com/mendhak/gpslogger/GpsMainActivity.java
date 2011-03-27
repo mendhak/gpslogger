@@ -59,6 +59,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	public final Handler handler = new Handler();
 	static final int DATEPICKER_ID = 0;
+	private static Intent serviceIntent;
 
 	// ---------------------------------------------------
 	// Helpers and managers
@@ -133,14 +134,78 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		GetPreferences();
 
-		Intent serviceIntent = new Intent(this, GpsLoggingService.class);
+		StartAndBindService();
+
+	}
+	
+	@Override
+	protected void onStart() 
+	{
+		super.onStart();
+		StartAndBindService();
+	};
+	
+	@Override
+	protected void onResume() 
+	{
+		super.onResume();
+		StartAndBindService();
+	};
+	
+	/**
+	 * Starts the service and binds the activity to it.
+	 */
+	private void StartAndBindService()
+	{
+
+		Utilities.LogDebug("StartAndBindService - binding now");
+		serviceIntent = new Intent(this, GpsLoggingService.class);
 		// Start the service in case it isn't already running
 		startService(serviceIntent);
 		// Now bind to service
 		bindService(serviceIntent, gpsServiceConnection, Context.BIND_AUTO_CREATE);
 		Session.setBoundToService(true);
+		
 	}
+	
 
+	/**
+	 * Stops the service if it isn't logging. Also unbinds.
+	 */
+	private void StopAndUnbindServiceIfRequired()
+	{
+		if(Session.isBoundToService())
+		{
+			unbindService(gpsServiceConnection);
+			Session.setBoundToService(false);	
+		}
+		
+		if(!Session.isStarted())
+		{
+			Utilities.LogDebug("StopServiceIfRequired - Stopping the service");
+			//serviceIntent = new Intent(this, GpsLoggingService.class);
+			stopService(serviceIntent);
+		}
+
+	}
+	
+	@Override
+	protected void onPause() 
+	{
+		
+		StopAndUnbindServiceIfRequired();
+		super.onPause();
+	};
+	
+	@Override
+	protected void onDestroy() 
+	{
+
+		StopAndUnbindServiceIfRequired();
+		super.onDestroy();
+	
+	};
+	
 	/**
 	 * Called when the toggle button is clicked
 	 */
@@ -150,10 +215,21 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		if (isChecked)
 		{
+//			Intent serviceIntent = new Intent(this, GpsLoggingService.class);
+//			serviceIntent.putExtra("buttonPressed", true);
+//			// Start the service in case it isn't already running
+//			startService(serviceIntent);
+				
+			
 			loggingService.StartLogging();
 		}
 		else
 		{
+//			Intent serviceIntent = new Intent(this, GpsLoggingService.class);
+//			serviceIntent.putExtra("buttonPressed", false);
+//			// Start the service in case it isn't already running
+//			startService(serviceIntent);
+			
 			loggingService.StopLogging();
 		}
 	}
@@ -271,7 +347,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		if (keyCode == KeyEvent.KEYCODE_BACK && Session.isBoundToService())
 		{
-			unbindService(gpsServiceConnection);
+			StopAndUnbindServiceIfRequired();
 		}
 
 		return super.onKeyDown(keyCode, event);

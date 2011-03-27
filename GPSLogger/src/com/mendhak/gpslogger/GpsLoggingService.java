@@ -96,9 +96,10 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId)
 	{
+
 		Utilities.LogDebug("GpsLoggingService.onStartCommand called");
 		HandleIntent(intent);
-		return START_STICKY;
+		return START_REDELIVER_INTENT;
 	}
 
 	@Override
@@ -115,12 +116,15 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		Utilities.LogWarning("Android is low on memory.");
 		super.onLowMemory();
 	}
-
+	
 	public void HandleIntent(Intent intent)
 	{
+		
 		Utilities.LogDebug("GpsLoggingService.handleIntent called");
 		GetPreferences();
 		// SetupAutoEmailTimers();
+		
+		Utilities.LogDebug("Null intent? " + String.valueOf(intent == null));
 
 		if (intent != null)
 		{
@@ -130,18 +134,32 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 			{
 				boolean startRightNow = bundle.getBoolean("immediate");
 				boolean alarmWentOff = bundle.getBoolean("alarmWentOff");
-				if (startRightNow)
+				boolean buttonPressed = bundle.getBoolean("buttonPressed");
+				
+				Utilities.LogDebug("startRightNow - " + String.valueOf(startRightNow));
+				Utilities.LogDebug("buttonPressed - " + String.valueOf(buttonPressed));
+				Utilities.LogDebug("alarmWentOff - " + String.valueOf(alarmWentOff));
+				
+				if (startRightNow || buttonPressed)
 				{
 					Utilities.LogInfo("Auto starting logging");
+					
 					StartLogging();
 				}
 
 				if (alarmWentOff)
 				{
+				
 					Utilities.LogDebug("setEmailReadyToBeSent = true");
 
 					Session.setEmailReadyToBeSent(true);
 					AutoEmailLogFile();
+				}
+				
+				if(buttonPressed == false)
+				{
+					Utilities.LogDebug("buttonPressed - false. Stop logging.");
+					StopLogging();
 				}
 			}
 		}
@@ -149,8 +167,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		{
 			// A null intent is passed in if the service has been killed and
 			// restarted.
-			Utilities.LogDebug("Service restarted with null intent. Restarting logging.");
-
+			Utilities.LogDebug("Service restarted with null intent. Start logging.");
 			StartLogging();
 
 		}
@@ -315,6 +332,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 			Session.setAutoEmailDelay(AppSettings.getAutoEmailDelay());
 			SetupAutoEmailTimers();
 		}
+		
 	}
 
 	/**

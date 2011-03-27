@@ -36,7 +36,7 @@ import android.util.Log;
 public class Utilities
 {
 
-	private static final int LOGLEVEL = 3;
+	private static final int LOGLEVEL = 5;
 
 	public static void LogInfo(String message)
 	{
