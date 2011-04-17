@@ -8,11 +8,20 @@ import java.io.RandomAccessFile;
 import java.nio.channels.FileLock;
 import java.util.Date;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xmlpull.v1.XmlSerializer;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.location.Location;
 import android.os.Environment;
 import android.util.Log;
+import android.util.Xml;
 import android.widget.EditText;
 
 import com.mendhak.gpslogger.R;
@@ -20,6 +29,7 @@ import com.mendhak.gpslogger.Utilities;
 import com.mendhak.gpslogger.interfaces.IFileLoggingHelperCallback;
 import com.mendhak.gpslogger.model.AppSettings;
 import com.mendhak.gpslogger.model.Session;
+
 
 public class FileLoggingHelper
 {
@@ -37,6 +47,8 @@ public class FileLoggingHelper
 	public void WriteToFile(Location loc)
 	{
 
+
+	
 		if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml())
 		{
 			return;
@@ -114,6 +126,7 @@ public class FileLoggingHelper
 
 				String initialXml = "<?xml version=\"1.0\"?>"
 						+ "<kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document>"
+						+"<Placemark><LineString><extrude>1</extrude><tessellate>1</tessellate><altitudeMode>absolute</altitudeMode><coordinates></coordinates></LineString></Placemark>"
 						+ "</Document></kml>";
 				initialOutput.write(initialXml.getBytes());
 				// initialOutput.write("\n".getBytes());
@@ -121,21 +134,64 @@ public class FileLoggingHelper
 				initialOutput.close();
 			}
 
-			long startPosition = kmlFile.length() - 17;
+			
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			factory.setNamespaceAware(true); 
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document doc = builder.parse(kmlFile);
+			
+			NodeList coordinatesList = doc.getElementsByTagName("coordinates");
+			
+			if(coordinatesList.item(0) != null)
+			{
+				Node coordinates = coordinatesList.item(0);
+				Node coordTextNode = coordinates.getFirstChild();
+				
+				if(coordTextNode == null)
+				{
+					coordTextNode = doc.createTextNode("");
+					coordinates.appendChild(coordTextNode);
+				}
+				
+				String coordText = coordinates.getFirstChild().getNodeValue();
+				coordText = coordText + "\n" + String.valueOf(loc.getLongitude()) + ","
+					+ String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getAltitude());
+				coordinates.getFirstChild().setNodeValue(coordText);
+				
+			}
 
-			String placemark = "<Placemark><description>" + dateTimeString
-					+ "</description><TimeStamp><when>" + dateTimeString + "</when></TimeStamp>"
-					+ "<Point><coordinates>" + String.valueOf(loc.getLongitude()) + ","
-					+ String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getAltitude())
-					+ "</coordinates></Point></Placemark></Document></kml>";
+			Node documentNode = doc.getElementsByTagName("Document").item(0);
+			Node newPlacemark = doc.createElement("Placemark");
+			
+			Node timeStamp = doc.createElement("TimeStamp");
+			Node whenNode = doc.createElement("when");
+			Node whenNodeText = doc.createTextNode(dateTimeString);
+			whenNode.appendChild(whenNodeText);
+			timeStamp.appendChild(whenNode);
+			newPlacemark.appendChild(timeStamp);
+			
+			Node newPoint = doc.createElement("Point");
+			
+			Node newCoords = doc.createElement("coordinates");
+			Node newCoordTextNode = doc.createTextNode("");
+			newCoords.appendChild(newCoordTextNode);
+			
+			newCoords.getFirstChild().setNodeValue( String.valueOf(loc.getLongitude()) + ","
+					+ String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getAltitude()));
+			newPoint.appendChild(newCoords);
+			
+			newPlacemark.appendChild(newPoint);
+			
+			documentNode.appendChild(newPlacemark);
 
+			String newFileContents = getStringFromNode(doc);
+			
 			RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
 			kmlLock = raf.getChannel().lock();
-			raf.seek(startPosition);
-			raf.write(placemark.getBytes());
+			raf.write(newFileContents.getBytes());
 			kmlLock.release();
 			raf.close();
-
+		
 		}
 		catch (IOException e)
 		{
@@ -143,9 +199,71 @@ public class FileLoggingHelper
 			callingClient.SetStatus(callingClient.getString(R.string.could_not_write_to_file)
 					+ e.getMessage());
 		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+			Log.e("Main", callingClient.getString(R.string.could_not_write_to_file) + e.getMessage());
+			callingClient.SetStatus(callingClient.getString(R.string.could_not_write_to_file)
+					+ e.getMessage());
+		}
 
 	}
+	
+	
+	public static String getStringFromNode(Node root)  {
 
+        StringBuilder result = new StringBuilder();
+
+        if (root.getNodeType() == Node.TEXT_NODE)
+        {
+            result.append(root.getNodeValue());
+        }
+        else 
+        {
+            if (root.getNodeType() != Node.DOCUMENT_NODE) 
+            {
+                StringBuffer attrs = new StringBuffer();
+                for (int k = 0; k < root.getAttributes().getLength(); ++k) 
+                {
+                    attrs.append(" ") 
+                    	.append(root.getAttributes().item(k).getNodeName())
+                    	.append("=\"")
+                    	.append(root.getAttributes().item(k).getNodeValue())
+                    	.append("\" ");
+                }
+                result.append("<")
+                	.append(root.getNodeName());
+                
+                if(attrs.length() > 0)
+                {
+                	result.append(" ")
+                	.append(attrs);
+                }
+                	
+                	result.append(">");
+            } 
+            else 
+            {
+                result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            }
+
+            NodeList nodes = root.getChildNodes();
+            for (int i = 0, j = nodes.getLength(); i < j; i++) 
+            {
+                Node node = nodes.item(i);
+                result.append(getStringFromNode(node));
+            }
+
+            if (root.getNodeType() != Node.DOCUMENT_NODE)
+            {
+                result.append("</").append(root.getNodeName()).append(">");
+            }
+        }
+        return result.toString();
+    }
+	
+
+	
 	public void WriteToGpxFile(Location loc, File gpxFolder, boolean brandNewFile)
 	{
 
