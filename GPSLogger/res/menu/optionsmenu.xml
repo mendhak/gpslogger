@@ -12,9 +12,10 @@
 			<item android:id="@+id/mnuClearMap" android:title="@string/menu_clear_map" />
 			<item android:id="@+id/mnuViewInBrowser" android:title="@string/menu_view_in_browser" />
 			<item android:id="@+id/mnuSeeMyMapMore" android:title="@string/menu_seemymap_more" />
-
 		</menu>
-	</item>
+	</item> 
+	
+	<item android:id="@+id/mnuEmailnow" android:title="@string/menu_email_now" android:icon="@android:drawable/ic_menu_send" />
 
 	<item android:id="@+id/mnuAnnotate" android:title="@string/menu_annotate"
 		android:icon="@android:drawable/ic_menu_edit" />

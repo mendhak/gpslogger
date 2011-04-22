@@ -365,6 +365,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		if (!AppSettings.isProVersion())
 		{
 			menu.getItem(1).setVisible(false);
+			menu.getItem(2).setVisible(false);
 		}
 
 		return true;
@@ -409,6 +410,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			case R.id.mnuShare:
 				Share();
 				break;
+			case R.id.mnuEmailnow:
+				EmailNow();
+				break;
 			case R.id.mnuExit:
 				loggingService.StopLogging();
 				loggingService.stopSelf();
@@ -421,6 +425,18 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	private void ViewInBrowser()
 	{
 		seeMyMapHelper.ViewInBrowser();
+	}
+	
+	private void EmailNow()
+	{
+		if (!AppSettings.isProVersion())
+		{
+			Utilities.MsgBox(getString(R.string.sharing), getString(R.string.sharing_pro), this);
+			return;
+		}
+		
+		loggingService.ForceEmailLogFile();
+		
 	}
 
 	/**

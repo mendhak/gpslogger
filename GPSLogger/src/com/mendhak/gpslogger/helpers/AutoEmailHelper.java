@@ -16,14 +16,16 @@ public class AutoEmailHelper implements IAutoSendHelper
 
 	ProgressDialog pd;
 	GpsLoggingService mainActivity;
+	boolean forcedSend = false;
 
 	public AutoEmailHelper(GpsLoggingService activity)
 	{
 		this.mainActivity = activity;
 	}
 
-	public void SendLogFile(String currentFileName, String personId)
+	public void SendLogFile(String currentFileName, String personId, boolean forcedSend)
 	{
+		this.forcedSend = forcedSend;
 
 		try
 		{
@@ -50,6 +52,8 @@ public class AutoEmailHelper implements IAutoSendHelper
 		t.start();
 
 	}
+	
+	
 
 	public void OnRelay(boolean connectionSuccess, String errorMessage)
 	{
@@ -86,9 +90,13 @@ public class AutoEmailHelper implements IAutoSendHelper
 		{
 			//This was a success
 			Utilities.LogInfo("Email sent");
-			Utilities.LogDebug("setEmailReadyToBeSent = false");
-			Session.setEmailReadyToBeSent(false);
-			Session.setAutoEmailTimeStamp(System.currentTimeMillis());
+			
+			if(!forcedSend)
+			{
+				Utilities.LogDebug("setEmailReadyToBeSent = false");
+				Session.setEmailReadyToBeSent(false);
+				Session.setAutoEmailTimeStamp(System.currentTimeMillis());
+			}
 		}
 
 	}

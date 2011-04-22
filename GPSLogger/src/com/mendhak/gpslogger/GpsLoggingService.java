@@ -270,10 +270,21 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		{
 			Utilities.LogInfo("Emailing Log File");
 			AutoEmailHelper aeh = new AutoEmailHelper(GpsLoggingService.this);
-			aeh.SendLogFile(Session.getCurrentFileName(), Utilities.GetPersonId(getBaseContext()));
-
+			aeh.SendLogFile(Session.getCurrentFileName(), Utilities.GetPersonId(getBaseContext()),false);
 			SetupAutoEmailTimers();
 		}
+	}
+	
+	public void ForceEmailLogFile()
+	{
+		Utilities.LogDebug("GpsLoggingService.ForceEmailLogFile called.");
+		if (Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0)
+		{
+			Utilities.LogInfo("Force emailing Log File");
+			AutoEmailHelper aeh = new AutoEmailHelper(GpsLoggingService.this);
+			aeh.SendLogFile(Session.getCurrentFileName(), Utilities.GetPersonId(getBaseContext()),true);
+		}
+		
 	}
 
 	public final Runnable updateResultsEmailSendError = new Runnable()
