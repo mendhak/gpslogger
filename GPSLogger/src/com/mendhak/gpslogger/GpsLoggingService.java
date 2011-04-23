@@ -291,7 +291,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	{
 		public void run()
 		{
-			AutoEmailTooManySentError();
+			AutoEmailGenericError();
 		}
 	};
 
@@ -308,9 +308,9 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		Utilities.LogWarning("Could not send email, invalid GPS data.");
 	}
 
-	private void AutoEmailTooManySentError()
+	private void AutoEmailGenericError()
 	{
-		Utilities.LogWarning("Could not send email, user has exceeded the daily limit.");
+		Utilities.LogWarning("Could not send email, please check Internet and auto email settings.");
 	}
 
 	/**

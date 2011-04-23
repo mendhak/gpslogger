@@ -14,4 +14,26 @@
 		android:summary="@string/autoemail_frequency_summary"
 		android:entries="@array/autosend_frequencies" android:defaultValue="0"
 		android:entryValues="@array/autosend_values" />
+		
+	<PreferenceCategory android:title="@string/autoemail_smtp_category">
+	    <ListPreference android:key="autoemail_preset"
+		android:title="@string/autoemail_choosepreset"
+		android:summary="@string/autoemail_choosepreset_summary"
+		android:entries="@array/autoemail_presets" android:defaultValue="0"
+		android:entryValues="@array/autoemail_presetvalues" />
+	    
+		<EditTextPreference android:key="smtp_username" android:title="@string/autoemail_username"
+		android:summary="@string/autoemail_username_summary" android:dialogTitle="@string/autoemail_username" />
+		<EditTextPreference android:key="smtp_password" android:title="@string/autoemail_password"
+		android:summary="@string/autoemail_password_summary" android:dialogTitle="@string/autoemail_password"
+		android:password="true"
+		 />
+		<EditTextPreference android:key="smtp_server" android:title="@string/autoemail_server"
+		android:summary="@string/autoemail_server_summary" android:dialogTitle="@string/autoemail_server" />
+		<EditTextPreference android:key="smtp_port" android:title="@string/autoemail_port"
+		android:summary="@string/autoemail_port_summary" android:dialogTitle="@string/autoemail_port" />
+		<CheckBoxPreference android:key="smtp_ssl" android:title="@string/autoemail_ssl" 
+		android:summary="@string/autoemail_ssl_summary" />
+	</PreferenceCategory>
+		
 </PreferenceScreen>

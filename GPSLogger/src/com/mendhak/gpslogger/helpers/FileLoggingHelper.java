@@ -14,14 +14,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xmlpull.v1.XmlSerializer;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.location.Location;
 import android.os.Environment;
 import android.util.Log;
-import android.util.Xml;
+
 import android.widget.EditText;
 
 import com.mendhak.gpslogger.R;

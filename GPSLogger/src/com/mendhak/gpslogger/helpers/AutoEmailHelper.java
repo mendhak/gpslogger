@@ -1,6 +1,8 @@
 package com.mendhak.gpslogger.helpers;
 
 import java.io.File;
+import java.util.Date;
+
 import android.app.ProgressDialog;
 import android.os.Environment;
 
@@ -46,8 +48,6 @@ public class AutoEmailHelper implements IAutoSendHelper
 			//	Swallow exception	
 		}
 		
-		
-
 		Thread t = new Thread(new AutoSendHandler(currentFileName, personId, this));
 		t.start();
 
@@ -69,22 +69,9 @@ public class AutoEmailHelper implements IAutoSendHelper
 			//swallow exception
 		}
 		
-		if (errorMessage != null && errorMessage.length() > 0 && errorMessage.indexOf("faultstring") > 0)
+		if (!connectionSuccess)
 		{
-			//If it contains "faultstring", there are errors.
-			String errorCode = errorMessage.substring(errorMessage.indexOf("xml:lang=\"en-US\">") + 17,
-					errorMessage.indexOf("</faultstring>"));
-
-			if (errorCode.equalsIgnoreCase("toomanyemails"))
-			{
 				mainActivity.handler.post(mainActivity.updateResultsEmailSendError);
-			}
-
-			if (errorCode.equalsIgnoreCase("invalidgpx"))
-			{
-				mainActivity.handler.post(mainActivity.updateResultsBadGPX);
-			}
-
 		}
 		else
 		{
@@ -111,13 +98,11 @@ class AutoSendHandler implements Runnable
 {
 
 	String currentFileName;
-	String personId;
 	IAutoSendHelper helper;
 
 	public AutoSendHandler(String currentFileName, String personId, IAutoSendHelper helper)
 	{
 		this.currentFileName = currentFileName;
-		this.personId = personId;
 		this.helper = helper;
 	}
 
@@ -161,29 +146,34 @@ class AutoSendHandler implements Runnable
 			ZipHelper zh = new ZipHelper(files, zipFile.getAbsolutePath());
 			zh.Zip();
 
-			Utilities.LogInfo("Converting to byte array");
-			byte[] contents = Utilities.GetBytesFromFile(zipFile);
-			Utilities.LogInfo("Converting to base 64");
+			 Mail m = new Mail(AppSettings.getSmtpUsername(), AppSettings.getSmtpPassword());
 
-			String base64Contents = Utilities.GetStringFromByteArray(contents);
-
-			String postBody = "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">"
-					+ "<s:Body><RelayFile xmlns=\"http://tempuri.org/\">"
-					+ "<body xmlns:a=\"http://schemas.datacontract.org/2004/07/SeeMyMapWeb\" "
-					+ "xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">" + "<a:FileName>"
-					+ zipFile.getName() + "</a:FileName>" + "<a:PersonId>" + personId + "</a:PersonId>"
-					+ "<a:XmlBody>" + Utilities.EncodeHTML(base64Contents)
-					+ "</a:XmlBody></body></RelayFile></s:Body></s:Envelope>";
-
-			Utilities.LogInfo("Posting...");
-			String result = Utilities.PostUrl(AppSettings.getEmsu() + "/basic", postBody,
-					"http://tempuri.org/IEmailService/RelayFile");
-
-			helper.OnRelay(true, result);
+		     String[] toArr = {AppSettings.getAutoEmailTarget()};
+		     m.setTo(toArr);
+		     m.setFrom(AppSettings.getSmtpUsername());
+		     m.setSubject("GPS Log file generated at " + Utilities.GetReadableDateTime(new Date()) + " - " + zipFile.getName());
+		     m.setBody(zipFile.getName());
+		     
+		     m.setPort(AppSettings.getSmtpPort());
+		     m.setSecurePort(AppSettings.getSmtpPort());
+		     m.setSmtpHost(AppSettings.getSmtpServer());
+		     m.setSsl(AppSettings.isSmtpSsl());
+	         m.addAttachment(zipFile.getAbsolutePath());
+	        
+	        Utilities.LogInfo("Sending email...");
+	        
+	        if(m.send()) {
+	        	helper.OnRelay(true, "Email was sent successfully.");
+	        } 
+	        else 
+	        {
+	        	helper.OnRelay(false, "Email was not sent.");
+	        }
 		}
 		catch (Exception e)
 		{
 			helper.OnRelay(false, e.getMessage());
+			Utilities.LogError("AutoSendHandler.run", e);
 		}
 
 	}

@@ -22,9 +22,17 @@ public class AppSettings extends Application
 	private static String seeMyMapGuid;
 	private static Float autoEmailDelay = 0f;
 	private static boolean autoEmailEnabled = false;
+	private static String smtpServer;
+	private static String smtpPort;
+	private static String smtpUsername;
+	private static String smtpPassword;
+	private static String autoEmailTarget;
+	private static boolean smtpSsl;
+	
 	private static String emsu;
 	private static String smmsu;
 	private static boolean proVersion = false;
+	
 
 	/**
 	 * @return the useImperial
@@ -299,6 +307,7 @@ public class AppSettings extends Application
 	{
 		AppSettings.autoEmailEnabled = autoEmailEnabled;
 	}
+	
 
 	public static void setEmsu(String emsu)
 	{
@@ -328,6 +337,63 @@ public class AppSettings extends Application
 	public static boolean isProVersion()
 	{
 		return proVersion;
+	}
+
+	public static void setSmtpServer(String smtpServer) 
+	{
+		AppSettings.smtpServer = smtpServer;
+	}
+
+	public static String getSmtpServer() 
+	{
+		return smtpServer;
+	}
+
+	public static void setSmtpPort(String smtpPort) 
+	{
+		AppSettings.smtpPort = smtpPort;
+	}
+
+	public static String getSmtpPort() 
+	{
+		return smtpPort;
+	}
+
+	public static void setSmtpUsername(String smtpUsername) 
+	{
+		AppSettings.smtpUsername = smtpUsername;
+	}
+
+	public static String getSmtpUsername()
+	{
+		return smtpUsername;
+	}
+
+	public static void setSmtpPassword(String smtpPassword) 
+	{
+		AppSettings.smtpPassword = smtpPassword;
+	}
+
+	public static String getSmtpPassword() 
+	{
+		return smtpPassword;
+	}
+
+	public static void setSmtpSsl(boolean smtpSsl) {
+		AppSettings.smtpSsl = smtpSsl;
+	}
+
+	public static boolean isSmtpSsl() 
+	{
+		return smtpSsl;
+	}
+
+	public static void setAutoEmailTarget(String autoEmailTarget) {
+		AppSettings.autoEmailTarget = autoEmailTarget;
+	}
+
+	public static String getAutoEmailTarget() {
+		return autoEmailTarget;
 	}
 
 

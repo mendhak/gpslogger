@@ -177,8 +177,16 @@ public class Utilities
 		{
 			AppSettings.setSmmsu(GetSMMSU(context));
 		}
-
+		
 		AppSettings.setProVersion(IsProVersion(context));
+		
+		AppSettings.setSmtpServer(prefs.getString("smtp_server", ""));
+		AppSettings.setSmtpPort(prefs.getString("smtp_port", "25"));
+		AppSettings.setSmtpSsl(prefs.getBoolean("smtp_ssl", true));
+		AppSettings.setSmtpUsername(prefs.getString("smtp_username", ""));
+		AppSettings.setSmtpPassword(prefs.getString("smtp_password", ""));
+		AppSettings.setAutoEmailTarget(prefs.getString("autoemail_target", ""));
+		
 
 	}
 
@@ -691,6 +699,12 @@ public class Utilities
 
 		return dateTimeString;
 
+	}
+	
+	public static String GetReadableDateTime(Date dateToFormat)
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm");
+		return sdf.format(dateToFormat);
 	}
 
 	/**

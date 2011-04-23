@@ -212,7 +212,19 @@
     <string name="autoemail_frequency_2">After 2 hours</string>
     <string name="autoemail_frequency_1">After 1 hour</string>
     <string name="autoemail_frequency_05">After 0.5 hour</string>
-
+    <string name="autoemail_smtp_category">Email Settings</string> 
+    <string name="autoemail_username">Username</string>
+    <string name="autoemail_username_summary">Username with your email provider</string>
+    <string name="autoemail_password">Password</string>
+    <string name="autoemail_password_summary">Password with your email provider</string>
+    <string name="autoemail_port">Port</string>
+    <string name="autoemail_port_summary">SMTP Port</string>
+    <string name="autoemail_ssl">Use SSL?</string>
+    <string name="autoemail_ssl_summary">Try toggling this if you cannot connect</string>
+    <string name="autoemail_server">SMTP Server</string>
+    <string name="autoemail_server_summary">Hostname of the SMTP server to use</string>
+    <string name="autoemail_choosepreset">Mail Provider</string>
+    <string name="autoemail_choosepreset_summary">Pick a provider or choose manual</string>
     
     <string name="fix_obtained">Fix obtained</string>
     <string name="started_waiting">GPS started, waiting for fix</string>
@@ -222,7 +234,11 @@
     <string name="language">Language</string>
     <string name="language_summary">You will need to restart the application</string>
     
+	
+
     <string name="SMMSU">88F6B44D4785553A28114A7AE5E3503E85F15B98E51F28AED08BFBA8B677B6BE9D434CC4211C8369625E89D7554C6405</string>
     <string name="EMSU">88F6B44D4785553A28114A7AE5E3503E876B52F327D15367F6678D61B7BA432AF26ED9E781608A80F553251940DA3E9D</string>
+
+
     
 </resources>
