@@ -18,9 +18,22 @@
 			android:launchMode="singleTask" android:configChanges="locale">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
+				 <category android:name="android.intent.category.LAUNCHER" /> 
+			</intent-filter> 
 		</activity> 
+
+		<activity android:label="test" android:name="com.mendhak.gpslogger.OAuthReceiver">
+           <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="gpslogger" android:host="authorize" />
+            
+			<!--	<action android:name="android.intent.action.MAIN" />
+				 <category android:name="android.intent.category.LAUNCHER" /> --> 
+			
+           </intent-filter>
+          </activity>
 
 		<activity android:name="com.mendhak.gpslogger.GpsSettingsActivity"
 			android:label="@string/settings_screen_name"

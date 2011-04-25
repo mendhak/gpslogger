@@ -134,13 +134,12 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 			{
 				boolean startRightNow = bundle.getBoolean("immediate");
 				boolean alarmWentOff = bundle.getBoolean("alarmWentOff");
-				boolean buttonPressed = bundle.getBoolean("buttonPressed");
 				
 				Utilities.LogDebug("startRightNow - " + String.valueOf(startRightNow));
-				Utilities.LogDebug("buttonPressed - " + String.valueOf(buttonPressed));
+
 				Utilities.LogDebug("alarmWentOff - " + String.valueOf(alarmWentOff));
 				
-				if (startRightNow || buttonPressed)
+				if (startRightNow)
 				{
 					Utilities.LogInfo("Auto starting logging");
 					
@@ -156,11 +155,6 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 					AutoEmailLogFile();
 				}
 				
-				if(buttonPressed == false)
-				{
-					Utilities.LogDebug("buttonPressed - false. Stop logging.");
-					StopLogging();
-				}
 			}
 		}
 		else

@@ -28,9 +28,13 @@ public class GpsLoggerApplication extends Application
   {
     Configuration cfg = new Configuration();
     if (!TextUtils.isEmpty(lang))
+    {
       cfg.locale = new Locale(lang);
+    }
     else
+    {
       cfg.locale = Locale.getDefault();
+    }
 
     ctx.getResources().updateConfiguration(cfg, null);
   }

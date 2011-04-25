@@ -225,6 +225,14 @@
     <string name="autoemail_server_summary">Hostname of the SMTP server to use</string>
     <string name="autoemail_choosepreset">Mail Provider</string>
     <string name="autoemail_choosepreset_summary">Pick a provider or choose manual</string>
+    <string name="autoemail_smtp_testemail">Test email</string>
+    <string name="autoemail_test">Send a test email using the above settings</string>
+    <string name="autoemail_sendingtest">Sending a test email</string>
+    <string name="autoemail_testresult_title">Result</string>
+    <string name="autoemail_testresult_success">Email was sent</string>
+    <string name="autoemail_testresult_fail">Email not sent - please check connection settings and email settings</string>
+    <string name="autoemail_invalid_form">Invalid values</string>
+    <string name="autoemail_invalid_form_message">Please ensure that all of the fields have been filled in properly</string>
     
     <string name="fix_obtained">Fix obtained</string>
     <string name="started_waiting">GPS started, waiting for fix</string>
