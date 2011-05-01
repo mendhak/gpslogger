@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.mendhak.gpslogger" android:versionCode="8"
-	android:versionName="1.0.8">
+	package="com.mendhak.gpslogger" android:versionCode="9"
+	android:versionName="1.0.9">
 	<application android:icon="@drawable/gpsloggericon2" 
 		android:name="@string/app_name" 
 		android:label="@string/app_name" 
-		android:debuggable="true">
+		android:debuggable="false">
 		
 		<service android:name="com.mendhak.gpslogger.GpsLoggingService">
 			<intent-filter>
@@ -22,18 +22,14 @@
 			</intent-filter> 
 		</activity> 
 
-		<activity android:label="test" android:name="com.mendhak.gpslogger.OAuthReceiver">
-           <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="gpslogger" android:host="authorize" />
-            
-			<!--	<action android:name="android.intent.action.MAIN" />
-				 <category android:name="android.intent.category.LAUNCHER" /> --> 
-			
-           </intent-filter>
-          </activity>
+		<activity android:label="@string/osm_preferences_title" android:name="com.mendhak.gpslogger.OSMSettingsActivity">
+			<intent-filter>
+				<action android:name="com.mendhak.gpslogger.OSM_SETUP" />
+	            <category android:name="android.intent.category.DEFAULT" />
+	        <!--     <category android:name="android.intent.category.BROWSABLE" /> 
+	            <data android:scheme="gpslogger" android:host="authorize" />  -->
+			</intent-filter>
+		</activity>
 
 		<activity android:name="com.mendhak.gpslogger.GpsSettingsActivity"
 			android:label="@string/settings_screen_name"

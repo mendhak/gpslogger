@@ -212,6 +212,7 @@
     <string name="autoemail_frequency_2">After 2 hours</string>
     <string name="autoemail_frequency_1">After 1 hour</string>
     <string name="autoemail_frequency_05">After 0.5 hour</string>
+    <string name="autoemail_frequency_008">After 5 minutes</string>
     <string name="autoemail_smtp_category">Email Settings</string> 
     <string name="autoemail_username">Username</string>
     <string name="autoemail_username_summary">Username with your email provider</string>
@@ -241,6 +242,11 @@
     
     <string name="language">Language</string>
     <string name="language_summary">You will need to restart the application</string>
+    
+    
+    <string name="osm_setup_title">OpenStreetMap</string>
+    <string name="osm_setup_summary">Settings for uploading GPS traces</string>
+    <string name="osm_preferences_title">OpenStreetMap Preferences</string>
     
 	
 

@@ -669,7 +669,6 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		Session.setCurrentLocationInfo(loc);
 		Notify();
 		WriteToFile(loc);
-		AutoEmailLogFile();
 		GetPreferences();
 		ResetManagersIfRequired();
 

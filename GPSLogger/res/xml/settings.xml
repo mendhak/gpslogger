@@ -47,6 +47,10 @@
 			android:summary="@string/seemymap_setup_summary" android:key="seemymap_setup">
 			<intent android:action="com.mendhak.gpslogger.SEEMYMAP_SETUP" />
 		</Preference>
+		<!--  <Preference android:title="@string/osm_setup_title"
+			android:summary="@string/osm_setup_summary" android:key="osm_setup">
+			<intent android:action="com.mendhak.gpslogger.OSM_SETUP" /> 
+		</Preference> -->
 		<CheckBoxPreference android:title="@string/startonbootup_title"
 			android:summary="@string/startonbootup_summary" android:key="startonbootup" />
 		<CheckBoxPreference android:title="@string/useimperial_title"

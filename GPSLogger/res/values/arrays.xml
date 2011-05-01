@@ -21,6 +21,7 @@
 	<item>@string/autoemail_frequency_2</item>
 	<item>@string/autoemail_frequency_1</item>
 	<item>@string/autoemail_frequency_05</item>
+	<item>@string/autoemail_frequency_008</item>
 </string-array>
 
 <string-array name="autosend_values">
@@ -33,6 +34,7 @@
 	<item>2</item>
 	<item>1</item>
 	<item>0.5</item>
+	<item>0.08</item>
 </string-array>
 
 <string-array name="autoemail_presets">

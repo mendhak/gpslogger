@@ -319,7 +319,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			{
 				
 				autoEmailResx = "autoemail_frequency_"
-						+ String.valueOf(AppSettings.getAutoEmailDelay()).replace(".0", "").replace(".", "");
+						+ String.valueOf(AppSettings.getAutoEmailDelay()).replace(".", "");
+				//.replace(".0", "")
 			}
 
 			
