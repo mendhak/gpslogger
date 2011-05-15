@@ -113,16 +113,6 @@ public class SeeMyMapSetupActivity extends Activity implements OnClickListener
 		EditText txtPassword = (EditText) findViewById(R.id.txtPassword);
 		
 		personId = Utilities.GetPersonId(getBaseContext());
-		
-//		personId = prefs.getString("personId","");
-//		
-//		if(personId == null || personId == "" || personId.length() == 0)
-//		{
-//			personId = String.valueOf(UUID.randomUUID());
-//			SharedPreferences.Editor editor = prefs.edit();
-//			editor.putString("personId", personId);
-//			editor.commit();
-//		}
 
 		String seeMyMapUrl = prefs.getString("seemymap_URL", "");
 

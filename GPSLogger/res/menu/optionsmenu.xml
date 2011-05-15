@@ -2,7 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:id="@+id/mnuSettings" android:title="@string/menu_settings"
 		android:icon="@android:drawable/ic_menu_preferences" />
-	<item android:id="@+id/mnuSeeMyMap" android:title="@string/menu_seemymap"
+	
+	<item android:id="@+id/mnuOSM" android:title="@string/osm_upload" android:icon="@android:drawable/ic_menu_mapmode" />
+	
+	<!-- <item android:id="@+id/mnuSeeMyMap" android:title="@string/menu_seemymap"
 		android:icon="@android:drawable/ic_menu_mapmode">
 		<menu>
 			<item android:id="@+id/mnuShareLatest" android:title="@string/menu_share_latest"
@@ -13,7 +16,7 @@
 			<item android:id="@+id/mnuViewInBrowser" android:title="@string/menu_view_in_browser" />
 			<item android:id="@+id/mnuSeeMyMapMore" android:title="@string/menu_seemymap_more" />
 		</menu>
-	</item> 
+	</item> --> 
 	
 	<item android:id="@+id/mnuEmailnow" android:title="@string/menu_email_now" android:icon="@android:drawable/ic_menu_send" />
 

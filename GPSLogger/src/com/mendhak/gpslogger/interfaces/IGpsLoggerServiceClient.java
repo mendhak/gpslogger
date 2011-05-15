@@ -1,5 +1,6 @@
 package com.mendhak.gpslogger.interfaces;
 
+import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
 
@@ -44,6 +45,12 @@ public interface IGpsLoggerServiceClient
 	 * @return
 	 */
 	public Context GetContext();
+	
+	/**
+	 * Returns the activity
+	 * @return
+	 */
+	public Activity GetActivity();
 
 	/**
 	 * A new current file name is available.

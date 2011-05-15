@@ -4,12 +4,9 @@ import java.io.File;
 import java.util.Date;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.Environment;
 
 import com.mendhak.gpslogger.GpsLoggingService;
-import com.mendhak.gpslogger.GpsMainActivity;
-import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.Utilities;
 import com.mendhak.gpslogger.interfaces.IAutoSendHelper;
 import com.mendhak.gpslogger.model.AppSettings;
@@ -18,7 +15,6 @@ import com.mendhak.gpslogger.model.Session;
 public class AutoEmailHelper implements IAutoSendHelper
 {
 
-	ProgressDialog		pd;
 	GpsLoggingService	mainActivity;
 	boolean				forcedSend	= false;
 
@@ -31,27 +27,6 @@ public class AutoEmailHelper implements IAutoSendHelper
 			boolean forcedSend)
 	{
 		this.forcedSend = forcedSend;
-
-		try
-		{
-			if (mainActivity.IsMainFormVisible())
-			{
-				pd = new ProgressDialog(mainActivity,
-						ProgressDialog.STYLE_HORIZONTAL);
-				pd.setMax(100);
-				pd.setIndeterminate(true);
-
-				pd = ProgressDialog.show(
-						(GpsMainActivity) GpsLoggingService.mainServiceClient,
-						mainActivity.getString(R.string.autoemail_sending),
-						mainActivity.getString(R.string.please_wait), true,
-						true);
-
-			}
-		} catch (Exception ex)
-		{
-			// Swallow exception
-		}
 
 		Thread t = new Thread(new AutoSendHandler(currentFileName, personId,
 				this));
@@ -71,21 +46,12 @@ public class AutoEmailHelper implements IAutoSendHelper
 
 	public void OnRelay(boolean connectionSuccess, String errorMessage)
 	{
-		try
-		{
-			if (pd != null)
-			{
-				pd.dismiss();
-			}
-		} catch (Exception ex)
-		{
-			// swallow exception
-		}
 
 		if (!connectionSuccess)
 		{
 			mainActivity.handler.post(mainActivity.updateResultsEmailSendError);
-		} else
+		}
+		else
 		{
 			// This was a success
 			Utilities.LogInfo("Email sent");
@@ -179,11 +145,13 @@ class AutoSendHandler implements Runnable
 			if (m.send())
 			{
 				helper.OnRelay(true, "Email was sent successfully.");
-			} else
+			}
+			else
 			{
 				helper.OnRelay(false, "Email was not sent.");
 			}
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			helper.OnRelay(false, e.getMessage());
 			Utilities.LogError("AutoSendHandler.run", e);
@@ -242,11 +210,13 @@ class TestEmailHandler implements Runnable
 			if (m.send())
 			{
 				helper.OnRelay(true, "Email was sent successfully.");
-			} else
+			}
+			else
 			{
 				helper.OnRelay(false, "Email was not sent.");
 			}
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			helper.OnRelay(false, e.getMessage());
 			Utilities.LogError("AutoSendHandler.run", e);

@@ -1,8 +1,8 @@
 package com.mendhak.gpslogger;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
@@ -63,11 +63,8 @@ public class GpsSettingsActivity extends PreferenceActivity
 			public boolean onPreferenceChange(Preference preference, final Object newValue)
 			{
 
-				final ProgressDialog pd = ProgressDialog.show(
-						GpsSettingsActivity.this,
-						getString(R.string.settings_converting_title),
-						getString(R.string.settings_converting_description),
-						true, true);
+				Utilities.ShowProgress(GpsSettingsActivity.this, getString(R.string.settings_converting_title),
+						getString(R.string.settings_converting_description));
 
 				new Thread()
 				{
@@ -77,7 +74,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 
 						try
 						{
-							sleep(3000); // Give user time to read the progressdialog
+							sleep(3000); // Give user time to read the message
 						}
 						catch (InterruptedException e)
 						{
@@ -128,7 +125,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 						editor.commit();
 
 						handler.post(updateResults);
-						pd.dismiss();
+						Utilities.HideProgress();
 					};
 				}.start();
 
@@ -149,6 +146,25 @@ public class GpsSettingsActivity extends PreferenceActivity
 				return true;
 			}
 
+		});
+		
+		Preference osmSetupPref = (Preference) findPreference("osm_setup");
+		osmSetupPref.setOnPreferenceClickListener(new OnPreferenceClickListener()
+		{
+			
+			public boolean onPreferenceClick(Preference preference)
+			{
+				try
+				{
+					startActivity(Utilities.GetOsmSettingsIntent(getBaseContext()));
+				}
+				catch(Exception ex)
+				{
+					String abc = ex.getMessage();
+				}
+				
+				return false;
+			}
 		});
 
 	}

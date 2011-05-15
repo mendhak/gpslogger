@@ -1,7 +1,5 @@
 package com.mendhak.gpslogger;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,7 +26,6 @@ public class AutoEmailActivity extends PreferenceActivity implements
 	String					initialEmailAddress;
 	public final Handler	handler	= new Handler();
 
-	ProgressDialog			pd;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -68,22 +65,8 @@ public class AutoEmailActivity extends PreferenceActivity implements
 			return false;
 		}
 
-		try
-		{
-
-			pd = new ProgressDialog(this, ProgressDialog.STYLE_HORIZONTAL);
-			pd.setMax(100);
-			pd.setIndeterminate(true);
-
-			pd = ProgressDialog.show(this,
-					getString(R.string.autoemail_sendingtest),
-					getString(R.string.please_wait), true, true);
-
-		}
-		catch (Exception ex)
-		{
-
-		}
+		Utilities.ShowProgress(this, getString(R.string.autoemail_sendingtest),
+					getString(R.string.please_wait));
 
 		CheckBoxPreference chkUseSsl = (CheckBoxPreference) findPreference("smtp_ssl");
 		EditTextPreference txtSmtpServer = (EditTextPreference) findPreference("smtp_server");
@@ -97,7 +80,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
 				txtUsername.getText(), txtPassword.getText(),
 				chkUseSsl.isChecked(), txtTarget.getText(),
 				AutoEmailActivity.this, AutoEmailActivity.this);
-
+		
 		return true;
 	}
 
@@ -253,11 +236,6 @@ public class AutoEmailActivity extends PreferenceActivity implements
 	public void OnRelay(boolean connectionSuccess, String message)
 	{
 
-		if (pd != null)
-		{
-			pd.dismiss();
-		}
-
 		testResults = message;
 
 		handler.post(showTestResults);
@@ -273,6 +251,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
 
 	public void TestEmailResults()
 	{
+		Utilities.HideProgress();
 		Utilities.MsgBox(getString(R.string.autoemail_testresult_title),
 				testResults, this);
 	}

@@ -18,6 +18,11 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.UUID;
 
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.OAuthProvider;
+import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
+import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
+
 import com.mendhak.gpslogger.helpers.Base64;
 import com.mendhak.gpslogger.helpers.SimpleCrypto;
 import com.mendhak.gpslogger.interfaces.IMessageBoxCallback;
@@ -25,11 +30,14 @@ import com.mendhak.gpslogger.model.AppSettings;
 import com.mendhak.gpslogger.R;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -37,6 +45,7 @@ public class Utilities
 {
 
 	private static final int LOGLEVEL = 5;
+	static ProgressDialog pd;
 
 	public static void LogInfo(String message)
 	{
@@ -189,6 +198,33 @@ public class Utilities
 		
 
 	}
+	
+	public static void ShowProgress(Context ctx, String title, String message)
+	{
+		if(ctx != null)
+		{
+			pd = new ProgressDialog(ctx,
+					ProgressDialog.STYLE_HORIZONTAL);
+			pd.setMax(100);
+			pd.setIndeterminate(true);
+
+			pd = ProgressDialog.show(
+					ctx,
+					title,
+					message, 
+					true,
+					true);	
+		}
+	}
+	
+	public static void HideProgress()
+	{
+		if (pd != null)
+		{
+			pd.dismiss();
+		}
+	}
+	
 
 	/**
 	 * Displays a message box to the user with an OK button.
@@ -879,7 +915,76 @@ public class Utilities
 
 		return smmsu;
 	}
+	
+	
+	public static OAuthConsumer GetOSMAuthConsumer(Context ctx)
+	{
+		
+		int testResId = ctx.getResources().getIdentifier("test1", "string", ctx.getPackageName());
+		OAuthConsumer consumer = null;
+		
+		try
+		{
+			consumer = new CommonsHttpOAuthConsumer(
+					SimpleCrypto.decrypt(ctx.getString(testResId), ctx.getString(R.string.osm_consumerkey)), 
+					SimpleCrypto.decrypt(ctx.getString(testResId), ctx.getString(R.string.osm_consumersecret)));
+			
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+			String osmAccessToken = prefs.getString("osm_accesstoken", "");
+			String osmAccessTokenSecret = prefs.getString("osm_accesstokensecret", "");
+			
+			if(osmAccessToken != null && osmAccessToken.length()>0 
+					&& osmAccessTokenSecret != null && osmAccessTokenSecret.length()>0)
+			{
+				consumer.setTokenWithSecret(osmAccessToken, osmAccessTokenSecret);
+			}
+			
+			
+		}
+		catch(Exception e)
+		{
+		}
+		
+		return consumer;
+	}
+	
+	public static OAuthProvider GetOSMAuthProvider(Context ctx)
+	{
+		return new CommonsHttpOAuthProvider(
+				ctx.getString(R.string.osm_requesttoken_url),
+				ctx.getString(R.string.osm_accesstoken_url),
+				ctx.getString(R.string.osm_authorize_url));
 
+	}
+
+	
+	public static boolean IsOsmAuthorized(Context ctx)
+	{
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+		String oAuthAccessToken = prefs.getString("osm_accesstoken", "");
+		
+		return (oAuthAccessToken != null && oAuthAccessToken.length()>0);
+	}
+	
+	public static Intent GetOsmSettingsIntent(Context ctx)
+	{
+		
+		
+		if(!IsOsmAuthorized(ctx))
+		{
+			Intent iAuth =new Intent(ctx.getPackageName() + ".OSM_AUTHORIZE");
+			iAuth.setData(Uri.parse("gpslogger://authorize"));
+			
+			return iAuth;
+			
+		}
+		else
+		{
+			return new Intent(ctx.getPackageName() + ".OSM_SETUP");
+			
+		}
+	}
+	
 	private static boolean IsProVersion(Context ctx)
 	{
 		String proPackage = "com.mendhak.gpsloggerpro";

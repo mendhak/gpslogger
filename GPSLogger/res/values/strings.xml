@@ -243,16 +243,41 @@
     <string name="language">Language</string>
     <string name="language_summary">You will need to restart the application</string>
     
-    
-    <string name="osm_setup_title">OpenStreetMap</string>
-    <string name="osm_setup_summary">Settings for uploading GPS traces</string>
-    <string name="osm_preferences_title">OpenStreetMap Preferences</string>
-    
-	
-
     <string name="SMMSU">88F6B44D4785553A28114A7AE5E3503E85F15B98E51F28AED08BFBA8B677B6BE9D434CC4211C8369625E89D7554C6405</string>
     <string name="EMSU">88F6B44D4785553A28114A7AE5E3503E876B52F327D15367F6678D61B7BA432AF26ED9E781608A80F553251940DA3E9D</string>
-
-
     
+    
+    <string name="osm_setup_title">OpenStreetMap</string>
+    <string name="osm_setup_summary">Set tags, description, visibility and authorization for uploading GPS Traces</string>
+    <string name="osm_preferences_title">OpenStreetMap Preferences</string>
+    
+
+	<string name="osm_authorization">Authorization</string>
+	<string name="osm_lbl_authorize">Authorize this app</string>
+	<string name="osm_lbl_authorize_description">You will need to grant this app permissions in order to upload GPS traces to OpenStreetMap. You can set tags, descriptions and visibility here after you have authorized this app.</string>
+	
+	<string name="osm_consumerkey">5B4027907859E3BA770BE008069AEEF62D3CDF9CC9B0D4815CA69A6F0B8A2BBD</string>
+	<string name="osm_consumersecret">C9F16D1740B15BC57363CE771602462E8036584E48A4D1A6F5FC9307481098954FA06A8199921AA626C99A12A940F34E</string>
+	
+	<string name="osm_requesttoken_url">http://api06.dev.openstreetmap.org/oauth/request_token</string>
+	<string name="osm_accesstoken_url">http://api06.dev.openstreetmap.org/oauth/access_token</string>
+	<string name="osm_authorize_url">http://api06.dev.openstreetmap.org/oauth/authorize</string>
+	<string name="osm_gpstrace_url">http://api06.dev.openstreetmap.org/api/0.6/gpx/create</string>
+	
+	<string name="osm_upload">OpenStreetMap</string>
+	<string name="osm_uploading">Uploading to OpenStreetMap</string>
+	<string name="osm_resetauth">Clear authorization</string>
+	<string name="osm_resetauth_summary">Remove the local authorization used to talk to your OSM account.</string>
+	<string name="osm_auth_error">An error occurred while trying to contact the OpenStreetMap servers. Check that your phone has a connection or please try again later.</string>
+
+	<string name="osm_visibility">Visibility</string>
+	<string name="osm_visibility_summary">Set the visibility of your GPS Trace uploads</string>
+    
+    <string name="osm_description">Description</string>
+    <string name="osm_description_summary">The description to use when uploading a trace</string>
+    <string name="osm_tags">Tags</string>
+    <string name="osm_tags_summary">The tags to apply when uploading a trace</string>
+    
+    <string name="no_files_found">No files found, nothing to share or upload.</string>
+    <string name="osm_pick_file">Pick a file to upload</string>
 </resources>

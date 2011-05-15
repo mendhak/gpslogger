@@ -22,15 +22,25 @@
 			</intent-filter> 
 		</activity> 
 
-		<activity android:label="@string/osm_preferences_title" android:name="com.mendhak.gpslogger.OSMSettingsActivity">
+		<activity android:label="@string/osm_preferences_title" android:name=".OSMSettingsActivity">
 			<intent-filter>
 				<action android:name="com.mendhak.gpslogger.OSM_SETUP" />
 	            <category android:name="android.intent.category.DEFAULT" />
-	        <!--     <category android:name="android.intent.category.BROWSABLE" /> 
-	            <data android:scheme="gpslogger" android:host="authorize" />  -->
+	            <!-- <category android:name="android.intent.category.BROWSABLE" /> 
+	            <data android:scheme="gpslogger" android:host="authorize" />  -->  
 			</intent-filter>
 		</activity>
-
+		
+		<activity android:label="@string/osm_preferences_title" android:name=".OSMAuthorizationActivity">
+			<intent-filter>
+				<action android:name="com.mendhak.gpslogger.OSM_AUTHORIZE" />
+				<action android:name="android.intent.action.VIEW" />
+		        <category android:name="android.intent.category.DEFAULT" />
+		        <category android:name="android.intent.category.BROWSABLE" />
+	            <data android:scheme="gpslogger" android:host="authorize" /> 
+			</intent-filter>
+		</activity>
+		
 		<activity android:name="com.mendhak.gpslogger.GpsSettingsActivity"
 			android:label="@string/settings_screen_name"
 			android:screenOrientation="portrait">

@@ -69,4 +69,11 @@
 	<item>zh-rTW</item>
 </string-array>
 
+<string-array name="osm_visibility_choices">
+	<item>private</item>
+	<item>public</item>
+	<item>trackable</item>
+	<item>identifiable</item>
+</string-array>
+
 </resources> 

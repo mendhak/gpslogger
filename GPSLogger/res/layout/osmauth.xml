@@ -4,9 +4,21 @@
   android:layout_width="fill_parent"
   android:layout_height="fill_parent">
   
-   <Button android:id="@+id/btnAuthorizeOSM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Authorize" />
   
+  
+
+	<TableLayout android:id="@+id/TableOSM"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:stretchColumns="1" android:background="#000000">
+		<TableRow></TableRow>
+		<TableRow>
+  
+	  	<TextView android:id="@+id/lblAuthorizeDescription" android:layout_height="wrap_content"
+	  	android:text="@string/osm_lbl_authorize_description" android:layout_width="wrap_content"></TextView>
+	  </TableRow>
+	  <TableRow>
+	   	<Button android:id="@+id/btnAuthorizeOSM"
+	            android:text="@string/osm_lbl_authorize" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+	  </TableRow>
+	</TableLayout>
 </LinearLayout>

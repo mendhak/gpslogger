@@ -2,6 +2,7 @@ package com.mendhak.gpslogger;
 
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -9,6 +10,16 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import oauth.signpost.OAuthConsumer;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.mendhak.gpslogger.helpers.*;
 import com.mendhak.gpslogger.interfaces.IFileLoggingHelperCallback;
@@ -135,7 +146,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		GetPreferences();
 
 		StartAndBindService();
-
 	}
 	
 	@Override
@@ -363,12 +373,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.optionsmenu, menu);
 
-		if (!AppSettings.isProVersion())
-		{
-			menu.getItem(1).setVisible(false);
-			menu.getItem(2).setVisible(false);
-		}
-
 		return true;
 
 	}
@@ -384,27 +388,30 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		switch (itemId)
 		{
-			case R.id.mnuSeeMyMap:
-				break;
+//			case R.id.mnuSeeMyMap:
+//				break;
 			case R.id.mnuSettings:
 				Intent settingsActivity = new Intent(getBaseContext(), GpsSettingsActivity.class);
 				startActivity(settingsActivity);
 				break;
-			case R.id.mnuShareLatest:
-				SendLocation();
+			case R.id.mnuOSM:
+				UploadToOpenStreetMap();
 				break;
-			case R.id.mnuClearMap:
-				ClearMap();
-				break;
-			case R.id.mnuSeeMyMapMore:
-				startActivity(new Intent(getPackageName() + ".SEEMYMAP_SETUP"));
-				break;
-			case R.id.mnuViewInBrowser:
-				ViewInBrowser();
-				break;
-			case R.id.mnuShareAnnotated:
-				showDialog(DATEPICKER_ID);
-				break;
+//			case R.id.mnuShareLatest:
+//				SendLocation();
+//				break;
+//			case R.id.mnuClearMap:
+//				ClearMap();
+//				break;
+//			case R.id.mnuSeeMyMapMore:
+//				startActivity(new Intent(getPackageName() + ".SEEMYMAP_SETUP"));
+//				break;
+//			case R.id.mnuViewInBrowser:
+//				ViewInBrowser();
+//				break;
+//			case R.id.mnuShareAnnotated:
+//				showDialog(DATEPICKER_ID);
+//				break;
 			case R.id.mnuAnnotate:
 				Annotate();
 				break;
@@ -514,6 +521,10 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 				});
 				dialog.show();
 			}
+			else
+			{
+				Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
+			}
 		}
 		catch (Exception ex)
 		{
@@ -554,6 +565,95 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 	};
 
+	/**
+	 * Uploads a GPS Trace to OpenStreetMap.org. 
+	 */
+	private void UploadToOpenStreetMap()
+	{
+	
+		if(!Utilities.IsOsmAuthorized(getBaseContext()))
+		{
+			startActivity(Utilities.GetOsmSettingsIntent(getBaseContext()));
+			return;
+		}
+
+		final String goToOsmSettings = getString(R.string.menu_settings);
+		
+		final File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+		
+		if (gpxFolder.exists())
+		{
+			FilenameFilter select = new FilenameFilter()
+			{
+				
+				public boolean accept(File dir, String filename)
+				{
+					if(filename.toLowerCase().contains(".gpx") || filename.toLowerCase().contains(".zip"))
+					{
+						return true;
+					}
+					return false;
+				}
+			};
+			
+			String[] enumeratedFiles = gpxFolder.list(select);
+			List<String> fileList = new ArrayList<String>(Arrays.asList(enumeratedFiles));
+			Collections.reverse(fileList);
+			fileList.add(0, goToOsmSettings);
+			final String[] files = fileList.toArray(new String[0]);
+
+			final Dialog dialog = new Dialog(this);
+			dialog.setTitle(R.string.osm_pick_file);
+			dialog.setContentView(R.layout.filelist);
+			ListView thelist = (ListView) dialog.findViewById(R.id.listViewFiles);
+
+			thelist.setAdapter(new ArrayAdapter<String>(getBaseContext(),
+					android.R.layout.simple_list_item_single_choice, files));
+
+			thelist.setOnItemClickListener(new OnItemClickListener()
+			{
+
+				public void onItemClick(AdapterView<?> av, View v, int index, long arg)
+				{
+					
+					dialog.dismiss();
+					String chosenFileName = files[index];
+					
+					if(chosenFileName.equalsIgnoreCase(goToOsmSettings))
+					{
+						startActivity(Utilities.GetOsmSettingsIntent(getBaseContext()));
+					}
+					else
+					{
+						OSMHelper osm = new OSMHelper(GpsMainActivity.this);
+						Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.osm_uploading), getString(R.string.please_wait));
+						osm.UploadGpsTrace(chosenFileName);	
+					}
+					
+					
+				}
+			});
+			dialog.show();
+		}
+		else
+		{
+			Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
+		}
+	}
+	
+	public final Runnable updateOsmUpload = new Runnable() {
+		public void run()
+		{
+			OnOSMUploadComplete();
+		}
+	};
+	
+	private void OnOSMUploadComplete()
+	{
+		Utilities.HideProgress();
+	}
+	
+	
 	/**
 	 * Prompts user for input, then adds text to log file
 	 */
