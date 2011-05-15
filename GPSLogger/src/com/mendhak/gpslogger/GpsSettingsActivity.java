@@ -2,7 +2,6 @@ package com.mendhak.gpslogger;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
@@ -30,10 +29,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 
 		if (!AppSettings.isProVersion())
 		{
-			Preference seemymapSetup = (Preference) findPreference("seemymap_setup");
-			seemymapSetup.setSummary(R.string.settings_in_pro_version);
-			seemymapSetup.setEnabled(false);
-			
+		
 			Preference autoEmailSetup = (Preference) findPreference("autoemail_setup");
 			autoEmailSetup.setSummary(R.string.settings_in_pro_version);
 			autoEmailSetup.setEnabled(false);
@@ -154,15 +150,8 @@ public class GpsSettingsActivity extends PreferenceActivity
 			
 			public boolean onPreferenceClick(Preference preference)
 			{
-				try
-				{
-					startActivity(Utilities.GetOsmSettingsIntent(getBaseContext()));
-				}
-				catch(Exception ex)
-				{
-					String abc = ex.getMessage();
-				}
-				
+				startActivity(Utilities.GetOsmSettingsIntent(getBaseContext()));
+
 				return false;
 			}
 		});

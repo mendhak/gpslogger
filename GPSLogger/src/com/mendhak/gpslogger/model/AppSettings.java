@@ -14,12 +14,9 @@ public class AppSettings extends Application
 	private static boolean logToKml;
 	private static boolean logToGpx;
 	private static boolean showInNotificationBar;
-	private static String subdomain;
 	private static int minimumDistance;
 	private static int minimumSeconds;
 	private static String newFileCreation;
-	private static String seeMyMapUrl;
-	private static String seeMyMapGuid;
 	private static Float autoEmailDelay = 0f;
 	private static boolean autoEmailEnabled = false;
 	private static String smtpServer;
@@ -28,9 +25,7 @@ public class AppSettings extends Application
 	private static String smtpPassword;
 	private static String autoEmailTarget;
 	private static boolean smtpSsl;
-	
-	private static String emsu;
-	private static String smmsu;
+
 	private static boolean proVersion = false;
 	
 
@@ -153,22 +148,6 @@ public class AppSettings extends Application
 		AppSettings.showInNotificationBar = showInNotificationBar;
 	}
 
-	/**
-	 * @return the subdomain
-	 */
-	public static String getSubdomain()
-	{
-		return subdomain;
-	}
-
-	/**
-	 * @param subdomain
-	 *            the subdomain to set
-	 */
-	public static void setSubdomain(String subdomain)
-	{
-		AppSettings.subdomain = subdomain;
-	}
 
 	/**
 	 * @return the minimumDistance
@@ -221,40 +200,7 @@ public class AppSettings extends Application
 		AppSettings.newFileCreation = newFileCreation;
 	}
 
-	/**
-	 * @return the seeMyMapUrl
-	 */
-	public static String getSeeMyMapUrl()
-	{
-		return seeMyMapUrl;
-	}
-
-	/**
-	 * @param seeMyMapUrl
-	 *            the seeMyMapUrl to set
-	 */
-	public static void setSeeMyMapUrl(String seeMyMapUrl)
-	{
-		AppSettings.seeMyMapUrl = seeMyMapUrl;
-	}
-
-	/**
-	 * @return the seeMyMapGuid
-	 */
-	public static String getSeeMyMapGuid()
-	{
-		return seeMyMapGuid;
-	}
-
-	/**
-	 * @param seeMyMapGuid
-	 *            the seeMyMapGuid to set
-	 */
-	public static void setSeeMyMapGuid(String seeMyMapGuid)
-	{
-		AppSettings.seeMyMapGuid = seeMyMapGuid;
-	}
-
+	
 	/**
 	 * @return the autoEmailDelay
 	 */
@@ -309,26 +255,7 @@ public class AppSettings extends Application
 	}
 	
 
-	public static void setEmsu(String emsu)
-	{
-		AppSettings.emsu = emsu;
-	}
-
-	public static String getEmsu()
-	{
-		return emsu;
-	}
-
-	public static void setSmmsu(String smmsu)
-	{
-		AppSettings.smmsu = smmsu;
-	}
-
-	public static String getSmmsu()
-	{
-		return smmsu;
-	}
-
+	
 	public static void setProVersion(boolean proVersion)
 	{
 		AppSettings.proVersion = proVersion;

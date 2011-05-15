@@ -10,20 +10,17 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
-import java.util.UUID;
 
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
 
-import com.mendhak.gpslogger.helpers.Base64;
 import com.mendhak.gpslogger.helpers.SimpleCrypto;
 import com.mendhak.gpslogger.interfaces.IMessageBoxCallback;
 import com.mendhak.gpslogger.model.AppSettings;
@@ -122,7 +119,6 @@ public class Utilities
 		AppSettings.setShowInNotificationBar(prefs.getBoolean("show_notification", true));
 
 		AppSettings.setPreferCellTower(prefs.getBoolean("prefer_celltower", false));
-		AppSettings.setSubdomain(prefs.getString("subdomain", "where"));
 
 		String minimumDistanceString = prefs.getString("distance_before_logging", "0");
 
@@ -162,9 +158,6 @@ public class Utilities
 			AppSettings.setNewFileOnceADay(false);
 		}
 
-		AppSettings.setSeeMyMapUrl(prefs.getString("seemymap_URL", ""));
-
-		AppSettings.setSeeMyMapGuid(prefs.getString("seemymap_GUID", ""));
 
 		AppSettings.setAutoEmailEnabled(prefs.getBoolean("autoemail_enabled", false));
 
@@ -176,17 +169,7 @@ public class Utilities
 		}
 
 		AppSettings.setAutoEmailDelay(Float.valueOf(prefs.getString("autoemail_frequency", "0")));
-
-		if (AppSettings.getEmsu() == null)
-		{
-			AppSettings.setEmsu(GetEMSU(context));
-		}
-
-		if (AppSettings.getSmmsu() == null)
-		{
-			AppSettings.setSmmsu(GetSMMSU(context));
-		}
-		
+	
 		AppSettings.setProVersion(IsProVersion(context));
 		
 		AppSettings.setSmtpServer(prefs.getString("smtp_server", ""));
@@ -269,65 +252,6 @@ public class Utilities
 			}
 		});
 		alertDialog.show();
-	}
-
-	/**
-	 * Removes bad characters from a string, HTML-encodes it, then URL-encodes
-	 * it. Best used when sending to server.
-	 * 
-	 * @param input
-	 * @return
-	 */
-	public static String CleanString(String input)
-	{
-
-		input = input.replace(":", "");
-
-		input = Utilities.EncodeHTML(input);
-
-		input = URLEncoder.encode(input);
-		return input;
-	}
-
-	/**
-	 * Makes string safe for writing to XML file. Removes lt and gt. Best used
-	 * when writing to file.
-	 * 
-	 * @param desc
-	 * @return
-	 */
-	public static String CleanDescription(String desc)
-	{
-		desc = desc.replace("<", "");
-		desc = desc.replace(">", "");
-		desc = desc.replace("&", "&amp;");
-		desc = desc.replace("\"", "&quot;");
-
-		return desc;
-	}
-
-	/**
-	 * HTML Encodes a string
-	 * 
-	 * @param s
-	 * @return
-	 */
-	public static String EncodeHTML(String s)
-	{
-		StringBuffer out = new StringBuffer();
-		for (int i = 0; i < s.length(); i++)
-		{
-			char c = s.charAt(i);
-			if (c > 127 || c == '"' || c == '<' || c == '>' || c == '&')
-			{
-				out.append("&#" + (int) c + ";");
-			}
-			else
-			{
-				out.append(c);
-			}
-		}
-		return out.toString();
 	}
 
 	/**
@@ -492,29 +416,24 @@ public class Utilities
 
 	}
 
+	
 	/**
-	 * Checks if a person ID exists and if it doesn't, creates one and returns
-	 * it.
+	 * Makes string safe for writing to XML file. Removes lt and gt. Best used
+	 * when writing to file.
 	 * 
-	 * @param context
+	 * @param desc
 	 * @return
 	 */
-	public static String GetPersonId(Context context)
+	public static String CleanDescription(String desc)
 	{
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		String personId = prefs.getString("personId", "");
+		desc = desc.replace("<", "");
+		desc = desc.replace(">", "");
+		desc = desc.replace("&", "&amp;");
+		desc = desc.replace("\"", "&quot;");
 
-		if (personId == null || personId == "" || personId.length() == 0)
-		{
-			personId = String.valueOf(UUID.randomUUID());
-			SharedPreferences.Editor editor = prefs.edit();
-			editor.putString("personId", personId);
-			editor.commit();
-		}
-
-		return personId;
+		return desc;
 	}
-
+	
 	/**
 	 * Returns the contents of the file in a byte array
 	 * 
@@ -588,12 +507,6 @@ public class Utilities
 
 		}
 		return bytes;
-
-	}
-
-	public static String GetStringFromByteArray(byte[] content)
-	{
-		return Base64.encodeBytes(content);
 
 	}
 
@@ -787,61 +700,8 @@ public class Utilities
 		return FeetToMeters((int) f);
 	}
 
-	public static String GetRegisterSettingUrl(String personId, String target)
-	{
-		String regUrl = AppSettings.getEmsu() + "/registersetting/" + personId + "/" + target;
-		return regUrl;
-	}
 
-	public static String GetSeeMyMapAddLocationUrl(String seeMyMapGuid, double currentLatitude,
-			double currentLongitude, String input)
-	{
 
-		String whereUrl = AppSettings.getSmmsu() + "/savepoint/?guid=" + seeMyMapGuid + "&lat="
-				+ String.valueOf(currentLatitude) + "&lon=" + String.valueOf(currentLongitude) + "&des="
-				+ URLEncoder.encode(input);
-		return whereUrl;
-
-	}
-
-	public static String GetSeeMyMapAddLocationWithDateUrl(String seeMyMapGuid, double currentLatitude,
-			double currentLongitude, String input, String dateTime)
-	{
-		String whereUrl = AppSettings.getSmmsu() + "/savepointwithdate/?guid=" + seeMyMapGuid + "&lat="
-				+ String.valueOf(currentLatitude) + "&lon=" + String.valueOf(currentLongitude) + "&des="
-				+ URLEncoder.encode(input) + "&date=" + URLEncoder.encode(dateTime);
-
-		return whereUrl;
-
-	}
-
-	public static String GetSeeMyMapRequestUrl(String requestedUrl, String password, String personId)
-	{
-
-		String requestUrl = AppSettings.getSmmsu() + "/requestmap/" + requestedUrl + "/" + password
-				+ "/" + personId;
-
-		return requestUrl;
-	}
-
-	public static String GetDeleteFirstPointUrl(String seeMyMapGuid)
-	{
-		String deleteUrl = AppSettings.getSmmsu() + "/clearfirstpoint/" + seeMyMapGuid;
-
-		return deleteUrl;
-	}
-
-	public static String GetDeleteLastPointUrl(String seeMyMapGuid)
-	{
-		String deleteUrl = AppSettings.getSmmsu() + "/clearlastpoint/" + seeMyMapGuid;
-		return deleteUrl;
-	}
-
-	public static String GetSeeMyMapClearMapUrl(String seeMyMapGuid)
-	{
-		String clearUrl = AppSettings.getSmmsu() + "/clearmap/" + seeMyMapGuid;
-		return clearUrl;
-	}
 
 	public static boolean IsValidEmailAddress(String email)
 	{
@@ -874,48 +734,6 @@ public class Utilities
 		return false;
 	}
 
-
-	public static String GetEMSU(Context ctx)
-	{
-		String emsu = "";
-		int testResId = ctx.getResources().getIdentifier("test1", "string", ctx.getPackageName());
-
-		if (testResId > 0)
-		{
-			try
-			{
-				emsu = SimpleCrypto.decrypt(ctx.getString(testResId), ctx.getString(R.string.EMSU));
-
-			}
-			catch (Exception e)
-			{
-			}
-		}
-
-		return emsu;
-	}
-
-	public static String GetSMMSU(Context ctx)
-	{
-
-		String smmsu = "";
-		int testResId = ctx.getResources().getIdentifier("test1", "string", ctx.getPackageName());
-
-		if (testResId > 0)
-		{
-			try
-			{
-				smmsu = SimpleCrypto.decrypt(ctx.getString(testResId), ctx.getString(R.string.SMMSU));
-
-			}
-			catch (Exception e)
-			{
-			}
-		}
-
-		return smmsu;
-	}
-	
 	
 	public static OAuthConsumer GetOSMAuthConsumer(Context ctx)
 	{

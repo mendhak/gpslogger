@@ -23,13 +23,11 @@ public class AutoEmailHelper implements IAutoSendHelper
 		this.mainActivity = activity;
 	}
 
-	public void SendLogFile(String currentFileName, String personId,
-			boolean forcedSend)
+	public void SendLogFile(String currentFileName, boolean forcedSend)
 	{
 		this.forcedSend = forcedSend;
 
-		Thread t = new Thread(new AutoSendHandler(currentFileName, personId,
-				this));
+		Thread t = new Thread(new AutoSendHandler(currentFileName, this));
 		t.start();
 
 	}
@@ -73,8 +71,7 @@ class AutoSendHandler implements Runnable
 	String			currentFileName;
 	IAutoSendHelper	helper;
 
-	public AutoSendHandler(String currentFileName, String personId,
-			IAutoSendHelper helper)
+	public AutoSendHandler(String currentFileName,	IAutoSendHelper helper)
 	{
 		this.currentFileName = currentFileName;
 		this.helper = helper;

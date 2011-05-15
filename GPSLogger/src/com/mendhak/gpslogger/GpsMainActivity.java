@@ -5,21 +5,10 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import oauth.signpost.OAuthConsumer;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.mendhak.gpslogger.helpers.*;
 import com.mendhak.gpslogger.interfaces.IFileLoggingHelperCallback;
@@ -28,7 +17,6 @@ import com.mendhak.gpslogger.model.AppSettings;
 import com.mendhak.gpslogger.model.Session;
 import com.mendhak.gpslogger.R;
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 
 import android.content.ComponentName;
@@ -53,7 +41,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -77,7 +64,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	// ---------------------------------------------------
 	GeneralLocationListener gpsLocationListener;
 	GeneralLocationListener towerLocationListener;
-	SeeMyMapHelper seeMyMapHelper;
 	FileLoggingHelper fileHelper;
 	public LocationManager gpsLocationManager;
 	public LocationManager towerLocationManager;
@@ -138,7 +124,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		Utilities.LogInfo("GPSLogger started");
 
-		seeMyMapHelper = new SeeMyMapHelper(this);
 		fileHelper = new FileLoggingHelper(this);
 
 		setContentView(R.layout.main);
@@ -388,8 +373,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		switch (itemId)
 		{
-//			case R.id.mnuSeeMyMap:
-//				break;
 			case R.id.mnuSettings:
 				Intent settingsActivity = new Intent(getBaseContext(), GpsSettingsActivity.class);
 				startActivity(settingsActivity);
@@ -397,21 +380,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			case R.id.mnuOSM:
 				UploadToOpenStreetMap();
 				break;
-//			case R.id.mnuShareLatest:
-//				SendLocation();
-//				break;
-//			case R.id.mnuClearMap:
-//				ClearMap();
-//				break;
-//			case R.id.mnuSeeMyMapMore:
-//				startActivity(new Intent(getPackageName() + ".SEEMYMAP_SETUP"));
-//				break;
-//			case R.id.mnuViewInBrowser:
-//				ViewInBrowser();
-//				break;
-//			case R.id.mnuShareAnnotated:
-//				showDialog(DATEPICKER_ID);
-//				break;
 			case R.id.mnuAnnotate:
 				Annotate();
 				break;
@@ -430,10 +398,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		return false;
 	}
 
-	private void ViewInBrowser()
-	{
-		seeMyMapHelper.ViewInBrowser();
-	}
 	
 	private void EmailNow()
 	{
@@ -533,38 +497,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 	}
 
-	/**
-	 * Called when the date picker dialog is asked for
-	 */
-	@Override
-	protected Dialog onCreateDialog(int id)
-	{
-		Calendar c = Calendar.getInstance();
-		int cyear = c.get(Calendar.YEAR);
-		int cmonth = c.get(Calendar.MONTH);
-		int cday = c.get(Calendar.DAY_OF_MONTH);
-		switch (id)
-		{
-			case DATEPICKER_ID:
-				return new DatePickerDialog(this, dateSetListener, cyear, cmonth, cday);
-		}
-		return null;
-	}
-
-	/**
-	 * Handles the 'set' button click in the date picker, and calls SeeMyMap
-	 * functionality
-	 */
-	private DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
-	{
-		// onDateSet method
-		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
-		{
-
-			seeMyMapHelper.SendAnnotatedPointsSince(year, monthOfYear, dayOfMonth);
-		}
-	};
-
+	
 	/**
 	 * Uploads a GPS Trace to OpenStreetMap.org. 
 	 */
@@ -685,38 +618,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 	};
 
-	/**
-	 * Update the UI: The point has been added to the map
-	 */
-	public final Runnable updateResults = new Runnable()
-	{
-		public void run()
-		{
-			AddedToMap();
-		}
-	};
-
-	/**
-	 * Update the UI: The map has been cleared
-	 */
-	public final Runnable updateResultsClearMap = new Runnable()
-	{
-		public void run()
-		{
-			MapCleared();
-		}
-	};
-
-	/**
-	 * Update the UI: The points have been read and sent to the map
-	 */
-	public final Runnable updateResultsSentPoints = new Runnable()
-	{
-		public void run()
-		{
-			PointsSent();
-		}
-	};
 
 	/**
 	 * MessageBox: There was a connection error.
@@ -725,48 +626,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	{
 		Utilities.MsgBox(getString(R.string.error), getString(R.string.error_connection), this);
 
-	}
-
-	/**
-	 * MessageBox: the points have been read and sent to the server
-	 */
-	private void PointsSent()
-	{
-		Utilities.MsgBox(getString(R.string.sent), getString(R.string.sent_server), this);
-	}
-
-	/**
-	 * MessageBox: The point has been sent to the server
-	 */
-	private void AddedToMap()
-	{
-		Utilities.MsgBox(getString(R.string.sent), getString(R.string.sent_location), this);
-	}
-
-	/**
-	 * MessageBox: The map has been cleared
-	 */
-	private void MapCleared()
-	{
-		Utilities.MsgBox(getString(R.string.cleared), getString(R.string.cleared_map), this);
-	}
-
-	/**
-	 * Clears the user's SeeMyMap map
-	 */
-	private void ClearMap()
-	{
-
-		seeMyMapHelper.ClearMap();
-	}
-
-	/**
-	 * Sends the user input to his SeeMyMap map
-	 */
-	private void SendLocation()
-	{
-
-		seeMyMapHelper.SendAnnotatedPoint();
 	}
 
 	/**

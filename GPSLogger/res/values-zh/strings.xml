@@ -13,12 +13,12 @@
     
     <!-- menu strings -->
     <string name="menu_settings">设置</string>
-    <string name="menu_seemymap">SeeMyMap</string>
+    
     <string name="menu_share_latest">发送新的位置点</string>
     <string name="menu_send_annotated">发送的位置点先于</string>
     <string name="menu_clear_map">清除地图</string>
     <string name="menu_view_in_browser">显示地图</string>
-    <string name="menu_seemymap_more">更多</string>
+    
     <string name="menu_annotate">注释</string>
     <string name="menu_share">分享</string>
     <string name="menu_exit">退出</string>
@@ -115,20 +115,6 @@
     <string name="error_displaying">显示位置信息时出错： %s</string>
     <string name="degree_symbol">°</string>
     
-    <!-- seemymap activity -->
-    <string name="lbl_request_url">你的地图网站：</string>
-    <string name="txt_request_url_hint">选择一个名字</string>
-    <string name="lbl_seemymapcom">.seemymap.com</string>
-    <string name="lbl_password">密码：</string>
-    <string name="lbl_check_register">检查并注册</string>
-    <string name="lbl_seemymap_summary">简要显示在这</string>
-    <string name="lbl_more_actions">更多操作</string>
-    <string name="lbl_delete_first_point">删除第一个位置点</string>
-    <string name="lbl_delete_last_point">删除最近的位置点</string>
-    <string name="name_available">它是你的</string>
-    <string name="name_unavailable">你选择的名字不可用，试试另一个</string>
-    <string name="seemymap_currenturl">当前你已经注册了 %s.seemymap.com</string>
-    <string name="seemymap_introduction">使用上面的文本框来注册一个 SeeMyMap 网址。你随时可以改变主意，然后重新注册一个。不要忘记密码，如果某天你想要找回你的网址你会需要它的。</string>
     
     <!-- Settings activity -->
     <string name="settings_in_pro_version">在 GPSLogger 专业版中可用</string>
@@ -168,8 +154,7 @@
     <string name="show_notification_title">显示通知</string>
     <string name="show_notification_summary">随着坐标的变化在通知栏上显示一个提醒。</string>
     
-    <string name="seemymap_setup_title">你的 SeeMyMap.com</string>
-    <string name="seemymap_setup_summary">设置你的 seemymap.com 网站</string>
+
     <string name="enabledisablegps_title">启用/禁用 GPS</string>
     <string name="enabledisablegps_summary">转到手机的设置来启用或禁用提供器。</string>
     
@@ -179,10 +164,6 @@
     <string name="autoemail_title">设定自动发送Email</string>
     <string name="autoemail_summary">自动的通过Email发送日志到你选择的Email地址。</string>
     <string name="autoemail_btn_register">保存设置</string>
-    <string name="seemymap_mistyped">无法获得你的键盘？</string>
-    <string name="seemymap_limit_website">请先至你的网站的名字和密码为数字和字母，仅此而已。</string>
-    <string name="seemymap_checking">检查中...</string>
-    <string name="seemymap_checking_website">正在检查 %s.seemymap.com 的可用性</string>
     
     <string name="autoemail_registering">注册中...</string>
     <string name="please_wait">请稍等。</string>

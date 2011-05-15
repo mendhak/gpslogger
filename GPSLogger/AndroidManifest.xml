@@ -46,14 +46,7 @@
 			android:screenOrientation="portrait">
 		</activity>
 
-		<activity android:name="com.mendhak.gpslogger.SeeMyMapSetupActivity"
-			android:label="@string/seemymap_setup_title"
-			android:screenOrientation="portrait">
-			<intent-filter>
-				<category android:name="android.intent.category.DEFAULT" />
-				<action android:name="com.mendhak.gpslogger.SEEMYMAP_SETUP" />
-			</intent-filter>
-		</activity>
+
 		<activity android:name="com.mendhak.gpslogger.AutoEmailActivity"
 			android:label="@string/autoemail_title" android:screenOrientation="portrait">
 			<intent-filter>

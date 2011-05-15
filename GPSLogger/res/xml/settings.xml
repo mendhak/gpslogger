@@ -43,10 +43,7 @@
 			android:summary="@string/autoemail_summary" android:key="autoemail_setup">
 			<intent android:action="com.mendhak.gpslogger.AUTOEMAIL_SETUP" />
 		</Preference>
-		<Preference android:title="@string/seemymap_setup_title"
-			android:summary="@string/seemymap_setup_summary" android:key="seemymap_setup">
-			<intent android:action="com.mendhak.gpslogger.SEEMYMAP_SETUP" />
-		</Preference>
+
 		<Preference android:title="@string/osm_setup_title"
 			android:summary="@string/osm_setup_summary" android:key="osm_setup">
 			<intent android:action="com.mendhak.gpslogger.OSM_SETUP" /> 

@@ -47,7 +47,6 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	// ---------------------------------------------------
 	GeneralLocationListener gpsLocationListener;
 	GeneralLocationListener towerLocationListener;
-	SeeMyMapHelper seeMyMapHelper;
 	FileLoggingHelper fileHelper;
 	public LocationManager gpsLocationManager;
 	public LocationManager towerLocationManager;
@@ -270,7 +269,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 			
 			Utilities.LogInfo("Emailing Log File");
 			AutoEmailHelper aeh = new AutoEmailHelper(GpsLoggingService.this);
-			aeh.SendLogFile(Session.getCurrentFileName(), Utilities.GetPersonId(getBaseContext()),false);
+			aeh.SendLogFile(Session.getCurrentFileName(), false);
 			SetupAutoEmailTimers();
 			
 			if(IsMainFormVisible())
@@ -294,7 +293,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 			
 			Utilities.LogInfo("Force emailing Log File");
 			AutoEmailHelper aeh = new AutoEmailHelper(GpsLoggingService.this);
-			aeh.SendLogFile(Session.getCurrentFileName(), Utilities.GetPersonId(getBaseContext()),true);
+			aeh.SendLogFile(Session.getCurrentFileName(), true);
 			
 			if(IsMainFormVisible())
 			{

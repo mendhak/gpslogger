@@ -13,12 +13,10 @@
     
     <!-- menu strings -->
     <string name="menu_settings">Settings</string>
-    <string name="menu_seemymap">SeeMyMap</string>
     <string name="menu_share_latest">Send new point</string>
     <string name="menu_send_annotated">Send points since</string>
     <string name="menu_clear_map">Clear Map</string>
     <string name="menu_view_in_browser">Show map</string>
-    <string name="menu_seemymap_more">More</string>
     <string name="menu_emailnow">Email now</string>
     <string name="menu_annotate">Annotate</string>
     <string name="menu_share">Share</string>
@@ -118,20 +116,7 @@
     <string name="error_displaying">Error in displaying location info: %s</string>
     <string name="degree_symbol">&#176;</string>
     
-    <!-- seemymap activity -->
-    <string name="lbl_request_url">Your map website:</string>
-    <string name="txt_request_url_hint">pick a name</string>
-    <string name="lbl_seemymapcom">.seemymap.com</string>
-    <string name="lbl_password">Password:</string>
-    <string name="lbl_check_register">Check and Register</string>
-    <string name="lbl_seemymap_summary">Summary goes here</string>
-    <string name="lbl_more_actions">More actions</string>
-    <string name="lbl_delete_first_point">Delete First Point</string>
-    <string name="lbl_delete_last_point">Delete Last Point</string>
-    <string name="name_available">It\'s yours</string>
-    <string name="name_unavailable">That name isn\'t available, try another.</string>
-    <string name="seemymap_currenturl">You\'ve currently registered %s.seemymap.com</string>
-    <string name="seemymap_introduction">Use the textboxes above to register a SeeMyMap URL. You can always change your mind and register another.  Don\'t forget the password, as you\'ll need it if you want to retrieve your URL some day.</string>
+    
     
     <!-- Settings activity -->
     <string name="settings_in_pro_version">Available in GPSLogger Pro</string>
@@ -171,8 +156,7 @@
     <string name="show_notification_title">Show Notification</string>
     <string name="show_notification_summary">Displays a reminder along with coordinates in the notification bar.</string>
     
-    <string name="seemymap_setup_title">Your SeeMyMap.com</string>
-    <string name="seemymap_setup_summary">Set up your seemymap.com website</string>
+    
     <string name="enabledisablegps_title">Enable/Disable GPS</string>
     <string name="enabledisablegps_summary">Go to the phone settings to enable or disable the providers.</string>
     
@@ -182,10 +166,7 @@
     <string name="autoemail_title">Auto Email Setup</string>
     <string name="autoemail_summary">Automatically emails the log file to an address of your choice</string>
     <string name="autoemail_btn_register">Save settings</string>
-    <string name="seemymap_mistyped">Cat got your keyboard?</string>
-    <string name="seemymap_limit_website">Please limit the website name and password to numbers and letters, nothing else.</string>
-    <string name="seemymap_checking">Checking...</string>
-    <string name="seemymap_checking_website">Checking availability of %s.seemymap.com</string>
+    
     
     <string name="autoemail_registering">Registering...</string>
     <string name="please_wait">Please wait.</string>
@@ -242,10 +223,6 @@
     
     <string name="language">Language</string>
     <string name="language_summary">You will need to restart the application</string>
-    
-    <string name="SMMSU">88F6B44D4785553A28114A7AE5E3503E85F15B98E51F28AED08BFBA8B677B6BE9D434CC4211C8369625E89D7554C6405</string>
-    <string name="EMSU">88F6B44D4785553A28114A7AE5E3503E876B52F327D15367F6678D61B7BA432AF26ED9E781608A80F553251940DA3E9D</string>
-    
     
     <string name="osm_setup_title">OpenStreetMap</string>
     <string name="osm_setup_summary">Set tags, description, visibility and authorization for uploading GPS Traces</string>

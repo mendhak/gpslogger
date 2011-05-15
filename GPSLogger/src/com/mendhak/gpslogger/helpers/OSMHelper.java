@@ -16,7 +16,6 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;

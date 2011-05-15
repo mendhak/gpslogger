@@ -1438,6 +1438,7 @@ public class Base64
      * @throws java.io.IOException if there is an error
      * @since 2.1
      */
+    
     public static void decodeToFile( String dataToDecode, String filename )
     throws java.io.IOException {
         

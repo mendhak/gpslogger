@@ -7,15 +7,6 @@ import android.location.Location;
 public interface IGpsLoggerServiceClient
 {
 
-	/**
-	 * Beginning GPS logging
-	 */
-	public void OnBeginGpsLogging();
-	
-	/**
-	 * Stopping GPS logging
-	 */
-	public void OnStopGpsLogging();
 	
 	/**
 	 * New message from the service to be displayed on the activity form.

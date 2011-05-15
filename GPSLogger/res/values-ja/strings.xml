@@ -13,12 +13,12 @@
 
  <!--  menu strings   --> 
   <string name="menu_settings">設定</string> 
-  <string name="menu_seemymap">SeeMyMapの機能</string> 
+   
   <string name="menu_share_latest">ポイントのシェア</string> 
   <string name="menu_send_annotated">以前からのポイントのアップロード</string> 
   <string name="menu_clear_map">マップのクリア</string> 
   <string name="menu_view_in_browser">マップの展示</string> 
-  <string name="menu_seemymap_more">より多く</string> 
+   
   <string name="menu_annotate">メモの追加</string> 
   <string name="menu_share">シェア</string> 
   <string name="menu_exit">出口</string> 
@@ -112,20 +112,6 @@
     <string name="error_displaying">位置の情報を表現のエラー： %s</string>
     <string name="degree_symbol">&#176;</string>
     
-    <!-- seemymap activity -->
-    <string name="lbl_request_url">お客さんのマップのウェッブサイト：</string>
-    <string name="txt_request_url_hint">名を選んでください。</string>
-    <string name="lbl_seemymapcom">.seemymap.com</string>
-    <string name="lbl_password">パスワード：</string>
-    <string name="lbl_check_register">チェックそして登録</string>
-    <string name="lbl_seemymap_summary">要約はここへ</string>
-    <string name="lbl_more_actions">もっと行動</string>
-    <string name="lbl_delete_first_point">最初のポイントの削除</string>
-    <string name="lbl_delete_last_point">最後のポイントの削除</string>
-    <string name="name_available">ウェブサイトを手に入れている</string>
-    <string name="name_unavailable">That name isn\'t available, try another.</string>
-    <string name="seemymap_currenturl">You\'ve currently registered %s.seemymap.com</string>
-    <string name="seemymap_introduction">Use the textboxes above to register a SeeMyMap URL. You can always change your mind and register another.  Don\'t forget the password, as you\'ll need it if you want to retrieve your URL some day.</string>
     
     <!-- Settings activity -->
     <string name="settings_in_pro_version">Available in GPSLogger Pro</string>
@@ -165,8 +151,7 @@
     <string name="show_notification_title">Show Notification</string>
     <string name="show_notification_summary">Displays a reminder along with coordinates in the notification bar.</string>
     
-    <string name="seemymap_setup_title">Your SeeMyMap.com</string>
-    <string name="seemymap_setup_summary">Set up your seemymap.com website</string>
+    
     <string name="enabledisablegps_title">Enable/Disable GPS</string>
     <string name="enabledisablegps_summary">Go to the phone settings to enable or disable the providers.</string>
     

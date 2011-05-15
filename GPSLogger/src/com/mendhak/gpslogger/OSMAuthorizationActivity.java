@@ -1,16 +1,8 @@
 package com.mendhak.gpslogger;
 
-import com.mendhak.gpslogger.helpers.SimpleCrypto;
-
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
-import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
-import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
-import oauth.signpost.exception.OAuthCommunicationException;
-import oauth.signpost.exception.OAuthExpectationFailedException;
-import oauth.signpost.exception.OAuthMessageSignerException;
-import oauth.signpost.exception.OAuthNotAuthorizedException;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,15 +27,6 @@ public class OSMAuthorizationActivity extends Activity implements
 		setContentView(R.layout.osmauth);
 
 		final Intent intent = getIntent();
-		final String myScheme = intent.getScheme();
-		final Bundle myBundle = intent.getExtras();
-		final boolean inContestKey;
-
-		if (myBundle != null)
-		{
-			inContestKey = myBundle.containsKey("oauth_token");
-		}
-
 		final Uri myURI = intent.getData();
 
 		if (myURI != null && myURI.getQuery() != null

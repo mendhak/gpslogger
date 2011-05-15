@@ -11,12 +11,10 @@
 	<string name="add_description">Ajouter une description</string>
 	<string name="letters_numbers">Utilisez uniquement des lettres et chiffres</string>
 	<string name="menu_settings">Paramètres</string>
-	<string name="menu_seemymap">SeeMyMap</string>
 	<string name="menu_share_latest">Envoyer un nouveau point</string>
 	<string name="menu_send_annotated">Envoyer points depuis</string>
 	<string name="menu_clear_map">Effacer le plan</string>
 	<string name="menu_view_in_browser">Montrer le plan</string>
-	<string name="menu_seemymap_more">Plus</string>
 	<string name="menu_emailnow">Email maintenant</string>
 	<string name="menu_annotate">Annoter</string>
 	<string name="menu_share">Partager</string>
@@ -105,17 +103,16 @@
 	<string name="degree_symbol">°</string>
 	<string name="lbl_request_url">Votre site web du plan:</string>
 	<string name="txt_request_url_hint">Choisir un nom</string>
-	<string name="lbl_seemymapcom">.seemymap.com</string>
+
 	<string name="lbl_password">Mot de passe:</string>
 	<string name="lbl_check_register">Vérifier et enregistrer</string>
-	<string name="lbl_seemymap_summary">Résumé va ici</string>
+
 	<string name="lbl_more_actions">Plus d\'actions</string>
 	<string name="lbl_delete_first_point">Supprimer premier point</string>
 	<string name="lbl_delete_last_point">Supprimer dernier point</string>
 	<string name="name_available">C\'est le vôtre</string>
 	<string name="name_unavailable">Ce nom n\'est pas disponible, essayez un autre.</string>
-	<string name="seemymap_currenturl">Vous avez actuellement enregistré %s.seemymap.com</string>
-	<string name="seemymap_introduction">Utilisez les zones de texte ci-dessus pour enregistrer une URL SeeMyMap. Vous pouvez toujours changer d\'avis et en enregistrer une autre. N\'oubliez pas le mot de passe, comme vous en aurez besoin si vous voulez récupérer l\'URL un de ces jour.</string>
+
 	<string name="settings_in_pro_version">Disponible avec GPSLogger Pro</string>
 	<string name="settings_distance_in_feet">Distance en pieds</string>
 	<string name="settings_enter_feet">Entrez pieds (max 9999)</string>
@@ -148,8 +145,7 @@
 	<string name="useimperial_summary">Utilisez pieds, milles et pintes, rien de ces nouveaux trucs métriques.</string>
 	<string name="show_notification_title">Afficher la notification</string>
 	<string name="show_notification_summary">Affiche un rappel  avec les coordonnées dans la barre de notification.</string>
-	<string name="seemymap_setup_title">Vôtre SeeMyMap.com</string>
-	<string name="seemymap_setup_summary">Configurez vôtre site web seemymap.com</string>
+
 	<string name="enabledisablegps_title">Activer / Désactiver GPS</string>
 	<string name="enabledisablegps_summary">Accédez aux paramètres du cellulaire pour activer ou désactiver les fournisseurs du service.</string>
 	<string name="startonbootup_title">Démarrer au démarrage du cellulaire</string>
@@ -157,10 +153,6 @@
 	<string name="autoemail_title">Configuration email automatique</string>
 	<string name="autoemail_summary">Emails automatique du  fichier d\'enregistrement à une adresse de votre choix</string>
 	<string name="autoemail_btn_register">Enregistrer les paramètres</string>
-	<string name="seemymap_mistyped">Un chat joue avec votre clavier?</string>
-	<string name="seemymap_limit_website">S\'il vous plaît limiter le nom du site et mot de passe à des numéros et des lettres, rien d\'autre.</string>
-	<string name="seemymap_checking">Vérification ...</string>
-	<string name="seemymap_checking_website">Vérification de la disponibilité de %s.seemymap.com</string>
 	<string name="autoemail_registering">Enregistrement ...</string>
 	<string name="please_wait">Attendre s\'il vous plaît.</string>
 	<string name="autoemail_invalid_title">Email invalide</string>

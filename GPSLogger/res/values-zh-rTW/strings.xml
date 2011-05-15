@@ -13,12 +13,10 @@
     
     <!-- menu strings -->
     <string name="menu_settings">設定</string>
-    <string name="menu_seemymap">SeeMyMap</string>
     <string name="menu_share_latest">傳送新的位置點</string>
     <string name="menu_send_annotated">傳送的位置點先於</string>
     <string name="menu_clear_map">清除地圖</string>
     <string name="menu_view_in_browser">顯示地圖</string>
-    <string name="menu_seemymap_more">更多</string>
     <string name="menu_annotate">註解</string>
     <string name="menu_share">分享</string>
     <string name="menu_exit">結束</string>
@@ -115,21 +113,7 @@
     <string name="error_displaying">顯示位置訊息時錯誤： %s</string>
     <string name="degree_symbol">°</string>
     
-    <!-- seemymap activity -->
-    <string name="lbl_request_url">你的地圖網站：</string>
-    <string name="txt_request_url_hint">選取一個名字</string>
-    <string name="lbl_seemymapcom">.seemymap.com</string>
-    <string name="lbl_password">密碼：</string>
-    <string name="lbl_check_register">檢查並註冊</string>
-    <string name="lbl_seemymap_summary">簡要顯示在這</string>
-    <string name="lbl_more_actions">更多操作</string>
-    <string name="lbl_delete_first_point">刪除第一個位置點</string>
-    <string name="lbl_delete_last_point">刪除最近的位置點</string>
-    <string name="name_available">它是你的</string>
-    <string name="name_unavailable">你選取的名字不可用，試試另一個</string>
-    <string name="seemymap_currenturl">目前你已經註冊了 %s.seemymap.com</string>
-    <string name="seemymap_introduction">使用上面的文字方塊來註冊一個 SeeMyMap 網址。你隨時可以改變主意，然後重新註冊一個。不要忘記密碼，如果某天你想要找回你的網址你會需要它的。</string>
-    
+ 
     <!-- Settings activity -->
     <string name="settings_in_pro_version">在 GPSLogger 專業版中可用</string>
     <string name="settings_distance_in_feet">以英尺算的距離</string>
@@ -168,8 +152,6 @@
     <string name="show_notification_title">顯示通知</string>
     <string name="show_notification_summary">隨著坐標的變化在通知列上顯示一個提醒。</string>
     
-    <string name="seemymap_setup_title">你的 SeeMyMap.com</string>
-    <string name="seemymap_setup_summary">設定你的 seemymap.com 網站</string>
     <string name="enabledisablegps_title">啟用/禁用 GPS</string>
     <string name="enabledisablegps_summary">轉到手機的設定來啟用或禁用提供器。</string>
     
@@ -179,10 +161,6 @@
     <string name="autoemail_title">設定自動傳送Email</string>
     <string name="autoemail_summary">自動的通過Email傳送日誌到你選取的Email位址。</string>
     <string name="autoemail_btn_register">儲存設定</string>
-    <string name="seemymap_mistyped">無法獲得你的鍵盤？</string>
-    <string name="seemymap_limit_website">請先至你的網站的名字和密碼為數字和字母，僅此而已。</string>
-    <string name="seemymap_checking">檢查中...</string>
-    <string name="seemymap_checking_website">正在檢查 %s.seemymap.com 的可用性</string>
     
     <string name="autoemail_registering">註冊中...</string>
     <string name="please_wait">請稍等。</string>
