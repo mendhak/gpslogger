@@ -233,13 +233,12 @@
 	<string name="osm_lbl_authorize">Authorize this app</string>
 	<string name="osm_lbl_authorize_description">You will need to grant this app permissions in order to upload GPS traces to OpenStreetMap. You can set tags, descriptions and visibility here after you have authorized this app.</string>
 	
-	<string name="osm_consumerkey">5B4027907859E3BA770BE008069AEEF62D3CDF9CC9B0D4815CA69A6F0B8A2BBD</string>
-	<string name="osm_consumersecret">C9F16D1740B15BC57363CE771602462E8036584E48A4D1A6F5FC9307481098954FA06A8199921AA626C99A12A940F34E</string>
 	
-	<string name="osm_requesttoken_url">http://api06.dev.openstreetmap.org/oauth/request_token</string>
-	<string name="osm_accesstoken_url">http://api06.dev.openstreetmap.org/oauth/access_token</string>
-	<string name="osm_authorize_url">http://api06.dev.openstreetmap.org/oauth/authorize</string>
-	<string name="osm_gpstrace_url">http://api06.dev.openstreetmap.org/api/0.6/gpx/create</string>
+	
+	<string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
+	<string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
+	<string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
+	<string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
 	
 	<string name="osm_upload">OpenStreetMap</string>
 	<string name="osm_uploading">Uploading to OpenStreetMap</string>

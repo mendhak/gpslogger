@@ -96,6 +96,11 @@ public class OSMHelper implements IOsmHelper
 	            FileBody gpxBody = new FileBody(chosenFile);
 
 	            entity.addPart("file", gpxBody);
+	            if(description == null || description.length() <= 0)
+	            {
+	            	description = "GPSLogger for Android";
+	            }
+	            	
 	            entity.addPart("description", new StringBody(description));
 	            entity.addPart("tags", new StringBody(tags));
 	            entity.addPart("visibility", new StringBody(visibility));

@@ -738,14 +738,13 @@ public class Utilities
 	public static OAuthConsumer GetOSMAuthConsumer(Context ctx)
 	{
 		
-		int testResId = ctx.getResources().getIdentifier("test1", "string", ctx.getPackageName());
 		OAuthConsumer consumer = null;
 		
 		try
 		{
 			consumer = new CommonsHttpOAuthConsumer(
-					SimpleCrypto.decrypt(ctx.getString(testResId), ctx.getString(R.string.osm_consumerkey)), 
-					SimpleCrypto.decrypt(ctx.getString(testResId), ctx.getString(R.string.osm_consumersecret)));
+					ctx.getString(R.string.osm_consumerkey), 
+					ctx.getString(R.string.osm_consumersecret));
 			
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
 			String osmAccessToken = prefs.getString("osm_accesstoken", "");
