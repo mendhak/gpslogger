@@ -12,8 +12,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 import java.util.TimeZone;
 
 import oauth.signpost.OAuthConsumer;
@@ -21,7 +19,6 @@ import oauth.signpost.OAuthProvider;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
 
-import com.mendhak.gpslogger.helpers.SimpleCrypto;
 import com.mendhak.gpslogger.interfaces.IMessageBoxCallback;
 import com.mendhak.gpslogger.model.AppSettings;
 import com.mendhak.gpslogger.R;
@@ -32,8 +29,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -170,18 +165,15 @@ public class Utilities
 
 		AppSettings.setAutoEmailDelay(Float.valueOf(prefs.getString("autoemail_frequency", "0")));
 	
-		AppSettings.setProVersion(IsProVersion(context));
-		
 		AppSettings.setSmtpServer(prefs.getString("smtp_server", ""));
 		AppSettings.setSmtpPort(prefs.getString("smtp_port", "25"));
 		AppSettings.setSmtpSsl(prefs.getBoolean("smtp_ssl", true));
 		AppSettings.setSmtpUsername(prefs.getString("smtp_username", ""));
 		AppSettings.setSmtpPassword(prefs.getString("smtp_password", ""));
 		AppSettings.setAutoEmailTarget(prefs.getString("autoemail_target", ""));
-		
-
 	}
 	
+
 	public static void ShowProgress(Context ctx, String title, String message)
 	{
 		if(ctx != null)
@@ -735,6 +727,22 @@ public class Utilities
 	}
 
 	
+	public static boolean IsEmailSetup(Context ctx)
+	{
+		if(AppSettings.isAutoEmailEnabled() &&
+				AppSettings.getAutoEmailTarget().length() > 0 &&
+				AppSettings.getSmtpServer().length() > 0 &&
+				AppSettings.getSmtpPort().length() > 0 &&
+				AppSettings.getSmtpUsername().length() > 0
+				)
+		{
+			return true;
+		}
+		
+		return false;
+				
+	}
+	
 	public static OAuthConsumer GetOSMAuthConsumer(Context ctx)
 	{
 		
@@ -802,28 +810,28 @@ public class Utilities
 		}
 	}
 	
-	private static boolean IsProVersion(Context ctx)
-	{
-		String proPackage = "com.mendhak.gpsloggerpro";
-
-		final PackageManager pm = ctx.getPackageManager();
-
-		List<PackageInfo> list = pm.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
-
-		Iterator<PackageInfo> i = list.iterator();
-		while (i.hasNext())
-		{
-			PackageInfo p = i.next();
-
-			if ((p.packageName.equals(proPackage))
-					&& (pm.checkSignatures(ctx.getPackageName(), p.packageName) == PackageManager.SIGNATURE_MATCH))
-			{
-				return true;
-			}
-
-		}
-		return false;
-	}
+//	private static boolean IsProVersion(Context ctx)
+//	{
+//		String proPackage = "com.mendhak.gpsloggerpro";
+//
+//		final PackageManager pm = ctx.getPackageManager();
+//
+//		List<PackageInfo> list = pm.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
+//
+//		Iterator<PackageInfo> i = list.iterator();
+//		while (i.hasNext())
+//		{
+//			PackageInfo p = i.next();
+//
+//			if ((p.packageName.equals(proPackage))
+//					&& (pm.checkSignatures(ctx.getPackageName(), p.packageName) == PackageManager.SIGNATURE_MATCH))
+//			{
+//				return true;
+//			}
+//
+//		}
+//		return false;
+//	}
 
 
 }

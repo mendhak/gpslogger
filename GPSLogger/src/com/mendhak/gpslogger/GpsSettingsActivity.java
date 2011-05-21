@@ -13,7 +13,6 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.model.AppSettings;
 
 public class GpsSettingsActivity extends PreferenceActivity
 {
@@ -26,18 +25,6 @@ public class GpsSettingsActivity extends PreferenceActivity
 
 		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		boolean useImperial = prefs.getBoolean("useImperial", false);
-
-		if (!AppSettings.isProVersion())
-		{
-		
-			Preference autoEmailSetup = (Preference) findPreference("autoemail_setup");
-			autoEmailSetup.setSummary(R.string.settings_in_pro_version);
-			autoEmailSetup.setEnabled(false);
-			
-			Preference startOnBootSetup = (Preference) findPreference("startonbootup");
-			startOnBootSetup.setSummary(R.string.settings_in_pro_version);
-			startOnBootSetup.setEnabled(false);
-		}
 
 		final EditTextPreference distanceBeforeLogging = (EditTextPreference) findPreference("distance_before_logging");
 

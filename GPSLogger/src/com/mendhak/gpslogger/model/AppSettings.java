@@ -26,7 +26,6 @@ public class AppSettings extends Application
 	private static String autoEmailTarget;
 	private static boolean smtpSsl;
 
-	private static boolean proVersion = false;
 	
 
 	/**
@@ -254,17 +253,6 @@ public class AppSettings extends Application
 		AppSettings.autoEmailEnabled = autoEmailEnabled;
 	}
 	
-
-	
-	public static void setProVersion(boolean proVersion)
-	{
-		AppSettings.proVersion = proVersion;
-	}
-
-	public static boolean isProVersion()
-	{
-		return proVersion;
-	}
 
 	public static void setSmtpServer(String smtpServer) 
 	{

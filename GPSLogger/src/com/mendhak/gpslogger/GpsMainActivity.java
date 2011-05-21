@@ -401,13 +401,15 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	
 	private void EmailNow()
 	{
-		if (!AppSettings.isProVersion())
+		if(Utilities.IsEmailSetup(getBaseContext()))
 		{
-			Utilities.MsgBox(getString(R.string.sharing), getString(R.string.sharing_pro), this);
-			return;
+			loggingService.ForceEmailLogFile();	
 		}
-		
-		loggingService.ForceEmailLogFile();
+		else
+		{
+			Intent emailSetup = new Intent(getBaseContext(), AutoEmailActivity.class);
+			startActivity(emailSetup);
+		}
 		
 	}
 
@@ -420,11 +422,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	{
 		try
 		{
-			if (!AppSettings.isProVersion())
-			{
-				Utilities.MsgBox(getString(R.string.sharing), getString(R.string.sharing_pro), this);
-				return;
-			}
 
 			final String locationOnly = getString(R.string.sharing_location_only);
 			final File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
@@ -521,7 +518,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 				
 				public boolean accept(File dir, String filename)
 				{
-					if(filename.toLowerCase().contains(".gpx") || filename.toLowerCase().contains(".zip"))
+					if(filename.toLowerCase().contains(".gpx"))
 					{
 						return true;
 					}
