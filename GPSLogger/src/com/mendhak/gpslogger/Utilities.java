@@ -36,7 +36,7 @@ import android.util.Log;
 public class Utilities
 {
 
-	private static final int LOGLEVEL = 5;
+	private static final int LOGLEVEL = 3;
 	static ProgressDialog pd;
 
 	public static void LogInfo(String message)
@@ -793,21 +793,20 @@ public class Utilities
 	
 	public static Intent GetOsmSettingsIntent(Context ctx)
 	{
-		
+		Intent intentOsm = null;
 		
 		if(!IsOsmAuthorized(ctx))
 		{
-			Intent iAuth =new Intent(ctx.getPackageName() + ".OSM_AUTHORIZE");
-			iAuth.setData(Uri.parse("gpslogger://authorize"));
-			
-			return iAuth;
-			
+			intentOsm = new Intent(ctx.getPackageName() + ".OSM_AUTHORIZE");
+			intentOsm.setData(Uri.parse("gpslogger://authorize"));
 		}
 		else
 		{
-			return new Intent(ctx.getPackageName() + ".OSM_SETUP");
+			intentOsm = new Intent(ctx.getPackageName() + ".OSM_SETUP");
 			
 		}
+		
+		return intentOsm;
 	}
 	
 //	private static boolean IsProVersion(Context ctx)

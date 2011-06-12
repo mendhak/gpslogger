@@ -139,7 +139,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 			{
 				startActivity(Utilities.GetOsmSettingsIntent(getBaseContext()));
 
-				return false;
+				return true;
 			}
 		});
 

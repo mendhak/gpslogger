@@ -39,7 +39,7 @@
 	<string name="summary_dist">Distance:</string>
 	<string name="summary_dist_regardless">Maximum</string>
 	<string name="summary_current_filename">Fichier:</string>
-	<string name="summary_current_filename_format">% s (dans votre dossier GPSLogger)</string>
+	<string name="summary_current_filename_format">%s (dans votre dossier GPSLogger)</string>
 	<string name="summary_autoemail">Emails:</string>
 	<string name="sharing">Partage</string>
 	<string name="sharing_pro">Vous pouvez partager les locations et envoyer des emails dans la version Pro du GPS Logger.</string>
@@ -61,7 +61,7 @@
 	<string name="cleared_map">Le plan a été effacé.</string>
 	<string name="gpsprovider_unavailable">Pas de service GPS disponible.</string>
 	<string name="started">Débuté</string>
-	<string name="providername_using"> (Utilisation % s)</string>
+	<string name="providername_using"> (Utilisation %s)</string>
 	<string name="providername_gps">Satellites GPS</string>
 	<string name="providername_celltower">Tours  cellulaires</string>
 	<string name="not_applicable">n/a</string>
@@ -99,7 +99,7 @@
 	<string name="time_twoandhalfhours">2½ heures</string>
 	<string name="time_hms_format" formatted="false">%sh %sm %ss</string>
 	<string name="accuracy_within" formatted="false">entre %s %s</string>
-	<string name="error_displaying">Erreur dans l\'affichage des infos location: % s</string>
+	<string name="error_displaying">Erreur dans l\'affichage des infos location: %s</string>
 	<string name="degree_symbol">°</string>
 	<string name="lbl_request_url">Votre site web du plan:</string>
 	<string name="txt_request_url_hint">Choisir un nom</string>
