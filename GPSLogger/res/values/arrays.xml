@@ -54,16 +54,18 @@
 <string-array name="language_choices">
 	<item>Default</item>
 	<item>English</item>
-	<item>French</item>
-	<item>Japanese</item>
-	<item>Chinese</item>
-	<item>Chinese (TW)</item>
+	<item>Français</item>
+	<item>Italiano</item>
+	<item>日本語</item>
+	<item>中文</item>
+	<item>台語 (TW)</item>
 </string-array>
 
 <string-array name="language_values">
 	<item></item>
 	<item>en</item>
 	<item>fr</item>
+	<item>it</item>
 	<item>ja</item>
 	<item>zh</item>
 	<item>zh-rTW</item>
