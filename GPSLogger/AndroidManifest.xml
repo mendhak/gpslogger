@@ -5,7 +5,7 @@
 	<application android:icon="@drawable/gpsloggericon2" 
 		android:name="@string/app_name" 
 		android:label="@string/app_name" 
-		android:debuggable="false">
+		android:debuggable="true">
 		
 		<service android:name="com.mendhak.gpslogger.GpsLoggingService">
 			<intent-filter>
