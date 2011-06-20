@@ -1,0 +1,13 @@
+bin/
+gen/
+R.java
+.settings/
+.metadata/
+*.class
+
+local.properties
+*.apk
+*.ap_
+*.dex
+
+test.xml
