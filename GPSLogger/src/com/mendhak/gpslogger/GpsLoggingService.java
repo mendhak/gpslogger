@@ -472,7 +472,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		PendingIntent pending = PendingIntent.getActivity(getBaseContext(), 0, contentIntent,
 				android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		Notification nfc = new Notification(R.drawable.gpsstatus5, null, System.currentTimeMillis());
+		Notification nfc = new Notification(R.drawable.gpsloggericon2, null, System.currentTimeMillis());
 		nfc.flags |= Notification.FLAG_ONGOING_EVENT;
 
 		NumberFormat nf = new DecimalFormat("###.######");
