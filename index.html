@@ -8,7 +8,7 @@
   <style type="text/css">
     body {
       margin-top: 1.0em;
-      background-color: #9391e5;
+      background-color: #FFF0F8;
       font-family: Helvetica, Arial, FreeSans, san-serif;
       color: #000000;
     }
@@ -36,34 +36,165 @@
   <div id="container">
 
     <div class="download">
-      <a href="http://github.com/mendhak/GPSLogger-For-Android/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/mendhak/GPSLogger-For-Android/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+      <a href="market://search?q=pname:com.mendhak.gpslogger"><img border="0" width="90" src="qrcode.gpslogger.png" /></a>
     </div>
 
     <h1><a href="http://github.com/mendhak/GPSLogger-For-Android">GPSLogger For Android</a>
-      <span class="small">by <a href="http://github.com/mendhak">mendhak</a></span></h1>
+      <span class="small"><img src="Satellite.png"></span></h1>
 
     <div class="description">
       Lightweight GPS Logging Application For Android
     </div>
 
-    <h2>Authors</h2>
-<p>Mendhak<br/><br/>      </p>
+    <h2>Description</h2>
+	 <div id="WikiContent" class="WikiContent">
+	      <div class="wikidoc">
+		<br />
+		A battery efficient GPS Logger application for Android. Works on Android 2
+		onwards.<br />
+		<br />
+		GPSLogger uses the GPS capabilities of your Android phone to log coordinates to a
+		GPS or KML file at regular intervals. This can be particularly useful if you want
+		to geotag your photos after a day out or share your travel route with someone.
+		The purpose of this application is to be battery efficient to save you battery
+		power when abroad and last as long as possible.<br />
+		<br />
+		This is available on the Android Market as "GPS Logger for Android".<br />
+		<br />
+
+		<h2>Features</h2>
+
+		<ul>
+		  <li>Logs to GPX and KML format, or if you want, only to screen</li>
+
+		  <li>Logs GPX points as tracks and track segments</li>
+
+		  <li>Also logs speed, direction and altitude</li>
+
+		  <li>Add a description to a point using the annotate menu</li>
+
+		  <li>Configure time intervals between points</li>
+
+		  <li>Configure distance intervals between points</li>
+
+		  <li>Notification icon with coordinates</li>
+
+		  <li>Uses cell towers for location when GPS is disabled or not available</li>
+
+		  <li>Prefer cell tower based location over GPS to save even more battery
+		  life</li>
+
+		  <li>Changes you make on the settings screen will take effect after the next
+		  point is logged</li>
+
+		  <li>Automatically email the file at set intervals to an email address of your
+		  choice.</li>
+
+		  <li>Share location via SMS/Email (and other apps such as Facebook or Twitter
+		  depending on what you've got installed)</li>
+
+		  <li>You can have it start logging on phone bootup</li>
+		</ul><br />
+		<br />
+		This has been tested on the Nexus One, G1, Hero, Desire, Legend and the Acer
+		Liquid A1 so far. Please leave feedback with bugs or feature requests (or even
+		criticism), and your phone make and model as well.<br />
+
+		<h2>FAQ</h2><b>How is this different from other logging apps?</b><br />
+		It's meant to be more battery efficient. A lot of other apps, such as MyTracks,
+		usually go with the assumption that you have a data connection available and your
+		routes won't be very long - this isn't very useful when all you want to do is log
+		your position rather than marvel at it :p<br />
+		<br />
+		<b>It takes a long time to find a fix</b><br />
+		When you go to a new location for the first time (especially after a flight), try
+		running the app with 0 seconds and 0 meters so that it can find a fix by
+		frequently polling.<br />
+		<br />
+		<b>How long can it run for?</b><br />
+		I ran a few tests (0 meters and every 60 seconds) and was able to get about 12-16
+		hours on a fully charged Nexus One with wifi , GPS and background data transfer
+		on. Turning background data and wifi can help you squeeze out a few more hours.
+		You can get best results if you put your phone into airplane mode (GPS still
+		works).<br />
+		<br />
+		<b>I see the GPS icon active between the intervals I've set, why is
+		that?</b><br />
+		It's how the Android OS has implemented its GPS system. When you say you want a
+		point every 60 seconds (for example), that's actually a suggestion rather than an
+		imperative, and so the time interval between GPS points is never guaranteed.
+		GPSLogger has logic that checks the time difference, though, and will make sure
+		that at least 60 seconds have passed before logging again.<br />
+		<br />
+		<b>It's not accurate!</b><br />
+		The accuracy is only as good as your phone's GPS chip. You may also want to check
+		your environment. The inaccuracy could be due to clouds, buildings, sunspots,
+		alien invasion, etc.<br />
+		<br />
+		<b>My time interval has passed, but no point was logged</b><br />
+		The GPS will have attempted to find its location and given up after a while. It
+		all comes down to your location as well as your phone hardware. If your hardware
+		is weak and you were in a location with the sky not visible, it's possible that
+		the app tried to find a position but simply gave up.<br />
+		<br />
+		<b>How do I get to the file being logged?</b><br />
+		You can connect your phone to your computer and mount the SD card, then copy the
+		file off. Note that while your SD card is mounted, GPSLogger can't write to the
+		card, since it's in use.<br />
+		If you have Astro File Explorer, then you can go to /sdcard/GPSlogger &gt; Long
+		press file &gt; Open as &gt; Text &gt; File Editor<br />
+		<br />
+		<b>I've changed the settings, but it's still showing/using the old
+		settings</b><br />
+		If the app is logging, and you make changes to the settings, the changes will
+		take effect <i>afteri&gt; the next point is logged. This means that if you've set
+		your interval as 1 hour, you have a long wait ahead of you. If you want the
+		changes to take effect immediately, then stop logging and start it again so that
+		the changes are refreshed.<br />
+		<br />
+		<b>How do I download it?</b></i>
+
+		<ol>
+		  <li><i>Go to the Android Market on your phone</i></li>
+
+		  <li><i>Search for GPS Logger.</i></li>
+
+		  <li><i>The app name is "GPS Logger For Android" by author Mendhak.</i></li>
+		</ol><i><br />
+		<br /></i>
+
+		<h2><i>Screenshots</i></h2>
+
+		<h2><i>Main screen</i></h2><i><br />
+		<img src="1.png" alt="1.png" title="1.png" /><br />
+		<br /></i>
+
+		<h2><i>Settings screen</i></h2><i><br />
+		<img src="2.png" alt="2.png" title="2.png" /><br />
+		<img src="3.png" alt="3.png" title="3.png" /><br />
+		<img src="4.png" alt="4.png" title="4.png" /><br />
+		<br /></i>
+
+		<h2><i>Auto Email Setup screen</i></h2><i><br />
+		<img src="5.png" alt="5.png" title="5.png" /><br />
+		<img src="6.png" alt="6.png" title="6.png" /><br />
+		<br /></i>
+
+		<h2><i>OpenStreetMap Setup screen</i></h2><i><br />
+		<img src="7.png" alt="7.png" title="7.png" /></i>
+	      </div>
+
+	      <div class="ClearBoth"></div>
+	    </div>
+
+
+        
 
 
     <h2>Download</h2>
     <p>
-      You can download this project in either
-      <a href="http://github.com/mendhak/GPSLogger-For-Android/zipball/master">zip</a> or
-      <a href="http://github.com/mendhak/GPSLogger-For-Android/tarball/master">tar</a> formats.
+      <a href="market://search?q=pname:com.mendhak.gpslogger">Download from the Android Market</a>.
     </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/mendhak/GPSLogger-For-Android</pre>
-    </p>
-
     <div class="footer">
       get the source code on GitHub : <a href="http://github.com/mendhak/GPSLogger-For-Android">mendhak/GPSLogger-For-Android</a>
     </div>
