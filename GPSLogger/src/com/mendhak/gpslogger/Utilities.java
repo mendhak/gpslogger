@@ -737,9 +737,11 @@ public class Utilities
 		
 		try
 		{
+			int osmConsumerKey = ctx.getResources().getIdentifier("osm_consumerkey", "string", ctx.getPackageName());
+			int osmConsumerSecret = ctx.getResources().getIdentifier("osm_consumersecret", "string", ctx.getPackageName());
 			consumer = new CommonsHttpOAuthConsumer(
-					ctx.getString(R.string.osm_consumerkey), 
-					ctx.getString(R.string.osm_consumersecret));
+					ctx.getString(osmConsumerKey), 
+					ctx.getString(osmConsumerSecret));
 			
 			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
 			String osmAccessToken = prefs.getString("osm_accesstoken", "");
