@@ -713,20 +713,7 @@ public class Utilities
 		}
 	}
 
-	public static boolean IsValidUrlAndPassword(String requestedUrl, String password)
-	{
-
-		requestedUrl = requestedUrl.trim();
-		if (requestedUrl != null && requestedUrl.length() > 0 && requestedUrl.matches("[a-zA-Z0-9]+")
-				&& password != null && password.length() > 0 && password.matches("[a-zA-Z0-9]+"))
-		{
-			return true;
-		}
-
-		return false;
-	}
-
-	
+		
 	public static boolean IsEmailSetup(Context ctx)
 	{
 		if(AppSettings.isAutoEmailEnabled() &&
@@ -809,28 +796,5 @@ public class Utilities
 		return intentOsm;
 	}
 	
-//	private static boolean IsProVersion(Context ctx)
-//	{
-//		String proPackage = "com.mendhak.gpsloggerpro";
-//
-//		final PackageManager pm = ctx.getPackageManager();
-//
-//		List<PackageInfo> list = pm.getInstalledPackages(PackageManager.GET_DISABLED_COMPONENTS);
-//
-//		Iterator<PackageInfo> i = list.iterator();
-//		while (i.hasNext())
-//		{
-//			PackageInfo p = i.next();
-//
-//			if ((p.packageName.equals(proPackage))
-//					&& (pm.checkSignatures(ctx.getPackageName(), p.packageName) == PackageManager.SIGNATURE_MATCH))
-//			{
-//				return true;
-//			}
-//
-//		}
-//		return false;
-//	}
-
 
 }

@@ -8,7 +8,6 @@ import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
-@SuppressWarnings("ucd")
 public class GpsLoggerApplication extends Application
 {
   @Override

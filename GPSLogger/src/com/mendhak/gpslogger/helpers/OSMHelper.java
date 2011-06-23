@@ -110,6 +110,7 @@ public class OSMHelper implements IOsmHelper
 
 	            HttpResponse response = httpClient.execute(request);
 	            int statusCode = response.getStatusLine().getStatusCode();
+	            Utilities.LogDebug("OSM Upload - " + String.valueOf(statusCode));
 	            helper.OnComplete();
 			
 			}
