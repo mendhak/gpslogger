@@ -26,7 +26,6 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.location.Location;
-import android.location.LocationManager; //import android.os.AsyncTask;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -56,19 +55,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 * General all purpose handler used for updating the UI from threads.
 	 */
 	public final Handler handler = new Handler();
-	static final int DATEPICKER_ID = 0;
 	private static Intent serviceIntent;
-
-	// ---------------------------------------------------
-	// Helpers and managers
-	// ---------------------------------------------------
-	GeneralLocationListener gpsLocationListener;
-	GeneralLocationListener towerLocationListener;
-	FileLoggingHelper fileHelper;
-	public LocationManager gpsLocationManager;
-	public LocationManager towerLocationManager;
-	// ---------------------------------------------------
-
+	private FileLoggingHelper fileHelper;
 	private GpsLoggingService loggingService;
 
 	/**
@@ -152,7 +140,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	private void StartAndBindService()
 	{
-
 		Utilities.LogDebug("StartAndBindService - binding now");
 		serviceIntent = new Intent(this, GpsLoggingService.class);
 		// Start the service in case it isn't already running
@@ -160,7 +147,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		// Now bind to service
 		bindService(serviceIntent, gpsServiceConnection, Context.BIND_AUTO_CREATE);
 		Session.setBoundToService(true);
-		
 	}
 	
 
@@ -232,7 +218,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	/**
 	 * Gets preferences chosen by the user
 	 */
-	public void GetPreferences()
+	private void GetPreferences()
 	{
 		Utilities.PopulateAppSettings(getBaseContext());
 		ShowPreferencesSummary();
@@ -594,38 +580,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	}
 
 	/**
-	 * Directly adds the given description to the log file
-	 * 
-	 * @param desc
-	 */
-	public void AddNoteToLastPoint(String desc)
-	{
-
-		fileHelper.AddNoteToLastPoint(desc);
-	}
-
-	/**
-	 * Update the UI: There was a connection error
-	 */
-	public final Runnable updateResultsConnectionError = new Runnable()
-	{
-		public void run()
-		{
-			ThereWasAConnectionError();
-		}
-	};
-
-
-	/**
-	 * MessageBox: There was a connection error.
-	 */
-	private void ThereWasAConnectionError()
-	{
-		Utilities.MsgBox(getString(R.string.error), getString(R.string.error_connection), this);
-
-	}
-
-	/**
 	 * Clears the table, removes all values.
 	 */
 	public void ClearForm()
@@ -657,17 +611,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	/**
 	 * Sets the message in the top status label.
 	 * 
-	 * @param stringId
-	 */
-	public void SetStatus(int stringId)
-	{
-		String s = getString(stringId);
-		SetStatus(s);
-	}
-
-	/**
-	 * Sets the message in the top status label.
-	 * 
 	 * @param message
 	 */
 	public void SetStatus(String message)
@@ -681,7 +624,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 * 
 	 * @param number
 	 */
-	public void SetSatelliteInfo(int number)
+	private void SetSatelliteInfo(int number)
 	{
 		Session.setSatelliteCount(number);
 		TextView txtSatellites = (TextView) findViewById(R.id.txtSatellites);
@@ -694,7 +637,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 * 
 	 * @param loc
 	 */
-	public void DisplayLocationInfo(Location loc)
+	private void DisplayLocationInfo(Location loc)
 	{
 		try
 		{
@@ -824,16 +767,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		{
 			SetStatus(getString(R.string.error_displaying, ex.getMessage()));
 		}
-
-	}
-
-	public void OnBeginGpsLogging()
-	{
-
-	}
-
-	public void OnStopGpsLogging()
-	{
 
 	}
 

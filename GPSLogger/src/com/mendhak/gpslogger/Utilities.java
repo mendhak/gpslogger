@@ -37,7 +37,7 @@ public class Utilities
 {
 
 	private static final int LOGLEVEL = 3;
-	static ProgressDialog pd;
+	private static ProgressDialog pd;
 
 	public static void LogInfo(String message)
 	{
@@ -75,7 +75,7 @@ public class Utilities
 		}
 	}
 
-	public static void LogWarning(String message)
+	protected static void LogWarning(String message)
 	{
 		if (LOGLEVEL >= 2)
 		{
@@ -98,7 +98,7 @@ public class Utilities
 	 * @param context
 	 * @return
 	 */
-	public static void PopulateAppSettings(Context context)
+	protected static void PopulateAppSettings(Context context)
 	{
 
 		Utilities.LogInfo("Getting preferences");
@@ -174,7 +174,7 @@ public class Utilities
 	}
 	
 
-	public static void ShowProgress(Context ctx, String title, String message)
+	protected static void ShowProgress(Context ctx, String title, String message)
 	{
 		if(ctx != null)
 		{
@@ -192,7 +192,7 @@ public class Utilities
 		}
 	}
 	
-	public static void HideProgress()
+	protected static void HideProgress()
 	{
 		if (pd != null)
 		{
@@ -227,7 +227,7 @@ public class Utilities
 	 *            An object which implements IHasACallBack so that the click
 	 *            event can call the callback method.
 	 */
-	public static void MsgBox(String title, String message, Context className,
+	protected static void MsgBox(String title, String message, Context className,
 			final IMessageBoxCallback msgCallback)
 	{
 		AlertDialog alertDialog = new AlertDialog.Builder(className).create();
@@ -252,7 +252,7 @@ public class Utilities
 	 * @param numberOfSeconds
 	 * @return
 	 */
-	public static String GetDescriptiveTimeString(int numberOfSeconds, Context context)
+	protected static String GetDescriptiveTimeString(int numberOfSeconds, Context context)
 	{
 
 		String descriptive = "";
@@ -327,7 +327,7 @@ public class Utilities
 	 * @param bearingDegrees
 	 * @return
 	 */
-	public static String GetBearingDescription(float bearingDegrees, Context context)
+	protected static String GetBearingDescription(float bearingDegrees, Context context)
 	{
 
 		String direction;
@@ -654,7 +654,7 @@ public class Utilities
 	 * @param m
 	 * @return
 	 */
-	public static int MetersToFeet(int m)
+	protected static int MetersToFeet(int m)
 	{
 		return (int) Math.round(m * 3.2808399);
 	}
@@ -665,7 +665,7 @@ public class Utilities
 	 * @param f
 	 * @return
 	 */
-	public static int FeetToMeters(int f)
+	protected static int FeetToMeters(int f)
 	{
 		return (int) Math.round(f / 3.2808399);
 	}
@@ -676,23 +676,10 @@ public class Utilities
 	 * @param m
 	 * @return
 	 */
-	public static int MetersToFeet(double m)
+	protected static int MetersToFeet(double m)
 	{
 		return MetersToFeet((int) m);
 	}
-
-	/**
-	 * Converts given feet to meters and rounds up.
-	 * 
-	 * @param f
-	 * @return
-	 */
-	public static int FeetToMeters(double f)
-	{
-		return FeetToMeters((int) f);
-	}
-
-
 
 
 	public static boolean IsValidEmailAddress(String email)
@@ -714,7 +701,7 @@ public class Utilities
 	}
 
 		
-	public static boolean IsEmailSetup(Context ctx)
+	protected static boolean IsEmailSetup(Context ctx)
 	{
 		if(AppSettings.isAutoEmailEnabled() &&
 				AppSettings.getAutoEmailTarget().length() > 0 &&
@@ -762,7 +749,7 @@ public class Utilities
 		return consumer;
 	}
 	
-	public static OAuthProvider GetOSMAuthProvider(Context ctx)
+	protected static OAuthProvider GetOSMAuthProvider(Context ctx)
 	{
 		return new CommonsHttpOAuthProvider(
 				ctx.getString(R.string.osm_requesttoken_url),
@@ -772,7 +759,7 @@ public class Utilities
 	}
 
 	
-	public static boolean IsOsmAuthorized(Context ctx)
+	protected static boolean IsOsmAuthorized(Context ctx)
 	{
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
 		String oAuthAccessToken = prefs.getString("osm_accesstoken", "");
@@ -780,7 +767,7 @@ public class Utilities
 		return (oAuthAccessToken != null && oAuthAccessToken.length()>0);
 	}
 	
-	public static Intent GetOsmSettingsIntent(Context ctx)
+	protected static Intent GetOsmSettingsIntent(Context ctx)
 	{
 		Intent intentOsm = null;
 		

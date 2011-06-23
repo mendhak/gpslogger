@@ -16,7 +16,7 @@ import android.os.Bundle;
 public class GeneralLocationListener implements LocationListener, GpsStatus.Listener
 {
 
-	static GpsLoggingService mainActivity;
+	private static GpsLoggingService mainActivity;
 
 	public GeneralLocationListener(GpsLoggingService activity)
 	{

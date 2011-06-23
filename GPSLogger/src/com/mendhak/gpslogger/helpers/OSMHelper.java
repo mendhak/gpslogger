@@ -12,7 +12,6 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -24,13 +23,8 @@ import com.mendhak.gpslogger.Utilities;
 public class OSMHelper implements IOsmHelper
 {
 
-	GpsMainActivity mainActivity;
-	Activity activity;
-	
-	public OSMHelper(Activity activity)
-	{
-		this.activity = activity;
-	}
+	private GpsMainActivity mainActivity;
+
 	
 	public OSMHelper(GpsMainActivity activity)
 	{

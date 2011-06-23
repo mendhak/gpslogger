@@ -38,20 +38,19 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 * General all purpose handler used for updating the UI from threads.
 	 */
 	public final Handler handler = new Handler();
-	Handler autoEmailHandler = new Handler();
 	private final IBinder mBinder = new GpsLoggingBinder();
-	public static IGpsLoggerServiceClient mainServiceClient;
+	private static IGpsLoggerServiceClient mainServiceClient;
 
 	// ---------------------------------------------------
 	// Helpers and managers
 	// ---------------------------------------------------
-	GeneralLocationListener gpsLocationListener;
-	GeneralLocationListener towerLocationListener;
-	FileLoggingHelper fileHelper;
+	private GeneralLocationListener gpsLocationListener;
+	private GeneralLocationListener towerLocationListener;
+	private FileLoggingHelper fileHelper;
 	public LocationManager gpsLocationManager;
-	public LocationManager towerLocationManager;
+	private LocationManager towerLocationManager;
 
-	Intent alarmIntent;
+	private Intent alarmIntent;
 
 	// ---------------------------------------------------
 
@@ -116,7 +115,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		super.onLowMemory();
 	}
 	
-	public void HandleIntent(Intent intent)
+	private void HandleIntent(Intent intent)
 	{
 		
 		Utilities.LogDebug("GpsLoggingService.handleIntent called");
@@ -171,7 +170,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 * properties.
 	 * 
 	 */
-	public class GpsLoggingBinder extends Binder
+	class GpsLoggingBinder extends Binder
 	{
 		public GpsLoggingService getService()
 		{
@@ -183,7 +182,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	/**
 	 * Sets up the auto email timers based on user preferences.
 	 */
-	public void SetupAutoEmailTimers()
+	private void SetupAutoEmailTimers()
 	{
 		Utilities.LogDebug("GpsLoggingService.SetupAutoEmailTimers called.");
 		Utilities.LogDebug("isAutoEmailEnabled - " + String.valueOf(AppSettings.isAutoEmailEnabled()));
@@ -247,7 +246,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	/**
 	 * Calls the Auto Email Helper which processes the file and sends it.
 	 */
-	public void AutoEmailLogFile()
+	private void AutoEmailLogFile()
 	{
 
 		Utilities.LogDebug("GpsLoggingService.AutoEmailLogFile called.");
@@ -279,7 +278,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		}
 	}
 	
-	public void ForceEmailLogFile()
+	protected void ForceEmailLogFile()
 	{
 		
 		Utilities.LogDebug("GpsLoggingService.ForceEmailLogFile called.");
@@ -310,18 +309,6 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		}
 	};
 
-	public final Runnable updateResultsBadGPX = new Runnable()
-	{
-		public void run()
-		{
-			AutoEmailBadGPXError();
-		}
-	};
-
-	private void AutoEmailBadGPXError()
-	{
-		Utilities.LogWarning("Could not send email, invalid GPS data.");
-	}
 
 	private void AutoEmailGenericError()
 	{
@@ -334,7 +321,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 * 
 	 * @param mainForm
 	 */
-	public static void SetServiceClient(IGpsLoggerServiceClient mainForm)
+	protected static void SetServiceClient(IGpsLoggerServiceClient mainForm)
 	{
 		mainServiceClient = mainForm;
 	}
@@ -343,7 +330,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 * Gets preferences chosen by the user and populates the AppSettings object.
 	 * Also sets up email timers if required.
 	 */
-	public void GetPreferences()
+	private void GetPreferences()
 	{
 		Utilities.LogDebug("GpsLoggingService.GetPreferences called");
 		Utilities.PopulateAppSettings(getBaseContext());
@@ -364,7 +351,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	/**
 	 * Resets the form, resets file name if required, reobtains preferences
 	 */
-	public void StartLogging()
+	protected void StartLogging()
 	{
 		Utilities.LogDebug("GpsLoggingService.StartLogging called");
 		Session.setAddNewTrackSegment(true);
@@ -400,7 +387,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	/**
 	 * Stops logging, removes notification, stops GPS manager, stops email timer
 	 */
-	public void StopLogging()
+	protected void StopLogging()
 	{
 		Utilities.LogDebug("GpsLoggingService.StopLogging called");
 		Session.setAddNewTrackSegment(true);
@@ -500,7 +487,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 * prefer cell towers, then cell towers are used. If neither is enabled,
 	 * then nothing is requested.
 	 */
-	public void StartGpsManager()
+	private void StartGpsManager()
 	{
 		Utilities.LogDebug("GpsLoggingService.StartGpsManager");
 
@@ -562,7 +549,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	/**
 	 * Stops the location managers
 	 */
-	public void StopGpsManager()
+	private void StopGpsManager()
 	{
 
 		Utilities.LogDebug("GpsLoggingService.StopGpsManager");
@@ -628,7 +615,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 * 
 	 * @param stringId
 	 */
-	public void SetStatus(int stringId)
+	private void SetStatus(int stringId)
 	{
 		String s = getString(stringId);
 		SetStatus(s);
@@ -648,7 +635,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 * Checks to see if providers have been enabled and switches providers based
 	 * on user preferences.
 	 */
-	public void ResetManagersIfRequired()
+	private void ResetManagersIfRequired()
 	{
 		CheckTowerAndGpsStatus();
 
@@ -732,16 +719,10 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 		return getBaseContext();
 	}
 
-	public boolean IsMainFormVisible()
+	private boolean IsMainFormVisible()
 	{
 		return mainServiceClient != null;
 	}
 
-	public Context GetMainFormContext()
-	{
-
-		return mainServiceClient.GetContext();
-
-	}
 
 }

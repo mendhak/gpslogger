@@ -15,8 +15,8 @@ import com.mendhak.gpslogger.model.Session;
 public class AutoEmailHelper implements IAutoSendHelper
 {
 
-	GpsLoggingService	mainActivity;
-	boolean				forcedSend	= false;
+	private GpsLoggingService	mainActivity;
+	private boolean				forcedSend	= false;
 
 	public AutoEmailHelper(GpsLoggingService activity)
 	{
@@ -68,8 +68,8 @@ public class AutoEmailHelper implements IAutoSendHelper
 class AutoSendHandler implements Runnable
 {
 
-	String			currentFileName;
-	IAutoSendHelper	helper;
+	private String			currentFileName;
+	private IAutoSendHelper	helper;
 
 	public AutoSendHandler(String currentFileName,	IAutoSendHelper helper)
 	{
@@ -130,6 +130,7 @@ class AutoSendHandler implements Runnable
 					+ Utilities.GetReadableDateTime(new Date()) + " - "
 					+ zipFile.getName());
 			m.setBody(zipFile.getName());
+			
 
 			m.setPort(AppSettings.getSmtpPort());
 			m.setSecurePort(AppSettings.getSmtpPort());

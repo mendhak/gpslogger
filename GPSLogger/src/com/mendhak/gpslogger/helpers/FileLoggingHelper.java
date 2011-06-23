@@ -33,10 +33,10 @@ import com.mendhak.gpslogger.model.Session;
 public class FileLoggingHelper
 {
 
-	IFileLoggingHelperCallback callingClient;
-	FileLock gpxLock;
-	FileLock kmlLock;
-	public static boolean allowDescription = false;
+	private IFileLoggingHelperCallback callingClient;
+	private FileLock gpxLock;
+	private FileLock kmlLock;
+	private static boolean allowDescription = false;
 
 	public FileLoggingHelper(IFileLoggingHelperCallback callback)
 	{
@@ -89,7 +89,7 @@ public class FileLoggingHelper
 
 	}
 
-	public void WriteToKmlFile(Location loc, File gpxFolder, boolean brandNewFile)
+	private void WriteToKmlFile(Location loc, File gpxFolder, boolean brandNewFile)
 	{
 
 		try
@@ -209,7 +209,7 @@ public class FileLoggingHelper
 	}
 	
 	
-	public static String getStringFromNode(Node root)  {
+	private static String getStringFromNode(Node root)  {
 
         StringBuilder result = new StringBuilder();
 
@@ -263,7 +263,7 @@ public class FileLoggingHelper
 	
 
 	
-	public void WriteToGpxFile(Location loc, File gpxFolder, boolean brandNewFile)
+	private void WriteToGpxFile(Location loc, File gpxFolder, boolean brandNewFile)
 	{
 
 		try
@@ -361,7 +361,7 @@ public class FileLoggingHelper
 
 	}
 
-	public String GetTrackPointXml(Location loc, String dateTimeString)
+	private String GetTrackPointXml(Location loc, String dateTimeString)
 	{
 		String track = "";
 		if (Session.shouldAddNewTrackSegment())
@@ -454,7 +454,7 @@ public class FileLoggingHelper
 
 	}
 
-	public void AddNoteToLastPoint(String desc)
+	private void AddNoteToLastPoint(String desc)
 	{
 
 		File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
