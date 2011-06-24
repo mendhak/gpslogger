@@ -10,11 +10,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import com.mendhak.gpslogger.helpers.*;
-import com.mendhak.gpslogger.interfaces.IFileLoggingHelperCallback;
-import com.mendhak.gpslogger.interfaces.IGpsLoggerServiceClient;
-import com.mendhak.gpslogger.model.AppSettings;
-import com.mendhak.gpslogger.model.Session;
+import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.loggers.FileLoggingHelper;
+import com.mendhak.gpslogger.loggers.IFileLoggingHelperCallback;
+import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
+import com.mendhak.gpslogger.senders.osm.OSMHelper;
 import com.mendhak.gpslogger.R;
 import android.app.Activity;
 import android.app.Dialog;

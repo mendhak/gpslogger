@@ -2,52 +2,53 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.mendhak.gpslogger" android:versionCode="12"
 	android:versionName="1.1.2">
-	<application android:icon="@drawable/gpsloggericon2" 
-		android:name="@string/app_name" 
-		android:label="@string/app_name" 
+	<application android:icon="@drawable/gpsloggericon2"
+		android:name="@string/app_name" android:label="@string/app_name"
 		android:debuggable="true">
-		
+
 		<service android:name="com.mendhak.gpslogger.GpsLoggingService">
 			<intent-filter>
-			<action android:name="com.mendhak.gpslogger.GpsLoggingService" />
+				<action android:name="com.mendhak.gpslogger.GpsLoggingService" />
 			</intent-filter>
 		</service>
-		
-		 <activity android:name="com.mendhak.gpslogger.GpsMainActivity"
+
+		<activity android:name="com.mendhak.gpslogger.GpsMainActivity"
 			android:label="@string/app_name" android:screenOrientation="portrait"
 			android:launchMode="singleTask" android:configChanges="locale">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
-				 <category android:name="android.intent.category.LAUNCHER" /> 
-			</intent-filter> 
-		</activity> 
-
-		<activity android:label="@string/osm_preferences_title" android:name=".OSMSettingsActivity">
-			<intent-filter>
-				<action android:name="com.mendhak.gpslogger.OSM_SETUP" />
-	            <category android:name="android.intent.category.DEFAULT" />
-	            <!-- <category android:name="android.intent.category.BROWSABLE" /> 
-	            <data android:scheme="gpslogger" android:host="authorize" />  -->  
+				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		
-		<activity android:label="@string/osm_preferences_title" android:name=".OSMAuthorizationActivity">
+
+		<activity android:label="@string/osm_preferences_title"
+			android:name="com.mendhak.gpslogger.senders.osm.OSMSettingsActivity">
+			<intent-filter>
+				<action android:name="com.mendhak.gpslogger.OSM_SETUP" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<!-- <category android:name="android.intent.category.BROWSABLE" /> <data 
+					android:scheme="gpslogger" android:host="authorize" /> -->
+			</intent-filter>
+		</activity>
+
+		<activity android:label="@string/osm_preferences_title"
+			android:name="com.mendhak.gpslogger.senders.osm.OSMAuthorizationActivity">
 			<intent-filter>
 				<action android:name="com.mendhak.gpslogger.OSM_AUTHORIZE" />
 				<action android:name="android.intent.action.VIEW" />
-		        <category android:name="android.intent.category.DEFAULT" />
-		        <category android:name="android.intent.category.BROWSABLE" />
-	            <data android:scheme="gpslogger" android:host="authorize" /> 
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="gpslogger" android:host="authorize" />
 			</intent-filter>
 		</activity>
-		
+
 		<activity android:name="com.mendhak.gpslogger.GpsSettingsActivity"
 			android:label="@string/settings_screen_name"
 			android:screenOrientation="portrait">
 		</activity>
 
 
-		<activity android:name="com.mendhak.gpslogger.AutoEmailActivity"
+		<activity android:name="com.mendhak.gpslogger.senders.email.AutoEmailActivity"
 			android:label="@string/autoemail_title" android:screenOrientation="portrait">
 			<intent-filter>
 				<category android:name="android.intent.category.DEFAULT" />
@@ -56,8 +57,7 @@
 		</activity>
 
 		<receiver android:enabled="true"
-			android:name="com.mendhak.gpslogger.helpers.StartupReceiver"
-			android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+			android:name="com.mendhak.gpslogger.StartupReceiver.permission.RECEIVE_BOOT_COMPLETED">
 
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -65,11 +65,8 @@
 			</intent-filter>
 
 		</receiver>
-		
-		<receiver  android:name="com.mendhak.gpslogger.helpers.AlarmReceiver">
-		</receiver>
 
-
+		<receiver android:name="com.mendhak.gpslogger.senders.AlarmReceiver"></receiver>
 	</application>
 	<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="5" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
@@ -78,9 +75,9 @@
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 	<uses-permission android:name="android.permission.INTERNET" />
 
-		<supports-screens android:smallScreens="true"
-			android:normalScreens="true" android:largeScreens="true"
-			android:anyDensity="true" />
+	<supports-screens android:smallScreens="true"
+		android:normalScreens="true" android:largeScreens="true"
+		android:anyDensity="true" />
 
 </manifest> 
 

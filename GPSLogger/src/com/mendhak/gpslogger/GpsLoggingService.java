@@ -6,9 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import com.mendhak.gpslogger.helpers.*;
-import com.mendhak.gpslogger.interfaces.*;
-import com.mendhak.gpslogger.model.*;
+import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.loggers.FileLoggingHelper;
+import com.mendhak.gpslogger.loggers.IFileLoggingHelperCallback;
+import com.mendhak.gpslogger.senders.AlarmReceiver;
+import com.mendhak.gpslogger.senders.email.AutoEmailHelper;
 
 
 import android.app.Activity;
