@@ -4,12 +4,14 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.loggers.FileLoggingHelper;
+import com.mendhak.gpslogger.loggers.FileLoggerFactory;
+import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.loggers.IFileLoggingHelperCallback;
 import com.mendhak.gpslogger.senders.AlarmReceiver;
 import com.mendhak.gpslogger.senders.email.AutoEmailHelper;
@@ -50,7 +52,6 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	// ---------------------------------------------------
 	private GeneralLocationListener gpsLocationListener;
 	private GeneralLocationListener towerLocationListener;
-	private FileLoggingHelper fileHelper;
 	public LocationManager gpsLocationManager;
 	private LocationManager towerLocationManager;
 
@@ -82,8 +83,6 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 			getBaseContext().getResources().updateConfiguration(config,
 					getBaseContext().getResources().getDisplayMetrics());
 		}
-
-		fileHelper = new FileLoggingHelper(this);
 
 		Utilities.LogInfo("GPSLoggerService created");
 	}
@@ -697,7 +696,19 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 	 */
 	private void WriteToFile(Location loc)
 	{
-		fileHelper.WriteToFile(loc);
+		List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers();
+		for(IFileLogger logger : loggers)
+		{
+			try
+			{
+				logger.Write(loc);
+			}
+			catch (Exception e)
+			{
+				SetStatus(R.string.could_not_write_to_file);
+			}
+		}
+		
 	}
 
 	/**
