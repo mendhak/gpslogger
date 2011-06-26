@@ -22,7 +22,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-public class Mail extends javax.mail.Authenticator
+class Mail extends javax.mail.Authenticator
 {
 	private String		_user;
 	private String		_pass;
@@ -70,7 +70,7 @@ public class Mail extends javax.mail.Authenticator
 		CommandMap.setDefaultCommandMap(mc);
 	}
 
-	public Mail(String user, String pass)
+	Mail(String user, String pass)
 	{
 		this();
 
@@ -78,7 +78,7 @@ public class Mail extends javax.mail.Authenticator
 		_pass = pass;
 	}
 
-	public boolean send() throws Exception
+	boolean send() throws Exception
 	{
 		Properties props = _setProperties();
 
@@ -121,7 +121,7 @@ public class Mail extends javax.mail.Authenticator
 		}
 	}
 
-	public void addAttachment(String filename) throws Exception
+	void addAttachment(String filename) throws Exception
 	{
 		BodyPart messageBodyPart = new MimeBodyPart();
 		DataSource source = new FileDataSource(filename);

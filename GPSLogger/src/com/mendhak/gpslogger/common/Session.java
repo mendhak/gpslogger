@@ -19,7 +19,6 @@ public class Session extends Application
 	private static boolean notificationVisible;
 	private static float autoEmailDelay;
 	private static long latestTimeStamp;
-	private static long autoEmailTimeStamp;
 	private static boolean addNewTrackSegment = true;
 	private static Location currentLocationInfo;
 	private static boolean isBound;
@@ -201,23 +200,6 @@ public class Session extends Application
 	public static void setLatestTimeStamp(long latestTimeStamp)
 	{
 		Session.latestTimeStamp = latestTimeStamp;
-	}
-
-	/**
-	 * @return the autoEmailTimeStamp
-	 */
-	public static long getAutoEmailTimeStamp()
-	{
-		return autoEmailTimeStamp;
-	}
-
-	/**
-	 * @param autoEmailTimeStamp
-	 *            the autoEmailTimeStamp to set
-	 */
-	public static void setAutoEmailTimeStamp(long autoEmailTimeStamp)
-	{
-		Session.autoEmailTimeStamp = autoEmailTimeStamp;
 	}
 
 	/**

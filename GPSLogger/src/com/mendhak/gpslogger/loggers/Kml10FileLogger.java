@@ -15,14 +15,14 @@ import com.mendhak.gpslogger.common.Utilities;
 import android.location.Location;
 
 
-public class Kml10FileLogger implements IFileLogger
+class Kml10FileLogger implements IFileLogger
 {
 
 	private boolean useSatelliteTime;
 	private File kmlFile;
 	private FileLock kmlLock;
 	
-	public Kml10FileLogger(File kmlFile, boolean useSatelliteTime)
+	Kml10FileLogger(File kmlFile, boolean useSatelliteTime)
 	{
 		this.useSatelliteTime = useSatelliteTime;
 		this.kmlFile = kmlFile;

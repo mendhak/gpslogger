@@ -33,7 +33,7 @@ public class AutoEmailHelper implements IAutoSendHelper
 
 	}
 
-	public void SendTestEmail(String smtpServer, String smtpPort,
+	void SendTestEmail(String smtpServer, String smtpPort,
 			String smtpUsername, String smtpPassword, boolean smtpUseSsl,
 			String emailTarget, Activity callingActivity, IAutoSendHelper helper)
 	{
@@ -59,7 +59,6 @@ public class AutoEmailHelper implements IAutoSendHelper
 			{
 				Utilities.LogDebug("setEmailReadyToBeSent = false");
 				Session.setEmailReadyToBeSent(false);
-				Session.setAutoEmailTimeStamp(System.currentTimeMillis());
 			}
 		}
 

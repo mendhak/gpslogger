@@ -15,7 +15,7 @@ import android.util.Log;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
 
-public class GpsSettingsActivity extends PreferenceActivity
+class GpsSettingsActivity extends PreferenceActivity
 {
 
 	@Override
@@ -146,8 +146,8 @@ public class GpsSettingsActivity extends PreferenceActivity
 
 	}
 
-	final Handler handler = new Handler();
-	final Runnable updateResults = new Runnable()
+	private final Handler handler = new Handler();
+	private final Runnable updateResults = new Runnable()
 	{
 		public void run()
 		{

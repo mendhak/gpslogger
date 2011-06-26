@@ -1,10 +1,9 @@
 package com.mendhak.gpslogger;
 
 import android.app.Activity;
-import android.content.Context;
 import android.location.Location;
 
-public interface IGpsLoggerServiceClient
+interface IGpsLoggerServiceClient
 {
 
 	
@@ -31,11 +30,7 @@ public interface IGpsLoggerServiceClient
 	 */
 	public void ClearForm();
 	
-	/**
-	 * Returns the base context 
-	 * @return
-	 */
-	public Context GetContext();
+
 	
 	/**
 	 * Returns the activity

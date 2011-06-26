@@ -11,14 +11,14 @@ import com.mendhak.gpslogger.common.Utilities;
 import android.location.Location;
 
 
-public class Gpx10FileLogger implements IFileLogger
+class Gpx10FileLogger implements IFileLogger
 {
 	private FileLock gpxLock;
 	private File gpxFile = null;
 	private boolean useSatelliteTime = false;
 	private boolean addNewTrackSegment;
 	
-	public Gpx10FileLogger(File gpxFile, boolean useSatelliteTime, boolean addNewTrackSegment)
+	Gpx10FileLogger(File gpxFile, boolean useSatelliteTime, boolean addNewTrackSegment)
 	{
 		this.gpxFile = gpxFile;
 		this.useSatelliteTime = useSatelliteTime;

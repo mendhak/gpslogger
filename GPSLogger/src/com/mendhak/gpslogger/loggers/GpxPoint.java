@@ -5,7 +5,7 @@ package com.mendhak.gpslogger.loggers;
  * @author mendhak
  *
  */
-public class GpxPoint
+class GpxPoint
 {
 	private String latitude;
 	private String longitude;

@@ -40,7 +40,7 @@ public class AppSettings extends Application
 	 * @param useImperial
 	 *            the useImperial to set
 	 */
-	public static void setUseImperial(boolean useImperial)
+	static void setUseImperial(boolean useImperial)
 	{
 		AppSettings.useImperial = useImperial;
 	}
@@ -57,7 +57,7 @@ public class AppSettings extends Application
 	 * @param newFileOnceADay
 	 *            the newFileOnceADay to set
 	 */
-	public static void setNewFileOnceADay(boolean newFileOnceADay)
+	static void setNewFileOnceADay(boolean newFileOnceADay)
 	{
 		AppSettings.newFileOnceADay = newFileOnceADay;
 	}
@@ -74,7 +74,7 @@ public class AppSettings extends Application
 	 * @param preferCellTower
 	 *            the preferCellTower to set
 	 */
-	public static void setPreferCellTower(boolean preferCellTower)
+	static void setPreferCellTower(boolean preferCellTower)
 	{
 		AppSettings.preferCellTower = preferCellTower;
 	}
@@ -91,7 +91,7 @@ public class AppSettings extends Application
 	 * @param useSatelliteTime
 	 *            the useSatelliteTime to set
 	 */
-	public static void setUseSatelliteTime(boolean useSatelliteTime)
+	static void setUseSatelliteTime(boolean useSatelliteTime)
 	{
 		AppSettings.useSatelliteTime = useSatelliteTime;
 	}
@@ -108,7 +108,7 @@ public class AppSettings extends Application
 	 * @param logToKml
 	 *            the logToKml to set
 	 */
-	public static void setLogToKml(boolean logToKml)
+	static void setLogToKml(boolean logToKml)
 	{
 		AppSettings.logToKml = logToKml;
 	}
@@ -125,7 +125,7 @@ public class AppSettings extends Application
 	 * @param logToGpx
 	 *            the logToGpx to set
 	 */
-	public static void setLogToGpx(boolean logToGpx)
+	static void setLogToGpx(boolean logToGpx)
 	{
 		AppSettings.logToGpx = logToGpx;
 	}
@@ -142,7 +142,7 @@ public class AppSettings extends Application
 	 * @param showInNotificationBar
 	 *            the showInNotificationBar to set
 	 */
-	public static void setShowInNotificationBar(boolean showInNotificationBar)
+	static void setShowInNotificationBar(boolean showInNotificationBar)
 	{
 		AppSettings.showInNotificationBar = showInNotificationBar;
 	}
@@ -160,7 +160,7 @@ public class AppSettings extends Application
 	 * @param minimumDistance
 	 *            the minimumDistance to set
 	 */
-	public static void setMinimumDistance(int minimumDistance)
+	static void setMinimumDistance(int minimumDistance)
 	{
 		AppSettings.minimumDistance = minimumDistance;
 	}
@@ -177,7 +177,7 @@ public class AppSettings extends Application
 	 * @param minimumSeconds
 	 *            the minimumSeconds to set
 	 */
-	public static void setMinimumSeconds(int minimumSeconds)
+	static void setMinimumSeconds(int minimumSeconds)
 	{
 		AppSettings.minimumSeconds = minimumSeconds;
 	}
@@ -185,7 +185,7 @@ public class AppSettings extends Application
 	/**
 	 * @return the newFileCreation
 	 */
-	public static String getNewFileCreation()
+	static String getNewFileCreation()
 	{
 		return newFileCreation;
 	}
@@ -194,7 +194,7 @@ public class AppSettings extends Application
 	 * @param newFileCreation
 	 *            the newFileCreation to set
 	 */
-	public static void setNewFileCreation(String newFileCreation)
+	static void setNewFileCreation(String newFileCreation)
 	{
 		AppSettings.newFileCreation = newFileCreation;
 	}
@@ -221,7 +221,7 @@ public class AppSettings extends Application
 	 * @param autoEmailDelay
 	 *            the autoEmailDelay to set
 	 */
-	public static void setAutoEmailDelay(Float autoEmailDelay)
+	static void setAutoEmailDelay(Float autoEmailDelay)
 	{
 		
 		if(autoEmailDelay >= 8f)
@@ -248,13 +248,13 @@ public class AppSettings extends Application
 	 * @param autoEmailEnabled
 	 *            the autoEmailEnabled to set
 	 */
-	public static void setAutoEmailEnabled(boolean autoEmailEnabled)
+	static void setAutoEmailEnabled(boolean autoEmailEnabled)
 	{
 		AppSettings.autoEmailEnabled = autoEmailEnabled;
 	}
 	
 
-	public static void setSmtpServer(String smtpServer) 
+	static void setSmtpServer(String smtpServer) 
 	{
 		AppSettings.smtpServer = smtpServer;
 	}
@@ -264,7 +264,7 @@ public class AppSettings extends Application
 		return smtpServer;
 	}
 
-	public static void setSmtpPort(String smtpPort) 
+	static void setSmtpPort(String smtpPort) 
 	{
 		AppSettings.smtpPort = smtpPort;
 	}
@@ -274,7 +274,7 @@ public class AppSettings extends Application
 		return smtpPort;
 	}
 
-	public static void setSmtpUsername(String smtpUsername) 
+	static void setSmtpUsername(String smtpUsername) 
 	{
 		AppSettings.smtpUsername = smtpUsername;
 	}
@@ -284,7 +284,7 @@ public class AppSettings extends Application
 		return smtpUsername;
 	}
 
-	public static void setSmtpPassword(String smtpPassword) 
+	static void setSmtpPassword(String smtpPassword) 
 	{
 		AppSettings.smtpPassword = smtpPassword;
 	}
@@ -294,7 +294,7 @@ public class AppSettings extends Application
 		return smtpPassword;
 	}
 
-	public static void setSmtpSsl(boolean smtpSsl) {
+	static void setSmtpSsl(boolean smtpSsl) {
 		AppSettings.smtpSsl = smtpSsl;
 	}
 
@@ -303,7 +303,7 @@ public class AppSettings extends Application
 		return smtpSsl;
 	}
 
-	public static void setAutoEmailTarget(String autoEmailTarget) {
+	static void setAutoEmailTarget(String autoEmailTarget) {
 		AppSettings.autoEmailTarget = autoEmailTarget;
 	}
 

@@ -677,7 +677,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 * 
 	 * @param message
 	 */
-	public void SetStatus(String message)
+	private void SetStatus(String message)
 	{
 		TextView tvStatus = (TextView) findViewById(R.id.textStatus);
 		tvStatus.setText(message);
@@ -874,11 +874,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	public Activity GetActivity()
 	{
 		return this;
-	}
-
-	public Context GetContext()
-	{
-		return getBaseContext();
 	}
 
 }

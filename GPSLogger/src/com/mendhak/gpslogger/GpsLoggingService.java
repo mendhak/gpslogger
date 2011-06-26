@@ -15,9 +15,6 @@ import com.mendhak.gpslogger.loggers.IFileLogger;
 
 import com.mendhak.gpslogger.senders.AlarmReceiver;
 import com.mendhak.gpslogger.senders.email.AutoEmailHelper;
-
-
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -52,7 +49,7 @@ public class GpsLoggingService extends Service
 	// ---------------------------------------------------
 	private GeneralLocationListener gpsLocationListener;
 	private GeneralLocationListener towerLocationListener;
-	public LocationManager gpsLocationManager;
+	LocationManager gpsLocationManager;
 	private LocationManager towerLocationManager;
 
 	private Intent alarmIntent;
@@ -605,7 +602,7 @@ public class GpsLoggingService extends Service
 	/**
 	 * Gives a status message to the main service client to display
 	 */
-	public void SetStatus(String status)
+	void SetStatus(String status)
 	{
 		if (IsMainFormVisible())
 		{
@@ -627,7 +624,7 @@ public class GpsLoggingService extends Service
 	/**
 	 * Stops location manager, then starts it.
 	 */
-	public void RestartGpsManagers()
+	void RestartGpsManagers()
 	{
 		Utilities.LogDebug("GpsLoggingService.RestartGpsManagers");
 		StopGpsManager();
@@ -665,7 +662,7 @@ public class GpsLoggingService extends Service
 	 * 
 	 * @param loc
 	 */
-	public void OnLocationChanged(Location loc)
+	void OnLocationChanged(Location loc)
 	{
 
 		// Don't do anything until the proper time has elapsed
@@ -717,7 +714,7 @@ public class GpsLoggingService extends Service
 	 * 
 	 * @param count
 	 */
-	public void SetSatelliteInfo(int count)
+	void SetSatelliteInfo(int count)
 	{
 		if (IsMainFormVisible())
 		{
@@ -725,15 +722,6 @@ public class GpsLoggingService extends Service
 		}
 	}
 
-	public Activity GetActivity()
-	{
-		return null;
-	}
-
-	public Context GetContext()
-	{
-		return getBaseContext();
-	}
 
 	private boolean IsMainFormVisible()
 	{

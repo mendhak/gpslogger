@@ -23,8 +23,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
 		OnPreferenceClickListener
 {
 
-	String					initialEmailAddress;
-	public final Handler	handler	= new Handler();
+	private final Handler	handler	= new Handler();
 
 
 	@Override
@@ -44,9 +43,6 @@ public class AutoEmailActivity extends PreferenceActivity implements
 		EditTextPreference txtSmtpPort = (EditTextPreference) findPreference("smtp_port");
 		txtSmtpServer.setOnPreferenceChangeListener(this);
 		txtSmtpPort.setOnPreferenceChangeListener(this);
-
-		EditTextPreference txtTarget = (EditTextPreference) findPreference("autoemail_target");
-		initialEmailAddress = txtTarget.getText();
 
 		Preference testEmailPref = (Preference) findPreference("smtp_testemail");
 
@@ -141,41 +137,10 @@ public class AutoEmailActivity extends PreferenceActivity implements
 		}
 	}
 
-	public final Runnable	updateResultsSettingsRegistered	= new Runnable()
-															{
-																public void run()
-																{
-																	TargetEmailSaved();
-																}
-															};
-	public final Runnable	updateResultsConnectionFail		= new Runnable()
-															{
-																public void run()
-																{
-																	CouldNotSaveDetails();
-																}
-															};
-
-	private void CouldNotSaveDetails()
-	{
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(getBaseContext());
-		SharedPreferences.Editor editor = prefs.edit();
-		editor.putString("autoemail_target", initialEmailAddress);
-		editor.commit();
-		Utilities.MsgBox(getString(R.string.sorry),
-				getString(R.string.error_connection), this, this);
-	}
 
 	public void MessageBoxResult(int which)
 	{
 		finish();
-	}
-
-	private void TargetEmailSaved()
-	{
-		Utilities.MsgBox(getString(R.string.success),
-				getString(R.string.autoemail_success), this, this);
 	}
 
 	public boolean onPreferenceChange(Preference preference, Object newValue)
@@ -241,7 +206,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
 		handler.post(showTestResults);
 	}
 
-	public final Runnable	showTestResults	= new Runnable()
+	private final Runnable	showTestResults	= new Runnable()
 											{
 												public void run()
 												{
@@ -249,7 +214,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
 												}
 											};
 
-	public void TestEmailResults()
+	private void TestEmailResults()
 	{
 		Utilities.HideProgress();
 		Utilities.MsgBox(getString(R.string.autoemail_testresult_title),

@@ -1,10 +1,6 @@
 package com.mendhak.gpslogger.common;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -223,7 +219,7 @@ public class Utilities
 	 *            An object which implements IHasACallBack so that the click
 	 *            event can call the callback method.
 	 */
-	public static void MsgBox(String title, String message, Context className,
+	private static void MsgBox(String title, String message, Context className,
 			final IMessageBoxCallback msgCallback)
 	{
 		AlertDialog alertDialog = new AlertDialog.Builder(className).create();
@@ -422,82 +418,7 @@ public class Utilities
 		return desc;
 	}
 	
-	/**
-	 * Returns the contents of the file in a byte array
-	 * 
-	 * @param file
-	 *            File this method should read
-	 * @return byte[] Returns a byte[] array of the contents of the file
-	 */
-	public static byte[] GetBytesFromFile(File file)
-	{
-
-		InputStream is;
-		try
-		{
-			is = new FileInputStream(file);
-		}
-		catch (FileNotFoundException e)
-		{
-			return null;
-		}
-
-		System.out.println("\nDEBUG: FileInputStream is " + file);
-
-		// Get the size of the file
-		long length = file.length();
-		System.out.println("DEBUG: Length of " + file + " is " + length + "\n");
-
-		/*
-		 * You cannot create an array using a long type. It needs to be an int
-		 * type. Before converting to an int type, check to ensure that file is
-		 * not larger than Integer.MAX_VALUE;
-		 */
-		if (length > Integer.MAX_VALUE)
-		{
-			System.out.println("File is too large to process");
-			return null;
-		}
-
-		// Create the byte array to hold the data
-		byte[] bytes = new byte[(int) length];
-
-		// Read in the bytes
-		int offset = 0;
-		int numRead = 0;
-		try
-		{
-			while ((offset < bytes.length)
-					&& ((numRead = is.read(bytes, offset, bytes.length - offset)) >= 0))
-			{
-
-				offset += numRead;
-
-			}
-		}
-		catch (IOException e1)
-		{
-			e1.printStackTrace();
-		}
-
-		// Ensure all the bytes have been read in
-		if (offset < bytes.length)
-		{
-			return null;
-		}
-
-		try
-		{
-			is.close();
-		}
-		catch (IOException e)
-		{
-
-		}
-		return bytes;
-
-	}
-
+	
 	/**
 	 * Performs a web request on a given URL and returns the response as a
 	 * string.

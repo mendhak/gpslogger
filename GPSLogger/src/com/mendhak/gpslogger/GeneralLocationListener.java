@@ -12,12 +12,12 @@ import android.location.LocationListener;
 import android.location.LocationProvider;
 import android.os.Bundle;
 
-public class GeneralLocationListener implements LocationListener, GpsStatus.Listener
+class GeneralLocationListener implements LocationListener, GpsStatus.Listener
 {
 
 	private static GpsLoggingService mainActivity;
 
-	public GeneralLocationListener(GpsLoggingService activity)
+	GeneralLocationListener(GpsLoggingService activity)
 	{
 		Utilities.LogDebug("GeneralLocationListener constructor");
 		mainActivity = activity;
