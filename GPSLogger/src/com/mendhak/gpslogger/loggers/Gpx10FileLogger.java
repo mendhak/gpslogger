@@ -160,5 +160,38 @@ public class Gpx10FileLogger implements IFileLogger
 
 		return track;
 	}
+
+	@Override
+	public void Annotate(String description) throws Exception
+	{
+		if (!gpxFile.exists())
+		{
+			return;
+		}
+		int offsetFromEnd = 29;
+
+		long startPosition = gpxFile.length() - offsetFromEnd;
+
+		description = "<name>" + description + "</name><desc>" + description
+				+ "</desc></trkpt></trkseg></trk></gpx>";
+		RandomAccessFile raf = null;
+		try
+		{
+			raf = new RandomAccessFile(gpxFile, "rw");
+			gpxLock = raf.getChannel().lock();
+			raf.seek(startPosition);
+			raf.write(description.getBytes());
+			gpxLock.release();
+			raf.close();
+		}
+		catch (Exception e)
+		{
+			Utilities.LogError("Gpx10FileLogger.Annotate", e);
+			throw new Exception("Could not annotate GPX file");
+		}
+		
+	}
+
+	
 	
 }

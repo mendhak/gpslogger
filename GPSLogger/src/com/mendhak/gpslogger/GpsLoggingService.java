@@ -12,7 +12,7 @@ import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
-import com.mendhak.gpslogger.loggers.IFileLoggingHelperCallback;
+
 import com.mendhak.gpslogger.senders.AlarmReceiver;
 import com.mendhak.gpslogger.senders.email.AutoEmailHelper;
 
@@ -35,7 +35,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 
-public class GpsLoggingService extends Service implements IFileLoggingHelperCallback
+public class GpsLoggingService extends Service
 {
 	private static NotificationManager gpsNotifyManager;
 	private static int NOTIFICATION_ID;
@@ -702,6 +702,7 @@ public class GpsLoggingService extends Service implements IFileLoggingHelperCall
 			try
 			{
 				logger.Write(loc);
+				Session.setAllowDescription(true);
 			}
 			catch (Exception e)
 			{

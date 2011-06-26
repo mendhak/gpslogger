@@ -186,6 +186,38 @@ public class Kml10FileLogger implements IFileLogger
         }
         return result.toString();
     }
+
+	@Override
+	public void Annotate(String description) throws Exception
+	{
+
+		if (!kmlFile.exists())
+		{
+			return;
+		}
+
+		int offsetFromEnd = 37;
+
+		description = "<name>" + description + "</name></Point></Placemark></Document></kml>";
+
+		long startPosition = kmlFile.length() - offsetFromEnd;
+		try
+		{
+			RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
+			kmlLock = raf.getChannel().lock();
+			raf.seek(startPosition);
+			raf.write(description.getBytes());
+			kmlLock.release();
+			raf.close();
+		}
+		catch (Exception e)
+		{
+			Utilities.LogError("Kml10FileLogger.Annotate", e);
+			throw new Exception("Could not annotate KML file");
+		}
+		
+	}
+
 	
 	
 }

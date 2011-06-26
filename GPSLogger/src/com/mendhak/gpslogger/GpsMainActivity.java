@@ -13,16 +13,19 @@ import java.util.Locale;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.loggers.FileLoggingHelper;
-import com.mendhak.gpslogger.loggers.IFileLoggingHelperCallback;
+import com.mendhak.gpslogger.loggers.FileLoggerFactory;
+import com.mendhak.gpslogger.loggers.IFileLogger;
+//import com.mendhak.gpslogger.loggers.IFileLoggingHelperCallback;
 import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
 import com.mendhak.gpslogger.R;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
@@ -42,6 +45,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -50,7 +54,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class GpsMainActivity extends Activity implements OnCheckedChangeListener,
-		IGpsLoggerServiceClient, IFileLoggingHelperCallback
+		IGpsLoggerServiceClient
 {
 
 	/**
@@ -58,7 +62,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	public final Handler handler = new Handler();
 	private static Intent serviceIntent;
-	private FileLoggingHelper fileHelper;
 	private GpsLoggingService loggingService;
 
 	/**
@@ -113,8 +116,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		super.onCreate(savedInstanceState);
 
 		Utilities.LogInfo("GPSLogger started");
-
-		fileHelper = new FileLoggingHelper(this);
 
 		setContentView(R.layout.main);
 
@@ -572,13 +573,74 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	}
 	
 	
+	
 	/**
 	 * Prompts user for input, then adds text to log file
 	 */
 	private void Annotate()
 	{
 
-		fileHelper.Annotate();
+		if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml())
+		{
+			return;
+		}
+		
+		if (!Session.shoulAllowDescription())
+		{
+			Utilities.MsgBox(getString(R.string.not_yet),
+					getString(R.string.cant_add_description_until_next_point),
+					GetActivity());
+
+			return;
+
+		}
+
+		AlertDialog.Builder alert = new AlertDialog.Builder(GpsMainActivity.this);
+
+		alert.setTitle(R.string.add_description);
+		alert.setMessage(R.string.letters_numbers);
+
+		// Set an EditText view to get user input
+		final EditText input = new EditText(getBaseContext());
+		alert.setView(input);
+
+		alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener()
+		{
+			public void onClick(DialogInterface dialog, int whichButton)
+			{
+				final String desc = Utilities.CleanDescription(input.getText().toString());
+				Annotate(desc);
+			}
+
+		});
+		alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
+		{
+			public void onClick(DialogInterface dialog, int whichButton)
+			{
+				// Cancelled.
+			}
+		});
+
+		alert.show();
+	}
+	
+	private void Annotate(String description)
+	{
+		List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers();
+		
+		for(IFileLogger logger : loggers)
+		{
+			try
+			{
+				logger.Annotate(description);
+				SetStatus(getString(R.string.description_added));
+				Session.setAllowDescription(false);
+			}
+			catch (Exception e)
+			{
+				SetStatus(getString(R.string.could_not_write_to_file));
+			}
+		}
 	}
 
 	/**

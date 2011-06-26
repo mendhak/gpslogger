@@ -24,6 +24,7 @@ public class Session extends Application
 	private static Location currentLocationInfo;
 	private static boolean isBound;
 	private static boolean emailReadyToBeSent=false;
+	private static boolean allowDescription = true;
 
 	// ---------------------------------------------------
 	/**
@@ -303,6 +304,16 @@ public class Session extends Application
 	public static boolean isEmailReadyToBeSent()
 	{
 		return emailReadyToBeSent;
+	}
+
+	public static boolean shoulAllowDescription()
+	{
+		return allowDescription;
+	}
+
+	public static void setAllowDescription(boolean allowDescription)
+	{
+		Session.allowDescription = allowDescription;
 	}
 
 }
