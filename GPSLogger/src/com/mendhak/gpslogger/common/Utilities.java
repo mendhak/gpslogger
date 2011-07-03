@@ -9,7 +9,6 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
@@ -27,10 +26,18 @@ import android.util.Log;
 
 public class Utilities
 {
-
-	private static final int LOGLEVEL = 3;
-	private static ProgressDialog pd;
-
+	
+	private static final int		LOGLEVEL	= 3;
+	private static ProgressDialog	pd;
+	
+	private static void LogToDebugFile(String message)
+	{
+		if (AppSettings.isDebugToFile())
+		{
+			DebugLogger.Write(message);
+		}
+	}
+	
 	public static void LogInfo(String message)
 	{
 		if (LOGLEVEL >= 3)
@@ -38,8 +45,10 @@ public class Utilities
 			Log.i("GPSLogger", message);
 		}
 
+		LogToDebugFile(message);
+		
 	}
-
+	
 	public static void LogError(String methodName, Exception ex)
 	{
 		try
@@ -51,13 +60,13 @@ public class Utilities
 			/**/
 		}
 	}
-
+	
 	private static void LogError(String message)
 	{
 		Log.e("GPSLogger", message);
-
+		LogToDebugFile(message);
 	}
-
+	
 	@SuppressWarnings("unused")
 	public static void LogDebug(String message)
 	{
@@ -65,16 +74,18 @@ public class Utilities
 		{
 			Log.d("GPSLogger", message);
 		}
+		LogToDebugFile(message);
 	}
-
+	
 	public static void LogWarning(String message)
 	{
 		if (LOGLEVEL >= 2)
 		{
 			Log.w("GPSLogger", message);
 		}
+		LogToDebugFile(message);
 	}
-
+	
 	@SuppressWarnings("unused")
 	public static void LogVerbose(String message)
 	{
@@ -82,8 +93,9 @@ public class Utilities
 		{
 			Log.v("GPSLogger", message);
 		}
+		LogToDebugFile(message);
 	}
-
+	
 	/**
 	 * Gets user preferences, populates the AppSettings class.
 	 * 
@@ -92,50 +104,60 @@ public class Utilities
 	 */
 	public static void PopulateAppSettings(Context context)
 	{
-
+		
 		Utilities.LogInfo("Getting preferences");
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		
 		AppSettings.setUseImperial(prefs.getBoolean("useImperial", false));
-		AppSettings.setUseSatelliteTime(prefs.getBoolean("satellite_time", false));
-
+		AppSettings.setUseSatelliteTime(prefs.getBoolean("satellite_time",
+				false));
+		
 		AppSettings.setLogToKml(prefs.getBoolean("log_kml", false));
-
+		
 		AppSettings.setLogToGpx(prefs.getBoolean("log_gpx", false));
-
-		AppSettings.setShowInNotificationBar(prefs.getBoolean("show_notification", true));
-
-		AppSettings.setPreferCellTower(prefs.getBoolean("prefer_celltower", false));
-
-		String minimumDistanceString = prefs.getString("distance_before_logging", "0");
-
+		
+		AppSettings.setShowInNotificationBar(prefs.getBoolean(
+				"show_notification", true));
+		
+		AppSettings.setPreferCellTower(prefs.getBoolean("prefer_celltower",
+				false));
+		
+		String minimumDistanceString = prefs.getString(
+				"distance_before_logging", "0");
+		
 		if (minimumDistanceString != null && minimumDistanceString.length() > 0)
 		{
-			AppSettings.setMinimumDistance(Integer.valueOf(minimumDistanceString));
+			AppSettings.setMinimumDistance(Integer
+					.valueOf(minimumDistanceString));
 		}
 		else
 		{
 			AppSettings.setMinimumDistance(Integer.valueOf(0));
 		}
-
+		
 		if (AppSettings.shouldUseImperial())
 		{
-			AppSettings.setMinimumDistance(Utilities.FeetToMeters(AppSettings.getMinimumDistance()));
+			AppSettings.setMinimumDistance(Utilities.FeetToMeters(AppSettings
+					.getMinimumDistance()));
 		}
-
-		String minimumSecondsString = prefs.getString("time_before_logging", "60");
-
+		
+		String minimumSecondsString = prefs.getString("time_before_logging",
+				"60");
+		
 		if (minimumSecondsString != null && minimumSecondsString.length() > 0)
 		{
-			AppSettings.setMinimumSeconds(Integer.valueOf(minimumSecondsString));
+			AppSettings
+					.setMinimumSeconds(Integer.valueOf(minimumSecondsString));
 		}
 		else
 		{
 			AppSettings.setMinimumSeconds(60);
 		}
-
-		AppSettings.setNewFileCreation(prefs.getString("new_file_creation", "onceaday"));
-
+		
+		AppSettings.setNewFileCreation(prefs.getString("new_file_creation",
+				"onceaday"));
+		
 		if (AppSettings.getNewFileCreation().equals("onceaday"))
 		{
 			AppSettings.setNewFileOnceADay(true);
@@ -144,43 +166,38 @@ public class Utilities
 		{
 			AppSettings.setNewFileOnceADay(false);
 		}
-
-
-		AppSettings.setAutoEmailEnabled(prefs.getBoolean("autoemail_enabled", false));
-
+		
+		AppSettings.setAutoEmailEnabled(prefs.getBoolean("autoemail_enabled",
+				false));
+		
 		if (Float.valueOf(prefs.getString("autoemail_frequency", "0")) >= 8f)
 		{
 			SharedPreferences.Editor editor = prefs.edit();
 			editor.putString("autoemail_frequency", "8");
 			editor.commit();
 		}
-
-		AppSettings.setAutoEmailDelay(Float.valueOf(prefs.getString("autoemail_frequency", "0")));
-	
+		
+		AppSettings.setAutoEmailDelay(Float.valueOf(prefs.getString(
+				"autoemail_frequency", "0")));
+		
 		AppSettings.setSmtpServer(prefs.getString("smtp_server", ""));
 		AppSettings.setSmtpPort(prefs.getString("smtp_port", "25"));
 		AppSettings.setSmtpSsl(prefs.getBoolean("smtp_ssl", true));
 		AppSettings.setSmtpUsername(prefs.getString("smtp_username", ""));
 		AppSettings.setSmtpPassword(prefs.getString("smtp_password", ""));
 		AppSettings.setAutoEmailTarget(prefs.getString("autoemail_target", ""));
+		AppSettings.setDebugToFile(prefs.getBoolean("debugtofile", false));
 	}
 	
-
 	public static void ShowProgress(Context ctx, String title, String message)
 	{
-		if(ctx != null)
+		if (ctx != null)
 		{
-			pd = new ProgressDialog(ctx,
-					ProgressDialog.STYLE_HORIZONTAL);
+			pd = new ProgressDialog(ctx, ProgressDialog.STYLE_HORIZONTAL);
 			pd.setMax(100);
 			pd.setIndeterminate(true);
-
-			pd = ProgressDialog.show(
-					ctx,
-					title,
-					message, 
-					true,
-					true);	
+			
+			pd = ProgressDialog.show(ctx, title, message, true, true);
 		}
 	}
 	
@@ -192,7 +209,6 @@ public class Utilities
 		}
 	}
 	
-
 	/**
 	 * Displays a message box to the user with an OK button.
 	 * 
@@ -206,7 +222,7 @@ public class Utilities
 	{
 		MsgBox(title, message, className, null);
 	}
-
+	
 	/**
 	 * Displays a message box to the user with an OK button.
 	 * 
@@ -225,93 +241,96 @@ public class Utilities
 		AlertDialog alertDialog = new AlertDialog.Builder(className).create();
 		alertDialog.setTitle(title);
 		alertDialog.setMessage(message);
-		alertDialog.setButton(className.getString(R.string.ok), new DialogInterface.OnClickListener()
-		{
-			public void onClick(DialogInterface dialog, int which)
-			{
-				if (msgCallback != null)
+		alertDialog.setButton(className.getString(R.string.ok),
+				new DialogInterface.OnClickListener()
 				{
-					msgCallback.MessageBoxResult(which);
-				}
-			}
-		});
+					public void onClick(DialogInterface dialog, int which)
+					{
+						if (msgCallback != null)
+						{
+							msgCallback.MessageBoxResult(which);
+						}
+					}
+				});
 		alertDialog.show();
 	}
-
+	
 	/**
 	 * Converts seconds into friendly, understandable description of time.
 	 * 
 	 * @param numberOfSeconds
 	 * @return
 	 */
-	public static String GetDescriptiveTimeString(int numberOfSeconds, Context context)
+	public static String GetDescriptiveTimeString(int numberOfSeconds,
+			Context context)
 	{
-
+		
 		String descriptive = "";
 		int hours = 0;
 		int minutes = 0;
 		int seconds = 0;
-
+		
 		int remainingSeconds = 0;
-
+		
 		// Special cases
 		if (numberOfSeconds == 1)
 		{
 			return context.getString(R.string.time_onesecond);
 		}
-
+		
 		if (numberOfSeconds == 30)
 		{
 			return context.getString(R.string.time_halfminute);
 		}
-
+		
 		if (numberOfSeconds == 60)
 		{
 			return context.getString(R.string.time_oneminute);
 		}
-
+		
 		if (numberOfSeconds == 900)
 		{
 			return context.getString(R.string.time_quarterhour);
 		}
-
+		
 		if (numberOfSeconds == 1800)
 		{
 			return context.getString(R.string.time_halfhour);
 		}
-
+		
 		if (numberOfSeconds == 3600)
 		{
 			return context.getString(R.string.time_onehour);
 		}
-
+		
 		if (numberOfSeconds == 4800)
 		{
 			return context.getString(R.string.time_oneandhalfhours);
 		}
-
+		
 		if (numberOfSeconds == 9000)
 		{
 			return context.getString(R.string.time_twoandhalfhours);
 		}
-
+		
 		// For all other cases, calculate
-
+		
 		hours = numberOfSeconds / 3600;
 		remainingSeconds = numberOfSeconds % 3600;
 		minutes = remainingSeconds / 60;
 		seconds = remainingSeconds % 60;
-
+		
 		// Every 5 hours and 2 minutes
 		// XYZ-5*2*20*
-
-		descriptive = context.getString(R.string.time_hms_format, String.valueOf(hours),
-				String.valueOf(minutes), String.valueOf(seconds));
-
+		
+		descriptive = context.getString(R.string.time_hms_format,
+				String.valueOf(hours), String.valueOf(minutes),
+				String.valueOf(seconds));
+		
 		return descriptive;
-
+		
 	}
-
+	
 	/**
 	 * Converts given bearing degrees into a rough cardinal direction that's
 	 * more understandable to humans.
@@ -319,12 +338,13 @@ public class Utilities
 	 * @param bearingDegrees
 	 * @return
 	 */
-	public static String GetBearingDescription(float bearingDegrees, Context context)
+	public static String GetBearingDescription(float bearingDegrees,
+			Context context)
 	{
-
+		
 		String direction;
 		String cardinal;
-
+		
 		if (bearingDegrees > 348.75 || bearingDegrees <= 11.25)
 		{
 			cardinal = context.getString(R.string.direction_north);
@@ -394,12 +414,11 @@ public class Utilities
 			direction = context.getString(R.string.unknown_direction);
 			return direction;
 		}
-
+		
 		direction = context.getString(R.string.direction_roughly, cardinal);
 		return direction;
-
+		
 	}
-
 	
 	/**
 	 * Makes string safe for writing to XML file. Removes lt and gt. Best used
@@ -414,10 +433,9 @@ public class Utilities
 		desc = desc.replace(">", "");
 		desc = desc.replace("&", "&amp;");
 		desc = desc.replace("\"", "&quot;");
-
+		
 		return desc;
 	}
-	
 	
 	/**
 	 * Performs a web request on a given URL and returns the response as a
@@ -438,33 +456,34 @@ public class Utilities
 		BufferedReader rd = null;
 		StringBuilder sb = null;
 		String line = null;
-
+		
 		try
 		{
 			serverAddress = new URL(url);
 			// set up out communications stuff
 			connection = null;
-
+			
 			// Set up the initial connection
 			connection = (HttpURLConnection) serverAddress.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setDoOutput(true);
 			connection.setReadTimeout(10000);
-
+			
 			connection.setConnectTimeout(10000);
 			connection.connect();
-
+			
 			// read the result from the server
-			rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			rd = new BufferedReader(new InputStreamReader(
+					connection.getInputStream()));
 			sb = new StringBuilder();
-
+			
 			while ((line = rd.readLine()) != null)
 			{
 				sb.append(line);
 			}
-
+			
 			return sb.toString();
-
+			
 		}
 		catch (Exception e)
 		{
@@ -481,28 +500,30 @@ public class Utilities
 			// wr = null;
 			connection = null;
 		}
-
+		
 	}
-
+	
 	public static String PostUrl(String url, String body, String soapAction)
 	{
 		StringBuilder sb = new StringBuilder();
 		try
 		{
 			String data = body;
-
+			
 			// Send data
 			URL targetUrl = new URL(url);
-			HttpURLConnection conn = (HttpURLConnection) targetUrl.openConnection();
+			HttpURLConnection conn = (HttpURLConnection) targetUrl
+					.openConnection();
 			conn.addRequestProperty("SOAPAction", soapAction);
 			conn.addRequestProperty("Content-Type", "text/xml; charset=utf-8");
 			conn.setDoOutput(true);
-
-			OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+			
+			OutputStreamWriter wr = new OutputStreamWriter(
+					conn.getOutputStream());
 			wr.write(data);
 			wr.flush();
 			// Get the response
-
+			
 			InputStream iStream;
 			if (conn.getResponseCode() >= 400)
 			{
@@ -512,9 +533,10 @@ public class Utilities
 			{
 				iStream = conn.getInputStream();
 			}
-
-			BufferedReader rd = new BufferedReader(new InputStreamReader(iStream));
-
+			
+			BufferedReader rd = new BufferedReader(new InputStreamReader(
+					iStream));
+			
 			String line;
 			while ((line = rd.readLine()) != null)
 			{
@@ -525,13 +547,13 @@ public class Utilities
 		}
 		catch (Exception ex)
 		{
-
+			
 			sb.append(ex.getMessage());
 		}
-
+		
 		return sb.toString();
 	}
-
+	
 	/**
 	 * Given a Date object, returns an ISO 8601 date time string in UTC.
 	 * Example: 2010-03-23T05:17:22Z but not 2010-03-23T05:17:22+04:00
@@ -542,21 +564,21 @@ public class Utilities
 	 */
 	public static String GetIsoDateTime(Date dateToFormat)
 	{
-
+		
 		// GPX specs say that time given should be in UTC, no local time.
 		// SimpleDateFormat sdf = new
 		// SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 		String dateTimeString = sdf.format(dateToFormat);
-
+		
 		// dateTimeString = dateTimeString.replaceAll("\\+0000$", "Z");
 		// dateTimeString = dateTimeString.replaceAll("(\\d\\d)$", ":$1");
 		// Because the Z in SimpleDateFormat gives you '+0900', so we need to
 		// add the colon ourselves
-
+		
 		return dateTimeString;
-
+		
 	}
 	
 	public static String GetReadableDateTime(Date dateToFormat)
@@ -564,7 +586,7 @@ public class Utilities
 		SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm");
 		return sdf.format(dateToFormat);
 	}
-
+	
 	/**
 	 * Converts given meters to feet.
 	 * 
@@ -575,7 +597,7 @@ public class Utilities
 	{
 		return (int) Math.round(m * 3.2808399);
 	}
-
+	
 	/**
 	 * Converts given feet to meters
 	 * 
@@ -586,7 +608,7 @@ public class Utilities
 	{
 		return (int) Math.round(f / 3.2808399);
 	}
-
+	
 	/**
 	 * Converts given meters to feet and rounds up.
 	 * 
@@ -597,15 +619,14 @@ public class Utilities
 	{
 		return MetersToFeet((int) m);
 	}
-
-
+	
 	public static boolean IsValidEmailAddress(String email)
 	{
 		if (email == null || email.length() == 0)
 		{
 			return false;
 		}
-
+		
 		email = email.trim().toUpperCase();
 		if (email.matches("[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}"))
 		{
@@ -616,22 +637,20 @@ public class Utilities
 			return false;
 		}
 	}
-
-		
+	
 	public static boolean IsEmailSetup(Context ctx)
 	{
-		if(AppSettings.isAutoEmailEnabled() &&
-				AppSettings.getAutoEmailTarget().length() > 0 &&
-				AppSettings.getSmtpServer().length() > 0 &&
-				AppSettings.getSmtpPort().length() > 0 &&
-				AppSettings.getSmtpUsername().length() > 0
-				)
+		if (AppSettings.isAutoEmailEnabled()
+				&& AppSettings.getAutoEmailTarget().length() > 0
+				&& AppSettings.getSmtpServer().length() > 0
+				&& AppSettings.getSmtpPort().length() > 0
+				&& AppSettings.getSmtpUsername().length() > 0)
 		{
 			return true;
 		}
 		
 		return false;
-				
+		
 	}
 	
 	public static OAuthConsumer GetOSMAuthConsumer(Context ctx)
@@ -641,25 +660,30 @@ public class Utilities
 		
 		try
 		{
-			int osmConsumerKey = ctx.getResources().getIdentifier("osm_consumerkey", "string", ctx.getPackageName());
-			int osmConsumerSecret = ctx.getResources().getIdentifier("osm_consumersecret", "string", ctx.getPackageName());
+			int osmConsumerKey = ctx.getResources().getIdentifier(
+					"osm_consumerkey", "string", ctx.getPackageName());
+			int osmConsumerSecret = ctx.getResources().getIdentifier(
+					"osm_consumersecret", "string", ctx.getPackageName());
 			consumer = new CommonsHttpOAuthConsumer(
-					ctx.getString(osmConsumerKey), 
+					ctx.getString(osmConsumerKey),
 					ctx.getString(osmConsumerSecret));
 			
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+			SharedPreferences prefs = PreferenceManager
+					.getDefaultSharedPreferences(ctx);
 			String osmAccessToken = prefs.getString("osm_accesstoken", "");
-			String osmAccessTokenSecret = prefs.getString("osm_accesstokensecret", "");
+			String osmAccessTokenSecret = prefs.getString(
+					"osm_accesstokensecret", "");
 			
-			if(osmAccessToken != null && osmAccessToken.length()>0 
-					&& osmAccessTokenSecret != null && osmAccessTokenSecret.length()>0)
+			if (osmAccessToken != null && osmAccessToken.length() > 0
+					&& osmAccessTokenSecret != null
+					&& osmAccessTokenSecret.length() > 0)
 			{
-				consumer.setTokenWithSecret(osmAccessToken, osmAccessTokenSecret);
+				consumer.setTokenWithSecret(osmAccessToken,
+						osmAccessTokenSecret);
 			}
 			
-			
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 		}
 		
@@ -672,23 +696,23 @@ public class Utilities
 				ctx.getString(R.string.osm_requesttoken_url),
 				ctx.getString(R.string.osm_accesstoken_url),
 				ctx.getString(R.string.osm_authorize_url));
-
+		
 	}
-
 	
 	public static boolean IsOsmAuthorized(Context ctx)
 	{
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(ctx);
 		String oAuthAccessToken = prefs.getString("osm_accesstoken", "");
 		
-		return (oAuthAccessToken != null && oAuthAccessToken.length()>0);
+		return (oAuthAccessToken != null && oAuthAccessToken.length() > 0);
 	}
 	
 	public static Intent GetOsmSettingsIntent(Context ctx)
 	{
 		Intent intentOsm = null;
 		
-		if(!IsOsmAuthorized(ctx))
+		if (!IsOsmAuthorized(ctx))
 		{
 			intentOsm = new Intent(ctx.getPackageName() + ".OSM_AUTHORIZE");
 			intentOsm.setData(Uri.parse("gpslogger://authorize"));
@@ -702,5 +726,4 @@ public class Utilities
 		return intentOsm;
 	}
 	
-
 }

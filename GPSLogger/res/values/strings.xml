@@ -256,4 +256,8 @@
     
     <string name="no_files_found">No files found, nothing to share or upload.</string>
     <string name="osm_pick_file">Pick a file to upload</string>
+    
+    <string name="debuglog_title">Write to debug file</string>
+    <string name="debuglog_summary">Writes debug messages to a file on the SD card. Warning: The file grows very fast.</string>
+    
 </resources>

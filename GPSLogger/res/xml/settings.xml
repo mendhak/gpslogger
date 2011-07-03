@@ -61,6 +61,9 @@
 			android:entries="@array/language_choices" android:defaultValue=""
 			android:entryValues="@array/language_values" /> 
 
+		<CheckBoxPreference android:title="@string/debuglog_title" android:summary="@string/debuglog_summary" 
+		android:key="debugtofile" android:defaultValue="false" />
+
 	</PreferenceCategory>
 
 </PreferenceScreen>

@@ -25,6 +25,7 @@ public class AppSettings extends Application
 	private static String smtpPassword;
 	private static String autoEmailTarget;
 	private static boolean smtpSsl;
+	private static boolean debugToFile;
 
 	
 
@@ -309,6 +310,16 @@ public class AppSettings extends Application
 
 	public static String getAutoEmailTarget() {
 		return autoEmailTarget;
+	}
+
+	public static boolean isDebugToFile()
+	{
+		return debugToFile;
+	}
+
+	public static void setDebugToFile(boolean debugToFile)
+	{
+		AppSettings.debugToFile = debugToFile;
 	}
 
 
