@@ -15,7 +15,7 @@ import android.util.Log;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
 
-class GpsSettingsActivity extends PreferenceActivity
+public class GpsSettingsActivity extends PreferenceActivity
 {
 
 	@Override
