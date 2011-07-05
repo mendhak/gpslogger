@@ -1,11 +1,5 @@
 package com.mendhak.gpslogger.common;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -23,6 +17,8 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class Utilities
 {
@@ -578,5 +574,66 @@ public class Utilities
 		
 		return intentOsm;
 	}
+
+   /**
+   * Parses XML Nodes and returns a string. This method exists due to a problem in the Android framework;
+   * no transformers!
+   * http://stackoverflow.com/questions/2290945/writing-xml-on-android
+   * @param root
+   * @return
+   */
+  public static String GetStringFromNode(Node root)  {
+
+      StringBuilder result = new StringBuilder();
+
+      if (root.getNodeType() == Node.TEXT_NODE)
+      {
+          result.append(root.getNodeValue());
+      }
+      else
+      {
+          if (root.getNodeType() != Node.DOCUMENT_NODE)
+          {
+              StringBuffer attrs = new StringBuffer();
+              for (int k = 0; k < root.getAttributes().getLength(); ++k)
+              {
+                  attrs.append(" ")
+                      .append(root.getAttributes().item(k).getNodeName())
+                      .append("=\"")
+                      .append(root.getAttributes().item(k).getNodeValue())
+                      .append("\" ");
+              }
+              result.append("<")
+                  .append(root.getNodeName());
+
+              if(attrs.length() > 0)
+              {
+                  result.append(" ")
+                  .append(attrs);
+              }
+
+                  result.append(">");
+          }
+          else
+          {
+              result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+          }
+
+          NodeList nodes = root.getChildNodes();
+          for (int i = 0, j = nodes.getLength(); i < j; i++)
+          {
+              Node node = nodes.item(i);
+              result.append(GetStringFromNode(node));
+          }
+
+          if (root.getNodeType() != Node.DOCUMENT_NODE)
+          {
+              result.append("</").append(root.getNodeName()).append(">");
+          }
+      }
+      return result.toString();
+  }
+
+
 	
 }

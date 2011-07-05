@@ -25,7 +25,7 @@ class Gpx10FileLogger implements IFileLogger
 		this.addNewTrackSegment = addNewTrackSegment;
 	}
 
-	@Override
+
 	public void Write(Location loc) throws Exception
 	{
 		try
@@ -161,7 +161,7 @@ class Gpx10FileLogger implements IFileLogger
 		return track;
 	}
 
-	@Override
+
 	public void Annotate(String description) throws Exception
 	{
 		if (!gpxFile.exists())

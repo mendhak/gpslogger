@@ -28,7 +28,6 @@ class Kml10FileLogger implements IFileLogger
 		this.kmlFile = kmlFile;
 	}
 	
-	@Override
 	public void Write(Location loc) throws Exception
 	{
 		try
@@ -113,7 +112,7 @@ class Kml10FileLogger implements IFileLogger
 			
 			documentNode.appendChild(newPlacemark);
 
-			String newFileContents = getStringFromNode(doc);
+			String newFileContents = Utilities.GetStringFromNode(doc);
 			
 			RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
 			kmlLock = raf.getChannel().lock();
@@ -126,68 +125,12 @@ class Kml10FileLogger implements IFileLogger
 		{
 			Utilities.LogError("Kml10FileLogger.Write", e);
 			throw new Exception("Could not write to KML file");
-//			System.out.println(e.getMessage());
-//			Log.e("Main", callingClient.getString(R.string.could_not_write_to_file) + e.getMessage());
-//			callingClient.SetStatus(callingClient.getString(R.string.could_not_write_to_file)
-//					+ e.getMessage());
 		}
 		
 	}
-	
-	
-	private static String getStringFromNode(Node root)  {
 
-        StringBuilder result = new StringBuilder();
 
-        if (root.getNodeType() == Node.TEXT_NODE)
-        {
-            result.append(root.getNodeValue());
-        }
-        else 
-        {
-            if (root.getNodeType() != Node.DOCUMENT_NODE) 
-            {
-                StringBuffer attrs = new StringBuffer();
-                for (int k = 0; k < root.getAttributes().getLength(); ++k) 
-                {
-                    attrs.append(" ") 
-                    	.append(root.getAttributes().item(k).getNodeName())
-                    	.append("=\"")
-                    	.append(root.getAttributes().item(k).getNodeValue())
-                    	.append("\" ");
-                }
-                result.append("<")
-                	.append(root.getNodeName());
-                
-                if(attrs.length() > 0)
-                {
-                	result.append(" ")
-                	.append(attrs);
-                }
-                	
-                	result.append(">");
-            } 
-            else 
-            {
-                result.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            }
 
-            NodeList nodes = root.getChildNodes();
-            for (int i = 0, j = nodes.getLength(); i < j; i++) 
-            {
-                Node node = nodes.item(i);
-                result.append(getStringFromNode(node));
-            }
-
-            if (root.getNodeType() != Node.DOCUMENT_NODE)
-            {
-                result.append("</").append(root.getNodeName()).append(">");
-            }
-        }
-        return result.toString();
-    }
-
-	@Override
 	public void Annotate(String description) throws Exception
 	{
 
