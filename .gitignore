@@ -15,3 +15,7 @@ DEPLOYMENT/
 KEYSTORE/
 images/
 ucdetector_reports/
+
+.idea
+*.iml
+*.eml
