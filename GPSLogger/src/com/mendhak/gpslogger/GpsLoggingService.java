@@ -601,7 +601,8 @@ public class GpsLoggingService extends Service
 
 	/**
 	 * Gives a status message to the main service client to display
-	 */
+     * @param status
+     */
 	void SetStatus(String status)
 	{
 		if (IsMainFormVisible())

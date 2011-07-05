@@ -15,10 +15,8 @@ import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
-//import com.mendhak.gpslogger.loggers.IFileLoggingHelperCallback;
 import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
-import com.mendhak.gpslogger.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -129,14 +127,14 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	{
 		super.onStart();
 		StartAndBindService();
-	};
+	}
 	
 	@Override
 	protected void onResume() 
 	{
 		super.onResume();
 		StartAndBindService();
-	};
+	}
 	
 	/**
 	 * Starts the service and binds the activity to it.
@@ -179,7 +177,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		
 		StopAndUnbindServiceIfRequired();
 		super.onPause();
-	};
+	}
 	
 	@Override
 	protected void onDestroy() 
@@ -188,7 +186,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		StopAndUnbindServiceIfRequired();
 		super.onDestroy();
 	
-	};
+	}
 	
 	/**
 	 * Called when the toggle button is clicked
@@ -293,7 +291,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 		if (AppSettings.isAutoEmailEnabled())
 		{
-			String autoEmailResx = "";
+			String autoEmailResx;
 
 			if (AppSettings.getAutoEmailDelay() == 0)
 			{
@@ -458,7 +456,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 							intent.putExtra("sms_body", bodyText);
 						}
 
-						if (chosenFileName != null && chosenFileName.length() > 0
+						if (chosenFileName.length() > 0
 								&& !chosenFileName.equalsIgnoreCase(locationOnly))
 						{
 							intent.putExtra(Intent.EXTRA_STREAM,
@@ -507,12 +505,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 				
 				public boolean accept(File dir, String filename)
 				{
-					if(filename.toLowerCase().contains(".gpx"))
-					{
-						return true;
-					}
-					return false;
-				}
+                    return filename.toLowerCase().contains(".gpx");
+                }
 			};
 			
 			String[] enumeratedFiles = gpxFolder.list(select);
@@ -785,7 +779,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			{
 
 				float bearingDegrees = loc.getBearing();
-				String direction = getString(R.string.unknown_direction);
+				String direction;
 
 				direction = Utilities.GetBearingDescription(bearingDegrees, getBaseContext());
 

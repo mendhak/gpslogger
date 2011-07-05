@@ -133,7 +133,7 @@ public class Utilities
 		}
 		else
 		{
-			AppSettings.setMinimumDistance(Integer.valueOf(0));
+			AppSettings.setMinimumDistance(0);
 		}
 		
 		if (AppSettings.shouldUseImperial())
@@ -231,7 +231,7 @@ public class Utilities
 	 * @param className
 	 *            The calling class, such as GpsMainActivity.this or
 	 *            mainActivity.
-	 * @param callback
+	 * @param msgCallback
 	 *            An object which implements IHasACallBack so that the click
 	 *            event can call the callback method.
 	 */
@@ -265,12 +265,12 @@ public class Utilities
 			Context context)
 	{
 		
-		String descriptive = "";
-		int hours = 0;
-		int minutes = 0;
-		int seconds = 0;
+		String descriptive;
+		int hours;
+		int minutes;
+		int seconds;
 		
-		int remainingSeconds = 0;
+		int remainingSeconds;
 		
 		// Special cases
 		if (numberOfSeconds == 1)
@@ -437,122 +437,7 @@ public class Utilities
 		return desc;
 	}
 	
-	/**
-	 * Performs a web request on a given URL and returns the response as a
-	 * string.
-	 * 
-	 * @param url
-	 *            The URL to perform a web request on.
-	 * @return The (usually HTML) response
-	 * @throws Exception
-	 *             Throws an exception if there was a connection error. Handle
-	 *             this and inform the user that there was a problem.
-	 */
-	public static String GetUrl(String url) throws Exception
-	{
-		URL serverAddress = null;
-		HttpURLConnection connection = null;
-		// OutputStreamWriter wr = null;
-		BufferedReader rd = null;
-		StringBuilder sb = null;
-		String line = null;
-		
-		try
-		{
-			serverAddress = new URL(url);
-			// set up out communications stuff
-			connection = null;
-			
-			// Set up the initial connection
-			connection = (HttpURLConnection) serverAddress.openConnection();
-			connection.setRequestMethod("GET");
-			connection.setDoOutput(true);
-			connection.setReadTimeout(10000);
-			
-			connection.setConnectTimeout(10000);
-			connection.connect();
-			
-			// read the result from the server
-			rd = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
-			sb = new StringBuilder();
-			
-			while ((line = rd.readLine()) != null)
-			{
-				sb.append(line);
-			}
-			
-			return sb.toString();
-			
-		}
-		catch (Exception e)
-		{
-			throw e;
-			// Swallow
-		}
-		finally
-		{
-			// close the connection, set all objects
-			// to null
-			connection.disconnect();
-			rd = null;
-			sb = null;
-			// wr = null;
-			connection = null;
-		}
-		
-	}
-	
-	public static String PostUrl(String url, String body, String soapAction)
-	{
-		StringBuilder sb = new StringBuilder();
-		try
-		{
-			String data = body;
-			
-			// Send data
-			URL targetUrl = new URL(url);
-			HttpURLConnection conn = (HttpURLConnection) targetUrl
-					.openConnection();
-			conn.addRequestProperty("SOAPAction", soapAction);
-			conn.addRequestProperty("Content-Type", "text/xml; charset=utf-8");
-			conn.setDoOutput(true);
-			
-			OutputStreamWriter wr = new OutputStreamWriter(
-					conn.getOutputStream());
-			wr.write(data);
-			wr.flush();
-			// Get the response
-			
-			InputStream iStream;
-			if (conn.getResponseCode() >= 400)
-			{
-				iStream = conn.getErrorStream();
-			}
-			else
-			{
-				iStream = conn.getInputStream();
-			}
-			
-			BufferedReader rd = new BufferedReader(new InputStreamReader(
-					iStream));
-			
-			String line;
-			while ((line = rd.readLine()) != null)
-			{
-				sb.append(line);
-			}
-			wr.close();
-			rd.close();
-		}
-		catch (Exception ex)
-		{
-			
-			sb.append(ex.getMessage());
-		}
-		
-		return sb.toString();
-	}
+
 	
 	/**
 	 * Given a Date object, returns an ISO 8601 date time string in UTC.
@@ -564,21 +449,11 @@ public class Utilities
 	 */
 	public static String GetIsoDateTime(Date dateToFormat)
 	{
-		
 		// GPX specs say that time given should be in UTC, no local time.
-		// SimpleDateFormat sdf = new
-		// SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-		String dateTimeString = sdf.format(dateToFormat);
-		
-		// dateTimeString = dateTimeString.replaceAll("\\+0000$", "Z");
-		// dateTimeString = dateTimeString.replaceAll("(\\d\\d)$", ":$1");
-		// Because the Z in SimpleDateFormat gives you '+0900', so we need to
-		// add the colon ourselves
-		
-		return dateTimeString;
-		
+
+		return sdf.format(dateToFormat);
 	}
 	
 	public static String GetReadableDateTime(Date dateToFormat)
@@ -620,38 +495,15 @@ public class Utilities
 		return MetersToFeet((int) m);
 	}
 	
-	public static boolean IsValidEmailAddress(String email)
-	{
-		if (email == null || email.length() == 0)
-		{
-			return false;
-		}
-		
-		email = email.trim().toUpperCase();
-		if (email.matches("[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}"))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
 	public static boolean IsEmailSetup(Context ctx)
 	{
-		if (AppSettings.isAutoEmailEnabled()
-				&& AppSettings.getAutoEmailTarget().length() > 0
-				&& AppSettings.getSmtpServer().length() > 0
-				&& AppSettings.getSmtpPort().length() > 0
-				&& AppSettings.getSmtpUsername().length() > 0)
-		{
-			return true;
-		}
-		
-		return false;
-		
-	}
+        return AppSettings.isAutoEmailEnabled()
+                && AppSettings.getAutoEmailTarget().length() > 0
+                && AppSettings.getSmtpServer().length() > 0
+                && AppSettings.getSmtpPort().length() > 0
+                && AppSettings.getSmtpUsername().length() > 0;
+
+    }
 	
 	public static OAuthConsumer GetOSMAuthConsumer(Context ctx)
 	{
@@ -685,6 +537,7 @@ public class Utilities
 		}
 		catch (Exception e)
 		{
+            //Swallow the exception
 		}
 		
 		return consumer;
@@ -710,7 +563,7 @@ public class Utilities
 	
 	public static Intent GetOsmSettingsIntent(Context ctx)
 	{
-		Intent intentOsm = null;
+		Intent intentOsm;
 		
 		if (!IsOsmAuthorized(ctx))
 		{

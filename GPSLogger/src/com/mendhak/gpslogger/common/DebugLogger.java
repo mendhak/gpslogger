@@ -29,7 +29,6 @@ class DebugLogWriter implements Runnable
 		this.message = message;
 	}
 	
-	@Override
 	public void run()
 	{
 		
