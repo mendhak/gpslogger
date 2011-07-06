@@ -139,26 +139,38 @@ class Kml10FileLogger implements IFileLogger
 			return;
 		}
 
-		int offsetFromEnd = 37;
 
-		description = "<name>" + description + "</name></Point></Placemark></Document></kml>";
+        try
+        {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(kmlFile);
 
-		long startPosition = kmlFile.length() - offsetFromEnd;
-		try
-		{
-			RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
-			kmlLock = raf.getChannel().lock();
-			raf.seek(startPosition);
-			raf.write(description.getBytes());
-			kmlLock.release();
-			raf.close();
-		}
-		catch (Exception e)
-		{
-			Utilities.LogError("Kml10FileLogger.Annotate", e);
-			throw new Exception("Could not annotate KML file");
-		}
-		
+            NodeList placemarkList = doc.getElementsByTagName("Placemark");
+            Node lastPlacemark = placemarkList.item(placemarkList.getLength() - 1);
+
+            Node annotation = doc.createElement("name");
+            Node annotationText = doc.createTextNode("");
+            annotation.appendChild(annotationText);
+            annotation.getFirstChild().setNodeValue(description);
+
+            lastPlacemark.appendChild(annotation);
+
+            String newFileContents = Utilities.GetStringFromNode(doc);
+
+            RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
+            kmlLock = raf.getChannel().lock();
+            raf.write(newFileContents.getBytes());
+            kmlLock.release();
+            raf.close();
+
+        }
+        catch (Exception e)
+        {
+            Utilities.LogError("Kml10FileLogger.Annotate", e);
+    		throw new Exception("Could not annotate KML file");
+        }
 	}
 
 	
