@@ -9,6 +9,10 @@ import java.util.Date;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import android.location.Location;
+import org.w3c.dom.*;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 
 class Gpx10FileLogger implements IFileLogger
@@ -17,12 +21,14 @@ class Gpx10FileLogger implements IFileLogger
 	private File gpxFile = null;
 	private boolean useSatelliteTime = false;
 	private boolean addNewTrackSegment;
+    private int satelliteCount;
 	
-	Gpx10FileLogger(File gpxFile, boolean useSatelliteTime, boolean addNewTrackSegment)
+	Gpx10FileLogger(File gpxFile, boolean useSatelliteTime, boolean addNewTrackSegment, int satelliteCount)
 	{
 		this.gpxFile = gpxFile;
 		this.useSatelliteTime = useSatelliteTime;
 		this.addNewTrackSegment = addNewTrackSegment;
+        this.satelliteCount = satelliteCount;
 	}
 
 
@@ -54,54 +60,86 @@ class Gpx10FileLogger implements IFileLogger
 						+ "<gpx version=\"1.0\" creator=\"GPSLogger - http://gpslogger.mendhak.com/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">"
 						+ "<time>" + dateTimeString + "</time>" + "<bounds />" + "<trk></trk></gpx>";
 				initialOutput.write(initialXml.getBytes());
-				// initialOutput.write("\n".getBytes());
 				initialOutput.flush();
 				initialOutput.close();
 			}
 
-			int offsetFromEnd = (addNewTrackSegment) ? 12 : 21;
 
-			long startPosition = gpxFile.length() - offsetFromEnd;
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(gpxFile);
 
-			String trackPoint = GetTrackPointXml(loc, dateTimeString);
+            Node trkSegNode;
 
-			// Leaving this commented code in - may want to give user the choice
-			// to
-			// pick between WPT and TRK. Choice is good.
-			//
-			// String waypoint = "<wpt lat=\"" +
-			// String.valueOf(loc.getLatitude())
-			// + "\" lon=\"" + String.valueOf(loc.getLongitude()) + "\">"
-			// + "<time>" + dateTimeString + "</time>";
-			//
-			// if (loc.hasAltitude()) {
-			// waypoint = waypoint + "<ele>"
-			// + String.valueOf(loc.getAltitude()) + "</ele>";
-			// }
-			//
-			// if (loc.hasBearing()) {
-			// waypoint = waypoint + "<course>"
-			// + String.valueOf(loc.getBearing()) + "</course>";
-			// }
-			//
-			// if (loc.hasSpeed()) {
-			// waypoint = waypoint + "<speed>"
-			// + String.valueOf(loc.getSpeed()) + "</speed>";
-			// }
-			//
-			// waypoint = waypoint + "<src>" + loc.getProvider() + "</src>";
-			//
-			// if (satellites > 0) {
-			// waypoint = waypoint + "<sat>" + String.valueOf(satellites)
-			// + "</sat>";
-			// }
-			//
-			// waypoint = waypoint + "</wpt></gpx>";
+            NodeList trkSegNodeList = doc.getElementsByTagName("trkseg");
+
+            if(addNewTrackSegment || trkSegNodeList.getLength()==0)
+            {
+                NodeList trkNodeList = doc.getElementsByTagName("trk");
+                trkSegNode = doc.createElement("trkseg");
+                trkNodeList.item(0).appendChild(trkSegNode);
+            }
+            else
+            {
+                trkSegNode = trkSegNodeList.item(trkSegNodeList.getLength()-1);
+            }
+
+            Element trkptNode = doc.createElement("trkpt");
+
+            Attr latAttribute = doc.createAttribute("lat");
+            latAttribute.setValue(String.valueOf(loc.getLatitude()));
+            trkptNode.setAttributeNode(latAttribute);
+
+            Attr lonAttribute = doc.createAttribute("lon");
+            lonAttribute.setValue(String.valueOf(loc.getLongitude()));
+            trkptNode.setAttributeNode(lonAttribute);
+
+            if(loc.hasAltitude())
+            {
+                Node eleNode = doc.createElement("ele");
+                eleNode.appendChild(doc.createTextNode(String.valueOf(loc.getAltitude())));
+                trkptNode.appendChild(eleNode);
+            }
+
+            if(loc.hasBearing())
+            {
+                Node courseNode = doc.createElement("course");
+                courseNode.appendChild(doc.createTextNode(String.valueOf(loc.getBearing())));
+                trkptNode.appendChild(courseNode);
+            }
+
+            if(loc.hasSpeed())
+            {
+                Node speedNode = doc.createElement("speed");
+                speedNode.appendChild(doc.createTextNode(String.valueOf(loc.getSpeed())));
+                trkptNode.appendChild(speedNode);
+            }
+
+
+            Node srcNode = doc.createElement("src");
+            srcNode.appendChild(doc.createTextNode(loc.getProvider()));
+            trkptNode.appendChild(srcNode);
+
+            if(Session.getSatelliteCount() > 0)
+            {
+                Node satNode = doc.createElement("sat");
+                satNode.appendChild(doc.createTextNode(String.valueOf(satelliteCount)));
+                trkptNode.appendChild(satNode);
+            }
+
+
+            Node timeNode = doc.createElement("time");
+            timeNode.appendChild(doc.createTextNode(dateTimeString));
+            trkptNode.appendChild(timeNode);
+
+            trkSegNode.appendChild(trkptNode);
+
+            String newFileContents = Utilities.GetStringFromNode(doc);
 
 			RandomAccessFile raf = new RandomAccessFile(gpxFile, "rw");
 			gpxLock = raf.getChannel().lock();
-			raf.seek(startPosition);
-			raf.write(trackPoint.getBytes());
+			raf.write(newFileContents.getBytes());
 			gpxLock.release();
 			raf.close();
 
@@ -110,55 +148,9 @@ class Gpx10FileLogger implements IFileLogger
 		{
 			Utilities.LogError("Gpx10FileLogger.Write", e);
 			throw new Exception("Could not write to GPX file");
-//			Log.e("Main", callingClient.getString(R.string.could_not_write_to_file) + e.getMessage());
-//			callingClient.SetStatus(callingClient.getString(R.string.could_not_write_to_file)
-//					+ e.getMessage());
 		}
 
 		
-	}
-	
-	
-	private String GetTrackPointXml(Location loc, String dateTimeString)
-	{
-		String track = "";
-		if (Session.shouldAddNewTrackSegment())
-		{
-			track = track + "<trkseg>";
-		}
-
-		track = track + "<trkpt lat=\"" + String.valueOf(loc.getLatitude()) + "\" lon=\""
-				+ String.valueOf(loc.getLongitude()) + "\">";
-
-		if (loc.hasAltitude())
-		{
-			track = track + "<ele>" + String.valueOf(loc.getAltitude()) + "</ele>";
-		}
-
-		if (loc.hasBearing())
-		{
-			track = track + "<course>" + String.valueOf(loc.getBearing()) + "</course>";
-		}
-
-		if (loc.hasSpeed())
-		{
-			track = track + "<speed>" + String.valueOf(loc.getSpeed()) + "</speed>";
-		}
-
-		track = track + "<src>" + loc.getProvider() + "</src>";
-
-		if(Session.getSatelliteCount()>0)
-		{
-			track = track + "<sat>" + String.valueOf(Session.getSatelliteCount()) + "</sat>";
-		}
-
-		track = track + "<time>" + dateTimeString + "</time>";
-
-		track = track + "</trkpt>";
-
-		track = track + "</trkseg></trk></gpx>";
-
-		return track;
 	}
 
 

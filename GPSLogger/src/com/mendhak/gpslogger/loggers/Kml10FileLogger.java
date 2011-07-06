@@ -164,7 +164,6 @@ class Kml10FileLogger implements IFileLogger
             raf.write(newFileContents.getBytes());
             kmlLock.release();
             raf.close();
-
         }
         catch(Exception e)
         {
