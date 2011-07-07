@@ -18,6 +18,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 class Gpx10FileLogger implements IFileLogger
 {
 	private FileLock gpxLock;
+    private final static Object lock = new Object();
 	private File gpxFile = null;
 	private boolean useSatelliteTime = false;
 	private boolean addNewTrackSegment;
@@ -137,11 +138,12 @@ class Gpx10FileLogger implements IFileLogger
 
             String newFileContents = Utilities.GetStringFromNode(doc);
 
-			RandomAccessFile raf = new RandomAccessFile(gpxFile, "rw");
-			gpxLock = raf.getChannel().lock();
-			raf.write(newFileContents.getBytes());
-			gpxLock.release();
-			raf.close();
+            synchronized(lock)
+            {
+                RandomAccessFile raf = new RandomAccessFile(gpxFile, "rw");
+                raf.write(newFileContents.getBytes());
+                raf.close();
+            }
 
 		}
 		catch (Exception e)
@@ -160,28 +162,42 @@ class Gpx10FileLogger implements IFileLogger
 		{
 			return;
 		}
-		int offsetFromEnd = 29;
 
-		long startPosition = gpxFile.length() - offsetFromEnd;
+        try
+        {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(gpxFile);
 
-		description = "<name>" + description + "</name><desc>" + description
-				+ "</desc></trkpt></trkseg></trk></gpx>";
-		RandomAccessFile raf = null;
-		try
-		{
-			raf = new RandomAccessFile(gpxFile, "rw");
-			gpxLock = raf.getChannel().lock();
-			raf.seek(startPosition);
-			raf.write(description.getBytes());
-			gpxLock.release();
-			raf.close();
-		}
-		catch (Exception e)
-		{
-			Utilities.LogError("Gpx10FileLogger.Annotate", e);
-			throw new Exception("Could not annotate GPX file");
-		}
-		
+            NodeList trkptNodeList = doc.getElementsByTagName("trkpt");
+            Node lastTrkPt = trkptNodeList.item(trkptNodeList.getLength()-1);
+
+            Node nameNode = doc.createElement("name");
+            nameNode.appendChild(doc.createTextNode(description));
+            lastTrkPt.appendChild(nameNode);
+
+            Node descNode = doc.createElement("desc");
+            descNode.appendChild(doc.createTextNode(description));
+            lastTrkPt.appendChild(descNode);
+
+            String newFileContents = Utilities.GetStringFromNode(doc);
+
+
+            synchronized(lock)
+            {
+                RandomAccessFile raf = new RandomAccessFile(gpxFile, "rw");
+                raf.write(newFileContents.getBytes());
+                raf.close();
+            }
+
+        }
+        catch(Exception e)
+        {
+            Utilities.LogError("Gpx10FileLogger.Annotate", e);
+            throw new Exception("Could not annotate GPX file");
+        }
+
 	}
 
 	
