@@ -26,18 +26,18 @@
 		</TableRow>
 		<TableRow android:background="#333333" android:layout_margin="1dip">
 			<TextView android:textStyle="bold" android:text="@string/txt_latitude"
-				android:padding="3dip" />
+				android:padding="3dip" android:textSize="17sp" />
 			<TextView android:id="@+id/txtLatitude" android:gravity="left"
 				android:padding="3dip" android:textColor="#e8a317"
-				android:textStyle="bold" />
+				android:textStyle="bold" android:textSize="18sp" />
 		</TableRow>
 
 		<TableRow android:background="#333333" android:layout_margin="1dip">
 			<TextView android:textStyle="bold" android:text="@string/txt_longitude"
-				android:padding="3dip" />
+				android:padding="3dip" android:textSize="17sp" />
 			<TextView android:id="@+id/txtLongitude" android:gravity="left"
 				android:padding="3dip" android:textColor="#e8a317"
-				android:textStyle="bold" />
+				android:textStyle="bold" android:textSize="18sp" />
 		</TableRow>
 
 		<TableRow android:background="#333333" android:layout_margin="1dip">
