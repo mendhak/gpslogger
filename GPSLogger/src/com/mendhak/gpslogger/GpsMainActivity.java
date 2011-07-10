@@ -666,7 +666,13 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 	}
 
-	/**
+    public void OnStopLogging()
+    {
+        ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
+        buttonOnOff.setChecked(false);
+    }
+
+    /**
 	 * Sets the message in the top status label.
 	 * 
 	 * @param message
@@ -865,7 +871,12 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		SetStatus(message);
 	}
 
-	public Activity GetActivity()
+    public void OnFatalMessage(String message)
+    {
+        Utilities.MsgBox(getString(R.string.sorry), message, this);
+    }
+
+    public Activity GetActivity()
 	{
 		return this;
 	}

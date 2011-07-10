@@ -12,7 +12,13 @@ interface IGpsLoggerServiceClient
 	 * @param message
 	 */
 	public void OnStatusMessage(String message);
-	
+
+    /**
+     * Indicates that a fatal error has occurred, logging will stop.
+     * @param message
+     */
+    public void OnFatalMessage(String message);
+
 	/**
 	 * A new location fix has been obtained.
 	 * @param loc
@@ -29,8 +35,11 @@ interface IGpsLoggerServiceClient
 	 * Asking the calling activity form to clear itself.
 	 */
 	public void ClearForm();
-	
 
+    /**
+     * Asking the calling activity form to indicate that logging has stopped
+     */
+    public void OnStopLogging();
 	
 	/**
 	 * Returns the activity

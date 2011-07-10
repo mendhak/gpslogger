@@ -401,6 +401,7 @@ public class GpsLoggingService extends Service
 
 		RemoveNotification();
 		StopGpsManager();
+        StopMainActivity();
 	}
 
 	/**
@@ -528,6 +529,8 @@ public class GpsLoggingService extends Service
 			Utilities.LogInfo("No provider available");
 			Session.setUsingGps(false);
 			SetStatus(R.string.gpsprovider_unavailable);
+            SetFatalMessage(R.string.gpsprovider_unavailable);
+            StopLogging();
 			return;
 		}
 
@@ -610,6 +613,18 @@ public class GpsLoggingService extends Service
 		}
 	}
 
+    /**
+     * Gives an error message to the main service client to display
+     * @param messageId
+     */
+    void SetFatalMessage(int messageId)
+    {
+        if(IsMainFormVisible())
+        {
+            mainServiceClient.OnFatalMessage(getString(messageId));
+        }
+    }
+
 	/**
 	 * Gets string from given resource ID, passes to SetStatus(String)
 	 * 
@@ -620,6 +635,18 @@ public class GpsLoggingService extends Service
 		String s = getString(stringId);
 		SetStatus(s);
 	}
+
+    /**
+     * Notifies main form that logging has stopped
+     */
+    void StopMainActivity()
+    {
+        if(IsMainFormVisible())
+        {
+            mainServiceClient.OnStopLogging();
+        }
+    }
+
 
 	/**
 	 * Stops location manager, then starts it.

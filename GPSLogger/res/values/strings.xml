@@ -69,7 +69,7 @@
     <string name="sent_location">Location sent to server.</string>
     <string name="cleared">Cleared</string>
     <string name="cleared_map">The map has been cleared.</string>
-    <string name="gpsprovider_unavailable">No GPS provider available.</string>
+    <string name="gpsprovider_unavailable">No GPS provider available. Please check your location settings and enable a location provider.</string>
     <string name="started">Started</string>
     <string name="providername_using">&#160;&#160;&#160;&#160;(Using %s)</string>
     <string name="providername_gps">GPS satellites</string>
