@@ -681,6 +681,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	{
 		TextView tvStatus = (TextView) findViewById(R.id.textStatus);
 		tvStatus.setText(message);
+        Utilities.LogInfo(message);
 	}
 
 	/**
