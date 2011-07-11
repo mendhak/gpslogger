@@ -14,14 +14,9 @@
 	<TableLayout android:id="@+id/TableGPS"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:stretchColumns="1" android:background="#000000">
-		<TableRow>
-			<TextView></TextView>
-			<TextView></TextView>
-		</TableRow>
-
 		<TableRow android:background="#333333" android:layout_margin="1dip">
 			<TextView android:id="@+id/txtDateTimeAndProvider"
-				android:gravity="left" android:textStyle="bold" android:padding="3dip"
+				android:gravity="left" android:textStyle="bold" android:padding="2dip"
 				android:layout_span="2" />
 		</TableRow>
 		<TableRow android:background="#333333" android:layout_margin="1dip">
