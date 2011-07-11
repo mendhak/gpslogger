@@ -259,5 +259,11 @@
     
     <string name="debuglog_title">Write to debug file</string>
     <string name="debuglog_summary">Writes debug messages to a file on the SD card. Warning: The file grows very fast.</string>
-    
+
+    <string name="pref_logging_summary">Time, distance, file creation</string>
+    <string name="pref_general_title">General Options</string>
+    <string name="pref_general_summary">Startup and display options</string>
+    <string name="pref_emailupload_title">Email/Upload</string>
+    <string name="pref_emailupload_summary">Email, share and upload options</string>
+
 </resources>

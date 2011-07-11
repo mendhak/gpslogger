@@ -1,69 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-	android:key="gpslogger_preferences">
-	<PreferenceCategory android:title="@string/pref_logging_title">
+                  android:key="gpslogger_preferences">
 
-		<CheckBoxPreference android:key="log_gpx"
-			android:title="@string/log_gpx_title" android:summary="@string/log_gpx_summary" />
+    <CheckBoxPreference android:key="log_gpx"
+                        android:title="@string/log_gpx_title" android:summary="@string/log_gpx_summary"/>
 
-		<CheckBoxPreference android:key="log_kml"
-			android:summary="@string/log_kml_summary" android:title="@string/log_kml_title" />
+    <CheckBoxPreference android:key="log_kml"
+                        android:summary="@string/log_kml_summary" android:title="@string/log_kml_title"/>
 
-		<CheckBoxPreference android:key="satellite_time"
-			android:summary="@string/satellite_time_summary" android:title="@string/satellite_time_title"
-			android:defaultValue="false" />
-		<ListPreference android:key="new_file_creation"
-			android:title="@string/new_file_creation_title" android:summary="@string/new_file_creation_summary"
-			android:entries="@array/filecreation_entries" android:defaultValue="onceaday"
-			android:entryValues="@array/filecreation_values" />
-	</PreferenceCategory>
-	<PreferenceCategory android:title="@string/pref_performance_title">
-		<CheckBoxPreference android:key="prefer_celltower"
-			android:summary="@string/prefer_celltower_summary" android:title="@string/prefer_celltower_title" />
+    <PreferenceScreen android:title="@string/pref_logging_title"
+                      android:summary="@string/pref_logging_summary">
+        <PreferenceCategory android:title="@string/pref_logging_title">
 
-		<EditTextPreference android:key="time_before_logging"
-			android:title="@string/time_before_logging_title" android:summary="@string/time_before_logging_summary"
-			android:dialogTitle="@string/time_before_logging_dialog_title"
-			android:numeric="integer" android:maxLength="4"
-			android:hint="@string/time_before_logging_hint" />
-		<EditTextPreference android:key="distance_before_logging"
-			android:title="@string/distance_before_logging_title"
-			android:summary="@string/distance_before_logging_summary"
-			android:dialogTitle="@string/settings_distance_in_meters"
-			android:numeric="integer" android:maxLength="4"
-			android:hint="@string/settings_enter_meters" />
 
-	</PreferenceCategory>
-	<PreferenceCategory android:title="@string/pref_extras_title">
+            <CheckBoxPreference android:key="satellite_time"
+                                android:summary="@string/satellite_time_summary"
+                                android:title="@string/satellite_time_title"
+                                android:defaultValue="false"/>
+            <ListPreference android:key="new_file_creation"
+                            android:title="@string/new_file_creation_title"
+                            android:summary="@string/new_file_creation_summary"
+                            android:entries="@array/filecreation_entries" android:defaultValue="onceaday"
+                            android:entryValues="@array/filecreation_values"/>
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/pref_performance_title">
+            <CheckBoxPreference android:key="prefer_celltower"
+                                android:summary="@string/prefer_celltower_summary"
+                                android:title="@string/prefer_celltower_title"/>
 
-		<CheckBoxPreference android:key="show_notification"
-			android:summary="@string/show_notification_summary" android:title="@string/show_notification_title"
-			android:defaultValue="true" />
-		<Preference android:title="@string/autoemail_title"
-			android:summary="@string/autoemail_summary" android:key="autoemail_setup">
-			<intent android:action="com.mendhak.gpslogger.AUTOEMAIL_SETUP" />
-		</Preference>
+            <EditTextPreference android:key="time_before_logging"
+                                android:title="@string/time_before_logging_title"
+                                android:summary="@string/time_before_logging_summary"
+                                android:dialogTitle="@string/time_before_logging_dialog_title"
+                                android:numeric="integer" android:maxLength="4"
+                                android:hint="@string/time_before_logging_hint"/>
+            <EditTextPreference android:key="distance_before_logging"
+                                android:title="@string/distance_before_logging_title"
+                                android:summary="@string/distance_before_logging_summary"
+                                android:dialogTitle="@string/settings_distance_in_meters"
+                                android:numeric="integer" android:maxLength="4"
+                                android:hint="@string/settings_enter_meters"/>
 
-		<Preference android:title="@string/osm_setup_title"
-			android:summary="@string/osm_setup_summary" android:key="osm_setup">
-			<intent android:action="com.mendhak.gpslogger.OSM_SETUP" /> 
-		</Preference> 
-		<CheckBoxPreference android:title="@string/startonbootup_title"
-			android:summary="@string/startonbootup_summary" android:key="startonbootup" />
-		<CheckBoxPreference android:title="@string/useimperial_title"
-			android:summary="@string/useimperial_summary" android:key="useImperial" />
-		<Preference android:title="@string/enabledisablegps_title"
-			android:summary="@string/enabledisablegps_summary" android:key="enableDisableGps"
-			android:defaultValue="false" />
+        </PreferenceCategory>
+    </PreferenceScreen>
+    <PreferenceScreen android:title="@string/pref_general_title" android:summary="@string/pref_general_summary">
 
-	 	<ListPreference android:key="locale_override"
-			android:title="@string/language" android:summary="@string/language_summary"
-			android:entries="@array/language_choices" android:defaultValue=""
-			android:entryValues="@array/language_values" /> 
+            <CheckBoxPreference android:key="show_notification"
+                                android:summary="@string/show_notification_summary"
+                                android:title="@string/show_notification_title"
+                                android:defaultValue="true"/>
+            <CheckBoxPreference android:title="@string/startonbootup_title"
+                                android:summary="@string/startonbootup_summary" android:key="startonbootup"/>
+            <CheckBoxPreference android:title="@string/useimperial_title"
+                                android:summary="@string/useimperial_summary" android:key="useImperial"/>
+            <Preference android:title="@string/enabledisablegps_title"
+                        android:summary="@string/enabledisablegps_summary" android:key="enableDisableGps"
+                        android:defaultValue="false"/>
 
-		<CheckBoxPreference android:title="@string/debuglog_title" android:summary="@string/debuglog_summary" 
-		android:key="debugtofile" android:defaultValue="false" />
+            <ListPreference android:key="locale_override"
+                            android:title="@string/language" android:summary="@string/language_summary"
+                            android:entries="@array/language_choices" android:defaultValue=""
+                            android:entryValues="@array/language_values"/>
 
-	</PreferenceCategory>
+            <CheckBoxPreference android:title="@string/debuglog_title" android:summary="@string/debuglog_summary"
+                                android:key="debugtofile" android:defaultValue="false"/>
+
+    </PreferenceScreen>
+    <PreferenceScreen android:title="@string/pref_emailupload_title" android:summary="@string/pref_emailupload_summary">
+
+        <Preference android:title="@string/autoemail_title"
+                    android:summary="@string/autoemail_summary" android:key="autoemail_setup">
+            <intent android:action="com.mendhak.gpslogger.AUTOEMAIL_SETUP"/>
+        </Preference>
+
+        <Preference android:title="@string/osm_setup_title"
+                    android:summary="@string/osm_setup_summary" android:key="osm_setup">
+            <intent android:action="com.mendhak.gpslogger.OSM_SETUP"/>
+        </Preference>
+
+    </PreferenceScreen>
+
 
 </PreferenceScreen>
