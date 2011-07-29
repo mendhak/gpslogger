@@ -193,25 +193,15 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	 */
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 	{
-		GetPreferences();
-
 		if (isChecked)
 		{
-//			Intent serviceIntent = new Intent(this, GpsLoggingService.class);
-//			serviceIntent.putExtra("buttonPressed", true);
-//			// Start the service in case it isn't already running
-//			startService(serviceIntent);
-				
+            GetPreferences();
 			
 			loggingService.StartLogging();
 		}
 		else
 		{
-//			Intent serviceIntent = new Intent(this, GpsLoggingService.class);
-//			serviceIntent.putExtra("buttonPressed", false);
-//			// Start the service in case it isn't already running
-//			startService(serviceIntent);
-			
+
 			loggingService.StopLogging();
 		}
 	}
