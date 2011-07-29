@@ -105,6 +105,12 @@ class Gpx10FileLogger implements IFileLogger
                 trkptNode.appendChild(eleNode);
             }
 
+            Node timeNode = doc.createElement("time");
+            timeNode.appendChild(doc.createTextNode(dateTimeString));
+            trkptNode.appendChild(timeNode);
+
+            trkSegNode.appendChild(trkptNode);
+
             if(loc.hasBearing())
             {
                 Node courseNode = doc.createElement("course");
@@ -132,11 +138,7 @@ class Gpx10FileLogger implements IFileLogger
             }
 
 
-            Node timeNode = doc.createElement("time");
-            timeNode.appendChild(doc.createTextNode(dateTimeString));
-            trkptNode.appendChild(timeNode);
 
-            trkSegNode.appendChild(trkptNode);
 
             String newFileContents = Utilities.GetStringFromNode(doc);
 
