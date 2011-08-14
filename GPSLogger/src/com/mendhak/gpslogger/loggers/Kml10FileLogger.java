@@ -18,7 +18,7 @@ import android.location.Location;
 
 class Kml10FileLogger implements IFileLogger
 {
-
+    private final static Object lock = new Object();
     private boolean useSatelliteTime;
     private File kmlFile;
     private FileLock kmlLock;
@@ -66,7 +66,6 @@ class Kml10FileLogger implements IFileLogger
             }
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(kmlFile);
 
@@ -86,8 +85,9 @@ class Kml10FileLogger implements IFileLogger
                 String coordText = coordinates.getFirstChild().getNodeValue();
                 coordText = coordText + "\n" + String.valueOf(loc.getLongitude()) + ","
                         + String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getAltitude());
-                coordinates.getFirstChild().setNodeValue(coordText);
 
+                coordinates.removeChild(coordinates.getFirstChild());
+                coordinates.appendChild(doc.createTextNode(coordText));
             }
 
             Node documentNode = doc.getElementsByTagName("Document").item(0);
@@ -103,11 +103,9 @@ class Kml10FileLogger implements IFileLogger
             Node newPoint = doc.createElement("Point");
 
             Node newCoords = doc.createElement("coordinates");
-            Node newCoordTextNode = doc.createTextNode("");
-            newCoords.appendChild(newCoordTextNode);
+            newCoords.appendChild(doc.createTextNode(String.valueOf(loc.getLongitude()) + ","
+                    + String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getAltitude())));
 
-            newCoords.getFirstChild().setNodeValue(String.valueOf(loc.getLongitude()) + ","
-                    + String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getAltitude()));
             newPoint.appendChild(newCoords);
 
             newPlacemark.appendChild(newPoint);
@@ -116,11 +114,12 @@ class Kml10FileLogger implements IFileLogger
 
             String newFileContents = Utilities.GetStringFromNode(doc);
 
-            RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
-            kmlLock = raf.getChannel().lock();
-            raf.write(newFileContents.getBytes());
-            kmlLock.release();
-            raf.close();
+            synchronized(lock)
+            {
+                FileOutputStream fos = new FileOutputStream(kmlFile, false);
+                fos.write(newFileContents.getBytes());
+                fos.close();
+            }
 
         }
         catch(Exception e)
@@ -143,7 +142,6 @@ class Kml10FileLogger implements IFileLogger
         try
         {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(kmlFile);
 
@@ -151,19 +149,20 @@ class Kml10FileLogger implements IFileLogger
             Node lastPlacemark = placemarkList.item(placemarkList.getLength() - 1);
 
             Node annotation = doc.createElement("name");
-            Node annotationText = doc.createTextNode("");
-            annotation.appendChild(annotationText);
-            annotation.getFirstChild().setNodeValue(description);
+            annotation.appendChild(doc.createTextNode(description));
 
             lastPlacemark.appendChild(annotation);
 
             String newFileContents = Utilities.GetStringFromNode(doc);
 
-            RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
-            kmlLock = raf.getChannel().lock();
-            raf.write(newFileContents.getBytes());
-            kmlLock.release();
-            raf.close();
+            synchronized(lock)
+            {
+                FileOutputStream fos = new FileOutputStream(kmlFile, false);
+                fos.write(newFileContents.getBytes());
+                fos.close();
+            }
+
+
         }
         catch(Exception e)
         {

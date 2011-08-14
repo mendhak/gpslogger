@@ -69,7 +69,6 @@ class Gpx10FileLogger implements IFileLogger
 
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(gpxFile);
 
@@ -144,9 +143,9 @@ class Gpx10FileLogger implements IFileLogger
 
             synchronized(lock)
             {
-                RandomAccessFile raf = new RandomAccessFile(gpxFile, "rw");
-                raf.write(newFileContents.getBytes());
-                raf.close();
+                FileOutputStream fos = new FileOutputStream(gpxFile, false);
+                fos.write(newFileContents.getBytes());
+                fos.close();
             }
 
 		}
@@ -170,7 +169,6 @@ class Gpx10FileLogger implements IFileLogger
         try
         {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(gpxFile);
 
@@ -190,9 +188,9 @@ class Gpx10FileLogger implements IFileLogger
 
             synchronized(lock)
             {
-                RandomAccessFile raf = new RandomAccessFile(gpxFile, "rw");
-                raf.write(newFileContents.getBytes());
-                raf.close();
+                FileOutputStream fos = new FileOutputStream(gpxFile, false);
+                fos.write(newFileContents.getBytes());
+                fos.close();
             }
 
         }
