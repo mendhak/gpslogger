@@ -218,7 +218,7 @@
     
     <string name="fix_obtained">Fix obtained</string>
     <string name="started_waiting">GPS started, waiting for fix</string>
-    <string name="gps_stopped">GPS stopped</string>
+    <string name="gps_stopped">GPS paused</string>
     <string name="stopped">Stopped</string>
     
     <string name="language">Language</string>
