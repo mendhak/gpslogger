@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GPSLogger</string>
+    <string name="settings_screen_name">Настройки GPSLogger</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Отмена</string>
+    <string name="could_not_write_to_file">Файл не доступен для записи</string>
+    <string name="description_added">Описание добавлено</string>
+    <string name="not_yet">Пока нет</string>
+    <string name="cant_add_description_until_next_point">Вы не можете добавить описание пока не будет получена следующая
+        точка положения
+    </string>
+    <string name="add_description">Добавить описание</string>
+    <string name="letters_numbers">Используйте только буквы и цифры</string>
+
+    <!-- menu strings -->
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_share_latest">Опубликовать последнюю</string>
+    <string name="menu_send_annotated">Опубликовать точки</string>
+    <string name="menu_clear_map">Очистить карту</string>
+    <string name="menu_view_in_browser">Показать карту</string>
+    <string name="menu_emailnow">Отправить письмом</string>
+    <string name="menu_annotate">Описание</string>
+    <string name="menu_share">Опубликовать</string>
+    <string name="menu_exit">Выход</string>
+    <string name="menu_email_now">Опубликовать письмом</string>
+
+    <!-- main form labels -->
+    <string name="txt_latitude">Широта:</string>
+    <string name="txt_longitude">Долгота:</string>
+    <string name="txt_altitude">Высота:</string>
+    <string name="txt_speed">Скорость:</string>
+    <string name="txt_direction">Направление:</string>
+    <string name="txt_satellites">Спутников:</string>
+    <string name="txt_accuracy">Точность:</string>
+    <string name="btn_start_logging">Начать запись лога</string>
+    <string name="btn_stop_logging">Остановить запись лога</string>
+
+    <string name="button_click_error">Ошабка:</string>
+    <string name="gpslogger_still_running">GPSLogger запущен.</string>
+    <string name="toast_gpslogger_stillrunning">GPSLogger запущен. Вы можете выйти из приложения через меню.</string>
+    <string name="summary_loggingto">Формат лога:</string>
+    <string name="summary_loggingto_screen">только экран</string>
+    <string name="summary_loggingto_both">GPX и KML</string>
+    <string name="summary_freq_every">Частота:</string>
+    <string name="summary_freq_max">максимум</string>
+    <string name="summary_dist">Дистанция:</string>
+    <string name="summary_dist_regardless">максимум</string>
+    <string name="summary_current_filename">Файл лога:</string>
+    <string name="summary_current_filename_format">%s (в папке GPSLogger)</string>
+    <string name="summary_autoemail">Писем:</string>
+
+
+    <string name="sharing">Опубликовать</string>
+    <string name="sharing_pro">Вы можете опубликовать трек и отправить его письмом в Pro версии GPS Logger.</string>
+    <string name="sharing_location_only">Только координаты</string>
+    <string name="sharing_pick_file">Выберите файл</string>
+    <string name="sharing_mylocation">Мои координаты</string>
+    <string name="sharing_latlong_text" formatted="false">Шир: %s, Дол: %s</string>
+    <string name="sharing_via">Опубликовать через</string>
+
+    <!-- general -->
+    <string name="foot">&#160;фут</string>
+    <string name="feet">&#160;футы</string>
+    <string name="meter">&#160;метр</string>
+    <string name="meters">&#160;метры</string>
+    <string name="error">Ошибка</string>
+    <string name="error_connection">Ошибка соединения. Пожайлуйста, проверьте настройки телефона.</string>
+    <string name="sent">Отправлено</string>
+    <string name="sent_server">Точки отправлены на сервер.</string>
+    <string name="sent_location">Координаты отправлены на сервер.</string>
+    <string name="cleared">Очищено</string>
+    <string name="cleared_map">Карта очищена.</string>
+    <string name="gpsprovider_unavailable">Нет доступного источника GPS данных. Пожалуйста, проверьте настройки.
+    </string>
+    <string name="started">Начато</string>
+    <string name="providername_using">&#160;&#160;&#160;&#160;(Используется %s)</string>
+    <string name="providername_gps">спутники GPS</string>
+    <string name="providername_celltower">сотовые вышки</string>
+    <string name="not_applicable">неопределено</string>
+    <string name="meters_per_second">&#160;м/с</string>
+    <string name="feet_per_second">&#160;футов/с</string>
+    <string name="unknown_direction">неизвестно</string>
+    <string name="deleted">Удалено</string>
+    <string name="point_deleted">Точка удалена</string>
+    <string name="sorry">Извините</string>
+    <string name="success">Успешно</string>
+
+
+    <string name="direction_roughly">Приблизительно %s</string>
+    <string name="direction_north">Север</string>
+    <string name="direction_northnortheast">Севернее северо-востока</string>
+    <string name="direction_northeast">Северо-восток</string>
+    <string name="direction_eastnortheast">Восточнее северо-востока</string>
+    <string name="direction_east">Восток</string>
+    <string name="direction_eastsoutheast">Восточнее юго-востока</string>
+    <string name="direction_southeast">Юго-восток</string>
+    <string name="direction_southsoutheast">Южнее юго-востока</string>
+    <string name="direction_south">Юг</string>
+    <string name="direction_southsouthwest">Южнее юго-запада</string>
+    <string name="direction_southwest">Юго-запад</string>
+    <string name="direction_westsouthwest">Западнее юго-запада</string>
+    <string name="direction_west">Запад</string>
+    <string name="direction_westnorthwest">Западнее северо-запада</string>
+    <string name="direction_northwest">Северо-запад</string>
+    <string name="direction_northnorthwest">Севернее северо-запада</string>
+
+    <string name="time_onesecond">1 секунда</string>
+    <string name="time_halfminute">30 секунд</string>
+    <string name="time_oneminute">1 минута</string>
+    <string name="time_onehour">1 час</string>
+    <string name="time_quarterhour">15 минут</string>
+    <string name="time_halfhour">30 минут</string>
+    <string name="time_oneandhalfhours">90 минут</string>
+    <string name="time_twoandhalfhours">150 минут</string>
+    <string name="time_hms_format" formatted="false">%s:%s:%s</string>
+    <string name="accuracy_within" formatted="false">в интервале %s %s</string>
+    <string name="error_displaying">Ошибка отображения координат: %s</string>
+    <string name="degree_symbol">&#176;</string>
+
+
+    <!-- Settings activity -->
+    <string name="settings_in_pro_version">Доступно в цGPSLogger Pro</string>
+    <string name="settings_distance_in_feet">Дистанция в футах</string>
+    <string name="settings_enter_feet">Введите число футов (max 9999)</string>
+    <string name="settings_distance_in_meters">Дистанция в метрах</string>
+    <string name="settings_enter_meters">Введите число метров (max 9999)</string>
+    <string name="settings_converting_title">Конвертирую...</string>
+    <string name="settings_converting_description">Конвертирую единицы минимальной дистанции. Значения больше 9999 будут
+        сброшены до 9999. Экран настроек будет перезагружен.
+    </string>
+
+    <!-- Settings -->
+    <string name="pref_logging_title">Настройки записи лога</string>
+    <string name="log_gpx_title">Писать лог в GPX</string>
+    <string name="log_gpx_summary">Создается GPX файл в GPSLogger папке на SD карте.</string>
+    <string name="log_kml_title">Писать лог в KML</string>
+    <string name="log_kml_summary">Создается KML файл в GPSLogger папке на SD карте.</string>
+    <string name="satellite_time_title">Использовать время со спутников</string>
+    <string name="new_file_creation_title">New file creation</string>
+    <string name="satellite_time_summary">Использовать время, полученно от спутников вместо времени телефона. Время со
+        спутников более точное.
+    </string>
+    <string name="new_file_creation_summary">Создвать файл лога один раз в день или каждый раз при старте записи лога.
+    </string>
+    <string name="new_file_creation_onceaday">Один раз в день</string>
+    <string name="new_file_creation_everystart">При старте записи лога</string>
+
+    <string name="pref_performance_title">Настройки производительности</string>
+    <string name="prefer_celltower_title">Предпочитать сотовые вышки</string>
+    <string name="prefer_celltower_summary">Использовать данные о положении с сотовых вышек. Менее точно, но экономит
+        батарею.
+    </string>
+    <string name="time_before_logging_title">Период логирования точки</string>
+    <string name="time_before_logging_summary">Используйте 0 для минимально возможного периода логирования. Реже - лучше
+        для батареи.
+    </string>
+    <string name="time_before_logging_dialog_title">Время в секундах</string>
+    <string name="time_before_logging_hint">Введите число секунд (max 9999)</string>
+    <string name="distance_before_logging_title">Дистанция логирования точки</string>
+    <string name="distance_before_logging_summary">Используйте 0 для минимально возможной дистанции логирования. Больше
+        - лучше для батареи.
+    </string>
+
+    <string name="pref_extras_title">Дополнительно</string>
+    <string name="useimperial_title">Имперская система мер</string>
+    <string name="useimperial_summary">Использовать футы, мили, пинты.</string>
+    <string name="show_notification_title">Показывать уведомления</string>
+    <string name="show_notification_summary">Отображать значок в панели уведомлений.</string>
+
+
+    <string name="enabledisablegps_title">Вкл/Выкл GPS</string>
+    <string name="enabledisablegps_summary">Перейти в настройки GPS телефона.</string>
+
+    <string name="startonbootup_title">Автозапуск</string>
+    <string name="startonbootup_summary">Запускать приложение и запись лога при старте операционной системы</string>
+
+    <string name="autoemail_title">Настройки Email</string>
+    <string name="autoemail_summary">Автоматически отправлять лог файл письмом на адрес по Вашему выбору</string>
+    <string name="autoemail_btn_register">Сохранить</string>
+
+
+    <string name="autoemail_registering">Регистриую...</string>
+    <string name="please_wait">Пожалуйста, подождите.</string>
+    <string name="autoemail_invalid_title">Неправильный email адрес.</string>
+    <string name="autoemail_invalid_summary">Пожалуйста, укажите верный email адрес.</string>
+    <string name="autoemail_success">Email сохранен.</string>
+    <string name="autoemail_autosend">Разрешить автооптравку</string>
+    <string name="autoemail_autosend_summary">Разрешает автоматическую отправку лога письмом на выбранный email.
+    </string>
+    <string name="autoemail_frequency">Как часто?</string>
+    <string name="autoemail_frequency_summary">Частота отправки лога на email в день</string>
+    <string name="autoemail_sendto">Email</string>
+    <string name="autoemail_frequency_format">Через %d час(а)</string>
+    <string name="autoemail_target">Email</string>
+    <string name="autoemail_target_summary">Куда отправлять email с логом</string>
+    <string name="autoemail_sending">Отправлять email</string>
+    <string name="autoemail_frequency_whenistop">Когда я останавливаю логирование</string>
+    <string name="autoemail_frequency_24">Каждые 24 часа</string>
+    <string name="autoemail_frequency_12">Каждые 12 часов</string>
+    <string name="autoemail_frequency_8">Каждые 8 часов</string>
+    <string name="autoemail_frequency_6">Каждые 6 часов</string>
+    <string name="autoemail_frequency_5">Каждые 5 часов</string>
+    <string name="autoemail_frequency_4">Каждые 4 часа</string>
+    <string name="autoemail_frequency_3">Каждые 3 часа</string>
+    <string name="autoemail_frequency_2">Каждые 2 часа</string>
+    <string name="autoemail_frequency_1">Каждый час</string>
+    <string name="autoemail_frequency_05">Каждые 30 минут</string>
+    <string name="autoemail_frequency_008">Каждые 5 минут</string>
+    <string name="autoemail_smtp_category">Настройки Email</string>
+    <string name="autoemail_username">Имя пользователя</string>
+    <string name="autoemail_username_summary">Например, user@domen.com</string>
+    <string name="autoemail_password">Пароль</string>
+    <string name="autoemail_password_summary">Пароль для доступа к почте</string>
+    <string name="autoemail_port">Порт</string>
+    <string name="autoemail_port_summary">SMTP порт</string>
+    <string name="autoemail_ssl">Использовать SSL?</string>
+    <string name="autoemail_ssl_summary">Попробуйте изменить, при ошибке подключения</string>
+    <string name="autoemail_server">SMTP сервер</string>
+    <string name="autoemail_server_summary">Например smtp.domen.com</string>
+    <string name="autoemail_choosepreset">Почтовый сервис</string>
+    <string name="autoemail_choosepreset_summary">Выберите почтовый сервис из доступных или введите настройки</string>
+    <string name="autoemail_smtp_testemail">Тестовый email</string>
+    <string name="autoemail_test">Отправить тестовый email?</string>
+    <string name="autoemail_sendingtest">Отправляю тестовый email</string>
+    <string name="autoemail_testresult_title">Результат</string>
+    <string name="autoemail_testresult_success">Email отправлен</string>
+    <string name="autoemail_testresult_fail">Email не отправлен. Пожауйста, проверьте настройки соединения</string>
+    <string name="autoemail_invalid_form">Неверные значения</string>
+    <string name="autoemail_invalid_form_message">Пожалуйста, убедитесь, что все поля заполнены верно</string>
+
+    <string name="fix_obtained">Координаты получены</string>
+    <string name="started_waiting">GPS запущен, ожидаем координаты</string>
+    <string name="gps_stopped">GPS приостановлен</string>
+    <string name="stopped">Остановлено</string>
+
+    <string name="language">Язык</string>
+    <string name="language_summary">Вам придется перезапустить приложение</string>
+
+    <string name="osm_setup_title">OpenStreetMap</string>
+    <string name="osm_setup_summary">Добавляйте теги, описания GPS трекам</string>
+    <string name="osm_preferences_title">Настройки OpenStreetMap</string>
+
+
+    <string name="osm_authorization">Авторизация</string>
+    <string name="osm_lbl_authorize">Авторизовать приложение</string>
+    <string name="osm_lbl_authorize_description">Вам нужно разрешить приложению GPSLogger загружать треки под Вашим
+        аккаунтом на OpenStreetMap. После этого Вы сможете добавлять теги, описания и т.п.
+    </string>
+
+
+    <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
+    <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
+    <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
+    <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
+
+    <string name="osm_upload">OpenStreetMap</string>
+    <string name="osm_uploading">Загружаю на OpenStreetMap</string>
+    <string name="osm_resetauth">Убрать информацию об авторизации</string>
+    <string name="osm_resetauth_summary">Удалить с телефона информацицю об авторизации приложения на OSM.</string>
+    <string name="osm_auth_error">Ошибка подключения к OpenStreetMap. Проверьте наличие интернет соединения.</string>
+
+    <string name="osm_visibility">Видимость</string>
+    <string name="osm_visibility_summary">Открыть доступ к Вашим GPS трекам другим пользователям</string>
+
+    <string name="osm_description">Описание</string>
+    <string name="osm_description_summary">Описание трека</string>
+    <string name="osm_tags">Тэги</string>
+    <string name="osm_tags_summary">Тэги трека</string>
+
+    <string name="no_files_found">Файлов для публикации не обнаружено.</string>
+    <string name="osm_pick_file">Выберите файл</string>
+
+    <string name="debuglog_title">Писать файл с отладочной информацией</string>
+    <string name="debuglog_summary">Писать отладочную информацию в файл на SD card. Предупреждение: размер файла
+        увеличивается очень быстро.
+    </string>
+
+    <string name="pref_logging_summary">Период/дистанция логирования, создание файлов</string>
+    <string name="pref_general_title">Основные настройки</string>
+    <string name="pref_general_summary">Автозапуск и настройки отображения</string>
+    <string name="pref_emailupload_title">Email и публикация</string>
+    <string name="pref_emailupload_summary">Настройки email и публикации</string>
+
+</resources>
