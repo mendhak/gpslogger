@@ -38,10 +38,10 @@
 </string-array>
 
 <string-array name="autoemail_presets">
-	<item>Google Mail</item>
-	<item>Windows Live Mail</item>
-	<item>Yahoo Mail</item>
-	<item>Manual</item>
+	<item>@string/emailprovider_google</item>
+	<item>@string/emailprovider_msn</item>
+	<item>@string/emailprovider_yahoo</item>
+	<item>@string/emailprovider_manual</item>
 </string-array>
 
 <string-array name="autoemail_presetvalues">

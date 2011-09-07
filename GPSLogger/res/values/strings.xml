@@ -266,4 +266,9 @@
     <string name="pref_emailupload_title">Email and Upload</string>
     <string name="pref_emailupload_summary">Email, share and upload options</string>
 
+    <string name="emailprovider_google">Google Mail</string>
+    <string name="emailprovider_yahoo">Yahoo! Mail</string>
+    <string name="emailprovider_msn">Windows Live Mail</string>
+    <string name="emailprovider_manual">Manual</string>
+
 </resources>
