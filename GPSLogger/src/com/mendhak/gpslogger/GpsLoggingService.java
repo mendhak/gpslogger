@@ -722,6 +722,8 @@ public class GpsLoggingService extends Service
 	{
         Utilities.LogDebug("GpsLoggingService.WriteToFile");
 		List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers();
+        Session.setAddNewTrackSegment(false);
+
 		for(IFileLogger logger : loggers)
 		{
 			try
@@ -734,6 +736,8 @@ public class GpsLoggingService extends Service
 				SetStatus(R.string.could_not_write_to_file);
 			}
 		}
+
+
 		
 	}
 

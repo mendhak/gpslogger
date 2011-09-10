@@ -3,6 +3,8 @@ package com.mendhak.gpslogger.loggers;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import android.os.Build;
 import android.os.Environment;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
@@ -23,14 +25,18 @@ public class FileLoggerFactory
 		{
 			File gpxFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".gpx");
 			loggers.add(new Gpx10FileLogger(gpxFile, AppSettings.shouldUseSatelliteTime(), Session.shouldAddNewTrackSegment(), Session.getSatelliteCount()));
-			Session.setAddNewTrackSegment(false);
 		}
 		
-		if(AppSettings.shouldLogToKml())
-		{
-			File kmlFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".kml");
-			loggers.add(new Kml10FileLogger(kmlFile, AppSettings.shouldUseSatelliteTime()));
-		}
+        if(AppSettings.shouldLogToKml() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO)
+        {
+            File kmlFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".kml");
+            loggers.add(new Kml22FileLogger(kmlFile, AppSettings.shouldUseSatelliteTime(), Session.shouldAddNewTrackSegment()));
+        }
+        else if(AppSettings.shouldLogToKml())
+        {
+            File kmlFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".kml");
+            loggers.add(new Kml10FileLogger(kmlFile, AppSettings.shouldUseSatelliteTime()));
+        }
 		
 		return loggers;
 	}
