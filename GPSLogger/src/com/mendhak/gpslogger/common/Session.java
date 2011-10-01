@@ -24,8 +24,19 @@ public class Session extends Application
 	private static boolean isBound;
 	private static boolean emailReadyToBeSent=false;
 	private static boolean allowDescription = true;
+    private static boolean isSinglePointMode = false;
 
-	// ---------------------------------------------------
+    public static boolean isSinglePointMode()
+    {
+        return isSinglePointMode;
+    }
+
+    public static void setSinglePointMode(boolean singlePointMode)
+    {
+        isSinglePointMode = singlePointMode;
+    }
+
+    // ---------------------------------------------------
 	/**
 	 * @return whether GPS (tower) is enabled
 	 */

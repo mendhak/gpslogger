@@ -86,6 +86,10 @@
                           android:layout_width="fill_parent" android:layout_height="wrap_content"
                           android:textOn="@string/btn_stop_logging" android:textOff="@string/btn_start_logging"/>
         </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <Button android:id="@+id/buttonSinglePoint" android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:text="@string/btn_single_point"></Button>
+        </LinearLayout>
 
         <TableLayout android:id="@+id/TableSummary"
                      android:layout_width="fill_parent" android:layout_height="wrap_content"

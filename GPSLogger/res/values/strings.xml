@@ -270,5 +270,6 @@
     <string name="emailprovider_yahoo">Yahoo! Mail</string>
     <string name="emailprovider_msn">Windows Live Mail</string>
     <string name="emailprovider_manual">Manual</string>
+    <string name="btn_single_point">Log a single point</string>
 
 </resources>

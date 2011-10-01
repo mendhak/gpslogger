@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import android.widget.*;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
@@ -40,19 +41,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TableRow;
-import android.widget.TextView;
-import android.widget.ToggleButton;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class GpsMainActivity extends Activity implements OnCheckedChangeListener,
-		IGpsLoggerServiceClient
+		IGpsLoggerServiceClient, View.OnClickListener
 {
 
 	/**
@@ -78,15 +71,28 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			loggingService = ((GpsLoggingService.GpsLoggingBinder) service).getService();
 			GpsLoggingService.SetServiceClient(GpsMainActivity.this);
 
-			// Form setup - toggle button, display existing location info
-			ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
+
+            Button buttonSinglePoint = (Button) findViewById(R.id.buttonSinglePoint);
+
+            buttonSinglePoint.setOnClickListener(GpsMainActivity.this);
 
 			if (Session.isStarted())
 			{
-				buttonOnOff.setChecked(true);
-				DisplayLocationInfo(Session.getCurrentLocationInfo());
+                if(Session.isSinglePointMode())
+                {
+                    SetMainButtonEnabled(false);
+                }
+                else
+                {
+                    SetMainButtonChecked(true);
+                    SetSinglePointButtonEnabled(false);
+                }
+
+    			DisplayLocationInfo(Session.getCurrentLocationInfo());
 			}
 
+            // Form setup - toggle button, display existing location info
+            ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
 			buttonOnOff.setOnCheckedChangeListener(GpsMainActivity.this);
 		}
 	};
@@ -196,15 +202,56 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		if (isChecked)
 		{
             GetPreferences();
-			
+            SetSinglePointButtonEnabled(false);
 			loggingService.StartLogging();
 		}
 		else
 		{
-
+            SetSinglePointButtonEnabled(true);
 			loggingService.StopLogging();
 		}
 	}
+
+    /**
+     * Called when the single point button is clicked
+     * @param view
+     */
+    public void onClick(View view)
+    {
+
+        if(!Session.isStarted())
+        {
+            SetMainButtonEnabled(false);
+            loggingService.StartLogging();
+            Session.setSinglePointMode(true);
+        }
+        else if(Session.isStarted() && Session.isSinglePointMode())
+        {
+            loggingService.StopLogging();
+            SetMainButtonEnabled(true);
+            Session.setSinglePointMode(false);
+        }
+    }
+
+
+    public void SetSinglePointButtonEnabled(boolean enabled)
+    {
+        Button buttonSinglePoint = (Button) findViewById(R.id.buttonSinglePoint);
+        buttonSinglePoint.setEnabled(enabled);
+    }
+
+    public void SetMainButtonEnabled(boolean enabled)
+    {
+        ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
+        buttonOnOff.setEnabled(enabled);
+    }
+
+    public void SetMainButtonChecked(boolean checked)
+    {
+
+        ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
+        buttonOnOff.setChecked(checked);
+    }
 
 	/**
 	 * Gets preferences chosen by the user
@@ -658,8 +705,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
     public void OnStopLogging()
     {
-        ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
-        buttonOnOff.setChecked(false);
+        SetMainButtonChecked(false);
     }
 
     /**
@@ -830,6 +876,13 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		DisplayLocationInfo(loc);
 		ShowPreferencesSummary();
 
+        if(Session.isSinglePointMode())
+        {
+            loggingService.StopLogging();
+            SetMainButtonEnabled(true);
+            Session.setSinglePointMode(false);
+        }
+
 	}
 
 	public void OnSatelliteCount(int count)
@@ -871,5 +924,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	{
 		return this;
 	}
+
 
 }
