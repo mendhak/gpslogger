@@ -270,91 +270,100 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	private void ShowPreferencesSummary()
 	{
 
-		TextView txtLoggingTo = (TextView) findViewById(R.id.txtLoggingTo);
-		TextView txtFrequency = (TextView) findViewById(R.id.txtFrequency);
-		TextView txtDistance = (TextView) findViewById(R.id.txtDistance);
-		TextView txtAutoEmail = (TextView) findViewById(R.id.txtAutoEmail);
+        try
+        {
+            TextView txtLoggingTo = (TextView) findViewById(R.id.txtLoggingTo);
+            TextView txtFrequency = (TextView) findViewById(R.id.txtFrequency);
+            TextView txtDistance = (TextView) findViewById(R.id.txtDistance);
+            TextView txtAutoEmail = (TextView) findViewById(R.id.txtAutoEmail);
 
-		if (!AppSettings.shouldLogToKml() && !AppSettings.shouldLogToGpx())
-		{
-			txtLoggingTo.setText(R.string.summary_loggingto_screen);
+            if(!AppSettings.shouldLogToKml() && !AppSettings.shouldLogToGpx())
+            {
+                txtLoggingTo.setText(R.string.summary_loggingto_screen);
 
-		}
-		else if (AppSettings.shouldLogToGpx() && AppSettings.shouldLogToKml())
-		{
-			txtLoggingTo.setText(R.string.summary_loggingto_both);
-		}
-		else
-		{
-			txtLoggingTo.setText((AppSettings.shouldLogToGpx() ? "GPX" : "KML"));
+            }
+            else if(AppSettings.shouldLogToGpx() && AppSettings.shouldLogToKml())
+            {
+                txtLoggingTo.setText(R.string.summary_loggingto_both);
+            }
+            else
+            {
+                txtLoggingTo.setText((AppSettings.shouldLogToGpx() ? "GPX" : "KML"));
 
-		}
+            }
 
-		if (AppSettings.getMinimumSeconds() > 0)
-		{
-			String descriptiveTime = Utilities.GetDescriptiveTimeString(AppSettings.getMinimumSeconds(),
-					getBaseContext());
+            if(AppSettings.getMinimumSeconds() > 0)
+            {
+                String descriptiveTime = Utilities.GetDescriptiveTimeString(AppSettings.getMinimumSeconds(),
+                        getBaseContext());
 
-			txtFrequency.setText(descriptiveTime);
-		}
-		else
-		{
-			txtFrequency.setText(R.string.summary_freq_max);
+                txtFrequency.setText(descriptiveTime);
+            }
+            else
+            {
+                txtFrequency.setText(R.string.summary_freq_max);
 
-		}
+            }
 
-		if (AppSettings.getMinimumDistance() > 0)
-		{
+            if(AppSettings.getMinimumDistance() > 0)
+            {
 
-			if (AppSettings.shouldUseImperial())
-			{
-				int minimumDistanceInFeet = Utilities.MetersToFeet(AppSettings.getMinimumDistance());
-				txtDistance.setText(((minimumDistanceInFeet == 1)
-					? getString(R.string.foot)
-					: String.valueOf(minimumDistanceInFeet) + getString(R.string.feet)));
-			}
-			else
-			{
-				txtDistance.setText(((AppSettings.getMinimumDistance() == 1)
-					? getString(R.string.meter)
-					: String.valueOf(AppSettings.getMinimumDistance()) + getString(R.string.meters)));
-			}
+                if(AppSettings.shouldUseImperial())
+                {
+                    int minimumDistanceInFeet = Utilities.MetersToFeet(AppSettings.getMinimumDistance());
+                    txtDistance.setText(((minimumDistanceInFeet == 1)
+                            ? getString(R.string.foot)
+                            : String.valueOf(minimumDistanceInFeet) + getString(R.string.feet)));
+                }
+                else
+                {
+                    txtDistance.setText(((AppSettings.getMinimumDistance() == 1)
+                            ? getString(R.string.meter)
+                            : String.valueOf(AppSettings.getMinimumDistance()) + getString(R.string.meters)));
+                }
 
-		}
-		else
-		{
-			txtDistance.setText(R.string.summary_dist_regardless);
-		}
+            }
+            else
+            {
+                txtDistance.setText(R.string.summary_dist_regardless);
+            }
 
-		if (AppSettings.isAutoEmailEnabled())
-		{
-			String autoEmailResx;
+            if(AppSettings.isAutoEmailEnabled())
+            {
+                String autoEmailResx;
 
-			if (AppSettings.getAutoEmailDelay() == 0)
-			{
-				autoEmailResx = "autoemail_frequency_whenistop";
-			}
-			else
-			{
-				
-				autoEmailResx = "autoemail_frequency_"
-						+ String.valueOf(AppSettings.getAutoEmailDelay()).replace(".", "");
-				//.replace(".0", "")
-			}
+                if(AppSettings.getAutoEmailDelay() == 0)
+                {
+                    autoEmailResx = "autoemail_frequency_whenistop";
+                }
+                else
+                {
 
-			
-			String autoEmailDesc = getString(getResources().getIdentifier(autoEmailResx, "string", getPackageName()));
-			
+                    autoEmailResx = "autoemail_frequency_"
+                            + String.valueOf(AppSettings.getAutoEmailDelay()).replace(".", "");
+                    //.replace(".0", "")
+                }
+
+
+                String autoEmailDesc = getString(getResources().getIdentifier(autoEmailResx, "string", getPackageName()));
+
 //			String autoEmailDesc = getString(getResources().getIdentifier(
 //					getPackageName() +  ":string/" + autoEmailResx, null, null));
 
-			txtAutoEmail.setText(autoEmailDesc);
-		}
-		else
-		{
-			TableRow trAutoEmail = (TableRow) findViewById(R.id.trAutoEmail);
-			trAutoEmail.setVisibility(View.INVISIBLE);
-		}
+                txtAutoEmail.setText(autoEmailDesc);
+            }
+            else
+            {
+                TableRow trAutoEmail = (TableRow) findViewById(R.id.trAutoEmail);
+                trAutoEmail.setVisibility(View.INVISIBLE);
+            }
+        }
+        catch(Exception ex)
+        {
+                Utilities.LogError("ShowPreferencesSummary", ex);
+        }
+
+
 
 	}
 
