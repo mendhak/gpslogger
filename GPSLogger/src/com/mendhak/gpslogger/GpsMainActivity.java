@@ -214,7 +214,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
     /**
      * Called when the single point button is clicked
-     * @param view
      */
     public void onClick(View view)
     {
@@ -719,8 +718,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
     /**
 	 * Sets the message in the top status label.
+     * @param message The status message
 	 * 
-	 * @param message
 	 */
 	private void SetStatus(String message)
 	{
@@ -731,8 +730,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 	/**
 	 * Sets the number of satellites in the satellite row in the table.
+     * @param number The number of satellites
 	 * 
-	 * @param number
 	 */
 	private void SetSatelliteInfo(int number)
 	{
@@ -744,8 +743,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	/**
 	 * Given a location fix, processes it and displays it in the table on the
 	 * form.
+     * @param  loc  Location information
 	 * 
-	 * @param loc
 	 */
 	private void DisplayLocationInfo(Location loc)
 	{
