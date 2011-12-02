@@ -811,15 +811,35 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			{
 
 				float speed = loc.getSpeed();
+                String unit;
 				if (AppSettings.shouldUseImperial())
 				{
-					txtSpeed.setText(String.valueOf(Utilities.MetersToFeet(speed))
-							+ getString(R.string.feet_per_second));
+                    if(speed > 1.47)
+                    {
+                        speed = speed * 0.6818f;
+                        unit = getString(R.string.miles_per_hour);
+
+                    }
+                    else
+                    {
+                        speed = Utilities.MetersToFeet(speed);
+                        unit = getString(R.string.feet_per_second);
+                    }
 				}
 				else
 				{
-					txtSpeed.setText(String.valueOf(speed) + getString(R.string.meters_per_second));
+                    if(speed > 0.277)
+                    {
+                        speed = speed * 3.6f;
+                        unit = getString(R.string.kilometers_per_hour);
+                    }
+                    else
+                    {
+                        unit = getString(R.string.meters_per_second);
+                    }
 				}
+
+                txtSpeed.setText(String.valueOf(speed) + unit);
 
 			}
 			else

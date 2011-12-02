@@ -77,6 +77,8 @@
     <string name="not_applicable">n/a</string>
     <string name="meters_per_second">&#160;m/s</string>
     <string name="feet_per_second">&#160;ft/s</string>
+    <string name="miles_per_hour">&#160;mi/h</string>
+    <string name="kilometers_per_hour">&#160;km/h</string>
     <string name="unknown_direction">unknown</string>
     <string name="deleted">Deleted</string>
     <string name="point_deleted">Point deleted</string>
