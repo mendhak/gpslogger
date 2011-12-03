@@ -9,10 +9,6 @@
 		android:icon="@android:drawable/ic_menu_edit" />
 	<item android:id="@+id/mnuShare" android:title="@string/menu_share"
 		android:icon="@android:drawable/ic_menu_share" />
-	<item android:id="@+id/mnuExit" android:title="@string/menu_exit"
-		android:icon="@android:drawable/ic_menu_close_clear_cancel" />
-
-
 
     <item android:id="@+id/mnuUpload" android:title="@string/menu_upload" android:icon="@android:drawable/ic_menu_upload">
         <menu>
@@ -23,7 +19,7 @@
         </menu>
     </item>
 
-
-
+    <item android:id="@+id/mnuExit" android:title="@string/menu_exit"
+          android:icon="@android:drawable/ic_menu_close_clear_cancel"/>
 
 </menu>
