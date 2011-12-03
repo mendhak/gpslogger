@@ -59,7 +59,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 	/**
 	 * Provides a connection to the GPS Logging Service
 	 */
-	private ServiceConnection gpsServiceConnection = new ServiceConnection()
+	private final ServiceConnection gpsServiceConnection = new ServiceConnection()
 	{
 
 		public void onServiceDisconnected(ComponentName name)

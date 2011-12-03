@@ -66,7 +66,8 @@ public class GpsSettingsActivity extends PreferenceActivity
 							Log.e("Settings", e.getMessage());
 
 						}
-						boolean useImp = new Boolean(newValue.toString());
+
+                        boolean useImp = Boolean.parseBoolean(newValue.toString());
 
 						String minimumDistanceString = prefs.getString("distance_before_logging", "0");
 
@@ -83,7 +84,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 
 						SharedPreferences.Editor editor = prefs.edit();
 
-						if (useImp == true)
+						if (useImp)
 						{
 							distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_feet);
 							distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_feet);
@@ -110,7 +111,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 
 						handler.post(updateResults);
 						Utilities.HideProgress();
-					};
+					}
 				}.start();
 
 				return true;
@@ -119,7 +120,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 		});
 
 
-		Preference enableDisablePref = (Preference) findPreference("enableDisableGps");
+		Preference enableDisablePref = findPreference("enableDisableGps");
 
 		enableDisablePref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
@@ -132,7 +133,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 
 		});
 		
-		Preference osmSetupPref = (Preference) findPreference("osm_setup");
+		Preference osmSetupPref = findPreference("osm_setup");
 		osmSetupPref.setOnPreferenceClickListener(new OnPreferenceClickListener()
 		{
 			

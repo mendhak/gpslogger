@@ -22,7 +22,7 @@ public class DebugLogger
 class DebugLogWriter implements Runnable
 {
 	
-	private String	message;
+	private final String	message;
 	
 	public DebugLogWriter(String message)
 	{

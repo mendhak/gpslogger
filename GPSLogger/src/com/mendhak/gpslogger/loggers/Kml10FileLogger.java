@@ -19,8 +19,8 @@ import android.location.Location;
 class Kml10FileLogger implements IFileLogger
 {
     private final static Object lock = new Object();
-    private boolean useSatelliteTime;
-    private File kmlFile;
+    private final boolean useSatelliteTime;
+    private final File kmlFile;
     private FileLock kmlLock;
 
     Kml10FileLogger(File kmlFile, boolean useSatelliteTime)

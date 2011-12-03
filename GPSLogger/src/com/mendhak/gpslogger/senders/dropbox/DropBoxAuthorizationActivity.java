@@ -74,10 +74,11 @@ public class DropBoxAuthorizationActivity extends Activity implements
 
     /**
      * Convenience function to change UI state based on being logged in
+     * @param newState The new logged in state
      */
-    private void setLoggedIn(boolean mli)
+    private void setLoggedIn(boolean newState)
     {
-        loggedIn = mli;
+        loggedIn = newState;
         Button authButton = (Button) findViewById(R.id.btnAuthorizeDropBox);
         TextView tvDescription = (TextView)findViewById(R.id.lblAuthorizeDropBox);
 
@@ -95,38 +96,6 @@ public class DropBoxAuthorizationActivity extends Activity implements
 
     public void onClick(View view)
     {
-
-//        if(view.getId() == R.id.btnDBTest)
-//        {
-//            // Uploading content.
-//            String fileContents = "Hello World!";
-//            ByteArrayInputStream inputStream = new ByteArrayInputStream(fileContents.getBytes());
-//            try
-//            {
-//                Utilities.ShowProgress(DropBoxAuthorizationActivity.this, getString(R.string.please_wait), getString(R.string.please_wait));
-//                File gpsDir = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
-//                File testFile = new File(gpsDir,  "test.gpx");
-//
-//                FileInputStream fis = new FileInputStream(testFile);
-//                DropboxAPI.Entry upEntry = dropboxApi.putFileOverwrite(testFile.getName(), fis, testFile.length(), null);
-//                Log.i("DbExampleLog", "The uploaded file's rev is: " + upEntry.rev);
-//                Utilities.HideProgress();
-//            }
-//            catch(DropboxUnlinkedException e)
-//            {
-//                // User has unlinked, ask them to link again here.
-//                Log.e("DbExampleLog", "User has unlinked.");
-//            }
-//            catch(DropboxException e)
-//            {
-//                Log.e("DbExampleLog", "Something went wrong while uploading.");
-//            }
-//            catch(FileNotFoundException e)
-//            {
-//                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//            }
-//            return;
-//        }
 
         // This logs you out if you're logged in, or vice versa
         if(loggedIn)

@@ -23,7 +23,7 @@ import com.mendhak.gpslogger.common.Utilities;
 public class OSMHelper implements IOsmHelper
 {
 
-	private GpsMainActivity mainActivity;
+	private final GpsMainActivity mainActivity;
 
 	
 	public OSMHelper(GpsMainActivity activity)

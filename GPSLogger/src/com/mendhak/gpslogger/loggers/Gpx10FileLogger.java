@@ -19,8 +19,8 @@ class Gpx10FileLogger implements IFileLogger
     private final static Object lock = new Object();
 	private File gpxFile = null;
 	private boolean useSatelliteTime = false;
-	private boolean addNewTrackSegment;
-    private int satelliteCount;
+	private final boolean addNewTrackSegment;
+    private final int satelliteCount;
 	
 	Gpx10FileLogger(File gpxFile, boolean useSatelliteTime, boolean addNewTrackSegment, int satelliteCount)
 	{

@@ -16,12 +16,12 @@ import com.mendhak.gpslogger.senders.ZipHelper;
 public class AutoEmailHelper implements IAutoSendHelper
 {
 
-	private GpsLoggingService	mainActivity;
+	private final GpsLoggingService	mainActivity;
 	private boolean				forcedSend	= false;
 
 	public AutoEmailHelper(GpsLoggingService activity)
 	{
-		this.mainActivity = activity;
+		mainActivity = activity;
 	}
 
 	public void SendLogFile(String currentFileName, boolean forcedSend)
@@ -68,8 +68,8 @@ public class AutoEmailHelper implements IAutoSendHelper
 class AutoSendHandler implements Runnable
 {
 
-	private String			currentFileName;
-	private IAutoSendHelper	helper;
+	private final String			currentFileName;
+	private final IAutoSendHelper	helper;
 
 	public AutoSendHandler(String currentFileName,	IAutoSendHelper helper)
 	{

@@ -44,7 +44,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
 		txtSmtpServer.setOnPreferenceChangeListener(this);
 		txtSmtpPort.setOnPreferenceChangeListener(this);
 
-		Preference testEmailPref = (Preference) findPreference("smtp_testemail");
+		Preference testEmailPref = findPreference("smtp_testemail");
 
 		testEmailPref.setOnPreferenceClickListener(this);
 
@@ -92,23 +92,16 @@ public class AutoEmailActivity extends PreferenceActivity implements
 
 		if (chkEnabled.isChecked())
 		{
-			if (txtSmtpServer.getText() != null
-					&& txtSmtpServer.getText().length() > 0
-					&& txtSmtpPort.getText() != null
-					&& txtSmtpPort.getText().length() > 0
-					&& txtUsername.getText() != null
-					&& txtUsername.getText().length() > 0
-					&& txtPassword.getText() != null
-					&& txtPassword.getText().length() > 0
-					&& txtTarget.getText() != null
-					&& txtTarget.getText().length() > 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+            return txtSmtpServer.getText() != null
+                    && txtSmtpServer.getText().length() > 0
+                    && txtSmtpPort.getText() != null
+                    && txtSmtpPort.getText().length() > 0
+                    && txtUsername.getText() != null
+                    && txtUsername.getText().length() > 0
+                    && txtPassword.getText() != null
+                    && txtPassword.getText().length() > 0
+                    && txtTarget.getText() != null
+                    && txtTarget.getText().length() > 0;
 		}
 
 		return true;

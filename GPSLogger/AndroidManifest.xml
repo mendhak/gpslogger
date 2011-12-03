@@ -88,11 +88,11 @@
 
         </receiver>
 
-        <receiver android:name="com.mendhak.gpslogger.senders.AlarmReceiver"></receiver>
+        <receiver android:name="com.mendhak.gpslogger.senders.AlarmReceiver"/>
     </application>
     <uses-sdk android:minSdkVersion="5" android:targetSdkVersion="5"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.INTERNET"/>

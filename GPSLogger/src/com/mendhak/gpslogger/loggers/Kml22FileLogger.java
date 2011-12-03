@@ -24,9 +24,9 @@ import java.util.logging.ConsoleHandler;
 public class Kml22FileLogger implements IFileLogger
 {
     private final static Object lock = new Object();
-    private boolean useSatelliteTime;
-    private boolean addNewTrackSegment;
-    private File kmlFile;
+    private final boolean useSatelliteTime;
+    private final boolean addNewTrackSegment;
+    private final File kmlFile;
     private FileLock kmlLock;
 
     public Kml22FileLogger(File kmlFile, boolean useSatelliteTime, boolean addNewTrackSegment)
