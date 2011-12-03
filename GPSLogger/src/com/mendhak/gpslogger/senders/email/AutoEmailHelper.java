@@ -8,12 +8,12 @@ import android.os.Environment;
 
 import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.senders.IAutoSendHelper;
 import com.mendhak.gpslogger.senders.ZipHelper;
 
-public class AutoEmailHelper implements IAutoSendHelper
+public class AutoEmailHelper implements IActionListener
 {
 
 	private final GpsLoggingService	mainActivity;
@@ -35,7 +35,7 @@ public class AutoEmailHelper implements IAutoSendHelper
 
 	void SendTestEmail(String smtpServer, String smtpPort,
 			String smtpUsername, String smtpPassword, boolean smtpUseSsl,
-			String emailTarget, Activity callingActivity, IAutoSendHelper helper)
+			String emailTarget, Activity callingActivity, IActionListener helper)
 	{
 
 		Thread t = new Thread(new TestEmailHandler(helper, smtpServer,
@@ -43,35 +43,33 @@ public class AutoEmailHelper implements IAutoSendHelper
 		t.start();
 	}
 
-	public void OnRelay(boolean connectionSuccess, String errorMessage)
-	{
 
-		if (!connectionSuccess)
-		{
-			mainActivity.handler.post(mainActivity.updateResultsEmailSendError);
-		}
-		else
-		{
-			// This was a success
-			Utilities.LogInfo("Email sent");
 
-			if (!forcedSend)
-			{
-				Utilities.LogDebug("setEmailReadyToBeSent = false");
-				Session.setEmailReadyToBeSent(false);
-			}
-		}
+    public void OnComplete()
+    {
+        // This was a success
+        Utilities.LogInfo("Email sent");
 
-	}
+        if(!forcedSend)
+        {
+            Utilities.LogDebug("setEmailReadyToBeSent = false");
+            Session.setEmailReadyToBeSent(false);
+        }
+    }
+
+    public void OnFailure()
+    {
+        mainActivity.handler.post(mainActivity.updateResultsEmailSendError);
+    }
 }
 
 class AutoSendHandler implements Runnable
 {
 
 	private final String			currentFileName;
-	private final IAutoSendHelper	helper;
+	private final IActionListener	helper;
 
-	public AutoSendHandler(String currentFileName,	IAutoSendHelper helper)
+	public AutoSendHandler(String currentFileName,	IActionListener helper)
 	{
 		this.currentFileName = currentFileName;
 		this.helper = helper;
@@ -84,7 +82,7 @@ class AutoSendHandler implements Runnable
 
 		if (!gpxFolder.exists())
 		{
-			helper.OnRelay(true, null);
+            helper.OnFailure();
 			return;
 		}
 
@@ -104,7 +102,7 @@ class AutoSendHandler implements Runnable
 
 		if (foundFile == null)
 		{
-			helper.OnRelay(true, null);
+            helper.OnComplete();
 			return;
 		}
 
@@ -142,16 +140,16 @@ class AutoSendHandler implements Runnable
 
 			if (m.send())
 			{
-				helper.OnRelay(true, "Email was sent successfully.");
+                helper.OnComplete();
 			}
 			else
 			{
-				helper.OnRelay(false, "Email was not sent.");
+				helper.OnFailure();
 			}
 		}
 		catch (Exception e)
 		{
-			helper.OnRelay(false, e.getMessage());
+			helper.OnFailure();
 			Utilities.LogError("AutoSendHandler.run", e);
 		}
 
@@ -167,9 +165,9 @@ class TestEmailHandler implements Runnable
 	String			smtpPassword;
 	boolean			smtpUseSsl;
 	String			emailTarget;
-	IAutoSendHelper	helper;
+	IActionListener	helper;
 
-	public TestEmailHandler(IAutoSendHelper helper, String smtpServer,
+	public TestEmailHandler(IActionListener helper, String smtpServer,
 			String smtpPort, String smtpUsername, String smtpPassword,
 			boolean smtpUseSsl, String emailTarget)
 	{
@@ -207,16 +205,16 @@ class TestEmailHandler implements Runnable
 			Utilities.LogInfo("Sending email...");
 			if (m.send())
 			{
-				helper.OnRelay(true, "Email was sent successfully.");
+                helper.OnComplete();
 			}
 			else
 			{
-				helper.OnRelay(false, "Email was not sent.");
+				helper.OnFailure();
 			}
 		}
 		catch (Exception e)
 		{
-			helper.OnRelay(false, e.getMessage());
+			helper.OnFailure();
 			Utilities.LogError("AutoSendHandler.run", e);
 		}
 

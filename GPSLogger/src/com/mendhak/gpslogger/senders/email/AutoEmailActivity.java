@@ -13,13 +13,13 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.view.KeyEvent;
 
+import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.IMessageBoxCallback;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.senders.IAutoSendHelper;
 import com.mendhak.gpslogger.R;
 
 public class AutoEmailActivity extends PreferenceActivity implements
-		OnPreferenceChangeListener, IMessageBoxCallback, IAutoSendHelper,
+		OnPreferenceChangeListener, IMessageBoxCallback, IActionListener,
 		OnPreferenceClickListener
 {
 
@@ -189,29 +189,46 @@ public class AutoEmailActivity extends PreferenceActivity implements
 
 	}
 
-	String	testResults;
 
-	public void OnRelay(boolean connectionSuccess, String message)
-	{
-
-		testResults = message;
-
-		handler.post(showTestResults);
-	}
-
-	private final Runnable	showTestResults	= new Runnable()
+	private final Runnable successfullySent = new Runnable()
 											{
 												public void run()
 												{
-													TestEmailResults();
+													SuccessfulSending();
 												}
 											};
 
-	private void TestEmailResults()
+    private final Runnable failedSend = new Runnable()
+    {
+
+        public void run()
+        {
+            FailureSending();
+        }
+    };
+
+    private void FailureSending()
+    {
+        Utilities.HideProgress();
+        Utilities.MsgBox(getString(R.string.sorry), getString(R.string.error_connection), this);
+    }
+
+	private void SuccessfulSending()
 	{
 		Utilities.HideProgress();
 		Utilities.MsgBox(getString(R.string.autoemail_testresult_title),
-				testResults, this);
+				getString(R.string.success), this);
 	}
 
+    public void OnComplete()
+    {
+        handler.post(successfullySent);
+    }
+
+    public void OnFailure()
+    {
+
+        handler.post(failedSend);
+
+    }
 }

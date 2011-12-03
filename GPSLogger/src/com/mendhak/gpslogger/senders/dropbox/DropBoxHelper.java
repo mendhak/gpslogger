@@ -7,20 +7,18 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
-import com.dropbox.client2.exception.DropboxException;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 import com.dropbox.client2.session.Session;
 import com.dropbox.client2.session.TokenPair;
 import com.mendhak.gpslogger.GpsMainActivity;
-import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
-
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
-public class DropBoxHelper implements IDropBoxHelper
+
+public class DropBoxHelper implements IActionListener
 {
 
     final static private String ACCESS_KEY_NAME = "DROPBOX_ACCESS_KEY";
@@ -38,6 +36,10 @@ public class DropBoxHelper implements IDropBoxHelper
         dropboxApi = new DropboxAPI<AndroidAuthSession>(session);
     }
 
+    /**
+     * Whether the user has authorized GPSLogger with DropBox
+     * @return True/False
+     */
     public boolean IsLinked()
     {
         return dropboxApi.getSession().isLinked();
@@ -62,6 +64,8 @@ public class DropBoxHelper implements IDropBoxHelper
      * Shows keeping the access keys returned from Trusted Authenticator in a local
      * store, rather than storing user name & password, and re-authenticating each
      * time (which is not to be done, ever).
+     * @param key The Access Key
+     * @param secret The Access Secret
      */
     private void storeKeys(String key, String secret)
     {
@@ -157,14 +161,19 @@ public class DropBoxHelper implements IDropBoxHelper
         mainActivity.handler.post(mainActivity.updateDropBoxUpload);
     }
 
+    public void OnFailure()
+    {
+
+    }
+
 
     public class DropBoxUploadHandler implements Runnable
     {
         DropboxAPI<AndroidAuthSession> api;
         String fileName;
-        IDropBoxHelper helper;
+        IActionListener helper;
 
-        public DropBoxUploadHandler(String file, DropboxAPI<AndroidAuthSession> dbApi, IDropBoxHelper dbHelper)
+        public DropBoxUploadHandler(String file, DropboxAPI<AndroidAuthSession> dbApi, IActionListener dbHelper)
         {
             fileName = file;
             api = dbApi;
@@ -192,10 +201,6 @@ public class DropBoxHelper implements IDropBoxHelper
 
 }
 
-interface IDropBoxHelper
-{
-    public void OnComplete();
 
-}
 
 

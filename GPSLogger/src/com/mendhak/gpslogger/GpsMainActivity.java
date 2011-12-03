@@ -662,6 +662,14 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 	};
 
+    public final Runnable updateOsmFailed = new Runnable()
+    {
+        public void run()
+        {
+            OnOSMUploadComplete();
+        }
+    };
+
 	private void OnOSMUploadComplete()
 	{
 		Utilities.HideProgress();
