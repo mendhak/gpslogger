@@ -274,12 +274,16 @@
     <string name="emailprovider_manual">Manual</string>
     <string name="btn_single_point">Log a single point</string>
 
+    <string name="dropbox_setup_title">Dropbox</string>
+    <string name="dropbox_setup_summary">Authorize with Dropbox to allow file uploads</string>
     <string name="dropbox_authorize_description">To use DropBox features, you will need to authorize GPSLogger to upload files to your account.</string>
     <string name="dropbox_authorize">Authorize</string>
     <string name="dropbox_unauthorize">Remove Authorization</string>
     <string name="dropbox_unauthorize_description">You are authorized with DropBox. You can unlink GPSLogger from DropBox if you wish.</string>
     <string name="dropbox_couldnotauthorize">Could not authorize with DropBox, please try again later</string>
-    <string name="dropbox_upload">Upload to Dropbox</string>
+    <string name="dropbox_upload">Dropbox</string>
     <string name="dropbox_uploading">Uploading to Dropbox</string>
+
+    <string name="menu_upload">Upload</string>
 
 </resources>

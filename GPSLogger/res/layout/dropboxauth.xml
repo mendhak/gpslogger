@@ -21,10 +21,5 @@
 	            android:text="@string/dropbox_authorize" android:layout_height="wrap_content"
                 android:layout_width="wrap_content"/>
 	  </TableRow>
-        <TableRow>
-            <Button android:id="@+id/btnDBTest"
-                    android:text="Upload test" android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"/>
-        </TableRow>
 	</TableLayout>
 </LinearLayout>

@@ -3,36 +3,19 @@
 package com.mendhak.gpslogger.senders.dropbox;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.dropbox.client2.DropboxAPI;
-import com.dropbox.client2.android.AndroidAuthSession;
-import com.dropbox.client2.exception.DropboxException;
-import com.dropbox.client2.exception.DropboxUnlinkedException;
-import com.dropbox.client2.session.AccessTokenPair;
-import com.dropbox.client2.session.AppKeyPair;
-import com.dropbox.client2.session.Session;
-import com.dropbox.client2.session.TokenPair;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
-
-import java.io.*;
 
 public class DropBoxAuthorizationActivity extends Activity implements
                                                            View.OnClickListener
 {
 
-
     DropBoxHelper helper;
     boolean loggedIn = false;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -42,9 +25,6 @@ public class DropBoxAuthorizationActivity extends Activity implements
 
         Button authButton = (Button) findViewById(R.id.btnAuthorizeDropBox);
         authButton.setOnClickListener(this);
-
-        Button testButton = (Button) findViewById(R.id.btnDBTest);
-        testButton.setOnClickListener(this);
 
         helper = new DropBoxHelper(getBaseContext());
 
@@ -69,18 +49,18 @@ public class DropBoxAuthorizationActivity extends Activity implements
         }
 
         setLoggedIn(helper.IsLinked());
-        finish();
     }
 
     /**
      * Convenience function to change UI state based on being logged in
+     *
      * @param newState The new logged in state
      */
     private void setLoggedIn(boolean newState)
     {
         loggedIn = newState;
         Button authButton = (Button) findViewById(R.id.btnAuthorizeDropBox);
-        TextView tvDescription = (TextView)findViewById(R.id.lblAuthorizeDropBox);
+        TextView tvDescription = (TextView) findViewById(R.id.lblAuthorizeDropBox);
 
         if(loggedIn)
         {
@@ -121,8 +101,6 @@ public class DropBoxAuthorizationActivity extends Activity implements
         // Change UI state to display logged out version
         setLoggedIn(false);
     }
-
-
 
 
 }

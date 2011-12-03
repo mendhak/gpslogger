@@ -3,8 +3,6 @@
 	<item android:id="@+id/mnuSettings" android:title="@string/menu_settings"
 		android:icon="@android:drawable/ic_menu_preferences" />
 	
-	<item android:id="@+id/mnuOSM" android:title="@string/osm_upload" android:icon="@android:drawable/ic_menu_mapmode" />
-		
 	<item android:id="@+id/mnuEmailnow" android:title="@string/menu_email_now" android:icon="@android:drawable/ic_menu_send" />
 
 	<item android:id="@+id/mnuAnnotate" android:title="@string/menu_annotate"
@@ -14,7 +12,16 @@
 	<item android:id="@+id/mnuExit" android:title="@string/menu_exit"
 		android:icon="@android:drawable/ic_menu_close_clear_cancel" />
 
-    <item android:id="@+id/mnuDropBox" android:title="@string/dropbox_upload" android:icon="@android:drawable/ic_menu_upload"/>
+
+
+    <item android:id="@+id/mnuUpload" android:title="@string/menu_upload" android:icon="@android:drawable/ic_menu_upload">
+        <menu>
+            <item android:id="@+id/mnuDropBox" android:title="@string/dropbox_upload"
+                  android:icon="@android:drawable/ic_menu_upload"/>
+            <item android:id="@+id/mnuOSM" android:title="@string/osm_upload"
+                  android:icon="@android:drawable/ic_menu_mapmode"/>
+        </menu>
+    </item>
 
 
 
