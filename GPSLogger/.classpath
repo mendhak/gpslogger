@@ -8,7 +8,9 @@
 	<classpathentry kind="lib" path="lib/mail.jar"/>
 	<classpathentry kind="lib" path="lib/signpost-commonshttp4-1.2.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/signpost-core-1.2.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/httpmime-4.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/apache-mime4j-0.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/json_simple-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/dropbox-android-sdk.jar"/>
+	<classpathentry kind="lib" path="lib/httpmime-4.0.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
