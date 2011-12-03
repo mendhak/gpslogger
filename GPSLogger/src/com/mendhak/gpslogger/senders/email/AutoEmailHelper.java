@@ -28,7 +28,45 @@ public class AutoEmailHelper implements IActionListener
 	{
 		this.forcedSend = forcedSend;
 
-		Thread t = new Thread(new AutoSendHandler(currentFileName, this));
+
+        File gpxFolder = new File(Environment.getExternalStorageDirectory(),
+                "GPSLogger");
+
+        if(!gpxFolder.exists())
+        {
+            OnFailure();
+            return;
+        }
+
+        File gpxFile = new File(gpxFolder.getPath(), currentFileName + ".gpx");
+        File kmlFile = new File(gpxFolder.getPath(), currentFileName + ".kml");
+
+        File foundFile = null;
+
+        if(kmlFile.exists())
+        {
+            foundFile = kmlFile;
+        }
+        if(gpxFile.exists())
+        {
+            foundFile = gpxFile;
+        }
+
+        if(foundFile == null)
+        {
+            OnFailure();
+            return;
+        }
+
+        String[] files = new String[]
+                {foundFile.getAbsolutePath()};
+        File zipFile = new File(gpxFolder.getPath(), currentFileName + ".zip");
+
+        Utilities.LogInfo("Zipping file");
+        ZipHelper zh = new ZipHelper(files, zipFile.getAbsolutePath());
+        zh.Zip();
+
+		Thread t = new Thread(new AutoSendHandler(zipFile, this));
 		t.start();
 
 	}
@@ -66,56 +104,21 @@ public class AutoEmailHelper implements IActionListener
 class AutoSendHandler implements Runnable
 {
 
-	private final String			currentFileName;
+	final File zipFile;
 	private final IActionListener	helper;
 
-	public AutoSendHandler(String currentFileName,	IActionListener helper)
+	public AutoSendHandler(File zipFile,	IActionListener helper)
 	{
-		this.currentFileName = currentFileName;
+		this.zipFile = zipFile;
 		this.helper = helper;
 	}
 
 	public void run()
 	{
-		File gpxFolder = new File(Environment.getExternalStorageDirectory(),
-				"GPSLogger");
 
-		if (!gpxFolder.exists())
-		{
-            helper.OnFailure();
-			return;
-		}
-
-		File gpxFile = new File(gpxFolder.getPath(), currentFileName + ".gpx");
-		File kmlFile = new File(gpxFolder.getPath(), currentFileName + ".kml");
-
-		File foundFile = null;
-
-		if (kmlFile.exists())
-		{
-			foundFile = kmlFile;
-		}
-		if (gpxFile.exists())
-		{
-			foundFile = gpxFile;
-		}
-
-		if (foundFile == null)
-		{
-            helper.OnComplete();
-			return;
-		}
-
-		String[] files = new String[]
-		{ foundFile.getAbsolutePath() };
-		File zipFile = new File(gpxFolder.getPath(), currentFileName + ".zip");
 
 		try
 		{
-
-			Utilities.LogInfo("Zipping file");
-			ZipHelper zh = new ZipHelper(files, zipFile.getAbsolutePath());
-			zh.Zip();
 
 			Mail m = new Mail(AppSettings.getSmtpUsername(),
 					AppSettings.getSmtpPassword());

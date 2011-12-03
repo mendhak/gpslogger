@@ -216,8 +216,8 @@ public class AutoEmailActivity extends PreferenceActivity implements
 	private void SuccessfulSending()
 	{
 		Utilities.HideProgress();
-		Utilities.MsgBox(getString(R.string.autoemail_testresult_title),
-				getString(R.string.success), this);
+		Utilities.MsgBox(getString(R.string.success),
+				getString(R.string.autoemail_testresult_success), this);
 	}
 
     public void OnComplete()

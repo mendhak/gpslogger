@@ -293,10 +293,7 @@ public class GpsLoggingService extends Service
 			AutoEmailHelper aeh = new AutoEmailHelper(GpsLoggingService.this);
 			aeh.SendLogFile(Session.getCurrentFileName(), true);
 			
-			if(IsMainFormVisible())
-			{
-				Utilities.HideProgress();
-			}
+
 		}
 	}
 
@@ -308,17 +305,38 @@ public class GpsLoggingService extends Service
 		}
 	};
 
+    public final Runnable updateResultsEmailSent = new Runnable()
+    {
+        public void run()
+        {
+            AutoEmailSent();
+        }
+    };
+
+    private void AutoEmailSent()
+    {
+        Utilities.LogInfo("Email sent");
+        if(IsMainFormVisible())
+        {
+            Utilities.HideProgress();
+        }
+    }
+
 
 	private void AutoEmailGenericError()
 	{
 		Utilities.LogWarning("Could not send email, please check Internet and auto email settings.");
+        if(IsMainFormVisible())
+        {
+            Utilities.HideProgress();
+        }
 	}
 
 	/**
 	 * Sets the activity form for this service. The activity form needs to
 	 * implement IGpsLoggerServiceClient.
 	 * 
-	 * @param mainForm
+	 * @param mainForm The calling client
 	 */
 	protected static void SetServiceClient(IGpsLoggerServiceClient mainForm)
 	{
@@ -603,7 +621,7 @@ public class GpsLoggingService extends Service
 
 	/**
 	 * Gives a status message to the main service client to display
-     * @param status
+     * @param status  The status message
      */
 	void SetStatus(String status)
 	{
@@ -615,7 +633,7 @@ public class GpsLoggingService extends Service
 
     /**
      * Gives an error message to the main service client to display
-     * @param messageId
+     * @param messageId ID of string to lookup
      */
     void SetFatalMessage(int messageId)
     {
@@ -628,7 +646,7 @@ public class GpsLoggingService extends Service
 	/**
 	 * Gets string from given resource ID, passes to SetStatus(String)
 	 * 
-	 * @param stringId
+	 * @param stringId  ID of string to lookup
 	 */
 	private void SetStatus(int stringId)
 	{
@@ -687,7 +705,7 @@ public class GpsLoggingService extends Service
 	 * This method in turn updates notification, writes to file, reobtains
 	 * preferences, notifies main service client and resets location managers.
 	 * 
-	 * @param loc
+	 * @param loc   Location object
 	 */
 	void OnLocationChanged(Location loc)
 	{
@@ -716,7 +734,7 @@ public class GpsLoggingService extends Service
 	/**
 	 * Calls file helper to write a given location to a file.
 	 * 
-	 * @param loc
+	 * @param loc   Location object
 	 */
 	private void WriteToFile(Location loc)
 	{
@@ -744,7 +762,7 @@ public class GpsLoggingService extends Service
 	/**
 	 * Informs the main service client of the number of visible satellites.
 	 * 
-	 * @param count
+	 * @param count  Number of Satellites
 	 */
 	void SetSatelliteInfo(int count)
 	{
