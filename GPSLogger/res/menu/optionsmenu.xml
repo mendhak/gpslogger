@@ -14,6 +14,9 @@
 	<item android:id="@+id/mnuExit" android:title="@string/menu_exit"
 		android:icon="@android:drawable/ic_menu_close_clear_cancel" />
 
+    <item android:id="@+id/mnuDropBox" android:title="@string/dropbox_upload" android:icon="@android:drawable/ic_menu_upload"/>
+
+
 
 
 </menu>

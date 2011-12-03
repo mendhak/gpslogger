@@ -16,6 +16,7 @@ import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
+import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
 import android.app.Activity;
@@ -97,7 +98,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 		}
 	};
 
-	/**
+
+    /**
 	 * Event raised when the form is created for the first time
 	 */
 	@Override
@@ -412,6 +414,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			case R.id.mnuOSM:
 				UploadToOpenStreetMap();
 				break;
+            case R.id.mnuDropBox:
+                UploadToDropBox();
+                break;
 			case R.id.mnuAnnotate:
 				Annotate();
 				break;
@@ -526,6 +531,57 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
 	}
 
+
+    private void UploadToDropBox()
+    {
+        final DropBoxHelper dropBoxHelper = new DropBoxHelper(getBaseContext());
+
+
+        if(!dropBoxHelper.IsLinked())
+        {
+            startActivity(new Intent("com.mendhak.gpslogger.DROPBOX_SETUP"));
+            return;
+        }
+
+        final File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+
+        if(gpxFolder.exists())
+        {
+
+            String[] enumeratedFiles = gpxFolder.list();
+            List<String> fileList = new ArrayList<String>(Arrays.asList(enumeratedFiles));
+            Collections.reverse(fileList);
+            final String[] files = fileList.toArray(new String[0]);
+
+            final Dialog dialog = new Dialog(this);
+            dialog.setTitle(R.string.dropbox_upload);
+            dialog.setContentView(R.layout.filelist);
+            ListView thelist = (ListView) dialog.findViewById(R.id.listViewFiles);
+
+            thelist.setAdapter(new ArrayAdapter<String>(getBaseContext(),
+                    android.R.layout.simple_list_item_single_choice, files));
+
+            thelist.setOnItemClickListener(new OnItemClickListener()
+            {
+
+                public void onItemClick(AdapterView<?> av, View v, int index, long arg)
+                {
+
+                    dialog.dismiss();
+                    String chosenFileName = files[index];
+                    Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.dropbox_uploading), getString(R.string.please_wait));
+                    dropBoxHelper.UploadFile(chosenFileName, GpsMainActivity.this);
+                }
+            });
+            dialog.show();
+        }
+        else
+        {
+            Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
+        }
+    }
+
+
 	
 	/**
 	 * Uploads a GPS Trace to OpenStreetMap.org. 
@@ -605,11 +661,24 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			OnOSMUploadComplete();
 		}
 	};
-	
+
 	private void OnOSMUploadComplete()
 	{
 		Utilities.HideProgress();
 	}
+
+    public final Runnable updateDropBoxUpload = new Runnable()
+    {
+        public void run()
+        {
+            OnDropBoxUploadComplete();
+        }
+    };
+
+    public void OnDropBoxUploadComplete()
+    {
+        Utilities.HideProgress();
+    }
 	
 	
 	

@@ -16,18 +16,18 @@
                   android:label="@string/app_name"
                   android:launchMode="singleTask" android:configChanges="locale">
             <intent-filter>
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <activity android:name="com.mendhak.gpslogger.senders.dropbox.DropBoxAuthorizationActivity" android:label="DropBox"
                   android:launchMode="singleTask">
                     <intent-filter>
-                        <action android:name="android.intent.action.MAIN" />
-                        <category android:name="android.intent.category.LAUNCHER"/>
+                        <action android:name="com.mendhak.gpslogger.DROPBOX_SETUP"/>
+                        <category android:name="android.intent.category.DEFAULT"/>
                     </intent-filter>
-                  </activity>
+        </activity>
 
         <activity
                 android:name="com.dropbox.client2.android.AuthActivity"
