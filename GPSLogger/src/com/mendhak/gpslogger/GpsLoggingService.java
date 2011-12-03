@@ -259,21 +259,13 @@ public class GpsLoggingService extends Service
 		if (Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0
 				&& Session.isEmailReadyToBeSent())
 		{
-			if(IsMainFormVisible())
-			{
-				Utilities.ShowProgress(mainServiceClient.GetActivity(), getString(R.string.autoemail_sending),
-					getString(R.string.please_wait));
-			}
-			
+
+            //Don't show a progress bar when auto-emailing
 			Utilities.LogInfo("Emailing Log File");
 			AutoEmailHelper aeh = new AutoEmailHelper(GpsLoggingService.this);
 			aeh.SendLogFile(Session.getCurrentFileName(), false);
 			SetupAutoEmailTimers();
 			
-			if(IsMainFormVisible())
-			{
-				Utilities.HideProgress();
-			}
 		}
 	}
 	

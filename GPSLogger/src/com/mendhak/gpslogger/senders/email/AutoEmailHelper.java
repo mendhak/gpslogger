@@ -93,6 +93,7 @@ public class AutoEmailHelper implements IActionListener
             Utilities.LogDebug("setEmailReadyToBeSent = false");
             Session.setEmailReadyToBeSent(false);
         }
+        mainActivity.handler.post(mainActivity.updateResultsEmailSent);
     }
 
     public void OnFailure()
