@@ -429,7 +429,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 			case R.id.mnuExit:
 				loggingService.StopLogging();
 				loggingService.stopSelf();
-				System.exit(0);
+				finish();
 				break;
 		}
 		return false;
