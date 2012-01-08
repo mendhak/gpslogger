@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import android.os.*;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
@@ -26,10 +27,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Binder;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
 import android.preference.PreferenceManager;
 
 public class GpsLoggingService extends Service
@@ -53,6 +50,8 @@ public class GpsLoggingService extends Service
 	private LocationManager towerLocationManager;
 
 	private Intent alarmIntent;
+
+    AlarmManager nextPointAlarmManager;
 
 	// ---------------------------------------------------
 
@@ -80,6 +79,8 @@ public class GpsLoggingService extends Service
 			getBaseContext().getResources().updateConfiguration(config,
 					getBaseContext().getResources().getDisplayMetrics());
 		}
+
+        nextPointAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
 		Utilities.LogInfo("GPSLoggerService created");
 	}
@@ -132,6 +133,7 @@ public class GpsLoggingService extends Service
 			{
 				boolean startRightNow = bundle.getBoolean("immediate");
 				boolean alarmWentOff = bundle.getBoolean("alarmWentOff");
+                boolean getNextPoint = bundle.getBoolean("getnextpoint");
 				
 				Utilities.LogDebug("startRightNow - " + String.valueOf(startRightNow));
 
@@ -152,6 +154,12 @@ public class GpsLoggingService extends Service
 					Session.setEmailReadyToBeSent(true);
 					AutoEmailLogFile();
 				}
+
+                if(getNextPoint)
+                {
+                    Utilities.LogDebug("HandleIntent - getNextPoint");
+                    StartGpsManager();
+                }
 				
 			}
 		}
@@ -410,6 +418,7 @@ public class GpsLoggingService extends Service
 		stopForeground(true);
 
 		RemoveNotification();
+        StopAlarm();
 		StopGpsManager();
         StopMainActivity();
 	}
@@ -516,7 +525,7 @@ public class GpsLoggingService extends Service
 			Utilities.LogInfo("Requesting GPS location updates");
 			// gps satellite based
 			gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-					AppSettings.getMinimumSeconds() * 1000, AppSettings.getMinimumDistance(),
+					1000, 0,
 					gpsLocationListener);
 
 			gpsLocationManager.addGpsStatusListener(gpsLocationListener);
@@ -527,10 +536,9 @@ public class GpsLoggingService extends Service
 		{
 			Utilities.LogInfo("Requesting tower location updates");
 			Session.setUsingGps(false);
-			// isUsingGps = false;
 			// Cell tower and wifi based
 			towerLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-					AppSettings.getMinimumSeconds() * 1000, AppSettings.getMinimumDistance(),
+					1000, 0,
 					towerLocationListener);
 
 		}
@@ -675,21 +683,22 @@ public class GpsLoggingService extends Service
 	private void ResetManagersIfRequired()
 	{
 		CheckTowerAndGpsStatus();
+        RestartGpsManagers();
 
-		if (Session.isUsingGps() && AppSettings.shouldPreferCellTower())
-		{
-			RestartGpsManagers();
-		}
-		// If GPS is enabled and user doesn't prefer celltowers
-		else if (Session.isGpsEnabled() && !AppSettings.shouldPreferCellTower())
-		{
-			// But we're not *already* using GPS
-			if (!Session.isUsingGps())
-			{
-				RestartGpsManagers();
-			}
-			// Else do nothing
-		}
+//		if (Session.isUsingGps() && AppSettings.shouldPreferCellTower())
+//		{
+//			RestartGpsManagers();
+//		}
+//		// If GPS is enabled and user doesn't prefer celltowers
+//		else if (Session.isGpsEnabled() && !AppSettings.shouldPreferCellTower())
+//		{
+//			// But we're not *already* using GPS
+//			if (!Session.isUsingGps())
+//			{
+//				RestartGpsManagers();
+//			}
+//			// Else do nothing
+//		}
 	}
 
 	/**
@@ -715,7 +724,9 @@ public class GpsLoggingService extends Service
 		Notify();
 		WriteToFile(loc);
 		GetPreferences();
-		ResetManagersIfRequired();
+		//ResetManagersIfRequired();
+        StopGpsManager();
+        SetAlarmForNextPoint();
 
 		if (IsMainFormVisible())
 		{
@@ -723,7 +734,31 @@ public class GpsLoggingService extends Service
 		}
 	}
 
-	/**
+    private void StopAlarm()
+    {
+        Intent i = new Intent(this, GpsLoggingService.class);
+        i.putExtra("getnextpoint", true);
+        PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
+        nextPointAlarmManager.cancel(pi);
+    }
+            
+    
+    private void SetAlarmForNextPoint()
+    {
+
+        Intent i = new Intent(this, GpsLoggingService.class);
+        
+        i.putExtra("getnextpoint", true);
+        
+        PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
+        nextPointAlarmManager.cancel(pi);
+
+        nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + AppSettings.getMinimumSeconds()*1000, pi);
+        
+    }
+
+    /**
 	 * Calls file helper to write a given location to a file.
 	 * 
 	 * @param loc   Location object
