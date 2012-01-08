@@ -1,27 +1,32 @@
 package com.mendhak.gpslogger.loggers;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.RandomAccessFile;
-import java.nio.channels.FileLock;
-import java.util.Date;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
+import android.location.Location;
+import com.mendhak.gpslogger.common.RejectionHandler;
+import com.mendhak.gpslogger.common.Utilities;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import com.mendhak.gpslogger.common.Utilities;
-import android.location.Location;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Date;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 
 class Kml10FileLogger implements IFileLogger
 {
-    private final static Object lock = new Object();
+
+    private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
+            new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
+
+    protected final static Object lock = new Object();
     private final boolean useSatelliteTime;
     private final File kmlFile;
-    private FileLock kmlLock;
 
     Kml10FileLogger(File kmlFile, boolean useSatelliteTime)
     {
@@ -31,12 +36,95 @@ class Kml10FileLogger implements IFileLogger
 
     public void Write(Location loc) throws Exception
     {
+        Kml10WriteHandler writeHandler = new Kml10WriteHandler(useSatelliteTime, loc, kmlFile);
+        EXECUTOR.execute(writeHandler);
+    }
+
+
+    public void Annotate(String description) throws Exception
+    {
+        Kml10AnnotateHandler annotateHandler = new Kml10AnnotateHandler(kmlFile, description);
+        EXECUTOR.execute(annotateHandler);
+    }
+
+}
+
+
+class Kml10AnnotateHandler implements Runnable
+{
+    File kmlFile;
+    String description;
+
+    public Kml10AnnotateHandler(File kmlFile, String description)
+    {
+        this.kmlFile = kmlFile;
+        this.description = description;
+    }
+
+    @Override
+    public void run()
+    {
+        if (!kmlFile.exists())
+        {
+            return;
+        }
+
         try
         {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(kmlFile);
 
+            NodeList placemarkList = doc.getElementsByTagName("Placemark");
+            Node lastPlacemark = placemarkList.item(placemarkList.getLength() - 1);
+
+            Node annotation = doc.createElement("name");
+            annotation.appendChild(doc.createTextNode(description));
+
+            lastPlacemark.appendChild(annotation);
+
+            String newFileContents = Utilities.GetStringFromNode(doc);
+
+            synchronized (Kml10FileLogger.lock)
+            {
+                FileOutputStream fos = new FileOutputStream(kmlFile, false);
+                fos.write(newFileContents.getBytes());
+                fos.close();
+            }
+
+
+        }
+        catch (Exception e)
+        {
+            Utilities.LogError("Kml10FileLogger.Annotate", e);
+        }
+
+    }
+}
+
+class Kml10WriteHandler implements Runnable
+{
+
+    boolean useSatelliteTime;
+    Location loc;
+    File kmlFile;
+
+    public Kml10WriteHandler(boolean useSatelliteTime, Location loc, File kmlFile)
+    {
+        this.useSatelliteTime = useSatelliteTime;
+        this.loc = loc;
+        this.kmlFile = kmlFile;
+    }
+
+
+    @Override
+    public void run()
+    {
+        try
+        {
             Date now;
 
-            if(useSatelliteTime)
+            if (useSatelliteTime)
             {
                 now = new Date(loc.getTime());
             }
@@ -47,7 +135,7 @@ class Kml10FileLogger implements IFileLogger
 
             String dateTimeString = Utilities.GetIsoDateTime(now);
 
-            if(!kmlFile.exists())
+            if (!kmlFile.exists())
             {
                 kmlFile.createNewFile();
 
@@ -71,12 +159,12 @@ class Kml10FileLogger implements IFileLogger
 
             NodeList coordinatesList = doc.getElementsByTagName("coordinates");
 
-            if(coordinatesList.item(0) != null)
+            if (coordinatesList.item(0) != null)
             {
                 Node coordinates = coordinatesList.item(0);
                 Node coordTextNode = coordinates.getFirstChild();
 
-                if(coordTextNode == null)
+                if (coordTextNode == null)
                 {
                     coordTextNode = doc.createTextNode("");
                     coordinates.appendChild(coordTextNode);
@@ -114,7 +202,7 @@ class Kml10FileLogger implements IFileLogger
 
             String newFileContents = Utilities.GetStringFromNode(doc);
 
-            synchronized(lock)
+            synchronized (Kml10FileLogger.lock)
             {
                 FileOutputStream fos = new FileOutputStream(kmlFile, false);
                 fos.write(newFileContents.getBytes());
@@ -122,54 +210,9 @@ class Kml10FileLogger implements IFileLogger
             }
 
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Utilities.LogError("Kml10FileLogger.Write", e);
-            throw new Exception("Could not write to KML file");
-        }
-
-    }
-
-
-    public void Annotate(String description) throws Exception
-    {
-
-        if(!kmlFile.exists())
-        {
-            return;
-        }
-
-        try
-        {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(kmlFile);
-
-            NodeList placemarkList = doc.getElementsByTagName("Placemark");
-            Node lastPlacemark = placemarkList.item(placemarkList.getLength() - 1);
-
-            Node annotation = doc.createElement("name");
-            annotation.appendChild(doc.createTextNode(description));
-
-            lastPlacemark.appendChild(annotation);
-
-            String newFileContents = Utilities.GetStringFromNode(doc);
-
-            synchronized(lock)
-            {
-                FileOutputStream fos = new FileOutputStream(kmlFile, false);
-                fos.write(newFileContents.getBytes());
-                fos.close();
-            }
-
-
-        }
-        catch(Exception e)
-        {
-            Utilities.LogError("Kml10FileLogger.Annotate", e);
-            throw new Exception("Could not annotate KML file");
         }
     }
-
-
 }

@@ -1,6 +1,7 @@
 package com.mendhak.gpslogger.loggers;
 
 import android.location.Location;
+import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Utilities;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -17,17 +18,19 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.nio.channels.FileLock;
 import java.util.Date;
-import java.util.logging.ConsoleHandler;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class Kml22FileLogger implements IFileLogger
 {
-    private final static Object lock = new Object();
+    protected final static Object lock = new Object();
+    private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
+            new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
     private final boolean useSatelliteTime;
     private final boolean addNewTrackSegment;
     private final File kmlFile;
-    private FileLock kmlLock;
 
     public Kml22FileLogger(File kmlFile, boolean useSatelliteTime, boolean addNewTrackSegment)
     {
@@ -39,12 +42,109 @@ public class Kml22FileLogger implements IFileLogger
 
     public void Write(Location loc) throws Exception
     {
+        Kml22WriteHandler writeHandler = new Kml22WriteHandler(useSatelliteTime, loc, kmlFile, addNewTrackSegment);
+        EXECUTOR.execute(writeHandler);
+    }
+
+    public void Annotate(String description) throws Exception
+    {
+        Kml22AnnotateHandler annotateHandler = new Kml22AnnotateHandler(kmlFile, description);
+        EXECUTOR.execute(annotateHandler);
+    }
+}
+
+class Kml22AnnotateHandler implements Runnable
+{
+    File kmlFile;
+    String description;
+
+    public Kml22AnnotateHandler(File kmlFile, String description)
+    {
+        this.kmlFile = kmlFile;
+        this.description = description;
+    }
+
+
+    @Override
+    public void run()
+    {
+        if (!kmlFile.exists())
+        {
+            return;
+        }
+
+        try
+        {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(kmlFile);
+
+            Node documentNode = doc.getElementsByTagName("Document").item(0);
+            Node newPlacemark = doc.createElement("Placemark");
+
+            Node nameNode = doc.createElement("name");
+            nameNode.appendChild(doc.createTextNode(description));
+
+            Node pointNode = doc.createElement("Point");
+            Node coordinatesNode = doc.createElement("coordinates");
+
+            //Find the latest coordinates from the list of gx:coords.
+            NodeList gxCoords = doc.getElementsByTagNameNS("http://www.google.com/kml/ext/2.2", "coord");
+            Node latestCoordinates = gxCoords.item(gxCoords.getLength() - 1);
+            coordinatesNode.appendChild(doc.createTextNode(latestCoordinates.getTextContent().replace(" ", ",")));
+
+            pointNode.appendChild(coordinatesNode);
+            newPlacemark.appendChild(nameNode);
+            newPlacemark.appendChild(pointNode);
+
+            documentNode.appendChild(newPlacemark);
+
+            synchronized (Kml22FileLogger.lock)
+            {
+
+                Transformer transformer = TransformerFactory.newInstance().newTransformer();
+                Result output = new StreamResult(kmlFile);
+                Source input = new DOMSource(doc);
+
+                transformer.transform(input, output);
+            }
+        }
+        catch (Exception e)
+        {
+            Utilities.LogError("Kml22FileLogger.Annotate", e);
+        }
+    }
+}
+
+class Kml22WriteHandler implements Runnable
+{
+
+    boolean useSatelliteTime;
+    boolean addNewTrackSegment;
+    File kmlFile;
+    Location loc;
+
+
+    public Kml22WriteHandler(boolean useSatelliteTime, Location loc, File kmlFile, boolean addNewTrackSegment)
+    {
+
+        this.useSatelliteTime = useSatelliteTime;
+        this.loc = loc;
+        this.kmlFile = kmlFile;
+        this.addNewTrackSegment = addNewTrackSegment;
+    }
+
+
+    @Override
+    public void run()
+    {
         try
         {
 
             Date now;
 
-            if(useSatelliteTime)
+            if (useSatelliteTime)
             {
                 now = new Date(loc.getTime());
             }
@@ -55,7 +155,7 @@ public class Kml22FileLogger implements IFileLogger
 
             String dateTimeString = Utilities.GetIsoDateTime(now);
 
-            if(!kmlFile.exists())
+            if (!kmlFile.exists())
             {
                 kmlFile.createNewFile();
 
@@ -84,7 +184,7 @@ public class Kml22FileLogger implements IFileLogger
             NodeList trackNodes = doc.getElementsByTagNameNS("http://www.google.com/kml/ext/2.2", "Track");
             Node gxTrack;
 
-            if(addNewTrackSegment || trackNodes.getLength() == 0)
+            if (addNewTrackSegment || trackNodes.getLength() == 0)
             {
                 Node placeMark = doc.createElement("Placemark");
                 documentNode.appendChild(placeMark);
@@ -106,67 +206,19 @@ public class Kml22FileLogger implements IFileLogger
             when.appendChild(doc.createTextNode(dateTimeString));
             gxTrack.appendChild(gxCoord);
 
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            Result output = new StreamResult(kmlFile);
-            Source input = new DOMSource(doc);
+            synchronized (Kml22FileLogger.lock)
+            {
+                Transformer transformer = TransformerFactory.newInstance().newTransformer();
+                Result output = new StreamResult(kmlFile);
+                Source input = new DOMSource(doc);
 
-            transformer.transform(input, output);
+                transformer.transform(input, output);
+            }
 
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Utilities.LogError("Kml22FileLogger.Write", e);
-            throw new Exception("Could not write to KML file");
-        }
-    }
-
-    public void Annotate(String description) throws Exception
-    {
-        if(!kmlFile.exists())
-        {
-            return;
-        }
-
-        try
-        {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setNamespaceAware(true);
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(kmlFile);
-
-            Node documentNode = doc.getElementsByTagName("Document").item(0);
-            Node newPlacemark = doc.createElement("Placemark");
-
-            Node nameNode = doc.createElement("name");
-            nameNode.appendChild(doc.createTextNode(description));
-
-            Node pointNode = doc.createElement("Point");
-            Node coordinatesNode = doc.createElement("coordinates");
-
-            //Find the latest coordinates from the list of gx:coords.
-            NodeList gxCoords = doc.getElementsByTagNameNS("http://www.google.com/kml/ext/2.2", "coord");
-            Node latestCoordinates = gxCoords.item(gxCoords.getLength()-1);
-            coordinatesNode.appendChild(doc.createTextNode(latestCoordinates.getTextContent().replace(" ",",")));
-
-            pointNode.appendChild(coordinatesNode);
-            newPlacemark.appendChild(nameNode);
-            newPlacemark.appendChild(pointNode);
-
-            documentNode.appendChild(newPlacemark);
-
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            Result output = new StreamResult(kmlFile);
-            Source input = new DOMSource(doc);
-
-            transformer.transform(input, output);
-
-
-
-        }
-        catch(Exception e)
-        {
-            Utilities.LogError("Kml22FileLogger.Annotate", e);
-            throw new Exception("Could not annotate KML file");
         }
     }
 }
