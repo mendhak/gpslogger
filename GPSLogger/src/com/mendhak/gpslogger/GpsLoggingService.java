@@ -706,6 +706,7 @@ public class GpsLoggingService extends Service
      */
     void OnLocationChanged(Location loc)
     {
+        Utilities.LogDebug("GpsLoggingService.OnLocationChanged");
 
         // Don't do anything until the proper time has elapsed
         long currentTimeStamp = System.currentTimeMillis();
@@ -732,6 +733,7 @@ public class GpsLoggingService extends Service
 
     private void StopAlarm()
     {
+        Utilities.LogDebug("GpsLoggingService.StopAlarm");
         Intent i = new Intent(this, GpsLoggingService.class);
         i.putExtra("getnextpoint", true);
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
@@ -741,6 +743,8 @@ public class GpsLoggingService extends Service
 
     private void SetAlarmForNextPoint()
     {
+
+        Utilities.LogDebug("GpsLoggingService.SetAlarmForNextPoint");
 
         Intent i = new Intent(this, GpsLoggingService.class);
 
