@@ -127,12 +127,12 @@ public class GpsLoggingService extends Service
             if (bundle != null)
             {
                 boolean startRightNow = bundle.getBoolean("immediate");
-                boolean alarmWentOff = bundle.getBoolean("alarmWentOff");
+                boolean sendEmailNow = bundle.getBoolean("emailAlarm");
                 boolean getNextPoint = bundle.getBoolean("getnextpoint");
 
                 Utilities.LogDebug("startRightNow - " + String.valueOf(startRightNow));
 
-                Utilities.LogDebug("alarmWentOff - " + String.valueOf(alarmWentOff));
+                Utilities.LogDebug("emailAlarm - " + String.valueOf(sendEmailNow));
 
                 if (startRightNow)
                 {
@@ -141,7 +141,7 @@ public class GpsLoggingService extends Service
                     StartLogging();
                 }
 
-                if (alarmWentOff)
+                if (sendEmailNow)
                 {
 
                     Utilities.LogDebug("setEmailReadyToBeSent = true");
