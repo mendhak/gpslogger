@@ -86,8 +86,10 @@
                           android:layout_width="fill_parent" android:layout_height="wrap_content"
                           android:textOn="@string/btn_stop_logging" android:textOff="@string/btn_start_logging"/>
         </LinearLayout>
-        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
-            <Button android:id="@+id/buttonSinglePoint" android:layout_width="fill_parent" android:layout_height="wrap_content"
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
+                      android:layout_height="wrap_content">
+            <Button android:id="@+id/buttonSinglePoint" android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
                     android:text="@string/btn_single_point"></Button>
         </LinearLayout>
 
@@ -109,15 +111,6 @@
                           android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
                           android:paddingLeft="8dip" android:text="@string/summary_freq_every"/>
                 <TextView android:id="@+id/txtFrequency" android:layout_width="wrap_content"
-                          android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
-                          android:layout_height="fill_parent"/>
-            </TableRow>
-            <TableRow android:layout_width="fill_parent"
-                      android:layout_height="fill_parent">
-                <TextView android:id="@+id/lblDistance" android:layout_width="wrap_content"
-                          android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
-                          android:paddingLeft="8dip" android:text="@string/summary_dist"/>
-                <TextView android:id="@+id/txtDistance" android:layout_width="wrap_content"
                           android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
                           android:layout_height="fill_parent"/>
             </TableRow>

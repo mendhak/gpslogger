@@ -34,36 +34,30 @@
                                 android:dialogTitle="@string/time_before_logging_dialog_title"
                                 android:numeric="integer" android:maxLength="4"
                                 android:hint="@string/time_before_logging_hint"/>
-            <EditTextPreference android:key="distance_before_logging"
-                                android:title="@string/distance_before_logging_title"
-                                android:summary="@string/distance_before_logging_summary"
-                                android:dialogTitle="@string/settings_distance_in_meters"
-                                android:numeric="integer" android:maxLength="4"
-                                android:hint="@string/settings_enter_meters"/>
 
         </PreferenceCategory>
     </PreferenceScreen>
     <PreferenceScreen android:title="@string/pref_general_title" android:summary="@string/pref_general_summary">
 
-            <CheckBoxPreference android:key="show_notification"
-                                android:summary="@string/show_notification_summary"
-                                android:title="@string/show_notification_title"
-                                android:defaultValue="true"/>
-            <CheckBoxPreference android:title="@string/startonbootup_title"
-                                android:summary="@string/startonbootup_summary" android:key="startonbootup"/>
-            <CheckBoxPreference android:title="@string/useimperial_title"
-                                android:summary="@string/useimperial_summary" android:key="useImperial"/>
-            <Preference android:title="@string/enabledisablegps_title"
-                        android:summary="@string/enabledisablegps_summary" android:key="enableDisableGps"
-                        android:defaultValue="false"/>
+        <CheckBoxPreference android:key="show_notification"
+                            android:summary="@string/show_notification_summary"
+                            android:title="@string/show_notification_title"
+                            android:defaultValue="true"/>
+        <CheckBoxPreference android:title="@string/startonbootup_title"
+                            android:summary="@string/startonbootup_summary" android:key="startonbootup"/>
+        <CheckBoxPreference android:title="@string/useimperial_title"
+                            android:summary="@string/useimperial_summary" android:key="useImperial"/>
+        <Preference android:title="@string/enabledisablegps_title"
+                    android:summary="@string/enabledisablegps_summary" android:key="enableDisableGps"
+                    android:defaultValue="false"/>
 
-            <ListPreference android:key="locale_override"
-                            android:title="@string/language" android:summary="@string/language_summary"
-                            android:entries="@array/language_choices" android:defaultValue=""
-                            android:entryValues="@array/language_values"/>
+        <ListPreference android:key="locale_override"
+                        android:title="@string/language" android:summary="@string/language_summary"
+                        android:entries="@array/language_choices" android:defaultValue=""
+                        android:entryValues="@array/language_values"/>
 
-            <CheckBoxPreference android:title="@string/debuglog_title" android:summary="@string/debuglog_summary"
-                                android:key="debugtofile" android:defaultValue="false"/>
+        <CheckBoxPreference android:title="@string/debuglog_title" android:summary="@string/debuglog_summary"
+                            android:key="debugtofile" android:defaultValue="false"/>
 
     </PreferenceScreen>
     <PreferenceScreen android:title="@string/pref_emailupload_title" android:summary="@string/pref_emailupload_summary">
@@ -78,7 +72,7 @@
             <intent android:action="com.mendhak.gpslogger.OSM_SETUP"/>
         </Preference>
         <Preference android:title="@string/dropbox_setup_title" android:summary="@string/dropbox_setup_summary"
-                android:key="dropbox_setup">
+                    android:key="dropbox_setup">
             <intent android:action="com.mendhak.gpslogger.DROPBOX_SETUP"/>
         </Preference>
 
