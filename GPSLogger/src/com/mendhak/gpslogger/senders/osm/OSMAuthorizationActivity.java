@@ -1,11 +1,5 @@
 package com.mendhak.gpslogger.senders.osm;
 
-import com.mendhak.gpslogger.GpsMainActivity;
-import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.Utilities;
-import oauth.signpost.OAuth;
-import oauth.signpost.OAuthConsumer;
-import oauth.signpost.OAuthProvider;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,105 +9,111 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import com.mendhak.gpslogger.GpsMainActivity;
+import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.Utilities;
+import oauth.signpost.OAuth;
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.OAuthProvider;
 
 public class OSMAuthorizationActivity extends Activity implements
-		OnClickListener
+        OnClickListener
 {
 
-	private static OAuthProvider	provider;
-	private static OAuthConsumer	consumer;
+    private static OAuthProvider provider;
+    private static OAuthConsumer consumer;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.osmauth);
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.osmauth);
 
-		final Intent intent = getIntent();
-		final Uri myURI = intent.getData();
+        final Intent intent = getIntent();
+        final Uri myURI = intent.getData();
 
-		if (myURI != null && myURI.getQuery() != null
-				&& myURI.getQuery().length() > 0)
-		{
-			//User has returned! Read the verifier info from querystring
-			String oAuthVerifier = myURI.getQueryParameter("oauth_verifier");
+        if (myURI != null && myURI.getQuery() != null
+                && myURI.getQuery().length() > 0)
+        {
+            //User has returned! Read the verifier info from querystring
+            String oAuthVerifier = myURI.getQueryParameter("oauth_verifier");
 
-			try
-			{
-				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-				
-				if (provider == null)
-				{
-					provider = Utilities.GetOSMAuthProvider(getBaseContext());
-				}
+            try
+            {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-				if (consumer == null)
-				{
-					//In case consumer is null, re-initialize from stored values.
-					consumer = Utilities.GetOSMAuthConsumer(getBaseContext());
-				}
+                if (provider == null)
+                {
+                    provider = OSMHelper.GetOSMAuthProvider(getBaseContext());
+                }
 
-				//Ask OpenStreetMap for the access token. This is the main event.
-				provider.retrieveAccessToken(consumer, oAuthVerifier);
-				
-				String osmAccessToken = consumer.getToken();
-				String osmAccessTokenSecret = consumer.getTokenSecret();
-				
-				//Save for use later.
-				SharedPreferences.Editor editor = prefs.edit();
-				editor.putString("osm_accesstoken", osmAccessToken);
-				editor.putString("osm_accesstokensecret", osmAccessTokenSecret);
-				editor.commit();
-				
-				//Now go away
-				startActivity(new Intent(getBaseContext(), GpsMainActivity.class));
-				finish();
+                if (consumer == null)
+                {
+                    //In case consumer is null, re-initialize from stored values.
+                    consumer = OSMHelper.GetOSMAuthConsumer(getBaseContext());
+                }
 
-			}
-			catch (Exception e)
-			{
-				Utilities.LogError("OSMAuthorizationActivity.onCreate - user has returned", e);
-				Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error), this);
-			}
-		}
+                //Ask OpenStreetMap for the access token. This is the main event.
+                provider.retrieveAccessToken(consumer, oAuthVerifier);
 
-		Button authButton = (Button) findViewById(R.id.btnAuthorizeOSM);
-		authButton.setOnClickListener(this);
+                String osmAccessToken = consumer.getToken();
+                String osmAccessTokenSecret = consumer.getTokenSecret();
 
-	}
+                //Save for use later.
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("osm_accesstoken", osmAccessToken);
+                editor.putString("osm_accesstokensecret", osmAccessTokenSecret);
+                editor.commit();
 
-	public void onClick(View v)
-	{
-		try
-		{
-			//User clicks. Set the consumer and provider up.
-			consumer = Utilities.GetOSMAuthConsumer(getBaseContext());
-			provider = Utilities.GetOSMAuthProvider(getBaseContext());
+                //Now go away
+                startActivity(new Intent(getBaseContext(), GpsMainActivity.class));
+                finish();
 
-			String authUrl;
+            }
+            catch (Exception e)
+            {
+                Utilities.LogError("OSMAuthorizationActivity.onCreate - user has returned", e);
+                Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error), this);
+            }
+        }
 
-			//Get the request token and request token secret
-			authUrl = provider.retrieveRequestToken(consumer, OAuth.OUT_OF_BAND);
+        Button authButton = (Button) findViewById(R.id.btnAuthorizeOSM);
+        authButton.setOnClickListener(this);
 
-			//Save for later
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-			SharedPreferences.Editor editor = prefs.edit();
-			editor.putString("osm_requesttoken", consumer.getToken());
-			editor.putString("osm_requesttokensecret",consumer.getTokenSecret());
-			editor.commit();
+    }
 
-			//Open browser, send user to OpenStreetMap.org
-			Uri uri = Uri.parse(authUrl);
-			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-			startActivity(intent);
+    public void onClick(View v)
+    {
+        try
+        {
+            //User clicks. Set the consumer and provider up.
+            consumer = OSMHelper.GetOSMAuthConsumer(getBaseContext());
+            provider = OSMHelper.GetOSMAuthProvider(getBaseContext());
 
-		}
-		catch (Exception e)
-		{
-			Utilities.LogError("OSMAuthorizationActivity.onClick", e);
-			Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error), this);
-		}
+            String authUrl;
 
-	}
+            //Get the request token and request token secret
+            authUrl = provider.retrieveRequestToken(consumer, OAuth.OUT_OF_BAND);
+
+            //Save for later
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("osm_requesttoken", consumer.getToken());
+            editor.putString("osm_requesttokensecret", consumer.getTokenSecret());
+            editor.commit();
+
+            //Open browser, send user to OpenStreetMap.org
+            Uri uri = Uri.parse(authUrl);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+
+        }
+        catch (Exception e)
+        {
+            Utilities.LogError("OSMAuthorizationActivity.onClick", e);
+            Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error), this);
+        }
+
+    }
 
 }

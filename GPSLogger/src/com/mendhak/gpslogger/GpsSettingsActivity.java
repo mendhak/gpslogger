@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.senders.osm.OSMHelper;
 
 public class GpsSettingsActivity extends PreferenceActivity
 {
@@ -45,7 +45,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 
         public boolean onPreferenceClick(Preference preference)
         {
-            startActivity(Utilities.GetOsmSettingsIntent(getBaseContext()));
+            startActivity(OSMHelper.GetOsmSettingsIntent(getBaseContext()));
 
             return true;
         }

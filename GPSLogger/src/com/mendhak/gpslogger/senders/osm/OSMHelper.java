@@ -1,10 +1,18 @@
 package com.mendhak.gpslogger.senders.osm;
 
-import java.io.File;
-
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.Environment;
+import android.preference.PreferenceManager;
+import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
+import com.mendhak.gpslogger.common.Utilities;
 import oauth.signpost.OAuthConsumer;
-
+import oauth.signpost.OAuthProvider;
+import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
+import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
@@ -13,34 +21,105 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import android.content.SharedPreferences;
-import android.os.Environment;
-import android.preference.PreferenceManager;
-
-import com.mendhak.gpslogger.GpsMainActivity;
-import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.Utilities;
+import java.io.File;
 
 public class OSMHelper implements IActionListener
 {
 
-    private final GpsMainActivity mainActivity;
+    IActionListener callback;
+    Context ctx;
 
-
-    public OSMHelper(GpsMainActivity activity)
+    public OSMHelper(Context ctx)
     {
-        this.mainActivity = activity;
+
+        this.ctx = ctx;
     }
+
+    public static OAuthProvider GetOSMAuthProvider(Context ctx)
+    {
+        return new CommonsHttpOAuthProvider(
+                ctx.getString(R.string.osm_requesttoken_url),
+                ctx.getString(R.string.osm_accesstoken_url),
+                ctx.getString(R.string.osm_authorize_url));
+
+    }
+
+    public static boolean IsOsmAuthorized(Context ctx)
+    {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(ctx);
+        String oAuthAccessToken = prefs.getString("osm_accesstoken", "");
+
+        return (oAuthAccessToken != null && oAuthAccessToken.length() > 0);
+    }
+
+    public static Intent GetOsmSettingsIntent(Context ctx)
+    {
+        Intent intentOsm;
+
+        if (!IsOsmAuthorized(ctx))
+        {
+            intentOsm = new Intent(ctx.getPackageName() + ".OSM_AUTHORIZE");
+            intentOsm.setData(Uri.parse("gpslogger://authorize"));
+        }
+        else
+        {
+            intentOsm = new Intent(ctx.getPackageName() + ".OSM_SETUP");
+
+        }
+
+        return intentOsm;
+    }
+
+
+    public static OAuthConsumer GetOSMAuthConsumer(Context ctx)
+    {
+
+        OAuthConsumer consumer = null;
+
+        try
+        {
+            int osmConsumerKey = ctx.getResources().getIdentifier(
+                    "osm_consumerkey", "string", ctx.getPackageName());
+            int osmConsumerSecret = ctx.getResources().getIdentifier(
+                    "osm_consumersecret", "string", ctx.getPackageName());
+            consumer = new CommonsHttpOAuthConsumer(
+                    ctx.getString(osmConsumerKey),
+                    ctx.getString(osmConsumerSecret));
+
+            SharedPreferences prefs = PreferenceManager
+                    .getDefaultSharedPreferences(ctx);
+            String osmAccessToken = prefs.getString("osm_accesstoken", "");
+            String osmAccessTokenSecret = prefs.getString(
+                    "osm_accesstokensecret", "");
+
+            if (osmAccessToken != null && osmAccessToken.length() > 0
+                    && osmAccessTokenSecret != null
+                    && osmAccessTokenSecret.length() > 0)
+            {
+                consumer.setTokenWithSecret(osmAccessToken,
+                        osmAccessTokenSecret);
+            }
+
+        }
+        catch (Exception e)
+        {
+            //Swallow the exception
+        }
+
+        return consumer;
+    }
+
 
     public void UploadGpsTrace(String fileName)
     {
 
         File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
         File chosenFile = new File(gpxFolder, fileName);
-        OAuthConsumer consumer = Utilities.GetOSMAuthConsumer(mainActivity.getBaseContext());
-        String gpsTraceUrl = mainActivity.getString(R.string.osm_gpstrace_url);
+        OAuthConsumer consumer = GetOSMAuthConsumer(ctx);
+        String gpsTraceUrl = ctx.getString(R.string.osm_gpstrace_url);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mainActivity.getBaseContext());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         String description = prefs.getString("osm_description", "");
         String tags = prefs.getString("osm_tags", "");
         String visibility = prefs.getString("osm_visibility", "private");
@@ -51,12 +130,12 @@ public class OSMHelper implements IActionListener
 
     public void OnComplete()
     {
-        mainActivity.handler.post(mainActivity.updateOsmUpload);
+        callback.OnComplete();
     }
 
     public void OnFailure()
     {
-       mainActivity.handler.post(mainActivity.updateOsmFailed);
+        callback.OnFailure();
     }
 
 
@@ -94,7 +173,7 @@ public class OSMHelper implements IActionListener
                 FileBody gpxBody = new FileBody(chosenFile);
 
                 entity.addPart("file", gpxBody);
-                if(description == null || description.length() <= 0)
+                if (description == null || description.length() <= 0)
                 {
                     description = "GPSLogger for Android";
                 }
@@ -112,7 +191,7 @@ public class OSMHelper implements IActionListener
                 helper.OnComplete();
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 helper.OnFailure();
                 Utilities.LogError("OsmUploadHelper.run", e);

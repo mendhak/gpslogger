@@ -10,7 +10,6 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.view.*;
@@ -38,7 +37,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
     /**
      * General all purpose handler used for updating the UI from threads.
      */
-    public final Handler handler = new Handler();
     private static Intent serviceIntent;
     private GpsLoggingService loggingService;
 
@@ -405,7 +403,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
     {
         Utilities.LogDebug("GpsMainActivity.EmailNow");
 
-        if (Utilities.IsEmailSetup(getBaseContext()))
+        if (Utilities.IsEmailSetup())
         {
             loggingService.ForceEmailLogFile();
         }
@@ -559,9 +557,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
     {
         Utilities.LogDebug("GpsMainactivity.UploadToOpenStreetMap");
 
-        if (!Utilities.IsOsmAuthorized(getBaseContext()))
+        if (!OSMHelper.IsOsmAuthorized(getBaseContext()))
         {
-            startActivity(Utilities.GetOsmSettingsIntent(getBaseContext()));
+            startActivity(OSMHelper.GetOsmSettingsIntent(getBaseContext()));
             return;
         }
 
@@ -605,7 +603,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
                     if (chosenFileName.equalsIgnoreCase(goToOsmSettings))
                     {
-                        startActivity(Utilities.GetOsmSettingsIntent(getBaseContext()));
+                        startActivity(OSMHelper.GetOsmSettingsIntent(getBaseContext()));
                     }
                     else
                     {
@@ -623,27 +621,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         {
             Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
         }
-    }
-
-    public final Runnable updateOsmUpload = new Runnable()
-    {
-        public void run()
-        {
-            OnOSMUploadComplete();
-        }
-    };
-
-    public final Runnable updateOsmFailed = new Runnable()
-    {
-        public void run()
-        {
-            OnOSMUploadComplete();
-        }
-    };
-
-    private void OnOSMUploadComplete()
-    {
-        Utilities.HideProgress();
     }
 
 

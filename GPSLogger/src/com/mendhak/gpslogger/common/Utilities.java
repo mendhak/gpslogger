@@ -4,16 +4,10 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import com.mendhak.gpslogger.R;
-import oauth.signpost.OAuthConsumer;
-import oauth.signpost.OAuthProvider;
-import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
-import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -445,17 +439,6 @@ public class Utilities
     }
 
     /**
-     * Converts given feet to meters
-     *
-     * @param f
-     * @return
-     */
-    public static int FeetToMeters(int f)
-    {
-        return (int) Math.round(f / 3.2808399);
-    }
-
-    /**
      * Converts given meters to feet and rounds up.
      *
      * @param m
@@ -466,7 +449,7 @@ public class Utilities
         return MetersToFeet((int) m);
     }
 
-    public static boolean IsEmailSetup(Context ctx)
+    public static boolean IsEmailSetup()
     {
         return AppSettings.isAutoEmailEnabled()
                 && AppSettings.getAutoEmailTarget().length() > 0
@@ -476,79 +459,6 @@ public class Utilities
 
     }
 
-    public static OAuthConsumer GetOSMAuthConsumer(Context ctx)
-    {
-
-        OAuthConsumer consumer = null;
-
-        try
-        {
-            int osmConsumerKey = ctx.getResources().getIdentifier(
-                    "osm_consumerkey", "string", ctx.getPackageName());
-            int osmConsumerSecret = ctx.getResources().getIdentifier(
-                    "osm_consumersecret", "string", ctx.getPackageName());
-            consumer = new CommonsHttpOAuthConsumer(
-                    ctx.getString(osmConsumerKey),
-                    ctx.getString(osmConsumerSecret));
-
-            SharedPreferences prefs = PreferenceManager
-                    .getDefaultSharedPreferences(ctx);
-            String osmAccessToken = prefs.getString("osm_accesstoken", "");
-            String osmAccessTokenSecret = prefs.getString(
-                    "osm_accesstokensecret", "");
-
-            if (osmAccessToken != null && osmAccessToken.length() > 0
-                    && osmAccessTokenSecret != null
-                    && osmAccessTokenSecret.length() > 0)
-            {
-                consumer.setTokenWithSecret(osmAccessToken,
-                        osmAccessTokenSecret);
-            }
-
-        }
-        catch (Exception e)
-        {
-            //Swallow the exception
-        }
-
-        return consumer;
-    }
-
-    public static OAuthProvider GetOSMAuthProvider(Context ctx)
-    {
-        return new CommonsHttpOAuthProvider(
-                ctx.getString(R.string.osm_requesttoken_url),
-                ctx.getString(R.string.osm_accesstoken_url),
-                ctx.getString(R.string.osm_authorize_url));
-
-    }
-
-    public static boolean IsOsmAuthorized(Context ctx)
-    {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(ctx);
-        String oAuthAccessToken = prefs.getString("osm_accesstoken", "");
-
-        return (oAuthAccessToken != null && oAuthAccessToken.length() > 0);
-    }
-
-    public static Intent GetOsmSettingsIntent(Context ctx)
-    {
-        Intent intentOsm;
-
-        if (!IsOsmAuthorized(ctx))
-        {
-            intentOsm = new Intent(ctx.getPackageName() + ".OSM_AUTHORIZE");
-            intentOsm.setData(Uri.parse("gpslogger://authorize"));
-        }
-        else
-        {
-            intentOsm = new Intent(ctx.getPackageName() + ".OSM_SETUP");
-
-        }
-
-        return intentOsm;
-    }
 
     /**
      * Parses XML Nodes and returns a string. This method exists due to a problem in the Android framework;
