@@ -11,7 +11,7 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
 
 public class DropBoxAuthorizationActivity extends Activity implements
-                                                           View.OnClickListener
+        View.OnClickListener
 {
 
     DropBoxHelper helper;
@@ -26,7 +26,7 @@ public class DropBoxAuthorizationActivity extends Activity implements
         Button authButton = (Button) findViewById(R.id.btnAuthorizeDropBox);
         authButton.setOnClickListener(this);
 
-        helper = new DropBoxHelper(getBaseContext());
+        helper = new DropBoxHelper(getBaseContext(), null);
 
         // Display the proper UI state if logged in or not
         setLoggedIn(helper.IsLinked());
@@ -41,7 +41,7 @@ public class DropBoxAuthorizationActivity extends Activity implements
         {
             helper.FinishAuthorization();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Utilities.MsgBox(getString(R.string.error), getString(R.string.dropbox_couldnotauthorize),
                     DropBoxAuthorizationActivity.this);
@@ -62,7 +62,7 @@ public class DropBoxAuthorizationActivity extends Activity implements
         Button authButton = (Button) findViewById(R.id.btnAuthorizeDropBox);
         TextView tvDescription = (TextView) findViewById(R.id.lblAuthorizeDropBox);
 
-        if(loggedIn)
+        if (loggedIn)
         {
             authButton.setText(R.string.dropbox_unauthorize);
             tvDescription.setText(R.string.dropbox_unauthorize_description);
@@ -78,7 +78,7 @@ public class DropBoxAuthorizationActivity extends Activity implements
     {
 
         // This logs you out if you're logged in, or vice versa
-        if(loggedIn)
+        if (loggedIn)
         {
             logOut();
         }
@@ -88,7 +88,7 @@ public class DropBoxAuthorizationActivity extends Activity implements
             {
                 helper.StartAuthentication(DropBoxAuthorizationActivity.this);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Utilities.LogError("DropBoxAuthorizationActivity.onClick", e);
             }

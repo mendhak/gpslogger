@@ -1,7 +1,6 @@
 package com.mendhak.gpslogger.senders.dropbox;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -11,9 +10,9 @@ import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 import com.dropbox.client2.session.Session;
 import com.dropbox.client2.session.TokenPair;
-import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
+
 import java.io.File;
 import java.io.FileInputStream;
 
@@ -26,18 +25,19 @@ public class DropBoxHelper implements IActionListener
     final static private Session.AccessType ACCESS_TYPE = Session.AccessType.APP_FOLDER;
     Context ctx;
     DropboxAPI<AndroidAuthSession> dropboxApi;
-    GpsMainActivity mainActivity;
+    IActionListener callback;
 
-
-    public DropBoxHelper(Context context)
+    public DropBoxHelper(Context context, IActionListener listener)
     {
         ctx = context;
         AndroidAuthSession session = buildSession();
         dropboxApi = new DropboxAPI<AndroidAuthSession>(session);
+        callback = listener;
     }
 
     /**
      * Whether the user has authorized GPSLogger with DropBox
+     *
      * @return True/False
      */
     public boolean IsLinked()
@@ -48,7 +48,7 @@ public class DropBoxHelper implements IActionListener
     public void FinishAuthorization()
     {
         AndroidAuthSession session = dropboxApi.getSession();
-        if(session.authenticationSuccessful())
+        if (session.authenticationSuccessful())
         {
             // Mandatory call to complete the auth
             session.finishAuthentication();
@@ -64,11 +64,13 @@ public class DropBoxHelper implements IActionListener
      * Shows keeping the access keys returned from Trusted Authenticator in a local
      * store, rather than storing user name & password, and re-authenticating each
      * time (which is not to be done, ever).
-     * @param key The Access Key
+     *
+     * @param key    The Access Key
      * @param secret The Access Secret
      */
     private void storeKeys(String key, String secret)
     {
+
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(ctx);
         SharedPreferences.Editor edit = prefs.edit();
@@ -96,7 +98,7 @@ public class DropBoxHelper implements IActionListener
         AndroidAuthSession session;
 
         String[] stored = getKeys();
-        if(stored != null)
+        if (stored != null)
         {
             AccessTokenPair accessToken = new AccessTokenPair(stored[0], stored[1]);
             session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE, accessToken);
@@ -121,7 +123,7 @@ public class DropBoxHelper implements IActionListener
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         String key = prefs.getString(ACCESS_KEY_NAME, null);
         String secret = prefs.getString(ACCESS_SECRET_NAME, null);
-        if(key != null && secret != null)
+        if (key != null && secret != null)
         {
             String[] ret = new String[2];
             ret[0] = key;
@@ -149,16 +151,15 @@ public class DropBoxHelper implements IActionListener
         clearKeys();
     }
 
-    public void UploadFile(String fileName, GpsMainActivity activity)
+    public void UploadFile(String fileName)
     {
-        mainActivity = activity;
         Thread t = new Thread(new DropBoxUploadHandler(fileName, dropboxApi, this));
         t.start();
     }
 
     public void OnComplete()
     {
-        mainActivity.handler.post(mainActivity.updateDropBoxUpload);
+        callback.OnComplete();
     }
 
     public void OnFailure()
@@ -192,7 +193,7 @@ public class DropBoxHelper implements IActionListener
                 Utilities.LogInfo("DropBox uploaded file rev is: " + upEntry.rev);
                 helper.OnComplete();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Utilities.LogError("DropBoxHelper.UploadFile", e);
             }

@@ -18,6 +18,7 @@ import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
@@ -31,7 +32,7 @@ import java.io.FilenameFilter;
 import java.util.*;
 
 public class GpsMainActivity extends Activity implements OnCheckedChangeListener,
-        IGpsLoggerServiceClient, View.OnClickListener
+        IGpsLoggerServiceClient, View.OnClickListener, IActionListener
 {
 
     /**
@@ -503,7 +504,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
     {
         Utilities.LogDebug("GpsMainActivity.UploadToDropBox");
 
-        final DropBoxHelper dropBoxHelper = new DropBoxHelper(getBaseContext());
+        final DropBoxHelper dropBoxHelper = new DropBoxHelper(getBaseContext(), this);
 
 
         if (!dropBoxHelper.IsLinked())
@@ -539,7 +540,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
                     dialog.dismiss();
                     String chosenFileName = files[index];
                     Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.dropbox_uploading), getString(R.string.please_wait));
-                    dropBoxHelper.UploadFile(chosenFileName, GpsMainActivity.this);
+                    dropBoxHelper.UploadFile(chosenFileName);
                 }
             });
             dialog.show();
@@ -641,19 +642,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
     };
 
     private void OnOSMUploadComplete()
-    {
-        Utilities.HideProgress();
-    }
-
-    public final Runnable updateDropBoxUpload = new Runnable()
-    {
-        public void run()
-        {
-            OnDropBoxUploadComplete();
-        }
-    };
-
-    public void OnDropBoxUploadComplete()
     {
         Utilities.HideProgress();
     }
@@ -1009,4 +997,15 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
     }
 
 
+    @Override
+    public void OnComplete()
+    {
+        Utilities.HideProgress();
+    }
+
+    @Override
+    public void OnFailure()
+    {
+        Utilities.HideProgress();
+    }
 }
