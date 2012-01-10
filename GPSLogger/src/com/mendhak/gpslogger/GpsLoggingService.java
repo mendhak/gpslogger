@@ -1,3 +1,10 @@
+//TODO: Simplify email logic (too many methods)
+//TODO: Remove GpsMainActivity references in other classes
+//TODO: Use IActionListener callbacks
+//TODO: Allow messages in IActionListener callback methods
+//TODO: Handle case where a fix is not found and GPS gives up - restart alarm somehow?
+//TODO: Get rid of handlers from GPSMain and GPSLoggingSvc
+
 package com.mendhak.gpslogger;
 
 import android.app.*;
@@ -7,9 +14,13 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.*;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
@@ -24,15 +35,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class GpsLoggingService extends Service
+public class GpsLoggingService extends Service implements IActionListener
 {
     private static NotificationManager gpsNotifyManager;
     private static int NOTIFICATION_ID;
 
-    /**
-     * General all purpose handler used for updating the UI from threads.
-     */
-    public final Handler handler = new Handler();
     private final IBinder mBinder = new GpsLoggingBinder();
     private static IGpsLoggerServiceClient mainServiceClient;
 
@@ -168,6 +175,18 @@ public class GpsLoggingService extends Service
         }
     }
 
+    @Override
+    public void OnComplete()
+    {
+
+    }
+
+    @Override
+    public void OnFailure()
+    {
+
+    }
+
     /**
      * Can be used from calling classes as the go-between for methods and
      * properties.
@@ -264,7 +283,7 @@ public class GpsLoggingService extends Service
 
             //Don't show a progress bar when auto-emailing
             Utilities.LogInfo("Emailing Log File");
-            AutoEmailHelper aeh = new AutoEmailHelper(GpsLoggingService.this);
+            AutoEmailHelper aeh = new AutoEmailHelper(this);
             aeh.SendLogFile(Session.getCurrentFileName(), false);
             SetupAutoEmailTimers();
 
@@ -284,7 +303,7 @@ public class GpsLoggingService extends Service
             }
 
             Utilities.LogInfo("Force emailing Log File");
-            AutoEmailHelper aeh = new AutoEmailHelper(GpsLoggingService.this);
+            AutoEmailHelper aeh = new AutoEmailHelper(this);
             aeh.SendLogFile(Session.getCurrentFileName(), true);
 
 
