@@ -29,10 +29,11 @@ public class OSMHelper implements IActionListener
     IActionListener callback;
     Context ctx;
 
-    public OSMHelper(Context ctx)
+    public OSMHelper(Context ctx, IActionListener callback)
     {
 
         this.ctx = ctx;
+        this.callback = callback;
     }
 
     public static OAuthProvider GetOSMAuthProvider(Context ctx)

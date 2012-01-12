@@ -4,6 +4,7 @@
 //TODO: Allow messages in IActionListener callback methods
 //TODO: Handle case where a fix is not found and GPS gives up - restart alarm somehow?
 //TODO: Get rid of handlers from GPSMain and GPSLoggingSvc
+//TODO: Onlocationchanged? Session is started.
 
 package com.mendhak.gpslogger;
 
@@ -38,7 +39,7 @@ import java.util.Locale;
 public class GpsLoggingService extends Service implements IActionListener
 {
     private static NotificationManager gpsNotifyManager;
-    private static int NOTIFICATION_ID;
+    private static int NOTIFICATION_ID = 8675309;
 
     private final IBinder mBinder = new GpsLoggingBinder();
     private static IGpsLoggerServiceClient mainServiceClient;
@@ -68,7 +69,7 @@ public class GpsLoggingService extends Service implements IActionListener
     public void onCreate()
     {
         Utilities.LogDebug("GpsLoggingService.onCreate");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String lang = prefs.getString("locale_override", "");
 
         if (!lang.equalsIgnoreCase(""))
@@ -78,8 +79,8 @@ public class GpsLoggingService extends Service implements IActionListener
             Locale.setDefault(locale);
             Configuration config = new Configuration();
             config.locale = locale;
-            getBaseContext().getResources().updateConfiguration(config,
-                    getBaseContext().getResources().getDisplayMetrics());
+            getApplicationContext().getResources().updateConfiguration(config,
+                    getApplicationContext().getResources().getDisplayMetrics());
         }
 
         nextPointAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -178,13 +179,13 @@ public class GpsLoggingService extends Service implements IActionListener
     @Override
     public void OnComplete()
     {
-
+        Utilities.HideProgress();
     }
 
     @Override
     public void OnFailure()
     {
-
+        Utilities.HideProgress();
     }
 
     /**
@@ -214,7 +215,7 @@ public class GpsLoggingService extends Service implements IActionListener
             long triggerTime = System.currentTimeMillis()
                     + (long) (Session.getAutoEmailDelay() * 60 * 60 * 1000);
 
-            alarmIntent = new Intent(getBaseContext(), AlarmReceiver.class);
+            alarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
 
             PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
@@ -310,40 +311,6 @@ public class GpsLoggingService extends Service implements IActionListener
         }
     }
 
-    public final Runnable updateResultsEmailSendError = new Runnable()
-    {
-        public void run()
-        {
-            AutoEmailGenericError();
-        }
-    };
-
-    public final Runnable updateResultsEmailSent = new Runnable()
-    {
-        public void run()
-        {
-            AutoEmailSent();
-        }
-    };
-
-    private void AutoEmailSent()
-    {
-        Utilities.LogInfo("Email sent");
-        if (IsMainFormVisible())
-        {
-            Utilities.HideProgress();
-        }
-    }
-
-
-    private void AutoEmailGenericError()
-    {
-        Utilities.LogWarning("Could not send email, please check Internet and auto email settings.");
-        if (IsMainFormVisible())
-        {
-            Utilities.HideProgress();
-        }
-    }
 
     /**
      * Sets the activity form for this service. The activity form needs to
@@ -363,7 +330,7 @@ public class GpsLoggingService extends Service implements IActionListener
     private void GetPreferences()
     {
         Utilities.LogDebug("GpsLoggingService.GetPreferences");
-        Utilities.PopulateAppSettings(getBaseContext());
+        Utilities.PopulateAppSettings(getApplicationContext());
 
         Utilities.LogDebug("Session.getAutoEmailDelay: " + Session.getAutoEmailDelay());
         Utilities.LogDebug("AppSettings.getAutoEmailDelay: " + AppSettings.getAutoEmailDelay());
@@ -392,7 +359,16 @@ public class GpsLoggingService extends Service implements IActionListener
         }
 
         Utilities.LogInfo("Starting logging procedures");
-        startForeground(NOTIFICATION_ID, null);
+        try
+        {
+            startForeground(NOTIFICATION_ID, new Notification());
+        }
+        catch (Exception ex)
+        {
+            System.out.print(ex.getMessage());
+        }
+
+
         Session.setStarted(true);
 
         GetPreferences();
@@ -474,7 +450,6 @@ public class GpsLoggingService extends Service implements IActionListener
         }
         finally
         {
-            // notificationVisible = false;
             Session.setNotificationVisible(false);
         }
     }
@@ -488,7 +463,7 @@ public class GpsLoggingService extends Service implements IActionListener
         // What happens when the notification item is clicked
         Intent contentIntent = new Intent(this, GpsMainActivity.class);
 
-        PendingIntent pending = PendingIntent.getActivity(getBaseContext(), 0, contentIntent,
+        PendingIntent pending = PendingIntent.getActivity(getApplicationContext(), 0, contentIntent,
                 android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
 
         Notification nfc = new Notification(R.drawable.gpsloggericon2, null, System.currentTimeMillis());
@@ -498,13 +473,12 @@ public class GpsLoggingService extends Service implements IActionListener
 
         String contentText = getString(R.string.gpslogger_still_running);
         if (Session.hasValidLocation())
-        // if (currentLatitude != 0 && currentLongitude != 0)
         {
             contentText = nf.format(Session.getCurrentLatitude()) + ","
                     + nf.format(Session.getCurrentLongitude());
         }
 
-        nfc.setLatestEventInfo(getBaseContext(), getString(R.string.gpslogger_still_running),
+        nfc.setLatestEventInfo(getApplicationContext(), getString(R.string.gpslogger_still_running),
                 contentText, pending);
 
         gpsNotifyManager.notify(NOTIFICATION_ID, nfc);
@@ -691,30 +665,6 @@ public class GpsLoggingService extends Service implements IActionListener
         StartGpsManager();
     }
 
-    /**
-     * Checks to see if providers have been enabled and switches providers based
-     * on user preferences.
-     */
-    private void ResetManagersIfRequired()
-    {
-        CheckTowerAndGpsStatus();
-        RestartGpsManagers();
-
-//		if (Session.isUsingGps() && AppSettings.shouldPreferCellTower())
-//		{
-//			RestartGpsManagers();
-//		}
-//		// If GPS is enabled and user doesn't prefer celltowers
-//		else if (Session.isGpsEnabled() && !AppSettings.shouldPreferCellTower())
-//		{
-//			// But we're not *already* using GPS
-//			if (!Session.isUsingGps())
-//			{
-//				RestartGpsManagers();
-//			}
-//			// Else do nothing
-//		}
-    }
 
     /**
      * This event is raised when the GeneralLocationListener has a new location.

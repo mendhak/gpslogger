@@ -84,21 +84,12 @@ public class AutoEmailActivity extends PreferenceActivity implements
         EditTextPreference txtPassword = (EditTextPreference) findPreference("smtp_password");
         EditTextPreference txtTarget = (EditTextPreference) findPreference("autoemail_target");
 
-        if (chkEnabled.isChecked())
-        {
-            return txtSmtpServer.getText() != null
-                    && txtSmtpServer.getText().length() > 0
-                    && txtSmtpPort.getText() != null
-                    && txtSmtpPort.getText().length() > 0
-                    && txtUsername.getText() != null
-                    && txtUsername.getText().length() > 0
-                    && txtPassword.getText() != null
-                    && txtPassword.getText().length() > 0
-                    && txtTarget.getText() != null
-                    && txtTarget.getText().length() > 0;
-        }
-
-        return true;
+        return !chkEnabled.isChecked() || txtSmtpServer.getText() != null
+                && txtSmtpServer.getText().length() > 0 && txtSmtpPort.getText() != null
+                && txtSmtpPort.getText().length() > 0 && txtUsername.getText() != null
+                && txtUsername.getText().length() > 0 && txtPassword.getText() != null
+                && txtPassword.getText().length() > 0 && txtTarget.getText() != null
+                && txtTarget.getText().length() > 0;
 
     }
 
@@ -164,7 +155,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
     private void SetSmtpValues(String server, String port, boolean useSsl)
     {
         SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(getBaseContext());
+                .getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
 
         EditTextPreference txtSmtpServer = (EditTextPreference) findPreference("smtp_server");

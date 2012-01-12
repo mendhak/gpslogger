@@ -1,3 +1,5 @@
+//TODO: Move GPSMain email now call to gpsmain to allow closing of progress bar
+
 package com.mendhak.gpslogger;
 
 
@@ -92,7 +94,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
         Utilities.LogDebug("GpsMainActivity.onCreate");
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String lang = prefs.getString("locale_override", "");
 
         if (!lang.equalsIgnoreCase(""))
@@ -101,8 +103,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             Locale.setDefault(locale);
             Configuration config = new Configuration();
             config.locale = locale;
-            getBaseContext().getResources().updateConfiguration(config,
-                    getBaseContext().getResources().getDisplayMetrics());
+            getApplicationContext().getResources().updateConfiguration(config,
+                    getApplicationContext().getResources().getDisplayMetrics());
         }
 
         super.onCreate(savedInstanceState);
@@ -252,7 +254,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
      */
     private void GetPreferences()
     {
-        Utilities.PopulateAppSettings(getBaseContext());
+        Utilities.PopulateAppSettings(getApplicationContext());
         ShowPreferencesSummary();
     }
 
@@ -287,7 +289,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             if (AppSettings.getMinimumSeconds() > 0)
             {
                 String descriptiveTime = Utilities.GetDescriptiveTimeString(AppSettings.getMinimumSeconds(),
-                        getBaseContext());
+                        getApplicationContext());
 
                 txtFrequency.setText(descriptiveTime);
             }
@@ -371,7 +373,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         switch (itemId)
         {
             case R.id.mnuSettings:
-                Intent settingsActivity = new Intent(getBaseContext(), GpsSettingsActivity.class);
+                Intent settingsActivity = new Intent(getApplicationContext(), GpsSettingsActivity.class);
                 startActivity(settingsActivity);
                 break;
             case R.id.mnuOSM:
@@ -409,7 +411,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         }
         else
         {
-            Intent emailSetup = new Intent(getBaseContext(), AutoEmailActivity.class);
+            Intent emailSetup = new Intent(getApplicationContext(), AutoEmailActivity.class);
             startActivity(emailSetup);
         }
 
@@ -434,14 +436,14 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
                 List<String> fileList = new ArrayList<String>(Arrays.asList(enumeratedFiles));
                 Collections.reverse(fileList);
                 fileList.add(0, locationOnly);
-                final String[] files = fileList.toArray(new String[0]);
+                final String[] files = fileList.toArray(new String[fileList.size()]);
 
                 final Dialog dialog = new Dialog(this);
                 dialog.setTitle(R.string.sharing_pick_file);
                 dialog.setContentView(R.layout.filelist);
                 ListView thelist = (ListView) dialog.findViewById(R.id.listViewFiles);
 
-                thelist.setAdapter(new ArrayAdapter<String>(getBaseContext(),
+                thelist.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
                         android.R.layout.simple_list_item_single_choice, files));
 
                 thelist.setOnItemClickListener(new OnItemClickListener()
@@ -502,7 +504,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
     {
         Utilities.LogDebug("GpsMainActivity.UploadToDropBox");
 
-        final DropBoxHelper dropBoxHelper = new DropBoxHelper(getBaseContext(), this);
+        final DropBoxHelper dropBoxHelper = new DropBoxHelper(getApplicationContext(), this);
 
 
         if (!dropBoxHelper.IsLinked())
@@ -519,14 +521,14 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             String[] enumeratedFiles = gpxFolder.list();
             List<String> fileList = new ArrayList<String>(Arrays.asList(enumeratedFiles));
             Collections.reverse(fileList);
-            final String[] files = fileList.toArray(new String[0]);
+            final String[] files = fileList.toArray(new String[fileList.size()]);
 
             final Dialog dialog = new Dialog(this);
             dialog.setTitle(R.string.dropbox_upload);
             dialog.setContentView(R.layout.filelist);
             ListView thelist = (ListView) dialog.findViewById(R.id.listViewFiles);
 
-            thelist.setAdapter(new ArrayAdapter<String>(getBaseContext(),
+            thelist.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
                     android.R.layout.simple_list_item_single_choice, files));
 
             thelist.setOnItemClickListener(new OnItemClickListener()
@@ -557,9 +559,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
     {
         Utilities.LogDebug("GpsMainactivity.UploadToOpenStreetMap");
 
-        if (!OSMHelper.IsOsmAuthorized(getBaseContext()))
+        if (!OSMHelper.IsOsmAuthorized(getApplicationContext()))
         {
-            startActivity(OSMHelper.GetOsmSettingsIntent(getBaseContext()));
+            startActivity(OSMHelper.GetOsmSettingsIntent(getApplicationContext()));
             return;
         }
 
@@ -582,14 +584,14 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             List<String> fileList = new ArrayList<String>(Arrays.asList(enumeratedFiles));
             Collections.reverse(fileList);
             fileList.add(0, goToOsmSettings);
-            final String[] files = fileList.toArray(new String[0]);
+            final String[] files = fileList.toArray(new String[fileList.size()]);
 
             final Dialog dialog = new Dialog(this);
             dialog.setTitle(R.string.osm_pick_file);
             dialog.setContentView(R.layout.filelist);
             ListView thelist = (ListView) dialog.findViewById(R.id.listViewFiles);
 
-            thelist.setAdapter(new ArrayAdapter<String>(getBaseContext(),
+            thelist.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
                     android.R.layout.simple_list_item_single_choice, files));
 
             thelist.setOnItemClickListener(new OnItemClickListener()
@@ -603,11 +605,11 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
                     if (chosenFileName.equalsIgnoreCase(goToOsmSettings))
                     {
-                        startActivity(OSMHelper.GetOsmSettingsIntent(getBaseContext()));
+                        startActivity(OSMHelper.GetOsmSettingsIntent(getApplicationContext()));
                     }
                     else
                     {
-                        OSMHelper osm = new OSMHelper(GpsMainActivity.this);
+                        OSMHelper osm = new OSMHelper(GpsMainActivity.this, GpsMainActivity.this);
                         Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.osm_uploading), getString(R.string.please_wait));
                         osm.UploadGpsTrace(chosenFileName);
                     }
@@ -652,7 +654,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         alert.setMessage(R.string.letters_numbers);
 
         // Set an EditText view to get user input
-        final EditText input = new EditText(getBaseContext());
+        final EditText input = new EditText(getApplicationContext());
         alert.setView(input);
 
         alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener()
@@ -871,7 +873,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
                 float bearingDegrees = loc.getBearing();
                 String direction;
 
-                direction = Utilities.GetBearingDescription(bearingDegrees, getBaseContext());
+                direction = Utilities.GetBearingDescription(bearingDegrees, getApplicationContext());
 
                 txtDirection.setText(direction + "(" + String.valueOf(Math.round(bearingDegrees))
                         + getString(R.string.degree_symbol) + ")");
@@ -923,6 +925,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         Utilities.LogDebug("GpsMainActivity.OnLocationUpdate");
         DisplayLocationInfo(loc);
         ShowPreferencesSummary();
+        SetMainButtonChecked(true);
 
         if (Session.isSinglePointMode())
         {

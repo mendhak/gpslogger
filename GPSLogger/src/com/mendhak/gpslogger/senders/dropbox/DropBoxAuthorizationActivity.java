@@ -26,7 +26,7 @@ public class DropBoxAuthorizationActivity extends Activity implements
         Button authButton = (Button) findViewById(R.id.btnAuthorizeDropBox);
         authButton.setOnClickListener(this);
 
-        helper = new DropBoxHelper(getBaseContext(), null);
+        helper = new DropBoxHelper(getApplicationContext(), null);
 
         // Display the proper UI state if logged in or not
         setLoggedIn(helper.IsLinked());

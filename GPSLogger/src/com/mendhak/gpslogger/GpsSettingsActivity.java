@@ -45,7 +45,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 
         public boolean onPreferenceClick(Preference preference)
         {
-            startActivity(OSMHelper.GetOsmSettingsIntent(getBaseContext()));
+            startActivity(OSMHelper.GetOsmSettingsIntent(getApplicationContext()));
 
             return true;
         }

@@ -40,17 +40,17 @@ public class OSMAuthorizationActivity extends Activity implements
 
             try
             {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
                 if (provider == null)
                 {
-                    provider = OSMHelper.GetOSMAuthProvider(getBaseContext());
+                    provider = OSMHelper.GetOSMAuthProvider(getApplicationContext());
                 }
 
                 if (consumer == null)
                 {
                     //In case consumer is null, re-initialize from stored values.
-                    consumer = OSMHelper.GetOSMAuthConsumer(getBaseContext());
+                    consumer = OSMHelper.GetOSMAuthConsumer(getApplicationContext());
                 }
 
                 //Ask OpenStreetMap for the access token. This is the main event.
@@ -66,7 +66,7 @@ public class OSMAuthorizationActivity extends Activity implements
                 editor.commit();
 
                 //Now go away
-                startActivity(new Intent(getBaseContext(), GpsMainActivity.class));
+                startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
                 finish();
 
             }
@@ -87,8 +87,8 @@ public class OSMAuthorizationActivity extends Activity implements
         try
         {
             //User clicks. Set the consumer and provider up.
-            consumer = OSMHelper.GetOSMAuthConsumer(getBaseContext());
-            provider = OSMHelper.GetOSMAuthProvider(getBaseContext());
+            consumer = OSMHelper.GetOSMAuthConsumer(getApplicationContext());
+            provider = OSMHelper.GetOSMAuthProvider(getApplicationContext());
 
             String authUrl;
 
@@ -96,7 +96,7 @@ public class OSMAuthorizationActivity extends Activity implements
             authUrl = provider.retrieveRequestToken(consumer, OAuth.OUT_OF_BAND);
 
             //Save for later
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("osm_requesttoken", consumer.getToken());
             editor.putString("osm_requesttokensecret", consumer.getTokenSecret());
