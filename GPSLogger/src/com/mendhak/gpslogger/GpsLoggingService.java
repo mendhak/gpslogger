@@ -1,10 +1,9 @@
 //TODO: Simplify email logic (too many methods)
-//TODO: Remove GpsMainActivity references in other classes
-//TODO: Use IActionListener callbacks
 //TODO: Allow messages in IActionListener callback methods
 //TODO: Handle case where a fix is not found and GPS gives up - restart alarm somehow?
-//TODO: Get rid of handlers from GPSMain and GPSLoggingSvc
 //TODO: Onlocationchanged? Session is started.
+//TODO: Reimplement distance by calculating difference between last point and new point
+//TODO: A more efficient way of writing to the GPX/KML files
 
 package com.mendhak.gpslogger;
 
@@ -124,7 +123,6 @@ public class GpsLoggingService extends Service implements IActionListener
 
         Utilities.LogDebug("GpsLoggingService.handleIntent");
         GetPreferences();
-        // SetupAutoEmailTimers();
 
         Utilities.LogDebug("Null intent? " + String.valueOf(intent == null));
 
@@ -306,8 +304,6 @@ public class GpsLoggingService extends Service implements IActionListener
             Utilities.LogInfo("Force emailing Log File");
             AutoEmailHelper aeh = new AutoEmailHelper(this);
             aeh.SendLogFile(Session.getCurrentFileName(), true);
-
-
         }
     }
 
@@ -690,15 +686,21 @@ public class GpsLoggingService extends Service implements IActionListener
         Notify();
         WriteToFile(loc);
         GetPreferences();
-        //ResetManagersIfRequired();
-        StopGpsManager();
-        SetAlarmForNextPoint();
+        StopManagerAndResetAlarm();
 
         if (IsMainFormVisible())
         {
             mainServiceClient.OnLocationUpdate(loc);
         }
     }
+
+    protected void StopManagerAndResetAlarm()
+    {
+        Utilities.LogDebug("GpsLoggingService.StopManagerAndResetAlarm");
+        StopGpsManager();
+        SetAlarmForNextPoint();
+    }
+
 
     private void StopAlarm()
     {
