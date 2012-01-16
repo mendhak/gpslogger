@@ -35,6 +35,15 @@
                                 android:numeric="integer" android:maxLength="4"
                                 android:hint="@string/time_before_logging_hint"/>
 
+
+            <EditTextPreference android:key="distance_before_logging"
+                                android:title="@string/distance_before_logging_title"
+                                android:summary="@string/distance_before_logging_summary"
+                                android:dialogTitle="@string/settings_distance_in_meters"
+                                android:numeric="integer" android:maxLength="4"
+                                android:hint="@string/settings_enter_meters"/>
+
+
         </PreferenceCategory>
     </PreferenceScreen>
     <PreferenceScreen android:title="@string/pref_general_title" android:summary="@string/pref_general_summary">

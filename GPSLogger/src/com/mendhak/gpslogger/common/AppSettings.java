@@ -25,6 +25,7 @@ public class AppSettings extends Application
     private static String autoEmailTarget;
     private static boolean smtpSsl;
     private static boolean debugToFile;
+    private static int minimumDistance;
 
 
     /**
@@ -155,6 +156,24 @@ public class AppSettings extends Application
     {
         AppSettings.minimumSeconds = minimumSeconds;
     }
+
+
+    /**
+     * @return the minimumDistance
+     */
+    public static int getMinimumDistance()
+    {
+        return minimumDistance;
+    }
+
+    /**
+     * @param minimumDistance the minimumDistance to set
+     */
+    static void setMinimumDistance(int minimumDistance)
+    {
+        AppSettings.minimumDistance = minimumDistance;
+    }
+
 
     /**
      * @return the newFileCreation

@@ -112,6 +112,26 @@ public class Utilities
                 false));
 
 
+        String minimumDistanceString = prefs.getString(
+                "distance_before_logging", "0");
+
+        if (minimumDistanceString != null && minimumDistanceString.length() > 0)
+        {
+            AppSettings.setMinimumDistance(Integer
+                    .valueOf(minimumDistanceString));
+        }
+        else
+        {
+            AppSettings.setMinimumDistance(0);
+        }
+
+        if (AppSettings.shouldUseImperial())
+        {
+            AppSettings.setMinimumDistance(Utilities.FeetToMeters(AppSettings
+                    .getMinimumDistance()));
+        }
+
+
         String minimumSecondsString = prefs.getString("time_before_logging",
                 "60");
 
@@ -437,6 +457,19 @@ public class Utilities
     {
         return (int) Math.round(m * 3.2808399);
     }
+
+
+    /**
+     * Converts given feet to meters
+     *
+     * @param f
+     * @return
+     */
+    public static int FeetToMeters(int f)
+    {
+        return (int) Math.round(f / 3.2808399);
+    }
+
 
     /**
      * Converts given meters to feet and rounds up.

@@ -269,6 +269,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         {
             TextView txtLoggingTo = (TextView) findViewById(R.id.txtLoggingTo);
             TextView txtFrequency = (TextView) findViewById(R.id.txtFrequency);
+            TextView txtDistance = (TextView) findViewById(R.id.txtDistance);
             TextView txtAutoEmail = (TextView) findViewById(R.id.txtAutoEmail);
 
             if (!AppSettings.shouldLogToKml() && !AppSettings.shouldLogToGpx())
@@ -297,6 +298,28 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             {
                 txtFrequency.setText(R.string.summary_freq_max);
 
+            }
+
+
+            if (AppSettings.getMinimumDistance() > 0)
+            {
+                if (AppSettings.shouldUseImperial())
+                {
+                    int minimumDistanceInFeet = Utilities.MetersToFeet(AppSettings.getMinimumDistance());
+                    txtDistance.setText(((minimumDistanceInFeet == 1)
+                            ? getString(R.string.foot)
+                            : String.valueOf(minimumDistanceInFeet) + getString(R.string.feet)));
+                }
+                else
+                {
+                    txtDistance.setText(((AppSettings.getMinimumDistance() == 1)
+                            ? getString(R.string.meter)
+                            : String.valueOf(AppSettings.getMinimumDistance()) + getString(R.string.meters)));
+                }
+            }
+            else
+            {
+                txtDistance.setText(R.string.summary_dist_regardless);
             }
 
 
