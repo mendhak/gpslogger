@@ -301,20 +301,20 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             }
 
 
-            if (AppSettings.getMinimumDistance() > 0)
+            if (AppSettings.getMinimumDistanceInMeters() > 0)
             {
                 if (AppSettings.shouldUseImperial())
                 {
-                    int minimumDistanceInFeet = Utilities.MetersToFeet(AppSettings.getMinimumDistance());
+                    int minimumDistanceInFeet = Utilities.MetersToFeet(AppSettings.getMinimumDistanceInMeters());
                     txtDistance.setText(((minimumDistanceInFeet == 1)
                             ? getString(R.string.foot)
                             : String.valueOf(minimumDistanceInFeet) + getString(R.string.feet)));
                 }
                 else
                 {
-                    txtDistance.setText(((AppSettings.getMinimumDistance() == 1)
+                    txtDistance.setText(((AppSettings.getMinimumDistanceInMeters() == 1)
                             ? getString(R.string.meter)
-                            : String.valueOf(AppSettings.getMinimumDistance()) + getString(R.string.meters)));
+                            : String.valueOf(AppSettings.getMinimumDistanceInMeters()) + getString(R.string.meters)));
                 }
             }
             else

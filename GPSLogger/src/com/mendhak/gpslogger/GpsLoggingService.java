@@ -680,6 +680,20 @@ public class GpsLoggingService extends Service implements IActionListener
             return;
         }
 
+        //Don't do anything until the user-defined distance has been traversed
+        if (AppSettings.getMinimumDistanceInMeters() > 0)
+        {
+
+            double distanceTraveled = Utilities.CalculateDistance(loc.getLatitude(), loc.getLongitude(),
+                    Session.getCurrentLatitude(), Session.getCurrentLongitude());
+
+            if (AppSettings.getMinimumDistanceInMeters() > distanceTraveled)
+            {
+                return;
+            }
+        }
+
+
         Utilities.LogInfo("New location obtained");
         Session.setLatestTimeStamp(System.currentTimeMillis());
         Session.setCurrentLocationInfo(loc);

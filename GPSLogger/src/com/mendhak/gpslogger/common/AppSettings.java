@@ -161,7 +161,7 @@ public class AppSettings extends Application
     /**
      * @return the minimumDistance
      */
-    public static int getMinimumDistance()
+    public static int getMinimumDistanceInMeters()
     {
         return minimumDistance;
     }
@@ -169,7 +169,7 @@ public class AppSettings extends Application
     /**
      * @param minimumDistance the minimumDistance to set
      */
-    static void setMinimumDistance(int minimumDistance)
+    static void setMinimumDistanceInMeters(int minimumDistance)
     {
         AppSettings.minimumDistance = minimumDistance;
     }
