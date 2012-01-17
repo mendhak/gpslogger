@@ -681,7 +681,7 @@ public class GpsLoggingService extends Service implements IActionListener
         }
 
         //Don't do anything until the user-defined distance has been traversed
-        if (AppSettings.getMinimumDistanceInMeters() > 0)
+        if (AppSettings.getMinimumDistanceInMeters() > 0 && Session.hasValidLocation())
         {
 
             double distanceTraveled = Utilities.CalculateDistance(loc.getLatitude(), loc.getLongitude(),
@@ -689,8 +689,11 @@ public class GpsLoggingService extends Service implements IActionListener
 
             if (AppSettings.getMinimumDistanceInMeters() > distanceTraveled)
             {
+                SetStatus("Only " + String.valueOf(Math.floor(distanceTraveled)) + " m traveled.");
+                StopManagerAndResetAlarm();
                 return;
             }
+
         }
 
 
