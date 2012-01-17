@@ -311,4 +311,10 @@
 
     <string name="menu_upload">Upload</string>
 
+
+    <string name="autoemail_sendzip_title">Send zip file</string>
+    <string name="autoemail_sendzip_summary">Disable to send individual GPX/KML files, or if the zip option is not
+        working for you
+    </string>
+
 </resources>

@@ -177,6 +177,7 @@ public class Utilities
         AppSettings.setSmtpPassword(prefs.getString("smtp_password", ""));
         AppSettings.setAutoEmailTarget(prefs.getString("autoemail_target", ""));
         AppSettings.setDebugToFile(prefs.getBoolean("debugtofile", false));
+        AppSettings.setShouldSendZipFile(prefs.getBoolean("autoemail_sendzip", true));
     }
 
     public static void ShowProgress(Context ctx, String title, String message)
@@ -585,7 +586,7 @@ public class Utilities
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        double distanceInMeters = 6371 * c * 1000;
-        return distanceInMeters;
+        return 6371 * c * 1000; //Distance in meters
+
     }
 }

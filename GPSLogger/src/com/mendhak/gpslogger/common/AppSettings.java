@@ -26,6 +26,7 @@ public class AppSettings extends Application
     private static boolean smtpSsl;
     private static boolean debugToFile;
     private static int minimumDistance;
+    private static boolean shouldSendZipFile;
 
 
     /**
@@ -315,4 +316,13 @@ public class AppSettings extends Application
     }
 
 
+    public static boolean shouldSendZipFile()
+    {
+        return shouldSendZipFile;
+    }
+
+    public static void setShouldSendZipFile(boolean shouldSendZipFile)
+    {
+        AppSettings.shouldSendZipFile = shouldSendZipFile;
+    }
 }

@@ -8,6 +8,7 @@ import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.ZipHelper;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class AutoEmailHelper implements IActionListener
@@ -22,7 +23,7 @@ public class AutoEmailHelper implements IActionListener
         this.callback = callback;
     }
 
-    public void SendLogFile(String currentFileName, boolean forcedSend)
+    public void SendLogFile(String currentFileName, boolean forcedSend, boolean sendZipFile)
     {
         this.forcedSend = forcedSend;
 
@@ -39,32 +40,43 @@ public class AutoEmailHelper implements IActionListener
         File gpxFile = new File(gpxFolder.getPath(), currentFileName + ".gpx");
         File kmlFile = new File(gpxFolder.getPath(), currentFileName + ".kml");
 
-        File foundFile = null;
+        ArrayList<File> files = new ArrayList<File>();
 
         if (kmlFile.exists())
         {
-            foundFile = kmlFile;
+            files.add(kmlFile);
+
         }
         if (gpxFile.exists())
         {
-            foundFile = gpxFile;
+            files.add(gpxFile);
         }
 
-        if (foundFile == null)
+        if (files.size() == 0)
         {
             OnFailure();
             return;
         }
 
-        String[] files = new String[]
-                {foundFile.getAbsolutePath()};
-        File zipFile = new File(gpxFolder.getPath(), currentFileName + ".zip");
+        if (sendZipFile)
+        {
+            File zipFile = new File(gpxFolder.getPath(), currentFileName + ".zip");
+            ArrayList<String> filePaths = new ArrayList<String>();
 
-        Utilities.LogInfo("Zipping file");
-        ZipHelper zh = new ZipHelper(files, zipFile.getAbsolutePath());
-        zh.Zip();
+            for (File f : files)
+            {
+                filePaths.add(f.getAbsolutePath());
+            }
 
-        Thread t = new Thread(new AutoSendHandler(zipFile, this));
+            Utilities.LogInfo("Zipping file");
+            ZipHelper zh = new ZipHelper(filePaths.toArray(new String[filePaths.size()]), zipFile.getAbsolutePath());
+            zh.Zip();
+
+            files.clear();
+            files.add(zipFile);
+        }
+
+        Thread t = new Thread(new AutoSendHandler(files.toArray(new File[files.size()]), this));
         t.start();
 
     }
@@ -102,12 +114,12 @@ public class AutoEmailHelper implements IActionListener
 class AutoSendHandler implements Runnable
 {
 
-    final File zipFile;
+    File[] files;
     private final IActionListener helper;
 
-    public AutoSendHandler(File zipFile, IActionListener helper)
+    public AutoSendHandler(File[] files, IActionListener helper)
     {
-        this.zipFile = zipFile;
+        this.files = files;
         this.helper = helper;
     }
 
@@ -123,16 +135,19 @@ class AutoSendHandler implements Runnable
             m.setTo(toArr);
             m.setFrom(AppSettings.getSmtpUsername());
             m.setSubject("GPS Log file generated at "
-                    + Utilities.GetReadableDateTime(new Date()) + " - "
-                    + zipFile.getName());
-            m.setBody(zipFile.getName());
-
+                    + Utilities.GetReadableDateTime(new Date()));
+            m.setBody("GPS Log file generated at "
+                    + Utilities.GetReadableDateTime(new Date()));
 
             m.setPort(AppSettings.getSmtpPort());
             m.setSecurePort(AppSettings.getSmtpPort());
             m.setSmtpHost(AppSettings.getSmtpServer());
             m.setSsl(AppSettings.isSmtpSsl());
-            m.addAttachment(zipFile.getAbsolutePath());
+
+            for (File f : files)
+            {
+                m.addAttachment(f.getName(), f.getAbsolutePath());
+            }
 
             Utilities.LogInfo("Sending email...");
 

@@ -283,7 +283,7 @@ public class GpsLoggingService extends Service implements IActionListener
             //Don't show a progress bar when auto-emailing
             Utilities.LogInfo("Emailing Log File");
             AutoEmailHelper aeh = new AutoEmailHelper(this);
-            aeh.SendLogFile(Session.getCurrentFileName(), false);
+            aeh.SendLogFile(Session.getCurrentFileName(), false, AppSettings.shouldSendZipFile());
             SetupAutoEmailTimers();
 
         }
@@ -303,7 +303,7 @@ public class GpsLoggingService extends Service implements IActionListener
 
             Utilities.LogInfo("Force emailing Log File");
             AutoEmailHelper aeh = new AutoEmailHelper(this);
-            aeh.SendLogFile(Session.getCurrentFileName(), true);
+            aeh.SendLogFile(Session.getCurrentFileName(), true, AppSettings.shouldSendZipFile());
         }
     }
 
