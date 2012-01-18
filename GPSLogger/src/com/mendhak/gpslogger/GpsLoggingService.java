@@ -214,12 +214,13 @@ public class GpsLoggingService extends Service implements IActionListener
                     + (long) (Session.getAutoEmailDelay() * 60 * 60 * 1000);
 
             alarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
-
+            CancelAlarm();
+            Utilities.LogDebug("New alarm intent");
             PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
-
             AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
             am.set(AlarmManager.RTC_WAKEUP, triggerTime, sender);
+            Utilities.LogDebug("Alarm has been set");
 
         }
         else
@@ -277,7 +278,7 @@ public class GpsLoggingService extends Service implements IActionListener
         // Check that auto emailing is enabled, there's a valid location and
         // file name.
         if (Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0
-                && Session.isEmailReadyToBeSent())
+                && Session.isEmailReadyToBeSent() && Session.hasValidLocation())
         {
 
             //Don't show a progress bar when auto-emailing
