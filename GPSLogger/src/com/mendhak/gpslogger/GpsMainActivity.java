@@ -800,8 +800,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
                 return;
             }
 
-            Session.setLatestTimeStamp(System.currentTimeMillis());
-
             TextView tvLatitude = (TextView) findViewById(R.id.txtLatitude);
             TextView tvLongitude = (TextView) findViewById(R.id.txtLongitude);
             TextView tvDateTime = (TextView) findViewById(R.id.txtDateTimeAndProvider);
@@ -824,7 +822,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
                 providerName = getString(R.string.providername_celltower);
             }
 
-            tvDateTime.setText(new Date().toLocaleString()
+            tvDateTime.setText(new Date(Session.getLatestTimeStamp()).toLocaleString()
                     + getString(R.string.providername_using, providerName));
             tvLatitude.setText(String.valueOf(loc.getLatitude()));
             tvLongitude.setText(String.valueOf(loc.getLongitude()));
