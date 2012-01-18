@@ -509,7 +509,7 @@ public class GpsLoggingService extends Service implements IActionListener
             Utilities.LogInfo("Requesting GPS location updates");
             // gps satellite based
             gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    1000, 0,
+                    0, 0,
                     gpsLocationListener);
 
             gpsLocationManager.addGpsStatusListener(gpsLocationListener);
@@ -522,7 +522,7 @@ public class GpsLoggingService extends Service implements IActionListener
             Session.setUsingGps(false);
             // Cell tower and wifi based
             towerLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                    1000, 0,
+                    0, 0,
                     towerLocationListener);
 
         }
