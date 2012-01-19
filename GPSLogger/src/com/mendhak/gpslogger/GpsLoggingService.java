@@ -674,8 +674,17 @@ public class GpsLoggingService extends Service implements IActionListener
     {
         Utilities.LogDebug("GpsLoggingService.OnLocationChanged");
 
-        // Don't do anything until the user-defined time has elapsed
+
         long currentTimeStamp = System.currentTimeMillis();
+
+        // Wait some time even on 0 frequency so that the UI doesn't lock up
+
+        if ((currentTimeStamp - Session.getLatestTimeStamp()) < 500)
+        {
+            return;
+        }
+
+        // Don't do anything until the user-defined time has elapsed
         if ((currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 1000))
         {
             return;
