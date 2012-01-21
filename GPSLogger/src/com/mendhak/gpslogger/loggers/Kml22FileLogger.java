@@ -213,6 +213,7 @@ class Kml22WriteHandler implements Runnable
                 Source input = new DOMSource(doc);
 
                 transformer.transform(input, output);
+                Utilities.LogDebug("Finished writing to KML22 file.");
             }
 
         }

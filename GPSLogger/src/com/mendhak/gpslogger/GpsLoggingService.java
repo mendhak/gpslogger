@@ -509,7 +509,7 @@ public class GpsLoggingService extends Service implements IActionListener
             Utilities.LogInfo("Requesting GPS location updates");
             // gps satellite based
             gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    0, 0,
+                    1000, 0,
                     gpsLocationListener);
 
             gpsLocationManager.addGpsStatusListener(gpsLocationListener);
@@ -522,7 +522,7 @@ public class GpsLoggingService extends Service implements IActionListener
             Session.setUsingGps(false);
             // Cell tower and wifi based
             towerLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                    0, 0,
+                    1000, 0,
                     towerLocationListener);
 
         }
@@ -672,6 +672,13 @@ public class GpsLoggingService extends Service implements IActionListener
      */
     void OnLocationChanged(Location loc)
     {
+
+        if (!Session.isStarted())
+        {
+            Utilities.LogDebug("OnLocationChanged called, but Session.isStarted is false");
+            return;
+        }
+
         Utilities.LogDebug("GpsLoggingService.OnLocationChanged");
 
 
@@ -679,7 +686,7 @@ public class GpsLoggingService extends Service implements IActionListener
 
         // Wait some time even on 0 frequency so that the UI doesn't lock up
 
-        if ((currentTimeStamp - Session.getLatestTimeStamp()) < 500)
+        if ((currentTimeStamp - Session.getLatestTimeStamp()) < 1000)
         {
             return;
         }

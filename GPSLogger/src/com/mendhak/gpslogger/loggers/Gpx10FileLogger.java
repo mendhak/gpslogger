@@ -53,13 +53,16 @@ class Gpx10FileLogger implements IFileLogger
         String dateTimeString = Utilities.GetIsoDateTime(now);
 
         Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(dateTimeString, gpxFile, loc, addNewTrackSegment, satelliteCount);
+        Utilities.LogDebug(String.format("There are currently %s tasks waiting on the GPX10 EXECUTOR.", EXECUTOR.getTaskCount()));
         EXECUTOR.execute(writeHandler);
     }
 
     public void Annotate(String description) throws Exception
     {
         Gpx10AnnotateHandler annotateHandler = new Gpx10AnnotateHandler(description, gpxFile);
+        Utilities.LogDebug(String.format("There are currently %s tasks waiting on the GPX10 EXECUTOR.", EXECUTOR.getTaskCount()));
         EXECUTOR.execute(annotateHandler);
+
     }
 
 

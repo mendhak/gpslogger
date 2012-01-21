@@ -18,7 +18,7 @@ import java.util.TimeZone;
 public class Utilities
 {
 
-    private static final int LOGLEVEL = 3;
+    private static final int LOGLEVEL = 5;
     private static ProgressDialog pd;
 
     private static void LogToDebugFile(String message)
