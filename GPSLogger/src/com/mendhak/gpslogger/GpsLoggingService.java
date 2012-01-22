@@ -156,7 +156,7 @@ public class GpsLoggingService extends Service implements IActionListener
                     AutoEmailLogFile();
                 }
 
-                if (getNextPoint)
+                if (getNextPoint && Session.isStarted())
                 {
                     Utilities.LogDebug("HandleIntent - getNextPoint");
                     StartGpsManager();
@@ -496,8 +496,16 @@ public class GpsLoggingService extends Service implements IActionListener
 
         GetPreferences();
 
-        gpsLocationListener = new GeneralLocationListener(this);
-        towerLocationListener = new GeneralLocationListener(this);
+        if (gpsLocationListener == null)
+        {
+            gpsLocationListener = new GeneralLocationListener(this);
+        }
+
+        if (towerLocationListener == null)
+        {
+            towerLocationListener = new GeneralLocationListener(this);
+        }
+
 
         gpsLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         towerLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -560,11 +568,13 @@ public class GpsLoggingService extends Service implements IActionListener
 
         if (towerLocationListener != null)
         {
+            Utilities.LogDebug("Removing towerLocationManager updates");
             towerLocationManager.removeUpdates(towerLocationListener);
         }
 
         if (gpsLocationListener != null)
         {
+            Utilities.LogDebug("Removing gpsLocationManager updates");
             gpsLocationManager.removeUpdates(gpsLocationListener);
             gpsLocationManager.removeGpsStatusListener(gpsLocationListener);
         }
@@ -676,6 +686,7 @@ public class GpsLoggingService extends Service implements IActionListener
         if (!Session.isStarted())
         {
             Utilities.LogDebug("OnLocationChanged called, but Session.isStarted is false");
+            StopLogging();
             return;
         }
 
