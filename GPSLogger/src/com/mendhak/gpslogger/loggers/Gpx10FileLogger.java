@@ -54,7 +54,7 @@ class Gpx10FileLogger implements IFileLogger
         EXECUTOR.execute(writeHandler);
     }
 
-    public void Annotate(String description) throws Exception
+    public void Annotate(String description, Location loc) throws Exception
     {
         Gpx10AnnotateHandler annotateHandler = new Gpx10AnnotateHandler(description, gpxFile);
         Utilities.LogDebug(String.format("There are currently %s tasks waiting on the GPX10 EXECUTOR.", EXECUTOR.getQueue().size()));

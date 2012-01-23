@@ -41,7 +41,7 @@ class Kml10FileLogger implements IFileLogger
     }
 
 
-    public void Annotate(String description) throws Exception
+    public void Annotate(String description, Location loc) throws Exception
     {
         Kml10AnnotateHandler annotateHandler = new Kml10AnnotateHandler(kmlFile, description);
         EXECUTOR.execute(annotateHandler);

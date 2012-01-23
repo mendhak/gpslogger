@@ -710,7 +710,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         {
             try
             {
-                logger.Annotate(description);
+                logger.Annotate(description, Session.getCurrentLocationInfo());
                 SetStatus(getString(R.string.description_added));
                 Session.setAllowDescription(false);
             }

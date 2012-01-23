@@ -3,21 +3,8 @@ package com.mendhak.gpslogger.loggers;
 import android.location.Location;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Utilities;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -46,9 +33,9 @@ public class Kml22FileLogger implements IFileLogger
         EXECUTOR.execute(writeHandler);
     }
 
-    public void Annotate(String description) throws Exception
+    public void Annotate(String description, Location loc) throws Exception
     {
-        Kml22AnnotateHandler annotateHandler = new Kml22AnnotateHandler(kmlFile, description);
+        Kml22AnnotateHandler annotateHandler = new Kml22AnnotateHandler(kmlFile, description, loc);
         EXECUTOR.execute(annotateHandler);
     }
 }
@@ -57,11 +44,13 @@ class Kml22AnnotateHandler implements Runnable
 {
     File kmlFile;
     String description;
+    Location loc;
 
-    public Kml22AnnotateHandler(File kmlFile, String description)
+    public Kml22AnnotateHandler(File kmlFile, String description, Location loc)
     {
         this.kmlFile = kmlFile;
         this.description = description;
+        this.loc = loc;
     }
 
 
@@ -75,39 +64,45 @@ class Kml22AnnotateHandler implements Runnable
 
         try
         {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setNamespaceAware(true);
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(kmlFile);
-
-            Node documentNode = doc.getElementsByTagName("Document").item(0);
-            Node newPlacemark = doc.createElement("Placemark");
-
-            Node nameNode = doc.createElement("name");
-            nameNode.appendChild(doc.createTextNode(description));
-
-            Node pointNode = doc.createElement("Point");
-            Node coordinatesNode = doc.createElement("coordinates");
-
-            //Find the latest coordinates from the list of gx:coords.
-            NodeList gxCoords = doc.getElementsByTagNameNS("http://www.google.com/kml/ext/2.2", "coord");
-            Node latestCoordinates = gxCoords.item(gxCoords.getLength() - 1);
-            coordinatesNode.appendChild(doc.createTextNode(latestCoordinates.getTextContent().replace(" ", ",")));
-
-            pointNode.appendChild(coordinatesNode);
-            newPlacemark.appendChild(nameNode);
-            newPlacemark.appendChild(pointNode);
-
-            documentNode.appendChild(newPlacemark);
-
             synchronized (Kml22FileLogger.lock)
             {
 
-                Transformer transformer = TransformerFactory.newInstance().newTransformer();
-                Result output = new StreamResult(kmlFile);
-                Source input = new DOMSource(doc);
+                StringBuilder descriptionNode = new StringBuilder();
+                descriptionNode.append("<Placemark><name>");
+                descriptionNode.append(description);
+                descriptionNode.append("</name><Point><coordinates>");
+                descriptionNode.append(String.valueOf(loc.getLongitude()));
+                descriptionNode.append(" ");
+                descriptionNode.append(String.valueOf(loc.getLatitude()));
+                descriptionNode.append(" ");
+                descriptionNode.append(String.valueOf(loc.getAltitude()));
+                descriptionNode.append("</coordinates></Point></Placemark>\n");
 
-                transformer.transform(input, output);
+                BufferedReader bf = new BufferedReader(new FileReader(kmlFile));
+
+                StringBuilder restOfFile = new StringBuilder();
+                String currentLine;
+                int lineNumber = 1;
+
+                while ((currentLine = bf.readLine()) != null)
+                {
+                    if (lineNumber > 1)
+                    {
+                        restOfFile.append(currentLine);
+                        restOfFile.append("\n");
+                    }
+
+                    lineNumber++;
+                }
+
+                bf.close();
+
+                RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
+                raf.seek(255);
+                raf.write(descriptionNode.toString().getBytes());
+                raf.write(restOfFile.toString().getBytes());
+                raf.close();
+
             }
         }
         catch (Exception e)
@@ -142,6 +137,7 @@ class Kml22WriteHandler implements Runnable
         try
         {
 
+            RandomAccessFile raf;
             Date now;
 
             if (useSatelliteTime)
@@ -154,66 +150,61 @@ class Kml22WriteHandler implements Runnable
             }
 
             String dateTimeString = Utilities.GetIsoDateTime(now);
-
-            if (!kmlFile.exists())
-            {
-                kmlFile.createNewFile();
-
-                FileOutputStream initialWriter = new FileOutputStream(kmlFile, true);
-                BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
-
-
-                String initialXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                        + "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">"
-                        + "<Document>"
-                        + "<name>" + dateTimeString + "</name>"
-                        + "<Placemark><gx:Track></gx:Track></Placemark>"
-                        + "</Document></kml>";
-                initialOutput.write(initialXml.getBytes());
-                initialOutput.flush();
-                initialOutput.close();
-            }
-
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setNamespaceAware(true);
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(kmlFile);
-
-            Node documentNode = doc.getElementsByTagName("Document").item(0);
-
-            NodeList trackNodes = doc.getElementsByTagNameNS("http://www.google.com/kml/ext/2.2", "Track");
-            Node gxTrack;
-
-            if (addNewTrackSegment || trackNodes.getLength() == 0)
-            {
-                Node placeMark = doc.createElement("Placemark");
-                documentNode.appendChild(placeMark);
-                gxTrack = doc.createElementNS("http://www.google.com/kml/ext/2.2", "gx:Track");
-                placeMark.appendChild(gxTrack);
-
-            }
-            else
-            {
-                gxTrack = trackNodes.item(trackNodes.getLength() - 1);
-            }
-
-
-            Node when = doc.createElement("when");
-            Node gxCoord = doc.createElementNS("http://www.google.com/kml/ext/2.2", "gx:coord");
-            gxCoord.appendChild(doc.createTextNode(String.valueOf(loc.getLongitude()) + " "
-                    + String.valueOf(loc.getLatitude()) + " " + String.valueOf(loc.getAltitude())));
-            gxTrack.appendChild(when);
-            when.appendChild(doc.createTextNode(dateTimeString));
-            gxTrack.appendChild(gxCoord);
+            String placemarkHead = "<Placemark>\n<gx:Track>\n";
+            String placemarkTail = "</gx:Track>\n</Placemark></Document></kml>\n";
 
             synchronized (Kml22FileLogger.lock)
             {
-                Transformer transformer = TransformerFactory.newInstance().newTransformer();
-                Result output = new StreamResult(kmlFile);
-                Source input = new DOMSource(doc);
 
-                transformer.transform(input, output);
-                Utilities.LogDebug("Finished writing to KML22 file.");
+                if (!kmlFile.exists())
+                {
+                    kmlFile.createNewFile();
+
+                    FileOutputStream initialWriter = new FileOutputStream(kmlFile, true);
+                    BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
+
+                    StringBuilder initialXml = new StringBuilder();
+                    initialXml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                    initialXml.append("<kml xmlns=\"http://www.opengis.net/kml/2.2\" ");
+                    initialXml.append("xmlns:gx=\"http://www.google.com/kml/ext/2.2\" ");
+                    initialXml.append("xmlns:kml=\"http://www.opengis.net/kml/2.2\" ");
+                    initialXml.append("xmlns:atom=\"http://www.w3.org/2005/Atom\">");
+                    initialXml.append("<Document>");
+                    initialXml.append("<name>" + dateTimeString + "</name>\n");
+
+                    initialXml.append("</Document></kml>\n");
+                    initialOutput.write(initialXml.toString().getBytes());
+                    initialOutput.flush();
+                    initialOutput.close();
+                }
+
+
+                if (addNewTrackSegment)
+                {
+                    raf = new RandomAccessFile(kmlFile, "rw");
+                    raf.seek(kmlFile.length() - 18);
+                    raf.write((placemarkHead + placemarkTail).getBytes());
+                    raf.close();
+
+                }
+
+                StringBuilder coords = new StringBuilder();
+                coords.append("\n<when>");
+                coords.append(dateTimeString);
+                coords.append("</when>\n<gx:coord>");
+                coords.append(String.valueOf(loc.getLongitude()));
+                coords.append(" ");
+                coords.append(String.valueOf(loc.getLatitude()));
+                coords.append(" ");
+                coords.append(String.valueOf(loc.getAltitude()));
+                coords.append("</gx:coord>\n");
+                coords.append(placemarkTail);
+
+                raf = new RandomAccessFile(kmlFile, "rw");
+                raf.seek(kmlFile.length() - 42);
+                raf.write(coords.toString().getBytes());
+                raf.close();
+                Utilities.LogDebug("Finished writing to KML22 File");
             }
 
         }
