@@ -64,11 +64,12 @@ public class AutoEmailActivity extends PreferenceActivity implements
         EditTextPreference txtUsername = (EditTextPreference) findPreference("smtp_username");
         EditTextPreference txtPassword = (EditTextPreference) findPreference("smtp_password");
         EditTextPreference txtTarget = (EditTextPreference) findPreference("autoemail_target");
+        EditTextPreference txtFrom = (EditTextPreference) findPreference("autoemail_from");
 
         AutoEmailHelper aeh = new AutoEmailHelper(null);
         aeh.SendTestEmail(txtSmtpServer.getText(), txtSmtpPort.getText(),
                 txtUsername.getText(), txtPassword.getText(),
-                chkUseSsl.isChecked(), txtTarget.getText(),
+                chkUseSsl.isChecked(), txtTarget.getText(), txtFrom.getText(),
                 AutoEmailActivity.this);
 
         return true;

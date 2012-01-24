@@ -83,11 +83,11 @@ public class AutoEmailHelper implements IActionListener
 
     void SendTestEmail(String smtpServer, String smtpPort,
                        String smtpUsername, String smtpPassword, boolean smtpUseSsl,
-                       String emailTarget, IActionListener helper)
+                       String emailTarget, String fromAddress, IActionListener helper)
     {
 
         Thread t = new Thread(new TestEmailHandler(helper, smtpServer,
-                smtpPort, smtpUsername, smtpPassword, smtpUseSsl, emailTarget));
+                smtpPort, smtpUsername, smtpPassword, smtpUseSsl, emailTarget, fromAddress));
         t.start();
     }
 
@@ -133,7 +133,7 @@ class AutoSendHandler implements Runnable
             String[] toArr =
                     {AppSettings.getAutoEmailTarget()};
             m.setTo(toArr);
-            m.setFrom(AppSettings.getSmtpUsername());
+            m.setFrom(AppSettings.getSenderAddress());
             m.setSubject("GPS Log file generated at "
                     + Utilities.GetReadableDateTime(new Date()));
             m.setBody("GPS Log file generated at "
@@ -179,10 +179,11 @@ class TestEmailHandler implements Runnable
     boolean smtpUseSsl;
     String emailTarget;
     IActionListener helper;
+    String fromAddress;
 
     public TestEmailHandler(IActionListener helper, String smtpServer,
                             String smtpPort, String smtpUsername, String smtpPassword,
-                            boolean smtpUseSsl, String emailTarget)
+                            boolean smtpUseSsl, String emailTarget, String fromAddress)
     {
         this.smtpServer = smtpServer;
         this.smtpPort = smtpPort;
@@ -191,6 +192,7 @@ class TestEmailHandler implements Runnable
         this.smtpUseSsl = smtpUseSsl;
         this.emailTarget = emailTarget;
         this.helper = helper;
+        this.fromAddress = fromAddress;
     }
 
     public void run()
@@ -203,7 +205,17 @@ class TestEmailHandler implements Runnable
             String[] toArr =
                     {emailTarget};
             m.setTo(toArr);
-            m.setFrom(smtpUsername);
+
+            if (fromAddress != null && fromAddress.length() > 0)
+            {
+                m.setFrom(fromAddress);
+            }
+            else
+            {
+                m.setFrom(smtpUsername);
+            }
+
+
             m.setSubject("Test Email from GPSLogger at "
                     + Utilities.GetReadableDateTime(new Date()));
             m.setBody("Test Email from GPSLogger at "

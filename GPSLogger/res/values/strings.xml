@@ -317,4 +317,8 @@
         working for you
     </string>
 
+    <string name="autoemail_from">From address</string>
+    <string name="autoemail_from_summary">Some email providers require a from address. Use this only if you need it.
+    </string>
+
 </resources>

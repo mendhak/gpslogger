@@ -31,6 +31,9 @@
         <EditTextPreference android:key="smtp_username" android:title="@string/autoemail_username"
                             android:summary="@string/autoemail_username_summary"
                             android:dialogTitle="@string/autoemail_username"/>
+        <EditTextPreference android:key="smtp_from" android:title="@string/autoemail_from"
+                            android:summary="@string/autoemail_from_summary"
+                            android:dialogTitle="@string/autoemail_from"/>
         <EditTextPreference android:key="smtp_password" android:title="@string/autoemail_password"
                             android:summary="@string/autoemail_password_summary"
                             android:dialogTitle="@string/autoemail_password"

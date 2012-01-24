@@ -178,6 +178,7 @@ public class Utilities
         AppSettings.setAutoEmailTarget(prefs.getString("autoemail_target", ""));
         AppSettings.setDebugToFile(prefs.getBoolean("debugtofile", false));
         AppSettings.setShouldSendZipFile(prefs.getBoolean("autoemail_sendzip", true));
+        AppSettings.setSmtpFrom(prefs.getString("smtp_from", ""));
     }
 
     public static void ShowProgress(Context ctx, String title, String message)

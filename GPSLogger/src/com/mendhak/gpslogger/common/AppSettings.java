@@ -22,6 +22,7 @@ public class AppSettings extends Application
     private static String smtpPort;
     private static String smtpUsername;
     private static String smtpPassword;
+    private static String smtpFrom;
     private static String autoEmailTarget;
     private static boolean smtpSsl;
     private static boolean debugToFile;
@@ -275,6 +276,7 @@ public class AppSettings extends Application
         return smtpUsername;
     }
 
+
     static void setSmtpPassword(String smtpPassword)
     {
         AppSettings.smtpPassword = smtpPassword;
@@ -324,5 +326,30 @@ public class AppSettings extends Application
     public static void setShouldSendZipFile(boolean shouldSendZipFile)
     {
         AppSettings.shouldSendZipFile = shouldSendZipFile;
+    }
+
+    private static String getSmtpFrom()
+    {
+        return smtpFrom;
+    }
+
+    public static void setSmtpFrom(String smtpFrom)
+    {
+        AppSettings.smtpFrom = smtpFrom;
+    }
+
+    /**
+     * Returns the from value to use when sending an email
+     *
+     * @return
+     */
+    public static String getSenderAddress()
+    {
+        if (getSmtpFrom() != null && getSmtpFrom().length() > 0)
+        {
+            return getSmtpFrom();
+        }
+
+        return getSmtpUsername();
     }
 }
