@@ -1,4 +1,5 @@
 bin/
+out/
 gen/
 R.java
 .settings/
