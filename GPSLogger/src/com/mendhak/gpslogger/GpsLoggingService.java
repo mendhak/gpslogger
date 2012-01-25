@@ -1,9 +1,6 @@
 //TODO: Simplify email logic (too many methods)
 //TODO: Allow messages in IActionListener callback methods
 //TODO: Handle case where a fix is not found and GPS gives up - restart alarm somehow?
-//TODO: Onlocationchanged? Session is started.
-//TODO: Reimplement distance by calculating difference between last point and new point
-//TODO: A more efficient way of writing to the GPX/KML files
 
 package com.mendhak.gpslogger;
 
