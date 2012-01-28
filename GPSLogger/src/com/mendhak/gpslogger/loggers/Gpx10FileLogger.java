@@ -91,7 +91,7 @@ class Gpx10AnnotateHandler implements Runnable
             {
                 return;
             }
-            int offsetFromEnd = 29;
+            int offsetFromEnd = 30;
 
             long startPosition = gpxFile.length() - offsetFromEnd;
 

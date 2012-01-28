@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.mendhak.gpslogger" android:versionCode="17"
-          android:versionName="1.1.7" android:installLocation="auto">
+          package="com.mendhak.gpslogger" android:versionCode="18"
+          android:versionName="18" android:installLocation="auto">
     <application android:icon="@drawable/gpsloggericon2"
                  android:name="@string/app_name" android:label="@string/app_name"
                  android:debuggable="false">
@@ -21,12 +21,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.mendhak.gpslogger.senders.dropbox.DropBoxAuthorizationActivity" android:label="DropBox"
+        <activity android:name="com.mendhak.gpslogger.senders.dropbox.DropBoxAuthorizationActivity"
+                  android:label="DropBox"
                   android:launchMode="singleTask">
-                    <intent-filter>
-                        <action android:name="com.mendhak.gpslogger.DROPBOX_SETUP"/>
-                        <category android:name="android.intent.category.DEFAULT"/>
-                    </intent-filter>
+            <intent-filter>
+                <action android:name="com.mendhak.gpslogger.DROPBOX_SETUP"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
         </activity>
 
         <activity
