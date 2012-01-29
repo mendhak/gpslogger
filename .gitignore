@@ -17,6 +17,6 @@ KEYSTORE/
 images/
 ucdetector_reports/
 
-.idea
-*.iml
-*.eml
+
+workspace.xml
+tasks.xml
