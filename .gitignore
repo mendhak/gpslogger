@@ -3,7 +3,6 @@ out/
 gen/
 R.java
 .settings/
-.metadata/
 *.class
 
 local.properties
