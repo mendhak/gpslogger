@@ -118,6 +118,33 @@ public class GpsMainActivityTest extends ActivityInstrumentationTestCase2<GpsMai
         solo.assertCurrentActivity("Expected DropBoxAuthorizationActivity","DropBoxAuthorizationActivity");
     }
 
+    @Smoke
+    public void testImperial_DistanceConversion()
+    {
+        solo.clickOnMenuItem("Settings");
+        solo.clickOnText("Logging details");
+        solo.clickOnText("Distance before logging");
+        solo.enterText(0, "10");
+        solo.clickOnText("OK");
+        solo.goBack();
+
+        solo.clickOnText("General Options");
+        solo.clickOnText("Use Imperial units");
+
+        solo.sleep(5000);
+
+        solo.clickOnText("Logging details");
+        solo.clickOnText("Distance before logging");
+
+        assertTrue(solo.searchText("Distance in feet"));
+        assertTrue(solo.searchText("33"));
+
+        solo.clickOnText("Cancel");
+        
+        solo.goBack();
+        solo.goBack();
+
+    }
     
 
 }

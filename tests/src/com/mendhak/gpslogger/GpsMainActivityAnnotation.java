@@ -1,14 +1,10 @@
 package com.mendhak.gpslogger;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Location;
-import android.location.LocationManager;
-import android.os.Debug;
 import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.Smoke;
-import android.widget.TextView;
 import com.jayway.android.robotium.solo.Solo;
 
 public class GpsMainActivityAnnotation extends ActivityInstrumentationTestCase2<GpsMainActivity> {
@@ -41,7 +37,7 @@ public class GpsMainActivityAnnotation extends ActivityInstrumentationTestCase2<
         }
         catch (Throwable throwable)
         {
-            throwable.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            throwable.printStackTrace();
         }
     }
 
