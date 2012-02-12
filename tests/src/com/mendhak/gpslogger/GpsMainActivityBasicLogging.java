@@ -185,45 +185,7 @@ public class GpsMainActivityBasicLogging extends ActivityInstrumentationTestCase
     }
 
 
-    @Smoke
-    public void testContinuity_StartLogging_ResumeActivityStillLogging_1()
-    {
-        solo.clickOnMenuItem("Settings");
-        solo.clickOnText("Logging details");
-        solo.clickOnText("Time before logging");
-        solo.enterText(0,"1");
-        solo.clickOnText("OK");
-        solo.goBack();
-        solo.goBack();
 
-
-
-        //Start logging
-        solo.clickOnButton(0);
-        //Wait a bit
-        solo.sleep(1000);
-
-        //Set device location
-        Common.SetDeviceGpsLocation(88.8, 77.7, getInstrumentation().getContext());
-
-        //Wait a bit
-        solo.sleep(3000);
-
-        // Check if the location was displayed
-        assertTrue(solo.searchText(String.valueOf(88.8)));
-
-        //Now the tearDown gets called
-    }
-
-
-    @Smoke
-    public void testContinuity_StartLogging_ResumeActivityStillLogging_2()
-    {
-        // Check if the location was displayed
-        solo.clickOnButton(0);
-        assertTrue(solo.searchText(String.valueOf(88.8)));
-
-    }
 
 
 }
