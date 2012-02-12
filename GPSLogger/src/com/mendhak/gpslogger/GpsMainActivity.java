@@ -967,6 +967,11 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
     public void onFileName(String newFileName)
     {
+        if(newFileName == null || newFileName.length() <= 0)
+        {
+            return;
+        }
+        
         TextView txtFilename = (TextView) findViewById(R.id.txtFileName);
 
         if (AppSettings.shouldLogToGpx() || AppSettings.shouldLogToKml())
