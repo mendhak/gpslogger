@@ -347,6 +347,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
                 TableRow trAutoEmail = (TableRow) findViewById(R.id.trAutoEmail);
                 trAutoEmail.setVisibility(View.INVISIBLE);
             }
+
+            onFileName(Session.getCurrentFileName());
         }
         catch (Exception ex)
         {
