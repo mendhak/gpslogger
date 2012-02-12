@@ -66,8 +66,6 @@ public class GpsMainContinuity  extends ActivityInstrumentationTestCase2<GpsMain
         solo.goBack();
         solo.goBack();
 
-
-
         //Start logging
         solo.clickOnButton(0);
         //Wait a bit

@@ -8,6 +8,13 @@
 # and sometimes you'll get the 'Sorry! Application GPSLogger (...) is not responding' dialog
 # I have no idea why this happens and whether it's due to Robotium or not
 
+# To run the tests in ANT
+# You can run the tests using ANT build.
+# Open build.xml, then open the 'Ant Build' window in IntelliJ
+# Run the 'RobotiumTests' target
+# This launches the emulator, installs the apps, runs each test in testNames.txt
+# It does not build the code though, so make sure you build before running it.
+#
 
 
 # To run the tests from commandline
