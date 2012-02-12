@@ -722,7 +722,9 @@ public class GpsLoggingService extends Service implements IActionListener
         }
 
 
+
         Utilities.LogInfo("New location obtained");
+        ResetCurrentFileName();
         Session.setLatestTimeStamp(System.currentTimeMillis());
         Session.setCurrentLocationInfo(loc);
         Notify();
