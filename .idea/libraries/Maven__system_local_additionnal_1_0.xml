@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Maven: system.local:additionnal:1.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/GPSLogger/libs/additionnal.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
