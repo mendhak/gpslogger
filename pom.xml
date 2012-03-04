@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mendhak.gpslogger</groupId>
+    <artifactId>gpslogger-parent</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>GPS Logger Project</name>
+
+    <modules>
+        <module>GPSLogger</module>
+        <module>tests</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>2.3.3</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android-test</artifactId>
+            <scope>provided</scope>
+            <version>2.3.3</version>
+        </dependency>
+    </dependencies>
+    </dependencyManagement>
+
+</project>

@@ -48,7 +48,7 @@
 
     <!-- http://ant-contrib.sourceforge.net/ -->
     <!-- This allows tasks like 'for' and 'if' -->
-    <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+
 
 
     <!--
@@ -84,13 +84,47 @@
     <property name="emulatorPath" value="${sdk.dir}/tools/emulator"/>
     <property name="adbPath" value="${sdk.dir}/platform-tools/adb"/>
     <property name="emulatorName" value="Android2Level5"/>
-    <property name="testApkPath" value="/home/mendhak/Code/gpslogger/out/production/tests/tests.apk"/>
-    <property name="gpsloggerApkPath" value="/home/mendhak/Code/gpslogger/out/production/GPSLogger/GPSLogger.apk"/>
     <property name="testNamesFile" value="testNames.txt" />
+    <property name="testApkPath" location="${gpsloggertestapk}"/>
+    <property name="gpsloggerApkPath" location="${gpsloggerapk}"/>
 
+    <taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${lib.dir}/ant-contrib-1.0b3.jar"></taskdef>
+
+    <target name="EchoTest" >
+        <echo message="Testing GPSLogger APK ${gpsloggerapk}" />
+        <echo message="Testing APK ${gpsloggertestapk}" />
+
+        <if>
+            <available file="${gpsloggerapk}"/>
+            <then><echo>GPSLogger APK exists</echo></then>
+            <else><echo>GPSLogger APK MISSING!</echo></else>
+        </if>
+
+        <if>
+            <available file="${gpsloggertestapk}"/>
+            <then><echo>Tests APK exists</echo></then>
+            <else><echo>Tests APK MISSING!</echo></else>
+        </if>
+
+    </target>
+
+    <target name="SampleExecute">
+        <antcall target="ExecuteSingleTest">
+            <param name="testName" value="com.mendhak.gpslogger.GpsMainContinuity"/>
+        </antcall>
+    </target>
 
     <!-- Pre build setup -->
     <target name="RobotiumTests" >
+
+
+        <echo message="Testing APK ${testApkPath}" />
+        <echo message="GPSLogger APK ${gpsloggerApkPath}" />
+
+                <!--<echo message="compile classpath: ${compile_classpath}"/>-->
+                <!--<echo message="runtime classpath: ${runtime_classpath}"/>-->
+                <!--<echo message="test classpath:    ${test_classpath}"/>-->
+                <!--<echo message="plugin classpath:  ${plugin_classpath}"/>-->
 
                 <parallel>
                     <sequential>
@@ -109,7 +143,7 @@
 
 
 
-                        <sleep seconds="30"/>
+                        <sleep seconds="40"/>
                         <exec executable="${adbPath}"
                               description="Check if boot is complete" outputproperty="isBootComplete">
                             <arg value="-e"/>
@@ -121,7 +155,7 @@
                         <echo message="Is Boot Complete? ${isBootComplete}"/>
 
                         <if>
-                            <equals arg1="${isBootComplete}" arg2="1" />
+                            <isset property="isBootComplete" />
                             <then>
                                 <echo>Unlocking screen</echo>
                                 <exec executable="${adbPath}"
@@ -163,7 +197,7 @@
                                                 <loadfile property="file-content" srcFile="${testNamesFile}"/>
 
                                                 <foreach list="${file-content}" delimiter="${line.separator}"
-                                                         param="testName" target="ExecuteSingleTest"/>
+                                                         param="testName" target="ExecuteSingleTest" inheritall="true" inheritrefs="true" />
 
                                             </try>
 
