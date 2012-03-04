@@ -68,7 +68,7 @@
                 <configuration>
                     <device>emulator</device>
                     <sdk>
-                        <platform>11</platform>
+                        <platform>8</platform>
                     </sdk>
                     <emulator>
                         <avd>Android2Level5</avd>

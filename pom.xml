@@ -7,6 +7,9 @@
     <packaging>pom</packaging>
     <name>GPS Logger Project</name>
 
+
+
+
     <modules>
         <module>GPSLogger</module>
         <module>tests</module>

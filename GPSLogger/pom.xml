@@ -177,7 +177,7 @@
                     <!--<nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>-->
                     <!--<nativeLibrariesDirectory>${project.basedir}/libs</nativeLibrariesDirectory>-->
                     <sdk>
-                        <platform>11</platform>
+                        <platform>8</platform>
                     </sdk>
                     <runDebug>true</runDebug>
                     <undeployBeforeDeploy>true</undeployBeforeDeploy>
