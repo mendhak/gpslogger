@@ -100,17 +100,17 @@
 
                 </configuration>
                 <extensions>true</extensions>
-                <executions>
-                    <!-- android plugin execution that starts the emulator. -->
-                    <execution>
-                        <id>startemulator</id>
-                        <!-- bound to the 'initialize' phase -->
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>emulator-start</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <!--<executions>-->
+                    <!--&lt;!&ndash; android plugin execution that starts the emulator. &ndash;&gt;-->
+                    <!--<execution>-->
+                        <!--<id>startemulator</id>-->
+                        <!--&lt;!&ndash; bound to the 'initialize' phase &ndash;&gt;-->
+                        <!--<phase>initialize</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>emulator-start</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
 
             </plugin>
             <!--<plugin>-->
