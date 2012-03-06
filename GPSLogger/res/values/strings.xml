@@ -321,4 +321,15 @@
     <string name="autoemail_from_summary">Some email providers require a from address. Use this only if you need it.
     </string>
 
+    <string name="gdocs_upload">Google Docs</string>
+    <string name="gdocs_authorize_screenname">Authorize with Google Docs</string>
+    <string name="gdocs_settings_screenname">Google Docs Upload Settings</string>
+    <string name="gdocs_startauthorization">Authorize with Google Docs</string>
+    <string name="gdocs_authorize_summary">Takes you to Google Docs where you need to authorize GPSLogger</string>
+    <string name="gdocs_clearauthorization">Clear Authorization</string>
+    <string name="gdocs_clearauthorization_summary">Forgets local GDocs settings. To permanently revoke access, go to Google Account settings</string>
+    <string name="gdocs_setup_title">Google Docs</string>
+    <string name="gdocs_setup_summary">Authorize with Google Docs to allow uploads</string>
+
+
 </resources>

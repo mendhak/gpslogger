@@ -26,6 +26,8 @@ import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
+import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
+import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
 
 import java.io.File;
@@ -407,6 +409,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             case R.id.mnuDropBox:
                 UploadToDropBox();
                 break;
+            case R.id.mnuGDocs:
+                UploadToGoogleDocs();
+                break;
             case R.id.mnuAnnotate:
                 Annotate();
                 break;
@@ -524,6 +529,17 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
     }
 
+    private void UploadToGoogleDocs()
+    {
+        Utilities.LogDebug("GpsMainActivity.UploadToGoogleDocs");
+
+        if(!GDocsHelper.IsLinked(getApplicationContext()))
+        {
+            startActivity(new Intent(GpsMainActivity.this, GDocsSettingsActivity.class));
+        }
+
+    }
+    
 
     private void UploadToDropBox()
     {

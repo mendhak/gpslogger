@@ -84,6 +84,10 @@
                     android:key="dropbox_setup">
             <intent android:action="com.mendhak.gpslogger.DROPBOX_SETUP"/>
         </Preference>
+        <Preference android:title="@string/gdocs_setup_title"
+                    android:summary="@string/gdocs_setup_summary" android:key="gdocs_setup">
+            <intent android:action="com.mendhak.gpslogger.GDOCS_SETUP" />
+                    </Preference>
 
     </PreferenceScreen>
 

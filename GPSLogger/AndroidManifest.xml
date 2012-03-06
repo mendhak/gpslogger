@@ -77,6 +77,14 @@
                 <action android:name="com.mendhak.gpslogger.AUTOEMAIL_SETUP"/>
             </intent-filter>
         </activity>
+        <activity android:name="com.mendhak.gpslogger.senders.gdocs.GDocsAuthorizationActivity" android:label="@string/gdocs_authorize_screenname"/>
+        <activity android:name="com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity" android:label="@string/gdocs_settings_screenname">
+            <intent-filter>
+                <action android:name="com.mendhak.gpslogger.GDOCS_SETUP"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
 
         <receiver android:enabled="true"
                   android:name="com.mendhak.gpslogger.StartupReceiver"
