@@ -330,6 +330,10 @@
     <string name="gdocs_clearauthorization_summary">Forgets local GDocs settings. To permanently revoke access, go to Google Account settings</string>
     <string name="gdocs_setup_title">Google Docs</string>
     <string name="gdocs_setup_summary">Authorize with Google Docs to allow uploads</string>
+    <string name="gdocs_test_summary">Upload a test file to Google Docs</string>
+    <string name="gdocs_test_title">Test upload</string>
+    <string name="gdocs_testupload_error">Could not upload a test file</string>
+    <string name="gdocs_testupload_success">Uploaded. Please check your Google Documents for a new file.</string>
 
 
 </resources>
