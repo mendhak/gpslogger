@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.senders.IFileSender;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
@@ -23,7 +24,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.File;
 
-public class OSMHelper implements IActionListener
+public class OSMHelper implements IActionListener, IFileSender
 {
 
     IActionListener callback;
@@ -111,10 +112,19 @@ public class OSMHelper implements IActionListener
         return consumer;
     }
 
-
-    public void UploadGpsTrace(String fileName)
+    public void OnComplete()
     {
+        callback.OnComplete();
+    }
 
+    public void OnFailure()
+    {
+        callback.OnFailure();
+    }
+
+    @Override
+    public void UploadFile(String fileName)
+    {
         File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
         File chosenFile = new File(gpxFolder, fileName);
         OAuthConsumer consumer = GetOSMAuthConsumer(ctx);
@@ -127,16 +137,6 @@ public class OSMHelper implements IActionListener
 
         Thread t = new Thread(new OsmUploadHandler(this, consumer, gpsTraceUrl, chosenFile, description, tags, visibility));
         t.start();
-    }
-
-    public void OnComplete()
-    {
-        callback.OnComplete();
-    }
-
-    public void OnFailure()
-    {
-        callback.OnFailure();
     }
 
 

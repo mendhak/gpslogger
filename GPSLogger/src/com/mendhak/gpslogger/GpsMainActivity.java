@@ -24,6 +24,9 @@ import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
+import com.mendhak.gpslogger.senders.FileSenderFactory;
+import com.mendhak.gpslogger.senders.IFileSender;
+import com.mendhak.gpslogger.senders.dropbox.DropBoxAuthorizationActivity;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
@@ -536,7 +539,12 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         if(!GDocsHelper.IsLinked(getApplicationContext()))
         {
             startActivity(new Intent(GpsMainActivity.this, GDocsSettingsActivity.class));
+            return;
         }
+        
+        Intent settingsIntent = new Intent(GpsMainActivity.this, GDocsSettingsActivity.class);
+        ShowFileListDialog(true, true, true, settingsIntent, FileSenderFactory.GetGDocsSender(getApplicationContext(), this));
+        
 
     }
     
@@ -547,49 +555,16 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
         final DropBoxHelper dropBoxHelper = new DropBoxHelper(getApplicationContext(), this);
 
-
         if (!dropBoxHelper.IsLinked())
         {
             startActivity(new Intent("com.mendhak.gpslogger.DROPBOX_SETUP"));
             return;
         }
+       
+        Intent settingsIntent = new Intent(GpsMainActivity.this, DropBoxAuthorizationActivity.class);
+        ShowFileListDialog(true, true, true, settingsIntent, 
+                FileSenderFactory.GetDropBoxSender(getApplication(), this));
 
-        final File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
-
-        if (gpxFolder.exists())
-        {
-
-            String[] enumeratedFiles = gpxFolder.list();
-            List<String> fileList = new ArrayList<String>(Arrays.asList(enumeratedFiles));
-            Collections.reverse(fileList);
-            final String[] files = fileList.toArray(new String[fileList.size()]);
-
-            final Dialog dialog = new Dialog(this);
-            dialog.setTitle(R.string.dropbox_upload);
-            dialog.setContentView(R.layout.filelist);
-            ListView thelist = (ListView) dialog.findViewById(R.id.listViewFiles);
-
-            thelist.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
-                    android.R.layout.simple_list_item_single_choice, files));
-
-            thelist.setOnItemClickListener(new OnItemClickListener()
-            {
-
-                public void onItemClick(AdapterView<?> av, View v, int index, long arg)
-                {
-
-                    dialog.dismiss();
-                    String chosenFileName = files[index];
-                    Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.dropbox_uploading), getString(R.string.please_wait));
-                    dropBoxHelper.UploadFile(chosenFileName);
-                }
-            });
-            dialog.show();
-        }
-        else
-        {
-            Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
-        }
     }
 
 
@@ -606,7 +581,18 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             return;
         }
 
-        final String goToOsmSettings = getString(R.string.menu_settings);
+        Intent settingsIntent = OSMHelper.GetOsmSettingsIntent(getApplicationContext());
+        
+        ShowFileListDialog(true, false, false, settingsIntent,
+                FileSenderFactory.GetOsmSender(getApplicationContext(),this));
+        
+    }
+
+    
+    private void ShowFileListDialog(final boolean allowGpx, final boolean allowKml, final boolean allowZip,
+                                    final Intent settingsIntent,
+                                    final IFileSender sender)
+    {
 
         final File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
 
@@ -617,14 +603,18 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
                 public boolean accept(File dir, String filename)
                 {
-                    return filename.toLowerCase().contains(".gpx");
+                    return (allowGpx && filename.toLowerCase().contains(".gpx"))
+                            || (allowKml && filename.toLowerCase().contains(".kml"))
+                            || (allowZip && filename.toLowerCase().contains(".zip"));
+
                 }
             };
 
             String[] enumeratedFiles = gpxFolder.list(select);
             List<String> fileList = new ArrayList<String>(Arrays.asList(enumeratedFiles));
+            final String settingsText = getString(R.string.menu_settings);
             Collections.reverse(fileList);
-            fileList.add(0, goToOsmSettings);
+            fileList.add(0, settingsText);
             final String[] files = fileList.toArray(new String[fileList.size()]);
 
             final Dialog dialog = new Dialog(this);
@@ -637,25 +627,22 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
             thelist.setOnItemClickListener(new OnItemClickListener()
             {
-
                 public void onItemClick(AdapterView<?> av, View v, int index, long arg)
                 {
 
                     dialog.dismiss();
                     String chosenFileName = files[index];
 
-                    if (chosenFileName.equalsIgnoreCase(goToOsmSettings))
+                    if (chosenFileName.equalsIgnoreCase(settingsText))
                     {
-                        startActivity(OSMHelper.GetOsmSettingsIntent(getApplicationContext()));
+                        startActivity(settingsIntent);
                     }
                     else
                     {
-                        OSMHelper osm = new OSMHelper(GpsMainActivity.this, GpsMainActivity.this);
-                        Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.osm_uploading), getString(R.string.please_wait));
-                        osm.UploadGpsTrace(chosenFileName);
+                        Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.please_wait),
+                                getString(R.string.please_wait));
+                        sender.UploadFile(chosenFileName);
                     }
-
-
                 }
             });
             dialog.show();
@@ -665,7 +652,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
         }
     }
-
+    
 
     /**
      * Prompts user for input, then adds text to log file

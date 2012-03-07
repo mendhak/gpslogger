@@ -2,6 +2,7 @@ package com.mendhak.gpslogger.senders.gdocs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import com.google.api.client.auth.oauth2.draft10.AccessTokenResponse;
 import com.google.api.client.googleapis.GoogleHeaders;
@@ -15,6 +16,7 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson.JacksonFactory;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.senders.IFileSender;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -24,12 +26,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
 
 
-public class GDocsHelper implements IActionListener
+public class GDocsHelper implements IActionListener, IFileSender
 {
     Context ctx;
     IActionListener callback;
-    
-    
+
+
     public GDocsHelper(Context applicationContext, IActionListener callback)
     {
 
@@ -37,7 +39,7 @@ public class GDocsHelper implements IActionListener
         this.callback = callback;
     }
 
-   
+
     /** Value of the "Client ID" shown under "Client ID for installed applications". */
     //private static final String CLIENT_ID = "";
 
@@ -51,6 +53,16 @@ public class GDocsHelper implements IActionListener
     /** OAuth 2 redirect uri */
     private static final String REDIRECT_URI = "http://localhost";
 
+
+    private static void SaveRefreshedToken(String accessToken, String refreshToken, Context applicationContext)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("GDOCS_ACCESS_TOKEN",accessToken );
+        editor.putString("GDOCS_REFRESH_TOKEN", refreshToken);
+        editor.commit();
+
+    }
 
     public static void SaveAccessToken(AccessTokenResponse accessTokenResponse, Context applicationContext)
     {
@@ -71,6 +83,7 @@ public class GDocsHelper implements IActionListener
 
         editor.remove("GDOCS_ACCESS_TOKEN");
         editor.remove("GDOCS_EXPIRES_IN");
+        editor.remove("GDOCS_SAVE_TIME");
         editor.remove("GDOCS_REFRESH_TOKEN");
         editor.remove("GDOCS_SCOPE");
         editor.commit();
@@ -96,7 +109,7 @@ public class GDocsHelper implements IActionListener
         }
 
     }
-    
+
     public static boolean IsLinked(Context applicationContext)
     {
         return (GetAccessToken(applicationContext) != null);
@@ -112,18 +125,18 @@ public class GDocsHelper implements IActionListener
     {
         return url.startsWith(REDIRECT_URI);
     }
-    
-    
+
+
 
     private static String GetClientID(Context applicationContext)
     {
         int RClientId = applicationContext.getResources().getIdentifier(
                     "gdocs_clientid", "string", applicationContext.getPackageName());
-                            
-                    
+
+
         return applicationContext.getString(RClientId);
     }
-    
+
     private static String GetClientSecret(Context applicationContext)
     {
 
@@ -168,19 +181,21 @@ public class GDocsHelper implements IActionListener
 
 
     private static GoogleAccessProtectedResource GetAccessProtectedResource(String clientId, String clientSecret,
-                                                                     String accessToken, String refreshToken)
+                                                       AccessTokenResponse accessTokenResponse)
     {
 
         final JsonFactory jsonFactory = new JacksonFactory();
         HttpTransport transport = new NetHttpTransport();
 
         return new GoogleAccessProtectedResource(
-                accessToken,
+                accessTokenResponse.accessToken,
                 transport,
                 jsonFactory,
                 clientId,
                 clientSecret,
-                refreshToken);
+                accessTokenResponse.refreshToken);
+
+
     }
 
 
@@ -189,6 +204,7 @@ public class GDocsHelper implements IActionListener
 
         //Create an AccessTokenResponse from the stored data
         AccessTokenResponse accessTokenResponse = GetAccessToken(ctx);
+
 
         if(accessTokenResponse == null)
         {
@@ -201,18 +217,17 @@ public class GDocsHelper implements IActionListener
         {
 
             GoogleAccessProtectedResource accessProtectedResource = GetAccessProtectedResource(
-                    GetClientID(ctx), GetClientSecret(ctx),
-                    accessTokenResponse.accessToken,  accessTokenResponse.refreshToken);
+                    GetClientID(ctx), GetClientSecret(ctx), accessTokenResponse);
 
 
-           
+
             Thread t = new Thread(new GDocsUploadHandler(
-                    new ByteArrayInputStream("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<a>This is a test upload</a>".getBytes()), 
+                    new ByteArrayInputStream("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<a>This is a test upload</a>".getBytes()),
                     "test.xml" ,this, accessProtectedResource));
             t.start();
 
         }
-        catch(Exception e) 
+        catch(Exception e)
         {
             Utilities.LogError("GDocsHelper.UploadTestFile", e);
         }
@@ -231,33 +246,68 @@ public class GDocsHelper implements IActionListener
     {
           callback.OnFailure();
     }
-    
-    
+
+    @Override
+    public void UploadFile(String fileName)
+    {
+        //Create an AccessTokenResponse from the stored data
+        AccessTokenResponse accessTokenResponse = GetAccessToken(ctx);
+
+        if(accessTokenResponse == null)
+        {
+            callback.OnFailure();
+            return;
+        }
+
+
+        try
+        {
+
+            GoogleAccessProtectedResource accessProtectedResource = GetAccessProtectedResource(
+                    GetClientID(ctx), GetClientSecret(ctx), accessTokenResponse);
+
+
+            File gpsDir = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+            File gpxFile = new File(gpsDir, fileName);
+
+            FileInputStream fis = new FileInputStream(gpxFile);
+
+            Thread t = new Thread(new GDocsUploadHandler(
+                    fis, fileName ,this, accessProtectedResource));
+            t.start();
+
+        }
+        catch(Exception e)
+        {
+            Utilities.LogError("GDocsHelper.UploadTestFile", e);
+        }
+    }
+
+
     private class GDocsUploadHandler implements Runnable
     {
-        
+
+        boolean hasRun = false;
         String fileName;
         InputStream inputStream;
         IActionListener callback;
         GoogleAccessProtectedResource accessProtectedResource;
-        
+
         GDocsUploadHandler(InputStream inputStream, String fileName, IActionListener callback, GoogleAccessProtectedResource accessProtectedResource)
         {
-            
+
             this.inputStream = inputStream;
             this.fileName = fileName;
             this.callback = callback;
             this.accessProtectedResource = accessProtectedResource;
         }
-        
+
 
         @Override
         public void run()
         {
             try
             {
-                //Slow, but always refresh token.  If it errors, then we're not authorized.
-                accessProtectedResource.refreshToken();
 
                 String gpsLoggerFolderFeed;
 
@@ -273,6 +323,7 @@ public class GDocsHelper implements IActionListener
                     //Not found, create the folder
                     HttpRequest createFolderRequest = GetCreateFolderRequest(accessProtectedResource);
                     HttpResponse createFolderResponse = createFolderRequest.execute();
+
                     gpsLoggerFolderFeed = GetFolderFeedUrl(createFolderResponse);
                 }
 
@@ -338,6 +389,27 @@ public class GDocsHelper implements IActionListener
                 }
 
                 callback.OnComplete();
+            }
+            catch(HttpResponseException hre)
+            {
+                if(hre.response.statusCode == 401)
+                {
+                    try
+                    {
+                        accessProtectedResource.refreshToken();
+                        GDocsHelper.SaveRefreshedToken(accessProtectedResource.getAccessToken(),
+                                accessProtectedResource.getRefreshToken(), ctx);
+                        if(!hasRun)
+                        {
+                            hasRun = true;
+                            run();
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                         Utilities.LogError("Could not refresh GDocs Token, giving up.", ex);
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -468,6 +540,7 @@ public class GDocsHelper implements IActionListener
 
         private String GetFolderFeedUrl(HttpResponse createFolderResponse)
         {
+
             String gpsLoggerFolderFeed = "";
 
             try
@@ -476,11 +549,7 @@ public class GDocsHelper implements IActionListener
 
                 Node newFolderContentNode = createFolderDoc.getElementsByTagName("content").item(0);
 
-                if (newFolderContentNode == null)
-                {
-                    System.out.println("Failed to create a collection");
-                }
-                else
+                if (newFolderContentNode != null)
                 {
                     //<content type="application/atom+xml;type=feed" src=".../contents"/>
                     gpsLoggerFolderFeed = createFolderDoc.getElementsByTagName("content").item(0)
@@ -739,13 +808,15 @@ public class GDocsHelper implements IActionListener
             // Return full string
             return total.toString();
         }
-        
+
 
         private boolean IsNullOrEmpty(String gpsLoggerFolderFeed)
         {
             return gpsLoggerFolderFeed == null || gpsLoggerFolderFeed.length() == 0;
         }
-        
+
     }
-    
+
+
+
 }

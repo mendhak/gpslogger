@@ -12,12 +12,13 @@ import com.dropbox.client2.session.Session;
 import com.dropbox.client2.session.TokenPair;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.senders.IFileSender;
 
 import java.io.File;
 import java.io.FileInputStream;
 
 
-public class DropBoxHelper implements IActionListener
+public class DropBoxHelper implements IActionListener, IFileSender
 {
 
     final static private String ACCESS_KEY_NAME = "DROPBOX_ACCESS_KEY";
