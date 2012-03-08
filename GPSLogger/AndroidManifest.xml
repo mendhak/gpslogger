@@ -30,6 +30,7 @@
             </intent-filter>
         </activity>
 
+        <!--suppress AndroidDomInspection -->
         <activity
                 android:name="com.dropbox.client2.android.AuthActivity"
                 android:launchMode="singleTask"
@@ -40,16 +41,6 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
-
-        <activity android:label="@string/osm_preferences_title"
-                  android:name="com.mendhak.gpslogger.senders.osm.OSMSettingsActivity">
-            <intent-filter>
-                <action android:name="com.mendhak.gpslogger.OSM_SETUP"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <!-- <category android:name="android.intent.category.BROWSABLE" /> <data
-                        android:scheme="gpslogger" android:host="authorize" /> -->
             </intent-filter>
         </activity>
 

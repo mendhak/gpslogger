@@ -32,12 +32,14 @@
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/target/android-classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/generated-sources/combined-assets" />
       <excludeFolder url="file://$MODULE_DIR$/target/generated-sources/combined-resources" />
       <excludeFolder url="file://$MODULE_DIR$/target/generated-sources/extracted-dependencies" />
       <excludeFolder url="file://$MODULE_DIR$/target/test-classes" />
     </content>
+    <orderEntry type="jdk" jdkName="Android 2.2 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.android:android:2.3.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
@@ -61,7 +63,6 @@
     <orderEntry type="library" name="Maven: oauth.signpost:signpost-commonshttp4:1.2.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.james:apache-mime4j:0.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpmime:4.0.3" level="project" />
-    <orderEntry type="jdk" jdkName="Android 2.2 Platform" jdkType="Android SDK" />
   </component>
 </module>
 

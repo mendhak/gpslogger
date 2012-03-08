@@ -59,16 +59,9 @@ public class OSMHelper implements IActionListener, IFileSender
     {
         Intent intentOsm;
 
-        if (!IsOsmAuthorized(ctx))
-        {
-            intentOsm = new Intent(ctx.getPackageName() + ".OSM_AUTHORIZE");
-            intentOsm.setData(Uri.parse("gpslogger://authorize"));
-        }
-        else
-        {
-            intentOsm = new Intent(ctx.getPackageName() + ".OSM_SETUP");
 
-        }
+        intentOsm = new Intent(ctx.getPackageName() + ".OSM_AUTHORIZE");
+        intentOsm.setData(Uri.parse("gpslogger://authorize"));
 
         return intentOsm;
     }
