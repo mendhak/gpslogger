@@ -30,7 +30,6 @@
             </intent-filter>
         </activity>
 
-        <!--suppress AndroidDomInspection -->
         <activity
                 android:name="com.dropbox.client2.android.AuthActivity"
                 android:launchMode="singleTask"

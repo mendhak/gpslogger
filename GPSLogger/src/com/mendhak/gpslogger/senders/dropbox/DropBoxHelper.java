@@ -46,10 +46,10 @@ public class DropBoxHelper implements IActionListener, IFileSender
         return dropboxApi.getSession().isLinked();
     }
 
-    public void FinishAuthorization()
+    public boolean FinishAuthorization()
     {
         AndroidAuthSession session = dropboxApi.getSession();
-        if (session.authenticationSuccessful())
+        if (!session.isLinked() && session.authenticationSuccessful())
         {
             // Mandatory call to complete the auth
             session.finishAuthentication();
@@ -57,7 +57,10 @@ public class DropBoxHelper implements IActionListener, IFileSender
             // Store it locally in our app for later use
             TokenPair tokens = session.getAccessTokenPair();
             storeKeys(tokens.key, tokens.secret);
+            return true;
         }
+        
+        return false;
     }
 
 

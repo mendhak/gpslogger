@@ -2,16 +2,15 @@
 
 package com.mendhak.gpslogger.senders.dropbox;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.preference.Preference;
+import android.preference.PreferenceActivity;
+import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
 
-public class DropBoxAuthorizationActivity extends Activity implements
-        View.OnClickListener
+public class DropBoxAuthorizationActivity extends PreferenceActivity
 {
 
     DropBoxHelper helper;
@@ -21,15 +20,55 @@ public class DropBoxAuthorizationActivity extends Activity implements
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dropboxauth);
+        addPreferencesFromResource(R.xml.dropboxsettings);
+        //setContentView(R.layout.dropboxauth);
 
-        Button authButton = (Button) findViewById(R.id.btnAuthorizeDropBox);
-        authButton.setOnClickListener(this);
+//        Button authButton = (Button) findViewById(R.id.btnAuthorizeDropBox);
+//        authButton.setOnClickListener(this);
 
+        Preference pref = findPreference("dropbox_resetauth");
+        
         helper = new DropBoxHelper(getApplicationContext(), null);
+        
+        if(helper.IsLinked())
+        {
+            pref.setTitle(R.string.dropbox_unauthorize);
+            pref.setSummary(R.string.dropbox_unauthorize_description);
+        }
+        else
+        {
+            pref.setTitle(R.string.dropbox_authorize);
+            pref.setSummary(R.string.dropbox_authorize_description);
+        }
+        
+        pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+        {
+            @Override
+            public boolean onPreferenceClick(Preference preference)
+            {
+                // This logs you out if you're logged in, or vice versa
+                if(helper.IsLinked())
+                {
+                    helper.UnLink();
+                    startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
+                    finish();
+                }
+                else
+                {
+                    try
+                    {
+                        helper.StartAuthentication(DropBoxAuthorizationActivity.this);
+                    }
+                    catch (Exception e)
+                    {
+                        Utilities.LogError("DropBoxAuthorizationActivity.onPreferenceClick", e);
+                    }
+                }
 
-        // Display the proper UI state if logged in or not
-        setLoggedIn(helper.IsLinked());
+                return true;
+            }
+        });
+        
     }
 
     @Override
@@ -39,7 +78,11 @@ public class DropBoxAuthorizationActivity extends Activity implements
 
         try
         {
-            helper.FinishAuthorization();
+            if(helper.FinishAuthorization())
+            {
+                startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
+                finish();
+            }
         }
         catch (Exception e)
         {
@@ -48,59 +91,12 @@ public class DropBoxAuthorizationActivity extends Activity implements
             Utilities.LogError("DropBoxAuthorizationActivity.onResume", e);
         }
 
-        setLoggedIn(helper.IsLinked());
     }
 
-    /**
-     * Convenience function to change UI state based on being logged in
-     *
-     * @param newState The new logged in state
-     */
-    private void setLoggedIn(boolean newState)
-    {
-        loggedIn = newState;
-        Button authButton = (Button) findViewById(R.id.btnAuthorizeDropBox);
-        TextView tvDescription = (TextView) findViewById(R.id.lblAuthorizeDropBox);
 
-        if (loggedIn)
-        {
-            authButton.setText(R.string.dropbox_unauthorize);
-            tvDescription.setText(R.string.dropbox_unauthorize_description);
-        }
-        else
-        {
-            authButton.setText(R.string.dropbox_authorize);
-            tvDescription.setText(R.string.dropbox_authorize_description);
-        }
-    }
 
-    public void onClick(View view)
-    {
 
-        // This logs you out if you're logged in, or vice versa
-        if (loggedIn)
-        {
-            logOut();
-        }
-        else
-        {
-            try
-            {
-                helper.StartAuthentication(DropBoxAuthorizationActivity.this);
-            }
-            catch (Exception e)
-            {
-                Utilities.LogError("DropBoxAuthorizationActivity.onClick", e);
-            }
-        }
-    }
 
-    private void logOut()
-    {
-        helper.UnLink();
-        // Change UI state to display logged out version
-        setLoggedIn(false);
-    }
 
 
 }
