@@ -14,7 +14,6 @@ public class DropBoxAuthorizationActivity extends PreferenceActivity
 {
 
     DropBoxHelper helper;
-    boolean loggedIn = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
