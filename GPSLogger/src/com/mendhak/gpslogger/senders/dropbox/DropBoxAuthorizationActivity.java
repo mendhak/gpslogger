@@ -20,10 +20,6 @@ public class DropBoxAuthorizationActivity extends PreferenceActivity
     {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.dropboxsettings);
-        //setContentView(R.layout.dropboxauth);
-
-//        Button authButton = (Button) findViewById(R.id.btnAuthorizeDropBox);
-//        authButton.setOnClickListener(this);
 
         Preference pref = findPreference("dropbox_resetauth");
         

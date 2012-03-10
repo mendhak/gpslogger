@@ -465,9 +465,22 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             final File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
             if (gpxFolder.exists())
             {
-                String[] enumeratedFiles = gpxFolder.list();
-                List<String> fileList = new ArrayList<String>(Arrays.asList(enumeratedFiles));
-                Collections.reverse(fileList);
+
+                File[] enumeratedFiles = gpxFolder.listFiles();
+
+                Arrays.sort(enumeratedFiles, new Comparator<File>(){
+                    public int compare(File f1, File f2)
+                    {
+                        return -1 * Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+                    } });
+
+                List<String> fileList = new ArrayList<String>(enumeratedFiles.length);
+
+                for(File f:enumeratedFiles)
+                {
+                    fileList.add(f.getName());
+                }
+
                 fileList.add(0, locationOnly);
                 final String[] files = fileList.toArray(new String[fileList.size()]);
 
@@ -610,22 +623,35 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
                 }
             };
 
-            String[] enumeratedFiles = gpxFolder.list(select);
-            List<String> fileList = new ArrayList<String>(Arrays.asList(enumeratedFiles));
+            File[] enumeratedFiles = gpxFolder.listFiles(select);
+
+            Arrays.sort(enumeratedFiles, new Comparator<File>(){
+                public int compare(File f1, File f2)
+                {
+                    return -1 * Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+                } });
+            
+            List<String> fileList = new ArrayList<String>(enumeratedFiles.length);
+
+            for(File f:enumeratedFiles)
+            {
+                fileList.add(f.getName());
+            }
+
             final String settingsText = getString(R.string.menu_settings);
-            Collections.reverse(fileList);
+
             fileList.add(0, settingsText);
             final String[] files = fileList.toArray(new String[fileList.size()]);
 
             final Dialog dialog = new Dialog(this);
             dialog.setTitle(R.string.osm_pick_file);
             dialog.setContentView(R.layout.filelist);
-            ListView thelist = (ListView) dialog.findViewById(R.id.listViewFiles);
+            ListView displayList = (ListView) dialog.findViewById(R.id.listViewFiles);
 
-            thelist.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
+            displayList.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
                     android.R.layout.simple_list_item_single_choice, files));
 
-            thelist.setOnItemClickListener(new OnItemClickListener()
+            displayList.setOnItemClickListener(new OnItemClickListener()
             {
                 public void onItemClick(AdapterView<?> av, View v, int index, long arg)
                 {
