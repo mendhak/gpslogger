@@ -1,4 +1,5 @@
-Can you help with [translations](http://crowdin.net/project/gpslogger-for-android)?
+**Can you help with [translations](http://crowdin.net/project/gpslogger-for-android)?**
+------
 
 GPSLogger
 =========
