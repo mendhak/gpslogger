@@ -48,19 +48,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.json:json:20080701" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.android:android-test:2.3.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: junit:junit:4.8.1" level="project" />
-    <orderEntry type="library" name="Maven: system.local:additionnal:1.0" level="project" />
-    <orderEntry type="library" name="Maven: system.local:activation:1.0" level="project" />
-    <orderEntry type="library" name="Maven: system.local:mail:1.0" level="project" />
-    <orderEntry type="library" name="Maven: system.local:dropbox-android-sdk:1.0" level="project" />
-    <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1" level="project" />
-    <orderEntry type="library" name="Maven: com.google.api.client:google-api-client:1.4.1-beta" level="project" />
-    <orderEntry type="library" name="Maven: com.google.guava:guava:r09" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-core-asl:1.6.7" level="project" />
-    <orderEntry type="library" name="Maven: com.google.api.client:google-api-client-googleapis:1.4.1-beta" level="project" />
-    <orderEntry type="library" name="Maven: oauth.signpost:signpost-core:1.2.1.1" level="project" />
-    <orderEntry type="library" name="Maven: oauth.signpost:signpost-commonshttp4:1.2.1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.james:apache-mime4j:0.6.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpmime:4.0.3" level="project" />
     <orderEntry type="module" module-name="GPSLogger" scope="PROVIDED" />
     <orderEntry type="library" name="Maven: com.jayway.android.robotium:robotium-solo:3.1" level="project" />
     <orderEntry type="jdk" jdkName="Android 2.2 Platform" jdkType="Android SDK" />

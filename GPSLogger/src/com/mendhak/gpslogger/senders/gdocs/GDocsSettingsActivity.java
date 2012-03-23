@@ -1,5 +1,12 @@
 package com.mendhak.gpslogger.senders.gdocs;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,9 +18,12 @@ import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 
 
-public class GDocsSettingsActivity extends PreferenceActivity implements Preference.OnPreferenceClickListener, IActionListener
+public class GDocsSettingsActivity extends PreferenceActivity
+        implements Preference.OnPreferenceClickListener, IActionListener
 {
     private final Handler handler = new Handler();
+    AccountManager accountManager;
+    private boolean freshAuthentication = false;
 
 
     public void onCreate(Bundle savedInstanceState)
@@ -67,19 +77,107 @@ public class GDocsSettingsActivity extends PreferenceActivity implements Prefere
             if(GDocsHelper.IsLinked(getApplicationContext()))
             {
                 //Clear authorization
-                GDocsHelper.ClearAccessToken(getApplicationContext());
+                GDocsHelper.ClearAuthToken(getApplicationContext());
                 startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
                 finish();
             }
             else
             {
-                startActivity(new Intent().setClass(getApplicationContext(), GDocsAuthorizationActivity.class));
-                finish();
+                //Re-authorize
+                freshAuthentication = true;
+                Authorize();
+                
             }
         }
         
         return true;
     }
+
+    private void Authorize()
+    {
+        accountManager = GDocsHelper.GetAccountManager(getApplicationContext());
+
+        if(GDocsHelper.GetAccounts(accountManager).length > 0)
+        {
+            showDialog(0);  //Invokes onCreateDialog
+        }
+
+    }
+
+
+    @Override
+    protected Dialog onCreateDialog(int id)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.gdocs_selectgoogleaccount);
+        final Account[] accounts = GDocsHelper.GetAccounts(accountManager);
+        final int size = accounts.length;
+
+        if(size == 0)
+        {
+            return builder.create();
+        }
+        else if (size == 1)
+        {
+            //Skip the dialog, just use this account
+            AuthorizeSelectedAccount(accounts[0]);
+        }
+        else
+        {
+            String[] names = new String[size];
+            for (int i = 0; i < size; i++)
+            {
+                names[i] = accounts[i].name;
+            }
+            builder.setItems(names, new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    AuthorizeSelectedAccount(accounts[which]);
+                }
+            });
+            return builder.create();
+        }
+
+        return null;
+    }
+
+
+    private void AuthorizeSelectedAccount(Account account)
+    {
+        if(account == null)
+        {
+            return;
+        }
+
+        OnTokenAcquired ota = new OnTokenAcquired();
+        GDocsHelper.GetAuthTokenFromAccountManager(accountManager, account, ota, this);
+    }
+
+    private class OnTokenAcquired implements AccountManagerCallback<Bundle>
+    {
+        @Override
+        public void run(AccountManagerFuture<Bundle> bundleAccountManagerFuture)
+        {
+            try
+            {
+                GDocsHelper.SaveAuthToken(getApplicationContext(), bundleAccountManagerFuture);
+
+                // If reauthorizing, close activity when done
+                if(freshAuthentication)
+                {
+                    freshAuthentication = false;
+                    finish();    
+                }
+            }
+            catch (Exception e)
+            {
+                Utilities.LogError("OnTokenAcquired.run", e);
+            }
+
+        }
+    }
+
 
     private void UploadTestFileToGoogleDocs()
     {
@@ -87,6 +185,21 @@ public class GDocsSettingsActivity extends PreferenceActivity implements Prefere
         Utilities.ShowProgress(GDocsSettingsActivity.this, getString(R.string.please_wait), getString(R.string.please_wait));
         GDocsHelper helper = new GDocsHelper(getApplicationContext(),this);
         helper.UploadTestFile();
+    }
+
+    @Override
+    public void OnComplete()
+    {
+        Utilities.HideProgress();
+        handler.post(successUpload);
+    }
+
+    @Override
+    public void OnFailure()
+    {
+        Utilities.HideProgress();
+        handler.post(failedUpload);
+
     }
 
 
@@ -118,18 +231,5 @@ public class GDocsSettingsActivity extends PreferenceActivity implements Prefere
         Utilities.MsgBox(getString(R.string.success), getString(R.string.gdocs_testupload_success), this);
     }
 
-    @Override
-    public void OnComplete()
-    {
-        Utilities.HideProgress();
-        handler.post(successUpload);
-    }
 
-    @Override
-    public void OnFailure()
-    {
-        Utilities.HideProgress();
-        handler.post(failedUpload);
-
-    }
 }

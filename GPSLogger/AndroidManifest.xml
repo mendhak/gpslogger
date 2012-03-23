@@ -67,7 +67,6 @@
                 <action android:name="com.mendhak.gpslogger.AUTOEMAIL_SETUP"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.mendhak.gpslogger.senders.gdocs.GDocsAuthorizationActivity" android:label="@string/gdocs_authorize_screenname"/>
         <activity android:name="com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity" android:label="@string/gdocs_settings_screenname">
             <intent-filter>
                 <action android:name="com.mendhak.gpslogger.GDOCS_SETUP"/>
@@ -96,6 +95,8 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
     <supports-screens android:smallScreens="true"
                       android:normalScreens="true" android:largeScreens="true"

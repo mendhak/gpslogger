@@ -8,7 +8,14 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import com.mendhak.gpslogger.R;
+import org.w3c.dom.Document;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -16,7 +23,7 @@ import java.util.TimeZone;
 public class Utilities
 {
 
-    private static final int LOGLEVEL = 3;
+    private static final int LOGLEVEL = 5;
     private static ProgressDialog pd;
 
     private static void LogToDebugFile(String message)
@@ -526,4 +533,83 @@ public class Utilities
         return 6371 * c * 1000; //Distance in meters
 
     }
+
+
+    /**
+     * Checks if a string is null or empty
+     * @param text
+     * @return
+     */
+    public static boolean IsNullOrEmpty(String text)
+    {
+        return text == null || text.length() == 0;
+    }
+
+
+    /**
+     * Loops through an input stream and converts it into a string, then closes the input stream
+     * @param is
+     * @return
+     */
+    public static String GetStringFromInputStream(InputStream is)
+    {
+        String line;
+        StringBuilder total = new StringBuilder();
+
+        // Wrap a BufferedReader around the InputStream
+        BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+
+        // Read response until the end
+        try
+        {
+            while ((line = rd.readLine()) != null)
+            {
+                total.append(line);
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                is.close();
+            }
+            catch(Exception e)
+            {
+                Utilities.LogWarning("GetStringFromInputStream - could not close stream");
+            }
+        }
+
+        // Return full string
+        return total.toString();
+    }
+
+
+    /**
+     * Converts an input stream containing an XML response into an XML Document object
+     * @param stream
+     * @return
+     */
+    public static Document GetDocumentFromInputStream(InputStream stream)
+    {
+        Document doc;
+
+        try
+        {
+            DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
+            xmlFactory.setNamespaceAware(true);
+            DocumentBuilder builder = xmlFactory.newDocumentBuilder();
+            doc = builder.parse(stream);
+        }
+        catch (Exception e)
+        {
+            doc = null;
+        }
+
+        return doc;
+    }
+
 }

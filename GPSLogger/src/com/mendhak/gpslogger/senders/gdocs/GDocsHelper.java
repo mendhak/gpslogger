@@ -1,19 +1,13 @@
 package com.mendhak.gpslogger.senders.gdocs;
 
+import android.accounts.*;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import com.google.api.client.auth.oauth2.draft10.AccessTokenResponse;
-import com.google.api.client.googleapis.GoogleHeaders;
-import com.google.api.client.googleapis.auth.oauth2.draft10.GoogleAccessProtectedResource;
-import com.google.api.client.googleapis.auth.oauth2.draft10.GoogleAccessTokenRequest;
-import com.google.api.client.googleapis.auth.oauth2.draft10.GoogleAuthorizationRequestUrl;
-import com.google.api.client.googleapis.json.JsonCParser;
-import com.google.api.client.http.*;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson.JacksonFactory;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.IFileSender;
@@ -21,9 +15,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 
 public class GDocsHelper implements IActionListener, IFileSender
@@ -39,201 +33,247 @@ public class GDocsHelper implements IActionListener, IFileSender
         this.callback = callback;
     }
 
-
-    /** Value of the "Client ID" shown under "Client ID for installed applications". */
-    //private static final String CLIENT_ID = "";
-
-    /** Value of the "Client secret" shown under "Client ID for installed applications". */
-    //private static final String CLIENT_SECRET = "";
-
     /** OAuth 2 scope to use */
     //https://docs.google.com/feeds/ gives full access to the user's documents
-    private static final String SCOPE = "https://docs.google.com/feeds/";
-
-    /** OAuth 2 redirect uri */
-    private static final String REDIRECT_URI = "http://localhost";
+    private static final String SCOPE = "oauth2:https://docs.google.com/feeds/";
 
 
-    private static void SaveRefreshedToken(String accessToken, String refreshToken, Context applicationContext)
-    {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("GDOCS_ACCESS_TOKEN",accessToken );
-        editor.putString("GDOCS_REFRESH_TOKEN", refreshToken);
-        editor.commit();
-
-    }
-
-    public static void SaveAccessToken(AccessTokenResponse accessTokenResponse, Context applicationContext)
-    {
-        //Store in preferences, we'll use it later.
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("GDOCS_ACCESS_TOKEN",accessTokenResponse.accessToken );
-        editor.putLong("GDOCS_EXPIRES_IN", accessTokenResponse.expiresIn);
-        editor.putString("GDOCS_REFRESH_TOKEN", accessTokenResponse.refreshToken);
-        editor.putString("GDOCS_SCOPE", accessTokenResponse.scope);
-        editor.commit();
-    }
-
-    public static void ClearAccessToken(Context applicationContext)
-    {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        SharedPreferences.Editor editor = prefs.edit();
-
-        editor.remove("GDOCS_ACCESS_TOKEN");
-        editor.remove("GDOCS_EXPIRES_IN");
-        editor.remove("GDOCS_SAVE_TIME");
-        editor.remove("GDOCS_REFRESH_TOKEN");
-        editor.remove("GDOCS_SCOPE");
-        editor.commit();
-    }
-
-    public static AccessTokenResponse GetAccessToken(Context applicationContext)
-    {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        AccessTokenResponse atr = new AccessTokenResponse();
-
-        atr.accessToken = prefs.getString("GDOCS_ACCESS_TOKEN","");
-        atr.expiresIn = prefs.getLong("GDOCS_EXPIRES_IN",0);
-        atr.refreshToken = prefs.getString("GDOCS_REFRESH_TOKEN","");
-        atr.scope =  prefs.getString("GDOCS_SCOPE","");
-
-        if(atr.accessToken.length() == 0 || atr.refreshToken.length() == 0)
-        {
-            return null;
-        }
-        else
-        {
-            return atr;
-        }
-
-    }
-
-    public static boolean IsLinked(Context applicationContext)
-    {
-        return (GetAccessToken(applicationContext) != null);
-    }
-
-
-    public static String GetAuthorizationRequestUrl(Context applicationContext)
-    {
-        return  new GoogleAuthorizationRequestUrl(GetClientID(applicationContext), REDIRECT_URI, SCOPE).build();
-    }
-
-    public static boolean IsSuccessfulRedirectUrl(String url)
-    {
-        return url.startsWith(REDIRECT_URI);
-    }
-
-
-
+    /**
+     * Returns the Google API CLIENT ID to use in API calls
+     * @param applicationContext
+     * @return
+     */
     private static String GetClientID(Context applicationContext)
     {
         int RClientId = applicationContext.getResources().getIdentifier(
-                    "gdocs_clientid", "string", applicationContext.getPackageName());
+                "gdocs_clientid", "string", applicationContext.getPackageName());
 
 
         return applicationContext.getString(RClientId);
     }
 
+    /**
+     * Returns the Google API CLIENT SECRET to use in API calls
+     * @param applicationContext
+     * @return
+     */
     private static String GetClientSecret(Context applicationContext)
     {
 
         int RClientSecret = applicationContext.getResources().getIdentifier(
-                    "gdocs_clientsecret", "string", applicationContext.getPackageName());
+                "gdocs_clientsecret", "string", applicationContext.getPackageName());
 
         return applicationContext.getString(RClientSecret);
     }
 
-    public static AccessTokenResponse GetAccessTokenResponse(String code, Context applicationContext)
+    /**
+     * Gets the stored authToken, which may be expired
+     */
+    public static String GetAuthToken(Context applicationContext)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+        return prefs.getString("GDOCS_AUTH_TOKEN","");
+    }
+
+    /**
+     * Gets the stored account name
+     */
+    public static String GetAccountName(Context applicationContext)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+        return prefs.getString("GDOCS_ACCOUNT_NAME","");
+        
+    }
+
+    /**
+     * Saves the authToken and account name into shared preferences
+     */
+    public static void SaveAuthToken(Context applicationContext,AccountManagerFuture<Bundle> bundleAccountManagerFuture)
     {
         try
         {
+            String authToken = bundleAccountManagerFuture.getResult().getString(AccountManager.KEY_AUTHTOKEN);
+            String accountName =bundleAccountManagerFuture.getResult().getString(AccountManager.KEY_ACCOUNT_NAME); 
+            
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+            SharedPreferences.Editor editor = prefs.edit();
 
-           return new GoogleAccessTokenRequest.GoogleAuthorizationCodeGrant(
-                    new NetHttpTransport(),
-                    new JacksonFactory(),
-                    GetClientID(applicationContext),
-                    GetClientSecret(applicationContext),
-                    code,
-                    REDIRECT_URI).execute();
+            Utilities.LogDebug("Saving GDocs authToken: " + authToken);
+            editor.putString("GDOCS_AUTH_TOKEN", authToken);
+            editor.putString("GDOCS_ACCOUNT_NAME", accountName);
+            editor.commit();
         }
         catch (Exception e)
         {
-            Utilities.LogError("GDocsHelper.GetAccessTokenResponse", e);
+
+            Utilities.LogError("GDocsHelper.SaveAuthToken", e);
         }
 
-        return null;
     }
 
-    public static void SaveAccessTokenFromUrl(String url, Context applicationContext)
+    /**
+     * Removes the authToken and account name from storage
+     * @param applicationContext
+     */
+    public static void ClearAuthToken(Context applicationContext)
     {
-        String code = extractCodeFromUrl(url);
-        AccessTokenResponse accessTokenResponse =  GDocsHelper.GetAccessTokenResponse(code, applicationContext);
-        GDocsHelper.SaveAccessToken(accessTokenResponse, applicationContext);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.remove("GDOCS_AUTH_TOKEN");
+        editor.remove("GDOCS_ACCOUNT_NAME");
+        editor.commit();
     }
 
-    private static String extractCodeFromUrl(String url)
+
+    /**
+     * Returns whether the app is authorized to perform Google API operations
+     * @param applicationContext
+     * @return
+     */
+    public static boolean IsLinked(Context applicationContext)
     {
-        return url.substring(REDIRECT_URI.length() + 7, url.length());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+        String gdocsAuthToken = prefs.getString("GDOCS_AUTH_TOKEN","");
+        String gdocsAccount = prefs.getString("GDOCS_ACCOUNT_NAME","");
+        return gdocsAuthToken.length() > 0 && gdocsAccount.length() > 0;
     }
 
 
-    private static GoogleAccessProtectedResource GetAccessProtectedResource(String clientId, String clientSecret,
-                                                       AccessTokenResponse accessTokenResponse)
+    /**
+     * Gets an instance of an AccountManager to use for authorizing the app
+     * @param applicationContext
+     * @return
+     */
+    public static AccountManager GetAccountManager(Context applicationContext)
+    {
+        return AccountManager.get(applicationContext);
+    }
+
+    /**
+     * This version show the user an access request screen for the user to authorize the app
+     * @param accountManager
+     * @param account
+     * @param ota
+     * @param activity
+     */
+    public static void GetAuthTokenFromAccountManager(AccountManager accountManager, Account account,
+                                                      AccountManagerCallback<Bundle> ota, Activity activity)
+    {
+        Bundle bundle = new Bundle();
+        accountManager.getAuthToken(account,
+                SCOPE,
+                bundle,
+                activity,
+                ota,
+                null);
+    }
+
+    /**
+     * This version puts a message in the notification area asking for authorization
+     * @param accountManager
+     * @param account
+     * @param ota
+     */
+    public static void GetAuthTokenFromAccountManager(AccountManager accountManager, Account account,
+                                                      AccountManagerCallback<Bundle> ota)
+    {
+        accountManager.getAuthToken(
+                account,                     // Account retrieved using getAccountsByType()
+                SCOPE,            // Auth scope
+                true,
+                ota,          // Callback called when a token is successfully acquired
+                null);    // Callback called if an error occurs    
+    }
+
+    /**
+     * Invalidates the authToken and requests a new one and saves the new authToken
+     * @param applicationContext
+     * @param accountManager
+     */
+    private void ResetAuthToken(final Context applicationContext, final AccountManager accountManager, 
+                                final Thread threadToStart)
     {
 
-        final JsonFactory jsonFactory = new JacksonFactory();
-        HttpTransport transport = new NetHttpTransport();
+        //To completely revoke access, adb -e shell 'sqlite3 /data/system/accounts.db "delete from grants;"'
+        //Invalidate token, get new token, invalidate it again, then get it again.
+        //As weird as that sounds, the first time you get a token it will be expired.
+        
+        Account[] accounts = accountManager.getAccountsByType("com.google");
+        Account account = null;
 
-        return new GoogleAccessProtectedResource(
-                accessTokenResponse.accessToken,
-                transport,
-                jsonFactory,
-                clientId,
-                clientSecret,
-                accessTokenResponse.refreshToken);
+        for(Account acc : accounts)
+        {
+            if(acc.name.equalsIgnoreCase(GetAccountName(applicationContext)))
+            {
+                account = acc;
+            }
+        }
+
+        final Account finalAccount = account;
+
+        //Invalidate the token
+        accountManager.invalidateAuthToken("com.google", GetAuthToken(applicationContext));
 
 
+        //Request a token (AccountManager will return a cached and probably expired token)
+        GetAuthTokenFromAccountManager(accountManager,account,new AccountManagerCallback<Bundle>()
+        {
+            @Override
+            public void run(AccountManagerFuture<Bundle> bundleAccountManagerFuture)
+            {
+                //Save the (stale) token
+                SaveAuthToken(applicationContext,bundleAccountManagerFuture);
+
+                //Invalidate it again
+                accountManager.invalidateAuthToken("com.google", GetAuthToken(applicationContext));
+
+                //Request a token again
+                GetAuthTokenFromAccountManager(accountManager, finalAccount,new AccountManagerCallback<Bundle>()
+                {
+                    @Override
+                    public void run(AccountManagerFuture<Bundle> bundleAccountManagerFuture)
+                    {
+                        //and finally save it
+                        SaveAuthToken(applicationContext,bundleAccountManagerFuture);
+                        threadToStart.start();
+                    }
+                });
+            }
+        });
     }
-
+    
+    public static Account[] GetAccounts(AccountManager accountManager)
+    {
+        return accountManager.getAccountsByType("com.google");
+    }
 
     public void UploadTestFile()
     {
 
-        //Create an AccessTokenResponse from the stored data
-        AccessTokenResponse accessTokenResponse = GetAccessToken(ctx);
-
-
-        if(accessTokenResponse == null)
+        if(!IsLinked(ctx))
         {
             callback.OnFailure();
             return;
         }
 
-
         try
         {
-
-            GoogleAccessProtectedResource accessProtectedResource = GetAccessProtectedResource(
-                    GetClientID(ctx), GetClientSecret(ctx), accessTokenResponse);
-
+            AccountManager accountManager = GetAccountManager(ctx);
 
 
             Thread t = new Thread(new GDocsUploadHandler(
                     new ByteArrayInputStream("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<a>This is a test upload</a>".getBytes()),
-                    "test.xml" ,this, accessProtectedResource));
-            t.start();
+                    "test.xml", GDocsHelper.this));
 
+            ResetAuthToken(ctx, accountManager, t);
         }
         catch(Exception e)
         {
+            callback.OnFailure();
             Utilities.LogError("GDocsHelper.UploadTestFile", e);
         }
-
     }
-
 
     @Override
     public void OnComplete()
@@ -248,174 +288,224 @@ public class GDocsHelper implements IActionListener, IFileSender
     }
 
     @Override
-    public void UploadFile(String fileName)
+    public void UploadFile(final String fileName)
     {
-        //Create an AccessTokenResponse from the stored data
-        AccessTokenResponse accessTokenResponse = GetAccessToken(ctx);
 
-        if(accessTokenResponse == null)
+        if(!IsLinked(ctx))
         {
             callback.OnFailure();
             return;
         }
 
-
         try
         {
-
-            GoogleAccessProtectedResource accessProtectedResource = GetAccessProtectedResource(
-                    GetClientID(ctx), GetClientSecret(ctx), accessTokenResponse);
-
+            AccountManager accountManager = GetAccountManager(ctx);
 
             File gpsDir = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
             File gpxFile = new File(gpsDir, fileName);
-
             FileInputStream fis = new FileInputStream(gpxFile);
 
-            Thread t = new Thread(new GDocsUploadHandler(
-                    fis, fileName ,this, accessProtectedResource));
-            t.start();
+            Thread t = new Thread(new GDocsUploadHandler(fis, fileName, GDocsHelper.this));
 
+            ResetAuthToken(ctx, accountManager,t);
         }
         catch(Exception e)
         {
-            Utilities.LogError("GDocsHelper.UploadTestFile", e);
+            callback.OnFailure();
+            Utilities.LogError("GDocsHelper.UploadFile", e);
         }
     }
+
+  
 
 
     private class GDocsUploadHandler implements Runnable
     {
 
-        boolean hasRun = false;
         String fileName;
         InputStream inputStream;
         IActionListener callback;
-        GoogleAccessProtectedResource accessProtectedResource;
 
-        GDocsUploadHandler(InputStream inputStream, String fileName, IActionListener callback, GoogleAccessProtectedResource accessProtectedResource)
+        GDocsUploadHandler(InputStream inputStream, String fileName, 
+                           IActionListener callback)
         {
 
             this.inputStream = inputStream;
             this.fileName = fileName;
             this.callback = callback;
-            this.accessProtectedResource = accessProtectedResource;
         }
 
 
         @Override
         public void run()
         {
+               
             try
             {
 
-                String gpsLoggerFolderFeed;
-
-
-                //Search for the 'GPSLogger For Android' folder.
-                HttpRequest searchForCollectionRequest = GetSearchForFolderRequest(accessProtectedResource);
-                HttpResponse searchForCollectionResponse = searchForCollectionRequest.execute();
-
-                gpsLoggerFolderFeed = GetFolderFeedUrl(searchForCollectionResponse);
-
-                if (IsNullOrEmpty(gpsLoggerFolderFeed))
+                if (Integer.parseInt(Build.VERSION.SDK) < Build.VERSION_CODES.FROYO)
                 {
-                    //Not found, create the folder
-                    HttpRequest createFolderRequest = GetCreateFolderRequest(accessProtectedResource);
-                    HttpResponse createFolderResponse = createFolderRequest.execute();
-
-                    gpsLoggerFolderFeed = GetFolderFeedUrl(createFolderResponse);
+                    //Due to a pre-froyo bug
+                    //http://android-developers.blogspot.com/2011/09/androids-http-clients.html
+                    System.setProperty("http.keepAlive", "false");
                 }
 
-                //Now that you have the collection feed url, search for the file test.xml
-                HttpRequest searchForFileRequest = GetSearchForFileRequest(gpsLoggerFolderFeed, fileName,
-                        accessProtectedResource);
-                HttpResponse searchForFileResponse = searchForFileRequest.execute();
+                String gpsLoggerFolderFeed = SearchForGpsLoggerFolder();
 
-                Document fileSearchNode = GetDocumentFromHttpResponse(searchForFileResponse);
+                if(Utilities.IsNullOrEmpty(gpsLoggerFolderFeed))
+                {
+                    //Couldn't find anything, need to create it.
+                    gpsLoggerFolderFeed = CreateFolder();
+                }
 
-                String fileEditUrl = GetFileEditUrl(fileSearchNode);
+                FileAccessLocations fileSearch = SearchForFile(gpsLoggerFolderFeed, fileName);
 
-                if (IsNullOrEmpty(fileEditUrl))
+                if(Utilities.IsNullOrEmpty(fileSearch.UpdateUrl))
                 {
                     //The file doesn't exist, you must create it.
-
-                    //Start a 'create file' session
-                    String fileUploadUrl = GetFileUploadUrl(fileSearchNode);
-
-                    String createFileAtomXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                            "<entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:docs=\"http://schemas.google.com/docs/2007\">\n" +
-                            "  <!-- Replace the following line appropriately to create another type of resource. -->\n" +
-                            "  <category scheme=\"http://schemas.google.com/g/2005#kind\"\n" +
-                            "      term=\"http://schemas.google.com/docs/2007#document\"/>\n" +
-                            "  <title>" + fileName + "</title>\n" +
-                            "</entry>";
-
-                    HttpRequest createFileSessionRequest = GetCreateFileRequest(fileName, createFileAtomXml,
-                            fileUploadUrl + "?convert=false", accessProtectedResource);
-
-                    HttpResponse createFileSessionResponse = createFileSessionRequest.execute();
-
-                    //Get the actual file upload location
-                    String newUploadLocation = createFileSessionResponse.headers.location;
-
-                    //Write to actual file upload location
-                    String fileContents =  inputStreamToString(inputStream);
-
-                    HttpRequest createFileRequest = GetCreateFileRequest(fileName, fileContents, newUploadLocation,
-                            accessProtectedResource);
-
-                    createFileRequest.execute();
-
+                    CreateFile(fileSearch, fileName, Utilities.GetStringFromInputStream(inputStream));
                 }
                 else
                 {
-                    //The file exists.  Update contents.
-
-                    String fileContents = inputStreamToString(inputStream);
-
-                    HttpRequest updateFileSessionRequest = GetUpdateFileRequest(fileName, fileContents,
-                            fileEditUrl + "?convert=false", accessProtectedResource);
-
-                    HttpResponse updateFileSessionResponse = updateFileSessionRequest.execute();
-                    String newUpdateLocation = updateFileSessionResponse.headers.location;
-
-
-                    HttpRequest updateFileRequest = GetUpdateFileRequest(fileName, fileContents,
-                            newUpdateLocation, accessProtectedResource);
-
-                    updateFileRequest.execute();
-
+                    //The file exists, update its contents instead
+                    UpdateFile(fileSearch, fileName, Utilities.GetStringFromInputStream(inputStream));
                 }
-
+                
                 callback.OnComplete();
-            }
-            catch(HttpResponseException hre)
-            {
-                if(hre.response.statusCode == 401)
-                {
-                    try
-                    {
-                        accessProtectedResource.refreshToken();
-                        GDocsHelper.SaveRefreshedToken(accessProtectedResource.getAccessToken(),
-                                accessProtectedResource.getRefreshToken(), ctx);
-                        if(!hasRun)
-                        {
-                            hasRun = true;
-                            run();
-                        }
-                    }
-                    catch(Exception ex)
-                    {
-                         Utilities.LogError("Could not refresh GDocs Token, giving up.", ex);
-                    }
-                }
+
             }
             catch (Exception e)
             {
-                Utilities.LogError("GDocsUploadHandler", e);
+                Utilities.LogError("GDocsUploadHandler.run", e);
                 callback.OnFailure();
             }
+        }
+
+
+        private void UpdateFile(FileAccessLocations accessLocations, String fileName, String fileContents)
+        {
+
+            String resumableFileUploadUrl = UploadFileContentsToResumableUrl(accessLocations.UpdateUrl+"?convert=false",
+                    fileName, fileContents,true);
+
+            UploadFileContentsToResumableUrl(resumableFileUploadUrl, fileName, fileContents, true);
+
+        }
+
+        private void CreateFile(FileAccessLocations accessLocations, String fileName, String fileContents)
+        {
+            String createFileAtomXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                    "<entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:docs=\"http://schemas.google.com/docs/2007\">\n" +
+                    "  <category scheme=\"http://schemas.google.com/g/2005#kind\"\n" +
+                    "      term=\"http://schemas.google.com/docs/2007#document\"/>\n" +
+                    "  <title>" + fileName + "</title>\n" +
+                    "</entry>";
+
+            String resumableFileUploadUrl = UploadFileContentsToResumableUrl(accessLocations.CreateUrl + "?convert=false",
+                    fileName, createFileAtomXml, false);
+
+            UploadFileContentsToResumableUrl(resumableFileUploadUrl, fileName, fileContents, false);
+
+        }
+
+        private String UploadFileContentsToResumableUrl(String resumableFileUploadUrl,
+                                                        String fileName,
+                                                        String fileContents,
+                                                        boolean isUpdate)
+        {
+            //This method gets used 4 times - to get the resumable location for create/edit, and to do the actual uploads.
+
+            String newLocation = "";
+            HttpURLConnection conn = null;
+
+            try
+            {
+
+                URL url = new URL(resumableFileUploadUrl);
+                conn = (HttpURLConnection) url.openConnection();
+                AddCommonHeaders(conn);
+
+                conn.setRequestProperty("X-Upload-Content-Length", String.valueOf(fileContents.length())); //back to 0
+                conn.setRequestProperty("X-Upload-Content-Type", "text/xml");
+                conn.setRequestProperty("Content-Type", "text/xml");
+                conn.setRequestProperty("Content-Length", String.valueOf(fileContents.length()));
+                conn.setRequestProperty("Slug", fileName);
+
+
+                if(isUpdate)
+                {
+                    conn.setRequestProperty("If-Match", "*");
+                    conn.setRequestMethod("PUT");
+                }
+                else
+                {
+                    conn.setRequestMethod("POST");
+                }
+
+                conn.setUseCaches(false);
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                DataOutputStream wr = new DataOutputStream(
+                        conn.getOutputStream());
+                wr.writeBytes(fileContents);
+                wr.flush();
+                wr.close();
+
+                //Make the request
+                conn.getResponseCode();
+                newLocation = conn.getHeaderField("location");
+            }
+            catch (Exception e)
+            {
+                 Utilities.LogError("GDocsUploadHandler.UploadFileContentsToResumableUrl", e);
+            }
+            finally
+            {
+                if(conn != null)
+                {
+                    conn.disconnect();
+                }
+            }
+
+            return newLocation;
+
+        }
+
+        private FileAccessLocations SearchForFile(String gpsLoggerFolderFeed, String fileName)
+        {
+
+            FileAccessLocations fal = new FileAccessLocations();
+            HttpURLConnection conn = null;
+            String searchUrl = gpsLoggerFolderFeed + "?title=" + fileName;
+
+            try
+            {
+
+                URL url = new URL(searchUrl);
+
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                AddCommonHeaders(conn);
+
+                Document doc = Utilities.GetDocumentFromInputStream(conn.getInputStream());
+                fal.CreateUrl = GetFileUploadUrl(doc);
+                fal.UpdateUrl = GetFileEditUrl(doc);
+            }
+            catch (Exception e)
+            {
+                Utilities.LogError("GDocsUploadHandler.SearchForFile", e);
+            }
+            finally
+            {
+                if(conn != null)
+                {
+                    conn.disconnect();
+                }
+            }
+
+            return fal;
+
         }
 
 
@@ -436,6 +526,7 @@ public class GDocsHelper implements IActionListener, IFileSender
             }
 
             return fileUploadUrl;
+
         }
 
 
@@ -458,361 +549,138 @@ public class GDocsHelper implements IActionListener, IFileSender
             return fileEditUrl;
         }
 
-        private Document GetDocumentFromHttpResponse(HttpResponse searchForFileResponse)
+
+        private String CreateFolder()
         {
-            Document doc;
+
+            String folderFeedUrl = "";
+            HttpURLConnection conn = null;
+
+            String createFolderUrl = "https://docs.google.com/feeds/default/private/full";
+
+            String createXml = "<?xml version='1.0' encoding='UTF-8'?>\n" +
+                    "<entry xmlns=\"http://www.w3.org/2005/Atom\">\n" +
+                    "  <category scheme=\"http://schemas.google.com/g/2005#kind\"\n" +
+                    "      term=\"http://schemas.google.com/docs/2007#folder\"/>\n" +
+                    "  <title>GPSLogger For Android</title>\n" +
+                    "</entry>";
 
             try
             {
-                DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
-                xmlFactory.setNamespaceAware(true);
-                DocumentBuilder builder;
-                builder = xmlFactory.newDocumentBuilder();
-                doc = builder.parse(searchForFileResponse.getContent());
+
+                URL url = new URL(createFolderUrl);
+
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                AddCommonHeaders(conn);
+                conn.setRequestProperty("Content-Type", "application/atom+xml");
+
+                conn.setUseCaches(false);
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                DataOutputStream wr = new DataOutputStream(
+                        conn.getOutputStream());
+                wr.writeBytes(createXml);
+                wr.flush();
+                wr.close();
+
+                folderFeedUrl = GetFolderFeedUrlFromInputStream(conn.getInputStream());
+
             }
             catch (Exception e)
             {
-                doc = null;
-            }
 
-            return doc;
-
-        }
-
-        private HttpRequest GetSearchForFileRequest(String gpsLoggerFolderFeed, String fileTitle,
-                                                    final GoogleAccessProtectedResource accessProtectedResource) throws IOException
-        {
-
-
-            final JsonFactory jsonFactory = new JacksonFactory();
-            HttpTransport transport = new NetHttpTransport();
-
-
-            HttpRequestFactory httpBasicFactory = transport.createRequestFactory(new HttpRequestInitializer()
-            {
-
-                @Override
-                public void initialize(HttpRequest request)
-                {
-                    JsonCParser parser = new JsonCParser();
-                    parser.jsonFactory = jsonFactory;
-                    request.addParser(parser);
-                    GoogleHeaders headers = new GoogleHeaders();
-                    headers.setApplicationName("GPSLogger for Android");
-                    headers.set("Authorization", "Bearer " + accessProtectedResource.getAccessToken());
-                    headers.gdataVersion = "3";
-                    request.headers = headers;
-                }
-            });
-
-            //https://docs.google.com/feeds/default/private/full/folder:...../contents?title=test.xml
-            return httpBasicFactory.buildGetRequest(new GenericUrl(gpsLoggerFolderFeed + "?title=" + fileTitle));
-        }
-
-        private HttpRequest GetSearchForFolderRequest(final GoogleAccessProtectedResource accessProtectedResource) throws IOException
-        {
-
-
-            final JsonFactory jsonFactory = new JacksonFactory();
-            HttpTransport transport = new NetHttpTransport();
-
-            HttpRequestFactory httpBasicFactory = transport.createRequestFactory(new HttpRequestInitializer()
-            {
-
-                @Override
-                public void initialize(HttpRequest request)
-                {
-                    JsonCParser parser = new JsonCParser();
-                    parser.jsonFactory = jsonFactory;
-                    request.addParser(parser);
-                    GoogleHeaders headers = new GoogleHeaders();
-                    headers.setApplicationName("GPSLogger for Android");
-                    headers.set("Authorization", "Bearer " + accessProtectedResource.getAccessToken());
-                    headers.gdataVersion = "3";
-                    request.headers = headers;
-                }
-            });
-
-            return httpBasicFactory.buildGetRequest(
-                    new GenericUrl("https://docs.google.com/feeds/default/private/full?title=GPSLogger+For+Android&showfolders=true"));
-        }
-
-
-        private String GetFolderFeedUrl(HttpResponse createFolderResponse)
-        {
-
-            String gpsLoggerFolderFeed = "";
-
-            try
-            {
-                Document createFolderDoc = GetDocumentFromHttpResponse(createFolderResponse);
-
-                Node newFolderContentNode = createFolderDoc.getElementsByTagName("content").item(0);
-
-                if (newFolderContentNode != null)
-                {
-                    //<content type="application/atom+xml;type=feed" src=".../contents"/>
-                    gpsLoggerFolderFeed = createFolderDoc.getElementsByTagName("content").item(0)
-                            .getAttributes().getNamedItem("src").getNodeValue();
-                }
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-
-            return gpsLoggerFolderFeed;
-        }
-
-
-        private HttpRequest GetUpdateFileRequest(final String fileName, final String payload, String updateUrl,
-                                                 final GoogleAccessProtectedResource accessProtectedResource) throws IOException
-        {
-
-            final JsonFactory jsonFactory = new JacksonFactory();
-            HttpTransport transport = new NetHttpTransport();
-
-
-            HttpRequestFactory updateFactory = transport.createRequestFactory( new HttpRequestInitializer()
-            {
-                @Override
-                public void initialize(HttpRequest request) throws IOException
-                {
-                    // set the parser
-                    JsonCParser parser = new JsonCParser();
-                    parser.jsonFactory = jsonFactory;
-                    request.addParser(parser);
-                    // set up the Google headers
-                    GoogleHeaders headers = new GoogleHeaders();
-                    headers.setApplicationName("GPSLogger for Android");
-                    headers.set("Authorization", "Bearer " + accessProtectedResource.getAccessToken());
-                    headers.set("X-Upload-Content-Length", payload.length());
-                    headers.set("X-Upload-Content-Type", "text/xml");
-                    headers.set("Content-Type", "text/xml");
-                    headers.set("Content-Length", String.valueOf(payload.length()));
-                    headers.setSlugFromFileName(fileName);
-                    headers.set("If-Match", "*");
-                    headers.gdataVersion = "3";
-                    headers.putAll(request.headers);
-                    request.headers = headers;
-                }
-            });
-
-            return updateFactory.buildPutRequest(new GenericUrl(updateUrl), new HttpContent()
-            {
-                @Override
-                public long getLength() throws IOException
-                {
-                    return payload.length();
-                }
-
-                @Override
-                public String getEncoding()
-                {
-                    return null;
-                }
-
-                @Override
-                public String getType()
-                {
-                    return "text/xml";
-                }
-
-                @Override
-                public void writeTo(OutputStream outputStream) throws IOException
-                {
-                    outputStream.write(payload.getBytes());
-                }
-
-                @Override
-                public boolean retrySupported()
-                {
-                    return false;
-                }
-            });
-
-        }
-
-
-        private HttpRequest GetCreateFileRequest(final String fileName, final String payload, String uploadUrl,
-                                                 final GoogleAccessProtectedResource accessProtectedResource
-        ) throws IOException
-        {
-
-
-            final JsonFactory jsonFactory = new JacksonFactory();
-            HttpTransport transport = new NetHttpTransport();
-
-
-            HttpRequestFactory uploadFactory = transport.createRequestFactory(new HttpRequestInitializer()
-            {
-
-                @Override
-                public void initialize(HttpRequest request)
-                {
-                    // set the parser
-                    JsonCParser parser = new JsonCParser();
-                    parser.jsonFactory = jsonFactory;
-                    request.addParser(parser);
-                    // set up the Google headers
-                    GoogleHeaders headers = new GoogleHeaders();
-                    headers.setApplicationName("GPSLogger for Android");
-                    headers.set("Authorization", "Bearer " + accessProtectedResource.getAccessToken());
-                    headers.set("X-Upload-Content-Length", "0");
-                    headers.set("X-Upload-Content-Type", "text/xml");
-                    headers.set("Content-Type", "text/xml");
-                    headers.set("Content-Length", String.valueOf(payload.length()));
-                    headers.setSlugFromFileName(fileName);
-                    headers.gdataVersion = "3";
-                    headers.putAll(request.headers);
-                    request.headers = headers;
-                }
-            });
-
-            return uploadFactory.buildPostRequest(new GenericUrl(uploadUrl), new HttpContent()
-            {
-                @Override
-                public long getLength() throws IOException
-                {
-                    return payload.length();
-                }
-
-                @Override
-                public String getEncoding()
-                {
-                    return null;
-                }
-
-                @Override
-                public String getType()
-                {
-                    return "text/xml";
-                }
-
-                @Override
-                public void writeTo(OutputStream outputStream) throws IOException
-                {
-                    outputStream.write(payload.getBytes());
-                }
-
-                @Override
-                public boolean retrySupported()
-                {
-                    return false;
-                }
-            });
-
-        }
-
-
-        private HttpRequest GetCreateFolderRequest(final GoogleAccessProtectedResource accessProtectedResource) throws IOException
-        {
-
-
-            final JsonFactory jsonFactory = new JacksonFactory();
-            HttpTransport transport = new NetHttpTransport();
-
-
-            HttpRequestFactory httpBasicFactory = transport.createRequestFactory(new HttpRequestInitializer()
-            {
-
-                @Override
-                public void initialize(HttpRequest request)
-                {
-                    JsonCParser parser = new JsonCParser();
-                    parser.jsonFactory = jsonFactory;
-                    request.addParser(parser);
-                    GoogleHeaders headers = new GoogleHeaders();
-                    headers.setApplicationName("GPSLogger for Android");
-                    headers.set("Authorization", "Bearer " + accessProtectedResource.getAccessToken());
-                    headers.gdataVersion = "3";
-                    request.headers = headers;
-                }
-            });
-
-            return httpBasicFactory.buildPostRequest(
-                    new GenericUrl("https://docs.google.com/feeds/default/private/full"), new HttpContent()
-            {
-
-                String createXml = "<?xml version='1.0' encoding='UTF-8'?>\n" +
-                        "<entry xmlns=\"http://www.w3.org/2005/Atom\">\n" +
-                        "  <category scheme=\"http://schemas.google.com/g/2005#kind\"\n" +
-                        "      term=\"http://schemas.google.com/docs/2007#folder\"/>\n" +
-                        "  <title>GPSLogger For Android</title>\n" +
-                        "</entry>";
-
-                @Override
-                public long getLength() throws IOException
-                {
-                    return createXml.length();
-                }
-
-                @Override
-                public String getEncoding()
-                {
-                    return null;
-                }
-
-                @Override
-                public String getType()
-                {
-                    return "application/atom+xml";
-                }
-
-                @Override
-                public void writeTo(OutputStream outputStream) throws IOException
-                {
-                    outputStream.write(createXml.getBytes());
-                }
-
-                @Override
-                public boolean retrySupported()
-                {
-                    return false;
-                }
-            });
-        }
-
-        private String inputStreamToString(InputStream is)
-        {
-            String line;
-            StringBuilder total = new StringBuilder();
-
-            // Wrap a BufferedReader around the InputStream
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-
-            // Read response until the end
-            try
-            {
-                while ((line = rd.readLine()) != null)
-                {
-                    total.append(line);
-                }
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
+               Utilities.LogError("GDocsUploadHandler.CreateFolder", e);
             }
             finally
             {
-                try
+                if(conn != null)
                 {
-                    is.close();
+                    conn.disconnect();
                 }
-                catch(Exception e)
-                {
-                    Utilities.LogWarning("inputStreamToString - could not close stream");
-                }
+
             }
 
-            // Return full string
-            return total.toString();
+            return folderFeedUrl;
         }
 
 
-        private boolean IsNullOrEmpty(String gpsLoggerFolderFeed)
+
+        private String GetFolderFeedUrlFromInputStream(InputStream inputStream)
         {
-            return gpsLoggerFolderFeed == null || gpsLoggerFolderFeed.length() == 0;
+            String folderFeedUrl = "";
+
+            Document createFolderDoc = Utilities.GetDocumentFromInputStream(inputStream);
+
+            Node newFolderContentNode = createFolderDoc.getElementsByTagName("content").item(0);
+
+            if (newFolderContentNode == null)
+            {
+                Utilities.LogInfo("Could not get collection info from response");
+            }
+            else
+            {
+                folderFeedUrl = createFolderDoc.getElementsByTagName("content").item(0)
+                        .getAttributes().getNamedItem("src").getNodeValue();
+            }
+
+            return folderFeedUrl;
+        }
+
+
+        private String SearchForGpsLoggerFolder()
+        {
+
+            String folderFeedUrl = "";
+
+            String searchUrl = "https://docs.google.com/feeds/default/private/full?title=GPSLogger+For+Android&showfolders=true";
+            HttpURLConnection conn = null;
+
+            try
+            {
+
+                URL url = new URL(searchUrl);
+
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                AddCommonHeaders(conn);
+
+                folderFeedUrl = GetFolderFeedUrlFromInputStream(conn.getInputStream());
+            }
+            catch (Exception e)
+            {
+                Utilities.LogError("GDocsUploadHandler.SearchForGpsLoggerFolder", e);
+            }
+            finally
+            {
+                if(conn != null)
+                {
+                    conn.disconnect();
+                }
+            }
+
+            return folderFeedUrl;
+        }
+
+
+        /**
+         * Adds headers commonly  used when talking to Google APIs
+         * @param conn
+         */
+        private void AddCommonHeaders(HttpURLConnection conn)
+        {
+            conn.addRequestProperty("client_id", GDocsHelper.GetClientID(ctx));
+            conn.addRequestProperty("client_secret", GDocsHelper.GetClientSecret(ctx));
+            conn.setRequestProperty("GData-Version", "3.0");
+            conn.setRequestProperty("User-Agent", "GPSLogger for Android");
+            conn.setRequestProperty("Authorization", "OAuth " + GDocsHelper.GetAuthToken(ctx));
+        }
+
+        private class FileAccessLocations
+        {
+            public String CreateUrl;
+            public String UpdateUrl;
         }
 
     }
