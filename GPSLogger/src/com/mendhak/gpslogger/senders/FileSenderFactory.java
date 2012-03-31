@@ -3,6 +3,7 @@ package com.mendhak.gpslogger.senders;
 import android.content.Context;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
+import com.mendhak.gpslogger.senders.email.AutoEmailHelper;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
 
@@ -28,5 +29,10 @@ public class FileSenderFactory
     public static IFileSender GetGDocsSender(Context applicationContext, IActionListener callback)
     {
         return new GDocsHelper(applicationContext, callback);
+    }
+    
+    public static IFileSender GetEmailSender(IActionListener callback)
+    {
+        return new AutoEmailHelper(callback);
     }
 }

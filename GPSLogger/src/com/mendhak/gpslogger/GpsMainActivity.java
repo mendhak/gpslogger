@@ -415,6 +415,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             case R.id.mnuGDocs:
                 UploadToGoogleDocs();
                 break;
+            case R.id.mnuEmail:
+                SelectAndEmailFile();
+                break;
             case R.id.mnuAnnotate:
                 Annotate();
                 break;
@@ -542,6 +545,26 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         {
             Utilities.LogError("Share", ex);
         }
+
+    }
+    
+    private void SelectAndEmailFile()
+    {
+        Utilities.LogDebug("GpsMainActivity.SelectAndEmailFile");
+
+        Intent settingsIntent = new Intent(getApplicationContext(), AutoEmailActivity.class);
+        
+        if (!Utilities.IsEmailSetup())
+        {
+            
+            startActivity(settingsIntent);                
+        }
+        else
+        {
+            ShowFileListDialog(true, true, true, settingsIntent,FileSenderFactory.GetEmailSender(this) );
+        }
+        
+       
 
     }
 

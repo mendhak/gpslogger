@@ -17,6 +17,7 @@
             <item android:id="@+id/mnuOSM" android:title="@string/osm_upload"
                   android:icon="@android:drawable/ic_menu_mapmode"/>
             <item android:id="@+id/mnuGDocs" android:title="@string/gdocs_upload" />
+            <item android:id="@+id/mnuEmail" android:title="@string/email_upload"/>
 
         </menu>
     </item>

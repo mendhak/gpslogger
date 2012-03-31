@@ -5,13 +5,14 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.senders.IFileSender;
 import com.mendhak.gpslogger.senders.ZipHelper;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class AutoEmailHelper implements IActionListener
+public class AutoEmailHelper implements IActionListener, IFileSender
 {
 
 
@@ -21,6 +22,37 @@ public class AutoEmailHelper implements IActionListener
     public AutoEmailHelper(IActionListener callback)
     {
         this.callback = callback;
+    }
+
+
+    @Override
+    public void UploadFile(String fileName)
+    {
+        this.forcedSend = true;
+
+        File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+
+        if (!gpxFolder.exists())
+        {
+            OnFailure();
+            return;
+        }
+        
+        File chosenFile = new File(gpxFolder.getPath(), fileName);
+        
+        if(!chosenFile.exists())
+        {
+            OnFailure();
+            return;
+        }
+
+        ArrayList<File> files = new ArrayList<File>();
+        files.add(chosenFile);
+
+        Thread t = new Thread(new AutoSendHandler(files.toArray(new File[files.size()]), this));
+        t.start();
+
+
     }
 
     public void SendLogFile(String currentFileName, boolean forcedSend, boolean sendZipFile)
@@ -109,6 +141,7 @@ public class AutoEmailHelper implements IActionListener
     {
         callback.OnFailure();
     }
+
 }
 
 class AutoSendHandler implements Runnable

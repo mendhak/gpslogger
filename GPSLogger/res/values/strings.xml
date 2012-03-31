@@ -335,6 +335,8 @@
     <string name="gdocs_testupload_error">Could not upload a test file</string>
     <string name="gdocs_testupload_success">Uploaded. Please check your Google Documents for a new file.</string>
     <string name="gdocs_selectgoogleaccount">Select a Google Account</string>
+    
+    <string name="email_upload">Email a file</string>
 
 
 </resources>
