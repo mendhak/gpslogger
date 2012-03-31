@@ -42,6 +42,7 @@ public class ZipHelper
 				{
 					out.write(data, 0, count);
 				}
+                out.closeEntry();
 				origin.close();
 			}
 
