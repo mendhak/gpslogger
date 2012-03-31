@@ -426,8 +426,9 @@ public class GDocsHelper implements IActionListener, IFileSender
                 AddCommonHeaders(conn);
 
                 conn.setRequestProperty("X-Upload-Content-Length", String.valueOf(fileContents.length())); //back to 0
-                conn.setRequestProperty("X-Upload-Content-Type", "text/xml");
-                conn.setRequestProperty("Content-Type", "text/xml");
+                
+                conn.setRequestProperty("X-Upload-Content-Type", Utilities.GetMimeTypeFromFileName(fileName));
+                conn.setRequestProperty("Content-Type", Utilities.GetMimeTypeFromFileName(fileName));
                 conn.setRequestProperty("Content-Length", String.valueOf(fileContents.length()));
                 conn.setRequestProperty("Slug", fileName);
 

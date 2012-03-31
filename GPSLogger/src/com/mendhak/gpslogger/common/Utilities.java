@@ -612,4 +612,48 @@ public class Utilities
         return doc;
     }
 
+    /**
+     * Gets the GPSLogger-specific MIME type to use for a given filename/extension
+     * @param fileName
+     * @return
+     */
+    public static String GetMimeTypeFromFileName(String fileName)
+    {
+       
+        if(fileName == null || fileName.length() == 0)
+        {
+            return "";
+        }
+        
+        
+        int pos = fileName.lastIndexOf(".");
+        if (pos == -1)
+        {
+            return "application/octet-stream";
+        }
+        else
+        {
+
+            String extension = fileName.substring(pos+1,fileName.length());
+            
+            
+            if(extension.equalsIgnoreCase("gpx"))
+            {
+                return "application/gpx+xml";
+            }
+            else if(extension.equalsIgnoreCase("kml"))
+            {
+                return "application/vnd.google-earth.kml+xml";
+            }
+            else if(extension.equalsIgnoreCase("zip"))
+            {
+                return "application/zip";
+            }
+        }
+
+        //Unknown mime type
+        return "application/octet-stream";
+
+    }
+
 }
