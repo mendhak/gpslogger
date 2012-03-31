@@ -180,7 +180,7 @@ public class Utilities
         AppSettings.setSmtpSsl(prefs.getBoolean("smtp_ssl", true));
         AppSettings.setSmtpUsername(prefs.getString("smtp_username", ""));
         AppSettings.setSmtpPassword(prefs.getString("smtp_password", ""));
-        AppSettings.setAutoEmailTarget(prefs.getString("autoemail_target", ""));
+        AppSettings.setAutoEmailTargets(prefs.getString("autoemail_target", ""));
         AppSettings.setDebugToFile(prefs.getBoolean("debugtofile", false));
         AppSettings.setShouldSendZipFile(prefs.getBoolean("autoemail_sendzip", true));
         AppSettings.setSmtpFrom(prefs.getString("smtp_from", ""));
@@ -492,7 +492,7 @@ public class Utilities
     public static boolean IsEmailSetup()
     {
         return AppSettings.isAutoEmailEnabled()
-                && AppSettings.getAutoEmailTarget().length() > 0
+                && AppSettings.getAutoEmailTargets().length() > 0
                 && AppSettings.getSmtpServer().length() > 0
                 && AppSettings.getSmtpPort().length() > 0
                 && AppSettings.getSmtpUsername().length() > 0;

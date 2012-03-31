@@ -194,7 +194,7 @@
     <string name="autoemail_frequency_summary">How frequently log files should be emailed in a day</string>
     <string name="autoemail_sendto">An email address</string>
     <string name="autoemail_frequency_format">After %d hours</string>
-    <string name="autoemail_target">Target email address</string>
+    <string name="autoemail_target">Target email addresses</string>
     <string name="autoemail_target_summary">Where to email the log file</string>
     <string name="autoemail_sending">Auto sending emails</string>
     <string name="autoemail_frequency_whenistop">When I press stop</string>
@@ -337,6 +337,8 @@
     <string name="gdocs_selectgoogleaccount">Select a Google Account</string>
     
     <string name="email_upload">Email a file</string>
+
+    <string name="autoemail_sendto_csv">Comma separated email addresses</string>
 
 
 </resources>

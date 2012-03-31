@@ -7,8 +7,8 @@
                         android:summary="@string/autoemail_autosend_summary"/>
 
     <EditTextPreference android:key="autoemail_target"
-                        android:title="@string/autoemail_target" android:summary="@string/autoemail_target_summary"
-                        android:dialogTitle="@string/autoemail_target" android:hint="@string/autoemail_sendto"/>
+                        android:title="@string/autoemail_target" android:summary="@string/autoemail_sendto_csv"
+                        android:dialogTitle="@string/autoemail_target" android:hint="@string/autoemail_sendto_csv"/>
 
     <ListPreference android:key="autoemail_frequency"
                     android:title="@string/autoemail_frequency"

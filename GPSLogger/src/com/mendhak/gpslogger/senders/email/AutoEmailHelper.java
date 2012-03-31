@@ -163,8 +163,9 @@ class AutoSendHandler implements Runnable
             Mail m = new Mail(AppSettings.getSmtpUsername(),
                     AppSettings.getSmtpPassword());
 
-            String[] toArr =
-                    {AppSettings.getAutoEmailTarget()};
+            String csvEmailTargets = AppSettings.getAutoEmailTargets();
+            String[] toArr = csvEmailTargets.split(",");
+
             m.setTo(toArr);
             m.setFrom(AppSettings.getSenderAddress());
             m.setSubject("GPS Log file generated at "
@@ -210,20 +211,20 @@ class TestEmailHandler implements Runnable
     String smtpUsername;
     String smtpPassword;
     boolean smtpUseSsl;
-    String emailTarget;
+    String csvEmailTargets;
     IActionListener helper;
     String fromAddress;
 
     public TestEmailHandler(IActionListener helper, String smtpServer,
                             String smtpPort, String smtpUsername, String smtpPassword,
-                            boolean smtpUseSsl, String emailTarget, String fromAddress)
+                            boolean smtpUseSsl, String csvEmailTargets, String fromAddress)
     {
         this.smtpServer = smtpServer;
         this.smtpPort = smtpPort;
         this.smtpPassword = smtpPassword;
         this.smtpUsername = smtpUsername;
         this.smtpUseSsl = smtpUseSsl;
-        this.emailTarget = emailTarget;
+        this.csvEmailTargets = csvEmailTargets;
         this.helper = helper;
         this.fromAddress = fromAddress;
     }
@@ -235,8 +236,7 @@ class TestEmailHandler implements Runnable
 
             Mail m = new Mail(smtpUsername, smtpPassword);
 
-            String[] toArr =
-                    {emailTarget};
+            String[] toArr = csvEmailTargets.split(",");
             m.setTo(toArr);
 
             if (fromAddress != null && fromAddress.length() > 0)

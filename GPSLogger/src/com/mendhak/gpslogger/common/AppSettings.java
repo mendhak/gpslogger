@@ -23,7 +23,7 @@ public class AppSettings extends Application
     private static String smtpUsername;
     private static String smtpPassword;
     private static String smtpFrom;
-    private static String autoEmailTarget;
+    private static String autoEmailTargets;
     private static boolean smtpSsl;
     private static boolean debugToFile;
     private static int minimumDistance;
@@ -297,14 +297,14 @@ public class AppSettings extends Application
         return smtpSsl;
     }
 
-    static void setAutoEmailTarget(String autoEmailTarget)
+    static void setAutoEmailTargets(String autoEmailTargets)
     {
-        AppSettings.autoEmailTarget = autoEmailTarget;
+        AppSettings.autoEmailTargets = autoEmailTargets;
     }
 
-    public static String getAutoEmailTarget()
+    public static String getAutoEmailTargets()
     {
-        return autoEmailTarget;
+        return autoEmailTargets;
     }
 
     public static boolean isDebugToFile()
