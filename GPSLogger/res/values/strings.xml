@@ -15,11 +15,11 @@
 
     <!-- menu strings -->
     <string name="menu_settings">Settings</string>
-    <string name="menu_share_latest">Send new point</string>
-    <string name="menu_send_annotated">Send points since</string>
-    <string name="menu_clear_map">Clear Map</string>
-    <string name="menu_view_in_browser">Show map</string>
-    <string name="menu_emailnow">Email now</string>
+
+
+
+
+
     <string name="menu_annotate">Annotate</string>
     <string name="menu_share">Share</string>
     <string name="menu_exit">Exit</string>
@@ -36,11 +36,9 @@
     <string name="btn_start_logging">Start Logging</string>
     <string name="btn_stop_logging">Stop Logging</string>
 
-    <string name="button_click_error">Button click error:</string>
+
     <string name="gpslogger_still_running">GPSLogger is still running.</string>
-    <string name="toast_gpslogger_stillrunning">GPSLogger is still running. You can exit the application from the menu
-        options.
-    </string>
+
     <string name="summary_loggingto">Logging to:</string>
     <string name="summary_loggingto_screen">screen only</string>
     <string name="summary_loggingto_both">Both GPX and KML</string>
@@ -54,7 +52,7 @@
 
 
     <string name="sharing">Sharing</string>
-    <string name="sharing_pro">You can share locations and send emails in the Pro version of GPS Logger.</string>
+
     <string name="sharing_location_only">Location only</string>
     <string name="sharing_pick_file">Pick a file to share</string>
     <string name="sharing_mylocation">My location</string>
@@ -69,10 +67,10 @@
     <string name="error">Error</string>
     <string name="error_connection">Connection Error. Please check your phone settings.</string>
     <string name="sent">Sent</string>
-    <string name="sent_server">Points sent to server.</string>
-    <string name="sent_location">Location sent to server.</string>
-    <string name="cleared">Cleared</string>
-    <string name="cleared_map">The map has been cleared.</string>
+
+
+
+
     <string name="gpsprovider_unavailable">No GPS provider available. Please check your location settings and enable a
         location provider.
     </string>
@@ -87,7 +85,7 @@
     <string name="kilometers_per_hour">&#160;km/h</string>
     <string name="unknown_direction">unknown</string>
     <string name="deleted">Deleted</string>
-    <string name="point_deleted">Point deleted</string>
+
     <string name="sorry">Sorry</string>
     <string name="success">Yay!</string>
 
@@ -125,7 +123,7 @@
 
 
     <!-- Settings activity -->
-    <string name="settings_in_pro_version">Available in GPSLogger Pro</string>
+
     <string name="settings_distance_in_feet">Distance in feet</string>
     <string name="settings_enter_feet">Enter feet(max 9999)</string>
     <string name="settings_distance_in_meters">Distance in meters</string>
@@ -179,14 +177,14 @@
 
     <string name="autoemail_title">Auto Email Setup</string>
     <string name="autoemail_summary">Automatically emails the log file to an address of your choice</string>
-    <string name="autoemail_btn_register">Save settings</string>
 
 
-    <string name="autoemail_registering">Registering...</string>
+
+
     <string name="please_wait">Please wait.</string>
     <string name="autoemail_invalid_title">Invalid email</string>
     <string name="autoemail_invalid_summary">Please use a valid email address.</string>
-    <string name="autoemail_success">Target email address saved.</string>
+
     <string name="autoemail_autosend">Enable auto send</string>
     <string name="autoemail_autosend_summary">Enables sending the log file to an email address of your choosing.
     </string>
@@ -195,11 +193,11 @@
     <string name="autoemail_sendto">An email address</string>
     <string name="autoemail_frequency_format">After %d hours</string>
     <string name="autoemail_target">Target email addresses</string>
-    <string name="autoemail_target_summary">Where to email the log file</string>
+
     <string name="autoemail_sending">Auto sending emails</string>
     <string name="autoemail_frequency_whenistop">When I press stop</string>
-    <string name="autoemail_frequency_24">After 24 hours</string>
-    <string name="autoemail_frequency_12">After 12 hours</string>
+
+
     <string name="autoemail_frequency_8">After 8 hours</string>
     <string name="autoemail_frequency_6">After 6 hours</string>
     <string name="autoemail_frequency_5">After 5 hours</string>
@@ -247,7 +245,7 @@
     <string name="osm_preferences_title">OpenStreetMap Preferences</string>
 
 
-    <string name="osm_authorization">Authorization</string>
+
     <string name="osm_lbl_authorize">Authorize this app</string>
     <string name="osm_lbl_authorize_description">You will need to grant this app permissions in order to upload GPS
         traces to OpenStreetMap. You can set tags, descriptions and visibility here after you have authorized this app.
@@ -260,7 +258,7 @@
     <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
 
     <string name="osm_upload">OpenStreetMap</string>
-    <string name="osm_uploading">Uploading to OpenStreetMap</string>
+
     <string name="osm_resetauth">Clear authorization</string>
     <string name="osm_resetauth_summary">Remove the local authorization used to talk to your OSM account.</string>
     <string name="osm_auth_error">An error occurred while trying to contact the OpenStreetMap servers. Check that your
@@ -306,8 +304,8 @@
     </string>
     <string name="dropbox_couldnotauthorize">Could not authorize with Dropbox, please try again later</string>
     <string name="dropbox_upload">Dropbox</string>
-    <string name="dropbox_uploading">Uploading to Dropbox</string>
-    <string name="dropbox_upload_complete">Uploaded to Dropbox</string>
+
+
 
     <string name="menu_upload">Upload</string>
 
@@ -322,7 +320,7 @@
     </string>
 
     <string name="gdocs_upload">Google Docs</string>
-    <string name="gdocs_authorize_screenname">Authorize with Google Docs</string>
+
     <string name="gdocs_settings_screenname">Google Docs Upload Settings</string>
     <string name="gdocs_startauthorization">Authorize with Google Docs</string>
     <string name="gdocs_authorize_summary">Takes you to Google Docs where you need to authorize GPSLogger</string>

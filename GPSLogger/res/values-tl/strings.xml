@@ -12,11 +12,6 @@
   <string name="add_description">Magdagdag ng deskripsyon</string>
   <string name="letters_numbers">Gumamit lamang ng mga letra at numero</string>
   <string name="menu_settings">Mga opsyon</string>
-  <string name="menu_share_latest">Magpadala ng bagong punto</string>
-  <string name="menu_send_annotated">Magpadala ng mga punto mula</string>
-  <string name="menu_clear_map">Linisin ang mapa</string>
-  <string name="menu_view_in_browser">Ipakita ang mapa</string>
-  <string name="menu_emailnow">Mag email ngayon</string>
   <string name="menu_annotate">Anotahin</string>
   <string name="menu_share">Ibahagi</string>
   <string name="menu_exit">Labas</string>
@@ -30,9 +25,7 @@
   <string name="txt_accuracy">Katumpakan:</string>
   <string name="btn_start_logging">Simulan ang pagtala</string>
   <string name="btn_stop_logging">Ihinto ang pagtala</string>
-  <string name="button_click_error">Kamalian sa pagpindot ng buton:</string>
   <string name="gpslogger_still_running">Ang GPSLogger ay nananatiling nakatakbo.</string>
-  <string name="toast_gpslogger_stillrunning">Ang GPSLogger ay nananatiling tumatakbo. Pwedeng lumabas sa app sa pamamagitan ang mga opsyon sa menu.</string>
   <string name="summary_loggingto">Tumatala sa:</string>
   <string name="summary_loggingto_screen">Sa screen lamang</string>
   <string name="summary_loggingto_both">Sa kapwa GPX at KML</string>
@@ -44,7 +37,6 @@
   <string name="summary_current_filename_format">%s (sa iyong GPSLogger na polder)</string>
   <string name="summary_autoemail">Mga email:</string>
   <string name="sharing">Pagbabahagi</string>
-  <string name="sharing_pro">Maaaring ibahagi ang lokasyon sa pamamagitan ng e-mail sa bersyon na Pro ng GPS Logger.</string>
   <string name="sharing_location_only">Lokasyon lamang</string>
   <string name="sharing_pick_file">Piliin ang file na ibabahagi</string>
   <string name="sharing_mylocation">Aking lokasyon</string>
@@ -57,9 +49,6 @@
   <string name="error">Mali</string>
   <string name="error_connection">Hindi makakonekta. Suriin ng mabuti ang mga opsyon sa phone.</string>
   <string name="sent">Nahatid</string>
-  <string name="sent_server">Mga puntong nailathala sa server.</string>
-  <string name="sent_location">Lokasyon nailathala sa server.</string>
-  <string name="cleared">Nailinis</string>
   <string name="gpsprovider_unavailable">Walang nagtagpoang tagapagtustos ng GPS. Suriing mabuti ang iyong mga opsyon para sa lokasyon at tikayin na mayroong tagapagtustos ng GPS.</string>
   <string name="providername_using">    (Gumagamit ng %s)</string>
   <string name="providername_gps">Mga GPS satelayt</string>
@@ -67,7 +56,6 @@
   <string name="not_applicable">n/a</string>
   <string name="unknown_direction">hindi batid</string>
   <string name="deleted">Nabura</string>
-  <string name="point_deleted">Nabura ang punto</string>
   <string name="sorry">Pasensya</string>
   <string name="success">Yey!</string>
   <string name="direction_roughly">Halos %s</string>
@@ -109,8 +97,6 @@
   <string name="log_kml_title">Itala sa KML</string>
   <string name="please_wait">Maghintay Sandali.</string>
   <string name="autoemail_frequency_whenistop">Kapag pinindot ko ang Tigil</string>
-  <string name="autoemail_frequency_24">Pagkatapos ng 24 oras</string>
-  <string name="autoemail_frequency_12">Pagkatapos ng 12 na oras</string>
   <string name="autoemail_frequency_8">Pagkatapos ng 8 na oras</string>
   <string name="autoemail_frequency_6">Pagkatapos ng 6 na oras</string>
   <string name="autoemail_frequency_5">Pagkatapos ng 5 oras</string>
@@ -149,10 +135,8 @@
   <string name="language_summary">Kakailanganing pag-uumpisahang muli ang app</string>
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Magtakda ng mga pananda, deskripsyon, bisibilidad at awtorisasyon para sa pag-upload ng mga bakas ng GPS     </string>
-  <string name="osm_authorization">Awtorisasyon</string>
   <string name="osm_lbl_authorize">I-awtorisa ang app na ito</string>
   <string name="osm_lbl_authorize_description">Kakailanganin ang iyong pahintulot para magkapagupload ng bakas ng GPS sa OpenStreetMap. Maaring makatakda ng mga tanda, deskripsyon at bisibilidad rito matapos ang pag-awtorisa sa app     </string>
-  <string name="osm_uploading">Nag-a-upload sa OpenStreetMap</string>
   <string name="osm_resetauth">Alisin ang awtorisasyon</string>
   <string name="osm_resetauth_summary">Alisin ang awtorisasyon na gamit para sa OSM account.</string>
   <string name="osm_auth_error">Kamalian sa pag-konek sa OpenStreetMap servers. Tiyakin na ang phone ay mag koneksyon o subukan muli pagkaraan ng ilang sandali     </string>
@@ -180,8 +164,6 @@
   <string name="dropbox_unauthorize">Alisin ang Awtorisasyon</string>
   <string name="dropbox_unauthorize_description">Ikaw ay awtorisado sa Dropbox. Ang mga files ay mai-upload sa \'Apps\\GPSLogger for Android\'. Maaring matanggal ang GPSLogger mula sa Dropbox ano mang oras     </string>
   <string name="dropbox_couldnotauthorize">Hindi maka-awtorisa sa Dropbox, Subukan muli pagkaraan ng ilang sandali</string>
-  <string name="dropbox_uploading">Mag-upload sa Dropbox</string>
-  <string name="dropbox_upload_complete">Mag-upload sa Dropbox</string>
   <string name="menu_upload">Upload</string>
   <string name="autoemail_sendzip_title">Ipadala ang zip file</string>
   <string name="autoemail_sendzip_summary">Huwag paganahin ang isat-isang pagpapadala ng GPX o KML na files kung ang opsyon na zip ay hindi gumagana para sa iyo     </string>
