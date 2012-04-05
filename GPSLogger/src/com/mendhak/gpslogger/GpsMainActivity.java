@@ -516,7 +516,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
                         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing_mylocation));
                         if (Session.hasValidLocation())
                         {
-                            String bodyText = getString(R.string.sharing_latlong_text,
+                            String bodyText = getString(R.string.sharing_googlemaps_link,
                                     String.valueOf(Session.getCurrentLatitude()),
                                     String.valueOf(Session.getCurrentLongitude()));
                             intent.putExtra(Intent.EXTRA_TEXT, bodyText);

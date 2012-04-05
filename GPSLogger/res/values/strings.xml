@@ -57,6 +57,7 @@
     <string name="sharing_pick_file">Pick a file to share</string>
     <string name="sharing_mylocation">My location</string>
     <string name="sharing_latlong_text" formatted="false">Lat: %s, Long: %s</string>
+    <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
     <string name="sharing_via">Share via</string>
 
     <!-- general -->
