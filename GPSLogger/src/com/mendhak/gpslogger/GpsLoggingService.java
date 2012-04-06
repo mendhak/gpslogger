@@ -367,7 +367,7 @@ public class GpsLoggingService extends Service implements IActionListener
 
         GetPreferences();
         Notify();
-        ResetCurrentFileName();
+        ResetCurrentFileName(true);
         ClearForm();
         StartGpsManager();
 
@@ -582,12 +582,12 @@ public class GpsLoggingService extends Service implements IActionListener
     /**
      * Sets the current file name based on user preference.
      */
-    private void ResetCurrentFileName()
+    private void ResetCurrentFileName(boolean newStart)
     {
 
         Utilities.LogDebug("GpsLoggingService.ResetCurrentFileName");
 
-        String newFileName;
+        String newFileName = Session.getCurrentFileName();
         if (AppSettings.shouldCreateNewFileOnceADay())
         {
             // 20100114.gpx
@@ -595,7 +595,7 @@ public class GpsLoggingService extends Service implements IActionListener
             newFileName = sdf.format(new Date());
             Session.setCurrentFileName(newFileName);
         }
-        else
+        else if (newStart)
         {
             // 20100114183329.gpx
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -724,7 +724,7 @@ public class GpsLoggingService extends Service implements IActionListener
 
 
         Utilities.LogInfo("New location obtained");
-        ResetCurrentFileName();
+        ResetCurrentFileName(false);
         Session.setLatestTimeStamp(System.currentTimeMillis());
         Session.setCurrentLocationInfo(loc);
         Notify();
