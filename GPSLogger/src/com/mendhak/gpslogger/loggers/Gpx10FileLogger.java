@@ -166,6 +166,9 @@ class Gpx10WriteHandler implements Runnable
                     initialOutput.write(initialXml.toString().getBytes());
                     initialOutput.flush();
                     initialOutput.close();
+
+                    //New file, so new segment.
+                    addNewTrackSegment = true;
                 }
 
                 int offsetFromEnd = (addNewTrackSegment) ? 12 : 21;

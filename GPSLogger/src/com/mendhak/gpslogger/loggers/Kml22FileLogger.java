@@ -176,6 +176,9 @@ class Kml22WriteHandler implements Runnable
                     initialOutput.write(initialXml.toString().getBytes());
                     initialOutput.flush();
                     initialOutput.close();
+
+                    //New file, so new track segment
+                    addNewTrackSegment = true;
                 }
 
 
