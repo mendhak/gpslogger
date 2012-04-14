@@ -13,6 +13,7 @@ public class AppSettings extends Application
     private static boolean useSatelliteTime;
     private static boolean logToKml;
     private static boolean logToGpx;
+    private static boolean logToPlainText;
     private static boolean showInNotificationBar;
     private static int minimumSeconds;
     private static String newFileCreation;
@@ -124,6 +125,14 @@ public class AppSettings extends Application
     static void setLogToGpx(boolean logToGpx)
     {
         AppSettings.logToGpx = logToGpx;
+    }
+
+    public static boolean shouldLogToPlainText() {
+	return logToPlainText;
+    }
+
+    static void setLogToPlainText(boolean logToPlainText) {
+	AppSettings.logToPlainText = logToPlainText;
     }
 
     /**

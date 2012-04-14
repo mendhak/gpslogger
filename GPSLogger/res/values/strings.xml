@@ -140,6 +140,8 @@
     <string name="log_gpx_summary">Creates a GPX file in the GPSLogger folder on the SD card.</string>
     <string name="log_kml_title">Log to KML</string>
     <string name="log_kml_summary">Creates a KML file in the GPSLogger folder on the SD card.</string>
+    <string name="log_plain_text_title">Log to Plain Text</string>
+    <string name="log_plain_text_summary">Creates a plain text file in the GPSLogger folder on the SD card.</string>
     <string name="satellite_time_title">Use satellite time</string>
     <string name="satellite_time_summary">Use satellite time instead of local phone time, it\'s more accurate.</string>
     <string name="new_file_creation_title">New file creation</string>
