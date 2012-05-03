@@ -226,9 +226,9 @@
   <string name="gdocs_upload">Google Docs</string>
   <string name="gdocs_settings_screenname">Impostazioni di caricamento di Google Docs</string>
   <string name="gdocs_startauthorization">Autorizza Google Docs</string>
-  <string name="gdocs_authorize_summary">Apri Google Docs dove è necessario autorizzare GPSLogger</string>
+  <string name="gdocs_authorize_summary">Apri le impostazioni di Google Docs per autorizzare GPSLogger ad inviare files</string>
   <string name="gdocs_clearauthorization">Rimuovi Autorizzazione</string>
-  <string name="gdocs_clearauthorization_summary">Elimina le impostazioni di Google Docs. Per eliminare definitivamente l\'accesso, vai nelle impostazioni di Google Accounts</string>
+  <string name="gdocs_clearauthorization_summary">Elimina l\'autorizzazione per Google Docs. Per eliminare definitivamente l\'accesso, vai nelle impostazioni di Google Accounts</string>
   <string name="gdocs_setup_title">Google Docs</string>
   <string name="gdocs_setup_summary">Autorizza Google Docs a ricevere files</string>
   <string name="gdocs_test_summary">Carica su Google Docs un file di test</string>
