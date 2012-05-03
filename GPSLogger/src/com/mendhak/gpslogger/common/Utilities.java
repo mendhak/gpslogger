@@ -110,6 +110,9 @@ public class Utilities
 
         AppSettings.setLogToGpx(prefs.getBoolean("log_gpx", false));
 
+	AppSettings.setLogToPlainText(prefs.getBoolean("log_plain_text", false));
+
+        
         AppSettings.setShowInNotificationBar(prefs.getBoolean(
                 "show_notification", true));
 
