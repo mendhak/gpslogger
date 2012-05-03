@@ -7,6 +7,9 @@
 
     <CheckBoxPreference android:key="log_kml"
                         android:summary="@string/log_kml_summary" android:title="@string/log_kml_title"/>
+                        
+    <CheckBoxPreference android:key="log_plain_text"
+                        android:summary="@string/log_plain_text_summary" android:title="@string/log_plain_text_title"/>
 
     <PreferenceScreen android:title="@string/pref_logging_title"
                       android:summary="@string/pref_logging_summary">
