@@ -8,8 +8,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.jvw.gpslogger.loggers.PlainTextFileLogger;
-
 public class FileLoggerFactory
 {
     public static List<IFileLogger> GetFileLoggers()

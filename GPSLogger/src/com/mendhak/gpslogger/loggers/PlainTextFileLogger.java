@@ -1,4 +1,4 @@
-package net.jvw.gpslogger.loggers;
+package com.mendhak.gpslogger.loggers;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -59,7 +59,7 @@ public class PlainTextFileLogger implements IFileLogger {
 									loc.getAccuracy(),
 									loc.getBearing(),
 									loc.getSpeed());
-		
+
 		output.write(outputString.getBytes());
 		output.flush();
 		output.close();
@@ -68,7 +68,7 @@ public class PlainTextFileLogger implements IFileLogger {
 	@Override
 	public void Annotate(String description, Location loc) throws Exception {
 	    // TODO Auto-generated method stub
-	    
+
 	}
 
 }
