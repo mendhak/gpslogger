@@ -6,6 +6,7 @@
       <directory url="file://$PROJECT_DIR$/tests/target/generated-sources/r" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/GPSLogger/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/GPSLogger/target/generated-sources/r" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/tests/gen" includeSubdirectories="true" />
     </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>

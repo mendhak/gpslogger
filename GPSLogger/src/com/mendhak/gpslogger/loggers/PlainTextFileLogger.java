@@ -8,13 +8,14 @@ import java.util.Date;
 import android.location.Location;
 
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.loggers.IFileLogger;
+
 
 /**
  * Writes a comma separated plain text file.<br/>
  * First line of file is a header with the logged fields: time,lat,lon,elevation,accuracy,bearing,speed
  *
  * @author Jeroen van Wilgenburg
+ * https://github.com/jvwilge/gpslogger/commit/a7d45bcc1d5012513ff2246022ce4da2708adf47
  */
 public class PlainTextFileLogger implements IFileLogger
 {
