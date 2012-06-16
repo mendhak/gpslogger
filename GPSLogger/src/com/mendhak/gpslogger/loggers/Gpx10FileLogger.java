@@ -4,10 +4,7 @@ import android.location.Location;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Utilities;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -56,7 +53,20 @@ class Gpx10FileLogger implements IFileLogger
 
     public void Annotate(String description, Location loc) throws Exception
     {
-        Gpx10AnnotateHandler annotateHandler = new Gpx10AnnotateHandler(description, gpxFile);
+        Date now;
+
+        if (useSatelliteTime)
+        {
+            now = new Date(loc.getTime());
+        }
+        else
+        {
+            now = new Date();
+        }
+
+        String dateTimeString = Utilities.GetIsoDateTime(now);
+
+        Gpx10AnnotateHandler annotateHandler = new Gpx10AnnotateHandler(description, gpxFile, loc, dateTimeString);
         Utilities.LogDebug(String.format("There are currently %s tasks waiting on the GPX10 EXECUTOR.", EXECUTOR.getQueue().size()));
         EXECUTOR.execute(annotateHandler);
 
@@ -69,11 +79,15 @@ class Gpx10AnnotateHandler implements Runnable
 {
     String description;
     File gpxFile;
+    Location loc;
+    String dateTimeString;
 
-    public Gpx10AnnotateHandler(String description, File gpxFile)
+    public Gpx10AnnotateHandler(String description, File gpxFile, Location loc, String dateTimeString)
     {
         this.description = description;
         this.gpxFile = gpxFile;
+        this.loc = loc;
+        this.dateTimeString = dateTimeString;
     }
 
     @Override
@@ -91,25 +105,44 @@ class Gpx10AnnotateHandler implements Runnable
             {
                 return;
             }
-            int offsetFromEnd = 30;
 
-            long startPosition = gpxFile.length() - offsetFromEnd;
+            int startPosition = 346;
 
-            StringBuilder descXml = new StringBuilder();
-            descXml.append("<name>");
-            descXml.append(description);
-            descXml.append("</name><desc>");
-            descXml.append(description);
-            descXml.append("</desc></trkpt></trkseg></trk></gpx>");
-
-            RandomAccessFile raf;
+            String wpt = GetWaypointXml(loc, dateTimeString, description);
 
             try
             {
-                raf = new RandomAccessFile(gpxFile, "rw");
-                raf.seek(startPosition);
-                raf.write(descXml.toString().getBytes());
-                raf.close();
+
+                //Write to a temp file, delete original file, move temp to original
+                File gpxTempFile = new File(gpxFile.getAbsolutePath() + ".tmp");
+
+                BufferedInputStream bis = new BufferedInputStream(new FileInputStream(gpxFile));
+                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(gpxTempFile));
+
+                int written = 0;
+                int readSize;
+                byte[] buffer = new byte[startPosition];
+                while ((readSize = bis.read(buffer)) > 0)
+                {
+                    bos.write(buffer, 0, readSize);
+                    written += readSize;
+
+                    System.out.println(written);
+
+                    if(written == startPosition)
+                    {
+                        bos.write(wpt.getBytes());
+                        buffer = new byte[20480];
+                    }
+
+                }
+
+                bis.close();
+                bos.close();
+
+                gpxFile.delete();
+                gpxTempFile.renameTo(gpxFile);
+
                 Utilities.LogDebug("Finished annotation to GPX10 File");
             }
             catch (Exception e)
@@ -118,6 +151,41 @@ class Gpx10AnnotateHandler implements Runnable
             }
 
         }
+    }
+
+    private String GetWaypointXml(Location loc, String dateTimeString, String description)
+    {
+
+        StringBuilder waypoint = new StringBuilder();
+
+        waypoint.append("\n<wpt lat=\"" + String.valueOf(loc.getLatitude()) + "\" lon=\""
+                + String.valueOf(loc.getLongitude()) + "\">");
+
+        if (loc.hasAltitude())
+        {
+            waypoint.append("<ele>" + String.valueOf(loc.getAltitude()) + "</ele>");
+        }
+
+        if (loc.hasBearing())
+        {
+            waypoint.append("<course>" + String.valueOf(loc.getBearing()) + "</course>");
+        }
+
+        if (loc.hasSpeed())
+        {
+            waypoint.append("<speed>" + String.valueOf(loc.getSpeed()) + "</speed>");
+        }
+
+        waypoint.append("<name>" + description + "</name>");
+
+        waypoint.append("<src>" + loc.getProvider() + "</src>");
+
+
+        waypoint.append("<time>" + dateTimeString + "</time>");
+
+        waypoint.append("</wpt>\n");
+
+        return waypoint.toString();
     }
 }
 
