@@ -32,10 +32,11 @@ public class FileLoggerFactory
             loggers.add(new Kml22FileLogger(kmlFile, AppSettings.shouldUseSatelliteTime(), Session.shouldAddNewTrackSegment()));
         }
         
-	if (AppSettings.shouldLogToPlainText()) {
-	    File file = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".txt");
-	    loggers.add(new PlainTextFileLogger(file, AppSettings.shouldUseSatelliteTime()));
-	}
+        if (AppSettings.shouldLogToPlainText())
+        {
+            File file = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".txt");
+            loggers.add(new PlainTextFileLogger(file, AppSettings.shouldUseSatelliteTime()));
+        }
 
         return loggers;
     }

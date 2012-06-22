@@ -9,8 +9,11 @@ import com.mendhak.gpslogger.senders.IFileSender;
 import com.mendhak.gpslogger.senders.ZipHelper;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class AutoEmailHelper implements IActionListener, IFileSender
 {
@@ -55,7 +58,7 @@ public class AutoEmailHelper implements IActionListener, IFileSender
 
     }
 
-    public void SendLogFile(String currentFileName, boolean forcedSend, boolean sendZipFile)
+    public void SendLogFile(final String currentFileName, boolean forcedSend, boolean sendZipFile)
     {
         this.forcedSend = forcedSend;
 
@@ -69,20 +72,14 @@ public class AutoEmailHelper implements IActionListener, IFileSender
             return;
         }
 
-        File gpxFile = new File(gpxFolder.getPath(), currentFileName + ".gpx");
-        File kmlFile = new File(gpxFolder.getPath(), currentFileName + ".kml");
-
-        ArrayList<File> files = new ArrayList<File>();
-
-        if (kmlFile.exists())
+        List<File> files = new ArrayList<File>(Arrays.asList(gpxFolder.listFiles(new FilenameFilter()
         {
-            files.add(kmlFile);
-
-        }
-        if (gpxFile.exists())
-        {
-            files.add(gpxFile);
-        }
+            @Override
+            public boolean accept(File file, String s)
+            {
+                return s.contains(currentFileName) && !s.contains("zip");
+            }
+        })));
 
         if (files.size() == 0)
         {
