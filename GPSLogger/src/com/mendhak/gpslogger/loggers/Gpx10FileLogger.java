@@ -287,6 +287,12 @@ class Gpx10WriteHandler implements Runnable
             track.append("<speed>" + String.valueOf(loc.getSpeed()) + "</speed>");
         }
 
+        if (loc.hasAccuracy() && loc.getAccuracy() > 0)
+        {
+            // Accuracy divided by 5 or 6 for approximate HDOP
+            track.append("<hdop>" + String.valueOf(loc.getAccuracy()/5) + "</hdop>");
+        }
+
         track.append("<src>" + loc.getProvider() + "</src>");
 
         if (satelliteCount > 0)
