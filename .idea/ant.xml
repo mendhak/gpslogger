@@ -2,16 +2,6 @@
 <project version="4">
   <component name="AntConfiguration">
     <defaultAnt bundledAnt="true" />
-    <buildFile url="file://$PROJECT_DIR$/tests/build.xml">
-      <additionalClassPath>
-        <entry path="file://$PROJECT_DIR$/tests/libs/ant-contrib-1.0b3.jar" />
-      </additionalClassPath>
-      <antReference projectDefault="true" />
-      <customJdkName value="" />
-      <maximumHeapSize value="128" />
-      <maximumStackSize value="2" />
-      <properties />
-    </buildFile>
   </component>
 </project>
 

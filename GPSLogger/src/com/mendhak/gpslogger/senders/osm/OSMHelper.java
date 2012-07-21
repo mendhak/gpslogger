@@ -23,6 +23,7 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.File;
+import java.util.List;
 
 public class OSMHelper implements IActionListener, IFileSender
 {
@@ -116,6 +117,22 @@ public class OSMHelper implements IActionListener, IFileSender
     }
 
     @Override
+    public void UploadFile(List<File> files)
+    {
+        //Upload only GPX
+
+        for(File f : files)
+        {
+            if(f.getName().contains(".gpx"))
+            {
+                UploadFile(f.getName());
+            }
+
+        }
+
+    }
+
+
     public void UploadFile(String fileName)
     {
         File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");

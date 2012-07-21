@@ -18,6 +18,7 @@ import org.w3c.dom.NodeList;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 
 public class GDocsHelper implements IActionListener, IFileSender
@@ -288,6 +289,37 @@ public class GDocsHelper implements IActionListener, IFileSender
     }
 
     @Override
+    public void UploadFile(List<File> files)
+    {
+        //If there's a zip file, upload just that
+        //Else upload everything in files.
+
+        File zipFile = null;
+
+
+        for(File f : files)
+        {
+            if(f.getName().contains(".zip"))
+            {
+                zipFile = f;
+                break;
+            }
+        }
+
+        if(zipFile != null)
+        {
+            UploadFile(zipFile.getName());
+        }
+        else
+        {
+            for(File f : files)
+            {
+                UploadFile(f.getName());
+            }
+        }
+    }
+
+
     public void UploadFile(final String fileName)
     {
 
@@ -363,12 +395,12 @@ public class GDocsHelper implements IActionListener, IFileSender
                 if(Utilities.IsNullOrEmpty(fileSearch.UpdateUrl))
                 {
                     //The file doesn't exist, you must create it.
-                    CreateFile(fileSearch, fileName, Utilities.GetStringFromInputStream(inputStream));
+                    CreateFile(fileSearch, fileName, Utilities.GetByteArrayFromInputStream(inputStream));
                 }
                 else
                 {
                     //The file exists, update its contents instead
-                    UpdateFile(fileSearch, fileName, Utilities.GetStringFromInputStream(inputStream));
+                    UpdateFile(fileSearch, fileName, Utilities.GetByteArrayFromInputStream(inputStream));
                 }
                 
                 callback.OnComplete();
@@ -382,7 +414,7 @@ public class GDocsHelper implements IActionListener, IFileSender
         }
 
 
-        private void UpdateFile(FileAccessLocations accessLocations, String fileName, String fileContents)
+        private void UpdateFile(FileAccessLocations accessLocations, String fileName, byte[] fileContents)
         {
 
             String resumableFileUploadUrl = UploadFileContentsToResumableUrl(accessLocations.UpdateUrl+"?convert=false",
@@ -392,7 +424,7 @@ public class GDocsHelper implements IActionListener, IFileSender
 
         }
 
-        private void CreateFile(FileAccessLocations accessLocations, String fileName, String fileContents)
+        private void CreateFile(FileAccessLocations accessLocations, String fileName, byte[] fileContents)
         {
             String createFileAtomXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                     "<entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:docs=\"http://schemas.google.com/docs/2007\">\n" +
@@ -402,7 +434,7 @@ public class GDocsHelper implements IActionListener, IFileSender
                     "</entry>";
 
             String resumableFileUploadUrl = UploadFileContentsToResumableUrl(accessLocations.CreateUrl + "?convert=false",
-                    fileName, createFileAtomXml, false);
+                    fileName, createFileAtomXml.getBytes(), false);
 
             UploadFileContentsToResumableUrl(resumableFileUploadUrl, fileName, fileContents, false);
 
@@ -410,7 +442,7 @@ public class GDocsHelper implements IActionListener, IFileSender
 
         private String UploadFileContentsToResumableUrl(String resumableFileUploadUrl,
                                                         String fileName,
-                                                        String fileContents,
+                                                        byte[] fileContents,
                                                         boolean isUpdate)
         {
             //This method gets used 4 times - to get the resumable location for create/edit, and to do the actual uploads.
@@ -425,11 +457,11 @@ public class GDocsHelper implements IActionListener, IFileSender
                 conn = (HttpURLConnection) url.openConnection();
                 AddCommonHeaders(conn);
 
-                conn.setRequestProperty("X-Upload-Content-Length", String.valueOf(fileContents.length())); //back to 0
+                conn.setRequestProperty("X-Upload-Content-Length", String.valueOf(fileContents.length)); //back to 0
                 
                 conn.setRequestProperty("X-Upload-Content-Type", Utilities.GetMimeTypeFromFileName(fileName));
                 conn.setRequestProperty("Content-Type", Utilities.GetMimeTypeFromFileName(fileName));
-                conn.setRequestProperty("Content-Length", String.valueOf(fileContents.length()));
+                conn.setRequestProperty("Content-Length", String.valueOf(fileContents.length));
                 conn.setRequestProperty("Slug", fileName);
 
 
@@ -449,7 +481,8 @@ public class GDocsHelper implements IActionListener, IFileSender
 
                 DataOutputStream wr = new DataOutputStream(
                         conn.getOutputStream());
-                wr.writeBytes(fileContents);
+                //wr.writeBytes(fileContents);
+                wr.write(fileContents);
                 wr.flush();
                 wr.close();
 

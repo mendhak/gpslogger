@@ -23,8 +23,7 @@ import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.AlarmReceiver;
-import com.mendhak.gpslogger.senders.email.AutoEmailHelper;
-
+import com.mendhak.gpslogger.senders.FileSenderFactory;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -280,8 +279,9 @@ public class GpsLoggingService extends Service implements IActionListener
 
             //Don't show a progress bar when auto-emailing
             Utilities.LogInfo("Emailing Log File");
-            AutoEmailHelper aeh = new AutoEmailHelper(this);
-            aeh.SendLogFile(Session.getCurrentFileName(), false, AppSettings.shouldSendZipFile());
+
+            FileSenderFactory.SendFiles(getApplicationContext(), this);
+            Session.setEmailReadyToBeSent(true);
             SetupAutoEmailTimers();
 
         }
@@ -300,8 +300,7 @@ public class GpsLoggingService extends Service implements IActionListener
             }
 
             Utilities.LogInfo("Force emailing Log File");
-            AutoEmailHelper aeh = new AutoEmailHelper(this);
-            aeh.SendLogFile(Session.getCurrentFileName(), true, AppSettings.shouldSendZipFile());
+            FileSenderFactory.SendFiles(getApplicationContext(), this);
         }
     }
 

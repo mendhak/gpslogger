@@ -1,6 +1,12 @@
 package com.mendhak.gpslogger.senders;
 
+import java.io.File;
+import java.util.List;
+
 public interface IFileSender
 {
-    void UploadFile(String fileName);
+    /// Upload or send this specific file
+    void UploadFile(List<File> files);
+
+
 }

@@ -580,8 +580,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         
         Intent settingsIntent = new Intent(GpsMainActivity.this, GDocsSettingsActivity.class);
         ShowFileListDialog(true, true, true, settingsIntent, FileSenderFactory.GetGDocsSender(getApplicationContext(), this));
-        
-
     }
     
 
@@ -690,7 +688,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
                     {
                         Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.please_wait),
                                 getString(R.string.please_wait));
-                        sender.UploadFile(chosenFileName);
+                        List<File> files = new ArrayList<File>();
+                        files.add(new File(gpxFolder, chosenFileName));
+                        sender.UploadFile(files);
                     }
                 }
             });

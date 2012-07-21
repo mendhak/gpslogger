@@ -16,6 +16,7 @@ import com.mendhak.gpslogger.senders.IFileSender;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.List;
 
 
 public class DropBoxHelper implements IActionListener, IFileSender
@@ -153,6 +154,39 @@ public class DropBoxHelper implements IActionListener, IFileSender
 
         // Clear our stored keys
         clearKeys();
+    }
+
+    @Override
+    public void UploadFile(List<File> files)
+    {
+
+        //If there's a zip file, upload just that
+        //Else upload everything in files.
+
+        File zipFile = null;
+
+
+        for(File f : files)
+        {
+            if(f.getName().contains(".zip"))
+            {
+                zipFile = f;
+                break;
+            }
+        }
+
+        if(zipFile != null)
+        {
+            UploadFile(zipFile.getName());
+        }
+        else
+        {
+            for(File f : files)
+            {
+                UploadFile(f.getName());
+            }
+        }
+
     }
 
     public void UploadFile(String fileName)

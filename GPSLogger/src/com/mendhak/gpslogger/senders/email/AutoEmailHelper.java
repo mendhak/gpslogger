@@ -1,25 +1,17 @@
 package com.mendhak.gpslogger.senders.email;
 
-import android.os.Environment;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
-import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.IFileSender;
-import com.mendhak.gpslogger.senders.ZipHelper;
-
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 public class AutoEmailHelper implements IActionListener, IFileSender
 {
 
-
-    private boolean forcedSend = false;
     IActionListener callback;
 
     public AutoEmailHelper(IActionListener callback)
@@ -27,88 +19,30 @@ public class AutoEmailHelper implements IActionListener, IFileSender
         this.callback = callback;
     }
 
-
     @Override
-    public void UploadFile(String fileName)
+    public void UploadFile(List<File> files)
     {
-        this.forcedSend = true;
 
-        File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+        ArrayList<File> filesToSend = new ArrayList<File>();
 
-        if (!gpxFolder.exists())
+        //If a zip file exists, remove others
+        for(File f : files)
         {
-            OnFailure();
-            return;
-        }
-        
-        File chosenFile = new File(gpxFolder.getPath(), fileName);
-        
-        if(!chosenFile.exists())
-        {
-            OnFailure();
-            return;
+            filesToSend.add(f);
+
+             if(f.getName().contains(".zip"))
+             {
+                 filesToSend.clear();
+                 filesToSend.add(f);
+                 break;
+             }
         }
 
-        ArrayList<File> files = new ArrayList<File>();
-        files.add(chosenFile);
 
-        Thread t = new Thread(new AutoSendHandler(files.toArray(new File[files.size()]), this));
+        Thread t = new Thread(new AutoSendHandler(filesToSend.toArray(new File[filesToSend.size()]), this));
         t.start();
-
-
     }
 
-    public void SendLogFile(final String currentFileName, boolean forcedSend, boolean sendZipFile)
-    {
-        this.forcedSend = forcedSend;
-
-
-        File gpxFolder = new File(Environment.getExternalStorageDirectory(),
-                "GPSLogger");
-
-        if (!gpxFolder.exists())
-        {
-            OnFailure();
-            return;
-        }
-
-        List<File> files = new ArrayList<File>(Arrays.asList(gpxFolder.listFiles(new FilenameFilter()
-        {
-            @Override
-            public boolean accept(File file, String s)
-            {
-                return s.contains(currentFileName) && !s.contains("zip");
-            }
-        })));
-
-        if (files.size() == 0)
-        {
-            OnFailure();
-            return;
-        }
-
-        if (sendZipFile)
-        {
-            File zipFile = new File(gpxFolder.getPath(), currentFileName + ".zip");
-            ArrayList<String> filePaths = new ArrayList<String>();
-
-            for (File f : files)
-            {
-                filePaths.add(f.getAbsolutePath());
-            }
-
-            Utilities.LogInfo("Zipping file");
-            ZipHelper zh = new ZipHelper(filePaths.toArray(new String[filePaths.size()]), zipFile.getAbsolutePath());
-            zh.Zip();
-
-            files.clear();
-            files.add(zipFile);
-        }
-
-        Thread t = new Thread(new AutoSendHandler(files.toArray(new File[files.size()]), this));
-        t.start();
-
-    }
 
     void SendTestEmail(String smtpServer, String smtpPort,
                        String smtpUsername, String smtpPassword, boolean smtpUseSsl,
@@ -126,11 +60,6 @@ public class AutoEmailHelper implements IActionListener, IFileSender
         // This was a success
         Utilities.LogInfo("Email sent");
 
-        if (!forcedSend)
-        {
-            Utilities.LogDebug("setEmailReadyToBeSent = false");
-            Session.setEmailReadyToBeSent(false);
-        }
         callback.OnComplete();
     }
 

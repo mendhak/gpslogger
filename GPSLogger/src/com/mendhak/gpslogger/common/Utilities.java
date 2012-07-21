@@ -12,10 +12,7 @@ import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -548,6 +545,53 @@ public class Utilities
         return text == null || text.length() == 0;
     }
 
+
+    public static byte[] GetByteArrayFromInputStream(InputStream is)
+    {
+
+        try
+        {
+            int length;
+            int size = 1024;
+            byte[] buffer;
+
+            if (is instanceof ByteArrayInputStream)
+            {
+                size = is.available();
+                buffer = new byte[size];
+            }
+            else
+            {
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                buffer = new byte[size];
+                while ((length = is.read(buffer, 0, size)) != -1)
+                {
+                    outputStream.write(buffer, 0, length);
+                }
+
+                buffer = outputStream.toByteArray();
+            }
+            return buffer;
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                is.close();
+            }
+            catch(Exception e)
+            {
+                Utilities.LogWarning("GetStringFromInputStream - could not close stream");
+            }
+        }
+
+        return null;
+
+    }
 
     /**
      * Loops through an input stream and converts it into a string, then closes the input stream
