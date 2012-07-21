@@ -146,10 +146,10 @@ public class GpsLoggingService extends Service implements IActionListener
                 if (sendEmailNow)
                 {
 
-                    Utilities.LogDebug("setEmailReadyToBeSent = true");
+                    Utilities.LogDebug("setReadyToBeAutoSent = true");
 
-                    Session.setEmailReadyToBeSent(true);
-                    AutoEmailLogFile();
+                    Session.setReadyToBeAutoSent(true);
+                    AutoSendLogFile();
                 }
 
                 if (getNextPoint && Session.isStarted())
@@ -198,16 +198,16 @@ public class GpsLoggingService extends Service implements IActionListener
     /**
      * Sets up the auto email timers based on user preferences.
      */
-    private void SetupAutoEmailTimers()
+    public void SetupAutoSendTimers()
     {
-        Utilities.LogDebug("GpsLoggingService.SetupAutoEmailTimers");
-        Utilities.LogDebug("isAutoEmailEnabled - " + String.valueOf(AppSettings.isAutoEmailEnabled()));
-        Utilities.LogDebug("Session.getAutoEmailDelay - " + String.valueOf(Session.getAutoEmailDelay()));
-        if (AppSettings.isAutoEmailEnabled() && Session.getAutoEmailDelay() > 0)
+        Utilities.LogDebug("GpsLoggingService.SetupAutoSendTimers");
+        Utilities.LogDebug("isAutoSendEnabled - " + String.valueOf(AppSettings.isAutoSendEnabled()));
+        Utilities.LogDebug("Session.getAutoSendDelay - " + String.valueOf(Session.getAutoSendDelay()));
+        if (AppSettings.isAutoSendEnabled() && Session.getAutoSendDelay() > 0)
         {
-            Utilities.LogDebug("Setting up email alarm");
+            Utilities.LogDebug("Setting up autosend alarm");
             long triggerTime = System.currentTimeMillis()
-                    + (long) (Session.getAutoEmailDelay() * 60 * 60 * 1000);
+                    + (long) (Session.getAutoSendDelay() * 60 * 60 * 1000);
 
             alarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
             CancelAlarm();
@@ -250,39 +250,39 @@ public class GpsLoggingService extends Service implements IActionListener
      * Method to be called if user has chosen to auto email log files when he
      * stops logging
      */
-    private void AutoEmailLogFileOnStop()
+    private void AutoSendLogFileOnStop()
     {
-        Utilities.LogDebug("GpsLoggingService.AutoEmailLogFileOnStop");
-        Utilities.LogVerbose("isAutoEmailEnabled - " + AppSettings.isAutoEmailEnabled());
-        // autoEmailDelay 0 means send it when you stop logging.
-        if (AppSettings.isAutoEmailEnabled() && Session.getAutoEmailDelay() == 0)
+        Utilities.LogDebug("GpsLoggingService.AutoSendLogFileOnStop");
+        Utilities.LogVerbose("isAutoSendEnabled - " + AppSettings.isAutoSendEnabled());
+        // autoSendDelay 0 means send it when you stop logging.
+        if (AppSettings.isAutoSendEnabled() && Session.getAutoSendDelay() == 0)
         {
-            Session.setEmailReadyToBeSent(true);
-            AutoEmailLogFile();
+            Session.setReadyToBeAutoSent(true);
+            AutoSendLogFile();
         }
     }
 
     /**
      * Calls the Auto Email Helper which processes the file and sends it.
      */
-    private void AutoEmailLogFile()
+    private void AutoSendLogFile()
     {
 
-        Utilities.LogDebug("GpsLoggingService.AutoEmailLogFile");
-        Utilities.LogVerbose("isEmailReadyToBeSent - " + Session.isEmailReadyToBeSent());
+        Utilities.LogDebug("GpsLoggingService.AutoSendLogFile");
+        Utilities.LogVerbose("isReadyToBeAutoSent - " + Session.isReadyToBeAutoSent());
 
         // Check that auto emailing is enabled, there's a valid location and
         // file name.
         if (Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0
-                && Session.isEmailReadyToBeSent() && Session.hasValidLocation())
+                && Session.isReadyToBeAutoSent() && Session.hasValidLocation())
         {
 
             //Don't show a progress bar when auto-emailing
             Utilities.LogInfo("Emailing Log File");
 
             FileSenderFactory.SendFiles(getApplicationContext(), this);
-            Session.setEmailReadyToBeSent(true);
-            SetupAutoEmailTimers();
+            Session.setReadyToBeAutoSent(true);
+            SetupAutoSendTimers();
 
         }
     }
@@ -291,11 +291,11 @@ public class GpsLoggingService extends Service implements IActionListener
     {
 
         Utilities.LogDebug("GpsLoggingService.ForceEmailLogFile");
-        if (Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0)
+        if (AppSettings.isAutoSendEnabled() && Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0)
         {
             if (IsMainFormVisible())
             {
-                Utilities.ShowProgress(mainServiceClient.GetActivity(), getString(R.string.autoemail_sending),
+                Utilities.ShowProgress(mainServiceClient.GetActivity(), getString(R.string.autosend_sending),
                         getString(R.string.please_wait));
             }
 
@@ -325,15 +325,15 @@ public class GpsLoggingService extends Service implements IActionListener
         Utilities.LogDebug("GpsLoggingService.GetPreferences");
         Utilities.PopulateAppSettings(getApplicationContext());
 
-        Utilities.LogDebug("Session.getAutoEmailDelay: " + Session.getAutoEmailDelay());
-        Utilities.LogDebug("AppSettings.getAutoEmailDelay: " + AppSettings.getAutoEmailDelay());
+        Utilities.LogDebug("Session.getAutoSendDelay: " + Session.getAutoSendDelay());
+        Utilities.LogDebug("AppSettings.getAutoSendDelay: " + AppSettings.getAutoSendDelay());
 
-        if (Session.getAutoEmailDelay() != AppSettings.getAutoEmailDelay())
+        if (Session.getAutoSendDelay() != AppSettings.getAutoSendDelay())
         {
-            Utilities.LogDebug("Old autoEmailDelay - " + String.valueOf(Session.getAutoEmailDelay())
-                    + "; New -" + String.valueOf(AppSettings.getAutoEmailDelay()));
-            Session.setAutoEmailDelay(AppSettings.getAutoEmailDelay());
-            SetupAutoEmailTimers();
+            Utilities.LogDebug("Old autoSendDelay - " + String.valueOf(Session.getAutoSendDelay())
+                    + "; New -" + String.valueOf(AppSettings.getAutoSendDelay()));
+            Session.setAutoSendDelay(AppSettings.getAutoSendDelay());
+            SetupAutoSendTimers();
         }
 
     }
@@ -394,7 +394,7 @@ public class GpsLoggingService extends Service implements IActionListener
         Utilities.LogInfo("Stopping logging");
         Session.setStarted(false);
         // Email log file before setting location info to null
-        AutoEmailLogFileOnStop();
+        AutoSendLogFileOnStop();
         CancelAlarm();
         Session.setCurrentLocationInfo(null);
         stopForeground(true);

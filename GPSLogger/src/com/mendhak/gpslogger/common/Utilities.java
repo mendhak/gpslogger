@@ -162,18 +162,20 @@ public class Utilities
             AppSettings.setNewFileOnceADay(false);
         }
 
+        AppSettings.setAutoSendEnabled(prefs.getBoolean("autosend_enabled", false));
+
         AppSettings.setAutoEmailEnabled(prefs.getBoolean("autoemail_enabled",
                 false));
 
-        if (Float.valueOf(prefs.getString("autoemail_frequency", "0")) >= 8f)
+        if (Float.valueOf(prefs.getString("autosend_frequency", "0")) >= 8f)
         {
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("autoemail_frequency", "8");
+            editor.putString("autosend_frequency", "8");
             editor.commit();
         }
 
-        AppSettings.setAutoEmailDelay(Float.valueOf(prefs.getString(
-                "autoemail_frequency", "0")));
+        AppSettings.setAutoSendDelay(Float.valueOf(prefs.getString(
+                "autosend_frequency", "0")));
 
         AppSettings.setSmtpServer(prefs.getString("smtp_server", ""));
         AppSettings.setSmtpPort(prefs.getString("smtp_port", "25"));
@@ -182,7 +184,7 @@ public class Utilities
         AppSettings.setSmtpPassword(prefs.getString("smtp_password", ""));
         AppSettings.setAutoEmailTargets(prefs.getString("autoemail_target", ""));
         AppSettings.setDebugToFile(prefs.getBoolean("debugtofile", false));
-        AppSettings.setShouldSendZipFile(prefs.getBoolean("autoemail_sendzip", true));
+        AppSettings.setShouldSendZipFile(prefs.getBoolean("autosend_sendzip", true));
         AppSettings.setSmtpFrom(prefs.getString("smtp_from", ""));
     }
 

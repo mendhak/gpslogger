@@ -21,6 +21,14 @@ public class GpsSettingsActivity extends PreferenceActivity
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
 
+        if (getIntent().getBooleanExtra("autosend_preferencescreen", false))
+        {
+            PreferenceScreen screen = (PreferenceScreen) findPreference("gpslogger_preferences");
+            int pos = findPreference("autosend_preferencescreen").getOrder();
+            screen.onItemClick(null, null, pos, 0);
+        }
+
+
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         boolean useImperial = prefs.getBoolean("useImperial", false);

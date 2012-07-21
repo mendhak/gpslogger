@@ -17,7 +17,8 @@ public class AppSettings extends Application
     private static boolean showInNotificationBar;
     private static int minimumSeconds;
     private static String newFileCreation;
-    private static Float autoEmailDelay = 0f;
+    private static Float autoSendDelay = 0f;
+    private static boolean autoSendEnabled = false;
     private static boolean autoEmailEnabled = false;
     private static String smtpServer;
     private static String smtpPort;
@@ -204,35 +205,35 @@ public class AppSettings extends Application
 
 
     /**
-     * @return the autoEmailDelay
+     * @return the autoSendDelay
      */
-    public static Float getAutoEmailDelay()
+    public static Float getAutoSendDelay()
     {
-        if (autoEmailDelay >= 8f)
+        if (autoSendDelay >= 8f)
         {
             return 8f;
         }
         else
         {
-            return autoEmailDelay;
+            return autoSendDelay;
         }
 
 
     }
 
     /**
-     * @param autoEmailDelay the autoEmailDelay to set
+     * @param autoSendDelay the autoSendDelay to set
      */
-    static void setAutoEmailDelay(Float autoEmailDelay)
+    static void setAutoSendDelay(Float autoSendDelay)
     {
 
-        if (autoEmailDelay >= 8f)
+        if (autoSendDelay >= 8f)
         {
-            AppSettings.autoEmailDelay = 8f;
+            AppSettings.autoSendDelay = 8f;
         }
         else
         {
-            AppSettings.autoEmailDelay = autoEmailDelay;
+            AppSettings.autoSendDelay = autoSendDelay;
         }
 
 
@@ -360,5 +361,15 @@ public class AppSettings extends Application
         }
 
         return getSmtpUsername();
+    }
+
+    public static boolean isAutoSendEnabled()
+    {
+        return autoSendEnabled;
+    }
+
+    public static void setAutoSendEnabled(boolean autoSendEnabled)
+    {
+        AppSettings.autoSendEnabled = autoSendEnabled;
     }
 }

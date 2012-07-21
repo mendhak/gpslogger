@@ -17,12 +17,12 @@ public class Session extends Application
 	private static String currentFileName;
 	private static int satellites;
 	private static boolean notificationVisible;
-	private static float autoEmailDelay;
+	private static float autoSendDelay;
 	private static long latestTimeStamp;
 	private static boolean addNewTrackSegment = true;
 	private static Location currentLocationInfo;
 	private static boolean isBound;
-	private static boolean emailReadyToBeSent=false;
+	private static boolean readyToBeAutoSent =false;
 	private static boolean allowDescription = true;
     private static boolean isSinglePointMode = false;
 
@@ -231,20 +231,20 @@ public class Session extends Application
 	}
 
 	/**
-	 * @param autoEmailDelay
-	 *            the autoEmailDelay to set
+	 * @param autoSendDelay
+	 *            the autoSendDelay to set
 	 */
-	public static void setAutoEmailDelay(float autoEmailDelay)
+	public static void setAutoSendDelay(float autoSendDelay)
 	{
-		Session.autoEmailDelay = autoEmailDelay;
+		Session.autoSendDelay = autoSendDelay;
 	}
 
 	/**
-	 * @return the autoEmailDelay to use for the timer
+	 * @return the autoSendDelay to use for the timer
 	 */
-	public static float getAutoEmailDelay()
+	public static float getAutoSendDelay()
 	{
-		return autoEmailDelay;
+		return autoSendDelay;
 	}
 
 	/**
@@ -283,20 +283,20 @@ public class Session extends Application
 
 	/**
 	 * Sets whether an email is ready to be sent
-	 * @param emailReadyToBeSent
+	 * @param readyToBeAutoSent
 	 */
-	public static void setEmailReadyToBeSent(boolean emailReadyToBeSent)
+	public static void setReadyToBeAutoSent(boolean readyToBeAutoSent)
 	{
-		Session.emailReadyToBeSent = emailReadyToBeSent;
+		Session.readyToBeAutoSent = readyToBeAutoSent;
 	}
 
 	/**
 	 * Gets whether an email is waiting to be sent
 	 * @return
 	 */
-	public static boolean isEmailReadyToBeSent()
+	public static boolean isReadyToBeAutoSent()
 	{
-		return emailReadyToBeSent;
+		return readyToBeAutoSent;
 	}
 
 	public static boolean shoulAllowDescription()

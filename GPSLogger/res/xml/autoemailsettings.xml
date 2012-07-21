@@ -10,17 +10,6 @@
                         android:title="@string/autoemail_target" android:summary="@string/autoemail_sendto_csv"
                         android:dialogTitle="@string/autoemail_target" android:hint="@string/autoemail_sendto_csv"/>
 
-    <ListPreference android:key="autoemail_frequency"
-                    android:title="@string/autoemail_frequency"
-                    android:summary="@string/autoemail_frequency_summary"
-                    android:entries="@array/autosend_frequencies" android:defaultValue="0"
-                    android:entryValues="@array/autosend_values"/>
-
-    <CheckBoxPreference android:key="autoemail_sendzip" android:defaultValue="true"
-                        android:title="@string/autoemail_sendzip_title"
-                        android:summary="@string/autoemail_sendzip_summary"/>
-
-
     <PreferenceCategory android:title="@string/autoemail_smtp_category">
         <ListPreference android:key="autoemail_preset"
                         android:title="@string/autoemail_choosepreset"

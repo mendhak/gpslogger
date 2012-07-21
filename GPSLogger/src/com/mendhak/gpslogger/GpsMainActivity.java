@@ -205,6 +205,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         {
             GetPreferences();
             SetSinglePointButtonEnabled(false);
+            loggingService.SetupAutoSendTimers();
             loggingService.StartLogging();
         }
         else
@@ -328,11 +329,11 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             }
 
 
-            if (AppSettings.isAutoEmailEnabled())
+            if (AppSettings.isAutoSendEnabled())
             {
                 String autoEmailResx;
 
-                if (AppSettings.getAutoEmailDelay() == 0)
+                if (AppSettings.getAutoSendDelay() == 0)
                 {
                     autoEmailResx = "autoemail_frequency_whenistop";
                 }
@@ -340,7 +341,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
                 {
 
                     autoEmailResx = "autoemail_frequency_"
-                            + String.valueOf(AppSettings.getAutoEmailDelay()).replace(".", "");
+                            + String.valueOf(AppSettings.getAutoSendDelay()).replace(".", "");
                 }
 
                 String autoEmailDesc = getString(getResources().getIdentifier(autoEmailResx, "string", getPackageName()));
@@ -441,17 +442,25 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
     {
         Utilities.LogDebug("GpsMainActivity.EmailNow");
 
-        if (Utilities.IsEmailSetup())
+        if (AppSettings.isAutoSendEnabled())
         {
             loggingService.ForceEmailLogFile();
         }
         else
         {
-            Intent emailSetup = new Intent(getApplicationContext(), AutoEmailActivity.class);
-            startActivity(emailSetup);
+
+            Intent pref = new Intent().setClass(this, GpsSettingsActivity.class);
+            pref.putExtra("autosend_preferencescreen", true);
+            startActivity(pref);
+
         }
 
     }
+
+
+
+
+
 
     /**
      * Allows user to send a GPX/KML file along with location, or location only

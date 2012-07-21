@@ -72,25 +72,44 @@
                             android:key="debugtofile" android:defaultValue="false"/>
 
     </PreferenceScreen>
-    <PreferenceScreen android:title="@string/pref_emailupload_title" android:summary="@string/pref_emailupload_summary">
+    <PreferenceScreen android:key="autosend_preferencescreen" android:title="@string/pref_autosend_title" android:summary="@string/pref_autosend_summary">
 
-        <Preference android:title="@string/autoemail_title"
-                    android:summary="@string/autoemail_summary" android:key="autoemail_setup">
-            <intent android:action="com.mendhak.gpslogger.AUTOEMAIL_SETUP"/>
-        </Preference>
+        <CheckBoxPreference android:key="autosend_enabled"
+                            android:title="@string/autosend_enabled"
+                            android:summary="@string/autosend_enabled_summary" />
 
-        <Preference android:title="@string/osm_setup_title"
-                    android:summary="@string/osm_setup_summary" android:key="osm_setup">
-            <intent android:action="com.mendhak.gpslogger.OSM_AUTHORIZE"/>
-        </Preference>
-        <Preference android:title="@string/dropbox_setup_title" android:summary="@string/dropbox_setup_summary"
-                    android:key="dropbox_setup">
-            <intent android:action="com.mendhak.gpslogger.DROPBOX_SETUP"/>
-        </Preference>
-        <Preference android:title="@string/gdocs_setup_title"
-                    android:summary="@string/gdocs_setup_summary" android:key="gdocs_setup">
-            <intent android:action="com.mendhak.gpslogger.GDOCS_SETUP" />
-                    </Preference>
+
+        <ListPreference android:key="autosend_frequency"
+                        android:title="@string/autosend_frequency"
+                        android:summary="@string/autosend_frequency_summary"
+                        android:entries="@array/autosend_frequencies" android:defaultValue="0"
+                        android:entryValues="@array/autosend_values"/>
+
+        <CheckBoxPreference android:key="autosend_sendzip" android:defaultValue="true"
+                            android:title="@string/autosend_sendzip_title"
+                            android:summary="@string/autosend_sendzip_summary"/>
+
+        <PreferenceCategory android:title="@string/autosend_targets_category">
+            <Preference android:title="@string/autoemail_title"
+                        android:summary="@string/autoemail_summary" android:key="autoemail_setup">
+                <intent android:action="com.mendhak.gpslogger.AUTOEMAIL_SETUP"/>
+            </Preference>
+
+            <Preference android:title="@string/osm_setup_title"
+                        android:summary="@string/osm_setup_summary" android:key="osm_setup">
+                <intent android:action="com.mendhak.gpslogger.OSM_AUTHORIZE"/>
+            </Preference>
+            <Preference android:title="@string/dropbox_setup_title" android:summary="@string/dropbox_setup_summary"
+                        android:key="dropbox_setup">
+                <intent android:action="com.mendhak.gpslogger.DROPBOX_SETUP"/>
+            </Preference>
+            <Preference android:title="@string/gdocs_setup_title"
+                        android:summary="@string/gdocs_setup_summary" android:key="gdocs_setup">
+                <intent android:action="com.mendhak.gpslogger.GDOCS_SETUP" />
+            </Preference>
+        </PreferenceCategory>
+
+
 
     </PreferenceScreen>
 

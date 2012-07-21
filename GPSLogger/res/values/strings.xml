@@ -23,7 +23,7 @@
     <string name="menu_annotate">Annotate</string>
     <string name="menu_share">Share</string>
     <string name="menu_exit">Exit</string>
-    <string name="menu_email_now">Email Now</string>
+
 
     <!-- main form labels -->
     <string name="txt_latitude">Latitude:</string>
@@ -48,7 +48,7 @@
     <string name="summary_dist_regardless">maximum</string>
     <string name="summary_current_filename">File:</string>
     <string name="summary_current_filename_format">%s (in your GPSLogger folder)</string>
-    <string name="summary_autoemail">Emails:</string>
+
 
 
     <string name="sharing">Sharing</string>
@@ -191,13 +191,13 @@
     <string name="autoemail_autosend">Enable auto send</string>
     <string name="autoemail_autosend_summary">Enables sending the log file to an email address of your choosing.
     </string>
-    <string name="autoemail_frequency">How often?</string>
-    <string name="autoemail_frequency_summary">How frequently log files should be emailed in a day</string>
+
+
     <string name="autoemail_sendto">An email address</string>
     <string name="autoemail_frequency_format">After %d hours</string>
     <string name="autoemail_target">Target email addresses</string>
 
-    <string name="autoemail_sending">Auto sending emails</string>
+
     <string name="autoemail_frequency_whenistop">When I press stop</string>
 
 
@@ -286,8 +286,7 @@
     <string name="pref_logging_summary">Time, distance, file creation</string>
     <string name="pref_general_title">General Options</string>
     <string name="pref_general_summary">Startup and display options</string>
-    <string name="pref_emailupload_title">Email and Upload</string>
-    <string name="pref_emailupload_summary">Email, share and upload options</string>
+
 
     <string name="emailprovider_google">Google Mail</string>
     <string name="emailprovider_yahoo">Yahoo! Mail</string>
@@ -309,14 +308,8 @@
     <string name="dropbox_upload">Dropbox</string>
 
 
-
     <string name="menu_upload">Upload</string>
 
-
-    <string name="autoemail_sendzip_title">Send zip file</string>
-    <string name="autoemail_sendzip_summary">Disable to send individual GPX/KML files, or if the zip option is not
-        working for you
-    </string>
 
     <string name="autoemail_from">From address</string>
     <string name="autoemail_from_summary">Some email providers require a from address. Use this only if you need it.
@@ -341,5 +334,22 @@
 
     <string name="autoemail_sendto_csv">Comma separated email addresses</string>
 
+
+    <string name="autosend_enabled">Allow auto sending</string>
+    <string name="autosend_enabled_summary">Allows sending the files to various targets</string>
+    <string name="autosend_frequency_summary">How frequently log files should be sent</string>
+    <string name="autosend_frequency">How often?</string>
+
+    <string name="autosend_sendzip_title">Send zip file</string>
+    <string name="autosend_sendzip_summary">Send zip file where applicable. Disable to send individual files, or if the zip option is not
+        working for you
+    </string>
+    <string name="autosend_targets_category">Auto Send Targets</string>
+    <string name="menu_email_now">Auto Send Now</string>
+    <string name="autosend_sending">Auto sending</string>
+    <string name="summary_autosend">Auto send:</string>
+
+    <string name="pref_autosend_title">Auto send, email and upload</string>
+    <string name="pref_autosend_summary">Email, share and upload options</string>
 
 </resources>
