@@ -559,6 +559,7 @@ public class Utilities
             {
                 size = is.available();
                 buffer = new byte[size];
+                is.read(buffer, 0, size);
             }
             else
             {
