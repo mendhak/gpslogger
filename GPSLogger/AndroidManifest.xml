@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.mendhak.gpslogger" android:versionCode="21"
-          android:versionName="21" android:installLocation="auto">
+          package="com.mendhak.gpslogger" android:versionCode="22"
+          android:versionName="22" android:installLocation="auto">
     <application android:icon="@drawable/gpsloggericon2"
                  android:name="@string/app_name" android:label="@string/app_name"
                  android:debuggable="false">
