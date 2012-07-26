@@ -188,7 +188,7 @@
     <string name="autoemail_invalid_title">Invalid email</string>
     <string name="autoemail_invalid_summary">Please use a valid email address.</string>
 
-    <string name="autoemail_autosend">Enable auto send</string>
+    <string name="autoemail_autosend">Enable emails</string>
     <string name="autoemail_autosend_summary">Enables sending the log file to an email address of your choosing.
     </string>
 
