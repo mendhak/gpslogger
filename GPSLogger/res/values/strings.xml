@@ -41,7 +41,6 @@
 
     <string name="summary_loggingto">Logging to:</string>
     <string name="summary_loggingto_screen">screen only</string>
-    <string name="summary_loggingto_both">Both GPX and KML</string>
     <string name="summary_freq_every">Frequency:</string>
     <string name="summary_freq_max">maximum</string>
     <string name="summary_dist">Distance:</string>

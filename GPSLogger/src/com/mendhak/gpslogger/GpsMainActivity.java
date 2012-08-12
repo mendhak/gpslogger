@@ -278,20 +278,33 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             TextView txtDistance = (TextView) findViewById(R.id.txtDistance);
             TextView txtAutoEmail = (TextView) findViewById(R.id.txtAutoEmail);
 
-            if (!AppSettings.shouldLogToKml() && !AppSettings.shouldLogToGpx())
-            {
-                txtLoggingTo.setText(R.string.summary_loggingto_screen);
+            String loggingTo = "";
 
-            }
-            else if (AppSettings.shouldLogToGpx() && AppSettings.shouldLogToKml())
+            if(AppSettings.shouldLogToGpx())
             {
-                txtLoggingTo.setText(R.string.summary_loggingto_both);
+                loggingTo = loggingTo + "GPX, ";
+            }
+
+            if(AppSettings.shouldLogToKml())
+            {
+                loggingTo = loggingTo + "KML, ";
+            }
+
+            if(AppSettings.shouldLogToPlainText())
+            {
+                loggingTo = loggingTo + "TXT, ";
+            }
+
+            if(loggingTo.length() > 0)
+            {
+                loggingTo = loggingTo.substring(0, loggingTo.length() - 2);
             }
             else
             {
-                txtLoggingTo.setText((AppSettings.shouldLogToGpx() ? "GPX" : "KML"));
-
+                loggingTo = getString(R.string.summary_loggingto_screen);
             }
+
+            txtLoggingTo.setText(loggingTo);
 
             if (AppSettings.getMinimumSeconds() > 0)
             {
