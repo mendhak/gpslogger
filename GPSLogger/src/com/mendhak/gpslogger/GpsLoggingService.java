@@ -128,6 +128,7 @@ public class GpsLoggingService extends Service implements IActionListener
 
             if (bundle != null)
             {
+                boolean stopRightNow = bundle.getBoolean("immediatestop");
                 boolean startRightNow = bundle.getBoolean("immediate");
                 boolean sendEmailNow = bundle.getBoolean("emailAlarm");
                 boolean getNextPoint = bundle.getBoolean("getnextpoint");
@@ -141,6 +142,12 @@ public class GpsLoggingService extends Service implements IActionListener
                     Utilities.LogInfo("Auto starting logging");
 
                     StartLogging();
+                }
+
+                if (stopRightNow)
+                {
+                    Utilities.LogInfo("Auto stop logging");
+                    StopLogging();
                 }
 
                 if (sendEmailNow)
@@ -186,7 +193,7 @@ public class GpsLoggingService extends Service implements IActionListener
      * Can be used from calling classes as the go-between for methods and
      * properties.
      */
-    class GpsLoggingBinder extends Binder
+    public class GpsLoggingBinder extends Binder
     {
         public GpsLoggingService getService()
         {
@@ -386,7 +393,7 @@ public class GpsLoggingService extends Service implements IActionListener
     /**
      * Stops logging, removes notification, stops GPS manager, stops email timer
      */
-    protected void StopLogging()
+    public void StopLogging()
     {
         Utilities.LogDebug("GpsLoggingService.StopLogging");
         Session.setAddNewTrackSegment(true);

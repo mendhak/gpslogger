@@ -352,4 +352,8 @@
     <string name="pref_autosend_title">Auto send, email and upload</string>
     <string name="pref_autosend_summary">Email, share and upload options</string>
 
+    <string name="shortcut_start">Start</string>
+    <string name="shortcut_stop">Stop</string>
+    <string name="shortcut_pickaction">Pick an action</string>
+
 </resources>
