@@ -21,6 +21,9 @@ public class Session extends Application
 	private static long latestTimeStamp;
 	private static boolean addNewTrackSegment = true;
 	private static Location currentLocationInfo;
+    private static Location previousLocationInfo;
+    private static double totalTravelled;
+    private static int numLegs;
 	private static boolean isBound;
 	private static boolean readyToBeAutoSent =false;
 	private static boolean allowDescription = true;
@@ -173,7 +176,44 @@ public class Session extends Application
 		}
 	}
 
-	/**
+    public static double getPreviousLatitude() {
+        Location loc = getPreviousLocationInfo();
+        return loc != null ? loc.getLatitude() : 0;
+    }
+
+    public static double getPreviousLongitude() {
+        Location loc = getPreviousLocationInfo();
+        return loc != null ? loc.getLongitude() : 0;
+    }
+
+    public static double getTotalTravelled() {
+        return totalTravelled;
+    }
+
+    public static int getNumLegs() {
+        return numLegs;
+    }
+
+    public static void setTotalTravelled(double totalTravelled) {
+        if (totalTravelled == 0 ) {
+            Session.numLegs = 0;
+        } else {
+            Session.numLegs++;
+        }
+        Session.totalTravelled = totalTravelled;
+    }
+
+    public static Location getPreviousLocationInfo() {
+        return previousLocationInfo;
+    }
+
+    public static void setPreviousLocationInfo(Location previousLocationInfo) {
+        Session.previousLocationInfo = previousLocationInfo;
+    }
+
+
+
+    /**
 	 * Determines whether a valid location is available
 	 */
 	public static boolean hasValidLocation()

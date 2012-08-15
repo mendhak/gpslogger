@@ -33,6 +33,8 @@
     <string name="txt_direction">Direction:</string>
     <string name="txt_satellites">Satellites:</string>
     <string name="txt_accuracy">Accuracy:</string>
+    <string name="txt_distance">Distance:</string>
+    <string name="txt_travel_distance">Travelled:</string>
     <string name="btn_start_logging">Start Logging</string>
     <string name="btn_stop_logging">Stop Logging</string>
 
@@ -82,7 +84,9 @@
     <string name="meters_per_second">&#160;m/s</string>
     <string name="feet_per_second">&#160;ft/s</string>
     <string name="miles_per_hour">&#160;mi/h</string>
+    <string name="miles">&#160;mi</string>
     <string name="kilometers_per_hour">&#160;km/h</string>
+    <string name="kilometers">&#160;km</string>
     <string name="unknown_direction">unknown</string>
     <string name="deleted">Deleted</string>
 

@@ -70,6 +70,12 @@
                 <TextView android:id="@+id/txtAccuracy" android:gravity="left"
                           android:padding="3dip"/>
             </TableRow>
+            <TableRow android:background="#333333" android:layout_margin="1dip">
+                <TextView android:id="@+id/lblDistance" android:textStyle="bold"
+                          android:text="@string/txt_travel_distance" android:padding="3dip"/>
+                <TextView android:id="@+id/txtDistanceTravelled" android:gravity="left"
+                          android:padding="3dip"/>
+            </TableRow>
         </TableLayout>
 
 
