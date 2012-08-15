@@ -816,6 +816,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         TextView txtSatellites = (TextView) findViewById(R.id.txtSatellites);
         TextView txtDirection = (TextView) findViewById(R.id.txtDirection);
         TextView txtAccuracy = (TextView) findViewById(R.id.txtAccuracy);
+        TextView txtDistance = (TextView) findViewById(R.id.txtDistanceTravelled);
 
         tvLatitude.setText("");
         tvLongitude.setText("");
@@ -825,7 +826,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         txtSatellites.setText("");
         txtDirection.setText("");
         txtAccuracy.setText("");
-
+        txtDistance.setText("");
+        Session.setPreviousLocationInfo(null);
+        Session.setTotalTravelled(0d);
     }
 
     public void OnStopLogging()
@@ -887,6 +890,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             TextView txtSatellites = (TextView) findViewById(R.id.txtSatellites);
             TextView txtDirection = (TextView) findViewById(R.id.txtDirection);
             TextView txtAccuracy = (TextView) findViewById(R.id.txtAccuracy);
+            TextView txtTravelled = (TextView) findViewById(R.id.txtDistanceTravelled);
             String providerName = loc.getProvider();
 
             if (providerName.equalsIgnoreCase("gps"))
@@ -1008,6 +1012,40 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             {
                 txtAccuracy.setText(R.string.not_applicable);
             }
+
+            // Distance
+            if (Session.getPreviousLocationInfo() == null) {
+                Session.setPreviousLocationInfo(loc);
+            }
+            // Calculate this location and the previous location location and add to the current running total distance.
+            // NOTE: Should be used in conjunction with 'distance required before logging' for more realistic values.
+            double distance = Utilities.CalculateDistance(
+                    Session.getPreviousLatitude(),
+                    Session.getPreviousLongitude(),
+                    loc.getLatitude(),
+                    loc.getLongitude());
+            Session.setPreviousLocationInfo(loc);
+            Session.setTotalTravelled(Session.getTotalTravelled() + distance);
+            String distanceUnit;
+            double distanceValue = Session.getTotalTravelled();
+            if (AppSettings.shouldUseImperial()) {
+                distanceUnit = getString(R.string.feet);
+                distanceValue = Utilities.MetersToFeet(distanceValue);
+                // When it passes more than 1 kilometer, convert to miles.
+                if (distanceValue > 3281) {
+                    distanceUnit = getString(R.string.miles);
+                    distanceValue = distance / 5280;
+                }
+            } else {
+                distanceUnit = getString(R.string.meters);
+                if (distanceValue > 1000) {
+                    distanceUnit = getString(R.string.kilometers);
+                    distanceValue = distanceValue / 1000;
+                }
+            }
+
+            txtTravelled.setText(String.valueOf(Math.round(distanceValue)) + " " + distanceUnit +
+                    " (" + Session.getNumLegs() + " points)");
 
         }
         catch (Exception ex)
