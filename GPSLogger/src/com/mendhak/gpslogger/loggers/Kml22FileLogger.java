@@ -18,6 +18,7 @@ public class Kml22FileLogger implements IFileLogger
     private final boolean useSatelliteTime;
     private final boolean addNewTrackSegment;
     private final File kmlFile;
+    protected final String name = "KML";
 
     public Kml22FileLogger(File kmlFile, boolean useSatelliteTime, boolean addNewTrackSegment)
     {
@@ -37,6 +38,11 @@ public class Kml22FileLogger implements IFileLogger
     {
         Kml22AnnotateHandler annotateHandler = new Kml22AnnotateHandler(kmlFile, description, loc);
         EXECUTOR.execute(annotateHandler);
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }
 

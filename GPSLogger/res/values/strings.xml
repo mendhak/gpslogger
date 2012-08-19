@@ -355,4 +355,25 @@
     <string name="shortcut_stop">Stop</string>
     <string name="shortcut_pickaction">Pick an action</string>
 
+    <string name="log_opengts_title">Log to OpenGTS Server</string>
+    <string name="log_opengts_summary">Send GPRMC data to an online OpenGTS server.</string>
+    <string name="opengts_setup_title">OpenGTS Setup</string>
+    <string name="opengts_setup_summary">Send GPS traces to an OpenGTS server of your choice.</string>
+    <string name="opengts_enabled">Enable OpenGTS</string>
+    <string name="opengts_enabled_summary">Enable this OpenGTS server.</string>
+    <string name="autoopengts_autosend">Enable Automatically Send</string>
+    <string name="autoopengts_autosend_summary">Enables automatically sending the GPS traces.</string>
+    <string name="autoopengts_server_category">OpenGTS Settings</string>
+    <string name="autoopengts_invalid_form">Invalid values</string>
+    <string name="autoopengts_invalid_form_message">Please ensure that all of the fields have been filled in properly</string>
+    <string name="opengts_upload">Send to OpenGTS</string>
+    <string name="autoopengts_server">Server</string>
+    <string name="autoopengts_server_summary">Hostname or IP</string>
+    <string name="opengts_server_port">Port</string>
+    <string name="opengts_server_communication_method">Communication Method</string>
+    <string name="opengts_server_communication_method_summary">HTTP-based or Raw Socket Based communication</string>
+    <string name="autoopengts_server_path">Server Path</string>
+    <string name="autoopengts_server_path_summary">Optional and only for HTTP-based communication. For example \'/gprmc/Data\'</string>
+    <string name="autoopengts_device_id">Device ID</string>
+
 </resources>
