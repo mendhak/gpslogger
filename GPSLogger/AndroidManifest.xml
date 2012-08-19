@@ -89,7 +89,13 @@
                 <action android:name="android.intent.action.VIEW"/>
             </intent-filter>
         </activity>
-
+        <activity android:name="com.mendhak.gpslogger.senders.opengts.OpenGTSActivity"
+                  android:label="@string/opengts_setup_title">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="com.mendhak.gpslogger.OPENGTS_SETUP"/>
+            </intent-filter>
+        </activity>
 
         <receiver android:enabled="true"
                   android:name="com.mendhak.gpslogger.StartupReceiver"
