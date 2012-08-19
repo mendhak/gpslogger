@@ -32,9 +32,9 @@ import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
+import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.*;
 
 public class GpsMainActivity extends Activity implements OnCheckedChangeListener,
@@ -118,7 +118,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
         setContentView(R.layout.main);
 
-        GetPreferences();
+        // Moved to onResume to update the list of loggers
+        //GetPreferences();
 
         StartAndBindService();
     }
@@ -136,6 +137,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
     {
         Utilities.LogDebug("GpsMainactivity.onResume");
         super.onResume();
+        GetPreferences();
         StartAndBindService();
     }
 
@@ -278,33 +280,22 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             TextView txtDistance = (TextView) findViewById(R.id.txtDistance);
             TextView txtAutoEmail = (TextView) findViewById(R.id.txtAutoEmail);
 
-            String loggingTo = "";
+            List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers();
 
-            if(AppSettings.shouldLogToGpx())
-            {
-                loggingTo = loggingTo + "GPX, ";
-            }
+            if(loggers.size() > 0) {
 
-            if(AppSettings.shouldLogToKml())
-            {
-                loggingTo = loggingTo + "KML, ";
-            }
+                ListIterator<IFileLogger> li = loggers.listIterator();
+                String logTo = li.next().getName();
+                while(li.hasNext()) {
+                    logTo += ", " + li.next().getName();
+                }
+                txtLoggingTo.setText(logTo);
 
-            if(AppSettings.shouldLogToPlainText())
-            {
-                loggingTo = loggingTo + "TXT, ";
-            }
+            } else {
 
-            if(loggingTo.length() > 0)
-            {
-                loggingTo = loggingTo.substring(0, loggingTo.length() - 2);
-            }
-            else
-            {
-                loggingTo = getString(R.string.summary_loggingto_screen);
-            }
+                txtLoggingTo.setText(R.string.summary_loggingto_screen);
 
-            txtLoggingTo.setText(loggingTo);
+            }
 
             if (AppSettings.getMinimumSeconds() > 0)
             {
@@ -428,6 +419,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
                 break;
             case R.id.mnuGDocs:
                 UploadToGoogleDocs();
+                break;
+            case R.id.mnuOpenGTS:
+                SendToOpenGTS();
                 break;
             case R.id.mnuEmail:
                 SelectAndEmailFile();
@@ -578,17 +572,33 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         
         if (!Utilities.IsEmailSetup())
         {
-            
-            startActivity(settingsIntent);                
+
+            startActivity(settingsIntent);
         }
         else
         {
-            ShowFileListDialog(true, true, true, settingsIntent,FileSenderFactory.GetEmailSender(this) );
+            ShowFileListDialog(settingsIntent,FileSenderFactory.GetEmailSender(this) );
         }
-        
-       
 
     }
+
+    private void SendToOpenGTS()
+    {
+        Utilities.LogDebug("GpsMainActivity.SendToOpenGTS");
+
+        Intent settingsIntent = new Intent(getApplicationContext(), OpenGTSActivity.class);
+
+        if (!Utilities.IsOpenGTSSetup())
+        {
+            startActivity(settingsIntent);
+        }
+        else
+        {
+            IFileSender fs = FileSenderFactory.GetOpenGTSSender(getApplicationContext(), this);
+            ShowFileListDialog(settingsIntent, fs);
+        }
+    }
+
 
     private void UploadToGoogleDocs()
     {
@@ -601,7 +611,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         }
         
         Intent settingsIntent = new Intent(GpsMainActivity.this, GDocsSettingsActivity.class);
-        ShowFileListDialog(true, true, true, settingsIntent, FileSenderFactory.GetGDocsSender(getApplicationContext(), this));
+        ShowFileListDialog(settingsIntent, FileSenderFactory.GetGDocsSender(getApplicationContext(), this));
     }
     
 
@@ -618,8 +628,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         }
        
         Intent settingsIntent = new Intent(GpsMainActivity.this, DropBoxAuthorizationActivity.class);
-        ShowFileListDialog(true, true, true, settingsIntent, 
-                FileSenderFactory.GetDropBoxSender(getApplication(), this));
+        ShowFileListDialog(settingsIntent, FileSenderFactory.GetDropBoxSender(getApplication(), this));
 
     }
 
@@ -639,34 +648,19 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
         Intent settingsIntent = OSMHelper.GetOsmSettingsIntent(getApplicationContext());
         
-        ShowFileListDialog(true, false, false, settingsIntent,
-                FileSenderFactory.GetOsmSender(getApplicationContext(),this));
+        ShowFileListDialog(settingsIntent, FileSenderFactory.GetOsmSender(getApplicationContext(),this));
         
     }
 
     
-    private void ShowFileListDialog(final boolean allowGpx, final boolean allowKml, final boolean allowZip,
-                                    final Intent settingsIntent,
-                                    final IFileSender sender)
+    private void ShowFileListDialog(final Intent settingsIntent, final IFileSender sender)
     {
 
         final File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
 
         if (gpxFolder.exists())
         {
-            FilenameFilter select = new FilenameFilter()
-            {
-
-                public boolean accept(File dir, String filename)
-                {
-                    return (allowGpx && filename.toLowerCase().contains(".gpx"))
-                            || (allowKml && filename.toLowerCase().contains(".kml"))
-                            || (allowZip && filename.toLowerCase().contains(".zip"));
-
-                }
-            };
-
-            File[] enumeratedFiles = gpxFolder.listFiles(select);
+            File[] enumeratedFiles = gpxFolder.listFiles(sender);
 
             Arrays.sort(enumeratedFiles, new Comparator<File>(){
                 public int compare(File f1, File f2)

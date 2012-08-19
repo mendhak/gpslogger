@@ -82,4 +82,15 @@
 	<item>identifiable</item>
 </string-array>
 
-</resources> 
+<string-array name="opengts_server_communication_methods">
+    <item>HTTP/GET Based</item>
+    <!-- <item>Raw Socket based</item> -->
+</string-array>
+
+<string-array name="opengts_server_communication_methods_values">
+    <item>HTTP/GET</item>
+    <!-- <item>RAW</item> -->
+</string-array>
+
+
+</resources>
