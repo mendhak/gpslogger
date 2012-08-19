@@ -149,6 +149,12 @@ public class OSMHelper implements IActionListener, IFileSender
         t.start();
     }
 
+    @Override
+    public boolean accept(File dir, String name)
+    {
+        return name.toLowerCase().contains(".gpx");
+    }
+
 
     private class OsmUploadHandler implements Runnable
     {

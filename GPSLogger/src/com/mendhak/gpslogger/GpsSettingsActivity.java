@@ -14,6 +14,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 {
 
     private final Handler handler = new Handler();
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,7 +31,7 @@ public class GpsSettingsActivity extends PreferenceActivity
 
 
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         boolean useImperial = prefs.getBoolean("useImperial", false);
 
         EditTextPreference distanceBeforeLogging = (EditTextPreference) findPreference("distance_before_logging");
@@ -55,6 +56,9 @@ public class GpsSettingsActivity extends PreferenceActivity
 
         Preference osmSetupPref = findPreference("osm_setup");
         osmSetupPref.setOnPreferenceClickListener(new OSMPreferenceClickListener());
+
+        CheckBoxPreference chkLog_opengts  = (CheckBoxPreference) findPreference("log_opengts");
+        chkLog_opengts.setOnPreferenceClickListener(new LogOpenGTSPreferenceClickListener(prefs));
 
     }
 
@@ -184,5 +188,44 @@ public class GpsSettingsActivity extends PreferenceActivity
 
     }
 
+    /**
+     * Opens the OpenGTS preferences
+     * Listener to ensure that the server is configured when the user wants to enable OpenGTS logging logger
+     */
+    private class LogOpenGTSPreferenceClickListener implements OnPreferenceClickListener
+    {
+        private SharedPreferences prefs;
 
+        public LogOpenGTSPreferenceClickListener(SharedPreferences prefs)
+        {
+            this.prefs = prefs;
+        }
+
+        public boolean onPreferenceClick(Preference preference)
+        {
+            CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
+            boolean opengts_enabled           = prefs.getBoolean("opengts_enabled", false);
+
+            if(chkLog_opengts.isChecked() && !opengts_enabled){
+                startActivity(new Intent("com.mendhak.gpslogger.OPENGTS_SETUP"));
+            }
+            return true;
+        }
+    }
+
+    @Override
+    public void onWindowFocusChanged (boolean hasFocus)
+    {
+        Utilities.LogDebug("GpsSettingsActivity.onWindowFocusChanged");
+        if(hasFocus) {
+
+            CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
+            boolean opengts_enabled           = prefs.getBoolean("opengts_enabled", false);
+
+            if(chkLog_opengts.isChecked() && !opengts_enabled){
+                chkLog_opengts.setChecked(false);
+            }
+
+        }
+    }
 }
