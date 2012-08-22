@@ -1013,32 +1013,24 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
                 txtAccuracy.setText(R.string.not_applicable);
             }
 
-            // Distance
-            if (Session.getPreviousLocationInfo() == null) {
-                Session.setPreviousLocationInfo(loc);
-            }
-            // Calculate this location and the previous location location and add to the current running total distance.
-            // NOTE: Should be used in conjunction with 'distance required before logging' for more realistic values.
-            double distance = Utilities.CalculateDistance(
-                    Session.getPreviousLatitude(),
-                    Session.getPreviousLongitude(),
-                    loc.getLatitude(),
-                    loc.getLongitude());
-            Session.setPreviousLocationInfo(loc);
-            Session.setTotalTravelled(Session.getTotalTravelled() + distance);
+
             String distanceUnit;
             double distanceValue = Session.getTotalTravelled();
-            if (AppSettings.shouldUseImperial()) {
+            if (AppSettings.shouldUseImperial())
+            {
                 distanceUnit = getString(R.string.feet);
                 distanceValue = Utilities.MetersToFeet(distanceValue);
                 // When it passes more than 1 kilometer, convert to miles.
-                if (distanceValue > 3281) {
+                if (distanceValue > 3281)
+                {
                     distanceUnit = getString(R.string.miles);
-                    distanceValue = distance / 5280;
+                    distanceValue = distanceValue / 5280;
                 }
-            } else {
+            } else
+            {
                 distanceUnit = getString(R.string.meters);
-                if (distanceValue > 1000) {
+                if (distanceValue > 1000)
+                {
                     distanceUnit = getString(R.string.kilometers);
                     distanceValue = distanceValue / 1000;
                 }

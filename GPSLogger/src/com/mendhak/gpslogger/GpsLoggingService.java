@@ -733,6 +733,7 @@ public class GpsLoggingService extends Service implements IActionListener
         ResetCurrentFileName(false);
         Session.setLatestTimeStamp(System.currentTimeMillis());
         Session.setCurrentLocationInfo(loc);
+        SetDistanceTraveled(loc);
         Notify();
         WriteToFile(loc);
         GetPreferences();
@@ -742,6 +743,24 @@ public class GpsLoggingService extends Service implements IActionListener
         {
             mainServiceClient.OnLocationUpdate(loc);
         }
+    }
+
+    private void SetDistanceTraveled(Location loc)
+    {
+        // Distance
+        if (Session.getPreviousLocationInfo() == null)
+        {
+            Session.setPreviousLocationInfo(loc);
+        }
+        // Calculate this location and the previous location location and add to the current running total distance.
+        // NOTE: Should be used in conjunction with 'distance required before logging' for more realistic values.
+        double distance = Utilities.CalculateDistance(
+                Session.getPreviousLatitude(),
+                Session.getPreviousLongitude(),
+                loc.getLatitude(),
+                loc.getLongitude());
+        Session.setPreviousLocationInfo(loc);
+        Session.setTotalTravelled(Session.getTotalTravelled() + distance);
     }
 
     protected void StopManagerAndResetAlarm()

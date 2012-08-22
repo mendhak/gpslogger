@@ -176,25 +176,30 @@ public class Session extends Application
 		}
 	}
 
-    public static double getPreviousLatitude() {
+    public static double getPreviousLatitude()
+    {
         Location loc = getPreviousLocationInfo();
         return loc != null ? loc.getLatitude() : 0;
     }
 
-    public static double getPreviousLongitude() {
+    public static double getPreviousLongitude()
+    {
         Location loc = getPreviousLocationInfo();
         return loc != null ? loc.getLongitude() : 0;
     }
 
-    public static double getTotalTravelled() {
+    public static double getTotalTravelled()
+    {
         return totalTravelled;
     }
 
-    public static int getNumLegs() {
+    public static int getNumLegs()
+    {
         return numLegs;
     }
 
-    public static void setTotalTravelled(double totalTravelled) {
+    public static void setTotalTravelled(double totalTravelled)
+    {
         if (totalTravelled == 0 ) {
             Session.numLegs = 0;
         } else {
@@ -207,7 +212,8 @@ public class Session extends Application
         return previousLocationInfo;
     }
 
-    public static void setPreviousLocationInfo(Location previousLocationInfo) {
+    public static void setPreviousLocationInfo(Location previousLocationInfo)
+    {
         Session.previousLocationInfo = previousLocationInfo;
     }
 
