@@ -21,6 +21,7 @@ class Gpx10FileLogger implements IFileLogger
     private boolean useSatelliteTime = false;
     private final boolean addNewTrackSegment;
     private final int satelliteCount;
+    protected final String name = "GPX";
 
     Gpx10FileLogger(File gpxFile, boolean useSatelliteTime, boolean addNewTrackSegment, int satelliteCount)
     {
@@ -70,6 +71,11 @@ class Gpx10FileLogger implements IFileLogger
         Utilities.LogDebug(String.format("There are currently %s tasks waiting on the GPX10 EXECUTOR.", EXECUTOR.getQueue().size()));
         EXECUTOR.execute(annotateHandler);
 
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
 

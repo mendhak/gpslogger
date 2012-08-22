@@ -38,6 +38,11 @@ public class FileLoggerFactory
             loggers.add(new PlainTextFileLogger(file, AppSettings.shouldUseSatelliteTime()));
         }
 
+        if (AppSettings.shouldLogToOpenGTS())
+        {
+            loggers.add(new OpenGTSLogger(AppSettings.shouldUseSatelliteTime()));
+        }
+
         return loggers;
     }
 }
