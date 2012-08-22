@@ -24,6 +24,7 @@ import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.AlarmReceiver;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -726,7 +727,6 @@ public class GpsLoggingService extends Service implements IActionListener
             }
 
         }
-
 
 
         Utilities.LogInfo("New location obtained");

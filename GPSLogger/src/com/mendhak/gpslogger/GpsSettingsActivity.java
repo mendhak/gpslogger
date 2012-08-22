@@ -30,7 +30,6 @@ public class GpsSettingsActivity extends PreferenceActivity
         }
 
 
-
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         boolean useImperial = prefs.getBoolean("useImperial", false);
 
@@ -57,7 +56,7 @@ public class GpsSettingsActivity extends PreferenceActivity
         Preference osmSetupPref = findPreference("osm_setup");
         osmSetupPref.setOnPreferenceClickListener(new OSMPreferenceClickListener());
 
-        CheckBoxPreference chkLog_opengts  = (CheckBoxPreference) findPreference("log_opengts");
+        CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
         chkLog_opengts.setOnPreferenceClickListener(new LogOpenGTSPreferenceClickListener(prefs));
 
     }
@@ -204,9 +203,10 @@ public class GpsSettingsActivity extends PreferenceActivity
         public boolean onPreferenceClick(Preference preference)
         {
             CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
-            boolean opengts_enabled           = prefs.getBoolean("opengts_enabled", false);
+            boolean opengts_enabled = prefs.getBoolean("opengts_enabled", false);
 
-            if(chkLog_opengts.isChecked() && !opengts_enabled){
+            if (chkLog_opengts.isChecked() && !opengts_enabled)
+            {
                 startActivity(new Intent("com.mendhak.gpslogger.OPENGTS_SETUP"));
             }
             return true;
@@ -214,15 +214,17 @@ public class GpsSettingsActivity extends PreferenceActivity
     }
 
     @Override
-    public void onWindowFocusChanged (boolean hasFocus)
+    public void onWindowFocusChanged(boolean hasFocus)
     {
         Utilities.LogDebug("GpsSettingsActivity.onWindowFocusChanged");
-        if(hasFocus) {
+        if (hasFocus)
+        {
 
             CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
-            boolean opengts_enabled           = prefs.getBoolean("opengts_enabled", false);
+            boolean opengts_enabled = prefs.getBoolean("opengts_enabled", false);
 
-            if(chkLog_opengts.isChecked() && !opengts_enabled){
+            if (chkLog_opengts.isChecked() && !opengts_enabled)
+            {
                 chkLog_opengts.setChecked(false);
             }
 

@@ -75,13 +75,12 @@ public class OSMAuthorizationActivity extends PreferenceActivity
         }
 
 
-
         Preference visibilityPref = findPreference("osm_visibility");
         Preference descriptionPref = findPreference("osm_description");
         Preference tagsPref = findPreference("osm_tags");
         Preference resetPref = findPreference("osm_resetauth");
-        
-        if(!OSMHelper.IsOsmAuthorized(getApplicationContext()))
+
+        if (!OSMHelper.IsOsmAuthorized(getApplicationContext()))
         {
             resetPref.setTitle(R.string.osm_lbl_authorize);
             resetPref.setSummary(R.string.osm_lbl_authorize_description);
@@ -96,15 +95,15 @@ public class OSMAuthorizationActivity extends PreferenceActivity
             tagsPref.setEnabled(true);
 
         }
-        
+
 
         resetPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
         {
 
             public boolean onPreferenceClick(Preference preference)
             {
-                
-                if(OSMHelper.IsOsmAuthorized(getApplicationContext()))
+
+                if (OSMHelper.IsOsmAuthorized(getApplicationContext()))
                 {
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editor = prefs.edit();
@@ -152,7 +151,7 @@ public class OSMAuthorizationActivity extends PreferenceActivity
                 }
 
                 return true;
-                
+
 
             }
         });
@@ -161,7 +160,6 @@ public class OSMAuthorizationActivity extends PreferenceActivity
 //        authButton.setOnClickListener(this);
 
     }
-
 
 
 }

@@ -121,9 +121,9 @@ public class OSMHelper implements IActionListener, IFileSender
     {
         //Upload only GPX
 
-        for(File f : files)
+        for (File f : files)
         {
-            if(f.getName().contains(".gpx"))
+            if (f.getName().contains(".gpx"))
             {
                 UploadFile(f.getName());
             }

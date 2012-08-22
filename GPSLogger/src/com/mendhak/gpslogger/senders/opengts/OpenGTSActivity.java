@@ -8,8 +8,6 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.view.KeyEvent;
 import android.webkit.URLUtil;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.IActionListener;
-import com.mendhak.gpslogger.common.IMessageBoxCallback;
 import com.mendhak.gpslogger.common.Utilities;
 
 public class OpenGTSActivity extends PreferenceActivity implements
@@ -17,21 +15,18 @@ public class OpenGTSActivity extends PreferenceActivity implements
         OnPreferenceClickListener
 {
 
-    private final Handler handler = new Handler();
-
-
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.opengtssettings);
 
-        CheckBoxPreference chkEnabled                    = (CheckBoxPreference) findPreference("autoopengts_enabled");
-        EditTextPreference txtOpenGTSServer              = (EditTextPreference) findPreference("opengts_server");
-        EditTextPreference txtOpenGTSServerPort          = (EditTextPreference) findPreference("opengts_server_port");
-        ListPreference txtOpenGTSCommunicationMethod     = (ListPreference) findPreference("opengts_server_communication_method");
-        EditTextPreference txtOpenGTSServerPath          = (EditTextPreference) findPreference("autoopengts_server_path");
-        EditTextPreference txtOpenGTSDeviceId            = (EditTextPreference) findPreference("opengts_device_id");
+        CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoopengts_enabled");
+        EditTextPreference txtOpenGTSServer = (EditTextPreference) findPreference("opengts_server");
+        EditTextPreference txtOpenGTSServerPort = (EditTextPreference) findPreference("opengts_server_port");
+        ListPreference txtOpenGTSCommunicationMethod = (ListPreference) findPreference("opengts_server_communication_method");
+        EditTextPreference txtOpenGTSServerPath = (EditTextPreference) findPreference("autoopengts_server_path");
+        EditTextPreference txtOpenGTSDeviceId = (EditTextPreference) findPreference("opengts_device_id");
 
         chkEnabled.setOnPreferenceChangeListener(this);
         txtOpenGTSServer.setOnPreferenceChangeListener(this);
@@ -56,19 +51,19 @@ public class OpenGTSActivity extends PreferenceActivity implements
 
     private boolean IsFormValid()
     {
-        CheckBoxPreference chkEnabled                 = (CheckBoxPreference) findPreference("opengts_enabled");
-        EditTextPreference txtOpenGTSServer           = (EditTextPreference) findPreference("opengts_server");
-        EditTextPreference txtOpenGTSServerPort       = (EditTextPreference) findPreference("opengts_server_port");
-        ListPreference txtOpenGTSCommunicationMethod  = (ListPreference) findPreference("opengts_server_communication_method");
-        EditTextPreference txtOpenGTSServerPath       = (EditTextPreference) findPreference("autoopengts_server_path");
-        EditTextPreference txtOpenGTSDeviceId         = (EditTextPreference) findPreference("opengts_device_id");
+        CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("opengts_enabled");
+        EditTextPreference txtOpenGTSServer = (EditTextPreference) findPreference("opengts_server");
+        EditTextPreference txtOpenGTSServerPort = (EditTextPreference) findPreference("opengts_server_port");
+        ListPreference txtOpenGTSCommunicationMethod = (ListPreference) findPreference("opengts_server_communication_method");
+        EditTextPreference txtOpenGTSServerPath = (EditTextPreference) findPreference("autoopengts_server_path");
+        EditTextPreference txtOpenGTSDeviceId = (EditTextPreference) findPreference("opengts_device_id");
 
         return !chkEnabled.isChecked()
                 || txtOpenGTSServer.getText() != null && txtOpenGTSServer.getText().length() > 0
                 && txtOpenGTSServerPort.getText() != null && isNumeric(txtOpenGTSServerPort.getText())
                 && txtOpenGTSCommunicationMethod.getValue() != null && txtOpenGTSCommunicationMethod.getValue().length() > 0
                 && txtOpenGTSDeviceId.getText() != null && txtOpenGTSDeviceId.getText().length() > 0
-                && URLUtil.isValidUrl("http://" + txtOpenGTSServer.getText() + ":" + txtOpenGTSServerPort.getText() +  txtOpenGTSServerPath.getText());
+                && URLUtil.isValidUrl("http://" + txtOpenGTSServer.getText() + ":" + txtOpenGTSServerPort.getText() + txtOpenGTSServerPath.getText());
 
     }
 
@@ -76,7 +71,10 @@ public class OpenGTSActivity extends PreferenceActivity implements
     {
         for (char c : str.toCharArray())
         {
-            if (!Character.isDigit(c)) return false;
+            if (!Character.isDigit(c))
+            {
+                return false;
+            }
         }
         return true;
     }

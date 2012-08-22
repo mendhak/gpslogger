@@ -34,13 +34,16 @@ public class GDocsHelper implements IActionListener, IFileSender
         this.callback = callback;
     }
 
-    /** OAuth 2 scope to use */
+    /**
+     * OAuth 2 scope to use
+     */
     //https://docs.google.com/feeds/ gives full access to the user's documents
     private static final String SCOPE = "oauth2:https://docs.google.com/feeds/";
 
 
     /**
      * Returns the Google API CLIENT ID to use in API calls
+     *
      * @param applicationContext
      * @return
      */
@@ -55,6 +58,7 @@ public class GDocsHelper implements IActionListener, IFileSender
 
     /**
      * Returns the Google API CLIENT SECRET to use in API calls
+     *
      * @param applicationContext
      * @return
      */
@@ -73,7 +77,7 @@ public class GDocsHelper implements IActionListener, IFileSender
     public static String GetAuthToken(Context applicationContext)
     {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        return prefs.getString("GDOCS_AUTH_TOKEN","");
+        return prefs.getString("GDOCS_AUTH_TOKEN", "");
     }
 
     /**
@@ -82,20 +86,20 @@ public class GDocsHelper implements IActionListener, IFileSender
     public static String GetAccountName(Context applicationContext)
     {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        return prefs.getString("GDOCS_ACCOUNT_NAME","");
-        
+        return prefs.getString("GDOCS_ACCOUNT_NAME", "");
+
     }
 
     /**
      * Saves the authToken and account name into shared preferences
      */
-    public static void SaveAuthToken(Context applicationContext,AccountManagerFuture<Bundle> bundleAccountManagerFuture)
+    public static void SaveAuthToken(Context applicationContext, AccountManagerFuture<Bundle> bundleAccountManagerFuture)
     {
         try
         {
             String authToken = bundleAccountManagerFuture.getResult().getString(AccountManager.KEY_AUTHTOKEN);
-            String accountName =bundleAccountManagerFuture.getResult().getString(AccountManager.KEY_ACCOUNT_NAME); 
-            
+            String accountName = bundleAccountManagerFuture.getResult().getString(AccountManager.KEY_ACCOUNT_NAME);
+
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
             SharedPreferences.Editor editor = prefs.edit();
 
@@ -114,6 +118,7 @@ public class GDocsHelper implements IActionListener, IFileSender
 
     /**
      * Removes the authToken and account name from storage
+     *
      * @param applicationContext
      */
     public static void ClearAuthToken(Context applicationContext)
@@ -129,20 +134,22 @@ public class GDocsHelper implements IActionListener, IFileSender
 
     /**
      * Returns whether the app is authorized to perform Google API operations
+     *
      * @param applicationContext
      * @return
      */
     public static boolean IsLinked(Context applicationContext)
     {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        String gdocsAuthToken = prefs.getString("GDOCS_AUTH_TOKEN","");
-        String gdocsAccount = prefs.getString("GDOCS_ACCOUNT_NAME","");
+        String gdocsAuthToken = prefs.getString("GDOCS_AUTH_TOKEN", "");
+        String gdocsAccount = prefs.getString("GDOCS_ACCOUNT_NAME", "");
         return gdocsAuthToken.length() > 0 && gdocsAccount.length() > 0;
     }
 
 
     /**
      * Gets an instance of an AccountManager to use for authorizing the app
+     *
      * @param applicationContext
      * @return
      */
@@ -153,6 +160,7 @@ public class GDocsHelper implements IActionListener, IFileSender
 
     /**
      * This version show the user an access request screen for the user to authorize the app
+     *
      * @param accountManager
      * @param account
      * @param ota
@@ -172,6 +180,7 @@ public class GDocsHelper implements IActionListener, IFileSender
 
     /**
      * This version puts a message in the notification area asking for authorization
+     *
      * @param accountManager
      * @param account
      * @param ota
@@ -189,23 +198,24 @@ public class GDocsHelper implements IActionListener, IFileSender
 
     /**
      * Invalidates the authToken and requests a new one and saves the new authToken
+     *
      * @param applicationContext
      * @param accountManager
      */
-    private void ResetAuthToken(final Context applicationContext, final AccountManager accountManager, 
+    private void ResetAuthToken(final Context applicationContext, final AccountManager accountManager,
                                 final Thread threadToStart)
     {
 
         //To completely revoke access, adb -e shell 'sqlite3 /data/system/accounts.db "delete from grants;"'
         //Invalidate token, get new token, invalidate it again, then get it again.
         //As weird as that sounds, the first time you get a token it will be expired.
-        
+
         Account[] accounts = accountManager.getAccountsByType("com.google");
         Account account = null;
 
-        for(Account acc : accounts)
+        for (Account acc : accounts)
         {
-            if(acc.name.equalsIgnoreCase(GetAccountName(applicationContext)))
+            if (acc.name.equalsIgnoreCase(GetAccountName(applicationContext)))
             {
                 account = acc;
             }
@@ -218,32 +228,32 @@ public class GDocsHelper implements IActionListener, IFileSender
 
 
         //Request a token (AccountManager will return a cached and probably expired token)
-        GetAuthTokenFromAccountManager(accountManager,account,new AccountManagerCallback<Bundle>()
+        GetAuthTokenFromAccountManager(accountManager, account, new AccountManagerCallback<Bundle>()
         {
             @Override
             public void run(AccountManagerFuture<Bundle> bundleAccountManagerFuture)
             {
                 //Save the (stale) token
-                SaveAuthToken(applicationContext,bundleAccountManagerFuture);
+                SaveAuthToken(applicationContext, bundleAccountManagerFuture);
 
                 //Invalidate it again
                 accountManager.invalidateAuthToken("com.google", GetAuthToken(applicationContext));
 
                 //Request a token again
-                GetAuthTokenFromAccountManager(accountManager, finalAccount,new AccountManagerCallback<Bundle>()
+                GetAuthTokenFromAccountManager(accountManager, finalAccount, new AccountManagerCallback<Bundle>()
                 {
                     @Override
                     public void run(AccountManagerFuture<Bundle> bundleAccountManagerFuture)
                     {
                         //and finally save it
-                        SaveAuthToken(applicationContext,bundleAccountManagerFuture);
+                        SaveAuthToken(applicationContext, bundleAccountManagerFuture);
                         threadToStart.start();
                     }
                 });
             }
         });
     }
-    
+
     public static Account[] GetAccounts(AccountManager accountManager)
     {
         return accountManager.getAccountsByType("com.google");
@@ -252,7 +262,7 @@ public class GDocsHelper implements IActionListener, IFileSender
     public void UploadTestFile()
     {
 
-        if(!IsLinked(ctx))
+        if (!IsLinked(ctx))
         {
             callback.OnFailure();
             return;
@@ -269,7 +279,7 @@ public class GDocsHelper implements IActionListener, IFileSender
 
             ResetAuthToken(ctx, accountManager, t);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             callback.OnFailure();
             Utilities.LogError("GDocsHelper.UploadTestFile", e);
@@ -279,13 +289,13 @@ public class GDocsHelper implements IActionListener, IFileSender
     @Override
     public void OnComplete()
     {
-         callback.OnComplete();
+        callback.OnComplete();
     }
 
     @Override
     public void OnFailure()
     {
-          callback.OnFailure();
+        callback.OnFailure();
     }
 
     @Override
@@ -297,22 +307,22 @@ public class GDocsHelper implements IActionListener, IFileSender
         File zipFile = null;
 
 
-        for(File f : files)
+        for (File f : files)
         {
-            if(f.getName().contains(".zip"))
+            if (f.getName().contains(".zip"))
             {
                 zipFile = f;
                 break;
             }
         }
 
-        if(zipFile != null)
+        if (zipFile != null)
         {
             UploadFile(zipFile.getName());
         }
         else
         {
-            for(File f : files)
+            for (File f : files)
             {
                 UploadFile(f.getName());
             }
@@ -323,7 +333,7 @@ public class GDocsHelper implements IActionListener, IFileSender
     public void UploadFile(final String fileName)
     {
 
-        if(!IsLinked(ctx))
+        if (!IsLinked(ctx))
         {
             callback.OnFailure();
             return;
@@ -339,9 +349,9 @@ public class GDocsHelper implements IActionListener, IFileSender
 
             Thread t = new Thread(new GDocsUploadHandler(fis, fileName, GDocsHelper.this));
 
-            ResetAuthToken(ctx, accountManager,t);
+            ResetAuthToken(ctx, accountManager, t);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             callback.OnFailure();
             Utilities.LogError("GDocsHelper.UploadFile", e);
@@ -363,7 +373,7 @@ public class GDocsHelper implements IActionListener, IFileSender
         InputStream inputStream;
         IActionListener callback;
 
-        GDocsUploadHandler(InputStream inputStream, String fileName, 
+        GDocsUploadHandler(InputStream inputStream, String fileName,
                            IActionListener callback)
         {
 
@@ -376,7 +386,7 @@ public class GDocsHelper implements IActionListener, IFileSender
         @Override
         public void run()
         {
-               
+
             try
             {
 
@@ -389,7 +399,7 @@ public class GDocsHelper implements IActionListener, IFileSender
 
                 String gpsLoggerFolderFeed = SearchForGpsLoggerFolder();
 
-                if(Utilities.IsNullOrEmpty(gpsLoggerFolderFeed))
+                if (Utilities.IsNullOrEmpty(gpsLoggerFolderFeed))
                 {
                     //Couldn't find anything, need to create it.
                     gpsLoggerFolderFeed = CreateFolder();
@@ -397,7 +407,7 @@ public class GDocsHelper implements IActionListener, IFileSender
 
                 FileAccessLocations fileSearch = SearchForFile(gpsLoggerFolderFeed, fileName);
 
-                if(Utilities.IsNullOrEmpty(fileSearch.UpdateUrl))
+                if (Utilities.IsNullOrEmpty(fileSearch.UpdateUrl))
                 {
                     //The file doesn't exist, you must create it.
                     CreateFile(fileSearch, fileName, Utilities.GetByteArrayFromInputStream(inputStream));
@@ -407,7 +417,7 @@ public class GDocsHelper implements IActionListener, IFileSender
                     //The file exists, update its contents instead
                     UpdateFile(fileSearch, fileName, Utilities.GetByteArrayFromInputStream(inputStream));
                 }
-                
+
                 callback.OnComplete();
 
             }
@@ -422,8 +432,8 @@ public class GDocsHelper implements IActionListener, IFileSender
         private void UpdateFile(FileAccessLocations accessLocations, String fileName, byte[] fileContents)
         {
 
-            String resumableFileUploadUrl = UploadFileContentsToResumableUrl(accessLocations.UpdateUrl+"?convert=false",
-                    fileName, fileContents,true);
+            String resumableFileUploadUrl = UploadFileContentsToResumableUrl(accessLocations.UpdateUrl + "?convert=false",
+                    fileName, fileContents, true);
 
             UploadFileContentsToResumableUrl(resumableFileUploadUrl, fileName, fileContents, true);
 
@@ -463,14 +473,14 @@ public class GDocsHelper implements IActionListener, IFileSender
                 AddCommonHeaders(conn);
 
                 conn.setRequestProperty("X-Upload-Content-Length", String.valueOf(fileContents.length)); //back to 0
-                
+
                 conn.setRequestProperty("X-Upload-Content-Type", Utilities.GetMimeTypeFromFileName(fileName));
                 conn.setRequestProperty("Content-Type", Utilities.GetMimeTypeFromFileName(fileName));
                 conn.setRequestProperty("Content-Length", String.valueOf(fileContents.length));
                 conn.setRequestProperty("Slug", fileName);
 
 
-                if(isUpdate)
+                if (isUpdate)
                 {
                     conn.setRequestProperty("If-Match", "*");
                     conn.setRequestMethod("PUT");
@@ -497,11 +507,11 @@ public class GDocsHelper implements IActionListener, IFileSender
             }
             catch (Exception e)
             {
-                 Utilities.LogError("GDocsUploadHandler.UploadFileContentsToResumableUrl", e);
+                Utilities.LogError("GDocsUploadHandler.UploadFileContentsToResumableUrl", e);
             }
             finally
             {
-                if(conn != null)
+                if (conn != null)
                 {
                     conn.disconnect();
                 }
@@ -537,7 +547,7 @@ public class GDocsHelper implements IActionListener, IFileSender
             }
             finally
             {
-                if(conn != null)
+                if (conn != null)
                 {
                     conn.disconnect();
                 }
@@ -630,11 +640,11 @@ public class GDocsHelper implements IActionListener, IFileSender
             catch (Exception e)
             {
 
-               Utilities.LogError("GDocsUploadHandler.CreateFolder", e);
+                Utilities.LogError("GDocsUploadHandler.CreateFolder", e);
             }
             finally
             {
-                if(conn != null)
+                if (conn != null)
                 {
                     conn.disconnect();
                 }
@@ -643,7 +653,6 @@ public class GDocsHelper implements IActionListener, IFileSender
 
             return folderFeedUrl;
         }
-
 
 
         private String GetFolderFeedUrlFromInputStream(InputStream inputStream)
@@ -693,7 +702,7 @@ public class GDocsHelper implements IActionListener, IFileSender
             }
             finally
             {
-                if(conn != null)
+                if (conn != null)
                 {
                     conn.disconnect();
                 }
@@ -705,6 +714,7 @@ public class GDocsHelper implements IActionListener, IFileSender
 
         /**
          * Adds headers commonly  used when talking to Google APIs
+         *
          * @param conn
          */
         private void AddCommonHeaders(HttpURLConnection conn)
@@ -723,7 +733,6 @@ public class GDocsHelper implements IActionListener, IFileSender
         }
 
     }
-
 
 
 }

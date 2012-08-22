@@ -282,16 +282,20 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
             List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers();
 
-            if(loggers.size() > 0) {
+            if (loggers.size() > 0)
+            {
 
                 ListIterator<IFileLogger> li = loggers.listIterator();
                 String logTo = li.next().getName();
-                while(li.hasNext()) {
+                while (li.hasNext())
+                {
                     logTo += ", " + li.next().getName();
                 }
                 txtLoggingTo.setText(logTo);
 
-            } else {
+            }
+            else
+            {
 
                 txtLoggingTo.setText(R.string.summary_loggingto_screen);
 
@@ -465,10 +469,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
     }
 
 
-
-
-
-
     /**
      * Allows user to send a GPX/KML file along with location, or location only
      * using a provider. 'Provider' means any application that can accept such
@@ -487,15 +487,17 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
                 File[] enumeratedFiles = gpxFolder.listFiles();
 
-                Arrays.sort(enumeratedFiles, new Comparator<File>(){
+                Arrays.sort(enumeratedFiles, new Comparator<File>()
+                {
                     public int compare(File f1, File f2)
                     {
                         return -1 * Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
-                    } });
+                    }
+                });
 
                 List<String> fileList = new ArrayList<String>(enumeratedFiles.length);
 
-                for(File f:enumeratedFiles)
+                for (File f : enumeratedFiles)
                 {
                     fileList.add(f.getName());
                 }
@@ -563,13 +565,13 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         }
 
     }
-    
+
     private void SelectAndEmailFile()
     {
         Utilities.LogDebug("GpsMainActivity.SelectAndEmailFile");
 
         Intent settingsIntent = new Intent(getApplicationContext(), AutoEmailActivity.class);
-        
+
         if (!Utilities.IsEmailSetup())
         {
 
@@ -577,7 +579,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         }
         else
         {
-            ShowFileListDialog(settingsIntent,FileSenderFactory.GetEmailSender(this) );
+            ShowFileListDialog(settingsIntent, FileSenderFactory.GetEmailSender(this));
         }
 
     }
@@ -604,16 +606,16 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
     {
         Utilities.LogDebug("GpsMainActivity.UploadToGoogleDocs");
 
-        if(!GDocsHelper.IsLinked(getApplicationContext()))
+        if (!GDocsHelper.IsLinked(getApplicationContext()))
         {
             startActivity(new Intent(GpsMainActivity.this, GDocsSettingsActivity.class));
             return;
         }
-        
+
         Intent settingsIntent = new Intent(GpsMainActivity.this, GDocsSettingsActivity.class);
         ShowFileListDialog(settingsIntent, FileSenderFactory.GetGDocsSender(getApplicationContext(), this));
     }
-    
+
 
     private void UploadToDropBox()
     {
@@ -626,7 +628,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             startActivity(new Intent("com.mendhak.gpslogger.DROPBOX_SETUP"));
             return;
         }
-       
+
         Intent settingsIntent = new Intent(GpsMainActivity.this, DropBoxAuthorizationActivity.class);
         ShowFileListDialog(settingsIntent, FileSenderFactory.GetDropBoxSender(getApplication(), this));
 
@@ -647,12 +649,12 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         }
 
         Intent settingsIntent = OSMHelper.GetOsmSettingsIntent(getApplicationContext());
-        
-        ShowFileListDialog(settingsIntent, FileSenderFactory.GetOsmSender(getApplicationContext(),this));
-        
+
+        ShowFileListDialog(settingsIntent, FileSenderFactory.GetOsmSender(getApplicationContext(), this));
+
     }
 
-    
+
     private void ShowFileListDialog(final Intent settingsIntent, final IFileSender sender)
     {
 
@@ -662,15 +664,17 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         {
             File[] enumeratedFiles = gpxFolder.listFiles(sender);
 
-            Arrays.sort(enumeratedFiles, new Comparator<File>(){
+            Arrays.sort(enumeratedFiles, new Comparator<File>()
+            {
                 public int compare(File f1, File f2)
                 {
                     return -1 * Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
-                } });
-            
+                }
+            });
+
             List<String> fileList = new ArrayList<String>(enumeratedFiles.length);
 
-            for(File f:enumeratedFiles)
+            for (File f : enumeratedFiles)
             {
                 fileList.add(f.getName());
             }
@@ -717,7 +721,7 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
         }
     }
-    
+
 
     /**
      * Prompts user for input, then adds text to log file
@@ -1020,7 +1024,8 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
                     distanceUnit = getString(R.string.miles);
                     distanceValue = distanceValue / 5280;
                 }
-            } else
+            }
+            else
             {
                 distanceUnit = getString(R.string.meters);
                 if (distanceValue > 1000)
@@ -1065,11 +1070,11 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
 
     public void onFileName(String newFileName)
     {
-        if(newFileName == null || newFileName.length() <= 0)
+        if (newFileName == null || newFileName.length() <= 0)
         {
             return;
         }
-        
+
         TextView txtFilename = (TextView) findViewById(R.id.txtFileName);
 
         if (AppSettings.shouldLogToGpx() || AppSettings.shouldLogToKml())

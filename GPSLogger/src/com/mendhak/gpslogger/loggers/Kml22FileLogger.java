@@ -41,7 +41,8 @@ public class Kml22FileLogger implements IFileLogger
     }
 
     @Override
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 }

@@ -23,19 +23,19 @@ public class FileSenderFactory
 
     public static IFileSender GetOsmSender(Context applicationContext, IActionListener callback)
     {
-        return new OSMHelper(applicationContext,  callback);
+        return new OSMHelper(applicationContext, callback);
     }
 
     public static IFileSender GetDropBoxSender(Context applicationContext, IActionListener callback)
     {
         return new DropBoxHelper(applicationContext, callback);
     }
-    
+
     public static IFileSender GetGDocsSender(Context applicationContext, IActionListener callback)
     {
         return new GDocsHelper(applicationContext, callback);
     }
-    
+
     public static IFileSender GetEmailSender(IActionListener callback)
     {
         return new AutoEmailHelper(callback);
@@ -61,9 +61,11 @@ public class FileSenderFactory
             return;
         }
 
-        List<File> files = new ArrayList<File>(Arrays.asList(gpxFolder.listFiles(new FilenameFilter() {
+        List<File> files = new ArrayList<File>(Arrays.asList(gpxFolder.listFiles(new FilenameFilter()
+        {
             @Override
-            public boolean accept(File file, String s) {
+            public boolean accept(File file, String s)
+            {
                 return s.contains(currentFileName) && !s.contains("zip");
             }
         })));
@@ -94,41 +96,40 @@ public class FileSenderFactory
 
         List<IFileSender> senders = GetFileSenders(applicationContext, callback);
 
-        for(IFileSender sender : senders)
+        for (IFileSender sender : senders)
         {
             sender.UploadFile(files);
         }
     }
 
 
-
     public static List<IFileSender> GetFileSenders(Context applicationContext, IActionListener callback)
     {
         List<IFileSender> senders = new ArrayList<IFileSender>();
 
-        if(GDocsHelper.IsLinked(applicationContext))
+        if (GDocsHelper.IsLinked(applicationContext))
         {
             senders.add(new GDocsHelper(applicationContext, callback));
         }
 
-        if(OSMHelper.IsOsmAuthorized(applicationContext))
+        if (OSMHelper.IsOsmAuthorized(applicationContext))
         {
             senders.add(new OSMHelper(applicationContext, callback));
         }
 
-        if(AppSettings.isAutoEmailEnabled())
+        if (AppSettings.isAutoEmailEnabled())
         {
             senders.add(new AutoEmailHelper(callback));
         }
 
         DropBoxHelper dh = new DropBoxHelper(applicationContext, callback);
 
-        if(dh.IsLinked())
+        if (dh.IsLinked())
         {
             senders.add(dh);
         }
 
-        if(AppSettings.isAutoOpenGTSEnabled())
+        if (AppSettings.isAutoOpenGTSEnabled())
         {
             senders.add(new OpenGTSHelper(applicationContext, callback));
         }

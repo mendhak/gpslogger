@@ -4,6 +4,7 @@ import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.OpenGTSClient;
+
 import java.util.Date;
 
 
@@ -28,7 +29,8 @@ public class OpenGTSLogger implements IFileLogger
     {
 
         Location nLoc = new Location(loc);
-        if (!useSatelliteTime) {
+        if (!useSatelliteTime)
+        {
             Date now = new Date();
             nLoc.setTime(now.getTime());
         }
@@ -38,12 +40,16 @@ public class OpenGTSLogger implements IFileLogger
         String path = AppSettings.getOpenGTSServerPath();
         String deviceId = AppSettings.getOpenGTSDeviceId();
 
-        IActionListener al = new IActionListener(){
+        IActionListener al = new IActionListener()
+        {
             @Override
-            public void OnComplete() {
+            public void OnComplete()
+            {
             }
+
             @Override
-            public void OnFailure() {
+            public void OnFailure()
+            {
             }
         };
 
@@ -60,7 +66,8 @@ public class OpenGTSLogger implements IFileLogger
     }
 
     @Override
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 

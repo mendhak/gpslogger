@@ -22,10 +22,10 @@ public class DropBoxAuthorizationActivity extends PreferenceActivity
         addPreferencesFromResource(R.xml.dropboxsettings);
 
         Preference pref = findPreference("dropbox_resetauth");
-        
+
         helper = new DropBoxHelper(getApplicationContext(), null);
-        
-        if(helper.IsLinked())
+
+        if (helper.IsLinked())
         {
             pref.setTitle(R.string.dropbox_unauthorize);
             pref.setSummary(R.string.dropbox_unauthorize_description);
@@ -35,14 +35,14 @@ public class DropBoxAuthorizationActivity extends PreferenceActivity
             pref.setTitle(R.string.dropbox_authorize);
             pref.setSummary(R.string.dropbox_authorize_description);
         }
-        
+
         pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
         {
             @Override
             public boolean onPreferenceClick(Preference preference)
             {
                 // This logs you out if you're logged in, or vice versa
-                if(helper.IsLinked())
+                if (helper.IsLinked())
                 {
                     helper.UnLink();
                     startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
@@ -63,7 +63,7 @@ public class DropBoxAuthorizationActivity extends PreferenceActivity
                 return true;
             }
         });
-        
+
     }
 
     @Override
@@ -73,7 +73,7 @@ public class DropBoxAuthorizationActivity extends PreferenceActivity
 
         try
         {
-            if(helper.FinishAuthorization())
+            if (helper.FinishAuthorization())
             {
                 startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
                 finish();
@@ -87,11 +87,6 @@ public class DropBoxAuthorizationActivity extends PreferenceActivity
         }
 
     }
-
-
-
-
-
 
 
 }

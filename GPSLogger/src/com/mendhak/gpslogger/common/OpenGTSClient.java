@@ -5,6 +5,7 @@ import android.location.Location;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
@@ -47,17 +48,18 @@ public class OpenGTSClient
 
     /**
      * Send locations sing HTTP GET request to the server
-     *
+     * <p/>
      * See <a href="http://opengts.sourceforge.net/OpenGTS_Config.pdf">OpenGTS_Config.pdf</a>
      * section 9.1.2 Default "gprmc" Configuration
      *
-     * @param id id of the device
+     * @param id        id of the device
      * @param locations locations
      */
 
     public void sendHTTP(String id, Location[] locations)
     {
-        try {
+        try
+        {
             locationsCount = locations.length;
             StringBuilder url = new StringBuilder();
             url.append("http://");
@@ -65,7 +67,8 @@ public class OpenGTSClient
 
             httpClient = new AsyncHttpClient();
 
-            for (Location loc : locations) {
+            for (Location loc : locations)
+            {
                 RequestParams params = new RequestParams();
                 params.put("id", id);
                 params.put("code", "0xF020");
@@ -75,7 +78,9 @@ public class OpenGTSClient
                 Utilities.LogDebug("Sending URL " + url + " with params " + params.toString());
                 httpClient.get(applicationContext, url.toString(), params, new MyAsyncHttpResponseHandler(this));
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             Utilities.LogError("OpenGTSClient.sendHTTP", e);
             OnFailure();
         }
@@ -95,11 +100,13 @@ public class OpenGTSClient
     {
         StringBuilder url = new StringBuilder();
         url.append(server);
-        if(port != null){
+        if (port != null)
+        {
             url.append(":");
             url.append(port);
         }
-        if(path != null){
+        if (path != null)
+        {
             url.append(path);
         }
         return url.toString();
@@ -110,18 +117,22 @@ public class OpenGTSClient
     {
         private OpenGTSClient callback;
 
-        public MyAsyncHttpResponseHandler(OpenGTSClient callback){
+        public MyAsyncHttpResponseHandler(OpenGTSClient callback)
+        {
             super();
             this.callback = callback;
         }
 
         @Override
-        public void onSuccess(String response) {
+        public void onSuccess(String response)
+        {
             Utilities.LogInfo("Response Success :" + response);
             callback.OnCompleteLocation();
         }
+
         @Override
-        public void onFailure(Throwable e, String response) {
+        public void onFailure(Throwable e, String response)
+        {
             Utilities.LogError("OnCompleteLocation.MyAsyncHttpResponseHandler Failure with response :" + response, new Exception(e));
             callback.OnFailure();
         }
@@ -131,7 +142,8 @@ public class OpenGTSClient
     {
         sentLocationsCount += 1;
         Utilities.LogDebug("Sent locations count: " + sentLocationsCount + "/" + locationsCount);
-        if( locationsCount == sentLocationsCount){
+        if (locationsCount == sentLocationsCount)
+        {
             OnComplete();
         }
     }
@@ -149,7 +161,7 @@ public class OpenGTSClient
 
     /**
      * Encode a location as GPRMC string data.
-     *
+     * <p/>
      * For details check org.opengts.util.Nmea0183#_parse_GPRMC(String)
      * (OpenGTS source)
      *
@@ -196,10 +208,10 @@ public class OpenGTSClient
     public static String NMEAGPRMCCoord(double coord)
     {
         // “DDDMM.MMMMM”
-        int degrees    = (int)coord;
-        double minutes = (coord-degrees)*60;
+        int degrees = (int) coord;
+        double minutes = (coord - degrees) * 60;
 
-        DecimalFormat df     = new DecimalFormat("00.00000", new DecimalFormatSymbols(Locale.US));
+        DecimalFormat df = new DecimalFormat("00.00000", new DecimalFormatSymbols(Locale.US));
         StringBuilder rCoord = new StringBuilder();
         rCoord.append(degrees);
         rCoord.append(df.format(minutes));
@@ -208,13 +220,16 @@ public class OpenGTSClient
     }
 
 
-    public static String NMEACheckSum( String msg ){
+    public static String NMEACheckSum(String msg)
+    {
         int chk = 0;
-        for ( int i = 1; i < msg.length(); i++ ){
+        for (int i = 1; i < msg.length(); i++)
+        {
             chk ^= msg.charAt(i);
         }
-        String chk_s = Integer.toHexString( chk ).toUpperCase();
-        while ( chk_s.length() < 2 ) {
+        String chk_s = Integer.toHexString(chk).toUpperCase();
+        while (chk_s.length() < 2)
+        {
             chk_s = "0" + chk_s;
         }
         return chk_s;

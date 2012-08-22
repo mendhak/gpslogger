@@ -19,12 +19,14 @@ public class ShortcutCreate extends Activity
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.shortcut_pickaction);
-        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int item)
+            {
                 Intent shortcutIntent;
                 String shortcutLabel;
 
-                if(item == 0)
+                if (item == 0)
                 {
                     shortcutIntent = new Intent(getApplicationContext(), ShortcutStart.class);
                     shortcutLabel = getString(R.string.shortcut_start);
@@ -36,7 +38,7 @@ public class ShortcutCreate extends Activity
                 }
 
                 Intent.ShortcutIconResource iconResource = Intent.ShortcutIconResource.fromContext
-                                                            (getApplicationContext(), R.drawable.gpsloggericon2);
+                        (getApplicationContext(), R.drawable.gpsloggericon2);
                 Intent intent = new Intent();
                 intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
                 intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, shortcutLabel);

@@ -4,6 +4,7 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.IFileSender;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,16 +27,16 @@ public class AutoEmailHelper implements IActionListener, IFileSender
         ArrayList<File> filesToSend = new ArrayList<File>();
 
         //If a zip file exists, remove others
-        for(File f : files)
+        for (File f : files)
         {
             filesToSend.add(f);
 
-             if(f.getName().contains(".zip"))
-             {
-                 filesToSend.clear();
-                 filesToSend.add(f);
-                 break;
-             }
+            if (f.getName().contains(".zip"))
+            {
+                filesToSend.clear();
+                filesToSend.add(f);
+                break;
+            }
         }
 
 

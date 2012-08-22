@@ -60,7 +60,7 @@ public class DropBoxHelper implements IActionListener, IFileSender
             storeKeys(tokens.key, tokens.secret);
             return true;
         }
-        
+
         return false;
     }
 
@@ -166,22 +166,22 @@ public class DropBoxHelper implements IActionListener, IFileSender
         File zipFile = null;
 
 
-        for(File f : files)
+        for (File f : files)
         {
-            if(f.getName().contains(".zip"))
+            if (f.getName().contains(".zip"))
             {
                 zipFile = f;
                 break;
             }
         }
 
-        if(zipFile != null)
+        if (zipFile != null)
         {
             UploadFile(zipFile.getName());
         }
         else
         {
-            for(File f : files)
+            for (File f : files)
             {
                 UploadFile(f.getName());
             }

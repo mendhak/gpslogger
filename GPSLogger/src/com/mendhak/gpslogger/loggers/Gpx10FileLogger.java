@@ -74,7 +74,8 @@ class Gpx10FileLogger implements IFileLogger
     }
 
     @Override
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -135,7 +136,7 @@ class Gpx10AnnotateHandler implements Runnable
 
                     System.out.println(written);
 
-                    if(written == startPosition)
+                    if (written == startPosition)
                     {
                         bos.write(wpt.getBytes());
                         buffer = new byte[20480];
@@ -296,7 +297,7 @@ class Gpx10WriteHandler implements Runnable
         if (loc.hasAccuracy() && loc.getAccuracy() > 0)
         {
             // Accuracy divided by 5 or 6 for approximate HDOP
-            track.append("<hdop>" + String.valueOf(loc.getAccuracy()/5) + "</hdop>");
+            track.append("<hdop>" + String.valueOf(loc.getAccuracy() / 5) + "</hdop>");
         }
 
         track.append("<src>" + loc.getProvider() + "</src>");

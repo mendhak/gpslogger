@@ -41,7 +41,6 @@ public class AppSettings extends Application
     private static String openGTSDeviceId;
 
 
-
     /**
      * @return the useImperial
      */
@@ -138,12 +137,14 @@ public class AppSettings extends Application
         AppSettings.logToGpx = logToGpx;
     }
 
-    public static boolean shouldLogToPlainText() {
-	    return logToPlainText;
+    public static boolean shouldLogToPlainText()
+    {
+        return logToPlainText;
     }
 
-    static void setLogToPlainText(boolean logToPlainText) {
-	    AppSettings.logToPlainText = logToPlainText;
+    static void setLogToPlainText(boolean logToPlainText)
+    {
+        AppSettings.logToPlainText = logToPlainText;
     }
 
     /**
@@ -382,68 +383,84 @@ public class AppSettings extends Application
     {
         AppSettings.autoSendEnabled = autoSendEnabled;
     }
-   
-    public static boolean shouldLogToOpenGTS() {
+
+    public static boolean shouldLogToOpenGTS()
+    {
         return LogToOpenGTS;
     }
 
-    public static void setLogToOpenGTS(boolean logToOpenGTS) {
+    public static void setLogToOpenGTS(boolean logToOpenGTS)
+    {
         AppSettings.LogToOpenGTS = logToOpenGTS;
     }
 
-    public static boolean isOpenGTSEnabled() {
+    public static boolean isOpenGTSEnabled()
+    {
         return openGTSEnabled;
     }
 
-    public static void setOpenGTSEnabled(boolean openGTSEnabled) {
+    public static void setOpenGTSEnabled(boolean openGTSEnabled)
+    {
         AppSettings.openGTSEnabled = openGTSEnabled;
     }
 
-    public static boolean isAutoOpenGTSEnabled() {
+    public static boolean isAutoOpenGTSEnabled()
+    {
         return autoOpenGTSEnabled;
     }
 
-    public static void setAutoOpenGTSEnabled(boolean autoOpenGTSEnabled) {
+    public static void setAutoOpenGTSEnabled(boolean autoOpenGTSEnabled)
+    {
         AppSettings.autoOpenGTSEnabled = autoOpenGTSEnabled;
     }
 
-    public static String getOpenGTSServer() {
+    public static String getOpenGTSServer()
+    {
         return openGTSServer;
     }
 
-    public static void setOpenGTSServer(String openGTSServer) {
+    public static void setOpenGTSServer(String openGTSServer)
+    {
         AppSettings.openGTSServer = openGTSServer;
     }
 
-    public static String getOpenGTSServerPort() {
+    public static String getOpenGTSServerPort()
+    {
         return openGTSServerPort;
     }
 
-    public static void setOpenGTSServerPort(String openGTSServerPort) {
+    public static void setOpenGTSServerPort(String openGTSServerPort)
+    {
         AppSettings.openGTSServerPort = openGTSServerPort;
     }
 
-    public static String getOpenGTSServerCommunicationMethod() {
+    public static String getOpenGTSServerCommunicationMethod()
+    {
         return openGTSServerCommunicationMethod;
     }
 
-    public static void setOpenGTSServerCommunicationMethod(String openGTSServerCommunicationMethod) {
+    public static void setOpenGTSServerCommunicationMethod(String openGTSServerCommunicationMethod)
+    {
         AppSettings.openGTSServerCommunicationMethod = openGTSServerCommunicationMethod;
     }
 
-    public static String getOpenGTSServerPath() {
+    public static String getOpenGTSServerPath()
+    {
         return openGTSServerPath;
     }
 
-    public static void setOpenGTSServerPath(String openGTSServerPath) {
+    public static void setOpenGTSServerPath(String openGTSServerPath)
+    {
         AppSettings.openGTSServerPath = openGTSServerPath;
     }
 
-    public static String getOpenGTSDeviceId() {
+    public static String getOpenGTSDeviceId()
+    {
         return openGTSDeviceId;
     }
 
-    public static void setOpenGTSDeviceId(String openGTSDeviceId) {
+    public static void setOpenGTSDeviceId(String openGTSDeviceId)
+    {
         AppSettings.openGTSDeviceId = openGTSDeviceId;
     }
 

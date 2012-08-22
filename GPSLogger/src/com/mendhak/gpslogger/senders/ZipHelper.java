@@ -9,50 +9,50 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipHelper
 {
-	private static final int BUFFER = 2048;
+    private static final int BUFFER = 2048;
 
-	private final String[] files;
-	private final String zipFile;
+    private final String[] files;
+    private final String zipFile;
 
-	public ZipHelper(String[] files, String zipFile)
-	{
-		this.files = files;
-		this.zipFile = zipFile;
-	}
+    public ZipHelper(String[] files, String zipFile)
+    {
+        this.files = files;
+        this.zipFile = zipFile;
+    }
 
-	public void Zip()
-	{
-		try
-		{
-			BufferedInputStream origin;
-			FileOutputStream dest = new FileOutputStream(zipFile);
+    public void Zip()
+    {
+        try
+        {
+            BufferedInputStream origin;
+            FileOutputStream dest = new FileOutputStream(zipFile);
 
-			ZipOutputStream out = new ZipOutputStream(new BufferedOutputStream(dest));
+            ZipOutputStream out = new ZipOutputStream(new BufferedOutputStream(dest));
 
-			byte data[] = new byte[BUFFER];
+            byte data[] = new byte[BUFFER];
 
             for (String f : files)
-			{
-				FileInputStream fi = new FileInputStream(f);
-				origin = new BufferedInputStream(fi, BUFFER);
-				ZipEntry entry = new ZipEntry(f.substring(f.lastIndexOf("/") + 1));
-				out.putNextEntry(entry);
-				int count;
-				while ((count = origin.read(data, 0, BUFFER)) != -1)
-				{
-					out.write(data, 0, count);
-				}
+            {
+                FileInputStream fi = new FileInputStream(f);
+                origin = new BufferedInputStream(fi, BUFFER);
+                ZipEntry entry = new ZipEntry(f.substring(f.lastIndexOf("/") + 1));
+                out.putNextEntry(entry);
+                int count;
+                while ((count = origin.read(data, 0, BUFFER)) != -1)
+                {
+                    out.write(data, 0, count);
+                }
                 out.closeEntry();
-				origin.close();
-			}
+                origin.close();
+            }
 
-			out.close();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+            out.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
-	}
+    }
 
 }

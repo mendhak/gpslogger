@@ -107,7 +107,7 @@ public class Utilities
 
         AppSettings.setLogToGpx(prefs.getBoolean("log_gpx", false));
 
-	    AppSettings.setLogToPlainText(prefs.getBoolean("log_plain_text", false));
+        AppSettings.setLogToPlainText(prefs.getBoolean("log_plain_text", false));
 
         AppSettings.setLogToOpenGTS(prefs.getBoolean("log_opengts", false));
 
@@ -512,7 +512,7 @@ public class Utilities
 
     public static boolean IsOpenGTSSetup()
     {
-        return  AppSettings.isOpenGTSEnabled() &&
+        return AppSettings.isOpenGTSEnabled() &&
                 AppSettings.getOpenGTSServer().length() > 0
                 && AppSettings.getOpenGTSServerPort().length() > 0
                 && AppSettings.getOpenGTSServerCommunicationMethod().length() > 0
@@ -556,6 +556,7 @@ public class Utilities
 
     /**
      * Checks if a string is null or empty
+     *
      * @param text
      * @return
      */
@@ -603,7 +604,7 @@ public class Utilities
             {
                 is.close();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Utilities.LogWarning("GetStringFromInputStream - could not close stream");
             }
@@ -615,6 +616,7 @@ public class Utilities
 
     /**
      * Loops through an input stream and converts it into a string, then closes the input stream
+     *
      * @param is
      * @return
      */
@@ -644,7 +646,7 @@ public class Utilities
             {
                 is.close();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Utilities.LogWarning("GetStringFromInputStream - could not close stream");
             }
@@ -657,6 +659,7 @@ public class Utilities
 
     /**
      * Converts an input stream containing an XML response into an XML Document object
+     *
      * @param stream
      * @return
      */
@@ -681,18 +684,19 @@ public class Utilities
 
     /**
      * Gets the GPSLogger-specific MIME type to use for a given filename/extension
+     *
      * @param fileName
      * @return
      */
     public static String GetMimeTypeFromFileName(String fileName)
     {
-       
-        if(fileName == null || fileName.length() == 0)
+
+        if (fileName == null || fileName.length() == 0)
         {
             return "";
         }
-        
-        
+
+
         int pos = fileName.lastIndexOf(".");
         if (pos == -1)
         {
@@ -701,18 +705,18 @@ public class Utilities
         else
         {
 
-            String extension = fileName.substring(pos+1,fileName.length());
-            
-            
-            if(extension.equalsIgnoreCase("gpx"))
+            String extension = fileName.substring(pos + 1, fileName.length());
+
+
+            if (extension.equalsIgnoreCase("gpx"))
             {
                 return "application/gpx+xml";
             }
-            else if(extension.equalsIgnoreCase("kml"))
+            else if (extension.equalsIgnoreCase("kml"))
             {
                 return "application/vnd.google-earth.kml+xml";
             }
-            else if(extension.equalsIgnoreCase("zip"))
+            else if (extension.equalsIgnoreCase("zip"))
             {
                 return "application/zip";
             }

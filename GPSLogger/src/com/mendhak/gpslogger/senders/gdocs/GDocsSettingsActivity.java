@@ -33,12 +33,12 @@ public class GDocsSettingsActivity extends PreferenceActivity
 
         Preference resetPref = findPreference("gdocs_resetauth");
         Preference testPref = findPreference("gdocs_test");
-        
+
         ResetPreferenceAppearance(resetPref, testPref);
 
         testPref.setOnPreferenceClickListener(this);
         resetPref.setOnPreferenceClickListener(this);
-        
+
     }
 
     public void onResume()
@@ -52,7 +52,7 @@ public class GDocsSettingsActivity extends PreferenceActivity
 
     private void ResetPreferenceAppearance(Preference resetPref, Preference testPref)
     {
-        if(GDocsHelper.IsLinked(getApplicationContext()))
+        if (GDocsHelper.IsLinked(getApplicationContext()))
         {
             resetPref.setTitle(R.string.gdocs_clearauthorization);
             resetPref.setSummary(R.string.gdocs_clearauthorization_summary);
@@ -68,13 +68,13 @@ public class GDocsSettingsActivity extends PreferenceActivity
     @Override
     public boolean onPreferenceClick(Preference preference)
     {
-        if(preference.getKey().equalsIgnoreCase("gdocs_test"))
+        if (preference.getKey().equalsIgnoreCase("gdocs_test"))
         {
-              UploadTestFileToGoogleDocs();
+            UploadTestFileToGoogleDocs();
         }
         else
         {
-            if(GDocsHelper.IsLinked(getApplicationContext()))
+            if (GDocsHelper.IsLinked(getApplicationContext()))
             {
                 //Clear authorization
                 GDocsHelper.ClearAuthToken(getApplicationContext());
@@ -86,10 +86,10 @@ public class GDocsSettingsActivity extends PreferenceActivity
                 //Re-authorize
                 freshAuthentication = true;
                 Authorize();
-                
+
             }
         }
-        
+
         return true;
     }
 
@@ -97,7 +97,7 @@ public class GDocsSettingsActivity extends PreferenceActivity
     {
         accountManager = GDocsHelper.GetAccountManager(getApplicationContext());
 
-        if(GDocsHelper.GetAccounts(accountManager).length > 0)
+        if (GDocsHelper.GetAccounts(accountManager).length > 0)
         {
             showDialog(0);  //Invokes onCreateDialog
         }
@@ -113,7 +113,7 @@ public class GDocsSettingsActivity extends PreferenceActivity
         final Account[] accounts = GDocsHelper.GetAccounts(accountManager);
         final int size = accounts.length;
 
-        if(size == 0)
+        if (size == 0)
         {
             return builder.create();
         }
@@ -145,7 +145,7 @@ public class GDocsSettingsActivity extends PreferenceActivity
 
     private void AuthorizeSelectedAccount(Account account)
     {
-        if(account == null)
+        if (account == null)
         {
             return;
         }
@@ -164,10 +164,10 @@ public class GDocsSettingsActivity extends PreferenceActivity
                 GDocsHelper.SaveAuthToken(getApplicationContext(), bundleAccountManagerFuture);
 
                 // If reauthorizing, close activity when done
-                if(freshAuthentication)
+                if (freshAuthentication)
                 {
                     freshAuthentication = false;
-                    finish();    
+                    finish();
                 }
             }
             catch (Exception e)
@@ -183,7 +183,7 @@ public class GDocsSettingsActivity extends PreferenceActivity
     {
 
         Utilities.ShowProgress(GDocsSettingsActivity.this, getString(R.string.please_wait), getString(R.string.please_wait));
-        GDocsHelper helper = new GDocsHelper(getApplicationContext(),this);
+        GDocsHelper helper = new GDocsHelper(getApplicationContext(), this);
         helper.UploadTestFile();
     }
 
@@ -220,12 +220,11 @@ public class GDocsSettingsActivity extends PreferenceActivity
     };
 
 
-
     private void FailureUploading()
     {
         Utilities.MsgBox(getString(R.string.sorry), getString(R.string.gdocs_testupload_error), this);
     }
-    
+
     private void SuccessUploading()
     {
         Utilities.MsgBox(getString(R.string.success), getString(R.string.gdocs_testupload_success), this);

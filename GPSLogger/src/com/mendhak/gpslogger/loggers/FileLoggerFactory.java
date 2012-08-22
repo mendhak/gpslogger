@@ -31,7 +31,7 @@ public class FileLoggerFactory
             File kmlFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".kml");
             loggers.add(new Kml22FileLogger(kmlFile, AppSettings.shouldUseSatelliteTime(), Session.shouldAddNewTrackSegment()));
         }
-        
+
         if (AppSettings.shouldLogToPlainText())
         {
             File file = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".txt");
