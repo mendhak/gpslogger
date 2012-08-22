@@ -348,8 +348,13 @@ public class GDocsHelper implements IActionListener, IFileSender
         }
     }
 
-  
-
+    @Override
+    public boolean accept(File dir, String name)
+    {
+        return name.toLowerCase().endsWith(".zip")
+                || name.toLowerCase().endsWith(".gpx")
+                || name.toLowerCase().endsWith(".kml");
+    }
 
     private class GDocsUploadHandler implements Runnable
     {

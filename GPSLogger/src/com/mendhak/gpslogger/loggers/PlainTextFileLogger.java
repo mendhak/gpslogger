@@ -22,6 +22,7 @@ public class PlainTextFileLogger implements IFileLogger
 
     private File file;
     private boolean useSatelliteTime;
+    protected final String name = "TXT";
 
     public PlainTextFileLogger(File file, boolean useSatelliteTime)
     {
@@ -78,6 +79,11 @@ public class PlainTextFileLogger implements IFileLogger
     {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
 }

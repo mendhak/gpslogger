@@ -68,6 +68,14 @@ public class AutoEmailHelper implements IActionListener, IFileSender
         callback.OnFailure();
     }
 
+    @Override
+    public boolean accept(File dir, String name)
+    {
+        return name.toLowerCase().endsWith(".zip")
+                || name.toLowerCase().endsWith(".gpx")
+                || name.toLowerCase().endsWith(".kml");
+    }
+
 }
 
 class AutoSendHandler implements Runnable

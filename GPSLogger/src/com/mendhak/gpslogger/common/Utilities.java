@@ -107,9 +107,10 @@ public class Utilities
 
         AppSettings.setLogToGpx(prefs.getBoolean("log_gpx", false));
 
-	AppSettings.setLogToPlainText(prefs.getBoolean("log_plain_text", false));
+	    AppSettings.setLogToPlainText(prefs.getBoolean("log_plain_text", false));
 
-        
+        AppSettings.setLogToOpenGTS(prefs.getBoolean("log_opengts", false));
+
         AppSettings.setShowInNotificationBar(prefs.getBoolean(
                 "show_notification", true));
 
@@ -186,6 +187,14 @@ public class Utilities
         AppSettings.setDebugToFile(prefs.getBoolean("debugtofile", false));
         AppSettings.setShouldSendZipFile(prefs.getBoolean("autosend_sendzip", true));
         AppSettings.setSmtpFrom(prefs.getString("smtp_from", ""));
+        AppSettings.setOpenGTSEnabled(prefs.getBoolean("opengts_enabled", false));
+        AppSettings.setAutoOpenGTSEnabled(prefs.getBoolean("autoopengts_enabled", false));
+        AppSettings.setOpenGTSServer(prefs.getString("opengts_server", ""));
+        AppSettings.setOpenGTSServerPort(prefs.getString("opengts_server_port", ""));
+        AppSettings.setOpenGTSServerCommunicationMethod(prefs.getString("opengts_server_communication_method", ""));
+        AppSettings.setOpenGTSServerPath(prefs.getString("autoopengts_server_path", ""));
+        AppSettings.setOpenGTSDeviceId(prefs.getString("opengts_device_id", ""));
+
     }
 
     public static void ShowProgress(Context ctx, String title, String message)
@@ -501,6 +510,14 @@ public class Utilities
 
     }
 
+    public static boolean IsOpenGTSSetup()
+    {
+        return  AppSettings.isOpenGTSEnabled() &&
+                AppSettings.getOpenGTSServer().length() > 0
+                && AppSettings.getOpenGTSServerPort().length() > 0
+                && AppSettings.getOpenGTSServerCommunicationMethod().length() > 0
+                && AppSettings.getOpenGTSDeviceId().length() > 0;
+    }
 
     /**
      * Uses the Haversine formula to calculate the distnace between to lat-long coordinates

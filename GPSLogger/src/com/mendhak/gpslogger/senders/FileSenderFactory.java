@@ -9,6 +9,7 @@ import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.email.AutoEmailHelper;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
+import com.mendhak.gpslogger.senders.opengts.OpenGTSHelper;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
 
 import java.io.File;
@@ -38,6 +39,11 @@ public class FileSenderFactory
     public static IFileSender GetEmailSender(IActionListener callback)
     {
         return new AutoEmailHelper(callback);
+    }
+
+    public static IFileSender GetOpenGTSSender(Context applicationContext, IActionListener callback)
+    {
+        return new OpenGTSHelper(applicationContext, callback);
     }
 
     public static void SendFiles(Context applicationContext, IActionListener callback)
@@ -120,6 +126,11 @@ public class FileSenderFactory
         if(dh.IsLinked())
         {
             senders.add(dh);
+        }
+
+        if(AppSettings.isAutoOpenGTSEnabled())
+        {
+            senders.add(new OpenGTSHelper(applicationContext, callback));
         }
 
         return senders;
