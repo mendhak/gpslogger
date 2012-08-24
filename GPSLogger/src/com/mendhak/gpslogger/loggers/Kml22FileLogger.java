@@ -79,9 +79,9 @@ class Kml22AnnotateHandler implements Runnable
                 descriptionNode.append(description);
                 descriptionNode.append("</name><Point><coordinates>");
                 descriptionNode.append(String.valueOf(loc.getLongitude()));
-                descriptionNode.append(" ");
+                descriptionNode.append(",");
                 descriptionNode.append(String.valueOf(loc.getLatitude()));
-                descriptionNode.append(" ");
+                descriptionNode.append(",");
                 descriptionNode.append(String.valueOf(loc.getAltitude()));
                 descriptionNode.append("</coordinates></Point></Placemark>\n");
 
