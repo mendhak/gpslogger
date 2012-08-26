@@ -15,7 +15,6 @@
   <string name="menu_annotate">﻿Aantekening maken</string>
   <string name="menu_share">Delen</string>
   <string name="menu_exit">Afsluiten</string>
-  <string name="menu_email_now">Email nu</string>
   <string name="txt_latitude">Breedtegraad:</string>
   <string name="txt_longitude">﻿Lengtegraad:</string>
   <string name="txt_altitude">Hoogte:</string>
@@ -34,11 +33,10 @@
   <string name="summary_dist_regardless">maximum</string>
   <string name="summary_current_filename">Bestand:</string>
   <string name="summary_current_filename_format">﻿%s (in uw GPSLogger map)</string>
-  <string name="sharing">﻿Delen</string>
   <string name="sharing_location_only">Alleen locatie</string>
   <string name="sharing_pick_file">﻿Kies een bestand om te delen</string>
   <string name="sharing_mylocation">Mijn locatie</string>
-  <string name="sharing_latlong_text" formatted="false">﻿Breedtegraad: %s, lengtegraad: %s</string>
+  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Delen via</string>
   <string name="foot"> ﻿voet</string>
   <string name="feet"> ﻿voeten</string>
@@ -46,7 +44,6 @@
   <string name="meters"> meter</string>
   <string name="error">Fout</string>
   <string name="error_connection">﻿Verbindingsfout. Controleer de telefooninstellingen.</string>
-  <string name="sent">Verzonden</string>
   <string name="gpsprovider_unavailable">﻿Geen GPS provider beschikbaar. Controleer de instellingen van uw locatie en activeer een locatiedienst.</string>
   <string name="started">Gestart</string>
   <string name="providername_using">    (Met behulp van %s)</string>
@@ -58,7 +55,6 @@
   <string name="miles_per_hour"> Mi/h</string>
   <string name="kilometers_per_hour"> km/h</string>
   <string name="unknown_direction">onbekend</string>
-  <string name="deleted">Verwijderd</string>
   <string name="sorry">Sorry</string>
   <string name="success">Yay!</string>
   <string name="direction_roughly">Ongeveer %s</string>
@@ -94,13 +90,14 @@
   <string name="settings_enter_feet">Voer voeten in(max 9999)</string>
   <string name="settings_distance_in_meters">Afstand in meter</string>
   <string name="settings_enter_meters">Voer meter in(max 9999)</string>
-  <string name="settings_converting_title">Converteren…</string>
   <string name="settings_converting_description">Minimale afstand voor converteren van eenheden. Waarden boven 9999 worden teruggezet op 9999. Het instellingen scherm zal nu herladen.     </string>
   <string name="pref_logging_title">Logging details</string>
   <string name="log_gpx_title">Loggen naar GPX</string>
   <string name="log_gpx_summary">﻿Maakt een KML-bestand in de GPSLogger map op de SD-kaart.</string>
   <string name="log_kml_title">Loggen naar KML</string>
   <string name="log_kml_summary">﻿Maakt een KML-bestand in de GPSLogger map op de SD-kaart.</string>
+  <string name="log_plain_text_title">Log naar tekst zonder opmaak</string>
+  <string name="log_plain_text_summary">Maakt een platte tekstbestand in de map GPSLogger op de SD card.</string>
   <string name="satellite_time_title">﻿Satelliettijd gebruiken</string>
   <string name="satellite_time_summary">﻿Satelliettijd gebruiken in plaats van lokale telefoon tijd, het is nauwkeuriger.</string>
   <string name="new_file_creation_title">﻿Nieuw bestand maken</string>
@@ -116,7 +113,6 @@
   <string name="time_before_logging_hint">﻿Voer seconden in (max 9999)</string>
   <string name="distance_before_logging_title">Afstand tussen logpunten</string>
   <string name="distance_before_logging_summary">Minimum afstand tussen vorig en nieuw logpunt. Gebruik 0 om alle punten te loggen.</string>
-  <string name="pref_extras_title">Extras</string>
   <string name="useimperial_title">﻿Engelse eenheden gebruiken</string>
   <string name="useimperial_summary">﻿Voeten, mijlen en pinten, geen nieuwerwetse metrische dingen gebruiken.</string>
   <string name="show_notification_title">Toon meldingen</string>
@@ -128,11 +124,7 @@
   <string name="autoemail_title">﻿Automatische E-mail instellingen</string>
   <string name="autoemail_summary">Verstuurt automatisch een e-mails met het logbestand naar een adres van uw keuze</string>
   <string name="please_wait">Een ogenblik geduld.</string>
-  <string name="autoemail_invalid_title">Ongeldig e-mailadres</string>
-  <string name="autoemail_invalid_summary">Gebruik een geldig e-mailadres.</string>
-  <string name="autoemail_autosend">Schakel automatische sturen in</string>
   <string name="autoemail_autosend_summary">Hiermee kunt het logbestand verzenden naar een e-mailadres van uw keuze.     </string>
-  <string name="autoemail_sendto">E-mailadres</string>
   <string name="autoemail_frequency_format">Na %d uur</string>
   <string name="autoemail_target">Doel e-mailadressen</string>
   <string name="autoemail_frequency_whenistop">Wanneer ik op stop druk</string>
@@ -161,9 +153,7 @@
   <string name="autoemail_smtp_testemail">Test e-mail</string>
   <string name="autoemail_test">Stuur een test e-mail met de bovenstaande instellingen</string>
   <string name="autoemail_sendingtest">Test e-mail aan het verzenden</string>
-  <string name="autoemail_testresult_title">Resultaat</string>
   <string name="autoemail_testresult_success">E-mail is verzonden</string>
-  <string name="autoemail_testresult_fail">E-mail niet verzonden - Controleer verbindings- en e-mailinstellingen     </string>
   <string name="autoemail_invalid_form">Ongeldige waarden</string>
   <string name="autoemail_invalid_form_message">Zorg ervoor dat alle velden correct zijn ingevuld     </string>
   <string name="fix_obtained">Fix verkregen</string>
@@ -229,4 +219,16 @@
   <string name="gdocs_selectgoogleaccount">Selecteer een Google-Account</string>
   <string name="email_upload">E-mail een bestand</string>
   <string name="autoemail_sendto_csv">E-mailadressen gescheiden door een komma</string>
+  <string name="autosend_enabled">Automatisch verzenden toestaan</string>
+  <string name="autosend_enabled_summary">Staat het verzenden van de bestanden naar verschillende doelen toe</string>
+  <string name="autosend_frequency_summary">Hoe vaak log-bestanden moeten verzonden worden</string>
+  <string name="autosend_frequency">Hoe vaak?</string>
+  <string name="autosend_sendzip_title">Zip-bestand verzenden</string>
+  <string name="autosend_sendzip_summary">Zipbestand verzenden indien van toepassing. Uitschakelen voor het verzenden van individuele bestanden, of als de zip-optie niet voor u werkt     </string>
+  <string name="autosend_targets_category">Doelinstellingen van automatisch verzenden</string>
+  <string name="menu_email_now">Nu automatisch verzenden</string>
+  <string name="autosend_sending">Automatisch verzenden</string>
+  <string name="summary_autosend">Automatisch verzenden:</string>
+  <string name="pref_autosend_title">Automatisch verzenden, e-mail en upload</string>
+  <string name="pref_autosend_summary">E-mail, delen en upload opties</string>
 </resources>

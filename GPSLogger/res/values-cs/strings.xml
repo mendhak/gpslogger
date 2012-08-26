@@ -17,7 +17,6 @@
   <string name="menu_annotate">Anotovat</string>
   <string name="menu_share">Sdílet</string>
   <string name="menu_exit">Konec</string>
-  <string name="menu_email_now">Poslat email nyní</string>
   <string name="txt_latitude">Zeměpisná šířka:</string>
   <string name="txt_longitude">Zeměpisná délka:</string>
   <string name="txt_altitude">Nadmořská výška:</string>
@@ -39,6 +38,7 @@
   <string name="sharing_location_only">Pouze umístění</string>
   <string name="sharing_pick_file">Vyberte soubor ke sdílení</string>
   <string name="sharing_mylocation">Moje umístění</string>
+  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Sdílet pomocí</string>
   <string name="foot"> stopa</string>
   <string name="feet"> stop</string>
@@ -94,13 +94,14 @@
   <string name="settings_enter_feet">Zadejte stopy (max 9999)</string>
   <string name="settings_distance_in_meters">Vzdálenost v metrech</string>
   <string name="settings_enter_meters">Zadejte metry (max 9999)</string>
-  <string name="settings_converting_title">Převádím…</string>
   <string name="settings_converting_description">Převod jednotek minimální vzdálenost. Hodnoty nad 9999 budou resetovány na 9999. Okno nastavení se nyní načte znovu.     </string>
   <string name="pref_logging_title">Podrobnosti záznamu</string>
   <string name="log_gpx_title">Zapisovat do GPX</string>
   <string name="log_gpx_summary">Vytvoří GPX soubor ve složce GPSLogger na SD kartě.</string>
   <string name="log_kml_title">Zapisovat do KML</string>
   <string name="log_kml_summary">Vytvoří KML soubor ve složce GPSLogger na SD kartě.</string>
+  <string name="log_plain_text_title">Zaznamenávat do prostého textu</string>
+  <string name="log_plain_text_summary">Vytvoří textový soubor ve složce GPSLogger na SD kartě.</string>
   <string name="satellite_time_title">Použít satelitní čas</string>
   <string name="satellite_time_summary">Použije se satelitní čas místo místního času telefonu, je to přesnější.</string>
   <string name="new_file_creation_title">Vytvoření nového souboru</string>
@@ -130,7 +131,6 @@
   <string name="autoemail_title">Nastavení automatického emailu</string>
   <string name="autoemail_summary">Automaticky odesílá soubor se záznamy na vámi zvolenou email adresu</string>
   <string name="please_wait">Čekejte prosím.</string>
-  <string name="autoemail_autosend">Povolit automatické odesílání</string>
   <string name="autoemail_autosend_summary">Povolí odesílání souboru se záznamy na email adresu dle vašeho výběru.
     </string>
   <string name="autoemail_frequency_format">Po %d hodinách</string>
@@ -162,7 +162,6 @@
   <string name="autoemail_test">Poslat testovací email s použitím uvedeného nastavení</string>
   <string name="autoemail_sendingtest">Posílám testovací email</string>
   <string name="autoemail_testresult_success">E-mail byl odeslán</string>
-
   <string name="autoemail_invalid_form">Neplatné hodnoty</string>
   <string name="autoemail_invalid_form_message">Ujistěte se, že všechna pole byla vyplněna správně     </string>
   <string name="fix_obtained">Oprava obdržena</string>
@@ -231,4 +230,16 @@
   <string name="gdocs_selectgoogleaccount">Vyberte účet Google</string>
   <string name="email_upload">Odeslat soubor e-mailem</string>
   <string name="autoemail_sendto_csv">E-mailové adresy oddělené čárkou</string>
+  <string name="autosend_enabled">Povolit automatické odesílání</string>
+  <string name="autosend_enabled_summary">Umožňuje odesílat soubory do různých umístění</string>
+  <string name="autosend_frequency_summary">Jak často se mají posílat soubory záznamů</string>
+  <string name="autosend_frequency">Jak často?</string>
+  <string name="autosend_sendzip_title">Odeslat soubor zip</string>
+  <string name="autosend_sendzip_summary">Odeslat soubor zip, pokud možno. Zakažte pokud chcete odesílate jednotlivé soubory, nebo pokud nefunguje možnost zip     </string>
+  <string name="autosend_targets_category">Cíle automatického odesílání</string>
+  <string name="menu_email_now">Automaticky odeslat nyní</string>
+  <string name="autosend_sending">Automatické odesílání</string>
+  <string name="summary_autosend">Automaticky odeslat:</string>
+  <string name="pref_autosend_title">Automaticky odeslat, poslat email a uploadnout</string>
+  <string name="pref_autosend_summary">Možnosti e-mailu, sdílení a uploadu</string>
 </resources>

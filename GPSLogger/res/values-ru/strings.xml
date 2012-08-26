@@ -16,7 +16,6 @@
   <string name="menu_annotate">Добавить примечания</string>
   <string name="menu_share">Опубликовать</string>
   <string name="menu_exit">Выход</string>
-  <string name="menu_email_now">Отправить электронной почтой</string>
   <string name="txt_latitude">Широта:</string>
   <string name="txt_longitude">Долгота:</string>
   <string name="txt_altitude">Высота:</string>
@@ -29,19 +28,15 @@
   <string name="gpslogger_still_running">GPSLogger запущен.</string>
   <string name="summary_loggingto">Запись в:</string>
   <string name="summary_loggingto_screen">только на экран</string>
-  <string name="summary_loggingto_both">GPX и KML</string>
   <string name="summary_freq_every">Частота:</string>
   <string name="summary_freq_max">максимум</string>
   <string name="summary_dist">Расстояние:</string>
   <string name="summary_dist_regardless">максимум</string>
   <string name="summary_current_filename">Файл записи:</string>
   <string name="summary_current_filename_format">%s (в папке GPSLogger)</string>
-  <string name="summary_autoemail">Письма:</string>
-  <string name="sharing">Опубликовать</string>
   <string name="sharing_location_only">Только координаты</string>
   <string name="sharing_pick_file">Выберите файл</string>
   <string name="sharing_mylocation">Мои координаты</string>
-  <string name="sharing_latlong_text" formatted="false">Шир: %s, Дол: %s</string>
   <string name="sharing_via">Опубликовать через</string>
   <string name="foot"> фут</string>
   <string name="feet"> футы</string>
@@ -49,7 +44,6 @@
   <string name="meters"> метры</string>
   <string name="error">Ошибка</string>
   <string name="error_connection">Ошибка соединения. Пожайлуйста, проверьте настройки телефона.</string>
-  <string name="sent">Отправлено</string>
   <string name="gpsprovider_unavailable">Нет доступного источника GPS данных. Пожалуйста, проверьте настройки.
     </string>
   <string name="started">Начато</string>
@@ -62,7 +56,6 @@
   <string name="miles_per_hour"> миль/ч</string>
   <string name="kilometers_per_hour"> км/ч</string>
   <string name="unknown_direction">неизвестно</string>
-  <string name="deleted">Удалено</string>
   <string name="sorry">Извините</string>
   <string name="success">Успешно</string>
   <string name="direction_roughly">Приблизительно %s</string>
@@ -98,7 +91,6 @@
   <string name="settings_enter_feet">Введите число футов (max 9999)</string>
   <string name="settings_distance_in_meters">Дистанция в метрах</string>
   <string name="settings_enter_meters">Введите число метров (max 9999)</string>
-  <string name="settings_converting_title">Конвертирую…</string>
   <string name="settings_converting_description">Конвертирую единицы минимальной дистанции. Значения больше 9999 будут
         сброшены до 9999. Экран настроек будет перезагружен.
     </string>
@@ -131,7 +123,6 @@
   <string name="distance_before_logging_summary">Используйте 0 для минимально возможной дистанции логирования. Больше
         - лучше для батареи.
     </string>
-  <string name="pref_extras_title">Дополнительно</string>
   <string name="useimperial_title">Имперская система мер</string>
   <string name="useimperial_summary">Использовать футы, мили, пинты.</string>
   <string name="show_notification_title">Показывать уведомления</string>
@@ -143,16 +134,9 @@
   <string name="autoemail_title">Настройки Email</string>
   <string name="autoemail_summary">Автоматически отправлять лог файл письмом на адрес по Вашему выбору</string>
   <string name="please_wait">Пожалуйста, подождите.</string>
-  <string name="autoemail_invalid_title">Неправильный email адрес.</string>
-  <string name="autoemail_invalid_summary">Пожалуйста, укажите верный email адрес.</string>
-  <string name="autoemail_autosend">Разрешить автооптравку</string>
   <string name="autoemail_autosend_summary">Разрешает автоматическую отправку лога письмом на выбранный email.
     </string>
-  <string name="autoemail_frequency">Как часто?</string>
-  <string name="autoemail_frequency_summary">Частота отправки лога на email в день</string>
-  <string name="autoemail_sendto">Email</string>
   <string name="autoemail_frequency_format">Через %d час(а)</string>
-  <string name="autoemail_sending">Отправлять email</string>
   <string name="autoemail_frequency_whenistop">Когда я останавливаю логирование</string>
   <string name="autoemail_frequency_8">Каждые 8 часов</string>
   <string name="autoemail_frequency_6">Каждые 6 часов</string>
@@ -179,9 +163,7 @@
   <string name="autoemail_smtp_testemail">Тестовый email</string>
   <string name="autoemail_test">Отправить тестовый email?</string>
   <string name="autoemail_sendingtest">Отправляю тестовый email</string>
-  <string name="autoemail_testresult_title">Результат</string>
   <string name="autoemail_testresult_success">Email отправлен</string>
-  <string name="autoemail_testresult_fail">Email не отправлен. Пожауйста, проверьте настройки соединения</string>
   <string name="autoemail_invalid_form">Неверные значения</string>
   <string name="autoemail_invalid_form_message">Пожалуйста, убедитесь, что все поля заполнены верно</string>
   <string name="fix_obtained">Координаты получены</string>
@@ -220,8 +202,6 @@
   <string name="pref_logging_summary">Период/дистанция логирования, создание файлов</string>
   <string name="pref_general_title">Основные настройки</string>
   <string name="pref_general_summary">Автозапуск и настройки отображения</string>
-  <string name="pref_emailupload_title">Email и публикация</string>
-  <string name="pref_emailupload_summary">Настройки email и публикации</string>
   <string name="emailprovider_google">Google Почта</string>
   <string name="emailprovider_yahoo">Yahoo! Почта</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
@@ -237,8 +217,6 @@
   <string name="dropbox_couldnotauthorize">Не могу получить авторизацию с Dropbox, пожалуйста попробуйте еще раз позже</string>
   <string name="dropbox_upload">Dropbox</string>
   <string name="menu_upload">Загрузить</string>
-  <string name="autoemail_sendzip_title">Отправить zip файл</string>
-  <string name="autoemail_sendzip_summary">Отключите если хотите отправлять отдельные GPX/KML файлы, или если zip опция не работает     </string>
   <string name="autoemail_from">Адрес отправителя</string>
   <string name="autoemail_from_summary">Некоторые поставщики услуг электронной почты требуют адреса отправителя. Используйте эту опцию только если вы в ней нуждаетесь.     </string>
   <string name="gdocs_upload">Google Docs</string>

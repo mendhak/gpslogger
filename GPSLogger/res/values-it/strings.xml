@@ -15,7 +15,6 @@
   <string name="menu_annotate">Annota</string>
   <string name="menu_share">Condividi</string>
   <string name="menu_exit">Esci</string>
-  <string name="menu_email_now">Invia Email</string>
   <string name="txt_latitude">Latitudine:</string>
   <string name="txt_longitude">Longitudine:</string>
   <string name="txt_altitude">Altitudine:</string>
@@ -34,11 +33,10 @@
   <string name="summary_dist_regardless">Massima</string>
   <string name="summary_current_filename">File:</string>
   <string name="summary_current_filename_format">%s (nella cartella GPSLogger)</string>
-  <string name="sharing">Condividi</string>
   <string name="sharing_location_only">Solo posizione</string>
   <string name="sharing_pick_file">Seleziona un file da condividere</string>
   <string name="sharing_mylocation">Mia posizione</string>
-  <string name="sharing_latlong_text" formatted="false">Lat: %s, Long: %s</string>
+  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Condividi tramite</string>
   <string name="foot">Piede</string>
   <string name="feet">Piedi</string>
@@ -46,7 +44,6 @@
   <string name="meters">Metri</string>
   <string name="error">Errore</string>
   <string name="error_connection">Errore di connessione. Per favore verifica le impostazioni di rete del cellulare.</string>
-  <string name="sent">Inviato</string>
   <string name="gpsprovider_unavailable">Il servizio GPS non è disponibile. Controlla le impostazioni di posizione (GPS o reti mobili)</string>
   <string name="started">Iniziato</string>
   <string name="providername_using"> (Utilizzo %s)</string>
@@ -58,7 +55,6 @@
   <string name="miles_per_hour"> mi/h</string>
   <string name="kilometers_per_hour"> km/h</string>
   <string name="unknown_direction">Sconosciuta</string>
-  <string name="deleted">Eliminato</string>
   <string name="sorry">Spiacente</string>
   <string name="success">Ok!</string>
   <string name="direction_roughly">All\'incirca %s</string>
@@ -94,13 +90,14 @@
   <string name="settings_enter_feet">Inserisci i piedi (max 9999)</string>
   <string name="settings_distance_in_meters">Distanza in metri</string>
   <string name="settings_enter_meters">Inserisci i metri (max 9999)</string>
-  <string name="settings_converting_title">Sto convertendo…</string>
   <string name="settings_converting_description">Conversione distanza minima. Valori superiori a 9999 saranno riportati a 9999. La schermata delle impostazioni sarà ricaricata.</string>
   <string name="pref_logging_title">Dettagli registrazione</string>
   <string name="log_gpx_title">Salva in GPX</string>
   <string name="log_gpx_summary">Crea un file GPX nella cartella GPSLogger su scheda SD.</string>
   <string name="log_kml_title">Salva in KML</string>
   <string name="log_kml_summary">Crea un file KML nella cartella GPSLogger su scheda SD.</string>
+  <string name="log_plain_text_title">Scrivi log in un file di testo</string>
+  <string name="log_plain_text_summary">Crea un file di testo nella cartella GPSLogger sulla scheda SD.</string>
   <string name="satellite_time_title">Utilizza l\'orario dei satelliti</string>
   <string name="satellite_time_summary">Utilizza l\'orario dei satelliti anziché quello del cellulare. Ha una maggiore accuratezza.</string>
   <string name="new_file_creation_title">Creazione di nuovi file</string>
@@ -116,7 +113,6 @@
   <string name="time_before_logging_hint">Inserisci i secondi (max 9999)</string>
   <string name="distance_before_logging_title">Distanza fra le registrazioni</string>
   <string name="distance_before_logging_summary">Distanza minima che intercorre tra le registrazioni. Utilizza 0 per la minima distanza possibile, con valori maggiori risparmi batteria.</string>
-  <string name="pref_extras_title">Extra</string>
   <string name="useimperial_title">Utilizza unità UK/USA</string>
   <string name="useimperial_summary">Usa piedi, miglia e pinte al posto delle unità metriche.</string>
   <string name="show_notification_title">Mostra notifiche</string>
@@ -128,11 +124,7 @@
   <string name="autoemail_title">Configurazione Email automatiche</string>
   <string name="autoemail_summary">Invia automaticamente i files ad un indirizzo Email a tua scelta</string>
   <string name="please_wait">Attendere prego.</string>
-  <string name="autoemail_invalid_title">Email non valida</string>
-  <string name="autoemail_invalid_summary">Per favore utilizzare un indirizzo Email valido.</string>
-  <string name="autoemail_autosend">Attiva Email automatiche</string>
   <string name="autoemail_autosend_summary">Abilita l\'invio dei file ad un indirizzo Email a tua scelta.</string>
-  <string name="autoemail_sendto">Un indirizzo Email</string>
   <string name="autoemail_frequency_format">Dopo %d ore</string>
   <string name="autoemail_target">Indirizzi Email di destinazione</string>
   <string name="autoemail_frequency_whenistop">Ad ogni registrazione</string>
@@ -161,9 +153,7 @@
   <string name="autoemail_smtp_testemail">Email di test</string>
   <string name="autoemail_test">Invia una Email di test utilizzando le impostazioni sopra indicate</string>
   <string name="autoemail_sendingtest">Invio della Email di test</string>
-  <string name="autoemail_testresult_title">Risultato</string>
   <string name="autoemail_testresult_success">Email inviata</string>
-  <string name="autoemail_testresult_fail">Email non inviata - per favore controlla le impostazioni di connessione e della posta elettronica</string>
   <string name="autoemail_invalid_form">Valori non validi</string>
   <string name="autoemail_invalid_form_message">Per favore verifica che tutti i campi siano compilati correttamente</string>
   <string name="fix_obtained">Posizione ottenuta</string>
@@ -229,4 +219,16 @@
   <string name="gdocs_selectgoogleaccount">Seleziona un Account Google</string>
   <string name="email_upload">Invia un file con Email</string>
   <string name="autoemail_sendto_csv">Indirizzi Email separati da una virgola</string>
+  <string name="autosend_enabled">Permetti invio automatico</string>
+  <string name="autosend_enabled_summary">Permetti invio dei files a diversi destinatari</string>
+  <string name="autosend_frequency_summary">Quanto frequentemente i file di logo devono essere inviati</string>
+  <string name="autosend_frequency">Quanto spesso ?</string>
+  <string name="autosend_sendzip_title">Invia file ZIP</string>
+  <string name="autosend_sendzip_summary">Invia file ZIP (se possibile). Disabilita per inviare files singoli</string>
+  <string name="autosend_targets_category">Destinazioni invio automatico</string>
+  <string name="menu_email_now">Invia automaticamente ora</string>
+  <string name="autosend_sending">Invio automatico</string>
+  <string name="summary_autosend">Invio automatico:</string>
+  <string name="pref_autosend_title">Invio automatico, email e upload</string>
+  <string name="pref_autosend_summary">Opzioni email, condivisione e upload</string>
 </resources>

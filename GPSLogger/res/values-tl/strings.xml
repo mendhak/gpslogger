@@ -15,7 +15,6 @@
   <string name="menu_annotate">Anotahin</string>
   <string name="menu_share">Ibahagi</string>
   <string name="menu_exit">Labas</string>
-  <string name="menu_email_now">Mag email ngayon</string>
   <string name="txt_latitude">Latitud:</string>
   <string name="txt_longitude">Longhitud:</string>
   <string name="txt_altitude">Altitud:</string>
@@ -28,19 +27,15 @@
   <string name="gpslogger_still_running">Ang GPSLogger ay nananatiling nakatakbo.</string>
   <string name="summary_loggingto">Tumatala sa:</string>
   <string name="summary_loggingto_screen">Sa screen lamang</string>
-  <string name="summary_loggingto_both">Sa kapwa GPX at KML</string>
   <string name="summary_freq_every">Prikwensya:</string>
   <string name="summary_freq_max">Pinakamalaki</string>
   <string name="summary_dist">Distansya:</string>
   <string name="summary_dist_regardless">Pinakamalaki</string>
   <string name="summary_current_filename">File:</string>
   <string name="summary_current_filename_format">%s (sa iyong GPSLogger na polder)</string>
-  <string name="summary_autoemail">Mga email:</string>
-  <string name="sharing">Pagbabahagi</string>
   <string name="sharing_location_only">Lokasyon lamang</string>
   <string name="sharing_pick_file">Piliin ang file na ibabahagi</string>
   <string name="sharing_mylocation">Aking lokasyon</string>
-  <string name="sharing_latlong_text" formatted="false">Lat: %s, Long: %s</string>
   <string name="sharing_via">Pagbabahagi sa pamamagitan ng</string>
   <string name="foot"> talampakan</string>
   <string name="feet"> talampakan</string>
@@ -48,14 +43,12 @@
   <string name="meters"> metro</string>
   <string name="error">Mali</string>
   <string name="error_connection">Hindi makakonekta. Suriin ng mabuti ang mga opsyon sa phone.</string>
-  <string name="sent">Nahatid</string>
   <string name="gpsprovider_unavailable">Walang nagtagpoang tagapagtustos ng GPS. Suriing mabuti ang iyong mga opsyon para sa lokasyon at tikayin na mayroong tagapagtustos ng GPS.</string>
   <string name="providername_using">    (Gumagamit ng %s)</string>
   <string name="providername_gps">Mga GPS satelayt</string>
   <string name="providername_celltower">Mga tore ng cellphone</string>
   <string name="not_applicable">n/a</string>
   <string name="unknown_direction">hindi batid</string>
-  <string name="deleted">Nabura</string>
   <string name="sorry">Pasensya</string>
   <string name="success">Yey!</string>
   <string name="direction_roughly">Halos %s</string>
@@ -89,7 +82,6 @@
   <string name="settings_enter_feet">Itala ang feet(hindi tataas sa 9999)</string>
   <string name="settings_distance_in_meters">Distansya sa metro</string>
   <string name="settings_enter_meters">Itala ang metro (hindi tataas sa 9999)</string>
-  <string name="settings_converting_title">Nagpapa-palit…</string>
   <string name="settings_converting_description">Nagpapa-palit ng pinakamaliit na halaga ng distansya. Mga halaga na sobra sa 9999 ay magiging 9999 lamang. Ang settings screen ay ihahantad na muli.</string>
   <string name="pref_logging_title">Mga detalye ng talaarawan ng GPS</string>
   <string name="log_gpx_title">Itala sa GPX</string>
@@ -122,9 +114,7 @@
   <string name="autoemail_smtp_testemail">Pagsubok na email</string>
   <string name="autoemail_test">Magpadala ang pagsubok na email gamit ang mga opsyon sa ibabaw nito</string>
   <string name="autoemail_sendingtest">Nagpapadala ang pagsubok na email</string>
-  <string name="autoemail_testresult_title">Resulta</string>
   <string name="autoemail_testresult_success">Ang email ay napadala</string>
-  <string name="autoemail_testresult_fail">Ang email ay hindi napadala - tiyakin na ang mga opsyon sa pagkonek at opsyon ng email</string>
   <string name="autoemail_invalid_form">Mga maling halaga</string>
   <string name="autoemail_invalid_form_message">Tiyakin na lahat ng patlang ay napunoan ng tamang halaga.</string>
   <string name="fix_obtained">Ang punto ay nakamit</string>
@@ -153,8 +143,6 @@
   <string name="pref_logging_summary">Oras, distansya, ng paglikha ng file</string>
   <string name="pref_general_title">Pangkalahatang opsyon</string>
   <string name="pref_general_summary">Mga pang-umpisa at pakitang opsyon</string>
-  <string name="pref_emailupload_title">Email at Upload</string>
-  <string name="pref_emailupload_summary">Mga email, pag-bahagi at upload na opsyon</string>
   <string name="emailprovider_google">Google Mail</string>
   <string name="emailprovider_manual">Manwal</string>
   <string name="btn_single_point">Magtala ng isang punto</string>
@@ -165,8 +153,6 @@
   <string name="dropbox_unauthorize_description">Ikaw ay awtorisado sa Dropbox. Ang mga files ay mai-upload sa \'Apps\\GPSLogger for Android\'. Maaring matanggal ang GPSLogger mula sa Dropbox ano mang oras     </string>
   <string name="dropbox_couldnotauthorize">Hindi maka-awtorisa sa Dropbox, Subukan muli pagkaraan ng ilang sandali</string>
   <string name="menu_upload">Upload</string>
-  <string name="autoemail_sendzip_title">Ipadala ang zip file</string>
-  <string name="autoemail_sendzip_summary">Huwag paganahin ang isat-isang pagpapadala ng GPX o KML na files kung ang opsyon na zip ay hindi gumagana para sa iyo     </string>
   <string name="autoemail_from">Pinagmulang address</string>
   <string name="autoemail_from_summary">Mayroong mga tagapagtustos ng email na kumakailangan ng pinagmulang address. Gamitin lamang kung kakailanganin     </string>
 </resources>
