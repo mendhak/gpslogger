@@ -98,7 +98,7 @@
   <string name="settings_enter_feet">Введите число футов (max 9999)</string>
   <string name="settings_distance_in_meters">Дистанция в метрах</string>
   <string name="settings_enter_meters">Введите число метров (max 9999)</string>
-  <string name="settings_converting_title">Конвертирую...</string>
+  <string name="settings_converting_title">Конвертирую…</string>
   <string name="settings_converting_description">Конвертирую единицы минимальной дистанции. Значения больше 9999 будут
         сброшены до 9999. Экран настроек будет перезагружен.
     </string>

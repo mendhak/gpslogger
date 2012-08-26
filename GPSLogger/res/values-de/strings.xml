@@ -28,19 +28,15 @@
     <string name="gpslogger_still_running">GPSLogger läuft noch.</string>
     <string name="summary_loggingto">Logge nach:</string>
     <string name="summary_loggingto_screen">Nur Bildschirm</string>
-    <string name="summary_loggingto_both">Beides GPX und KML</string>
     <string name="summary_freq_every">Frequenz:</string>
     <string name="summary_freq_max">Maximum</string>
     <string name="summary_dist">Entfernung:</string>
     <string name="summary_dist_regardless">Maximum</string>
     <string name="summary_current_filename">Datei:</string>
     <string name="summary_current_filename_format">%s (in deinem GPSLogger Verzeichnis)</string>
-    <string name="summary_autoemail">E-Mails:</string>
-    <string name="sharing">Teilen</string>
     <string name="sharing_location_only">Nur Orte</string>
     <string name="sharing_pick_file">Wähle eine Datei zum teilen aus</string>
     <string name="sharing_mylocation">Mein Ort</string>
-    <string name="sharing_latlong_text" formatted="false">Breitengrad: %s, Längengrad: %s</string>
     <string name="sharing_via">Teile über</string>
     <string name="foot"> Fuß</string>
     <string name="feet"> Fuß</string>
@@ -48,7 +44,6 @@
     <string name="meters"> Meter</string>
     <string name="error">Fehler</string>
     <string name="error_connection">Verbindungsfehler: Prüfe bitte die Telefoneinstellungen.</string>
-    <string name="sent">Gesendet</string>
     <string name="gpsprovider_unavailable">Kein GPS-Anbieter verfügbar. Bitte überprüfe die Ortseinstellungen und aktiviere einen Anbieter für die Orte.   </string>
     <string name="started">Gestartet</string>
     <string name="providername_using">    (Verwende %s)</string>
@@ -60,7 +55,6 @@
     <string name="miles_per_hour"> Meilen/h</string>
     <string name="kilometers_per_hour"> km/h</string>
     <string name="unknown_direction">unbekannt</string>
-    <string name="deleted">Gelöscht</string>
     <string name="sorry">Tut mir Leid</string>
     <string name="success">Yay!</string>
     <string name="direction_roughly">Etwa %s</string>
@@ -96,7 +90,7 @@
     <string name="settings_enter_feet">Eingabe in Fuß (max. 9999)</string>
     <string name="settings_distance_in_meters">Entfernung in Metern</string>
     <string name="settings_enter_meters">Eingabe in Metern (max. 9999)</string>
-    <string name="settings_converting_title">Umrechnung in ...</string>
+    <string name="settings_converting_title">Umrechnung in …</string>
     <string name="settings_converting_description">Rechne Mindestentfernung Einheiten um. Werte über 9999 werden auf 9999 gesetzt. Der Einstellungsschirm wird nun neu geladen.</string>
     <string name="pref_logging_title">Logging Details</string>
     <string name="log_gpx_title">Logge zu GPX</string>
@@ -118,7 +112,6 @@
     <string name="time_before_logging_hint">Eingabe in Sekunden (max. 9999)</string>
     <string name="distance_before_logging_title">Entfernung vor dem Loggen</string>
     <string name="distance_before_logging_summary">Entfernung bis der nächste Punkt geloggt wird. Verwende 0 um alle Punkte zu loggen.</string>
-    <string name="pref_extras_title">Extras</string>
     <string name="useimperial_title">﻿Imperiale Einheiten verwenden</string>
     <string name="useimperial_summary">Verwende Fuß, Meilen und Pints, keines von diesem neumodischen metrischen Zeug.</string>
     <string name="show_notification_title">Benachrichtigung anzeigen</string>
@@ -130,15 +123,9 @@
     <string name="autoemail_title">Automatisches E-Mail Setup</string>
     <string name="autoemail_summary">Automatisch die Log-Datei an eine frei ausgewählte Email-Adresse senden</string>
     <string name="please_wait">Bitte warten.</string>
-    <string name="autoemail_invalid_title">Ungültige E-mail-Adresse</string>
-    <string name="autoemail_invalid_summary">Bitte benutzen Sie eine gültige e-Mail-Adresse.</string>
     <string name="autoemail_autosend">Aktiviere automatisches Senden</string>
     <string name="autoemail_autosend_summary">Ermöglicht das Senden der Log-Datei an eine beliebige E-mail-Adresse.</string>
-    <string name="autoemail_frequency">Wie oft?</string>
-    <string name="autoemail_frequency_summary">Wie oft sollen Protokoll-Dateien pro Tag versendet werden</string>
-    <string name="autoemail_sendto">Eine e-Mail-Adresse</string>
     <string name="autoemail_frequency_format">Nach %d Stunden</string>
-    <string name="autoemail_sending">Automatischer e-Mail-Versand</string>
     <string name="autoemail_frequency_whenistop">Wenn ich die Stop Taste drücke</string>
     <string name="autoemail_frequency_8">Nach 8 Stunden</string>
     <string name="autoemail_frequency_6">Nach 6 Stunden</string>
@@ -165,9 +152,7 @@
     <string name="autoemail_smtp_testemail">Test E-mail</string>
     <string name="autoemail_test">Versende ein Test-Email mit den o.a. Einstellungen</string>
     <string name="autoemail_sendingtest">Versende ein Test-Email</string>
-    <string name="autoemail_testresult_title">Ergebnis</string>
     <string name="autoemail_testresult_success">E-Mail wurde gesendet</string>
-    <string name="autoemail_testresult_fail">E-Mail nicht gesendet - bitte überprüfe die Verbindungseinstellungen und die E-Mail-Einstellungen</string>
     <string name="autoemail_invalid_form">Ungültige Werte</string>
     <string name="autoemail_invalid_form_message">Bitte stelle sicher, dass alle Felder ordnungsgemäß ausgefüllt worden sind     </string>
     <string name="fix_obtained">Fix erhalten</string>
@@ -202,8 +187,6 @@
     <string name="pref_logging_summary">Zeit, Entfernung, Dateierstellung</string>
     <string name="pref_general_title">Allgemeine Einstellungen</string>
     <string name="pref_general_summary">Start und Anzeigeoptionen</string>
-    <string name="pref_emailupload_title">E-Mail- und Upload</string>
-    <string name="pref_emailupload_summary">E-Mail, Teilen- und Upload-Optionen</string>
     <string name="emailprovider_google">Google Mail</string>
     <string name="emailprovider_yahoo">Yahoo! Mail</string>
     <string name="emailprovider_msn">Windows Live Mail</string>
@@ -218,8 +201,6 @@
     <string name="dropbox_couldnotauthorize">Dropbox-Anmeldung fehlgeschlagen, bitte probiere es später noch einmal</string>
     <string name="dropbox_upload">Dropbox</string>
     <string name="menu_upload">Upload</string>
-    <string name="autoemail_sendzip_title">Zip-Datei senden</string>
-    <string name="autoemail_sendzip_summary">Sende keine einzelnen GPX/KML-Dateien, oder wenn die Zip-Option nicht funktioniert</string>
     <string name="autoemail_from">Absender-Adresse</string>
     <string name="autoemail_from_summary">Einige Email-Anbieter verlangen eine Absender-Adresse. Verwende das nur, wenn du das musst.</string>
 </resources>

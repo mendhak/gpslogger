@@ -194,7 +194,7 @@ class Kml22WriteHandler implements Runnable
                     initialXml.append("xmlns:kml=\"http://www.opengis.net/kml/2.2\" ");
                     initialXml.append("xmlns:atom=\"http://www.w3.org/2005/Atom\">");
                     initialXml.append("<Document>");
-                    initialXml.append("<name>" + dateTimeString + "</name>\n");
+                    initialXml.append("<name>").append(dateTimeString).append("</name>\n");
 
                     initialXml.append("</Document></kml>\n");
                     initialOutput.write(initialXml.toString().getBytes());

@@ -39,7 +39,7 @@
     <string name="sharing_pick_file">Wybierz plik do udostępnienia</string>
     <string name="sharing_mylocation">Moja lokalizacja</string>
     <string name="sharing_latlong_text" formatted="false">Szer: %s, Dł: %s</string>
-    <string name="sharing_via">Udostępnij przez...</string>
+    <string name="sharing_via">Udostępnij przez…</string>
     <string name="foot"> stopa</string>
     <string name="feet"> stóp</string>
     <string name="meter"> metr</string>
@@ -63,21 +63,21 @@
     <string name="success">Sukces!</string>
     <string name="direction_roughly">Mniej więcej %s</string>
     <string name="direction_north">Północ</string>
-    <string name="direction_northnortheast">Północ--Północny wschód</string>
+    <string name="direction_northnortheast">Północ—Północny wschód</string>
     <string name="direction_northeast">Północny wschód</string>
-    <string name="direction_eastnortheast">Wschód--Północny wschód</string>
+    <string name="direction_eastnortheast">Wschód—Północny wschód</string>
     <string name="direction_east">Wschód</string>
-    <string name="direction_eastsoutheast">Wschód--Południowy wschód</string>
+    <string name="direction_eastsoutheast">Wschód—Południowy wschód</string>
     <string name="direction_southeast">Południowy wschód</string>
-    <string name="direction_southsoutheast">Południe--Południowy wschód</string>
+    <string name="direction_southsoutheast">Południe—Południowy wschód</string>
     <string name="direction_south">Południe</string>
-    <string name="direction_southsouthwest">Południe--Południowy zachód</string>
+    <string name="direction_southsouthwest">Południe—Południowy zachód</string>
     <string name="direction_southwest">Południowy zachód</string>
-    <string name="direction_westsouthwest">Zachód--Południowy zachód</string>
+    <string name="direction_westsouthwest">Zachód—Południowy zachód</string>
     <string name="direction_west">Zachód</string>
-    <string name="direction_westnorthwest">Zachód--Północny zachód</string>
+    <string name="direction_westnorthwest">Zachód—Północny zachód</string>
     <string name="direction_northwest">Północny zachód</string>
-    <string name="direction_northnorthwest">Północ--Północny zachód</string>
+    <string name="direction_northnorthwest">Północ—Północny zachód</string>
     <string name="time_onesecond">1 sekunda</string>
     <string name="time_halfminute">½ minut</string>
     <string name="time_oneminute">1 minuta</string>
@@ -92,7 +92,7 @@
     <string name="settings_enter_feet">Wprowadź stopy (maks. 9999)</string>
     <string name="settings_distance_in_meters">Odległość w metrach</string>
     <string name="settings_enter_meters">Wprowadź metry (maks. 9999)</string>
-    <string name="settings_converting_title">Konwertowanie...</string>
+    <string name="settings_converting_title">Konwertowanie…</string>
     <string name="settings_converting_description">Trwa konwersja jednostek odległości. Wartości powyżej 9999 są resetowane do 9999. Ekran ustawień zostanie przeładowany.</string>
     <string name="pref_logging_title">Szczegóły logowania</string>
     <string name="log_gpx_title">Loguj do GPX</string>
@@ -192,8 +192,6 @@
     <string name="pref_logging_summary">Czas, odległość oraz tworzenie plików</string>
     <string name="pref_general_title">Ustawienia ogólne</string>
     <string name="pref_general_summary">Ustawienia uruchamiania i wyświetlania</string>
-    <string name="pref_emailupload_title">E-mail i przesyłanie</string>
-    <string name="pref_emailupload_summary">E-mail, udostępnianie oraz opcje przesyłania</string>
     <string name="emailprovider_google">Poczta Google</string>
     <string name="emailprovider_yahoo">Poczta Yahoo!</string>
     <string name="emailprovider_msn">Poczta Windows Live</string>
@@ -208,8 +206,6 @@
     </string>
     <string name="dropbox_couldnotauthorize">Nie można uzyskać autoryzacji Dropboxa, proszę spróbować ponownie.</string>
     <string name="menu_upload">Wysyłanie</string>
-    <string name="autoemail_sendzip_title">Wyślij plik zip.</string>
-    <string name="autoemail_sendzip_summary">Wyłącz aby przesyłać pojedyncze pliki GPX/KML lub jeżeli wysyłanie zip-ów nie działa poprawnie.</string>
     <string name="autoemail_from">Adres nadawcy</string>
     <string name="autoemail_from_summary">Niektórzy dostawcy poczty wymagają adresu nadawcy. Należy używać tej opcji tylko, gdy jest to wymagane.</string>
     <string name="gdocs_upload">Dokumenty Google</string>

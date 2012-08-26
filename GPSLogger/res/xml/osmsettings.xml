@@ -4,7 +4,7 @@
   
  
 	 <Preference android:key="osm_resetauth" android:summary="@string/osm_resetauth_summary" 
-	 	android:title="@string/osm_resetauth"></Preference>
+	 	android:title="@string/osm_resetauth"/>
  	
  	
 	 <ListPreference android:key="osm_visibility"

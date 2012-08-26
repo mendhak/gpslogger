@@ -94,7 +94,7 @@
   <string name="settings_enter_feet">输入英尺数(最大 9999)</string>
   <string name="settings_distance_in_meters">以米算的距离</string>
   <string name="settings_enter_meters">输入米数(最大 9999)</string>
-  <string name="settings_converting_title">转换中...</string>
+  <string name="settings_converting_title">转换中…</string>
   <string name="settings_converting_description">正在转换最小距离单位。值大于9999的将重置为9999。设置界面将会重载。</string>
   <string name="pref_logging_title">记录细节</string>
   <string name="log_gpx_title">记录到 GPX 文件</string>

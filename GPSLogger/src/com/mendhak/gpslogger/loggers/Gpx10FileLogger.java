@@ -182,30 +182,33 @@ class Gpx10AnnotateHandler implements Runnable
 
         StringBuilder waypoint = new StringBuilder();
 
-        waypoint.append("\n<wpt lat=\"" + String.valueOf(loc.getLatitude()) + "\" lon=\""
-                + String.valueOf(loc.getLongitude()) + "\">");
+        waypoint.append("\n<wpt lat=\"")
+                .append(String.valueOf(loc.getLatitude()))
+                .append("\" lon=\"")
+                .append(String.valueOf(loc.getLongitude()))
+                .append("\">");
 
         if (loc.hasAltitude())
         {
-            waypoint.append("<ele>" + String.valueOf(loc.getAltitude()) + "</ele>");
+            waypoint.append("<ele>").append(String.valueOf(loc.getAltitude())).append("</ele>");
         }
 
         if (loc.hasBearing())
         {
-            waypoint.append("<course>" + String.valueOf(loc.getBearing()) + "</course>");
+            waypoint.append("<course>").append(String.valueOf(loc.getBearing())).append("</course>");
         }
 
         if (loc.hasSpeed())
         {
-            waypoint.append("<speed>" + String.valueOf(loc.getSpeed()) + "</speed>");
+            waypoint.append("<speed>").append(String.valueOf(loc.getSpeed())).append("</speed>");
         }
 
-        waypoint.append("<name>" + description + "</name>");
+        waypoint.append("<name>").append(description).append("</name>");
 
-        waypoint.append("<src>" + loc.getProvider() + "</src>");
+        waypoint.append("<src>").append(loc.getProvider()).append("</src>");
 
 
-        waypoint.append("<time>" + dateTimeString + "</time>");
+        waypoint.append("<time>").append(dateTimeString).append("</time>");
 
         waypoint.append("</wpt>\n");
 
@@ -254,7 +257,7 @@ class Gpx10WriteHandler implements Runnable
                     initialXml.append("xmlns=\"http://www.topografix.com/GPX/1/0\" ");
                     initialXml.append("xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 ");
                     initialXml.append("http://www.topografix.com/GPX/1/0/gpx.xsd\">");
-                    initialXml.append("<time>" + dateTimeString + "</time>" + "<bounds />" + "<trk></trk></gpx>");
+                    initialXml.append("<time>").append(dateTimeString).append("</time>").append("<bounds />").append("<trk></trk></gpx>");
                     initialOutput.write(initialXml.toString().getBytes());
                     initialOutput.flush();
                     initialOutput.close();
@@ -293,38 +296,41 @@ class Gpx10WriteHandler implements Runnable
             track.append("<trkseg>");
         }
 
-        track.append("<trkpt lat=\"" + String.valueOf(loc.getLatitude()) + "\" lon=\""
-                + String.valueOf(loc.getLongitude()) + "\">");
+        track.append("<trkpt lat=\"")
+                .append(String.valueOf(loc.getLatitude()))
+                .append("\" lon=\"")
+                .append(String.valueOf(loc.getLongitude()))
+                .append("\">");
 
         if (loc.hasAltitude())
         {
-            track.append("<ele>" + String.valueOf(loc.getAltitude()) + "</ele>");
+            track.append("<ele>").append(String.valueOf(loc.getAltitude())).append("</ele>");
         }
 
         if (loc.hasBearing())
         {
-            track.append("<course>" + String.valueOf(loc.getBearing()) + "</course>");
+            track.append("<course>").append(String.valueOf(loc.getBearing())).append("</course>");
         }
 
         if (loc.hasSpeed())
         {
-            track.append("<speed>" + String.valueOf(loc.getSpeed()) + "</speed>");
+            track.append("<speed>").append(String.valueOf(loc.getSpeed())).append("</speed>");
         }
 
         if (loc.hasAccuracy() && loc.getAccuracy() > 0)
         {
             // Accuracy divided by 5 or 6 for approximate HDOP
-            track.append("<hdop>" + String.valueOf(loc.getAccuracy() / 5) + "</hdop>");
+            track.append("<hdop>").append(String.valueOf(loc.getAccuracy() / 5)).append("</hdop>");
         }
 
-        track.append("<src>" + loc.getProvider() + "</src>");
+        track.append("<src>").append(loc.getProvider()).append("</src>");
 
         if (satelliteCount > 0)
         {
-            track.append("<sat>" + String.valueOf(satelliteCount) + "</sat>");
+            track.append("<sat>").append(String.valueOf(satelliteCount)).append("</sat>");
         }
 
-        track.append("<time>" + dateTimeString + "</time>");
+        track.append("<time>").append(dateTimeString).append("</time>");
 
         track.append("</trkpt>\n");
 

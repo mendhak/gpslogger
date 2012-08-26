@@ -18,7 +18,6 @@
 package com.mendhak.gpslogger.senders.opengts;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.*;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;

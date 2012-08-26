@@ -4,7 +4,7 @@
 	android:layout_width="wrap_content" android:layout_height="wrap_content"
 	android:orientation="vertical">
 	<ListView android:id="@+id/listViewFiles" android:divider="#ffffff"
-		android:dividerHeight="1px" android:footerDividersEnabled="true"
+		android:dividerHeight="1dp" android:footerDividersEnabled="true"
 		android:headerDividersEnabled="true" android:gravity="center"
 		android:choiceMode="singleChoice" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />

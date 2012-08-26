@@ -90,7 +90,7 @@
   <string name="settings_enter_feet">輸入英尺數(最大 9999)</string>
   <string name="settings_distance_in_meters">以米算的距離</string>
   <string name="settings_enter_meters">輸入米數(最大 9999)</string>
-  <string name="settings_converting_title">轉換中...</string>
+  <string name="settings_converting_title">轉換中…</string>
   <string name="settings_converting_description">正在轉換最小距離單位。值大於9999的將重設為9999。設定介面將會重載。</string>
   <string name="pref_logging_title">記錄細節</string>
   <string name="log_gpx_title">記錄到 GPX 檔案</string>

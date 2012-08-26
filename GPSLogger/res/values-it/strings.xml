@@ -28,14 +28,12 @@
   <string name="gpslogger_still_running">GPSLogger è in esecuzione.</string>
   <string name="summary_loggingto">Salvataggio su:</string>
   <string name="summary_loggingto_screen">sola visualizzazione</string>
-  <string name="summary_loggingto_both">GPX e KML</string>
   <string name="summary_freq_every">Frequenza:</string>
   <string name="summary_freq_max">Massima</string>
   <string name="summary_dist">Distanza:</string>
   <string name="summary_dist_regardless">Massima</string>
   <string name="summary_current_filename">File:</string>
   <string name="summary_current_filename_format">%s (nella cartella GPSLogger)</string>
-  <string name="summary_autoemail">Email:</string>
   <string name="sharing">Condividi</string>
   <string name="sharing_location_only">Solo posizione</string>
   <string name="sharing_pick_file">Seleziona un file da condividere</string>
@@ -96,7 +94,7 @@
   <string name="settings_enter_feet">Inserisci i piedi (max 9999)</string>
   <string name="settings_distance_in_meters">Distanza in metri</string>
   <string name="settings_enter_meters">Inserisci i metri (max 9999)</string>
-  <string name="settings_converting_title">Sto convertendo...</string>
+  <string name="settings_converting_title">Sto convertendo…</string>
   <string name="settings_converting_description">Conversione distanza minima. Valori superiori a 9999 saranno riportati a 9999. La schermata delle impostazioni sarà ricaricata.</string>
   <string name="pref_logging_title">Dettagli registrazione</string>
   <string name="log_gpx_title">Salva in GPX</string>
@@ -134,12 +132,9 @@
   <string name="autoemail_invalid_summary">Per favore utilizzare un indirizzo Email valido.</string>
   <string name="autoemail_autosend">Attiva Email automatiche</string>
   <string name="autoemail_autosend_summary">Abilita l\'invio dei file ad un indirizzo Email a tua scelta.</string>
-  <string name="autoemail_frequency">Quanto spesso?</string>
-  <string name="autoemail_frequency_summary">Quante volte al giorno devono essere inviati i file</string>
   <string name="autoemail_sendto">Un indirizzo Email</string>
   <string name="autoemail_frequency_format">Dopo %d ore</string>
   <string name="autoemail_target">Indirizzi Email di destinazione</string>
-  <string name="autoemail_sending">Invio automatico Email</string>
   <string name="autoemail_frequency_whenistop">Ad ogni registrazione</string>
   <string name="autoemail_frequency_8">Dopo 8 ore</string>
   <string name="autoemail_frequency_6">Dopo 6 ore</string>
@@ -203,8 +198,6 @@
   <string name="pref_logging_summary">Tempo, distanza, creazione file</string>
   <string name="pref_general_title">Opzioni generiche</string>
   <string name="pref_general_summary">Opzioni avvio e display</string>
-  <string name="pref_emailupload_title">Email e Caricamento</string>
-  <string name="pref_emailupload_summary">Opzioni Email, condivisione e caricamento</string>
   <string name="emailprovider_google">Google Mail</string>
   <string name="emailprovider_yahoo">Yahoo! Mail</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
@@ -219,8 +212,6 @@
   <string name="dropbox_couldnotauthorize">Non riesco ad autorizzarti a DropBox, riprova più tardi.</string>
   <string name="dropbox_upload">Dropbox</string>
   <string name="menu_upload">Caricamento</string>
-  <string name="autoemail_sendzip_title">Invia file ZIP</string>
-  <string name="autoemail_sendzip_summary">Togli la spunta se inviare file compressi con ZIP non ti va bene</string>
   <string name="autoemail_from">Da: (mittente)</string>
   <string name="autoemail_from_summary">Alcuni provider di posta richiedono nella Email il mittente (Da:), usalo solo se richiesto.</string>
   <string name="gdocs_upload">Google Docs</string>

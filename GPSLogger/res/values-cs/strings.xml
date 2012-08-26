@@ -30,19 +30,15 @@
   <string name="gpslogger_still_running">GPSLogger stále běží.</string>
   <string name="summary_loggingto">Zapisuji do:</string>
   <string name="summary_loggingto_screen">pouze displej</string>
-  <string name="summary_loggingto_both">GPX i KML</string>
   <string name="summary_freq_every">Frekvence:</string>
   <string name="summary_freq_max">maximum</string>
   <string name="summary_dist">Vzdálenost:</string>
   <string name="summary_dist_regardless">maximum</string>
   <string name="summary_current_filename">Soubor:</string>
   <string name="summary_current_filename_format">%s (ve složce GPSLogger)</string>
-  <string name="summary_autoemail">Emailů:</string>
-  <string name="sharing">Sdílení</string>
   <string name="sharing_location_only">Pouze umístění</string>
   <string name="sharing_pick_file">Vyberte soubor ke sdílení</string>
   <string name="sharing_mylocation">Moje umístění</string>
-  <string name="sharing_latlong_text" formatted="false">Lat: %s, Long: %s</string>
   <string name="sharing_via">Sdílet pomocí</string>
   <string name="foot"> stopa</string>
   <string name="feet"> stop</string>
@@ -50,7 +46,6 @@
   <string name="meters"> metrů</string>
   <string name="error">Chyba</string>
   <string name="error_connection">Chyba připojení. Zkontrolujte prosím nastavení telefonu.</string>
-  <string name="sent">Odesláno</string>
   <string name="gpsprovider_unavailable">Není k dispozici poskytovatel GPS. Zkontrolujte prosím nastavení umístění a povolte
         poskytovatele umístění.
     </string>
@@ -64,7 +59,6 @@
   <string name="miles_per_hour"> mi/h</string>
   <string name="kilometers_per_hour"> km/h</string>
   <string name="unknown_direction">neznámý</string>
-  <string name="deleted">Smazáno</string>
   <string name="sorry">Pardon</string>
   <string name="success">Juchů!</string>
   <string name="direction_roughly">Zhruba %s</string>
@@ -100,7 +94,7 @@
   <string name="settings_enter_feet">Zadejte stopy (max 9999)</string>
   <string name="settings_distance_in_meters">Vzdálenost v metrech</string>
   <string name="settings_enter_meters">Zadejte metry (max 9999)</string>
-  <string name="settings_converting_title">Převádím...</string>
+  <string name="settings_converting_title">Převádím…</string>
   <string name="settings_converting_description">Převod jednotek minimální vzdálenost. Hodnoty nad 9999 budou resetovány na 9999. Okno nastavení se nyní načte znovu.     </string>
   <string name="pref_logging_title">Podrobnosti záznamu</string>
   <string name="log_gpx_title">Zapisovat do GPX</string>
@@ -125,7 +119,6 @@
   <string name="time_before_logging_hint">Zadejte sekundy (maximum 9999)</string>
   <string name="distance_before_logging_title">Vzdálenost před záznamem</string>
   <string name="distance_before_logging_summary">Jak daleko se má jít, než se zaznamená další bod. Použijte 0 pro záznam všech bodů.     </string>
-  <string name="pref_extras_title">Doplňkové funkce</string>
   <string name="useimperial_title">Použít imperiální jednotky</string>
   <string name="useimperial_summary">Použít stopy, míle a pinty, nic z těch moderních metrických jednotek.</string>
   <string name="show_notification_title">Zobrazit oznámení</string>
@@ -137,17 +130,11 @@
   <string name="autoemail_title">Nastavení automatického emailu</string>
   <string name="autoemail_summary">Automaticky odesílá soubor se záznamy na vámi zvolenou email adresu</string>
   <string name="please_wait">Čekejte prosím.</string>
-  <string name="autoemail_invalid_title">Neplatný e-mail</string>
-  <string name="autoemail_invalid_summary">Použijte prosím platnou e-mailovou adresu.</string>
   <string name="autoemail_autosend">Povolit automatické odesílání</string>
   <string name="autoemail_autosend_summary">Povolí odesílání souboru se záznamy na email adresu dle vašeho výběru.
     </string>
-  <string name="autoemail_frequency">Jak často?</string>
-  <string name="autoemail_frequency_summary">Jak často za den by měly soubory záznamů odesílat e-mailem</string>
-  <string name="autoemail_sendto">E-mailová adresa</string>
   <string name="autoemail_frequency_format">Po %d hodinách</string>
   <string name="autoemail_target">Cílové emailové adresy</string>
-  <string name="autoemail_sending">Automatické odesílání e-mailů</string>
   <string name="autoemail_frequency_whenistop">Když stisknu stop</string>
   <string name="autoemail_frequency_8">Po 8 hodinách</string>
   <string name="autoemail_frequency_6">Po 6 hodinách</string>
@@ -174,10 +161,8 @@
   <string name="autoemail_smtp_testemail">Testovací email</string>
   <string name="autoemail_test">Poslat testovací email s použitím uvedeného nastavení</string>
   <string name="autoemail_sendingtest">Posílám testovací email</string>
-  <string name="autoemail_testresult_title">Výsledek</string>
   <string name="autoemail_testresult_success">E-mail byl odeslán</string>
-  <string name="autoemail_testresult_fail">E-mail nebyl odeslán - zkontrolujte prosím nastavení připojení a nastavení e-mailu
-    </string>
+
   <string name="autoemail_invalid_form">Neplatné hodnoty</string>
   <string name="autoemail_invalid_form_message">Ujistěte se, že všechna pole byla vyplněna správně     </string>
   <string name="fix_obtained">Oprava obdržena</string>
@@ -213,8 +198,6 @@
   <string name="pref_logging_summary">Čas, vzdálenost, vytvoření souboru</string>
   <string name="pref_general_title">Obecné možnosti</string>
   <string name="pref_general_summary">Možnosti spouštění a zobrazení</string>
-  <string name="pref_emailupload_title">E-mailů a upload</string>
-  <string name="pref_emailupload_summary">Možnosti e-mailu, sdílení a uploadu</string>
   <string name="emailprovider_google">Google Mail</string>
   <string name="emailprovider_yahoo">Yahoo! Mail</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
@@ -231,8 +214,6 @@
   <string name="dropbox_couldnotauthorize">Nelze autorizovat Dropbox, prosím zkuste znovu později</string>
   <string name="dropbox_upload">Dropbox</string>
   <string name="menu_upload">Upload</string>
-  <string name="autoemail_sendzip_title">Odeslat soubor zip</string>
-  <string name="autoemail_sendzip_summary">Zakázat odesílání jednotlivých souborů GPX/KML, nebo pokud u vás nefunguje ZIP varianta     </string>
   <string name="autoemail_from">Z adresy</string>
   <string name="autoemail_from_summary">Někteří poskytovatelé e-mailu vyžadují adresu odesílatele. Použijte pouze tehdy, pokud ho budete potřebovat.     </string>
   <string name="gdocs_upload">Google Docs</string>

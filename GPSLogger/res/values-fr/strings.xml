@@ -28,19 +28,15 @@
   <string name="gpslogger_still_running">GPSLogger est toujours en exécution.</string>
   <string name="summary_loggingto">Enregistrement sur:</string>
   <string name="summary_loggingto_screen">Écran seulement</string>
-  <string name="summary_loggingto_both">GPX et KML</string>
   <string name="summary_freq_every">Fréquence:</string>
   <string name="summary_freq_max">Maximum</string>
   <string name="summary_dist">Distance :</string>
   <string name="summary_dist_regardless">Maximum</string>
   <string name="summary_current_filename">Fichier:</string>
   <string name="summary_current_filename_format">%s (dans votre dossier GPSLogger)</string>
-  <string name="summary_autoemail">Courriels :</string>
-  <string name="sharing">Partage</string>
   <string name="sharing_location_only">Location seulement</string>
   <string name="sharing_pick_file">Choisissez un fichier à partager</string>
   <string name="sharing_mylocation">Ma location</string>
-  <string name="sharing_latlong_text" formatted="false">Lat: %s, Long : %s</string>
   <string name="sharing_via">Partager par</string>
   <string name="foot">Pied</string>
   <string name="feet">Pieds</string>
@@ -48,7 +44,6 @@
   <string name="meters">Mètres</string>
   <string name="error">Erreur</string>
   <string name="error_connection">Erreur de connexion. S\'il vous plaît vérifier les paramètres du cellulaire.</string>
-  <string name="sent">Envoyé</string>
   <string name="gpsprovider_unavailable">Pas de service GPS disponible.</string>
   <string name="started">Débuté</string>
   <string name="providername_using"> (Utilisation %s)</string>
@@ -60,7 +55,6 @@
   <string name="miles_per_hour"> mi/h</string>
   <string name="kilometers_per_hour"> km/h</string>
   <string name="unknown_direction">Inconnu</string>
-  <string name="deleted">Supprimé</string>
   <string name="sorry">Désolé</string>
   <string name="success">Yay !</string>
   <string name="direction_roughly">Environ %s</string>
@@ -134,11 +128,8 @@
   <string name="autoemail_invalid_summary">S\'il vous plaît utiliser une adresse email valide.</string>
   <string name="autoemail_autosend">Activer  envoie automatique</string>
   <string name="autoemail_autosend_summary">Permet d\'envoyer le fichier enregistrements à une adresse email de votre choix.</string>
-  <string name="autoemail_frequency">Combien de fois?</string>
-  <string name="autoemail_frequency_summary">À quelle fréquence les fichiers enregistrements doivent être envoyés par jour</string>
   <string name="autoemail_sendto">Une adresse email</string>
   <string name="autoemail_frequency_format">Après %d heures</string>
-  <string name="autoemail_sending">Auto envoi du email</string>
   <string name="autoemail_frequency_whenistop">Lorsque j\'appuie sur arrêt</string>
   <string name="autoemail_frequency_8">Après 8 heures</string>
   <string name="autoemail_frequency_6">Après 6 heures</string>

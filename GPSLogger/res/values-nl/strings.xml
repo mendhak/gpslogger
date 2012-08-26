@@ -28,14 +28,12 @@
   <string name="gpslogger_still_running">﻿GPSLogger is nog steeds actief.</string>
   <string name="summary_loggingto">Loggen naar:</string>
   <string name="summary_loggingto_screen">Alleen scherm</string>
-  <string name="summary_loggingto_both">﻿Zowel GPX en KML</string>
   <string name="summary_freq_every">Frequentie:</string>
   <string name="summary_freq_max">maximum</string>
   <string name="summary_dist">Afstand:</string>
   <string name="summary_dist_regardless">maximum</string>
   <string name="summary_current_filename">Bestand:</string>
   <string name="summary_current_filename_format">﻿%s (in uw GPSLogger map)</string>
-  <string name="summary_autoemail">﻿E-mails:</string>
   <string name="sharing">﻿Delen</string>
   <string name="sharing_location_only">Alleen locatie</string>
   <string name="sharing_pick_file">﻿Kies een bestand om te delen</string>
@@ -96,7 +94,7 @@
   <string name="settings_enter_feet">Voer voeten in(max 9999)</string>
   <string name="settings_distance_in_meters">Afstand in meter</string>
   <string name="settings_enter_meters">Voer meter in(max 9999)</string>
-  <string name="settings_converting_title">Converteren...</string>
+  <string name="settings_converting_title">Converteren…</string>
   <string name="settings_converting_description">Minimale afstand voor converteren van eenheden. Waarden boven 9999 worden teruggezet op 9999. Het instellingen scherm zal nu herladen.     </string>
   <string name="pref_logging_title">Logging details</string>
   <string name="log_gpx_title">Loggen naar GPX</string>
@@ -134,12 +132,9 @@
   <string name="autoemail_invalid_summary">Gebruik een geldig e-mailadres.</string>
   <string name="autoemail_autosend">Schakel automatische sturen in</string>
   <string name="autoemail_autosend_summary">Hiermee kunt het logbestand verzenden naar een e-mailadres van uw keuze.     </string>
-  <string name="autoemail_frequency">Hoe vaak?</string>
-  <string name="autoemail_frequency_summary">Hoe vaak moeten de logbestanden per dag verstuurd worden</string>
   <string name="autoemail_sendto">E-mailadres</string>
   <string name="autoemail_frequency_format">Na %d uur</string>
   <string name="autoemail_target">Doel e-mailadressen</string>
-  <string name="autoemail_sending">Automatisch versturen van e-mails</string>
   <string name="autoemail_frequency_whenistop">Wanneer ik op stop druk</string>
   <string name="autoemail_frequency_8">Na 8 uur</string>
   <string name="autoemail_frequency_6">Na 6 uur</string>
@@ -203,8 +198,6 @@
   <string name="pref_logging_summary">Tijd, afstand, bestanden maken</string>
   <string name="pref_general_title">Algemene opties</string>
   <string name="pref_general_summary">Opstart- en weergaveopties</string>
-  <string name="pref_emailupload_title">E-mail en upload</string>
-  <string name="pref_emailupload_summary">E-mail, delen en upload opties</string>
   <string name="emailprovider_google">Google Mail</string>
   <string name="emailprovider_yahoo">Yahoo! Mail</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
@@ -219,8 +212,6 @@
   <string name="dropbox_couldnotauthorize">Kon niet autoriseren met Dropbox, gelieve later opnieuw te proberen</string>
   <string name="dropbox_upload">Dropbox</string>
   <string name="menu_upload">Uploaden</string>
-  <string name="autoemail_sendzip_title">Zip-bestand verzenden</string>
-  <string name="autoemail_sendzip_summary">Uitschakelen om individuele GPX/KML-bestanden te verzenden, of als de zip-optie niet werkt voor u     </string>
   <string name="autoemail_from">Verzendadres</string>
   <string name="autoemail_from_summary">Sommige e-mailproviders vereisen een verzendadres. Gebruik dit alleen als je het nodig hebt.     </string>
   <string name="gdocs_upload">Google Docs</string>

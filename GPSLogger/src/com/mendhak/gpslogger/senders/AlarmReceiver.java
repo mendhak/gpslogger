@@ -40,7 +40,7 @@ public class AlarmReceiver extends BroadcastReceiver
         }
         catch (Exception ex)
         {
-
+             Utilities.LogError("AlarmReceiver.onReceive", ex);
         }
 
 

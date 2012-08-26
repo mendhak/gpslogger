@@ -42,7 +42,7 @@ public class GpxReader
 
     public static List<Location> getPoints(File gpxFile) throws Exception
     {
-        List<Location> points = null;
+        List<Location> points;
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
