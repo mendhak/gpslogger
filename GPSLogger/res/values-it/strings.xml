@@ -160,8 +160,7 @@
   <string name="started_waiting">GPS avviato, in attesa della posizione</string>
   <string name="gps_stopped">GPS fermato</string>
   <string name="stopped">Fermato</string>
-  <string name="language">Lingua</string>
-  <string name="language_summary">Sarà necessario riavviare l\'applicazione</string>
+
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Imposta etichette, descrizione, visibilità ed autorizzazioni per caricare le tracce GPS</string>
   <string name="osm_preferences_title">Impostazioni OpenStreetMap</string>

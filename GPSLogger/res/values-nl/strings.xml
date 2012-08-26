@@ -160,8 +160,7 @@
   <string name="started_waiting">GPS is opgestart, wacht op een fix</string>
   <string name="gps_stopped">GPS gepauzeerd</string>
   <string name="stopped">Gestopt</string>
-  <string name="language">Taal</string>
-  <string name="language_summary">U moet de toepassing opnieuw starten</string>
+
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Tags, beschrijving, zichtbaarheid en autorisatie voor het uploaden van GPS tracks instellen     </string>
   <string name="osm_preferences_title">OpenStreetMap voorkeuren</string>

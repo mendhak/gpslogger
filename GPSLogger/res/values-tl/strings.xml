@@ -121,8 +121,7 @@
   <string name="started_waiting">Ang GPS ay nasimulan, naghihintay makakuha ng punto</string>
   <string name="gps_stopped">Ang GPS ay pinaghinga</string>
   <string name="stopped">Natigil</string>
-  <string name="language">Linguahe</string>
-  <string name="language_summary">Kakailanganing pag-uumpisahang muli ang app</string>
+
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Magtakda ng mga pananda, deskripsyon, bisibilidad at awtorisasyon para sa pag-upload ng mga bakas ng GPS     </string>
   <string name="osm_lbl_authorize">I-awtorisa ang app na ito</string>

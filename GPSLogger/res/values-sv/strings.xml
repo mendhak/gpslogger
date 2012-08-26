@@ -160,8 +160,7 @@
     <string name="started_waiting">GPS startad, väntar på fixering</string>
     <string name="gps_stopped">GPS pausad</string>
     <string name="stopped">Stoppad</string>
-    <string name="language">Språk</string>
-    <string name="language_summary">Programmet kommer behöva startas om</string>
+
     <string name="osm_setup_title">OpenStreetMap</string>
     <string name="osm_setup_summary">Ställ in taggar, beskrivning och synlighet för GPS-spår som skickas.</string>
     <string name="osm_preferences_title">OpenStreetMap-inställningar</string>

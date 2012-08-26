@@ -168,8 +168,7 @@
   <string name="started_waiting">GPS spuštěna, čekám na opravu</string>
   <string name="gps_stopped">GPS pozastavena</string>
   <string name="stopped">Zastaveno</string>
-  <string name="language">Jazyk</string>
-  <string name="language_summary">Bude nutné restartovat aplikaci</string>
+
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Nastavení štítků, popisů, viditelnosti a autorizace pro upload GPS tras
     </string>

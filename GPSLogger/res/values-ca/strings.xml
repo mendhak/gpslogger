@@ -103,7 +103,6 @@
   <string name="autoemail_choosepreset">Proveïdor de correu</string>
   <string name="autoemail_invalid_form">Dades invàlides</string>
   <string name="stopped">Aturat</string>
-  <string name="language">Idioma</string>
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_lbl_authorize">Autoritzar aquest aplicació</string>
   <string name="osm_upload">OpenStreetMap</string>

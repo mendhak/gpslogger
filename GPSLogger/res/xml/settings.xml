@@ -66,11 +66,6 @@
                     android:summary="@string/enabledisablegps_summary" android:key="enableDisableGps"
                     android:defaultValue="false"/>
 
-        <ListPreference android:key="locale_override"
-                        android:title="@string/language" android:summary="@string/language_summary"
-                        android:entries="@array/language_choices" android:defaultValue=""
-                        android:entryValues="@array/language_values"/>
-
         <CheckBoxPreference android:title="@string/debuglog_title" android:summary="@string/debuglog_summary"
                             android:key="debugtofile" android:defaultValue="false"/>
 

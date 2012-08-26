@@ -51,29 +51,7 @@
 	<item>99</item>
 </string-array>
 
-<string-array name="language_choices">
-	<item>Default</item>
-	<item>English</item>
-	<item>Français</item>
-	<item>Italiano</item>
-    <item>РУССКИЙ</item>
-	<item>日本語</item>
-	<item>中文</item>
-	<item>台語 (TW)</item>
-	<item>Polski</item>
-</string-array>
 
-<string-array name="language_values">
-	<item/>
-	<item>en</item>
-	<item>fr</item>
-	<item>it</item>
-    <item>ru</item>
-	<item>ja</item>
-	<item>zh</item>
-	<item>zh-rTW</item>
-	<item>pl</item>
-</string-array>
 
 <string-array name="osm_visibility_choices">
 	<item>private</item>

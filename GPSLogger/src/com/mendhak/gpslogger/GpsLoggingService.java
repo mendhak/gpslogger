@@ -24,15 +24,12 @@ package com.mendhak.gpslogger;
 import android.app.*;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
-import android.preference.PreferenceManager;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
@@ -47,7 +44,6 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class GpsLoggingService extends Service implements IActionListener
 {
@@ -82,20 +78,6 @@ public class GpsLoggingService extends Service implements IActionListener
     public void onCreate()
     {
         Utilities.LogDebug("GpsLoggingService.onCreate");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String lang = prefs.getString("locale_override", "");
-
-        if (!lang.equalsIgnoreCase(""))
-        {
-            Utilities.LogVerbose("Setting app to user specified locale: " + lang);
-            Locale locale = new Locale(lang);
-            Locale.setDefault(locale);
-            Configuration config = new Configuration();
-            config.locale = locale;
-            getApplicationContext().getResources().updateConfiguration(config,
-                    getApplicationContext().getResources().getDisplayMetrics());
-        }
-
         nextPointAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         Utilities.LogInfo("GPSLoggerService created");

@@ -170,8 +170,7 @@
   <string name="started_waiting">GPS запущен, ожидаем координаты</string>
   <string name="gps_stopped">GPS приостановлен</string>
   <string name="stopped">Остановлено</string>
-  <string name="language">Язык</string>
-  <string name="language_summary">Вам придется перезапустить приложение</string>
+
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Добавляйте теги, описания GPS трекам</string>
   <string name="osm_preferences_title">Настройки OpenStreetMap</string>

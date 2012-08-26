@@ -231,8 +231,7 @@
     <string name="gps_stopped">GPS paused</string>
     <string name="stopped">Stopped</string>
 
-    <string name="language">Language</string>
-    <string name="language_summary">You will need to restart the application</string>
+
 
     <string name="osm_setup_title">OpenStreetMap</string>
     <string name="osm_setup_summary">Set tags, description, visibility and authorization for uploading GPS Traces

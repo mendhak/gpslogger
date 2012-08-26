@@ -24,13 +24,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.*;
-import android.content.res.Configuration;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
@@ -115,19 +113,6 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
     {
 
         Utilities.LogDebug("GpsMainActivity.onCreate");
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String lang = prefs.getString("locale_override", "");
-
-        if (!lang.equalsIgnoreCase(""))
-        {
-            Locale locale = new Locale(lang);
-            Locale.setDefault(locale);
-            Configuration config = new Configuration();
-            config.locale = locale;
-            getApplicationContext().getResources().updateConfiguration(config,
-                    getApplicationContext().getResources().getDisplayMetrics());
-        }
 
         super.onCreate(savedInstanceState);
 

@@ -152,8 +152,7 @@
   <string name="started_waiting">GPS uruchomiony, oczekiwanie na ustalenie pozycji</string>
   <string name="gps_stopped">GPS wstrzymany</string>
   <string name="stopped">Zatrzymany</string>
-  <string name="language">Język</string>
-  <string name="language_summary">Należy uruchomić ponownie aplikację</string>
+
   <string name="osm_setup_summary">Ustawienie tagów, opisy, widoczność i uprawnień do przesyłania śladów GPS</string>
   <string name="osm_preferences_title">Ustawienia OpenStreetMap</string>
   <string name="osm_lbl_authorize">Uprawnij ten program.</string>

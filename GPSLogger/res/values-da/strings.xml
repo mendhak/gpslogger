@@ -155,8 +155,7 @@
   <string name="started_waiting">GPS i gang, venter på fix</string>
   <string name="gps_stopped">GPS midlertidigt afbrudt</string>
   <string name="stopped">Afbrudt</string>
-  <string name="language">Sprog</string>
-  <string name="language_summary">Du skal genstarte programmet</string>
+
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Angive mærker, beskrivelse, synlighed og tilladelse til at uploade GPS spor     </string>
   <string name="osm_preferences_title">OpenStreetMap Indstillinger</string>
