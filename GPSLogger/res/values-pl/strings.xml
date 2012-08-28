@@ -118,7 +118,6 @@
   <string name="autoemail_summary">Automatyczne wysyłanie maila z plikiem logu na podany adres</string>
   <string name="please_wait">Proszę czekać.</string>
   <string name="autoemail_autosend_summary">Włączenie automatycznego wysyłania na wskazany adres.</string>
-  <string name="autoemail_frequency_format">Po %d godzinach</string>
   <string name="autoemail_target">Adresy docelowe</string>
   <string name="autoemail_frequency_whenistop">Po zatrzymaniu logowania</string>
   <string name="autoemail_frequency_8">Po 8 godzinach</string>
@@ -152,7 +151,6 @@
   <string name="started_waiting">GPS uruchomiony, oczekiwanie na ustalenie pozycji</string>
   <string name="gps_stopped">GPS wstrzymany</string>
   <string name="stopped">Zatrzymany</string>
-
   <string name="osm_setup_summary">Ustawienie tagów, opisy, widoczność i uprawnień do przesyłania śladów GPS</string>
   <string name="osm_preferences_title">Ustawienia OpenStreetMap</string>
   <string name="osm_lbl_authorize">Uprawnij ten program.</string>

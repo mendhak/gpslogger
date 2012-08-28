@@ -77,7 +77,6 @@
   <string name="autoemail_summary">Automatiškai siunčia el. laiškus su įrašytom koordinatėm į jūsų parinktą adresą</string>
   <string name="please_wait">Prašau palaukti.</string>
   <string name="autoemail_autosend_summary">Įjungia automatinį el. laiškų su įrašytom kordinatėm siuntimą pasirinktu adresu</string>
-  <string name="autoemail_frequency_format">Po %d valandų</string>
   <string name="autoemail_target">Pasirinkti el. pašto adresatus</string>
   <string name="autoemail_frequency_whenistop">Kai paspaudžiu stabdyti</string>
   <string name="autoemail_frequency_8">po 8 valandų</string>

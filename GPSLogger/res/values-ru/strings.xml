@@ -37,6 +37,7 @@
   <string name="sharing_location_only">Только координаты</string>
   <string name="sharing_pick_file">Выберите файл</string>
   <string name="sharing_mylocation">Мои координаты</string>
+  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Опубликовать через</string>
   <string name="foot"> фут</string>
   <string name="feet"> футы</string>
@@ -99,6 +100,8 @@
   <string name="log_gpx_summary">Создается GPX файл в GPSLogger папке на SD карте.</string>
   <string name="log_kml_title">Писать лог в KML</string>
   <string name="log_kml_summary">Создается KML файл в GPSLogger папке на SD карте.</string>
+  <string name="log_plain_text_title">Записывать в обычный текст</string>
+  <string name="log_plain_text_summary">Создает текстовый файл в папке GPSLogger на SD-карте.</string>
   <string name="satellite_time_title">Использовать время со спутников</string>
   <string name="satellite_time_summary">Использовать время, полученно от спутников вместо времени телефона. Время со
         спутников более точное.
@@ -136,7 +139,7 @@
   <string name="please_wait">Пожалуйста, подождите.</string>
   <string name="autoemail_autosend_summary">Разрешает автоматическую отправку лога письмом на выбранный email.
     </string>
-  <string name="autoemail_frequency_format">Через %d час(а)</string>
+  <string name="autoemail_target">Адреса электронной почты получателей</string>
   <string name="autoemail_frequency_whenistop">Когда я останавливаю логирование</string>
   <string name="autoemail_frequency_8">Каждые 8 часов</string>
   <string name="autoemail_frequency_6">Каждые 6 часов</string>
@@ -170,7 +173,6 @@
   <string name="started_waiting">GPS запущен, ожидаем координаты</string>
   <string name="gps_stopped">GPS приостановлен</string>
   <string name="stopped">Остановлено</string>
-
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Добавляйте теги, описания GPS трекам</string>
   <string name="osm_preferences_title">Настройки OpenStreetMap</string>
@@ -230,4 +232,16 @@
   <string name="gdocs_test_title">Испытать загрузку файла</string>
   <string name="gdocs_testupload_error">Не смог загрузить пробный файл</string>
   <string name="gdocs_testupload_success">Загрузка завершена. Проверте наличее файла в ваших Google Documents.</string>
+  <string name="gdocs_selectgoogleaccount">Выберите Google акаунт</string>
+  <string name="email_upload">Отправить файл по электронной почте</string>
+  <string name="autoemail_sendto_csv">Адреса электронной почты разделённые запятыми</string>
+  <string name="autosend_enabled">Разрешить авто отправку</string>
+  <string name="autosend_enabled_summary">Позволяет отправку файлов в различные цели</string>
+  <string name="autosend_frequency_summary">Как часто отправлять журнальные файлы</string>
+  <string name="autosend_frequency">Как часто?</string>
+  <string name="autosend_sendzip_title">Отправить zip файл</string>
+  <string name="autosend_sendzip_summary">Отправить zip-файл если применимо. Отключите, чтобы отправлять файлы по одиночке, или если zip параметр для вас не работает     </string>
+  <string name="autosend_targets_category">Места назначения для авто отправки</string>
+  <string name="menu_email_now">Авто отправить сейчас</string>
+  <string name="summary_autosend">Авто отправить:</string>
 </resources>

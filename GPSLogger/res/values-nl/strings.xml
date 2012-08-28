@@ -22,6 +22,7 @@
   <string name="txt_direction">Richting:</string>
   <string name="txt_satellites">﻿Satellieten:</string>
   <string name="txt_accuracy">﻿Nauwkeurigheid:</string>
+  <string name="txt_travel_distance">Afgelegd:</string>
   <string name="btn_start_logging">Start het loggen</string>
   <string name="btn_stop_logging">Stop het loggen</string>
   <string name="gpslogger_still_running">﻿GPSLogger is nog steeds actief.</string>
@@ -53,7 +54,9 @@
   <string name="meters_per_second"> m/s</string>
   <string name="feet_per_second"> vt/s</string>
   <string name="miles_per_hour"> Mi/h</string>
+  <string name="miles"> Mijl</string>
   <string name="kilometers_per_hour"> km/h</string>
+  <string name="kilometers"> km</string>
   <string name="unknown_direction">onbekend</string>
   <string name="sorry">Sorry</string>
   <string name="success">Yay!</string>
@@ -90,6 +93,7 @@
   <string name="settings_enter_feet">Voer voeten in(max 9999)</string>
   <string name="settings_distance_in_meters">Afstand in meter</string>
   <string name="settings_enter_meters">Voer meter in(max 9999)</string>
+  <string name="settings_converting_title">Converteren...</string>
   <string name="settings_converting_description">Minimale afstand voor converteren van eenheden. Waarden boven 9999 worden teruggezet op 9999. Het instellingen scherm zal nu herladen.     </string>
   <string name="pref_logging_title">Logging details</string>
   <string name="log_gpx_title">Loggen naar GPX</string>
@@ -124,8 +128,8 @@
   <string name="autoemail_title">﻿Automatische E-mail instellingen</string>
   <string name="autoemail_summary">Verstuurt automatisch een e-mails met het logbestand naar een adres van uw keuze</string>
   <string name="please_wait">Een ogenblik geduld.</string>
+  <string name="autoemail_autosend">e-mails inschakelen</string>
   <string name="autoemail_autosend_summary">Hiermee kunt het logbestand verzenden naar een e-mailadres van uw keuze.     </string>
-  <string name="autoemail_frequency_format">Na %d uur</string>
   <string name="autoemail_target">Doel e-mailadressen</string>
   <string name="autoemail_frequency_whenistop">Wanneer ik op stop druk</string>
   <string name="autoemail_frequency_8">Na 8 uur</string>
@@ -160,7 +164,6 @@
   <string name="started_waiting">GPS is opgestart, wacht op een fix</string>
   <string name="gps_stopped">GPS gepauzeerd</string>
   <string name="stopped">Gestopt</string>
-
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Tags, beschrijving, zichtbaarheid en autorisatie voor het uploaden van GPS tracks instellen     </string>
   <string name="osm_preferences_title">OpenStreetMap voorkeuren</string>
@@ -230,4 +233,27 @@
   <string name="summary_autosend">Automatisch verzenden:</string>
   <string name="pref_autosend_title">Automatisch verzenden, e-mail en upload</string>
   <string name="pref_autosend_summary">E-mail, delen en upload opties</string>
+  <string name="shortcut_start">Start</string>
+  <string name="shortcut_stop">Stop</string>
+  <string name="shortcut_pickaction">Kies een actie</string>
+  <string name="log_opengts_title">Log naar OpenGTS Server</string>
+  <string name="log_opengts_summary">GPRMC gegevens verzenden naar een online OpenGTS server.</string>
+  <string name="opengts_setup_title">OpenGTS Setup</string>
+  <string name="opengts_setup_summary">GPS tracks verzenden op een OpenGTS server van uw keuze.</string>
+  <string name="opengts_enabled">OpenGTS inschakelen</string>
+  <string name="opengts_enabled_summary">Deze OpenGTS-server inschakelen.</string>
+  <string name="autoopengts_autosend">Automatisch verzenden inschakelen</string>
+  <string name="autoopengts_autosend_summary">Maakt het mogelijk om de GPS tracks automatisch te verzenden.</string>
+  <string name="autoopengts_server_category">OpenGTS instellingen</string>
+  <string name="autoopengts_invalid_form">Ongeldige waarden</string>
+  <string name="autoopengts_invalid_form_message">Zorg ervoor dat alle velden correct zijn ingevuld</string>
+  <string name="opengts_upload">Verzenden naar OpenGTS</string>
+  <string name="autoopengts_server">Server</string>
+  <string name="autoopengts_server_summary">Hostnaam of IP adres</string>
+  <string name="opengts_server_port">Poort</string>
+  <string name="opengts_server_communication_method">Communicatiemethode</string>
+  <string name="opengts_server_communication_method_summary">HTTP-gebaseerde of Raw Socket gebaseerde communicatie</string>
+  <string name="autoopengts_server_path">Het pad naar de server</string>
+  <string name="autoopengts_server_path_summary">Optioneel en alleen voor HTTP-gebaseerde communicatie. Bijvoorbeeld \'/ gprmc/gegevens\'</string>
+  <string name="autoopengts_device_id">Apparaat-ID</string>
 </resources>

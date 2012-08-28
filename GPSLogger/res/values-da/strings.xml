@@ -121,7 +121,6 @@
   <string name="autoemail_summary">Automatisk e-mail logfilen til en adresse efter eget valg</string>
   <string name="please_wait">Vent venligst.</string>
   <string name="autoemail_autosend_summary">Aktiverer afsendelse logfilen til en e-mail-adresse du vælger.     </string>
-  <string name="autoemail_frequency_format">Efter %d timer</string>
   <string name="autoemail_frequency_whenistop">Når jeg trykker på stop</string>
   <string name="autoemail_frequency_8">Efter 8 timer</string>
   <string name="autoemail_frequency_6">Efter 6 timer</string>
@@ -155,7 +154,6 @@
   <string name="started_waiting">GPS i gang, venter på fix</string>
   <string name="gps_stopped">GPS midlertidigt afbrudt</string>
   <string name="stopped">Afbrudt</string>
-
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Angive mærker, beskrivelse, synlighed og tilladelse til at uploade GPS spor     </string>
   <string name="osm_preferences_title">OpenStreetMap Indstillinger</string>

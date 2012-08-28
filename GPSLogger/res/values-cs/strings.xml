@@ -24,6 +24,7 @@
   <string name="txt_direction">Směr:</string>
   <string name="txt_satellites">Satelitů:</string>
   <string name="txt_accuracy">Přesnost:</string>
+  <string name="txt_travel_distance">Procestováno:</string>
   <string name="btn_start_logging">Spustit zápis</string>
   <string name="btn_stop_logging">Ukončit zápis</string>
   <string name="gpslogger_still_running">GPSLogger stále běží.</string>
@@ -57,7 +58,9 @@
   <string name="meters_per_second"> m/s</string>
   <string name="feet_per_second"> ft/s</string>
   <string name="miles_per_hour"> mi/h</string>
+  <string name="miles"> mi</string>
   <string name="kilometers_per_hour"> km/h</string>
+  <string name="kilometers"> km</string>
   <string name="unknown_direction">neznámý</string>
   <string name="sorry">Pardon</string>
   <string name="success">Juchů!</string>
@@ -94,6 +97,7 @@
   <string name="settings_enter_feet">Zadejte stopy (max 9999)</string>
   <string name="settings_distance_in_meters">Vzdálenost v metrech</string>
   <string name="settings_enter_meters">Zadejte metry (max 9999)</string>
+  <string name="settings_converting_title">Převádím…</string>
   <string name="settings_converting_description">Převod jednotek minimální vzdálenost. Hodnoty nad 9999 budou resetovány na 9999. Okno nastavení se nyní načte znovu.     </string>
   <string name="pref_logging_title">Podrobnosti záznamu</string>
   <string name="log_gpx_title">Zapisovat do GPX</string>
@@ -131,9 +135,9 @@
   <string name="autoemail_title">Nastavení automatického emailu</string>
   <string name="autoemail_summary">Automaticky odesílá soubor se záznamy na vámi zvolenou email adresu</string>
   <string name="please_wait">Čekejte prosím.</string>
+  <string name="autoemail_autosend">Povolit e-maily</string>
   <string name="autoemail_autosend_summary">Povolí odesílání souboru se záznamy na email adresu dle vašeho výběru.
     </string>
-  <string name="autoemail_frequency_format">Po %d hodinách</string>
   <string name="autoemail_target">Cílové emailové adresy</string>
   <string name="autoemail_frequency_whenistop">Když stisknu stop</string>
   <string name="autoemail_frequency_8">Po 8 hodinách</string>
@@ -168,7 +172,6 @@
   <string name="started_waiting">GPS spuštěna, čekám na opravu</string>
   <string name="gps_stopped">GPS pozastavena</string>
   <string name="stopped">Zastaveno</string>
-
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Nastavení štítků, popisů, viditelnosti a autorizace pro upload GPS tras
     </string>
@@ -241,4 +244,27 @@
   <string name="summary_autosend">Automaticky odeslat:</string>
   <string name="pref_autosend_title">Automaticky odeslat, poslat email a uploadnout</string>
   <string name="pref_autosend_summary">Možnosti e-mailu, sdílení a uploadu</string>
+  <string name="shortcut_start">Start</string>
+  <string name="shortcut_stop">Stop</string>
+  <string name="shortcut_pickaction">Vyberte akci</string>
+  <string name="log_opengts_title">Zaznamenávat na OpenGTS Server</string>
+  <string name="log_opengts_summary">Odeslat GPRMC data na online OpenGTS server.</string>
+  <string name="opengts_setup_title">OpenGTS nastavení</string>
+  <string name="opengts_setup_summary">Odešle GPS trasy na OpenGTS server dle vašeho výběru.</string>
+  <string name="opengts_enabled">Povolit OpenGTS</string>
+  <string name="opengts_enabled_summary">Povolit tento OpenGTS server.</string>
+  <string name="autoopengts_autosend">Povolit automatické odesílání</string>
+  <string name="autoopengts_autosend_summary">Umožňuje automaticky odesílat GPS trasy.</string>
+  <string name="autoopengts_server_category">OpenGTS nastavení</string>
+  <string name="autoopengts_invalid_form">Neplatné hodnoty</string>
+  <string name="autoopengts_invalid_form_message">Ujistěte se, že všechna pole byla vyplněna správně</string>
+  <string name="opengts_upload">Poslat na OpenGTS</string>
+  <string name="autoopengts_server">Server</string>
+  <string name="autoopengts_server_summary">Název hostitele nebo IP</string>
+  <string name="opengts_server_port">Port</string>
+  <string name="opengts_server_communication_method">Metoda komunikace</string>
+  <string name="opengts_server_communication_method_summary">Komunikace založená na HTTP nebo Raw Socket</string>
+  <string name="autoopengts_server_path">Cesta k serveru</string>
+  <string name="autoopengts_server_path_summary">Volitelné a pouze pro komunikaci založenou na protokolu HTTP. Například \"/ gprmc/Data\"</string>
+  <string name="autoopengts_device_id">ID zařízení</string>
 </resources>

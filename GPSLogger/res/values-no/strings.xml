@@ -74,7 +74,6 @@
   <string name="autoemail_summary">Sender automatisk e-post med GPS-sporet til ei adresse du vel</string>
   <string name="please_wait">Vent.</string>
   <string name="autoemail_autosend_summary">Slår på automatisk sending av loggfila til ei e-postadresse du vel.<br /></string>
-  <string name="autoemail_frequency_format">Etter %d timar</string>
   <string name="autoemail_frequency_whenistop">Når eg trykker på stop</string>
   <string name="autoemail_frequency_8">Etter 8 timar</string>
   <string name="autoemail_frequency_6">Etter 6 timar</string>

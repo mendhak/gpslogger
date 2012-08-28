@@ -125,7 +125,6 @@
   <string name="autoemail_summary">Invia automaticamente i files ad un indirizzo Email a tua scelta</string>
   <string name="please_wait">Attendere prego.</string>
   <string name="autoemail_autosend_summary">Abilita l\'invio dei file ad un indirizzo Email a tua scelta.</string>
-  <string name="autoemail_frequency_format">Dopo %d ore</string>
   <string name="autoemail_target">Indirizzi Email di destinazione</string>
   <string name="autoemail_frequency_whenistop">Ad ogni registrazione</string>
   <string name="autoemail_frequency_8">Dopo 8 ore</string>
@@ -160,7 +159,6 @@
   <string name="started_waiting">GPS avviato, in attesa della posizione</string>
   <string name="gps_stopped">GPS fermato</string>
   <string name="stopped">Fermato</string>
-
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Imposta etichette, descrizione, visibilità ed autorizzazioni per caricare le tracce GPS</string>
   <string name="osm_preferences_title">Impostazioni OpenStreetMap</string>

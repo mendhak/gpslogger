@@ -122,7 +122,6 @@
   <string name="autoemail_summary">Automatisch die Log-Datei an eine frei ausgewählte Email-Adresse senden</string>
   <string name="please_wait">Bitte warten.</string>
   <string name="autoemail_autosend_summary">Ermöglicht das Senden der Log-Datei an eine beliebige E-mail-Adresse.</string>
-  <string name="autoemail_frequency_format">Nach %d Stunden</string>
   <string name="autoemail_frequency_whenistop">Wenn ich die Stop Taste drücke</string>
   <string name="autoemail_frequency_8">Nach 8 Stunden</string>
   <string name="autoemail_frequency_6">Nach 6 Stunden</string>
@@ -156,7 +155,6 @@
   <string name="started_waiting">GPS gestartet, warten auf Fix</string>
   <string name="gps_stopped">GPS angehalten</string>
   <string name="stopped">Gestoppt</string>
-
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Festlegen der Tags, Beschreibung, Sichtbarkeit und Berechtigung für das Hochladen der GPS-Tracks     </string>
   <string name="osm_preferences_title">OpenStreetMap-Einstellungen</string>
