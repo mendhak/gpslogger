@@ -21,13 +21,12 @@
         </dependency>
 
         <dependency>
-                    <groupId>system.local</groupId>
-                    <artifactId>additionnal</artifactId>
-                    <version>1.0</version>
-                    <scope>system</scope>
-                    <systemPath>${project.basedir}/libs/additionnal.jar</systemPath>
-                </dependency>
-
+            <groupId>system.local</groupId>
+            <artifactId>additionnal</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/additionnal.jar</systemPath>
+        </dependency>
 
         <dependency>
             <groupId>system.local</groupId>
@@ -51,6 +50,14 @@
             <version>1.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/dropbox-android-sdk.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>system.local</groupId>
+            <artifactId>android-async-http</artifactId>
+            <version>1.4.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/android-async-http-1.4.1.jar</systemPath>
         </dependency>
 
         <dependency>
