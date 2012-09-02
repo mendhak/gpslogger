@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Maven: system.local:android-async:1.4.1">
+  <library name="Maven: system.local:android-async-http:1.4.1">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/GPSLogger/libs/android-async-http-1.4.1.jar!/" />
     </CLASSES>
