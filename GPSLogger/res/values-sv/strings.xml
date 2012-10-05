@@ -22,6 +22,7 @@
   <string name="txt_direction">Riktning:</string>
   <string name="txt_satellites">Satelliter:</string>
   <string name="txt_accuracy">Noggrannhet:</string>
+  <string name="txt_travel_distance">Sträcka:</string>
   <string name="btn_start_logging">Starta loggning</string>
   <string name="btn_stop_logging">Stoppa loggning</string>
   <string name="gpslogger_still_running">GPSLogger körs fortfarande.</string>
@@ -53,7 +54,9 @@
   <string name="meters_per_second"> m/s</string>
   <string name="feet_per_second"> ft/s</string>
   <string name="miles_per_hour"> mi/h</string>
+  <string name="miles"> Mi</string>
   <string name="kilometers_per_hour"> km/h</string>
+  <string name="kilometers"> km</string>
   <string name="unknown_direction">okänd</string>
   <string name="sorry">Tyvärr</string>
   <string name="success">Hurra!</string>
@@ -90,6 +93,7 @@
   <string name="settings_enter_feet">Ange fot (max 9999)</string>
   <string name="settings_distance_in_meters">Avstånd i meter</string>
   <string name="settings_enter_meters">Ange meter (max 9999)</string>
+  <string name="settings_converting_title">Konverterar…</string>
   <string name="settings_converting_description">Konverterar enheter för minsta avstånd. Värden över 9999 sätts till 9999. Inställningsskärmen laddas sedan om.</string>
   <string name="pref_logging_title">Loggningsdetaljer</string>
   <string name="log_gpx_title">Logga till GPX</string>
@@ -124,6 +128,7 @@
   <string name="autoemail_title">Ställ in automatisk e-post</string>
   <string name="autoemail_summary">Mailar automatiskt loggfilen till valfri adress</string>
   <string name="please_wait">Var god vänta.</string>
+  <string name="autoemail_autosend">Aktivera e-postmeddelanden</string>
   <string name="autoemail_autosend_summary">Låter loggfilen skickas till valfri e-postadress.</string>
   <string name="autoemail_target">Mottagaradresser</string>
   <string name="autoemail_frequency_whenistop">När jag trycker stopp</string>
@@ -231,7 +236,27 @@
   <string name="summary_autosend">Autosänd:</string>
   <string name="pref_autosend_title">Autosänd, mail och uppladdning</string>
   <string name="pref_autosend_summary">Mail-, delnings- och uppladdningsalternativ</string>
+  <string name="shortcut_start">Starta</string>
+  <string name="shortcut_stop">Stoppa</string>
+  <string name="shortcut_pickaction">Välj en åtgärd</string>
+  <string name="log_opengts_title">Logga in till en OpenGTS Server</string>
+  <string name="log_opengts_summary">Skicka GPRMC data till en OpenGTS-server.</string>
+  <string name="opengts_setup_title">OpenGTS</string>
+  <string name="opengts_setup_summary">Skicka GPS spår till en OpenGTS-server</string>
+  <string name="opengts_enabled">Aktivera OpenGTS</string>
+  <string name="opengts_enabled_summary">Aktivera vald OpenGTS server</string>
+  <string name="autoopengts_autosend">Skicka automatiskt</string>
+  <string name="autoopengts_autosend_summary">Aktiverar automatiskt GPS spårning</string>
+  <string name="autoopengts_server_category">OpenGTS inställningar</string>
   <string name="autoopengts_invalid_form">Ogiltiga värden</string>
   <string name="autoopengts_invalid_form_message">Säkerställ att alla fält fyllts i ordentligt</string>
+  <string name="opengts_upload">Skicka till OpenGTS</string>
+  <string name="autoopengts_server">Server</string>
+  <string name="autoopengts_server_summary">DNS eller IP</string>
   <string name="opengts_server_port">Port</string>
+  <string name="opengts_server_communication_method">Kommunikationsmetod</string>
+  <string name="opengts_server_communication_method_summary">HTTP-baserad eller RAW-baserad kommunikation</string>
+  <string name="autoopengts_server_path">Serversökväg</string>
+  <string name="autoopengts_server_path_summary">Tillval och endast för HTTP-baserad kommunikation. Tex. \"/gprmc/Data\"</string>
+  <string name="autoopengts_device_id">Enhets-ID</string>
 </resources>

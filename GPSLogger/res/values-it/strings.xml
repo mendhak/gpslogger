@@ -22,6 +22,7 @@
   <string name="txt_direction">Direzione:</string>
   <string name="txt_satellites">Satelliti:</string>
   <string name="txt_accuracy">Precisione:</string>
+  <string name="txt_travel_distance">Percorso:</string>
   <string name="btn_start_logging">Inizia la registrazione</string>
   <string name="btn_stop_logging">Ferma la registrazione</string>
   <string name="gpslogger_still_running">GPSLogger è in esecuzione.</string>
@@ -53,7 +54,9 @@
   <string name="meters_per_second"> m/s</string>
   <string name="feet_per_second">ft/s</string>
   <string name="miles_per_hour"> mi/h</string>
+  <string name="miles"> mi</string>
   <string name="kilometers_per_hour"> km/h</string>
+  <string name="kilometers"> km</string>
   <string name="unknown_direction">Sconosciuta</string>
   <string name="sorry">Spiacente</string>
   <string name="success">Ok!</string>
@@ -90,6 +93,7 @@
   <string name="settings_enter_feet">Inserisci i piedi (max 9999)</string>
   <string name="settings_distance_in_meters">Distanza in metri</string>
   <string name="settings_enter_meters">Inserisci i metri (max 9999)</string>
+  <string name="settings_converting_title">Sto convertendo...</string>
   <string name="settings_converting_description">Conversione distanza minima. Valori superiori a 9999 saranno riportati a 9999. La schermata delle impostazioni sarà ricaricata.</string>
   <string name="pref_logging_title">Dettagli registrazione</string>
   <string name="log_gpx_title">Salva in GPX</string>
@@ -124,6 +128,7 @@
   <string name="autoemail_title">Configurazione Email automatiche</string>
   <string name="autoemail_summary">Invia automaticamente i files ad un indirizzo Email a tua scelta</string>
   <string name="please_wait">Attendere prego.</string>
+  <string name="autoemail_autosend">Abilita Email</string>
   <string name="autoemail_autosend_summary">Abilita l\'invio dei file ad un indirizzo Email a tua scelta.</string>
   <string name="autoemail_target">Indirizzi Email di destinazione</string>
   <string name="autoemail_frequency_whenistop">Ad ogni registrazione</string>
@@ -228,4 +233,27 @@
   <string name="summary_autosend">Invio automatico:</string>
   <string name="pref_autosend_title">Invio automatico, email e upload</string>
   <string name="pref_autosend_summary">Opzioni email, condivisione e upload</string>
+  <string name="shortcut_start">Avvia</string>
+  <string name="shortcut_stop">Ferma</string>
+  <string name="shortcut_pickaction">Scegli una azione</string>
+  <string name="log_opengts_title">Registra su un server OpenGTS</string>
+  <string name="log_opengts_summary">Invia dati GPRMC ad un server OpenGTS.</string>
+  <string name="opengts_setup_title">Impostazioni OpenGTS</string>
+  <string name="opengts_setup_summary">Invia le tracce GPS a un server OpenGTS.</string>
+  <string name="opengts_enabled">Abilita OpenGTS</string>
+  <string name="opengts_enabled_summary">Abilita questo server OpenGTS.</string>
+  <string name="autoopengts_autosend">Abilita invio automatico</string>
+  <string name="autoopengts_autosend_summary">Invia automaticamente le tracce GPS.</string>
+  <string name="autoopengts_server_category">Impostazioni OpenGTS</string>
+  <string name="autoopengts_invalid_form">Valori non validi</string>
+  <string name="autoopengts_invalid_form_message">Per favore verifica che tutti i campi siano compilati correttamente</string>
+  <string name="opengts_upload">Invia a OpenGTS</string>
+  <string name="autoopengts_server">Server</string>
+  <string name="autoopengts_server_summary">Hostname o IP</string>
+  <string name="opengts_server_port">Porta TCP</string>
+  <string name="opengts_server_communication_method">Metodo di comunicazione</string>
+  <string name="opengts_server_communication_method_summary">Comunicazione HTTP o Raw Socket</string>
+  <string name="autoopengts_server_path">Path del server</string>
+  <string name="autoopengts_server_path_summary">Facoltativo e solo per comunicazioni basate su HTTP. Per esempio \'/gprmc/Data\'</string>
+  <string name="autoopengts_device_id">ID del Device</string>
 </resources>
