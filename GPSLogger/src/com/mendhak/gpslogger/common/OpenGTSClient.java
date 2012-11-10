@@ -90,6 +90,7 @@ public class OpenGTSClient
                 params.put("id", id);
                 params.put("code", "0xF020");
                 params.put("gprmc", OpenGTSClient.GPRMCEncode(loc));
+                params.put("alt", String.valueOf(loc.getAltitude()));
 
 
                 Utilities.LogDebug("Sending URL " + url + " with params " + params.toString());
