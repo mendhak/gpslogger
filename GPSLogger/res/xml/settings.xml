@@ -50,6 +50,23 @@
                                 android:hint="@string/settings_enter_meters"/>
 
 
+            <EditTextPreference android:key="accuracy_before_logging"
+                                android:title="@string/accuracy_before_logging_title"
+                                android:summary="@string/accuracy_before_logging_summary"
+                                android:dialogTitle="@string/settings_accuracy_in_meters"
+                                android:numeric="integer" android:maxLength="4"
+                                android:hint="@string/settings_enter_meters"/>
+
+            <EditTextPreference android:key="retry_time"
+                                android:title="@string/retry_time_title"
+                                android:summary="@string/retry_time_summary"
+                                android:dialogTitle="@string/retry_time_dialog_title"
+                                android:numeric="integer" android:maxLength="4"
+                                android:hint="@string/retry_time_hint"/>
+
+
+
+
         </PreferenceCategory>
     </PreferenceScreen>
     <PreferenceScreen android:title="@string/pref_general_title" android:summary="@string/pref_general_summary">

@@ -33,6 +33,7 @@ public class AppSettings extends Application
     private static boolean logToPlainText;
     private static boolean showInNotificationBar;
     private static int minimumSeconds;
+    private static int retryInterval;
     private static String newFileCreation;
     private static Float autoSendDelay = 0f;
     private static boolean autoSendEnabled = false;
@@ -46,6 +47,7 @@ public class AppSettings extends Application
     private static boolean smtpSsl;
     private static boolean debugToFile;
     private static int minimumDistance;
+    private static int minimumAccuracy;
     private static boolean shouldSendZipFile;
 
     private static boolean LogToOpenGTS;
@@ -196,6 +198,22 @@ public class AppSettings extends Application
     {
         AppSettings.minimumSeconds = minimumSeconds;
     }
+    
+          /**
+     * @return the retryInterval
+     */
+    public static int getRetryInterval()
+    {
+        return retryInterval;
+    }
+
+    /**
+     * @param retryInterval the retryInterval to set
+     */
+    static void setRetryInterval(int retryInterval)
+    {
+        AppSettings.retryInterval = retryInterval;
+    }
 
 
     /**
@@ -212,6 +230,22 @@ public class AppSettings extends Application
     static void setMinimumDistanceInMeters(int minimumDistance)
     {
         AppSettings.minimumDistance = minimumDistance;
+    }
+
+         /**
+     * @return the minimumAccuracy
+     */
+    public static int getMinimumAccuracyInMeters()
+    {
+        return minimumAccuracy;
+    }
+
+    /**
+     * @param minimumAccuracy the minimumAccuracy to set
+     */
+    static void setMinimumAccuracyInMeters(int minimumAccuracy)
+    {
+        AppSettings.minimumAccuracy = minimumAccuracy;
     }
 
 

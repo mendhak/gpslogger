@@ -30,6 +30,7 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.widget.Toast;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
@@ -685,6 +686,7 @@ public class GpsLoggingService extends Service implements IActionListener
      */
     void OnLocationChanged(Location loc)
     {
+        int retryTimeout = Session.getRetryTimeout();
 
         if (!Session.isStarted())
         {
@@ -709,6 +711,28 @@ public class GpsLoggingService extends Service implements IActionListener
         if ((currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 1000))
         {
             return;
+        }
+
+        // Don't do anything until the user-defined accuracy is reached
+        if (AppSettings.getMinimumAccuracyInMeters() > 0)
+        {
+          if(AppSettings.getMinimumAccuracyInMeters() < Math.abs(loc.getAccuracy()))
+            {
+                if(retryTimeout < 50)
+                {
+                    Session.setRetryTimeout(retryTimeout+1);
+                    SetStatus("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " reached");
+                    StopManagerAndResetAlarm(AppSettings.getRetryInterval());
+                    return;
+                }
+                else
+                {
+                    Session.setRetryTimeout(0);
+                    SetStatus("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " reached and timeout reached");
+                    StopManagerAndResetAlarm();
+                    return;
+                }
+            }
         }
 
         //Don't do anything until the user-defined distance has been traversed
@@ -769,6 +793,12 @@ public class GpsLoggingService extends Service implements IActionListener
         SetAlarmForNextPoint();
     }
 
+    protected void StopManagerAndResetAlarm(int retryInterval)
+    {
+        Utilities.LogDebug("GpsLoggingService.StopManagerAndResetAlarm_retryInterval");
+        StopGpsManager();
+        SetAlarmForNextPoint(retryInterval);
+    }
 
     private void StopAlarm()
     {
@@ -794,6 +824,23 @@ public class GpsLoggingService extends Service implements IActionListener
 
         nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime() + AppSettings.getMinimumSeconds() * 1000, pi);
+
+    }
+
+    private void SetAlarmForNextPoint(int retryInterval)
+    {
+
+        Utilities.LogDebug("GpsLoggingService.SetAlarmForNextPoint_retryInterval");
+
+        Intent i = new Intent(this, GpsLoggingService.class);
+
+        i.putExtra("getnextpoint", true);
+
+        PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
+        nextPointAlarmManager.cancel(pi);
+
+        nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + retryInterval * 1000, pi);
 
     }
 

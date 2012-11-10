@@ -126,6 +126,8 @@
     <string name="settings_distance_in_feet">Distance in feet</string>
     <string name="settings_enter_feet">Enter feet(max 9999)</string>
     <string name="settings_distance_in_meters">Distance in meters</string>
+    <string name="settings_accuracy_in_meters">Accuracy in meters</string>
+    <string name="settings_accuracy_in_feet">Accuracy in feet</string>
     <string name="settings_enter_meters">Enter meters(max 9999)</string>
     <string name="settings_converting_title">Converting…</string>
     <string name="settings_converting_description">Converting minimum distance units. Values above 9999 are reset to
@@ -157,8 +159,17 @@
     </string>
     <string name="time_before_logging_dialog_title">Time in seconds</string>
     <string name="time_before_logging_hint">Enter seconds (max 9999)</string>
+    <string name="retry_time_title">Time interval for accuracy</string>
+    <string name="retry_time_summary">Use 0 for maximum frequency, but slower is better for battery life.
+    </string>
+    <string name="retry_time_dialog_title">Time in seconds</string>
+    <string name="retry_time_hint">Enter seconds (max 9999)</string>
     <string name="distance_before_logging_title">Distance before logging</string>
     <string name="distance_before_logging_summary">How far to travel before logging the next point. Use 0 to log all
+        points.
+    </string>
+    <string name="accuracy_before_logging_title">Accuracy before logging</string>
+    <string name="accuracy_before_logging_summary">Which min. accuracy to for logging. Use 0 to log all
         points.
     </string>
 

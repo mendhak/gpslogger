@@ -148,10 +148,26 @@ public class Utilities
             AppSettings.setMinimumDistanceInMeters(0);
         }
 
+        String minimumAccuracyString = prefs.getString(
+                "accuracy_before_logging", "0");
+
+        if (minimumAccuracyString != null && minimumAccuracyString.length() > 0)
+        {
+            AppSettings.setMinimumAccuracyInMeters(Integer
+                    .valueOf(minimumAccuracyString));
+        }
+        else
+        {
+            AppSettings.setMinimumAccuracyInMeters(0);
+        }
+
         if (AppSettings.shouldUseImperial())
         {
             AppSettings.setMinimumDistanceInMeters(Utilities.FeetToMeters(AppSettings
                     .getMinimumDistanceInMeters()));
+
+            AppSettings.setMinimumAccuracyInMeters(Utilities.FeetToMeters(AppSettings
+                    .getMinimumAccuracyInMeters()));
         }
 
 
@@ -166,6 +182,19 @@ public class Utilities
         else
         {
             AppSettings.setMinimumSeconds(60);
+        }
+
+        String retryIntervalString = prefs.getString("retry_time",
+                "60");
+
+        if (retryIntervalString != null && retryIntervalString.length() > 0)
+        {
+            AppSettings
+                    .setRetryInterval(Integer.valueOf(retryIntervalString));
+        }
+        else
+        {
+             AppSettings.setRetryInterval(60);
         }
 
         AppSettings.setNewFileCreation(prefs.getString("new_file_creation",

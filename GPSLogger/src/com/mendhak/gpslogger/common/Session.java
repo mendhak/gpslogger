@@ -45,6 +45,7 @@ public class Session extends Application
     private static boolean readyToBeAutoSent = false;
     private static boolean allowDescription = true;
     private static boolean isSinglePointMode = false;
+    private static int retryTimeout=0;
 
     public static boolean isSinglePointMode()
     {
@@ -154,6 +155,23 @@ public class Session extends Application
     public static void setSatelliteCount(int satellites)
     {
         Session.satellites = satellites;
+    }
+
+           /**
+     * @return the retryTimeout
+     */
+    public static int getRetryTimeout()
+    {
+        return retryTimeout;
+    }
+
+    /**
+     * @param retryTimeout sets the retryTimeout
+     *
+     * */
+    public static void setRetryTimeout(int retryTimeout)
+    {
+        Session.retryTimeout = retryTimeout;
     }
 
     /**

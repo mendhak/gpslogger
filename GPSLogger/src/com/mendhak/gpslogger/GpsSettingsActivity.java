@@ -62,9 +62,22 @@ public class GpsSettingsActivity extends PreferenceActivity
             distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_meters);
             distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
         }
+        
+        EditTextPreference accuracyBeforeLogging = (EditTextPreference) findPreference("accuracy_before_logging");
+
+        if (useImperial)
+        {
+            accuracyBeforeLogging.setDialogTitle(R.string.settings_accuracy_in_feet);
+            accuracyBeforeLogging.getEditText().setHint(R.string.settings_enter_feet);
+        }
+        else
+        {
+            accuracyBeforeLogging.setDialogTitle(R.string.settings_accuracy_in_meters);
+            accuracyBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
+        }
 
         CheckBoxPreference imperialCheckBox = (CheckBoxPreference) findPreference("useImperial");
-        imperialCheckBox.setOnPreferenceChangeListener(new ImperialPreferenceChangeListener(prefs, distanceBeforeLogging));
+        imperialCheckBox.setOnPreferenceChangeListener(new ImperialPreferenceChangeListener(prefs, distanceBeforeLogging, accuracyBeforeLogging));
 
 
         Preference enableDisablePref = findPreference("enableDisableGps");
@@ -121,12 +134,14 @@ public class GpsSettingsActivity extends PreferenceActivity
     private class ImperialPreferenceChangeListener implements Preference.OnPreferenceChangeListener
     {
         EditTextPreference distanceBeforeLogging;
+        EditTextPreference accuracyBeforeLogging;
         SharedPreferences prefs;
 
-        public ImperialPreferenceChangeListener(SharedPreferences prefs, EditTextPreference distanceBeforeLogging)
+        public ImperialPreferenceChangeListener(SharedPreferences prefs, EditTextPreference distanceBeforeLogging, EditTextPreference accuracyBeforeLogging)
         {
             this.prefs = prefs;
-            this.distanceBeforeLogging = distanceBeforeLogging;
+            this.distanceBeforeLogging = accuracyBeforeLogging;
+            this.accuracyBeforeLogging = accuracyBeforeLogging;
         }
 
         public boolean onPreferenceChange(Preference preference, final Object newValue)
@@ -155,7 +170,8 @@ public class GpsSettingsActivity extends PreferenceActivity
                     boolean useImp = Boolean.parseBoolean(newValue.toString());
 
                     String minimumDistanceString = prefs.getString("distance_before_logging", "0");
-
+                    String minimumAccuracyString = prefs.getString("accuracy_before_logging", "0");
+                    
                     int minimumDistance;
 
                     if (minimumDistanceString != null && minimumDistanceString.length() > 0)
@@ -166,6 +182,17 @@ public class GpsSettingsActivity extends PreferenceActivity
                     {
                         minimumDistance = 0;
                     }
+                    
+                    int minimumAccuracy;
+
+                    if (minimumAccuracyString != null && minimumAccuracyString.length() > 0)
+                    {
+                        minimumAccuracy = Integer.valueOf(minimumAccuracyString);
+                    }
+                    else
+                    {
+                        minimumAccuracy = 0;
+                    }
 
                     SharedPreferences.Editor editor = prefs.edit();
 
@@ -175,13 +202,22 @@ public class GpsSettingsActivity extends PreferenceActivity
                         distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_feet);
 
                         minimumDistance = Utilities.MetersToFeet(minimumDistance);
+                        
+                        accuracyBeforeLogging.setDialogTitle(R.string.settings_accuracy_in_feet);
+                        accuracyBeforeLogging.getEditText().setHint(R.string.settings_enter_feet);
 
+                        minimumAccuracy = Utilities.MetersToFeet(minimumAccuracy);
                     }
                     else
                     {
                         minimumDistance = Utilities.FeetToMeters(minimumDistance);
                         distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_meters);
                         distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
+                                                    
+                        minimumAccuracy = Utilities.FeetToMeters(minimumAccuracy);
+                        accuracyBeforeLogging.setDialogTitle(R.string.settings_accuracy_in_meters);
+                        accuracyBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
+                        
 
                     }
 
@@ -189,9 +225,15 @@ public class GpsSettingsActivity extends PreferenceActivity
                     {
                         minimumDistance = 9999;
                     }
+                    
+                    if (minimumAccuracy >= 9999)
+                    {
+                        minimumAccuracy = 9999;
+                    }
 
                     editor.putString("distance_before_logging", String.valueOf(minimumDistance));
-
+                    
+                    editor.putString("accuracy_before_logging", String.valueOf(minimumAccuracy));
                     editor.commit();
 
                     handler.post(updateResults);
