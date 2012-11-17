@@ -21,6 +21,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
+import java.util.Locale;
 
 import android.location.Location;
 
@@ -78,7 +79,7 @@ public class PlainTextFileLogger implements IFileLogger
 
         String dateTimeString = Utilities.GetIsoDateTime(now);
 
-        String outputString = String.format("%s,%f,%f,%f,%f,%f,%f\n", dateTimeString,
+        String outputString = String.format(Locale.US, "%s,%f,%f,%f,%f,%f,%f\n", dateTimeString,
                 loc.getLatitude(),
                 loc.getLongitude(),
                 loc.getAltitude(),
