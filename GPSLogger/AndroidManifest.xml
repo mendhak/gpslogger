@@ -126,6 +126,17 @@
         </receiver>
 
         <receiver android:name="com.mendhak.gpslogger.senders.AlarmReceiver"/>
+        
+        <receiver
+            android:name="com.mendhak.gpslogger.ExternalControlReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.mendhak.gpslogger.STARTL" />
+                <action android:name="com.mendhak.gpslogger.STOPL" />
+            </intent-filter>
+        </receiver>
+        
     </application>
 
 
