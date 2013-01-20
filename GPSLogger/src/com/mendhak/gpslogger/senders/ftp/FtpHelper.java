@@ -19,6 +19,7 @@
 package com.mendhak.gpslogger.senders.ftp;
 
 import android.util.Log;
+import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.senders.IFileSender;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPSClient;
@@ -32,22 +33,44 @@ import java.util.List;
 
 public class FtpHelper implements IFileSender
 {
+    IActionListener callback;
+
+    public FtpHelper(IActionListener callback)
+    {
+        this.callback = callback;
+    }
+
+    void TestFtp()
+    {
+        Thread t = new Thread(new TestFtpHandler(callback));
+        t.start();
+    }
 
     @Override
     public void UploadFile(List<File> files)
     {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     @Override
     public boolean accept(File file, String s)
     {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
+
+
 }
 
 class TestFtpHandler implements Runnable
 {
+
+    IActionListener helper;
+
+    public TestFtpHandler(IActionListener helper)
+    {
+        this.helper = helper;
+    }
+
 
     @Override
     public void run()
@@ -59,7 +82,7 @@ class TestFtpHandler implements Runnable
 
         //If implicit = true, set port to 990. If false, set to 21.  If useFtps = false, set to 21.
         boolean implicit = true;
-        int port = 990;
+        int port = 21;
 
         try
         {
@@ -83,7 +106,7 @@ class TestFtpHandler implements Runnable
         }
         catch (Exception e)
         {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
 
@@ -97,8 +120,8 @@ class TestFtpHandler implements Runnable
             {
                 Log.v("FTPTEST", "logged in");
                 client.enterLocalPassiveMode();
-                String data = "test data";
-                ByteArrayInputStream in = new ByteArrayInputStream(data.getBytes());
+//                String data = "test data";
+//                ByteArrayInputStream in = new ByteArrayInputStream(data.getBytes());
 //                boolean result = client.storeFile("test2.txt", in);
 //                in.close();
 //                if (result)
@@ -110,15 +133,18 @@ class TestFtpHandler implements Runnable
 //                    Log.v("FTPTEST", "failed to write file");
 //                }
 
+                helper.OnComplete();
             }
             else
             {
                 Log.e("FTPTEST", "Login fail...");
+                helper.OnFailure();
             }
 
         } catch (IOException e) {
             Log.e("FTPTEST", e.getMessage());
             e.printStackTrace();
+            helper.OnFailure();
         } finally {
             try {
                 //
@@ -131,6 +157,7 @@ class TestFtpHandler implements Runnable
             } catch (IOException e) {
                 Log.e("FTPTEST", e.getMessage());
                 e.printStackTrace();
+
             }
         }
     }
