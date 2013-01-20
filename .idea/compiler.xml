@@ -8,6 +8,8 @@
       <directory url="file://$PROJECT_DIR$/GPSLogger/target/generated-sources/r" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/tests/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/Testing/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/GPSLogger/target/generated-sources/annotations" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/GPSLogger/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
     </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>
@@ -22,7 +24,11 @@
       <entry name="?*.tld" />
       <entry name="?*.ftl" />
     </wildcardResourcePatterns>
-    <annotationProcessing enabled="false" useClasspath="true" />
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+    </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-target 1.6" />
