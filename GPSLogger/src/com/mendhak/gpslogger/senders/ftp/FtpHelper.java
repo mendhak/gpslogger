@@ -42,7 +42,17 @@ public class FtpHelper implements IFileSender
 
     void TestFtp()
     {
-        Thread t = new Thread(new TestFtpHandler(callback));
+
+        boolean useFtps = false;
+        String protocol = "SSL";
+
+        //If implicit = true, set port to 990. If false, set to 21.  If useFtps = false, set to 21.
+        boolean implicit = true;
+        int port = 21;
+
+
+        Thread t = new Thread(new TestFtpHandler(callback, "ftp.secureftp-test.com", port, "test", "test",
+                useFtps, protocol, implicit));
         t.start();
     }
 
@@ -65,30 +75,39 @@ class TestFtpHandler implements Runnable
 {
 
     IActionListener helper;
+    String server;
+    int port;
+    String username;
+    String password;
+    boolean useFtps;
+    String protocol;
+    boolean implicit;
 
-    public TestFtpHandler(IActionListener helper)
+    public TestFtpHandler(IActionListener helper, String server, int port, String username,
+                          String password, boolean useFtps, String protocol, boolean implicit)
     {
         this.helper = helper;
+        this.server = server;
+        this.port = port;
+        this.username = username;
+        this.password = password;
+        this.useFtps = useFtps;
+        this.protocol = protocol;
+        this.implicit = implicit;
     }
-
 
     @Override
     public void run()
     {
 
-        boolean useFtps = false;
-        FTPClient client = null;
-        String protocol = "SSL";
 
-        //If implicit = true, set port to 990. If false, set to 21.  If useFtps = false, set to 21.
-        boolean implicit = true;
-        int port = 21;
+        FTPClient client = null;
 
         try
         {
             Log.v("FTPTEST", "Connecting...");
 
-            if(useFtps)
+            if (useFtps)
             {
                 client = new FTPSClient(protocol, implicit);
 
@@ -110,13 +129,14 @@ class TestFtpHandler implements Runnable
         }
 
 
-        try {
-            client.connect("ftp.secureftp-test.com", port);
+        try
+        {
+            client.connect(server, port);
 
             //
             // When login success the login method returns true.
             //
-            if (client.login("test", "test"))
+            if (client.login(username, password))
             {
                 Log.v("FTPTEST", "logged in");
                 client.enterLocalPassiveMode();
@@ -141,12 +161,17 @@ class TestFtpHandler implements Runnable
                 helper.OnFailure();
             }
 
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             Log.e("FTPTEST", e.getMessage());
             e.printStackTrace();
             helper.OnFailure();
-        } finally {
-            try {
+        }
+        finally
+        {
+            try
+            {
                 //
                 // Closes the connection to the FTP server
                 //
@@ -154,7 +179,9 @@ class TestFtpHandler implements Runnable
                 client.logout();
                 Log.v("FTPTEST", "Disconnecting...");
                 client.disconnect();
-            } catch (IOException e) {
+            }
+            catch (IOException e)
+            {
                 Log.e("FTPTEST", e.getMessage());
                 e.printStackTrace();
 
