@@ -92,6 +92,7 @@
   <string name="settings_distance_in_feet">Afstand in voet</string>
   <string name="settings_enter_feet">Voer voeten in(max 9999)</string>
   <string name="settings_distance_in_meters">Afstand in meter</string>
+  <string name="settings_accuracy_in_meters">Nauwkeurigheid in meters</string>
   <string name="settings_enter_meters">Voer meter in(max 9999)</string>
   <string name="settings_converting_title">Converteren...</string>
   <string name="settings_converting_description">Minimale afstand voor converteren van eenheden. Waarden boven 9999 worden teruggezet op 9999. Het instellingen scherm zal nu herladen.     </string>
@@ -115,6 +116,7 @@
   <string name="time_before_logging_summary">﻿Gebruik 0 voor maximale frequentie, maar langzamer is beter voor de belsting van de batterij.</string>
   <string name="time_before_logging_dialog_title">﻿Tijd in seconden</string>
   <string name="time_before_logging_hint">﻿Voer seconden in (max 9999)</string>
+  <string name="retry_time_dialog_title">Tijd in seconden</string>
   <string name="distance_before_logging_title">Afstand tussen logpunten</string>
   <string name="distance_before_logging_summary">Minimum afstand tussen vorig en nieuw logpunt. Gebruik 0 om alle punten te loggen.</string>
   <string name="useimperial_title">﻿Engelse eenheden gebruiken</string>

@@ -23,6 +23,7 @@
   <string name="txt_direction">Направление:</string>
   <string name="txt_satellites">Спутники:</string>
   <string name="txt_accuracy">Точность:</string>
+  <string name="txt_travel_distance">Пройдено:</string>
   <string name="btn_start_logging">Начать запись</string>
   <string name="btn_stop_logging">Прекратить запись</string>
   <string name="gpslogger_still_running">GPSLogger запущен.</string>
@@ -55,7 +56,9 @@
   <string name="meters_per_second"> м/с</string>
   <string name="feet_per_second"> футов/с</string>
   <string name="miles_per_hour"> миль/ч</string>
+  <string name="miles"> миль</string>
   <string name="kilometers_per_hour"> км/ч</string>
+  <string name="kilometers"> км</string>
   <string name="unknown_direction">неизвестно</string>
   <string name="sorry">Извините</string>
   <string name="success">Успешно</string>
@@ -91,7 +94,10 @@
   <string name="settings_distance_in_feet">Дистанция в футах</string>
   <string name="settings_enter_feet">Введите число футов (max 9999)</string>
   <string name="settings_distance_in_meters">Дистанция в метрах</string>
+  <string name="settings_accuracy_in_meters">Точность в метрах</string>
+  <string name="settings_accuracy_in_feet">Точность в футах</string>
   <string name="settings_enter_meters">Введите число метров (max 9999)</string>
+  <string name="settings_converting_title">Преобразование...</string>
   <string name="settings_converting_description">Конвертирую единицы минимальной дистанции. Значения больше 9999 будут
         сброшены до 9999. Экран настроек будет перезагружен.
     </string>
@@ -122,10 +128,16 @@
     </string>
   <string name="time_before_logging_dialog_title">Время в секундах</string>
   <string name="time_before_logging_hint">Введите число секунд (max 9999)</string>
+  <string name="retry_time_title">Интервал времени для точности</string>
+  <string name="retry_time_summary">Используйте 0 для максимальной частоты, но чем медленнее, тем лучше для аккумулятора.     </string>
+  <string name="retry_time_dialog_title">Время в секундах</string>
+  <string name="retry_time_hint">Введите интервал в секундах (максимум 9999)</string>
   <string name="distance_before_logging_title">Дистанция логирования точки</string>
   <string name="distance_before_logging_summary">Используйте 0 для минимально возможной дистанции логирования. Больше
         - лучше для батареи.
     </string>
+  <string name="accuracy_before_logging_title">Минимальная точность измерений</string>
+  <string name="accuracy_before_logging_summary">Минимально допустимая точность измерений. Установите 0 для записи результатов с любой точностью.</string>
   <string name="useimperial_title">Имперская система мер</string>
   <string name="useimperial_summary">Использовать футы, мили, пинты.</string>
   <string name="show_notification_title">Показывать уведомления</string>
@@ -137,6 +149,7 @@
   <string name="autoemail_title">Настройки Email</string>
   <string name="autoemail_summary">Автоматически отправлять лог файл письмом на адрес по Вашему выбору</string>
   <string name="please_wait">Пожалуйста, подождите.</string>
+  <string name="autoemail_autosend">Включить электронную почту</string>
   <string name="autoemail_autosend_summary">Разрешает автоматическую отправку лога письмом на выбранный email.
     </string>
   <string name="autoemail_target">Адреса электронной почты получателей</string>
@@ -243,5 +256,30 @@
   <string name="autosend_sendzip_summary">Отправить zip-файл если применимо. Отключите, чтобы отправлять файлы по одиночке, или если zip параметр для вас не работает     </string>
   <string name="autosend_targets_category">Места назначения для авто отправки</string>
   <string name="menu_email_now">Авто отправить сейчас</string>
+  <string name="autosend_sending">Автоматическая отправка</string>
   <string name="summary_autosend">Авто отправить:</string>
+  <string name="pref_autosend_title">Автоматическая отправка, электронная почта и выгрузка</string>
+  <string name="shortcut_start">Старт</string>
+  <string name="shortcut_stop">Стоп</string>
+  <string name="shortcut_pickaction">Выбрать действие</string>
+  <string name="log_opengts_title">Отправлять координаты на сервер OpenGTS</string>
+  <string name="log_opengts_summary">Отправлять данные GPRMC на сервер OpenGTS.</string>
+  <string name="opengts_setup_title">OpenGTS Настройка</string>
+  <string name="opengts_setup_summary">Отправка координат на сервер OpenGTS по вашему выбору.</string>
+  <string name="opengts_enabled">Включить OpenGTS</string>
+  <string name="opengts_enabled_summary">Включите этот OpenGTS сервер.</string>
+  <string name="autoopengts_autosend">Включить автоматическую отправку</string>
+  <string name="autoopengts_autosend_summary">Включает автоматическую отправку координат.</string>
+  <string name="autoopengts_server_category">OpenGTS параметры</string>
+  <string name="autoopengts_invalid_form">Недопустимые значения</string>
+  <string name="autoopengts_invalid_form_message">Пожалуйста, убедитесь, что все поля заполнены верно</string>
+  <string name="opengts_upload">Отправить в OpenGTS</string>
+  <string name="autoopengts_server">Сервер</string>
+  <string name="autoopengts_server_summary">Имя хоста или IP</string>
+  <string name="opengts_server_port">Порт</string>
+  <string name="opengts_server_communication_method">Способ связи</string>
+  <string name="opengts_server_communication_method_summary">На основе протокола HTTP или сырых сокетов</string>
+  <string name="autoopengts_server_path">Путь на сервере</string>
+  <string name="autoopengts_server_path_summary">Опционально, только для способа связи на основе протокола HTTP. Например, \'/gprmc/Data\'</string>
+  <string name="autoopengts_device_id">Идентификатор устройства</string>
 </resources>

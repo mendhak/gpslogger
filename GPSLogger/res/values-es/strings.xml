@@ -91,7 +91,9 @@
   <string name="settings_distance_in_feet">Distancia en pies</string>
   <string name="settings_enter_feet">Ingrese pies (máx. 9999)</string>
   <string name="settings_distance_in_meters">Distancia en metros</string>
+  <string name="settings_accuracy_in_meters">Precisión (en metros)</string>
   <string name="settings_enter_meters">Ingrese metros (máx. 9999)</string>
+  <string name="settings_converting_title">Convirtiendo...</string>
   <string name="pref_logging_title">Detalles de Registro</string>
   <string name="log_gpx_title">Registrar en GPX</string>
   <string name="log_gpx_summary">Crea un archivo GPX en la carpeta GPSLogger de la tarjeta SD.</string>
