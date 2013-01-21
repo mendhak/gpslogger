@@ -126,6 +126,10 @@
                         android:summary="@string/opengts_setup_summary" android:key="opengts_setup">
                 <intent android:action="com.mendhak.gpslogger.OPENGTS_SETUP" />
             </Preference>
+            <Preference android:title="@string/autoftp_setup_title"
+                         android:summary="@string/autoftp_setup_summary" android:key="autoftp_setup">
+                <intent android:action="com.mendhak.gpslogger.AUTOFTP_SETUP" />
+            </Preference>
         </PreferenceCategory>
 
 

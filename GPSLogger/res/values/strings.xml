@@ -399,6 +399,10 @@
     <string name="autoftp_invalid_summary">Some of your settings are invalid. Please ensure that you have filled out all
         relevant fields.
     </string>
-    <string name="autoftp_enabled">Auto FTP enabled</string>
+    <string name="autoftp_enabled">FTP enabled</string>
     <string name="ftp_upload">FTP upload</string>
+
+    <string name="autoftp_setup_title">FTP Setup</string>
+    <string name="autoftp_setup_summary">Upload your files to an FTP(S) server. Note: This does not cover SFTP.</string>
+
 </resources>

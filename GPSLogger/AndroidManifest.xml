@@ -76,7 +76,12 @@
                   android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name="com.mendhak.gpslogger.senders.ftp.AutoFtpActivity">
+        <activity android:name="com.mendhak.gpslogger.senders.ftp.AutoFtpActivity"
+                  android:label="@string/autoftp_setup_title" android:screenOrientation="portrait">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="com.mendhak.gpslogger.AUTOFTP_SETUP"/>
+            </intent-filter>
         </activity>
 
         <activity android:name="com.mendhak.gpslogger.senders.email.AutoEmailActivity"
