@@ -241,6 +241,7 @@ public class Utilities
         AppSettings.setOpenGTSServerPath(prefs.getString("autoopengts_server_path", ""));
         AppSettings.setOpenGTSDeviceId(prefs.getString("opengts_device_id", ""));
 
+        AppSettings.setAutoFtpEnabled(prefs.getBoolean("autoftp_enabled",false));
         AppSettings.setFtpServerName(prefs.getString("autoftp_server",""));
         AppSettings.setFtpUsername(prefs.getString("autoftp_username",""));
         AppSettings.setFtpPassword(prefs.getString("autoftp_password",""));

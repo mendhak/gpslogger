@@ -59,6 +59,7 @@ public class AppSettings extends Application
     private static String openGTSServerPath;
     private static String openGTSDeviceId;
 
+    private static boolean autoFtpEnabled;
     private static String ftpServerName;
     private static int ftpPort;
     private static String ftpUsername;
@@ -592,5 +593,15 @@ public class AppSettings extends Application
     public static void setFtpImplicit(boolean ftpImplicit)
     {
         AppSettings.ftpImplicit = ftpImplicit;
+    }
+
+    public static boolean isAutoFtpEnabled()
+    {
+        return autoFtpEnabled;
+    }
+
+    public static void setAutoFtpEnabled(boolean autoFtpEnabled)
+    {
+        AppSettings.autoFtpEnabled = autoFtpEnabled;
     }
 }

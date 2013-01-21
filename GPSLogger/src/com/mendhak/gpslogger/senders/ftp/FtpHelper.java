@@ -79,7 +79,7 @@ public class FtpHelper implements IFileSender
     @Override
     public boolean accept(File file, String s)
     {
-        return false;
+        return true;
     }
 
 

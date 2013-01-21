@@ -76,6 +76,8 @@
                   android:screenOrientation="portrait">
         </activity>
 
+        <activity android:name="com.mendhak.gpslogger.senders.ftp.AutoFtpActivity">
+        </activity>
 
         <activity android:name="com.mendhak.gpslogger.senders.email.AutoEmailActivity"
                   android:label="@string/autoemail_title" android:screenOrientation="portrait">

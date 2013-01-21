@@ -2,6 +2,12 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   android:key="autoftp_preferences">
+
+    <CheckBoxPreference
+        android:key="autoftp_enabled"
+        android:title="@string/autoftp_enabled" />
+
+
     <EditTextPreference
             android:key="autoftp_server"
             android:title="@string/autoftp_server"
