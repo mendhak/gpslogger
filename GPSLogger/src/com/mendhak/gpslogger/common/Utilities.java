@@ -241,6 +241,14 @@ public class Utilities
         AppSettings.setOpenGTSServerPath(prefs.getString("autoopengts_server_path", ""));
         AppSettings.setOpenGTSDeviceId(prefs.getString("opengts_device_id", ""));
 
+        AppSettings.setFtpServerName(prefs.getString("autoftp_server",""));
+        AppSettings.setFtpUsername(prefs.getString("autoftp_username",""));
+        AppSettings.setFtpPassword(prefs.getString("autoftp_password",""));
+        AppSettings.setFtpPort(prefs.getInt("autoftp_port", 21));
+        AppSettings.setFtpUseFtps(prefs.getBoolean("autoftp_useftps", false));
+        AppSettings.setFtpProtocol(prefs.getString("autoftp_ssltls",""));
+        AppSettings.setFtpImplicit(prefs.getBoolean("autoftp_implicit", false));
+
     }
 
     public static void ShowProgress(Context ctx, String title, String message)

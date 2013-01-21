@@ -19,10 +19,12 @@
 package com.mendhak.gpslogger.senders.ftp;
 
 
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
+import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.IFileSender;
-import java.io.ByteArrayInputStream;
-import java.io.File;
+
+import java.io.*;
 import java.util.Date;
 import java.util.List;
 
@@ -37,9 +39,11 @@ public class FtpHelper implements IFileSender
 
     void TestFtp(String servername, String username, String password, int port, boolean useFtps, String protocol, boolean implicit)
     {
+        String data = "GPSLogger for Android, test file.  Generated at " + (new Date()).toLocaleString() + "\r\n";
+        ByteArrayInputStream in = new ByteArrayInputStream(data.getBytes());
 
-        Thread t = new Thread(new TestFtpHandler(callback, servername, port, username, password,
-                useFtps, protocol, implicit));
+        Thread t = new Thread(new FtpUploadHandler(callback, servername, port, username, password,
+                useFtps, protocol, implicit, in, "gpslogger_test.txt"));
         t.start();
     }
 
@@ -47,6 +51,29 @@ public class FtpHelper implements IFileSender
     public void UploadFile(List<File> files)
     {
 
+        if (!ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(), AppSettings.getFtpPassword(),
+                AppSettings.getFtpPort(), AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit()))
+        {
+            callback.OnFailure();
+        }
+
+        for (File f : files)
+        {
+            try
+            {
+                FileInputStream fis = new FileInputStream(f);
+                Thread t = new Thread(new FtpUploadHandler(callback, AppSettings.getFtpServerName(), AppSettings.getFtpPort(),
+                        AppSettings.getFtpUsername(), AppSettings.getFtpPassword(),
+                        AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit(),
+                        fis, f.getName()));
+                t.start();
+            }
+            catch (Exception e)
+            {
+                Utilities.LogError("Could not prepare file for upload.", e);
+            }
+
+        }
     }
 
     @Override
@@ -61,7 +88,7 @@ public class FtpHelper implements IFileSender
     {
         boolean retVal = servername != null && servername.length() > 0 && port != null && port > 0;
 
-        if(useFtps && (sslTls == null || sslTls.length() <= 0))
+        if (useFtps && (sslTls == null || sslTls.length() <= 0))
         {
             retVal = false;
         }
@@ -70,7 +97,7 @@ public class FtpHelper implements IFileSender
     }
 }
 
-class TestFtpHandler implements Runnable
+class FtpUploadHandler implements Runnable
 {
 
     IActionListener helper;
@@ -81,9 +108,12 @@ class TestFtpHandler implements Runnable
     boolean useFtps;
     String protocol;
     boolean implicit;
+    InputStream inputStream;
+    String fileName;
 
-    public TestFtpHandler(IActionListener helper, String server, int port, String username,
-                          String password, boolean useFtps, String protocol, boolean implicit)
+    public FtpUploadHandler(IActionListener helper, String server, int port, String username,
+                            String password, boolean useFtps, String protocol, boolean implicit,
+                            InputStream inputStream, String fileName)
     {
         this.helper = helper;
         this.server = server;
@@ -93,15 +123,14 @@ class TestFtpHandler implements Runnable
         this.useFtps = useFtps;
         this.protocol = protocol;
         this.implicit = implicit;
+        this.inputStream = inputStream;
+        this.fileName = fileName;
     }
 
     @Override
     public void run()
     {
-        String data = "GPSLogger for Android, test file.  Generated at " + (new Date()).toLocaleString() + "\r\n";
-        ByteArrayInputStream in = new ByteArrayInputStream(data.getBytes());
-
-        if(Ftp.Upload(server, username,  password,  port, useFtps, protocol,  implicit, in, "gpslogger_test.txt"))
+        if (Ftp.Upload(server, username, password, port, useFtps, protocol, implicit, inputStream, fileName))
         {
             helper.OnComplete();
         }

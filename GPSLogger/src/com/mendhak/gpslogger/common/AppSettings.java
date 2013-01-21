@@ -59,6 +59,14 @@ public class AppSettings extends Application
     private static String openGTSServerPath;
     private static String openGTSDeviceId;
 
+    private static String ftpServerName;
+    private static int ftpPort;
+    private static String ftpUsername;
+    private static String ftpPassword;
+    private static boolean ftpUseFtps;
+    private static String ftpProtocol;
+    private static boolean ftpImplicit;
+
 
     /**
      * @return the useImperial
@@ -516,4 +524,73 @@ public class AppSettings extends Application
     }
 
 
+    public static String getFtpServerName()
+    {
+        return ftpServerName;
+    }
+
+    public static void setFtpServerName(String ftpServerName)
+    {
+        AppSettings.ftpServerName = ftpServerName;
+    }
+
+    public static int getFtpPort()
+    {
+        return ftpPort;
+    }
+
+    public static void setFtpPort(int ftpPort)
+    {
+        AppSettings.ftpPort = ftpPort;
+    }
+
+    public static String getFtpUsername()
+    {
+        return ftpUsername;
+    }
+
+    public static void setFtpUsername(String ftpUsername)
+    {
+        AppSettings.ftpUsername = ftpUsername;
+    }
+
+    public static String getFtpPassword()
+    {
+        return ftpPassword;
+    }
+
+    public static void setFtpPassword(String ftpPassword)
+    {
+        AppSettings.ftpPassword = ftpPassword;
+    }
+
+    public static boolean FtpUseFtps()
+    {
+        return ftpUseFtps;
+    }
+
+    public static void setFtpUseFtps(boolean ftpUseFtps)
+    {
+        AppSettings.ftpUseFtps = ftpUseFtps;
+    }
+
+    public static String getFtpProtocol()
+    {
+        return ftpProtocol;
+    }
+
+    public static void setFtpProtocol(String ftpProtocol)
+    {
+        AppSettings.ftpProtocol = ftpProtocol;
+    }
+
+    public static boolean FtpImplicit()
+    {
+        return ftpImplicit;
+    }
+
+    public static void setFtpImplicit(boolean ftpImplicit)
+    {
+        AppSettings.ftpImplicit = ftpImplicit;
+    }
 }
