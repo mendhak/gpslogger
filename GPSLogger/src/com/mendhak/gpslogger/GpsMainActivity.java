@@ -44,6 +44,7 @@ import com.mendhak.gpslogger.senders.IFileSender;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxAuthorizationActivity;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
+import com.mendhak.gpslogger.senders.ftp.AutoFtpActivity;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
@@ -429,6 +430,9 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             case R.id.mnuOpenGTS:
                 SendToOpenGTS();
                 break;
+            case R.id.mnuFtp:
+                SendToFtp();
+                break;
             case R.id.mnuEmail:
                 SelectAndEmailFile();
                 break;
@@ -584,6 +588,18 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
             ShowFileListDialog(settingsIntent, FileSenderFactory.GetEmailSender(this));
         }
 
+    }
+
+    private void SendToFtp()
+    {
+        Utilities.LogDebug("GpsMainActivity.SendToFTP");
+
+        Intent settingsIntent = new Intent(getApplicationContext(), AutoFtpActivity.class);
+
+        if(!Utilities.IsFtpSetup())
+        {
+            startActivity(settingsIntent);
+        }
     }
 
     private void SendToOpenGTS()

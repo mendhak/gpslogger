@@ -25,6 +25,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.senders.ftp.FtpHelper;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -574,6 +575,17 @@ public class Utilities
                 && AppSettings.getOpenGTSDeviceId().length() > 0;
     }
 
+
+    public static boolean IsFtpSetup()
+    {
+
+        FtpHelper helper = new FtpHelper(null);
+
+        return helper.ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(),
+                AppSettings.getFtpPassword(), AppSettings.getFtpPort(), AppSettings.FtpUseFtps(),
+                AppSettings.getFtpProtocol(), AppSettings.FtpImplicit());
+    }
+
     /**
      * Uses the Haversine formula to calculate the distnace between to lat-long coordinates
      *
@@ -781,5 +793,6 @@ public class Utilities
         return "application/octet-stream";
 
     }
+
 
 }
