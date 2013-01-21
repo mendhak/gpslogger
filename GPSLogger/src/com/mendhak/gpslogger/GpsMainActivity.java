@@ -600,6 +600,12 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
         {
             startActivity(settingsIntent);
         }
+        else
+        {
+            IFileSender fs = FileSenderFactory.GetFtpSender(getApplicationContext(), this);
+            ShowFileListDialog(settingsIntent, fs);
+
+        }
     }
 
     private void SendToOpenGTS()
