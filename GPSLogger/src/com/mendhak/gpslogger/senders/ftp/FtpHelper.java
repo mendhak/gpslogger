@@ -18,17 +18,12 @@
 
 package com.mendhak.gpslogger.senders.ftp;
 
-import android.util.Log;
+
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.senders.IFileSender;
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPSClient;
-
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.KeyManagerFactory;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 public class FtpHelper implements IFileSender
@@ -43,8 +38,6 @@ public class FtpHelper implements IFileSender
     void TestFtp(String servername, String username, String password, int port, boolean useFtps, String protocol, boolean implicit)
     {
 
-        //If implicit = true, set port to 990. If false, set to 21.  If useFtps = false, set to 21.
-        //"ftp.secureftp-test.com", test, test
         Thread t = new Thread(new TestFtpHandler(callback, servername, port, username, password,
                 useFtps, protocol, implicit));
         t.start();
@@ -105,93 +98,16 @@ class TestFtpHandler implements Runnable
     @Override
     public void run()
     {
+        String data = "GPSLogger for Android, test file.  Generated at " + (new Date()).toLocaleString() + "\r\n";
+        ByteArrayInputStream in = new ByteArrayInputStream(data.getBytes());
 
-
-        FTPClient client = null;
-
-        try
+        if(Ftp.Upload(server, username,  password,  port, useFtps, protocol,  implicit, in, "gpslogger_test.txt"))
         {
-            Log.v("FTPTEST", "Connecting...");
-
-            if (useFtps)
-            {
-                client = new FTPSClient(protocol, implicit);
-
-                KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-                kmf.init(null, null);
-                KeyManager km = kmf.getKeyManagers()[0];
-                ((FTPSClient) client).setKeyManager(km);
-
-            }
-            else
-            {
-                client = new FTPClient();
-            }
-
+            helper.OnComplete();
         }
-        catch (Exception e)
+        else
         {
-            e.printStackTrace();
-        }
-
-
-        try
-        {
-            client.connect(server, port);
-
-            //
-            // When login success the login method returns true.
-            //
-            if (client.login(username, password))
-            {
-                Log.v("FTPTEST", "logged in");
-                client.enterLocalPassiveMode();
-//                String data = "test data";
-//                ByteArrayInputStream in = new ByteArrayInputStream(data.getBytes());
-//                boolean result = client.storeFile("test2.txt", in);
-//                in.close();
-//                if (result)
-//                {
-//                    Log.v("FTPTEST", "succeeded in writing file");
-//                }
-//                else
-//                {
-//                    Log.v("FTPTEST", "failed to write file");
-//                }
-
-                helper.OnComplete();
-            }
-            else
-            {
-                Log.e("FTPTEST", "Login fail...");
-                helper.OnFailure();
-            }
-
-        }
-        catch (Exception e)
-        {
-            Log.e("FTPTEST", e.getMessage());
-            e.printStackTrace();
             helper.OnFailure();
-        }
-        finally
-        {
-            try
-            {
-                //
-                // Closes the connection to the FTP server
-                //
-                Log.v("FTPTEST", "Logging out...");
-                client.logout();
-                Log.v("FTPTEST", "Disconnecting...");
-                client.disconnect();
-            }
-            catch (IOException e)
-            {
-                Log.e("FTPTEST", e.getMessage());
-                e.printStackTrace();
-
-            }
         }
     }
 }
