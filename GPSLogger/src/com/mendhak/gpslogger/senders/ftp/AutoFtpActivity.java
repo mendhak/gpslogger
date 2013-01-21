@@ -19,8 +19,7 @@ package com.mendhak.gpslogger.senders.ftp;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.preference.*;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
@@ -36,8 +35,8 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
         addPreferencesFromResource(R.xml.autoftpsettings);
 
         Preference testFtp = findPreference("autoftp_test");
-
         testFtp.setOnPreferenceClickListener(this);
+
     }
 
 
@@ -74,22 +73,52 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
     @Override
     public void OnComplete()
     {
-
+        Utilities.HideProgress();
         handler.post(successfullySent);
     }
 
     @Override
     public void OnFailure()
     {
+        Utilities.HideProgress();
         handler.post(failedSend);
     }
 
     @Override
     public boolean onPreferenceClick(Preference preference)
     {
+
         FtpHelper helper = new FtpHelper(this);
-        helper.TestFtp();
+
+        EditTextPreference servernamePreference = (EditTextPreference)findPreference("autoftp_server");
+        EditTextPreference usernamePreference = (EditTextPreference)findPreference("autoftp_username");
+        EditTextPreference passwordPreference = (EditTextPreference)findPreference("autoftp_password");
+        EditTextPreference portPreference = (EditTextPreference)findPreference("autoftp_port");
+        CheckBoxPreference useFtpsPreference = (CheckBoxPreference)findPreference("autoftp_useftps");
+        ListPreference sslTlsPreference = (ListPreference)findPreference("autoftp_ssltls");
+        CheckBoxPreference implicitPreference = (CheckBoxPreference)findPreference("autoftp_implicit");
+
+        if(!helper.ValidSettings(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
+                Integer.valueOf(portPreference.getText()), useFtpsPreference.isChecked(), sslTlsPreference.getValue(),
+                implicitPreference.isChecked()))
+        {
+            Utilities.MsgBox(getString(R.string.autoftp_invalid_settings),
+                    getString(R.string.autoftp_invalid_summary),
+                    AutoFtpActivity.this);
+            return false;
+        }
+
+
+        Utilities.ShowProgress(this, getString(R.string.autoftp_testing),
+                getString(R.string.please_wait));
+
+
+        helper.TestFtp(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
+                Integer.valueOf(portPreference.getText()), useFtpsPreference.isChecked(), sslTlsPreference.getValue(),
+                implicitPreference.isChecked());
 
         return true;
     }
+
+
 }

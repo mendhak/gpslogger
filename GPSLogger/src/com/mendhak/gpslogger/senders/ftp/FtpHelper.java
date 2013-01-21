@@ -40,18 +40,12 @@ public class FtpHelper implements IFileSender
         this.callback = callback;
     }
 
-    void TestFtp()
+    void TestFtp(String servername, String username, String password, int port, boolean useFtps, String protocol, boolean implicit)
     {
 
-        boolean useFtps = false;
-        String protocol = "SSL";
-
         //If implicit = true, set port to 990. If false, set to 21.  If useFtps = false, set to 21.
-        boolean implicit = true;
-        int port = 21;
-
-
-        Thread t = new Thread(new TestFtpHandler(callback, "ftp.secureftp-test.com", port, "test", "test",
+        //"ftp.secureftp-test.com", test, test
+        Thread t = new Thread(new TestFtpHandler(callback, servername, port, username, password,
                 useFtps, protocol, implicit));
         t.start();
     }
@@ -69,6 +63,18 @@ public class FtpHelper implements IFileSender
     }
 
 
+    public boolean ValidSettings(String servername, String username, String password, Integer port, boolean useFtps,
+                                 String sslTls, boolean implicit)
+    {
+        boolean retVal = servername != null && servername.length() > 0 && port != null && port > 0;
+
+        if(useFtps && (sslTls == null || sslTls.length() <= 0))
+        {
+            retVal = false;
+        }
+
+        return retVal;
+    }
 }
 
 class TestFtpHandler implements Runnable
@@ -162,7 +168,7 @@ class TestFtpHandler implements Runnable
             }
 
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             Log.e("FTPTEST", e.getMessage());
             e.printStackTrace();

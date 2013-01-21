@@ -28,11 +28,13 @@
                 android:key="autoftp_port"
                 android:title="@string/autoftp_port"
                 android:dialogTitle="@string/autoftp_port"
+                android:defaultValue="21"
                 android:inputType="number"/>
 
         <CheckBoxPreference
                 android:key="autoftp_useftps"
                 android:title="@string/autoftp_useftps"
+                android:defaultValue="false"
                 android:summary="@string/autoftp_useftps_summary"/>
 
         <ListPreference
@@ -48,6 +50,7 @@
         <CheckBoxPreference
                 android:key="autoftp_implicit"
                 android:title="@string/autoftp_implicit"
+                android:defaultValue="false"
                 android:summary="@string/autoftp_implicit_summary"/>
 
 
