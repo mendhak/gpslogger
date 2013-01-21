@@ -377,5 +377,21 @@
     <string name="autoopengts_server_path">Server Path</string>
     <string name="autoopengts_server_path_summary">Optional and only for HTTP-based communication. For example \'/gprmc/Data\'</string>
     <string name="autoopengts_device_id">Device ID</string>
-
+    <string name="autoftp_server">FTP Server</string>
+    <string name="autoftp_server_summary">IP address or hostname</string>
+    <string name="autoftp_username">Username</string>
+    <string name="autoftp_password">Password</string>
+    <string name="autoftp_advanced_settings">Advanced settings</string>
+    <string name="autoftp_port">Port</string>
+    <string name="autoftp_useftps">Use FTPS</string>
+    <string name="autoftp_useftps_summary">Enable FTP over SSL. SSL/TLS and Implicit are ignored if this is unchecked.</string>
+    <string name="autoftp_ssltls">SSL/TLS</string>
+    <string name="autoftp_ssltls_summary">None, SSL or TLS. Use none for regular unsecured connections.</string>
+    <string name="autoftp_ssltls_none">None</string>
+    <string name="autoftp_ssltls_ssl">SSL</string>
+    <string name="autoftp_ssltls_tls">TLS</string>
+    <string name="autoftp_implicit">Implicit FTP over SSL</string>
+    <string name="autoftp_implicit_summary">Leave unchecked if you don\'t know.</string>
+    <string name="autoftp_test">Test FTP Upload</string>
+    <string name="autoftp_test_summary">Upload a test file to the FTP server</string>
 </resources>

@@ -1,14 +1,3 @@
-package com.mendhak.gpslogger.senders.ftp;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.os.Handler;
-import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.IActionListener;
-import com.mendhak.gpslogger.common.Utilities;
-
-
-
 /*
 *    This file is part of GPSLogger for Android.
 *
@@ -26,8 +15,17 @@ import com.mendhak.gpslogger.common.Utilities;
 *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+package com.mendhak.gpslogger.senders.ftp;
 
-public class AutoFtpActivity extends Activity implements IActionListener
+import android.os.Bundle;
+import android.os.Handler;
+import android.preference.Preference;
+import android.preference.PreferenceActivity;
+import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.IActionListener;
+import com.mendhak.gpslogger.common.Utilities;
+
+public class AutoFtpActivity extends PreferenceActivity implements IActionListener, Preference.OnPreferenceClickListener
 {
 
     private final Handler handler = new Handler();
@@ -35,9 +33,11 @@ public class AutoFtpActivity extends Activity implements IActionListener
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.autoftpsettings);
 
-        FtpHelper helper = new FtpHelper(this);
-        helper.TestFtp();
+        Preference testFtp = findPreference("autoftp_test");
+
+        testFtp.setOnPreferenceClickListener(this);
     }
 
 
@@ -82,5 +82,14 @@ public class AutoFtpActivity extends Activity implements IActionListener
     public void OnFailure()
     {
         handler.post(failedSend);
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference)
+    {
+        FtpHelper helper = new FtpHelper(this);
+        helper.TestFtp();
+
+        return true;
     }
 }
