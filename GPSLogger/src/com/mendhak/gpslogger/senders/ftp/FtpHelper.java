@@ -51,28 +51,53 @@ public class FtpHelper implements IFileSender
     public void UploadFile(List<File> files)
     {
 
+
         if (!ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(), AppSettings.getFtpPassword(),
                 AppSettings.getFtpPort(), AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit()))
         {
             callback.OnFailure();
         }
 
+        File zipFile = null;
+
+        //Only upload a zip file if it's present
         for (File f : files)
         {
-            try
+            if (f.getName().contains(".zip"))
             {
-                FileInputStream fis = new FileInputStream(f);
-                Thread t = new Thread(new FtpUploadHandler(callback, AppSettings.getFtpServerName(), AppSettings.getFtpPort(),
-                        AppSettings.getFtpUsername(), AppSettings.getFtpPassword(),
-                        AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit(),
-                        fis, f.getName()));
-                t.start();
+                zipFile = f;
+                break;
             }
-            catch (Exception e)
-            {
-                Utilities.LogError("Could not prepare file for upload.", e);
-            }
+        }
 
+        if (zipFile != null)
+        {
+            UploadFile(zipFile);
+        }
+        else
+        {
+            for (File f : files)
+            {
+                UploadFile(f);
+            }
+        }
+
+    }
+
+    public void UploadFile(File f)
+    {
+        try
+        {
+            FileInputStream fis = new FileInputStream(f);
+            Thread t = new Thread(new FtpUploadHandler(callback, AppSettings.getFtpServerName(), AppSettings.getFtpPort(),
+                    AppSettings.getFtpUsername(), AppSettings.getFtpPassword(),
+                    AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit(),
+                    fis, f.getName()));
+            t.start();
+        }
+        catch (Exception e)
+        {
+            Utilities.LogError("Could not prepare file for upload.", e);
         }
     }
 
