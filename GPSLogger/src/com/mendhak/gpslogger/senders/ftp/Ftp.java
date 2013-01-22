@@ -21,6 +21,7 @@ package com.mendhak.gpslogger.senders.ftp;
 
 import com.mendhak.gpslogger.common.Utilities;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPSClient;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
@@ -68,6 +69,15 @@ public class Ftp
                 client.enterLocalPassiveMode();
 
                 Utilities.LogDebug("Uploading file to FTP server");
+
+                FTPFile[] existingDirectory = client.listFiles("GPSLogger");
+
+                if(existingDirectory.length <= 0)
+                {
+                    client.makeDirectory("GPSLogger");
+                }
+
+                client.changeWorkingDirectory("GPSLogger");
                 boolean result = client.storeFile(fileName, inputStream);
                 inputStream.close();
                 if (result)
