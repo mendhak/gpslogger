@@ -8,7 +8,7 @@ GPSLogger
 
 You can [download it from Google Play](https://play.google.com/store/apps/details?id=com.mendhak.gpslogger).
 
-You can bypass the market and get the APK yourself:  [Download here](https://github.com/mendhak/gpslogger/archives/master)
+You can bypass the market and get the APK yourself:  [Download here](https://sourceforge.net/projects/gfadownload/files/)
 
 Licensed under [GPL v2](http://www.gnu.org/licenses/gpl-2.0.html).
 
