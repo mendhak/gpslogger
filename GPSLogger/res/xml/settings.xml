@@ -19,10 +19,6 @@
         <PreferenceCategory android:title="@string/pref_logging_title">
 
 
-            <CheckBoxPreference android:key="satellite_time"
-                                android:summary="@string/satellite_time_summary"
-                                android:title="@string/satellite_time_title"
-                                android:defaultValue="false"/>
             <ListPreference android:key="new_file_creation"
                             android:title="@string/new_file_creation_title"
                             android:summary="@string/new_file_creation_summary"
