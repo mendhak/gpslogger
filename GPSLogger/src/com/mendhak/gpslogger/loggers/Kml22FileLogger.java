@@ -32,14 +32,12 @@ public class Kml22FileLogger implements IFileLogger
     protected final static Object lock = new Object();
     private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
             new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
-    private final boolean useSatelliteTime;
     private final boolean addNewTrackSegment;
     private final File kmlFile;
     protected final String name = "KML";
 
-    public Kml22FileLogger(File kmlFile, boolean useSatelliteTime, boolean addNewTrackSegment)
+    public Kml22FileLogger(File kmlFile, boolean addNewTrackSegment)
     {
-        this.useSatelliteTime = useSatelliteTime;
         this.kmlFile = kmlFile;
         this.addNewTrackSegment = addNewTrackSegment;
     }
@@ -47,7 +45,7 @@ public class Kml22FileLogger implements IFileLogger
 
     public void Write(Location loc) throws Exception
     {
-        Kml22WriteHandler writeHandler = new Kml22WriteHandler(useSatelliteTime, loc, kmlFile, addNewTrackSegment);
+        Kml22WriteHandler writeHandler = new Kml22WriteHandler(loc, kmlFile, addNewTrackSegment);
         EXECUTOR.execute(writeHandler);
     }
 
@@ -139,16 +137,15 @@ class Kml22AnnotateHandler implements Runnable
 class Kml22WriteHandler implements Runnable
 {
 
-    boolean useSatelliteTime;
+
     boolean addNewTrackSegment;
     File kmlFile;
     Location loc;
 
 
-    public Kml22WriteHandler(boolean useSatelliteTime, Location loc, File kmlFile, boolean addNewTrackSegment)
+    public Kml22WriteHandler( Location loc, File kmlFile, boolean addNewTrackSegment)
     {
 
-        this.useSatelliteTime = useSatelliteTime;
         this.loc = loc;
         this.kmlFile = kmlFile;
         this.addNewTrackSegment = addNewTrackSegment;
@@ -162,18 +159,8 @@ class Kml22WriteHandler implements Runnable
         {
 
             RandomAccessFile raf;
-            Date now;
 
-            if (useSatelliteTime)
-            {
-                now = new Date(loc.getTime());
-            }
-            else
-            {
-                now = new Date();
-            }
-
-            String dateTimeString = Utilities.GetIsoDateTime(now);
+            String dateTimeString = Utilities.GetIsoDateTime(new Date(loc.getTime()));
             String placemarkHead = "<Placemark>\n<gx:Track>\n";
             String placemarkTail = "</gx:Track>\n</Placemark></Document></kml>\n";
 

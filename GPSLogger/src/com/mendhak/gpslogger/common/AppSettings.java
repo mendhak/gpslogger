@@ -27,7 +27,6 @@ public class AppSettings extends Application
     private static boolean useImperial = false;
     private static boolean newFileOnceADay;
     private static boolean preferCellTower;
-    private static boolean useSatelliteTime;
     private static boolean logToKml;
     private static boolean logToGpx;
     private static boolean logToPlainText;
@@ -117,21 +116,6 @@ public class AppSettings extends Application
         AppSettings.preferCellTower = preferCellTower;
     }
 
-    /**
-     * @return the useSatelliteTime
-     */
-    public static boolean shouldUseSatelliteTime()
-    {
-        return useSatelliteTime;
-    }
-
-    /**
-     * @param useSatelliteTime the useSatelliteTime to set
-     */
-    static void setUseSatelliteTime(boolean useSatelliteTime)
-    {
-        AppSettings.useSatelliteTime = useSatelliteTime;
-    }
 
     /**
      * @return the logToKml

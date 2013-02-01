@@ -40,24 +40,24 @@ public class FileLoggerFactory
         if (AppSettings.shouldLogToGpx())
         {
             File gpxFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".gpx");
-            loggers.add(new Gpx10FileLogger(gpxFile, AppSettings.shouldUseSatelliteTime(), Session.shouldAddNewTrackSegment(), Session.getSatelliteCount()));
+            loggers.add(new Gpx10FileLogger(gpxFile,  Session.shouldAddNewTrackSegment(), Session.getSatelliteCount()));
         }
 
         if (AppSettings.shouldLogToKml())
         {
             File kmlFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".kml");
-            loggers.add(new Kml22FileLogger(kmlFile, AppSettings.shouldUseSatelliteTime(), Session.shouldAddNewTrackSegment()));
+            loggers.add(new Kml22FileLogger(kmlFile, Session.shouldAddNewTrackSegment()));
         }
 
         if (AppSettings.shouldLogToPlainText())
         {
             File file = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".txt");
-            loggers.add(new PlainTextFileLogger(file, AppSettings.shouldUseSatelliteTime()));
+            loggers.add(new PlainTextFileLogger(file));
         }
 
         if (AppSettings.shouldLogToOpenGTS())
         {
-            loggers.add(new OpenGTSLogger(AppSettings.shouldUseSatelliteTime()));
+            loggers.add(new OpenGTSLogger());
         }
 
         return loggers;

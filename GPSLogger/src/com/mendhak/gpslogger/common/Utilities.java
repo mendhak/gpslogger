@@ -118,8 +118,6 @@ public class Utilities
                 .getDefaultSharedPreferences(context);
 
         AppSettings.setUseImperial(prefs.getBoolean("useImperial", false));
-        AppSettings.setUseSatelliteTime(prefs.getBoolean("satellite_time",
-                false));
 
         AppSettings.setLogToKml(prefs.getBoolean("log_kml", false));
 

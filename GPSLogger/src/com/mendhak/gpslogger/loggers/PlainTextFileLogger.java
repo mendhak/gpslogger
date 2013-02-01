@@ -39,13 +39,11 @@ public class PlainTextFileLogger implements IFileLogger
 {
 
     private File file;
-    private boolean useSatelliteTime;
     protected final String name = "TXT";
 
-    public PlainTextFileLogger(File file, boolean useSatelliteTime)
+    public PlainTextFileLogger(File file)
     {
         this.file = file;
-        this.useSatelliteTime = useSatelliteTime;
     }
 
     @Override
@@ -66,18 +64,7 @@ public class PlainTextFileLogger implements IFileLogger
         FileOutputStream writer = new FileOutputStream(file, true);
         BufferedOutputStream output = new BufferedOutputStream(writer);
 
-        Date now;
-
-        if (useSatelliteTime)
-        {
-            now = new Date(loc.getTime());
-        }
-        else
-        {
-            now = new Date();
-        }
-
-        String dateTimeString = Utilities.GetIsoDateTime(now);
+        String dateTimeString = Utilities.GetIsoDateTime(new Date(loc.getTime()));
 
         String outputString = String.format(Locale.US, "%s,%f,%f,%f,%f,%f,%f\n", dateTimeString,
                 loc.getLatitude(),
