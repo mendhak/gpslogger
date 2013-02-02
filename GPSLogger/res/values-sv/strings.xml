@@ -118,6 +118,7 @@
   <string name="time_before_logging_dialog_title">Tid i sekunder</string>
   <string name="time_before_logging_hint">Ange sekunder (max 9999)</string>
   <string name="retry_time_dialog_title">Tid i sekunder</string>
+  <string name="retry_time_hint">Ange sekunder (max 9999)</string>
   <string name="distance_before_logging_title">Avstånd innan loggning</string>
   <string name="distance_before_logging_summary">Avstånd innan en ny punkt loggas. Använd 0 för att logga alla punkter.</string>
   <string name="useimperial_title">Använd anglosaxiska enheter</string>
@@ -262,4 +263,15 @@
   <string name="autoopengts_server_path">Serversökväg</string>
   <string name="autoopengts_server_path_summary">Tillval och endast för HTTP-baserad kommunikation. Tex. \"/gprmc/Data\"</string>
   <string name="autoopengts_device_id">Enhets-ID</string>
+  <string name="autoftp_server">FTP-server</string>
+  <string name="autoftp_server_summary">IP-adress eller värdnamn</string>
+  <string name="autoftp_username">Användarnamn</string>
+  <string name="autoftp_password">Lösenord</string>
+  <string name="autoftp_advanced_settings">Avancerade inställningar</string>
+  <string name="autoftp_port">Port</string>
+  <string name="autoftp_ssltls">SSL/TLS</string>
+  <string name="autoftp_ssltls_ssl">SSL</string>
+  <string name="autoftp_ssltls_tls">TLS</string>
+  <string name="autoftp_test_summary">Skicka en testfil till FTP-servern</string>
+  <string name="autoftp_invalid_settings">Ogiltiga inställningar</string>
 </resources>
