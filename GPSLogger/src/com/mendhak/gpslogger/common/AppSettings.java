@@ -32,6 +32,7 @@ public class AppSettings extends Application
     private static boolean logToPlainText;
     private static boolean showInNotificationBar;
     private static int minimumSeconds;
+    private static boolean keepFix;
     private static int retryInterval;
     private static String newFileCreation;
     private static Float autoSendDelay = 0f;
@@ -190,6 +191,23 @@ public class AppSettings extends Application
     static void setMinimumSeconds(int minimumSeconds)
     {
         AppSettings.minimumSeconds = minimumSeconds;
+    }
+
+
+    /**
+     * @return the keepFix
+     */
+    public static boolean shouldkeepFix()
+    {
+        return keepFix;
+    }
+
+    /**
+     * @param keepFix the keepFix to set
+     */
+    static void setKeepFix(boolean keepFix)
+    {
+        AppSettings.keepFix = keepFix;
     }
     
           /**
