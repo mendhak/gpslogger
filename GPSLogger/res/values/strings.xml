@@ -357,7 +357,7 @@
 
     <string name="log_opengts_title">Log to OpenGTS Server</string>
     <string name="log_opengts_summary">Send GPRMC data to an online OpenGTS server.</string>
-    <string name="opengts_setup_title">OpenGTS Setup</string>
+    <string name="opengts_setup_title">OpenGTS</string>
     <string name="opengts_setup_summary">Send GPS traces to an OpenGTS server of your choice.</string>
     <string name="opengts_enabled">Enable OpenGTS</string>
     <string name="opengts_enabled_summary">Enable this OpenGTS server.</string>
@@ -371,10 +371,10 @@
     <string name="autoopengts_server_summary">Hostname or IP</string>
     <string name="opengts_server_port">Port</string>
     <string name="opengts_server_communication_method">Communication Method</string>
-    <string name="opengts_server_communication_method_summary">HTTP-based or Raw Socket Based communication</string>
+    <string name="opengts_server_communication_method_summary">TCP/IP (HTTP GET) or UDP based communication</string>
     <string name="autoopengts_server_path">Server Path</string>
     <string name="autoopengts_server_path_summary">Optional and only for HTTP-based communication. For example \'/gprmc/Data\'</string>
-    <string name="autoopengts_device_id">Device ID</string>
+    <string name="autoopengts_device_id">Device Unique ID</string>
     <string name="autoftp_server">FTP Server</string>
     <string name="autoftp_server_summary">IP address or hostname</string>
     <string name="autoftp_username">Username</string>
