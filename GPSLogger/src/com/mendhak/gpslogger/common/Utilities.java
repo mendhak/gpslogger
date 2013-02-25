@@ -183,6 +183,9 @@ public class Utilities
             AppSettings.setMinimumSeconds(60);
         }
 
+        AppSettings.setKeepFix(prefs.getBoolean("keep_fix",
+                false));
+
         String retryIntervalString = prefs.getString("retry_time",
                 "60");
 
