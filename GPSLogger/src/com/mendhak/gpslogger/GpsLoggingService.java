@@ -791,7 +791,7 @@ public class GpsLoggingService extends Service implements IActionListener
         Utilities.LogDebug("GpsLoggingService.StopManagerAndResetAlarm");
         if( !AppSettings.shouldkeepFix() )
         {
-        StopGpsManager();
+            StopGpsManager();
         }
         SetAlarmForNextPoint();
     }
@@ -801,7 +801,7 @@ public class GpsLoggingService extends Service implements IActionListener
         Utilities.LogDebug("GpsLoggingService.StopManagerAndResetAlarm_retryInterval");
         if( !AppSettings.shouldkeepFix() )
         {
-        StopGpsManager();
+            StopGpsManager();
         }
         SetAlarmForNextPoint(retryInterval);
     }
