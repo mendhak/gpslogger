@@ -265,4 +265,25 @@
   <string name="autoopengts_server_path">Szerver könyvtár</string>
   <string name="autoopengts_server_path_summary">Nem kötelező, és csak a HTTP-alapú kommunikációt. Például \'/ gprmc/Data\"</string>
   <string name="autoopengts_device_id">Eszközazonosító</string>
+  <string name="autoftp_server">FTP-kiszolgáló</string>
+  <string name="autoftp_server_summary">IP-cím vagy webcím megadása</string>
+  <string name="autoftp_username">Felhasználónév</string>
+  <string name="autoftp_password">Jelszó</string>
+  <string name="autoftp_advanced_settings">Speciális beállítások</string>
+  <string name="autoftp_port">Port</string>
+  <string name="autoftp_useftps">FTPS használata</string>
+  <string name="autoftp_useftps_summary">Jelölje be az SSL-s FTP kapcsolatot a titkosított kapcsolathoz</string>
+  <string name="autoftp_ssltls">SSL/TLS</string>
+  <string name="autoftp_ssltls_summary">Nincs, SSL vagy TLS beállítva. Így titkosítatlan a kapcsolatok.</string>
+  <string name="autoftp_ssltls_none">Egyik sem</string>
+  <string name="autoftp_ssltls_ssl">SSL</string>
+  <string name="autoftp_ssltls_tls">TLS</string>
+  <string name="autoftp_implicit_summary">Hagyja bejelölve, ha nem ismeri pontosan.</string>
+  <string name="autoftp_test">FTP feltöltés teszt</string>
+  <string name="autoftp_test_summary">Teszt fájlt feltöltése FTP-kiszolgálóra</string>
+  <string name="autoftp_testing">FTP feltöltés vizsgálata</string>
+  <string name="autoftp_invalid_settings">Érvénytelen beállítások</string>
+  <string name="autoftp_enabled">FTP engedélyezve</string>
+  <string name="ftp_upload">FTP feltöltés</string>
+  <string name="autoftp_setup_title">FTP beállítások</string>
 </resources>

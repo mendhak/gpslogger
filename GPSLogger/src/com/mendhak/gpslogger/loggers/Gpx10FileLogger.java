@@ -35,15 +35,13 @@ class Gpx10FileLogger implements IFileLogger
     private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
             new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
     private File gpxFile = null;
-    private boolean useSatelliteTime = false;
     private final boolean addNewTrackSegment;
     private final int satelliteCount;
     protected final String name = "GPX";
 
-    Gpx10FileLogger(File gpxFile, boolean useSatelliteTime, boolean addNewTrackSegment, int satelliteCount)
+    Gpx10FileLogger(File gpxFile, boolean addNewTrackSegment, int satelliteCount)
     {
         this.gpxFile = gpxFile;
-        this.useSatelliteTime = useSatelliteTime;
         this.addNewTrackSegment = addNewTrackSegment;
         this.satelliteCount = satelliteCount;
     }
@@ -51,18 +49,7 @@ class Gpx10FileLogger implements IFileLogger
 
     public void Write(Location loc) throws Exception
     {
-        Date now;
-
-        if (useSatelliteTime)
-        {
-            now = new Date(loc.getTime());
-        }
-        else
-        {
-            now = new Date();
-        }
-
-        String dateTimeString = Utilities.GetIsoDateTime(now);
+        String dateTimeString = Utilities.GetIsoDateTime(new Date(loc.getTime()));
 
         Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(dateTimeString, gpxFile, loc, addNewTrackSegment, satelliteCount);
         Utilities.LogDebug(String.format("There are currently %s tasks waiting on the GPX10 EXECUTOR.", EXECUTOR.getQueue().size()));
@@ -71,18 +58,8 @@ class Gpx10FileLogger implements IFileLogger
 
     public void Annotate(String description, Location loc) throws Exception
     {
-        Date now;
 
-        if (useSatelliteTime)
-        {
-            now = new Date(loc.getTime());
-        }
-        else
-        {
-            now = new Date();
-        }
-
-        String dateTimeString = Utilities.GetIsoDateTime(now);
+        String dateTimeString = Utilities.GetIsoDateTime(new Date(loc.getTime()));
 
         Gpx10AnnotateHandler annotateHandler = new Gpx10AnnotateHandler(description, gpxFile, loc, dateTimeString);
         Utilities.LogDebug(String.format("There are currently %s tasks waiting on the GPX10 EXECUTOR.", EXECUTOR.getQueue().size()));

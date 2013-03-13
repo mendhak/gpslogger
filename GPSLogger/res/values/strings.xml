@@ -142,8 +142,6 @@
     <string name="log_kml_summary">Creates a KML file in the GPSLogger folder on the SD card.</string>
     <string name="log_plain_text_title">Log to Plain Text</string>
     <string name="log_plain_text_summary">Creates a plain text file in the GPSLogger folder on the SD card.</string>
-    <string name="satellite_time_title">Use satellite time</string>
-    <string name="satellite_time_summary">Use satellite time instead of local phone time, it\'s more accurate.</string>
     <string name="new_file_creation_title">New file creation</string>
     <string name="new_file_creation_summary">Whether to create a new file once a day or each time you start.</string>
     <string name="new_file_creation_onceaday">Once a day</string>
@@ -377,5 +375,32 @@
     <string name="autoopengts_server_path">Server Path</string>
     <string name="autoopengts_server_path_summary">Optional and only for HTTP-based communication. For example \'/gprmc/Data\'</string>
     <string name="autoopengts_device_id">Device ID</string>
+    <string name="autoftp_server">FTP Server</string>
+    <string name="autoftp_server_summary">IP address or hostname</string>
+    <string name="autoftp_username">Username</string>
+    <string name="autoftp_password">Password</string>
+    <string name="autoftp_advanced_settings">Advanced settings</string>
+    <string name="autoftp_port">Port</string>
+    <string name="autoftp_useftps">Use FTPS</string>
+    <string name="autoftp_useftps_summary">Enable FTP over SSL. SSL/TLS and Implicit are ignored if this is unchecked.</string>
+    <string name="autoftp_ssltls">SSL/TLS</string>
+    <string name="autoftp_ssltls_summary">None, SSL or TLS. Use none for regular unsecured connections.</string>
+    <string name="autoftp_ssltls_none">None</string>
+    <string name="autoftp_ssltls_ssl">SSL</string>
+    <string name="autoftp_ssltls_tls">TLS</string>
+    <string name="autoftp_implicit">Implicit FTP over SSL</string>
+    <string name="autoftp_implicit_summary">Leave unchecked if you don\'t know.</string>
+    <string name="autoftp_test">Test FTP Upload</string>
+    <string name="autoftp_test_summary">Upload a test file to the FTP server</string>
+    <string name="autoftp_testing">Testing FTP upload</string>
+    <string name="autoftp_invalid_settings">Invalid settings</string>
+    <string name="autoftp_invalid_summary">Some of your settings are invalid. Please ensure that you have filled out all
+        relevant fields.
+    </string>
+    <string name="autoftp_enabled">FTP enabled</string>
+    <string name="ftp_upload">FTP upload</string>
+
+    <string name="autoftp_setup_title">FTP Setup</string>
+    <string name="autoftp_setup_summary">Upload your files to an FTP(S) server. Note: This does not cover SFTP.</string>
 
 </resources>

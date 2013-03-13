@@ -25,6 +25,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.senders.ftp.FtpHelper;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -117,8 +118,6 @@ public class Utilities
                 .getDefaultSharedPreferences(context);
 
         AppSettings.setUseImperial(prefs.getBoolean("useImperial", false));
-        AppSettings.setUseSatelliteTime(prefs.getBoolean("satellite_time",
-                false));
 
         AppSettings.setLogToKml(prefs.getBoolean("log_kml", false));
 
@@ -240,6 +239,15 @@ public class Utilities
         AppSettings.setOpenGTSServerCommunicationMethod(prefs.getString("opengts_server_communication_method", ""));
         AppSettings.setOpenGTSServerPath(prefs.getString("autoopengts_server_path", ""));
         AppSettings.setOpenGTSDeviceId(prefs.getString("opengts_device_id", ""));
+
+        AppSettings.setAutoFtpEnabled(prefs.getBoolean("autoftp_enabled",false));
+        AppSettings.setFtpServerName(prefs.getString("autoftp_server",""));
+        AppSettings.setFtpUsername(prefs.getString("autoftp_username",""));
+        AppSettings.setFtpPassword(prefs.getString("autoftp_password",""));
+        AppSettings.setFtpPort(Integer.valueOf(prefs.getString("autoftp_port", "21")));
+        AppSettings.setFtpUseFtps(prefs.getBoolean("autoftp_useftps", false));
+        AppSettings.setFtpProtocol(prefs.getString("autoftp_ssltls",""));
+        AppSettings.setFtpImplicit(prefs.getBoolean("autoftp_implicit", false));
 
     }
 
@@ -565,6 +573,17 @@ public class Utilities
                 && AppSettings.getOpenGTSDeviceId().length() > 0;
     }
 
+
+    public static boolean IsFtpSetup()
+    {
+
+        FtpHelper helper = new FtpHelper(null);
+
+        return helper.ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(),
+                AppSettings.getFtpPassword(), AppSettings.getFtpPort(), AppSettings.FtpUseFtps(),
+                AppSettings.getFtpProtocol(), AppSettings.FtpImplicit());
+    }
+
     /**
      * Uses the Haversine formula to calculate the distnace between to lat-long coordinates
      *
@@ -772,5 +791,6 @@ public class Utilities
         return "application/octet-stream";
 
     }
+
 
 }

@@ -19,6 +19,7 @@
             <item android:id="@+id/mnuGDocs" android:title="@string/gdocs_upload" />
             <item android:id="@+id/mnuEmail" android:title="@string/email_upload"/>
             <item android:id="@+id/mnuOpenGTS" android:title="@string/opengts_upload"/>
+            <item android:id="@+id/mnuFtp" android:title="@string/ftp_upload" />
 
         </menu>
     </item>

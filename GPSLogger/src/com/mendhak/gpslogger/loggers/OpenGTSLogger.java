@@ -22,7 +22,6 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.OpenGTSClient;
 
-import java.util.Date;
 
 
 /**
@@ -33,24 +32,16 @@ import java.util.Date;
 public class OpenGTSLogger implements IFileLogger
 {
 
-    private boolean useSatelliteTime;
     protected final String name = "OpenGTS";
 
-    public OpenGTSLogger(boolean useSatelliteTime)
+    public OpenGTSLogger()
     {
-        this.useSatelliteTime = useSatelliteTime;
     }
 
     @Override
     public void Write(Location loc) throws Exception
     {
 
-        Location nLoc = new Location(loc);
-        if (!useSatelliteTime)
-        {
-            Date now = new Date();
-            nLoc.setTime(now.getTime());
-        }
 
         String server = AppSettings.getOpenGTSServer();
         int port = Integer.parseInt(AppSettings.getOpenGTSServerPort());

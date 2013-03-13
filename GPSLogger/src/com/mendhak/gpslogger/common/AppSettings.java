@@ -27,7 +27,6 @@ public class AppSettings extends Application
     private static boolean useImperial = false;
     private static boolean newFileOnceADay;
     private static boolean preferCellTower;
-    private static boolean useSatelliteTime;
     private static boolean logToKml;
     private static boolean logToGpx;
     private static boolean logToPlainText;
@@ -58,6 +57,15 @@ public class AppSettings extends Application
     private static String openGTSServerCommunicationMethod;
     private static String openGTSServerPath;
     private static String openGTSDeviceId;
+
+    private static boolean autoFtpEnabled;
+    private static String ftpServerName;
+    private static int ftpPort;
+    private static String ftpUsername;
+    private static String ftpPassword;
+    private static boolean ftpUseFtps;
+    private static String ftpProtocol;
+    private static boolean ftpImplicit;
 
 
     /**
@@ -108,21 +116,6 @@ public class AppSettings extends Application
         AppSettings.preferCellTower = preferCellTower;
     }
 
-    /**
-     * @return the useSatelliteTime
-     */
-    public static boolean shouldUseSatelliteTime()
-    {
-        return useSatelliteTime;
-    }
-
-    /**
-     * @param useSatelliteTime the useSatelliteTime to set
-     */
-    static void setUseSatelliteTime(boolean useSatelliteTime)
-    {
-        AppSettings.useSatelliteTime = useSatelliteTime;
-    }
 
     /**
      * @return the logToKml
@@ -516,4 +509,83 @@ public class AppSettings extends Application
     }
 
 
+    public static String getFtpServerName()
+    {
+        return ftpServerName;
+    }
+
+    public static void setFtpServerName(String ftpServerName)
+    {
+        AppSettings.ftpServerName = ftpServerName;
+    }
+
+    public static int getFtpPort()
+    {
+        return ftpPort;
+    }
+
+    public static void setFtpPort(int ftpPort)
+    {
+        AppSettings.ftpPort = ftpPort;
+    }
+
+    public static String getFtpUsername()
+    {
+        return ftpUsername;
+    }
+
+    public static void setFtpUsername(String ftpUsername)
+    {
+        AppSettings.ftpUsername = ftpUsername;
+    }
+
+    public static String getFtpPassword()
+    {
+        return ftpPassword;
+    }
+
+    public static void setFtpPassword(String ftpPassword)
+    {
+        AppSettings.ftpPassword = ftpPassword;
+    }
+
+    public static boolean FtpUseFtps()
+    {
+        return ftpUseFtps;
+    }
+
+    public static void setFtpUseFtps(boolean ftpUseFtps)
+    {
+        AppSettings.ftpUseFtps = ftpUseFtps;
+    }
+
+    public static String getFtpProtocol()
+    {
+        return ftpProtocol;
+    }
+
+    public static void setFtpProtocol(String ftpProtocol)
+    {
+        AppSettings.ftpProtocol = ftpProtocol;
+    }
+
+    public static boolean FtpImplicit()
+    {
+        return ftpImplicit;
+    }
+
+    public static void setFtpImplicit(boolean ftpImplicit)
+    {
+        AppSettings.ftpImplicit = ftpImplicit;
+    }
+
+    public static boolean isAutoFtpEnabled()
+    {
+        return autoFtpEnabled;
+    }
+
+    public static void setAutoFtpEnabled(boolean autoFtpEnabled)
+    {
+        AppSettings.autoFtpEnabled = autoFtpEnabled;
+    }
 }
