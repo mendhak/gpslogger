@@ -104,8 +104,6 @@
   <string name="log_kml_summary">Crée un fichier KML dans le dossier GPSLogger sur la carte SD.</string>
   <string name="log_plain_text_title">Enregistrer au format texte brut</string>
   <string name="log_plain_text_summary">Crée un fichier au format texte brut dans le dossier GPSLogger de la carte SD.</string>
-  <string name="satellite_time_title">Utiliser l\'heure des  satellites</string>
-  <string name="satellite_time_summary">Utiliser l\' heure des  satellites plutôt que  l\'heure  locale du cellulaire  c\'est plus précis.</string>
   <string name="new_file_creation_title">Nouvelle création du fichier</string>
   <string name="new_file_creation_summary">Que ce soit de créer un nouveau fichier une fois par jour ou chaque fois que vous démarrez.</string>
   <string name="new_file_creation_onceaday">Une fois par jour</string>
@@ -264,4 +262,24 @@
   <string name="autoopengts_server_path">Chemin d\'accès serveur</string>
   <string name="autoopengts_server_path_summary">Optionnel et uniquement pour les communications HTTP. Par exemple \"/gprmc/Data\"</string>
   <string name="autoopengts_device_id">ID du périphérique</string>
+  <string name="autoftp_server">Serveur FTP</string>
+  <string name="autoftp_server_summary">Adresse IP ou nom d\'hôte</string>
+  <string name="autoftp_username">Login</string>
+  <string name="autoftp_password">Mot de passe</string>
+  <string name="autoftp_advanced_settings">Paramètres avancés</string>
+  <string name="autoftp_port">Port</string>
+  <string name="autoftp_useftps">Utiliser FTPS</string>
+  <string name="autoftp_ssltls">SSL/TLS</string>
+  <string name="autoftp_ssltls_none">Aucun</string>
+  <string name="autoftp_ssltls_ssl">SSL</string>
+  <string name="autoftp_ssltls_tls">TLS</string>
+  <string name="autoftp_test">Tester l\'envoi FTP</string>
+  <string name="autoftp_test_summary">Envoyer un fichier de test sur le serveur FTP</string>
+  <string name="autoftp_testing">Test de l\'envoi FTP en cours</string>
+  <string name="autoftp_invalid_settings">Paramètres invalides</string>
+  <string name="autoftp_invalid_summary">Certains de vos paramètres sont invalides. Veuillez vous assurer que vous avez bien rempli tous les champs.</string>
+  <string name="autoftp_enabled">FTP activé</string>
+  <string name="ftp_upload">Transfert FTP</string>
+  <string name="autoftp_setup_title">Configuration FTP</string>
+  <string name="autoftp_setup_summary">Transférer vos fichiers vers un serveur FTP (S). Remarque : Ceci ne concerne pas SFTP.</string>
 </resources>

@@ -50,8 +50,6 @@
   <string name="providername_gps">GPS satelitai</string>
   <string name="log_kml_title">Saugoti į KML</string>
   <string name="log_kml_summary">Sukuria KML failą su GPSLogger aplanku SD kortelėje.</string>
-  <string name="satellite_time_title">Naudoti palydovo laiką</string>
-  <string name="satellite_time_summary">Naudokite palydovo laiką vietoj telefono laiko - tai daug tiksliau.</string>
   <string name="new_file_creation_title">Naujas failas</string>
   <string name="new_file_creation_summary">Priklauso ar failas sukuriamas kasdien, ar kiekvieną kartą paleidžiant programą.</string>
   <string name="new_file_creation_onceaday">Kasdien</string>

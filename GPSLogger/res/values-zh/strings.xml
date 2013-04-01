@@ -95,8 +95,6 @@
   <string name="log_kml_title">记录到 KML 文件</string>
   <string name="log_kml_summary">在SD卡的 GPSLogger 文件夹中创建 KML 文件。</string>
   <string name="log_plain_text_summary">以纯文本文件形式记录在 SD 卡上的 GPSLogger 文件夹中。</string>
-  <string name="satellite_time_title">使用卫星时间</string>
-  <string name="satellite_time_summary">使用卫星时间而不是本地手机时间，这将更加的精确。</string>
   <string name="new_file_creation_title">新文件的创建</string>
   <string name="new_file_creation_summary">选择是一天仅创建一个文件呢还是每次开始都创建一个文件。</string>
   <string name="new_file_creation_onceaday">一天仅一次</string>

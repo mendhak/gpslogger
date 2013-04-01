@@ -47,8 +47,6 @@
   <string name="log_gpx_summary">Lagar ei GPX-fil i GPSLogger-mappa på SD-kortet.</string>
   <string name="log_kml_title">Logg til KML</string>
   <string name="log_kml_summary">Lagar ei KML-fil i GPSLogger-mappa på SD-kortet.</string>
-  <string name="satellite_time_title">Bruk satellittid</string>
-  <string name="satellite_time_summary">Bruk satellittid i staden for telefontid, det er meir nøyaktig.</string>
   <string name="new_file_creation_title">Filoppretting</string>
   <string name="new_file_creation_summary">Skal ny fil opprettast ein gong om dagen eller kvar gong du byrjar.</string>
   <string name="new_file_creation_onceaday">Ein gong om dagen</string>

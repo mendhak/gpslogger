@@ -22,6 +22,7 @@
   <string name="txt_direction">Dirección:</string>
   <string name="txt_satellites">Satélites:</string>
   <string name="txt_accuracy">Precisión:</string>
+  <string name="txt_travel_distance">Recorrida:</string>
   <string name="btn_start_logging">Iniciar Registro</string>
   <string name="btn_stop_logging">Detener Registro</string>
   <string name="gpslogger_still_running">GPSLogger todavía se está ejecutando.</string>
@@ -55,7 +56,9 @@
   <string name="meters_per_second"> m/s</string>
   <string name="feet_per_second"> pie/s</string>
   <string name="miles_per_hour"> mi/h</string>
+  <string name="miles"> mi</string>
   <string name="kilometers_per_hour"> km/h</string>
+  <string name="kilometers"> km</string>
   <string name="unknown_direction">desconocido</string>
   <string name="sorry">Lo siento</string>
   <string name="success">¡Yay!</string>
@@ -92,6 +95,7 @@
   <string name="settings_enter_feet">Ingrese pies (máx. 9999)</string>
   <string name="settings_distance_in_meters">Distancia en metros</string>
   <string name="settings_accuracy_in_meters">Precisión (en metros)</string>
+  <string name="settings_accuracy_in_feet">Precisión en piés</string>
   <string name="settings_enter_meters">Ingrese metros (máx. 9999)</string>
   <string name="settings_converting_title">Convirtiendo...</string>
   <string name="pref_logging_title">Detalles de Registro</string>
@@ -99,23 +103,19 @@
   <string name="log_gpx_summary">Crea un archivo GPX en la carpeta GPSLogger de la tarjeta SD.</string>
   <string name="log_kml_title">Registrar en KML</string>
   <string name="log_kml_summary">Crea un archivo GPX en la carpeta GPSLogger de la tarjeta SD.</string>
+  <string name="log_plain_text_title">Registrar en texto sin formato</string>
   <string name="log_plain_text_summary">Crea un archivo de texto en la carpeta GPSLogger de la tarjeta SD.</string>
-  <string name="satellite_time_title">Utilizar fecha de satelite</string>
-  <string name="satellite_time_summary">Utiliza la fecha/hora del satélite en lugar de la del teléfono local. Es más preciso.</string>
   <string name="new_file_creation_title">Creación de archivos</string>
   <string name="new_file_creation_summary">Crear un nuevo archivo por día, o cada vez que inicie.</string>
   <string name="new_file_creation_onceaday">Una vez al día</string>
   <string name="new_file_creation_everystart">Cada vez que inicia</string>
+  <string name="pref_performance_title">Rendimiento</string>
   <string name="prefer_celltower_title">Preferir torres celular</string>
   <string name="prefer_celltower_summary">Utilizar torres celular en lugar de satélites. Es menos preciso, pero ahorra batería.</string>
   <string name="time_before_logging_title">Tiempo entre cada registro</string>
   <string name="time_before_logging_summary">Use 0 para máxima frecuencia, aunque mas lento ahorra batería.     </string>
   <string name="time_before_logging_dialog_title">Tiempo en segundos</string>
   <string name="time_before_logging_hint">Ingrese segundos (máx. 9999)</string>
-  <string name="keep_fix_summary">Ten cuidado, esto disminuirá notablemente la duración de la batería. Úsalo
-      solamente para tener mayor precisión con frecuencias bajas.
-  </string>
-  <string name="keep_fix_title">GPS encendido entre registros</string>
   <string name="distance_before_logging_title">Distancia entre cada registro</string>
   <string name="distance_before_logging_summary">Desplazamiento antes de iniciar el siguiente registro. Use 0 para registrar todos los puntos.   
   </string>
@@ -130,6 +130,7 @@
   <string name="autoemail_title">Envío automático de correo electrónico</string>
   <string name="autoemail_summary">Envia automáticamente el archivo de registro a la dirección especificada</string>
   <string name="please_wait">Por favor espere.</string>
+  <string name="autoemail_autosend">Activar correos electrónicos</string>
   <string name="autoemail_autosend_summary">﻿Permite enviar el archivo de registro a una dirección de correo electrónico especificada.</string>
   <string name="autoemail_frequency_whenistop">Cuando presiono detener</string>
   <string name="autoemail_frequency_8">Después de 8 horas</string>
@@ -188,4 +189,35 @@
   <string name="osm_pick_file">Seleccionar un archivo para subir</string>
   <string name="debuglog_title">﻿Escribir en archivo para depurar</string>
   <string name="debuglog_summary">Escribe mensajes para depurar a un archivo en la tarjeta SD. ADVERTENCIA: El archivo crece muy rápido.     </string>
+  <string name="email_upload">Enviar por correo como fichero</string>
+  <string name="autoemail_sendto_csv">Direcciones de email separadas por comas</string>
+  <string name="autosend_enabled">Permitir envío automático</string>
+  <string name="opengts_enabled">Activar OpenGTS</string>
+  <string name="opengts_enabled_summary">Activar este servidor OpenGTS.</string>
+  <string name="autoopengts_autosend">Activar envío automático</string>
+  <string name="autoopengts_autosend_summary">Activar envío automático de trazos de GPS.</string>
+  <string name="autoopengts_server_category">Configuración OpenGTS</string>
+  <string name="autoopengts_invalid_form">Valores no válidos</string>
+  <string name="autoopengts_invalid_form_message">Asegúrese de que todos los campos han sido rellenadas correctamente</string>
+  <string name="opengts_upload">Enviar a OpenGTS</string>
+  <string name="autoopengts_server">Servidor</string>
+  <string name="autoopengts_server_summary">Nombre de host o IP</string>
+  <string name="opengts_server_port">Puerto</string>
+  <string name="opengts_server_communication_method">Método de comunicación</string>
+  <string name="autoopengts_server_path">Ruta del servidor</string>
+  <string name="autoopengts_device_id">Identificador de dispositivo</string>
+  <string name="autoftp_server">Servidor FTP</string>
+  <string name="autoftp_server_summary">Dirección IP o nombre de host</string>
+  <string name="autoftp_username">Nombre de usuario</string>
+  <string name="autoftp_password">Contraseña</string>
+  <string name="autoftp_advanced_settings">Configuración avanzada</string>
+  <string name="autoftp_port">Puerto</string>
+  <string name="autoftp_useftps">Utilizar FTPS</string>
+  <string name="autoftp_ssltls_none">Ninguno</string>
+  <string name="autoftp_ssltls_ssl">SSL</string>
+  <string name="autoftp_ssltls_tls">TLS</string>
+  <string name="autoftp_test">Prueba de subida al FTP</string>
+  <string name="autoftp_test_summary">Cargar un archivo de prueba en el servidor FTP</string>
+  <string name="autoftp_testing">Probando subida a FTP</string>
+  <string name="autoftp_invalid_settings">Configuración no válida</string>
 </resources>

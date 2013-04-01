@@ -104,8 +104,6 @@
   <string name="log_kml_summary">Skapar en KML-fil i mappen GPSLogger på SD-kortet.</string>
   <string name="log_plain_text_title">Logga som klartext</string>
   <string name="log_plain_text_summary">Skapar en klartextfil i GPSLogger-mappen på SD-kortet.</string>
-  <string name="satellite_time_title">Använd satellittid</string>
-  <string name="satellite_time_summary">Använd satellittid istället för telefontid, det är mer korrekt.</string>
   <string name="new_file_creation_title">Ny fil skapas</string>
   <string name="new_file_creation_summary">Om du vill skapa en ny fil en gång per dag eller varje gång du startar.</string>
   <string name="new_file_creation_onceaday">En gång om dagen</string>
@@ -117,10 +115,16 @@
   <string name="time_before_logging_summary">Använd 0 för högsta frekvens, men långsammare är bättre för batterilivslängd.     </string>
   <string name="time_before_logging_dialog_title">Tid i sekunder</string>
   <string name="time_before_logging_hint">Ange sekunder (max 9999)</string>
+  <string name="retry_time_title">Tidsintervall för noggrannhet</string>
+  <string name="retry_time_summary">Använd 0 för maximal frekvens, men långsammare drar mindre batteri.
+    </string>
   <string name="retry_time_dialog_title">Tid i sekunder</string>
   <string name="retry_time_hint">Ange sekunder (max 9999)</string>
   <string name="distance_before_logging_title">Avstånd innan loggning</string>
   <string name="distance_before_logging_summary">Avstånd innan en ny punkt loggas. Använd 0 för att logga alla punkter.</string>
+  <string name="accuracy_before_logging_title">Noggrannhet innan loggning</string>
+  <string name="accuracy_before_logging_summary">Min. noggrannhet för loggning. Använd 0 för att logga alla punkter.
+    </string>
   <string name="useimperial_title">Använd anglosaxiska enheter</string>
   <string name="useimperial_summary">Använd fot, mile och pint istället för metersystemet.</string>
   <string name="show_notification_title">Visa meddelande</string>
@@ -243,15 +247,15 @@
   <string name="shortcut_start">Starta</string>
   <string name="shortcut_stop">Stoppa</string>
   <string name="shortcut_pickaction">Välj en åtgärd</string>
-  <string name="log_opengts_title">Logga in till en OpenGTS Server</string>
-  <string name="log_opengts_summary">Skicka GPRMC data till en OpenGTS-server.</string>
+  <string name="log_opengts_title">Logga till en OpenGTS-Server</string>
+  <string name="log_opengts_summary">Skicka GPRMC-data till en OpenGTS-server.</string>
   <string name="opengts_setup_title">OpenGTS</string>
-  <string name="opengts_setup_summary">Skicka GPS spår till en OpenGTS-server</string>
+  <string name="opengts_setup_summary">Skicka GPS-spår till en OpenGTS-server.</string>
   <string name="opengts_enabled">Aktivera OpenGTS</string>
-  <string name="opengts_enabled_summary">Aktivera vald OpenGTS server</string>
+  <string name="opengts_enabled_summary">Aktivera denna OpenGTS-server.</string>
   <string name="autoopengts_autosend">Skicka automatiskt</string>
-  <string name="autoopengts_autosend_summary">Aktiverar automatiskt GPS spårning</string>
-  <string name="autoopengts_server_category">OpenGTS inställningar</string>
+  <string name="autoopengts_autosend_summary">Aktiverar automatisk sändning av GPS-spår.</string>
+  <string name="autoopengts_server_category">OpenGTS-inställningar</string>
   <string name="autoopengts_invalid_form">Ogiltiga värden</string>
   <string name="autoopengts_invalid_form_message">Säkerställ att alla fält fyllts i ordentligt</string>
   <string name="opengts_upload">Skicka till OpenGTS</string>
@@ -269,9 +273,23 @@
   <string name="autoftp_password">Lösenord</string>
   <string name="autoftp_advanced_settings">Avancerade inställningar</string>
   <string name="autoftp_port">Port</string>
+  <string name="autoftp_useftps">Använd FTPS</string>
+  <string name="autoftp_useftps_summary">Aktivera FTP över SSL. SSL/TLS och Implicit ignoreras om detta är okryssat.</string>
   <string name="autoftp_ssltls">SSL/TLS</string>
+  <string name="autoftp_ssltls_summary">Ingen, SSL eller TLS. Använd ingen för vanliga osäkrade anslutningar.</string>
+  <string name="autoftp_ssltls_none">Ingen</string>
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
+  <string name="autoftp_implicit">Implicit FTP över SSL</string>
+  <string name="autoftp_implicit_summary">Lämna okryssad om du inte vet.</string>
+  <string name="autoftp_test">Testa sända till FTP</string>
   <string name="autoftp_test_summary">Skicka en testfil till FTP-servern</string>
+  <string name="autoftp_testing">Testar sända till FTP</string>
   <string name="autoftp_invalid_settings">Ogiltiga inställningar</string>
+  <string name="autoftp_invalid_summary">Några av dina inställningar är ogiltiga. Säkerställ att du fyllt i alla relevanta fält.
+    </string>
+  <string name="autoftp_enabled">FTP aktiverat</string>
+  <string name="ftp_upload">Skicka till FTP</string>
+  <string name="autoftp_setup_title">FTP-inställning</string>
+  <string name="autoftp_setup_summary">Skicka dina filer till en FTP(S)-server. Obs: Detta täcker inte SFTP.</string>
 </resources>

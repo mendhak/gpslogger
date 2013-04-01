@@ -105,8 +105,6 @@
   <string name="log_kml_summary">Létrehoz egy KML-fájlt a GPSLogger mappába az SD kártyán.</string>
   <string name="log_plain_text_title">Egyszerű szöveges napló</string>
   <string name="log_plain_text_summary">Létrehoz egy sima szöveges fájlt a GPSLogger mappába az SD kártyán.</string>
-  <string name="satellite_time_title">GPS műhold idő használata</string>
-  <string name="satellite_time_summary">A műhold idő helyett a helyi telefon órát használ, ez pontosabb.</string>
   <string name="new_file_creation_title">Új fájl létrehozása</string>
   <string name="new_file_creation_summary">Létrehoz egy új fájlt, naponta egyszer, vagy minden induláskor.</string>
   <string name="new_file_creation_onceaday">Naponta egyszer</string>

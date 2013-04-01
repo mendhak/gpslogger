@@ -54,8 +54,6 @@
   <string name="log_kml_summary">Ustvari datoteko KML v GPSLogger mapo na SD kartici.</string>
   <string name="log_plain_text_title">Piši dnevnik v golo besedilo</string>
   <string name="log_plain_text_summary">Ustvari navadno besedilno datoteko v mapi GPSLogger na SD kartici.</string>
-  <string name="satellite_time_title">Uporabi satelitski čas</string>
-  <string name="satellite_time_summary">Uporabite čas iz satelita namesto lokalnega telefonskega časa, je bolj natančen.</string>
   <string name="new_file_creation_title">Ustvarjanje nove datoteke</string>
   <string name="new_file_creation_summary">Ali želite ustvariti novo datoteko enkrat na dan, ali vsakič ko boste začeli.</string>
   <string name="new_file_creation_onceaday">Enkrat na dan</string>

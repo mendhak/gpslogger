@@ -91,8 +91,6 @@
   <string name="log_gpx_summary">Tworzy plik GPX w folderze GPSLogger na karcie SD.</string>
   <string name="log_kml_title">Loguj do KML</string>
   <string name="log_kml_summary">Tworzy plik KML w folderze GPSLogger na karcie SD.</string>
-  <string name="satellite_time_title">Czas z satelity</string>
-  <string name="satellite_time_summary">Użycie czasu z satelity zamiast czasu w telefonie. Czas z satelity ma większą dokładność.</string>
   <string name="new_file_creation_title">Tworzenie nowego pliku</string>
   <string name="new_file_creation_summary">Tworzenie pliku raz na dzień lub za każdym uruchomieniem programu.</string>
   <string name="new_file_creation_onceaday">Raz na dzień</string>

@@ -96,6 +96,8 @@
   <string name="settings_distance_in_feet">Vzdálenost ve stopách</string>
   <string name="settings_enter_feet">Zadejte stopy (max 9999)</string>
   <string name="settings_distance_in_meters">Vzdálenost v metrech</string>
+  <string name="settings_accuracy_in_meters">Přesnost v metrech</string>
+  <string name="settings_accuracy_in_feet">Přesnost ve stopách</string>
   <string name="settings_enter_meters">Zadejte metry (max 9999)</string>
   <string name="settings_converting_title">Převádím…</string>
   <string name="settings_converting_description">Převod jednotek minimální vzdálenost. Hodnoty nad 9999 budou resetovány na 9999. Okno nastavení se nyní načte znovu.     </string>
@@ -106,8 +108,6 @@
   <string name="log_kml_summary">Vytvoří KML soubor ve složce GPSLogger na SD kartě.</string>
   <string name="log_plain_text_title">Zaznamenávat do prostého textu</string>
   <string name="log_plain_text_summary">Vytvoří textový soubor ve složce GPSLogger na SD kartě.</string>
-  <string name="satellite_time_title">Použít satelitní čas</string>
-  <string name="satellite_time_summary">Použije se satelitní čas místo místního času telefonu, je to přesnější.</string>
   <string name="new_file_creation_title">Vytvoření nového souboru</string>
   <string name="new_file_creation_summary">Zda chcete vytvořit nový soubor jednou denně, nebo při každém spuštění.</string>
   <string name="new_file_creation_onceaday">Jednou za den</string>
@@ -122,8 +122,14 @@
     </string>
   <string name="time_before_logging_dialog_title">Čas v sekundách</string>
   <string name="time_before_logging_hint">Zadejte sekundy (maximum 9999)</string>
+  <string name="retry_time_title">Časový interval pro přesnost</string>
+  <string name="retry_time_summary">Použijte 0 pro maximální frekvenci, ale pomalejší je lepší pro výdrž baterie.</string>
+  <string name="retry_time_dialog_title">Čas v sekundách</string>
+  <string name="retry_time_hint">Zadejte sekundy (max 9999)</string>
   <string name="distance_before_logging_title">Vzdálenost před záznamem</string>
   <string name="distance_before_logging_summary">Jak daleko se má jít, než se zaznamená další bod. Použijte 0 pro záznam všech bodů.     </string>
+  <string name="accuracy_before_logging_title">Přesnost pro záznam</string>
+  <string name="accuracy_before_logging_summary">Jakou min. přesnost pro záznam. Použijte 0 pro záznam všech bodů.</string>
   <string name="useimperial_title">Použít imperiální jednotky</string>
   <string name="useimperial_summary">Použít stopy, míle a pinty, nic z těch moderních metrických jednotek.</string>
   <string name="show_notification_title">Zobrazit oznámení</string>
@@ -265,6 +271,30 @@
   <string name="opengts_server_communication_method">Metoda komunikace</string>
   <string name="opengts_server_communication_method_summary">Komunikace založená na HTTP nebo Raw Socket</string>
   <string name="autoopengts_server_path">Cesta k serveru</string>
-  <string name="autoopengts_server_path_summary">Volitelné a pouze pro komunikaci založenou na protokolu HTTP. Například \"/ gprmc/Data\"</string>
+  <string name="autoopengts_server_path_summary">Volitelné a pouze pro komunikaci založenou na protokolu HTTP. Například \"/gprmc/Data\"</string>
   <string name="autoopengts_device_id">ID zařízení</string>
+  <string name="autoftp_server">FTP Server</string>
+  <string name="autoftp_server_summary">Adresa IP nebo název hostitele</string>
+  <string name="autoftp_username">Uživatelské jméno</string>
+  <string name="autoftp_password">Heslo</string>
+  <string name="autoftp_advanced_settings">Upřesňující nastavení</string>
+  <string name="autoftp_port">Port</string>
+  <string name="autoftp_useftps">Použít FTPS</string>
+  <string name="autoftp_useftps_summary">Povolte FTP přes SSL. Protokol SSL/TLS a implicitní jsou ignorována, pokud tato volba není zaškrtnuta.</string>
+  <string name="autoftp_ssltls">SSL/TLS</string>
+  <string name="autoftp_ssltls_summary">Žádné, SSL nebo TLS. Použijte žádné pro nezabezpečené připojení.</string>
+  <string name="autoftp_ssltls_none">Žádné</string>
+  <string name="autoftp_ssltls_ssl">SSL</string>
+  <string name="autoftp_ssltls_tls">TLS</string>
+  <string name="autoftp_implicit">Implicitní FTP přes SSL</string>
+  <string name="autoftp_implicit_summary">Nechejte nezaškrtnuté, pokud nevíte.</string>
+  <string name="autoftp_test">Testovat FTP upload</string>
+  <string name="autoftp_test_summary">Nahrát testovací soubor na FTP server</string>
+  <string name="autoftp_testing">Testování FTP uploadu</string>
+  <string name="autoftp_invalid_settings">Neplatné nastavení</string>
+  <string name="autoftp_invalid_summary">Některá nastavení jsou neplatné. Přesvědčte se, zda že jste vyplnili všechna příslušná pole.</string>
+  <string name="autoftp_enabled">FTP povolena</string>
+  <string name="ftp_upload">FTP upload</string>
+  <string name="autoftp_setup_title">Nastavení FTP</string>
+  <string name="autoftp_setup_summary">Nahrajte soubory na server FTP (S). Poznámka: Nezahrnuje SFTP.</string>
 </resources>

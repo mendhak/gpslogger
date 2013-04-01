@@ -103,8 +103,6 @@
   <string name="log_kml_summary">﻿Maakt een KML-bestand in de GPSLogger map op de SD-kaart.</string>
   <string name="log_plain_text_title">Log naar tekst zonder opmaak</string>
   <string name="log_plain_text_summary">Maakt een platte tekstbestand in de map GPSLogger op de SD card.</string>
-  <string name="satellite_time_title">﻿Satelliettijd gebruiken</string>
-  <string name="satellite_time_summary">﻿Satelliettijd gebruiken in plaats van lokale telefoon tijd, het is nauwkeuriger.</string>
   <string name="new_file_creation_title">﻿Nieuw bestand maken</string>
   <string name="new_file_creation_summary">﻿Of u een keer per dag een nieuw bestand wilt maken of elke keer dat u start.</string>
   <string name="new_file_creation_onceaday">﻿Een keer per dag</string>

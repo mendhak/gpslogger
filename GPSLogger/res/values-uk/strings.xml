@@ -104,8 +104,6 @@
   <string name="log_kml_summary">Створюється файл KML у теці GPSLogger на карті SD.</string>
   <string name="log_plain_text_title">Записувати як звичайний текст</string>
   <string name="log_plain_text_summary">Створює простий текстовий файл в папці GPSLogger на SD-картці.</string>
-  <string name="satellite_time_title">Використовувати час супутника</string>
-  <string name="satellite_time_summary">Використовувати час з супутника замість місцевого часу телефону. Це точніше.</string>
   <string name="new_file_creation_title">Створити новий файл</string>
   <string name="new_file_creation_summary">Чи слід створювати новий файл, один раз на день або під час кожного запуску.</string>
   <string name="new_file_creation_onceaday">Один раз на день</string>
@@ -264,4 +262,28 @@
   <string name="autoopengts_server_path">Шлях на сервері</string>
   <string name="autoopengts_server_path_summary">Додатково і тільки для способу зв\'язку на основі протоколу HTTP. Наприклад, \'/gprmc/Data\'</string>
   <string name="autoopengts_device_id">Ідентифікатор пристрою</string>
+  <string name="autoftp_server">FTP-сервер</string>
+  <string name="autoftp_server_summary">IP-адреса або ім\'я хоста</string>
+  <string name="autoftp_username">Ім\'я користувача</string>
+  <string name="autoftp_password">Пароль</string>
+  <string name="autoftp_advanced_settings">Додаткові параметри</string>
+  <string name="autoftp_port">Порт</string>
+  <string name="autoftp_useftps">Використання FTPS</string>
+  <string name="autoftp_useftps_summary">Увімкнути FTP через SSL. SSL/TLS і неявний опис ігноруються, якщо цей прапорець знято.</string>
+  <string name="autoftp_ssltls">SSL/TLS</string>
+  <string name="autoftp_ssltls_summary">Будь-яке, SSL або TLS. Використовуйте для регулярних небезпечних підключень.</string>
+  <string name="autoftp_ssltls_none">Жоден</string>
+  <string name="autoftp_ssltls_ssl">SSL</string>
+  <string name="autoftp_ssltls_tls">TLS</string>
+  <string name="autoftp_implicit">Неявний FTP через SSL</string>
+  <string name="autoftp_implicit_summary">Залиште прапорець знятим, якщо ви не знаєте.</string>
+  <string name="autoftp_test">Перевірити завантаження FTP</string>
+  <string name="autoftp_test_summary">Завантажити тестовий файл на FTP-сервер</string>
+  <string name="autoftp_testing">Тестування завантаження FTP</string>
+  <string name="autoftp_invalid_settings">Неприпустимі параметри</string>
+  <string name="autoftp_invalid_summary">Деякі параметри неприпустимі. Будь ласка, переконайтеся, що ви заповнили всі відповідні поля.     </string>
+  <string name="autoftp_enabled">FTP включений</string>
+  <string name="ftp_upload">Завантаження FTP</string>
+  <string name="autoftp_setup_title">Установка FTP</string>
+  <string name="autoftp_setup_summary">Завантажити файли на сервер FTP(S). Примітка: Це не охоплює SFTP.</string>
 </resources>

@@ -91,8 +91,6 @@
   <string name="log_gpx_summary">在SD卡的 GPSLogger 資料夾中建立 GPX 檔案。</string>
   <string name="log_kml_title">記錄到 KML 檔案</string>
   <string name="log_kml_summary">在SD卡的 GPSLogger 資料夾中建立 KML 檔案。</string>
-  <string name="satellite_time_title">使用衛星時間</string>
-  <string name="satellite_time_summary">使用衛星時間而不是本機手機時間，這將更加的精確。</string>
   <string name="new_file_creation_title">新檔案的建立</string>
   <string name="new_file_creation_summary">選取是一天僅建立一個檔案呢還是每次開始都建立一個檔案。</string>
   <string name="new_file_creation_onceaday">一天僅一次</string>

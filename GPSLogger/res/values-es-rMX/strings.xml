@@ -104,8 +104,6 @@
   <string name="log_kml_summary">Crea un archivo GPX en la carpeta GPSLogger de la tarjeta SD.</string>
   <string name="log_plain_text_title">Registro en texto sin formato</string>
   <string name="log_plain_text_summary">Crea un archivo de texto en la carpeta GPSLogger en la tarjeta SD.</string>
-  <string name="satellite_time_title">Usar Hora de Satelites</string>
-  <string name="satellite_time_summary">Uso de satélite en lugar de tiempo de teléfono local, es más preciso.</string>
   <string name="new_file_creation_title">Creación de archivos nuevos</string>
   <string name="new_file_creation_summary">Si desea crear un nuevo archivo una vez al día o cada vez que inicie.</string>
   <string name="new_file_creation_onceaday">Una vez al día</string>

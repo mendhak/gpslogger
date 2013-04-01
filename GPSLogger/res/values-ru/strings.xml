@@ -108,10 +108,6 @@
   <string name="log_kml_summary">Создается KML файл в GPSLogger папке на SD карте.</string>
   <string name="log_plain_text_title">Записывать в обычный текст</string>
   <string name="log_plain_text_summary">Создает текстовый файл в папке GPSLogger на SD-карте.</string>
-  <string name="satellite_time_title">Использовать время со спутников</string>
-  <string name="satellite_time_summary">Использовать время, полученно от спутников вместо времени телефона. Время со
-        спутников более точное.
-    </string>
   <string name="new_file_creation_title">Создать новый файл</string>
   <string name="new_file_creation_summary">Создвать файл лога один раз в день или каждый раз при старте записи лога.
     </string>
