@@ -1,4 +1,4 @@
-**Feature request? Please consider [contributing](https://help.github.com/articles/using-pull-requests) code. **
+**Feature request? Please consider [contributing](https://help.github.com/articles/using-pull-requests) code.**
 ----
 
 **Can you help with [translations](http://crowdin.net/project/gpslogger-for-android)?**
