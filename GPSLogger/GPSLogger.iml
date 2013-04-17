@@ -5,26 +5,11 @@
       <configuration>
         <option name="GEN_FOLDER_RELATIVE_PATH_APT" value="/target/generated-sources/r" />
         <option name="GEN_FOLDER_RELATIVE_PATH_AIDL" value="/target/generated-sources/aidl" />
-        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/AndroidManifest.xml" />
-        <option name="RES_FOLDER_RELATIVE_PATH" value="/res" />
-        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/assets" />
-        <option name="LIBS_FOLDER_RELATIVE_PATH" value="/libs" />
-        <option name="USE_CUSTOM_APK_RESOURCE_FOLDER" value="false" />
-        <option name="CUSTOM_APK_RESOURCE_FOLDER" value="" />
-        <option name="USE_CUSTOM_COMPILER_MANIFEST" value="false" />
-        <option name="CUSTOM_COMPILER_MANIFEST" value="" />
-        <option name="APK_PATH" value="" />
-        <option name="LIBRARY_PROJECT" value="false" />
         <option name="RUN_PROCESS_RESOURCES_MAVEN_TASK" value="false" />
-        <option name="GENERATE_UNSIGNED_APK" value="false" />
-        <option name="CUSTOM_DEBUG_KEYSTORE_PATH" value="" />
-        <option name="PACK_TEST_CODE" value="false" />
-        <option name="RUN_PROGUARD" value="false" />
         <option name="PROGUARD_CFG_PATH" value="/proguard.cfg" />
-        <resOverlayFolders />
         <includeSystemProguardFile>false</includeSystemProguardFile>
         <includeAssetsFromLibraries>true</includeAssetsFromLibraries>
-        <additionalNativeLibs />
+        <resOverlayFolders />
       </configuration>
     </facet>
   </component>
@@ -43,7 +28,7 @@
       <excludeFolder url="file://$MODULE_DIR$/target/generated-sources/extracted-dependencies" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="jdk" jdkName="Maven Android 4.1.2 Platform" jdkType="Android SDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.android:android:4.1.1.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.httpcomponents:httpclient:4.0.1" level="project" />
@@ -66,7 +51,7 @@
     <orderEntry type="library" name="Maven: commons-net:commons-net:2.2" level="project" />
     <orderEntry type="library" name="Maven: com.actionbarsherlock:actionbarsherlock:apklib:4.2.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.android:support-v4:r7" level="project" />
-    <orderEntry type="module" module-name="~apklib-com.actionbarsherlock_actionbarsherlock_4.2.0" />
+    <orderEntry type="module" module-name="~apklib-com.actionbarsherlock_actionbarsherlock_4.2.0" exported="" />
   </component>
 </module>
 
