@@ -24,10 +24,12 @@ import android.os.Handler;
 import android.preference.*;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
+import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
 
-public class GpsSettingsActivity extends PreferenceActivity
+public class GpsSettingsActivity extends SherlockPreferenceActivity
 {
 
     private final Handler handler = new Handler();
@@ -37,6 +39,10 @@ public class GpsSettingsActivity extends PreferenceActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        // enable the home button so you can go back to the main screen
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         addPreferencesFromResource(R.xml.settings);
 
         if (getIntent().getBooleanExtra("autosend_preferencescreen", false))
@@ -89,6 +95,25 @@ public class GpsSettingsActivity extends PreferenceActivity
         CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
         chkLog_opengts.setOnPreferenceClickListener(new LogOpenGTSPreferenceClickListener(prefs));
 
+    }
+
+    /**
+     * Called when one of the menu items is selected.
+     */
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        int itemId = item.getItemId();
+        Utilities.LogInfo("Option item selected - " + String.valueOf(item.getTitle()));
+
+        switch (itemId)
+        {
+            case android.R.id.home:
+                finish();
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

@@ -16,6 +16,7 @@ DEPLOYMENT/
 KEYSTORE/
 images/
 ucdetector_reports/
+GPSLogger/gen-external-apklibs/
 
 
 workspace.xml
