@@ -402,8 +402,11 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.optionsmenu, menu);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         return true;
     }
+
 
     /**
      * Called when one of the menu items is selected.
