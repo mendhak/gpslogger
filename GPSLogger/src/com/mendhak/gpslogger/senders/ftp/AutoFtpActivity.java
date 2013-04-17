@@ -17,14 +17,18 @@
 
 package com.mendhak.gpslogger.senders.ftp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.*;
+import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import com.actionbarsherlock.view.MenuItem;
+import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 
-public class AutoFtpActivity extends PreferenceActivity implements IActionListener, Preference.OnPreferenceClickListener
+public class AutoFtpActivity extends SherlockPreferenceActivity implements IActionListener, Preference.OnPreferenceClickListener
 {
 
     private final Handler handler = new Handler();
@@ -32,12 +36,41 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        // enable the home button so you can go back to the main screen
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         addPreferencesFromResource(R.xml.autoftpsettings);
 
         Preference testFtp = findPreference("autoftp_test");
         testFtp.setOnPreferenceClickListener(this);
 
     }
+
+
+    /**
+     * Called when one of the menu items is selected.
+     */
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        int itemId = item.getItemId();
+        Utilities.LogInfo("Option item selected - " + String.valueOf(item.getTitle()));
+
+        switch (itemId)
+        {
+            case android.R.id.home:
+                Intent intent = new Intent(this, GpsMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
 
 
     private final Runnable successfullySent = new Runnable()

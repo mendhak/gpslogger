@@ -97,6 +97,7 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
 
     }
 
+
     /**
      * Called when one of the menu items is selected.
      */
@@ -109,12 +110,15 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
         switch (itemId)
         {
             case android.R.id.home:
-                finish();
+                Intent intent = new Intent(this, GpsMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
 
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 
     private final Runnable updateResults = new Runnable()

@@ -17,16 +17,20 @@
 
 package com.mendhak.gpslogger.senders.opengts;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.*;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.view.KeyEvent;
 import android.webkit.URLUtil;
+import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import com.actionbarsherlock.view.MenuItem;
+import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
 
-public class OpenGTSActivity extends PreferenceActivity implements
+public class OpenGTSActivity extends SherlockPreferenceActivity implements
         OnPreferenceChangeListener,
         OnPreferenceClickListener
 {
@@ -35,6 +39,10 @@ public class OpenGTSActivity extends PreferenceActivity implements
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        // enable the home button so you can go back to the main screen
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         addPreferencesFromResource(R.xml.opengtssettings);
 
         CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoopengts_enabled");
@@ -52,6 +60,31 @@ public class OpenGTSActivity extends PreferenceActivity implements
         txtOpenGTSDeviceId.setOnPreferenceChangeListener(this);
 
     }
+
+
+    /**
+     * Called when one of the menu items is selected.
+     */
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        int itemId = item.getItemId();
+        Utilities.LogInfo("Option item selected - " + String.valueOf(item.getTitle()));
+
+        switch (itemId)
+        {
+            case android.R.id.home:
+                Intent intent = new Intent(this, GpsMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
 
     public boolean onPreferenceClick(Preference preference)
     {
