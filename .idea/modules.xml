@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GPSLogger/GPSLogger.iml" filepath="$PROJECT_DIR$/GPSLogger/GPSLogger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GPSLogger/gen-external-apklibs/~apklib-com.actionbarsherlock_actionbarsherlock_4.2.0.iml" filepath="$PROJECT_DIR$/GPSLogger/gen-external-apklibs/~apklib-com.actionbarsherlock_actionbarsherlock_4.2.0.iml" />
     </modules>
   </component>
 </project>

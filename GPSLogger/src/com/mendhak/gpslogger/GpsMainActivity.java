@@ -33,6 +33,10 @@ import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.*;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
@@ -53,7 +57,7 @@ import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
 import java.io.File;
 import java.util.*;
 
-public class GpsMainActivity extends Activity implements OnCheckedChangeListener,
+public class GpsMainActivity extends SherlockActivity implements OnCheckedChangeListener,
         IGpsLoggerServiceClient, View.OnClickListener, IActionListener
 {
 
@@ -394,13 +398,11 @@ public class GpsMainActivity extends Activity implements OnCheckedChangeListener
      * Called when the menu is created.
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        MenuInflater inflater = getMenuInflater();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.optionsmenu, menu);
 
         return true;
-
     }
 
     /**

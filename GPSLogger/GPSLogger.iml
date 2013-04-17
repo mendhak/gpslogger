@@ -41,10 +41,10 @@
       <excludeFolder url="file://$MODULE_DIR$/target/generated-sources/combined-assets" />
       <excludeFolder url="file://$MODULE_DIR$/target/generated-sources/combined-resources" />
       <excludeFolder url="file://$MODULE_DIR$/target/generated-sources/extracted-dependencies" />
-      <excludeFolder url="file://$MODULE_DIR$/target/test-classes" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.android:android:2.3.3" level="project" />
+    <orderEntry type="jdk" jdkName="Maven Android 4.1.2 Platform" jdkType="Android SDK" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.android:android:4.1.1.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.httpcomponents:httpclient:4.0.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.httpcomponents:httpcore:4.0.1" level="project" />
@@ -64,7 +64,9 @@
     <orderEntry type="library" name="Maven: org.apache.james:apache-mime4j:0.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpmime:4.0.3" level="project" />
     <orderEntry type="library" name="Maven: commons-net:commons-net:2.2" level="project" />
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="library" name="Maven: com.actionbarsherlock:actionbarsherlock:apklib:4.2.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.android:support-v4:r7" level="project" />
+    <orderEntry type="module" module-name="~apklib-com.actionbarsherlock_actionbarsherlock_4.2.0" />
   </component>
 </module>
 

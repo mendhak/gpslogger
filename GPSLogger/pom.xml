@@ -18,6 +18,8 @@
         <dependency>
             <groupId>com.google.android</groupId>
             <artifactId>android</artifactId>
+            <scope>provided</scope>
+            <version>4.1.1.4</version>
         </dependency>
 
         <dependency>
@@ -135,6 +137,12 @@
             <artifactId>commons-net</artifactId>
             <version>2.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.actionbarsherlock</groupId>
+            <artifactId>actionbarsherlock</artifactId>
+            <version>4.2.0</version>
+            <type>apklib</type>
+        </dependency>
 
     </dependencies>
 
@@ -144,7 +152,7 @@
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>android-maven-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.5.0</version>
                 <configuration>
                     <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
                     <assetsDirectory>${project.basedir}/assets</assetsDirectory>
@@ -152,7 +160,7 @@
                     <!--<nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>-->
                     <!--<nativeLibrariesDirectory>${project.basedir}/libs</nativeLibrariesDirectory>-->
                     <sdk>
-                        <platform>8</platform>
+                        <platform>16</platform>
                     </sdk>
                     <runDebug>true</runDebug>
                     <undeployBeforeDeploy>true</undeployBeforeDeploy>
