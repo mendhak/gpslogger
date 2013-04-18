@@ -206,6 +206,11 @@ public class Utilities
         {
             AppSettings.setNewFileOnceADay(true);
         }
+        else if(AppSettings.getNewFileCreation().equals("static"))
+        {
+            AppSettings.setStaticFile(true);
+            AppSettings.setStaticFileName(prefs.getString("new_file_static_name","gpslogger"));
+        }
         else
         {
             AppSettings.setNewFileOnceADay(false);

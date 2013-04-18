@@ -146,6 +146,10 @@
     <string name="new_file_creation_summary">Whether to create a new file once a day or each time you start.</string>
     <string name="new_file_creation_onceaday">Once a day</string>
     <string name="new_file_creation_everystart">Every time I start</string>
+    <string name="new_file_creation_static">Fixed file</string>
+    <string name="new_file_static_title">Static file name</string>
+    <string name="new_file_static_summary">If you chose to create a fixed file, enter a custom file name</string>
+
 
     <string name="pref_performance_title">Performance</string>
     <string name="prefer_celltower_title">Prefer celltowers</string>
@@ -406,5 +410,7 @@
 
     <string name="autoftp_setup_title">FTP Setup</string>
     <string name="autoftp_setup_summary">Upload your files to an FTP(S) server. Note: This does not cover SFTP.</string>
+
+
 
 </resources>

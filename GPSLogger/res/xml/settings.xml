@@ -24,6 +24,12 @@
                             android:summary="@string/new_file_creation_summary"
                             android:entries="@array/filecreation_entries" android:defaultValue="onceaday"
                             android:entryValues="@array/filecreation_values"/>
+            <EditTextPreference android:key="new_file_static_name"
+                                android:title="@string/new_file_static_title"
+                                android:summary="@string/new_file_static_summary"
+                                android:dialogTitle="@string/new_file_static_title"
+                                android:defaultValue="gpslogger"
+                                />
         </PreferenceCategory>
         <PreferenceCategory android:title="@string/pref_performance_title">
             <CheckBoxPreference android:key="prefer_celltower"

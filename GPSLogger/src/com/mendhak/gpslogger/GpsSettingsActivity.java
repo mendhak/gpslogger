@@ -82,6 +82,9 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
             accuracyBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
         }
 
+
+
+
         CheckBoxPreference imperialCheckBox = (CheckBoxPreference) findPreference("useImperial");
         imperialCheckBox.setOnPreferenceChangeListener(new ImperialPreferenceChangeListener(prefs, distanceBeforeLogging, accuracyBeforeLogging));
 
@@ -94,6 +97,18 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
 
         CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
         chkLog_opengts.setOnPreferenceClickListener(new LogOpenGTSPreferenceClickListener(prefs));
+
+
+        ListPreference newFilePref = (ListPreference) findPreference("new_file_creation");
+        newFilePref.setOnPreferenceChangeListener(new FileCreationPreferenceChangeListener());
+
+
+        if(!newFilePref.getValue().equals("static"))
+        {
+            Preference staticPref = (Preference)findPreference("new_file_static_name");
+            staticPref.setEnabled(false);
+        }
+
 
     }
 
@@ -154,6 +169,25 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
         public boolean onPreferenceClick(Preference preference)
         {
             startActivity(OSMHelper.GetOsmSettingsIntent(getApplicationContext()));
+
+            return true;
+        }
+    }
+
+    private class FileCreationPreferenceChangeListener implements Preference.OnPreferenceChangeListener
+    {
+        @Override
+        public boolean onPreferenceChange(Preference preference, Object newValue) {
+            System.out.print(newValue.toString());
+            Preference staticPref = (Preference)findPreference("new_file_static_name");
+            if(newValue.equals("static"))
+            {
+                staticPref.setEnabled(true);
+            }
+            else
+            {
+                staticPref.setEnabled(false);
+            }
 
             return true;
         }
@@ -318,4 +352,6 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
 
         }
     }
+
+
 }

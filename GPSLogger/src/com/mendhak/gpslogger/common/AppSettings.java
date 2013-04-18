@@ -68,6 +68,9 @@ public class AppSettings extends Application
     private static String ftpProtocol;
     private static boolean ftpImplicit;
 
+    private static String staticFileName;
+    private static boolean isStaticFile;
+
 
     /**
      * @return the useImperial
@@ -605,5 +608,25 @@ public class AppSettings extends Application
     public static void setAutoFtpEnabled(boolean autoFtpEnabled)
     {
         AppSettings.autoFtpEnabled = autoFtpEnabled;
+    }
+
+    public static String getStaticFileName()
+    {
+        return staticFileName;
+    }
+
+    public static void setStaticFileName(String staticFileName)
+    {
+        AppSettings.staticFileName = staticFileName;
+    }
+
+    public static boolean isStaticFile()
+    {
+        return isStaticFile;
+    }
+
+    public static void setStaticFile(boolean staticFile)
+    {
+        AppSettings.isStaticFile = staticFile;
     }
 }
