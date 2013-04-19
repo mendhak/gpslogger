@@ -205,6 +205,7 @@ public class Utilities
         if (AppSettings.getNewFileCreation().equals("onceaday"))
         {
             AppSettings.setNewFileOnceADay(true);
+            AppSettings.setStaticFile(false);
         }
         else if(AppSettings.getNewFileCreation().equals("static"))
         {
@@ -214,6 +215,7 @@ public class Utilities
         else
         {
             AppSettings.setNewFileOnceADay(false);
+            AppSettings.setStaticFile(false);
         }
 
         AppSettings.setAutoSendEnabled(prefs.getBoolean("autosend_enabled", false));

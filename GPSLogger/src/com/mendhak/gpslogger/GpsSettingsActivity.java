@@ -26,6 +26,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
 
