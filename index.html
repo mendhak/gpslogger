@@ -20,7 +20,7 @@
     h1 .small { font-size: 0.4em; }
     h1 a { text-decoration: none }
     h2 { font-size: 1.5em; color: #6c6e1a; }
-    h3 { text-align: center; color: #6c6e1a; }
+    h3 {  color: #6c6e1a; }
     a { color: #6c6e1a; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
     .download { float: right; }
@@ -114,71 +114,98 @@
 		This has been tested on the Nexus One, G1, Hero, Desire, Legend and the Acer
 		Liquid A1 so far. Please leave feedback with bugs or feature requests, and your phone make and model as well.<br />
 
-		<h2>FAQ</h2><b>How is this different from other logging apps?</b><br />
-		It's meant to be more battery efficient. A lot of other apps, such as MyTracks,
-		usually go with the assumption that you have a data connection available and your
-		routes won't be very long - this isn't very useful when all you want to do is log
-		your position rather than marvel at it :p<br />
-		<br />
-		<b>It takes a long time to find a fix</b><br />
-		When you go to a new location for the first time (especially after a flight), try
-		running the app with 0 seconds and 0 meters so that it can find a fix by
-		frequently polling.<br />
-		<br />
-		<b>How long can it run for?</b><br />
-		I ran a few tests (0 meters and every 60 seconds) and was able to get about 12-16
-		hours on a fully charged Nexus One with wifi , GPS and background data transfer
-		on. Turning background data and wifi can help you squeeze out a few more hours.
-		You can get best results if you put your phone into airplane mode (GPS still
-		works).<br />
-		<br />
-		<b>I see the GPS icon active between the intervals I've set, why is
-		that?</b><br />
-		It's how the Android OS has implemented its GPS system. When you say you want a
-		point every 60 seconds (for example), that's actually a suggestion rather than an
-		imperative, and so the time interval between GPS points is never guaranteed.
-		GPSLogger has logic that checks the time difference, though, and will make sure
-		that at least 60 seconds have passed before logging again.<br />
-		<br />
-		<b>It's not accurate!</b><br />
-		The accuracy is only as good as your phone's GPS chip. You may also want to check
-		your environment. The inaccuracy could be due to clouds, buildings, sunspots,
-		alien invasion, etc.<br />
-		<br />
-		<b>My time interval has passed, but no point was logged</b><br />
-		The GPS will have attempted to find its location and given up after a while. It
-		all comes down to your location as well as your phone hardware. If your hardware
-		is weak and you were in a location with the sky not visible, it's possible that
-		the app tried to find a position but simply gave up.<br />
-		<br />
-		<b>How do I get to the file being logged?</b><br />
-		You can connect your phone to your computer and mount the SD card, then copy the
-		file off. Note that while your SD card is mounted, GPSLogger can't write to the
-		card, since it's in use.<br />
-		If you have Astro File Explorer, then you can go to /sdcard/GPSlogger &gt; Long
-		press file &gt; Open as &gt; Text &gt; File Editor<br />
-		<br />
-		<b>I've changed the settings, but it's still showing/using the old
-		settings</b><br />
-		If the app is logging, and you make changes to the settings, the changes will
-		take effect <i>after</i> the next point is logged. This means that if you've set
-		your interval as 1 hour, you have a long wait ahead of you. If you want the
-		changes to take effect immediately, then stop logging and start it again so that
-		the changes are refreshed.<br />
-		<br />
-		<b>What do the various settings mean? (Accuracy before logging, time interval for accuracy, etc)</b>
-		<br />
-		<b><i>Time before logging</i></b> - How long to wait after a point has been logged to try logging again.<br />
-		<b><i>Distance before logging</i></b> - When a point is available, the app will check to ensure that this much distance exists between the previous and current points.<br />
-		<b><i>Accuracy before logging</i></b> - Sometimes your phone doesn't grab accurate points due to interference (it could be within a few hundred meters which is undesirable or it could be within a few meters which is better), this setting specifies how accurate a point should be before it is logged.<br />
-		<b><i>Time interval for accuracy</i></b> - When searching for a point, the app can continue searching for this many seconds and then attempt to pick the most accurate of all the points it receives.<br /><br />
-		<b>How do I download it?</b></i>
-		<br />
+		
 
-		Search for GPS Logger for Android in Google Play, or follow <a href="market://details?id=com.mendhak.gpslogger">this direct link</a>.
-		<br /><br />
-		<b>How do I download it without using the Android market?</b><br />
-		You can download the APK file <a href="https://github.com/mendhak/gpslogger/downloads">here</a>.
+ <h1>Frequently asked questions</h1>
+
+
+         <h3>It's taking a long time to find a fix!</h3>
+         <p>There can be several reasons reasons for this.</p>
+
+         <ul>
+         <li><strong>New location</strong> - if you are at a new location after a long flight, the GPS on your phone can take a while to reorient itself. Try running GPSLogger at high frequency until it does find a location.</li>
+         <li><strong>Interference</strong> - there may be structures nearby blocking your signal.</li>
+         <li><strong>Mid flight</strong> - if you are in a commercial aircraft, you are probably traveling too fast for your phone's hardware to keep up with the GPS signals.</li>
+         </ul>
+
+
+         <h3>It's not accurate!</h3>
+         <p>It all comes down to your hardware, settings and environment. The accuracy is only as good as your phone's GPS chip.
+         Some phones may have 4 meter accuracies, some have 500 meters.  Also, using GPS satellites will give you better accuracy but take a longer time; using network location will give worse accuracy but is quicker. You may also want to check your environment, as there can be inaccuracy due to clouds, buildings, sunspots, alien invasion, etc.
+         </p>
+
+         <h3>My time interval has passed, but no point was logged</h3>
+         <p>There are two possible reasons for this.</p>
+         <ul>
+         <li>The GPS will have attempted to find its location and given up after a while.  This means that Android OS will not have given a location to GPSLogger</li>
+         <li>The accuracy was below your <em>Accuracy before logging</em> settings, so GPSLogger didn't log it.</li>
+         </ul>
+
+         <h3>It's using the wrong timezone, can you make it use my timezone?</h3>
+         <p>The standard when logging points is to use UTC.  Since this is the standard, it would be wrong to use the the local time zone.  Instead, it is the responsibility of the software you use the log file on (Google Earth, GeoSetter, etc.) to adjust for your timezone.
+             Any application that deals with GPX or KML files will have a setting that allows you to specify your own timezone.</p>
+
+         <h3>I am displaying imperial units but why isn't it logging imperial to the file?</h3>
+         <h3>What are the units in which the values are logged?</h3>
+         <p>The imperial units are only for display purposes.  Speed and distances may also show up as miles and kilometers.  But when logging, the units are always in SI units - meters and seconds.</p>
+
+         <h3>Where is the file being logged?</h3>
+         <p>You can connect your phone to your computer and mount the SD card, then copy the
+         file from the <em>GPSLogger</em> folder. Note that while your SD card is mounted, GPSLogger can't write to the
+         card, since it's in use. To view it on the phone itself, if you have a file explorer, then you can go to /sdcard/GPSlogger &gt; Long
+         press file &gt; Open as &gt; Text</p>
+
+         <h3>I've changed the settings, but it's still showing/using the old settings</h3>
+         <p>If the app is logging, and you make changes to the settings, the changes will
+         take effect <em>after</em> the next point is logged. This means that if you've set
+         your interval as 1 hour, you have a long wait ahead of you. If you want the
+         changes to take effect immediately, then stop logging and start it again so that
+         the changes are refreshed.</p>
+
+         <h3>What do the various settings mean? (Accuracy before logging, time interval for accuracy, etc)</h3>
+         <ul>
+             <li><strong>Time before logging</strong> - How long to wait after a point has been logged to try logging again.</li>
+             <li><strong>Distance before logging</strong> - When a point is available, the app will check to ensure that this much distance exists between the previous and current points.</li>
+             <li><strong>Accuracy before logging</strong> - This setting sets the minimum accuracy a point should have before it is logged. This is useful if you are inside a building for a while.</li>
+             <li><strong>Time interval for accuracy</strong> - When searching for a point, the app can continue searching for this many seconds and then attempt to pick the most accurate of all the points it receives.</li>
+         </ul>
+
+         <h3>Can I use this with automation apps such as Tasker, Locale and Llama?</h3>
+         <p>GPSLogger provides a <em>Start logging</em> and <em>Stop logging</em> shortcut.  Your automation app can invoke these shortcuts.</p>
+
+         <h3>How do I make it last longer?</h3>
+         <p> Mainly, turn wifi off, turn mobile data off, turn background synchronization off, turn bluetooth off.
+             You can also try going into airplane mode which turns many things off.  When it comes to choosing between location sources - GPS vs network - GPS will be more battery hungry while network location is easier on the battery.</p>
+
+         <h3>I see the GPS icon active between the intervals I've set, why is that?</h3>
+         <p>It's how the Android OS has implemented its GPS system. When you say you want a
+             point every 60 seconds (for example), that's actually a suggestion rather than an
+             imperative, and so the time interval between GPS points is never guaranteed.
+             GPSLogger has logic that checks the time difference, though, and will make sure
+             that at least 60 seconds have passed before logging again.</p>
+
+         <h3>Why haven't you developed <em>XYZ</em> feature?</h3>
+         <p>I work on GPSLogger in my spare time and I don't always have the time or resources to implement a feature. However, GPSLogger is open source. You are encouraged to contribute or get someone else to contribute a feature.</p>
+
+         <h3>Where can I contribute code and features?</h3>
+         <p>On <a href="https://github.com/mendhak/gpslogger" onclick="window.open(this.href);return false;">Github</a></p>
+
+         <h3>Where can I contribute translations?</h3>
+         <p>On <a href="http://crowdin.net/project/gpslogger-for-android">Crowdin</a></p>
+
+         <h3>How is this different from other logging apps?</h3>
+         <p>It's meant to be more battery efficient. A lot of other apps, such as MyTracks,
+             usually go with the assumption that you have a data connection available and your
+             routes won't be very long.  The aim of GPSLogger is to log points and stay quiet.</p>
+
+
+		<h3>How do I download it?</h3>
+
+
+		<p>Search for GPS Logger for Android in Google Play, or follow <a href="market://details?id=com.mendhak.gpslogger">this direct link</a>.</p>
+
+		<h3>How do I download it without using the Android market?</h3>
+		<p>You can download the APK file <a href="https://github.com/mendhak/gpslogger/downloads">here</a>.</p>
 
 		<h2><i>Bugs, issues, code?</i></h2>
 		You can add issues and view the source code at <a href="http://github.com/mendhak/gpslogger">github.com/mendhak/gpslogger</a>
