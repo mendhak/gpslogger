@@ -453,6 +453,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             case R.id.mnuFAQ:
                 Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
                 startActivity(faqtivity);
+                break;
             case R.id.mnuExit:
                 loggingService.StopLogging();
                 loggingService.stopSelf();
