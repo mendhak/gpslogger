@@ -5,10 +5,7 @@
 </head>
 <body>
          <h1>Frequently asked questions</h1>
-         <h3>How is this different from other logging apps?</h3>
-         <p>It's meant to be more battery efficient. A lot of other apps, such as MyTracks,
-         usually go with the assumption that you have a data connection available and your
-         routes won't be very long.  The aim of GPSLogger is to log points and stay quiet.</p>
+
 
          <h3>It's taking a long time to find a fix!</h3>
          <p>There can be several reasons reasons for this.</p>
@@ -20,35 +17,30 @@
          </ul>
 
 
-
-         <h3>What's the best way to make it run for a long time?</h3>
-         <p>There are many different things you can do.  Mainly, turn wifi off, turn mobile data off, turn background synchronization off, turn bluetooth off.
-             You can also try going into airplane mode which turns many things off.  When it comes to location sources - GPS vs network - GPS will be more battery hungry while network location is easier on the battery.</p>
-
-         <h3>I see the GPS icon active between the intervals I've set, why is that?</h3>
-         <p>It's how the Android OS has implemented its GPS system. When you say you want a
-         point every 60 seconds (for example), that's actually a suggestion rather than an
-         imperative, and so the time interval between GPS points is never guaranteed.
-         GPSLogger has logic that checks the time difference, though, and will make sure
-         that at least 60 seconds have passed before logging again.</p>
-
          <h3>It's not accurate!</h3>
          <p>It all comes down to your hardware, settings and environment. The accuracy is only as good as your phone's GPS chip.
          Some phones may have 4 meter accuracies, some have 500 meters.  Also, using GPS satellites will give you better accuracy but take a longer time; using network location will give worse accuracy but is quicker. You may also want to check your environment, as there can be inaccuracy due to clouds, buildings, sunspots, alien invasion, etc.
          </p>
 
          <h3>My time interval has passed, but no point was logged</h3>
-
          <p>There are two possible reasons for this.</p>
-             <ul>
-             <li>The GPS will have attempted to find its location and given up after a while.  This means that Android OS will not have given a location to GPSLogger</li>
-             <li>The accuracy was below your <em>Accuracy before logging</em> settings, so GPSLogger didn't log it.</li>
-             </ul>
+         <ul>
+         <li>The GPS will have attempted to find its location and given up after a while.  This means that Android OS will not have given a location to GPSLogger</li>
+         <li>The accuracy was below your <em>Accuracy before logging</em> settings, so GPSLogger didn't log it.</li>
+         </ul>
+
+         <h3>It's using the wrong timezone, can you make it use my timezone?</h3>
+         <p>The standard when logging points is to use UTC.  Since this is the standard, it would be wrong to use the the local time zone.  Instead, it is the responsibility of the software you use the log file on (Google Earth, GeoSetter, etc.) to adjust for your timezone.
+             Any application that deals with GPX or KML files will have a setting that allows you to specify your own timezone.</p>
+
+         <h3>I am displaying imperial units but why isn't it logging imperial to the file?</h3>
+         <h3>What are the units in which the values are logged?</h3>
+         <p>The imperial units are only for display purposes.  Speed and distances may also show up as miles and kilometers.  But when logging, the units are always in SI units - meters and seconds.</p>
 
          <h3>Where is the file being logged?</h3>
          <p>You can connect your phone to your computer and mount the SD card, then copy the
          file from the <em>GPSLogger</em> folder. Note that while your SD card is mounted, GPSLogger can't write to the
-         card, since it's in use. To view it on the phoen itself, if you have a file explorer, then you can go to /sdcard/GPSlogger &gt; Long
+         card, since it's in use. To view it on the phone itself, if you have a file explorer, then you can go to /sdcard/GPSlogger &gt; Long
          press file &gt; Open as &gt; Text</p>
 
          <h3>I've changed the settings, but it's still showing/using the old settings</h3>
@@ -65,6 +57,34 @@
              <li><strong>Accuracy before logging</strong> - This setting sets the minimum accuracy a point should have before it is logged. This is useful if you are inside a building for a while.</li>
              <li><strong>Time interval for accuracy</strong> - When searching for a point, the app can continue searching for this many seconds and then attempt to pick the most accurate of all the points it receives.</li>
          </ul>
+
+         <h3>Can I use this with automation apps such as Tasker, Locale and Llama?</h3>
+         <p>GPSLogger provides a <em>Start logging</em> and <em>Stop logging</em> shortcut.  Your automation app can invoke these shortcuts.</p>
+
+         <h3>How do I make it last longer?</h3>
+         <p> Mainly, turn wifi off, turn mobile data off, turn background synchronization off, turn bluetooth off.
+             You can also try going into airplane mode which turns many things off.  When it comes to choosing between location sources - GPS vs network - GPS will be more battery hungry while network location is easier on the battery.</p>
+
+         <h3>I see the GPS icon active between the intervals I've set, why is that?</h3>
+         <p>It's how the Android OS has implemented its GPS system. When you say you want a
+             point every 60 seconds (for example), that's actually a suggestion rather than an
+             imperative, and so the time interval between GPS points is never guaranteed.
+             GPSLogger has logic that checks the time difference, though, and will make sure
+             that at least 60 seconds have passed before logging again.</p>
+
+         <h3>Why haven't you developed <em>XYZ</em> feature?</h3>
+         <p>I work on GPSLogger in my spare time and I don't always have the time or resources to implement a feature. However, GPSLogger is open source. You are encouraged to contribute or get someone else to contribute a feature.</p>
+
+         <h3>Where can I contribute code and features?</h3>
+         <p>On <a href="https://github.com/mendhak/gpslogger" onclick="window.open(this.href);return false;">Github</a></p>
+
+         <h3>Where can I contribute translations?</h3>
+         <p>On <a href="http://crowdin.net/project/gpslogger-for-android">Crowdin</a></p>
+
+         <h3>How is this different from other logging apps?</h3>
+         <p>It's meant to be more battery efficient. A lot of other apps, such as MyTracks,
+             usually go with the assumption that you have a data connection available and your
+             routes won't be very long.  The aim of GPSLogger is to log points and stay quiet.</p>
 
 
 </body>

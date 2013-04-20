@@ -19,6 +19,7 @@
 package com.mendhak.gpslogger;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -46,15 +47,8 @@ public class Faqtivity extends SherlockActivity
 
         WebView browser = (WebView)findViewById(R.id.faqwebview);
         WebSettings settings = browser.getSettings();
-        settings.setJavaScriptEnabled(false);
+        settings.setJavaScriptEnabled(true);
         browser.loadUrl("file:///android_asset/faq.html");
-
-        browser.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return false;
-            }
-        });
 
         // enable the home button so you can go back to the main screen
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
