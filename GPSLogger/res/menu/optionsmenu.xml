@@ -20,6 +20,9 @@
         </menu>
     </item>
 
+    <item android:id="@+id/mnuFAQ" android:title="@string/menu_faq"
+          android:icon="@android:drawable/ic_menu_help" />
+
     <item android:id="@+id/mnuExit" android:title="@string/menu_exit"
           android:icon="@android:drawable/ic_menu_close_clear_cancel"/>
 

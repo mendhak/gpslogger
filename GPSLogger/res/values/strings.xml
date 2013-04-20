@@ -412,5 +412,6 @@
     <string name="autoftp_setup_summary">Upload your files to an FTP(S) server. Note: This does not cover SFTP.</string>
 
     <string name="faq_screen_title">Frequently asked questions</string>
+    <string name="menu_faq">Help and FAQ</string>
 
 </resources>
