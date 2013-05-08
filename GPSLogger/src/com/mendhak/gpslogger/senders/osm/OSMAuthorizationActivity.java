@@ -21,8 +21,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -143,6 +143,8 @@ public class OSMAuthorizationActivity extends SherlockPreferenceActivity
                 {
                     try
                     {
+                        StrictMode.enableDefaults();
+
                         //User clicks. Set the consumer and provider up.
                         consumer = OSMHelper.GetOSMAuthConsumer(getApplicationContext());
                         provider = OSMHelper.GetOSMAuthProvider(getApplicationContext());
