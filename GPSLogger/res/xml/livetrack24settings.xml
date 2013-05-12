@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:key="livetrack24_preferences">
+
+    <CheckBoxPreference android:key="livetrack24_enabled"
+                        android:title="@string/livetrack24_enabled"
+                        android:summary="@string/livetrack24_enabled_summary"/>
+
+    <PreferenceCategory android:title="@string/livetrack24_server_category">
+
+        <EditTextPreference android:key="livetrack24_server_url"
+                            android:title="@string/livetrack24_server_url"
+                            android:inputType="textUri"
+                            android:summary="@string/livetrack24_server_url_summary"
+                            android:dialogTitle="@string/livetrack24_server_url"
+                android:defaultValue="@string/livetrack24_server_url_default"/>
+        
+        <EditTextPreference android:key="livetrack24_username" android:title="@string/livetrack24_username"
+                            android:dialogTitle="@string/livetrack24_username"/>
+        <EditTextPreference android:key="livetrack24_password" android:title="@string/livetrack24_password"
+                            android:dialogTitle="@string/livetrack24_password"/>
+        <EditTextPreference android:key="livetrack24_interval" android:title="@string/livetrack24_interval"
+                            android:dialogTitle="@string/livetrack24_interval"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

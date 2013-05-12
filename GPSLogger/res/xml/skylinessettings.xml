@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:key="skylines_preferences">
+
+    <CheckBoxPreference android:key="skylines_enabled"
+                        android:title="@string/skylines_enabled"
+                        android:summary="@string/skylines_enabled_summary"/>
+
+    <PreferenceCategory android:title="@string/skylines_server_category">
+
+        <EditTextPreference android:key="skylines_server"
+                            android:title="@string/skylines_server"
+                            android:inputType="textUri"
+                            android:summary="@string/skylines_server_summary"
+                            android:dialogTitle="@string/skylines_server"
+                android:defaultValue="@string/skylines_server_default"/>
+
+        <EditTextPreference android:key="skylines_server_port"
+                            android:title="@string/skylines_server_port"
+                            android:inputType="number"
+                            android:dialogTitle="@string/skylines_server_port"
+                android:defaultValue="@string/skylines_server_port_default"/>
+
+        <EditTextPreference android:key="skylines_key" android:title="@string/skylines_key"
+                            android:dialogTitle="@string/skylines_key"/>
+        <EditTextPreference android:key="skylines_interval" android:title="@string/skylines_interval"
+                            android:dialogTitle="@string/skylines_interval"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

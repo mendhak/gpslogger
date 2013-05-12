@@ -18,48 +18,125 @@
 package com.mendhak.gpslogger.loggers;
 
 import android.os.Environment;
+import android.util.Log;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileLoggerFactory
 {
+    public static List<String> GetFileLoggersNames() {
+
+        List<String> loggers = new ArrayList<String>();
+
+        if (AppSettings.shouldLogToGpx())
+        {
+            loggers.add(Gpx10FileLogger.name);
+        }
+
+        if (AppSettings.shouldLogToIgc())
+        {
+            loggers.add(IgcFileLogger.name);
+        }
+
+        if (AppSettings.shouldLogToKml())
+        {
+            loggers.add(Kml22FileLogger.name);
+        }
+
+        if (AppSettings.shouldLogToPlainText())
+        {
+            loggers.add(PlainTextFileLogger.name);
+        }
+
+        if (AppSettings.shouldLogToSkylines())
+        {
+            loggers.add(SkyLinesLogger.name);
+        }
+
+        if (AppSettings.shouldLogToLivetrack24())
+        {
+            loggers.add(LiveTrack24FileLogger.name);
+        }
+
+        if (AppSettings.shouldLogToOpenGTS())
+        {
+            loggers.add(OpenGTSLogger.name);
+        }
+        return loggers;
+    }
+
     public static List<IFileLogger> GetFileLoggers()
     {
-        File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
-        if (!gpxFolder.exists())
+        File gpx_or_igcFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+        if (!gpx_or_igcFolder.exists())
         {
-            gpxFolder.mkdirs();
+            gpx_or_igcFolder.mkdirs();
         }
 
         List<IFileLogger> loggers = new ArrayList<IFileLogger>();
 
         if (AppSettings.shouldLogToGpx())
         {
-            File gpxFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".gpx");
+            File gpxFile = new File(gpx_or_igcFolder.getPath(), Session.getCurrentFileName() + ".gpx");
             loggers.add(new Gpx10FileLogger(gpxFile,  Session.shouldAddNewTrackSegment(), Session.getSatelliteCount()));
+        }
+
+        if (AppSettings.shouldLogToIgc())
+        {
+            File igcFile = new File(gpx_or_igcFolder.getPath(), Session.getCurrentFileName() + ".igc");
+            try{
+                loggers.add(IgcFileLogger.getIgcFileLogger(igcFile, AppSettings.getIgcPrivateKey()));
+            } catch (IOException ioe){
+
+            }
         }
 
         if (AppSettings.shouldLogToKml())
         {
-            File kmlFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".kml");
+            File kmlFile = new File(gpx_or_igcFolder.getPath(), Session.getCurrentFileName() + ".kml");
             loggers.add(new Kml22FileLogger(kmlFile, Session.shouldAddNewTrackSegment()));
         }
 
         if (AppSettings.shouldLogToPlainText())
         {
-            File file = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".txt");
+            File file = new File(gpx_or_igcFolder.getPath(), Session.getCurrentFileName() + ".txt");
             loggers.add(new PlainTextFileLogger(file));
+        }
+
+        if (AppSettings.shouldLogToSkylines())
+        {
+            try{
+                loggers.add(SkyLinesLogger.getSkyLinesLogger(Long.parseLong(AppSettings.getSkylinesKey(), 16),
+                        AppSettings.getSkylinesInterval(),
+                        AppSettings.getSkylinesServer(),
+                        AppSettings.getSkylinesServerPort()
+                ));
+            } catch (Exception e){
+                Log.e("FileLoggerFactory", "Error creating Skylines logger", e);
+            }
+        }
+
+        if (AppSettings.shouldLogToLivetrack24())
+        {
+            try{
+                loggers.add(LiveTrack24FileLogger.getLiveTrack24Logger(AppSettings.getLivetrack24ServerURL(),
+                        AppSettings.getLivetrack24Username(),
+                        AppSettings.getLivetrack24Password(),
+                        AppSettings.getLivetrack24Interval()));
+            } catch (Exception e){
+                Log.e("FileLoggerFactory", "Error creating Livetrack24 logger", e);
+            }
         }
 
         if (AppSettings.shouldLogToOpenGTS())
         {
             loggers.add(new OpenGTSLogger());
         }
-
         return loggers;
     }
 }

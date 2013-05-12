@@ -142,6 +142,8 @@
     <string name="log_kml_summary">Creates a KML file in the GPSLogger folder on the SD card.</string>
     <string name="log_plain_text_title">Log to Plain Text</string>
     <string name="log_plain_text_summary">Creates a plain text file in the GPSLogger folder on the SD card.</string>
+    <string name="log_igc_title">Log to IGC</string>
+    <string name="log_igc_summary">Creates an IGC file in the GPSLogger folder on the SD card.</string>
     <string name="new_file_creation_title">New file creation</string>
     <string name="new_file_creation_summary">Whether to create a new file once a day or each time you start.</string>
     <string name="new_file_creation_onceaday">Once a day</string>
@@ -363,6 +365,41 @@
     <string name="shortcut_stop">Stop</string>
     <string name="shortcut_pickaction">Pick an action</string>
 
+    <string name="log_skylines_title">Log to SkyLines Server</string>
+    <string name="log_skylines_summary">Send GPS data to an online SkyLines server.</string>
+    <string name="skylines_setup_title">SkyLines Setup</string>
+    <string name="skylines_setup_summary">Send GPS traces to a SkyLines server of your choice.</string>
+    <string name="skylines_enabled">Enable SkyLines</string>
+    <string name="skylines_enabled_summary">Enable this SkyLines server.</string>
+    <string name="skylines_server_category">SkyLines Settings</string>
+    <string name="skylines_server">Server</string>
+    <string name="skylines_server_summary">Hostname or IP</string>
+    <string name="skylines_server_port">Port</string>
+    <string name="skylines_server_default">78.47.50.46</string>
+    <string name="skylines_server_port_default">5597</string>
+    <string name="skylines_key">Your pilot private key</string>
+    <string name="skylines_interval">Interval for sending data</string>
+    <string name="skylines_invalid_form">Invalid values</string>
+    <string name="skylines_invalid_form_message">Please ensure that all of the fields have been filled in properly</string>
+
+       
+    <string name="log_livetrack24_title">Log to livetrack24 Server</string>
+    <string name="log_livetrack24_summary">Send GPS data to an online livetrack24 server.</string>
+    <string name="livetrack24_setup_title">livetrack24 Setup</string>
+    <string name="livetrack24_setup_summary">Send GPS traces to a livetrack24 server of your choice.</string>
+    <string name="livetrack24_enabled">Enable livetrack24</string>
+    <string name="livetrack24_enabled_summary">Enable this livetrack24 server.</string>
+    <string name="livetrack24_server_category">livetrack24 Settings</string>
+    <string name="livetrack24_server_url">Server</string>
+    <string name="livetrack24_server_url_summary">Submission URL</string>
+    <string name="livetrack24_server_url_default">http://www.livetrack24.com</string>
+
+    <string name="livetrack24_username">Your livetrack24 username</string>
+    <string name="livetrack24_password">Your livetrack24 password</string>
+    <string name="livetrack24_interval">Interval for sending data</string>
+    <string name="livetrack24_invalid_form">Invalid values</string>
+    <string name="livetrack24_invalid_form_message">Please ensure that all of the fields have been filled in properly</string>
+    
     <string name="log_opengts_title">Log to OpenGTS Server</string>
     <string name="log_opengts_summary">Send GPRMC data to an online OpenGTS server.</string>
     <string name="opengts_setup_title">OpenGTS Setup</string>

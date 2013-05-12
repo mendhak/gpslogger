@@ -221,6 +221,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         {
             SetSinglePointButtonEnabled(true);
             loggingService.StopLogging();
+            ShowPreferencesSummary();
         }
     }
 
@@ -240,6 +241,8 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         else if (Session.isStarted() && Session.isSinglePointMode())
         {
             loggingService.StopLogging();
+            ShowPreferencesSummary();
+
             SetMainButtonEnabled(true);
             Session.setSinglePointMode(false);
         }
@@ -287,19 +290,32 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             TextView txtDistance = (TextView) findViewById(R.id.txtDistance);
             TextView txtAutoEmail = (TextView) findViewById(R.id.txtAutoEmail);
 
-            List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers();
+
+            List<String> loggers;
+            if (!Session.isStarted()){
+                 loggers = FileLoggerFactory.GetFileLoggersNames();
+            } else {
+                loggers = new ArrayList<String>();
+                for (IFileLogger lo : Session.getFileLoggers()){
+                    loggers.add(lo.getName());
+                }
+            }
 
             if (loggers.size() > 0)
             {
-
-                ListIterator<IFileLogger> li = loggers.listIterator();
-                String logTo = li.next().getName();
-                while (li.hasNext())
+                StringBuffer sb = new StringBuffer();
+                sb.append(loggers.get(0));
+                boolean b = false;
+                for (final String log : loggers)
                 {
-                    logTo += ", " + li.next().getName();
+                    if (!b) {
+                        b = true;
+                        continue;
+                    }
+                    sb.append(", ");
+                    sb.append(log);
                 }
-                txtLoggingTo.setText(logTo);
-
+                txtLoggingTo.setText(sb.toString());
             }
             else
             {
@@ -456,6 +472,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
                 break;
             case R.id.mnuExit:
                 loggingService.StopLogging();
+                ShowPreferencesSummary();
                 loggingService.stopSelf();
                 finish();
                 break;
@@ -768,7 +785,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             return;
         }
 
-        if (!Session.shoulAllowDescription())
+        if (!Session.shouldAllowDescription())
         {
             Utilities.MsgBox(getString(R.string.not_yet),
                     getString(R.string.cant_add_description_until_next_point),
@@ -811,7 +828,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
     {
         Utilities.LogDebug("GpsMainActivity.Annotate(description)");
 
-        List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers();
+        List<IFileLogger> loggers = Session.getFileLoggers();
 
         for (IFileLogger logger : loggers)
         {
@@ -1089,6 +1106,8 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         if (Session.isSinglePointMode())
         {
             loggingService.StopLogging();
+            ShowPreferencesSummary();
+
             SetMainButtonEnabled(true);
             Session.setSinglePointMode(false);
         }

@@ -10,9 +10,18 @@
 
     <CheckBoxPreference android:key="log_opengts"
                         android:summary="@string/log_opengts_summary" android:title="@string/log_opengts_title"/>
-                        
+
+    <CheckBoxPreference android:key="log_skylines"
+                        android:summary="@string/log_skylines_summary" android:title="@string/log_skylines_title"/>
+
+    <CheckBoxPreference android:key="log_livetrack24"
+                        android:summary="@string/log_livetrack24_summary" android:title="@string/log_livetrack24_title"/>
+
     <CheckBoxPreference android:key="log_plain_text"
                         android:summary="@string/log_plain_text_summary" android:title="@string/log_plain_text_title"/>
+
+    <CheckBoxPreference android:key="log_igc"
+                        android:summary="@string/log_igc_summary" android:title="@string/log_igc_title"/>
 
     <PreferenceScreen android:title="@string/pref_logging_title"
                       android:summary="@string/pref_logging_summary">
@@ -132,15 +141,23 @@
                         android:summary="@string/opengts_setup_summary" android:key="opengts_setup">
                 <intent android:action="com.mendhak.gpslogger.OPENGTS_SETUP" />
             </Preference>
+
+            <Preference android:title="@string/skylines_setup_title"
+                        android:summary="@string/skylines_setup_summary" android:key="skylines_setup">
+                <intent android:action="com.mendhak.gpslogger.SKYLINES_SETUP" />
+            </Preference>
+
+            <Preference android:title="@string/livetrack24_setup_title"
+                        android:summary="@string/livetrack24_setup_summary" android:key="livetrack24_setup">
+                <intent android:action="com.mendhak.gpslogger.LIVETRACK24_SETUP" />
+            </Preference>
+
             <Preference android:title="@string/autoftp_setup_title"
                          android:summary="@string/autoftp_setup_summary" android:key="autoftp_setup">
                 <intent android:action="com.mendhak.gpslogger.AUTOFTP_SETUP" />
             </Preference>
         </PreferenceCategory>
 
-
-
     </PreferenceScreen>
-
 
 </PreferenceScreen>

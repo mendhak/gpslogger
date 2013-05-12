@@ -34,7 +34,7 @@ public class Kml22FileLogger implements IFileLogger
             new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
     private final boolean addNewTrackSegment;
     private final File kmlFile;
-    protected final String name = "KML";
+    public static final String name = "KML";
 
     public Kml22FileLogger(File kmlFile, boolean addNewTrackSegment)
     {
@@ -42,13 +42,14 @@ public class Kml22FileLogger implements IFileLogger
         this.addNewTrackSegment = addNewTrackSegment;
     }
 
-
+    @Override
     public void Write(Location loc) throws Exception
     {
         Kml22WriteHandler writeHandler = new Kml22WriteHandler(loc, kmlFile, addNewTrackSegment);
         EXECUTOR.execute(writeHandler);
     }
 
+    @Override
     public void Annotate(String description, Location loc) throws Exception
     {
         Kml22AnnotateHandler annotateHandler = new Kml22AnnotateHandler(kmlFile, description, loc);
@@ -59,6 +60,11 @@ public class Kml22FileLogger implements IFileLogger
     public String getName()
     {
         return name;
+    }
+
+    @Override
+    public void close() throws Exception{
+
     }
 }
 

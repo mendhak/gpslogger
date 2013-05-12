@@ -127,6 +127,22 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.mendhak.gpslogger.senders.skylines.SkylinesActivity"
+                  android:label="@string/skylines_setup_title">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="com.mendhak.gpslogger.SKYLINES_SETUP"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.mendhak.gpslogger.senders.livetrack24.Livetrack24Activity"
+                  android:label="@string/livetrack24_setup_title">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="com.mendhak.gpslogger.LIVETRACK24_SETUP"/>
+            </intent-filter>
+        </activity>
+
         <receiver android:enabled="true"
                   android:name="com.mendhak.gpslogger.StartupReceiver"
                   android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
@@ -140,9 +156,4 @@
 
         <receiver android:name="com.mendhak.gpslogger.senders.AlarmReceiver"/>
     </application>
-
-
-
-
-
-</manifest> 
+</manifest>

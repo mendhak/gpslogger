@@ -39,7 +39,7 @@ public class PlainTextFileLogger implements IFileLogger
 {
 
     private File file;
-    protected final String name = "TXT";
+    public static final String name = "TXT";
 
     public PlainTextFileLogger(File file)
     {
@@ -83,6 +83,11 @@ public class PlainTextFileLogger implements IFileLogger
     public void Annotate(String description, Location loc) throws Exception
     {
         // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void close() throws Exception{
 
     }
 

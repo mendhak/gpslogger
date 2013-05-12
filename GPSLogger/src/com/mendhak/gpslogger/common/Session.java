@@ -20,6 +20,10 @@ package com.mendhak.gpslogger.common;
 
 import android.app.Application;
 import android.location.Location;
+import com.mendhak.gpslogger.loggers.IFileLogger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Session extends Application
 {
@@ -46,6 +50,7 @@ public class Session extends Application
     private static boolean allowDescription = true;
     private static boolean isSinglePointMode = false;
     private static int retryTimeout=0;
+    private static final List<IFileLogger> loggers = new ArrayList<IFileLogger>();
 
     public static boolean isSinglePointMode()
     {
@@ -157,7 +162,18 @@ public class Session extends Application
         Session.satellites = satellites;
     }
 
-           /**
+    public static void setFileLoggers(List<IFileLogger> loggers){
+
+        Session.loggers.clear();
+        if (loggers != null)
+            Session.loggers.addAll(loggers);
+    }
+
+    public static List<IFileLogger> getFileLoggers(){
+        return loggers;
+    }
+
+    /**
      * @return the retryTimeout
      */
     public static int getRetryTimeout()
@@ -374,7 +390,7 @@ public class Session extends Application
         return readyToBeAutoSent;
     }
 
-    public static boolean shoulAllowDescription()
+    public static boolean shouldAllowDescription()
     {
         return allowDescription;
     }

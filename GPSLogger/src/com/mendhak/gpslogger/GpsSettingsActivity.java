@@ -98,6 +98,11 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
         CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
         chkLog_opengts.setOnPreferenceClickListener(new LogOpenGTSPreferenceClickListener(prefs));
 
+        CheckBoxPreference chkLog_skylines = (CheckBoxPreference) findPreference("log_skylines");
+        chkLog_skylines.setOnPreferenceClickListener(new LogSkylinesPreferenceClickListener(prefs));
+
+        CheckBoxPreference chkLog_livetrack24 = (CheckBoxPreference) findPreference("log_livetrack24");
+        chkLog_livetrack24.setOnPreferenceClickListener(new LogLivetrack24PreferenceClickListener(prefs));
 
         ListPreference newFilePref = (ListPreference) findPreference("new_file_creation");
         newFilePref.setOnPreferenceChangeListener(new FileCreationPreferenceChangeListener());
@@ -108,8 +113,6 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
             Preference staticPref = (Preference)findPreference("new_file_static_name");
             staticPref.setEnabled(false);
         }
-
-
     }
 
 
@@ -335,6 +338,59 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
         }
     }
 
+      /**
+     * Opens the SkyLines preferences
+     * Listener to ensure that the server is configured when the user wants to enable SkyLines logging logger
+     */
+    private class LogSkylinesPreferenceClickListener implements OnPreferenceClickListener
+    {
+        private SharedPreferences prefs;
+
+        public LogSkylinesPreferenceClickListener(SharedPreferences prefs)
+        {
+            this.prefs = prefs;
+        }
+
+        public boolean onPreferenceClick(Preference preference)
+        {
+            CheckBoxPreference chkLog_skylines = (CheckBoxPreference) findPreference("log_skylines");
+            boolean skylines_enabled = prefs.getBoolean("skylines_enabled", false);
+
+            if (chkLog_skylines.isChecked() && !skylines_enabled)
+            {
+                startActivity(new Intent("com.mendhak.gpslogger.SKYLINES_SETUP"));
+            }
+            return true;
+        }
+    }
+
+
+      /**
+     * Opens the Livetrack24 preferences
+     * Listener to ensure that the server is configured when the user wants to enable Livetrack24 logging logger
+     */
+    private class LogLivetrack24PreferenceClickListener implements OnPreferenceClickListener
+    {
+        private SharedPreferences prefs;
+
+        public LogLivetrack24PreferenceClickListener(SharedPreferences prefs)
+        {
+            this.prefs = prefs;
+        }
+
+        public boolean onPreferenceClick(Preference preference)
+        {
+            CheckBoxPreference chkLog_livetrack24 = (CheckBoxPreference) findPreference("log_livetrack24");
+            boolean livetrack24_enabled = prefs.getBoolean("livetrack24_enabled", false);
+
+            if (chkLog_livetrack24.isChecked() && !livetrack24_enabled)
+            {
+                startActivity(new Intent("com.mendhak.gpslogger.LIVETRACK24_SETUP"));
+            }
+            return true;
+        }
+    }
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus)
     {
@@ -350,8 +406,22 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
                 chkLog_opengts.setChecked(false);
             }
 
+            CheckBoxPreference chkLog_skylines = (CheckBoxPreference) findPreference("log_skylines");
+            boolean skylines_enabled = prefs.getBoolean("skylines_enabled", false);
+
+            if (chkLog_skylines.isChecked() && !skylines_enabled)
+            {
+                chkLog_skylines.setChecked(false);
+            }
+
+
+            CheckBoxPreference chkLog_livetrack24 = (CheckBoxPreference) findPreference("log_livetrack24");
+            boolean livetrack24_enabled = prefs.getBoolean("livetrack24_enabled", false);
+
+            if (chkLog_livetrack24.isChecked() && !livetrack24_enabled)
+            {
+                chkLog_livetrack24.setChecked(false);
+            }
         }
     }
-
-
 }

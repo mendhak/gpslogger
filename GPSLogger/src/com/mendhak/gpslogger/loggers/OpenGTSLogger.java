@@ -32,17 +32,20 @@ import com.mendhak.gpslogger.common.OpenGTSClient;
 public class OpenGTSLogger implements IFileLogger
 {
 
-    protected final String name = "OpenGTS";
+    public static final String name = "OpenGTS";
 
     public OpenGTSLogger()
     {
     }
 
     @Override
+    public void close() throws Exception{
+
+    }
+
+    @Override
     public void Write(Location loc) throws Exception
     {
-
-
         String server = AppSettings.getOpenGTSServer();
         int port = Integer.parseInt(AppSettings.getOpenGTSServerPort());
         String path = AppSettings.getOpenGTSServerPath();

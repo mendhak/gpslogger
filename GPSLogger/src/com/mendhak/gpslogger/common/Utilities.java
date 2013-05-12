@@ -123,6 +123,21 @@ public class Utilities
 
         AppSettings.setLogToGpx(prefs.getBoolean("log_gpx", false));
 
+        AppSettings.setLogToIgc(prefs.getBoolean("log_igc", false));
+        AppSettings.setIgcPrivateKey(context.getString(R.string.igc_private_key));
+
+        AppSettings.setLogToSkylines(prefs.getBoolean("log_skylines", false));
+        AppSettings.setSkylinesInterval(Integer.parseInt(prefs.getString("skylines_interval", "3")));
+        AppSettings.setSkylinesKey(prefs.getString("skylines_key", ""));
+        AppSettings.setSkylinesServerPort(Integer.parseInt(prefs.getString("skylines_server_port", "5597")));
+        AppSettings.setSkylinesServer(prefs.getString("skylines_server", ""));
+
+        AppSettings.setLogToLivetrack24(prefs.getBoolean("log_livetrack24", false));
+        AppSettings.setLivetrack24Interval(Integer.parseInt(prefs.getString("livetrack24_interval", "3")));
+        AppSettings.setLivetrack24ServerURL(prefs.getString("livetrack24_server_url", ""));
+        AppSettings.setLivetrack24Username(prefs.getString("livetrack24_username", ""));
+        AppSettings.setLivetrack24Password(prefs.getString("livetrack24_password", ""));
+
         AppSettings.setLogToPlainText(prefs.getBoolean("log_plain_text", false));
 
         AppSettings.setLogToOpenGTS(prefs.getBoolean("log_opengts", false));

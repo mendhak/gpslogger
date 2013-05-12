@@ -25,6 +25,7 @@ public interface IFileLogger
     void Write(Location loc) throws Exception;
 
     void Annotate(String description, Location loc) throws Exception;
+    void close() throws Exception;
 
     String getName();
 

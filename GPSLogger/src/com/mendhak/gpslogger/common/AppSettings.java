@@ -29,6 +29,8 @@ public class AppSettings extends Application
     private static boolean preferCellTower;
     private static boolean logToKml;
     private static boolean logToGpx;
+    private static boolean logToIgc;
+    private static String igcPrivateKey;
     private static boolean logToPlainText;
     private static boolean showInNotificationBar;
     private static int minimumSeconds;
@@ -49,6 +51,18 @@ public class AppSettings extends Application
     private static int minimumDistance;
     private static int minimumAccuracy;
     private static boolean shouldSendZipFile;
+
+    private static boolean logToSkylines;
+    private static String skylinesKey;
+    private static String skylinesServer;
+    private static int skylinesServerPort;
+    private static int skylinesInterval;
+
+    private static boolean logToLivetrack24;
+    private static String livetrack24ServerURL;
+    private static String livetrack24Username;
+    private static String livetrack24Password;
+    private static int livetrack24Interval;
 
     private static boolean LogToOpenGTS;
     private static boolean openGTSEnabled;
@@ -151,6 +165,30 @@ public class AppSettings extends Application
     static void setLogToGpx(boolean logToGpx)
     {
         AppSettings.logToGpx = logToGpx;
+    }
+
+    /**
+     * @return the logToIgc
+     */
+    public static boolean shouldLogToIgc()
+    {
+        return logToIgc;
+    }
+
+    /**
+     * @param logToIgc the logToIgc to set
+     */
+    static void setLogToIgc(boolean logToIgc)
+    {
+        AppSettings.logToIgc = logToIgc;
+    }
+
+    public static void setIgcPrivateKey(final String igcPrivateKey){
+        AppSettings.igcPrivateKey = igcPrivateKey;
+    }
+
+    public static String getIgcPrivateKey() {
+        return AppSettings.igcPrivateKey;
     }
 
     public static boolean shouldLogToPlainText()
@@ -447,6 +485,104 @@ public class AppSettings extends Application
     public static void setAutoSendEnabled(boolean autoSendEnabled)
     {
         AppSettings.autoSendEnabled = autoSendEnabled;
+    }
+
+    public static boolean shouldLogToSkylines()
+    {
+        return logToSkylines;
+    }
+
+    public static void setLogToSkylines(boolean logToSkylines)
+    {
+        AppSettings.logToSkylines = logToSkylines;
+    }
+
+    public static void setSkylinesKey(final String key)
+    {
+        AppSettings.skylinesKey = key;
+    }
+
+    public static String getSkylinesKey()
+    {
+        return AppSettings.skylinesKey;
+    }
+
+    public static void setSkylinesServer(final String server)
+    {
+        AppSettings.skylinesServer = server;
+    }
+
+    public static String getSkylinesServer()
+    {
+        return AppSettings.skylinesServer;
+    }
+
+    public static void setSkylinesInterval(final int interval)
+    {
+        AppSettings.skylinesInterval = interval;
+    }
+
+    public static int getSkylinesInterval()
+    {
+        return AppSettings.skylinesInterval;
+    }
+
+    public static void setSkylinesServerPort(final int port)
+    {
+        AppSettings.skylinesServerPort = port;
+    }
+
+    public static int getSkylinesServerPort()
+    {
+        return AppSettings.skylinesServerPort;
+    }
+
+    public static boolean shouldLogToLivetrack24()
+    {
+        return AppSettings.logToLivetrack24;
+    }
+
+    public static void setLogToLivetrack24(boolean logToLivetrack24)
+    {
+        AppSettings.logToLivetrack24 = logToLivetrack24;
+    }
+
+    public static void setLivetrack24ServerURL(final String serverURL)
+    {
+        AppSettings.livetrack24ServerURL = serverURL;
+    }
+
+    public static String getLivetrack24ServerURL()
+    {
+        return AppSettings.livetrack24ServerURL;
+    }
+
+    public static void setLivetrack24Username(final String username)
+    {
+        AppSettings.livetrack24Username = username;
+    }
+
+    public static String getLivetrack24Username()
+    {
+        return AppSettings.livetrack24Username;
+    }
+    public static void setLivetrack24Password(final String password)
+    {
+        AppSettings.livetrack24Password = password;
+    }
+
+    public static String getLivetrack24Password()
+    {
+        return AppSettings.livetrack24Password;
+    }
+
+    public static int getLivetrack24Interval()
+    {
+        return AppSettings.livetrack24Interval;
+    }
+    public static void setLivetrack24Interval(final int interval)
+    {
+        AppSettings.livetrack24Interval = interval;
     }
 
     public static boolean shouldLogToOpenGTS()

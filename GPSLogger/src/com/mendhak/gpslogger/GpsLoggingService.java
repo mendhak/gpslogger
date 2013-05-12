@@ -358,7 +358,7 @@ public class GpsLoggingService extends Service implements IActionListener
         {
             return;
         }
-
+        Session.setFileLoggers(FileLoggerFactory.GetFileLoggers());
         Utilities.LogInfo("Starting logging procedures");
         try
         {
@@ -400,6 +400,8 @@ public class GpsLoggingService extends Service implements IActionListener
         Session.setAddNewTrackSegment(true);
 
         Utilities.LogInfo("Stopping logging");
+        closeLoggers();
+
         Session.setStarted(false);
         // Email log file before setting location info to null
         AutoSendLogFileOnStop();
@@ -856,6 +858,23 @@ public class GpsLoggingService extends Service implements IActionListener
 
     }
 
+    private void closeLoggers(){
+        Utilities.LogDebug("GpsLoggingService.closeLoggers");
+        final List<IFileLogger> loggers = Session.getFileLoggers();
+
+        for (IFileLogger logger : loggers)
+        {
+            try
+            {
+                logger.close();
+            }
+            catch (Exception e)
+            {
+                SetStatus(R.string.could_not_write_to_file);
+            }
+        }
+    }
+
     /**
      * Calls file helper to write a given location to a file.
      *
@@ -864,7 +883,7 @@ public class GpsLoggingService extends Service implements IActionListener
     private void WriteToFile(Location loc)
     {
         Utilities.LogDebug("GpsLoggingService.WriteToFile");
-        List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers();
+        List<IFileLogger> loggers = Session.getFileLoggers();
         Session.setAddNewTrackSegment(false);
 
         for (IFileLogger logger : loggers)
