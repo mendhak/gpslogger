@@ -358,7 +358,6 @@ public class GpsLoggingService extends Service implements IActionListener
         {
             return;
         }
-        Session.setFileLoggers(FileLoggerFactory.GetFileLoggers());
         Utilities.LogInfo("Starting logging procedures");
         try
         {
@@ -376,6 +375,8 @@ public class GpsLoggingService extends Service implements IActionListener
         Notify();
         ResetCurrentFileName(true);
         ClearForm();
+        Session.setFileLoggers(FileLoggerFactory.GetFileLoggers());
+
         StartGpsManager();
 
     }

@@ -181,7 +181,6 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             //serviceIntent = new Intent(this, GpsLoggingService.class);
             stopService(serviceIntent);
         }
-
     }
 
     @Override
@@ -200,12 +199,12 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         Utilities.LogDebug("GpsMainActivity.onDestroy");
         StopAndUnbindServiceIfRequired();
         super.onDestroy();
-
     }
 
     /**
      * Called when the toggle button is clicked
      */
+    @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
     {
         Utilities.LogDebug("GpsMainActivity.onCheckedChanged");
@@ -228,6 +227,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
     /**
      * Called when the single point button is clicked
      */
+    @Override
     public void onClick(View view)
     {
         Utilities.LogDebug("GpsMainActivity.onClick");
@@ -391,13 +391,12 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         {
             Utilities.LogError("ShowPreferencesSummary", ex);
         }
-
-
     }
 
     /**
      * Handles the hardware back-button press
      */
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
         Utilities.LogInfo("KeyDown - " + String.valueOf(keyCode));
@@ -427,6 +426,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
     /**
      * Called when one of the menu items is selected.
      */
+    @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
 
@@ -704,7 +704,6 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
 
     }
 
-
     private void ShowFileListDialog(final Intent settingsIntent, final IFileSender sender)
     {
 
@@ -848,6 +847,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
     /**
      * Clears the table, removes all values.
      */
+    @Override
     public void ClearForm()
     {
 
@@ -879,6 +879,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         Session.setTotalTravelled(0d);
     }
 
+    @Override
     public void OnStopLogging()
     {
         Utilities.LogDebug("GpsMainActivity.OnStopLogging");
@@ -1096,6 +1097,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
 
     }
 
+    @Override
     public void OnLocationUpdate(Location loc)
     {
         Utilities.LogDebug("GpsMainActivity.OnLocationUpdate");
@@ -1114,12 +1116,14 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
 
     }
 
+    @Override
     public void OnSatelliteCount(int count)
     {
         SetSatelliteInfo(count);
 
     }
 
+    @Override
     public void onFileName(String newFileName)
     {
         if (newFileName == null || newFileName.length() <= 0)
@@ -1129,10 +1133,8 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
 
         TextView txtFilename = (TextView) findViewById(R.id.txtFileName);
 
-        if (AppSettings.shouldLogToGpx() || AppSettings.shouldLogToKml())
+        if (AppSettings.shouldLogToGpx() || AppSettings.shouldLogToKml() || AppSettings.shouldLogToIgc())
         {
-
-
             txtFilename.setText(getString(R.string.summary_current_filename_format,
                     Session.getCurrentFileName()));
         }
@@ -1140,20 +1142,21 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         {
             txtFilename.setText("");
         }
-
-
     }
 
+    @Override
     public void OnStatusMessage(String message)
     {
         SetStatus(message);
     }
 
+    @Override
     public void OnFatalMessage(String message)
     {
         Utilities.MsgBox(getString(R.string.sorry), message, this);
     }
 
+    @Override
     public Activity GetActivity()
     {
         return this;

@@ -75,13 +75,21 @@ public class IgcFileLogger implements IFileLogger
     private IgcFileLogger(File file, String privateKeyB64) throws IOException {
         this.file = file;
         this.privateKeyB64 = privateKeyB64;
-
+        boolean alreadyExists = false;
         if (!file.exists()) {
+            alreadyExists = true;
             file.createNewFile();
         }
-        FileOutputStream writer = new FileOutputStream(file, true);
-        try {
 
+        FileOutputStream writer = new FileOutputStream(file, true);
+
+        // appending to existing file, skip header and signature stuff
+        if (alreadyExists) {
+            Utilities.LogDebug("skipping IGC header as file already exists. Appending, no matter what...");
+            return;
+        }
+
+        try {
             PrivateKey pk = getPrivateKey();
             sig = Signature.getInstance("SHA1withRSA");
 
@@ -106,7 +114,7 @@ public class IgcFileLogger implements IFileLogger
         StringBuffer sb = new StringBuffer();
         sb.append("AXGL1\r\n");
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyMF");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyMMFF");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         String s = sdf.format(new Date());
