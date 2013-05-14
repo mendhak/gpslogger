@@ -45,11 +45,12 @@ import java.text.SimpleDateFormat;
 public class IgcFileLogger implements IFileLogger
 {
 
-    private File file;
     private OutputStream output = null;
     private SignatureOutputStream sos = null;
     private String privateKeyB64 = null;
     private Signature sig;
+
+    private File file;
 
     public static final String name = "IGC";
     private Calendar cal = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
@@ -72,43 +73,74 @@ public class IgcFileLogger implements IFileLogger
         }
     }
 
+
+    private boolean initSignature(){
+        try {
+            PrivateKey pk = getPrivateKey();
+            sig = Signature.getInstance("SHA1withRSA");
+            sig.initSign(pk);
+            return true;
+        } catch (InvalidKeySpecException e) {
+        } catch (NoSuchAlgorithmException e) {
+        } catch (InvalidKeyException e) {
+        }
+        Utilities.LogDebug("Error when initializing IGC signature");
+        return false;
+    }
+
     private IgcFileLogger(File file, String privateKeyB64) throws IOException {
-        this.file = file;
         this.privateKeyB64 = privateKeyB64;
         boolean alreadyExists = false;
+        this.file = file;
+
+        final boolean signatureEnabled = initSignature();
+        File previousContent = null;
+
         if (!file.exists()) {
-            alreadyExists = true;
             file.createNewFile();
+        } else {
+            alreadyExists = true;
+
+            if (signatureEnabled) {
+                previousContent = File.createTempFile(file.getName(), null, file.getParentFile());
+
+                if (!file.renameTo(previousContent)){
+                    Utilities.LogDebug("error when moving orig file");
+                } else {
+                    file.createNewFile();
+                }
+            }
         }
 
         FileOutputStream writer = new FileOutputStream(file, true);
+
+        if (signatureEnabled){
+            sos = new SignatureOutputStream(writer, sig);
+            output = sos;
+
+            if (previousContent != null){
+                BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(previousContent)));
+                String line = in.readLine();
+
+                while(line != null){
+                    if (!line.startsWith("G")){
+                        output.write(line.getBytes());
+                        output.write("\r\n".getBytes());
+                    }
+                    line = in.readLine();
+                }
+                previousContent.delete();
+            }
+        } else {
+            sos = null;
+            sig = null;
+            output = new BufferedOutputStream(writer);
+        }
 
         // appending to existing file, skip header and signature stuff
         if (alreadyExists) {
             Utilities.LogDebug("skipping IGC header as file already exists. Appending, no matter what...");
             return;
-        }
-
-        try {
-            PrivateKey pk = getPrivateKey();
-            sig = Signature.getInstance("SHA1withRSA");
-
-            sig.initSign(pk);
-
-            sos = new SignatureOutputStream(writer, sig);
-            output = sos;
-        } catch (InvalidKeySpecException e) {
-            sos = null;
-            sig = null;
-            output = new BufferedOutputStream(writer);
-        } catch (NoSuchAlgorithmException e) {
-            sos = null;
-            sig = null;
-            output = new BufferedOutputStream(writer);
-        } catch (InvalidKeyException e) {
-            sos = null;
-            sig = null;
-            output = new BufferedOutputStream(writer);
         }
 
         StringBuffer sb = new StringBuffer();
@@ -229,6 +261,8 @@ public class IgcFileLogger implements IFileLogger
 
     @Override
     public void close() throws Exception {
+        instances.remove(this.file.getAbsolutePath());
+
         // sect 3.2, G=security record
         if (sig != null) {
             StringBuffer sb = new StringBuffer();
@@ -252,7 +286,6 @@ public class IgcFileLogger implements IFileLogger
             output.write(sb.toString().getBytes());
         }
         output.close();
-        instances.remove(this);
     }
 
     @Override
