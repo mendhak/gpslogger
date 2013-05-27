@@ -108,6 +108,9 @@
   <string name="new_file_creation_summary">Om du vill skapa en ny fil en gång per dag eller varje gång du startar.</string>
   <string name="new_file_creation_onceaday">En gång om dagen</string>
   <string name="new_file_creation_everystart">Varje gång jag startar</string>
+  <string name="new_file_creation_static">Fast fil</string>
+  <string name="new_file_static_title">Statiskt filnamn</string>
+  <string name="new_file_static_summary">Om du väljer att skapa en fast fil, ange ett valfritt filnamn</string>
   <string name="pref_performance_title">Prestanda</string>
   <string name="prefer_celltower_title">Föredra mobilmaster</string>
   <string name="prefer_celltower_summary">Använder mobilmaster istället för satelliter. Mindre noggrant, men sparar mer batteri.     </string>
@@ -115,6 +118,9 @@
   <string name="time_before_logging_summary">Använd 0 för högsta frekvens, men långsammare är bättre för batterilivslängd.     </string>
   <string name="time_before_logging_dialog_title">Tid i sekunder</string>
   <string name="time_before_logging_hint">Ange sekunder (max 9999)</string>
+  <string name="keep_fix_summary">Observera att detta minskar batterilivslängden drastiskt. Använd endast för högre precision vid låga frekvenser.
+    </string>
+  <string name="keep_fix_title">Behåll GPS på mellan fixeringar</string>
   <string name="retry_time_title">Tidsintervall för noggrannhet</string>
   <string name="retry_time_summary">Använd 0 för maximal frekvens, men långsammare drar mindre batteri.
     </string>
@@ -205,7 +211,7 @@
   <string name="emailprovider_manual">Manuell</string>
   <string name="btn_single_point">Logga en ensam punkt</string>
   <string name="dropbox_setup_title">Dropbox</string>
-  <string name="dropbox_setup_summary">Auktorisera mot Dropbox för att tillåta filuppladning</string>
+  <string name="dropbox_setup_summary">Auktorisera mot Dropbox för att tillåta filuppladdning</string>
   <string name="dropbox_authorize_description">För att använda funktioner i Dropbox måste du auktorisera GPSLogger så du kan ladda upp filer till ditt konto.
     </string>
   <string name="dropbox_authorize">Auktorisera</string>
@@ -247,7 +253,7 @@
   <string name="shortcut_start">Starta</string>
   <string name="shortcut_stop">Stoppa</string>
   <string name="shortcut_pickaction">Välj en åtgärd</string>
-  <string name="log_opengts_title">Logga till en OpenGTS-Server</string>
+  <string name="log_opengts_title">Logga till en OpenGTS-server</string>
   <string name="log_opengts_summary">Skicka GPRMC-data till en OpenGTS-server.</string>
   <string name="opengts_setup_title">OpenGTS</string>
   <string name="opengts_setup_summary">Skicka GPS-spår till en OpenGTS-server.</string>
