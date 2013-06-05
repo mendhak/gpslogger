@@ -18,7 +18,7 @@
 
 /*
  * Copyright Geeksville Industries LLC, a California limited liability corporation.
- * Copyright Marc Poulhiès <dkm@kataplop.net>
+ * Copyright Marc PoulhiÃ¨s <dkm@kataplop.net>
  * Code is also published with GPL2
  * http://github.com/geeksville/Gaggle
  */

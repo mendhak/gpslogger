@@ -90,6 +90,16 @@
                             android:summary="@string/show_notification_summary"
                             android:title="@string/show_notification_title"
                             android:defaultValue="true"/>
+        <CheckBoxPreference android:key="modular_view"
+                            android:summary="@string/modular_view_summary"
+                            android:title="@string/modular_view_title"
+                            android:defaultValue="false"/>
+
+        <CheckBoxPreference android:key="force_screen_on"
+                            android:summary="@string/force_screen_on_summary"
+                            android:title="@string/force_screen_on_title"
+                            android:defaultValue="false"/>
+
         <CheckBoxPreference android:title="@string/startonbootup_title"
                             android:summary="@string/startonbootup_summary" android:key="startonbootup"/>
         <CheckBoxPreference android:title="@string/useimperial_title"

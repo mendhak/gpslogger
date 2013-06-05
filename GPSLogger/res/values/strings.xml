@@ -17,9 +17,6 @@
     <string name="menu_settings">Settings</string>
 
 
-
-
-
     <string name="menu_annotate">Annotate</string>
     <string name="menu_share">Share</string>
     <string name="menu_exit">Exit</string>
@@ -187,6 +184,11 @@
     <string name="show_notification_summary">Displays a reminder along with coordinates in the notification bar.
     </string>
 
+    <string name="modular_view_summary">Divide display in small area filled by different widgets</string>
+    <string name="modular_view_title">Use modular display</string>
+
+    <string name="force_screen_on_summary">If checked, screen stays on</string>
+    <string name="force_screen_on_title">Force screen on</string>
 
     <string name="enabledisablegps_title">Enable/Disable GPS</string>
     <string name="enabledisablegps_summary">Go to the phone settings to enable or disable the providers.</string>
@@ -198,20 +200,15 @@
     <string name="autoemail_summary">Automatically emails the log file to an address of your choice</string>
 
 
-
-
     <string name="please_wait">Please wait.</string>
 
     <string name="autoemail_autosend">Enable emails</string>
     <string name="autoemail_autosend_summary">Enables sending the log file to an email address of your choosing.
     </string>
 
-
     <string name="autoemail_target">Target email addresses</string>
 
-
     <string name="autoemail_frequency_whenistop">When I press stop</string>
-
 
     <string name="autoemail_frequency_8">After 8 hours</string>
     <string name="autoemail_frequency_6">After 6 hours</string>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <FrameLayout
+            android:id="@+id/main_frag_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <LinearLayout android:id="@+id/main_modular_container"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1">
+
+            <LinearLayout android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1">
+
+                <TextView android:id="@+id/frag_NO_title"
+                          android:layout_width="match_parent"
+                          android:textSize="9dip"
+                          android:layout_height="wrap_content"
+                          android:textStyle="italic"
+                          android:paddingLeft="8dip"
+                          android:gravity="center"/>
+
+                <FrameLayout
+                        android:id="@+id/frag_NO"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1">
+
+                <TextView android:id="@+id/frag_NE_title"
+                          android:layout_width="match_parent"
+                          android:textSize="9dip"
+                          android:layout_height="wrap_content"
+                          android:textStyle="italic"
+                          android:paddingLeft="8dip"
+                          android:gravity="center"/>
+                <FrameLayout
+                        android:id="@+id/frag_NE"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1">
+
+            <LinearLayout android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1">
+
+                <TextView android:id="@+id/frag_SO_title"
+                          android:layout_width="match_parent"
+                          android:textSize="9dip"
+                          android:layout_height="wrap_content"
+                          android:textStyle="italic"
+                          android:paddingLeft="8dip"
+                          android:gravity="center"/>
+                <FrameLayout
+                        android:id="@+id/frag_SO"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:layout_weight="1">
+
+                <TextView android:id="@+id/frag_SE_title"
+                          android:layout_width="match_parent"
+                          android:textSize="9dip"
+                          android:layout_height="wrap_content"
+                          android:textStyle="italic"
+                          android:paddingLeft="8dip"
+                          android:gravity="center"/>
+                <FrameLayout
+                        android:id="@+id/frag_SE"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
+        <!--
+            <Button android:id="@+id/buttonStart" android:layout_width="120px"
+            android:layout_height="wrap_content" android:tag="Start"
+            android:text="Start" /> <Button android:id="@+id/buttonStop"
+            android:layout_width="120px" android:layout_height="wrap_content"
+            android:tag="Stop" android:text="Stop" />
+        -->
+        <ToggleButton android:id="@+id/buttonOnOff"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:textOn="@string/btn_stop_logging"
+                      android:textOff="@string/btn_start_logging"/>
+    <!--</LinearLayout>-->
+    <!--<LinearLayout android:orientation="vertical" android:layout_width="fill_parent"-->
+                  <!--android:layout_height="wrap_content">-->
+        <Button android:id="@+id/buttonSinglePoint"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_single_point"/>
+    </LinearLayout>
+
+    <TableLayout android:id="@+id/TableSummary"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:background="#222222">
+
+        <TableRow android:layout_width="fill_parent"
+                  android:layout_height="fill_parent">
+
+            <TextView android:id="@+id/lblLoggingTo"
+                      android:layout_width="wrap_content"
+                      android:textSize="9dip"
+                      android:layout_height="fill_parent"
+                      android:textStyle="italic"
+                      android:paddingLeft="8dip"
+                      android:text="@string/summary_loggingto"/>
+
+            <TextView android:id="@+id/txtLoggingTo"
+                      android:layout_width="wrap_content"
+                      android:paddingLeft="3dip"
+                      android:textSize="9dip"
+                      android:textStyle="italic"
+                      android:layout_height="fill_parent"/>
+
+        </TableRow>
+        <TableRow android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:id="@+id/frequency">
+            <TextView android:id="@+id/lblFrequency" android:layout_width="wrap_content"
+                      android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
+                      android:paddingLeft="8dip" android:text="@string/summary_freq_every"/>
+            <TextView android:id="@+id/txtFrequency" android:layout_width="wrap_content"
+                      android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
+                      android:layout_height="fill_parent"/>
+        </TableRow>
+
+
+        <TableRow android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:id="@+id/distance">
+            <TextView android:id="@+id/lblDistance" android:layout_width="wrap_content"
+                      android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
+                      android:paddingLeft="8dip" android:text="@string/summary_dist"/>
+            <TextView android:id="@+id/txtDistance" android:layout_width="wrap_content"
+                      android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
+                      android:layout_height="fill_parent"/>
+        </TableRow>
+
+
+        <TableRow android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:id="@+id/fileName">
+            <TextView android:id="@+id/lblFileName" android:layout_width="wrap_content"
+                      android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
+                      android:paddingLeft="8dip" android:text="@string/summary_current_filename"/>
+            <TextView android:id="@+id/txtFileName" android:layout_width="wrap_content"
+                      android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
+                      android:layout_height="fill_parent"/>
+
+        </TableRow>
+
+        <TableRow android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:id="@+id/trAutoEmail">
+            <TextView android:id="@+id/lblAutoEmail" android:layout_width="wrap_content"
+                      android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
+                      android:paddingLeft="8dip" android:text="@string/summary_autosend"/>
+            <TextView android:id="@+id/txtAutoEmail" android:layout_width="wrap_content"
+                      android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
+                      android:layout_height="fill_parent"/>
+
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

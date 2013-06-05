@@ -93,7 +93,8 @@ public class IgcFileLogger implements IFileLogger
         boolean alreadyExists = false;
         this.file = file;
 
-        final boolean signatureEnabled = initSignature();
+//        final boolean signatureEnabled = initSignature();
+        final boolean signatureEnabled = false;
         File previousContent = null;
 
         if (!file.exists()) {
@@ -146,7 +147,7 @@ public class IgcFileLogger implements IFileLogger
         StringBuffer sb = new StringBuffer();
         sb.append("AXGL1\r\n");
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyMMFF");
+        SimpleDateFormat sdf = new SimpleDateFormat("FFMMyy");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         String s = sdf.format(new Date());
@@ -244,12 +245,13 @@ public class IgcFileLogger implements IFileLogger
     public void Write(Location loc) throws Exception
     {
         String dateTimeString = Utilities.GetIsoDateTime(new Date(loc.getTime()));
-
+        cal.setTimeInMillis(loc.getTime());
         final int hours = cal.get(Calendar.HOUR_OF_DAY);
 
         String line = String.format(Locale.US, "B%02d%02d%02d%s%s%c%05d%05d%03d\r\n", hours,
                 cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND),
-                degreeStr(loc.getLatitude(), true), degreeStr(loc.getLongitude(), false),
+                degreeStr(loc.getLatitude(), true),
+                degreeStr(loc.getLongitude(), false),
                 'A', (int) loc.getAltitude(),
                 (int) loc.getAltitude(),
                 (int) (loc.getSpeed()*3.6) // convert m/s -> km/h

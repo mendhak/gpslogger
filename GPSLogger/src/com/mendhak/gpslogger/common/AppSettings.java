@@ -52,6 +52,9 @@ public class AppSettings extends Application
     private static int minimumAccuracy;
     private static boolean shouldSendZipFile;
 
+    private static boolean useModularView;
+    private static boolean forceScreenOn;
+
     private static boolean logToSkylines;
     private static String skylinesKey;
     private static String skylinesServer;
@@ -485,6 +488,22 @@ public class AppSettings extends Application
     public static void setAutoSendEnabled(boolean autoSendEnabled)
     {
         AppSettings.autoSendEnabled = autoSendEnabled;
+    }
+
+    public static boolean getUseModularView(){
+        return AppSettings.useModularView;
+    }
+
+    public static void setUseModularView(boolean b){
+        AppSettings.useModularView = b;
+    }
+
+    public static boolean getForceScreenOn(){
+        return AppSettings.forceScreenOn;
+    }
+
+    public static void setForceScreenOn(boolean b){
+        AppSettings.forceScreenOn = b;
     }
 
     public static boolean shouldLogToSkylines()

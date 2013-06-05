@@ -19,7 +19,6 @@
 
 package com.mendhak.gpslogger;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -29,14 +28,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.*;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.mendhak.gpslogger.com.mendhak.gpslogger.fragments.*;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
@@ -53,11 +55,12 @@ import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
+import net.kataplop.gpslogger.R;
 
 import java.io.File;
 import java.util.*;
 
-public class GpsMainActivity extends SherlockActivity implements OnCheckedChangeListener,
+public class GpsMainActivity extends SherlockFragmentActivity implements OnCheckedChangeListener,
         IGpsLoggerServiceClient, View.OnClickListener, IActionListener
 {
 
@@ -72,17 +75,17 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
      */
     private final ServiceConnection gpsServiceConnection = new ServiceConnection()
     {
-
+        @Override
         public void onServiceDisconnected(ComponentName name)
         {
             loggingService = null;
         }
 
+        @Override
         public void onServiceConnected(ComponentName name, IBinder service)
         {
             loggingService = ((GpsLoggingService.GpsLoggingBinder) service).getService();
             GpsLoggingService.SetServiceClient(GpsMainActivity.this);
-
 
             Button buttonSinglePoint = (Button) findViewById(R.id.buttonSinglePoint);
 
@@ -109,21 +112,19 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         }
     };
 
-
     /**
      * Event raised when the form is created for the first time
      */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-
         Utilities.LogDebug("GpsMainActivity.onCreate");
 
         super.onCreate(savedInstanceState);
 
         Utilities.LogInfo("GPSLogger started");
 
-        setContentView(R.layout.main);
+        setContentView(R.layout.main_fragment);
 
         // Moved to onResume to update the list of loggers
         //GetPreferences();
@@ -143,9 +144,113 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
     protected void onResume()
     {
         Utilities.LogDebug("GpsMainactivity.onResume");
-        super.onResume();
         GetPreferences();
+
+        if (AppSettings.getForceScreenOn()){
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        } else {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+
+        FragmentManager fm = getSupportFragmentManager();
+
+        Fragment main_frag = fm.findFragmentById(R.id.main_frag_container);
+        Fragment no_frag = fm.findFragmentById(R.id.frag_NO);
+        Fragment ne_frag = fm.findFragmentById(R.id.frag_NE);
+        Fragment so_frag = fm.findFragmentById(R.id.frag_SO);
+        Fragment se_frag = fm.findFragmentById(R.id.frag_SE);
+
+        View modular_view = findViewById(R.id.main_modular_container);
+        View normal_view = findViewById(R.id.main_frag_container);
+
+        View not_modular_view[] = {findViewById(R.id.trAutoEmail),
+                findViewById(R.id.fileName),
+                findViewById(R.id.distance),
+                findViewById(R.id.frequency),
+                findViewById(R.id.buttonSinglePoint),
+        };
+
+        TextView frag_NO_title = (TextView) findViewById(R.id.frag_NO_title);
+        TextView frag_NE_title = (TextView) findViewById(R.id.frag_NE_title);
+        TextView frag_SO_title = (TextView) findViewById(R.id.frag_SO_title);
+        TextView frag_SE_title = (TextView) findViewById(R.id.frag_SE_title);
+
+        if (!AppSettings.getUseModularView()){
+            if (modular_view.getVisibility() != View.GONE){
+                FragmentTransaction ft = fm.beginTransaction();
+                modular_view.setVisibility(View.GONE);
+                normal_view.setVisibility(View.VISIBLE);
+
+                if (no_frag != null){
+                    ft.remove(no_frag);
+                }
+                if (ne_frag != null){
+                    ft.remove(ne_frag);
+                }
+                if (so_frag != null){
+                    ft.remove(so_frag);
+                }
+                if (se_frag != null){
+                    ft.remove(se_frag);
+                }
+
+                if (main_frag == null){
+                    ft.add(R.id.main_frag_container, new GpsMainFragment());
+                }
+                if (!ft.isEmpty()){
+                    ft.commit();
+                }
+
+                for (View v : not_modular_view){
+                    v.setVisibility(View.VISIBLE);
+                }
+            }
+        } else {
+            if (normal_view.getVisibility() != View.GONE) {
+                normal_view.setVisibility(View.GONE);
+                modular_view.setVisibility(View.VISIBLE);
+
+                FragmentTransaction ft = fm.beginTransaction();
+
+                if (main_frag != null){
+                    ft.remove(main_frag);
+                }
+
+                if (no_frag == null) {
+                    SpeedFragment sf = new SpeedFragment();
+                    frag_NO_title.setText(sf.getTitle());
+                    ft.add(R.id.frag_NO, sf);
+                }
+
+                if (ne_frag == null) {
+                    CompassFragment cf = new CompassFragment();
+                    frag_NE_title.setText(cf.getTitle());
+                    ft.add(R.id.frag_NE, cf);
+                }
+
+                if (se_frag == null) {
+                    AltitudeFragment sf = new AltitudeFragment();
+                    frag_SE_title.setText(sf.getTitle());
+                    ft.add(R.id.frag_SE, sf);
+                }
+
+                if (so_frag == null) {
+                    CompassFragment cf = new CompassFragment();
+                    frag_SO_title.setText(cf.getTitle());
+                    ft.add(R.id.frag_SO, cf);
+                }
+                if (!ft.isEmpty()){
+                    ft.commit();
+                }
+
+                for (View v : not_modular_view){
+                    v.setVisibility(View.GONE);
+                }
+            }
+        }
+
         StartAndBindService();
+        super.onResume();
     }
 
     /**
@@ -162,7 +267,6 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         Session.setBoundToService(true);
     }
 
-
     /**
      * Stops the service if it isn't logging. Also unbinds.
      */
@@ -171,6 +275,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         Utilities.LogDebug("GpsMainActivity.StopAndUnbindServiceIfRequired");
         if (Session.isBoundToService())
         {
+            GpsLoggingService.SetServiceClient(null);
             unbindService(gpsServiceConnection);
             Session.setBoundToService(false);
         }
@@ -195,10 +300,10 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
     @Override
     protected void onDestroy()
     {
+        super.onDestroy();
 
         Utilities.LogDebug("GpsMainActivity.onDestroy");
         StopAndUnbindServiceIfRequired();
-        super.onDestroy();
     }
 
     /**
@@ -850,31 +955,28 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
     @Override
     public void ClearForm()
     {
+        FragmentManager fm = getSupportFragmentManager();
 
         Utilities.LogDebug("GpsMainActivity.ClearForm");
+        if (!AppSettings.getUseModularView()) {
+            IWidgetFragment gpsmf = (IWidgetFragment) fm.findFragmentById(R.id.main_frag_container);
+            if (gpsmf == null) {
+                Utilities.LogDebug("GpsMainFragment not found");
+                return;
+            }
+            gpsmf.clear();
+        } else {
+            int frags_id[] = {R.id.frag_SO, R.id.frag_SE, R.id.frag_NE, R.id.frag_NO};
+            for (int id : frags_id) {
+                IWidgetFragment widget = (IWidgetFragment) fm.findFragmentById(id);
+                if (widget == null) {
+                    Utilities.LogDebug("Widget not found");
+                    return;
+                }
+                widget.clear();
+            }
+        }
 
-        TextView tvLatitude = (TextView) findViewById(R.id.txtLatitude);
-        TextView tvLongitude = (TextView) findViewById(R.id.txtLongitude);
-        TextView tvDateTime = (TextView) findViewById(R.id.txtDateTimeAndProvider);
-
-        TextView tvAltitude = (TextView) findViewById(R.id.txtAltitude);
-
-        TextView txtSpeed = (TextView) findViewById(R.id.txtSpeed);
-
-        TextView txtSatellites = (TextView) findViewById(R.id.txtSatellites);
-        TextView txtDirection = (TextView) findViewById(R.id.txtDirection);
-        TextView txtAccuracy = (TextView) findViewById(R.id.txtAccuracy);
-        TextView txtDistance = (TextView) findViewById(R.id.txtDistanceTravelled);
-
-        tvLatitude.setText("");
-        tvLongitude.setText("");
-        tvDateTime.setText("");
-        tvAltitude.setText("");
-        txtSpeed.setText("");
-        txtSatellites.setText("");
-        txtDirection.setText("");
-        txtAccuracy.setText("");
-        txtDistance.setText("");
         Session.setPreviousLocationInfo(null);
         Session.setTotalTravelled(0d);
     }
@@ -894,8 +996,27 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
     private void SetStatus(String message)
     {
         Utilities.LogDebug("GpsMainActivity.SetStatus: " + message);
-        TextView tvStatus = (TextView) findViewById(R.id.textStatus);
-        tvStatus.setText(message);
+        FragmentManager fm = getSupportFragmentManager();
+
+        Utilities.LogDebug("GpsMainActivity.ClearForm");
+        if (!AppSettings.getUseModularView()) {
+            IWidgetFragment gpsmf = (IWidgetFragment) fm.findFragmentById(R.id.main_frag_container);
+            if (gpsmf == null) {
+                Utilities.LogDebug("GpsMainFragment not found");
+                return;
+            }
+            gpsmf.setStatus(message);
+        } else {
+            int frags_id[] = {R.id.frag_SO, R.id.frag_SE, R.id.frag_NE, R.id.frag_NO};
+            for (int id : frags_id) {
+                IWidgetFragment widget = (IWidgetFragment) fm.findFragmentById(id);
+                if (widget == null) {
+                    Utilities.LogDebug("Widget not found");
+                    return;
+                }
+                widget.setStatus(message);
+            }
+        }
         Utilities.LogInfo(message);
     }
 
@@ -907,8 +1028,22 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
     private void SetSatelliteInfo(int number)
     {
         Session.setSatelliteCount(number);
-        TextView txtSatellites = (TextView) findViewById(R.id.txtSatellites);
-        txtSatellites.setText(String.valueOf(number));
+        FragmentManager fm = getSupportFragmentManager();
+
+        if (!AppSettings.getUseModularView()){
+            IWidgetFragment gmf = (IWidgetFragment) fm.findFragmentById(R.id.main_frag_container);
+            gmf.setSatelliteInfo(number);
+        } else {
+            int frags_id[] = {R.id.frag_SO, R.id.frag_SE, R.id.frag_NE, R.id.frag_NO};
+            for (int id : frags_id) {
+                IWidgetFragment widget = (IWidgetFragment) fm.findFragmentById(id);
+                if (widget == null) {
+                    Utilities.LogDebug("Widget not found");
+                    return;
+                }
+                widget.setSatelliteInfo(number);
+            }
+        }
     }
 
     /**
@@ -919,182 +1054,27 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
      */
     private void DisplayLocationInfo(Location loc)
     {
-        Utilities.LogDebug("GpsMainActivity.DisplayLocationInfo");
-        try
-        {
+        FragmentManager fm = getSupportFragmentManager();
 
-            if (loc == null)
-            {
+
+        if (!AppSettings.getUseModularView()) {
+            IWidgetFragment gpsmf = (IWidgetFragment) fm.findFragmentById(R.id.main_frag_container);
+            if (gpsmf == null) {
+                Utilities.LogDebug("GpsMainFragment not found");
                 return;
             }
-
-            TextView tvLatitude = (TextView) findViewById(R.id.txtLatitude);
-            TextView tvLongitude = (TextView) findViewById(R.id.txtLongitude);
-            TextView tvDateTime = (TextView) findViewById(R.id.txtDateTimeAndProvider);
-
-            TextView tvAltitude = (TextView) findViewById(R.id.txtAltitude);
-
-            TextView txtSpeed = (TextView) findViewById(R.id.txtSpeed);
-
-            TextView txtSatellites = (TextView) findViewById(R.id.txtSatellites);
-            TextView txtDirection = (TextView) findViewById(R.id.txtDirection);
-            TextView txtAccuracy = (TextView) findViewById(R.id.txtAccuracy);
-            TextView txtTravelled = (TextView) findViewById(R.id.txtDistanceTravelled);
-            String providerName = loc.getProvider();
-
-            if (providerName.equalsIgnoreCase("gps"))
-            {
-                providerName = getString(R.string.providername_gps);
-            }
-            else
-            {
-                providerName = getString(R.string.providername_celltower);
-            }
-
-            tvDateTime.setText(new Date(Session.getLatestTimeStamp()).toLocaleString()
-                    + getString(R.string.providername_using, providerName));
-            tvLatitude.setText(String.valueOf(loc.getLatitude()));
-            tvLongitude.setText(String.valueOf(loc.getLongitude()));
-
-            if (loc.hasAltitude())
-            {
-
-                double altitude = loc.getAltitude();
-
-                if (AppSettings.shouldUseImperial())
-                {
-                    tvAltitude.setText(String.valueOf(Utilities.MetersToFeet(altitude))
-                            + getString(R.string.feet));
+            gpsmf.onLocationChanged(loc);
+        } else {
+            int frags_id[] = {R.id.frag_SO, R.id.frag_SE, R.id.frag_NE, R.id.frag_NO};
+            for (int id : frags_id) {
+                IWidgetFragment widget = (IWidgetFragment) fm.findFragmentById(id);
+                if (widget == null) {
+                    Utilities.LogDebug("Widget not found");
+                    return;
                 }
-                else
-                {
-                    tvAltitude.setText(String.valueOf(altitude) + getString(R.string.meters));
-                }
-
+                widget.onLocationChanged(loc);
             }
-            else
-            {
-                tvAltitude.setText(R.string.not_applicable);
-            }
-
-            if (loc.hasSpeed())
-            {
-
-                float speed = loc.getSpeed();
-                String unit;
-                if (AppSettings.shouldUseImperial())
-                {
-                    if (speed > 1.47)
-                    {
-                        speed = speed * 0.6818f;
-                        unit = getString(R.string.miles_per_hour);
-
-                    }
-                    else
-                    {
-                        speed = Utilities.MetersToFeet(speed);
-                        unit = getString(R.string.feet_per_second);
-                    }
-                }
-                else
-                {
-                    if (speed > 0.277)
-                    {
-                        speed = speed * 3.6f;
-                        unit = getString(R.string.kilometers_per_hour);
-                    }
-                    else
-                    {
-                        unit = getString(R.string.meters_per_second);
-                    }
-                }
-
-                txtSpeed.setText(String.valueOf(speed) + unit);
-
-            }
-            else
-            {
-                txtSpeed.setText(R.string.not_applicable);
-            }
-
-            if (loc.hasBearing())
-            {
-
-                float bearingDegrees = loc.getBearing();
-                String direction;
-
-                direction = Utilities.GetBearingDescription(bearingDegrees, getApplicationContext());
-
-                txtDirection.setText(direction + "(" + String.valueOf(Math.round(bearingDegrees))
-                        + getString(R.string.degree_symbol) + ")");
-            }
-            else
-            {
-                txtDirection.setText(R.string.not_applicable);
-            }
-
-            if (!Session.isUsingGps())
-            {
-                txtSatellites.setText(R.string.not_applicable);
-                Session.setSatelliteCount(0);
-            }
-
-            if (loc.hasAccuracy())
-            {
-
-                float accuracy = loc.getAccuracy();
-
-                if (AppSettings.shouldUseImperial())
-                {
-                    txtAccuracy.setText(getString(R.string.accuracy_within,
-                            String.valueOf(Utilities.MetersToFeet(accuracy)), getString(R.string.feet)));
-
-                }
-                else
-                {
-                    txtAccuracy.setText(getString(R.string.accuracy_within, String.valueOf(accuracy),
-                            getString(R.string.meters)));
-                }
-
-            }
-            else
-            {
-                txtAccuracy.setText(R.string.not_applicable);
-            }
-
-
-            String distanceUnit;
-            double distanceValue = Session.getTotalTravelled();
-            if (AppSettings.shouldUseImperial())
-            {
-                distanceUnit = getString(R.string.feet);
-                distanceValue = Utilities.MetersToFeet(distanceValue);
-                // When it passes more than 1 kilometer, convert to miles.
-                if (distanceValue > 3281)
-                {
-                    distanceUnit = getString(R.string.miles);
-                    distanceValue = distanceValue / 5280;
-                }
-            }
-            else
-            {
-                distanceUnit = getString(R.string.meters);
-                if (distanceValue > 1000)
-                {
-                    distanceUnit = getString(R.string.kilometers);
-                    distanceValue = distanceValue / 1000;
-                }
-            }
-
-            txtTravelled.setText(String.valueOf(Math.round(distanceValue)) + " " + distanceUnit +
-                    " (" + Session.getNumLegs() + " points)");
-
         }
-        catch (Exception ex)
-        {
-            SetStatus(getString(R.string.error_displaying, ex.getMessage()));
-        }
-
     }
 
     @Override
@@ -1120,7 +1100,6 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
     public void OnSatelliteCount(int count)
     {
         SetSatelliteInfo(count);
-
     }
 
     @Override

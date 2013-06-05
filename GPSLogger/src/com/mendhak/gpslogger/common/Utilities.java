@@ -62,14 +62,8 @@ public class Utilities
 
     public static void LogError(String methodName, Exception ex)
     {
-        try
-        {
-            LogError(methodName + ":" + ex.getMessage());
-        }
-        catch (Exception e)
-        {
-            /**/
-        }
+        Log.e("GPSLogger", methodName, ex);
+        LogToDebugFile(methodName + ":" + ex.getMessage());
     }
 
     private static void LogError(String message)
@@ -125,6 +119,9 @@ public class Utilities
 
         AppSettings.setLogToIgc(prefs.getBoolean("log_igc", false));
         AppSettings.setIgcPrivateKey(context.getString(R.string.igc_private_key));
+
+        AppSettings.setUseModularView(prefs.getBoolean("modular_view", false));
+        AppSettings.setForceScreenOn(prefs.getBoolean("force_screen_on", false));
 
         AppSettings.setLogToSkylines(prefs.getBoolean("log_skylines", false));
         AppSettings.setSkylinesInterval(Integer.parseInt(prefs.getString("skylines_interval", "3")));

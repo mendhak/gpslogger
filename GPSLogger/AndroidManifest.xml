@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.mendhak.gpslogger" android:versionCode="29"
-          android:versionName="29" android:installLocation="auto">
+          package="net.kataplop.gpslogger" android:versionCode="20130605"
+          android:versionName="20130605" android:installLocation="auto">
 
     <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="16"/>
-
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -14,6 +13,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <supports-screens android:smallScreens="true"
                       android:normalScreens="true" android:largeScreens="true"
@@ -103,18 +103,18 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".shortcuts.ShortcutCreate" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        <activity android:name="com.mendhak.gpslogger.shortcuts.ShortcutCreate" android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".shortcuts.ShortcutStart" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        <activity android:name="com.mendhak.gpslogger.shortcuts.ShortcutStart" android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
             </intent-filter>
         </activity>
-        <activity android:name=".shortcuts.ShortcutStop" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        <activity android:name="com.mendhak.gpslogger.shortcuts.ShortcutStop" android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
             </intent-filter>

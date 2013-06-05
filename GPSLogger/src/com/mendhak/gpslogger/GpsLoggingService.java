@@ -103,9 +103,9 @@ public class GpsLoggingService extends Service implements IActionListener
     @Override
     public void onDestroy()
     {
+        super.onDestroy();
         Utilities.LogWarning("GpsLoggingService is being destroyed by Android OS.");
         mainServiceClient = null;
-        super.onDestroy();
     }
 
     @Override
@@ -321,6 +321,7 @@ public class GpsLoggingService extends Service implements IActionListener
      */
     protected static void SetServiceClient(IGpsLoggerServiceClient mainForm)
     {
+        Utilities.LogDebug("GpsLoggingService.SetServiceClient");
         mainServiceClient = mainForm;
     }
 
@@ -635,7 +636,11 @@ public class GpsLoggingService extends Service implements IActionListener
     {
         if (IsMainFormVisible())
         {
-            mainServiceClient.OnStatusMessage(status);
+            if (mainServiceClient != null){
+                mainServiceClient.OnStatusMessage(status);
+            } else {
+                Utilities.LogDebug("GpsLoggingService.SetStatus: no valid activity bound");
+            }
         }
     }
 
