@@ -27,7 +27,7 @@ import android.preference.PreferenceManager;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.mendhak.gpslogger.GpsMainActivity;
-import com.mendhak.gpslogger.R;
+import net.kataplop.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;

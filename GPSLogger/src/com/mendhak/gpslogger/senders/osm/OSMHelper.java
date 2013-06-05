@@ -23,7 +23,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import com.mendhak.gpslogger.R;
+import net.kataplop.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.IFileSender;

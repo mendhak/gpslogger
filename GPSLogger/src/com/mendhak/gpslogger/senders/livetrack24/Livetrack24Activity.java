@@ -30,7 +30,7 @@ import android.view.KeyEvent;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.mendhak.gpslogger.GpsMainActivity;
-import com.mendhak.gpslogger.R;
+import net.kataplop.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
 
 public class Livetrack24Activity extends SherlockPreferenceActivity implements

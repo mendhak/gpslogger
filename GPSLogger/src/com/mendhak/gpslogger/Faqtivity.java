@@ -27,6 +27,7 @@ import android.webkit.WebViewClient;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.mendhak.gpslogger.common.Utilities;
+import net.kataplop.gpslogger.R;
 
 public class Faqtivity extends SherlockActivity
 {

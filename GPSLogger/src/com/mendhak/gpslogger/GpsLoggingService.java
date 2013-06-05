@@ -39,6 +39,7 @@ import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.AlarmReceiver;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
+import net.kataplop.gpslogger.R;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;

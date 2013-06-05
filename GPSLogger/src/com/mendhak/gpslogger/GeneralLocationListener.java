@@ -20,6 +20,7 @@ package com.mendhak.gpslogger;
 import android.location.*;
 import android.os.Bundle;
 import com.mendhak.gpslogger.common.Utilities;
+import net.kataplop.gpslogger.R;
 
 import java.util.Iterator;
 

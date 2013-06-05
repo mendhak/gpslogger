@@ -28,6 +28,7 @@ import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
+import net.kataplop.gpslogger.R;
 
 public class GpsSettingsActivity extends SherlockPreferenceActivity
 {

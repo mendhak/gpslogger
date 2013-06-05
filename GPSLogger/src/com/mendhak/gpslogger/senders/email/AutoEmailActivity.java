@@ -28,7 +28,7 @@ import android.view.KeyEvent;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.mendhak.gpslogger.GpsMainActivity;
-import com.mendhak.gpslogger.R;
+import net.kataplop.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.IMessageBoxCallback;
 import com.mendhak.gpslogger.common.Utilities;

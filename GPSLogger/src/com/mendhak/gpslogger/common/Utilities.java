@@ -24,7 +24,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import com.mendhak.gpslogger.R;
+import net.kataplop.gpslogger.R;
 import com.mendhak.gpslogger.senders.ftp.FtpHelper;
 import org.w3c.dom.Document;
 

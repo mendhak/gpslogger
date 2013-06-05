@@ -22,7 +22,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import com.mendhak.gpslogger.R;
+import net.kataplop.gpslogger.R;
 
 public class ShortcutCreate extends Activity
 {
