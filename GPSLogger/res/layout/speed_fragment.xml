@@ -3,21 +3,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:layout_gravity="center_vertical"
+              android:gravity="right">
 
     <TextView android:id="@+id/big_speed"
               android:layout_width="wrap_content"
-              android:textSize="90dip"
+              android:textSize="80dip"
               android:layout_height="wrap_content"
               android:paddingLeft="8dip"
               android:text="0"/>
-
-    <TextView android:id="@+id/big_speed_unit"
-              android:layout_width="wrap_content"
-              android:textSize="15dip"
-              android:layout_height="wrap_content"
-              android:paddingLeft="8dip"
-
-              android:text="km/h"/>
-
 </LinearLayout>

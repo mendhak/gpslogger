@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name">GPSLoggerFlight</string>
     <string name="settings_screen_name">GPSLogger Settings</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -46,7 +46,10 @@
     <string name="summary_current_filename">File:</string>
     <string name="summary_current_filename_format">%s (in your GPSLogger folder)</string>
 
-
+    <string name="altitude">Altitude</string>
+    <string name="speed">Speed</string>
+    <string name="direction">Direction</string>
+    <string name="glideratio">Glide Ratio</string>
 
 
     <string name="sharing_location_only">Location only</string>

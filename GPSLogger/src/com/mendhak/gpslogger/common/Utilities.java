@@ -607,7 +607,7 @@ public class Utilities
     }
 
     /**
-     * Uses the Haversine formula to calculate the distnace between to lat-long coordinates
+     * Uses the Haversine formula to calculate the distance between to lat-long coordinates
      *
      * @param latitude1  The first point's latitude
      * @param longitude1 The first point's longitude

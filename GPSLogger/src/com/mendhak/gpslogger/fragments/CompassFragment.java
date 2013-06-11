@@ -16,8 +16,9 @@
  *    You should have received a copy of the GNU General Public License
  *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.mendhak.gpslogger.com.mendhak.gpslogger.fragments;
+package com.mendhak.gpslogger.fragments;
 
+import android.app.Activity;
 import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 import android.location.Location;
@@ -36,16 +37,22 @@ public class CompassFragment extends SherlockFragment implements  IWidgetFragmen
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.compas_fragment, container, false);
-        tvDirection = (TextView) v.findViewById(R.id.compas);
+        tvDirection = (TextView) v.findViewById(R.id.big_compass);
 
         return v;
     }
 
+
+    @Override
+    public void onActivityCreated(Bundle bundle){
+        super.onActivityCreated(bundle);
+        IWidgetContainer c = (IWidgetContainer) getActivity();
+        c.setTitle(getTitle(), this);
+    }
+
     @Override
     public String getTitle() {
-        // FIXME move to strings
-
-        return "compass";
+        return getString(R.string.direction);
     }
 
     @Override

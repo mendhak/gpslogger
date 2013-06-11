@@ -1,4 +1,4 @@
-package com.mendhak.gpslogger.com.mendhak.gpslogger.fragments;
+package com.mendhak.gpslogger.fragments;
 
 import android.location.Location;
 

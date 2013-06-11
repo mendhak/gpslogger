@@ -38,7 +38,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.mendhak.gpslogger.com.mendhak.gpslogger.fragments.*;
+import com.mendhak.gpslogger.fragments.*;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
@@ -61,7 +61,7 @@ import java.io.File;
 import java.util.*;
 
 public class GpsMainActivity extends SherlockFragmentActivity implements OnCheckedChangeListener,
-        IGpsLoggerServiceClient, View.OnClickListener, IActionListener
+        IGpsLoggerServiceClient, View.OnClickListener, IActionListener, IWidgetContainer
 {
 
     /**
@@ -143,6 +143,8 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
     @Override
     protected void onResume()
     {
+        super.onResume();
+
         Utilities.LogDebug("GpsMainactivity.onResume");
         GetPreferences();
 
@@ -169,11 +171,11 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
                 findViewById(R.id.frequency),
                 findViewById(R.id.buttonSinglePoint),
         };
-
-        TextView frag_NO_title = (TextView) findViewById(R.id.frag_NO_title);
-        TextView frag_NE_title = (TextView) findViewById(R.id.frag_NE_title);
-        TextView frag_SO_title = (TextView) findViewById(R.id.frag_SO_title);
-        TextView frag_SE_title = (TextView) findViewById(R.id.frag_SE_title);
+//
+//        TextView frag_NO_title = (TextView) findViewById(R.id.frag_NO_title);
+//        TextView frag_NE_title = (TextView) findViewById(R.id.frag_NE_title);
+//        TextView frag_SO_title = (TextView) findViewById(R.id.frag_SO_title);
+//        TextView frag_SE_title = (TextView) findViewById(R.id.frag_SE_title);
 
         if (!AppSettings.getUseModularView()){
             if (modular_view.getVisibility() != View.GONE){
@@ -218,25 +220,25 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
 
                 if (no_frag == null) {
                     SpeedFragment sf = new SpeedFragment();
-                    frag_NO_title.setText(sf.getTitle());
+//                    frag_NO_title.setText(sf.getTitle());
                     ft.add(R.id.frag_NO, sf);
                 }
 
                 if (ne_frag == null) {
                     CompassFragment cf = new CompassFragment();
-                    frag_NE_title.setText(cf.getTitle());
+//                    frag_NE_title.setText(cf.getTitle());
                     ft.add(R.id.frag_NE, cf);
                 }
 
                 if (se_frag == null) {
                     AltitudeFragment sf = new AltitudeFragment();
-                    frag_SE_title.setText(sf.getTitle());
+//                    frag_SE_title.setText(sf.getTitle());
                     ft.add(R.id.frag_SE, sf);
                 }
 
                 if (so_frag == null) {
-                    CompassFragment cf = new CompassFragment();
-                    frag_SO_title.setText(cf.getTitle());
+                    GlideRatioFragment cf = new GlideRatioFragment();
+//                    frag_SO_title.setText(cf.getTitle());
                     ft.add(R.id.frag_SO, cf);
                 }
                 if (!ft.isEmpty()){
@@ -250,7 +252,35 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
         }
 
         StartAndBindService();
-        super.onResume();
+    }
+
+    @Override
+    public void setTitle(final String title, IWidgetFragment self){
+        FragmentManager fm = getSupportFragmentManager();
+        TextView frag_NO_title = (TextView) findViewById(R.id.frag_NO_title);
+        TextView frag_NE_title = (TextView) findViewById(R.id.frag_NE_title);
+        TextView frag_SO_title = (TextView) findViewById(R.id.frag_SO_title);
+        TextView frag_SE_title = (TextView) findViewById(R.id.frag_SE_title);
+
+        Fragment no_frag = fm.findFragmentById(R.id.frag_NO);
+        Fragment ne_frag = fm.findFragmentById(R.id.frag_NE);
+        Fragment so_frag = fm.findFragmentById(R.id.frag_SO);
+        Fragment se_frag = fm.findFragmentById(R.id.frag_SE);
+        if (no_frag == self){
+            frag_NO_title.setText(title);
+        }
+
+        if (ne_frag == self){
+            frag_NE_title.setText(title);
+        }
+
+        if (so_frag == self){
+            frag_SO_title.setText(title);
+        }
+
+        if (se_frag == self){
+            frag_SE_title.setText(title);
+        }
     }
 
     /**

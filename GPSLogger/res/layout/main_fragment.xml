@@ -23,11 +23,12 @@
             <LinearLayout android:orientation="vertical"
                           android:layout_width="match_parent"
                           android:layout_height="match_parent"
-                          android:layout_weight="1">
+                          android:layout_weight="1"
+                          android:background="@drawable/back">
 
                 <TextView android:id="@+id/frag_NO_title"
                           android:layout_width="match_parent"
-                          android:textSize="9dip"
+                          android:textSize="12dip"
                           android:layout_height="wrap_content"
                           android:textStyle="italic"
                           android:paddingLeft="8dip"
@@ -36,17 +37,19 @@
                 <FrameLayout
                         android:id="@+id/frag_NO"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:paddingRight="2dip"/>
             </LinearLayout>
 
             <LinearLayout android:orientation="vertical"
                           android:layout_width="match_parent"
                           android:layout_height="match_parent"
-                          android:layout_weight="1">
+                          android:layout_weight="1"
+                          android:background="@drawable/back">
 
                 <TextView android:id="@+id/frag_NE_title"
                           android:layout_width="match_parent"
-                          android:textSize="9dip"
+                          android:textSize="12dip"
                           android:layout_height="wrap_content"
                           android:textStyle="italic"
                           android:paddingLeft="8dip"
@@ -54,7 +57,8 @@
                 <FrameLayout
                         android:id="@+id/frag_NE"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:paddingRight="2dip"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -66,11 +70,12 @@
             <LinearLayout android:orientation="vertical"
                           android:layout_width="match_parent"
                           android:layout_height="match_parent"
-                          android:layout_weight="1">
+                          android:layout_weight="1"
+                          android:background="@drawable/back">
 
                 <TextView android:id="@+id/frag_SO_title"
                           android:layout_width="match_parent"
-                          android:textSize="9dip"
+                          android:textSize="12dip"
                           android:layout_height="wrap_content"
                           android:textStyle="italic"
                           android:paddingLeft="8dip"
@@ -78,17 +83,19 @@
                 <FrameLayout
                         android:id="@+id/frag_SO"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:paddingRight="2dip"/>
             </LinearLayout>
 
             <LinearLayout android:orientation="vertical"
                           android:layout_width="match_parent"
                           android:layout_height="match_parent"
-                          android:layout_weight="1">
+                          android:layout_weight="1"
+                          android:background="@drawable/back">
 
                 <TextView android:id="@+id/frag_SE_title"
                           android:layout_width="match_parent"
-                          android:textSize="9dip"
+                          android:textSize="12dip"
                           android:layout_height="wrap_content"
                           android:textStyle="italic"
                           android:paddingLeft="8dip"
@@ -96,7 +103,8 @@
                 <FrameLayout
                         android:id="@+id/frag_SE"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:paddingRight="2dip"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -14,7 +14,7 @@
  *    You should have received a copy of the GNU General Public License
  *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.mendhak.gpslogger.com.mendhak.gpslogger.fragments;
+package com.mendhak.gpslogger.fragments;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import android.widget.TextView;

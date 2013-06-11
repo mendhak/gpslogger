@@ -17,8 +17,9 @@
  *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.mendhak.gpslogger.com.mendhak.gpslogger.fragments;
+package com.mendhak.gpslogger.fragments;
 
+import android.app.Activity;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,61 +32,65 @@ import com.mendhak.gpslogger.common.Utilities;
 import net.kataplop.gpslogger.R;
 
 
-public class SpeedFragment extends SherlockFragment implements  IWidgetFragment {
-    private TextView tvSpeed;
-    private TextView tvUnit;
+public class AltitudeFragment extends SherlockFragment implements  IWidgetFragment {
+    private TextView tvAltitude;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.speed_fragment, container, false);
-        tvSpeed = (TextView) v.findViewById(R.id.big_speed);
-        tvUnit = (TextView) v.findViewById(R.id.big_speed_unit);
+        View v = inflater.inflate(R.layout.altitude_fragment, container, false);
+        tvAltitude = (TextView) v.findViewById(R.id.big_altitude);
 
         return v;
     }
 
+
+    @Override
+    public void onActivityCreated(Bundle bundle){
+        super.onActivityCreated(bundle);
+        IWidgetContainer c = (IWidgetContainer) getActivity();
+        c.setTitle(getTitle(), this);
+    }
+
     @Override
     public String getTitle() {
-        // FIXME move to strings
+        String title = getString(R.string.altitude) + " (";
 
-        return "speed";
+        if (AppSettings.shouldUseImperial()) {
+            title += getString(R.string.feet) + ")";
+        } else {
+            title += getString(R.string.meters) + ")";
+        }
+        return title;
     }
 
     @Override
     public void onLocationChanged(final Location loc) {
-        Utilities.LogDebug("SpeedFragment.onLocationChanged");
+        Utilities.LogDebug("AltitudeFragment.onLocationChanged");
 
         if (loc == null) {
             return;
         }
 
-        setSpeed(loc);
+        setAltitude(loc);
     }
 
-    private void setSpeed(final Location loc) {
-        String unit;
-        if (AppSettings.shouldUseImperial()) {
-            tvUnit.setText(getString(R.string.miles_per_hour));
-        } else {
-            tvUnit.setText(R.string.kilometers_per_hour);
-        }
+    private void setAltitude(final Location loc) {
 
-        if (loc.hasSpeed()) {
-            float speed = loc.getSpeed();
+
+        if (loc.hasAltitude()) {
+            double altitude = loc.getAltitude();
 
             if (AppSettings.shouldUseImperial()) {
-                speed = speed * 0.6818f;
-            } else {
-                speed = speed * 3.6f;
+                altitude = altitude * 3.28084;
             }
 
-            final String sspeed = Integer.toString((int)speed);
+            final String saltitude = Integer.toString((int)altitude);
 
-            tvSpeed.setText(sspeed);
+            tvAltitude.setText(saltitude);
         } else {
-            tvSpeed.setText(R.string.not_applicable);
+            tvAltitude.setText(R.string.not_applicable);
         }
     }
 
@@ -99,6 +104,6 @@ public class SpeedFragment extends SherlockFragment implements  IWidgetFragment 
 
     @Override
     public void clear() {
-        tvSpeed.setText("-");
+        tvAltitude.setText("-");
     }
 }
