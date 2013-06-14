@@ -82,6 +82,15 @@ public class Utilities
         LogToDebugFile(message);
     }
 
+    public static void LogDebug(String message, Exception ex)
+    {
+        if (LOGLEVEL >= 4)
+        {
+            Log.d("GPSLogger", message, ex);
+        }
+        LogToDebugFile(message + ":" + ex.getMessage());
+    }
+
     public static void LogWarning(String message)
     {
         if (LOGLEVEL >= 2)
