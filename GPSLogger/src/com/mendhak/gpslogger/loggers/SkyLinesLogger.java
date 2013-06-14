@@ -36,11 +36,14 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.ArrayDeque;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import com.mendhak.gpslogger.common.Utilities;
@@ -127,6 +130,55 @@ public class SkyLinesLogger implements IFileLogger
 
     private static SkyLinesLogger instance = null;
 
+    private static class BufferedLocation {
+        public final int timems;
+        public final double lat;
+        public final double lon;
+        public final int altitude;
+        public final int bearing;
+        public final int speed;
+        public BufferedLocation(int time_ms, double lat, double lon, int alt, int bearing, int speed){
+            timems = time_ms;
+            this.lat = lat;
+            this.lon = lon;
+            this.altitude = alt;
+            this.bearing = bearing;
+            this.speed = speed;
+        }
+    }
+    private final ConcurrentLinkedDeque<BufferedLocation> loc_buffer = new ConcurrentLinkedDeque<BufferedLocation>();
+    private Runnable flusher;
+    private Handler handler;
+    private class FlusherAsyncTask extends  AsyncTask<ConcurrentLinkedDeque<BufferedLocation>, Void, Void> {
+        @Override
+        protected Void doInBackground(ConcurrentLinkedDeque<BufferedLocation>... buffers) {
+            for (ConcurrentLinkedDeque<BufferedLocation> buf : buffers){
+                BufferedLocation b;
+
+                Utilities.LogDebug(name + " flushing buffer (" + buf.size() + ")");
+                int i = 0;
+
+                while(buf.peek() != null) {
+                    b = buf.pop();
+                    try {
+                        Utilities.LogDebug(name + " flushing elt " + i);
+                        sendFix(b.timems,
+                                b.lat, b.lon,
+                                b.altitude,
+                                b.bearing,
+                                b.speed);
+                        i++;
+                    } catch (IOException ex) {
+                        Utilities.LogDebug(name + ": sending fix", ex);
+                    }
+                }
+                Utilities.LogDebug(name + ": finished flushing " + i + " locations" );
+            }
+            return null;
+        }
+    };
+    private FlusherAsyncTask flushertask;
+
     public static SkyLinesLogger getSkyLinesLogger(long key, int intervals, String host, int port)
             throws SocketException, UnknownHostException {
 
@@ -151,6 +203,63 @@ public class SkyLinesLogger implements IFileLogger
 
         InetAddress serverIP = InetAddress.getByName(host);
         serverAddress = new InetSocketAddress(serverIP, port);
+        this.handler = new Handler();
+
+        flusher = new Runnable() {
+            @Override
+            public void run() {
+                if (flushertask == null || flushertask.getStatus() != AsyncTask.Status.RUNNING){
+                    Utilities.LogDebug(name + " starting flusher task");
+
+                    if (flushertask == null || flushertask.getStatus() == AsyncTask.Status.FINISHED) {
+                        flushertask = new FlusherAsyncTask();
+                    }
+                    flushertask.execute(loc_buffer);
+                } else {
+                    Utilities.LogDebug(name + " flusher task already running");
+                }
+                handler.postDelayed(flusher, intervalMS);
+            }
+        };
+        flusher.run();
+    }
+
+    private void flushBufferLocs(ConcurrentLinkedDeque<BufferedLocation> shared_buffer) {
+        BufferedLocation b;
+        Utilities.LogDebug(name + " flushing buffer (" + loc_buffer.size() + ")");
+        int sent_count = 0;
+        int ssent_count = 0;
+        int fail_count = 0;
+
+        if (shared_buffer.peek() == null){
+            Utilities.LogDebug(name + " buffer empty, skipping");
+            return;
+        }
+
+        while((b = shared_buffer.pop()) != null){
+            try {
+                sendFix(b.timems,
+                        b.lat, b.lon,
+                        b.altitude,
+                        b.bearing,
+                        b.speed);
+                sent_count++;
+            } catch (IOException ex) {
+                Utilities.LogDebug("ERROR " + name + ": sending fix", ex);
+                shared_buffer.push(b);
+                if (sent_count == ssent_count){
+                    fail_count++;
+                } else {
+                    ssent_count = sent_count;
+                    fail_count = 0;
+                }
+                if (fail_count == 100){
+                    Utilities.LogDebug(name + " flusher failed to sent 100 times the same loc, skipping this flush");
+                    break;
+                }
+            }
+        }
+        Utilities.LogDebug(name + ": finished flushing " + sent_count + " locations" );
     }
 
     private void writeHeader(DataOutputStream dos, short type)
@@ -221,46 +330,64 @@ public class SkyLinesLogger implements IFileLogger
         socket.send(datagram);
     }
 
-    private class WriteAsync extends AsyncTask<Location, Void, Void> {
-        @Override
-        protected Void doInBackground(Location... locs){
-            for (int i = 0; i < locs.length; i++){
-                final Location loc = locs[i];
-                try {
-                    calendar.setTimeInMillis(loc.getTime());
-                    int second_of_day =
-                            calendar.get(Calendar.HOUR_OF_DAY) * 3600
-                                    + calendar.get(Calendar.MINUTE) * 60
-                                    + calendar.get(Calendar.SECOND);
-                    int ms_of_day = second_of_day * 1000
-                            + calendar.get(Calendar.MILLISECOND);
-                    sendFix(ms_of_day,
-                            loc.getLatitude(), loc.getLongitude(),
-                            (int)loc.getAltitude(),
-                            (int)loc.getBearing(),
-                            (int)(loc.getSpeed() / 3.6));
-                } catch (IOException ex) {
-                    Log.e("SkyLines", "Error", ex);
-                }
-            }
-            return null;
-        }
-    }
+
+
+//    private class WriteAsync extends AsyncTask<Location, Void, Void> {
+//        @Override
+//        protected Void doInBackground(Location... locs){
+//            for (int i = 0; i < locs.length; i++){
+//                final Location loc = locs[i];
+//                try {
+//                    calendar.setTimeInMillis(loc.getTime());
+//                    int second_of_day =
+//                            calendar.get(Calendar.HOUR_OF_DAY) * 3600
+//                                    + calendar.get(Calendar.MINUTE) * 60
+//                                    + calendar.get(Calendar.SECOND);
+//                    int ms_of_day = second_of_day * 1000
+//                            + calendar.get(Calendar.MILLISECOND);
+//                    sendFix(ms_of_day,
+//                            loc.getLatitude(), loc.getLongitude(),
+//                            (int)loc.getAltitude(),
+//                            (int)loc.getBearing(),
+//                            (int)(loc.getSpeed() / 3.6));
+//                } catch (IOException ex) {
+//                    Log.e("SkyLines", "Error", ex);
+//                }
+//            }
+//            return null;
+//        }
+//    }
 
     @Override
     public void close() throws Exception{
+        this.handler.removeCallbacks(flusher);
         instance = null;
     }
 
     @Override
     public void Write(Location loc) throws Exception
     {
-        long now = SystemClock.elapsedRealtime();
-
-        if (now >= nextUpdateTime) {
-            new WriteAsync().execute(loc);
-            nextUpdateTime = now + intervalMS;
-        }
+        final long now = SystemClock.elapsedRealtime();
+        calendar.setTimeInMillis(loc.getTime());
+        final int second_of_day =
+                calendar.get(Calendar.HOUR_OF_DAY) * 3600
+                        + calendar.get(Calendar.MINUTE) * 60
+                        + calendar.get(Calendar.SECOND);
+        final int ms_of_day = second_of_day * 1000
+                + calendar.get(Calendar.MILLISECOND);
+        Utilities.LogDebug(name  + " pushed (" + loc_buffer.size() + ")");
+        loc_buffer.push(new BufferedLocation(
+                ms_of_day,
+                loc.getLatitude(), loc.getLongitude(),
+                (int)loc.getAltitude(),
+                (int)loc.getBearing(),
+                (int)(loc.getSpeed() / 3.6)
+        ));
+//
+//        if (now >= nextUpdateTime) {
+//            new WriteAsync().execute(loc);
+//            nextUpdateTime = now + intervalMS;
+//        }
     }
 
     @Override
