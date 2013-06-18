@@ -208,20 +208,24 @@ public class SkyLinesLogger implements IFileLogger
         flusher = new Runnable() {
             @Override
             public void run() {
-                if (flushertask == null || flushertask.getStatus() != AsyncTask.Status.RUNNING){
-                    Utilities.LogDebug(name + " starting flusher task");
-
-                    if (flushertask == null || flushertask.getStatus() == AsyncTask.Status.FINISHED) {
-                        flushertask = new FlusherAsyncTask();
-                    }
-                    flushertask.execute(loc_buffer);
-                } else {
-                    Utilities.LogDebug(name + " flusher task already running");
-                }
+                execAsyncFlush();
                 handler.postDelayed(flusher, intervalMS);
             }
         };
         flusher.run();
+    }
+
+    private void execAsyncFlush(){
+        if (flushertask == null || flushertask.getStatus() != AsyncTask.Status.RUNNING){
+            Utilities.LogDebug(name + " starting flusher task");
+
+            if (flushertask == null || flushertask.getStatus() == AsyncTask.Status.FINISHED) {
+                flushertask = new FlusherAsyncTask();
+            }
+            flushertask.execute(loc_buffer);
+        } else {
+            Utilities.LogDebug(name + " flusher task already running");
+        }
     }
 
     private void flushBufferLocs(ConcurrentLinkedDeque<BufferedLocation> shared_buffer) {
@@ -361,6 +365,8 @@ public class SkyLinesLogger implements IFileLogger
     @Override
     public void close() throws Exception{
         this.handler.removeCallbacks(flusher);
+        execAsyncFlush();
+
         instance = null;
     }
 
