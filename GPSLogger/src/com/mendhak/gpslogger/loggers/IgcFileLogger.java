@@ -93,8 +93,8 @@ public class IgcFileLogger implements IFileLogger
         boolean alreadyExists = false;
         this.file = file;
 
-//        final boolean signatureEnabled = initSignature();
-        final boolean signatureEnabled = false;
+        final boolean signatureEnabled = initSignature();
+//        final boolean signatureEnabled = false;
         File previousContent = null;
 
         if (!file.exists()) {
@@ -145,7 +145,7 @@ public class IgcFileLogger implements IFileLogger
         }
 
         StringBuffer sb = new StringBuffer();
-        sb.append("AXGL1\r\n");
+        sb.append("AXGP1\r\n");
 
         SimpleDateFormat sdf = new SimpleDateFormat("FFMMyy");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -283,7 +283,7 @@ public class IgcFileLogger implements IFileLogger
                 Utilities.LogDebug("IGC : Error when signing...");
                 Log.e("IGC", "Error when signing", e);
                 sb = new StringBuffer();
-                sb.append("GGaggleFailedToSign\r\n");
+                sb.append("GGPSLoggerFailedToSign\r\n");
             }
             output.write(sb.toString().getBytes());
         }
