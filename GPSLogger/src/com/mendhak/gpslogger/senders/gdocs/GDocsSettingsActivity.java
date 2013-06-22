@@ -306,7 +306,7 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
             gpxFolder.mkdirs();
         }
 
-        File testFile = new File(gpxFolder.getPath(), "gpslogger_test.txt");
+        File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
 
         try
         {
@@ -318,7 +318,7 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
                 BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
 
                 StringBuilder initialString = new StringBuilder();
-                initialString.append("This is a test file");
+                initialString.append("<x>This is a test file</x>");
                 initialOutput.write(initialString.toString().getBytes());
                 initialOutput.flush();
                 initialOutput.close();

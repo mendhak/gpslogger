@@ -17,20 +17,22 @@
 
 package com.mendhak.gpslogger.senders.gdocs;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import com.google.android.gms.auth.GoogleAuthUtil;
-import com.google.android.gms.auth.GooglePlayServicesAvailabilityException;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.IFileSender;
+import org.json.JSONObject;
+
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 
@@ -47,8 +49,6 @@ public class GDocsHelper implements IActionListener, IFileSender
     or
     (old Android)
    ./adb -e shell 'sqlite3 /data/system/accounts.db "delete from grants;"'
-
-
      */
 
     public GDocsHelper(Context applicationContext, IActionListener callback)
@@ -60,10 +60,10 @@ public class GDocsHelper implements IActionListener, IFileSender
 
     public static String GetOauth2Scope()
     {
-        return  "oauth2:https://www.googleapis.com/auth/drive.file";
+        return "oauth2:https://www.googleapis.com/auth/drive.file";
     }
 
-     /**
+    /**
      * Gets the stored authToken, which may be expired
      */
     public static String GetAuthToken(Context applicationContext)
@@ -114,7 +114,6 @@ public class GDocsHelper implements IActionListener, IFileSender
 
     /**
      * Removes the authToken and account name from storage
-     *
      */
     public static void ClearAuthToken(Context applicationContext)
     {
@@ -259,20 +258,235 @@ public class GDocsHelper implements IActionListener, IFileSender
 
                 String token = GoogleAuthUtil.getTokenWithNotification(ctx, GetAccountName(ctx), GetOauth2Scope(), new Bundle());
                 Utilities.LogDebug(token);
+
+                String gpsLoggerFolderId = GetFileIdFromFileName(token, "GPSLogger For Android");
+
+                if(Utilities.IsNullOrEmpty(gpsLoggerFolderId))
+                {
+                    //Couldn't find folder, must create it
+                    gpsLoggerFolderId = CreateEmptyFile(token, "GPSLogger For Android", "application/vnd.google-apps.folder", "root");
+                }
+
+                //Now search for the file
+                String gpxFileId = GetFileIdFromFileName(token,fileName);
+
+                if(Utilities.IsNullOrEmpty(gpxFileId))
+                {
+                    //Create empty file first
+                    gpxFileId = CreateEmptyFile(token, fileName, "application/xml", gpsLoggerFolderId);
+                }
+
+                if(!Utilities.IsNullOrEmpty(gpxFileId))
+                {
+                    //Set file's contents
+                    UpdateFileContents(token, gpxFileId, Utilities.GetByteArrayFromInputStream(inputStream));
+                }
+
+                callback.OnComplete();
+
             }
             catch (Exception e)
             {
-                Utilities.LogError("GDocsUploadHandler.RefreshToken", e);
+                Utilities.LogError("GDocsUploadHandler", e);
+                callback.OnFailure();
             }
-
 
 
         }
     }
 
+    private String UpdateFileContents(String authToken, String gpxFileId, byte[] fileContents)
+    {
+        HttpURLConnection conn = null;
+        String fileId = null;
+
+        String fileUpdateUrl = "https://www.googleapis.com/upload/drive/v2/files/"+ gpxFileId + "?uploadType=media";
+
+        try
+        {
 
 
-        @Override
+            if (Integer.parseInt(Build.VERSION.SDK) < Build.VERSION_CODES.FROYO)
+            {
+                //Due to a pre-froyo bug
+                //http://android-developers.blogspot.com/2011/09/androids-http-clients.html
+                System.setProperty("http.keepAlive", "false");
+            }
+
+            URL url = new URL(fileUpdateUrl);
+
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("User-Agent", "GPSLogger for Android");
+            conn.setRequestProperty("Authorization", "Bearer " + authToken);
+            conn.setRequestProperty("Content-Type", "application/xml");
+            conn.setRequestProperty("Content-Length", String.valueOf(fileContents.length));
+
+            conn.setUseCaches(false);
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            DataOutputStream wr = new DataOutputStream(
+                    conn.getOutputStream());
+            wr.write(fileContents);
+            wr.flush();
+            wr.close();
+
+            String fileMetadata = Utilities.GetStringFromInputStream(conn.getInputStream());
+
+            JSONObject fileMetadataJson = new JSONObject(fileMetadata);
+            fileId = fileMetadataJson.getString("id");
+            Utilities.LogDebug("File updated : " + fileId);
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        finally
+        {
+            if (conn != null)
+            {
+                conn.disconnect();
+            }
+
+        }
+
+        return fileId;
+
+    }
+
+    private String CreateEmptyFile(String authToken, String fileName, String mimeType, String parentFolderId)
+    {
+
+        String fileId = null;
+        HttpURLConnection conn = null;
+
+        String createFileUrl = "https://www.googleapis.com/drive/v2/files";
+
+        String createFilePayload = "   {\n" +
+                "             \"title\": \"" + fileName + "\",\n" +
+                "             \"mimeType\": \"" + mimeType + "\",\n" +
+                "             \"parents\": [\n" +
+                "              {\n" +
+                "               \"id\": \"" + parentFolderId + "\"\n" +
+                "              }\n" +
+                "             ]\n" +
+                "            }";
+
+        try
+        {
+
+            if (Integer.parseInt(Build.VERSION.SDK) < Build.VERSION_CODES.FROYO)
+            {
+                //Due to a pre-froyo bug
+                //http://android-developers.blogspot.com/2011/09/androids-http-clients.html
+                System.setProperty("http.keepAlive", "false");
+            }
+
+            URL url = new URL(createFileUrl);
+
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("User-Agent", "GPSLogger for Android");
+            conn.setRequestProperty("Authorization", "Bearer " + authToken);
+            conn.setRequestProperty("Content-Type", "application/json");
+
+            conn.setUseCaches(false);
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            DataOutputStream wr = new DataOutputStream(
+                    conn.getOutputStream());
+            wr.writeBytes(createFilePayload);
+            wr.flush();
+            wr.close();
+
+            fileId = null;
+
+            String fileMetadata = Utilities.GetStringFromInputStream(conn.getInputStream());
+
+            JSONObject fileMetadataJson = new JSONObject(fileMetadata);
+            fileId = fileMetadataJson.getString("id");
+            Utilities.LogDebug("File created with ID " + fileId);
+
+        }
+        catch (Exception e)
+        {
+
+            System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
+        }
+        finally
+        {
+            if (conn != null)
+            {
+                conn.disconnect();
+            }
+
+        }
+
+        return fileId;
+    }
+
+
+    private String GetFileIdFromFileName(String authToken, String fileName)
+    {
+
+        HttpURLConnection conn = null;
+        String fileId = "";
+
+        try
+        {
+
+            fileName = URLEncoder.encode(fileName, "UTF-8");
+            String searchUrl = "https://www.googleapis.com/drive/v2/files?q=title%20%3D%20%27" + fileName + "%27%20and%20trashed%20%3D%20false";
+
+
+            if (Integer.parseInt(Build.VERSION.SDK) < Build.VERSION_CODES.FROYO)
+            {
+                //Due to a pre-froyo bug
+                //http://android-developers.blogspot.com/2011/09/androids-http-clients.html
+                System.setProperty("http.keepAlive", "false");
+            }
+
+            URL url = new URL(searchUrl);
+
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("User-Agent", "GPSLogger for Android");
+            conn.setRequestProperty("Authorization", "OAuth " + authToken);
+
+            String fileMetadata = Utilities.GetStringFromInputStream(conn.getInputStream());
+
+
+            JSONObject fileMetadataJson = new JSONObject(fileMetadata);
+            if(fileMetadataJson.getJSONArray("items") != null && fileMetadataJson.getJSONArray("items").length() > 0)
+            {
+                fileId = fileMetadataJson.getJSONArray("items").getJSONObject(0).get("id").toString();
+                Utilities.LogDebug("Found file with ID " + fileId);
+            }
+
+        }
+        catch (Exception e)
+        {
+            Utilities.LogError("SearchForGPSLoggerFile", e);
+        }
+        finally
+        {
+            if (conn != null)
+            {
+                conn.disconnect();
+            }
+        }
+
+        return fileId;
+    }
+
+
+
+
+    @Override
     public boolean accept(File dir, String filename)
     {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
