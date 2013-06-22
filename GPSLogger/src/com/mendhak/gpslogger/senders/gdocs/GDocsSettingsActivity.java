@@ -285,9 +285,13 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
             @Override
             protected void onPostExecute(String authToken)
             {
-                GDocsHelper.SaveAuthToken(getApplicationContext(),authToken);
-                Toast.makeText(getApplicationContext(), authToken, Toast.LENGTH_SHORT).show();
-                VerifyGooglePlayServices();
+                if(authToken != null)
+                {
+                    GDocsHelper.SaveAuthToken(getApplicationContext(),authToken);
+                    Toast.makeText(getApplicationContext(), authToken, Toast.LENGTH_SHORT).show();
+                    VerifyGooglePlayServices();
+                }
+
             }
         };
         task.execute();
