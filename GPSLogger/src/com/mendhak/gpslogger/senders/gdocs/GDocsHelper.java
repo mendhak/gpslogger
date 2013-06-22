@@ -17,28 +17,20 @@
 
 package com.mendhak.gpslogger.senders.gdocs;
 
-import android.accounts.*;
-import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.GooglePlayServicesAvailabilityException;
-import com.google.android.gms.auth.UserRecoverableAuthException;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.IFileSender;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 
 
@@ -46,8 +38,7 @@ public class GDocsHelper implements IActionListener, IFileSender
 {
     Context ctx;
     IActionListener callback;
-    private static final int USER_RECOVERABLE_AUTH = 5;
-    private static final int ACCOUNT_PICKER = 2;
+
 
     /*
     To revoke permissions:
@@ -67,15 +58,12 @@ public class GDocsHelper implements IActionListener, IFileSender
         this.callback = callback;
     }
 
-    /**
-     * OAuth 2 scope to use
-     */
-    private static final String SCOPE = "oauth2:https://docs.google.com/feeds/";
+    public static String GetOauth2Scope()
+    {
+        return  "oauth2:https://www.googleapis.com/auth/drive.file";
+    }
 
-
-
-
-    /**
+     /**
      * Gets the stored authToken, which may be expired
      */
     public static String GetAuthToken(Context applicationContext)
@@ -109,8 +97,6 @@ public class GDocsHelper implements IActionListener, IFileSender
     {
         try
         {
-
-
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
             SharedPreferences.Editor editor = prefs.edit();
 
@@ -129,7 +115,6 @@ public class GDocsHelper implements IActionListener, IFileSender
     /**
      * Removes the authToken and account name from storage
      *
-     * @param applicationContext
      */
     public static void ClearAuthToken(Context applicationContext)
     {
@@ -157,13 +142,137 @@ public class GDocsHelper implements IActionListener, IFileSender
     }
 
 
+//    void RefreshToken()
+//    {
+//        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>()
+//        {
+//            @Override
+//            protected String doInBackground(Void... params)
+//            {
+//                try
+//                {
+//                    // Retrieve a token for the given account and scope. It will always return either
+//                    // a non-empty String or throw an exception.
+//
+//                    return token;
+//                }
+//                catch (Exception e)
+//                {
+//                    Utilities.LogError("RefreshToken", e);
+//                }
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(String authToken)
+//            {
+//                if(authToken != null)
+//                {
+//                    SaveAuthToken(ctx, authToken);
+//                    Utilities.LogDebug(authToken);
+//                }
+//
+//            }
+//        };
+//        task.execute();
+//    }
+
+
     @Override
     public void UploadFile(List<File> files)
     {
-        //To change body of implemented methods use File | Settings | File Templates.
+        File zipFile = null;
+
+
+        for (File f : files)
+        {
+            if (f.getName().contains(".zip"))
+            {
+                zipFile = f;
+                break;
+            }
+        }
+
+        if (zipFile != null)
+        {
+            UploadFile(zipFile.getName());
+        }
+        else
+        {
+            for (File f : files)
+            {
+                UploadFile(f.getName());
+            }
+        }
     }
 
-    @Override
+    public void UploadFile(final String fileName)
+    {
+
+        if (!IsLinked(ctx))
+        {
+            callback.OnFailure();
+            return;
+        }
+
+        try
+        {
+
+            File gpsDir = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+            File gpxFile = new File(gpsDir, fileName);
+            FileInputStream fis = new FileInputStream(gpxFile);
+
+
+            Thread t = new Thread(new GDocsUploadHandler(fis, fileName, GDocsHelper.this));
+            t.start();
+
+
+        }
+        catch (Exception e)
+        {
+            callback.OnFailure();
+            Utilities.LogError("GDocsHelper.UploadFile", e);
+        }
+    }
+
+    private class GDocsUploadHandler implements Runnable
+    {
+
+        String fileName;
+        InputStream inputStream;
+        IActionListener callback;
+
+        GDocsUploadHandler(InputStream inputStream, String fileName,
+                           IActionListener callback)
+        {
+
+            this.inputStream = inputStream;
+            this.fileName = fileName;
+            this.callback = callback;
+        }
+
+        @Override
+        public void run()
+        {
+            try
+            {
+
+                String token = GoogleAuthUtil.getTokenWithNotification(ctx, GetAccountName(ctx), GetOauth2Scope(), new Bundle());
+                Utilities.LogDebug(token);
+            }
+            catch (Exception e)
+            {
+                Utilities.LogError("GDocsUploadHandler.RefreshToken", e);
+            }
+
+
+
+        }
+    }
+
+
+
+        @Override
     public boolean accept(File dir, String filename)
     {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
@@ -172,12 +281,12 @@ public class GDocsHelper implements IActionListener, IFileSender
     @Override
     public void OnComplete()
     {
-        //To change body of implemented methods use File | Settings | File Templates.
+        callback.OnComplete();
     }
 
     @Override
     public void OnFailure()
     {
-        //To change body of implemented methods use File | Settings | File Templates.
+        callback.OnFailure();
     }
 }

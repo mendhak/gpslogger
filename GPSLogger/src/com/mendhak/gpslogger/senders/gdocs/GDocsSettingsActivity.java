@@ -22,9 +22,10 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.preference.Preference;
-import android.widget.Toast;
+
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.android.gms.auth.GoogleAuthException;
@@ -37,9 +38,15 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
+import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GDocsSettingsActivity extends SherlockPreferenceActivity
@@ -49,7 +56,7 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
     boolean messageShown = false;
     String accountName;
 
-    static final String GOOGLE_DRIVE_SCOPE = "oauth2:https://www.googleapis.com/auth/drive.file";
+
     static final int REQUEST_CODE_MISSING_GPSF = 1;
     static final int REQUEST_CODE_ACCOUNT_PICKER = 2;
     static final int REQUEST_CODE_RECOVERED=3;
@@ -200,7 +207,7 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
                             AccountManager.KEY_ACCOUNT_NAME);
 
                     GDocsHelper.SetAccountName(getApplicationContext(),accountName);
-                    Toast.makeText(this, accountName, Toast.LENGTH_LONG).show();
+                    Utilities.LogDebug(accountName);
                     getAndUseAuthTokenInAsyncTask();
                 }
                 break;
@@ -222,16 +229,8 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
         {
             // Retrieve a token for the given account and scope. It will always return either
             // a non-empty String or throw an exception.
-            final String token = GoogleAuthUtil.getToken(getApplicationContext(), GDocsHelper.GetAccountName(getApplicationContext()), GOOGLE_DRIVE_SCOPE);
-            // Do work with token.
+            final String token = GoogleAuthUtil.getToken(getApplicationContext(), GDocsHelper.GetAccountName(getApplicationContext()), GDocsHelper.GetOauth2Scope());
 
-//            if (server indicates token is invalid) {
-//                // invalidate the token that we found is bad so that GoogleAuthUtil won't
-//                // return it next time (it may have cached it)
-//                GoogleAuthUtil.invalidateToken(Context, String)(context, token);
-//                // consider retrying getAndUseTokenBlocking() once more
-//                return;
-//            }
             return token;
         }
         catch (GooglePlayServicesAvailabilityException playEx)
@@ -270,7 +269,6 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
     }
 
 
-    // Example of how to use AsyncTask to call blocking code on a background thread.
     void getAndUseAuthTokenInAsyncTask()
     {
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>()
@@ -288,7 +286,7 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
                 if(authToken != null)
                 {
                     GDocsHelper.SaveAuthToken(getApplicationContext(),authToken);
-                    Toast.makeText(getApplicationContext(), authToken, Toast.LENGTH_SHORT).show();
+                    Utilities.LogDebug(authToken);
                     VerifyGooglePlayServices();
                 }
 
@@ -302,6 +300,43 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
     {
 
         Utilities.ShowProgress(GDocsSettingsActivity.this, getString(R.string.please_wait), getString(R.string.please_wait));
+        File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+        if (!gpxFolder.exists())
+        {
+            gpxFolder.mkdirs();
+        }
+
+        File testFile = new File(gpxFolder.getPath(), "gpslogger_test.txt");
+
+        try
+        {
+            if(!testFile.exists())
+            {
+                testFile.createNewFile();
+
+                FileOutputStream initialWriter = new FileOutputStream(testFile, true);
+                BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
+
+                StringBuilder initialString = new StringBuilder();
+                initialString.append("This is a test file");
+                initialOutput.write(initialString.toString().getBytes());
+                initialOutput.flush();
+                initialOutput.close();
+            }
+
+        }
+        catch(Exception ex)
+        {
+            OnFailure();
+        }
+
+
+        GDocsHelper helper = new GDocsHelper(getApplicationContext(), this);
+
+        ArrayList<File> files = new ArrayList<File>();
+        files.add(testFile);
+
+        helper.UploadFile(files);
 
     }
 
