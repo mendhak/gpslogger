@@ -130,10 +130,7 @@ public class FileSenderFactory
     {
         List<IFileSender> senders = new ArrayList<IFileSender>();
 
-        if (GDocsHelper.IsLinked(applicationContext))
-        {
-            senders.add(new GDocsHelper(applicationContext, callback));
-        }
+
 
         if (OSMHelper.IsOsmAuthorized(applicationContext))
         {

@@ -25,12 +25,18 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.auth.GooglePlayServicesAvailabilityException;
+import com.google.android.gms.auth.UserRecoverableAuthException;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
@@ -41,8 +47,7 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
         implements Preference.OnPreferenceClickListener, IActionListener
 {
     private final Handler handler = new Handler();
-    AccountManager accountManager;
-    private boolean freshAuthentication = false;
+
 
 
     public void onCreate(Bundle savedInstanceState)
@@ -57,10 +62,23 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
         Preference resetPref = findPreference("gdocs_resetauth");
         Preference testPref = findPreference("gdocs_test");
 
-        ResetPreferenceAppearance(resetPref, testPref);
 
-        testPref.setOnPreferenceClickListener(this);
-        resetPref.setOnPreferenceClickListener(this);
+        int availability = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
+
+        if(availability != ConnectionResult.SUCCESS)
+        {
+            resetPref.setEnabled(false);
+            testPref.setEnabled(false);
+            Utilities.MsgBox(getString(R.string.gpsf_missing), getString(R.string.gpsf_missing_description), this );
+            GooglePlayServicesUtil.getErrorDialog(availability, this, 1);
+        }
+        else
+        {
+            ResetPreferenceAppearance(resetPref, testPref);
+
+            testPref.setOnPreferenceClickListener(this);
+            resetPref.setOnPreferenceClickListener(this);
+        }
 
     }
 
@@ -122,6 +140,7 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
             if (GDocsHelper.IsLinked(getApplicationContext()))
             {
                 //Clear authorization
+                GoogleAuthUtil.invalidateToken(getApplicationContext(), GDocsHelper.GetAuthToken(getApplicationContext()));
                 GDocsHelper.ClearAuthToken(getApplicationContext());
                 startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
                 finish();
@@ -129,7 +148,6 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
             else
             {
                 //Re-authorize
-                freshAuthentication = true;
                 Authorize();
 
             }
@@ -140,12 +158,6 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
 
     private void Authorize()
     {
-        accountManager = GDocsHelper.GetAccountManager(getApplicationContext());
-
-        if (GDocsHelper.GetAccounts(accountManager).length > 0)
-        {
-            showDialog(0);  //Invokes onCreateDialog
-        }
 
     }
 
@@ -153,83 +165,22 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
     @Override
     protected Dialog onCreateDialog(int id)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.gdocs_selectgoogleaccount);
-        final Account[] accounts = GDocsHelper.GetAccounts(accountManager);
-        final int size = accounts.length;
-
-        if (size == 0)
-        {
-            return builder.create();
-        }
-        else if (size == 1)
-        {
-            //Skip the dialog, just use this account
-            AuthorizeSelectedAccount(accounts[0]);
-        }
-        else
-        {
-            String[] names = new String[size];
-            for (int i = 0; i < size; i++)
-            {
-                names[i] = accounts[i].name;
-            }
-            builder.setItems(names, new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface dialog, int which)
-                {
-                    AuthorizeSelectedAccount(accounts[which]);
-                }
-            });
-            return builder.create();
-        }
-
-        return null;
+      return null;
     }
 
 
-    private void AuthorizeSelectedAccount(Account account)
-    {
-        if (account == null)
-        {
-            return;
-        }
 
-        OnTokenAcquired ota = new OnTokenAcquired();
-        GDocsHelper.GetAuthTokenFromAccountManager(accountManager, account, ota, this);
-    }
 
-    private class OnTokenAcquired implements AccountManagerCallback<Bundle>
-    {
-        @Override
-        public void run(AccountManagerFuture<Bundle> bundleAccountManagerFuture)
-        {
-            try
-            {
-                GDocsHelper.SaveAuthToken(getApplicationContext(), bundleAccountManagerFuture);
 
-                // If reauthorizing, close activity when done
-                if (freshAuthentication)
-                {
-                    freshAuthentication = false;
-                    finish();
-                }
-            }
-            catch (Exception e)
-            {
-                Utilities.LogError("OnTokenAcquired.run", e);
-            }
 
-        }
-    }
+
 
 
     private void UploadTestFileToGoogleDocs()
     {
 
         Utilities.ShowProgress(GDocsSettingsActivity.this, getString(R.string.please_wait), getString(R.string.please_wait));
-        GDocsHelper helper = new GDocsHelper(getApplicationContext(), this);
-        helper.UploadTestFile();
+
     }
 
     @Override
