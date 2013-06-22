@@ -17,24 +17,17 @@
 
 package com.mendhak.gpslogger.senders.gdocs;
 
-import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AccountManagerCallback;
-import android.accounts.AccountManagerFuture;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.android.gms.auth.GoogleAuthUtil;
-import com.google.android.gms.auth.GooglePlayServicesAvailabilityException;
-import com.google.android.gms.auth.UserRecoverableAuthException;
+import com.google.android.gms.common.AccountPicker;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.mendhak.gpslogger.GpsMainActivity;
@@ -47,7 +40,10 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
         implements Preference.OnPreferenceClickListener, IActionListener
 {
     private final Handler handler = new Handler();
+    boolean messageShown = false;
 
+    static final int REQUEST_CODE_MISSING_GPSF = 1;
+    static final int REQUEST_CODE_ACCOUNT_PICKER = 2;
 
 
     public void onCreate(Bundle savedInstanceState)
@@ -59,18 +55,37 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
 
         addPreferencesFromResource(R.xml.gdocssettings);
 
+        VerifyGooglePlayServices();
+
+
+    }
+
+    private void VerifyGooglePlayServices()
+    {
         Preference resetPref = findPreference("gdocs_resetauth");
         Preference testPref = findPreference("gdocs_test");
 
-
         int availability = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
 
-        if(availability != ConnectionResult.SUCCESS)
+        if (availability != ConnectionResult.SUCCESS)
         {
             resetPref.setEnabled(false);
             testPref.setEnabled(false);
-            Utilities.MsgBox(getString(R.string.gpsf_missing), getString(R.string.gpsf_missing_description), this );
-            GooglePlayServicesUtil.getErrorDialog(availability, this, 1);
+
+            if (!messageShown)
+            {
+                Dialog d = GooglePlayServicesUtil.getErrorDialog(availability, this, REQUEST_CODE_MISSING_GPSF);
+                if (d != null)
+                {
+                    d.show();
+                }
+                else
+                {
+                    Utilities.MsgBox(getString(R.string.gpsf_missing), getString(R.string.gpsf_missing_description), this);
+                }
+                messageShown = true;
+            }
+
         }
         else
         {
@@ -107,9 +122,7 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
     public void onResume()
     {
         super.onResume();
-        Preference resetPref = findPreference("gdocs_resetauth");
-        Preference testPref = findPreference("gdocs_test");
-        ResetPreferenceAppearance(resetPref, testPref);
+        VerifyGooglePlayServices();
 
     }
 
@@ -158,22 +171,33 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
 
     private void Authorize()
     {
+        Intent intent = AccountPicker.newChooseAccountIntent(null, null, new String[]{GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE},
+                false, null, null, null, null);
 
+        startActivityForResult(intent, REQUEST_CODE_ACCOUNT_PICKER);
     }
 
 
     @Override
-    protected Dialog onCreateDialog(int id)
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-      return null;
+        switch (requestCode)
+        {
+
+            case REQUEST_CODE_ACCOUNT_PICKER:
+                if (resultCode == RESULT_OK)
+                {
+                    String accountName = data.getStringExtra(
+                            AccountManager.KEY_ACCOUNT_NAME);
+
+                    Toast.makeText(this, accountName, Toast.LENGTH_LONG).show();
+
+                }
+
+                return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
-
-
-
-
-
-
-
 
 
     private void UploadTestFileToGoogleDocs()
