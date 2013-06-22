@@ -20,13 +20,17 @@ package com.mendhak.gpslogger.senders.gdocs;
 import android.accounts.AccountManager;
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.Preference;
 import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.auth.GooglePlayServicesAvailabilityException;
+import com.google.android.gms.auth.UserRecoverableAuthException;
 import com.google.android.gms.common.AccountPicker;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -35,15 +39,20 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 
+import java.io.IOException;
+
 
 public class GDocsSettingsActivity extends SherlockPreferenceActivity
         implements Preference.OnPreferenceClickListener, IActionListener
 {
     private final Handler handler = new Handler();
     boolean messageShown = false;
+    String accountName;
 
+    static final String GOOGLE_DRIVE_SCOPE = "oauth2:https://www.googleapis.com/auth/drive.file";
     static final int REQUEST_CODE_MISSING_GPSF = 1;
     static final int REQUEST_CODE_ACCOUNT_PICKER = 2;
+    static final int REQUEST_CODE_RECOVERED=3;
 
 
     public void onCreate(Bundle savedInstanceState)
@@ -190,13 +199,98 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
                     String accountName = data.getStringExtra(
                             AccountManager.KEY_ACCOUNT_NAME);
 
+                    GDocsHelper.SetAccountName(getApplicationContext(),accountName);
                     Toast.makeText(this, accountName, Toast.LENGTH_LONG).show();
-
+                    getAndUseAuthTokenInAsyncTask();
                 }
-
-                return;
+                break;
+            case REQUEST_CODE_RECOVERED:
+                if(resultCode == RESULT_OK)
+                {
+                    getAndUseAuthTokenInAsyncTask();
+                }
+                break;
         }
+
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    // Example of how to use the GoogleAuthUtil in a blocking, non-main thread context
+    String getAndUseAuthTokenBlocking()
+    {
+        try
+        {
+            // Retrieve a token for the given account and scope. It will always return either
+            // a non-empty String or throw an exception.
+            final String token = GoogleAuthUtil.getToken(getApplicationContext(), GDocsHelper.GetAccountName(getApplicationContext()), GOOGLE_DRIVE_SCOPE);
+            // Do work with token.
+
+//            if (server indicates token is invalid) {
+//                // invalidate the token that we found is bad so that GoogleAuthUtil won't
+//                // return it next time (it may have cached it)
+//                GoogleAuthUtil.invalidateToken(Context, String)(context, token);
+//                // consider retrying getAndUseTokenBlocking() once more
+//                return;
+//            }
+            return token;
+        }
+        catch (GooglePlayServicesAvailabilityException playEx)
+        {
+            Dialog alert = GooglePlayServicesUtil.getErrorDialog(
+                    playEx.getConnectionStatusCode(),
+                    this,
+                    REQUEST_CODE_RECOVERED);
+            alert.show();
+
+        }
+        catch (UserRecoverableAuthException userAuthEx)
+        {
+            // Start the user recoverable action using the intent returned by
+            // getIntent()
+            startActivityForResult(
+                    userAuthEx.getIntent(),
+                    REQUEST_CODE_RECOVERED);
+
+        }
+        catch (IOException transientEx)
+        {
+            // network or server error, the call is expected to succeed if you try again later.
+            // Don't attempt to call again immediately - the request is likely to
+            // fail, you'll hit quotas or back-off.
+
+
+        }
+        catch (GoogleAuthException authEx)
+        {
+            // Failure. The call is not expected to ever succeed so it should not be
+            // retried.
+
+        }
+        return null;
+    }
+
+
+    // Example of how to use AsyncTask to call blocking code on a background thread.
+    void getAndUseAuthTokenInAsyncTask()
+    {
+        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>()
+        {
+            @Override
+            protected String doInBackground(Void... params)
+            {
+               return getAndUseAuthTokenBlocking();
+
+            }
+
+            @Override
+            protected void onPostExecute(String authToken)
+            {
+                GDocsHelper.SaveAuthToken(getApplicationContext(),authToken);
+                Toast.makeText(getApplicationContext(), authToken, Toast.LENGTH_SHORT).show();
+                VerifyGooglePlayServices();
+            }
+        };
+        task.execute();
     }
 
 

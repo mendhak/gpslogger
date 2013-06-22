@@ -49,6 +49,16 @@ public class GDocsHelper implements IActionListener, IFileSender
     private static final int USER_RECOVERABLE_AUTH = 5;
     private static final int ACCOUNT_PICKER = 2;
 
+    /*
+    To revoke permissions:
+    (new Android)
+    ./adb -e shell 'sqlite3 /data/system/users/0/accounts.db "delete from grants;"'
+    or
+    (old Android)
+   ./adb -e shell 'sqlite3 /data/system/accounts.db "delete from grants;"'
+
+
+     */
 
     public GDocsHelper(Context applicationContext, IActionListener callback)
     {
@@ -83,10 +93,19 @@ public class GDocsHelper implements IActionListener, IFileSender
         return prefs.getString("GDOCS_ACCOUNT_NAME", "");
     }
 
+    public static void SetAccountName(Context applicationContext, String accountName)
+    {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.putString("GDOCS_ACCOUNT_NAME", accountName);
+        editor.commit();
+    }
+
     /**
      * Saves the authToken and account name into shared preferences
      */
-    public static void SaveAuthToken(Context applicationContext, String authToken, String accountName)
+    public static void SaveAuthToken(Context applicationContext, String authToken)
     {
         try
         {
@@ -97,7 +116,6 @@ public class GDocsHelper implements IActionListener, IFileSender
 
             Utilities.LogDebug("Saving GDocs authToken: " + authToken);
             editor.putString("GDOCS_AUTH_TOKEN", authToken);
-            editor.putString("GDOCS_ACCOUNT_NAME", accountName);
             editor.commit();
         }
         catch (Exception e)
