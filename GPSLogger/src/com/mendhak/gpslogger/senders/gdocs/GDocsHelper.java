@@ -69,7 +69,7 @@ public class GDocsHelper implements IActionListener, IFileSender
     public static String GetAuthToken(Context applicationContext)
     {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        return prefs.getString("GDOCS_AUTH_TOKEN", "");
+        return prefs.getString("GDRIVE_AUTH_TOKEN", "");
     }
 
     /**
@@ -78,7 +78,7 @@ public class GDocsHelper implements IActionListener, IFileSender
     public static String GetAccountName(Context applicationContext)
     {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        return prefs.getString("GDOCS_ACCOUNT_NAME", "");
+        return prefs.getString("GDRIVE_ACCOUNT_NAME", "");
     }
 
     public static void SetAccountName(Context applicationContext, String accountName)
@@ -86,7 +86,7 @@ public class GDocsHelper implements IActionListener, IFileSender
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
         SharedPreferences.Editor editor = prefs.edit();
 
-        editor.putString("GDOCS_ACCOUNT_NAME", accountName);
+        editor.putString("GDRIVE_ACCOUNT_NAME", accountName);
         editor.commit();
     }
 
@@ -101,7 +101,7 @@ public class GDocsHelper implements IActionListener, IFileSender
             SharedPreferences.Editor editor = prefs.edit();
 
             Utilities.LogDebug("Saving GDocs authToken: " + authToken);
-            editor.putString("GDOCS_AUTH_TOKEN", authToken);
+            editor.putString("GDRIVE_AUTH_TOKEN", authToken);
             editor.commit();
         }
         catch (Exception e)
@@ -120,8 +120,8 @@ public class GDocsHelper implements IActionListener, IFileSender
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
         SharedPreferences.Editor editor = prefs.edit();
 
-        editor.remove("GDOCS_AUTH_TOKEN");
-        editor.remove("GDOCS_ACCOUNT_NAME");
+        editor.remove("GDRIVE_AUTH_TOKEN");
+        editor.remove("GDRIVE_ACCOUNT_NAME");
         editor.commit();
     }
 
@@ -135,8 +135,8 @@ public class GDocsHelper implements IActionListener, IFileSender
     public static boolean IsLinked(Context applicationContext)
     {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        String gdocsAuthToken = prefs.getString("GDOCS_AUTH_TOKEN", "");
-        String gdocsAccount = prefs.getString("GDOCS_ACCOUNT_NAME", "");
+        String gdocsAuthToken = prefs.getString("GDRIVE_AUTH_TOKEN", "");
+        String gdocsAccount = prefs.getString("GDRIVE_ACCOUNT_NAME", "");
         return gdocsAuthToken.length() > 0 && gdocsAccount.length() > 0;
     }
 
