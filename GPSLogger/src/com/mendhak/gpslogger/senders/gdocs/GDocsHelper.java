@@ -141,42 +141,6 @@ public class GDocsHelper implements IActionListener, IFileSender
     }
 
 
-//    void RefreshToken()
-//    {
-//        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>()
-//        {
-//            @Override
-//            protected String doInBackground(Void... params)
-//            {
-//                try
-//                {
-//                    // Retrieve a token for the given account and scope. It will always return either
-//                    // a non-empty String or throw an exception.
-//
-//                    return token;
-//                }
-//                catch (Exception e)
-//                {
-//                    Utilities.LogError("RefreshToken", e);
-//                }
-//                return null;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(String authToken)
-//            {
-//                if(authToken != null)
-//                {
-//                    SaveAuthToken(ctx, authToken);
-//                    Utilities.LogDebug(authToken);
-//                }
-//
-//            }
-//        };
-//        task.execute();
-//    }
-
-
     @Override
     public void UploadFile(List<File> files)
     {
@@ -257,6 +221,7 @@ public class GDocsHelper implements IActionListener, IFileSender
             {
 
                 String token = GoogleAuthUtil.getTokenWithNotification(ctx, GetAccountName(ctx), GetOauth2Scope(), new Bundle());
+                GDocsHelper.SaveAuthToken(ctx, token);
                 Utilities.LogDebug(token);
 
                 String gpsLoggerFolderId = GetFileIdFromFileName(token, "GPSLogger For Android");
@@ -265,7 +230,14 @@ public class GDocsHelper implements IActionListener, IFileSender
                 {
                     //Couldn't find folder, must create it
                     gpsLoggerFolderId = CreateEmptyFile(token, "GPSLogger For Android", "application/vnd.google-apps.folder", "root");
+
+                    if(Utilities.IsNullOrEmpty(gpsLoggerFolderId))
+                    {
+                        callback.OnFailure();
+                        return;
+                    }
                 }
+
 
                 //Now search for the file
                 String gpxFileId = GetFileIdFromFileName(token,fileName);
@@ -274,6 +246,12 @@ public class GDocsHelper implements IActionListener, IFileSender
                 {
                     //Create empty file first
                     gpxFileId = CreateEmptyFile(token, fileName, "application/xml", gpsLoggerFolderId);
+
+                    if(Utilities.IsNullOrEmpty(gpxFileId))
+                    {
+                        callback.OnFailure();
+                        return;
+                    }
                 }
 
                 if(!Utilities.IsNullOrEmpty(gpxFileId))
