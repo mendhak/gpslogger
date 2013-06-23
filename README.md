@@ -99,7 +99,7 @@ Go to the [Google APIs Console](https://code.google.com/apis/console/) and creat
 After registering a project, click on API Access and click the 'Create another Client ID' button
 
 Choose "Installed Application" and then under Installed Application Type, choose "Android".  Follow the instructions under
-[Learn More](http://code.google.com/apis/accounts/docs/OAuth2.html#scenarios) to specify the package name and
+[Learn More](https://developers.google.com/console/help/#installed_applications) to specify the package name and
 the SHA1 fingerprint of your debug certificate.
 
 ![GAPI Console](http://farm3.staticflickr.com/2866/9113223789_222f62a51a_c.jpg)
