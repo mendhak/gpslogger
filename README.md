@@ -98,8 +98,18 @@ Go to the [Google APIs Console](https://code.google.com/apis/console/) and creat
 
 After registering a project, click on API Access and click the 'Create another Client ID' button
 
-Grab the Client ID and Client Secret and add them to the test.xml file
+Choose "Installed Application" and then under Installed Application Type, choose "Android".  Follow the instructions under
+[Learn More](https://developers.google.com/console/help/#installed_applications) to specify the package name and
+the SHA1 fingerprint of your debug certificate.
 
-    <string name="gdocs_clientid">123412341234</string>
-    <string name="gdocs_clientsecret">123412341234</string>
+![GAPI Console](http://farm3.staticflickr.com/2866/9113223789_222f62a51a_c.jpg)
+
+The Google Docs feature requires the [Google Play Services Framework](http://developer.android.com/google/play-services/index.html),
+so ensure that the emulator you are using is Android 4.2.2 (API level 17) or greater if you want to use this feature.
+
+![AVD](http://farm6.staticflickr.com/5322/9113255381_9fba026576_o.png)
+
+You can also debug directly against your phone - all phones Android 2.2 and above should have this framework installed.
+
+
 

@@ -17,32 +17,49 @@
 
 package com.mendhak.gpslogger.senders.gdocs;
 
-import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AccountManagerCallback;
-import android.accounts.AccountManagerFuture;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
+
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.android.gms.auth.GoogleAuthException;
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.auth.GooglePlayServicesAvailabilityException;
+import com.google.android.gms.auth.UserRecoverableAuthException;
+import com.google.android.gms.common.AccountPicker;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
+import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GDocsSettingsActivity extends SherlockPreferenceActivity
         implements Preference.OnPreferenceClickListener, IActionListener
 {
     private final Handler handler = new Handler();
-    AccountManager accountManager;
-    private boolean freshAuthentication = false;
+    boolean messageShown = false;
+    String accountName;
+
+
+    static final int REQUEST_CODE_MISSING_GPSF = 1;
+    static final int REQUEST_CODE_ACCOUNT_PICKER = 2;
+    static final int REQUEST_CODE_RECOVERED=3;
 
 
     public void onCreate(Bundle savedInstanceState)
@@ -54,13 +71,45 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
 
         addPreferencesFromResource(R.xml.gdocssettings);
 
+        VerifyGooglePlayServices();
+
+
+    }
+
+    private void VerifyGooglePlayServices()
+    {
         Preference resetPref = findPreference("gdocs_resetauth");
         Preference testPref = findPreference("gdocs_test");
 
-        ResetPreferenceAppearance(resetPref, testPref);
+        int availability = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
 
-        testPref.setOnPreferenceClickListener(this);
-        resetPref.setOnPreferenceClickListener(this);
+        if (availability != ConnectionResult.SUCCESS)
+        {
+            resetPref.setEnabled(false);
+            testPref.setEnabled(false);
+
+            if (!messageShown)
+            {
+                Dialog d = GooglePlayServicesUtil.getErrorDialog(availability, this, REQUEST_CODE_MISSING_GPSF);
+                if (d != null)
+                {
+                    d.show();
+                }
+                else
+                {
+                    Utilities.MsgBox(getString(R.string.gpsf_missing), getString(R.string.gpsf_missing_description), this);
+                }
+                messageShown = true;
+            }
+
+        }
+        else
+        {
+            ResetPreferenceAppearance(resetPref, testPref);
+
+            testPref.setOnPreferenceClickListener(this);
+            resetPref.setOnPreferenceClickListener(this);
+        }
 
     }
 
@@ -89,9 +138,7 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
     public void onResume()
     {
         super.onResume();
-        Preference resetPref = findPreference("gdocs_resetauth");
-        Preference testPref = findPreference("gdocs_test");
-        ResetPreferenceAppearance(resetPref, testPref);
+        VerifyGooglePlayServices();
 
     }
 
@@ -122,6 +169,7 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
             if (GDocsHelper.IsLinked(getApplicationContext()))
             {
                 //Clear authorization
+                GoogleAuthUtil.invalidateToken(getApplicationContext(), GDocsHelper.GetAuthToken(getApplicationContext()));
                 GDocsHelper.ClearAuthToken(getApplicationContext());
                 startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
                 finish();
@@ -129,7 +177,6 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
             else
             {
                 //Re-authorize
-                freshAuthentication = true;
                 Authorize();
 
             }
@@ -140,87 +187,112 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
 
     private void Authorize()
     {
-        accountManager = GDocsHelper.GetAccountManager(getApplicationContext());
+        Intent intent = AccountPicker.newChooseAccountIntent(null, null, new String[]{GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE},
+                false, null, null, null, null);
 
-        if (GDocsHelper.GetAccounts(accountManager).length > 0)
-        {
-            showDialog(0);  //Invokes onCreateDialog
-        }
-
+        startActivityForResult(intent, REQUEST_CODE_ACCOUNT_PICKER);
     }
 
 
     @Override
-    protected Dialog onCreateDialog(int id)
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.gdocs_selectgoogleaccount);
-        final Account[] accounts = GDocsHelper.GetAccounts(accountManager);
-        final int size = accounts.length;
+        switch (requestCode)
+        {
 
-        if (size == 0)
-        {
-            return builder.create();
-        }
-        else if (size == 1)
-        {
-            //Skip the dialog, just use this account
-            AuthorizeSelectedAccount(accounts[0]);
-        }
-        else
-        {
-            String[] names = new String[size];
-            for (int i = 0; i < size; i++)
-            {
-                names[i] = accounts[i].name;
-            }
-            builder.setItems(names, new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface dialog, int which)
+            case REQUEST_CODE_ACCOUNT_PICKER:
+                if (resultCode == RESULT_OK)
                 {
-                    AuthorizeSelectedAccount(accounts[which]);
+                    String accountName = data.getStringExtra(
+                            AccountManager.KEY_ACCOUNT_NAME);
+
+                    GDocsHelper.SetAccountName(getApplicationContext(),accountName);
+                    Utilities.LogDebug(accountName);
+                    getAndUseAuthTokenInAsyncTask();
                 }
-            });
-            return builder.create();
+                break;
+            case REQUEST_CODE_RECOVERED:
+                if(resultCode == RESULT_OK)
+                {
+                    getAndUseAuthTokenInAsyncTask();
+                }
+                break;
         }
 
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    // Example of how to use the GoogleAuthUtil in a blocking, non-main thread context
+    String getAndUseAuthTokenBlocking()
+    {
+        try
+        {
+            // Retrieve a token for the given account and scope. It will always return either
+            // a non-empty String or throw an exception.
+            final String token = GoogleAuthUtil.getToken(getApplicationContext(), GDocsHelper.GetAccountName(getApplicationContext()), GDocsHelper.GetOauth2Scope());
+
+            return token;
+        }
+        catch (GooglePlayServicesAvailabilityException playEx)
+        {
+            Dialog alert = GooglePlayServicesUtil.getErrorDialog(
+                    playEx.getConnectionStatusCode(),
+                    this,
+                    REQUEST_CODE_RECOVERED);
+            alert.show();
+
+        }
+        catch (UserRecoverableAuthException userAuthEx)
+        {
+            // Start the user recoverable action using the intent returned by
+            // getIntent()
+            startActivityForResult(
+                    userAuthEx.getIntent(),
+                    REQUEST_CODE_RECOVERED);
+
+        }
+        catch (IOException transientEx)
+        {
+            // network or server error, the call is expected to succeed if you try again later.
+            // Don't attempt to call again immediately - the request is likely to
+            // fail, you'll hit quotas or back-off.
+
+
+        }
+        catch (GoogleAuthException authEx)
+        {
+            // Failure. The call is not expected to ever succeed so it should not be
+            // retried.
+
+        }
         return null;
     }
 
 
-    private void AuthorizeSelectedAccount(Account account)
+    void getAndUseAuthTokenInAsyncTask()
     {
-        if (account == null)
+        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>()
         {
-            return;
-        }
-
-        OnTokenAcquired ota = new OnTokenAcquired();
-        GDocsHelper.GetAuthTokenFromAccountManager(accountManager, account, ota, this);
-    }
-
-    private class OnTokenAcquired implements AccountManagerCallback<Bundle>
-    {
-        @Override
-        public void run(AccountManagerFuture<Bundle> bundleAccountManagerFuture)
-        {
-            try
+            @Override
+            protected String doInBackground(Void... params)
             {
-                GDocsHelper.SaveAuthToken(getApplicationContext(), bundleAccountManagerFuture);
+               return getAndUseAuthTokenBlocking();
 
-                // If reauthorizing, close activity when done
-                if (freshAuthentication)
+            }
+
+            @Override
+            protected void onPostExecute(String authToken)
+            {
+                if(authToken != null)
                 {
-                    freshAuthentication = false;
-                    finish();
+                    GDocsHelper.SaveAuthToken(getApplicationContext(),authToken);
+                    Utilities.LogDebug(authToken);
+                    VerifyGooglePlayServices();
                 }
-            }
-            catch (Exception e)
-            {
-                Utilities.LogError("OnTokenAcquired.run", e);
-            }
 
-        }
+            }
+        };
+        task.execute();
     }
 
 
@@ -228,8 +300,44 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
     {
 
         Utilities.ShowProgress(GDocsSettingsActivity.this, getString(R.string.please_wait), getString(R.string.please_wait));
+        File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+        if (!gpxFolder.exists())
+        {
+            gpxFolder.mkdirs();
+        }
+
+        File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
+
+        try
+        {
+            if(!testFile.exists())
+            {
+                testFile.createNewFile();
+
+                FileOutputStream initialWriter = new FileOutputStream(testFile, true);
+                BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
+
+                StringBuilder initialString = new StringBuilder();
+                initialString.append("<x>This is a test file</x>");
+                initialOutput.write(initialString.toString().getBytes());
+                initialOutput.flush();
+                initialOutput.close();
+            }
+
+        }
+        catch(Exception ex)
+        {
+            OnFailure();
+        }
+
+
         GDocsHelper helper = new GDocsHelper(getApplicationContext(), this);
-        helper.UploadTestFile();
+
+        ArrayList<File> files = new ArrayList<File>();
+        files.add(testFile);
+
+        helper.UploadFile(files);
+
     }
 
     @Override
