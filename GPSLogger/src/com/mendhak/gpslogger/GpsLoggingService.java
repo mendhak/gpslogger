@@ -30,6 +30,7 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.os.Handler;
 import android.widget.Toast;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
@@ -45,6 +46,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.lang.Runnable;
 
 public class GpsLoggingService extends Service implements IActionListener
 {
@@ -160,10 +162,13 @@ public class GpsLoggingService extends Service implements IActionListener
                     AutoSendLogFile();
                 }
 
-                if (getNextPoint && Session.isStarted())
+                if (getNextPoint)
                 {
+                    Session.setArmedForNextPoint(false);
+                    if (Session.isStarted()) {
                     Utilities.LogDebug("HandleIntent - getNextPoint");
                     StartGpsManager();
+                    }
                 }
 
             }
@@ -525,7 +530,18 @@ public class GpsLoggingService extends Service implements IActionListener
                     gpsLocationListener);
 
             gpsLocationManager.addGpsStatusListener(gpsLocationListener);
-
+            if (AppSettings.getTimeoutSeconds() > 0 )
+            {
+                Handler th = new Handler();
+                th.postDelayed(new Runnable() {
+                    public void run() {
+                        if (!Session.isArmedForNextPoint()) {
+                            Utilities.LogInfo("Timeout called");
+                            StopManagerAndResetAlarm();
+                        }
+                    }
+                }, AppSettings.getTimeoutSeconds()*1000);
+            }
             Session.setUsingGps(true);
         }
         else if (Session.isTowerEnabled())
@@ -714,7 +730,7 @@ public class GpsLoggingService extends Service implements IActionListener
         }
 
         // Don't do anything until the user-defined time has elapsed
-        if ((currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 1000))
+        if ((loc.getTime() - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 1000))
         {
             return;
         }
@@ -760,7 +776,8 @@ public class GpsLoggingService extends Service implements IActionListener
 
         Utilities.LogInfo("New location obtained");
         ResetCurrentFileName(false);
-        Session.setLatestTimeStamp(System.currentTimeMillis());
+        //LatestTimeStamp is the last Fix time.
+        Session.setLatestTimeStamp(loc.getTime());
         Session.setCurrentLocationInfo(loc);
         SetDistanceTraveled(loc);
         Notify();
@@ -837,6 +854,8 @@ public class GpsLoggingService extends Service implements IActionListener
         nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime() + AppSettings.getMinimumSeconds() * 1000, pi);
 
+        Session.setArmedForNextPoint(true);
+
     }
 
     private void SetAlarmForNextPoint(int retryInterval)
@@ -853,6 +872,8 @@ public class GpsLoggingService extends Service implements IActionListener
 
         nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime() + retryInterval * 1000, pi);
+
+        Session.setArmedForNextPoint(true);
 
     }
 

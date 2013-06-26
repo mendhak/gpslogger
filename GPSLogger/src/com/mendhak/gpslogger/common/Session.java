@@ -46,6 +46,7 @@ public class Session extends Application
     private static boolean allowDescription = true;
     private static boolean isSinglePointMode = false;
     private static int retryTimeout=0;
+    private static boolean armedForNextPoint;
 
     public static boolean isSinglePointMode()
     {
@@ -384,4 +385,12 @@ public class Session extends Application
         Session.allowDescription = allowDescription;
     }
 
+    public static boolean isArmedForNextPoint()
+    {
+        return armedForNextPoint;
+    }
+    public static void setArmedForNextPoint(boolean armedForNextPoint)
+    {
+        Session.armedForNextPoint = armedForNextPoint;
+    }
 }

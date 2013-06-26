@@ -70,6 +70,7 @@ public class AppSettings extends Application
 
     private static String staticFileName;
     private static boolean isStaticFile;
+    private static int timeoutSeconds;
 
 
     /**
@@ -628,5 +629,12 @@ public class AppSettings extends Application
     public static void setStaticFile(boolean staticFile)
     {
         AppSettings.isStaticFile = staticFile;
+    }
+
+    public static int getTimeoutSeconds() {
+        return timeoutSeconds;
+    }
+    public static void setTimeoutSeconds(int timeoutSeconds) {
+        AppSettings.timeoutSeconds = timeoutSeconds;
     }
 }

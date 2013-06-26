@@ -10,7 +10,7 @@
 
     <CheckBoxPreference android:key="log_opengts"
                         android:summary="@string/log_opengts_summary" android:title="@string/log_opengts_title"/>
-                        
+
     <CheckBoxPreference android:key="log_plain_text"
                         android:summary="@string/log_plain_text_summary" android:title="@string/log_plain_text_title"/>
 
@@ -69,6 +69,12 @@
                                 android:dialogTitle="@string/retry_time_dialog_title"
                                 android:numeric="integer" android:maxLength="4"
                                 android:hint="@string/retry_time_hint"/>
+            <EditTextPreference android:key="timeout_time"
+                                android:title="@string/timeout_time_title"
+                                android:summary="@string/timeout_time_summary"
+                                android:dialogTitle="@string/timeout_time_dialog_title"
+                                android:numeric="integer" android:maxLength="4"
+                                android:hint="@string/timeout_time_hint"/>
 
 
 

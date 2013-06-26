@@ -198,7 +198,7 @@ public class Utilities
         {
              AppSettings.setRetryInterval(60);
         }
-
+        AppSettings.setTimeoutSeconds(Integer.valueOf(prefs.getString("timeout_time","0")));
         AppSettings.setNewFileCreation(prefs.getString("new_file_creation",
                 "onceaday"));
 
