@@ -121,7 +121,7 @@ public class Utilities
 
         AppSettings.setLogToKml(prefs.getBoolean("log_kml", false));
 
-        AppSettings.setLogToGpx(prefs.getBoolean("log_gpx", false));
+        AppSettings.setLogToGpx(prefs.getBoolean("log_gpx", true));
 
         AppSettings.setLogToPlainText(prefs.getBoolean("log_plain_text", false));
 
