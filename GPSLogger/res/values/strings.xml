@@ -174,7 +174,7 @@
         points.
     </string>
     <string name="accuracy_before_logging_title">Minimum accuracy per point</string>
-    <string name="accuracy_before_logging_summary">How accurate the current GPS point\'s value should be before it is logged. Use 0 to log all points.</string>
+    <string name="accuracy_before_logging_summary">How accurate the current GPS fix should be before it is logged. Use 0 to log all points.</string>
     <string name="timeout_time_title">Timeout</string>
     <string name="timeout_time_summary">How long the GPS stays on looking for a fix before giving up. Use 0 for no timeout</string>
     <string name="timeout_time_dialog_title">Time in seconds</string>
