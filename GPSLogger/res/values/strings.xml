@@ -157,7 +157,7 @@
         battery.
     </string>
     <string name="time_before_logging_title">Time before logging</string>
-    <string name="time_before_logging_summary">How long to wait between logging GPS points. Use 0 for maximum frequency, but slower is better for battery life.
+    <string name="time_before_logging_summary">Use 0 for maximum frequency, but slower is better for battery life.
     </string>
     <string name="time_before_logging_dialog_title">Time in seconds</string>
     <string name="time_before_logging_hint">Enter seconds (max 9999)</string>
@@ -165,16 +165,19 @@
         higher precision with low frequencies.
     </string>
     <string name="keep_fix_title">Keep GPS on between fixes</string>
-    <string name="retry_time_title">Retry interval on failure</string>
-    <string name="retry_time_summary">If no fix is found matching your criteria, wait this long and try again. Use 0 to keep trying indefinitely.</string>
+    <string name="retry_time_title">Time interval for accuracy</string>
+    <string name="retry_time_summary">Use 0 for maximum frequency, but slower is better for battery life.
+    </string>
     <string name="retry_time_dialog_title">Time in seconds</string>
     <string name="retry_time_hint">Enter seconds (max 9999)</string>
-    <string name="distance_before_logging_title">Distance between points</string>
-    <string name="distance_before_logging_summary">What the distance to the previous point should be before this point is logged. Use 0 to log all
+    <string name="distance_before_logging_title">Distance before logging</string>
+    <string name="distance_before_logging_summary">How far to travel before logging the next point. Use 0 to log all
         points.
     </string>
-    <string name="accuracy_before_logging_title">Minimum accuracy per point</string>
-    <string name="accuracy_before_logging_summary">How accurate the current GPS fix should be before it is logged. Use 0 to log all points.</string>
+    <string name="accuracy_before_logging_title">Accuracy before logging</string>
+    <string name="accuracy_before_logging_summary">Which min. accuracy to for logging. Use 0 to log all
+        points.
+    </string>
     <string name="timeout_time_title">Timeout</string>
     <string name="timeout_time_summary">How long the GPS stays on looking for a fix before giving up. Use 0 for no timeout</string>
     <string name="timeout_time_dialog_title">Time in seconds</string>

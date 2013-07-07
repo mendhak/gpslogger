@@ -10,6 +10,8 @@
       <directory url="file://$PROJECT_DIR$/Testing/gen" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/GPSLogger/target/generated-sources/annotations" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/GPSLogger/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/google-play-services_lib/gen" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/GPSLogger/gen-external-apklibs/com.actionbarsherlock_actionbarsherlock_4.2.0/gen" includeSubdirectories="true" />
     </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>
