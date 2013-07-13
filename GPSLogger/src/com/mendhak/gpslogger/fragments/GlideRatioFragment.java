@@ -52,10 +52,18 @@ public class GlideRatioFragment extends SherlockFragment implements  IWidgetFrag
 
     @Override
     public void onCreate(Bundle savedInstanceState){
-        lastLoc = null;
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null){
+            lastLoc = savedInstanceState.getParcelable("location");
+        }
+        lastLoc = null;
     }
 
+    @Override
+    public void onSaveInstanceState (Bundle outState) {
+        if (lastLoc != null)
+            outState.putParcelable("location", lastLoc);
+    }
 
     @Override
     public void onActivityCreated(Bundle bundle){
