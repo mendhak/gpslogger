@@ -12,6 +12,7 @@
 
     <LinearLayout android:id="@+id/main_modular_container"
                   android:orientation="vertical"
+                  android:layout_weight="1"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content">
 
@@ -22,7 +23,7 @@
 
             <LinearLayout android:orientation="vertical"
                           android:layout_width="match_parent"
-                          android:layout_height="match_parent"
+                          android:layout_height="wrap_content"
                           android:layout_weight="1"
                           android:background="@drawable/back">
 
@@ -38,12 +39,13 @@
                         android:id="@+id/frag_NO"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingRight="2dip"/>
+                        android:paddingRight="2dip"
+                        android:layout_gravity="center_vertical"/>
             </LinearLayout>
 
             <LinearLayout android:orientation="vertical"
                           android:layout_width="match_parent"
-                          android:layout_height="match_parent"
+                          android:layout_height="wrap_content"
                           android:layout_weight="1"
                           android:background="@drawable/back">
 
@@ -58,7 +60,8 @@
                         android:id="@+id/frag_NE"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingRight="2dip"/>
+                        android:paddingRight="2dip"
+                        android:layout_gravity="center_vertical"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -69,7 +72,7 @@
 
             <LinearLayout android:orientation="vertical"
                           android:layout_width="match_parent"
-                          android:layout_height="match_parent"
+                          android:layout_height="wrap_content"
                           android:layout_weight="1"
                           android:background="@drawable/back">
 
@@ -84,12 +87,13 @@
                         android:id="@+id/frag_SO"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingRight="2dip"/>
+                        android:paddingRight="2dip"
+                        android:layout_gravity="center_vertical"/>
             </LinearLayout>
 
             <LinearLayout android:orientation="vertical"
                           android:layout_width="match_parent"
-                          android:layout_height="match_parent"
+                          android:layout_height="wrap_content"
                           android:layout_weight="1"
                           android:background="@drawable/back">
 
@@ -104,7 +108,8 @@
                         android:id="@+id/frag_SE"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingRight="2dip"/>
+                        android:paddingRight="2dip"
+                        android:layout_gravity="center_vertical"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -137,7 +142,6 @@
                  android:layout_width="fill_parent"
                  android:layout_height="wrap_content"
                  android:background="#222222">
-
         <TableRow android:layout_width="fill_parent"
                   android:layout_height="fill_parent">
 
@@ -167,8 +171,6 @@
                       android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
                       android:layout_height="fill_parent"/>
         </TableRow>
-
-
         <TableRow android:layout_width="fill_parent"
                   android:layout_height="fill_parent"
                   android:id="@+id/distance">
@@ -179,8 +181,6 @@
                       android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
                       android:layout_height="fill_parent"/>
         </TableRow>
-
-
         <TableRow android:layout_width="fill_parent"
                   android:layout_height="fill_parent"
                   android:id="@+id/fileName">
@@ -192,7 +192,6 @@
                       android:layout_height="fill_parent"/>
 
         </TableRow>
-
         <TableRow android:layout_width="fill_parent"
                   android:layout_height="fill_parent"
                   android:id="@+id/trAutoEmail">
