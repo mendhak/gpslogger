@@ -379,6 +379,7 @@
     <string name="skylines_server_port_default">5597</string>
     <string name="skylines_key">Your pilot private key</string>
     <string name="skylines_interval">Interval for sending data</string>
+    <string name="skylines_interval_default">3</string>
     <string name="skylines_invalid_form">Invalid values</string>
     <string name="skylines_invalid_form_message">Please ensure that all of the fields have been filled in properly</string>
 
@@ -397,6 +398,8 @@
     <string name="livetrack24_username">Your livetrack24 username</string>
     <string name="livetrack24_password">Your livetrack24 password</string>
     <string name="livetrack24_interval">Interval for sending data</string>
+    <string name="livetrack24_interval_default">3</string>
+
     <string name="livetrack24_invalid_form">Invalid values</string>
     <string name="livetrack24_invalid_form_message">Please ensure that all of the fields have been filled in properly</string>
     

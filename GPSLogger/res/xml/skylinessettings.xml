@@ -23,8 +23,10 @@
 
         <EditTextPreference android:key="skylines_key" android:title="@string/skylines_key"
                             android:dialogTitle="@string/skylines_key"/>
+
         <EditTextPreference android:key="skylines_interval" android:title="@string/skylines_interval"
-                            android:dialogTitle="@string/skylines_interval"/>
+                            android:dialogTitle="@string/skylines_interval"
+                            android:defaultValue="@string/skylines_interval_default"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

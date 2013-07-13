@@ -110,6 +110,10 @@ public class SkylinesActivity extends SherlockPreferenceActivity implements
 
     private static boolean isNumeric(String str)
     {
+        if (str.isEmpty()){
+            return false;
+        }
+
         for (char c : str.toCharArray())
         {
             if (!Character.isDigit(c))

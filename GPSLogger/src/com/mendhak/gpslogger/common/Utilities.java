@@ -132,14 +132,36 @@ public class Utilities
         AppSettings.setUseModularView(prefs.getBoolean("modular_view", false));
         AppSettings.setForceScreenOn(prefs.getBoolean("force_screen_on", false));
 
+        final int skylines_interval_default = Integer.parseInt(context.getString(R.string.skylines_interval_default));
+        final int skylines_server_port_default = Integer.parseInt(context.getString(R.string.skylines_server_port_default));
+
         AppSettings.setLogToSkylines(prefs.getBoolean("log_skylines", false));
-        AppSettings.setSkylinesInterval(Integer.parseInt(prefs.getString("skylines_interval", "3")));
+        try {
+            AppSettings.setSkylinesInterval(Integer.parseInt(prefs.getString("skylines_interval",
+                    Integer.toString(skylines_interval_default))));
+        } catch (java.lang.NumberFormatException nfe){
+            AppSettings.setSkylinesInterval(skylines_interval_default);
+        }
         AppSettings.setSkylinesKey(prefs.getString("skylines_key", ""));
-        AppSettings.setSkylinesServerPort(Integer.parseInt(prefs.getString("skylines_server_port", "5597")));
+
+        try {
+            AppSettings.setSkylinesServerPort(Integer.parseInt(prefs.getString("skylines_server_port",
+                    Integer.toString(skylines_server_port_default))));
+        } catch (java.lang.NumberFormatException nf){
+            AppSettings.setSkylinesServerPort(skylines_server_port_default);
+        }
         AppSettings.setSkylinesServer(prefs.getString("skylines_server", ""));
 
+        final int livetrack24_interval_default = Integer.parseInt(context.getString(R.string.livetrack24_interval_default));
+
         AppSettings.setLogToLivetrack24(prefs.getBoolean("log_livetrack24", false));
-        AppSettings.setLivetrack24Interval(Integer.parseInt(prefs.getString("livetrack24_interval", "3")));
+        try {
+            AppSettings.setLivetrack24Interval(Integer.parseInt(prefs.getString("livetrack24_interval",
+                    Integer.toString(livetrack24_interval_default))));
+        } catch (Exception e){
+            AppSettings.setLivetrack24Interval(livetrack24_interval_default);
+        }
+
         AppSettings.setLivetrack24ServerURL(prefs.getString("livetrack24_server_url", ""));
         AppSettings.setLivetrack24Username(prefs.getString("livetrack24_username", ""));
         AppSettings.setLivetrack24Password(prefs.getString("livetrack24_password", ""));
