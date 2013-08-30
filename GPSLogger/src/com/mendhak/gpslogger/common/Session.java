@@ -43,7 +43,7 @@ public class Session extends Application
     private static int numLegs;
     private static boolean isBound;
     private static boolean readyToBeAutoSent = false;
-    private static boolean allowDescription = true;
+    private static String description = "";
     private static boolean isSinglePointMode = false;
     private static int retryTimeout=0;
 
@@ -374,14 +374,24 @@ public class Session extends Application
         return readyToBeAutoSent;
     }
 
-    public static boolean shoulAllowDescription()
+    public static boolean hasDescription()
     {
-        return allowDescription;
+        return !description.isEmpty();
     }
 
-    public static void setAllowDescription(boolean allowDescription)
+    public static String getDescription()
     {
-        Session.allowDescription = allowDescription;
+        return description;
+    }
+
+    public static void clearDescription()
+    {
+        description = "";
+    }
+
+    public static void setDescription(String newDescription)
+    {
+        description = newDescription;
     }
 
 }
