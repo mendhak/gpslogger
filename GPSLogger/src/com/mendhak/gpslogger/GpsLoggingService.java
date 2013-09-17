@@ -30,7 +30,7 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
-import android.widget.Toast;
+
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
@@ -891,6 +891,7 @@ public class GpsLoggingService extends Service implements IActionListener
         Utilities.LogDebug("GpsLoggingService.WriteToFile");
         List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers();
         Session.setAddNewTrackSegment(false);
+        boolean atLeastOneAnnotationSuccess = false;
 
         for (IFileLogger logger : loggers)
         {
@@ -900,11 +901,7 @@ public class GpsLoggingService extends Service implements IActionListener
                 if (Session.hasDescription())
                 {
                     logger.Annotate(Session.getDescription(), loc);
-                    Session.clearDescription();
-                    if (IsMainFormVisible())
-                    {
-                        mainServiceClient.OnClearAnnotation();
-                    }
+                    atLeastOneAnnotationSuccess = true;
                 }
             }
             catch (Exception e)
@@ -913,6 +910,14 @@ public class GpsLoggingService extends Service implements IActionListener
             }
         }
 
+        if (atLeastOneAnnotationSuccess)
+        {
+            Session.clearDescription();
+            if (IsMainFormVisible())
+            {
+                mainServiceClient.OnClearAnnotation();
+            }
+        }
     }
 
     /**
