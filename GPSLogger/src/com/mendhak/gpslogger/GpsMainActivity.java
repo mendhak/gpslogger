@@ -68,6 +68,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
      */
     private static Intent serviceIntent;
     private GpsLoggingService loggingService;
+    private MenuItem mnuAnnotate;
 
     /**
      * Provides a connection to the GPS Logging Service
@@ -108,6 +109,9 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             // Form setup - toggle button, display existing location info
             ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
             buttonOnOff.setOnCheckedChangeListener(GpsMainActivity.this);
+
+            if (Session.hasDescription())
+                OnSetAnnotation();
         }
     };
 
@@ -288,6 +292,18 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         buttonSinglePoint.setEnabled(enabled);
     }
 
+    public void SetAnnotationButtonMarked(boolean marked)
+    {
+        if (marked)
+        {
+            mnuAnnotate.setIcon(R.drawable.ic_menu_edit_active);
+        }
+        else
+        {
+            mnuAnnotate.setIcon(R.drawable.ic_menu_edit);
+        }
+    }
+
     public void SetMainButtonEnabled(boolean enabled)
     {
         ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
@@ -437,6 +453,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
     public boolean onCreateOptionsMenu(Menu menu) {
         com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.optionsmenu, menu);
+        mnuAnnotate = menu.findItem(R.id.mnuAnnotate);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -804,16 +821,6 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             return;
         }
 
-        if (!Session.shoulAllowDescription())
-        {
-            Utilities.MsgBox(getString(R.string.not_yet),
-                    getString(R.string.cant_add_description_until_next_point),
-                    GetActivity());
-
-            return;
-
-        }
-
         AlertDialog.Builder alert = new AlertDialog.Builder(GpsMainActivity.this);
 
         alert.setTitle(R.string.add_description);
@@ -821,6 +828,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
 
         // Set an EditText view to get user input
         final EditText input = new EditText(getApplicationContext());
+        input.setText(Session.getDescription());
         alert.setView(input);
 
         alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener()
@@ -828,7 +836,19 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             public void onClick(DialogInterface dialog, int whichButton)
             {
                 final String desc = Utilities.CleanDescription(input.getText().toString());
-                Annotate(desc);
+                if (desc.isEmpty())
+                {
+                    Session.clearDescription();
+                    OnClearAnnotation();
+                }
+                else
+                {
+                    Session.setDescription(desc);
+                    OnSetAnnotation();
+                    if (!Session.isStarted()) // logOnce will start single point mode.
+                        SetMainButtonEnabled(false);
+                    loggingService.LogOnce();
+                }
             }
 
         });
@@ -841,27 +861,6 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         });
 
         alert.show();
-    }
-
-    private void Annotate(String description)
-    {
-        Utilities.LogDebug("GpsMainActivity.Annotate(description)");
-
-        List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers();
-
-        for (IFileLogger logger : loggers)
-        {
-            try
-            {
-                logger.Annotate(description, Session.getCurrentLocationInfo());
-                SetStatus(getString(R.string.description_added));
-                Session.setAllowDescription(false);
-            }
-            catch (Exception e)
-            {
-                SetStatus(getString(R.string.could_not_write_to_file));
-            }
-        }
     }
 
     /**
@@ -903,6 +902,19 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         Utilities.LogDebug("GpsMainActivity.OnStopLogging");
         SetMainButtonChecked(false);
     }
+
+    public void OnSetAnnotation()
+    {
+        Utilities.LogDebug("GpsMainActivity.OnSetAnnotation");
+        SetAnnotationButtonMarked(true);
+    }
+
+    public void OnClearAnnotation()
+    {
+        Utilities.LogDebug("GpsMainActivity.OnClearAnnotation");
+        SetAnnotationButtonMarked(false);
+    }
+
 
     /**
      * Sets the message in the top status label.

@@ -63,6 +63,16 @@ interface IGpsLoggerServiceClient
     public void OnStopLogging();
 
     /**
+     * Asking the calling activity form to indicate that an annotation is pending
+     */
+    public void OnSetAnnotation();
+
+    /**
+     * Asking the calling activity form to indicate that no annotation is pending
+     */
+    public void OnClearAnnotation();
+
+    /**
      * Returns the activity
      *
      * @return

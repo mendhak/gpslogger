@@ -30,7 +30,7 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
-import android.widget.Toast;
+
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
@@ -53,6 +53,8 @@ public class GpsLoggingService extends Service implements IActionListener
 
     private final IBinder mBinder = new GpsLoggingBinder();
     private static IGpsLoggerServiceClient mainServiceClient;
+
+    private boolean forceLogOnce = false;
 
     // ---------------------------------------------------
     // Helpers and managers
@@ -235,6 +237,28 @@ public class GpsLoggingService extends Service implements IActionListener
                 Utilities.LogDebug("alarmIntent was null, canceling alarm");
                 CancelAlarm();
             }
+        }
+    }
+
+    private void SetForceLogOnce(boolean flag)
+    {
+        forceLogOnce = flag;
+    }
+
+    private boolean ForceLogOnce()
+    {
+        return forceLogOnce;
+    }
+
+    public void LogOnce()
+    {
+        SetForceLogOnce(true);
+        if (Session.isStarted())
+            StartGpsManager();
+        else
+        {
+            Session.setSinglePointMode(true);
+            StartLogging();
         }
     }
 
@@ -714,7 +738,7 @@ public class GpsLoggingService extends Service implements IActionListener
         }
 
         // Don't do anything until the user-defined time has elapsed
-        if ((currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 1000))
+        if (!ForceLogOnce() && (currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 1000))
         {
             return;
         }
@@ -742,7 +766,7 @@ public class GpsLoggingService extends Service implements IActionListener
         }
 
         //Don't do anything until the user-defined distance has been traversed
-        if (AppSettings.getMinimumDistanceInMeters() > 0 && Session.hasValidLocation())
+        if (!ForceLogOnce() && AppSettings.getMinimumDistanceInMeters() > 0 && Session.hasValidLocation())
         {
 
             double distanceTraveled = Utilities.CalculateDistance(loc.getLatitude(), loc.getLongitude(),
@@ -767,6 +791,7 @@ public class GpsLoggingService extends Service implements IActionListener
         WriteToFile(loc);
         GetPreferences();
         StopManagerAndResetAlarm();
+        SetForceLogOnce(false);
 
         if (IsMainFormVisible())
         {
@@ -866,13 +891,18 @@ public class GpsLoggingService extends Service implements IActionListener
         Utilities.LogDebug("GpsLoggingService.WriteToFile");
         List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers();
         Session.setAddNewTrackSegment(false);
+        boolean atLeastOneAnnotationSuccess = false;
 
         for (IFileLogger logger : loggers)
         {
             try
             {
                 logger.Write(loc);
-                Session.setAllowDescription(true);
+                if (Session.hasDescription())
+                {
+                    logger.Annotate(Session.getDescription(), loc);
+                    atLeastOneAnnotationSuccess = true;
+                }
             }
             catch (Exception e)
             {
@@ -880,6 +910,14 @@ public class GpsLoggingService extends Service implements IActionListener
             }
         }
 
+        if (atLeastOneAnnotationSuccess)
+        {
+            Session.clearDescription();
+            if (IsMainFormVisible())
+            {
+                mainServiceClient.OnClearAnnotation();
+            }
+        }
     }
 
     /**
