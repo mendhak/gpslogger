@@ -4,7 +4,8 @@
 
     <CheckBoxPreference android:key="livetrack24_enabled"
                         android:title="@string/livetrack24_enabled"
-                        android:summary="@string/livetrack24_enabled_summary"/>
+                        android:summary="@string/livetrack24_enabled_summary"
+                        android:defaultValue="false"/>
 
     <PreferenceCategory android:title="@string/livetrack24_server_category">
 
@@ -13,14 +14,23 @@
                             android:inputType="textUri"
                             android:summary="@string/livetrack24_server_url_summary"
                             android:dialogTitle="@string/livetrack24_server_url"
-                android:defaultValue="@string/livetrack24_server_url_default"/>
+                            android:defaultValue="@string/livetrack24_server_url_default"/>
         
-        <EditTextPreference android:key="livetrack24_username" android:title="@string/livetrack24_username"
-                            android:dialogTitle="@string/livetrack24_username"/>
-        <EditTextPreference android:key="livetrack24_password" android:title="@string/livetrack24_password"
-                            android:dialogTitle="@string/livetrack24_password"/>
-        <EditTextPreference android:key="livetrack24_interval" android:title="@string/livetrack24_interval"
-                            android:dialogTitle="@string/livetrack24_interval"/>
+        <EditTextPreference android:key="livetrack24_username"
+                            android:title="@string/livetrack24_username"
+                            android:dialogTitle="@string/livetrack24_username"
+                            android:defaultValue=""/>
+
+        <EditTextPreference android:key="livetrack24_password"
+                            android:title="@string/livetrack24_password"
+                            android:dialogTitle="@string/livetrack24_password"
+                            android:defaultValue=""/>
+
+        <EditTextPreference android:key="livetrack24_interval"
+                            android:title="@string/livetrack24_interval"
+                            android:dialogTitle="@string/livetrack24_interval"
+                            android:defaultValue="3"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -4,7 +4,8 @@
 
     <CheckBoxPreference android:key="skylines_enabled"
                         android:title="@string/skylines_enabled"
-                        android:summary="@string/skylines_enabled_summary"/>
+                        android:summary="@string/skylines_enabled_summary"
+                        android:defaultValue="false"/>
 
     <PreferenceCategory android:title="@string/skylines_server_category">
 
@@ -13,18 +14,26 @@
                             android:inputType="textUri"
                             android:summary="@string/skylines_server_summary"
                             android:dialogTitle="@string/skylines_server"
-                android:defaultValue="@string/skylines_server_default"/>
+                            android:defaultValue="@string/skylines_server_default"/>
 
         <EditTextPreference android:key="skylines_server_port"
                             android:title="@string/skylines_server_port"
                             android:inputType="number"
                             android:dialogTitle="@string/skylines_server_port"
-                android:defaultValue="@string/skylines_server_port_default"/>
+                            android:defaultValue="@string/skylines_server_port_default"/>
 
-        <EditTextPreference android:key="skylines_key" android:title="@string/skylines_key"
-                            android:dialogTitle="@string/skylines_key"/>
-        <EditTextPreference android:key="skylines_interval" android:title="@string/skylines_interval"
-                            android:dialogTitle="@string/skylines_interval"/>
+        <EditTextPreference android:key="skylines_key"
+                            android:title="@string/skylines_key"
+                            android:dialogTitle="@string/skylines_key"
+                            android:defaultValue=""/>
+
+        <EditTextPreference android:key="skylines_interval"
+                            android:title="@string/skylines_interval"
+                            android:dialogTitle="@string/skylines_interval"
+                            android:numeric="integer"
+                            android:maxLength="4"
+                            android:defaultValue="3"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -122,6 +122,8 @@
         <ToggleButton android:id="@+id/buttonOnOff"
                       android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
+                      android:textSize="15dip"
+                      android:textStyle="bold"
                       android:textOn="@string/btn_stop_logging"
                       android:textOff="@string/btn_start_logging"/>
     <!--</LinearLayout>-->
@@ -130,6 +132,8 @@
         <Button android:id="@+id/buttonSinglePoint"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:textSize="14dip"
+                android:textStyle="bold"
                 android:text="@string/btn_single_point"/>
     </LinearLayout>
 

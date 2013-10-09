@@ -22,59 +22,65 @@
             </TableRow>
             <TableRow android:background="#333333" android:layout_margin="1dip">
                 <TextView android:textStyle="bold" android:text="@string/txt_latitude"
-                          android:padding="3dip" android:textSize="17sp"/>
+                          android:padding="3dip" android:textSize="15sp"/>
                 <TextView android:id="@+id/txtLatitude" android:gravity="left"
                           android:padding="3dip" android:textColor="#e8a317"
-                          android:textStyle="bold" android:textSize="18sp"/>
+                          android:textStyle="bold" android:textSize="15sp"/>
             </TableRow>
 
             <TableRow android:background="#333333" android:layout_margin="1dip">
                 <TextView android:textStyle="bold" android:text="@string/txt_longitude"
-                          android:padding="3dip" android:textSize="17sp"/>
+                          android:padding="3dip" android:textSize="15sp"/>
                 <TextView android:id="@+id/txtLongitude" android:gravity="left"
                           android:padding="3dip" android:textColor="#e8a317"
-                          android:textStyle="bold" android:textSize="18sp"/>
+                          android:textStyle="bold" android:textSize="15sp"/>
             </TableRow>
 
             <TableRow android:background="#333333" android:layout_margin="1dip">
                 <TextView android:id="@+id/lblAltitude" android:textStyle="bold"
-                          android:text="@string/txt_altitude" android:padding="3dip"/>
+                          android:text="@string/txt_altitude" android:padding="3dip"
+                          android:textSize="14sp"/>
                 <TextView android:id="@+id/txtAltitude" android:gravity="left"
-                          android:padding="3dip"/>
+                          android:padding="3dip" android:textSize="14sp"/>
             </TableRow>
 
             <TableRow android:background="#333333" android:layout_margin="1dip">
                 <TextView android:id="@+id/lblSpeed" android:textStyle="bold"
-                          android:text="@string/txt_speed" android:padding="3dip"/>
+                          android:text="@string/txt_speed" android:padding="3dip"
+                          android:textSize="14sp"/>
                 <TextView android:id="@+id/txtSpeed" android:gravity="left"
-                          android:padding="3dip"/>
+                          android:padding="3dip" android:textSize="14sp"/>
             </TableRow>
 
             <TableRow android:background="#333333" android:layout_margin="1dip">
                 <TextView android:id="@+id/lblDirection" android:textStyle="bold"
-                          android:text="@string/txt_direction" android:padding="3dip"/>
+                          android:text="@string/txt_direction" android:padding="3dip"
+                          android:textSize="14sp"/>
                 <TextView android:id="@+id/txtDirection" android:gravity="left"
-                          android:padding="3dip"/>
+                          android:padding="3dip" android:textSize="14sp"/>
             </TableRow>
 
             <TableRow android:background="#333333" android:layout_margin="1dip">
                 <TextView android:id="@+id/lblSatellites" android:textStyle="bold"
-                          android:text="@string/txt_satellites" android:padding="3dip"/>
+                          android:text="@string/txt_satellites" android:padding="3dip"
+                          android:textSize="14sp"/>
                 <TextView android:id="@+id/txtSatellites" android:gravity="left"
-                          android:padding="3dip"/>
+                          android:padding="3dip" android:textSize="14sp"/>
             </TableRow>
 
             <TableRow android:background="#333333" android:layout_margin="1dip">
                 <TextView android:id="@+id/lblAccuracy" android:textStyle="bold"
-                          android:text="@string/txt_accuracy" android:padding="3dip"/>
+                          android:text="@string/txt_accuracy" android:padding="3dip"
+                          android:textSize="14sp"/>
                 <TextView android:id="@+id/txtAccuracy" android:gravity="left"
-                          android:padding="3dip"/>
+                          android:padding="3dip" android:textSize="14sp"/>
             </TableRow>
             <TableRow android:background="#333333" android:layout_margin="1dip">
                 <TextView android:id="@+id/lblDistanceTravelled" android:textStyle="bold"
-                          android:text="@string/txt_travel_distance" android:padding="3dip"/>
+                          android:text="@string/txt_travel_distance" android:padding="3dip"
+                          android:textSize="14sp"/>
                 <TextView android:id="@+id/txtDistanceTravelled" android:gravity="left"
-                          android:padding="3dip"/>
+                          android:padding="3dip" android:textSize="14sp"/>
             </TableRow>
         </TableLayout>
 

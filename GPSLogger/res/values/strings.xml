@@ -15,12 +15,26 @@
 
     <!-- menu strings -->
     <string name="menu_settings">Settings</string>
+    <string name="menu_pexp">Export Settings</string>
+    <string name="menu_pimp">Import Settings</string>
 
 
     <string name="menu_annotate">Annotate</string>
     <string name="menu_share">Share</string>
     <string name="menu_exit">Exit</string>
 
+    <!-- Export / Import Settings-->
+    <string name="ExportSuccess">Settings exported successfully</string>
+    <string name="ExportFailed">Failed to export settings</string>
+    <string name="ImportSuccess">Settings imported successfully</string>
+    <string name="ImportFailed">Failed to import settings</string>
+    <string name="AskFileName">Enter the file name without extension</string>
+    <string name="ChooseFile">Choose file</string>
+    <string name="SelectFile">Select file</string>
+    <string name="Browse">Browse...</string>
+    <string name="NoFSBrowser">No filesystem browser installed</string>
+    <string name="FileExists">File already exists</string>
+    <string name="AskAnotherFile">Please, enter another name</string>
 
     <!-- main form labels -->
     <string name="txt_latitude">Latitude:</string>

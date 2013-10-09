@@ -3,93 +3,119 @@
                   android:key="gpslogger_preferences">
 
     <CheckBoxPreference android:key="log_gpx"
-                        android:title="@string/log_gpx_title" android:summary="@string/log_gpx_summary"/>
+                        android:title="@string/log_gpx_title"
+                        android:summary="@string/log_gpx_summary"
+                        android:defaultValue="false"/>
 
     <CheckBoxPreference android:key="log_kml"
-                        android:summary="@string/log_kml_summary" android:title="@string/log_kml_title"/>
-
-    <CheckBoxPreference android:key="log_opengts"
-                        android:summary="@string/log_opengts_summary" android:title="@string/log_opengts_title"/>
-
-    <CheckBoxPreference android:key="log_skylines"
-                        android:summary="@string/log_skylines_summary" android:title="@string/log_skylines_title"/>
-
-    <CheckBoxPreference android:key="log_livetrack24"
-                        android:summary="@string/log_livetrack24_summary" android:title="@string/log_livetrack24_title"/>
-
-    <CheckBoxPreference android:key="log_plain_text"
-                        android:summary="@string/log_plain_text_summary" android:title="@string/log_plain_text_title"/>
+                        android:summary="@string/log_kml_summary"
+                        android:title="@string/log_kml_title"
+                        android:defaultValue="true"/>
 
     <CheckBoxPreference android:key="log_igc"
-                        android:summary="@string/log_igc_summary" android:title="@string/log_igc_title"/>
+                        android:summary="@string/log_igc_summary"
+                        android:title="@string/log_igc_title"
+                        android:defaultValue="false"/>
+
+    <CheckBoxPreference android:key="log_plain_text"
+                        android:summary="@string/log_plain_text_summary"
+                        android:title="@string/log_plain_text_title"
+                        android:defaultValue="false"/>
+
+    <CheckBoxPreference android:key="log_opengts"
+                        android:summary="@string/log_opengts_summary"
+                        android:title="@string/log_opengts_title"
+                        android:defaultValue="false"/>
+
+    <CheckBoxPreference android:key="log_skylines"
+                        android:summary="@string/log_skylines_summary"
+                        android:title="@string/log_skylines_title"
+                        android:defaultValue="false"/>
+
+    <CheckBoxPreference android:key="log_livetrack24"
+                        android:summary="@string/log_livetrack24_summary"
+                        android:title="@string/log_livetrack24_title"
+                        android:defaultValue="false"/>
 
     <PreferenceScreen android:title="@string/pref_logging_title"
                       android:summary="@string/pref_logging_summary">
-        <PreferenceCategory android:title="@string/pref_logging_title">
 
+        <PreferenceCategory android:title="@string/pref_logging_title">
 
             <ListPreference android:key="new_file_creation"
                             android:title="@string/new_file_creation_title"
                             android:summary="@string/new_file_creation_summary"
-                            android:entries="@array/filecreation_entries" android:defaultValue="onceaday"
+                            android:entries="@array/filecreation_entries"
+                            android:defaultValue="onceaday"
                             android:entryValues="@array/filecreation_values"/>
+
             <EditTextPreference android:key="new_file_static_name"
                                 android:title="@string/new_file_static_title"
                                 android:summary="@string/new_file_static_summary"
                                 android:dialogTitle="@string/new_file_static_title"
-                                android:defaultValue="gpslogger"
-                                />
+                                android:defaultValue="gpslogger"/>
         </PreferenceCategory>
+
         <PreferenceCategory android:title="@string/pref_performance_title">
+
             <CheckBoxPreference android:key="prefer_celltower"
                                 android:summary="@string/prefer_celltower_summary"
-                                android:title="@string/prefer_celltower_title"/>
+                                android:title="@string/prefer_celltower_title"
+                                android:defaultValue="false"/>
 
             <EditTextPreference android:key="time_before_logging"
                                 android:title="@string/time_before_logging_title"
                                 android:summary="@string/time_before_logging_summary"
                                 android:dialogTitle="@string/time_before_logging_dialog_title"
-                                android:numeric="integer" android:maxLength="4"
-                                android:hint="@string/time_before_logging_hint"/>
+                                android:numeric="integer"
+                                android:maxLength="4"
+                                android:hint="@string/time_before_logging_hint"
+                                android:defaultValue="60"/>
 
             <CheckBoxPreference android:key="keep_fix"
                                 android:summary="@string/keep_fix_summary"
-                                android:title="@string/keep_fix_title"/>
-
+                                android:title="@string/keep_fix_title"
+                                android:defaultValue="false"/>
 
             <EditTextPreference android:key="distance_before_logging"
                                 android:title="@string/distance_before_logging_title"
                                 android:summary="@string/distance_before_logging_summary"
                                 android:dialogTitle="@string/settings_distance_in_meters"
-                                android:numeric="integer" android:maxLength="4"
-                                android:hint="@string/settings_enter_meters"/>
-
+                                android:numeric="integer"
+                                android:maxLength="4"
+                                android:hint="@string/settings_enter_meters"
+                                android:defaultValue="0"/>
 
             <EditTextPreference android:key="accuracy_before_logging"
                                 android:title="@string/accuracy_before_logging_title"
                                 android:summary="@string/accuracy_before_logging_summary"
                                 android:dialogTitle="@string/settings_accuracy_in_meters"
-                                android:numeric="integer" android:maxLength="4"
-                                android:hint="@string/settings_enter_meters"/>
+                                android:numeric="integer"
+                                android:maxLength="4"
+                                android:hint="@string/settings_enter_meters"
+                                android:defaultValue="0"/>
 
             <EditTextPreference android:key="retry_time"
                                 android:title="@string/retry_time_title"
                                 android:summary="@string/retry_time_summary"
                                 android:dialogTitle="@string/retry_time_dialog_title"
-                                android:numeric="integer" android:maxLength="4"
-                                android:hint="@string/retry_time_hint"/>
-
-
-
+                                android:numeric="integer"
+                                android:maxLength="4"
+                                android:hint="@string/retry_time_hint"
+                                android:defaultValue="60"/>
 
         </PreferenceCategory>
+
     </PreferenceScreen>
-    <PreferenceScreen android:title="@string/pref_general_title" android:summary="@string/pref_general_summary">
+
+    <PreferenceScreen android:title="@string/pref_general_title"
+                      android:summary="@string/pref_general_summary">
 
         <CheckBoxPreference android:key="show_notification"
                             android:summary="@string/show_notification_summary"
                             android:title="@string/show_notification_title"
                             android:defaultValue="true"/>
+
         <CheckBoxPreference android:key="modular_view"
                             android:summary="@string/modular_view_summary"
                             android:title="@string/modular_view_title"
@@ -101,37 +127,52 @@
                             android:defaultValue="false"/>
 
         <CheckBoxPreference android:title="@string/startonbootup_title"
-                            android:summary="@string/startonbootup_summary" android:key="startonbootup"/>
-        <CheckBoxPreference android:title="@string/useimperial_title"
-                            android:summary="@string/useimperial_summary" android:key="useImperial"/>
-        <Preference android:title="@string/enabledisablegps_title"
-                    android:summary="@string/enabledisablegps_summary" android:key="enableDisableGps"
-                    android:defaultValue="false"/>
+                            android:summary="@string/startonbootup_summary"
+                            android:key="startonbootup"
+                            android:defaultValue="false"/>
 
-        <CheckBoxPreference android:title="@string/debuglog_title" android:summary="@string/debuglog_summary"
-                            android:key="debugtofile" android:defaultValue="false"/>
+        <CheckBoxPreference android:title="@string/useimperial_title"
+                            android:summary="@string/useimperial_summary"
+                            android:key="useImperial"
+                            android:defaultValue="false"/>
+
+        <Preference android:title="@string/enabledisablegps_title"
+                    android:summary="@string/enabledisablegps_summary"
+                    android:key="enableDisableGps"/>
+
+        <CheckBoxPreference android:title="@string/debuglog_title"
+                            android:summary="@string/debuglog_summary"
+                            android:key="debugtofile"
+                            android:defaultValue="false"/>
 
     </PreferenceScreen>
-    <PreferenceScreen android:key="autosend_preferencescreen" android:title="@string/pref_autosend_title" android:summary="@string/pref_autosend_summary">
+
+    <PreferenceScreen android:key="autosend_preferencescreen"
+                      android:title="@string/pref_autosend_title"
+                      android:summary="@string/pref_autosend_summary">
 
         <CheckBoxPreference android:key="autosend_enabled"
                             android:title="@string/autosend_enabled"
-                            android:summary="@string/autosend_enabled_summary" />
-
+                            android:summary="@string/autosend_enabled_summary"
+                            android:defaultValue="false"/>
 
         <ListPreference android:key="autosend_frequency"
                         android:title="@string/autosend_frequency"
                         android:summary="@string/autosend_frequency_summary"
-                        android:entries="@array/autosend_frequencies" android:defaultValue="0"
+                        android:entries="@array/autosend_frequencies"
+                        android:defaultValue="0"
                         android:entryValues="@array/autosend_values"/>
 
-        <CheckBoxPreference android:key="autosend_sendzip" android:defaultValue="true"
+        <CheckBoxPreference android:key="autosend_sendzip"
                             android:title="@string/autosend_sendzip_title"
-                            android:summary="@string/autosend_sendzip_summary"/>
+                            android:summary="@string/autosend_sendzip_summary"
+                            android:defaultValue="true"/>
 
         <PreferenceCategory android:title="@string/autosend_targets_category">
+
             <Preference android:title="@string/autoemail_title"
-                        android:summary="@string/autoemail_summary" android:key="autoemail_setup">
+                        android:summary="@string/autoemail_summary"
+                        android:key="autoemail_setup">
                 <intent android:action="com.mendhak.gpslogger.AUTOEMAIL_SETUP"/>
             </Preference>
 
@@ -139,33 +180,43 @@
                         android:summary="@string/osm_setup_summary" android:key="osm_setup">
                 <intent android:action="com.mendhak.gpslogger.OSM_AUTHORIZE"/>
             </Preference>
-            <Preference android:title="@string/dropbox_setup_title" android:summary="@string/dropbox_setup_summary"
+
+            <Preference android:title="@string/dropbox_setup_title"
+                        android:summary="@string/dropbox_setup_summary"
                         android:key="dropbox_setup">
                 <intent android:action="com.mendhak.gpslogger.DROPBOX_SETUP"/>
             </Preference>
+
             <Preference android:title="@string/gdocs_setup_title"
-                        android:summary="@string/gdocs_setup_summary" android:key="gdocs_setup">
+                        android:summary="@string/gdocs_setup_summary"
+                        android:key="gdocs_setup">
                 <intent android:action="com.mendhak.gpslogger.GDOCS_SETUP" />
             </Preference>
+
             <Preference android:title="@string/opengts_setup_title"
-                        android:summary="@string/opengts_setup_summary" android:key="opengts_setup">
+                        android:summary="@string/opengts_setup_summary"
+                        android:key="opengts_setup">
                 <intent android:action="com.mendhak.gpslogger.OPENGTS_SETUP" />
             </Preference>
 
             <Preference android:title="@string/skylines_setup_title"
-                        android:summary="@string/skylines_setup_summary" android:key="skylines_setup">
+                        android:summary="@string/skylines_setup_summary"
+                        android:key="skylines_setup">
                 <intent android:action="com.mendhak.gpslogger.SKYLINES_SETUP" />
             </Preference>
 
             <Preference android:title="@string/livetrack24_setup_title"
-                        android:summary="@string/livetrack24_setup_summary" android:key="livetrack24_setup">
+                        android:summary="@string/livetrack24_setup_summary"
+                        android:key="livetrack24_setup">
                 <intent android:action="com.mendhak.gpslogger.LIVETRACK24_SETUP" />
             </Preference>
 
             <Preference android:title="@string/autoftp_setup_title"
-                         android:summary="@string/autoftp_setup_summary" android:key="autoftp_setup">
+                         android:summary="@string/autoftp_setup_summary"
+                         android:key="autoftp_setup">
                 <intent android:action="com.mendhak.gpslogger.AUTOFTP_SETUP" />
             </Preference>
+
         </PreferenceCategory>
 
     </PreferenceScreen>

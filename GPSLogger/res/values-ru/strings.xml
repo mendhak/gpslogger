@@ -13,9 +13,25 @@
   <string name="add_description">Добавить описание</string>
   <string name="letters_numbers">Используйте только буквы и цифры</string>
   <string name="menu_settings">Настройки</string>
+    <string name="menu_pexp">Экспорт настроек</string>
+    <string name="menu_pimp">Импорт настроек</string>
   <string name="menu_annotate">Добавить примечания</string>
   <string name="menu_share">Опубликовать</string>
   <string name="menu_exit">Выход</string>
+
+    <string name="ExportSuccess">Настройки экспортированы успешно</string>
+    <string name="ExportFailed">Не удалось экспортировать настройки</string>
+    <string name="ImportSuccess">Настройки импортированы успешно</string>
+    <string name="ImportFailed">Не удалось импортировать настройки</string>
+    <string name="AskFileName">Укажите имя файла без расширения</string>
+    <string name="ChooseFile">Выберите файл</string>
+    <string name="SelectFile">Выберите файл</string>
+    <string name="Browse">Поиск файла...</string>
+    <string name="NoFSBrowser">Приложение для просмотра файловой системы не установлено</string>
+    <string name="FileExists">Такой файл уже существует</string>
+    <string name="AskAnotherFile">Укажите другое имя файла</string>
+
+
   <string name="txt_latitude">Широта:</string>
   <string name="txt_longitude">Долгота:</string>
   <string name="txt_altitude">Высота:</string>
