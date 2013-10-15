@@ -393,7 +393,7 @@
     <string name="livetrack24_server_category">livetrack24 Settings</string>
     <string name="livetrack24_server_url">Server</string>
     <string name="livetrack24_server_url_summary">Submission URL</string>
-    <string name="livetrack24_server_url_default">http://www.livetrack24.com</string>
+    <string name="livetrack24_server_url_default">http://t1.livetrack24.com</string>
 
     <string name="livetrack24_username">Your livetrack24 username</string>
     <string name="livetrack24_password">Your livetrack24 password</string>
