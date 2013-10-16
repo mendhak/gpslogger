@@ -292,10 +292,27 @@
     <string name="debuglog_summary">Writes debug messages to a file on the SD card. Warning: The file grows very fast.
     </string>
 
+    <!-- flying preference -->
+    <string name="flying_pref_title">flying details</string>
+    <string name="flying_pref_summary">Wing type, pilot name,...</string>
+
+    <string name="flying_pref_pilot_name_title">Pilot name</string>
+    <string name="flying_pref_pilot_name_summary">May be used by logger to identify pilot</string>
+    <string name="flying_pref_pilot_name_diag_title">Enter pilot name</string>
+
+    <string name="flying_pref_glider_name_title">Glider name</string>
+    <string name="flying_pref_glider_name_summary">Glider name (eg. aspen)</string>
+    <string name="flying_pref_glider_name_diag_title">Enter glider name</string>
+
+    <string name="flying_pref_glider_id_title">Glider ID</string>
+    <string name="flying_pref_glider_id_summary">Glider ID if applicable (eg. competition)</string>
+    <string name="flying_pref_glider_id_diag_title">Enter glider ID</string>
+
+    <!-- /flighing preference -->
+
     <string name="pref_logging_summary">Time, distance, file creation</string>
     <string name="pref_general_title">General Options</string>
     <string name="pref_general_summary">Startup and display options</string>
-
 
     <string name="emailprovider_google">Google Mail</string>
     <string name="emailprovider_yahoo">Yahoo! Mail</string>

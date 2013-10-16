@@ -21,6 +21,8 @@ import android.app.Application;
 
 public class AppSettings extends Application
 {
+    private static String versionName;
+
     // ---------------------------------------------------
     // User Preferences
     // ---------------------------------------------------
@@ -55,6 +57,10 @@ public class AppSettings extends Application
     private static boolean useModularView;
     private static boolean forceScreenOn;
 
+    private static String pilotName;
+    private static String gliderName;
+    private static String gliderId;
+
     private static boolean logToSkylines;
     private static String skylinesKey;
     private static String skylinesServer;
@@ -88,6 +94,14 @@ public class AppSettings extends Application
     private static String staticFileName;
     private static boolean isStaticFile;
 
+
+    static void setVersionName(String versionName){
+        AppSettings.versionName = versionName;
+    }
+
+    public static String getVersionName(){
+        return AppSettings.versionName;
+    }
 
     /**
      * @return the useImperial
@@ -184,6 +198,49 @@ public class AppSettings extends Application
     static void setLogToIgc(boolean logToIgc)
     {
         AppSettings.logToIgc = logToIgc;
+    }
+
+    /**
+     */
+    static void setPilotName(String pilotName)
+    {
+        AppSettings.pilotName = pilotName;
+    }
+
+    /**
+     */
+    public static final String getPilotName()
+    {
+        return AppSettings.pilotName;
+    }
+
+    /**
+     */
+    static void setGliderName(String gliderName)
+    {
+        AppSettings.gliderName = gliderName;
+    }
+
+    /**
+     */
+    public static final String getGliderName()
+    {
+        return AppSettings.gliderName;
+    }
+
+
+    /**
+     */
+    static void setGliderId(String gliderId)
+    {
+        AppSettings.gliderId = gliderId;
+    }
+
+    /**
+     */
+    public static final String getGliderId()
+    {
+        return AppSettings.gliderId;
     }
 
     public static void setIgcPrivateKey(final String igcPrivateKey){

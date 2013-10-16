@@ -22,6 +22,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import net.kataplop.gpslogger.R;
@@ -120,6 +122,13 @@ public class Utilities
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
 
+        try {
+            PackageInfo pInfo =  context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            AppSettings.setVersionName(pInfo.versionName);
+        } catch(Exception e){
+            AppSettings.setVersionName("unkown");
+        }
+
         AppSettings.setUseImperial(prefs.getBoolean("useImperial", false));
 
         AppSettings.setLogToKml(prefs.getBoolean("log_kml", false));
@@ -131,6 +140,10 @@ public class Utilities
 
         AppSettings.setUseModularView(prefs.getBoolean("modular_view", false));
         AppSettings.setForceScreenOn(prefs.getBoolean("force_screen_on", false));
+
+        AppSettings.setPilotName(prefs.getString("flying_pref_pilot_name", "-"));
+        AppSettings.setGliderName(prefs.getString("flying_pref_glider_name", "-"));
+        AppSettings.setGliderId(prefs.getString("flying_pref_glider_id", "-"));
 
         final int skylines_interval_default = Integer.parseInt(context.getString(R.string.skylines_interval_default));
         final int skylines_server_port_default = Integer.parseInt(context.getString(R.string.skylines_server_port_default));
