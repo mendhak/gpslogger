@@ -12,6 +12,20 @@
    <item>static</item>
 </string-array>
 
+
+<string-array name="livetrack24_preset_entries">
+   <item>@string/livetrack24_preset_leonardo</item>
+   <item>@string/livetrack24_preset_ffvl</item>
+   <item>@string/livetrack24_preset_custom</item>
+</string-array>
+
+<string-array name="livetrack24_preset_values">
+   <item>leonardo</item>
+   <item>ffvl</item>
+   <item>custom</item>
+</string-array>
+
+
 <string-array name="autosend_frequencies">
 	<item>@string/autoemail_frequency_whenistop</item>
 	<item>@string/autoemail_frequency_8</item>

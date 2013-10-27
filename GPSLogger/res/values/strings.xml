@@ -135,6 +135,16 @@
     </string>
 
     <!-- Settings -->
+    <string name="pref_pref_mode">Preference mode</string>
+    <string name="pref_pref_mode_summary">Change from simple to advanced mode</string>
+    <string name="pref_pref_mode_simple">Simple</string>
+    <string name="pref_pref_mode_advanced">Advanced</string>
+
+    <string name="pref_livetracker_title">Live tracker settings</string>
+    <string name="pref_livetracker_summary">Select and configure live trackers</string>
+
+    <string name="pref_loggers_catname">Loggers</string>
+    <string name="pref_loggers_conf">Loggers settings</string>
     <string name="pref_logging_title">Logging details</string>
     <string name="log_gpx_title">Log to GPX</string>
     <string name="log_gpx_summary">Creates a GPX file in the GPSLogger folder on the SD card.</string>
@@ -293,7 +303,7 @@
     </string>
 
     <!-- flying preference -->
-    <string name="flying_pref_title">flying details</string>
+    <string name="flying_pref_title">Flying details</string>
     <string name="flying_pref_summary">Wing type, pilot name,...</string>
 
     <string name="flying_pref_pilot_name_title">Pilot name</string>
@@ -402,21 +412,32 @@
 
        
     <string name="log_livetrack24_title">Log to livetrack24 Server</string>
-    <string name="log_livetrack24_summary">Send GPS data to an online livetrack24 server.</string>
+    <string name="log_livetrack24_summary">Send GPS data to an online livetrack server (leonardo, FFVL, ...).</string>
     <string name="livetrack24_setup_title">livetrack24 Setup</string>
     <string name="livetrack24_setup_summary">Send GPS traces to a livetrack24 server of your choice.</string>
     <string name="livetrack24_enabled">Enable livetrack24</string>
     <string name="livetrack24_enabled_summary">Enable this livetrack24 server.</string>
     <string name="livetrack24_server_category">livetrack24 Settings</string>
-    <string name="livetrack24_server_url">Server</string>
-    <string name="livetrack24_server_url_summary">Submission URL</string>
-    <string name="livetrack24_server_url_default">http://t1.livetrack24.com</string>
+    <string name="livetrack24_server_url">Custom Server</string>
+    <string name="livetrack24_server_url_summary">Custom submission URL</string>
 
-    <string name="livetrack24_username">Your livetrack24 username</string>
-    <string name="livetrack24_password">Your livetrack24 password</string>
+    <string name="livetrack24_server_leonard">http://t1.livetrack24.com</string>
+    <string name="livetrack24_server_ffvl">http://ffvl</string>
+
+    <string name="livetrack24_preset_leonardo">Leonardo live servers</string>
+    <string name="livetrack24_preset_ffvl">FFVL live servers</string>
+    <string name="livetrack24_preset_custom">Custom server settings</string>
+
+    <string name="livetrack24_username">Username</string>
+    <string name="livetrack24_username_summary">Your Leonardo/FFVL/other username</string>
+
+    <string name="livetrack24_password">Password</string>
+    <string name="livetrack24_password_summary">Your Leonardo/FFVL/other password</string>
+
     <string name="livetrack24_interval">Interval for sending data</string>
     <string name="livetrack24_interval_default">3</string>
-
+    <string name="livetrack24_presets">Livetrack presets</string>
+    <string name="livetrack24_presets_summary">Configure for leonardo, FFVL, ...</string>
     <string name="livetrack24_invalid_form">Invalid values</string>
     <string name="livetrack24_invalid_form_message">Please ensure that all of the fields have been filled in properly</string>
     

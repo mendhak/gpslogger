@@ -23,10 +23,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.view.KeyEvent;
+import android.widget.Toast;
+
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.mendhak.gpslogger.GpsMainActivity;
@@ -49,7 +52,7 @@ public class Livetrack24Activity extends SherlockPreferenceActivity implements
         addPreferencesFromResource(R.xml.livetrack24settings);
 
         CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("livetrack24_enabled");
-        EditTextPreference txtlivetrack24Server = (EditTextPreference) findPreference("livetrack24_server_url");
+        final EditTextPreference txtlivetrack24Server = (EditTextPreference) findPreference("livetrack24_server_url");
         EditTextPreference txtlivetrack24Username = (EditTextPreference) findPreference("livetrack24_username");
         EditTextPreference txtlivetrack24Password = (EditTextPreference) findPreference("livetrack24_password");
         EditTextPreference txtlivetrack24Interval = (EditTextPreference) findPreference("livetrack24_interval");
@@ -59,6 +62,18 @@ public class Livetrack24Activity extends SherlockPreferenceActivity implements
         txtlivetrack24Username.setOnPreferenceChangeListener(this);
         txtlivetrack24Password.setOnPreferenceChangeListener(this);
         txtlivetrack24Interval.setOnPreferenceChangeListener(this);
+
+
+        final ListPreference livetrack24_preset= (ListPreference) findPreference("livetrack24_presets");
+        txtlivetrack24Server.setEnabled(livetrack24_preset.getValue().equals("custom"));
+
+        livetrack24_preset.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newVal) {
+                txtlivetrack24Server.setEnabled(newVal.equals("custom"));
+                return true;
+            }
+        });
     }
 
     /**
@@ -96,16 +111,20 @@ public class Livetrack24Activity extends SherlockPreferenceActivity implements
     private boolean IsFormValid()
     {
         CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("livetrack24_enabled");
+        String preset = ((ListPreference) findPreference("livetrack24_presets")).getValue();
         EditTextPreference txtlivetrack24Server = (EditTextPreference) findPreference("livetrack24_server_url");
         EditTextPreference txtlivetrack24Username = (EditTextPreference) findPreference("livetrack24_username");
         EditTextPreference txtlivetrack24Password = (EditTextPreference) findPreference("livetrack24_password");
         EditTextPreference txtlivetrack24Interval = (EditTextPreference) findPreference("livetrack24_interval");
 
+        final boolean srv_not_empty = txtlivetrack24Server.getText() != null && !txtlivetrack24Server.getText().isEmpty();
+        final boolean use_preset = !preset.equals("custom");
+        final boolean has_user = txtlivetrack24Username.getText() != null && !txtlivetrack24Username.getText().isEmpty();
+        final boolean has_passwd = txtlivetrack24Password.getText() != null && !txtlivetrack24Password.getText().isEmpty();
+        final boolean has_interv = txtlivetrack24Interval.getText() != null && isNumeric(txtlivetrack24Interval.getText());
+
         return !chkEnabled.isChecked()
-                || txtlivetrack24Server.getText() != null && !txtlivetrack24Server.getText().isEmpty()
-                && txtlivetrack24Username.getText() != null && !txtlivetrack24Username.getText().isEmpty()
-                && txtlivetrack24Interval.getText() != null && isNumeric(txtlivetrack24Interval.getText())
-                && txtlivetrack24Password.getText() != null && !txtlivetrack24Password.getText().isEmpty();
+                || (srv_not_empty || use_preset) && has_user && has_passwd && has_interv;
     }
 
     private static boolean isNumeric(String str)

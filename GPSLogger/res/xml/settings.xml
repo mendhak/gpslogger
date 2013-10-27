@@ -23,10 +23,34 @@
     <CheckBoxPreference android:key="log_igc"
                         android:summary="@string/log_igc_summary" android:title="@string/log_igc_title"/>
 
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_loggers_conf">
+
+
+        <PreferenceScreen
+            android:title="@string/pref_livetracker_title"
+            android:summary="@string/pref_livetracker_summary">
+
+            <Preference android:title="@string/opengts_setup_title"
+                android:summary="@string/opengts_setup_summary" android:key="opengts_setup">
+                <intent android:action="com.mendhak.gpslogger.OPENGTS_SETUP" />
+            </Preference>
+
+            <Preference android:title="@string/skylines_setup_title"
+                android:summary="@string/skylines_setup_summary" android:key="skylines_setup">
+                <intent android:action="com.mendhak.gpslogger.SKYLINES_SETUP" />
+            </Preference>
+
+            <Preference android:title="@string/livetrack24_setup_title"
+                android:summary="@string/livetrack24_setup_summary" android:key="livetrack24_setup">
+                <intent android:action="com.mendhak.gpslogger.LIVETRACK24_SETUP" />
+            </Preference>
+        </PreferenceScreen>
+
     <PreferenceScreen android:title="@string/pref_logging_title"
                       android:summary="@string/pref_logging_summary">
         <PreferenceCategory android:title="@string/pref_logging_title">
-
 
             <ListPreference android:key="new_file_creation"
                             android:title="@string/new_file_creation_title"
@@ -125,6 +149,7 @@
                             android:key="debugtofile" android:defaultValue="false"/>
 
     </PreferenceScreen>
+
     <PreferenceScreen android:key="autosend_preferencescreen" android:title="@string/pref_autosend_title" android:summary="@string/pref_autosend_summary">
 
         <CheckBoxPreference android:key="autosend_enabled"
@@ -160,27 +185,16 @@
                         android:summary="@string/gdocs_setup_summary" android:key="gdocs_setup">
                 <intent android:action="com.mendhak.gpslogger.GDOCS_SETUP" />
             </Preference>
-            <Preference android:title="@string/opengts_setup_title"
-                        android:summary="@string/opengts_setup_summary" android:key="opengts_setup">
-                <intent android:action="com.mendhak.gpslogger.OPENGTS_SETUP" />
-            </Preference>
 
-            <Preference android:title="@string/skylines_setup_title"
-                        android:summary="@string/skylines_setup_summary" android:key="skylines_setup">
-                <intent android:action="com.mendhak.gpslogger.SKYLINES_SETUP" />
-            </Preference>
 
-            <Preference android:title="@string/livetrack24_setup_title"
-                        android:summary="@string/livetrack24_setup_summary" android:key="livetrack24_setup">
-                <intent android:action="com.mendhak.gpslogger.LIVETRACK24_SETUP" />
-            </Preference>
 
-            <Preference android:title="@string/autoftp_setup_title"
-                         android:summary="@string/autoftp_setup_summary" android:key="autoftp_setup">
-                <intent android:action="com.mendhak.gpslogger.AUTOFTP_SETUP" />
-            </Preference>
+                <Preference android:title="@string/autoftp_setup_title"
+                    android:summary="@string/autoftp_setup_summary" android:key="autoftp_setup">
+                    <intent android:action="com.mendhak.gpslogger.AUTOFTP_SETUP" />
+                </Preference>
         </PreferenceCategory>
 
     </PreferenceScreen>
+    </PreferenceCategory>
 
 </PreferenceScreen>
