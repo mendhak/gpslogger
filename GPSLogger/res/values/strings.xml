@@ -421,8 +421,8 @@
     <string name="livetrack24_server_url">Custom Server</string>
     <string name="livetrack24_server_url_summary">Custom submission URL</string>
 
-    <string name="livetrack24_server_leonard">http://t1.livetrack24.com</string>
-    <string name="livetrack24_server_ffvl">http://ffvl</string>
+    <string name="livetrack24_server_leonardo">http://t1.livetrack24.com</string>
+    <string name="livetrack24_server_ffvl"> http://geolocalisation.ffvl.fr:443</string>
 
     <string name="livetrack24_preset_leonardo">Leonardo live servers</string>
     <string name="livetrack24_preset_ffvl">FFVL live servers</string>

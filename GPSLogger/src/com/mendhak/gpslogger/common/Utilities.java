@@ -175,12 +175,11 @@ public class Utilities
             AppSettings.setLivetrack24Interval(livetrack24_interval_default);
         }
 
-
         String livetrack24_preset = prefs.getString("livetrack24_presets", "");
         if (livetrack24_preset.equals("leonardo")){
-            AppSettings.setLivetrack24ServerURL(prefs.getString("livetrack24_preset_leonardo", ""));
+            AppSettings.setLivetrack24ServerURL(context.getString(R.string.livetrack24_server_leonardo, ""));
         } else if (livetrack24_preset.equals("ffvl")){
-            AppSettings.setLivetrack24ServerURL(prefs.getString("livetrack24_preset_ffvl", ""));
+            AppSettings.setLivetrack24ServerURL(context.getString(R.string.livetrack24_server_ffvl, ""));
         } else {
             AppSettings.setLivetrack24ServerURL(prefs.getString("livetrack24_server_url", ""));
         }
