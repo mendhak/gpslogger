@@ -2,27 +2,16 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
-    <excludeFromCompile>
-      <directory url="file://$PROJECT_DIR$/tests/target/generated-sources/r" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/GPSLogger/gen" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/GPSLogger/target/generated-sources/r" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/tests/gen" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/Testing/gen" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/GPSLogger/target/generated-sources/annotations" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/GPSLogger/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
-    </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>
-      <entry name="?*.properties" />
-      <entry name="?*.xml" />
-      <entry name="?*.gif" />
-      <entry name="?*.png" />
-      <entry name="?*.jpeg" />
-      <entry name="?*.jpg" />
-      <entry name="?*.html" />
-      <entry name="?*.dtd" />
-      <entry name="?*.tld" />
-      <entry name="?*.ftl" />
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
     </wildcardResourcePatterns>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="false">
@@ -33,11 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="GPSLogger" />
+        <module name="gpslogger" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="GPSLogger" target="1.6" />
+      <module name="gpslogger" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>

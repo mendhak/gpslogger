@@ -22,6 +22,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import net.kataplop.gpslogger.R;
@@ -120,6 +122,13 @@ public class Utilities
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
 
+        try {
+            PackageInfo pInfo =  context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            AppSettings.setVersionName(pInfo.versionName);
+        } catch(Exception e){
+            AppSettings.setVersionName("unkown");
+        }
+
         AppSettings.setUseImperial(prefs.getBoolean("useImperial", false));
         AppSettings.setLogToKml(prefs.getBoolean("log_kml", true));
         AppSettings.setLogToGpx(prefs.getBoolean("log_gpx", false));
@@ -128,13 +137,41 @@ public class Utilities
         AppSettings.setIgcPrivateKey(context.getString(R.string.igc_private_key));
         AppSettings.setUseModularView(prefs.getBoolean("modular_view", false));
         AppSettings.setForceScreenOn(prefs.getBoolean("force_screen_on", false));
+
+        AppSettings.setPilotName(prefs.getString("flying_pref_pilot_name", "-"));
+        AppSettings.setGliderName(prefs.getString("flying_pref_glider_name", "-"));
+        AppSettings.setGliderId(prefs.getString("flying_pref_glider_id", "-"));
+
+        final int skylines_interval_default = Integer.parseInt(context.getString(R.string.skylines_interval_default));
+        final int skylines_server_port_default = Integer.parseInt(context.getString(R.string.skylines_server_port_default));
+
         AppSettings.setLogToSkylines(prefs.getBoolean("log_skylines", false));
-        AppSettings.setSkylinesInterval(Integer.parseInt(prefs.getString("skylines_interval", "3")));
+        try {
+            AppSettings.setSkylinesInterval(Integer.parseInt(prefs.getString("skylines_interval",
+                    Integer.toString(skylines_interval_default))));
+        } catch (java.lang.NumberFormatException nfe){
+            AppSettings.setSkylinesInterval(skylines_interval_default);
+        }
         AppSettings.setSkylinesKey(prefs.getString("skylines_key", ""));
-        AppSettings.setSkylinesServerPort(Integer.parseInt(prefs.getString("skylines_server_port", context.getString(R.string.skylines_server_port_default))));
-        AppSettings.setSkylinesServer(prefs.getString("skylines_server", context.getString(R.string.skylines_server_default)));
+
+        try {
+            AppSettings.setSkylinesServerPort(Integer.parseInt(prefs.getString("skylines_server_port",
+                    Integer.toString(skylines_server_port_default))));
+        } catch (java.lang.NumberFormatException nf){
+            AppSettings.setSkylinesServerPort(skylines_server_port_default);
+        }
+        AppSettings.setSkylinesServer(prefs.getString("skylines_server", ""));
+
+        final int livetrack24_interval_default = Integer.parseInt(context.getString(R.string.livetrack24_interval_default));
+
         AppSettings.setLogToLivetrack24(prefs.getBoolean("log_livetrack24", false));
-        AppSettings.setLivetrack24Interval(Integer.parseInt(prefs.getString("livetrack24_interval", "3")));
+        try {
+            AppSettings.setLivetrack24Interval(Integer.parseInt(prefs.getString("livetrack24_interval",
+                    Integer.toString(livetrack24_interval_default))));
+        } catch (Exception e){
+            AppSettings.setLivetrack24Interval(livetrack24_interval_default);
+        }
+
         AppSettings.setLivetrack24ServerURL(prefs.getString("livetrack24_server_url", context.getString(R.string.livetrack24_server_url_default)));
         AppSettings.setLivetrack24Username(prefs.getString("livetrack24_username", ""));
         AppSettings.setLivetrack24Password(prefs.getString("livetrack24_password", ""));
@@ -202,15 +239,15 @@ public class Utilities
             AppSettings.setStaticFile(false);
         }
         else if(AppSettings.getNewFileCreation().equals("static"))
-            {
-                AppSettings.setStaticFile(true);
-                AppSettings.setStaticFileName(prefs.getString("new_file_static_name","gpslogger"));
-            }
-            else
-            {
-                AppSettings.setNewFileOnceADay(false);
-                AppSettings.setStaticFile(false);
-            }
+        {
+            AppSettings.setStaticFile(true);
+            AppSettings.setStaticFileName(prefs.getString("new_file_static_name","gpslogger"));
+        }
+        else
+        {
+            AppSettings.setNewFileOnceADay(false);
+            AppSettings.setStaticFile(false);
+        }
 
         AppSettings.setAutoSendEnabled(prefs.getBoolean("autosend_enabled", false));
         AppSettings.setAutoEmailEnabled(prefs.getBoolean("autoemail_enabled", false));
@@ -233,7 +270,6 @@ public class Utilities
         AppSettings.setAutoEmailTargets(prefs.getString("autoemail_target", ""));
         AppSettings.setDebugToFile(prefs.getBoolean("debugtofile", false));
         AppSettings.setShouldSendZipFile(prefs.getBoolean("autosend_sendzip", true));
-
         AppSettings.setOpenGTSEnabled(prefs.getBoolean("opengts_enabled", false));
         AppSettings.setAutoOpenGTSEnabled(prefs.getBoolean("autoopengts_enabled", false));
         AppSettings.setOpenGTSServer(prefs.getString("opengts_server", ""));

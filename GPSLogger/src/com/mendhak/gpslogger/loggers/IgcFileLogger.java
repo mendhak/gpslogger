@@ -24,9 +24,11 @@
 
 package com.mendhak.gpslogger.loggers;
 
+import android.content.pm.PackageInfo;
 import android.location.Location;
 import android.util.Base64;
 import android.util.Log;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Utilities;
 
 import java.io.*;
@@ -44,7 +46,6 @@ import java.text.SimpleDateFormat;
  */
 public class IgcFileLogger implements IFileLogger
 {
-
     private OutputStream output = null;
     private SignatureOutputStream sos = null;
     private String privateKeyB64 = null;
@@ -56,8 +57,8 @@ public class IgcFileLogger implements IFileLogger
     private Calendar cal = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
 
     private String pilotName;
-    private String gliderType;
-    private String pilotId;
+    private String gliderName;
+    private String gliderId;
     private String versionString;
 
     private static HashMap<String, IgcFileLogger> instances = new HashMap<String, IgcFileLogger>();
@@ -72,7 +73,6 @@ public class IgcFileLogger implements IFileLogger
             return ifl;
         }
     }
-
 
     private boolean initSignature(){
         try {
@@ -92,9 +92,13 @@ public class IgcFileLogger implements IFileLogger
         this.privateKeyB64 = privateKeyB64;
         boolean alreadyExists = false;
         this.file = file;
+        this.pilotName = AppSettings.getPilotName();
+        this.gliderName = AppSettings.getGliderName();
+        this.gliderId = AppSettings.getGliderId();
+
+        this.versionString = AppSettings.getVersionName();
 
         final boolean signatureEnabled = initSignature();
-//        final boolean signatureEnabled = false;
         File previousContent = null;
 
         if (!file.exists()) {
@@ -159,8 +163,8 @@ public class IgcFileLogger implements IFileLogger
         sb.append("HFDTE" + s + "\r\n");
         sb.append("HFFXA100\r\n"); // accuracy in meters - required
         sb.append("HFPLTPILOT:" + pilotName + "\r\n"); // pilot (required)
-        sb.append("HFGTYGLIDERTYPE:" + gliderType + "\r\n"); // glider type (required)
-        sb.append("HFGIDGLIDERID:" + pilotId + "\r\n"); // glider ID required
+        sb.append("HFGTYGLIDERTYPE:" + gliderName + "\r\n"); // glider type (required)
+        sb.append("HFGIDGLIDERID:" + gliderId + "\r\n"); // glider ID required
         sb.append("HFDTM100GPSDATUM:WGS84" + "\r\n"); // datum required - must be wgs84
         sb.append("HFGPSGPS:" + android.os.Build.MODEL + "\r\n"); // info on gps
         // manufacturer

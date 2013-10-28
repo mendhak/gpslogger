@@ -105,7 +105,22 @@
                                 android:defaultValue="60"/>
 
         </PreferenceCategory>
+    </PreferenceScreen>
+    <PreferenceScreen android:title="@string/flying_pref_title" android:summary="@string/flying_pref_summary">
+        <EditTextPreference android:key="flying_pref_pilot_name"
+                            android:title="@string/flying_pref_pilot_name_title"
+                            android:summary="@string/flying_pref_pilot_name_summary"
+                            android:dialogTitle="@string/flying_pref_pilot_name_diag_title"/>
 
+        <EditTextPreference android:key="flying_pref_glider_name"
+                            android:title="@string/flying_pref_glider_name_title"
+                            android:summary="@string/flying_pref_glider_name_summary"
+                            android:dialogTitle="@string/flying_pref_glider_name_diag_title"/>
+
+        <EditTextPreference android:key="flying_pref_glider_id"
+                            android:title="@string/flying_pref_glider_id_title"
+                            android:summary="@string/flying_pref_glider_id_summary"
+                            android:dialogTitle="@string/flying_pref_glider_id_diag_title"/>
     </PreferenceScreen>
 
     <PreferenceScreen android:title="@string/pref_general_title"
