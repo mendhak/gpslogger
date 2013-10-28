@@ -5,22 +5,24 @@
  
 	 <Preference android:key="osm_resetauth" android:summary="@string/osm_resetauth_summary" 
 	 	android:title="@string/osm_resetauth"/>
- 	
- 	
+
 	 <ListPreference android:key="osm_visibility"
-		android:title="@string/osm_visibility" android:summary="@string/osm_visibility_summary"
-		android:entries="@array/osm_visibility_choices" android:defaultValue="private"
+		android:title="@string/osm_visibility"
+        android:summary="@string/osm_visibility_summary"
+		android:entries="@array/osm_visibility_choices"
+        android:defaultValue="private"
 		android:entryValues="@array/osm_visibility_choices" />
  
  	<EditTextPreference android:key="osm_description"
 		android:title="@string/osm_description"
 		android:summary="@string/osm_description_summary"
-		android:dialogTitle="@string/osm_description" />
+		android:dialogTitle="@string/osm_description"
+        android:defaultValue=""/>
 			
 	<EditTextPreference android:key="osm_tags"
 		android:title="@string/osm_tags"
 		android:summary="@string/osm_tags_summary"
-		android:dialogTitle="@string/osm_tags" />
- 
-  
+		android:dialogTitle="@string/osm_tags"
+        android:defaultValue=""/>
+
 </PreferenceScreen>

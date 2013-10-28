@@ -130,14 +130,11 @@ public class Utilities
         }
 
         AppSettings.setUseImperial(prefs.getBoolean("useImperial", false));
-
-        AppSettings.setLogToKml(prefs.getBoolean("log_kml", false));
-
+        AppSettings.setLogToKml(prefs.getBoolean("log_kml", true));
         AppSettings.setLogToGpx(prefs.getBoolean("log_gpx", false));
-
+        AppSettings.setLogToPlainText(prefs.getBoolean("log_plain_text", false));
         AppSettings.setLogToIgc(prefs.getBoolean("log_igc", false));
         AppSettings.setIgcPrivateKey(context.getString(R.string.igc_private_key));
-
         AppSettings.setUseModularView(prefs.getBoolean("modular_view", false));
         AppSettings.setForceScreenOn(prefs.getBoolean("force_screen_on", false));
 
@@ -181,42 +178,30 @@ public class Utilities
         } else if (livetrack24_preset.equals("ffvl")){
             AppSettings.setLivetrack24ServerURL(context.getString(R.string.livetrack24_server_ffvl, ""));
         } else {
-            AppSettings.setLivetrack24ServerURL(prefs.getString("livetrack24_server_url", ""));
+            AppSettings.setLivetrack24ServerURL(prefs.getString("livetrack24_server_url", context.getString(R.string.livetrack24_server_leonardo)));
         }
+
         AppSettings.setLivetrack24Username(prefs.getString("livetrack24_username", ""));
         AppSettings.setLivetrack24Password(prefs.getString("livetrack24_password", ""));
-
-        AppSettings.setLogToPlainText(prefs.getBoolean("log_plain_text", false));
-
         AppSettings.setLogToOpenGTS(prefs.getBoolean("log_opengts", false));
+        AppSettings.setShowInNotificationBar(prefs.getBoolean("show_notification", true));
+        AppSettings.setPreferCellTower(prefs.getBoolean("prefer_celltower", false));
 
-        AppSettings.setShowInNotificationBar(prefs.getBoolean(
-                "show_notification", true));
-
-        AppSettings.setPreferCellTower(prefs.getBoolean("prefer_celltower",
-                false));
-
-
-        String minimumDistanceString = prefs.getString(
-                "distance_before_logging", "0");
-
+        String minimumDistanceString = prefs.getString("distance_before_logging", "0");
         if (minimumDistanceString != null && minimumDistanceString.length() > 0)
         {
-            AppSettings.setMinimumDistanceInMeters(Integer
-                    .valueOf(minimumDistanceString));
+            AppSettings.setMinimumDistanceInMeters(Integer.valueOf(minimumDistanceString));
         }
         else
         {
             AppSettings.setMinimumDistanceInMeters(0);
         }
 
-        String minimumAccuracyString = prefs.getString(
-                "accuracy_before_logging", "0");
+        String minimumAccuracyString = prefs.getString("accuracy_before_logging", "0");
 
         if (minimumAccuracyString != null && minimumAccuracyString.length() > 0)
         {
-            AppSettings.setMinimumAccuracyInMeters(Integer
-                    .valueOf(minimumAccuracyString));
+            AppSettings.setMinimumAccuracyInMeters(Integer.valueOf(minimumAccuracyString));
         }
         else
         {
@@ -225,45 +210,36 @@ public class Utilities
 
         if (AppSettings.shouldUseImperial())
         {
-            AppSettings.setMinimumDistanceInMeters(Utilities.FeetToMeters(AppSettings
-                    .getMinimumDistanceInMeters()));
+            AppSettings.setMinimumDistanceInMeters(Utilities.FeetToMeters(AppSettings.getMinimumDistanceInMeters()));
 
-            AppSettings.setMinimumAccuracyInMeters(Utilities.FeetToMeters(AppSettings
-                    .getMinimumAccuracyInMeters()));
+            AppSettings.setMinimumAccuracyInMeters(Utilities.FeetToMeters(AppSettings.getMinimumAccuracyInMeters()));
         }
 
-
-        String minimumSecondsString = prefs.getString("time_before_logging",
-                "60");
+        String minimumSecondsString = prefs.getString("time_before_logging", "60");
 
         if (minimumSecondsString != null && minimumSecondsString.length() > 0)
         {
-            AppSettings
-                    .setMinimumSeconds(Integer.valueOf(minimumSecondsString));
+            AppSettings.setMinimumSeconds(Integer.valueOf(minimumSecondsString));
         }
         else
         {
             AppSettings.setMinimumSeconds(60);
         }
 
-        AppSettings.setKeepFix(prefs.getBoolean("keep_fix",
-                false));
+        AppSettings.setKeepFix(prefs.getBoolean("keep_fix", false));
 
-        String retryIntervalString = prefs.getString("retry_time",
-                "60");
+        String retryIntervalString = prefs.getString("retry_time", "60");
 
         if (retryIntervalString != null && retryIntervalString.length() > 0)
         {
-            AppSettings
-                    .setRetryInterval(Integer.valueOf(retryIntervalString));
+            AppSettings.setRetryInterval(Integer.valueOf(retryIntervalString));
         }
         else
         {
              AppSettings.setRetryInterval(60);
         }
 
-        AppSettings.setNewFileCreation(prefs.getString("new_file_creation",
-                "onceaday"));
+        AppSettings.setNewFileCreation(prefs.getString("new_file_creation", "onceaday"));
 
         if (AppSettings.getNewFileCreation().equals("onceaday"))
         {
@@ -282,9 +258,7 @@ public class Utilities
         }
 
         AppSettings.setAutoSendEnabled(prefs.getBoolean("autosend_enabled", false));
-
-        AppSettings.setAutoEmailEnabled(prefs.getBoolean("autoemail_enabled",
-                false));
+        AppSettings.setAutoEmailEnabled(prefs.getBoolean("autoemail_enabled", false));
 
         if (Float.valueOf(prefs.getString("autosend_frequency", "0")) >= 8f)
         {
@@ -293,22 +267,21 @@ public class Utilities
             editor.commit();
         }
 
-        AppSettings.setAutoSendDelay(Float.valueOf(prefs.getString(
-                "autosend_frequency", "0")));
+        AppSettings.setAutoSendDelay(Float.valueOf(prefs.getString("autosend_frequency", "0")));
 
         AppSettings.setSmtpServer(prefs.getString("smtp_server", ""));
         AppSettings.setSmtpPort(prefs.getString("smtp_port", "25"));
         AppSettings.setSmtpSsl(prefs.getBoolean("smtp_ssl", true));
+        AppSettings.setSmtpFrom(prefs.getString("smtp_from", ""));
         AppSettings.setSmtpUsername(prefs.getString("smtp_username", ""));
         AppSettings.setSmtpPassword(prefs.getString("smtp_password", ""));
         AppSettings.setAutoEmailTargets(prefs.getString("autoemail_target", ""));
         AppSettings.setDebugToFile(prefs.getBoolean("debugtofile", false));
         AppSettings.setShouldSendZipFile(prefs.getBoolean("autosend_sendzip", true));
-        AppSettings.setSmtpFrom(prefs.getString("smtp_from", ""));
         AppSettings.setOpenGTSEnabled(prefs.getBoolean("opengts_enabled", false));
         AppSettings.setAutoOpenGTSEnabled(prefs.getBoolean("autoopengts_enabled", false));
         AppSettings.setOpenGTSServer(prefs.getString("opengts_server", ""));
-        AppSettings.setOpenGTSServerPort(prefs.getString("opengts_server_port", ""));
+        AppSettings.setOpenGTSServerPort(prefs.getString("opengts_server_port", "80"));
         AppSettings.setOpenGTSServerCommunicationMethod(prefs.getString("opengts_server_communication_method", ""));
         AppSettings.setOpenGTSServerPath(prefs.getString("autoopengts_server_path", ""));
         AppSettings.setOpenGTSDeviceId(prefs.getString("opengts_device_id", ""));

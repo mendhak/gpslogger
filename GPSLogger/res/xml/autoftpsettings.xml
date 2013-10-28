@@ -5,7 +5,8 @@
 
     <CheckBoxPreference
         android:key="autoftp_enabled"
-        android:title="@string/autoftp_enabled" />
+        android:title="@string/autoftp_enabled"
+        android:defaultValue="false"/>
 
 
     <EditTextPreference
@@ -13,23 +14,28 @@
             android:title="@string/autoftp_server"
             android:summary="@string/autoftp_server_summary"
             android:dialogTitle="@string/autoftp_server"
-            android:hint="@string/autoftp_server_summary"/>
+            android:hint="@string/autoftp_server_summary"
+            android:defaultValue=""/>
 
     <EditTextPreference
             android:key="autoftp_username"
             android:title="@string/autoftp_username"
-            android:dialogTitle="@string/autoftp_username"/>
+            android:dialogTitle="@string/autoftp_username"
+            android:defaultValue=""/>
 
     <EditTextPreference
             android:key="autoftp_password"
             android:title="@string/autoftp_password"
             android:dialogTitle="@string/autoftp_password"
-            android:password="true"/>
+            android:password="true"
+            android:defaultValue=""/>
 
     <Preference android:title="@string/autoftp_test"
-                android:summary="@string/autoftp_test_summary" android:key="autoftp_test"/>
+                android:summary="@string/autoftp_test_summary"
+                android:key="autoftp_test"/>
 
     <PreferenceCategory android:title="@string/autoftp_advanced_settings">
+
         <EditTextPreference
                 android:key="autoftp_port"
                 android:title="@string/autoftp_port"
@@ -58,7 +64,6 @@
                 android:title="@string/autoftp_implicit"
                 android:defaultValue="false"
                 android:summary="@string/autoftp_implicit_summary"/>
-
 
     </PreferenceCategory>
 

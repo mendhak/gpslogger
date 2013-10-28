@@ -20,6 +20,12 @@
         </menu>
     </item>
 
+    <item android:id="@+id/mnuPrefsExport" android:title="@string/menu_pexp"
+          />
+
+    <item android:id="@+id/mnuPrefsImport" android:title="@string/menu_pimp"
+          />
+
     <item android:id="@+id/mnuFAQ" android:title="@string/menu_faq"
           android:icon="@android:drawable/ic_menu_help" />
 

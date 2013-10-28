@@ -2,7 +2,8 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Preference android:key="dropbox_resetauth" android:summary="@string/dropbox_authorize_description"
+    <Preference android:key="dropbox_resetauth"
+                android:summary="@string/dropbox_authorize_description"
                 android:title="@string/dropbox_authorize" />
 
 </PreferenceScreen>

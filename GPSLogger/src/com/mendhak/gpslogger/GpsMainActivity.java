@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -38,11 +39,8 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.fragments.*;
-import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.IActionListener;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
@@ -69,6 +67,8 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
      */
     private static Intent serviceIntent;
     private GpsLoggingService loggingService;
+    private PrefsIO prefsio;
+    private final int DIALOG_CHOOSE_FILE = 103;
 
     /**
      * Provides a connection to the GPS Logging Service
@@ -118,6 +118,8 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+        String path;
+
         Utilities.LogDebug("GpsMainActivity.onCreate");
 
         super.onCreate(savedInstanceState);
@@ -130,6 +132,9 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
         //GetPreferences();
 
         StartAndBindService();
+
+        path = Environment.getExternalStorageDirectory() + File.separator + "GPSLogger";
+        prefsio=new PrefsIO(this, PreferenceManager.getDefaultSharedPreferences(this), "gpslogger", path);
     }
 
     @Override
@@ -282,10 +287,28 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
             frag_SE_title.setText(title);
         }
     }
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DIALOG_CHOOSE_FILE:
+                return prefsio.ChooseFileDialog();
+            default:
+                return null;
+        }
+    }
 
-    /**
-     * Starts the service and binds the activity to it.
-     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if( (requestCode==prefsio.ACTIVITY_CHOOSE_FILE) && (resultCode == RESULT_OK) ) {
+            Uri uri = data.getData();
+            String str=uri.getPath();
+            prefsio.SetCurFileName(str);
+            prefsio.ImportFile();
+        }
+    }
+        /**
+         * Starts the service and binds the activity to it.
+         */
     private void StartAndBindService()
     {
         Utilities.LogDebug("StartAndBindService - binding now");
@@ -564,7 +587,7 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-
+        Boolean res=false;
         int itemId = item.getItemId();
         Utilities.LogInfo("Option item selected - " + String.valueOf(item.getTitle()));
 
@@ -600,6 +623,12 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
                 break;
             case R.id.mnuEmailnow:
                 EmailNow();
+                break;
+            case R.id.mnuPrefsExport:
+                prefsio.AskFileName();
+                break;
+            case R.id.mnuPrefsImport:
+                showDialog(DIALOG_CHOOSE_FILE);
                 break;
             case R.id.mnuFAQ:
                 Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);

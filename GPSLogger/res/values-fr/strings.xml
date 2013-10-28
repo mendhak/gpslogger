@@ -12,9 +12,23 @@
   <string name="add_description">Ajouter une description</string>
   <string name="letters_numbers">Utilisez uniquement des lettres et chiffres</string>
   <string name="menu_settings">Paramètres</string>
+    <string name="menu_pexp">Export de paramètres</string>
+    <string name="menu_pimp">Import de paramètres</string>
   <string name="menu_annotate">Annoter</string>
   <string name="menu_share">Partager</string>
   <string name="menu_exit">Quitter</string>
+    <string name="ExportSuccess">Les paramètres ont été exportés avec succès</string>
+    <string name="ExportFailed">Echec d\'exportation des paramètres</string>
+    <string name="ImportSuccess">Les paramètres ont été importés avec succès</string>
+    <string name="ImportFailed">Echec d\'importation des paramètres</string>
+    <string name="AskFileName">Entrez le nom de fichier sans extension</string>
+    <string name="ChooseFile">Choisissez le fichier</string>
+    <string name="SelectFile">Sélectionnez le fichier</string>
+    <string name="Browse">Explorer...</string>
+    <string name="NoFSBrowser">Explorateur de fichiers n\'est pas installé</string>
+    <string name="FileExists">Le fichier existe déjà"</string>
+    <string name="AskAnotherFile">Merci d\'entrer un autre nom</string>
+
   <string name="txt_latitude">Latitude :</string>
   <string name="txt_longitude">Longitude :</string>
   <string name="txt_altitude">Altitude :</string>
