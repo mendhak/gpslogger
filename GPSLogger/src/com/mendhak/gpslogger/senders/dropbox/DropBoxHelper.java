@@ -19,6 +19,7 @@ package com.mendhak.gpslogger.senders.dropbox;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import com.dropbox.client2.DropboxAPI;
@@ -129,7 +130,6 @@ public class DropBoxHelper implements IActionListener, IFileSender
         {
             session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE);
         }
-
         return session;
     }
 

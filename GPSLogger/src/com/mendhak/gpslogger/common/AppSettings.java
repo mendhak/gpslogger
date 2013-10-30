@@ -93,7 +93,7 @@ public class AppSettings extends Application
 
     private static String staticFileName;
     private static boolean isStaticFile;
-
+    private static String msgTemplate;
 
     static void setVersionName(String versionName){
         AppSettings.versionName = versionName;
@@ -840,5 +840,15 @@ public class AppSettings extends Application
     public static void setStaticFile(boolean staticFile)
     {
         AppSettings.isStaticFile = staticFile;
+    }
+
+    public static void setMsgTemplate(String newMsgTemplate)
+    {
+        AppSettings.msgTemplate = newMsgTemplate;
+    }
+
+    public static String getMsgTemplate()
+    {
+        return msgTemplate;
     }
 }

@@ -69,10 +69,24 @@
     <string name="sharing_location_only">Location only</string>
     <string name="sharing_pick_file">Pick a file to share</string>
     <string name="sharing_mylocation">My location</string>
-    <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
+<!--    <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>  -->
     <string name="sharing_via">Share via</string>
+    <string name="sharing_template_default">http://maps.google.com/maps?q=LATDD,LONDD</string>
+<!--    <string name="sharing_template_default">LATDD LONDD\nLATD LATMD LOND LONMD\nLATD LATM LATSD LOND LONM LONSD</string>    -->
+    <string name="latitude_degree_decimal">LATDD</string>
+    <string name="longitude_degree_decimal">LONDD</string>
+    <string name="latitude_degree">LATD</string>
+    <string name="longitude_degree">LOND</string>
+    <string name="latitude_min_decimal">LATMD</string>
+    <string name="longitude_min_decimal">LONMD</string>
+    <string name="latitude_min">LATM</string>
+    <string name="longitude_min">LONM</string>
+    <string name="latitude_sec_decimal">LATSD</string>
+    <string name="longitude_sec_decimal">LONSD</string>
+    <string name="latitude_sec">LATS</string>
+    <string name="longitude_sec">LONS</string>
 
-    <!-- general -->
+            <!-- general -->
     <string name="foot">&#160;foot</string>
     <string name="feet">&#160;feet</string>
     <string name="meter">&#160;meter</string>
@@ -207,6 +221,9 @@
 
     <string name="useimperial_title">Use Imperial units</string>
     <string name="useimperial_summary">Use feet, miles and pints, none of that newfangled metric stuff.</string>
+    <string name="msg_template_title">Message template</string>
+    <string name="msg_template_summary">The template to use for sharing position. See help for available variables.</string>
+    <string name="msg_template_dialog_title">Message template</string>
     <string name="show_notification_title">Show Notification</string>
     <string name="show_notification_summary">Displays a reminder along with coordinates in the notification bar.
     </string>

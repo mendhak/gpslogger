@@ -17,6 +17,7 @@
 
 package com.mendhak.gpslogger;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -172,7 +173,10 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
 
         public boolean onPreferenceClick(Preference preference)
         {
-            startActivity(OSMHelper.GetOsmSettingsIntent(getApplicationContext()));
+            Context cnt = getApplicationContext();
+            Intent intent = OSMHelper.GetOsmSettingsIntent(cnt);
+            startActivity(intent);
+//            startActivity(OSMHelper.GetOsmSettingsIntent(getApplicationContext()));
 
             return true;
         }
