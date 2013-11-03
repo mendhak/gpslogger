@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/google-play-services_lib/google-play-services_lib.iml" filepath="$PROJECT_DIR$/google-play-services_lib/google-play-services_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/GPSLogger/gpslogger.iml" filepath="$PROJECT_DIR$/GPSLogger/gpslogger.iml" />
       <module fileurl="file://$PROJECT_DIR$/gpslogger-parent.iml" filepath="$PROJECT_DIR$/gpslogger-parent.iml" />
-      <module fileurl="file://$PROJECT_DIR$/GPSLogger/gen-external-apklibs/~apklib-com.actionbarsherlock_actionbarsherlock_4.2.0.iml" filepath="$PROJECT_DIR$/GPSLogger/gen-external-apklibs/~apklib-com.actionbarsherlock_actionbarsherlock_4.2.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GPSLogger/gen-external-apklibs/~apklib-com.actionbarsherlock_actionbarsherlock_4.4.0.iml" filepath="$PROJECT_DIR$/GPSLogger/gen-external-apklibs/~apklib-com.actionbarsherlock_actionbarsherlock_4.4.0.iml" />
     </modules>
   </component>
 </project>
