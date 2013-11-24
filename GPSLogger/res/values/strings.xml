@@ -197,7 +197,7 @@
         battery.
     </string>
     <string name="time_before_logging_title">Time before logging</string>
-    <string name="time_before_logging_summary">Use 0 for maximum frequency, but slower is better for battery life.
+    <string name="time_before_logging_summary">Used by fileloggers only. Use 0 for maximum frequency.
     </string>
     <string name="time_before_logging_dialog_title">Time in seconds</string>
     <string name="time_before_logging_hint">Enter seconds (max 9999)</string>
@@ -211,8 +211,7 @@
     <string name="retry_time_dialog_title">Time in seconds</string>
     <string name="retry_time_hint">Enter seconds (max 9999)</string>
     <string name="distance_before_logging_title">Distance before logging</string>
-    <string name="distance_before_logging_summary">How far to travel before logging the next point. Use 0 to log all
-        points.
+    <string name="distance_before_logging_summary">Used by fileloggers only. How far to travel before logging the next point. Use 0 to log all points.
     </string>
     <string name="accuracy_before_logging_title">Accuracy before logging</string>
     <string name="accuracy_before_logging_summary">Which min. accuracy to for logging. Use 0 to log all
@@ -437,7 +436,11 @@
     <string name="skylines_server_port_default">5597</string>
     <string name="skylines_key">Your pilot private key</string>
     <string name="skylines_interval">Interval for sending data</string>
+    <string name="skylines_interval_summary">How often send data to SkyLines server</string>
     <string name="skylines_interval_default">3</string>
+    <string name="skylines_distance_before_logging">Distance before logging</string>
+    <string name="skylines_distance_before_logging_summary">How far to travel before logging the next point to SkyLines server. Use 0 to log all points.</string>
+    <string name="skylines_distance_before_logging_default">10</string>
     <string name="skylines_invalid_form">Invalid values</string>
     <string name="skylines_invalid_form_message">Please ensure that all of the fields have been filled in properly</string>
 
@@ -467,6 +470,10 @@
 
     <string name="livetrack24_interval">Interval for sending data</string>
     <string name="livetrack24_interval_default">3</string>
+    <string name="livetrack24_interval_summary">How often send data to Livetrack24 server</string>
+    <string name="livetrack24_distance_before_logging">Distance before logging</string>
+    <string name="livetrack24_distance_before_logging_summary">How far to travel before logging the next point to Livetrack24 server. Use 0 to log all points.</string>
+    <string name="livetrack24_distance_before_logging_default">10</string>
     <string name="livetrack24_presets">Livetrack presets</string>
     <string name="livetrack24_presets_summary">Configure for leonardo, FFVL, ...</string>
     <string name="livetrack24_invalid_form">Invalid values</string>
@@ -492,6 +499,13 @@
     <string name="autoopengts_server_path">Server Path</string>
     <string name="autoopengts_server_path_summary">Optional and only for HTTP-based communication. For example \'/gprmc/Data\'</string>
     <string name="autoopengts_device_id">Device ID</string>
+    <string name="opengts_interval">Interval for sending data</string>
+    <string name="opengts_interval_default">60</string>
+    <string name="opengts_interval_summary">How often send data to OpenGTS server</string>
+    <string name="opengts_distance_before_logging">Distance before logging</string>
+    <string name="opengts_distance_before_logging_summary">How far to travel before logging the next point to OpenGTS server. Use 0 to log all points.</string>
+    <string name="opengts_distance_before_logging_default">10</string>
+
     <string name="autoftp_server">FTP Server</string>
     <string name="autoftp_server_summary">IP address or hostname</string>
     <string name="autoftp_username">Username</string>

@@ -35,14 +35,15 @@ import com.mendhak.gpslogger.common.Utilities;
  * @author Jeroen van Wilgenburg
  *         https://github.com/jvwilge/gpslogger/commit/a7d45bcc1d5012513ff2246022ce4da2708adf47
  */
-public class PlainTextFileLogger implements IFileLogger
+public class PlainTextFileLogger  extends BaseLogger implements IFileLogger
 {
 
     private File file;
     public static final String name = "TXT";
 
-    public PlainTextFileLogger(File file)
+    public PlainTextFileLogger(File file, int minsec, int mindist)
     {
+        super(minsec,mindist);
         this.file = file;
     }
 
@@ -65,6 +66,7 @@ public class PlainTextFileLogger implements IFileLogger
         BufferedOutputStream output = new BufferedOutputStream(writer);
 
         String dateTimeString = Utilities.GetIsoDateTime(new Date(loc.getTime()));
+        SetLatestTimeStamp(System.currentTimeMillis());
 
         String outputString = String.format(Locale.US, "%s,%f,%f,%f,%f,%f,%f\n", dateTimeString,
                 loc.getLatitude(),

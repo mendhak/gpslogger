@@ -44,7 +44,7 @@ import java.text.SimpleDateFormat;
  * Writes an IGC file suitable for most flight related
  * tools.
  */
-public class IgcFileLogger implements IFileLogger
+public class IgcFileLogger extends BaseLogger implements IFileLogger
 {
     private OutputStream output = null;
     private SignatureOutputStream sos = null;
@@ -63,12 +63,12 @@ public class IgcFileLogger implements IFileLogger
 
     private static HashMap<String, IgcFileLogger> instances = new HashMap<String, IgcFileLogger>();
 
-    public static IgcFileLogger getIgcFileLogger(File file, final String privateKey) throws IOException {
+    public static IgcFileLogger getIgcFileLogger(File file, final String privateKey, int minsec, int mindist) throws IOException {
         final String fname = file.getAbsolutePath();
         if(instances.containsKey(fname) && privateKey.equals(instances.get(fname).privateKeyB64)) {
             return instances.get(fname);
         } else {
-            IgcFileLogger ifl = new IgcFileLogger(file, privateKey);
+            IgcFileLogger ifl = new IgcFileLogger(file, privateKey, minsec, mindist);
             instances.put(fname, ifl);
             return ifl;
         }
@@ -88,7 +88,8 @@ public class IgcFileLogger implements IFileLogger
         return false;
     }
 
-    private IgcFileLogger(File file, String privateKeyB64) throws IOException {
+    private IgcFileLogger(File file, String privateKeyB64, int minsec, int mindist) throws IOException {
+        super(minsec,mindist);
         this.privateKeyB64 = privateKeyB64;
         boolean alreadyExists = false;
         this.file = file;
@@ -262,6 +263,7 @@ public class IgcFileLogger implements IFileLogger
         );
 
         output.write(line.getBytes());
+        SetLatestTimeStamp(System.currentTimeMillis());
 //        output.flush();
     }
 

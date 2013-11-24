@@ -28,7 +28,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 
-class Gpx10FileLogger implements IFileLogger
+class Gpx10FileLogger extends BaseLogger implements IFileLogger
 {
     protected final static Object lock = new Object();
 
@@ -39,8 +39,9 @@ class Gpx10FileLogger implements IFileLogger
     private final int satelliteCount;
     public static final String name = "GPX";
 
-    Gpx10FileLogger(File gpxFile, boolean addNewTrackSegment, int satelliteCount)
+    Gpx10FileLogger(File gpxFile, boolean addNewTrackSegment, int satelliteCount, int minsec, int mindist)
     {
+        super(minsec,mindist);
         this.gpxFile = gpxFile;
         this.addNewTrackSegment = addNewTrackSegment;
         this.satelliteCount = satelliteCount;
@@ -59,6 +60,7 @@ class Gpx10FileLogger implements IFileLogger
 
         Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(dateTimeString, gpxFile, loc, addNewTrackSegment, satelliteCount);
         Utilities.LogDebug(String.format("There are currently %s tasks waiting on the GPX10 EXECUTOR.", EXECUTOR.getQueue().size()));
+        SetLatestTimeStamp(System.currentTimeMillis());
         EXECUTOR.execute(writeHandler);
     }
 

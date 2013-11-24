@@ -35,6 +35,7 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.loggers.BaseLogger;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.AlarmReceiver;
@@ -46,6 +47,10 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class GpsLoggingService extends Service implements IActionListener
 {
@@ -526,7 +531,7 @@ public class GpsLoggingService extends Service implements IActionListener
             Utilities.LogInfo("Requesting GPS location updates");
             // gps satellite based
             gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    1000, 0,
+                    500, 0,
                     gpsLocationListener);
 
             gpsLocationManager.addGpsStatusListener(gpsLocationListener);
@@ -717,13 +722,7 @@ public class GpsLoggingService extends Service implements IActionListener
 
         // Wait some time even on 0 frequency so that the UI doesn't lock up
 
-        if ((currentTimeStamp - Session.getLatestTimeStamp()) < 1000)
-        {
-            return;
-        }
-
-        // Don't do anything until the user-defined time has elapsed
-        if ((currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 1000))
+        if ((currentTimeStamp - Session.getLatestTimeStamp()) < 300)
         {
             return;
         }
@@ -750,37 +749,52 @@ public class GpsLoggingService extends Service implements IActionListener
             }
         }
 
-        //Don't do anything until the user-defined distance has been traversed
-        if (AppSettings.getMinimumDistanceInMeters() > 0 && Session.hasValidLocation())
-        {
-
-            double distanceTraveled = Utilities.CalculateDistance(loc.getLatitude(), loc.getLongitude(),
-                    Session.getCurrentLatitude(), Session.getCurrentLongitude());
-
-            if (AppSettings.getMinimumDistanceInMeters() > distanceTraveled)
-            {
-                SetStatus("Only " + String.valueOf(Math.floor(distanceTraveled)) + " m traveled.");
-                StopManagerAndResetAlarm();
-                return;
+        if( NeedToLog(loc) ) {
+            Utilities.LogInfo("New location obtained and we need to log a point");
+            ResetCurrentFileName(false);
+            Session.setLatestTimeStamp(System.currentTimeMillis());
+            Session.setCurrentLocationInfo(loc);
+            SetDistanceTraveled(loc);
+            Notify();
+            WriteToFile(loc);
+            GetPreferences();
+            if (IsMainFormVisible()) mainServiceClient.OnLocationUpdate(loc);
             }
-
-        }
-
-
-        Utilities.LogInfo("New location obtained");
-        ResetCurrentFileName(false);
-        Session.setLatestTimeStamp(System.currentTimeMillis());
-        Session.setCurrentLocationInfo(loc);
-        SetDistanceTraveled(loc);
-        Notify();
-        WriteToFile(loc);
-        GetPreferences();
         StopManagerAndResetAlarm();
 
-        if (IsMainFormVisible())
+    }
+
+    private boolean NeedToLog(Location loc) {
+        List<IFileLogger> loggers = Session.getFileLoggers();
+        boolean needToLog=false;
+        for (IFileLogger logger : loggers)
         {
-            mainServiceClient.OnLocationUpdate(loc);
+            needToLog|=logger.isTimeToLog();
+            needToLog|=logger.isDistToLog(loc.getLongitude(),loc.getLatitude());
         }
+        Utilities.LogInfo("Need to log? "+String.valueOf(needToLog));
+        return needToLog;
+    }
+
+    private long GetNextAlarmTime() {
+        List<IFileLogger> loggers = Session.getFileLoggers();
+        long NextAlarmTime=500; // Minimum alarm time
+        List<Long> nats = new ArrayList<Long>();
+        long nat=0;
+        long systime = System.currentTimeMillis();
+        for (IFileLogger logger : loggers)
+        {
+            Utilities.LogDebug("GetNextAlarmTime logger:"+logger.getName());
+            nat=logger.getNextPointTime();
+            Utilities.LogDebug("NextAlarmTime: "+nat);
+            nats.add(nat-systime);
+        }
+        Long[] arnat = nats.toArray(new Long[nats.size()]);
+        Arrays.sort(arnat);
+        Utilities.LogDebug("Sorted array of NextAlarmTime: " + Arrays.toString(arnat));
+        nat=(long)arnat[0];
+        if(nat>NextAlarmTime) NextAlarmTime=nat;
+        return NextAlarmTime;
     }
 
     private void SetDistanceTraveled(Location loc)
@@ -842,9 +856,14 @@ public class GpsLoggingService extends Service implements IActionListener
 
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
         nextPointAlarmManager.cancel(pi);
-
-        nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + AppSettings.getMinimumSeconds() * 1000, pi);
+//        long realtime = SystemClock.elapsedRealtime();
+        long systime = System.currentTimeMillis();
+        long nextalarm = GetNextAlarmTime();
+        Utilities.LogDebug("Systime:" +String.valueOf(systime) + "; Got nextalarm time:" + String.valueOf(nextalarm));
+//        nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+//                realtime + nextalarm, pi);
+        nextPointAlarmManager.set(AlarmManager.RTC_WAKEUP,
+                systime + nextalarm, pi);
 
     }
 
@@ -889,21 +908,28 @@ public class GpsLoggingService extends Service implements IActionListener
      */
     private void WriteToFile(Location loc)
     {
-        Utilities.LogDebug("GpsLoggingService.WriteToFile");
+        Utilities.LogDebug("GpsLoggingService WriteToFile");
         List<IFileLogger> loggers = Session.getFileLoggers();
         Session.setAddNewTrackSegment(false);
-
+        double lon = loc.getLongitude();
+        double lat = loc.getLatitude();
+        boolean allowdesc = false;
         for (IFileLogger logger : loggers)
         {
             try
             {
-                logger.Write(loc);
-                Session.setAllowDescription(true);
+                if(logger.isTimeToLog() && logger.isDistToLog(lon,lat))
+                {
+                    Utilities.LogDebug("Finally write to logger: " + logger.getName() + " at time: " + System.currentTimeMillis());
+                    logger.Write(loc);
+                    allowdesc=true;
+                }
             }
             catch (Exception e)
             {
                 SetStatus(R.string.could_not_write_to_file);
             }
+            if(allowdesc) Session.setAllowDescription(true);
         }
 
     }

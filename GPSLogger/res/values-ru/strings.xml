@@ -149,24 +149,24 @@
   <string name="prefer_celltower_summary">Использовать данные о положении с сотовых вышек. Менее точно, но экономит
         батарею.
     </string>
-  <string name="time_before_logging_title">Интервал логирования точки</string>
+  <string name="time_before_logging_title">Интервал записи лога</string>
   <string name="time_before_logging_summary">Используйте 0 для минимально возможного интервала логирования. Реже - лучше
         для батареи.
     </string>
   <string name="time_before_logging_dialog_title">Время в секундах</string>
-  <string name="time_before_logging_hint">Введите число секунд (max 9999)</string>
+  <string name="time_before_logging_hint">Укажите количество секунд (0...9999)</string>
   <string name="keep_fix_summary">Не выключать GPS в промежутках между точками. Осторожно, при этом увеличивается расход аккумулятора.</string>
   <string name="keep_fix_title">Держать GPS включённым</string>
-  <string name="retry_time_title">Интервал времени для точности</string>
+  <string name="retry_time_title">Время ожидания точности GPS</string>
   <string name="retry_time_summary">Используйте 0 для максимальной частоты, но чем медленнее, тем лучше для аккумулятора.     </string>
   <string name="retry_time_dialog_title">Время в секундах</string>
-  <string name="retry_time_hint">Введите интервал в секундах (максимум 9999)</string>
-  <string name="distance_before_logging_title">Дистанция логирования точки</string>
+  <string name="retry_time_hint">Укажите количество секунд (0...9999)</string>
+  <string name="distance_before_logging_title">Дистанция записи лога</string>
   <string name="distance_before_logging_summary">Используйте 0 для минимально возможной дистанции логирования. Больше
         - лучше для батареи.
     </string>
   <string name="accuracy_before_logging_title">Минимальная точность измерений</string>
-  <string name="accuracy_before_logging_summary">Минимально допустимая точность измерений. Установите 0 для записи результатов с любой точностью.</string>
+  <string name="accuracy_before_logging_summary">Минимально допустимая точность измерений координат. Установите 0 для записи результатов с любой точностью.</string>
   <string name="useimperial_title">Имперская система мер</string>
   <string name="useimperial_summary">Использовать футы, мили, пинты.</string>
   <string name="msg_template_title">Модель сообщений</string>
@@ -183,7 +183,7 @@
   <string name="startonbootup_title">Автозапуск</string>
   <string name="startonbootup_summary">Запускать приложение и запись лога при старте операционной системы</string>
   <string name="autoemail_title">Настройки Email</string>
-  <string name="autoemail_summary">Автоматически отправлять лог файл письмом на адрес по Вашему выбору</string>
+  <string name="autoemail_summary">Автоматически отправлять лог файл письмом на адрес email</string>
   <string name="please_wait">Пожалуйста, подождите.</string>
   <string name="autoemail_autosend">Включить электронную почту</string>
   <string name="autoemail_autosend_summary">Разрешает автоматическую отправку лога письмом на выбранный email.
@@ -330,7 +330,11 @@
     <string name="skylines_server_port_default">5597</string>
     <string name="skylines_key">Ключ доступа</string>
     <string name="skylines_interval">Интервал отправки данных</string>
+    <string name="skylines_interval_summary">Частота отправки точек на сервер</string>
     <string name="skylines_interval_default">3</string>
+    <string name="skylines_distance_before_logging">Дистанция отправки точек</string>
+    <string name="skylines_distance_before_logging_summary">Минимальное пройденное расстояние для отправки точек. Используйте 0 для отправки всех точек.</string>
+    <string name="skylines_distance_before_logging_default">10</string>
     <string name="skylines_invalid_form">Недопустимые значения</string>
     <string name="skylines_invalid_form_message">Пожалуйста, убедитесь, что все поля заполнены верно</string>
 
@@ -360,6 +364,10 @@
 
     <string name="livetrack24_interval">Интервал отправки данных</string>
     <string name="livetrack24_interval_default">3</string>
+    <string name="livetrack24_interval_summary">Частота отправки точек на сервер</string>
+    <string name="livetrack24_distance_before_logging">Дистанция отправки точек</string>
+    <string name="livetrack24_distance_before_logging_summary">Минимальное пройденное расстояние для отправки точек. Используйте 0 для отправки всех точек.</string>
+    <string name="livetrack24_distance_before_logging_default">10</string>
     <string name="livetrack24_presets">Предустановки Livetrack</string>
     <string name="livetrack24_presets_summary">Стандартные настройки для leonardo, FFVL, ...</string>
     <string name="livetrack24_invalid_form">Недопустимые значения</string>
@@ -385,6 +393,13 @@
   <string name="autoopengts_server_path">Путь на сервере</string>
   <string name="autoopengts_server_path_summary">Опционально, только для способа связи на основе протокола HTTP. Например, \'/gprmc/Data\'</string>
   <string name="autoopengts_device_id">Идентификатор устройства</string>
+  <string name="opengts_interval">Интервал отправки данных</string>
+  <string name="opengts_interval_default">60</string>
+  <string name="opengts_interval_summary">Частота отправки точек на сервер</string>
+  <string name="opengts_distance_before_logging">Дистанция отправки точек</string>
+  <string name="opengts_distance_before_logging_summary">Минимальное пройденное расстояние для отправки точек. Используйте 0 для отправки всех точек.</string>
+  <string name="opengts_distance_before_logging_default">10</string>
+
     <string name="autoftp_server">Сервер FTP</string>
     <string name="autoftp_server_summary">Имя или IP адрес сервера</string>
     <string name="autoftp_username">Логин</string>

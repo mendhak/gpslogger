@@ -24,6 +24,7 @@ import com.mendhak.gpslogger.loggers.IFileLogger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Session extends Application
 {
@@ -163,7 +164,6 @@ public class Session extends Application
     }
 
     public static void setFileLoggers(List<IFileLogger> loggers){
-
         Session.loggers.clear();
         if (loggers != null)
             Session.loggers.addAll(loggers);

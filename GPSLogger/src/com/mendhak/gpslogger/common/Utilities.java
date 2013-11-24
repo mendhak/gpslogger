@@ -152,6 +152,15 @@ public class Utilities
         } catch (java.lang.NumberFormatException nfe){
             AppSettings.setSkylinesInterval(skylines_interval_default);
         }
+
+        final int skylines_dist_default = Integer.parseInt(context.getString(R.string.skylines_distance_before_logging_default));
+        try {
+            AppSettings.setSkylinesMinimumDistanceInMeters(Integer.parseInt(prefs.getString("skylines_distance_before_logging",
+                    Integer.toString(skylines_dist_default))));
+        } catch (java.lang.NumberFormatException nfe){
+            AppSettings.setSkylinesMinimumDistanceInMeters(skylines_dist_default);
+        }
+
         AppSettings.setSkylinesKey(prefs.getString("skylines_key", ""));
 
         try {
@@ -170,6 +179,14 @@ public class Utilities
                     Integer.toString(livetrack24_interval_default))));
         } catch (Exception e){
             AppSettings.setLivetrack24Interval(livetrack24_interval_default);
+        }
+
+        final int livetrack24_dist_default = Integer.parseInt(context.getString(R.string.livetrack24_distance_before_logging_default));
+        try {
+            AppSettings.setLivetrack24MinimumDistanceInMeters(Integer.parseInt(prefs.getString("livetrack24_distance_before_logging",
+                    Integer.toString(livetrack24_dist_default))));
+        } catch (java.lang.NumberFormatException nfe){
+            AppSettings.setLivetrack24MinimumDistanceInMeters(livetrack24_dist_default);
         }
 
         String livetrack24_preset = prefs.getString("livetrack24_presets", "");
@@ -285,6 +302,22 @@ public class Utilities
         AppSettings.setOpenGTSServerCommunicationMethod(prefs.getString("opengts_server_communication_method", ""));
         AppSettings.setOpenGTSServerPath(prefs.getString("autoopengts_server_path", ""));
         AppSettings.setOpenGTSDeviceId(prefs.getString("opengts_device_id", ""));
+        final int opengts_interval_default = Integer.parseInt(context.getString(R.string.opengts_interval_default));
+
+        try {
+            AppSettings.setOpenGTSInterval(Integer.parseInt(prefs.getString("opengts_interval",
+                    Integer.toString(opengts_interval_default))));
+        } catch (Exception e){
+            AppSettings.setOpenGTSInterval(opengts_interval_default);
+        }
+
+        final int opengts_dist_default = Integer.parseInt(context.getString(R.string.opengts_distance_before_logging_default));
+        try {
+            AppSettings.setOpenGTSMinimumDistanceInMeters(Integer.parseInt(prefs.getString("opengts_distance_before_logging",
+                    Integer.toString(opengts_dist_default))));
+        } catch (java.lang.NumberFormatException nfe){
+            AppSettings.setOpenGTSMinimumDistanceInMeters(opengts_dist_default);
+        }
 
         AppSettings.setAutoFtpEnabled(prefs.getBoolean("autoftp_enabled",false));
         AppSettings.setFtpServerName(prefs.getString("autoftp_server",""));

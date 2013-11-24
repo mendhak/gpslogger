@@ -732,7 +732,7 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
                         {
                             double lat=Session.getCurrentLatitude();
                             double lon=Session.getCurrentLongitude();
-                            String bodyText=Utilities.GetBodyFormatted((Context)GetActivity(),lat,lon);
+                            String bodyText=Utilities.GetBodyFormatted(getApplicationContext(),lat,lon);
 
                             intent.putExtra(Intent.EXTRA_TEXT, bodyText);
                             intent.putExtra("sms_body", bodyText);

@@ -19,23 +19,25 @@ package com.mendhak.gpslogger.loggers;
 
 import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.loggers.BaseLogger;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.OpenGTSClient;
 
 
 
 /**
- * Send locations directly to an OpenGTS server <br/>
+ * Send locations directly to an OpenGTS server
  *
  * @author Francisco Reynoso
  */
-public class OpenGTSLogger implements IFileLogger
+public class OpenGTSLogger extends BaseLogger implements IFileLogger
 {
 
     public static final String name = "OpenGTS";
 
-    public OpenGTSLogger()
+    public OpenGTSLogger(int minsec, int mindist)
     {
+        super(minsec,mindist);
     }
 
     @Override
@@ -66,7 +68,7 @@ public class OpenGTSLogger implements IFileLogger
 
         OpenGTSClient openGTSClient = new OpenGTSClient(server, port, path, al, null);
         openGTSClient.sendHTTP(deviceId, loc);
-
+        SetLatestTimeStamp(System.currentTimeMillis());
     }
 
     @Override
