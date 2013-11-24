@@ -48,6 +48,7 @@ import com.mendhak.gpslogger.senders.IFileSender;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxAuthorizationActivity;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
+import com.mendhak.gpslogger.senders.email.AutoEmailHelper;
 import com.mendhak.gpslogger.senders.ftp.AutoFtpActivity;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity;
@@ -615,6 +616,9 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
             case R.id.mnuEmail:
                 SelectAndEmailFile();
                 break;
+            case R.id.mnuEmailLoc:
+                EmailLocation();
+                break;
             case R.id.mnuAnnotate:
                 Annotate();
                 break;
@@ -728,15 +732,10 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
                         }
 
                         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing_mylocation));
-                        if (Session.hasValidLocation())
-                        {
-                            double lat=Session.getCurrentLatitude();
-                            double lon=Session.getCurrentLongitude();
-                            String bodyText=Utilities.GetBodyFormatted(getApplicationContext(),lat,lon);
+                        String bodyText=Utilities.GetBodyFormatted(getApplicationContext(),0);
 
-                            intent.putExtra(Intent.EXTRA_TEXT, bodyText);
-                            intent.putExtra("sms_body", bodyText);
-                        }
+                        intent.putExtra(Intent.EXTRA_TEXT, bodyText);
+                        intent.putExtra("sms_body", bodyText);
 
                         if (chosenFileName.length() > 0
                                 && !chosenFileName.equalsIgnoreCase(locationOnly))
@@ -777,6 +776,43 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
         else
         {
             ShowFileListDialog(settingsIntent, FileSenderFactory.GetEmailSender(this));
+        }
+
+    }
+
+    private void EmailLocation()
+    {
+        String msgSubject="Location at: ";
+        String msgBody="No location";
+
+        Utilities.LogDebug("GpsMainActivity.EmailLocation");
+
+        Intent settingsIntent = new Intent(getApplicationContext(), AutoEmailActivity.class);
+
+        if (!Utilities.IsEmailSetup())
+        {
+            startActivity(settingsIntent);
+        }
+        else
+        {
+            if (Session.hasValidLocation())
+            {
+                msgBody=Utilities.GetBodyFormatted(getApplicationContext(),1);
+                msgSubject+=Utilities.GetReadableDateTime(new Date(Session.getCurrentLocationInfo().getTime()));
+            }
+            else if(Session.getPreviousLocationInfo()!=null)
+                {
+                    msgBody=Utilities.GetBodyFormatted(getApplicationContext(),-1);
+                    msgSubject="Previous Location at: ";
+                    msgSubject+=Utilities.GetReadableDateTime(new Date(Session.getPreviousLocationInfo().getTime()));
+                }
+
+            AutoEmailHelper aeh = new AutoEmailHelper(null);
+            Utilities.ShowProgress(this, getString(R.string.autosend_sending), getString(R.string.please_wait));
+            aeh.SendEmail(AppSettings.getSmtpServer(), AppSettings.getSmtpPort(),
+                    AppSettings.getSmtpUsername(), AppSettings.getSmtpPassword(),
+                    AppSettings.isSmtpSsl(), AppSettings.getAutoEmailTargets(), AppSettings.getSenderAddress(),
+                    msgSubject, msgBody, GpsMainActivity.this);
         }
 
     }
