@@ -152,6 +152,15 @@ public class Utilities
         } catch (java.lang.NumberFormatException nfe){
             AppSettings.setSkylinesInterval(skylines_interval_default);
         }
+
+        final int skylines_dist_default = Integer.parseInt(context.getString(R.string.skylines_distance_before_logging_default));
+        try {
+            AppSettings.setSkylinesMinimumDistanceInMeters(Integer.parseInt(prefs.getString("skylines_distance_before_logging",
+                    Integer.toString(skylines_dist_default))));
+        } catch (java.lang.NumberFormatException nfe){
+            AppSettings.setSkylinesMinimumDistanceInMeters(skylines_dist_default);
+        }
+
         AppSettings.setSkylinesKey(prefs.getString("skylines_key", ""));
 
         try {
@@ -170,6 +179,14 @@ public class Utilities
                     Integer.toString(livetrack24_interval_default))));
         } catch (Exception e){
             AppSettings.setLivetrack24Interval(livetrack24_interval_default);
+        }
+
+        final int livetrack24_dist_default = Integer.parseInt(context.getString(R.string.livetrack24_distance_before_logging_default));
+        try {
+            AppSettings.setLivetrack24MinimumDistanceInMeters(Integer.parseInt(prefs.getString("livetrack24_distance_before_logging",
+                    Integer.toString(livetrack24_dist_default))));
+        } catch (java.lang.NumberFormatException nfe){
+            AppSettings.setLivetrack24MinimumDistanceInMeters(livetrack24_dist_default);
         }
 
         String livetrack24_preset = prefs.getString("livetrack24_presets", "");
@@ -285,6 +302,22 @@ public class Utilities
         AppSettings.setOpenGTSServerCommunicationMethod(prefs.getString("opengts_server_communication_method", ""));
         AppSettings.setOpenGTSServerPath(prefs.getString("autoopengts_server_path", ""));
         AppSettings.setOpenGTSDeviceId(prefs.getString("opengts_device_id", ""));
+        final int opengts_interval_default = Integer.parseInt(context.getString(R.string.opengts_interval_default));
+
+        try {
+            AppSettings.setOpenGTSInterval(Integer.parseInt(prefs.getString("opengts_interval",
+                    Integer.toString(opengts_interval_default))));
+        } catch (Exception e){
+            AppSettings.setOpenGTSInterval(opengts_interval_default);
+        }
+
+        final int opengts_dist_default = Integer.parseInt(context.getString(R.string.opengts_distance_before_logging_default));
+        try {
+            AppSettings.setOpenGTSMinimumDistanceInMeters(Integer.parseInt(prefs.getString("opengts_distance_before_logging",
+                    Integer.toString(opengts_dist_default))));
+        } catch (java.lang.NumberFormatException nfe){
+            AppSettings.setOpenGTSMinimumDistanceInMeters(opengts_dist_default);
+        }
 
         AppSettings.setAutoFtpEnabled(prefs.getBoolean("autoftp_enabled",false));
         AppSettings.setFtpServerName(prefs.getString("autoftp_server",""));
@@ -294,7 +327,7 @@ public class Utilities
         AppSettings.setFtpUseFtps(prefs.getBoolean("autoftp_useftps", false));
         AppSettings.setFtpProtocol(prefs.getString("autoftp_ssltls",""));
         AppSettings.setFtpImplicit(prefs.getBoolean("autoftp_implicit", false));
-
+        AppSettings.setMsgTemplate(prefs.getString("msg_template",context.getString(R.string.sharing_template_default)));
     }
 
     public static void ShowProgress(Context ctx, String title, String message)
@@ -838,5 +871,50 @@ public class Utilities
 
     }
 
+    public static String GetBodyFormatted(Context ctx, double latdd, double londd)
+    {
+        int latd=(int)latdd;
+        int lond=(int)londd;
+        double latmd=(latdd-latd)*60.0;
+        double lonmd=(londd-lond)*60.0;
+        int latm=(int)latmd;
+        int lonm=(int)lonmd;
+        double latsd=(latmd-latm)*60.0;
+        double lonsd=(lonmd-lonm)*60.0;
+        int lats=(int)latsd;
+        int lons=(int)lonsd;
+
+        String slatdd = String.format("%.6f",latdd);
+        String slondd = String.format("%.6f",londd);
+        String slatmd = String.format("%.4f",latmd);
+        String slonmd = String.format("%.4f",lonmd);
+        String slatsd = String.format("%.2f",latsd);
+        String slonsd = String.format("%.2f",lonsd);
+        String slatd = String.format("%d",latd);
+        String slond = String.format("%d",lond);
+        String slatm = String.format("%d",latm);
+        String slonm = String.format("%d",lonm);
+        String slats = String.format("%d",lats);
+        String slons = String.format("%d",lons);
+
+        String bodyText=AppSettings.getMsgTemplate();
+
+        bodyText=bodyText.replace(ctx.getString(R.string.latitude_degree_decimal),slatdd);
+        bodyText=bodyText.replace(ctx.getString(R.string.longitude_degree_decimal),slondd);
+        bodyText=bodyText.replace(ctx.getString(R.string.latitude_degree),slatd);
+        bodyText=bodyText.replace(ctx.getString(R.string.longitude_degree),slond);
+
+        bodyText=bodyText.replace(ctx.getString(R.string.latitude_min_decimal),slatmd);
+        bodyText=bodyText.replace(ctx.getString(R.string.longitude_min_decimal),slonmd);
+        bodyText=bodyText.replace(ctx.getString(R.string.latitude_min),slatm);
+        bodyText=bodyText.replace(ctx.getString(R.string.longitude_min),slonm);
+
+        bodyText=bodyText.replace(ctx.getString(R.string.latitude_sec_decimal),slatsd);
+        bodyText=bodyText.replace(ctx.getString(R.string.longitude_sec_decimal),slonsd);
+        bodyText=bodyText.replace(ctx.getString(R.string.latitude_sec),slats);
+        bodyText=bodyText.replace(ctx.getString(R.string.longitude_sec),slons);
+
+        return bodyText;
+    }
 
 }

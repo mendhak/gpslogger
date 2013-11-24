@@ -100,7 +100,7 @@ class CRC16CCITT {
  * http://skylines.xcsoar.org
  * @see "http://git.xcsoar.org/cgit/master/xcsoar.git/tree/src/Tracking/SkyLines/Protocol.hpp"
  */
-public class SkyLinesLogger implements IFileLogger
+public class SkyLinesLogger extends BaseLogger implements IFileLogger
 {
     private static final int MAGIC = 0x5df4b67b;
 	private static final short TYPE_FIX = 0x3;
@@ -179,20 +179,21 @@ public class SkyLinesLogger implements IFileLogger
     };
     private FlusherAsyncTask flushertask;
 
-    public static SkyLinesLogger getSkyLinesLogger(long key, int intervals, String host, int port)
+    public static SkyLinesLogger getSkyLinesLogger(long key, int intervals, int minDistance, String host, int port)
             throws SocketException, UnknownHostException {
 
         if (instance == null || instance.key != key || instance.intervalMS != intervals ||
                 !instance.servername.equals(host) ||
                 instance.serverport != port)
-            instance = new SkyLinesLogger(key, intervals, host, port);
+            instance = new SkyLinesLogger(key, intervals, minDistance, host, port);
 
         return instance;
     }
 
-    private SkyLinesLogger(long key, int intervals, String host, int port)
+    private SkyLinesLogger(long key, int intervals, int minDistance, String host, int port)
             throws SocketException, UnknownHostException
     {
+        super(intervals,minDistance);
         Utilities.LogDebug("Skylines constructor");
         this.key = key;
         this.intervalMS = intervals * 1000;
@@ -375,6 +376,7 @@ public class SkyLinesLogger implements IFileLogger
     {
         final long now = SystemClock.elapsedRealtime();
         calendar.setTimeInMillis(loc.getTime());
+        SetLatestTimeStamp(System.currentTimeMillis());
         final int second_of_day =
                 calendar.get(Calendar.HOUR_OF_DAY) * 3600
                         + calendar.get(Calendar.MINUTE) * 60

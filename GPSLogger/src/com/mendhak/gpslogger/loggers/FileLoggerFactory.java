@@ -21,6 +21,7 @@ import android.os.Environment;
 import android.util.Log;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Utilities;
 
 import java.io.File;
 import java.io.IOException;
@@ -83,14 +84,14 @@ public class FileLoggerFactory
         if (AppSettings.shouldLogToGpx())
         {
             File gpxFile = new File(gpx_or_igcFolder.getPath(), Session.getCurrentFileName() + ".gpx");
-            loggers.add(new Gpx10FileLogger(gpxFile,  Session.shouldAddNewTrackSegment(), Session.getSatelliteCount()));
+            loggers.add(new Gpx10FileLogger(gpxFile,  Session.shouldAddNewTrackSegment(), Session.getSatelliteCount(), AppSettings.getMinimumSeconds(), AppSettings.getMinimumDistanceInMeters()));
         }
 
         if (AppSettings.shouldLogToIgc())
         {
             File igcFile = new File(gpx_or_igcFolder.getPath(), Session.getCurrentFileName() + ".igc");
             try{
-                loggers.add(IgcFileLogger.getIgcFileLogger(igcFile, AppSettings.getIgcPrivateKey()));
+                loggers.add(IgcFileLogger.getIgcFileLogger(igcFile, AppSettings.getIgcPrivateKey(), AppSettings.getMinimumSeconds(), AppSettings.getMinimumDistanceInMeters()));
             } catch (IOException ioe){
 
             }
@@ -99,13 +100,13 @@ public class FileLoggerFactory
         if (AppSettings.shouldLogToKml())
         {
             File kmlFile = new File(gpx_or_igcFolder.getPath(), Session.getCurrentFileName() + ".kml");
-            loggers.add(new Kml22FileLogger(kmlFile, Session.shouldAddNewTrackSegment()));
+            loggers.add(new Kml22FileLogger(kmlFile, Session.shouldAddNewTrackSegment(), AppSettings.getMinimumSeconds(), AppSettings.getMinimumDistanceInMeters()));
         }
 
         if (AppSettings.shouldLogToPlainText())
         {
             File file = new File(gpx_or_igcFolder.getPath(), Session.getCurrentFileName() + ".txt");
-            loggers.add(new PlainTextFileLogger(file));
+            loggers.add(new PlainTextFileLogger(file, AppSettings.getMinimumSeconds(), AppSettings.getMinimumDistanceInMeters()));
         }
 
         if (AppSettings.shouldLogToSkylines())
@@ -113,6 +114,7 @@ public class FileLoggerFactory
             try{
                 loggers.add(SkyLinesLogger.getSkyLinesLogger(Long.parseLong(AppSettings.getSkylinesKey(), 16),
                         AppSettings.getSkylinesInterval(),
+                        AppSettings.getSkylinesMinimumDistanceInMeters(),
                         AppSettings.getSkylinesServer(),
                         AppSettings.getSkylinesServerPort()
                 ));
@@ -127,7 +129,8 @@ public class FileLoggerFactory
                 loggers.add(LiveTrack24FileLogger.getLiveTrack24Logger(AppSettings.getLivetrack24ServerURL(),
                         AppSettings.getLivetrack24Username(),
                         AppSettings.getLivetrack24Password(),
-                        AppSettings.getLivetrack24Interval()));
+                        AppSettings.getLivetrack24Interval(),
+                        AppSettings.getLivetrack24MinimumDistanceInMeters()));
             } catch (Exception e){
                 Log.e("FileLoggerFactory", "Error creating Livetrack24 logger", e);
             }
@@ -135,7 +138,12 @@ public class FileLoggerFactory
 
         if (AppSettings.shouldLogToOpenGTS())
         {
-            loggers.add(new OpenGTSLogger());
+            loggers.add(new OpenGTSLogger(AppSettings.getOpenGTSInterval(), AppSettings.getOpenGTSMinimumDistanceInMeters() ) );
+        }
+
+        for(IFileLogger lg : loggers)
+        {
+            Utilities.LogDebug("FileLoggerFactory created logger: " + lg.getName()+ "("+ lg.GetMinSec() + "sec," + lg.GetMinDist() + "m)");
         }
         return loggers;
     }

@@ -216,6 +216,13 @@
                 android:key="useImperial"
                 android:defaultValue="false" />
 
+            <EditTextPreference
+                android:key="msg_template"
+                android:title="@string/msg_template_title"
+                android:summary="@string/msg_template_summary"
+                android:dialogTitle="@string/msg_template_dialog_title"
+                android:defaultValue="@string/sharing_template_default" />
+
             <Preference
                 android:title="@string/enabledisablegps_title"
                 android:summary="@string/enabledisablegps_summary"

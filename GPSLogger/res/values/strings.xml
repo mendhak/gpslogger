@@ -69,10 +69,24 @@
     <string name="sharing_location_only">Location only</string>
     <string name="sharing_pick_file">Pick a file to share</string>
     <string name="sharing_mylocation">My location</string>
-    <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
+<!--    <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>  -->
     <string name="sharing_via">Share via</string>
+    <string name="sharing_template_default">http://maps.google.com/maps?q=LATDD,LONDD</string>
+<!--    <string name="sharing_template_default">LATDD LONDD\nLATD LATMD LOND LONMD\nLATD LATM LATSD LOND LONM LONSD</string>    -->
+    <string name="latitude_degree_decimal">LATDD</string>
+    <string name="longitude_degree_decimal">LONDD</string>
+    <string name="latitude_degree">LATD</string>
+    <string name="longitude_degree">LOND</string>
+    <string name="latitude_min_decimal">LATMD</string>
+    <string name="longitude_min_decimal">LONMD</string>
+    <string name="latitude_min">LATM</string>
+    <string name="longitude_min">LONM</string>
+    <string name="latitude_sec_decimal">LATSD</string>
+    <string name="longitude_sec_decimal">LONSD</string>
+    <string name="latitude_sec">LATS</string>
+    <string name="longitude_sec">LONS</string>
 
-    <!-- general -->
+            <!-- general -->
     <string name="foot">&#160;foot</string>
     <string name="feet">&#160;feet</string>
     <string name="meter">&#160;meter</string>
@@ -183,7 +197,7 @@
         battery.
     </string>
     <string name="time_before_logging_title">Time before logging</string>
-    <string name="time_before_logging_summary">Use 0 for maximum frequency, but slower is better for battery life.
+    <string name="time_before_logging_summary">Used by fileloggers only. Use 0 for maximum frequency.
     </string>
     <string name="time_before_logging_dialog_title">Time in seconds</string>
     <string name="time_before_logging_hint">Enter seconds (max 9999)</string>
@@ -197,8 +211,7 @@
     <string name="retry_time_dialog_title">Time in seconds</string>
     <string name="retry_time_hint">Enter seconds (max 9999)</string>
     <string name="distance_before_logging_title">Distance before logging</string>
-    <string name="distance_before_logging_summary">How far to travel before logging the next point. Use 0 to log all
-        points.
+    <string name="distance_before_logging_summary">Used by fileloggers only. How far to travel before logging the next point. Use 0 to log all points.
     </string>
     <string name="accuracy_before_logging_title">Accuracy before logging</string>
     <string name="accuracy_before_logging_summary">Which min. accuracy to for logging. Use 0 to log all
@@ -207,6 +220,9 @@
 
     <string name="useimperial_title">Use Imperial units</string>
     <string name="useimperial_summary">Use feet, miles and pints, none of that newfangled metric stuff.</string>
+    <string name="msg_template_title">Message template</string>
+    <string name="msg_template_summary">The template to use for sharing position. See help for available variables.</string>
+    <string name="msg_template_dialog_title">Message template</string>
     <string name="show_notification_title">Show Notification</string>
     <string name="show_notification_summary">Displays a reminder along with coordinates in the notification bar.
     </string>
@@ -420,7 +436,11 @@
     <string name="skylines_server_port_default">5597</string>
     <string name="skylines_key">Your pilot private key</string>
     <string name="skylines_interval">Interval for sending data</string>
+    <string name="skylines_interval_summary">How often send data to SkyLines server</string>
     <string name="skylines_interval_default">3</string>
+    <string name="skylines_distance_before_logging">Distance before logging</string>
+    <string name="skylines_distance_before_logging_summary">How far to travel before logging the next point to SkyLines server. Use 0 to log all points.</string>
+    <string name="skylines_distance_before_logging_default">10</string>
     <string name="skylines_invalid_form">Invalid values</string>
     <string name="skylines_invalid_form_message">Please ensure that all of the fields have been filled in properly</string>
 
@@ -450,6 +470,10 @@
 
     <string name="livetrack24_interval">Interval for sending data</string>
     <string name="livetrack24_interval_default">3</string>
+    <string name="livetrack24_interval_summary">How often send data to Livetrack24 server</string>
+    <string name="livetrack24_distance_before_logging">Distance before logging</string>
+    <string name="livetrack24_distance_before_logging_summary">How far to travel before logging the next point to Livetrack24 server. Use 0 to log all points.</string>
+    <string name="livetrack24_distance_before_logging_default">10</string>
     <string name="livetrack24_presets">Livetrack presets</string>
     <string name="livetrack24_presets_summary">Configure for leonardo, FFVL, ...</string>
     <string name="livetrack24_invalid_form">Invalid values</string>
@@ -475,6 +499,13 @@
     <string name="autoopengts_server_path">Server Path</string>
     <string name="autoopengts_server_path_summary">Optional and only for HTTP-based communication. For example \'/gprmc/Data\'</string>
     <string name="autoopengts_device_id">Device ID</string>
+    <string name="opengts_interval">Interval for sending data</string>
+    <string name="opengts_interval_default">60</string>
+    <string name="opengts_interval_summary">How often send data to OpenGTS server</string>
+    <string name="opengts_distance_before_logging">Distance before logging</string>
+    <string name="opengts_distance_before_logging_summary">How far to travel before logging the next point to OpenGTS server. Use 0 to log all points.</string>
+    <string name="opengts_distance_before_logging_default">10</string>
+
     <string name="autoftp_server">FTP Server</string>
     <string name="autoftp_server_summary">IP address or hostname</string>
     <string name="autoftp_username">Username</string>

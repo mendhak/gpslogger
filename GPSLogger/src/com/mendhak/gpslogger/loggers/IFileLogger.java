@@ -29,4 +29,9 @@ public interface IFileLogger
 
     String getName();
 
+    long getNextPointTime();
+    int GetMinSec();
+    int GetMinDist();
+    boolean isTimeToLog();
+    boolean isDistToLog(double lon, double lat);
 }

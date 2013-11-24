@@ -47,6 +47,22 @@
                             android:dialogTitle="@string/autoopengts_device_id"
                             android:defaultValue=""/>
 
+        <EditTextPreference android:key="opengts_interval"
+            android:title="@string/opengts_interval"
+            android:summary="@string/opengts_interval_summary"
+            android:dialogTitle="@string/time_before_logging_dialog_title"
+            android:numeric="integer"
+            android:maxLength="4"
+            android:defaultValue="@string/opengts_interval_default"/>
+
+        <EditTextPreference android:key="opengts_distance_before_logging"
+            android:title="@string/opengts_distance_before_logging"
+            android:summary="@string/opengts_distance_before_logging_summary"
+            android:dialogTitle="@string/settings_distance_in_meters"
+            android:numeric="integer"
+            android:maxLength="5"
+            android:defaultValue="@string/opengts_distance_before_logging_default"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

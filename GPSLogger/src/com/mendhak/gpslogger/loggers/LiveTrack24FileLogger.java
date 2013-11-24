@@ -42,7 +42,7 @@ import com.loopj.android.http.RequestParams;
 import com.mendhak.gpslogger.common.Utilities;
 
 
-public class LiveTrack24FileLogger implements IFileLogger {
+public class LiveTrack24FileLogger extends BaseLogger implements IFileLogger {
 
     public static final String name = "LIVETRACK24";
 
@@ -52,7 +52,7 @@ public class LiveTrack24FileLogger implements IFileLogger {
     private String ourVersion = "0.1";
 
     /**
-     * How many secs between position reports - FIXME, choose correctly
+     * How many secs between position reports
      */
     private int expectedIntervalSecs;
 
@@ -92,26 +92,26 @@ public class LiveTrack24FileLogger implements IFileLogger {
     private boolean start_ok = false;
 
     private int packetNum = 1;
-    long lastUpdateTime = SystemClock.elapsedRealtime();
+//    long lastUpdateTime = SystemClock.elapsedRealtime();*****goes to superclass
 
     private static LiveTrack24FileLogger instance = null;
 
     public static LiveTrack24FileLogger getLiveTrack24Logger(String serverURL, String username,
-                                                      String password, int expectedInterval)
+                                                      String password, int expectedInterval, int minDistance)
             throws MalformedURLException {
         if (instance == null ||
                 !instance.serverURL.equals(serverURL) ||
                 !instance.userName.equals(username) ||
                 !instance.password.equals(password) ||
                 expectedInterval != instance.expectedIntervalSecs){
-            instance = new LiveTrack24FileLogger(serverURL, username, password, expectedInterval);
+            instance = new LiveTrack24FileLogger(serverURL, username, password, expectedInterval, minDistance);
         }
 
         return instance;
     }
 
     private LiveTrack24FileLogger(String serverURL, String username,
-                                  String password, int expectedInterval) throws MalformedURLException {
+                                  String password, int expectedInterval, int minDistance) throws MalformedURLException {
 //             PackageManager pm = context.getPackageManager();
 //		PackageInfo pi;
 //		try {
@@ -122,8 +122,8 @@ public class LiveTrack24FileLogger implements IFileLogger {
 //			throw new RuntimeException(eNnf); // We better be able to find the
 //			// info about our own package
 //		}
+        super(expectedInterval,minDistance);
         Utilities.LogDebug("livetrack24 constructor");
-
         URL url = new URL(serverURL + "/track.php");
         trackURL = url.toString();
         url = new URL(serverURL + "/client.php");
@@ -163,12 +163,8 @@ public class LiveTrack24FileLogger implements IFileLogger {
             return;
         }
 
-        long now = SystemClock.elapsedRealtime();
-        if (lastUpdateTime + (expectedIntervalSecs * 1000) < now) {
-
-            sendPacket(PACKET_POINT, loc);
-            lastUpdateTime = SystemClock.elapsedRealtime();
-        }
+        SetLatestTimeStamp(System.currentTimeMillis());
+        sendPacket(PACKET_POINT, loc);
     }
 
     @Override

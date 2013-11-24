@@ -730,9 +730,10 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
                         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing_mylocation));
                         if (Session.hasValidLocation())
                         {
-                            String bodyText = getString(R.string.sharing_googlemaps_link,
-                                    String.valueOf(Session.getCurrentLatitude()),
-                                    String.valueOf(Session.getCurrentLongitude()));
+                            double lat=Session.getCurrentLatitude();
+                            double lon=Session.getCurrentLongitude();
+                            String bodyText=Utilities.GetBodyFormatted(getApplicationContext(),lat,lon);
+
                             intent.putExtra(Intent.EXTRA_TEXT, bodyText);
                             intent.putExtra("sms_body", bodyText);
                         }

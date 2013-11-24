@@ -66,12 +66,14 @@ public class AppSettings extends Application
     private static String skylinesServer;
     private static int skylinesServerPort;
     private static int skylinesInterval;
+    private static int skylinesMinDistance;
 
     private static boolean logToLivetrack24;
     private static String livetrack24ServerURL;
     private static String livetrack24Username;
     private static String livetrack24Password;
     private static int livetrack24Interval;
+    private static int livetrack24MinDistance;
 
     private static boolean LogToOpenGTS;
     private static boolean openGTSEnabled;
@@ -81,6 +83,8 @@ public class AppSettings extends Application
     private static String openGTSServerCommunicationMethod;
     private static String openGTSServerPath;
     private static String openGTSDeviceId;
+    private static int openGTSInterval;
+    private static int openGTSMinDistance;
 
     private static boolean autoFtpEnabled;
     private static String ftpServerName;
@@ -93,7 +97,7 @@ public class AppSettings extends Application
 
     private static String staticFileName;
     private static boolean isStaticFile;
-
+    private static String msgTemplate;
 
     static void setVersionName(String versionName){
         AppSettings.versionName = versionName;
@@ -613,6 +617,17 @@ public class AppSettings extends Application
         return AppSettings.skylinesServerPort;
     }
 
+    public static int getSkylinesMinimumDistanceInMeters()
+    {
+        return skylinesMinDistance;
+    }
+    static void setSkylinesMinimumDistanceInMeters(int minimumDistance)
+    {
+        AppSettings.skylinesMinDistance = minimumDistance;
+    }
+
+
+
     public static boolean shouldLogToLivetrack24()
     {
         return AppSettings.logToLivetrack24;
@@ -659,6 +674,14 @@ public class AppSettings extends Application
     public static void setLivetrack24Interval(final int interval)
     {
         AppSettings.livetrack24Interval = interval;
+    }
+    public static int getLivetrack24MinimumDistanceInMeters()
+    {
+        return livetrack24MinDistance;
+    }
+    static void setLivetrack24MinimumDistanceInMeters(int minimumDistance)
+    {
+        AppSettings.livetrack24MinDistance = minimumDistance;
     }
 
     public static boolean shouldLogToOpenGTS()
@@ -741,6 +764,23 @@ public class AppSettings extends Application
         AppSettings.openGTSDeviceId = openGTSDeviceId;
     }
 
+    public static void setOpenGTSInterval(final int interval)
+    {
+        AppSettings.openGTSInterval = interval;
+    }
+
+    public static int getOpenGTSInterval()
+    {
+        return AppSettings.openGTSInterval;
+    }
+    public static int getOpenGTSMinimumDistanceInMeters()
+    {
+        return openGTSMinDistance;
+    }
+    static void setOpenGTSMinimumDistanceInMeters(int minimumDistance)
+    {
+        AppSettings.openGTSMinDistance = minimumDistance;
+    }
 
     public static String getFtpServerName()
     {
@@ -840,5 +880,15 @@ public class AppSettings extends Application
     public static void setStaticFile(boolean staticFile)
     {
         AppSettings.isStaticFile = staticFile;
+    }
+
+    public static void setMsgTemplate(String newMsgTemplate)
+    {
+        AppSettings.msgTemplate = newMsgTemplate;
+    }
+
+    public static String getMsgTemplate()
+    {
+        return msgTemplate;
     }
 }

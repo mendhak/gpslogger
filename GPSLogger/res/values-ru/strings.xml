@@ -54,7 +54,7 @@
   <string name="sharing_location_only">Только координаты</string>
   <string name="sharing_pick_file">Выберите файл</string>
   <string name="sharing_mylocation">Мои координаты</string>
-  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
+    <!--      <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>     -->
   <string name="sharing_via">Опубликовать через</string>
   <string name="foot"> фут</string>
   <string name="feet"> футы</string>
@@ -117,49 +117,73 @@
   <string name="settings_converting_description">Конвертирую единицы минимальной дистанции. Значения больше 9999 будут
         сброшены до 9999. Экран настроек будет перезагружен.
     </string>
+  <string name="pref_pref_mode">Режим настроек</string>
+  <string name="pref_pref_mode_summary">Активировать расширенный режим настроек</string>
+  <string name="pref_pref_mode_simple">Простой</string>
+  <string name="pref_pref_mode_advanced">Расширенный</string>
+
+  <string name="pref_livetracker_title">Настройки live-tracking</string>
+  <string name="pref_livetracker_summary">Выбор и настройка серверов для live-tracking</string>
+
+  <string name="pref_loggers_catname">Loggers</string>
+  <string name="pref_loggers_conf">Настройки loggers</string>
   <string name="pref_logging_title">Настройки записи лога</string>
-  <string name="log_gpx_title">Писать лог в GPX</string>
+  <string name="log_gpx_title">Писать лог в файл GPX</string>
   <string name="log_gpx_summary">Создается GPX файл в GPSLogger папке на SD карте.</string>
-  <string name="log_kml_title">Писать лог в KML</string>
+  <string name="log_kml_title">Писать лог в файл KML</string>
   <string name="log_kml_summary">Создается KML файл в GPSLogger папке на SD карте.</string>
-  <string name="log_plain_text_title">Записывать в обычный текст</string>
+  <string name="log_plain_text_title">Писать лог в текстовый файл</string>
   <string name="log_plain_text_summary">Создает текстовый файл в папке GPSLogger на SD-карте.</string>
-  <string name="new_file_creation_title">Создать новый файл</string>
-  <string name="new_file_creation_summary">Создвать файл лога один раз в день или каждый раз при старте записи лога.
+  <string name="log_igc_title">Писать лог в файл IGC</string>
+  <string name="log_igc_summary">Создается IGC файл в GPSLogger папке на SD карте.</string>
+  <string name="new_file_creation_title">Создание нового файла</string>
+  <string name="new_file_creation_summary">Когда создавать новый лог файл.
     </string>
   <string name="new_file_creation_onceaday">Один раз в день</string>
   <string name="new_file_creation_everystart">При старте записи лога</string>
+  <string name="new_file_creation_static">Фиксированное имя файла</string>
+  <string name="new_file_static_title">Имя файла</string>
+  <string name="new_file_static_summary">Укажите имя файла для записи лога</string>
   <string name="pref_performance_title">Настройки производительности</string>
   <string name="prefer_celltower_title">Предпочитать сотовые вышки</string>
   <string name="prefer_celltower_summary">Использовать данные о положении с сотовых вышек. Менее точно, но экономит
         батарею.
     </string>
-  <string name="time_before_logging_title">Период логирования точки</string>
-  <string name="time_before_logging_summary">Используйте 0 для минимально возможного периода логирования. Реже - лучше
+  <string name="time_before_logging_title">Интервал записи лога</string>
+  <string name="time_before_logging_summary">Используйте 0 для минимально возможного интервала логирования. Реже - лучше
         для батареи.
     </string>
   <string name="time_before_logging_dialog_title">Время в секундах</string>
-  <string name="time_before_logging_hint">Введите число секунд (max 9999)</string>
-  <string name="retry_time_title">Интервал времени для точности</string>
+  <string name="time_before_logging_hint">Укажите количество секунд (0...9999)</string>
+  <string name="keep_fix_summary">Не выключать GPS в промежутках между точками. Осторожно, при этом увеличивается расход аккумулятора.</string>
+  <string name="keep_fix_title">Держать GPS включённым</string>
+  <string name="retry_time_title">Время ожидания точности GPS</string>
   <string name="retry_time_summary">Используйте 0 для максимальной частоты, но чем медленнее, тем лучше для аккумулятора.     </string>
   <string name="retry_time_dialog_title">Время в секундах</string>
-  <string name="retry_time_hint">Введите интервал в секундах (максимум 9999)</string>
-  <string name="distance_before_logging_title">Дистанция логирования точки</string>
+  <string name="retry_time_hint">Укажите количество секунд (0...9999)</string>
+  <string name="distance_before_logging_title">Дистанция записи лога</string>
   <string name="distance_before_logging_summary">Используйте 0 для минимально возможной дистанции логирования. Больше
         - лучше для батареи.
     </string>
   <string name="accuracy_before_logging_title">Минимальная точность измерений</string>
-  <string name="accuracy_before_logging_summary">Минимально допустимая точность измерений. Установите 0 для записи результатов с любой точностью.</string>
+  <string name="accuracy_before_logging_summary">Минимально допустимая точность измерений координат. Установите 0 для записи результатов с любой точностью.</string>
   <string name="useimperial_title">Имперская система мер</string>
   <string name="useimperial_summary">Использовать футы, мили, пинты.</string>
+  <string name="msg_template_title">Модель сообщений</string>
+  <string name="msg_template_summary">Модель для отправки координат. См. help для расшифровки используемых переменных.</string>
+  <string name="msg_template_dialog_title">Модель сообщений</string>
   <string name="show_notification_title">Показывать уведомления</string>
   <string name="show_notification_summary">Отображать значок в панели уведомлений.</string>
+  <string name="modular_view_summary">Основной экран разделён на несколько зон с различной информацией</string>
+  <string name="modular_view_title">Активировать модульный интерфейс</string>
+  <string name="force_screen_on_summary">Не давать системе выключить экран (осторожно, повышенный расход аккумулятора)</string>
+  <string name="force_screen_on_title">Экран всегда включен</string>
   <string name="enabledisablegps_title">Вкл/Выкл GPS</string>
   <string name="enabledisablegps_summary">Перейти в настройки GPS телефона.</string>
   <string name="startonbootup_title">Автозапуск</string>
   <string name="startonbootup_summary">Запускать приложение и запись лога при старте операционной системы</string>
   <string name="autoemail_title">Настройки Email</string>
-  <string name="autoemail_summary">Автоматически отправлять лог файл письмом на адрес по Вашему выбору</string>
+  <string name="autoemail_summary">Автоматически отправлять лог файл письмом на адрес email</string>
   <string name="please_wait">Пожалуйста, подождите.</string>
   <string name="autoemail_autosend">Включить электронную почту</string>
   <string name="autoemail_autosend_summary">Разрешает автоматическую отправку лога письмом на выбранный email.
@@ -225,6 +249,22 @@
   <string name="debuglog_summary">Писать отладочную информацию в файл на SD card. Предупреждение: размер файла
         увеличивается очень быстро.
     </string>
+
+  <string name="flying_pref_title">Персональные данные</string>
+  <string name="flying_pref_summary">Имя пилота, тип ЛА,...</string>
+
+  <string name="flying_pref_pilot_name_title">Имя пилота</string>
+  <string name="flying_pref_pilot_name_summary">Используется при записи треклога для идентификации пилота</string>
+  <string name="flying_pref_pilot_name_diag_title">Укажите имя и фамилию пилота</string>
+
+  <string name="flying_pref_glider_name_title">Название ЛА</string>
+  <string name="flying_pref_glider_name_summary">Название ЛА (например, Laminar)</string>
+  <string name="flying_pref_glider_name_diag_title">Укажите название ЛА</string>
+
+  <string name="flying_pref_glider_id_title">Идентификатор ЛА</string>
+  <string name="flying_pref_glider_id_summary">Идентификатор ЛА (как правило, для соревнований)</string>
+  <string name="flying_pref_glider_id_diag_title">Укажите идентификатор ЛА</string>
+
   <string name="pref_logging_summary">Период/дистанция логирования, создание файлов</string>
   <string name="pref_general_title">Основные настройки</string>
   <string name="pref_general_summary">Автозапуск и настройки отображения</string>
@@ -270,28 +310,117 @@
   <string name="menu_email_now">Авто отправить сейчас</string>
   <string name="autosend_sending">Автоматическая отправка</string>
   <string name="summary_autosend">Авто отправить:</string>
-  <string name="pref_autosend_title">Автоматическая отправка, электронная почта и выгрузка</string>
+  <string name="pref_autosend_title">Автоматическая отправка, электронная почта и загрузка</string>
+  <string name="pref_autosend_summary">Настройки автоматической отправки, электронной почты и загрузки</string>
   <string name="shortcut_start">Старт</string>
   <string name="shortcut_stop">Стоп</string>
   <string name="shortcut_pickaction">Выбрать действие</string>
+
+    <string name="log_skylines_title">Отправлять координаты на сервер SkyLines</string>
+    <string name="log_skylines_summary">Отправлять данные GPS на сервер SkyLines.</string>
+    <string name="skylines_setup_title">Настройка SkyLines</string>
+    <string name="skylines_setup_summary">Отправка координат на выбранный сервер SkyLines.</string>
+    <string name="skylines_enabled">Активировать SkyLines</string>
+    <string name="skylines_enabled_summary">Активировать этот сервер SkyLines.</string>
+    <string name="skylines_server_category">Параметры SkyLines</string>
+    <string name="skylines_server">Сервер</string>
+    <string name="skylines_server_summary">Имя или IP адрес сервера</string>
+    <string name="skylines_server_port">Порт</string>
+    <string name="skylines_server_default">78.47.50.46</string>
+    <string name="skylines_server_port_default">5597</string>
+    <string name="skylines_key">Ключ доступа</string>
+    <string name="skylines_interval">Интервал отправки данных</string>
+    <string name="skylines_interval_summary">Частота отправки точек на сервер</string>
+    <string name="skylines_interval_default">3</string>
+    <string name="skylines_distance_before_logging">Дистанция отправки точек</string>
+    <string name="skylines_distance_before_logging_summary">Минимальное пройденное расстояние для отправки точек. Используйте 0 для отправки всех точек.</string>
+    <string name="skylines_distance_before_logging_default">10</string>
+    <string name="skylines_invalid_form">Недопустимые значения</string>
+    <string name="skylines_invalid_form_message">Пожалуйста, убедитесь, что все поля заполнены верно</string>
+
+
+    <string name="log_livetrack24_title">Отправлять координаты на сервер livetrack24</string>
+    <string name="log_livetrack24_summary">Отправлять данные GPS на сервер livetrack24 (leonardo, FFVL, ...).</string>
+    <string name="livetrack24_setup_title">Настройка livetrack24</string>
+    <string name="livetrack24_setup_summary">Отправка координат на выбранный сервер livetrack24.</string>
+    <string name="livetrack24_enabled">Активировать livetrack24</string>
+    <string name="livetrack24_enabled_summary">Активировать этот сервер livetrack24.</string>
+    <string name="livetrack24_server_category">Параметры livetrack24</string>
+    <string name="livetrack24_server_url">Другой Сервер</string>
+    <string name="livetrack24_server_url_summary">Укажите URL вашего сервера</string>
+
+    <string name="livetrack24_server_leonardo">http://t1.livetrack24.com</string>
+    <string name="livetrack24_server_ffvl"> http://geolocalisation.ffvl.fr:443</string>
+
+    <string name="livetrack24_preset_leonardo">Leonardo live servers</string>
+    <string name="livetrack24_preset_ffvl">FFVL live servers</string>
+    <string name="livetrack24_preset_custom">Custom server settings</string>
+
+    <string name="livetrack24_username">Имя пользователя</string>
+    <string name="livetrack24_username_summary">Логин для сервера Leonardo/FFVL/other</string>
+
+    <string name="livetrack24_password">Пароль</string>
+    <string name="livetrack24_password_summary">Пароль для сервера Leonardo/FFVL/other</string>
+
+    <string name="livetrack24_interval">Интервал отправки данных</string>
+    <string name="livetrack24_interval_default">3</string>
+    <string name="livetrack24_interval_summary">Частота отправки точек на сервер</string>
+    <string name="livetrack24_distance_before_logging">Дистанция отправки точек</string>
+    <string name="livetrack24_distance_before_logging_summary">Минимальное пройденное расстояние для отправки точек. Используйте 0 для отправки всех точек.</string>
+    <string name="livetrack24_distance_before_logging_default">10</string>
+    <string name="livetrack24_presets">Предустановки Livetrack</string>
+    <string name="livetrack24_presets_summary">Стандартные настройки для leonardo, FFVL, ...</string>
+    <string name="livetrack24_invalid_form">Недопустимые значения</string>
+    <string name="livetrack24_invalid_form_message">Пожалуйста, убедитесь, что все поля заполнены верно</string>
+
   <string name="log_opengts_title">Отправлять координаты на сервер OpenGTS</string>
-  <string name="log_opengts_summary">Отправлять данные GPRMC на сервер OpenGTS.</string>
-  <string name="opengts_setup_title">OpenGTS Настройка</string>
-  <string name="opengts_setup_summary">Отправка координат на сервер OpenGTS по вашему выбору.</string>
-  <string name="opengts_enabled">Включить OpenGTS</string>
-  <string name="opengts_enabled_summary">Включите этот OpenGTS сервер.</string>
-  <string name="autoopengts_autosend">Включить автоматическую отправку</string>
+  <string name="log_opengts_summary">Отправлять данные GPS на сервер OpenGTS.</string>
+  <string name="opengts_setup_title">Настройка OpenGTS</string>
+  <string name="opengts_setup_summary">Отправка координат на выбранный сервер OpenGTS.</string>
+  <string name="opengts_enabled">Активировать OpenGTS</string>
+  <string name="opengts_enabled_summary">Активировать этот сервер OpenGTS.</string>
+  <string name="autoopengts_autosend">Активировать автоматическую отправку</string>
   <string name="autoopengts_autosend_summary">Включает автоматическую отправку координат.</string>
-  <string name="autoopengts_server_category">OpenGTS параметры</string>
+  <string name="autoopengts_server_category">Параметры OpenGTS</string>
   <string name="autoopengts_invalid_form">Недопустимые значения</string>
   <string name="autoopengts_invalid_form_message">Пожалуйста, убедитесь, что все поля заполнены верно</string>
-  <string name="opengts_upload">Отправить в OpenGTS</string>
+  <string name="opengts_upload">Отправить на сервер OpenGTS</string>
   <string name="autoopengts_server">Сервер</string>
-  <string name="autoopengts_server_summary">Имя хоста или IP</string>
+  <string name="autoopengts_server_summary">Имя или IP адрес сервера</string>
   <string name="opengts_server_port">Порт</string>
   <string name="opengts_server_communication_method">Способ связи</string>
-  <string name="opengts_server_communication_method_summary">На основе протокола HTTP или сырых сокетов</string>
+  <string name="opengts_server_communication_method_summary">На основе протокола HTTP или сокетов TCP/UDP</string>
   <string name="autoopengts_server_path">Путь на сервере</string>
   <string name="autoopengts_server_path_summary">Опционально, только для способа связи на основе протокола HTTP. Например, \'/gprmc/Data\'</string>
   <string name="autoopengts_device_id">Идентификатор устройства</string>
+  <string name="opengts_interval">Интервал отправки данных</string>
+  <string name="opengts_interval_default">60</string>
+  <string name="opengts_interval_summary">Частота отправки точек на сервер</string>
+  <string name="opengts_distance_before_logging">Дистанция отправки точек</string>
+  <string name="opengts_distance_before_logging_summary">Минимальное пройденное расстояние для отправки точек. Используйте 0 для отправки всех точек.</string>
+  <string name="opengts_distance_before_logging_default">10</string>
+
+    <string name="autoftp_server">Сервер FTP</string>
+    <string name="autoftp_server_summary">Имя или IP адрес сервера</string>
+    <string name="autoftp_username">Логин</string>
+    <string name="autoftp_password">Пароль</string>
+    <string name="autoftp_advanced_settings">Расширенные настройки</string>
+    <string name="autoftp_port">Порт</string>
+    <string name="autoftp_useftps">Использовать FTPS</string>
+    <string name="autoftp_useftps_summary">Использовать FTP через SSL. Настройки SSL/TLS и Implicit не используются если эта настройка не активна.</string>
+    <string name="autoftp_ssltls">SSL/TLS</string>
+    <string name="autoftp_ssltls_summary">None, SSL или TLS. Для обычного подключения без шифрования данных используйте none.</string>
+    <string name="autoftp_implicit">Implicit FTP over SSL</string>
+    <string name="autoftp_implicit_summary">Не используйте эту настройку если не понимаете о чём идёт речь.</string>
+    <string name="autoftp_test">Test FTP Upload</string>
+    <string name="autoftp_test_summary">Загрузка тестового файла на сервер FTP для проверки настроек.</string>
+    <string name="autoftp_testing">Testing FTP upload</string>
+    <string name="autoftp_invalid_settings">Недопустимые значения</string>
+    <string name="autoftp_invalid_summary">Пожалуйста, убедитесь, что все поля заполнены верно</string>
+    <string name="autoftp_enabled">FTP активно</string>
+    <string name="ftp_upload">FTP upload</string>
+
+    <string name="autoftp_setup_title">Настройки FTP</string>
+    <string name="autoftp_setup_summary">Загрузка треков на сервер FTP(S).</string>
+
 </resources>
