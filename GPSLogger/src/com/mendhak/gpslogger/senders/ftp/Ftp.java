@@ -54,7 +54,8 @@ public class Ftp
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            Utilities.LogError("Could not create FTP Client", e);
+            return false;
         }
 
 
@@ -87,6 +88,7 @@ public class Ftp
                 else
                 {
                     Utilities.LogDebug("Failed to FTP file");
+                    return false;
                 }
 
             }
@@ -100,6 +102,7 @@ public class Ftp
         catch (Exception e)
         {
             Utilities.LogError("Could not connect or upload to FTP server.", e);
+            return false;
         }
         finally
         {
@@ -114,6 +117,7 @@ public class Ftp
             catch (Exception e)
             {
                 Utilities.LogError("Could not logout or disconnect", e);
+                return false;
             }
         }
 
