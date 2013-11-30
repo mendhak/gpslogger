@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.mendhak.gpslogger" android:versionCode="33"
-          android:versionName="33" android:installLocation="auto">
+          package="com.mendhak.gpslogger" android:versionCode="34"
+          android:versionName="34" android:installLocation="auto">
 
     <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="16"/>
 
