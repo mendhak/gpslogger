@@ -109,16 +109,16 @@
   <string name="new_file_creation_summary">Crear un nuevo archivo por día, o cada vez que inicie.</string>
   <string name="new_file_creation_onceaday">Una vez al día</string>
   <string name="new_file_creation_everystart">Cada vez que inicia</string>
+  <string name="new_file_creation_static">Archivo fijo</string>
+  <string name="new_file_static_title">Nombre del archivo estático</string>
+  <string name="new_file_static_summary">Si eliges crear un archivo fijo, entre el nombre del archivo personalizado</string>
   <string name="pref_performance_title">Rendimiento</string>
   <string name="prefer_celltower_title">Preferir torres celular</string>
   <string name="prefer_celltower_summary">Utilizar torres celular en lugar de satélites. Es menos preciso, pero ahorra batería.</string>
   <string name="time_before_logging_title">Tiempo entre cada registro</string>
-  <string name="time_before_logging_summary">Use 0 para máxima frecuencia, aunque mas lento ahorra batería.     </string>
+  <string name="time_before_logging_summary">Cuanto tiempo para esperar entre los puntos GPS rastreados. Use 0 para la máxima frecuencia, pero una frecuencia menor es mejor para que no gaste tanta batería.</string>
   <string name="time_before_logging_dialog_title">Tiempo en segundos</string>
   <string name="time_before_logging_hint">Ingrese segundos (máx. 9999)</string>
-  <string name="distance_before_logging_title">Distancia entre cada registro</string>
-  <string name="distance_before_logging_summary">Desplazamiento antes de iniciar el siguiente registro. Use 0 para registrar todos los puntos.   
-  </string>
   <string name="useimperial_title">Utilizar unidades imperiales</string>
   <string name="useimperial_summary">Utiliza las exoticas unidades pies, millas y pintas.</string>
   <string name="show_notification_title">Mostrar Notificación</string>
@@ -189,6 +189,9 @@
   <string name="osm_pick_file">Seleccionar un archivo para subir</string>
   <string name="debuglog_title">﻿Escribir en archivo para depurar</string>
   <string name="debuglog_summary">Escribe mensajes para depurar a un archivo en la tarjeta SD. ADVERTENCIA: El archivo crece muy rápido.     </string>
+  <string name="autoemail_from">Desde dirección</string>
+  <string name="gdocs_clearauthorization">Borrar autorización</string>
+  <string name="gdocs_setup_title">Google Docs</string>
   <string name="email_upload">Enviar por correo como fichero</string>
   <string name="autoemail_sendto_csv">Direcciones de email separadas por comas</string>
   <string name="autosend_enabled">Permitir envío automático</string>

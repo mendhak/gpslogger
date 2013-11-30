@@ -11,6 +11,7 @@
   <string name="menu_settings">الأعدادات</string>
   <string name="menu_share">مشاركة</string>
   <string name="menu_exit">خروج</string>
+  <string name="txt_altitude">ارتفاع:</string>
   <string name="txt_speed">السرعة :</string>
   <string name="txt_direction">الأتجاة :</string>
   <string name="txt_satellites">الأقمار الصناعية :</string>
@@ -28,12 +29,25 @@
   <string name="sharing_pick_file">أختر ملف للمشاركه</string>
   <string name="sharing_mylocation">موقعي</string>
   <string name="sharing_via">المشاركة بأستخدام</string>
+  <string name="foot"> قدم</string>
   <string name="meter">متر</string>
+  <string name="meters"> أمتار</string>
   <string name="error">خطاء</string>
   <string name="error_connection">خطاء في الأتصال , الرجاء التأكد من أعدادات الجهاز.</string>
   <string name="started">بدأ</string>
+  <string name="sorry">آسف</string>
+  <string name="direction_north">شمال</string>
+  <string name="direction_east">الشرق</string>
+  <string name="direction_south">جنوب</string>
+  <string name="direction_west">غرب</string>
   <string name="pref_performance_title">الأداء</string>
   <string name="time_before_logging_dialog_title">الوقت بالثانية</string>
   <string name="autoemail_title">إعداد البريد الإلكتروني التلقائي</string>
   <string name="please_wait">الرجاء الانتظار.</string>
+  <string name="osm_description">وصف</string>
+  <string name="dropbox_setup_title">Dropbox</string>
+  <string name="dropbox_upload">Dropbox</string>
+  <string name="shortcut_start">بدء</string>
+  <string name="shortcut_stop">إيقاف</string>
+  <string name="autoftp_password">كلمة السر</string>
 </resources>

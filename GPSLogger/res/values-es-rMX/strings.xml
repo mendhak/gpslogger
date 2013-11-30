@@ -108,16 +108,16 @@
   <string name="new_file_creation_summary">Si desea crear un nuevo archivo una vez al día o cada vez que inicie.</string>
   <string name="new_file_creation_onceaday">Una vez al día</string>
   <string name="new_file_creation_everystart">Cada vez que empiezo</string>
+  <string name="new_file_static_title">Nombre de archivo estático</string>
+  <string name="new_file_static_summary">Si eliges crear un archivo fijo, introduce un nombre personalizado para el archivo</string>
   <string name="pref_performance_title">Rendimiento</string>
   <string name="prefer_celltower_title">Preferir Torres Celulares</string>
   <string name="prefer_celltower_summary">Utilice celltowers en lugar de satélites. Menos precisa, pero guarda más batería.     </string>
   <string name="time_before_logging_title">Tiempo antes de registro</string>
-  <string name="time_before_logging_summary">Use 0 para frecuencia máxima, pero más lento es mejor para la duración de la batería.     </string>
+  <string name="time_before_logging_summary">Cuanto tiempo esperar entre recolleccion de coordenadas GPS. Usa 0 para la máxima frecuencia, pero una frecuencia menor es mejor para la duración de la batería.
+    </string>
   <string name="time_before_logging_dialog_title">Tiempo en segundos</string>
   <string name="time_before_logging_hint">Introduzca a segundos (máx. 9999)</string>
-  <string name="retry_time_title">Intervalo de tiempo para la precisión</string>
-  <string name="distance_before_logging_title">Distancia antes de registro</string>
-  <string name="distance_before_logging_summary">Distancia de Viaje antes de iniciar el siguiente punto. Use 0 para registrar todos los puntos.     </string>
   <string name="useimperial_title">Utilice unidades imperiales</string>
   <string name="useimperial_summary">Utilice pies, millas y pintas, ninguna de esas cosas métricas exótico.</string>
   <string name="show_notification_title">Mostrar notificación</string>
@@ -257,4 +257,7 @@
   <string name="autoopengts_server_path">Ruta del servidor</string>
   <string name="autoopengts_server_path_summary">Opcional y sólo para la comunicación basada en HTTP. Por ejemplo \'/gprmc/Data\'</string>
   <string name="autoopengts_device_id">ID de dispositivo</string>
+  <string name="autoftp_enabled">FTP habilitado</string>
+  <string name="autoftp_setup_title">Configuración FTP</string>
+  <string name="menu_faq">Ayuda y FAQ</string>
 </resources>

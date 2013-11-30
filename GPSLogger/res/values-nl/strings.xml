@@ -115,19 +115,17 @@
   <string name="prefer_celltower_title">﻿Voorkeur celtorens</string>
   <string name="prefer_celltower_summary">﻿Maakt gebruik van celtorens in plaats van satellieten. Minder nauwkeurig, maar bespaart uw batterij.</string>
   <string name="time_before_logging_title">﻿Tijd tussen de logpunten</string>
-  <string name="time_before_logging_summary">﻿Gebruik 0 voor maximale frequentie, maar langzamer is beter voor de belsting van de batterij.</string>
+  <string name="time_before_logging_summary">Tijd om te wachten tussen GPS puinten. Gebruik 0 voor maximale frequentie, maar langzamer is beter voor de batterijduur.</string>
   <string name="time_before_logging_dialog_title">﻿Tijd in seconden</string>
   <string name="time_before_logging_hint">﻿Voer seconden in (max 9999)</string>
   <string name="keep_fix_summary">Pas op, verkort de accuduur sterk. Alleen gebruiken voor hogere nauwkeurigheid met lagere frequenties.</string>
   <string name="keep_fix_title">Houdt GPS ingeschakeld tussen \"fixes\"</string>
-  <string name="retry_time_title">Tijd-interval tussen \"GPS-fixes\"</string>
-  <string name="retry_time_summary">Gebruik 0 voor maximum frequenties, maar trager is beter voor de accuduur.</string>
+  <string name="retry_time_title">Herstarten na mislukte poging</string>
   <string name="retry_time_dialog_title">Tijd in seconden</string>
   <string name="retry_time_hint">Voor seconden in (max 9999)</string>
-  <string name="distance_before_logging_title">Afstand tussen logpunten</string>
-  <string name="distance_before_logging_summary">Minimum afstand tussen vorig en nieuw logpunt. Gebruik 0 om alle punten te loggen.</string>
-  <string name="accuracy_before_logging_title">Nauwkeurigheid voor start loggen</string>
-  <string name="accuracy_before_logging_summary">Welke min. nauwkeurigheid foor het loggen. Gebruik 0 om alle punten te loggen.</string>
+  <string name="timeout_time_title">Timeout</string>
+  <string name="timeout_time_dialog_title">Tijd in seconden</string>
+  <string name="timeout_time_hint">Voer seconden in (max 9999)</string>
   <string name="useimperial_title">﻿Engelse eenheden gebruiken</string>
   <string name="useimperial_summary">﻿Voeten, mijlen en pinten, geen nieuwerwetse metrische dingen gebruiken.</string>
   <string name="show_notification_title">Toon meldingen</string>
@@ -291,4 +289,8 @@
   <string name="ftp_upload">FTP upload</string>
   <string name="autoftp_setup_title">FTP parameters</string>
   <string name="autoftp_setup_summary">Upload uw bestanden naar een FTP server. Let op: geen SFTP.</string>
+  <string name="faq_screen_title">Veel gestelde vragen</string>
+  <string name="menu_faq">Help en veel gestelde vragen (FAQ)</string>
+  <string name="gpsf_missing">Ontbrekende Serivce</string>
+  <string name="gpsf_missing_description">U heeft Google Play Services Framework nodig voor deze functie.</string>
 </resources>

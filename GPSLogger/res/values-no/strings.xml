@@ -55,11 +55,8 @@
   <string name="prefer_celltower_title">Føretrekk mobilmaster</string>
   <string name="prefer_celltower_summary">Bruk mobilmaster heller enn satellittar. Mindre nøyaktig, men sparar<br />batteriet.<br /></string>
   <string name="time_before_logging_title">Tid før logging</string>
-  <string name="time_before_logging_summary">Bruk 0 for maksimum frekvens, men treigare er betre for batteriet.<br /></string>
   <string name="time_before_logging_dialog_title">Tid i sekund</string>
   <string name="time_before_logging_hint">Skriv inn sekund (maks 9999)</string>
-  <string name="distance_before_logging_title">Avstand før logging</string>
-  <string name="distance_before_logging_summary">Kor langt det skal vere mellom kvar logging. Bruk 0 for å logga alle<br />punkt.</string>
   <string name="useimperial_title">Bruk imperieeiningar</string>
   <string name="useimperial_summary">Bruk fot, engelske mil og pint, ikkje noko nymotens metergreier.</string>
   <string name="show_notification_title">Vis melding</string>

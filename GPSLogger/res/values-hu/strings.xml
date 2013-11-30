@@ -113,17 +113,10 @@
   <string name="prefer_celltower_title">GSM torony az elsődleges</string>
   <string name="prefer_celltower_summary">Műholdak helyett a GSM tornyokat használja. Kevésbé pontos, de energiát takarít meg     </string>
   <string name="time_before_logging_title">Logolás előtt</string>
-  <string name="time_before_logging_summary">Ha 0 a maximális frekvencia, akkor tovább működik akkumulátorról.</string>
   <string name="time_before_logging_dialog_title">Idő másodpercben</string>
   <string name="time_before_logging_hint">Adja meg másodpercben (max 9999)</string>
-  <string name="retry_time_title">Hitelesítési időintervallum</string>
-  <string name="retry_time_summary">Ha 0 a maximális frekvencia, akkor tovább működik akkumulátorról.</string>
   <string name="retry_time_dialog_title">Idő másodpercben</string>
   <string name="retry_time_hint">Adja meg másodpercben (max 9999)</string>
-  <string name="distance_before_logging_title">Távolság bejelentkezés előtt</string>
-  <string name="distance_before_logging_summary">Ekkora elmozdulás legyen a következő bejelentkezésig. Ha az összes pont kell akkor legyen 0.     </string>
-  <string name="accuracy_before_logging_title">Bejelentkezés előtti hitelesítés</string>
-  <string name="accuracy_before_logging_summary">Melyik a hitelesítés legkisebb pontossága. 0-nál mindent logol     </string>
   <string name="useimperial_title">Angolszász mértékegységek használata</string>
   <string name="useimperial_summary">Használja a lábat, a mérföldet és a pint, nem metrikus mértékegység.</string>
   <string name="show_notification_title">Értesítés megjelenítése</string>

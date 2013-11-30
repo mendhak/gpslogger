@@ -115,19 +115,19 @@
   <string name="prefer_celltower_title">Bevorzugte Funkzelle</string>
   <string name="prefer_celltower_summary">Bevorzugt Funkzellen vor Satelliten. Das ist weniger genau, aber schont die Batterie.</string>
   <string name="time_before_logging_title">Zeit vor dem Loggen</string>
-  <string name="time_before_logging_summary">Verwende 0 als Maximalfrequenz, ist zwar langsamer, aber besser für den Akku.</string>
+  <string name="time_before_logging_summary">Wie lange wird zwischen der Erfassung der GPS-Punkte gewartet. 0 steht für maximale Frequenz wobei eine langsamere Erfassung besser für die Laufzeit der Batterie ist.</string>
   <string name="time_before_logging_dialog_title">Zeit in Sekunden</string>
   <string name="time_before_logging_hint">Eingabe in Sekunden (max. 9999)</string>
   <string name="keep_fix_summary">Vorsicht, dies senkt die Lebensdauer des Akkus erheblich. Nur für hohe Präzision bei niedrigen Frequenzen verwenden.</string>
   <string name="keep_fix_title">GPS zwischen Fixes aktiviert lassen</string>
-  <string name="retry_time_title">Zeitintervall</string>
-  <string name="retry_time_summary">Verwende 0 als Maximalfrequenz. Langsamer ist aber besser für den Akku.</string>
+  <string name="retry_time_title">Wiederholungsintervall im Fehlerfall</string>
   <string name="retry_time_dialog_title">Zeit in Sekunden</string>
   <string name="retry_time_hint">Eingabe in Sekunden (max. 9999)</string>
-  <string name="distance_before_logging_title">Entfernung vor dem Loggen</string>
-  <string name="distance_before_logging_summary">Entfernung bis der nächste Punkt geloggt wird. Verwende 0 um alle Punkte zu loggen.</string>
-  <string name="accuracy_before_logging_title">Genauigkeit bevor geloggt wird</string>
-  <string name="accuracy_before_logging_summary">Welche Mindestgenauigkeit wird benötigt bevor geloggt wird. Verwende 0 um alle Punkte zu loggen.</string>
+  <string name="distance_before_logging_title">Abstand zwischen den Punkten</string>
+  <string name="accuracy_before_logging_title">Mindestgenauigkeit pro Punkt</string>
+  <string name="timeout_time_title">Zeitüberschreitung</string>
+  <string name="timeout_time_dialog_title">Zeit in Sekunden</string>
+  <string name="timeout_time_hint">Eingabe in Sekunden (max. 9999)</string>
   <string name="useimperial_title">﻿Imperiale Einheiten verwenden</string>
   <string name="useimperial_summary">Verwende Fuß, Meilen und Pints, keines von diesem neumodischen metrischen Zeug.</string>
   <string name="show_notification_title">Benachrichtigung anzeigen</string>
@@ -291,4 +291,7 @@
   <string name="ftp_upload">FTP-Upload</string>
   <string name="autoftp_setup_title">FTP-Setup</string>
   <string name="autoftp_setup_summary">Lade deine Dateien auf einen FTP(S)-Server hoch. Hinweis: Das beinhaltet nicht SFTP.</string>
+  <string name="faq_screen_title">Häufig gestellte Fragen</string>
+  <string name="menu_faq">Hilfe und FAQ</string>
+  <string name="gpsf_missing">Kein GPS-Signal</string>
 </resources>

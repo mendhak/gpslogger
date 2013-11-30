@@ -113,27 +113,32 @@
     </string>
   <string name="new_file_creation_onceaday">Один раз в день</string>
   <string name="new_file_creation_everystart">При старте записи лога</string>
+  <string name="new_file_creation_static">Фиксированный файл</string>
+  <string name="new_file_static_title">Имя статического файла</string>
+  <string name="new_file_static_summary">Если вы выбрали создание фиксированного файла, введите имя файла</string>
   <string name="pref_performance_title">Настройки производительности</string>
   <string name="prefer_celltower_title">Предпочитать сотовые вышки</string>
   <string name="prefer_celltower_summary">Использовать данные о положении с сотовых вышек. Менее точно, но экономит
         батарею.
     </string>
   <string name="time_before_logging_title">Период логирования точки</string>
-  <string name="time_before_logging_summary">Используйте 0 для минимально возможного периода логирования. Реже - лучше
-        для батареи.
-    </string>
+  <string name="time_before_logging_summary">Как долго ждать между сохранениями GPS точек. Используйте 0 для максимальной частоты, но медленнее лучше для жизни батареи.</string>
   <string name="time_before_logging_dialog_title">Время в секундах</string>
   <string name="time_before_logging_hint">Введите число секунд (max 9999)</string>
-  <string name="retry_time_title">Интервал времени для точности</string>
-  <string name="retry_time_summary">Используйте 0 для максимальной частоты, но чем медленнее, тем лучше для аккумулятора.     </string>
+  <string name="keep_fix_summary">Будьте осторожны, это значительно сократит жизнь батареи. Используйте только для высокой точности с низкими интервалами.</string>
+  <string name="keep_fix_title">Держать GPS включенным между местоопределениями</string>
+  <string name="retry_time_title">Интервал повтора при ошибке</string>
+  <string name="retry_time_summary">Если не найдено местоположение соответствующее критерию, сколько надо ждать прежде чем повторить попытку. Используйте 0 для бесконечного количества попыток.</string>
   <string name="retry_time_dialog_title">Время в секундах</string>
   <string name="retry_time_hint">Введите интервал в секундах (максимум 9999)</string>
-  <string name="distance_before_logging_title">Дистанция логирования точки</string>
-  <string name="distance_before_logging_summary">Используйте 0 для минимально возможной дистанции логирования. Больше
-        - лучше для батареи.
-    </string>
-  <string name="accuracy_before_logging_title">Минимальная точность измерений</string>
-  <string name="accuracy_before_logging_summary">Минимально допустимая точность измерений. Установите 0 для записи результатов с любой точностью.</string>
+  <string name="distance_before_logging_title">Расстояние между точками</string>
+  <string name="distance_before_logging_summary">Какого должно быть расстояние до предыдущей точки прежде чем текущая точка будет сохранена. Используйте 0 для сохранения всех точек.</string>
+  <string name="accuracy_before_logging_title">Минимальная точность на точку</string>
+  <string name="accuracy_before_logging_summary">Насколько точно должно быть текущее GPS местоположение прежде чем оно занесется в журнал. Используйте 0 для сохранения всех точек.</string>
+  <string name="timeout_time_title">Тайм-аут</string>
+  <string name="timeout_time_summary">Как долго GPS остается в местоопределении перед отказом. Используйте 0 для отключения тайм-аута</string>
+  <string name="timeout_time_dialog_title">Время в секундах</string>
+  <string name="timeout_time_hint">Введите секунды (максимум 9999)</string>
   <string name="useimperial_title">Имперская система мер</string>
   <string name="useimperial_summary">Использовать футы, мили, пинты.</string>
   <string name="show_notification_title">Показывать уведомления</string>
@@ -253,8 +258,9 @@
   <string name="autosend_targets_category">Места назначения для авто отправки</string>
   <string name="menu_email_now">Авто отправить сейчас</string>
   <string name="autosend_sending">Автоматическая отправка</string>
-  <string name="summary_autosend">Авто отправить:</string>
+  <string name="summary_autosend">Автоматическая отправка:</string>
   <string name="pref_autosend_title">Автоматическая отправка, электронная почта и выгрузка</string>
+  <string name="pref_autosend_summary">Настройки электронной почты, публикаций и выгрузки</string>
   <string name="shortcut_start">Старт</string>
   <string name="shortcut_stop">Стоп</string>
   <string name="shortcut_pickaction">Выбрать действие</string>
@@ -274,23 +280,36 @@
   <string name="autoopengts_server_summary">Имя хоста или IP</string>
   <string name="opengts_server_port">Порт</string>
   <string name="opengts_server_communication_method">Способ связи</string>
-  <string name="opengts_server_communication_method_summary">На основе протокола HTTP или сырых сокетов</string>
+  <string name="opengts_server_communication_method_summary">На основе связи HTTP или Raw Socket</string>
   <string name="autoopengts_server_path">Путь на сервере</string>
   <string name="autoopengts_server_path_summary">Опционально, только для способа связи на основе протокола HTTP. Например, \'/gprmc/Data\'</string>
   <string name="autoopengts_device_id">Идентификатор устройства</string>
   <string name="autoftp_server">Сервер FTP</string>
-  <string name="autoftp_server_summary">IP-адрес или имя хоста</string>
+  <string name="autoftp_server_summary">IP адрес или имя хоста</string>
   <string name="autoftp_username">Имя пользователя</string>
   <string name="autoftp_password">Пароль</string>
   <string name="autoftp_advanced_settings">Дополнительные настройки</string>
   <string name="autoftp_port">Порт</string>
+  <string name="autoftp_useftps">Использовать FTPS</string>
+  <string name="autoftp_useftps_summary">Включить FTP через SSL. SSL/TLS и Безусловно игнорируются, если это не установлено.</string>
   <string name="autoftp_ssltls">SSL/TLS</string>
+  <string name="autoftp_ssltls_summary">Нет, SSL или TLS. Используйте none для обычных небезопасных соединений.</string>
+  <string name="autoftp_ssltls_none">Нет</string>
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
+  <string name="autoftp_implicit">Безусловно FTP через SSL</string>
+  <string name="autoftp_implicit_summary">Оставьте неотмеченным, если вы не знаете.</string>
   <string name="autoftp_test">Проверить выгрузку по FTP</string>
-  <string name="autoftp_test_summary">Загрузить тестовый файл на FTP-сервер</string>
+  <string name="autoftp_test_summary">Выгрузить тестовый файл на FTP сервер</string>
   <string name="autoftp_testing">Проверяется выгрузка на FTP</string>
   <string name="autoftp_invalid_settings">Неправильные параметры</string>
   <string name="autoftp_invalid_summary">Некоторые из ваших настроек заданы неверно. Убедитесь, что вы заполнили все поля.</string>
+  <string name="autoftp_enabled">FTP включен</string>
+  <string name="ftp_upload">FTP загрузка</string>
   <string name="autoftp_setup_title">Настройка FTP</string>
+  <string name="autoftp_setup_summary">Загрузите ваши файлы на FTP(S) сервер. Примечание: Это не охватывает SFTP.</string>
+  <string name="faq_screen_title">Часто задаваемые вопросы</string>
+  <string name="menu_faq">Помощь и ЧаВо</string>
+  <string name="gpsf_missing">Отсутствует Служба</string>
+  <string name="gpsf_missing_description">Вам понадобится Google Play Services Framework для использования этой функции.</string>
 </resources>

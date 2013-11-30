@@ -118,18 +118,10 @@
         baterii.
     </string>
   <string name="time_before_logging_title">Čas před záznamem</string>
-  <string name="time_before_logging_summary">Nastavte 0 pro maximální frekvenci, ale pomalejší je lepší pro životnost baterie.
-    </string>
   <string name="time_before_logging_dialog_title">Čas v sekundách</string>
   <string name="time_before_logging_hint">Zadejte sekundy (maximum 9999)</string>
-  <string name="retry_time_title">Časový interval pro přesnost</string>
-  <string name="retry_time_summary">Použijte 0 pro maximální frekvenci, ale pomalejší je lepší pro výdrž baterie.</string>
   <string name="retry_time_dialog_title">Čas v sekundách</string>
   <string name="retry_time_hint">Zadejte sekundy (max 9999)</string>
-  <string name="distance_before_logging_title">Vzdálenost před záznamem</string>
-  <string name="distance_before_logging_summary">Jak daleko se má jít, než se zaznamená další bod. Použijte 0 pro záznam všech bodů.     </string>
-  <string name="accuracy_before_logging_title">Přesnost pro záznam</string>
-  <string name="accuracy_before_logging_summary">Jakou min. přesnost pro záznam. Použijte 0 pro záznam všech bodů.</string>
   <string name="useimperial_title">Použít imperiální jednotky</string>
   <string name="useimperial_summary">Použít stopy, míle a pinty, nic z těch moderních metrických jednotek.</string>
   <string name="show_notification_title">Zobrazit oznámení</string>
