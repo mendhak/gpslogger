@@ -1,11 +1,8 @@
-**Feature request? Please consider [contributing](https://help.github.com/articles/using-pull-requests) code.**
-----
-
-**Can you help with [translations](http://crowdin.net/project/gpslogger-for-android)?**
-------
 
 GPSLogger
 =========
+
+GPSLogger is an Android app that logs GPS information to GPX, KML or text files and has options for annotating and sharing.
 
 [Read about GPSLogger here](http://mendhak.github.com/gpslogger/)
 
@@ -14,6 +11,14 @@ You can [download it from Google Play](https://play.google.com/store/apps/detail
 You can bypass the market and get the APK yourself:  [Download here](https://sourceforge.net/projects/gfadownload/files/)
 
 Licensed under [GPL v2](http://www.gnu.org/licenses/gpl-2.0.html).
+
+
+No new features are being planned for GPSLogger. However, [contributions](https://help.github.com/articles/using-pull-requests) are welcome!
+----
+
+**Can you help with [translations](http://crowdin.net/project/gpslogger-for-android)?**
+------
+
 
 
 Setting up the code
