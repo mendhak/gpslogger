@@ -107,7 +107,7 @@ class Gpx10AnnotateHandler implements Runnable
                 return;
             }
 
-            int startPosition = 346;
+            int startPosition = 323;
 
             String wpt = GetWaypointXml(loc, dateTimeString, description);
 
@@ -170,23 +170,10 @@ class Gpx10AnnotateHandler implements Runnable
             waypoint.append("<ele>").append(String.valueOf(loc.getAltitude())).append("</ele>");
         }
 
-        if (loc.hasBearing())
-        {
-            waypoint.append("<course>").append(String.valueOf(loc.getBearing())).append("</course>");
-        }
-
-        if (loc.hasSpeed())
-        {
-            waypoint.append("<speed>").append(String.valueOf(loc.getSpeed())).append("</speed>");
-        }
-
+        waypoint.append("<time>").append(dateTimeString).append("</time>");
         waypoint.append("<name>").append(description).append("</name>");
 
         waypoint.append("<src>").append(loc.getProvider()).append("</src>");
-
-
-        waypoint.append("<time>").append(dateTimeString).append("</time>");
-
         waypoint.append("</wpt>\n");
 
         return waypoint.toString();
@@ -234,7 +221,7 @@ class Gpx10WriteHandler implements Runnable
                     initialXml.append("xmlns=\"http://www.topografix.com/GPX/1/0\" ");
                     initialXml.append("xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 ");
                     initialXml.append("http://www.topografix.com/GPX/1/0/gpx.xsd\">");
-                    initialXml.append("<time>").append(dateTimeString).append("</time>").append("<bounds />").append("<trk></trk></gpx>");
+                    initialXml.append("<time>").append(dateTimeString).append("</time>").append("<trk></trk></gpx>");
                     initialOutput.write(initialXml.toString().getBytes());
                     initialOutput.flush();
                     initialOutput.close();
@@ -284,6 +271,8 @@ class Gpx10WriteHandler implements Runnable
             track.append("<ele>").append(String.valueOf(loc.getAltitude())).append("</ele>");
         }
 
+        track.append("<time>").append(dateTimeString).append("</time>");
+
         if (loc.hasBearing())
         {
             track.append("<course>").append(String.valueOf(loc.getBearing())).append("</course>");
@@ -294,12 +283,6 @@ class Gpx10WriteHandler implements Runnable
             track.append("<speed>").append(String.valueOf(loc.getSpeed())).append("</speed>");
         }
 
-        if (loc.hasAccuracy() && loc.getAccuracy() > 0)
-        {
-            // Accuracy divided by 5 or 6 for approximate HDOP
-            track.append("<hdop>").append(String.valueOf(loc.getAccuracy() / 5)).append("</hdop>");
-        }
-
         track.append("<src>").append(loc.getProvider()).append("</src>");
 
         if (satelliteCount > 0)
@@ -307,7 +290,12 @@ class Gpx10WriteHandler implements Runnable
             track.append("<sat>").append(String.valueOf(satelliteCount)).append("</sat>");
         }
 
-        track.append("<time>").append(dateTimeString).append("</time>");
+        if (loc.hasAccuracy() && loc.getAccuracy() > 0)
+        {
+            // Accuracy divided by 5 or 6 for approximate HDOP
+            track.append("<hdop>").append(String.valueOf(loc.getAccuracy() / 5)).append("</hdop>");
+        }
+
 
         track.append("</trkpt>\n");
 
