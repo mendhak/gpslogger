@@ -116,6 +116,3 @@ so ensure that the emulator you are using is Android 4.2.2 (API level 17) or gre
 
 You can also debug directly against your phone - all phones Android 2.2 and above should have this framework installed.
 
-
-
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/9d438fd3c85a54bb30e84bd5437de8c1 "githalytics.com")](http://githalytics.com/mendhak/gpslogger)
