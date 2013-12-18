@@ -107,7 +107,7 @@ class Gpx10AnnotateHandler implements Runnable
                 return;
             }
 
-            int startPosition = 323;
+            int startPosition = 336;
 
             String wpt = GetWaypointXml(loc, dateTimeString, description);
 
