@@ -1,4 +1,3 @@
-
 GPSLogger
 =========
 
@@ -27,6 +26,8 @@ Setting up the code
 ### Development environment
 
 Feel free to adopt and document your own OS and IDEs.
+
+After you select an environment and complete configuring it, come back here and continue with the steps below.
 
  * [IntelliJ IDEA](docs/intellij.md)
  * [Eclipse + ADT Plugin](docs/eclipse.md)
