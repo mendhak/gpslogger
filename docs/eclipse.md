@@ -1,4 +1,3 @@
-
 ## Download tools and projects
 
 Download and extract to your preferred location:
@@ -8,11 +7,11 @@ Download and extract to your preferred location:
  * [Actionbar Sherlock 4.2.0 (ABS)](http://actionbarsherlock.com/download.html)
  * GPSLogger:
 
-       git clone https://github.com/mendhak/gpslogger.git
+        git clone https://github.com/mendhak/gpslogger.git
 
 Remmember where you have placed each.
 
-## Configure tools
+## Configure Eclipse
 
 Execute Eclipse
 
@@ -40,13 +39,13 @@ Once Eclipse restarts, in the menu:
 
  > Window > Preferences > Android > SDK Location
 
-Update *SDK Location* with the path to the directory of the SDK that you downloaded.
+Update *SDK Location* with the path to the directory of the SDK that you [just downloaded](eclipse.md#download-tools-and-projects).
 
 ### SDK platforms
 
-Again, in the menu:
+In the window:
 
-    Window > Android SDK Manager
+ > Window > Android SDK Manager
 
 Install the following:
  * API 16
@@ -71,17 +70,20 @@ Copy ABS to the GPSLogger clone, use a similar command:
 In the Eclipse menu:
 
  > File > Import > Maven > Existing Maven Projects
+ 
 In *Root directory* browse for the folder that you just copied (actionbarsherlock) and import it.
 
 Right click on the project and go to: 
 
  > Properties > Android
+ 
  1. Verify that the *Project Build Target* matches the target declared in the manifest. For version 4.2.0 is API 16.
  2. Verify that *Is Library* is checked and do not close the window.
 
 In the same window go to:
 
- > Java Build Path > Order and Export 
+ > Java Build Path > Order and Export
+ 
  1. Select the entry: Android 4.0
 
 ### Google Play services
@@ -95,11 +97,13 @@ Make a copy of the library project and put it in the root folder. Assuming that 
 In the Eclipse menu:
 
  > File > Import > Android > Existing Android Code Into Workspace
+ 
 In *Root directory* browse for the folder that you just copied (google-play-services_lib) and import it.
 
 Right click on the project and go to: 
 
  > Properties > Android
+ 
  1. Verify that the *Project Build Target* matches: API level 16
  2. Verify that *Is Library* is checked.
 
@@ -108,7 +112,8 @@ Right click on the project and go to:
 In the Eclipse menu:
 
  > File > Import > Maven > Existing Maven Projects
-In *Root directory* browse for the GPSLogger clone (gpslogger) and import it.
+ 
+In *Root directory* browse for your GPSLogger clone (gpslogger) and import it.
 
 In the left side panel, Package Explorer, you will see four nodes:
  1. actionbarsherlock
