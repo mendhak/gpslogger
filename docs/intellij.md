@@ -1,5 +1,3 @@
-
-These instructions are specific to Ubuntu, feel free to adopt and document it for your own OS and IDEs
                                                                                  
 ### Set up your Android Development Environment                                  
                                                                                  

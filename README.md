@@ -26,6 +26,8 @@ Setting up the code
 
 ### Development environment
 
+Feel free to adopt and document your own OS and IDEs.
+
  * [IntelliJ IDEA](docs/intellij.md)
  * [Eclipse + ADT Plugin](docs/eclipse.md)
 
