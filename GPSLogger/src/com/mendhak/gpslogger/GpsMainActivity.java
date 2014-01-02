@@ -32,9 +32,11 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.view.*;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.*;
 import com.actionbarsherlock.view.Menu;
@@ -835,8 +837,13 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         {
             public void onClick(DialogInterface dialog, int whichButton)
             {
+            	// DONE close keyboard
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.toggleSoftInput(0, 0);
+
                 final String desc = Utilities.CleanDescription(input.getText().toString());
-                if (desc.isEmpty())
+//              if (desc.isEmpty()) // DONE String.isEmpty() requires API level 9, use TextUtils.isEmpty or String.length instead
+                if (desc.length() == 0)
                 {
                     Session.clearDescription();
                     OnClearAnnotation();
@@ -857,10 +864,16 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             public void onClick(DialogInterface dialog, int whichButton)
             {
                 // Cancelled.
+            	// DONE close keyboard
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.toggleSoftInput(0, 0);
             }
         });
 
         alert.show();
+        // DONE automatically start keyboard
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
     /**
