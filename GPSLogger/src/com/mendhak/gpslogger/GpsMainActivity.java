@@ -856,9 +856,6 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         {
             public void onClick(DialogInterface dialog, int whichButton)
             {
-            	// DONE close keyboard
-//                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
-
                 final String desc = Utilities.CleanDescription(input.getText().toString());
 //              if (desc.isEmpty()) // DONE String.isEmpty() requires API level 9, use TextUtils.isEmpty or String.length instead
                 if (desc.length() == 0)
