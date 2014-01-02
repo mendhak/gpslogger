@@ -20,10 +20,23 @@
 package com.mendhak.gpslogger;
 
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.ListIterator;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.*;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.location.Location;
 import android.net.Uri;
@@ -31,14 +44,22 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.view.*;
+import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TableRow;
+import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.*;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.mendhak.gpslogger.common.AppSettings;
@@ -55,11 +76,8 @@ import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
 import com.mendhak.gpslogger.senders.ftp.AutoFtpActivity;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity;
-import com.mendhak.gpslogger.senders.osm.OSMHelper;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
-
-import java.io.File;
-import java.util.*;
+import com.mendhak.gpslogger.senders.osm.OSMHelper;
 
 public class GpsMainActivity extends SherlockActivity implements OnCheckedChangeListener,
         IGpsLoggerServiceClient, View.OnClickListener, IActionListener
@@ -232,6 +250,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
 
         Utilities.LogDebug("GpsMainActivity.onPause");
         StopAndUnbindServiceIfRequired();
+        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
         super.onPause();
     }
 
@@ -241,6 +260,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
 
         Utilities.LogDebug("GpsMainActivity.onDestroy");
         StopAndUnbindServiceIfRequired();
+        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
         super.onDestroy();
 
     }
@@ -838,8 +858,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             public void onClick(DialogInterface dialog, int whichButton)
             {
             	// DONE close keyboard
-                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputMethodManager.toggleSoftInput(0, 0);
+                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
 
                 final String desc = Utilities.CleanDescription(input.getText().toString());
 //              if (desc.isEmpty()) // DONE String.isEmpty() requires API level 9, use TextUtils.isEmpty or String.length instead
@@ -865,15 +884,13 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             {
                 // Cancelled.
             	// DONE close keyboard
-                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputMethodManager.toggleSoftInput(0, 0);
+                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
             }
         });
-
+        
         alert.show();
-        // DONE automatically start keyboard
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        // DONE open keyboard
+        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
     /**
