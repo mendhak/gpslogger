@@ -48,7 +48,7 @@ In the window:
  > Window > Android SDK Manager
 
 Install the following:
- * API 16
+ * API 19
     * SDK Platform
     * Google APIs
  * Extras
@@ -77,14 +77,14 @@ Right click on the project and go to:
 
  > Properties > Android
  
- 1. Verify that the *Project Build Target* matches the target declared in the manifest. For version 4.2.0 is API 16.
+ 1. Verify that the *Project Build Target* matches the target declared in the manifest. For version 4.2.0 is API 19.
  2. Verify that *Is Library* is checked and do not close the window.
 
 In the same window go to:
 
  > Java Build Path > Order and Export
  
- 1. Select the entry: Android 4.0
+ 1. Select the entry: Android 4.4.2
 
 ### Google Play services
 
@@ -104,7 +104,7 @@ Right click on the project and go to:
 
  > Properties > Android
  
- 1. Verify that the *Project Build Target* matches: API level 16
+ 1. Verify that the *Project Build Target* matches: API level 19
  2. Verify that *Is Library* is checked.
 
 ## Import GPSLogger
@@ -125,7 +125,7 @@ Right click on number three, gpslogger, and go to
 
  > Properties > Android
 
- 1. In *Project Build Target* verify that the selected API is level 16.
+ 1. In *Project Build Target* verify that the selected API is level 19.
  2. In the *Library* section use the *Add* button to add:
      1. actionbarsherlock
      2. google-play-services_lib

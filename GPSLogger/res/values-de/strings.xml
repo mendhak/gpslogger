@@ -121,10 +121,13 @@
   <string name="keep_fix_summary">Vorsicht, dies senkt die Lebensdauer des Akkus erheblich. Nur für hohe Präzision bei niedrigen Frequenzen verwenden.</string>
   <string name="keep_fix_title">GPS zwischen Fixes aktiviert lassen</string>
   <string name="retry_time_title">Wiederholungsintervall im Fehlerfall</string>
+  <string name="retry_time_summary">Setze auf 0 um mit maximaler Frequenz aufzuzeichnen. Größere Werte verlängern die Akkulaufzeit.</string>
   <string name="retry_time_dialog_title">Zeit in Sekunden</string>
   <string name="retry_time_hint">Eingabe in Sekunden (max. 9999)</string>
   <string name="distance_before_logging_title">Abstand zwischen den Punkten</string>
+  <string name="distance_before_logging_summary">Kürzeste zurückzulegende Wegstrecke bevor der nächste Punkt aufgezeichnet wird. Setze auf 0 um alle Punkte aufzuzeichnen.</string>
   <string name="accuracy_before_logging_title">Mindestgenauigkeit pro Punkt</string>
+  <string name="accuracy_before_logging_summary">Geringste Genauigkeit, ab der ein Punkt aufgezeichnet wird. Setze auf 0 um alle Punkte aufzuzeichnen.</string>
   <string name="timeout_time_title">Zeitüberschreitung</string>
   <string name="timeout_time_dialog_title">Zeit in Sekunden</string>
   <string name="timeout_time_hint">Eingabe in Sekunden (max. 9999)</string>
@@ -179,7 +182,7 @@
   <string name="osm_setup_summary">Festlegen der Tags, Beschreibung, Sichtbarkeit und Berechtigung für das Hochladen der GPS-Tracks     </string>
   <string name="osm_preferences_title">OpenStreetMap-Einstellungen</string>
   <string name="osm_lbl_authorize">Autorisiere diese App</string>
-  <string name="osm_lbl_authorize_description">Sie müssen dieser App die Berechtigung erteilen Tracks zu OpenStreetMap hochzuladen. Du kannst Tags, Beschreibungen und Sichtbarkeit festlegen, nachdem du die App dazu hier authorisiert hast.</string>
+  <string name="osm_lbl_authorize_description">Sie müssen dieser App die Berechtigung erteilen Tracks zu OpenStreetMap hochzuladen. Du kannst Tags, Beschreibungen und Sichtbarkeit festlegen, nachdem du die App dazu hier autorisiert hast.</string>
   <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
   <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
   <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
@@ -208,10 +211,10 @@
   <string name="btn_single_point">Zeichne einen einzelnen Wegpunkt auf</string>
   <string name="dropbox_setup_title">Dropbox</string>
   <string name="dropbox_setup_summary">Authorisiere mit Dropbox um Datei-Uploads zu erlauben</string>
-  <string name="dropbox_authorize_description">Um Dropbox-Features zu nutzen, musst du GPSLogger authorisieren Dateien zu deinem Account hochzuladen.</string>
-  <string name="dropbox_authorize">Authorisieren</string>
+  <string name="dropbox_authorize_description">Um Dropbox-Features zu nutzen, musst du GPSLogger autorisieren Dateien zu deinem Account hochzuladen.</string>
+  <string name="dropbox_authorize">Autorisieren</string>
   <string name="dropbox_unauthorize">Entferne die Authorisierung</string>
-  <string name="dropbox_unauthorize_description">Du bist für Dropbox authorisiert. Dateien werden zu \'Apps\\GPSLogger for Android\' hochgeladen. Wenn du möchtest, kannst du die GPSLogger-Verbindung in deinem Dropbox-Konto löschen.</string>
+  <string name="dropbox_unauthorize_description">Du bist für Dropbox autorisiert. Dateien werden zu \'Apps\\GPSLogger for Android\' hochgeladen. Wenn du möchtest, kannst du die GPSLogger-Verbindung in deinem Dropbox-Konto löschen.</string>
   <string name="dropbox_couldnotauthorize">Dropbox-Anmeldung fehlgeschlagen, bitte probiere es später noch einmal</string>
   <string name="dropbox_upload">Dropbox</string>
   <string name="menu_upload">Upload</string>
