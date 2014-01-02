@@ -46,6 +46,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -250,7 +251,6 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
 
         Utilities.LogDebug("GpsMainActivity.onPause");
         StopAndUnbindServiceIfRequired();
-        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
         super.onPause();
     }
 
@@ -260,7 +260,6 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
 
         Utilities.LogDebug("GpsMainActivity.onDestroy");
         StopAndUnbindServiceIfRequired();
-        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
         super.onDestroy();
 
     }
@@ -858,7 +857,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             public void onClick(DialogInterface dialog, int whichButton)
             {
             	// DONE close keyboard
-                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+//                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
 
                 final String desc = Utilities.CleanDescription(input.getText().toString());
 //              if (desc.isEmpty()) // DONE String.isEmpty() requires API level 9, use TextUtils.isEmpty or String.length instead
@@ -883,14 +882,14 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             public void onClick(DialogInterface dialog, int whichButton)
             {
                 // Cancelled.
-            	// DONE close keyboard
-                ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
             }
         });
         
-        alert.show();
         // DONE open keyboard
-        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        // First, create the Dialog, then do some fine tuning, then show it.
+        AlertDialog alertDialog = alert.create();
+        alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        alertDialog.show();
     }
 
     /**
