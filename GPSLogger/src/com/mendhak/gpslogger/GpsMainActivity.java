@@ -835,7 +835,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             public void onClick(DialogInterface dialog, int whichButton)
             {
                 final String desc = Utilities.CleanDescription(input.getText().toString());
-                if (desc.isEmpty())
+                if (desc.length() == 0)
                 {
                     Session.clearDescription();
                     OnClearAnnotation();
