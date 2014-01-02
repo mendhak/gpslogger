@@ -21,3 +21,9 @@ GPSLogger/gen-external-apklibs/
 
 workspace.xml
 tasks.xml
+
+# Ignore Eclipse meta files
+google-play-services_lib/.project
+google-play-services_lib/.classpath
+.project
+.classpath
