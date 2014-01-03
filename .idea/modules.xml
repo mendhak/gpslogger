@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/GPSLogger/GPSLogger.iml" filepath="$PROJECT_DIR$/GPSLogger/GPSLogger.iml" />
       <module fileurl="file://$PROJECT_DIR$/google-play-services_lib/google-play-services_lib.iml" filepath="$PROJECT_DIR$/google-play-services_lib/google-play-services_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/GPSLogger/gen-external-apklibs/~apklib-com.actionbarsherlock_actionbarsherlock_4.2.0.iml" filepath="$PROJECT_DIR$/GPSLogger/gen-external-apklibs/~apklib-com.actionbarsherlock_actionbarsherlock_4.2.0.iml" />
-      <module fileurl="file://$PROJECT_DIR$/GPSLogger/gen-external-apklibs/~apklib-com.actionbarsherlock_actionbarsherlock_4.2.0.iml" filepath="$PROJECT_DIR$/GPSLogger/gen-external-apklibs/~apklib-com.actionbarsherlock_actionbarsherlock_4.2.0.iml" />
     </modules>
   </component>
 </project>
