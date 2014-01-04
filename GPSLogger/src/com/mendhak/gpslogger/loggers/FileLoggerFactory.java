@@ -60,6 +60,8 @@ public class FileLoggerFactory
             loggers.add(new OpenGTSLogger());
         }
 
+        loggers.add(new HttpUrlLogger());
+
         return loggers;
     }
 }
