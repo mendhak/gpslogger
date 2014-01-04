@@ -60,7 +60,7 @@ public class FileLoggerFactory
             loggers.add(new OpenGTSLogger());
         }
 
-        loggers.add(new HttpUrlLogger());
+        loggers.add(new HttpUrlLogger(Session.getSatelliteCount()));
 
         return loggers;
     }
