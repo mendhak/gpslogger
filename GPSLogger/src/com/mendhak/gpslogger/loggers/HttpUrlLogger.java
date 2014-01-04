@@ -82,11 +82,21 @@ class HttpUrlLogHandler implements Runnable {
             Utilities.LogDebug("Writing HTTP URL Logger");
             HttpURLConnection conn = null;
 
-            String searchUrl = MessageFormat.format("http://192.168.1.65:8000/test?lat={0}&lon={1}&sat={2}&desc={3}&alt={4}&acc={5}&dir={6}&prov={7}&spd={8}&time={9}",
-                    loc.getLatitude(), loc.getLongitude(), satellites, annotation, loc.getAltitude(), loc.getAccuracy(), loc.getBearing(), loc.getProvider(), loc.getSpeed(),
-                    Utilities.GetIsoDateTime(new Date(loc.getTime())));
+            String logUrl = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME";
 
-            Utilities.LogDebug(searchUrl);
+            logUrl = logUrl.replaceAll("(?i)%lat", String.valueOf(loc.getLatitude()));
+            logUrl = logUrl.replaceAll("(?i)%lon", String.valueOf(loc.getLongitude()));
+            logUrl = logUrl.replaceAll("(?i)%sat", String.valueOf(satellites));
+            logUrl = logUrl.replaceAll("(?i)%desc", String.valueOf(annotation));
+            logUrl = logUrl.replaceAll("(?i)%alt", String.valueOf(loc.getAltitude()));
+            logUrl = logUrl.replaceAll("(?i)%acc", String.valueOf(loc.getAccuracy()));
+            logUrl = logUrl.replaceAll("(?i)%dir", String.valueOf(loc.getBearing()));
+            logUrl = logUrl.replaceAll("(?i)%prov", String.valueOf(loc.getProvider()));
+            logUrl = logUrl.replaceAll("(?i)%spd", String.valueOf(loc.getSpeed()));
+            logUrl = logUrl.replaceAll("(?i)%time", String.valueOf(Utilities.GetIsoDateTime(new Date(loc.getTime()))));
+
+
+            Utilities.LogDebug(logUrl);
 
 
             if (Integer.parseInt(Build.VERSION.SDK) < Build.VERSION_CODES.FROYO) {
@@ -95,7 +105,7 @@ class HttpUrlLogHandler implements Runnable {
                 System.setProperty("http.keepAlive", "false");
             }
 
-            URL url = new URL(searchUrl);
+            URL url = new URL(logUrl);
 
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
