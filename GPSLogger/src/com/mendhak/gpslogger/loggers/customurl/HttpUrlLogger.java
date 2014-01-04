@@ -15,20 +15,17 @@
 *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.mendhak.gpslogger.loggers;
+package com.mendhak.gpslogger.loggers.customurl;
 
 import android.location.Location;
 import android.os.Build;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Utilities;
-import org.apache.commons.net.io.Util;
-import org.json.JSONObject;
+import com.mendhak.gpslogger.loggers.IFileLogger;
 
-import java.io.File;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.MessageFormat;
 import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;

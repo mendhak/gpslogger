@@ -2,17 +2,25 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   android:key="gpslogger_preferences">
 
-    <CheckBoxPreference android:key="log_gpx"
-                        android:title="@string/log_gpx_title" android:summary="@string/log_gpx_summary"/>
+    <PreferenceScreen android:title="@string/pref_loggingto_title" android:summary="@string/pref_loggingto_summary">
+        <CheckBoxPreference android:key="log_gpx"
+                            android:title="@string/log_gpx_title" android:summary="@string/log_gpx_summary"/>
 
-    <CheckBoxPreference android:key="log_kml"
-                        android:summary="@string/log_kml_summary" android:title="@string/log_kml_title"/>
+        <CheckBoxPreference android:key="log_kml"
+                            android:summary="@string/log_kml_summary" android:title="@string/log_kml_title"/>
 
-    <CheckBoxPreference android:key="log_opengts"
-                        android:summary="@string/log_opengts_summary" android:title="@string/log_opengts_title"/>
-                        
-    <CheckBoxPreference android:key="log_plain_text"
-                        android:summary="@string/log_plain_text_summary" android:title="@string/log_plain_text_title"/>
+        <Preference android:title="Log to custom URL"
+                    android:summary="Log points to a custom URL" android:key="customurl_setup">
+            <intent android:action="com.mendhak.gpslogger.CUSTOMURL_SETUP" />
+        </Preference>
+
+        <CheckBoxPreference android:key="log_opengts"
+                            android:summary="@string/log_opengts_summary" android:title="@string/log_opengts_title"/>
+
+        <CheckBoxPreference android:key="log_plain_text"
+                            android:summary="@string/log_plain_text_summary" android:title="@string/log_plain_text_title"/>
+    </PreferenceScreen>
+
 
     <PreferenceScreen android:title="@string/pref_logging_title"
                       android:summary="@string/pref_logging_summary">

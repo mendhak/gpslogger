@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.loggers;
 import android.os.Environment;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.loggers.customurl.HttpUrlLogger;
 
 import java.io.File;
 import java.util.ArrayList;

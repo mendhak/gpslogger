@@ -419,5 +419,7 @@
     <string name="menu_faq">Help and FAQ</string>
     <string name="gpsf_missing">Missing Service</string>
     <string name="gpsf_missing_description">You will need Google Play Services Framework to use this feature.</string>
+    <string name="pref_loggingto_title">Log to...</string>
+    <string name="pref_loggingto_summary">Files and destinations to log your location to</string>
 
 </resources>
