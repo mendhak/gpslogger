@@ -125,6 +125,9 @@ public class Utilities
 
         AppSettings.setLogToPlainText(prefs.getBoolean("log_plain_text", false));
 
+        AppSettings.setLogToCustomUrl(prefs.getBoolean("log_customurl_enabled", false));
+        AppSettings.setCustomLoggingUrl(prefs.getString("log_customurl_url", ""));
+
         AppSettings.setLogToOpenGTS(prefs.getBoolean("log_opengts", false));
 
         AppSettings.setShowInNotificationBar(prefs.getBoolean(

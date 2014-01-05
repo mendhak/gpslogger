@@ -421,5 +421,13 @@
     <string name="gpsf_missing_description">You will need Google Play Services Framework to use this feature.</string>
     <string name="pref_loggingto_title">Log to...</string>
     <string name="pref_loggingto_summary">Files and destinations to log your location to</string>
+    <string name="log_customurl_title">Log to custom URL</string>
+    <string name="log_customurl_summary">Send logging info to your own server over HTTP</string>
+    <string name="log_customurl_urlparameters">URL Parameters</string>
+    <string name="log_customUrl_urllatitude">Latitude: %LAT</string>
+    <string name="txt_annotation">Annotation:</string>
+    <string name="txt_time_isoformat">Time UTC (2011-12-25T15:27:33Z):</string>
+    <string name="txt_provider">Provider:</string>
+
 
 </resources>

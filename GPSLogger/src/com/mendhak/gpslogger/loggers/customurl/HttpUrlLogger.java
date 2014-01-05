@@ -37,10 +37,12 @@ public class HttpUrlLogger implements IFileLogger {
             new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
     private final String name = "URL";
     private final int satellites;
+    private final String customLoggingUrl;
 
-    public HttpUrlLogger(int satellites)
+    public HttpUrlLogger(String customLoggingUrl, int satellites)
     {
         this.satellites = satellites;
+        this.customLoggingUrl = customLoggingUrl;
     }
 
     @Override
@@ -50,7 +52,7 @@ public class HttpUrlLogger implements IFileLogger {
 
     @Override
     public void Annotate(String description, Location loc) throws Exception {
-        HttpUrlLogHandler writeHandler = new HttpUrlLogHandler(loc, description, satellites);
+        HttpUrlLogHandler writeHandler = new HttpUrlLogHandler(customLoggingUrl, loc, description, satellites);
         Utilities.LogDebug(String.format("There are currently %s tasks waiting on the GPX10 EXECUTOR.", EXECUTOR.getQueue().size()));
         EXECUTOR.execute(writeHandler);
     }
@@ -66,11 +68,13 @@ class HttpUrlLogHandler implements Runnable {
     private Location loc;
     private String annotation;
     private int satellites;
+    private String logUrl;
 
-    public HttpUrlLogHandler(Location loc, String annotation, int satellites) {
+    public HttpUrlLogHandler(String customLoggingUrl, Location loc, String annotation, int satellites) {
         this.loc = loc;
         this.annotation = annotation;
         this.satellites = satellites;
+        this.logUrl = customLoggingUrl;
     }
 
     @Override
@@ -79,7 +83,7 @@ class HttpUrlLogHandler implements Runnable {
             Utilities.LogDebug("Writing HTTP URL Logger");
             HttpURLConnection conn = null;
 
-            String logUrl = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME";
+            //String logUrl = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME";
 
             logUrl = logUrl.replaceAll("(?i)%lat", String.valueOf(loc.getLatitude()));
             logUrl = logUrl.replaceAll("(?i)%lon", String.valueOf(loc.getLongitude()));

@@ -61,7 +61,11 @@ public class FileLoggerFactory
             loggers.add(new OpenGTSLogger());
         }
 
-        loggers.add(new HttpUrlLogger(Session.getSatelliteCount()));
+        if(AppSettings.shouldLogToCustomUrl())
+        {
+            loggers.add(new HttpUrlLogger(AppSettings.getCustomLoggingUrl(), Session.getSatelliteCount()));
+        }
+
 
         return loggers;
     }

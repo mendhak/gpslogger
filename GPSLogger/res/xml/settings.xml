@@ -9,8 +9,8 @@
         <CheckBoxPreference android:key="log_kml"
                             android:summary="@string/log_kml_summary" android:title="@string/log_kml_title"/>
 
-        <Preference android:title="Log to custom URL"
-                    android:summary="Log points to a custom URL" android:key="customurl_setup">
+        <Preference android:title="@string/log_customurl_title"
+                    android:summary="@string/log_customurl_summary" android:key="customurl_setup">
             <intent android:action="com.mendhak.gpslogger.CUSTOMURL_SETUP" />
         </Preference>
 
