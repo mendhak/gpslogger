@@ -206,6 +206,10 @@ public class DropBoxHelper implements IActionListener, IFileSender
 
     }
 
+    public boolean acceptZip() {
+        return true;
+    }
+
     public void UploadFile(String fileName)
     {
         Thread t = new Thread(new DropBoxUploadHandler(fileName, dropboxApi, this));

@@ -45,6 +45,7 @@ import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.senders.IFileSender;
+import com.mendhak.gpslogger.senders.ZipHelper;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxAuthorizationActivity;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
@@ -960,6 +961,20 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
                                 getString(R.string.please_wait));
                         List<File> files = new ArrayList<File>();
                         files.add(new File(gpxFolder, chosenFileName));
+                        if ( AppSettings.shouldSendZipFile() && sender.acceptZip() && (!chosenFileName.toLowerCase().endsWith(".zip")) )
+                        {
+                            File zipFile = new File(gpxFolder.getPath(), chosenFileName + ".zip");
+                            ArrayList<String> filePaths = new ArrayList<String>();
+                            for (File f : files)
+                            {
+                                filePaths.add(f.getAbsolutePath());
+                            }
+                            Utilities.LogInfo("Zipping selected file: "+chosenFileName);
+                            ZipHelper zh = new ZipHelper(filePaths.toArray(new String[filePaths.size()]), zipFile.getAbsolutePath());
+                            zh.Zip();
+                            files.clear();
+                            files.add(zipFile);
+                        }
                         sender.UploadFile(files);
                     }
                 }

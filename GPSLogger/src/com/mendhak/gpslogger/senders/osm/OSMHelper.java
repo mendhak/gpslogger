@@ -149,6 +149,10 @@ public class OSMHelper implements IActionListener, IFileSender
 
     }
 
+    public boolean acceptZip() {
+        return false;
+    }
+
 
     public void UploadFile(String fileName)
     {

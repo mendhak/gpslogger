@@ -54,6 +54,10 @@ public class OpenGTSHelper implements IActionListener, IFileSender
         }
     }
 
+    public boolean acceptZip() {
+        return false;
+    }
+
     public void OnComplete()
     {
         callback.OnComplete();

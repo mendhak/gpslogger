@@ -61,6 +61,10 @@ public class AutoEmailHelper implements IActionListener, IFileSender
         t.start();
     }
 
+    public boolean acceptZip() {
+        return true;
+    }
+
 
     void SendTestEmail(String smtpServer, String smtpPort,
                        String smtpUsername, String smtpPassword, boolean smtpUseSsl,
