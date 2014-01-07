@@ -328,6 +328,15 @@ public class Utilities
         AppSettings.setFtpProtocol(prefs.getString("autoftp_ssltls",""));
         AppSettings.setFtpImplicit(prefs.getBoolean("autoftp_implicit", false));
         AppSettings.setMsgTemplate(prefs.getString("msg_template",context.getString(R.string.sharing_template_default)));
+
+        final int critical_battery_level_default = Integer.parseInt(context.getString(R.string.crit_battery_default));
+
+        try {
+            AppSettings.setCritBattLevel(Integer.parseInt(prefs.getString("crit_battery",
+                    Integer.toString(critical_battery_level_default))));
+        } catch (Exception e) {
+            AppSettings.setCritBattLevel(critical_battery_level_default);
+        }
     }
 
     public static void ShowProgress(Context ctx, String title, String message)

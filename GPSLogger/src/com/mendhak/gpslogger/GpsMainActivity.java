@@ -25,6 +25,7 @@ import android.app.Dialog;
 import android.content.*;
 import android.location.Location;
 import android.net.Uri;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
@@ -137,6 +138,7 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
 
         path = Environment.getExternalStorageDirectory() + File.separator + "GPSLogger";
         prefsio=new PrefsIO(this, PreferenceManager.getDefaultSharedPreferences(this), "gpslogger", path);
+        this.registerReceiver(this.batteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     }
 
     @Override
@@ -308,6 +310,25 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
             prefsio.ImportFile();
         }
     }
+
+    private BroadcastReceiver batteryInfoReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Utilities.LogDebug("Enter BatteryInfoReceiver");
+            int plugged= intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+            if(plugged!=0) return;
+            int level= intent.getIntExtra(BatteryManager.EXTRA_LEVEL,0);
+            int scale= intent.getIntExtra(BatteryManager.EXTRA_SCALE,100);
+            int percent = (level*100)/scale;
+            Utilities.LogDebug("Got battery level: "+percent+"%");
+            if(percent<AppSettings.getCritBattLevel()) {
+                Utilities.LogDebug("Stop logging - battery level below critical");
+                loggingService.StopLogging();
+                ShowPreferencesSummary();
+                loggingService.stopSelf();
+            }
+        }
+    }; 
         /**
          * Starts the service and binds the activity to it.
          */

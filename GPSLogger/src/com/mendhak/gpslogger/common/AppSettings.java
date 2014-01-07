@@ -98,6 +98,7 @@ public class AppSettings extends Application
     private static String staticFileName;
     private static boolean isStaticFile;
     private static String msgTemplate;
+    private static int critBattLevel;
 
     static void setVersionName(String versionName){
         AppSettings.versionName = versionName;
@@ -890,5 +891,15 @@ public class AppSettings extends Application
     public static String getMsgTemplate()
     {
         return msgTemplate;
+    }
+
+    public static void setCritBattLevel(int battLevel)
+    {
+        AppSettings.critBattLevel = battLevel;
+    }
+
+    public static int getCritBattLevel()
+    {
+        return critBattLevel;
     }
 }

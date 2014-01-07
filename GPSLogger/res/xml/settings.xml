@@ -158,6 +158,15 @@
                     android:hint="@string/retry_time_hint"
                     android:defaultValue="60" />
 
+                <EditTextPreference
+                    android:key="crit_battery"
+                    android:title="@string/crit_battery_title"
+                    android:summary="@string/crit_battery_summary"
+                    android:dialogTitle="@string/crit_battery_dialog_title"
+                    android:numeric="integer"
+                    android:maxLength="2"
+                    android:defaultValue="@string/crit_battery_default" />
+
             </PreferenceCategory>
         </PreferenceScreen>
         <PreferenceScreen

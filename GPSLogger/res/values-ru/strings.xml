@@ -219,6 +219,10 @@
   <string name="autoemail_testresult_success">Email отправлен</string>
   <string name="autoemail_invalid_form">Неверные значения</string>
   <string name="autoemail_invalid_form_message">Пожалуйста, убедитесь, что все поля заполнены верно</string>
+  <string name="crit_battery_title">Критический уровень батареи</string>
+  <string name="crit_battery_summary">При достижении данного уровня зарядя батареи запись и посылка координат будут остановлены</string>
+  <string name="crit_battery_dialog_title">Укажите проценты</string>
+  <string name="crit_battery_default">15</string>
   <string name="fix_obtained">Координаты получены</string>
   <string name="started_waiting">GPS запущен, ожидаем координаты</string>
   <string name="gps_stopped">GPS приостановлен</string>

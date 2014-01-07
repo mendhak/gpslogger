@@ -285,7 +285,10 @@
     <string name="autoemail_invalid_form">Invalid values</string>
     <string name="autoemail_invalid_form_message">Please ensure that all of the fields have been filled in properly
     </string>
-
+    <string name="crit_battery_title">Critical Battery Level</string>
+    <string name="crit_battery_summary">GPS tracking will be stopped at this charge level</string>
+    <string name="crit_battery_dialog_title">Enter percent</string>
+    <string name="crit_battery_default">15</string>
     <string name="fix_obtained">Fix obtained</string>
     <string name="started_waiting">GPS started, waiting for fix</string>
     <string name="gps_stopped">GPS paused</string>
