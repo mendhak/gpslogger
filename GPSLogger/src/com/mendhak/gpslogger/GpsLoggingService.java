@@ -21,7 +21,18 @@
 
 package com.mendhak.gpslogger;
 
-import android.app.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -40,12 +51,6 @@ import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.AlarmReceiver;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
 public class GpsLoggingService extends Service implements IActionListener
 {
     private static NotificationManager gpsNotifyManager;
@@ -55,6 +60,9 @@ public class GpsLoggingService extends Service implements IActionListener
     private static IGpsLoggerServiceClient mainServiceClient;
 
     private boolean forceLogOnce = false;
+    
+//    private Notification.Builder nfcBuilder;
+    private Notification nfc = null;
 
     // ---------------------------------------------------
     // Helpers and managers
@@ -488,23 +496,22 @@ public class GpsLoggingService extends Service implements IActionListener
         // What happens when the notification item is clicked
         Intent contentIntent = new Intent(this, GpsMainActivity.class);
 
-        PendingIntent pending = PendingIntent.getActivity(getApplicationContext(), 0, contentIntent,
-                android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        Notification nfc = new Notification(R.drawable.gpsloggericon2, null, System.currentTimeMillis());
-        nfc.flags |= Notification.FLAG_ONGOING_EVENT;
+        PendingIntent pending = PendingIntent.getActivity(getApplicationContext(), 0, contentIntent, android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
 
         NumberFormat nf = new DecimalFormat("###.######");
 
         String contentText = getString(R.string.gpslogger_still_running);
-        if (Session.hasValidLocation())
-        {
-            contentText = nf.format(Session.getCurrentLatitude()) + ","
-                    + nf.format(Session.getCurrentLongitude());
+        if (Session.hasValidLocation()) {
+        	contentText = Session.getNumLegs() + ": ";
+            contentText += nf.format(Session.getCurrentLatitude()) + "," + nf.format(Session.getCurrentLongitude());
         }
 
-        nfc.setLatestEventInfo(getApplicationContext(), getString(R.string.gpslogger_still_running),
-                contentText, pending);
+        if (nfc == null) {
+        	nfc = new Notification(R.drawable.gpsloggericon2, null, System.currentTimeMillis());
+        	nfc.flags |= Notification.FLAG_ONGOING_EVENT;
+        }
+
+        nfc.setLatestEventInfo(getApplicationContext(), getString(R.string.gpslogger_still_running), contentText, pending);
 
         gpsNotifyManager.notify(NOTIFICATION_ID, nfc);
         Session.setNotificationVisible(true);
