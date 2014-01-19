@@ -856,7 +856,6 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             public void onClick(DialogInterface dialog, int whichButton)
             {
                 final String desc = Utilities.CleanDescription(input.getText().toString());
-//              if (desc.isEmpty()) // DONE String.isEmpty() requires API level 9, use TextUtils.isEmpty or String.length instead
                 if (desc.length() == 0)
                 {
                     Session.clearDescription();
@@ -880,9 +879,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
                 // Cancelled.
             }
         });
-        
-        // DONE open keyboard
-        // First, create the Dialog, then do some fine tuning, then show it.
+
         AlertDialog alertDialog = alert.create();
         alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         alertDialog.show();

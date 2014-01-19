@@ -376,7 +376,7 @@ public class Session extends Application
 
     public static boolean hasDescription()
     {
-        return !description.isEmpty();
+        return !(description.length()==0);
     }
 
     public static String getDescription()
