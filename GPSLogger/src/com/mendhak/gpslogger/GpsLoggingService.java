@@ -41,6 +41,7 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.text.format.DateFormat;
 
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
@@ -60,8 +61,8 @@ public class GpsLoggingService extends Service implements IActionListener
     private static IGpsLoggerServiceClient mainServiceClient;
 
     private boolean forceLogOnce = false;
-    
-//    private Notification.Builder nfcBuilder;
+
+//	private Notification.Builder nfcBuilder;
     private Notification nfc = null;
 
     // ---------------------------------------------------
@@ -483,6 +484,7 @@ public class GpsLoggingService extends Service implements IActionListener
         }
         finally
         {
+        	nfc = null;
             Session.setNotificationVisible(false);
         }
     }
@@ -498,12 +500,13 @@ public class GpsLoggingService extends Service implements IActionListener
 
         PendingIntent pending = PendingIntent.getActivity(getApplicationContext(), 0, contentIntent, android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        NumberFormat nf = new DecimalFormat("###.######");
+        NumberFormat nf = new DecimalFormat("###.#####");
 
         String contentText = getString(R.string.gpslogger_still_running);
         if (Session.hasValidLocation()) {
-        	contentText = Session.getNumLegs() + ": ";
-            contentText += nf.format(Session.getCurrentLatitude()) + "," + nf.format(Session.getCurrentLongitude());
+//        	contentText = Session.getNumLegs() + ": ";
+        	contentText = DateFormat.format("HH:mm:ss", Session.getCurrentLocationInfo().getTime())  + ": ";
+            contentText += "Lat: " + nf.format(Session.getCurrentLatitude()) + ", Lon: " + nf.format(Session.getCurrentLongitude());
         }
 
         if (nfc == null) {
