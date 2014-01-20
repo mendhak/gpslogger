@@ -56,14 +56,12 @@ public class GpsLoggingService extends Service implements IActionListener
 {
     private static NotificationManager gpsNotifyManager;
     private static int NOTIFICATION_ID = 8675309;
+    private Notification nfc = null;
 
     private final IBinder mBinder = new GpsLoggingBinder();
     private static IGpsLoggerServiceClient mainServiceClient;
 
     private boolean forceLogOnce = false;
-
-//	private Notification.Builder nfcBuilder;
-    private Notification nfc = null;
 
     // ---------------------------------------------------
     // Helpers and managers
@@ -484,7 +482,7 @@ public class GpsLoggingService extends Service implements IActionListener
         }
         finally
         {
-        	nfc = null;
+            nfc = null;
             Session.setNotificationVisible(false);
         }
     }
@@ -504,14 +502,13 @@ public class GpsLoggingService extends Service implements IActionListener
 
         String contentText = getString(R.string.gpslogger_still_running);
         if (Session.hasValidLocation()) {
-//        	contentText = Session.getNumLegs() + ": ";
-        	contentText = DateFormat.format("HH:mm:ss", Session.getCurrentLocationInfo().getTime())  + ": ";
+            contentText = DateFormat.format("HH:mm:ss", Session.getCurrentLocationInfo().getTime())  + ": ";
             contentText += "Lat: " + nf.format(Session.getCurrentLatitude()) + ", Lon: " + nf.format(Session.getCurrentLongitude());
         }
 
         if (nfc == null) {
-        	nfc = new Notification(R.drawable.gpsloggericon2, null, System.currentTimeMillis());
-        	nfc.flags |= Notification.FLAG_ONGOING_EVENT;
+            nfc = new Notification(R.drawable.gpsloggericon2, null, System.currentTimeMillis());
+            nfc.flags |= Notification.FLAG_ONGOING_EVENT;
         }
 
         nfc.setLatestEventInfo(getApplicationContext(), getString(R.string.gpslogger_still_running), contentText, pending);
