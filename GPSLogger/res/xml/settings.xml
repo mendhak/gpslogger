@@ -4,7 +4,8 @@
 
     <PreferenceScreen android:title="@string/pref_loggingto_title" android:summary="@string/pref_loggingto_summary">
         <CheckBoxPreference android:key="log_gpx"
-                            android:title="@string/log_gpx_title" android:summary="@string/log_gpx_summary"/>
+                            android:title="@string/log_gpx_title" android:summary="@string/log_gpx_summary"
+                            android:defaultValue="true"/>
 
         <CheckBoxPreference android:key="log_kml"
                             android:summary="@string/log_kml_summary" android:title="@string/log_kml_title"/>
