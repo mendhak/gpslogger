@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <CheckBox
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/log_customurl_title"
+            android:id="@+id/customUrlEnabled"
+            android:checked="false"/>
+
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="166dp"
+            android:id="@+id/customUrlText"
+            android:text="http://localhost/log?lat=%LAT&amp;longitude=%LON&amp;time=%TIME&amp;s=%SPD"
+            android:inputType="textUri|textCapSentences|textMultiLine"
+            android:textStyle="bold"/>
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/log_customurl_urlparameters"
+            android:id="@+id/textView"
+            android:textStyle="bold"/>
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/textViewLegend"/>
+
+</LinearLayout>

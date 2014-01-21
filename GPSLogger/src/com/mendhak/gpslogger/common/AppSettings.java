@@ -30,6 +30,8 @@ public class AppSettings extends Application
     private static boolean logToKml;
     private static boolean logToGpx;
     private static boolean logToPlainText;
+    private static boolean logToCustomUrl;
+    private static String customLoggingUrl;
     private static boolean showInNotificationBar;
     private static int minimumSeconds;
     private static boolean keepFix;
@@ -628,5 +630,22 @@ public class AppSettings extends Application
     public static void setStaticFile(boolean staticFile)
     {
         AppSettings.isStaticFile = staticFile;
+    }
+
+    public static boolean shouldLogToCustomUrl() {
+        return logToCustomUrl;
+    }
+
+    public static void setLogToCustomUrl(boolean logToCustomUrl) {
+        AppSettings.logToCustomUrl = logToCustomUrl;
+    }
+
+
+    public static String getCustomLoggingUrl() {
+        return customLoggingUrl;
+    }
+
+    public static void setCustomLoggingUrl(String customLoggingUrl) {
+        AppSettings.customLoggingUrl = customLoggingUrl;
     }
 }

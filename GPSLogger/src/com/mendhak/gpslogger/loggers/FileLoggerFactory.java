@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.loggers;
 import android.os.Environment;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.loggers.customurl.HttpUrlLogger;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -59,6 +60,12 @@ public class FileLoggerFactory
         {
             loggers.add(new OpenGTSLogger());
         }
+
+        if(AppSettings.shouldLogToCustomUrl())
+        {
+            loggers.add(new HttpUrlLogger(AppSettings.getCustomLoggingUrl(), Session.getSatelliteCount()));
+        }
+
 
         return loggers;
     }

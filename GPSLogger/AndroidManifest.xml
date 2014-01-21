@@ -103,6 +103,15 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
+        <activity android:name="com.mendhak.gpslogger.loggers.customurl.CustomUrlLoggerActivity"
+                  android:label="Custom URL Logging">
+            <intent-filter>
+                <action android:name="com.mendhak.gpslogger.CUSTOMURL_SETUP"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
         <activity android:name=".shortcuts.ShortcutCreate" android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT"/>

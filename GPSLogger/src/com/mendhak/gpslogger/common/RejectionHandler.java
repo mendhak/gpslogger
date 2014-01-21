@@ -26,7 +26,7 @@ public class RejectionHandler implements RejectedExecutionHandler
     @Override
     public void rejectedExecution(Runnable runnable, ThreadPoolExecutor threadPoolExecutor)
     {
-        Utilities.LogWarning("Could not write to GPX file, there were too many queued tasks.");
+        Utilities.LogWarning("Could not queue task, some points may not be logged.");
     }
 }
 
