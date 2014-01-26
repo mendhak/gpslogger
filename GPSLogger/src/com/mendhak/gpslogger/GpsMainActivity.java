@@ -657,7 +657,7 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
         {
 
             Intent pref = new Intent().setClass(this, GpsSettingsActivity.class);
-            pref.putExtra("autosend_preferencescreen", true);
+            pref.putExtra("autosend_preferencescreen_advancedP", true);
             startActivity(pref);
 
         }

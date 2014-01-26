@@ -20,22 +20,54 @@ package com.mendhak.gpslogger;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.*;
+import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
+import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceGroup;
+import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.util.Log;
+
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
+
 import net.kataplop.gpslogger.R;
+
+import java.util.ArrayList;
 
 public class GpsSettingsActivity extends SherlockPreferenceActivity
 {
 
     private final Handler handler = new Handler();
     private SharedPreferences prefs;
+
+    protected boolean filterAdvanced(PreferenceGroup pg){
+        boolean reload = false;
+        ArrayList<Preference> to_remove = new ArrayList<Preference>();
+
+        for (int i=0; i < pg.getPreferenceCount(); i++){
+            Preference p = pg.getPreference(i);
+            if (p.getKey() != null && p.getKey().endsWith("_advancedP")){
+                to_remove.add(p);
+            } else if(p instanceof PreferenceGroup){
+                PreferenceGroup pc = (PreferenceGroup)p;
+                reload |= filterAdvanced(pc);
+            }
+        }
+        for (Preference p : to_remove){
+            pg.removePreference(p);
+        }
+        reload |= !to_remove.isEmpty();
+
+        return reload;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,15 +79,35 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
 
         addPreferencesFromResource(R.xml.settings);
 
-        if (getIntent().getBooleanExtra("autosend_preferencescreen", false))
+        if (getIntent().getBooleanExtra("autosend_preferencescreen_advancedP", false))
         {
             PreferenceScreen screen = (PreferenceScreen) findPreference("gpslogger_preferences");
-            int pos = findPreference("autosend_preferencescreen").getOrder();
+            int pos = findPreference("autosend_preferencescreen_advancedP").getOrder();
             screen.onItemClick(null, null, pos, 0);
         }
 
-
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+        if (prefs.getString("preference_mode", "simple").equals("simple")){
+            filterAdvanced(getPreferenceScreen());
+        }
+
+        Preference prefmode = findPreference("preference_mode");
+        if (prefmode != null)
+            prefmode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                        recreate();
+                    } else {
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
+                    }
+                    return true;
+                }
+            });
+
         boolean useImperial = prefs.getBoolean("useImperial", false);
 
         EditTextPreference distanceBeforeLogging = (EditTextPreference) findPreference("distance_before_logging");
@@ -84,37 +136,54 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
             accuracyBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
         }
 
-
-
-
         CheckBoxPreference imperialCheckBox = (CheckBoxPreference) findPreference("useImperial");
-        imperialCheckBox.setOnPreferenceChangeListener(new ImperialPreferenceChangeListener(prefs, distanceBeforeLogging, accuracyBeforeLogging));
-
+        if (imperialCheckBox != null)
+            imperialCheckBox.setOnPreferenceChangeListener(new ImperialPreferenceChangeListener(prefs, distanceBeforeLogging, accuracyBeforeLogging));
 
         Preference enableDisablePref = findPreference("enableDisableGps");
-        enableDisablePref.setOnPreferenceClickListener(new AndroidLocationPreferenceClickListener());
+        if (enableDisablePref != null)
+            enableDisablePref.setOnPreferenceClickListener(new AndroidLocationPreferenceClickListener());
 
         Preference osmSetupPref = findPreference("osm_setup");
-        osmSetupPref.setOnPreferenceClickListener(new OSMPreferenceClickListener());
+        if (osmSetupPref != null)
+            osmSetupPref.setOnPreferenceClickListener(new OSMPreferenceClickListener());
 
         CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
-        chkLog_opengts.setOnPreferenceClickListener(new LogOpenGTSPreferenceClickListener(prefs));
+        if (chkLog_opengts != null)
+            chkLog_opengts.setOnPreferenceClickListener(new LogOpenGTSPreferenceClickListener(prefs));
 
         CheckBoxPreference chkLog_skylines = (CheckBoxPreference) findPreference("log_skylines");
-        chkLog_skylines.setOnPreferenceClickListener(new LogSkylinesPreferenceClickListener(prefs));
+        if (chkLog_skylines != null)
+            chkLog_skylines.setOnPreferenceClickListener(new LogSkylinesPreferenceClickListener(prefs));
 
         CheckBoxPreference chkLog_livetrack24 = (CheckBoxPreference) findPreference("log_livetrack24");
-        chkLog_livetrack24.setOnPreferenceClickListener(new LogLivetrack24PreferenceClickListener(prefs));
+        if (chkLog_livetrack24 != null)
+            chkLog_livetrack24.setOnPreferenceClickListener(new LogLivetrack24PreferenceClickListener(prefs));
 
         ListPreference newFilePref = (ListPreference) findPreference("new_file_creation");
-        newFilePref.setOnPreferenceChangeListener(new FileCreationPreferenceChangeListener());
+        if (newFilePref != null)
+            newFilePref.setOnPreferenceChangeListener(new FileCreationPreferenceChangeListener());
 
-
-        if(!newFilePref.getValue().equals("static"))
+        if (!prefs.getString("new_file_creation", "static").equals("static"))
+//        if(!newFilePref.getValue().equals("static"))
         {
             Preference staticPref = (Preference)findPreference("new_file_static_name");
             staticPref.setEnabled(false);
         }
+//
+//        final ListPreference mode_selection= (ListPreference) findPreference("preference_mode");
+//        if (mode_selection.getValue().equals("simple")){
+//            removeAdvanced();
+//        }
+//        mode_selection.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+//            @Override
+//            public boolean onPreferenceChange(Preference preference, Object newVal) {
+//                if (newVal.equals("simple")){
+//                    removeAdvanced();
+//                }
+//                return true;
+//            }
+//        });
     }
 
 

@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="pref_mode_entries">
+        <item>@string/pref_pref_mode_simple</item>
+        <item>@string/pref_pref_mode_advanced</item>
+    </string-array>
+    <string-array name="pref_mode_values">
+        <item>simple</item>
+        <item>advanced</item>
+    </string-array>
+
 <string-array name="filecreation_entries">
    <item>@string/new_file_creation_onceaday</item>
    <item>@string/new_file_creation_everystart</item>
@@ -65,8 +74,6 @@
 	<item>2</item>
 	<item>99</item>
 </string-array>
-
-
 
 <string-array name="osm_visibility_choices">
 	<item>private</item>

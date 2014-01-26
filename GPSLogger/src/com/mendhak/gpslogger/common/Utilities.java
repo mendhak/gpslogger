@@ -135,7 +135,7 @@ public class Utilities
         AppSettings.setLogToPlainText(prefs.getBoolean("log_plain_text", false));
         AppSettings.setLogToIgc(prefs.getBoolean("log_igc", false));
         AppSettings.setIgcPrivateKey(context.getString(R.string.igc_private_key));
-        AppSettings.setUseModularView(prefs.getBoolean("modular_view", false));
+        AppSettings.setUseModularView(prefs.getBoolean("modular_view_advancedP", false));
         AppSettings.setForceScreenOn(prefs.getBoolean("force_screen_on", false));
 
         AppSettings.setPilotName(prefs.getString("flying_pref_pilot_name", "-"));

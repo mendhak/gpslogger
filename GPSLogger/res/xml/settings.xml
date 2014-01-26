@@ -2,11 +2,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="gpslogger_preferences">
 
-    <!--<ListPreference android:key="preference_mode"-->
-    <!--android:title="@string/pref_pref_mode"-->
-    <!--android:summary="@string/pref_pref_mode_summary"-->
-    <!--android:entries="@array/pref_mode_entries" android:defaultValue="simple"-->
-    <!--android:entryValues="@array/pref_mode_values"/>-->
+    <ListPreference android:key="preference_mode"
+        android:title="@string/pref_pref_mode"
+        android:summary="@string/pref_pref_mode_summary"
+        android:entries="@array/pref_mode_entries"
+        android:defaultValue="simple"
+        android:entryValues="@array/pref_mode_values"/>
 
     <PreferenceCategory android:title="@string/pref_loggers_catname">
 
@@ -185,7 +186,6 @@
         <PreferenceScreen
             android:title="@string/pref_general_title"
             android:summary="@string/pref_general_summary">
-
             <CheckBoxPreference
                 android:key="show_notification"
                 android:summary="@string/show_notification_summary"
@@ -193,7 +193,7 @@
                 android:defaultValue="true" />
 
             <CheckBoxPreference
-                android:key="modular_view"
+                android:key="modular_view_advancedP"
                 android:summary="@string/modular_view_summary"
                 android:title="@string/modular_view_title"
                 android:defaultValue="false" />
@@ -238,7 +238,7 @@
 
 
         <PreferenceScreen
-            android:key="autosend_preferencescreen"
+            android:key="autosend_preferencescreen_advancedP"
             android:title="@string/pref_autosend_title"
             android:summary="@string/pref_autosend_summary">
 
