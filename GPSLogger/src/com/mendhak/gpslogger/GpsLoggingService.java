@@ -26,8 +26,6 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -42,7 +40,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.text.format.DateFormat;
-
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
@@ -620,26 +617,28 @@ public class GpsLoggingService extends Service implements IActionListener
     /**
      * Sets the current file name based on user preference.
      */
-    private void ResetCurrentFileName(boolean newStart)
+    private void ResetCurrentFileName(boolean newLogEachStart)
     {
 
         Utilities.LogDebug("GpsLoggingService.ResetCurrentFileName");
-
+        
+        /* Pick up saved settings, if any. (Saved static file) */
         String newFileName = Session.getCurrentFileName();
 
+        /* Update the file name, if required. (New day, Re-start service) */
         if(AppSettings.isStaticFile())
         {
-            newFileName = AppSettings.getStaticFileName();
+        	newFileName = AppSettings.getStaticFileName();
             Session.setCurrentFileName(AppSettings.getStaticFileName());
         }
         else if (AppSettings.shouldCreateNewFileOnceADay())
         {
-            // 20100114.gpx
+        	// 20100114.gpx
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
             newFileName = sdf.format(new Date());
             Session.setCurrentFileName(newFileName);
         }
-        else if (newStart)
+        else if (newLogEachStart)
         {
             // 20100114183329.gpx
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");

@@ -98,17 +98,14 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
         CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
         chkLog_opengts.setOnPreferenceClickListener(new LogOpenGTSPreferenceClickListener(prefs));
 
-
+        /** 
+         * Logging Details - New file creation 
+         */
         ListPreference newFilePref = (ListPreference) findPreference("new_file_creation");
         newFilePref.setOnPreferenceChangeListener(new FileCreationPreferenceChangeListener());
-
-
-        if(!newFilePref.getValue().equals("static"))
-        {
-            Preference staticPref = (Preference)findPreference("new_file_static_name");
-            staticPref.setEnabled(false);
-        }
-
+        /* Trigger artificially the listener and perform validations. */
+        newFilePref.getOnPreferenceChangeListener()
+                   .onPreferenceChange(newFilePref, newFilePref.getValue());
 
     }
 
@@ -174,25 +171,25 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
         }
     }
 
+    /** 
+     * New file creation preference listener, if enabled let the user 
+     * choose a file name. 
+     * 
+     * TODO: Prompt the user immediately for a new file name or confirmation of
+     * the current name.
+     */
     private class FileCreationPreferenceChangeListener implements Preference.OnPreferenceChangeListener
     {
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
-            System.out.print(newValue.toString());
-            Preference staticPref = (Preference)findPreference("new_file_static_name");
-            if(newValue.equals("static"))
-            {
-                staticPref.setEnabled(true);
-            }
-            else
-            {
-                staticPref.setEnabled(false);
-            }
+            
+        	boolean isFileStaticEnabled = newValue.equals("static");
+            Preference prefFileStaticName = (Preference)findPreference("new_file_static_name");
+            prefFileStaticName.setEnabled(isFileStaticEnabled);
 
             return true;
         }
     }
-
 
     private class ImperialPreferenceChangeListener implements Preference.OnPreferenceChangeListener
     {
