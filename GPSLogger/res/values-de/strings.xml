@@ -39,24 +39,24 @@
   <string name="sharing_mylocation">Mein Ort</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Teile über</string>
-  <string name="foot"> Fuß</string>
-  <string name="feet"> Fuß</string>
-  <string name="meter"> Meter</string>
-  <string name="meters"> Meter</string>
+  <string name="foot">&#160;Fuß</string>
+  <string name="feet">&#160;Fuß</string>
+  <string name="meter">&#160;Meter</string>
+  <string name="meters">&#160;Meter</string>
   <string name="error">Fehler</string>
   <string name="error_connection">Verbindungsfehler: Prüfe bitte die Telefoneinstellungen.</string>
   <string name="gpsprovider_unavailable">Kein GPS-Anbieter verfügbar. Bitte überprüfe die Ortseinstellungen und aktiviere einen Anbieter für die Orte.   </string>
   <string name="started">Gestartet</string>
-  <string name="providername_using">    (Verwende %s)</string>
+  <string name="providername_using">&#160;&#160;&#160;&#160;(Verwende %s)</string>
   <string name="providername_gps">GPS Satelliten</string>
   <string name="providername_celltower">Funkzellen</string>
   <string name="not_applicable">nicht verfügbar</string>
-  <string name="meters_per_second"> m/s</string>
-  <string name="feet_per_second"> ft/s</string>
-  <string name="miles_per_hour"> Meilen/h</string>
-  <string name="miles"> mi</string>
-  <string name="kilometers_per_hour"> km/h</string>
-  <string name="kilometers"> km</string>
+  <string name="meters_per_second">&#160;m/s</string>
+  <string name="feet_per_second">&#160;ft/s</string>
+  <string name="miles_per_hour">&#160;Meilen/h</string>
+  <string name="miles">&#160;mi</string>
+  <string name="kilometers_per_hour">&#160;km/h</string>
+  <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">unbekannt</string>
   <string name="sorry">Tut mir Leid</string>
   <string name="success">Yay!</string>
@@ -121,11 +121,15 @@
   <string name="keep_fix_summary">Vorsicht, dies senkt die Lebensdauer des Akkus erheblich. Nur für hohe Präzision bei niedrigen Frequenzen verwenden.</string>
   <string name="keep_fix_title">GPS zwischen Fixes aktiviert lassen</string>
   <string name="retry_time_title">Wiederholungsintervall im Fehlerfall</string>
+  <string name="retry_time_summary">Falls kein Standort gefunden wurde, der den Kriterien entspricht, warte so lange und versuche es erneut. Gebe 0 für unendliche Wiederholungen ein.</string>
   <string name="retry_time_dialog_title">Zeit in Sekunden</string>
   <string name="retry_time_hint">Eingabe in Sekunden (max. 9999)</string>
   <string name="distance_before_logging_title">Abstand zwischen den Punkten</string>
+  <string name="distance_before_logging_summary">Welcher Abstand sollte zwischen dem vorherigen und jetzigen Standort sein, bevor der Punkt protokolliert werden soll. Setze den Wert auf 0, um alle Punkte zu protokollieren.</string>
   <string name="accuracy_before_logging_title">Mindestgenauigkeit pro Punkt</string>
+  <string name="accuracy_before_logging_summary">Wie genau soll der GPS basierte Standort sein, bevor dieser protokolliert wird. Der Wert 0 wird alle Standorte protokollieren.</string>
   <string name="timeout_time_title">Zeitüberschreitung</string>
+  <string name="timeout_time_summary">Wie lange soll das GPS eingeschaltet bleiben, bis ein Standort gefunden wird? Setze 0 für keine zeitliche Begrenzung.</string>
   <string name="timeout_time_dialog_title">Zeit in Sekunden</string>
   <string name="timeout_time_hint">Eingabe in Sekunden (max. 9999)</string>
   <string name="useimperial_title">﻿Imperiale Einheiten verwenden</string>
@@ -294,4 +298,5 @@
   <string name="faq_screen_title">Häufig gestellte Fragen</string>
   <string name="menu_faq">Hilfe und FAQ</string>
   <string name="gpsf_missing">Kein GPS-Signal</string>
+  <string name="gpsf_missing_description">Für dieses Feature wird das \"Google Play Services Framework\" benötigt.</string>
 </resources>

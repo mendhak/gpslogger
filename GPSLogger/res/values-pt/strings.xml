@@ -38,13 +38,20 @@
   <string name="sharing_pick_file">Escolha o ficheiro para partilhar</string>
   <string name="sharing_mylocation">Minha Localização</string>
   <string name="sharing_via">Partilhar via</string>
-  <string name="meters"> metros</string>
+  <string name="foot">pé</string>
+  <string name="feet">pés</string>
+  <string name="meter">metro</string>
+  <string name="meters">&#160;metros</string>
   <string name="error">Erro</string>
   <string name="error_connection">Erro de conexão. Por favor, verifique as configurações do telefone.</string>
   <string name="gpsprovider_unavailable">Nenhum provedor GPS disponível. Por favor, verifique suas configurações de local e habilitar um provedor de loacalização.     </string>
   <string name="started">Iniciado</string>
   <string name="providername_gps">Satélites GPS</string>
   <string name="providername_celltower">Torres de Rede</string>
+  <string name="meters_per_second">&#160;m/s</string>
+  <string name="kilometers_per_hour">&#160;km/h</string>
+  <string name="kilometers">&#160;km</string>
+  <string name="unknown_direction">desconhecido(a)</string>
   <string name="sorry">Sinto muito</string>
   <string name="success">Yay!</string>
   <string name="direction_north">Norte</string>
@@ -73,6 +80,18 @@
   <string name="time_twoandhalfhours">duas horas e meia</string>
   <string name="time_hms_format" formatted="false">% sh % sm % ss</string>
   <string name="accuracy_within" formatted="false">dentro de %s %s</string>
+  <string name="settings_distance_in_feet">Distância em pés</string>
+  <string name="log_gpx_title">Log para GPX</string>
+  <string name="log_plain_text_title">Log para texto simples</string>
+  <string name="new_file_creation_title">Novo arquivo criado</string>
+  <string name="new_file_creation_onceaday">Uma vez por dia</string>
+  <string name="new_file_creation_everystart">Toda vez que iniciar</string>
+  <string name="new_file_creation_static">Arquivo corrigido</string>
+  <string name="new_file_static_title">Nome de arquivo estático</string>
+  <string name="pref_performance_title">Desempenho</string>
+  <string name="time_before_logging_dialog_title">Tempo em segundos</string>
+  <string name="keep_fix_summary">Tome cuidado, isto consumirá muita bateria. Use apenas para alta precisão com baixa frequência.</string>
+  <string name="retry_time_dialog_title">Tempo em segundos</string>
   <string name="distance_before_logging_title">Distância entre pontos</string>
   <string name="distance_before_logging_summary">Qual a distância até o ponto anterior deve ser antes deste ponto é registrado. Use 0 para registrar todos os pontos.     </string>
   <string name="accuracy_before_logging_title">Mínima precisão por ponto</string>
@@ -118,7 +137,11 @@
   <string name="autoemail_choosepreset_summary">Escolher um fornecedor ou escolha manual</string>
   <string name="autoemail_smtp_testemail">E-mail de teste</string>
   <string name="autoemail_test">Enviar um e-mail de teste usando as configurações acima</string>
+  <string name="autoemail_sendingtest">Enviando email de teste</string>
   <string name="autoemail_testresult_success">O E-mail foi enviado</string>
+  <string name="autoemail_invalid_form">Valores inválidos</string>
+  <string name="gps_stopped">GPS parado</string>
+  <string name="stopped">Parado</string>
   <string name="autoemail_from">De endereço</string>
   <string name="autoemail_from_summary">Alguns provedores de e-mail exigem um endereço. Use isso somente se você precisar dele.     </string>
   <string name="gdocs_upload">Google Docs</string>

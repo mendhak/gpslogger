@@ -41,26 +41,26 @@
   <string name="sharing_mylocation">Moje umístění</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Sdílet pomocí</string>
-  <string name="foot"> stopa</string>
-  <string name="feet"> stop</string>
-  <string name="meter"> metr</string>
-  <string name="meters"> metrů</string>
+  <string name="foot">&#160;stopa</string>
+  <string name="feet">&#160;stop</string>
+  <string name="meter">&#160;metr</string>
+  <string name="meters">&#160;metrů</string>
   <string name="error">Chyba</string>
   <string name="error_connection">Chyba připojení. Zkontrolujte prosím nastavení telefonu.</string>
   <string name="gpsprovider_unavailable">Není k dispozici poskytovatel GPS. Zkontrolujte prosím nastavení umístění a povolte
         poskytovatele umístění.
     </string>
   <string name="started">Spuštěno</string>
-  <string name="providername_using">    (Používám %s)</string>
+  <string name="providername_using">&#160;&#160;&#160;&#160;(Používám %s)</string>
   <string name="providername_gps">GPS satelitů</string>
   <string name="providername_celltower">GSM stanic</string>
   <string name="not_applicable">n/a</string>
-  <string name="meters_per_second"> m/s</string>
-  <string name="feet_per_second"> ft/s</string>
-  <string name="miles_per_hour"> mi/h</string>
-  <string name="miles"> mi</string>
-  <string name="kilometers_per_hour"> km/h</string>
-  <string name="kilometers"> km</string>
+  <string name="meters_per_second">&#160;m/s</string>
+  <string name="feet_per_second">&#160;ft/s</string>
+  <string name="miles_per_hour">&#160;mi/h</string>
+  <string name="miles">&#160;mi</string>
+  <string name="kilometers_per_hour">&#160;km/h</string>
+  <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">neznámý</string>
   <string name="sorry">Pardon</string>
   <string name="success">Juchů!</string>
@@ -99,7 +99,7 @@
   <string name="settings_accuracy_in_meters">Přesnost v metrech</string>
   <string name="settings_accuracy_in_feet">Přesnost ve stopách</string>
   <string name="settings_enter_meters">Zadejte metry (max 9999)</string>
-  <string name="settings_converting_title">Převádím…</string>
+  <string name="settings_converting_title">Převádím&#8230;</string>
   <string name="settings_converting_description">Převod jednotek minimální vzdálenost. Hodnoty nad 9999 budou resetovány na 9999. Okno nastavení se nyní načte znovu.     </string>
   <string name="pref_logging_title">Podrobnosti záznamu</string>
   <string name="log_gpx_title">Zapisovat do GPX</string>
@@ -112,16 +112,32 @@
   <string name="new_file_creation_summary">Zda chcete vytvořit nový soubor jednou denně, nebo při každém spuštění.</string>
   <string name="new_file_creation_onceaday">Jednou za den</string>
   <string name="new_file_creation_everystart">Při každém spuštění</string>
+  <string name="new_file_creation_static">Opravený soubor</string>
+  <string name="new_file_static_title">Název statického souboru</string>
+  <string name="new_file_static_summary">Pokud jste zvolili vytvoření opraveného souboru, zadejte vlastní název souboru</string>
   <string name="pref_performance_title">Výkon</string>
   <string name="prefer_celltower_title">Preferovat GSM lokalizaci</string>
   <string name="prefer_celltower_summary">Využívá spíše umístění podle GSM stanic místo satelitů. Méně přesné, ale úspornější na
         baterii.
     </string>
   <string name="time_before_logging_title">Čas před záznamem</string>
+  <string name="time_before_logging_summary">Jak dlouho čekat mezi záznamem GPS bodů. Použijte 0 pro maximální frekvenci, ale pomalejší je lepší pro výdrž na baterii.</string>
   <string name="time_before_logging_dialog_title">Čas v sekundách</string>
   <string name="time_before_logging_hint">Zadejte sekundy (maximum 9999)</string>
+  <string name="keep_fix_summary">Buďte opatrní, toto dramaticky sníží výdrž na baterii. Použijte pouze pro vyšší přesnost při nízkých frekvencích.</string>
+  <string name="keep_fix_title">Ponechat GPS zapnutou mezi opravami</string>
+  <string name="retry_time_title">Interval zkoušení znovu při selhání</string>
+  <string name="retry_time_summary">Pokud se nenajde oprava odpovídající vašim kritériím, čekej takhle dlouho a zkus znovu. Použijte 0 pro pokračování do nekonečna.</string>
   <string name="retry_time_dialog_title">Čas v sekundách</string>
   <string name="retry_time_hint">Zadejte sekundy (max 9999)</string>
+  <string name="distance_before_logging_title">Vzdálenost mezi body</string>
+  <string name="distance_before_logging_summary">Jaká má být vzdálenost k předchozímu bodu než se načte další bod. Použijte 0 pro záznam všech bodů.</string>
+  <string name="accuracy_before_logging_title">Minimální přesnost na bod</string>
+  <string name="accuracy_before_logging_summary">Jak přesná má být oprava aktuální GPS pozice než se zaznamená. Použijte 0 pro záznam všech bodů.</string>
+  <string name="timeout_time_title">Časový limit</string>
+  <string name="timeout_time_summary">Jak dlouho GPS hledá opravu než to vzdá. Použijte 0 pro žádný časový limit</string>
+  <string name="timeout_time_dialog_title">Čas v sekundách</string>
+  <string name="timeout_time_hint">Zadejte sekundy (max 9999)</string>
   <string name="useimperial_title">Použít imperiální jednotky</string>
   <string name="useimperial_summary">Použít stopy, míle a pinty, nic z těch moderních metrických jednotek.</string>
   <string name="show_notification_title">Zobrazit oznámení</string>
@@ -289,4 +305,8 @@
   <string name="ftp_upload">FTP upload</string>
   <string name="autoftp_setup_title">Nastavení FTP</string>
   <string name="autoftp_setup_summary">Nahrajte soubory na server FTP (S). Poznámka: Nezahrnuje SFTP.</string>
+  <string name="faq_screen_title">Často kladené dotazy</string>
+  <string name="menu_faq">Nejčastější dotazy a nápověda</string>
+  <string name="gpsf_missing">Chybí služba</string>
+  <string name="gpsf_missing_description">Potřebujete framework služeb Google Play pro použití této funkce.</string>
 </resources>

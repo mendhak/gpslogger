@@ -40,25 +40,25 @@
   <string name="sharing_mylocation">Мои координаты</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Опубликовать через</string>
-  <string name="foot"> фут</string>
-  <string name="feet"> футы</string>
-  <string name="meter"> метр</string>
-  <string name="meters"> метры</string>
+  <string name="foot">&#160;фут</string>
+  <string name="feet">&#160;футы</string>
+  <string name="meter">&#160;метр</string>
+  <string name="meters">&#160;метры</string>
   <string name="error">Ошибка</string>
   <string name="error_connection">Ошибка соединения. Пожайлуйста, проверьте настройки телефона.</string>
   <string name="gpsprovider_unavailable">Нет доступного источника GPS данных. Пожалуйста, проверьте настройки.
     </string>
   <string name="started">Начато</string>
-  <string name="providername_using">    (Используя %s)</string>
+  <string name="providername_using">&#160;&#160;&#160;&#160;(Используя %s)</string>
   <string name="providername_gps">спутники GPS</string>
   <string name="providername_celltower">сотовые вышки</string>
   <string name="not_applicable">неопределено</string>
-  <string name="meters_per_second"> м/с</string>
-  <string name="feet_per_second"> футов/с</string>
-  <string name="miles_per_hour"> миль/ч</string>
-  <string name="miles"> миль</string>
-  <string name="kilometers_per_hour"> км/ч</string>
-  <string name="kilometers"> км</string>
+  <string name="meters_per_second">&#160;м/с</string>
+  <string name="feet_per_second">&#160;футов/с</string>
+  <string name="miles_per_hour">&#160;миль/ч</string>
+  <string name="miles">&#160;миль</string>
+  <string name="kilometers_per_hour">&#160;км/ч</string>
+  <string name="kilometers">&#160;км</string>
   <string name="unknown_direction">неизвестно</string>
   <string name="sorry">Извините</string>
   <string name="success">Успешно</string>
