@@ -27,7 +27,6 @@ import android.util.Log;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.senders.ftp.FtpHelper;
 import org.w3c.dom.Document;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
@@ -202,6 +201,12 @@ public class Utilities
              AppSettings.setRetryInterval(60);
         }
 
+        /** 
+         * New file creation preference: 
+         *     onceaday, 
+         *     fixed file (static),
+         *     every time the service starts 
+         */
         AppSettings.setNewFileCreation(prefs.getString("new_file_creation",
                 "onceaday"));
 
@@ -213,9 +218,9 @@ public class Utilities
         else if(AppSettings.getNewFileCreation().equals("static"))
         {
             AppSettings.setStaticFile(true);
-            AppSettings.setStaticFileName(prefs.getString("new_file_static_name","gpslogger"));
+            AppSettings.setStaticFileName(prefs.getString("new_file_static_name", "gpslogger"));
         }
-        else
+        else /* new log with each start */
         {
             AppSettings.setNewFileOnceADay(false);
             AppSettings.setStaticFile(false);
@@ -311,12 +316,12 @@ public class Utilities
                                final IMessageBoxCallback msgCallback)
     {
         AlertDialog alertDialog = new AlertDialog.Builder(className).create();
-        alertDialog.setTitle(title);
-        alertDialog.setMessage(message);
+        alertDialog.setTitle("givanse " + title);
+        alertDialog.setMessage("givanse " + message);
         alertDialog.setButton(className.getString(R.string.ok),
                 new DialogInterface.OnClickListener()
                 {
-                    public void onClick(DialogInterface dialog, int which)
+                    public void onClick(final DialogInterface dialog, final int which)
                     {
                         if (msgCallback != null)
                         {

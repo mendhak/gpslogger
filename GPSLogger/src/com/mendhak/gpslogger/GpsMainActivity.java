@@ -809,7 +809,16 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
 
 
     /**
-     * Prompts user for input, then adds text to log file
+     * Annotates GPX and KML files, TXT files are ignored.
+     * 
+     * The annotation is done like this:
+     *     <wpt lat="##.##" lon="##.##">
+     *         <name>user input</name>
+     *     </wpt>
+     *    
+     * The user is prompted for the content of the <name> tag. If a valid
+     * description is given, the logging service starts in single point mode.
+     *  
      */
     private void Annotate()
     {
@@ -830,11 +839,12 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         input.setText(Session.getDescription());
         alert.setView(input);
 
+        /* ok */
         alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int whichButton)
             {
-                final String desc = Utilities.CleanDescription(input.getText().toString());
+            	final String desc = Utilities.CleanDescription(input.getText().toString());
                 if (desc.length() == 0)
                 {
                     Session.clearDescription();
@@ -851,6 +861,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             }
 
         });
+        
         alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int whichButton)
