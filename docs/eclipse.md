@@ -2,12 +2,14 @@
 
 Download and extract to your preferred location:
 
- * [SDK Tools Only](https://developer.android.com/sdk/index.html)
- * [Eclipse Standard](http://www.eclipse.org/downloads/).
- * [Actionbar Sherlock 4.2.0 (ABS)](http://actionbarsherlock.com/download.html)
- * GPSLogger:
+ * [SDK Tools Only](https://developer.android.com/sdk/index.html) (android-sdk_r22.3-linux.tgz)
+ * [Eclipse Standard](http://www.eclipse.org/downloads/) (Eclipse Standard 4.3.1 Eclipse Standard 4.3.1)
+ * [Actionbar Sherlock 4.4.0 (ABS)](http://actionbarsherlock.com/download.html)
+ * GPSLogger source code:
 
         git clone https://github.com/mendhak/gpslogger.git
+
+    Now you'll have the root folder `gpslogger/`
 
 Remmember where you have placed each.
 
@@ -61,38 +63,46 @@ Install the following:
 
 Create this folder:
 
-    mkdir GPSLogger/gen-external-apklibs
+    mkdir gpslogger/gen-external-apklibs
 
-Copy ABS to the GPSLogger clone, use a similar command:
+Copy ABS to the new folder, use a command similar to:
 
-    cp -R ~/Downloads/JakeWharton-ActionBarSherlock-5a15d92/library GPSLogger/gen-external-apklibs/actionbarsherlock
+    cp -R ~/Downloads/JakeWharton-ActionBarSherlock-5a15d92/actionbarsherlock \ 
+          gpslogger/gen-external-apklibs/actionbarsherlock
 
 In the Eclipse menu:
 
  > File > Import > Maven > Existing Maven Projects
  
-In *Root directory* browse for the folder that you just copied (actionbarsherlock) and import it.
+In `Root directory` browse for the folder that you just copied `actionbarsherlock/` and import it.
 
-Right click on the project and go to: 
+Right click on the project and go to:
 
  > Properties > Android
  
- 1. Verify that the *Project Build Target* matches the target declared in the manifest. For version 4.2.0 is API 19.
- 2. Verify that *Is Library* is checked and do not close the window.
+Verify that:
+ 1. `Project Build Target` matches the version indicated in the manifest file, examples:
+     * ABS v4.2.0 targetSdkVersion=16, use:
+       * Target Name `Android 4.1.2` API Level `16`
+     * ABS v4.4.0 targetSdkVersion=17, use:
+       * Target Name `Android 4.2.2` API Level `17`
+ 2. `Is Library` is checked.
 
-In the same window go to:
+Click ok and open the properties window again.
+
+Now go to:
 
  > Java Build Path > Order and Export
- 
- 1. Select the entry: Android 4.4.2
 
+ 1. Select the appropriate entry: `Android 4.#.#`
+ 
 ### Google Play services
 
 We have already installed the library in a previous step, in [SDK platforms](eclipse.md#sdk-platforms).
 
-Make a copy of the library project and put it in the root folder. Assuming that you are in the root folder of the project, the command would be similar to:
+Make a copy of the library project and put it inside the root folder of the project.
 
-    cp your-own-path-to-sdk/sdk/extras/google/google_play_services/libproject/google-play-services_lib/ .
+    cp YOUR_SDK_PATH/extras/google/google_play_services/libproject/google-play-services_lib/ gpslogger/
 
 In the Eclipse menu:
 
@@ -104,8 +114,10 @@ Right click on the project and go to:
 
  > Properties > Android
  
- 1. Verify that the *Project Build Target* matches: API level 19
- 2. Verify that *Is Library* is checked.
+ Verify that:
+ 1. `Project Build Target` matches the following: 
+     * Target Name `Android 4.4.2` API Level `19`
+ 2. `Is Library` is checked.
 
 ## Import GPSLogger
 
@@ -113,7 +125,7 @@ In the Eclipse menu:
 
  > File > Import > Maven > Existing Maven Projects
  
-In *Root directory* browse for your GPSLogger clone (gpslogger) and import it.
+In *Root directory* browse for your GPSLogger clone `gpslogger/` and import it.
 
 In the left side panel, Package Explorer, you will see four nodes:
  1. actionbarsherlock
@@ -125,8 +137,10 @@ Right click on number three, gpslogger, and go to
 
  > Properties > Android
 
- 1. In *Project Build Target* verify that the selected API is level 19.
- 2. In the *Library* section use the *Add* button to add:
+Verify that:
+ 1. `Project Build Target` matches the following: 
+     * Target Name `Android 4.4.2` API Level `19`
+ 2. The `Library` section has this two project references:
      1. actionbarsherlock
      2. google-play-services_lib
 
@@ -134,5 +148,5 @@ In the same window go to:
 
  > Java Build Path > Order and Export 
 
- 1. Un-select the entry *Maven Dependencies*
+ 1. Un-select the entry `Maven Dependencies`
 
