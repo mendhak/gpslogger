@@ -24,14 +24,19 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.senders.ftp.FtpHelper;
+
 import org.w3c.dom.Document;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class Utilities
@@ -77,7 +82,6 @@ public class Utilities
         LogToDebugFile(message);
     }
 
-    @SuppressWarnings("unused")
     public static void LogDebug(String message)
     {
         if (LOGLEVEL >= 4)
@@ -96,7 +100,6 @@ public class Utilities
         LogToDebugFile(message);
     }
 
-    @SuppressWarnings("unused")
     public static void LogVerbose(String message)
     {
         if (LOGLEVEL >= 5)
@@ -309,26 +312,32 @@ public class Utilities
      * @param message
      * @param className   The calling class, such as GpsMainActivity.this or
      *                    mainActivity.
-     * @param msgCallback An object which implements IHasACallBack so that the click
-     *                    event can call the callback method.
+     * @param msgCallback An object which implements IHasACallBack so that the 
+     *                    click event can call the callback method.
      */
     private static void MsgBox(String title, String message, Context className,
                                final IMessageBoxCallback msgCallback)
     {
-        AlertDialog alertDialog = new AlertDialog.Builder(className).create();
-        alertDialog.setTitle("givanse " + title);
-        alertDialog.setMessage("givanse " + message);
-        alertDialog.setButton(className.getString(R.string.ok),
-                new DialogInterface.OnClickListener()
-                {
-                    public void onClick(final DialogInterface dialog, final int which)
-                    {
-                        if (msgCallback != null)
-                        {
-                            msgCallback.MessageBoxResult(which);
-                        }
-                    }
-                });
+    	AlertDialog.Builder alertBuilder = new AlertDialog.Builder(className);
+    	alertBuilder.setTitle(title)
+                    .setMessage(message)
+                    .setCancelable(false)
+                    .setPositiveButton(className.getString(R.string.ok),
+                        new DialogInterface.OnClickListener() {
+                    	
+                            public void onClick(final DialogInterface dialog, 
+                            		            final int which) {
+                       
+                            	if (msgCallback != null)
+                            	{
+                            		msgCallback.MessageBoxResult(which);
+                            	}
+                            }
+                    	}
+                    );
+    	
+        AlertDialog alertDialog = alertBuilder.create();
+        
         alertDialog.show();
     }
 
@@ -524,8 +533,18 @@ public class Utilities
      */
     public static String GetIsoDateTime(Date dateToFormat)
     {
+    	/**
+        * This function is used in gpslogger.loggers.* and for most of them the
+        * default locale should be fine, but in the case of HttpUrlLogger we 
+        * want machine-readable output, thus  Locale.US.
+        * 
+        * Be wary of the default locale
+        * http://developer.android.com/reference/java/util/Locale.html#default_locale
+        */
+        
         // GPX specs say that time given should be in UTC, no local time.
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", 
+        		 									Locale.US);
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         return sdf.format(dateToFormat);
@@ -533,7 +552,12 @@ public class Utilities
 
     public static String GetReadableDateTime(Date dateToFormat)
     {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm");
+    	/**
+    	 * Similar to GetIsoDateTime(), this function is used in 
+    	 * AutoEmailHelper, and we want machine-readable output.
+    	 */
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm", 
+        		                                    Locale.US);
         return sdf.format(dateToFormat);
     }
 
