@@ -68,6 +68,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
     private static Intent serviceIntent;
     private GpsLoggingService loggingService;
     private MenuItem mnuAnnotate;
+    private Menu menu;
 
     /**
      * Provides a connection to the GPS Logging Service
@@ -445,6 +446,17 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         return super.onKeyDown(keyCode, event);
     }
 
+
+    public boolean onKeyUp(int keyCode, KeyEvent event){
+
+        if(keyCode == KeyEvent.KEYCODE_MENU){
+            Utilities.LogInfo("KeyUp Menu");
+            this.menu.performIdentifierAction(R.id.mnuOverflow,0);
+        }
+
+        return super.onKeyUp(keyCode, event);
+    }
+
     /**
      * Called when the menu is created.
      */
@@ -453,6 +465,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.optionsmenu, menu);
         mnuAnnotate = menu.findItem(R.id.mnuAnnotate);
+        this.menu = menu;
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
