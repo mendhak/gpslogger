@@ -87,22 +87,9 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
             loggingService = ((GpsLoggingService.GpsLoggingBinder) service).getService();
             GpsLoggingService.SetServiceClient(GpsMainActivity.this);
 
-            Button buttonSinglePoint = (Button) findViewById(R.id.buttonSinglePoint);
-
-            buttonSinglePoint.setOnClickListener(GpsMainActivity.this);
-
             if (Session.isStarted())
             {
-                if (Session.isSinglePointMode())
-                {
-                    SetMainButtonEnabled(false);
-                }
-                else
-                {
-                    SetMainButtonChecked(true);
-                    SetSinglePointButtonEnabled(false);
-                }
-
+                SetMainButtonChecked(true);
                 DisplayLocationInfo(Session.getCurrentLocationInfo());
             }
 
@@ -170,11 +157,11 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
         View modular_view = findViewById(R.id.main_modular_container);
         View normal_view = findViewById(R.id.main_frag_container);
 
-        View not_modular_view[] = {findViewById(R.id.trAutoEmail),
+        View not_modular_view[] = {
+                findViewById(R.id.trAutoEmail),
                 findViewById(R.id.fileName),
                 findViewById(R.id.distance),
                 findViewById(R.id.frequency),
-                findViewById(R.id.buttonSinglePoint),
         };
 //
 //        TextView frag_NO_title = (TextView) findViewById(R.id.frag_NO_title);
@@ -370,13 +357,11 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
         if (isChecked)
         {
             GetPreferences();
-            SetSinglePointButtonEnabled(false);
             loggingService.SetupAutoSendTimers();
             loggingService.StartLogging();
         }
         else
         {
-            SetSinglePointButtonEnabled(true);
             loggingService.StopLogging();
             ShowPreferencesSummary();
         }
@@ -394,23 +379,7 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
         {
             SetMainButtonEnabled(false);
             loggingService.StartLogging();
-            Session.setSinglePointMode(true);
         }
-        else if (Session.isStarted() && Session.isSinglePointMode())
-        {
-            loggingService.StopLogging();
-            ShowPreferencesSummary();
-
-            SetMainButtonEnabled(true);
-            Session.setSinglePointMode(false);
-        }
-    }
-
-
-    public void SetSinglePointButtonEnabled(boolean enabled)
-    {
-        Button buttonSinglePoint = (Button) findViewById(R.id.buttonSinglePoint);
-        buttonSinglePoint.setEnabled(enabled);
     }
 
     public void SetMainButtonEnabled(boolean enabled)
@@ -1144,16 +1113,6 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
         DisplayLocationInfo(loc);
         ShowPreferencesSummary();
         SetMainButtonChecked(true);
-
-        if (Session.isSinglePointMode())
-        {
-            loggingService.StopLogging();
-            ShowPreferencesSummary();
-
-            SetMainButtonEnabled(true);
-            Session.setSinglePointMode(false);
-        }
-
     }
 
     @Override

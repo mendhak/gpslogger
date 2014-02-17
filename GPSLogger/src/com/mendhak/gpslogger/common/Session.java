@@ -20,11 +20,11 @@ package com.mendhak.gpslogger.common;
 
 import android.app.Application;
 import android.location.Location;
+
 import com.mendhak.gpslogger.loggers.IFileLogger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Session extends Application
 {
@@ -49,19 +49,19 @@ public class Session extends Application
     private static boolean isBound;
     private static boolean readyToBeAutoSent = false;
     private static boolean allowDescription = true;
-    private static boolean isSinglePointMode = false;
+//    private static boolean isSinglePointMode = false;
     private static int retryTimeout=0;
     private static final List<IFileLogger> loggers = new ArrayList<IFileLogger>();
-
-    public static boolean isSinglePointMode()
-    {
-        return isSinglePointMode;
-    }
-
-    public static void setSinglePointMode(boolean singlePointMode)
-    {
-        isSinglePointMode = singlePointMode;
-    }
+//
+//    public static boolean isSinglePointMode()
+//    {
+//        return isSinglePointMode;
+//    }
+//
+//    public static void setSinglePointMode(boolean singlePointMode)
+//    {
+//        isSinglePointMode = singlePointMode;
+//    }
 
     // ---------------------------------------------------
 

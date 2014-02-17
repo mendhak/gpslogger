@@ -134,12 +134,6 @@
     <!--</LinearLayout>-->
     <!--<LinearLayout android:orientation="vertical" android:layout_width="fill_parent"-->
                   <!--android:layout_height="wrap_content">-->
-        <Button android:id="@+id/buttonSinglePoint"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14dip"
-                android:textStyle="bold"
-                android:text="@string/btn_single_point"/>
     </LinearLayout>
 
     <TableLayout android:id="@+id/TableSummary"
