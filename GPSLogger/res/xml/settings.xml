@@ -84,17 +84,19 @@
         </PreferenceScreen>
 
         <PreferenceScreen
+            android:key="logging_details_advancedP"
             android:title="@string/pref_logging_title"
             android:summary="@string/pref_logging_summary">
 
-            <PreferenceCategory android:title="@string/pref_logging_title">
+            <PreferenceCategory
+                android:title="@string/pref_logging_title">
 
                 <ListPreference
                     android:key="new_file_creation"
                     android:title="@string/new_file_creation_title"
                     android:summary="@string/new_file_creation_summary"
                     android:entries="@array/filecreation_entries"
-                    android:defaultValue="onceaday"
+                    android:defaultValue="everystart"
                     android:entryValues="@array/filecreation_values" />
 
                 <EditTextPreference
@@ -105,7 +107,8 @@
                     android:defaultValue="gpslogger" />
             </PreferenceCategory>
 
-            <PreferenceCategory android:title="@string/pref_performance_title">
+            <PreferenceCategory
+                android:title="@string/pref_performance_title">
 
                 <CheckBoxPreference
                     android:key="prefer_celltower"
@@ -121,7 +124,7 @@
                     android:numeric="integer"
                     android:maxLength="4"
                     android:hint="@string/time_before_logging_hint"
-                    android:defaultValue="60" />
+                    android:defaultValue="0" />
 
                 <CheckBoxPreference
                     android:key="keep_fix"
@@ -157,7 +160,7 @@
                     android:numeric="integer"
                     android:maxLength="4"
                     android:hint="@string/retry_time_hint"
-                    android:defaultValue="60" />
+                    android:defaultValue="10" />
 
             </PreferenceCategory>
         </PreferenceScreen>
@@ -231,7 +234,7 @@
             <CheckBoxPreference
                 android:title="@string/debuglog_title"
                 android:summary="@string/debuglog_summary"
-                android:key="debugtofile"
+                android:key="debugtofile_advancedP"
                 android:defaultValue="false" />
 
         </PreferenceScreen>

@@ -293,7 +293,7 @@ public class Utilities
         AppSettings.setSmtpUsername(prefs.getString("smtp_username", ""));
         AppSettings.setSmtpPassword(prefs.getString("smtp_password", ""));
         AppSettings.setAutoEmailTargets(prefs.getString("autoemail_target", ""));
-        AppSettings.setDebugToFile(prefs.getBoolean("debugtofile", false));
+        AppSettings.setDebugToFile(prefs.getBoolean("debugtofile_advancedP", false));
         AppSettings.setShouldSendZipFile(prefs.getBoolean("autosend_sendzip", true));
         AppSettings.setOpenGTSEnabled(prefs.getBoolean("opengts_enabled", false));
         AppSettings.setAutoOpenGTSEnabled(prefs.getBoolean("autoopengts_enabled", false));

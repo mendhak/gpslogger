@@ -112,28 +112,27 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
 
         EditTextPreference distanceBeforeLogging = (EditTextPreference) findPreference("distance_before_logging");
 
-        if (useImperial)
-        {
-            distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_feet);
-            distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_feet);
+        if (distanceBeforeLogging != null){
+            if (useImperial)
+            {
+                distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_feet);
+                distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_feet);
+            } else {
+                distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_meters);
+                distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
+            }
         }
-        else
-        {
-            distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_meters);
-            distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
-        }
-        
+
         EditTextPreference accuracyBeforeLogging = (EditTextPreference) findPreference("accuracy_before_logging");
 
-        if (useImperial)
-        {
-            accuracyBeforeLogging.setDialogTitle(R.string.settings_accuracy_in_feet);
-            accuracyBeforeLogging.getEditText().setHint(R.string.settings_enter_feet);
-        }
-        else
-        {
-            accuracyBeforeLogging.setDialogTitle(R.string.settings_accuracy_in_meters);
-            accuracyBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
+        if (accuracyBeforeLogging != null ) {
+            if (useImperial) {
+                accuracyBeforeLogging.setDialogTitle(R.string.settings_accuracy_in_feet);
+                accuracyBeforeLogging.getEditText().setHint(R.string.settings_enter_feet);
+            } else {
+                accuracyBeforeLogging.setDialogTitle(R.string.settings_accuracy_in_meters);
+                accuracyBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
+            }
         }
 
         CheckBoxPreference imperialCheckBox = (CheckBoxPreference) findPreference("useImperial");
@@ -168,7 +167,8 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
 //        if(!newFilePref.getValue().equals("static"))
         {
             Preference staticPref = (Preference)findPreference("new_file_static_name");
-            staticPref.setEnabled(false);
+            if (staticPref != null)
+                staticPref.setEnabled(false);
         }
 //
 //        final ListPreference mode_selection= (ListPreference) findPreference("preference_mode");
@@ -255,7 +255,6 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
     {
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
-            System.out.print(newValue.toString());
             Preference staticPref = (Preference)findPreference("new_file_static_name");
             if(newValue.equals("static"))
             {
@@ -338,26 +337,31 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
 
                     if (useImp)
                     {
-                        distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_feet);
-                        distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_feet);
-
+                        if (distanceBeforeLogging != null) {
+                            distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_feet);
+                            distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_feet);
+                        }
                         minimumDistance = Utilities.MetersToFeet(minimumDistance);
-                        
-                        accuracyBeforeLogging.setDialogTitle(R.string.settings_accuracy_in_feet);
-                        accuracyBeforeLogging.getEditText().setHint(R.string.settings_enter_feet);
 
+                        if (accuracyBeforeLogging != null) {
+                            accuracyBeforeLogging.setDialogTitle(R.string.settings_accuracy_in_feet);
+                            accuracyBeforeLogging.getEditText().setHint(R.string.settings_enter_feet);
+                        }
                         minimumAccuracy = Utilities.MetersToFeet(minimumAccuracy);
                     }
                     else
                     {
                         minimumDistance = Utilities.FeetToMeters(minimumDistance);
-                        distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_meters);
-                        distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
-                                                    
+                        if (distanceBeforeLogging != null) {
+                            distanceBeforeLogging.setDialogTitle(R.string.settings_distance_in_meters);
+                            distanceBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
+                        }
+
                         minimumAccuracy = Utilities.FeetToMeters(minimumAccuracy);
-                        accuracyBeforeLogging.setDialogTitle(R.string.settings_accuracy_in_meters);
-                        accuracyBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
-                        
+                        if (accuracyBeforeLogging != null){
+                            accuracyBeforeLogging.setDialogTitle(R.string.settings_accuracy_in_meters);
+                            accuracyBeforeLogging.getEditText().setHint(R.string.settings_enter_meters);
+                        }
 
                     }
 
