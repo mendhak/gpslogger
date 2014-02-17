@@ -28,7 +28,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 
-class Gpx10FileLogger extends BaseLogger implements IFileLogger
+class Gpx10FileLogger extends AbstractLogger implements IFileLogger
 {
     protected final static Object lock = new Object();
 

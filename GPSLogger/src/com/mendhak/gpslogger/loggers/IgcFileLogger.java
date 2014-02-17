@@ -24,7 +24,6 @@
 
 package com.mendhak.gpslogger.loggers;
 
-import android.content.pm.PackageInfo;
 import android.location.Location;
 import android.util.Base64;
 import android.util.Log;
@@ -44,7 +43,7 @@ import java.text.SimpleDateFormat;
  * Writes an IGC file suitable for most flight related
  * tools.
  */
-public class IgcFileLogger extends BaseLogger implements IFileLogger
+public class IgcFileLogger extends AbstractLogger implements IFileLogger
 {
     private OutputStream output = null;
     private SignatureOutputStream sos = null;

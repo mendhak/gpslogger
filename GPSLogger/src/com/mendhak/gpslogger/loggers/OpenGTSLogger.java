@@ -19,7 +19,6 @@ package com.mendhak.gpslogger.loggers;
 
 import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.loggers.BaseLogger;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.OpenGTSClient;
 
@@ -30,7 +29,7 @@ import com.mendhak.gpslogger.common.OpenGTSClient;
  *
  * @author Francisco Reynoso
  */
-public class OpenGTSLogger extends BaseLogger implements IFileLogger
+public class OpenGTSLogger extends AbstractLogger implements IFileLogger
 {
 
     public static final String name = "OpenGTS";

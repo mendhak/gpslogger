@@ -27,7 +27,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class Kml22FileLogger extends BaseLogger implements IFileLogger
+public class Kml22FileLogger extends AbstractLogger implements IFileLogger
 {
     protected final static Object lock = new Object();
     private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,

@@ -143,7 +143,7 @@ public class FileLoggerFactory
 
         for(IFileLogger lg : loggers)
         {
-            Utilities.LogDebug("FileLoggerFactory created logger: " + lg.getName()+ "("+ lg.GetMinSec() + "sec," + lg.GetMinDist() + "m)");
+            Utilities.LogDebug("FileLoggerFactory created logger: " + lg.getName()+ "("+ lg.getMinSec() + "sec," + lg.getMinDist() + "m)");
         }
         return loggers;
     }

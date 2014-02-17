@@ -30,8 +30,8 @@ public interface IFileLogger
     String getName();
 
     long getNextPointTime();
-    int GetMinSec();
-    int GetMinDist();
+    int getMinSec();
+    int getMinDist();
     boolean isTimeToLog();
     boolean isDistToLog(double lon, double lat);
 }
