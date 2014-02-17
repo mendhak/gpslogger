@@ -57,9 +57,9 @@
         <dependency>
             <groupId>system.local</groupId>
             <artifactId>android-async-http</artifactId>
-            <version>1.4.1</version>
+            <version>1.4.4</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/android-async-http-1.4.1.jar</systemPath>
+            <systemPath>${project.basedir}/libs/android-async-http-1.4.4.jar</systemPath>
         </dependency>
 
         <dependency>
