@@ -26,27 +26,24 @@
 package com.mendhak.gpslogger.loggers;
 
 import android.location.Location;
+import android.os.SystemClock;
+
+import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.loggers.utils.LocationBuffer;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.DatagramSocket;
 import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.ArrayDeque;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
-import java.util.concurrent.ConcurrentLinkedDeque;
-
-import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.SystemClock;
-import android.util.Log;
-import com.mendhak.gpslogger.common.Utilities;
 
 class CRC16CCITT {
 	private static final int[] table = new int[]{
@@ -89,8 +86,8 @@ class CRC16CCITT {
 	}
 
 	static short update(byte[] data, short crc) {
-		for (int i = 0; i < data.length; ++i)
-			crc = update(data[i], crc);
+        for (int i = 0; i < data.length; ++i)
+            crc = update(data[i], crc);
 		return crc;
 	}
 }
@@ -100,7 +97,7 @@ class CRC16CCITT {
  * http://skylines.xcsoar.org
  * @see "http://git.xcsoar.org/cgit/master/xcsoar.git/tree/src/Tracking/SkyLines/Protocol.hpp"
  */
-public class SkyLinesLogger extends BaseLogger implements IFileLogger
+public class SkyLinesLogger extends AbstractLiveLogger
 {
     private static final int MAGIC = 0x5df4b67b;
 	private static final short TYPE_FIX = 0x3;
@@ -130,55 +127,6 @@ public class SkyLinesLogger extends BaseLogger implements IFileLogger
 
     private static SkyLinesLogger instance = null;
 
-    private static class BufferedLocation {
-        public final int timems;
-        public final double lat;
-        public final double lon;
-        public final int altitude;
-        public final int bearing;
-        public final int speed;
-        public BufferedLocation(int time_ms, double lat, double lon, int alt, int bearing, int speed){
-            timems = time_ms;
-            this.lat = lat;
-            this.lon = lon;
-            this.altitude = alt;
-            this.bearing = bearing;
-            this.speed = speed;
-        }
-    }
-    private final ConcurrentLinkedDeque<BufferedLocation> loc_buffer = new ConcurrentLinkedDeque<BufferedLocation>();
-    private Runnable flusher;
-    private Handler handler;
-    private class FlusherAsyncTask extends  AsyncTask<ConcurrentLinkedDeque<BufferedLocation>, Void, Void> {
-        @Override
-        protected Void doInBackground(ConcurrentLinkedDeque<BufferedLocation>... buffers) {
-            for (ConcurrentLinkedDeque<BufferedLocation> buf : buffers){
-                BufferedLocation b;
-
-                Utilities.LogDebug(name + " flushing buffer (" + buf.size() + ")");
-                int i = 0;
-
-                while(buf.peek() != null) {
-                    b = buf.pop();
-                    try {
-                        Utilities.LogDebug(name + " flushing elt " + i);
-                        sendFix(b.timems,
-                                b.lat, b.lon,
-                                b.altitude,
-                                b.bearing,
-                                b.speed);
-                        i++;
-                    } catch (IOException ex) {
-                        Utilities.LogDebug(name + ": sending fix", ex);
-                    }
-                }
-                Utilities.LogDebug(name + ": finished flushing " + i + " locations" );
-            }
-            return null;
-        }
-    };
-    private FlusherAsyncTask flushertask;
-
     public static SkyLinesLogger getSkyLinesLogger(long key, int intervals, int minDistance, String host, int port)
             throws SocketException, UnknownHostException {
 
@@ -204,67 +152,6 @@ public class SkyLinesLogger extends BaseLogger implements IFileLogger
 
         InetAddress serverIP = InetAddress.getByName(host);
         serverAddress = new InetSocketAddress(serverIP, port);
-        this.handler = new Handler();
-
-        flusher = new Runnable() {
-            @Override
-            public void run() {
-                execAsyncFlush();
-                handler.postDelayed(flusher, intervalMS);
-            }
-        };
-        flusher.run();
-    }
-
-    private void execAsyncFlush(){
-        if (flushertask == null || flushertask.getStatus() != AsyncTask.Status.RUNNING){
-            Utilities.LogDebug(name + " starting flusher task");
-
-            if (flushertask == null || flushertask.getStatus() == AsyncTask.Status.FINISHED) {
-                flushertask = new FlusherAsyncTask();
-            }
-            flushertask.execute(loc_buffer);
-        } else {
-            Utilities.LogDebug(name + " flusher task already running");
-        }
-    }
-
-    private void flushBufferLocs(ConcurrentLinkedDeque<BufferedLocation> shared_buffer) {
-        BufferedLocation b;
-        Utilities.LogDebug(name + " flushing buffer (" + loc_buffer.size() + ")");
-        int sent_count = 0;
-        int ssent_count = 0;
-        int fail_count = 0;
-
-        if (shared_buffer.peek() == null){
-            Utilities.LogDebug(name + " buffer empty, skipping");
-            return;
-        }
-
-        while((b = shared_buffer.pop()) != null){
-            try {
-                sendFix(b.timems,
-                        b.lat, b.lon,
-                        b.altitude,
-                        b.bearing,
-                        b.speed);
-                sent_count++;
-            } catch (IOException ex) {
-                Utilities.LogDebug("ERROR " + name + ": sending fix", ex);
-                shared_buffer.push(b);
-                if (sent_count == ssent_count){
-                    fail_count++;
-                } else {
-                    ssent_count = sent_count;
-                    fail_count = 0;
-                }
-                if (fail_count == 100){
-                    Utilities.LogDebug(name + " flusher failed to sent 100 times the same loc, skipping this flush");
-                    break;
-                }
-            }
-        }
-        Utilities.LogDebug(name + ": finished flushing " + sent_count + " locations" );
     }
 
     private void writeHeader(DataOutputStream dos, short type)
@@ -294,13 +181,13 @@ public class SkyLinesLogger extends BaseLogger implements IFileLogger
     }
 
     private void writeFix(DataOutputStream dos,
-                          int time, double latitude, double longitude,
+                          long time, double latitude, double longitude,
                           int altitude, int track, int groundSpeed)
             throws IOException {
         writeHeader(dos, TYPE_FIX);
         dos.writeInt(FLAG_LOCATION | FLAG_TRACK | FLAG_GROUND_SPEED |
                 FLAG_ALTITUDE);
-        dos.writeInt(time);
+        dos.writeInt((int)time);
         writeGeoPoint(dos, latitude, longitude);
         dos.writeInt(0); // reserved
         dos.writeShort(track);
@@ -311,7 +198,16 @@ public class SkyLinesLogger extends BaseLogger implements IFileLogger
         dos.writeShort(0); // engine noise level (unavailable)
     }
 
-    private void sendFix(int time, double latitude, double longitude,
+    public boolean liveUpload(LocationBuffer.BufferedLocation b) throws IOException{
+        sendFix(b.timems,
+                b.lat, b.lon,
+                b.altitude,
+                b.bearing,
+                b.speed);
+        return true;
+    }
+
+    private void sendFix(long time, double latitude, double longitude,
                          int altitude, int track, int groundSpeed)
             throws IOException {
 
@@ -335,68 +231,13 @@ public class SkyLinesLogger extends BaseLogger implements IFileLogger
         socket.send(datagram);
     }
 
-
-
-//    private class WriteAsync extends AsyncTask<Location, Void, Void> {
-//        @Override
-//        protected Void doInBackground(Location... locs){
-//            for (int i = 0; i < locs.length; i++){
-//                final Location loc = locs[i];
-//                try {
-//                    calendar.setTimeInMillis(loc.getTime());
-//                    int second_of_day =
-//                            calendar.get(Calendar.HOUR_OF_DAY) * 3600
-//                                    + calendar.get(Calendar.MINUTE) * 60
-//                                    + calendar.get(Calendar.SECOND);
-//                    int ms_of_day = second_of_day * 1000
-//                            + calendar.get(Calendar.MILLISECOND);
-//                    sendFix(ms_of_day,
-//                            loc.getLatitude(), loc.getLongitude(),
-//                            (int)loc.getAltitude(),
-//                            (int)loc.getBearing(),
-//                            (int)(loc.getSpeed() / 3.6));
-//                } catch (IOException ex) {
-//                    Log.e("SkyLines", "Error", ex);
-//                }
-//            }
-//            return null;
-//        }
-//    }
-
     @Override
     public void close() throws Exception{
-        this.handler.removeCallbacks(flusher);
-        execAsyncFlush();
-
+        super.close();
         instance = null;
     }
 
-    @Override
-    public void Write(Location loc) throws Exception
-    {
-        final long now = SystemClock.elapsedRealtime();
-        calendar.setTimeInMillis(loc.getTime());
-        SetLatestTimeStamp(System.currentTimeMillis());
-        final int second_of_day =
-                calendar.get(Calendar.HOUR_OF_DAY) * 3600
-                        + calendar.get(Calendar.MINUTE) * 60
-                        + calendar.get(Calendar.SECOND);
-        final int ms_of_day = second_of_day * 1000
-                + calendar.get(Calendar.MILLISECOND);
-        Utilities.LogDebug(name  + " pushed (" + loc_buffer.size() + ")");
-        loc_buffer.push(new BufferedLocation(
-                ms_of_day,
-                loc.getLatitude(), loc.getLongitude(),
-                (int)loc.getAltitude(),
-                (int)loc.getBearing(),
-                (int)(loc.getSpeed() / 3.6)
-        ));
-//
-//        if (now >= nextUpdateTime) {
-//            new WriteAsync().execute(loc);
-//            nextUpdateTime = now + intervalMS;
-//        }
-    }
+
 
     @Override
     public void Annotate(String description, Location loc) throws Exception

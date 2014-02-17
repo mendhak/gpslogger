@@ -26,23 +26,25 @@
 package com.mendhak.gpslogger.loggers;
 
 import android.location.Location;
-import java.io.IOException;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestHandle;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.SyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.loggers.utils.LocationBuffer;
+
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import android.os.SystemClock;
-import android.util.Log;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.mendhak.gpslogger.common.Utilities;
-
-
-public class LiveTrack24FileLogger extends BaseLogger implements IFileLogger {
+public class LiveTrack24FileLogger extends AbstractLiveLogger {
 
     public static final String name = "LIVETRACK24";
 
@@ -96,6 +98,18 @@ public class LiveTrack24FileLogger extends BaseLogger implements IFileLogger {
 
     private static LiveTrack24FileLogger instance = null;
 
+    public boolean liveUpload(LocationBuffer.BufferedLocation b){
+        RequestHandle rh = sendLocationPacket(b);
+        while (!rh.isFinished()){
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return lastSendingOK;
+    }
+
     public static LiveTrack24FileLogger getLiveTrack24Logger(String serverURL, String username,
                                                       String password, int expectedInterval, int minDistance)
             throws MalformedURLException {
@@ -112,16 +126,6 @@ public class LiveTrack24FileLogger extends BaseLogger implements IFileLogger {
 
     private LiveTrack24FileLogger(String serverURL, String username,
                                   String password, int expectedInterval, int minDistance) throws MalformedURLException {
-//             PackageManager pm = context.getPackageManager();
-//		PackageInfo pi;
-//		try {
-//			pi = pm.getPackageInfo(context.getPackageName(), 0);
-//
-//			ourVersion = pi.versionName;
-//		} catch (NameNotFoundException eNnf) {
-//			throw new RuntimeException(eNnf); // We better be able to find the
-//			// info about our own package
-//		}
         super(expectedInterval,minDistance);
         Utilities.LogDebug("livetrack24 constructor");
         URL url = new URL(serverURL + "/track.php");
@@ -133,8 +137,6 @@ public class LiveTrack24FileLogger extends BaseLogger implements IFileLogger {
         this.password = password;
         this.serverURL = serverURL;
 
-//		this.vehicleType = vehicleType;
-//		this.vehicleName = vehicleName;
         expectedIntervalSecs = expectedInterval;
 
         doLogin(); // Login here, so we can find out about bad passwords ASAP
@@ -143,34 +145,18 @@ public class LiveTrack24FileLogger extends BaseLogger implements IFileLogger {
     @Override
     public void close() throws  Exception{
         // FIXME - add support for end of track types (need retrieve etc...)
+        super.close();
+
         HashMap<String,String> m = new HashMap<String, String>();
         m.put("prid", "0");
-        sendPacket(PACKET_END, m);
+        sendPacket(PACKET_END, m, locationPacketHandler, true);
 
         instance = null;
     }
 
     @Override
-    public void Write(Location loc) throws Exception {
-
-        if (!login_ok) {
-            Utilities.LogDebug("Livetrack24 Write but login not ok");
-            return;
-//            throw new Exception("Livetrack24 error");
-        }
-        if (!start_ok){
-            Utilities.LogDebug("Livetrack24 Write but start not ok");
-            return;
-        }
-
-        SetLatestTimeStamp(System.currentTimeMillis());
-        sendPacket(PACKET_POINT, loc);
-    }
-
-    @Override
     public void Annotate(String description, Location loc) throws Exception {
         // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -182,6 +168,11 @@ public class LiveTrack24FileLogger extends BaseLogger implements IFileLogger {
     static int PACKET_END = 3;
     static int PACKET_POINT = 4;
 
+    static SyncHttpClient httpSyncClient = new SyncHttpClient();
+    static AsyncHttpClient httpAsyncClient = new AsyncHttpClient();
+
+    private boolean lastSendingOK = false;
+
     /**
      * Cleans up illegal chars in a URL
      *
@@ -192,81 +183,67 @@ public class LiveTrack24FileLogger extends BaseLogger implements IFileLogger {
         return url.replace(' ', '+'); // FIXME, do a better job of this
     }
 
-    void sendPacket(int packetType, Map<String,String> params){
-              AsyncHttpResponseHandler handler = new AsyncHttpResponseHandler() {
-                   @Override
-                   public void onSuccess(String message){
-                       Utilities.LogDebug("packet sent ok");
-                   }
+    private AsyncHttpResponseHandler locationPacketHandler = new TextHttpResponseHandler() {
+        @Override
+        public void onSuccess(int statusCode, org.apache.http.Header[] headers, String message){
+            Utilities.LogDebug("packet sent ok:" + message);
+            lastSendingOK = true;
+        }
 
-                   @Override
-                   public void onFailure(Throwable e, String response){
-                       Utilities.LogDebug("packet NOT sent");
-                   }
-              };
-        sendPacket(packetType, params, handler);
-    }
+        @Override
+        public void onFailure(String response, Throwable e){
+            Utilities.LogDebug("packet NOT sent:" + response);
+            lastSendingOK = false;
+        }
+    };
 
-    void sendPacket(int packetType, Map<String,String> params, AsyncHttpResponseHandler handler){
-        AsyncHttpClient httpClient = new AsyncHttpClient();
+    /**
+     * Sends a packet to livetrack24 server
+     * @param packetType the packet type
+     * @param params the request parameters
+     * @param async if true, request is asynchronous, else it's synchronous
+     * @return the request handle
+     */
+    RequestHandle sendPacket(int packetType, Map<String,String> params,AsyncHttpResponseHandler handler, boolean async){
 
         RequestParams nparams = new RequestParams(params);
 
         nparams.put("leolive", Integer.toString(packetType));
         nparams.put("sid", sessionId);
         nparams.put("pid", Integer.toString(packetNum));
-
-        httpClient.get(null, trackURL, nparams, handler);
+        Utilities.LogDebug("URL: " + nparams.toString());
         packetNum++;
+
+        if (async){
+            return httpAsyncClient.get(null, trackURL, nparams, handler);
+        } else {
+            return httpSyncClient.get(null, trackURL, nparams, handler);
+        }
     }
 
-    void sendPacket(int packetType, Location loc) {
-//		try {
-//
-//			String urlstr = String.format(Locale.US,
-//					"%s?leolive=%d&sid=%d&pid=%d&%s", trackURL, packetType,
-//					sessionId, packetNum, options);
-//
-//						"lat=%f&lon=%f&alt=%d&sog=%d&cog=%d&tm=%d",
-//                        loc.getLatitude(),
-//						loc.getLongitude(),
-//                        loc.hasAltitude() ? (int) loc.getAltitude() : "0",
-//                        groundKmPerHr,
-//                        loc.getBearing(),
-//						unixTimestamp);
-        final int groundKmPerHr = (int) (loc.getSpeed() / 3.6);
-        final int unixTimestamp = (int) (loc.getTime() / 1000); // Convert from msecs to
-        // secs
-        final int alt = (int) (loc.hasAltitude() ? loc.getAltitude() : 0);
-
+    /**
+     * Sends a packet with a location update
+     * @param bloc the location
+     * @return a request handle for the asynchronous request
+     */
+    RequestHandle sendLocationPacket(LocationBuffer.BufferedLocation bloc){
         HashMap<String,String> params = new HashMap<String,String>();
 
+        params.put("lat", Float.toString((float)bloc.lat));
+        params.put("lon", Float.toString((float)bloc.lon));
+        params.put("alt", Integer.toString(bloc.altitude));
+        params.put("sog", Integer.toString(bloc.speed));
+        params.put("cog", Integer.toString(bloc.bearing));
+        params.put("tm", Integer.toString((int)(bloc.timems/1000)));
 
-        params.put("lat", Float.toString((float)loc.getLatitude()));
-        params.put("lon", Float.toString((float)loc.getLongitude()));
-        params.put("alt", Integer.toString(alt));
-        params.put("sog", Integer.toString(groundKmPerHr));
-        params.put("cog", Integer.toString((int)loc.getBearing()));
-        params.put("tm", Integer.toString(unixTimestamp));
-
-        sendPacket(packetType, params);
-//
-//			URL url = new URL(normalizeURL(urlstr));
-//
-//			url.openStream().();
-//		} catch (MalformedURLException ex) {
-//			// We should have caught this in the constructor
-//			throw new RuntimeException(ex);
-//		}
-
+        return sendPacket(PACKET_POINT, params, locationPacketHandler, false /* async */);
     }
 
-
-    private class AsyncLoginHandler extends AsyncHttpResponseHandler {
+    private class AsyncLoginHandler extends TextHttpResponseHandler {
         @Override
-        public void onSuccess(String response) {
+        public void onSuccess(int statusCode, org.apache.http.Header[] headers, String response) {
             try {
-                Utilities.LogDebug("livetrack24: resp for login");
+                Utilities.LogDebug("livetrack24: resp for login:" + response);
                 final int userID = Integer.parseInt(response);
 
                 if (userID == 0){
@@ -298,34 +275,28 @@ public class LiveTrack24FileLogger extends BaseLogger implements IFileLogger {
                 params.put("vtype", Integer.toString(vehicleType));
                 params.put("vname",vehicleName);
 
-                sendPacket(PACKET_START, params,new AsyncHttpResponseHandler() {
+                sendPacket(PACKET_START, params, new TextHttpResponseHandler() {
                     @Override
-                    public void onSuccess(String message){
-                        Utilities.LogDebug("packet START sent ok");
+                    public void onSuccess(int statusCode, org.apache.http.Header[] headers, String message){
+                        Utilities.LogDebug("packet START sent ok:" + message);
                         start_ok = true;
                     }
 
                     @Override
-                    public void onFailure(Throwable e, String response){
+                    public void onFailure(String response, Throwable e){
                         Utilities.LogDebug("packet START NOT sent");
                     }
-                });
+                }, true);
 
                 login_ok = true;
             } catch (NumberFormatException ex) {
                 Utilities.LogDebug("livetrack24: got unexpected answer:"+ response);
-
-//                throw new Exception("Unexpected server response");
             }
-//            Utilities.LogInfo("Response Success :" + response);
-//            callback.OnCompleteLocation();
         }
 
         @Override
-        public void onFailure(Throwable e, String response) {
+        public void onFailure(String response, Throwable e) {
             Utilities.LogDebug("livetrack24: login resp failed");
-//            Utilities.LogError("OnCompleteLocation.MyAsyncHttpResponseHandler Failure with response :" + response, new Exception(e));
-//            callback.OnFailure();
         }
     }
 
@@ -341,13 +312,15 @@ public class LiveTrack24FileLogger extends BaseLogger implements IFileLogger {
         // The result of the page is an integer, 0 if userdata are incorrect, or
         // else the userID of the user
 
-        AsyncHttpClient httpClient = new AsyncHttpClient();
+//        AsyncHttpClient httpClient = new AsyncHttpClient();
+//        SyncHttpClient httpClient = new SyncHttpClient();
+
         RequestParams params = new RequestParams();
         params.put("op", "login");
         params.put("user", userName);
         params.put("pass", password);
 
         Utilities.LogDebug("livetrack24: sending login info");
-        httpClient.get(null, clientURL, params, new AsyncLoginHandler());
+        httpAsyncClient.get(null, clientURL, params, new AsyncLoginHandler());
     }
 }
