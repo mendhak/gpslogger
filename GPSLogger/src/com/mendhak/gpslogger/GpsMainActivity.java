@@ -837,8 +837,10 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
     {
         Utilities.LogDebug("GpsMainActivity.Annotate");
 
-        if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml())
+        if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml() && !AppSettings.shouldLogToCustomUrl())
         {
+            Toast.makeText(getApplicationContext(), getString(R.string.annotation_requires_logging), 1000).show();
+
             return;
         }
 
