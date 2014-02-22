@@ -37,10 +37,10 @@
   <string name="sharing_pick_file">Kies \'n lêer om te deel</string>
   <string name="sharing_mylocation">My ligging</string>
   <string name="sharing_via">Deel met</string>
-  <string name="foot"> voet</string>
-  <string name="feet"> voete</string>
-  <string name="meter"> meter</string>
-  <string name="meters"> meters</string>
+  <string name="foot">&#160;voet</string>
+  <string name="feet">&#160;voete</string>
+  <string name="meter">&#160;meter</string>
+  <string name="meters">&#160;meters</string>
   <string name="error">Fout</string>
   <string name="error_connection">Konneksiefout. Kontroleer asseblief jou selfoon instellings.</string>
   <string name="gpsprovider_unavailable">Geen GPS verskaffer beskikbaar nie. Kontroleer asseblief jou ligging-instellings en ​​stel \'n ligging verskaffer in staat.     </string>

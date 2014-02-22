@@ -103,7 +103,7 @@
   <string name="log_kml_title">Logge zu KML</string>
   <string name="log_kml_summary">Erstellt eine KML-Datei im GPSLogger Verzeichnis auf der SD-Karte.</string>
   <string name="log_plain_text_title">Logge als Klartext</string>
-  <string name="log_plain_text_summary">Erstellt eine einfache Textdatei im GPSLogger Verzeichnis auf der SD-Karte.</string>
+  <string name="log_plain_text_summary">Erstellt eine einfache Textdatei im GPSLogger-Verzeichnis auf der SD-Karte.</string>
   <string name="new_file_creation_title">Neue Datei erstellen</string>
   <string name="new_file_creation_summary">Ob eine neue Datei einmal am Tag erstellt werden soll oder nach jedem Start.</string>
   <string name="new_file_creation_onceaday">Einmal am Tag</string>
@@ -115,19 +115,21 @@
   <string name="prefer_celltower_title">Bevorzugte Funkzelle</string>
   <string name="prefer_celltower_summary">Bevorzugt Funkzellen vor Satelliten. Das ist weniger genau, aber schont die Batterie.</string>
   <string name="time_before_logging_title">Zeit vor dem Loggen</string>
-  <string name="time_before_logging_summary">Wie lange wird zwischen der Erfassung der GPS-Punkte gewartet. 0 steht für maximale Frequenz wobei eine langsamere Erfassung besser für die Laufzeit der Batterie ist.</string>
+  <string name="time_before_logging_summary">Verwende 0 als Maximalfrequenz für höchste Präzision, eine langsamere Aufzeichnung der Punkte ist allerdings besser für den Akku.</string>
   <string name="time_before_logging_dialog_title">Zeit in Sekunden</string>
   <string name="time_before_logging_hint">Eingabe in Sekunden (max. 9999)</string>
   <string name="keep_fix_summary">Vorsicht, dies senkt die Lebensdauer des Akkus erheblich. Nur für hohe Präzision bei niedrigen Frequenzen verwenden.</string>
   <string name="keep_fix_title">GPS zwischen Fixes aktiviert lassen</string>
-  <string name="retry_time_title">Wiederholungsintervall im Fehlerfall</string>
-  <string name="retry_time_summary">Falls kein Standort gefunden wurde, der den Kriterien entspricht, warte so lange und versuche es erneut. Gebe 0 für unendliche Wiederholungen ein.</string>
+  <string name="retry_time_title">Zeitintervall für Genauigkeit</string>
+  <string name="retry_time_summary">Verwende 0 als Maximalfrequenz, ist zwar langsamer, schont aber den Akku. </string>
   <string name="retry_time_dialog_title">Zeit in Sekunden</string>
   <string name="retry_time_hint">Eingabe in Sekunden (max. 9999)</string>
-  <string name="distance_before_logging_title">Abstand zwischen den Punkten</string>
-  <string name="distance_before_logging_summary">Welcher Abstand sollte zwischen dem vorherigen und jetzigen Standort sein, bevor der Punkt protokolliert werden soll. Setze den Wert auf 0, um alle Punkte zu protokollieren.</string>
-  <string name="accuracy_before_logging_title">Mindestgenauigkeit pro Punkt</string>
-  <string name="accuracy_before_logging_summary">Wie genau soll der GPS basierte Standort sein, bevor dieser protokolliert wird. Der Wert 0 wird alle Standorte protokollieren.</string>
+  <string name="distance_before_logging_title">Entfernung vor dem Loggen</string>
+  <string name="distance_before_logging_summary">Entfernung, bis der nächste Punkt geloggt wird. Verwende 0, um alle Punkte zu loggen.
+    </string>
+  <string name="accuracy_before_logging_title">Genauigkeit, bevor geloggt wird</string>
+  <string name="accuracy_before_logging_summary">Welche Mindestgenauigkeit wird benötigt, bevor geloggt wird? Verwende 0, um alle Punkte zu loggen.
+    </string>
   <string name="timeout_time_title">Zeitüberschreitung</string>
   <string name="timeout_time_summary">Wie lange soll das GPS eingeschaltet bleiben, bis ein Standort gefunden wird? Setze 0 für keine zeitliche Begrenzung.</string>
   <string name="timeout_time_dialog_title">Zeit in Sekunden</string>
@@ -145,7 +147,7 @@
   <string name="please_wait">Bitte warten.</string>
   <string name="autoemail_autosend">E-Mails aktivieren</string>
   <string name="autoemail_autosend_summary">Ermöglicht das Senden der Log-Datei an eine beliebige E-mail-Adresse.</string>
-  <string name="autoemail_target">Ziel E-Mail-Adresse</string>
+  <string name="autoemail_target">Ziel-E-Mail-Adressen</string>
   <string name="autoemail_frequency_whenistop">Wenn ich die Stop Taste drücke</string>
   <string name="autoemail_frequency_8">Nach 8 Stunden</string>
   <string name="autoemail_frequency_6">Nach 6 Stunden</string>
@@ -252,7 +254,7 @@
   <string name="shortcut_stop">Stopp</string>
   <string name="shortcut_pickaction">Wähle eine Aktion</string>
   <string name="log_opengts_title">Logge zu einem OpenGTS-Server</string>
-  <string name="log_opengts_summary">Sende GPRMC-Daten an einen OpenGTS-Server, der online ist.</string>
+  <string name="log_opengts_summary">Sende GPRMC-Daten an einen Online-OpenGTS-Server.</string>
   <string name="opengts_setup_title">OpenGTS-Setup</string>
   <string name="opengts_setup_summary">Sende GPS-Tracks an einen OpenGTS-Server deiner Wahl.</string>
   <string name="opengts_enabled">Aktiviere OpenGTS</string>
@@ -299,4 +301,13 @@
   <string name="menu_faq">Hilfe und FAQ</string>
   <string name="gpsf_missing">Kein GPS-Signal</string>
   <string name="gpsf_missing_description">Für dieses Feature wird das \"Google Play Services Framework\" benötigt.</string>
+  <string name="pref_loggingto_title">Logge zu ...</string>
+  <string name="pref_loggingto_summary">Dateien und Zielorte für das Loggen deines Standorts</string>
+  <string name="log_customurl_title">Logge zu einem Server</string>
+  <string name="log_customurl_summary">Sende Log über HTTP auf deinen eigenen Server</string>
+  <string name="log_customurl_urlparameters">URL-Parameter</string>
+  <string name="log_customUrl_urllatitude">Breitengrad: %LAT</string>
+  <string name="txt_annotation">Anmerkung:</string>
+  <string name="txt_time_isoformat">Zeit UTC (2011-12-25T15:27:33Z):</string>
+  <string name="txt_provider">Anbieter:</string>
 </resources>

@@ -39,15 +39,15 @@
   <string name="sharing_mylocation">Moja lokacija</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Deli preko</string>
-  <string name="foot"> foot</string>
-  <string name="feet"> feet</string>
-  <string name="meter"> meter</string>
-  <string name="meters"> metrov</string>
+  <string name="foot">&#160;foot</string>
+  <string name="feet">&#160;feet</string>
+  <string name="meter">&#160;meter</string>
+  <string name="meters">&#160;metrov</string>
   <string name="error">Napaka</string>
   <string name="error_connection">Napake pri povezavi. Prosimo, preverite vaše nastavitve telefona.</string>
   <string name="gpsprovider_unavailable">Ponudnik GPS ni na voljo. Preverite nastavitve mesta in omogoči namestitev ponudnika     </string>
   <string name="started">Začel</string>
-  <string name="providername_using">    (Z uporabo %s)</string>
+  <string name="providername_using">&#160;&#160;&#160;&#160;(Z uporabo %s)</string>
   <string name="providername_gps">GPS sateliti</string>
   <string name="providername_celltower">GSM stolpi</string>
   <string name="not_applicable">n/a</string>

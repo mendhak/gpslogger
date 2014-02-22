@@ -115,19 +115,20 @@
   <string name="prefer_celltower_title">Preferisci i ponti radio</string>
   <string name="prefer_celltower_summary">Utilizza la posizione estrapolata dalla rete cellulare. Meno precisa, ma riduce il consumo di batteria.</string>
   <string name="time_before_logging_title">Tempo fra le registrazioni</string>
-  <string name="time_before_logging_summary">Quanto tempo intercorre tra due registrazioni GPS. Usa 0 per la massima frequenza, valori maggiori fanno durare di più la batteria.</string>
+  <string name="time_before_logging_summary">Usa 0 per la massima frequenza, più lento fa durare di più la batteria.</string>
   <string name="time_before_logging_dialog_title">Tempo in secondi</string>
   <string name="time_before_logging_hint">Inserisci i secondi (max 9999)</string>
   <string name="keep_fix_summary">Attenzione: riduce di molto la vita della batteria. Usatelo solo per ottenere alte precisioni con basse frequenze di campionatura.</string>
   <string name="keep_fix_title">Lascia sempre acceso il GPS</string>
-  <string name="retry_time_title">in caso di errore il tempo di attesa prima di riprovare</string>
-  <string name="retry_time_summary">Se in base ai criteri impostati non è possibile ottenere un punto GPS, attendi questo tempo e riprova. Usa 0 per riprovare indefinitivamente.</string>
+  <string name="retry_time_title">Intervallo di tempo per la precisione</string>
+  <string name="retry_time_summary">Usa 0 per la massima frequenza, più lento fa durare di più la batteria.</string>
   <string name="retry_time_dialog_title">Tempo in secondi</string>
   <string name="retry_time_hint">Inserisci i secondi (max 9999)</string>
-  <string name="distance_before_logging_title">Distanza tra i punti</string>
-  <string name="distance_before_logging_summary">Quale è la distanza minima dal punto precedente per far sì che il nuovo punto sia registrato. USa 0 per registrare tutti i punti.</string>
-  <string name="accuracy_before_logging_title">Precisione rchista minima per ogni punto</string>
-  <string name="accuracy_before_logging_summary">Quanto deve essere preciso il fix GPS prima che il punto sia registrato. Usa 0 per registrare tutti i punti.</string>
+  <string name="distance_before_logging_title">Distanza prima di registrare</string>
+  <string name="distance_before_logging_summary">Di quanto mi devo spostare prima che un punto sia registrato. Usa 0 per registrare tutti i punti.</string>
+  <string name="accuracy_before_logging_title">Precisione richiesta per registrare</string>
+  <string name="accuracy_before_logging_summary">Precisione minima richiesta al GPS per registrare un punto. Utilizzare 0 per registrare tutti i punti.
+    </string>
   <string name="timeout_time_title">Timeout</string>
   <string name="timeout_time_summary">Quanto tempo il GPS deve rimanere acceso per avere un fix prima di annullare l\'operazione. Usa 0 per non avere un timeout (il GPS rimarrà acceso sino a che non ha trovato un fix)</string>
   <string name="timeout_time_dialog_title">Tempo in secondi</string>
@@ -299,4 +300,13 @@
   <string name="menu_faq">Aiuto e FAQ</string>
   <string name="gpsf_missing">Servizio non presente/inattivo</string>
   <string name="gpsf_missing_description">Per usare questa funzione devi avere installato il Google Play Services Framework.</string>
+  <string name="pref_loggingto_title">Salva su...</string>
+  <string name="pref_loggingto_summary">Dove salvare i dati (files o server remoti)</string>
+  <string name="log_customurl_title">Salva con un URL custom</string>
+  <string name="log_customurl_summary">Invia i dati ad un server HTTP generico</string>
+  <string name="log_customurl_urlparameters">Parametri per l\'URL</string>
+  <string name="log_customUrl_urllatitude">Latitudine: %LAT</string>
+  <string name="txt_annotation">Nota:</string>
+  <string name="txt_time_isoformat">Tempo UTC (2011-12-25T15:27:33Z):</string>
+  <string name="txt_provider">Fonte:</string>
 </resources>

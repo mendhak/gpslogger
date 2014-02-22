@@ -29,9 +29,9 @@
   <string name="sharing_pick_file">أختر ملف للمشاركه</string>
   <string name="sharing_mylocation">موقعي</string>
   <string name="sharing_via">المشاركة بأستخدام</string>
-  <string name="foot"> قدم</string>
+  <string name="foot">&#160;قدم</string>
   <string name="meter">متر</string>
-  <string name="meters"> أمتار</string>
+  <string name="meters">&#160;أمتار</string>
   <string name="error">خطاء</string>
   <string name="error_connection">خطاء في الأتصال , الرجاء التأكد من أعدادات الجهاز.</string>
   <string name="started">بدأ</string>

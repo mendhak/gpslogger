@@ -39,15 +39,15 @@
   <string name="sharing_mylocation">位置情報</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.co.jp/maps?q=%s,%s</string>
   <string name="sharing_via">共有法</string>
-  <string name="foot"> フィート</string>
-  <string name="feet"> フィート</string>
-  <string name="meter"> メートル</string>
-  <string name="meters"> メートル</string>
+  <string name="foot">&#160;フィート</string>
+  <string name="feet">&#160;フィート</string>
+  <string name="meter">&#160;メートル</string>
+  <string name="meters">&#160;メートル</string>
   <string name="error">エラー</string>
   <string name="error_connection">接続エラーです。携帯電話の設定を確認してください。</string>
   <string name="gpsprovider_unavailable">GPSプロバイダーが利用できません。位置情報プロバイダを有効にしてください。</string>
   <string name="started">開始しました。</string>
-  <string name="providername_using">    （%sを使います）</string>
+  <string name="providername_using">&#160;&#160;&#160;&#160;（%sを使います）</string>
   <string name="providername_gps">GPS衛星</string>
   <string name="providername_celltower">基地局</string>
   <string name="not_applicable">利用不可</string>
@@ -115,19 +115,16 @@
   <string name="prefer_celltower_title">基地局を優先</string>
   <string name="prefer_celltower_summary">衛星ではなく基地局の情報を使います。精度は悪くなりますが、バッテリーの消費は少なくなります。</string>
   <string name="time_before_logging_title">保存周期</string>
-  <string name="time_before_logging_summary">この時間だけ待って次の位置情報を記録します。0を指定すると書込頻度が最大となりますが、書込頻度が少ない程バッテリーの持ちが良くなります。</string>
+  <string name="time_before_logging_summary">0にすると書き込み頻度が最大になりますが、バッテリーの持ちが悪くなります。</string>
   <string name="time_before_logging_dialog_title">時間（秒）</string>
   <string name="time_before_logging_hint">時間（秒、最大9999）を入力してください</string>
   <string name="keep_fix_summary">注意。この設定はバッテリを著しく消費します。書込頻度を抑えて高精度を得たい場合のみ使用してください。</string>
   <string name="keep_fix_title">GPSを常にON</string>
-  <string name="retry_time_title">失敗時に再試行</string>
-  <string name="retry_time_summary">基準を満たす位置情報が得られない場合、この値だけ待ってリトライします。0にした場合はリトライし続けます。</string>
+  <string name="retry_time_summary">0にすると書き込み頻度が最大になりますが、バッテリーの持ちが悪くなります。</string>
   <string name="retry_time_dialog_title">時間（秒）</string>
   <string name="retry_time_hint">入力（秒、最大 9999)</string>
-  <string name="distance_before_logging_title">保存間隔</string>
-  <string name="distance_before_logging_summary">この距離を超えると次の位置情報をログに保存します。0 にすると全ての位置情報を保存します。</string>
-  <string name="accuracy_before_logging_title">最大許容誤差</string>
-  <string name="accuracy_before_logging_summary">現在の位置情報がこの誤差以内ならログに保存します。0にすると全ての位置情報を保存します。</string>
+  <string name="distance_before_logging_summary">次のポイントを保存するまでの距離。0にすると全ポイントを書き込みます。</string>
+  <string name="accuracy_before_logging_summary">ログの保存間隔を分で指定します。0にすると全ポイントを書き込みます。</string>
   <string name="timeout_time_title">タイムアウト</string>
   <string name="timeout_time_summary">この値の間、GPSをONにして位置情報を待ちます。時間内に取得できなかった場合、タイムアウトします。0にするとタイムアウトしません。</string>
   <string name="timeout_time_dialog_title">時間（秒）</string>
@@ -299,4 +296,12 @@
   <string name="menu_faq">ヘルプとFAQ</string>
   <string name="gpsf_missing">不足しているサービス</string>
   <string name="gpsf_missing_description">この機能を使用するには Google Playサービス フレームワークが必要になります。</string>
+  <string name="pref_loggingto_title">ログ保存場所</string>
+  <string name="pref_loggingto_summary">ファイルや保存場所等を設定します。</string>
+  <string name="log_customurl_title">カスタムURLに保存</string>
+  <string name="log_customurl_summary">HTTPを利用してログをあなたのサーバへ送信します。</string>
+  <string name="log_customurl_urlparameters">URLパラメター</string>
+  <string name="log_customUrl_urllatitude">緯度: % LAT</string>
+  <string name="txt_annotation">注釈:</string>
+  <string name="txt_provider">プロバイダー:</string>
 </resources>

@@ -40,24 +40,24 @@
   <string name="sharing_mylocation">Mano vieta</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Dalintis per</string>
-  <string name="foot"> pėda</string>
-  <string name="feet"> pėdos</string>
-  <string name="meter"> metras</string>
-  <string name="meters"> metrai</string>
+  <string name="foot">&#160;pėda</string>
+  <string name="feet">&#160;pėdos</string>
+  <string name="meter">&#160;metras</string>
+  <string name="meters">&#160;metrai</string>
   <string name="error">Klaida</string>
   <string name="error_connection">Klaida prisijungiant: Prašau patikrinti jūsų telefono nustatymus.</string>
   <string name="gpsprovider_unavailable">Nėra GPS vietos nustatymo tiekėjų. Prašau patikrinti jūsų vietos nustatymo nustatymus ir įjungti/pateikti vietos nustatymo tiekėją.</string>
   <string name="started">Pradėta</string>
-  <string name="providername_using">    (Naudojama %s)</string>
+  <string name="providername_using">&#160;&#160;&#160;&#160;(Naudojama %s)</string>
   <string name="providername_gps">GPS satelitai</string>
   <string name="providername_celltower">telefonų bokštai</string>
   <string name="not_applicable">n/a</string>
-  <string name="meters_per_second"> m/s</string>
-  <string name="feet_per_second"> ft/s</string>
-  <string name="miles_per_hour"> mi/h</string>
-  <string name="miles"> mi</string>
-  <string name="kilometers_per_hour"> km/h</string>
-  <string name="kilometers"> km</string>
+  <string name="meters_per_second">&#160;m/s</string>
+  <string name="feet_per_second">&#160;ft/s</string>
+  <string name="miles_per_hour">&#160;mi/h</string>
+  <string name="miles">&#160;mi</string>
+  <string name="kilometers_per_hour">&#160;km/h</string>
+  <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">nežinoma</string>
   <string name="sorry">Atsiprašome</string>
   <string name="success">Ura!</string>
@@ -96,7 +96,7 @@
   <string name="settings_accuracy_in_meters">Tikslumas metrais</string>
   <string name="settings_accuracy_in_feet">Tikslumas pėdom</string>
   <string name="settings_enter_meters">Įvesti metrais(max 9999)</string>
-  <string name="settings_converting_title">Konvertuojama…</string>
+  <string name="settings_converting_title">Konvertuojama&#8230;</string>
   <string name="settings_converting_description">Mažiausias atstumo vienetų konvertavimas. Jei viršys 9999, bus nustatyta 9999. Dabar persikraus parametrų ekranas.
     </string>
   <string name="pref_logging_title">Registruojami duomenys</string>

@@ -40,10 +40,10 @@ próximo ponto tenha sido logado.</string>
   <string name="sharing_mylocation">Minha localização</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Compartilhar via</string>
-  <string name="foot"> pé</string>
-  <string name="feet"> pés</string>
-  <string name="meter"> metro</string>
-  <string name="meters"> metros</string>
+  <string name="foot">&#160;pé</string>
+  <string name="feet">&#160;pés</string>
+  <string name="meter">&#160;metro</string>
+  <string name="meters">&#160;metros</string>
   <string name="error">Erro</string>
   <string name="error_connection">Erro de conexão. Favor verificar as opções do seu telefone.</string>
   <string name="gpsprovider_unavailable">Sem provedor GPS disponível. Favor checar suas opções de localização e 
@@ -51,16 +51,16 @@ próximo ponto tenha sido logado.</string>
 
     </string>
   <string name="started">Iniciou</string>
-  <string name="providername_using">    (Usando %s)</string>
+  <string name="providername_using">&#160;&#160;&#160;&#160;(Usando %s)</string>
   <string name="providername_gps">Satélites GPS</string>
   <string name="providername_celltower">Torres de celular</string>
   <string name="not_applicable">n/a</string>
-  <string name="meters_per_second"> m/s</string>
+  <string name="meters_per_second">&#160;m/s</string>
   <string name="feet_per_second">pé/s</string>
-  <string name="miles_per_hour"> Mi/h</string>
-  <string name="miles"> Mi</string>
-  <string name="kilometers_per_hour"> km/h</string>
-  <string name="kilometers"> km</string>
+  <string name="miles_per_hour">&#160;Mi/h</string>
+  <string name="miles">&#160;Mi</string>
+  <string name="kilometers_per_hour">&#160;km/h</string>
+  <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">desconhecido</string>
   <string name="sorry">Desculpe</string>
   <string name="success">Oba!</string>
@@ -120,19 +120,12 @@ próximo ponto tenha sido logado.</string>
   <string name="prefer_celltower_title">Prefiro torres de celular</string>
   <string name="prefer_celltower_summary">Usa torres de celular em vez de satélites. Menos precisos, mas economiza mais bateria.     </string>
   <string name="time_before_logging_title">Tempo antes de logar</string>
-  <string name="time_before_logging_summary">Tempo de espera entre pontos de GPS de log. Use 0 para a freqüência máxima, mas mais lento é melhor para a vida da bateria.     </string>
   <string name="time_before_logging_dialog_title">Tempo em segundos</string>
   <string name="time_before_logging_hint">Digite segundos (máximo de 9999)</string>
   <string name="keep_fix_summary">Cuidado, que isso irá diminuir drasticamente a vida da bateria. Uso apenas para maior precisão com frequências baixas. </string>
   <string name="keep_fix_title">Manter o GPS entre conexões</string>
-  <string name="retry_time_title">Intervalo em caso de falha</string>
-  <string name="retry_time_summary">Se nenhuma conexão é encontrada que corresponda aos seus critérios, esperar esse tempo e tente novamente. Use 0 para continuar tentando indefinidamente.</string>
   <string name="retry_time_dialog_title">Tempo em segundos</string>
   <string name="retry_time_hint">Digite segundos (máximo de 9999)</string>
-  <string name="distance_before_logging_title">Distância entre pontos</string>
-  <string name="distance_before_logging_summary">Qual a distância até o ponto anterior deve ser antes deste ponto ser registrado. Use 0 para registrar todos os pontos.     </string>
-  <string name="accuracy_before_logging_title">Mínima precisão por ponto</string>
-  <string name="accuracy_before_logging_summary">Quão preciso o GPS deve ser antes que ele efetue o registro. Use 0 para registrar todos os pontos.</string>
   <string name="timeout_time_title">Timeout</string>
   <string name="timeout_time_summary">Quanto tempo o GPS fica na procura de uma conexão antes de desistir. Use 0 para nenhum tempo limite</string>
   <string name="timeout_time_dialog_title">Tempo em segundos</string>

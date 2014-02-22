@@ -47,16 +47,16 @@
   <string name="error_connection">Erreur de connexion. S\'il vous plaît vérifier les paramètres du cellulaire.</string>
   <string name="gpsprovider_unavailable">Pas de service GPS disponible.</string>
   <string name="started">Débuté</string>
-  <string name="providername_using"> (Utilisation %s)</string>
+  <string name="providername_using">&#160;(Utilisation %s)</string>
   <string name="providername_gps">Satellites GPS</string>
   <string name="providername_celltower">Tours  cellulaires</string>
   <string name="not_applicable">n/a</string>
-  <string name="meters_per_second"> m/s</string>
-  <string name="feet_per_second"> FT/s</string>
-  <string name="miles_per_hour"> mi/h</string>
-  <string name="miles"> mi</string>
-  <string name="kilometers_per_hour"> km/h</string>
-  <string name="kilometers"> km</string>
+  <string name="meters_per_second">&#160;m/s</string>
+  <string name="feet_per_second">&#160;FT/s</string>
+  <string name="miles_per_hour">&#160;mi/h</string>
+  <string name="miles">&#160;mi</string>
+  <string name="kilometers_per_hour">&#160;km/h</string>
+  <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">Inconnu</string>
   <string name="sorry">Désolé</string>
   <string name="success">Yay !</string>
@@ -115,20 +115,15 @@
   <string name="prefer_celltower_title">Préfère tours cellulaires</string>
   <string name="prefer_celltower_summary">Utilise tours cellulaires plutôt que  satellites. Moins précis, mais permet d\'économiser la batterie.</string>
   <string name="time_before_logging_title">Temps avant l\'enregistrement</string>
-  <string name="time_before_logging_summary">Combien de temps d\'attente entre l\'enregistrement des points GPS. Utilisez 0 pour la fréquence maximale, mais plus lent est préférable pour la vie de la batterie.</string>
   <string name="time_before_logging_dialog_title">Temps en secondes</string>
   <string name="time_before_logging_hint">Entrez secondes (max 9999)</string>
   <string name="keep_fix_summary">Attention, cela va réduire considérablement la vie de la batterie. Utiliser uniquement pour
 une plus grande précision à basses fréquences.</string>
   <string name="keep_fix_title">Gardez GPS allumer entre les différents enregistrements de positions</string>
-  <string name="retry_time_title">Intervalle entre les tentatives en cas d\'échec</string>
-  <string name="retry_time_summary">Si aucune solution n\'est trouvée correspondant à vos critères, attendre aussi longtemps et réessayez. Utilisez 0 pour continuer à essayer indéfiniment.</string>
+  <string name="retry_time_title">Intervalle de temps pour la précision</string>
   <string name="retry_time_dialog_title">Temps en secondes</string>
   <string name="retry_time_hint">Entrer les secondes (max. 9999)</string>
-  <string name="distance_before_logging_title">Distance entre les points</string>
-  <string name="distance_before_logging_summary">Que doit être la distance au point précédant avant que ce point est enregistré. Utilisez 0 pour enregistrer tout les points.</string>
-  <string name="accuracy_before_logging_title">Précision minimale par point</string>
-  <string name="accuracy_before_logging_summary">Que devrait être la précision de la position GPS actuelle avant qu\'elle ne soit enregistré. Utilisez 0 pour enregistrer tous les points.</string>
+  <string name="distance_before_logging_title">Distance avant l\'enregistrement</string>
   <string name="timeout_time_title">Délai</string>
   <string name="timeout_time_summary">Combien de temps le GPS reste allumé à la recherche d\'une solution avant d\'abandonner. Utilisez 0 pour aucun délai</string>
   <string name="timeout_time_dialog_title">Temps en secondes</string>
@@ -300,4 +295,9 @@ une plus grande précision à basses fréquences.</string>
   <string name="menu_faq">Aide et questions fréquemment posées</string>
   <string name="gpsf_missing">Service Manquant</string>
   <string name="gpsf_missing_description">Vous aurez besoin de Google Play Services Framework pour utiliser cette fonction.</string>
+  <string name="pref_loggingto_title">Connectez-vous...</string>
+  <string name="log_customurl_urlparameters">Paramètres d\'URL</string>
+  <string name="log_customUrl_urllatitude">Latitude: %LAT</string>
+  <string name="txt_annotation">Annotation :</string>
+  <string name="txt_provider">Fournisseur :</string>
 </resources>

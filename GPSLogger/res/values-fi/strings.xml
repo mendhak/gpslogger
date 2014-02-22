@@ -47,11 +47,8 @@
   <string name="pref_performance_title">Suorituskyky</string>
   <string name="time_before_logging_dialog_title">Aika sekunteina</string>
   <string name="keep_fix_title">Pidä aina GPS päällä</string>
-  <string name="retry_time_title">Uudelleenyritysväli vian sattuessa</string>
   <string name="retry_time_dialog_title">Aika sekunteina</string>
   <string name="retry_time_hint">Anna sekunnit (max 9999)</string>
-  <string name="distance_before_logging_title">Pisteiden välimatka</string>
-  <string name="accuracy_before_logging_title">Pisteen vähimmäistarkkuus</string>
   <string name="timeout_time_title">Aikakatkaisu</string>
   <string name="timeout_time_dialog_title">Aika sekunteina</string>
   <string name="show_notification_title">Näytä ilmoitus</string>

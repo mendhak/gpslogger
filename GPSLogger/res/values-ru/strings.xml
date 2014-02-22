@@ -122,19 +122,12 @@
         батарею.
     </string>
   <string name="time_before_logging_title">Период логирования точки</string>
-  <string name="time_before_logging_summary">Как долго ждать между сохранениями GPS точек. Используйте 0 для максимальной частоты, но медленнее лучше для жизни батареи.</string>
   <string name="time_before_logging_dialog_title">Время в секундах</string>
   <string name="time_before_logging_hint">Введите число секунд (max 9999)</string>
   <string name="keep_fix_summary">Будьте осторожны, это значительно сократит жизнь батареи. Используйте только для высокой точности с низкими интервалами.</string>
   <string name="keep_fix_title">Держать GPS включенным между местоопределениями</string>
-  <string name="retry_time_title">Интервал повтора при ошибке</string>
-  <string name="retry_time_summary">Если не найдено местоположение соответствующее критерию, сколько надо ждать прежде чем повторить попытку. Используйте 0 для бесконечного количества попыток.</string>
   <string name="retry_time_dialog_title">Время в секундах</string>
   <string name="retry_time_hint">Введите интервал в секундах (максимум 9999)</string>
-  <string name="distance_before_logging_title">Расстояние между точками</string>
-  <string name="distance_before_logging_summary">Какого должно быть расстояние до предыдущей точки прежде чем текущая точка будет сохранена. Используйте 0 для сохранения всех точек.</string>
-  <string name="accuracy_before_logging_title">Минимальная точность на точку</string>
-  <string name="accuracy_before_logging_summary">Насколько точно должно быть текущее GPS местоположение прежде чем оно занесется в журнал. Используйте 0 для сохранения всех точек.</string>
   <string name="timeout_time_title">Тайм-аут</string>
   <string name="timeout_time_summary">Как долго GPS остается в местоопределении перед отказом. Используйте 0 для отключения тайм-аута</string>
   <string name="timeout_time_dialog_title">Время в секундах</string>

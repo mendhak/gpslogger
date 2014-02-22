@@ -121,19 +121,12 @@
         baterii.
     </string>
   <string name="time_before_logging_title">Čas před záznamem</string>
-  <string name="time_before_logging_summary">Jak dlouho čekat mezi záznamem GPS bodů. Použijte 0 pro maximální frekvenci, ale pomalejší je lepší pro výdrž na baterii.</string>
   <string name="time_before_logging_dialog_title">Čas v sekundách</string>
   <string name="time_before_logging_hint">Zadejte sekundy (maximum 9999)</string>
   <string name="keep_fix_summary">Buďte opatrní, toto dramaticky sníží výdrž na baterii. Použijte pouze pro vyšší přesnost při nízkých frekvencích.</string>
   <string name="keep_fix_title">Ponechat GPS zapnutou mezi opravami</string>
-  <string name="retry_time_title">Interval zkoušení znovu při selhání</string>
-  <string name="retry_time_summary">Pokud se nenajde oprava odpovídající vašim kritériím, čekej takhle dlouho a zkus znovu. Použijte 0 pro pokračování do nekonečna.</string>
   <string name="retry_time_dialog_title">Čas v sekundách</string>
   <string name="retry_time_hint">Zadejte sekundy (max 9999)</string>
-  <string name="distance_before_logging_title">Vzdálenost mezi body</string>
-  <string name="distance_before_logging_summary">Jaká má být vzdálenost k předchozímu bodu než se načte další bod. Použijte 0 pro záznam všech bodů.</string>
-  <string name="accuracy_before_logging_title">Minimální přesnost na bod</string>
-  <string name="accuracy_before_logging_summary">Jak přesná má být oprava aktuální GPS pozice než se zaznamená. Použijte 0 pro záznam všech bodů.</string>
   <string name="timeout_time_title">Časový limit</string>
   <string name="timeout_time_summary">Jak dlouho GPS hledá opravu než to vzdá. Použijte 0 pro žádný časový limit</string>
   <string name="timeout_time_dialog_title">Čas v sekundách</string>

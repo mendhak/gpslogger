@@ -39,24 +39,24 @@
   <string name="sharing_mylocation">Min plats</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Dela via</string>
-  <string name="foot"> fot</string>
-  <string name="feet"> fot</string>
-  <string name="meter"> meter</string>
-  <string name="meters"> meter</string>
+  <string name="foot">&#160;fot</string>
+  <string name="feet">&#160;fot</string>
+  <string name="meter">&#160;meter</string>
+  <string name="meters">&#160;meter</string>
   <string name="error">Fel</string>
   <string name="error_connection">Anslutningsfel. Kontrollera telefonens inställningar.</string>
   <string name="gpsprovider_unavailable">Ingen GPS-leverantör finns tillgänglig. Kontrollera inställningarna för plats och aktivera en plats-leverantör.     </string>
   <string name="started">Startad</string>
-  <string name="providername_using">    (Använder %s)</string>
+  <string name="providername_using">&#160;&#160;&#160;&#160;(Använder %s)</string>
   <string name="providername_gps">GPS-satelliter</string>
   <string name="providername_celltower">mobilmaster</string>
   <string name="not_applicable">n/a</string>
-  <string name="meters_per_second"> m/s</string>
-  <string name="feet_per_second"> ft/s</string>
-  <string name="miles_per_hour"> mi/h</string>
-  <string name="miles"> Mi</string>
-  <string name="kilometers_per_hour"> km/h</string>
-  <string name="kilometers"> km</string>
+  <string name="meters_per_second">&#160;m/s</string>
+  <string name="feet_per_second">&#160;ft/s</string>
+  <string name="miles_per_hour">&#160;mi/h</string>
+  <string name="miles">&#160;Mi</string>
+  <string name="kilometers_per_hour">&#160;km/h</string>
+  <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">okänd</string>
   <string name="sorry">Tyvärr</string>
   <string name="success">Hurra!</string>
@@ -95,7 +95,7 @@
   <string name="settings_accuracy_in_meters">Noggrannhet i meter</string>
   <string name="settings_accuracy_in_feet">Noggrannhet i fot</string>
   <string name="settings_enter_meters">Ange meter (max 9999)</string>
-  <string name="settings_converting_title">Konverterar…</string>
+  <string name="settings_converting_title">Konverterar&#8230;</string>
   <string name="settings_converting_description">Konverterar enheter för minsta avstånd. Värden över 9999 sätts till 9999. Inställningsskärmen laddas sedan om.</string>
   <string name="pref_logging_title">Loggningsdetaljer</string>
   <string name="log_gpx_title">Logga till GPX</string>
@@ -115,22 +115,24 @@
   <string name="prefer_celltower_title">Föredra mobilmaster</string>
   <string name="prefer_celltower_summary">Använder mobilmaster istället för satelliter. Mindre noggrant, men sparar mer batteri.     </string>
   <string name="time_before_logging_title">Tid innan loggning</string>
-  <string name="time_before_logging_summary">Tid att vänta mellan loggning av GPS-punkter. Använd 0 för maximal frekvens, men långsammare är bättre för batterilivslängden.
+  <string name="time_before_logging_summary">Använd 0 för maximal frekvens, men långsammare drar mindre batteri.
     </string>
   <string name="time_before_logging_dialog_title">Tid i sekunder</string>
   <string name="time_before_logging_hint">Ange sekunder (max 9999)</string>
   <string name="keep_fix_summary">Observera att detta minskar batterilivslängden drastiskt. Använd endast för högre precision vid låga frekvenser.
     </string>
   <string name="keep_fix_title">Behåll GPS på mellan fixeringar</string>
-  <string name="retry_time_title">Intervall för nytt försök vid misslyckande</string>
-  <string name="retry_time_summary">Vänta så här länge innan ett nytt försök görs om ingen fixering hittas som uppfyller dina kriterier. Använd 0 för att ständigt försöka på nytt.</string>
+  <string name="retry_time_title">Tidsintervall för noggrannhet</string>
+  <string name="retry_time_summary">Använd 0 för maximal frekvens, men långsammare drar mindre batteri.
+    </string>
   <string name="retry_time_dialog_title">Tid i sekunder</string>
   <string name="retry_time_hint">Ange sekunder (max 9999)</string>
-  <string name="distance_before_logging_title">Avstånd mellan punkter</string>
-  <string name="distance_before_logging_summary">Vad distansen till föregående punkt ska vara innan en ny loggas. Använd 0 för att logga alla punkter.
+  <string name="distance_before_logging_title">Avstånd innan loggning</string>
+  <string name="distance_before_logging_summary">Avstånd innan nästa punkt loggas. Använd 0 för att logga alla punkter.
     </string>
-  <string name="accuracy_before_logging_title">Minimal noggrannhet per punkt</string>
-  <string name="accuracy_before_logging_summary">Hur noggrann aktuell GPS-fixering ska vara innan den loggas. Använd 0 för att logga alla punkter.</string>
+  <string name="accuracy_before_logging_title">Noggrannhet innan loggning</string>
+  <string name="accuracy_before_logging_summary">Min. noggrannhet för loggning. Använd 0 för att logga alla punkter.
+    </string>
   <string name="timeout_time_title">Timeout</string>
   <string name="timeout_time_summary">Hur länge GPS:en söker en fixering innan den ger upp. Använd 0 för att inte ha någon gräns</string>
   <string name="timeout_time_dialog_title">Tid i sekunder</string>
@@ -306,4 +308,10 @@
   <string name="menu_faq">Hjälp och FAQ</string>
   <string name="gpsf_missing">Saknad tjänst</string>
   <string name="gpsf_missing_description">Du behöver ramverket Google Play Tjänster för att använda denna funktion.</string>
+  <string name="pref_loggingto_title">Logga till...</string>
+  <string name="pref_loggingto_summary">Filer och mål att logga din plats till</string>
+  <string name="log_customurl_title">Logga till valfri URL</string>
+  <string name="log_customurl_summary">Skicka loggningsinfo till din egen server via HTTP</string>
+  <string name="log_customurl_urlparameters">URL-parametrar</string>
+  <string name="log_customUrl_urllatitude">Latitud: %LAT</string>
 </resources>
