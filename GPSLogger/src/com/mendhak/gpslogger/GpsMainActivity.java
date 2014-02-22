@@ -186,6 +186,8 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         super.onResume();
         GetPreferences();
         StartAndBindService();
+
+        EnableDisableMenuItems();
     }
 
     /**
@@ -465,6 +467,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
         inflater.inflate(R.menu.optionsmenu, menu);
         mnuAnnotate = menu.findItem(R.id.mnuAnnotate);
+        EnableDisableMenuItems();
         this.menu = menu;
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -1154,6 +1157,23 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         }
 
     }
+
+    private void EnableDisableMenuItems() {
+        if(mnuAnnotate == null)
+        {
+            return;
+        }
+
+        if(!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml() && !AppSettings.shouldLogToCustomUrl())
+        {
+            mnuAnnotate.setIcon(R.drawable.ic_menu_edit_disabled);
+        }
+        else
+        {
+            mnuAnnotate.setIcon(R.drawable.ic_menu_edit);
+        }
+    }
+
 
     public void OnLocationUpdate(Location loc)
     {
