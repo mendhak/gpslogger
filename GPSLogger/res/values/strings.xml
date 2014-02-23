@@ -429,6 +429,15 @@
     <string name="txt_time_isoformat">Time UTC (2011-12-25T15:27:33Z):</string>
     <string name="txt_provider">Provider:</string>
     <string name="annotation_requires_logging">Annotations require logging to GPX/KML/Custom URL</string>
+    <string name="filedialog_location">Location</string>
+    <string name="filedialog_cantreadfolder">Folder can\'t be read</string>
+    <string name="filedialog_new">New</string>
+    <string name="filedialog_name">Folder name:</string>
+    <string name="filedialog_create">Save</string>
+    <string name="filedialog_select">Select</string>
+    <string name="filedialog_no_data">No data</string>
+    <string name="gpslogger_folder_title">Save to folder</string>
+    <string name="gpslogger_folder_summary">Where to save the log files to, defaults to /sdcard/GPSLogger</string>
 
 
 </resources>

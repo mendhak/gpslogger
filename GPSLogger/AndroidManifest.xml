@@ -47,6 +47,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".common.FileDialog.FileDialog" ></activity>
 
         <activity android:name="com.mendhak.gpslogger.Faqtivity"
                   android:label="@string/faq_screen_title"

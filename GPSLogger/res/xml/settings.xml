@@ -27,6 +27,8 @@
                       android:summary="@string/pref_logging_summary">
         <PreferenceCategory android:title="@string/pref_logging_title">
 
+            <Preference android:key="gpslogger_folder" android:title="@string/gpslogger_folder_title"
+                        android:summary="@string/gpslogger_folder_summary"></Preference>
 
             <ListPreference android:key="new_file_creation"
                             android:title="@string/new_file_creation_title"
