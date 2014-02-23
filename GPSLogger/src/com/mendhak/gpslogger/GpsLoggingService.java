@@ -390,7 +390,7 @@ public class GpsLoggingService extends Service implements IActionListener
         Utilities.LogInfo("Starting logging procedures");
         try
         {
-            startForeground(NOTIFICATION_ID, new Notification());
+            startForeground(NOTIFICATION_ID, null);
         }
         catch (Exception ex)
         {
