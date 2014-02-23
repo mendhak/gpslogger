@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import com.google.android.gms.auth.GoogleAuthUtil;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.IFileSender;
@@ -181,7 +182,7 @@ public class GDocsHelper implements IActionListener, IFileSender
         try
         {
 
-            File gpsDir = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+            File gpsDir = new File(AppSettings.getGpsLoggerFolder());
             File gpxFile = new File(gpsDir, fileName);
             FileInputStream fis = new FileInputStream(gpxFile);
 

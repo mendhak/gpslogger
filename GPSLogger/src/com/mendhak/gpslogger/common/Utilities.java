@@ -22,6 +22,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -269,6 +270,7 @@ public class Utilities
         AppSettings.setFtpUseFtps(prefs.getBoolean("autoftp_useftps", false));
         AppSettings.setFtpProtocol(prefs.getString("autoftp_ssltls",""));
         AppSettings.setFtpImplicit(prefs.getBoolean("autoftp_implicit", false));
+        AppSettings.setGpsLoggerFolder(prefs.getString("gpslogger_folder", Environment.getExternalStorageDirectory() + "/GPSLogger"));
 
     }
 

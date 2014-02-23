@@ -73,6 +73,9 @@ public class AppSettings extends Application
     private static String staticFileName;
     private static boolean isStaticFile;
 
+    private static String gpsLoggerFolder;
+
+
 
     /**
      * @return the useImperial
@@ -647,5 +650,13 @@ public class AppSettings extends Application
 
     public static void setCustomLoggingUrl(String customLoggingUrl) {
         AppSettings.customLoggingUrl = customLoggingUrl;
+    }
+
+    public static String getGpsLoggerFolder() {
+        return gpsLoggerFolder;
+    }
+
+    public static void setGpsLoggerFolder(String gpsLoggerFolder) {
+        AppSettings.gpsLoggerFolder = gpsLoggerFolder;
     }
 }

@@ -30,7 +30,7 @@ public class FileLoggerFactory
 {
     public static List<IFileLogger> GetFileLoggers()
     {
-        File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+        File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
         if (!gpxFolder.exists())
         {
             gpxFolder.mkdirs();

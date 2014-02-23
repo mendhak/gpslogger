@@ -75,8 +75,7 @@ public class FileSenderFactory
 
         final String currentFileName = Session.getCurrentFileName();
 
-        File gpxFolder = new File(Environment.getExternalStorageDirectory(),
-                "GPSLogger");
+        File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
         if (!gpxFolder.exists())
         {

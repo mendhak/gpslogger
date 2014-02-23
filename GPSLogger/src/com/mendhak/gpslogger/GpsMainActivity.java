@@ -565,7 +565,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         {
 
             final String locationOnly = getString(R.string.sharing_location_only);
-            final File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+            final File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
             if (gpxFolder.exists())
             {
 
@@ -760,7 +760,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
     private void ShowFileListDialog(final Intent settingsIntent, final IFileSender sender)
     {
 
-        final File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+        final File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
         if (gpxFolder.exists())
         {
@@ -1216,8 +1216,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         {
 
 
-            txtFilename.setText(getString(R.string.summary_current_filename_format,
-                    Session.getCurrentFileName()));
+            txtFilename.setText(Session.getCurrentFileName() + " (" + AppSettings.getGpsLoggerFolder() + ")" );
         }
         else
         {

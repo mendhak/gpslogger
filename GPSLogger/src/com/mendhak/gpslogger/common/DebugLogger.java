@@ -58,7 +58,7 @@ class DebugLogWriter implements Runnable
         try
         {
             File gpxFolder = new File(
-                    Environment.getExternalStorageDirectory(), "GPSLogger");
+                    AppSettings.getGpsLoggerFolder());
 
             if (!gpxFolder.exists())
             {

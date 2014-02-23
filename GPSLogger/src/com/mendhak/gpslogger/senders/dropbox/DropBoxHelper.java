@@ -27,6 +27,7 @@ import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 import com.dropbox.client2.session.Session;
 import com.dropbox.client2.session.TokenPair;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.IFileSender;
@@ -247,7 +248,7 @@ public class DropBoxHelper implements IActionListener, IFileSender
         {
             try
             {
-                File gpsDir = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+                File gpsDir = new File(AppSettings.getGpsLoggerFolder());
                 File gpxFile = new File(gpsDir, fileName);
 
                 FileInputStream fis = new FileInputStream(gpxFile);

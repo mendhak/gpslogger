@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.IFileSender;
@@ -152,7 +153,7 @@ public class OSMHelper implements IActionListener, IFileSender
 
     public void UploadFile(String fileName)
     {
-        File gpxFolder = new File(Environment.getExternalStorageDirectory(), "GPSLogger");
+        File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
         File chosenFile = new File(gpxFolder, fileName);
         OAuthConsumer consumer = GetOSMAuthConsumer(ctx);
         String gpsTraceUrl = ctx.getString(R.string.osm_gpstrace_url);
