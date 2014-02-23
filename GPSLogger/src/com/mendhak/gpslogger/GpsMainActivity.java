@@ -56,6 +56,7 @@ import com.mendhak.gpslogger.senders.osm.OSMHelper;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
 
 import java.io.File;
+import java.text.NumberFormat;
 import java.util.*;
 
 public class GpsMainActivity extends SherlockActivity implements OnCheckedChangeListener,
@@ -1014,7 +1015,12 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
 
             tvDateTime.setText(new Date(Session.getLatestTimeStamp()).toLocaleString()
                     + getString(R.string.providername_using, providerName));
-            tvLatitude.setText(String.valueOf(loc.getLatitude()));
+
+            NumberFormat nf = NumberFormat.getInstance();
+            nf.setMaximumFractionDigits(3);
+
+
+            tvLatitude.setText(String.valueOf(   loc.getLatitude()));
             tvLongitude.setText(String.valueOf(loc.getLongitude()));
 
             if (loc.hasAltitude())
@@ -1024,12 +1030,12 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
 
                 if (AppSettings.shouldUseImperial())
                 {
-                    tvAltitude.setText(String.valueOf(Utilities.MetersToFeet(altitude))
+                    tvAltitude.setText( nf.format(Utilities.MetersToFeet(altitude))
                             + getString(R.string.feet));
                 }
                 else
                 {
-                    tvAltitude.setText(String.valueOf(altitude) + getString(R.string.meters));
+                    tvAltitude.setText(nf.format(altitude) + getString(R.string.meters));
                 }
 
             }
@@ -1070,7 +1076,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
                     }
                 }
 
-                txtSpeed.setText(String.valueOf(speed) + unit);
+                txtSpeed.setText(String.valueOf(nf.format(speed)) + unit);
 
             }
             else
@@ -1108,12 +1114,12 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
                 if (AppSettings.shouldUseImperial())
                 {
                     txtAccuracy.setText(getString(R.string.accuracy_within,
-                            String.valueOf(Utilities.MetersToFeet(accuracy)), getString(R.string.feet)));
+                            nf.format(Utilities.MetersToFeet(accuracy)), getString(R.string.feet)));
 
                 }
                 else
                 {
-                    txtAccuracy.setText(getString(R.string.accuracy_within, String.valueOf(accuracy),
+                    txtAccuracy.setText(getString(R.string.accuracy_within, nf.format(accuracy),
                             getString(R.string.meters)));
                 }
 
