@@ -214,7 +214,7 @@ public class IgcFileLogger extends AbstractLogger implements IFileLogger
 					if (b[offset+i] != '\r' && b[offset+i] != '\n')
 						sig.update(b, offset + i, 1);
 			} catch (SignatureException ex) {
-				throw new IOException(ex);
+				throw new IOException(ex.getMessage());
 			}
 		}
 
