@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="net.kataplop.gpslogger" android:versionCode="20140217"
-          android:versionName="20140217" android:installLocation="auto">
+          package="net.kataplop.gpslogger" android:versionCode="20140228"
+          android:versionName="20140228" android:installLocation="auto">
 
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="16"/>
 
