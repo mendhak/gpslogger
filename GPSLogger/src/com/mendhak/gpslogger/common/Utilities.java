@@ -23,19 +23,27 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import net.kataplop.gpslogger.R;
+
 import com.mendhak.gpslogger.senders.ftp.FtpHelper;
+
+import net.kataplop.gpslogger.R;
+
 import org.w3c.dom.Document;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 public class Utilities
 {
@@ -126,7 +134,7 @@ public class Utilities
             PackageInfo pInfo =  context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             AppSettings.setVersionName(pInfo.versionName);
         } catch(Exception e){
-            AppSettings.setVersionName("unkown");
+            AppSettings.setVersionName("unknown");
         }
 
         AppSettings.setUseImperial(prefs.getBoolean("useImperial", false));
