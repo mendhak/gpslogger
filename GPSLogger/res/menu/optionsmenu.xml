@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:id="@+id/mnuSettings" android:title="@string/menu_settings"
-		android:icon="@android:drawable/ic_menu_preferences" />
+		android:icon="@drawable/ic_menu_preferences" />
 	
-	<item android:id="@+id/mnuEmailnow" android:title="@string/menu_email_now" android:icon="@android:drawable/ic_menu_send" />
+	<item android:id="@+id/mnuEmailnow" android:title="@string/menu_email_now" android:icon="@drawable/ic_menu_send" />
 
 	<item android:id="@+id/mnuAnnotate" android:title="@string/menu_annotate" android:icon="@android:drawable/ic_menu_edit" android:showAsAction="always" />
 	<item android:id="@+id/mnuShare" android:title="@string/menu_share" android:icon="@android:drawable/ic_menu_share" android:showAsAction="always" />
@@ -22,15 +22,17 @@
     </item>
 
     <item android:id="@+id/mnuPrefsExport" android:title="@string/menu_pexp"
+          android:icon="@drawable/ic_menu_exp"
           />
 
     <item android:id="@+id/mnuPrefsImport" android:title="@string/menu_pimp"
+          android:icon="@drawable/ic_menu_imp"
           />
 
     <item android:id="@+id/mnuFAQ" android:title="@string/menu_faq"
-          android:icon="@android:drawable/ic_menu_help" />
+          android:icon="@drawable/ic_menu_help" />
 
     <item android:id="@+id/mnuExit" android:title="@string/menu_exit"
-          android:icon="@android:drawable/ic_menu_close_clear_cancel"/>
+          android:icon="@drawable/ic_menu_close_clear_cancel"/>
 
 </menu>

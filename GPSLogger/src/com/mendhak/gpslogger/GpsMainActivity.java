@@ -322,11 +322,13 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
                 int scale= intent.getIntExtra(BatteryManager.EXTRA_SCALE,100);
                 int percent = (level*100)/scale;
                 Utilities.LogDebug("Got battery level: "+percent+"%");
-                if(percent<AppSettings.getCritBattLevel()) {
-                    Utilities.LogDebug("Stop logging - battery level below critical");
+                if(percent<=AppSettings.getCritBattLevel()) {
+                    Utilities.LogDebug("Stop logging - battery level equal or below critical");
                     loggingService.StopLogging();
-                    ShowPreferencesSummary();
+                    SetMainButtonChecked(false);
+//                    ShowPreferencesSummary();
                     loggingService.stopSelf();
+                    loggingService.SetStatus(getString(R.string.stopped));
                 }
             }
         }
