@@ -130,6 +130,7 @@ public class AutoFtpActivity extends SherlockPreferenceActivity implements IActi
         CheckBoxPreference useFtpsPreference = (CheckBoxPreference)findPreference("autoftp_useftps");
         ListPreference sslTlsPreference = (ListPreference)findPreference("autoftp_ssltls");
         CheckBoxPreference implicitPreference = (CheckBoxPreference)findPreference("autoftp_implicit");
+        EditTextPreference directoryPreference = (EditTextPreference)findPreference("autoftp_directory");
 
         if(!helper.ValidSettings(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
                 Integer.valueOf(portPreference.getText()), useFtpsPreference.isChecked(), sslTlsPreference.getValue(),
@@ -147,8 +148,8 @@ public class AutoFtpActivity extends SherlockPreferenceActivity implements IActi
 
 
         helper.TestFtp(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
-                Integer.valueOf(portPreference.getText()), useFtpsPreference.isChecked(), sslTlsPreference.getValue(),
-                implicitPreference.isChecked());
+                directoryPreference.getText(), Integer.valueOf(portPreference.getText()), useFtpsPreference.isChecked(),
+                sslTlsPreference.getValue(), implicitPreference.isChecked());
 
         return true;
     }

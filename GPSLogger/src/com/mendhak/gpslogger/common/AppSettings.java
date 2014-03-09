@@ -66,6 +66,7 @@ public class AppSettings extends Application
     private static int ftpPort;
     private static String ftpUsername;
     private static String ftpPassword;
+    private static String ftpDirectory;
     private static boolean ftpUseFtps;
     private static String ftpProtocol;
     private static boolean ftpImplicit;
@@ -658,5 +659,13 @@ public class AppSettings extends Application
 
     public static void setGpsLoggerFolder(String gpsLoggerFolder) {
         AppSettings.gpsLoggerFolder = gpsLoggerFolder;
+    }
+
+    public static String getFtpDirectory() {
+        return ftpDirectory;
+    }
+
+    public static void setFtpDirectory(String ftpDirectory) {
+        AppSettings.ftpDirectory = ftpDirectory;
     }
 }

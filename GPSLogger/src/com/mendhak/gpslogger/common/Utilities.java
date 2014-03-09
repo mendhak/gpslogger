@@ -266,6 +266,7 @@ public class Utilities
         AppSettings.setFtpServerName(prefs.getString("autoftp_server",""));
         AppSettings.setFtpUsername(prefs.getString("autoftp_username",""));
         AppSettings.setFtpPassword(prefs.getString("autoftp_password",""));
+        AppSettings.setFtpDirectory(prefs.getString("autoftp_directory", "GPSLogger"));
         AppSettings.setFtpPort(Integer.valueOf(prefs.getString("autoftp_port", "21")));
         AppSettings.setFtpUseFtps(prefs.getBoolean("autoftp_useftps", false));
         AppSettings.setFtpProtocol(prefs.getString("autoftp_ssltls",""));

@@ -37,12 +37,12 @@ public class FtpHelper implements IFileSender
         this.callback = callback;
     }
 
-    void TestFtp(String servername, String username, String password, int port, boolean useFtps, String protocol, boolean implicit)
+    void TestFtp(String servername, String username, String password, String directory, int port, boolean useFtps, String protocol, boolean implicit)
     {
         String data = "GPSLogger for Android, test file.  Generated at " + (new Date()).toLocaleString() + "\r\n";
         ByteArrayInputStream in = new ByteArrayInputStream(data.getBytes());
 
-        Thread t = new Thread(new FtpUploadHandler(callback, servername, port, username, password,
+        Thread t = new Thread(new FtpUploadHandler(callback, servername, port, username, password, directory,
                 useFtps, protocol, implicit, in, "gpslogger_test.txt"));
         t.start();
     }
@@ -90,7 +90,7 @@ public class FtpHelper implements IFileSender
         {
             FileInputStream fis = new FileInputStream(f);
             Thread t = new Thread(new FtpUploadHandler(callback, AppSettings.getFtpServerName(), AppSettings.getFtpPort(),
-                    AppSettings.getFtpUsername(), AppSettings.getFtpPassword(),
+                    AppSettings.getFtpUsername(), AppSettings.getFtpPassword(), AppSettings.getFtpDirectory(),
                     AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit(),
                     fis, f.getName()));
             t.start();
@@ -135,9 +135,10 @@ class FtpUploadHandler implements Runnable
     boolean implicit;
     InputStream inputStream;
     String fileName;
+    String directory;
 
     public FtpUploadHandler(IActionListener helper, String server, int port, String username,
-                            String password, boolean useFtps, String protocol, boolean implicit,
+                            String password, String directory, boolean useFtps, String protocol, boolean implicit,
                             InputStream inputStream, String fileName)
     {
         this.helper = helper;
@@ -150,12 +151,13 @@ class FtpUploadHandler implements Runnable
         this.implicit = implicit;
         this.inputStream = inputStream;
         this.fileName = fileName;
+        this.directory = directory;
     }
 
     @Override
     public void run()
     {
-        if (Ftp.Upload(server, username, password, port, useFtps, protocol, implicit, inputStream, fileName))
+        if (Ftp.Upload(server, username, password, directory, port, useFtps, protocol, implicit, inputStream, fileName))
         {
             helper.OnComplete();
         }

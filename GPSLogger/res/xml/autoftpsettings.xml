@@ -26,6 +26,12 @@
             android:dialogTitle="@string/autoftp_password"
             android:password="true"/>
 
+    <EditTextPreference
+            android:key="autoftp_directory"
+            android:title="@string/autoftp_directory"
+            android:dialogTitle="@string/autoftp_directory"
+            />
+
     <Preference android:title="@string/autoftp_test"
                 android:summary="@string/autoftp_test_summary" android:key="autoftp_test"/>
 
