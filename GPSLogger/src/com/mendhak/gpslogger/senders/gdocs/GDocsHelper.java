@@ -230,7 +230,7 @@ public class GDocsHelper implements IActionListener, IFileSender
                 if(Utilities.IsNullOrEmpty(gpsLoggerFolderId))
                 {
                     //Couldn't find folder, must create it
-                    gpsLoggerFolderId = CreateEmptyFile(token, "GPSLogger For Android", "application/vnd.google-apps.folder", "root");
+                    gpsLoggerFolderId = CreateEmptyFile(token, "GPSLogger For Android", GetMimeTypeFromFileName(fileName), "root");
 
                     if(Utilities.IsNullOrEmpty(gpsLoggerFolderId))
                     {
@@ -246,7 +246,7 @@ public class GDocsHelper implements IActionListener, IFileSender
                 if(Utilities.IsNullOrEmpty(gpxFileId))
                 {
                     //Create empty file first
-                    gpxFileId = CreateEmptyFile(token, fileName, "application/xml", gpsLoggerFolderId);
+                    gpxFileId = CreateEmptyFile(token, fileName, GetMimeTypeFromFileName(fileName), gpsLoggerFolderId);
 
                     if(Utilities.IsNullOrEmpty(gpxFileId))
                     {
@@ -258,7 +258,7 @@ public class GDocsHelper implements IActionListener, IFileSender
                 if(!Utilities.IsNullOrEmpty(gpxFileId))
                 {
                     //Set file's contents
-                    UpdateFileContents(token, gpxFileId, Utilities.GetByteArrayFromInputStream(inputStream));
+                    UpdateFileContents(token, gpxFileId, Utilities.GetByteArrayFromInputStream(inputStream), fileName);
                 }
 
                 callback.OnComplete();
@@ -274,7 +274,7 @@ public class GDocsHelper implements IActionListener, IFileSender
         }
     }
 
-    private String UpdateFileContents(String authToken, String gpxFileId, byte[] fileContents)
+    private String UpdateFileContents(String authToken, String gpxFileId, byte[] fileContents, String fileName)
     {
         HttpURLConnection conn = null;
         String fileId = null;
@@ -298,7 +298,7 @@ public class GDocsHelper implements IActionListener, IFileSender
             conn.setRequestMethod("PUT");
             conn.setRequestProperty("User-Agent", "GPSLogger for Android");
             conn.setRequestProperty("Authorization", "Bearer " + authToken);
-            conn.setRequestProperty("Content-Type", "application/xml");
+            conn.setRequestProperty("Content-Type", GetMimeTypeFromFileName(fileName));
             conn.setRequestProperty("Content-Length", String.valueOf(fileContents.length));
 
             conn.setUseCaches(false);
@@ -387,7 +387,7 @@ public class GDocsHelper implements IActionListener, IFileSender
 
             JSONObject fileMetadataJson = new JSONObject(fileMetadata);
             fileId = fileMetadataJson.getString("id");
-            Utilities.LogDebug("File created with ID " + fileId);
+            Utilities.LogDebug("File created with ID " + fileId + " of type " + mimeType);
 
         }
         catch (Exception e)
@@ -462,6 +462,22 @@ public class GDocsHelper implements IActionListener, IFileSender
         return fileId;
     }
 
+    private String GetMimeTypeFromFileName(String fileName){
+        if(fileName.endsWith("kml")){
+            return "application/vnd.google-earth.kml+xml";
+        }
+
+        if(fileName.endsWith("gpx")){
+            return "application/gpx+xml";
+        }
+
+        if(fileName.endsWith("zip")){
+            return "application/zip";
+        }
+
+        return "application/vnd.google-apps.spreadsheet";
+    }
+
 
 
 
@@ -470,7 +486,8 @@ public class GDocsHelper implements IActionListener, IFileSender
     {
         return name.toLowerCase().endsWith(".zip")
                 || name.toLowerCase().endsWith(".gpx")
-                || name.toLowerCase().endsWith(".kml");
+                || name.toLowerCase().endsWith(".kml")
+                || name.toLowerCase().endsWith(".txt");
     }
 
     @Override
