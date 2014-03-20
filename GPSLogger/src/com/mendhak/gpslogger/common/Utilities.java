@@ -856,4 +856,11 @@ public class Utilities
     }
 
 
+    public static String HtmlDecode(String text) {
+        if(IsNullOrEmpty(text)){
+            return text;
+        }
+
+        return text.replace("&amp;", "&").replace("&quot;", "\"");
+    }
 }

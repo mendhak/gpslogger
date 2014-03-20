@@ -26,6 +26,7 @@ import com.mendhak.gpslogger.loggers.IFileLogger;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -97,7 +98,7 @@ class HttpUrlLogHandler implements Runnable {
             logUrl = logUrl.replaceAll("(?i)%lat", String.valueOf(loc.getLatitude()));
             logUrl = logUrl.replaceAll("(?i)%lon", String.valueOf(loc.getLongitude()));
             logUrl = logUrl.replaceAll("(?i)%sat", String.valueOf(satellites));
-            logUrl = logUrl.replaceAll("(?i)%desc", String.valueOf(annotation));
+            logUrl = logUrl.replaceAll("(?i)%desc", String.valueOf(URLEncoder.encode(Utilities.HtmlDecode(annotation), "UTF-8")));
             logUrl = logUrl.replaceAll("(?i)%alt", String.valueOf(loc.getAltitude()));
             logUrl = logUrl.replaceAll("(?i)%acc", String.valueOf(loc.getAccuracy()));
             logUrl = logUrl.replaceAll("(?i)%dir", String.valueOf(loc.getBearing()));
