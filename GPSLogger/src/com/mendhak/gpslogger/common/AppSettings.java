@@ -76,6 +76,7 @@ public class AppSettings extends Application
 
     private static String gpsLoggerFolder;
 
+    private static boolean fileNamePrefixSerial;
 
 
     /**
@@ -667,5 +668,13 @@ public class AppSettings extends Application
 
     public static void setFtpDirectory(String ftpDirectory) {
         AppSettings.ftpDirectory = ftpDirectory;
+    }
+
+    public static boolean shouldPrefixSerialToFileName() {
+        return fileNamePrefixSerial;
+    }
+
+    public static void setFileNamePrefixSerial(boolean fileNamePrefixSerial) {
+        AppSettings.fileNamePrefixSerial = fileNamePrefixSerial;
     }
 }

@@ -272,6 +272,7 @@ public class Utilities
         AppSettings.setFtpProtocol(prefs.getString("autoftp_ssltls",""));
         AppSettings.setFtpImplicit(prefs.getBoolean("autoftp_implicit", false));
         AppSettings.setGpsLoggerFolder(prefs.getString("gpslogger_folder", Environment.getExternalStorageDirectory() + "/GPSLogger"));
+        AppSettings.setFileNamePrefixSerial(prefs.getBoolean("new_file_prefix_serial",false));
 
     }
 

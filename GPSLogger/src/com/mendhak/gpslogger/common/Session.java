@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.common;
 
 import android.app.Application;
 import android.location.Location;
+import android.os.Build;
 
 public class Session extends Application
 {
@@ -129,7 +130,21 @@ public class Session extends Application
      */
     public static String getCurrentFileName()
     {
+        if(AppSettings.getNewFileCreation().equals("static") && !Utilities.IsNullOrEmpty(currentFileName))
+        {
+            return currentFileName.replaceAll("(?i)%ser", String.valueOf(android.os.Build.SERIAL));
+        }
+        else
+        {
+            if(!Utilities.IsNullOrEmpty(currentFileName) && AppSettings.shouldPrefixSerialToFileName() && !currentFileName.contains(Build.SERIAL))
+            {
+                currentFileName = String.valueOf(Build.SERIAL) + "_" + currentFileName;
+            }
+        }
+
+
         return currentFileName;
+
     }
 
     /**

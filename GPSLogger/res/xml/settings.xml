@@ -39,7 +39,13 @@
                                 android:title="@string/new_file_static_title"
                                 android:summary="@string/new_file_static_summary"
                                 android:dialogTitle="@string/new_file_static_title"
+                                android:dialogMessage="@string/new_file_static_message"
                                 android:defaultValue="gpslogger"
+                                />
+            <CheckBoxPreference android:key="new_file_prefix_serial"
+                                android:title="@string/new_file_prefix_serial_title"
+                                android:summary="@string/new_file_prefix_serial_summary"
+                                android:defaultValue="false"
                                 />
         </PreferenceCategory>
         <PreferenceCategory android:title="@string/pref_performance_title">

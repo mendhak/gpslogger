@@ -20,6 +20,7 @@ package com.mendhak.gpslogger;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -113,6 +114,9 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
         /* Trigger artificially the listener and perform validations. */
         newFilePref.getOnPreferenceChangeListener()
                    .onPreferenceChange(newFilePref, newFilePref.getValue());
+
+        CheckBoxPreference chkfile_prefix_serial = (CheckBoxPreference) findPreference("new_file_prefix_serial");
+        chkfile_prefix_serial.setSummary(chkfile_prefix_serial.getSummary().toString() + "(" + Build.SERIAL + ")");
 
     }
 

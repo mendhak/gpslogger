@@ -439,6 +439,9 @@
     <string name="gpslogger_folder_title">Save to folder</string>
     <string name="gpslogger_folder_summary">Where to save the log files to, defaults to /sdcard/GPSLogger</string>
     <string name="autoftp_directory">Directory</string>
+    <string name="new_file_static_message">Use %SER for device serial number</string>
+    <string name="new_file_prefix_serial_title">Prefix the device serial number to the file name</string>
+    <string name="new_file_prefix_serial_summary">This is the serial number found in your phone status </string>
 
 
 </resources>
