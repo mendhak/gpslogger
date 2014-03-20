@@ -65,7 +65,8 @@ public class FileLoggerFactory
         if(AppSettings.shouldLogToCustomUrl())
         {
             float batteryLevel = Utilities.GetBatteryLevel(context);
-            loggers.add(new HttpUrlLogger(AppSettings.getCustomLoggingUrl(), Session.getSatelliteCount(), batteryLevel));
+            String androidId = Utilities.GetAndroidId(context);
+            loggers.add(new HttpUrlLogger(AppSettings.getCustomLoggingUrl(), Session.getSatelliteCount(), batteryLevel, androidId));
         }
 
 

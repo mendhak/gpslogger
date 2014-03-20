@@ -39,12 +39,14 @@ public class HttpUrlLogger implements IFileLogger {
     private final int satellites;
     private final String customLoggingUrl;
     private final float batteryLevel;
+    private final String androidId;
 
-    public HttpUrlLogger(String customLoggingUrl, int satellites, float batteryLevel)
+    public HttpUrlLogger(String customLoggingUrl, int satellites, float batteryLevel, String androidId)
     {
         this.satellites = satellites;
         this.customLoggingUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
+        this.androidId = androidId;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class HttpUrlLogger implements IFileLogger {
 
     @Override
     public void Annotate(String description, Location loc) throws Exception {
-        HttpUrlLogHandler writeHandler = new HttpUrlLogHandler(customLoggingUrl, loc, description, satellites, batteryLevel);
+        HttpUrlLogHandler writeHandler = new HttpUrlLogHandler(customLoggingUrl, loc, description, satellites, batteryLevel, androidId);
         Utilities.LogDebug(String.format("There are currently %s tasks waiting on the GPX10 EXECUTOR.", EXECUTOR.getQueue().size()));
         EXECUTOR.execute(writeHandler);
     }
@@ -72,13 +74,15 @@ class HttpUrlLogHandler implements Runnable {
     private int satellites;
     private String logUrl;
     private float batteryLevel;
+    private String androidId;
 
-    public HttpUrlLogHandler(String customLoggingUrl, Location loc, String annotation, int satellites, float batteryLevel) {
+    public HttpUrlLogHandler(String customLoggingUrl, Location loc, String annotation, int satellites, float batteryLevel, String androidId) {
         this.loc = loc;
         this.annotation = annotation;
         this.satellites = satellites;
         this.logUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
+        this.androidId = androidId;
     }
 
     @Override
@@ -87,7 +91,8 @@ class HttpUrlLogHandler implements Runnable {
             Utilities.LogDebug("Writing HTTP URL Logger");
             HttpURLConnection conn = null;
 
-            //String logUrl = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME&battery=%BATT";
+            //String logUrl = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV
+            // &spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER";
 
             logUrl = logUrl.replaceAll("(?i)%lat", String.valueOf(loc.getLatitude()));
             logUrl = logUrl.replaceAll("(?i)%lon", String.valueOf(loc.getLongitude()));
@@ -100,6 +105,9 @@ class HttpUrlLogHandler implements Runnable {
             logUrl = logUrl.replaceAll("(?i)%spd", String.valueOf(loc.getSpeed()));
             logUrl = logUrl.replaceAll("(?i)%time", String.valueOf(Utilities.GetIsoDateTime(new Date(loc.getTime()))));
             logUrl = logUrl.replaceAll("(?i)%batt", String.valueOf(batteryLevel));
+            logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));
+            logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(android.os.Build.SERIAL));
+
 
 
             Utilities.LogDebug(logUrl);

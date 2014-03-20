@@ -49,11 +49,11 @@ public class CustomUrlLoggerActivity extends SherlockActivity  {
 
         TextView legendView = (TextView)findViewById(R.id.textViewLegend);
 
-        String legend = MessageFormat.format("{0} %LAT\n{1} %LON\n{2} %DESC\n{3} %SAT\n{4} %ALT\n{5} %SPD\n{6} %ACC\n{7} %DIR\n{8} %PROV\n{9} %TIME\n{10} %BATT",
+        String legend = MessageFormat.format("{0} %LAT\n{1} %LON\n{2} %DESC\n{3} %SAT\n{4} %ALT\n{5} %SPD\n{6} %ACC\n{7} %DIR\n{8} %PROV\n{9} %TIME\n{10} %BATT\n{11} %AID\n{12} %SER",
                 getString(R.string.txt_latitude), getString(R.string.txt_longitude), getString(R.string.txt_annotation),
                 getString(R.string.txt_satellites), getString(R.string.txt_altitude), getString(R.string.txt_speed),
                 getString(R.string.txt_accuracy), getString(R.string.txt_direction), getString(R.string.txt_provider),
-                getString(R.string.txt_time_isoformat), "Battery:");
+                getString(R.string.txt_time_isoformat), "Battery:", "Android ID:", "Serial:");
         legendView.setText(legend);
 
     }
