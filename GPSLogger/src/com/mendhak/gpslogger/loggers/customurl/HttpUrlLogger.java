@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.loggers.customurl;
 import android.location.Location;
 import android.os.Build;
 import com.mendhak.gpslogger.common.RejectionHandler;
+import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 
@@ -52,7 +53,10 @@ public class HttpUrlLogger implements IFileLogger {
 
     @Override
     public void Write(Location loc) throws Exception {
-        Annotate("", loc);
+        if(!Session.hasDescription()){
+            Annotate("", loc);
+        }
+
     }
 
     @Override
