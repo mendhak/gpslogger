@@ -38,11 +38,13 @@ public class HttpUrlLogger implements IFileLogger {
     private final String name = "URL";
     private final int satellites;
     private final String customLoggingUrl;
+    private final float batteryLevel;
 
-    public HttpUrlLogger(String customLoggingUrl, int satellites)
+    public HttpUrlLogger(String customLoggingUrl, int satellites, float batteryLevel)
     {
         this.satellites = satellites;
         this.customLoggingUrl = customLoggingUrl;
+        this.batteryLevel = batteryLevel;
     }
 
     @Override
@@ -52,7 +54,7 @@ public class HttpUrlLogger implements IFileLogger {
 
     @Override
     public void Annotate(String description, Location loc) throws Exception {
-        HttpUrlLogHandler writeHandler = new HttpUrlLogHandler(customLoggingUrl, loc, description, satellites);
+        HttpUrlLogHandler writeHandler = new HttpUrlLogHandler(customLoggingUrl, loc, description, satellites, batteryLevel);
         Utilities.LogDebug(String.format("There are currently %s tasks waiting on the GPX10 EXECUTOR.", EXECUTOR.getQueue().size()));
         EXECUTOR.execute(writeHandler);
     }
@@ -69,12 +71,14 @@ class HttpUrlLogHandler implements Runnable {
     private String annotation;
     private int satellites;
     private String logUrl;
+    private float batteryLevel;
 
-    public HttpUrlLogHandler(String customLoggingUrl, Location loc, String annotation, int satellites) {
+    public HttpUrlLogHandler(String customLoggingUrl, Location loc, String annotation, int satellites, float batteryLevel) {
         this.loc = loc;
         this.annotation = annotation;
         this.satellites = satellites;
         this.logUrl = customLoggingUrl;
+        this.batteryLevel = batteryLevel;
     }
 
     @Override
@@ -83,7 +87,7 @@ class HttpUrlLogHandler implements Runnable {
             Utilities.LogDebug("Writing HTTP URL Logger");
             HttpURLConnection conn = null;
 
-            //String logUrl = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME";
+            //String logUrl = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME&battery=%BATT";
 
             logUrl = logUrl.replaceAll("(?i)%lat", String.valueOf(loc.getLatitude()));
             logUrl = logUrl.replaceAll("(?i)%lon", String.valueOf(loc.getLongitude()));
@@ -95,6 +99,7 @@ class HttpUrlLogHandler implements Runnable {
             logUrl = logUrl.replaceAll("(?i)%prov", String.valueOf(loc.getProvider()));
             logUrl = logUrl.replaceAll("(?i)%spd", String.valueOf(loc.getSpeed()));
             logUrl = logUrl.replaceAll("(?i)%time", String.valueOf(Utilities.GetIsoDateTime(new Date(loc.getTime()))));
+            logUrl = logUrl.replaceAll("(?i)%batt", String.valueOf(batteryLevel));
 
 
             Utilities.LogDebug(logUrl);

@@ -342,7 +342,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             TextView txtDistance = (TextView) findViewById(R.id.txtDistance);
             TextView txtAutoEmail = (TextView) findViewById(R.id.txtAutoEmail);
 
-            List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers();
+            List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers(getApplicationContext());
 
             if (loggers.size() > 0)
             {

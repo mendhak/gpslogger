@@ -895,7 +895,7 @@ public class GpsLoggingService extends Service implements IActionListener
     private void WriteToFile(Location loc)
     {
         Utilities.LogDebug("GpsLoggingService.WriteToFile");
-        List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers();
+        List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers(getApplicationContext());
         Session.setAddNewTrackSegment(false);
         boolean atLeastOneAnnotationSuccess = false;
 

@@ -17,9 +17,10 @@
 
 package com.mendhak.gpslogger.loggers;
 
-import android.os.Environment;
+import android.content.Context;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.customurl.HttpUrlLogger;
 
 import java.io.File;
@@ -28,7 +29,7 @@ import java.util.List;
 
 public class FileLoggerFactory
 {
-    public static List<IFileLogger> GetFileLoggers()
+    public static List<IFileLogger> GetFileLoggers(Context context)
     {
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
         if (!gpxFolder.exists())
@@ -63,7 +64,8 @@ public class FileLoggerFactory
 
         if(AppSettings.shouldLogToCustomUrl())
         {
-            loggers.add(new HttpUrlLogger(AppSettings.getCustomLoggingUrl(), Session.getSatelliteCount()));
+            float batteryLevel = Utilities.GetBatteryLevel(context);
+            loggers.add(new HttpUrlLogger(AppSettings.getCustomLoggingUrl(), Session.getSatelliteCount(), batteryLevel));
         }
 
 
