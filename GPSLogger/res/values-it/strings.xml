@@ -108,7 +108,7 @@
   <string name="new_file_creation_summary">Creare un nuovo file per ogni giorno oppure ad ogni avvio di registrazione.</string>
   <string name="new_file_creation_onceaday">Un file al giorno</string>
   <string name="new_file_creation_everystart">Un file ad ogni avvio</string>
-  <string name="new_file_creation_static">Nome file fisso</string>
+  <string name="new_file_creation_static">Nome del file fisso</string>
   <string name="new_file_static_title">Nome file fisso</string>
   <string name="new_file_static_summary">Inserisci il nome del file fisso che vorrai usare</string>
   <string name="pref_performance_title">Prestazioni</string>
@@ -127,8 +127,7 @@
   <string name="distance_before_logging_title">Distanza prima di registrare</string>
   <string name="distance_before_logging_summary">Di quanto mi devo spostare prima che un punto sia registrato. Usa 0 per registrare tutti i punti.</string>
   <string name="accuracy_before_logging_title">Precisione richiesta per registrare</string>
-  <string name="accuracy_before_logging_summary">Precisione minima richiesta al GPS per registrare un punto. Utilizzare 0 per registrare tutti i punti.
-    </string>
+  <string name="accuracy_before_logging_summary">Precisione minima richiesta al GPS per registrare un punto. Utilizzare 0 per registrare tutti i punti.</string>
   <string name="timeout_time_title">Timeout</string>
   <string name="timeout_time_summary">Quanto tempo il GPS deve rimanere acceso per avere un fix prima di annullare l\'operazione. Usa 0 per non avere un timeout (il GPS rimarrà acceso sino a che non ha trovato un fix)</string>
   <string name="timeout_time_dialog_title">Tempo in secondi</string>
@@ -222,18 +221,18 @@
   <string name="menu_upload">Caricamento</string>
   <string name="autoemail_from">Da: (mittente)</string>
   <string name="autoemail_from_summary">Alcuni provider di posta richiedono nella Email il mittente (Da:), usalo solo se richiesto.</string>
-  <string name="gdocs_upload">Google Docs</string>
-  <string name="gdocs_settings_screenname">Impostazioni di caricamento di Google Docs</string>
-  <string name="gdocs_startauthorization">Autorizza Google Docs</string>
-  <string name="gdocs_authorize_summary">Apri le impostazioni di Google Docs per autorizzare GPSLogger ad inviare files</string>
+  <string name="gdocs_upload">Google Drive</string>
+  <string name="gdocs_settings_screenname">Impostazioni di caricamento di Google Drive</string>
+  <string name="gdocs_startauthorization">Autorizza Google Drive</string>
+  <string name="gdocs_authorize_summary">Apri le impostazioni di Google Drive per autorizzare GPSLogger ad inviare files</string>
   <string name="gdocs_clearauthorization">Rimuovi Autorizzazione</string>
-  <string name="gdocs_clearauthorization_summary">Elimina l\'autorizzazione per Google Docs. Per eliminare definitivamente l\'accesso, vai nelle impostazioni di Google Accounts</string>
-  <string name="gdocs_setup_title">Google Docs</string>
-  <string name="gdocs_setup_summary">Autorizza Google Docs a ricevere files</string>
-  <string name="gdocs_test_summary">Carica su Google Docs un file di test</string>
+  <string name="gdocs_clearauthorization_summary">Elimina l\'autorizzazione per Google Drive. Per eliminare definitivamente l\'accesso, vai nelle impostazioni di Google Accounts</string>
+  <string name="gdocs_setup_title">Google Drive</string>
+  <string name="gdocs_setup_summary">Autorizza Google Drive a ricevere files</string>
+  <string name="gdocs_test_summary">Carica su Google Drive un file di test</string>
   <string name="gdocs_test_title">Test di caricamento</string>
   <string name="gdocs_testupload_error">Non riesco a caricare il file di test</string>
-  <string name="gdocs_testupload_success">Caricato! Vai su Google Docs e controlla il file.</string>
+  <string name="gdocs_testupload_success">Caricato! Vai su Google Drive e controlla il file.</string>
   <string name="gdocs_selectgoogleaccount">Seleziona un Account Google</string>
   <string name="email_upload">Invia un file con Email</string>
   <string name="autoemail_sendto_csv">Indirizzi Email separati da una virgola</string>
@@ -309,4 +308,5 @@
   <string name="txt_annotation">Nota:</string>
   <string name="txt_time_isoformat">Tempo UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Fonte:</string>
+  <string name="annotation_requires_logging">Le annotazioni richiedono che sia attivato il log su GPX/KML/CustomURL</string>
 </resources>
