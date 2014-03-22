@@ -309,4 +309,17 @@
   <string name="txt_time_isoformat">Tempo UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Fonte:</string>
   <string name="annotation_requires_logging">Le annotazioni richiedono che sia attivato il log su GPX/KML/CustomURL</string>
+  <string name="filedialog_location">Posizione</string>
+  <string name="filedialog_cantreadfolder">Impossibile leggere la cartella</string>
+  <string name="filedialog_new">Nuovo</string>
+  <string name="filedialog_name">Nome cartella:</string>
+  <string name="filedialog_create">Salva</string>
+  <string name="filedialog_select">Seleziona</string>
+  <string name="filedialog_no_data">Nessun dato</string>
+  <string name="gpslogger_folder_title">Salva nella cartella</string>
+  <string name="gpslogger_folder_summary">Dove salvare i files, default in /sdcard/GPSLogger</string>
+  <string name="autoftp_directory">Cartella</string>
+  <string name="new_file_static_message">Usa %SER come numero seriale del dispositivo</string>
+  <string name="new_file_prefix_serial_title">Premetti al nome del file il numero seriale del dispositivo</string>
+  <string name="new_file_prefix_serial_summary">Questo è il numero seriale del tuo dispositivo </string>
 </resources>
