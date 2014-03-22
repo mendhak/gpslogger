@@ -297,6 +297,10 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
 
     public void SetAnnotationButtonMarked(boolean marked)
     {
+        if(mnuAnnotate == null){
+            return;
+        }
+
         if (marked)
         {
             mnuAnnotate.setIcon(R.drawable.ic_menu_edit_active);
