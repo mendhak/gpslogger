@@ -766,7 +766,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
 
         final File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
-        if (gpxFolder.exists())
+        if (gpxFolder != null && gpxFolder.exists())
         {
             File[] enumeratedFiles = gpxFolder.listFiles(sender);
 
