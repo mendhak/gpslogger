@@ -77,7 +77,7 @@ public class FileSenderFactory
 
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
-        if (!gpxFolder.exists())
+        if (gpxFolder == null || !gpxFolder.exists() || gpxFolder.listFiles().length < 1)
         {
             callback.OnFailure();
             return;
