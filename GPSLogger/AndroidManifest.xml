@@ -3,7 +3,7 @@
           package="com.mendhak.gpslogger" android:versionCode="41"
           android:versionName="41" android:installLocation="auto">
 
-    <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="16"/>
+    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="16"/>
 
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -151,4 +151,8 @@
         <receiver android:name="com.mendhak.gpslogger.senders.AlarmReceiver"/>
     </application>
 
-</manifest>
+
+
+
+
+</manifest> 
