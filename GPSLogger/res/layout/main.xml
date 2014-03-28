@@ -3,7 +3,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/scroll" android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
                   android:layout_width="fill_parent" android:layout_height="wrap_content"
                   android:orientation="vertical">
 
@@ -75,6 +75,12 @@
                           android:text="@string/txt_travel_distance" android:padding="3dip"/>
                 <TextView android:id="@+id/txtDistanceTravelled" android:gravity="left"
                           android:padding="3dip"/>
+            </TableRow>
+            <TableRow android:background="#333333" android:layout_margin="1dip">
+                <TextView android:id="@+id/lblTimeTravelled" android:textStyle="bold"
+                          android:text="@string/txt_travel_duration" android:padding="3dip"/>
+                <TextView android:id="@+id/txtTimeTravelled" android:gravity="left"
+                          android:padding="3dip" />
             </TableRow>
         </TableLayout>
 

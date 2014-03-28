@@ -28,13 +28,13 @@ import android.content.pm.PackageInfo;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -58,6 +58,8 @@ import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
 import java.io.File;
 import java.text.NumberFormat;
 import java.util.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class GpsMainActivity extends SherlockActivity implements OnCheckedChangeListener,
         IGpsLoggerServiceClient, View.OnClickListener, IActionListener
@@ -919,6 +921,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         TextView txtDirection = (TextView) findViewById(R.id.txtDirection);
         TextView txtAccuracy = (TextView) findViewById(R.id.txtAccuracy);
         TextView txtDistance = (TextView) findViewById(R.id.txtDistanceTravelled);
+        TextView txtTime = (TextView) findViewById(R.id.txtTimeTravelled);
 
         tvLatitude.setText("");
         tvLongitude.setText("");
@@ -929,6 +932,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         txtDirection.setText("");
         txtAccuracy.setText("");
         txtDistance.setText("");
+        txtTime.setText("");
         Session.setPreviousLocationInfo(null);
         Session.setTotalTravelled(0d);
     }
@@ -976,6 +980,27 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
         TextView txtSatellites = (TextView) findViewById(R.id.txtSatellites);
         txtSatellites.setText(String.valueOf(number));
     }
+    
+    private String getInterval(long startTime, long endTime)
+    {
+    	StringBuffer sb = new StringBuffer();
+    	long diff = endTime - startTime;
+    	long diffSeconds = diff / 1000 % 60;
+    	long diffMinutes = diff / (60 * 1000) % 60;
+    	long diffHours = diff / (60 * 60 * 1000) % 24;
+    	long diffDays = diff / (24 * 60 * 60 * 1000);
+    	if (diffDays > 0)
+    	{
+    		sb.append(diffDays + " days ");
+    	}
+    	if (diffHours > 0)
+    	{
+    		sb.append(String.format("%02d", diffHours)+":");
+    	}
+   		sb.append(String.format("%02d", diffMinutes)+":");
+   		sb.append(String.format("%02d", diffSeconds));
+   		return sb.toString();
+    }
 
     /**
      * Given a location fix, processes it and displays it in the table on the
@@ -1006,6 +1031,7 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
             TextView txtDirection = (TextView) findViewById(R.id.txtDirection);
             TextView txtAccuracy = (TextView) findViewById(R.id.txtAccuracy);
             TextView txtTravelled = (TextView) findViewById(R.id.txtDistanceTravelled);
+            TextView txtTime = (TextView) findViewById(R.id.txtTimeTravelled);
             String providerName = loc.getProvider();
 
             if (providerName.equalsIgnoreCase("gps"))
@@ -1157,8 +1183,17 @@ public class GpsMainActivity extends SherlockActivity implements OnCheckedChange
                 }
             }
 
-            txtTravelled.setText(String.valueOf(Math.round(distanceValue)) + " " + distanceUnit +
+            txtTravelled.setText(nf.format(distanceValue) + " " + distanceUnit +
                     " (" + Session.getNumLegs() + " points)");
+            
+            long startTime = Session.getStartTimeStamp();
+            Date d = new Date(startTime);
+            long currentTime = System.currentTimeMillis();
+            String duration = getInterval(startTime, currentTime);
+            
+            DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+            DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
+            txtTime.setText(duration+" (started at "+dateFormat.format(d)+" "+timeFormat.format(d)+")");
 
         }
         catch (Exception ex)
