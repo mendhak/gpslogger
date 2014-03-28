@@ -111,7 +111,7 @@ class HttpUrlLogHandler implements Runnable {
             logUrl = logUrl.replaceAll("(?i)%time", String.valueOf(Utilities.GetIsoDateTime(new Date(loc.getTime()))));
             logUrl = logUrl.replaceAll("(?i)%batt", String.valueOf(batteryLevel));
             logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));
-            logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(android.os.Build.SERIAL));
+            logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(Utilities.GetBuildSerial()));
 
 
 

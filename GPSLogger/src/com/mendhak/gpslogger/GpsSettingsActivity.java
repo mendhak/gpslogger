@@ -116,7 +116,16 @@ public class GpsSettingsActivity extends SherlockPreferenceActivity
                    .onPreferenceChange(newFilePref, newFilePref.getValue());
 
         CheckBoxPreference chkfile_prefix_serial = (CheckBoxPreference) findPreference("new_file_prefix_serial");
-        chkfile_prefix_serial.setSummary(chkfile_prefix_serial.getSummary().toString() + "(" + Build.SERIAL + ")");
+        if(Utilities.IsNullOrEmpty(Utilities.GetBuildSerial()))
+        {
+            chkfile_prefix_serial.setEnabled(false);
+            chkfile_prefix_serial.setSummary("This option not available on older phones or if a serial id is not present");
+        }
+        else
+        {
+            chkfile_prefix_serial.setSummary(chkfile_prefix_serial.getSummary().toString() + "(" + Utilities.GetBuildSerial() + ")");
+        }
+
 
     }
 

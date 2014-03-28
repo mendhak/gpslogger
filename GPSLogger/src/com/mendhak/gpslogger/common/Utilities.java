@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.*;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
@@ -864,4 +865,16 @@ public class Utilities
 
         return text.replace("&amp;", "&").replace("&quot;", "\"");
     }
+
+    public static String GetBuildSerial()
+    {
+        try{
+            return Build.SERIAL;
+        }
+        catch(Throwable t){
+            return "";
+        }
+    }
+
+
 }

@@ -132,13 +132,13 @@ public class Session extends Application
     {
         if(AppSettings.getNewFileCreation().equals("static") && !Utilities.IsNullOrEmpty(currentFileName))
         {
-            return currentFileName.replaceAll("(?i)%ser", String.valueOf(android.os.Build.SERIAL));
+            return currentFileName.replaceAll("(?i)%ser", String.valueOf(Utilities.GetBuildSerial()));
         }
         else
         {
-            if(!Utilities.IsNullOrEmpty(currentFileName) && AppSettings.shouldPrefixSerialToFileName() && !currentFileName.contains(Build.SERIAL))
+            if(!Utilities.IsNullOrEmpty(currentFileName) && AppSettings.shouldPrefixSerialToFileName() && !currentFileName.contains(Utilities.GetBuildSerial()))
             {
-                currentFileName = String.valueOf(Build.SERIAL) + "_" + currentFileName;
+                currentFileName = String.valueOf(Utilities.GetBuildSerial()) + "_" + currentFileName;
             }
         }
 
