@@ -36,6 +36,7 @@ public class Session extends Application
     private static int satellites;
     private static boolean notificationVisible;
     private static float autoSendDelay;
+    private static long startTimeStamp;
     private static long latestTimeStamp;
     private static boolean addNewTrackSegment = true;
     private static Location currentLocationInfo;
@@ -106,7 +107,10 @@ public class Session extends Application
     public static void setStarted(boolean isStarted)
     {
         Session.isStarted = isStarted;
-
+        if (isStarted)
+        {
+        	Session.startTimeStamp = System.currentTimeMillis();
+        }
     }
 
     /**
@@ -295,6 +299,14 @@ public class Session extends Application
     public static long getLatestTimeStamp()
     {
         return latestTimeStamp;
+    }
+    
+    /**
+     * @return the timestamp when measuring was started
+     */
+    public static long getStartTimeStamp()
+    {
+    	return startTimeStamp;
     }
 
     /**

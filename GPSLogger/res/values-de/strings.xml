@@ -310,4 +310,5 @@
   <string name="txt_annotation">Anmerkung:</string>
   <string name="txt_time_isoformat">Zeit UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Anbieter:</string>
+  <string name="txt_travel_duration">Dauer:</string>
 </resources>
