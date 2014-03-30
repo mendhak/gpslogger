@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filecreation_entries">
+        <item>@string/new_file_creation_onceaday</item>
+        <item>@string/new_file_creation_everystart</item>
+        <item>@string/new_file_creation_static</item>
+    </string-array>
+
+    <string-array name="filecreation_values">
+        <item>onceaday</item>
+        <item>everystart</item>
+        <item>static</item>
+    </string-array>
+
+    <string-array name="autosend_frequencies">
+        <item>@string/autoemail_frequency_whenistop</item>
+        <item>@string/autoemail_frequency_8</item>
+        <item>@string/autoemail_frequency_6</item>
+        <item>@string/autoemail_frequency_5</item>
+        <item>@string/autoemail_frequency_4</item>
+        <item>@string/autoemail_frequency_3</item>
+        <item>@string/autoemail_frequency_2</item>
+        <item>@string/autoemail_frequency_1</item>
+        <item>@string/autoemail_frequency_05</item>
+        <item>@string/autoemail_frequency_008</item>
+    </string-array>
+
+    <string-array name="autosend_values">
+        <item>0</item>
+        <item>8</item>
+        <item>6</item>
+        <item>5</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+        <item>0.5</item>
+        <item>0.08</item>
+    </string-array>
+
+    <string-array name="autoemail_presets">
+        <item>@string/emailprovider_google</item>
+        <item>@string/emailprovider_msn</item>
+        <item>@string/emailprovider_yahoo</item>
+        <item>@string/emailprovider_manual</item>
+    </string-array>
+
+    <string-array name="autoemail_presetvalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>99</item>
+    </string-array>
+
+
+
+    <string-array name="osm_visibility_choices">
+        <item>private</item>
+        <item>public</item>
+        <item>trackable</item>
+        <item>identifiable</item>
+    </string-array>
+
+    <string-array name="opengts_server_communication_methods">
+        <item>HTTP/GET Based</item>
+        <!-- <item>Raw Socket based</item> -->
+    </string-array>
+
+    <string-array name="opengts_server_communication_methods_values">
+        <item>HTTP/GET</item>
+        <!-- <item>RAW</item> -->
+    </string-array>
+    <string-array name="autoftp_ssltls_entries">
+        <item>@string/autoftp_ssltls_none</item>
+        <item>@string/autoftp_ssltls_ssl</item>
+        <item>@string/autoftp_ssltls_tls</item>
+    </string-array>
+    <string-array name="autoftp_ssltls_values">
+        <item> </item>
+        <item>SSL</item>
+        <item>TLS</item>
+    </string-array>
+
+
+</resources>
