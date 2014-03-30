@@ -19,8 +19,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class GpsMainActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener  {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -45,6 +47,8 @@ public class GpsMainActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+
     }
 
     @Override
@@ -70,26 +74,33 @@ public class GpsMainActivity extends Activity
 
     }
 
-//    public void onSectionAttached(int number) {
-//        switch (number) {
-//            case 1:
-//                mTitle = getString(R.string.title_section1);
-//                break;
-//            case 2:
-//                mTitle = getString(R.string.title_section2);
-//                break;
-//            case 3:
-//                mTitle = getString(R.string.title_section3);
-//                break;
-//        }
-//    }
 
     public void restoreActionBar() {
-        ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
+
+
+
+        getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        ArrayList<String> itemList = new ArrayList<String>();
+        itemList.add("Section 1");
+        itemList.add("Section 2");
+
+        ArrayAdapter<String> aAdpt = new ArrayAdapter<String>(this, R.layout.simpledropdown, R.id.simpletext, itemList);
+        getActionBar().setListNavigationCallbacks(aAdpt, this);
+        getActionBar().setDisplayShowTitleEnabled(true);
+        getActionBar().setTitle("TEST TITEL");
+        getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_CUSTOM);
+        getActionBar().setCustomView(R.layout.actionbar);
+
     }
+
+    @Override
+    public boolean onNavigationItemSelected(int position, long id) {
+
+        // Our logic
+        return true;
+
+    }
+
 
 
     @Override
@@ -148,7 +159,7 @@ public class GpsMainActivity extends Activity
             Log.d("GPSLogger", "-------------------onCreateView : " + getArguments().getString("parent_message"));
 
 
-            int sectionNumber = getArguments().getInt("parent_message");
+
 
             View rootView;
             TextView textView;
