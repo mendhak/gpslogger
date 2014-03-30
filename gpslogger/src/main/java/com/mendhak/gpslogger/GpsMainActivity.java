@@ -84,8 +84,8 @@ public class GpsMainActivity extends Activity
 
         getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         ArrayList<String> itemList = new ArrayList<String>();
-        itemList.add("Section 1");
-        itemList.add("Section 2");
+        itemList.add("Dropdown 1");
+        itemList.add("Dropdown 2");
 
         ArrayAdapter<String> aAdpt = new ArrayAdapter<String>(this, R.layout.simpledropdown, R.id.simpletext, itemList);
         getActionBar().setListNavigationCallbacks(aAdpt, this);
