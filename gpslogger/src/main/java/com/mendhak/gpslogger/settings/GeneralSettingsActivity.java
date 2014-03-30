@@ -2,6 +2,7 @@ package com.mendhak.gpslogger.settings;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -16,6 +17,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 import com.mendhak.gpslogger.R;
@@ -34,7 +36,7 @@ import java.util.List;
  * API Guide</a> for more information on developing a Settings UI.
  */
 @SuppressWarnings("deprecation")
-public class GeneralSettingsActivity extends PreferenceActivity {
+public class GeneralSettingsActivity extends PreferenceActivity implements Preference.OnPreferenceClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +79,19 @@ public class GeneralSettingsActivity extends PreferenceActivity {
         super.onPostCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.pref_general);
+
+        Preference enableDisablePref = findPreference("enableDisableGps");
+        enableDisablePref.setOnPreferenceClickListener(this);
     }
 
 
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
 
+        if(preference.getKey().equals("enableDisableGps")){
+            startActivity(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"));
+            return true;
+        }
+        return false;
+    }
 }
