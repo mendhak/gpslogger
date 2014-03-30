@@ -60,7 +60,7 @@ public class GpsMainActivity extends Activity
         switch(position){
             case 0:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, PlaceholderFragment.newInstance("Only the beginning"))
+                        .replace(R.id.container, PlaceholderFragment.newInstance(String.valueOf(BuildConfig.VERSION_NAME)))
                         .commit();
                 mTitle = "First";
                 break;

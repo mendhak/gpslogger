@@ -19,8 +19,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 1
-        versionName "1.0"
+        versionCode 45
+        versionName "45"
     }
     buildTypes {
         release {
@@ -31,8 +31,16 @@ android {
     //Bug: http://stackoverflow.com/a/20675331
     android {
         packagingOptions {
-            exclude 'META-INF/NOTICE.txt'
+            exclude 'META-INF/DEPENDENCIES.txt'
             exclude 'META-INF/LICENSE.txt'
+            exclude 'META-INF/NOTICE.txt'
+            exclude 'META-INF/NOTICE'
+            exclude 'META-INF/LICENSE'
+            exclude 'META-INF/DEPENDENCIES'
+            exclude 'META-INF/notice.txt'
+            exclude 'META-INF/license.txt'
+            exclude 'META-INF/dependencies.txt'
+            exclude 'META-INF/LGPL2.1'
         }
     }
 }
