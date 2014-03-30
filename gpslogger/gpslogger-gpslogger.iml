@@ -70,8 +70,8 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 19 Platform (1)" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="support-v4-18.0.0" level="project" />
     <orderEntry type="library" exported="" name="ComGoogleAndroidGmsPlayServices4030.aar" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-19.1.0" level="project" />
   </component>
 </module>
 
