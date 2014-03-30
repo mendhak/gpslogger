@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -74,14 +75,18 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         addPreferencesFromResource(R.xml.pref_logging);
 
 
         Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
         gpsloggerFolder.setOnPreferenceClickListener(this);
-
-        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         gpsloggerFolder.setSummary(prefs.getString("gpslogger_folder", Environment.getExternalStorageDirectory() + "/GPSLogger"));
+
+        CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
+        chkLog_opengts.setOnPreferenceClickListener(this);
+
+
 
     }
 
@@ -96,6 +101,17 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
 
             intent.putExtra(FileDialog.CAN_SELECT_DIR, true);
             startActivityForResult(intent, SELECT_FOLDER_DIALOG);
+            return true;
+        }
+
+        if(preference.getKey().equals("log_opengts")){
+            CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
+            boolean opengts_enabled = prefs.getBoolean("opengts_enabled", false);
+
+            if (chkLog_opengts.isChecked() && !opengts_enabled)
+            {
+                startActivity(new Intent("com.mendhak.gpslogger.OPENGTS_SETUP"));
+            }
             return true;
         }
 
