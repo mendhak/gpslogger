@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="title_drawer_generalsettings">GPSLogger</string>
-    <string name="title_drawer_loggingsettings">General settings</string>
+    <string name="title_drawer_headsettings">GPSLogger</string>
+    <string name="title_drawer_generalsettings">General settings</string>
+    <string name="title_drawer_loggingsettings">Logging settings</string>
     <string name="title_drawer_uploadsettings">Upload settings</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

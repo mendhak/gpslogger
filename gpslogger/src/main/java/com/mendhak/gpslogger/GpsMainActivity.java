@@ -64,14 +64,22 @@ public class GpsMainActivity extends Activity
                 mTitle = "First";
                 break;
             case 1:
-                Intent settingsActivity = new Intent(getApplicationContext(), GeneralSettingsActivity.class);
-                startActivity(settingsActivity);
+                Intent generalsettingsActivity = new Intent(getApplicationContext(), GeneralSettingsActivity.class);
+                startActivity(generalsettingsActivity);
+                break;
+            case 2:
+                Intent loggingsettingsActivity = new Intent(getApplicationContext(), LoggingSettingsActivity.class);
+                startActivity(loggingsettingsActivity);
+                break;
+            case 4:
+//                Intent uploadsettingsActivity = new Intent(getApplicationContext(), UploadSettingsActivity.class);
+//                startActivity(uploadsettingsActivity);
                 break;
             default:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, PlaceholderFragment.newInstance("Default case"))
-                        .commit();
-                mTitle = "SEcond";
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.container, PlaceholderFragment.newInstance("Default case"))
+//                        .commit();
+//                mTitle = "SEcond";
         }
 
 
