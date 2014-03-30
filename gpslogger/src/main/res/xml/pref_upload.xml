@@ -39,7 +39,6 @@
             android:title="@string/osm_setup_title"
             android:summary="@string/osm_setup_summary"
             android:key="osm_setup">
-            <intent android:action="com.mendhak.gpslogger.OSM_AUTHORIZE"/>
         </Preference>
         <Preference
             android:title="@string/dropbox_setup_title"

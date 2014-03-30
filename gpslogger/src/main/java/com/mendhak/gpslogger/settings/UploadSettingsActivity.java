@@ -3,10 +3,12 @@ package com.mendhak.gpslogger.settings;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.senders.osm.OSMHelper;
 
 /**
  * A {@link android.preference.PreferenceActivity} that presents a set of application settings. On
@@ -20,7 +22,7 @@ import com.mendhak.gpslogger.R;
  * API Guide</a> for more information on developing a Settings UI.
  */
 @SuppressWarnings("deprecation")
-public class UploadSettingsActivity extends PreferenceActivity {
+public class UploadSettingsActivity extends PreferenceActivity implements Preference.OnPreferenceClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +65,21 @@ public class UploadSettingsActivity extends PreferenceActivity {
         super.onPostCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.pref_upload);
+
+
+        Preference osmSetupPref = findPreference("osm_setup");
+        osmSetupPref.setOnPreferenceClickListener(this);
     }
 
 
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
 
+        if(preference.getKey().equals("osm_setup")){
+            startActivity(OSMHelper.GetOsmSettingsIntent(getApplicationContext()));
+            return true;
+        }
+
+        return false;
+    }
 }
