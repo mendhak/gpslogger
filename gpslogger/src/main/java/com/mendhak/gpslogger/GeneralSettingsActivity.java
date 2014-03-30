@@ -32,6 +32,7 @@ import java.util.List;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
+@SuppressWarnings("deprecation")
 public class GeneralSettingsActivity extends PreferenceActivity {
 
     @Override
