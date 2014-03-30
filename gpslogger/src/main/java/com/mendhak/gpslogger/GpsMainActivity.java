@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -64,16 +65,13 @@ public class GpsMainActivity extends Activity
                 mTitle = "First";
                 break;
             case 1:
-                Intent generalsettingsActivity = new Intent(getApplicationContext(), GeneralSettingsActivity.class);
-                startActivity(generalsettingsActivity);
+                LaunchActivity(GeneralSettingsActivity.class);
                 break;
             case 2:
-                Intent loggingsettingsActivity = new Intent(getApplicationContext(), LoggingSettingsActivity.class);
-                startActivity(loggingsettingsActivity);
+                LaunchActivity(LoggingSettingsActivity.class);
                 break;
             case 3:
-                Intent uploadsettingsActivity = new Intent(getApplicationContext(), UploadSettingsActivity.class);
-                startActivity(uploadsettingsActivity);
+                LaunchActivity(UploadSettingsActivity.class);
                 break;
             default:
 //                fragmentManager.beginTransaction()
@@ -84,6 +82,16 @@ public class GpsMainActivity extends Activity
         }
 
 
+    }
+
+    private void LaunchActivity(final Class activityClass) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent targetActivity = new Intent(getApplicationContext(), activityClass);
+                startActivity(targetActivity);
+            }
+        }, 120);
     }
 
 
