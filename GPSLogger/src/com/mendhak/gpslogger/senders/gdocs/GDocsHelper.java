@@ -230,7 +230,7 @@ public class GDocsHelper implements IActionListener, IFileSender
                 if(Utilities.IsNullOrEmpty(gpsLoggerFolderId))
                 {
                     //Couldn't find folder, must create it
-                    gpsLoggerFolderId = CreateEmptyFile(token, "GPSLogger For Android", GetMimeTypeFromFileName(fileName), "root");
+                    gpsLoggerFolderId = CreateEmptyFile(token, "GPSLogger For Android", "application/vnd.google-apps.folder", "root");
 
                     if(Utilities.IsNullOrEmpty(gpsLoggerFolderId))
                     {
@@ -473,6 +473,10 @@ public class GDocsHelper implements IActionListener, IFileSender
 
         if(fileName.endsWith("zip")){
             return "application/zip";
+        }
+
+        if(fileName.endsWith("xml")){
+            return "application/xml";
         }
 
         return "application/vnd.google-apps.spreadsheet";

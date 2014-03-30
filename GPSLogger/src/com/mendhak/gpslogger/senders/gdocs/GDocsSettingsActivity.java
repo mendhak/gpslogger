@@ -307,6 +307,7 @@ public class GDocsSettingsActivity extends SherlockPreferenceActivity
             gpxFolder.mkdirs();
         }
 
+        Utilities.LogDebug("Creating gpslogger_test.xml");
         File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
 
         try
