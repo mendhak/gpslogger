@@ -1,12 +1,20 @@
 package com.mendhak.gpslogger.settings;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.FileDialog.FileDialog;
+import com.mendhak.gpslogger.common.Utilities;
 
 /**
  * A {@link android.preference.PreferenceActivity} that presents a set of application settings. On
@@ -20,7 +28,11 @@ import com.mendhak.gpslogger.R;
  * API Guide</a> for more information on developing a Settings UI.
  */
 @SuppressWarnings("deprecation")
-public class LoggingSettingsActivity extends PreferenceActivity {
+public class LoggingSettingsActivity extends PreferenceActivity implements Preference.OnPreferenceClickListener {
+
+    SharedPreferences prefs;
+    private final static int SELECT_FOLDER_DIALOG=420;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +75,56 @@ public class LoggingSettingsActivity extends PreferenceActivity {
         super.onPostCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.pref_logging);
+
+
+        Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
+        gpsloggerFolder.setOnPreferenceClickListener(this);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        gpsloggerFolder.setSummary(prefs.getString("gpslogger_folder", Environment.getExternalStorageDirectory() + "/GPSLogger"));
+
     }
 
 
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
 
+        if(preference.getKey().equals("gpslogger_folder")){
+            Intent intent = new Intent(getBaseContext(), FileDialog.class);
+            intent.putExtra(FileDialog.START_PATH, prefs.getString("gpslogger_folder",
+                    Environment.getExternalStorageDirectory() + "/GPSLogger"));
+
+            intent.putExtra(FileDialog.CAN_SELECT_DIR, true);
+            startActivityForResult(intent, SELECT_FOLDER_DIALOG);
+            return true;
+        }
+
+        return false;
+    }
+
+    public synchronized void onActivityResult(final int requestCode, int resultCode, final Intent data)
+    {
+
+        if(requestCode==SELECT_FOLDER_DIALOG)
+        {
+            if (resultCode == Activity.RESULT_OK)
+            {
+                String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
+                Utilities.LogDebug("Folder path selected" + filePath);
+
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("gpslogger_folder", filePath);
+                editor.commit();
+
+                Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
+                gpsloggerFolder.setSummary(filePath);
+
+            }
+            else if (resultCode == Activity.RESULT_CANCELED)
+            {
+                Utilities.LogDebug("No file selected");
+            }
+        }
+    }
 }
