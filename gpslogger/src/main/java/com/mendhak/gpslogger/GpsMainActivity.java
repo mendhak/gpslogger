@@ -71,15 +71,16 @@ public class GpsMainActivity extends Activity
                 Intent loggingsettingsActivity = new Intent(getApplicationContext(), LoggingSettingsActivity.class);
                 startActivity(loggingsettingsActivity);
                 break;
-            case 4:
-//                Intent uploadsettingsActivity = new Intent(getApplicationContext(), UploadSettingsActivity.class);
-//                startActivity(uploadsettingsActivity);
+            case 3:
+                Intent uploadsettingsActivity = new Intent(getApplicationContext(), UploadSettingsActivity.class);
+                startActivity(uploadsettingsActivity);
                 break;
             default:
 //                fragmentManager.beginTransaction()
 //                        .replace(R.id.container, PlaceholderFragment.newInstance("Default case"))
 //                        .commit();
 //                mTitle = "SEcond";
+                break;
         }
 
 

@@ -38,6 +38,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />
         </activity>
+
+        <activity
+            android:name="com.mendhak.gpslogger.UploadSettingsActivity"
+            android:label="@string/pref_logging_title"
+            android:parentActivityName="com.mendhak.gpslogger.GpsMainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mendhak.gpslogger.GpsMainActivity" />
+        </activity>
     </application>
 
 </manifest>
