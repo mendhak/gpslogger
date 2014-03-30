@@ -1,4 +1,4 @@
-package com.mendhak.gpslogger;
+package com.mendhak.gpslogger.settings;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
+import com.mendhak.gpslogger.R;
 
 /**
  * A {@link android.preference.PreferenceActivity} that presents a set of application settings. On
