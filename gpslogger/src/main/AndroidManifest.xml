@@ -104,7 +104,6 @@
             <intent-filter>
                 <action android:name="com.mendhak.gpslogger.OSM_AUTHORIZE"/>
                 <action android:name="android.intent.action.VIEW"/>
-
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
 
