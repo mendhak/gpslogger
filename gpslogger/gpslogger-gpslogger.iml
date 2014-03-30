@@ -71,6 +71,7 @@
     <orderEntry type="jdk" jdkName="Android API 19 Platform (1)" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="Gradle: support-v4-19.1.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: ComGoogleAndroidGmsPlayServices4030.aar" level="project" />
   </component>
 </module>
 

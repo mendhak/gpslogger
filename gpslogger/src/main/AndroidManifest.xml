@@ -10,6 +10,9 @@
         android:uiOptions="splitActionBarWhenNarrow"
         >
 
+        <meta-data android:name="com.google.android.gms.version"
+                   android:value="@integer/google_play_services_version" />
+
         <activity
             android:uiOptions="splitActionBarWhenNarrow"
             android:name="com.mendhak.gpslogger.GpsMainActivity"
