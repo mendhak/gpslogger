@@ -28,9 +28,43 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    //Bug: http://stackoverflow.com/a/20675331
+    android {
+        packagingOptions {
+            exclude 'META-INF/NOTICE.txt'
+            exclude 'META-INF/LICENSE.txt'
+        }
+    }
 }
 
 dependencies {
     compile 'com.android.support:support-v4:18.0.0'
     compile 'com.google.android.gms:play-services:4.0.30'
+    compile fileTree(dir:'./src/main/libs', include: '*.jar')
+
+    compile('commons-net:commons-net:2.0')
+
+    compile('org.apache.httpcomponents:httpmime:4.0.3'){
+        exclude module: 'commons-logging'
+        exclude module: 'httpcore'
+        exclude module: 'httpclient'
+    }
+
+    compile('org.apache.james:apache-mime4j:0.6.1'){
+        exclude module: 'commons-logging'
+    }
+
+    compile('oauth.signpost:signpost-commonshttp4:1.2.1.1'){
+        exclude module: 'commons-logging'
+        exclude module: 'httpcore'
+        exclude module: 'httpclient'
+    }
+
+    compile('oauth.signpost:signpost-core:1.2.1.1'){
+        exclude module: 'commons-codec'
+    }
+
+    compile('com.googlecode.json-simple:json-simple:1.1')
+
+
 }

@@ -72,6 +72,18 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="Gradle: support-v4-18.0.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: ComGoogleAndroidGmsPlayServices4030.aar" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: mail" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: android-async-http-1.4.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: dropbox-android-sdk" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: additionnal" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: activation" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: commons-net-2.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: httpmime-4.0.3" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: commons-codec-1.3" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: signpost-core-1.2.1.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: json-simple-1.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: signpost-commonshttp4-1.2.1.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: apache-mime4j-0.6.1" level="project" />
   </component>
 </module>
 

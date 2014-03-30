@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:key="autoftp_preferences">
+
+    <CheckBoxPreference
+        android:key="autoftp_enabled"
+        android:title="@string/autoftp_enabled" />
+
+
+    <EditTextPreference
+            android:key="autoftp_server"
+            android:title="@string/autoftp_server"
+            android:summary="@string/autoftp_server_summary"
+            android:dialogTitle="@string/autoftp_server"
+            android:hint="@string/autoftp_server_summary"/>
+
+    <EditTextPreference
+            android:key="autoftp_username"
+            android:title="@string/autoftp_username"
+            android:dialogTitle="@string/autoftp_username"/>
+
+    <EditTextPreference
+            android:key="autoftp_password"
+            android:title="@string/autoftp_password"
+            android:dialogTitle="@string/autoftp_password"
+            android:password="true"/>
+
+    <EditTextPreference
+            android:key="autoftp_directory"
+            android:title="@string/autoftp_directory"
+            android:dialogTitle="@string/autoftp_directory"
+            />
+
+    <Preference android:title="@string/autoftp_test"
+                android:summary="@string/autoftp_test_summary" android:key="autoftp_test"/>
+
+    <PreferenceCategory android:title="@string/autoftp_advanced_settings">
+        <EditTextPreference
+                android:key="autoftp_port"
+                android:title="@string/autoftp_port"
+                android:dialogTitle="@string/autoftp_port"
+                android:defaultValue="21"
+                android:inputType="number"/>
+
+        <CheckBoxPreference
+                android:key="autoftp_useftps"
+                android:title="@string/autoftp_useftps"
+                android:defaultValue="false"
+                android:summary="@string/autoftp_useftps_summary"/>
+
+        <ListPreference
+                android:key="autoftp_ssltls"
+                android:title="@string/autoftp_ssltls"
+                android:summary="@string/autoftp_ssltls_summary"
+                android:entries="@array/autoftp_ssltls_entries"
+                android:entryValues="@array/autoftp_ssltls_values"
+                android:dialogTitle="@string/autoftp_ssltls"
+                android:defaultValue=""
+                android:shouldDisableView="false"/>
+
+        <CheckBoxPreference
+                android:key="autoftp_implicit"
+                android:title="@string/autoftp_implicit"
+                android:defaultValue="false"
+                android:summary="@string/autoftp_implicit_summary"/>
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
