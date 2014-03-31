@@ -5,25 +5,30 @@ GPSLogger is an Android app that logs GPS information to GPX, KML or text files 
 
 [Read about GPSLogger here](http://mendhak.github.com/gpslogger/)
 
+## Download
+
 You can [download it from Google Play](https://play.google.com/store/apps/details?id=com.mendhak.gpslogger).
 
-You can bypass the market and get the APK yourself:  [Download here](https://sourceforge.net/projects/gfadownload/files/)
+You can download the APK directly [here](https://sourceforge.net/projects/gfadownload/files/)
+
+## Contribute
+
+You can help with [translations](http://crowdin.net/project/gpslogger-for-android)
+
+You can also submit [pull requests](https://help.github.com/articles/using-pull-requests) for bug fixes and new features.
+
+
+## License
 
 Licensed under [GPL v2](http://www.gnu.org/licenses/gpl-2.0.html).
 
 
-No new features are being planned for GPSLogger. However, [contributions](https://help.github.com/articles/using-pull-requests) are welcome!
-----
-
-**Can you help with [translations](http://crowdin.net/project/gpslogger-for-android)?**
-------
 
 
 
 Setting up the code
 =========
 
-### Development environment
 
 Feel free to adopt and document your own OS and IDEs.  These instructions are for Ubuntu 13.10 with IntelliJ 13
 
