@@ -4,15 +4,13 @@ import android.app.*;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.widget.SpinnerAdapter;
+import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.settings.GeneralSettingsActivity;
 import com.mendhak.gpslogger.settings.LoggingSettingsActivity;
 import com.mendhak.gpslogger.settings.UploadSettingsActivity;
@@ -21,32 +19,62 @@ import com.mendhak.gpslogger.views.GpsLegacyFragment;
 import java.util.ArrayList;
 
 public class GpsMainActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, GpsLegacyFragment.IGpsLegacyFragmentListener {
 
 
     FragmentManager fragmentManager;
-    GpsLegacyFragment fragment1;
-    NavigationDrawerFragment fragment2;
+
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+    private NavigationDrawerFragment navigationDrawerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps_main);
 
-        // Set up the drawer.
-        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+        SetUpNavigationDrawer();
 
         if (fragmentManager == null) {
             fragmentManager = getFragmentManager();
         }
 
-        restoreActionBar();
+        SetUpActionBar();
+    }
+
+    /**
+     *
+     */
+    private void SetUpNavigationDrawer() {
+        // Set up the drawer
+        navigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
+        navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        //Prevents the action bar spinner from hiding when drawer is opened
+        drawerLayout.setDrawerListener( new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View view, float v) {
+                getActionBar().setDisplayShowTitleEnabled(false);
+            }
+
+            @Override
+            public void onDrawerOpened(View view) {
+                getActionBar().setDisplayShowTitleEnabled(false);
+            }
+
+            @Override
+            public void onDrawerClosed(View view) {
+                getActionBar().setDisplayShowTitleEnabled(false);
+            }
+
+            @Override
+            public void onDrawerStateChanged(int i) {
+                getActionBar().setDisplayShowTitleEnabled(false);
+            }
+        });
     }
 
     private void ShowFragment(int fragment_number) {
@@ -61,6 +89,9 @@ public class GpsMainActivity extends Activity
         transaction.commit();
     }
 
+    /**
+     * Handles drawer item selection
+     */
     @Override
     public void onNavigationDrawerItemSelected(int position) {
 
@@ -80,8 +111,12 @@ public class GpsMainActivity extends Activity
 
                 break;
         }
+
     }
 
+    /**
+     * Launches activity in a delayed handler, less stutter
+     */
     private void LaunchActivity(final Class activityClass) {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -93,23 +128,25 @@ public class GpsMainActivity extends Activity
     }
 
 
-    public void restoreActionBar() {
+    public void SetUpActionBar() {
+        ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
+        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(actionBar.getThemedContext(), R.array.gps_main_views, android.R.layout.simple_spinner_dropdown_item);
 
-        getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        ArrayList<String> itemList = new ArrayList<String>();
-        itemList.add("Dropdown 1");
-        itemList.add("Dropdown 2");
+        actionBar.setListNavigationCallbacks(spinnerAdapter, this);
+        actionBar.setDisplayShowTitleEnabled(false);
 
-        ArrayAdapter<String> aAdpt = new ArrayAdapter<String>(this, R.layout.simpledropdown, R.id.simpletext, itemList);
-        getActionBar().setListNavigationCallbacks(aAdpt, this);
-        getActionBar().setDisplayShowTitleEnabled(true);
-        getActionBar().setTitle("TEST TITEL");
-        getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_CUSTOM);
-        getActionBar().setCustomView(R.layout.actionbar);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setTitle("TEST TITEL");
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setCustomView(R.layout.actionbar);
 
     }
 
+    /**
+     * Handles dropdown selection
+     */
     @Override
     public boolean onNavigationItemSelected(int position, long id) {
 
@@ -120,18 +157,18 @@ public class GpsMainActivity extends Activity
     }
 
 
+    /**
+     * Creates menu items
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.gps_main, menu);
             return true;
-        }
-        return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Handles menu item selection
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -145,4 +182,8 @@ public class GpsMainActivity extends Activity
     }
 
 
+    @Override
+    public void OnNewGpsLegacyMessage(String message) {
+        Utilities.LogDebug(message);
+    }
 }

@@ -15,6 +15,12 @@ import com.mendhak.gpslogger.R;
  */
 public class GpsLegacyFragment extends Fragment {
 
+    IGpsLegacyFragmentListener callback;
+
+    public interface IGpsLegacyFragmentListener{
+        public void OnNewGpsLegacyMessage(String message);
+    }
+
     public static GpsLegacyFragment newInstance() {
         return new GpsLegacyFragment();
     }
@@ -37,6 +43,17 @@ public class GpsLegacyFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            callback = (IGpsLegacyFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
+
+        callback.OnNewGpsLegacyMessage("Well well well");
 
     }
 
