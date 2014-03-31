@@ -4,6 +4,7 @@
 .idea/workspace.xml
 .idea/libraries
 
+*.iml
 
 /*/local.properties
 /*/out
