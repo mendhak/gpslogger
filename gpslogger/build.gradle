@@ -73,6 +73,11 @@ dependencies {
     }
 
     compile('com.googlecode.json-simple:json-simple:1.1')
+}
 
-
+preBuild.doFirst {
+    if (!file("./src/main/res/values/test.xml").exists()) {
+        // Ensure that the developer at least knows of 'test.xml'.
+        throw new GradleScriptException("Please create a file at ./src/main/res/values/test.xml. If you just want to build, leave the file empty. If you want to use DropBox or OpenStreetMap features, this file must contain OAuth keys (instructions in README).", null)
+    }
 }
