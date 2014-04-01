@@ -93,30 +93,6 @@ public class GpsMainActivity extends Activity
         // Set up the drawer
         navigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        //Prevents the action bar spinner from hiding when drawer is opened
-        drawerLayout.setDrawerListener( new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(View view, float v) {
-                getActionBar().setDisplayShowTitleEnabled(false);
-            }
-
-            @Override
-            public void onDrawerOpened(View view) {
-                getActionBar().setDisplayShowTitleEnabled(false);
-            }
-
-            @Override
-            public void onDrawerClosed(View view) {
-                getActionBar().setDisplayShowTitleEnabled(false);
-            }
-
-            @Override
-            public void onDrawerStateChanged(int i) {
-                getActionBar().setDisplayShowTitleEnabled(false);
-            }
-        });
     }
 
     private void ShowFragment(int fragment_number) {
