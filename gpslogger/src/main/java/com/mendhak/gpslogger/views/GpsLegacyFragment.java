@@ -7,18 +7,34 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import com.mendhak.gpslogger.R;
+import org.w3c.dom.Text;
 
 /**
  * Created by mendhak on 31/03/14.
  */
-public class GpsLegacyFragment extends Fragment {
+public class GpsLegacyFragment extends Fragment implements View.OnClickListener {
 
+    View rootView;
     IGpsLegacyFragmentListener callback;
+
+    @Override
+    public void onClick(View view) {
+        callback.OnGpsLegacyButtonClick();
+    }
+
+    public void onTextUpdate(String message){
+        TextView txt = (TextView)rootView.findViewById(R.id.textViewLocation);
+        txt.setText(message);
+    }
 
     public interface IGpsLegacyFragmentListener{
         public void OnNewGpsLegacyMessage(String message);
+
+
+        public void OnGpsLegacyButtonClick();
     }
 
     public static GpsLegacyFragment newInstance() {
@@ -31,9 +47,13 @@ public class GpsLegacyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView;
+
         TextView textView;
         rootView = inflater.inflate(R.layout.fragment_gps_main, container, false);
+        Button btnStart = (Button) rootView.findViewById(R.id.buttonStart);
+        btnStart.setText("Found it");
+        btnStart.setOnClickListener(this);
+
 //            textView = (TextView) rootView.findViewById(R.id.section_label);
 //            textView.setText(getArguments().getString("parent_message"));
 

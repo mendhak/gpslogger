@@ -8,175 +8,26 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.mendhak.gpslogger.GpsMainActivity$PlaceholderFragment">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/scroll" android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-        <LinearLayout
-            android:layout_width="fill_parent" android:layout_height="wrap_content"
-            android:orientation="vertical">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textViewLocation"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="116dp"/>
 
-            <TextView android:id="@+id/textStatus" android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-
-            <TableLayout android:id="@+id/TableGPS"
-                android:layout_width="fill_parent" android:layout_height="wrap_content"
-                android:stretchColumns="1" android:background="#000000">
-                <TableRow android:background="#333333" android:layout_margin="1dip">
-                    <TextView android:id="@+id/txtDateTimeAndProvider"
-                        android:gravity="left" android:textStyle="bold" android:padding="2dip"
-                        android:layout_span="2"/>
-                </TableRow>
-                <TableRow android:background="#333333" android:layout_margin="1dip">
-                    <TextView android:textStyle="bold" android:text="@string/txt_latitude"
-                        android:padding="3dip" android:textSize="17sp"/>
-                    <TextView android:id="@+id/txtLatitude" android:gravity="left"
-                        android:padding="3dip" android:textColor="#e8a317"
-                        android:textStyle="bold" android:textSize="18sp"/>
-                </TableRow>
-
-                <TableRow android:background="#333333" android:layout_margin="1dip">
-                    <TextView android:textStyle="bold" android:text="@string/txt_longitude"
-                        android:padding="3dip" android:textSize="17sp"/>
-                    <TextView android:id="@+id/txtLongitude" android:gravity="left"
-                        android:padding="3dip" android:textColor="#e8a317"
-                        android:textStyle="bold" android:textSize="18sp"/>
-                </TableRow>
-
-                <TableRow android:background="#333333" android:layout_margin="1dip">
-                    <TextView android:id="@+id/lblAltitude" android:textStyle="bold"
-                        android:text="@string/txt_altitude" android:padding="3dip"/>
-                    <TextView android:id="@+id/txtAltitude" android:gravity="left"
-                        android:padding="3dip"/>
-                </TableRow>
-
-                <TableRow android:background="#333333" android:layout_margin="1dip">
-                    <TextView android:id="@+id/lblSpeed" android:textStyle="bold"
-                        android:text="@string/txt_speed" android:padding="3dip"/>
-                    <TextView android:id="@+id/txtSpeed" android:gravity="left"
-                        android:padding="3dip"/>
-                </TableRow>
-
-                <TableRow android:background="#333333" android:layout_margin="1dip">
-                    <TextView android:id="@+id/lblDirection" android:textStyle="bold"
-                        android:text="@string/txt_direction" android:padding="3dip"/>
-                    <TextView android:id="@+id/txtDirection" android:gravity="left"
-                        android:padding="3dip"/>
-                </TableRow>
-
-                <TableRow android:background="#333333" android:layout_margin="1dip">
-                    <TextView android:id="@+id/lblSatellites" android:textStyle="bold"
-                        android:text="@string/txt_satellites" android:padding="3dip"/>
-                    <TextView android:id="@+id/txtSatellites" android:gravity="left"
-                        android:padding="3dip"/>
-                </TableRow>
-
-                <TableRow android:background="#333333" android:layout_margin="1dip">
-                    <TextView android:id="@+id/lblAccuracy" android:textStyle="bold"
-                        android:text="@string/txt_accuracy" android:padding="3dip"/>
-                    <TextView android:id="@+id/txtAccuracy" android:gravity="left"
-                        android:padding="3dip"/>
-                </TableRow>
-                <TableRow android:background="#333333" android:layout_margin="1dip">
-                    <TextView android:id="@+id/lblDistanceTravelled" android:textStyle="bold"
-                        android:text="@string/txt_travel_distance" android:padding="3dip"/>
-                    <TextView android:id="@+id/txtDistanceTravelled" android:gravity="left"
-                        android:padding="3dip"/>
-                </TableRow>
-                <TableRow android:background="#333333" android:layout_margin="1dip">
-                    <TextView android:id="@+id/lblTimeTravelled" android:textStyle="bold"
-                        android:text="@string/txt_travel_duration" android:padding="3dip"/>
-                    <TextView android:id="@+id/txtTimeTravelled" android:gravity="left"
-                        android:padding="3dip" />
-                </TableRow>
-            </TableLayout>
-
-
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="fill_parent" android:layout_height="wrap_content">
-                <!--
-                    <Button android:id="@+id/buttonStart" android:layout_width="120px"
-                    android:layout_height="wrap_content" android:tag="Start"
-                    android:text="Start" /> <Button android:id="@+id/buttonStop"
-                    android:layout_width="120px" android:layout_height="wrap_content"
-                    android:tag="Stop" android:text="Stop" />
-                -->
-                <ToggleButton android:id="@+id/buttonOnOff"
-                    android:layout_width="fill_parent" android:layout_height="wrap_content"
-                    android:textOn="@string/btn_stop_logging" android:textOff="@string/btn_start_logging"/>
-            </LinearLayout>
-            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-                <Button android:id="@+id/buttonSinglePoint" android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/btn_single_point"/>
-            </LinearLayout>
-
-            <TableLayout android:id="@+id/TableSummary"
-                android:layout_width="fill_parent" android:layout_height="wrap_content"
-                android:background="#222222">
-                <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent">
-                    <TextView android:id="@+id/lblLoggingTo" android:layout_width="wrap_content"
-                        android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
-                        android:paddingLeft="8dip" android:text="@string/summary_loggingto"/>
-                    <TextView android:id="@+id/txtLoggingTo" android:layout_width="wrap_content"
-                        android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
-                        android:layout_height="fill_parent"/>
-
-                </TableRow>
-                <TableRow android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-                    <TextView android:id="@+id/lblFrequency" android:layout_width="wrap_content"
-                        android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
-                        android:paddingLeft="8dip" android:text="@string/summary_freq_every"/>
-                    <TextView android:id="@+id/txtFrequency" android:layout_width="wrap_content"
-                        android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
-                        android:layout_height="fill_parent"/>
-                </TableRow>
-
-
-                <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent">
-                    <TextView android:id="@+id/lblDistance" android:layout_width="wrap_content"
-                        android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
-                        android:paddingLeft="8dip" android:text="@string/summary_dist"/>
-                    <TextView android:id="@+id/txtDistance" android:layout_width="wrap_content"
-                        android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
-                        android:layout_height="fill_parent"/>
-                </TableRow>
-
-
-                <TableRow android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-                    <TextView android:id="@+id/lblFileName" android:layout_width="wrap_content"
-                        android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
-                        android:paddingLeft="8dip" android:text="@string/summary_current_filename"/>
-                    <TextView android:id="@+id/txtFileName" android:layout_width="wrap_content"
-                        android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
-                        android:layout_height="fill_parent"/>
-
-                </TableRow>
-
-                <TableRow android:layout_width="fill_parent"
-                    android:layout_height="fill_parent" android:id="@+id/trAutoEmail">
-                    <TextView android:id="@+id/lblAutoEmail" android:layout_width="wrap_content"
-                        android:textSize="9dip" android:layout_height="fill_parent" android:textStyle="italic"
-                        android:paddingLeft="8dip" android:text="@string/summary_autosend"/>
-                    <TextView android:id="@+id/txtAutoEmail" android:layout_width="wrap_content"
-                        android:paddingLeft="3dip" android:textSize="9dip" android:textStyle="italic"
-                        android:layout_height="fill_parent"/>
-
-                </TableRow>
-
-
-            </TableLayout>
-
-            <!-- 	<TextView android:id="@+id/lblSummary" android:layout_width="fill_parent"
-          android:layout_height="wrap_content" android:textStyle="italic"
-          android:textSize="11dip" /> -->
-
-
-        </LinearLayout>
-    </ScrollView>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/buttonStart"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/textViewLocation"
+        android:layout_alignStart="@+id/textViewLocation"/>
 
 </RelativeLayout>

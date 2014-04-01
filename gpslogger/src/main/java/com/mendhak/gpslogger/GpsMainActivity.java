@@ -1,15 +1,22 @@
 package com.mendhak.gpslogger;
 
 import android.app.*;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
+import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.settings.GeneralSettingsActivity;
 import com.mendhak.gpslogger.settings.LoggingSettingsActivity;
@@ -19,8 +26,10 @@ import com.mendhak.gpslogger.views.GpsLegacyFragment;
 import java.util.ArrayList;
 
 public class GpsMainActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, GpsLegacyFragment.IGpsLegacyFragmentListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, GpsLegacyFragment.IGpsLegacyFragmentListener, IGpsLoggerServiceClient {
 
+    private static Intent serviceIntent;
+    private GpsLoggingService loggingService;
 
     FragmentManager fragmentManager;
 
@@ -42,6 +51,19 @@ public class GpsMainActivity extends Activity
         }
 
         SetUpActionBar();
+        StartAndBindService();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        StartAndBindService();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        StartAndBindService();
     }
 
     /**
@@ -175,7 +197,9 @@ public class GpsMainActivity extends Activity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.mnuAnnotate) {
+            Utilities.LogDebug("GpsMainActivity - Menu Annotate");
+            Toast.makeText(this, "Annotate", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -185,5 +209,158 @@ public class GpsMainActivity extends Activity
     @Override
     public void OnNewGpsLegacyMessage(String message) {
         Utilities.LogDebug(message);
+    }
+
+    @Override
+    public void OnGpsLegacyButtonClick() {
+        Utilities.LogDebug("Starting logging");
+
+        if (!Session.isStarted())
+        {
+            loggingService.StartLogging();
+        }
+        else
+        {
+            loggingService.StopLogging();
+        }
+
+
+    }
+
+
+    /**
+     * Provides a connection to the GPS Logging Service
+     */
+    private final ServiceConnection gpsServiceConnection = new ServiceConnection()
+    {
+
+        public void onServiceDisconnected(ComponentName name)
+        {
+            loggingService = null;
+        }
+
+        public void onServiceConnected(ComponentName name, IBinder service)
+        {
+            loggingService = ((GpsLoggingService.GpsLoggingBinder) service).getService();
+            GpsLoggingService.SetServiceClient(GpsMainActivity.this);
+
+
+//            Button buttonSinglePoint = (Button) findViewById(R.id.buttonSinglePoint);
+//
+//            buttonSinglePoint.setOnClickListener(GpsMainActivity.this);
+
+//            if (Session.isStarted())
+//            {
+//                if (Session.isSinglePointMode())
+//                {
+//                    SetMainButtonEnabled(false);
+//                }
+//                else
+//                {
+//                    SetMainButtonChecked(true);
+//                    SetSinglePointButtonEnabled(false);
+//                }
+//
+//                DisplayLocationInfo(Session.getCurrentLocationInfo());
+//            }
+
+//            // Form setup - toggle button, display existing location info
+//            ToggleButton buttonOnOff = (ToggleButton) findViewById(R.id.buttonOnOff);
+//            buttonOnOff.setOnCheckedChangeListener(GpsMainActivity.this);
+
+            if (Session.hasDescription()){
+               // OnSetAnnotation();
+            }
+
+        }
+    };
+
+
+    /**
+     * Starts the service and binds the activity to it.
+     */
+    private void StartAndBindService()
+    {
+        Utilities.LogDebug("StartAndBindService - binding now");
+        serviceIntent = new Intent(this, GpsLoggingService.class);
+        // Start the service in case it isn't already running
+        startService(serviceIntent);
+        // Now bind to service
+        bindService(serviceIntent, gpsServiceConnection, Context.BIND_AUTO_CREATE);
+        Session.setBoundToService(true);
+    }
+
+
+    /**
+     * Stops the service if it isn't logging. Also unbinds.
+     */
+    private void StopAndUnbindServiceIfRequired()
+    {
+        Utilities.LogDebug("GpsMainActivity.StopAndUnbindServiceIfRequired");
+        if (Session.isBoundToService())
+        {
+            unbindService(gpsServiceConnection);
+            Session.setBoundToService(false);
+        }
+
+        if (!Session.isStarted())
+        {
+            Utilities.LogDebug("StopServiceIfRequired - Stopping the service");
+            //serviceIntent = new Intent(this, GpsLoggingService.class);
+            stopService(serviceIntent);
+        }
+
+    }
+
+
+    @Override
+    public void OnStatusMessage(String message) {
+
+    }
+
+    @Override
+    public void OnFatalMessage(String message) {
+
+    }
+
+    @Override
+    public void OnLocationUpdate(Location loc) {
+        GpsLegacyFragment frag = (GpsLegacyFragment)getFragmentManager().findFragmentById(R.id.container);
+        frag.onTextUpdate(String.valueOf(loc.getLatitude()));
+    }
+
+    @Override
+    public void OnSatelliteCount(int count) {
+
+    }
+
+    @Override
+    public void ClearForm() {
+
+    }
+
+    @Override
+    public void OnStopLogging() {
+
+    }
+
+    @Override
+    public void OnSetAnnotation() {
+
+    }
+
+    @Override
+    public void OnClearAnnotation() {
+
+    }
+
+    @Override
+    public Activity GetActivity() {
+        return null;
+    }
+
+    @Override
+    public void onFileName(String newFileName) {
+
     }
 }
