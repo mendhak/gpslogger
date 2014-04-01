@@ -132,6 +132,11 @@ public class GpsMainActivity extends Activity
             case 3:
                 LaunchActivity(UploadSettingsActivity.class);
                 break;
+            case 4:
+                loggingService.StopLogging();
+                loggingService.stopSelf();
+                finish();
+                break;
             default:
 
                 break;
