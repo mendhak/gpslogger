@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 import com.mendhak.gpslogger.common.Session;
@@ -182,6 +183,15 @@ public class GpsMainActivity extends Activity
         actionBar.setTitle("TEST TITEL");
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setCustomView(R.layout.actionbar);
+
+        ImageButton helpButton = (ImageButton) actionBar.getCustomView().findViewById(R.id.imgHelp);
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
+                startActivity(faqtivity);
+            }
+        });
 
     }
 
