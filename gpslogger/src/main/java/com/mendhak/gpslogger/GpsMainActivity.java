@@ -66,6 +66,25 @@ public class GpsMainActivity extends Activity
         StartAndBindService();
     }
 
+    @Override
+    protected void onPause()
+    {
+
+        Utilities.LogDebug("GpsMainActivity.onPause");
+        StopAndUnbindServiceIfRequired();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+
+        Utilities.LogDebug("GpsMainActivity.onDestroy");
+        StopAndUnbindServiceIfRequired();
+        super.onDestroy();
+
+    }
+
     /**
      *
      */
