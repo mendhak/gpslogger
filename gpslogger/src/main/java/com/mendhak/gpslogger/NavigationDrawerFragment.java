@@ -107,6 +107,7 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_drawer_generalsettings),
                         getString(R.string.title_drawer_loggingsettings),
                         getString(R.string.title_drawer_uploadsettings),
+                        getString(R.string.menu_exit)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -230,6 +231,17 @@ public class NavigationDrawerFragment extends Fragment {
         super.onConfigurationChanged(newConfig);
         // Forward the new configuration the drawer toggle component.
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //Required to show the left drawer
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

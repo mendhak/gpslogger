@@ -4,26 +4,15 @@
               android:orientation="horizontal"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content">
-    <Button
-        android:id="@+id/buttonTest1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ImageButton
+        android:id="@+id/imgHelp"
         android:layout_alignParentRight="true"
-        android:text="Test"
-        />
-    <Button
-        android:id="@+id/buttonTest2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/buttonTest1"
-        android:text="Test"
+        android:src="@android:drawable/ic_menu_help"
+        android:background="?android:selectableItemBackground"
         />
-
-    <DigitalClock
-
-        android:layout_toLeftOf="@id/buttonTest2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
 
 </RelativeLayout>
