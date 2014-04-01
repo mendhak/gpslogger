@@ -191,6 +191,16 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
+    public void toggleDrawer(){
+        if(isDrawerOpen()){
+            mDrawerLayout.closeDrawer(mFragmentContainerView);
+        }
+        else{
+            mDrawerLayout.openDrawer(mFragmentContainerView);
+        }
+
+    }
+
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {

@@ -9,9 +9,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -84,6 +82,15 @@ public class GpsMainActivity extends Activity
         StopAndUnbindServiceIfRequired();
         super.onDestroy();
 
+    }
+
+    public boolean onKeyUp(int keyCode, KeyEvent event){
+        if(keyCode == KeyEvent.KEYCODE_MENU){
+            Utilities.LogInfo("KeyUp Menu");
+            navigationDrawerFragment.toggleDrawer();
+        }
+
+        return super.onKeyUp(keyCode, event);
     }
 
     /**
