@@ -1,20 +1,17 @@
 package com.mendhak.gpslogger;
 
 import android.app.*;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.*;
+import android.content.res.ColorStateList;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.*;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
-import android.widget.SpinnerAdapter;
-import android.widget.Toast;
+import android.widget.*;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.settings.GeneralSettingsActivity;
@@ -38,8 +35,11 @@ public class GpsMainActivity extends Activity
      */
     private NavigationDrawerFragment navigationDrawerFragment;
 
+    MenuItem mnuAnnotate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Utilities.LogDebug("GpsMainActivity.onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps_main);
 
@@ -55,12 +55,14 @@ public class GpsMainActivity extends Activity
 
     @Override
     protected void onStart() {
+        Utilities.LogDebug("GpsMainActivity.onStart");
         super.onStart();
         StartAndBindService();
     }
 
     @Override
     protected void onResume() {
+        Utilities.LogDebug("GpsMainActivity.onResume");
         super.onResume();
         StartAndBindService();
     }
@@ -68,7 +70,6 @@ public class GpsMainActivity extends Activity
     @Override
     protected void onPause()
     {
-
         Utilities.LogDebug("GpsMainActivity.onPause");
         StopAndUnbindServiceIfRequired();
         super.onPause();
@@ -77,7 +78,6 @@ public class GpsMainActivity extends Activity
     @Override
     protected void onDestroy()
     {
-
         Utilities.LogDebug("GpsMainActivity.onDestroy");
         StopAndUnbindServiceIfRequired();
         super.onDestroy();
@@ -108,6 +108,7 @@ public class GpsMainActivity extends Activity
         if (fragment_number == 0) {
             transaction.replace(R.id.container, GpsLegacyFragment.newInstance());
         } else {
+
             transaction.replace(R.id.container, new NavigationDrawerFragment());
         }
 
@@ -168,7 +169,7 @@ public class GpsMainActivity extends Activity
         actionBar.setDisplayShowTitleEnabled(false);
 
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle("TEST TITEL");
+        actionBar.setTitle("");
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setCustomView(R.layout.actionbar);
 
@@ -188,7 +189,6 @@ public class GpsMainActivity extends Activity
      */
     @Override
     public boolean onNavigationItemSelected(int position, long id) {
-
         // Our logic
         ShowFragment(position);
         return true;
@@ -202,8 +202,46 @@ public class GpsMainActivity extends Activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
             getMenuInflater().inflate(R.menu.gps_main, menu);
+            mnuAnnotate = menu.findItem(R.id.mnuAnnotate);
+            enableDisableMenuItems();
             return true;
     }
+
+    private void enableDisableMenuItems() {
+
+
+        if(mnuAnnotate == null)
+        {
+            return;
+        }
+
+        if(!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml() && !AppSettings.shouldLogToCustomUrl())
+        {
+            mnuAnnotate.setIcon(R.drawable.ic_menu_edit_disabled);
+            mnuAnnotate.setEnabled(false);
+        }
+        else
+        {
+            mnuAnnotate.setIcon(android.R.drawable.ic_menu_edit);
+        }
+    }
+
+    public void SetAnnotationButtonMarked(boolean marked)
+    {
+        if(mnuAnnotate == null){
+            return;
+        }
+
+        if (marked)
+        {
+            mnuAnnotate.setIcon(R.drawable.ic_menu_edit_active);
+        }
+        else
+        {
+            mnuAnnotate.setIcon(android.R.drawable.ic_menu_edit);
+        }
+    }
+
 
     /**
      * Handles menu item selection
@@ -214,16 +252,97 @@ public class GpsMainActivity extends Activity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.mnuAnnotate) {
-            Utilities.LogDebug("GpsMainActivity - Menu Annotate");
-            Toast.makeText(this, "Annotate", Toast.LENGTH_SHORT).show();
-            return true;
+
+        switch(id){
+            case R.id.mnuAnnotate:
+                Annotate();
+                return true;
+            case R.id.mnuOnePoint:
+                LogSinglePoint();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        if(id == R.id.mnuOnePoint){
-                loggingService.LogOnce();
+    }
+
+    private void LogSinglePoint() {
+        GpsLegacyFragment frag = (GpsLegacyFragment)getFragmentManager().findFragmentById(R.id.container);
+        frag.setCurrentlyLogging(true);
+        loggingService.LogOnce();
+    }
+
+    /**
+     * Annotates GPX and KML files, TXT files are ignored.
+     *
+     * The annotation is done like this:
+     *     <wpt lat="##.##" lon="##.##">
+     *         <name>user input</name>
+     *     </wpt>
+     *
+     * The user is prompted for the content of the <name> tag. If a valid
+     * description is given, the logging service starts in single point mode.
+     *
+     */
+    private void Annotate()
+    {
+        Utilities.LogDebug("GpsMainActivity.Annotate");
+
+        if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml() && !AppSettings.shouldLogToCustomUrl())
+        {
+            Toast.makeText(getApplicationContext(), getString(R.string.annotation_requires_logging), 1000).show();
+
+            return;
         }
-        return super.onOptionsItemSelected(item);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(GpsMainActivity.this);
+
+
+        alert.setTitle(R.string.add_description);
+        alert.setMessage(R.string.letters_numbers);
+
+        // Set an EditText view to get user input
+        final EditText input = new EditText(getApplicationContext());
+        input.setTextColor(getResources().getColor(android.R.color.black));
+        input.setText(Session.getDescription());
+        alert.setView(input);
+
+        /* ok */
+        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+                final String desc = Utilities.CleanDescription(input.getText().toString());
+                if (desc.length() == 0)
+                {
+                    Session.clearDescription();
+                    OnClearAnnotation();
+                }
+                else
+                {
+                    Session.setDescription(desc);
+                    OnSetAnnotation();
+                    // logOnce will start single point mode.
+                    if (!Session.isStarted()){
+                        LogSinglePoint();
+                    }
+                }
+            }
+
+        });
+
+        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+                // Cancelled.
+            }
+        });
+
+        AlertDialog alertDialog = alert.create();
+        alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        alertDialog.show();
+        //alert.show();
     }
 
 
@@ -244,9 +363,8 @@ public class GpsMainActivity extends Activity
         {
             loggingService.StopLogging();
         }
-
-
     }
+
 
 
     /**
@@ -290,7 +408,7 @@ public class GpsMainActivity extends Activity
 //            buttonOnOff.setOnCheckedChangeListener(GpsMainActivity.this);
 
             if (Session.hasDescription()){
-               // OnSetAnnotation();
+                OnSetAnnotation();
             }
 
         }
@@ -347,7 +465,8 @@ public class GpsMainActivity extends Activity
     @Override
     public void OnLocationUpdate(Location loc) {
         GpsLegacyFragment frag = (GpsLegacyFragment)getFragmentManager().findFragmentById(R.id.container);
-        frag.onTextUpdate(String.valueOf(loc.getLatitude()));
+        //frag.onTextUpdate(String.valueOf(loc.getLatitude()));
+        frag.setLocationInfo(loc);
     }
 
     @Override
@@ -362,17 +481,20 @@ public class GpsMainActivity extends Activity
 
     @Override
     public void OnStopLogging() {
-
+        GpsLegacyFragment frag = (GpsLegacyFragment)getFragmentManager().findFragmentById(R.id.container);
+        frag.onTextUpdate("Stopped logging");
     }
 
     @Override
     public void OnSetAnnotation() {
-
+        Utilities.LogDebug("GpsMainActivity.OnSetAnnotation");
+        SetAnnotationButtonMarked(true);
     }
 
     @Override
     public void OnClearAnnotation() {
-
+        Utilities.LogDebug("GpsMainActivity.OnClearAnnotation");
+        SetAnnotationButtonMarked(false);
     }
 
     @Override

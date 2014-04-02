@@ -2,6 +2,7 @@ package com.mendhak.gpslogger.views;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.Session;
 import org.w3c.dom.Text;
 
 /**
@@ -30,6 +32,19 @@ public class GpsLegacyFragment extends Fragment implements View.OnClickListener 
         txt.setText(message);
     }
 
+    public void setCurrentlyLogging(boolean loggingStatus) {
+        TextView txt = (TextView)rootView.findViewById(R.id.textViewLocation);
+        txt.setText("Started logging " + String.valueOf(loggingStatus));
+    }
+
+    public void setLocationInfo(Location currentLocationInfo) {
+        if(currentLocationInfo != null){
+            TextView txt = (TextView)rootView.findViewById(R.id.textViewLocation);
+            txt.setText(String.valueOf(currentLocationInfo.getAccuracy()));
+        }
+
+    }
+
     public interface IGpsLegacyFragmentListener{
         public void OnNewGpsLegacyMessage(String message);
 
@@ -48,8 +63,12 @@ public class GpsLegacyFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        TextView textView;
         rootView = inflater.inflate(R.layout.fragment_gps_main, container, false);
+
+
+        setCurrentlyLogging(Session.isStarted());
+        setLocationInfo(Session.getCurrentLocationInfo());
+
         Button btnStart = (Button) rootView.findViewById(R.id.buttonStart);
         btnStart.setText("Found it");
         btnStart.setOnClickListener(this);
@@ -74,6 +93,8 @@ public class GpsLegacyFragment extends Fragment implements View.OnClickListener 
         }
 
         callback.OnNewGpsLegacyMessage("Well well well");
+
+
 
     }
 

@@ -801,6 +801,7 @@ public class GpsLoggingService extends Service implements IActionListener
 
         if (IsMainFormVisible())
         {
+            Utilities.LogDebug("Location to update: " + String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getLongitude()));
             mainServiceClient.OnLocationUpdate(loc);
         }
 
