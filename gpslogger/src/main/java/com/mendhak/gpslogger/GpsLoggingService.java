@@ -803,6 +803,11 @@ public class GpsLoggingService extends Service implements IActionListener
         {
             mainServiceClient.OnLocationUpdate(loc);
         }
+
+        if(Session.isSinglePointMode()){
+            Utilities.LogDebug("Single point mode - stopping logging now");
+            StopLogging();
+        }
     }
 
     private void SetDistanceTraveled(Location loc)

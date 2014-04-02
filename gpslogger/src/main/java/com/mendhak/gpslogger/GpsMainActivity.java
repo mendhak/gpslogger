@@ -219,6 +219,10 @@ public class GpsMainActivity extends Activity
             Toast.makeText(this, "Annotate", Toast.LENGTH_SHORT).show();
             return true;
         }
+
+        if(id == R.id.mnuOnePoint){
+                loggingService.LogOnce();
+        }
         return super.onOptionsItemSelected(item);
     }
 
