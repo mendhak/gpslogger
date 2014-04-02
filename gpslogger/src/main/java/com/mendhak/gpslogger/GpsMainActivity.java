@@ -4,6 +4,7 @@ import android.app.*;
 import android.content.*;
 import android.content.res.ColorStateList;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -19,7 +20,11 @@ import com.mendhak.gpslogger.settings.LoggingSettingsActivity;
 import com.mendhak.gpslogger.settings.UploadSettingsActivity;
 import com.mendhak.gpslogger.views.GpsLegacyFragment;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 public class GpsMainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, GpsLegacyFragment.IGpsLegacyFragmentListener, IGpsLoggerServiceClient {
@@ -92,6 +97,22 @@ public class GpsMainActivity extends Activity
 
         return super.onKeyUp(keyCode, event);
     }
+
+    /**
+     * Handles the hardware back-button press
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        Utilities.LogInfo("KeyDown - " + String.valueOf(keyCode));
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && Session.isBoundToService())
+        {
+            StopAndUnbindServiceIfRequired();
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
 
     /**
      *
@@ -260,6 +281,9 @@ public class GpsMainActivity extends Activity
             case R.id.mnuOnePoint:
                 LogSinglePoint();
                 return true;
+            case R.id.mnuShare:
+                Share();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -343,6 +367,103 @@ public class GpsMainActivity extends Activity
         alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         alertDialog.show();
         //alert.show();
+    }
+
+
+
+    /**
+     * Allows user to send a GPX/KML file along with location, or location only
+     * using a provider. 'Provider' means any application that can accept such
+     * an intent (Facebook, SMS, Twitter, Email, K-9, Bluetooth)
+     */
+    private void Share()
+    {
+        Utilities.LogDebug("GpsMainActivity.Share");
+        try
+        {
+
+            final String locationOnly = getString(R.string.sharing_location_only);
+            final File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
+            if (gpxFolder.exists())
+            {
+
+                File[] enumeratedFiles = gpxFolder.listFiles();
+
+                Arrays.sort(enumeratedFiles, new Comparator<File>() {
+                    public int compare(File f1, File f2) {
+                        return -1 * Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+                    }
+                });
+
+                List<String> fileList = new ArrayList<String>(enumeratedFiles.length);
+
+                for (File f : enumeratedFiles)
+                {
+                    fileList.add(f.getName());
+                }
+
+                fileList.add(0, locationOnly);
+                final String[] files = fileList.toArray(new String[fileList.size()]);
+
+                final Dialog dialog = new Dialog(this);
+                dialog.setTitle(R.string.sharing_pick_file);
+                dialog.setContentView(R.layout.filelist);
+                ListView thelist = (ListView) dialog.findViewById(R.id.listViewFiles);
+
+                thelist.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
+                        R.layout.list_black_text, R.id.list_content, files));
+
+                thelist.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                {
+
+                    public void onItemClick(AdapterView<?> av, View v, int index, long arg)
+                    {
+                        dialog.dismiss();
+                        String chosenFileName = files[index];
+
+                        final Intent intent = new Intent(Intent.ACTION_SEND);
+
+                        // intent.setType("text/plain");
+                        intent.setType("*/*");
+
+                        if (chosenFileName.equalsIgnoreCase(locationOnly))
+                        {
+                            intent.setType("text/plain");
+                        }
+
+                        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing_mylocation));
+                        if (Session.hasValidLocation())
+                        {
+                            String bodyText = getString(R.string.sharing_googlemaps_link,
+                                    String.valueOf(Session.getCurrentLatitude()),
+                                    String.valueOf(Session.getCurrentLongitude()));
+                            intent.putExtra(Intent.EXTRA_TEXT, bodyText);
+                            intent.putExtra("sms_body", bodyText);
+                        }
+
+                        if (chosenFileName.length() > 0
+                                && !chosenFileName.equalsIgnoreCase(locationOnly))
+                        {
+                            intent.putExtra(Intent.EXTRA_STREAM,
+                                    Uri.fromFile(new File(gpxFolder, chosenFileName)));
+                        }
+
+                        startActivity(Intent.createChooser(intent, getString(R.string.sharing_via)));
+
+                    }
+                });
+                dialog.show();
+            }
+            else
+            {
+                Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
+            }
+        }
+        catch (Exception ex)
+        {
+            Utilities.LogError("Share", ex);
+        }
+
     }
 
 

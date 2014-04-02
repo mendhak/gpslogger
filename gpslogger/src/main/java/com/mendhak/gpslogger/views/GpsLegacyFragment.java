@@ -93,9 +93,6 @@ public class GpsLegacyFragment extends Fragment implements View.OnClickListener 
         }
 
         callback.OnNewGpsLegacyMessage("Well well well");
-
-
-
     }
 
 }
