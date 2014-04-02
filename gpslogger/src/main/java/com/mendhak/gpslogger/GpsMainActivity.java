@@ -13,8 +13,19 @@ import android.view.*;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.*;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.senders.FileSenderFactory;
+import com.mendhak.gpslogger.senders.IFileSender;
+import com.mendhak.gpslogger.senders.dropbox.DropBoxAuthorizationActivity;
+import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
+import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
+import com.mendhak.gpslogger.senders.ftp.AutoFtpActivity;
+import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
+import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity;
+import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
+import com.mendhak.gpslogger.senders.osm.OSMHelper;
 import com.mendhak.gpslogger.settings.GeneralSettingsActivity;
 import com.mendhak.gpslogger.settings.LoggingSettingsActivity;
 import com.mendhak.gpslogger.settings.UploadSettingsActivity;
@@ -27,7 +38,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class GpsMainActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, GpsLegacyFragment.IGpsLegacyFragmentListener, IGpsLoggerServiceClient {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, GpsLegacyFragment.IGpsLegacyFragmentListener, IGpsLoggerServiceClient, IActionListener {
 
     private static Intent serviceIntent;
     private GpsLoggingService loggingService;
@@ -284,6 +295,24 @@ public class GpsMainActivity extends Activity
             case R.id.mnuShare:
                 Share();
                 return true;
+            case R.id.mnuOSM:
+                UploadToOpenStreetMap();
+                return true;
+            case R.id.mnuDropBox:
+                UploadToDropBox();
+                return true;
+            case R.id.mnuGDocs:
+                UploadToGoogleDocs();
+                return true;
+            case R.id.mnuOpenGTS:
+                SendToOpenGTS();
+                return true;
+            case R.id.mnuFtp:
+                SendToFtp();
+                return true;
+            case R.id.mnuEmail:
+                SelectAndEmailFile();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -370,6 +399,176 @@ public class GpsMainActivity extends Activity
     }
 
 
+
+    /**
+     * Uploads a GPS Trace to OpenStreetMap.org.
+     */
+    private void UploadToOpenStreetMap()
+    {
+        Utilities.LogDebug("GpsMainactivity.UploadToOpenStreetMap");
+
+        if (!OSMHelper.IsOsmAuthorized(getApplicationContext()))
+        {
+            startActivity(OSMHelper.GetOsmSettingsIntent(getApplicationContext()));
+            return;
+        }
+
+        Intent settingsIntent = OSMHelper.GetOsmSettingsIntent(getApplicationContext());
+
+        ShowFileListDialog(settingsIntent, FileSenderFactory.GetOsmSender(getApplicationContext(), this));
+
+    }
+
+    private void UploadToDropBox()
+    {
+        Utilities.LogDebug("GpsMainActivity.UploadToDropBox");
+
+        final DropBoxHelper dropBoxHelper = new DropBoxHelper(getApplicationContext(), this);
+
+        if (!dropBoxHelper.IsLinked())
+        {
+            startActivity(new Intent("com.mendhak.gpslogger.DROPBOX_SETUP"));
+            return;
+        }
+
+        Intent settingsIntent = new Intent(GpsMainActivity.this, DropBoxAuthorizationActivity.class);
+        ShowFileListDialog(settingsIntent, FileSenderFactory.GetDropBoxSender(getApplication(), this));
+
+    }
+
+    private void SendToOpenGTS()
+    {
+        Utilities.LogDebug("GpsMainActivity.SendToOpenGTS");
+
+        Intent settingsIntent = new Intent(getApplicationContext(), OpenGTSActivity.class);
+
+        if (!Utilities.IsOpenGTSSetup())
+        {
+            startActivity(settingsIntent);
+        }
+        else
+        {
+            IFileSender fs = FileSenderFactory.GetOpenGTSSender(getApplicationContext(), this);
+            ShowFileListDialog(settingsIntent, fs);
+        }
+    }
+
+    private void UploadToGoogleDocs()
+    {
+        Utilities.LogDebug("GpsMainActivity.UploadToGoogleDocs");
+
+        if (!GDocsHelper.IsLinked(getApplicationContext()))
+        {
+            startActivity(new Intent(GpsMainActivity.this, GDocsSettingsActivity.class));
+            return;
+        }
+
+        Intent settingsIntent = new Intent(GpsMainActivity.this, GDocsSettingsActivity.class);
+        ShowFileListDialog(settingsIntent, FileSenderFactory.GetGDocsSender(getApplicationContext(), this));
+    }
+
+    private void SendToFtp()
+    {
+        Utilities.LogDebug("GpsMainActivity.SendToFTP");
+
+        Intent settingsIntent = new Intent(getApplicationContext(), AutoFtpActivity.class);
+
+        if(!Utilities.IsFtpSetup())
+        {
+            startActivity(settingsIntent);
+        }
+        else
+        {
+            IFileSender fs = FileSenderFactory.GetFtpSender(getApplicationContext(), this);
+            ShowFileListDialog(settingsIntent, fs);
+
+        }
+    }
+
+    private void SelectAndEmailFile()
+    {
+        Utilities.LogDebug("GpsMainActivity.SelectAndEmailFile");
+
+        Intent settingsIntent = new Intent(getApplicationContext(), AutoEmailActivity.class);
+
+        if (!Utilities.IsEmailSetup())
+        {
+
+            startActivity(settingsIntent);
+        }
+        else
+        {
+            ShowFileListDialog(settingsIntent, FileSenderFactory.GetEmailSender(this));
+        }
+
+    }
+
+    private void ShowFileListDialog(final Intent settingsIntent, final IFileSender sender)
+    {
+
+        final File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
+
+        if (gpxFolder != null && gpxFolder.exists())
+        {
+            File[] enumeratedFiles = gpxFolder.listFiles(sender);
+
+            Arrays.sort(enumeratedFiles, new Comparator<File>()
+            {
+                public int compare(File f1, File f2)
+                {
+                    return -1 * Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+                }
+            });
+
+            List<String> fileList = new ArrayList<String>(enumeratedFiles.length);
+
+            for (File f : enumeratedFiles)
+            {
+                fileList.add(f.getName());
+            }
+
+            final String settingsText = getString(R.string.menu_settings);
+
+            fileList.add(0, settingsText);
+            final String[] files = fileList.toArray(new String[fileList.size()]);
+
+            final Dialog dialog = new Dialog(this);
+            dialog.setTitle(R.string.osm_pick_file);
+            dialog.setContentView(R.layout.filelist);
+            ListView displayList = (ListView) dialog.findViewById(R.id.listViewFiles);
+
+            displayList.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
+                    R.layout.list_black_text, R.id.list_content, files));
+
+            displayList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
+                public void onItemClick(AdapterView<?> av, View v, int index, long arg)
+                {
+
+                    dialog.dismiss();
+                    String chosenFileName = files[index];
+
+                    if (chosenFileName.equalsIgnoreCase(settingsText))
+                    {
+                        startActivity(settingsIntent);
+                    }
+                    else
+                    {
+                        Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.please_wait),
+                                getString(R.string.please_wait));
+                        List<File> files = new ArrayList<File>();
+                        files.add(new File(gpxFolder, chosenFileName));
+                        sender.UploadFile(files);
+                    }
+                }
+            });
+            dialog.show();
+        }
+        else
+        {
+            Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
+        }
+    }
 
     /**
      * Allows user to send a GPX/KML file along with location, or location only
@@ -626,5 +825,16 @@ public class GpsMainActivity extends Activity
     @Override
     public void onFileName(String newFileName) {
 
+    }
+
+    // IActionListener callbacks
+    @Override
+    public void OnComplete() {
+        Utilities.HideProgress();
+    }
+
+    @Override
+    public void OnFailure() {
+        Utilities.HideProgress();
     }
 }
