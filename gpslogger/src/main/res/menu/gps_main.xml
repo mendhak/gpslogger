@@ -4,12 +4,12 @@
 
 
 
-    <item android:id="@+id/mnuAnnotate" android:title="@string/menu_annotate" android:icon="@android:drawable/ic_menu_edit" android:showAsAction="always" />
+    <item android:id="@+id/mnuAnnotate" android:title="@string/menu_annotate" android:icon="@drawable/annotate2" android:showAsAction="always" />
 
-    <item android:id="@+id/mnuOnePoint" android:title="@string/menu_onepoint" android:icon="@drawable/ic_action_one" android:showAsAction="always" />
+    <item android:id="@+id/mnuOnePoint" android:title="@string/menu_onepoint" android:icon="@drawable/singlepoint" android:showAsAction="always" />
 
 
-    <item android:id="@+id/mnuUpload" android:title="@string/menu_upload" android:icon="@android:drawable/ic_menu_upload" android:showAsAction="always">
+    <item android:id="@+id/mnuUpload" android:title="@string/menu_upload" android:icon="@drawable/upload" android:showAsAction="always">
         <menu>
             <item android:id="@+id/mnuDropBox" android:title="@string/dropbox_upload" />
             <item android:id="@+id/mnuOSM" android:title="@string/osm_upload" />
@@ -22,7 +22,7 @@
     </item>
 
 
-    <item android:id="@+id/mnuShare" android:title="@string/menu_share" android:icon="@android:drawable/ic_menu_share" android:showAsAction="always"  />
+    <item android:id="@+id/mnuShare" android:title="@string/menu_share" android:icon="@drawable/share" android:showAsAction="always"  />
 
 
 

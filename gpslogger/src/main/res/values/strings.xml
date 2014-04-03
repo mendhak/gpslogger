@@ -456,5 +456,8 @@
     <string name="txt_travel_duration">Duration:</string>
     <string name="menu_onepoint">Log one point</string>
 
+    <string name="view_simple">Simple View</string>
+    <string name="view_detailed">Detailed View</string>
+    <string name="view_legacy">Legacy</string>
 
 </resources>
