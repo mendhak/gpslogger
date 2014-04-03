@@ -2,20 +2,15 @@ package com.mendhak.gpslogger;
 
 import android.app.*;
 import android.content.*;
-import android.content.res.ColorStateList;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.*;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.*;
-import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.IActionListener;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxAuthorizationActivity;
@@ -29,6 +24,8 @@ import com.mendhak.gpslogger.senders.osm.OSMHelper;
 import com.mendhak.gpslogger.settings.GeneralSettingsActivity;
 import com.mendhak.gpslogger.settings.LoggingSettingsActivity;
 import com.mendhak.gpslogger.settings.UploadSettingsActivity;
+import com.mendhak.gpslogger.views.GpsDetailedViewFragment;
+import com.mendhak.gpslogger.views.GpsSimpleViewFragment;
 import com.mendhak.gpslogger.views.GpsLegacyFragment;
 
 import java.io.File;
@@ -134,16 +131,21 @@ public class GpsMainActivity extends Activity
         navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
-    private void ShowFragment(int fragment_number) {
+    private void changeMainView(int view) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-        if (fragment_number == 0) {
-            transaction.replace(R.id.container, GpsLegacyFragment.newInstance());
-        } else {
-
-            transaction.replace(R.id.container, new NavigationDrawerFragment());
+        switch (view) {
+            case 0:
+                transaction.replace(R.id.container, new GpsSimpleViewFragment());
+                break;
+            case 1:
+                transaction.replace(R.id.container, new GpsDetailedViewFragment());
+                break;
+            default:
+            case 2:
+                transaction.replace(R.id.container, GpsLegacyFragment.newInstance());
+                break;
         }
-
         transaction.commit();
     }
 
@@ -221,8 +223,7 @@ public class GpsMainActivity extends Activity
      */
     @Override
     public boolean onNavigationItemSelected(int position, long id) {
-        // Our logic
-        ShowFragment(position);
+        changeMainView(position);
         return true;
 
     }

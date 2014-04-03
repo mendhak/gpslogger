@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <TableLayout
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        <TableRow>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lat:"
+                        android:id="@+id/simple_lat_label"/>
+
+                <EditText
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="100dp"
+                        android:id="@+id/simple_lon_text"
+                        android:editable="false"/>
+
+                <TextView
+                        android:layout_toLeftOf="@id/simple_lon_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lon:"
+                        android:id="@+id/simple_lon_label"/>
+
+                <EditText
+                        android:layout_toRightOf="@id/simple_lat_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="100dp"
+                        android:id="@+id/simple_lat_text"
+                        android:editable="false"/>
+
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content">
+            <!-- TODO: Only one of the following views should be displayed -->
+            <ImageView
+                    android:layout_height="100dp"
+                    android:layout_width="100dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:background="?android:selectableItemBackground"
+                    android:id="@+id/simple_play"
+                    android:src="@android:drawable/ic_media_play"
+                    />
+            <ImageView
+                    android:layout_height="100dp"
+                    android:layout_width="100dp"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:background="?android:selectableItemBackground"
+                    android:id="@+id/simple_stop"
+                    android:src="@android:drawable/ic_media_pause"
+                    />
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>
