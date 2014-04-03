@@ -5,6 +5,24 @@
               android:layout_width="fill_parent"
               android:layout_height="wrap_content">
 
+    <!-- TODO: Need to change the image views src to either circle_grey or circle_dark dynamically. -->
+    <ImageView
+            android:layout_alignParentLeft="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:id="@+id/action_notify_fix_img"
+            android:src="@drawable/circle_white"/>
+
+    <ImageView
+            android:layout_toRightOf="@id/action_notify_fix_img"
+            android:padding="5dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/action_notify_log_img"
+            android:src="@drawable/circle_white"
+            />
+
     <ImageButton
         android:id="@+id/imgHelp"
         android:layout_alignParentRight="true"
@@ -13,6 +31,5 @@
         android:src="@android:drawable/ic_menu_help"
         android:background="?android:selectableItemBackground"
         />
-
 
 </RelativeLayout>
