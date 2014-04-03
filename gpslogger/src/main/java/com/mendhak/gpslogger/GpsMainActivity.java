@@ -250,12 +250,12 @@ public class GpsMainActivity extends Activity
 
         if(!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml() && !AppSettings.shouldLogToCustomUrl())
         {
-            mnuAnnotate.setIcon(R.drawable.ic_menu_edit_disabled);
+            mnuAnnotate.setIcon(R.drawable.annotate2_disabled);
             mnuAnnotate.setEnabled(false);
         }
         else
         {
-            mnuAnnotate.setIcon(android.R.drawable.ic_menu_edit);
+            mnuAnnotate.setIcon(R.drawable.annotate2);
         }
     }
 
@@ -267,11 +267,11 @@ public class GpsMainActivity extends Activity
 
         if (marked)
         {
-            mnuAnnotate.setIcon(R.drawable.ic_menu_edit_active);
+            mnuAnnotate.setIcon(R.drawable.annotate2_active);
         }
         else
         {
-            mnuAnnotate.setIcon(android.R.drawable.ic_menu_edit);
+            mnuAnnotate.setIcon(R.drawable.annotate2);
         }
     }
 
@@ -321,8 +321,8 @@ public class GpsMainActivity extends Activity
     }
 
     private void LogSinglePoint() {
-        GpsLegacyFragment frag = (GpsLegacyFragment)getFragmentManager().findFragmentById(R.id.container);
-        frag.setCurrentlyLogging(true);
+//        GpsLegacyFragment frag = (GpsLegacyFragment)getFragmentManager().findFragmentById(R.id.container);
+//        frag.setCurrentlyLogging(true);
         loggingService.LogOnce();
     }
 
