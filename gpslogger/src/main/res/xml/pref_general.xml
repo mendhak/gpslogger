@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:key="gpslogger_preferences">
+
+
+    <CheckBoxPreference
+        android:key="show_notification"
+        android:summary="@string/show_notification_summary"
+        android:title="@string/show_notification_title"
+        android:defaultValue="true"/>
+    <CheckBoxPreference
+        android:title="@string/startonbootup_title"
+        android:summary="@string/startonbootup_summary"
+        android:key="startonbootup"/>
+    <CheckBoxPreference
+        android:title="@string/display_imperial_title"
+        android:summary="@string/display_imperial_summary"
+        android:key="useImperial"/>
+    <Preference
+        android:title="@string/enabledisablegps_title"
+        android:summary="@string/enabledisablegps_summary"
+        android:key="enableDisableGps"
+        android:defaultValue="false"/>
+
+    <CheckBoxPreference
+        android:title="@string/debuglog_title"
+        android:summary="@string/debuglog_summary"
+        android:key="debugtofile"
+        android:defaultValue="false"/>
+
+    <Preference android:key="about_version_info"></Preference>
+
+
+</PreferenceScreen>
