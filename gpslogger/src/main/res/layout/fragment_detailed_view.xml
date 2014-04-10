@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:background="@drawable/rounded_gray"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+
+                android:layout_alignParentLeft="true"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="30"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_latitude"
+                        android:textSize="20sp"
+                        android:id="@+id/detailedview_lat_label"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="80"
+                        android:layout_height="wrap_content"
+                        android:minWidth="200dp"
+                        android:textSize="50sp"
+                        android:id="@+id/detailedview_lat_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="30"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_longitude"
+                        android:textSize="20sp"
+                        android:id="@+id/detailedview_lon_label"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="80"
+                        android:layout_height="wrap_content"
+                        android:minWidth="200dp"
+                        android:textSize="50sp"
+                        android:text=""
+                        android:id="@+id/detailedview_lon_text"
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+
+            android:background="@drawable/rounded_gray_thin"
+
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                    <!-- TODO: Only one of the following views should be displayed -->
+                    <ImageView
+                        android:layout_height="50dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:background="?android:selectableItemBackground"
+                        android:id="@+id/detailedview_play"
+                        android:src="@drawable/play"
+                        />
+
+                    <ImageView
+                        android:layout_height="50dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:background="?android:selectableItemBackground"
+                        android:id="@+id/detailedview_stop"
+                        android:src="@drawable/stop"
+                        />
+                    <TextView
+                        android:id="@+id/detailedview_txtstatus"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:layout_gravity="center_vertical"
+                        />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+
+            android:background="@drawable/rounded_gray_thin"
+
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <EditText
+                        android:minWidth="@dimen/view_text_width"
+                        android:layout_width="0dp"
+                        android:layout_weight="100"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detailedview_datetime_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_altitude"
+                        android:id="@+id/detailedview_altitude_label"/>
+
+                    <EditText
+                        android:minWidth="@dimen/view_text_width"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detailedview_altitude_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_speed"
+                        android:id="@+id/detailedview_speed_label"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:minWidth="@dimen/view_text_width"
+                        android:id="@+id/detailedview_speed_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_direction"
+                        android:id="@+id/detailedview_direction_label"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:minWidth="@dimen/view_text_width"
+                        android:id="@+id/detailedview_direction_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_satellites"
+                        android:id="@+id/detailedview_satellites_label"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:minWidth="@dimen/view_text_width"
+                        android:id="@+id/detailedview_satellites_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_accuracy"
+                        android:id="@+id/detailedview_accuracy_label"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:minWidth="@dimen/view_text_width"
+                        android:id="@+id/detailedview_accuracy_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_travel_distance"
+                        android:id="@+id/detailedview_travelled_label"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:minWidth="@dimen/view_text_width"
+                        android:id="@+id/detailedview_travelled_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_travel_duration"
+                        android:id="@+id/detailedview_duration_label"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:minWidth="@dimen/view_text_width"
+                        android:id="@+id/detailedview_duration_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+
+            android:background="@drawable/rounded_gray_thin"
+
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:text="@string/summary_loggingto"
+                        android:id="@+id/detailedview_loggingto_label"/>
+
+                    <EditText
+                        android:minWidth="@dimen/view_text_width"
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detailedview_loggingto_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:text="@string/summary_freq_every"
+                        android:id="@+id/detailedview_frequency_label"/>
+
+                    <EditText
+                        android:minWidth="@dimen/view_text_width"
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detailedview_frequency_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:text="@string/summary_dist"
+                        android:id="@+id/detailedview_distance_label"/>
+
+                    <EditText
+                        android:minWidth="@dimen/view_text_width"
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detailedview_distance_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:text="@string/summary_current_filename"
+                        android:id="@+id/detailedview_file_label"/>
+
+                    <EditText
+                        android:minWidth="@dimen/view_text_width"
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detailedview_file_text"
+                        android:textSize="12sp"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:text="@string/summary_autosend"
+                        android:id="@+id/detailedview_autosend_label"/>
+
+                    <EditText
+                        android:minWidth="@dimen/view_text_width"
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detailedview_autosend_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:text="@string/summary_autosendtargets"
+                        android:id="@+id/detailedview_autosendtargets_label"/>
+
+                    <EditText
+                        android:minWidth="@dimen/view_text_width"
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detailedview_autosendtargets_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>
