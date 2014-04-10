@@ -32,7 +32,7 @@
                         android:layout_weight="30"
                         android:layout_height="wrap_content"
                         android:text="@string/txt_latitude"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/detailedview_latlong_labelsize"
                         android:id="@+id/detailedview_lat_label"/>
 
                     <EditText
@@ -40,7 +40,7 @@
                         android:layout_weight="80"
                         android:layout_height="wrap_content"
                         android:minWidth="200dp"
-                        android:textSize="50sp"
+                        android:textSize="@dimen/detailedview_latlong_textsize"
                         android:id="@+id/detailedview_lat_text"
                         android:text=""
                         android:selectAllOnFocus="true"
@@ -60,7 +60,7 @@
                         android:layout_weight="30"
                         android:layout_height="wrap_content"
                         android:text="@string/txt_longitude"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/detailedview_latlong_labelsize"
                         android:id="@+id/detailedview_lon_label"/>
 
                     <EditText
@@ -68,7 +68,7 @@
                         android:layout_weight="80"
                         android:layout_height="wrap_content"
                         android:minWidth="200dp"
-                        android:textSize="50sp"
+                        android:textSize="@dimen/detailedview_latlong_textsize"
                         android:text=""
                         android:id="@+id/detailedview_lon_text"
                         android:selectAllOnFocus="true"

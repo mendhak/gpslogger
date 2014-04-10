@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="detailedview_label_weight">25</integer>
+    <integer name="detailedview_label_weight">30</integer>
     <integer name="detailedview_text_weight">90</integer>
 </resources>
