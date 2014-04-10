@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="title_drawer_headsettings">GPSLogger</string>
+    <string name="title_drawer_generalsettings">General settings</string>
+    <string name="title_drawer_loggingsettings">Logging settings</string>
+    <string name="title_drawer_uploadsettings">Upload settings</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="app_name">GPSLogger</string>
+    <string name="settings_screen_name">GPSLogger Settings</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="could_not_write_to_file">Could not write to file</string>
+    <string name="description_added">Description added to file</string>
+    <string name="not_yet">Not Yet</string>
+    <string name="cant_add_description_until_next_point">You can\'t add a description until the next point has been
+        logged to a file.
+    </string>
+    <string name="add_description">Add a description</string>
+    <string name="letters_numbers">Use only letters and numbers</string>
+
+    <!-- menu strings -->
+    <string name="menu_settings">Settings</string>
+
+
+
+
+
+    <string name="menu_annotate">Annotate</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_exit">Exit</string>
+
+
+    <!-- main form labels -->
+    <string name="txt_latitude">Latitude:</string>
+    <string name="txt_longitude">Longitude:</string>
+    <string name="txt_altitude">Altitude:</string>
+    <string name="txt_speed">Speed:</string>
+    <string name="txt_direction">Direction:</string>
+    <string name="txt_satellites">Satellites:</string>
+    <string name="txt_accuracy">Accuracy:</string>
+    <string name="txt_travel_distance">Travelled:</string>
+    <string name="btn_start_logging">Start Logging</string>
+    <string name="btn_stop_logging">Stop Logging</string>
+
+
+    <string name="gpslogger_still_running">GPSLogger is still running.</string>
+
+    <string name="summary_loggingto">Logging to:</string>
+    <string name="summary_loggingto_screen">screen only</string>
+    <string name="summary_freq_every">Frequency:</string>
+    <string name="summary_freq_max">maximum</string>
+    <string name="summary_dist">Distance:</string>
+    <string name="summary_dist_regardless">maximum</string>
+    <string name="summary_current_filename">File:</string>
+    <string name="summary_current_filename_format">%s (in your GPSLogger folder)</string>
+
+
+
+
+    <string name="sharing_location_only">Location only</string>
+    <string name="sharing_pick_file">Pick a file to share</string>
+    <string name="sharing_mylocation">My location</string>
+    <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
+    <string name="sharing_via">Share via</string>
+
+    <!-- general -->
+    <string name="foot">&#160;foot</string>
+    <string name="feet">&#160;feet</string>
+    <string name="meter">&#160;meter</string>
+    <string name="meters">&#160;meters</string>
+    <string name="error">Error</string>
+    <string name="error_connection">Connection Error. Please check your phone settings.</string>
+
+
+
+
+    <string name="gpsprovider_unavailable">No GPS provider available. Please check your location settings and enable a
+        location provider.
+    </string>
+    <string name="started">Started</string>
+    <string name="providername_using">&#160;&#160;&#160;&#160;(Using %s)</string>
+    <string name="providername_gps">GPS satellites</string>
+    <string name="providername_celltower">cell towers</string>
+    <string name="not_applicable">n/a</string>
+    <string name="meters_per_second">&#160;m/s</string>
+    <string name="feet_per_second">&#160;ft/s</string>
+    <string name="miles_per_hour">&#160;mi/h</string>
+    <string name="miles">&#160;mi</string>
+    <string name="kilometers_per_hour">&#160;km/h</string>
+    <string name="kilometers">&#160;km</string>
+    <string name="unknown_direction">unknown</string>
+
+    <string name="sorry">Sorry</string>
+    <string name="success">Yay!</string>
+
+
+    <string name="direction_roughly">Roughly %s</string>
+    <string name="direction_north">North</string>
+    <string name="direction_northnortheast">North by Northeast</string>
+    <string name="direction_northeast">Northeast</string>
+    <string name="direction_eastnortheast">East by Northeast</string>
+    <string name="direction_east">East</string>
+    <string name="direction_eastsoutheast">East by Southeast</string>
+    <string name="direction_southeast">Southeast</string>
+    <string name="direction_southsoutheast">South by Southeast</string>
+    <string name="direction_south">South</string>
+    <string name="direction_southsouthwest">South by Southwest</string>
+    <string name="direction_southwest">Southwest</string>
+    <string name="direction_westsouthwest">West by Southwest</string>
+    <string name="direction_west">West</string>
+    <string name="direction_westnorthwest">West by Northwest</string>
+    <string name="direction_northwest">Northwest</string>
+    <string name="direction_northnorthwest">North by Northwest</string>
+
+    <string name="time_onesecond">1 second</string>
+    <string name="time_halfminute">&#189; minute</string>
+    <string name="time_oneminute">1 minute</string>
+    <string name="time_onehour">1 hour</string>
+    <string name="time_quarterhour">15 minutes</string>
+    <string name="time_halfhour">&#189; hour</string>
+    <string name="time_oneandhalfhours">1&#189; hours</string>
+    <string name="time_twoandhalfhours">2&#189; hours</string>
+    <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
+    <string name="accuracy_within" formatted="false">within %s %s</string>
+    <string name="error_displaying">Error in displaying location info: %s</string>
+    <string name="degree_symbol">&#176;</string>
+
+
+    <!-- Settings activity -->
+
+    <string name="settings_distance_in_feet">Distance in feet</string>
+    <string name="settings_enter_feet">Enter feet(max 9999)</string>
+    <string name="settings_distance_in_meters">Distance in meters</string>
+    <string name="settings_accuracy_in_meters">Accuracy in meters</string>
+    <string name="settings_accuracy_in_feet">Accuracy in feet</string>
+    <string name="settings_enter_meters">Enter meters(max 9999)</string>
+    <string name="settings_converting_title">Convertingâ€¦</string>
+    <string name="settings_converting_description">Converting minimum distance units. Values above 9999 are reset to
+        9999. The settings screen will now reload.
+    </string>
+
+    <!-- Settings -->
+    <string name="pref_logging_title">Logging details</string>
+    <string name="log_gpx_title">Log to GPX</string>
+    <string name="log_gpx_summary">Creates a GPX file in the GPSLogger folder on the SD card.</string>
+    <string name="log_kml_title">Log to KML</string>
+    <string name="log_kml_summary">Creates a KML file in the GPSLogger folder on the SD card.</string>
+    <string name="log_plain_text_title">Log to Plain Text</string>
+    <string name="log_plain_text_summary">Creates a plain text file in the GPSLogger folder on the SD card.</string>
+    <string name="new_file_creation_title">New file creation</string>
+    <string name="new_file_creation_summary">Whether to create a new file once a day or each time you start.</string>
+    <string name="new_file_creation_onceaday">Once a day</string>
+    <string name="new_file_creation_everystart">Every time I start</string>
+    <string name="new_file_creation_static">Fixed file</string>
+    <string name="new_file_static_title">Static file name</string>
+    <string name="new_file_static_summary">If you chose to create a fixed file, enter a custom file name</string>
+
+
+    <string name="pref_performance_title">Performance</string>
+    <string name="prefer_celltower_title">Prefer celltowers</string>
+    <string name="prefer_celltower_summary">Uses celltowers rather than satellites. Less accurate, but saves more
+        battery.
+    </string>
+    <string name="time_before_logging_title">Time before logging</string>
+    <string name="time_before_logging_summary">Use 0 for maximum frequency, but slower is better for battery life.
+    </string>
+    <string name="time_before_logging_dialog_title">Time in seconds</string>
+    <string name="time_before_logging_hint">Enter seconds (max 9999)</string>
+    <string name="keep_fix_summary">Be careful, this will dramatically decrease the battery life. Use only for
+        higher precision with low frequencies.
+    </string>
+    <string name="keep_fix_title">Keep GPS on between fixes</string>
+    <string name="retry_time_title">Time interval for accuracy</string>
+    <string name="retry_time_summary">Use 0 for maximum frequency, but slower is better for battery life.
+    </string>
+    <string name="retry_time_dialog_title">Time in seconds</string>
+    <string name="retry_time_hint">Enter seconds (max 9999)</string>
+    <string name="distance_before_logging_title">Distance before logging</string>
+    <string name="distance_before_logging_summary">How far to travel before logging the next point. Use 0 to log all
+        points.
+    </string>
+    <string name="accuracy_before_logging_title">Accuracy before logging</string>
+    <string name="accuracy_before_logging_summary">Which min. accuracy to for logging. Use 0 to log all
+        points.
+    </string>
+    <string name="timeout_time_title">Timeout</string>
+    <string name="timeout_time_summary">How long the GPS stays on looking for a fix before giving up. Use 0 for no timeout</string>
+    <string name="timeout_time_dialog_title">Time in seconds</string>
+    <string name="timeout_time_hint">Enter seconds (max 9999)</string>
+
+    <string name="display_imperial_title">Display Imperial units</string>
+    <string name="display_imperial_summary">Display feet, miles and pints, none of that newfangled metric stuff. (Preferences must still be in metrics)</string>
+    <string name="show_notification_title">Show Notification</string>
+    <string name="show_notification_summary">Displays a reminder along with coordinates in the notification bar.
+    </string>
+
+
+    <string name="enabledisablegps_title">Enable/Disable GPS</string>
+    <string name="enabledisablegps_summary">Go to the phone settings to enable or disable the providers.</string>
+
+    <string name="startonbootup_title">Start on bootup</string>
+    <string name="startonbootup_summary">Launch app and start logging when phone starts</string>
+
+    <string name="autoemail_title">Auto Email Setup</string>
+    <string name="autoemail_summary">Automatically emails the log file to an address of your choice</string>
+
+
+
+
+    <string name="please_wait">Please wait.</string>
+
+    <string name="autoemail_autosend">Enable emails</string>
+    <string name="autoemail_autosend_summary">Enables sending the log file to an email address of your choosing.
+    </string>
+
+
+    <string name="autoemail_target">Target email addresses</string>
+
+
+    <string name="autoemail_frequency_whenistop">When I press stop</string>
+
+
+    <string name="autoemail_frequency_8">After 8 hours</string>
+    <string name="autoemail_frequency_6">After 6 hours</string>
+    <string name="autoemail_frequency_5">After 5 hours</string>
+    <string name="autoemail_frequency_4">After 4 hours</string>
+    <string name="autoemail_frequency_3">After 3 hours</string>
+    <string name="autoemail_frequency_2">After 2 hours</string>
+    <string name="autoemail_frequency_1">After 1 hour</string>
+    <string name="autoemail_frequency_05">After 0.5 hour</string>
+    <string name="autoemail_frequency_008">After 5 minutes</string>
+    <string name="autoemail_smtp_category">Email Settings</string>
+    <string name="autoemail_username">Username</string>
+    <string name="autoemail_username_summary">Username with your email provider</string>
+    <string name="autoemail_password">Password</string>
+    <string name="autoemail_password_summary">Password with your email provider</string>
+    <string name="autoemail_port">Port</string>
+    <string name="autoemail_port_summary">SMTP Port</string>
+    <string name="autoemail_ssl">Use SSL?</string>
+    <string name="autoemail_ssl_summary">Try toggling this if you cannot connect</string>
+    <string name="autoemail_server">SMTP Server</string>
+    <string name="autoemail_server_summary">Hostname of the SMTP server to use</string>
+    <string name="autoemail_choosepreset">Mail Provider</string>
+    <string name="autoemail_choosepreset_summary">Pick a provider or choose manual</string>
+    <string name="autoemail_smtp_testemail">Test email</string>
+    <string name="autoemail_test">Send a test email using the above settings</string>
+    <string name="autoemail_sendingtest">Sending a test email</string>
+    <string name="autoemail_testresult_success">Email was sent</string>
+
+    <string name="autoemail_invalid_form">Invalid values</string>
+    <string name="autoemail_invalid_form_message">Please ensure that all of the fields have been filled in properly
+    </string>
+
+    <string name="fix_obtained">Fix obtained</string>
+    <string name="started_waiting">GPS started, waiting for fix</string>
+    <string name="gps_stopped">GPS paused</string>
+    <string name="stopped">Stopped</string>
+
+
+
+    <string name="osm_setup_title">OpenStreetMap</string>
+    <string name="osm_setup_summary">Set tags, description, visibility and authorization for uploading GPS Traces
+    </string>
+    <string name="osm_preferences_title">OpenStreetMap Preferences</string>
+
+
+
+    <string name="osm_lbl_authorize">Authorize this app</string>
+    <string name="osm_lbl_authorize_description">You will need to grant this app permissions in order to upload GPS
+        traces to OpenStreetMap. You can set tags, descriptions and visibility here after you have authorized this app.
+    </string>
+
+
+    <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
+    <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
+    <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
+    <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
+
+    <string name="osm_upload">OpenStreetMap</string>
+
+    <string name="osm_resetauth">Clear authorization</string>
+    <string name="osm_resetauth_summary">Remove the local authorization used to talk to your OSM account.</string>
+    <string name="osm_auth_error">An error occurred while trying to contact the OpenStreetMap servers. Check that your
+        phone has a connection or please try again later.
+    </string>
+
+    <string name="osm_visibility">Visibility</string>
+    <string name="osm_visibility_summary">Set the visibility of your GPS Trace uploads</string>
+
+    <string name="osm_description">Description</string>
+    <string name="osm_description_summary">The description to use when uploading a trace</string>
+    <string name="osm_tags">Tags</string>
+    <string name="osm_tags_summary">The tags to apply when uploading a trace</string>
+
+    <string name="no_files_found">No files found, nothing to share or upload.</string>
+    <string name="osm_pick_file">Pick a file to upload</string>
+
+    <string name="debuglog_title">Write to debug file</string>
+    <string name="debuglog_summary">Writes debug messages to a file on the SD card. Warning: The file grows very fast.
+    </string>
+
+    <string name="pref_logging_summary">Time, distance, file creation</string>
+    <string name="pref_general_title">General Options</string>
+    <string name="pref_general_summary">Startup and display options</string>
+
+
+    <string name="emailprovider_google">Google Mail</string>
+    <string name="emailprovider_yahoo">Yahoo! Mail</string>
+    <string name="emailprovider_msn">Windows Live Mail</string>
+    <string name="emailprovider_manual">Manual</string>
+    <string name="btn_single_point">Log a single point</string>
+
+    <string name="dropbox_setup_title">Dropbox</string>
+    <string name="dropbox_setup_summary">Authorize with Dropbox to allow file uploads</string>
+    <string name="dropbox_authorize_description">To use Dropbox features, you will need to authorize GPSLogger to upload
+        files to your account.
+    </string>
+    <string name="dropbox_authorize">Authorize</string>
+    <string name="dropbox_unauthorize">Remove Authorization</string>
+    <string name="dropbox_unauthorize_description">You are authorized with Dropbox. Files will be uploaded to
+        \'Apps\\GPSLogger for Android\' You can unlink GPSLogger from Dropbox if you wish.
+    </string>
+    <string name="dropbox_couldnotauthorize">Could not authorize with Dropbox, please try again later</string>
+    <string name="dropbox_upload">Dropbox</string>
+
+
+    <string name="menu_upload">Upload</string>
+
+
+    <string name="autoemail_from">From address</string>
+    <string name="autoemail_from_summary">Some email providers require a from address. Use this only if you need it.
+    </string>
+
+    <string name="gdocs_upload">Google Docs</string>
+
+    <string name="gdocs_settings_screenname">Google Docs Upload Settings</string>
+    <string name="gdocs_startauthorization">Authorize with Google Docs</string>
+    <string name="gdocs_authorize_summary">Takes you to Google Docs where you need to authorize GPSLogger</string>
+    <string name="gdocs_clearauthorization">Clear Authorization</string>
+    <string name="gdocs_clearauthorization_summary">Forgets local GDocs settings. To permanently revoke access, go to Google Account settings</string>
+    <string name="gdocs_setup_title">Google Docs</string>
+    <string name="gdocs_setup_summary">Authorize with Google Docs to allow uploads</string>
+    <string name="gdocs_test_summary">Upload a test file to Google Docs</string>
+    <string name="gdocs_test_title">Test upload</string>
+    <string name="gdocs_testupload_error">Could not upload a test file</string>
+    <string name="gdocs_testupload_success">Uploaded. Please check your Google Documents for a new file.</string>
+    <string name="gdocs_selectgoogleaccount">Select a Google Account</string>
+
+    <string name="email_upload">Email a file</string>
+
+    <string name="autoemail_sendto_csv">Comma separated email addresses</string>
+
+
+    <string name="autosend_enabled">Allow auto sending</string>
+    <string name="autosend_enabled_summary">Allows sending the files to various targets</string>
+    <string name="autosend_frequency_summary">How frequently log files should be sent</string>
+    <string name="autosend_frequency">How often?</string>
+
+    <string name="autosend_sendzip_title">Send zip file</string>
+    <string name="autosend_sendzip_summary">Send zip file where applicable. Disable to send individual files, or if the zip option is not
+        working for you
+    </string>
+    <string name="autosend_targets_category">Auto Send Targets</string>
+    <string name="menu_email_now">Auto Send Now</string>
+    <string name="autosend_sending">Auto sending</string>
+    <string name="summary_autosend">Auto send:</string>
+
+    <string name="pref_autosend_title">Auto send, email and upload</string>
+    <string name="pref_autosend_summary">Email, share and upload options</string>
+
+    <string name="shortcut_start">Start</string>
+    <string name="shortcut_stop">Stop</string>
+    <string name="shortcut_pickaction">Pick an action</string>
+
+    <string name="log_opengts_title">Log to OpenGTS Server</string>
+    <string name="log_opengts_summary">Send GPRMC data to an online OpenGTS server.</string>
+    <string name="opengts_setup_title">OpenGTS Setup</string>
+    <string name="opengts_setup_summary">Send GPS traces to an OpenGTS server of your choice.</string>
+    <string name="opengts_enabled">Enable OpenGTS</string>
+    <string name="opengts_enabled_summary">Enable this OpenGTS server.</string>
+    <string name="autoopengts_autosend">Enable Automatically Send</string>
+    <string name="autoopengts_autosend_summary">Enables automatically sending the GPS traces.</string>
+    <string name="autoopengts_server_category">OpenGTS Settings</string>
+    <string name="autoopengts_invalid_form">Invalid values</string>
+    <string name="autoopengts_invalid_form_message">Please ensure that all of the fields have been filled in properly</string>
+    <string name="opengts_upload">Send to OpenGTS</string>
+    <string name="autoopengts_server">Server</string>
+    <string name="autoopengts_server_summary">Hostname or IP</string>
+    <string name="opengts_server_port">Port</string>
+    <string name="opengts_server_communication_method">Communication Method</string>
+    <string name="opengts_server_communication_method_summary">HTTP-based or Raw Socket Based communication</string>
+    <string name="autoopengts_server_path">Server Path</string>
+    <string name="autoopengts_server_path_summary">Optional and only for HTTP-based communication. For example \'/gprmc/Data\'</string>
+    <string name="autoopengts_device_id">Device ID</string>
+    <string name="autoftp_server">FTP Server</string>
+    <string name="autoftp_server_summary">IP address or hostname</string>
+    <string name="autoftp_username">Username</string>
+    <string name="autoftp_password">Password</string>
+    <string name="autoftp_advanced_settings">Advanced settings</string>
+    <string name="autoftp_port">Port</string>
+    <string name="autoftp_useftps">Use FTPS</string>
+    <string name="autoftp_useftps_summary">Enable FTP over SSL. SSL/TLS and Implicit are ignored if this is unchecked.</string>
+    <string name="autoftp_ssltls">SSL/TLS</string>
+    <string name="autoftp_ssltls_summary">None, SSL or TLS. Use none for regular unsecured connections.</string>
+    <string name="autoftp_ssltls_none">None</string>
+    <string name="autoftp_ssltls_ssl">SSL</string>
+    <string name="autoftp_ssltls_tls">TLS</string>
+    <string name="autoftp_implicit">Implicit FTP over SSL</string>
+    <string name="autoftp_implicit_summary">Leave unchecked if you don\'t know.</string>
+    <string name="autoftp_test">Test FTP Upload</string>
+    <string name="autoftp_test_summary">Upload a test file to the FTP server</string>
+    <string name="autoftp_testing">Testing FTP upload</string>
+    <string name="autoftp_invalid_settings">Invalid settings</string>
+    <string name="autoftp_invalid_summary">Some of your settings are invalid. Please ensure that you have filled out all
+        relevant fields.
+    </string>
+    <string name="autoftp_enabled">FTP enabled</string>
+    <string name="ftp_upload">FTP upload</string>
+
+    <string name="autoftp_setup_title">FTP Setup</string>
+    <string name="autoftp_setup_summary">Upload your files to an FTP(S) server. Note: This does not cover SFTP.</string>
+
+    <string name="faq_screen_title">Frequently asked questions</string>
+    <string name="menu_faq">Help and FAQ</string>
+    <string name="gpsf_missing">Missing Service</string>
+    <string name="gpsf_missing_description">You will need Google Play Services Framework to use this feature.</string>
+    <string name="pref_loggingto_title">Log to...</string>
+    <string name="pref_loggingto_summary">Files and destinations to log your location to</string>
+    <string name="log_customurl_title">Log to custom URL</string>
+    <string name="log_customurl_summary">Send logging info to your own server over HTTP</string>
+    <string name="log_customurl_urlparameters">URL Parameters</string>
+    <string name="log_customUrl_urllatitude">Latitude: %LAT</string>
+    <string name="txt_annotation">Annotation:</string>
+    <string name="txt_time_isoformat">Time UTC (2011-12-25T15:27:33Z):</string>
+    <string name="txt_provider">Provider:</string>
+    <string name="annotation_requires_logging">Annotations require logging to GPX/KML/Custom URL</string>
+    <string name="filedialog_location">Location</string>
+    <string name="filedialog_cantreadfolder">Folder can\'t be read</string>
+    <string name="filedialog_new">New</string>
+    <string name="filedialog_name">Folder name:</string>
+    <string name="filedialog_create">Save</string>
+    <string name="filedialog_select">Select</string>
+    <string name="filedialog_no_data">No data</string>
+    <string name="gpslogger_folder_title">Save to folder</string>
+    <string name="gpslogger_folder_summary">Where to save the log files to, defaults to /sdcard/GPSLogger</string>
+    <string name="autoftp_directory">Directory</string>
+    <string name="new_file_static_message">Use %SER for device serial number</string>
+    <string name="new_file_prefix_serial_title">Prefix the device serial number to the file name</string>
+    <string name="new_file_prefix_serial_summary">This is the serial number found in your phone status </string>
+    <string name="txt_travel_duration">Duration:</string>
+
+    <string name="menu_onepoint">Log one point</string>
+
+    <string name="view_simple">Simple View</string>
+    <string name="view_detailed">Detailed View</string>
+    <string name="view_big">Big View</string>
+    <string name="bigview_taptotoggle">Tap to start/stop logging</string>
+    <string name="summary_autosendtargets">Upload to:</string>
+
+</resources>
