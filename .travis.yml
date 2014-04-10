@@ -12,6 +12,7 @@ before_install:
   - export ANDROID_HOME=$PWD/android-sdk-linux
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
   - echo "sdk.dir=$ANDROID_HOME" > local.properties
+
   # Install required components.
   # For a full list, run `android list sdk -a --extended`
   # Note that sysimg-19 downloads only ARM, because only the first license query is accepted.
