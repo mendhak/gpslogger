@@ -1,4 +1,4 @@
-GPSLogger [![Build Status](https://travis-ci.org/mendhak/gpslogger.svg?branch=redesign)](https://travis-ci.org/mendhak/gpslogger)
+GPSLogger [![Build Status](https://travis-ci.org/mendhak/gpslogger.svg?branch=master)](https://travis-ci.org/mendhak/gpslogger)
 =========
 
 GPSLogger is an Android app that logs GPS information to GPX, KML or text files and has options for annotating and sharing.
