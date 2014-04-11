@@ -25,7 +25,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.view.MenuItem;
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.GooglePlayServicesAvailabilityException;
@@ -65,9 +64,6 @@ public class GDocsSettingsActivity extends PreferenceActivity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        // enable the home button so you can go back to the main screen
-        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         addPreferencesFromResource(R.xml.gdocssettings);
 
@@ -111,27 +107,6 @@ public class GDocsSettingsActivity extends PreferenceActivity
             resetPref.setOnPreferenceClickListener(this);
         }
 
-    }
-
-    /**
-     * Called when one of the menu items is selected.
-     */
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-
-        int itemId = item.getItemId();
-        tracer.info("Option item selected - " + String.valueOf(item.getTitle()));
-
-        switch (itemId)
-        {
-            case android.R.id.home:
-                Intent intent = new Intent(this, GpsMainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 

@@ -69,7 +69,11 @@
         <activity
             android:name="com.mendhak.gpslogger.senders.dropbox.DropBoxAuthorizationActivity"
             android:label="DropBox"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:parentActivityName=".GpsMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mendhak.gpslogger.GpsMainActivity"/>
             <intent-filter>
                 <action android:name="com.mendhak.gpslogger.DROPBOX_SETUP"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -81,18 +85,25 @@
         <activity
             android:name="com.mendhak.gpslogger.Faqtivity"
             android:label="@string/faq_screen_title"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:parentActivityName=".GpsMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mendhak.gpslogger.GpsMainActivity"/>
         </activity>
 
         <activity
             android:name="com.dropbox.client2.android.AuthActivity"
             android:launchMode="singleTask"
-            android:configChanges="orientation|keyboard">
+            android:configChanges="orientation|keyboard"
+            android:parentActivityName=".GpsMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mendhak.gpslogger.GpsMainActivity"/>
             <intent-filter>
                 <!-- Change this to be db- followed by your app key -->
                 <data android:scheme="db-0unjsn38gpe3rwv"/>
                 <action android:name="android.intent.action.VIEW"/>
-
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
@@ -100,7 +111,11 @@
 
         <activity
             android:label="@string/osm_preferences_title"
-            android:name="com.mendhak.gpslogger.senders.osm.OSMAuthorizationActivity">
+            android:name="com.mendhak.gpslogger.senders.osm.OSMAuthorizationActivity"
+            android:parentActivityName=".GpsMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mendhak.gpslogger.GpsMainActivity"/>
             <intent-filter>
                 <action android:name="com.mendhak.gpslogger.OSM_AUTHORIZE"/>
                 <action android:name="android.intent.action.VIEW"/>
@@ -116,7 +131,11 @@
         <activity
             android:name="com.mendhak.gpslogger.senders.ftp.AutoFtpActivity"
             android:label="@string/autoftp_setup_title"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:parentActivityName=".GpsMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mendhak.gpslogger.GpsMainActivity"/>
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <action android:name="com.mendhak.gpslogger.AUTOFTP_SETUP"/>
@@ -126,7 +145,11 @@
         <activity
             android:name="com.mendhak.gpslogger.senders.email.AutoEmailActivity"
             android:label="@string/autoemail_title"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:parentActivityName=".GpsMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mendhak.gpslogger.GpsMainActivity"/>
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <action android:name="com.mendhak.gpslogger.AUTOEMAIL_SETUP"/>
@@ -134,7 +157,11 @@
         </activity>
         <activity
             android:name="com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity"
-            android:label="@string/gdocs_settings_screenname">
+            android:label="@string/gdocs_settings_screenname"
+            android:parentActivityName=".GpsMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mendhak.gpslogger.GpsMainActivity"/>
             <intent-filter>
                 <action android:name="com.mendhak.gpslogger.GDOCS_SETUP"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -143,7 +170,11 @@
 
         <activity
             android:name="com.mendhak.gpslogger.loggers.customurl.CustomUrlLoggerActivity"
-            android:label="Custom URL Logging">
+            android:label="Custom URL Logging"
+            android:parentActivityName=".GpsMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mendhak.gpslogger.GpsMainActivity"/>
             <intent-filter>
                 <action android:name="com.mendhak.gpslogger.CUSTOMURL_SETUP"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -174,7 +205,11 @@
         </activity>
         <activity
             android:name="com.mendhak.gpslogger.senders.opengts.OpenGTSActivity"
-            android:label="@string/opengts_setup_title">
+            android:label="@string/opengts_setup_title"
+            android:parentActivityName=".GpsMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mendhak.gpslogger.GpsMainActivity"/>
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <action android:name="com.mendhak.gpslogger.OPENGTS_SETUP"/>
@@ -197,7 +232,6 @@
         <receiver android:name="com.mendhak.gpslogger.senders.AlarmReceiver"/>
 
     </application>
-
 
 
 </manifest>

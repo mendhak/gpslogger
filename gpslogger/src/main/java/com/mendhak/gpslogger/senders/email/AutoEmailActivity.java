@@ -17,17 +17,18 @@
 
 package com.mendhak.gpslogger.senders.email;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.*;
+import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
+import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
-
-import android.view.MenuItem;
-import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.IMessageBoxCallback;
@@ -48,9 +49,6 @@ public class AutoEmailActivity extends PreferenceActivity implements
     {
         super.onCreate(savedInstanceState);
 
-        // enable the home button so you can go back to the main screen
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
         addPreferencesFromResource(R.xml.autoemailsettings);
 
         CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoemail_enabled");
@@ -69,28 +67,6 @@ public class AutoEmailActivity extends PreferenceActivity implements
 
         testEmailPref.setOnPreferenceClickListener(this);
 
-    }
-
-
-    /**
-     * Called when one of the menu items is selected.
-     */
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-
-        int itemId = item.getItemId();
-        tracer.info("Option item selected - " + String.valueOf(item.getTitle()));
-
-        switch (itemId)
-        {
-            case android.R.id.home:
-                Intent intent = new Intent(this, GpsMainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 

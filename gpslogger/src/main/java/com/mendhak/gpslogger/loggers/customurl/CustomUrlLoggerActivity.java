@@ -1,15 +1,12 @@
 package com.mendhak.gpslogger.loggers.customurl;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import org.slf4j.LoggerFactory;
 
@@ -25,8 +22,6 @@ public class CustomUrlLoggerActivity extends Activity {
     {
         tracer.debug("CustomUrlLogger Settings Screen");
         super.onCreate(savedInstanceState);
-        // enable the home button so you can go back to the main screen
-        getActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_customurl);
 
 
@@ -57,26 +52,6 @@ public class CustomUrlLoggerActivity extends Activity {
 
     }
 
-    /**
-     * Called when one of the menu items is selected.
-     */
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-
-        int itemId = item.getItemId();
-        tracer.info("Option item selected - " + String.valueOf(item.getTitle()));
-
-        switch (itemId)
-        {
-            case android.R.id.home:
-                Intent intent = new Intent(this, GpsMainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onBackPressed()
