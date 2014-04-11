@@ -37,4 +37,4 @@ before_script:
 
 script:
   - ./gradlew build
-  - ./gradlew connectedInstrumentTest
+  - ./gradlew connectedInstrumentTest --info
