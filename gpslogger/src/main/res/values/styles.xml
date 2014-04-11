@@ -9,8 +9,8 @@
     <!-- ActionBar styles -->
     <style name="CustomActionBar"
            parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">#cc000000</item>
-        <item name="android:backgroundSplit">#cc000000</item>
+        <item name="android:background">#CC000000</item>
+        <item name="android:backgroundSplit">#CC000000</item>
     </style>
 
     <style name="GenericProgressIndicator" parent="@android:style/Widget.ProgressBar.Small">
