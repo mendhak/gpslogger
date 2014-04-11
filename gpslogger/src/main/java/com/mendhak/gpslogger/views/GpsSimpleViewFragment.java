@@ -227,6 +227,34 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
 
         txtDuration.setText(duration);
 
+
+        String distanceUnit;
+        double distanceValue = Session.getTotalTravelled();
+        if (AppSettings.shouldUseImperial())
+        {
+            distanceUnit = getString(R.string.feet);
+            distanceValue = Utilities.MetersToFeet(distanceValue);
+            // When it passes more than 1 kilometer, convert to miles.
+            if (distanceValue > 3281)
+            {
+                distanceUnit = getString(R.string.miles);
+                distanceValue = distanceValue / 5280;
+            }
+        }
+        else
+        {
+            distanceUnit = getString(R.string.meters);
+            if (distanceValue > 1000)
+            {
+                distanceUnit = getString(R.string.kilometers);
+                distanceValue = distanceValue / 1000;
+            }
+        }
+
+        TextView txtTravelled = (TextView)rootView.findViewById(R.id.simpleview_txtDistance);
+        txtTravelled.setText(nf.format(distanceValue) + " " + distanceUnit +
+                " (" + Session.getNumLegs() + " points)");
+
         String providerName = locationInfo.getProvider();
         if (!providerName.equalsIgnoreCase("gps"))
         {
