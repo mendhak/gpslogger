@@ -251,9 +251,10 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
             }
         }
 
+        TextView txtPoints = (TextView) rootView.findViewById(R.id.simpleview_txtPoints);
         TextView txtTravelled = (TextView)rootView.findViewById(R.id.simpleview_txtDistance);
-        txtTravelled.setText(nf.format(distanceValue) + " " + distanceUnit +
-                " (" + Session.getNumLegs() + " points)");
+        txtTravelled.setText(nf.format(distanceValue) + " " + distanceUnit);
+        txtPoints.setText(Session.getNumLegs() + " points");
 
         String providerName = locationInfo.getProvider();
         if (!providerName.equalsIgnoreCase("gps"))

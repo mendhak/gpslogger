@@ -260,7 +260,28 @@
                         android:layout_column="1"
                         android:layout_row="3"
                         android:text="-"
-                        android:layout_columnSpan="3"
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        />
+
+                    <ImageView
+                        android:id="@+id/simpleview_points"
+                        android:layout_gravity="center|top"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/points"
+                        android:layout_column="2"
+                        android:layout_row="3"
+                        />
+
+                    <TextView
+                        android:id="@+id/simpleview_txtPoints"
+                        android:layout_gravity="left|center"
+
+                        android:layout_height="wrap_content"
+                        android:layout_column="3"
+                        android:layout_row="3"
+                        android:text="-"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
                         />
