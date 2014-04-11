@@ -24,9 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 
-/**
- * Created by oceanebelle on 03/04/14.
- */
+
 public class GpsDetailedViewFragment extends GenericViewFragment {
 
     private ToggleComponent toggleComponent;

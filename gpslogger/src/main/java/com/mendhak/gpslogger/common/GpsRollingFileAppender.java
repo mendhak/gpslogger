@@ -2,9 +2,7 @@ package com.mendhak.gpslogger.common;
 
 import ch.qos.logback.core.rolling.RollingFileAppender;
 
-/**
- * Created by mendhak on 08/04/14.
- */
+
 public class GpsRollingFileAppender <E> extends RollingFileAppender <E> {
 
 

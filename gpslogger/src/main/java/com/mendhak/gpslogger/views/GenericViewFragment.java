@@ -3,7 +3,7 @@ package com.mendhak.gpslogger.views;
 import android.app.Activity;
 import android.app.Fragment;
 import android.location.Location;
-import com.mendhak.gpslogger.common.Utilities;
+
 
 /**
  * Common class for communicating with the parent for the

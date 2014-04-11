@@ -19,9 +19,6 @@ import org.slf4j.LoggerFactory;
 
 import java.text.NumberFormat;
 
-/**
- * Created by oceanebelle on 03/04/14.
- */
 public class GpsSimpleViewFragment extends GenericViewFragment {
 
     Context context;
@@ -130,22 +127,19 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
             TextView txtAccuracy = (TextView) rootView.findViewById(R.id.simpleview_txtAccuracy);
             float accuracy = locationInfo.getAccuracy();
 
-            if (AppSettings.shouldUseImperial())
-            {
-                txtAccuracy.setText( nf.format(Utilities.MetersToFeet(accuracy)) +  getString(R.string.feet));
+            if (AppSettings.shouldUseImperial()) {
+                txtAccuracy.setText(nf.format(Utilities.MetersToFeet(accuracy)) + getString(R.string.feet));
 
-            }
-            else
-            {
-                txtAccuracy.setText(nf.format(accuracy) +  getString(R.string.meters));
+            } else {
+                txtAccuracy.setText(nf.format(accuracy) + getString(R.string.meters));
             }
 
 
-            if(accuracy>500){
+            if (accuracy > 500) {
                 txtAccuracy.setTextColor(getResources().getColor(android.R.color.holo_orange_dark));
             }
 
-            if(accuracy>900){
+            if (accuracy > 900) {
                 txtAccuracy.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
             } else {
                 txtAccuracy.setTextColor(getResources().getColor(android.R.color.black));
@@ -158,16 +152,12 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
 
             TextView txtAltitude = (TextView) rootView.findViewById(R.id.simpleview_txtAltitude);
 
-            if (AppSettings.shouldUseImperial())
-            {
-                txtAltitude.setText( nf.format(Utilities.MetersToFeet(locationInfo.getAltitude()))
+            if (AppSettings.shouldUseImperial()) {
+                txtAltitude.setText(nf.format(Utilities.MetersToFeet(locationInfo.getAltitude()))
                         + getString(R.string.feet));
-            }
-            else
-            {
+            } else {
                 txtAltitude.setText(nf.format(locationInfo.getAltitude()) + getString(R.string.meters));
             }
-
 
 
         }
@@ -177,29 +167,20 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
 
             float speed = locationInfo.getSpeed();
             String unit;
-            if (AppSettings.shouldUseImperial())
-            {
-                if (speed > 1.47)
-                {
+            if (AppSettings.shouldUseImperial()) {
+                if (speed > 1.47) {
                     speed = speed * 0.6818f;
                     unit = getString(R.string.miles_per_hour);
 
-                }
-                else
-                {
+                } else {
                     speed = Utilities.MetersToFeet(speed);
                     unit = getString(R.string.feet_per_second);
                 }
-            }
-            else
-            {
-                if (speed > 0.277)
-                {
+            } else {
+                if (speed > 0.277) {
                     speed = speed * 3.6f;
                     unit = getString(R.string.kilometers_per_hour);
-                }
-                else
-                {
+                } else {
                     unit = getString(R.string.meters_per_second);
                 }
             }
@@ -209,7 +190,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
 
         }
 
-        if(locationInfo.hasBearing()){
+        if (locationInfo.hasBearing()) {
 
             ImageView imgDirection = (ImageView) rootView.findViewById(R.id.simpleview_imgDirection);
             imgDirection.setRotation(locationInfo.getBearing());
@@ -231,22 +212,17 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
         String distanceUnit;
 
         double distanceValue = Session.getTotalTravelled();
-        if (AppSettings.shouldUseImperial())
-        {
+        if (AppSettings.shouldUseImperial()) {
             distanceUnit = getString(R.string.feet);
             distanceValue = Utilities.MetersToFeet(distanceValue);
             // When it passes more than 1 kilometer, convert to miles.
-            if (distanceValue > 3281)
-            {
+            if (distanceValue > 3281) {
                 distanceUnit = getString(R.string.miles);
                 distanceValue = distanceValue / 5280;
             }
-        }
-        else
-        {
+        } else {
             distanceUnit = getString(R.string.meters);
-            if (distanceValue > 1000)
-            {
+            if (distanceValue > 1000) {
                 distanceUnit = getString(R.string.kilometers);
                 distanceValue = distanceValue / 1000;
             }
@@ -254,15 +230,14 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
 
 
         TextView txtPoints = (TextView) rootView.findViewById(R.id.simpleview_txtPoints);
-        TextView txtTravelled = (TextView)rootView.findViewById(R.id.simpleview_txtDistance);
+        TextView txtTravelled = (TextView) rootView.findViewById(R.id.simpleview_txtDistance);
 
         nf.setMaximumFractionDigits(1);
         txtTravelled.setText(nf.format(distanceValue) + " " + distanceUnit);
         txtPoints.setText(Session.getNumLegs() + " points");
 
         String providerName = locationInfo.getProvider();
-        if (!providerName.equalsIgnoreCase("gps"))
-        {
+        if (!providerName.equalsIgnoreCase("gps")) {
             TextView txtSatelliteCount = (TextView) rootView.findViewById(R.id.simpleview_txtSatelliteCount);
             txtSatelliteCount.setText("-");
         }
@@ -323,7 +298,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
         TextView txtSatelliteCount = (TextView) rootView.findViewById(R.id.simpleview_txtSatelliteCount);
 
 
-        AlphaAnimation fadeIn = new AlphaAnimation(0.6f , 1.0f ) ;
+        AlphaAnimation fadeIn = new AlphaAnimation(0.6f, 1.0f);
         fadeIn.setDuration(1200);
         fadeIn.setFillAfter(true);
         txtSatelliteCount.startAnimation(fadeIn);

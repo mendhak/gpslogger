@@ -46,7 +46,6 @@ public class GeneralSettingsActivity extends PreferenceActivity implements Prefe
             aboutInfo.setTitle("GPSLogger version " + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
             aboutInfo.setOnPreferenceClickListener(this);
         } catch (PackageManager.NameNotFoundException e) {
-
         }
     }
 

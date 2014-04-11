@@ -17,7 +17,6 @@
 
 package com.mendhak.gpslogger;
 
-import android.app.Activity;
 import android.location.Location;
 
 interface IGpsLoggerServiceClient

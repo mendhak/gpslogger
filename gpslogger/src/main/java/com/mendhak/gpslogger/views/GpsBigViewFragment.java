@@ -14,9 +14,6 @@ import org.slf4j.LoggerFactory;
 
 import java.text.NumberFormat;
 
-/**
- * Created by mendhak on 31/03/14.
- */
 public class GpsBigViewFragment extends GenericViewFragment implements View.OnTouchListener {
 
     View rootView;
