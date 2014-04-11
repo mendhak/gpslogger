@@ -46,9 +46,16 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    sourceSets {
+        instrumentTest.setRoot('src/test')
+    }
 }
 
 dependencies {
+
+    instrumentTestCompile 'com.jayway.android.robotium:robotium-solo:5.1'
+
     compile 'com.android.support:support-v4:18.0.0'
     compile 'com.google.android.gms:play-services:4.0.30'
     compile fileTree(dir:'./src/main/libs', include: '*.jar')
