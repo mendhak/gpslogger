@@ -1,8 +1,16 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme"
+           parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <!--<item name="android:actionBarStyle">@style/CustomActionBar</item>-->
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="CustomActionBar"
+           parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#cc000000</item>
+        <item name="android:backgroundSplit">#cc000000</item>
     </style>
 
     <style name="GenericProgressIndicator" parent="@android:style/Widget.ProgressBar.Small">

@@ -229,6 +229,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
 
 
         String distanceUnit;
+
         double distanceValue = Session.getTotalTravelled();
         if (AppSettings.shouldUseImperial())
         {
@@ -251,8 +252,11 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
             }
         }
 
+
         TextView txtPoints = (TextView) rootView.findViewById(R.id.simpleview_txtPoints);
         TextView txtTravelled = (TextView)rootView.findViewById(R.id.simpleview_txtDistance);
+
+        nf.setMaximumFractionDigits(1);
         txtTravelled.setText(nf.format(distanceValue) + " " + distanceUnit);
         txtPoints.setText(Session.getNumLegs() + " points");
 
