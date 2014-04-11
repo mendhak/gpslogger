@@ -556,6 +556,7 @@ public class GpsLoggingService extends Service implements IActionListener {
      * @param status The status message
      */
     void SetStatus(String status) {
+        tracer.info(status);
         if (IsMainFormVisible()) {
             mainServiceClient.OnStatusMessage(status);
         }
@@ -567,6 +568,7 @@ public class GpsLoggingService extends Service implements IActionListener {
      * @param messageId ID of string to lookup
      */
     void SetFatalMessage(int messageId) {
+        tracer.error(getString(messageId));
         if (IsMainFormVisible()) {
             mainServiceClient.OnFatalMessage(getString(messageId));
         }

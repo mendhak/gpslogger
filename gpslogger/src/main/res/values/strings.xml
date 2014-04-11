@@ -164,8 +164,7 @@
 
     <string name="pref_performance_title">Performance</string>
     <string name="prefer_celltower_title">Prefer celltowers</string>
-    <string name="prefer_celltower_summary">Uses celltowers rather than satellites. Less accurate, but saves more
-        battery.
+    <string name="prefer_celltower_summary">Uses celltowers even if GPS is enabled. Less accurate, but saves more battery.
     </string>
     <string name="time_before_logging_title">Time before logging</string>
     <string name="time_before_logging_summary">Use 0 for maximum frequency, but slower is better for battery life.
@@ -176,19 +175,16 @@
         higher precision with low frequencies.
     </string>
     <string name="keep_fix_title">Keep GPS on between fixes</string>
-    <string name="retry_time_title">Time interval for accuracy</string>
-    <string name="retry_time_summary">Use 0 for maximum frequency, but slower is better for battery life.
-    </string>
+
+    <string name="retry_time_title">Retry time interval for accuracy</string>
+    <string name="retry_time_summary">Keep retrying for this long to get an accurate point.</string>
     <string name="retry_time_dialog_title">Time in seconds</string>
     <string name="retry_time_hint">Enter seconds (max 9999)</string>
     <string name="distance_before_logging_title">Distance before logging</string>
     <string name="distance_before_logging_summary">How far to travel before logging the next point. Use 0 to log all
         points.
     </string>
-    <string name="accuracy_before_logging_title">Accuracy before logging</string>
-    <string name="accuracy_before_logging_summary">Which min. accuracy to for logging. Use 0 to log all
-        points.
-    </string>
+
     <string name="timeout_time_title">Timeout</string>
     <string name="timeout_time_summary">How long the GPS stays on looking for a fix before giving up. Use 0 for no timeout</string>
     <string name="timeout_time_dialog_title">Time in seconds</string>
@@ -462,5 +458,10 @@
     <string name="view_big">Big View</string>
     <string name="bigview_taptotoggle">Tap to start/stop logging</string>
     <string name="summary_autosendtargets">Upload to:</string>
+
+    <string name="accuracy_filter_title">Accuracy Filter</string>
+    <string name="accuracy_filter_summary">The minimum precision required for a point to be saved</string>
+    <string name="distance_filter_title">Distance filter</string>
+    <string name="distance_filter_summary">The minimum distance required between current and previous for a point to be saved</string>
 
 </resources>

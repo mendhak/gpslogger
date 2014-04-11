@@ -90,8 +90,8 @@
 
         <EditTextPreference
             android:key="distance_before_logging"
-            android:title="@string/distance_before_logging_title"
-            android:summary="@string/distance_before_logging_summary"
+            android:title="@string/distance_filter_title"
+            android:summary="@string/distance_filter_summary"
             android:dialogTitle="@string/settings_distance_in_meters"
             android:numeric="integer"
             android:maxLength="4"
@@ -100,8 +100,8 @@
 
         <EditTextPreference
             android:key="accuracy_before_logging"
-            android:title="@string/accuracy_before_logging_title"
-            android:summary="@string/accuracy_before_logging_summary"
+            android:title="@string/accuracy_filter_title"
+            android:summary="@string/accuracy_filter_summary"
             android:dialogTitle="@string/settings_accuracy_in_meters"
             android:numeric="integer"
             android:maxLength="4"
