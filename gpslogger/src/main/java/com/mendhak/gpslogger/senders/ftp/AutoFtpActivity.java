@@ -24,6 +24,7 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.view.KeyEvent;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
@@ -46,6 +47,46 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
 
     }
 
+    private boolean IsFormValid()
+    {
+
+        CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoftp_enabled");
+        EditTextPreference txtServer = (EditTextPreference) findPreference("autoftp_server");
+        EditTextPreference txtUserName = (EditTextPreference) findPreference("autoftp_username");
+        EditTextPreference txtPort = (EditTextPreference) findPreference("autoftp_port");
+
+
+
+        return !chkEnabled.isChecked() || txtServer.getText() != null
+                && txtServer.getText().length() > 0 && txtUserName.getText() != null
+                && txtUserName.getText().length() > 0 && txtPort.getText() != null
+                && txtPort.getText().length() > 0 ;
+
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            if (!IsFormValid())
+            {
+                CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoftp_enabled");
+                chkEnabled.setChecked(false);
+                Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
+                        getString(R.string.autoemail_invalid_form_message),
+                        this);
+                return false;
+            }
+            else
+            {
+                return super.onKeyDown(keyCode, event);
+            }
+        }
+        else
+        {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
 
     private final Runnable successfullySent = new Runnable()
     {

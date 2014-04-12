@@ -89,15 +89,24 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
 
     }
 
-    public void testEmailsRequireFilledValues() {
+    public void testAutoEmailsRequireFilledValues() {
         solo.sendKey(Solo.MENU);
         solo.clickOnText(getActivity().getString(R.string.autoemail_title));
-        //launchActivity("com.mendhak.gpslogger", AutoEmailActivity.class, null);
         solo.clickOnCheckBox(0);
         solo.goBack();
         assertTrue("Email form without valid values should show alert dialog", solo.searchText(getActivity().getString(R.string.autoemail_invalid_form)));
         solo.clickOnText("OK");
         assertTrue("Enable emails checkbox should be unchecked", !solo.isCheckBoxChecked(0));
+    }
+
+    public void testAutoFtpRequireFilledValues() {
+        solo.sendKey(Solo.MENU);
+        solo.clickOnText(getActivity().getString(R.string.autoftp_setup_title));
+        solo.clickOnCheckBox(0);
+        solo.goBack();
+        assertTrue("FTP form without valid values should show alert dialog", solo.searchText(getActivity().getString(R.string.autoemail_invalid_form)));
+        solo.clickOnText("OK");
+        assertTrue("Enable FTP checkbox should be unchecked", !solo.isCheckBoxChecked(0));
     }
 
 }
