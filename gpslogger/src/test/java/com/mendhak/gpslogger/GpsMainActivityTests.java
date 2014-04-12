@@ -36,9 +36,9 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
 
     public void testCanSeeMenuItems() {
         solo.sendKey(Solo.MENU);
-        assertTrue("Could not find menu Logging Settings", solo.searchText(getActivity().getString(R.string.title_drawer_loggingsettings)));
-        assertTrue("Could not find menu Upload Settings", solo.searchText(getActivity().getString(R.string.title_drawer_uploadsettings)));
-        assertTrue("Could not find menu General Settings", solo.searchText(getActivity().getString(R.string.title_drawer_generalsettings)));
+        assertTrue("Could not find menu Logging Settings", solo.searchText(solo.getCurrentActivity().getString(R.string.title_drawer_loggingsettings)));
+        assertTrue("Could not find menu Upload Settings", solo.searchText(solo.getCurrentActivity().getString(R.string.title_drawer_uploadsettings)));
+        assertTrue("Could not find menu General Settings", solo.searchText(solo.getCurrentActivity().getString(R.string.title_drawer_generalsettings)));
     }
 
     public void testHelpButtonOpensFAQPage(){
@@ -62,11 +62,11 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     public void testAnnotateButtonDisabledIfGpxKmlUrlAreDisabled(){
 
         solo.sendKey(Solo.MENU);
-        solo.clickOnText(getActivity().getString(R.string.title_drawer_loggingsettings));
+        solo.clickOnText(solo.getCurrentActivity().getString(R.string.title_drawer_loggingsettings));
         solo.scrollToTop();
         if(solo.isCheckBoxChecked(0)) { solo.clickOnCheckBox(0); }
         if(solo.isCheckBoxChecked(1)) { solo.clickOnCheckBox(1); }
-        solo.clickOnText(getActivity().getString(R.string.log_customurl_title));
+        solo.clickOnText(solo.getCurrentActivity().getString(R.string.log_customurl_title));
         if(solo.isCheckBoxChecked(0)) { solo.clickOnCheckBox(0); }
         solo.goBack();
         solo.goBack();
@@ -75,8 +75,8 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     }
 
     public void testSpinnerNavigation(){
-        solo.clickOnText(getActivity().getString(R.string.view_simple));
-        solo.clickOnText(getActivity().getString(R.string.view_detailed));
+        solo.clickOnText(solo.getCurrentActivity().getString(R.string.view_simple));
+        solo.clickOnText(solo.getCurrentActivity().getString(R.string.view_detailed));
         solo.finishOpenedActivities();
 
         launchActivity("com.mendhak.gpslogger", GpsMainActivity.class,null);
@@ -85,18 +85,18 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
         assertTrue("Detailed view should be visible if previously selected",
                 solo.getView(R.id.detailedview_lat_label).isShown());
 
-        solo.clickOnText(getActivity().getString(R.string.view_detailed));
-        solo.clickOnText(getActivity().getString(R.string.view_simple));
+        solo.clickOnText(solo.getCurrentActivity().getString(R.string.view_detailed));
+        solo.clickOnText(solo.getCurrentActivity().getString(R.string.view_simple));
 
     }
 
     public void testAutoEmailsRequireFilledValues() {
         solo.sendKey(Solo.MENU);
         solo.setNavigationDrawer(Solo.OPENED);
-        solo.clickOnText(getActivity().getString(R.string.autoemail_title));
+        solo.clickOnText(solo.getCurrentActivity().getString(R.string.autoemail_title));
         solo.clickOnCheckBox(0);
         solo.goBack();
-        assertTrue("Email form without valid values should show alert dialog", solo.searchText(getActivity().getString(R.string.autoemail_invalid_form)));
+        assertTrue("Email form without valid values should show alert dialog", solo.searchText(solo.getCurrentActivity().getString(R.string.autoemail_invalid_form)));
         solo.clickOnText("OK");
         assertTrue("Enable emails checkbox should be unchecked", !solo.isCheckBoxChecked(0));
     }
@@ -104,10 +104,10 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     public void testAutoFtpRequireFilledValues() {
         solo.sendKey(Solo.MENU);
         solo.setNavigationDrawer(Solo.OPENED);
-        solo.clickOnText(getActivity().getString(R.string.autoftp_setup_title));
+        solo.clickOnText(solo.getCurrentActivity().getString(R.string.autoftp_setup_title));
         solo.clickOnCheckBox(0);
         solo.goBack();
-        assertTrue("FTP form without valid values should show alert dialog", solo.searchText(getActivity().getString(R.string.autoemail_invalid_form)));
+        assertTrue("FTP form without valid values should show alert dialog", solo.searchText(solo.getCurrentActivity().getString(R.string.autoemail_invalid_form)));
         solo.clickOnText("OK");
         assertTrue("Enable FTP checkbox should be unchecked", !solo.isCheckBoxChecked(0));
     }
