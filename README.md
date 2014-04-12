@@ -171,6 +171,30 @@ so ensure that the emulator you are using is Android 4.2.2 (API level 17) or gre
 You can also debug directly against your phone - all phones Android 2.2 and above should have this framework installed.
 
 
+### Running tests
+
+This solution has a few [Robotium](https://code.google.com/p/robotium/) tests.  To run them, first ensure that you
+have an emulator up and running or your phone is connected.  In other words, `adb devices` should show a connected device.
+
+Then run the tests using the gradle wrapper
+
+     ./gradlew connectedInstrumentTest --info
+
+If a test fails and you want a little more info, you can add the `stacktrace` and `debug` flags
+
+    ./gradlew connectedInstrumentTest --debug --stacktrace
+
+You can also try running the tests straight from the IDE, but at the time of writing, IntelliJ and Android Studio are
+only just starting to include this functionality.  Your mileage may vary.  I have found that if GPSLogger is already
+ installed on the device when running the test, at least one test fails.
+
+ ![tests](https://farm8.staticflickr.com/7424/13796700395_021e03cd8e_o.png)
+
+ The solution is to ensure that you uninstall the app from the emulator before running the tests.
+ If you use the gradle wrapper command shown above, it installs and uninstalls for you.
+
+
+
 Overview
 ======
 
