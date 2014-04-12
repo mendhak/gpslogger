@@ -13,7 +13,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -270,17 +269,13 @@ public class GpsMainActivity extends Activity
 
         switch (position) {
             case 0:
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
                 transaction.replace(R.id.container, GpsSimpleViewFragment.newInstance());
                 break;
             case 1:
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
                 transaction.replace(R.id.container, GpsDetailedViewFragment.newInstance());
                 break;
             default:
             case 2:
-                //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 transaction.replace(R.id.container, GpsBigViewFragment.newInstance());
                 break;
         }

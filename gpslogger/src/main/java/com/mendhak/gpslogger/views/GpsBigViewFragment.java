@@ -44,7 +44,7 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         SetLocation(Session.getCurrentLocationInfo());
 
         if(Session.isStarted()){
-            Toast.makeText(getActivity().getApplicationContext(), R.string.bigview_taptotoggle, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getApplicationContext(), R.string.bigview_taptotoggle, Toast.LENGTH_SHORT).show();
         }
 
 
