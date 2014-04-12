@@ -69,12 +69,6 @@ public class UtilitiesTests extends AndroidTestCase {
         assertEquals("Dropbox setup if KEY and SECRET exist in preferences", true, Utilities.IsDropBoxSetup(context));
     }
 
-     public void testReadableDateTime() {
-         String actual = Utilities.GetReadableDateTime(new Date(1417726140000l));
-         String expected = "04 Dec 2014 20:49";
-         assertEquals("Readable date time", expected, actual);
-     }
-
     public void testIsoDateTime() {
 
         String actual = Utilities.GetIsoDateTime(new Date(1417726140000l));
