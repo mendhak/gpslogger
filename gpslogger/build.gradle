@@ -99,10 +99,12 @@ preBuild.doFirst {
 }
 
 tasks.whenTaskAdded { task ->
+    //Don't run lint. Takes too long.
     if (task.name.equals("lint")) {
         task.enabled = false
     }
 
+    //Force the APK to be uninstalled before running tests
     if(task.name.equals("connectedInstrumentTest")){
         task.dependsOn(uninstallAll)
     }

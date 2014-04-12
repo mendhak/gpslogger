@@ -16,10 +16,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     protected void setUp() throws Exception {
         super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
-        //solo.sendKey(Solo.MENU);
-        //solo.sleep(3000);
     }
-
 
     @Override
     protected void tearDown() throws Exception {
@@ -30,10 +27,9 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     public void testCanSeeMenuItems() {
         setDrawerVisibility(true);
         solo.sleep(100);
-        assertTrue("Could not find menu Logging Settings", solo.searchText("Logging settings"));
-        assertTrue("Could not find menu Upload Settings", solo.searchText("Upload settings"));
-        assertTrue("Could not find menu General Settings", solo.searchText("General settings"));
-        //solo.sendKey(Solo.MENU);
+        assertTrue("Could not find menu Logging Settings", solo.searchText(getActivity().getString(R.string.title_drawer_loggingsettings)));
+        assertTrue("Could not find menu Upload Settings", solo.searchText(getActivity().getString(R.string.title_drawer_uploadsettings)));
+        assertTrue("Could not find menu General Settings", solo.searchText(getActivity().getString(R.string.title_drawer_generalsettings)));
     }
 
     public void testHelpButtonOpensFAQPage(){
@@ -46,10 +42,8 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     }
 
     public void testSinglePointButtonDisabledWhenLoggingStarted() {
-        //setDrawerVisibility(false);
 
         solo.clickOnView(solo.getView(R.id.simple_play));
-        System.out.println("Clicked on simple play");
         solo.sleep(500);
         assertFalse("One Point button should be disabled if main logging enabled", ((GpsMainActivity) solo.getCurrentActivity()).mnuOnePoint.isEnabled());
         solo.clickOnView(solo.getView(R.id.simple_stop));
