@@ -40,4 +40,4 @@ script:
   # Performs tests (which will do a ./gradlew build task first)
   # Skips the uninstallAll task as it's always a fresh emulator
   # Does a logcat dump if anything fails
-  - ./gradlew connectedInstrumentTest -x uninstallAll --info || adb logcat -d
+  - ./gradlew connectedInstrumentTest -x uninstallAll --info  || (adb logcat -d && echo "TESTS FAILED" && exit  1)
