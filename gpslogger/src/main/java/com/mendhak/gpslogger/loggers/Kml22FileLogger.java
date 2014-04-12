@@ -92,16 +92,8 @@ class Kml22AnnotateHandler implements Runnable
             synchronized (Kml22FileLogger.lock)
             {
 
-                StringBuilder descriptionNode = new StringBuilder();
-                descriptionNode.append("<Placemark><name>");
-                descriptionNode.append(description);
-                descriptionNode.append("</name><Point><coordinates>");
-                descriptionNode.append(String.valueOf(loc.getLongitude()));
-                descriptionNode.append(",");
-                descriptionNode.append(String.valueOf(loc.getLatitude()));
-                descriptionNode.append(",");
-                descriptionNode.append(String.valueOf(loc.getAltitude()));
-                descriptionNode.append("</coordinates></Point></Placemark>\n");
+                String descriptionNode = GetPlacemarkXml(description, loc);
+
 
                 BufferedReader bf = new BufferedReader(new FileReader(kmlFile));
 
@@ -124,7 +116,7 @@ class Kml22AnnotateHandler implements Runnable
 
                 RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
                 raf.seek(255);
-                raf.write(descriptionNode.toString().getBytes());
+                raf.write(descriptionNode.getBytes());
                 raf.write(restOfFile.toString().getBytes());
                 raf.close();
 
@@ -134,6 +126,21 @@ class Kml22AnnotateHandler implements Runnable
         {
             tracer.error("Kml22FileLogger.Annotate", e);
         }
+    }
+
+    String GetPlacemarkXml(String description, Location loc) {
+        StringBuilder descriptionNode = new StringBuilder();
+        descriptionNode.append("<Placemark><name>");
+        descriptionNode.append(description);
+        descriptionNode.append("</name><Point><coordinates>");
+        descriptionNode.append(String.valueOf(loc.getLongitude()));
+        descriptionNode.append(",");
+        descriptionNode.append(String.valueOf(loc.getLatitude()));
+        descriptionNode.append(",");
+        descriptionNode.append(String.valueOf(loc.getAltitude()));
+        descriptionNode.append("</coordinates></Point></Placemark>\n");
+
+        return descriptionNode.toString();
     }
 }
 

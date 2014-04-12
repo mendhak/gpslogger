@@ -264,7 +264,7 @@ class Gpx10WriteHandler implements Runnable
 
     }
 
-    private String GetTrackPointXml(Location loc, String dateTimeString)
+    String GetTrackPointXml(Location loc, String dateTimeString)
     {
 
         StringBuilder track = new StringBuilder();
