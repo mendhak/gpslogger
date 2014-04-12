@@ -37,7 +37,7 @@ before_script:
   - adb shell input keyevent 82 &
 
 script:
-  #- ./gradlew --version
-  #- ./gradlew build
-  - ./gradlew connectedInstrumentTest -x uninstallAll --info
-  - adb logcat -d
+  # Performs tests (which will do a ./gradlew build task first)
+  # Skips the uninstallAll task as it's always a fresh emulator
+  # Does a logcat dump if anything fails
+  - ./gradlew connectedInstrumentTest -x uninstallAll --info || adb logcat -d
