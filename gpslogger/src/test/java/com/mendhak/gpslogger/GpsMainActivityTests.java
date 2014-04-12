@@ -27,14 +27,14 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
         super.tearDown();
     }
 
-    public void testCanSeeMenuItems() {
-        setDrawerVisibility(true);
-        solo.sleep(100);
-        assertTrue("Could not find menu Logging Settings", solo.searchText("Logging settings"));
-        assertTrue("Could not find menu Upload Settings", solo.searchText("Upload settings"));
-        assertTrue("Could not find menu General Settings", solo.searchText("General settings"));
-        //solo.sendKey(Solo.MENU);
-    }
+//    public void testCanSeeMenuItems() {
+//        setDrawerVisibility(true);
+//        solo.sleep(100);
+//        assertTrue("Could not find menu Logging Settings", solo.searchText("Logging settings"));
+//        assertTrue("Could not find menu Upload Settings", solo.searchText("Upload settings"));
+//        assertTrue("Could not find menu General Settings", solo.searchText("General settings"));
+//        //solo.sendKey(Solo.MENU);
+//    }
 
     public void testHelpButtonOpensFAQPage(){
         setDrawerVisibility(false);
