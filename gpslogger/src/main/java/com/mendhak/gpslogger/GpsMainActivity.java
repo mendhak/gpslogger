@@ -707,14 +707,24 @@ public class GpsMainActivity extends Activity
     private void StopAndUnbindServiceIfRequired() {
         tracer.debug(".");
         if (Session.isBoundToService()) {
-            unbindService(gpsServiceConnection);
-            Session.setBoundToService(false);
+
+            try{
+                unbindService(gpsServiceConnection);
+                Session.setBoundToService(false);
+            }catch (Exception e){
+                tracer.error("Could not unbind service", e);
+            }
         }
 
         if (!Session.isStarted()) {
             tracer.debug("Stopping the service");
             //serviceIntent = new Intent(this, GpsLoggingService.class);
-            stopService(serviceIntent);
+            try{
+                stopService(serviceIntent);
+            } catch(Exception e){
+                tracer.error("Could not stop the service", e);
+            }
+
         }
 
     }

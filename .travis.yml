@@ -40,4 +40,5 @@ script:
   - ./gradlew --version
   - ./gradlew build
   - ./gradlew connectedInstrumentTest --info --stacktrace --debug
-  - adb logcat &
+  # If the tests didn't pass, do a logcat dump
+  - if [ "$?" -eq "0" ]; then echo "Passed"; else adb logcat -d; fi;
