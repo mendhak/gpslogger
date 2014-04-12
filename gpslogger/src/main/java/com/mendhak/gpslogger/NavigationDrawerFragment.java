@@ -170,15 +170,6 @@ public class NavigationDrawerFragment extends Fragment {
                     return;
                 }
 
-                if (!userHasSeenDrawer) {
-                    // The user manually opened the drawer; store this flag to prevent auto-showing
-                    // the navigation drawer automatically in the future.
-                    userHasSeenDrawer = true;
-                    SharedPreferences sp = PreferenceManager
-                            .getDefaultSharedPreferences(getActivity());
-                    sp.edit().putBoolean(PREF_USER_SEEN_DRAWER, true).apply();
-                }
-
                 getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
 
@@ -189,15 +180,6 @@ public class NavigationDrawerFragment extends Fragment {
                     return;
                 }
 
-                if (!userHasSeenDrawer) {
-                    // The user manually opened the drawer; store this flag to prevent auto-showing
-                    // the navigation drawer automatically in the future.
-                    userHasSeenDrawer = true;
-                    SharedPreferences sp = PreferenceManager
-                            .getDefaultSharedPreferences(getActivity());
-                    sp.edit().putBoolean(PREF_USER_SEEN_DRAWER, true).apply();
-                }
-
                 getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
         };
@@ -206,6 +188,9 @@ public class NavigationDrawerFragment extends Fragment {
         // per the navigation drawer design guidelines.
         if (!userHasSeenDrawer && !fromSavedInstanceState) {
             this.drawerLayout.openDrawer(fragmentContainerView);
+            SharedPreferences sp = PreferenceManager
+                    .getDefaultSharedPreferences(getActivity());
+            sp.edit().putBoolean(PREF_USER_SEEN_DRAWER, true).apply();
         }
 
         // Defer code dependent on restoration of previous instance state.
