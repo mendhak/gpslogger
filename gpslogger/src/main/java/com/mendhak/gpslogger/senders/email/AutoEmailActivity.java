@@ -128,6 +128,8 @@ public class AutoEmailActivity extends PreferenceActivity implements
         {
             if (!IsFormValid())
             {
+                CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoemail_enabled");
+                chkEnabled.setChecked(false);
                 Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
                         getString(R.string.autoemail_invalid_form_message),
                         this);

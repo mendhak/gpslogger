@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
-import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
 import com.robotium.solo.Solo;
 
 
@@ -92,10 +91,13 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
 
     public void testEmailsRequireFilledValues() {
         solo.sendKey(Solo.MENU);
-        launchActivity("com.mendhak.gpslogger", AutoEmailActivity.class, null);
+        solo.clickOnText(getActivity().getString(R.string.autoemail_title));
+        //launchActivity("com.mendhak.gpslogger", AutoEmailActivity.class, null);
         solo.clickOnCheckBox(0);
         solo.goBack();
         assertTrue("Email form without valid values should show alert dialog", solo.searchText(getActivity().getString(R.string.autoemail_invalid_form)));
+        solo.clickOnText("OK");
+        assertTrue("Enable emails checkbox should be unchecked", !solo.isCheckBoxChecked(0));
     }
 
 }
