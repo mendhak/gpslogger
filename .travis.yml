@@ -39,4 +39,5 @@ before_script:
 script:
   - ./gradlew --version
   - ./gradlew build
-  - ./gradlew connectedInstrumentTest --info --stacktrace --debug
+  #- ./gradlew connectedInstrumentTest --info --stacktrace --debug
+  #- adb logcat &
