@@ -29,7 +29,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 
-class Gpx10FileLogger implements IFileLogger
+public class Gpx10FileLogger implements IFileLogger
 {
     protected final static Object lock = new Object();
 
@@ -167,7 +167,7 @@ class Gpx10AnnotateHandler implements Runnable
         }
     }
 
-    private String GetWaypointXml(Location loc, String dateTimeString, String description)
+    String GetWaypointXml(Location loc, String dateTimeString, String description)
     {
 
         StringBuilder waypoint = new StringBuilder();
