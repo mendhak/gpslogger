@@ -12,6 +12,7 @@ before_install:
   - export ANDROID_HOME=$PWD/android-sdk-linux
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
   - echo "sdk.dir=$ANDROID_HOME" > local.properties
+  - export TERM=dumb
   - gradle --version
 
   # Install required components.
