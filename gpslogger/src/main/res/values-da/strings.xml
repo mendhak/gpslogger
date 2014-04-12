@@ -94,7 +94,6 @@
   <string name="settings_accuracy_in_meters">Nøjagtighed i meter</string>
   <string name="settings_accuracy_in_feet">Nøjagtighed i fod</string>
   <string name="settings_enter_meters">Angiv meter (max 9999)</string>
-  <string name="settings_converting_title">Konvertering...</string>
   <string name="settings_converting_description">Konverterer minimumsafstands enheder. Værdier over 9999 nulstilles til 9999. Skærmen Indstillinger genindlæser nu.</string>
   <string name="pref_logging_title">Logføring detaljer</string>
   <string name="log_gpx_title">Log til GPX</string>
@@ -112,12 +111,9 @@
   <string name="new_file_static_summary">Vælger du at oprette en fast fil, skal du indtaste navnet på en brugerdefineret fil</string>
   <string name="pref_performance_title">Ydeevne</string>
   <string name="prefer_celltower_title">Foretræk sendemaster</string>
-  <string name="prefer_celltower_summary">Bruger sendemaster fremfor satellitter. Mindre nøjagtige, men bruger mindre batteri.</string>
   <string name="time_before_logging_title">Tid før logføring</string>
   <string name="time_before_logging_dialog_title">Tid i sekunder</string>
   <string name="time_before_logging_hint">Angiv sekunder (max 9999)</string>
-  <string name="useimperial_title">Bruge engelske enheder</string>
-  <string name="useimperial_summary">Bruge fod, mil og pints, ikke det der nymodens metersystem.</string>
   <string name="show_notification_title">Vis meddelelse</string>
   <string name="show_notification_summary">Viser en påmindelse sammen med koordinater i meddelelseslinjen.     </string>
   <string name="enabledisablegps_title">Aktiver/Deaktiver GPS</string>

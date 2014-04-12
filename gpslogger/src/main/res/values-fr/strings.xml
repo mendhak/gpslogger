@@ -95,7 +95,6 @@
   <string name="settings_accuracy_in_meters">Précision en mètres</string>
   <string name="settings_accuracy_in_feet">Précision en pieds</string>
   <string name="settings_enter_meters">Entrez mètres (max 9999)</string>
-  <string name="settings_converting_title">Conversion en cours...</string>
   <string name="settings_converting_description">Conversion des unités de distance minimale. Les valeurs supérieures à 9999 sont remis à 9999. L\'écran des paramètres vas recharger.</string>
   <string name="pref_logging_title">Détails de l\'enregistrement</string>
   <string name="log_gpx_title">Enregistrement sur GPX</string>
@@ -113,14 +112,12 @@
   <string name="new_file_static_summary">Si vous choisissez de créer un fichier fixe, entrez un nom de fichier personnalisé</string>
   <string name="pref_performance_title">Performance</string>
   <string name="prefer_celltower_title">Préfère tours cellulaires</string>
-  <string name="prefer_celltower_summary">Utilise tours cellulaires plutôt que  satellites. Moins précis, mais permet d\'économiser la batterie.</string>
   <string name="time_before_logging_title">Temps avant l\'enregistrement</string>
   <string name="time_before_logging_dialog_title">Temps en secondes</string>
   <string name="time_before_logging_hint">Entrez secondes (max 9999)</string>
   <string name="keep_fix_summary">Attention, cela va réduire considérablement la vie de la batterie. Utiliser uniquement pour
 une plus grande précision à basses fréquences.</string>
   <string name="keep_fix_title">Gardez GPS allumer entre les différents enregistrements de positions</string>
-  <string name="retry_time_title">Intervalle de temps pour la précision</string>
   <string name="retry_time_dialog_title">Temps en secondes</string>
   <string name="retry_time_hint">Entrer les secondes (max. 9999)</string>
   <string name="distance_before_logging_title">Distance avant l\'enregistrement</string>
@@ -128,8 +125,6 @@ une plus grande précision à basses fréquences.</string>
   <string name="timeout_time_summary">Combien de temps le GPS reste allumé à la recherche d\'une solution avant d\'abandonner. Utilisez 0 pour aucun délai</string>
   <string name="timeout_time_dialog_title">Temps en secondes</string>
   <string name="timeout_time_hint">Entrez secondes (max 9999)</string>
-  <string name="useimperial_title">Utilisez les unités impériales</string>
-  <string name="useimperial_summary">Utilisez pieds, milles et pintes, rien de ces nouveaux trucs métriques.</string>
   <string name="show_notification_title">Afficher la notification</string>
   <string name="show_notification_summary">Affiche un rappel  avec les coordonnées dans la barre de notification.</string>
   <string name="enabledisablegps_title">Activer / Désactiver GPS</string>

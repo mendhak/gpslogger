@@ -97,7 +97,6 @@
   <string name="settings_accuracy_in_meters">Точность в метрах</string>
   <string name="settings_accuracy_in_feet">Точность в футах</string>
   <string name="settings_enter_meters">Введите число метров (max 9999)</string>
-  <string name="settings_converting_title">Преобразование...</string>
   <string name="settings_converting_description">Конвертирую единицы минимальной дистанции. Значения больше 9999 будут
         сброшены до 9999. Экран настроек будет перезагружен.
     </string>
@@ -118,9 +117,6 @@
   <string name="new_file_static_summary">Если вы выбрали создание фиксированного файла, введите имя файла</string>
   <string name="pref_performance_title">Настройки производительности</string>
   <string name="prefer_celltower_title">Предпочитать сотовые вышки</string>
-  <string name="prefer_celltower_summary">Использовать данные о положении с сотовых вышек. Менее точно, но экономит
-        батарею.
-    </string>
   <string name="time_before_logging_title">Период логирования точки</string>
   <string name="time_before_logging_dialog_title">Время в секундах</string>
   <string name="time_before_logging_hint">Введите число секунд (max 9999)</string>
@@ -132,8 +128,6 @@
   <string name="timeout_time_summary">Как долго GPS остается в местоопределении перед отказом. Используйте 0 для отключения тайм-аута</string>
   <string name="timeout_time_dialog_title">Время в секундах</string>
   <string name="timeout_time_hint">Введите секунды (максимум 9999)</string>
-  <string name="useimperial_title">Имперская система мер</string>
-  <string name="useimperial_summary">Использовать футы, мили, пинты.</string>
   <string name="show_notification_title">Показывать уведомления</string>
   <string name="show_notification_summary">Отображать значок в панели уведомлений.</string>
   <string name="enabledisablegps_title">Вкл/Выкл GPS</string>

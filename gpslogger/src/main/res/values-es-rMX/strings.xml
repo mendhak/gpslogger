@@ -95,7 +95,6 @@
   <string name="settings_accuracy_in_meters">Precisión en metros</string>
   <string name="settings_accuracy_in_feet">Precisión en pies</string>
   <string name="settings_enter_meters">Introduzca metros (máx. 9999)</string>
-  <string name="settings_converting_title">Convirtiendo...</string>
   <string name="settings_converting_description">Conversión de unidades de distancia mínima. Valores superiores a 9999 se restablecen a 9999. Ahora volverá a cargar la pantalla de configuración.     </string>
   <string name="pref_logging_title">Detalles de registro</string>
   <string name="log_gpx_title">Registro a GPX</string>
@@ -113,28 +112,20 @@
   <string name="new_file_static_summary">Si eliges crear un archivo fijo, introduce un nombre personalizado para el archivo</string>
   <string name="pref_performance_title">Rendimiento</string>
   <string name="prefer_celltower_title">Preferir Torres Celulares</string>
-  <string name="prefer_celltower_summary">Utilice celltowers en lugar de satélites. Menos precisa, pero guarda más batería.     </string>
   <string name="time_before_logging_title">Tiempo antes de registro</string>
   <string name="time_before_logging_summary">Usa 0 para frecuencia máxima, pero más lento es mejor para la duración de la batería.</string>
   <string name="time_before_logging_dialog_title">Tiempo en segundos</string>
   <string name="time_before_logging_hint">Introduzca a segundos (máx. 9999)</string>
   <string name="keep_fix_summary">Con cuidado, esto disminuirá considerablemente la duración de la batería. Utilice únicamente para obtener mayor precisión usando frecuencias bajas.</string>
   <string name="keep_fix_title">Mantener el GPS prendido entre posiciones</string>
-  <string name="retry_time_title">Intervalo de tiempo para la precisión</string>
-  <string name="retry_time_summary">Usa 0 para frecuencia máxima, pero más lento es mejor para la duración de la batería.
-    </string>
   <string name="retry_time_dialog_title">Tiempo en segundos</string>
   <string name="retry_time_hint">Ingrese segundos (máx. 9999)</string>
   <string name="distance_before_logging_title">Distancia antes de registrar un punto</string>
   <string name="distance_before_logging_summary">Que tan lejos viajar antes de registrar el siguiente punto. Utilizar 0 para registrar todos los puntos.</string>
-  <string name="accuracy_before_logging_title">Precisión antes de registrar un punto</string>
-  <string name="accuracy_before_logging_summary">Que precisión mínima usar para registrar puntos. Utilizar 0 para registrar todos los puntos.</string>
   <string name="timeout_time_title">Tiempo de espera</string>
   <string name="timeout_time_summary">¿Cuánto tiempo el GPS se mantendra buscando una posición antes de detenerse? Use 0 para ningún tiempo de espera</string>
   <string name="timeout_time_dialog_title">Tiempo en segundos</string>
   <string name="timeout_time_hint">Ingrese segundos (máx. 9999)</string>
-  <string name="useimperial_title">Utilice unidades imperiales</string>
-  <string name="useimperial_summary">Utilice pies, millas y pintas, ninguna de esas cosas métricas exótico.</string>
   <string name="show_notification_title">Mostrar notificación</string>
   <string name="show_notification_summary">Muestra un recordatorio junto con las coordenadas en la barra de notificaciones.     </string>
   <string name="enabledisablegps_title">Activar/desactivar GPS</string>

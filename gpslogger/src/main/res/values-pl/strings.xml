@@ -95,7 +95,6 @@
   <string name="settings_accuracy_in_meters">Dokładność w metrach</string>
   <string name="settings_accuracy_in_feet">Dokładność w stopach</string>
   <string name="settings_enter_meters">Wprowadź metry (maks. 9999)</string>
-  <string name="settings_converting_title">Przeliczanie...</string>
   <string name="settings_converting_description">Trwa konwersja jednostek odległości. Wartości powyżej 9999 są resetowane do 9999. Ekran ustawień zostanie przeładowany.</string>
   <string name="pref_logging_title">Szczegóły logowania</string>
   <string name="log_gpx_title">Loguj do GPX</string>
@@ -113,7 +112,6 @@
   <string name="new_file_static_summary">Jeśli zdecydujesz się na utworzenie pliku stałego, wprowadź jego nazwę</string>
   <string name="pref_performance_title">Wydajność</string>
   <string name="prefer_celltower_title">Preferuj wieże telefonii</string>
-  <string name="prefer_celltower_summary">Użycie wież telefonii zamiast satelitów. Mniej dokładne, ale oszczędza baterię.</string>
   <string name="time_before_logging_title">Odstępy czasu</string>
   <string name="time_before_logging_dialog_title">Czas w sekundach</string>
   <string name="time_before_logging_hint">Wprowadź czas (max 9999)</string>
@@ -125,8 +123,6 @@
   <string name="timeout_time_summary">Po jakim czasie ma zakończyć prace w przypadku nieustalenia pozycji. Użyj 0 brak limitu.</string>
   <string name="timeout_time_dialog_title">Czas w sekundach</string>
   <string name="timeout_time_hint">Wprowadź sekundy (max 9999)</string>
-  <string name="useimperial_title">Użyj jednostek imperialnych</string>
-  <string name="useimperial_summary">Używanie stóp, mil i pint.</string>
   <string name="show_notification_title">Powiadomienia</string>
   <string name="show_notification_summary">Wyświetlanie powiadomienia wraz z lokalizacją na pasku powiadomień.</string>
   <string name="enabledisablegps_title">Włącz/Wyłącz GPS</string>

@@ -94,7 +94,6 @@
   <string name="settings_accuracy_in_meters">Presnosť v metroch</string>
   <string name="settings_accuracy_in_feet">Presnosť v stopách</string>
   <string name="settings_enter_meters">Zadajte metre (max. 9999)</string>
-  <string name="settings_converting_title">Prevod...</string>
   <string name="pref_logging_title">Detaily prihlásenia</string>
   <string name="log_gpx_title">Záznam do GPX</string>
   <string name="log_gpx_summary">Vytvorí GPX súbor v priečinku GPSLogger na SD karte.</string>
@@ -111,7 +110,6 @@
   <string name="new_file_static_summary">Ak ste sa rozhodli vytvoriť nemenný súbor, zadajte názov vlastného súboru</string>
   <string name="pref_performance_title">Výkon</string>
   <string name="prefer_celltower_title">Preferuj mobilnú sieť</string>
-  <string name="prefer_celltower_summary">Používanie mobilnej siete namiesto GPS. Menej presné, ale šetrí viac batériu.</string>
   <string name="time_before_logging_title">Čas pred záznamom</string>
   <string name="time_before_logging_dialog_title">Čas v sekundách</string>
   <string name="time_before_logging_hint">Zadajte sekúnd (max. 9999)</string>
@@ -122,8 +120,6 @@
   <string name="timeout_time_summary">Ako dlho GPS hľadá fix pred ukončením. Použitie 0 pre žiaden časový limit</string>
   <string name="timeout_time_dialog_title">Čas v sekundách</string>
   <string name="timeout_time_hint">Zadajte sekúnd (max. 9999)</string>
-  <string name="useimperial_title">Používať britské jednotky</string>
-  <string name="useimperial_summary">Použitie stopy, míli a pinty, žiadne metrické vzdialenosti.</string>
   <string name="show_notification_title">Zobraziť oznámenia</string>
   <string name="show_notification_summary">Na paneli oznámení zobrazí pripomenutie spolu so súradnicami.     </string>
   <string name="enabledisablegps_title">Povoliť/zakázať GPS</string>

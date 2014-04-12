@@ -96,7 +96,6 @@
   <string name="settings_accuracy_in_meters">Tikslumas metrais</string>
   <string name="settings_accuracy_in_feet">Tikslumas pėdom</string>
   <string name="settings_enter_meters">Įvesti metrais(max 9999)</string>
-  <string name="settings_converting_title">Konvertuojama&#8230;</string>
   <string name="settings_converting_description">Mažiausias atstumo vienetų konvertavimas. Jei viršys 9999, bus nustatyta 9999. Dabar persikraus parametrų ekranas.
     </string>
   <string name="pref_logging_title">Registruojami duomenys</string>
@@ -115,12 +114,9 @@
   <string name="new_file_static_summary">Jei pasirinkote sukurti fiksuotą failą, įveskite pasirinktą failo vardą</string>
   <string name="pref_performance_title">Vykdymas</string>
   <string name="prefer_celltower_title">Priimtiniau mob. telefono stotys</string>
-  <string name="prefer_celltower_summary">Naudoja mob. telefonų stotis vietoj satelitų. Mažiau tikslumo, tačiau sutaupo energijos.</string>
   <string name="time_before_logging_title">Laikas iki įrašymo</string>
   <string name="time_before_logging_dialog_title">Laikas sekundėmis</string>
   <string name="time_before_logging_hint">Įveskite sekundes (maks. 9999)</string>
-  <string name="useimperial_title">Naudotis empirinius vienetus</string>
-  <string name="useimperial_summary">Naudoti pėdas, mylias ir pintas</string>
   <string name="show_notification_title">Rodyti pranešimus</string>
   <string name="show_notification_summary">Rodo pranešimus su kordinatėmis pranešimų panelėje.</string>
   <string name="enabledisablegps_title">Įjungti/Išjungti GPS</string>

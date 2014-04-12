@@ -95,7 +95,6 @@
   <string name="settings_accuracy_in_meters">Nauwkeurigheid in meters</string>
   <string name="settings_accuracy_in_feet">Nauwkeurigheid in feet</string>
   <string name="settings_enter_meters">Voer meter in(max 9999)</string>
-  <string name="settings_converting_title">Converteren...</string>
   <string name="settings_converting_description">Minimale afstand voor converteren van eenheden. Waarden boven 9999 worden teruggezet op 9999. Het instellingen scherm zal nu herladen.     </string>
   <string name="pref_logging_title">Logging details</string>
   <string name="log_gpx_title">Loggen naar GPX</string>
@@ -113,7 +112,6 @@
   <string name="new_file_static_summary">Als u voor een vast bestand kiest, voer dan hier de bestandsnaam in</string>
   <string name="pref_performance_title">Performantie</string>
   <string name="prefer_celltower_title">﻿Voorkeur celtorens</string>
-  <string name="prefer_celltower_summary">﻿Maakt gebruik van celtorens in plaats van satellieten. Minder nauwkeurig, maar bespaart uw batterij.</string>
   <string name="time_before_logging_title">﻿Tijd tussen de logpunten</string>
   <string name="time_before_logging_dialog_title">﻿Tijd in seconden</string>
   <string name="time_before_logging_hint">﻿Voer seconden in (max 9999)</string>
@@ -125,8 +123,6 @@
   <string name="timeout_time_summary">Hoe lang probeert de GPS een fix te krijgen, voordat hij opgeeft. Gebruik 0 voor oneindig</string>
   <string name="timeout_time_dialog_title">Tijd in seconden</string>
   <string name="timeout_time_hint">Voer seconden in (max 9999)</string>
-  <string name="useimperial_title">﻿Engelse eenheden gebruiken</string>
-  <string name="useimperial_summary">﻿Voeten, mijlen en pinten, geen nieuwerwetse metrische dingen gebruiken.</string>
   <string name="show_notification_title">Toon meldingen</string>
   <string name="show_notification_summary">Toont een herinnering samen met coördinaten in het systeemvak.</string>
   <string name="enabledisablegps_title">GPS in- of uitschakelen</string>

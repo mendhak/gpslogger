@@ -81,7 +81,6 @@
   <string name="pref_performance_title">Rendiment</string>
   <string name="prefer_celltower_title">Torres de telefonia preferides</string>
   <string name="time_before_logging_dialog_title">Temps en segons</string>
-  <string name="useimperial_title">Utilitzar unitats imperials</string>
   <string name="show_notification_title">Mostrar Notificació</string>
   <string name="enabledisablegps_title">Activar/Desactivar GPS</string>
   <string name="please_wait">Espera si us plau.</string>

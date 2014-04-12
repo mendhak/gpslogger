@@ -99,7 +99,6 @@ próximo ponto tenha sido logado.</string>
   <string name="settings_accuracy_in_meters">Precisão em metros</string>
   <string name="settings_accuracy_in_feet">Precisão em pés</string>
   <string name="settings_enter_meters">Digite metros (máximo de 9999)</string>
-  <string name="settings_converting_title">Convertendo...</string>
   <string name="settings_converting_description">Converter unidades de distância mínima. Valores acima de 9999 são redefinidas para 9999. A tela de configurações agora irá recarregar.
     </string>
   <string name="pref_logging_title">Detalhes de log</string>
@@ -118,7 +117,6 @@ próximo ponto tenha sido logado.</string>
   <string name="new_file_static_summary">Se você optar por criar um arquivo fixo, digite um nome de arquivo personalizado</string>
   <string name="pref_performance_title">Desempenho</string>
   <string name="prefer_celltower_title">Prefiro torres de celular</string>
-  <string name="prefer_celltower_summary">Usa torres de celular em vez de satélites. Menos precisos, mas economiza mais bateria.     </string>
   <string name="time_before_logging_title">Tempo antes de logar</string>
   <string name="time_before_logging_dialog_title">Tempo em segundos</string>
   <string name="time_before_logging_hint">Digite segundos (máximo de 9999)</string>
@@ -130,8 +128,6 @@ próximo ponto tenha sido logado.</string>
   <string name="timeout_time_summary">Quanto tempo o GPS fica na procura de uma conexão antes de desistir. Use 0 para nenhum tempo limite</string>
   <string name="timeout_time_dialog_title">Tempo em segundos</string>
   <string name="timeout_time_hint">Digite segundos (máximo de 9999)</string>
-  <string name="useimperial_title">Usar unidades imperiais</string>
-  <string name="useimperial_summary">Usar pés, milhas e pontos, nada métrico.</string>
   <string name="show_notification_title">Visualizar notificação</string>
   <string name="show_notification_summary">Exibe um lembrete juntamente com as coordenadas na barra de notificação.     </string>
   <string name="enabledisablegps_title">Ativar/desativar GPS</string>

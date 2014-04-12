@@ -95,7 +95,6 @@
   <string name="settings_accuracy_in_meters">Noggrannhet i meter</string>
   <string name="settings_accuracy_in_feet">Noggrannhet i fot</string>
   <string name="settings_enter_meters">Ange meter (max 9999)</string>
-  <string name="settings_converting_title">Konverterar&#8230;</string>
   <string name="settings_converting_description">Konverterar enheter för minsta avstånd. Värden över 9999 sätts till 9999. Inställningsskärmen laddas sedan om.</string>
   <string name="pref_logging_title">Loggningsdetaljer</string>
   <string name="log_gpx_title">Logga till GPX</string>
@@ -113,7 +112,6 @@
   <string name="new_file_static_summary">Om du väljer att skapa en fast fil, ange ett valfritt filnamn</string>
   <string name="pref_performance_title">Prestanda</string>
   <string name="prefer_celltower_title">Föredra mobilmaster</string>
-  <string name="prefer_celltower_summary">Använder mobilmaster istället för satelliter. Mindre noggrant, men sparar mer batteri.     </string>
   <string name="time_before_logging_title">Tid innan loggning</string>
   <string name="time_before_logging_summary">Använd 0 för maximal frekvens, men långsammare drar mindre batteri.
     </string>
@@ -122,23 +120,15 @@
   <string name="keep_fix_summary">Observera att detta minskar batterilivslängden drastiskt. Använd endast för högre precision vid låga frekvenser.
     </string>
   <string name="keep_fix_title">Behåll GPS på mellan fixeringar</string>
-  <string name="retry_time_title">Tidsintervall för noggrannhet</string>
-  <string name="retry_time_summary">Använd 0 för maximal frekvens, men långsammare drar mindre batteri.
-    </string>
   <string name="retry_time_dialog_title">Tid i sekunder</string>
   <string name="retry_time_hint">Ange sekunder (max 9999)</string>
   <string name="distance_before_logging_title">Avstånd innan loggning</string>
   <string name="distance_before_logging_summary">Avstånd innan nästa punkt loggas. Använd 0 för att logga alla punkter.
     </string>
-  <string name="accuracy_before_logging_title">Noggrannhet innan loggning</string>
-  <string name="accuracy_before_logging_summary">Min. noggrannhet för loggning. Använd 0 för att logga alla punkter.
-    </string>
   <string name="timeout_time_title">Timeout</string>
   <string name="timeout_time_summary">Hur länge GPS:en söker en fixering innan den ger upp. Använd 0 för att inte ha någon gräns</string>
   <string name="timeout_time_dialog_title">Tid i sekunder</string>
   <string name="timeout_time_hint">Ange sekunder (max 9999)</string>
-  <string name="useimperial_title">Använd anglosaxiska enheter</string>
-  <string name="useimperial_summary">Använd fot, mile och pint istället för metersystemet.</string>
   <string name="show_notification_title">Visa meddelande</string>
   <string name="show_notification_summary">Visar en påminnelse tillsammans med koordinater i meddelandefältet.</string>
   <string name="enabledisablegps_title">Aktivera/Inaktivera GPS</string>
@@ -314,4 +304,17 @@
   <string name="log_customurl_summary">Skicka loggningsinfo till din egen server via HTTP</string>
   <string name="log_customurl_urlparameters">URL-parametrar</string>
   <string name="log_customUrl_urllatitude">Latitud: %LAT</string>
+  <string name="filedialog_location">Plats</string>
+  <string name="filedialog_cantreadfolder">Mappen kan inte läsas</string>
+  <string name="filedialog_new">Ny</string>
+  <string name="filedialog_name">Mappnamn:</string>
+  <string name="filedialog_create">Spara</string>
+  <string name="filedialog_select">Välj</string>
+  <string name="filedialog_no_data">Inget data</string>
+  <string name="gpslogger_folder_title">Spara till mapp</string>
+  <string name="gpslogger_folder_summary">Var loggfiler ska sparas, standard är /sdcard/GPSLogger</string>
+  <string name="autoftp_directory">Katalog</string>
+  <string name="new_file_static_message">Använd %SER för enhetens serienummer</string>
+  <string name="new_file_prefix_serial_title">Sätt enhetens serienummer i början på filnamn</string>
+  <string name="new_file_prefix_serial_summary">Det här är serienumret som hittas i din telefonstatus </string>
 </resources>

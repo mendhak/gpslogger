@@ -95,7 +95,6 @@
   <string name="settings_accuracy_in_meters">Точність у метрах</string>
   <string name="settings_accuracy_in_feet">Точність у футах</string>
   <string name="settings_enter_meters">Введіть метри(макс. 9999)</string>
-  <string name="settings_converting_title">Перетворення...</string>
   <string name="settings_converting_description">Перетворюю одиниці мінімальної відстані. Значенні більші 9999 будуть зменшені до 9999. Екран налаштувань буде зараз перезавантажено.</string>
   <string name="pref_logging_title">Налаштування журналу</string>
   <string name="log_gpx_title">Записувати у GPX</string>
@@ -113,28 +112,20 @@
   <string name="new_file_static_summary">Якщо ви вибрали створення фіксованого файлу, введіть бажану назву файлу</string>
   <string name="pref_performance_title">Продуктивність</string>
   <string name="prefer_celltower_title">Перевага вежам моб. зв\'язку</string>
-  <string name="prefer_celltower_summary">Використовує дані веж моб. зв\'язку, а не супутників. Менша точність, але зберігає заряд акумулятора.</string>
   <string name="time_before_logging_title">Час до початку запису</string>
   <string name="time_before_logging_summary">Для максимальної частоти запису використовуйте 0, але повільніший режим є кращім для збереження заряду батареї. </string>
   <string name="time_before_logging_dialog_title">Час в секундах</string>
   <string name="time_before_logging_hint">Введіть секунди (макс. 9999)</string>
   <string name="keep_fix_summary">Обережно, це суттєво зменшує заряд батареї. Використовуйте лише для більшої точності з малою частотою.</string>
   <string name="keep_fix_title">Не вимикати GPS між замірами</string>
-  <string name="retry_time_title">Інтервал часу для точності</string>
-  <string name="retry_time_summary">Для максимальної частоти запису використовуйте 0, але повільніший режим є кращім для збереження заряду батареї. </string>
   <string name="retry_time_dialog_title">Час в секундах</string>
   <string name="retry_time_hint">Введіть секунди (макс. 9999)</string>
   <string name="distance_before_logging_title">Відстань до початку запису</string>
   <string name="distance_before_logging_summary">Як далеко потрібно зрушити до запису наступної точки. Використовуйте 0 для запису всіх точок. </string>
-  <string name="accuracy_before_logging_title">Точність перед початком запису</string>
-  <string name="accuracy_before_logging_summary">Мінімально допустима точність перед записом у журнал. Установіть 0 для всіх точок.
-    </string>
   <string name="timeout_time_title">Таймаут</string>
   <string name="timeout_time_summary">Скільки часу GPS очікує на замір перед тим як припинити спроби. Використовуйте 0, якщо таймауту немає</string>
   <string name="timeout_time_dialog_title">Час в секундах</string>
   <string name="timeout_time_hint">Введіть секунди (макс. 9999)</string>
-  <string name="useimperial_title">Імперська система мір</string>
-  <string name="useimperial_summary">Використовувати фути, милі, пінти, жодну з нових модних метричних одиниць.</string>
   <string name="show_notification_title">Показати сповіщення</string>
   <string name="show_notification_summary">Показувати нагадування з координатами у рядку сповіщень</string>
   <string name="enabledisablegps_title">Увімкнути/вимкнути GPS</string>

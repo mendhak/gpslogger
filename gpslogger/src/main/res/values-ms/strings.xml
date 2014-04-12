@@ -95,7 +95,6 @@
   <string name="settings_accuracy_in_meters">Ketepatan dalam meter</string>
   <string name="settings_accuracy_in_feet">Ketepatan dalam kaki</string>
   <string name="settings_enter_meters">Masukkan meter (maksimum 9999)</string>
-  <string name="settings_converting_title">Menukar&#8230;</string>
   <string name="settings_converting_description">Menukar unit jarak minimum. Nilai melebihi 9999 diset semula ke 9999. Skrin tetapan akan dimuat semula.</string>
   <string name="pref_logging_title">Mengelog perincian</string>
   <string name="log_gpx_title">Log kedalam GPX</string>
@@ -113,7 +112,6 @@
   <string name="new_file_static_summary">Jika anda memilih untuk mencipta fail tetap, masukkan nama fail tersuai</string>
   <string name="pref_performance_title">Prestasi</string>
   <string name="prefer_celltower_title">Utamakan menara pemancar</string>
-  <string name="prefer_celltower_summary">Gunakan menara pemancar berbanding satelit.  Kurang tepat, tetapi menjimatkan lebih banyak kuasa.</string>
   <string name="time_before_logging_title">Masa sebelum log masuk</string>
   <string name="time_before_logging_dialog_title">Masa dalam saat</string>
   <string name="time_before_logging_hint">Masukkan saat (maksimum 9999)</string>
@@ -125,8 +123,6 @@
   <string name="timeout_time_summary">Berapa lama GPS cuba mengunci lokasi sebelum berhenti. Gunakan 0 untuk tidak percubaan tanpa had</string>
   <string name="timeout_time_dialog_title">Masa dalam saat</string>
   <string name="timeout_time_hint">Masukkan saat (maksimum 9999)</string>
-  <string name="useimperial_title">Gunakan unit Imperial</string>
-  <string name="useimperial_summary">Gunakan kaki, batu dan pain, daripada sebarang ukuran metrik.</string>
   <string name="show_notification_title">Tunjuk notifikasi</string>
   <string name="show_notification_summary">Memaparkan peringatan bersama-sama dengan koordinat pada turus pemberitahuan. </string>
   <string name="enabledisablegps_title">Aktif/Padam GPS</string>

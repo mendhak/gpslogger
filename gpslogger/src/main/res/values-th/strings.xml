@@ -95,7 +95,6 @@
   <string name="settings_accuracy_in_meters">ความแม่นยำเป็นเมตร</string>
   <string name="settings_accuracy_in_feet">ความแม่นยำเป็นฟุต</string>
   <string name="settings_enter_meters">ใส่ค่าเป็นเมตร (สูงสุด 9999)</string>
-  <string name="settings_converting_title">กำลังแปลงค่า...</string>
   <string name="settings_converting_description">แปลงหน่วยของระยะทางขั้นต่ำ ใส่ค่าเกิน 9999 จะถูกรีเซ็ตเป็น 9999 เสมอ หน้าจอการตั้งค่าจะถูกรีโหลด</string>
   <string name="pref_logging_title">รายละเอียดการบันทึก</string>
   <string name="log_gpx_title">บันทึกลงไฟล์ GPX</string>
@@ -113,7 +112,6 @@
   <string name="new_file_static_summary">ถ้าเลือกจะตั้งชื่อไฟล์คงที่ กรุณาป้อนชื่อไฟล์</string>
   <string name="pref_performance_title">ประสิทธิภาพ</string>
   <string name="prefer_celltower_title">เน้นเสาสัญญานมือถือ</string>
-  <string name="prefer_celltower_summary">เลือกใช้เสาสัญญานมือถือแทนดาวเทียม แม่นยำน้อย แต่ประหยัดแบตเตอรี่กว่า</string>
   <string name="time_before_logging_title">เวลาหน่วงระหว่างบันทึก</string>
   <string name="time_before_logging_dialog_title">เวลาเป็นวินาที</string>
   <string name="time_before_logging_hint">ใส่ค่าเป็นวินาที (สูงสุด 9999)</string>
@@ -125,8 +123,6 @@
   <string name="timeout_time_summary">นานแค่ไหนเวลาจีพีเอสคำนวณหาตำแหน่งก่อนจะยอมแพ้ ค่า 0 คือหาไปเรื่อยๆไม่กำหนดเวลา</string>
   <string name="timeout_time_dialog_title">เวลาเป็นวินาที</string>
   <string name="timeout_time_hint">ใส่ค่าเป็นวินาที (สูงสุด 9999)</string>
-  <string name="useimperial_title">ใช้หน่วยอิมพีเรียล</string>
-  <string name="useimperial_summary">ค่าหลักหน่วยเป็นฟุต ไมล์ และไพนต์ ไม่มีใช้พวกหน่วยวัดใหม่ๆอะไร</string>
   <string name="show_notification_title">แสดงการแจ้งเตือน</string>
   <string name="show_notification_summary">แสดงการเตือนพร้อมพิกัดในบาร์การแจ้งเตือน</string>
   <string name="enabledisablegps_title">เปิด/ปิด จีพีเอส</string>

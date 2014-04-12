@@ -95,7 +95,6 @@
   <string name="settings_accuracy_in_meters">Nøyaktighet i meter</string>
   <string name="settings_accuracy_in_feet">Nøyaktighet i fot</string>
   <string name="settings_enter_meters">Angi meter (maks 9999)</string>
-  <string name="settings_converting_title">Konverterer...</string>
   <string name="settings_converting_description">Konverterer minimumsdistanse. Verdier over 9999 tilbakestilles til 9999. Skjermbildet vil nå laste på nytt.     </string>
   <string name="pref_logging_title">Logg detaljer</string>
   <string name="log_gpx_title">Logg til GPX</string>
@@ -113,7 +112,6 @@
   <string name="new_file_static_summary">Hvis du velger å opprette en bestemt fil, angi et navn</string>
   <string name="pref_performance_title">Yting</string>
   <string name="prefer_celltower_title">Føretrekk mobilmaster</string>
-  <string name="prefer_celltower_summary">Bruk mobilmaster heller enn satellittar. Mindre nøyaktig, men sparar<br />batteriet.<br /></string>
   <string name="time_before_logging_title">Tid før logging</string>
   <string name="time_before_logging_dialog_title">Tid i sekund</string>
   <string name="time_before_logging_hint">Skriv inn sekund (maks 9999)</string>
@@ -125,8 +123,6 @@
   <string name="timeout_time_summary">Hvor lenge skal GPS\'en søke etter posisjon før den gir opp. Bruk 0 for å aldri gi opp</string>
   <string name="timeout_time_dialog_title">Tid i sekunder</string>
   <string name="timeout_time_hint">Angi sekunder (maks 9999)</string>
-  <string name="useimperial_title">Bruk imperieeiningar</string>
-  <string name="useimperial_summary">Bruk fot, engelske mil og pint, ikkje noko nymotens metergreier.</string>
   <string name="show_notification_title">Vis melding</string>
   <string name="show_notification_summary">Viser ei påminning saman med koordinat i meldingsbjelken.<br /></string>
   <string name="enabledisablegps_title">Slå på/av GPS</string>

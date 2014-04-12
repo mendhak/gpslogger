@@ -94,7 +94,6 @@
   <string name="settings_accuracy_in_meters">精确到米</string>
   <string name="settings_accuracy_in_feet">精确到英尺</string>
   <string name="settings_enter_meters">输入米数(最大 9999)</string>
-  <string name="settings_converting_title">转换中...</string>
   <string name="settings_converting_description">正在转换最小距离单位。值大于9999的将重置为9999。设置界面将会重载。</string>
   <string name="pref_logging_title">记录细节</string>
   <string name="log_gpx_title">记录到 GPX 文件</string>
@@ -109,7 +108,6 @@
   <string name="new_file_creation_everystart">每次我点击开始</string>
   <string name="pref_performance_title">性能</string>
   <string name="prefer_celltower_title">独爱基站</string>
-  <string name="prefer_celltower_summary">使用基站而不是卫星定位。精确度较低，但是可以省更多的电。</string>
   <string name="time_before_logging_title">在记录之前的时间</string>
   <string name="time_before_logging_dialog_title">以秒计的时间</string>
   <string name="time_before_logging_hint">输入秒数(最大 9999)</string>
@@ -117,8 +115,6 @@
   <string name="retry_time_hint">请输入秒 (最大 9999）</string>
   <string name="timeout_time_title">超时</string>
   <string name="timeout_time_hint">请输入秒 (最大 9999）</string>
-  <string name="useimperial_title">使用英制单位</string>
-  <string name="useimperial_summary">使用英尺、英里和品脱，没有这种新奇的度量东西。</string>
   <string name="show_notification_title">显示通知</string>
   <string name="show_notification_summary">随着坐标的变化在通知栏上显示一个提醒。</string>
   <string name="enabledisablegps_title">启用/禁用 GPS</string>

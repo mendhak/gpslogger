@@ -48,7 +48,6 @@
   <string name="settings_enter_feet">Tik voete (max 9999)</string>
   <string name="settings_distance_in_meters">Afstand in meters</string>
   <string name="settings_enter_meters">Tik meters (max 9999)</string>
-  <string name="settings_converting_title">Skakel om...</string>
   <string name="settings_converting_description">Minimum afstand eenhede word omgeskakel. Waardes bo 9999 is herstel na 9999. Die instellings skerm sal nou herlaai.     </string>
   <string name="enabledisablegps_summary">Gaan na die telefoon instellings om verskaffers in of uit staat te stel.</string>
   <string name="autoemail_smtp_category">Epos Instellings</string>
