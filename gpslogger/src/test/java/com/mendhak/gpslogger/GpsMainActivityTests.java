@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
+import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
+import com.mendhak.gpslogger.senders.ftp.AutoFtpActivity;
 import com.robotium.solo.Solo;
 
 
@@ -91,9 +93,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     }
 
     public void testAutoEmailsRequireFilledValues() {
-        solo.sendKey(Solo.MENU);
-        solo.setNavigationDrawer(Solo.OPENED);
-        solo.clickOnText(solo.getCurrentActivity().getString(R.string.autoemail_title));
+        launchActivity("com.mendhak.gpslogger", AutoEmailActivity.class, null);
         solo.clickOnCheckBox(0);
         solo.goBack();
         assertTrue("Email form without valid values should show alert dialog", solo.searchText(solo.getCurrentActivity().getString(R.string.autoemail_invalid_form)));
@@ -102,9 +102,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     }
 
     public void testAutoFtpRequireFilledValues() {
-        solo.sendKey(Solo.MENU);
-        solo.setNavigationDrawer(Solo.OPENED);
-        solo.clickOnText(solo.getCurrentActivity().getString(R.string.autoftp_setup_title));
+        launchActivity("com.mendhak.gpslogger", AutoFtpActivity.class, null);
         solo.clickOnCheckBox(0);
         solo.goBack();
         assertTrue("FTP form without valid values should show alert dialog", solo.searchText(solo.getCurrentActivity().getString(R.string.autoemail_invalid_form)));
