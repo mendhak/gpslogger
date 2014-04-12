@@ -97,3 +97,9 @@ preBuild.doFirst {
         //throw new GradleScriptException("Please create a file at ./src/main/res/values/test.xml. If you just want to build, leave the file empty. If you want to use DropBox or OpenStreetMap features, this file must contain OAuth keys (instructions in README).", null)
     }
 }
+
+tasks.whenTaskAdded { task ->
+    if (task.name.equals("lint")) {
+        task.enabled = false
+    }
+}
