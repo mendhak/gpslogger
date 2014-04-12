@@ -37,5 +37,6 @@ before_script:
   - adb shell input keyevent 82 &
 
 script:
+  - ./gradlew --version
   - ./gradlew build
-  - ./gradlew connectedInstrumentTest --info
+  - ./gradlew connectedInstrumentTest --info --stacktrace --debug
