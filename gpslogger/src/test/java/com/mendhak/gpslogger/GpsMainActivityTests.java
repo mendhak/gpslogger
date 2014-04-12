@@ -48,6 +48,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
 
     public void testSinglePointButtonDisabledWhenLoggingStarted() {
         //setDrawerVisibility(false);
+        solo.setNavigationDrawer(Solo.CLOSED);
         solo.clickOnView(solo.getView(R.id.simple_play));
         solo.sleep(500);
         assertFalse("One Point button should be disabled if main logging enabled", ((GpsMainActivity) solo.getCurrentActivity()).mnuOnePoint.isEnabled());
@@ -91,6 +92,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
 
     public void testAutoEmailsRequireFilledValues() {
         solo.sendKey(Solo.MENU);
+        solo.setNavigationDrawer(Solo.OPENED);
         solo.clickOnText(getActivity().getString(R.string.autoemail_title));
         solo.clickOnCheckBox(0);
         solo.goBack();
@@ -101,6 +103,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
 
     public void testAutoFtpRequireFilledValues() {
         solo.sendKey(Solo.MENU);
+        solo.setNavigationDrawer(Solo.OPENED);
         solo.clickOnText(getActivity().getString(R.string.autoftp_setup_title));
         solo.clickOnCheckBox(0);
         solo.goBack();
