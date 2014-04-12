@@ -1,6 +1,10 @@
 package com.mendhak.gpslogger;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
+import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
 import com.robotium.solo.Solo;
 
 
@@ -15,7 +19,14 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+
+        Context context = getInstrumentation().getTargetContext();
+        final SharedPreferences.Editor preferencesEditor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+        preferencesEditor.putBoolean("navigation_drawer_learned", true);
+        preferencesEditor.commit();
+
         solo = new Solo(getInstrumentation(), getActivity());
+
     }
 
     @Override
@@ -25,24 +36,19 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     }
 
     public void testCanSeeMenuItems() {
-        setDrawerVisibility(true);
-        solo.sleep(100);
+        solo.sendKey(Solo.MENU);
         assertTrue("Could not find menu Logging Settings", solo.searchText(getActivity().getString(R.string.title_drawer_loggingsettings)));
         assertTrue("Could not find menu Upload Settings", solo.searchText(getActivity().getString(R.string.title_drawer_uploadsettings)));
         assertTrue("Could not find menu General Settings", solo.searchText(getActivity().getString(R.string.title_drawer_generalsettings)));
     }
 
     public void testHelpButtonOpensFAQPage(){
-        setDrawerVisibility(false);
         solo.clickOnView(solo.getView(R.id.imgHelp));
         solo.assertCurrentActivity("FAQ Screen", Faqtivity.class);
-        solo.scrollDown();
-        solo.scrollToBottom();
-        solo.scrollToTop();
     }
 
     public void testSinglePointButtonDisabledWhenLoggingStarted() {
-
+        //setDrawerVisibility(false);
         solo.clickOnView(solo.getView(R.id.simple_play));
         solo.sleep(500);
         assertFalse("One Point button should be disabled if main logging enabled", ((GpsMainActivity) solo.getCurrentActivity()).mnuOnePoint.isEnabled());
@@ -53,18 +59,9 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     }
 
 
-    private void setDrawerVisibility(boolean visible){
-        solo.sleep(100);
-        if(solo.getView(R.id.drawer_layout).isShown() != visible){
-            solo.sendKey(Solo.MENU);
-            solo.sleep(100);
-        }
-    }
-
     public void testAnnotateButtonDisabledIfGpxKmlUrlAreDisabled(){
 
-        setDrawerVisibility(true);
-        solo.waitForText(getActivity().getString(R.string.title_drawer_loggingsettings));
+        solo.sendKey(Solo.MENU);
         solo.clickOnText(getActivity().getString(R.string.title_drawer_loggingsettings));
         solo.scrollToTop();
         if(solo.isCheckBoxChecked(0)) { solo.clickOnCheckBox(0); }
@@ -78,7 +75,6 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     }
 
     public void testSpinnerNavigation(){
-        setDrawerVisibility(false);
         solo.clickOnText(getActivity().getString(R.string.view_simple));
         solo.clickOnText(getActivity().getString(R.string.view_detailed));
         solo.finishOpenedActivities();
@@ -92,6 +88,14 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
         solo.clickOnText(getActivity().getString(R.string.view_detailed));
         solo.clickOnText(getActivity().getString(R.string.view_simple));
 
+    }
+
+    public void testEmailsRequireFilledValues() {
+        solo.sendKey(Solo.MENU);
+        launchActivity("com.mendhak.gpslogger", AutoEmailActivity.class, null);
+        solo.clickOnCheckBox(0);
+        solo.goBack();
+        assertTrue("Email form without valid values should show alert dialog", solo.searchText(getActivity().getString(R.string.autoemail_invalid_form)));
     }
 
 }
