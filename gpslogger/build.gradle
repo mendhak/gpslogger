@@ -102,4 +102,8 @@ tasks.whenTaskAdded { task ->
     if (task.name.equals("lint")) {
         task.enabled = false
     }
+
+    if(task.name.equals("connectedInstrumentTest")){
+        task.dependsOn(uninstallAll)
+    }
 }
