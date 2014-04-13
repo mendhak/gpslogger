@@ -179,11 +179,11 @@ have an emulator up and running or your phone is connected.  In other words, `ad
 
 Then run the tests using the gradle wrapper
 
-     ./gradlew connectedAndroidTest --info
+     ./gradlew connectedInstrumentTest --info
 
 If a test fails and you want a little more info, you can add the `stacktrace` and `debug` flags
 
-    ./gradlew connectedAndroidTest --debug --stacktrace
+    ./gradlew connectedInstrumentTest --debug --stacktrace
 
 You can also try running the tests straight from the IDE, but at the time of writing, IntelliJ and Android Studio are
 only just starting to include this functionality.  Your mileage may vary.  I have found that if GPSLogger is already
