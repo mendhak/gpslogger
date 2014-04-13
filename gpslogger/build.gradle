@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.+'
+        classpath 'com.android.tools.build:gradle:0.9.+'
     }
 }
 apply plugin: 'android'
@@ -14,7 +14,7 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.1"
+    buildToolsVersion "19.0.3"
 
     defaultConfig {
         minSdkVersion 14
@@ -48,15 +48,15 @@ android {
     }
 
     sourceSets {
-        instrumentTest.setRoot('src/test')
+        androidTest.setRoot('src/test')
     }
 }
 
 dependencies {
 
-    instrumentTestCompile 'com.jayway.android.robotium:robotium-solo:5.1'
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.1'
 
-    compile 'com.android.support:support-v4:18.0.0'
+    compile 'com.android.support:support-v4:19.1.0'
     compile 'com.google.android.gms:play-services:4.0.30'
     compile fileTree(dir:'./src/main/libs', include: '*.jar')
 

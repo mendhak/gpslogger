@@ -64,7 +64,7 @@ This project uses certain Google libraries, you will need to add them. Run
 
 Which brings up the Android SDK manager.  In here, choose
 
-*  Tools > Android SDK build tools 19.0.1
+*  Tools > Android SDK build tools 19.0.3
 *  Extras > Android Support Repository
 *  Extras > Android Support Library
 *  Extras > Google Play services
@@ -178,11 +178,11 @@ have an emulator up and running or your phone is connected.  In other words, `ad
 
 Then run the tests using the gradle wrapper
 
-     ./gradlew connectedInstrumentTest --info
+     ./gradlew connectedAndroidTest --info
 
 If a test fails and you want a little more info, you can add the `stacktrace` and `debug` flags
 
-    ./gradlew connectedInstrumentTest --debug --stacktrace
+    ./gradlew connectedAndroidTest --debug --stacktrace
 
 You can also try running the tests straight from the IDE, but at the time of writing, IntelliJ and Android Studio are
 only just starting to include this functionality.  Your mileage may vary.  I have found that if GPSLogger is already
