@@ -30,7 +30,7 @@ Setting up the code
 =========
 
 
-Feel free to adopt and document your own OS and IDEs.  These instructions are for Ubuntu 13.10 with IntelliJ 13
+Feel free to adopt and document your own OS and IDEs.  These instructions are for Ubuntu 13.10 with IntelliJ 13.1.1
 
 ### Set up your Android Development Environment
 
@@ -51,6 +51,7 @@ If you don't already have Gradle, download it to `/opt/gradle/gradle-1.x`.  Add 
 ### Get IntelliJ IDEA
 
 Download and install [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/download/index.html), which is free.
+Note that Gradle 1.11 does not work well with anything earlier than 13.1.
 
 ### Install Git
 
