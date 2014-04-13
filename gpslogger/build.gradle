@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.android.tools.build:gradle:0.8.+'
     }
 }
 apply plugin: 'android'
@@ -48,13 +48,13 @@ android {
     }
 
     sourceSets {
-        androidTest.setRoot('src/test')
+        instrumentTest.setRoot('src/test')
     }
 }
 
 dependencies {
 
-    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.1'
+    instrumentTestCompile 'com.jayway.android.robotium:robotium-solo:5.1'
 
     compile 'com.android.support:support-v4:19.1.0'
     compile 'com.google.android.gms:play-services:4.0.30'
