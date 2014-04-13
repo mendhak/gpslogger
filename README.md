@@ -30,7 +30,7 @@ Setting up the code
 =========
 
 
-Feel free to adopt and document your own OS and IDEs.  These instructions are for Ubuntu 13.10 with IntelliJ 13
+Feel free to adopt and document your own OS and IDEs.  These instructions are for Ubuntu 13.10 with IntelliJ 13.1.1
 
 ### Set up your Android Development Environment
 
@@ -51,6 +51,7 @@ If you don't already have Gradle, download it to `/opt/gradle/gradle-1.x`.  Add 
 ### Get IntelliJ IDEA
 
 Download and install [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/download/index.html), which is free.
+Note that Gradle 1.11 does not work well with anything earlier than 13.1.
 
 ### Install Git
 
@@ -64,7 +65,7 @@ This project uses certain Google libraries, you will need to add them. Run
 
 Which brings up the Android SDK manager.  In here, choose
 
-*  Tools > Android SDK build tools 19.0.1
+*  Tools > Android SDK build tools 19.0.3
 *  Extras > Android Support Repository
 *  Extras > Android Support Library
 *  Extras > Google Play services

@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.+'
+        classpath 'com.android.tools.build:gradle:0.8.+'
     }
 }
 apply plugin: 'android'
@@ -14,7 +14,7 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.1"
+    buildToolsVersion "19.0.3"
 
     defaultConfig {
         minSdkVersion 14
@@ -56,7 +56,7 @@ dependencies {
 
     instrumentTestCompile 'com.jayway.android.robotium:robotium-solo:5.1'
 
-    compile 'com.android.support:support-v4:18.0.0'
+    compile 'com.android.support:support-v4:19.1.0'
     compile 'com.google.android.gms:play-services:4.0.30'
     compile fileTree(dir:'./src/main/libs', include: '*.jar')
 
@@ -100,7 +100,7 @@ preBuild.doFirst {
 
 tasks.whenTaskAdded { task ->
     //Don't run lint. Takes too long.
-    if (task.name.equals("lint")) {
+    if (task.name.contains("lint")) {
         task.enabled = false
     }
 
