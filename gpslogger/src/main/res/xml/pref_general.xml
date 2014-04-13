@@ -3,11 +3,7 @@
                   android:key="gpslogger_preferences">
 
 
-    <CheckBoxPreference
-        android:key="show_notification"
-        android:summary="@string/show_notification_summary"
-        android:title="@string/show_notification_title"
-        android:defaultValue="true"/>
+
     <CheckBoxPreference
         android:title="@string/startonbootup_title"
         android:summary="@string/startonbootup_summary"

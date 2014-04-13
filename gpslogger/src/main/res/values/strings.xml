@@ -192,9 +192,6 @@
 
     <string name="display_imperial_title">Display Imperial units</string>
     <string name="display_imperial_summary">Display feet, miles and pints, none of that newfangled metric stuff. (Preferences must still be in metrics)</string>
-    <string name="show_notification_title">Show Notification</string>
-    <string name="show_notification_summary">Displays a reminder along with coordinates in the notification bar.
-    </string>
 
 
     <string name="enabledisablegps_title">Enable/Disable GPS</string>

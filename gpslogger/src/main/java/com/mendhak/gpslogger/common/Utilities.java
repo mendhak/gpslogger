@@ -141,8 +141,6 @@ public class Utilities
 
         AppSettings.setLogToOpenGTS(prefs.getBoolean("log_opengts", false));
 
-        AppSettings.setShowInNotificationBar(prefs.getBoolean(
-                "show_notification", true));
 
         AppSettings.setPreferCellTower(prefs.getBoolean("prefer_celltower",
                 false));

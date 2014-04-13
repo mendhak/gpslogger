@@ -32,7 +32,6 @@ public class AppSettings extends Application
     private static boolean logToPlainText;
     private static boolean logToCustomUrl;
     private static String customLoggingUrl;
-    private static boolean showInNotificationBar;
     private static int minimumSeconds;
     private static boolean keepFix;
     private static int retryInterval;
@@ -168,22 +167,6 @@ public class AppSettings extends Application
     static void setLogToPlainText(boolean logToPlainText)
     {
         AppSettings.logToPlainText = logToPlainText;
-    }
-
-    /**
-     * @return the showInNotificationBar
-     */
-    public static boolean shouldShowInNotificationBar()
-    {
-        return showInNotificationBar;
-    }
-
-    /**
-     * @param showInNotificationBar the showInNotificationBar to set
-     */
-    static void setShowInNotificationBar(boolean showInNotificationBar)
-    {
-        AppSettings.showInNotificationBar = showInNotificationBar;
     }
 
 
