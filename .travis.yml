@@ -1,5 +1,8 @@
 language: java
 jdk: oraclejdk7
+
+notifications:
+  email: false
 env:
   matrix:
     - ANDROID_TARGET=android-19  ANDROID_ABI=armeabi-v7a
