@@ -24,10 +24,13 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Faqtivity extends Activity
 {
 
-
+    WebView browser;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Faqtivity.class.getSimpleName());
     /**
      * Event raised when the form is created for the first time
@@ -42,13 +45,25 @@ public class Faqtivity extends Activity
 
         setContentView(R.layout.activity_faq);
 
-        WebView browser = (WebView)findViewById(R.id.faqwebview);
+        browser = (WebView)findViewById(R.id.faqwebview);
         WebSettings settings = browser.getSettings();
+        settings.setLoadWithOverviewMode(true);
+        settings.setUseWideViewPort(true);
+        settings.setBuiltInZoomControls(true);
         settings.setJavaScriptEnabled(true);
-        browser.loadUrl("file:///android_asset/faq.html");
+
+        Map<String, String> noCacheHeaders = new HashMap<String, String>(2);
+        noCacheHeaders.put("Pragma", "no-cache");
+        noCacheHeaders.put("Cache-Control", "no-cache");
+
+        browser.loadUrl("http://code.mendhak.com/gpslogger/index.html", noCacheHeaders);
     }
 
 
-
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        browser.clearCache(true);
+        browser.clearHistory();
+    }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
+import android.webkit.WebView;
 import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
 import com.mendhak.gpslogger.senders.ftp.AutoFtpActivity;
 import com.robotium.solo.Solo;
@@ -46,6 +47,8 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     public void testHelpButtonOpensFAQPage(){
         solo.clickOnView(solo.getView(R.id.imgHelp));
         solo.assertCurrentActivity("FAQ Screen", Faqtivity.class);
+        WebView webView = (WebView)solo.getView(R.id.faqwebview);
+        assertTrue(solo.getWebUrl(), solo.getWebUrl().equals("http://code.mendhak.com/gpslogger/index.html"));
     }
 
     public void testSinglePointButtonDisabledWhenLoggingStarted() {
