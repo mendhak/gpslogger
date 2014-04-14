@@ -351,7 +351,7 @@ header #nav-wrap {
    margin-bottom: 6px;
 }
 #more-articles .a-left {
-   padding-left: 54px;
+   padding-left: 24px;
    text-align: right;
 }
 #more-articles .a-left h3,
@@ -372,7 +372,7 @@ header #nav-wrap {
 }
 #more-articles .a-right {
     position: relative;
-    padding-right: 82px;
+    padding-right: 12px;
 }
 #more-articles .a-right .comments {
     position: absolute;
@@ -857,32 +857,37 @@ footer ul.photostream li a {
 }
 #go-top a:hover { background-color: #1E83B6; }
 
+.hiddentext { display:none; min-width: 600px;}
 
-@media (max-device-width: 800px) { 
-    /*.brief p { */
-    /*    font-size: 35px; */
-    /*    line-height:38px;*/
-    /*}*/
+@media (max-device-width: 800px) or (max-width: 800px) {
+        /*.brief p { */
+        /*    font-size: 35px; */
+        /*    line-height:38px;*/
+        /*}*/
 
 
-#more-articles .a-left {
-   padding-left: 24px;
-   text-align: right;
-}
-
-    #more-articles .a-right p {
-        font-size:35px;
-        line-height:38px;
+    #more-articles .a-left {
+       padding-left: 4px;
+       text-align: right;
     }
-    
-   #more-articles .a-left h3,
-#more-articles .a-left h3 a {
-   font-family: Sans-Serif;
-   font-weight: bold;
-   font-size: 32px;
-   line-height: 38px;
-   color: #666666;
-   margin-bottom: 6px;
-}
+
+        #more-articles .a-right p {
+            font-size:35px;
+            line-height:38px;
+        }
+
+       #more-articles .a-left h3,
+    #more-articles .a-left h3 a {
+       font-family: Sans-Serif;
+       font-weight: bold;
+       font-size: 32px;
+       line-height: 38px;
+       color: #666666;
+       margin-bottom: 6px;
+    }
+
+    .grid9 {
+        padding-left: 24px;
+    }
 
 }

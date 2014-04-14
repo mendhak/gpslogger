@@ -7,9 +7,9 @@
    <!--- Basic Page Needs
    ================================================== -->
 	<meta charset="utf-8">
-	<title>Freshpick</title>
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<title>GPSLogger for Android</title>
+	<meta name="description" content="GPS Logging application for Android">
+	<meta name="author" content="Mendhak">
 
 	<!-- CSS
    ================================================== -->
@@ -32,7 +32,7 @@
       <article id="latest-article" class="container">
 
          <h2><a href="#">GPSLogger for Android</a></h2>
-         <p class="post-info">A battery efficient GPS Logger application for Android</p>
+         <p class="post-info">A battery efficient GPS logging application for Android</p>
 
          <div class="dcontent cf">
             <p>GPSLogger uses the GPS capabilities of your Android phone to log coordinates to a GPS or KML file at regular intervals. This can be particularly useful if you want to geotag your photos after a day out or share your travel route with someone. The purpose of this application is to be battery efficient to save you battery power when abroad and last as long as possible.</p>
@@ -93,9 +93,6 @@
                magna odio, nisi, in est aenean porttitor, urna egestas er odio arcu
                Lundium facilisis odio arcu mus ultricies ac penatibus risus nascetur. <a href="#">Read More...</a> </p>
 
-               <div class="comments">
-                  <a href="#" title="comment on...">5</a>
-               </div>
 
             </div>
 
@@ -110,16 +107,13 @@
 
             <div class="grid8 a-right">
 
-               <p>Enim urna! Et turpis ac mus arcu, placerat in proinodio, nisi, in est
+               <p><img src="1.png" />
+                   </p><p>Enim urna! Et turpis ac mus arcu, placerat in proinodio, nisi, in est
                Hac, augue ultrices phasellus elit, sociis aenean aenean Eu turpis
                scelerisque sed eu pid, elementum aliquet, nec cras urpis magnis
                Sagittis diam aenean? Eu turpis magnis risus nascetur magna odio
                magna odio, nisi, in est aenean porttitor, urna egestas er odio arcu
                 Lundium facilisis odio arcu mus ultricies ac penatibus risus nascetur. <a href="#">Read More...</a> </p>
-
-               <div class="comments">
-                  <a href="#" title="comment on...">97</a>
-               </div>
 
             </div>
 
@@ -141,15 +135,41 @@
                magna odio, nisi, in est aenean porttitor, urna egestas er odio arcu
                Lundium facilisis odio arcu mus ultricies ac penatibus risus nascetur. <a href="#">Read More...</a> </p>
 
-               <div class="comments">
-                  <a href="#" title="comment on...">125</a>
-               </div>
 
             </div>
 
          </article>
 
       </div>
+
+       <div id="content" class="container">
+           <section id="main" class="grid9 first">
+               <article>
+                   <h2 class="subheader">Frequently Asked Questions</h2>
+
+                   <p></p>
+
+                   <div class="a-left">
+                       <h3>Why is it taking so long to find a fix? </h3>
+
+                       <p class="lead">test test <br/>
+
+
+                            <a href="javascript:void(0);" class="toggle">You can read about it in more detail
+                            here.</a><br/>
+
+                            <div class="hiddentext">THis is some hidden text.</div>
+
+                       </p>
+                   </div>
+                   <div class="a-left">
+                       <h3>How can I save more battery life?</h3>
+
+                       <p class="lead">test test</p>
+                   </div>
+               </article>
+           </section>
+       </div>
 
       <!-- search section
       ================================================== -->
@@ -296,6 +316,23 @@
 
    <script src="js/custom.js"></script>
 
+<script type="text/javascript">
+    // expanding, collapsing div script
+    $(document).ready(function() {
+        $(".toggle").click(function() {
+
+           $(".hiddentext").slideToggle(500);
+        });
+//        $(".toggle-content").slideUp();
+//        $(".hiddentext").click(function() {
+//            var $next = $(this).next(".toggle-content");
+//            $('.byline').not(this).removeClass('exp');
+//            $(".toggle-content").not($next).slideUp();
+//            $next.slideToggle(500);
+//            $(this).toggleClass('exp');
+//        });
+    });
+</script>
 </body>
 
 </html>
