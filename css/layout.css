@@ -859,12 +859,20 @@ footer ul.photostream li a {
 
 .hiddentext { display:none; min-width: 600px;}
 
-@media (max-device-width: 800px) or (max-width: 800px) {
+@media (max-device-width: 800px), (max-width: 800px) {
         /*.brief p { */
         /*    font-size: 35px; */
         /*    line-height:38px;*/
         /*}*/
 
+    #latest-article p {
+        font-size: 38px;
+        line-height: 45px;
+    }
+    
+    .post-info {
+        font-size: 24px !important;
+    }
 
     #more-articles .a-left {
        padding-left: 4px;
@@ -873,7 +881,7 @@ footer ul.photostream li a {
 
         #more-articles .a-right p {
             font-size:35px;
-            line-height:38px;
+            line-height:40px;
         }
 
        #more-articles .a-left h3,
@@ -881,7 +889,7 @@ footer ul.photostream li a {
        font-family: Sans-Serif;
        font-weight: bold;
        font-size: 32px;
-       line-height: 38px;
+       line-height: 40px;
        color: #666666;
        margin-bottom: 6px;
     }
@@ -889,5 +897,22 @@ footer ul.photostream li a {
     .grid9 {
         padding-left: 24px;
     }
+    
+    .faq h3 {
+        font-size: 37px;
+        line-height: 40px;
+    }
+    
+    .faq h2 {
+        font-size: 46px;
+        line-height: 50px;
+    }
+    
+    .faq, .faq p, .faq a {
+        font-size: 30px;
+        line-height: 32px;
+    }
+    
+    
 
 }
