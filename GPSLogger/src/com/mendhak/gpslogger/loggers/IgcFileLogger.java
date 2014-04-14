@@ -170,7 +170,7 @@ public class IgcFileLogger extends AbstractLogger implements IFileLogger
         // manufacturer
         sb.append("HFRFWFIRMWAREVERSION:" + versionString + "\r\n"); // sw version of app
         sb.append("HFRHWHARDWAREVERSION:" + versionString + "\r\n"); // hw version
-        sb.append("HFFTYFRTYPE:GpsLogger" + "\r\n"); // required: manufacturer
+        sb.append("HFFTYFRTYPE:Flight GpsLogger" + "\r\n"); // required: manufacturer
         sb.append("I013638GSP" + "\r\n");
 
         output.write(sb.toString().getBytes());

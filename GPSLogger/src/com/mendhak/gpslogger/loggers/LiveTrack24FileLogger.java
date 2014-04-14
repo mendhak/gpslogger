@@ -26,6 +26,7 @@
 package com.mendhak.gpslogger.loggers;
 
 import android.location.Location;
+import android.os.Handler;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -33,9 +34,9 @@ import com.loopj.android.http.RequestHandle;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.utils.LocationBuffer;
-
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -51,7 +52,7 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
     /**
      * Sent to server
      */
-    private String ourVersion = "0.1";
+    private String ourVersion;
 
     /**
      * How many secs between position reports
@@ -66,12 +67,12 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
     /**
      * Our app name, FIXME - pick a good name
      */
-    private String programName = "Android GpsLogger";
+    private String programName = "Flight GPSLogger";
 
     /**
      * FIXME - pass in from app
      */
-    private String vehicleName = "Foo";
+    private String vehicleName;
 
     /**
      * Hardwired for paraglider - FIXME
@@ -99,6 +100,11 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
     private static LiveTrack24FileLogger instance = null;
 
     public boolean liveUpload(LocationBuffer.BufferedLocation b){
+        // discard location if login not yet ready.
+        if (!login_ok){
+            return true;
+        }
+
         RequestHandle rh = sendLocationPacket(b);
         while (!rh.isFinished()){
             try {
@@ -127,6 +133,11 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
     private LiveTrack24FileLogger(String serverURL, String username,
                                   String password, int expectedInterval, int minDistance) throws MalformedURLException {
         super(expectedInterval,minDistance);
+        this.ourVersion = AppSettings.getVersionName();
+        this.vehicleName = AppSettings.getGliderName();
+        if (this.vehicleName == null || this.vehicleName.trim().equals("")){
+            this.vehicleName = "none";
+        }
         Utilities.LogDebug("livetrack24 constructor");
         URL url = new URL(serverURL + "/track.php");
         trackURL = url.toString();
@@ -204,7 +215,8 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
      * @param async if true, request is asynchronous, else it's synchronous
      * @return the request handle
      */
-    RequestHandle sendPacket(int packetType, Map<String,String> params,AsyncHttpResponseHandler handler, boolean async){
+    RequestHandle sendPacket(int packetType, Map<String,String> params,
+                             AsyncHttpResponseHandler handler, boolean async){
 
         RequestParams nparams = new RequestParams(params);
 
@@ -238,6 +250,20 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
 
         return sendPacket(PACKET_POINT, params, locationPacketHandler, false /* async */);
     }
+
+    private TextHttpResponseHandler send_start_handler = new TextHttpResponseHandler() {
+        @Override
+        public void onSuccess(int statusCode, org.apache.http.Header[] headers, String message){
+            Utilities.LogDebug("packet START sent ok:" + message);
+            login_ok = true;
+        }
+
+        @Override
+        public void onFailure(String response, Throwable e){
+            Utilities.LogDebug("packet START NOT sent, starting new login...");
+            delayedDoLogin(1000);
+        }
+    };
 
     private class AsyncLoginHandler extends TextHttpResponseHandler {
         @Override
@@ -275,29 +301,44 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
                 params.put("vtype", Integer.toString(vehicleType));
                 params.put("vname",vehicleName);
 
-                sendPacket(PACKET_START, params, new TextHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, org.apache.http.Header[] headers, String message){
-                        Utilities.LogDebug("packet START sent ok:" + message);
-                        start_ok = true;
-                    }
-
-                    @Override
-                    public void onFailure(String response, Throwable e){
-                        Utilities.LogDebug("packet START NOT sent");
-                    }
-                }, true);
-
-                login_ok = true;
+                sendPacket(PACKET_START, params, send_start_handler, true);
+//
+//                if (start_ok) {
+//                    login_ok = true;
+//                } else {
+//                    Utilities.LogDebug("livetrack24: start packet not correctly sent, new login try...");
+//                    delayedDoLogin(1000);
+//                }
             } catch (NumberFormatException ex) {
-                Utilities.LogDebug("livetrack24: got unexpected answer:"+ response);
+                Utilities.LogDebug("livetrack24: during login got unexpected answer: "+ response);
+                delayedDoLogin(1000);
             }
         }
 
         @Override
         public void onFailure(String response, Throwable e) {
             Utilities.LogDebug("livetrack24: login resp failed");
+            delayedDoLogin(1000);
         }
+    }
+
+    private void delayedDoLogin(int msecs){
+        if (instance == null ){
+            Utilities.LogDebug("livetrack24: was trying to login but tracking has stopped before success");
+            return;
+        }
+
+        Handler handler = new Handler();
+        Utilities.LogDebug("livetrack24: will try login in " + msecs + " millisecs");
+
+        Runnable login_retry = new Runnable() {
+            @Override
+            public void run() {
+                Utilities.LogDebug("livetrack24: new try");
+                doLogin();
+            }
+        };
+        handler.postDelayed(login_retry, msecs);
     }
 
     private void doLogin() {

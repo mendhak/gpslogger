@@ -32,6 +32,7 @@
         <EditTextPreference android:key="livetrack24_password"
                             android:title="@string/livetrack24_password"
                             android:dialogTitle="@string/livetrack24_password"
+                            android:inputType="textPassword"
                             android:defaultValue=""/>
 
         <EditTextPreference android:key="livetrack24_interval"

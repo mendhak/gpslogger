@@ -25,6 +25,7 @@
         <EditTextPreference android:key="skylines_key"
                             android:title="@string/skylines_key"
                             android:dialogTitle="@string/skylines_key"
+                            android:inputType="textPassword"
                             android:defaultValue=""/>
 
         <EditTextPreference android:key="skylines_interval"

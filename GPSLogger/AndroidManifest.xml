@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="net.kataplop.gpslogger" android:versionCode="20140228"
-          android:versionName="20140228" android:installLocation="auto">
+          package="net.kataplop.gpslogger" android:versionCode="20140413"
+          android:versionName="20140413" android:installLocation="auto">
 
-    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="16"/>
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17"/>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
