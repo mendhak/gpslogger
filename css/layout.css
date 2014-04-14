@@ -985,7 +985,7 @@ footer ul.photostream li a {
     min-width: 600px;
 }
 
-#more-articles img {
+#more-articles img, #search-section img {
     width: 100%;
 }
 
@@ -1005,6 +1005,26 @@ footer ul.photostream li a {
     font-family: Domine, Serif;
 }
 
+.faq h3 {
+    font-size: 32px;
+    line-height: 38px;
+}
+
+.faq h2 {
+    font-size: 46px;
+    line-height: 56px;
+}
+
+.faq, .faq p, .faq a, .faq li {
+    font-size: 20px;
+    line-height: 28px;
+}
+
+.toggle {
+    font-weight: bolder;
+    color: #1E83B6;
+    font-variant: small-caps;
+}
 
 /* ------------ Media queries ------------------- */
 @media (max-device-width: 800px), (max-width: 800px) {
@@ -1058,19 +1078,16 @@ footer ul.photostream li a {
         padding-left: 24px;
     }
 
+    .faq, .faq p, .faq a, .faq li {
+        font-size: 35px;
+        line-height: 43px;
+    }
+
     .faq h3 {
-        font-size: 37px;
-        line-height: 40px;
+        font-size: 42px;
+        line-height: 48px;
     }
 
-    .faq h2 {
-        font-size: 46px;
-        line-height: 50px;
-    }
 
-    .faq, .faq p, .faq a {
-        font-size: 30px;
-        line-height: 32px;
-    }
 
 }

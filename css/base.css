@@ -79,6 +79,7 @@ audio:not([controls]) {
 code, kbd, pre, samp {
    font-family: monospace, serif;
    font-size: 1em;
+    color: darkgreen;
 }
 
 pre {
@@ -585,7 +586,7 @@ legend span {
 .grid6  { width: 464px; }
 .grid7  { width: 546px; }
 .grid8  { width: 628px; }
-.grid9  { width: 710px; }
+.grid9  { width: 90%; }
 .grid10 { width: 792px; }
 .grid11 { width: 874px; }
 .grid12 { width: 956px; }
