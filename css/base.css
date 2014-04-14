@@ -160,10 +160,7 @@ h4 { font-size: 21px; line-height: 30px; margin-bottom: 6px; }
 h5 { font-size: 18px; line-height: 30px; }
 h6 { font-size: 14px; line-height: 30px; }
 
-.subheader {
-    font-size:40px;
-    font-family: Domine, Serif;
-}
+
 
 p { margin: 0 0 24px 0; }
 p img { margin: 0; }
