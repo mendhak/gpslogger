@@ -50,6 +50,38 @@ android {
     sourceSets {
         instrumentTest.setRoot('src/test')
     }
+
+    signingConfigs {
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+
+    assembleRelease.doLast {
+
+        copy{
+            from "build/apk/gpslogger-release.apk"
+            into "./"
+
+            // Use a closure to map the file name
+            rename { String fileName ->
+                fileName.replace('release', android.defaultConfig.versionName)
+            }
+        }
+
+        // Use a regular expression to map the file name
+
+
+    }
 }
 
 dependencies {
