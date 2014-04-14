@@ -271,8 +271,13 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
 
 
         TextView txtDuration = (TextView) rootView.findViewById(R.id.simpleview_txtDuration);
-
         txtDuration.setText("-");
+
+        TextView txtPoints = (TextView) rootView.findViewById(R.id.simpleview_txtPoints);
+        TextView txtTravelled = (TextView) rootView.findViewById(R.id.simpleview_txtDistance);
+
+        txtPoints.setText("");
+        txtTravelled.setText("");
     }
 
     private String getInterval(long startTime, long endTime) {
