@@ -38,15 +38,6 @@ Follow the instructions on the [Android Developer Website](http://developer.andr
 
 On Ubuntu 64bit, you'll also need `ia32-libs`, follow [these instructions](http://stackoverflow.com/a/21956268/974369).
 
-### Get Gradle
-
-If you don't already have Gradle, download it to `/opt/gradle/gradle-1.x`.  Add the following to your `~/.bashrc` so that it is available to IntelliJ later on
-
-    GRADLE_HOME=/opt/gradle/gradle-1.11/bin
-    export GRADLE_HOME
-    PATH=$PATH:$GRADLE_HOME
-    export PATH
-
 
 ### Get IntelliJ IDEA
 
