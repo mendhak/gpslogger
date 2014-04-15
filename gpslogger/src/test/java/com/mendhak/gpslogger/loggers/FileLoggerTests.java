@@ -2,6 +2,7 @@ package com.mendhak.gpslogger.loggers;
 
 import android.location.Location;
 import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.SmallTest;
 
 public class FileLoggerTests extends AndroidTestCase {
 
@@ -9,6 +10,7 @@ public class FileLoggerTests extends AndroidTestCase {
 
     }
 
+    @SmallTest
     public void testWaypointXml_BasicInfo(){
         Gpx10AnnotateHandler annotateHandler = new Gpx10AnnotateHandler(null, null, null, null);
 
@@ -22,6 +24,7 @@ public class FileLoggerTests extends AndroidTestCase {
         assertEquals("Basic waypoint XML", expected, actual);
     }
 
+    @SmallTest
     public void testWaypointXml_WithAltitude(){
         Gpx10AnnotateHandler annotateHandler = new Gpx10AnnotateHandler(null, null, null, null);
 
@@ -36,6 +39,7 @@ public class FileLoggerTests extends AndroidTestCase {
         assertEquals("Basic waypoint XML", expected, actual);
     }
 
+    @SmallTest
     public void testTrackPointXml_LatLongOnly(){
 
         Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(null, null, null, false, 41);
@@ -52,6 +56,7 @@ public class FileLoggerTests extends AndroidTestCase {
     }
 
 
+    @SmallTest
     public void testTrackPointXml_ExtraInfo(){
 
         Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(null, null, null, false, 41);
@@ -72,6 +77,7 @@ public class FileLoggerTests extends AndroidTestCase {
     }
 
 
+    @SmallTest
     public void testTrackPointXml_ExtraInfoWithoutSatellites(){
 
         Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(null, null, null, false, 0);
@@ -91,6 +97,7 @@ public class FileLoggerTests extends AndroidTestCase {
         assertEquals("Trackpoint XML without satellites", expected, actual);
     }
 
+    @SmallTest
     public void testTrackPointXml_NewTrackSegment(){
 
         Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(null, null, null, true, 0);
@@ -110,6 +117,7 @@ public class FileLoggerTests extends AndroidTestCase {
         assertEquals("Trackpoint XML with a new segment", expected, actual);
     }
 
+    @SmallTest
     public void testPlacemarkXml_BasicInfo() {
 
         Kml22AnnotateHandler kmlHandler = new Kml22AnnotateHandler(null, null, null);

@@ -21,6 +21,9 @@ android {
         targetSdkVersion 19
         versionCode 45
         versionName "45"
+
+        testPackageName "com.mendhak.gpslogger.test"
+        testInstrumentationRunner getInstrumentationTestRunner();
     }
     buildTypes {
         release {
@@ -141,4 +144,27 @@ tasks.whenTaskAdded { task ->
     if(task.name.equals("connectedInstrumentTest")){
         task.dependsOn(uninstallAll)
     }
+}
+
+def getInstrumentationTestRunner() {
+
+    def result = "android.test.InstrumentationTestRunner";
+
+    if (project.hasProperty("testSize")) {
+
+        switch (project.getProperties().get("testSize")) {
+
+            case "small":
+                result = "com.mendhak.gpslogger.SmallInstrumentationTestRunner";
+                break;
+
+            case "medium":
+                result = "com.mendhak.gpslogger.MediumInstrumentationTestRunner";
+                break
+        }
+    }
+
+    logger.lifecycle("Using TestRunner: " + result)
+
+    return result
 }

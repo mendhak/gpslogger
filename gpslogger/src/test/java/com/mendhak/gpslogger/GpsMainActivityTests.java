@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.webkit.WebView;
 import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
 import com.mendhak.gpslogger.senders.ftp.AutoFtpActivity;
@@ -37,6 +38,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
         super.tearDown();
     }
 
+    @MediumTest
     public void testCanSeeMenuItems() {
         solo.sendKey(Solo.MENU);
         assertTrue("Could not find menu Logging Settings", solo.searchText(solo.getCurrentActivity().getString(R.string.title_drawer_loggingsettings)));
@@ -44,6 +46,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
         assertTrue("Could not find menu General Settings", solo.searchText(solo.getCurrentActivity().getString(R.string.title_drawer_generalsettings)));
     }
 
+    @MediumTest
     public void testHelpButtonOpensFAQPage(){
         solo.clickOnView(solo.getView(R.id.imgHelp));
         solo.assertCurrentActivity("FAQ Screen", Faqtivity.class);
@@ -51,6 +54,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
         assertTrue(solo.getWebUrl(), solo.getWebUrl().equals("http://code.mendhak.com/gpslogger/index.html"));
     }
 
+    @MediumTest
     public void testSinglePointButtonDisabledWhenLoggingStarted() {
         //setDrawerVisibility(false);
         solo.setNavigationDrawer(Solo.CLOSED);
@@ -64,6 +68,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     }
 
 
+    @MediumTest
     public void testAnnotateButtonDisabledIfGpxKmlUrlAreDisabled(){
 
         solo.sendKey(Solo.MENU);
@@ -79,6 +84,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
 
     }
 
+    @MediumTest
     public void testSpinnerNavigation(){
         solo.clickOnText(solo.getCurrentActivity().getString(R.string.view_simple));
         solo.clickOnText(solo.getCurrentActivity().getString(R.string.view_detailed));
@@ -95,6 +101,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
 
     }
 
+    @MediumTest
     public void testAutoEmailsRequireFilledValues() {
         launchActivity("com.mendhak.gpslogger", AutoEmailActivity.class, null);
         solo.clickOnCheckBox(0);
@@ -104,6 +111,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
         assertTrue("Enable emails checkbox should be unchecked", !solo.isCheckBoxChecked(0));
     }
 
+    @MediumTest
     public void testAutoFtpRequireFilledValues() {
         launchActivity("com.mendhak.gpslogger", AutoFtpActivity.class, null);
         solo.clickOnCheckBox(0);

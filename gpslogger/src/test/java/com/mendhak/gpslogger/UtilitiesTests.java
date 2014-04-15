@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.test.AndroidTestCase;
 import android.test.mock.MockContext;
+import android.test.suitebuilder.annotation.SmallTest;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 
@@ -44,6 +45,7 @@ public class UtilitiesTests extends AndroidTestCase {
     }
 
 
+    @SmallTest
     public void testHTMLDecoder(){
 
 
@@ -58,6 +60,7 @@ public class UtilitiesTests extends AndroidTestCase {
 
     }
 
+    @SmallTest
     public void testDropBoxSetup() {
 
         assertFalse("Dropbox defaults to not set up.", Utilities.IsDropBoxSetup(context));
@@ -69,6 +72,7 @@ public class UtilitiesTests extends AndroidTestCase {
         assertEquals("Dropbox setup if KEY and SECRET exist in preferences", true, Utilities.IsDropBoxSetup(context));
     }
 
+    @SmallTest
     public void testIsoDateTime() {
 
         String actual = Utilities.GetIsoDateTime(new Date(1417726140000l));
@@ -76,6 +80,7 @@ public class UtilitiesTests extends AndroidTestCase {
         assertEquals("Conversion of date to ISO string", expected, actual);
     }
 
+    @SmallTest
     public void testCleanDescription() {
         String content = "This is some annotation that will end up in an " +
                 "XML file.  It will either <b>break</b> or Bert & Ernie will show up" +
