@@ -78,9 +78,6 @@ android {
             }
         }
 
-        // Use a regular expression to map the file name
-
-
     }
 }
 
