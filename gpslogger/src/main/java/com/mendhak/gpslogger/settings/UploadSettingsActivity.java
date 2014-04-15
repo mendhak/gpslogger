@@ -1,8 +1,11 @@
 package com.mendhak.gpslogger.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.view.MenuItem;
+import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
 
@@ -23,6 +26,21 @@ public class UploadSettingsActivity extends PreferenceActivity implements Prefer
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                Intent intent = new Intent(this, GpsMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

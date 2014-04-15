@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.view.MenuItem;
+import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 
 /**
@@ -13,7 +15,7 @@ import com.mendhak.gpslogger.R;
  * handset devices, settings are presented as a single list. On tablets,
  * settings are split by category, with category headers shown to the left of
  * the list of settings.
- * <p>
+ * <p/>
  * See <a href="http://developer.android.com/design/patterns/settings.html">
  * Android Design: Settings</a> for design guidelines and the <a
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
@@ -22,11 +24,12 @@ import com.mendhak.gpslogger.R;
 @SuppressWarnings("deprecation")
 public class GeneralSettingsActivity extends PreferenceActivity implements Preference.OnPreferenceClickListener {
 
-    int aboutClickCounter=0;
+    int aboutClickCounter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -49,19 +52,33 @@ public class GeneralSettingsActivity extends PreferenceActivity implements Prefe
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                Intent intent = new Intent(this, GpsMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
-        if(preference.getKey().equals("enableDisableGps")){
+        if (preference.getKey().equals("enableDisableGps")) {
             startActivity(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"));
             return true;
         }
 
-        if(preference.getKey().equals("about_version_info")){
+        if (preference.getKey().equals("about_version_info")) {
             aboutClickCounter++;
 
-            if(aboutClickCounter==3){
+            if (aboutClickCounter == 3) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://dQw4w9WgXcQ"));
                 startActivity(intent);
             }

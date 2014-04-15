@@ -17,6 +17,7 @@
 
 package com.mendhak.gpslogger.senders.ftp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
@@ -25,6 +26,8 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.view.KeyEvent;
+import android.view.MenuItem;
+import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
@@ -39,6 +42,7 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         addPreferencesFromResource(R.xml.autoftpsettings);
 
@@ -46,6 +50,21 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
         testFtp.setOnPreferenceClickListener(this);
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                Intent intent = new Intent(this, GpsMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private boolean IsFormValid()
     {

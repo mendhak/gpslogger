@@ -19,7 +19,9 @@
 package com.mendhak.gpslogger;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import org.slf4j.LoggerFactory;
@@ -43,6 +45,8 @@ public class Faqtivity extends Activity
 
         super.onCreate(savedInstanceState);
 
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
         setContentView(R.layout.activity_faq);
 
         browser = (WebView)findViewById(R.id.faqwebview);
@@ -58,6 +62,21 @@ public class Faqtivity extends Activity
 
         browser.loadUrl("http://code.mendhak.com/gpslogger/index.html", noCacheHeaders);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                Intent intent = new Intent(this, GpsMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
     @Override

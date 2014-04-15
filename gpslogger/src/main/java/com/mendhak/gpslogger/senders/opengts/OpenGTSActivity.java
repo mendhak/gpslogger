@@ -17,6 +17,7 @@
 
 package com.mendhak.gpslogger.senders.opengts;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -26,7 +27,9 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.webkit.URLUtil;
+import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
@@ -42,6 +45,7 @@ public class OpenGTSActivity extends PreferenceActivity implements
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         addPreferencesFromResource(R.xml.opengtssettings);
 
@@ -59,6 +63,20 @@ public class OpenGTSActivity extends PreferenceActivity implements
         txtOpenGTSServerPath.setOnPreferenceChangeListener(this);
         txtOpenGTSDeviceId.setOnPreferenceChangeListener(this);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                Intent intent = new Intent(this, GpsMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
