@@ -22,6 +22,8 @@ android {
         versionCode 45
         versionName "45"
 
+        //This allows us to run Robotium and Unit tests separately using
+        //connectedInstrumentTest -PtestSize=small
         testPackageName "com.mendhak.gpslogger.test"
         testInstrumentationRunner getInstrumentationTestRunner();
     }
