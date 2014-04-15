@@ -121,4 +121,10 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
         assertTrue("Enable FTP checkbox should be unchecked", !solo.isCheckBoxChecked(0));
     }
 
+    @MediumTest
+    public void testClickingSimpleViewIconProducesToast(){
+        solo.clickOnView(solo.getView(R.id.simpleview_imgSpeed));
+        assertTrue(solo.waitForText("Speed"));
+    }
+
 }

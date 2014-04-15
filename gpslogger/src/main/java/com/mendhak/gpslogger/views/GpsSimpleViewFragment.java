@@ -3,6 +3,7 @@ package com.mendhak.gpslogger.views;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.view.animation.AlphaAnimation;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
@@ -19,7 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import java.text.NumberFormat;
 
-public class GpsSimpleViewFragment extends GenericViewFragment {
+public class GpsSimpleViewFragment extends GenericViewFragment implements View.OnClickListener {
 
     Context context;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GpsSimpleViewFragment.class.getSimpleName());
@@ -56,6 +58,9 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
 
         rootView = inflater.inflate(R.layout.fragment_simple_view, container, false);
 
+        setImageTooltips();
+
+
         // Toggle the play and pause.
         toggleComponent = ToggleComponent.getBuilder()
                 .addOnView(rootView.findViewById(R.id.simple_play))
@@ -85,6 +90,33 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
 
 
         return rootView;
+    }
+
+    private void setImageTooltips() {
+        ImageView imgSatellites = (ImageView) rootView.findViewById(R.id.simpleview_imgSatelliteCount);
+        imgSatellites.setOnClickListener(this);
+
+        TextView txtAccuracyIcon = (TextView) rootView.findViewById(R.id.simpleview_txtAccuracyIcon);
+        txtAccuracyIcon.setOnClickListener(this);
+
+        ImageView imgElevation = (ImageView) rootView.findViewById(R.id.simpleview_imgAltitude);
+        imgElevation.setOnClickListener(this);
+
+        ImageView imgBearing = (ImageView) rootView.findViewById(R.id.simpleview_imgDirection);
+        imgBearing.setOnClickListener(this);
+
+        ImageView imgDuration = (ImageView) rootView.findViewById(R.id.simpleview_imgDuration);
+        imgDuration.setOnClickListener(this);
+
+        ImageView imgSpeed = (ImageView) rootView.findViewById(R.id.simpleview_imgSpeed);
+        imgSpeed.setOnClickListener(this);
+
+        ImageView imgDistance = (ImageView) rootView.findViewById(R.id.simpleview_distance);
+        imgDistance.setOnClickListener(this);
+
+        ImageView imgPoints = (ImageView) rootView.findViewById(R.id.simpleview_points);
+        imgPoints.setOnClickListener(this);
+
     }
 
     @Override
@@ -234,7 +266,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
 
         nf.setMaximumFractionDigits(1);
         txtTravelled.setText(nf.format(distanceValue) + " " + distanceUnit);
-        txtPoints.setText(Session.getNumLegs() + " points");
+        txtPoints.setText(Session.getNumLegs() + " " +getString(R.string.points));
 
         String providerName = locationInfo.getProvider();
         if (!providerName.equalsIgnoreCase("gps")) {
@@ -337,6 +369,54 @@ public class GpsSimpleViewFragment extends GenericViewFragment {
 
     @Override
     public void OnFileNameChange(String newFileName) {
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        Toast toast = new Toast(getActivity());
+        switch(view.getId()){
+            case R.id.simpleview_imgSatelliteCount:
+                toast = getToast(R.string.txt_satellites);
+                break;
+            case R.id.simpleview_txtAccuracyIcon:
+                toast = getToast(R.string.txt_accuracy);
+                break;
+
+            case R.id.simpleview_imgAltitude:
+                toast = getToast(R.string.txt_altitude);
+                break;
+
+            case R.id.simpleview_imgDirection:
+                toast = getToast(R.string.txt_direction);
+                break;
+
+            case R.id.simpleview_imgDuration:
+                toast = getToast(R.string.txt_travel_duration);
+                break;
+
+            case R.id.simpleview_imgSpeed:
+                toast = getToast(R.string.txt_speed);
+                break;
+
+            case R.id.simpleview_distance:
+                toast = getToast(R.string.txt_travel_distance);
+                break;
+
+            case R.id.simpleview_points:
+                toast = getToast(R.string.txt_number_of_points);
+                break;
+
+        }
+
+        int location[]=new int[2];
+        view.getLocationOnScreen(location);
+        toast.setGravity(Gravity.TOP|Gravity.LEFT, location[0], location[1]);
+        toast.show();
+    }
+
+    private Toast getToast(int stringResourceId) {
+        return Toast.makeText(getActivity(), getString(stringResourceId).replace(":",""), Toast.LENGTH_SHORT);
 
     }
 }
