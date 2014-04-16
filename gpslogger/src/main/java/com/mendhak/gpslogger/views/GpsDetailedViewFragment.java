@@ -71,7 +71,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             SetLocation(Session.getCurrentLocationInfo());
         }
 
-        ShowPreferencesSummary();
+        showPreferencesSummary();
 
         return rootView;
     }
@@ -97,7 +97,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             return;
         }
 
-        ShowPreferencesSummary();
+        showPreferencesSummary();
 
         TextView tvLatitude = (TextView) rootView.findViewById(R.id.detailedview_lat_text);
         TextView tvLongitude = (TextView) rootView.findViewById(R.id.detailedview_lon_text);
@@ -303,9 +303,9 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
      * Displays a human readable summary of the preferences chosen by the user
      * on the main form
      */
-    private void ShowPreferencesSummary()
+    private void showPreferencesSummary()
     {
-        tracer.debug("GpsDetailedViewFragment.ShowPreferencesSummary");
+        tracer.debug("GpsDetailedViewFragment.showPreferencesSummary");
         try
         {
             TextView txtLoggingTo = (TextView) rootView.findViewById(R.id.detailedview_loggingto_text);
@@ -427,7 +427,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         }
         catch (Exception ex)
         {
-            tracer.error("ShowPreferencesSummary", ex);
+            tracer.error("showPreferencesSummary", ex);
         }
 
 

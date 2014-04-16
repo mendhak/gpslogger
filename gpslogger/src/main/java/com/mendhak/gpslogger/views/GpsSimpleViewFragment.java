@@ -3,6 +3,7 @@ package com.mendhak.gpslogger.views;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +17,14 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.loggers.FileLoggerFactory;
+import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.views.component.ToggleComponent;
 import org.slf4j.LoggerFactory;
 
 import java.text.NumberFormat;
+import java.util.List;
+import java.util.ListIterator;
 
 public class GpsSimpleViewFragment extends GenericViewFragment implements View.OnClickListener {
 
@@ -59,6 +64,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         rootView = inflater.inflate(R.layout.fragment_simple_view, container, false);
 
         setImageTooltips();
+        showPreferencesSummary();
 
 
         // Toggle the play and pause.
@@ -92,6 +98,61 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         return rootView;
     }
 
+    private void showPreferencesSummary() {
+        showCurrentFileName(Session.getCurrentFileName());
+
+
+        ImageView imgGpx = (ImageView) rootView.findViewById(R.id.simpleview_imgGpx);
+        ImageView imgKml = (ImageView) rootView.findViewById(R.id.simpleview_imgKml);
+        ImageView imgCsv = (ImageView) rootView.findViewById(R.id.simpleview_imgCsv);
+        ImageView imgLink = (ImageView) rootView.findViewById(R.id.simpleview_imgLink);
+
+        if (AppSettings.shouldLogToGpx()) {
+
+            imgGpx.setVisibility(View.VISIBLE);
+        } else {
+            imgGpx.setVisibility(View.GONE);
+        }
+
+        if (AppSettings.shouldLogToKml()) {
+
+            imgKml.setVisibility(View.VISIBLE);
+        }
+        else{
+            imgKml.setVisibility(View.GONE);
+        }
+
+        if (AppSettings.shouldLogToPlainText()) {
+
+            imgCsv.setVisibility(View.VISIBLE);
+        }
+        else{
+            imgCsv.setVisibility(View.GONE);
+        }
+
+        if (AppSettings.shouldLogToCustomUrl()) {
+
+            imgLink.setVisibility(View.VISIBLE);
+        }
+        else{
+            imgLink.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void showCurrentFileName(String newFileName) {
+        TextView txtFilename = (TextView) rootView.findViewById(R.id.simpleview_txtfilepath);
+        if (newFileName == null || newFileName.length() <= 0) {
+            txtFilename.setText("");
+            txtFilename.setVisibility(View.INVISIBLE);
+            return;
+        }
+
+        txtFilename.setVisibility(View.VISIBLE);
+        txtFilename.setText(Html.fromHtml("<em>" + AppSettings.getGpsLoggerFolder() + "/<strong>" + Session.getCurrentFileName() + "</strong></em>" ));
+
+    }
+
     private void setImageTooltips() {
         ImageView imgSatellites = (ImageView) rootView.findViewById(R.id.simpleview_imgSatelliteCount);
         imgSatellites.setOnClickListener(this);
@@ -123,12 +184,12 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     public void onStart() {
 
         toggleComponent.SetEnabled(!Session.isStarted());
-        super.onResume();
+        super.onStart();
     }
 
     @Override
     public void onResume() {
-
+        showPreferencesSummary();
         toggleComponent.SetEnabled(!Session.isStarted());
         super.onResume();
     }
@@ -142,6 +203,8 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     @Override
     public void SetLocation(Location locationInfo) {
+
+        showPreferencesSummary();
 
         NumberFormat nf = NumberFormat.getInstance();
         nf.setMaximumFractionDigits(6);
@@ -266,7 +329,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
         nf.setMaximumFractionDigits(1);
         txtTravelled.setText(nf.format(distanceValue) + " " + distanceUnit);
-        txtPoints.setText(Session.getNumLegs() + " " +getString(R.string.points));
+        txtPoints.setText(Session.getNumLegs() + " " + getString(R.string.points));
 
         String providerName = locationInfo.getProvider();
         if (!providerName.equalsIgnoreCase("gps")) {
@@ -345,6 +408,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     @Override
     public void SetLoggingStarted() {
         tracer.debug("GpsSimpleViewFragment.SetLoggingStarted");
+        showPreferencesSummary();
         clearLocationDisplay();
         toggleComponent.SetEnabled(false);
     }
@@ -369,13 +433,13 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     @Override
     public void OnFileNameChange(String newFileName) {
-
+        showCurrentFileName(newFileName);
     }
 
     @Override
     public void onClick(View view) {
         Toast toast = new Toast(getActivity());
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.simpleview_imgSatelliteCount:
                 toast = getToast(R.string.txt_satellites);
                 break;
@@ -409,14 +473,14 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
         }
 
-        int location[]=new int[2];
+        int location[] = new int[2];
         view.getLocationOnScreen(location);
-        toast.setGravity(Gravity.TOP|Gravity.LEFT, location[0], location[1]);
+        toast.setGravity(Gravity.TOP | Gravity.LEFT, location[0], location[1]);
         toast.show();
     }
 
     private Toast getToast(int stringResourceId) {
-        return Toast.makeText(getActivity(), getString(stringResourceId).replace(":",""), Toast.LENGTH_SHORT);
+        return Toast.makeText(getActivity(), getString(stringResourceId).replace(":", ""), Toast.LENGTH_SHORT);
 
     }
 }

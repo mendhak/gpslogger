@@ -96,7 +96,7 @@
                     android:alignmentMode="alignBounds"
                     android:columnOrderPreserved="false"
                     android:columnCount="4"
-                    android:rowCount="5"
+                    android:rowCount="7"
                     >
 
 
@@ -286,8 +286,57 @@
                         android:textIsSelectable="true"
                         />
 
-                    <Space
+                    <TextView
+                        android:id="@+id/simpleview_txtfilepath"
                         android:layout_row="4"
+                        android:layout_column="0"
+                        android:layout_columnSpan="4"
+                        android:layout_gravity="center"
+                        android:visibility="visible"
+                        android:textSize="11sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="italic"
+                        android:paddingTop="4dp"
+                        android:text=""/>
+
+                    <LinearLayout android:layout_column="0"
+                        android:layout_row="5"
+                        android:layout_columnSpan="4"
+                        android:layout_width="fill_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        >
+
+                        <ImageView
+                            android:id="@+id/simpleview_imgGpx"
+                            android:visibility="invisible"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/gpx"/>
+                        <ImageView
+                            android:id="@+id/simpleview_imgKml"
+                            android:visibility="invisible"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/kml"/>
+                        <ImageView
+                            android:id="@+id/simpleview_imgCsv"
+                            android:visibility="invisible"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/csv"/>
+                        <ImageView
+                            android:id="@+id/simpleview_imgLink"
+                            android:visibility="invisible"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/link"/>
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_row="6"
                         android:layout_column="0"
                         android:layout_columnSpan="3"
                         android:layout_gravity="fill"
