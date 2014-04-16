@@ -304,6 +304,7 @@ public class GpsMainActivity extends Activity
 
         if (mnuOnePoint != null) {
             mnuOnePoint.setEnabled(!Session.isStarted());
+            mnuOnePoint.setIcon( (Session.isStarted()  ? R.drawable.singlepoint_disabled : R.drawable.singlepoint ) );
         }
 
 
