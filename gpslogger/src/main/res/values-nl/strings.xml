@@ -123,8 +123,6 @@
   <string name="timeout_time_summary">Hoe lang probeert de GPS een fix te krijgen, voordat hij opgeeft. Gebruik 0 voor oneindig</string>
   <string name="timeout_time_dialog_title">Tijd in seconden</string>
   <string name="timeout_time_hint">Voer seconden in (max 9999)</string>
-  <string name="show_notification_title">Toon meldingen</string>
-  <string name="show_notification_summary">Toont een herinnering samen met coördinaten in het systeemvak.</string>
   <string name="enabledisablegps_title">GPS in- of uitschakelen</string>
   <string name="enabledisablegps_summary">﻿Ga naar de telefooninstellingen om locatieaanbieders in of uit te schakelen.</string>
   <string name="startonbootup_title">﻿Start bij het opstarten</string>

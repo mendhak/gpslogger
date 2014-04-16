@@ -127,8 +127,6 @@
   <string name="timeout_time_summary">Wie lange soll das GPS eingeschaltet bleiben, bis ein Standort gefunden wird? Setze 0 für keine zeitliche Begrenzung.</string>
   <string name="timeout_time_dialog_title">Zeit in Sekunden</string>
   <string name="timeout_time_hint">Eingabe in Sekunden (max. 9999)</string>
-  <string name="show_notification_title">Benachrichtigung anzeigen</string>
-  <string name="show_notification_summary">Zeigt eine Erinnerung zusammen mit den Koordinaten in der Benachrichtigungsleiste.</string>
   <string name="enabledisablegps_title">Aktvieren / Deaktivieren des GPS</string>
   <string name="enabledisablegps_summary">Gehe zu den Telefon-Einstellungen zum Aktivieren oder Deaktivieren der Anbieter.</string>
   <string name="startonbootup_title">Beim Booten starten</string>

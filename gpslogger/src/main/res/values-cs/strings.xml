@@ -132,8 +132,6 @@
   <string name="timeout_time_summary">Jak dlouho GPS určuje polohu než to vzdá. Použijte 0 pro žádný časový limit</string>
   <string name="timeout_time_dialog_title">Čas v sekundách</string>
   <string name="timeout_time_hint">Zadejte sekundy (max 9999)</string>
-  <string name="show_notification_title">Zobrazit oznámení</string>
-  <string name="show_notification_summary">V panelu oznámení zobrazí připomenutí spolu se souřadnicemi.     </string>
   <string name="enabledisablegps_title">Povolit/zakázat GPS</string>
   <string name="enabledisablegps_summary">Přejděte do nastavení telefonu pro povolení/zakázání poskytovatelů.</string>
   <string name="startonbootup_title">Spustit při startu</string>

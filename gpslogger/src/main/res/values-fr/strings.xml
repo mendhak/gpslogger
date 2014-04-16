@@ -125,8 +125,6 @@ une plus grande précision à basses fréquences.</string>
   <string name="timeout_time_summary">Combien de temps le GPS reste allumé à la recherche d\'une solution avant d\'abandonner. Utilisez 0 pour aucun délai</string>
   <string name="timeout_time_dialog_title">Temps en secondes</string>
   <string name="timeout_time_hint">Entrez secondes (max 9999)</string>
-  <string name="show_notification_title">Afficher la notification</string>
-  <string name="show_notification_summary">Affiche un rappel  avec les coordonnées dans la barre de notification.</string>
   <string name="enabledisablegps_title">Activer / Désactiver GPS</string>
   <string name="enabledisablegps_summary">Accédez aux paramètres du cellulaire pour activer ou désactiver les fournisseurs du service.</string>
   <string name="startonbootup_title">Démarrer au démarrage du cellulaire</string>

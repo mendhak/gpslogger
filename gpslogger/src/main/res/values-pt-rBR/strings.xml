@@ -128,8 +128,6 @@ próximo ponto tenha sido logado.</string>
   <string name="timeout_time_summary">Quanto tempo o GPS fica na procura de uma conexão antes de desistir. Use 0 para nenhum tempo limite</string>
   <string name="timeout_time_dialog_title">Tempo em segundos</string>
   <string name="timeout_time_hint">Digite segundos (máximo de 9999)</string>
-  <string name="show_notification_title">Visualizar notificação</string>
-  <string name="show_notification_summary">Exibe um lembrete juntamente com as coordenadas na barra de notificação.     </string>
   <string name="enabledisablegps_title">Ativar/desativar GPS</string>
   <string name="enabledisablegps_summary">Vá para as configurações do telefone para ativar ou desativar os provedores.</string>
   <string name="startonbootup_title">Carregar na inicialização</string>

@@ -105,8 +105,6 @@
   <string name="time_before_logging_hint">輸入秒數(最大 9999)</string>
   <string name="retry_time_hint">輸入秒數 (最大9999)</string>
   <string name="timeout_time_hint">輸入秒數 (最大9999)</string>
-  <string name="show_notification_title">顯示通知</string>
-  <string name="show_notification_summary">隨著坐標的變化在通知列上顯示一個提醒。</string>
   <string name="enabledisablegps_title">啟用/禁用 GPS</string>
   <string name="enabledisablegps_summary">轉到手機的設定來啟用或禁用提供器。</string>
   <string name="startonbootup_title">開機自啟動</string>

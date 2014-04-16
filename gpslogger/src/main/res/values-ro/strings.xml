@@ -127,8 +127,6 @@
   <string name="timeout_time_summary">Cât timp GPS-ul rămâne în localizarea semnalului GPS înainte de a renunţa. Utilizarea 0 pentru nici un timeout</string>
   <string name="timeout_time_dialog_title">Timp în secunde</string>
   <string name="timeout_time_hint">Introduceţi secunde (max 9999)</string>
-  <string name="show_notification_title">Arată Notificare</string>
-  <string name="show_notification_summary">Afişează un memento impreuna cu coordonatele în bara de notificare.</string>
   <string name="enabledisablegps_title">Activează/Dezactivează GPS</string>
   <string name="enabledisablegps_summary">Du-te la setările de telefon pentru a activa sau dezactiva furnizorii.</string>
   <string name="startonbootup_title">Starteaza aplicatia la pornirea telefonului</string>

@@ -120,8 +120,6 @@
   <string name="timeout_time_summary">Ako dlho GPS hľadá fix pred ukončením. Použitie 0 pre žiaden časový limit</string>
   <string name="timeout_time_dialog_title">Čas v sekundách</string>
   <string name="timeout_time_hint">Zadajte sekúnd (max. 9999)</string>
-  <string name="show_notification_title">Zobraziť oznámenia</string>
-  <string name="show_notification_summary">Na paneli oznámení zobrazí pripomenutie spolu so súradnicami.     </string>
   <string name="enabledisablegps_title">Povoliť/zakázať GPS</string>
   <string name="startonbootup_title">Spustiť pri štarte</string>
   <string name="startonbootup_summary">Spustenie aplikácie a zapisovanie do denníka pri spustení systému</string>

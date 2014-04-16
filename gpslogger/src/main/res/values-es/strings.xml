@@ -128,8 +128,6 @@
   <string name="timeout_time_summary">Tiempo de espera máximo para obtener una posición fiable. Use 0 para no esperar.</string>
   <string name="timeout_time_dialog_title">Tiempo en segundos</string>
   <string name="timeout_time_hint">Ingrese segundos (máx. 9999)</string>
-  <string name="show_notification_title">Mostrar Notificación</string>
-  <string name="show_notification_summary">Muestra el estado junto con las coordenadas en la barra de notificación.     </string>
   <string name="enabledisablegps_title">Activar/desactivar GPS</string>
   <string name="enabledisablegps_summary">Ir a la configuración del teléfono para activar o desactivar a proveedores de posicionamiento.</string>
   <string name="startonbootup_title">﻿Iniciar en el arranque</string>

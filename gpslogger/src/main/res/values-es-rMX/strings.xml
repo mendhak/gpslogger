@@ -126,8 +126,6 @@
   <string name="timeout_time_summary">¿Cuánto tiempo el GPS se mantendra buscando una posición antes de detenerse? Use 0 para ningún tiempo de espera</string>
   <string name="timeout_time_dialog_title">Tiempo en segundos</string>
   <string name="timeout_time_hint">Ingrese segundos (máx. 9999)</string>
-  <string name="show_notification_title">Mostrar notificación</string>
-  <string name="show_notification_summary">Muestra un recordatorio junto con las coordenadas en la barra de notificaciones.     </string>
   <string name="enabledisablegps_title">Activar/desactivar GPS</string>
   <string name="enabledisablegps_summary">Ir a la configuración del teléfono para activar o desactivar a los proveedores.</string>
   <string name="startonbootup_title">Iniciar en el arranque</string>

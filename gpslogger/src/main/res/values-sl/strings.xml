@@ -65,8 +65,6 @@
   <string name="time_before_logging_hint">Vnesite sekunde (max 9999)</string>
   <string name="retry_time_dialog_title">Čas v sekundah</string>
   <string name="retry_time_hint">Vnesite sekunde (max 9999)</string>
-  <string name="show_notification_title">Prikaži obvestila</string>
-  <string name="show_notification_summary">Prikaže opomnik skupaj s koordinatami v vrstici z obvestili.     </string>
   <string name="enabledisablegps_title">Omogoči/onemogoči GPS</string>
   <string name="enabledisablegps_summary">Pojdite na nastavitve telefona za vključitev ali izključitev ponudnikov.</string>
   <string name="startonbootup_title">Zaženi ob vklopu</string>

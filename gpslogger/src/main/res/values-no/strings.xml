@@ -123,8 +123,6 @@
   <string name="timeout_time_summary">Hvor lenge skal GPS\'en søke etter posisjon før den gir opp. Bruk 0 for å aldri gi opp</string>
   <string name="timeout_time_dialog_title">Tid i sekunder</string>
   <string name="timeout_time_hint">Angi sekunder (maks 9999)</string>
-  <string name="show_notification_title">Vis melding</string>
-  <string name="show_notification_summary">Viser ei påminning saman med koordinat i meldingsbjelken.<br /></string>
   <string name="enabledisablegps_title">Slå på/av GPS</string>
   <string name="enabledisablegps_summary">Gå til telefoninstillingane for å velja / slå av posisjonsteneste.</string>
   <string name="startonbootup_title">Start ved oppstart</string>

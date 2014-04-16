@@ -129,8 +129,6 @@
   <string name="timeout_time_summary">Hur länge GPS:en söker en fixering innan den ger upp. Använd 0 för att inte ha någon gräns</string>
   <string name="timeout_time_dialog_title">Tid i sekunder</string>
   <string name="timeout_time_hint">Ange sekunder (max 9999)</string>
-  <string name="show_notification_title">Visa meddelande</string>
-  <string name="show_notification_summary">Visar en påminnelse tillsammans med koordinater i meddelandefältet.</string>
   <string name="enabledisablegps_title">Aktivera/Inaktivera GPS</string>
   <string name="enabledisablegps_summary">Gå till telefoninställningarna för att aktivera eller inaktivera leverantörer.</string>
   <string name="startonbootup_title">Starta vid systemstart</string>

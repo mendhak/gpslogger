@@ -125,8 +125,6 @@
   <string name="timeout_time_summary">この値の間、GPSをONにして位置情報を待ちます。時間内に取得できなかった場合、タイムアウトします。0にするとタイムアウトしません。</string>
   <string name="timeout_time_dialog_title">時間（秒）</string>
   <string name="timeout_time_hint">入力（秒、最大9999）</string>
-  <string name="show_notification_title">通知を表示</string>
-  <string name="show_notification_summary">通知バーに座標と共にリマインダーを表示します。</string>
   <string name="enabledisablegps_title">GPS 有効/無効</string>
   <string name="enabledisablegps_summary">携帯電話の設定でプロバイダの有効／無効の設定を行います。</string>
   <string name="startonbootup_title">ブート時に開始</string>

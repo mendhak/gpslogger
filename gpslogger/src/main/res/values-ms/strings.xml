@@ -123,8 +123,6 @@
   <string name="timeout_time_summary">Berapa lama GPS cuba mengunci lokasi sebelum berhenti. Gunakan 0 untuk tidak percubaan tanpa had</string>
   <string name="timeout_time_dialog_title">Masa dalam saat</string>
   <string name="timeout_time_hint">Masukkan saat (maksimum 9999)</string>
-  <string name="show_notification_title">Tunjuk notifikasi</string>
-  <string name="show_notification_summary">Memaparkan peringatan bersama-sama dengan koordinat pada turus pemberitahuan. </string>
   <string name="enabledisablegps_title">Aktif/Padam GPS</string>
   <string name="enabledisablegps_summary">Pergi ke tetapan telefon untuk membolehkan atau mematikan penyedia.</string>
   <string name="startonbootup_title">Mula semasa bootup</string>

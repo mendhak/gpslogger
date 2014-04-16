@@ -123,8 +123,6 @@
   <string name="timeout_time_summary">นานแค่ไหนเวลาจีพีเอสคำนวณหาตำแหน่งก่อนจะยอมแพ้ ค่า 0 คือหาไปเรื่อยๆไม่กำหนดเวลา</string>
   <string name="timeout_time_dialog_title">เวลาเป็นวินาที</string>
   <string name="timeout_time_hint">ใส่ค่าเป็นวินาที (สูงสุด 9999)</string>
-  <string name="show_notification_title">แสดงการแจ้งเตือน</string>
-  <string name="show_notification_summary">แสดงการเตือนพร้อมพิกัดในบาร์การแจ้งเตือน</string>
   <string name="enabledisablegps_title">เปิด/ปิด จีพีเอส</string>
   <string name="enabledisablegps_summary">ไปที่การตั้งค่าของโทรศัพท์เพื่อเปิดหรือปิดผู้ให้บริการ</string>
   <string name="startonbootup_title">เริ่มเมื่อบูตเครื่อง</string>

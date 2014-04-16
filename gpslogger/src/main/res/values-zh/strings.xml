@@ -115,8 +115,6 @@
   <string name="retry_time_hint">请输入秒 (最大 9999）</string>
   <string name="timeout_time_title">超时</string>
   <string name="timeout_time_hint">请输入秒 (最大 9999）</string>
-  <string name="show_notification_title">显示通知</string>
-  <string name="show_notification_summary">随着坐标的变化在通知栏上显示一个提醒。</string>
   <string name="enabledisablegps_title">启用/禁用 GPS</string>
   <string name="enabledisablegps_summary">转到手机的设置来启用或禁用提供器。</string>
   <string name="startonbootup_title">开机自启动</string>

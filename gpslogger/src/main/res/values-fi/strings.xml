@@ -51,7 +51,6 @@
   <string name="retry_time_hint">Anna sekunnit (max 9999)</string>
   <string name="timeout_time_title">Aikakatkaisu</string>
   <string name="timeout_time_dialog_title">Aika sekunteina</string>
-  <string name="show_notification_title">Näytä ilmoitus</string>
   <string name="enabledisablegps_title">Ota/Poista GPS käytöstä</string>
   <string name="startonbootup_title">Aloita käynnistyksen yhteydessä</string>
   <string name="autoemail_autosend">Käytä sähköpostia</string>

@@ -126,8 +126,6 @@
   <string name="timeout_time_summary">Скільки часу GPS очікує на замір перед тим як припинити спроби. Використовуйте 0, якщо таймауту немає</string>
   <string name="timeout_time_dialog_title">Час в секундах</string>
   <string name="timeout_time_hint">Введіть секунди (макс. 9999)</string>
-  <string name="show_notification_title">Показати сповіщення</string>
-  <string name="show_notification_summary">Показувати нагадування з координатами у рядку сповіщень</string>
   <string name="enabledisablegps_title">Увімкнути/вимкнути GPS</string>
   <string name="enabledisablegps_summary">Перейти у налаштування телефону для увімкнення чи вимкнення GPS.</string>
   <string name="startonbootup_title">Запускати при завантаженні</string>

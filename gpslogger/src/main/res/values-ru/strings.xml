@@ -128,8 +128,6 @@
   <string name="timeout_time_summary">Как долго GPS остается в местоопределении перед отказом. Используйте 0 для отключения тайм-аута</string>
   <string name="timeout_time_dialog_title">Время в секундах</string>
   <string name="timeout_time_hint">Введите секунды (максимум 9999)</string>
-  <string name="show_notification_title">Показывать уведомления</string>
-  <string name="show_notification_summary">Отображать значок в панели уведомлений.</string>
   <string name="enabledisablegps_title">Вкл/Выкл GPS</string>
   <string name="enabledisablegps_summary">Перейти в настройки GPS телефона.</string>
   <string name="startonbootup_title">Автозапуск</string>
