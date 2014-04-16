@@ -4,16 +4,15 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.*;
 import com.mendhak.gpslogger.R;
 import org.slf4j.LoggerFactory;
 
 import java.text.MessageFormat;
 
 
-public class CustomUrlLoggerActivity extends Activity {
+public class CustomUrlLoggerActivity extends Activity implements View.OnClickListener {
 
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(CustomUrlLoggerActivity.class.getSimpleName());
@@ -28,6 +27,8 @@ public class CustomUrlLoggerActivity extends Activity {
         EditText urlText = (EditText)findViewById(R.id.customUrlText);
         CheckBox urlEnabled = (CheckBox)findViewById(R.id.customUrlEnabled);
 
+        Button btnSave = (Button)findViewById(R.id.customurl_btnSave);
+        btnSave.setOnClickListener(this);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
@@ -53,13 +54,14 @@ public class CustomUrlLoggerActivity extends Activity {
     }
 
 
+
+
     @Override
-    public void onBackPressed()
-    {
-        tracer.debug("CustomUrlLoggerActivity - Back pressed, saving values");
+    public void onClick(View view) {
+
+        tracer.debug("Saving values");
         EditText urlText = (EditText)findViewById(R.id.customUrlText);
         CheckBox urlEnabled = (CheckBox)findViewById(R.id.customUrlEnabled);
-
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor   = prefs.edit();
@@ -67,7 +69,6 @@ public class CustomUrlLoggerActivity extends Activity {
         editor.putString("log_customurl_url", urlText.getText().toString());
         editor.commit();
 
-        super.onBackPressed();
+        Toast.makeText(getApplicationContext(), getString(R.string.values_saved), Toast.LENGTH_LONG).show();
     }
-
 }
