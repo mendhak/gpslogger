@@ -178,6 +178,9 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         ImageView imgPoints = (ImageView) rootView.findViewById(R.id.simpleview_points);
         imgPoints.setOnClickListener(this);
 
+        ImageView imgLink = (ImageView)rootView.findViewById(R.id.simpleview_imgLink);
+        imgLink.setOnClickListener(this);
+
     }
 
     @Override
@@ -471,6 +474,10 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
                 toast = getToast(R.string.txt_number_of_points);
                 break;
 
+            case R.id.simpleview_imgLink:
+                toast = getToast(AppSettings.getCustomLoggingUrl());
+                break;
+
         }
 
         int location[] = new int[2];
@@ -479,8 +486,11 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         toast.show();
     }
 
-    private Toast getToast(int stringResourceId) {
-        return Toast.makeText(getActivity(), getString(stringResourceId).replace(":", ""), Toast.LENGTH_SHORT);
+    private Toast getToast(String message){
+        return Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT);
+    }
 
+    private Toast getToast(int stringResourceId) {
+        return getToast(getString(stringResourceId).replace(":", ""));
     }
 }
