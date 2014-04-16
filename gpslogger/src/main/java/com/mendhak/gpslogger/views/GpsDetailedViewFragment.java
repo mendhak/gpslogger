@@ -80,13 +80,14 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     public void onStart() {
 
         toggleComponent.SetEnabled(!Session.isStarted());
-        super.onResume();
+        super.onStart();
     }
 
     @Override
     public void onResume() {
 
         toggleComponent.SetEnabled(!Session.isStarted());
+        showPreferencesSummary();
         super.onResume();
     }
 
@@ -456,6 +457,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     @Override
     public void SetLoggingStarted() {
         toggleComponent.SetEnabled(false);
+        showPreferencesSummary();
         ClearDisplay();
     }
 
@@ -499,6 +501,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         TextView txtStatus = (TextView)rootView.findViewById(R.id.detailedview_txtstatus);
 
         txtStatus.setText(message);
+        showPreferencesSummary();
     }
 
     @Override
