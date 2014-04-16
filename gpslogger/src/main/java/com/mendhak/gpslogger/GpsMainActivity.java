@@ -80,6 +80,7 @@ public class GpsMainActivity extends Activity
 
     MenuItem mnuAnnotate;
     MenuItem mnuOnePoint;
+    MenuItem mnuAutoSendNow;
     private boolean annotationMarked;
     private org.slf4j.Logger tracer;
 
@@ -293,6 +294,7 @@ public class GpsMainActivity extends Activity
         getMenuInflater().inflate(R.menu.gps_main, menu);
         mnuAnnotate = menu.findItem(R.id.mnuAnnotate);
         mnuOnePoint = menu.findItem(R.id.mnuOnePoint);
+        mnuAutoSendNow = menu.findItem(R.id.mnuAutoSendNow);
         enableDisableMenuItems();
         return true;
     }
@@ -307,6 +309,9 @@ public class GpsMainActivity extends Activity
             mnuOnePoint.setIcon( (Session.isStarted()  ? R.drawable.singlepoint_disabled : R.drawable.singlepoint ) );
         }
 
+        if(mnuAutoSendNow != null){
+            mnuAutoSendNow.setEnabled(Session.isStarted());
+        }
 
         if (mnuAnnotate != null) {
 
@@ -365,8 +370,31 @@ public class GpsMainActivity extends Activity
             case R.id.mnuEmail:
                 SelectAndEmailFile();
                 return true;
+            case R.id.mnuAutoSendNow:
+                ForceAutoSendNow();
             default:
                 return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    private void ForceAutoSendNow()
+    {
+        tracer.debug("Auto send now");
+
+        if (AppSettings.isAutoSendEnabled())
+        {
+
+                Utilities.ShowProgress(this, getString(R.string.autosend_sending),
+                        getString(R.string.please_wait));
+                loggingService.ForceAutoSendNow();
+
+
+        }
+        else
+        {
+            Intent pref = new Intent().setClass(this, UploadSettingsActivity.class);
+            startActivity(pref);
         }
 
     }

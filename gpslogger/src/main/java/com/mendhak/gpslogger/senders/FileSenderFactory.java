@@ -75,6 +75,7 @@ public class FileSenderFactory
 
 
         final String currentFileName = Session.getCurrentFileName();
+        tracer.info("Sending file " + currentFileName);
 
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
