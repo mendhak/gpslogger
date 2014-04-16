@@ -21,6 +21,7 @@ import android.content.Context;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.email.AutoEmailHelper;
 import com.mendhak.gpslogger.senders.ftp.FtpHelper;
@@ -79,13 +80,13 @@ public class FileSenderFactory
 
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
-        if (gpxFolder == null || !gpxFolder.exists() || gpxFolder.listFiles() == null ||  gpxFolder.listFiles().length < 1)
+        if (Utilities.GetFilesInFolder(gpxFolder).length < 1)
         {
             callback.OnFailure();
             return;
         }
 
-        List<File> files = new ArrayList<File>(Arrays.asList(gpxFolder.listFiles(new FilenameFilter()
+        List<File> files = new ArrayList<File>(Arrays.asList(Utilities.GetFilesInFolder(gpxFolder, new FilenameFilter()
         {
             @Override
             public boolean accept(File file, String s)

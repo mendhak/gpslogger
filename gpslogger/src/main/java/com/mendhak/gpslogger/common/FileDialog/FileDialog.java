@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.Utilities;
 
 /**
  * https://code.google.com/p/android-file-dialog/
@@ -214,11 +215,11 @@ public class FileDialog extends ListActivity {
 		mList = new ArrayList<HashMap<String, Object>>();
 
 		File f = new File(currentPath);
-		File[] files = f.listFiles();
+		File[] files = Utilities.GetFilesInFolder(f);
 		if (files == null) {
 			currentPath = ROOT;
 			f = new File(currentPath);
-			files = f.listFiles();
+			files = Utilities.GetFilesInFolder(f);
 		}
 		myPath.setText(getText(R.string.filedialog_location) + ": " + currentPath);
 

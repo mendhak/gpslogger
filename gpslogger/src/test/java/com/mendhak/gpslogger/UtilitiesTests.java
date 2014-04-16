@@ -10,6 +10,7 @@ import android.test.suitebuilder.annotation.SmallTest;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 
+import java.io.File;
 import java.util.Date;
 
 
@@ -93,6 +94,17 @@ public class UtilitiesTests extends AndroidTestCase {
         String actual = Utilities.CleanDescription(content);
 
         assertEquals("Clean Description should remove characters", expected, actual);
+    }
+
+    @SmallTest
+    public void testFolderListFiles() {
+        assertNotNull("Null File object should return empty list", Utilities.GetFilesInFolder(null));
+
+        assertNotNull("Empty folder should return empty list", Utilities.GetFilesInFolder(new File("/")));
+
+
+
+
     }
 
 

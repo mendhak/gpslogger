@@ -547,7 +547,7 @@ public class GpsMainActivity extends Activity
         final File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
         if (gpxFolder != null && gpxFolder.exists()) {
-            File[] enumeratedFiles = gpxFolder.listFiles(sender);
+            File[] enumeratedFiles = Utilities.GetFilesInFolder(gpxFolder, sender);
 
             Arrays.sort(enumeratedFiles, new Comparator<File>() {
                 public int compare(File f1, File f2) {
@@ -615,7 +615,7 @@ public class GpsMainActivity extends Activity
             final File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
             if (gpxFolder.exists()) {
 
-                File[] enumeratedFiles = gpxFolder.listFiles();
+                File[] enumeratedFiles = Utilities.GetFilesInFolder(gpxFolder);
 
                 Arrays.sort(enumeratedFiles, new Comparator<File>() {
                     public int compare(File f1, File f2) {

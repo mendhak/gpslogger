@@ -44,12 +44,7 @@ import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -892,6 +887,25 @@ public class Utilities
             return "";
         }
     }
+
+    public static File[] GetFilesInFolder(File folder){
+        return GetFilesInFolder(folder, null);
+    }
+
+    public static File[] GetFilesInFolder(File folder, FilenameFilter filter){
+
+        if( folder == null || !folder.exists() || folder.listFiles() == null){
+            return new File[]{};
+        }
+        else{
+            if(filter != null){
+                return folder.listFiles(filter);
+            }
+            return folder.listFiles();
+        }
+    }
+
+
 
 
 
