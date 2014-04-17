@@ -56,11 +56,9 @@ public class Faqtivity extends Activity
         settings.setBuiltInZoomControls(true);
         settings.setJavaScriptEnabled(true);
 
-        Map<String, String> noCacheHeaders = new HashMap<String, String>(2);
-        noCacheHeaders.put("Pragma", "no-cache");
-        noCacheHeaders.put("Cache-Control", "no-cache");
+        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
-        browser.loadUrl("http://code.mendhak.com/gpslogger/index.html", noCacheHeaders);
+        browser.loadUrl("http://code.mendhak.com/gpslogger/index.html");
     }
 
     @Override
@@ -82,7 +80,5 @@ public class Faqtivity extends Activity
     @Override
     protected void onStop() {
         super.onStop();
-        browser.clearCache(true);
-        browser.clearHistory();
     }
 }
