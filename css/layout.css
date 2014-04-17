@@ -1026,6 +1026,13 @@ footer ul.photostream li a {
     font-variant: small-caps;
 }
 
+
+/* Fix for Android browser and webviews on small screens.
+   This prevents a force wrap by using a blank background img */
+p, em, i, strong, h2, h3, a, li, div  {
+    background: url('/images/x.png');
+}
+
 /* ------------ Media queries ------------------- */
 @media (max-device-width: 800px), (max-width: 800px) {
     /*.brief p { */
