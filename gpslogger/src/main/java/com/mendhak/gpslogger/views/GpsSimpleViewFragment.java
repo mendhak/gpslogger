@@ -131,11 +131,15 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         }
 
         if (AppSettings.shouldLogToCustomUrl()) {
-
             imgLink.setVisibility(View.VISIBLE);
         }
         else{
             imgLink.setVisibility(View.GONE);
+        }
+
+        if(!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml()
+                && !AppSettings.shouldLogToPlainText()){
+            showCurrentFileName(null);
         }
 
     }

@@ -80,8 +80,23 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
         if(solo.isCheckBoxChecked(0)) { solo.clickOnCheckBox(0); }
         solo.goBack();
         solo.goBack();
-        assertFalse("Annotate button should be disabled if GPX, KML, URL disabled", ((GpsMainActivity) solo.getCurrentActivity()).mnuAnnotate.isEnabled());
+        assertFalse("Annotate button should be disabled if GPX, KML, URL disabled",
+                ((GpsMainActivity) solo.getCurrentActivity()).mnuAnnotate.isEnabled());
+    }
 
+    @MediumTest
+    public void testFilePathNotShownIfGpxKmlCsvAreDisabled(){
+
+        solo.sendKey(Solo.MENU);
+        solo.clickOnText(solo.getCurrentActivity().getString(R.string.title_drawer_loggingsettings));
+        solo.scrollToTop();
+        if(solo.isCheckBoxChecked(0)) { solo.clickOnCheckBox(0); }
+        if(solo.isCheckBoxChecked(1)) { solo.clickOnCheckBox(1); }
+        if(solo.isCheckBoxChecked(3)) { solo.clickOnCheckBox(3); }
+        solo.goBack();
+        
+        assertFalse("File path should be hidden if GPX, KML and CSV disabled",
+                solo.getCurrentActivity().findViewById(R.id.simpleview_txtfilepath).isShown());
     }
 
     @MediumTest
