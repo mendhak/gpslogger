@@ -17,7 +17,6 @@
 
 //TODO: Simplify email logic (too many methods)
 //TODO: Allow messages in IActionListener callback methods
-//TODO: Handle case where a fix is not found and GPS gives up - restart alarm somehow?
 
 package com.mendhak.gpslogger;
 
@@ -30,10 +29,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Binder;
-import android.os.Bundle;
-import android.os.IBinder;
-import android.os.SystemClock;
+import android.os.*;
 import android.text.format.DateFormat;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
@@ -49,6 +45,8 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GpsLoggingService extends Service implements IActionListener {
     private static NotificationManager gpsNotifyManager;
@@ -67,7 +65,7 @@ public class GpsLoggingService extends Service implements IActionListener {
     private GeneralLocationListener towerLocationListener;
     private LocationManager towerLocationManager;
     private Intent alarmIntent;
-
+    private Handler handler = new Handler();
     // ---------------------------------------------------
 
     /**
@@ -366,6 +364,7 @@ public class GpsLoggingService extends Service implements IActionListener {
         Session.setAddNewTrackSegment(true);
 
         Session.setStarted(false);
+        stopAbsoluteTimer();
         // Email log file before setting location info to null
         AutoSendLogFileOnStop();
         CancelAlarm();
@@ -475,6 +474,8 @@ public class GpsLoggingService extends Service implements IActionListener {
             gpsLocationManager.addGpsStatusListener(gpsLocationListener);
 
             Session.setUsingGps(true);
+            startAbsoluteTimer();
+
         } else if (Session.isTowerEnabled()) {
             tracer.info("Requesting tower location updates");
             Session.setUsingGps(false);
@@ -482,6 +483,8 @@ public class GpsLoggingService extends Service implements IActionListener {
             towerLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
                     1000, 0,
                     towerLocationListener);
+
+            startAbsoluteTimer();
 
         } else {
             tracer.info("No provider available");
@@ -498,6 +501,26 @@ public class GpsLoggingService extends Service implements IActionListener {
         }
 
         SetStatus(R.string.started);
+    }
+
+    private void startAbsoluteTimer() {
+        if(AppSettings.getAbsoluteTimeout() >= 1){
+            tracer.debug("Starting absolute timer");
+            handler.postDelayed(stopManagerRunnable, AppSettings.getAbsoluteTimeout()*1000);
+        }
+    }
+
+    private Runnable stopManagerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            tracer.warn("Absolute timeout reached, giving up on this point");
+            StopManagerAndResetAlarm();
+        }
+    };
+
+    private void stopAbsoluteTimer(){
+        tracer.debug("Stopping absolute timer");
+        handler.removeCallbacks(stopManagerRunnable);
     }
 
     /**
@@ -728,6 +751,8 @@ public class GpsLoggingService extends Service implements IActionListener {
         if (!AppSettings.shouldkeepFix()) {
             StopGpsManager();
         }
+
+        stopAbsoluteTimer();
         SetAlarmForNextPoint();
     }
 
@@ -736,6 +761,8 @@ public class GpsLoggingService extends Service implements IActionListener {
         if (!AppSettings.shouldkeepFix()) {
             StopGpsManager();
         }
+
+        stopAbsoluteTimer();
         SetAlarmForNextPoint(retryInterval);
     }
 

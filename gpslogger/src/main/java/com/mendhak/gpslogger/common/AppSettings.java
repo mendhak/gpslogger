@@ -77,6 +77,8 @@ public class AppSettings extends Application
 
     private static boolean fileNamePrefixSerial;
 
+    private static int absoluteTimeout;
+
 
     /**
      * @return the useImperial
@@ -659,5 +661,13 @@ public class AppSettings extends Application
 
     public static void setFileNamePrefixSerial(boolean fileNamePrefixSerial) {
         AppSettings.fileNamePrefixSerial = fileNamePrefixSerial;
+    }
+
+    public static int getAbsoluteTimeout() {
+        return absoluteTimeout;
+    }
+
+    public static void setAbsoluteTimeout(int absoluteTimeout) {
+        AppSettings.absoluteTimeout = absoluteTimeout;
     }
 }

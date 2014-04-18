@@ -465,5 +465,7 @@
     <string name="save">Save</string>
     <string name="values_saved">Values saved</string>
     <string name="pref_filedetails_title">File and Folder Details</string>
+    <string name="absolute_timeout_title">Absolute Timeout</string>
+    <string name="absolute_timeout_summary">Number of seconds after which the app gives up on trying to acquire a fix, regardless of other settings. This is especially useful for when you are inside buildings to prevent the GPS from draining battery.  Set to 0 for no timeout.</string>
 
 </resources>

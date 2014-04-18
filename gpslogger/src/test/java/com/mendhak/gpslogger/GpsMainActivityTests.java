@@ -94,7 +94,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
         if(solo.isCheckBoxChecked(1)) { solo.clickOnCheckBox(1); }
         if(solo.isCheckBoxChecked(3)) { solo.clickOnCheckBox(3); }
         solo.goBack();
-        
+
         assertFalse("File path should be hidden if GPX, KML and CSV disabled",
                 solo.getCurrentActivity().findViewById(R.id.simpleview_txtfilepath).isShown());
     }
@@ -140,6 +140,25 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
     public void testClickingSimpleViewIconProducesToast(){
         solo.clickOnView(solo.getView(R.id.simpleview_imgSpeed));
         assertTrue(solo.waitForText("Speed"));
+    }
+
+    @MediumTest
+    public void testLoggingPausedWhenAbsoluteTimeoutReached(){
+        solo.sendKey(Solo.MENU);
+        solo.clickOnText(solo.getCurrentActivity().getString(R.string.title_drawer_loggingsettings));
+        solo.scrollToBottom();
+        solo.clickOnText(solo.getCurrentActivity().getString(R.string.absolute_timeout_title));
+        solo.clearEditText(0);
+        solo.enterText(0, "10");
+        solo.clickOnText("OK");
+        solo.goBack();
+        solo.clickOnView(solo.getView(R.id.simple_play));
+        solo.sleep(500);
+        assertTrue("Progress gif should spin when logging started", solo.getCurrentActivity().findViewById(R.id.progressBarGpsFix).isShown());
+        solo.sleep(11000);
+        assertFalse("Absolute timeout should stop waiting for a fix after 10 seconds", solo.getCurrentActivity().findViewById(R.id.progressBarGpsFix).isShown());
+        solo.clickOnView(solo.getView(R.id.simple_stop));
+
     }
 
 }

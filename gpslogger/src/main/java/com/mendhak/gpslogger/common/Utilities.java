@@ -275,6 +275,15 @@ public class Utilities
         AppSettings.setGpsLoggerFolder(prefs.getString("gpslogger_folder", Environment.getExternalStorageDirectory() + "/GPSLogger"));
         AppSettings.setFileNamePrefixSerial(prefs.getBoolean("new_file_prefix_serial",false));
 
+        String absoluteTimeoutString = prefs.getString("absolute_timeout",
+                "0");
+
+        if (absoluteTimeoutString != null && absoluteTimeoutString.length() > 0) {
+            AppSettings.setAbsoluteTimeout(Integer.valueOf(absoluteTimeoutString));
+        }
+        else {
+            AppSettings.setAbsoluteTimeout(0);
+        }
     }
 
 

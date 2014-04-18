@@ -114,6 +114,14 @@
             android:maxLength="4"
             android:hint="@string/retry_time_hint"/>
 
+        <EditTextPreference
+            android:key="absolute_timeout"
+            android:title="@string/absolute_timeout_title"
+            android:summary="@string/absolute_timeout_summary"
+            android:dialogTitle="@string/retry_time_dialog_title"
+            android:numeric="integer"
+            android:maxLength="4"
+            android:hint="@string/retry_time_hint"/>
 
     </PreferenceCategory>
 
