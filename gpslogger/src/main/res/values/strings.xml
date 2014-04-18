@@ -464,5 +464,6 @@
     <string name="txt_number_of_points">Number of points</string>
     <string name="save">Save</string>
     <string name="values_saved">Values saved</string>
+    <string name="pref_filedetails_title">File and Folder Details</string>
 
 </resources>

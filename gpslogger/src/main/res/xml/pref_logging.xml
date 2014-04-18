@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:key="gpslogger_preferences">
+                  android:key="gpslogger_preferences"
+                  android:title="@string/pref_logging_title"
+                  android:summary="@string/pref_logging_summary">
 
-    <PreferenceCategory
-        android:title="@string/pref_loggingto_title"
-        android:summary="@string/pref_loggingto_summary">
+
         <CheckBoxPreference
             android:key="log_gpx"
             android:title="@string/log_gpx_title"
@@ -34,11 +34,9 @@
             android:title="@string/log_plain_text_title"/>
 
 
-    </PreferenceCategory>
-
     <PreferenceCategory
-        android:title="@string/pref_logging_title"
-        android:summary="@string/pref_logging_summary">
+        android:title="@string/pref_filedetails_title"
+        >
 
         <Preference
             android:key="gpslogger_folder"

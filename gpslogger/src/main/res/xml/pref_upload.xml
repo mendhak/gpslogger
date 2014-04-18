@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:key="gpslogger_preferences">
-    <PreferenceCategory
-        android:key="autosend_preferencescreen"
-        android:title="@string/pref_autosend_title"
-        android:summary="@string/pref_autosend_summary">
+                  android:key="gpslogger_preferences" android:title="@string/pref_autosend_title" android:summary="@string/pref_autosend_summary">
+
 
         <CheckBoxPreference
             android:key="autosend_enabled"
@@ -25,7 +22,7 @@
             android:defaultValue="true"
             android:title="@string/autosend_sendzip_title"
             android:summary="@string/autosend_sendzip_summary"/>
-    </PreferenceCategory>
+
 
     <PreferenceCategory android:title="@string/autosend_targets_category">
         <Preference
