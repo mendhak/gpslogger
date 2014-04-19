@@ -182,22 +182,6 @@ public class Session extends Application
 
 
     /**
-     * @return the notificationVisible
-     */
-    public static boolean isNotificationVisible()
-    {
-        return notificationVisible;
-    }
-
-    /**
-     * @param notificationVisible the notificationVisible to set
-     */
-    public static void setNotificationVisible(boolean notificationVisible)
-    {
-        Session.notificationVisible = notificationVisible;
-    }
-
-    /**
      * @return the currentLatitude
      */
     public static double getCurrentLatitude()

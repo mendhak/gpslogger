@@ -341,7 +341,7 @@ public class GpsLoggingService extends Service implements IActionListener {
         Session.setStarted(true);
 
         GetPreferences();
-        Notify();
+        ShowNotification();
         ResetCurrentFileName(true);
         NotifyClientStarted();
         StartGpsManager();
@@ -380,33 +380,11 @@ public class GpsLoggingService extends Service implements IActionListener {
     }
 
     /**
-     * Manages the notification in the status bar
-     */
-    private void Notify() {
-
-        tracer.debug("GpsLoggingService.Notify");
-
-        //Notification is necessary now to prevent service from being killed.
-        gpsNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-        ShowNotification();
-    }
-
-    /**
      * Hides the notification icon in the status bar if it's visible.
      */
     private void RemoveNotification() {
-        tracer.debug("GpsLoggingService.RemoveNotification");
-        try {
-            if (Session.isNotificationVisible()) {
-                gpsNotifyManager.cancelAll();
-            }
-        } catch (Exception ex) {
-            tracer.error("RemoveNotification", ex);
-        } finally {
-            nfc = null;
-            Session.setNotificationVisible(false);
-        }
+        gpsNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        gpsNotifyManager.cancelAll();
     }
 
     /**
@@ -446,8 +424,8 @@ public class GpsLoggingService extends Service implements IActionListener {
         nfc.setContentText(contentText);
         nfc.setWhen(notificationTime);
 
+        gpsNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         gpsNotifyManager.notify(NOTIFICATION_ID, nfc.build());
-        Session.setNotificationVisible(true);
     }
 
     /**
@@ -731,7 +709,7 @@ public class GpsLoggingService extends Service implements IActionListener {
         Session.setLatestTimeStamp(System.currentTimeMillis());
         Session.setCurrentLocationInfo(loc);
         SetDistanceTraveled(loc);
-        Notify();
+        ShowNotification();
         WriteToFile(loc);
         GetPreferences();
         StopManagerAndResetAlarm();
