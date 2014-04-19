@@ -910,7 +910,6 @@ public class GpsMainActivity extends Activity
      */
     private void GetPreferences() {
         Utilities.PopulateAppSettings(getApplicationContext());
-        //ShowPreferencesSummary();
     }
 
 

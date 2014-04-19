@@ -55,7 +55,7 @@ public class GpsLoggingService extends Service implements IActionListener {
     LocationManager gpsLocationManager;
     AlarmManager nextPointAlarmManager;
     private NotificationCompat.Builder nfc = null;
-    private boolean forceLogOnce = false;
+
     private org.slf4j.Logger tracer;
     // ---------------------------------------------------
     // Helpers and managers
@@ -222,23 +222,15 @@ public class GpsLoggingService extends Service implements IActionListener {
         }
     }
 
-    private void SetForceLogOnce(boolean flag) {
-        forceLogOnce = flag;
-    }
-
-    private boolean ForceLogOnce() {
-        return forceLogOnce;
-    }
 
     public void LogOnce() {
         tracer.debug(".");
 
-        SetForceLogOnce(true);
+        Session.setSinglePointMode(true);
 
         if (Session.isStarted()) {
             StartGpsManager();
         } else {
-            Session.setSinglePointMode(true);
             StartLogging();
         }
     }
@@ -646,7 +638,7 @@ public class GpsLoggingService extends Service implements IActionListener {
         long currentTimeStamp = System.currentTimeMillis();
 
         // Don't do anything until the user-defined time has elapsed
-        if (!ForceLogOnce() && (currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 100)) {
+        if (!Session.isSinglePointMode() && (currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 100)) {
             return;
         }
 
@@ -682,7 +674,7 @@ public class GpsLoggingService extends Service implements IActionListener {
         }
 
         //Don't do anything until the user-defined distance has been traversed
-        if (!ForceLogOnce() && AppSettings.getMinimumDistanceInMeters() > 0 && Session.hasValidLocation()) {
+        if (!Session.isSinglePointMode() && AppSettings.getMinimumDistanceInMeters() > 0 && Session.hasValidLocation()) {
 
             double distanceTraveled = Utilities.CalculateDistance(loc.getLatitude(), loc.getLongitude(),
                     Session.getCurrentLatitude(), Session.getCurrentLongitude());
@@ -705,7 +697,6 @@ public class GpsLoggingService extends Service implements IActionListener {
         WriteToFile(loc);
         GetPreferences();
         StopManagerAndResetAlarm();
-        SetForceLogOnce(false);
 
         if (IsMainFormVisible()) {
 
