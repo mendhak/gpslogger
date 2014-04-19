@@ -52,6 +52,14 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
         }
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        setPreferencesEnabledDisabled();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -155,12 +163,25 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
 
         if (preference.getKey().equals("new_file_creation")) {
 
-            boolean isFileStaticEnabled = newValue.equals("custom");
             Preference prefFileStaticName = (Preference) findPreference("new_file_custom_name");
-            prefFileStaticName.setEnabled(isFileStaticEnabled);
+            Preference prefSerialPrefix = (Preference) findPreference("new_file_prefix_serial");
+            prefFileStaticName.setEnabled(newValue.equals("custom"));
+            prefSerialPrefix.setEnabled(!newValue.equals("custom"));
+
 
             return true;
         }
         return false;
+    }
+
+    private void setPreferencesEnabledDisabled(){
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        Preference prefFileStaticName = (Preference) findPreference("new_file_custom_name");
+        Preference prefSerialPrefix = (Preference) findPreference("new_file_prefix_serial");
+
+        prefFileStaticName.setEnabled(prefs.getString("new_file_creation","onceaday").equals("custom"));
+        prefSerialPrefix.setEnabled(!prefs.getString("new_file_creation","onceaday").equals("custom"));
     }
 }
