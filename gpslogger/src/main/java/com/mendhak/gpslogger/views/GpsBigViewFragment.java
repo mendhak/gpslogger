@@ -106,6 +106,11 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
 
     }
 
+    @Override
+    public void OnNmeaSentence(long timestamp, String nmeaSentence) {
+
+    }
+
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {

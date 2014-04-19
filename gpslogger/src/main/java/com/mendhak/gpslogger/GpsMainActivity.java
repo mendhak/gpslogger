@@ -785,6 +785,14 @@ public class GpsMainActivity extends Activity
     }
 
     @Override
+    public void OnNmeaSentence(long timestamp, String nmeaSentence) {
+        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
+        if (currentFragment instanceof GenericViewFragment) {
+            ((GenericViewFragment) currentFragment).OnNmeaSentence(timestamp, nmeaSentence);
+        }
+    }
+
+    @Override
     public void OnSatelliteCount(int count) {
         Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
         if (currentFragment instanceof GenericViewFragment) {
@@ -833,7 +841,6 @@ public class GpsMainActivity extends Activity
         tracer.debug(".");
         this.annotationMarked = false;
         enableDisableMenuItems();
-
     }
 
 

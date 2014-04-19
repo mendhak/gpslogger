@@ -157,7 +157,9 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     }
 
     @Override
-    public void onNmeaReceived(long l, String nmeaSentence) {
+    public void onNmeaReceived(long timestamp, String nmeaSentence) {
+        loggingService.OnNmeaSentence(timestamp, nmeaSentence);
+
         String[] nmeaParts = nmeaSentence.split(",");
 
         if(nmeaParts[0].equalsIgnoreCase("$GPGSA")){
@@ -174,7 +176,6 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
                 this.latestVdop = nmeaParts[17].split("\\*")[0];
             }
-
         }
 
 

@@ -809,6 +809,11 @@ public class GpsLoggingService extends Service implements IActionListener {
         return mainServiceClient != null;
     }
 
+    public void OnNmeaSentence(long timestamp, String nmeaSentence) {
+        if (IsMainFormVisible()) {
+            mainServiceClient.OnNmeaSentence(timestamp, nmeaSentence);
+        }
+    }
 
     /**
      * Can be used from calling classes as the go-between for methods and
