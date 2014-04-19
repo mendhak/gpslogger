@@ -30,6 +30,8 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.*;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.text.format.DateFormat;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
@@ -53,7 +55,7 @@ public class GpsLoggingService extends Service implements IActionListener {
     private final IBinder mBinder = new GpsLoggingBinder();
     LocationManager gpsLocationManager;
     AlarmManager nextPointAlarmManager;
-    private Notification nfc = null;
+    private NotificationCompat.Builder nfc = null;
     private boolean forceLogOnce = false;
     private org.slf4j.Logger tracer;
     // ---------------------------------------------------
@@ -415,24 +417,36 @@ public class GpsLoggingService extends Service implements IActionListener {
         // What happens when the notification item is clicked
         Intent contentIntent = new Intent(this, GpsMainActivity.class);
 
-        PendingIntent pending = PendingIntent.getActivity(getApplicationContext(), 0, contentIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addNextIntent(contentIntent);
+
+        PendingIntent pending = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
 
         NumberFormat nf = new DecimalFormat("###.#####");
 
         String contentText = getString(R.string.gpslogger_still_running);
+        long notificationTime = System.currentTimeMillis();
+
         if (Session.hasValidLocation()) {
-            contentText = DateFormat.format("HH:mm:ss", Session.getCurrentLocationInfo().getTime()) + ": ";
-            contentText += "Lat: " + nf.format(Session.getCurrentLatitude()) + ", Lon: " + nf.format(Session.getCurrentLongitude());
+            contentText = getString(R.string.txt_latitude_short) + ": " + nf.format(Session.getCurrentLatitude()) + ", "
+                    + getString(R.string.txt_longitude_short) + ": " + nf.format(Session.getCurrentLongitude());
+
+            notificationTime = Session.getCurrentLocationInfo().getTime();
         }
 
         if (nfc == null) {
-            nfc = new Notification(R.drawable.gpsloggericon2, null, System.currentTimeMillis());
-            nfc.flags |= Notification.FLAG_ONGOING_EVENT;
+            nfc = new NotificationCompat.Builder(getApplicationContext())
+                    .setSmallIcon(R.drawable.gpsloggericon2)
+                    .setContentTitle(getString(R.string.gpslogger_still_running))
+                    .setOngoing(true)
+                    .setContentIntent(pending);
         }
 
-        nfc.setLatestEventInfo(getApplicationContext(), getString(R.string.gpslogger_still_running), contentText, pending);
+        nfc.setContentText(contentText);
+        nfc.setWhen(notificationTime);
 
-        gpsNotifyManager.notify(NOTIFICATION_ID, nfc);
+        gpsNotifyManager.notify(NOTIFICATION_ID, nfc.build());
         Session.setNotificationVisible(true);
     }
 
