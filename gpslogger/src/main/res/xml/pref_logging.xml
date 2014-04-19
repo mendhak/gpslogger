@@ -51,11 +51,11 @@
             android:defaultValue="onceaday"
             android:entryValues="@array/filecreation_values"/>
         <EditTextPreference
-            android:key="new_file_static_name"
-            android:title="@string/new_file_static_title"
-            android:summary="@string/new_file_static_summary"
-            android:dialogTitle="@string/new_file_static_title"
-            android:dialogMessage="@string/new_file_static_message"
+            android:key="new_file_custom_name"
+            android:title="@string/new_file_custom_title"
+            android:summary="@string/new_file_custom_summary"
+            android:dialogTitle="@string/new_file_custom_title"
+            android:dialogMessage="@string/new_file_custom_message"
             android:defaultValue="gpslogger"
             />
         <CheckBoxPreference

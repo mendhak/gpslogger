@@ -3,10 +3,12 @@ package com.mendhak.gpslogger;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.test.AndroidTestCase;
 import android.test.mock.MockContext;
 import android.test.suitebuilder.annotation.SmallTest;
+import android.text.format.Time;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 
@@ -102,11 +104,32 @@ public class UtilitiesTests extends AndroidTestCase {
 
         assertNotNull("Empty folder should return empty list", Utilities.GetFilesInFolder(new File("/")));
 
-
-
-
     }
 
+    @SmallTest
+    public void testFormattedCustomFileName() {
 
+
+        String expected = "basename_" + Build.SERIAL;
+        String actual = Utilities.GetFormattedCustomFileName("basename_%ser");
+        assertEquals("Static file name %SER should be replaced with Build Serial", expected, actual);
+
+        Time t = new Time();
+        t.setToNow();
+
+        expected = "basename_" +  String.valueOf(t.hour);
+
+        actual = Utilities.GetFormattedCustomFileName("basename_%HOUR");
+        assertEquals("Static file name %HOUR should be replaced with Hour", expected, actual);
+
+        actual = Utilities.GetFormattedCustomFileName("basename_%HOUR%MIN");
+        expected = "basename_" +  String.valueOf(t.hour) + String.valueOf(t.minute);
+        assertEquals("Static file name %HOUR, %MIN should be replaced with Hour, Minute", expected, actual);
+
+        actual = Utilities.GetFormattedCustomFileName("basename_%YEAR%MONTH%DAY");
+        expected = "basename_" +  String.valueOf(t.year) + String.valueOf(t.month) + String.valueOf(t.monthDay);
+        assertEquals("Static file name %YEAR, %MONTH, %DAY should be replaced with Year Month and Day", expected, actual);
+
+    }
 
 }

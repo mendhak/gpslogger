@@ -545,9 +545,9 @@ public class GpsLoggingService extends Service implements IActionListener {
         String newFileName = Session.getCurrentFileName();
 
         /* Update the file name, if required. (New day, Re-start service) */
-        if (AppSettings.isStaticFile()) {
-            newFileName = AppSettings.getStaticFileName();
-            Session.setCurrentFileName(AppSettings.getStaticFileName());
+        if (AppSettings.isCustomFile()) {
+            newFileName = AppSettings.getCustomFileName();
+            Session.setCurrentFileName(AppSettings.getCustomFileName());
         } else if (AppSettings.shouldCreateNewFileOnceADay()) {
             // 20100114.gpx
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");

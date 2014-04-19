@@ -70,8 +70,8 @@ public class AppSettings extends Application
     private static String ftpProtocol;
     private static boolean ftpImplicit;
 
-    private static String staticFileName;
-    private static boolean isStaticFile;
+    private static String customFileName;
+    private static boolean isCustomFile;
 
     private static String gpsLoggerFolder;
 
@@ -602,24 +602,24 @@ public class AppSettings extends Application
         AppSettings.autoFtpEnabled = autoFtpEnabled;
     }
 
-    public static String getStaticFileName()
+    public static String getCustomFileName()
     {
-        return staticFileName;
+        return customFileName;
     }
 
-    public static void setStaticFileName(String staticFileName)
+    public static void setCustomFileName(String customFileName)
     {
-        AppSettings.staticFileName = staticFileName;
+        AppSettings.customFileName = customFileName;
     }
 
-    public static boolean isStaticFile()
+    public static boolean isCustomFile()
     {
-        return isStaticFile;
+        return isCustomFile;
     }
 
-    public static void setStaticFile(boolean staticFile)
+    public static void setCustomFile(boolean customFile)
     {
-        AppSettings.isStaticFile = staticFile;
+        AppSettings.isCustomFile = customFile;
     }
 
     public static boolean shouldLogToCustomUrl() {

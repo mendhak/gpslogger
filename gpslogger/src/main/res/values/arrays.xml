@@ -3,13 +3,13 @@
     <string-array name="filecreation_entries">
         <item>@string/new_file_creation_onceaday</item>
         <item>@string/new_file_creation_everystart</item>
-        <item>@string/new_file_creation_static</item>
+        <item>@string/new_file_creation_custom</item>
     </string-array>
 
     <string-array name="filecreation_values">
         <item>onceaday</item>
         <item>everystart</item>
-        <item>static</item>
+        <item>custom</item>
     </string-array>
 
     <string-array name="autosend_frequencies">

@@ -30,6 +30,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.text.format.Time;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.android.LogcatAppender;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
@@ -209,7 +210,7 @@ public class Utilities
         /** 
          * New file creation preference: 
          *     onceaday, 
-         *     fixed file (static),
+         *     custom file (static),
          *     every time the service starts 
          */
         AppSettings.setNewFileCreation(prefs.getString("new_file_creation",
@@ -218,17 +219,17 @@ public class Utilities
         if (AppSettings.getNewFileCreation().equals("onceaday"))
         {
             AppSettings.setNewFileOnceADay(true);
-            AppSettings.setStaticFile(false);
+            AppSettings.setCustomFile(false);
         }
-        else if(AppSettings.getNewFileCreation().equals("static"))
+        else if(AppSettings.getNewFileCreation().equals("custom")  || AppSettings.getNewFileCreation().equals("static"))
         {
-            AppSettings.setStaticFile(true);
-            AppSettings.setStaticFileName(prefs.getString("new_file_static_name", "gpslogger"));
+            AppSettings.setCustomFile(true);
+            AppSettings.setCustomFileName(prefs.getString("new_file_custom_name", "gpslogger"));
         }
         else /* new log with each start */
         {
             AppSettings.setNewFileOnceADay(false);
-            AppSettings.setStaticFile(false);
+            AppSettings.setCustomFile(false);
         }
 
         AppSettings.setAutoSendEnabled(prefs.getBoolean("autosend_enabled", false));
@@ -912,6 +913,23 @@ public class Utilities
             }
             return folder.listFiles();
         }
+    }
+
+
+    public static String GetFormattedCustomFileName(String baseName){
+
+        Time t = new Time();
+        t.setToNow();
+
+        String finalFileName = baseName;
+        finalFileName = finalFileName.replaceAll("(?i)%ser", String.valueOf(Utilities.GetBuildSerial()));
+        finalFileName = finalFileName.replaceAll("(?i)%hour", String.valueOf(t.hour));
+        finalFileName = finalFileName.replaceAll("(?i)%min", String.valueOf(t.minute));
+        finalFileName = finalFileName.replaceAll("(?i)%year", String.valueOf(t.year));
+        finalFileName = finalFileName.replaceAll("(?i)%month", String.valueOf(t.month));
+        finalFileName = finalFileName.replaceAll("(?i)%day", String.valueOf(t.monthDay));
+        return finalFileName;
+
     }
 
 

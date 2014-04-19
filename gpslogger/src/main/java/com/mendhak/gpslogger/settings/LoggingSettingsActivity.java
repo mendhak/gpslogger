@@ -40,6 +40,16 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        if(prefs.getString("new_file_creation","onceaday").equals("static")) {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("new_file_creation", "custom");
+            editor.commit();
+
+            ListPreference newFileCreation = (ListPreference)findPreference("new_file_creation");
+            newFileCreation.setValue("custom");
+        }
     }
 
     @Override
@@ -145,8 +155,8 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
 
         if (preference.getKey().equals("new_file_creation")) {
 
-            boolean isFileStaticEnabled = newValue.equals("static");
-            Preference prefFileStaticName = (Preference) findPreference("new_file_static_name");
+            boolean isFileStaticEnabled = newValue.equals("custom");
+            Preference prefFileStaticName = (Preference) findPreference("new_file_custom_name");
             prefFileStaticName.setEnabled(isFileStaticEnabled);
 
             return true;

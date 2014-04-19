@@ -137,9 +137,10 @@ public class Session extends Application
      */
     public static String getCurrentFileName()
     {
-        if(AppSettings.getNewFileCreation().equals("static") && !Utilities.IsNullOrEmpty(currentFileName))
+        tracer.info(currentFileName);
+        if(AppSettings.isCustomFile() && !Utilities.IsNullOrEmpty(currentFileName))
         {
-            return currentFileName.replaceAll("(?i)%ser", String.valueOf(Utilities.GetBuildSerial()));
+            return Utilities.GetFormattedCustomFileName(currentFileName);
         }
         else
         {
@@ -148,11 +149,10 @@ public class Session extends Application
                 currentFileName = String.valueOf(Utilities.GetBuildSerial()) + "_" + currentFileName;
             }
         }
-
-
         return currentFileName;
-
     }
+
+
 
     /**
      * @param currentFileName the currentFileName to set
