@@ -178,11 +178,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
         }
 
 
-        //height of geoid nmeaparts 11
-        //time since last update 13
-        // station id 14
         if(nmeaParts[0].equalsIgnoreCase("$GPGGA")){
-            tracer.info(nmeaSentence);
             if(!Utilities.IsNullOrEmpty(nmeaParts[8])){
                 this.latestHdop = nmeaParts[8];
             }
@@ -198,8 +194,6 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
             if(!Utilities.IsNullOrEmpty(nmeaParts[14]) && !nmeaParts[14].startsWith("*")){
                 this.dgpsId = nmeaParts[14].split("\\*")[0];
             }
-
         }
-
     }
 }
