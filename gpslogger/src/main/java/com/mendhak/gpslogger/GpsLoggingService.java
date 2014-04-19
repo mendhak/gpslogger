@@ -799,6 +799,7 @@ public class GpsLoggingService extends Service implements IActionListener {
      * @param count Number of Satellites
      */
     void SetSatelliteInfo(int count) {
+        Session.setSatelliteCount(count);
         if (IsMainFormVisible()) {
             mainServiceClient.OnSatelliteCount(count);
         }
@@ -807,6 +808,7 @@ public class GpsLoggingService extends Service implements IActionListener {
     private boolean IsMainFormVisible() {
         return mainServiceClient != null;
     }
+
 
     /**
      * Can be used from calling classes as the go-between for methods and
