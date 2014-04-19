@@ -304,21 +304,39 @@ class Gpx10WriteHandler implements Runnable
             track.append("<sat>").append(String.valueOf(satelliteCount)).append("</sat>");
         }
 
-        String hdop = loc.getExtras().getString("HDOP");
-        String pdop = loc.getExtras().getString("PDOP");
-        String vdop = loc.getExtras().getString("VDOP");
+        if(loc.getExtras()!=null){
+            String hdop = loc.getExtras().getString("HDOP");
+            String pdop = loc.getExtras().getString("PDOP");
+            String vdop = loc.getExtras().getString("VDOP");
+            String geoidheight = loc.getExtras().getString("GEOIDHEIGHT");
+            String ageofdgpsdata = loc.getExtras().getString("AGEOFDGPSDATA");
+            String dgpsid = loc.getExtras().getString("DGPSID");
 
-        if(!Utilities.IsNullOrEmpty(hdop)){
-            track.append("<hdop>").append(hdop).append("</hdop>");
+            if(!Utilities.IsNullOrEmpty(hdop)){
+                track.append("<hdop>").append(hdop).append("</hdop>");
+            }
+
+            if(!Utilities.IsNullOrEmpty(vdop)){
+                track.append("<vdop>").append(vdop).append("</vdop>");
+            }
+
+            if(!Utilities.IsNullOrEmpty(pdop)){
+                track.append("<pdop>").append(pdop).append("</pdop>");
+            }
+
+            if(!Utilities.IsNullOrEmpty(geoidheight)){
+                track.append("<geoidheight>").append(geoidheight).append("</geoidheight>");
+            }
+
+            if(!Utilities.IsNullOrEmpty(ageofdgpsdata)){
+                track.append("<ageofdgpsdata>").append(ageofdgpsdata).append("</ageofdgpsdata>");
+            }
+
+            if(!Utilities.IsNullOrEmpty(dgpsid)){
+                track.append("<dgpsid>").append(dgpsid).append("</dgpsid>");
+            }
         }
 
-        if(!Utilities.IsNullOrEmpty(vdop)){
-            track.append("<vdop>").append(vdop).append("</vdop>");
-        }
-
-        if(!Utilities.IsNullOrEmpty(pdop)){
-            track.append("<pdop>").append(pdop).append("</pdop>");
-        }
 
 
 

@@ -1,6 +1,7 @@
 package com.mendhak.gpslogger.loggers;
 
 import android.location.Location;
+import android.os.Bundle;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
@@ -71,7 +72,7 @@ public class FileLoggerTests extends AndroidTestCase {
 
         String actual = writeHandler.GetTrackPointXml(loc, "2011-09-17T18:45:33Z");
         String expected = "<trkpt lat=\"12.193\" lon=\"19.111\"><ele>9001.0</ele><time>2011-09-17T18:45:33Z</time>" +
-                "<course>91.88</course><speed>188.44</speed><src>MOCK</src><sat>41</sat><hdop>11.0</hdop></trkpt>\n</trkseg></trk></gpx>";
+                "<course>91.88</course><speed>188.44</speed><src>MOCK</src><sat>41</sat></trkpt>\n</trkseg></trk></gpx>";
 
         assertEquals("Trackpoint XML with all info", expected, actual);
     }
@@ -92,7 +93,7 @@ public class FileLoggerTests extends AndroidTestCase {
 
         String actual = writeHandler.GetTrackPointXml(loc, "2011-09-17T18:45:33Z");
         String expected = "<trkpt lat=\"12.193\" lon=\"19.111\"><ele>9001.0</ele><time>2011-09-17T18:45:33Z</time>" +
-                "<course>91.88</course><speed>188.44</speed><src>MOCK</src><hdop>11.0</hdop></trkpt>\n</trkseg></trk></gpx>";
+                "<course>91.88</course><speed>188.44</speed><src>MOCK</src></trkpt>\n</trkseg></trk></gpx>";
 
         assertEquals("Trackpoint XML without satellites", expected, actual);
     }
@@ -115,6 +116,54 @@ public class FileLoggerTests extends AndroidTestCase {
                 "<course>91.88</course><speed>188.44</speed><src>MOCK</src></trkpt>\n</trkseg></trk></gpx>";
 
         assertEquals("Trackpoint XML with a new segment", expected, actual);
+    }
+
+
+    @SmallTest
+    public void testTrackPointXml_BundledHDOP(){
+
+        Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(null, null, null, true, 0);
+
+        Location loc = new Location("MOCK");
+        loc.setLatitude(12.193);
+        loc.setLongitude(19.111);
+        loc.setAltitude(9001);
+        loc.setBearing(91.88f);
+        loc.setSpeed(188.44f);
+        Bundle b = new Bundle();
+        b.putString("HDOP", "LOOKATTHISHDOP!");
+        loc.setExtras(b);
+
+
+        String actual = writeHandler.GetTrackPointXml(loc, "2011-09-17T18:45:33Z");
+        String expected = "<trkseg><trkpt lat=\"12.193\" lon=\"19.111\"><ele>9001.0</ele><time>2011-09-17T18:45:33Z</time>" +
+                "<course>91.88</course><speed>188.44</speed><src>MOCK</src><hdop>LOOKATTHISHDOP!</hdop></trkpt>\n</trkseg></trk></gpx>";
+
+        assertEquals("Trackpoint XML with an HDOP", expected, actual);
+    }
+
+
+    @SmallTest
+    public void testTrackPointXml_BundledGeoIdHeight(){
+
+        Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(null, null, null, true, 0);
+
+        Location loc = new Location("MOCK");
+        loc.setLatitude(12.193);
+        loc.setLongitude(19.111);
+        loc.setAltitude(9001);
+        loc.setBearing(91.88f);
+        loc.setSpeed(188.44f);
+        Bundle b = new Bundle();
+        b.putString("GEOIDHEIGHT", "MYGEOIDHEIGHT");
+        loc.setExtras(b);
+
+
+        String actual = writeHandler.GetTrackPointXml(loc, "2011-09-17T18:45:33Z");
+        String expected = "<trkseg><trkpt lat=\"12.193\" lon=\"19.111\"><ele>9001.0</ele><time>2011-09-17T18:45:33Z</time>" +
+                "<course>91.88</course><speed>188.44</speed><src>MOCK</src><geoidheight>MYGEOIDHEIGHT</geoidheight></trkpt>\n</trkseg></trk></gpx>";
+
+        assertEquals("Trackpoint XML with a geoid height", expected, actual);
     }
 
     @SmallTest

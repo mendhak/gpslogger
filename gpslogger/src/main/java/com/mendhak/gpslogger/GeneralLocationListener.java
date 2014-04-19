@@ -36,6 +36,9 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     private String latestHdop;
     private String latestPdop;
     private String latestVdop;
+    private String geoIdHeight;
+    private String ageOfDgpsData;
+    private String dgpsId;
 
     GeneralLocationListener(GpsLoggingService activity)
     {
@@ -58,6 +61,9 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 b.putString("HDOP", this.latestHdop);
                 b.putString("PDOP", this.latestPdop);
                 b.putString("VDOP", this.latestVdop);
+                b.putString("GEOIDHEIGHT", this.geoIdHeight);
+                b.putString("AGEOFDGPSDATA", this.ageOfDgpsData);
+                b.putString("DGPSID", this.dgpsId);
                 loc.setExtras(b);
                 loggingService.OnLocationChanged(loc);
 
@@ -171,13 +177,28 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
         }
 
+
+        //height of geoid nmeaparts 11
+        //time since last update 13
+        // station id 14
         if(nmeaParts[0].equalsIgnoreCase("$GPGGA")){
+            tracer.info(nmeaSentence);
             if(!Utilities.IsNullOrEmpty(nmeaParts[8])){
                 this.latestHdop = nmeaParts[8];
-                //height of geoid nmeaparts 11
-                //time since last update 13
-                // station id 14
             }
+
+            if(!Utilities.IsNullOrEmpty(nmeaParts[11])){
+                this.geoIdHeight = nmeaParts[11];
+            }
+
+            if(!Utilities.IsNullOrEmpty(nmeaParts[13])){
+                this.ageOfDgpsData = nmeaParts[13];
+            }
+
+            if(!Utilities.IsNullOrEmpty(nmeaParts[14]) && !nmeaParts[14].startsWith("*")){
+                this.dgpsId = nmeaParts[14].split("\\*")[0];
+            }
+
         }
 
     }
