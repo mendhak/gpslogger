@@ -23,15 +23,19 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 
-class GeneralLocationListener implements LocationListener, GpsStatus.Listener
+class GeneralLocationListener implements LocationListener, GpsStatus.Listener, GpsStatus.NmeaListener
 {
 
     private static GpsLoggingService loggingService;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GeneralLocationListener.class.getSimpleName());
+    private String latestHdop;
+    private String latestPdop;
+    private String latestVdop;
 
     GeneralLocationListener(GpsLoggingService activity)
     {
@@ -50,7 +54,16 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener
             if (loc != null)
             {
                 tracer.debug("GeneralLocationListener.onLocationChanged");
+                Bundle b = new Bundle();
+                b.putString("HDOP", this.latestHdop);
+                b.putString("PDOP", this.latestPdop);
+                b.putString("VDOP", this.latestVdop);
+                loc.setExtras(b);
                 loggingService.OnLocationChanged(loc);
+
+                this.latestHdop = "";
+                this.latestPdop="";
+                this.latestVdop="";
             }
 
         }
@@ -137,4 +150,35 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener
         }
     }
 
+    @Override
+    public void onNmeaReceived(long l, String nmeaSentence) {
+        String[] nmeaParts = nmeaSentence.split(",");
+
+        if(nmeaParts[0].equalsIgnoreCase("$GPGSA")){
+
+            if(!Utilities.IsNullOrEmpty(nmeaParts[15])){
+                this.latestPdop = nmeaParts[15];
+            }
+
+            if(!Utilities.IsNullOrEmpty(nmeaParts[16])){
+                this.latestHdop = nmeaParts[16];
+            }
+
+            if(!Utilities.IsNullOrEmpty(nmeaParts[17]) && !nmeaParts[17].startsWith("*")){
+
+                this.latestVdop = nmeaParts[17].split("\\*")[0];
+            }
+
+        }
+
+        if(nmeaParts[0].equalsIgnoreCase("$GPGGA")){
+            if(!Utilities.IsNullOrEmpty(nmeaParts[8])){
+                this.latestHdop = nmeaParts[8];
+                //height of geoid nmeaparts 11
+                //time since last update 13
+                // station id 14
+            }
+        }
+
+    }
 }

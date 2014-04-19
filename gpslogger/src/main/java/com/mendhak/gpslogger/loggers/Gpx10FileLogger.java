@@ -304,11 +304,22 @@ class Gpx10WriteHandler implements Runnable
             track.append("<sat>").append(String.valueOf(satelliteCount)).append("</sat>");
         }
 
-        if (loc.hasAccuracy() && loc.getAccuracy() > 0)
-        {
-            // Accuracy divided by 5 or 6 for approximate HDOP
-            track.append("<hdop>").append(String.valueOf(loc.getAccuracy() / 5)).append("</hdop>");
+        String hdop = loc.getExtras().getString("HDOP");
+        String pdop = loc.getExtras().getString("PDOP");
+        String vdop = loc.getExtras().getString("VDOP");
+
+        if(!Utilities.IsNullOrEmpty(hdop)){
+            track.append("<hdop>").append(hdop).append("</hdop>");
         }
+
+        if(!Utilities.IsNullOrEmpty(vdop)){
+            track.append("<vdop>").append(vdop).append("</vdop>");
+        }
+
+        if(!Utilities.IsNullOrEmpty(pdop)){
+            track.append("<pdop>").append(pdop).append("</pdop>");
+        }
+
 
 
         track.append("</trkpt>\n");

@@ -51,7 +51,7 @@ public class GpsMainActivityTests extends ActivityInstrumentationTestCase2<GpsMa
         solo.clickOnView(solo.getView(R.id.imgHelp));
         solo.assertCurrentActivity("FAQ Screen", Faqtivity.class);
         WebView webView = (WebView)solo.getView(R.id.faqwebview);
-        assertTrue(solo.getWebUrl(), solo.getWebUrl().equals("http://code.mendhak.com/gpslogger/index.html"));
+        assertTrue(solo.getWebUrl(), solo.getWebUrl().equalsIgnoreCase("http://code.mendhak.com/gpslogger/index.html"));
     }
 
     @MediumTest

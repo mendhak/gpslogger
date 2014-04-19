@@ -447,6 +447,7 @@ public class GpsLoggingService extends Service implements IActionListener {
                     gpsLocationListener);
 
             gpsLocationManager.addGpsStatusListener(gpsLocationListener);
+            gpsLocationManager.addNmeaListener(gpsLocationListener);
 
             Session.setUsingGps(true);
             startAbsoluteTimer();
