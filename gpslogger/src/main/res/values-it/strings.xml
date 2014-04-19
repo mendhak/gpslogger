@@ -128,8 +128,6 @@
   <string name="time_before_logging_hint">Inserisci i secondi (max 9999)</string>
   <string name="keep_fix_summary">Attenzione: riduce di molto la vita della batteria. Usatelo solo per ottenere alte precisioni con basse frequenze di campionatura.</string>
   <string name="keep_fix_title">Lascia sempre acceso il GPS</string>
-  <string name="retry_time_title">Tempo per trovare un punto</string>
-  <string name="retry_time_summary">Continua a provare per questo tempo per avere un punto più preciso.</string>
   <string name="retry_time_dialog_title">Tempo in secondi</string>
   <string name="retry_time_hint">Inserisci i secondi (max 9999)</string>
   <string name="distance_before_logging_title">Distanza prima di registrare</string>
@@ -334,7 +332,5 @@
   <string name="bigview_taptotoggle">Tocca per start/stop registrazione</string>
   <string name="summary_autosendtargets">Upload su:</string>
   <string name="accuracy_filter_title">Filtro precisione</string>
-  <string name="accuracy_filter_summary">Precisione minima richiesta perchè un punto sia registrato</string>
   <string name="distance_filter_title">Filtro distanza</string>
-  <string name="distance_filter_summary">Distanza minima da percorrere prima che un punto sia registrato</string>
 </resources>
