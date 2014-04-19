@@ -32,7 +32,6 @@ import android.location.LocationManager;
 import android.os.*;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.text.format.DateFormat;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
@@ -49,10 +48,10 @@ import java.util.Date;
 import java.util.List;
 
 public class GpsLoggingService extends Service implements IActionListener {
-    private static NotificationManager gpsNotifyManager;
+    private static NotificationManager notificationManager;
     private static int NOTIFICATION_ID = 8675309;
     private static IGpsLoggerServiceClient mainServiceClient;
-    private final IBinder mBinder = new GpsLoggingBinder();
+    private final IBinder binder = new GpsLoggingBinder();
     LocationManager gpsLocationManager;
     AlarmManager nextPointAlarmManager;
     private NotificationCompat.Builder nfc = null;
@@ -82,7 +81,7 @@ public class GpsLoggingService extends Service implements IActionListener {
     @Override
     public IBinder onBind(Intent arg0) {
         tracer.debug(".");
-        return mBinder;
+        return binder;
     }
 
     @Override
@@ -94,11 +93,6 @@ public class GpsLoggingService extends Service implements IActionListener {
         nextPointAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
     }
 
-    @Override
-    public void onStart(Intent intent, int startId) {
-        tracer.debug(".");
-        HandleIntent(intent);
-    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -221,8 +215,6 @@ public class GpsLoggingService extends Service implements IActionListener {
             if (IsMainFormVisible())
             {
                 SetStatus(R.string.autosend_sending);
-//                Utilities.ShowProgress(mainServiceClient.GetActivity(), getString(R.string.autosend_sending),
-//                        getString(R.string.please_wait));
             }
 
             tracer.info("Force emailing Log File");
@@ -383,8 +375,8 @@ public class GpsLoggingService extends Service implements IActionListener {
      * Hides the notification icon in the status bar if it's visible.
      */
     private void RemoveNotification() {
-        gpsNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        gpsNotifyManager.cancelAll();
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.cancelAll();
     }
 
     /**
@@ -424,8 +416,8 @@ public class GpsLoggingService extends Service implements IActionListener {
         nfc.setContentText(contentText);
         nfc.setWhen(notificationTime);
 
-        gpsNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        gpsNotifyManager.notify(NOTIFICATION_ID, nfc.build());
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(NOTIFICATION_ID, nfc.build());
     }
 
     /**
