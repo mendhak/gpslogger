@@ -176,8 +176,8 @@
     </string>
     <string name="keep_fix_title">Keep GPS on between fixes</string>
 
-    <string name="retry_time_title">Retry time interval for accuracy</string>
-    <string name="retry_time_summary">Keep retrying for this long to get an accurate point.</string>
+    <string name="retry_time_title">Retry time interval for accuracy filter</string>
+    <string name="retry_time_summary">After acquiring a fix, keep retrying for this long to get an accurate point to match the accuracy filter setting.</string>
     <string name="retry_time_dialog_title">Time in seconds</string>
     <string name="retry_time_hint">Enter seconds (max 9999)</string>
     <string name="distance_before_logging_title">Distance before logging</string>
@@ -457,9 +457,9 @@
     <string name="summary_autosendtargets">Upload to:</string>
 
     <string name="accuracy_filter_title">Accuracy Filter</string>
-    <string name="accuracy_filter_summary">The minimum precision required for a point to be saved</string>
+    <string name="accuracy_filter_summary">The minimum precision required for a point to be saved. Points that aren\'t this accurate will be discarded.</string>
     <string name="distance_filter_title">Distance filter</string>
-    <string name="distance_filter_summary">The minimum distance required between current and previous for a point to be saved</string>
+    <string name="distance_filter_summary">The minimum distance required between current and previous for a point to be saved, otherwise the point will be discarded.</string>
     <string name="points">points</string>
     <string name="txt_number_of_points">Number of points</string>
     <string name="save">Save</string>

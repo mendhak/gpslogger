@@ -45,8 +45,6 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GpsLoggingService extends Service implements IActionListener {
     private static NotificationManager gpsNotifyManager;
@@ -66,6 +64,7 @@ public class GpsLoggingService extends Service implements IActionListener {
     private LocationManager towerLocationManager;
     private Intent alarmIntent;
     private Handler handler = new Handler();
+    private long firstRetryTimeStamp;
     // ---------------------------------------------------
 
     /**
@@ -589,7 +588,6 @@ public class GpsLoggingService extends Service implements IActionListener {
             tracer.info("File name: " + newFileName);
             mainServiceClient.onFileName(newFileName);
         }
-
     }
 
     /**
@@ -652,7 +650,6 @@ public class GpsLoggingService extends Service implements IActionListener {
      * @param loc Location object
      */
     void OnLocationChanged(Location loc) {
-        int retryTimeout = Session.getRetryTimeout();
 
         if (!Session.isStarted()) {
             tracer.debug("OnLocationChanged called, but Session.isStarted is false");
@@ -662,34 +659,41 @@ public class GpsLoggingService extends Service implements IActionListener {
 
         tracer.debug("GpsLoggingService.OnLocationChanged");
 
-
         long currentTimeStamp = System.currentTimeMillis();
 
-        // Wait some time even on 0 frequency so that the UI doesn't lock up
-
-        if ((currentTimeStamp - Session.getLatestTimeStamp()) < 1000) {
-            return;
-        }
-
         // Don't do anything until the user-defined time has elapsed
-        if (!ForceLogOnce() && (currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 1000)) {
+        if (!ForceLogOnce() && (currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 100)) {
             return;
         }
 
         // Don't do anything until the user-defined accuracy is reached
         if (AppSettings.getMinimumAccuracyInMeters() > 0) {
             if (AppSettings.getMinimumAccuracyInMeters() < Math.abs(loc.getAccuracy())) {
-                if (retryTimeout < 50) {
-                    Session.setRetryTimeout(retryTimeout + 1);
-                    SetStatus("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " reached");
-                    StopManagerAndResetAlarm(AppSettings.getRetryInterval());
-                    return;
-                } else {
-                    Session.setRetryTimeout(0);
-                    SetStatus("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " reached and timeout reached");
-                    StopManagerAndResetAlarm();
+
+                if(this.firstRetryTimeStamp == 0){
+                    this.firstRetryTimeStamp = System.currentTimeMillis();
+                }
+
+                if(currentTimeStamp - this.firstRetryTimeStamp <= AppSettings.getRetryInterval()*1000){
+                    tracer.warn("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " m. Point discarded.");
+                    SetStatus("Inaccurate point discarded.");
+                    //return and keep trying
                     return;
                 }
+
+                if (currentTimeStamp - this.firstRetryTimeStamp > AppSettings.getRetryInterval()*1000) {
+                    tracer.warn("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " m and timeout reached");
+                    SetStatus("Inaccurate points discarded and retries timed out.");
+                    //Give up for now
+                    StopManagerAndResetAlarm();
+
+                    //reset timestamp for next time.
+                    this.firstRetryTimeStamp = 0;
+                    return;
+                }
+
+                //Success, reset timestamp for next time.
+                this.firstRetryTimeStamp = 0;
             }
         }
 
@@ -700,15 +704,15 @@ public class GpsLoggingService extends Service implements IActionListener {
                     Session.getCurrentLatitude(), Session.getCurrentLongitude());
 
             if (AppSettings.getMinimumDistanceInMeters() > distanceTraveled) {
-                SetStatus("Only " + String.valueOf(Math.floor(distanceTraveled)) + " m traveled.");
+                SetStatus("Only " + String.valueOf(Math.floor(distanceTraveled)) + " m traveled. Point discarded.");
+                tracer.warn("Only " + String.valueOf(Math.floor(distanceTraveled)) + " m traveled. Point discarded.");
                 StopManagerAndResetAlarm();
                 return;
             }
-
         }
 
 
-        tracer.debug("Location to update: " + String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getLongitude()));
+        tracer.info("Location to update: " + String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getLongitude()));
         ResetCurrentFileName(false);
         Session.setLatestTimeStamp(System.currentTimeMillis());
         Session.setCurrentLocationInfo(loc);
@@ -756,15 +760,6 @@ public class GpsLoggingService extends Service implements IActionListener {
         SetAlarmForNextPoint();
     }
 
-    protected void StopManagerAndResetAlarm(int retryInterval) {
-        tracer.debug("GpsLoggingService.StopManagerAndResetAlarm_retryInterval");
-        if (!AppSettings.shouldkeepFix()) {
-            StopGpsManager();
-        }
-
-        stopAbsoluteTimer();
-        SetAlarmForNextPoint(retryInterval);
-    }
 
     private void StopAlarm() {
         tracer.debug("GpsLoggingService.StopAlarm");
@@ -790,21 +785,6 @@ public class GpsLoggingService extends Service implements IActionListener {
 
     }
 
-    private void SetAlarmForNextPoint(int retryInterval) {
-
-        tracer.debug("GpsLoggingService.SetAlarmForNextPoint_retryInterval");
-
-        Intent i = new Intent(this, GpsLoggingService.class);
-
-        i.putExtra("getnextpoint", true);
-
-        PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
-        nextPointAlarmManager.cancel(pi);
-
-        nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + retryInterval * 1000, pi);
-
-    }
 
     /**
      * Calls file helper to write a given location to a file.

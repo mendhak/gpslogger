@@ -179,22 +179,7 @@ public class Session extends Application
         Session.satellites = satellites;
     }
 
-           /**
-     * @return the retryTimeout
-     */
-    public static int getRetryTimeout()
-    {
-        return retryTimeout;
-    }
 
-    /**
-     * @param retryTimeout sets the retryTimeout
-     *
-     * */
-    public static void setRetryTimeout(int retryTimeout)
-    {
-        Session.retryTimeout = retryTimeout;
-    }
 
     /**
      * @return the notificationVisible
