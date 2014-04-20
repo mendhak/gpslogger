@@ -37,8 +37,7 @@ import java.util.TimeZone;
  *
  * @author Francisco Reynoso <franole @ gmail.com>
  */
-public class OpenGTSClient
-{
+public class OpenGTSClient {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSClient.class.getSimpleName());
 
@@ -52,8 +51,7 @@ public class OpenGTSClient
     private int sentLocationsCount = 0;
 
 
-    public OpenGTSClient(String server, Integer port, String path, IActionListener callback, Context applicationContext)
-    {
+    public OpenGTSClient(String server, Integer port, String path, IActionListener callback, Context applicationContext) {
         this.server = server;
         this.port = port;
         this.path = path;
@@ -61,8 +59,7 @@ public class OpenGTSClient
         this.applicationContext = applicationContext;
     }
 
-    public void sendHTTP(String id, Location location)
-    {
+    public void sendHTTP(String id, Location location) {
         sendHTTP(id, new Location[]{location});
     }
 
@@ -76,10 +73,8 @@ public class OpenGTSClient
      * @param locations locations
      */
 
-    public void sendHTTP(String id, Location[] locations)
-    {
-        try
-        {
+    public void sendHTTP(String id, Location[] locations) {
+        try {
             locationsCount = locations.length;
             StringBuilder url = new StringBuilder();
             url.append("http://");
@@ -87,8 +82,7 @@ public class OpenGTSClient
 
             httpClient = new AsyncHttpClient();
 
-            for (Location loc : locations)
-            {
+            for (Location loc : locations) {
                 RequestParams params = new RequestParams();
                 params.put("id", id);
                 params.put("code", "0xF020");
@@ -99,83 +93,68 @@ public class OpenGTSClient
                 tracer.debug("Sending URL " + url + " with params " + params.toString());
                 httpClient.get(applicationContext, url.toString(), params, new MyAsyncHttpResponseHandler(this));
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             tracer.error("OpenGTSClient.sendHTTP", e);
             OnFailure();
         }
     }
 
-    public void sendRAW(String id, Location location)
-    {
+    public void sendRAW(String id, Location location) {
         // TODO
     }
 
-    private void sendRAW(String id, Location[] locations)
-    {
+    private void sendRAW(String id, Location[] locations) {
         // TODO
     }
 
-    private String getURL()
-    {
+    private String getURL() {
         StringBuilder url = new StringBuilder();
         url.append(server);
-        if (port != null)
-        {
+        if (port != null) {
             url.append(":");
             url.append(port);
         }
-        if (path != null)
-        {
+        if (path != null) {
             url.append(path);
         }
         return url.toString();
     }
 
 
-    private class MyAsyncHttpResponseHandler extends AsyncHttpResponseHandler
-    {
+    private class MyAsyncHttpResponseHandler extends AsyncHttpResponseHandler {
         private OpenGTSClient callback;
 
-        public MyAsyncHttpResponseHandler(OpenGTSClient callback)
-        {
+        public MyAsyncHttpResponseHandler(OpenGTSClient callback) {
             super();
             this.callback = callback;
         }
 
         @Override
-        public void onSuccess(String response)
-        {
+        public void onSuccess(String response) {
             tracer.info("Response Success :" + response);
             callback.OnCompleteLocation();
         }
 
         @Override
-        public void onFailure(Throwable e, String response)
-        {
+        public void onFailure(Throwable e, String response) {
             tracer.error("OnCompleteLocation.MyAsyncHttpResponseHandler Failure with response :" + response, new Exception(e));
             callback.OnFailure();
         }
     }
 
-    public void OnCompleteLocation()
-    {
+    public void OnCompleteLocation() {
         sentLocationsCount += 1;
         tracer.debug("Sent locations count: " + sentLocationsCount + "/" + locationsCount);
-        if (locationsCount == sentLocationsCount)
-        {
+        if (locationsCount == sentLocationsCount) {
             OnComplete();
         }
     }
 
-    public void OnComplete()
-    {
+    public void OnComplete() {
         callback.OnComplete();
     }
 
-    public void OnFailure()
-    {
+    public void OnFailure() {
         httpClient.cancelRequests(applicationContext, true);
         callback.OnFailure();
     }
@@ -189,8 +168,7 @@ public class OpenGTSClient
      * @param loc location
      * @return GPRMC data
      */
-    public static String GPRMCEncode(Location loc)
-    {
+    public static String GPRMCEncode(Location loc) {
         DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.US);
         DecimalFormat f = new DecimalFormat("0.000000", dfs);
 
@@ -212,22 +190,19 @@ public class OpenGTSClient
         return gprmc;
     }
 
-    public static String NMEAGPRMCTime(Date dateToFormat)
-    {
+    public static String NMEAGPRMCTime(Date dateToFormat) {
         SimpleDateFormat sdf = new SimpleDateFormat("HHmmss.SSS");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         return sdf.format(dateToFormat);
     }
 
-    public static String NMEAGPRMCDate(Date dateToFormat)
-    {
+    public static String NMEAGPRMCDate(Date dateToFormat) {
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyy");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         return sdf.format(dateToFormat);
     }
 
-    public static String NMEAGPRMCCoord(double coord)
-    {
+    public static String NMEAGPRMCCoord(double coord) {
         // “DDDMM.MMMMM”
         int degrees = (int) coord;
         double minutes = (coord - degrees) * 60;
@@ -241,16 +216,13 @@ public class OpenGTSClient
     }
 
 
-    public static String NMEACheckSum(String msg)
-    {
+    public static String NMEACheckSum(String msg) {
         int chk = 0;
-        for (int i = 1; i < msg.length(); i++)
-        {
+        for (int i = 1; i < msg.length(); i++) {
             chk ^= msg.charAt(i);
         }
         String chk_s = Integer.toHexString(chk).toUpperCase();
-        while (chk_s.length() < 2)
-        {
+        while (chk_s.length() < 2) {
             chk_s = "0" + chk_s;
         }
         return chk_s;
@@ -262,8 +234,7 @@ public class OpenGTSClient
      * @param mps meters per second
      * @return knots
      */
-    public static double MetersPerSecondToKnots(double mps)
-    {
+    public static double MetersPerSecondToKnots(double mps) {
         // Google "meters per second to knots"
         return mps * 1.94384449;
     }

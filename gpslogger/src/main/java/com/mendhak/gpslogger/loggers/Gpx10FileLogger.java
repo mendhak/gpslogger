@@ -22,15 +22,19 @@ import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.RandomAccessFile;
 import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 
-public class Gpx10FileLogger implements IFileLogger
-{
+public class Gpx10FileLogger implements IFileLogger {
     protected final static Object lock = new Object();
 
     private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
@@ -41,19 +45,16 @@ public class Gpx10FileLogger implements IFileLogger
     protected final String name = "GPX";
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Gpx10FileLogger.class.getSimpleName());
 
-    Gpx10FileLogger(File gpxFile, boolean addNewTrackSegment, int satelliteCount)
-    {
+    Gpx10FileLogger(File gpxFile, boolean addNewTrackSegment, int satelliteCount) {
         this.gpxFile = gpxFile;
         this.addNewTrackSegment = addNewTrackSegment;
         this.satelliteCount = satelliteCount;
     }
 
 
-    public void Write(Location loc) throws Exception
-    {
+    public void Write(Location loc) throws Exception {
         long time = loc.getTime();
-        if(time <= 0)
-        {
+        if (time <= 0) {
             time = System.currentTimeMillis();
         }
         String dateTimeString = Utilities.GetIsoDateTime(new Date(time));
@@ -63,12 +64,10 @@ public class Gpx10FileLogger implements IFileLogger
         EXECUTOR.execute(writeHandler);
     }
 
-    public void Annotate(String description, Location loc) throws Exception
-    {
+    public void Annotate(String description, Location loc) throws Exception {
 
         long time = loc.getTime();
-        if(time <= 0)
-        {
+        if (time <= 0) {
             time = System.currentTimeMillis();
         }
         String dateTimeString = Utilities.GetIsoDateTime(new Date(time));
@@ -80,24 +79,21 @@ public class Gpx10FileLogger implements IFileLogger
     }
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
 
 }
 
-class Gpx10AnnotateHandler implements Runnable
-{
+class Gpx10AnnotateHandler implements Runnable {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Gpx10AnnotateHandler.class.getSimpleName());
     String description;
     File gpxFile;
     Location loc;
     String dateTimeString;
 
-    public Gpx10AnnotateHandler(String description, File gpxFile, Location loc, String dateTimeString)
-    {
+    public Gpx10AnnotateHandler(String description, File gpxFile, Location loc, String dateTimeString) {
         this.description = description;
         this.gpxFile = gpxFile;
         this.loc = loc;
@@ -105,18 +101,14 @@ class Gpx10AnnotateHandler implements Runnable
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
 
-        synchronized (Gpx10FileLogger.lock)
-        {
-            if (!gpxFile.exists())
-            {
+        synchronized (Gpx10FileLogger.lock) {
+            if (!gpxFile.exists()) {
                 return;
             }
 
-            if (!gpxFile.exists())
-            {
+            if (!gpxFile.exists()) {
                 return;
             }
 
@@ -124,8 +116,7 @@ class Gpx10AnnotateHandler implements Runnable
 
             String wpt = GetWaypointXml(loc, dateTimeString, description);
 
-            try
-            {
+            try {
 
                 //Write to a temp file, delete original file, move temp to original
                 File gpxTempFile = new File(gpxFile.getAbsolutePath() + ".tmp");
@@ -136,15 +127,13 @@ class Gpx10AnnotateHandler implements Runnable
                 int written = 0;
                 int readSize;
                 byte[] buffer = new byte[startPosition];
-                while ((readSize = bis.read(buffer)) > 0)
-                {
+                while ((readSize = bis.read(buffer)) > 0) {
                     bos.write(buffer, 0, readSize);
                     written += readSize;
 
                     System.out.println(written);
 
-                    if (written == startPosition)
-                    {
+                    if (written == startPosition) {
                         bos.write(wpt.getBytes());
                         buffer = new byte[20480];
                     }
@@ -158,17 +147,14 @@ class Gpx10AnnotateHandler implements Runnable
                 gpxTempFile.renameTo(gpxFile);
 
                 tracer.debug("Finished annotation to GPX10 File");
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 tracer.error("Gpx10FileLogger.Annotate", e);
             }
 
         }
     }
 
-    String GetWaypointXml(Location loc, String dateTimeString, String description)
-    {
+    String GetWaypointXml(Location loc, String dateTimeString, String description) {
 
         StringBuilder waypoint = new StringBuilder();
 
@@ -178,8 +164,7 @@ class Gpx10AnnotateHandler implements Runnable
                 .append(String.valueOf(loc.getLongitude()))
                 .append("\">");
 
-        if (loc.hasAltitude())
-        {
+        if (loc.hasAltitude()) {
             waypoint.append("<ele>").append(String.valueOf(loc.getAltitude())).append("</ele>");
         }
 
@@ -194,8 +179,7 @@ class Gpx10AnnotateHandler implements Runnable
 }
 
 
-class Gpx10WriteHandler implements Runnable
-{
+class Gpx10WriteHandler implements Runnable {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Gpx10WriteHandler.class.getSimpleName());
     String dateTimeString;
     Location loc;
@@ -203,8 +187,7 @@ class Gpx10WriteHandler implements Runnable
     private boolean addNewTrackSegment;
     private int satelliteCount;
 
-    public Gpx10WriteHandler(String dateTimeString, File gpxFile, Location loc, boolean addNewTrackSegment, int satelliteCount)
-    {
+    public Gpx10WriteHandler(String dateTimeString, File gpxFile, Location loc, boolean addNewTrackSegment, int satelliteCount) {
         this.dateTimeString = dateTimeString;
         this.addNewTrackSegment = addNewTrackSegment;
         this.gpxFile = gpxFile;
@@ -214,15 +197,11 @@ class Gpx10WriteHandler implements Runnable
 
 
     @Override
-    public void run()
-    {
-        synchronized (Gpx10FileLogger.lock)
-        {
+    public void run() {
+        synchronized (Gpx10FileLogger.lock) {
 
-            try
-            {
-                if (!gpxFile.exists())
-                {
+            try {
+                if (!gpxFile.exists()) {
                     gpxFile.createNewFile();
 
                     FileOutputStream initialWriter = new FileOutputStream(gpxFile, true);
@@ -254,9 +233,7 @@ class Gpx10WriteHandler implements Runnable
                 raf.close();
                 tracer.debug("Finished writing to GPX10 file");
 
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 tracer.error("Gpx10FileLogger.Write", e);
             }
 
@@ -264,13 +241,11 @@ class Gpx10WriteHandler implements Runnable
 
     }
 
-    String GetTrackPointXml(Location loc, String dateTimeString)
-    {
+    String GetTrackPointXml(Location loc, String dateTimeString) {
 
         StringBuilder track = new StringBuilder();
 
-        if (addNewTrackSegment)
-        {
+        if (addNewTrackSegment) {
             track.append("<trkseg>");
         }
 
@@ -280,31 +255,27 @@ class Gpx10WriteHandler implements Runnable
                 .append(String.valueOf(loc.getLongitude()))
                 .append("\">");
 
-        if (loc.hasAltitude())
-        {
+        if (loc.hasAltitude()) {
             track.append("<ele>").append(String.valueOf(loc.getAltitude())).append("</ele>");
         }
 
         track.append("<time>").append(dateTimeString).append("</time>");
 
-        if (loc.hasBearing())
-        {
+        if (loc.hasBearing()) {
             track.append("<course>").append(String.valueOf(loc.getBearing())).append("</course>");
         }
 
-        if (loc.hasSpeed())
-        {
+        if (loc.hasSpeed()) {
             track.append("<speed>").append(String.valueOf(loc.getSpeed())).append("</speed>");
         }
 
         track.append("<src>").append(loc.getProvider()).append("</src>");
 
-        if (satelliteCount > 0)
-        {
+        if (satelliteCount > 0) {
             track.append("<sat>").append(String.valueOf(satelliteCount)).append("</sat>");
         }
 
-        if(loc.getExtras()!=null){
+        if (loc.getExtras() != null) {
             String hdop = loc.getExtras().getString("HDOP");
             String pdop = loc.getExtras().getString("PDOP");
             String vdop = loc.getExtras().getString("VDOP");
@@ -312,32 +283,30 @@ class Gpx10WriteHandler implements Runnable
             String ageofdgpsdata = loc.getExtras().getString("AGEOFDGPSDATA");
             String dgpsid = loc.getExtras().getString("DGPSID");
 
-            if(!Utilities.IsNullOrEmpty(hdop)){
+            if (!Utilities.IsNullOrEmpty(hdop)) {
                 track.append("<hdop>").append(hdop).append("</hdop>");
             }
 
-            if(!Utilities.IsNullOrEmpty(vdop)){
+            if (!Utilities.IsNullOrEmpty(vdop)) {
                 track.append("<vdop>").append(vdop).append("</vdop>");
             }
 
-            if(!Utilities.IsNullOrEmpty(pdop)){
+            if (!Utilities.IsNullOrEmpty(pdop)) {
                 track.append("<pdop>").append(pdop).append("</pdop>");
             }
 
-            if(!Utilities.IsNullOrEmpty(geoidheight)){
+            if (!Utilities.IsNullOrEmpty(geoidheight)) {
                 track.append("<geoidheight>").append(geoidheight).append("</geoidheight>");
             }
 
-            if(!Utilities.IsNullOrEmpty(ageofdgpsdata)){
+            if (!Utilities.IsNullOrEmpty(ageofdgpsdata)) {
                 track.append("<ageofdgpsdata>").append(ageofdgpsdata).append("</ageofdgpsdata>");
             }
 
-            if(!Utilities.IsNullOrEmpty(dgpsid)){
+            if (!Utilities.IsNullOrEmpty(dgpsid)) {
                 track.append("<dgpsid>").append(dgpsid).append("</dgpsid>");
             }
         }
-
-
 
 
         track.append("</trkpt>\n");

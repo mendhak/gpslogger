@@ -23,12 +23,10 @@ import android.os.Bundle;
 import com.mendhak.gpslogger.GpsLoggingService;
 import org.slf4j.LoggerFactory;
 
-public class ShortcutStart extends Activity
-{
+public class ShortcutStart extends Activity {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(ShortcutStart.class.getSimpleName());
 
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         tracer.info("Shortcut - start logging");

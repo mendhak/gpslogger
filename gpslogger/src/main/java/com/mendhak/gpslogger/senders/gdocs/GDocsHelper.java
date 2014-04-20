@@ -40,8 +40,7 @@ import java.net.URLEncoder;
 import java.util.List;
 
 
-public class GDocsHelper implements IActionListener, IFileSender
-{
+public class GDocsHelper implements IActionListener, IFileSender {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GDocsHelper.class.getSimpleName());
     Context ctx;
@@ -57,23 +56,20 @@ public class GDocsHelper implements IActionListener, IFileSender
    ./adb -e shell 'sqlite3 /data/system/accounts.db "delete from grants;"'
      */
 
-    public GDocsHelper(Context applicationContext, IActionListener callback)
-    {
+    public GDocsHelper(Context applicationContext, IActionListener callback) {
 
         this.ctx = applicationContext;
         this.callback = callback;
     }
 
-    public static String GetOauth2Scope()
-    {
+    public static String GetOauth2Scope() {
         return "oauth2:https://www.googleapis.com/auth/drive.file";
     }
 
     /**
      * Gets the stored authToken, which may be expired
      */
-    public static String GetAuthToken(Context applicationContext)
-    {
+    public static String GetAuthToken(Context applicationContext) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
         return prefs.getString("GDRIVE_AUTH_TOKEN", "");
     }
@@ -81,14 +77,12 @@ public class GDocsHelper implements IActionListener, IFileSender
     /**
      * Gets the stored account name
      */
-    public static String GetAccountName(Context applicationContext)
-    {
+    public static String GetAccountName(Context applicationContext) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
         return prefs.getString("GDRIVE_ACCOUNT_NAME", "");
     }
 
-    public static void SetAccountName(Context applicationContext, String accountName)
-    {
+    public static void SetAccountName(Context applicationContext, String accountName) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
         SharedPreferences.Editor editor = prefs.edit();
 
@@ -99,19 +93,15 @@ public class GDocsHelper implements IActionListener, IFileSender
     /**
      * Saves the authToken and account name into shared preferences
      */
-    public static void SaveAuthToken(Context applicationContext, String authToken)
-    {
-        try
-        {
+    public static void SaveAuthToken(Context applicationContext, String authToken) {
+        try {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
             SharedPreferences.Editor editor = prefs.edit();
 
             tracer.debug("Saving GDocs authToken: " + authToken);
             editor.putString("GDRIVE_AUTH_TOKEN", authToken);
             editor.commit();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
 
             tracer.error("GDocsHelper.SaveAuthToken", e);
         }
@@ -121,8 +111,7 @@ public class GDocsHelper implements IActionListener, IFileSender
     /**
      * Removes the authToken and account name from storage
      */
-    public static void ClearAuthToken(Context applicationContext)
-    {
+    public static void ClearAuthToken(Context applicationContext) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
         SharedPreferences.Editor editor = prefs.edit();
 
@@ -138,8 +127,7 @@ public class GDocsHelper implements IActionListener, IFileSender
      * @param applicationContext
      * @return
      */
-    public static boolean IsLinked(Context applicationContext)
-    {
+    public static boolean IsLinked(Context applicationContext) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
         String gdocsAuthToken = prefs.getString("GDRIVE_AUTH_TOKEN", "");
         String gdocsAccount = prefs.getString("GDRIVE_ACCOUNT_NAME", "");
@@ -148,44 +136,34 @@ public class GDocsHelper implements IActionListener, IFileSender
 
 
     @Override
-    public void UploadFile(List<File> files)
-    {
+    public void UploadFile(List<File> files) {
         File zipFile = null;
 
 
-        for (File f : files)
-        {
-            if (f.getName().contains(".zip"))
-            {
+        for (File f : files) {
+            if (f.getName().contains(".zip")) {
                 zipFile = f;
                 break;
             }
         }
 
-        if (zipFile != null)
-        {
+        if (zipFile != null) {
             UploadFile(zipFile.getName());
-        }
-        else
-        {
-            for (File f : files)
-            {
+        } else {
+            for (File f : files) {
                 UploadFile(f.getName());
             }
         }
     }
 
-    public void UploadFile(final String fileName)
-    {
+    public void UploadFile(final String fileName) {
 
-        if (!IsLinked(ctx))
-        {
+        if (!IsLinked(ctx)) {
             callback.OnFailure();
             return;
         }
 
-        try
-        {
+        try {
 
             File gpsDir = new File(AppSettings.getGpsLoggerFolder());
             File gpxFile = new File(gpsDir, fileName);
@@ -196,24 +174,20 @@ public class GDocsHelper implements IActionListener, IFileSender
             t.start();
 
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             callback.OnFailure();
             tracer.error("GDocsHelper.UploadFile", e);
         }
     }
 
-    private class GDocsUploadHandler implements Runnable
-    {
+    private class GDocsUploadHandler implements Runnable {
 
         String fileName;
         InputStream inputStream;
         IActionListener callback;
 
         GDocsUploadHandler(InputStream inputStream, String fileName,
-                           IActionListener callback)
-        {
+                           IActionListener callback) {
 
             this.inputStream = inputStream;
             this.fileName = fileName;
@@ -221,10 +195,8 @@ public class GDocsHelper implements IActionListener, IFileSender
         }
 
         @Override
-        public void run()
-        {
-            try
-            {
+        public void run() {
+            try {
 
                 String token = GoogleAuthUtil.getTokenWithNotification(ctx, GetAccountName(ctx), GetOauth2Scope(), new Bundle());
                 GDocsHelper.SaveAuthToken(ctx, token);
@@ -232,13 +204,11 @@ public class GDocsHelper implements IActionListener, IFileSender
 
                 String gpsLoggerFolderId = GetFileIdFromFileName(token, "GPSLogger For Android");
 
-                if(Utilities.IsNullOrEmpty(gpsLoggerFolderId))
-                {
+                if (Utilities.IsNullOrEmpty(gpsLoggerFolderId)) {
                     //Couldn't find folder, must create it
                     gpsLoggerFolderId = CreateEmptyFile(token, "GPSLogger For Android", "application/vnd.google-apps.folder", "root");
 
-                    if(Utilities.IsNullOrEmpty(gpsLoggerFolderId))
-                    {
+                    if (Utilities.IsNullOrEmpty(gpsLoggerFolderId)) {
                         callback.OnFailure();
                         return;
                     }
@@ -246,31 +216,26 @@ public class GDocsHelper implements IActionListener, IFileSender
 
 
                 //Now search for the file
-                String gpxFileId = GetFileIdFromFileName(token,fileName);
+                String gpxFileId = GetFileIdFromFileName(token, fileName);
 
-                if(Utilities.IsNullOrEmpty(gpxFileId))
-                {
+                if (Utilities.IsNullOrEmpty(gpxFileId)) {
                     //Create empty file first
                     gpxFileId = CreateEmptyFile(token, fileName, GetMimeTypeFromFileName(fileName), gpsLoggerFolderId);
 
-                    if(Utilities.IsNullOrEmpty(gpxFileId))
-                    {
+                    if (Utilities.IsNullOrEmpty(gpxFileId)) {
                         callback.OnFailure();
                         return;
                     }
                 }
 
-                if(!Utilities.IsNullOrEmpty(gpxFileId))
-                {
+                if (!Utilities.IsNullOrEmpty(gpxFileId)) {
                     //Set file's contents
                     UpdateFileContents(token, gpxFileId, Utilities.GetByteArrayFromInputStream(inputStream), fileName);
                 }
 
                 callback.OnComplete();
 
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 tracer.error("GDocsUploadHandler", e);
                 callback.OnFailure();
             }
@@ -279,19 +244,16 @@ public class GDocsHelper implements IActionListener, IFileSender
         }
     }
 
-    private String UpdateFileContents(String authToken, String gpxFileId, byte[] fileContents, String fileName)
-    {
+    private String UpdateFileContents(String authToken, String gpxFileId, byte[] fileContents, String fileName) {
         HttpURLConnection conn = null;
         String fileId = null;
 
-        String fileUpdateUrl = "https://www.googleapis.com/upload/drive/v2/files/"+ gpxFileId + "?uploadType=media";
+        String fileUpdateUrl = "https://www.googleapis.com/upload/drive/v2/files/" + gpxFileId + "?uploadType=media";
 
-        try
-        {
+        try {
 
 
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO)
-            {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
                 //Due to a pre-froyo bug
                 //http://android-developers.blogspot.com/2011/09/androids-http-clients.html
                 System.setProperty("http.keepAlive", "false");
@@ -322,15 +284,10 @@ public class GDocsHelper implements IActionListener, IFileSender
             fileId = fileMetadataJson.getString("id");
             tracer.debug("File updated : " + fileId);
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-        }
-        finally
-        {
-            if (conn != null)
-            {
+        } finally {
+            if (conn != null) {
                 conn.disconnect();
             }
 
@@ -340,8 +297,7 @@ public class GDocsHelper implements IActionListener, IFileSender
 
     }
 
-    private String CreateEmptyFile(String authToken, String fileName, String mimeType, String parentFolderId)
-    {
+    private String CreateEmptyFile(String authToken, String fileName, String mimeType, String parentFolderId) {
 
         String fileId = null;
         HttpURLConnection conn = null;
@@ -358,11 +314,9 @@ public class GDocsHelper implements IActionListener, IFileSender
                 "             ]\n" +
                 "            }";
 
-        try
-        {
+        try {
 
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO)
-            {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
                 //Due to a pre-froyo bug
                 //http://android-developers.blogspot.com/2011/09/androids-http-clients.html
                 System.setProperty("http.keepAlive", "false");
@@ -394,17 +348,12 @@ public class GDocsHelper implements IActionListener, IFileSender
             fileId = fileMetadataJson.getString("id");
             tracer.debug("File created with ID " + fileId + " of type " + mimeType);
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
 
             System.out.println(e.getMessage());
             System.out.println(e.getMessage());
-        }
-        finally
-        {
-            if (conn != null)
-            {
+        } finally {
+            if (conn != null) {
                 conn.disconnect();
             }
 
@@ -414,21 +363,18 @@ public class GDocsHelper implements IActionListener, IFileSender
     }
 
 
-    private String GetFileIdFromFileName(String authToken, String fileName)
-    {
+    private String GetFileIdFromFileName(String authToken, String fileName) {
 
         HttpURLConnection conn = null;
         String fileId = "";
 
-        try
-        {
+        try {
 
             fileName = URLEncoder.encode(fileName, "UTF-8");
             String searchUrl = "https://www.googleapis.com/drive/v2/files?q=title%20%3D%20%27" + fileName + "%27%20and%20trashed%20%3D%20false";
 
 
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO)
-            {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
                 //Due to a pre-froyo bug
                 //http://android-developers.blogspot.com/2011/09/androids-http-clients.html
                 System.setProperty("http.keepAlive", "false");
@@ -445,21 +391,15 @@ public class GDocsHelper implements IActionListener, IFileSender
 
 
             JSONObject fileMetadataJson = new JSONObject(fileMetadata);
-            if(fileMetadataJson.getJSONArray("items") != null && fileMetadataJson.getJSONArray("items").length() > 0)
-            {
+            if (fileMetadataJson.getJSONArray("items") != null && fileMetadataJson.getJSONArray("items").length() > 0) {
                 fileId = fileMetadataJson.getJSONArray("items").getJSONObject(0).get("id").toString();
                 tracer.debug("Found file with ID " + fileId);
             }
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             tracer.error("SearchForGPSLoggerFile", e);
-        }
-        finally
-        {
-            if (conn != null)
-            {
+        } finally {
+            if (conn != null) {
                 conn.disconnect();
             }
         }
@@ -467,24 +407,24 @@ public class GDocsHelper implements IActionListener, IFileSender
         return fileId;
     }
 
-    private String GetMimeTypeFromFileName(String fileName){
-        if(fileName.endsWith("kml")){
+    private String GetMimeTypeFromFileName(String fileName) {
+        if (fileName.endsWith("kml")) {
             return "application/vnd.google-earth.kml+xml";
         }
 
-        if(fileName.endsWith("gpx")){
+        if (fileName.endsWith("gpx")) {
             return "application/gpx+xml";
         }
 
-        if(fileName.endsWith("zip")){
+        if (fileName.endsWith("zip")) {
             return "application/zip";
         }
 
-        if(fileName.endsWith("xml")){
+        if (fileName.endsWith("xml")) {
             return "application/xml";
         }
 
-        if(fileName.endsWith("nmea")){
+        if (fileName.endsWith("nmea")) {
             return "application/x-nmea";
         }
 
@@ -492,23 +432,18 @@ public class GDocsHelper implements IActionListener, IFileSender
     }
 
 
-
-
     @Override
-    public boolean accept(File dir, String name)
-    {
+    public boolean accept(File dir, String name) {
         return true;
     }
 
     @Override
-    public void OnComplete()
-    {
+    public void OnComplete() {
         callback.OnComplete();
     }
 
     @Override
-    public void OnFailure()
-    {
+    public void OnFailure() {
         callback.OnFailure();
     }
 }

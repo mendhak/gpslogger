@@ -22,14 +22,18 @@ import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.RandomAccessFile;
 import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class Kml22FileLogger implements IFileLogger
-{
+public class Kml22FileLogger implements IFileLogger {
     protected final static Object lock = new Object();
     private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
             new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
@@ -38,41 +42,35 @@ public class Kml22FileLogger implements IFileLogger
     protected final String name = "KML";
 
 
-    public Kml22FileLogger(File kmlFile, boolean addNewTrackSegment)
-    {
+    public Kml22FileLogger(File kmlFile, boolean addNewTrackSegment) {
         this.kmlFile = kmlFile;
         this.addNewTrackSegment = addNewTrackSegment;
     }
 
 
-    public void Write(Location loc) throws Exception
-    {
+    public void Write(Location loc) throws Exception {
         Kml22WriteHandler writeHandler = new Kml22WriteHandler(loc, kmlFile, addNewTrackSegment);
         EXECUTOR.execute(writeHandler);
     }
 
-    public void Annotate(String description, Location loc) throws Exception
-    {
+    public void Annotate(String description, Location loc) throws Exception {
         Kml22AnnotateHandler annotateHandler = new Kml22AnnotateHandler(kmlFile, description, loc);
         EXECUTOR.execute(annotateHandler);
     }
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 }
 
-class Kml22AnnotateHandler implements Runnable
-{
+class Kml22AnnotateHandler implements Runnable {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Kml22AnnotateHandler.class.getSimpleName());
     File kmlFile;
     String description;
     Location loc;
 
-    public Kml22AnnotateHandler(File kmlFile, String description, Location loc)
-    {
+    public Kml22AnnotateHandler(File kmlFile, String description, Location loc) {
         this.kmlFile = kmlFile;
         this.description = description;
         this.loc = loc;
@@ -80,17 +78,13 @@ class Kml22AnnotateHandler implements Runnable
 
 
     @Override
-    public void run()
-    {
-        if (!kmlFile.exists())
-        {
+    public void run() {
+        if (!kmlFile.exists()) {
             return;
         }
 
-        try
-        {
-            synchronized (Kml22FileLogger.lock)
-            {
+        try {
+            synchronized (Kml22FileLogger.lock) {
 
                 String descriptionNode = GetPlacemarkXml(description, loc);
 
@@ -101,10 +95,8 @@ class Kml22AnnotateHandler implements Runnable
                 String currentLine;
                 int lineNumber = 1;
 
-                while ((currentLine = bf.readLine()) != null)
-                {
-                    if (lineNumber > 1)
-                    {
+                while ((currentLine = bf.readLine()) != null) {
+                    if (lineNumber > 1) {
                         restOfFile.append(currentLine);
                         restOfFile.append("\n");
                     }
@@ -121,9 +113,7 @@ class Kml22AnnotateHandler implements Runnable
                 raf.close();
 
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             tracer.error("Kml22FileLogger.Annotate", e);
         }
     }
@@ -144,8 +134,7 @@ class Kml22AnnotateHandler implements Runnable
     }
 }
 
-class Kml22WriteHandler implements Runnable
-{
+class Kml22WriteHandler implements Runnable {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Kml22WriteHandler.class.getSimpleName());
     boolean addNewTrackSegment;
@@ -153,8 +142,7 @@ class Kml22WriteHandler implements Runnable
     Location loc;
 
 
-    public Kml22WriteHandler( Location loc, File kmlFile, boolean addNewTrackSegment)
-    {
+    public Kml22WriteHandler(Location loc, File kmlFile, boolean addNewTrackSegment) {
 
         this.loc = loc;
         this.kmlFile = kmlFile;
@@ -163,10 +151,8 @@ class Kml22WriteHandler implements Runnable
 
 
     @Override
-    public void run()
-    {
-        try
-        {
+    public void run() {
+        try {
 
             RandomAccessFile raf;
 
@@ -174,11 +160,9 @@ class Kml22WriteHandler implements Runnable
             String placemarkHead = "<Placemark>\n<gx:Track>\n";
             String placemarkTail = "</gx:Track>\n</Placemark></Document></kml>\n";
 
-            synchronized (Kml22FileLogger.lock)
-            {
+            synchronized (Kml22FileLogger.lock) {
 
-                if (!kmlFile.exists())
-                {
+                if (!kmlFile.exists()) {
                     kmlFile.createNewFile();
 
                     FileOutputStream initialWriter = new FileOutputStream(kmlFile, true);
@@ -203,8 +187,7 @@ class Kml22WriteHandler implements Runnable
                 }
 
 
-                if (addNewTrackSegment)
-                {
+                if (addNewTrackSegment) {
                     raf = new RandomAccessFile(kmlFile, "rw");
                     raf.seek(kmlFile.length() - 18);
                     raf.write((placemarkHead + placemarkTail).getBytes());
@@ -231,9 +214,7 @@ class Kml22WriteHandler implements Runnable
                 tracer.debug("Finished writing to KML22 File");
             }
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             tracer.error("Kml22FileLogger.Write", e);
         }
     }

@@ -5,7 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 import com.mendhak.gpslogger.R;
 import org.slf4j.LoggerFactory;
 
@@ -17,17 +21,16 @@ public class CustomUrlLoggerActivity extends Activity implements View.OnClickLis
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(CustomUrlLoggerActivity.class.getSimpleName());
 
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         tracer.debug("CustomUrlLogger Settings Screen");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customurl);
 
 
-        EditText urlText = (EditText)findViewById(R.id.customUrlText);
-        CheckBox urlEnabled = (CheckBox)findViewById(R.id.customUrlEnabled);
+        EditText urlText = (EditText) findViewById(R.id.customUrlText);
+        CheckBox urlEnabled = (CheckBox) findViewById(R.id.customUrlEnabled);
 
-        Button btnSave = (Button)findViewById(R.id.customurl_btnSave);
+        Button btnSave = (Button) findViewById(R.id.customurl_btnSave);
         btnSave.setOnClickListener(this);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -37,12 +40,11 @@ public class CustomUrlLoggerActivity extends Activity implements View.OnClickLis
 
 
         String customUrl = prefs.getString("log_customurl_url", "");
-        if(customUrl.length() > 0)
-        {
+        if (customUrl.length() > 0) {
             urlText.setText(customUrl);
         }
 
-        TextView legendView = (TextView)findViewById(R.id.textViewLegend);
+        TextView legendView = (TextView) findViewById(R.id.textViewLegend);
 
         String legend = MessageFormat.format("{0} %LAT\n{1} %LON\n{2} %DESC\n{3} %SAT\n{4} %ALT\n{5} %SPD\n{6} %ACC\n{7} %DIR\n{8} %PROV\n{9} %TIME\n{10} %BATT\n{11} %AID\n{12} %SER",
                 getString(R.string.txt_latitude), getString(R.string.txt_longitude), getString(R.string.txt_annotation),
@@ -54,17 +56,15 @@ public class CustomUrlLoggerActivity extends Activity implements View.OnClickLis
     }
 
 
-
-
     @Override
     public void onClick(View view) {
 
         tracer.debug("Saving values");
-        EditText urlText = (EditText)findViewById(R.id.customUrlText);
-        CheckBox urlEnabled = (CheckBox)findViewById(R.id.customUrlEnabled);
+        EditText urlText = (EditText) findViewById(R.id.customUrlText);
+        CheckBox urlEnabled = (CheckBox) findViewById(R.id.customUrlEnabled);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor   = prefs.edit();
+        SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("log_customurl_enabled", urlEnabled.isChecked());
         editor.putString("log_customurl_url", urlText.getText().toString());
         editor.commit();

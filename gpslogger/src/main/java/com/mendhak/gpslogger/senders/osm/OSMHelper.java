@@ -42,22 +42,19 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.util.List;
 
-public class OSMHelper implements IActionListener, IFileSender
-{
+public class OSMHelper implements IActionListener, IFileSender {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OSMHelper.class.getSimpleName());
     IActionListener callback;
     Context ctx;
 
-    public OSMHelper(Context ctx, IActionListener callback)
-    {
+    public OSMHelper(Context ctx, IActionListener callback) {
 
         this.ctx = ctx;
         this.callback = callback;
     }
 
-    public static OAuthProvider GetOSMAuthProvider(Context ctx)
-    {
+    public static OAuthProvider GetOSMAuthProvider(Context ctx) {
         return new CommonsHttpOAuthProvider(
                 ctx.getString(R.string.osm_requesttoken_url),
                 ctx.getString(R.string.osm_accesstoken_url),
@@ -65,8 +62,7 @@ public class OSMHelper implements IActionListener, IFileSender
 
     }
 
-    public static boolean IsOsmAuthorized(Context ctx)
-    {
+    public static boolean IsOsmAuthorized(Context ctx) {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(ctx);
         String oAuthAccessToken = prefs.getString("osm_accesstoken", "");
@@ -74,8 +70,7 @@ public class OSMHelper implements IActionListener, IFileSender
         return (oAuthAccessToken != null && oAuthAccessToken.length() > 0);
     }
 
-    public static Intent GetOsmSettingsIntent(Context ctx)
-    {
+    public static Intent GetOsmSettingsIntent(Context ctx) {
         Intent intentOsm;
 
         intentOsm = new Intent(ctx.getPackageName() + ".OSM_AUTHORIZE");
@@ -85,13 +80,11 @@ public class OSMHelper implements IActionListener, IFileSender
     }
 
 
-    public static OAuthConsumer GetOSMAuthConsumer(Context ctx)
-    {
+    public static OAuthConsumer GetOSMAuthConsumer(Context ctx) {
 
         OAuthConsumer consumer = null;
 
-        try
-        {
+        try {
             int osmConsumerKey = ctx.getResources().getIdentifier(
                     "osm_consumerkey", "string", ctx.getPackageName());
             int osmConsumerSecret = ctx.getResources().getIdentifier(
@@ -108,40 +101,32 @@ public class OSMHelper implements IActionListener, IFileSender
 
             if (osmAccessToken != null && osmAccessToken.length() > 0
                     && osmAccessTokenSecret != null
-                    && osmAccessTokenSecret.length() > 0)
-            {
+                    && osmAccessTokenSecret.length() > 0) {
                 consumer.setTokenWithSecret(osmAccessToken,
                         osmAccessTokenSecret);
             }
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             //Swallow the exception
         }
 
         return consumer;
     }
 
-    public void OnComplete()
-    {
+    public void OnComplete() {
         callback.OnComplete();
     }
 
-    public void OnFailure()
-    {
+    public void OnFailure() {
         callback.OnFailure();
     }
 
     @Override
-    public void UploadFile(List<File> files)
-    {
+    public void UploadFile(List<File> files) {
         //Upload only GPX
 
-        for (File f : files)
-        {
-            if (f.getName().contains(".gpx"))
-            {
+        for (File f : files) {
+            if (f.getName().contains(".gpx")) {
                 UploadFile(f.getName());
             }
 
@@ -150,8 +135,7 @@ public class OSMHelper implements IActionListener, IFileSender
     }
 
 
-    public void UploadFile(String fileName)
-    {
+    public void UploadFile(String fileName) {
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
         File chosenFile = new File(gpxFolder, fileName);
         OAuthConsumer consumer = GetOSMAuthConsumer(ctx);
@@ -167,14 +151,12 @@ public class OSMHelper implements IActionListener, IFileSender
     }
 
     @Override
-    public boolean accept(File dir, String name)
-    {
+    public boolean accept(File dir, String name) {
         return name.toLowerCase().contains(".gpx");
     }
 
 
-    private class OsmUploadHandler implements Runnable
-    {
+    private class OsmUploadHandler implements Runnable {
         OAuthConsumer consumer;
         String gpsTraceUrl;
         File chosenFile;
@@ -183,8 +165,7 @@ public class OSMHelper implements IActionListener, IFileSender
         String visibility;
         IActionListener helper;
 
-        public OsmUploadHandler(IActionListener helper, OAuthConsumer consumer, String gpsTraceUrl, File chosenFile, String description, String tags, String visibility)
-        {
+        public OsmUploadHandler(IActionListener helper, OAuthConsumer consumer, String gpsTraceUrl, File chosenFile, String description, String tags, String visibility) {
             this.consumer = consumer;
             this.gpsTraceUrl = gpsTraceUrl;
             this.chosenFile = chosenFile;
@@ -194,10 +175,8 @@ public class OSMHelper implements IActionListener, IFileSender
             this.helper = helper;
         }
 
-        public void run()
-        {
-            try
-            {
+        public void run() {
+            try {
                 HttpPost request = new HttpPost(gpsTraceUrl);
 
                 consumer.sign(request);
@@ -207,8 +186,7 @@ public class OSMHelper implements IActionListener, IFileSender
                 FileBody gpxBody = new FileBody(chosenFile);
 
                 entity.addPart("file", gpxBody);
-                if (description == null || description.length() <= 0)
-                {
+                if (description == null || description.length() <= 0) {
                     description = "GPSLogger for Android";
                 }
 
@@ -224,9 +202,7 @@ public class OSMHelper implements IActionListener, IFileSender
                 tracer.debug("OSM Upload - " + String.valueOf(statusCode));
                 helper.OnComplete();
 
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 helper.OnFailure();
                 tracer.error("OsmUploadHelper.run", e);
             }

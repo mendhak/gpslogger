@@ -33,14 +33,12 @@ import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
-public class AutoFtpActivity extends PreferenceActivity implements IActionListener, Preference.OnPreferenceClickListener
-{
+public class AutoFtpActivity extends PreferenceActivity implements IActionListener, Preference.OnPreferenceClickListener {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoFtpActivity.class.getSimpleName());
 
     private final Handler handler = new Handler();
 
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -66,8 +64,7 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
     }
 
 
-    private boolean IsFormValid()
-    {
+    private boolean IsFormValid() {
 
         CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoftp_enabled");
         EditTextPreference txtServer = (EditTextPreference) findPreference("autoftp_server");
@@ -75,101 +72,83 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
         EditTextPreference txtPort = (EditTextPreference) findPreference("autoftp_port");
 
 
-
         return !chkEnabled.isChecked() || txtServer.getText() != null
                 && txtServer.getText().length() > 0 && txtUserName.getText() != null
                 && txtUserName.getText().length() > 0 && txtPort.getText() != null
-                && txtPort.getText().length() > 0 ;
+                && txtPort.getText().length() > 0;
 
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        if (keyCode == KeyEvent.KEYCODE_BACK)
-        {
-            if (!IsFormValid())
-            {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (!IsFormValid()) {
                 CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoftp_enabled");
                 chkEnabled.setChecked(false);
                 Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
                         getString(R.string.autoemail_invalid_form_message),
                         this);
                 return false;
-            }
-            else
-            {
+            } else {
                 return super.onKeyDown(keyCode, event);
             }
-        }
-        else
-        {
+        } else {
             return super.onKeyDown(keyCode, event);
         }
     }
 
-    private final Runnable successfullySent = new Runnable()
-    {
-        public void run()
-        {
+    private final Runnable successfullySent = new Runnable() {
+        public void run() {
             SuccessfulSending();
         }
     };
 
-    private final Runnable failedSend = new Runnable()
-    {
+    private final Runnable failedSend = new Runnable() {
 
-        public void run()
-        {
+        public void run() {
             FailureSending();
         }
     };
 
-    private void FailureSending()
-    {
+    private void FailureSending() {
         Utilities.HideProgress();
         Utilities.MsgBox(getString(R.string.sorry), "FTP Test Failed", this);
     }
 
-    private void SuccessfulSending()
-    {
+    private void SuccessfulSending() {
         Utilities.HideProgress();
         Utilities.MsgBox(getString(R.string.success),
                 "FTP Test Succeeded", this);
     }
 
     @Override
-    public void OnComplete()
-    {
+    public void OnComplete() {
         Utilities.HideProgress();
         handler.post(successfullySent);
     }
 
     @Override
-    public void OnFailure()
-    {
+    public void OnFailure() {
         Utilities.HideProgress();
         handler.post(failedSend);
     }
 
     @Override
-    public boolean onPreferenceClick(Preference preference)
-    {
+    public boolean onPreferenceClick(Preference preference) {
 
         FtpHelper helper = new FtpHelper(this);
 
-        EditTextPreference servernamePreference = (EditTextPreference)findPreference("autoftp_server");
-        EditTextPreference usernamePreference = (EditTextPreference)findPreference("autoftp_username");
-        EditTextPreference passwordPreference = (EditTextPreference)findPreference("autoftp_password");
-        EditTextPreference portPreference = (EditTextPreference)findPreference("autoftp_port");
-        CheckBoxPreference useFtpsPreference = (CheckBoxPreference)findPreference("autoftp_useftps");
-        ListPreference sslTlsPreference = (ListPreference)findPreference("autoftp_ssltls");
-        CheckBoxPreference implicitPreference = (CheckBoxPreference)findPreference("autoftp_implicit");
-        EditTextPreference directoryPreference = (EditTextPreference)findPreference("autoftp_directory");
+        EditTextPreference servernamePreference = (EditTextPreference) findPreference("autoftp_server");
+        EditTextPreference usernamePreference = (EditTextPreference) findPreference("autoftp_username");
+        EditTextPreference passwordPreference = (EditTextPreference) findPreference("autoftp_password");
+        EditTextPreference portPreference = (EditTextPreference) findPreference("autoftp_port");
+        CheckBoxPreference useFtpsPreference = (CheckBoxPreference) findPreference("autoftp_useftps");
+        ListPreference sslTlsPreference = (ListPreference) findPreference("autoftp_ssltls");
+        CheckBoxPreference implicitPreference = (CheckBoxPreference) findPreference("autoftp_implicit");
+        EditTextPreference directoryPreference = (EditTextPreference) findPreference("autoftp_directory");
 
-        if(!helper.ValidSettings(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
+        if (!helper.ValidSettings(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
                 Integer.valueOf(portPreference.getText()), useFtpsPreference.isChecked(), sslTlsPreference.getValue(),
-                implicitPreference.isChecked()))
-        {
+                implicitPreference.isChecked())) {
             Utilities.MsgBox(getString(R.string.autoftp_invalid_settings),
                     getString(R.string.autoftp_invalid_summary),
                     AutoFtpActivity.this);

@@ -17,14 +17,10 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.loggers.FileLoggerFactory;
-import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.views.component.ToggleComponent;
 import org.slf4j.LoggerFactory;
 
 import java.text.NumberFormat;
-import java.util.List;
-import java.util.ListIterator;
 
 public class GpsSimpleViewFragment extends GenericViewFragment implements View.OnClickListener {
 
@@ -118,35 +114,31 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         if (AppSettings.shouldLogToKml()) {
 
             imgKml.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else {
             imgKml.setVisibility(View.GONE);
         }
 
-        if(AppSettings.shouldLogToNmea()){
+        if (AppSettings.shouldLogToNmea()) {
             imgNmea.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else {
             imgNmea.setVisibility(View.GONE);
         }
 
         if (AppSettings.shouldLogToPlainText()) {
 
             imgCsv.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else {
             imgCsv.setVisibility(View.GONE);
         }
 
         if (AppSettings.shouldLogToCustomUrl()) {
             imgLink.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else {
             imgLink.setVisibility(View.GONE);
         }
 
-        if(!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml()
-                && !AppSettings.shouldLogToPlainText()){
+        if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml()
+                && !AppSettings.shouldLogToPlainText()) {
             showCurrentFileName(null);
         }
 
@@ -161,7 +153,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         }
 
         txtFilename.setVisibility(View.VISIBLE);
-        txtFilename.setText(Html.fromHtml("<em>" + AppSettings.getGpsLoggerFolder() + "/<strong>" + Session.getCurrentFileName() + "</strong></em>" ));
+        txtFilename.setText(Html.fromHtml("<em>" + AppSettings.getGpsLoggerFolder() + "/<strong>" + Session.getCurrentFileName() + "</strong></em>"));
 
     }
 
@@ -190,7 +182,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         ImageView imgPoints = (ImageView) rootView.findViewById(R.id.simpleview_points);
         imgPoints.setOnClickListener(this);
 
-        ImageView imgLink = (ImageView)rootView.findViewById(R.id.simpleview_imgLink);
+        ImageView imgLink = (ImageView) rootView.findViewById(R.id.simpleview_imgLink);
         imgLink.setOnClickListener(this);
 
     }
@@ -503,7 +495,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         toast.show();
     }
 
-    private Toast getToast(String message){
+    private Toast getToast(String message) {
         return Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT);
     }
 

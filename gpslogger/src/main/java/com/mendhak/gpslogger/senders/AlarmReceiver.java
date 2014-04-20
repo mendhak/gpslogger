@@ -23,25 +23,20 @@ import android.content.Intent;
 import org.slf4j.LoggerFactory;
 
 
-public class AlarmReceiver extends BroadcastReceiver
-{
+public class AlarmReceiver extends BroadcastReceiver {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AlarmReceiver.class.getSimpleName());
 
     @Override
-    public void onReceive(Context context, Intent intent)
-    {
-        try
-        {
+    public void onReceive(Context context, Intent intent) {
+        try {
             tracer.info("Email alarm received");
             Intent serviceIntent = new Intent(context.getPackageName() + ".GpsLoggingService");
             serviceIntent.putExtra("emailAlarm", true);
             // Start the service in case it isn't already running
             context.startService(serviceIntent);
-        }
-        catch (Exception ex)
-        {
-             tracer.error("AlarmReceiver.onReceive", ex);
+        } catch (Exception ex) {
+            tracer.error("AlarmReceiver.onReceive", ex);
         }
 
 

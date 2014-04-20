@@ -14,12 +14,19 @@ public abstract class GenericViewFragment extends Fragment {
     protected IGpsViewCallback gpsCallback;
 
     public abstract void SetLocation(Location locationInfo);
+
     public abstract void SetSatelliteCount(int count);
+
     public abstract void SetLoggingStarted();
+
     public abstract void SetLoggingStopped();
+
     public abstract void SetStatusMessage(String message);
+
     public abstract void SetFatalMessage(String message);
+
     public abstract void OnFileNameChange(String newFileName);
+
     public abstract void OnNmeaSentence(long timestamp, String nmeaSentence);
 
     protected void requestStartLogging() {
@@ -59,8 +66,6 @@ public abstract class GenericViewFragment extends Fragment {
     }
 
 
-
-
     /**
      * Interface used by the different fragments to communicate with the parent activity
      * which should implement this interface.
@@ -68,7 +73,9 @@ public abstract class GenericViewFragment extends Fragment {
      */
     public static interface IGpsViewCallback {
         public void onRequestStartLogging();
+
         public void onRequestStopLogging();
+
         public void onRequestToggleLogging();
     }
 }

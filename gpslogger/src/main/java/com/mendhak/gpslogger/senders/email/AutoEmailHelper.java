@@ -28,30 +28,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AutoEmailHelper implements IActionListener, IFileSender
-{
+public class AutoEmailHelper implements IActionListener, IFileSender {
 
     IActionListener callback;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoEmailHelper.class.getSimpleName());
 
-    public AutoEmailHelper(IActionListener callback)
-    {
+    public AutoEmailHelper(IActionListener callback) {
         this.callback = callback;
     }
 
     @Override
-    public void UploadFile(List<File> files)
-    {
+    public void UploadFile(List<File> files) {
 
         ArrayList<File> filesToSend = new ArrayList<File>();
 
         //If a zip file exists, remove others
-        for (File f : files)
-        {
+        for (File f : files) {
             filesToSend.add(f);
 
-            if (f.getName().contains(".zip"))
-            {
+            if (f.getName().contains(".zip")) {
                 filesToSend.clear();
                 filesToSend.add(f);
                 break;
@@ -66,8 +61,7 @@ public class AutoEmailHelper implements IActionListener, IFileSender
 
     void SendTestEmail(String smtpServer, String smtpPort,
                        String smtpUsername, String smtpPassword, boolean smtpUseSsl,
-                       String emailTarget, String fromAddress, IActionListener helper)
-    {
+                       String emailTarget, String fromAddress, IActionListener helper) {
 
         Thread t = new Thread(new TestEmailHandler(helper, smtpServer,
                 smtpPort, smtpUsername, smtpPassword, smtpUseSsl, emailTarget, fromAddress));
@@ -75,44 +69,37 @@ public class AutoEmailHelper implements IActionListener, IFileSender
     }
 
 
-    public void OnComplete()
-    {
+    public void OnComplete() {
         // This was a success
         tracer.info("Email sent");
 
         callback.OnComplete();
     }
 
-    public void OnFailure()
-    {
+    public void OnFailure() {
         callback.OnFailure();
     }
 
     @Override
-    public boolean accept(File dir, String name)
-    {
+    public boolean accept(File dir, String name) {
         return true;
     }
 
 }
 
-class AutoSendHandler implements Runnable
-{
+class AutoSendHandler implements Runnable {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoSendHandler.class.getSimpleName());
     File[] files;
     private final IActionListener helper;
 
-    public AutoSendHandler(File[] files, IActionListener helper)
-    {
+    public AutoSendHandler(File[] files, IActionListener helper) {
         this.files = files;
         this.helper = helper;
     }
 
-    public void run()
-    {
-        try
-        {
+    public void run() {
+        try {
             Mail m = new Mail(AppSettings.getSmtpUsername(),
                     AppSettings.getSmtpPassword());
 
@@ -131,24 +118,18 @@ class AutoSendHandler implements Runnable
             m.setSmtpHost(AppSettings.getSmtpServer());
             m.setSsl(AppSettings.isSmtpSsl());
 
-            for (File f : files)
-            {
+            for (File f : files) {
                 m.addAttachment(f.getName(), f.getAbsolutePath());
             }
 
             tracer.info("Sending email...");
 
-            if (m.send())
-            {
+            if (m.send()) {
                 helper.OnComplete();
-            }
-            else
-            {
+            } else {
                 helper.OnFailure();
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             helper.OnFailure();
             tracer.error("AutoSendHandler.run", e);
         }
@@ -157,8 +138,7 @@ class AutoSendHandler implements Runnable
 
 }
 
-class TestEmailHandler implements Runnable
-{
+class TestEmailHandler implements Runnable {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(TestEmailHandler.class.getSimpleName());
     String smtpServer;
     String smtpPort;
@@ -171,8 +151,7 @@ class TestEmailHandler implements Runnable
 
     public TestEmailHandler(IActionListener helper, String smtpServer,
                             String smtpPort, String smtpUsername, String smtpPassword,
-                            boolean smtpUseSsl, String csvEmailTargets, String fromAddress)
-    {
+                            boolean smtpUseSsl, String csvEmailTargets, String fromAddress) {
         this.smtpServer = smtpServer;
         this.smtpPort = smtpPort;
         this.smtpPassword = smtpPassword;
@@ -183,22 +162,17 @@ class TestEmailHandler implements Runnable
         this.fromAddress = fromAddress;
     }
 
-    public void run()
-    {
-        try
-        {
+    public void run() {
+        try {
 
             Mail m = new Mail(smtpUsername, smtpPassword);
 
             String[] toArr = csvEmailTargets.split(",");
             m.setTo(toArr);
 
-            if (fromAddress != null && fromAddress.length() > 0)
-            {
+            if (fromAddress != null && fromAddress.length() > 0) {
                 m.setFrom(fromAddress);
-            }
-            else
-            {
+            } else {
                 m.setFrom(smtpUsername);
             }
 
@@ -215,17 +189,12 @@ class TestEmailHandler implements Runnable
             m.setDebuggable(true);
 
             tracer.info("Sending email...");
-            if (m.send())
-            {
+            if (m.send()) {
                 helper.OnComplete();
-            }
-            else
-            {
+            } else {
                 helper.OnFailure();
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             helper.OnFailure();
             tracer.error("AutoSendHandler.run", e);
         }

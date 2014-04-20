@@ -28,8 +28,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 
-class GeneralLocationListener implements LocationListener, GpsStatus.Listener, GpsStatus.NmeaListener
-{
+class GeneralLocationListener implements LocationListener, GpsStatus.Listener, GpsStatus.NmeaListener {
 
     private static GpsLoggingService loggingService;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GeneralLocationListener.class.getSimpleName());
@@ -40,8 +39,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     private String ageOfDgpsData;
     private String dgpsId;
 
-    GeneralLocationListener(GpsLoggingService activity)
-    {
+    GeneralLocationListener(GpsLoggingService activity) {
         tracer.debug("GeneralLocationListener constructor");
         loggingService = activity;
     }
@@ -49,13 +47,10 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     /**
      * Event raised when a new fix is received.
      */
-    public void onLocationChanged(Location loc)
-    {
+    public void onLocationChanged(Location loc) {
 
-        try
-        {
-            if (loc != null)
-            {
+        try {
+            if (loc != null) {
                 tracer.debug("GeneralLocationListener.onLocationChanged");
                 Bundle b = new Bundle();
                 b.putString("HDOP", this.latestHdop);
@@ -68,57 +63,47 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 loggingService.OnLocationChanged(loc);
 
                 this.latestHdop = "";
-                this.latestPdop="";
-                this.latestVdop="";
+                this.latestPdop = "";
+                this.latestVdop = "";
             }
 
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             tracer.error("GeneralLocationListener.onLocationChanged", ex);
             loggingService.SetStatus(ex.getMessage());
         }
 
     }
 
-    public void onProviderDisabled(String provider)
-    {
+    public void onProviderDisabled(String provider) {
         tracer.info("Provider disabled: " + provider);
         loggingService.RestartGpsManagers();
     }
 
-    public void onProviderEnabled(String provider)
-    {
+    public void onProviderEnabled(String provider) {
 
         tracer.info("Provider enabled: " + provider);
         loggingService.RestartGpsManagers();
     }
 
-    public void onStatusChanged(String provider, int status, Bundle extras)
-    {
-        if (status == LocationProvider.OUT_OF_SERVICE)
-        {
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        if (status == LocationProvider.OUT_OF_SERVICE) {
             tracer.debug(provider + " is out of service");
             loggingService.StopManagerAndResetAlarm();
         }
 
-        if (status == LocationProvider.AVAILABLE)
-        {
+        if (status == LocationProvider.AVAILABLE) {
             tracer.debug(provider + " is available");
         }
 
-        if (status == LocationProvider.TEMPORARILY_UNAVAILABLE)
-        {
+        if (status == LocationProvider.TEMPORARILY_UNAVAILABLE) {
             tracer.debug(provider + " is temporarily unavailable");
             loggingService.StopManagerAndResetAlarm();
         }
     }
 
-    public void onGpsStatusChanged(int event)
-    {
+    public void onGpsStatusChanged(int event) {
 
-        switch (event)
-        {
+        switch (event) {
             case GpsStatus.GPS_EVENT_FIRST_FIX:
                 tracer.debug("GPS Event First Fix");
                 loggingService.SetStatus(loggingService.getString(R.string.fix_obtained));
@@ -133,8 +118,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 Iterator<GpsSatellite> it = status.getSatellites().iterator();
                 int count = 0;
 
-                while (it.hasNext() && count <= maxSatellites)
-                {
+                while (it.hasNext() && count <= maxSatellites) {
                     it.next();
                     count++;
                 }
@@ -162,37 +146,37 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
         String[] nmeaParts = nmeaSentence.split(",");
 
-        if(nmeaParts[0].equalsIgnoreCase("$GPGSA")){
+        if (nmeaParts[0].equalsIgnoreCase("$GPGSA")) {
 
-            if(!Utilities.IsNullOrEmpty(nmeaParts[15])){
+            if (!Utilities.IsNullOrEmpty(nmeaParts[15])) {
                 this.latestPdop = nmeaParts[15];
             }
 
-            if(!Utilities.IsNullOrEmpty(nmeaParts[16])){
+            if (!Utilities.IsNullOrEmpty(nmeaParts[16])) {
                 this.latestHdop = nmeaParts[16];
             }
 
-            if(!Utilities.IsNullOrEmpty(nmeaParts[17]) && !nmeaParts[17].startsWith("*")){
+            if (!Utilities.IsNullOrEmpty(nmeaParts[17]) && !nmeaParts[17].startsWith("*")) {
 
                 this.latestVdop = nmeaParts[17].split("\\*")[0];
             }
         }
 
 
-        if(nmeaParts[0].equalsIgnoreCase("$GPGGA")){
-            if(!Utilities.IsNullOrEmpty(nmeaParts[8])){
+        if (nmeaParts[0].equalsIgnoreCase("$GPGGA")) {
+            if (!Utilities.IsNullOrEmpty(nmeaParts[8])) {
                 this.latestHdop = nmeaParts[8];
             }
 
-            if(!Utilities.IsNullOrEmpty(nmeaParts[11])){
+            if (!Utilities.IsNullOrEmpty(nmeaParts[11])) {
                 this.geoIdHeight = nmeaParts[11];
             }
 
-            if(!Utilities.IsNullOrEmpty(nmeaParts[13])){
+            if (!Utilities.IsNullOrEmpty(nmeaParts[13])) {
                 this.ageOfDgpsData = nmeaParts[13];
             }
 
-            if(!Utilities.IsNullOrEmpty(nmeaParts[14]) && !nmeaParts[14].startsWith("*")){
+            if (!Utilities.IsNullOrEmpty(nmeaParts[14]) && !nmeaParts[14].startsWith("*")) {
                 this.dgpsId = nmeaParts[14].split("\\*")[0];
             }
         }

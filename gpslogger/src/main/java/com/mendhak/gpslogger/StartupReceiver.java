@@ -26,32 +26,26 @@ import android.preference.PreferenceManager;
 import org.slf4j.LoggerFactory;
 
 
-public class StartupReceiver extends BroadcastReceiver
-{
+public class StartupReceiver extends BroadcastReceiver {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(StartupReceiver.class.getSimpleName());
 
     @Override
-    public void onReceive(Context context, Intent intent)
-    {
-        try
-        {
+    public void onReceive(Context context, Intent intent) {
+        try {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean startImmediately = prefs.getBoolean("startonbootup", false);
 
             tracer.info("Did the user ask for start on bootup? - "
                     + String.valueOf(startImmediately));
 
-            if (startImmediately)
-            {
+            if (startImmediately) {
                 tracer.info("Launching GPSLoggingService");
                 Intent serviceIntent = new Intent(context, GpsLoggingService.class);
                 serviceIntent.putExtra("immediate", true);
                 context.startService(serviceIntent);
             }
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             tracer.error("StartupReceiver", ex);
 
         }

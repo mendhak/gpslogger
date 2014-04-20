@@ -31,18 +31,15 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
-public class FtpHelper implements IFileSender
-{
+public class FtpHelper implements IFileSender {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FtpHelper.class.getSimpleName());
     IActionListener callback;
 
-    public FtpHelper(IActionListener callback)
-    {
+    public FtpHelper(IActionListener callback) {
         this.callback = callback;
     }
 
-    void TestFtp(String servername, String username, String password, String directory, int port, boolean useFtps, String protocol, boolean implicit)
-    {
+    void TestFtp(String servername, String username, String password, String directory, int port, boolean useFtps, String protocol, boolean implicit) {
         String data = "GPSLogger for Android, test file.  Generated at " + (new Date()).toLocaleString() + "\r\n";
         ByteArrayInputStream in = new ByteArrayInputStream(data.getBytes());
 
@@ -52,73 +49,58 @@ public class FtpHelper implements IFileSender
     }
 
     @Override
-    public void UploadFile(List<File> files)
-    {
+    public void UploadFile(List<File> files) {
 
 
         if (!ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(), AppSettings.getFtpPassword(),
-                AppSettings.getFtpPort(), AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit()))
-        {
+                AppSettings.getFtpPort(), AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit())) {
             callback.OnFailure();
         }
 
         File zipFile = null;
 
         //Only upload a zip file if it's present
-        for (File f : files)
-        {
-            if (f.getName().contains(".zip"))
-            {
+        for (File f : files) {
+            if (f.getName().contains(".zip")) {
                 zipFile = f;
                 break;
             }
         }
 
-        if (zipFile != null)
-        {
+        if (zipFile != null) {
             UploadFile(zipFile);
-        }
-        else
-        {
-            for (File f : files)
-            {
+        } else {
+            for (File f : files) {
                 UploadFile(f);
             }
         }
 
     }
 
-    public void UploadFile(File f)
-    {
-        try
-        {
+    public void UploadFile(File f) {
+        try {
             FileInputStream fis = new FileInputStream(f);
             Thread t = new Thread(new FtpUploadHandler(callback, AppSettings.getFtpServerName(), AppSettings.getFtpPort(),
                     AppSettings.getFtpUsername(), AppSettings.getFtpPassword(), AppSettings.getFtpDirectory(),
                     AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit(),
                     fis, f.getName()));
             t.start();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             tracer.error("Could not prepare file for upload.", e);
         }
     }
 
     @Override
-    public boolean accept(File file, String s)
-    {
+    public boolean accept(File file, String s) {
         return true;
     }
 
 
     public boolean ValidSettings(String servername, String username, String password, Integer port, boolean useFtps,
-                                 String sslTls, boolean implicit)
-    {
+                                 String sslTls, boolean implicit) {
         boolean retVal = servername != null && servername.length() > 0 && port != null && port > 0;
 
-        if (useFtps && (sslTls == null || sslTls.length() <= 0))
-        {
+        if (useFtps && (sslTls == null || sslTls.length() <= 0)) {
             retVal = false;
         }
 
@@ -126,8 +108,7 @@ public class FtpHelper implements IFileSender
     }
 }
 
-class FtpUploadHandler implements Runnable
-{
+class FtpUploadHandler implements Runnable {
 
     IActionListener helper;
     String server;
@@ -143,8 +124,7 @@ class FtpUploadHandler implements Runnable
 
     public FtpUploadHandler(IActionListener helper, String server, int port, String username,
                             String password, String directory, boolean useFtps, String protocol, boolean implicit,
-                            InputStream inputStream, String fileName)
-    {
+                            InputStream inputStream, String fileName) {
         this.helper = helper;
         this.server = server;
         this.port = port;
@@ -159,14 +139,10 @@ class FtpUploadHandler implements Runnable
     }
 
     @Override
-    public void run()
-    {
-        if (Ftp.Upload(server, username, password, directory, port, useFtps, protocol, implicit, inputStream, fileName))
-        {
+    public void run() {
+        if (Ftp.Upload(server, username, password, directory, port, useFtps, protocol, implicit, inputStream, fileName)) {
             helper.OnComplete();
-        }
-        else
-        {
+        } else {
             helper.OnFailure();
         }
     }

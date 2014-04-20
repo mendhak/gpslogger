@@ -19,8 +19,7 @@ package com.mendhak.gpslogger.common;
 
 import android.app.Application;
 
-public class AppSettings extends Application
-{
+public class AppSettings extends Application {
     // ---------------------------------------------------
     // User Preferences
     // ---------------------------------------------------
@@ -84,48 +83,42 @@ public class AppSettings extends Application
     /**
      * @return the useImperial
      */
-    public static boolean shouldUseImperial()
-    {
+    public static boolean shouldUseImperial() {
         return useImperial;
     }
 
     /**
      * @param useImperial the useImperial to set
      */
-    static void setUseImperial(boolean useImperial)
-    {
+    static void setUseImperial(boolean useImperial) {
         AppSettings.useImperial = useImperial;
     }
 
     /**
      * @return the newFileOnceADay
      */
-    public static boolean shouldCreateNewFileOnceADay()
-    {
+    public static boolean shouldCreateNewFileOnceADay() {
         return newFileOnceADay;
     }
 
     /**
      * @param newFileOnceADay the newFileOnceADay to set
      */
-    static void setNewFileOnceADay(boolean newFileOnceADay)
-    {
+    static void setNewFileOnceADay(boolean newFileOnceADay) {
         AppSettings.newFileOnceADay = newFileOnceADay;
     }
 
     /**
      * @return the preferCellTower
      */
-    public static boolean shouldPreferCellTower()
-    {
+    public static boolean shouldPreferCellTower() {
         return preferCellTower;
     }
 
     /**
      * @param preferCellTower the preferCellTower to set
      */
-    static void setPreferCellTower(boolean preferCellTower)
-    {
+    static void setPreferCellTower(boolean preferCellTower) {
         AppSettings.preferCellTower = preferCellTower;
     }
 
@@ -133,42 +126,36 @@ public class AppSettings extends Application
     /**
      * @return the logToKml
      */
-    public static boolean shouldLogToKml()
-    {
+    public static boolean shouldLogToKml() {
         return logToKml;
     }
 
     /**
      * @param logToKml the logToKml to set
      */
-    static void setLogToKml(boolean logToKml)
-    {
+    static void setLogToKml(boolean logToKml) {
         AppSettings.logToKml = logToKml;
     }
 
     /**
      * @return the logToGpx
      */
-    public static boolean shouldLogToGpx()
-    {
+    public static boolean shouldLogToGpx() {
         return logToGpx;
     }
 
     /**
      * @param logToGpx the logToGpx to set
      */
-    static void setLogToGpx(boolean logToGpx)
-    {
+    static void setLogToGpx(boolean logToGpx) {
         AppSettings.logToGpx = logToGpx;
     }
 
-    public static boolean shouldLogToPlainText()
-    {
+    public static boolean shouldLogToPlainText() {
         return logToPlainText;
     }
 
-    static void setLogToPlainText(boolean logToPlainText)
-    {
+    static void setLogToPlainText(boolean logToPlainText) {
         AppSettings.logToPlainText = logToPlainText;
     }
 
@@ -176,16 +163,14 @@ public class AppSettings extends Application
     /**
      * @return the minimumSeconds
      */
-    public static int getMinimumSeconds()
-    {
+    public static int getMinimumSeconds() {
         return minimumSeconds;
     }
 
     /**
      * @param minimumSeconds the minimumSeconds to set
      */
-    static void setMinimumSeconds(int minimumSeconds)
-    {
+    static void setMinimumSeconds(int minimumSeconds) {
         AppSettings.minimumSeconds = minimumSeconds;
     }
 
@@ -193,32 +178,28 @@ public class AppSettings extends Application
     /**
      * @return the keepFix
      */
-    public static boolean shouldkeepFix()
-    {
+    public static boolean shouldkeepFix() {
         return keepFix;
     }
 
     /**
      * @param keepFix the keepFix to set
      */
-    static void setKeepFix(boolean keepFix)
-    {
+    static void setKeepFix(boolean keepFix) {
         AppSettings.keepFix = keepFix;
     }
-    
-          /**
+
+    /**
      * @return the retryInterval
      */
-    public static int getRetryInterval()
-    {
+    public static int getRetryInterval() {
         return retryInterval;
     }
 
     /**
      * @param retryInterval the retryInterval to set
      */
-    static void setRetryInterval(int retryInterval)
-    {
+    static void setRetryInterval(int retryInterval) {
         AppSettings.retryInterval = retryInterval;
     }
 
@@ -226,32 +207,28 @@ public class AppSettings extends Application
     /**
      * @return the minimumDistance
      */
-    public static int getMinimumDistanceInMeters()
-    {
+    public static int getMinimumDistanceInMeters() {
         return minimumDistance;
     }
 
     /**
      * @param minimumDistance the minimumDistance to set
      */
-    static void setMinimumDistanceInMeters(int minimumDistance)
-    {
+    static void setMinimumDistanceInMeters(int minimumDistance) {
         AppSettings.minimumDistance = minimumDistance;
     }
 
-         /**
+    /**
      * @return the minimumAccuracy
      */
-    public static int getMinimumAccuracyInMeters()
-    {
+    public static int getMinimumAccuracyInMeters() {
         return minimumAccuracy;
     }
 
     /**
      * @param minimumAccuracy the minimumAccuracy to set
      */
-    static void setMinimumAccuracyInMeters(int minimumAccuracy)
-    {
+    static void setMinimumAccuracyInMeters(int minimumAccuracy) {
         AppSettings.minimumAccuracy = minimumAccuracy;
     }
 
@@ -259,16 +236,14 @@ public class AppSettings extends Application
     /**
      * @return the newFileCreation
      */
-    static String getNewFileCreation()
-    {
+    static String getNewFileCreation() {
         return newFileCreation;
     }
 
     /**
      * @param newFileCreation the newFileCreation to set
      */
-    static void setNewFileCreation(String newFileCreation)
-    {
+    static void setNewFileCreation(String newFileCreation) {
         AppSettings.newFileCreation = newFileCreation;
     }
 
@@ -276,14 +251,10 @@ public class AppSettings extends Application
     /**
      * @return the autoSendDelay
      */
-    public static Float getAutoSendDelay()
-    {
-        if (autoSendDelay >= 8f)
-        {
+    public static Float getAutoSendDelay() {
+        if (autoSendDelay >= 8f) {
             return 8f;
-        }
-        else
-        {
+        } else {
             return autoSendDelay;
         }
 
@@ -293,15 +264,11 @@ public class AppSettings extends Application
     /**
      * @param autoSendDelay the autoSendDelay to set
      */
-    static void setAutoSendDelay(Float autoSendDelay)
-    {
+    static void setAutoSendDelay(Float autoSendDelay) {
 
-        if (autoSendDelay >= 8f)
-        {
+        if (autoSendDelay >= 8f) {
             AppSettings.autoSendDelay = 8f;
-        }
-        else
-        {
+        } else {
             AppSettings.autoSendDelay = autoSendDelay;
         }
 
@@ -311,109 +278,89 @@ public class AppSettings extends Application
     /**
      * @return the autoEmailEnabled
      */
-    public static boolean isAutoEmailEnabled()
-    {
+    public static boolean isAutoEmailEnabled() {
         return autoEmailEnabled;
     }
 
     /**
      * @param autoEmailEnabled the autoEmailEnabled to set
      */
-    static void setAutoEmailEnabled(boolean autoEmailEnabled)
-    {
+    static void setAutoEmailEnabled(boolean autoEmailEnabled) {
         AppSettings.autoEmailEnabled = autoEmailEnabled;
     }
 
 
-    static void setSmtpServer(String smtpServer)
-    {
+    static void setSmtpServer(String smtpServer) {
         AppSettings.smtpServer = smtpServer;
     }
 
-    public static String getSmtpServer()
-    {
+    public static String getSmtpServer() {
         return smtpServer;
     }
 
-    static void setSmtpPort(String smtpPort)
-    {
+    static void setSmtpPort(String smtpPort) {
         AppSettings.smtpPort = smtpPort;
     }
 
-    public static String getSmtpPort()
-    {
+    public static String getSmtpPort() {
         return smtpPort;
     }
 
-    static void setSmtpUsername(String smtpUsername)
-    {
+    static void setSmtpUsername(String smtpUsername) {
         AppSettings.smtpUsername = smtpUsername;
     }
 
-    public static String getSmtpUsername()
-    {
+    public static String getSmtpUsername() {
         return smtpUsername;
     }
 
 
-    static void setSmtpPassword(String smtpPassword)
-    {
+    static void setSmtpPassword(String smtpPassword) {
         AppSettings.smtpPassword = smtpPassword;
     }
 
-    public static String getSmtpPassword()
-    {
+    public static String getSmtpPassword() {
         return smtpPassword;
     }
 
-    static void setSmtpSsl(boolean smtpSsl)
-    {
+    static void setSmtpSsl(boolean smtpSsl) {
         AppSettings.smtpSsl = smtpSsl;
     }
 
-    public static boolean isSmtpSsl()
-    {
+    public static boolean isSmtpSsl() {
         return smtpSsl;
     }
 
-    static void setAutoEmailTargets(String autoEmailTargets)
-    {
+    static void setAutoEmailTargets(String autoEmailTargets) {
         AppSettings.autoEmailTargets = autoEmailTargets;
     }
 
-    public static String getAutoEmailTargets()
-    {
+    public static String getAutoEmailTargets() {
         return autoEmailTargets;
     }
 
-    public static boolean isDebugToFile()
-    {
+    public static boolean isDebugToFile() {
         return debugToFile;
     }
 
-    public static void setDebugToFile(boolean debugToFile)
-    {
+    public static void setDebugToFile(boolean debugToFile) {
         AppSettings.debugToFile = debugToFile;
     }
 
 
-    public static boolean shouldSendZipFile()
-    {
+    public static boolean shouldSendZipFile() {
         return shouldSendZipFile;
     }
 
-    public static void setShouldSendZipFile(boolean shouldSendZipFile)
-    {
+    public static void setShouldSendZipFile(boolean shouldSendZipFile) {
         AppSettings.shouldSendZipFile = shouldSendZipFile;
     }
 
-    private static String getSmtpFrom()
-    {
+    private static String getSmtpFrom() {
         return smtpFrom;
     }
 
-    public static void setSmtpFrom(String smtpFrom)
-    {
+    public static void setSmtpFrom(String smtpFrom) {
         AppSettings.smtpFrom = smtpFrom;
     }
 
@@ -422,204 +369,164 @@ public class AppSettings extends Application
      *
      * @return
      */
-    public static String getSenderAddress()
-    {
-        if (getSmtpFrom() != null && getSmtpFrom().length() > 0)
-        {
+    public static String getSenderAddress() {
+        if (getSmtpFrom() != null && getSmtpFrom().length() > 0) {
             return getSmtpFrom();
         }
 
         return getSmtpUsername();
     }
 
-    public static boolean isAutoSendEnabled()
-    {
+    public static boolean isAutoSendEnabled() {
         return autoSendEnabled;
     }
 
-    public static void setAutoSendEnabled(boolean autoSendEnabled)
-    {
+    public static void setAutoSendEnabled(boolean autoSendEnabled) {
         AppSettings.autoSendEnabled = autoSendEnabled;
     }
 
-    public static boolean shouldLogToOpenGTS()
-    {
+    public static boolean shouldLogToOpenGTS() {
         return LogToOpenGTS;
     }
 
-    public static void setLogToOpenGTS(boolean logToOpenGTS)
-    {
+    public static void setLogToOpenGTS(boolean logToOpenGTS) {
         AppSettings.LogToOpenGTS = logToOpenGTS;
     }
 
-    public static boolean isOpenGTSEnabled()
-    {
+    public static boolean isOpenGTSEnabled() {
         return openGTSEnabled;
     }
 
-    public static void setOpenGTSEnabled(boolean openGTSEnabled)
-    {
+    public static void setOpenGTSEnabled(boolean openGTSEnabled) {
         AppSettings.openGTSEnabled = openGTSEnabled;
     }
 
-    public static boolean isAutoOpenGTSEnabled()
-    {
+    public static boolean isAutoOpenGTSEnabled() {
         return autoOpenGTSEnabled;
     }
 
-    public static void setAutoOpenGTSEnabled(boolean autoOpenGTSEnabled)
-    {
+    public static void setAutoOpenGTSEnabled(boolean autoOpenGTSEnabled) {
         AppSettings.autoOpenGTSEnabled = autoOpenGTSEnabled;
     }
 
-    public static String getOpenGTSServer()
-    {
+    public static String getOpenGTSServer() {
         return openGTSServer;
     }
 
-    public static void setOpenGTSServer(String openGTSServer)
-    {
+    public static void setOpenGTSServer(String openGTSServer) {
         AppSettings.openGTSServer = openGTSServer;
     }
 
-    public static String getOpenGTSServerPort()
-    {
+    public static String getOpenGTSServerPort() {
         return openGTSServerPort;
     }
 
-    public static void setOpenGTSServerPort(String openGTSServerPort)
-    {
+    public static void setOpenGTSServerPort(String openGTSServerPort) {
         AppSettings.openGTSServerPort = openGTSServerPort;
     }
 
-    public static String getOpenGTSServerCommunicationMethod()
-    {
+    public static String getOpenGTSServerCommunicationMethod() {
         return openGTSServerCommunicationMethod;
     }
 
-    public static void setOpenGTSServerCommunicationMethod(String openGTSServerCommunicationMethod)
-    {
+    public static void setOpenGTSServerCommunicationMethod(String openGTSServerCommunicationMethod) {
         AppSettings.openGTSServerCommunicationMethod = openGTSServerCommunicationMethod;
     }
 
-    public static String getOpenGTSServerPath()
-    {
+    public static String getOpenGTSServerPath() {
         return openGTSServerPath;
     }
 
-    public static void setOpenGTSServerPath(String openGTSServerPath)
-    {
+    public static void setOpenGTSServerPath(String openGTSServerPath) {
         AppSettings.openGTSServerPath = openGTSServerPath;
     }
 
-    public static String getOpenGTSDeviceId()
-    {
+    public static String getOpenGTSDeviceId() {
         return openGTSDeviceId;
     }
 
-    public static void setOpenGTSDeviceId(String openGTSDeviceId)
-    {
+    public static void setOpenGTSDeviceId(String openGTSDeviceId) {
         AppSettings.openGTSDeviceId = openGTSDeviceId;
     }
 
 
-    public static String getFtpServerName()
-    {
+    public static String getFtpServerName() {
         return ftpServerName;
     }
 
-    public static void setFtpServerName(String ftpServerName)
-    {
+    public static void setFtpServerName(String ftpServerName) {
         AppSettings.ftpServerName = ftpServerName;
     }
 
-    public static int getFtpPort()
-    {
+    public static int getFtpPort() {
         return ftpPort;
     }
 
-    public static void setFtpPort(int ftpPort)
-    {
+    public static void setFtpPort(int ftpPort) {
         AppSettings.ftpPort = ftpPort;
     }
 
-    public static String getFtpUsername()
-    {
+    public static String getFtpUsername() {
         return ftpUsername;
     }
 
-    public static void setFtpUsername(String ftpUsername)
-    {
+    public static void setFtpUsername(String ftpUsername) {
         AppSettings.ftpUsername = ftpUsername;
     }
 
-    public static String getFtpPassword()
-    {
+    public static String getFtpPassword() {
         return ftpPassword;
     }
 
-    public static void setFtpPassword(String ftpPassword)
-    {
+    public static void setFtpPassword(String ftpPassword) {
         AppSettings.ftpPassword = ftpPassword;
     }
 
-    public static boolean FtpUseFtps()
-    {
+    public static boolean FtpUseFtps() {
         return ftpUseFtps;
     }
 
-    public static void setFtpUseFtps(boolean ftpUseFtps)
-    {
+    public static void setFtpUseFtps(boolean ftpUseFtps) {
         AppSettings.ftpUseFtps = ftpUseFtps;
     }
 
-    public static String getFtpProtocol()
-    {
+    public static String getFtpProtocol() {
         return ftpProtocol;
     }
 
-    public static void setFtpProtocol(String ftpProtocol)
-    {
+    public static void setFtpProtocol(String ftpProtocol) {
         AppSettings.ftpProtocol = ftpProtocol;
     }
 
-    public static boolean FtpImplicit()
-    {
+    public static boolean FtpImplicit() {
         return ftpImplicit;
     }
 
-    public static void setFtpImplicit(boolean ftpImplicit)
-    {
+    public static void setFtpImplicit(boolean ftpImplicit) {
         AppSettings.ftpImplicit = ftpImplicit;
     }
 
-    public static boolean isAutoFtpEnabled()
-    {
+    public static boolean isAutoFtpEnabled() {
         return autoFtpEnabled;
     }
 
-    public static void setAutoFtpEnabled(boolean autoFtpEnabled)
-    {
+    public static void setAutoFtpEnabled(boolean autoFtpEnabled) {
         AppSettings.autoFtpEnabled = autoFtpEnabled;
     }
 
-    public static String getCustomFileName()
-    {
+    public static String getCustomFileName() {
         return customFileName;
     }
 
-    public static void setCustomFileName(String customFileName)
-    {
+    public static void setCustomFileName(String customFileName) {
         AppSettings.customFileName = customFileName;
     }
 
-    public static boolean isCustomFile()
-    {
+    public static boolean isCustomFile() {
         return isCustomFile;
     }
 
-    public static void setCustomFile(boolean customFile)
-    {
+    public static void setCustomFile(boolean customFile) {
         AppSettings.isCustomFile = customFile;
     }
 

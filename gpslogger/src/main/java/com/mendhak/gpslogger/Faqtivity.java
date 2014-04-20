@@ -26,20 +26,16 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class Faqtivity extends Activity
-{
+public class Faqtivity extends Activity {
 
     WebView browser;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Faqtivity.class.getSimpleName());
+
     /**
      * Event raised when the form is created for the first time
      */
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
 
         tracer.debug("Faqtivity.onCreate");
 
@@ -49,7 +45,7 @@ public class Faqtivity extends Activity
 
         setContentView(R.layout.activity_faq);
 
-        browser = (WebView)findViewById(R.id.faqwebview);
+        browser = (WebView) findViewById(R.id.faqwebview);
         WebSettings settings = browser.getSettings();
         settings.setLoadWithOverviewMode(true);
         settings.setUseWideViewPort(true);
@@ -74,7 +70,6 @@ public class Faqtivity extends Activity
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
     @Override

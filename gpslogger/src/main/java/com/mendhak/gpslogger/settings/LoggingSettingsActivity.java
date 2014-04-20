@@ -42,12 +42,12 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        if(prefs.getString("new_file_creation","onceaday").equals("static")) {
+        if (prefs.getString("new_file_creation", "onceaday").equals("static")) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("new_file_creation", "custom");
             editor.commit();
 
-            ListPreference newFileCreation = (ListPreference)findPreference("new_file_creation");
+            ListPreference newFileCreation = (ListPreference) findPreference("new_file_creation");
             newFileCreation.setValue("custom");
         }
     }
@@ -174,14 +174,14 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
         return false;
     }
 
-    private void setPreferencesEnabledDisabled(){
+    private void setPreferencesEnabledDisabled() {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         Preference prefFileStaticName = (Preference) findPreference("new_file_custom_name");
         Preference prefSerialPrefix = (Preference) findPreference("new_file_prefix_serial");
 
-        prefFileStaticName.setEnabled(prefs.getString("new_file_creation","onceaday").equals("custom"));
-        prefSerialPrefix.setEnabled(!prefs.getString("new_file_creation","onceaday").equals("custom"));
+        prefFileStaticName.setEnabled(prefs.getString("new_file_creation", "onceaday").equals("custom"));
+        prefSerialPrefix.setEnabled(!prefs.getString("new_file_creation", "onceaday").equals("custom"));
     }
 }

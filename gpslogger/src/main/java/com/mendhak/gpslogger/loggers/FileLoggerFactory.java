@@ -27,43 +27,35 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileLoggerFactory
-{
-    public static List<IFileLogger> GetFileLoggers(Context context)
-    {
+public class FileLoggerFactory {
+    public static List<IFileLogger> GetFileLoggers(Context context) {
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
-        if (!gpxFolder.exists())
-        {
+        if (!gpxFolder.exists()) {
             gpxFolder.mkdirs();
         }
 
         List<IFileLogger> loggers = new ArrayList<IFileLogger>();
 
-        if (AppSettings.shouldLogToGpx())
-        {
+        if (AppSettings.shouldLogToGpx()) {
             File gpxFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".gpx");
-            loggers.add(new Gpx10FileLogger(gpxFile,  Session.shouldAddNewTrackSegment(), Session.getSatelliteCount()));
+            loggers.add(new Gpx10FileLogger(gpxFile, Session.shouldAddNewTrackSegment(), Session.getSatelliteCount()));
         }
 
-        if (AppSettings.shouldLogToKml())
-        {
+        if (AppSettings.shouldLogToKml()) {
             File kmlFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".kml");
             loggers.add(new Kml22FileLogger(kmlFile, Session.shouldAddNewTrackSegment()));
         }
 
-        if (AppSettings.shouldLogToPlainText())
-        {
+        if (AppSettings.shouldLogToPlainText()) {
             File file = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".txt");
             loggers.add(new PlainTextFileLogger(file));
         }
 
-        if (AppSettings.shouldLogToOpenGTS())
-        {
+        if (AppSettings.shouldLogToOpenGTS()) {
             loggers.add(new OpenGTSLogger());
         }
 
-        if(AppSettings.shouldLogToCustomUrl())
-        {
+        if (AppSettings.shouldLogToCustomUrl()) {
             float batteryLevel = Utilities.GetBatteryLevel(context);
             String androidId = Utilities.GetAndroidId(context);
             loggers.add(new HttpUrlLogger(AppSettings.getCustomLoggingUrl(), Session.getSatelliteCount(), batteryLevel, androidId));

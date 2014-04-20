@@ -22,8 +22,7 @@ import android.app.Application;
 import android.location.Location;
 import org.slf4j.LoggerFactory;
 
-public class Session extends Application
-{
+public class Session extends Application {
 
     private static org.slf4j.Logger tracer = LoggerFactory.getLogger(Session.class.getSimpleName());
 
@@ -49,16 +48,14 @@ public class Session extends Application
     private static boolean readyToBeAutoSent = false;
     private static String description = "";
     private static boolean isSinglePointMode = false;
-    private static int retryTimeout=0;
+    private static int retryTimeout = 0;
     private static boolean waitingForLocation;
 
-    public static boolean isSinglePointMode()
-    {
+    public static boolean isSinglePointMode() {
         return isSinglePointMode;
     }
 
-    public static void setSinglePointMode(boolean singlePointMode)
-    {
+    public static void setSinglePointMode(boolean singlePointMode) {
         isSinglePointMode = singlePointMode;
     }
 
@@ -67,84 +64,70 @@ public class Session extends Application
     /**
      * @return whether GPS (tower) is enabled
      */
-    public static boolean isTowerEnabled()
-    {
+    public static boolean isTowerEnabled() {
         return towerEnabled;
     }
 
     /**
      * @param towerEnabled set whether GPS (tower) is enabled
      */
-    public static void setTowerEnabled(boolean towerEnabled)
-    {
+    public static void setTowerEnabled(boolean towerEnabled) {
         Session.towerEnabled = towerEnabled;
     }
 
     /**
      * @return whether GPS (satellite) is enabled
      */
-    public static boolean isGpsEnabled()
-    {
+    public static boolean isGpsEnabled() {
         return gpsEnabled;
     }
 
     /**
      * @param gpsEnabled set whether GPS (satellite) is enabled
      */
-    public static void setGpsEnabled(boolean gpsEnabled)
-    {
+    public static void setGpsEnabled(boolean gpsEnabled) {
         Session.gpsEnabled = gpsEnabled;
     }
 
     /**
      * @return whether logging has started
      */
-    public static boolean isStarted()
-    {
+    public static boolean isStarted() {
         return isStarted;
     }
 
     /**
      * @param isStarted set whether logging has started
      */
-    public static void setStarted(boolean isStarted)
-    {
+    public static void setStarted(boolean isStarted) {
         Session.isStarted = isStarted;
-        if (isStarted)
-        {
-        	Session.startTimeStamp = System.currentTimeMillis();
+        if (isStarted) {
+            Session.startTimeStamp = System.currentTimeMillis();
         }
     }
 
     /**
      * @return the isUsingGps
      */
-    public static boolean isUsingGps()
-    {
+    public static boolean isUsingGps() {
         return isUsingGps;
     }
 
     /**
      * @param isUsingGps the isUsingGps to set
      */
-    public static void setUsingGps(boolean isUsingGps)
-    {
+    public static void setUsingGps(boolean isUsingGps) {
         Session.isUsingGps = isUsingGps;
     }
 
     /**
      * @return the currentFileName (without extension)
      */
-    public static String getCurrentFileName()
-    {
-        if(AppSettings.isCustomFile() && !Utilities.IsNullOrEmpty(currentFileName))
-        {
+    public static String getCurrentFileName() {
+        if (AppSettings.isCustomFile() && !Utilities.IsNullOrEmpty(currentFileName)) {
             return Utilities.GetFormattedCustomFileName(currentFileName);
-        }
-        else
-        {
-            if(!Utilities.IsNullOrEmpty(currentFileName) && AppSettings.shouldPrefixSerialToFileName() && !currentFileName.contains(Utilities.GetBuildSerial()))
-            {
+        } else {
+            if (!Utilities.IsNullOrEmpty(currentFileName) && AppSettings.shouldPrefixSerialToFileName() && !currentFileName.contains(Utilities.GetBuildSerial())) {
                 currentFileName = String.valueOf(Utilities.GetBuildSerial()) + "_" + currentFileName;
             }
         }
@@ -152,12 +135,10 @@ public class Session extends Application
     }
 
 
-
     /**
      * @param currentFileName the currentFileName to set
      */
-    public static void setCurrentFileName(String currentFileName)
-    {
+    public static void setCurrentFileName(String currentFileName) {
         tracer.info("Setting file name - " + currentFileName);
         Session.currentFileName = currentFileName;
     }
@@ -165,78 +146,61 @@ public class Session extends Application
     /**
      * @return the number of satellites visible
      */
-    public static int getSatelliteCount()
-    {
+    public static int getSatelliteCount() {
         return satellites;
     }
 
     /**
      * @param satellites sets the number of visible satellites
      */
-    public static void setSatelliteCount(int satellites)
-    {
+    public static void setSatelliteCount(int satellites) {
         Session.satellites = satellites;
     }
-
 
 
     /**
      * @return the currentLatitude
      */
-    public static double getCurrentLatitude()
-    {
-        if (getCurrentLocationInfo() != null)
-        {
+    public static double getCurrentLatitude() {
+        if (getCurrentLocationInfo() != null) {
             return getCurrentLocationInfo().getLatitude();
-        }
-        else
-        {
+        } else {
             return 0;
         }
     }
 
-    public static double getPreviousLatitude()
-    {
+    public static double getPreviousLatitude() {
         Location loc = getPreviousLocationInfo();
         return loc != null ? loc.getLatitude() : 0;
     }
 
-    public static double getPreviousLongitude()
-    {
+    public static double getPreviousLongitude() {
         Location loc = getPreviousLocationInfo();
         return loc != null ? loc.getLongitude() : 0;
     }
 
-    public static double getTotalTravelled()
-    {
+    public static double getTotalTravelled() {
         return totalTravelled;
     }
 
-    public static int getNumLegs()
-    {
+    public static int getNumLegs() {
         return numLegs;
     }
 
-    public static void setTotalTravelled(double totalTravelled)
-    {
-        if (totalTravelled == 0)
-        {
+    public static void setTotalTravelled(double totalTravelled) {
+        if (totalTravelled == 0) {
             Session.numLegs = 0;
-        }
-        else
-        {
+        } else {
             Session.numLegs++;
         }
         Session.totalTravelled = totalTravelled;
     }
 
-    public static Location getPreviousLocationInfo()
-    {
+    public static Location getPreviousLocationInfo() {
         return previousLocationInfo;
     }
 
-    public static void setPreviousLocationInfo(Location previousLocationInfo)
-    {
+    public static void setPreviousLocationInfo(Location previousLocationInfo) {
         Session.previousLocationInfo = previousLocationInfo;
     }
 
@@ -244,22 +208,17 @@ public class Session extends Application
     /**
      * Determines whether a valid location is available
      */
-    public static boolean hasValidLocation()
-    {
+    public static boolean hasValidLocation() {
         return (getCurrentLocationInfo() != null && getCurrentLatitude() != 0 && getCurrentLongitude() != 0);
     }
 
     /**
      * @return the currentLongitude
      */
-    public static double getCurrentLongitude()
-    {
-        if (getCurrentLocationInfo() != null)
-        {
+    public static double getCurrentLongitude() {
+        if (getCurrentLocationInfo() != null) {
             return getCurrentLocationInfo().getLongitude();
-        }
-        else
-        {
+        } else {
             return 0;
         }
     }
@@ -267,88 +226,77 @@ public class Session extends Application
     /**
      * @return the latestTimeStamp (for location info)
      */
-    public static long getLatestTimeStamp()
-    {
+    public static long getLatestTimeStamp() {
         return latestTimeStamp;
     }
-    
+
     /**
      * @return the timestamp when measuring was started
      */
-    public static long getStartTimeStamp()
-    {
-    	return startTimeStamp;
+    public static long getStartTimeStamp() {
+        return startTimeStamp;
     }
 
     /**
      * @param latestTimeStamp the latestTimeStamp (for location info) to set
      */
-    public static void setLatestTimeStamp(long latestTimeStamp)
-    {
+    public static void setLatestTimeStamp(long latestTimeStamp) {
         Session.latestTimeStamp = latestTimeStamp;
     }
 
     /**
      * @return whether to create a new track segment
      */
-    public static boolean shouldAddNewTrackSegment()
-    {
+    public static boolean shouldAddNewTrackSegment() {
         return addNewTrackSegment;
     }
 
     /**
      * @param addNewTrackSegment set whether to create a new track segment
      */
-    public static void setAddNewTrackSegment(boolean addNewTrackSegment)
-    {
+    public static void setAddNewTrackSegment(boolean addNewTrackSegment) {
         Session.addNewTrackSegment = addNewTrackSegment;
     }
 
     /**
      * @param autoSendDelay the autoSendDelay to set
      */
-    public static void setAutoSendDelay(float autoSendDelay)
-    {
+    public static void setAutoSendDelay(float autoSendDelay) {
         Session.autoSendDelay = autoSendDelay;
     }
 
     /**
      * @return the autoSendDelay to use for the timer
      */
-    public static float getAutoSendDelay()
-    {
+    public static float getAutoSendDelay() {
         return autoSendDelay;
     }
 
     /**
      * @param currentLocationInfo the latest Location class
      */
-    public static void setCurrentLocationInfo(Location currentLocationInfo)
-    {
+    public static void setCurrentLocationInfo(Location currentLocationInfo) {
         Session.currentLocationInfo = currentLocationInfo;
     }
 
     /**
      * @return the Location class containing latest lat-long information
      */
-    public static Location getCurrentLocationInfo()
-    {
+    public static Location getCurrentLocationInfo() {
         return currentLocationInfo;
     }
 
     /**
      * @param isBound set whether the activity is bound to the GpsLoggingService
      */
-    public static void setBoundToService(boolean isBound)
-    {
+    public static void setBoundToService(boolean isBound) {
         Session.isBound = isBound;
     }
 
     /**
      * @return whether the activity is bound to the GpsLoggingService
      */
-    public static boolean isBoundToService()
-    {
+    public static boolean isBoundToService() {
         return isBound;
     }
 
@@ -357,8 +305,7 @@ public class Session extends Application
      *
      * @param readyToBeAutoSent
      */
-    public static void setReadyToBeAutoSent(boolean readyToBeAutoSent)
-    {
+    public static void setReadyToBeAutoSent(boolean readyToBeAutoSent) {
         Session.readyToBeAutoSent = readyToBeAutoSent;
     }
 
@@ -367,28 +314,23 @@ public class Session extends Application
      *
      * @return
      */
-    public static boolean isReadyToBeAutoSent()
-    {
+    public static boolean isReadyToBeAutoSent() {
         return readyToBeAutoSent;
     }
 
-    public static boolean hasDescription()
-    {
-        return !(description.length()==0);
+    public static boolean hasDescription() {
+        return !(description.length() == 0);
     }
 
-    public static String getDescription()
-    {
+    public static String getDescription() {
         return description;
     }
 
-    public static void clearDescription()
-    {
+    public static void clearDescription() {
         description = "";
     }
 
-    public static void setDescription(String newDescription)
-    {
+    public static void setDescription(String newDescription) {
         description = newDescription;
     }
 

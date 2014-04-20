@@ -36,43 +36,35 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FileSenderFactory
-{
+public class FileSenderFactory {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FileSenderFactory.class.getSimpleName());
 
-    public static IFileSender GetOsmSender(Context applicationContext, IActionListener callback)
-    {
+    public static IFileSender GetOsmSender(Context applicationContext, IActionListener callback) {
         return new OSMHelper(applicationContext, callback);
     }
 
-    public static IFileSender GetDropBoxSender(Context applicationContext, IActionListener callback)
-    {
+    public static IFileSender GetDropBoxSender(Context applicationContext, IActionListener callback) {
         return new DropBoxHelper(applicationContext, callback);
     }
 
-    public static IFileSender GetGDocsSender(Context applicationContext, IActionListener callback)
-    {
+    public static IFileSender GetGDocsSender(Context applicationContext, IActionListener callback) {
         return new GDocsHelper(applicationContext, callback);
     }
 
-    public static IFileSender GetEmailSender(IActionListener callback)
-    {
+    public static IFileSender GetEmailSender(IActionListener callback) {
         return new AutoEmailHelper(callback);
     }
 
-    public static IFileSender GetOpenGTSSender(Context applicationContext, IActionListener callback)
-    {
+    public static IFileSender GetOpenGTSSender(Context applicationContext, IActionListener callback) {
         return new OpenGTSHelper(applicationContext, callback);
     }
 
-    public static IFileSender GetFtpSender(Context applicationContext, IActionListener callback)
-    {
+    public static IFileSender GetFtpSender(Context applicationContext, IActionListener callback) {
         return new FtpHelper(callback);
     }
 
-    public static void SendFiles(Context applicationContext, IActionListener callback)
-    {
+    public static void SendFiles(Context applicationContext, IActionListener callback) {
 
 
         final String currentFileName = Session.getCurrentFileName();
@@ -80,34 +72,28 @@ public class FileSenderFactory
 
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
-        if (Utilities.GetFilesInFolder(gpxFolder).length < 1)
-        {
+        if (Utilities.GetFilesInFolder(gpxFolder).length < 1) {
             callback.OnFailure();
             return;
         }
 
-        List<File> files = new ArrayList<File>(Arrays.asList(Utilities.GetFilesInFolder(gpxFolder, new FilenameFilter()
-        {
+        List<File> files = new ArrayList<File>(Arrays.asList(Utilities.GetFilesInFolder(gpxFolder, new FilenameFilter() {
             @Override
-            public boolean accept(File file, String s)
-            {
+            public boolean accept(File file, String s) {
                 return s.contains(currentFileName) && !s.contains("zip");
             }
         })));
 
-        if (files.size() == 0)
-        {
+        if (files.size() == 0) {
             callback.OnFailure();
             return;
         }
 
-        if (AppSettings.shouldSendZipFile())
-        {
+        if (AppSettings.shouldSendZipFile()) {
             File zipFile = new File(gpxFolder.getPath(), currentFileName + ".zip");
             ArrayList<String> filePaths = new ArrayList<String>();
 
-            for (File f : files)
-            {
+            for (File f : files) {
                 filePaths.add(f.getAbsolutePath());
             }
 
@@ -121,46 +107,38 @@ public class FileSenderFactory
 
         List<IFileSender> senders = GetFileSenders(applicationContext, callback);
 
-        for (IFileSender sender : senders)
-        {
+        for (IFileSender sender : senders) {
             sender.UploadFile(files);
         }
     }
 
 
-    public static List<IFileSender> GetFileSenders(Context applicationContext, IActionListener callback)
-    {
+    public static List<IFileSender> GetFileSenders(Context applicationContext, IActionListener callback) {
         List<IFileSender> senders = new ArrayList<IFileSender>();
 
-        if (GDocsHelper.IsLinked(applicationContext))
-        {
+        if (GDocsHelper.IsLinked(applicationContext)) {
             senders.add(new GDocsHelper(applicationContext, callback));
         }
 
-        if (OSMHelper.IsOsmAuthorized(applicationContext))
-        {
+        if (OSMHelper.IsOsmAuthorized(applicationContext)) {
             senders.add(new OSMHelper(applicationContext, callback));
         }
 
-        if (AppSettings.isAutoEmailEnabled())
-        {
+        if (AppSettings.isAutoEmailEnabled()) {
             senders.add(new AutoEmailHelper(callback));
         }
 
         DropBoxHelper dh = new DropBoxHelper(applicationContext, callback);
 
-        if (dh.IsLinked())
-        {
+        if (dh.IsLinked()) {
             senders.add(dh);
         }
 
-        if (AppSettings.isAutoOpenGTSEnabled())
-        {
+        if (AppSettings.isAutoOpenGTSEnabled()) {
             senders.add(new OpenGTSHelper(applicationContext, callback));
         }
 
-        if(AppSettings.isAutoFtpEnabled())
-        {
+        if (AppSettings.isAutoFtpEnabled()) {
             senders.add(new FtpHelper(callback));
         }
 

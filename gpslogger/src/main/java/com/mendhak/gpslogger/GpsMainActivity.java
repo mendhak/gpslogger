@@ -105,8 +105,6 @@ public class GpsMainActivity extends Activity
     }
 
 
-
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -162,7 +160,6 @@ public class GpsMainActivity extends Activity
         navigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
     }
-
 
 
     /**
@@ -306,10 +303,10 @@ public class GpsMainActivity extends Activity
 
         if (mnuOnePoint != null) {
             mnuOnePoint.setEnabled(!Session.isStarted());
-            mnuOnePoint.setIcon( (Session.isStarted()  ? R.drawable.singlepoint_disabled : R.drawable.singlepoint ) );
+            mnuOnePoint.setIcon((Session.isStarted() ? R.drawable.singlepoint_disabled : R.drawable.singlepoint));
         }
 
-        if(mnuAutoSendNow != null){
+        if (mnuAutoSendNow != null) {
             mnuAutoSendNow.setEnabled(Session.isStarted());
         }
 
@@ -378,21 +375,17 @@ public class GpsMainActivity extends Activity
 
     }
 
-    private void ForceAutoSendNow()
-    {
+    private void ForceAutoSendNow() {
         tracer.debug("Auto send now");
 
-        if (AppSettings.isAutoSendEnabled())
-        {
+        if (AppSettings.isAutoSendEnabled()) {
 
-                Utilities.ShowProgress(this, getString(R.string.autosend_sending),
-                        getString(R.string.please_wait));
-                loggingService.ForceAutoSendNow();
+            Utilities.ShowProgress(this, getString(R.string.autosend_sending),
+                    getString(R.string.please_wait));
+            loggingService.ForceAutoSendNow();
 
 
-        }
-        else
-        {
+        } else {
             Intent pref = new Intent().setClass(this, UploadSettingsActivity.class);
             startActivity(pref);
         }
@@ -551,7 +544,7 @@ public class GpsMainActivity extends Activity
 
             Arrays.sort(enumeratedFiles, new Comparator<File>() {
                 public int compare(File f1, File f2) {
-                    if(f1 != null && f2 != null){
+                    if (f1 != null && f2 != null) {
                         return -1 * Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
                     }
                     return -1;
@@ -732,10 +725,10 @@ public class GpsMainActivity extends Activity
         tracer.debug(".");
         if (Session.isBoundToService()) {
 
-            try{
+            try {
                 unbindService(gpsServiceConnection);
                 Session.setBoundToService(false);
-            }catch (Exception e){
+            } catch (Exception e) {
                 tracer.error("Could not unbind service", e);
             }
         }
@@ -743,9 +736,9 @@ public class GpsMainActivity extends Activity
         if (!Session.isStarted()) {
             tracer.debug("Stopping the service");
             //serviceIntent = new Intent(this, GpsLoggingService.class);
-            try{
+            try {
                 stopService(serviceIntent);
-            } catch(Exception e){
+            } catch (Exception e) {
                 tracer.error("Could not stop the service", e);
             }
 

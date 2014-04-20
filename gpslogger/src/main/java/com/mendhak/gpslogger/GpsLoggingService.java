@@ -29,7 +29,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.*;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import com.mendhak.gpslogger.common.AppSettings;
@@ -42,6 +46,7 @@ import com.mendhak.gpslogger.loggers.nmea.NmeaFileLogger;
 import com.mendhak.gpslogger.senders.AlarmReceiver;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import org.slf4j.LoggerFactory;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -207,14 +212,11 @@ public class GpsLoggingService extends Service implements IActionListener {
     }
 
 
-    protected void ForceAutoSendNow()
-    {
+    protected void ForceAutoSendNow() {
 
         tracer.debug(".");
-        if (AppSettings.isAutoSendEnabled() && Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0)
-        {
-            if (IsMainFormVisible())
-            {
+        if (AppSettings.isAutoSendEnabled() && Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0) {
+            if (IsMainFormVisible()) {
                 SetStatus(R.string.autosend_sending);
             }
 
@@ -481,9 +483,9 @@ public class GpsLoggingService extends Service implements IActionListener {
     }
 
     private void startAbsoluteTimer() {
-        if(AppSettings.getAbsoluteTimeout() >= 1){
+        if (AppSettings.getAbsoluteTimeout() >= 1) {
             tracer.debug("Starting absolute timer");
-            handler.postDelayed(stopManagerRunnable, AppSettings.getAbsoluteTimeout()*1000);
+            handler.postDelayed(stopManagerRunnable, AppSettings.getAbsoluteTimeout() * 1000);
         }
     }
 
@@ -495,7 +497,7 @@ public class GpsLoggingService extends Service implements IActionListener {
         }
     };
 
-    private void stopAbsoluteTimer(){
+    private void stopAbsoluteTimer() {
         tracer.debug("Stopping absolute timer");
         handler.removeCallbacks(stopManagerRunnable);
     }
@@ -648,18 +650,18 @@ public class GpsLoggingService extends Service implements IActionListener {
         if (AppSettings.getMinimumAccuracyInMeters() > 0) {
             if (AppSettings.getMinimumAccuracyInMeters() < Math.abs(loc.getAccuracy())) {
 
-                if(this.firstRetryTimeStamp == 0){
+                if (this.firstRetryTimeStamp == 0) {
                     this.firstRetryTimeStamp = System.currentTimeMillis();
                 }
 
-                if(currentTimeStamp - this.firstRetryTimeStamp <= AppSettings.getRetryInterval()*1000){
+                if (currentTimeStamp - this.firstRetryTimeStamp <= AppSettings.getRetryInterval() * 1000) {
                     tracer.warn("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " m. Point discarded.");
                     SetStatus("Inaccurate point discarded.");
                     //return and keep trying
                     return;
                 }
 
-                if (currentTimeStamp - this.firstRetryTimeStamp > AppSettings.getRetryInterval()*1000) {
+                if (currentTimeStamp - this.firstRetryTimeStamp > AppSettings.getRetryInterval() * 1000) {
                     tracer.warn("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " m and timeout reached");
                     SetStatus("Inaccurate points discarded and retries timed out.");
                     //Give up for now
@@ -812,7 +814,7 @@ public class GpsLoggingService extends Service implements IActionListener {
 
     public void OnNmeaSentence(long timestamp, String nmeaSentence) {
 
-        if(AppSettings.shouldLogToNmea()) {
+        if (AppSettings.shouldLogToNmea()) {
             NmeaFileLogger nmeaLogger = new NmeaFileLogger(Session.getCurrentFileName());
             nmeaLogger.Write(timestamp, nmeaSentence);
         }

@@ -48,8 +48,7 @@ import java.util.ArrayList;
 
 
 public class GDocsSettingsActivity extends PreferenceActivity
-        implements Preference.OnPreferenceClickListener, IActionListener
-{
+        implements Preference.OnPreferenceClickListener, IActionListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GDocsSettingsActivity.class.getSimpleName());
     private final Handler handler = new Handler();
@@ -59,11 +58,10 @@ public class GDocsSettingsActivity extends PreferenceActivity
 
     static final int REQUEST_CODE_MISSING_GPSF = 1;
     static final int REQUEST_CODE_ACCOUNT_PICKER = 2;
-    static final int REQUEST_CODE_RECOVERED=3;
+    static final int REQUEST_CODE_RECOVERED = 3;
 
 
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -89,35 +87,27 @@ public class GDocsSettingsActivity extends PreferenceActivity
     }
 
 
-    private void VerifyGooglePlayServices()
-    {
+    private void VerifyGooglePlayServices() {
         Preference resetPref = findPreference("gdocs_resetauth");
         Preference testPref = findPreference("gdocs_test");
 
         int availability = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
 
-        if (availability != ConnectionResult.SUCCESS)
-        {
+        if (availability != ConnectionResult.SUCCESS) {
             resetPref.setEnabled(false);
             testPref.setEnabled(false);
 
-            if (!messageShown)
-            {
+            if (!messageShown) {
                 Dialog d = GooglePlayServicesUtil.getErrorDialog(availability, this, REQUEST_CODE_MISSING_GPSF);
-                if (d != null)
-                {
+                if (d != null) {
                     d.show();
-                }
-                else
-                {
+                } else {
                     Utilities.MsgBox(getString(R.string.gpsf_missing), getString(R.string.gpsf_missing_description), this);
                 }
                 messageShown = true;
             }
 
-        }
-        else
-        {
+        } else {
             ResetPreferenceAppearance(resetPref, testPref);
 
             testPref.setOnPreferenceClickListener(this);
@@ -127,47 +117,35 @@ public class GDocsSettingsActivity extends PreferenceActivity
     }
 
 
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
         VerifyGooglePlayServices();
 
     }
 
-    private void ResetPreferenceAppearance(Preference resetPref, Preference testPref)
-    {
-        if (GDocsHelper.IsLinked(getApplicationContext()))
-        {
+    private void ResetPreferenceAppearance(Preference resetPref, Preference testPref) {
+        if (GDocsHelper.IsLinked(getApplicationContext())) {
             resetPref.setTitle(R.string.gdocs_clearauthorization);
             resetPref.setSummary(R.string.gdocs_clearauthorization_summary);
             testPref.setEnabled(true);
-        }
-        else
-        {
+        } else {
             testPref.setEnabled(false);
         }
 
     }
 
     @Override
-    public boolean onPreferenceClick(Preference preference)
-    {
-        if (preference.getKey().equalsIgnoreCase("gdocs_test"))
-        {
+    public boolean onPreferenceClick(Preference preference) {
+        if (preference.getKey().equalsIgnoreCase("gdocs_test")) {
             UploadTestFileToGoogleDocs();
-        }
-        else
-        {
-            if (GDocsHelper.IsLinked(getApplicationContext()))
-            {
+        } else {
+            if (GDocsHelper.IsLinked(getApplicationContext())) {
                 //Clear authorization
                 GoogleAuthUtil.invalidateToken(getApplicationContext(), GDocsHelper.GetAuthToken(getApplicationContext()));
                 GDocsHelper.ClearAuthToken(getApplicationContext());
                 startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
                 finish();
-            }
-            else
-            {
+            } else {
                 //Re-authorize
                 Authorize();
 
@@ -177,8 +155,7 @@ public class GDocsSettingsActivity extends PreferenceActivity
         return true;
     }
 
-    private void Authorize()
-    {
+    private void Authorize() {
         Intent intent = AccountPicker.newChooseAccountIntent(null, null, new String[]{GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE},
                 false, null, null, null, null);
 
@@ -187,25 +164,21 @@ public class GDocsSettingsActivity extends PreferenceActivity
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        switch (requestCode)
-        {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
 
             case REQUEST_CODE_ACCOUNT_PICKER:
-                if (resultCode == RESULT_OK)
-                {
+                if (resultCode == RESULT_OK) {
                     String accountName = data.getStringExtra(
                             AccountManager.KEY_ACCOUNT_NAME);
 
-                    GDocsHelper.SetAccountName(getApplicationContext(),accountName);
+                    GDocsHelper.SetAccountName(getApplicationContext(), accountName);
                     tracer.debug(accountName);
                     getAndUseAuthTokenInAsyncTask();
                 }
                 break;
             case REQUEST_CODE_RECOVERED:
-                if(resultCode == RESULT_OK)
-                {
+                if (resultCode == RESULT_OK) {
                     getAndUseAuthTokenInAsyncTask();
                 }
                 break;
@@ -215,44 +188,34 @@ public class GDocsSettingsActivity extends PreferenceActivity
     }
 
     // Example of how to use the GoogleAuthUtil in a blocking, non-main thread context
-    String getAndUseAuthTokenBlocking()
-    {
-        try
-        {
+    String getAndUseAuthTokenBlocking() {
+        try {
             // Retrieve a token for the given account and scope. It will always return either
             // a non-empty String or throw an exception.
             final String token = GoogleAuthUtil.getToken(getApplicationContext(), GDocsHelper.GetAccountName(getApplicationContext()), GDocsHelper.GetOauth2Scope());
 
             return token;
-        }
-        catch (GooglePlayServicesAvailabilityException playEx)
-        {
+        } catch (GooglePlayServicesAvailabilityException playEx) {
             Dialog alert = GooglePlayServicesUtil.getErrorDialog(
                     playEx.getConnectionStatusCode(),
                     this,
                     REQUEST_CODE_RECOVERED);
             alert.show();
 
-        }
-        catch (UserRecoverableAuthException userAuthEx)
-        {
+        } catch (UserRecoverableAuthException userAuthEx) {
             // Start the user recoverable action using the intent returned by
             // getIntent()
             startActivityForResult(
                     userAuthEx.getIntent(),
                     REQUEST_CODE_RECOVERED);
 
-        }
-        catch (IOException transientEx)
-        {
+        } catch (IOException transientEx) {
             // network or server error, the call is expected to succeed if you try again later.
             // Don't attempt to call again immediately - the request is likely to
             // fail, you'll hit quotas or back-off.
 
 
-        }
-        catch (GoogleAuthException authEx)
-        {
+        } catch (GoogleAuthException authEx) {
             // Failure. The call is not expected to ever succeed so it should not be
             // retried.
 
@@ -261,23 +224,18 @@ public class GDocsSettingsActivity extends PreferenceActivity
     }
 
 
-    void getAndUseAuthTokenInAsyncTask()
-    {
-        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>()
-        {
+    void getAndUseAuthTokenInAsyncTask() {
+        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
             @Override
-            protected String doInBackground(Void... params)
-            {
-               return getAndUseAuthTokenBlocking();
+            protected String doInBackground(Void... params) {
+                return getAndUseAuthTokenBlocking();
 
             }
 
             @Override
-            protected void onPostExecute(String authToken)
-            {
-                if(authToken != null)
-                {
-                    GDocsHelper.SaveAuthToken(getApplicationContext(),authToken);
+            protected void onPostExecute(String authToken) {
+                if (authToken != null) {
+                    GDocsHelper.SaveAuthToken(getApplicationContext(), authToken);
                     tracer.debug(authToken);
                     VerifyGooglePlayServices();
                 }
@@ -288,23 +246,19 @@ public class GDocsSettingsActivity extends PreferenceActivity
     }
 
 
-    private void UploadTestFileToGoogleDocs()
-    {
+    private void UploadTestFileToGoogleDocs() {
 
         Utilities.ShowProgress(GDocsSettingsActivity.this, getString(R.string.please_wait), getString(R.string.please_wait));
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
-        if (!gpxFolder.exists())
-        {
+        if (!gpxFolder.exists()) {
             gpxFolder.mkdirs();
         }
 
         tracer.debug("Creating gpslogger_test.xml");
         File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
 
-        try
-        {
-            if(!testFile.exists())
-            {
+        try {
+            if (!testFile.exists()) {
                 testFile.createNewFile();
 
                 FileOutputStream initialWriter = new FileOutputStream(testFile, true);
@@ -317,9 +271,7 @@ public class GDocsSettingsActivity extends PreferenceActivity
                 initialOutput.close();
             }
 
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             OnFailure();
         }
 
@@ -334,45 +286,37 @@ public class GDocsSettingsActivity extends PreferenceActivity
     }
 
     @Override
-    public void OnComplete()
-    {
+    public void OnComplete() {
         Utilities.HideProgress();
         handler.post(successUpload);
     }
 
     @Override
-    public void OnFailure()
-    {
+    public void OnFailure() {
         Utilities.HideProgress();
         handler.post(failedUpload);
 
     }
 
 
-    private final Runnable failedUpload = new Runnable()
-    {
-        public void run()
-        {
+    private final Runnable failedUpload = new Runnable() {
+        public void run() {
             FailureUploading();
         }
     };
 
-    private final Runnable successUpload = new Runnable()
-    {
-        public void run()
-        {
+    private final Runnable successUpload = new Runnable() {
+        public void run() {
             SuccessUploading();
         }
     };
 
 
-    private void FailureUploading()
-    {
+    private void FailureUploading() {
         Utilities.MsgBox(getString(R.string.sorry), getString(R.string.gdocs_testupload_error), this);
     }
 
-    private void SuccessUploading()
-    {
+    private void SuccessUploading() {
         Utilities.MsgBox(getString(R.string.success), getString(R.string.gdocs_testupload_success), this);
     }
 

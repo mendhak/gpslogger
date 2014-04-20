@@ -19,8 +19,7 @@ package com.mendhak.gpslogger;
 
 import android.location.Location;
 
-interface IGpsLoggerServiceClient
-{
+interface IGpsLoggerServiceClient {
 
 
     /**
@@ -47,6 +46,7 @@ interface IGpsLoggerServiceClient
 
     /**
      * A new NMEA sentence was received
+     *
      * @param timestamp
      * @param nmeaSentence
      */

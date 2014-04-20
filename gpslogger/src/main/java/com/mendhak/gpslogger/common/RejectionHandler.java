@@ -22,14 +22,12 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class RejectionHandler implements RejectedExecutionHandler
-{
+public class RejectionHandler implements RejectedExecutionHandler {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(RejectionHandler.class.getSimpleName());
 
     @Override
-    public void rejectedExecution(Runnable runnable, ThreadPoolExecutor threadPoolExecutor)
-    {
+    public void rejectedExecution(Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
         tracer.warn("Could not queue task, some points may not be logged.");
     }
 }

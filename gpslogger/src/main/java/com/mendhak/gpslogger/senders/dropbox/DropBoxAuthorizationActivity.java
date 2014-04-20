@@ -29,15 +29,13 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
-public class DropBoxAuthorizationActivity extends PreferenceActivity
-{
+public class DropBoxAuthorizationActivity extends PreferenceActivity {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropBoxAuthorizationActivity.class.getSimpleName());
     DropBoxHelper helper;
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -47,37 +45,26 @@ public class DropBoxAuthorizationActivity extends PreferenceActivity
 
         helper = new DropBoxHelper(getApplicationContext(), null);
 
-        if (helper.IsLinked())
-        {
+        if (helper.IsLinked()) {
             pref.setTitle(R.string.dropbox_unauthorize);
             pref.setSummary(R.string.dropbox_unauthorize_description);
-        }
-        else
-        {
+        } else {
             pref.setTitle(R.string.dropbox_authorize);
             pref.setSummary(R.string.dropbox_authorize_description);
         }
 
-        pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
-        {
+        pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
-            public boolean onPreferenceClick(Preference preference)
-            {
+            public boolean onPreferenceClick(Preference preference) {
                 // This logs you out if you're logged in, or vice versa
-                if (helper.IsLinked())
-                {
+                if (helper.IsLinked()) {
                     helper.UnLink();
                     startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
                     finish();
-                }
-                else
-                {
-                    try
-                    {
+                } else {
+                    try {
                         helper.StartAuthentication(DropBoxAuthorizationActivity.this);
-                    }
-                    catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         tracer.error("DropBoxAuthorizationActivity.onPreferenceClick", e);
                     }
                 }
@@ -104,20 +91,15 @@ public class DropBoxAuthorizationActivity extends PreferenceActivity
 
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
 
-        try
-        {
-            if (helper.FinishAuthorization())
-            {
+        try {
+            if (helper.FinishAuthorization()) {
                 startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
                 finish();
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Utilities.MsgBox(getString(R.string.error), getString(R.string.dropbox_couldnotauthorize),
                     DropBoxAuthorizationActivity.this);
             tracer.error("DropBoxAuthorizationActivity.onResume", e);

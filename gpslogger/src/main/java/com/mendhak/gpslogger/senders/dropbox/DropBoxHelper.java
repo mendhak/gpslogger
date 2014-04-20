@@ -36,8 +36,7 @@ import java.io.FileInputStream;
 import java.util.List;
 
 
-public class DropBoxHelper implements IActionListener, IFileSender
-{
+public class DropBoxHelper implements IActionListener, IFileSender {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropBoxHelper.class.getSimpleName());
     final static public String ACCESS_KEY_NAME = "DROPBOX_ACCESS_KEY";
@@ -47,8 +46,7 @@ public class DropBoxHelper implements IActionListener, IFileSender
     DropboxAPI<AndroidAuthSession> dropboxApi;
     IActionListener callback;
 
-    public DropBoxHelper(Context context, IActionListener listener)
-    {
+    public DropBoxHelper(Context context, IActionListener listener) {
         ctx = context;
         AndroidAuthSession session = buildSession();
         dropboxApi = new DropboxAPI<AndroidAuthSession>(session);
@@ -60,16 +58,13 @@ public class DropBoxHelper implements IActionListener, IFileSender
      *
      * @return True/False
      */
-    public boolean IsLinked()
-    {
+    public boolean IsLinked() {
         return dropboxApi.getSession().isLinked();
     }
 
-    public boolean FinishAuthorization()
-    {
+    public boolean FinishAuthorization() {
         AndroidAuthSession session = dropboxApi.getSession();
-        if (!session.isLinked() && session.authenticationSuccessful())
-        {
+        if (!session.isLinked() && session.authenticationSuccessful()) {
             // Mandatory call to complete the auth
             session.finishAuthentication();
 
@@ -91,8 +86,7 @@ public class DropBoxHelper implements IActionListener, IFileSender
      * @param key    The Access Key
      * @param secret The Access Secret
      */
-    private void storeKeys(String key, String secret)
-    {
+    private void storeKeys(String key, String secret) {
 
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(ctx);
@@ -102,8 +96,7 @@ public class DropBoxHelper implements IActionListener, IFileSender
         edit.commit();
     }
 
-    private void clearKeys()
-    {
+    private void clearKeys() {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(ctx);
         SharedPreferences.Editor edit = prefs.edit();
@@ -113,21 +106,17 @@ public class DropBoxHelper implements IActionListener, IFileSender
     }
 
 
-    private AndroidAuthSession buildSession()
-    {
+    private AndroidAuthSession buildSession() {
         int dropboxAppKey = ctx.getResources().getIdentifier("dropbox_appkey", "string", ctx.getPackageName());
         int dropboxAppSecret = ctx.getResources().getIdentifier("dropbox_appsecret", "string", ctx.getPackageName());
         AppKeyPair appKeyPair = new AppKeyPair(ctx.getString(dropboxAppKey), ctx.getString(dropboxAppSecret));
         AndroidAuthSession session;
 
         String[] stored = getKeys();
-        if (stored != null)
-        {
+        if (stored != null) {
             AccessTokenPair accessToken = new AccessTokenPair(stored[0], stored[1]);
             session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE, accessToken);
-        }
-        else
-        {
+        } else {
             session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE);
         }
 
@@ -141,32 +130,26 @@ public class DropBoxHelper implements IActionListener, IFileSender
      *
      * @return Array of [access_key, access_secret], or null if none stored
      */
-    private String[] getKeys()
-    {
+    private String[] getKeys() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         String key = prefs.getString(ACCESS_KEY_NAME, null);
         String secret = prefs.getString(ACCESS_SECRET_NAME, null);
-        if (key != null && secret != null)
-        {
+        if (key != null && secret != null) {
             String[] ret = new String[2];
             ret[0] = key;
             ret[1] = secret;
             return ret;
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
 
-    public void StartAuthentication(DropBoxAuthorizationActivity dropBoxAuthorizationActivity)
-    {
+    public void StartAuthentication(DropBoxAuthorizationActivity dropBoxAuthorizationActivity) {
         // Start the remote authentication
         dropboxApi.getSession().startAuthentication(dropBoxAuthorizationActivity);
     }
 
-    public void UnLink()
-    {
+    public void UnLink() {
         // Remove credentials from the session
         dropboxApi.getSession().unlink();
 
@@ -175,8 +158,7 @@ public class DropBoxHelper implements IActionListener, IFileSender
     }
 
     @Override
-    public void UploadFile(List<File> files)
-    {
+    public void UploadFile(List<File> files) {
 
         //If there's a zip file, upload just that
         //Else upload everything in files.
@@ -184,68 +166,54 @@ public class DropBoxHelper implements IActionListener, IFileSender
         File zipFile = null;
 
 
-        for (File f : files)
-        {
-            if (f.getName().contains(".zip"))
-            {
+        for (File f : files) {
+            if (f.getName().contains(".zip")) {
                 zipFile = f;
                 break;
             }
         }
 
-        if (zipFile != null)
-        {
+        if (zipFile != null) {
             UploadFile(zipFile.getName());
-        }
-        else
-        {
-            for (File f : files)
-            {
+        } else {
+            for (File f : files) {
                 UploadFile(f.getName());
             }
         }
 
     }
 
-    public void UploadFile(String fileName)
-    {
+    public void UploadFile(String fileName) {
         Thread t = new Thread(new DropBoxUploadHandler(fileName, dropboxApi, this));
         t.start();
     }
 
-    public void OnComplete()
-    {
+    public void OnComplete() {
         callback.OnComplete();
     }
 
-    public void OnFailure()
-    {
+    public void OnFailure() {
 
     }
 
     @Override
-    public boolean accept(File dir, String name)
-    {
+    public boolean accept(File dir, String name) {
         return true;
     }
 
-    public class DropBoxUploadHandler implements Runnable
-    {
+    public class DropBoxUploadHandler implements Runnable {
         DropboxAPI<AndroidAuthSession> api;
         String fileName;
         IActionListener helper;
 
-        public DropBoxUploadHandler(String file, DropboxAPI<AndroidAuthSession> dbApi, IActionListener dbHelper)
-        {
+        public DropBoxUploadHandler(String file, DropboxAPI<AndroidAuthSession> dbApi, IActionListener dbHelper) {
             fileName = file;
             api = dbApi;
             helper = dbHelper;
         }
 
-        public void run()
-        {
-            try
-            {
+        public void run() {
+            try {
                 File gpsDir = new File(AppSettings.getGpsLoggerFolder());
                 File gpxFile = new File(gpsDir, fileName);
 
@@ -253,9 +221,7 @@ public class DropBoxHelper implements IActionListener, IFileSender
                 DropboxAPI.Entry upEntry = api.putFileOverwrite(gpxFile.getName(), fis, gpxFile.length(), null);
                 tracer.info("DropBox uploaded file rev is: " + upEntry.rev);
                 helper.OnComplete();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 tracer.error("DropBoxHelper.UploadFile", e);
             }
         }

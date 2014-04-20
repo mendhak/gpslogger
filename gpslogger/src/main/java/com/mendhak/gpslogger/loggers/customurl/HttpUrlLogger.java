@@ -46,8 +46,7 @@ public class HttpUrlLogger implements IFileLogger {
     private final float batteryLevel;
     private final String androidId;
 
-    public HttpUrlLogger(String customLoggingUrl, int satellites, float batteryLevel, String androidId)
-    {
+    public HttpUrlLogger(String customLoggingUrl, int satellites, float batteryLevel, String androidId) {
         this.satellites = satellites;
         this.customLoggingUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
@@ -56,7 +55,7 @@ public class HttpUrlLogger implements IFileLogger {
 
     @Override
     public void Write(Location loc) throws Exception {
-        if(!Session.hasDescription()){
+        if (!Session.hasDescription()) {
             Annotate("", loc);
         }
 
@@ -116,7 +115,6 @@ class HttpUrlLogHandler implements Runnable {
             logUrl = logUrl.replaceAll("(?i)%batt", String.valueOf(batteryLevel));
             logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));
             logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(Utilities.GetBuildSerial()));
-
 
 
             tracer.debug(logUrl);

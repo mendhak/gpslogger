@@ -17,15 +17,14 @@
 
 package com.mendhak.gpslogger.loggers;
 
+import android.location.Location;
+import com.mendhak.gpslogger.common.Utilities;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.Locale;
-
-import android.location.Location;
-
-import com.mendhak.gpslogger.common.Utilities;
 
 
 /**
@@ -35,22 +34,18 @@ import com.mendhak.gpslogger.common.Utilities;
  * @author Jeroen van Wilgenburg
  *         https://github.com/jvwilge/gpslogger/commit/a7d45bcc1d5012513ff2246022ce4da2708adf47
  */
-public class PlainTextFileLogger implements IFileLogger
-{
+public class PlainTextFileLogger implements IFileLogger {
 
     private File file;
     protected final String name = "TXT";
 
-    public PlainTextFileLogger(File file)
-    {
+    public PlainTextFileLogger(File file) {
         this.file = file;
     }
 
     @Override
-    public void Write(Location loc) throws Exception
-    {
-        if (!file.exists())
-        {
+    public void Write(Location loc) throws Exception {
+        if (!file.exists()) {
             file.createNewFile();
 
             FileOutputStream writer = new FileOutputStream(file, true);
@@ -80,15 +75,13 @@ public class PlainTextFileLogger implements IFileLogger
     }
 
     @Override
-    public void Annotate(String description, Location loc) throws Exception
-    {
+    public void Annotate(String description, Location loc) throws Exception {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 

@@ -34,16 +34,14 @@ import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import org.slf4j.LoggerFactory;
 
-public class OSMAuthorizationActivity extends PreferenceActivity
-{
+public class OSMAuthorizationActivity extends PreferenceActivity {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OSMAuthorizationActivity.class.getSimpleName());
     private static OAuthProvider provider;
     private static OAuthConsumer consumer;
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -53,22 +51,18 @@ public class OSMAuthorizationActivity extends PreferenceActivity
         final Uri myURI = intent.getData();
 
         if (myURI != null && myURI.getQuery() != null
-                && myURI.getQuery().length() > 0)
-        {
+                && myURI.getQuery().length() > 0) {
             //User has returned! Read the verifier info from querystring
             String oAuthVerifier = myURI.getQueryParameter("oauth_verifier");
 
-            try
-            {
+            try {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-                if (provider == null)
-                {
+                if (provider == null) {
                     provider = OSMHelper.GetOSMAuthProvider(getApplicationContext());
                 }
 
-                if (consumer == null)
-                {
+                if (consumer == null) {
                     //In case consumer is null, re-initialize from stored values.
                     consumer = OSMHelper.GetOSMAuthConsumer(getApplicationContext());
                 }
@@ -89,9 +83,7 @@ public class OSMAuthorizationActivity extends PreferenceActivity
                 startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
                 finish();
 
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 tracer.error("OSMAuthorizationActivity.onCreate - user has returned", e);
                 Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error), this);
             }
@@ -103,16 +95,13 @@ public class OSMAuthorizationActivity extends PreferenceActivity
         Preference tagsPref = findPreference("osm_tags");
         Preference resetPref = findPreference("osm_resetauth");
 
-        if (!OSMHelper.IsOsmAuthorized(getApplicationContext()))
-        {
+        if (!OSMHelper.IsOsmAuthorized(getApplicationContext())) {
             resetPref.setTitle(R.string.osm_lbl_authorize);
             resetPref.setSummary(R.string.osm_lbl_authorize_description);
             visibilityPref.setEnabled(false);
             descriptionPref.setEnabled(false);
             tagsPref.setEnabled(false);
-        }
-        else
-        {
+        } else {
             visibilityPref.setEnabled(true);
             descriptionPref.setEnabled(true);
             tagsPref.setEnabled(true);
@@ -120,14 +109,11 @@ public class OSMAuthorizationActivity extends PreferenceActivity
         }
 
 
-        resetPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
-        {
+        resetPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            public boolean onPreferenceClick(Preference preference)
-            {
+            public boolean onPreferenceClick(Preference preference) {
 
-                if (OSMHelper.IsOsmAuthorized(getApplicationContext()))
-                {
+                if (OSMHelper.IsOsmAuthorized(getApplicationContext())) {
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.remove("osm_accesstoken");
@@ -138,11 +124,8 @@ public class OSMAuthorizationActivity extends PreferenceActivity
                     startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
                     finish();
 
-                }
-                else
-                {
-                    try
-                    {
+                } else {
+                    try {
                         StrictMode.enableDefaults();
 
                         //User clicks. Set the consumer and provider up.
@@ -166,9 +149,7 @@ public class OSMAuthorizationActivity extends PreferenceActivity
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
 
-                    }
-                    catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         tracer.error("OSMAuthorizationActivity.onClick", e);
                         Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error),
                                 OSMAuthorizationActivity.this);
@@ -199,7 +180,6 @@ public class OSMAuthorizationActivity extends PreferenceActivity
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }

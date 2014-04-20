@@ -45,14 +45,20 @@ import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class Utilities
-{
+public class Utilities {
 
     private static final int LOGLEVEL = 5;
     private static ProgressDialog pd;
@@ -117,8 +123,7 @@ public class Utilities
     /**
      * Gets user preferences, populates the AppSettings class.
      */
-    public static void PopulateAppSettings(Context context)
-    {
+    public static void PopulateAppSettings(Context context) {
 
         tracer.info("Getting preferences");
         SharedPreferences prefs = PreferenceManager
@@ -147,31 +152,24 @@ public class Utilities
         String minimumDistanceString = prefs.getString(
                 "distance_before_logging", "0");
 
-        if (minimumDistanceString != null && minimumDistanceString.length() > 0)
-        {
+        if (minimumDistanceString != null && minimumDistanceString.length() > 0) {
             AppSettings.setMinimumDistanceInMeters(Integer
                     .valueOf(minimumDistanceString));
-        }
-        else
-        {
+        } else {
             AppSettings.setMinimumDistanceInMeters(0);
         }
 
         String minimumAccuracyString = prefs.getString(
                 "accuracy_before_logging", "0");
 
-        if (minimumAccuracyString != null && minimumAccuracyString.length() > 0)
-        {
+        if (minimumAccuracyString != null && minimumAccuracyString.length() > 0) {
             AppSettings.setMinimumAccuracyInMeters(Integer
                     .valueOf(minimumAccuracyString));
-        }
-        else
-        {
+        } else {
             AppSettings.setMinimumAccuracyInMeters(0);
         }
 
-        if (AppSettings.shouldUseImperial())
-        {
+        if (AppSettings.shouldUseImperial()) {
             AppSettings.setMinimumDistanceInMeters(Utilities.FeetToMeters(AppSettings
                     .getMinimumDistanceInMeters()));
 
@@ -183,13 +181,10 @@ public class Utilities
         String minimumSecondsString = prefs.getString("time_before_logging",
                 "60");
 
-        if (minimumSecondsString != null && minimumSecondsString.length() > 0)
-        {
+        if (minimumSecondsString != null && minimumSecondsString.length() > 0) {
             AppSettings
                     .setMinimumSeconds(Integer.valueOf(minimumSecondsString));
-        }
-        else
-        {
+        } else {
             AppSettings.setMinimumSeconds(60);
         }
 
@@ -199,17 +194,14 @@ public class Utilities
         String retryIntervalString = prefs.getString("retry_time",
                 "60");
 
-        if (retryIntervalString != null && retryIntervalString.length() > 0)
-        {
+        if (retryIntervalString != null && retryIntervalString.length() > 0) {
             AppSettings
                     .setRetryInterval(Integer.valueOf(retryIntervalString));
-        }
-        else
-        {
-             AppSettings.setRetryInterval(60);
+        } else {
+            AppSettings.setRetryInterval(60);
         }
 
-        /** 
+        /**
          * New file creation preference: 
          *     onceaday, 
          *     custom file (static),
@@ -218,18 +210,13 @@ public class Utilities
         AppSettings.setNewFileCreation(prefs.getString("new_file_creation",
                 "onceaday"));
 
-        if (AppSettings.getNewFileCreation().equals("onceaday"))
-        {
+        if (AppSettings.getNewFileCreation().equals("onceaday")) {
             AppSettings.setNewFileOnceADay(true);
             AppSettings.setCustomFile(false);
-        }
-        else if(AppSettings.getNewFileCreation().equals("custom")  || AppSettings.getNewFileCreation().equals("static"))
-        {
+        } else if (AppSettings.getNewFileCreation().equals("custom") || AppSettings.getNewFileCreation().equals("static")) {
             AppSettings.setCustomFile(true);
             AppSettings.setCustomFileName(prefs.getString("new_file_custom_name", "gpslogger"));
-        }
-        else /* new log with each start */
-        {
+        } else /* new log with each start */ {
             AppSettings.setNewFileOnceADay(false);
             AppSettings.setCustomFile(false);
         }
@@ -239,8 +226,7 @@ public class Utilities
         AppSettings.setAutoEmailEnabled(prefs.getBoolean("autoemail_enabled",
                 false));
 
-        if (Float.valueOf(prefs.getString("autosend_frequency", "0")) >= 8f)
-        {
+        if (Float.valueOf(prefs.getString("autosend_frequency", "0")) >= 8f) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("autosend_frequency", "8");
             editor.commit();
@@ -266,34 +252,31 @@ public class Utilities
         AppSettings.setOpenGTSServerPath(prefs.getString("autoopengts_server_path", ""));
         AppSettings.setOpenGTSDeviceId(prefs.getString("opengts_device_id", ""));
 
-        AppSettings.setAutoFtpEnabled(prefs.getBoolean("autoftp_enabled",false));
-        AppSettings.setFtpServerName(prefs.getString("autoftp_server",""));
-        AppSettings.setFtpUsername(prefs.getString("autoftp_username",""));
-        AppSettings.setFtpPassword(prefs.getString("autoftp_password",""));
+        AppSettings.setAutoFtpEnabled(prefs.getBoolean("autoftp_enabled", false));
+        AppSettings.setFtpServerName(prefs.getString("autoftp_server", ""));
+        AppSettings.setFtpUsername(prefs.getString("autoftp_username", ""));
+        AppSettings.setFtpPassword(prefs.getString("autoftp_password", ""));
         AppSettings.setFtpDirectory(prefs.getString("autoftp_directory", "GPSLogger"));
         AppSettings.setFtpPort(Integer.valueOf(prefs.getString("autoftp_port", "21")));
         AppSettings.setFtpUseFtps(prefs.getBoolean("autoftp_useftps", false));
-        AppSettings.setFtpProtocol(prefs.getString("autoftp_ssltls",""));
+        AppSettings.setFtpProtocol(prefs.getString("autoftp_ssltls", ""));
         AppSettings.setFtpImplicit(prefs.getBoolean("autoftp_implicit", false));
         AppSettings.setGpsLoggerFolder(prefs.getString("gpslogger_folder", Environment.getExternalStorageDirectory() + "/GPSLogger"));
-        AppSettings.setFileNamePrefixSerial(prefs.getBoolean("new_file_prefix_serial",false));
+        AppSettings.setFileNamePrefixSerial(prefs.getBoolean("new_file_prefix_serial", false));
 
         String absoluteTimeoutString = prefs.getString("absolute_timeout",
                 "0");
 
         if (absoluteTimeoutString != null && absoluteTimeoutString.length() > 0) {
             AppSettings.setAbsoluteTimeout(Integer.valueOf(absoluteTimeoutString));
-        }
-        else {
+        } else {
             AppSettings.setAbsoluteTimeout(0);
         }
     }
 
 
-    public static void ShowProgress(Context ctx, String title, String message)
-    {
-        if (ctx != null)
-        {
+    public static void ShowProgress(Context ctx, String title, String message) {
+        if (ctx != null) {
             pd = new ProgressDialog(ctx, ProgressDialog.STYLE_HORIZONTAL);
             pd.setMax(100);
             pd.setIndeterminate(true);
@@ -302,10 +285,8 @@ public class Utilities
         }
     }
 
-    public static void HideProgress()
-    {
-        if (pd != null)
-        {
+    public static void HideProgress() {
+        if (pd != null) {
             pd.dismiss();
         }
     }
@@ -318,8 +299,7 @@ public class Utilities
      * @param className The calling class, such as GpsMainActivity.this or
      *                  mainActivity.
      */
-    public static void MsgBox(String title, String message, Context className)
-    {
+    public static void MsgBox(String title, String message, Context className) {
         MsgBox(title, message, className, null);
     }
 
@@ -330,36 +310,33 @@ public class Utilities
      * @param message
      * @param className   The calling class, such as GpsMainActivity.this or
      *                    mainActivity.
-     * @param msgCallback An object which implements IHasACallBack so that the 
+     * @param msgCallback An object which implements IHasACallBack so that the
      *                    click event can call the callback method.
      */
     private static void MsgBox(String title, String message, Context className,
-                               final IMessageBoxCallback msgCallback)
-    {
-    	AlertDialog.Builder alertBuilder = new AlertDialog.Builder(className);
-    	alertBuilder.setTitle(title)
-                    .setMessage(message)
-                    .setCancelable(false)
-                    .setPositiveButton(className.getString(R.string.ok),
+                               final IMessageBoxCallback msgCallback) {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(className);
+        alertBuilder.setTitle(title)
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton(className.getString(R.string.ok),
                         new DialogInterface.OnClickListener() {
-                    	
-                            public void onClick(final DialogInterface dialog, 
-                            		            final int which) {
-                       
-                            	if (msgCallback != null)
-                            	{
-                            		msgCallback.MessageBoxResult(which);
-                            	}
+
+                            public void onClick(final DialogInterface dialog,
+                                                final int which) {
+
+                                if (msgCallback != null) {
+                                    msgCallback.MessageBoxResult(which);
+                                }
                             }
-                    	}
-                    );
-    	
+                        }
+                );
+
         AlertDialog alertDialog = alertBuilder.create();
 
-        if(className instanceof Activity && !((Activity)className).isFinishing()){
+        if (className instanceof Activity && !((Activity) className).isFinishing()) {
             alertDialog.show();
-        }
-        else {
+        } else {
             alertDialog.show();
         }
 
@@ -372,8 +349,7 @@ public class Utilities
      * @return
      */
     public static String GetDescriptiveTimeString(int numberOfSeconds,
-                                                  Context context)
-    {
+                                                  Context context) {
 
         String descriptive;
         int hours;
@@ -383,43 +359,35 @@ public class Utilities
         int remainingSeconds;
 
         // Special cases
-        if (numberOfSeconds == 1)
-        {
+        if (numberOfSeconds == 1) {
             return context.getString(R.string.time_onesecond);
         }
 
-        if (numberOfSeconds == 30)
-        {
+        if (numberOfSeconds == 30) {
             return context.getString(R.string.time_halfminute);
         }
 
-        if (numberOfSeconds == 60)
-        {
+        if (numberOfSeconds == 60) {
             return context.getString(R.string.time_oneminute);
         }
 
-        if (numberOfSeconds == 900)
-        {
+        if (numberOfSeconds == 900) {
             return context.getString(R.string.time_quarterhour);
         }
 
-        if (numberOfSeconds == 1800)
-        {
+        if (numberOfSeconds == 1800) {
             return context.getString(R.string.time_halfhour);
         }
 
-        if (numberOfSeconds == 3600)
-        {
+        if (numberOfSeconds == 3600) {
             return context.getString(R.string.time_onehour);
         }
 
-        if (numberOfSeconds == 4800)
-        {
+        if (numberOfSeconds == 4800) {
             return context.getString(R.string.time_oneandhalfhours);
         }
 
-        if (numberOfSeconds == 9000)
-        {
+        if (numberOfSeconds == 9000) {
             return context.getString(R.string.time_twoandhalfhours);
         }
 
@@ -449,78 +417,44 @@ public class Utilities
      * @return
      */
     public static String GetBearingDescription(float bearingDegrees,
-                                               Context context)
-    {
+                                               Context context) {
 
         String direction;
         String cardinal;
 
-        if (bearingDegrees > 348.75 || bearingDegrees <= 11.25)
-        {
+        if (bearingDegrees > 348.75 || bearingDegrees <= 11.25) {
             cardinal = context.getString(R.string.direction_north);
-        }
-        else if (bearingDegrees > 11.25 && bearingDegrees <= 33.75)
-        {
+        } else if (bearingDegrees > 11.25 && bearingDegrees <= 33.75) {
             cardinal = context.getString(R.string.direction_northnortheast);
-        }
-        else if (bearingDegrees > 33.75 && bearingDegrees <= 56.25)
-        {
+        } else if (bearingDegrees > 33.75 && bearingDegrees <= 56.25) {
             cardinal = context.getString(R.string.direction_northeast);
-        }
-        else if (bearingDegrees > 56.25 && bearingDegrees <= 78.75)
-        {
+        } else if (bearingDegrees > 56.25 && bearingDegrees <= 78.75) {
             cardinal = context.getString(R.string.direction_eastnortheast);
-        }
-        else if (bearingDegrees > 78.75 && bearingDegrees <= 101.25)
-        {
+        } else if (bearingDegrees > 78.75 && bearingDegrees <= 101.25) {
             cardinal = context.getString(R.string.direction_east);
-        }
-        else if (bearingDegrees > 101.25 && bearingDegrees <= 123.75)
-        {
+        } else if (bearingDegrees > 101.25 && bearingDegrees <= 123.75) {
             cardinal = context.getString(R.string.direction_eastsoutheast);
-        }
-        else if (bearingDegrees > 123.75 && bearingDegrees <= 146.26)
-        {
+        } else if (bearingDegrees > 123.75 && bearingDegrees <= 146.26) {
             cardinal = context.getString(R.string.direction_southeast);
-        }
-        else if (bearingDegrees > 146.25 && bearingDegrees <= 168.75)
-        {
+        } else if (bearingDegrees > 146.25 && bearingDegrees <= 168.75) {
             cardinal = context.getString(R.string.direction_southsoutheast);
-        }
-        else if (bearingDegrees > 168.75 && bearingDegrees <= 191.25)
-        {
+        } else if (bearingDegrees > 168.75 && bearingDegrees <= 191.25) {
             cardinal = context.getString(R.string.direction_south);
-        }
-        else if (bearingDegrees > 191.25 && bearingDegrees <= 213.75)
-        {
+        } else if (bearingDegrees > 191.25 && bearingDegrees <= 213.75) {
             cardinal = context.getString(R.string.direction_southsouthwest);
-        }
-        else if (bearingDegrees > 213.75 && bearingDegrees <= 236.25)
-        {
+        } else if (bearingDegrees > 213.75 && bearingDegrees <= 236.25) {
             cardinal = context.getString(R.string.direction_southwest);
-        }
-        else if (bearingDegrees > 236.25 && bearingDegrees <= 258.75)
-        {
+        } else if (bearingDegrees > 236.25 && bearingDegrees <= 258.75) {
             cardinal = context.getString(R.string.direction_westsouthwest);
-        }
-        else if (bearingDegrees > 258.75 && bearingDegrees <= 281.25)
-        {
+        } else if (bearingDegrees > 258.75 && bearingDegrees <= 281.25) {
             cardinal = context.getString(R.string.direction_west);
-        }
-        else if (bearingDegrees > 281.25 && bearingDegrees <= 303.75)
-        {
+        } else if (bearingDegrees > 281.25 && bearingDegrees <= 303.75) {
             cardinal = context.getString(R.string.direction_westnorthwest);
-        }
-        else if (bearingDegrees > 303.75 && bearingDegrees <= 326.25)
-        {
+        } else if (bearingDegrees > 303.75 && bearingDegrees <= 326.25) {
             cardinal = context.getString(R.string.direction_northwest);
-        }
-        else if (bearingDegrees > 326.25 && bearingDegrees <= 348.75)
-        {
+        } else if (bearingDegrees > 326.25 && bearingDegrees <= 348.75) {
             cardinal = context.getString(R.string.direction_northnorthwest);
-        }
-        else
-        {
+        } else {
             direction = context.getString(R.string.unknown_direction);
             return direction;
         }
@@ -537,8 +471,7 @@ public class Utilities
      * @param desc
      * @return
      */
-    public static String CleanDescription(String desc)
-    {
+    public static String CleanDescription(String desc) {
         desc = desc.replace("<", "");
         desc = desc.replace(">", "");
         desc = desc.replace("&", "&amp;");
@@ -555,33 +488,31 @@ public class Utilities
      * @param dateToFormat The Date object to format.
      * @return The ISO 8601 formatted string.
      */
-    public static String GetIsoDateTime(Date dateToFormat)
-    {
-    	/**
-        * This function is used in gpslogger.loggers.* and for most of them the
-        * default locale should be fine, but in the case of HttpUrlLogger we 
-        * want machine-readable output, thus  Locale.US.
-        * 
-        * Be wary of the default locale
-        * http://developer.android.com/reference/java/util/Locale.html#default_locale
-        */
-        
+    public static String GetIsoDateTime(Date dateToFormat) {
+        /**
+         * This function is used in gpslogger.loggers.* and for most of them the
+         * default locale should be fine, but in the case of HttpUrlLogger we
+         * want machine-readable output, thus  Locale.US.
+         *
+         * Be wary of the default locale
+         * http://developer.android.com/reference/java/util/Locale.html#default_locale
+         */
+
         // GPX specs say that time given should be in UTC, no local time.
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", 
-        		 									Locale.US);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
+                Locale.US);
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         return sdf.format(dateToFormat);
     }
 
-    public static String GetReadableDateTime(Date dateToFormat)
-    {
-    	/**
-    	 * Similar to GetIsoDateTime(), this function is used in 
-    	 * AutoEmailHelper, and we want machine-readable output.
-    	 */
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm", 
-        		                                    Locale.US);
+    public static String GetReadableDateTime(Date dateToFormat) {
+        /**
+         * Similar to GetIsoDateTime(), this function is used in
+         * AutoEmailHelper, and we want machine-readable output.
+         */
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm",
+                Locale.US);
         return sdf.format(dateToFormat);
     }
 
@@ -591,8 +522,7 @@ public class Utilities
      * @param m
      * @return
      */
-    public static int MetersToFeet(int m)
-    {
+    public static int MetersToFeet(int m) {
         return (int) Math.round(m * 3.2808399);
     }
 
@@ -603,8 +533,7 @@ public class Utilities
      * @param f
      * @return
      */
-    public static int FeetToMeters(int f)
-    {
+    public static int FeetToMeters(int f) {
         return (int) Math.round(f / 3.2808399);
     }
 
@@ -615,13 +544,11 @@ public class Utilities
      * @param m
      * @return
      */
-    public static int MetersToFeet(double m)
-    {
+    public static int MetersToFeet(double m) {
         return MetersToFeet((int) m);
     }
 
-    public static boolean IsEmailSetup()
-    {
+    public static boolean IsEmailSetup() {
         return AppSettings.isAutoEmailEnabled()
                 && AppSettings.getAutoEmailTargets().length() > 0
                 && AppSettings.getSmtpServer().length() > 0
@@ -630,8 +557,7 @@ public class Utilities
 
     }
 
-    public static boolean IsOpenGTSSetup()
-    {
+    public static boolean IsOpenGTSSetup() {
         return AppSettings.isOpenGTSEnabled() &&
                 AppSettings.getOpenGTSServer().length() > 0
                 && AppSettings.getOpenGTSServerPort().length() > 0
@@ -640,8 +566,7 @@ public class Utilities
     }
 
 
-    public static boolean IsFtpSetup()
-    {
+    public static boolean IsFtpSetup() {
 
         FtpHelper helper = new FtpHelper(null);
 
@@ -664,8 +589,7 @@ public class Utilities
      * @param longitude2 The second point's longitude
      * @return The distance between the two points in meters
      */
-    public static double CalculateDistance(double latitude1, double longitude1, double latitude2, double longitude2)
-    {
+    public static double CalculateDistance(double latitude1, double longitude1, double latitude2, double longitude2) {
         /*
             Haversine formula:
             A = sin²(Δlat/2) + cos(lat1).cos(lat2).sin²(Δlong/2)
@@ -696,52 +620,38 @@ public class Utilities
      * @param text
      * @return
      */
-    public static boolean IsNullOrEmpty(String text)
-    {
+    public static boolean IsNullOrEmpty(String text) {
         return text == null || text.length() == 0;
     }
 
 
-    public static byte[] GetByteArrayFromInputStream(InputStream is)
-    {
+    public static byte[] GetByteArrayFromInputStream(InputStream is) {
 
-        try
-        {
+        try {
             int length;
             int size = 1024;
             byte[] buffer;
 
-            if (is instanceof ByteArrayInputStream)
-            {
+            if (is instanceof ByteArrayInputStream) {
                 size = is.available();
                 buffer = new byte[size];
                 is.read(buffer, 0, size);
-            }
-            else
-            {
+            } else {
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 buffer = new byte[size];
-                while ((length = is.read(buffer, 0, size)) != -1)
-                {
+                while ((length = is.read(buffer, 0, size)) != -1) {
                     outputStream.write(buffer, 0, length);
                 }
 
                 buffer = outputStream.toByteArray();
             }
             return buffer;
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally
-        {
-            try
-            {
+        } finally {
+            try {
                 is.close();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 tracer.warn("GetStringFromInputStream - could not close stream");
             }
         }
@@ -756,8 +666,7 @@ public class Utilities
      * @param is
      * @return
      */
-    public static String GetStringFromInputStream(InputStream is)
-    {
+    public static String GetStringFromInputStream(InputStream is) {
         String line;
         StringBuilder total = new StringBuilder();
 
@@ -765,25 +674,16 @@ public class Utilities
         BufferedReader rd = new BufferedReader(new InputStreamReader(is));
 
         // Read response until the end
-        try
-        {
-            while ((line = rd.readLine()) != null)
-            {
+        try {
+            while ((line = rd.readLine()) != null) {
                 total.append(line);
             }
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally
-        {
-            try
-            {
+        } finally {
+            try {
                 is.close();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 tracer.warn("GetStringFromInputStream - could not close stream");
             }
         }
@@ -799,19 +699,15 @@ public class Utilities
      * @param stream
      * @return
      */
-    public static Document GetDocumentFromInputStream(InputStream stream)
-    {
+    public static Document GetDocumentFromInputStream(InputStream stream) {
         Document doc;
 
-        try
-        {
+        try {
             DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
             xmlFactory.setNamespaceAware(true);
             DocumentBuilder builder = xmlFactory.newDocumentBuilder();
             doc = builder.parse(stream);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             doc = null;
         }
 
@@ -824,36 +720,26 @@ public class Utilities
      * @param fileName
      * @return
      */
-    public static String GetMimeTypeFromFileName(String fileName)
-    {
+    public static String GetMimeTypeFromFileName(String fileName) {
 
-        if (fileName == null || fileName.length() == 0)
-        {
+        if (fileName == null || fileName.length() == 0) {
             return "";
         }
 
 
         int pos = fileName.lastIndexOf(".");
-        if (pos == -1)
-        {
+        if (pos == -1) {
             return "application/octet-stream";
-        }
-        else
-        {
+        } else {
 
             String extension = fileName.substring(pos + 1, fileName.length());
 
 
-            if (extension.equalsIgnoreCase("gpx"))
-            {
+            if (extension.equalsIgnoreCase("gpx")) {
                 return "application/gpx+xml";
-            }
-            else if (extension.equalsIgnoreCase("kml"))
-            {
+            } else if (extension.equalsIgnoreCase("kml")) {
                 return "application/vnd.google-earth.kml+xml";
-            }
-            else if (extension.equalsIgnoreCase("zip"))
-            {
+            } else if (extension.equalsIgnoreCase("zip")) {
                 return "application/zip";
             }
         }
@@ -864,53 +750,50 @@ public class Utilities
     }
 
     public static float GetBatteryLevel(Context context) {
-        Intent batteryIntent =  context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 
-        if(level == -1 || scale == -1) {
+        if (level == -1 || scale == -1) {
             return 50.0f;
         }
 
-        return ((float)level / (float)scale) * 100.0f;
+        return ((float) level / (float) scale) * 100.0f;
     }
 
-    public static String GetAndroidId(Context context){
-        return  Settings.Secure.getString(context.getContentResolver(),
+    public static String GetAndroidId(Context context) {
+        return Settings.Secure.getString(context.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
 
     }
 
 
     public static String HtmlDecode(String text) {
-        if(IsNullOrEmpty(text)){
+        if (IsNullOrEmpty(text)) {
             return text;
         }
 
         return text.replace("&amp;", "&").replace("&quot;", "\"");
     }
 
-    public static String GetBuildSerial()
-    {
-        try{
+    public static String GetBuildSerial() {
+        try {
             return Build.SERIAL;
-        }
-        catch(Throwable t){
+        } catch (Throwable t) {
             return "";
         }
     }
 
-    public static File[] GetFilesInFolder(File folder){
+    public static File[] GetFilesInFolder(File folder) {
         return GetFilesInFolder(folder, null);
     }
 
-    public static File[] GetFilesInFolder(File folder, FilenameFilter filter){
+    public static File[] GetFilesInFolder(File folder, FilenameFilter filter) {
 
-        if( folder == null || !folder.exists() || folder.listFiles() == null){
+        if (folder == null || !folder.exists() || folder.listFiles() == null) {
             return new File[]{};
-        }
-        else{
-            if(filter != null){
+        } else {
+            if (filter != null) {
                 return folder.listFiles(filter);
             }
             return folder.listFiles();
@@ -918,7 +801,7 @@ public class Utilities
     }
 
 
-    public static String GetFormattedCustomFileName(String baseName){
+    public static String GetFormattedCustomFileName(String baseName) {
 
         Time t = new Time();
         t.setToNow();
@@ -933,9 +816,6 @@ public class Utilities
         return finalFileName;
 
     }
-
-
-
 
 
 }

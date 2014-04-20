@@ -40,16 +40,14 @@ import org.slf4j.LoggerFactory;
 
 public class AutoEmailActivity extends PreferenceActivity implements
         OnPreferenceChangeListener, IMessageBoxCallback, IActionListener,
-        OnPreferenceClickListener
-{
+        OnPreferenceClickListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoEmailActivity.class.getSimpleName());
     private final Handler handler = new Handler();
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -88,12 +86,9 @@ public class AutoEmailActivity extends PreferenceActivity implements
     }
 
 
+    public boolean onPreferenceClick(Preference preference) {
 
-    public boolean onPreferenceClick(Preference preference)
-    {
-
-        if (!IsFormValid())
-        {
+        if (!IsFormValid()) {
             Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
                     getString(R.string.autoemail_invalid_form_message),
                     AutoEmailActivity.this);
@@ -121,8 +116,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
         return true;
     }
 
-    private boolean IsFormValid()
-    {
+    private boolean IsFormValid() {
 
         CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoemail_enabled");
         EditTextPreference txtSmtpServer = (EditTextPreference) findPreference("smtp_server");
@@ -140,45 +134,34 @@ public class AutoEmailActivity extends PreferenceActivity implements
 
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        if (keyCode == KeyEvent.KEYCODE_BACK)
-        {
-            if (!IsFormValid())
-            {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (!IsFormValid()) {
                 CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoemail_enabled");
                 chkEnabled.setChecked(false);
                 Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
                         getString(R.string.autoemail_invalid_form_message),
                         this);
                 return false;
-            }
-            else
-            {
+            } else {
                 return super.onKeyDown(keyCode, event);
             }
-        }
-        else
-        {
+        } else {
             return super.onKeyDown(keyCode, event);
         }
     }
 
 
-    public void MessageBoxResult(int which)
-    {
+    public void MessageBoxResult(int which) {
         finish();
     }
 
-    public boolean onPreferenceChange(Preference preference, Object newValue)
-    {
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
 
-        if (preference.getKey().equals("autoemail_preset"))
-        {
+        if (preference.getKey().equals("autoemail_preset")) {
             int newPreset = Integer.valueOf(newValue.toString());
 
-            switch (newPreset)
-            {
+            switch (newPreset) {
                 case 0:
                     // Gmail
                     SetSmtpValues("smtp.gmail.com", "465", true);
@@ -201,8 +184,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
         return true;
     }
 
-    private void SetSmtpValues(String server, String port, boolean useSsl)
-    {
+    private void SetSmtpValues(String server, String port, boolean useSsl) {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
@@ -224,43 +206,35 @@ public class AutoEmailActivity extends PreferenceActivity implements
     }
 
 
-    private final Runnable successfullySent = new Runnable()
-    {
-        public void run()
-        {
+    private final Runnable successfullySent = new Runnable() {
+        public void run() {
             SuccessfulSending();
         }
     };
 
-    private final Runnable failedSend = new Runnable()
-    {
+    private final Runnable failedSend = new Runnable() {
 
-        public void run()
-        {
+        public void run() {
             FailureSending();
         }
     };
 
-    private void FailureSending()
-    {
+    private void FailureSending() {
         Utilities.HideProgress();
         Utilities.MsgBox(getString(R.string.sorry), getString(R.string.error_connection), this);
     }
 
-    private void SuccessfulSending()
-    {
+    private void SuccessfulSending() {
         Utilities.HideProgress();
         Utilities.MsgBox(getString(R.string.success),
                 getString(R.string.autoemail_testresult_success), this);
     }
 
-    public void OnComplete()
-    {
+    public void OnComplete() {
         handler.post(successfullySent);
     }
 
-    public void OnFailure()
-    {
+    public void OnFailure() {
 
         handler.post(failedSend);
 

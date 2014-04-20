@@ -19,15 +19,14 @@ public class NmeaFileLogger {
     private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
             new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
 
-    public NmeaFileLogger(String fileName){
+    public NmeaFileLogger(String fileName) {
         this.fileName = fileName;
     }
 
-    public void Write(long timestamp, String nmeaSentence){
+    public void Write(long timestamp, String nmeaSentence) {
 
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
-        if (!gpxFolder.exists())
-        {
+        if (!gpxFolder.exists()) {
             gpxFolder.mkdirs();
         }
 
@@ -44,7 +43,7 @@ class NmeaWriteHandler implements Runnable {
     File gpxFile;
     String nmeaSentence;
 
-    NmeaWriteHandler(File gpxFile, String nmeaSentence){
+    NmeaWriteHandler(File gpxFile, String nmeaSentence) {
         this.gpxFile = gpxFile;
         this.nmeaSentence = nmeaSentence;
     }
@@ -52,7 +51,7 @@ class NmeaWriteHandler implements Runnable {
     @Override
     public void run() {
 
-        synchronized (NmeaFileLogger.lock){
+        synchronized (NmeaFileLogger.lock) {
 
             try {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(gpxFile, true));

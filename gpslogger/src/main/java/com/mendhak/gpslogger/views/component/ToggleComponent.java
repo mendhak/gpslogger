@@ -13,10 +13,10 @@ public class ToggleComponent {
     private ToggleHandler handler;
     private boolean enabled;
 
-    ToggleComponent() {}
+    ToggleComponent() {
+    }
 
-    public void SetEnabled(boolean enabled)
-    {
+    public void SetEnabled(boolean enabled) {
 
         if (enabled) {
             on.setVisibility(View.VISIBLE);
@@ -27,7 +27,7 @@ public class ToggleComponent {
         }
     }
 
-    public static ToggleBuilder getBuilder () {
+    public static ToggleBuilder getBuilder() {
         return new ToggleBuilder(new ToggleComponent());
     }
 
@@ -101,7 +101,7 @@ public class ToggleComponent {
             }
         });
 
-        viewOff.setOnClickListener(new View.OnClickListener(){
+        viewOff.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {

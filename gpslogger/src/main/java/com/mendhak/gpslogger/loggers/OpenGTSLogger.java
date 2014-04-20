@@ -23,24 +23,20 @@ import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.OpenGTSClient;
 
 
-
 /**
  * Send locations directly to an OpenGTS server <br/>
  *
  * @author Francisco Reynoso
  */
-public class OpenGTSLogger implements IFileLogger
-{
+public class OpenGTSLogger implements IFileLogger {
 
     protected final String name = "OpenGTS";
 
-    public OpenGTSLogger()
-    {
+    public OpenGTSLogger() {
     }
 
     @Override
-    public void Write(Location loc) throws Exception
-    {
+    public void Write(Location loc) throws Exception {
 
 
         String server = AppSettings.getOpenGTSServer();
@@ -48,16 +44,13 @@ public class OpenGTSLogger implements IFileLogger
         String path = AppSettings.getOpenGTSServerPath();
         String deviceId = AppSettings.getOpenGTSDeviceId();
 
-        IActionListener al = new IActionListener()
-        {
+        IActionListener al = new IActionListener() {
             @Override
-            public void OnComplete()
-            {
+            public void OnComplete() {
             }
 
             @Override
-            public void OnFailure()
-            {
+            public void OnFailure() {
             }
         };
 
@@ -67,15 +60,13 @@ public class OpenGTSLogger implements IFileLogger
     }
 
     @Override
-    public void Annotate(String description, Location loc) throws Exception
-    {
+    public void Annotate(String description, Location loc) throws Exception {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 

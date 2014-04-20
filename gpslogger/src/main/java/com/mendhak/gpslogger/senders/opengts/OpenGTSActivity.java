@@ -36,14 +36,12 @@ import org.slf4j.LoggerFactory;
 
 public class OpenGTSActivity extends PreferenceActivity implements
         OnPreferenceChangeListener,
-        OnPreferenceClickListener
-{
+        OnPreferenceClickListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSActivity.class.getSimpleName());
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -80,11 +78,8 @@ public class OpenGTSActivity extends PreferenceActivity implements
     }
 
 
-
-    public boolean onPreferenceClick(Preference preference)
-    {
-        if (!IsFormValid())
-        {
+    public boolean onPreferenceClick(Preference preference) {
+        if (!IsFormValid()) {
             Utilities.MsgBox(getString(R.string.autoopengts_invalid_form),
                     getString(R.string.autoopengts_invalid_form_message),
                     OpenGTSActivity.this);
@@ -93,8 +88,7 @@ public class OpenGTSActivity extends PreferenceActivity implements
         return true;
     }
 
-    private boolean IsFormValid()
-    {
+    private boolean IsFormValid() {
         CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("opengts_enabled");
         EditTextPreference txtOpenGTSServer = (EditTextPreference) findPreference("opengts_server");
         EditTextPreference txtOpenGTSServerPort = (EditTextPreference) findPreference("opengts_server_port");
@@ -111,43 +105,32 @@ public class OpenGTSActivity extends PreferenceActivity implements
 
     }
 
-    private static boolean isNumeric(String str)
-    {
-        for (char c : str.toCharArray())
-        {
-            if (!Character.isDigit(c))
-            {
+    private static boolean isNumeric(String str) {
+        for (char c : str.toCharArray()) {
+            if (!Character.isDigit(c)) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        if (keyCode == KeyEvent.KEYCODE_BACK)
-        {
-            if (!IsFormValid())
-            {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (!IsFormValid()) {
                 Utilities.MsgBox(getString(R.string.autoopengts_invalid_form),
                         getString(R.string.autoopengts_invalid_form_message),
                         this);
                 return false;
-            }
-            else
-            {
+            } else {
                 return super.onKeyDown(keyCode, event);
             }
-        }
-        else
-        {
+        } else {
             return super.onKeyDown(keyCode, event);
         }
     }
 
 
-    public boolean onPreferenceChange(Preference preference, Object newValue)
-    {
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
         return true;
     }
 

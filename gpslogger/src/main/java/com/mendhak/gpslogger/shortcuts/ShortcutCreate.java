@@ -24,10 +24,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.mendhak.gpslogger.R;
 
-public class ShortcutCreate extends Activity
-{
-    public void onCreate(Bundle savedInstanceState)
-    {
+public class ShortcutCreate extends Activity {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
@@ -36,20 +34,15 @@ public class ShortcutCreate extends Activity
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.shortcut_pickaction);
-        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int item)
-            {
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
                 Intent shortcutIntent;
                 String shortcutLabel;
 
-                if (item == 0)
-                {
+                if (item == 0) {
                     shortcutIntent = new Intent(getApplicationContext(), ShortcutStart.class);
                     shortcutLabel = getString(R.string.shortcut_start);
-                }
-                else
-                {
+                } else {
                     shortcutIntent = new Intent(getApplicationContext(), ShortcutStop.class);
                     shortcutLabel = getString(R.string.shortcut_stop);
                 }

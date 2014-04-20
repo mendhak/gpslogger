@@ -35,15 +35,15 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
 
         rootView = inflater.inflate(R.layout.fragment_big_view, container, false);
 
-        TextView txtLat = (TextView)rootView.findViewById(R.id.bigview_text_lat);
+        TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
         txtLat.setOnTouchListener(this);
 
-        TextView txtLong = (TextView)rootView.findViewById(R.id.bigview_text_long);
+        TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
         txtLong.setOnTouchListener(this);
 
         SetLocation(Session.getCurrentLocationInfo());
 
-        if(Session.isStarted()){
+        if (Session.isStarted()) {
             Toast.makeText(getActivity().getApplicationContext(), R.string.bigview_taptotoggle, Toast.LENGTH_SHORT).show();
         }
 
@@ -53,22 +53,19 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
 
     @Override
     public void SetLocation(Location locationInfo) {
-        TextView txtLat = (TextView)rootView.findViewById(R.id.bigview_text_lat);
-        TextView txtLong = (TextView)rootView.findViewById(R.id.bigview_text_long);
+        TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
+        TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
 
-        if(locationInfo != null){
+        if (locationInfo != null) {
             NumberFormat nf = NumberFormat.getInstance();
             nf.setMaximumFractionDigits(6);
 
             txtLat.setText(String.valueOf(nf.format(locationInfo.getLatitude())));
 
             txtLong.setText(String.valueOf(nf.format(locationInfo.getLongitude())));
-        }
-        else if (Session.isStarted())
-        {
+        } else if (Session.isStarted()) {
             txtLat.setText("...");
-        }
-        else {
+        } else {
             txtLat.setText(R.string.bigview_taptotoggle);
         }
     }
@@ -80,8 +77,8 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
 
     @Override
     public void SetLoggingStarted() {
-        TextView txtLat = (TextView)rootView.findViewById(R.id.bigview_text_lat);
-        TextView txtLong = (TextView)rootView.findViewById(R.id.bigview_text_long);
+        TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
+        TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
         txtLat.setText("");
         txtLong.setText("");
     }
@@ -114,8 +111,7 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN)
-        {
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
             tracer.debug("Big frame - onTouch event");
             requestToggleLogging();
             return true;
