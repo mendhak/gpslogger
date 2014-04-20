@@ -484,6 +484,10 @@ public class GDocsHelper implements IActionListener, IFileSender
             return "application/xml";
         }
 
+        if(fileName.endsWith("nmea")){
+            return "application/x-nmea";
+        }
+
         return "application/vnd.google-apps.spreadsheet";
     }
 
@@ -493,10 +497,7 @@ public class GDocsHelper implements IActionListener, IFileSender
     @Override
     public boolean accept(File dir, String name)
     {
-        return name.toLowerCase().endsWith(".zip")
-                || name.toLowerCase().endsWith(".gpx")
-                || name.toLowerCase().endsWith(".kml")
-                || name.toLowerCase().endsWith(".txt");
+        return true;
     }
 
     @Override
