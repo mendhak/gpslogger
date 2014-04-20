@@ -291,6 +291,16 @@
 
 
             <div class="a-left">
+                <h3>How do I remove the notification?</h3>
+                <p>Unfortunately, and annoyingly, the notification needs to stay there.  Android 4.x has become very restrictive and will kill foreground services that don't show notifications.  There is also
+			<a href="http://commonsware.com/blog/2013/07/30/notifications-foreground-services-android-4p3.html" onclick="window.open(this.href);return false;">no way to work around this</a> as there
+			was in the past.  This also means that more applications will start to ask for notification area space, it may get quite crowded soon. At the same time, this is with good reason; 
+			the user should know that a foreground service is running and consuming resources, however no means has been provided to allow it to be dismissed.</p>
+
+            </div>
+
+
+            <div class="a-left">
                 <h3>It's using the wrong timezone, can you make it use my timezone?</h3>
                 <p>The standard when logging points is to use UTC.  Since this is the standard, it would be wrong to use the the local time zone.  Instead, it is the responsibility of the software you use the log file on (Google Earth, GeoSetter, etc.) to adjust for your timezone.
                     Any application that deals with GPX or KML files will have a setting that allows you to specify your own timezone.</p>
