@@ -325,6 +325,11 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
                 {
                     logTo += ", " + li.next().getName();
                 }
+
+                if(AppSettings.shouldLogToNmea()){
+                    logTo += ", NMEA";
+                }
+
                 txtLoggingTo.setText(logTo);
 
             }
