@@ -137,22 +137,9 @@ public class GDocsHelper implements IActionListener, IFileSender {
 
     @Override
     public void UploadFile(List<File> files) {
-        File zipFile = null;
-
 
         for (File f : files) {
-            if (f.getName().contains(".zip")) {
-                zipFile = f;
-                break;
-            }
-        }
-
-        if (zipFile != null) {
-            UploadFile(zipFile.getName());
-        } else {
-            for (File f : files) {
-                UploadFile(f.getName());
-            }
+            UploadFile(f.getName());
         }
     }
 
@@ -425,7 +412,7 @@ public class GDocsHelper implements IActionListener, IFileSender {
         }
 
         if (fileName.endsWith("nmea")) {
-            return "application/x-nmea";
+            return "text/plain";
         }
 
         return "application/vnd.google-apps.spreadsheet";

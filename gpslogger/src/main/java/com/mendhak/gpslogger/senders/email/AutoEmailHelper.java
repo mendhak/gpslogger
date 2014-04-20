@@ -45,14 +45,7 @@ public class AutoEmailHelper implements IActionListener, IFileSender {
         //If a zip file exists, remove others
         for (File f : files) {
             filesToSend.add(f);
-
-            if (f.getName().contains(".zip")) {
-                filesToSend.clear();
-                filesToSend.add(f);
-                break;
-            }
         }
-
 
         Thread t = new Thread(new AutoSendHandler(filesToSend.toArray(new File[filesToSend.size()]), this));
         t.start();

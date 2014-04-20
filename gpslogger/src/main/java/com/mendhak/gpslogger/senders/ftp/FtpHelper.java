@@ -57,24 +57,9 @@ public class FtpHelper implements IFileSender {
             callback.OnFailure();
         }
 
-        File zipFile = null;
-
-        //Only upload a zip file if it's present
         for (File f : files) {
-            if (f.getName().contains(".zip")) {
-                zipFile = f;
-                break;
-            }
+            UploadFile(f);
         }
-
-        if (zipFile != null) {
-            UploadFile(zipFile);
-        } else {
-            for (File f : files) {
-                UploadFile(f);
-            }
-        }
-
     }
 
     public void UploadFile(File f) {
