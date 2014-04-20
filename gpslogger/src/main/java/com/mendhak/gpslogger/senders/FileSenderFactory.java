@@ -101,7 +101,7 @@ public class FileSenderFactory {
             ZipHelper zh = new ZipHelper(filePaths.toArray(new String[filePaths.size()]), zipFile.getAbsolutePath());
             zh.Zip();
 
-            //files.clear();
+            files.clear();
             files.add(zipFile);
         }
 
