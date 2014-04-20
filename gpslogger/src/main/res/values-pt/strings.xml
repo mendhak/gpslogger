@@ -86,8 +86,6 @@
   <string name="new_file_creation_title">Novo arquivo criado</string>
   <string name="new_file_creation_onceaday">Uma vez por dia</string>
   <string name="new_file_creation_everystart">Toda vez que iniciar</string>
-  <string name="new_file_creation_static">Arquivo corrigido</string>
-  <string name="new_file_static_title">Nome de arquivo estático</string>
   <string name="pref_performance_title">Desempenho</string>
   <string name="time_before_logging_dialog_title">Tempo em segundos</string>
   <string name="keep_fix_summary">Tome cuidado, isto consumirá muita bateria. Use apenas para alta precisão com baixa frequência.</string>

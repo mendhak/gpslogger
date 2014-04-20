@@ -107,9 +107,6 @@
   <string name="new_file_creation_summary">Tworzenie pliku raz na dzień lub za każdym uruchomieniem programu.</string>
   <string name="new_file_creation_onceaday">Raz na dzień</string>
   <string name="new_file_creation_everystart">Za każdym uruchomieniem.</string>
-  <string name="new_file_creation_static">Poprawiono plik</string>
-  <string name="new_file_static_title">Nazwa pliku stałego</string>
-  <string name="new_file_static_summary">Jeśli zdecydujesz się na utworzenie pliku stałego, wprowadź jego nazwę</string>
   <string name="pref_performance_title">Wydajność</string>
   <string name="prefer_celltower_title">Preferuj wieże telefonii</string>
   <string name="time_before_logging_title">Odstępy czasu</string>

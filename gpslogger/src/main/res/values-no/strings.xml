@@ -107,9 +107,6 @@
   <string name="new_file_creation_summary">Skal ny fil opprettast ein gong om dagen eller kvar gong du byrjar.</string>
   <string name="new_file_creation_onceaday">Ein gong om dagen</string>
   <string name="new_file_creation_everystart">Kvar gong eg byrjar</string>
-  <string name="new_file_creation_static">Fast fil</string>
-  <string name="new_file_static_title">Statisk filnavn</string>
-  <string name="new_file_static_summary">Hvis du velger å opprette en bestemt fil, angi et navn</string>
   <string name="pref_performance_title">Yting</string>
   <string name="prefer_celltower_title">Føretrekk mobilmaster</string>
   <string name="time_before_logging_title">Tid før logging</string>

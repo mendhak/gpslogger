@@ -107,9 +107,6 @@
   <string name="new_file_creation_summary">Si desea crear un nuevo archivo una vez al día o cada vez que inicie.</string>
   <string name="new_file_creation_onceaday">Una vez al día</string>
   <string name="new_file_creation_everystart">Cada vez que empiezo</string>
-  <string name="new_file_creation_static">Archivo fijo</string>
-  <string name="new_file_static_title">Nombre de archivo estático</string>
-  <string name="new_file_static_summary">Si eliges crear un archivo fijo, introduce un nombre personalizado para el archivo</string>
   <string name="pref_performance_title">Rendimiento</string>
   <string name="prefer_celltower_title">Preferir Torres Celulares</string>
   <string name="time_before_logging_title">Tiempo antes de registro</string>

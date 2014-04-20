@@ -112,9 +112,6 @@ próximo ponto tenha sido logado.</string>
   <string name="new_file_creation_summary">Se deseja criar um novo arquivo de uma vez por dia ou cada vez que você iniciar.</string>
   <string name="new_file_creation_onceaday">Uma vez por dia</string>
   <string name="new_file_creation_everystart">Toda vez que eu inicio</string>
-  <string name="new_file_creation_static">Arquivo fixo</string>
-  <string name="new_file_static_title">Nome de arquivo estático</string>
-  <string name="new_file_static_summary">Se você optar por criar um arquivo fixo, digite um nome de arquivo personalizado</string>
   <string name="pref_performance_title">Desempenho</string>
   <string name="prefer_celltower_title">Prefiro torres de celular</string>
   <string name="time_before_logging_title">Tempo antes de logar</string>

@@ -109,9 +109,6 @@
   <string name="new_file_creation_summary">Priklauso ar failas sukuriamas kasdien, ar kiekvieną kartą paleidžiant programą.</string>
   <string name="new_file_creation_onceaday">Kasdien</string>
   <string name="new_file_creation_everystart">Kiekvieną kartą paleidžiant programą</string>
-  <string name="new_file_creation_static">Fiksuotas failas</string>
-  <string name="new_file_static_title">Fiksuoto failo vardas</string>
-  <string name="new_file_static_summary">Jei pasirinkote sukurti fiksuotą failą, įveskite pasirinktą failo vardą</string>
   <string name="pref_performance_title">Vykdymas</string>
   <string name="prefer_celltower_title">Priimtiniau mob. telefono stotys</string>
   <string name="time_before_logging_title">Laikas iki įrašymo</string>

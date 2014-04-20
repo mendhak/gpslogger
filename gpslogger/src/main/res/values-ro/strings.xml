@@ -107,9 +107,6 @@
   <string name="new_file_creation_summary">Fişierul nou se creeaza in fiecare zi sau de fiecare dată când pornesti inregistrarea.</string>
   <string name="new_file_creation_onceaday">O dată pe zi</string>
   <string name="new_file_creation_everystart">De fiecare dată când încep</string>
-  <string name="new_file_creation_static">Fisier fix</string>
-  <string name="new_file_static_title">Nume de fişier static</string>
-  <string name="new_file_static_summary">Dacă aţi ales pentru a crea un fişier fix, introduceţi un nume de fişier particularizat</string>
   <string name="pref_performance_title">Performanţă</string>
   <string name="prefer_celltower_title">Prefera turnuri GSM</string>
   <string name="time_before_logging_title">Timp înainte de inregistrare</string>

@@ -107,9 +107,6 @@
   <string name="new_file_creation_summary">Чи слід створювати новий файл, один раз на день або під час кожного запуску.</string>
   <string name="new_file_creation_onceaday">Один раз на день</string>
   <string name="new_file_creation_everystart">Під час кожного запуску</string>
-  <string name="new_file_creation_static">Фіксований файл</string>
-  <string name="new_file_static_title">Статична назва файлу</string>
-  <string name="new_file_static_summary">Якщо ви вибрали створення фіксованого файлу, введіть бажану назву файлу</string>
   <string name="pref_performance_title">Продуктивність</string>
   <string name="prefer_celltower_title">Перевага вежам моб. зв\'язку</string>
   <string name="time_before_logging_title">Час до початку запису</string>

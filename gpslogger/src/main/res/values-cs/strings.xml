@@ -111,9 +111,6 @@
   <string name="new_file_creation_summary">Zda chcete vytvořit nový soubor jednou denně, nebo při každém spuštění.</string>
   <string name="new_file_creation_onceaday">Jednou za den</string>
   <string name="new_file_creation_everystart">Při každém spuštění</string>
-  <string name="new_file_creation_static">Opravený soubor</string>
-  <string name="new_file_static_title">Název statického souboru</string>
-  <string name="new_file_static_summary">Pokud jste zvolili vytvoření opraveného souboru, zadejte vlastní název souboru</string>
   <string name="pref_performance_title">Výkon</string>
   <string name="prefer_celltower_title">Preferovat GSM lokalizaci</string>
   <string name="time_before_logging_title">Čas před záznamem</string>
@@ -319,7 +316,6 @@
   <string name="gpslogger_folder_title">Uložit do složky</string>
   <string name="gpslogger_folder_summary">Kam uložit soubory záznamů, výchozí hodnota je /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Složka</string>
-  <string name="new_file_static_message">Použít %SER pro sériové číslo zařízení</string>
   <string name="new_file_prefix_serial_title">Předpona sériového čísla zařízení v názvu souboru</string>
   <string name="new_file_prefix_serial_summary">Toto je sériové číslo vašeho telefonu </string>
 </resources>

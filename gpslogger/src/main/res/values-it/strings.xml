@@ -116,9 +116,6 @@
   <string name="new_file_creation_summary">Creare un nuovo file per ogni giorno oppure ad ogni avvio di registrazione.</string>
   <string name="new_file_creation_onceaday">Un file al giorno</string>
   <string name="new_file_creation_everystart">Un file ad ogni avvio</string>
-  <string name="new_file_creation_static">Nome del file fisso</string>
-  <string name="new_file_static_title">Nome file fisso</string>
-  <string name="new_file_static_summary">Inserisci il nome del file fisso che vorrai usare</string>
   <string name="pref_performance_title">Prestazioni</string>
   <string name="prefer_celltower_title">Preferisci i ponti radio</string>
   <string name="prefer_celltower_summary">Usa la rete cellulare anzichè il GPS per ricavare la posizione. Meno preciso ma consuma meno la batteria.</string>
@@ -321,7 +318,6 @@
   <string name="gpslogger_folder_title">Salva nella cartella</string>
   <string name="gpslogger_folder_summary">Dove salvare i files, default in /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Cartella</string>
-  <string name="new_file_static_message">Usa %SER come numero seriale del dispositivo</string>
   <string name="new_file_prefix_serial_title">Premetti al nome del file il numero seriale del dispositivo</string>
   <string name="new_file_prefix_serial_summary">Questo è il numero seriale del tuo dispositivo </string>
   <string name="txt_travel_duration">Durata:</string>

@@ -106,9 +106,6 @@
   <string name="new_file_creation_summary">Om du vil oprette en ny fil en gang om dagen eller hver gang du starter.</string>
   <string name="new_file_creation_onceaday">En gang om dagen</string>
   <string name="new_file_creation_everystart">Hver gang jeg starter</string>
-  <string name="new_file_creation_static">Fast fil</string>
-  <string name="new_file_static_title">Statisk filnavn</string>
-  <string name="new_file_static_summary">Vælger du at oprette en fast fil, skal du indtaste navnet på en brugerdefineret fil</string>
   <string name="pref_performance_title">Ydeevne</string>
   <string name="prefer_celltower_title">Foretræk sendemaster</string>
   <string name="time_before_logging_title">Tid før logføring</string>

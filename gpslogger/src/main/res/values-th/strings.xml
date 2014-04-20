@@ -107,9 +107,6 @@
   <string name="new_file_creation_summary">ไม่ว่าจะสร้างไฟล์ใหม่วันละครั้ง หรือทุกครั้งที่คุณเริ่มบันทึก</string>
   <string name="new_file_creation_onceaday">วันละครั้ง</string>
   <string name="new_file_creation_everystart">ทุกครั้งที่เริ่มบันทึก</string>
-  <string name="new_file_creation_static">ไฟล์เดิม</string>
-  <string name="new_file_static_title">ใช้ชื่อไฟล์คงที่</string>
-  <string name="new_file_static_summary">ถ้าเลือกจะตั้งชื่อไฟล์คงที่ กรุณาป้อนชื่อไฟล์</string>
   <string name="pref_performance_title">ประสิทธิภาพ</string>
   <string name="prefer_celltower_title">เน้นเสาสัญญานมือถือ</string>
   <string name="time_before_logging_title">เวลาหน่วงระหว่างบันทึก</string>

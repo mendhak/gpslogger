@@ -107,9 +107,6 @@
   <string name="new_file_creation_summary">Om du vill skapa en ny fil en gång per dag eller varje gång du startar.</string>
   <string name="new_file_creation_onceaday">En gång om dagen</string>
   <string name="new_file_creation_everystart">Varje gång jag startar</string>
-  <string name="new_file_creation_static">Fast fil</string>
-  <string name="new_file_static_title">Statiskt filnamn</string>
-  <string name="new_file_static_summary">Om du väljer att skapa en fast fil, ange ett valfritt filnamn</string>
   <string name="pref_performance_title">Prestanda</string>
   <string name="prefer_celltower_title">Föredra mobilmaster</string>
   <string name="time_before_logging_title">Tid innan loggning</string>
@@ -312,7 +309,6 @@
   <string name="gpslogger_folder_title">Spara till mapp</string>
   <string name="gpslogger_folder_summary">Var loggfiler ska sparas, standard är /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Katalog</string>
-  <string name="new_file_static_message">Använd %SER för enhetens serienummer</string>
   <string name="new_file_prefix_serial_title">Sätt enhetens serienummer i början på filnamn</string>
   <string name="new_file_prefix_serial_summary">Det här är serienumret som hittas i din telefonstatus </string>
 </resources>
