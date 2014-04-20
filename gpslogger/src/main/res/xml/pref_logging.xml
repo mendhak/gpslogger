@@ -33,6 +33,10 @@
             android:summary="@string/log_plain_text_summary"
             android:title="@string/log_plain_text_title"/>
 
+        <CheckBoxPreference
+            android:key="log_nmea"
+            android:title="@string/log_nmea_title"
+            android:summary="@string/log_nmea_summary" />
 
     <PreferenceCategory
         android:title="@string/pref_filedetails_title"

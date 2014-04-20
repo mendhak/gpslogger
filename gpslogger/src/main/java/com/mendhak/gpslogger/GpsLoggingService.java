@@ -812,8 +812,10 @@ public class GpsLoggingService extends Service implements IActionListener {
 
     public void OnNmeaSentence(long timestamp, String nmeaSentence) {
 
-        NmeaFileLogger nmeaLogger = new NmeaFileLogger(Session.getCurrentFileName());
-        nmeaLogger.Write(timestamp, nmeaSentence);
+        if(AppSettings.shouldLogToNmea()) {
+            NmeaFileLogger nmeaLogger = new NmeaFileLogger(Session.getCurrentFileName());
+            nmeaLogger.Write(timestamp, nmeaSentence);
+        }
 
         if (IsMainFormVisible()) {
             mainServiceClient.OnNmeaSentence(timestamp, nmeaSentence);

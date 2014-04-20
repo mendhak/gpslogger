@@ -30,6 +30,7 @@ public class AppSettings extends Application
     private static boolean logToKml;
     private static boolean logToGpx;
     private static boolean logToPlainText;
+    private static boolean logToNmea;
     private static boolean logToCustomUrl;
     private static String customLoggingUrl;
     private static int minimumSeconds;
@@ -669,5 +670,13 @@ public class AppSettings extends Application
 
     public static void setAbsoluteTimeout(int absoluteTimeout) {
         AppSettings.absoluteTimeout = absoluteTimeout;
+    }
+
+    public static boolean shouldLogToNmea() {
+        return logToNmea;
+    }
+
+    public static void setLogToNmea(boolean logToNmea) {
+        AppSettings.logToNmea = logToNmea;
     }
 }
