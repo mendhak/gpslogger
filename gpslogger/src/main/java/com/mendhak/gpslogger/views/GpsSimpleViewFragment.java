@@ -105,6 +105,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         ImageView imgGpx = (ImageView) rootView.findViewById(R.id.simpleview_imgGpx);
         ImageView imgKml = (ImageView) rootView.findViewById(R.id.simpleview_imgKml);
         ImageView imgCsv = (ImageView) rootView.findViewById(R.id.simpleview_imgCsv);
+        ImageView imgNmea = (ImageView) rootView.findViewById(R.id.simpleview_imgNmea);
         ImageView imgLink = (ImageView) rootView.findViewById(R.id.simpleview_imgLink);
 
         if (AppSettings.shouldLogToGpx()) {
@@ -120,6 +121,13 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         }
         else{
             imgKml.setVisibility(View.GONE);
+        }
+
+        if(AppSettings.shouldLogToNmea()){
+            imgNmea.setVisibility(View.VISIBLE);
+        }
+        else{
+            imgNmea.setVisibility(View.GONE);
         }
 
         if (AppSettings.shouldLogToPlainText()) {
@@ -441,6 +449,11 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     @Override
     public void OnFileNameChange(String newFileName) {
         showCurrentFileName(newFileName);
+    }
+
+    @Override
+    public void OnNmeaSentence(long timestamp, String nmeaSentence) {
+
     }
 
     @Override

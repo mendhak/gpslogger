@@ -132,6 +132,8 @@ public class Utilities
 
         AppSettings.setLogToPlainText(prefs.getBoolean("log_plain_text", false));
 
+        AppSettings.setLogToNmea(prefs.getBoolean("log_nmea", false));
+
         AppSettings.setLogToCustomUrl(prefs.getBoolean("log_customurl_enabled", false));
         AppSettings.setCustomLoggingUrl(prefs.getString("log_customurl_url", ""));
 

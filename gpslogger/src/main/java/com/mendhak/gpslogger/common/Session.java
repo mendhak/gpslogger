@@ -137,7 +137,6 @@ public class Session extends Application
      */
     public static String getCurrentFileName()
     {
-        tracer.info(currentFileName);
         if(AppSettings.isCustomFile() && !Utilities.IsNullOrEmpty(currentFileName))
         {
             return Utilities.GetFormattedCustomFileName(currentFileName);

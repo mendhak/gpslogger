@@ -38,6 +38,7 @@ import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
+import com.mendhak.gpslogger.loggers.nmea.NmeaFileLogger;
 import com.mendhak.gpslogger.senders.AlarmReceiver;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import org.slf4j.LoggerFactory;
@@ -809,6 +810,17 @@ public class GpsLoggingService extends Service implements IActionListener {
         return mainServiceClient != null;
     }
 
+    public void OnNmeaSentence(long timestamp, String nmeaSentence) {
+
+        if(AppSettings.shouldLogToNmea()) {
+            NmeaFileLogger nmeaLogger = new NmeaFileLogger(Session.getCurrentFileName());
+            nmeaLogger.Write(timestamp, nmeaSentence);
+        }
+
+        if (IsMainFormVisible()) {
+            mainServiceClient.OnNmeaSentence(timestamp, nmeaSentence);
+        }
+    }
 
     /**
      * Can be used from calling classes as the go-between for methods and

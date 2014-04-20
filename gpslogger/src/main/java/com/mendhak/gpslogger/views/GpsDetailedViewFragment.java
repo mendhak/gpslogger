@@ -325,6 +325,11 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
                 {
                     logTo += ", " + li.next().getName();
                 }
+
+                if(AppSettings.shouldLogToNmea()){
+                    logTo += ", NMEA";
+                }
+
                 txtLoggingTo.setText(logTo);
 
             }
@@ -514,5 +519,10 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     @Override
     public void OnFileNameChange(String newFileName) {
         showCurrentFileName(newFileName);
+    }
+
+    @Override
+    public void OnNmeaSentence(long timestamp, String nmeaSentence) {
+
     }
 }

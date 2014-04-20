@@ -44,6 +44,14 @@ interface IGpsLoggerServiceClient
      */
     public void OnLocationUpdate(Location loc);
 
+
+    /**
+     * A new NMEA sentence was received
+     * @param timestamp
+     * @param nmeaSentence
+     */
+    public void OnNmeaSentence(long timestamp, String nmeaSentence);
+
     /**
      * New satellite count has been obtained.
      *

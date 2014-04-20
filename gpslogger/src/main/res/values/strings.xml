@@ -471,5 +471,7 @@
     <string name="absolute_timeout_summary">Number of seconds after which the app gives up on trying to acquire a fix, regardless of other settings. This is especially useful for when you are inside buildings to prevent the GPS from draining battery.  Set to 0 for no timeout.</string>
     <string name="txt_latitude_short">Lat</string>
     <string name="txt_longitude_short">Lon</string>
+    <string name="log_nmea_title">Log to NMEA</string>
+    <string name="log_nmea_summary">Creates a raw NMEA file while trying to get a fix. This file grows very quickly.</string>
 
 </resources>

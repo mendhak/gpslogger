@@ -8,8 +8,6 @@ import android.location.Location;
 /**
  * Common class for communicating with the parent for the
  * GpsViewCallbacks
- *
- * Created by oceanebelle on 04/04/14.
  */
 public abstract class GenericViewFragment extends Fragment {
     // Mechanism to talk back to parent
@@ -22,6 +20,7 @@ public abstract class GenericViewFragment extends Fragment {
     public abstract void SetStatusMessage(String message);
     public abstract void SetFatalMessage(String message);
     public abstract void OnFileNameChange(String newFileName);
+    public abstract void OnNmeaSentence(long timestamp, String nmeaSentence);
 
     protected void requestStartLogging() {
         if (gpsCallback != null) {
