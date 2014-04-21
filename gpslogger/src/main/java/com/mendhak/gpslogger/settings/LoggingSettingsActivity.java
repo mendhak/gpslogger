@@ -65,7 +65,10 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
             editor.commit();
 
             ListPreference newFileCreation = (ListPreference) findPreference("new_file_creation");
-            newFileCreation.setValue("custom");
+            if(newFileCreation !=null){
+                newFileCreation.setValue("custom");
+            }
+
         }
     }
 
