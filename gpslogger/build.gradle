@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.8.+'
+        classpath 'com.android.tools.build:gradle:0.9.+'
     }
 }
 apply plugin: 'android'
@@ -23,37 +23,38 @@ android {
         versionName "47"
 
         //This allows us to run Robotium and Unit tests separately using
-        //connectedInstrumentTest -PtestSize=small
+        //connectedAndroidTest -PtestSize=small
         testPackageName "com.mendhak.gpslogger.test"
         testInstrumentationRunner getInstrumentationTestRunner();
     }
+
     buildTypes {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
     //Bug: http://stackoverflow.com/a/20675331
-    android {
-        packagingOptions {
-            exclude 'META-INF/DEPENDENCIES.txt'
-            exclude 'META-INF/LICENSE.txt'
-            exclude 'META-INF/NOTICE.txt'
-            exclude 'META-INF/NOTICE'
-            exclude 'META-INF/LICENSE'
-            exclude 'META-INF/DEPENDENCIES'
-            exclude 'META-INF/notice.txt'
-            exclude 'META-INF/license.txt'
-            exclude 'META-INF/dependencies.txt'
-            exclude 'META-INF/LGPL2.1'
-        }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
     }
+
     lintOptions {
         abortOnError false
     }
 
     sourceSets {
-        instrumentTest.setRoot('src/test')
+        androidTest.setRoot('src/test')
     }
 
 
@@ -72,11 +73,9 @@ android {
                 signingConfig signingConfigs.release
             }
         }
-
     }
 
     assembleRelease.doLast {
-
         copy{
             from "build/apk/gpslogger-release.apk"
             into "./"
@@ -86,13 +85,12 @@ android {
                 fileName.replace('release', android.defaultConfig.versionName)
             }
         }
-
     }
 }
 
 dependencies {
 
-    instrumentTestCompile 'com.jayway.android.robotium:robotium-solo:5.1'
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.1'
 
     compile 'com.android.support:support-v4:19.1.0'
     compile 'com.google.android.gms:play-services:4.0.30'
@@ -143,7 +141,7 @@ tasks.whenTaskAdded { task ->
     }
 
     //Force the APK to be uninstalled before running tests
-    if(task.name.equals("connectedInstrumentTest")){
+    if(task.name.equals("connectedAndroidTest")){
         task.dependsOn(uninstallAll)
     }
 }

@@ -30,19 +30,20 @@ Setting up the code
 =========
 
 
-Feel free to adopt and document your own OS and IDEs.  These instructions are for Ubuntu 13.10 with IntelliJ 13.1.1
+The project is based on the new [Android build system](http://tools.android.com/tech-docs/new-build-system/user-guide) plugin for Gradle.
+Feel free to adopt and document your own OS and IDEs.  These instructions are for Ubuntu Linux with IntelliJ 13.1.2 onwards.
 
 ### Set up your Android Development Environment
 
 Follow the instructions on the [Android Developer Website](http://developer.android.com/sdk/installing/index.html) to set up your computer for development.
 
-On Ubuntu 64bit, you'll also need `ia32-libs`, follow [these instructions](http://stackoverflow.com/a/21956268/974369).
+On Ubuntu 64bit, you may also need `ia32-libs`, follow [these instructions](http://stackoverflow.com/a/21956268/974369).  I did not need this for Ubuntu 14.04.
 
 
 ### Get IntelliJ IDEA
 
 Download and install [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/download/index.html), which is free.
-Note that Gradle 1.11 does not work well with anything earlier than 13.1.
+Note that the Android build system version 0.9 does not work well with anything earlier than IntelliJ 13.1.2.
 
 ### Install Git
 
@@ -170,20 +171,20 @@ have an emulator up and running or your phone is connected.  In other words, `ad
 
 Then run the tests using the gradle wrapper
 
-     ./gradlew connectedInstrumentTest --info
+     ./gradlew connectedAndroidTest --info
 
 If a test fails and you want a little more info, you can add the `stacktrace` and `debug` flags
 
-    ./gradlew connectedInstrumentTest --debug --stacktrace
+    ./gradlew connectedAndroidTest --debug --stacktrace
 
-You can also try running the tests straight from the IDE, but at the time of writing, IntelliJ and Android Studio are
-only just starting to include this functionality.  Your mileage may vary.  I have found that if GPSLogger is already
- installed on the device when running the test, at least one test fails.
+You can also try running the tests straight from the IDE.  Right click on a test class such as `GpsMainActivityTests`
+or on the `src/test/java` folder and choose to run it with the Android test instrumentation runner.
 
- ![tests](https://farm8.staticflickr.com/7424/13796700395_021e03cd8e_o.png)
+![Android tests](https://farm8.staticflickr.com/7248/13943655031_7ee4e7e92f_z.jpg)
 
- The solution is to ensure that you uninstall the app from the emulator before running the tests.
- If you use the gradle wrapper command shown above, it installs and uninstalls for you.
+And you should get results in the Run tab.
+
+![tests](https://farm8.staticflickr.com/7424/13796700395_021e03cd8e_o.png)
 
 
 
