@@ -1,9 +1,25 @@
+/*******************************************************************************
+ * This file is part of GPSLogger for Android.
+ *
+ * GPSLogger for Android is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GPSLogger for Android is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
+ ******************************************************************************/
+
 package com.mendhak.gpslogger;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -25,12 +41,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
@@ -412,7 +426,7 @@ public class GpsMainActivity extends Activity
 
         if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml() && !AppSettings.shouldLogToCustomUrl()) {
             tracer.debug("GPX, KML, URL disabled; annotation shouldn't work");
-            Toast.makeText(getApplicationContext(), getString(R.string.annotation_requires_logging), 1000).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.annotation_requires_logging), Toast.LENGTH_SHORT).show();
             return;
         }
 
