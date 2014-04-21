@@ -102,8 +102,8 @@
 
                     <ImageView
                         android:id="@+id/simpleview_imgSatelliteCount"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
+                        android:layout_width="@dimen/simpleview_grid_iconwidth"
+                        android:layout_height="@dimen/simlpeview_grid_iconheight"
                         android:layout_gravity="left|center"
                         android:layout_column="0"
                         android:layout_row="0"
@@ -112,7 +112,7 @@
 
                     <TextView
                         android:id="@+id/simpleview_txtSatelliteCount"
-                        android:layout_gravity="center"
+                        android:layout_gravity="left|center"
                         android:layout_width="@dimen/simpleview_grid_labelwidth"
                         android:layout_height="22dp"
                         android:layout_column="1"
@@ -164,7 +164,7 @@
 
                     <TextView
                         android:id="@+id/simpleview_txtAltitude"
-                        android:layout_gravity="center"
+                        android:layout_gravity="left|center"
                         android:layout_width="@dimen/simpleview_grid_labelwidth"
                         android:layout_height="wrap_content"
                         android:layout_column="1"
@@ -177,8 +177,8 @@
                     <ImageView
                         android:id="@+id/simpleview_imgDuration"
                         android:layout_gravity="center|top"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
+                        android:layout_width="@dimen/simpleview_grid_iconwidth"
+                        android:layout_height="@dimen/simlpeview_grid_iconheight"
                         android:src="@drawable/duration"
                         android:layout_column="0"
                         android:layout_row="2"
@@ -186,7 +186,7 @@
 
                     <TextView
                         android:id="@+id/simpleview_txtDuration"
-                        android:layout_gravity="center|top"
+                        android:layout_gravity="left|center"
                         android:layout_width="@dimen/simpleview_grid_labelwidth"
                         android:layout_height="wrap_content"
                         android:layout_column="1"
@@ -200,8 +200,8 @@
                     <ImageView
                         android:id="@+id/simpleview_imgDirection"
                         android:layout_gravity="center|top"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
+                        android:layout_width="@dimen/simpleview_grid_iconwidth"
+                        android:layout_height="@dimen/simlpeview_grid_iconheight"
                         android:src="@drawable/uparrow"
                         android:layout_column="2"
                         android:layout_row="1"
@@ -222,8 +222,8 @@
                     <ImageView
                         android:id="@+id/simpleview_imgSpeed"
                         android:layout_gravity="center|top"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
+                        android:layout_width="@dimen/simpleview_grid_iconwidth"
+                        android:layout_height="@dimen/simlpeview_grid_iconheight"
                         android:src="@drawable/speed"
                         android:layout_column="2"
                         android:layout_row="2"
@@ -245,8 +245,8 @@
                     <ImageView
                         android:id="@+id/simpleview_distance"
                         android:layout_gravity="center|top"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
+                        android:layout_width="@dimen/simpleview_grid_iconwidth"
+                        android:layout_height="@dimen/simlpeview_grid_iconheight"
                         android:src="@drawable/distance"
                         android:layout_column="0"
                         android:layout_row="3"
@@ -267,8 +267,8 @@
                     <ImageView
                         android:id="@+id/simpleview_points"
                         android:layout_gravity="center|top"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
+                        android:layout_width="@dimen/simpleview_grid_iconwidth"
+                        android:layout_height="@dimen/simlpeview_grid_iconheight"
                         android:src="@drawable/points"
                         android:layout_column="2"
                         android:layout_row="3"
