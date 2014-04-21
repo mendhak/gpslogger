@@ -45,9 +45,6 @@ On Ubuntu 64bit, you may also need `ia32-libs`, follow [these instructions](http
 Download and install [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/download/index.html), which is free.
 Note that the Android build system version 0.9 does not work well with anything earlier than IntelliJ 13.1.2.
 
-### Install Git
-
-    sudo apt-get install git
 
 ### Get the Android SDK extra repositories
 

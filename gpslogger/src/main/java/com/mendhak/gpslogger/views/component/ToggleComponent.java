@@ -5,7 +5,6 @@ import android.view.View;
 /**
  * Toggles two views. Handles the hiding and showing of two views.
  * Notifies interested handlers of the current state.
- * Created by oceanebelle on 04/04/14.
  */
 public class ToggleComponent {
     private View on;

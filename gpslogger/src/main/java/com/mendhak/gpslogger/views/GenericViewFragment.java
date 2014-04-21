@@ -69,7 +69,6 @@ public abstract class GenericViewFragment extends Fragment {
     /**
      * Interface used by the different fragments to communicate with the parent activity
      * which should implement this interface.
-     * Created by oceanebelle on 04/04/14.
      */
     public static interface IGpsViewCallback {
         public void onRequestStartLogging();
