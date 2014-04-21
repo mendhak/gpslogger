@@ -32,12 +32,12 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
     private static GpsLoggingService loggingService;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GeneralLocationListener.class.getSimpleName());
-    private String latestHdop;
-    private String latestPdop;
-    private String latestVdop;
-    private String geoIdHeight;
-    private String ageOfDgpsData;
-    private String dgpsId;
+    protected String latestHdop;
+    protected String latestPdop;
+    protected String latestVdop;
+    protected String geoIdHeight;
+    protected String ageOfDgpsData;
+    protected String dgpsId;
 
     GeneralLocationListener(GpsLoggingService activity) {
         tracer.debug("GeneralLocationListener constructor");
@@ -144,19 +144,23 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     public void onNmeaReceived(long timestamp, String nmeaSentence) {
         loggingService.OnNmeaSentence(timestamp, nmeaSentence);
 
+        if(Utilities.IsNullOrEmpty(nmeaSentence)){
+            return;
+        }
+
         String[] nmeaParts = nmeaSentence.split(",");
 
         if (nmeaParts[0].equalsIgnoreCase("$GPGSA")) {
 
-            if (!Utilities.IsNullOrEmpty(nmeaParts[15])) {
+            if (nmeaParts.length > 15 && !Utilities.IsNullOrEmpty(nmeaParts[15])) {
                 this.latestPdop = nmeaParts[15];
             }
 
-            if (!Utilities.IsNullOrEmpty(nmeaParts[16])) {
+            if (nmeaParts.length > 16 &&!Utilities.IsNullOrEmpty(nmeaParts[16])) {
                 this.latestHdop = nmeaParts[16];
             }
 
-            if (!Utilities.IsNullOrEmpty(nmeaParts[17]) && !nmeaParts[17].startsWith("*")) {
+            if (nmeaParts.length > 17 &&!Utilities.IsNullOrEmpty(nmeaParts[17]) && !nmeaParts[17].startsWith("*")) {
 
                 this.latestVdop = nmeaParts[17].split("\\*")[0];
             }
@@ -164,19 +168,19 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
 
         if (nmeaParts[0].equalsIgnoreCase("$GPGGA")) {
-            if (!Utilities.IsNullOrEmpty(nmeaParts[8])) {
+            if (nmeaParts.length > 8 &&!Utilities.IsNullOrEmpty(nmeaParts[8])) {
                 this.latestHdop = nmeaParts[8];
             }
 
-            if (!Utilities.IsNullOrEmpty(nmeaParts[11])) {
+            if (nmeaParts.length > 11 &&!Utilities.IsNullOrEmpty(nmeaParts[11])) {
                 this.geoIdHeight = nmeaParts[11];
             }
 
-            if (!Utilities.IsNullOrEmpty(nmeaParts[13])) {
+            if (nmeaParts.length > 13 &&!Utilities.IsNullOrEmpty(nmeaParts[13])) {
                 this.ageOfDgpsData = nmeaParts[13];
             }
 
-            if (!Utilities.IsNullOrEmpty(nmeaParts[14]) && !nmeaParts[14].startsWith("*")) {
+            if (nmeaParts.length > 14 &&!Utilities.IsNullOrEmpty(nmeaParts[14]) && !nmeaParts[14].startsWith("*")) {
                 this.dgpsId = nmeaParts[14].split("\\*")[0];
             }
         }
