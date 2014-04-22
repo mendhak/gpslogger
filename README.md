@@ -183,7 +183,9 @@ And you should get results in the Run tab.
 
 ![tests](https://farm8.staticflickr.com/7424/13796700395_021e03cd8e_o.png)
 
+You can run just the quicker `@SmallTest`s using
 
+    ./gradlew connectedAndroidTest -PtestSize=small --info
 
 Overview
 ======
