@@ -59,8 +59,8 @@ public class OpenGTSClient {
         this.applicationContext = applicationContext;
     }
 
-    public void sendHTTP(String id, Location location) {
-        sendHTTP(id, new Location[]{location});
+    public void sendHTTP(String id, String accountName, Location location) {
+        sendHTTP(id, accountName, new Location[]{location});
     }
 
     /**
@@ -73,7 +73,7 @@ public class OpenGTSClient {
      * @param locations locations
      */
 
-    public void sendHTTP(String id, Location[] locations) {
+    public void sendHTTP(String id, String accountName, Location[] locations) {
         try {
             locationsCount = locations.length;
             StringBuilder url = new StringBuilder();
@@ -85,6 +85,13 @@ public class OpenGTSClient {
             for (Location loc : locations) {
                 RequestParams params = new RequestParams();
                 params.put("id", id);
+                params.put("dev", id);
+
+                params.put("acct", id);
+                if(!Utilities.IsNullOrEmpty(accountName)){
+                    params.put("acct", accountName);
+                }
+
                 params.put("code", "0xF020");
                 params.put("gprmc", OpenGTSClient.GPRMCEncode(loc));
                 params.put("alt", String.valueOf(loc.getAltitude()));

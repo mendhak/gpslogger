@@ -90,9 +90,10 @@ class OpenGTSHandler implements Runnable {
                 int port = Integer.parseInt(AppSettings.getOpenGTSServerPort());
                 String path = AppSettings.getOpenGTSServerPath();
                 String deviceId = AppSettings.getOpenGTSDeviceId();
+                String accountName = AppSettings.getOpenGTSAccountName();
 
                 OpenGTSClient openGTSClient = new OpenGTSClient(server, port, path, helper, applicationContext);
-                openGTSClient.sendHTTP(deviceId, locations.toArray(new Location[0]));
+                openGTSClient.sendHTTP(deviceId, accountName, locations.toArray(new Location[0]));
 
             } else {
                 helper.OnFailure();

@@ -32,6 +32,9 @@
                             android:inputType="textUri"
                             android:summary="@string/autoopengts_server_path_summary"
                             android:dialogTitle="@string/autoopengts_server_path"/>
+        <EditTextPreference android:key="opengts_accountname" android:title="@string/autoopengts_accountname">
+
+        </EditTextPreference>
         <EditTextPreference android:key="opengts_device_id" android:title="@string/autoopengts_device_id"
                             android:dialogTitle="@string/autoopengts_device_id"/>
     </PreferenceCategory>

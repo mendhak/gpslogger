@@ -41,6 +41,7 @@ public class OpenGTSLogger implements IFileLogger {
 
         String server = AppSettings.getOpenGTSServer();
         int port = Integer.parseInt(AppSettings.getOpenGTSServerPort());
+        String accountName = AppSettings.getOpenGTSAccountName();
         String path = AppSettings.getOpenGTSServerPath();
         String deviceId = AppSettings.getOpenGTSDeviceId();
 
@@ -55,7 +56,7 @@ public class OpenGTSLogger implements IFileLogger {
         };
 
         OpenGTSClient openGTSClient = new OpenGTSClient(server, port, path, al, null);
-        openGTSClient.sendHTTP(deviceId, loc);
+        openGTSClient.sendHTTP(deviceId, accountName, loc);
 
     }
 
