@@ -146,9 +146,8 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
 
         if (preference.getKey().equals("log_opengts")) {
             CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
-            boolean opengts_enabled = prefs.getBoolean("opengts_enabled", false);
 
-            if (chkLog_opengts.isChecked() && !opengts_enabled) {
+            if (chkLog_opengts.isChecked()) {
                 startActivity(new Intent("com.mendhak.gpslogger.OPENGTS_SETUP"));
             }
             return true;
