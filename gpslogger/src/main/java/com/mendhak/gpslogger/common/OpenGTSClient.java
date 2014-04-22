@@ -198,7 +198,7 @@ public class OpenGTSClient {
     }
 
     public static String NMEAGPRMCTime(Date dateToFormat) {
-        SimpleDateFormat sdf = new SimpleDateFormat("HHmmss.SSS");
+        SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         return sdf.format(dateToFormat);
     }
