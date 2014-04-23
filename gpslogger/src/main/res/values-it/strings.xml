@@ -116,6 +116,9 @@
   <string name="new_file_creation_summary">Creare un nuovo file per ogni giorno oppure ad ogni avvio di registrazione.</string>
   <string name="new_file_creation_onceaday">Un file al giorno</string>
   <string name="new_file_creation_everystart">Un file ad ogni avvio</string>
+  <string name="new_file_creation_custom">File custom</string>
+  <string name="new_file_custom_title">Nome del file custom</string>
+  <string name="new_file_custom_summary">Si può usare un nome del file personalizzato in modo dinamico. Si possono aggiungere alcuni parametri dinamici come il numero seriale, anno, ora, minuti, etc. Potrebbe non funzionare correttamente con le funzioni di auto-invio perchè inviano solo l\'ultimo file.</string>
   <string name="pref_performance_title">Prestazioni</string>
   <string name="prefer_celltower_title">Preferisci i ponti radio</string>
   <string name="prefer_celltower_summary">Usa la rete cellulare anzichè il GPS per ricavare la posizione. Meno preciso ma consuma meno la batteria.</string>
@@ -125,6 +128,8 @@
   <string name="time_before_logging_hint">Inserisci i secondi (max 9999)</string>
   <string name="keep_fix_summary">Attenzione: riduce di molto la vita della batteria. Usatelo solo per ottenere alte precisioni con basse frequenze di campionatura.</string>
   <string name="keep_fix_title">Lascia sempre acceso il GPS</string>
+  <string name="retry_time_title">Tempo usato per il filtro di precisione</string>
+  <string name="retry_time_summary">Dopo aver ottenuto un fix GPS, continua a rimanere agganciato al segnale GPS per questo tempo in modo da ottenere una precisione migliore.</string>
   <string name="retry_time_dialog_title">Tempo in secondi</string>
   <string name="retry_time_hint">Inserisci i secondi (max 9999)</string>
   <string name="distance_before_logging_title">Distanza prima di registrare</string>
@@ -318,6 +323,7 @@
   <string name="gpslogger_folder_title">Salva nella cartella</string>
   <string name="gpslogger_folder_summary">Dove salvare i files, default in /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Cartella</string>
+  <string name="new_file_custom_message">Puoi usare %YEAR, %MONTH, %DAY, %HOUR, %MIN, %SER (numero seriale del telefono)</string>
   <string name="new_file_prefix_serial_title">Premetti al nome del file il numero seriale del dispositivo</string>
   <string name="new_file_prefix_serial_summary">Questo è il numero seriale del tuo dispositivo </string>
   <string name="txt_travel_duration">Durata:</string>
@@ -328,5 +334,18 @@
   <string name="bigview_taptotoggle">Tocca per start/stop registrazione</string>
   <string name="summary_autosendtargets">Upload su:</string>
   <string name="accuracy_filter_title">Filtro precisione</string>
+  <string name="accuracy_filter_summary">Precisione minima richiesta perchè un punto GPS sia salvato. I punti GPS ottenuti con una precisione minore saranno scartati.</string>
   <string name="distance_filter_title">Filtro distanza</string>
+  <string name="distance_filter_summary">Distanza minima richiesta tra il punto corrente e il precedente perchè il punto GPS sia salvato. Se la distanza tra i due punti è minore, il punto è scartato.</string>
+  <string name="points">punti</string>
+  <string name="txt_number_of_points">Numero di punti</string>
+  <string name="save">Salva</string>
+  <string name="values_saved">Valori salvati</string>
+  <string name="pref_filedetails_title">Dettagli sul file e cartella</string>
+  <string name="absolute_timeout_title">Timeout</string>
+  <string name="absolute_timeout_summary">Numero di secondi dopo i quali si interrompe la ricerca del fix GPS. Utile nel caso si sia in un edificio e il telefono continua per molto tempo la ricerca del fix. Interrompendo prima la ricerca si evita un eccessivo consumo della batteria. Usa 0 per non avere timeout.</string>
+  <string name="txt_latitude_short">Lat</string>
+  <string name="txt_longitude_short">Lon</string>
+  <string name="log_nmea_title">Registra su NMEA</string>
+  <string name="log_nmea_summary">Crea un file NMEA durante il tentativo di avere un punto GPS. Le dimensioni del file crescono rapidamente. Funziona solo quando il GPS è in uso.</string>
 </resources>
