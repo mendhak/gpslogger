@@ -59,6 +59,7 @@ public class AppSettings extends Application {
     private static String openGTSServerCommunicationMethod;
     private static String openGTSServerPath;
     private static String openGTSDeviceId;
+    private static String openGTSAccountName;
 
     private static boolean autoFtpEnabled;
     private static String ftpServerName;
@@ -585,5 +586,13 @@ public class AppSettings extends Application {
 
     public static void setLogToNmea(boolean logToNmea) {
         AppSettings.logToNmea = logToNmea;
+    }
+
+    public static String getOpenGTSAccountName() {
+        return openGTSAccountName;
+    }
+
+    public static void setOpenGTSAccountName(String openGTSAccountName) {
+        AppSettings.openGTSAccountName = openGTSAccountName;
     }
 }
