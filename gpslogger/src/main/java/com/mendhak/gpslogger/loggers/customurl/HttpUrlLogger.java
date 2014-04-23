@@ -18,18 +18,17 @@
 package com.mendhak.gpslogger.loggers.customurl;
 
 import android.location.Location;
-import android.os.Build;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import org.slf4j.LoggerFactory;
 
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -117,21 +116,24 @@ class HttpUrlLogHandler implements Runnable {
             logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(Utilities.GetBuildSerial()));
 
 
-            tracer.debug(logUrl);
 
-
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
-                //Due to a pre-froyo bug
-                //http://android-developers.blogspot.com/2011/09/androids-http-clients.html
-                System.setProperty("http.keepAlive", "false");
-            }
-
+            tracer.debug("Sending to URL: " + logUrl);
             URL url = new URL(logUrl);
 
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
-            conn.setRequestProperty("User-Agent", "GPSLogger for Android");
-            InputStream response = conn.getInputStream();
+
+            Scanner s;
+            if(conn.getResponseCode() != 200){
+                s = new Scanner(conn.getErrorStream());
+                tracer.error("Status code: " + String.valueOf(conn.getResponseCode()));
+                tracer.error(s.useDelimiter("\\A").next());
+            } else {
+                s = new Scanner(conn.getInputStream());
+                tracer.debug("Status code: " + String.valueOf(conn.getResponseCode()));
+                tracer.debug(s.useDelimiter("\\A").next());
+            }
+
         } catch (Exception e) {
             tracer.error("HttpUrlLogHandler.run", e);
 
