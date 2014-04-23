@@ -20,7 +20,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 19
         versionCode 47
-        versionName "issue232"
+        versionName "47"
 
         //This allows us to run Robotium and Unit tests separately using
         //connectedAndroidTest -PtestSize=small
