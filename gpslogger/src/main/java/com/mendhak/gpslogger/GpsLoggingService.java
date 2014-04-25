@@ -641,13 +641,15 @@ public class GpsLoggingService extends Service implements IActionListener {
 
         long currentTimeStamp = System.currentTimeMillis();
 
-        // Don't do anything until the user-defined time has elapsed
-        if (!Session.isSinglePointMode() && (currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 100)) {
+        // Don't log a point until the user-defined time has elapsed
+        // However, if user has set an annotation, just log the point, disregard any filters
+        if (!Session.hasDescription() && !Session.isSinglePointMode() && (currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 100)) {
             return;
         }
 
         // Don't do anything until the user-defined accuracy is reached
-        if (AppSettings.getMinimumAccuracyInMeters() > 0) {
+        // However, if user has set an annotation, just log the point, disregard any filters
+        if (!Session.hasDescription() &&  AppSettings.getMinimumAccuracyInMeters() > 0) {
             if (AppSettings.getMinimumAccuracyInMeters() < Math.abs(loc.getAccuracy())) {
 
                 if (this.firstRetryTimeStamp == 0) {
@@ -678,7 +680,8 @@ public class GpsLoggingService extends Service implements IActionListener {
         }
 
         //Don't do anything until the user-defined distance has been traversed
-        if (!Session.isSinglePointMode() && AppSettings.getMinimumDistanceInMeters() > 0 && Session.hasValidLocation()) {
+        // However, if user has set an annotation, just log the point, disregard any filters
+        if (!Session.hasDescription() && !Session.isSinglePointMode() && AppSettings.getMinimumDistanceInMeters() > 0 && Session.hasValidLocation()) {
 
             double distanceTraveled = Utilities.CalculateDistance(loc.getLatitude(), loc.getLongitude(),
                     Session.getCurrentLatitude(), Session.getCurrentLongitude());
