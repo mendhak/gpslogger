@@ -127,11 +127,15 @@ class HttpUrlLogHandler implements Runnable {
             if(conn.getResponseCode() != 200){
                 s = new Scanner(conn.getErrorStream());
                 tracer.error("Status code: " + String.valueOf(conn.getResponseCode()));
-                tracer.error(s.useDelimiter("\\A").next());
+                if(s.hasNext()){
+                    tracer.error(s.useDelimiter("\\A").next());
+                }
             } else {
                 s = new Scanner(conn.getInputStream());
                 tracer.debug("Status code: " + String.valueOf(conn.getResponseCode()));
-                tracer.debug(s.useDelimiter("\\A").next());
+                if(s.hasNext()){
+                    tracer.debug(s.useDelimiter("\\A").next());
+                }
             }
 
         } catch (Exception e) {
