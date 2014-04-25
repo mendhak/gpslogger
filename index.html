@@ -44,12 +44,16 @@
             share your travel route with someone. The purpose of this application is to be battery efficient to save
             you battery power when abroad and last as long as possible.</p>
 
-        <a href="https://play.google.com/store/apps/details?id=com.mendhak.gpslogger">
+        <a href="#tour" class="button">Tour</a>
+        <a href="#faq" class="button">FAQ</a>
+        <a href="#screenshots" class="button">Screenshots</a>
+
+        <a class="pull-right" href="https://play.google.com/store/apps/details?id=com.mendhak.gpslogger">
             <img alt="Android app on Google Play"
                  src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png"/>
         </a>
 
-        <a href="https://github.com/mendhak/gpslogger"><img src="images/social/GitHub-Mark-64px.png" height="40px"/><img
+        <a class="pull-right" href="https://github.com/mendhak/gpslogger"><img src="images/social/GitHub-Mark-64px.png" height="40px"/><img
                 src="images/social/GitHub_Logo.png" height="40px"/></a>
 
 
@@ -59,7 +63,7 @@
 
 <div id="more-articles" class="container">
 
-    <h2 class="subheader">Quick Tour</h2>
+   <a href="#tour" name="tour"><h2 class="subheader">Quick Tour</h2></a>
     <p></p>
 
     <article class="cf">
@@ -228,12 +232,12 @@
 <div id="content" class="container">
     <section id="main" class="grid9 first faq">
         <article>
-            <h2 class="subheader">Frequently Asked Questions</h2>
+            <a href="#faq" name="faq"><h2 class="subheader">Frequently Asked Questions</h2></a>
 
             <p></p>
 
             <div class="a-left">
-                <h3>Why is it taking so long to find a fix? </h3>
+                <a href="#1" name="1"><h3>Why is it taking so long to find a fix? </h3></a>
 
                 <p>There can be several reasons reasons for this.</p>
 
@@ -272,7 +276,7 @@
                 </p>
             </div>
             <div class="a-left">
-                <h3>It's not accurate!</h3>
+                <a href="#2" name="2"><h3>It's not accurate!</h3></a>
                 <p>It all comes down to your hardware, settings and environment. The accuracy is only as good as your phone's GPS chip.
                     Some phones may have 4 meter accuracies, some have 500 meters.  Also, using GPS satellites will give you better accuracy but take a longer time; using network location will give worse accuracy but is quicker. You may also want to check your environment, as there can be inaccuracy due to clouds, buildings, sunspots, alien invasion, etc.
                 </p>
@@ -280,7 +284,7 @@
 
 
             <div class="a-left">
-                <h3>My time interval has passed, but no point was logged</h3>
+                <a href="#3" name="3"><h3>My time interval has passed, but no point was logged</h3></a>
                 <p>There are two possible reasons for this.</p>
                 <ul>
                     <li>The GPS will have attempted to find its location and given up after a while.  This means that Android OS will not have given a location to GPSLogger</li>
@@ -291,7 +295,7 @@
 
 
             <div class="a-left">
-                <h3>How do I remove the notification?</h3>
+                <a href="#4" name="4"><h3>How do I remove the notification?</h3></a>
                 <p>Unfortunately, and annoyingly, the notification needs to stay there.  Android 4.x has become very restrictive and will kill foreground services that don't show notifications.  There is also
 			<a href="http://commonsware.com/blog/2013/07/30/notifications-foreground-services-android-4p3.html" onclick="window.open(this.href);return false;">no way to work around this</a> as there
 			was in the past.  This also means that more applications will start to ask for notification area space, it may get quite crowded soon. At the same time, this is with good reason; 
@@ -301,21 +305,21 @@
 
 
             <div class="a-left">
-                <h3>It's using the wrong timezone, can you make it use my timezone?</h3>
+                <a href="#5" name="5"><h3>It's using the wrong timezone, can you make it use my timezone?</h3></a>
                 <p>The standard when logging points is to use UTC.  Since this is the standard, it would be wrong to use the the local time zone.  Instead, it is the responsibility of the software you use the log file on (Google Earth, GeoSetter, etc.) to adjust for your timezone.
                     Any application that deals with GPX or KML files will have a setting that allows you to specify your own timezone.</p>
 
             </div>
 
             <div class="a-left">
-                <h3>I am displaying imperial units but why isn't it logging imperial to the file?</h3>
+                <a href="#6" name="6"><h3>I am displaying imperial units but why isn't it logging imperial to the file?</h3></a>
                 <h3>What are the units in which the values are logged?</h3>
                 <p>The imperial units are only for display purposes and nothing else. When logging, the units are always in SI units - meters and seconds.</p>
 
             </div>
 
             <div class="a-left">
-                <h3>Where is the file being logged?  How do I get to it?</h3>
+                <a href="#7" name="7"><h3>Where is the file being logged?  How do I get to it?</h3></a>
                 <p>You can connect your phone to your computer and mount the SD card, then copy the
                     file from the <em>GPSLogger</em> folder.  That's the default folder, but you can change it in the settings. Note that while your SD card is mounted, GPSLogger can't write to the
                     card, since it's in use. To view it on the phone itself, if you have a file explorer, then you can go to /sdcard/GPSlogger &gt; Long
@@ -324,7 +328,7 @@
             </div>
 
             <div class="a-left">
-                <h3>I've changed the settings, but it's still showing/using the old settings</h3>
+                <a href="#8" name="8"><h3>I've changed the settings, but it's still showing/using the old settings</h3></a>
                 <p>If the app is logging, and you make changes to the settings, the changes will
                     take effect <em>after</em> the next point is logged. This means that if you've set
                     your interval as 1 hour, you have a long wait ahead of you. If you want the
@@ -333,7 +337,7 @@
             </div>
 
             <div class="a-left">
-                <h3>What do the various settings mean? (Accuracy, retry interval for accuracy, etc)</h3>
+                <a href="#9" name="9"><h3>What do the various settings mean? (Accuracy, retry interval for accuracy, etc)</h3></a>
                 <ul>
                     <li><strong>Time before logging</strong> - How long to wait after a point has been logged to try logging again.</li>
                     <li><strong>Distance filter</strong> - When a point is available, the app will check to ensure that this much distance exists between the previous and current points. If it isn't this distance, the point is discarded.</li>
@@ -343,20 +347,20 @@
             </div>
 
             <div class="a-left">
-                <h3>Can I use this with automation apps such as Tasker, Locale and Llama?</h3>
+                <a href="#10" name="10"><h3>Can I use this with automation apps such as Tasker, Locale and Llama?</h3></a>
                 <p>GPSLogger provides a <em>Start logging</em> and <em>Stop logging</em> shortcut.  Your automation app can invoke these shortcuts.</p>
 
             </div>
 
             <div class="a-left">
-                <h3>How do I make it last longer?</h3>
+                <a href="#11" name="11"><h3>How do I make it last longer?</h3></a>
                 <p> Mainly, turn wifi off, turn mobile data off, turn background synchronization off, turn bluetooth off.  If you turn data off, you'll probably want to inject aGPS data regularly, there are apps that can do it for you.
                     You can also try going into airplane mode which turns many things off.  When it comes to choosing between location sources - GPS vs network - GPS will be more battery hungry while network location is easier on the battery.</p>
 
             </div>
 
             <div class="a-left">
-                <h3>I see the Android GPS icon active between the intervals I've set, why is that?</h3>
+                <a href="#12" name="12"><h3>I see the Android GPS icon active between the intervals I've set, why is that?</h3></a>
                 <p>It's how the Android OS has implemented its GPS system. When you say you want a
                     point every 60 seconds (for example), that's actually a suggestion rather than an
                     imperative, and so the time interval between GPS points is never guaranteed.
@@ -366,26 +370,26 @@
             </div>
 
             <div class="a-left">
-                <h3>Why can't I remove the notification?</h3>
+                <a href="#13" name="13"><h3>Why can't I remove the notification?</h3></a>
                 <p>As of newer versions of Android, removing the notification will cause the service to be killed.  As a result, the notification now needs to stay there.
                     You may have seen a recent increase in the number of apps that need to sit in the notification bar for the same reason - to perform background services without being killed.</p>
 
             </div>
 
             <div class="a-left">
-                <h3>Why haven't you developed <em>XYZ</em> feature?</h3>
+                <a href="#14" name="14"><h3>Why haven't you developed <em>XYZ</em> feature?</h3></a>
                 <p>I work on GPSLogger in my spare time and I don't always have the time or resources to implement a feature. However, GPSLogger is open source. You are encouraged to contribute or get someone else to contribute a feature.</p>
 
             </div>
 
             <div class="a-left">
-                <h3>Where can I contribute code and features?</h3>
+                <a href="#15" name="15"><h3>Where can I contribute code and features?</h3></a>
                 <p>On <a href="https://github.com/mendhak/gpslogger" onclick="window.open(this.href);return false;">Github</a></p>
 
             </div>
 
             <div class="a-left">
-                <h3>I've found a mistake in a translation!</h3>
+                <a href="#16" name="16"><h3>I've found a mistake in a translation!</h3></a>
                 <h3>Where can I contribute translations?</h3>
                 <p>On <a href="http://crowdin.net/project/gpslogger-for-android">Crowdin</a></p>
 
@@ -393,7 +397,7 @@
 
 
             <div class="a-left">
-                <h3>How is this different from other logging apps?</h3>
+                <a href="#17" name="17"><h3>How is this different from other logging apps?</h3></a>
                 <p>It's meant to be more battery efficient. A lot of other apps, such as MyTracks,
                     usually go with the assumption that you have a data connection available and your
                     routes won't be very long.  They use CPU wakelocks and log points extremely frequently with high accuracy.
@@ -402,18 +406,18 @@
             </div>
 
             <div class="a-left">
-                <h3>How do I download it?</h3>
+                <a href="#18" name="18"><h3>How do I download it?</h3></a>
                 <p>Search for GPS Logger for Android in Google Play, or follow <a href="market://details?id=com.mendhak.gpslogger">this direct link</a>.</p>
             </div>
 
             <div class="a-left">
-                <h3>How do I download it without using the Android market?</h3>
+                <a href="#19" name="19"><h3>How do I download it without using the Android market?</h3></a>
                 <p>You can download the APK file <a href="http://sourceforge.net/projects/gfadownload/files/">here</a>.</p>
             </div>
 
 
             <div class="a-left">
-                <h3><i>Bugs, issues, code?</i></h3>
+                <a href="#20" name="20"><h3><i>Bugs, issues, code?</i></h3></a>
                 <p>You can add issues and view the source code at <a href="http://github.com/mendhak/gpslogger">github.com/mendhak/gpslogger</a></p>
             </div>
         </article>
@@ -424,7 +428,7 @@
 ================================================== -->
 <div id="search-section" class="container">
 
-    <h2 class="subheader">More Screenshots</h2>
+    <a href="#screenshots" name="screenshots"><h2 class="subheader">More Screenshots</h2></a>
 
     <article class="cf">
 

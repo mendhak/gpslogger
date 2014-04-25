@@ -1095,6 +1095,11 @@ p, em, i, strong, h2, h3, a, li, div  {
         line-height: 48px;
     }
 
-
+    .button {
+        padding-top:5px;
+        font-size: 32px;
+        line-height: 60px;
+        height: 60px;
+    }
 
 }
