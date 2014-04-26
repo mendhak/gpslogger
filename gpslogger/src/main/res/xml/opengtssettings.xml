@@ -9,7 +9,6 @@
     <CheckBoxPreference android:key="autoopengts_enabled"
                         android:title="@string/autoopengts_autosend"
                         android:summary="@string/autoopengts_autosend_summary"/>
-    opengts_enabled
 
     <PreferenceCategory android:title="@string/autoopengts_server_category">
 
