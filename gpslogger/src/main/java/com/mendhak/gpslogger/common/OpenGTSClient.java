@@ -24,12 +24,17 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.net.*;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -37,7 +42,7 @@ import java.util.TimeZone;
  *
  * @author Francisco Reynoso <franole @ gmail.com>
  */
-public class OpenGTSClient {
+public class OpenGTSClient implements IActionListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSClient.class.getSimpleName());
 
@@ -49,6 +54,8 @@ public class OpenGTSClient {
     private AsyncHttpClient httpClient;
     private int locationsCount = 0;
     private int sentLocationsCount = 0;
+    private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
+            new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
 
 
     public OpenGTSClient(String server, Integer port, String path, IActionListener callback, Context applicationContext) {
@@ -106,13 +113,62 @@ public class OpenGTSClient {
         }
     }
 
-    public void sendRAW(String id, Location location) {
-        // TODO
+    public void sendRAW(String id, String accountName, Location location) {
+        if(Utilities.IsNullOrEmpty(accountName)){
+            accountName = id;
+        }
+        String message = accountName + "/" + id + "/" + GPRMCEncode(location);
+        UdpSender sender = new UdpSender(server, port, message, this);
+        EXECUTOR.execute(sender);
     }
 
-    private void sendRAW(String id, Location[] locations) {
-        // TODO
+    public void sendRAW(String id, String accountName, Location[] locations) {
+        for (Location loc : locations) {
+            sendRAW(id, accountName, loc);
+        }
     }
+
+    class UdpSender implements Runnable {
+
+        String server;
+        Integer port;
+        String message;
+        IActionListener callback;
+
+        UdpSender(String server, Integer port, String message, IActionListener callback){
+            this.server = server;
+            this.port = port;
+            this.message = message;
+            this.callback = callback;
+        }
+
+        @Override
+        public void run() {
+            try {
+                DatagramSocket socket = new DatagramSocket();
+                byte[] buffer = message.getBytes();
+                DatagramPacket packet = new DatagramPacket(buffer, buffer.length, InetAddress.getByName(server), port);
+                tracer.debug("Sending " + message + " over UDP");
+                socket.send(packet);
+                socket.close();
+                callback.OnComplete();
+
+            } catch (UnknownHostException e) {
+                tracer.error("Could not getByName on host", e);
+                callback.OnFailure();
+            } catch (SocketException e) {
+                tracer.error("Could not create DatagramSocket", e);
+                callback.OnFailure();
+            } catch (IOException e) {
+                tracer.error("Network communication error", e);
+                callback.OnFailure();
+            } catch (Exception e) {
+                tracer.error("Could not send raw packet", e);
+                callback.OnFailure();
+            }
+        }
+    }
+
 
     private String getURL() {
         StringBuilder url = new StringBuilder();

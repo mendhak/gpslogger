@@ -91,9 +91,15 @@ class OpenGTSHandler implements Runnable {
                 String path = AppSettings.getOpenGTSServerPath();
                 String deviceId = AppSettings.getOpenGTSDeviceId();
                 String accountName = AppSettings.getOpenGTSAccountName();
+                String communication = AppSettings.getOpenGTSServerCommunicationMethod();
 
                 OpenGTSClient openGTSClient = new OpenGTSClient(server, port, path, helper, applicationContext);
-                openGTSClient.sendHTTP(deviceId, accountName, locations.toArray(new Location[0]));
+
+                if(communication.equalsIgnoreCase("UDP")) {
+                    openGTSClient.sendRAW(deviceId, accountName, locations.toArray(new Location[0]));
+                } else {
+                    openGTSClient.sendHTTP(deviceId, accountName, locations.toArray(new Location[0]));
+                }
 
             } else {
                 helper.OnFailure();

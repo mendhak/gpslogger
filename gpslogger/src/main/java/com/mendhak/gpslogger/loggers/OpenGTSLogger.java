@@ -44,6 +44,7 @@ public class OpenGTSLogger implements IFileLogger {
         String accountName = AppSettings.getOpenGTSAccountName();
         String path = AppSettings.getOpenGTSServerPath();
         String deviceId = AppSettings.getOpenGTSDeviceId();
+        String communication = AppSettings.getOpenGTSServerCommunicationMethod();
 
         IActionListener al = new IActionListener() {
             @Override
@@ -56,14 +57,18 @@ public class OpenGTSLogger implements IFileLogger {
         };
 
         OpenGTSClient openGTSClient = new OpenGTSClient(server, port, path, al, null);
-        openGTSClient.sendHTTP(deviceId, accountName, loc);
+
+        if(communication.equalsIgnoreCase("UDP")){
+            openGTSClient.sendRAW(deviceId, accountName, loc);
+        }
+        else{
+            openGTSClient.sendHTTP(deviceId, accountName, loc);
+        }
 
     }
 
     @Override
     public void Annotate(String description, Location loc) throws Exception {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
