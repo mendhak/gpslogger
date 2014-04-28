@@ -25,6 +25,6 @@ public interface IFileSender extends FilenameFilter
 {
     /// Upload or send this specific file
     void UploadFile(List<File> files);
-
+    boolean acceptZip();
 
 }

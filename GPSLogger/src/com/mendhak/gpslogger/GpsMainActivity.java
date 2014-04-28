@@ -25,6 +25,7 @@ import android.app.Dialog;
 import android.content.*;
 import android.location.Location;
 import android.net.Uri;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
@@ -45,9 +46,11 @@ import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.senders.IFileSender;
+import com.mendhak.gpslogger.senders.ZipHelper;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxAuthorizationActivity;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
+import com.mendhak.gpslogger.senders.email.AutoEmailHelper;
 import com.mendhak.gpslogger.senders.ftp.AutoFtpActivity;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity;
@@ -122,6 +125,7 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
 
         path = Environment.getExternalStorageDirectory() + File.separator + "GPSLogger";
         prefsio=new PrefsIO(this, PreferenceManager.getDefaultSharedPreferences(this), "gpslogger", path);
+        this.registerReceiver(this.batteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     }
 
     @Override
@@ -293,6 +297,29 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
             prefsio.ImportFile();
         }
     }
+
+    private BroadcastReceiver batteryInfoReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Utilities.LogDebug("Enter BatteryInfoReceiver");
+            if (Session.isStarted()) {
+                int plugged= intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+                if(plugged!=0) return;
+                int level= intent.getIntExtra(BatteryManager.EXTRA_LEVEL,0);
+                int scale= intent.getIntExtra(BatteryManager.EXTRA_SCALE,100);
+                int percent = (level*100)/scale;
+                Utilities.LogDebug("Got battery level: "+percent+"%");
+                if(percent<=AppSettings.getCritBattLevel()) {
+                    Utilities.LogDebug("Stop logging - battery level equal or below critical");
+                    loggingService.StopLogging();
+                    SetMainButtonChecked(false);
+//                    ShowPreferencesSummary();
+                    loggingService.stopSelf();
+                    loggingService.SetStatus(getString(R.string.stopped));
+                }
+            }
+        }
+    }; 
         /**
          * Starts the service and binds the activity to it.
          */
@@ -584,6 +611,9 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
             case R.id.mnuEmail:
                 SelectAndEmailFile();
                 break;
+            case R.id.mnuEmailLoc:
+                EmailLocation();
+                break;
             case R.id.mnuAnnotate:
                 Annotate();
                 break;
@@ -697,15 +727,10 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
                         }
 
                         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing_mylocation));
-                        if (Session.hasValidLocation())
-                        {
-                            double lat=Session.getCurrentLatitude();
-                            double lon=Session.getCurrentLongitude();
-                            String bodyText=Utilities.GetBodyFormatted(getApplicationContext(),lat,lon);
+                        String bodyText=Utilities.GetBodyFormatted(getApplicationContext(),0);
 
-                            intent.putExtra(Intent.EXTRA_TEXT, bodyText);
-                            intent.putExtra("sms_body", bodyText);
-                        }
+                        intent.putExtra(Intent.EXTRA_TEXT, bodyText);
+                        intent.putExtra("sms_body", bodyText);
 
                         if (chosenFileName.length() > 0
                                 && !chosenFileName.equalsIgnoreCase(locationOnly))
@@ -746,6 +771,43 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
         else
         {
             ShowFileListDialog(settingsIntent, FileSenderFactory.GetEmailSender(this));
+        }
+
+    }
+
+    private void EmailLocation()
+    {
+        String msgSubject="Location at: ";
+        String msgBody="No location";
+
+        Utilities.LogDebug("GpsMainActivity.EmailLocation");
+
+        Intent settingsIntent = new Intent(getApplicationContext(), AutoEmailActivity.class);
+
+        if (!Utilities.IsEmailSetup())
+        {
+            startActivity(settingsIntent);
+        }
+        else
+        {
+            if (Session.hasValidLocation())
+            {
+                msgBody=Utilities.GetBodyFormatted(getApplicationContext(),1);
+                msgSubject+=Utilities.GetReadableDateTime(new Date(Session.getCurrentLocationInfo().getTime()));
+            }
+            else if(Session.getPreviousLocationInfo()!=null)
+                {
+                    msgBody=Utilities.GetBodyFormatted(getApplicationContext(),-1);
+                    msgSubject="Previous Location at: ";
+                    msgSubject+=Utilities.GetReadableDateTime(new Date(Session.getPreviousLocationInfo().getTime()));
+                }
+
+            AutoEmailHelper aeh = new AutoEmailHelper(null);
+            Utilities.ShowProgress(this, getString(R.string.autosend_sending), getString(R.string.please_wait));
+            aeh.SendEmail(AppSettings.getSmtpServer(), AppSettings.getSmtpPort(),
+                    AppSettings.getSmtpUsername(), AppSettings.getSmtpPassword(),
+                    AppSettings.isSmtpSsl(), AppSettings.getAutoEmailTargets(), AppSettings.getSenderAddress(),
+                    msgSubject, msgBody, GpsMainActivity.this);
         }
 
     }
@@ -893,6 +955,20 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
                                 getString(R.string.please_wait));
                         List<File> files = new ArrayList<File>();
                         files.add(new File(gpxFolder, chosenFileName));
+                        if ( AppSettings.shouldSendZipFile() && sender.acceptZip() && (!chosenFileName.toLowerCase().endsWith(".zip")) )
+                        {
+                            File zipFile = new File(gpxFolder.getPath(), chosenFileName + ".zip");
+                            ArrayList<String> filePaths = new ArrayList<String>();
+                            for (File f : files)
+                            {
+                                filePaths.add(f.getAbsolutePath());
+                            }
+                            Utilities.LogInfo("Zipping selected file: "+chosenFileName);
+                            ZipHelper zh = new ZipHelper(filePaths.toArray(new String[filePaths.size()]), zipFile.getAbsolutePath());
+                            zh.Zip();
+                            files.clear();
+                            files.add(zipFile);
+                        }
                         sender.UploadFile(files);
                     }
                 }

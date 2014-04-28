@@ -346,6 +346,10 @@ public class GDocsHelper implements IActionListener, IFileSender
         }
     }
 
+    public boolean acceptZip() {
+        return true;
+    }
+
 
     public void UploadFile(final String fileName)
     {

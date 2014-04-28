@@ -56,6 +56,7 @@
   <string name="sharing_mylocation">Мои координаты</string>
     <!--      <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>     -->
   <string name="sharing_via">Опубликовать через</string>
+  <string name="no_location">Нет данных о координатах</string>
   <string name="foot"> фут</string>
   <string name="feet"> футы</string>
   <string name="meter"> метр</string>
@@ -218,6 +219,10 @@
   <string name="autoemail_testresult_success">Email отправлен</string>
   <string name="autoemail_invalid_form">Неверные значения</string>
   <string name="autoemail_invalid_form_message">Пожалуйста, убедитесь, что все поля заполнены верно</string>
+  <string name="crit_battery_title">Критический уровень батареи</string>
+  <string name="crit_battery_summary">При достижении данного уровня зарядя батареи запись и посылка координат будут остановлены</string>
+  <string name="crit_battery_dialog_title">Укажите проценты</string>
+  <string name="crit_battery_default">15</string>
   <string name="fix_obtained">Координаты получены</string>
   <string name="started_waiting">GPS запущен, ожидаем координаты</string>
   <string name="gps_stopped">GPS приостановлен</string>
@@ -298,7 +303,8 @@
   <string name="gdocs_testupload_error">Не смог загрузить пробный файл</string>
   <string name="gdocs_testupload_success">Загрузка завершена. Проверте наличее файла в ваших Google Documents.</string>
   <string name="gdocs_selectgoogleaccount">Выберите Google акаунт</string>
-  <string name="email_upload">Отправить файл по электронной почте</string>
+  <string name="email_upload">Отправить файл по email</string>
+  <string name="email_location">Отправить координаты по email</string>
   <string name="autoemail_sendto_csv">Адреса электронной почты разделённые запятыми</string>
   <string name="autosend_enabled">Разрешить авто отправку</string>
   <string name="autosend_enabled_summary">Позволяет отправку файлов в различные цели</string>

@@ -336,6 +336,15 @@ public class Utilities
         AppSettings.setFtpProtocol(prefs.getString("autoftp_ssltls",""));
         AppSettings.setFtpImplicit(prefs.getBoolean("autoftp_implicit", false));
         AppSettings.setMsgTemplate(prefs.getString("msg_template",context.getString(R.string.sharing_template_default)));
+
+        final int critical_battery_level_default = Integer.parseInt(context.getString(R.string.crit_battery_default));
+
+        try {
+            AppSettings.setCritBattLevel(Integer.parseInt(prefs.getString("crit_battery",
+                    Integer.toString(critical_battery_level_default))));
+        } catch (Exception e) {
+            AppSettings.setCritBattLevel(critical_battery_level_default);
+        }
     }
 
     public static void ShowProgress(Context ctx, String title, String message)
@@ -879,48 +888,98 @@ public class Utilities
 
     }
 
-    public static String GetBodyFormatted(Context ctx, double latdd, double londd)
+// which=1 - current location, which=-1 - previous location, which=0 - current or (of current is not defined) previous location
+    public static String GetBodyFormatted(Context ctx, int which)
     {
-        int latd=(int)latdd;
-        int lond=(int)londd;
-        double latmd=(latdd-latd)*60.0;
-        double lonmd=(londd-lond)*60.0;
-        int latm=(int)latmd;
-        int lonm=(int)lonmd;
-        double latsd=(latmd-latm)*60.0;
-        double lonsd=(lonmd-lonm)*60.0;
-        int lats=(int)latsd;
-        int lons=(int)lonsd;
+        double latdd=0.0;
+        double londd=0.0;
+        String timestamp="";
+        String bodyText=ctx.getString(R.string.no_location);
+        boolean LocationDefined=false;
 
-        String slatdd = String.format("%.6f",latdd);
-        String slondd = String.format("%.6f",londd);
-        String slatmd = String.format("%.4f",latmd);
-        String slonmd = String.format("%.4f",lonmd);
-        String slatsd = String.format("%.2f",latsd);
-        String slonsd = String.format("%.2f",lonsd);
-        String slatd = String.format("%d",latd);
-        String slond = String.format("%d",lond);
-        String slatm = String.format("%d",latm);
-        String slonm = String.format("%d",lonm);
-        String slats = String.format("%d",lats);
-        String slons = String.format("%d",lons);
+        boolean CurrValidLocation=Session.hasValidLocation();
+        boolean PrevValidLocation=false;
+        if(Session.getPreviousLocationInfo()!=null) PrevValidLocation=true;
 
-        String bodyText=AppSettings.getMsgTemplate();
+        if( (which==1) && CurrValidLocation )
+        {
+            latdd=Session.getCurrentLatitude();
+            londd=Session.getCurrentLongitude();
+            timestamp=GetReadableDateTime(new Date(Session.getCurrentLocationInfo().getTime()));
+            LocationDefined=true;
+        }
 
-        bodyText=bodyText.replace(ctx.getString(R.string.latitude_degree_decimal),slatdd);
-        bodyText=bodyText.replace(ctx.getString(R.string.longitude_degree_decimal),slondd);
-        bodyText=bodyText.replace(ctx.getString(R.string.latitude_degree),slatd);
-        bodyText=bodyText.replace(ctx.getString(R.string.longitude_degree),slond);
+        if( (which==-1) && PrevValidLocation )
+        {
+            latdd=Session.getPreviousLatitude();
+            londd=Session.getPreviousLongitude();
+            timestamp=GetReadableDateTime(new Date(Session.getPreviousLocationInfo().getTime()));
+            LocationDefined=true;
+        }
 
-        bodyText=bodyText.replace(ctx.getString(R.string.latitude_min_decimal),slatmd);
-        bodyText=bodyText.replace(ctx.getString(R.string.longitude_min_decimal),slonmd);
-        bodyText=bodyText.replace(ctx.getString(R.string.latitude_min),slatm);
-        bodyText=bodyText.replace(ctx.getString(R.string.longitude_min),slonm);
+        if(which==0)
+        {
+            if(CurrValidLocation)
+            {
+                latdd=Session.getCurrentLatitude();
+                londd=Session.getCurrentLongitude();
+                timestamp=GetReadableDateTime(new Date(Session.getCurrentLocationInfo().getTime()));
+                LocationDefined=true;
+            }
+            else if(PrevValidLocation)
+                {
+                    latdd=Session.getPreviousLatitude();
+                    londd=Session.getPreviousLongitude();
+                    timestamp=GetReadableDateTime(new Date(Session.getPreviousLocationInfo().getTime()));
+                    LocationDefined=true;
+                }
+        }
 
-        bodyText=bodyText.replace(ctx.getString(R.string.latitude_sec_decimal),slatsd);
-        bodyText=bodyText.replace(ctx.getString(R.string.longitude_sec_decimal),slonsd);
-        bodyText=bodyText.replace(ctx.getString(R.string.latitude_sec),slats);
-        bodyText=bodyText.replace(ctx.getString(R.string.longitude_sec),slons);
+        if(LocationDefined)
+        {
+            int latd=(int)latdd;
+            int lond=(int)londd;
+            double latmd=(latdd-latd)*60.0;
+            double lonmd=(londd-lond)*60.0;
+            int latm=(int)latmd;
+            int lonm=(int)lonmd;
+            double latsd=(latmd-latm)*60.0;
+            double lonsd=(lonmd-lonm)*60.0;
+            int lats=(int)latsd;
+            int lons=(int)lonsd;
+
+            String slatdd = String.format("%.6f",latdd);
+            String slondd = String.format("%.6f",londd);
+            String slatmd = String.format("%.4f",latmd);
+            String slonmd = String.format("%.4f",lonmd);
+            String slatsd = String.format("%.2f",latsd);
+            String slonsd = String.format("%.2f",lonsd);
+            String slatd = String.format("%d",latd);
+            String slond = String.format("%d",lond);
+            String slatm = String.format("%d",latm);
+            String slonm = String.format("%d",lonm);
+            String slats = String.format("%d",lats);
+            String slons = String.format("%d",lons);
+
+            bodyText=AppSettings.getMsgTemplate();
+
+            bodyText=bodyText.replace(ctx.getString(R.string.latitude_degree_decimal),slatdd);
+            bodyText=bodyText.replace(ctx.getString(R.string.longitude_degree_decimal),slondd);
+            bodyText=bodyText.replace(ctx.getString(R.string.latitude_degree),slatd);
+            bodyText=bodyText.replace(ctx.getString(R.string.longitude_degree),slond);
+
+            bodyText=bodyText.replace(ctx.getString(R.string.latitude_min_decimal),slatmd);
+            bodyText=bodyText.replace(ctx.getString(R.string.longitude_min_decimal),slonmd);
+            bodyText=bodyText.replace(ctx.getString(R.string.latitude_min),slatm);
+            bodyText=bodyText.replace(ctx.getString(R.string.longitude_min),slonm);
+
+            bodyText=bodyText.replace(ctx.getString(R.string.latitude_sec_decimal),slatsd);
+            bodyText=bodyText.replace(ctx.getString(R.string.longitude_sec_decimal),slonsd);
+            bodyText=bodyText.replace(ctx.getString(R.string.latitude_sec),slats);
+            bodyText=bodyText.replace(ctx.getString(R.string.longitude_sec),slons);
+            bodyText=bodyText.replace(ctx.getString(R.string.timestamp),timestamp);
+            bodyText=bodyText.replace("\\n", System.getProperty("line.separator"));
+        }
 
         return bodyText;
     }

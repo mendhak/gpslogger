@@ -84,6 +84,10 @@ public class FtpHelper implements IFileSender
 
     }
 
+    public boolean acceptZip() {
+        return true;
+    }
+
     public void UploadFile(File f)
     {
         try

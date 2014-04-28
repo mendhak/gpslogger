@@ -61,6 +61,10 @@ public class AutoEmailHelper implements IActionListener, IFileSender
         t.start();
     }
 
+    public boolean acceptZip() {
+        return true;
+    }
+
 
     void SendTestEmail(String smtpServer, String smtpPort,
                        String smtpUsername, String smtpPassword, boolean smtpUseSsl,
@@ -69,6 +73,17 @@ public class AutoEmailHelper implements IActionListener, IFileSender
 
         Thread t = new Thread(new TestEmailHandler(helper, smtpServer,
                 smtpPort, smtpUsername, smtpPassword, smtpUseSsl, emailTarget, fromAddress));
+        t.start();
+    }
+
+    public void SendEmail(String smtpServer, String smtpPort,
+                       String smtpUsername, String smtpPassword, boolean smtpUseSsl,
+                       String emailTarget, String fromAddress, String msgSubject, String msgBody,
+                       IActionListener helper)
+    {
+
+        Thread t = new Thread(new TestEmailHandler(helper, smtpServer,
+                smtpPort, smtpUsername, smtpPassword, smtpUseSsl, emailTarget, fromAddress, msgSubject, msgBody));
         t.start();
     }
 
@@ -91,6 +106,7 @@ public class AutoEmailHelper implements IActionListener, IFileSender
     {
         return name.toLowerCase().endsWith(".zip")
                 || name.toLowerCase().endsWith(".gpx")
+                || name.toLowerCase().endsWith(".igc")
                 || name.toLowerCase().endsWith(".kml");
     }
 
@@ -166,6 +182,8 @@ class TestEmailHandler implements Runnable
     String csvEmailTargets;
     IActionListener helper;
     String fromAddress;
+    String msgSubject;
+    String msgBody;
 
     public TestEmailHandler(IActionListener helper, String smtpServer,
                             String smtpPort, String smtpUsername, String smtpPassword,
@@ -179,10 +197,30 @@ class TestEmailHandler implements Runnable
         this.csvEmailTargets = csvEmailTargets;
         this.helper = helper;
         this.fromAddress = fromAddress;
+        this.msgSubject = "";
+        this.msgBody = "";
+    }
+
+    public TestEmailHandler(IActionListener helper, String smtpServer,
+                            String smtpPort, String smtpUsername, String smtpPassword,
+                            boolean smtpUseSsl, String csvEmailTargets, String fromAddress,
+                            String msgSubj, String msgBod)
+    {
+        this.smtpServer = smtpServer;
+        this.smtpPort = smtpPort;
+        this.smtpPassword = smtpPassword;
+        this.smtpUsername = smtpUsername;
+        this.smtpUseSsl = smtpUseSsl;
+        this.csvEmailTargets = csvEmailTargets;
+        this.helper = helper;
+        this.fromAddress = fromAddress;
+        this.msgSubject = msgSubj;
+        this.msgBody = msgBod;
     }
 
     public void run()
     {
+        String defBody="";
         try
         {
 
@@ -200,11 +238,12 @@ class TestEmailHandler implements Runnable
                 m.setFrom(smtpUsername);
             }
 
-
-            m.setSubject("Test Email from GPSLogger at "
-                    + Utilities.GetReadableDateTime(new Date()));
-            m.setBody("Test Email from GPSLogger at "
-                    + Utilities.GetReadableDateTime(new Date()));
+            defBody="Test Email from GPSLogger at "
+                    + Utilities.GetReadableDateTime(new Date());
+            if(msgBody.length()==0) msgBody = defBody;
+            if(msgSubject.length()==0) msgSubject = defBody;
+            m.setSubject(msgSubject);
+            m.setBody(msgBody);
 
             m.setPort(smtpPort);
             m.setSecurePort(smtpPort);
