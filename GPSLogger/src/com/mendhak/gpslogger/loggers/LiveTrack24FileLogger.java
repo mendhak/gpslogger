@@ -156,7 +156,13 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
     @Override
     public void close() throws  Exception{
         // FIXME - add support for end of track types (need retrieve etc...)
+
+        // This triggers a flush of all pending locations not yet sent
         super.close();
+
+        // invalidate login, no more location should be sent to server.
+        // Better wait few ms for on-the-fly packet to be transmitted/lost
+        login_ok = false;
 
         HashMap<String,String> m = new HashMap<String, String>();
         m.put("prid", "0");
