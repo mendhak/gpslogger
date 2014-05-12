@@ -1,0 +1,17 @@
+language: android
+jdk: oraclejdk7
+
+
+notifications:
+  email: true
+
+
+env:
+  matrix:
+    - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
+
+script:
+  # Performs tests (which will do a ./gradlew build task first)
+  # Skips the uninstallAll task as it's always a fresh emulator
+  # Does a logcat dump if anything fails
+  - ./gradlew 
