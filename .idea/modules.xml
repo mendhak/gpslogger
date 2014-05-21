@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GPSLogger/gpslogger.iml" filepath="$PROJECT_DIR$/GPSLogger/gpslogger.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gpslogger-parent.iml" filepath="$PROJECT_DIR$/gpslogger-parent.iml" />
-      <module fileurl="file://$PROJECT_DIR$/GPSLogger/gen-external-apklibs/~apklib-com.actionbarsherlock_actionbarsherlock_4.4.0.iml" filepath="$PROJECT_DIR$/GPSLogger/gen-external-apklibs/~apklib-com.actionbarsherlock_actionbarsherlock_4.4.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GPSLogger/GPSLogger.iml" filepath="$PROJECT_DIR$/GPSLogger/GPSLogger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GPSLoggerFlight.iml" filepath="$PROJECT_DIR$/GPSLoggerFlight.iml" />
     </modules>
   </component>
 </project>

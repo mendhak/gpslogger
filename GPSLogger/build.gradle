@@ -1,59 +1,38 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.10.+'
-    }
-}
-
 apply plugin: 'android'
-
-repositories {
-    mavenCentral()
-}
-
-
-dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
-    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
-    compile 'commons-net:commons-net:2.2'
-    compile 'org.apache.httpcomponents:httpmime:4.3.3'
-    compile 'oauth.signpost:signpost-commonshttp4:1.2.1.2'
-    compile 'com.loopj.android:android-async-http:1.4.4'
-    compile 'com.android.support:support-v4:19.1.0'
-
-}
-
-
-
 
 android {
     compileSdkVersion 19
     buildToolsVersion "19.0.3"
 
-    sourceSets {
-        main {
-            manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src']
-            resources.srcDirs = ['src']
-            aidl.srcDirs = ['src']
-            renderscript.srcDirs = ['src']
-            res.srcDirs = ['res']
-            assets.srcDirs = ['assets']
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 19
+        versionCode 20140519
+        versionName "20140519"
+    }
+
+     signingConfigs {
+
+        release {
+            storeFile file("/YYY/XXX/keystore.ks")
+            storePassword "XXXX"
+            keyAlias "XXXX"
+            keyPassword "XXXX"
+        }
+    }
+
+    buildTypes {
+        releaseSigned {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
         }
 
-        // Move the tests to tests/java, tests/res, etc...
-        instrumentTest.setRoot('tests')
+        releaseUnsigned {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
 
-        // Move the build types to build-types/<type>
-        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
-        // This moves them out of them default location under src/<type>/... which would
-        // conflict with src/ being used by the main source set.
-        // Adding new build types or product flavors should be accompanied
-        // by a similar customization.
-        debug.setRoot('build-types/debug')
-        release.setRoot('build-types/release')
     }
 
     lintOptions {
@@ -73,5 +52,14 @@ android {
         exclude 'META-INF/LGPL2.1'
     }
 
+}
 
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:support-v4:19.1.0'
+    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    compile 'commons-net:commons-net:2.2'
+    compile 'org.apache.httpcomponents:httpmime:4.3.3'
+    compile 'oauth.signpost:signpost-commonshttp4:1.2.1.2'
+    compile 'com.loopj.android:android-async-http:1.4.4'
 }

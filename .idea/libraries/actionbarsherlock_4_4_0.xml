@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="actionbarsherlock-4.4.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/GPSLogger/build/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/GPSLogger/build/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

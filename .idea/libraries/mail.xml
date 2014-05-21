@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mail">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/GPSLogger/libs/mail.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

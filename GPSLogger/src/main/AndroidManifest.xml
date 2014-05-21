@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="net.kataplop.gpslogger" android:versionCode="20140430"
-          android:versionName="20140430" android:installLocation="auto">
-
-    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17"/>
+    package="net.kataplop.gpslogger">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <!--<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />-->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <supports-screens android:smallScreens="true"
-                      android:normalScreens="true" android:largeScreens="true"
-                      android:anyDensity="true"/>
 
-    <!--suppress AndroidDomInspection -->
-    <application android:icon="@drawable/gpsloggericon2"
-                 android:name="@string/app_name" android:label="@string/app_name" android:theme="@style/Theme.Sherlock">
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/gpsloggericon2"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.Sherlock" >
 
         <service android:name="com.mendhak.gpslogger.GpsLoggingService">
             <intent-filter>
@@ -155,5 +151,8 @@
         </receiver>
 
         <receiver android:name="com.mendhak.gpslogger.senders.AlarmReceiver"/>
+
+
     </application>
+
 </manifest>
