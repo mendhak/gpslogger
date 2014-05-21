@@ -232,8 +232,7 @@ public class SkyLinesLogger extends AbstractLiveLogger
     }
 
     @Override
-    public void close() throws Exception{
-        super.close();
+    public void closeAfterFlush() {
         instance = null;
     }
 

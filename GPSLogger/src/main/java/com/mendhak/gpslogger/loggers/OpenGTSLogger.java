@@ -21,7 +21,9 @@ import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.OpenGTSClient;
+import com.mendhak.gpslogger.loggers.utils.LocationBuffer;
 
+import java.io.IOException;
 
 
 /**
@@ -29,7 +31,7 @@ import com.mendhak.gpslogger.common.OpenGTSClient;
  *
  * @author Francisco Reynoso
  */
-public class OpenGTSLogger extends AbstractLogger implements IFileLogger
+public class OpenGTSLogger extends AbstractLiveLogger
 {
 
     public static final String name = "OpenGTS";
@@ -40,13 +42,7 @@ public class OpenGTSLogger extends AbstractLogger implements IFileLogger
     }
 
     @Override
-    public void close() throws Exception{
-
-    }
-
-    @Override
-    public void Write(Location loc) throws Exception
-    {
+    public boolean liveUpload(LocationBuffer.BufferedLocation bloc) throws IOException {
         String server = AppSettings.getOpenGTSServer();
         int port = Integer.parseInt(AppSettings.getOpenGTSServerPort());
         String path = AppSettings.getOpenGTSServerPath();
@@ -66,8 +62,9 @@ public class OpenGTSLogger extends AbstractLogger implements IFileLogger
         };
 
         OpenGTSClient openGTSClient = new OpenGTSClient(server, port, path, al, null);
-        openGTSClient.sendHTTP(deviceId, loc);
+        openGTSClient.sendHTTP(deviceId, bloc.toLocation() );
         SetLatestTimeStamp(System.currentTimeMillis());
+        return true;
     }
 
     @Override

@@ -16,10 +16,18 @@ public abstract class AbstractLiveLogger extends AbstractLogger {
     private Runnable flusher;
     private Handler handler;
     private FlusherAsyncTask flushertask;
+    private boolean loggerIsClosing = false;
 
     private static String name = "AbstractLiveLogger";
 
     public abstract boolean liveUpload(LocationBuffer.BufferedLocation bloc) throws IOException;
+
+    /**
+     * Called after buffer has been flushed when closing.
+     */
+    public void closeAfterFlush(){
+        // default is empty.
+    }
 
     public AbstractLiveLogger(final int minsec, final int mindist){
         super(minsec, mindist);
@@ -63,6 +71,13 @@ public abstract class AbstractLiveLogger extends AbstractLogger {
             }
             return null;
         }
+
+        @Override
+        protected void onPostExecute(Void e){
+            if (loggerIsClosing) {
+                closeAfterFlush();
+            }
+        }
     };
 
 //    int currentapiVersion = android.os.Build.VERSION.SDK_INT;
@@ -88,6 +103,7 @@ public abstract class AbstractLiveLogger extends AbstractLogger {
     @Override
     public void close() throws Exception{
         this.handler.removeCallbacks(flusher);
+        loggerIsClosing = true;
         execAsyncFlush();
     }
 
