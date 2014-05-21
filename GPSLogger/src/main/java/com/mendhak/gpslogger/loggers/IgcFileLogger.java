@@ -25,19 +25,36 @@
 package com.mendhak.gpslogger.loggers;
 
 import android.location.Location;
+import android.text.format.Time;
 import android.util.Base64;
 import android.util.Log;
+
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Utilities;
 
-import java.io.*;
-import java.security.*;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.security.InvalidKeyException;
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.Signature;
+import java.security.SignatureException;
 import java.security.spec.EncodedKeySpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
-import java.util.*;
-
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Writes an IGC file suitable for most flight related
@@ -151,14 +168,9 @@ public class IgcFileLogger extends AbstractLogger implements IFileLogger
         StringBuffer sb = new StringBuffer();
         sb.append("AXGP1\r\n");
 
-        SimpleDateFormat sdf = new SimpleDateFormat("FFMMyy");
-        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-
-        String s = sdf.format(new Date());
-/*
-            String dstr = String.format(Locale.US, "HFDTE%02d%02d%02d",
-                    cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH) + 1,
-                    (cal.get(Calendar.YEAR) - 1900) % 100);*/
+        Time now = new Time();
+        now.setToNow();
+        String s = String.format("%02d%02d%02d", now.monthDay, now.month+1, now.year % 100);
 
         sb.append("HFDTE" + s + "\r\n");
         sb.append("HFFXA100\r\n"); // accuracy in meters - required
