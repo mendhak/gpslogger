@@ -1,5 +1,7 @@
 package com.mendhak.gpslogger.loggers.utils;
 
+import android.location.Location;
+
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -22,6 +24,16 @@ public class LocationBuffer {
             this.altitude = alt;
             this.bearing = bearing;
             this.speed = speed;
+        }
+        public Location toLocation(){
+            Location loc = new Location("BufferLocation");
+            loc.setTime(timems);
+            loc.setLatitude(lat);
+            loc.setLongitude(lon);
+            loc.setAltitude(altitude);
+            loc.setBearing(bearing);
+            loc.setSpeed(speed);
+            return loc;
         }
     }
 
