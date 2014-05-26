@@ -371,6 +371,7 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
 
         Utilities.LogDebug("GpsMainActivity.onDestroy");
         StopAndUnbindServiceIfRequired();
+        this.unregisterReceiver(this.batteryInfoReceiver);
     }
 
     /**

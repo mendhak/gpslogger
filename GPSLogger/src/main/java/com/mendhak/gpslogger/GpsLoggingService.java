@@ -791,11 +791,13 @@ public class GpsLoggingService extends Service implements IActionListener
             Utilities.LogDebug("NextAlarmTime: "+nat);
             nats.add(nat-systime);
         }
-        Long[] arnat = nats.toArray(new Long[nats.size()]);
-        Arrays.sort(arnat);
-        Utilities.LogDebug("Sorted array of NextAlarmTime: " + Arrays.toString(arnat));
-        nat=(long)arnat[0];
-        if(nat>NextAlarmTime) NextAlarmTime=nat;
+        if(!nats.isEmpty()) {
+            Long[] arnat = nats.toArray(new Long[nats.size()]);
+            Arrays.sort(arnat);
+            Utilities.LogDebug("Sorted array of NextAlarmTime: " + Arrays.toString(arnat));
+            nat = (long) arnat[0];
+            if (nat > NextAlarmTime) NextAlarmTime = nat;
+        }
         return NextAlarmTime;
     }
 
