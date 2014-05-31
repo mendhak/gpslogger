@@ -20,6 +20,7 @@
 package com.mendhak.gpslogger.senders.livetrack24;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -28,13 +29,13 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.view.KeyEvent;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.mendhak.gpslogger.GpsMainActivity;
-import net.kataplop.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
+
+import net.kataplop.gpslogger.R;
 
 public class Livetrack24Activity extends SherlockPreferenceActivity implements
         OnPreferenceChangeListener,
@@ -117,14 +118,26 @@ public class Livetrack24Activity extends SherlockPreferenceActivity implements
         EditTextPreference txtlivetrack24Password = (EditTextPreference) findPreference("livetrack24_password");
         EditTextPreference txtlivetrack24Interval = (EditTextPreference) findPreference("livetrack24_interval");
 
-        final boolean srv_not_empty = txtlivetrack24Server.getText() != null && !txtlivetrack24Server.getText().isEmpty();
-        final boolean use_preset = !preset.equals("custom");
-        final boolean has_user = txtlivetrack24Username.getText() != null && !txtlivetrack24Username.getText().isEmpty();
-        final boolean has_passwd = txtlivetrack24Password.getText() != null && !txtlivetrack24Password.getText().isEmpty();
-        final boolean has_interv = txtlivetrack24Interval.getText() != null && isNumeric(txtlivetrack24Interval.getText());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
 
-        return !chkEnabled.isChecked()
-                || (srv_not_empty || use_preset) && has_user && has_passwd && has_interv;
+            final boolean srv_not_empty = txtlivetrack24Server.getText() != null && !txtlivetrack24Server.getText().isEmpty();
+            final boolean use_preset = !preset.equals("custom");
+            final boolean has_user = txtlivetrack24Username.getText() != null && !txtlivetrack24Username.getText().isEmpty();
+            final boolean has_passwd = txtlivetrack24Password.getText() != null && !txtlivetrack24Password.getText().isEmpty();
+            final boolean has_interv = txtlivetrack24Interval.getText() != null && isNumeric(txtlivetrack24Interval.getText());
+
+            return !chkEnabled.isChecked()
+                    || (srv_not_empty || use_preset) && has_user && has_passwd && has_interv;
+        } else {
+            final boolean srv_not_empty = txtlivetrack24Server.getText() != null && txtlivetrack24Server.getText().length() > 0;
+            final boolean use_preset = !preset.equals("custom");
+            final boolean has_user = txtlivetrack24Username.getText() != null && txtlivetrack24Username.getText().length() > 0;
+            final boolean has_passwd = txtlivetrack24Password.getText() != null && txtlivetrack24Password.getText().length() > 0;
+            final boolean has_interv = txtlivetrack24Interval.getText() != null && isNumeric(txtlivetrack24Interval.getText());
+
+            return !chkEnabled.isChecked()
+                    || (srv_not_empty || use_preset) && has_user && has_passwd && has_interv;
+        }
     }
 
     private static boolean isNumeric(String str)
