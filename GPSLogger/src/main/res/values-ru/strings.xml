@@ -26,7 +26,7 @@
     <string name="AskFileName">Укажите имя файла без расширения</string>
     <string name="ChooseFile">Выберите файл</string>
     <string name="SelectFile">Выберите файл</string>
-    <string name="Browse">Поиск файла...</string>
+    <string name="Browse">Поиск файла…</string>
     <string name="NoFSBrowser">Приложение для просмотра файловой системы не установлено</string>
     <string name="FileExists">Такой файл уже существует</string>
     <string name="AskAnotherFile">Укажите другое имя файла</string>
@@ -66,7 +66,7 @@
   <string name="gpsprovider_unavailable">Нет доступного источника GPS данных. Пожалуйста, проверьте настройки.
     </string>
   <string name="started">Начато</string>
-  <string name="providername_using">    (Используя %s)</string>
+  <string name="providername_using">&#160;&#160;&#160;&#160;(Используя %s)</string>
   <string name="providername_gps">спутники GPS</string>
   <string name="providername_celltower">сотовые вышки</string>
   <string name="not_applicable">неопределено</string>
@@ -105,7 +105,7 @@
   <string name="time_oneandhalfhours">90 минут</string>
   <string name="time_twoandhalfhours">150 минут</string>
   <string name="time_hms_format" formatted="false">%s:%s:%s</string>
-  <string name="accuracy_within" formatted="false">в интервале %s %s</string>
+  <string name="accuracy_within" formatted="false">в радиусе %s %s</string>
   <string name="error_displaying">Ошибка отображения координат: %s</string>
   <string name="degree_symbol">°</string>
   <string name="settings_distance_in_feet">Дистанция в футах</string>
@@ -114,7 +114,7 @@
   <string name="settings_accuracy_in_meters">Точность в метрах</string>
   <string name="settings_accuracy_in_feet">Точность в футах</string>
   <string name="settings_enter_meters">Введите число метров (max 9999)</string>
-  <string name="settings_converting_title">Преобразование...</string>
+  <string name="settings_converting_title">Преобразование…</string>
   <string name="settings_converting_description">Конвертирую единицы минимальной дистанции. Значения больше 9999 будут
         сброшены до 9999. Экран настроек будет перезагружен.
     </string>
@@ -155,13 +155,13 @@
         для батареи.
     </string>
   <string name="time_before_logging_dialog_title">Время в секундах</string>
-  <string name="time_before_logging_hint">Укажите количество секунд (0...9999)</string>
+  <string name="time_before_logging_hint">Укажите количество секунд (0…9999)</string>
   <string name="keep_fix_summary">Не выключать GPS в промежутках между точками. Осторожно, при этом увеличивается расход аккумулятора.</string>
   <string name="keep_fix_title">Держать GPS включённым</string>
   <string name="retry_time_title">Время ожидания точности GPS</string>
   <string name="retry_time_summary">Используйте 0 для максимальной частоты, но чем медленнее, тем лучше для аккумулятора.     </string>
   <string name="retry_time_dialog_title">Время в секундах</string>
-  <string name="retry_time_hint">Укажите количество секунд (0...9999)</string>
+  <string name="retry_time_hint">Укажите количество секунд (0…9999)</string>
   <string name="distance_before_logging_title">Дистанция записи лога</string>
   <string name="distance_before_logging_summary">Используйте 0 для минимально возможной дистанции логирования. Больше
         - лучше для батареи.
@@ -256,7 +256,7 @@
     </string>
 
   <string name="flying_pref_title">Персональные данные</string>
-  <string name="flying_pref_summary">Имя пилота, тип ЛА,...</string>
+  <string name="flying_pref_summary">Имя пилота, тип ЛА,…</string>
 
   <string name="flying_pref_pilot_name_title">Имя пилота</string>
   <string name="flying_pref_pilot_name_summary">Используется при записи треклога для идентификации пилота</string>
@@ -346,7 +346,7 @@
 
 
     <string name="log_livetrack24_title">Отправлять координаты на сервер livetrack24</string>
-    <string name="log_livetrack24_summary">Отправлять данные GPS на сервер livetrack24 (leonardo, FFVL, ...).</string>
+    <string name="log_livetrack24_summary">Отправлять данные GPS на сервер livetrack24 (leonardo, FFVL, …).</string>
     <string name="livetrack24_setup_title">Настройка livetrack24</string>
     <string name="livetrack24_setup_summary">Отправка координат на выбранный сервер livetrack24.</string>
     <string name="livetrack24_enabled">Активировать livetrack24</string>
@@ -375,7 +375,7 @@
     <string name="livetrack24_distance_before_logging_summary">Минимальное пройденное расстояние для отправки точек. Используйте 0 для отправки всех точек.</string>
     <string name="livetrack24_distance_before_logging_default">10</string>
     <string name="livetrack24_presets">Предустановки Livetrack</string>
-    <string name="livetrack24_presets_summary">Стандартные настройки для leonardo, FFVL, ...</string>
+    <string name="livetrack24_presets_summary">Стандартные настройки для leonardo, FFVL, …</string>
     <string name="livetrack24_invalid_form">Недопустимые значения</string>
     <string name="livetrack24_invalid_form_message">Пожалуйста, убедитесь, что все поля заполнены верно</string>
 

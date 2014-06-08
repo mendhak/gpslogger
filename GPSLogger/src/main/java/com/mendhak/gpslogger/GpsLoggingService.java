@@ -475,9 +475,10 @@ public class GpsLoggingService extends Service implements IActionListener
         Utilities.LogDebug("GpsLoggingService.ShowNotification");
         // What happens when the notification item is clicked
         Intent contentIntent = new Intent(this, GpsMainActivity.class);
+        contentIntent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
 
         PendingIntent pending = PendingIntent.getActivity(getApplicationContext(), 0, contentIntent,
-                android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification nfc = new Notification(R.drawable.gpsloggericon2, null, System.currentTimeMillis());
         nfc.flags |= Notification.FLAG_ONGOING_EVENT;
@@ -771,10 +772,11 @@ public class GpsLoggingService extends Service implements IActionListener
         boolean needToLog=false;
         for (IFileLogger logger : loggers)
         {
-            needToLog|=logger.isTimeToLog();
-            needToLog|=logger.isDistToLog(loc.getLongitude(),loc.getLatitude());
+            needToLog=logger.isTimeToLog();
+            if(needToLog) needToLog&=logger.isDistToLog(loc.getLongitude(),loc.getLatitude());
+            if(needToLog) return needToLog;
         }
-        Utilities.LogInfo("Need to log? "+String.valueOf(needToLog));
+//        Utilities.LogInfo("Need to log? "+String.valueOf(needToLog));
         return needToLog;
     }
 
