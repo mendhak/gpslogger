@@ -31,7 +31,7 @@ public class ShortcutStart extends Activity {
 
         tracer.info("Shortcut - start logging");
         Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
-        serviceIntent.putExtra("immediate", true);
+        serviceIntent.putExtra("immediatestart", true);
         getApplicationContext().startService(serviceIntent);
 
         finish();

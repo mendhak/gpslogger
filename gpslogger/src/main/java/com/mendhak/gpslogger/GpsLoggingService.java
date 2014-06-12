@@ -135,7 +135,7 @@ public class GpsLoggingService extends Service implements IActionListener {
                 boolean needToStartGpsManager = false;
 
                 boolean stopRightNow = bundle.getBoolean("immediatestop");
-                boolean startRightNow = bundle.getBoolean("immediate");
+                boolean startRightNow = bundle.getBoolean("immediatestart");
                 boolean sendEmailNow = bundle.getBoolean("emailAlarm");
                 boolean getNextPoint = bundle.getBoolean("getnextpoint");
 
