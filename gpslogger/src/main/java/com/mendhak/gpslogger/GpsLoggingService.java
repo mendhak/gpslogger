@@ -27,6 +27,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Binder;
@@ -34,6 +35,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import com.mendhak.gpslogger.common.AppSettings;
@@ -130,6 +132,8 @@ public class GpsLoggingService extends Service implements IActionListener {
             Bundle bundle = intent.getExtras();
 
             if (bundle != null) {
+                boolean needToStartGpsManager = false;
+
                 boolean stopRightNow = bundle.getBoolean("immediatestop");
                 boolean startRightNow = bundle.getBoolean("immediate");
                 boolean sendEmailNow = bundle.getBoolean("emailAlarm");
@@ -157,11 +161,74 @@ public class GpsLoggingService extends Service implements IActionListener {
                     AutoSendLogFile();
                 }
 
-                if (getNextPoint && Session.isStarted()) {
+                if (getNextPoint) {
                     tracer.debug("Intent received - Get Next Point");
-                    StartGpsManager();
+                    needToStartGpsManager = true;
                 }
 
+                String setNextPointDescription = bundle.getString("setnextpointdescription");
+                if (setNextPointDescription != null) {
+                    tracer.debug("Intent received - Set Next Point Description: " + setNextPointDescription);
+
+                    final String desc = Utilities.CleanDescription(setNextPointDescription);
+                    if (desc.length() == 0) {
+                        tracer.debug("Clearing annotation");
+                        Session.clearDescription();
+                    } else {
+                        tracer.debug("Setting annotation: " + desc);
+                        Session.setDescription(desc);
+                    }
+                    needToStartGpsManager = true;
+                }
+
+                SharedPreferences prefs = PreferenceManager
+                        .getDefaultSharedPreferences(getApplicationContext());
+
+                if (bundle.get("setprefercelltower") != null) {
+                    boolean preferCellTower = bundle.getBoolean("setprefercelltower");
+                    tracer.debug("Intent received - Set Prefer Cell Tower: " + String.valueOf(preferCellTower));
+                    prefs.edit().putBoolean("prefer_celltower", preferCellTower).commit();
+                    needToStartGpsManager = true;
+                }
+
+                if (bundle.get("settimebeforelogging") != null) {
+                    int timeBeforeLogging = bundle.getInt("settimebeforelogging");
+                    tracer.debug("Intent received - Set Time Before Logging: " + String.valueOf(timeBeforeLogging));
+                    prefs.edit().putString("time_before_logging", String.valueOf(timeBeforeLogging)).commit();
+                    needToStartGpsManager = true;
+                }
+
+                if (bundle.get("setdistancebeforelogging") != null) {
+                    int distanceBeforeLogging = bundle.getInt("setdistancebeforelogging");
+                    tracer.debug("Intent received - Set Distance Before Logging: " + String.valueOf(distanceBeforeLogging));
+                    prefs.edit().putString("distance_before_logging", String.valueOf(distanceBeforeLogging)).commit();
+                    needToStartGpsManager = true;
+                }
+
+                if (bundle.get("setkeepbetweenfix") != null) {
+                    boolean keepBetweenFix = bundle.getBoolean("setkeepbetweenfix");
+                    tracer.debug("Intent received - Set Keep Between Fix: " + String.valueOf(keepBetweenFix));
+                    prefs.edit().putBoolean("keep_fix", keepBetweenFix).commit();
+                    needToStartGpsManager = true;
+                }
+
+                if (bundle.get("setretrytime") != null) {
+                    int retryTime = bundle.getInt("setretrytime");
+                    tracer.debug("Intent received - Set Retry Time: " + String.valueOf(retryTime));
+                    prefs.edit().putString("retry_time", String.valueOf(retryTime)).commit();
+                    needToStartGpsManager = true;
+                }
+
+                if (bundle.get("setabsolutetimeout") != null) {
+                    int absolumeTimeOut = bundle.getInt("setabsolutetimeout");
+                    tracer.debug("Intent received - Set Retry Time: " + String.valueOf(absolumeTimeOut));
+                    prefs.edit().putString("absolute_timeout", String.valueOf(absolumeTimeOut)).commit();
+                    needToStartGpsManager = true;
+                }
+
+                if (needToStartGpsManager && Session.isStarted()) {
+                    StartGpsManager();
+                }
             }
         } else {
             // A null intent is passed in if the service has been killed and
