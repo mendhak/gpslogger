@@ -226,6 +226,13 @@ public class GpsLoggingService extends Service implements IActionListener {
                     needToStartGpsManager = true;
                 }
 
+                if(bundle.get("logonce") != null){
+                    boolean logOnceIntent = bundle.getBoolean("logonce");
+                    tracer.debug("Intent received - Log Once: " + String.valueOf(logOnceIntent));
+                    needToStartGpsManager = false;
+                    LogOnce();
+                }
+
                 if (needToStartGpsManager && Session.isStarted()) {
                     StartGpsManager();
                 }
