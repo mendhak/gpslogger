@@ -406,18 +406,48 @@
             </div>
 
             <div class="a-left">
-                <a href="#18" name="18"><h3>How do I download it?</h3></a>
+                <a href="#18" name="18"><h3>How does this integrate with Tasker/Llama or other automation frameworks?</h3></a>
+                <p>
+                    If your automation app can send intents, you can send intents to GPSLogger to get it to perform a few actions.
+                    For example, in Tasker, create a new action under Misc > Send Intent.
+                    <br/><br/>
+                    Action: <code>com.mendhak.gpslogger.GpsLoggingService</code><br/>
+                    Extra: <code>immediatestart:true</code> (others below)<br/>
+                    Target: <code>Service</code><br/>
+                </p>
+
+                    These are the extras you can send to GPSLogger:
+
+                <blockquote><ul>
+                    <li><code>immediatestart</code> - (true/false) Start logging immediately</li>
+                    <li><code>immediatestop</code> - (true/false) Stop logging</li>
+                    <li><code>logonce</code> - (true/false) Log a single point and stop</li>
+                    <li><code>setnextpointdescription</code> - (text) Sets the annotation text to use for the next point logged</li>
+                    <li><code>setprefercelltower</code> - (true/false) Sets preference to use cell towers instead of GPS</li>
+                    <li><code>settimebeforelogging</code> - (number) Sets preference for time before logging option</li>
+                    <li><code>setdistancebeforelogging</code> - (number) Sets preference for distance before logging option</li>
+                    <li><code>setkeepbetweenfix</code> - (true/false) Sets preference whether to keep GPS on between fixes</li>
+                    <li><code>setretrytime</code> - (number) Sets preference for retry time</li>
+                    <li><code>setabsolutetimeout</code> - (number) Sets preference for absolute timeout</li>
+
+                </ul></blockquote>
+
+
+            </div>
+
+            <div class="a-left">
+                <a href="#100" name="100"><h3>How do I download it?</h3></a>
                 <p>Search for GPS Logger for Android in Google Play, or follow <a href="market://details?id=com.mendhak.gpslogger">this direct link</a>.</p>
             </div>
 
             <div class="a-left">
-                <a href="#19" name="19"><h3>How do I download it without using the Android market?</h3></a>
+                <a href="#101" name="101"><h3>How do I download it without using the Android market?</h3></a>
                 <p>You can download the APK file <a href="http://sourceforge.net/projects/gfadownload/files/">here</a>.</p>
             </div>
 
 
             <div class="a-left">
-                <a href="#20" name="20"><h3><i>Bugs, issues, code?</i></h3></a>
+                <a href="#102" name="102"><h3><i>Bugs, issues, code?</i></h3></a>
                 <p>You can add issues and view the source code at <a href="http://github.com/mendhak/gpslogger">github.com/mendhak/gpslogger</a></p>
             </div>
         </article>
