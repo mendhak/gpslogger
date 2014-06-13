@@ -44,7 +44,7 @@ public class FtpHelper implements IFileSender {
         ByteArrayInputStream in = new ByteArrayInputStream(data.getBytes());
 
         Thread t = new Thread(new FtpUploadHandler(callback, servername, port, username, password, directory,
-                useFtps, protocol, implicit, in, "gpslogger_test.txt"));
+                useFtps, protocol, implicit, "TEST", in, "gpslogger_test.txt"));
         t.start();
     }
 
@@ -67,7 +67,7 @@ public class FtpHelper implements IFileSender {
             FileInputStream fis = new FileInputStream(f);
             Thread t = new Thread(new FtpUploadHandler(callback, AppSettings.getFtpServerName(), AppSettings.getFtpPort(),
                     AppSettings.getFtpUsername(), AppSettings.getFtpPassword(), AppSettings.getFtpDirectory(),
-                    AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit(),
+                    AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit(), AppSettings.getOerhbMemberNumber(),
                     fis, f.getName()));
             t.start();
         } catch (Exception e) {
@@ -106,9 +106,11 @@ class FtpUploadHandler implements Runnable {
     InputStream inputStream;
     String fileName;
     String directory;
+    String oerhbMemberNumber;
 
     public FtpUploadHandler(IActionListener helper, String server, int port, String username,
                             String password, String directory, boolean useFtps, String protocol, boolean implicit,
+                            String oerhbMemberNumber,
                             InputStream inputStream, String fileName) {
         this.helper = helper;
         this.server = server;
@@ -121,11 +123,12 @@ class FtpUploadHandler implements Runnable {
         this.inputStream = inputStream;
         this.fileName = fileName;
         this.directory = directory;
+        this.oerhbMemberNumber = oerhbMemberNumber;
     }
 
     @Override
     public void run() {
-        if (Ftp.Upload(server, username, password, directory, port, useFtps, protocol, implicit, inputStream, fileName)) {
+        if (Ftp.Upload(server, username, password, directory, port, useFtps, protocol, implicit, oerhbMemberNumber, inputStream, fileName)) {
             helper.OnComplete();
         } else {
             helper.OnFailure();

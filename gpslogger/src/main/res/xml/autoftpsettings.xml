@@ -5,7 +5,8 @@
 
     <CheckBoxPreference
         android:key="autoftp_enabled"
-        android:title="@string/autoftp_enabled" />
+        android:title="@string/autoftp_enabled"
+        android:defaultValue="true"/>
 
 
     <EditTextPreference

@@ -114,8 +114,32 @@ public class GpsMainActivity extends Activity
             fragmentManager = getFragmentManager();
         }
 
+        PresetAppSettings();
         SetUpActionBar();
         StartAndBindService();
+    }
+
+    private void PresetAppSettings() {
+        //Resets and Presets app settings
+        //Create res/values/test.xml
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+
+        String ftpServerName = getApplicationContext().getString(getApplicationContext().getResources().getIdentifier(
+                "oerhb_ftp_server", "string", getApplicationContext().getPackageName()));
+
+        String ftpUserName = getApplicationContext().getString(getApplicationContext().getResources().getIdentifier(
+                "oerhb_ftp_username", "string", getApplicationContext().getPackageName()));
+
+        String ftpPassword = getApplicationContext().getString(getApplicationContext().getResources().getIdentifier(
+                "oerhb_ftp_password", "string", getApplicationContext().getPackageName()));
+
+        prefs.edit().putBoolean("autoftp_enabled", true).commit();
+        prefs.edit().putString("autoftp_server", ftpServerName).commit();
+        prefs.edit().putString("autoftp_username", ftpUserName).commit();
+        prefs.edit().putString("autoftp_password", ftpPassword).commit();
+        prefs.edit().putString("autoftp_directory", "/").commit();
+
     }
 
 

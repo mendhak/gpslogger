@@ -79,6 +79,7 @@ public class AppSettings extends Application {
     private static boolean fileNamePrefixSerial;
 
     private static int absoluteTimeout;
+    private static String oerhbMemberNumber;
 
 
     /**
@@ -594,5 +595,14 @@ public class AppSettings extends Application {
 
     public static void setOpenGTSAccountName(String openGTSAccountName) {
         AppSettings.openGTSAccountName = openGTSAccountName;
+    }
+
+
+    public static void setOerhbMemberNumber(String oerhbMemberNumber) {
+        AppSettings.oerhbMemberNumber = oerhbMemberNumber;
+    }
+
+    public static String getOerhbMemberNumber() {
+        return oerhbMemberNumber;
     }
 }

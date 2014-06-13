@@ -253,7 +253,7 @@ public class Utilities {
         AppSettings.setOpenGTSDeviceId(prefs.getString("opengts_device_id", ""));
         AppSettings.setOpenGTSAccountName(prefs.getString("opengts_accountname",""));
 
-        AppSettings.setAutoFtpEnabled(prefs.getBoolean("autoftp_enabled", false));
+        AppSettings.setAutoFtpEnabled(prefs.getBoolean("autoftp_enabled", true));
         AppSettings.setFtpServerName(prefs.getString("autoftp_server", ""));
         AppSettings.setFtpUsername(prefs.getString("autoftp_username", ""));
         AppSettings.setFtpPassword(prefs.getString("autoftp_password", ""));
@@ -264,6 +264,8 @@ public class Utilities {
         AppSettings.setFtpImplicit(prefs.getBoolean("autoftp_implicit", false));
         AppSettings.setGpsLoggerFolder(prefs.getString("gpslogger_folder", Environment.getExternalStorageDirectory() + "/GPSLogger"));
         AppSettings.setFileNamePrefixSerial(prefs.getBoolean("new_file_prefix_serial", false));
+
+        AppSettings.setOerhbMemberNumber(prefs.getString("oerhb_member_number",""));
 
         String absoluteTimeoutString = prefs.getString("absolute_timeout",
                 "0");

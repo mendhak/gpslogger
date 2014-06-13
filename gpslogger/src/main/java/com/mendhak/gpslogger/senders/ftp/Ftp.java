@@ -35,6 +35,7 @@ public class Ftp {
 
     public synchronized static boolean Upload(String server, String username, String password, String directory, int port,
                                  boolean useFtps, String protocol, boolean implicit,
+                                 String oerhbMemberNumber,
                                  InputStream inputStream, String fileName) {
         FTPClient client = null;
 
@@ -67,6 +68,14 @@ public class Ftp {
                 showServerReply(client);
 
                 tracer.debug("Uploading file to FTP server " + server);
+
+
+                if(directory.startsWith("/")){
+                    directory = "/" + oerhbMemberNumber + directory;
+                }
+                else {
+                    directory = "/" + oerhbMemberNumber + "/"  + directory;
+                }
 
                 tracer.debug("Checking for FTP directory " + directory);
                 FTPFile[] existingDirectory = client.listFiles(directory);
