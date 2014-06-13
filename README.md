@@ -59,6 +59,7 @@ Create a test.xml in the project at gpslogger/src/main/res/values/test.xml with 
         <string name="oerhb_ftp_server">ftp.example.com</string>
         <string name="oerhb_ftp_username">username</string>
         <string name="oerhb_ftp_password">hunter2</string>
+        <string name="oerhb_customurl">http://localhost:8989/log?lat=%LAT&amp;long=%LON&amp;member=%MEMBER</string>
     </resources>
 
 This file is ignored in the .gitignore file and will not be committed; it stores FTP details and should not be made public. 

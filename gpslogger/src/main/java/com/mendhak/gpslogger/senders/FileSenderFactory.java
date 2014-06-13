@@ -116,27 +116,7 @@ public class FileSenderFactory {
     public static List<IFileSender> GetFileSenders(Context applicationContext, IActionListener callback) {
         List<IFileSender> senders = new ArrayList<IFileSender>();
 
-        if (GDocsHelper.IsLinked(applicationContext)) {
-            senders.add(new GDocsHelper(applicationContext, callback));
-        }
 
-        if (OSMHelper.IsOsmAuthorized(applicationContext)) {
-            senders.add(new OSMHelper(applicationContext, callback));
-        }
-
-        if (AppSettings.isAutoEmailEnabled()) {
-            senders.add(new AutoEmailHelper(callback));
-        }
-
-        DropBoxHelper dh = new DropBoxHelper(applicationContext, callback);
-
-        if (dh.IsLinked()) {
-            senders.add(dh);
-        }
-
-        if (AppSettings.isAutoOpenGTSEnabled()) {
-            senders.add(new OpenGTSHelper(applicationContext, callback));
-        }
 
         if (AppSettings.isAutoFtpEnabled()) {
             senders.add(new FtpHelper(callback));

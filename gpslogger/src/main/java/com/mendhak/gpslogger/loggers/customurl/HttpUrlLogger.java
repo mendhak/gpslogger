@@ -44,12 +44,14 @@ public class HttpUrlLogger implements IFileLogger {
     private final String customLoggingUrl;
     private final float batteryLevel;
     private final String androidId;
+    private final String oerhbMemberNumber;
 
-    public HttpUrlLogger(String customLoggingUrl, int satellites, float batteryLevel, String androidId) {
+    public HttpUrlLogger(String customLoggingUrl, int satellites, float batteryLevel, String androidId, String oerhbMemberNumber) {
         this.satellites = satellites;
         this.customLoggingUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
         this.androidId = androidId;
+        this.oerhbMemberNumber = oerhbMemberNumber;
     }
 
     @Override
@@ -62,7 +64,7 @@ public class HttpUrlLogger implements IFileLogger {
 
     @Override
     public void Annotate(String description, Location loc) throws Exception {
-        HttpUrlLogHandler writeHandler = new HttpUrlLogHandler(customLoggingUrl, loc, description, satellites, batteryLevel, androidId);
+        HttpUrlLogHandler writeHandler = new HttpUrlLogHandler(customLoggingUrl, loc, description, satellites, batteryLevel, androidId, oerhbMemberNumber);
         tracer.debug(String.format("There are currently %s tasks waiting on the GPX10 EXECUTOR.", EXECUTOR.getQueue().size()));
         EXECUTOR.execute(writeHandler);
     }
@@ -82,14 +84,16 @@ class HttpUrlLogHandler implements Runnable {
     private String logUrl;
     private float batteryLevel;
     private String androidId;
+    private String oerhbMemberNumber;
 
-    public HttpUrlLogHandler(String customLoggingUrl, Location loc, String annotation, int satellites, float batteryLevel, String androidId) {
+    public HttpUrlLogHandler(String customLoggingUrl, Location loc, String annotation, int satellites, float batteryLevel, String androidId, String oerhbMemberNumber) {
         this.loc = loc;
         this.annotation = annotation;
         this.satellites = satellites;
         this.logUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
         this.androidId = androidId;
+        this.oerhbMemberNumber = oerhbMemberNumber;
     }
 
     @Override
@@ -114,6 +118,7 @@ class HttpUrlLogHandler implements Runnable {
             logUrl = logUrl.replaceAll("(?i)%batt", String.valueOf(batteryLevel));
             logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));
             logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(Utilities.GetBuildSerial()));
+            logUrl = logUrl.replaceAll("(?i)%member", String.valueOf(oerhbMemberNumber));
 
 
 

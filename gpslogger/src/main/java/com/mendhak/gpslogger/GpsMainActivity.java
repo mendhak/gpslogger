@@ -134,11 +134,20 @@ public class GpsMainActivity extends Activity
         String ftpPassword = getApplicationContext().getString(getApplicationContext().getResources().getIdentifier(
                 "oerhb_ftp_password", "string", getApplicationContext().getPackageName()));
 
+        String customUrl =  getApplicationContext().getString(getApplicationContext().getResources().getIdentifier(
+                "oerhb_customurl", "string", getApplicationContext().getPackageName()));
+
+        prefs.edit().putBoolean("autosend_enabled", true).commit();
+
+
         prefs.edit().putBoolean("autoftp_enabled", true).commit();
         prefs.edit().putString("autoftp_server", ftpServerName).commit();
         prefs.edit().putString("autoftp_username", ftpUserName).commit();
         prefs.edit().putString("autoftp_password", ftpPassword).commit();
         prefs.edit().putString("autoftp_directory", "/").commit();
+
+        prefs.edit().putBoolean("log_customurl_enabled", true).commit();
+        prefs.edit().putString("log_customurl_url", customUrl).commit();
 
     }
 
