@@ -17,42 +17,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
+
             <TableRow>
 
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
+                <EditText
+                    android:inputType="text"
+                    android:textStyle="bold"
+                    android:layout_width="0dp"
+                    android:layout_weight="55"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/simple_member_number"
+                    android:hint="@string/txt_member_number"
+                    android:editable="true"/>
 
-
-                    <EditText
-                        android:layout_alignParentRight="true"
-                        android:layout_width="0dp"
-                        android:layout_weight="55"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/txt_latitude"
-                        android:id="@+id/simple_lat_text"
-                        android:editable="false"
-                        android:selectAllOnFocus="true"
-                        android:textIsSelectable="true"
-                        />
-
-
-                    <EditText
-                        android:layout_toRightOf="@id/simple_lat_text"
-                        android:layout_width="0dp"
-                        android:layout_weight="55"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/simple_lon_text"
-                        android:hint="@string/txt_longitude"
-                        android:selectAllOnFocus="true"
-                        android:textIsSelectable="true"
-                        android:editable="false"/>
-
-
-                </LinearLayout>
             </TableRow>
+
+
+
 
             <TableRow>
 
@@ -82,7 +63,45 @@
                         />
                 </LinearLayout>
             </TableRow>
+            <TableRow>
 
+
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_alignParentRight="true"
+                        android:layout_width="0dp"
+                        android:layout_weight="55"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="#ff3873ff"
+                        android:id="@+id/simple_lat_text"
+                        android:editable="false"
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        />
+
+
+                    <TextView
+                        android:layout_toRightOf="@id/simple_lat_text"
+                        android:layout_width="0dp"
+                        android:layout_weight="55"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/simple_lon_text"
+                        android:textStyle="bold"
+                        android:textColor="#ff3873ff"
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"/>
+
+                </LinearLayout>
+            </TableRow>
             <TableRow
                 android:layout_gravity="center"
                 android:orientation="horizontal"

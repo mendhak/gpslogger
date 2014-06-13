@@ -233,10 +233,10 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         NumberFormat nf = NumberFormat.getInstance();
         nf.setMaximumFractionDigits(6);
 
-        EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
+        TextView txtLatitude = (TextView) rootView.findViewById(R.id.simple_lat_text);
         txtLatitude.setText(String.valueOf(nf.format(locationInfo.getLatitude())));
 
-        EditText txtLongitude = (EditText) rootView.findViewById(R.id.simple_lon_text);
+        TextView txtLongitude = (TextView) rootView.findViewById(R.id.simple_lon_text);
         txtLongitude.setText(String.valueOf(nf.format(locationInfo.getLongitude())));
 
         nf.setMaximumFractionDigits(3);
@@ -367,10 +367,10 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         NumberFormat nf = NumberFormat.getInstance();
         nf.setMaximumFractionDigits(3);
 
-        EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
+        TextView txtLatitude = (TextView) rootView.findViewById(R.id.simple_lat_text);
         txtLatitude.setText("-");
 
-        EditText txtLongitude = (EditText) rootView.findViewById(R.id.simple_lon_text);
+        TextView txtLongitude = (TextView) rootView.findViewById(R.id.simple_lon_text);
         txtLongitude.setText("-");
 
 
