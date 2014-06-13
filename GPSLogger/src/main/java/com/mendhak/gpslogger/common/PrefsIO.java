@@ -32,6 +32,8 @@ import android.app.Activity;
 import com.mendhak.gpslogger.GpsSettingsActivity;
 import net.kataplop.gpslogger.R;
 
+import org.apache.commons.codec.StringEncoder;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,6 +51,7 @@ public class PrefsIO {
     private String extension;
     private String separator;
     private String commentPrefix;
+    private final String version = "v1.1";
 
     public final int ACTIVITY_CHOOSE_FILE = 2;
 
@@ -86,6 +89,7 @@ public class PrefsIO {
         Object val=null;
         String str="";
         String type="unknown";
+        String value="";
         int ind=0;
         Date date=new Date();
         String strdate;
@@ -106,14 +110,17 @@ public class PrefsIO {
             PrintWriter pw = new PrintWriter(fw);
             Map<String,?> prefsMap = sharedPrefs.getAll();
             pw.println(commentPrefix+" Settings Dump "+strdate);
+            pw.println(commentPrefix+version);
             for(Map.Entry<String,?> entry : prefsMap.entrySet())
             {
                 val=entry.getValue();
+                value=val.toString();
                 str="";
                 str+=val.getClass();
                 ind=str.lastIndexOf(".");
                 if(ind>0) type=str.substring(ind+1);
-                pw.println(entry.getKey() + separator + val.toString() + separator + type);
+                if(type.endsWith("String")) pw.println(entry.getKey() + separator + EncodeValue(value) + separator + type);
+                    else pw.println(entry.getKey() + separator + value + separator + type);
             }
             pw.close();
             fw.close();
@@ -145,7 +152,7 @@ public class PrefsIO {
                         if(str.startsWith(commentPrefix)) continue;
                         params=str.split(regexp);
                         if(params[2].endsWith(strBoolean)) editor.putBoolean(params[0], Boolean.parseBoolean(params[1]) );
-                        else if(params[2].endsWith(strString)) editor.putString(params[0], params[1] );
+                        else if(params[2].endsWith(strString)) editor.putString(params[0], DecodeValue(params[1]) );
                         editor.commit();
                     }
                     br.close();
@@ -269,4 +276,23 @@ public class PrefsIO {
 
         builder.show();
     }
+
+    private String EncodeValue(String val) {
+// Takes care on \n only for the moment, full encoding can be added later
+        String retVal="";
+        String elFilter="\n";
+        String elRepl="<br>";
+        retVal=val.replaceAll(elFilter,elRepl);
+        return retVal;
+    }
+
+    private String DecodeValue(String val) {
+// Takes care on \n only for the moment, full decoding can be added later
+        String retVal="";
+        String elFilter="\n";
+        String elRepl="<br>";
+        retVal=val.replaceAll(elRepl,elFilter);
+        return retVal;
+    }
+
 }
