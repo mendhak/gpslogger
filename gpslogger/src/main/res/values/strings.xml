@@ -475,5 +475,6 @@
     <string name="log_nmea_summary">Creates a raw NMEA file while trying to get a fix. This file grows very quickly. Only works while GPS is being used.</string>
     <string name="autoopengts_accountname">Account name</string>
     <string name="txt_member_number">Member Number:</string>
+    <string name="please_enter_member_number">Please enter your member number first</string>
 
 </resources>

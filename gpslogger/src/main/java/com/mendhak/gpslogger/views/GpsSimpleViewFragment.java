@@ -18,8 +18,10 @@
 package com.mendhak.gpslogger.views;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -89,6 +91,18 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
                     @Override
                     public void onStatusChange(boolean status) {
                         if (status) {
+
+                            EditText txtMemberNumber = (EditText) rootView.findViewById(R.id.simple_member_number);
+                            if (txtMemberNumber.getText().length() <= 0) {
+                                Toast.makeText(getActivity(), R.string.please_enter_member_number, Toast.LENGTH_LONG).show();
+                                SetLoggingStopped();
+                                return;
+                            } else {
+                                SharedPreferences prefs = PreferenceManager
+                                        .getDefaultSharedPreferences(getActivity());
+                                prefs.edit().putString("oerhb_member_number", txtMemberNumber.getText().toString()).commit();
+                            }
+
                             requestStartLogging();
                         } else {
                             requestStopLogging();
