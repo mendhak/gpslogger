@@ -437,6 +437,7 @@ public class GpsMainActivity extends Activity
         // Set an EditText view to get user input
         final EditText input = new EditText(getApplicationContext());
         input.setTextColor(getResources().getColor(android.R.color.black));
+        input.setBackgroundColor(getResources().getColor(android.R.color.white));
         input.setText(Session.getDescription());
         alert.setView(input);
 
