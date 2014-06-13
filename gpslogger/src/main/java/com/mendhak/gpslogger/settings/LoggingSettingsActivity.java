@@ -107,8 +107,7 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
         gpsloggerFolder.setOnPreferenceClickListener(this);
         gpsloggerFolder.setSummary(prefs.getString("gpslogger_folder", Environment.getExternalStorageDirectory() + "/GPSLogger"));
 
-        CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
-        chkLog_opengts.setOnPreferenceClickListener(this);
+
 
         /**
          * Logging Details - New file creation
@@ -144,14 +143,7 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
             return true;
         }
 
-        if (preference.getKey().equals("log_opengts")) {
-            CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
 
-            if (chkLog_opengts.isChecked()) {
-                startActivity(new Intent("com.mendhak.gpslogger.OPENGTS_SETUP"));
-            }
-            return true;
-        }
 
         return false;
     }

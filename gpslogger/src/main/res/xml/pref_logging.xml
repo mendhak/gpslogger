@@ -11,10 +11,7 @@
             android:summary="@string/log_gpx_summary"
             android:defaultValue="true"/>
 
-        <CheckBoxPreference
-            android:key="log_kml"
-            android:summary="@string/log_kml_summary"
-            android:title="@string/log_kml_title"/>
+
 
         <Preference
             android:title="@string/log_customurl_title"
@@ -23,20 +20,7 @@
             <intent android:action="com.mendhak.gpslogger.CUSTOMURL_SETUP"/>
         </Preference>
 
-        <CheckBoxPreference
-            android:key="log_opengts"
-            android:summary="@string/log_opengts_summary"
-            android:title="@string/log_opengts_title"/>
 
-        <CheckBoxPreference
-            android:key="log_plain_text"
-            android:summary="@string/log_plain_text_summary"
-            android:title="@string/log_plain_text_title"/>
-
-        <CheckBoxPreference
-            android:key="log_nmea"
-            android:title="@string/log_nmea_title"
-            android:summary="@string/log_nmea_summary" />
 
     <PreferenceCategory
         android:title="@string/pref_filedetails_title"

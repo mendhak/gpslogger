@@ -9,17 +9,8 @@
     <item android:id="@+id/mnuOnePoint" android:title="@string/menu_onepoint" android:icon="@drawable/singlepoint" android:showAsAction="always" />
 
 
-    <item android:id="@+id/mnuUpload" android:title="@string/menu_upload" android:icon="@drawable/upload" android:showAsAction="always">
-        <menu>
-            <item android:id="@+id/mnuAutoSendNow" android:title="@string/menu_email_now" />
-            <item android:id="@+id/mnuDropBox" android:title="@string/dropbox_upload" />
-            <item android:id="@+id/mnuOSM" android:title="@string/osm_upload" />
-            <item android:id="@+id/mnuGDocs" android:title="@string/gdocs_upload" />
-            <item android:id="@+id/mnuEmail" android:title="@string/email_upload"/>
-            <item android:id="@+id/mnuOpenGTS" android:title="@string/opengts_upload"/>
-            <item android:id="@+id/mnuFtp" android:title="@string/ftp_upload" />
+    <item android:id="@+id/mnuFtp" android:title="@string/ftp_upload" android:icon="@drawable/upload" android:showAsAction="always">
 
-        </menu>
     </item>
 
 

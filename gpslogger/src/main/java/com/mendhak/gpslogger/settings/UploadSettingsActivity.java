@@ -24,7 +24,7 @@ import android.preference.PreferenceActivity;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.senders.osm.OSMHelper;
+
 
 /**
  * A {@link android.preference.PreferenceActivity} that presents a set of application settings. On
@@ -68,18 +68,13 @@ public class UploadSettingsActivity extends PreferenceActivity implements Prefer
         addPreferencesFromResource(R.xml.pref_upload);
 
 
-        Preference osmSetupPref = findPreference("osm_setup");
-        osmSetupPref.setOnPreferenceClickListener(this);
     }
 
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
-        if (preference.getKey().equals("osm_setup")) {
-            startActivity(OSMHelper.GetOsmSettingsIntent(getApplicationContext()));
-            return true;
-        }
+
 
         return false;
     }

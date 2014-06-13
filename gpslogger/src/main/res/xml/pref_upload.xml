@@ -25,36 +25,7 @@
 
 
     <PreferenceCategory android:title="@string/autosend_targets_category">
-        <Preference
-            android:title="@string/autoemail_title"
-            android:summary="@string/autoemail_summary"
-            android:key="autoemail_setup">
-            <intent android:action="com.mendhak.gpslogger.AUTOEMAIL_SETUP"/>
-        </Preference>
 
-        <Preference
-            android:title="@string/osm_setup_title"
-            android:summary="@string/osm_setup_summary"
-            android:key="osm_setup">
-        </Preference>
-        <Preference
-            android:title="@string/dropbox_setup_title"
-            android:summary="@string/dropbox_setup_summary"
-            android:key="dropbox_setup">
-            <intent android:action="com.mendhak.gpslogger.DROPBOX_SETUP"/>
-        </Preference>
-        <Preference
-            android:title="@string/gdocs_setup_title"
-            android:summary="@string/gdocs_setup_summary"
-            android:key="gdocs_setup">
-            <intent android:action="com.mendhak.gpslogger.GDOCS_SETUP"/>
-        </Preference>
-        <Preference
-            android:title="@string/opengts_setup_title"
-            android:summary="@string/opengts_setup_summary"
-            android:key="opengts_setup">
-            <intent android:action="com.mendhak.gpslogger.OPENGTS_SETUP"/>
-        </Preference>
         <Preference
             android:title="@string/autoftp_setup_title"
             android:summary="@string/autoftp_setup_summary"

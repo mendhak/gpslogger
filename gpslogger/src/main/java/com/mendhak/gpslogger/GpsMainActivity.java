@@ -198,21 +198,7 @@ public class GpsMainActivity extends Activity
             case 4:
                 LaunchActivity(AutoFtpActivity.class);
                 break;
-            case 5:
-                LaunchActivity(AutoEmailActivity.class);
-                break;
-            case 6:
-                LaunchActivity(OpenGTSActivity.class);
-                break;
-            case 7:
-                LaunchActivity(GDocsSettingsActivity.class);
-                break;
-            case 8:
-                LaunchActivity(OSMAuthorizationActivity.class);
-                break;
-            case 9:
-                LaunchActivity(DropBoxAuthorizationActivity.class);
-                break;
+
             default:
                 loggingService.StopLogging();
                 loggingService.stopSelf();
@@ -305,7 +291,7 @@ public class GpsMainActivity extends Activity
         getMenuInflater().inflate(R.menu.gps_main, menu);
         mnuAnnotate = menu.findItem(R.id.mnuAnnotate);
         mnuOnePoint = menu.findItem(R.id.mnuOnePoint);
-        mnuAutoSendNow = menu.findItem(R.id.mnuAutoSendNow);
+
         enableDisableMenuItems();
         return true;
     }
@@ -363,26 +349,11 @@ public class GpsMainActivity extends Activity
             case R.id.mnuShare:
                 Share();
                 return true;
-            case R.id.mnuOSM:
-                UploadToOpenStreetMap();
-                return true;
-            case R.id.mnuDropBox:
-                UploadToDropBox();
-                return true;
-            case R.id.mnuGDocs:
-                UploadToGoogleDocs();
-                return true;
-            case R.id.mnuOpenGTS:
-                SendToOpenGTS();
-                return true;
+
             case R.id.mnuFtp:
                 SendToFtp();
                 return true;
-            case R.id.mnuEmail:
-                SelectAndEmailFile();
-                return true;
-            case R.id.mnuAutoSendNow:
-                ForceAutoSendNow();
+
             default:
                 return super.onOptionsItemSelected(item);
         }

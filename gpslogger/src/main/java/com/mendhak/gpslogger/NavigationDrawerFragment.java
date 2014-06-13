@@ -125,15 +125,6 @@ public class NavigationDrawerFragment extends Fragment {
 
         drawerMenuItems.add("    " + getString(R.string.autoftp_setup_title));
 
-        drawerMenuItems.add("    " + getString(R.string.autoemail_title));
-
-        drawerMenuItems.add("    " + getString(R.string.opengts_setup_title));
-
-        drawerMenuItems.add("    " + getString(R.string.gdocs_setup_title));
-
-        drawerMenuItems.add("    " + getString(R.string.osm_setup_title));
-
-        drawerMenuItems.add("    " + getString(R.string.dropbox_setup_title));
 
 
         drawerMenuItems.add(getString(R.string.menu_exit));
