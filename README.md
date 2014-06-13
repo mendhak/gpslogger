@@ -1,27 +1,5 @@
-GPSLogger [![Build Status](https://travis-ci.org/mendhak/gpslogger.svg?branch=master)](https://travis-ci.org/mendhak/gpslogger)
+GPSLogger for Oerhb
 =========
-
-GPSLogger is an Android app that logs GPS information to GPX, KML or text files and has options for annotating and sharing.
-
-[Read about GPSLogger here](http://mendhak.github.com/gpslogger/)
-
-## Download
-
-You can [download it from Google Play](https://play.google.com/store/apps/details?id=com.mendhak.gpslogger).
-
-You can download the APK directly [here](https://sourceforge.net/projects/gfadownload/files/)
-
-## Contribute
-
-You can help with [translations](http://crowdin.net/project/gpslogger-for-android)
-
-You can also submit [pull requests](https://help.github.com/articles/using-pull-requests) for bug fixes and new features.
-
-
-## License
-
-Licensed under [GPL v2](http://www.gnu.org/licenses/gpl-2.0.html).
-
 
 
 
@@ -104,64 +82,3 @@ Give it a minute and IntelliJ/Gradle will configure the projects and download th
 IntelliJ may not know where your Android SDK is.  You can find this under *File > Project Structure...* where you should set the Project SDK.  You will want to use Java 1.6 with Android 4 or above.
 
 
-
-
-### Running tests
-
-This solution has a few [Robotium](https://code.google.com/p/robotium/) tests.  To run them, first ensure that you
-have an emulator up and running or your phone is connected.  In other words, `adb devices` should show a connected device.
-
-Then run the tests using the gradle wrapper
-
-     ./gradlew connectedAndroidTest --info
-
-If a test fails and you want a little more info, you can add the `stacktrace` and `debug` flags
-
-    ./gradlew connectedAndroidTest --debug --stacktrace
-
-You can also try running the tests straight from the IDE.  Right click on a test class such as `GpsMainActivityTests`
-or on the `src/test/java` folder and choose to run it with the Android test instrumentation runner.
-
-![Android tests](https://farm8.staticflickr.com/7248/13943655031_7ee4e7e92f_z.jpg)
-
-And you should get results in the Run tab.
-
-![tests](https://farm8.staticflickr.com/7424/13796700395_021e03cd8e_o.png)
-
-You can run just the quicker `@SmallTest`s using
-
-    ./gradlew connectedAndroidTest -PtestSize=small --info
-
-Overview
-======
-
-GPSLogger is composed of a few main components;
-
-![test](https://drive.google.com/uc?export=view&id=0B6IOK82n4BkAankxcFJmYk90Y0U)
-
-
-### GPS Logging Service
-
-GPSLoggingService is where all the work happens.  This service talks to the location providers (network and satellite).
-It sets up timers and alarms for the next GPS point to be requested.  It passes location info to the various loggers
-so that they can write files.  It also invokes the auto-uploaders so that they may send their files to Dropbox, etc.
-
-It also passes information to the GPSMainActivity.
-
-### GPS Main Activity
-
-This is the main visible form in the app.   It consists of several 'fragments' - the simple view, detailed view and big view.
-
-It takes care of the main screen, the menus and passing information from the GPSLoggingService to the various fragments.
-
-It also passes requests from the fragments to start or stop logging.
-
-### Session and AppSettings
-
-Floating about are two other objects.  `Session` contains various pieces of information related to the current GPSLogger run,
-such as current file name, the last known location, satellite count, and any other information which isn't static but is
-needed for the current run of GPSLogger.
-
-`AppSettings` is a representation of the user's preferences.
-
-These objects are visible throughout the application and can be accessed directly by any class, service, activity or fragment.
