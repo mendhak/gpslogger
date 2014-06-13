@@ -33,7 +33,7 @@ public class Ftp {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Ftp.class.getSimpleName());
 
-    public static boolean Upload(String server, String username, String password, String directory, int port,
+    public synchronized static boolean Upload(String server, String username, String password, String directory, int port,
                                  boolean useFtps, String protocol, boolean implicit,
                                  InputStream inputStream, String fileName) {
         FTPClient client = null;
