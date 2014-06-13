@@ -15,7 +15,7 @@ public class LocationBuffer {
         public final double lon;
         public final int altitude;
         public final int bearing;
-        public final int speed;
+        public final int speed; // in m/s
 
         public BufferedLocation(long time_ms, double lat, double lon, int alt, int bearing, int speed){
             timems = time_ms;
