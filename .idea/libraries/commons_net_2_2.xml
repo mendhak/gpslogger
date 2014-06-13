@@ -4,6 +4,8 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-net/commons-net/2.2/7993c12f63c78378f8c90de4bc2ee62daa7ca3a/commons-net-2.2.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-net/commons-net/2.2/ff553d8d0ab747b733fb36e846d42fe8321ba64d/commons-net-2.2-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

@@ -4,6 +4,8 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/oauth.signpost/signpost-commonshttp4/1.2.1.2/731e05de30cfeb1f41d417f886277f9597fe0f36/signpost-commonshttp4-1.2.1.2.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/oauth.signpost/signpost-commonshttp4/1.2.1.2/800090917f3bc70acf695986c95245e80c13e06f/signpost-commonshttp4-1.2.1.2-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
