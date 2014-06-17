@@ -56,6 +56,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'javax.mail:mailapi:1.4.3'
+    compile 'javax.activation:activation:1.1.1'
     compile 'com.android.support:support-v4:19.1.0'
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile 'commons-net:commons-net:2.2'

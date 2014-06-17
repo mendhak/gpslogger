@@ -62,17 +62,17 @@
     <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.4" level="project" />
-    <orderEntry type="library" exported="" name="mail" level="project" />
     <orderEntry type="library" exported="" name="signpost-commonshttp4-1.2.1.2" level="project" />
+    <orderEntry type="library" exported="" name="mailapi-1.4.3" level="project" />
     <orderEntry type="library" exported="" name="commons-net-2.2" level="project" />
     <orderEntry type="library" exported="" name="httpmime-4.3.3" level="project" />
+    <orderEntry type="library" exported="" name="activation-1.1.1" level="project" />
     <orderEntry type="library" exported="" name="httpcore-4.3.2" level="project" />
     <orderEntry type="library" exported="" name="commons-codec-1.6" level="project" />
     <orderEntry type="library" exported="" name="signpost-core-1.2.1.2" level="project" />
     <orderEntry type="library" exported="" name="support-v4-19.1.0" level="project" />
     <orderEntry type="library" exported="" name="dropbox-android-sdk" level="project" />
     <orderEntry type="library" exported="" name="actionbarsherlock-4.4.0" level="project" />
-    <orderEntry type="library" exported="" name="activation" level="project" />
   </component>
 </module>
 
