@@ -42,7 +42,7 @@ public class StartupReceiver extends BroadcastReceiver {
             if (startImmediately) {
                 tracer.info("Launching GPSLoggingService");
                 Intent serviceIntent = new Intent(context, GpsLoggingService.class);
-                serviceIntent.putExtra("immediate", true);
+                serviceIntent.putExtra("immediatestart", true);
                 context.startService(serviceIntent);
             }
         } catch (Exception ex) {
