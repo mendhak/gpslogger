@@ -22,8 +22,9 @@ You can also submit [pull requests](https://help.github.com/articles/using-pull-
 
 Licensed under [GPL v2](http://www.gnu.org/licenses/gpl-2.0.html).
 
+## Donate
 
-
+You can donate Bitcoins to `1ArYCJf8pvwELiCSGerih5NQrczLJQdJpY`
 
 
 Setting up the code
