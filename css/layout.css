@@ -1033,6 +1033,14 @@ p, em, i, strong, h2, h3, a, li, div  {
     background: url('/images/x.png');
 }
 
+input.bitcoin {
+    border:none;
+    background:none;
+    font-style: italic;
+    padding:0;
+
+}
+
 /* ------------ Media queries ------------------- */
 @media (max-device-width: 800px), (max-width: 800px) {
     /*.brief p { */
@@ -1100,6 +1108,10 @@ p, em, i, strong, h2, h3, a, li, div  {
         font-size: 32px;
         line-height: 60px;
         height: 60px;
+    }
+
+    input.bitcoin {
+       display:none;
     }
 
 }
