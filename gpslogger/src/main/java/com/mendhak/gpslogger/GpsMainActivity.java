@@ -32,6 +32,7 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -73,10 +74,10 @@ import com.mendhak.gpslogger.views.GpsSimpleViewFragment;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.util.*;
 
 public class GpsMainActivity extends Activity
         implements GenericViewFragment.IGpsViewCallback, NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, IGpsLoggerServiceClient, IActionListener {
@@ -100,11 +101,13 @@ public class GpsMainActivity extends Activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         Utilities.ConfigureLogbackDirectly(getApplicationContext());
         tracer = LoggerFactory.getLogger(GpsMainActivity.class.getSimpleName());
 
-        super.onCreate(savedInstanceState);
+        loadPresetProperties();
+
         setContentView(R.layout.activity_gps_main);
 
         SetUpNavigationDrawer();
@@ -116,6 +119,45 @@ public class GpsMainActivity extends Activity
 
         SetUpActionBar();
         StartAndBindService();
+    }
+
+    private void loadPresetProperties() {
+
+        //Either look for /sdcard/GPSLogger/gpslogger.properties or /sdcard/gpslogger.properties
+        File file =  new File(Environment.getExternalStorageDirectory() + "/GPSLogger/gpslogger.properties");
+        if(!file.exists()){
+            file = new File(Environment.getExternalStorageDirectory() + "/gpslogger.properties");
+            if(!file.exists()){
+                return;
+            }
+        }
+
+        try {
+            Properties props = new Properties();
+            InputStreamReader reader = new InputStreamReader(new FileInputStream(file));
+            props.load(reader);
+
+            for(Object key : props.keySet()){
+
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = prefs.edit();
+
+                String value = props.getProperty(key.toString());
+                tracer.info("Setting preset property: " + key.toString() + " to " + value.toString());
+
+                if(value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")){
+                    editor.putBoolean(key.toString(), Boolean.parseBoolean(value));
+                }
+                else {
+                    editor.putString(key.toString(), value);
+                }
+                editor.commit();
+            }
+
+        } catch (Exception e) {
+            tracer.error("Could not load preset properties", e);
+        }
+
     }
 
 
