@@ -135,41 +135,41 @@ public class UtilitiesTests extends AndroidTestCase {
     @SmallTest
     public void testNmeaListenerStrings(){
         String expected = "44";
-        GeneralLocationListener listener = new GeneralLocationListener(new GpsLoggingService());
+        GeneralLocationListener listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
         listener.onNmeaReceived(0, "blahasdfasdf");
         assertNull("VDOP null by default", listener.latestVdop);
 
-        listener = new GeneralLocationListener(new GpsLoggingService());
+        listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
         listener.onNmeaReceived(0, "$GPGGA,,,,,,,,,,,,,,*47");
         assertNull("Empty NMEA sentence", listener.latestHdop);
 
-        listener = new GeneralLocationListener(new GpsLoggingService());
+        listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
         listener.onNmeaReceived(0, "$GPGGA,,");
         assertNull("Incomplete NMEA string", listener.dgpsId);
 
-        listener = new GeneralLocationListener(new GpsLoggingService());
+        listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
         listener.onNmeaReceived(0, "");
         assertNull("Empty NMEA string", listener.dgpsId);
 
-        listener = new GeneralLocationListener(new GpsLoggingService());
+        listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
         listener.onNmeaReceived(0, "$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,27*47");
         assertEquals("GPGGA - read HDOP", "0.9", listener.latestHdop);
         assertEquals("GPGGA - read GeoIdHeight",  "46.9", listener.geoIdHeight);
         assertEquals("GPGGA - read Last dgps update", null,  listener.ageOfDgpsData);
         assertEquals("GPGGA - read dgps station id",  "27", listener.dgpsId);
 
-        listener = new GeneralLocationListener(new GpsLoggingService());
+        listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
         listener.onNmeaReceived(0, "$GPGSA,A,3,04,05,,09,12,,,24,,,,,2.5,1.3,2.1*39");
         assertEquals("GPGSA - read PDOP","2.5", listener.latestPdop );
         assertEquals("GPGSA - read HDOP","1.3", listener.latestHdop );
         assertEquals("GPGSA - read VDOP","2.1", listener.latestVdop );
 
-        listener = new GeneralLocationListener(new GpsLoggingService());
+        listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
         listener.onNmeaReceived(0, "$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545");
         assertEquals("GPGGA - Incomplete, read HDOP", "0.9", listener.latestHdop);
         assertEquals("GPGGA - Incomplete, no GeoIdHeight",  null, listener.geoIdHeight);
 
-        listener = new GeneralLocationListener(new GpsLoggingService());
+        listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
         listener.onNmeaReceived(0, null);
         assertNull("Null NMEA string", listener.latestHdop);
 
