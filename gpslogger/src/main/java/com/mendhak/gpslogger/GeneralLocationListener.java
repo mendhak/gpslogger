@@ -30,6 +30,7 @@ import java.util.Iterator;
 
 class GeneralLocationListener implements LocationListener, GpsStatus.Listener, GpsStatus.NmeaListener {
 
+    private static String listenerName;
     private static GpsLoggingService loggingService;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GeneralLocationListener.class.getSimpleName());
     protected String latestHdop;
@@ -39,9 +40,10 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     protected String ageOfDgpsData;
     protected String dgpsId;
 
-    GeneralLocationListener(GpsLoggingService activity) {
+    GeneralLocationListener(GpsLoggingService activity, String name) {
         tracer.debug("GeneralLocationListener constructor");
         loggingService = activity;
+        listenerName = name;
     }
 
     /**
@@ -59,6 +61,10 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 b.putString("GEOIDHEIGHT", this.geoIdHeight);
                 b.putString("AGEOFDGPSDATA", this.ageOfDgpsData);
                 b.putString("DGPSID", this.dgpsId);
+
+                b.putBoolean("PASSIVE", listenerName.equalsIgnoreCase("PASSIVE"));
+                b.putString("LISTENER", listenerName);
+
                 loc.setExtras(b);
                 loggingService.OnLocationChanged(loc);
 

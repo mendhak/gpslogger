@@ -60,7 +60,6 @@ public class GpsLoggingService extends Service implements IActionListener {
     private static int NOTIFICATION_ID = 8675309;
     private static IGpsLoggerServiceClient mainServiceClient;
     private final IBinder binder = new GpsLoggingBinder();
-    LocationManager gpsLocationManager;
     AlarmManager nextPointAlarmManager;
     private NotificationCompat.Builder nfc = null;
 
@@ -68,9 +67,12 @@ public class GpsLoggingService extends Service implements IActionListener {
     // ---------------------------------------------------
     // Helpers and managers
     // ---------------------------------------------------
+    protected LocationManager gpsLocationManager;
+    private LocationManager passiveLocationManager;
+    private LocationManager towerLocationManager;
     private GeneralLocationListener gpsLocationListener;
     private GeneralLocationListener towerLocationListener;
-    private LocationManager towerLocationManager;
+    private GeneralLocationListener passiveLocationListener;
     private Intent alarmIntent;
     private Handler handler = new Handler();
     private long firstRetryTimeStamp;
@@ -405,6 +407,7 @@ public class GpsLoggingService extends Service implements IActionListener {
         ShowNotification();
         ResetCurrentFileName(true);
         NotifyClientStarted();
+        StartPassiveManager();
         StartGpsManager();
 
     }
@@ -437,6 +440,7 @@ public class GpsLoggingService extends Service implements IActionListener {
         RemoveNotification();
         StopAlarm();
         StopGpsManager();
+        StopPassiveManager();
         NotifyClientStopped();
     }
 
@@ -489,6 +493,14 @@ public class GpsLoggingService extends Service implements IActionListener {
         notificationManager.notify(NOTIFICATION_ID, nfc.build());
     }
 
+    private void StartPassiveManager() {
+        if(passiveLocationListener== null){
+            passiveLocationListener = new GeneralLocationListener(this, "PASSIVE");
+        }
+        passiveLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        passiveLocationManager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 1000, 0, passiveLocationListener);
+    }
+
     /**
      * Starts the location manager. There are two location managers - GPS and
      * Cell Tower. This code determines which manager to request updates from
@@ -503,13 +515,12 @@ public class GpsLoggingService extends Service implements IActionListener {
         GetPreferences();
 
         if (gpsLocationListener == null) {
-            gpsLocationListener = new GeneralLocationListener(this);
+            gpsLocationListener = new GeneralLocationListener(this, "GPS");
         }
 
         if (towerLocationListener == null) {
-            towerLocationListener = new GeneralLocationListener(this);
+            towerLocationListener = new GeneralLocationListener(this, "CELL");
         }
-
 
         gpsLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         towerLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -612,6 +623,13 @@ public class GpsLoggingService extends Service implements IActionListener {
         SetStatus(getString(R.string.stopped));
     }
 
+    private void StopPassiveManager(){
+        if(passiveLocationManager!=null){
+            tracer.debug("Removing passiveLocationManager updates");
+            passiveLocationManager.removeUpdates(passiveLocationListener);
+        }
+    }
+
     /**
      * Sets the current file name based on user preference.
      */
@@ -712,19 +730,21 @@ public class GpsLoggingService extends Service implements IActionListener {
         }
 
         tracer.debug("GpsLoggingService.OnLocationChanged");
-
+        boolean isPassiveLocation = loc.getExtras().getBoolean("PASSIVE");
         long currentTimeStamp = System.currentTimeMillis();
 
         // Don't log a point until the user-defined time has elapsed
         // However, if user has set an annotation, just log the point, disregard any filters
-        if (!Session.hasDescription() && !Session.isSinglePointMode() && (currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 100)) {
+        if (!Session.hasDescription() && !Session.isSinglePointMode() && (currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 1000)) {
             return;
         }
 
         // Don't do anything until the user-defined accuracy is reached
         // However, if user has set an annotation, just log the point, disregard any filters
         if (!Session.hasDescription() &&  AppSettings.getMinimumAccuracyInMeters() > 0) {
-            if (AppSettings.getMinimumAccuracyInMeters() < Math.abs(loc.getAccuracy())) {
+
+            //Don't apply the retry interval to passive locations
+            if (!isPassiveLocation && AppSettings.getMinimumAccuracyInMeters() < Math.abs(loc.getAccuracy())) {
 
                 if (this.firstRetryTimeStamp == 0) {
                     this.firstRetryTimeStamp = System.currentTimeMillis();
@@ -775,6 +795,11 @@ public class GpsLoggingService extends Service implements IActionListener {
         Session.setCurrentLocationInfo(loc);
         SetDistanceTraveled(loc);
         ShowNotification();
+
+        if(isPassiveLocation){
+            tracer.debug("Logging passive location to file");
+        }
+
         WriteToFile(loc);
         GetPreferences();
         StopManagerAndResetAlarm();
