@@ -494,6 +494,7 @@ public class GpsLoggingService extends Service implements IActionListener {
     }
 
     private void StartPassiveManager() {
+        tracer.debug("Starting passive location listener");
         if(passiveLocationListener== null){
             passiveLocationListener = new GeneralLocationListener(this, "PASSIVE");
         }
@@ -527,7 +528,7 @@ public class GpsLoggingService extends Service implements IActionListener {
 
         CheckTowerAndGpsStatus();
 
-        if (Session.isGpsEnabled() && !AppSettings.shouldPreferCellTower()) {
+        if (Session.isGpsEnabled()) {
             tracer.info("Requesting GPS location updates");
             // gps satellite based
             gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
@@ -540,7 +541,9 @@ public class GpsLoggingService extends Service implements IActionListener {
             Session.setUsingGps(true);
             startAbsoluteTimer();
 
-        } else if (Session.isTowerEnabled()) {
+        }
+
+        if (Session.isTowerEnabled() && (AppSettings.shouldPreferCellTower() || !Session.isGpsEnabled())) {
             tracer.info("Requesting tower location updates");
             Session.setUsingGps(false);
             // Cell tower and wifi based
@@ -550,7 +553,9 @@ public class GpsLoggingService extends Service implements IActionListener {
 
             startAbsoluteTimer();
 
-        } else {
+        }
+
+        if(!Session.isTowerEnabled() && !Session.isGpsEnabled()) {
             tracer.info("No provider available");
             Session.setUsingGps(false);
             SetStatus(R.string.gpsprovider_unavailable);
@@ -729,8 +734,6 @@ public class GpsLoggingService extends Service implements IActionListener {
             return;
         }
 
-        tracer.debug("GpsLoggingService.OnLocationChanged");
-        boolean isPassiveLocation = loc.getExtras().getBoolean("PASSIVE");
         long currentTimeStamp = System.currentTimeMillis();
 
         // Don't log a point until the user-defined time has elapsed
@@ -738,6 +741,9 @@ public class GpsLoggingService extends Service implements IActionListener {
         if (!Session.hasDescription() && !Session.isSinglePointMode() && (currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 1000)) {
             return;
         }
+
+        tracer.debug("GpsLoggingService.OnLocationChanged");
+        boolean isPassiveLocation = loc.getExtras().getBoolean("PASSIVE");
 
         // Don't do anything until the user-defined accuracy is reached
         // However, if user has set an annotation, just log the point, disregard any filters

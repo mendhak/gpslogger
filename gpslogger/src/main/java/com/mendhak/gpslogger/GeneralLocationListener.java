@@ -53,7 +53,6 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
         try {
             if (loc != null) {
-                tracer.debug("GeneralLocationListener.onLocationChanged");
                 Bundle b = new Bundle();
                 b.putString("HDOP", this.latestHdop);
                 b.putString("PDOP", this.latestPdop);
