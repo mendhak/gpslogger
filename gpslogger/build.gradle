@@ -3,7 +3,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.+'
+        //When releasing APK:
+        //classpath 'com.android.tools.build:gradle:0.12.+'
+        //When developing:
+        classpath 'com.android.tools.build:gradle:0.10.+'
     }
 }
 apply plugin: 'android'
