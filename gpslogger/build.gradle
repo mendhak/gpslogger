@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.android.tools.build:gradle:0.12.+'
     }
 }
 apply plugin: 'android'
@@ -14,7 +14,7 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion "20"
 
     defaultConfig {
         minSdkVersion 14
@@ -77,7 +77,7 @@ android {
 
     assembleRelease.doLast {
         copy{
-            from "build/apk/gpslogger-release.apk"
+            from "build/outputs/apk/gpslogger-release.apk"
             into "./"
 
             // Use a closure to map the file name
