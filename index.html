@@ -207,8 +207,7 @@
 
                 <li>Uses cell towers for location when GPS is disabled</li>
 
-                <li>Prefer cell tower based location over GPS to save even more battery
-                    life</li>
+                <li>Selectively choose network, gps and passive location providers</li>
 
                 <li>Changes you make on the settings screen will take effect after the next
                     point is logged</li>
@@ -222,6 +221,8 @@
                 <li>You can have it start logging on phone bootup</li>
 
                 <li>You can invoke operations from Tasker or other automation apps.</li>
+
+                <li>You can give it a preset file with your own values for distribution</li>
 
             </ul>
 
@@ -423,7 +424,6 @@
                     <li><code>immediatestop</code> - (true/false) Stop logging</li>
                     <li><code>logonce</code> - (true/false) Log a single point and stop</li>
                     <li><code>setnextpointdescription</code> - (text) Sets the annotation text to use for the next point logged</li>
-                    <li><code>setprefercelltower</code> - (true/false) Sets preference to use cell towers instead of GPS</li>
                     <li><code>settimebeforelogging</code> - (number) Sets preference for time before logging option</li>
                     <li><code>setdistancebeforelogging</code> - (number) Sets preference for distance before logging option</li>
                     <li><code>setkeepbetweenfix</code> - (true/false) Sets preference whether to keep GPS on between fixes</li>
@@ -438,7 +438,15 @@
 
             <div class="a-left">
                 <a href="#19" name="19"><h3>What are some recommended settings to save battery life?</h3></a>
-                <p>Preferring to use cell towers over GPS saves more battery.  You will also save more battery life if you keep the interval between points to about 60 seconds or more.  Note that any option to save on battery life will not guarantee accuracy.</p>
+                <p>From location providers, choose only network and passive. Preferring to use network (cell towers) over GPS saves more battery.  You will also save more battery life if you keep the interval between points to about 60 seconds or more.  Note that any option to save on battery life will not guarantee accuracy.</p>
+            </div>
+
+            <div class="a-left">
+                <a href="#20" name="20"><h3>How can I define a preset file with my own values?</h3></a>
+                <p>Many people distribute GPSLogger to other people along with phones, with some preset values. If you create a file at either <code>/sdcard/GPSLogger/gpslogger.properties</code> or <code>/sdcard/gpslogger.properties</code>, then GPSLogger will read this file each time it loads and apply those settings to the application.
+                <br />For example, in the file you can put <code>accuracy_before_logging=42</code> and that will reset the Accuracy Filter to 42 meters each time the application starts. There are many properties that can be applied and you can glean a <a href="https://github.com/mendhak/gpslogger/blob/master/gpslogger/src/main/java/com/mendhak/gpslogger/common/Utilities.java#L124">full list here</a>.</p>
+                <p>The most common examples of properties would be <code>log_gpx</code>, <code>log_kml</code>, <code>time_before_logging</code>, <code>opengts_*</code> for OpenGTS settings, <code>smtp_*</code> for email settings.</p>
+
             </div>
 
             <div class="a-left">
