@@ -88,4 +88,17 @@
     </string-array>
 
 
+    <string-array name="listeners">
+        <item>@string/listeners_gps</item>
+        <item>@string/listeners_cell</item>
+        <item>@string/listeners_passive</item>
+    </string-array>
+
+    <string-array name="listeners_values">
+        <item>gps</item>
+        <item>network</item>
+        <item>passive</item>
+    </string-array>
+
+
 </resources>

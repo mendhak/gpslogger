@@ -54,9 +54,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.util.*;
 
 public class Utilities {
 
@@ -144,10 +142,11 @@ public class Utilities {
 
         AppSettings.setLogToOpenGTS(prefs.getBoolean("log_opengts", false));
 
-
-        AppSettings.setPreferCellTower(prefs.getBoolean("prefer_celltower",
-                false));
-
+        Set<String> listeners = new HashSet<String>();
+        listeners.add("gps");
+        listeners.add("network");
+        listeners.add("passive");
+        AppSettings.setChosenListeners(prefs.getStringSet("listeners", listeners));
 
         String minimumDistanceString = prefs.getString(
                 "distance_before_logging", "0");

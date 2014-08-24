@@ -475,4 +475,10 @@
     <string name="log_nmea_summary">Creates a raw NMEA file while trying to get a fix. This file grows very quickly. Only works while GPS is being used.</string>
     <string name="autoopengts_accountname">Account name</string>
 
+    <string name="listeners_gps">GPS</string>
+    <string name="listeners_cell">Network</string>
+    <string name="listeners_passive">Passive</string>
+    <string name="listeners_summary">Which location providers to use when they are available; GPS for satellites, Network for cell tower/wifi, Passive is a special provider that listens for locations requested from other applications.</string>
+    <string name="listeners_title">Location providers</string>
+
 </resources>

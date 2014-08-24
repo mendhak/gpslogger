@@ -494,12 +494,14 @@ public class GpsLoggingService extends Service implements IActionListener {
     }
 
     private void StartPassiveManager() {
-        tracer.debug("Starting passive location listener");
-        if(passiveLocationListener== null){
-            passiveLocationListener = new GeneralLocationListener(this, "PASSIVE");
+        if(AppSettings.getChosenListeners().contains("passive")){
+            tracer.debug("Starting passive location listener");
+            if(passiveLocationListener== null){
+                passiveLocationListener = new GeneralLocationListener(this, "PASSIVE");
+            }
+            passiveLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            passiveLocationManager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 1000, 0, passiveLocationListener);
         }
-        passiveLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        passiveLocationManager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 1000, 0, passiveLocationListener);
     }
 
     /**
@@ -528,7 +530,7 @@ public class GpsLoggingService extends Service implements IActionListener {
 
         CheckTowerAndGpsStatus();
 
-        if (Session.isGpsEnabled()) {
+        if (Session.isGpsEnabled() && AppSettings.getChosenListeners().contains("gps")) {
             tracer.info("Requesting GPS location updates");
             // gps satellite based
             gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
@@ -543,7 +545,7 @@ public class GpsLoggingService extends Service implements IActionListener {
 
         }
 
-        if (Session.isTowerEnabled() && (AppSettings.shouldPreferCellTower() || !Session.isGpsEnabled())) {
+        if (Session.isTowerEnabled() &&  ( AppSettings.getChosenListeners().contains("network")  || !Session.isGpsEnabled() ) ) {
             tracer.info("Requesting tower location updates");
             Session.setUsingGps(false);
             // Cell tower and wifi based
@@ -742,6 +744,10 @@ public class GpsLoggingService extends Service implements IActionListener {
             return;
         }
 
+        if(!isFromValidListener(loc)){
+            return;
+        }
+
         tracer.debug("GpsLoggingService.OnLocationChanged");
         boolean isPassiveLocation = loc.getExtras().getBoolean("PASSIVE");
 
@@ -819,6 +825,23 @@ public class GpsLoggingService extends Service implements IActionListener {
             tracer.debug("Single point mode - stopping logging now");
             StopLogging();
         }
+    }
+
+    private boolean isFromValidListener(Location loc) {
+
+        if(!AppSettings.getChosenListeners().contains("gps") && !AppSettings.getChosenListeners().contains("network")){
+            return true;
+        }
+
+        if(!AppSettings.getChosenListeners().contains("network")){
+            return loc.getProvider().equalsIgnoreCase("gps");
+        }
+
+        if(!AppSettings.getChosenListeners().contains("gps")){
+            return !loc.getProvider().equalsIgnoreCase("gps");
+        }
+
+        return true;
     }
 
     private void SetDistanceTraveled(Location loc) {

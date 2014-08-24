@@ -19,13 +19,15 @@ package com.mendhak.gpslogger.common;
 
 import android.app.Application;
 
+import java.util.Set;
+
 public class AppSettings extends Application {
     // ---------------------------------------------------
     // User Preferences
     // ---------------------------------------------------
     private static boolean useImperial = false;
     private static boolean newFileOnceADay;
-    private static boolean preferCellTower;
+
     private static boolean logToKml;
     private static boolean logToGpx;
     private static boolean logToPlainText;
@@ -79,6 +81,7 @@ public class AppSettings extends Application {
     private static boolean fileNamePrefixSerial;
 
     private static int absoluteTimeout;
+    private static Set<String> chosenListeners;
 
 
     /**
@@ -109,19 +112,6 @@ public class AppSettings extends Application {
         AppSettings.newFileOnceADay = newFileOnceADay;
     }
 
-    /**
-     * @return the preferCellTower
-     */
-    public static boolean shouldPreferCellTower() {
-        return preferCellTower;
-    }
-
-    /**
-     * @param preferCellTower the preferCellTower to set
-     */
-    static void setPreferCellTower(boolean preferCellTower) {
-        AppSettings.preferCellTower = preferCellTower;
-    }
 
 
     /**
@@ -594,5 +584,13 @@ public class AppSettings extends Application {
 
     public static void setOpenGTSAccountName(String openGTSAccountName) {
         AppSettings.openGTSAccountName = openGTSAccountName;
+    }
+
+    public static void setChosenListeners(Set<String> chosenListeners) {
+        AppSettings.chosenListeners = chosenListeners;
+    }
+
+    public static Set<String> getChosenListeners() {
+        return chosenListeners;
     }
 }
