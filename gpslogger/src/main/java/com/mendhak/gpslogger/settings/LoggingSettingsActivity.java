@@ -34,6 +34,8 @@ import com.mendhak.gpslogger.common.FileDialog.FileDialog;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+
 /**
  * A {@link android.preference.PreferenceActivity} that presents a set of application settings. On
  * handset devices, settings are presented as a single list. On tablets,
@@ -161,6 +163,10 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
         if (requestCode == SELECT_FOLDER_DIALOG) {
             if (resultCode == Activity.RESULT_OK) {
                 String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
+                File chosenFile = new File(filePath);
+                if(!chosenFile.isDirectory()) {
+                    filePath = chosenFile.getParent();
+                }
                 tracer.debug("Folder path selected" + filePath);
 
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
