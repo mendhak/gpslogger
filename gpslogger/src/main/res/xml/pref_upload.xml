@@ -19,9 +19,14 @@
             android:hint="@string/autosend_frequency_hint"
             />
 
+    <CheckBoxPreference
+        android:key="autosend_frequency_whenstoppressed"
+        android:defaultValue="false"
+        android:title="@string/autoemail_frequency_whenistop"
 
+        />
 
-        <CheckBoxPreference
+    <CheckBoxPreference
             android:key="autosend_sendzip"
             android:defaultValue="true"
             android:title="@string/autosend_sendzip_title"

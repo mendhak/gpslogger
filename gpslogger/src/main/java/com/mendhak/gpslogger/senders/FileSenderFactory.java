@@ -117,28 +117,34 @@ public class FileSenderFactory {
         List<IFileSender> senders = new ArrayList<IFileSender>();
 
         if (GDocsHelper.IsLinked(applicationContext)) {
+            tracer.debug("Google Docs Sender picked");
             senders.add(new GDocsHelper(applicationContext, callback));
         }
 
         if (OSMHelper.IsOsmAuthorized(applicationContext)) {
+            tracer.debug("OSM Sender picked");
             senders.add(new OSMHelper(applicationContext, callback));
         }
 
         if (AppSettings.isAutoEmailEnabled()) {
+            tracer.debug("Email Sender picked");
             senders.add(new AutoEmailHelper(callback));
         }
 
         DropBoxHelper dh = new DropBoxHelper(applicationContext, callback);
 
         if (dh.IsLinked()) {
+            tracer.debug("DropBox Sender picked");
             senders.add(dh);
         }
 
         if (AppSettings.isAutoOpenGTSEnabled()) {
+            tracer.debug("OpenGTS Sender picked");
             senders.add(new OpenGTSHelper(applicationContext, callback));
         }
 
         if (AppSettings.isAutoFtpEnabled()) {
+            tracer.debug("FTP Sender picked");
             senders.add(new FtpHelper(callback));
         }
 

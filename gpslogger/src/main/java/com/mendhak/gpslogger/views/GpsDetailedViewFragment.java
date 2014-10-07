@@ -338,7 +338,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             }
 
 
-            if (AppSettings.isAutoSendEnabled()) {
+            if (AppSettings.isAutoSendEnabled() && AppSettings.getAutoSendDelay() > 0) {
                 String autoEmailDisplay = String.format(getString(R.string.autosend_frequency_display), AppSettings.getAutoSendDelay().intValue());
 
                 txtAutoEmail.setText(autoEmailDisplay);

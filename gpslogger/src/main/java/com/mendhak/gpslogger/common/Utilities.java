@@ -229,6 +229,8 @@ public class Utilities {
         AppSettings.setAutoSendDelay(Float.valueOf(prefs.getString(
                 "autosend_frequency_minutes", "0")));
 
+        AppSettings.setAutoSendWhenIPressStop(prefs.getBoolean("autosend_frequency_whenstoppressed", false));
+
         AppSettings.setSmtpServer(prefs.getString("smtp_server", ""));
         AppSettings.setSmtpPort(prefs.getString("smtp_port", "25"));
         AppSettings.setSmtpSsl(prefs.getBoolean("smtp_ssl", true));

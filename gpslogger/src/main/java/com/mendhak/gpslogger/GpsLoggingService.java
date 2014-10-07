@@ -331,11 +331,9 @@ public class GpsLoggingService extends Service implements IActionListener {
      * stops logging
      */
     private void AutoSendLogFileOnStop() {
-        tracer.debug("Auto send enabled: " + String.valueOf(AppSettings.isAutoSendEnabled()) + ", "
-                + " auto send delay: " + String.valueOf(Session.getAutoSendDelay()));
+        tracer.debug("Auto send on stop enabled: " + String.valueOf(AppSettings.shouldAutoSendWhenIPressStop()));
 
-        // autoSendDelay 0 means send it when you stop logging.
-        if (AppSettings.isAutoSendEnabled() && Session.getAutoSendDelay() == 0) {
+        if (AppSettings.isAutoSendEnabled() && AppSettings.shouldAutoSendWhenIPressStop()) {
             Session.setReadyToBeAutoSent(true);
             AutoSendLogFile();
         }

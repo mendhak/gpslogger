@@ -347,7 +347,7 @@
 
     <string name="autosend_enabled">Allow auto sending</string>
     <string name="autosend_enabled_summary">Allows sending the files to various targets</string>
-    <string name="autosend_frequency_summary">How frequently log files should be sent, in minutes</string>
+    <string name="autosend_frequency_summary">How frequently log files should be sent, in minutes. Set to 0 to disable this.</string>
     <string name="autosend_frequency">How often?</string>
 
     <string name="autosend_sendzip_title">Send zip file</string>

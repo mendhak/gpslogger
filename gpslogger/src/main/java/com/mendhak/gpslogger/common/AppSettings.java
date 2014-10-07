@@ -82,6 +82,7 @@ public class AppSettings extends Application {
 
     private static int absoluteTimeout;
     private static Set<String> chosenListeners;
+    private static boolean autoSendWhenIPressStop;
 
 
     /**
@@ -592,5 +593,13 @@ public class AppSettings extends Application {
 
     public static Set<String> getChosenListeners() {
         return chosenListeners;
+    }
+
+    public static void setAutoSendWhenIPressStop(boolean autoSendWhenIPressStop) {
+        AppSettings.autoSendWhenIPressStop = autoSendWhenIPressStop;
+    }
+
+    public static boolean shouldAutoSendWhenIPressStop() {
+        return autoSendWhenIPressStop;
     }
 }
