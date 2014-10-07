@@ -135,15 +135,6 @@
   <string name="autoemail_autosend_summary">Permite trimiterea fisierelor de log la o adresă de e-mail de alegerea dvs.     </string>
   <string name="autoemail_target">Adrese de email destinaţie</string>
   <string name="autoemail_frequency_whenistop">Atunci când apăsaţi stop</string>
-  <string name="autoemail_frequency_8">După 8 ore</string>
-  <string name="autoemail_frequency_6">După 6 ore</string>
-  <string name="autoemail_frequency_5">După 5 ore</string>
-  <string name="autoemail_frequency_4">Dupa 4 ore</string>
-  <string name="autoemail_frequency_3">După 3 ore</string>
-  <string name="autoemail_frequency_2">După 2 ore</string>
-  <string name="autoemail_frequency_1">După 1 oră</string>
-  <string name="autoemail_frequency_05">După 0,5 ore</string>
-  <string name="autoemail_frequency_008">După 5 minute</string>
   <string name="autoemail_smtp_category">Setări de e-mail</string>
   <string name="autoemail_username">Nume utilizator</string>
   <string name="autoemail_username_summary">Numele de utilizator de la furnizorul dvs. de e-mail</string>
@@ -226,7 +217,6 @@
   <string name="autoemail_sendto_csv">Adrese de email separate prin virgulă</string>
   <string name="autosend_enabled">Permite trimitere automată</string>
   <string name="autosend_enabled_summary">Permite trimiterea fişierelor la diverse e-mails</string>
-  <string name="autosend_frequency_summary">Frecventa cu care se trimit fişierele de log</string>
   <string name="autosend_frequency">Cât de des?</string>
   <string name="autosend_sendzip_title">Trimite fişier zip</string>
   <string name="autosend_sendzip_summary">Trimite fişier zip după caz. Scoate aceasta optiune pentru a trimite fişiere individuale, sau în cazul în care opţiunea zip nu este functionala pentru tine     </string>

@@ -131,15 +131,6 @@
     </string>
   <string name="autoemail_target">ที่อยู่อีเมล์ปลายทาง</string>
   <string name="autoemail_frequency_whenistop">เมื่อฉันกดหยุด</string>
-  <string name="autoemail_frequency_8">หลัง 8 ชั่วโมง</string>
-  <string name="autoemail_frequency_6">หลัง 6 ชั่วโมง</string>
-  <string name="autoemail_frequency_5">หลัง 5 ชั่วโมง</string>
-  <string name="autoemail_frequency_4">หลัง 4 ชั่วโมง</string>
-  <string name="autoemail_frequency_3">หลัง 3 ชั่วโมง</string>
-  <string name="autoemail_frequency_2">หลัง 2 ชั่วโมง</string>
-  <string name="autoemail_frequency_1">หลัง 1 ชั่วโมง</string>
-  <string name="autoemail_frequency_05">หลังครึ่งชั่วโมง</string>
-  <string name="autoemail_frequency_008">หลัง 5 นาที</string>
   <string name="autoemail_smtp_category">การตั้งค่าอีเมล์</string>
   <string name="autoemail_username">ชื่อผู้ใช้</string>
   <string name="autoemail_username_summary">ชื่อผู้ใช้กับผู้ให้บริการอีเมล์ของคุณ</string>
@@ -199,7 +190,6 @@
   <string name="autoemail_sendto_csv">คั่นแต่ละอีเมล์ด้วยจุลภาค</string>
   <string name="autosend_enabled">อนุญาตให้ส่งอัตโนมัติ</string>
   <string name="autosend_enabled_summary">อนุญาตให้ส่งไฟล์ไปยังเป้าหมายต่าง ๆ</string>
-  <string name="autosend_frequency_summary">ควรส่งไฟล์ log บ่อยแค่ไหน</string>
   <string name="autosend_frequency">บ่อยแค่ไหน?</string>
   <string name="autosend_sendzip_title">ส่งไฟล์ zip</string>
   <string name="shortcut_start">เริ่ม</string>

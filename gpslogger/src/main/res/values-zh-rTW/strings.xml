@@ -127,15 +127,6 @@
   <string name="please_wait">請稍等。</string>
   <string name="autoemail_autosend_summary">開啟自動傳送日誌檔案到你選取的Email位址。</string>
   <string name="autoemail_frequency_whenistop">當我點擊停止</string>
-  <string name="autoemail_frequency_8">在 8 小時後</string>
-  <string name="autoemail_frequency_6">6 小時後</string>
-  <string name="autoemail_frequency_5">5 小時後</string>
-  <string name="autoemail_frequency_4">4 小時後</string>
-  <string name="autoemail_frequency_3">3 小時後</string>
-  <string name="autoemail_frequency_2">2 小時後</string>
-  <string name="autoemail_frequency_1">1 小時後</string>
-  <string name="autoemail_frequency_05">30 分鐘後</string>
-  <string name="autoemail_frequency_008">5 分鐘後</string>
   <string name="autoemail_smtp_category">Email 設定</string>
   <string name="autoemail_username">帳號</string>
   <string name="autoemail_username_summary">你接送電郵的用戶名</string>

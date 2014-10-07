@@ -159,15 +159,6 @@
     </string>
   <string name="autoemail_target">Cílové emailové adresy</string>
   <string name="autoemail_frequency_whenistop">Když stisknu stop</string>
-  <string name="autoemail_frequency_8">Po 8 hodinách</string>
-  <string name="autoemail_frequency_6">Po 6 hodinách</string>
-  <string name="autoemail_frequency_5">Po 5 hodinách</string>
-  <string name="autoemail_frequency_4">Po 4 hodinách</string>
-  <string name="autoemail_frequency_3">Po 3 hodinách</string>
-  <string name="autoemail_frequency_2">Po 2 hodinách</string>
-  <string name="autoemail_frequency_1">Po 1 hodině</string>
-  <string name="autoemail_frequency_05">Po 0,5 hodině</string>
-  <string name="autoemail_frequency_008">Po 5 minutách</string>
   <string name="autoemail_smtp_category">Nastavení e-mailu</string>
   <string name="autoemail_username">Uživatelské jméno</string>
   <string name="autoemail_username_summary">Uživatelské jméno s poskytovatelem e-mailu</string>
@@ -253,7 +244,6 @@
   <string name="autoemail_sendto_csv">E-mailové adresy oddělené čárkou</string>
   <string name="autosend_enabled">Povolit automatické odesílání</string>
   <string name="autosend_enabled_summary">Umožňuje odesílat soubory do různých umístění</string>
-  <string name="autosend_frequency_summary">Jak často se mají posílat soubory záznamů</string>
   <string name="autosend_frequency">Jak často?</string>
   <string name="autosend_sendzip_title">Odeslat soubor zip</string>
   <string name="autosend_sendzip_summary">Odeslat soubor zip, pokud možno. Zakažte pokud chcete odesílate jednotlivé soubory, nebo pokud nefunguje možnost zip     </string>

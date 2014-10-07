@@ -151,15 +151,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="autoemail_autosend_summary">Naplófájl küldése Ön által választott e-mail címre.     </string>
   <string name="autoemail_target">Cél e-mail cím</string>
   <string name="autoemail_frequency_whenistop">Nyomja meg a megállításhoz</string>
-  <string name="autoemail_frequency_8">8 óra múlva</string>
-  <string name="autoemail_frequency_6">6 óra múlva</string>
-  <string name="autoemail_frequency_5">5 óra múlva</string>
-  <string name="autoemail_frequency_4">4 óra múlva</string>
-  <string name="autoemail_frequency_3">3 óra múlva</string>
-  <string name="autoemail_frequency_2">2 óra múlva</string>
-  <string name="autoemail_frequency_1">1 óra múlva</string>
-  <string name="autoemail_frequency_05">30 perc múlva</string>
-  <string name="autoemail_frequency_008">5 perc múlva</string>
   <string name="autoemail_smtp_category">E-mail beállítások</string>
   <string name="autoemail_username">Felhasználónév</string>
   <string name="autoemail_username_summary">Az e-mail szolgáltatótól kapott felhasználóneve</string>
@@ -242,7 +233,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="autoemail_sendto_csv">Vesszővel elválasztott e-mail címek</string>
   <string name="autosend_enabled">Automatikus küldés engedélyezése</string>
   <string name="autosend_enabled_summary">Lehetővé teszi a fájlok küldése különböző célokra</string>
-  <string name="autosend_frequency_summary">Milyen gyakran kell küldeni naplófájlokat</string>
   <string name="autosend_frequency">Milyen gyakran?</string>
   <string name="autosend_sendzip_title">Küld a zip-fájlt</string>
   <string name="autosend_sendzip_summary">Zip-fájl küldése. Kikapcsolja az egyes fájlok küldését, ha a zip opció nem működik az Önnél     </string>

@@ -151,15 +151,6 @@
   <string name="autoemail_autosend_summary">選択したアドレスへのログファイル送信を有効にします。</string>
   <string name="autoemail_target">送信先メール アドレス</string>
   <string name="autoemail_frequency_whenistop">停止を押した時</string>
-  <string name="autoemail_frequency_8">8 時間後</string>
-  <string name="autoemail_frequency_6">6 時間後</string>
-  <string name="autoemail_frequency_5">5 時間後</string>
-  <string name="autoemail_frequency_4">4 時間後</string>
-  <string name="autoemail_frequency_3">3 時間後</string>
-  <string name="autoemail_frequency_2">2 時間後</string>
-  <string name="autoemail_frequency_1">1 時間後</string>
-  <string name="autoemail_frequency_05">30分後</string>
-  <string name="autoemail_frequency_008">5 分後</string>
   <string name="autoemail_smtp_category">メール設定</string>
   <string name="autoemail_username">ユーザー名</string>
   <string name="autoemail_username_summary">メールブロバイダーのユーザー名</string>
@@ -242,7 +233,6 @@
   <string name="autoemail_sendto_csv">カンマで区切られた電子メール アドレス</string>
   <string name="autosend_enabled">自動送信を許可</string>
   <string name="autosend_enabled_summary">自動送信を有効にします</string>
-  <string name="autosend_frequency_summary">ログ ファイルの送信頻度http://crowdin.net/translate/gpslogger-for-android/11366/en-ja#</string>
   <string name="autosend_frequency">送信間隔</string>
   <string name="autosend_sendzip_title">Zip ファイルの送信</string>
   <string name="autosend_sendzip_summary">可能ならzipファイルを送信します。ファイルを個別で送信する場合、もしくはzipがうまく動かない場合はこの設定を無効にしてください。</string>

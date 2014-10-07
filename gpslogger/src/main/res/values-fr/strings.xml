@@ -120,6 +120,7 @@
   <string name="prefer_celltower_title">Préfère tours cellulaires</string>
   <string name="prefer_celltower_summary">Utilise les tours cellulaires même si le GPS est activé. Moins précis, mais permet d\'économiser plus de batterie.</string>
   <string name="time_before_logging_title">Temps avant l\'enregistrement</string>
+  <string name="time_before_logging_summary">Choisir 0 pour une fréquence maximum, mais une basse fréquence augmente l\'autonomie de la batterie.</string>
   <string name="time_before_logging_dialog_title">Temps en secondes</string>
   <string name="time_before_logging_hint">Entrez secondes (max 9999)</string>
   <string name="keep_fix_summary">Attention, cela va réduire considérablement la vie de la batterie. Utiliser uniquement pour
@@ -132,6 +133,7 @@ une plus grande précision à basses fréquences.</string>
   <string name="timeout_time_summary">Combien de temps le GPS reste allumé à la recherche d\'une solution avant d\'abandonner. Utilisez 0 pour aucun délai</string>
   <string name="timeout_time_dialog_title">Temps en secondes</string>
   <string name="timeout_time_hint">Entrez secondes (max 9999)</string>
+  <string name="display_imperial_title">Afficher les unités Impériales</string>
   <string name="enabledisablegps_title">Activer / Désactiver GPS</string>
   <string name="enabledisablegps_summary">Accédez aux paramètres du cellulaire pour activer ou désactiver les fournisseurs du service.</string>
   <string name="startonbootup_title">Démarrer au démarrage du cellulaire</string>
@@ -143,15 +145,6 @@ une plus grande précision à basses fréquences.</string>
   <string name="autoemail_autosend_summary">Permet d\'envoyer le fichier enregistrements à une adresse email de votre choix.</string>
   <string name="autoemail_target">Adresses de courriel ciblées</string>
   <string name="autoemail_frequency_whenistop">Lorsque j\'appuie sur arrêt</string>
-  <string name="autoemail_frequency_8">Après 8 heures</string>
-  <string name="autoemail_frequency_6">Après 6 heures</string>
-  <string name="autoemail_frequency_5">Après 5 heures</string>
-  <string name="autoemail_frequency_4">Après 4 heures</string>
-  <string name="autoemail_frequency_3">Après 3 heures</string>
-  <string name="autoemail_frequency_2">Après 2 heures</string>
-  <string name="autoemail_frequency_1">Après 1 heure</string>
-  <string name="autoemail_frequency_05">Après 0,5 heures</string>
-  <string name="autoemail_frequency_008">Après 5 minutes</string>
   <string name="autoemail_smtp_category">Paramètres de courriel</string>
   <string name="autoemail_username">Nom d\'utilisateur</string>
   <string name="autoemail_username_summary">Nom d\'utilisateur avec votre fournisseur de courriel</string>
@@ -234,7 +227,6 @@ une plus grande précision à basses fréquences.</string>
   <string name="autoemail_sendto_csv">Adresses de courriel séparées par une virgule</string>
   <string name="autosend_enabled">Autoriser l\'envoi automatique</string>
   <string name="autosend_enabled_summary">Autoriser l\'envoi de fichiers à différentes cibles</string>
-  <string name="autosend_frequency_summary">À quelle fréquence les enregistrements doivent-ils être envoyés?</string>
   <string name="autosend_frequency">Combien de fois ?</string>
   <string name="autosend_sendzip_title">Envoyer le fichier zip</string>
   <string name="autosend_sendzip_summary">Si possible, envoyer un fichier zip. Désactiver pour envoyer en fichiers individuels, ou si l\'option zip ne fonctionne pas     </string>
@@ -296,6 +288,7 @@ une plus grande précision à basses fréquences.</string>
   <string name="gpsf_missing">Service Manquant</string>
   <string name="gpsf_missing_description">Vous aurez besoin de Google Play Services Framework pour utiliser cette fonction.</string>
   <string name="pref_loggingto_title">Connectez-vous...</string>
+  <string name="pref_loggingto_summary">Fichiers et répertoires où sauvegarder votre location</string>
   <string name="log_customurl_urlparameters">Paramètres d\'URL</string>
   <string name="log_customUrl_urllatitude">Latitude: %LAT</string>
   <string name="txt_annotation">Annotation :</string>
