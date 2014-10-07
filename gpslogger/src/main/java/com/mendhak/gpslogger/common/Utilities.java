@@ -225,14 +225,9 @@ public class Utilities {
         AppSettings.setAutoEmailEnabled(prefs.getBoolean("autoemail_enabled",
                 false));
 
-        if (Float.valueOf(prefs.getString("autosend_frequency", "0")) >= 8f) {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("autosend_frequency", "8");
-            editor.commit();
-        }
 
         AppSettings.setAutoSendDelay(Float.valueOf(prefs.getString(
-                "autosend_frequency", "0")));
+                "autosend_frequency_minutes", "0")));
 
         AppSettings.setSmtpServer(prefs.getString("smtp_server", ""));
         AppSettings.setSmtpPort(prefs.getString("smtp_port", "25"));

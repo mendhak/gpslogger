@@ -339,19 +339,9 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
 
             if (AppSettings.isAutoSendEnabled()) {
-                String autoEmailResx;
+                String autoEmailDisplay = String.format(getString(R.string.autosend_frequency_display), AppSettings.getAutoSendDelay().intValue());
 
-                if (AppSettings.getAutoSendDelay() == 0) {
-                    autoEmailResx = "autoemail_frequency_whenistop";
-                } else {
-
-                    autoEmailResx = "autoemail_frequency_"
-                            + String.valueOf(AppSettings.getAutoSendDelay()).replace(".", "");
-                }
-
-                String autoEmailDesc = getString(getResources().getIdentifier(autoEmailResx, "string", getActivity().getPackageName()));
-
-                txtAutoEmail.setText(autoEmailDesc);
+                txtAutoEmail.setText(autoEmailDisplay);
             }
 
 

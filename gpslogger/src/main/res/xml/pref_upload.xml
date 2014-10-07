@@ -9,13 +9,17 @@
             android:summary="@string/autosend_enabled_summary"/>
 
 
-        <ListPreference
-            android:key="autosend_frequency"
+        <EditTextPreference
+            android:key="autosend_frequency_minutes"
             android:title="@string/autosend_frequency"
             android:summary="@string/autosend_frequency_summary"
-            android:entries="@array/autosend_frequencies"
-            android:defaultValue="0"
-            android:entryValues="@array/autosend_values"/>
+            android:numeric="integer"
+            android:maxLength="4"
+            android:defaultValue="60"
+            android:hint="@string/autosend_frequency_hint"
+            />
+
+
 
         <CheckBoxPreference
             android:key="autosend_sendzip"

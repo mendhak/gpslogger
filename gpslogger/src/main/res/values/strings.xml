@@ -218,18 +218,11 @@
     <string name="autoemail_target">Target email addresses</string>
 
 
+    <string name="autosend_frequency_display">After %s minutes</string>
     <string name="autoemail_frequency_whenistop">When I press stop</string>
 
 
-    <string name="autoemail_frequency_8">After 8 hours</string>
-    <string name="autoemail_frequency_6">After 6 hours</string>
-    <string name="autoemail_frequency_5">After 5 hours</string>
-    <string name="autoemail_frequency_4">After 4 hours</string>
-    <string name="autoemail_frequency_3">After 3 hours</string>
-    <string name="autoemail_frequency_2">After 2 hours</string>
-    <string name="autoemail_frequency_1">After 1 hour</string>
-    <string name="autoemail_frequency_05">After 0.5 hour</string>
-    <string name="autoemail_frequency_008">After 5 minutes</string>
+
     <string name="autoemail_smtp_category">Email Settings</string>
     <string name="autoemail_username">Username</string>
     <string name="autoemail_username_summary">Username with your email provider</string>
@@ -354,7 +347,7 @@
 
     <string name="autosend_enabled">Allow auto sending</string>
     <string name="autosend_enabled_summary">Allows sending the files to various targets</string>
-    <string name="autosend_frequency_summary">How frequently log files should be sent</string>
+    <string name="autosend_frequency_summary">How frequently log files should be sent, in minutes</string>
     <string name="autosend_frequency">How often?</string>
 
     <string name="autosend_sendzip_title">Send zip file</string>
@@ -480,5 +473,6 @@
     <string name="listeners_passive">Passive</string>
     <string name="listeners_summary">Which location providers to use when they are available; GPS for satellites, Network for cell tower/wifi, Passive is a special provider that listens for locations requested from other applications.</string>
     <string name="listeners_title">Location providers</string>
+    <string name="autosend_frequency_hint">Number of minutes</string>
 
 </resources>

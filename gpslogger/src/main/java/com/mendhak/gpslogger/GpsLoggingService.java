@@ -268,7 +268,7 @@ public class GpsLoggingService extends Service implements IActionListener {
         if (AppSettings.isAutoSendEnabled() && Session.getAutoSendDelay() > 0) {
             tracer.debug("Setting up autosend alarm");
             long triggerTime = System.currentTimeMillis()
-                    + (long) (Session.getAutoSendDelay() * 60 * 60 * 1000);
+                    + (long) (Session.getAutoSendDelay() * 60 * 1000);
 
             alarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
             CancelAlarm();
