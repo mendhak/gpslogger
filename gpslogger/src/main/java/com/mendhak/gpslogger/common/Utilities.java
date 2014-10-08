@@ -71,7 +71,7 @@ public class Utilities {
 
         //final String LOG_DIR = "/sdcard/GPSLogger";
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        final String LOG_DIR = prefs.getString("gpslogger_folder", Environment.getExternalStorageDirectory() + "/GPSLogger");
+        final String LOG_DIR = prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(context).getAbsolutePath());
 
         GpsRollingFileAppender<ILoggingEvent> rollingFileAppender = new GpsRollingFileAppender<ILoggingEvent>();
         rollingFileAppender.setAppend(true);
@@ -258,7 +258,7 @@ public class Utilities {
         AppSettings.setFtpUseFtps(prefs.getBoolean("autoftp_useftps", false));
         AppSettings.setFtpProtocol(prefs.getString("autoftp_ssltls", ""));
         AppSettings.setFtpImplicit(prefs.getBoolean("autoftp_implicit", false));
-        AppSettings.setGpsLoggerFolder(prefs.getString("gpslogger_folder", Environment.getExternalStorageDirectory() + "/GPSLogger"));
+        AppSettings.setGpsLoggerFolder(prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(context).getAbsolutePath()));
         AppSettings.setFileNamePrefixSerial(prefs.getBoolean("new_file_prefix_serial", false));
 
         String absoluteTimeoutString = prefs.getString("absolute_timeout",
@@ -815,4 +815,7 @@ public class Utilities {
     }
 
 
+    public static File GetDefaultStorageFolder(Context context){
+        return context.getExternalFilesDir(null);
+    }
 }

@@ -123,8 +123,9 @@ public class GpsMainActivity extends Activity
 
     private void loadPresetProperties() {
 
-        //Either look for /sdcard/GPSLogger/gpslogger.properties or /sdcard/gpslogger.properties
-        File file =  new File(Environment.getExternalStorageDirectory() + "/GPSLogger/gpslogger.properties");
+
+        //Either look for /<appfolder>/gpslogger.properties or /sdcard/gpslogger.properties
+        File file =  new File(Utilities.GetDefaultStorageFolder(getApplicationContext()) + "/gpslogger.properties");
         if(!file.exists()){
             file = new File(Environment.getExternalStorageDirectory() + "/gpslogger.properties");
             if(!file.exists()){

@@ -107,7 +107,7 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
 
         Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
         gpsloggerFolder.setOnPreferenceClickListener(this);
-        gpsloggerFolder.setSummary(prefs.getString("gpslogger_folder", Environment.getExternalStorageDirectory() + "/GPSLogger"));
+        gpsloggerFolder.setSummary(prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(getApplicationContext()).getAbsolutePath()));
 
         CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
         chkLog_opengts.setOnPreferenceClickListener(this);
@@ -139,7 +139,7 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
         if (preference.getKey().equals("gpslogger_folder")) {
             Intent intent = new Intent(getBaseContext(), FileDialog.class);
             intent.putExtra(FileDialog.START_PATH, prefs.getString("gpslogger_folder",
-                    Environment.getExternalStorageDirectory() + "/GPSLogger"));
+                    Utilities.GetDefaultStorageFolder(getApplicationContext()).getAbsolutePath()));
 
             intent.putExtra(FileDialog.CAN_SELECT_DIR, true);
             startActivityForResult(intent, SELECT_FOLDER_DIALOG);

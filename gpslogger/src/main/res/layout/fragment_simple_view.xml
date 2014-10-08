@@ -294,10 +294,11 @@
                         android:layout_gravity="center"
                         android:visibility="visible"
                         android:textSize="11sp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="italic"
                         android:paddingTop="12dp"
+                        android:width="0dip"
                         android:text=""/>
 
                     <LinearLayout android:layout_column="0"
