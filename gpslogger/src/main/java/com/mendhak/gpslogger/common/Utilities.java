@@ -25,6 +25,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Environment;
@@ -817,5 +819,16 @@ public class Utilities {
 
     public static File GetDefaultStorageFolder(Context context){
         return context.getExternalFilesDir(null);
+    }
+
+    public static boolean IsPackageInstalled(String targetPackage, Context context){
+        List<ApplicationInfo> packages;
+        PackageManager pm;
+        pm = context.getPackageManager();
+        packages = pm.getInstalledApplications(0);
+        for (ApplicationInfo packageInfo : packages) {
+            if(packageInfo.packageName.equals(targetPackage)) return true;
+        }
+        return false;
     }
 }
