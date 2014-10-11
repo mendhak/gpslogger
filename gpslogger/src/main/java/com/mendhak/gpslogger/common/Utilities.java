@@ -836,7 +836,8 @@ public class Utilities {
 
     public static void SetFileExplorerLink(TextView txtFilename, Spanned htmlString, final String pathToLinkTo, final Context context) {
 
-        if(Utilities.IsPackageInstalled("com.estrongs.android.pop", context)){
+        if(Utilities.IsPackageInstalled("com.estrongs.android.pop", context)
+                || Utilities.IsPackageInstalled("com.metago.astro", context)){
 
             txtFilename.setLinksClickable(true);
             txtFilename.setClickable(true);
@@ -850,10 +851,20 @@ public class Utilities {
                 public void onClick(View view) {
                     Intent shareIntent = new Intent(Intent.ACTION_VIEW);
                     shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                     shareIntent.setType("resource/folder");
                     shareIntent.setData(Uri.fromFile(new File(pathToLinkTo)));
-                    shareIntent.setComponent(ComponentName.unflattenFromString("com.estrongs.android.pop/.view.FileExplorerActivity"));
-                    shareIntent.setPackage("com.estrongs.android.pop");
+
+                    if(Utilities.IsPackageInstalled("com.estrongs.android.pop", context) ){
+                        shareIntent.setComponent(ComponentName.unflattenFromString("com.estrongs.android.pop/.view.FileExplorerActivity"));
+                        shareIntent.setPackage("com.estrongs.android.pop");
+                    }
+
+                    if(Utilities.IsPackageInstalled("com.metago.astro", context)){
+                        shareIntent.setPackage("com.metago.astro");
+                        shareIntent.setComponent(ComponentName.unflattenFromString("com.metago.astro/.MainActivity"));
+                    }
+
                     context.startActivity(shareIntent);
                 }
             });
