@@ -20,19 +20,21 @@ package com.mendhak.gpslogger.common;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.format.Time;
+import android.text.method.LinkMovementMethod;
+import android.view.View;
+import android.widget.TextView;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.android.LogcatAppender;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
@@ -830,5 +832,33 @@ public class Utilities {
             if(packageInfo.packageName.equals(targetPackage)) return true;
         }
         return false;
+    }
+
+    public static void SetFileExplorerLink(TextView txtFilename, Spanned htmlString, final String pathToLinkTo, final Context context) {
+
+        if(Utilities.IsPackageInstalled("com.estrongs.android.pop", context)){
+
+            txtFilename.setLinksClickable(true);
+            txtFilename.setClickable(true);
+            txtFilename.setMovementMethod(LinkMovementMethod.getInstance());
+            txtFilename.setSelectAllOnFocus(false);
+            txtFilename.setTextIsSelectable(false);
+            txtFilename.setText(htmlString);
+
+            txtFilename.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent shareIntent = new Intent(Intent.ACTION_VIEW);
+                    shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    shareIntent.setType("resource/folder");
+                    shareIntent.setData(Uri.fromFile(new File(pathToLinkTo)));
+                    shareIntent.setComponent(ComponentName.unflattenFromString("com.estrongs.android.pop/.view.FileExplorerActivity"));
+                    shareIntent.setPackage("com.estrongs.android.pop");
+                    context.startActivity(shareIntent);
+                }
+            });
+
+        }
+
     }
 }

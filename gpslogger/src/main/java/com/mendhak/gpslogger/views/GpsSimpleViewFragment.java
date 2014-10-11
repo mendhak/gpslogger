@@ -177,28 +177,10 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         txtFilename.setVisibility(View.VISIBLE);
         txtFilename.setText(Html.fromHtml("<em>" + AppSettings.getGpsLoggerFolder() + "/<strong>" + Session.getCurrentFileName() + "</strong></em>"));
 
-        if(Utilities.IsPackageInstalled("com.estrongs.android.pop", getActivity().getApplicationContext())){
-
-            txtFilename.setLinksClickable(true);
-            txtFilename.setClickable(true);
-            txtFilename.setMovementMethod(LinkMovementMethod.getInstance());
-            txtFilename.setSelectAllOnFocus(false);
-            txtFilename.setTextIsSelectable(false);
-            txtFilename.setText(Html.fromHtml("<font color='blue'><u>" + "<em>" + AppSettings.getGpsLoggerFolder() + "/<strong>" + Session.getCurrentFileName() + "</strong></em>" + "</u></font>"));
-
-            txtFilename.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent shareIntent = new Intent(Intent.ACTION_VIEW);
-                    shareIntent.setType("resource/folder");
-                    shareIntent.setData(Uri.fromFile(new File(AppSettings.getGpsLoggerFolder())));
-                    shareIntent.setComponent(ComponentName.unflattenFromString("com.estrongs.android.pop/.view.FileExplorerActivity"));
-                    shareIntent.setPackage("com.estrongs.android.pop");
-                    startActivity(shareIntent);
-                }
-            });
-
-        }
+        Utilities.SetFileExplorerLink(txtFilename,
+                Html.fromHtml("<em><font color='blue'><u>" + AppSettings.getGpsLoggerFolder() + "</u></font>" + "/<strong>" + Session.getCurrentFileName() + "</strong></em>" ),
+                AppSettings.getGpsLoggerFolder(),
+                getActivity().getApplicationContext());
 
     }
 
