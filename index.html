@@ -326,10 +326,25 @@
 
             <div class="a-left">
                 <a href="#7" name="7"><h3>Where is the file being logged?  How do I get to it?</h3></a>
-                <p>You can connect your phone to your computer and mount the SD card, then copy the
-                    file from the <em>GPSLogger</em> folder.  That's the default folder, but you can change it in the settings. Note that while your SD card is mounted, GPSLogger can't write to the
-                    card, since it's in use. To view it on the phone itself, if you have a file explorer, then you can go to /sdcard/GPSlogger &gt; Long
+                <h3>What is the default folder path?</h3>
+                <p>Due to recent restrictions, the default GPSLogger folder is different per device. You can see it on the simple/detailed screens and it may be something like <br /> <br />
+
+                    Example: <code>/storage/emulated/0/Android/data/com.mendhak.gpslogger/files/</code>
+
+                    <br />
+                    Example: <code>/sdcard/Android/data/com.mendhak.gpslogger/files/</code>
+
+
+                    <br /><br />
+
+                    The initial part will be different for your device.  If you have ES File Explorer or Astro File Explorer installed, you can click on the folder paths in the simple/detailed screens.
+                </p>
+                <p>To copy the GPSLogger files, you can connect your phone to your computer and mount the SD card, then copy straight from the above folder.  You can also change the default folder in the settings.
+
+                    To view it on the phone itself, if you have a file explorer, then you can go to the above folder &gt; Long
                     press file &gt; Open as &gt; Text</p>
+
+                <p>Finally, note that due to the <a href="http://commonsware.com/blog/2014/04/09/storage-situation-removable-storage.html">restrictions introduced in Android KitKat</a>, any files in the default folder will be removed if you uninstall the app.</p>
 
             </div>
 
@@ -443,7 +458,7 @@
 
             <div class="a-left">
                 <a href="#20" name="20"><h3>How can I define a preset file with my own values?</h3></a>
-                <p>Many people distribute GPSLogger to other people along with phones, with some preset values. If you create a file at either <code>/sdcard/GPSLogger/gpslogger.properties</code> or <code>/sdcard/gpslogger.properties</code>, then GPSLogger will read this file each time it loads and apply those settings to the application.
+                <p>Many people distribute GPSLogger to other people along with phones, with some preset values. If you create a file in the <a href="#7">default folder</a> or at <code>/sdcard/gpslogger.properties</code>, then GPSLogger will read this file each time it loads and apply those settings to the application.
                 <br />For example, in the file you can put <code>accuracy_before_logging=42</code> and that will reset the Accuracy Filter to 42 meters each time the application starts. There are many properties that can be applied and you can glean a <a href="https://github.com/mendhak/gpslogger/blob/master/gpslogger/src/main/java/com/mendhak/gpslogger/common/Utilities.java#L124">full list here</a>.</p>
                 <p>The most common examples of properties would be <code>log_gpx</code>, <code>log_kml</code>, <code>time_before_logging</code>, <code>opengts_*</code> for OpenGTS settings, <code>smtp_*</code> for email settings.</p>
 
