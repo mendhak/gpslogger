@@ -45,6 +45,13 @@ public class UtilitiesTests extends AndroidTestCase {
         public SharedPreferences getSharedPreferences(String name, int mode) {
             return mDelegatedContext.getSharedPreferences(name, mode);
         }
+
+        @Override
+        public File getExternalFilesDir(String type){
+            return new File("/sdcard/GPSLogger");
+        }
+
+
     }
 
 
