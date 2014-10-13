@@ -230,8 +230,10 @@ public class Utilities {
                 false));
 
 
-        AppSettings.setAutoSendDelay(Float.valueOf(prefs.getString(
-                "autosend_frequency_minutes", "0")));
+        try{
+            AppSettings.setAutoSendDelay(Float.valueOf(prefs.getString("autosend_frequency_minutes", "60")));
+        } catch (Exception e)  { AppSettings.setAutoSendDelay(60f);  }
+
 
         AppSettings.setAutoSendWhenIPressStop(prefs.getBoolean("autosend_frequency_whenstoppressed", false));
 
