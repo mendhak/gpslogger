@@ -244,13 +244,7 @@ public class AppSettings extends Application {
      * @return the autoSendDelay
      */
     public static Float getAutoSendDelay() {
-        if (autoSendDelay >= 8f) {
-            return 8f;
-        } else {
             return autoSendDelay;
-        }
-
-
     }
 
     /**
@@ -258,13 +252,7 @@ public class AppSettings extends Application {
      */
     static void setAutoSendDelay(Float autoSendDelay) {
 
-        if (autoSendDelay >= 8f) {
-            AppSettings.autoSendDelay = 8f;
-        } else {
             AppSettings.autoSendDelay = autoSendDelay;
-        }
-
-
     }
 
     /**
