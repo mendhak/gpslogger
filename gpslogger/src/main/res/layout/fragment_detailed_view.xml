@@ -111,6 +111,7 @@
                         android:background="?android:selectableItemBackground"
                         android:id="@+id/detailedview_play"
                         android:src="@drawable/play"
+                        android:contentDescription="@string/btn_start_logging"
                         />
 
                     <ImageView
@@ -121,6 +122,7 @@
                         android:background="?android:selectableItemBackground"
                         android:id="@+id/detailedview_stop"
                         android:src="@drawable/stop"
+                        android:contentDescription="@string/btn_stop_logging"
                         />
                     <TextView
                         android:id="@+id/detailedview_txtstatus"
