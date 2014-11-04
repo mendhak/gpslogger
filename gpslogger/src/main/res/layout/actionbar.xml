@@ -18,6 +18,7 @@
         android:src="@drawable/help"
         android:layout_centerVertical="true"
         android:background="?android:selectableItemBackground"
+        android:contentDescription="@string/faq_screen_title"
         />
 
     <ImageView

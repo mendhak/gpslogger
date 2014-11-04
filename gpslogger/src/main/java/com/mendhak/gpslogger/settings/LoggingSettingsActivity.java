@@ -27,6 +27,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
@@ -107,7 +108,11 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
 
         Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
         gpsloggerFolder.setOnPreferenceClickListener(this);
-        gpsloggerFolder.setSummary(prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(getApplicationContext()).getAbsolutePath()));
+        String gpsLoggerFolderPath = prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(getApplicationContext()).getAbsolutePath());
+        gpsloggerFolder.setSummary(gpsLoggerFolderPath);
+        if(!(new File(gpsLoggerFolderPath)).canWrite()){
+            gpsloggerFolder.setSummary(Html.fromHtml("<font color='red'>" + gpsLoggerFolderPath + "</font>"));
+        }
 
         CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
         chkLog_opengts.setOnPreferenceClickListener(this);
@@ -169,6 +174,11 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
                 }
                 tracer.debug("Folder path selected" + filePath);
 
+                if(!chosenFile.canWrite()){
+                    Utilities.MsgBox(getString(R.string.sorry), getString(R.string.pref_logging_file_no_permissions), LoggingSettingsActivity.this);
+                    return;
+                }
+
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("gpslogger_folder", filePath);
@@ -176,6 +186,8 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
 
                 Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
                 gpsloggerFolder.setSummary(filePath);
+
+
 
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 tracer.debug("No file selected");

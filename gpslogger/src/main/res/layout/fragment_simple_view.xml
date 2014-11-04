@@ -69,6 +69,7 @@
                         android:background="?android:selectableItemBackground"
                         android:id="@+id/simple_play"
                         android:src="@drawable/play"
+                        android:contentDescription="@string/btn_start_logging"
                         />
 
                     <ImageView
@@ -79,6 +80,7 @@
                         android:background="?android:selectableItemBackground"
                         android:id="@+id/simple_stop"
                         android:src="@drawable/stop"
+                        android:contentDescription="@string/btn_stop_logging"
                         />
                 </LinearLayout>
             </TableRow>
@@ -108,6 +110,7 @@
                         android:layout_column="0"
                         android:layout_row="0"
                         android:src="@drawable/satellite_count"
+                        android:contentDescription="@string/txt_satellites"
                         />
 
                     <TextView
@@ -132,6 +135,7 @@
                         android:paddingLeft="5dp"
                         android:layout_width="@dimen/simpleview_grid_iconwidth"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/txt_accuracy"
                         android:textSize="@dimen/simpleview_grid_iconwidth"
                         android:textAlignment="center"
                         />
@@ -159,6 +163,7 @@
                         android:layout_gravity="center"
                         android:layout_width="@dimen/simpleview_grid_iconwidth"
                         android:layout_height="@dimen/simlpeview_grid_iconheight"
+                        android:contentDescription="@string/txt_altitude"
                         android:src="@drawable/altitude"
                         />
 
@@ -182,6 +187,7 @@
                         android:src="@drawable/duration"
                         android:layout_column="0"
                         android:layout_row="2"
+                        android:contentDescription="@string/txt_travel_duration"
                         />
 
                     <TextView
@@ -205,6 +211,7 @@
                         android:src="@drawable/uparrow"
                         android:layout_column="2"
                         android:layout_row="1"
+                        android:contentDescription="@string/txt_direction"
                         />
 
                     <TextView
@@ -227,6 +234,7 @@
                         android:src="@drawable/speed"
                         android:layout_column="2"
                         android:layout_row="2"
+                        android:contentDescription="@string/txt_speed"
                         />
 
                     <TextView
@@ -250,6 +258,7 @@
                         android:src="@drawable/distance"
                         android:layout_column="0"
                         android:layout_row="3"
+                        android:contentDescription="@string/txt_travel_distance"
                         />
 
                     <TextView
@@ -272,6 +281,7 @@
                         android:src="@drawable/points"
                         android:layout_column="2"
                         android:layout_row="3"
+                        android:contentDescription="@string/txt_number_of_points"
                         />
 
                     <TextView
