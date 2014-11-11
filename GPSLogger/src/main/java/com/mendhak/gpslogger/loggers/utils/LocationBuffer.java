@@ -2,6 +2,7 @@ package com.mendhak.gpslogger.loggers.utils;
 
 import android.location.Location;
 
+import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -60,4 +61,9 @@ public class LocationBuffer {
     public void push(long time_ms, double lat, double lon, int alt, int bearing, int speed){
         loc_buffer.add(new BufferedLocation(time_ms, lat, lon, alt, bearing, speed));
     }
+
+    public boolean remove(BufferedLocation b) {
+        return loc_buffer.remove(b);
+    }
+
 }
