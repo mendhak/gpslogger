@@ -73,7 +73,6 @@ public class OpenGTSLogger extends AbstractLiveLogger
         OpenGTSClient openGTSClient = new OpenGTSClient(server, port, path, al, null);
         uploadFinished=false;
         openGTSClient.sendHTTP(deviceId, bloc.toLocation() );
-        SetLatestTimeStamp(System.currentTimeMillis());
         while (!uploadFinished){
             try {
                 Thread.sleep(10);
