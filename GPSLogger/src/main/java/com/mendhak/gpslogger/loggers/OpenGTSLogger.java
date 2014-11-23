@@ -72,10 +72,12 @@ public class OpenGTSLogger extends AbstractLiveLogger
         String deviceId = AppSettings.getOpenGTSDeviceId();
         OpenGTSClient openGTSClient = new OpenGTSClient(server, port, path, al, null);
         uploadFinished=false;
+        uploadOK=false;
+        startUploadTimer();
         openGTSClient.sendHTTP(deviceId, bloc.toLocation() );
-        while (!uploadFinished){
+        while ( (!uploadFinished) && (!isTimedOutUpload()) ) {
             try {
-                Thread.sleep(10);
+                Thread.sleep(sleepTimeUpload);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

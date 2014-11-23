@@ -106,11 +106,12 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
         if (!login_ok){
             return true;
         }
-
+        lastSendingOK=false;
+        startUploadTimer();
         RequestHandle rh = sendLocationPacket(b);
-        while (!rh.isFinished()){
+        while( (!rh.isFinished()) && (!isTimedOutUpload()) ) {
             try {
-                Thread.sleep(10);
+                Thread.sleep(sleepTimeUpload);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

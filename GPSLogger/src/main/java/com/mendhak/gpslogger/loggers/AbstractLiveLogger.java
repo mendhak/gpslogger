@@ -13,6 +13,9 @@ import java.io.IOException;
 
 public abstract class AbstractLiveLogger extends AbstractLogger {
     protected final LocationBuffer loc_buffer = new LocationBuffer();
+    protected final static long maxWaitUpload = 10000; // Upload will be failed if longs more than maxWaitUpload millisecsec
+    protected long timeStartUpload;
+    protected final static int sleepTimeUpload = 100;  // Time to sleep for upload thread waiting for upload (one cycle)
 
     private Runnable flusher;
 // **** Handler removed by Peter 01/11/2014 - replaced by execAsyncFlush() call in Write method
@@ -149,5 +152,15 @@ public abstract class AbstractLiveLogger extends AbstractLogger {
 //        }
 // *** Added by Peter 01/11/2014 ***
         execAsyncFlush();
+    }
+
+    protected void startUploadTimer() {
+        timeStartUpload=System.currentTimeMillis();
+    }
+
+    protected boolean isTimedOutUpload() {
+        long timeCurrent=System.currentTimeMillis();
+        if( (timeCurrent-timeStartUpload)> maxWaitUpload ) return true;
+            else return false;
     }
 }
