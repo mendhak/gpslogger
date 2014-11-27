@@ -16,9 +16,9 @@ public class LocationBuffer {
         public final double lon;
         public final int altitude;
         public final int bearing;
-        public final int speed;
+        public final float speed;
 
-        public BufferedLocation(long time_ms, double lat, double lon, int alt, int bearing, int speed){
+        public BufferedLocation(long time_ms, double lat, double lon, int alt, int bearing, float speed){
             timems = time_ms;
             this.lat = lat;
             this.lon = lon;
@@ -58,7 +58,7 @@ public class LocationBuffer {
         loc_buffer.add(b);
     }
 
-    public void push(long time_ms, double lat, double lon, int alt, int bearing, int speed){
+    public void push(long time_ms, double lat, double lon, int alt, int bearing, float speed){
         loc_buffer.add(new BufferedLocation(time_ms, lat, lon, alt, bearing, speed));
     }
 

@@ -140,8 +140,7 @@ public abstract class AbstractLiveLogger extends AbstractLogger {
                 loc.getLatitude(), loc.getLongitude(),
                 (int)loc.getAltitude(),
                 (int)loc.getBearing(),
-//                (int)(loc.getSpeed() / 3.6)  **** TODO: need to add a parameter to define speed units for every logger ***
-                (int)(loc.getSpeed())
+                loc.getSpeed()
         );
         Utilities.LogDebug(name  + " pushed (" + loc_buffer.size() + ")");
 

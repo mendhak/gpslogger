@@ -250,7 +250,7 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
         params.put("lat", Float.toString((float)bloc.lat));
         params.put("lon", Float.toString((float)bloc.lon));
         params.put("alt", Integer.toString(bloc.altitude));
-        params.put("sog", Integer.toString(bloc.speed));
+        params.put("sog", Float.toString(bloc.speed/(float)3.6));   // Convert to m/s before sending
         params.put("cog", Integer.toString(bloc.bearing));
         params.put("tm", Integer.toString((int)(bloc.timems/1000)));
 

@@ -204,7 +204,7 @@ public class SkyLinesLogger extends AbstractLiveLogger
                 b.lat, b.lon,
                 b.altitude,
                 b.bearing,
-                b.speed);
+                (int)b.speed);
         return true;
     }
 
