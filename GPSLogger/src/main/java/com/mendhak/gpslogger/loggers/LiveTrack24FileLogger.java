@@ -146,6 +146,8 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
         trackURL = url.toString();
         url = new URL(serverURL + "/client.php");
         clientURL = url.toString();
+        Utilities.LogDebug("trackURL: "+trackURL);
+        Utilities.LogDebug("clientURL: "+clientURL);
 
         this.userName = username;
         this.password = password;
@@ -203,13 +205,13 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
     private AsyncHttpResponseHandler locationPacketHandler = new TextHttpResponseHandler() {
         @Override
         public void onSuccess(int statusCode, org.apache.http.Header[] headers, String message){
-            Utilities.LogDebug("packet sent ok:" + message);
+            Utilities.LogDebug("livetrack24: packet sent ok:" + message);
             lastSendingOK = true;
         }
 
         @Override
         public void onFailure(String response, Throwable e){
-            Utilities.LogDebug("packet NOT sent:" + response);
+            Utilities.LogDebug("livetrack24: packet NOT sent:" + response);
             lastSendingOK = false;
         }
     };
@@ -229,7 +231,7 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
         nparams.put("leolive", Integer.toString(packetType));
         nparams.put("sid", sessionId);
         nparams.put("pid", Integer.toString(packetNum));
-        Utilities.LogDebug("URL: " + nparams.toString());
+        Utilities.LogDebug("livetrack24: URL: "+trackURL+" nparams: " + nparams.toString());
         packetNum++;
 
         if (async){
@@ -323,7 +325,7 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
 
         @Override
         public void onFailure(String response, Throwable e) {
-            Utilities.LogDebug("livetrack24: login resp failed");
+            Utilities.LogDebug("livetrack24: login response failed");
             delayedDoLogin(1000);
         }
     }
