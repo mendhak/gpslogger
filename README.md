@@ -9,7 +9,7 @@ GPSLogger is an Android app that logs GPS information to GPX, KML or text files 
 
 You can [download it from Google Play](https://play.google.com/store/apps/details?id=com.mendhak.gpslogger).
 
-You can download the APK directly [here](https://sourceforge.net/projects/gfadownload/files/)
+You can download the APK directly [from the releases](https://github.com/mendhak/gpslogger/releases). The oldest Android 2.x release is [here](https://github.com/mendhak/gpslogger/releases/tag/v43).
 
 ## Contribute
 
