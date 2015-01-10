@@ -60,6 +60,9 @@ public class GeneralSettingsActivity extends PreferenceActivity implements Prefe
         Preference enableDisablePref = findPreference("enableDisableGps");
         enableDisablePref.setOnPreferenceClickListener(this);
 
+        Preference gpsvisualizerPref = findPreference("gpsvisualizer_link");
+        gpsvisualizerPref.setOnPreferenceClickListener(this);
+
         Preference aboutInfo = findPreference("about_version_info");
         try {
 
@@ -89,6 +92,13 @@ public class GeneralSettingsActivity extends PreferenceActivity implements Prefe
 
         if (preference.getKey().equals("enableDisableGps")) {
             startActivity(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"));
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase("gpsvisualizer_link")){
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("market://details?id=com.mendhak.gpsvisualizer"));
+            startActivity(intent);
             return true;
         }
 

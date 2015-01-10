@@ -26,5 +26,12 @@
 
     <Preference android:key="about_version_info"></Preference>
 
+    <Preference
+
+        android:key="gpsvisualizer_link"
+        android:title="@string/pref_gpsvisualizer"
+        android:summary=""
+        android:icon="@drawable/gpsvisualizer"
+        />
 
 </PreferenceScreen>
