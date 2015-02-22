@@ -201,7 +201,9 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
         if (preference.getKey().equals("new_file_creation")) {
 
             Preference prefFileStaticName = (Preference) findPreference("new_file_custom_name");
+            Preference prefAskEachTime = (Preference)findPreference("new_file_custom_each_time");
             Preference prefSerialPrefix = (Preference) findPreference("new_file_prefix_serial");
+            prefAskEachTime.setEnabled(newValue.equals("custom"));
             prefFileStaticName.setEnabled(newValue.equals("custom"));
             prefSerialPrefix.setEnabled(!newValue.equals("custom"));
 
@@ -216,9 +218,11 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         Preference prefFileStaticName = (Preference) findPreference("new_file_custom_name");
+        Preference prefAskEachTime = (Preference)findPreference("new_file_custom_each_time");
         Preference prefSerialPrefix = (Preference) findPreference("new_file_prefix_serial");
 
         prefFileStaticName.setEnabled(prefs.getString("new_file_creation", "onceaday").equals("custom"));
+        prefAskEachTime.setEnabled(prefs.getString("new_file_creation", "onceaday").equals("custom"));
         prefSerialPrefix.setEnabled(!prefs.getString("new_file_creation", "onceaday").equals("custom"));
     }
 }

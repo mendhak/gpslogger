@@ -1023,7 +1023,52 @@ public class GpsMainActivity extends Activity
     @Override
     public void onRequestStartLogging() {
         tracer.info(".");
-        StartLogging();
+
+
+
+        if(AppSettings.isCustomFile()  && AppSettings.shouldAskCustomFileNameEachTime()){
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+
+            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            final EditText input = new EditText(this);
+            input.setText(AppSettings.getCustomFileName());
+            alert.setView(input);
+
+            alert.setTitle(R.string.new_file_custom_title)
+                    .setMessage(R.string.new_file_custom_message)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            String chosenFileName = AppSettings.getCustomFileName();
+
+                            if(!Utilities.IsNullOrEmpty(input.getText().toString()) && !input.getText().toString().equalsIgnoreCase(chosenFileName)){
+                                chosenFileName = input.getText().toString();
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString("new_file_custom_name", chosenFileName);
+                                editor.commit();
+                            }
+
+                            StartLogging();
+                        }
+                    })
+                    .setOnKeyListener(new DialogInterface.OnKeyListener() {
+                        @Override
+                        public boolean onKey(DialogInterface dialogInterface, int keycode, KeyEvent keyEvent) {
+                            if (keycode == KeyEvent.KEYCODE_BACK) {
+                                StartLogging();
+                                dialogInterface.dismiss();
+                            }
+                            return true;
+                        }
+                    });
+
+            alert.show();
+        }
+        else {
+            StartLogging();
+        }
+
     }
 
     @Override

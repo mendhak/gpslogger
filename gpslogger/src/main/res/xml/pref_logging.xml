@@ -63,6 +63,11 @@
             android:defaultValue="gpslogger"
             />
         <CheckBoxPreference
+            android:key="new_file_custom_each_time"
+            android:title="@string/new_file_custom_each_time_title"
+            android:summary="@string/new_file_custom_each_time_summary"
+            android:defaultValue="true"></CheckBoxPreference>
+        <CheckBoxPreference
             android:key="new_file_prefix_serial"
             android:title="@string/new_file_prefix_serial_title"
             android:summary="@string/new_file_prefix_serial_summary"

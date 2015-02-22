@@ -75,6 +75,7 @@ public class AppSettings extends Application {
 
     private static String customFileName;
     private static boolean isCustomFile;
+    private static boolean askCustomFileNameEachTime;
 
     private static String gpsLoggerFolder;
 
@@ -509,6 +510,10 @@ public class AppSettings extends Application {
     public static void setCustomFile(boolean customFile) {
         AppSettings.isCustomFile = customFile;
     }
+
+    public static boolean shouldAskCustomFileNameEachTime() { return askCustomFileNameEachTime; }
+
+    public static void setAskCustomFileNameEachTime(boolean askEachTime) { AppSettings.askCustomFileNameEachTime = askEachTime; }
 
     public static boolean shouldLogToCustomUrl() {
         return logToCustomUrl;

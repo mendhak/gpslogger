@@ -219,6 +219,7 @@ public class Utilities {
         } else if (AppSettings.getNewFileCreation().equals("custom") || AppSettings.getNewFileCreation().equals("static")) {
             AppSettings.setCustomFile(true);
             AppSettings.setCustomFileName(prefs.getString("new_file_custom_name", "gpslogger"));
+            AppSettings.setAskCustomFileNameEachTime(prefs.getBoolean("new_file_custom_each_time", true));
         } else /* new log with each start */ {
             AppSettings.setNewFileOnceADay(false);
             AppSettings.setCustomFile(false);
