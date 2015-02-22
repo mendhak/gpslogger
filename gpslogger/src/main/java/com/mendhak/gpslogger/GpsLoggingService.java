@@ -455,6 +455,17 @@ public class GpsLoggingService extends Service implements IActionListener {
      */
     private void ShowNotification() {
         tracer.debug("GpsLoggingService.ShowNotification");
+
+        Intent stopLoggingIntent = new Intent(this, GpsLoggingService.class);
+        stopLoggingIntent.setAction("NotificationButton_STOP");
+        stopLoggingIntent.putExtra("immediatestop", true);
+        PendingIntent piStop = PendingIntent.getService(this, 0, stopLoggingIntent, 0);
+
+        Intent annotateIntent = new Intent(this, NotificationAnnotationActivity.class);
+        annotateIntent.setAction("com.mendhak.gpslogger.NOTIFICATION_BUTTON");
+        annotateIntent.putExtra("setnextpointdescription", "This is from the notification...");
+        PendingIntent piAnnotate = PendingIntent.getActivity(this,0, annotateIntent,0);
+
         // What happens when the notification item is clicked
         Intent contentIntent = new Intent(this, GpsMainActivity.class);
 
@@ -481,7 +492,10 @@ public class GpsLoggingService extends Service implements IActionListener {
                     .setSmallIcon(R.drawable.gpsloggericon2)
                     .setContentTitle(getString(R.string.gpslogger_still_running))
                     .setOngoing(true)
-                    .setContentIntent(pending);
+                    .setContentIntent(pending)
+                    .addAction(R.drawable.annotate2, "Annotate", piAnnotate)
+                    .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Stop", piStop);
+
         }
 
         nfc.setContentText(contentText);
@@ -909,6 +923,7 @@ public class GpsLoggingService extends Service implements IActionListener {
             try {
                 logger.Write(loc);
                 if (Session.hasDescription()) {
+                    tracer.debug("Setting annotation: " + Session.getDescription());
                     logger.Annotate(Session.getDescription(), loc);
                     atLeastOneAnnotationSuccess = true;
                 }
