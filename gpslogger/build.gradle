@@ -4,7 +4,7 @@ buildscript {
     }
     dependencies {
         //When releasing APK:
-        classpath 'com.android.tools.build:gradle:0.14.2'
+        classpath 'com.android.tools.build:gradle:1.0.0'
         //When developing:
         //classpath 'com.android.tools.build:gradle:0.10.+'
     }
@@ -27,13 +27,13 @@ android {
 
         //This allows us to run Robotium and Unit tests separately using
         //connectedAndroidTest -PtestSize=small
-        testPackageName "com.mendhak.gpslogger.test"
+        testApplicationId "com.mendhak.gpslogger.test"
         testInstrumentationRunner getInstrumentationTestRunner();
     }
 
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
