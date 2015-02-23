@@ -154,6 +154,7 @@
   <string name="autoemail_autosend">Aktivera e-postmeddelanden</string>
   <string name="autoemail_autosend_summary">Låter loggfilen skickas till valfri e-postadress.</string>
   <string name="autoemail_target">Mottagaradresser</string>
+  <string name="autosend_frequency_display">Efter %s minuter</string>
   <string name="autoemail_frequency_whenistop">När jag trycker stopp</string>
   <string name="autoemail_smtp_category">Epost-inställningar</string>
   <string name="autoemail_username">Användarnamn</string>
@@ -346,4 +347,9 @@
   <string name="txt_longitude_short">Lon</string>
   <string name="log_nmea_title">Logga till NMEA</string>
   <string name="log_nmea_summary">Skapar en oredigerad NMEA-fil under tiden en fixering erhålls. Denna fil växer väldigt fort. Fungerar endast då GPS används.</string>
+  <string name="autoopengts_accountname">Kontonamn</string>
+  <string name="listeners_gps">GPS</string>
+  <string name="listeners_cell">Nätverk</string>
+  <string name="listeners_passive">Passiv</string>
+  <string name="autosend_frequency_hint">Antal minuter</string>
 </resources>

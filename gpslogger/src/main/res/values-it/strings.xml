@@ -150,6 +150,7 @@
   <string name="autoemail_autosend">Abilita Email</string>
   <string name="autoemail_autosend_summary">Abilita l\'invio dei file ad un indirizzo Email a tua scelta.</string>
   <string name="autoemail_target">Indirizzi Email di destinazione</string>
+  <string name="autosend_frequency_display">Dopo %s minuti</string>
   <string name="autoemail_frequency_whenistop">Ad ogni registrazione</string>
   <string name="autoemail_smtp_category">Impostazioni Email</string>
   <string name="autoemail_username">Utente</string>
@@ -233,6 +234,7 @@
   <string name="autoemail_sendto_csv">Indirizzi Email separati da una virgola</string>
   <string name="autosend_enabled">Permetti invio automatico</string>
   <string name="autosend_enabled_summary">Permetti invio dei files a diversi destinatari</string>
+  <string name="autosend_frequency_summary">Con quanta frequenza devono essere inviati i file di log, in minuti. Imposta su 0 per disabilitare questa opzione.</string>
   <string name="autosend_frequency">Quanto spesso ?</string>
   <string name="autosend_sendzip_title">Invia file ZIP</string>
   <string name="autosend_sendzip_summary">Invia file ZIP (se possibile). Disabilita per inviare files singoli</string>
@@ -344,4 +346,5 @@
   <string name="listeners_passive">Passivo</string>
   <string name="listeners_summary">Quali fornitori di posizione usare se disponibili; GPS da satellite, rete cellulare/wifi, Passivo è un fornitore speciale che intercetta le richieste di posizione dalla altre applicazioni.</string>
   <string name="listeners_title">Fornitori di posizione</string>
+  <string name="autosend_frequency_hint">Numero di minuti</string>
 </resources>

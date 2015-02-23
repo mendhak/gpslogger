@@ -126,6 +126,7 @@
   <string name="keep_fix_summary">Attention, cela va réduire considérablement la vie de la batterie. Utiliser uniquement pour
 une plus grande précision à basses fréquences.</string>
   <string name="keep_fix_title">Gardez le GPS allumé entre les différents enregistrements de positions</string>
+  <string name="retry_time_title">Intervalle de réessai pour le filtre de précision</string>
   <string name="retry_time_dialog_title">Temps en secondes</string>
   <string name="retry_time_hint">Entrer les secondes (max. 9999)</string>
   <string name="distance_before_logging_title">Distance avant l\'enregistrement</string>
@@ -144,6 +145,7 @@ une plus grande précision à basses fréquences.</string>
   <string name="autoemail_autosend">Activer les courriels</string>
   <string name="autoemail_autosend_summary">Permet d\'envoyer le fichier enregistrements à une adresse email de votre choix.</string>
   <string name="autoemail_target">Adresses de courriel ciblées</string>
+  <string name="autosend_frequency_display">Après %s minutes</string>
   <string name="autoemail_frequency_whenistop">Lorsque j\'appuie sur arrêt</string>
   <string name="autoemail_smtp_category">Paramètres de courriel</string>
   <string name="autoemail_username">Nom d\'utilisateur</string>
@@ -289,11 +291,13 @@ une plus grande précision à basses fréquences.</string>
   <string name="gpsf_missing_description">Vous aurez besoin de Google Play Services Framework pour utiliser cette fonction.</string>
   <string name="pref_loggingto_title">Connectez-vous...</string>
   <string name="pref_loggingto_summary">Fichiers et répertoires où sauvegarder votre location</string>
+  <string name="log_customurl_summary">Envoyer les informations de journalisation sur un serveur tier via HTTP</string>
   <string name="log_customurl_urlparameters">Paramètres d\'URL</string>
   <string name="log_customUrl_urllatitude">Latitude: %LAT</string>
   <string name="txt_annotation">Annotation :</string>
   <string name="txt_provider">Fournisseur :</string>
   <string name="filedialog_location">Localisation</string>
+  <string name="filedialog_cantreadfolder">Le dossier ne peut être lu</string>
   <string name="filedialog_new">Nouveau</string>
   <string name="filedialog_name">Nom du dossier :</string>
   <string name="filedialog_create">Enregistrer</string>
@@ -301,6 +305,7 @@ une plus grande précision à basses fréquences.</string>
   <string name="filedialog_no_data">Aucune donnée</string>
   <string name="gpslogger_folder_title">Enregistrer dans le dossier</string>
   <string name="autoftp_directory">Répertoire</string>
+  <string name="new_file_custom_message">Vous pouvez utiliser %SER pour le numéro de serie du périphérique, %YEAR pour l\'année, %MONTH pour le mois, %DAY pour la journée, %HOUR pour l\'heure, % MIN pour la minute</string>
   <string name="new_file_prefix_serial_title">Préfixer le numéro de série au nom de fichier</string>
   <string name="txt_travel_duration">Durée :</string>
   <string name="view_simple">Vue simple</string>
@@ -315,7 +320,13 @@ une plus grande précision à basses fréquences.</string>
   <string name="save">Enregistrer</string>
   <string name="values_saved">Valeurs enregistrées</string>
   <string name="pref_filedetails_title">Détails des dossiers et fichiers</string>
+  <string name="absolute_timeout_title">Délai d\'expiration absolu</string>
   <string name="txt_latitude_short">Lat</string>
   <string name="txt_longitude_short">Lon</string>
   <string name="log_nmea_summary">Crée un fichier NMEA durant la recherche d\'un signal. Ce fichier grossit très rapidement. Ne fonctionne que si le GPS est utilisé.</string>
+  <string name="listeners_gps">GPS</string>
+  <string name="listeners_cell">Réseau</string>
+  <string name="listeners_passive">Passif</string>
+  <string name="listeners_summary">Quels fournisseurs d\'emplacement à utiliser lorsqu\'ils sont disponibles ; GPS pour les satellites, réseau pour la tour cellulaire/wifi, passif est un fournisseur spécial qui écoute les emplacements demandés provenant d\'autres applications.</string>
+  <string name="autosend_frequency_hint">Nombre de minutes</string>
 </resources>

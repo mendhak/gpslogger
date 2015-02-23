@@ -164,6 +164,7 @@ zaznamenanie všetkých bodov zadajte hodnotu 0.
   <string name="autoemail_autosend">Povoliť e-maily</string>
   <string name="autoemail_autosend_summary">Umožňuje posielanie súboru denníka na e-mailovú adresu podľa vášho výberu.     </string>
   <string name="autoemail_target">Cieľové e-mailové adresy</string>
+  <string name="autosend_frequency_display">Po %s minútach</string>
   <string name="autoemail_frequency_whenistop">Pri stlačení tlačidla STOP</string>
   <string name="autoemail_smtp_category">Nastavenia e-mailu</string>
   <string name="autoemail_username">Meno používateľa</string>
@@ -260,6 +261,7 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
   <string name="autoemail_sendto_csv">E-mailové adresy oddelené čiarkou</string>
   <string name="autosend_enabled">Povoliť automatické odosielanie</string>
   <string name="autosend_enabled_summary">Umožňuje posielať súbory rôznym adresátom</string>
+  <string name="autosend_frequency_summary">Ako často (v minútach) by sa mal odosielať záznam. Zadaním hodnoty 0 dôjde k zablokovaniu.</string>
   <string name="autosend_frequency">Ako často?</string>
   <string name="autosend_sendzip_title">Odoslať súbor ZIP</string>
   <string name="autosend_sendzip_summary">Odoslať súbor ZIP ak je to možné. Vypnite pre odoslanie jednotlivých súborov, alebo ak táto funkcia nefunguje
@@ -369,4 +371,11 @@ polia.
   <string name="txt_longitude_short">Zem. dĺž.</string>
   <string name="log_nmea_title">Zaznamenávať do NMEA</string>
   <string name="log_nmea_summary">Počas pokusu o získanie korekcie sa vytvorí súbor NMEA. Tento súbor sa veľmi rýchlo zväčšuje. Nastavenie funguje iba pri používaním GPS.</string>
+  <string name="autoopengts_accountname">Názov účtu</string>
+  <string name="listeners_gps">GPS</string>
+  <string name="listeners_cell">Sieť</string>
+  <string name="listeners_passive">Pasívni</string>
+  <string name="listeners_summary">Určuje, ktorí poskytovatelia lokalizačných údajov sa majú použiť, ak sú dostupní; GPS pre satelity, Sieť pre wifi/celulárne vysielače, Pasívni (špeciálni poskytovatelia ktorí prijímajú lokalizačné údaje požadované inými aplikáciami).</string>
+  <string name="listeners_title">Poskytovatelia lokalizácie</string>
+  <string name="autosend_frequency_hint">Počet minút</string>
 </resources>

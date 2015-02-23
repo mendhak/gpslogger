@@ -152,6 +152,7 @@
   <string name="autoemail_autosend">E-mails inschakelen</string>
   <string name="autoemail_autosend_summary">Hiermee kunt het logbestand verzenden naar een e-mailadres van uw keuze.     </string>
   <string name="autoemail_target">Doel e-mailadressen</string>
+  <string name="autosend_frequency_display">Na %s minuten</string>
   <string name="autoemail_frequency_whenistop">Wanneer ik op stop druk</string>
   <string name="autoemail_smtp_category">E-mailinstellingen</string>
   <string name="autoemail_username">Gebruikersnaam</string>
@@ -346,4 +347,5 @@
   <string name="listeners_passive">Passief</string>
   <string name="listeners_summary">Welke providers gebruikt Worden Als ,ze beshikbaar zijn. GPS voor satelieten, netwerk voor cell toren/WiFi, passief is een provider die localizeringsaanvragen van andere toepassingen onderschept.</string>
   <string name="listeners_title">Localisering providers</string>
+  <string name="autosend_frequency_hint">Aantal minuten</string>
 </resources>

@@ -117,8 +117,9 @@
   <string name="new_file_custom_summary">Sie können Ihren eigenen Dateinamen verwenden. Fügen Sie optional ein paar dynamische Parameter wie Seriennummer, Jahr, Stunde, Minute, etc. ein. Sehr dynamische Dateinamen funktionieren möglicherweise nicht gut mit automatisch sendenden Funktionen, da diese nur die aktuellste Datei senden.</string>
   <string name="pref_performance_title">Leistung</string>
   <string name="prefer_celltower_title">Bevorzugte Funkzelle</string>
+  <string name="prefer_celltower_summary">Mobilfunknetz trotz aktiviertem GPS benutzen. Ungenauer, spart jedoch Akkuleistung.</string>
   <string name="time_before_logging_title">Zeit vor dem Loggen</string>
-  <string name="time_before_logging_summary">Verwende 0 als Maximalfrequenz für höchste Präzision, eine langsamere Aufzeichnung der Punkte ist allerdings besser für den Akku.</string>
+  <string name="time_before_logging_summary">Verwende 0 als Maximalfrequenz für höchste Präzision. Eine langsamere Aufzeichnung der Punkte schont den Akku.</string>
   <string name="time_before_logging_dialog_title">Zeit in Sekunden</string>
   <string name="time_before_logging_hint">Eingabe in Sekunden (max. 9999)</string>
   <string name="keep_fix_summary">Vorsicht, dies senkt die Betriebszeit des Akkus erheblich. Nur für hohe Präzision bei niedrigen Frequenzen verwenden.</string>
@@ -225,6 +226,7 @@
   <string name="autoemail_sendto_csv">Kommaseparierte E-Mail-Adressen</string>
   <string name="autosend_enabled">Erlaube automatisches Senden</string>
   <string name="autosend_enabled_summary">Erlaube das Senden der Dateien zu verschiedenen Zielen</string>
+  <string name="autosend_frequency_summary">Wie häufig Dateien gesendet werden sollen in Minuten. Setze 0 um Funktion zu deaktivieren.</string>
   <string name="autosend_frequency">Wie oft?</string>
   <string name="autosend_sendzip_title">Sende Zip-Datei</string>
   <string name="autosend_sendzip_summary">Sende Zip-Datei wo anwendbar. Deaktiviere diese Option, um einzelne Dateien zu senden oder wenn die Zip-Option bei dir nicht funktioniert.</string>
@@ -316,4 +318,7 @@
   <string name="save">Speichern</string>
   <string name="values_saved">Werte gespeichert</string>
   <string name="pref_filedetails_title">Datei und Ordner Informationen</string>
+  <string name="log_nmea_title">Logge zu NMEA</string>
+  <string name="autoopengts_accountname">Benutzername</string>
+  <string name="listeners_gps">GPS</string>
 </resources>
