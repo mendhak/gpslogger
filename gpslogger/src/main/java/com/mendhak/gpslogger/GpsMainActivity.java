@@ -1063,7 +1063,9 @@ public class GpsMainActivity extends Activity
                         }
                     });
 
-            alert.show();
+            AlertDialog alertDialog = alert.create();
+            alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            alertDialog.show();
         }
         else {
             StartLogging();
