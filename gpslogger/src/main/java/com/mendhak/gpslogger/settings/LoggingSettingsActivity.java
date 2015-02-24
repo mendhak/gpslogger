@@ -31,7 +31,7 @@ import android.view.MenuItem;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.FileDialog.FileDialog;
+import com.mendhak.gpslogger.common.FileDialog.FolderSelectorDialog;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +49,12 @@ import java.io.File;
  * API Guide</a> for more information on developing a Settings UI.
  */
 @SuppressWarnings("deprecation")
-public class LoggingSettingsActivity extends PreferenceActivity implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
+public class LoggingSettingsActivity extends PreferenceActivity
+        implements
+        Preference.OnPreferenceClickListener,
+        Preference.OnPreferenceChangeListener,
+        FolderSelectorDialog.FolderSelectCallback
+{
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(LoggingSettingsActivity.class.getSimpleName());
     SharedPreferences prefs;
@@ -142,12 +147,7 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
     public boolean onPreferenceClick(Preference preference) {
 
         if (preference.getKey().equals("gpslogger_folder")) {
-            Intent intent = new Intent(getBaseContext(), FileDialog.class);
-            intent.putExtra(FileDialog.START_PATH, prefs.getString("gpslogger_folder",
-                    Utilities.GetDefaultStorageFolder(getApplicationContext()).getAbsolutePath()));
-
-            intent.putExtra(FileDialog.CAN_SELECT_DIR, true);
-            startActivityForResult(intent, SELECT_FOLDER_DIALOG);
+            new FolderSelectorDialog().show(LoggingSettingsActivity.this);
             return true;
         }
 
@@ -163,37 +163,6 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
         return false;
     }
 
-    public synchronized void onActivityResult(final int requestCode, int resultCode, final Intent data) {
-
-        if (requestCode == SELECT_FOLDER_DIALOG) {
-            if (resultCode == Activity.RESULT_OK) {
-                String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
-                File chosenFile = new File(filePath);
-                if(!chosenFile.isDirectory()) {
-                    filePath = chosenFile.getParent();
-                }
-                tracer.debug("Folder path selected" + filePath);
-
-                if(!chosenFile.canWrite()){
-                    Utilities.MsgBox(getString(R.string.sorry), getString(R.string.pref_logging_file_no_permissions), LoggingSettingsActivity.this);
-                    return;
-                }
-
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("gpslogger_folder", filePath);
-                editor.commit();
-
-                Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
-                gpsloggerFolder.setSummary(filePath);
-
-
-
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-                tracer.debug("No file selected");
-            }
-        }
-    }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -224,5 +193,28 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
         prefFileStaticName.setEnabled(prefs.getString("new_file_creation", "onceaday").equals("custom"));
         prefAskEachTime.setEnabled(prefs.getString("new_file_creation", "onceaday").equals("custom"));
         prefSerialPrefix.setEnabled(!prefs.getString("new_file_creation", "onceaday").equals("custom"));
+    }
+
+    @Override
+    public void onFolderSelection(File folder) {
+        String filePath = folder.getPath();
+
+        if(!folder.isDirectory()) {
+            filePath = folder.getParent();
+        }
+        tracer.debug("Folder path selected" + filePath);
+
+        if(!folder.canWrite()){
+            Utilities.MsgBox(getString(R.string.sorry), getString(R.string.pref_logging_file_no_permissions), LoggingSettingsActivity.this);
+            return;
+        }
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("gpslogger_folder", filePath);
+        editor.commit();
+
+        Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
+        gpsloggerFolder.setSummary(filePath);
     }
 }
