@@ -478,5 +478,7 @@
     <string name="pref_gpsvisualizer">Visualize GPS log stats and graphs</string>
     <string name="new_file_custom_each_time_title">Ask for a file name on every start</string>
     <string name="new_file_custom_each_time_summary">Prompt for a custom file name each time the logging is started</string>
+    <string name="donate_app">Donate (app)</string>
+    <string name="donate_bitcoin">Donate (Bitcoin)</string>
 
 </resources>

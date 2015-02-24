@@ -24,14 +24,33 @@
         android:key="debugtofile"
         android:defaultValue="false"/>
 
+
     <Preference android:key="about_version_info"></Preference>
 
     <Preference
-
         android:key="gpsvisualizer_link"
         android:title="@string/pref_gpsvisualizer"
         android:summary=""
         android:icon="@drawable/gpsvisualizer"
         />
+
+
+    <Preference
+        android:key="gpsloggerdonate_link"
+        android:title="@string/donate_app"
+        android:icon="@drawable/gpsloggericon2" >
+        <intent android:action="android.intent.action.VIEW"
+                android:data="market://details?id=com.mendhak.gpsloggerpro" />
+        </Preference>
+
+
+    <Preference
+        android:key="bitcoindonate_link"
+        android:title="@string/donate_bitcoin"
+        android:icon="@drawable/bitcoin" >
+        <intent android:action="android.intent.action.VIEW"
+                android:data="bitcoin:1ArYCJf8pvwELiCSGerih5NQrczLJQdJpY"/>
+        </Preference>
+
 
 </PreferenceScreen>
