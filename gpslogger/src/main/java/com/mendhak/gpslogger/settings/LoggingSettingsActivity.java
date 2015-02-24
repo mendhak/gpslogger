@@ -23,12 +23,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.view.MenuItem;
+import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.FileDialog.FileDialog;
@@ -67,7 +67,7 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
             editor.putString("new_file_creation", "custom");
             editor.commit();
 
-            ListPreference newFileCreation = (ListPreference) findPreference("new_file_creation");
+            MaterialListPreference newFileCreation = (MaterialListPreference) findPreference("new_file_creation");
             if(newFileCreation !=null){
                 newFileCreation.setValue("custom");
             }
@@ -120,7 +120,7 @@ public class LoggingSettingsActivity extends PreferenceActivity implements Prefe
         /**
          * Logging Details - New file creation
          */
-        ListPreference newFilePref = (ListPreference) findPreference("new_file_creation");
+        MaterialListPreference newFilePref = (MaterialListPreference) findPreference("new_file_creation");
         newFilePref.setOnPreferenceChangeListener(this);
         /* Trigger artificially the listener and perform validations. */
         newFilePref.getOnPreferenceChangeListener()

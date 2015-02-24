@@ -22,8 +22,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
-import android.preference.ListPreference;
+
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -31,6 +30,8 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
+import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
@@ -57,11 +58,11 @@ public class AutoEmailActivity extends PreferenceActivity implements
 
         chkEnabled.setOnPreferenceChangeListener(this);
 
-        ListPreference lstPresets = (ListPreference) findPreference("autoemail_preset");
+        MaterialListPreference lstPresets = (MaterialListPreference) findPreference("autoemail_preset");
         lstPresets.setOnPreferenceChangeListener(this);
 
-        EditTextPreference txtSmtpServer = (EditTextPreference) findPreference("smtp_server");
-        EditTextPreference txtSmtpPort = (EditTextPreference) findPreference("smtp_port");
+        MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
+        MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
         txtSmtpServer.setOnPreferenceChangeListener(this);
         txtSmtpPort.setOnPreferenceChangeListener(this);
 
@@ -99,12 +100,12 @@ public class AutoEmailActivity extends PreferenceActivity implements
                 getString(R.string.please_wait));
 
         CheckBoxPreference chkUseSsl = (CheckBoxPreference) findPreference("smtp_ssl");
-        EditTextPreference txtSmtpServer = (EditTextPreference) findPreference("smtp_server");
-        EditTextPreference txtSmtpPort = (EditTextPreference) findPreference("smtp_port");
-        EditTextPreference txtUsername = (EditTextPreference) findPreference("smtp_username");
-        EditTextPreference txtPassword = (EditTextPreference) findPreference("smtp_password");
-        EditTextPreference txtTarget = (EditTextPreference) findPreference("autoemail_target");
-        EditTextPreference txtFrom = (EditTextPreference) findPreference("smtp_from");
+        MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
+        MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
+        MaterialEditTextPreference txtUsername = (MaterialEditTextPreference) findPreference("smtp_username");
+        MaterialEditTextPreference txtPassword = (MaterialEditTextPreference) findPreference("smtp_password");
+        MaterialEditTextPreference txtTarget = (MaterialEditTextPreference) findPreference("autoemail_target");
+        MaterialEditTextPreference txtFrom = (MaterialEditTextPreference) findPreference("smtp_from");
 
 
         AutoEmailHelper aeh = new AutoEmailHelper(null);
@@ -119,11 +120,11 @@ public class AutoEmailActivity extends PreferenceActivity implements
     private boolean IsFormValid() {
 
         CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoemail_enabled");
-        EditTextPreference txtSmtpServer = (EditTextPreference) findPreference("smtp_server");
-        EditTextPreference txtSmtpPort = (EditTextPreference) findPreference("smtp_port");
-        EditTextPreference txtUsername = (EditTextPreference) findPreference("smtp_username");
-        EditTextPreference txtPassword = (EditTextPreference) findPreference("smtp_password");
-        EditTextPreference txtTarget = (EditTextPreference) findPreference("autoemail_target");
+        MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
+        MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
+        MaterialEditTextPreference txtUsername = (MaterialEditTextPreference) findPreference("smtp_username");
+        MaterialEditTextPreference txtPassword = (MaterialEditTextPreference) findPreference("smtp_password");
+        MaterialEditTextPreference txtTarget = (MaterialEditTextPreference) findPreference("autoemail_target");
 
         return !chkEnabled.isChecked() || txtSmtpServer.getText() != null
                 && txtSmtpServer.getText().length() > 0 && txtSmtpPort.getText() != null
@@ -189,8 +190,8 @@ public class AutoEmailActivity extends PreferenceActivity implements
                 .getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
 
-        EditTextPreference txtSmtpServer = (EditTextPreference) findPreference("smtp_server");
-        EditTextPreference txtSmtpPort = (EditTextPreference) findPreference("smtp_port");
+        MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
+        MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
         CheckBoxPreference chkUseSsl = (CheckBoxPreference) findPreference("smtp_ssl");
 
         // Yahoo

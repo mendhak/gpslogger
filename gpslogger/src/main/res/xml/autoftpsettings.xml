@@ -8,25 +8,25 @@
         android:title="@string/autoftp_enabled" />
 
 
-    <EditTextPreference
+    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="autoftp_server"
             android:title="@string/autoftp_server"
             android:summary="@string/autoftp_server_summary"
             android:dialogTitle="@string/autoftp_server"
             android:hint="@string/autoftp_server_summary"/>
 
-    <EditTextPreference
+    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="autoftp_username"
             android:title="@string/autoftp_username"
             android:dialogTitle="@string/autoftp_username"/>
 
-    <EditTextPreference
+    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="autoftp_password"
             android:title="@string/autoftp_password"
             android:dialogTitle="@string/autoftp_password"
             android:password="true"/>
 
-    <EditTextPreference
+    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="autoftp_directory"
             android:title="@string/autoftp_directory"
             android:dialogTitle="@string/autoftp_directory"
@@ -36,7 +36,7 @@
                 android:summary="@string/autoftp_test_summary" android:key="autoftp_test"/>
 
     <PreferenceCategory android:title="@string/autoftp_advanced_settings">
-        <EditTextPreference
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
                 android:key="autoftp_port"
                 android:title="@string/autoftp_port"
                 android:dialogTitle="@string/autoftp_port"
@@ -49,7 +49,7 @@
                 android:defaultValue="false"
                 android:summary="@string/autoftp_useftps_summary"/>
 
-        <ListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
                 android:key="autoftp_ssltls"
                 android:title="@string/autoftp_ssltls"
                 android:summary="@string/autoftp_ssltls_summary"

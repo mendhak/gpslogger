@@ -6,32 +6,32 @@
                         android:title="@string/autoemail_autosend"
                         android:summary="@string/autoemail_autosend_summary"/>
 
-    <EditTextPreference android:key="autoemail_target"
+    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="autoemail_target"
                         android:title="@string/autoemail_target" android:summary="@string/autoemail_sendto_csv"
                         android:dialogTitle="@string/autoemail_target" android:hint="@string/autoemail_sendto_csv"/>
 
     <PreferenceCategory android:title="@string/autoemail_smtp_category">
-        <ListPreference android:key="autoemail_preset"
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference android:key="autoemail_preset"
                         android:title="@string/autoemail_choosepreset"
                         android:summary="@string/autoemail_choosepreset_summary"
                         android:entries="@array/autoemail_presets" android:defaultValue="0"
                         android:entryValues="@array/autoemail_presetvalues"/>
 
-        <EditTextPreference android:key="smtp_username" android:title="@string/autoemail_username"
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_username" android:title="@string/autoemail_username"
                             android:summary="@string/autoemail_username_summary"
                             android:dialogTitle="@string/autoemail_username"/>
-        <EditTextPreference android:key="smtp_from" android:title="@string/autoemail_from"
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_from" android:title="@string/autoemail_from"
                             android:summary="@string/autoemail_from_summary"
                             android:dialogTitle="@string/autoemail_from" android:defaultValue=""/>
-        <EditTextPreference android:key="smtp_password" android:title="@string/autoemail_password"
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_password" android:title="@string/autoemail_password"
                             android:summary="@string/autoemail_password_summary"
                             android:dialogTitle="@string/autoemail_password"
                             android:password="true"
                 />
-        <EditTextPreference android:key="smtp_server" android:title="@string/autoemail_server"
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_server" android:title="@string/autoemail_server"
                             android:summary="@string/autoemail_server_summary"
                             android:dialogTitle="@string/autoemail_server"/>
-        <EditTextPreference android:key="smtp_port" android:title="@string/autoemail_port"
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_port" android:title="@string/autoemail_port"
                             android:summary="@string/autoemail_port_summary"
                             android:dialogTitle="@string/autoemail_port"/>
         <CheckBoxPreference android:key="smtp_ssl" android:title="@string/autoemail_ssl"

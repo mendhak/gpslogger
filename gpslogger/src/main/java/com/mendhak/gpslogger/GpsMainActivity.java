@@ -19,7 +19,7 @@ package com.mendhak.gpslogger;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
+
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -42,13 +42,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.SpinnerAdapter;
-import android.widget.Toast;
+import android.widget.*;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
@@ -473,21 +468,16 @@ public class GpsMainActivity extends Activity
             return;
         }
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(GpsMainActivity.this);
-        alert.setTitle(R.string.add_description);
-        alert.setMessage(R.string.letters_numbers);
+        MaterialDialog.Builder alert = new MaterialDialog.Builder(GpsMainActivity.this);
+        alert.title(R.string.add_description);
 
-        // Set an EditText view to get user input
-        final EditText input = new EditText(getApplicationContext());
-        input.setTextColor(getResources().getColor(android.R.color.black));
-        input.setBackgroundColor(getResources().getColor(android.R.color.white));
-        input.setText(Session.getDescription());
-        alert.setView(input);
-
-        /* ok */
-        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                final String desc = Utilities.CleanDescription(input.getText().toString());
+        alert.customView(R.layout.alertview);
+        alert.positiveText(R.string.ok);
+        alert.callback(new MaterialDialog.ButtonCallback() {
+            @Override
+            public void onPositive(MaterialDialog dialog) {
+                EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
+                final String desc = Utilities.CleanDescription(userInput.getText().toString());
                 if (desc.length() == 0) {
                     tracer.debug("Clearing annotation");
                     Session.clearDescription();
@@ -502,17 +492,16 @@ public class GpsMainActivity extends Activity
                         LogSinglePoint();
                     }
                 }
-            }
 
-        });
-
-        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // Cancelled.
             }
         });
 
-        AlertDialog alertDialog = alert.create();
+
+        MaterialDialog alertDialog = alert.build();
+        EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
+        userInput.setText(Session.getDescription());
+        TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
+        tvMessage.setText(R.string.letters_numbers);
         alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         alertDialog.show();
     }
@@ -623,53 +612,21 @@ public class GpsMainActivity extends Activity
             final String[] files = fileList.toArray(new String[fileList.size()]);
 
 
-            final ArrayList selectedItems = new ArrayList();  // Where we track the selected items
+            //final ArrayList selectedItems = new ArrayList();  // Where we track the selected items
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            // Set the dialog title
-            builder.setTitle(R.string.osm_pick_file)
-                    // Specify the list array, the items to be selected by default (null for none),
-                    // and the listener through which to receive callbacks when items are selected
-                    .setMultiChoiceItems(files, null,
-                            new DialogInterface.OnMultiChoiceClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which,
-                                                    boolean isChecked) {
-
-
-                                    if (isChecked) {
-
-                                        if (which == 0) {
-                                            //Unselect all others
-                                            ((AlertDialog) dialog).getListView().clearChoices();
-                                            ((AlertDialog) dialog).getListView().setItemChecked(which, isChecked);
-                                            selectedItems.clear();
-                                        } else {
-                                            //Unselect the settings item
-                                            ((AlertDialog) dialog).getListView().setItemChecked(0, false);
-                                            if (selectedItems.contains(0)) {
-                                                selectedItems.remove(selectedItems.indexOf(0));
-                                            }
-                                        }
-
-                                        selectedItems.add(which);
-                                    } else if (selectedItems.contains(which)) {
-                                        // Else, if the item is already in the array, remove it
-                                        selectedItems.remove(Integer.valueOf(which));
-                                    }
-
-                                }
-                            }
-                    )
-                            // Set the action buttons
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
+            builder.title(R.string.osm_pick_file)
+                    .items(files)
+                    .positiveText(R.string.ok)
+                    .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMulti() {
                         @Override
-                        public void onClick(DialogInterface dialog, int id) {
+                        public void onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
 
-                            if (selectedItems.size() > 0 && selectedItems.get(0).equals(0)) {
+                            List<Integer> selectedItems = Arrays.asList(integers);
+
+                            if (selectedItems.size() > 0 && selectedItems.contains(0)) {
                                 startActivity(settingsIntent);
                             } else {
-
 
                                 List<File> chosenFiles = new ArrayList<File>();
 
@@ -678,8 +635,6 @@ public class GpsMainActivity extends Activity
                                     chosenFiles.add(new File(gpxFolder, files[Integer.valueOf(item.toString())]));
                                 }
 
-                                selectedItems.clear();
-
                                 if (chosenFiles.size() > 0) {
                                     Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.please_wait),
                                             getString(R.string.please_wait));
@@ -687,18 +642,8 @@ public class GpsMainActivity extends Activity
                                 }
 
                             }
-
                         }
-                    })
-                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            selectedItems.clear();
-                        }
-                    });
-
-            builder.create();
-            builder.show();
+                    }).show();
 
         } else {
             Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
@@ -736,52 +681,27 @@ public class GpsMainActivity extends Activity
                 final String[] files = fileList.toArray(new String[fileList.size()]);
 
 
-                final ArrayList selectedItems = new ArrayList();  // Where we track the selected items
+                //final ArrayList selectedItems = new ArrayList();  // Where we track the selected items
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
                 // Set the dialog title
-                builder.setTitle(R.string.osm_pick_file)
-                        .setMultiChoiceItems(files, null,
-                                new DialogInterface.OnMultiChoiceClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which,
-                                                        boolean isChecked) {
-
-                                        if (isChecked) {
-
-                                            if (which == 0) {
-                                                //Unselect all others
-                                                ((AlertDialog) dialog).getListView().clearChoices();
-                                                ((AlertDialog) dialog).getListView().setItemChecked(which, isChecked);
-                                                selectedItems.clear();
-                                            } else {
-                                                //Unselect the settings item
-                                                ((AlertDialog) dialog).getListView().setItemChecked(0, false);
-                                                if (selectedItems.contains(0)) {
-                                                    selectedItems.remove(selectedItems.indexOf(0));
-                                                }
-                                            }
-
-                                            selectedItems.add(which);
-                                        } else if (selectedItems.contains(which)) {
-                                            // Else, if the item is already in the array, remove it
-                                            selectedItems.remove(Integer.valueOf(which));
-                                        }
-                                    }
-                                }
-                        )
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                builder.title(R.string.osm_pick_file)
+                        .items(files)
+                        .positiveText(R.string.ok)
+                        //.alwaysCallMultiChoiceCallback()
+                        .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMulti() {
                             @Override
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                if(selectedItems.size() <= 0){
-                                    return;
-                                }
+                            public void onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
+                                List<Integer> selectedItems = Arrays.asList(integers);
 
                                 final Intent intent = new Intent(Intent.ACTION_SEND);
                                 intent.setType("*/*");
 
-                                if (selectedItems.get(0).equals(0)) {
+                                if (selectedItems.size() <= 0) {
+                                    return;
+                                }
+
+                                if (selectedItems.contains(0)) {
 
                                     tracer.debug("User selected location only");
                                     intent.setType("text/plain");
@@ -795,8 +715,8 @@ public class GpsMainActivity extends Activity
                                         intent.putExtra("sms_body", bodyText);
                                         startActivity(Intent.createChooser(intent, getString(R.string.sharing_via)));
                                     }
-
                                 } else {
+
                                     intent.setAction(Intent.ACTION_SEND_MULTIPLE);
                                     intent.putExtra(Intent.EXTRA_SUBJECT, "Here are some files.");
                                     intent.setType("*/*");
@@ -813,16 +733,8 @@ public class GpsMainActivity extends Activity
                                     startActivity(Intent.createChooser(intent, getString(R.string.sharing_via)));
                                 }
                             }
-                        })
-                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                selectedItems.clear();
-                            }
-                        });
+                        }).show();
 
-                builder.create();
-                builder.show();
 
             } else {
                 Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
@@ -1024,46 +936,45 @@ public class GpsMainActivity extends Activity
     public void onRequestStartLogging() {
         tracer.info(".");
 
-
-
         if(AppSettings.isCustomFile()  && AppSettings.shouldAskCustomFileNameEachTime()){
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            MaterialDialog.Builder alert = new MaterialDialog.Builder(this);
 
 
             final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             final EditText input = new EditText(this);
             input.setText(AppSettings.getCustomFileName());
-            alert.setView(input);
+            alert.customView(input);
 
-            alert.setTitle(R.string.new_file_custom_title)
-                    .setMessage(R.string.new_file_custom_message)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
 
+            alert.title(R.string.new_file_custom_title)
+                    //.message(R.string.new_file_custom_message)
+                    .positiveText(android.R.string.yes)
+                    .callback(new MaterialDialog.ButtonCallback() {
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
                             String chosenFileName = AppSettings.getCustomFileName();
-
-                            if(!Utilities.IsNullOrEmpty(input.getText().toString()) && !input.getText().toString().equalsIgnoreCase(chosenFileName)){
+                            if (!Utilities.IsNullOrEmpty(input.getText().toString()) && !input.getText().toString().equalsIgnoreCase(chosenFileName)) {
                                 chosenFileName = input.getText().toString();
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putString("new_file_custom_name", chosenFileName);
                                 editor.commit();
                             }
-
                             StartLogging();
                         }
-                    })
-                    .setOnKeyListener(new DialogInterface.OnKeyListener() {
-                        @Override
-                        public boolean onKey(DialogInterface dialogInterface, int keycode, KeyEvent keyEvent) {
-                            if (keycode == KeyEvent.KEYCODE_BACK) {
-                                StartLogging();
-                                dialogInterface.dismiss();
-                            }
-                            return true;
-                        }
-                    });
 
-            AlertDialog alertDialog = alert.create();
+                    })
+            .keyListener(new DialogInterface.OnKeyListener() {
+                @Override
+                public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        StartLogging();
+                        dialog.dismiss();
+                    }
+                    return true;
+                }
+            });
+
+            MaterialDialog alertDialog = alert.build();
             alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             alertDialog.show();
         }

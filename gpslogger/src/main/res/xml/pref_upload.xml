@@ -9,7 +9,7 @@
             android:summary="@string/autosend_enabled_summary"/>
 
 
-        <EditTextPreference
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="autosend_frequency_minutes"
             android:title="@string/autosend_frequency"
             android:summary="@string/autosend_frequency_summary"

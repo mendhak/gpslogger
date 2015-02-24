@@ -7,17 +7,17 @@
 	 	android:title="@string/osm_resetauth"/>
  	
  	
-	 <ListPreference android:key="osm_visibility"
+	 <com.afollestad.materialdialogs.prefs.MaterialListPreference android:key="osm_visibility"
 		android:title="@string/osm_visibility" android:summary="@string/osm_visibility_summary"
 		android:entries="@array/osm_visibility_choices" android:defaultValue="private"
 		android:entryValues="@array/osm_visibility_choices" />
  
- 	<EditTextPreference android:key="osm_description"
+ 	<com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="osm_description"
 		android:title="@string/osm_description"
 		android:summary="@string/osm_description_summary"
 		android:dialogTitle="@string/osm_description" />
 			
-	<EditTextPreference android:key="osm_tags"
+	<com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="osm_tags"
 		android:title="@string/osm_tags"
 		android:summary="@string/osm_tags_summary"
 		android:dialogTitle="@string/osm_tags" />

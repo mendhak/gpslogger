@@ -19,7 +19,7 @@ package com.mendhak.gpslogger.common.FileDialog;
 
 //https://code.google.com/p/android-file-dialog/
 
-import android.app.AlertDialog;
+
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -339,15 +339,8 @@ public class FileDialog extends ListActivity {
                     selectButton.setEnabled(true);
                 }
             } else {
-                new AlertDialog.Builder(this).setIcon(R.drawable.gpsloggericon2)
-                        .setTitle("[" + file.getName() + "] " + getText(R.string.filedialog_cantreadfolder))
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        }).show();
+                Utilities.MsgBox(getString(R.string.error),  "[" + file.getName() + "] " + getText(R.string.filedialog_cantreadfolder), this );
             }
         } else {
             selectedFile = file;

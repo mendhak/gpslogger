@@ -20,8 +20,7 @@ package com.mendhak.gpslogger.senders.opengts;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
-import android.preference.ListPreference;
+
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -29,6 +28,8 @@ import android.preference.PreferenceActivity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.webkit.URLUtil;
+import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
+import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
@@ -48,11 +49,11 @@ public class OpenGTSActivity extends PreferenceActivity implements
         addPreferencesFromResource(R.xml.opengtssettings);
 
         CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoopengts_enabled");
-        EditTextPreference txtOpenGTSServer = (EditTextPreference) findPreference("opengts_server");
-        EditTextPreference txtOpenGTSServerPort = (EditTextPreference) findPreference("opengts_server_port");
-        ListPreference txtOpenGTSCommunicationMethod = (ListPreference) findPreference("opengts_server_communication_method");
-        EditTextPreference txtOpenGTSServerPath = (EditTextPreference) findPreference("autoopengts_server_path");
-        EditTextPreference txtOpenGTSDeviceId = (EditTextPreference) findPreference("opengts_device_id");
+        MaterialEditTextPreference txtOpenGTSServer = (MaterialEditTextPreference) findPreference("opengts_server");
+        MaterialEditTextPreference txtOpenGTSServerPort = (MaterialEditTextPreference) findPreference("opengts_server_port");
+        MaterialListPreference txtOpenGTSCommunicationMethod = (MaterialListPreference) findPreference("opengts_server_communication_method");
+        MaterialEditTextPreference txtOpenGTSServerPath = (MaterialEditTextPreference) findPreference("autoopengts_server_path");
+        MaterialEditTextPreference txtOpenGTSDeviceId = (MaterialEditTextPreference) findPreference("opengts_device_id");
 
         chkEnabled.setOnPreferenceChangeListener(this);
         txtOpenGTSServer.setOnPreferenceChangeListener(this);
@@ -90,11 +91,11 @@ public class OpenGTSActivity extends PreferenceActivity implements
 
     private boolean IsFormValid() {
         CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("opengts_enabled");
-        EditTextPreference txtOpenGTSServer = (EditTextPreference) findPreference("opengts_server");
-        EditTextPreference txtOpenGTSServerPort = (EditTextPreference) findPreference("opengts_server_port");
-        ListPreference txtOpenGTSCommunicationMethod = (ListPreference) findPreference("opengts_server_communication_method");
-        EditTextPreference txtOpenGTSServerPath = (EditTextPreference) findPreference("autoopengts_server_path");
-        EditTextPreference txtOpenGTSDeviceId = (EditTextPreference) findPreference("opengts_device_id");
+        MaterialEditTextPreference txtOpenGTSServer = (MaterialEditTextPreference) findPreference("opengts_server");
+        MaterialEditTextPreference txtOpenGTSServerPort = (MaterialEditTextPreference) findPreference("opengts_server_port");
+        MaterialListPreference txtOpenGTSCommunicationMethod = (MaterialListPreference) findPreference("opengts_server_communication_method");
+        MaterialEditTextPreference txtOpenGTSServerPath = (MaterialEditTextPreference) findPreference("autoopengts_server_path");
+        MaterialEditTextPreference txtOpenGTSDeviceId = (MaterialEditTextPreference) findPreference("opengts_device_id");
 
         return !chkEnabled.isChecked()
                 || txtOpenGTSServer.getText() != null && txtOpenGTSServer.getText().length() > 0

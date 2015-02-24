@@ -47,14 +47,14 @@
             android:title="@string/gpslogger_folder_title"
             android:summary="@string/gpslogger_folder_summary"></Preference>
 
-        <ListPreference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:key="new_file_creation"
             android:title="@string/new_file_creation_title"
             android:summary="@string/new_file_creation_summary"
             android:entries="@array/filecreation_entries"
             android:defaultValue="onceaday"
             android:entryValues="@array/filecreation_values"/>
-        <EditTextPreference
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="new_file_custom_name"
             android:title="@string/new_file_custom_title"
             android:summary="@string/new_file_custom_summary"
@@ -85,7 +85,7 @@
             android:summary="@string/listeners_summary"
             android:title="@string/listeners_title" />
 
-        <EditTextPreference
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="time_before_logging"
             android:title="@string/time_before_logging_title"
             android:summary="@string/time_before_logging_summary"
@@ -101,7 +101,7 @@
             android:title="@string/keep_fix_title"/>
 
 
-        <EditTextPreference
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="distance_before_logging"
             android:title="@string/distance_filter_title"
             android:summary="@string/distance_filter_summary"
@@ -112,7 +112,7 @@
             android:hint="@string/settings_enter_meters"/>
 
 
-        <EditTextPreference
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="accuracy_before_logging"
             android:title="@string/accuracy_filter_title"
             android:summary="@string/accuracy_filter_summary"
@@ -122,7 +122,7 @@
             android:defaultValue="0"
             android:hint="@string/settings_enter_meters"/>
 
-        <EditTextPreference
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="retry_time"
             android:title="@string/retry_time_title"
             android:summary="@string/retry_time_summary"
@@ -132,7 +132,7 @@
             android:defaultValue="60"
             android:hint="@string/retry_time_hint"/>
 
-        <EditTextPreference
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="absolute_timeout"
             android:title="@string/absolute_timeout_title"
             android:summary="@string/absolute_timeout_summary"

@@ -13,11 +13,12 @@ apply plugin: 'android'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "20"
+    compileSdkVersion 21
+    buildToolsVersion "21"
 
     defaultConfig {
         minSdkVersion 14
@@ -126,6 +127,8 @@ dependencies {
     compile('org.slf4j:slf4j-api:1.7.6')
     compile('com.github.tony19:logback-android-classic:1.1.1-2')
     compile('com.github.tony19:logback-android-core:1.1.1-2')
+
+    compile('com.afollestad:material-dialogs:0.6.3.1')
 
 }
 
