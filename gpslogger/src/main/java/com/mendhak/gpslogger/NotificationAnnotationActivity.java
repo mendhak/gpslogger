@@ -30,11 +30,9 @@ public class NotificationAnnotationActivity extends Activity {
 
         tracer = LoggerFactory.getLogger(GpsLoggingService.class.getSimpleName());
 
-        MaterialDialog.Builder alert = new MaterialDialog.Builder(this);
-
-        alert.title(R.string.add_description);
-
-        alert.customView(R.layout.alertview,false)
+        MaterialDialog alertDialog = new MaterialDialog.Builder(this)
+                .title(R.string.add_description)
+                .customView(R.layout.alertview, false)
                 .positiveText(R.string.ok)
                 .negativeText(R.string.cancel)
                 .callback(new MaterialDialog.ButtonCallback() {
@@ -61,14 +59,12 @@ public class NotificationAnnotationActivity extends Activity {
                         finish();
                     }
                 }).cancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                dialog.dismiss();
-                finish();
-            }
-        });
-
-        MaterialDialog alertDialog = alert.build();
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                }).build();
         TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
         tvMessage.setText(R.string.letters_numbers);
         alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);

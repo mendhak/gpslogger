@@ -33,9 +33,9 @@ public class ShortcutCreate extends Activity {
 
         final CharSequence[] items = {getString(R.string.shortcut_start), getString(R.string.shortcut_stop)};
 
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
-        builder.title(R.string.shortcut_pickaction);
-        builder.items(items)
+        new MaterialDialog.Builder(this)
+                .title(R.string.shortcut_pickaction)
+                .items(items)
                 .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog materialDialog, View view, int item, CharSequence charSequence) {

@@ -321,8 +321,8 @@ public class Utilities {
      */
     private static void MsgBox(String title, String message, Context className,
                                final IMessageBoxCallback msgCallback) {
-        MaterialDialog.Builder alertBuilder = new MaterialDialog.Builder(className);
-        alertBuilder.title(title)
+        MaterialDialog alertDialog = new MaterialDialog.Builder(className)
+                .title(title)
                 .content(message)
                 .positiveText(R.string.ok)
                 .callback(new MaterialDialog.ButtonCallback() {
@@ -337,9 +337,8 @@ public class Utilities {
                     public void onNegative(MaterialDialog dialog) {
                         super.onNegative(dialog);
                     }
-                });
-
-        MaterialDialog alertDialog = alertBuilder.build();
+                })
+                .build();
 
         if (className instanceof Activity && !((Activity) className).isFinishing()) {
             alertDialog.show();

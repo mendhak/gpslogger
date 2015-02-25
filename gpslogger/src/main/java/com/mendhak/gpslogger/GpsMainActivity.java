@@ -468,36 +468,32 @@ public class GpsMainActivity extends Activity
             return;
         }
 
-        MaterialDialog.Builder alert = new MaterialDialog.Builder(GpsMainActivity.this);
-        alert.title(R.string.add_description);
-
-        alert.customView(R.layout.alertview);
-        alert.positiveText(R.string.ok);
-        alert.callback(new MaterialDialog.ButtonCallback() {
-            @Override
-            public void onPositive(MaterialDialog dialog) {
-                EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
-                final String desc = Utilities.CleanDescription(userInput.getText().toString());
-                if (desc.length() == 0) {
-                    tracer.debug("Clearing annotation");
-                    Session.clearDescription();
-                    OnClearAnnotation();
-                } else {
-                    tracer.debug("Setting annotation: " + desc);
-                    Session.setDescription(desc);
-                    OnSetAnnotation();
-                    // logOnce will start single point mode.
-                    if (!Session.isStarted()) {
-                        tracer.debug("Will start log-single-point");
-                        LogSinglePoint();
+        MaterialDialog alertDialog = new MaterialDialog.Builder(GpsMainActivity.this)
+                .title(R.string.add_description)
+                .customView(R.layout.alertview)
+                .positiveText(R.string.ok)
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
+                        final String desc = Utilities.CleanDescription(userInput.getText().toString());
+                        if (desc.length() == 0) {
+                            tracer.debug("Clearing annotation");
+                            Session.clearDescription();
+                            OnClearAnnotation();
+                        } else {
+                            tracer.debug("Setting annotation: " + desc);
+                            Session.setDescription(desc);
+                            OnSetAnnotation();
+                            // logOnce will start single point mode.
+                            if (!Session.isStarted()) {
+                                tracer.debug("Will start log-single-point");
+                                LogSinglePoint();
+                            }
+                        }
                     }
-                }
+                }).build();
 
-            }
-        });
-
-
-        MaterialDialog alertDialog = alert.build();
         EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
         userInput.setText(Session.getDescription());
         TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
@@ -614,8 +610,8 @@ public class GpsMainActivity extends Activity
 
             //final ArrayList selectedItems = new ArrayList();  // Where we track the selected items
 
-            MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
-            builder.title(R.string.osm_pick_file)
+            new MaterialDialog.Builder(this)
+                    .title(R.string.osm_pick_file)
                     .items(files)
                     .positiveText(R.string.ok)
                     .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMulti() {
@@ -680,15 +676,10 @@ public class GpsMainActivity extends Activity
                 fileList.add(0, locationOnly);
                 final String[] files = fileList.toArray(new String[fileList.size()]);
 
-
-                //final ArrayList selectedItems = new ArrayList();  // Where we track the selected items
-
-                MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
-                // Set the dialog title
-                builder.title(R.string.osm_pick_file)
+                new MaterialDialog.Builder(this)
+                        .title(R.string.osm_pick_file)
                         .items(files)
                         .positiveText(R.string.ok)
-                        //.alwaysCallMultiChoiceCallback()
                         .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMulti() {
                             @Override
                             public void onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
@@ -937,46 +928,46 @@ public class GpsMainActivity extends Activity
         tracer.info(".");
 
         if(AppSettings.isCustomFile()  && AppSettings.shouldAskCustomFileNameEachTime()){
-            MaterialDialog.Builder alert = new MaterialDialog.Builder(this);
-
 
             final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            final EditText input = new EditText(this);
-            input.setText(AppSettings.getCustomFileName());
-            alert.customView(input);
 
-
-            alert.title(R.string.new_file_custom_title)
-                    //.message(R.string.new_file_custom_message)
-                    .positiveText(android.R.string.yes)
+            MaterialDialog alertDialog = new MaterialDialog.Builder(GpsMainActivity.this)
+                    .title(R.string.new_file_custom_title)
+                    .customView(R.layout.alertview)
+                    .positiveText(R.string.ok)
                     .callback(new MaterialDialog.ButtonCallback() {
                         @Override
                         public void onPositive(MaterialDialog dialog) {
                             String chosenFileName = AppSettings.getCustomFileName();
-                            if (!Utilities.IsNullOrEmpty(input.getText().toString()) && !input.getText().toString().equalsIgnoreCase(chosenFileName)) {
-                                chosenFileName = input.getText().toString();
+                            EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
+
+                            if (!Utilities.IsNullOrEmpty(userInput.getText().toString()) && !userInput.getText().toString().equalsIgnoreCase(chosenFileName)) {
                                 SharedPreferences.Editor editor = prefs.edit();
-                                editor.putString("new_file_custom_name", chosenFileName);
+                                editor.putString("new_file_custom_name", userInput.getText().toString());
                                 editor.commit();
                             }
                             StartLogging();
                         }
-
                     })
-            .keyListener(new DialogInterface.OnKeyListener() {
-                @Override
-                public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                    if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        StartLogging();
-                        dialog.dismiss();
-                    }
-                    return true;
-                }
-            });
+                    .keyListener(new DialogInterface.OnKeyListener() {
+                        @Override
+                        public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                                StartLogging();
+                                dialog.dismiss();
+                            }
+                            return true;
+                        }
+                    })
+                    .build();
 
-            MaterialDialog alertDialog = alert.build();
+            EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
+            userInput.setText(AppSettings.getCustomFileName());
+            TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
+            tvMessage.setText(R.string.new_file_custom_message);
             alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             alertDialog.show();
+
         }
         else {
             StartLogging();
