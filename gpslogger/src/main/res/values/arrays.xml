@@ -69,11 +69,5 @@
         <item>@string/listeners_passive</item>
     </string-array>
 
-    <string-array name="listeners_values">
-        <item>gps</item>
-        <item>network</item>
-        <item>passive</item>
-    </string-array>
-
 
 </resources>

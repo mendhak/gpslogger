@@ -123,6 +123,17 @@ public class Utilities {
     }
 
 
+    public static List<String> GetListeners(){
+
+        List<String> listeners = new ArrayList<String>();
+        listeners.add("gps");
+        listeners.add("network");
+        listeners.add("passive");
+
+        return listeners;
+
+    }
+
     /**
      * Gets user preferences, populates the AppSettings class.
      */
@@ -147,10 +158,7 @@ public class Utilities {
 
         AppSettings.setLogToOpenGTS(prefs.getBoolean("log_opengts", false));
 
-        Set<String> listeners = new HashSet<String>();
-        listeners.add("gps");
-        listeners.add("network");
-        listeners.add("passive");
+        Set<String> listeners = new HashSet<String>(GetListeners());
         AppSettings.setChosenListeners(prefs.getStringSet("listeners", listeners));
 
         String minimumDistanceString = prefs.getString(

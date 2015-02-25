@@ -77,10 +77,7 @@
     <PreferenceCategory android:title="@string/pref_performance_title">
 
 
-        <MultiSelectListPreference
-            android:entries="@array/listeners"
-            android:entryValues="@array/listeners_values"
-            android:defaultValue="@array/listeners_values"
+        <Preference
             android:key="listeners"
             android:summary="@string/listeners_summary"
             android:title="@string/listeners_title" />
