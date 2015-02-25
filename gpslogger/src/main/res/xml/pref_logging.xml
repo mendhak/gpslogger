@@ -5,13 +5,13 @@
                   android:summary="@string/pref_logging_summary">
 
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="log_gpx"
             android:title="@string/log_gpx_title"
             android:summary="@string/log_gpx_summary"
             android:defaultValue="true"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="log_kml"
             android:summary="@string/log_kml_summary"
             android:title="@string/log_kml_title"/>
@@ -23,17 +23,17 @@
             <intent android:action="com.mendhak.gpslogger.CUSTOMURL_SETUP"/>
         </Preference>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="log_opengts"
             android:summary="@string/log_opengts_summary"
             android:title="@string/log_opengts_title"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="log_plain_text"
             android:summary="@string/log_plain_text_summary"
             android:title="@string/log_plain_text_title"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="log_nmea"
             android:title="@string/log_nmea_title"
             android:summary="@string/log_nmea_summary" />
@@ -62,12 +62,12 @@
             android:dialogMessage="@string/new_file_custom_message"
             android:defaultValue="gpslogger"
             />
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="new_file_custom_each_time"
             android:title="@string/new_file_custom_each_time_title"
             android:summary="@string/new_file_custom_each_time_summary"
-            android:defaultValue="true"></CheckBoxPreference>
-        <CheckBoxPreference
+            android:defaultValue="true"></SwitchPreference>
+        <SwitchPreference
             android:key="new_file_prefix_serial"
             android:title="@string/new_file_prefix_serial_title"
             android:summary="@string/new_file_prefix_serial_summary"
@@ -92,7 +92,7 @@
             android:hint="@string/time_before_logging_hint"
             android:defaultValue="60"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="keep_fix"
             android:summary="@string/keep_fix_summary"
             android:title="@string/keep_fix_title"/>

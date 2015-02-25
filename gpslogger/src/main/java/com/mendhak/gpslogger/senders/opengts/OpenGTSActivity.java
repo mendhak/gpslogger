@@ -19,7 +19,7 @@ package com.mendhak.gpslogger.senders.opengts;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
+import android.preference.SwitchPreference;
 
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -48,7 +48,7 @@ public class OpenGTSActivity extends PreferenceActivity implements
 
         addPreferencesFromResource(R.xml.opengtssettings);
 
-        CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoopengts_enabled");
+        SwitchPreference chkEnabled = (SwitchPreference) findPreference("autoopengts_enabled");
         MaterialEditTextPreference txtOpenGTSServer = (MaterialEditTextPreference) findPreference("opengts_server");
         MaterialEditTextPreference txtOpenGTSServerPort = (MaterialEditTextPreference) findPreference("opengts_server_port");
         MaterialListPreference txtOpenGTSCommunicationMethod = (MaterialListPreference) findPreference("opengts_server_communication_method");
@@ -90,7 +90,7 @@ public class OpenGTSActivity extends PreferenceActivity implements
     }
 
     private boolean IsFormValid() {
-        CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("opengts_enabled");
+        SwitchPreference chkEnabled = (SwitchPreference) findPreference("opengts_enabled");
         MaterialEditTextPreference txtOpenGTSServer = (MaterialEditTextPreference) findPreference("opengts_server");
         MaterialEditTextPreference txtOpenGTSServerPort = (MaterialEditTextPreference) findPreference("opengts_server_port");
         MaterialListPreference txtOpenGTSCommunicationMethod = (MaterialListPreference) findPreference("opengts_server_communication_method");

@@ -20,7 +20,7 @@ package com.mendhak.gpslogger.senders.ftp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.CheckBoxPreference;
+import android.preference.SwitchPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.view.KeyEvent;
@@ -66,7 +66,7 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
 
     private boolean IsFormValid() {
 
-        CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoftp_enabled");
+        SwitchPreference chkEnabled = (SwitchPreference) findPreference("autoftp_enabled");
         MaterialEditTextPreference txtServer = (MaterialEditTextPreference) findPreference("autoftp_server");
         MaterialEditTextPreference txtUserName = (MaterialEditTextPreference) findPreference("autoftp_username");
         MaterialEditTextPreference txtPort = (MaterialEditTextPreference) findPreference("autoftp_port");
@@ -82,7 +82,7 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (!IsFormValid()) {
-                CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoftp_enabled");
+                SwitchPreference chkEnabled = (SwitchPreference) findPreference("autoftp_enabled");
                 chkEnabled.setChecked(false);
                 Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
                         getString(R.string.autoemail_invalid_form_message),
@@ -141,9 +141,9 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
         MaterialEditTextPreference usernamePreference = (MaterialEditTextPreference) findPreference("autoftp_username");
         MaterialEditTextPreference passwordPreference = (MaterialEditTextPreference) findPreference("autoftp_password");
         MaterialEditTextPreference portPreference = (MaterialEditTextPreference) findPreference("autoftp_port");
-        CheckBoxPreference useFtpsPreference = (CheckBoxPreference) findPreference("autoftp_useftps");
+        SwitchPreference useFtpsPreference = (SwitchPreference) findPreference("autoftp_useftps");
         MaterialListPreference sslTlsPreference = (MaterialListPreference) findPreference("autoftp_ssltls");
-        CheckBoxPreference implicitPreference = (CheckBoxPreference) findPreference("autoftp_implicit");
+        SwitchPreference implicitPreference = (SwitchPreference) findPreference("autoftp_implicit");
         MaterialEditTextPreference directoryPreference = (MaterialEditTextPreference) findPreference("autoftp_directory");
 
         if (!helper.ValidSettings(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),

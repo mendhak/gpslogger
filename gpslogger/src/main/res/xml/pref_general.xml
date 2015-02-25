@@ -4,11 +4,11 @@
 
 
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:title="@string/startonbootup_title"
         android:summary="@string/startonbootup_summary"
         android:key="startonbootup"/>
-    <CheckBoxPreference
+    <SwitchPreference
         android:title="@string/display_imperial_title"
         android:summary="@string/display_imperial_summary"
         android:key="useImperial"/>
@@ -18,7 +18,7 @@
         android:key="enableDisableGps"
         android:defaultValue="false"/>
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:title="@string/debuglog_title"
         android:summary="@string/debuglog_summary"
         android:key="debugtofile"

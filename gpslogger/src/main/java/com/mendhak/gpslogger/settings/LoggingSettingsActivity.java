@@ -22,7 +22,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.CheckBoxPreference;
+import android.preference.SwitchPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -124,7 +124,7 @@ public class LoggingSettingsActivity extends PreferenceActivity
             gpsloggerFolder.setSummary(Html.fromHtml("<font color='red'>" + gpsLoggerFolderPath + "</font>"));
         }
 
-        CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
+        SwitchPreference chkLog_opengts = (SwitchPreference) findPreference("log_opengts");
         chkLog_opengts.setOnPreferenceClickListener(this);
 
         /**
@@ -136,7 +136,7 @@ public class LoggingSettingsActivity extends PreferenceActivity
         newFilePref.getOnPreferenceChangeListener()
                 .onPreferenceChange(newFilePref, newFilePref.getValue());
 
-        CheckBoxPreference chkfile_prefix_serial = (CheckBoxPreference) findPreference("new_file_prefix_serial");
+        SwitchPreference chkfile_prefix_serial = (SwitchPreference) findPreference("new_file_prefix_serial");
         if (Utilities.IsNullOrEmpty(Utilities.GetBuildSerial())) {
             chkfile_prefix_serial.setEnabled(false);
             chkfile_prefix_serial.setSummary("This option not available on older phones or if a serial id is not present");
@@ -225,7 +225,7 @@ public class LoggingSettingsActivity extends PreferenceActivity
         }
 
         if (preference.getKey().equals("log_opengts")) {
-            CheckBoxPreference chkLog_opengts = (CheckBoxPreference) findPreference("log_opengts");
+            SwitchPreference chkLog_opengts = (SwitchPreference) findPreference("log_opengts");
 
             if (chkLog_opengts.isChecked()) {
                 startActivity(new Intent("com.mendhak.gpslogger.OPENGTS_SETUP"));

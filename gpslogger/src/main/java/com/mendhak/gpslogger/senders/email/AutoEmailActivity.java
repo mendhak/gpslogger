@@ -21,7 +21,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.CheckBoxPreference;
+import android.preference.SwitchPreference;
 
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -54,7 +54,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
 
         addPreferencesFromResource(R.xml.autoemailsettings);
 
-        CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoemail_enabled");
+        SwitchPreference chkEnabled = (SwitchPreference) findPreference("autoemail_enabled");
 
         chkEnabled.setOnPreferenceChangeListener(this);
 
@@ -99,7 +99,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
         Utilities.ShowProgress(this, getString(R.string.autoemail_sendingtest),
                 getString(R.string.please_wait));
 
-        CheckBoxPreference chkUseSsl = (CheckBoxPreference) findPreference("smtp_ssl");
+        SwitchPreference chkUseSsl = (SwitchPreference) findPreference("smtp_ssl");
         MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
         MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
         MaterialEditTextPreference txtUsername = (MaterialEditTextPreference) findPreference("smtp_username");
@@ -119,7 +119,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
 
     private boolean IsFormValid() {
 
-        CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoemail_enabled");
+        SwitchPreference chkEnabled = (SwitchPreference) findPreference("autoemail_enabled");
         MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
         MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
         MaterialEditTextPreference txtUsername = (MaterialEditTextPreference) findPreference("smtp_username");
@@ -138,7 +138,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (!IsFormValid()) {
-                CheckBoxPreference chkEnabled = (CheckBoxPreference) findPreference("autoemail_enabled");
+                SwitchPreference chkEnabled = (SwitchPreference) findPreference("autoemail_enabled");
                 chkEnabled.setChecked(false);
                 Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
                         getString(R.string.autoemail_invalid_form_message),
@@ -192,7 +192,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
 
         MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
         MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
-        CheckBoxPreference chkUseSsl = (CheckBoxPreference) findPreference("smtp_ssl");
+        SwitchPreference chkUseSsl = (SwitchPreference) findPreference("smtp_ssl");
 
         // Yahoo
         txtSmtpServer.setText(server);

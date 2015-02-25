@@ -3,7 +3,7 @@
                   android:key="gpslogger_preferences" android:title="@string/pref_autosend_title" android:summary="@string/pref_autosend_summary">
 
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="autosend_enabled"
             android:title="@string/autosend_enabled"
             android:summary="@string/autosend_enabled_summary"/>
@@ -19,14 +19,14 @@
             android:hint="@string/autosend_frequency_hint"
             />
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="autosend_frequency_whenstoppressed"
         android:defaultValue="false"
         android:title="@string/autoemail_frequency_whenistop"
 
         />
 
-    <CheckBoxPreference
+    <SwitchPreference
             android:key="autosend_sendzip"
             android:defaultValue="true"
             android:title="@string/autosend_sendzip_title"
