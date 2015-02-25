@@ -28,6 +28,10 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.view.MenuItem;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.TextView;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
@@ -140,6 +144,9 @@ public class LoggingSettingsActivity extends PreferenceActivity
         }
 
 
+        Preference prefNewFileCustomName = (Preference)findPreference("new_file_custom_name");
+        prefNewFileCustomName.setOnPreferenceClickListener(this);
+
     }
 
 
@@ -149,6 +156,31 @@ public class LoggingSettingsActivity extends PreferenceActivity
         if (preference.getKey().equals("gpslogger_folder")) {
             new FolderSelectorDialog().show(LoggingSettingsActivity.this);
             return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase("new_file_custom_name")){
+
+            MaterialDialog alertDialog = new MaterialDialog.Builder(LoggingSettingsActivity.this)
+                    .title(R.string.new_file_custom_title)
+                    .customView(R.layout.alertview)
+                    .positiveText(R.string.ok)
+                    .negativeText(R.string.cancel)
+                    .callback(new MaterialDialog.ButtonCallback() {
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                            EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("new_file_custom_name", userInput.getText().toString());
+                            editor.commit();
+                        }
+                    }).build();
+
+            EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
+            userInput.setText(prefs.getString("new_file_custom_name","gpslogger"));
+            TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
+            tvMessage.setText(R.string.new_file_custom_message);
+            alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            alertDialog.show();
         }
 
         if (preference.getKey().equals("log_opengts")) {

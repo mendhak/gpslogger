@@ -54,7 +54,7 @@
             android:entries="@array/filecreation_entries"
             android:defaultValue="onceaday"
             android:entryValues="@array/filecreation_values"/>
-        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+        <Preference
             android:key="new_file_custom_name"
             android:title="@string/new_file_custom_title"
             android:summary="@string/new_file_custom_summary"
