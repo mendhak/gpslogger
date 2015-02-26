@@ -8,12 +8,32 @@
     android:layout_height="match_parent"
     tools:context="com.mendhak.gpslogger.GpsMainActivity">
 
+
+
+    <FrameLayout
+        android:id="@+id/supercontainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
     <!-- As the main content view, the view below consumes the entire
          space available using match_parent in both dimensions. -->
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+        </FrameLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar1"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:minHeight="45dp"
+        android:visibility="visible"
+        android:background="@color/primaryColor"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    </FrameLayout>
+
+
 
     <!-- android:layout_gravity="start" tells DrawerLayout to treat
          this as a sliding drawer on the left side for left-to-right
@@ -29,20 +49,8 @@
         android:name="com.mendhak.gpslogger.NavigationDrawerFragment"
         tools:layout="@layout/fragment_navigation_drawer"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar1"
-            android:gravity="bottom"
-            android:layout_gravity="bottom"
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:minHeight="45dp"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-            />
-    </LinearLayout>
+
+
+
 
 </android.support.v4.widget.DrawerLayout>

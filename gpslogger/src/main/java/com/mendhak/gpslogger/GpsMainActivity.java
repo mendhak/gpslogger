@@ -76,7 +76,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class GpsMainActivity extends ActionBarActivity
-        implements GenericViewFragment.IGpsViewCallback, NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, IGpsLoggerServiceClient, IActionListener {
+        implements GenericViewFragment.IGpsViewCallback, NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, IGpsLoggerServiceClient, IActionListener, MenuItem.OnMenuItemClickListener {
 
     private static Intent serviceIntent;
     private GpsLoggingService loggingService;
@@ -343,12 +343,17 @@ public class GpsMainActivity extends ActionBarActivity
     public boolean onCreateOptionsMenu(Menu menu) {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        if(toolbar.getMenu().size() > 0){ return true;}
+
         toolbar.inflateMenu(R.menu.gps_main);
         mnuAnnotate = toolbar.getMenu().findItem(R.id.mnuAnnotate);
         mnuOnePoint = toolbar.getMenu().findItem(R.id.mnuOnePoint);
         mnuAutoSendNow = toolbar.getMenu().findItem(R.id.mnuAutoSendNow);
         enableDisableMenuItems();
 
+        for(int i=0; i<toolbar.getMenu().size(); i++ ){
+            toolbar.getMenu().getItem(i).setOnMenuItemClickListener(this);
+        }
 
 //        getMenuInflater().inflate(R.menu.gps_main, menu);
 //        mnuAnnotate = menu.findItem(R.id.mnuAnnotate);
@@ -388,6 +393,51 @@ public class GpsMainActivity extends ActionBarActivity
         }
     }
 
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        tracer.debug("Menu Item: " + String.valueOf(item.getTitle()));
+
+        switch (id) {
+            case R.id.mnuAnnotate:
+                Annotate();
+                return true;
+            case R.id.mnuOnePoint:
+                LogSinglePoint();
+                return true;
+            case R.id.mnuShare:
+                Share();
+                return true;
+            case R.id.mnuOSM:
+                UploadToOpenStreetMap();
+                return true;
+            case R.id.mnuDropBox:
+                UploadToDropBox();
+                return true;
+            case R.id.mnuGDocs:
+                UploadToGoogleDocs();
+                return true;
+            case R.id.mnuOpenGTS:
+                SendToOpenGTS();
+                return true;
+            case R.id.mnuFtp:
+                SendToFtp();
+                return true;
+            case R.id.mnuEmail:
+                SelectAndEmailFile();
+                return true;
+            case R.id.mnuAutoSendNow:
+                ForceAutoSendNow();
+            default:
+                return true;
+        }
+
+    }
 
     /**
      * Handles menu item selection
@@ -1023,6 +1073,7 @@ public class GpsMainActivity extends ActionBarActivity
     private void GetPreferences() {
         Utilities.PopulateAppSettings(getApplicationContext());
     }
+
 
 
 }
