@@ -76,7 +76,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class GpsMainActivity extends ActionBarActivity
-        implements GenericViewFragment.IGpsViewCallback, NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, IGpsLoggerServiceClient, IActionListener, MenuItem.OnMenuItemClickListener {
+        implements GenericViewFragment.IGpsViewCallback, NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, IGpsLoggerServiceClient, IActionListener, Toolbar.OnMenuItemClickListener {
 
     private static Intent serviceIntent;
     private GpsLoggingService loggingService;
@@ -346,20 +346,11 @@ public class GpsMainActivity extends ActionBarActivity
         if(toolbar.getMenu().size() > 0){ return true;}
 
         toolbar.inflateMenu(R.menu.gps_main);
+        toolbar.setOnMenuItemClickListener(this);
         mnuAnnotate = toolbar.getMenu().findItem(R.id.mnuAnnotate);
         mnuOnePoint = toolbar.getMenu().findItem(R.id.mnuOnePoint);
         mnuAutoSendNow = toolbar.getMenu().findItem(R.id.mnuAutoSendNow);
         enableDisableMenuItems();
-
-        for(int i=0; i<toolbar.getMenu().size(); i++ ){
-            toolbar.getMenu().getItem(i).setOnMenuItemClickListener(this);
-        }
-
-//        getMenuInflater().inflate(R.menu.gps_main, menu);
-//        mnuAnnotate = menu.findItem(R.id.mnuAnnotate);
-//        mnuOnePoint = menu.findItem(R.id.mnuOnePoint);
-//        mnuAutoSendNow = menu.findItem(R.id.mnuAutoSendNow);
-//        enableDisableMenuItems();
         return true;
     }
 
