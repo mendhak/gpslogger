@@ -18,6 +18,7 @@
 package com.mendhak.gpslogger.settings;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.text.Html;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -40,6 +42,7 @@ import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.*;
 
 /**
@@ -124,9 +127,6 @@ public class LoggingSettingsActivity extends PreferenceActivity
             gpsloggerFolder.setSummary(Html.fromHtml("<font color='red'>" + gpsLoggerFolderPath + "</font>"));
         }
 
-        SwitchPreference chkLog_opengts = (SwitchPreference) findPreference("log_opengts");
-        chkLog_opengts.setOnPreferenceClickListener(this);
-
         /**
          * Logging Details - New file creation
          */
@@ -150,6 +150,12 @@ public class LoggingSettingsActivity extends PreferenceActivity
 
         Preference prefListeners = (Preference)findPreference("listeners");
         prefListeners.setOnPreferenceClickListener(this);
+
+        SwitchPreference prefCustomUrl = (SwitchPreference)findPreference("log_customurl_enabled");
+        prefCustomUrl.setOnPreferenceChangeListener(this);
+
+        SwitchPreference chkLog_opengts = (SwitchPreference) findPreference("log_opengts");
+        chkLog_opengts.setOnPreferenceChangeListener(this);
 
     }
 
@@ -224,21 +230,77 @@ public class LoggingSettingsActivity extends PreferenceActivity
             alertDialog.show();
         }
 
-        if (preference.getKey().equals("log_opengts")) {
-            SwitchPreference chkLog_opengts = (SwitchPreference) findPreference("log_opengts");
 
-            if (chkLog_opengts.isChecked()) {
-                startActivity(new Intent("com.mendhak.gpslogger.OPENGTS_SETUP"));
-            }
-            return true;
-        }
 
         return false;
     }
 
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
+    public boolean onPreferenceChange(final Preference preference, Object newValue) {
+
+        if (preference.getKey().equalsIgnoreCase("log_opengts")) {
+
+            if(!((SwitchPreference) preference).isChecked() && (Boolean)newValue  ) {
+                SwitchPreference chkLog_opengts = (SwitchPreference) findPreference("log_opengts");
+
+                if ((Boolean)newValue) {
+                    startActivity(new Intent("com.mendhak.gpslogger.OPENGTS_SETUP"));
+                }
+            }
+
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase("log_customurl_enabled") ){
+
+            // Bug in SwitchPreference: http://stackoverflow.com/questions/19503931/switchpreferences-calls-multiple-times-the-onpreferencechange-method
+            // Check if isChecked == false && newValue == true
+            if(!((SwitchPreference) preference).isChecked() && (Boolean)newValue  ) {
+                MaterialDialog alertDialog = new MaterialDialog.Builder(LoggingSettingsActivity.this)
+                        .title(R.string.log_customurl_title)
+                        .customView(R.layout.alertview)
+                        .positiveText(R.string.ok)
+                        .callback(new MaterialDialog.ButtonCallback() {
+                            @Override
+                            public void onPositive(MaterialDialog dialog) {
+                                EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString("log_customurl_url", userInput.getText().toString());
+                                editor.commit();
+                            }
+                        })
+                        .keyListener(new DialogInterface.OnKeyListener() {
+                            @Override
+                            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                                    ((SwitchPreference) preference).setChecked(false);
+                                    return false;
+                                }
+                                return true;
+                            }
+                        })
+                        .build();
+
+                EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
+                userInput.setText(prefs.getString("log_customurl_url","http://localhost/log?lat=%LAT&amp;longitude=%LON&amp;time=%TIME&amp;s=%SPD"));
+                userInput.setSingleLine(false);
+                TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
+
+                String legend = MessageFormat.format("{0} %LAT\n{1} %LON\n{2} %DESC\n{3} %SAT\n{4} %ALT\n{5} %SPD\n{6} %ACC\n{7} %DIR\n{8} %PROV\n{9} %TIME\n{10} %BATT\n{11} %AID\n{12} %SER",
+                        getString(R.string.txt_latitude), getString(R.string.txt_longitude), getString(R.string.txt_annotation),
+                        getString(R.string.txt_satellites), getString(R.string.txt_altitude), getString(R.string.txt_speed),
+                        getString(R.string.txt_accuracy), getString(R.string.txt_direction), getString(R.string.txt_provider),
+                        getString(R.string.txt_time_isoformat), "Battery:", "Android ID:", "Serial:");
+
+                tvMessage.setText(legend);
+                //alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                alertDialog.show();
+            }
+
+
+            return true;
+        }
 
         if (preference.getKey().equals("new_file_creation")) {
 

@@ -16,12 +16,11 @@
             android:summary="@string/log_kml_summary"
             android:title="@string/log_kml_title"/>
 
-        <Preference
+        <SwitchPreference
             android:title="@string/log_customurl_title"
             android:summary="@string/log_customurl_summary"
-            android:key="customurl_setup">
-            <intent android:action="com.mendhak.gpslogger.CUSTOMURL_SETUP"/>
-        </Preference>
+            android:key="log_customurl_enabled">
+        </SwitchPreference>
 
         <SwitchPreference
             android:key="log_opengts"
