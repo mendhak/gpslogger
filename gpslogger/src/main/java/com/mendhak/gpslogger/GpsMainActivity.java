@@ -37,12 +37,12 @@ import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.internal.view.menu.ActionMenuItemView;
+import android.support.v7.widget.*;
+import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
+import android.util.DisplayMetrics;
+import android.view.*;
 import android.widget.*;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.common.AppSettings;
@@ -201,6 +201,13 @@ public class GpsMainActivity extends ActionBarActivity
             StopAndUnbindServiceIfRequired();
         }
 
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if(navigationDrawerFragment.isDrawerOpen()){
+                navigationDrawerFragment.toggleDrawer();
+                return true;
+            }
+        }
+
         return super.onKeyDown(keyCode, event);
     }
 
@@ -346,12 +353,62 @@ public class GpsMainActivity extends ActionBarActivity
         if(toolbar.getMenu().size() > 0){ return true;}
 
         toolbar.inflateMenu(R.menu.gps_main);
+        setupEvenlyDistributedToolbar();
         toolbar.setOnMenuItemClickListener(this);
         mnuAnnotate = toolbar.getMenu().findItem(R.id.mnuAnnotate);
         mnuOnePoint = toolbar.getMenu().findItem(R.id.mnuOnePoint);
         mnuAutoSendNow = toolbar.getMenu().findItem(R.id.mnuAutoSendNow);
         enableDisableMenuItems();
         return true;
+    }
+
+
+    public void setupEvenlyDistributedToolbar(){
+
+        //http://stackoverflow.com/questions/26489079/evenly-spaced-menu-items-on-toolbar
+
+        // Use Display metrics to get Screen Dimensions
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+
+        // Toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+
+        // Add 10 spacing on either side of the toolbar
+        toolbar.setContentInsetsAbsolute(10, 10);
+
+        // Get the ChildCount of your Toolbar, this should only be 1
+        int childCount = toolbar.getChildCount();
+        // Get the Screen Width in pixels
+        int screenWidth = metrics.widthPixels;
+
+        // Create the Toolbar Params based on the screenWidth
+        Toolbar.LayoutParams toolbarParams = new Toolbar.LayoutParams(screenWidth, Toolbar.LayoutParams.WRAP_CONTENT);
+
+        // Loop through the child Items
+        for(int i = 0; i < childCount; i++){
+            // Get the item at the current index
+            View childView = toolbar.getChildAt(i);
+            // If its a ViewGroup
+            if(childView instanceof ViewGroup){
+                // Set its layout params
+                childView.setLayoutParams(toolbarParams);
+                // Get the child count of this view group, and compute the item widths based on this count & screen size
+                int innerChildCount = ((ViewGroup) childView).getChildCount();
+                int itemWidth  = (screenWidth / innerChildCount);
+                // Create layout params for the ActionMenuView
+                ActionMenuView.LayoutParams params = new ActionMenuView.LayoutParams(itemWidth, Toolbar.LayoutParams.WRAP_CONTENT);
+                // Loop through the children
+                for(int j = 0; j < innerChildCount; j++){
+                    View grandChild = ((ViewGroup) childView).getChildAt(j);
+                    if(grandChild instanceof ActionMenuItemView){
+                        // set the layout parameters on each View
+                        grandChild.setLayoutParams(params);
+                    }
+                }
+            }
+        }
     }
 
     private void enableDisableMenuItems() {

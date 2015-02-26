@@ -30,7 +30,9 @@
             android:configChanges="locale"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:uiOptions="splitActionBarWhenNarrow" >
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:windowSoftInputMode="adjustNothing"
+            >
             <meta-data
                 android:name="android.support.UI_OPTIONS"
                 android:value="splitActionBarWhenNarrow" />

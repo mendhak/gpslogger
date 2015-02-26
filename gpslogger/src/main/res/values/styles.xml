@@ -5,8 +5,6 @@
            parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/CustomActionBar</item>
 
-
-
         <!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette-->
         <!-- colorPrimary is used for the default action bar background -->
         <item name="colorPrimary">@color/primaryColor</item>
