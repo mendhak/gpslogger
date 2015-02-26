@@ -17,16 +17,11 @@
 
 package com.mendhak.gpslogger.settings;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
-import android.preference.SwitchPreference;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
+import android.preference.*;
 import android.text.Html;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -45,36 +40,23 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.*;
 
-/**
- * A {@link android.preference.PreferenceActivity} that presents a set of application settings. On
- * handset devices, settings are presented as a single list. On tablets,
- * settings are split by category, with category headers shown to the left of
- * the list of settings.
- * <p/>
- * See <a href="http://developer.android.com/design/patterns/settings.html">
- * Android Design: Settings</a> for design guidelines and the <a
- * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
- * API Guide</a> for more information on developing a Settings UI.
- */
-@SuppressWarnings("deprecation")
-public class LoggingSettingsActivity extends PreferenceActivity
+public class LoggingSettingsFragment extends PreferenceFragment
         implements
         Preference.OnPreferenceClickListener,
         Preference.OnPreferenceChangeListener,
         FolderSelectorDialog.FolderSelectCallback
 {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(LoggingSettingsActivity.class.getSimpleName());
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(LoggingSettingsFragment.class.getSimpleName());
     SharedPreferences prefs;
-    private final static int SELECT_FOLDER_DIALOG = 420;
-
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        addPreferencesFromResource(R.xml.pref_logging);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (prefs.getString("new_file_creation", "onceaday").equals("static")) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("new_file_creation", "custom");
@@ -84,44 +66,11 @@ public class LoggingSettingsActivity extends PreferenceActivity
             if(newFileCreation !=null){
                 newFileCreation.setValue("custom");
             }
-
         }
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        setPreferencesEnabledDisabled();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                Intent intent = new Intent(this, GpsMainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        addPreferencesFromResource(R.xml.pref_logging);
-
 
         Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
         gpsloggerFolder.setOnPreferenceClickListener(this);
-        String gpsLoggerFolderPath = prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(getApplicationContext()).getAbsolutePath());
+        String gpsLoggerFolderPath = prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(getActivity()).getAbsolutePath());
         gpsloggerFolder.setSummary(gpsLoggerFolderPath);
         if(!(new File(gpsLoggerFolderPath)).canWrite()){
             gpsloggerFolder.setSummary(Html.fromHtml("<font color='red'>" + gpsLoggerFolderPath + "</font>"));
@@ -156,7 +105,28 @@ public class LoggingSettingsActivity extends PreferenceActivity
 
         SwitchPreference chkLog_opengts = (SwitchPreference) findPreference("log_opengts");
         chkLog_opengts.setOnPreferenceChangeListener(this);
+    }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        setPreferencesEnabledDisabled();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                Intent intent = new Intent(getActivity(), GpsMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -164,7 +134,9 @@ public class LoggingSettingsActivity extends PreferenceActivity
     public boolean onPreferenceClick(Preference preference) {
 
         if (preference.getKey().equals("gpslogger_folder")) {
-            new FolderSelectorDialog().show(LoggingSettingsActivity.this);
+            FolderSelectorDialog fsd = new FolderSelectorDialog();
+            fsd.SetCallback(this);
+            fsd.show(getActivity());
             return true;
         }
 
@@ -179,7 +151,7 @@ public class LoggingSettingsActivity extends PreferenceActivity
                 chosenIndices.add(defaultListeners.indexOf(chosenListener));
             }
 
-            new MaterialDialog.Builder(this)
+            new MaterialDialog.Builder(getActivity())
                     .title(R.string.listeners_title)
                     .items(R.array.listeners)
                     .positiveText(R.string.ok)
@@ -207,7 +179,7 @@ public class LoggingSettingsActivity extends PreferenceActivity
 
         if(preference.getKey().equalsIgnoreCase("new_file_custom_name")){
 
-            MaterialDialog alertDialog = new MaterialDialog.Builder(LoggingSettingsActivity.this)
+            MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
                     .title(R.string.new_file_custom_title)
                     .customView(R.layout.alertview)
                     .positiveText(R.string.ok)
@@ -229,8 +201,6 @@ public class LoggingSettingsActivity extends PreferenceActivity
             alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             alertDialog.show();
         }
-
-
 
         return false;
     }
@@ -257,9 +227,9 @@ public class LoggingSettingsActivity extends PreferenceActivity
             // Bug in SwitchPreference: http://stackoverflow.com/questions/19503931/switchpreferences-calls-multiple-times-the-onpreferencechange-method
             // Check if isChecked == false && newValue == true
             if(!((SwitchPreference) preference).isChecked() && (Boolean)newValue  ) {
-                MaterialDialog alertDialog = new MaterialDialog.Builder(LoggingSettingsActivity.this)
+                MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
                         .title(R.string.log_customurl_title)
-                        .customView(R.layout.alertview)
+                        .customView(R.layout.alertview, true)
                         .positiveText(R.string.ok)
                         .callback(new MaterialDialog.ButtonCallback() {
                             @Override
@@ -294,7 +264,7 @@ public class LoggingSettingsActivity extends PreferenceActivity
                         getString(R.string.txt_time_isoformat), "Battery:", "Android ID:", "Serial:");
 
                 tvMessage.setText(legend);
-                //alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
                 alertDialog.show();
             }
 
@@ -319,7 +289,7 @@ public class LoggingSettingsActivity extends PreferenceActivity
 
     private void setPreferencesEnabledDisabled() {
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         Preference prefFileStaticName = (Preference) findPreference("new_file_custom_name");
         Preference prefAskEachTime = (Preference)findPreference("new_file_custom_each_time");
@@ -340,11 +310,11 @@ public class LoggingSettingsActivity extends PreferenceActivity
         tracer.debug("Folder path selected" + filePath);
 
         if(!folder.canWrite()){
-            Utilities.MsgBox(getString(R.string.sorry), getString(R.string.pref_logging_file_no_permissions), LoggingSettingsActivity.this);
+            Utilities.MsgBox(getString(R.string.sorry), getString(R.string.pref_logging_file_no_permissions), getActivity());
             return;
         }
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("gpslogger_folder", filePath);
         editor.commit();

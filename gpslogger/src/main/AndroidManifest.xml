@@ -39,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".settings.GeneralSettingsActivity"
+            android:name=".MainPreferenceActivity"
             android:label="@string/settings_screen_name"
             android:parentActivityName=".GpsMainActivity" >
             <meta-data
@@ -47,13 +47,14 @@
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />
         </activity>
         <activity
-            android:name=".settings.LoggingSettingsActivity"
-            android:label="@string/pref_logging_title"
+            android:name=".settings.GeneralSettingsActivity"
+            android:label="@string/settings_screen_name"
             android:parentActivityName=".GpsMainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />
         </activity>
+
         <activity
             android:name=".settings.UploadSettingsActivity"
             android:label="@string/pref_logging_title"

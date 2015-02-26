@@ -38,7 +38,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.internal.view.menu.ActionMenuItemView;
-import android.support.v7.widget.*;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
@@ -61,7 +60,7 @@ import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
 import com.mendhak.gpslogger.senders.osm.OSMAuthorizationActivity;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
 import com.mendhak.gpslogger.settings.GeneralSettingsActivity;
-import com.mendhak.gpslogger.settings.LoggingSettingsActivity;
+import com.mendhak.gpslogger.settings.LoggingSettingsFragment;
 import com.mendhak.gpslogger.settings.UploadSettingsActivity;
 import com.mendhak.gpslogger.views.GenericViewFragment;
 import com.mendhak.gpslogger.views.GpsBigViewFragment;
@@ -71,7 +70,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.*;
 
@@ -233,31 +231,31 @@ public class GpsMainActivity extends ActionBarActivity
             case 0:
                 break;
             case 1:
-                LaunchActivity(GeneralSettingsActivity.class);
+                LaunchActivity(MainPreferenceActivity.class, "GeneralSettingsFragment");
                 break;
             case 2:
-                LaunchActivity(LoggingSettingsActivity.class);
+                LaunchActivity(MainPreferenceActivity.class, "LoggingSettingsFragment");
                 break;
             case 3:
-                LaunchActivity(UploadSettingsActivity.class);
+                LaunchActivity(MainPreferenceActivity.class, "UploadSettingsFragment");
                 break;
             case 4:
-                LaunchActivity(AutoFtpActivity.class);
+                LaunchActivity(MainPreferenceActivity.class, "AutoFtpFragment");
                 break;
             case 5:
-                LaunchActivity(AutoEmailActivity.class);
+                LaunchActivity(MainPreferenceActivity.class, "AutoEmailFragment");
                 break;
             case 6:
-                LaunchActivity(OpenGTSActivity.class);
+                LaunchActivity(MainPreferenceActivity.class, "OpenGTSFragment");
                 break;
             case 7:
-                LaunchActivity(GDocsSettingsActivity.class);
+                LaunchActivity(MainPreferenceActivity.class, "GDocsSettingsFragment");
                 break;
             case 8:
-                LaunchActivity(OSMAuthorizationActivity.class);
+                LaunchActivity(MainPreferenceActivity.class, "OSMAuthorizationFragment");
                 break;
             case 9:
-                LaunchActivity(DropBoxAuthorizationActivity.class);
+                LaunchActivity(MainPreferenceActivity.class, "DropBoxAuthorizationFragment");
                 break;
             default:
                 loggingService.StopLogging();
@@ -272,11 +270,12 @@ public class GpsMainActivity extends ActionBarActivity
     /**
      * Launches activity in a delayed handler, less stutter
      */
-    private void LaunchActivity(final Class activityClass) {
+    private void LaunchActivity(final Class activityClass, final String whichFragment) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent targetActivity = new Intent(getApplicationContext(), activityClass);
+                targetActivity.putExtra("preference_fragment", whichFragment);
                 startActivity(targetActivity);
             }
         }, 120);
