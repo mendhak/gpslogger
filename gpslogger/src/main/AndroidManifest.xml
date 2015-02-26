@@ -33,12 +33,8 @@
             android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="adjustNothing"
             >
-            <meta-data
-                android:name="android.support.UI_OPTIONS"
-                android:value="splitActionBarWhenNarrow" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
