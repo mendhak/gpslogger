@@ -21,12 +21,13 @@ package com.mendhak.gpslogger;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import org.slf4j.LoggerFactory;
 
-public class Faqtivity extends Activity {
+public class Faqtivity extends ActionBarActivity {
 
     WebView browser;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Faqtivity.class.getSimpleName());
@@ -41,7 +42,7 @@ public class Faqtivity extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setContentView(R.layout.activity_faq);
 

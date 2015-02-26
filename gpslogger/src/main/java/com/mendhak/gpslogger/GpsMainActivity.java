@@ -17,8 +17,6 @@
 
 package com.mendhak.gpslogger;
 
-import android.app.ActionBar;
-import android.app.Activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -37,6 +35,9 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -74,7 +75,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class GpsMainActivity extends Activity
+public class GpsMainActivity extends ActionBarActivity
         implements GenericViewFragment.IGpsViewCallback, NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, IGpsLoggerServiceClient, IActionListener {
 
     private static Intent serviceIntent;
@@ -276,7 +277,7 @@ public class GpsMainActivity extends Activity
 
 
     public void SetUpActionBar() {
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
         SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(actionBar.getThemedContext(), R.array.gps_main_views, android.R.layout.simple_spinner_dropdown_item);
@@ -340,11 +341,20 @@ public class GpsMainActivity extends Activity
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.gps_main, menu);
-        mnuAnnotate = menu.findItem(R.id.mnuAnnotate);
-        mnuOnePoint = menu.findItem(R.id.mnuOnePoint);
-        mnuAutoSendNow = menu.findItem(R.id.mnuAutoSendNow);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        toolbar.inflateMenu(R.menu.gps_main);
+        mnuAnnotate = toolbar.getMenu().findItem(R.id.mnuAnnotate);
+        mnuOnePoint = toolbar.getMenu().findItem(R.id.mnuOnePoint);
+        mnuAutoSendNow = toolbar.getMenu().findItem(R.id.mnuAutoSendNow);
         enableDisableMenuItems();
+
+
+//        getMenuInflater().inflate(R.menu.gps_main, menu);
+//        mnuAnnotate = menu.findItem(R.id.mnuAnnotate);
+//        mnuOnePoint = menu.findItem(R.id.mnuOnePoint);
+//        mnuAutoSendNow = menu.findItem(R.id.mnuAutoSendNow);
+//        enableDisableMenuItems();
         return true;
     }
 

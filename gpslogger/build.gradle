@@ -130,6 +130,8 @@ dependencies {
 
     compile('com.afollestad:material-dialogs:0.6.3.1')
 
+    compile "com.android.support:appcompat-v7:21.0.+"
+
 }
 
 preBuild.doFirst {
