@@ -118,20 +118,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".senders.gdocs.GDocsSettingsActivity"
-            android:label="@string/gdocs_settings_screenname"
-            android:parentActivityName=".GpsMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
-
-            <intent-filter>
-                <action android:name="com.mendhak.gpslogger.GDOCS_SETUP" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".shortcuts.ShortcutCreate"

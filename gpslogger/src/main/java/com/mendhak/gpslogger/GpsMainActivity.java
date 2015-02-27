@@ -52,8 +52,7 @@ import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
-import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity;
-import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
+import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsFragment;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
 import com.mendhak.gpslogger.views.GenericViewFragment;
 import com.mendhak.gpslogger.views.GpsBigViewFragment;
@@ -644,7 +643,8 @@ public class GpsMainActivity extends ActionBarActivity
     private void UploadToGoogleDocs() {
         if (!GDocsHelper.IsLinked(getApplicationContext())) {
             tracer.debug("Not linked, opening Google Docs setup activity");
-            startActivity(new Intent(GpsMainActivity.this, GDocsSettingsActivity.class));
+            startActivity(new Intent(GpsMainActivity.this, GDocsSettingsFragment.class));
+            LaunchActivity(MainPreferenceActivity.class, "GDocsSettingsFragment");
             return;
         }
 

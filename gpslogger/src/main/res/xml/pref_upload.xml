@@ -38,7 +38,9 @@
             android:title="@string/autoemail_title"
             android:summary="@string/autoemail_summary"
             android:key="autoemail_setup">
-            <intent android:action="com.mendhak.gpslogger.AUTOEMAIL_SETUP"/>
+            <intent android:action="com.mendhak.gpslogger.MAIN_PREFS">
+                <extra android:name="preference_fragment" android:value="AutoEmailFragment" />
+            </intent>
         </Preference>
 
         <Preference
@@ -56,13 +58,17 @@
             android:title="@string/gdocs_setup_title"
             android:summary="@string/gdocs_setup_summary"
             android:key="gdocs_setup">
-            <intent android:action="com.mendhak.gpslogger.GDOCS_SETUP"/>
+            <intent android:action="com.mendhak.gpslogger.MAIN_PREFS">
+                <extra android:name="preference_fragment" android:value="GDocsSettingsFragment" />
+            </intent>
         </Preference>
         <Preference
             android:title="@string/opengts_setup_title"
             android:summary="@string/opengts_setup_summary"
             android:key="opengts_setup">
-            <intent android:action="com.mendhak.gpslogger.OPENGTS_SETUP"/>
+            <intent android:action="com.mendhak.gpslogger.MAIN_PREFS">
+                <extra android:name="preference_fragment" android:value="OpenGTSFragment" />
+            </intent>
         </Preference>
         <Preference
             android:title="@string/autoftp_setup_title"

@@ -9,6 +9,7 @@ import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.email.AutoEmailFragment;
 import com.mendhak.gpslogger.senders.ftp.AutoFtpFragment;
+import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsFragment;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
 import com.mendhak.gpslogger.settings.GeneralSettingsFragment;
 import com.mendhak.gpslogger.settings.LoggingSettingsFragment;
@@ -53,6 +54,10 @@ public class MainPreferenceActivity extends ActionBarActivity {
             case "OpenGTSFragment":
                 setTitle(R.string.opengts_setup_title);
                 preferenceFragment = new OpenGTSActivity();
+                break;
+            case "GDocsSettingsFragment":
+                setTitle(R.string.gdocs_setup_title);
+                preferenceFragment = new GDocsSettingsFragment();
                 break;
 
         }
