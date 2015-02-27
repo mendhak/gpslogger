@@ -17,30 +17,22 @@
 
 package com.mendhak.gpslogger.senders.email;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.SwitchPreference;
-
-import android.preference.Preference;
+import android.preference.*;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
-import android.view.KeyEvent;
-import android.view.MenuItem;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
-import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
-import com.mendhak.gpslogger.common.IMessageBoxCallback;
+import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
-public class AutoEmailActivity extends PreferenceActivity implements
-        OnPreferenceChangeListener, IMessageBoxCallback, IActionListener,
+public class AutoEmailActivity extends PreferenceValidationFragment implements
+        OnPreferenceChangeListener,  IActionListener,
         OnPreferenceClickListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoEmailActivity.class.getSimpleName());
@@ -50,7 +42,6 @@ public class AutoEmailActivity extends PreferenceActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         addPreferencesFromResource(R.xml.autoemailsettings);
 
@@ -72,31 +63,17 @@ public class AutoEmailActivity extends PreferenceActivity implements
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                Intent intent = new Intent(this, GpsMainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
     public boolean onPreferenceClick(Preference preference) {
 
         if (!IsFormValid()) {
             Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
                     getString(R.string.autoemail_invalid_form_message),
-                    AutoEmailActivity.this);
+                    getActivity());
             return false;
         }
 
-        Utilities.ShowProgress(this, getString(R.string.autoemail_sendingtest),
+        Utilities.ShowProgress(getActivity(), getString(R.string.autoemail_sendingtest),
                 getString(R.string.please_wait));
 
         SwitchPreference chkUseSsl = (SwitchPreference) findPreference("smtp_ssl");
@@ -135,27 +112,6 @@ public class AutoEmailActivity extends PreferenceActivity implements
 
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (!IsFormValid()) {
-                SwitchPreference chkEnabled = (SwitchPreference) findPreference("autoemail_enabled");
-                chkEnabled.setChecked(false);
-                Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
-                        getString(R.string.autoemail_invalid_form_message),
-                        this);
-                return false;
-            } else {
-                return super.onKeyDown(keyCode, event);
-            }
-        } else {
-            return super.onKeyDown(keyCode, event);
-        }
-    }
-
-
-    public void MessageBoxResult(int which) {
-        finish();
-    }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
 
@@ -187,7 +143,7 @@ public class AutoEmailActivity extends PreferenceActivity implements
 
     private void SetSmtpValues(String server, String port, boolean useSsl) {
         SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
+                .getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = prefs.edit();
 
         MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
@@ -222,13 +178,13 @@ public class AutoEmailActivity extends PreferenceActivity implements
 
     private void FailureSending() {
         Utilities.HideProgress();
-        Utilities.MsgBox(getString(R.string.sorry), getString(R.string.error_connection), this);
+        Utilities.MsgBox(getString(R.string.sorry), getString(R.string.error_connection), getActivity());
     }
 
     private void SuccessfulSending() {
         Utilities.HideProgress();
         Utilities.MsgBox(getString(R.string.success),
-                getString(R.string.autoemail_testresult_success), this);
+                getString(R.string.autoemail_testresult_success), getActivity());
     }
 
     public void OnComplete() {
@@ -239,5 +195,10 @@ public class AutoEmailActivity extends PreferenceActivity implements
 
         handler.post(failedSend);
 
+    }
+
+    @Override
+    public boolean IsValid() {
+        return IsFormValid();
     }
 }
