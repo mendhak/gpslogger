@@ -45,6 +45,11 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />
+            <intent-filter>
+                <action android:name="com.mendhak.gpslogger.MAIN_PREFS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <activity

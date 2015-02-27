@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
+import com.mendhak.gpslogger.common.PreferenceValidationFragment;
+import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.senders.ftp.AutoFtpActivity;
 import com.mendhak.gpslogger.settings.GeneralSettingsFragment;
 import com.mendhak.gpslogger.settings.LoggingSettingsFragment;
 import com.mendhak.gpslogger.settings.UploadSettingsFragment;
@@ -14,14 +18,14 @@ public class MainPreferenceActivity extends ActionBarActivity {
 
     private org.slf4j.Logger tracer;
 
+    PreferenceFragment preferenceFragment = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         tracer = LoggerFactory.getLogger(MainPreferenceActivity.class.getSimpleName());
 
         String whichFragment = getIntent().getExtras().getString("preference_fragment");
-
-        PreferenceFragment preferenceFragment = null;
 
         switch(whichFragment){
             case "GeneralSettingsFragment":
@@ -35,6 +39,11 @@ public class MainPreferenceActivity extends ActionBarActivity {
             case "UploadSettingsFragment":
                 setTitle(R.string.title_drawer_uploadsettings);
                 preferenceFragment = new UploadSettingsFragment();
+                break;
+            case "AutoFtpFragment":
+                setTitle(R.string.autoftp_setup_title);
+                preferenceFragment = new AutoFtpActivity();
+                break;
 
         }
 
@@ -47,6 +56,36 @@ public class MainPreferenceActivity extends ActionBarActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
 
+       if(isFormValid()){
+           super.onBackPressed();
+       }
 
+    }
+
+    private boolean isFormValid(){
+        if(preferenceFragment instanceof  PreferenceValidationFragment){
+            if( !((PreferenceValidationFragment)preferenceFragment).IsValid() ){
+                Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
+                        getString(R.string.autoemail_invalid_form_message),
+                        this);
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        final int id = item.getItemId();
+        if (id == android.R.id.home) {
+           return !isFormValid();
+        }
+
+        return false;
+    }
 }

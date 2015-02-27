@@ -68,7 +68,9 @@
             android:title="@string/autoftp_setup_title"
             android:summary="@string/autoftp_setup_summary"
             android:key="autoftp_setup">
-            <intent android:action="com.mendhak.gpslogger.AUTOFTP_SETUP"/>
+            <intent android:action="com.mendhak.gpslogger.MAIN_PREFS">
+                <extra android:name="preference_fragment" android:value="AutoFtpFragment" />
+            </intent>
         </Preference>
     </PreferenceCategory>
 

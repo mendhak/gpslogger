@@ -17,50 +17,30 @@
 
 package com.mendhak.gpslogger.senders.ftp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.SwitchPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.view.KeyEvent;
-import android.view.MenuItem;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
-import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
+import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
-public class AutoFtpActivity extends PreferenceActivity implements IActionListener, Preference.OnPreferenceClickListener {
+public class AutoFtpActivity
+        extends PreferenceValidationFragment implements IActionListener, Preference.OnPreferenceClickListener {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoFtpActivity.class.getSimpleName());
 
     private final Handler handler = new Handler();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
         addPreferencesFromResource(R.xml.autoftpsettings);
 
         Preference testFtp = findPreference("autoftp_test");
         testFtp.setOnPreferenceClickListener(this);
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                Intent intent = new Intent(this, GpsMainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 
@@ -79,22 +59,6 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
 
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (!IsFormValid()) {
-                SwitchPreference chkEnabled = (SwitchPreference) findPreference("autoftp_enabled");
-                chkEnabled.setChecked(false);
-                Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
-                        getString(R.string.autoemail_invalid_form_message),
-                        this);
-                return false;
-            } else {
-                return super.onKeyDown(keyCode, event);
-            }
-        } else {
-            return super.onKeyDown(keyCode, event);
-        }
-    }
 
     private final Runnable successfullySent = new Runnable() {
         public void run() {
@@ -111,13 +75,13 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
 
     private void FailureSending() {
         Utilities.HideProgress();
-        Utilities.MsgBox(getString(R.string.sorry), "FTP Test Failed", this);
+        Utilities.MsgBox(getString(R.string.sorry), "FTP Test Failed", getActivity());
     }
 
     private void SuccessfulSending() {
         Utilities.HideProgress();
         Utilities.MsgBox(getString(R.string.success),
-                "FTP Test Succeeded", this);
+                "FTP Test Succeeded", getActivity());
     }
 
     @Override
@@ -151,12 +115,11 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
                 implicitPreference.isChecked())) {
             Utilities.MsgBox(getString(R.string.autoftp_invalid_settings),
                     getString(R.string.autoftp_invalid_summary),
-                    AutoFtpActivity.this);
+                    getActivity());
             return false;
         }
 
-
-        Utilities.ShowProgress(this, getString(R.string.autoftp_testing),
+        Utilities.ShowProgress(getActivity(), getString(R.string.autoftp_testing),
                 getString(R.string.please_wait));
 
 
@@ -168,4 +131,8 @@ public class AutoFtpActivity extends PreferenceActivity implements IActionListen
     }
 
 
+    @Override
+    public boolean IsValid() {
+        return IsFormValid();
+    }
 }
