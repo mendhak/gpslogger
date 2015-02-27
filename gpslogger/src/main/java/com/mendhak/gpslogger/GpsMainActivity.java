@@ -284,6 +284,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     public void SetUpActionBar() {
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setElevation(0);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
         SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(actionBar.getThemedContext(), R.array.gps_main_views, android.R.layout.simple_spinner_dropdown_item);
@@ -353,6 +354,7 @@ public class GpsMainActivity extends ActionBarActivity
 
         toolbar.inflateMenu(R.menu.gps_main);
         setupEvenlyDistributedToolbar();
+
         toolbar.setOnMenuItemClickListener(this);
         mnuAnnotate = toolbar.getMenu().findItem(R.id.mnuAnnotate);
         mnuOnePoint = toolbar.getMenu().findItem(R.id.mnuOnePoint);
