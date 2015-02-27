@@ -623,7 +623,7 @@ public class GpsMainActivity extends ActionBarActivity
 
         if (!dropBoxHelper.IsLinked()) {
             tracer.debug("Not linked, opening Dropbox activity");
-            startActivity(new Intent("com.mendhak.gpslogger.DROPBOX_SETUP"));
+            LaunchActivity(MainPreferenceActivity.class, "DropBoxAuthorizationFragment");
             return;
         }
 
@@ -643,7 +643,6 @@ public class GpsMainActivity extends ActionBarActivity
     private void UploadToGoogleDocs() {
         if (!GDocsHelper.IsLinked(getApplicationContext())) {
             tracer.debug("Not linked, opening Google Docs setup activity");
-            startActivity(new Intent(GpsMainActivity.this, GDocsSettingsFragment.class));
             LaunchActivity(MainPreferenceActivity.class, "GDocsSettingsFragment");
             return;
         }

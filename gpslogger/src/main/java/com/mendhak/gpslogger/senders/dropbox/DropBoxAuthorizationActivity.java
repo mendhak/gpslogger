@@ -23,13 +23,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
-public class DropBoxAuthorizationActivity extends PreferenceActivity {
+public class DropBoxAuthorizationActivity extends PreferenceFragment {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropBoxAuthorizationActivity.class.getSimpleName());
     DropBoxHelper helper;
@@ -37,13 +38,12 @@ public class DropBoxAuthorizationActivity extends PreferenceActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         addPreferencesFromResource(R.xml.dropboxsettings);
 
         Preference pref = findPreference("dropbox_resetauth");
 
-        helper = new DropBoxHelper(getApplicationContext(), null);
+        helper = new DropBoxHelper(getActivity(), null);
 
         if (helper.IsLinked()) {
             pref.setTitle(R.string.dropbox_unauthorize);
@@ -59,8 +59,8 @@ public class DropBoxAuthorizationActivity extends PreferenceActivity {
                 // This logs you out if you're logged in, or vice versa
                 if (helper.IsLinked()) {
                     helper.UnLink();
-                    startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
-                    finish();
+                    startActivity(new Intent(getActivity(), GpsMainActivity.class));
+                    getActivity().finish();
                 } else {
                     try {
                         helper.StartAuthentication(DropBoxAuthorizationActivity.this);
@@ -75,37 +75,22 @@ public class DropBoxAuthorizationActivity extends PreferenceActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                Intent intent = new Intent(this, GpsMainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         try {
             if (helper.FinishAuthorization()) {
-                startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
-                finish();
+                startActivity(new Intent(getActivity(), GpsMainActivity.class));
+                getActivity().finish();
             }
         } catch (Exception e) {
             Utilities.MsgBox(getString(R.string.error), getString(R.string.dropbox_couldnotauthorize),
-                    DropBoxAuthorizationActivity.this);
+                    getActivity());
             tracer.error("DropBoxAuthorizationActivity.onResume", e);
         }
 
     }
-
 
 }

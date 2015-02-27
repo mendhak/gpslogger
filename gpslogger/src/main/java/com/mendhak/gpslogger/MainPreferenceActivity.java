@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.senders.dropbox.DropBoxAuthorizationActivity;
 import com.mendhak.gpslogger.senders.email.AutoEmailFragment;
 import com.mendhak.gpslogger.senders.ftp.AutoFtpFragment;
 import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsFragment;
@@ -58,6 +59,10 @@ public class MainPreferenceActivity extends ActionBarActivity {
             case "GDocsSettingsFragment":
                 setTitle(R.string.gdocs_setup_title);
                 preferenceFragment = new GDocsSettingsFragment();
+                break;
+            case "DropBoxAuthorizationFragment":
+                setTitle(R.string.dropbox_setup_title);
+                preferenceFragment = new DropBoxAuthorizationActivity();
                 break;
 
         }

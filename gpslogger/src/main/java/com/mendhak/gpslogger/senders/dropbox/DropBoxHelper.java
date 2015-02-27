@@ -146,7 +146,7 @@ public class DropBoxHelper implements IActionListener, IFileSender {
 
     public void StartAuthentication(DropBoxAuthorizationActivity dropBoxAuthorizationActivity) {
         // Start the remote authentication
-        dropboxApi.getSession().startAuthentication(dropBoxAuthorizationActivity);
+        dropboxApi.getSession().startAuthentication(dropBoxAuthorizationActivity.getActivity());
     }
 
     public void UnLink() {

@@ -53,22 +53,6 @@
         </activity>
 
         <activity
-            android:name=".senders.dropbox.DropBoxAuthorizationActivity"
-            android:label="DropBox"
-            android:launchMode="singleTask"
-            android:parentActivityName=".GpsMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
-
-            <intent-filter>
-                <action android:name="com.mendhak.gpslogger.DROPBOX_SETUP" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name=".Faqtivity"
             android:label="@string/faq_screen_title"
             android:launchMode="singleTask"
@@ -77,6 +61,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />
         </activity>
+
         <activity
             android:name="com.dropbox.client2.android.AuthActivity"
             android:configChanges="orientation|keyboard"
