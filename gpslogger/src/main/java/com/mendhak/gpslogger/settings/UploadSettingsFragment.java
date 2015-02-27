@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
@@ -38,35 +39,13 @@ import com.mendhak.gpslogger.senders.osm.OSMHelper;
  * API Guide</a> for more information on developing a Settings UI.
  */
 @SuppressWarnings("deprecation")
-public class UploadSettingsActivity extends PreferenceActivity implements Preference.OnPreferenceClickListener {
+public class UploadSettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                Intent intent = new Intent(this, GpsMainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.pref_upload);
-
 
         Preference osmSetupPref = findPreference("osm_setup");
         osmSetupPref.setOnPreferenceClickListener(this);
@@ -77,7 +56,7 @@ public class UploadSettingsActivity extends PreferenceActivity implements Prefer
     public boolean onPreferenceClick(Preference preference) {
 
         if (preference.getKey().equals("osm_setup")) {
-            startActivity(OSMHelper.GetOsmSettingsIntent(getApplicationContext()));
+            startActivity(OSMHelper.GetOsmSettingsIntent(getActivity().getApplicationContext()));
             return true;
         }
 

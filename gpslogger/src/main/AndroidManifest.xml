@@ -48,14 +48,6 @@
         </activity>
 
         <activity
-            android:name=".settings.UploadSettingsActivity"
-            android:label="@string/pref_logging_title"
-            android:parentActivityName=".GpsMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
-        </activity>
-        <activity
             android:name=".senders.dropbox.DropBoxAuthorizationActivity"
             android:label="DropBox"
             android:launchMode="singleTask"

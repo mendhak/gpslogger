@@ -58,7 +58,6 @@ import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
-import com.mendhak.gpslogger.settings.UploadSettingsActivity;
 import com.mendhak.gpslogger.views.GenericViewFragment;
 import com.mendhak.gpslogger.views.GpsBigViewFragment;
 import com.mendhak.gpslogger.views.GpsDetailedViewFragment;
@@ -225,66 +224,51 @@ public class GpsMainActivity extends ActionBarActivity
 
         tracer.debug("Navigation menu item: " + String.valueOf(position));
 
-        if(position > 0 && position <= 9)
-        {
-            LaunchActivity(MainPreferenceActivity.class, position);
+
+        switch (position) {
+            case 0:
+                break;
+            case 1:
+                LaunchActivity(MainPreferenceActivity.class, "GeneralSettingsFragment");
+                break;
+            case 2:
+                LaunchActivity(MainPreferenceActivity.class, "LoggingSettingsFragment");
+                break;
+            case 3:
+                LaunchActivity(MainPreferenceActivity.class, "UploadSettingsFragment");
+                break;
+            case 4:
+                LaunchActivity(MainPreferenceActivity.class, "AutoFtpFragment");
+                break;
+            case 5:
+                LaunchActivity(MainPreferenceActivity.class, "AutoEmailFragment");
+                break;
+            case 6:
+                LaunchActivity(MainPreferenceActivity.class, "OpenGTSFragment");
+                break;
+            case 7:
+                LaunchActivity(MainPreferenceActivity.class, "GDocsSettingsFragment");
+                break;
+            case 8:
+                LaunchActivity(MainPreferenceActivity.class, "OSMAuthorizationFragment");
+                break;
+            case 9:
+                LaunchActivity(MainPreferenceActivity.class, "DropBoxAuthorizationFragment");
+                break;
+            default:
+                loggingService.StopLogging();
+                loggingService.stopSelf();
+                finish();
+                break;
+
         }
-
-        if (position == 10) {
-            loggingService.StopLogging();
-            loggingService.stopSelf();
-            finish();
-        }
-
-
-
-
-//
-//
-//        switch (position) {
-//            case 0:
-//                break;
-//            case 1:
-//                LaunchActivity(MainPreferenceActivity.class, "GeneralSettingsFragment");
-//                break;
-//            case 2:
-//                LaunchActivity(MainPreferenceActivity.class, "LoggingSettingsFragment");
-//                break;
-//            case 3:
-//                LaunchActivity(MainPreferenceActivity.class, "UploadSettingsFragment");
-//                break;
-//            case 4:
-//                LaunchActivity(MainPreferenceActivity.class, "AutoFtpFragment");
-//                break;
-//            case 5:
-//                LaunchActivity(MainPreferenceActivity.class, "AutoEmailFragment");
-//                break;
-//            case 6:
-//                LaunchActivity(MainPreferenceActivity.class, "OpenGTSFragment");
-//                break;
-//            case 7:
-//                LaunchActivity(MainPreferenceActivity.class, "GDocsSettingsFragment");
-//                break;
-//            case 8:
-//                LaunchActivity(MainPreferenceActivity.class, "OSMAuthorizationFragment");
-//                break;
-//            case 9:
-//                LaunchActivity(MainPreferenceActivity.class, "DropBoxAuthorizationFragment");
-//                break;
-//            default:
-//                loggingService.StopLogging();
-//                loggingService.stopSelf();
-//                finish();
-//                break;
-//
-//        }
 
     }
 
     /**
      * Launches activity in a delayed handler, less stutter
      */
-    private void LaunchActivity(final Class activityClass, final int whichFragment) {
+    private void LaunchActivity(final Class activityClass, final String whichFragment) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -561,8 +545,7 @@ public class GpsMainActivity extends ActionBarActivity
 
 
         } else {
-            Intent pref = new Intent().setClass(this, UploadSettingsActivity.class);
-            startActivity(pref);
+            LaunchActivity(MainPreferenceActivity.class, "UploadSettingsFragment");
         }
 
     }

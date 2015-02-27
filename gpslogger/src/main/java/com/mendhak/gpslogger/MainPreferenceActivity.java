@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import com.mendhak.gpslogger.settings.GeneralSettingsFragment;
 import com.mendhak.gpslogger.settings.LoggingSettingsFragment;
+import com.mendhak.gpslogger.settings.UploadSettingsFragment;
 import org.slf4j.LoggerFactory;
 
 
@@ -18,19 +19,22 @@ public class MainPreferenceActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         tracer = LoggerFactory.getLogger(MainPreferenceActivity.class.getSimpleName());
 
-        int fragmentNumber = getIntent().getExtras().getInt("preference_fragment");
+        String whichFragment = getIntent().getExtras().getString("preference_fragment");
 
         PreferenceFragment preferenceFragment = null;
 
-        switch(fragmentNumber){
-            case 1:
+        switch(whichFragment){
+            case "GeneralSettingsFragment":
                 setTitle(R.string.settings_screen_name);
                 preferenceFragment = new GeneralSettingsFragment();
                 break;
-            case 2:
+            case "LoggingSettingsFragment":
                 setTitle(R.string.pref_logging_title);
                 preferenceFragment = new LoggingSettingsFragment();
                 break;
+            case "UploadSettingsFragment":
+                setTitle(R.string.title_drawer_uploadsettings);
+                preferenceFragment = new UploadSettingsFragment();
 
         }
 
