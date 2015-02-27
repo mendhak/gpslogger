@@ -32,10 +32,11 @@ import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
-public class OpenGTSActivity extends PreferenceActivity implements
+public class OpenGTSActivity extends PreferenceValidationFragment implements
         OnPreferenceChangeListener,
         OnPreferenceClickListener {
 
@@ -44,7 +45,6 @@ public class OpenGTSActivity extends PreferenceActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         addPreferencesFromResource(R.xml.opengtssettings);
 
@@ -64,26 +64,11 @@ public class OpenGTSActivity extends PreferenceActivity implements
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                Intent intent = new Intent(this, GpsMainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
     public boolean onPreferenceClick(Preference preference) {
         if (!IsFormValid()) {
             Utilities.MsgBox(getString(R.string.autoopengts_invalid_form),
                     getString(R.string.autoopengts_invalid_form_message),
-                    OpenGTSActivity.this);
+                    getActivity());
             return false;
         }
         return true;
@@ -115,24 +100,13 @@ public class OpenGTSActivity extends PreferenceActivity implements
         return true;
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (!IsFormValid()) {
-                Utilities.MsgBox(getString(R.string.autoopengts_invalid_form),
-                        getString(R.string.autoopengts_invalid_form_message),
-                        this);
-                return false;
-            } else {
-                return super.onKeyDown(keyCode, event);
-            }
-        } else {
-            return super.onKeyDown(keyCode, event);
-        }
-    }
-
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         return true;
     }
 
+    @Override
+    public boolean IsValid() {
+        return IsFormValid();
+    }
 }

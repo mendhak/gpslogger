@@ -31,11 +31,11 @@ import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
-public class AutoEmailActivity extends PreferenceValidationFragment implements
+public class AutoEmailFragment extends PreferenceValidationFragment implements
         OnPreferenceChangeListener,  IActionListener,
         OnPreferenceClickListener {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoEmailActivity.class.getSimpleName());
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoEmailFragment.class.getSimpleName());
     private final Handler handler = new Handler();
 
 
@@ -89,7 +89,7 @@ public class AutoEmailActivity extends PreferenceValidationFragment implements
         aeh.SendTestEmail(txtSmtpServer.getText(), txtSmtpPort.getText(),
                 txtUsername.getText(), txtPassword.getText(),
                 chkUseSsl.isChecked(), txtTarget.getText(), txtFrom.getText(),
-                AutoEmailActivity.this);
+                AutoEmailFragment.this);
 
         return true;
     }

@@ -50,10 +50,7 @@ import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.senders.IFileSender;
-import com.mendhak.gpslogger.senders.dropbox.DropBoxAuthorizationActivity;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
-import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
-import com.mendhak.gpslogger.senders.ftp.AutoFtpActivity;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
@@ -619,8 +616,7 @@ public class GpsMainActivity extends ActionBarActivity
             return;
         }
 
-        Intent settingsIntent = OSMHelper.GetOsmSettingsIntent(getApplicationContext());
-        ShowFileListDialog(settingsIntent, FileSenderFactory.GetOsmSender(getApplicationContext(), this));
+        ShowFileListDialog(FileSenderFactory.GetOsmSender(getApplicationContext(), this));
     }
 
     private void UploadToDropBox() {
@@ -632,19 +628,16 @@ public class GpsMainActivity extends ActionBarActivity
             return;
         }
 
-        Intent settingsIntent = new Intent(GpsMainActivity.this, DropBoxAuthorizationActivity.class);
-        ShowFileListDialog(settingsIntent, FileSenderFactory.GetDropBoxSender(getApplication(), this));
+        ShowFileListDialog(FileSenderFactory.GetDropBoxSender(getApplication(), this));
     }
 
     private void SendToOpenGTS() {
-        Intent settingsIntent = new Intent(getApplicationContext(), OpenGTSActivity.class);
-
         if (!Utilities.IsOpenGTSSetup()) {
             tracer.debug("Not set up, opening OpenGTS activity");
-            startActivity(settingsIntent);
+            LaunchActivity(MainPreferenceActivity.class, "OpenGTSFragment");
         } else {
             IFileSender fs = FileSenderFactory.GetOpenGTSSender(getApplicationContext(), this);
-            ShowFileListDialog(settingsIntent, fs);
+            ShowFileListDialog(fs);
         }
     }
 
@@ -655,36 +648,30 @@ public class GpsMainActivity extends ActionBarActivity
             return;
         }
 
-        Intent settingsIntent = new Intent(GpsMainActivity.this, GDocsSettingsActivity.class);
-        ShowFileListDialog(settingsIntent, FileSenderFactory.GetGDocsSender(getApplicationContext(), this));
+        ShowFileListDialog(FileSenderFactory.GetGDocsSender(getApplicationContext(), this));
     }
 
     private void SendToFtp() {
-        Intent settingsIntent = new Intent(getApplicationContext(), AutoFtpActivity.class);
-
         if (!Utilities.IsFtpSetup()) {
             tracer.debug("Not setup, opening FTP setup activity");
-            startActivity(settingsIntent);
+            LaunchActivity(MainPreferenceActivity.class, "AutoFtpFragment");
         } else {
             IFileSender fs = FileSenderFactory.GetFtpSender(getApplicationContext(), this);
-            ShowFileListDialog(settingsIntent, fs);
-
+            ShowFileListDialog(fs);
         }
     }
 
     private void SelectAndEmailFile() {
-        Intent settingsIntent = new Intent(getApplicationContext(), AutoEmailActivity.class);
-
         if (!Utilities.IsEmailSetup()) {
             tracer.debug("Not set up, opening email setup activity");
-            startActivity(settingsIntent);
+            LaunchActivity(MainPreferenceActivity.class, "AutoEmailFragment");
         } else {
-            ShowFileListDialog(settingsIntent, FileSenderFactory.GetEmailSender(this));
+            ShowFileListDialog(FileSenderFactory.GetEmailSender(this));
         }
 
     }
 
-    private void ShowFileListDialog(final Intent settingsIntent, final IFileSender sender) {
+    private void ShowFileListDialog(final IFileSender sender) {
 
         final File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
@@ -707,10 +694,6 @@ public class GpsMainActivity extends ActionBarActivity
                 fileList.add(f.getName());
             }
 
-            final String settingsText = getString(R.string.menu_settings);
-
-            //Add 'settings' to top of list
-            fileList.add(0, settingsText);
             final String[] files = fileList.toArray(new String[fileList.size()]);
 
 
@@ -726,23 +709,17 @@ public class GpsMainActivity extends ActionBarActivity
 
                             List<Integer> selectedItems = Arrays.asList(integers);
 
-                            if (selectedItems.size() > 0 && selectedItems.contains(0)) {
-                                startActivity(settingsIntent);
-                            } else {
+                            List<File> chosenFiles = new ArrayList<File>();
 
-                                List<File> chosenFiles = new ArrayList<File>();
+                            for (Object item : selectedItems) {
+                                tracer.info("Selected file to upload- " + files[Integer.valueOf(item.toString())]);
+                                chosenFiles.add(new File(gpxFolder, files[Integer.valueOf(item.toString())]));
+                            }
 
-                                for (Object item : selectedItems) {
-                                    tracer.info("Selected file to upload- " + files[Integer.valueOf(item.toString())]);
-                                    chosenFiles.add(new File(gpxFolder, files[Integer.valueOf(item.toString())]));
-                                }
-
-                                if (chosenFiles.size() > 0) {
-                                    Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.please_wait),
-                                            getString(R.string.please_wait));
-                                    sender.UploadFile(chosenFiles);
-                                }
-
+                            if (chosenFiles.size() > 0) {
+                                Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.please_wait),
+                                        getString(R.string.please_wait));
+                                sender.UploadFile(chosenFiles);
                             }
                         }
                     }).show();

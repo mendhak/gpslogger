@@ -29,9 +29,9 @@ import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
-public class AutoFtpActivity
+public class AutoFtpFragment
         extends PreferenceValidationFragment implements IActionListener, Preference.OnPreferenceClickListener {
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoFtpActivity.class.getSimpleName());
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoFtpFragment.class.getSimpleName());
 
     private final Handler handler = new Handler();
 

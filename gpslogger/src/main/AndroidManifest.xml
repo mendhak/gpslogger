@@ -67,7 +67,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".common.FileDialog.FileDialog" />
+
         <activity
             android:name=".Faqtivity"
             android:label="@string/faq_screen_title"
@@ -117,36 +117,7 @@
                     android:scheme="gpslogger" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".senders.ftp.AutoFtpActivity"
-            android:label="@string/autoftp_setup_title"
-            android:parentActivityName=".GpsMainActivity"
-            android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
 
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <action android:name="com.mendhak.gpslogger.AUTOFTP_SETUP" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".senders.email.AutoEmailActivity"
-            android:label="@string/autoemail_title"
-            android:parentActivityName=".GpsMainActivity"
-            android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
-
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <action android:name="com.mendhak.gpslogger.AUTOEMAIL_SETUP" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".senders.gdocs.GDocsSettingsActivity"
             android:label="@string/gdocs_settings_screenname"
@@ -161,20 +132,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".loggers.customurl.CustomUrlLoggerActivity"
-            android:label="Custom URL Logging"
-            android:parentActivityName=".GpsMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
 
-            <intent-filter>
-                <action android:name="com.mendhak.gpslogger.CUSTOMURL_SETUP" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".shortcuts.ShortcutCreate"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
@@ -198,20 +156,7 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".senders.opengts.OpenGTSActivity"
-            android:label="@string/opengts_setup_title"
-            android:parentActivityName=".GpsMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
 
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <action android:name="com.mendhak.gpslogger.OPENGTS_SETUP" />
-            </intent-filter>
-        </activity>
 
         <receiver
             android:name=".StartupReceiver"

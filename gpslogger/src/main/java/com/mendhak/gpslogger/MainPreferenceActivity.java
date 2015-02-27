@@ -7,8 +7,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
-import com.mendhak.gpslogger.senders.ftp.AutoFtpActivity;
+import com.mendhak.gpslogger.senders.email.AutoEmailFragment;
+import com.mendhak.gpslogger.senders.ftp.AutoFtpFragment;
+import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
 import com.mendhak.gpslogger.settings.GeneralSettingsFragment;
 import com.mendhak.gpslogger.settings.LoggingSettingsFragment;
 import com.mendhak.gpslogger.settings.UploadSettingsFragment;
@@ -43,11 +44,15 @@ public class MainPreferenceActivity extends ActionBarActivity {
                 break;
             case "AutoFtpFragment":
                 setTitle(R.string.autoftp_setup_title);
-                preferenceFragment = new AutoFtpActivity();
+                preferenceFragment = new AutoFtpFragment();
                 break;
             case "AutoEmailFragment":
                 setTitle(R.string.autoemail_title);
-                preferenceFragment = new AutoEmailActivity();
+                preferenceFragment = new AutoEmailFragment();
+                break;
+            case "OpenGTSFragment":
+                setTitle(R.string.opengts_setup_title);
+                preferenceFragment = new OpenGTSActivity();
                 break;
 
         }
