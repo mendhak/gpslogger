@@ -116,21 +116,6 @@ public class LoggingSettingsFragment extends PreferenceFragment
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                Intent intent = new Intent(getActivity(), GpsMainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    @Override
     public boolean onPreferenceClick(Preference preference) {
 
         if (preference.getKey().equals("gpslogger_folder")) {

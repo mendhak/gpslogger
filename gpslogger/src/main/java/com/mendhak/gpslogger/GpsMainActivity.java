@@ -57,10 +57,7 @@ import com.mendhak.gpslogger.senders.ftp.AutoFtpActivity;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
-import com.mendhak.gpslogger.senders.osm.OSMAuthorizationActivity;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
-import com.mendhak.gpslogger.settings.GeneralSettingsActivity;
-import com.mendhak.gpslogger.settings.LoggingSettingsFragment;
 import com.mendhak.gpslogger.settings.UploadSettingsActivity;
 import com.mendhak.gpslogger.views.GenericViewFragment;
 import com.mendhak.gpslogger.views.GpsBigViewFragment;
@@ -227,50 +224,67 @@ public class GpsMainActivity extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
 
         tracer.debug("Navigation menu item: " + String.valueOf(position));
-        switch (position) {
-            case 0:
-                break;
-            case 1:
-                LaunchActivity(MainPreferenceActivity.class, "GeneralSettingsFragment");
-                break;
-            case 2:
-                LaunchActivity(MainPreferenceActivity.class, "LoggingSettingsFragment");
-                break;
-            case 3:
-                LaunchActivity(MainPreferenceActivity.class, "UploadSettingsFragment");
-                break;
-            case 4:
-                LaunchActivity(MainPreferenceActivity.class, "AutoFtpFragment");
-                break;
-            case 5:
-                LaunchActivity(MainPreferenceActivity.class, "AutoEmailFragment");
-                break;
-            case 6:
-                LaunchActivity(MainPreferenceActivity.class, "OpenGTSFragment");
-                break;
-            case 7:
-                LaunchActivity(MainPreferenceActivity.class, "GDocsSettingsFragment");
-                break;
-            case 8:
-                LaunchActivity(MainPreferenceActivity.class, "OSMAuthorizationFragment");
-                break;
-            case 9:
-                LaunchActivity(MainPreferenceActivity.class, "DropBoxAuthorizationFragment");
-                break;
-            default:
-                loggingService.StopLogging();
-                loggingService.stopSelf();
-                finish();
-                break;
 
+        if(position > 0 && position <= 9)
+        {
+            LaunchActivity(MainPreferenceActivity.class, position);
         }
+
+        if (position == 10) {
+            loggingService.StopLogging();
+            loggingService.stopSelf();
+            finish();
+        }
+
+
+
+
+//
+//
+//        switch (position) {
+//            case 0:
+//                break;
+//            case 1:
+//                LaunchActivity(MainPreferenceActivity.class, "GeneralSettingsFragment");
+//                break;
+//            case 2:
+//                LaunchActivity(MainPreferenceActivity.class, "LoggingSettingsFragment");
+//                break;
+//            case 3:
+//                LaunchActivity(MainPreferenceActivity.class, "UploadSettingsFragment");
+//                break;
+//            case 4:
+//                LaunchActivity(MainPreferenceActivity.class, "AutoFtpFragment");
+//                break;
+//            case 5:
+//                LaunchActivity(MainPreferenceActivity.class, "AutoEmailFragment");
+//                break;
+//            case 6:
+//                LaunchActivity(MainPreferenceActivity.class, "OpenGTSFragment");
+//                break;
+//            case 7:
+//                LaunchActivity(MainPreferenceActivity.class, "GDocsSettingsFragment");
+//                break;
+//            case 8:
+//                LaunchActivity(MainPreferenceActivity.class, "OSMAuthorizationFragment");
+//                break;
+//            case 9:
+//                LaunchActivity(MainPreferenceActivity.class, "DropBoxAuthorizationFragment");
+//                break;
+//            default:
+//                loggingService.StopLogging();
+//                loggingService.stopSelf();
+//                finish();
+//                break;
+//
+//        }
 
     }
 
     /**
      * Launches activity in a delayed handler, less stutter
      */
-    private void LaunchActivity(final Class activityClass, final String whichFragment) {
+    private void LaunchActivity(final Class activityClass, final int whichFragment) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
@@ -39,21 +40,13 @@ import com.mendhak.gpslogger.R;
  * API Guide</a> for more information on developing a Settings UI.
  */
 @SuppressWarnings("deprecation")
-public class GeneralSettingsActivity extends PreferenceActivity implements Preference.OnPreferenceClickListener {
+public class GeneralSettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
     int aboutClickCounter = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
-    }
-
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.pref_general);
 
@@ -66,24 +59,10 @@ public class GeneralSettingsActivity extends PreferenceActivity implements Prefe
         Preference aboutInfo = findPreference("about_version_info");
         try {
 
-            aboutInfo.setTitle("GPSLogger version " + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+            aboutInfo.setTitle("GPSLogger version " + getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName);
             aboutInfo.setOnPreferenceClickListener(this);
         } catch (PackageManager.NameNotFoundException e) {
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                Intent intent = new Intent(this, GpsMainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 
