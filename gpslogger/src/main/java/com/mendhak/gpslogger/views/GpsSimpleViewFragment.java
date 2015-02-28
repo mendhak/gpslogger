@@ -188,8 +188,8 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         ImageView imgSatellites = (ImageView) rootView.findViewById(R.id.simpleview_imgSatelliteCount);
         imgSatellites.setOnClickListener(this);
 
-        TextView txtAccuracyIcon = (TextView) rootView.findViewById(R.id.simpleview_txtAccuracyIcon);
-        txtAccuracyIcon.setOnClickListener(this);
+        ImageView imgAccuracy = (ImageView) rootView.findViewById(R.id.simpleview_imgAccuracy);
+        imgAccuracy.setOnClickListener(this);
 
         ImageView imgElevation = (ImageView) rootView.findViewById(R.id.simpleview_imgAltitude);
         imgElevation.setOnClickListener(this);
@@ -271,7 +271,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             if (accuracy > 900) {
                 txtAccuracy.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
             } else {
-                txtAccuracy.setTextColor(getResources().getColor(android.R.color.black));
+                txtAccuracy.setTextColor(getResources().getColor(R.color.secondaryColorText));
             }
 
 
@@ -368,7 +368,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         String providerName = locationInfo.getProvider();
         if (!providerName.equalsIgnoreCase("gps")) {
             TextView txtSatelliteCount = (TextView) rootView.findViewById(R.id.simpleview_txtSatelliteCount);
-            txtSatelliteCount.setText("-");
+            txtSatelliteCount.setText("");
         }
 
     }
@@ -378,35 +378,35 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         nf.setMaximumFractionDigits(3);
 
         EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
-        txtLatitude.setText("-");
+        txtLatitude.setText("");
 
         EditText txtLongitude = (EditText) rootView.findViewById(R.id.simple_lon_text);
-        txtLongitude.setText("-");
+        txtLongitude.setText("");
 
 
         TextView txtAccuracy = (TextView) rootView.findViewById(R.id.simpleview_txtAccuracy);
-        txtAccuracy.setText("-");
+        txtAccuracy.setText("");
         txtAccuracy.setTextColor(getResources().getColor(android.R.color.black));
 
 
         TextView txtAltitude = (TextView) rootView.findViewById(R.id.simpleview_txtAltitude);
-        txtAltitude.setText("-");
+        txtAltitude.setText("");
 
         TextView txtDirection = (TextView) rootView.findViewById(R.id.simpleview_txtDirection);
-        txtDirection.setText("-");
+        txtDirection.setText("");
 
         TextView txtSpeed = (TextView) rootView.findViewById(R.id.simpleview_txtSpeed);
-        txtSpeed.setText("-");
+        txtSpeed.setText("");
 
 
         TextView txtDuration = (TextView) rootView.findViewById(R.id.simpleview_txtDuration);
-        txtDuration.setText("-");
+        txtDuration.setText("");
 
         TextView txtPoints = (TextView) rootView.findViewById(R.id.simpleview_txtPoints);
         TextView txtTravelled = (TextView) rootView.findViewById(R.id.simpleview_txtDistance);
 
-        txtPoints.setText("-");
-        txtTravelled.setText("-");
+        txtPoints.setText("");
+        txtTravelled.setText("");
     }
 
     private String getInterval(long startTime, long endTime) {
@@ -450,7 +450,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     @Override
     public void SetLoggingStopped() {
         TextView txtSatelliteCount = (TextView) rootView.findViewById(R.id.simpleview_txtSatelliteCount);
-        txtSatelliteCount.setText("-");
+        txtSatelliteCount.setText("");
 
         toggleComponent.SetEnabled(true);
     }
@@ -482,7 +482,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             case R.id.simpleview_imgSatelliteCount:
                 toast = getToast(R.string.txt_satellites);
                 break;
-            case R.id.simpleview_txtAccuracyIcon:
+            case R.id.simpleview_imgAccuracy:
                 toast = getToast(R.string.txt_accuracy);
                 break;
 
