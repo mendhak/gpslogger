@@ -1,5 +1,6 @@
 package com.mendhak.gpslogger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.ActionBar;
@@ -12,6 +13,7 @@ import com.mendhak.gpslogger.senders.email.AutoEmailFragment;
 import com.mendhak.gpslogger.senders.ftp.AutoFtpFragment;
 import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsFragment;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
+import com.mendhak.gpslogger.senders.osm.OSMAuthorizationActivity;
 import com.mendhak.gpslogger.settings.GeneralSettingsFragment;
 import com.mendhak.gpslogger.settings.LoggingSettingsFragment;
 import com.mendhak.gpslogger.settings.UploadSettingsFragment;
@@ -30,6 +32,12 @@ public class MainPreferenceActivity extends ActionBarActivity {
         tracer = LoggerFactory.getLogger(MainPreferenceActivity.class.getSimpleName());
 
         String whichFragment = getIntent().getExtras().getString("preference_fragment");
+
+        //If OpenStreetMap has returned with OAuth token
+        if(getIntent().getData() != null) {
+            whichFragment = "OSMAuthorizationFragment";
+        }
+
 
         switch(whichFragment){
             case "GeneralSettingsFragment":
@@ -63,6 +71,10 @@ public class MainPreferenceActivity extends ActionBarActivity {
             case "DropBoxAuthorizationFragment":
                 setTitle(R.string.dropbox_setup_title);
                 preferenceFragment = new DropBoxAuthorizationActivity();
+                break;
+            case "OSMAuthorizationFragment":
+                setTitle(R.string.osm_preferences_title);
+                preferenceFragment = new OSMAuthorizationActivity();
                 break;
 
         }

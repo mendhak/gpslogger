@@ -48,7 +48,17 @@
             <intent-filter>
                 <action android:name="com.mendhak.gpslogger.MAIN_PREFS" />
 
+
+                <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="authorize"
+                    android:scheme="gpslogger" />
+
             </intent-filter>
         </activity>
 
@@ -82,26 +92,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".senders.osm.OSMAuthorizationActivity"
-            android:label="@string/osm_preferences_title"
-            android:parentActivityName=".GpsMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
 
-            <intent-filter>
-                <action android:name="com.mendhak.gpslogger.OSM_AUTHORIZE" />
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="authorize"
-                    android:scheme="gpslogger" />
-            </intent-filter>
-        </activity>
 
 
         <activity

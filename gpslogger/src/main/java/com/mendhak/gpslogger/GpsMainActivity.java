@@ -611,7 +611,7 @@ public class GpsMainActivity extends ActionBarActivity
     private void UploadToOpenStreetMap() {
         if (!OSMHelper.IsOsmAuthorized(getApplicationContext())) {
             tracer.debug("Not authorized, opening OSM activity");
-            startActivity(OSMHelper.GetOsmSettingsIntent(getApplicationContext()));
+            LaunchActivity(MainPreferenceActivity.class, "OSMAuthorizationFragment");
             return;
         }
 

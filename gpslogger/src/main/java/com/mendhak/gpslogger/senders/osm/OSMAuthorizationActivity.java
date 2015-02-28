@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.GpsMainActivity;
@@ -34,7 +35,7 @@ import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import org.slf4j.LoggerFactory;
 
-public class OSMAuthorizationActivity extends PreferenceActivity {
+public class OSMAuthorizationActivity extends PreferenceFragment {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OSMAuthorizationActivity.class.getSimpleName());
     private static OAuthProvider provider;
@@ -43,11 +44,10 @@ public class OSMAuthorizationActivity extends PreferenceActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         addPreferencesFromResource(R.xml.osmsettings);
 
-        final Intent intent = getIntent();
+        final Intent intent = getActivity().getIntent();
         final Uri myURI = intent.getData();
 
         if (myURI != null && myURI.getQuery() != null
@@ -56,15 +56,15 @@ public class OSMAuthorizationActivity extends PreferenceActivity {
             String oAuthVerifier = myURI.getQueryParameter("oauth_verifier");
 
             try {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
                 if (provider == null) {
-                    provider = OSMHelper.GetOSMAuthProvider(getApplicationContext());
+                    provider = OSMHelper.GetOSMAuthProvider(getActivity());
                 }
 
                 if (consumer == null) {
                     //In case consumer is null, re-initialize from stored values.
-                    consumer = OSMHelper.GetOSMAuthConsumer(getApplicationContext());
+                    consumer = OSMHelper.GetOSMAuthConsumer(getActivity());
                 }
 
                 //Ask OpenStreetMap for the access token. This is the main event.
@@ -79,13 +79,9 @@ public class OSMAuthorizationActivity extends PreferenceActivity {
                 editor.putString("osm_accesstokensecret", osmAccessTokenSecret);
                 editor.commit();
 
-                //Now go away
-                startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
-                finish();
-
             } catch (Exception e) {
                 tracer.error("OSMAuthorizationActivity.onCreate - user has returned", e);
-                Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error), this);
+                Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error), getActivity());
             }
         }
 
@@ -95,7 +91,7 @@ public class OSMAuthorizationActivity extends PreferenceActivity {
         Preference tagsPref = findPreference("osm_tags");
         Preference resetPref = findPreference("osm_resetauth");
 
-        if (!OSMHelper.IsOsmAuthorized(getApplicationContext())) {
+        if (!OSMHelper.IsOsmAuthorized(getActivity())) {
             resetPref.setTitle(R.string.osm_lbl_authorize);
             resetPref.setSummary(R.string.osm_lbl_authorize_description);
             visibilityPref.setEnabled(false);
@@ -113,24 +109,24 @@ public class OSMAuthorizationActivity extends PreferenceActivity {
 
             public boolean onPreferenceClick(Preference preference) {
 
-                if (OSMHelper.IsOsmAuthorized(getApplicationContext())) {
-                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                if (OSMHelper.IsOsmAuthorized(getActivity())) {
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.remove("osm_accesstoken");
                     editor.remove("osm_accesstokensecret");
                     editor.remove("osm_requesttoken");
                     editor.remove("osm_requesttokensecret");
                     editor.commit();
-                    startActivity(new Intent(getApplicationContext(), GpsMainActivity.class));
-                    finish();
+                    startActivity(new Intent(getActivity(), GpsMainActivity.class));
+                    getActivity().finish();
 
                 } else {
                     try {
                         StrictMode.enableDefaults();
 
                         //User clicks. Set the consumer and provider up.
-                        consumer = OSMHelper.GetOSMAuthConsumer(getApplicationContext());
-                        provider = OSMHelper.GetOSMAuthProvider(getApplicationContext());
+                        consumer = OSMHelper.GetOSMAuthConsumer(getActivity());
+                        provider = OSMHelper.GetOSMAuthProvider(getActivity());
 
                         String authUrl;
 
@@ -138,7 +134,7 @@ public class OSMAuthorizationActivity extends PreferenceActivity {
                         authUrl = provider.retrieveRequestToken(consumer, OAuth.OUT_OF_BAND);
 
                         //Save for later
-                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString("osm_requesttoken", consumer.getToken());
                         editor.putString("osm_requesttokensecret", consumer.getTokenSecret());
@@ -152,7 +148,7 @@ public class OSMAuthorizationActivity extends PreferenceActivity {
                     } catch (Exception e) {
                         tracer.error("OSMAuthorizationActivity.onClick", e);
                         Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error),
-                                OSMAuthorizationActivity.this);
+                                getActivity());
                     }
                 }
 
@@ -162,23 +158,7 @@ public class OSMAuthorizationActivity extends PreferenceActivity {
             }
         });
 
-//        Button authButton = (Button) findViewById(R.id.btnAuthorizeOSM);
-//        authButton.setOnClickListener(this);
 
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                Intent intent = new Intent(this, GpsMainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 
