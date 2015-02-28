@@ -31,6 +31,7 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.GpsMainActivity;
+import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.FileDialog.FolderSelectorDialog;
 import com.mendhak.gpslogger.common.Utilities;
@@ -200,7 +201,10 @@ public class LoggingSettingsFragment extends PreferenceFragment
                 SwitchPreference chkLog_opengts = (SwitchPreference) findPreference("log_opengts");
 
                 if ((Boolean)newValue) {
-                    startActivity(new Intent("com.mendhak.gpslogger.OPENGTS_SETUP"));
+                    Intent targetActivity = new Intent(getActivity(), MainPreferenceActivity.class);
+                    targetActivity.putExtra("preference_fragment", MainPreferenceActivity.PreferenceConstants.OPENGTS);
+                    startActivity(targetActivity);
+
                 }
             }
 

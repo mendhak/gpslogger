@@ -7,8 +7,7 @@
     <string name="title_drawer_uploadsettings">Upload settings</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
-    <string name="action_settings">Settings</string>
+
 
 
     <string name="app_name">GPSLogger</string>
@@ -16,20 +15,10 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="could_not_write_to_file">Could not write to file</string>
-    <string name="description_added">Description added to file</string>
-    <string name="not_yet">Not Yet</string>
-    <string name="cant_add_description_until_next_point">You can\'t add a description until the next point has been
-        logged to a file.
-    </string>
     <string name="add_description">Add a description</string>
     <string name="letters_numbers">Use only letters and numbers</string>
 
-    <!-- menu strings -->
     <string name="menu_settings">Settings</string>
-
-
-
-
 
     <string name="menu_annotate">Annotate</string>
     <string name="menu_share">Share</string>
@@ -58,9 +47,6 @@
     <string name="summary_dist">Distance:</string>
     <string name="summary_dist_regardless">maximum</string>
     <string name="summary_current_filename">File:</string>
-    <string name="summary_current_filename_format">%s (in your GPSLogger folder)</string>
-
-
 
 
     <string name="sharing_location_only">Location only</string>
@@ -84,7 +70,6 @@
         location provider.
     </string>
     <string name="started">Started</string>
-    <string name="providername_using">&#160;&#160;&#160;&#160;(Using %s)</string>
     <string name="providername_gps">GPS satellites</string>
     <string name="providername_celltower">cell towers</string>
     <string name="not_applicable">n/a</string>
@@ -128,22 +113,13 @@
     <string name="time_twoandhalfhours">2&#189; hours</string>
     <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
     <string name="accuracy_within" formatted="false">within %s %s</string>
-    <string name="error_displaying">Error in displaying location info: %s</string>
     <string name="degree_symbol">&#176;</string>
 
 
     <!-- Settings activity -->
-
-    <string name="settings_distance_in_feet">Distance in feet</string>
-    <string name="settings_enter_feet">Enter feet(max 9999)</string>
     <string name="settings_distance_in_meters">Distance in meters</string>
     <string name="settings_accuracy_in_meters">Accuracy in meters</string>
-    <string name="settings_accuracy_in_feet">Accuracy in feet</string>
     <string name="settings_enter_meters">Enter meters(max 9999)</string>
-    <string name="settings_converting_title">Convertingâ€¦</string>
-    <string name="settings_converting_description">Converting minimum distance units. Values above 9999 are reset to
-        9999. The settings screen will now reload.
-    </string>
 
     <!-- Settings -->
     <string name="pref_logging_title">Logging details</string>
@@ -165,9 +141,8 @@
 
 
     <string name="pref_performance_title">Performance</string>
-    <string name="prefer_celltower_title">Prefer celltowers</string>
-    <string name="prefer_celltower_summary">Uses celltowers even if GPS is enabled. Less accurate, but saves more battery.
-    </string>
+
+
     <string name="time_before_logging_title">Time before logging</string>
     <string name="time_before_logging_summary">Use 0 for maximum frequency, but slower is better for battery life.
     </string>
@@ -182,15 +157,7 @@
     <string name="retry_time_summary">After acquiring a fix, keep retrying for this long to get an accurate point to match the accuracy filter setting.</string>
     <string name="retry_time_dialog_title">Time in seconds</string>
     <string name="retry_time_hint">Enter seconds (max 9999)</string>
-    <string name="distance_before_logging_title">Distance before logging</string>
-    <string name="distance_before_logging_summary">How far to travel before logging the next point. Use 0 to log all
-        points.
-    </string>
 
-    <string name="timeout_time_title">Timeout</string>
-    <string name="timeout_time_summary">How long the GPS stays on looking for a fix before giving up. Use 0 for no timeout</string>
-    <string name="timeout_time_dialog_title">Time in seconds</string>
-    <string name="timeout_time_hint">Enter seconds (max 9999)</string>
 
     <string name="display_imperial_title">Display Imperial units</string>
     <string name="display_imperial_summary">Display feet, miles and pints, none of that newfangled metric stuff. (Preferences must still be in metrics)</string>
@@ -302,7 +269,6 @@
     <string name="emailprovider_yahoo">Yahoo! Mail</string>
     <string name="emailprovider_msn">Windows Live Mail</string>
     <string name="emailprovider_manual">Manual</string>
-    <string name="btn_single_point">Log a single point</string>
 
     <string name="dropbox_setup_title">Dropbox</string>
     <string name="dropbox_setup_summary">Authorize with Dropbox to allow file uploads</string>
@@ -418,23 +384,16 @@
     <string name="menu_faq">Help and FAQ</string>
     <string name="gpsf_missing">Missing Service</string>
     <string name="gpsf_missing_description">You will need Google Play Services Framework to use this feature.</string>
-    <string name="pref_loggingto_title">Log to...</string>
-    <string name="pref_loggingto_summary">Files and destinations to log your location to</string>
+
     <string name="log_customurl_title">Log to custom URL</string>
     <string name="log_customurl_summary">Send logging info to your own server over HTTP</string>
     <string name="log_customurl_urlparameters">URL Parameters</string>
-    <string name="log_customUrl_urllatitude">Latitude: %LAT</string>
     <string name="txt_annotation">Annotation:</string>
     <string name="txt_time_isoformat">Time UTC (2011-12-25T15:27:33Z):</string>
     <string name="txt_provider">Provider:</string>
     <string name="annotation_requires_logging">Annotations require logging to GPX/KML/Custom URL</string>
-    <string name="filedialog_location">Location</string>
-    <string name="filedialog_cantreadfolder">Folder can\'t be read</string>
-    <string name="filedialog_new">New</string>
-    <string name="filedialog_name">Folder name:</string>
-    <string name="filedialog_create">Save</string>
-    <string name="filedialog_select">Select</string>
-    <string name="filedialog_no_data">No data</string>
+
+
     <string name="gpslogger_folder_title">Save to folder</string>
     <string name="gpslogger_folder_summary">Where to save the log files to, defaults to /sdcard/GPSLogger</string>
     <string name="autoftp_directory">Directory</string>
@@ -458,7 +417,7 @@
     <string name="points">points</string>
     <string name="txt_number_of_points">Number of points</string>
     <string name="save">Save</string>
-    <string name="values_saved">Values saved</string>
+
     <string name="pref_filedetails_title">File and Folder Details</string>
     <string name="absolute_timeout_title">Absolute Timeout</string>
     <string name="absolute_timeout_summary">Number of seconds after which the app gives up on trying to acquire a fix, regardless of other settings. This is especially useful for when you are inside buildings to prevent the GPS from draining battery.  Set to 0 for no timeout.</string>

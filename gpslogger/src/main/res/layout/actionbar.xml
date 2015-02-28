@@ -5,11 +5,6 @@
               android:layout_width="fill_parent"
               android:layout_height="wrap_content">
 
-    <!-- TODO: Need to change the image views src to either circle_grey or circle_dark dynamically. -->
-
-
-
-
     <ImageButton
         android:id="@+id/imgHelp"
         android:layout_alignParentRight="true"
