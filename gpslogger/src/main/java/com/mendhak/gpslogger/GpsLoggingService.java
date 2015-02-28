@@ -490,8 +490,8 @@ public class GpsLoggingService extends Service implements IActionListener {
                     .setContentTitle(getString(R.string.gpslogger_still_running))
                     .setOngoing(true)
                     .setContentIntent(pending)
-                    .addAction(R.drawable.annotate2, "Annotate", piAnnotate)
-                    .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Stop", piStop);
+                    .addAction(R.drawable.annotate2, getString(R.string.menu_annotate), piAnnotate)
+                    .addAction(android.R.drawable.ic_menu_close_clear_cancel, getString(R.string.shortcut_stop), piStop);
 
         }
 
