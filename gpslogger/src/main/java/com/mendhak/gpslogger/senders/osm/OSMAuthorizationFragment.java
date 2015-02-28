@@ -23,10 +23,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.view.MenuItem;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
@@ -35,9 +33,9 @@ import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import org.slf4j.LoggerFactory;
 
-public class OSMAuthorizationActivity extends PreferenceFragment {
+public class OSMAuthorizationFragment extends PreferenceFragment {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OSMAuthorizationActivity.class.getSimpleName());
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OSMAuthorizationFragment.class.getSimpleName());
     private static OAuthProvider provider;
     private static OAuthConsumer consumer;
 

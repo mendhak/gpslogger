@@ -47,18 +47,10 @@
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />
             <intent-filter>
                 <action android:name="com.mendhak.gpslogger.MAIN_PREFS" />
-
-
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="authorize"
-                    android:scheme="gpslogger" />
-
+                <data android:host="authorize" android:scheme="gpslogger" />
             </intent-filter>
         </activity>
 
@@ -82,7 +74,6 @@
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />
 
             <intent-filter>
-
                 <!-- Change this to be db- followed by your app key -->
                 <data android:scheme="db-0unjsn38gpe3rwv" />
 
@@ -92,8 +83,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-
 
         <activity
             android:name=".shortcuts.ShortcutCreate"

@@ -17,30 +17,25 @@
 
 package com.mendhak.gpslogger.senders.opengts;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.preference.SwitchPreference;
 
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceActivity;
-import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.webkit.URLUtil;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
-import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
-public class OpenGTSActivity extends PreferenceValidationFragment implements
+public class OpenGTSFragment extends PreferenceValidationFragment implements
         OnPreferenceChangeListener,
         OnPreferenceClickListener {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSActivity.class.getSimpleName());
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSFragment.class.getSimpleName());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

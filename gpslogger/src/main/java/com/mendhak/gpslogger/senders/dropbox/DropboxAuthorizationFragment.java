@@ -22,17 +22,15 @@ package com.mendhak.gpslogger.senders.dropbox;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
-import android.view.MenuItem;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
-public class DropBoxAuthorizationActivity extends PreferenceFragment {
+public class DropboxAuthorizationFragment extends PreferenceFragment {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropBoxAuthorizationActivity.class.getSimpleName());
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropboxAuthorizationFragment.class.getSimpleName());
     DropBoxHelper helper;
 
     @Override
@@ -63,7 +61,7 @@ public class DropBoxAuthorizationActivity extends PreferenceFragment {
                     getActivity().finish();
                 } else {
                     try {
-                        helper.StartAuthentication(DropBoxAuthorizationActivity.this);
+                        helper.StartAuthentication(DropboxAuthorizationFragment.this);
                     } catch (Exception e) {
                         tracer.error("DropBoxAuthorizationActivity.onPreferenceClick", e);
                     }
