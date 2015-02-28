@@ -34,10 +34,10 @@
 
     <ProgressBar
         android:id="@+id/progressBarGpsFix"
-        style="@style/GenericProgressIndicator"
+        android:progressDrawable="@drawable/progress"
         android:layout_centerVertical="true"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:visibility="invisible"
         android:indeterminateOnly="true"
         android:layout_toLeftOf="@id/notification_bulb"/>

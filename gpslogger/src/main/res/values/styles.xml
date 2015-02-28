@@ -27,11 +27,6 @@
         <item name="android:backgroundSplit">#CC000000</item>
     </style>
 
-    <style name="GenericProgressIndicator" parent="@android:style/Widget.ProgressBar.Small">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:indeterminate">true</item>
-    </style>
 
     <color name="primaryColor">#607d8b</color>
     <color name="primaryColorDark">#455a64</color>
