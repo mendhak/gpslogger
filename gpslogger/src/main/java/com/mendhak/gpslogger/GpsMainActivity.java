@@ -632,7 +632,7 @@ public class GpsMainActivity extends ActionBarActivity
     private void SendToOpenGTS() {
         if (!Utilities.IsOpenGTSSetup()) {
             tracer.debug("Not set up, opening OpenGTS activity");
-            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
         } else {
             IFileSender fs = FileSenderFactory.GetOpenGTSSender(getApplicationContext(), this);
             ShowFileListDialog(fs);
