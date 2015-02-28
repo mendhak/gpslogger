@@ -21,8 +21,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.senders.osm.OSMHelper;
+import com.mendhak.gpslogger.common.Utilities;
 
 /**
  * A {@link android.preference.PreferenceActivity} that presents a set of application settings. On
@@ -44,16 +45,57 @@ public class UploadSettingsFragment extends PreferenceFragment implements Prefer
 
         addPreferencesFromResource(R.xml.pref_upload);
 
-        Preference osmSetupPref = findPreference("osm_setup");
+        Preference osmSetupPref  = findPreference("osm_setup");
+        Preference autoEmailPref = findPreference("autoemail_setup");
+        Preference dropboxPref   = findPreference("dropbox_setup");
+        Preference gdocsPref     = findPreference("gdocs_setup");
+        Preference opengtsPref   = findPreference("opengts_setup");
+        Preference autoftpPref   = findPreference("autoftp_setup");
+
+
         osmSetupPref.setOnPreferenceClickListener(this);
+        autoEmailPref.setOnPreferenceClickListener(this);
+        dropboxPref.setOnPreferenceClickListener(this);
+        gdocsPref.setOnPreferenceClickListener(this);
+        opengtsPref.setOnPreferenceClickListener(this);
+        autoftpPref.setOnPreferenceClickListener(this);
     }
 
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
-        if (preference.getKey().equals("osm_setup")) {
-            startActivity(OSMHelper.GetOsmSettingsIntent(getActivity().getApplicationContext()));
+        String launchFragment = "";
+
+        if (preference.getKey().equalsIgnoreCase("osm_setup")) {
+            launchFragment = MainPreferenceActivity.PreferenceConstants.OSM;
+        }
+
+        if(preference.getKey().equalsIgnoreCase("autoemail_setup")){
+            launchFragment = MainPreferenceActivity.PreferenceConstants.EMAIL;
+        }
+
+        if(preference.getKey().equalsIgnoreCase("dropbox_setup")){
+            launchFragment = MainPreferenceActivity.PreferenceConstants.DROPBOX;
+        }
+
+        if(preference.getKey().equalsIgnoreCase("gdocs_setup")){
+            launchFragment = MainPreferenceActivity.PreferenceConstants.GDOCS;
+        }
+
+        if(preference.getKey().equalsIgnoreCase("opengts_setup")){
+            launchFragment = MainPreferenceActivity.PreferenceConstants.OPENGTS;
+        }
+
+        if(preference.getKey().equalsIgnoreCase("autoftp_setup")){
+            launchFragment = MainPreferenceActivity.PreferenceConstants.FTP;
+        }
+
+
+        if(!Utilities.IsNullOrEmpty(launchFragment)){
+            Intent intent = new Intent(getActivity(), MainPreferenceActivity.class);
+            intent.putExtra("preference_fragment", launchFragment);
+            startActivity(intent);
             return true;
         }
 

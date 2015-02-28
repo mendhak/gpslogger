@@ -224,31 +224,31 @@ public class GpsMainActivity extends ActionBarActivity
             case 0:
                 break;
             case 1:
-                LaunchActivity(MainPreferenceActivity.class, "GeneralSettingsFragment");
+                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GENERAL);
                 break;
             case 2:
-                LaunchActivity(MainPreferenceActivity.class, "LoggingSettingsFragment");
+                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.LOGGING);
                 break;
             case 3:
-                LaunchActivity(MainPreferenceActivity.class, "UploadSettingsFragment");
+                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
                 break;
             case 4:
-                LaunchActivity(MainPreferenceActivity.class, "AutoFtpFragment");
+                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
                 break;
             case 5:
-                LaunchActivity(MainPreferenceActivity.class, "AutoEmailFragment");
+                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
                 break;
             case 6:
-                LaunchActivity(MainPreferenceActivity.class, "OpenGTSFragment");
+                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
                 break;
             case 7:
-                LaunchActivity(MainPreferenceActivity.class, "GDocsSettingsFragment");
+                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
                 break;
             case 8:
-                LaunchActivity(MainPreferenceActivity.class, "OSMAuthorizationFragment");
+                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
                 break;
             case 9:
-                LaunchActivity(MainPreferenceActivity.class, "DropBoxAuthorizationFragment");
+                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
                 break;
             default:
                 loggingService.StopLogging();
@@ -263,11 +263,11 @@ public class GpsMainActivity extends ActionBarActivity
     /**
      * Launches activity in a delayed handler, less stutter
      */
-    private void LaunchActivity(final Class activityClass, final String whichFragment) {
+    private void LaunchPreferenceScreen(final String whichFragment) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent targetActivity = new Intent(getApplicationContext(), activityClass);
+                Intent targetActivity = new Intent(getApplicationContext(), MainPreferenceActivity.class);
                 targetActivity.putExtra("preference_fragment", whichFragment);
                 startActivity(targetActivity);
             }
@@ -540,7 +540,7 @@ public class GpsMainActivity extends ActionBarActivity
 
 
         } else {
-            LaunchActivity(MainPreferenceActivity.class, "UploadSettingsFragment");
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
         }
 
     }
@@ -610,7 +610,7 @@ public class GpsMainActivity extends ActionBarActivity
     private void UploadToOpenStreetMap() {
         if (!OSMHelper.IsOsmAuthorized(getApplicationContext())) {
             tracer.debug("Not authorized, opening OSM activity");
-            LaunchActivity(MainPreferenceActivity.class, "OSMAuthorizationFragment");
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
             return;
         }
 
@@ -622,7 +622,7 @@ public class GpsMainActivity extends ActionBarActivity
 
         if (!dropBoxHelper.IsLinked()) {
             tracer.debug("Not linked, opening Dropbox activity");
-            LaunchActivity(MainPreferenceActivity.class, "DropBoxAuthorizationFragment");
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
             return;
         }
 
@@ -632,7 +632,7 @@ public class GpsMainActivity extends ActionBarActivity
     private void SendToOpenGTS() {
         if (!Utilities.IsOpenGTSSetup()) {
             tracer.debug("Not set up, opening OpenGTS activity");
-            LaunchActivity(MainPreferenceActivity.class, "OpenGTSFragment");
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
         } else {
             IFileSender fs = FileSenderFactory.GetOpenGTSSender(getApplicationContext(), this);
             ShowFileListDialog(fs);
@@ -642,7 +642,7 @@ public class GpsMainActivity extends ActionBarActivity
     private void UploadToGoogleDocs() {
         if (!GDocsHelper.IsLinked(getApplicationContext())) {
             tracer.debug("Not linked, opening Google Docs setup activity");
-            LaunchActivity(MainPreferenceActivity.class, "GDocsSettingsFragment");
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
             return;
         }
 
@@ -652,7 +652,7 @@ public class GpsMainActivity extends ActionBarActivity
     private void SendToFtp() {
         if (!Utilities.IsFtpSetup()) {
             tracer.debug("Not setup, opening FTP setup activity");
-            LaunchActivity(MainPreferenceActivity.class, "AutoFtpFragment");
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
         } else {
             IFileSender fs = FileSenderFactory.GetFtpSender(getApplicationContext(), this);
             ShowFileListDialog(fs);
@@ -662,7 +662,7 @@ public class GpsMainActivity extends ActionBarActivity
     private void SelectAndEmailFile() {
         if (!Utilities.IsEmailSetup()) {
             tracer.debug("Not set up, opening email setup activity");
-            LaunchActivity(MainPreferenceActivity.class, "AutoEmailFragment");
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
         } else {
             ShowFileListDialog(FileSenderFactory.GetEmailSender(this));
         }

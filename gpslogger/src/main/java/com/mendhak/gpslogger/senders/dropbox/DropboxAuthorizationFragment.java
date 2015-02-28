@@ -73,7 +73,6 @@ public class DropboxAuthorizationFragment extends PreferenceFragment {
 
     }
 
-
     @Override
     public void onResume() {
         super.onResume();

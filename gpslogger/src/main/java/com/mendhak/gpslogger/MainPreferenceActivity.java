@@ -35,6 +35,7 @@ import com.mendhak.gpslogger.settings.UploadSettingsFragment;
 import org.slf4j.LoggerFactory;
 
 
+
 public class MainPreferenceActivity extends ActionBarActivity {
 
     private org.slf4j.Logger tracer;
@@ -51,43 +52,43 @@ public class MainPreferenceActivity extends ActionBarActivity {
         //If OpenStreetMap has returned with OAuth token
         if(getIntent().getData() != null) {
             tracer.debug("OSM Authorization returned: " + getIntent().getData().getQuery());
-            whichFragment = "OSMAuthorizationFragment";
+            whichFragment = PreferenceConstants.OSM;
         }
 
         switch(whichFragment){
-            case "GeneralSettingsFragment":
+            case PreferenceConstants.GENERAL:
                 setTitle(R.string.settings_screen_name);
                 preferenceFragment = new GeneralSettingsFragment();
                 break;
-            case "LoggingSettingsFragment":
+            case PreferenceConstants.LOGGING:
                 setTitle(R.string.pref_logging_title);
                 preferenceFragment = new LoggingSettingsFragment();
                 break;
-            case "UploadSettingsFragment":
+            case PreferenceConstants.UPLOAD:
                 setTitle(R.string.title_drawer_uploadsettings);
                 preferenceFragment = new UploadSettingsFragment();
                 break;
-            case "AutoFtpFragment":
+            case PreferenceConstants.FTP:
                 setTitle(R.string.autoftp_setup_title);
                 preferenceFragment = new AutoFtpFragment();
                 break;
-            case "AutoEmailFragment":
+            case PreferenceConstants.EMAIL:
                 setTitle(R.string.autoemail_title);
                 preferenceFragment = new AutoEmailFragment();
                 break;
-            case "OpenGTSFragment":
+            case PreferenceConstants.OPENGTS:
                 setTitle(R.string.opengts_setup_title);
                 preferenceFragment = new OpenGTSFragment();
                 break;
-            case "GDocsSettingsFragment":
+            case PreferenceConstants.GDOCS:
                 setTitle(R.string.gdocs_setup_title);
                 preferenceFragment = new GDocsSettingsFragment();
                 break;
-            case "DropBoxAuthorizationFragment":
+            case PreferenceConstants.DROPBOX:
                 setTitle(R.string.dropbox_setup_title);
                 preferenceFragment = new DropboxAuthorizationFragment();
                 break;
-            case "OSMAuthorizationFragment":
+            case PreferenceConstants.OSM:
                 setTitle(R.string.osm_preferences_title);
                 preferenceFragment = new OSMAuthorizationFragment();
                 break;
@@ -133,4 +134,17 @@ public class MainPreferenceActivity extends ActionBarActivity {
 
         return false;
     }
+
+    public static class PreferenceConstants{
+        public static final String GENERAL = "GeneralSettingsFragment";
+        public static final String LOGGING = "LoggingSettingsFragment";
+        public static final String UPLOAD = "UploadSettingsFragment";
+        public static final String FTP = "AutoFtpFragment";
+        public static final String EMAIL = "AutoEmailFragment";
+        public static final String OPENGTS = "OpenGTSFragment";
+        public static final String GDOCS = "GDocsSettingsFragment";
+        public static final String DROPBOX = "DropBoxAuthorizationFragment";
+        public static final String OSM = "OSMAuthorizationFragment";
+    }
+
 }
