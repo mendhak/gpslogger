@@ -48,8 +48,7 @@
         android:key="bitcoindonate_link"
         android:title="@string/donate_bitcoin"
         android:icon="@drawable/bitcoin" >
-        <intent android:action="android.intent.action.VIEW"
-                android:data="bitcoin:1ArYCJf8pvwELiCSGerih5NQrczLJQdJpY"/>
+
         </Preference>
 
 
