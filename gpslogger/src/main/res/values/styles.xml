@@ -16,6 +16,7 @@
         <!-- You can also set colorControlNormal, colorControlActivated
              colorControlHighlight and colorSwitchThumbNormal. -->
 
+        <item name="android:windowContentOverlay">@null</item>
 
     </style>
 
