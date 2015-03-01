@@ -112,7 +112,8 @@ public class GpsMainActivity extends ActionBarActivity
             fragmentManager = getFragmentManager();
         }
 
-        SetUpActionBarAndNavigationDrawer();
+        SetUpToolbar();
+        SetUpNavigationDrawer();
         LoadDefaultFragmentView();
         StartAndBindService();
     }
@@ -299,18 +300,21 @@ public class GpsMainActivity extends ActionBarActivity
         }
     }
 
-    public void SetUpActionBarAndNavigationDrawer() {
-
+    public void SetUpToolbar(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        //Deprecated in Lollipop but required if targeting 4.x
         SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.gps_main_views, R.layout.spinner_dropdown_item);
         getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, this);
         getSupportActionBar().setSelectedNavigationItem(GetUserSelectedNavigationItem());
+    }
 
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+    public void SetUpNavigationDrawer() {
+
+        final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         final DrawerView drawer = (DrawerView) findViewById(R.id.drawer);
 
         drawerToggle = new ActionBarDrawerToggle(
@@ -336,58 +340,83 @@ public class GpsMainActivity extends ActionBarActivity
         drawerLayout.closeDrawer(drawer);
 
         drawer.addItem(new DrawerItem()
-                        .setTextPrimary(getString(R.string.txt_annotation))
-                        .setTextSecondary(getString(R.string.menu_annotate))
+                        .setImage(getResources().getDrawable(R.drawable.settings))
+                        .setTextPrimary(getString(R.string.pref_general_title))
+                        .setTextSecondary(getString(R.string.pref_general_summary))
         );
 
         drawer.addItem(new DrawerItem()
-                        .setTextPrimary(getString(R.string.txt_annotation))
-                        .setTextSecondary(getString(R.string.menu_annotate))
+                        .setImage(getResources().getDrawable(R.drawable.loggingsettings))
+                        .setTextPrimary(getString(R.string.pref_logging_title))
+                        .setTextSecondary(getString(R.string.pref_logging_summary))
         );
 
         drawer.addDivider();
 
 
-        drawer.addItem(new DrawerItem()
-                        //.setRoundedImage((BitmapDrawable) getResources().getDrawable(R.drawable.cat_1))
-                        .setTextPrimary(getString(R.string.txt_annotation))
-                        .setTextSecondary(getString(R.string.menu_annotate))
-        );
+//        drawer.addItem(new DrawerItem()
+//                        .setTextSecondary(getString(R.string.title_drawer_uploadsettings))
+//        );
 
-        drawer.addItem(new DrawerHeaderItem().setTitle(getString(R.string.autoopengts_device_id)));
+        drawer.addItem(new DrawerItem().setTextPrimary(getString(R.string.title_drawer_uploadsettings)));
 
         drawer.addItem(new DrawerItem()
-                        .setTextPrimary(getString(R.string.autoemail_test))
+                        .setImage(getResources().getDrawable(R.drawable.googledrive))
+                        .setTextPrimary(getString(R.string.gdocs_setup_title))
         );
 
         drawer.addItem(new DrawerItem()
-                        .setTextPrimary(getString(R.string.txt_annotation))
-                        .setTextSecondary(getString(R.string.menu_annotate))
+                        .setImage(getResources().getDrawable(R.drawable.dropbox))
+                        .setTextPrimary(getString(R.string.dropbox_setup_title))
         );
 
-        drawer.selectItem(1);
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.email))
+                        .setTextPrimary(getString(R.string.autoemail_title))
+        );
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.ftp))
+                        .setTextPrimary(getString(R.string.ftp_upload))
+        );
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.opengts))
+                        .setTextPrimary(getString(R.string.opengts_setup_title))
+        );
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.openstreetmap))
+                        .setTextPrimary(getString(R.string.osm_setup_title))
+        );
+
+
+        //drawer.selectItem(1);
         drawer.setOnItemClickListener(new DrawerItem.OnItemClickListener() {
             @Override
-            public void onClick(DrawerItem drawerItem, int i, int i1) {
-                drawer.selectItem(i);
-                Toast.makeText(GpsMainActivity.this, "Clicked item #" + i, Toast.LENGTH_SHORT).show();
-                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
+            public void onClick(DrawerItem drawerItem, int id, int position) {
+                drawer.selectItem(position);
+                drawerLayout.closeDrawer(drawer);
+                Toast.makeText(GpsMainActivity.this, "Clicked item #" + position, Toast.LENGTH_SHORT).show();
+                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
             }
-
 
         });
 
-
         drawer.addFixedItem(new DrawerItem()
-
-                        .setTextPrimary(getString(R.string.txt_accuracy))
+                        .setImage(getResources().getDrawable(R.drawable.helpfaq))
+                        .setTextPrimary(getString(R.string.menu_faq))
         );
 
-        drawer.addFixedItem(new DrawerItem()
-                        .setImage(getResources().getDrawable(R.drawable.gpsloggericon2))
-                        .setTextPrimary(getString(R.string.menu_email_now))
-        );
-
+        drawer.setOnFixedItemClickListener(new DrawerItem.OnItemClickListener() {
+            @Override
+            public void onClick(DrawerItem drawerItem, int id, int position) {
+                drawer.selectFixedItem(position);
+                drawerLayout.closeDrawer(drawer);
+                Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
+                startActivity(faqtivity);
+            }
+        });
 
         ImageButton helpButton = (ImageButton) findViewById(R.id.imgHelp);
         helpButton.setOnClickListener(new View.OnClickListener() {
