@@ -27,6 +27,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.internal.view.menu.ActionMenuItemView;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
@@ -44,6 +47,10 @@ import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.*;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.heinrichreimersoftware.materialdrawer.DrawerView;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerHeaderItem;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
@@ -70,13 +77,15 @@ public class GpsMainActivity extends ActionBarActivity
     private static Intent serviceIntent;
     private GpsLoggingService loggingService;
 
+    Toolbar toolbar;
+    private ActionBarDrawerToggle drawerToggle;
     FragmentManager fragmentManager;
 
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
-    private NavigationDrawerFragment navigationDrawerFragment;
+    //private NavigationDrawerFragment navigationDrawerFragment;
 
     MenuItem mnuAnnotate;
     MenuItem mnuOnePoint;
@@ -95,7 +104,7 @@ public class GpsMainActivity extends ActionBarActivity
 
         setContentView(R.layout.activity_gps_main);
 
-        SetUpNavigationDrawer();
+        //SetUpNavigationDrawer();
 
         if (fragmentManager == null) {
             tracer.debug("Creating fragmentManager");
@@ -176,7 +185,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            navigationDrawerFragment.toggleDrawer();
+            //navigationDrawerFragment.toggleDrawer();
         }
 
         return super.onKeyUp(keyCode, event);
@@ -191,10 +200,10 @@ public class GpsMainActivity extends ActionBarActivity
         }
 
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(navigationDrawerFragment.isDrawerOpen()){
-                navigationDrawerFragment.toggleDrawer();
-                return true;
-            }
+           // if(navigationDrawerFragment.isDrawerOpen()){
+           //     navigationDrawerFragment.toggleDrawer();
+           //     return true;
+           // }
         }
 
         return super.onKeyDown(keyCode, event);
@@ -206,8 +215,8 @@ public class GpsMainActivity extends ActionBarActivity
      */
     private void SetUpNavigationDrawer() {
         // Set up the drawer
-        navigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+        //navigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
+        //navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
 
@@ -274,33 +283,147 @@ public class GpsMainActivity extends ActionBarActivity
         }, 120);
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    private DrawerView drawer;
+
+
 
     public void SetUpActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setElevation(0);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
-        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(actionBar.getThemedContext(), R.array.gps_main_views, android.R.layout.simple_spinner_dropdown_item);
 
-        actionBar.setListNavigationCallbacks(spinnerAdapter, this);
 
-        //Reload the user's previously selected view
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        actionBar.setSelectedNavigationItem(prefs.getInt("dropdownview", 0));
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle("");
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setCustomView(R.layout.actionbar);
+        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getSupportActionBar().getThemedContext(),
+                R.array.gps_main_views, android.R.layout.simple_spinner_dropdown_item);
 
-        ImageButton helpButton = (ImageButton) actionBar.getCustomView().findViewById(R.id.imgHelp);
-        helpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
-                startActivity(faqtivity);
+        Spinner navigationSpinner = new Spinner(getSupportActionBar().getThemedContext());
+        navigationSpinner.setAdapter(spinnerAdapter);
+        toolbar.addView(navigationSpinner, 0);
+
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerView) findViewById(R.id.drawer);
+
+        drawerToggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+        ){
+
+            public void onDrawerClosed(View view) {
+                invalidateOptionsMenu();
             }
+
+            public void onDrawerOpened(View drawerView) {
+                invalidateOptionsMenu();
+            }
+        };
+
+
+        drawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.primaryColorDark));
+        drawerLayout.setDrawerListener(drawerToggle);
+        drawerLayout.closeDrawer(drawer);
+
+        drawer.addItem(new DrawerItem()
+                        .setTextPrimary(getString(R.string.txt_annotation))
+                        .setTextSecondary(getString(R.string.menu_annotate))
+        );
+
+        drawer.addItem(new DrawerItem()
+                        .setTextPrimary(getString(R.string.txt_annotation))
+                        .setTextSecondary(getString(R.string.menu_annotate))
+        );
+
+        drawer.addDivider();
+
+
+        drawer.addItem(new DrawerItem()
+                        //.setRoundedImage((BitmapDrawable) getResources().getDrawable(R.drawable.cat_1))
+                        .setTextPrimary(getString(R.string.txt_annotation))
+                        .setTextSecondary(getString(R.string.menu_annotate))
+        );
+
+        drawer.addItem(new DrawerHeaderItem().setTitle(getString(R.string.autoopengts_device_id)));
+
+        drawer.addItem(new DrawerItem()
+                        .setTextPrimary(getString(R.string.autoemail_test))
+        );
+
+        drawer.addItem(new DrawerItem()
+                        .setTextPrimary(getString(R.string.txt_annotation))
+                        .setTextSecondary(getString(R.string.menu_annotate))
+        );
+
+        drawer.selectItem(1);
+        drawer.setOnItemClickListener(new DrawerItem.OnItemClickListener() {
+            @Override
+            public void onClick(DrawerItem drawerItem, int i, int i1) {
+                drawer.selectItem(i);
+                Toast.makeText(GpsMainActivity.this, "Clicked item #" + i, Toast.LENGTH_SHORT).show();
+            }
+
+
         });
+
+
+        drawer.addFixedItem(new DrawerItem()
+
+                        .setTextPrimary(getString(R.string.txt_accuracy))
+        );
+
+        drawer.addFixedItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.gpsloggericon2))
+                        .setTextPrimary(getString(R.string.menu_email_now))
+        );
+
+
+        fragmentManager = getFragmentManager();
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.container, GpsSimpleViewFragment.newInstance());
+        transaction.commitAllowingStateLoss();
+
+
+
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setElevation(0);
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+//
+//        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(actionBar.getThemedContext(), R.array.gps_main_views, android.R.layout.simple_spinner_dropdown_item);
+//
+//        actionBar.setListNavigationCallbacks(spinnerAdapter, this);
+//
+//        //Reload the user's previously selected view
+//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//        actionBar.setSelectedNavigationItem(prefs.getInt("dropdownview", 0));
+//
+//        actionBar.setDisplayShowTitleEnabled(true);
+//        actionBar.setTitle("");
+//        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_CUSTOM);
+//        actionBar.setCustomView(R.layout.actionbar);
+//
+//        ImageButton helpButton = (ImageButton) actionBar.getCustomView().findViewById(R.id.imgHelp);
+//        helpButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
+//                startActivity(faqtivity);
+//            }
+//        });
 
     }
 
@@ -955,8 +1078,8 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     private void SetBulbStatus(boolean started) {
-        ImageView bulb = (ImageView) findViewById(R.id.notification_bulb);
-        bulb.setImageResource(started ? R.drawable.circle_green : R.drawable.circle_none);
+//        ImageView bulb = (ImageView) findViewById(R.id.notification_bulb);
+//        bulb.setImageResource(started ? R.drawable.circle_green : R.drawable.circle_none);
     }
 
     @Override
@@ -984,8 +1107,8 @@ public class GpsMainActivity extends ActionBarActivity
 
     @Override
     public void OnWaitingForLocation(boolean inProgress) {
-        ProgressBar fixBar = (ProgressBar) findViewById(R.id.progressBarGpsFix);
-        fixBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
+//        ProgressBar fixBar = (ProgressBar) findViewById(R.id.progressBarGpsFix);
+//        fixBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
     }
 
 

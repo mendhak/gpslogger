@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme"  parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme"  parent="Theme.AppCompat.Light.NoActionBar">
 
         <!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette-->
         <!-- colorPrimary is used for the default action bar background -->
@@ -16,7 +16,19 @@
 
         <item name="android:windowContentOverlay">@null</item>
 
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+
     </style>
+
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
 
 
     <color name="primaryColor">#607d8b</color>
