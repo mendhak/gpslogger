@@ -169,7 +169,7 @@
     <string name="startonbootup_title">Start on bootup</string>
     <string name="startonbootup_summary">Launch app and start logging when phone starts</string>
 
-    <string name="autoemail_title">Auto Email Setup</string>
+    <string name="autoemail_title">Email</string>
     <string name="autoemail_summary">Automatically emails the log file to an address of your choice</string>
 
 
@@ -291,16 +291,16 @@
     <string name="autoemail_from_summary">Some email providers require a from address. Use this only if you need it.
     </string>
 
-    <string name="gdocs_upload">Google Docs</string>
+    <string name="gdocs_upload">Google Drive</string>
 
-    <string name="gdocs_settings_screenname">Google Docs Upload Settings</string>
-    <string name="gdocs_startauthorization">Authorize with Google Docs</string>
-    <string name="gdocs_authorize_summary">Takes you to Google Docs where you need to authorize GPSLogger</string>
+    <string name="gdocs_settings_screenname">Google Drive Upload Settings</string>
+    <string name="gdocs_startauthorization">Authorize with Google Drive</string>
+    <string name="gdocs_authorize_summary">Takes you to Google Drive where you need to authorize GPSLogger</string>
     <string name="gdocs_clearauthorization">Clear Authorization</string>
     <string name="gdocs_clearauthorization_summary">Forgets local GDocs settings. To permanently revoke access, go to Google Account settings</string>
-    <string name="gdocs_setup_title">Google Docs</string>
-    <string name="gdocs_setup_summary">Authorize with Google Docs to allow uploads</string>
-    <string name="gdocs_test_summary">Upload a test file to Google Docs</string>
+    <string name="gdocs_setup_title">Google Drive</string>
+    <string name="gdocs_setup_summary">Authorize with Google Drive to allow uploads</string>
+    <string name="gdocs_test_summary">Upload a test file to Google Drive</string>
     <string name="gdocs_test_title">Test upload</string>
     <string name="gdocs_testupload_error">Could not upload a test file</string>
     <string name="gdocs_testupload_success">Uploaded. Please check your Google Documents for a new file.</string>
@@ -334,7 +334,7 @@
 
     <string name="log_opengts_title">Log to OpenGTS Server</string>
     <string name="log_opengts_summary">Send GPRMC data to an online OpenGTS server.</string>
-    <string name="opengts_setup_title">OpenGTS Setup</string>
+    <string name="opengts_setup_title">OpenGTS</string>
     <string name="opengts_setup_summary">Send GPS traces to an OpenGTS server of your choice.</string>
     <string name="opengts_enabled">Enable OpenGTS</string>
     <string name="opengts_enabled_summary">Enable this OpenGTS server.</string>
@@ -377,7 +377,7 @@
     <string name="autoftp_enabled">FTP enabled</string>
     <string name="ftp_upload">FTP upload</string>
 
-    <string name="autoftp_setup_title">FTP Setup</string>
+    <string name="autoftp_setup_title">FTP</string>
     <string name="autoftp_setup_summary">Upload your files to an FTP(S) server. Note: This does not cover SFTP.</string>
 
     <string name="faq_screen_title">Frequently asked questions</string>

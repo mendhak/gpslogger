@@ -282,7 +282,9 @@ public class GpsMainActivity extends ActionBarActivity
 
 
         drawer.addItem(new DrawerItem()
-                .setTextPrimary(getString(R.string.title_drawer_uploadsettings)));
+                .setImage(getResources().getDrawable(R.drawable.autosend))
+                .setTextPrimary(getString(R.string.pref_autosend_title))
+                .setTextSecondary(getString(R.string.pref_autosend_summary)));
 
         drawer.addItem(new DrawerItem()
                         .setImage(getResources().getDrawable(R.drawable.googledrive))
@@ -301,7 +303,7 @@ public class GpsMainActivity extends ActionBarActivity
 
         drawer.addItem(new DrawerItem()
                         .setImage(getResources().getDrawable(R.drawable.ftp))
-                        .setTextPrimary(getString(R.string.ftp_upload))
+                        .setTextPrimary(getString(R.string.autoftp_setup_title))
         );
 
         drawer.addItem(new DrawerItem()
@@ -321,12 +323,12 @@ public class GpsMainActivity extends ActionBarActivity
                         .setTextPrimary(getString(R.string.menu_faq))
         );
 
-        drawer.selectItem(3);
+        //drawer.selectItem(3);
 
         drawer.setOnItemClickListener(new DrawerItem.OnItemClickListener() {
             @Override
             public void onClick(DrawerItem drawerItem, int id, int position) {
-                drawer.selectItem(3);
+                //drawer.selectItem(3);
                 drawerLayout.closeDrawer(drawer);
 
                 switch(position){

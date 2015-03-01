@@ -99,7 +99,7 @@ public class MainPreferenceActivity extends ActionBarActivity {
                 preferenceFragment = new DropboxAuthorizationFragment();
                 break;
             case PreferenceConstants.OSM:
-                setTitle(R.string.osm_preferences_title);
+                setTitle(R.string.osm_setup_title);
                 preferenceFragment = new OSMAuthorizationFragment();
                 break;
 
