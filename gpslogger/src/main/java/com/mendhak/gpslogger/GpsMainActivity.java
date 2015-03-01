@@ -323,6 +323,10 @@ public class GpsMainActivity extends ActionBarActivity
                         .setTextPrimary(getString(R.string.menu_faq))
         );
 
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.exit))
+                        .setTextPrimary(getString(R.string.menu_exit)));
+
         //drawer.selectItem(3);
 
         drawer.setOnItemClickListener(new DrawerItem.OnItemClickListener() {
@@ -362,6 +366,11 @@ public class GpsMainActivity extends ActionBarActivity
                     case 11:
                         Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
                         startActivity(faqtivity);
+                        break;
+                    case 12:
+                        loggingService.StopLogging();
+                        loggingService.stopSelf();
+                        finish();
                         break;
                 }
 
