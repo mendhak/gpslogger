@@ -28,7 +28,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -50,7 +49,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.heinrichreimersoftware.materialdrawer.DrawerView;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerHeaderItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
-import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
@@ -72,7 +70,12 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class GpsMainActivity extends ActionBarActivity
-        implements GenericViewFragment.IGpsViewCallback, NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, IGpsLoggerServiceClient, IActionListener, Toolbar.OnMenuItemClickListener {
+        implements GenericViewFragment.IGpsViewCallback,
+        NavigationDrawerFragment.NavigationDrawerCallbacks,
+        IGpsLoggerServiceClient,
+        IActionListener,
+        Toolbar.OnMenuItemClickListener,
+        ActionBar.OnNavigationListener {
 
     private static Intent serviceIntent;
     private GpsLoggingService loggingService;
@@ -104,14 +107,13 @@ public class GpsMainActivity extends ActionBarActivity
 
         setContentView(R.layout.activity_gps_main);
 
-        //SetUpNavigationDrawer();
-
         if (fragmentManager == null) {
             tracer.debug("Creating fragmentManager");
             fragmentManager = getFragmentManager();
         }
 
-        SetUpActionBar();
+        SetUpActionBarAndNavigationDrawer();
+        LoadDefaultFragmentView();
         StartAndBindService();
     }
 
@@ -185,7 +187,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            //navigationDrawerFragment.toggleDrawer();
+            ToggleDrawer();
         }
 
         return super.onKeyUp(keyCode, event);
@@ -200,23 +202,14 @@ public class GpsMainActivity extends ActionBarActivity
         }
 
         if(keyCode == KeyEvent.KEYCODE_BACK){
-           // if(navigationDrawerFragment.isDrawerOpen()){
-           //     navigationDrawerFragment.toggleDrawer();
-           //     return true;
-           // }
+            DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
+                ToggleDrawer();
+                return true;
+            }
         }
 
         return super.onKeyDown(keyCode, event);
-    }
-
-
-    /**
-     *
-     */
-    private void SetUpNavigationDrawer() {
-        // Set up the drawer
-        //navigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        //navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
 
@@ -295,27 +288,30 @@ public class GpsMainActivity extends ActionBarActivity
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-    private DrawerView drawer;
 
+    public void ToggleDrawer(){
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
+            drawerLayout.closeDrawer(Gravity.LEFT);
+        }
+        else {
+            drawerLayout.openDrawer(Gravity.LEFT);
+        }
+    }
 
-
-    public void SetUpActionBar() {
-
-
+    public void SetUpActionBarAndNavigationDrawer() {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
         SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.gps_main_views, R.layout.spinner_dropdown_item);
-        Spinner navigationSpinner = new Spinner(getSupportActionBar().getThemedContext());
-        navigationSpinner.setAdapter(spinnerAdapter);
-        toolbar.addView(navigationSpinner, 0);
+        getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, this);
+        getSupportActionBar().setSelectedNavigationItem(GetUserSelectedNavigationItem());
 
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer = (DrawerView) findViewById(R.id.drawer);
+        final DrawerView drawer = (DrawerView) findViewById(R.id.drawer);
 
         drawerToggle = new ActionBarDrawerToggle(
                 this,
@@ -375,6 +371,7 @@ public class GpsMainActivity extends ActionBarActivity
             public void onClick(DrawerItem drawerItem, int i, int i1) {
                 drawer.selectItem(i);
                 Toast.makeText(GpsMainActivity.this, "Clicked item #" + i, Toast.LENGTH_SHORT).show();
+                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
             }
 
 
@@ -392,54 +389,30 @@ public class GpsMainActivity extends ActionBarActivity
         );
 
 
-        fragmentManager = getFragmentManager();
-
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.container, GpsSimpleViewFragment.newInstance());
-        transaction.commitAllowingStateLoss();
-
-
-
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setElevation(0);
-//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-//
-//        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(actionBar.getThemedContext(), R.array.gps_main_views, android.R.layout.simple_spinner_dropdown_item);
-//
-//        actionBar.setListNavigationCallbacks(spinnerAdapter, this);
-//
-//        //Reload the user's previously selected view
-//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//        actionBar.setSelectedNavigationItem(prefs.getInt("dropdownview", 0));
-//
-//        actionBar.setDisplayShowTitleEnabled(true);
-//        actionBar.setTitle("");
-//        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_CUSTOM);
-//        actionBar.setCustomView(R.layout.actionbar);
-//
-//        ImageButton helpButton = (ImageButton) actionBar.getCustomView().findViewById(R.id.imgHelp);
-//        helpButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
-//                startActivity(faqtivity);
-//            }
-//        });
+        ImageButton helpButton = (ImageButton) findViewById(R.id.imgHelp);
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
+                startActivity(faqtivity);
+            }
+        });
 
     }
 
-    /**
-     * Handles dropdown selection
-     */
-    @Override
-    public boolean onNavigationItemSelected(int position, long id) {
+    private int GetUserSelectedNavigationItem(){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        return sp.getInt("SPINNER_SELECTED_POSITION", 0);
+    }
 
-        tracer.debug("Changing main view: " + String.valueOf(position));
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("dropdownview", position);
-        editor.commit();
+    private void LoadDefaultFragmentView( ) {
 
+        int currentSelectedPosition = GetUserSelectedNavigationItem();
+        tracer.debug("Loading fragment view: " + currentSelectedPosition);
+        LoadFragmentView(currentSelectedPosition);
+    }
+
+    private void LoadFragmentView(int position){
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         switch (position) {
@@ -455,7 +428,18 @@ public class GpsMainActivity extends ActionBarActivity
                 break;
         }
         transaction.commitAllowingStateLoss();
+    }
 
+
+    @Override
+    public boolean onNavigationItemSelected(int position, long itemId) {
+        tracer.debug("Changing main view: " + String.valueOf(position));
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("SPINNER_SELECTED_POSITION", position);
+        editor.commit();
+
+        LoadFragmentView(position);
         return true;
     }
 
@@ -466,7 +450,7 @@ public class GpsMainActivity extends ActionBarActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBottom);
         if(toolbar.getMenu().size() > 0){ return true;}
 
         toolbar.inflateMenu(R.menu.gps_main);
@@ -491,7 +475,7 @@ public class GpsMainActivity extends ActionBarActivity
         display.getMetrics(metrics);
 
         // Toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBottom);
 
         // Add 10 spacing on either side of the toolbar
         toolbar.setContentInsetsAbsolute(10, 10);
@@ -605,53 +589,6 @@ public class GpsMainActivity extends ActionBarActivity
 
     }
 
-    /**
-     * Handles menu item selection
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        tracer.debug("Menu Item: " + String.valueOf(item.getTitle()));
-
-        switch (id) {
-            case R.id.mnuAnnotate:
-                Annotate();
-                return true;
-            case R.id.mnuOnePoint:
-                LogSinglePoint();
-                return true;
-            case R.id.mnuShare:
-                Share();
-                return true;
-            case R.id.mnuOSM:
-                UploadToOpenStreetMap();
-                return true;
-            case R.id.mnuDropBox:
-                UploadToDropBox();
-                return true;
-            case R.id.mnuGDocs:
-                UploadToGoogleDocs();
-                return true;
-            case R.id.mnuOpenGTS:
-                SendToOpenGTS();
-                return true;
-            case R.id.mnuFtp:
-                SendToFtp();
-                return true;
-            case R.id.mnuEmail:
-                SelectAndEmailFile();
-                return true;
-            case R.id.mnuAutoSendNow:
-                ForceAutoSendNow();
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
 
     private void ForceAutoSendNow() {
         tracer.debug("Auto send now");
@@ -1079,8 +1016,8 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     private void SetBulbStatus(boolean started) {
-//        ImageView bulb = (ImageView) findViewById(R.id.notification_bulb);
-//        bulb.setImageResource(started ? R.drawable.circle_green : R.drawable.circle_none);
+        ImageView bulb = (ImageView) findViewById(R.id.notification_bulb);
+        bulb.setImageResource(started ? R.drawable.circle_green : R.drawable.circle_none);
     }
 
     @Override
@@ -1108,8 +1045,8 @@ public class GpsMainActivity extends ActionBarActivity
 
     @Override
     public void OnWaitingForLocation(boolean inProgress) {
-//        ProgressBar fixBar = (ProgressBar) findViewById(R.id.progressBarGpsFix);
-//        fixBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
+        ProgressBar fixBar = (ProgressBar) findViewById(R.id.progressBarGpsFix);
+        fixBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
     }
 
 

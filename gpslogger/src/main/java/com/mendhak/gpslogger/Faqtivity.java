@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -41,10 +42,11 @@ public class Faqtivity extends ActionBarActivity {
         tracer.debug("Faqtivity.onCreate");
 
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_faq);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        setContentView(R.layout.activity_faq);
 
         browser = (WebView) findViewById(R.id.faqwebview);
         WebSettings settings = browser.getSettings();

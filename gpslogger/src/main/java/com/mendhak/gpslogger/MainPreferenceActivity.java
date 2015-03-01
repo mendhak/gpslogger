@@ -20,6 +20,7 @@ package com.mendhak.gpslogger;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
@@ -45,6 +46,15 @@ public class MainPreferenceActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        setContentView(R.layout.activity_preferences);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         tracer = LoggerFactory.getLogger(MainPreferenceActivity.class.getSimpleName());
 
         String whichFragment = getIntent().getExtras().getString("preference_fragment");
@@ -96,10 +106,9 @@ public class MainPreferenceActivity extends ActionBarActivity {
         }
 
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, preferenceFragment)
+                .replace(R.id.content_frame, preferenceFragment)
                 .commit();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
