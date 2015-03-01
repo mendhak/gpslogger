@@ -143,7 +143,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             providerName = getString(R.string.providername_celltower);
         }
 
-        tvDateTime.setText(new Date(Session.getLatestTimeStamp()).toLocaleString() + "\n - " + providerName);
+        tvDateTime.setText(new Date(Session.getLatestTimeStamp()).toLocaleString() + " - " + providerName);
 
         NumberFormat nf = NumberFormat.getInstance();
 

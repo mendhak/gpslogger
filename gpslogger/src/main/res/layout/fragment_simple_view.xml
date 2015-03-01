@@ -29,26 +29,19 @@
                     <EditText
                         android:layout_alignParentRight="true"
                         android:layout_width="0dp"
-                        android:layout_weight="55"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:hint="@string/txt_latitude"
                         android:id="@+id/simple_lat_text"
                         android:editable="false"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
+                        android:textSize="@dimen/simpleview_latlong_textsize"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="italic"
+                        android:background="@null"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         />
-
-
-                    <EditText
-                        android:layout_toRightOf="@id/simple_lat_text"
-                        android:layout_width="0dp"
-                        android:layout_weight="55"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/simple_lon_text"
-                        android:hint="@string/txt_longitude"
-                        android:selectAllOnFocus="true"
-                        android:textIsSelectable="true"
-                        android:editable="false"/>
 
 
                 </LinearLayout>
@@ -290,6 +283,7 @@
                         android:layout_column="0"
                         android:layout_columnSpan="4"
                         android:layout_gravity="center"
+                        android:gravity="center"
                         android:visibility="visible"
                         android:textSize="11sp"
                         android:layout_width="fill_parent"

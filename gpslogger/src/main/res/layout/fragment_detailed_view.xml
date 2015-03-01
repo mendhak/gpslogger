@@ -50,6 +50,7 @@
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
                         android:editable="false"
+                        android:background="@null"
                         />
                 </LinearLayout>
 
@@ -78,7 +79,9 @@
                         android:id="@+id/detailedview_lon_text"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
             </LinearLayout>
 
@@ -162,14 +165,16 @@
 
                     <EditText
                         android:minWidth="@dimen/view_text_width"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_weight="100"
                         android:layout_height="wrap_content"
                         android:id="@+id/detailedview_datetime_text"
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -195,7 +200,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -221,7 +228,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -247,7 +256,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -273,7 +284,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -299,7 +312,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -325,7 +340,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -351,7 +368,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
 
@@ -394,7 +413,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -420,7 +441,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -446,7 +469,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -473,7 +498,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -499,7 +526,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -525,7 +554,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
             </LinearLayout>
 

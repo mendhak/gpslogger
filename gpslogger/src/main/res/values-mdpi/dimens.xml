@@ -12,6 +12,7 @@
     <dimen name="simpleview_grid_iconwidth">25dp</dimen>
     <dimen name="simlpeview_grid_iconheight">25dp</dimen>
     <dimen name="simpleview_grid_labelwidth">95dp</dimen>
+    <dimen name="simpleview_latlong_textsize">37sp</dimen>
 
     <dimen name="detailedview_latlong_textsize">30sp</dimen>
     <dimen name="detailedview_latlong_labelsize">15sp</dimen>

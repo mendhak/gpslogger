@@ -176,10 +176,10 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         }
 
         txtFilename.setVisibility(View.VISIBLE);
-        txtFilename.setText(Html.fromHtml("<em>" + AppSettings.getGpsLoggerFolder() + "/<strong>" + Session.getCurrentFileName() + "</strong></em>"));
+        txtFilename.setText(Html.fromHtml("<em>" + AppSettings.getGpsLoggerFolder() + "/<strong><br />" + Session.getCurrentFileName() + "</strong></em>"));
 
         Utilities.SetFileExplorerLink(txtFilename,
-                Html.fromHtml("<em><font color='blue'><u>" + AppSettings.getGpsLoggerFolder() + "</u></font>" + "/<strong>" + Session.getCurrentFileName() + "</strong></em>" ),
+                Html.fromHtml("<em><font color='blue'><u>" + AppSettings.getGpsLoggerFolder() + "</u></font>" + "/<strong><br />" + Session.getCurrentFileName() + "</strong></em>" ),
                 AppSettings.getGpsLoggerFolder(),
                 getActivity().getApplicationContext());
 
@@ -277,13 +277,11 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         showPreferencesSummary();
 
         NumberFormat nf = NumberFormat.getInstance();
-        nf.setMaximumFractionDigits(6);
+        nf.setMaximumFractionDigits(4);
 
         EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
-        txtLatitude.setText(String.valueOf(nf.format(locationInfo.getLatitude())));
+        txtLatitude.setText(String.valueOf(nf.format(locationInfo.getLatitude())) + ", " + String.valueOf(nf.format(locationInfo.getLongitude())));
 
-        EditText txtLongitude = (EditText) rootView.findViewById(R.id.simple_lon_text);
-        txtLongitude.setText(String.valueOf(nf.format(locationInfo.getLongitude())));
 
         nf.setMaximumFractionDigits(3);
 
@@ -418,9 +416,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
         EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
         txtLatitude.setText("");
-
-        EditText txtLongitude = (EditText) rootView.findViewById(R.id.simple_lon_text);
-        txtLongitude.setText("");
 
         ImageView imgAccuracy = (ImageView)rootView.findViewById(R.id.simpleview_imgAccuracy);
         ClearColor(imgAccuracy);
