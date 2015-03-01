@@ -71,7 +71,6 @@ import java.util.*;
 
 public class GpsMainActivity extends ActionBarActivity
         implements GenericViewFragment.IGpsViewCallback,
-        NavigationDrawerFragment.NavigationDrawerCallbacks,
         IGpsLoggerServiceClient,
         IActionListener,
         Toolbar.OnMenuItemClickListener,
@@ -88,7 +87,6 @@ public class GpsMainActivity extends ActionBarActivity
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
-    //private NavigationDrawerFragment navigationDrawerFragment;
 
     MenuItem mnuAnnotate;
     MenuItem mnuOnePoint;
@@ -214,54 +212,6 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
 
-    /**
-     * Handles drawer item selection
-     */
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-
-        tracer.debug("Navigation menu item: " + String.valueOf(position));
-
-
-        switch (position) {
-            case 0:
-                break;
-            case 1:
-                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GENERAL);
-                break;
-            case 2:
-                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.LOGGING);
-                break;
-            case 3:
-                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
-                break;
-            case 4:
-                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
-                break;
-            case 5:
-                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
-                break;
-            case 6:
-                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
-                break;
-            case 7:
-                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
-                break;
-            case 8:
-                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
-                break;
-            case 9:
-                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
-                break;
-            default:
-                loggingService.StopLogging();
-                loggingService.stopSelf();
-                finish();
-                break;
-
-        }
-
-    }
 
     /**
      * Launches activity in a delayed handler, less stutter
@@ -398,25 +348,46 @@ public class GpsMainActivity extends ActionBarActivity
         );
 
 
-        //drawer.selectItem(1);
         drawer.setOnItemClickListener(new DrawerItem.OnItemClickListener() {
             @Override
             public void onClick(DrawerItem drawerItem, int id, int position) {
                 drawer.selectItem(position);
                 drawerLayout.closeDrawer(drawer);
-                Toast.makeText(GpsMainActivity.this, "Clicked item #" + position, Toast.LENGTH_SHORT).show();
-                LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
-            }
-        });
 
+                switch(position){
+                    case 0:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GENERAL);
+                        break;
+                    case 1:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.LOGGING);
+                        break;
+                    case 3:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
+                        break;
+                    case 4:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
+                        break;
+                    case 5:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
+                        break;
+                    case 6:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
+                        break;
+                    case 7:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
+                        break;
+                    case 8:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
+                        break;
+                    case 9:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
+                        break;
+                    case 11:
+                        Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
+                        startActivity(faqtivity);
+                        break;
+                }
 
-        drawer.setOnFixedItemClickListener(new DrawerItem.OnItemClickListener() {
-            @Override
-            public void onClick(DrawerItem drawerItem, int id, int position) {
-                drawer.selectFixedItem(position);
-                drawerLayout.closeDrawer(drawer);
-                Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
-                startActivity(faqtivity);
             }
         });
 

@@ -23,9 +23,4 @@
 
     <item android:id="@+id/mnuShare" android:title="@string/menu_share" android:icon="@drawable/share" app:showAsAction="always"  />
 
-
-
-
-
-
 </menu>
