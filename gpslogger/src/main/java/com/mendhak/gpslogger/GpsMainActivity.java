@@ -306,9 +306,10 @@ public class GpsMainActivity extends ActionBarActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getSupportActionBar().getThemedContext(),
-                R.array.gps_main_views, android.R.layout.simple_spinner_dropdown_item);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+
+        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.gps_main_views, R.layout.spinner_dropdown_item);
         Spinner navigationSpinner = new Spinner(getSupportActionBar().getThemedContext());
         navigationSpinner.setAdapter(spinnerAdapter);
         toolbar.addView(navigationSpinner, 0);

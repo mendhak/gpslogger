@@ -29,7 +29,6 @@
                             android:orientation="horizontal"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content">
-
                 <ImageButton
                     android:id="@+id/imgHelp"
                     android:layout_alignParentRight="true"
