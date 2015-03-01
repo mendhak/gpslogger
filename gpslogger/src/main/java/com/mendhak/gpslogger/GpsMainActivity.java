@@ -19,7 +19,6 @@ package com.mendhak.gpslogger;
 
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
@@ -47,7 +46,6 @@ import android.view.*;
 import android.widget.*;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.heinrichreimersoftware.materialdrawer.DrawerView;
-import com.heinrichreimersoftware.materialdrawer.structure.DrawerHeaderItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
@@ -78,20 +76,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     private static Intent serviceIntent;
     private GpsLoggingService loggingService;
-
-    Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
-    FragmentManager fragmentManager;
-
-
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
-
-    MenuItem mnuAnnotate;
-    MenuItem mnuOnePoint;
-    MenuItem mnuAutoSendNow;
-    private boolean annotationMarked;
     private org.slf4j.Logger tracer;
 
     @Override
@@ -105,19 +90,83 @@ public class GpsMainActivity extends ActionBarActivity
 
         setContentView(R.layout.activity_gps_main);
 
-        if (fragmentManager == null) {
-            tracer.debug("Creating fragmentManager");
-            fragmentManager = getFragmentManager();
-        }
-
         SetUpToolbar();
         SetUpNavigationDrawer();
         LoadDefaultFragmentView();
         StartAndBindService();
     }
 
-    private void loadPresetProperties() {
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        StartAndBindService();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GetPreferences();
+        StartAndBindService();
+        enableDisableMenuItems();
+    }
+
+    @Override
+    protected void onPause() {
+        StopAndUnbindServiceIfRequired();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        StopAndUnbindServiceIfRequired();
+        super.onDestroy();
+
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            ToggleDrawer();
+        }
+
+        return super.onKeyUp(keyCode, event);
+    }
+
+    /**
+     * Handles the hardware back-button press
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && Session.isBoundToService()) {
+            StopAndUnbindServiceIfRequired();
+        }
+
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
+                ToggleDrawer();
+                return true;
+            }
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+
+    private void loadPresetProperties() {
 
         //Either look for /<appfolder>/gpslogger.properties or /sdcard/gpslogger.properties
         File file =  new File(Utilities.GetDefaultStorageFolder(getApplicationContext()) + "/gpslogger.properties");
@@ -153,68 +202,11 @@ public class GpsMainActivity extends ActionBarActivity
         } catch (Exception e) {
             tracer.error("Could not load preset properties", e);
         }
-
     }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        StartAndBindService();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        GetPreferences();
-        StartAndBindService();
-        enableDisableMenuItems();
-    }
-
-    @Override
-    protected void onPause() {
-        StopAndUnbindServiceIfRequired();
-        super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        StopAndUnbindServiceIfRequired();
-        super.onDestroy();
-
-    }
-
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU) {
-            ToggleDrawer();
-        }
-
-        return super.onKeyUp(keyCode, event);
-    }
-
-    /**
-     * Handles the hardware back-button press
-     */
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && Session.isBoundToService()) {
-            StopAndUnbindServiceIfRequired();
-        }
-
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-            if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
-                ToggleDrawer();
-                return true;
-            }
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }
-
 
 
     /**
-     * Launches activity in a delayed handler, less stutter
+     * Helper method, launches activity in a delayed handler, less stutter
      */
     private void LaunchPreferenceScreen(final String whichFragment) {
         new Handler().postDelayed(new Runnable() {
@@ -227,31 +219,14 @@ public class GpsMainActivity extends ActionBarActivity
         }, 120);
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        drawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        drawerToggle.onConfigurationChanged(newConfig);
-    }
 
 
-    public void ToggleDrawer(){
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
-            drawerLayout.closeDrawer(Gravity.LEFT);
-        }
-        else {
-            drawerLayout.openDrawer(Gravity.LEFT);
-        }
+    public Toolbar GetToolbar(){
+        return (Toolbar)findViewById(R.id.toolbar);
     }
 
     public void SetUpToolbar(){
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = GetToolbar();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -270,7 +245,7 @@ public class GpsMainActivity extends ActionBarActivity
         drawerToggle = new ActionBarDrawerToggle(
                 this,
                 drawerLayout,
-                toolbar,
+                GetToolbar(),
                 R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close
         ){
@@ -304,11 +279,8 @@ public class GpsMainActivity extends ActionBarActivity
         drawer.addDivider();
 
 
-//        drawer.addItem(new DrawerItem()
-//                        .setTextSecondary(getString(R.string.title_drawer_uploadsettings))
-//        );
-
-        drawer.addItem(new DrawerItem().setTextPrimary(getString(R.string.title_drawer_uploadsettings)));
+        drawer.addItem(new DrawerItem()
+                .setTextPrimary(getString(R.string.title_drawer_uploadsettings)));
 
         drawer.addItem(new DrawerItem()
                         .setImage(getResources().getDrawable(R.drawable.googledrive))
@@ -402,20 +374,29 @@ public class GpsMainActivity extends ActionBarActivity
 
     }
 
+    public void ToggleDrawer(){
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
+            drawerLayout.closeDrawer(Gravity.LEFT);
+        }
+        else {
+            drawerLayout.openDrawer(Gravity.LEFT);
+        }
+    }
+
     private int GetUserSelectedNavigationItem(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         return sp.getInt("SPINNER_SELECTED_POSITION", 0);
     }
 
-    private void LoadDefaultFragmentView( ) {
-
+    private void LoadDefaultFragmentView() {
         int currentSelectedPosition = GetUserSelectedNavigationItem();
         tracer.debug("Loading fragment view: " + currentSelectedPosition);
         LoadFragmentView(currentSelectedPosition);
     }
 
     private void LoadFragmentView(int position){
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
         switch (position) {
             case 0:
@@ -432,6 +413,13 @@ public class GpsMainActivity extends ActionBarActivity
         transaction.commitAllowingStateLoss();
     }
 
+    private GenericViewFragment GetCurrentFragment(){
+        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.container);
+        if (currentFragment instanceof GenericViewFragment) {
+            return ((GenericViewFragment) currentFragment);
+        }
+        return null;
+    }
 
     @Override
     public boolean onNavigationItemSelected(int position, long itemId) {
@@ -446,29 +434,22 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
 
-    /**
-     * Creates menu items
-     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBottom);
-        if(toolbar.getMenu().size() > 0){ return true;}
+        Toolbar toolbarBottom = (Toolbar) findViewById(R.id.toolbarBottom);
 
-        toolbar.inflateMenu(R.menu.gps_main);
+        if(toolbarBottom.getMenu().size() > 0){ return true;}
+
+        toolbarBottom.inflateMenu(R.menu.gps_main);
         setupEvenlyDistributedToolbar();
+        toolbarBottom.setOnMenuItemClickListener(this);
 
-        toolbar.setOnMenuItemClickListener(this);
-        mnuAnnotate = toolbar.getMenu().findItem(R.id.mnuAnnotate);
-        mnuOnePoint = toolbar.getMenu().findItem(R.id.mnuOnePoint);
-        mnuAutoSendNow = toolbar.getMenu().findItem(R.id.mnuAutoSendNow);
         enableDisableMenuItems();
         return true;
     }
 
-
     public void setupEvenlyDistributedToolbar(){
-
         //http://stackoverflow.com/questions/26489079/evenly-spaced-menu-items-on-toolbar
 
         // Use Display metrics to get Screen Dimensions
@@ -520,6 +501,11 @@ public class GpsMainActivity extends ActionBarActivity
         OnWaitingForLocation(Session.isWaitingForLocation());
         SetBulbStatus(Session.isStarted());
 
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarBottom);
+        MenuItem mnuAnnotate = toolbar.getMenu().findItem(R.id.mnuAnnotate);
+        MenuItem mnuOnePoint = toolbar.getMenu().findItem(R.id.mnuOnePoint);
+        MenuItem mnuAutoSendNow = toolbar.getMenu().findItem(R.id.mnuAutoSendNow);
+
         if (mnuOnePoint != null) {
             mnuOnePoint.setEnabled(!Session.isStarted());
             mnuOnePoint.setIcon((Session.isStarted() ? R.drawable.singlepoint_disabled : R.drawable.singlepoint));
@@ -535,7 +521,7 @@ public class GpsMainActivity extends ActionBarActivity
                 mnuAnnotate.setIcon(R.drawable.annotate2_disabled);
                 mnuAnnotate.setEnabled(false);
             } else {
-                if (annotationMarked) {
+                if (Session.isAnnotationMarked()) {
                     mnuAnnotate.setIcon(R.drawable.annotate2_active);
                 } else {
                     mnuAnnotate.setIcon(R.drawable.annotate2);
@@ -544,7 +530,6 @@ public class GpsMainActivity extends ActionBarActivity
 
         }
     }
-
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
@@ -588,7 +573,6 @@ public class GpsMainActivity extends ActionBarActivity
             default:
                 return true;
         }
-
     }
 
 
@@ -605,7 +589,6 @@ public class GpsMainActivity extends ActionBarActivity
         } else {
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
         }
-
     }
 
     private void LogSinglePoint() {
@@ -615,12 +598,6 @@ public class GpsMainActivity extends ActionBarActivity
 
     /**
      * Annotates GPX and KML files, TXT files are ignored.
-     * <p/>
-     * The annotation is done like this:
-     * <wpt lat="##.##" lon="##.##">
-     * <name>user input</name>
-     * </wpt>
-     * <p/>
      * The user is prompted for the content of the <name> tag. If a valid
      * description is given, the logging service starts in single point mode.
      */
@@ -667,9 +644,6 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
 
-    /**
-     * Uploads a GPS Trace to OpenStreetMap.org.
-     */
     private void UploadToOpenStreetMap() {
         if (!OSMHelper.IsOsmAuthorized(getApplicationContext())) {
             tracer.debug("Not authorized, opening OSM activity");
@@ -729,7 +703,6 @@ public class GpsMainActivity extends ActionBarActivity
         } else {
             ShowFileListDialog(FileSenderFactory.GetEmailSender(this));
         }
-
     }
 
     private void ShowFileListDialog(final IFileSender sender) {
@@ -877,7 +850,6 @@ public class GpsMainActivity extends ActionBarActivity
         } catch (Exception ex) {
             tracer.error("Share", ex);
         }
-
     }
 
 
@@ -935,7 +907,6 @@ public class GpsMainActivity extends ActionBarActivity
 
         if (!Session.isStarted()) {
             tracer.debug("Stopping the service");
-            //serviceIntent = new Intent(this, GpsLoggingService.class);
             try {
                 stopService(serviceIntent);
             } catch (Exception e) {
@@ -947,49 +918,48 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     //IGpsLoggerServiceClient callbacks
-
     @Override
     public void OnStatusMessage(String message) {
         tracer.debug(message);
 
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).SetStatusMessage(message);
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.SetStatusMessage(message);
         }
     }
 
     @Override
     public void OnFatalMessage(String message) {
         tracer.debug(message);
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).SetFatalMessage(message);
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.SetFatalMessage(message);
         }
     }
 
     @Override
     public void OnLocationUpdate(Location loc) {
         tracer.debug(".");
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).SetLocation(loc);
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.SetLocation(loc);
         }
 
     }
 
     @Override
     public void OnNmeaSentence(long timestamp, String nmeaSentence) {
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).OnNmeaSentence(timestamp, nmeaSentence);
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.OnNmeaSentence(timestamp, nmeaSentence);
         }
     }
 
     @Override
     public void OnSatelliteCount(int count) {
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).SetSatelliteCount(count);
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.SetSatelliteCount(count);
         }
     }
 
@@ -997,9 +967,9 @@ public class GpsMainActivity extends ActionBarActivity
     public void OnStartLogging() {
         tracer.debug(".");
 
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).SetLoggingStarted();
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.SetLoggingStarted();
         }
 
         enableDisableMenuItems();
@@ -1009,9 +979,9 @@ public class GpsMainActivity extends ActionBarActivity
     @Override
     public void OnStopLogging() {
         tracer.debug(".");
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).SetLoggingStopped();
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.SetLoggingStopped();
         }
 
         enableDisableMenuItems();
@@ -1025,23 +995,23 @@ public class GpsMainActivity extends ActionBarActivity
     @Override
     public void OnSetAnnotation() {
         tracer.debug(".");
-        this.annotationMarked = true;
+        Session.setAnnotationMarked(true);
         enableDisableMenuItems();
     }
 
     @Override
     public void OnClearAnnotation() {
         tracer.debug(".");
-        this.annotationMarked = false;
+        Session.setAnnotationMarked(false);
         enableDisableMenuItems();
     }
 
 
     @Override
     public void onFileName(String newFileName) {
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).OnFileNameChange(newFileName);
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.OnFileNameChange(newFileName);
         }
     }
 
@@ -1136,7 +1106,6 @@ public class GpsMainActivity extends ActionBarActivity
             tracer.info("Toggle requested - starting");
             StartLogging();
         }
-
     }
 
     private void StartLogging() {
@@ -1151,9 +1120,7 @@ public class GpsMainActivity extends ActionBarActivity
         enableDisableMenuItems();
     }
 
-    /**
-     * Gets preferences chosen by the user
-     */
+
     private void GetPreferences() {
         Utilities.PopulateAppSettings(getApplicationContext());
     }
