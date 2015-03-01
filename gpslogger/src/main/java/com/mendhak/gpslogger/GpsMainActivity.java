@@ -19,7 +19,6 @@ package com.mendhak.gpslogger;
 
 import android.app.ActionBar;
 import android.app.Activity;
-
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -42,10 +41,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.SpinnerAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
+import com.mendhak.gpslogger.common.NetworkUtils;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
@@ -66,13 +74,17 @@ import com.mendhak.gpslogger.views.GenericViewFragment;
 import com.mendhak.gpslogger.views.GpsBigViewFragment;
 import com.mendhak.gpslogger.views.GpsDetailedViewFragment;
 import com.mendhak.gpslogger.views.GpsSimpleViewFragment;
+
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Properties;
 
 public class GpsMainActivity extends Activity
         implements GenericViewFragment.IGpsViewCallback, NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, IGpsLoggerServiceClient, IActionListener {
@@ -513,6 +525,11 @@ public class GpsMainActivity extends Activity
             return;
         }
 
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.no_network_message), this);
+            return;
+        }
+
         Intent settingsIntent = OSMHelper.GetOsmSettingsIntent(getApplicationContext());
         ShowFileListDialog(settingsIntent, FileSenderFactory.GetOsmSender(getApplicationContext(), this));
     }
@@ -523,6 +540,11 @@ public class GpsMainActivity extends Activity
         if (!dropBoxHelper.IsLinked()) {
             tracer.debug("Not linked, opening Dropbox activity");
             startActivity(new Intent("com.mendhak.gpslogger.DROPBOX_SETUP"));
+            return;
+        }
+
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.no_network_message), this);
             return;
         }
 
@@ -549,6 +571,11 @@ public class GpsMainActivity extends Activity
             return;
         }
 
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.no_network_message), this);
+            return;
+        }
+
         Intent settingsIntent = new Intent(GpsMainActivity.this, GDocsSettingsActivity.class);
         ShowFileListDialog(settingsIntent, FileSenderFactory.GetGDocsSender(getApplicationContext(), this));
     }
@@ -560,9 +587,12 @@ public class GpsMainActivity extends Activity
             tracer.debug("Not setup, opening FTP setup activity");
             startActivity(settingsIntent);
         } else {
+            if (!NetworkUtils.isNetworkAvailable(this)) {
+                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.no_network_message), this);
+                return;
+            }
             IFileSender fs = FileSenderFactory.GetFtpSender(getApplicationContext(), this);
             ShowFileListDialog(settingsIntent, fs);
-
         }
     }
 
@@ -573,6 +603,10 @@ public class GpsMainActivity extends Activity
             tracer.debug("Not set up, opening email setup activity");
             startActivity(settingsIntent);
         } else {
+            if (!NetworkUtils.isNetworkAvailable(this)) {
+                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.no_network_message), this);
+                return;
+            }
             ShowFileListDialog(settingsIntent, FileSenderFactory.GetEmailSender(this));
         }
 
