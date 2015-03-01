@@ -390,6 +390,13 @@ public class GpsMainActivity extends ActionBarActivity
                         .setTextPrimary(getString(R.string.osm_setup_title))
         );
 
+        drawer.addDivider();
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.helpfaq))
+                        .setTextPrimary(getString(R.string.menu_faq))
+        );
+
 
         //drawer.selectItem(1);
         drawer.setOnItemClickListener(new DrawerItem.OnItemClickListener() {
@@ -400,13 +407,8 @@ public class GpsMainActivity extends ActionBarActivity
                 Toast.makeText(GpsMainActivity.this, "Clicked item #" + position, Toast.LENGTH_SHORT).show();
                 LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
             }
-
         });
 
-        drawer.addFixedItem(new DrawerItem()
-                        .setImage(getResources().getDrawable(R.drawable.helpfaq))
-                        .setTextPrimary(getString(R.string.menu_faq))
-        );
 
         drawer.setOnFixedItemClickListener(new DrawerItem.OnItemClickListener() {
             @Override
