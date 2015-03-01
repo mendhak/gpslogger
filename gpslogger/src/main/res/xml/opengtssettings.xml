@@ -2,11 +2,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   android:key="opengts_preferences">
 
-    <SwitchPreference android:key="opengts_enabled"
+    <com.mendhak.gpslogger.views.component.CustomSwitchPreference android:key="opengts_enabled"
                         android:title="@string/opengts_enabled"
                         android:summary="@string/opengts_enabled_summary"/>
 
-    <SwitchPreference android:key="autoopengts_enabled"
+    <com.mendhak.gpslogger.views.component.CustomSwitchPreference android:key="autoopengts_enabled"
                         android:title="@string/autoopengts_autosend"
                         android:summary="@string/autoopengts_autosend_summary"/>
 

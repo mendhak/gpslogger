@@ -35,6 +35,7 @@ import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.FileDialog.FolderSelectorDialog;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
@@ -86,7 +87,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
         newFilePref.getOnPreferenceChangeListener()
                 .onPreferenceChange(newFilePref, newFilePref.getValue());
 
-        SwitchPreference chkfile_prefix_serial = (SwitchPreference) findPreference("new_file_prefix_serial");
+        CustomSwitchPreference chkfile_prefix_serial = (CustomSwitchPreference) findPreference("new_file_prefix_serial");
         if (Utilities.IsNullOrEmpty(Utilities.GetBuildSerial())) {
             chkfile_prefix_serial.setEnabled(false);
             chkfile_prefix_serial.setSummary("This option not available on older phones or if a serial id is not present");
@@ -101,10 +102,10 @@ public class LoggingSettingsFragment extends PreferenceFragment
         Preference prefListeners = (Preference)findPreference("listeners");
         prefListeners.setOnPreferenceClickListener(this);
 
-        SwitchPreference prefCustomUrl = (SwitchPreference)findPreference("log_customurl_enabled");
+        CustomSwitchPreference prefCustomUrl = (CustomSwitchPreference)findPreference("log_customurl_enabled");
         prefCustomUrl.setOnPreferenceChangeListener(this);
 
-        SwitchPreference chkLog_opengts = (SwitchPreference) findPreference("log_opengts");
+        CustomSwitchPreference chkLog_opengts = (CustomSwitchPreference) findPreference("log_opengts");
         chkLog_opengts.setOnPreferenceChangeListener(this);
     }
 
@@ -197,8 +198,8 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
         if (preference.getKey().equalsIgnoreCase("log_opengts")) {
 
-            if(!((SwitchPreference) preference).isChecked() && (Boolean)newValue  ) {
-                SwitchPreference chkLog_opengts = (SwitchPreference) findPreference("log_opengts");
+            if(!((CustomSwitchPreference) preference).isChecked() && (Boolean)newValue  ) {
+                CustomSwitchPreference chkLog_opengts = (CustomSwitchPreference) findPreference("log_opengts");
 
                 if ((Boolean)newValue) {
                     Intent targetActivity = new Intent(getActivity(), MainPreferenceActivity.class);
@@ -215,7 +216,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
             // Bug in SwitchPreference: http://stackoverflow.com/questions/19503931/switchpreferences-calls-multiple-times-the-onpreferencechange-method
             // Check if isChecked == false && newValue == true
-            if(!((SwitchPreference) preference).isChecked() && (Boolean)newValue  ) {
+            if(!((CustomSwitchPreference) preference).isChecked() && (Boolean)newValue  ) {
                 MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
                         .title(R.string.log_customurl_title)
                         .customView(R.layout.alertview, true)
@@ -233,7 +234,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
                             @Override
                             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                                 if (keyCode == KeyEvent.KEYCODE_BACK) {
-                                    ((SwitchPreference) preference).setChecked(false);
+                                    ((CustomSwitchPreference) preference).setChecked(false);
                                     return false;
                                 }
                                 return true;

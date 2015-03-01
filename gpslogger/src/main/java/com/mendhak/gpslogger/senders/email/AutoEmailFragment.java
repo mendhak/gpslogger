@@ -29,6 +29,7 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import org.slf4j.LoggerFactory;
 
 public class AutoEmailFragment extends PreferenceValidationFragment implements
@@ -45,7 +46,7 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
 
         addPreferencesFromResource(R.xml.autoemailsettings);
 
-        SwitchPreference chkEnabled = (SwitchPreference) findPreference("autoemail_enabled");
+        CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("autoemail_enabled");
 
         chkEnabled.setOnPreferenceChangeListener(this);
 
@@ -76,7 +77,7 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
         Utilities.ShowProgress(getActivity(), getString(R.string.autoemail_sendingtest),
                 getString(R.string.please_wait));
 
-        SwitchPreference chkUseSsl = (SwitchPreference) findPreference("smtp_ssl");
+        CustomSwitchPreference chkUseSsl = (CustomSwitchPreference) findPreference("smtp_ssl");
         MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
         MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
         MaterialEditTextPreference txtUsername = (MaterialEditTextPreference) findPreference("smtp_username");
@@ -96,7 +97,7 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
 
     private boolean IsFormValid() {
 
-        SwitchPreference chkEnabled = (SwitchPreference) findPreference("autoemail_enabled");
+        CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("autoemail_enabled");
         MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
         MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
         MaterialEditTextPreference txtUsername = (MaterialEditTextPreference) findPreference("smtp_username");
@@ -148,7 +149,7 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
 
         MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
         MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
-        SwitchPreference chkUseSsl = (SwitchPreference) findPreference("smtp_ssl");
+        CustomSwitchPreference chkUseSsl = (CustomSwitchPreference) findPreference("smtp_ssl");
 
         // Yahoo
         txtSmtpServer.setText(server);

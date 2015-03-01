@@ -18,8 +18,6 @@
 package com.mendhak.gpslogger.senders.opengts;
 
 import android.os.Bundle;
-import android.preference.SwitchPreference;
-
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -29,6 +27,7 @@ import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import org.slf4j.LoggerFactory;
 
 public class OpenGTSFragment extends PreferenceValidationFragment implements
@@ -43,7 +42,7 @@ public class OpenGTSFragment extends PreferenceValidationFragment implements
 
         addPreferencesFromResource(R.xml.opengtssettings);
 
-        SwitchPreference chkEnabled = (SwitchPreference) findPreference("autoopengts_enabled");
+        CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("autoopengts_enabled");
         MaterialEditTextPreference txtOpenGTSServer = (MaterialEditTextPreference) findPreference("opengts_server");
         MaterialEditTextPreference txtOpenGTSServerPort = (MaterialEditTextPreference) findPreference("opengts_server_port");
         MaterialListPreference txtOpenGTSCommunicationMethod = (MaterialListPreference) findPreference("opengts_server_communication_method");
@@ -70,7 +69,7 @@ public class OpenGTSFragment extends PreferenceValidationFragment implements
     }
 
     private boolean IsFormValid() {
-        SwitchPreference chkEnabled = (SwitchPreference) findPreference("opengts_enabled");
+        CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("opengts_enabled");
         MaterialEditTextPreference txtOpenGTSServer = (MaterialEditTextPreference) findPreference("opengts_server");
         MaterialEditTextPreference txtOpenGTSServerPort = (MaterialEditTextPreference) findPreference("opengts_server_port");
         MaterialListPreference txtOpenGTSCommunicationMethod = (MaterialListPreference) findPreference("opengts_server_communication_method");

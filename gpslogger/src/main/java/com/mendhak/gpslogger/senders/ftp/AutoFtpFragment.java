@@ -19,7 +19,6 @@ package com.mendhak.gpslogger.senders.ftp;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.SwitchPreference;
 import android.preference.Preference;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
@@ -27,6 +26,7 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import org.slf4j.LoggerFactory;
 
 public class AutoFtpFragment
@@ -46,7 +46,7 @@ public class AutoFtpFragment
 
     private boolean IsFormValid() {
 
-        SwitchPreference chkEnabled = (SwitchPreference) findPreference("autoftp_enabled");
+        CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("autoftp_enabled");
         MaterialEditTextPreference txtServer = (MaterialEditTextPreference) findPreference("autoftp_server");
         MaterialEditTextPreference txtUserName = (MaterialEditTextPreference) findPreference("autoftp_username");
         MaterialEditTextPreference txtPort = (MaterialEditTextPreference) findPreference("autoftp_port");
@@ -105,9 +105,9 @@ public class AutoFtpFragment
         MaterialEditTextPreference usernamePreference = (MaterialEditTextPreference) findPreference("autoftp_username");
         MaterialEditTextPreference passwordPreference = (MaterialEditTextPreference) findPreference("autoftp_password");
         MaterialEditTextPreference portPreference = (MaterialEditTextPreference) findPreference("autoftp_port");
-        SwitchPreference useFtpsPreference = (SwitchPreference) findPreference("autoftp_useftps");
+        CustomSwitchPreference useFtpsPreference = (CustomSwitchPreference) findPreference("autoftp_useftps");
         MaterialListPreference sslTlsPreference = (MaterialListPreference) findPreference("autoftp_ssltls");
-        SwitchPreference implicitPreference = (SwitchPreference) findPreference("autoftp_implicit");
+        CustomSwitchPreference implicitPreference = (CustomSwitchPreference) findPreference("autoftp_implicit");
         MaterialEditTextPreference directoryPreference = (MaterialEditTextPreference) findPreference("autoftp_directory");
 
         if (!helper.ValidSettings(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
