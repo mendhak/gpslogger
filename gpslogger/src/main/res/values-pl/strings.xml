@@ -6,9 +6,6 @@
   <string name="ok">Ok</string>
   <string name="cancel">Anuluj</string>
   <string name="could_not_write_to_file">Nie można zapisać do pliku </string>
-  <string name="description_added">Opis dodany do pliku</string>
-  <string name="not_yet">Jeszcze nie</string>
-  <string name="cant_add_description_until_next_point">Nie można dodać opisu dopóki następny punkt zostanie zalogowany do pliku.</string>
   <string name="add_description">Dodaj opis</string>
   <string name="letters_numbers">Używaj tylko cyfr i liter</string>
   <string name="menu_settings">Ustawienia</string>
@@ -33,7 +30,6 @@
   <string name="summary_dist">Odległość:</string>
   <string name="summary_dist_regardless">maksimum</string>
   <string name="summary_current_filename">Plik:</string>
-  <string name="summary_current_filename_format">%s (w katalogu GPSLogger)</string>
   <string name="sharing_location_only">Tylko lokalizacja</string>
   <string name="sharing_pick_file">Wybierz plik do udostępnienia</string>
   <string name="sharing_mylocation">Moja lokalizacja</string>
@@ -47,7 +43,6 @@
   <string name="error_connection">Błąd połączenia. Proszę Sprawdzić ustawienia telefonu.</string>
   <string name="gpsprovider_unavailable">Brak dostawcy GPS. Proszę sprawdzić ustawienia lokalizacji oraz włączyć dostawcę lokalizacji.</string>
   <string name="started">Rozpoczęte</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(Użycie %s)</string>
   <string name="providername_gps">Satelity GPS</string>
   <string name="providername_celltower">Wieże telefonii</string>
   <string name="not_applicable">n/d</string>
@@ -87,15 +82,10 @@
   <string name="time_twoandhalfhours">2½ godzin</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">wewnątrz %s %s</string>
-  <string name="error_displaying">Błąd wyświetlania lokalizacji: %s</string>
   <string name="degree_symbol">°</string>
-  <string name="settings_distance_in_feet">Odległość w stopach</string>
-  <string name="settings_enter_feet">Wprowadź stopy (maks. 9999)</string>
   <string name="settings_distance_in_meters">Odległość w metrach</string>
   <string name="settings_accuracy_in_meters">Dokładność w metrach</string>
-  <string name="settings_accuracy_in_feet">Dokładność w stopach</string>
   <string name="settings_enter_meters">Wprowadź metry (maks. 9999)</string>
-  <string name="settings_converting_description">Trwa konwersja jednostek odległości. Wartości powyżej 9999 są resetowane do 9999. Ekran ustawień zostanie przeładowany.</string>
   <string name="pref_logging_title">Szczegóły logowania</string>
   <string name="log_gpx_title">Loguj do GPX</string>
   <string name="log_gpx_summary">Tworzy plik GPX w folderze GPSLogger na karcie SD.</string>
@@ -108,7 +98,6 @@
   <string name="new_file_creation_onceaday">Raz na dzień</string>
   <string name="new_file_creation_everystart">Za każdym uruchomieniem.</string>
   <string name="pref_performance_title">Wydajność</string>
-  <string name="prefer_celltower_title">Preferuj wieże telefonii</string>
   <string name="time_before_logging_title">Odstępy czasu</string>
   <string name="time_before_logging_dialog_title">Czas w sekundach</string>
   <string name="time_before_logging_hint">Wprowadź czas (max 9999)</string>
@@ -116,15 +105,10 @@
   <string name="keep_fix_title">Zachować GPS między poprawkami</string>
   <string name="retry_time_dialog_title">Czas w sekundach</string>
   <string name="retry_time_hint">Wprowadź sekundy (max 9999)</string>
-  <string name="timeout_time_title">Przekroczony czas. </string>
-  <string name="timeout_time_summary">Po jakim czasie ma zakończyć prace w przypadku nieustalenia pozycji. Użyj 0 brak limitu.</string>
-  <string name="timeout_time_dialog_title">Czas w sekundach</string>
-  <string name="timeout_time_hint">Wprowadź sekundy (max 9999)</string>
   <string name="enabledisablegps_title">Włącz/Wyłącz GPS</string>
   <string name="enabledisablegps_summary">Przejście do ustawień telefonu w celu zarządzania dostawcami.</string>
   <string name="startonbootup_title">Uruchom na starcie</string>
   <string name="startonbootup_summary">Uruchamianie programu i logowania po uruchomieniu telefonu</string>
-  <string name="autoemail_title">Ustawienia auto e-maila</string>
   <string name="autoemail_summary">Automatyczne wysyłanie maila z plikiem logu na podany adres</string>
   <string name="please_wait">Proszę czekać.</string>
   <string name="autoemail_autosend">Włącz wiadomości e-mail</string>
@@ -184,7 +168,6 @@
   <string name="emailprovider_yahoo">Poczta Yahoo!</string>
   <string name="emailprovider_msn">Poczta Windows Live</string>
   <string name="emailprovider_manual">Ręcznie</string>
-  <string name="btn_single_point">Zapisz pojedynczy punkt</string>
   <string name="dropbox_setup_title">Dropbox</string>
   <string name="dropbox_setup_summary">Autoryzuj w Dropbox aby umożliwić przesyłanie plików.</string>
   <string name="dropbox_authorize_description">Użycie Dropboxa wymaga autoryzacji GPSLoggera do przesyłania plików.</string>
@@ -198,15 +181,8 @@
   <string name="menu_upload">Wysyłanie</string>
   <string name="autoemail_from">Adres nadawcy</string>
   <string name="autoemail_from_summary">Niektórzy dostawcy poczty wymagają adresu nadawcy. Należy używać tej opcji tylko, gdy jest to wymagane.</string>
-  <string name="gdocs_upload">Dokumenty Google</string>
-  <string name="gdocs_settings_screenname">Ustawienia wysyłania do Dokumentów Google</string>
-  <string name="gdocs_startauthorization">Autoryzuj w Dokumentach Google</string>
-  <string name="gdocs_authorize_summary">Przeniesienie do Dokumentów Google celem autoryzacji GPSLoggera.</string>
   <string name="gdocs_clearauthorization">Usunięcie autoryzacji</string>
   <string name="gdocs_clearauthorization_summary">Porzuć lokalne ustawienia Dokumentów Google. W celu całkowitego odebrania dostępu należy przejść do ustawień Dokumentów Google.</string>
-  <string name="gdocs_setup_title">Dokumenty Google</string>
-  <string name="gdocs_setup_summary">Autoryzuj w Dokumentach Google w celu wysyłania.</string>
-  <string name="gdocs_test_summary">Wysłanie testowego pliku do Dokumentów Google.</string>
   <string name="gdocs_test_title">Test wysyłania</string>
   <string name="gdocs_testupload_error">Nie można wysłać testowego pliku</string>
   <string name="gdocs_testupload_success">Wysłano. Proszę sprawdzić nowe pliki w Dokumentach Google.</string>
@@ -227,7 +203,6 @@
   <string name="shortcut_pickaction">Wybierz działanie</string>
   <string name="log_opengts_title">Zaloguj do serwera OpenGTS</string>
   <string name="log_opengts_summary">Wyślij dane GPRMC na aktywny serwer OpenGTS.</string>
-  <string name="opengts_setup_title">Ustawienia OpenGTS</string>
   <string name="opengts_setup_summary">Wyślij ślad GPS na wybrany serwer OpenGTS.</string>
   <string name="opengts_enabled">Włącz OpenGTS</string>
   <string name="opengts_enabled_summary">Włącz serwer OpenGTS.</string>
@@ -266,7 +241,6 @@
   <string name="autoftp_invalid_summary">Niektóre ustawienia są nieprawidłowe. Upewnij się, czy wypełniłeś wszystkie istotne pola.     </string>
   <string name="autoftp_enabled">FTP włączony</string>
   <string name="ftp_upload">Wysyłanie na FTP</string>
-  <string name="autoftp_setup_title">Ustawienia FTP</string>
   <string name="autoftp_setup_summary">Prześlij pliki na serwer FTP(S). Notka: To nie obejmuje SFTP.</string>
   <string name="faq_screen_title">Najczęściej zadawane pytania</string>
   <string name="menu_faq">Pomoc i FAQ</string>

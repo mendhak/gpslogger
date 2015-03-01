@@ -6,9 +6,6 @@
   <string name="ok">OK</string>
   <string name="cancel">Avbryt</string>
   <string name="could_not_write_to_file">Kunne ikkje skriva til fil</string>
-  <string name="description_added">Skildring lagt til fila</string>
-  <string name="not_yet">Ikkje enno</string>
-  <string name="cant_add_description_until_next_point">Du kan ikkje leggja til skildring før det neste punktet har blitt<br />logga til ei fil.<br /></string>
   <string name="add_description">Legg til skildring</string>
   <string name="letters_numbers">Bruk berre bokstavar og tal</string>
   <string name="menu_settings">Innstillingar</string>
@@ -33,7 +30,6 @@
   <string name="summary_dist">Avstand:</string>
   <string name="summary_dist_regardless">maksimum</string>
   <string name="summary_current_filename">Fil:</string>
-  <string name="summary_current_filename_format">%s (i GPSLogger-mappa di)</string>
   <string name="sharing_location_only">Berre plassering</string>
   <string name="sharing_pick_file">Velj ei fil å dele</string>
   <string name="sharing_mylocation">Mi plassering</string>
@@ -47,7 +43,6 @@
   <string name="error_connection">Tilkoblingsfeil. Sjekk telefoninnstillingane dine.</string>
   <string name="gpsprovider_unavailable">Inga posisjonsteneste er tilgjengeleg. Sjekk posisjonsinnstillingane<br /> dine og slå på ei posisjonsteneste.<br /></string>
   <string name="started">Starta</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(Bruker %s)</string>
   <string name="providername_gps">GPS satellitter</string>
   <string name="providername_celltower">mobilnett</string>
   <string name="not_applicable">i/t</string>
@@ -87,15 +82,10 @@
   <string name="time_twoandhalfhours">2½ time</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">innenfor %s %s</string>
-  <string name="error_displaying">Kunne ikke vise posisjon: %s</string>
   <string name="degree_symbol">°</string>
-  <string name="settings_distance_in_feet">Avstand i fot</string>
-  <string name="settings_enter_feet">Angi fot (maks 9999)</string>
   <string name="settings_distance_in_meters">Avstanden i meter</string>
   <string name="settings_accuracy_in_meters">Nøyaktighet i meter</string>
-  <string name="settings_accuracy_in_feet">Nøyaktighet i fot</string>
   <string name="settings_enter_meters">Angi meter (maks 9999)</string>
-  <string name="settings_converting_description">Konverterer minimumsdistanse. Verdier over 9999 tilbakestilles til 9999. Skjermbildet vil nå laste på nytt.     </string>
   <string name="pref_logging_title">Logg detaljer</string>
   <string name="log_gpx_title">Logg til GPX</string>
   <string name="log_gpx_summary">Lagar ei GPX-fil i GPSLogger-mappa på SD-kortet.</string>
@@ -108,7 +98,6 @@
   <string name="new_file_creation_onceaday">Ein gong om dagen</string>
   <string name="new_file_creation_everystart">Kvar gong eg byrjar</string>
   <string name="pref_performance_title">Yting</string>
-  <string name="prefer_celltower_title">Føretrekk mobilmaster</string>
   <string name="time_before_logging_title">Tid før logging</string>
   <string name="time_before_logging_dialog_title">Tid i sekund</string>
   <string name="time_before_logging_hint">Skriv inn sekund (maks 9999)</string>
@@ -116,15 +105,10 @@
   <string name="keep_fix_title">Behold GPS\'en påskrudd mellom loggintervallene</string>
   <string name="retry_time_dialog_title">Tid i sekunder</string>
   <string name="retry_time_hint">Angi sekunder (maks 9999)</string>
-  <string name="timeout_time_title">Tidsavbrudd</string>
-  <string name="timeout_time_summary">Hvor lenge skal GPS\'en søke etter posisjon før den gir opp. Bruk 0 for å aldri gi opp</string>
-  <string name="timeout_time_dialog_title">Tid i sekunder</string>
-  <string name="timeout_time_hint">Angi sekunder (maks 9999)</string>
   <string name="enabledisablegps_title">Slå på/av GPS</string>
   <string name="enabledisablegps_summary">Gå til telefoninstillingane for å velja / slå av posisjonsteneste.</string>
   <string name="startonbootup_title">Start ved oppstart</string>
   <string name="startonbootup_summary">Start app og start logging når telefonen blir slått på</string>
-  <string name="autoemail_title">Auto-e-post-oppsett</string>
   <string name="autoemail_summary">Sender automatisk e-post med GPS-sporet til ei adresse du vel</string>
   <string name="please_wait">Vent.</string>
   <string name="autoemail_autosend">Aktivere e-post</string>
@@ -184,7 +168,6 @@
   <string name="emailprovider_yahoo">Yahoo! Mail</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
   <string name="emailprovider_manual">Manuell</string>
-  <string name="btn_single_point">Logg eitt enkelt punkt</string>
   <string name="dropbox_setup_title">Dropbox</string>
   <string name="dropbox_setup_summary">Godkjenn appen for filopplasting til Dropbox</string>
   <string name="dropbox_authorize_description">For å bruke Dropbox funksjoner, må du godkjenne at GPSLogger laster opp filer til kontoen din.    </string>
@@ -196,15 +179,8 @@
   <string name="menu_upload">Opplasting</string>
   <string name="autoemail_from">Fra adresse</string>
   <string name="autoemail_from_summary">Enkelte e-postleverandører krever en avsenderadresse. Bruk dette bare hvis du trenger det.</string>
-  <string name="gdocs_upload">Google Docs</string>
-  <string name="gdocs_settings_screenname">Google Docs opplastingsinnstillinger</string>
-  <string name="gdocs_startauthorization">Godkjenn med Google Docs</string>
-  <string name="gdocs_authorize_summary">Tar deg til Google Docs der du må godkjenne GPSLogger</string>
   <string name="gdocs_clearauthorization">Fjern autorisasjon</string>
   <string name="gdocs_clearauthorization_summary">Glem GDocs innstillinger. For å permanent fjerne tilgangen, gå til Google-Kontoinnstillinger</string>
-  <string name="gdocs_setup_title">Google Docs</string>
-  <string name="gdocs_setup_summary">Godkjenne med Google Docs for å tillate opplastinger</string>
-  <string name="gdocs_test_summary">Sende testfil til Google Docs</string>
   <string name="gdocs_test_title">Test opplasting</string>
   <string name="gdocs_testupload_error">Kunne ikke laste opp test-fil</string>
   <string name="gdocs_testupload_success">Lastet opp. Sjekk Google dokumenter for ny fil.</string>
@@ -218,7 +194,6 @@
   <string name="autoftp_invalid_summary">Innstillingene er ugyldige. Kontroller at du har fylt ut alle relevante felt.</string>
   <string name="autoftp_enabled">FTP aktivert</string>
   <string name="ftp_upload">FTP Opplasting</string>
-  <string name="autoftp_setup_title">FTP-oppsett</string>
   <string name="autoftp_setup_summary">Last opp filer til en FTP(S)-server. Merk: Dette gjelder ikke SFTP.</string>
   <string name="faq_screen_title">Vanlige spørsmål</string>
   <string name="menu_faq">Help pg FAQ</string>

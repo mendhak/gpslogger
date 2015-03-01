@@ -3,15 +3,11 @@
 <resources>
   <string name="title_drawer_generalsettings">Splošne nastavitve</string>
   <string name="title_drawer_uploadsettings">Nastavitve prenosa</string>
-  <string name="action_settings">Nastavitve</string>
   <string name="app_name">GPSLogger</string>
   <string name="settings_screen_name">GPSLogger Nastavitve</string>
   <string name="ok">Potrdi</string>
   <string name="cancel">Preklici</string>
   <string name="could_not_write_to_file">Ne morem zapisati v datoteko</string>
-  <string name="description_added">Opis dodan v datoteko</string>
-  <string name="not_yet">Ne še</string>
-  <string name="cant_add_description_until_next_point">Ne morete dodati opisa dokler točka ni zapisana v datodeko     </string>
   <string name="add_description">Dodajte opis</string>
   <string name="letters_numbers">Uporabite le črke in številke</string>
   <string name="menu_settings">Nastavitve</string>
@@ -36,7 +32,6 @@
   <string name="summary_dist">Oddaljenost:</string>
   <string name="summary_dist_regardless">največja</string>
   <string name="summary_current_filename">Datoteka:</string>
-  <string name="summary_current_filename_format">%s (v mapi GPSLogger)</string>
   <string name="sharing_location_only">Samo lokacija</string>
   <string name="sharing_pick_file">Izberite datoteko za deliti</string>
   <string name="sharing_mylocation">Moja lokacija</string>
@@ -50,7 +45,6 @@
   <string name="error_connection">Napake pri povezavi. Prosimo, preverite vaše nastavitve telefona.</string>
   <string name="gpsprovider_unavailable">Ponudnik GPS ni na voljo. Preverite nastavitve mesta in omogoči namestitev ponudnika     </string>
   <string name="started">Začel</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(Z uporabo %s)</string>
   <string name="providername_gps">GPS sateliti</string>
   <string name="providername_celltower">GSM stolpi</string>
   <string name="not_applicable">n/a</string>
@@ -77,10 +71,8 @@
   <string name="time_halfhour">pol ure</string>
   <string name="time_oneandhalfhours">1 ura in pol</string>
   <string name="time_twoandhalfhours">2 uri in pol</string>
-  <string name="settings_distance_in_feet">Razdalja v čevljih</string>
   <string name="settings_distance_in_meters">Razdalja v metrih</string>
   <string name="settings_accuracy_in_meters">Natančnost v metrih</string>
-  <string name="settings_accuracy_in_feet">Natančnost v čevljih</string>
   <string name="log_kml_summary">Ustvari datoteko KML v GPSLogger mapo na SD kartici.</string>
   <string name="log_plain_text_title">Piši dnevnik v golo besedilo</string>
   <string name="log_plain_text_summary">Ustvari navadno besedilno datoteko v mapi GPSLogger na SD kartici.</string>
@@ -89,7 +81,6 @@
   <string name="new_file_creation_onceaday">Enkrat na dan</string>
   <string name="new_file_creation_everystart">Vsakič, ko zaženete</string>
   <string name="pref_performance_title">Uspešno delovanje</string>
-  <string name="prefer_celltower_title">Raje uporabi GSM stolpe</string>
   <string name="time_before_logging_title">Čas pred vpisom</string>
   <string name="time_before_logging_dialog_title">Čas v sekundah</string>
   <string name="time_before_logging_hint">Vnesite sekunde (max 9999)</string>
@@ -99,7 +90,6 @@
   <string name="enabledisablegps_summary">Pojdite na nastavitve telefona za vključitev ali izključitev ponudnikov.</string>
   <string name="startonbootup_title">Zaženi ob vklopu</string>
   <string name="startonbootup_summary">Zagon app in začetek pisanja dnevnika, ko prižgete telefon</string>
-  <string name="autoemail_title">Samodejna nastavitev e-maila</string>
   <string name="autoemail_summary">Samodejno pošlje email dnevnik na naslov po vaši izbiri</string>
   <string name="please_wait">Počakaj, prosim.</string>
   <string name="autoemail_autosend">Omogoči e-pošto</string>
@@ -109,7 +99,6 @@
   <string name="autoemail_smtp_category">Nastavitve e-pošte</string>
   <string name="autoemail_username">Uporabniško ime</string>
   <string name="emailprovider_manual">Priročnik</string>
-  <string name="btn_single_point">V dnevnik vpiši samo eno točko</string>
   <string name="dropbox_setup_title">Dropbox</string>
   <string name="dropbox_setup_summary">Z Dropbox omogoči prenos datotek</string>
   <string name="dropbox_authorize_description">Za uporabo Dropbox funkcij, boste morali dovoliti GPSLogger-ju nalaganje datotek na vaš račun.     </string>
@@ -121,15 +110,8 @@
   <string name="menu_upload">Nalaganje</string>
   <string name="autoemail_from">Iz naslova</string>
   <string name="autoemail_from_summary">Nekateri ponudniki e-pošte zahtevajo polje: iz naslova. To uporabite le, če potrebujete.     </string>
-  <string name="gdocs_upload">Google Docs</string>
-  <string name="gdocs_settings_screenname">Google Docs Upload nastavitve</string>
-  <string name="gdocs_startauthorization">Odobritev z Google Docs</string>
-  <string name="gdocs_authorize_summary">Vas popelje v Google Docs, kjer morate odobriti GPSLogger</string>
   <string name="gdocs_clearauthorization">Počistite odobritev</string>
   <string name="gdocs_clearauthorization_summary">Pozabi lokalne nastavitve GDocs. Če želite trajno onemogočiti dostop, pojdite na nastavitve za Google račun</string>
-  <string name="gdocs_setup_title">Google Docs</string>
-  <string name="gdocs_setup_summary">Dovoli z Google Docs da omogoči nalaganje</string>
-  <string name="gdocs_test_summary">Naloži testno datoteko v Google Docs</string>
   <string name="gdocs_test_title">Preskusni upload</string>
   <string name="gdocs_testupload_error">Ne morem naložiti preizkusno datoteko</string>
   <string name="gdocs_testupload_success">Naloženo. Prosimo, preverite vaše Google Docs za novo datoteko.</string>
@@ -152,7 +134,6 @@
   <string name="shortcut_pickaction">Izberi dejanje</string>
   <string name="log_opengts_title">Dnevnik nalagaj v OpenGTS strežnik</string>
   <string name="log_opengts_summary">Pošlji GPRMC podatke v spletni strežnik OpenGTS.</string>
-  <string name="opengts_setup_title">OpenGTS nastavitev</string>
   <string name="opengts_setup_summary">Pošlji GPS sledi v OpenGTS strežnik po vaši izbiri.</string>
   <string name="opengts_enabled">Omogoči OpenGTS</string>
   <string name="opengts_enabled_summary">Omogoči ta strežnik OpenGTS.</string>

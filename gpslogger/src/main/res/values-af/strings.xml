@@ -6,9 +6,6 @@
   <string name="ok">OK</string>
   <string name="cancel">Kanseleer</string>
   <string name="could_not_write_to_file">Kon nie na lêer skryf nie</string>
-  <string name="description_added">Beskrywing by lêer bygevoeg</string>
-  <string name="not_yet">Nog Nie</string>
-  <string name="cant_add_description_until_next_point">Jy kan eers na die volgende punt \'n beskrywing byvoeg     </string>
   <string name="add_description">Voeg \'n beskrywing by</string>
   <string name="letters_numbers">Gebruik slegs letters en nommers</string>
   <string name="menu_settings">Instellings</string>
@@ -32,7 +29,6 @@
   <string name="summary_dist">Afstand:</string>
   <string name="summary_dist_regardless">maksimum</string>
   <string name="summary_current_filename">Lêer:</string>
-  <string name="summary_current_filename_format">%s (in jou GPSLogger vouer)</string>
   <string name="sharing_location_only">Slegs ligging</string>
   <string name="sharing_pick_file">Kies \'n lêer om te deel</string>
   <string name="sharing_mylocation">My ligging</string>
@@ -44,15 +40,11 @@
   <string name="error">Fout</string>
   <string name="error_connection">Konneksiefout. Kontroleer asseblief jou selfoon instellings.</string>
   <string name="gpsprovider_unavailable">Geen GPS verskaffer beskikbaar nie. Kontroleer asseblief jou ligging-instellings en ​​stel \'n ligging verskaffer in staat.     </string>
-  <string name="settings_distance_in_feet">Afstand in voet</string>
-  <string name="settings_enter_feet">Tik voete (max 9999)</string>
   <string name="settings_distance_in_meters">Afstand in meters</string>
   <string name="settings_enter_meters">Tik meters (max 9999)</string>
-  <string name="settings_converting_description">Minimum afstand eenhede word omgeskakel. Waardes bo 9999 is herstel na 9999. Die instellings skerm sal nou herlaai.     </string>
   <string name="enabledisablegps_summary">Gaan na die telefoon instellings om verskaffers in of uit staat te stel.</string>
   <string name="autoemail_smtp_category">Epos Instellings</string>
   <string name="autoemail_test">Stuur \'n toets epos met die instellings hierbo</string>
-  <string name="gdocs_settings_screenname">Google Docs Oplaai Instellings</string>
   <string name="gdocs_clearauthorization_summary">Vergeet plaaslike GDocs instellings. Om toegang permanent te herroep, gaan na Google Rekening instellings</string>
   <string name="autoopengts_server_category">OpenGTS Instellings</string>
 </resources>

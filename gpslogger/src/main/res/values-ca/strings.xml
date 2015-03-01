@@ -6,8 +6,6 @@
   <string name="ok">D\'acord</string>
   <string name="cancel">Anul·lar</string>
   <string name="could_not_write_to_file">No s\'ha pogut escriure a l\'arxiu</string>
-  <string name="description_added">Descripció afegida a l\'arxiu</string>
-  <string name="not_yet">Encara no</string>
   <string name="add_description">Afegir la descripció</string>
   <string name="letters_numbers">Tan sols pots utilitzar lletres i números</string>
   <string name="menu_settings">Opcions</string>
@@ -31,7 +29,6 @@
   <string name="summary_dist">Distància:</string>
   <string name="summary_dist_regardless">màxim</string>
   <string name="summary_current_filename">Arxiu:</string>
-  <string name="summary_current_filename_format">%s (a la teva carpeta de GPSLogger)</string>
   <string name="sharing_location_only">Només ubicació</string>
   <string name="sharing_pick_file">Trieu un arxiu per compartir</string>
   <string name="sharing_mylocation">La meva ubicació</string>
@@ -70,16 +67,12 @@
   <string name="time_halfhour">½ hora</string>
   <string name="time_oneandhalfhours">1 hora i mitja</string>
   <string name="time_twoandhalfhours">2 hores i mitja</string>
-  <string name="error_displaying">Error en mostrar la informació de la ubicació: %s</string>
-  <string name="settings_distance_in_feet">Distància en peus</string>
-  <string name="settings_enter_feet">Introdueixi peus (màx 9999)</string>
   <string name="settings_distance_in_meters">Distància en metres</string>
   <string name="settings_enter_meters">Introdueixi metres (màx 9999)</string>
   <string name="pref_logging_title">Dades del registre</string>
   <string name="new_file_creation_onceaday">Un cop al dia</string>
   <string name="new_file_creation_everystart">Cada cop que iniciï</string>
   <string name="pref_performance_title">Rendiment</string>
-  <string name="prefer_celltower_title">Torres de telefonia preferides</string>
   <string name="time_before_logging_dialog_title">Temps en segons</string>
   <string name="enabledisablegps_title">Activar/Desactivar GPS</string>
   <string name="please_wait">Espera si us plau.</string>
@@ -102,7 +95,6 @@
   <string name="dropbox_unauthorize">Treure l\'autorització</string>
   <string name="dropbox_upload">Dropbox</string>
   <string name="menu_upload">Carregar</string>
-  <string name="gdocs_upload">Google Docs</string>
   <string name="gdocs_test_title">Càrrega de prova</string>
   <string name="gdocs_testupload_error">No s\'ha pogut carregar l\'arxiu de prova</string>
   <string name="gdocs_selectgoogleaccount">Selecciona un compte de Google</string>

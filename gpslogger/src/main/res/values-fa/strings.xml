@@ -6,9 +6,6 @@
   <string name="ok">باشه</string>
   <string name="cancel">لغو</string>
   <string name="could_not_write_to_file">ناتوان در نوشتن در فايل</string>
-  <string name="description_added">توضیحات به پرونده افزوده شد</string>
-  <string name="not_yet">هنوز نه</string>
-  <string name="cant_add_description_until_next_point">شما نمی توانید توضیحات را اضافه می کند تا نقطه بعدی را در یک فایل وارد شده است.</string>
   <string name="add_description">افزودن توضیحات</string>
   <string name="letters_numbers">فقط حروف و اعداد استفاده شود</string>
   <string name="menu_settings">تنظیمات</string>
@@ -32,7 +29,6 @@
   <string name="summary_dist">فاصله:</string>
   <string name="summary_dist_regardless">حداکثر</string>
   <string name="summary_current_filename">پرونده:</string>
-  <string name="summary_current_filename_format">%s (در پوشه \"GPS ثبات\")</string>
   <string name="sharing_location_only">مکان فقط</string>
   <string name="sharing_pick_file">انتخاب یک فایل برای به اشتراک گذاشتن</string>
   <string name="sharing_mylocation">مکان من</string>
@@ -45,5 +41,4 @@
   <string name="error_connection">خطا در اتصال. لطفاً تنظیمات تلفن خود را بررسی کنید.</string>
   <string name="gpsprovider_unavailable">ارائه دهنده نرم افزار GPS موجود نيست. لطفا تنظیمات محل اقامت خود و امکان ارائه دهنده محل را بررسي كنيد.</string>
   <string name="started">آغاز شده</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(استفاده از % s)</string>
 </resources>

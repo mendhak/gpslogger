@@ -7,16 +7,11 @@
   <string name="title_drawer_uploadsettings">Yükleme Ayarları</string>
   <string name="navigation_drawer_open">Navigasyon çizimini aç</string>
   <string name="navigation_drawer_close">Navigasyon çizimini kapat</string>
-  <string name="action_example">Örnek hareket</string>
-  <string name="action_settings">Ayarlar</string>
   <string name="app_name">GPSKayıt</string>
   <string name="settings_screen_name">GPSLogger ayarları</string>
   <string name="ok">Tamam</string>
   <string name="cancel">İptal</string>
   <string name="could_not_write_to_file">Dosyaya yazılamadı</string>
-  <string name="description_added">Dosyaya eklenen açıklamalar</string>
-  <string name="not_yet">Henüz değil</string>
-  <string name="cant_add_description_until_next_point">Bir sonraki nokta kaydedilene kadar herhangi bir açıklama ekleyemezsiniz.</string>
   <string name="add_description">Açıklama Ekle</string>
   <string name="letters_numbers">Yalnızca harf ve sayı kullanın</string>
   <string name="menu_settings">Ayarlar</string>
@@ -41,7 +36,6 @@
   <string name="summary_dist">Mesafe:</string>
   <string name="summary_dist_regardless">maksimum</string>
   <string name="summary_current_filename">Dosya:</string>
-  <string name="summary_current_filename_format">%s (GPSLogger klasöründeki)</string>
   <string name="sharing_location_only">Sadece konum</string>
   <string name="sharing_pick_file">Paylaşmak için bir dosya seçin</string>
   <string name="sharing_mylocation">Konumum</string>
@@ -54,7 +48,6 @@
   <string name="error_connection">Bağlantı hatası. Lütfen telefon ayarları gözden geçirin.</string>
   <string name="gpsprovider_unavailable">GPS sağlayıcı yok. Lütfen konumu ayarlarınızı denetleyin ve konum sağlayıcıyı etkinleştiriniz.   </string>
   <string name="started">Başladı</string>
-  <string name="providername_using">(Kullanıyor %s)</string>
   <string name="providername_gps">GPS Uyduları</string>
   <string name="providername_celltower">baz istasyonları</string>
   <string name="not_applicable">n/a</string>
@@ -94,16 +87,10 @@
   <string name="time_twoandhalfhours">İki buçuk saat</string>
   <string name="time_hms_format" formatted="false">%ssa %sd %ss</string>
   <string name="accuracy_within" formatted="false">%s %s içinde</string>
-  <string name="error_displaying">Konum bilgisi görüntüleme hatası: %s</string>
   <string name="degree_symbol">°</string>
-  <string name="settings_distance_in_feet">fit olarak mesafe</string>
   <string name="settings_distance_in_meters">Metre olarak mesafe</string>
   <string name="settings_accuracy_in_meters">Doğruluk(Metre)</string>
-  <string name="settings_accuracy_in_feet">Doğruluk(feet)</string>
   <string name="settings_enter_meters">Metre giriniz (max 9999)</string>
-  <string name="settings_converting_title">Convertingâ€ |</string>
-  <string name="settings_converting_description">En kısa mesafe birimleri çevriliyor. 9999\'un üstündeki değerler 9999\'a ayarlancaktır. Ayarlar ekranı şimdi tekrar yüklenecek.
-</string>
   <string name="pref_logging_title">Kayıt detayları</string>
   <string name="log_gpx_title">GPX olarak kaydet</string>
   <string name="log_gpx_summary">SD karttaki GPSLogger dosyasında bir GPX dosyası oluşturur.</string>
@@ -120,8 +107,6 @@
   <string name="new_file_custom_summary">Kendi dosya adınızı kullanabilirsiniz. İsteğe bağlı olarak seri numarası, yıl, saat, dakika vb. dinamik parametre ekleyin
 Otomatik gönderme özellikleri ile çok iyi çalışmayabilir. Çünkü sadece son dosyayı gönderir</string>
   <string name="pref_performance_title">Performans</string>
-  <string name="prefer_celltower_title">Şebeke ile kullamayı tercih edin</string>
-  <string name="prefer_celltower_summary">GPS etkin olsa dahi şebekeyi kullanır. Doğruluk düşük bile olsa daha az şarj tüketir.</string>
   <string name="time_before_logging_title">Kayıttan önce zaman</string>
   <string name="fix_obtained">Konum belirlendi</string>
   <string name="started_waiting">GPS başlatıldı, düzeltme bekleniyor</string>

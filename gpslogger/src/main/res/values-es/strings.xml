@@ -6,9 +6,6 @@
   <string name="ok">Aceptar</string>
   <string name="cancel">Cancelar</string>
   <string name="could_not_write_to_file">No se pudo escribir al archivo</string>
-  <string name="description_added">Descripción agregada al archivo</string>
-  <string name="not_yet">Todavía no</string>
-  <string name="cant_add_description_until_next_point">No se puede agregar una descripción hasta que el siguiente punto se haya registrado en el archivo.     </string>
   <string name="add_description">Añadir una descripción</string>
   <string name="letters_numbers">Usar sólo letras y números</string>
   <string name="menu_settings">Configuración</string>
@@ -33,7 +30,6 @@
   <string name="summary_dist">Distancia:</string>
   <string name="summary_dist_regardless">máximo</string>
   <string name="summary_current_filename">Archivo:</string>
-  <string name="summary_current_filename_format">%s (en la carpeta de GPSLogger)</string>
   <string name="sharing_location_only">Sólo en la ubicación</string>
   <string name="sharing_pick_file">Selecciona un archivo para compartir</string>
   <string name="sharing_mylocation">Mi ubicación</string>
@@ -49,7 +45,6 @@
         ubicación y habilite algun proveedor de localización.
     </string>
   <string name="started">Iniciado</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(Usando %s)</string>
   <string name="providername_gps">Satélites GPS</string>
   <string name="providername_celltower">torres de celular</string>
   <string name="not_applicable">n/d</string>
@@ -89,15 +84,10 @@
   <string name="time_twoandhalfhours">2½ horas</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">dentro de %s %s</string>
-  <string name="error_displaying">Error al mostrar la información de ubicación: %s</string>
   <string name="degree_symbol">°</string>
-  <string name="settings_distance_in_feet">Distancia en pies</string>
-  <string name="settings_enter_feet">Ingrese pies (máx. 9999)</string>
   <string name="settings_distance_in_meters">Distancia en metros</string>
   <string name="settings_accuracy_in_meters">Precisión (en metros)</string>
-  <string name="settings_accuracy_in_feet">Precisión en piés</string>
   <string name="settings_enter_meters">Ingrese metros (máx. 9999)</string>
-  <string name="settings_converting_description">Convirtiendo unidades de distancia minima. Valores arriba de 9999 seran reajustados a 9999. La pantalla de configuracion sera recargada.</string>
   <string name="pref_logging_title">Detalles de Registro</string>
   <string name="log_gpx_title">Registrar en GPX</string>
   <string name="log_gpx_summary">Crea un archivo GPX en la carpeta GPSLogger de la tarjeta SD.</string>
@@ -110,7 +100,6 @@
   <string name="new_file_creation_onceaday">Una vez al día</string>
   <string name="new_file_creation_everystart">Cada vez que inicia</string>
   <string name="pref_performance_title">Rendimiento</string>
-  <string name="prefer_celltower_title">Preferir torres celular</string>
   <string name="time_before_logging_title">Tiempo entre cada registro</string>
   <string name="time_before_logging_summary">Use 0 para máxima frecuencia, pero es mejor reducirla para conservar batería.</string>
   <string name="time_before_logging_dialog_title">Tiempo en segundos</string>
@@ -119,17 +108,10 @@
   <string name="keep_fix_title">Mantenga GPS entre puntos</string>
   <string name="retry_time_dialog_title">Tiempo en segundos</string>
   <string name="retry_time_hint">Ingrese segundos (máx. 9999)</string>
-  <string name="distance_before_logging_title">Distancia mínima</string>
-  <string name="distance_before_logging_summary">Desplazamiento mínimo antes de registrar el siguiente punto. Use 0 para registrar todos los puntos.</string>
-  <string name="timeout_time_title">tiempo de espera</string>
-  <string name="timeout_time_summary">Tiempo de espera máximo para obtener una posición fiable. Use 0 para no esperar.</string>
-  <string name="timeout_time_dialog_title">Tiempo en segundos</string>
-  <string name="timeout_time_hint">Ingrese segundos (máx. 9999)</string>
   <string name="enabledisablegps_title">Activar/desactivar GPS</string>
   <string name="enabledisablegps_summary">Ir a la configuración del teléfono para activar o desactivar a proveedores de posicionamiento.</string>
   <string name="startonbootup_title">﻿Iniciar en el arranque</string>
   <string name="startonbootup_summary">Inicia la app y el registro cuando se prende el teléfono</string>
-  <string name="autoemail_title">Envío automático de correo electrónico</string>
   <string name="autoemail_summary">Envia automáticamente el archivo de registro a la dirección especificada</string>
   <string name="please_wait">Por favor espere.</string>
   <string name="autoemail_autosend">Activar correos electrónicos</string>
@@ -190,7 +172,6 @@
   <string name="emailprovider_yahoo">Yahoo! Mail</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
   <string name="emailprovider_manual">Manual</string>
-  <string name="btn_single_point">Capturar un solo punto</string>
   <string name="dropbox_setup_title">Dropbox</string>
   <string name="dropbox_setup_summary">Autorizar con Dropbox para permitir la carga de archivos</string>
   <string name="dropbox_authorize_description">Para usar las funciones de Dropbox debe autorizar el envío de archivos a su cuenta desde GPSLogger.</string>
@@ -202,15 +183,8 @@
   <string name="menu_upload">Subir</string>
   <string name="autoemail_from">Desde dirección</string>
   <string name="autoemail_from_summary">Algunos servidores requieren una dirección de origen. Usar sólo si es necesario.</string>
-  <string name="gdocs_upload">Google Docs</string>
-  <string name="gdocs_settings_screenname">Google Docs Opciones de Carga</string>
-  <string name="gdocs_startauthorization">Autorizar con Google Docs</string>
-  <string name="gdocs_authorize_summary">Ir a Google Docs para autorizar a GPSLogger</string>
   <string name="gdocs_clearauthorization">Borrar autorización</string>
   <string name="gdocs_clearauthorization_summary">Borrar ajustes GDocs. Puede revocar los permisos desde su cuenta Google</string>
-  <string name="gdocs_setup_title">Google Docs</string>
-  <string name="gdocs_setup_summary">Autorizar el envío a Google Docs</string>
-  <string name="gdocs_test_summary">Enviado archivo de prueba a Google Docs</string>
   <string name="gdocs_test_title">Prueba de carga</string>
   <string name="gdocs_testupload_error">No se pudo cargar el archivo de prueba</string>
   <string name="gdocs_testupload_success">Enviado. Compruebe el nuevo archivo en Google Docs.</string>
@@ -234,7 +208,6 @@
   <string name="shortcut_pickaction">Elija una acción</string>
   <string name="log_opengts_title">Enviar a servidor Open GTS</string>
   <string name="log_opengts_summary">Enviar datos GPRMC a un servidor OpenGTS.</string>
-  <string name="opengts_setup_title">Ajustes OpenGTS</string>
   <string name="opengts_setup_summary">Enviar registro GPS a un servidor OpenGTS personalizado.</string>
   <string name="opengts_enabled">Activar OpenGTS</string>
   <string name="opengts_enabled_summary">Activar este servidor OpenGTS.</string>
@@ -274,27 +247,17 @@
   <string name="autoftp_invalid_summary">Algunos ajustes no son válidos. Compruebe todos los valores importantes.</string>
   <string name="autoftp_enabled">FTP habilitado</string>
   <string name="ftp_upload">Envío a FTP</string>
-  <string name="autoftp_setup_title">Ajustes FTP</string>
   <string name="autoftp_setup_summary">Enviar los archivos a un servidor FTP(S). Nota: No compatible con SFTP.</string>
   <string name="faq_screen_title">Preguntas Frecuentes</string>
   <string name="menu_faq">Ayuda y PPFF</string>
   <string name="gpsf_missing">Servicio no disponible</string>
   <string name="gpsf_missing_description">Esta funcionalidad necesita servicios de Google Play.</string>
-  <string name="pref_loggingto_title">Registrar en...</string>
-  <string name="pref_loggingto_summary">Archivos y destinos donde registrar la ubicación</string>
   <string name="log_customurl_title">Enviar a URL personalizada</string>
   <string name="log_customurl_summary">Enviar datos a tu propio servidor via HTTP</string>
   <string name="log_customurl_urlparameters">Parámetros URL</string>
-  <string name="log_customUrl_urllatitude">Latitud:%LAT</string>
   <string name="txt_annotation">Comentarios:</string>
   <string name="txt_time_isoformat">Hora UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Proveedor:</string>
-  <string name="filedialog_location">Ubicación</string>
-  <string name="filedialog_cantreadfolder">No se puede leer la carpeta</string>
-  <string name="filedialog_new">Nuevo</string>
-  <string name="filedialog_name">Nombre de la carpeta:</string>
-  <string name="filedialog_create">Guardar</string>
-  <string name="filedialog_select">Seleccionar</string>
   <string name="gpslogger_folder_title">Guardar en carpeta</string>
   <string name="autoftp_directory">Directorio</string>
   <string name="view_simple">Vista Simple</string>
@@ -309,7 +272,6 @@
   <string name="points">puntos</string>
   <string name="txt_number_of_points">Número de puntos</string>
   <string name="save">Guardar</string>
-  <string name="values_saved">Valores guardados</string>
   <string name="pref_filedetails_title">Detalles de archivo y carpeta</string>
   <string name="absolute_timeout_summary">Número de segundos después de que la aplicación desiste de intentar adquirir una solución, sin importar las otras configuraciones. Esto es especialmente útil para cuando estás dentro de los edificios para evitar que el GPS drene la batería.  Establecer en 0 para que no haya timeout.</string>
   <string name="txt_latitude_short">Lat</string>

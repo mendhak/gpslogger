@@ -57,11 +57,8 @@
   <string name="time_oneandhalfhours">1시간30분</string>
   <string name="time_twoandhalfhours">2시간30분</string>
   <string name="time_hms_format" formatted="false">%s시간 %s분 %s초</string>
-  <string name="settings_distance_in_feet">거리(피트)</string>
-  <string name="settings_enter_feet">거리입력(최대 9999피트)</string>
   <string name="settings_distance_in_meters">거리(미터)</string>
   <string name="settings_accuracy_in_meters">정확도(미터)</string>
-  <string name="settings_accuracy_in_feet">정확도(피트)</string>
   <string name="settings_enter_meters">거리입력(최대 9999미터)</string>
   <string name="autoemail_smtp_category">이메일 설정</string>
 </resources>

@@ -5,14 +5,11 @@
   <string name="title_drawer_generalsettings">Cài đặt chung</string>
   <string name="title_drawer_loggingsettings">Cài đặt đăng nhập</string>
   <string name="title_drawer_uploadsettings">Cài đặt tải lên</string>
-  <string name="action_example">Hành động ví dụ</string>
-  <string name="action_settings">Cài đặt</string>
   <string name="app_name">GPSLogger</string>
   <string name="settings_screen_name">Cài đặt GPSLogger</string>
   <string name="ok">Ok</string>
   <string name="cancel">Hủy bỏ</string>
   <string name="could_not_write_to_file">Không thể ghi vào tập tin</string>
-  <string name="not_yet">Chưa</string>
   <string name="add_description">Thêm mô tả</string>
   <string name="letters_numbers">Sử dụng chỉ có chữ cái và số</string>
   <string name="menu_settings">Cài đặt</string>
@@ -33,7 +30,6 @@
   <string name="summary_dist">Khoảng cách:</string>
   <string name="summary_dist_regardless">tối đa</string>
   <string name="summary_current_filename">Tập tin:</string>
-  <string name="summary_current_filename_format">%s (trong thư mục GPSLogger)</string>
   <string name="sharing_location_only">Chỉ vị trí</string>
   <string name="sharing_pick_file">Chọn một tập tin để chia sẻ</string>
   <string name="sharing_mylocation">Vị trí của tôi</string>

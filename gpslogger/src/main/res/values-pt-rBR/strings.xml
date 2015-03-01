@@ -6,10 +6,6 @@
   <string name="ok">OK</string>
   <string name="cancel">Cancelar</string>
   <string name="could_not_write_to_file">Não pode gravar no arquivo</string>
-  <string name="description_added">Drescrição inserida no arquivo</string>
-  <string name="not_yet">Ainda Não</string>
-  <string name="cant_add_description_until_next_point">Você não pode adicionar uma descrição até que o 
-próximo ponto tenha sido logado.</string>
   <string name="add_description">Adicionar uma descrição</string>
   <string name="letters_numbers">Usar somente letras e números</string>
   <string name="menu_settings">Opções</string>
@@ -34,7 +30,6 @@ próximo ponto tenha sido logado.</string>
   <string name="summary_dist">Distancia:</string>
   <string name="summary_dist_regardless">maximo</string>
   <string name="summary_current_filename">Arquivo:</string>
-  <string name="summary_current_filename_format">%s (na sua pasta GPSLogger)</string>
   <string name="sharing_location_only">Localização somente</string>
   <string name="sharing_pick_file">Selecione um arquivo para compartilhar</string>
   <string name="sharing_mylocation">Minha localização</string>
@@ -51,7 +46,6 @@ próximo ponto tenha sido logado.</string>
 
     </string>
   <string name="started">Iniciou</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(Usando %s)</string>
   <string name="providername_gps">Satélites GPS</string>
   <string name="providername_celltower">Torres de celular</string>
   <string name="not_applicable">n/a</string>
@@ -91,16 +85,10 @@ próximo ponto tenha sido logado.</string>
   <string name="time_twoandhalfhours">2h30</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">dentro de %s %s</string>
-  <string name="error_displaying">Erro na exibição da informação de localização: %s</string>
   <string name="degree_symbol">°</string>
-  <string name="settings_distance_in_feet">Distância em pés</string>
-  <string name="settings_enter_feet">Digite pés (máximo de 9999)</string>
   <string name="settings_distance_in_meters">Distância em metros</string>
   <string name="settings_accuracy_in_meters">Precisão em metros</string>
-  <string name="settings_accuracy_in_feet">Precisão em pés</string>
   <string name="settings_enter_meters">Digite metros (máximo de 9999)</string>
-  <string name="settings_converting_description">Converter unidades de distância mínima. Valores acima de 9999 são redefinidas para 9999. A tela de configurações agora irá recarregar.
-    </string>
   <string name="pref_logging_title">Detalhes de log</string>
   <string name="log_gpx_title">Log para GPX</string>
   <string name="log_gpx_summary">Cria um arquivo GPX na pasta GPSLogger no cartão SD.</string>
@@ -113,7 +101,6 @@ próximo ponto tenha sido logado.</string>
   <string name="new_file_creation_onceaday">Uma vez por dia</string>
   <string name="new_file_creation_everystart">Toda vez que eu inicio</string>
   <string name="pref_performance_title">Desempenho</string>
-  <string name="prefer_celltower_title">Prefiro torres de celular</string>
   <string name="time_before_logging_title">Tempo antes de logar</string>
   <string name="time_before_logging_dialog_title">Tempo em segundos</string>
   <string name="time_before_logging_hint">Digite segundos (máximo de 9999)</string>
@@ -121,15 +108,10 @@ próximo ponto tenha sido logado.</string>
   <string name="keep_fix_title">Manter o GPS entre conexões</string>
   <string name="retry_time_dialog_title">Tempo em segundos</string>
   <string name="retry_time_hint">Digite segundos (máximo de 9999)</string>
-  <string name="timeout_time_title">Timeout</string>
-  <string name="timeout_time_summary">Quanto tempo o GPS fica na procura de uma conexão antes de desistir. Use 0 para nenhum tempo limite</string>
-  <string name="timeout_time_dialog_title">Tempo em segundos</string>
-  <string name="timeout_time_hint">Digite segundos (máximo de 9999)</string>
   <string name="enabledisablegps_title">Ativar/desativar GPS</string>
   <string name="enabledisablegps_summary">Vá para as configurações do telefone para ativar ou desativar os provedores.</string>
   <string name="startonbootup_title">Carregar na inicialização</string>
   <string name="startonbootup_summary">Rodar o app e gravar log quando telefone iniciar</string>
-  <string name="autoemail_title">Configuração automática de Email</string>
   <string name="autoemail_summary">Envia automaticamente um e-mail com o arquivo de log para um endereço de sua escolha</string>
   <string name="please_wait">Aguarde.</string>
   <string name="autoemail_autosend">Habilitar e-mails</string>
@@ -189,7 +171,6 @@ próximo ponto tenha sido logado.</string>
   <string name="emailprovider_yahoo">Email do Yahoo!</string>
   <string name="emailprovider_msn">Email do Windows Live</string>
   <string name="emailprovider_manual">Manual</string>
-  <string name="btn_single_point">Log de um único ponto</string>
   <string name="dropbox_setup_title">Dropbox</string>
   <string name="dropbox_setup_summary">Autorizar com Dropbox para permitir o upload de arquivos</string>
   <string name="dropbox_authorize_description">Para usar recursos do Dropbox, você precisará autorizar GPSLogger para carregar arquivos para sua conta.     </string>
@@ -201,15 +182,8 @@ próximo ponto tenha sido logado.</string>
   <string name="menu_upload">Fazer upload</string>
   <string name="autoemail_from">Do endereço</string>
   <string name="autoemail_from_summary">Alguns provedores de e-mail exigem um endereço. Use isso somente se você precisar dele.     </string>
-  <string name="gdocs_upload">Google Docs</string>
-  <string name="gdocs_settings_screenname">Configurações de upload do Google Docs</string>
-  <string name="gdocs_startauthorization">Autorizar com o Google Docs</string>
-  <string name="gdocs_authorize_summary">Leva você para o Google Docs onde você precisará autorizar GPSLogger</string>
   <string name="gdocs_clearauthorization">Excluir autorização</string>
   <string name="gdocs_clearauthorization_summary">Esquece as configurações locais do GDocs. Para revogar o acesso permanentemente, vá para configurações da conta do Google</string>
-  <string name="gdocs_setup_title">Google Docs</string>
-  <string name="gdocs_setup_summary">Autorizar com o Google Docs para permitir uploads</string>
-  <string name="gdocs_test_summary">Carregar um arquivo de teste para o Google Docs</string>
   <string name="gdocs_test_title">Upload de teste</string>
   <string name="gdocs_testupload_error">Não pude fazer upload de um arquivo de teste</string>
   <string name="gdocs_testupload_success">Enviado. Por favor, verifique seus documentos do Google.</string>
@@ -232,7 +206,6 @@ próximo ponto tenha sido logado.</string>
   <string name="shortcut_pickaction">Escolha uma ação</string>
   <string name="log_opengts_title">Logar para o servidor OpenGTS</string>
   <string name="log_opengts_summary">Envie dados GPRMC para um servidor de OpenGTS online.</string>
-  <string name="opengts_setup_title">Configuração OpenGTS</string>
   <string name="opengts_setup_summary">Envie o rastreamento GPS para um servidor de OpenGTS de sua escolha.</string>
   <string name="opengts_enabled">Habilitar OpenGTS</string>
   <string name="opengts_enabled_summary">Habilitar este servidor de OpenGTS.</string>
@@ -272,7 +245,6 @@ próximo ponto tenha sido logado.</string>
   <string name="autoftp_invalid_summary">Algumas de suas configurações são inválidas. Certifique-se de que preencheu todos os campos relevantes.     </string>
   <string name="autoftp_enabled">FTP habilitado</string>
   <string name="ftp_upload">Upload FTP</string>
-  <string name="autoftp_setup_title">Configuração de FTP</string>
   <string name="autoftp_setup_summary">Upload de seus arquivos para um servidor de FTP. Atenção: Isto não cobre SFTP.</string>
   <string name="faq_screen_title">Perguntas mais frequentes</string>
   <string name="menu_faq">Ajuda e FAQ</string>

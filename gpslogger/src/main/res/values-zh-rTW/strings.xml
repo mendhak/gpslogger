@@ -4,15 +4,11 @@
   <string name="title_drawer_headsettings">GPSLogger</string>
   <string name="title_drawer_generalsettings">一般設定</string>
   <string name="title_drawer_uploadsettings">上傳設定</string>
-  <string name="action_settings">設定</string>
   <string name="app_name">GPSLogger</string>
   <string name="settings_screen_name">GPSLogger 設定</string>
   <string name="ok">確定</string>
   <string name="cancel">取消</string>
   <string name="could_not_write_to_file">無法寫入到檔案</string>
-  <string name="description_added">描述已新增到檔案</string>
-  <string name="not_yet">尚未</string>
-  <string name="cant_add_description_until_next_point">在下一點記錄到檔案之前你不能新增描述。</string>
   <string name="add_description">新增一個描述</string>
   <string name="letters_numbers">只能使用英文字母和數字</string>
   <string name="menu_settings">設定</string>
@@ -37,7 +33,6 @@
   <string name="summary_dist">距離：</string>
   <string name="summary_dist_regardless">最大值</string>
   <string name="summary_current_filename">檔案：</string>
-  <string name="summary_current_filename_format">%s (在你的 GPSLogger 資料夾中)</string>
   <string name="sharing_location_only">僅位置</string>
   <string name="sharing_pick_file">選取一個要分享的檔案</string>
   <string name="sharing_mylocation">我的位置</string>
@@ -50,7 +45,6 @@
   <string name="error_connection">連接錯誤。請檢查你的手機設定。</string>
   <string name="gpsprovider_unavailable">無可用的GPS提供器</string>
   <string name="started">已開始</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(正在使用 %s)</string>
   <string name="providername_gps"> </string>
   <string name="providername_celltower">基站</string>
   <string name="not_applicable">無</string>
@@ -90,15 +84,10 @@
   <string name="time_twoandhalfhours">2½ 小時</string>
   <string name="time_hms_format" formatted="false">%s小時 %s分鐘 %s秒</string>
   <string name="accuracy_within" formatted="false">%s %s內</string>
-  <string name="error_displaying">顯示位置訊息時錯誤： %s</string>
   <string name="degree_symbol">°</string>
-  <string name="settings_distance_in_feet">以英尺算的距離</string>
-  <string name="settings_enter_feet">輸入英尺數(最大 9999)</string>
   <string name="settings_distance_in_meters">以米算的距離</string>
   <string name="settings_accuracy_in_meters">精確度〈公尺〉</string>
-  <string name="settings_accuracy_in_feet">精準度〈英尺〉</string>
   <string name="settings_enter_meters">輸入米數(最大 9999)</string>
-  <string name="settings_converting_description">正在轉換最小距離單位。值大於9999的將重設為9999。設定介面將會重載。</string>
   <string name="pref_logging_title">記錄細節</string>
   <string name="log_gpx_title">記錄到 GPX 檔案</string>
   <string name="log_gpx_summary">在SD卡的 GPSLogger 資料夾中建立 GPX 檔案。</string>
@@ -110,19 +99,15 @@
   <string name="new_file_creation_onceaday">一天僅一次</string>
   <string name="new_file_creation_everystart">每次我點擊開始</string>
   <string name="pref_performance_title">性能</string>
-  <string name="prefer_celltower_title">獨愛基站</string>
   <string name="time_before_logging_title">在記錄之前的時間</string>
   <string name="time_before_logging_dialog_title">以秒計的時間</string>
   <string name="time_before_logging_hint">輸入秒數(最大 9999)</string>
   <string name="retry_time_dialog_title">以秒計</string>
   <string name="retry_time_hint">輸入秒數 (最大9999)</string>
-  <string name="timeout_time_dialog_title">以秒計</string>
-  <string name="timeout_time_hint">輸入秒數 (最大9999)</string>
   <string name="enabledisablegps_title">啟用/禁用 GPS</string>
   <string name="enabledisablegps_summary">轉到手機的設定來啟用或禁用提供器。</string>
   <string name="startonbootup_title">開機自啟動</string>
   <string name="startonbootup_summary">當手機開機的時候自動啟動本程式</string>
-  <string name="autoemail_title">設定自動傳送Email</string>
   <string name="autoemail_summary">自動的通過Email傳送日誌到你選取的Email位址。</string>
   <string name="please_wait">請稍等。</string>
   <string name="autoemail_autosend_summary">開啟自動傳送日誌檔案到你選取的Email位址。</string>

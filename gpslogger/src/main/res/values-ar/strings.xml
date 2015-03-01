@@ -7,15 +7,11 @@
   <string name="title_drawer_uploadsettings">تحميل الإعدادات</string>
   <string name="navigation_drawer_open">فتح درج الملاحة</string>
   <string name="navigation_drawer_close">إغلاق درج الملاحة</string>
-  <string name="action_example">مثال للتطبيق</string>
-  <string name="action_settings">إعدادات</string>
   <string name="app_name">GPSLogger</string>
   <string name="settings_screen_name">إعدادات GPSLogger </string>
   <string name="ok">موافق</string>
   <string name="cancel">إلغاء الأمر</string>
   <string name="could_not_write_to_file">لأيمكنك الكتابة على الملف</string>
-  <string name="description_added">أضف وصف للملف</string>
-  <string name="not_yet">حتى الان</string>
   <string name="add_description">أضف وصف</string>
   <string name="letters_numbers">أستخدم الحروف والأرقام فقط</string>
   <string name="menu_settings">الأعدادات</string>
@@ -51,7 +47,6 @@
   <string name="error">خطاء</string>
   <string name="error_connection">خطاء في الأتصال , الرجاء التأكد من أعدادات الجهاز.</string>
   <string name="started">بدأ</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(يستخدم %s)</string>
   <string name="providername_gps">أقمار GPS</string>
   <string name="providername_celltower">أبراج الهاتف</string>
   <string name="not_applicable">بلا</string>
@@ -91,15 +86,10 @@
   <string name="time_twoandhalfhours">ساعتان و نصف</string>
   <string name="time_hms_format" formatted="false">%sس %sق %ss</string>
   <string name="accuracy_within" formatted="false">خلال %s %s</string>
-  <string name="error_displaying">خطأ في عرض معلومات الموقع: %s</string>
   <string name="degree_symbol">°</string>
-  <string name="settings_distance_in_feet">المسافة بالقدم</string>
-  <string name="settings_enter_feet">أدخل أقدام (اقصى حد 9999)</string>
   <string name="settings_distance_in_meters">المسافة بالأمتار</string>
   <string name="settings_accuracy_in_meters">الدقة في الأمتار</string>
-  <string name="settings_accuracy_in_feet">الدقة في الأقدام</string>
   <string name="settings_enter_meters">أدخل متر (أقصى 9999)</string>
-  <string name="settings_converting_title">تحويلâ€¦</string>
   <string name="pref_logging_title">تفاصيل  الدخول</string>
   <string name="log_gpx_title">دخول إلى GPX</string>
   <string name="new_file_creation_title">إنشاء ملف جديد</string>
@@ -108,7 +98,6 @@
   <string name="new_file_creation_custom">تخصيص ملف</string>
   <string name="new_file_custom_title">تخصيص اسم ملف</string>
   <string name="pref_performance_title">الأداء</string>
-  <string name="prefer_celltower_title">شبكة مفضلة</string>
   <string name="time_before_logging_title">الوقت قبل تسجيل الدخول</string>
   <string name="time_before_logging_dialog_title">الوقت بالثانية</string>
   <string name="time_before_logging_hint">أدخل ثواني (الاقصى 9999)</string>
@@ -116,17 +105,12 @@
   <string name="keep_fix_title">الحفاظ على نظام تحديد المواقع بين الإصلاحات</string>
   <string name="retry_time_dialog_title">الوقت بالثواني</string>
   <string name="retry_time_hint">أدخل ثواني (الاقصى 9999)</string>
-  <string name="distance_before_logging_title">المسافة قبل تسجيل الدخول</string>
-  <string name="timeout_time_title">انتهاء الوقت</string>
-  <string name="timeout_time_dialog_title">الوقت بالثواني</string>
-  <string name="timeout_time_hint">أدخل ثواني (الاقصى 9999)</string>
   <string name="display_imperial_title">عرض بالقياس الأمريكي</string>
   <string name="display_imperial_summary">عرض أقدام وكم ومكاييل، وليس من الوحدات المترية الحديثة. (يجب أن تكون المقايس على النظام المتري)</string>
   <string name="enabledisablegps_title">تمكين/تعطيل GPS</string>
   <string name="enabledisablegps_summary">إنتقل إلى إعدادات الهاتف لتمكين أو تعطيل مزودي الخدمة.</string>
   <string name="startonbootup_title">البدء عند التشغيل</string>
   <string name="startonbootup_summary">بدء تشغيل التطبيق وبدء تسجيل الدخول عند بدء تشغيل الهاتف</string>
-  <string name="autoemail_title">إعداد البريد الإلكتروني التلقائي</string>
   <string name="please_wait">الرجاء الانتظار.</string>
   <string name="autoemail_autosend">تمكين  البريد الإلكتروني</string>
   <string name="autoemail_autosend_summary">تمكين إرسال ملف السجل إلى بريد إلكتروني من اختيارك.     </string>
@@ -174,7 +158,6 @@
   <string name="emailprovider_yahoo">بريد ياهو!</string>
   <string name="emailprovider_msn">بريد Windows Live</string>
   <string name="emailprovider_manual">دليل</string>
-  <string name="btn_single_point">سجل نقطة واحدة</string>
   <string name="dropbox_setup_title">Dropbox</string>
   <string name="dropbox_setup_summary">تخويل Dropbox للسماح بتحميل الملف</string>
   <string name="dropbox_authorize">تصريح</string>
@@ -182,11 +165,7 @@
   <string name="dropbox_upload">Dropbox</string>
   <string name="menu_upload">تحميل</string>
   <string name="autoemail_from">من عنوان</string>
-  <string name="gdocs_upload">مستندات جوجل</string>
-  <string name="gdocs_settings_screenname">إعدادات تحميل مستندات جوجل</string>
-  <string name="gdocs_startauthorization">الإذن مع مستندات جوجل </string>
   <string name="gdocs_clearauthorization">إزالة التصريح</string>
-  <string name="gdocs_setup_title">مستندات جوجل</string>
   <string name="gdocs_test_title">إختبار التحميل</string>
   <string name="gdocs_testupload_error">لا يمكن تحميل ملف اختبار</string>
   <string name="email_upload">ارسال ملف بالبريد</string>
@@ -227,20 +206,11 @@
   <string name="autoftp_invalid_summary">بعض إعداداتك غير صحيحة. الرجاء التأكد أنك قمت بتعبئة كافة الحقول ذات الصلة.     </string>
   <string name="autoftp_enabled">FTP مفعل</string>
   <string name="ftp_upload">FTP رفع</string>
-  <string name="autoftp_setup_title">إعدادFTP </string>
   <string name="menu_faq">مساعدة والأسئلة الشائعة</string>
   <string name="gpsf_missing">خدمة مفقودة</string>
-  <string name="pref_loggingto_title">تسجيل الدخول إلى...</string>
   <string name="log_customurl_urlparameters">معطيات URL</string>
   <string name="txt_annotation">الشرح:</string>
   <string name="txt_provider">المزود:</string>
-  <string name="filedialog_location">موقع</string>
-  <string name="filedialog_cantreadfolder">لا يمكن قراءة المجلد</string>
-  <string name="filedialog_new">جديد</string>
-  <string name="filedialog_name">اسم المجلد:</string>
-  <string name="filedialog_create">حفظ</string>
-  <string name="filedialog_select">إختر</string>
-  <string name="filedialog_no_data">لا  بيانات</string>
   <string name="gpslogger_folder_title">حفظ إلى مجلد</string>
   <string name="gpslogger_folder_summary">عند حفظ السجل الملفات إلى، افتراضياً إلى/sdcard/GPSLogger</string>
   <string name="autoftp_directory">الدليل</string>
@@ -256,7 +226,6 @@
   <string name="points">نقاط</string>
   <string name="txt_number_of_points">عدد النقاط</string>
   <string name="save">حفظ</string>
-  <string name="values_saved">القيم المحفوظة</string>
   <string name="pref_filedetails_title">تفاصيل الملف و المجلد</string>
   <string name="txt_latitude_short">خط العرض</string>
   <string name="txt_longitude_short">خط الطول</string>

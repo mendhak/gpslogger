@@ -6,9 +6,6 @@
   <string name="ok">OK</string>
   <string name="cancel">Batal</string>
   <string name="could_not_write_to_file">Tidak dapat menulis ke fail</string>
-  <string name="description_added">Keterangan yang ditambah ke fail</string>
-  <string name="not_yet">Belum Lagi</string>
-  <string name="cant_add_description_until_next_point">Anda tidak boleh menambah penerangan sehingga titik yang seterusnya di log masuk ke dalam fail.</string>
   <string name="add_description">Tambah penerangan</string>
   <string name="letters_numbers">Gunakan hanya huruf dan angka</string>
   <string name="menu_settings">Tetapan</string>
@@ -33,7 +30,6 @@
   <string name="summary_dist">Jarak:</string>
   <string name="summary_dist_regardless">maksimum</string>
   <string name="summary_current_filename">Fail:</string>
-  <string name="summary_current_filename_format">%s (dalam folder GPSLogger anda)</string>
   <string name="sharing_location_only">Lokasi sahaja</string>
   <string name="sharing_pick_file">Pilih fail untuk dikongsi</string>
   <string name="sharing_mylocation">Lokasi saya</string>
@@ -47,7 +43,6 @@
   <string name="error_connection">Ralat penyambungan. Sila semak tetapan telefon anda.</string>
   <string name="gpsprovider_unavailable">Tiada pembekal GPS dikesan. Sila semak tetapan lokasi anda dan hidupkan sensor GPS. </string>
   <string name="started">Bermula</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(Menggunakan %s)</string>
   <string name="providername_gps">Satelit GPS</string>
   <string name="providername_celltower">Menara pemancar</string>
   <string name="not_applicable">n/a</string>
@@ -87,15 +82,10 @@
   <string name="time_twoandhalfhours">2½ jam</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">antara %s %s</string>
-  <string name="error_displaying">Ralat dalam memaparkan maklumat lokasi: %s</string>
   <string name="degree_symbol">°</string>
-  <string name="settings_distance_in_feet">Jarak dalam kaki</string>
-  <string name="settings_enter_feet">Masukkan kaki (maksimum 9999)</string>
   <string name="settings_distance_in_meters">Jarak dalam meter</string>
   <string name="settings_accuracy_in_meters">Ketepatan dalam meter</string>
-  <string name="settings_accuracy_in_feet">Ketepatan dalam kaki</string>
   <string name="settings_enter_meters">Masukkan meter (maksimum 9999)</string>
-  <string name="settings_converting_description">Menukar unit jarak minimum. Nilai melebihi 9999 diset semula ke 9999. Skrin tetapan akan dimuat semula.</string>
   <string name="pref_logging_title">Mengelog perincian</string>
   <string name="log_gpx_title">Log kedalam GPX</string>
   <string name="log_gpx_summary">Cipta satu fail GPX dalam GPSLogger folder pada kad SD.</string>
@@ -108,7 +98,6 @@
   <string name="new_file_creation_onceaday">Sekali sehari</string>
   <string name="new_file_creation_everystart">Setiap kali saya mula</string>
   <string name="pref_performance_title">Prestasi</string>
-  <string name="prefer_celltower_title">Utamakan menara pemancar</string>
   <string name="time_before_logging_title">Masa sebelum log masuk</string>
   <string name="time_before_logging_dialog_title">Masa dalam saat</string>
   <string name="time_before_logging_hint">Masukkan saat (maksimum 9999)</string>
@@ -116,15 +105,10 @@
   <string name="keep_fix_title">Kekalkan GPS diantara penguncian</string>
   <string name="retry_time_dialog_title">Masa dalam saat</string>
   <string name="retry_time_hint">Masukkan saat (maksimum 9999)</string>
-  <string name="timeout_time_title">Masa Tamat</string>
-  <string name="timeout_time_summary">Berapa lama GPS cuba mengunci lokasi sebelum berhenti. Gunakan 0 untuk tidak percubaan tanpa had</string>
-  <string name="timeout_time_dialog_title">Masa dalam saat</string>
-  <string name="timeout_time_hint">Masukkan saat (maksimum 9999)</string>
   <string name="enabledisablegps_title">Aktif/Padam GPS</string>
   <string name="enabledisablegps_summary">Pergi ke tetapan telefon untuk membolehkan atau mematikan penyedia.</string>
   <string name="startonbootup_title">Mula semasa bootup</string>
   <string name="startonbootup_summary">Lancarkan aplikasi dan mula mengelog apabila telefon bermula</string>
-  <string name="autoemail_title">Persediaan e-mel automatik</string>
   <string name="autoemail_summary">Emel fail log secara automatik kepada alamat pilihan anda</string>
   <string name="please_wait">sila tunggu.</string>
   <string name="autoemail_autosend">Aktifkan emel</string>
@@ -184,7 +168,6 @@
   <string name="emailprovider_yahoo">Yahoo! Mail</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
   <string name="emailprovider_manual">Manual</string>
-  <string name="btn_single_point">Log satu titik</string>
   <string name="dropbox_setup_title">DropBox</string>
   <string name="dropbox_setup_summary">Benarkan dengan Dropbox untuk membolehkan muat naik fail</string>
   <string name="dropbox_authorize_description">Untuk menggunakan ciri Dropbox, anda perlu membenarkan GPSLogger untuk memuat naik fail ke akaun anda.</string>
@@ -196,15 +179,8 @@
   <string name="menu_upload">Muat naik</string>
   <string name="autoemail_from">Daripada alamat</string>
   <string name="autoemail_from_summary">Sesetengah penyedia memerlukan alamat emel pengirim.  Gunakan ini diperlukan. </string>
-  <string name="gdocs_upload">Google Docs</string>
-  <string name="gdocs_settings_screenname">Tetapan muat naik Google Docs</string>
-  <string name="gdocs_startauthorization">Mengesahkan dengan Google Docs</string>
-  <string name="gdocs_authorize_summary">Bawa anda ke Google Docs untuk membenarkan GPSLogger</string>
   <string name="gdocs_clearauthorization">Bersihkan pengesahan</string>
   <string name="gdocs_clearauthorization_summary">Membuang tetapan GDocs tempatan. Untuk membuang langsung akses, pergi ke tetapan akaun Google</string>
-  <string name="gdocs_setup_title">Google Docs</string>
-  <string name="gdocs_setup_summary">Benarkan dengan Google Docs untuk membolehkan muat naik</string>
-  <string name="gdocs_test_summary">Muat naik fail ujian ke Google Docs</string>
   <string name="gdocs_test_title">Ujian muat naik</string>
   <string name="gdocs_testupload_error">Tidak dapat muat naik fail ujian</string>
   <string name="gdocs_testupload_success">Dimuat naik. Sila semak dokumen anda Google untuk fail baru.</string>
@@ -227,7 +203,6 @@
   <string name="shortcut_pickaction">Pilih tindakan</string>
   <string name="log_opengts_title">Log masuk ke pelayan OpenGTS</string>
   <string name="log_opengts_summary">Hantar data GPRMC ke pelayan OpenGTS dalam talian.</string>
-  <string name="opengts_setup_title">Persediaan OpenGTS</string>
   <string name="opengts_setup_summary">Hantar jejak GPS ke pelayan OpenGTS pilihan anda.</string>
   <string name="opengts_enabled">Aktifkan OpenGTS</string>
   <string name="opengts_enabled_summary">Aktifkan pelayan OpenGTS ini.</string>
@@ -267,7 +242,6 @@
   <string name="autoftp_invalid_summary">Sesetengah tetapan anda tidak sah. Sila pastikan bahawa semua ruang berkenaan terisi.</string>
   <string name="autoftp_enabled">FTP diaktifkan</string>
   <string name="ftp_upload">Muatnaik secara FTP</string>
-  <string name="autoftp_setup_title">Menyediakan FTP</string>
   <string name="autoftp_setup_summary">Muat naik fail ke pelayan FTP (S). Nota: Tidak meliputi SFTP.</string>
   <string name="faq_screen_title">Soalan-Soalan Lazim</string>
   <string name="menu_faq">Bantuan dan soalan-soalan lazim</string>
