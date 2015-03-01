@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.views;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.*;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -184,6 +185,41 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     }
 
+    private enum IconColorIndicator {
+        Good,
+        Warning,
+        Bad,
+        Inactive
+    }
+
+    private void ClearColor(ImageView imgView){
+        SetColor(imgView, IconColorIndicator.Inactive);
+    }
+
+    private void SetColor(ImageView imgView, IconColorIndicator colorIndicator ){
+        imgView.clearColorFilter();
+
+        if(colorIndicator == IconColorIndicator.Inactive){
+            return;
+        }
+
+        int color = -1;
+        switch(colorIndicator){
+            case Bad:
+                color = Color.parseColor("#FFEEEE");
+                break;
+            case Good:
+                color = getResources().getColor(R.color.accentColor);
+                break;
+            case Warning:
+                color = Color.parseColor("#D4FFA300");
+                break;
+        }
+
+        imgView.setColorFilter(color);
+
+    }
+
     private void setImageTooltips() {
         ImageView imgSatellites = (ImageView) rootView.findViewById(R.id.simpleview_imgSatelliteCount);
         imgSatellites.setOnClickListener(this);
@@ -251,6 +287,10 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
         nf.setMaximumFractionDigits(3);
 
+
+        ImageView imgAccuracy = (ImageView) rootView.findViewById(R.id.simpleview_imgAccuracy);
+        ClearColor(imgAccuracy);
+
         if (locationInfo.hasAccuracy()) {
 
             TextView txtAccuracy = (TextView) rootView.findViewById(R.id.simpleview_txtAccuracy);
@@ -263,22 +303,22 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
                 txtAccuracy.setText(nf.format(accuracy) + getString(R.string.meters));
             }
 
-
             if (accuracy > 500) {
-                txtAccuracy.setTextColor(getResources().getColor(android.R.color.holo_orange_dark));
+                SetColor(imgAccuracy, IconColorIndicator.Warning);
             }
 
             if (accuracy > 900) {
-                txtAccuracy.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                SetColor(imgAccuracy, IconColorIndicator.Bad);
             } else {
-                txtAccuracy.setTextColor(getResources().getColor(R.color.secondaryColorText));
+                SetColor(imgAccuracy, IconColorIndicator.Good);
             }
-
-
         }
 
-        if (locationInfo.hasAltitude()) {
+        ImageView imgAltitude = (ImageView)rootView.findViewById(R.id.simpleview_imgAltitude);
+        ClearColor(imgAltitude);
 
+        if (locationInfo.hasAltitude()) {
+            SetColor(imgAltitude, IconColorIndicator.Good);
             TextView txtAltitude = (TextView) rootView.findViewById(R.id.simpleview_txtAltitude);
 
             if (AppSettings.shouldUseImperial()) {
@@ -287,12 +327,14 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             } else {
                 txtAltitude.setText(nf.format(locationInfo.getAltitude()) + getString(R.string.meters));
             }
-
-
         }
+
+        ImageView imgSpeed = (ImageView)rootView.findViewById(R.id.simpleview_imgSpeed);
+        ClearColor(imgSpeed);
 
         if (locationInfo.hasSpeed()) {
 
+            SetColor(imgSpeed, IconColorIndicator.Good);
 
             float speed = locationInfo.getSpeed();
             String unit;
@@ -316,17 +358,17 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
             TextView txtSpeed = (TextView) rootView.findViewById(R.id.simpleview_txtSpeed);
             txtSpeed.setText(String.valueOf(nf.format(speed)) + unit);
-
         }
 
-        if (locationInfo.hasBearing()) {
+        ImageView imgDirection = (ImageView) rootView.findViewById(R.id.simpleview_imgDirection);
+        ClearColor(imgDirection);
 
-            ImageView imgDirection = (ImageView) rootView.findViewById(R.id.simpleview_imgDirection);
+        if (locationInfo.hasBearing()) {
+            SetColor(imgDirection, IconColorIndicator.Good);
             imgDirection.setRotation(locationInfo.getBearing());
 
             TextView txtDirection = (TextView) rootView.findViewById(R.id.simpleview_txtDirection);
             txtDirection.setText(String.valueOf(Math.round(locationInfo.getBearing())) + getString(R.string.degree_symbol));
-
         }
 
         TextView txtDuration = (TextView) rootView.findViewById(R.id.simpleview_txtDuration);
@@ -336,7 +378,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         String duration = getInterval(startTime, currentTime);
 
         txtDuration.setText(duration);
-
 
         String distanceUnit;
 
@@ -357,7 +398,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             }
         }
 
-
         TextView txtPoints = (TextView) rootView.findViewById(R.id.simpleview_txtPoints);
         TextView txtTravelled = (TextView) rootView.findViewById(R.id.simpleview_txtDistance);
 
@@ -367,8 +407,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
         String providerName = locationInfo.getProvider();
         if (!providerName.equalsIgnoreCase("gps")) {
-            TextView txtSatelliteCount = (TextView) rootView.findViewById(R.id.simpleview_txtSatelliteCount);
-            txtSatelliteCount.setText("");
+            SetSatelliteCount(-1);
         }
 
     }
@@ -383,17 +422,27 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         EditText txtLongitude = (EditText) rootView.findViewById(R.id.simple_lon_text);
         txtLongitude.setText("");
 
+        ImageView imgAccuracy = (ImageView)rootView.findViewById(R.id.simpleview_imgAccuracy);
+        ClearColor(imgAccuracy);
 
         TextView txtAccuracy = (TextView) rootView.findViewById(R.id.simpleview_txtAccuracy);
         txtAccuracy.setText("");
         txtAccuracy.setTextColor(getResources().getColor(android.R.color.black));
 
+        ImageView imgAltitude = (ImageView)rootView.findViewById(R.id.simpleview_imgAltitude);
+        ClearColor(imgAltitude);
 
         TextView txtAltitude = (TextView) rootView.findViewById(R.id.simpleview_txtAltitude);
         txtAltitude.setText("");
 
+        ImageView imgDirection = (ImageView)rootView.findViewById(R.id.simpleview_imgDirection);
+        ClearColor(imgDirection);
+
         TextView txtDirection = (TextView) rootView.findViewById(R.id.simpleview_txtDirection);
         txtDirection.setText("");
+
+        ImageView imgSpeed = (ImageView)rootView.findViewById(R.id.simpleview_imgSpeed);
+        ClearColor(imgSpeed);
 
         TextView txtSpeed = (TextView) rootView.findViewById(R.id.simpleview_txtSpeed);
         txtSpeed.setText("");
@@ -429,14 +478,23 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     @Override
     public void SetSatelliteCount(int count) {
+        ImageView imgSatelliteCount = (ImageView) rootView.findViewById(R.id.simpleview_imgSatelliteCount);
         TextView txtSatelliteCount = (TextView) rootView.findViewById(R.id.simpleview_txtSatelliteCount);
 
+        if(count > -1) {
+            SetColor(imgSatelliteCount, IconColorIndicator.Good);
 
-        AlphaAnimation fadeIn = new AlphaAnimation(0.6f, 1.0f);
-        fadeIn.setDuration(1200);
-        fadeIn.setFillAfter(true);
-        txtSatelliteCount.startAnimation(fadeIn);
-        txtSatelliteCount.setText(String.valueOf(count));
+            AlphaAnimation fadeIn = new AlphaAnimation(0.6f, 1.0f);
+            fadeIn.setDuration(1200);
+            fadeIn.setFillAfter(true);
+            txtSatelliteCount.startAnimation(fadeIn);
+            txtSatelliteCount.setText(String.valueOf(count));
+        }
+        else {
+            ClearColor(imgSatelliteCount);
+            txtSatelliteCount.setText("");
+        }
+
     }
 
     @Override
@@ -449,8 +507,8 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     @Override
     public void SetLoggingStopped() {
-        TextView txtSatelliteCount = (TextView) rootView.findViewById(R.id.simpleview_txtSatelliteCount);
-        txtSatelliteCount.setText("");
+
+        SetSatelliteCount(-1);
 
         toggleComponent.SetEnabled(true);
     }
