@@ -29,10 +29,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.location.Location;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.IBinder;
+import android.os.*;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -235,6 +232,11 @@ public class GpsMainActivity extends ActionBarActivity
         getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, this);
         getSupportActionBar().setSelectedNavigationItem(GetUserSelectedNavigationItem());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
     }
 
     public void SetUpNavigationDrawer() {
@@ -319,11 +321,12 @@ public class GpsMainActivity extends ActionBarActivity
                         .setTextPrimary(getString(R.string.menu_faq))
         );
 
+        drawer.selectItem(3);
 
         drawer.setOnItemClickListener(new DrawerItem.OnItemClickListener() {
             @Override
             public void onClick(DrawerItem drawerItem, int id, int position) {
-                drawer.selectItem(position);
+                drawer.selectItem(3);
                 drawerLayout.closeDrawer(drawer);
 
                 switch(position){
