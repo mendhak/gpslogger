@@ -1033,6 +1033,12 @@ public class GpsMainActivity extends ActionBarActivity
     public void OnWaitingForLocation(boolean inProgress) {
         ProgressBar fixBar = (ProgressBar) findViewById(R.id.progressBarGpsFix);
         fixBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
+
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null){
+            fragment.OnWaitingForLocation(inProgress);
+        }
+
     }
 
 

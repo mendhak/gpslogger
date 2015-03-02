@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:custom="http://schemas.android.com/apk/res-auto"
             android:paddingLeft="2dp"
             android:paddingRight="2dp"
             android:paddingTop="@dimen/activity_vertical_margin"
@@ -48,35 +49,34 @@
             </TableRow>
 
             <TableRow>
-
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content">
-                    <!-- TODO: Only one of the following views should be displayed -->
-                    <ImageView
-                        android:layout_height="100dp"
-                        android:layout_width="100dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:background="?android:selectableItemBackground"
-                        android:id="@+id/simple_play"
-                        android:src="@drawable/play"
-                        android:contentDescription="@string/btn_start_logging"
-                        />
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:layout_height="100dp"
-                        android:layout_width="100dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:background="?android:selectableItemBackground"
-                        android:id="@+id/simple_stop"
-                        android:src="@drawable/stop"
-                        android:contentDescription="@string/btn_stop_logging"
-                        />
+                <com.dd.processbutton.iml.ActionProcessButton
+                    android:id="@+id/btnActionProcess"
+                    android:layout_width="wrap_content"
+                    android:width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="22dp"
+                    android:layout_marginTop="24dp"
+                    android:text="Sign_in"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    custom:pb_colorComplete="@color/green_complete"
+                    custom:pb_colorNormal="@color/accentColorComplementary"
+                    custom:pb_colorPressed="@color/blue_pressed"
+                    custom:pb_colorProgress="@color/purple_progress"
+                    custom:pb_textComplete="Success"
+                    custom:pb_textProgress="Loading"
+                    custom:pb_textError="Error"
+                    custom:pb_colorError="@color/red_error" />
                 </LinearLayout>
             </TableRow>
+
+
 
             <TableRow
                 android:layout_gravity="center"

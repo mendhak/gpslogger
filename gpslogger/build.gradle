@@ -142,6 +142,9 @@ dependencies {
     //The material drawer
     compile 'com.heinrichreimersoftware.materialdrawer:library:1.4.2'
 
+    //Progress button
+    compile 'com.github.dmytrodanylyk.android-process-button:library:1.0.0'
+
 }
 
 preBuild.doFirst {

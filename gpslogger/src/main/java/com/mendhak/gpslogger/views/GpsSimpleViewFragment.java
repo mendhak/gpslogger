@@ -35,11 +35,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.dd.processbutton.iml.ActionProcessButton;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.views.component.ToggleComponent;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
@@ -52,7 +52,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
 
     private View rootView;
-    private ToggleComponent toggleComponent;
+    private ActionProcessButton actionButton;
 
     public GpsSimpleViewFragment() {
 
@@ -85,23 +85,22 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         setImageTooltips();
         showPreferencesSummary();
 
+        actionButton = (ActionProcessButton)rootView.findViewById(R.id.btnActionProcess);
+        actionButton.setMode(ActionProcessButton.Mode.ENDLESS);
+        actionButton.setBackgroundColor(getResources().getColor(R.color.accentColor));
 
-        // Toggle the play and pause.
-        toggleComponent = ToggleComponent.getBuilder()
-                .addOnView(rootView.findViewById(R.id.simple_play))
-                .addOffView(rootView.findViewById(R.id.simple_stop))
-                .setDefaultState(!Session.isStarted())
-                .addHandler(new ToggleComponent.ToggleHandler() {
-                    @Override
-                    public void onStatusChange(boolean status) {
-                        if (status) {
-                            requestStartLogging();
-                        } else {
-                            requestStopLogging();
-                        }
-                    }
-                })
-                .build();
+        actionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Session.isStarted()){
+                    requestStopLogging();
+                }
+                else {
+                    requestStartLogging();
+                }
+            }
+        });
+
 
         if (Session.hasValidLocation()) {
             SetLocation(Session.getCurrentLocationInfo());
@@ -115,6 +114,18 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
 
         return rootView;
+    }
+
+    private void setActionButtonStart(){
+        actionButton.setText(R.string.btn_start_logging);
+        actionButton.setBackgroundColor(getResources().getColor(R.color.accentColor));
+        actionButton.setAlpha(0.8f);
+    }
+
+    private void setActionButtonStop(){
+        actionButton.setText(R.string.btn_stop_logging);
+        actionButton.setBackgroundColor(getResources().getColor(R.color.accentColorComplementary));
+        actionButton.setAlpha(0.8f);
     }
 
     private void showPreferencesSummary() {
@@ -253,14 +264,20 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     @Override
     public void onStart() {
 
-        toggleComponent.SetEnabled(!Session.isStarted());
+        setActionButtonStop();
         super.onStart();
     }
 
     @Override
     public void onResume() {
         showPreferencesSummary();
-        toggleComponent.SetEnabled(!Session.isStarted());
+
+        if(Session.isStarted()){
+            setActionButtonStop();
+        }
+        else {
+            setActionButtonStart();
+        }
         super.onResume();
     }
 
@@ -497,15 +514,39 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         tracer.debug("GpsSimpleViewFragment.SetLoggingStarted");
         showPreferencesSummary();
         clearLocationDisplay();
-        toggleComponent.SetEnabled(false);
+
+        tracer.debug(".");
+        setActionButtonStop();
     }
 
     @Override
     public void SetLoggingStopped() {
 
+        tracer.debug(".");
         SetSatelliteCount(-1);
 
-        toggleComponent.SetEnabled(true);
+        setActionButtonStart();
+    }
+
+    @Override
+    public void OnWaitingForLocation(boolean inProgress) {
+
+        tracer.debug(inProgress + "");
+
+        if(!Session.isStarted()){
+            actionButton.setProgress(0);
+            setActionButtonStart();
+            return;
+        }
+
+        if(inProgress){
+            actionButton.setProgress(1);
+            setActionButtonStop();
+        }
+        else {
+            actionButton.setProgress(0);
+            setActionButtonStop();
+        }
     }
 
     @Override

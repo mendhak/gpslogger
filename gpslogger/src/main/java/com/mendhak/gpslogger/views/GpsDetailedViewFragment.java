@@ -454,6 +454,11 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     }
 
     @Override
+    public void OnWaitingForLocation(boolean inProgress) {
+
+    }
+
+    @Override
     public void SetStatusMessage(String message) {
 
         TextView txtStatus = (TextView) rootView.findViewById(R.id.detailedview_txtstatus);
