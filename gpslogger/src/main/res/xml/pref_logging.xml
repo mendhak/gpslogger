@@ -135,7 +135,7 @@
             android:dialogTitle="@string/retry_time_dialog_title"
             android:numeric="integer"
             android:maxLength="4"
-            android:defaultValue="0"
+            android:defaultValue="120"
             android:hint="@string/retry_time_hint"/>
 
     </PreferenceCategory>
