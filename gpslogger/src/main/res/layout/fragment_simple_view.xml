@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="22dp"
                     android:layout_marginTop="24dp"
-                    android:text="Sign_in"
+                    android:text="@string/btn_start_logging"
                     android:textColor="@android:color/white"
                     android:textSize="18sp"
                     custom:pb_colorComplete="@color/green_complete"

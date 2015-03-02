@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.dd.processbutton.iml.ActionProcessButton;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
@@ -37,7 +38,6 @@ import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
-import com.mendhak.gpslogger.views.component.ToggleComponent;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
@@ -51,8 +51,9 @@ import java.util.ListIterator;
 
 public class GpsDetailedViewFragment extends GenericViewFragment {
 
-    private ToggleComponent toggleComponent;
+
     private View rootView;
+    private ActionProcessButton actionButton;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GpsDetailedViewFragment.class.getSimpleName());
 
     public static final GpsDetailedViewFragment newInstance() {
@@ -74,22 +75,22 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
         rootView = inflater.inflate(R.layout.fragment_detailed_view, container, false);
 
-        // Toggle the play and pause views.
-        toggleComponent = ToggleComponent.getBuilder()
-                .addOnView(rootView.findViewById(R.id.detailedview_play))
-                .addOffView(rootView.findViewById(R.id.detailedview_stop))
-                .setDefaultState(!Session.isStarted())
-                .addHandler(new ToggleComponent.ToggleHandler() {
-                    @Override
-                    public void onStatusChange(boolean status) {
-                        if (status) {
-                            requestStartLogging();
-                        } else {
-                            requestStopLogging();
-                        }
-                    }
-                })
-                .build();
+        actionButton = (ActionProcessButton)rootView.findViewById(R.id.btnActionProcess);
+        actionButton.setBackgroundColor(getResources().getColor(R.color.accentColor));
+
+        actionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Session.isStarted()){
+                    requestStopLogging();
+                }
+                else {
+                    requestStartLogging();
+                }
+            }
+        });
+
+
 
         if (Session.hasValidLocation()) {
             SetLocation(Session.getCurrentLocationInfo());
@@ -100,17 +101,36 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         return rootView;
     }
 
+
+    private void setActionButtonStart(){
+        actionButton.setText(R.string.btn_start_logging);
+        actionButton.setBackgroundColor(getResources().getColor(R.color.accentColor));
+        actionButton.setAlpha(0.8f);
+    }
+
+    private void setActionButtonStop(){
+        actionButton.setText(R.string.btn_stop_logging);
+        actionButton.setBackgroundColor(getResources().getColor(R.color.accentColorComplementary));
+        actionButton.setAlpha(0.8f);
+    }
+
     @Override
     public void onStart() {
 
-        toggleComponent.SetEnabled(!Session.isStarted());
+        setActionButtonStop();
         super.onStart();
     }
 
     @Override
     public void onResume() {
 
-        toggleComponent.SetEnabled(!Session.isStarted());
+        if(Session.isStarted()){
+            setActionButtonStop();
+        }
+        else {
+            setActionButtonStart();
+        }
+
         showPreferencesSummary();
         super.onResume();
     }
@@ -414,7 +434,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     @Override
     public void SetLoggingStarted() {
-        toggleComponent.SetEnabled(false);
+        setActionButtonStop();
         showPreferencesSummary();
         ClearDisplay();
     }
@@ -450,7 +470,8 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     @Override
     public void SetLoggingStopped() {
-        toggleComponent.SetEnabled(true);
+
+        setActionButtonStart();
     }
 
     @Override
