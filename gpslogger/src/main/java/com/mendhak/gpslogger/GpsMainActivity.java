@@ -17,11 +17,8 @@
 
 package com.mendhak.gpslogger;
 
-import android.app.ActionBar;
-import android.app.Activity;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
@@ -29,39 +26,30 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.location.Location;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.IBinder;
+import android.os.*;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.internal.view.menu.ActionMenuItemView;
+import android.support.v7.widget.ActionMenuView;
+import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.view.*;
 import android.widget.*;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.IActionListener;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.heinrichreimersoftware.materialdrawer.DrawerView;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
+import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.senders.IFileSender;
-import com.mendhak.gpslogger.senders.dropbox.DropBoxAuthorizationActivity;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
-import com.mendhak.gpslogger.senders.email.AutoEmailActivity;
-import com.mendhak.gpslogger.senders.ftp.AutoFtpActivity;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
-import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsActivity;
-import com.mendhak.gpslogger.senders.opengts.OpenGTSActivity;
-import com.mendhak.gpslogger.senders.osm.OSMAuthorizationActivity;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
-import com.mendhak.gpslogger.settings.GeneralSettingsActivity;
-import com.mendhak.gpslogger.settings.LoggingSettingsActivity;
-import com.mendhak.gpslogger.settings.UploadSettingsActivity;
 import com.mendhak.gpslogger.views.GenericViewFragment;
 import com.mendhak.gpslogger.views.GpsBigViewFragment;
 import com.mendhak.gpslogger.views.GpsDetailedViewFragment;
@@ -70,28 +58,19 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class GpsMainActivity extends Activity
-        implements GenericViewFragment.IGpsViewCallback, NavigationDrawerFragment.NavigationDrawerCallbacks, ActionBar.OnNavigationListener, IGpsLoggerServiceClient, IActionListener {
+public class GpsMainActivity extends ActionBarActivity
+        implements GenericViewFragment.IGpsViewCallback,
+        IGpsLoggerServiceClient,
+        IActionListener,
+        Toolbar.OnMenuItemClickListener,
+        ActionBar.OnNavigationListener {
 
     private static Intent serviceIntent;
     private GpsLoggingService loggingService;
-
-    FragmentManager fragmentManager;
-
-
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
-    private NavigationDrawerFragment navigationDrawerFragment;
-
-    MenuItem mnuAnnotate;
-    MenuItem mnuOnePoint;
-    MenuItem mnuAutoSendNow;
-    private boolean annotationMarked;
+    private ActionBarDrawerToggle drawerToggle;
     private org.slf4j.Logger tracer;
 
     @Override
@@ -105,19 +84,83 @@ public class GpsMainActivity extends Activity
 
         setContentView(R.layout.activity_gps_main);
 
+        SetUpToolbar();
         SetUpNavigationDrawer();
-
-        if (fragmentManager == null) {
-            tracer.debug("Creating fragmentManager");
-            fragmentManager = getFragmentManager();
-        }
-
-        SetUpActionBar();
+        LoadDefaultFragmentView();
         StartAndBindService();
     }
 
-    private void loadPresetProperties() {
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        StartAndBindService();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GetPreferences();
+        StartAndBindService();
+        enableDisableMenuItems();
+    }
+
+    @Override
+    protected void onPause() {
+        StopAndUnbindServiceIfRequired();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        StopAndUnbindServiceIfRequired();
+        super.onDestroy();
+
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            ToggleDrawer();
+        }
+
+        return super.onKeyUp(keyCode, event);
+    }
+
+    /**
+     * Handles the hardware back-button press
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && Session.isBoundToService()) {
+            StopAndUnbindServiceIfRequired();
+        }
+
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
+                ToggleDrawer();
+                return true;
+            }
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+
+    private void loadPresetProperties() {
 
         //Either look for /<appfolder>/gpslogger.properties or /sdcard/gpslogger.properties
         File file =  new File(Utilities.GetDefaultStorageFolder(getApplicationContext()) + "/gpslogger.properties");
@@ -153,146 +196,185 @@ public class GpsMainActivity extends Activity
         } catch (Exception e) {
             tracer.error("Could not load preset properties", e);
         }
-
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        StartAndBindService();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        GetPreferences();
-        StartAndBindService();
-        enableDisableMenuItems();
-    }
-
-    @Override
-    protected void onPause() {
-        StopAndUnbindServiceIfRequired();
-        super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        StopAndUnbindServiceIfRequired();
-        super.onDestroy();
-
-    }
-
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU) {
-            navigationDrawerFragment.toggleDrawer();
-        }
-
-        return super.onKeyUp(keyCode, event);
-    }
-
-    /**
-     * Handles the hardware back-button press
-     */
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && Session.isBoundToService()) {
-            StopAndUnbindServiceIfRequired();
-        }
-
-        return super.onKeyDown(keyCode, event);
     }
 
 
     /**
-     *
+     * Helper method, launches activity in a delayed handler, less stutter
      */
-    private void SetUpNavigationDrawer() {
-        // Set up the drawer
-        navigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
-    }
-
-
-    /**
-     * Handles drawer item selection
-     */
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-
-        tracer.debug("Navigation menu item: " + String.valueOf(position));
-        switch (position) {
-            case 0:
-                break;
-            case 1:
-                LaunchActivity(GeneralSettingsActivity.class);
-                break;
-            case 2:
-                LaunchActivity(LoggingSettingsActivity.class);
-                break;
-            case 3:
-                LaunchActivity(UploadSettingsActivity.class);
-                break;
-            case 4:
-                LaunchActivity(AutoFtpActivity.class);
-                break;
-            case 5:
-                LaunchActivity(AutoEmailActivity.class);
-                break;
-            case 6:
-                LaunchActivity(OpenGTSActivity.class);
-                break;
-            case 7:
-                LaunchActivity(GDocsSettingsActivity.class);
-                break;
-            case 8:
-                LaunchActivity(OSMAuthorizationActivity.class);
-                break;
-            case 9:
-                LaunchActivity(DropBoxAuthorizationActivity.class);
-                break;
-            default:
-                loggingService.StopLogging();
-                loggingService.stopSelf();
-                finish();
-                break;
-
-        }
-
-    }
-
-    /**
-     * Launches activity in a delayed handler, less stutter
-     */
-    private void LaunchActivity(final Class activityClass) {
+    private void LaunchPreferenceScreen(final String whichFragment) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent targetActivity = new Intent(getApplicationContext(), activityClass);
+                Intent targetActivity = new Intent(getApplicationContext(), MainPreferenceActivity.class);
+                targetActivity.putExtra("preference_fragment", whichFragment);
                 startActivity(targetActivity);
             }
         }, 120);
     }
 
 
-    public void SetUpActionBar() {
-        ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
-        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(actionBar.getThemedContext(), R.array.gps_main_views, android.R.layout.simple_spinner_dropdown_item);
+    public Toolbar GetToolbar(){
+        return (Toolbar)findViewById(R.id.toolbar);
+    }
 
-        actionBar.setListNavigationCallbacks(spinnerAdapter, this);
+    public void SetUpToolbar(){
+        Toolbar toolbar = GetToolbar();
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        //Reload the user's previously selected view
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        actionBar.setSelectedNavigationItem(prefs.getInt("dropdownview", 0));
+        //Deprecated in Lollipop but required if targeting 4.x
+        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.gps_main_views, R.layout.spinner_dropdown_item);
+        getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, this);
+        getSupportActionBar().setSelectedNavigationItem(GetUserSelectedNavigationItem());
 
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle("");
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setCustomView(R.layout.actionbar);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+    }
 
-        ImageButton helpButton = (ImageButton) actionBar.getCustomView().findViewById(R.id.imgHelp);
+    public void SetUpNavigationDrawer() {
+
+        final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerView drawer = (DrawerView) findViewById(R.id.drawer);
+
+        drawerToggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                GetToolbar(),
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+        ){
+
+            public void onDrawerClosed(View view) {
+                invalidateOptionsMenu();
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                invalidateOptionsMenu();
+            }
+        };
+
+
+        drawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.primaryColorDark));
+        drawerLayout.setDrawerListener(drawerToggle);
+        drawerLayout.closeDrawer(drawer);
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.settings))
+                        .setTextPrimary(getString(R.string.pref_general_title))
+                        .setTextSecondary(getString(R.string.pref_general_summary))
+        );
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.loggingsettings))
+                        .setTextPrimary(getString(R.string.pref_logging_title))
+                        .setTextSecondary(getString(R.string.pref_logging_summary))
+        );
+
+        drawer.addDivider();
+
+
+        drawer.addItem(new DrawerItem()
+                .setImage(getResources().getDrawable(R.drawable.autosend))
+                .setTextPrimary(getString(R.string.pref_autosend_title))
+                .setTextSecondary(getString(R.string.pref_autosend_summary)));
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.googledrive))
+                        .setTextPrimary(getString(R.string.gdocs_setup_title))
+        );
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.dropbox))
+                        .setTextPrimary(getString(R.string.dropbox_setup_title))
+        );
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.email))
+                        .setTextPrimary(getString(R.string.autoemail_title))
+        );
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.ftp))
+                        .setTextPrimary(getString(R.string.autoftp_setup_title))
+        );
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.opengts))
+                        .setTextPrimary(getString(R.string.opengts_setup_title))
+        );
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.openstreetmap))
+                        .setTextPrimary(getString(R.string.osm_setup_title))
+        );
+
+        drawer.addDivider();
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.helpfaq))
+                        .setTextPrimary(getString(R.string.menu_faq))
+        );
+
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.exit))
+                        .setTextPrimary(getString(R.string.menu_exit)));
+
+        //drawer.selectItem(3);
+
+        drawer.setOnItemClickListener(new DrawerItem.OnItemClickListener() {
+            @Override
+            public void onClick(DrawerItem drawerItem, int id, int position) {
+                //drawer.selectItem(3);
+                drawerLayout.closeDrawer(drawer);
+
+                switch(position){
+                    case 0:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GENERAL);
+                        break;
+                    case 1:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.LOGGING);
+                        break;
+                    case 3:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
+                        break;
+                    case 4:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
+                        break;
+                    case 5:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
+                        break;
+                    case 6:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
+                        break;
+                    case 7:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
+                        break;
+                    case 8:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
+                        break;
+                    case 9:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
+                        break;
+                    case 11:
+                        Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
+                        startActivity(faqtivity);
+                        break;
+                    case 12:
+                        loggingService.StopLogging();
+                        loggingService.stopSelf();
+                        finish();
+                        break;
+                }
+
+            }
+        });
+
+        ImageButton helpButton = (ImageButton) findViewById(R.id.imgHelp);
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -303,19 +385,29 @@ public class GpsMainActivity extends Activity
 
     }
 
-    /**
-     * Handles dropdown selection
-     */
-    @Override
-    public boolean onNavigationItemSelected(int position, long id) {
+    public void ToggleDrawer(){
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
+            drawerLayout.closeDrawer(Gravity.LEFT);
+        }
+        else {
+            drawerLayout.openDrawer(Gravity.LEFT);
+        }
+    }
 
-        tracer.debug("Changing main view: " + String.valueOf(position));
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("dropdownview", position);
-        editor.commit();
+    private int GetUserSelectedNavigationItem(){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        return sp.getInt("SPINNER_SELECTED_POSITION", 0);
+    }
 
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+    private void LoadDefaultFragmentView() {
+        int currentSelectedPosition = GetUserSelectedNavigationItem();
+        tracer.debug("Loading fragment view: " + currentSelectedPosition);
+        LoadFragmentView(currentSelectedPosition);
+    }
+
+    private void LoadFragmentView(int position){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
         switch (position) {
             case 0:
@@ -330,28 +422,100 @@ public class GpsMainActivity extends Activity
                 break;
         }
         transaction.commitAllowingStateLoss();
+    }
 
+    private GenericViewFragment GetCurrentFragment(){
+        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.container);
+        if (currentFragment instanceof GenericViewFragment) {
+            return ((GenericViewFragment) currentFragment);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(int position, long itemId) {
+        tracer.debug("Changing main view: " + String.valueOf(position));
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("SPINNER_SELECTED_POSITION", position);
+        editor.commit();
+
+        LoadFragmentView(position);
         return true;
     }
 
 
-    /**
-     * Creates menu items
-     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.gps_main, menu);
-        mnuAnnotate = menu.findItem(R.id.mnuAnnotate);
-        mnuOnePoint = menu.findItem(R.id.mnuOnePoint);
-        mnuAutoSendNow = menu.findItem(R.id.mnuAutoSendNow);
+
+        Toolbar toolbarBottom = (Toolbar) findViewById(R.id.toolbarBottom);
+
+        if(toolbarBottom.getMenu().size() > 0){ return true;}
+
+        toolbarBottom.inflateMenu(R.menu.gps_main);
+        setupEvenlyDistributedToolbar();
+        toolbarBottom.setOnMenuItemClickListener(this);
+
         enableDisableMenuItems();
         return true;
+    }
+
+    public void setupEvenlyDistributedToolbar(){
+        //http://stackoverflow.com/questions/26489079/evenly-spaced-menu-items-on-toolbar
+
+        // Use Display metrics to get Screen Dimensions
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+
+        // Toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBottom);
+
+        // Add 10 spacing on either side of the toolbar
+        toolbar.setContentInsetsAbsolute(10, 10);
+
+        // Get the ChildCount of your Toolbar, this should only be 1
+        int childCount = toolbar.getChildCount();
+        // Get the Screen Width in pixels
+        int screenWidth = metrics.widthPixels;
+
+        // Create the Toolbar Params based on the screenWidth
+        Toolbar.LayoutParams toolbarParams = new Toolbar.LayoutParams(screenWidth, Toolbar.LayoutParams.WRAP_CONTENT);
+
+        // Loop through the child Items
+        for(int i = 0; i < childCount; i++){
+            // Get the item at the current index
+            View childView = toolbar.getChildAt(i);
+            // If its a ViewGroup
+            if(childView instanceof ViewGroup){
+                // Set its layout params
+                childView.setLayoutParams(toolbarParams);
+                // Get the child count of this view group, and compute the item widths based on this count & screen size
+                int innerChildCount = ((ViewGroup) childView).getChildCount();
+                int itemWidth  = (screenWidth / innerChildCount);
+                // Create layout params for the ActionMenuView
+                ActionMenuView.LayoutParams params = new ActionMenuView.LayoutParams(itemWidth, Toolbar.LayoutParams.WRAP_CONTENT);
+                // Loop through the children
+                for(int j = 0; j < innerChildCount; j++){
+                    View grandChild = ((ViewGroup) childView).getChildAt(j);
+                    if(grandChild instanceof ActionMenuItemView){
+                        // set the layout parameters on each View
+                        grandChild.setLayoutParams(params);
+                    }
+                }
+            }
+        }
     }
 
     private void enableDisableMenuItems() {
 
         OnWaitingForLocation(Session.isWaitingForLocation());
         SetBulbStatus(Session.isStarted());
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarBottom);
+        MenuItem mnuAnnotate = toolbar.getMenu().findItem(R.id.mnuAnnotate);
+        MenuItem mnuOnePoint = toolbar.getMenu().findItem(R.id.mnuOnePoint);
+        MenuItem mnuAutoSendNow = toolbar.getMenu().findItem(R.id.mnuAutoSendNow);
 
         if (mnuOnePoint != null) {
             mnuOnePoint.setEnabled(!Session.isStarted());
@@ -368,7 +532,7 @@ public class GpsMainActivity extends Activity
                 mnuAnnotate.setIcon(R.drawable.annotate2_disabled);
                 mnuAnnotate.setEnabled(false);
             } else {
-                if (annotationMarked) {
+                if (Session.isAnnotationMarked()) {
                     mnuAnnotate.setIcon(R.drawable.annotate2_active);
                 } else {
                     mnuAnnotate.setIcon(R.drawable.annotate2);
@@ -378,12 +542,8 @@ public class GpsMainActivity extends Activity
         }
     }
 
-
-    /**
-     * Handles menu item selection
-     */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onMenuItemClick(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -422,10 +582,10 @@ public class GpsMainActivity extends Activity
             case R.id.mnuAutoSendNow:
                 ForceAutoSendNow();
             default:
-                return super.onOptionsItemSelected(item);
+                return true;
         }
-
     }
+
 
     private void ForceAutoSendNow() {
         tracer.debug("Auto send now");
@@ -438,10 +598,8 @@ public class GpsMainActivity extends Activity
 
 
         } else {
-            Intent pref = new Intent().setClass(this, UploadSettingsActivity.class);
-            startActivity(pref);
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
         }
-
     }
 
     private void LogSinglePoint() {
@@ -451,12 +609,6 @@ public class GpsMainActivity extends Activity
 
     /**
      * Annotates GPX and KML files, TXT files are ignored.
-     * <p/>
-     * The annotation is done like this:
-     * <wpt lat="##.##" lon="##.##">
-     * <name>user input</name>
-     * </wpt>
-     * <p/>
      * The user is prompted for the content of the <name> tag. If a valid
      * description is given, the logging service starts in single point mode.
      */
@@ -503,18 +655,14 @@ public class GpsMainActivity extends Activity
     }
 
 
-    /**
-     * Uploads a GPS Trace to OpenStreetMap.org.
-     */
     private void UploadToOpenStreetMap() {
         if (!OSMHelper.IsOsmAuthorized(getApplicationContext())) {
             tracer.debug("Not authorized, opening OSM activity");
-            startActivity(OSMHelper.GetOsmSettingsIntent(getApplicationContext()));
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
             return;
         }
 
-        Intent settingsIntent = OSMHelper.GetOsmSettingsIntent(getApplicationContext());
-        ShowFileListDialog(settingsIntent, FileSenderFactory.GetOsmSender(getApplicationContext(), this));
+        ShowFileListDialog(FileSenderFactory.GetOsmSender(getApplicationContext(), this));
     }
 
     private void UploadToDropBox() {
@@ -522,43 +670,37 @@ public class GpsMainActivity extends Activity
 
         if (!dropBoxHelper.IsLinked()) {
             tracer.debug("Not linked, opening Dropbox activity");
-            startActivity(new Intent("com.mendhak.gpslogger.DROPBOX_SETUP"));
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
             return;
         }
 
-        Intent settingsIntent = new Intent(GpsMainActivity.this, DropBoxAuthorizationActivity.class);
-        ShowFileListDialog(settingsIntent, FileSenderFactory.GetDropBoxSender(getApplication(), this));
+        ShowFileListDialog(FileSenderFactory.GetDropBoxSender(getApplication(), this));
     }
 
     private void SendToOpenGTS() {
-        Intent settingsIntent = new Intent(getApplicationContext(), OpenGTSActivity.class);
-
         if (!Utilities.IsOpenGTSSetup()) {
             tracer.debug("Not set up, opening OpenGTS activity");
-            startActivity(settingsIntent);
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
         } else {
             IFileSender fs = FileSenderFactory.GetOpenGTSSender(getApplicationContext(), this);
-            ShowFileListDialog(settingsIntent, fs);
+            ShowFileListDialog(fs);
         }
     }
 
     private void UploadToGoogleDocs() {
         if (!GDocsHelper.IsLinked(getApplicationContext())) {
             tracer.debug("Not linked, opening Google Docs setup activity");
-            startActivity(new Intent(GpsMainActivity.this, GDocsSettingsActivity.class));
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
             return;
         }
 
-        Intent settingsIntent = new Intent(GpsMainActivity.this, GDocsSettingsActivity.class);
-        ShowFileListDialog(settingsIntent, FileSenderFactory.GetGDocsSender(getApplicationContext(), this));
+        ShowFileListDialog(FileSenderFactory.GetGDocsSender(getApplicationContext(), this));
     }
 
     private void SendToFtp() {
-        Intent settingsIntent = new Intent(getApplicationContext(), AutoFtpActivity.class);
-
         if (!Utilities.IsFtpSetup()) {
             tracer.debug("Not setup, opening FTP setup activity");
-            startActivity(settingsIntent);
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
         } else {
             IFileSender fs = FileSenderFactory.GetFtpSender(getApplicationContext(), this);
             ShowFileListDialog(fs);
@@ -566,18 +708,20 @@ public class GpsMainActivity extends Activity
     }
 
     private void SelectAndEmailFile() {
-        Intent settingsIntent = new Intent(getApplicationContext(), AutoEmailActivity.class);
-
         if (!Utilities.IsEmailSetup()) {
             tracer.debug("Not set up, opening email setup activity");
-            startActivity(settingsIntent);
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
         } else {
-            ShowFileListDialog(settingsIntent, FileSenderFactory.GetEmailSender(this));
+            ShowFileListDialog(FileSenderFactory.GetEmailSender(this));
         }
-
     }
 
-    private void ShowFileListDialog(final Intent settingsIntent, final IFileSender sender) {
+    private void ShowFileListDialog(final IFileSender sender) {
+
+        if (!Utilities.isNetworkAvailable(this)) {
+            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.no_network_message), this);
+            return;
+        }
 
         final File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
@@ -600,10 +744,6 @@ public class GpsMainActivity extends Activity
                 fileList.add(f.getName());
             }
 
-            final String settingsText = getString(R.string.menu_settings);
-
-            //Add 'settings' to top of list
-            fileList.add(0, settingsText);
             final String[] files = fileList.toArray(new String[fileList.size()]);
 
 
@@ -619,23 +759,17 @@ public class GpsMainActivity extends Activity
 
                             List<Integer> selectedItems = Arrays.asList(integers);
 
-                            if (selectedItems.size() > 0 && selectedItems.contains(0)) {
-                                startActivity(settingsIntent);
-                            } else {
+                            List<File> chosenFiles = new ArrayList<File>();
 
-                                List<File> chosenFiles = new ArrayList<File>();
+                            for (Object item : selectedItems) {
+                                tracer.info("Selected file to upload- " + files[Integer.valueOf(item.toString())]);
+                                chosenFiles.add(new File(gpxFolder, files[Integer.valueOf(item.toString())]));
+                            }
 
-                                for (Object item : selectedItems) {
-                                    tracer.info("Selected file to upload- " + files[Integer.valueOf(item.toString())]);
-                                    chosenFiles.add(new File(gpxFolder, files[Integer.valueOf(item.toString())]));
-                                }
-
-                                if (chosenFiles.size() > 0) {
-                                    Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.please_wait),
-                                            getString(R.string.please_wait));
-                                    sender.UploadFile(chosenFiles);
-                                }
-
+                            if (chosenFiles.size() > 0) {
+                                Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.please_wait),
+                                        getString(R.string.please_wait));
+                                sender.UploadFile(chosenFiles);
                             }
                         }
                     }).show();
@@ -732,7 +866,6 @@ public class GpsMainActivity extends Activity
         } catch (Exception ex) {
             tracer.error("Share", ex);
         }
-
     }
 
 
@@ -790,7 +923,6 @@ public class GpsMainActivity extends Activity
 
         if (!Session.isStarted()) {
             tracer.debug("Stopping the service");
-            //serviceIntent = new Intent(this, GpsLoggingService.class);
             try {
                 stopService(serviceIntent);
             } catch (Exception e) {
@@ -802,49 +934,48 @@ public class GpsMainActivity extends Activity
     }
 
     //IGpsLoggerServiceClient callbacks
-
     @Override
     public void OnStatusMessage(String message) {
         tracer.debug(message);
 
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).SetStatusMessage(message);
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.SetStatusMessage(message);
         }
     }
 
     @Override
     public void OnFatalMessage(String message) {
         tracer.debug(message);
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).SetFatalMessage(message);
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.SetFatalMessage(message);
         }
     }
 
     @Override
     public void OnLocationUpdate(Location loc) {
         tracer.debug(".");
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).SetLocation(loc);
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.SetLocation(loc);
         }
 
     }
 
     @Override
     public void OnNmeaSentence(long timestamp, String nmeaSentence) {
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).OnNmeaSentence(timestamp, nmeaSentence);
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.OnNmeaSentence(timestamp, nmeaSentence);
         }
     }
 
     @Override
     public void OnSatelliteCount(int count) {
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).SetSatelliteCount(count);
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.SetSatelliteCount(count);
         }
     }
 
@@ -852,9 +983,9 @@ public class GpsMainActivity extends Activity
     public void OnStartLogging() {
         tracer.debug(".");
 
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).SetLoggingStarted();
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.SetLoggingStarted();
         }
 
         enableDisableMenuItems();
@@ -864,9 +995,9 @@ public class GpsMainActivity extends Activity
     @Override
     public void OnStopLogging() {
         tracer.debug(".");
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).SetLoggingStopped();
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.SetLoggingStopped();
         }
 
         enableDisableMenuItems();
@@ -880,23 +1011,23 @@ public class GpsMainActivity extends Activity
     @Override
     public void OnSetAnnotation() {
         tracer.debug(".");
-        this.annotationMarked = true;
+        Session.setAnnotationMarked(true);
         enableDisableMenuItems();
     }
 
     @Override
     public void OnClearAnnotation() {
         tracer.debug(".");
-        this.annotationMarked = false;
+        Session.setAnnotationMarked(false);
         enableDisableMenuItems();
     }
 
 
     @Override
     public void onFileName(String newFileName) {
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.container);
-        if (currentFragment instanceof GenericViewFragment) {
-            ((GenericViewFragment) currentFragment).OnFileNameChange(newFileName);
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null) {
+            fragment.OnFileNameChange(newFileName);
         }
     }
 
@@ -904,6 +1035,12 @@ public class GpsMainActivity extends Activity
     public void OnWaitingForLocation(boolean inProgress) {
         ProgressBar fixBar = (ProgressBar) findViewById(R.id.progressBarGpsFix);
         fixBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
+
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null){
+            fragment.OnWaitingForLocation(inProgress);
+        }
+
     }
 
 
@@ -991,7 +1128,6 @@ public class GpsMainActivity extends Activity
             tracer.info("Toggle requested - starting");
             StartLogging();
         }
-
     }
 
     private void StartLogging() {
@@ -1006,12 +1142,8 @@ public class GpsMainActivity extends Activity
         enableDisableMenuItems();
     }
 
-    /**
-     * Gets preferences chosen by the user
-     */
+
     private void GetPreferences() {
         Utilities.PopulateAppSettings(getApplicationContext());
     }
-
-
 }

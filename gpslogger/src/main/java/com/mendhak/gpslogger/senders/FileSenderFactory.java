@@ -66,6 +66,10 @@ public class FileSenderFactory {
 
     public static void SendFiles(Context applicationContext, IActionListener callback) {
 
+        if(!Utilities.isNetworkAvailable(applicationContext)){
+            tracer.error("No network available, files will not be auto-sent.");
+            return;
+        }
 
         final String currentFileName = Session.getCurrentFileName();
         tracer.info("Sending file " + currentFileName);

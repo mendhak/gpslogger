@@ -23,6 +23,8 @@ import android.app.ProgressDialog;
 import android.content.*;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Build;
@@ -884,5 +886,22 @@ public class Utilities {
 
         }
 
+    }
+
+    private static NetworkInfo getActiveNetworkInfo(Context context) {
+        if (context == null) {
+            return null;
+        }
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm == null) {
+            return null;
+        }
+        // note that this may return null if no network is currently active
+        return cm.getActiveNetworkInfo();
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        NetworkInfo info = getActiveNetworkInfo(context);
+        return (info != null && info.isConnected());
     }
 }
