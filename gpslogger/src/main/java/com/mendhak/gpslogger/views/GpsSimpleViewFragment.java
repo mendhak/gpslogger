@@ -294,7 +294,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         showPreferencesSummary();
 
         NumberFormat nf = NumberFormat.getInstance();
-        nf.setMaximumFractionDigits(4);
+        nf.setMaximumFractionDigits(3);
 
         EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
         txtLatitude.setText(String.valueOf(nf.format(locationInfo.getLatitude())) + ", " + String.valueOf(nf.format(locationInfo.getLongitude())));
