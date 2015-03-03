@@ -7,16 +7,11 @@
   <string name="title_drawer_uploadsettings">Ladda upp inställningar</string>
   <string name="navigation_drawer_open">Öppna navigeringslåda</string>
   <string name="navigation_drawer_close">Stäng navigeringslåda</string>
-  <string name="action_example">Exempel åtgärd</string>
-  <string name="action_settings">Inställningar</string>
   <string name="app_name">GPSLogger</string>
   <string name="settings_screen_name">GPSLogger Inställningar</string>
   <string name="ok">OK</string>
   <string name="cancel">Avbryt</string>
   <string name="could_not_write_to_file">Kunde inte skriva till fil</string>
-  <string name="description_added">Beskrivning har lagts till i filen</string>
-  <string name="not_yet">Inte än</string>
-  <string name="cant_add_description_until_next_point">Du kan inte lägga till en beskrivning förrän nästa punkt har loggats till en fil.</string>
   <string name="add_description">Lägg till en beskrivning</string>
   <string name="letters_numbers">Använd endast bokstäver och siffror</string>
   <string name="menu_settings">Inställningar</string>
@@ -41,7 +36,6 @@
   <string name="summary_dist">Avstånd:</string>
   <string name="summary_dist_regardless">högsta</string>
   <string name="summary_current_filename">Fil:</string>
-  <string name="summary_current_filename_format">%s (i mappen GPSLogger)</string>
   <string name="sharing_location_only">Endast plats</string>
   <string name="sharing_pick_file">Välj en fil att dela</string>
   <string name="sharing_mylocation">Min plats</string>
@@ -55,7 +49,6 @@
   <string name="error_connection">Anslutningsfel. Kontrollera telefonens inställningar.</string>
   <string name="gpsprovider_unavailable">Ingen GPS-leverantör finns tillgänglig. Kontrollera inställningarna för plats och aktivera en plats-leverantör.     </string>
   <string name="started">Startad</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(Använder %s)</string>
   <string name="providername_gps">GPS-satelliter</string>
   <string name="providername_celltower">mobilmaster</string>
   <string name="not_applicable">n/a</string>
@@ -95,16 +88,10 @@
   <string name="time_twoandhalfhours">2½ timme</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">inom %s %s</string>
-  <string name="error_displaying">Fel vid visande av platsinfo: %s</string>
   <string name="degree_symbol">°</string>
-  <string name="settings_distance_in_feet">Avstånd i fot</string>
-  <string name="settings_enter_feet">Ange fot (max 9999)</string>
   <string name="settings_distance_in_meters">Avstånd i meter</string>
   <string name="settings_accuracy_in_meters">Noggrannhet i meter</string>
-  <string name="settings_accuracy_in_feet">Noggrannhet i fot</string>
   <string name="settings_enter_meters">Ange meter (max 9999)</string>
-  <string name="settings_converting_title">Konverterarâ€¦</string>
-  <string name="settings_converting_description">Konverterar enheter för minsta avstånd. Värden över 9999 sätts till 9999. Inställningsskärmen laddas sedan om.</string>
   <string name="pref_logging_title">Loggningsdetaljer</string>
   <string name="log_gpx_title">Logga till GPX</string>
   <string name="log_gpx_summary">Skapar en GPX-fil i mappen GPSLogger på SD-kortet.</string>
@@ -120,9 +107,6 @@
   <string name="new_file_custom_title">Anpassat filnamn</string>
   <string name="new_file_custom_summary">Du kan använda ditt eget filnamn. Alternativt lägga till några dynamiska parametrar såsom serienummer, år, timme, minut, etc. Mycket dynamiska filnamn kan fungera dåligt eftersom den bara sänder den senaste filen.</string>
   <string name="pref_performance_title">Prestanda</string>
-  <string name="prefer_celltower_title">Föredra mobilmaster</string>
-  <string name="prefer_celltower_summary">Använd mobilmaster även om GPS är aktiverat. Mindre noggrant, men sparar batteri.
-    </string>
   <string name="time_before_logging_title">Tid innan loggning</string>
   <string name="time_before_logging_summary">Använd 0 för maximal frekvens, men långsammare drar mindre batteri.
     </string>
@@ -135,20 +119,12 @@
   <string name="retry_time_summary">Efter att en fixering erhållits, försök på nytt så här länge för att få en punkt som uppfyller noggrannhetsfiltrets krav.</string>
   <string name="retry_time_dialog_title">Tid i sekunder</string>
   <string name="retry_time_hint">Ange sekunder (max 9999)</string>
-  <string name="distance_before_logging_title">Avstånd innan loggning</string>
-  <string name="distance_before_logging_summary">Avstånd innan nästa punkt loggas. Använd 0 för att logga alla punkter.
-    </string>
-  <string name="timeout_time_title">Timeout</string>
-  <string name="timeout_time_summary">Hur länge GPS:en söker en fixering innan den ger upp. Använd 0 för att inte ha någon gräns</string>
-  <string name="timeout_time_dialog_title">Tid i sekunder</string>
-  <string name="timeout_time_hint">Ange sekunder (max 9999)</string>
   <string name="display_imperial_title">Visa brittiska måttenheter</string>
   <string name="display_imperial_summary">Visa fot, mile and pint i stället för metriska enheter. (Inställningar måste fortfarande vara metriska)</string>
   <string name="enabledisablegps_title">Aktivera/Inaktivera GPS</string>
   <string name="enabledisablegps_summary">Gå till telefoninställningarna för att aktivera eller inaktivera leverantörer.</string>
   <string name="startonbootup_title">Starta vid systemstart</string>
   <string name="startonbootup_summary">Kör app och starta loggning då telefonen startas</string>
-  <string name="autoemail_title">Ställ in automatisk e-post</string>
   <string name="autoemail_summary">Mailar automatiskt loggfilen till valfri adress</string>
   <string name="please_wait">Var god vänta.</string>
   <string name="autoemail_autosend">Aktivera e-postmeddelanden</string>
@@ -210,7 +186,6 @@
   <string name="emailprovider_yahoo">Yahoo! Mail</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
   <string name="emailprovider_manual">Manuell</string>
-  <string name="btn_single_point">Logga en ensam punkt</string>
   <string name="dropbox_setup_title">Dropbox</string>
   <string name="dropbox_setup_summary">Auktorisera mot Dropbox för att tillåta filuppladdning</string>
   <string name="dropbox_authorize_description">För att använda funktioner i Dropbox måste du auktorisera GPSLogger så du kan ladda upp filer till ditt konto.
@@ -224,15 +199,8 @@
   <string name="menu_upload">Skicka</string>
   <string name="autoemail_from">Avsändaradress</string>
   <string name="autoemail_from_summary">Vissa e-postleverantörer kräver en avsändaradress. Använd detta endast om det behövs.</string>
-  <string name="gdocs_upload">Google Docs</string>
-  <string name="gdocs_settings_screenname">Uppladdningsinställningar för Google Docs</string>
-  <string name="gdocs_startauthorization">Auktorisera mot Google Docs</string>
-  <string name="gdocs_authorize_summary">Tar dig till Google Docs där du kan auktorisera GPSLogger</string>
   <string name="gdocs_clearauthorization">Ta bort auktorisering</string>
   <string name="gdocs_clearauthorization_summary">Glömmer lokala GDocs-inställningar. För att häva åtkomst permanent, gå till inställningar för Google-kontot</string>
-  <string name="gdocs_setup_title">Google Docs</string>
-  <string name="gdocs_setup_summary">Auktorisera mot Google Docs för att tillåta uppladdning</string>
-  <string name="gdocs_test_summary">Skicka en testfil till Google Docs</string>
   <string name="gdocs_test_title">Testa uppladdning</string>
   <string name="gdocs_testupload_error">Kunde inte skicka en testfil</string>
   <string name="gdocs_testupload_success">Skickad. Se dina Google Dokuments för den nya filen.</string>
@@ -255,7 +223,6 @@
   <string name="shortcut_pickaction">Välj en åtgärd</string>
   <string name="log_opengts_title">Logga till en OpenGTS-server</string>
   <string name="log_opengts_summary">Skicka GPRMC-data till en OpenGTS-server.</string>
-  <string name="opengts_setup_title">OpenGTS</string>
   <string name="opengts_setup_summary">Skicka GPS-spår till en OpenGTS-server.</string>
   <string name="opengts_enabled">Aktivera OpenGTS</string>
   <string name="opengts_enabled_summary">Aktivera denna OpenGTS-server.</string>
@@ -296,29 +263,18 @@
     </string>
   <string name="autoftp_enabled">FTP aktiverat</string>
   <string name="ftp_upload">Skicka till FTP</string>
-  <string name="autoftp_setup_title">FTP-inställning</string>
   <string name="autoftp_setup_summary">Skicka dina filer till en FTP(S)-server. Obs: Detta täcker inte SFTP.</string>
   <string name="faq_screen_title">Frågor och svar</string>
   <string name="menu_faq">Hjälp och FAQ</string>
   <string name="gpsf_missing">Saknad tjänst</string>
   <string name="gpsf_missing_description">Du behöver ramverket Google Play Tjänster för att använda denna funktion.</string>
-  <string name="pref_loggingto_title">Logga till...</string>
-  <string name="pref_loggingto_summary">Filer och mål att logga din plats till</string>
   <string name="log_customurl_title">Logga till valfri URL</string>
   <string name="log_customurl_summary">Skicka loggningsinfo till din egen server via HTTP</string>
   <string name="log_customurl_urlparameters">URL-parametrar</string>
-  <string name="log_customUrl_urllatitude">Latitud: %LAT</string>
   <string name="txt_annotation">Kommentar:</string>
   <string name="txt_time_isoformat">Tid UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Leverantör:</string>
   <string name="annotation_requires_logging">Kommentarer kräver loggning till GPX/KML/Anpassad URL</string>
-  <string name="filedialog_location">Plats</string>
-  <string name="filedialog_cantreadfolder">Mappen kan inte läsas</string>
-  <string name="filedialog_new">Ny</string>
-  <string name="filedialog_name">Mappnamn:</string>
-  <string name="filedialog_create">Spara</string>
-  <string name="filedialog_select">Välj</string>
-  <string name="filedialog_no_data">Inget data</string>
   <string name="gpslogger_folder_title">Spara till mapp</string>
   <string name="gpslogger_folder_summary">Var loggfiler ska sparas, standard är /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Katalog</string>
@@ -339,7 +295,6 @@
   <string name="points">punkter</string>
   <string name="txt_number_of_points">Antal punkter</string>
   <string name="save">Spara</string>
-  <string name="values_saved">Värden sparade</string>
   <string name="pref_filedetails_title">Fil- och mappdetaljer</string>
   <string name="absolute_timeout_title">Absolut timeout</string>
   <string name="absolute_timeout_summary">Antal sekunder efter vilket appen ger upp om att erhålla en fixering, oberoende av andra inställningar. Detta är speciellt användbart när du är inne i byggnader för att hindra GPS:en från att tömma batteriet.  Sätt till 0 för ingen timeout.</string>

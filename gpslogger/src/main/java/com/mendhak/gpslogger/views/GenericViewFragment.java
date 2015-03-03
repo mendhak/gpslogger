@@ -38,6 +38,8 @@ public abstract class GenericViewFragment extends Fragment {
 
     public abstract void SetLoggingStopped();
 
+    public abstract void OnWaitingForLocation(boolean inProgress);
+
     public abstract void SetStatusMessage(String message);
 
     public abstract void SetFatalMessage(String message);
@@ -81,6 +83,8 @@ public abstract class GenericViewFragment extends Fragment {
             gpsCallback = null;
         }
     }
+
+
 
 
     /**

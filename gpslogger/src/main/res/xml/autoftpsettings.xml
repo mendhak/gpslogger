@@ -3,7 +3,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   android:key="autoftp_preferences">
 
-    <SwitchPreference
+    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
         android:key="autoftp_enabled"
         android:title="@string/autoftp_enabled" />
 
@@ -43,7 +43,7 @@
                 android:defaultValue="21"
                 android:inputType="number"/>
 
-        <SwitchPreference
+        <com.mendhak.gpslogger.views.component.CustomSwitchPreference
                 android:key="autoftp_useftps"
                 android:title="@string/autoftp_useftps"
                 android:defaultValue="false"
@@ -59,7 +59,7 @@
                 android:defaultValue=""
                 android:shouldDisableView="false"/>
 
-        <SwitchPreference
+        <com.mendhak.gpslogger.views.component.CustomSwitchPreference
                 android:key="autoftp_implicit"
                 android:title="@string/autoftp_implicit"
                 android:defaultValue="false"

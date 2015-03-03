@@ -6,9 +6,6 @@
   <string name="ok">Sige</string>
   <string name="cancel">Kanselahin</string>
   <string name="could_not_write_to_file">Hindi makasulat sa file</string>
-  <string name="description_added">Ang paglalarawan ay naidagdag sa file</string>
-  <string name="not_yet">Hindi pa</string>
-  <string name="cant_add_description_until_next_point">Hindi pa pwedeng makapagdagdag ng deskripsyon habang ang kasunod na punto ay ilalagda pa sa file.</string>
   <string name="add_description">Magdagdag ng deskripsyon</string>
   <string name="letters_numbers">Gumamit lamang ng mga letra at numero</string>
   <string name="menu_settings">Mga opsyon</string>
@@ -32,7 +29,6 @@
   <string name="summary_dist">Distansya:</string>
   <string name="summary_dist_regardless">Pinakamalaki</string>
   <string name="summary_current_filename">File:</string>
-  <string name="summary_current_filename_format">%s (sa iyong GPSLogger na polder)</string>
   <string name="sharing_location_only">Lokasyon lamang</string>
   <string name="sharing_pick_file">Piliin ang file na ibabahagi</string>
   <string name="sharing_mylocation">Aking lokasyon</string>
@@ -44,7 +40,6 @@
   <string name="error">Mali</string>
   <string name="error_connection">Hindi makakonekta. Suriin ng mabuti ang mga opsyon sa phone.</string>
   <string name="gpsprovider_unavailable">Walang nagtagpoang tagapagtustos ng GPS. Suriing mabuti ang iyong mga opsyon para sa lokasyon at tikayin na mayroong tagapagtustos ng GPS.</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(Gumagamit ng %s)</string>
   <string name="providername_gps">Mga GPS satelayt</string>
   <string name="providername_celltower">Mga tore ng cellphone</string>
   <string name="not_applicable">n/a</string>
@@ -77,12 +72,8 @@
   <string name="time_oneandhalfhours">1½ oras</string>
   <string name="time_twoandhalfhours">2½ oras</string>
   <string name="accuracy_within" formatted="false">sa loob ng %s %s</string>
-  <string name="error_displaying">Kamalian sa paglathala ng inpormasyon ukol sa posisyon: %s</string>
-  <string name="settings_distance_in_feet">Distansya sa feet</string>
-  <string name="settings_enter_feet">Itala ang feet(hindi tataas sa 9999)</string>
   <string name="settings_distance_in_meters">Distansya sa metro</string>
   <string name="settings_enter_meters">Itala ang metro (hindi tataas sa 9999)</string>
-  <string name="settings_converting_description">Nagpapa-palit ng pinakamaliit na halaga ng distansya. Mga halaga na sobra sa 9999 ay magiging 9999 lamang. Ang settings screen ay ihahantad na muli.</string>
   <string name="pref_logging_title">Mga detalye ng talaarawan ng GPS</string>
   <string name="log_gpx_title">Itala sa GPX</string>
   <string name="log_gpx_summary">Lumikha ng GPX file sa directoryo ng GPSLogger sa SD card.</string>
@@ -134,7 +125,6 @@
   <string name="pref_general_summary">Mga pang-umpisa at pakitang opsyon</string>
   <string name="emailprovider_google">Google Mail</string>
   <string name="emailprovider_manual">Manwal</string>
-  <string name="btn_single_point">Magtala ng isang punto</string>
   <string name="dropbox_setup_summary">I-awtorisa ang Dropbox upang makapag-upload ng file</string>
   <string name="dropbox_authorize_description">Para magamit ang mga katangian ng Dropbox, kakailanganin ang iyong pahintulot upang makapag-upload ang GPSLogger sa iyong account     </string>
   <string name="dropbox_authorize">I-awtorisa</string>

@@ -28,7 +28,6 @@
     </string-array>
 
 
-
     <string-array name="osm_visibility_choices">
         <item>private</item>
         <item>public</item>

@@ -6,9 +6,6 @@
   <string name="ok">Valmis</string>
   <string name="cancel">Peruuta</string>
   <string name="could_not_write_to_file">Tiedostoon kirjoittaminen epäonnistui</string>
-  <string name="description_added">Kuvaus lisätty tiedostoon</string>
-  <string name="not_yet">Ei vielä</string>
-  <string name="cant_add_description_until_next_point">Et voi lisätä kuvausta kunnes seuraava paikkatieto on lisätty lokiin.</string>
   <string name="add_description">Lisää kuvaus</string>
   <string name="letters_numbers">Käytä vain kirjaimia ja numeroita</string>
   <string name="menu_settings">Asetukset</string>
@@ -38,10 +35,8 @@
   <string name="started">Käynnistetty</string>
   <string name="providername_gps">GPS satelliitit</string>
   <string name="providername_celltower">matkapuhelintukiasemat</string>
-  <string name="settings_distance_in_feet">Etäisyys jalkoina</string>
   <string name="settings_distance_in_meters">Etäisyys metreinä</string>
   <string name="settings_accuracy_in_meters">Tarkkuus metreinä</string>
-  <string name="settings_accuracy_in_feet">Tarkkuus jalkoina</string>
   <string name="new_file_creation_onceaday">Kerran päivässä</string>
   <string name="new_file_creation_everystart">Aina käynnistettäessä</string>
   <string name="pref_performance_title">Suorituskyky</string>
@@ -49,8 +44,6 @@
   <string name="keep_fix_title">Pidä aina GPS päällä</string>
   <string name="retry_time_dialog_title">Aika sekunteina</string>
   <string name="retry_time_hint">Anna sekunnit (max 9999)</string>
-  <string name="timeout_time_title">Aikakatkaisu</string>
-  <string name="timeout_time_dialog_title">Aika sekunteina</string>
   <string name="enabledisablegps_title">Ota/Poista GPS käytöstä</string>
   <string name="startonbootup_title">Aloita käynnistyksen yhteydessä</string>
   <string name="autoemail_autosend">Käytä sähköpostia</string>
@@ -91,7 +84,6 @@
   <string name="dropbox_unauthorize">Poista lupa</string>
   <string name="dropbox_upload">Dropbox</string>
   <string name="gdocs_clearauthorization">Poista lupa</string>
-  <string name="gdocs_setup_title">Google-dokumentit</string>
   <string name="gdocs_selectgoogleaccount">Valitse Google-tili</string>
   <string name="autoemail_sendto_csv">Sähköpostiosoitteet pilkuilla erotettuna</string>
   <string name="autosend_enabled">Salli automaattinen lähettäminen</string>
@@ -117,7 +109,6 @@
   <string name="autoftp_implicit_summary">Jätä valitsematta jos et tiedä.</string>
   <string name="autoftp_invalid_settings">Virheelliset asetukset</string>
   <string name="autoftp_enabled">FTP käytössä</string>
-  <string name="autoftp_setup_title">FTP-asetukset</string>
   <string name="faq_screen_title">Usein kysyttyjä kysymyksiä</string>
   <string name="menu_faq">Apu ja UKK</string>
   <string name="gpsf_missing">Puuttuva palvelu</string>

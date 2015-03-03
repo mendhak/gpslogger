@@ -7,17 +7,11 @@
   <string name="title_drawer_uploadsettings">Feltöltési beállítások</string>
   <string name="navigation_drawer_open">Navigációs menü kinyitása</string>
   <string name="navigation_drawer_close">Navigációs menü bezárása</string>
-  <string name="action_example">Példa akció</string>
-  <string name="action_settings">Beállítások</string>
   <string name="app_name">GPSLogger</string>
   <string name="settings_screen_name">GPSLogger beállítások</string>
   <string name="ok">OK</string>
   <string name="cancel">Mégsem</string>
   <string name="could_not_write_to_file">Nem lehet a fájlba írni</string>
-  <string name="description_added">Fájlhoz adott leírás</string>
-  <string name="not_yet">még nem</string>
-  <string name="cant_add_description_until_next_point">Nem adhat hozzá egy leírást, a következő pontig
-    </string>
   <string name="add_description">Leírás hozzáadása</string>
   <string name="letters_numbers">Csak betűket és számokat</string>
   <string name="menu_settings">Beállítások</string>
@@ -42,7 +36,6 @@
   <string name="summary_dist">Távolság:</string>
   <string name="summary_dist_regardless">maximális</string>
   <string name="summary_current_filename">Fájl:</string>
-  <string name="summary_current_filename_format">%s (a GPSLogger mappában)</string>
   <string name="sharing_location_only">Csak a helyzet</string>
   <string name="sharing_pick_file">Válasszon egy fájlt, hogy megossza</string>
   <string name="sharing_mylocation">Helyzetem</string>
@@ -56,7 +49,6 @@
   <string name="error_connection">Kapcsolódási hiba. Kérjük, ellenőrizze a telefon beállításait.</string>
   <string name="gpsprovider_unavailable">Nem találom a GPS-t. Kérem ellenőrizze a telefon beállításait     </string>
   <string name="started">Kezdés</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(Használ %s)</string>
   <string name="providername_gps">GPS műholdak</string>
   <string name="providername_celltower">GSM tornyok</string>
   <string name="not_applicable">nincs adat</string>
@@ -96,16 +88,10 @@
   <string name="time_twoandhalfhours">2,5 óra</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">belül: %s%s</string>
-  <string name="error_displaying">Hibásak a helyadatok: %s</string>
   <string name="degree_symbol">°</string>
-  <string name="settings_distance_in_feet">Távolság lábban</string>
-  <string name="settings_enter_feet">Adja meg a láb értéket (max 9999)</string>
   <string name="settings_distance_in_meters">Távolság méterben</string>
   <string name="settings_accuracy_in_meters">Méteres pontossággal</string>
-  <string name="settings_accuracy_in_feet">Pontosság lábban</string>
   <string name="settings_enter_meters">Adja meg a métert (max 9999)</string>
-  <string name="settings_converting_title">Konvertálás</string>
-  <string name="settings_converting_description">Minimális távolság-egységek konvertálása. Határértékek feletti érték 9999-ra visszaáll. A beállítások képernyőn frissül     </string>
   <string name="pref_logging_title">Naplózási részletek</string>
   <string name="log_gpx_title">GPX napló</string>
   <string name="log_gpx_summary">Létrehoz egy GPX-fájlt a GPSLogger mappába az SD kártyán.</string>
@@ -122,8 +108,6 @@
   <string name="new_file_custom_summary">Használhat tetszőleges fájlnevet.
 Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év, óra, perc, stb. A nagyon dinamikus fájlnevek nem biztos, hogy jól működnek, mert az automatikus küldés funkció csak az utolsó fájlt küldi el.</string>
   <string name="pref_performance_title">Teljesítmény</string>
-  <string name="prefer_celltower_title">GSM torony az elsődleges</string>
-  <string name="prefer_celltower_summary">Cellainformációk használata akkor is, ha a GPS aktív. Kevésbé pontos, de energiát takarít meg.</string>
   <string name="time_before_logging_title">Logolás előtt</string>
   <string name="time_before_logging_summary">A 0 a legnagyobb gyakoriság, de a ritkább jótékonyan hat az akkumulátor élettartamára.</string>
   <string name="time_before_logging_dialog_title">Idő másodpercben</string>
@@ -133,18 +117,12 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="retry_time_title">Újrapróbálási idő a pontosság alapú szűréshez</string>
   <string name="retry_time_dialog_title">Idő másodpercben</string>
   <string name="retry_time_hint">Adja meg másodpercben (max 9999)</string>
-  <string name="distance_before_logging_title">Naplózás előtt megtett távolság</string>
-  <string name="distance_before_logging_summary">Mekkora távolság megtétele után naplózza a következő pontot. Az összes pont naplózásához használja a 0 értéket.</string>
-  <string name="timeout_time_title">Időtúllépés</string>
-  <string name="timeout_time_dialog_title">Idő másodpercben</string>
-  <string name="timeout_time_hint">Adja meg a másodperceket (max 9999)</string>
   <string name="display_imperial_title">Angolszász mértékegységek használata</string>
   <string name="display_imperial_summary">Mérföld, láb és öl használata a hipermodern metrikus cuccok helyett. (A beállításokat továbbra is metrikusan kell megadni)</string>
   <string name="enabledisablegps_title">GPS engedélyezése/tiltása</string>
   <string name="enabledisablegps_summary">A telefon beállítások engedélyezése vagy tiltása</string>
   <string name="startonbootup_title">Boot-nál indul</string>
   <string name="startonbootup_summary">A GPS logger a telefon bekapcsolásakor induljon</string>
-  <string name="autoemail_title">Automatikus E-mail beállítása</string>
   <string name="autoemail_summary">Automatikusan e-mail küldés az ön által kiválasztott címre</string>
   <string name="please_wait">Kérem várjon.</string>
   <string name="autoemail_autosend">E-mailek engedélyezése</string>
@@ -204,7 +182,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="emailprovider_yahoo">Yahoo! Mail</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
   <string name="emailprovider_manual">Kézikönyv</string>
-  <string name="btn_single_point">Egypontos bejelentkezés</string>
   <string name="dropbox_setup_title">Dropbox</string>
   <string name="dropbox_setup_summary">Lehetséges a Dropbox fájlfeltöltés</string>
   <string name="dropbox_authorize_description">Dropbox funkciók használatához szüksége lesz hitelesítésre, hogy a GPSLogger fájlokat fel lehessen tölteni     </string>
@@ -216,15 +193,8 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="menu_upload">Feltöltés</string>
   <string name="autoemail_from">Címről</string>
   <string name="autoemail_from_summary">Egyes szolgáltatók megkövetelik az e-mail címet. Csak abban az esetben kell megadni.     </string>
-  <string name="gdocs_upload">Google Docs</string>
-  <string name="gdocs_settings_screenname">Google Docs beállítások feltöltése</string>
-  <string name="gdocs_startauthorization">Engedélyezze a Google Docs-t</string>
-  <string name="gdocs_authorize_summary">A Google Docs-nál , engedélyezze a GPSLogger-t</string>
   <string name="gdocs_clearauthorization">Meghatalmazás tisztázása</string>
   <string name="gdocs_clearauthorization_summary">Ideiglenesen törli a helyi GDocs beállításokat. Véglegesen a Google fiókjának beállításainál törölheti a hozzáférést</string>
-  <string name="gdocs_setup_title">Google Docs</string>
-  <string name="gdocs_setup_summary">Engedélyezze a Google Docs feltöltéseket</string>
-  <string name="gdocs_test_summary">Feltölt egy teszt fájt a Google Docs-ra</string>
   <string name="gdocs_test_title">Próba feltöltés</string>
   <string name="gdocs_testupload_error">Nem lehet feltölteni a próba fájlt</string>
   <string name="gdocs_testupload_success">Kész a feltöltés. Kérjük, ellenőrizze a Google dokumentumokban az új fájlt.</string>
@@ -247,7 +217,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="shortcut_pickaction">Válasszon műveletet</string>
   <string name="log_opengts_title">OpenGTS Server logolás</string>
   <string name="log_opengts_summary">GPRMC adat küldése OpenGTS szerverhez.</string>
-  <string name="opengts_setup_title">OpenGTS beállítás</string>
   <string name="opengts_setup_summary">GPS utvonal küldése a OpenGTS szervernek.</string>
   <string name="opengts_enabled">OpenGTS engedélyezése</string>
   <string name="opengts_enabled_summary">OpenGTS szerver engedélyezése.</string>
@@ -287,7 +256,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="autoftp_invalid_summary">Néhány beállításod érvénytelen. Kérlek ellenőrizd, hogy minden szükséges mezőt kitöltöttél.</string>
   <string name="autoftp_enabled">FTP engedélyezve</string>
   <string name="ftp_upload">FTP feltöltés</string>
-  <string name="autoftp_setup_title">FTP beállítások</string>
   <string name="autoftp_setup_summary">Fáj feltöltése FTP(S) szerverre. Mj.: Ez nem azonos az SFTP-vel.</string>
   <string name="faq_screen_title">Gyakran ismételt kérdések</string>
   <string name="menu_faq">Súgó és GYIK</string>
@@ -295,8 +263,4 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="gpsf_missing_description">Ehhez a szolgáltatáshoz a Google Play Services Framework-re lesz szükséged.</string>
   <string name="log_customurl_title">Mentés URL-re</string>
   <string name="log_customurl_urlparameters">URL-paraméterek</string>
-  <string name="filedialog_cantreadfolder">A mappa nem olvasható</string>
-  <string name="filedialog_new">Új</string>
-  <string name="filedialog_name">Mappa neve:</string>
-  <string name="filedialog_create">Mentés</string>
 </resources>

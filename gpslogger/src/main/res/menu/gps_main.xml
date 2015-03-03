@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+    <item android:id="@+id/mnuAnnotate" android:title="@string/menu_annotate" android:icon="@drawable/annotate2" app:showAsAction="always" />
+
+    <item android:id="@+id/mnuOnePoint" android:title="@string/menu_onepoint" android:icon="@drawable/singlepoint" app:showAsAction="always" />
 
 
-    <item android:id="@+id/mnuAnnotate" android:title="@string/menu_annotate" android:icon="@drawable/annotate2" android:showAsAction="always" />
-
-    <item android:id="@+id/mnuOnePoint" android:title="@string/menu_onepoint" android:icon="@drawable/singlepoint" android:showAsAction="always" />
-
-
-    <item android:id="@+id/mnuUpload" android:title="@string/menu_upload" android:icon="@drawable/upload" android:showAsAction="always">
+    <item android:id="@+id/mnuUpload" android:title="@string/menu_upload" android:icon="@drawable/upload" app:showAsAction="always">
         <menu>
             <item android:id="@+id/mnuAutoSendNow" android:title="@string/menu_email_now" />
             <item android:id="@+id/mnuDropBox" android:title="@string/dropbox_upload" />
@@ -23,11 +21,6 @@
     </item>
 
 
-    <item android:id="@+id/mnuShare" android:title="@string/menu_share" android:icon="@drawable/share" android:showAsAction="always"  />
-
-
-
-
-
+    <item android:id="@+id/mnuShare" android:title="@string/menu_share" android:icon="@drawable/share" app:showAsAction="always"  />
 
 </menu>

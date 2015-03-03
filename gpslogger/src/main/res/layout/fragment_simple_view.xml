@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:custom="http://schemas.android.com/apk/res-auto"
             android:paddingLeft="2dp"
             android:paddingRight="2dp"
             android:paddingTop="@dimen/activity_vertical_margin"
@@ -29,61 +30,53 @@
                     <EditText
                         android:layout_alignParentRight="true"
                         android:layout_width="0dp"
-                        android:layout_weight="55"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:hint="@string/txt_latitude"
                         android:id="@+id/simple_lat_text"
                         android:editable="false"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
+                        android:textSize="@dimen/simpleview_latlong_textsize"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="italic"
+                        android:background="@null"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         />
-
-
-                    <EditText
-                        android:layout_toRightOf="@id/simple_lat_text"
-                        android:layout_width="0dp"
-                        android:layout_weight="55"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/simple_lon_text"
-                        android:hint="@string/txt_longitude"
-                        android:selectAllOnFocus="true"
-                        android:textIsSelectable="true"
-                        android:editable="false"/>
 
 
                 </LinearLayout>
             </TableRow>
 
             <TableRow>
-
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content">
-                    <!-- TODO: Only one of the following views should be displayed -->
-                    <ImageView
-                        android:layout_height="100dp"
-                        android:layout_width="100dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:background="?android:selectableItemBackground"
-                        android:id="@+id/simple_play"
-                        android:src="@drawable/play"
-                        android:contentDescription="@string/btn_start_logging"
-                        />
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:layout_height="100dp"
-                        android:layout_width="100dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:background="?android:selectableItemBackground"
-                        android:id="@+id/simple_stop"
-                        android:src="@drawable/stop"
-                        android:contentDescription="@string/btn_stop_logging"
-                        />
+                <com.dd.processbutton.iml.ActionProcessButton
+                    android:id="@+id/btnActionProcess"
+                    android:layout_width="wrap_content"
+                    android:width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="22dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/btn_start_logging"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    custom:pb_colorComplete="@color/green_complete"
+                    custom:pb_colorNormal="@color/accentColorComplementary"
+                    custom:pb_colorPressed="@color/blue_pressed"
+                    custom:pb_colorProgress="@color/purple_progress"
+                    custom:pb_textComplete="Success"
+                    custom:pb_textProgress="Loading"
+                    custom:pb_textError="Error"
+                    custom:pb_colorError="@color/red_error" />
                 </LinearLayout>
             </TableRow>
+
+
 
             <TableRow
                 android:layout_gravity="center"
@@ -120,26 +113,21 @@
                         android:layout_height="22dp"
                         android:layout_column="1"
                         android:layout_row="0"
-                        android:text="-"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
                         />
 
 
-                    <TextView
-                        android:id="@+id/simpleview_txtAccuracyIcon"
-                        android:layout_gravity="center"
-                        android:text="±"
+                    <ImageView
+                        android:id="@+id/simpleview_imgAccuracy"
+                        android:layout_gravity="center|top"
+                        android:layout_width="@dimen/simpleview_grid_iconwidth"
+                        android:layout_height="@dimen/simlpeview_grid_iconheight"
+                        android:src="@drawable/accuracy"
                         android:layout_row="0"
                         android:layout_column="2"
-                        android:paddingLeft="5dp"
-                        android:layout_width="@dimen/simpleview_grid_iconwidth"
-                        android:layout_height="wrap_content"
                         android:contentDescription="@string/txt_accuracy"
-                        android:textSize="@dimen/simpleview_grid_iconwidth"
-                        android:textAlignment="center"
                         />
-
 
 
                     <TextView
@@ -150,7 +138,6 @@
                         android:layout_column="3"
                         android:layout_width="@dimen/simpleview_grid_labelwidth"
                         android:layout_height="wrap_content"
-                        android:text="-"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
                         />
@@ -174,7 +161,6 @@
                         android:layout_height="wrap_content"
                         android:layout_column="1"
                         android:layout_row="1"
-                        android:text="-"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
                         />
@@ -197,7 +183,6 @@
                         android:layout_height="wrap_content"
                         android:layout_column="1"
                         android:layout_row="2"
-                        android:text="-"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
                         />
@@ -208,7 +193,7 @@
                         android:layout_gravity="center|top"
                         android:layout_width="@dimen/simpleview_grid_iconwidth"
                         android:layout_height="@dimen/simlpeview_grid_iconheight"
-                        android:src="@drawable/uparrow"
+                        android:src="@drawable/direction"
                         android:layout_column="2"
                         android:layout_row="1"
                         android:contentDescription="@string/txt_direction"
@@ -221,7 +206,6 @@
                         android:layout_height="wrap_content"
                         android:layout_column="3"
                         android:layout_row="1"
-                        android:text="-"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
                         />
@@ -244,7 +228,6 @@
                         android:layout_height="wrap_content"
                         android:layout_column="3"
                         android:layout_row="2"
-                        android:text="-"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
                         />
@@ -268,7 +251,6 @@
                         android:layout_height="wrap_content"
                         android:layout_column="1"
                         android:layout_row="3"
-                        android:text="-"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
                         />
@@ -291,7 +273,6 @@
                         android:layout_height="wrap_content"
                         android:layout_column="3"
                         android:layout_row="3"
-                        android:text="-"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
                         />
@@ -302,6 +283,7 @@
                         android:layout_column="0"
                         android:layout_columnSpan="4"
                         android:layout_gravity="center"
+                        android:gravity="center"
                         android:visibility="visible"
                         android:textSize="11sp"
                         android:layout_width="fill_parent"

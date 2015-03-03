@@ -4,15 +4,11 @@
   <string name="title_drawer_generalsettings">ตั้งค่าทั่วไป</string>
   <string name="title_drawer_loggingsettings">ตั้งค่าการ Log</string>
   <string name="title_drawer_uploadsettings">ตั้งค่าการอัพโหลด</string>
-  <string name="action_settings">ตั้งค่า</string>
   <string name="app_name">GPSLogger</string>
   <string name="settings_screen_name">การตั้งค่า GPSLogger</string>
   <string name="ok">โอเค</string>
   <string name="cancel">ยกเลิก</string>
   <string name="could_not_write_to_file">ไม่สามารถเขียนไฟล์ได้</string>
-  <string name="description_added">จัดเก็บคำอธิบายลงไฟล์แล้ว</string>
-  <string name="not_yet">ยัง</string>
-  <string name="cant_add_description_until_next_point">คุณไม่สามารถเพิ่มคำอธิบายได้จนกว่าจุดต่อไปจะถูกบันทึกลงไฟล์</string>
   <string name="add_description">เพิ่มคำอธิบาย</string>
   <string name="letters_numbers">ใช้เฉพาะตัวอักษรและตัวเลข</string>
   <string name="menu_settings">ตั้งค่า</string>
@@ -37,7 +33,6 @@
   <string name="summary_dist">ระยะทาง:</string>
   <string name="summary_dist_regardless">สูงสุด</string>
   <string name="summary_current_filename">ไฟล์:</string>
-  <string name="summary_current_filename_format">%s (ในโฟลเดอร์ GPSLogger)</string>
   <string name="sharing_location_only">ตำแหน่งเท่านั้น</string>
   <string name="sharing_pick_file">เลือกไฟล์ที่จะแชร์</string>
   <string name="sharing_mylocation">ตำแหน่งของฉัน</string>
@@ -51,7 +46,6 @@
   <string name="error_connection">การเชื่อมต่อผิดพลาด กรุณาตรวจสอบการตั้งค่าโทรศัพท์ของคุณ</string>
   <string name="gpsprovider_unavailable">ไม่มีข้อมูลจาก GPS กรุณาตรวจสอบการตั้งค่าและเปิดใช้งานบริการระบุตำแหน่ง</string>
   <string name="started">เริ่มแล้ว</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(ใช้ %s)</string>
   <string name="providername_gps">ดาวเทียม GPS</string>
   <string name="providername_celltower">เสาสัญญานมือถือ</string>
   <string name="not_applicable">n/a</string>
@@ -91,16 +85,10 @@
   <string name="time_twoandhalfhours">2 ชั่วโมงครึ่ง</string>
   <string name="time_hms_format" formatted="false">%s ชม. %s น. %s วิ.</string>
   <string name="accuracy_within" formatted="false">ภายใน %s %s</string>
-  <string name="error_displaying">ผิดพลาดในการแสดงข้อมูลตำแหน่ง: %s</string>
   <string name="degree_symbol">°</string>
-  <string name="settings_distance_in_feet">ระยะทางเป็นฟุต</string>
-  <string name="settings_enter_feet">ใส่ค่าเป็นฟุต (สูงสุด 9999)</string>
   <string name="settings_distance_in_meters">ระยะทางเป็นเมตร</string>
   <string name="settings_accuracy_in_meters">ความแม่นยำเป็นเมตร</string>
-  <string name="settings_accuracy_in_feet">ความแม่นยำเป็นฟุต</string>
   <string name="settings_enter_meters">ใส่ค่าเป็นเมตร (สูงสุด 9999)</string>
-  <string name="settings_converting_title">แปลงค่า</string>
-  <string name="settings_converting_description">แปลงหน่วยของระยะทางขั้นต่ำ ใส่ค่าเกิน 9999 จะถูกรีเซ็ตเป็น 9999 เสมอ หน้าจอการตั้งค่าจะถูกรีโหลด</string>
   <string name="pref_logging_title">รายละเอียดการบันทึก</string>
   <string name="log_gpx_title">บันทึกลงไฟล์ GPX</string>
   <string name="log_gpx_summary">สร้างไฟล์ GPX ในโฟลเดอร์ GPSLogger บน SD card</string>
@@ -115,7 +103,6 @@
   <string name="new_file_creation_custom">กำหนดไฟล์เอง</string>
   <string name="new_file_custom_title">กำหนดชื่อไฟล์</string>
   <string name="pref_performance_title">ประสิทธิภาพ</string>
-  <string name="prefer_celltower_title">เน้นเสาสัญญานมือถือ</string>
   <string name="time_before_logging_title">เวลาหน่วงระหว่างบันทึก</string>
   <string name="time_before_logging_dialog_title">เวลาเป็นวินาที</string>
   <string name="time_before_logging_hint">ใส่ค่าเป็นวินาที (สูงสุด 9999)</string>
@@ -123,16 +110,10 @@
   <string name="keep_fix_title">เปิดจีพีเอสค้างไว้ระหว่างล็อคตำแหน่ง</string>
   <string name="retry_time_dialog_title">เวลาเป็นวินาที</string>
   <string name="retry_time_hint">ใส่ค่าเป็นวินาที (สูงสุด 9999)</string>
-  <string name="distance_before_logging_title">Log ตามระยะทาง</string>
-  <string name="timeout_time_title">หมดเวลา</string>
-  <string name="timeout_time_summary">นานแค่ไหนเวลาจีพีเอสคำนวณหาตำแหน่งก่อนจะยอมแพ้ ค่า 0 คือหาไปเรื่อยๆไม่กำหนดเวลา</string>
-  <string name="timeout_time_dialog_title">เวลาเป็นวินาที</string>
-  <string name="timeout_time_hint">ใส่ค่าเป็นวินาที (สูงสุด 9999)</string>
   <string name="enabledisablegps_title">เปิด/ปิด จีพีเอส</string>
   <string name="enabledisablegps_summary">ไปที่การตั้งค่าของโทรศัพท์เพื่อเปิดหรือปิดผู้ให้บริการ</string>
   <string name="startonbootup_title">เริ่มเมื่อบูตเครื่อง</string>
   <string name="startonbootup_summary">เปิดแอพพร้อมเริ่มบันทึกเมื่อเปิดโทรศัพท์</string>
-  <string name="autoemail_title">ตั้งค่าการส่งอีเมล์อัตโนมัติ</string>
   <string name="please_wait">กรุณารอสักครู่</string>
   <string name="autoemail_autosend">เปิดใช้งานอีเมล์</string>
   <string name="autoemail_autosend_summary">เปิดส่งไฟล์บันทึกไปยังอีเมล์ที่ท่านเลือก
@@ -178,18 +159,12 @@
   <string name="emailprovider_google">Google Mail</string>
   <string name="emailprovider_yahoo">Yahoo! Mail</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
-  <string name="btn_single_point">บันทึกจุดเดียว</string>
   <string name="dropbox_setup_title">Dropbox</string>
   <string name="dropbox_setup_summary">อนุมัติให้อัพโหลดไฟล์กับ Dropbox</string>
   <string name="dropbox_authorize">อนุมัติ</string>
   <string name="dropbox_unauthorize">ลบการอนุมัติ</string>
   <string name="dropbox_upload">Dropbox</string>
   <string name="menu_upload">อัพโหลด</string>
-  <string name="gdocs_upload">Google Docs</string>
-  <string name="gdocs_settings_screenname">การตั้งค่าการอัพโหลดไป Google Docs</string>
-  <string name="gdocs_startauthorization">อนุมัติกับ Google Docs</string>
-  <string name="gdocs_setup_title">Google Docs</string>
-  <string name="gdocs_test_summary">อัพโหลดไฟล์ทดสอบไปที่ Google Docs</string>
   <string name="gdocs_test_title">ทดสอบอัพโหลด</string>
   <string name="gdocs_testupload_error">ไม่สามารถอัพโหลดไฟล์ทดสอบได้</string>
   <string name="gdocs_testupload_success">อัพโหลดแล้ว กรุณาตรวจสอบ Google Docs สำหรับไฟล์ใหม่</string>
@@ -206,7 +181,6 @@
   <string name="shortcut_pickaction">เลือกดำเนินการ</string>
   <string name="log_opengts_title">บันทึกไปเซิร์ฟเวอร์ OpenGTS</string>
   <string name="log_opengts_summary">ส่งข้อมูล GPRMC ออนไลน์ไปยังเซิร์ฟเวอร์ OpenGTS</string>
-  <string name="opengts_setup_title">การตั้งค่า OpenGTS</string>
   <string name="opengts_enabled">เปิดใช้งาน OpenGTS</string>
   <string name="opengts_enabled_summary">เปิดใช้งานเซิร์ฟเวอร์ OpenGTS นี้</string>
   <string name="autoopengts_server_category">การตั้งค่า OpenGTS</string>
@@ -237,15 +211,11 @@
   <string name="autoftp_invalid_settings">การตั้งค่าไม่ถูกต้อง</string>
   <string name="autoftp_enabled">FTP เปิดแล้ว</string>
   <string name="ftp_upload">อัพโหลดผ่าน FTP</string>
-  <string name="autoftp_setup_title">ตั้งค่า FTP</string>
   <string name="autoftp_setup_summary">อัพโหลดไฟล์ของคุณขึ้น FTP(S) เซิฟเว่อร์  (ไม่รองรับ SFTP)</string>
   <string name="faq_screen_title">คำถามที่ถามบ่อย</string>
   <string name="menu_faq">วิธีใช้และ FAQ</string>
   <string name="gpsf_missing">Missing Service</string>
   <string name="gpsf_missing_description">คุณต้องการ Google Play Services Framework เพื่อใช้ความสามารถนี้</string>
-  <string name="filedialog_new">ใหม่</string>
-  <string name="filedialog_name">ชื่อโฟลเดอร์:</string>
-  <string name="filedialog_create">บันทึก</string>
   <string name="autoftp_directory">ไดเรกทอรี</string>
   <string name="txt_travel_duration">ระยะเวลา:</string>
   <string name="view_simple">แสดงผลอย่างง่าย</string>
@@ -257,7 +227,6 @@
   <string name="points">จุด</string>
   <string name="txt_number_of_points">จำนวนจุด</string>
   <string name="save">บันทึก</string>
-  <string name="values_saved">ค่าถูกบันทึกแล้ว</string>
   <string name="pref_filedetails_title">รายละเอียดแฟ้มและโฟลเดอร์</string>
   <string name="absolute_timeout_title">เวลาหมดอายุ</string>
   <string name="autoopengts_accountname">ชื่อบัญชี</string>

@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   android:key="autoemail_preferences">
 
-    <SwitchPreference android:key="autoemail_enabled"
+    <com.mendhak.gpslogger.views.component.CustomSwitchPreference android:key="autoemail_enabled"
                         android:title="@string/autoemail_autosend"
                         android:summary="@string/autoemail_autosend_summary"/>
 
@@ -34,7 +34,7 @@
         <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_port" android:title="@string/autoemail_port"
                             android:summary="@string/autoemail_port_summary"
                             android:dialogTitle="@string/autoemail_port"/>
-        <SwitchPreference android:key="smtp_ssl" android:title="@string/autoemail_ssl"
+        <com.mendhak.gpslogger.views.component.CustomSwitchPreference android:key="smtp_ssl" android:title="@string/autoemail_ssl"
                             android:summary="@string/autoemail_ssl_summary"/>
         <Preference android:title="@string/autoemail_smtp_testemail"
                     android:summary="@string/autoemail_test" android:key="smtp_testemail"/>

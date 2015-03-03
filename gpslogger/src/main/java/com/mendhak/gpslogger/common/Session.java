@@ -50,6 +50,7 @@ public class Session extends Application {
     private static boolean isSinglePointMode = false;
     private static int retryTimeout = 0;
     private static boolean waitingForLocation;
+    private static boolean annotationMarked;
 
     public static boolean isSinglePointMode() {
         return isSinglePointMode;
@@ -340,5 +341,13 @@ public class Session extends Application {
 
     public static boolean isWaitingForLocation() {
         return waitingForLocation;
+    }
+
+    public static boolean isAnnotationMarked() {
+        return annotationMarked;
+    }
+
+    public static void setAnnotationMarked(boolean annotationMarked) {
+        Session.annotationMarked = annotationMarked;
     }
 }

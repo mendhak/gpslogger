@@ -5,16 +5,11 @@
   <string name="title_drawer_generalsettings">Definições Gerais</string>
   <string name="title_drawer_loggingsettings">Definições de Logging</string>
   <string name="title_drawer_uploadsettings">Definições de Upload</string>
-  <string name="action_example">Acção de exemplo</string>
-  <string name="action_settings">Definições</string>
   <string name="app_name">GPSLogger</string>
   <string name="settings_screen_name">Configurações do GPSLogger</string>
   <string name="ok">Ok</string>
   <string name="cancel">Cancelar</string>
   <string name="could_not_write_to_file">Falhou a escrever para o ficheiro</string>
-  <string name="description_added">Descrição adicionada ao ficheiro</string>
-  <string name="not_yet">Ainda Não</string>
-  <string name="cant_add_description_until_next_point">Não é possível adicionar uma descrição enquanto o próximo ponto não for guardado num ficheiro</string>
   <string name="add_description">Adicione a descrição</string>
   <string name="letters_numbers">use apenas letras e números</string>
   <string name="menu_settings">Configurações</string>
@@ -39,7 +34,6 @@
   <string name="summary_dist">Distância:</string>
   <string name="summary_dist_regardless">máximo</string>
   <string name="summary_current_filename">Ficheiro:</string>
-  <string name="summary_current_filename_format">%s (na pasta do GPSLogger)</string>
   <string name="sharing_location_only">Apenas localização</string>
   <string name="sharing_pick_file">Escolha o ficheiro para partilhar</string>
   <string name="sharing_mylocation">Minha Localização</string>
@@ -86,10 +80,8 @@
   <string name="time_twoandhalfhours">duas horas e meia</string>
   <string name="time_hms_format" formatted="false">% sh % sm % ss</string>
   <string name="accuracy_within" formatted="false">dentro de %s %s</string>
-  <string name="settings_distance_in_feet">Distância em pés</string>
   <string name="settings_distance_in_meters">Distância em metros</string>
   <string name="settings_accuracy_in_meters">Precisão em metros</string>
-  <string name="settings_accuracy_in_feet">Precisão em pés</string>
   <string name="settings_enter_meters">Digite os metros(máximo 9999)</string>
   <string name="log_gpx_title">Log para GPX</string>
   <string name="log_kml_title">Logar para KML</string>
@@ -108,18 +100,11 @@
   <string name="keep_fix_title">Mantenha GPS activo entre correções</string>
   <string name="retry_time_dialog_title">Tempo em segundos</string>
   <string name="retry_time_hint">Digite segundos (máximo de 9999)</string>
-  <string name="distance_before_logging_title">Distancia antes de logar</string>
-  <string name="distance_before_logging_summary">Qual a distancia a percorrer antes de logar o próximo ponto. Use 0 para logar todos os pontos</string>
-  <string name="timeout_time_title">Tempo limite</string>
-  <string name="timeout_time_summary">Quanto tempo o GPS fica na procura de uma solução antes de desistir. Use 0 para nenhum tempo limite</string>
-  <string name="timeout_time_dialog_title">Tempo em segundos</string>
-  <string name="timeout_time_hint">Digite segundos (máximo de 9999)</string>
   <string name="display_imperial_title">Mostrar métricas imperiais</string>
   <string name="enabledisablegps_title">Ativar/desativar o GPS</string>
   <string name="enabledisablegps_summary">Vá para as configurações do telefone para ativar ou desativar os provedores.</string>
   <string name="startonbootup_title">Começar na inicialização</string>
   <string name="startonbootup_summary">Lançar o app e iniciar log quando inicia o telefone</string>
-  <string name="autoemail_title">Configuração automática de Email</string>
   <string name="autoemail_summary">E-mails automaticamente o arquivo de log para um endereço de sua escolha</string>
   <string name="please_wait">Aguarde.</string>
   <string name="autoemail_autosend">Permitir e-mails</string>
@@ -149,15 +134,8 @@
   <string name="stopped">Parado</string>
   <string name="autoemail_from">De endereço</string>
   <string name="autoemail_from_summary">Alguns provedores de e-mail exigem um endereço. Use isso somente se você precisar dele.     </string>
-  <string name="gdocs_upload">Google Docs</string>
-  <string name="gdocs_settings_screenname">Google Docs-Upload de configurações</string>
-  <string name="gdocs_startauthorization">Autorizar o Google Docs</string>
-  <string name="gdocs_authorize_summary">Leva você para o Google Docs onde você precisa autorizar GPSLogger</string>
   <string name="gdocs_clearauthorization">Eliminar autorização</string>
   <string name="gdocs_clearauthorization_summary">Esquece as configurações locais do GoogleDocs. Para revogar o acesso permanentemente, vá para configurações da conta do Google</string>
-  <string name="gdocs_setup_title">Google Docs</string>
-  <string name="gdocs_setup_summary">Autorizar com o Google Docs para permitir uploads</string>
-  <string name="gdocs_test_summary">Fazer upload de um arquivo de teste para o Google Docs</string>
   <string name="gdocs_test_title">Upload de teste</string>
   <string name="gdocs_testupload_error">Não pode fazer upload de um arquivo de teste</string>
   <string name="gdocs_testupload_success">Carregado. Por favor, verifique seus documentos do Google para um novo arquivo.</string>

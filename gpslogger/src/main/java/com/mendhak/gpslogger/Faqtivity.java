@@ -21,12 +21,14 @@ package com.mendhak.gpslogger;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import org.slf4j.LoggerFactory;
 
-public class Faqtivity extends Activity {
+public class Faqtivity extends ActionBarActivity {
 
     WebView browser;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Faqtivity.class.getSimpleName());
@@ -40,10 +42,11 @@ public class Faqtivity extends Activity {
         tracer.debug("Faqtivity.onCreate");
 
         super.onCreate(savedInstanceState);
-
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
         setContentView(R.layout.activity_faq);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         browser = (WebView) findViewById(R.id.faqwebview);
         WebSettings settings = browser.getSettings();
@@ -55,20 +58,6 @@ public class Faqtivity extends Activity {
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
         browser.loadUrl("http://code.mendhak.com/gpslogger/index.html");
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                Intent intent = new Intent(this, GpsMainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 

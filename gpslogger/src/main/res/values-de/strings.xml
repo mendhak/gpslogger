@@ -5,16 +5,11 @@
   <string name="title_drawer_generalsettings">Allgemeine Einstellungen</string>
   <string name="title_drawer_loggingsettings">Protokollierungseinstellungen</string>
   <string name="title_drawer_uploadsettings">Upload-Einstellungen</string>
-  <string name="action_example">Beispiel-Aktion</string>
-  <string name="action_settings">Einstellungen</string>
   <string name="app_name">GPSLogger</string>
   <string name="settings_screen_name">GPSLogger Einstellungen</string>
   <string name="ok">ok</string>
   <string name="cancel">Abbrechen</string>
   <string name="could_not_write_to_file">Konnte nicht in die Datei schreiben</string>
-  <string name="description_added">Beschreibung in Datei hinzugefügt</string>
-  <string name="not_yet">Später</string>
-  <string name="cant_add_description_until_next_point">Du kannst keine Beschreibung hinzufügen bevor der nächste Punkt in eine Datei geschrieben wurde.</string>
   <string name="add_description">Füge eine Beschreibung hinzu</string>
   <string name="letters_numbers">Verwende nur Buchstaben und Ziffern</string>
   <string name="menu_settings">Einstellungen</string>
@@ -39,7 +34,6 @@
   <string name="summary_dist">Entfernung:</string>
   <string name="summary_dist_regardless">Maximum</string>
   <string name="summary_current_filename">Datei:</string>
-  <string name="summary_current_filename_format">%s (in deinem GPSLogger Verzeichnis)</string>
   <string name="sharing_location_only">Nur Orte</string>
   <string name="sharing_pick_file">Wähle eine Datei zum teilen aus</string>
   <string name="sharing_mylocation">Mein Ort</string>
@@ -53,7 +47,6 @@
   <string name="error_connection">Verbindungsfehler: Prüfe bitte die Telefoneinstellungen.</string>
   <string name="gpsprovider_unavailable">Kein GPS-Anbieter verfügbar. Bitte überprüfe die Ortseinstellungen und aktiviere einen Anbieter für die Orte.   </string>
   <string name="started">Gestartet</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(Verwende %s)</string>
   <string name="providername_gps">GPS Satelliten</string>
   <string name="providername_celltower">Funkzellen</string>
   <string name="not_applicable">nicht verfügbar</string>
@@ -93,15 +86,10 @@
   <string name="time_twoandhalfhours">2 ½ Stunden</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">innerhalb %s %s</string>
-  <string name="error_displaying">Fehler beim Anzeigen der Ortsinformation: %s</string>
   <string name="degree_symbol">°</string>
-  <string name="settings_distance_in_feet">Entfernung in Fuß</string>
-  <string name="settings_enter_feet">Eingabe in Fuß (max. 9999)</string>
   <string name="settings_distance_in_meters">Entfernung in Metern</string>
   <string name="settings_accuracy_in_meters">Genauigkeit in Metern</string>
-  <string name="settings_accuracy_in_feet">Genauigkeit in Fuß</string>
   <string name="settings_enter_meters">Eingabe in Metern (max. 9999)</string>
-  <string name="settings_converting_description">Rechne Mindestentfernung Einheiten um. Werte über 9999 werden auf 9999 gesetzt. Der Einstellungsschirm wird nun neu geladen.</string>
   <string name="pref_logging_title">Logging Details</string>
   <string name="log_gpx_title">Logge zu GPX</string>
   <string name="log_gpx_summary">Erstellt eine GPX-Datei im GPSLogger Verzeichnis auf der SD-Karte.</string>
@@ -116,8 +104,6 @@
   <string name="new_file_custom_title">Benutzerdefinierter Dateinamen</string>
   <string name="new_file_custom_summary">Sie können Ihren eigenen Dateinamen verwenden. Fügen Sie optional ein paar dynamische Parameter wie Seriennummer, Jahr, Stunde, Minute, etc. ein. Sehr dynamische Dateinamen funktionieren möglicherweise nicht gut mit automatisch sendenden Funktionen, da diese nur die aktuellste Datei senden.</string>
   <string name="pref_performance_title">Leistung</string>
-  <string name="prefer_celltower_title">Bevorzugte Funkzelle</string>
-  <string name="prefer_celltower_summary">Mobilfunknetz trotz aktiviertem GPS benutzen. Ungenauer, spart jedoch Akkuleistung.</string>
   <string name="time_before_logging_title">Zeit vor dem Loggen</string>
   <string name="time_before_logging_summary">Verwende 0 als Maximalfrequenz für höchste Präzision. Eine langsamere Aufzeichnung der Punkte schont den Akku.</string>
   <string name="time_before_logging_dialog_title">Zeit in Sekunden</string>
@@ -126,18 +112,10 @@
   <string name="keep_fix_title">GPS zwischen Fixes aktiviert lassen</string>
   <string name="retry_time_dialog_title">Zeit in Sekunden</string>
   <string name="retry_time_hint">Eingabe in Sekunden (max. 9999)</string>
-  <string name="distance_before_logging_title">Entfernung vor dem Loggen</string>
-  <string name="distance_before_logging_summary">Entfernung, bis der nächste Punkt geloggt wird. Verwende 0, um alle Punkte zu loggen.
-    </string>
-  <string name="timeout_time_title">Zeitüberschreitung</string>
-  <string name="timeout_time_summary">Wie lange soll das GPS eingeschaltet bleiben, bis ein Standort gefunden wird? Setze 0 für keine zeitliche Begrenzung.</string>
-  <string name="timeout_time_dialog_title">Zeit in Sekunden</string>
-  <string name="timeout_time_hint">Eingabe in Sekunden (max. 9999)</string>
   <string name="enabledisablegps_title">Aktvieren / Deaktivieren des GPS</string>
   <string name="enabledisablegps_summary">Gehe zu den Telefon-Einstellungen zum Aktivieren oder Deaktivieren der Anbieter.</string>
   <string name="startonbootup_title">Beim Booten starten</string>
   <string name="startonbootup_summary">Starten der App und des Loggens beim Einschalten des Telefons</string>
-  <string name="autoemail_title">Automatisches E-Mail Setup</string>
   <string name="autoemail_summary">Automatisch die Log-Datei an eine frei ausgewählte Email-Adresse senden</string>
   <string name="please_wait">Bitte warten.</string>
   <string name="autoemail_autosend">E-Mails aktivieren</string>
@@ -197,7 +175,6 @@
   <string name="emailprovider_yahoo">Yahoo! Mail</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
   <string name="emailprovider_manual">Handbuch</string>
-  <string name="btn_single_point">Zeichne einen einzelnen Wegpunkt auf</string>
   <string name="dropbox_setup_title">Dropbox</string>
   <string name="dropbox_setup_summary">Authorisiere mit Dropbox um Datei-Uploads zu erlauben</string>
   <string name="dropbox_authorize_description">Um Dropbox-Features zu nutzen, musst du GPSLogger authorisieren Dateien zu deinem Account hochzuladen.</string>
@@ -209,15 +186,8 @@
   <string name="menu_upload">Upload</string>
   <string name="autoemail_from">Absender-Adresse</string>
   <string name="autoemail_from_summary">Einige Email-Anbieter verlangen eine Absender-Adresse. Verwende das nur, wenn du das musst.</string>
-  <string name="gdocs_upload">Google Docs</string>
-  <string name="gdocs_settings_screenname">Google Docs Upload-Einstellungen</string>
-  <string name="gdocs_startauthorization">Verbinde mit Google Docs...</string>
-  <string name="gdocs_authorize_summary">Ruft Google Docs auf, um GPSLogger zu autorisieren</string>
   <string name="gdocs_clearauthorization">Verknüpfung löschen</string>
   <string name="gdocs_clearauthorization_summary">Löscht lokale Google Docs-Einstellungen. Um den Zugriff dauerhaft zu entfernen, die Google-Kontoeinstellungen anpassen!</string>
-  <string name="gdocs_setup_title">Google Docs</string>
-  <string name="gdocs_setup_summary">Autorisiere GPSLogger, Datei-Uploads in Google Docs zu erlauben</string>
-  <string name="gdocs_test_summary">Lade eine Testdatei zu Google Docs hoch</string>
   <string name="gdocs_test_title">Teste Upload</string>
   <string name="gdocs_testupload_error">Eine Testdatei konnte nicht hochgeladen werden.</string>
   <string name="gdocs_testupload_success">Hochgeladen. Bitte prüfe deine Google-Dokumente auf eine neue Datei.</string>
@@ -241,7 +211,6 @@
   <string name="shortcut_pickaction">Wähle eine Aktion</string>
   <string name="log_opengts_title">Logge zu einem OpenGTS-Server</string>
   <string name="log_opengts_summary">Sende GPRMC-Daten an einen Online-OpenGTS-Server.</string>
-  <string name="opengts_setup_title">OpenGTS-Setup</string>
   <string name="opengts_setup_summary">Sende GPS-Tracks an einen OpenGTS-Server deiner Wahl.</string>
   <string name="opengts_enabled">Aktiviere OpenGTS</string>
   <string name="opengts_enabled_summary">Aktiviere diesen OpenGTS-Server.</string>
@@ -281,28 +250,17 @@
   <string name="autoftp_invalid_summary">Einige deiner Einstellungen sind ungültig. Bitte stelle sicher, dass du alle relevanten Felder ausgefüllt hast.</string>
   <string name="autoftp_enabled">FTP aktiviert</string>
   <string name="ftp_upload">FTP-Upload</string>
-  <string name="autoftp_setup_title">FTP-Setup</string>
   <string name="autoftp_setup_summary">Lade deine Dateien auf einen FTP(S)-Server hoch. Hinweis: Das beinhaltet nicht SFTP.</string>
   <string name="faq_screen_title">Häufig gestellte Fragen</string>
   <string name="menu_faq">Hilfe und FAQ</string>
   <string name="gpsf_missing">Kein GPS-Signal</string>
   <string name="gpsf_missing_description">Für dieses Feature wird das \"Google Play Services Framework\" benötigt.</string>
-  <string name="pref_loggingto_title">Logge zu ...</string>
-  <string name="pref_loggingto_summary">Dateien und Zielorte für das Loggen deines Standorts</string>
   <string name="log_customurl_title">Logge zu einem Server</string>
   <string name="log_customurl_summary">Sende Log über HTTP auf deinen eigenen Server</string>
   <string name="log_customurl_urlparameters">URL-Parameter</string>
-  <string name="log_customUrl_urllatitude">Breitengrad: %LAT</string>
   <string name="txt_annotation">Anmerkung:</string>
   <string name="txt_time_isoformat">Zeit UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Anbieter:</string>
-  <string name="filedialog_location">Position</string>
-  <string name="filedialog_cantreadfolder">Ordner kann nicht gelesen werden</string>
-  <string name="filedialog_new">Neu</string>
-  <string name="filedialog_name">Ordnername:</string>
-  <string name="filedialog_create">Speichern</string>
-  <string name="filedialog_select">Wähle</string>
-  <string name="filedialog_no_data">Keine Daten</string>
   <string name="gpslogger_folder_title">In Ordner speichern</string>
   <string name="gpslogger_folder_summary">Wo soll das Protokoll gespeichert werden, normalerweise in /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Verzeichnis</string>
@@ -316,7 +274,6 @@
   <string name="points">Punkte</string>
   <string name="txt_number_of_points">Anzahl der Punkte</string>
   <string name="save">Speichern</string>
-  <string name="values_saved">Werte gespeichert</string>
   <string name="pref_filedetails_title">Datei und Ordner Informationen</string>
   <string name="log_nmea_title">Logge zu NMEA</string>
   <string name="autoopengts_accountname">Benutzername</string>

@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -30,53 +31,30 @@
             android:configChanges="locale"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:uiOptions="splitActionBarWhenNarrow" >
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:windowSoftInputMode="adjustNothing"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".settings.GeneralSettingsActivity"
+            android:name=".MainPreferenceActivity"
             android:label="@string/settings_screen_name"
             android:parentActivityName=".GpsMainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />
-        </activity>
-        <activity
-            android:name=".settings.LoggingSettingsActivity"
-            android:label="@string/pref_logging_title"
-            android:parentActivityName=".GpsMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
-        </activity>
-        <activity
-            android:name=".settings.UploadSettingsActivity"
-            android:label="@string/pref_logging_title"
-            android:parentActivityName=".GpsMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
-        </activity>
-        <activity
-            android:name=".senders.dropbox.DropBoxAuthorizationActivity"
-            android:label="DropBox"
-            android:launchMode="singleTask"
-            android:parentActivityName=".GpsMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
-
             <intent-filter>
-                <action android:name="com.mendhak.gpslogger.DROPBOX_SETUP" />
-
+                <action android:name="com.mendhak.gpslogger.MAIN_PREFS" />
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="authorize" android:scheme="gpslogger" />
             </intent-filter>
         </activity>
-        <activity android:name=".common.FileDialog.FileDialog" />
+
         <activity
             android:name=".Faqtivity"
             android:label="@string/faq_screen_title"
@@ -86,6 +64,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />
         </activity>
+
         <activity
             android:name="com.dropbox.client2.android.AuthActivity"
             android:configChanges="orientation|keyboard"
@@ -96,7 +75,6 @@
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />
 
             <intent-filter>
-
                 <!-- Change this to be db- followed by your app key -->
                 <data android:scheme="db-0unjsn38gpe3rwv" />
 
@@ -106,84 +84,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".senders.osm.OSMAuthorizationActivity"
-            android:label="@string/osm_preferences_title"
-            android:parentActivityName=".GpsMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
 
-            <intent-filter>
-                <action android:name="com.mendhak.gpslogger.OSM_AUTHORIZE" />
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="authorize"
-                    android:scheme="gpslogger" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".senders.ftp.AutoFtpActivity"
-            android:label="@string/autoftp_setup_title"
-            android:parentActivityName=".GpsMainActivity"
-            android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
-
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <action android:name="com.mendhak.gpslogger.AUTOFTP_SETUP" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".senders.email.AutoEmailActivity"
-            android:label="@string/autoemail_title"
-            android:parentActivityName=".GpsMainActivity"
-            android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
-
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <action android:name="com.mendhak.gpslogger.AUTOEMAIL_SETUP" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".senders.gdocs.GDocsSettingsActivity"
-            android:label="@string/gdocs_settings_screenname"
-            android:parentActivityName=".GpsMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
-
-            <intent-filter>
-                <action android:name="com.mendhak.gpslogger.GDOCS_SETUP" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".loggers.customurl.CustomUrlLoggerActivity"
-            android:label="Custom URL Logging"
-            android:parentActivityName=".GpsMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
-
-            <intent-filter>
-                <action android:name="com.mendhak.gpslogger.CUSTOMURL_SETUP" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".shortcuts.ShortcutCreate"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
@@ -207,20 +108,7 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".senders.opengts.OpenGTSActivity"
-            android:label="@string/opengts_setup_title"
-            android:parentActivityName=".GpsMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
 
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <action android:name="com.mendhak.gpslogger.OPENGTS_SETUP" />
-            </intent-filter>
-        </activity>
 
         <receiver
             android:name=".StartupReceiver"

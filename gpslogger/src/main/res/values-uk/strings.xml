@@ -6,9 +6,6 @@
   <string name="ok">Гаразд</string>
   <string name="cancel">Скасувати</string>
   <string name="could_not_write_to_file">Не вдалося записати до файлу</string>
-  <string name="description_added">Опис, доданий до файлу</string>
-  <string name="not_yet">Ще ні</string>
-  <string name="cant_add_description_until_next_point">Ви не можете додати опис доки наступна точка не буде записана у файл.</string>
   <string name="add_description">Додати Опис</string>
   <string name="letters_numbers">Використовувати лише букви і цифри</string>
   <string name="menu_settings">Параметри</string>
@@ -33,7 +30,6 @@
   <string name="summary_dist">Відстань:</string>
   <string name="summary_dist_regardless">максимум</string>
   <string name="summary_current_filename">Файл:</string>
-  <string name="summary_current_filename_format">%s (в теці GPSLogger)</string>
   <string name="sharing_location_only">Розташування лише</string>
   <string name="sharing_pick_file">Вибрати файл для обміну</string>
   <string name="sharing_mylocation">Моє місцезнаходження</string>
@@ -47,7 +43,6 @@
   <string name="error_connection">Помилка підключення. Будь ласка, перевірте настройки телефону.</string>
   <string name="gpsprovider_unavailable">Постачальник GPS недоступний. Перевірте настройки розташування і включіть виявлення розташування.     </string>
   <string name="started">Розпочав</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(За допомогою %s)</string>
   <string name="providername_gps">GPS супутники</string>
   <string name="providername_celltower">стільникові вежі</string>
   <string name="not_applicable">н/д</string>
@@ -87,15 +82,10 @@
   <string name="time_twoandhalfhours">2½ години</string>
   <string name="time_hms_format" formatted="false">%sг:%sхв:%sс</string>
   <string name="accuracy_within" formatted="false">протягом %s %s</string>
-  <string name="error_displaying">Помилка показу  місцезнаходження: %s</string>
   <string name="degree_symbol">°</string>
-  <string name="settings_distance_in_feet">Відстань у футах</string>
-  <string name="settings_enter_feet">Введіть фути(макс. 9999)</string>
   <string name="settings_distance_in_meters">Відстань у метрах</string>
   <string name="settings_accuracy_in_meters">Точність у метрах</string>
-  <string name="settings_accuracy_in_feet">Точність у футах</string>
   <string name="settings_enter_meters">Введіть метри(макс. 9999)</string>
-  <string name="settings_converting_description">Перетворюю одиниці мінімальної відстані. Значенні більші 9999 будуть зменшені до 9999. Екран налаштувань буде зараз перезавантажено.</string>
   <string name="pref_logging_title">Налаштування журналу</string>
   <string name="log_gpx_title">Записувати у GPX</string>
   <string name="log_gpx_summary">Створюється файл GPX у теці GPSLogger на карті SD.</string>
@@ -108,7 +98,6 @@
   <string name="new_file_creation_onceaday">Один раз на день</string>
   <string name="new_file_creation_everystart">Під час кожного запуску</string>
   <string name="pref_performance_title">Продуктивність</string>
-  <string name="prefer_celltower_title">Перевага вежам моб. зв\'язку</string>
   <string name="time_before_logging_title">Час до початку запису</string>
   <string name="time_before_logging_summary">Для максимальної частоти запису використовуйте 0, але повільніший режим є кращім для збереження заряду батареї. </string>
   <string name="time_before_logging_dialog_title">Час в секундах</string>
@@ -117,17 +106,10 @@
   <string name="keep_fix_title">Не вимикати GPS між замірами</string>
   <string name="retry_time_dialog_title">Час в секундах</string>
   <string name="retry_time_hint">Введіть секунди (макс. 9999)</string>
-  <string name="distance_before_logging_title">Відстань до початку запису</string>
-  <string name="distance_before_logging_summary">Як далеко потрібно зрушити до запису наступної точки. Використовуйте 0 для запису всіх точок. </string>
-  <string name="timeout_time_title">Таймаут</string>
-  <string name="timeout_time_summary">Скільки часу GPS очікує на замір перед тим як припинити спроби. Використовуйте 0, якщо таймауту немає</string>
-  <string name="timeout_time_dialog_title">Час в секундах</string>
-  <string name="timeout_time_hint">Введіть секунди (макс. 9999)</string>
   <string name="enabledisablegps_title">Увімкнути/вимкнути GPS</string>
   <string name="enabledisablegps_summary">Перейти у налаштування телефону для увімкнення чи вимкнення GPS.</string>
   <string name="startonbootup_title">Запускати при завантаженні</string>
   <string name="startonbootup_summary">Запускати програму та запис журналу при увімкненні телефону</string>
-  <string name="autoemail_title">Налаштування пошти</string>
   <string name="autoemail_summary">Автоматично надсилати журнал листом на вказану вами адресу</string>
   <string name="please_wait">Будь ласка, зачекайте.</string>
   <string name="autoemail_autosend">Увімкнути електронну пошту</string>
@@ -187,7 +169,6 @@
   <string name="emailprovider_yahoo">Пошта Yahoo!</string>
   <string name="emailprovider_msn">Пошта Windows Live</string>
   <string name="emailprovider_manual">Вручну</string>
-  <string name="btn_single_point">Зберегти одну точку</string>
   <string name="dropbox_setup_title">Dropbox</string>
   <string name="dropbox_setup_summary">Авторизуйтесь з Dropbox, щоб мати змогу надсилати файли</string>
   <string name="dropbox_authorize_description">Для використання функцій Dropbox ви повинні авторизувати GPSLogger для завантаження файлів у ваш обліковий запис.</string>
@@ -199,15 +180,8 @@
   <string name="menu_upload">Надіслати</string>
   <string name="autoemail_from">За адресою</string>
   <string name="autoemail_from_summary">Деякі постачальники послуг електронної пошти вимагають адреси відправника. Використовуйте цей параметр лише, якщо він вам потрібний.</string>
-  <string name="gdocs_upload">Документи Google</string>
-  <string name="gdocs_settings_screenname">Параметри завантаження Документів Google</string>
-  <string name="gdocs_startauthorization">Авторизувати з Документами Google</string>
-  <string name="gdocs_authorize_summary">Відправляє вас до Google Docs, де вам потрібно авторизувати GPSLogger</string>
   <string name="gdocs_clearauthorization">Очистити дозвіл</string>
   <string name="gdocs_clearauthorization_summary">Забуває приватні налаштування GDocs. Щоб повністю скасувати доступ, перейдіть до налаштувань вашого облікового запису Google</string>
-  <string name="gdocs_setup_title">Документи Google</string>
-  <string name="gdocs_setup_summary">Авторизувати з Google Docs щоб дозволити завантаження файлів</string>
-  <string name="gdocs_test_summary">Надіслати пробний файл в Google Docs</string>
   <string name="gdocs_test_title">Тестове надсилання</string>
   <string name="gdocs_testupload_error">Не можливо надіслати тестовий файл</string>
   <string name="gdocs_testupload_success">Надіслано. Будь ласка, перевірте ваші Документи Google на наявність нового файлу.</string>
@@ -230,7 +204,6 @@
   <string name="shortcut_pickaction">Вибрати дію</string>
   <string name="log_opengts_title">Вхід до сервера OpenGTS</string>
   <string name="log_opengts_summary">Надсилати дані GPRMC на сервер OpenGTS.</string>
-  <string name="opengts_setup_title">OpenGTS налаштування</string>
   <string name="opengts_setup_summary">Надсилання координат на сервер OpenGTS за вашим вибором.</string>
   <string name="opengts_enabled">Увімкнути OpenGTS</string>
   <string name="opengts_enabled_summary">Увімкніть цей OpenGTS сервер.</string>
@@ -270,18 +243,14 @@
   <string name="autoftp_invalid_summary">Деякі параметри неприпустимі. Будь ласка, переконайтеся, що ви заповнили всі відповідні поля.     </string>
   <string name="autoftp_enabled">FTP включений</string>
   <string name="ftp_upload">Надсилання FTP</string>
-  <string name="autoftp_setup_title">Установка FTP</string>
   <string name="autoftp_setup_summary">Завантажити файли на сервер FTP(S). Примітка: Це не охоплює SFTP.</string>
   <string name="faq_screen_title">Часті запитання</string>
   <string name="menu_faq">Допомога і ЧаПи (FAQ)</string>
   <string name="gpsf_missing">Сервіс відсутній</string>
   <string name="gpsf_missing_description">Для використання цієї функції необхідний доступ до Google Play Services Framework.</string>
-  <string name="pref_loggingto_title">Писати до…</string>
-  <string name="pref_loggingto_summary">Файли та їх розташування для запису вашого місцезнаходження</string>
   <string name="log_customurl_title">Запис до обраного URL</string>
   <string name="log_customurl_summary">Надсилання даних до обраного сервера через HTTP</string>
   <string name="log_customurl_urlparameters">Параметри URL</string>
-  <string name="log_customUrl_urllatitude">Широта: %LAT</string>
   <string name="txt_annotation">Анотація:</string>
   <string name="txt_time_isoformat">Час UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Постачальник:</string>

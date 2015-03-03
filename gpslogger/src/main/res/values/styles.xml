@@ -1,21 +1,41 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme"
-           parent="@android:style/Theme.Holo.Light.DarkActionBar">
-        <item name="android:actionBarStyle">@style/CustomActionBar</item>
+    <style name="AppTheme"  parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette-->
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">@color/primaryColorDark</item>
+        <!-- colorAccent is used as the default value for colorControlActivated
+             which is used to tint widgets -->
+        <item name="colorAccent">@color/accentColor</item>
+        <!-- You can also set colorControlNormal, colorControlActivated
+             colorControlHighlight and colorSwitchThumbNormal. -->
+
+        <!--Remove shadow below top toolbar/actionbar-->
+        <item name="android:windowContentOverlay">@null</item>
+
+        <!--No thin window title-->
+        <item name="android:windowNoTitle">true</item>
+
+        <!--No more actionbar, use toolbar instead-->
+        <item name="windowActionBar">false</item>
+
+
     </style>
 
-    <!-- ActionBar styles -->
-    <style name="CustomActionBar"
-           parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">#CC000000</item>
-        <item name="android:backgroundSplit">#CC000000</item>
-    </style>
 
-    <style name="GenericProgressIndicator" parent="@android:style/Widget.ProgressBar.Small">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:indeterminate">true</item>
-    </style>
+
+    <color name="primaryColor">#607d8b</color>
+    <color name="primaryColorDark">#455a64</color>
+    <color name="accentColor">#448aff</color>
+    <!--<color name="accentColorComplementary">#FF5252</color>-->
+    <color name="accentColorComplementary">#4CAF50</color>
+    <color name="primaryColorLight">#CFD8DC</color>
+    <color name="primaryColorText">#212121</color>
+    <color name="secondaryColorText">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
 </resources>

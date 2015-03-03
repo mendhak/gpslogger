@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:custom="http://schemas.android.com/apk/res-auto"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="45dp">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:background="@drawable/rounded_gray"
-            android:layout_margin="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            card_view:cardCornerRadius="4dp"
+            android:layout_margin="5dp">
 
             <LinearLayout
 
@@ -47,6 +51,7 @@
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
                         android:editable="false"
+                        android:background="@null"
                         />
                 </LinearLayout>
 
@@ -75,20 +80,19 @@
                         android:id="@+id/detailedview_lon_text"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
             </LinearLayout>
 
 
-        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
         <RelativeLayout
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-
-            android:background="@drawable/rounded_gray_thin"
-
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
@@ -102,33 +106,31 @@
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content">
-                    <!-- TODO: Only one of the following views should be displayed -->
-                    <ImageView
-                        android:layout_height="50dp"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_gravity="center"
-                        android:background="?android:selectableItemBackground"
-                        android:id="@+id/detailedview_play"
-                        android:src="@drawable/play"
-                        android:contentDescription="@string/btn_start_logging"
-                        />
+                    <com.dd.processbutton.iml.ActionProcessButton
+                        android:id="@+id/btnActionProcess"
+                        android:layout_width="wrap_content"
+                        android:width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="22dp"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/btn_start_logging"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        custom:pb_colorComplete="@color/green_complete"
+                        custom:pb_colorNormal="@color/accentColorComplementary"
+                        custom:pb_colorPressed="@color/blue_pressed"
+                        custom:pb_colorProgress="@color/purple_progress"
+                        custom:pb_textComplete="Success"
+                        custom:pb_textProgress="Loading"
+                        custom:pb_textError="Error"
+                        custom:pb_colorError="@color/red_error" />
 
-                    <ImageView
-                        android:layout_height="50dp"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_gravity="center"
-                        android:background="?android:selectableItemBackground"
-                        android:id="@+id/detailedview_stop"
-                        android:src="@drawable/stop"
-                        android:contentDescription="@string/btn_stop_logging"
-                        />
                     <TextView
                         android:id="@+id/detailedview_txtstatus"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_weight="0.4"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="22dp"
                         android:text=""
                         android:layout_gravity="center_vertical"
                         />
@@ -140,15 +142,13 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-
-            android:background="@drawable/rounded_gray_thin"
-
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            card_view:cardCornerRadius="4dp"
+            android:layout_margin="5dp">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -164,14 +164,16 @@
 
                     <EditText
                         android:minWidth="@dimen/view_text_width"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_weight="100"
                         android:layout_height="wrap_content"
                         android:id="@+id/detailedview_datetime_text"
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -197,7 +199,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -223,7 +227,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -249,7 +255,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -275,7 +283,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -301,7 +311,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -327,7 +339,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -353,22 +367,22 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
 
             </LinearLayout>
-        </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
-        <RelativeLayout
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-
-            android:background="@drawable/rounded_gray_thin"
-
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            card_view:cardCornerRadius="4dp"
+            android:layout_margin="5dp">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -398,7 +412,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -424,7 +440,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -450,7 +468,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -477,7 +497,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -503,7 +525,9 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -529,11 +553,13 @@
                         android:text=""
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"/>
+                        android:editable="false"
+                        android:background="@null"
+                        />
                 </LinearLayout>
             </LinearLayout>
 
-        </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 </ScrollView>

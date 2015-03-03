@@ -51,6 +51,10 @@ public class FolderSelectorDialog extends DialogFragment implements MaterialDial
         parentContents = listFiles();
     }
 
+    public void SetCallback(FolderSelectCallback callback){
+        this.mCallback = callback;
+    }
+
     String[] getContentsArray() {
         String[] results = new String[parentContents.length + (canGoUp ? 1 : 0)];
         if (canGoUp) results[0] = "...";
@@ -98,11 +102,6 @@ public class FolderSelectorDialog extends DialogFragment implements MaterialDial
         dialog.setItems(getContentsArray());
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mCallback = (FolderSelectCallback) activity;
-    }
 
     public void show(Activity context) {
         show(context.getFragmentManager(), "FOLDER_SELECTOR");

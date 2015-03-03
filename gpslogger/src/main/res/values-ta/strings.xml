@@ -7,7 +7,6 @@
   <string name="title_drawer_uploadsettings">பதிவேற்ற அமைப்புகள்</string>
   <string name="ok">சரி</string>
   <string name="cancel">ரத்து செய்</string>
-  <string name="not_yet">இதுவரை இல்லை</string>
   <string name="add_description">ஒரு விளக்கம் சேர்</string>
   <string name="menu_settings">அமைப்புகள்</string>
   <string name="menu_share">பகிர்</string>
@@ -35,7 +34,6 @@
   <string name="meters">&#160;மீட்டர்கள்</string>
   <string name="error">பிழை</string>
   <string name="started">தொடங்கியது</string>
-  <string name="providername_using">&#160;&#160;&#160;&#160;(%s பயன்படுத்துகிறது)</string>
   <string name="providername_gps">GPS செயற்கைக்கோள்கள்</string>
   <string name="providername_celltower">தொலைபேசி கோபுரங்கள்</string>
   <string name="sorry">வருந்துகிறேன்</string>
@@ -56,6 +54,4 @@
   <string name="autoftp_ssltls">SSL/TLS</string>
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
-  <string name="filedialog_new">புதிய</string>
-  <string name="filedialog_create">சேமி</string>
 </resources>
