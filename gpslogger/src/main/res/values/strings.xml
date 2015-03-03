@@ -440,4 +440,5 @@
     <string name="donate_app">Donate (app)</string>
     <string name="donate_bitcoin">Donate (Bitcoin)</string>
 
+    <string name="no_network_message">There is no network available</string>
 </resources>
