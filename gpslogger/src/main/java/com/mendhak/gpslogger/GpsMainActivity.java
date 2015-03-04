@@ -210,7 +210,7 @@ public class GpsMainActivity extends ActionBarActivity
                 targetActivity.putExtra("preference_fragment", whichFragment);
                 startActivity(targetActivity);
             }
-        }, 120);
+        }, 250);
     }
 
 
