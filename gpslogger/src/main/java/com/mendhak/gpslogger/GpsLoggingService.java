@@ -485,7 +485,7 @@ public class GpsLoggingService extends Service implements IActionListener {
 
         if (nfc == null) {
             nfc = new NotificationCompat.Builder(getApplicationContext())
-                    .setSmallIcon(R.drawable.gpsloggericon3)
+                    .setSmallIcon(R.drawable.notification)
                     .setPriority(Notification.PRIORITY_MAX)
                     .setContentTitle(getString(R.string.gpslogger_still_running))
                     .setOngoing(true)
