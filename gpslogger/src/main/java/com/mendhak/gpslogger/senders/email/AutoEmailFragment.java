@@ -77,27 +77,39 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
         Utilities.ShowProgress(getActivity(), getString(R.string.autoemail_sendingtest),
                 getString(R.string.please_wait));
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        CustomSwitchPreference chkUseSsl = (CustomSwitchPreference) findPreference("smtp_ssl");
+        MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
+        MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
+        MaterialEditTextPreference txtUsername = (MaterialEditTextPreference) findPreference("smtp_username");
+        MaterialEditTextPreference txtPassword = (MaterialEditTextPreference) findPreference("smtp_password");
+        MaterialEditTextPreference txtTarget = (MaterialEditTextPreference) findPreference("autoemail_target");
+        MaterialEditTextPreference txtFrom = (MaterialEditTextPreference) findPreference("smtp_from");
+
 
         AutoEmailHelper aeh = new AutoEmailHelper(null);
-        aeh.SendTestEmail(prefs.getString("smtp_server",""), prefs.getString("smtp_port","25"),
-                prefs.getString("smtp_username",""), prefs.getString("smtp_password",""),
-                prefs.getBoolean("smtp_ssl", false), prefs.getString("autoemail_target",""),
-                prefs.getString("smtp_from", ""), AutoEmailFragment.this);
+        aeh.SendTestEmail(txtSmtpServer.getText(), txtSmtpPort.getText(),
+                txtUsername.getText(), txtPassword.getText(),
+                chkUseSsl.isChecked(), txtTarget.getText(), txtFrom.getText(),
+                AutoEmailFragment.this);
 
         return true;
     }
 
     private boolean IsFormValid() {
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("autoemail_enabled");
+        MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
+        MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
+        MaterialEditTextPreference txtUsername = (MaterialEditTextPreference) findPreference("smtp_username");
+        MaterialEditTextPreference txtPassword = (MaterialEditTextPreference) findPreference("smtp_password");
+        MaterialEditTextPreference txtTarget = (MaterialEditTextPreference) findPreference("autoemail_target");
 
-        return !prefs.getBoolean("autoemail_enabled", false)
-                || prefs.getString("smtp_server","").length() > 0
-                && prefs.getString("smtp_port", "25").length() > 0
-                && prefs.getString("smtp_username","").length() > 0
-                && prefs.getString("smtp_password", "").length() > 0
-                && prefs.getString("autoemail_target","").length() > 0;
+        return !chkEnabled.isChecked() || txtSmtpServer.getText() != null
+                && txtSmtpServer.getText().length() > 0 && txtSmtpPort.getText() != null
+                && txtSmtpPort.getText().length() > 0 && txtUsername.getText() != null
+                && txtUsername.getText().length() > 0 && txtPassword.getText() != null
+                && txtPassword.getText().length() > 0 && txtTarget.getText() != null
+                && txtTarget.getText().length() > 0;
 
     }
 
