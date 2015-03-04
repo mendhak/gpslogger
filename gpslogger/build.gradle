@@ -23,8 +23,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 55
-        versionName "55"
+        versionCode 56
+        versionName "56"
 
         //This allows us to run Robotium and Unit tests separately using
         //connectedAndroidTest -PtestSize=small
@@ -158,7 +158,7 @@ preBuild.doFirst {
 tasks.whenTaskAdded { task ->
     //Don't run lint. Takes too long.
     if (task.name.contains("lint")) {
-        task.enabled = false
+        //task.enabled = false
     }
 
     //Force the APK to be uninstalled before running tests
