@@ -51,7 +51,7 @@ public class ShortcutCreate extends Activity {
                         }
 
                         Intent.ShortcutIconResource iconResource = Intent.ShortcutIconResource.fromContext
-                                (getApplicationContext(), R.drawable.gpsloggericon2);
+                                (getApplicationContext(), R.drawable.gpsloggericon3);
                         Intent intent = new Intent();
                         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
                         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, shortcutLabel);
