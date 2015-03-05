@@ -71,57 +71,64 @@ public class Utilities {
 
 
     public static void ConfigureLogbackDirectly(Context context) {
-        // reset the default context (which may already have been initialized)
-        // since we want to reconfigure it
-        LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
-        lc.reset();
+        try {
+            // reset the default context (which may already have been initialized)
+            // since we want to reconfigure it
+            LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+            lc.reset();
 
-        //final String LOG_DIR = "/sdcard/GPSLogger";
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        final String LOG_DIR = prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(context).getAbsolutePath());
+            //final String LOG_DIR = "/sdcard/GPSLogger";
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            final String LOG_DIR = prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(context).getAbsolutePath());
 
-        GpsRollingFileAppender<ILoggingEvent> rollingFileAppender = new GpsRollingFileAppender<ILoggingEvent>();
-        rollingFileAppender.setAppend(true);
-        rollingFileAppender.setContext(lc);
+            GpsRollingFileAppender<ILoggingEvent> rollingFileAppender = new GpsRollingFileAppender<ILoggingEvent>();
+            rollingFileAppender.setAppend(true);
+            rollingFileAppender.setContext(lc);
 
-        // OPTIONAL: Set an active log file (separate from the rollover files).
-        // If rollingPolicy.fileNamePattern already set, you don't need this.
-        rollingFileAppender.setFile(LOG_DIR + "/debuglog.txt");
-        rollingFileAppender.setLazy(true);
+            // OPTIONAL: Set an active log file (separate from the rollover files).
+            // If rollingPolicy.fileNamePattern already set, you don't need this.
+            rollingFileAppender.setFile(LOG_DIR + "/debuglog.txt");
+            rollingFileAppender.setLazy(true);
 
-        TimeBasedRollingPolicy<ILoggingEvent> rollingPolicy = new TimeBasedRollingPolicy<ILoggingEvent>();
-        rollingPolicy.setFileNamePattern(LOG_DIR + "/debuglog.%d.txt");
-        rollingPolicy.setMaxHistory(3);
-        rollingPolicy.setParent(rollingFileAppender);  // parent and context required!
-        rollingPolicy.setContext(lc);
-        rollingPolicy.start();
+            TimeBasedRollingPolicy<ILoggingEvent> rollingPolicy = new TimeBasedRollingPolicy<ILoggingEvent>();
+            rollingPolicy.setFileNamePattern(LOG_DIR + "/debuglog.%d.txt");
+            rollingPolicy.setMaxHistory(3);
+            rollingPolicy.setParent(rollingFileAppender);  // parent and context required!
+            rollingPolicy.setContext(lc);
+            rollingPolicy.start();
 
-        rollingFileAppender.setRollingPolicy(rollingPolicy);
+            rollingFileAppender.setRollingPolicy(rollingPolicy);
 
-        PatternLayoutEncoder encoder = new PatternLayoutEncoder();
-        encoder.setPattern("%d{HH:mm:ss} %-5p %class{0}.%method:%L - %m%n");
-        encoder.setContext(lc);
-        encoder.start();
+            PatternLayoutEncoder encoder = new PatternLayoutEncoder();
+            encoder.setPattern("%d{HH:mm:ss} %-5p %class{0}.%method:%L - %m%n");
+            encoder.setContext(lc);
+            encoder.start();
 
-        rollingFileAppender.setEncoder(encoder);
-        rollingFileAppender.start();
+            rollingFileAppender.setEncoder(encoder);
+            rollingFileAppender.start();
 
-        // setup LogcatAppender
-        PatternLayoutEncoder encoder2 = new PatternLayoutEncoder();
-        encoder2.setContext(lc);
-        encoder2.setPattern("%method:%L - %m%n");
-        encoder2.start();
+            // setup LogcatAppender
+            PatternLayoutEncoder encoder2 = new PatternLayoutEncoder();
+            encoder2.setContext(lc);
+            encoder2.setPattern("%method:%L - %m%n");
+            encoder2.start();
 
-        LogcatAppender logcatAppender = new LogcatAppender();
-        logcatAppender.setContext(lc);
-        logcatAppender.setEncoder(encoder2);
-        logcatAppender.start();
+            LogcatAppender logcatAppender = new LogcatAppender();
+            logcatAppender.setContext(lc);
+            logcatAppender.setEncoder(encoder2);
+            logcatAppender.start();
 
-        // add the newly created appenders to the root logger;
-        // qualify Logger to disambiguate from org.slf4j.Logger
-        ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-        root.addAppender(rollingFileAppender);
-        root.addAppender(logcatAppender);
+            // add the newly created appenders to the root logger;
+            // qualify Logger to disambiguate from org.slf4j.Logger
+            ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+            root.addAppender(rollingFileAppender);
+            root.addAppender(logcatAppender);
+        }
+        catch(Exception ex){
+              System.out.println("Could not configure logging!");
+        }
+
+
     }
 
 
