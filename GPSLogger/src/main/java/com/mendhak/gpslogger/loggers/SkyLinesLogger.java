@@ -28,6 +28,7 @@ package com.mendhak.gpslogger.loggers;
 import android.location.Location;
 import android.os.SystemClock;
 
+import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.utils.LocationBuffer;
 
@@ -203,7 +204,7 @@ public class SkyLinesLogger extends AbstractLiveLogger
                 b.lat, b.lon,
                 b.altitude,
                 b.bearing,
-                b.speed);
+                (int)b.speed);
         return true;
     }
 

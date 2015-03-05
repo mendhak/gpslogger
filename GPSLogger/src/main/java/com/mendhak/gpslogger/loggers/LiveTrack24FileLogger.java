@@ -35,9 +35,11 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.utils.LocationBuffer;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -104,11 +106,12 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
         if (!login_ok){
             return true;
         }
-
+        lastSendingOK=false;
+        startUploadTimer();
         RequestHandle rh = sendLocationPacket(b);
-        while (!rh.isFinished()){
+        while( (!rh.isFinished()) && (!isTimedOutUpload()) ) {
             try {
-                Thread.sleep(10);
+                Thread.sleep(sleepTimeUpload);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -143,6 +146,8 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
         trackURL = url.toString();
         url = new URL(serverURL + "/client.php");
         clientURL = url.toString();
+        Utilities.LogDebug("trackURL: "+trackURL);
+        Utilities.LogDebug("clientURL: "+clientURL);
 
         this.userName = username;
         this.password = password;
@@ -200,13 +205,13 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
     private AsyncHttpResponseHandler locationPacketHandler = new TextHttpResponseHandler() {
         @Override
         public void onSuccess(int statusCode, org.apache.http.Header[] headers, String message){
-            Utilities.LogDebug("packet sent ok:" + message);
+            Utilities.LogDebug("livetrack24: packet sent ok:" + message);
             lastSendingOK = true;
         }
 
         @Override
         public void onFailure(String response, Throwable e){
-            Utilities.LogDebug("packet NOT sent:" + response);
+            Utilities.LogDebug("livetrack24: packet NOT sent:" + response);
             lastSendingOK = false;
         }
     };
@@ -226,7 +231,7 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
         nparams.put("leolive", Integer.toString(packetType));
         nparams.put("sid", sessionId);
         nparams.put("pid", Integer.toString(packetNum));
-        Utilities.LogDebug("URL: " + nparams.toString());
+        Utilities.LogDebug("livetrack24: URL: "+trackURL+" nparams: " + nparams.toString());
         packetNum++;
 
         if (async){
@@ -247,7 +252,10 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
         params.put("lat", Float.toString((float)bloc.lat));
         params.put("lon", Float.toString((float)bloc.lon));
         params.put("alt", Integer.toString(bloc.altitude));
-        params.put("sog", Integer.toString(bloc.speed/3600)); // buffered speed is in m/s, lt24 needs km/h
+
+	// Was "buffered speed is in m/s, lt24 needs km/h"
+        params.put("sog", Float.toString(bloc.speed/(float)3.6));   // Convert to m/s before sending
+
         params.put("cog", Integer.toString(bloc.bearing));
         params.put("tm", Integer.toString((int)(bloc.timems/1000)));
 
@@ -320,7 +328,7 @@ public class LiveTrack24FileLogger extends AbstractLiveLogger {
 
         @Override
         public void onFailure(String response, Throwable e) {
-            Utilities.LogDebug("livetrack24: login resp failed");
+            Utilities.LogDebug("livetrack24: login response failed");
             delayedDoLogin(1000);
         }
     }

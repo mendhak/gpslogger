@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GPSLogger/GPSLogger.iml" filepath="$PROJECT_DIR$/GPSLogger/GPSLogger.iml" />
       <module fileurl="file://$PROJECT_DIR$/GPSLoggerFlight.iml" filepath="$PROJECT_DIR$/GPSLoggerFlight.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gpslogger.iml" filepath="$PROJECT_DIR$/gpslogger.iml" />
     </modules>
   </component>
 </project>

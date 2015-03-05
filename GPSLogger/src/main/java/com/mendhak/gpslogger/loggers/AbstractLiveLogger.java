@@ -5,21 +5,25 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Handler;
 
+import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.utils.LocationBuffer;
 
 import java.io.IOException;
 
 public abstract class AbstractLiveLogger extends AbstractLogger {
-    private final LocationBuffer loc_buffer = new LocationBuffer();
+    protected final LocationBuffer loc_buffer = new LocationBuffer();
+    protected final static long maxWaitUpload = 10000; // Upload will be failed if longs more than maxWaitUpload millisecsec
+    protected long timeStartUpload;
+    protected final static int sleepTimeUpload = 100;  // Time to sleep for upload thread waiting for upload (one cycle)
 
     private Runnable flusher;
-    private Handler handler;
+// **** Handler removed by Peter 01/11/2014 - replaced by execAsyncFlush() call in Write method
+//    private Handler handler;
     private FlusherAsyncTask flushertask;
     private boolean loggerIsClosing = false;
 
     private static String name = "AbstractLiveLogger";
-
     public abstract boolean liveUpload(LocationBuffer.BufferedLocation bloc) throws IOException;
 
     /**
@@ -32,13 +36,13 @@ public abstract class AbstractLiveLogger extends AbstractLogger {
     public AbstractLiveLogger(final int minsec, final int mindist){
         super(minsec, mindist);
 
-        this.handler = new Handler();
+//        this.handler = new Handler();
 
         flusher = new Runnable() {
             @Override
             public void run() {
                 execAsyncFlush();
-                handler.postDelayed(flusher, minsec * 1000);
+//                handler.postDelayed(flusher, minsec * 1000);
             }
         };
         flusher.run();
@@ -49,25 +53,34 @@ public abstract class AbstractLiveLogger extends AbstractLogger {
         protected Void doInBackground(LocationBuffer... buffers) {
             for (LocationBuffer buf : buffers){
                 LocationBuffer.BufferedLocation b;
+                int bufsize=buf.size();
+                Utilities.LogDebug(name + " flushing buffer (" + bufsize + ")");
+                int i=0;
+                int sent=0;
+                int maxtry=3;
+                do {
+                    sent=0;
+                    for (i = 0; i < bufsize; i++) {
+                        try {
+                            b = buf.peek();
+                            if (b == null) break;
+                            Utilities.LogDebug(name + " flushing elt " + i);
+                            Utilities.LogDebug("location time: " + b.timems);
 
-                Utilities.LogDebug(name + " flushing buffer (" + buf.size() + ")");
-                int i = 0;
-
-                while((b = buf.peek()) != null) {
-                    try {
-                        Utilities.LogDebug(name + " flushing elt " + i);
-                        Utilities.LogDebug("TIME: " + b.timems);
-                        if (liveUpload(b)){
-                            buf.pop();
-                            i++;
-                        } else {
-                            Utilities.LogDebug(name + " failed flush elt " + i);
+                            if (liveUpload(b)) {
+                                buf.pop();
+                                sent++;
+                            } else {
+                                Utilities.LogDebug(name + " failed flush elt " + i);
+                            }
+                        } catch (IOException ex) {
+                            Utilities.LogDebug(name + ": sending fix", ex);
                         }
-                    } catch (IOException ex) {
-                        Utilities.LogDebug(name + ": sending fix", ex);
                     }
-                }
-                Utilities.LogDebug(name + ": finished flushing " + i + " locations" );
+                    Utilities.LogDebug(name + ": finished flushing " + i + " locations");
+                    maxtry--;
+                    bufsize=buf.size();
+                } while( (maxtry>0) && (sent>0) && (bufsize>0) );  // Trying to flush new locations if liveUpload was successful
             }
             return null;
         }
@@ -102,7 +115,7 @@ public abstract class AbstractLiveLogger extends AbstractLogger {
 
     @Override
     public void close() throws Exception{
-        this.handler.removeCallbacks(flusher);
+//        this.handler.removeCallbacks(flusher);
         loggerIsClosing = true;
         execAsyncFlush();
     }
@@ -127,7 +140,7 @@ public abstract class AbstractLiveLogger extends AbstractLogger {
                 loc.getLatitude(), loc.getLongitude(),
                 (int)loc.getAltitude(),
                 (int)loc.getBearing(),
-                (int)(loc.getSpeed())
+                loc.getSpeed()
         );
         Utilities.LogDebug(name  + " pushed (" + loc_buffer.size() + ")");
 
@@ -136,5 +149,17 @@ public abstract class AbstractLiveLogger extends AbstractLogger {
 //            new WriteAsync().execute(loc);
 //            nextUpdateTime = now + intervalMS;
 //        }
+// *** Added by Peter 01/11/2014 ***
+        execAsyncFlush();
+    }
+
+    protected void startUploadTimer() {
+        timeStartUpload=System.currentTimeMillis();
+    }
+
+    protected boolean isTimedOutUpload() {
+        long timeCurrent=System.currentTimeMillis();
+        if( (timeCurrent-timeStartUpload)> maxWaitUpload ) return true;
+            else return false;
     }
 }

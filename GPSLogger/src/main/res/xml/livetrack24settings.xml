@@ -22,7 +22,7 @@
                             android:inputType="textUri"
                             android:summary="@string/livetrack24_server_url_summary"
                             android:dialogTitle="@string/livetrack24_server_url"
-                            android:defaultValue="@string/livetrack24_preset_leonardo"/>
+                            android:defaultValue="@string/livetrack24_server_other"/>
 
         <EditTextPreference android:key="livetrack24_username"
                             android:title="@string/livetrack24_username"
