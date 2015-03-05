@@ -20,6 +20,8 @@
 package com.mendhak.gpslogger;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.*;
@@ -114,18 +116,19 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
 
         super.onCreate(savedInstanceState);
 
-        Utilities.LogInfo("GPSLogger started");
+        Utilities.LogInfo("GPSLogger activity created");
 
         setContentView(R.layout.main_fragment);
 
         // Moved to onResume to update the list of loggers
         //GetPreferences();
-
-        StartAndBindService();
+//          Stays in onStart
+//        StartAndBindService();
 
         path = Environment.getExternalStorageDirectory() + File.separator + "GPSLogger";
         prefsio=new PrefsIO(this, PreferenceManager.getDefaultSharedPreferences(this), "gpslogger", path);
         this.registerReceiver(this.batteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        serviceIntent = new Intent(this, GpsLoggingService.class);
     }
 
     @Override
@@ -133,7 +136,8 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
     {
         Utilities.LogDebug("GpsMainActivity.onStart");
         super.onStart();
-        StartAndBindService();
+//          Stays in onResume
+//        StartAndBindService();
     }
 
     @Override
@@ -326,7 +330,18 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
     private void StartAndBindService()
     {
         Utilities.LogDebug("StartAndBindService - binding now");
-        serviceIntent = new Intent(this, GpsLoggingService.class);
+        if(isServiceRunning(GpsLoggingService.class))
+        {
+            Utilities.LogDebug("Seems that the service is already running");
+            if(Session.isBoundToService()) return;
+                else
+                {
+                    Utilities.LogDebug("Seems that the service is running but not binded - stopping the service");
+                    StopAndUnbindServiceIfRequired();
+                }
+        }
+//        Goes to onCreate
+//        serviceIntent = new Intent(this, GpsLoggingService.class);
         // Start the service in case it isn't already running
         startService(serviceIntent);
         // Now bind to service
@@ -347,12 +362,23 @@ public class GpsMainActivity extends SherlockFragmentActivity implements OnCheck
             Session.setBoundToService(false);
         }
 
-        if (!Session.isStarted())
+//        if (!Session.isStarted())
+        if(isServiceRunning(GpsLoggingService.class))
         {
             Utilities.LogDebug("StopServiceIfRequired - Stopping the service");
             //serviceIntent = new Intent(this, GpsLoggingService.class);
             stopService(serviceIntent);
         }
+    }
+
+    private boolean isServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

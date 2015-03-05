@@ -58,6 +58,9 @@ public class GpsLoggingService extends Service implements IActionListener
 {
     private static NotificationManager gpsNotifyManager;
     private static int NOTIFICATION_ID = 8675309;
+    private final static int GPS_LOCATION_REQ_TIMEOUT = 200;
+    private final static int ON_LOCATION_CHANGED_MIN_FREQ = 200;
+    private final static int NEXT_ALARM_TIME_MIN = 100;
 
     private final IBinder mBinder = new GpsLoggingBinder();
     private static IGpsLoggerServiceClient mainServiceClient;
@@ -84,6 +87,13 @@ public class GpsLoggingService extends Service implements IActionListener
     }
 
     @Override
+    public boolean onUnbind(Intent arg0)
+    {
+        Utilities.LogDebug("GpsLoggingService.onUnbind");
+        return true;
+    }
+
+    @Override
     public void onCreate()
     {
         Utilities.LogDebug("GpsLoggingService.onCreate");
@@ -91,14 +101,14 @@ public class GpsLoggingService extends Service implements IActionListener
 
         Utilities.LogInfo("GPSLoggerService created");
     }
-
+/*      We don't need to support Android version  <2.0
     @Override
     public void onStart(Intent intent, int startId)
     {
         Utilities.LogDebug("GpsLoggingService.onStart");
         HandleIntent(intent);
     }
-
+*/
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
@@ -134,7 +144,8 @@ public class GpsLoggingService extends Service implements IActionListener
         if (intent != null)
         {
             Bundle bundle = intent.getExtras();
-
+            int flags=intent.getFlags();
+            Utilities.LogDebug("Intent Flags: "+String.valueOf(flags));
             if (bundle != null)
             {
                 boolean stopRightNow = bundle.getBoolean("immediatestop");
@@ -511,7 +522,7 @@ public class GpsLoggingService extends Service implements IActionListener
     {
         Utilities.LogDebug("GpsLoggingService.StartGpsManager");
 
-        GetPreferences();
+//        GetPreferences(); **** Preferences are updated in HandleIntent function ****
 
         if (gpsLocationListener == null)
         {
@@ -534,7 +545,7 @@ public class GpsLoggingService extends Service implements IActionListener
             Utilities.LogInfo("Requesting GPS location updates");
             // gps satellite based
             gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    500, 0,
+                    GPS_LOCATION_REQ_TIMEOUT, 0,
                     gpsLocationListener);
 
             gpsLocationManager.addGpsStatusListener(gpsLocationListener);
@@ -725,7 +736,7 @@ public class GpsLoggingService extends Service implements IActionListener
 
         // Wait some time even on 0 frequency so that the UI doesn't lock up
 
-        if ((currentTimeStamp - Session.getLatestTimeStamp()) < 300)
+        if ((currentTimeStamp - Session.getLatestTimeStamp()) < ON_LOCATION_CHANGED_MIN_FREQ)
         {
             return;
         }
@@ -760,7 +771,7 @@ public class GpsLoggingService extends Service implements IActionListener
             SetDistanceTraveled(loc);
             Notify();
             WriteToFile(loc);
-            GetPreferences();
+//            GetPreferences(); **** Preferences will be updated in HandleIntent function ****
             if (IsMainFormVisible()) mainServiceClient.OnLocationUpdate(loc);
             }
         StopManagerAndResetAlarm();
@@ -782,7 +793,7 @@ public class GpsLoggingService extends Service implements IActionListener
 
     private long GetNextAlarmTime() {
         List<IFileLogger> loggers = Session.getFileLoggers();
-        long NextAlarmTime=500; // Minimum alarm time
+        long NextAlarmTime=NEXT_ALARM_TIME_MIN; // Minimum alarm time
         List<Long> nats = new ArrayList<Long>();
         long nat=0;
         long systime = System.currentTimeMillis();
@@ -860,7 +871,7 @@ public class GpsLoggingService extends Service implements IActionListener
 
         i.putExtra("getnextpoint", true);
 
-        PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
+        PendingIntent pi = PendingIntent.getService(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT); // Last argument was 0
         nextPointAlarmManager.cancel(pi);
 //        long realtime = SystemClock.elapsedRealtime();
         long systime = System.currentTimeMillis();
@@ -882,7 +893,7 @@ public class GpsLoggingService extends Service implements IActionListener
 
         i.putExtra("getnextpoint", true);
 
-        PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
+        PendingIntent pi = PendingIntent.getService(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);  // Last argument was 0
         nextPointAlarmManager.cancel(pi);
 
         nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,

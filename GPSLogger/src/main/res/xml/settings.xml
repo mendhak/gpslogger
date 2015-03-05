@@ -130,7 +130,7 @@
                     android:key="keep_fix"
                     android:summary="@string/keep_fix_summary"
                     android:title="@string/keep_fix_title"
-                    android:defaultValue="false" />
+                    android:defaultValue="true" />
 
                 <EditTextPreference
                     android:key="distance_before_logging"
