@@ -572,6 +572,7 @@ public class GpsLoggingService extends Service implements IActionListener {
             SetStatus(R.string.gpsprovider_unavailable);
             SetFatalMessage(R.string.gpsprovider_unavailable);
             StopLogging();
+            SetLocationServiceUnavailable();
             return;
         }
 
@@ -687,6 +688,13 @@ public class GpsLoggingService extends Service implements IActionListener {
         tracer.info(status);
         if (IsMainFormVisible()) {
             mainServiceClient.OnStatusMessage(status);
+        }
+    }
+
+    void SetLocationServiceUnavailable(){
+        tracer.error("Location services not enabled");
+        if (IsMainFormVisible()) {
+            mainServiceClient.OnLocationServicesUnavailable();
         }
     }
 

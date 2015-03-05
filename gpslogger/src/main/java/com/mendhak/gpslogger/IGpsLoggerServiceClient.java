@@ -94,4 +94,8 @@ interface IGpsLoggerServiceClient {
     public void OnWaitingForLocation(boolean inProgress);
 
 
+    /**
+     * Indicates that location services aren't enabled, so logging will not occur.
+     */
+    public void OnLocationServicesUnavailable();
 }

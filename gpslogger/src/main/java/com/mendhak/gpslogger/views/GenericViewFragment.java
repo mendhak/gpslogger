@@ -19,7 +19,11 @@ package com.mendhak.gpslogger.views;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.location.Location;
+import android.provider.Settings;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.mendhak.gpslogger.R;
 
 
 /**
@@ -47,6 +51,26 @@ public abstract class GenericViewFragment extends Fragment {
     public abstract void OnFileNameChange(String newFileName);
 
     public abstract void OnNmeaSentence(long timestamp, String nmeaSentence);
+
+
+    public void OnLocationServicesUnavailable() {
+
+        new MaterialDialog.Builder(getActivity())
+                //.title("Location services unavailable")
+                .content(R.string.gpsprovider_unavailable)
+                .positiveText(R.string.ok)
+                .negativeText(R.string.cancel)
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getActivity().startActivity(settingsIntent);
+                    }
+                })
+                .show();
+    }
+
 
     protected void requestStartLogging() {
         if (gpsCallback != null) {

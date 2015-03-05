@@ -1043,6 +1043,14 @@ public class GpsMainActivity extends ActionBarActivity
 
     }
 
+    @Override
+    public void OnLocationServicesUnavailable() {
+        GenericViewFragment fragment = GetCurrentFragment();
+        if(fragment != null){
+            fragment.OnLocationServicesUnavailable();
+        }
+    }
+
 
     // IActionListener callbacks
     @Override
