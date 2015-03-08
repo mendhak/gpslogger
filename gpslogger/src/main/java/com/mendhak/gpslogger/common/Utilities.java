@@ -19,7 +19,6 @@ package com.mendhak.gpslogger.common;
 
 import android.app.Activity;
 
-import android.app.ProgressDialog;
 import android.content.*;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -28,10 +27,8 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Build;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.text.Html;
 import android.text.Spanned;
 import android.text.format.Time;
 import android.text.method.LinkMovementMethod;
@@ -60,6 +57,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -189,15 +187,6 @@ public class Utilities {
         } else {
             AppSettings.setMinimumAccuracyInMeters(0);
         }
-
-        if (AppSettings.shouldUseImperial()) {
-            AppSettings.setMinimumDistanceInMeters(Utilities.FeetToMeters(AppSettings
-                    .getMinimumDistanceInMeters()));
-
-            AppSettings.setMinimumAccuracyInMeters(Utilities.FeetToMeters(AppSettings
-                    .getMinimumAccuracyInMeters()));
-        }
-
 
         String minimumSecondsString = prefs.getString("time_before_logging",
                 "60");
@@ -539,37 +528,6 @@ public class Utilities {
         return sdf.format(dateToFormat);
     }
 
-    /**
-     * Converts given meters to feet.
-     *
-     * @param m
-     * @return
-     */
-    public static int MetersToFeet(int m) {
-        return (int) Math.round(m * 3.2808399);
-    }
-
-
-    /**
-     * Converts given feet to meters
-     *
-     * @param f
-     * @return
-     */
-    public static int FeetToMeters(int f) {
-        return (int) Math.round(f / 3.2808399);
-    }
-
-
-    /**
-     * Converts given meters to feet and rounds up.
-     *
-     * @param m
-     * @return
-     */
-    public static int MetersToFeet(double m) {
-        return MetersToFeet((int) m);
-    }
 
     public static boolean IsEmailSetup() {
         return AppSettings.isAutoEmailEnabled()
@@ -911,4 +869,58 @@ public class Utilities {
         NetworkInfo info = getActiveNetworkInfo(context);
         return (info != null && info.isConnected());
     }
+
+
+    public static String GetSpeedDisplay(Context context, double metersPerSecond, boolean imperial){
+
+        DecimalFormat df = new DecimalFormat("#.###");
+        String result = df.format(metersPerSecond) + context.getString(R.string.meters_per_second);
+
+        if(imperial){
+            result = df.format(metersPerSecond * 2.23693629) + context.getString(R.string.miles_per_hour);
+        }
+        else if(metersPerSecond >= 0.28){
+            result = df.format(metersPerSecond * 3.6) + context.getString(R.string.kilometers_per_hour);
+        }
+
+        return result;
+
+    }
+
+    public static String GetDistanceDisplay(Context context, double meters, boolean imperial) {
+        DecimalFormat df = new DecimalFormat("#.###");
+        String result = df.format(meters) + context.getString(R.string.meters);
+
+        if(imperial){
+            if (meters <= 804){
+                result = df.format(meters * 3.2808399) + context.getString(R.string.feet);
+            }
+            else {
+                result = df.format(meters/1609.344) + context.getString(R.string.miles);
+            }
+        }
+        else if(meters >= 1000){
+            result = df.format(meters/1000) + context.getString(R.string.kilometers);
+        }
+
+        return result;
+    }
+
+    public static String GetTimeDisplay(Context context, long milliseconds) {
+
+        double ms = (double)milliseconds;
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        String result = df.format(ms/1000) + context.getString(R.string.seconds);
+
+        if(ms > 3600000){
+            result = df.format(ms/3600000) + context.getString(R.string.hours);
+        }
+        else if(ms > 60000){
+            result = df.format(ms/60000) + context.getString(R.string.minutes);
+        }
+
+        return result;
+    }
+
 }

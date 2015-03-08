@@ -17,15 +17,11 @@
 
 package com.mendhak.gpslogger.views;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.*;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,8 +37,6 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
 import java.text.NumberFormat;
 
 public class GpsSimpleViewFragment extends GenericViewFragment implements View.OnClickListener {
@@ -310,13 +304,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
             TextView txtAccuracy = (TextView) rootView.findViewById(R.id.simpleview_txtAccuracy);
             float accuracy = locationInfo.getAccuracy();
-
-            if (AppSettings.shouldUseImperial()) {
-                txtAccuracy.setText(nf.format(Utilities.MetersToFeet(accuracy)) + getString(R.string.feet));
-
-            } else {
-                txtAccuracy.setText(nf.format(accuracy) + getString(R.string.meters));
-            }
+            txtAccuracy.setText(Utilities.GetDistanceDisplay(getActivity(), accuracy, AppSettings.shouldUseImperial()));
 
             if (accuracy > 500) {
                 SetColor(imgAccuracy, IconColorIndicator.Warning);
@@ -336,12 +324,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             SetColor(imgAltitude, IconColorIndicator.Good);
             TextView txtAltitude = (TextView) rootView.findViewById(R.id.simpleview_txtAltitude);
 
-            if (AppSettings.shouldUseImperial()) {
-                txtAltitude.setText(nf.format(Utilities.MetersToFeet(locationInfo.getAltitude()))
-                        + getString(R.string.feet));
-            } else {
-                txtAltitude.setText(nf.format(locationInfo.getAltitude()) + getString(R.string.meters));
-            }
+            txtAltitude.setText(Utilities.GetDistanceDisplay(getActivity(), locationInfo.getAltitude(), AppSettings.shouldUseImperial()));
         }
 
         ImageView imgSpeed = (ImageView)rootView.findViewById(R.id.simpleview_imgSpeed);
@@ -351,28 +334,8 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
             SetColor(imgSpeed, IconColorIndicator.Good);
 
-            float speed = locationInfo.getSpeed();
-            String unit;
-            if (AppSettings.shouldUseImperial()) {
-                if (speed > 1.47) {
-                    speed = speed * 0.6818f;
-                    unit = getString(R.string.miles_per_hour);
-
-                } else {
-                    speed = Utilities.MetersToFeet(speed);
-                    unit = getString(R.string.feet_per_second);
-                }
-            } else {
-                if (speed > 0.277) {
-                    speed = speed * 3.6f;
-                    unit = getString(R.string.kilometers_per_hour);
-                } else {
-                    unit = getString(R.string.meters_per_second);
-                }
-            }
-
             TextView txtSpeed = (TextView) rootView.findViewById(R.id.simpleview_txtSpeed);
-            txtSpeed.setText(String.valueOf(nf.format(speed)) + unit);
+            txtSpeed.setText(Utilities.GetSpeedDisplay(getActivity(),locationInfo.getSpeed(),AppSettings.shouldUseImperial()));
         }
 
         ImageView imgDirection = (ImageView) rootView.findViewById(R.id.simpleview_imgDirection);
@@ -390,34 +353,15 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
         long startTime = Session.getStartTimeStamp();
         long currentTime = System.currentTimeMillis();
-        String duration = getInterval(startTime, currentTime);
 
-        txtDuration.setText(duration);
-
-        String distanceUnit;
+        txtDuration.setText(Utilities.GetTimeDisplay(getActivity(), currentTime-startTime));
 
         double distanceValue = Session.getTotalTravelled();
-        if (AppSettings.shouldUseImperial()) {
-            distanceUnit = getString(R.string.feet);
-            distanceValue = Utilities.MetersToFeet(distanceValue);
-            // When it passes more than 1 kilometer, convert to miles.
-            if (distanceValue > 3281) {
-                distanceUnit = getString(R.string.miles);
-                distanceValue = distanceValue / 5280;
-            }
-        } else {
-            distanceUnit = getString(R.string.meters);
-            if (distanceValue > 1000) {
-                distanceUnit = getString(R.string.kilometers);
-                distanceValue = distanceValue / 1000;
-            }
-        }
 
         TextView txtPoints = (TextView) rootView.findViewById(R.id.simpleview_txtPoints);
         TextView txtTravelled = (TextView) rootView.findViewById(R.id.simpleview_txtDistance);
 
-        nf.setMaximumFractionDigits(1);
-        txtTravelled.setText(nf.format(distanceValue) + " " + distanceUnit);
+        txtTravelled.setText(Utilities.GetDistanceDisplay(getActivity(), distanceValue, AppSettings.shouldUseImperial()));
         txtPoints.setText(Session.getNumLegs() + " " + getString(R.string.points));
 
         String providerName = locationInfo.getProvider();
@@ -428,8 +372,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     }
 
     private void clearLocationDisplay() {
-        NumberFormat nf = NumberFormat.getInstance();
-        nf.setMaximumFractionDigits(3);
 
         EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
         txtLatitude.setText("");
@@ -470,23 +412,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         txtTravelled.setText("");
     }
 
-    private String getInterval(long startTime, long endTime) {
-        StringBuffer sb = new StringBuffer();
-        long diff = endTime - startTime;
-        long diffSeconds = diff / 1000 % 60;
-        long diffMinutes = diff / (60 * 1000) % 60;
-        long diffHours = diff / (60 * 60 * 1000) % 24;
-        long diffDays = diff / (24 * 60 * 60 * 1000);
-        if (diffDays > 0) {
-            sb.append(diffDays + " days ");
-        }
-        if (diffHours > 0) {
-            sb.append(String.format("%02d", diffHours) + ":");
-        }
-        sb.append(String.format("%02d", diffMinutes) + ":");
-        sb.append(String.format("%02d", diffSeconds));
-        return sb.toString();
-    }
+
 
     @Override
     public void SetSatelliteCount(int count) {

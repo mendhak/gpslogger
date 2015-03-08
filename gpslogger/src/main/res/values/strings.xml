@@ -64,6 +64,9 @@
     <string name="error_connection">Connection Error. Please check your phone settings.</string>
 
 
+    <string name="seconds">&#160;s</string>
+    <string name="minutes">&#160;min</string>
+    <string name="hours">&#160;hrs</string>
 
 
     <string name="gpsprovider_unavailable">No GPS provider available. Please check your location settings and enable a  location provider.
@@ -440,4 +443,5 @@
     <string name="donate_bitcoin">Donate (Bitcoin)</string>
 
     <string name="no_network_message">There is no network available</string>
+
 </resources>

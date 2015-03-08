@@ -175,43 +175,13 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         nf.setMaximumFractionDigits(3);
 
         if (locationInfo.hasAltitude()) {
-
-            double altitude = locationInfo.getAltitude();
-
-            if (AppSettings.shouldUseImperial()) {
-                tvAltitude.setText(nf.format(Utilities.MetersToFeet(altitude))
-                        + getString(R.string.feet));
-            } else {
-                tvAltitude.setText(nf.format(altitude) + getString(R.string.meters));
-            }
-
+            tvAltitude.setText(Utilities.GetDistanceDisplay(getActivity(), locationInfo.getAltitude(), AppSettings.shouldUseImperial()));
         } else {
             tvAltitude.setText(R.string.not_applicable);
         }
 
         if (locationInfo.hasSpeed()) {
-
-            float speed = locationInfo.getSpeed();
-            String unit;
-            if (AppSettings.shouldUseImperial()) {
-                if (speed > 1.47) {
-                    speed = speed * 0.6818f;
-                    unit = getString(R.string.miles_per_hour);
-
-                } else {
-                    speed = Utilities.MetersToFeet(speed);
-                    unit = getString(R.string.feet_per_second);
-                }
-            } else {
-                if (speed > 0.277) {
-                    speed = speed * 3.6f;
-                    unit = getString(R.string.kilometers_per_hour);
-                } else {
-                    unit = getString(R.string.meters_per_second);
-                }
-            }
-
-            txtSpeed.setText(String.valueOf(nf.format(speed)) + unit);
+            txtSpeed.setText(Utilities.GetSpeedDisplay(getActivity(), locationInfo.getSpeed(), AppSettings.shouldUseImperial()));
 
         } else {
             txtSpeed.setText(R.string.not_applicable);
@@ -237,69 +207,26 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         if (locationInfo.hasAccuracy()) {
 
             float accuracy = locationInfo.getAccuracy();
-
-            if (AppSettings.shouldUseImperial()) {
-                txtAccuracy.setText(getString(R.string.accuracy_within,
-                        nf.format(Utilities.MetersToFeet(accuracy)), getString(R.string.feet)));
-
-            } else {
-                txtAccuracy.setText(getString(R.string.accuracy_within, nf.format(accuracy),
-                        getString(R.string.meters)));
-            }
+            txtAccuracy.setText(getString(R.string.accuracy_within, Utilities.GetDistanceDisplay(getActivity(), accuracy, AppSettings.shouldUseImperial()), ""));
 
         } else {
             txtAccuracy.setText(R.string.not_applicable);
         }
 
 
-        String distanceUnit;
         double distanceValue = Session.getTotalTravelled();
-        if (AppSettings.shouldUseImperial()) {
-            distanceUnit = getString(R.string.feet);
-            distanceValue = Utilities.MetersToFeet(distanceValue);
-            // When it passes more than 1 kilometer, convert to miles.
-            if (distanceValue > 3281) {
-                distanceUnit = getString(R.string.miles);
-                distanceValue = distanceValue / 5280;
-            }
-        } else {
-            distanceUnit = getString(R.string.meters);
-            if (distanceValue > 1000) {
-                distanceUnit = getString(R.string.kilometers);
-                distanceValue = distanceValue / 1000;
-            }
-        }
-
-        txtTravelled.setText(nf.format(distanceValue) + " " + distanceUnit +
-                " (" + Session.getNumLegs() + " points)");
+        txtTravelled.setText(Utilities.GetDistanceDisplay(getActivity(), distanceValue, AppSettings.shouldUseImperial()) + " (" + Session.getNumLegs() + " points)");
 
         long startTime = Session.getStartTimeStamp();
         Date d = new Date(startTime);
         long currentTime = System.currentTimeMillis();
-        String duration = getInterval(startTime, currentTime);
+
+        String duration = Utilities.GetDescriptiveTimeString((int)(currentTime - startTime)/1000, getActivity());
 
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());
         txtTime.setText(duration + " (started at " + dateFormat.format(d) + " " + timeFormat.format(d) + ")");
 
-    }
-
-    private String getInterval(long startTime, long endTime) {
-        StringBuffer sb = new StringBuffer();
-        long diff = endTime - startTime;
-        long diffSeconds = diff / 1000 % 60;
-        long diffMinutes = diff / (60 * 1000) % 60;
-        long diffHours = diff / (60 * 60 * 1000) % 24;
-        long diffDays = diff / (24 * 60 * 60 * 1000);
-        if (diffDays > 0) {
-            sb.append(diffDays + " days ");
-        }
-        if (diffHours > 0) {
-            sb.append(String.format("%02d", diffHours) + ":");
-        }
-        sb.append(String.format("%02d", diffMinutes) + ":");
-        sb.append(String.format("%02d", diffSeconds));
-        return sb.toString();
     }
 
 
@@ -349,20 +276,10 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
 
             if (AppSettings.getMinimumDistanceInMeters() > 0) {
-                if (AppSettings.shouldUseImperial()) {
-                    int minimumDistanceInFeet = Utilities.MetersToFeet(AppSettings.getMinimumDistanceInMeters());
-                    txtDistance.setText(((minimumDistanceInFeet == 1)
-                            ? getString(R.string.foot)
-                            : String.valueOf(minimumDistanceInFeet) + getString(R.string.feet)));
-                } else {
-                    txtDistance.setText(((AppSettings.getMinimumDistanceInMeters() == 1)
-                            ? getString(R.string.meter)
-                            : String.valueOf(AppSettings.getMinimumDistanceInMeters()) + getString(R.string.meters)));
-                }
+                txtDistance.setText(Utilities.GetDistanceDisplay(getActivity(), AppSettings.getMinimumDistanceInMeters(), AppSettings.shouldUseImperial()));
             } else {
                 txtDistance.setText(R.string.summary_dist_regardless);
             }
-
 
             if (AppSettings.isAutoSendEnabled() && AppSettings.getAutoSendDelay() > 0) {
                 String autoEmailDisplay = String.format(getString(R.string.autosend_frequency_display), AppSettings.getAutoSendDelay().intValue());
