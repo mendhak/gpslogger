@@ -32,6 +32,7 @@ import com.mendhak.gpslogger.senders.opengts.OpenGTSFragment;
 import com.mendhak.gpslogger.senders.osm.OSMAuthorizationFragment;
 import com.mendhak.gpslogger.settings.GeneralSettingsFragment;
 import com.mendhak.gpslogger.settings.LoggingSettingsFragment;
+import com.mendhak.gpslogger.settings.PerformanceSettingsFragment;
 import com.mendhak.gpslogger.settings.UploadSettingsFragment;
 import org.slf4j.LoggerFactory;
 
@@ -73,6 +74,10 @@ public class MainPreferenceActivity extends ActionBarActivity {
             case PreferenceConstants.LOGGING:
                 setTitle(R.string.pref_logging_title);
                 preferenceFragment = new LoggingSettingsFragment();
+                break;
+            case PreferenceConstants.PERFORMANCE:
+                setTitle(R.string.pref_performance_title);
+                preferenceFragment = new PerformanceSettingsFragment();
                 break;
             case PreferenceConstants.UPLOAD:
                 setTitle(R.string.title_drawer_uploadsettings);
@@ -147,6 +152,7 @@ public class MainPreferenceActivity extends ActionBarActivity {
     public static class PreferenceConstants{
         public static final String GENERAL = "GeneralSettingsFragment";
         public static final String LOGGING = "LoggingSettingsFragment";
+        public static final String PERFORMANCE = "PerformanceSettingsFragment";
         public static final String UPLOAD = "UploadSettingsFragment";
         public static final String FTP = "AutoFtpFragment";
         public static final String EMAIL = "AutoEmailFragment";

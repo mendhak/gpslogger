@@ -24,13 +24,11 @@ import android.os.Bundle;
 import android.preference.*;
 import android.text.Html;
 import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
-import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.FileDialog.FolderSelectorDialog;
@@ -40,7 +38,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.text.MessageFormat;
-import java.util.*;
+
 
 public class LoggingSettingsFragment extends PreferenceFragment
         implements
@@ -99,8 +97,6 @@ public class LoggingSettingsFragment extends PreferenceFragment
         Preference prefNewFileCustomName = (Preference)findPreference("new_file_custom_name");
         prefNewFileCustomName.setOnPreferenceClickListener(this);
 
-        Preference prefListeners = (Preference)findPreference("listeners");
-        prefListeners.setOnPreferenceClickListener(this);
 
         CustomSwitchPreference prefCustomUrl = (CustomSwitchPreference)findPreference("log_customurl_enabled");
         prefCustomUrl.setOnPreferenceChangeListener(this);
@@ -127,42 +123,6 @@ public class LoggingSettingsFragment extends PreferenceFragment
             return true;
         }
 
-        if(preference.getKey().equalsIgnoreCase("listeners")){
-
-            final SharedPreferences.Editor editor = prefs.edit();
-            final Set<String> currentListeners = prefs.getStringSet("listeners", new HashSet<String>(Utilities.GetListeners()));
-            ArrayList<Integer> chosenIndices = new ArrayList<Integer>();
-            final List<String> defaultListeners = Utilities.GetListeners();
-
-            for(String chosenListener : currentListeners){
-                chosenIndices.add(defaultListeners.indexOf(chosenListener));
-            }
-
-            new MaterialDialog.Builder(getActivity())
-                    .title(R.string.listeners_title)
-                    .items(R.array.listeners)
-                    .positiveText(R.string.ok)
-                    .negativeText(R.string.cancel)
-                    .itemsCallbackMultiChoice(chosenIndices.toArray(new Integer[0]), new MaterialDialog.ListCallbackMulti() {
-                        @Override
-                        public void onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
-
-                            List<Integer> selectedItems = Arrays.asList(integers);
-                            final Set<String> chosenListeners = new HashSet<String>();
-
-                            for (Integer selectedItem : selectedItems) {
-                                tracer.debug(defaultListeners.get(selectedItem));
-                                chosenListeners.add(defaultListeners.get(selectedItem));
-                            }
-
-                            if (chosenListeners.size() > 0) {
-                                editor.putStringSet("listeners", chosenListeners);
-                                editor.commit();
-                            }
-
-                        }
-                    }).show();
-        }
 
         if(preference.getKey().equalsIgnoreCase("new_file_custom_name")){
 

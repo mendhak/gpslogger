@@ -275,6 +275,13 @@ public class GpsMainActivity extends ActionBarActivity
                         .setTextSecondary(getString(R.string.pref_logging_summary))
         );
 
+        drawer.addItem(new DrawerItem()
+                        .setImage(getResources().getDrawable(R.drawable.performance))
+                        .setTextPrimary(getString(R.string.pref_performance_title))
+                        .setTextSecondary(getString(R.string.pref_performance_summary))
+        );
+
+
         drawer.addDivider();
 
 
@@ -339,32 +346,35 @@ public class GpsMainActivity extends ActionBarActivity
                     case 1:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.LOGGING);
                         break;
-                    case 3:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
+                    case 2:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.PERFORMANCE);
                         break;
                     case 4:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
                         break;
                     case 5:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
                         break;
                     case 6:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
                         break;
                     case 7:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
                         break;
                     case 8:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
                         break;
                     case 9:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
+                        break;
+                    case 10:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
                         break;
-                    case 11:
+                    case 12:
                         Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
                         startActivity(faqtivity);
                         break;
-                    case 12:
+                    case 13:
                         loggingService.StopLogging();
                         loggingService.stopSelf();
                         finish();

@@ -143,6 +143,7 @@
 
 
     <string name="pref_performance_title">Performance</string>
+    <string name="pref_performance_summary">Timings, filters and listeners</string>
 
 
     <string name="time_before_logging_title">Time before logging</string>
@@ -262,7 +263,7 @@
     <string name="debuglog_summary">Writes debug messages to a file on the SD card. Warning: The file grows very fast.
     </string>
 
-    <string name="pref_logging_summary">Time, distance, file creation</string>
+    <string name="pref_logging_summary">File types, creation and naming</string>
     <string name="pref_general_title">General Options</string>
     <string name="pref_general_summary">Startup and display options</string>
 
