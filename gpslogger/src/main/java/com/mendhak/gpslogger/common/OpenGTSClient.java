@@ -17,24 +17,17 @@
 
 package com.mendhak.gpslogger.common;
 
-import android.content.Context;
-import android.location.Location;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
+
 import com.loopj.android.http.RequestParams;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 import java.net.*;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Scanner;
 import java.util.TimeZone;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -42,32 +35,19 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Francisco Reynoso <franole @ gmail.com>
  */
-public class OpenGTSClient implements IActionListener {
+public class OpenGTSClient {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSClient.class.getSimpleName());
 
-    private Context applicationContext;
-    private IActionListener callback;
     private String server;
     private Integer port;
     private String path;
-    private AsyncHttpClient httpClient;
-    private int locationsCount = 0;
-    private int sentLocationsCount = 0;
-    private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
-            new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
 
 
-    public OpenGTSClient(String server, Integer port, String path, IActionListener callback, Context applicationContext) {
+    public OpenGTSClient(String server, Integer port, String path) {
         this.server = server;
         this.port = port;
         this.path = path;
-        this.callback = callback;
-        this.applicationContext = applicationContext;
-    }
-
-    public void sendHTTP(String id, String accountName, Location location) {
-        sendHTTP(id, accountName, new Location[]{location});
     }
 
     /**
@@ -80,97 +60,63 @@ public class OpenGTSClient implements IActionListener {
      * @param locations locations
      */
 
-    public void sendHTTP(String id, String accountName, Location[] locations) {
-        try {
-            locationsCount = locations.length;
-            StringBuilder url = new StringBuilder();
-            url.append("http://");
-            url.append(getURL());
+    public void sendHTTP(String id, String accountName, SerializableLocation[] locations) throws Exception {
 
-            httpClient = new AsyncHttpClient();
+        for (SerializableLocation loc : locations) {
+            RequestParams params = new RequestParams();
+            params.put("id", id);
+            params.put("dev", id);
 
-            for (Location loc : locations) {
-                RequestParams params = new RequestParams();
-                params.put("id", id);
-                params.put("dev", id);
-
-                params.put("acct", id);
-                if(!Utilities.IsNullOrEmpty(accountName)){
-                    params.put("acct", accountName);
-                }
-
-                params.put("code", "0xF020");
-                params.put("gprmc", OpenGTSClient.GPRMCEncode(loc));
-                params.put("alt", String.valueOf(loc.getAltitude()));
-
-
-                tracer.debug("Sending URL " + url + " with params " + params.toString());
-                httpClient.get(applicationContext, url.toString(), params, new MyAsyncHttpResponseHandler(this));
+            params.put("acct", id);
+            if(!Utilities.IsNullOrEmpty(accountName)){
+                params.put("acct", accountName);
             }
-        } catch (Exception e) {
-            tracer.error("OpenGTSClient.sendHTTP", e);
-            OnFailure();
+
+            params.put("code", "0xF020");
+            params.put("gprmc", OpenGTSClient.GPRMCEncode(loc));
+            params.put("alt", String.valueOf(loc.getAltitude()));
+
+            URL url = new URL("http://" + getURL() + "?" + params.toString());
+            tracer.debug("Sending URL " + url.toString());
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            Scanner s;
+            if(conn.getResponseCode() != 200){
+                s = new Scanner(conn.getErrorStream());
+                tracer.error("Status code: " + String.valueOf(conn.getResponseCode()));
+                if(s.hasNext()){
+                    tracer.error(s.useDelimiter("\\A").next());
+                }
+            } else {
+                s = new Scanner(conn.getInputStream());
+                tracer.debug("Status code: " + String.valueOf(conn.getResponseCode()));
+                if(s.hasNext()){
+                    tracer.debug(s.useDelimiter("\\A").next());
+                }
+            }
         }
+
     }
 
-    public void sendRAW(String id, String accountName, Location location) {
-        if(Utilities.IsNullOrEmpty(accountName)){
-            accountName = id;
-        }
-        String message = accountName + "/" + id + "/" + GPRMCEncode(location);
-        UdpSender sender = new UdpSender(server, port, message, this);
-        EXECUTOR.execute(sender);
-    }
 
-    public void sendRAW(String id, String accountName, Location[] locations) {
-        for (Location loc : locations) {
-            sendRAW(id, accountName, loc);
-        }
-    }
-
-    class UdpSender implements Runnable {
-
-        String server;
-        Integer port;
-        String message;
-        IActionListener callback;
-
-        UdpSender(String server, Integer port, String message, IActionListener callback){
-            this.server = server;
-            this.port = port;
-            this.message = message;
-            this.callback = callback;
-        }
-
-        @Override
-        public void run() {
-            try {
+    public void sendRAW(String id, String accountName, SerializableLocation[] locations) throws Exception {
+        for (SerializableLocation loc : locations) {
+            if(Utilities.IsNullOrEmpty(accountName)){
+                accountName = id;
+            }
+            String message = accountName + "/" + id + "/" + GPRMCEncode(loc);
                 DatagramSocket socket = new DatagramSocket();
                 byte[] buffer = message.getBytes();
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length, InetAddress.getByName(server), port);
                 tracer.debug("Sending " + message + " over UDP");
                 socket.send(packet);
                 socket.close();
-                callback.OnComplete();
-
-            } catch (UnknownHostException e) {
-                tracer.error("Could not getByName on host", e);
-                callback.OnFailure();
-            } catch (SocketException e) {
-                tracer.error("Could not create DatagramSocket", e);
-                callback.OnFailure();
-            } catch (IOException e) {
-                tracer.error("Network communication error", e);
-                callback.OnFailure();
-            } catch (Exception e) {
-                tracer.error("Could not send raw packet", e);
-                callback.OnFailure();
-            }
         }
     }
 
-
-    private String getURL() {
+   private String getURL() {
         StringBuilder url = new StringBuilder();
         url.append(server);
         if (port != null) {
@@ -184,44 +130,6 @@ public class OpenGTSClient implements IActionListener {
     }
 
 
-    private class MyAsyncHttpResponseHandler extends AsyncHttpResponseHandler {
-        private OpenGTSClient callback;
-
-        public MyAsyncHttpResponseHandler(OpenGTSClient callback) {
-            super();
-            this.callback = callback;
-        }
-
-        @Override
-        public void onSuccess(String response) {
-            tracer.info("Response Success :" + response);
-            callback.OnCompleteLocation();
-        }
-
-        @Override
-        public void onFailure(Throwable e, String response) {
-            tracer.error("OnCompleteLocation.MyAsyncHttpResponseHandler Failure with response :" + response, new Exception(e));
-            callback.OnFailure();
-        }
-    }
-
-    public void OnCompleteLocation() {
-        sentLocationsCount += 1;
-        tracer.debug("Sent locations count: " + sentLocationsCount + "/" + locationsCount);
-        if (locationsCount == sentLocationsCount) {
-            OnComplete();
-        }
-    }
-
-    public void OnComplete() {
-        callback.OnComplete();
-    }
-
-    public void OnFailure() {
-        httpClient.cancelRequests(applicationContext, true);
-        callback.OnFailure();
-    }
-
     /**
      * Encode a location as GPRMC string data.
      * <p/>
@@ -231,7 +139,7 @@ public class OpenGTSClient implements IActionListener {
      * @param loc location
      * @return GPRMC data
      */
-    public static String GPRMCEncode(Location loc) {
+    public static String GPRMCEncode(SerializableLocation loc) {
         DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.US);
         DecimalFormat f = new DecimalFormat("0.000000", dfs);
 

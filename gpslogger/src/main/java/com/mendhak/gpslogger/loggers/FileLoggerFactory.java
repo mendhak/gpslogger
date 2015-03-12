@@ -23,6 +23,7 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlLogger;
+import com.mendhak.gpslogger.loggers.opengts.OpenGTSLogger;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class FileLoggerFactory {
         }
 
         if (AppSettings.shouldLogToOpenGTS()) {
-            loggers.add(new OpenGTSLogger());
+            loggers.add(new OpenGTSLogger(context));
         }
 
         if (AppSettings.shouldLogToCustomUrl()) {

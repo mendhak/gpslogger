@@ -56,8 +56,8 @@ public class FileSenderFactory {
         return new AutoEmailHelper(callback);
     }
 
-    public static IFileSender GetOpenGTSSender(Context applicationContext, IActionListener callback) {
-        return new OpenGTSHelper(applicationContext, callback);
+    public static IFileSender GetOpenGTSSender(Context applicationContext) {
+        return new OpenGTSHelper(applicationContext);
     }
 
     public static IFileSender GetFtpSender(Context applicationContext, IActionListener callback) {
@@ -144,7 +144,7 @@ public class FileSenderFactory {
 
         if (AppSettings.isAutoOpenGTSEnabled()) {
             tracer.debug("OpenGTS Sender picked");
-            senders.add(new OpenGTSHelper(applicationContext, callback));
+            senders.add(new OpenGTSHelper(applicationContext));
         }
 
         if (AppSettings.isAutoFtpEnabled()) {

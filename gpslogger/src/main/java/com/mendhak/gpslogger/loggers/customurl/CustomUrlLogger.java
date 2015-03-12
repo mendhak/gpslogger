@@ -122,7 +122,7 @@ class CustomUrlJob extends Job {
         logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(Utilities.GetBuildSerial()));
 
         tracer.debug("Sending to URL: " + logUrl);
-        URL url = new URL("http://192.168.1.91:8000/");
+        URL url = new URL(logUrl);
 
         conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");

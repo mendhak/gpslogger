@@ -45,7 +45,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.heinrichreimersoftware.materialdrawer.DrawerView;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.mendhak.gpslogger.common.*;
-import com.mendhak.gpslogger.common.events.CustomUrlLoggedEvent;
+import com.mendhak.gpslogger.common.events.OpenGTSLoggedEvent;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
@@ -704,7 +704,7 @@ public class GpsMainActivity extends ActionBarActivity
             tracer.debug("Not set up, opening OpenGTS activity");
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
         } else {
-            IFileSender fs = FileSenderFactory.GetOpenGTSSender(getApplicationContext(), this);
+            IFileSender fs = FileSenderFactory.GetOpenGTSSender(getApplicationContext());
             ShowFileListDialog(fs);
         }
     }
@@ -1179,8 +1179,8 @@ public class GpsMainActivity extends ActionBarActivity
 
 
     @SuppressWarnings("UnusedDeclaration")
-    public void onEventMainThread(CustomUrlLoggedEvent i){
+    public void onEventMainThread(OpenGTSLoggedEvent o){
         //Toast.makeText(this, "cannot send the tweet", Toast.LENGTH_SHORT).show();
-        Utilities.MsgBox("Received", "Custom URL logged " + i.success , this);
+        Utilities.HideProgress();
     }
 }
