@@ -38,7 +38,6 @@ import java.util.Scanner;
 
 public class CustomUrlLogger implements IFileLogger {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(CustomUrlLogger.class.getSimpleName());
     private final String name = "URL";
     private final int satellites;
     private final String customLoggingUrl;
@@ -147,10 +146,12 @@ class CustomUrlJob extends Job {
 
     @Override
     protected void onCancel() {
+        EventBus.getDefault().post(new CustomUrlLoggedEvent(false));
     }
 
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
+        tracer.error("Could not send to custom URL", throwable);
         return true;
     }
 }

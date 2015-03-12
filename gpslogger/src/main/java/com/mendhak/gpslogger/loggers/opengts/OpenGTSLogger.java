@@ -20,13 +20,9 @@ package com.mendhak.gpslogger.loggers.opengts;
 import android.content.Context;
 import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.OpenGTSClient;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.loggers.IFileLogger;
-import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.JobManager;
-import com.path.android.jobqueue.Params;
-
 
 /**
  * Send locations directly to an OpenGTS server <br/>

@@ -2,7 +2,6 @@ package com.mendhak.gpslogger.loggers.opengts;
 
 import com.mendhak.gpslogger.common.OpenGTSClient;
 import com.mendhak.gpslogger.common.SerializableLocation;
-import com.mendhak.gpslogger.common.events.CustomUrlLoggedEvent;
 import com.mendhak.gpslogger.common.events.OpenGTSLoggedEvent;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
