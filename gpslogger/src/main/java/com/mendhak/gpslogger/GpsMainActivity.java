@@ -45,6 +45,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.heinrichreimersoftware.materialdrawer.DrawerView;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.mendhak.gpslogger.common.*;
+import com.mendhak.gpslogger.common.events.AutoEmailEvent;
 import com.mendhak.gpslogger.common.events.OpenGTSLoggedEvent;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.senders.IFileSender;
@@ -1180,7 +1181,14 @@ public class GpsMainActivity extends ActionBarActivity
 
     @SuppressWarnings("UnusedDeclaration")
     public void onEventMainThread(OpenGTSLoggedEvent o){
-        //Toast.makeText(this, "cannot send the tweet", Toast.LENGTH_SHORT).show();
+        tracer.debug("Open GTS Event completed, success: " + o.success);
         Utilities.HideProgress();
     }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEventMainThread(AutoEmailEvent o){
+        tracer.debug("Auto Email Event completed, success: " + o.success);
+        Utilities.HideProgress();
+    }
+
 }

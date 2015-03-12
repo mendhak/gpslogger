@@ -52,8 +52,8 @@ public class FileSenderFactory {
         return new GDocsHelper(applicationContext, callback);
     }
 
-    public static IFileSender GetEmailSender(IActionListener callback) {
-        return new AutoEmailHelper(callback);
+    public static IFileSender GetEmailSender(Context applicationContext) {
+        return new AutoEmailHelper(applicationContext);
     }
 
     public static IFileSender GetOpenGTSSender(Context applicationContext) {
@@ -65,11 +65,6 @@ public class FileSenderFactory {
     }
 
     public static void SendFiles(Context applicationContext, IActionListener callback) {
-
-        if(!Utilities.isNetworkAvailable(applicationContext)){
-            tracer.error("No network available, files will not be auto-sent.");
-            return;
-        }
 
         final String currentFileName = Session.getCurrentFileName();
         tracer.info("Sending file " + currentFileName);
@@ -132,7 +127,7 @@ public class FileSenderFactory {
 
         if (AppSettings.isAutoEmailEnabled()) {
             tracer.debug("Email Sender picked");
-            senders.add(new AutoEmailHelper(callback));
+            senders.add(new AutoEmailHelper(applicationContext));
         }
 
         DropBoxHelper dh = new DropBoxHelper(applicationContext, callback);
