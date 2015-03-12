@@ -45,6 +45,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.heinrichreimersoftware.materialdrawer.DrawerView;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.mendhak.gpslogger.common.*;
+import com.mendhak.gpslogger.common.events.CustomUrlLoggedEvent;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
@@ -54,6 +55,7 @@ import com.mendhak.gpslogger.views.GenericViewFragment;
 import com.mendhak.gpslogger.views.GpsBigViewFragment;
 import com.mendhak.gpslogger.views.GpsDetailedViewFragment;
 import com.mendhak.gpslogger.views.GpsSimpleViewFragment;
+import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
@@ -88,6 +90,11 @@ public class GpsMainActivity extends ActionBarActivity
         SetUpNavigationDrawer();
         LoadDefaultFragmentView();
         StartAndBindService();
+        RegisterEventBus();
+    }
+
+    private void RegisterEventBus() {
+        EventBus.getDefault().register(this);
     }
 
 
@@ -114,6 +121,11 @@ public class GpsMainActivity extends ActionBarActivity
     @Override
     protected void onDestroy() {
         StopAndUnbindServiceIfRequired();
+        try {
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
         super.onDestroy();
 
     }
@@ -1163,5 +1175,12 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void GetPreferences() {
         Utilities.PopulateAppSettings(getApplicationContext());
+    }
+
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEventMainThread(CustomUrlLoggedEvent i){
+        //Toast.makeText(this, "cannot send the tweet", Toast.LENGTH_SHORT).show();
+        Utilities.MsgBox("Received", "Custom URL logged " + i.success , this);
     }
 }

@@ -920,29 +920,25 @@ public class GpsLoggingService extends Service implements IActionListener {
      */
     private void WriteToFile(Location loc) {
         tracer.debug("GpsLoggingService.WriteToFile");
-        List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers(getApplicationContext());
+        //List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers(getApplicationContext());
         Session.setAddNewTrackSegment(false);
-        boolean atLeastOneAnnotationSuccess = false;
 
-        for (IFileLogger logger : loggers) {
-            try {
-                logger.Write(loc);
-                if (Session.hasDescription()) {
-                    tracer.debug("Setting annotation: " + Session.getDescription());
-                    logger.Annotate(Session.getDescription(), loc);
-                    atLeastOneAnnotationSuccess = true;
-                }
-            } catch (Exception e) {
-                SetStatus(R.string.could_not_write_to_file);
+        try {
+            FileLoggerFactory.Write(getApplicationContext(), loc);
+            if (Session.hasDescription()) {
+                tracer.debug("Setting annotation: " + Session.getDescription());
+                FileLoggerFactory.Annotate(getApplicationContext(), Session.getDescription(), loc);
             }
         }
-
-        if (atLeastOneAnnotationSuccess) {
-            Session.clearDescription();
-            if (IsMainFormVisible()) {
-                mainServiceClient.OnClearAnnotation();
-            }
+        catch(Exception e){
+             SetStatus(R.string.could_not_write_to_file);
         }
+
+        Session.clearDescription();
+        if (IsMainFormVisible()) {
+            mainServiceClient.OnClearAnnotation();
+        }
+
     }
 
     /**

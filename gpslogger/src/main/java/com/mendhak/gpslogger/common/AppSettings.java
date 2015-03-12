@@ -18,10 +18,18 @@
 package com.mendhak.gpslogger.common;
 
 import android.app.Application;
+import de.greenrobot.event.EventBus;
 
 import java.util.Set;
 
 public class AppSettings extends Application {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        EventBus.builder().logNoSubscriberMessages(false).sendNoSubscriberEvent(false).installDefaultEventBus();
+    }
+
     // ---------------------------------------------------
     // User Preferences
     // ---------------------------------------------------

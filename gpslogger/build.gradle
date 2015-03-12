@@ -145,6 +145,12 @@ dependencies {
     //Progress button
     compile 'com.github.dmytrodanylyk.android-process-button:library:1.0.0'
 
+    //Android Priority Jobqueue
+    compile 'com.path:android-priority-jobqueue:1.1.2'
+
+    //Event bus
+    compile 'de.greenrobot:eventbus:2.4.0'
+
 }
 
 preBuild.doFirst {

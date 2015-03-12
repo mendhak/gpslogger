@@ -18,10 +18,11 @@
 package com.mendhak.gpslogger.loggers;
 
 import android.content.Context;
+import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.loggers.customurl.HttpUrlLogger;
+import com.mendhak.gpslogger.loggers.customurl.CustomUrlLogger;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -58,10 +59,22 @@ public class FileLoggerFactory {
         if (AppSettings.shouldLogToCustomUrl()) {
             float batteryLevel = Utilities.GetBatteryLevel(context);
             String androidId = Utilities.GetAndroidId(context);
-            loggers.add(new HttpUrlLogger(AppSettings.getCustomLoggingUrl(), Session.getSatelliteCount(), batteryLevel, androidId));
+            loggers.add(new CustomUrlLogger(AppSettings.getCustomLoggingUrl(), Session.getSatelliteCount(), batteryLevel, androidId, context));
         }
 
 
         return loggers;
+    }
+
+    public static void Write(Context context, Location loc) throws Exception {
+        for (IFileLogger logger : GetFileLoggers(context)) {
+            logger.Write(loc);
+        }
+    }
+
+    public static void Annotate(Context context, String description, Location loc) throws Exception {
+        for (IFileLogger logger : GetFileLoggers(context)) {
+            logger.Annotate(description, loc);
+        }
     }
 }
