@@ -1208,4 +1208,9 @@ public class GpsMainActivity extends ActionBarActivity
         Utilities.HideProgress();
     }
 
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEventMainThread(FtpEvent o){
+        tracer.debug("FTP Event completed, success: " + o.success);
+        Utilities.HideProgress();
+    }
 }

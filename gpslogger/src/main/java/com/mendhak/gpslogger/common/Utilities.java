@@ -549,7 +549,7 @@ public class Utilities {
 
     public static boolean IsFtpSetup() {
 
-        FtpHelper helper = new FtpHelper(null);
+        FtpHelper helper = new FtpHelper();
 
         return helper.ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(),
                 AppSettings.getFtpPassword(), AppSettings.getFtpPort(), AppSettings.FtpUseFtps(),

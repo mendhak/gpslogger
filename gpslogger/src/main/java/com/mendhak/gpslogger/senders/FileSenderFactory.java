@@ -61,7 +61,7 @@ public class FileSenderFactory {
     }
 
     public static IFileSender GetFtpSender(Context applicationContext, IActionListener callback) {
-        return new FtpHelper(callback);
+        return new FtpHelper();
     }
 
     public static void SendFiles(Context applicationContext, IActionListener callback) {
@@ -144,7 +144,7 @@ public class FileSenderFactory {
 
         if (AppSettings.isAutoFtpEnabled()) {
             tracer.debug("FTP Sender picked");
-            senders.add(new FtpHelper(callback));
+            senders.add(new FtpHelper());
         }
 
         return senders;

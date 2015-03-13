@@ -21,40 +21,63 @@ package com.mendhak.gpslogger.senders.ftp;
 
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.IActionListener;
+import com.mendhak.gpslogger.common.events.FtpEvent;
+import com.mendhak.gpslogger.common.events.GDocsEvent;
 import com.mendhak.gpslogger.senders.IFileSender;
+import com.path.android.jobqueue.Job;
+import com.path.android.jobqueue.JobManager;
+import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Date;
 import java.util.List;
 
 public class FtpHelper implements IFileSender {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FtpHelper.class.getSimpleName());
-    IActionListener callback;
 
-    public FtpHelper(IActionListener callback) {
-        this.callback = callback;
+
+    public FtpHelper() {
     }
 
     void TestFtp(String servername, String username, String password, String directory, int port, boolean useFtps, String protocol, boolean implicit) {
-        String data = "GPSLogger for Android, test file.  Generated at " + (new Date()).toLocaleString() + "\r\n";
-        ByteArrayInputStream in = new ByteArrayInputStream(data.getBytes());
 
-        Thread t = new Thread(new FtpUploadHandler(callback, servername, port, username, password, directory,
-                useFtps, protocol, implicit, in, "gpslogger_test.txt"));
-        t.start();
+        File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
+        if (!gpxFolder.exists()) {
+            gpxFolder.mkdirs();
+        }
+
+        tracer.debug("Creating gpslogger_test.xml");
+        File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
+
+        try {
+            if (!testFile.exists()) {
+                testFile.createNewFile();
+
+                FileOutputStream initialWriter = new FileOutputStream(testFile, true);
+                BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
+
+                StringBuilder initialString = new StringBuilder();
+                initialString.append("<x>This is a test file</x>");
+                initialOutput.write(initialString.toString().getBytes());
+                initialOutput.flush();
+                initialOutput.close();
+            }
+
+        } catch (Exception ex) {
+            EventBus.getDefault().post(new FtpEvent(false));
+        }
+
+        JobManager jobManager = AppSettings.GetJobManager();
+        jobManager.addJobInBackground(new FtpJob(servername, port, username, password, directory,
+                useFtps, protocol, implicit, testFile, "gpslogger_test.txt"));
     }
 
     @Override
     public void UploadFile(List<File> files) {
-
-
         if (!ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(), AppSettings.getFtpPassword(),
                 AppSettings.getFtpPort(), AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit())) {
-            callback.OnFailure();
+            EventBus.getDefault().post(new FtpEvent(false));
         }
 
         for (File f : files) {
@@ -64,12 +87,12 @@ public class FtpHelper implements IFileSender {
 
     public void UploadFile(File f) {
         try {
-            FileInputStream fis = new FileInputStream(f);
-            Thread t = new Thread(new FtpUploadHandler(callback, AppSettings.getFtpServerName(), AppSettings.getFtpPort(),
+            JobManager jobManager = AppSettings.GetJobManager();
+            jobManager.addJobInBackground(new FtpJob(AppSettings.getFtpServerName(), AppSettings.getFtpPort(),
                     AppSettings.getFtpUsername(), AppSettings.getFtpPassword(), AppSettings.getFtpDirectory(),
                     AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit(),
-                    fis, f.getName()));
-            t.start();
+                    f, f.getName()));
+
         } catch (Exception e) {
             tracer.error("Could not prepare file for upload.", e);
         }
@@ -93,42 +116,3 @@ public class FtpHelper implements IFileSender {
     }
 }
 
-class FtpUploadHandler implements Runnable {
-
-    IActionListener helper;
-    String server;
-    int port;
-    String username;
-    String password;
-    boolean useFtps;
-    String protocol;
-    boolean implicit;
-    InputStream inputStream;
-    String fileName;
-    String directory;
-
-    public FtpUploadHandler(IActionListener helper, String server, int port, String username,
-                            String password, String directory, boolean useFtps, String protocol, boolean implicit,
-                            InputStream inputStream, String fileName) {
-        this.helper = helper;
-        this.server = server;
-        this.port = port;
-        this.username = username;
-        this.password = password;
-        this.useFtps = useFtps;
-        this.protocol = protocol;
-        this.implicit = implicit;
-        this.inputStream = inputStream;
-        this.fileName = fileName;
-        this.directory = directory;
-    }
-
-    @Override
-    public void run() {
-        if (Ftp.Upload(server, username, password, directory, port, useFtps, protocol, implicit, inputStream, fileName)) {
-            helper.OnComplete();
-        } else {
-            helper.OnFailure();
-        }
-    }
-}
