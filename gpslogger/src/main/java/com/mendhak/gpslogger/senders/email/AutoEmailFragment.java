@@ -99,7 +99,7 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
         MaterialEditTextPreference txtTarget = (MaterialEditTextPreference) findPreference("autoemail_target");
         MaterialEditTextPreference txtFrom = (MaterialEditTextPreference) findPreference("smtp_from");
 
-        AutoEmailHelper aeh = new AutoEmailHelper(getActivity());
+        AutoEmailHelper aeh = new AutoEmailHelper();
         aeh.SendTestEmail(txtSmtpServer.getText(), txtSmtpPort.getText(),
                 txtUsername.getText(), txtPassword.getText(),
                 chkUseSsl.isChecked(), txtTarget.getText(), txtFrom.getText());

@@ -684,7 +684,7 @@ public class GpsMainActivity extends ActionBarActivity
             return;
         }
 
-        ShowFileListDialog(FileSenderFactory.GetOsmSender(getApplicationContext(), this));
+        ShowFileListDialog(FileSenderFactory.GetOsmSender(getApplicationContext()));
     }
 
     private void UploadToDropBox() {
@@ -696,7 +696,7 @@ public class GpsMainActivity extends ActionBarActivity
             return;
         }
 
-        ShowFileListDialog(FileSenderFactory.GetDropBoxSender(getApplication(), this));
+        ShowFileListDialog(FileSenderFactory.GetDropBoxSender(getApplication()));
     }
 
     private void SendToOpenGTS() {
@@ -716,7 +716,7 @@ public class GpsMainActivity extends ActionBarActivity
             return;
         }
 
-        ShowFileListDialog(FileSenderFactory.GetGDocsSender(getApplicationContext(), this));
+        ShowFileListDialog(FileSenderFactory.GetGDocsSender(getApplicationContext()));
     }
 
     private void SendToFtp() {
@@ -724,7 +724,7 @@ public class GpsMainActivity extends ActionBarActivity
             tracer.debug("Not setup, opening FTP setup activity");
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
         } else {
-            IFileSender fs = FileSenderFactory.GetFtpSender(getApplicationContext(), this);
+            IFileSender fs = FileSenderFactory.GetFtpSender(getApplicationContext());
             ShowFileListDialog(fs);
         }
     }
