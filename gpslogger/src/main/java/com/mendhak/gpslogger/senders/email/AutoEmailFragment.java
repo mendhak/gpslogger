@@ -19,28 +19,20 @@ package com.mendhak.gpslogger.senders.email;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.*;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.AutoEmailEvent;
-import com.mendhak.gpslogger.common.events.OpenGTSLoggedEvent;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
 
 public class AutoEmailFragment extends PreferenceValidationFragment implements
         OnPreferenceChangeListener,  OnPreferenceClickListener {
-
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoEmailFragment.class.getSimpleName());
-    private final Handler handler = new Handler();
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

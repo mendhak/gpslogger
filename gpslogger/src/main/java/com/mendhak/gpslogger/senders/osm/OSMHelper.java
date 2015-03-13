@@ -18,40 +18,28 @@
 package com.mendhak.gpslogger.senders.osm;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.senders.IFileSender;
+import com.path.android.jobqueue.JobManager;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.List;
 
-public class OSMHelper implements IActionListener, IFileSender {
+public class OSMHelper implements IFileSender {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OSMHelper.class.getSimpleName());
-    IActionListener callback;
-    Context ctx;
+    Context context;
 
-    public OSMHelper(Context ctx, IActionListener callback) {
+    public OSMHelper(Context context) {
 
-        this.ctx = ctx;
-        this.callback = callback;
+        this.context = context;
     }
 
     public static OAuthProvider GetOSMAuthProvider(Context ctx) {
@@ -59,7 +47,6 @@ public class OSMHelper implements IActionListener, IFileSender {
                 ctx.getString(R.string.osm_requesttoken_url),
                 ctx.getString(R.string.osm_accesstoken_url),
                 ctx.getString(R.string.osm_authorize_url));
-
     }
 
     public static boolean IsOsmAuthorized(Context ctx) {
@@ -69,16 +56,6 @@ public class OSMHelper implements IActionListener, IFileSender {
 
         return (oAuthAccessToken != null && oAuthAccessToken.length() > 0);
     }
-
-    public static Intent GetOsmSettingsIntent(Context ctx) {
-        Intent intentOsm;
-
-        intentOsm = new Intent(ctx.getPackageName() + ".OSM_AUTHORIZE");
-        intentOsm.setData(Uri.parse("gpslogger://authorize"));
-
-        return intentOsm;
-    }
-
 
     public static OAuthConsumer GetOSMAuthConsumer(Context ctx) {
 
@@ -113,14 +90,6 @@ public class OSMHelper implements IActionListener, IFileSender {
         return consumer;
     }
 
-    public void OnComplete() {
-        callback.OnComplete();
-    }
-
-    public void OnFailure() {
-        callback.OnFailure();
-    }
-
     @Override
     public void UploadFile(List<File> files) {
         //Upload only GPX
@@ -129,84 +98,27 @@ public class OSMHelper implements IActionListener, IFileSender {
             if (f.getName().contains(".gpx")) {
                 UploadFile(f.getName());
             }
-
         }
-
     }
-
 
     public void UploadFile(String fileName) {
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
         File chosenFile = new File(gpxFolder, fileName);
-        OAuthConsumer consumer = GetOSMAuthConsumer(ctx);
-        String gpsTraceUrl = ctx.getString(R.string.osm_gpstrace_url);
+        OAuthConsumer consumer = GetOSMAuthConsumer(context);
+        String gpsTraceUrl = context.getString(R.string.osm_gpstrace_url);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String description = prefs.getString("osm_description", "");
         String tags = prefs.getString("osm_tags", "");
         String visibility = prefs.getString("osm_visibility", "private");
 
-        Thread t = new Thread(new OsmUploadHandler(this, consumer, gpsTraceUrl, chosenFile, description, tags, visibility));
-        t.start();
+        JobManager jobManager = new JobManager(this.context);
+        jobManager.addJobInBackground(new OSMJob( consumer, gpsTraceUrl, chosenFile, description, tags, visibility));
     }
 
     @Override
     public boolean accept(File dir, String name) {
         return name.toLowerCase().contains(".gpx");
-    }
-
-
-    private class OsmUploadHandler implements Runnable {
-        OAuthConsumer consumer;
-        String gpsTraceUrl;
-        File chosenFile;
-        String description;
-        String tags;
-        String visibility;
-        IActionListener helper;
-
-        public OsmUploadHandler(IActionListener helper, OAuthConsumer consumer, String gpsTraceUrl, File chosenFile, String description, String tags, String visibility) {
-            this.consumer = consumer;
-            this.gpsTraceUrl = gpsTraceUrl;
-            this.chosenFile = chosenFile;
-            this.description = description;
-            this.tags = tags;
-            this.visibility = visibility;
-            this.helper = helper;
-        }
-
-        public void run() {
-            try {
-                HttpPost request = new HttpPost(gpsTraceUrl);
-
-                consumer.sign(request);
-
-                MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-
-                FileBody gpxBody = new FileBody(chosenFile);
-
-                entity.addPart("file", gpxBody);
-                if (description == null || description.length() <= 0) {
-                    description = "GPSLogger for Android";
-                }
-
-                entity.addPart("description", new StringBody(description));
-                entity.addPart("tags", new StringBody(tags));
-                entity.addPart("visibility", new StringBody(visibility));
-
-                request.setEntity(entity);
-                DefaultHttpClient httpClient = new DefaultHttpClient();
-
-                HttpResponse response = httpClient.execute(request);
-                int statusCode = response.getStatusLine().getStatusCode();
-                tracer.debug("OSM Upload - " + String.valueOf(statusCode));
-                helper.OnComplete();
-
-            } catch (Exception e) {
-                helper.OnFailure();
-                tracer.error("OsmUploadHelper.run", e);
-            }
-        }
     }
 
 }

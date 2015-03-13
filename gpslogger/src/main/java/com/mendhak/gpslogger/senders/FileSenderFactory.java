@@ -41,7 +41,7 @@ public class FileSenderFactory {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FileSenderFactory.class.getSimpleName());
 
     public static IFileSender GetOsmSender(Context applicationContext, IActionListener callback) {
-        return new OSMHelper(applicationContext, callback);
+        return new OSMHelper(applicationContext);
     }
 
     public static IFileSender GetDropBoxSender(Context applicationContext, IActionListener callback) {
@@ -122,7 +122,7 @@ public class FileSenderFactory {
 
         if (OSMHelper.IsOsmAuthorized(applicationContext)) {
             tracer.debug("OSM Sender picked");
-            senders.add(new OSMHelper(applicationContext, callback));
+            senders.add(new OSMHelper(applicationContext));
         }
 
         if (AppSettings.isAutoEmailEnabled()) {
