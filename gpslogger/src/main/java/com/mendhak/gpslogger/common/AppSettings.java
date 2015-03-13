@@ -69,8 +69,8 @@ public class AppSettings extends Application {
     private static int minimumAccuracy;
     private static boolean shouldSendZipFile;
 
-    private static boolean LogToOpenGTS;
-    private static boolean openGTSEnabled;
+    private static boolean logToOpenGts;
+
     private static boolean openGtsAutoSendEnabled;
     private static String openGTSServer;
     private static String openGTSServerPort;
@@ -413,19 +413,11 @@ public class AppSettings extends Application {
     }
 
     public static boolean shouldLogToOpenGTS() {
-        return LogToOpenGTS;
+        return logToOpenGts;
     }
 
-    public static void setLogToOpenGTS(boolean logToOpenGTS) {
-        AppSettings.LogToOpenGTS = logToOpenGTS;
-    }
-
-    public static boolean isOpenGTSEnabled() {
-        return openGTSEnabled;
-    }
-
-    public static void setOpenGTSEnabled(boolean openGTSEnabled) {
-        AppSettings.openGTSEnabled = openGTSEnabled;
+    public static void setLogToOpenGts(boolean logToOpenGts) {
+        AppSettings.logToOpenGts = logToOpenGts;
     }
 
     public static boolean isOpenGtsAutoSendEnabled() {

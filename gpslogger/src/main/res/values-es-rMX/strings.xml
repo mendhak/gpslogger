@@ -31,7 +31,6 @@
   <string name="summary_dist_regardless">máximo</string>
   <string name="summary_current_filename">Archivo:</string>
   <string name="sharing_location_only">Sólo ubicación</string>
-  <string name="sharing_pick_file">Seleccionar un archivo para compartir</string>
   <string name="sharing_mylocation">Mi ubicación</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Compartir a través de</string>
@@ -41,7 +40,6 @@
   <string name="meters">&#160;metros</string>
   <string name="error">Error</string>
   <string name="error_connection">Error de conexión. Compruebe la configuración del teléfono.</string>
-  <string name="gpsprovider_unavailable">Ningún proveedor GPS disponible. Por favor, compruebe su configuración de ubicación y habilitar a un proveedor de localización.     </string>
   <string name="started">Iniciado</string>
   <string name="providername_gps">Satélites GPS</string>
   <string name="providername_celltower">Torres Celulares</string>
@@ -112,8 +110,6 @@
   <string name="startonbootup_summary">Lanzar app y el registro de inicio cuando se inicia el teléfono</string>
   <string name="autoemail_summary">Emails automáticamente el archivo de registro a la dirección de su elección</string>
   <string name="please_wait">Espera.</string>
-  <string name="autoemail_autosend">Activar los mensajes de correo electrónico</string>
-  <string name="autoemail_autosend_summary">Permite enviar el archivo de registro a una dirección de correo electrónico de su elección.     </string>
   <string name="autoemail_target">Direcciones de correo electrónico de destino</string>
   <string name="autoemail_frequency_whenistop">Cuando presiono stop</string>
   <string name="autoemail_smtp_category">Configuración de correo electrónico</string>
@@ -141,7 +137,6 @@
   <string name="stopped">Detenido</string>
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Establecer etiquetas, descripción, visibilidad y autorización para cargar GPS trazas     </string>
-  <string name="osm_preferences_title">Preferencias de OpenStreetMap</string>
   <string name="osm_lbl_authorize">Autorizar esta app</string>
   <string name="osm_lbl_authorize_description">Debe conceder los permisos de este app para cargar GPS traza a OpenStreetMap. Se pueden definir etiquetas, descripciones y visibilidad aquí después de que usted ha autorizado esta app.     </string>
   <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
@@ -162,7 +157,6 @@
   <string name="osm_pick_file">Seleccionar un archivo para cargar</string>
   <string name="debuglog_title">Escribir en archivo de depuración</string>
   <string name="debuglog_summary">Escribe mensajes a un archivo en la tarjeta SD de depuración. ADVERTENCIA: El archivo crece muy rápido.     </string>
-  <string name="pref_logging_summary">Tiempo, distancia, creación de archivos</string>
   <string name="pref_general_title">Opciones generales</string>
   <string name="pref_general_summary">Opciones de inicio y la pantalla</string>
   <string name="emailprovider_google">Google Mail</string>
@@ -206,7 +200,6 @@
   <string name="log_opengts_summary">Enviar datos GPRMC a un servidor OpenGTS en línea.</string>
   <string name="opengts_setup_summary">Enviar trazas GPS a un servidor OpenGTS de su elección.</string>
   <string name="opengts_enabled">Habilitar OpenGTS</string>
-  <string name="opengts_enabled_summary">Habilitar a este servidor OpenGTS.</string>
   <string name="autoopengts_autosend">Habilitar enviar automáticamente</string>
   <string name="autoopengts_autosend_summary">Permite enviar automáticamente las trazas GPS.</string>
   <string name="autoopengts_server_category">Configuración OpenGTS</string>
@@ -241,7 +234,6 @@
   <string name="autoftp_testing">Probando subida a FTP</string>
   <string name="autoftp_invalid_settings">Configuración no válida</string>
   <string name="autoftp_invalid_summary">Algunas de las preferencias no son válidas. Por favor asegúrese que ha rellenado todos los campos pertinentes.</string>
-  <string name="autoftp_enabled">FTP habilitado</string>
   <string name="ftp_upload">Subir FTP</string>
   <string name="autoftp_setup_summary">Sube tus archivos a un servidor FTP (S). Nota: Esto no cubre SFTP.</string>
   <string name="faq_screen_title">Preguntas más frecuentes</string>
@@ -250,7 +242,6 @@
   <string name="gpsf_missing_description">Necesitaras Google Play Services Framework para utilizar esta función.</string>
   <string name="log_customurl_title">Registrar usando una URL personalizada</string>
   <string name="log_customurl_summary">Enviar información de registros a tu propio servidor usando HTTP</string>
-  <string name="log_customurl_urlparameters">Parámetros de URL</string>
   <string name="txt_annotation">Anotación:</string>
   <string name="txt_time_isoformat">Hora UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Proveedor:</string>

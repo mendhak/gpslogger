@@ -46,7 +46,6 @@
   <string name="retry_time_hint">Anna sekunnit (max 9999)</string>
   <string name="enabledisablegps_title">Ota/Poista GPS käytöstä</string>
   <string name="startonbootup_title">Aloita käynnistyksen yhteydessä</string>
-  <string name="autoemail_autosend">Käytä sähköpostia</string>
   <string name="autoemail_smtp_category">Sähköpostiasetukset</string>
   <string name="autoemail_username">Käyttäjätunnus</string>
   <string name="autoemail_username_summary">Sähköpostipalveluntarjoajan käyttäjätunnus</string>
@@ -67,7 +66,6 @@
   <string name="gps_stopped">GPS pysäytetty</string>
   <string name="stopped">Pysäytetty</string>
   <string name="osm_setup_title">OpenStreetMap</string>
-  <string name="osm_preferences_title">OpenStreetMapin asetukset</string>
   <string name="osm_lbl_authorize">Salli tämä sovellus</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">Poista lupa</string>
@@ -108,7 +106,6 @@
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit_summary">Jätä valitsematta jos et tiedä.</string>
   <string name="autoftp_invalid_settings">Virheelliset asetukset</string>
-  <string name="autoftp_enabled">FTP käytössä</string>
   <string name="faq_screen_title">Usein kysyttyjä kysymyksiä</string>
   <string name="menu_faq">Apu ja UKK</string>
   <string name="gpsf_missing">Puuttuva palvelu</string>

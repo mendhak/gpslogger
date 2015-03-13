@@ -163,7 +163,7 @@ public class Utilities {
         AppSettings.setLogToCustomUrl(prefs.getBoolean("log_customurl_enabled", false));
         AppSettings.setCustomLoggingUrl(prefs.getString("log_customurl_url", ""));
 
-        AppSettings.setLogToOpenGTS(prefs.getBoolean("log_opengts", false));
+        AppSettings.setLogToOpenGts(prefs.getBoolean("log_opengts", false));
 
         Set<String> listeners = new HashSet<String>(GetListeners());
         AppSettings.setChosenListeners(prefs.getStringSet("listeners", listeners));
@@ -253,7 +253,6 @@ public class Utilities {
         AppSettings.setDebugToFile(prefs.getBoolean("debugtofile", false));
         AppSettings.setShouldSendZipFile(prefs.getBoolean("autosend_sendzip", true));
         AppSettings.setSmtpFrom(prefs.getString("smtp_from", ""));
-        AppSettings.setOpenGTSEnabled(prefs.getBoolean("opengts_enabled", false));
         AppSettings.setOpenGtsAutoSendEnabled(prefs.getBoolean("autoopengts_enabled", false));
         AppSettings.setOpenGTSServer(prefs.getString("opengts_server", ""));
         AppSettings.setOpenGTSServerPort(prefs.getString("opengts_server_port", ""));
@@ -542,8 +541,7 @@ public class Utilities {
     }
 
     public static boolean IsOpenGTSSetup() {
-        return AppSettings.isOpenGTSEnabled() &&
-                AppSettings.getOpenGTSServer().length() > 0
+        return  AppSettings.getOpenGTSServer().length() > 0
                 && AppSettings.getOpenGTSServerPort().length() > 0
                 && AppSettings.getOpenGTSServerCommunicationMethod().length() > 0
                 && AppSettings.getOpenGTSDeviceId().length() > 0;

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="title_drawer_headsettings">GPSLogger</string>
     <string name="title_drawer_generalsettings">General settings</string>
     <string name="title_drawer_loggingsettings">Logging settings</string>
     <string name="title_drawer_uploadsettings">Upload settings</string>
@@ -50,7 +49,6 @@
 
 
     <string name="sharing_location_only">Location only</string>
-    <string name="sharing_pick_file">Pick a file to share</string>
     <string name="sharing_mylocation">My location</string>
     <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
     <string name="sharing_via">Share via</string>
@@ -180,10 +178,6 @@
 
     <string name="please_wait">Please wait.</string>
 
-    <string name="autoemail_autosend">Enable emails</string>
-    <string name="autoemail_autosend_summary">Enables sending the log file to an email address of your choosing.
-    </string>
-
 
     <string name="autoemail_target">Target email addresses</string>
 
@@ -225,9 +219,6 @@
     <string name="osm_setup_title">OpenStreetMap</string>
     <string name="osm_setup_summary">Set tags, description, visibility and authorization for uploading GPS Traces
     </string>
-    <string name="osm_preferences_title">OpenStreetMap Preferences</string>
-
-
 
     <string name="osm_lbl_authorize">Authorize this app</string>
     <string name="osm_lbl_authorize_description">You will need to grant this app permissions in order to upload GPS
@@ -296,7 +287,6 @@
 
     <string name="gdocs_upload">Google Drive</string>
 
-    <string name="gdocs_settings_screenname">Google Drive Upload Settings</string>
     <string name="gdocs_startauthorization">Authorize with Google Drive</string>
     <string name="gdocs_authorize_summary">Takes you to Google Drive where you need to authorize GPSLogger</string>
     <string name="gdocs_clearauthorization">Clear Authorization</string>
@@ -340,7 +330,6 @@
     <string name="opengts_setup_title">OpenGTS</string>
     <string name="opengts_setup_summary">Send GPS traces to an OpenGTS server of your choice.</string>
     <string name="opengts_enabled">Enable OpenGTS</string>
-    <string name="opengts_enabled_summary">Enable this OpenGTS server.</string>
     <string name="autoopengts_autosend">Enable Automatically Send</string>
     <string name="autoopengts_autosend_summary">Enables automatically sending the GPS traces.</string>
     <string name="autoopengts_server_category">OpenGTS Settings</string>
@@ -377,7 +366,6 @@
     <string name="autoftp_invalid_summary">Some of your settings are invalid. Please ensure that you have filled out all
         relevant fields.
     </string>
-    <string name="autoftp_enabled">FTP enabled</string>
     <string name="ftp_upload">FTP upload</string>
 
     <string name="autoftp_setup_title">FTP</string>
@@ -390,7 +378,6 @@
 
     <string name="log_customurl_title">Log to custom URL</string>
     <string name="log_customurl_summary">Send logging info to your own server over HTTP</string>
-    <string name="log_customurl_urlparameters">URL Parameters</string>
     <string name="txt_annotation">Annotation:</string>
     <string name="txt_time_isoformat">Time UTC (2011-12-25T15:27:33Z):</string>
     <string name="txt_provider">Provider:</string>

@@ -69,15 +69,14 @@ public class OpenGTSFragment extends PreferenceValidationFragment implements
     }
 
     private boolean IsFormValid() {
-        CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("opengts_enabled");
+
         MaterialEditTextPreference txtOpenGTSServer = (MaterialEditTextPreference) findPreference("opengts_server");
         MaterialEditTextPreference txtOpenGTSServerPort = (MaterialEditTextPreference) findPreference("opengts_server_port");
         MaterialListPreference txtOpenGTSCommunicationMethod = (MaterialListPreference) findPreference("opengts_server_communication_method");
         MaterialEditTextPreference txtOpenGTSServerPath = (MaterialEditTextPreference) findPreference("autoopengts_server_path");
         MaterialEditTextPreference txtOpenGTSDeviceId = (MaterialEditTextPreference) findPreference("opengts_device_id");
 
-        return !chkEnabled.isChecked()
-                || txtOpenGTSServer.getText() != null && txtOpenGTSServer.getText().length() > 0
+        return  txtOpenGTSServer.getText() != null && txtOpenGTSServer.getText().length() > 0
                 && txtOpenGTSServerPort.getText() != null && isNumeric(txtOpenGTSServerPort.getText())
                 && txtOpenGTSCommunicationMethod.getValue() != null && txtOpenGTSCommunicationMethod.getValue().length() > 0
                 && txtOpenGTSDeviceId.getText() != null && txtOpenGTSDeviceId.getText().length() > 0

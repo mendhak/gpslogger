@@ -30,7 +30,6 @@
   <string name="summary_dist_regardless">màxim</string>
   <string name="summary_current_filename">Arxiu:</string>
   <string name="sharing_location_only">Només ubicació</string>
-  <string name="sharing_pick_file">Trieu un arxiu per compartir</string>
   <string name="sharing_mylocation">La meva ubicació</string>
   <string name="sharing_via">Compartir via</string>
   <string name="foot">&#160;peu</string>
@@ -39,7 +38,6 @@
   <string name="meters">&#160;metres</string>
   <string name="error">Error</string>
   <string name="error_connection">Error de connexió. Si us plau revisa les opcions del telèfon.</string>
-  <string name="gpsprovider_unavailable">Cap proveïdor de GPS està disponible. Si us plau revisa les opcions del telèfon i activa el proveïdor d\'ubicacions.</string>
   <string name="started">Iniciat</string>
   <string name="providername_gps">Satèl·lits GPS</string>
   <string name="providername_celltower">torres de telefonia</string>

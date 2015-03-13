@@ -34,7 +34,6 @@
   <string name="summary_dist_regardless">สูงสุด</string>
   <string name="summary_current_filename">ไฟล์:</string>
   <string name="sharing_location_only">ตำแหน่งเท่านั้น</string>
-  <string name="sharing_pick_file">เลือกไฟล์ที่จะแชร์</string>
   <string name="sharing_mylocation">ตำแหน่งของฉัน</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.co.th/maps?q=%s,%s</string>
   <string name="sharing_via">แชร์ผ่าน</string>
@@ -44,7 +43,6 @@
   <string name="meters">&#160;เมตร</string>
   <string name="error">ผิดพลาด</string>
   <string name="error_connection">การเชื่อมต่อผิดพลาด กรุณาตรวจสอบการตั้งค่าโทรศัพท์ของคุณ</string>
-  <string name="gpsprovider_unavailable">ไม่มีข้อมูลจาก GPS กรุณาตรวจสอบการตั้งค่าและเปิดใช้งานบริการระบุตำแหน่ง</string>
   <string name="started">เริ่มแล้ว</string>
   <string name="providername_gps">ดาวเทียม GPS</string>
   <string name="providername_celltower">เสาสัญญานมือถือ</string>
@@ -115,9 +113,6 @@
   <string name="startonbootup_title">เริ่มเมื่อบูตเครื่อง</string>
   <string name="startonbootup_summary">เปิดแอพพร้อมเริ่มบันทึกเมื่อเปิดโทรศัพท์</string>
   <string name="please_wait">กรุณารอสักครู่</string>
-  <string name="autoemail_autosend">เปิดใช้งานอีเมล์</string>
-  <string name="autoemail_autosend_summary">เปิดส่งไฟล์บันทึกไปยังอีเมล์ที่ท่านเลือก
-    </string>
   <string name="autoemail_target">ที่อยู่อีเมล์ปลายทาง</string>
   <string name="autoemail_frequency_whenistop">เมื่อฉันกดหยุด</string>
   <string name="autoemail_smtp_category">การตั้งค่าอีเมล์</string>
@@ -143,7 +138,6 @@
   <string name="gps_stopped">จีพีเอสหยุดชั่วคราว</string>
   <string name="stopped">หยุดแล้ว</string>
   <string name="osm_setup_title">OpenStreetMap</string>
-  <string name="osm_preferences_title">กำหนดลักษณะ OpenStreetMap</string>
   <string name="osm_lbl_authorize">อนุมัติแอพนี้</string>
   <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
   <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
@@ -182,7 +176,6 @@
   <string name="log_opengts_title">บันทึกไปเซิร์ฟเวอร์ OpenGTS</string>
   <string name="log_opengts_summary">ส่งข้อมูล GPRMC ออนไลน์ไปยังเซิร์ฟเวอร์ OpenGTS</string>
   <string name="opengts_enabled">เปิดใช้งาน OpenGTS</string>
-  <string name="opengts_enabled_summary">เปิดใช้งานเซิร์ฟเวอร์ OpenGTS นี้</string>
   <string name="autoopengts_server_category">การตั้งค่า OpenGTS</string>
   <string name="autoopengts_invalid_form">ค่าไม่ถูกต้อง</string>
   <string name="opengts_upload">ส่งไปที่ OpenGTS</string>
@@ -209,7 +202,6 @@
   <string name="autoftp_test_summary">อัพโหลดไฟล์ทดสอบผ่าน FTP</string>
   <string name="autoftp_testing">กำลังทดสอบอัพโหลดผ่าน FTP</string>
   <string name="autoftp_invalid_settings">การตั้งค่าไม่ถูกต้อง</string>
-  <string name="autoftp_enabled">FTP เปิดแล้ว</string>
   <string name="ftp_upload">อัพโหลดผ่าน FTP</string>
   <string name="autoftp_setup_summary">อัพโหลดไฟล์ของคุณขึ้น FTP(S) เซิฟเว่อร์  (ไม่รองรับ SFTP)</string>
   <string name="faq_screen_title">คำถามที่ถามบ่อย</string>

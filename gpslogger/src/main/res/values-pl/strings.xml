@@ -31,7 +31,6 @@
   <string name="summary_dist_regardless">maksimum</string>
   <string name="summary_current_filename">Plik:</string>
   <string name="sharing_location_only">Tylko lokalizacja</string>
-  <string name="sharing_pick_file">Wybierz plik do udostępnienia</string>
   <string name="sharing_mylocation">Moja lokalizacja</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Udostępnij przez...</string>
@@ -41,7 +40,6 @@
   <string name="meters">&#160;metrów</string>
   <string name="error">Błąd</string>
   <string name="error_connection">Błąd połączenia. Proszę Sprawdzić ustawienia telefonu.</string>
-  <string name="gpsprovider_unavailable">Brak dostawcy GPS. Proszę sprawdzić ustawienia lokalizacji oraz włączyć dostawcę lokalizacji.</string>
   <string name="started">Rozpoczęte</string>
   <string name="providername_gps">Satelity GPS</string>
   <string name="providername_celltower">Wieże telefonii</string>
@@ -111,8 +109,6 @@
   <string name="startonbootup_summary">Uruchamianie programu i logowania po uruchomieniu telefonu</string>
   <string name="autoemail_summary">Automatyczne wysyłanie maila z plikiem logu na podany adres</string>
   <string name="please_wait">Proszę czekać.</string>
-  <string name="autoemail_autosend">Włącz wiadomości e-mail</string>
-  <string name="autoemail_autosend_summary">Włączenie automatycznego wysyłania na wskazany adres.</string>
   <string name="autoemail_target">Adresy docelowe</string>
   <string name="autoemail_frequency_whenistop">Po zatrzymaniu logowania</string>
   <string name="autoemail_smtp_category">Ustawienia poczty</string>
@@ -140,7 +136,6 @@
   <string name="stopped">Zatrzymany</string>
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Ustawienie tagów, opisy, widoczność i uprawnień do przesyłania śladów GPS</string>
-  <string name="osm_preferences_title">Ustawienia OpenStreetMap</string>
   <string name="osm_lbl_authorize">Uprawnij ten program.</string>
   <string name="osm_lbl_authorize_description">Należy udzielić uprawnień w celu przesyłania śladów GPS do OpenStreetMap. Istnieje możliwość ustawienia tagów, opisu i widoczność po przydzieleniu uprawnień.</string>
   <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
@@ -161,7 +156,6 @@
   <string name="osm_pick_file">Wybierz plik do przesłania</string>
   <string name="debuglog_title">Zapisuj do pliku debug</string>
   <string name="debuglog_summary">Zapisywanie informacji debug do pliku na karcie SD. Uwaga: Wielkość pliku zwiększa się bardzo szybko.</string>
-  <string name="pref_logging_summary">Czas, odległość oraz tworzenie plików</string>
   <string name="pref_general_title">Ustawienia ogólne</string>
   <string name="pref_general_summary">Ustawienia uruchamiania i wyświetlania</string>
   <string name="emailprovider_google">Poczta Google</string>
@@ -205,7 +199,6 @@
   <string name="log_opengts_summary">Wyślij dane GPRMC na aktywny serwer OpenGTS.</string>
   <string name="opengts_setup_summary">Wyślij ślad GPS na wybrany serwer OpenGTS.</string>
   <string name="opengts_enabled">Włącz OpenGTS</string>
-  <string name="opengts_enabled_summary">Włącz serwer OpenGTS.</string>
   <string name="autoopengts_autosend">Włącz automatyczne wysyłanie</string>
   <string name="autoopengts_autosend_summary">Umożliwia automatyczne wysyłanie śladów GPS.</string>
   <string name="autoopengts_server_category">Ustawienia OpenGTS</string>
@@ -239,7 +232,6 @@
   <string name="autoftp_testing">Sprawdzanie komunikacji FTP</string>
   <string name="autoftp_invalid_settings">Nieprawidłowe ustawienia</string>
   <string name="autoftp_invalid_summary">Niektóre ustawienia są nieprawidłowe. Upewnij się, czy wypełniłeś wszystkie istotne pola.     </string>
-  <string name="autoftp_enabled">FTP włączony</string>
   <string name="ftp_upload">Wysyłanie na FTP</string>
   <string name="autoftp_setup_summary">Prześlij pliki na serwer FTP(S). Notka: To nie obejmuje SFTP.</string>
   <string name="faq_screen_title">Najczęściej zadawane pytania</string>
