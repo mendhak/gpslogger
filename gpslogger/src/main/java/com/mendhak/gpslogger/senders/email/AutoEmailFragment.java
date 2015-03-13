@@ -171,7 +171,7 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
         chkUseSsl.setChecked(useSsl);
         editor.putBoolean("smtp_ssl", useSsl);
 
-        editor.commit();
+        editor.apply();
 
     }
 

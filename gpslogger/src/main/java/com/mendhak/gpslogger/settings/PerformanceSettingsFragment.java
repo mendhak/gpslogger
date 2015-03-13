@@ -62,7 +62,7 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
 
                             if (chosenListeners.size() > 0) {
                                 editor.putStringSet("listeners", chosenListeners);
-                                editor.commit();
+                                editor.apply();
                             }
 
                         }

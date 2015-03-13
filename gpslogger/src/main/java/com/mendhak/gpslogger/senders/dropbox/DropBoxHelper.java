@@ -91,7 +91,7 @@ public class DropBoxHelper implements IFileSender {
         SharedPreferences.Editor edit = prefs.edit();
         edit.putString(ACCESS_KEY_NAME, key);
         edit.putString(ACCESS_SECRET_NAME, secret);
-        edit.commit();
+        edit.apply();
     }
 
     private void clearKeys() {
@@ -100,7 +100,7 @@ public class DropBoxHelper implements IFileSender {
         SharedPreferences.Editor edit = prefs.edit();
         edit.remove(ACCESS_KEY_NAME);
         edit.remove(ACCESS_SECRET_NAME);
-        edit.commit();
+        edit.apply();
     }
 
     private AndroidAuthSession buildSession() {

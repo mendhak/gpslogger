@@ -75,10 +75,10 @@ public class UtilitiesTests extends AndroidTestCase {
 
         assertFalse("Dropbox defaults to not set up.", Utilities.IsDropBoxSetup(context));
 
-        final SharedPreferences.Editor preferencesEditor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-        preferencesEditor.putString(DropBoxHelper.ACCESS_KEY_NAME, "12345");
-        preferencesEditor.putString(DropBoxHelper.ACCESS_SECRET_NAME, "abcdef");
-        preferencesEditor.commit();
+        final SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+        editor.putString(DropBoxHelper.ACCESS_KEY_NAME, "12345");
+        editor.putString(DropBoxHelper.ACCESS_SECRET_NAME, "abcdef");
+        editor.apply();
         assertEquals("Dropbox setup if KEY and SECRET exist in preferences", true, Utilities.IsDropBoxSetup(context));
     }
 

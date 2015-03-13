@@ -202,7 +202,7 @@ public class GpsMainActivity extends ActionBarActivity
                 else {
                     editor.putString(key.toString(), value);
                 }
-                editor.commit();
+                editor.apply();
             }
 
         } catch (Exception e) {
@@ -460,7 +460,7 @@ public class GpsMainActivity extends ActionBarActivity
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("SPINNER_SELECTED_POSITION", position);
-        editor.commit();
+        editor.apply();
 
         LoadFragmentView(position);
         return true;
@@ -1110,7 +1110,7 @@ public class GpsMainActivity extends ActionBarActivity
                             if (!Utilities.IsNullOrEmpty(userInput.getText().toString()) && !userInput.getText().toString().equalsIgnoreCase(chosenFileName)) {
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putString("new_file_custom_name", userInput.getText().toString());
-                                editor.commit();
+                                editor.apply();
                             }
                             StartLogging();
                         }

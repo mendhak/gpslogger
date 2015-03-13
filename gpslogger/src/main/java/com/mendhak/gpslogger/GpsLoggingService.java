@@ -185,42 +185,42 @@ public class GpsLoggingService extends Service implements IActionListener {
                 if (bundle.get("setprefercelltower") != null) {
                     boolean preferCellTower = bundle.getBoolean("setprefercelltower");
                     tracer.debug("Intent received - Set Prefer Cell Tower: " + String.valueOf(preferCellTower));
-                    prefs.edit().putBoolean("prefer_celltower", preferCellTower).commit();
+                    prefs.edit().putBoolean("prefer_celltower", preferCellTower).apply();
                     needToStartGpsManager = true;
                 }
 
                 if (bundle.get("settimebeforelogging") != null) {
                     int timeBeforeLogging = bundle.getInt("settimebeforelogging");
                     tracer.debug("Intent received - Set Time Before Logging: " + String.valueOf(timeBeforeLogging));
-                    prefs.edit().putString("time_before_logging", String.valueOf(timeBeforeLogging)).commit();
+                    prefs.edit().putString("time_before_logging", String.valueOf(timeBeforeLogging)).apply();
                     needToStartGpsManager = true;
                 }
 
                 if (bundle.get("setdistancebeforelogging") != null) {
                     int distanceBeforeLogging = bundle.getInt("setdistancebeforelogging");
                     tracer.debug("Intent received - Set Distance Before Logging: " + String.valueOf(distanceBeforeLogging));
-                    prefs.edit().putString("distance_before_logging", String.valueOf(distanceBeforeLogging)).commit();
+                    prefs.edit().putString("distance_before_logging", String.valueOf(distanceBeforeLogging)).apply();
                     needToStartGpsManager = true;
                 }
 
                 if (bundle.get("setkeepbetweenfix") != null) {
                     boolean keepBetweenFix = bundle.getBoolean("setkeepbetweenfix");
                     tracer.debug("Intent received - Set Keep Between Fix: " + String.valueOf(keepBetweenFix));
-                    prefs.edit().putBoolean("keep_fix", keepBetweenFix).commit();
+                    prefs.edit().putBoolean("keep_fix", keepBetweenFix).apply();
                     needToStartGpsManager = true;
                 }
 
                 if (bundle.get("setretrytime") != null) {
                     int retryTime = bundle.getInt("setretrytime");
                     tracer.debug("Intent received - Set Retry Time: " + String.valueOf(retryTime));
-                    prefs.edit().putString("retry_time", String.valueOf(retryTime)).commit();
+                    prefs.edit().putString("retry_time", String.valueOf(retryTime)).apply();
                     needToStartGpsManager = true;
                 }
 
                 if (bundle.get("setabsolutetimeout") != null) {
                     int absolumeTimeOut = bundle.getInt("setabsolutetimeout");
                     tracer.debug("Intent received - Set Retry Time: " + String.valueOf(absolumeTimeOut));
-                    prefs.edit().putString("absolute_timeout", String.valueOf(absolumeTimeOut)).commit();
+                    prefs.edit().putString("absolute_timeout", String.valueOf(absolumeTimeOut)).apply();
                     needToStartGpsManager = true;
                 }
 

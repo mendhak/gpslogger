@@ -75,7 +75,7 @@ public class OSMAuthorizationFragment extends PreferenceFragment {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("osm_accesstoken", osmAccessToken);
                 editor.putString("osm_accesstokensecret", osmAccessTokenSecret);
-                editor.commit();
+                editor.apply();
 
             } catch (Exception e) {
                 tracer.error("OSMAuthorizationActivity.onCreate - user has returned", e);
@@ -114,7 +114,7 @@ public class OSMAuthorizationFragment extends PreferenceFragment {
                     editor.remove("osm_accesstokensecret");
                     editor.remove("osm_requesttoken");
                     editor.remove("osm_requesttokensecret");
-                    editor.commit();
+                    editor.apply();
                     startActivity(new Intent(getActivity(), GpsMainActivity.class));
                     getActivity().finish();
 
@@ -136,7 +136,7 @@ public class OSMAuthorizationFragment extends PreferenceFragment {
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString("osm_requesttoken", consumer.getToken());
                         editor.putString("osm_requesttokensecret", consumer.getTokenSecret());
-                        editor.commit();
+                        editor.apply();
 
                         //Open browser, send user to OpenStreetMap.org
                         Uri uri = Uri.parse(authUrl);

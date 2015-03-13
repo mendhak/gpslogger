@@ -77,7 +77,7 @@ public class GDocsHelper implements IFileSender {
         SharedPreferences.Editor editor = prefs.edit();
 
         editor.putString("GDRIVE_ACCOUNT_NAME", accountName);
-        editor.commit();
+        editor.apply();
     }
 
     /**
@@ -90,7 +90,7 @@ public class GDocsHelper implements IFileSender {
 
             tracer.debug("Saving GDocs authToken: " + authToken);
             editor.putString("GDRIVE_AUTH_TOKEN", authToken);
-            editor.commit();
+            editor.apply();
         } catch (Exception e) {
 
             tracer.error("GDocsHelper.SaveAuthToken", e);
@@ -106,7 +106,7 @@ public class GDocsHelper implements IFileSender {
 
         editor.remove("GDRIVE_AUTH_TOKEN");
         editor.remove("GDRIVE_ACCOUNT_NAME");
-        editor.commit();
+        editor.apply();
     }
 
 
