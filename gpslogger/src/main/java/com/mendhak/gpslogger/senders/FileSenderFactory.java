@@ -45,7 +45,7 @@ public class FileSenderFactory {
     }
 
     public static IFileSender GetDropBoxSender(Context applicationContext, IActionListener callback) {
-        return new DropBoxHelper(applicationContext, callback);
+        return new DropBoxHelper(applicationContext);
     }
 
     public static IFileSender GetGDocsSender(Context applicationContext, IActionListener callback) {
@@ -130,7 +130,7 @@ public class FileSenderFactory {
             senders.add(new AutoEmailHelper(applicationContext));
         }
 
-        DropBoxHelper dh = new DropBoxHelper(applicationContext, callback);
+        DropBoxHelper dh = new DropBoxHelper(applicationContext);
 
         if (dh.IsLinked()) {
             tracer.debug("DropBox Sender picked");

@@ -41,7 +41,7 @@ public class DropboxAuthorizationFragment extends PreferenceFragment {
 
         Preference pref = findPreference("dropbox_resetauth");
 
-        helper = new DropBoxHelper(getActivity(), null);
+        helper = new DropBoxHelper(getActivity());
 
         if (helper.IsLinked()) {
             pref.setTitle(R.string.dropbox_unauthorize);

@@ -46,6 +46,7 @@ import com.heinrichreimersoftware.materialdrawer.DrawerView;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.AutoEmailEvent;
+import com.mendhak.gpslogger.common.events.DropboxEvent;
 import com.mendhak.gpslogger.common.events.OpenGTSLoggedEvent;
 import com.mendhak.gpslogger.common.events.OpenStreetMapEvent;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
@@ -690,7 +691,7 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     private void UploadToDropBox() {
-        final DropBoxHelper dropBoxHelper = new DropBoxHelper(getApplicationContext(), this);
+        final DropBoxHelper dropBoxHelper = new DropBoxHelper(getApplicationContext());
 
         if (!dropBoxHelper.IsLinked()) {
             tracer.debug("Not linked, opening Dropbox activity");
@@ -1195,6 +1196,12 @@ public class GpsMainActivity extends ActionBarActivity
     @SuppressWarnings("UnusedDeclaration")
     public void onEventMainThread(OpenStreetMapEvent o){
         tracer.debug("OSM Event completed, success: " + o.success);
+        Utilities.HideProgress();
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEventMainThread(DropboxEvent o){
+        tracer.debug("Dropbox Event completed, success: " + o.success);
         Utilities.HideProgress();
     }
 
