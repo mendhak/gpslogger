@@ -20,17 +20,13 @@ package com.mendhak.gpslogger.senders.ftp;
 
 
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.events.FtpEvent;
-import com.mendhak.gpslogger.common.events.GDocsEvent;
 import com.mendhak.gpslogger.senders.IFileSender;
-import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.JobManager;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.util.Date;
 import java.util.List;
 
 public class FtpHelper implements IFileSender {

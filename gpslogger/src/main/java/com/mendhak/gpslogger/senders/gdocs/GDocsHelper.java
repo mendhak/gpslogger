@@ -36,7 +36,7 @@ import java.util.List;
 public class GDocsHelper implements IFileSender {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GDocsHelper.class.getSimpleName());
-    Context ctx;
+    Context context;
 
     /*
     To revoke permissions:
@@ -49,7 +49,7 @@ public class GDocsHelper implements IFileSender {
 
     public GDocsHelper(Context applicationContext) {
 
-        this.ctx = applicationContext;
+        this.context = applicationContext;
     }
 
     public static String GetOauth2Scope() {
@@ -131,7 +131,7 @@ public class GDocsHelper implements IFileSender {
     }
 
     public void UploadFile(final String fileName) {
-        if (!IsLinked(ctx)) {
+        if (!IsLinked(context)) {
             EventBus.getDefault().post(new GDocsEvent(false));
             return;
         }
@@ -141,7 +141,7 @@ public class GDocsHelper implements IFileSender {
             File gpxFile = new File(gpsDir, fileName);
 
             tracer.debug("Sending file to GDocs: " + fileName);
-            new GDocsTokenAsyncTask(gpxFile).execute(ctx);
+            new GDocsTokenAsyncTask(gpxFile).execute(context);
         } catch (Exception e) {
             EventBus.getDefault().post(new GDocsEvent(false));
             tracer.error("GDocsHelper.UploadFile", e);
@@ -175,7 +175,7 @@ public class GDocsHelper implements IFileSender {
         @Override
         protected void onPostExecute(String token) {
             tracer.debug("On Post Execute with token: " + token);
-            GDocsHelper.SaveAuthToken(ctx, token);
+            GDocsHelper.SaveAuthToken(context, token);
 
             JobManager jobManager = AppSettings.GetJobManager();
             jobManager.addJobInBackground(new GDocsJob(token, gpxFile));

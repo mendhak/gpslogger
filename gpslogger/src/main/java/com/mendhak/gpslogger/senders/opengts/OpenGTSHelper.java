@@ -31,11 +31,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class OpenGTSHelper implements IFileSender {
-    Context applicationContext;
+
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSHelper.class.getSimpleName());
 
-    public OpenGTSHelper(Context applicationContext) {
-        this.applicationContext = applicationContext;
+    public OpenGTSHelper() {
     }
 
     @Override

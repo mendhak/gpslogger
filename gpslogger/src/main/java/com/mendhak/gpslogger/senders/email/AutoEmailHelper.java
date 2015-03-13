@@ -29,10 +29,7 @@ import java.util.List;
 
 public class AutoEmailHelper implements IFileSender {
 
-    Context context;
-
-    public AutoEmailHelper(Context context) {
-        this.context = context;
+    public AutoEmailHelper() {
     }
 
     @Override

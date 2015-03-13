@@ -40,27 +40,27 @@ public class FileSenderFactory {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FileSenderFactory.class.getSimpleName());
 
-    public static IFileSender GetOsmSender(Context applicationContext, IActionListener callback) {
+    public static IFileSender GetOsmSender(Context applicationContext) {
         return new OSMHelper(applicationContext);
     }
 
-    public static IFileSender GetDropBoxSender(Context applicationContext, IActionListener callback) {
+    public static IFileSender GetDropBoxSender(Context applicationContext) {
         return new DropBoxHelper(applicationContext);
     }
 
-    public static IFileSender GetGDocsSender(Context applicationContext, IActionListener callback) {
+    public static IFileSender GetGDocsSender(Context applicationContext) {
         return new GDocsHelper(applicationContext);
     }
 
     public static IFileSender GetEmailSender(Context applicationContext) {
-        return new AutoEmailHelper(applicationContext);
+        return new AutoEmailHelper();
     }
 
     public static IFileSender GetOpenGTSSender(Context applicationContext) {
-        return new OpenGTSHelper(applicationContext);
+        return new OpenGTSHelper();
     }
 
-    public static IFileSender GetFtpSender(Context applicationContext, IActionListener callback) {
+    public static IFileSender GetFtpSender(Context applicationContext) {
         return new FtpHelper();
     }
 
@@ -104,7 +104,7 @@ public class FileSenderFactory {
             files.add(zipFile);
         }
 
-        List<IFileSender> senders = GetFileSenders(applicationContext, callback);
+        List<IFileSender> senders = GetFileSenders(applicationContext);
 
         for (IFileSender sender : senders) {
             sender.UploadFile(files);
@@ -112,7 +112,7 @@ public class FileSenderFactory {
     }
 
 
-    public static List<IFileSender> GetFileSenders(Context applicationContext, IActionListener callback) {
+    public static List<IFileSender> GetFileSenders(Context applicationContext) {
         List<IFileSender> senders = new ArrayList<IFileSender>();
 
         if (GDocsHelper.IsLinked(applicationContext)) {
@@ -127,7 +127,7 @@ public class FileSenderFactory {
 
         if (AppSettings.isAutoEmailEnabled()) {
             tracer.debug("Email Sender picked");
-            senders.add(new AutoEmailHelper(applicationContext));
+            senders.add(new AutoEmailHelper());
         }
 
         DropBoxHelper dh = new DropBoxHelper(applicationContext);
@@ -139,7 +139,7 @@ public class FileSenderFactory {
 
         if (AppSettings.isAutoOpenGTSEnabled()) {
             tracer.debug("OpenGTS Sender picked");
-            senders.add(new OpenGTSHelper(applicationContext));
+            senders.add(new OpenGTSHelper());
         }
 
         if (AppSettings.isAutoFtpEnabled()) {

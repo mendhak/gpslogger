@@ -286,10 +286,10 @@ public class Utilities {
     }
 
 
-    public static void ShowProgress(Context ctx, String title, String message) {
-        if (ctx != null) {
+    public static void ShowProgress(Context context, String title, String message) {
+        if (context != null) {
 
-            pd = new MaterialDialog.Builder(ctx)
+            pd = new MaterialDialog.Builder(context)
                     .title(title)
                     .content(message)
                     .progress(true, 0)

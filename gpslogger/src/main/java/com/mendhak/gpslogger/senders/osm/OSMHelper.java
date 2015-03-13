@@ -42,36 +42,36 @@ public class OSMHelper implements IFileSender {
         this.context = context;
     }
 
-    public static OAuthProvider GetOSMAuthProvider(Context ctx) {
+    public static OAuthProvider GetOSMAuthProvider(Context context) {
         return new CommonsHttpOAuthProvider(
-                ctx.getString(R.string.osm_requesttoken_url),
-                ctx.getString(R.string.osm_accesstoken_url),
-                ctx.getString(R.string.osm_authorize_url));
+                context.getString(R.string.osm_requesttoken_url),
+                context.getString(R.string.osm_accesstoken_url),
+                context.getString(R.string.osm_authorize_url));
     }
 
-    public static boolean IsOsmAuthorized(Context ctx) {
+    public static boolean IsOsmAuthorized(Context context) {
         SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(ctx);
+                .getDefaultSharedPreferences(context);
         String oAuthAccessToken = prefs.getString("osm_accesstoken", "");
 
         return (oAuthAccessToken != null && oAuthAccessToken.length() > 0);
     }
 
-    public static OAuthConsumer GetOSMAuthConsumer(Context ctx) {
+    public static OAuthConsumer GetOSMAuthConsumer(Context context) {
 
         OAuthConsumer consumer = null;
 
         try {
-            int osmConsumerKey = ctx.getResources().getIdentifier(
-                    "osm_consumerkey", "string", ctx.getPackageName());
-            int osmConsumerSecret = ctx.getResources().getIdentifier(
-                    "osm_consumersecret", "string", ctx.getPackageName());
+            int osmConsumerKey = context.getResources().getIdentifier(
+                    "osm_consumerkey", "string", context.getPackageName());
+            int osmConsumerSecret = context.getResources().getIdentifier(
+                    "osm_consumersecret", "string", context.getPackageName());
             consumer = new CommonsHttpOAuthConsumer(
-                    ctx.getString(osmConsumerKey),
-                    ctx.getString(osmConsumerSecret));
+                    context.getString(osmConsumerKey),
+                    context.getString(osmConsumerSecret));
 
             SharedPreferences prefs = PreferenceManager
-                    .getDefaultSharedPreferences(ctx);
+                    .getDefaultSharedPreferences(context);
             String osmAccessToken = prefs.getString("osm_accesstoken", "");
             String osmAccessTokenSecret = prefs.getString(
                     "osm_accesstokensecret", "");
