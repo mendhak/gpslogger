@@ -276,18 +276,21 @@ public class GpsMainActivity extends ActionBarActivity
         drawerLayout.closeDrawer(drawer);
 
         drawer.addItem(new DrawerItem()
+                        .setId(0)
                         .setImage(getResources().getDrawable(R.drawable.settings))
                         .setTextPrimary(getString(R.string.pref_general_title))
                         .setTextSecondary(getString(R.string.pref_general_summary))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(1)
                         .setImage(getResources().getDrawable(R.drawable.loggingsettings))
                         .setTextPrimary(getString(R.string.pref_logging_title))
                         .setTextSecondary(getString(R.string.pref_logging_summary))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(2)
                         .setImage(getResources().getDrawable(R.drawable.performance))
                         .setTextPrimary(getString(R.string.pref_performance_title))
                         .setTextSecondary(getString(R.string.pref_performance_summary))
@@ -298,36 +301,43 @@ public class GpsMainActivity extends ActionBarActivity
 
 
         drawer.addItem(new DrawerItem()
+                .setId(3)
                 .setImage(getResources().getDrawable(R.drawable.autosend))
                 .setTextPrimary(getString(R.string.pref_autosend_title))
                 .setTextSecondary(getString(R.string.pref_autosend_summary)));
 
         drawer.addItem(new DrawerItem()
+                        .setId(4)
                         .setImage(getResources().getDrawable(R.drawable.googledrive))
                         .setTextPrimary(getString(R.string.gdocs_setup_title))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(5)
                         .setImage(getResources().getDrawable(R.drawable.dropbox))
                         .setTextPrimary(getString(R.string.dropbox_setup_title))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(6)
                         .setImage(getResources().getDrawable(R.drawable.email))
                         .setTextPrimary(getString(R.string.autoemail_title))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(7)
                         .setImage(getResources().getDrawable(R.drawable.ftp))
                         .setTextPrimary(getString(R.string.autoftp_setup_title))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(8)
                         .setImage(getResources().getDrawable(R.drawable.opengts))
                         .setTextPrimary(getString(R.string.opengts_setup_title))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(9)
                         .setImage(getResources().getDrawable(R.drawable.openstreetmap))
                         .setTextPrimary(getString(R.string.osm_setup_title))
         );
@@ -335,11 +345,13 @@ public class GpsMainActivity extends ActionBarActivity
         drawer.addDivider();
 
         drawer.addItem(new DrawerItem()
+                        .setId(10)
                         .setImage(getResources().getDrawable(R.drawable.helpfaq))
                         .setTextPrimary(getString(R.string.menu_faq))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(11)
                         .setImage(getResources().getDrawable(R.drawable.exit))
                         .setTextPrimary(getString(R.string.menu_exit)));
 
@@ -351,7 +363,7 @@ public class GpsMainActivity extends ActionBarActivity
                 //drawer.selectItem(3);
                 drawerLayout.closeDrawer(drawer);
 
-                switch(position){
+                switch(id){
                     case 0:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GENERAL);
                         break;
@@ -361,38 +373,37 @@ public class GpsMainActivity extends ActionBarActivity
                     case 2:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.PERFORMANCE);
                         break;
-                    case 4:
+                    case 3:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
                         break;
-                    case 5:
+                    case 4:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
                         break;
-                    case 6:
+                    case 5:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
                         break;
-                    case 7:
+                    case 6:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
                         break;
-                    case 8:
+                    case 7:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
                         break;
-                    case 9:
+                    case 8:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
                         break;
-                    case 10:
+                    case 9:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
                         break;
-                    case 12:
+                    case 10:
                         Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
                         startActivity(faqtivity);
                         break;
-                    case 13:
+                    case 11:
                         loggingService.StopLogging();
                         loggingService.stopSelf();
                         finish();
                         break;
                 }
-
             }
         });
 
