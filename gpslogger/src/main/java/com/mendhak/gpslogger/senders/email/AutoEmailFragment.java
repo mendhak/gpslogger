@@ -27,7 +27,7 @@ import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.common.events.AutoEmailEvent;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import de.greenrobot.event.EventBus;
 
@@ -182,7 +182,7 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void onEventMainThread(AutoEmailEvent o){
+    public void onEventMainThread(UploadEvents.AutoEmailEvent o){
 
         Utilities.HideProgress();
 

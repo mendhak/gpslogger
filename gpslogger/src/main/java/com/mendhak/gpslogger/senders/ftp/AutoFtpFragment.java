@@ -24,7 +24,7 @@ import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.common.events.FtpEvent;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
@@ -113,7 +113,7 @@ public class AutoFtpFragment
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void onEventMainThread(FtpEvent o){
+    public void onEventMainThread(UploadEvents.FtpEvent o){
         tracer.debug("FTP Event completed, success: " + o.success);
         Utilities.HideProgress();
         if(!o.success){

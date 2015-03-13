@@ -22,7 +22,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import com.google.android.gms.auth.GoogleAuthException;
@@ -36,7 +35,7 @@ import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.common.events.GDocsEvent;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
@@ -187,9 +186,8 @@ public class GDocsSettingsFragment extends PreferenceFragment
         try {
             // Retrieve a token for the given account and scope. It will always return either
             // a non-empty String or throw an exception.
-            final String token = GoogleAuthUtil.getToken(getActivity(), GDocsHelper.GetAccountName(getActivity()), GDocsHelper.GetOauth2Scope());
 
-            return token;
+            return GoogleAuthUtil.getToken(getActivity(), GDocsHelper.GetAccountName(getActivity()), GDocsHelper.GetOauth2Scope());
         } catch (GooglePlayServicesAvailabilityException playEx) {
             Dialog alert = GooglePlayServicesUtil.getErrorDialog(
                     playEx.getConnectionStatusCode(),
@@ -259,15 +257,13 @@ public class GDocsSettingsFragment extends PreferenceFragment
                 FileOutputStream initialWriter = new FileOutputStream(testFile, true);
                 BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
 
-                StringBuilder initialString = new StringBuilder();
-                initialString.append("<x>This is a test file</x>");
-                initialOutput.write(initialString.toString().getBytes());
+                initialOutput.write("<x>This is a test file</x>".getBytes());
                 initialOutput.flush();
                 initialOutput.close();
             }
 
         } catch (Exception ex) {
-            EventBus.getDefault().post(new GDocsEvent(false));
+            EventBus.getDefault().post(new UploadEvents.GDocsEvent(false));
         }
 
 
@@ -283,7 +279,7 @@ public class GDocsSettingsFragment extends PreferenceFragment
 
 
     @SuppressWarnings("UnusedDeclaration")
-    public void onEventMainThread(GDocsEvent o){
+    public void onEventMainThread(UploadEvents.GDocsEvent o){
         tracer.debug("GDocs Event completed, success: " + o.success);
         Utilities.HideProgress();
         if(!o.success){

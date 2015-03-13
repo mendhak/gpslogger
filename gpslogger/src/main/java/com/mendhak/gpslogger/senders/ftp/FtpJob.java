@@ -1,7 +1,7 @@
 package com.mendhak.gpslogger.senders.ftp;
 
 
-import com.mendhak.gpslogger.common.events.FtpEvent;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
@@ -52,7 +52,7 @@ public class FtpJob extends Job {
     public synchronized static boolean Upload(String server, String username, String password, String directory, int port,
                                               boolean useFtps, String protocol, boolean implicit,
                                               File gpxFile, String fileName) {
-        FTPClient client = null;
+        FTPClient client;
 
         try {
             if (useFtps) {
@@ -173,15 +173,15 @@ public class FtpJob extends Job {
     @Override
     public void onRun() throws Throwable {
         if (Upload(server, username, password, directory, port, useFtps, protocol, implicit, gpxFile, fileName)) {
-            EventBus.getDefault().post(new FtpEvent(true));
+            EventBus.getDefault().post(new UploadEvents.FtpEvent(true));
         } else {
-            EventBus.getDefault().post(new FtpEvent(false));
+            EventBus.getDefault().post(new UploadEvents.FtpEvent(false));
         }
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new FtpEvent(false));
+        EventBus.getDefault().post(new UploadEvents.FtpEvent(false));
     }
 
     @Override

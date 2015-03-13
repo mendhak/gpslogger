@@ -2,7 +2,7 @@ package com.mendhak.gpslogger.loggers.opengts;
 
 import com.mendhak.gpslogger.common.OpenGTSClient;
 import com.mendhak.gpslogger.common.SerializableLocation;
-import com.mendhak.gpslogger.common.events.OpenGTSLoggedEvent;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
@@ -49,12 +49,12 @@ public class OpenGTSJob extends Job {
             openGTSClient.sendHTTP(deviceId, accountName, locations);
         }
 
-        EventBus.getDefault().post(new OpenGTSLoggedEvent(true));
+        EventBus.getDefault().post(new UploadEvents.OpenGTSLoggedEvent(true));
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new OpenGTSLoggedEvent(false));
+        EventBus.getDefault().post(new UploadEvents.OpenGTSLoggedEvent(false));
     }
 
     @Override

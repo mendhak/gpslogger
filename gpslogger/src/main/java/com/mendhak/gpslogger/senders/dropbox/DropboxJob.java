@@ -6,7 +6,7 @@ import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 import com.dropbox.client2.session.Session;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.events.DropboxEvent;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
@@ -49,7 +49,7 @@ public class DropboxJob extends Job {
         dropboxApi = new DropboxAPI<AndroidAuthSession>(session);
         DropboxAPI.Entry upEntry = dropboxApi.putFileOverwrite(gpxFile.getName(), fis, gpxFile.length(), null);
         tracer.info("DropBox uploaded file rev is: " + upEntry.rev);
-        EventBus.getDefault().post(new DropboxEvent(true));
+        EventBus.getDefault().post(new UploadEvents.DropboxEvent(true));
     }
 
     private AndroidAuthSession buildSession() {
@@ -68,7 +68,7 @@ public class DropboxJob extends Job {
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new DropboxEvent(false));
+        EventBus.getDefault().post(new UploadEvents.DropboxEvent(false));
     }
 
     @Override

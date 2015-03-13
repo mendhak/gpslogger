@@ -3,7 +3,7 @@ package com.mendhak.gpslogger.loggers.customurl;
 import android.location.Location;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.common.events.CustomUrlLoggedEvent;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
@@ -43,7 +43,7 @@ public class CustomUrlJob extends Job {
     @Override
     public void onRun() throws Throwable {
         tracer.debug("onRun");
-        HttpURLConnection conn = null;
+        HttpURLConnection conn;
 
         //String logUrl = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV
         // &spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER";
@@ -83,12 +83,12 @@ public class CustomUrlJob extends Job {
             }
         }
 
-        EventBus.getDefault().post(new CustomUrlLoggedEvent(true));
+        EventBus.getDefault().post(new UploadEvents.CustomUrlLoggedEvent(true));
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new CustomUrlLoggedEvent(false));
+        EventBus.getDefault().post(new UploadEvents.CustomUrlLoggedEvent(false));
     }
 
     @Override

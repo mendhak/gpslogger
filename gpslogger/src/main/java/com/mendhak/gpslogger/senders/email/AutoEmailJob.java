@@ -1,6 +1,6 @@
 package com.mendhak.gpslogger.senders.email;
 
-import com.mendhak.gpslogger.common.events.AutoEmailEvent;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
@@ -74,15 +74,15 @@ public class AutoEmailJob extends Job {
 
         tracer.info("Sending email...");
         if (m.send()) {
-            EventBus.getDefault().post(new AutoEmailEvent(true));
+            EventBus.getDefault().post(new UploadEvents.AutoEmailEvent(true));
         } else {
-            EventBus.getDefault().post(new AutoEmailEvent(false));
+            EventBus.getDefault().post(new UploadEvents.AutoEmailEvent(false));
         }
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new AutoEmailEvent(false));
+        EventBus.getDefault().post(new UploadEvents.AutoEmailEvent(false));
     }
 
     @Override

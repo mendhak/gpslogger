@@ -1,6 +1,6 @@
 package com.mendhak.gpslogger.senders.osm;
 
-import com.mendhak.gpslogger.common.events.OpenStreetMapEvent;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
@@ -67,12 +67,12 @@ public class OSMJob extends Job {
         HttpResponse response = httpClient.execute(request);
         int statusCode = response.getStatusLine().getStatusCode();
         tracer.debug("OSM Upload - " + String.valueOf(statusCode));
-        EventBus.getDefault().post(new OpenStreetMapEvent(true));
+        EventBus.getDefault().post(new UploadEvents.OpenStreetMapEvent(true));
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new OpenStreetMapEvent(false));
+        EventBus.getDefault().post(new UploadEvents.OpenStreetMapEvent(false));
     }
 
     @Override

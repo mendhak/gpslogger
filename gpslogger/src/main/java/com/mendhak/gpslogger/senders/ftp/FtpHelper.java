@@ -20,7 +20,7 @@ package com.mendhak.gpslogger.senders.ftp;
 
 
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.events.FtpEvent;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
 import de.greenrobot.event.EventBus;
@@ -53,15 +53,13 @@ public class FtpHelper implements IFileSender {
                 FileOutputStream initialWriter = new FileOutputStream(testFile, true);
                 BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
 
-                StringBuilder initialString = new StringBuilder();
-                initialString.append("<x>This is a test file</x>");
-                initialOutput.write(initialString.toString().getBytes());
+                initialOutput.write("<x>This is a test file</x>".getBytes());
                 initialOutput.flush();
                 initialOutput.close();
             }
 
         } catch (Exception ex) {
-            EventBus.getDefault().post(new FtpEvent(false));
+            EventBus.getDefault().post(new UploadEvents.FtpEvent(false));
         }
 
         JobManager jobManager = AppSettings.GetJobManager();
@@ -73,7 +71,7 @@ public class FtpHelper implements IFileSender {
     public void UploadFile(List<File> files) {
         if (!ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(), AppSettings.getFtpPassword(),
                 AppSettings.getFtpPort(), AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit())) {
-            EventBus.getDefault().post(new FtpEvent(false));
+            EventBus.getDefault().post(new UploadEvents.FtpEvent(false));
         }
 
         for (File f : files) {

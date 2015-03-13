@@ -24,7 +24,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.events.GDocsEvent;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
 import de.greenrobot.event.EventBus;
@@ -113,8 +113,6 @@ public class GDocsHelper implements IFileSender {
     /**
      * Returns whether the app is authorized to perform Google API operations
      *
-     * @param applicationContext
-     * @return
      */
     public static boolean IsLinked(Context applicationContext) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
@@ -132,7 +130,7 @@ public class GDocsHelper implements IFileSender {
 
     public void UploadFile(final String fileName) {
         if (!IsLinked(context)) {
-            EventBus.getDefault().post(new GDocsEvent(false));
+            EventBus.getDefault().post(new UploadEvents.GDocsEvent(false));
             return;
         }
 
@@ -143,7 +141,7 @@ public class GDocsHelper implements IFileSender {
             tracer.debug("Sending file to GDocs: " + fileName);
             new GDocsTokenAsyncTask(gpxFile).execute(context);
         } catch (Exception e) {
-            EventBus.getDefault().post(new GDocsEvent(false));
+            EventBus.getDefault().post(new UploadEvents.GDocsEvent(false));
             tracer.error("GDocsHelper.UploadFile", e);
         }
     }

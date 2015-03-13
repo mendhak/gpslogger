@@ -1176,37 +1176,37 @@ public class GpsMainActivity extends ActionBarActivity
 
 
     @SuppressWarnings("UnusedDeclaration")
-    public void onEventMainThread(OpenGTSLoggedEvent o){
+    public void onEventMainThread(UploadEvents.OpenGTSLoggedEvent o){
         tracer.debug("Open GTS Event completed, success: " + o.success);
         Utilities.HideProgress();
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void onEventMainThread(AutoEmailEvent o){
+    public void onEventMainThread(UploadEvents.AutoEmailEvent o){
         tracer.debug("Auto Email Event completed, success: " + o.success);
         Utilities.HideProgress();
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void onEventMainThread(OpenStreetMapEvent o){
+    public void onEventMainThread(UploadEvents.OpenStreetMapEvent o){
         tracer.debug("OSM Event completed, success: " + o.success);
         Utilities.HideProgress();
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void onEventMainThread(DropboxEvent o){
+    public void onEventMainThread(UploadEvents.DropboxEvent o){
         tracer.debug("Dropbox Event completed, success: " + o.success);
         Utilities.HideProgress();
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void onEventMainThread(GDocsEvent o){
+    public void onEventMainThread(UploadEvents.GDocsEvent o){
         tracer.debug("GDocs Event completed, success: " + o.success);
         Utilities.HideProgress();
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void onEventMainThread(FtpEvent o){
+    public void onEventMainThread(UploadEvents.FtpEvent o){
         tracer.debug("FTP Event completed, success: " + o.success);
         Utilities.HideProgress();
     }
