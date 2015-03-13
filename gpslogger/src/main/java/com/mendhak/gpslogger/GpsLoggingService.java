@@ -16,7 +16,6 @@
 */
 
 //TODO: Simplify email logic (too many methods)
-//TODO: Allow messages in IActionListener callback methods
 
 package com.mendhak.gpslogger;
 
@@ -35,23 +34,19 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
-import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.loggers.nmea.NmeaFileLogger;
 import com.mendhak.gpslogger.senders.AlarmReceiver;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import org.slf4j.LoggerFactory;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
-public class GpsLoggingService extends Service implements IActionListener {
+public class GpsLoggingService extends Service  {
     private static NotificationManager notificationManager;
     private static int NOTIFICATION_ID = 8675309;
     private static IGpsLoggerServiceClient mainServiceClient;
@@ -244,16 +239,6 @@ public class GpsLoggingService extends Service implements IActionListener {
         }
     }
 
-    @Override
-    public void OnComplete() {
-        Utilities.HideProgress();
-    }
-
-    @Override
-    public void OnFailure() {
-        Utilities.HideProgress();
-    }
-
     /**
      * Sets up the auto email timers based on user preferences.
      */
@@ -293,7 +278,7 @@ public class GpsLoggingService extends Service implements IActionListener {
             }
 
             tracer.info("Force emailing Log File");
-            FileSenderFactory.SendFiles(getApplicationContext(), this);
+            FileSenderFactory.SendFiles(getApplicationContext());
         }
     }
 
@@ -347,10 +332,9 @@ public class GpsLoggingService extends Service implements IActionListener {
         if (Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0
                 && Session.isReadyToBeAutoSent() && Session.hasValidLocation()) {
 
-            //Don't show a progress bar when auto-sending
             tracer.info("Sending Log File");
 
-            FileSenderFactory.SendFiles(getApplicationContext(), this);
+            FileSenderFactory.SendFiles(getApplicationContext());
             Session.setReadyToBeAutoSent(true);
             SetupAutoSendTimers();
 

@@ -66,7 +66,6 @@ import java.util.*;
 public class GpsMainActivity extends ActionBarActivity
         implements GenericViewFragment.IGpsViewCallback,
         IGpsLoggerServiceClient,
-        IActionListener,
         Toolbar.OnMenuItemClickListener,
         ActionBar.OnNavigationListener {
 
@@ -1084,19 +1083,6 @@ public class GpsMainActivity extends ActionBarActivity
         }
     }
 
-
-    // IActionListener callbacks
-    @Override
-    public void OnComplete() {
-        tracer.debug(".");
-        Utilities.HideProgress();
-    }
-
-    @Override
-    public void OnFailure() {
-        tracer.debug(".");
-        Utilities.HideProgress();
-    }
 
     //IGpsViewCallback callbacks
     //These methods come from the fragments

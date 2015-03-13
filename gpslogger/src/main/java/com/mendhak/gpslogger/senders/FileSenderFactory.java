@@ -19,7 +19,6 @@ package com.mendhak.gpslogger.senders;
 
 import android.content.Context;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
@@ -64,7 +63,7 @@ public class FileSenderFactory {
         return new FtpHelper();
     }
 
-    public static void SendFiles(Context applicationContext, IActionListener callback) {
+    public static void SendFiles(Context applicationContext) {
 
         final String currentFileName = Session.getCurrentFileName();
         tracer.info("Sending file " + currentFileName);
@@ -72,7 +71,6 @@ public class FileSenderFactory {
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
         if (Utilities.GetFilesInFolder(gpxFolder).length < 1) {
-            callback.OnFailure();
             return;
         }
 
@@ -86,7 +84,6 @@ public class FileSenderFactory {
         List<File> zipFiles = new ArrayList<>();
 
         if (files.size() == 0) {
-            callback.OnFailure();
             return;
         }
 
