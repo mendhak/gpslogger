@@ -112,7 +112,7 @@ public class OSMHelper implements IFileSender {
         String tags = prefs.getString("osm_tags", "");
         String visibility = prefs.getString("osm_visibility", "private");
 
-        JobManager jobManager = new JobManager(this.context);
+        JobManager jobManager = AppSettings.GetJobManager();
         jobManager.addJobInBackground(new OSMJob( consumer, gpsTraceUrl, chosenFile, description, tags, visibility));
     }
 

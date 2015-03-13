@@ -26,6 +26,7 @@ import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 import com.dropbox.client2.session.Session;
 import com.dropbox.client2.session.TokenPair;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
 import org.slf4j.LoggerFactory;
@@ -164,7 +165,7 @@ public class DropBoxHelper implements IFileSender {
         int dropboxAppKey = context.getResources().getIdentifier("dropbox_appkey", "string", context.getPackageName());
         int dropboxAppSecret = context.getResources().getIdentifier("dropbox_appsecret", "string", context.getPackageName());
 
-        JobManager jobManager = new JobManager(this.context);
+        JobManager jobManager = AppSettings.GetJobManager();
         jobManager.addJobInBackground(new DropboxJob(fileName, context.getString(dropboxAppKey), context.getString(dropboxAppSecret), getKeys()));
     }
 

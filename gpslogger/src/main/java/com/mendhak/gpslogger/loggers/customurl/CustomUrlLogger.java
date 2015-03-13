@@ -19,6 +19,7 @@ package com.mendhak.gpslogger.loggers.customurl;
 
 import android.content.Context;
 import android.location.Location;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.events.CustomUrlLoggedEvent;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Session;
@@ -62,7 +63,7 @@ public class CustomUrlLogger implements IFileLogger {
 
     @Override
     public void Annotate(String description, Location loc) throws Exception {
-        JobManager jobManager = new JobManager(this.context);
+        JobManager jobManager = AppSettings.GetJobManager();
         jobManager.addJobInBackground(new CustomUrlJob(customLoggingUrl, loc, description, satellites, batteryLevel, androidId));
     }
 

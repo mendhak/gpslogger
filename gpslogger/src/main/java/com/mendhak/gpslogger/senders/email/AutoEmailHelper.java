@@ -49,7 +49,7 @@ public class AutoEmailHelper implements IFileSender {
 
         String body = "GPS Log file generated at "+ Utilities.GetReadableDateTime(new Date());
 
-        JobManager jobManager = new JobManager(this.context);
+        JobManager jobManager = AppSettings.GetJobManager();
         jobManager.addJobInBackground(new AutoEmailJob(AppSettings.getSmtpServer(),
                 AppSettings.getSmtpPort(), AppSettings.getSmtpUsername(), AppSettings.getSmtpPassword(),
                 AppSettings.isSmtpSsl(), AppSettings.getAutoEmailTargets(), AppSettings.getSenderAddress(),
@@ -65,7 +65,7 @@ public class AutoEmailHelper implements IFileSender {
         String subject = "Test Email from GPSLogger at " + Utilities.GetReadableDateTime(new Date());
         String body ="Test Email from GPSLogger at " + Utilities.GetReadableDateTime(new Date());
 
-        JobManager jobManager = new JobManager(this.context);
+        JobManager jobManager = AppSettings.GetJobManager();
         jobManager.addJobInBackground(new AutoEmailJob(smtpServer,
                 smtpPort, smtpUsername, smtpPassword, smtpUseSsl,
                 emailTarget, fromAddress, subject, body, new File[]{}));

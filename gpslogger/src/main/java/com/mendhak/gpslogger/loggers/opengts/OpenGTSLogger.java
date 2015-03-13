@@ -48,7 +48,7 @@ public class OpenGTSLogger implements IFileLogger {
         String deviceId = AppSettings.getOpenGTSDeviceId();
         String communication = AppSettings.getOpenGTSServerCommunicationMethod();
 
-        JobManager jobManager = new JobManager(this.context);
+        JobManager jobManager = AppSettings.GetJobManager();
         jobManager.addJobInBackground(new OpenGTSJob(server, port, accountName, path, deviceId, communication, new SerializableLocation[]{new SerializableLocation(loc)}));
     }
 

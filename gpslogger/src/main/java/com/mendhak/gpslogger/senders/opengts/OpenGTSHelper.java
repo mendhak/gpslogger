@@ -55,7 +55,7 @@ public class OpenGTSHelper implements IFileSender {
                     String accountName = AppSettings.getOpenGTSAccountName();
                     String communication = AppSettings.getOpenGTSServerCommunicationMethod();
 
-                    JobManager jobManager = new JobManager(applicationContext);
+                    JobManager jobManager = AppSettings.GetJobManager();
                     jobManager.addJobInBackground(new OpenGTSJob(server, port, accountName, path, deviceId, communication, locations.toArray(new SerializableLocation[0])));
                 }
             }

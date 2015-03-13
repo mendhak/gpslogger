@@ -49,7 +49,7 @@ public class FileSenderFactory {
     }
 
     public static IFileSender GetGDocsSender(Context applicationContext, IActionListener callback) {
-        return new GDocsHelper(applicationContext, callback);
+        return new GDocsHelper(applicationContext);
     }
 
     public static IFileSender GetEmailSender(Context applicationContext) {
@@ -117,7 +117,7 @@ public class FileSenderFactory {
 
         if (GDocsHelper.IsLinked(applicationContext)) {
             tracer.debug("Google Docs Sender picked");
-            senders.add(new GDocsHelper(applicationContext, callback));
+            senders.add(new GDocsHelper(applicationContext));
         }
 
         if (OSMHelper.IsOsmAuthorized(applicationContext)) {

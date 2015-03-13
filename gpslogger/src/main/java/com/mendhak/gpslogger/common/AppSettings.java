@@ -18,16 +18,24 @@
 package com.mendhak.gpslogger.common;
 
 import android.app.Application;
+import com.path.android.jobqueue.JobManager;
 import de.greenrobot.event.EventBus;
 
 import java.util.Set;
 
 public class AppSettings extends Application {
 
+    private static JobManager jobManager;
+
     @Override
     public void onCreate() {
         super.onCreate();
         EventBus.builder().logNoSubscriberMessages(false).sendNoSubscriberEvent(false).installDefaultEventBus();
+        jobManager = new JobManager(this);
+    }
+
+    public static JobManager GetJobManager(){
+        return jobManager;
     }
 
     // ---------------------------------------------------

@@ -45,10 +45,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.heinrichreimersoftware.materialdrawer.DrawerView;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.mendhak.gpslogger.common.*;
-import com.mendhak.gpslogger.common.events.AutoEmailEvent;
-import com.mendhak.gpslogger.common.events.DropboxEvent;
-import com.mendhak.gpslogger.common.events.OpenGTSLoggedEvent;
-import com.mendhak.gpslogger.common.events.OpenStreetMapEvent;
+import com.mendhak.gpslogger.common.events.*;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
@@ -1202,6 +1199,12 @@ public class GpsMainActivity extends ActionBarActivity
     @SuppressWarnings("UnusedDeclaration")
     public void onEventMainThread(DropboxEvent o){
         tracer.debug("Dropbox Event completed, success: " + o.success);
+        Utilities.HideProgress();
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEventMainThread(GDocsEvent o){
+        tracer.debug("GDocs Event completed, success: " + o.success);
         Utilities.HideProgress();
     }
 

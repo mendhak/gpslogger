@@ -35,8 +35,9 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.events.GDocsEvent;
+import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedOutputStream;
@@ -47,13 +48,10 @@ import java.util.ArrayList;
 
 
 public class GDocsSettingsFragment extends PreferenceFragment
-        implements Preference.OnPreferenceClickListener, IActionListener {
+        implements Preference.OnPreferenceClickListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GDocsSettingsFragment.class.getSimpleName());
-    private final Handler handler = new Handler();
     boolean messageShown = false;
-    String accountName;
-
 
     static final int REQUEST_CODE_MISSING_GPSF = 1;
     static final int REQUEST_CODE_ACCOUNT_PICKER = 2;
@@ -66,8 +64,22 @@ public class GDocsSettingsFragment extends PreferenceFragment
         addPreferencesFromResource(R.xml.gdocssettings);
 
         VerifyGooglePlayServices();
+        RegisterEventBus();
+    }
 
+    @Override
+    public void onDestroy() {
 
+        try {
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
+        super.onDestroy();
+    }
+
+    private void RegisterEventBus() {
+        EventBus.getDefault().register(this);
     }
 
     private void VerifyGooglePlayServices() {
@@ -255,11 +267,11 @@ public class GDocsSettingsFragment extends PreferenceFragment
             }
 
         } catch (Exception ex) {
-            OnFailure();
+            EventBus.getDefault().post(new GDocsEvent(false));
         }
 
 
-        GDocsHelper helper = new GDocsHelper(getActivity(), this);
+        GDocsHelper helper = new GDocsHelper(getActivity());
 
         ArrayList<File> files = new ArrayList<File>();
         files.add(testFile);
@@ -268,40 +280,18 @@ public class GDocsSettingsFragment extends PreferenceFragment
 
     }
 
-    @Override
-    public void OnComplete() {
+
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void onEventMainThread(GDocsEvent o){
+        tracer.debug("GDocs Event completed, success: " + o.success);
         Utilities.HideProgress();
-        handler.post(successUpload);
-    }
-
-    @Override
-    public void OnFailure() {
-        Utilities.HideProgress();
-        handler.post(failedUpload);
-
-    }
-
-
-    private final Runnable failedUpload = new Runnable() {
-        public void run() {
-            FailureUploading();
+        if(!o.success){
+            Utilities.MsgBox(getString(R.string.sorry), getString(R.string.gdocs_testupload_error), getActivity());
         }
-    };
-
-    private final Runnable successUpload = new Runnable() {
-        public void run() {
-            SuccessUploading();
+        else {
+            Utilities.MsgBox(getString(R.string.success), getString(R.string.gdocs_testupload_success), getActivity());
         }
-    };
-
-
-    private void FailureUploading() {
-        Utilities.MsgBox(getString(R.string.sorry), getString(R.string.gdocs_testupload_error), getActivity());
     }
-
-    private void SuccessUploading() {
-        Utilities.MsgBox(getString(R.string.success), getString(R.string.gdocs_testupload_success), getActivity());
-    }
-
 
 }
