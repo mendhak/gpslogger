@@ -83,6 +83,8 @@ public class FileSenderFactory {
             }
         })));
 
+        List<File> zipFiles = new ArrayList<>();
+
         if (files.size() == 0) {
             callback.OnFailure();
             return;
@@ -100,14 +102,25 @@ public class FileSenderFactory {
             ZipHelper zh = new ZipHelper(filePaths.toArray(new String[filePaths.size()]), zipFile.getAbsolutePath());
             zh.Zip();
 
-            files.clear();
-            files.add(zipFile);
+            zipFiles.clear();
+            zipFiles.add(zipFile);
         }
 
         List<IFileSender> senders = GetFileSenders(applicationContext);
 
         for (IFileSender sender : senders) {
-            sender.UploadFile(files);
+            //Special case for OSM Uploader
+            if(!sender.accept(null, ".zip")){
+                sender.UploadFile(files);
+                continue;
+            }
+
+            if(AppSettings.shouldSendZipFile()){
+                sender.UploadFile(zipFiles);
+            } else {
+                sender.UploadFile(files);
+            }
+
         }
     }
 
@@ -115,34 +128,34 @@ public class FileSenderFactory {
     public static List<IFileSender> GetFileSenders(Context applicationContext) {
         List<IFileSender> senders = new ArrayList<IFileSender>();
 
-        if (GDocsHelper.IsLinked(applicationContext)) {
+        if (AppSettings.isGDocsAutoSendEnabled() && GDocsHelper.IsLinked(applicationContext)) {
             tracer.debug("Google Docs Sender picked");
             senders.add(new GDocsHelper(applicationContext));
         }
 
-        if (OSMHelper.IsOsmAuthorized(applicationContext)) {
+        if (AppSettings.isOsmAutoSendEnabled() && OSMHelper.IsOsmAuthorized(applicationContext)) {
             tracer.debug("OSM Sender picked");
             senders.add(new OSMHelper(applicationContext));
         }
 
-        if (AppSettings.isAutoEmailEnabled()) {
+        if (AppSettings.isEmailAutoSendEnabled()) {
             tracer.debug("Email Sender picked");
             senders.add(new AutoEmailHelper());
         }
 
         DropBoxHelper dh = new DropBoxHelper(applicationContext);
 
-        if (dh.IsLinked()) {
+        if (AppSettings.isDropboxAutoSendEnabled() &&  dh.IsLinked()) {
             tracer.debug("DropBox Sender picked");
             senders.add(dh);
         }
 
-        if (AppSettings.isAutoOpenGTSEnabled()) {
+        if (AppSettings.isOpenGtsAutoSendEnabled()) {
             tracer.debug("OpenGTS Sender picked");
             senders.add(new OpenGTSHelper());
         }
 
-        if (AppSettings.isAutoFtpEnabled()) {
+        if (AppSettings.isFtpAutoSendEnabled()) {
             tracer.debug("FTP Sender picked");
             senders.add(new FtpHelper());
         }

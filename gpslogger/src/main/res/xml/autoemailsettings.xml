@@ -3,8 +3,7 @@
                   android:key="autoemail_preferences">
 
     <com.mendhak.gpslogger.views.component.CustomSwitchPreference android:key="autoemail_enabled"
-                        android:title="@string/autoemail_autosend"
-                        android:summary="@string/autoemail_autosend_summary"/>
+                        android:title="@string/autosend_enabled"/>
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="autoemail_target"
                         android:title="@string/autoemail_target" android:summary="@string/autoemail_sendto_csv"

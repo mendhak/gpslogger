@@ -92,8 +92,6 @@ public class OSMHelper implements IFileSender {
 
     @Override
     public void UploadFile(List<File> files) {
-        //Upload only GPX
-
         for (File f : files) {
             if (f.getName().contains(".gpx")) {
                 UploadFile(f.getName());

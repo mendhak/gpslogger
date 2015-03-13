@@ -56,7 +56,7 @@ public class AppSettings extends Application {
     private static String newFileCreation;
     private static Float autoSendDelay = 0f;
     private static boolean autoSendEnabled = false;
-    private static boolean autoEmailEnabled = false;
+    private static boolean emailAutoSendEnabled = false;
     private static String smtpServer;
     private static String smtpPort;
     private static String smtpUsername;
@@ -71,7 +71,7 @@ public class AppSettings extends Application {
 
     private static boolean LogToOpenGTS;
     private static boolean openGTSEnabled;
-    private static boolean autoOpenGTSEnabled;
+    private static boolean openGtsAutoSendEnabled;
     private static String openGTSServer;
     private static String openGTSServerPort;
     private static String openGTSServerCommunicationMethod;
@@ -79,7 +79,7 @@ public class AppSettings extends Application {
     private static String openGTSDeviceId;
     private static String openGTSAccountName;
 
-    private static boolean autoFtpEnabled;
+    private static boolean ftpAutoSendEnabled;
     private static String ftpServerName;
     private static int ftpPort;
     private static String ftpUsername;
@@ -100,6 +100,36 @@ public class AppSettings extends Application {
     private static int absoluteTimeout;
     private static Set<String> chosenListeners;
     private static boolean autoSendWhenIPressStop;
+
+    private static boolean gDocsAutoSendEnabled;
+    private static boolean dropboxAutoSendEnabled;
+    private static boolean osmAutoSendEnabled;
+
+
+
+    public static boolean isOsmAutoSendEnabled() {
+        return osmAutoSendEnabled;
+    }
+
+    public static void setOsmAutoSendEnabled(boolean osmAutoSendEnabled) {
+        AppSettings.osmAutoSendEnabled = osmAutoSendEnabled;
+    }
+
+    public static boolean isDropboxAutoSendEnabled(){
+        return dropboxAutoSendEnabled;
+    }
+
+    public static void setDropboxAutoSendEnabled(boolean enabled){
+        AppSettings.dropboxAutoSendEnabled = enabled;
+    }
+
+    public static boolean isGDocsAutoSendEnabled() {
+        return gDocsAutoSendEnabled;
+    }
+
+    public static void setGDocsAutoSendEnabled(boolean gdocsEnabled) {
+        AppSettings.gDocsAutoSendEnabled = gdocsEnabled;
+    }
 
 
     /**
@@ -273,17 +303,17 @@ public class AppSettings extends Application {
     }
 
     /**
-     * @return the autoEmailEnabled
+     * @return the emailAutoSendEnabled
      */
-    public static boolean isAutoEmailEnabled() {
-        return autoEmailEnabled;
+    public static boolean isEmailAutoSendEnabled() {
+        return emailAutoSendEnabled;
     }
 
     /**
-     * @param autoEmailEnabled the autoEmailEnabled to set
+     * @param emailAutoSendEnabled the emailAutoSendEnabled to set
      */
-    static void setAutoEmailEnabled(boolean autoEmailEnabled) {
-        AppSettings.autoEmailEnabled = autoEmailEnabled;
+    static void setEmailAutoSendEnabled(boolean emailAutoSendEnabled) {
+        AppSettings.emailAutoSendEnabled = emailAutoSendEnabled;
     }
 
 
@@ -398,12 +428,12 @@ public class AppSettings extends Application {
         AppSettings.openGTSEnabled = openGTSEnabled;
     }
 
-    public static boolean isAutoOpenGTSEnabled() {
-        return autoOpenGTSEnabled;
+    public static boolean isOpenGtsAutoSendEnabled() {
+        return openGtsAutoSendEnabled;
     }
 
-    public static void setAutoOpenGTSEnabled(boolean autoOpenGTSEnabled) {
-        AppSettings.autoOpenGTSEnabled = autoOpenGTSEnabled;
+    public static void setOpenGtsAutoSendEnabled(boolean openGtsAutoSendEnabled) {
+        AppSettings.openGtsAutoSendEnabled = openGtsAutoSendEnabled;
     }
 
     public static String getOpenGTSServer() {
@@ -503,12 +533,12 @@ public class AppSettings extends Application {
         AppSettings.ftpImplicit = ftpImplicit;
     }
 
-    public static boolean isAutoFtpEnabled() {
-        return autoFtpEnabled;
+    public static boolean isFtpAutoSendEnabled() {
+        return ftpAutoSendEnabled;
     }
 
-    public static void setAutoFtpEnabled(boolean autoFtpEnabled) {
-        AppSettings.autoFtpEnabled = autoFtpEnabled;
+    public static void setFtpAutoSendEnabled(boolean ftpAutoSendEnabled) {
+        AppSettings.ftpAutoSendEnabled = ftpAutoSendEnabled;
     }
 
     public static String getCustomFileName() {

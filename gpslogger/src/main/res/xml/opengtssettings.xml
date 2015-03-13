@@ -3,8 +3,7 @@
                   android:key="opengts_preferences">
 
     <com.mendhak.gpslogger.views.component.CustomSwitchPreference android:key="opengts_enabled"
-                        android:title="@string/opengts_enabled"
-                        android:summary="@string/opengts_enabled_summary"/>
+                        android:title="@string/autosend_enabled"/>
 
     <com.mendhak.gpslogger.views.component.CustomSwitchPreference android:key="autoopengts_enabled"
                         android:title="@string/autoopengts_autosend"

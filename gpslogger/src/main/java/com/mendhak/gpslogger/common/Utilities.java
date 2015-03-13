@@ -234,9 +234,8 @@ public class Utilities {
 
         AppSettings.setAutoSendEnabled(prefs.getBoolean("autosend_enabled", false));
 
-        AppSettings.setAutoEmailEnabled(prefs.getBoolean("autoemail_enabled",
+        AppSettings.setEmailAutoSendEnabled(prefs.getBoolean("autoemail_enabled",
                 false));
-
 
         try{
             AppSettings.setAutoSendDelay(Float.valueOf(prefs.getString("autosend_frequency_minutes", "60")));
@@ -255,7 +254,7 @@ public class Utilities {
         AppSettings.setShouldSendZipFile(prefs.getBoolean("autosend_sendzip", true));
         AppSettings.setSmtpFrom(prefs.getString("smtp_from", ""));
         AppSettings.setOpenGTSEnabled(prefs.getBoolean("opengts_enabled", false));
-        AppSettings.setAutoOpenGTSEnabled(prefs.getBoolean("autoopengts_enabled", false));
+        AppSettings.setOpenGtsAutoSendEnabled(prefs.getBoolean("autoopengts_enabled", false));
         AppSettings.setOpenGTSServer(prefs.getString("opengts_server", ""));
         AppSettings.setOpenGTSServerPort(prefs.getString("opengts_server_port", ""));
         AppSettings.setOpenGTSServerCommunicationMethod(prefs.getString("opengts_server_communication_method", ""));
@@ -263,7 +262,11 @@ public class Utilities {
         AppSettings.setOpenGTSDeviceId(prefs.getString("opengts_device_id", ""));
         AppSettings.setOpenGTSAccountName(prefs.getString("opengts_accountname",""));
 
-        AppSettings.setAutoFtpEnabled(prefs.getBoolean("autoftp_enabled", false));
+        AppSettings.setGDocsAutoSendEnabled(prefs.getBoolean("gdocs_enabled", false));
+        AppSettings.setDropboxAutoSendEnabled(prefs.getBoolean("dropbox_enabled", false));
+        AppSettings.setOsmAutoSendEnabled(prefs.getBoolean("osm_enabled", false));
+
+        AppSettings.setFtpAutoSendEnabled(prefs.getBoolean("autoftp_enabled", false));
         AppSettings.setFtpServerName(prefs.getString("autoftp_server", ""));
         AppSettings.setFtpUsername(prefs.getString("autoftp_username", ""));
         AppSettings.setFtpPassword(prefs.getString("autoftp_password", ""));
@@ -530,7 +533,7 @@ public class Utilities {
 
 
     public static boolean IsEmailSetup() {
-        return AppSettings.isAutoEmailEnabled()
+        return AppSettings.isEmailAutoSendEnabled()
                 && AppSettings.getAutoEmailTargets().length() > 0
                 && AppSettings.getSmtpServer().length() > 0
                 && AppSettings.getSmtpPort().length() > 0
