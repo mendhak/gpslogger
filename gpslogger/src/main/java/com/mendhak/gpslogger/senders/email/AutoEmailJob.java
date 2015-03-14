@@ -87,6 +87,7 @@ public class AutoEmailJob extends Job {
 
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
+        tracer.error("Could not send email", throwable);
         return false;
     }
 }

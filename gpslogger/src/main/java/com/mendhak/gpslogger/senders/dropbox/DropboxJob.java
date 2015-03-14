@@ -50,6 +50,7 @@ public class DropboxJob extends Job {
         DropboxAPI.Entry upEntry = dropboxApi.putFileOverwrite(gpxFile.getName(), fis, gpxFile.length(), null);
         tracer.info("DropBox uploaded file rev is: " + upEntry.rev);
         EventBus.getDefault().post(new UploadEvents.Dropbox(true));
+        fis.close();
     }
 
     private AndroidAuthSession buildSession() {
