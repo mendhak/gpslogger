@@ -106,6 +106,7 @@ public class FileSenderFactory {
         List<IFileSender> senders = GetFileSenders(applicationContext);
 
         for (IFileSender sender : senders) {
+            tracer.debug("Sender: " + sender.getClass().getName());
             //Special case for OSM Uploader
             if(!sender.accept(null, ".zip")){
                 sender.UploadFile(files);
