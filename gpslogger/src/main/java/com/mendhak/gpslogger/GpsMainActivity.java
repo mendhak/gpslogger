@@ -966,15 +966,6 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     @Override
-    public void OnFatalMessage(String message) {
-        tracer.debug(message);
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.SetFatalMessage(message);
-        }
-    }
-
-    @Override
     public void OnLocationUpdate(Location loc) {
         tracer.debug(".");
         GenericViewFragment fragment = GetCurrentFragment();

@@ -23,13 +23,6 @@ interface IGpsLoggerServiceClient {
 
 
     /**
-     * Indicates that a fatal error has occurred, logging will stop.
-     *
-     * @param message
-     */
-    public void OnFatalMessage(String message);
-
-    /**
      * A new location fix has been obtained.
      *
      * @param loc

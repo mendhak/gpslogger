@@ -396,12 +396,10 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         showPreferencesSummary();
     }
 
-
-    @Override
-    public void SetFatalMessage(String message) {
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.FatalMessageEvent event){
         TextView txtStatus = (TextView) rootView.findViewById(R.id.detailedview_txtstatus);
-
-        txtStatus.setText(message);
+        txtStatus.setText(event.message);
     }
 
     @Override

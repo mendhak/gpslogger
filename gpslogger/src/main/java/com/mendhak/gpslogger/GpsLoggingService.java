@@ -689,9 +689,7 @@ public class GpsLoggingService extends Service  {
      */
     void SetFatalMessage(int messageId) {
         tracer.error(getString(messageId));
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnFatalMessage(getString(messageId));
-        }
+        EventBus.getDefault().post(new ServiceEvents.FatalMessageEvent(getString(messageId)));
     }
 
     /**

@@ -111,11 +111,6 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
     }
 
     @Override
-    public void SetFatalMessage(String message) {
-
-    }
-
-    @Override
     public void OnFileNameChange(String newFileName) {
 
     }

@@ -476,10 +476,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         }
     }
 
-    @Override
-    public void SetFatalMessage(String message) {
-
-    }
 
     @Override
     public void OnFileNameChange(String newFileName) {

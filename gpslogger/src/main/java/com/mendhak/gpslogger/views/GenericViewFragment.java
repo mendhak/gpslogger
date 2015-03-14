@@ -60,10 +60,6 @@ public abstract class GenericViewFragment extends Fragment {
 
     public abstract void OnWaitingForLocation(boolean inProgress);
 
-//    public abstract void SetStatusMessage(String message);
-
-    public abstract void SetFatalMessage(String message);
-
     public abstract void OnFileNameChange(String newFileName);
 
     public abstract void OnNmeaSentence(long timestamp, String nmeaSentence);

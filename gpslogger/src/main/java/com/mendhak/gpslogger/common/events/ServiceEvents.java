@@ -8,4 +8,11 @@ public class ServiceEvents {
         }
 
     }
+
+    public static class FatalMessageEvent {
+        public String message;
+        public FatalMessageEvent(String message) {
+            this.message = message;
+        }
+    }
 }
