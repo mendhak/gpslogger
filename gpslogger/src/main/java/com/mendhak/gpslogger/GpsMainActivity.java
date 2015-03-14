@@ -660,21 +660,7 @@ public class GpsMainActivity extends ActionBarActivity
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                         EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
-                        final String desc = Utilities.CleanDescription(userInput.getText().toString());
-                        if (desc.length() == 0) {
-                            tracer.debug("Clearing annotation");
-                            Session.clearDescription();
-                            SetAnnotationDone();
-                        } else {
-                            tracer.debug("Setting annotation: " + desc);
-                            Session.setDescription(desc);
-                            SetAnnotationReady();
-                            // logOnce will start single point mode.
-                            if (!Session.isStarted()) {
-                                tracer.debug("Will start log-single-point");
-                                LogSinglePoint();
-                            }
-                        }
+                        EventBus.getDefault().postSticky(new CommandEvents.Annotate(userInput.getText().toString()));
                     }
                 }).build();
 
@@ -1034,8 +1020,14 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.AnnotationWritten annotationWritten){
-        SetAnnotationDone();
+    public void onEventMainThread(ServiceEvents.AnnotationStatus annotationStatus){
+        if(annotationStatus.annotationWritten){
+            SetAnnotationDone();
+        }
+        else {
+            SetAnnotationReady();
+        }
+
     }
 
     @EventBusHook

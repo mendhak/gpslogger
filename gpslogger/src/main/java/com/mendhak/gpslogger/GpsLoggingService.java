@@ -878,7 +878,7 @@ public class GpsLoggingService extends Service  {
         }
 
         Session.clearDescription();
-        EventBus.getDefault().post(new ServiceEvents.AnnotationWritten());
+        EventBus.getDefault().post(new ServiceEvents.AnnotationStatus(true));
 
     }
 
@@ -954,9 +954,13 @@ public class GpsLoggingService extends Service  {
         } else {
             tracer.debug("Setting annotation: " + desc);
             Session.setDescription(desc);
+            EventBus.getDefault().post(new ServiceEvents.AnnotationStatus(false));
 
             if(Session.isStarted()){
                 StartGpsManager();
+            }
+            else {
+                LogOnce();
             }
         }
 

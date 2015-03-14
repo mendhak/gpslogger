@@ -44,7 +44,11 @@ public class ServiceEvents {
     public static class LocationServicesUnavailable {
     }
 
-    public static class AnnotationWritten {
+    public static class AnnotationStatus {
+        public boolean annotationWritten;
+        public AnnotationStatus(boolean written){
+            this.annotationWritten = written;
+        }
     }
 
     public static class LoggingStatus {
