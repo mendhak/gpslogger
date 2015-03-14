@@ -52,10 +52,6 @@ public abstract class GenericViewFragment extends Fragment {
     protected IGpsViewCallback gpsCallback;
 
 
-    public abstract void SetLoggingStarted();
-
-    public abstract void SetLoggingStopped();
-
     public abstract void OnFileNameChange(String newFileName);
 
     @EventBusHook
@@ -111,8 +107,6 @@ public abstract class GenericViewFragment extends Fragment {
             gpsCallback = null;
         }
     }
-
-
 
 
     /**

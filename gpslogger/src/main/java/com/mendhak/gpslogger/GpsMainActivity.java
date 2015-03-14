@@ -964,30 +964,6 @@ public class GpsMainActivity extends ActionBarActivity
 
     }
 
-    @Override
-    public void OnStartLogging() {
-        tracer.debug(".");
-
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.SetLoggingStarted();
-        }
-
-        enableDisableMenuItems();
-
-    }
-
-    @Override
-    public void OnStopLogging() {
-        tracer.debug(".");
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.SetLoggingStopped();
-        }
-
-        enableDisableMenuItems();
-    }
-
     private void SetBulbStatus(boolean started) {
         ImageView bulb = (ImageView) findViewById(R.id.notification_bulb);
         bulb.setImageResource(started ? R.drawable.circle_green : R.drawable.circle_none);
@@ -1154,5 +1130,10 @@ public class GpsMainActivity extends ActionBarActivity
     @EventBusHook
     public void onEventMainThread(ServiceEvents.AnnotationWrittenEvent annotationWrittenEvent){
         SetAnnotationDone();
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LoggingStatusEvent loggingStatusEvent){
+            enableDisableMenuItems();
     }
 }

@@ -396,9 +396,7 @@ public class GpsLoggingService extends Service  {
      * Asks the main service client to clear its form.
      */
     private void NotifyClientStarted() {
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnStartLogging();
-        }
+        EventBus.getDefault().post(new ServiceEvents.LoggingStatusEvent(true));
     }
 
     /**
@@ -701,9 +699,7 @@ public class GpsLoggingService extends Service  {
      * Notifies main form that logging has stopped
      */
     void NotifyClientStopped() {
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnStopLogging();
-        }
+        EventBus.getDefault().post(new ServiceEvents.LoggingStatusEvent(false));
     }
 
     /**

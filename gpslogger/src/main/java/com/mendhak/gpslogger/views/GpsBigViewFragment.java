@@ -75,6 +75,16 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         DisplayLocationInfo(locationUpdateEvent.location);
     }
 
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LoggingStatusEvent loggingStatusEvent){
+        if(loggingStatusEvent.loggingStarted){
+            TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
+            TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
+            txtLat.setText("");
+            txtLong.setText("");
+        }
+    }
+
     public void DisplayLocationInfo(Location locationInfo){
 
         TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
@@ -92,19 +102,6 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         } else {
             txtLat.setText(R.string.bigview_taptotoggle);
         }
-    }
-
-    @Override
-    public void SetLoggingStarted() {
-        TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
-        TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
-        txtLat.setText("");
-        txtLong.setText("");
-    }
-
-    @Override
-    public void SetLoggingStopped() {
-
     }
 
     @Override

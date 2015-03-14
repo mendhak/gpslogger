@@ -299,6 +299,21 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         OnWaitingForLocation(waitingForLocationEvent.waiting);
     }
 
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LoggingStatusEvent loggingStatusEvent){
+        tracer.debug(".");
+
+        if(loggingStatusEvent.loggingStarted){
+            showPreferencesSummary();
+            clearLocationDisplay();
+            setActionButtonStop();
+        }
+        else {
+            SetSatelliteCount(-1);
+            setActionButtonStart();
+        }
+    }
+
     public void DisplayLocationInfo(Location locationInfo){
         showPreferencesSummary();
 
@@ -447,25 +462,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             txtSatelliteCount.setText("");
         }
 
-    }
-
-    @Override
-    public void SetLoggingStarted() {
-        tracer.debug("GpsSimpleViewFragment.SetLoggingStarted");
-        showPreferencesSummary();
-        clearLocationDisplay();
-
-        tracer.debug(".");
-        setActionButtonStop();
-    }
-
-    @Override
-    public void SetLoggingStopped() {
-
-        tracer.debug(".");
-        SetSatelliteCount(-1);
-
-        setActionButtonStart();
     }
 
     public void OnWaitingForLocation(boolean inProgress) {

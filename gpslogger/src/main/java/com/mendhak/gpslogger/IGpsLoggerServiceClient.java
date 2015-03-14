@@ -20,19 +20,6 @@ package com.mendhak.gpslogger;
 
 interface IGpsLoggerServiceClient {
 
-
-
-    /**
-     * Asking the calling activity form to clear itself.
-     */
-    public void OnStartLogging();
-
-    /**
-     * Asking the calling activity form to indicate that logging has stopped
-     */
-    public void OnStopLogging();
-
-
     /**
      * A new current file name is available.
      *

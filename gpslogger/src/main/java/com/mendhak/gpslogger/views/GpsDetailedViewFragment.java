@@ -246,13 +246,6 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         txtSatellites.setText(String.valueOf(count));
     }
 
-    @Override
-    public void SetLoggingStarted() {
-        setActionButtonStop();
-        showPreferencesSummary();
-        ClearDisplay();
-    }
-
     private void ClearDisplay() {
         TextView tvLatitude = (TextView) rootView.findViewById(R.id.detailedview_lat_text);
         TextView tvLongitude = (TextView) rootView.findViewById(R.id.detailedview_lon_text);
@@ -282,12 +275,6 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     }
 
-    @Override
-    public void SetLoggingStopped() {
-
-        setActionButtonStart();
-    }
-
     @EventBusHook
     public void onEventMainThread(ServiceEvents.StatusMessageEvent event){
         TextView txtStatus = (TextView) rootView.findViewById(R.id.detailedview_txtstatus);
@@ -309,6 +296,18 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     @EventBusHook
     public void onEventMainThread(ServiceEvents.SatelliteCountEvent satelliteCountEvent){
         SetSatelliteCount(satelliteCountEvent.satelliteCount);
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LoggingStatusEvent loggingStatusEvent){
+        if(loggingStatusEvent.loggingStarted){
+            setActionButtonStop();
+            showPreferencesSummary();
+            ClearDisplay();
+        }
+        else {
+            setActionButtonStart();
+        }
     }
 
     public void DisplayLocationInfo(Location locationInfo){

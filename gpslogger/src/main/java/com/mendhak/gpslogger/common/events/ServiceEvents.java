@@ -3,6 +3,8 @@ package com.mendhak.gpslogger.common.events;
 import android.location.Location;
 
 public class ServiceEvents {
+
+
     public static class StatusMessageEvent{
         public String status;
         public StatusMessageEvent(String message){
@@ -43,5 +45,12 @@ public class ServiceEvents {
     }
 
     public static class AnnotationWrittenEvent {
+    }
+
+    public static class LoggingStatusEvent {
+        public boolean loggingStarted;
+        public LoggingStatusEvent(boolean loggingStarted) {
+            this.loggingStarted = loggingStarted;
+        }
     }
 }
