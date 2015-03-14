@@ -63,7 +63,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class GpsMainActivity extends ActionBarActivity
-        implements GenericViewFragment.IGpsViewCallback,
+        implements
         Toolbar.OnMenuItemClickListener,
         ActionBar.OnNavigationListener {
 
@@ -982,91 +982,6 @@ public class GpsMainActivity extends ActionBarActivity
     public void OnWaitingForLocation(boolean inProgress) {
         ProgressBar fixBar = (ProgressBar) findViewById(R.id.progressBarGpsFix);
         fixBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
-    }
-
-    //IGpsViewCallback callbacks
-    //These methods come from the fragments
-    @Override
-    public void onRequestStartLogging() {
-        tracer.info(".");
-
-        if(AppSettings.isCustomFile()  && AppSettings.shouldAskCustomFileNameEachTime()){
-
-            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-            MaterialDialog alertDialog = new MaterialDialog.Builder(GpsMainActivity.this)
-                    .title(R.string.new_file_custom_title)
-                    .customView(R.layout.alertview)
-                    .positiveText(R.string.ok)
-                    .callback(new MaterialDialog.ButtonCallback() {
-                        @Override
-                        public void onPositive(MaterialDialog dialog) {
-                            String chosenFileName = AppSettings.getCustomFileName();
-                            EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
-
-                            if (!Utilities.IsNullOrEmpty(userInput.getText().toString()) && !userInput.getText().toString().equalsIgnoreCase(chosenFileName)) {
-                                SharedPreferences.Editor editor = prefs.edit();
-                                editor.putString("new_file_custom_name", userInput.getText().toString());
-                                editor.apply();
-                            }
-                            StartLogging();
-                        }
-                    })
-                    .keyListener(new DialogInterface.OnKeyListener() {
-                        @Override
-                        public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                                StartLogging();
-                                dialog.dismiss();
-                            }
-                            return true;
-                        }
-                    })
-                    .build();
-
-            EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
-            userInput.setText(AppSettings.getCustomFileName());
-            TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
-            tvMessage.setText(R.string.new_file_custom_message);
-            alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-            alertDialog.show();
-
-        }
-        else {
-            StartLogging();
-        }
-
-    }
-
-    @Override
-    public void onRequestStopLogging() {
-        tracer.info(".");
-        StopLogging();
-    }
-
-    @Override
-    public void onRequestToggleLogging() {
-        tracer.info(".");
-
-        if (Session.isStarted()) {
-            tracer.info("Toggle requested - stopping");
-            StopLogging();
-        } else {
-            tracer.info("Toggle requested - starting");
-            StartLogging();
-        }
-    }
-
-    private void StartLogging() {
-        GetPreferences();
-        loggingService.SetupAutoSendTimers();
-        loggingService.StartLogging();
-        enableDisableMenuItems();
-    }
-
-    private void StopLogging() {
-        loggingService.StopLogging();
-        enableDisableMenuItems();
     }
 
 

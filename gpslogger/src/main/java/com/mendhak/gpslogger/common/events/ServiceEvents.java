@@ -60,4 +60,7 @@ public class ServiceEvents {
             this.newFileName = newFileName;
         }
     }
+
+    public static class RequestToggleEvent {
+    }
 }

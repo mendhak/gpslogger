@@ -88,12 +88,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Session.isStarted()){
-                    requestStopLogging();
-                }
-                else {
-                    requestStartLogging();
-                }
+                RequestToggleLogging();
             }
         });
 

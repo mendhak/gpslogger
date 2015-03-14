@@ -34,6 +34,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
@@ -84,8 +85,13 @@ public class GpsLoggingService extends Service  {
 
         tracer.debug(".");
         nextPointAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        RegisterEventBus();
     }
 
+    private void RegisterEventBus() {
+        EventBus.getDefault().register(this);
+    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -98,6 +104,11 @@ public class GpsLoggingService extends Service  {
     @Override
     public void onDestroy() {
         tracer.warn("GpsLoggingService is being destroyed by Android OS.");
+        try {
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
         super.onDestroy();
     }
 
@@ -923,5 +934,16 @@ public class GpsLoggingService extends Service  {
         }
     }
 
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.RequestToggleEvent requestToggleEvent){
+        if (Session.isStarted()) {
+            tracer.info("Toggle requested - stopping");
+            StopLogging();
+        } else {
+            tracer.info("Toggle requested - starting");
+            StartLogging();
+        }
+    }
 
 }
