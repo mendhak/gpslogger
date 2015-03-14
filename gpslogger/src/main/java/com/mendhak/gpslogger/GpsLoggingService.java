@@ -154,11 +154,8 @@ public class GpsLoggingService extends Service  {
                 }
 
                 if (sendEmailNow) {
-
                     tracer.debug("Intent received - Send Email Now");
-
-                    Session.setReadyToBeAutoSent(true);
-                    AutoSendLogFile();
+                    EventBus.getDefault().postSticky(new CommandEvents.AutoSend());
                 }
 
                 if (getNextPoint) {
@@ -962,6 +959,15 @@ public class GpsLoggingService extends Service  {
         }
 
         EventBus.getDefault().removeStickyEvent(CommandEvents.RequestStartStop.class);
+    }
+
+    @EventBusHook
+    public void onEvent(CommandEvents.AutoSend autoSend){
+        tracer.debug(".");
+        Session.setReadyToBeAutoSent(true);
+        AutoSendLogFile();
+
+        EventBus.getDefault().removeStickyEvent(CommandEvents.AutoSend.class);
     }
 
 }

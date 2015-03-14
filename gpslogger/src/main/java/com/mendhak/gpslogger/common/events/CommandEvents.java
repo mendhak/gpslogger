@@ -18,4 +18,11 @@ public class CommandEvents {
             this.start = start;
         }
     }
+
+    /**
+     * Requests auto sending to targets
+     */
+    public static class AutoSend {
+
+    }
 }

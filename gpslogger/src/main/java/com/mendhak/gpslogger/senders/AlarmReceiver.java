@@ -20,6 +20,8 @@ package com.mendhak.gpslogger.senders;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import com.mendhak.gpslogger.common.events.CommandEvents;
+import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
 
@@ -31,14 +33,13 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         try {
             tracer.info("Email alarm received");
+
+            EventBus.getDefault().postSticky(new CommandEvents.AutoSend());
+
             Intent serviceIntent = new Intent(context.getPackageName() + ".GpsLoggingService");
-            serviceIntent.putExtra("emailAlarm", true);
-            // Start the service in case it isn't already running
             context.startService(serviceIntent);
         } catch (Exception ex) {
             tracer.error("AlarmReceiver.onReceive", ex);
         }
-
-
     }
 }
