@@ -53,4 +53,11 @@ public class ServiceEvents {
             this.loggingStarted = loggingStarted;
         }
     }
+
+    public static class FileNameEvent {
+        public String newFileName;
+        public FileNameEvent(String newFileName) {
+            this.newFileName = newFileName;
+        }
+    }
 }

@@ -314,6 +314,11 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         }
     }
 
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.FileNameEvent fileNameEvent){
+        showCurrentFileName(fileNameEvent.newFileName);
+    }
+
     public void DisplayLocationInfo(Location locationInfo){
         showPreferencesSummary();
 
@@ -484,11 +489,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         }
     }
 
-
-    @Override
-    public void OnFileNameChange(String newFileName) {
-        showCurrentFileName(newFileName);
-    }
 
     @Override
     public void onClick(View view) {

@@ -52,8 +52,6 @@ public abstract class GenericViewFragment extends Fragment {
     protected IGpsViewCallback gpsCallback;
 
 
-    public abstract void OnFileNameChange(String newFileName);
-
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LocationServicesUnavailableEvent locationServicesUnavailableEvent){
         new MaterialDialog.Builder(getActivity())

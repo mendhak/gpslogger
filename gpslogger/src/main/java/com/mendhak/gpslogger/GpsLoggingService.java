@@ -51,7 +51,6 @@ import java.util.Date;
 public class GpsLoggingService extends Service  {
     private static NotificationManager notificationManager;
     private static int NOTIFICATION_ID = 8675309;
-    private static IGpsLoggerServiceClient mainServiceClient;
     private final IBinder binder = new GpsLoggingBinder();
     AlarmManager nextPointAlarmManager;
     private NotificationCompat.Builder nfc = null;
@@ -71,15 +70,6 @@ public class GpsLoggingService extends Service  {
     private long firstRetryTimeStamp;
     // ---------------------------------------------------
 
-    /**
-     * Sets the activity form for this service. The activity form needs to
-     * implement IGpsLoggerServiceClient.
-     *
-     * @param mainForm The calling client
-     */
-    protected static void SetServiceClient(IGpsLoggerServiceClient mainForm) {
-        mainServiceClient = mainForm;
-    }
 
     @Override
     public IBinder onBind(Intent arg0) {
@@ -108,7 +98,6 @@ public class GpsLoggingService extends Service  {
     @Override
     public void onDestroy() {
         tracer.warn("GpsLoggingService is being destroyed by Android OS.");
-        mainServiceClient = null;
         super.onDestroy();
     }
 
@@ -275,9 +264,7 @@ public class GpsLoggingService extends Service  {
 
         tracer.debug(".");
         if (AppSettings.isAutoSendEnabled() && Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0) {
-            if (IsMainFormVisible()) {
-                SetStatus(R.string.autosend_sending);
-            }
+            SetStatus(R.string.autosend_sending);
 
             tracer.info("Force emailing Log File");
             FileSenderFactory.SendFiles(getApplicationContext());
@@ -654,10 +641,8 @@ public class GpsLoggingService extends Service  {
             Session.setCurrentFileName(newFileName);
         }
 
-        if (IsMainFormVisible()) {
-            tracer.info("File name: " + newFileName);
-            mainServiceClient.onFileName(newFileName);
-        }
+        EventBus.getDefault().post(new ServiceEvents.FileNameEvent(newFileName));
+
     }
 
     /**
@@ -917,10 +902,6 @@ public class GpsLoggingService extends Service  {
     void SetSatelliteInfo(int count) {
         Session.setSatelliteCount(count);
         EventBus.getDefault().post(new ServiceEvents.SatelliteCountEvent(count));
-    }
-
-    private boolean IsMainFormVisible() {
-        return mainServiceClient != null;
     }
 
     public void OnNmeaSentence(long timestamp, String nmeaSentence) {

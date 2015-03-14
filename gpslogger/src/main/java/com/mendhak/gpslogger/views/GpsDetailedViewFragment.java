@@ -310,6 +310,11 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         }
     }
 
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.FileNameEvent fileNameEvent){
+        showCurrentFileName(fileNameEvent.newFileName);
+    }
+
     public void DisplayLocationInfo(Location locationInfo){
         if (locationInfo == null) {
             return;
@@ -400,11 +405,5 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());
         txtTime.setText(duration + " (started at " + dateFormat.format(d) + " " + timeFormat.format(d) + ")");
     }
-
-    @Override
-    public void OnFileNameChange(String newFileName) {
-        showCurrentFileName(newFileName);
-    }
-
 
 }

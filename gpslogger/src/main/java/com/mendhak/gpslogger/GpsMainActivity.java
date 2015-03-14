@@ -64,7 +64,6 @@ import java.util.*;
 
 public class GpsMainActivity extends ActionBarActivity
         implements GenericViewFragment.IGpsViewCallback,
-        IGpsLoggerServiceClient,
         Toolbar.OnMenuItemClickListener,
         ActionBar.OnNavigationListener {
 
@@ -913,7 +912,6 @@ public class GpsMainActivity extends ActionBarActivity
         public void onServiceConnected(ComponentName name, IBinder service) {
             tracer.debug("Connected to GPSLoggingService from MainActivity");
             loggingService = ((GpsLoggingService.GpsLoggingBinder) service).getService();
-            GpsLoggingService.SetServiceClient(GpsMainActivity.this);
 
             if (Session.hasDescription()) {
                 SetAnnotationReady();
@@ -979,15 +977,6 @@ public class GpsMainActivity extends ActionBarActivity
         tracer.debug(".");
         Session.setAnnotationMarked(false);
         enableDisableMenuItems();
-    }
-
-
-    @Override
-    public void onFileName(String newFileName) {
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.OnFileNameChange(newFileName);
-        }
     }
 
     public void OnWaitingForLocation(boolean inProgress) {

@@ -105,11 +105,6 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
     }
 
     @Override
-    public void OnFileNameChange(String newFileName) {
-
-    }
-
-    @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
             tracer.debug("Big frame - onTouch event");
