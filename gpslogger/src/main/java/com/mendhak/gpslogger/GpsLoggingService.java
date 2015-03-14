@@ -815,10 +815,7 @@ public class GpsLoggingService extends Service  {
         GetPreferences();
         StopManagerAndResetAlarm();
 
-        if (IsMainFormVisible()) {
-
-            mainServiceClient.OnLocationUpdate(loc);
-        }
+        EventBus.getDefault().post(new ServiceEvents.LocationUpdateEvent(loc));
 
         if (Session.isSinglePointMode()) {
             tracer.debug("Single point mode - stopping logging now");

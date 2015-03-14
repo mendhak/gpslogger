@@ -966,16 +966,6 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     @Override
-    public void OnLocationUpdate(Location loc) {
-        tracer.debug(".");
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.SetLocation(loc);
-        }
-
-    }
-
-    @Override
     public void OnNmeaSentence(long timestamp, String nmeaSentence) {
         GenericViewFragment fragment = GetCurrentFragment();
         if(fragment != null) {

@@ -34,6 +34,7 @@ import android.widget.Toast;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
@@ -98,7 +99,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
 
         if (Session.hasValidLocation()) {
-            SetLocation(Session.getCurrentLocationInfo());
+            DisplayLocationInfo(Session.getCurrentLocationInfo());
         }
 
 
@@ -283,9 +284,12 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     }
 
 
-    @Override
-    public void SetLocation(Location locationInfo) {
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LocationUpdateEvent locationUpdateEvent){
+        DisplayLocationInfo(locationUpdateEvent.location);
+    }
 
+    public void DisplayLocationInfo(Location locationInfo){
         showPreferencesSummary();
 
         NumberFormat nf = NumberFormat.getInstance();
@@ -369,8 +373,8 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         if (!providerName.equalsIgnoreCase("gps")) {
             SetSatelliteCount(-1);
         }
-
     }
+
 
     private void clearLocationDisplay() {
 

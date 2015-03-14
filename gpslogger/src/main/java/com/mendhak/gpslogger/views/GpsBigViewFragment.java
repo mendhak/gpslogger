@@ -26,7 +26,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.events.ServiceEvents;
 import org.slf4j.LoggerFactory;
 
 import java.text.NumberFormat;
@@ -58,7 +60,7 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
         txtLong.setOnTouchListener(this);
 
-        SetLocation(Session.getCurrentLocationInfo());
+        DisplayLocationInfo(Session.getCurrentLocationInfo());
 
         if (Session.isStarted()) {
             Toast.makeText(getActivity().getApplicationContext(), R.string.bigview_taptotoggle, Toast.LENGTH_SHORT).show();
@@ -68,8 +70,13 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         return rootView;
     }
 
-    @Override
-    public void SetLocation(Location locationInfo) {
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LocationUpdateEvent locationUpdateEvent){
+        DisplayLocationInfo(locationUpdateEvent.location);
+    }
+
+    public void DisplayLocationInfo(Location locationInfo){
+
         TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
         TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
 

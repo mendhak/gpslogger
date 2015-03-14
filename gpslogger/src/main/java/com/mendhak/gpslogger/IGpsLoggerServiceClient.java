@@ -17,17 +17,9 @@
 
 package com.mendhak.gpslogger;
 
-import android.location.Location;
 
 interface IGpsLoggerServiceClient {
 
-
-    /**
-     * A new location fix has been obtained.
-     *
-     * @param loc
-     */
-    public void OnLocationUpdate(Location loc);
 
 
     /**
