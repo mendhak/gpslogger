@@ -33,10 +33,7 @@ import android.os.*;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
@@ -134,36 +131,27 @@ public class GpsLoggingService extends Service  {
             if (bundle != null) {
                 boolean needToStartGpsManager = false;
 
-                boolean stopRightNow = bundle.getBoolean("immediatestop");
-                boolean startRightNow = bundle.getBoolean("immediatestart");
-                boolean sendEmailNow = bundle.getBoolean("emailAlarm");
-                boolean getNextPoint = bundle.getBoolean("getnextpoint");
-
-                tracer.debug("stopRightNow - " + String.valueOf(stopRightNow) + ", startRightNow - "
-                        + String.valueOf(startRightNow) + ", sendEmailNow - " + String.valueOf(sendEmailNow)
-                        + ", getNextPoint - " + String.valueOf(getNextPoint));
-
-                if (startRightNow) {
+                if (bundle.getBoolean(IntentConstants.IMMEDIATE_START)) {
                     tracer.info("Intent received - Start Logging Now");
                     EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
                 }
 
-                if (stopRightNow) {
+                if (bundle.getBoolean(IntentConstants.IMMEDIATE_STOP)) {
                     tracer.info("Intent received - Stop logging now");
                     EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(false));
                 }
 
-                if (sendEmailNow) {
+                if (bundle.getBoolean(IntentConstants.AUTOSEND_NOW)) {
                     tracer.debug("Intent received - Send Email Now");
                     EventBus.getDefault().postSticky(new CommandEvents.AutoSend());
                 }
 
-                if (getNextPoint) {
+                if (bundle.getBoolean(IntentConstants.GET_NEXT_POINT)) {
                     tracer.debug("Intent received - Get Next Point");
                     needToStartGpsManager = true;
                 }
 
-                String setNextPointDescription = bundle.getString("setnextpointdescription");
+                String setNextPointDescription = bundle.getString(IntentConstants.SET_DESCRIPTION);
                 if (setNextPointDescription != null) {
                     tracer.debug("Intent received - Set Next Point Description: " + setNextPointDescription);
 
@@ -181,50 +169,50 @@ public class GpsLoggingService extends Service  {
                 SharedPreferences prefs = PreferenceManager
                         .getDefaultSharedPreferences(getApplicationContext());
 
-                if (bundle.get("setprefercelltower") != null) {
-                    boolean preferCellTower = bundle.getBoolean("setprefercelltower");
+                if (bundle.get(IntentConstants.PREFER_CELLTOWER) != null) {
+                    boolean preferCellTower = bundle.getBoolean(IntentConstants.PREFER_CELLTOWER);
                     tracer.debug("Intent received - Set Prefer Cell Tower: " + String.valueOf(preferCellTower));
                     prefs.edit().putBoolean("prefer_celltower", preferCellTower).apply();
                     needToStartGpsManager = true;
                 }
 
-                if (bundle.get("settimebeforelogging") != null) {
-                    int timeBeforeLogging = bundle.getInt("settimebeforelogging");
+                if (bundle.get(IntentConstants.TIME_BEFORE_LOGGING) != null) {
+                    int timeBeforeLogging = bundle.getInt(IntentConstants.TIME_BEFORE_LOGGING);
                     tracer.debug("Intent received - Set Time Before Logging: " + String.valueOf(timeBeforeLogging));
                     prefs.edit().putString("time_before_logging", String.valueOf(timeBeforeLogging)).apply();
                     needToStartGpsManager = true;
                 }
 
-                if (bundle.get("setdistancebeforelogging") != null) {
-                    int distanceBeforeLogging = bundle.getInt("setdistancebeforelogging");
+                if (bundle.get(IntentConstants.DISTANCE_BEFORE_LOGGING) != null) {
+                    int distanceBeforeLogging = bundle.getInt(IntentConstants.DISTANCE_BEFORE_LOGGING);
                     tracer.debug("Intent received - Set Distance Before Logging: " + String.valueOf(distanceBeforeLogging));
                     prefs.edit().putString("distance_before_logging", String.valueOf(distanceBeforeLogging)).apply();
                     needToStartGpsManager = true;
                 }
 
-                if (bundle.get("setkeepbetweenfix") != null) {
-                    boolean keepBetweenFix = bundle.getBoolean("setkeepbetweenfix");
+                if (bundle.get(IntentConstants.GPS_ON_BETWEEN_FIX) != null) {
+                    boolean keepBetweenFix = bundle.getBoolean(IntentConstants.GPS_ON_BETWEEN_FIX);
                     tracer.debug("Intent received - Set Keep Between Fix: " + String.valueOf(keepBetweenFix));
                     prefs.edit().putBoolean("keep_fix", keepBetweenFix).apply();
                     needToStartGpsManager = true;
                 }
 
-                if (bundle.get("setretrytime") != null) {
-                    int retryTime = bundle.getInt("setretrytime");
+                if (bundle.get(IntentConstants.RETRY_TIME) != null) {
+                    int retryTime = bundle.getInt(IntentConstants.RETRY_TIME);
                     tracer.debug("Intent received - Set Retry Time: " + String.valueOf(retryTime));
                     prefs.edit().putString("retry_time", String.valueOf(retryTime)).apply();
                     needToStartGpsManager = true;
                 }
 
-                if (bundle.get("setabsolutetimeout") != null) {
-                    int absolumeTimeOut = bundle.getInt("setabsolutetimeout");
+                if (bundle.get(IntentConstants.ABSOLUTE_TIMEOUT) != null) {
+                    int absolumeTimeOut = bundle.getInt(IntentConstants.ABSOLUTE_TIMEOUT);
                     tracer.debug("Intent received - Set Retry Time: " + String.valueOf(absolumeTimeOut));
                     prefs.edit().putString("absolute_timeout", String.valueOf(absolumeTimeOut)).apply();
                     needToStartGpsManager = true;
                 }
 
-                if(bundle.get("logonce") != null){
-                    boolean logOnceIntent = bundle.getBoolean("logonce");
+                if(bundle.get(IntentConstants.LOG_ONCE) != null){
+                    boolean logOnceIntent = bundle.getBoolean(IntentConstants.LOG_ONCE);
                     tracer.debug("Intent received - Log Once: " + String.valueOf(logOnceIntent));
                     needToStartGpsManager = false;
                     LogOnce();
@@ -438,12 +426,12 @@ public class GpsLoggingService extends Service  {
 
         Intent stopLoggingIntent = new Intent(this, GpsLoggingService.class);
         stopLoggingIntent.setAction("NotificationButton_STOP");
-        stopLoggingIntent.putExtra("immediatestop", true);
+        stopLoggingIntent.putExtra(IntentConstants.IMMEDIATE_STOP, true);
         PendingIntent piStop = PendingIntent.getService(this, 0, stopLoggingIntent, 0);
 
         Intent annotateIntent = new Intent(this, NotificationAnnotationActivity.class);
         annotateIntent.setAction("com.mendhak.gpslogger.NOTIFICATION_BUTTON");
-        annotateIntent.putExtra("setnextpointdescription", "This is from the notification...");
+        annotateIntent.putExtra(IntentConstants.SET_DESCRIPTION, "This is from the notification...");
         PendingIntent piAnnotate = PendingIntent.getActivity(this,0, annotateIntent,0);
 
         // What happens when the notification item is clicked
@@ -859,7 +847,7 @@ public class GpsLoggingService extends Service  {
     private void StopAlarm() {
         tracer.debug("GpsLoggingService.StopAlarm");
         Intent i = new Intent(this, GpsLoggingService.class);
-        i.putExtra("getnextpoint", true);
+        i.putExtra(IntentConstants.GET_NEXT_POINT, true);
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
         nextPointAlarmManager.cancel(pi);
     }
@@ -869,9 +857,7 @@ public class GpsLoggingService extends Service  {
         tracer.debug("GpsLoggingService.SetAlarmForNextPoint");
 
         Intent i = new Intent(this, GpsLoggingService.class);
-
-        i.putExtra("getnextpoint", true);
-
+        i.putExtra(IntentConstants.GET_NEXT_POINT, true);
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
         nextPointAlarmManager.cancel(pi);
 

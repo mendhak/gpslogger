@@ -22,16 +22,12 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.IntentConstants;
 import org.slf4j.LoggerFactory;
 
 public class NotificationAnnotationActivity extends Activity {
@@ -70,7 +66,7 @@ public class NotificationAnnotationActivity extends Activity {
                         tracer.info("Notification annotation: " + userInput.getText().toString());
 
                         Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
-                        serviceIntent.putExtra("setnextpointdescription", userInput.getText().toString());
+                        serviceIntent.putExtra(IntentConstants.SET_DESCRIPTION, userInput.getText().toString());
                         getApplicationContext().startService(serviceIntent);
 
                         finish();
