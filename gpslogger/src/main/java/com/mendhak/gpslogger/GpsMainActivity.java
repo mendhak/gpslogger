@@ -27,7 +27,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.location.Location;
 import android.net.Uri;
 import android.os.*;
 import android.preference.PreferenceManager;
@@ -664,11 +663,11 @@ public class GpsMainActivity extends ActionBarActivity
                         if (desc.length() == 0) {
                             tracer.debug("Clearing annotation");
                             Session.clearDescription();
-                            OnClearAnnotation();
+                            SetAnnotationDone();
                         } else {
                             tracer.debug("Setting annotation: " + desc);
                             Session.setDescription(desc);
-                            OnSetAnnotation();
+                            SetAnnotationReady();
                             // logOnce will start single point mode.
                             if (!Session.isStarted()) {
                                 tracer.debug("Will start log-single-point");
@@ -917,7 +916,7 @@ public class GpsMainActivity extends ActionBarActivity
             GpsLoggingService.SetServiceClient(GpsMainActivity.this);
 
             if (Session.hasDescription()) {
-                OnSetAnnotation();
+                SetAnnotationReady();
             }
 
         }
@@ -994,15 +993,13 @@ public class GpsMainActivity extends ActionBarActivity
         bulb.setImageResource(started ? R.drawable.circle_green : R.drawable.circle_none);
     }
 
-    @Override
-    public void OnSetAnnotation() {
+    public void SetAnnotationReady() {
         tracer.debug(".");
         Session.setAnnotationMarked(true);
         enableDisableMenuItems();
     }
 
-    @Override
-    public void OnClearAnnotation() {
+    public void SetAnnotationDone() {
         tracer.debug(".");
         Session.setAnnotationMarked(false);
         enableDisableMenuItems();
@@ -1152,5 +1149,10 @@ public class GpsMainActivity extends ActionBarActivity
     @EventBusHook
     public void onEventMainThread(ServiceEvents.WaitingForLocationEvent waitingForLocationEvent){
         OnWaitingForLocation(waitingForLocationEvent.waiting);
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.AnnotationWrittenEvent annotationWrittenEvent){
+        SetAnnotationDone();
     }
 }

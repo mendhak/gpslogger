@@ -41,4 +41,7 @@ public class ServiceEvents {
 
     public static class LocationServicesUnavailableEvent {
     }
+
+    public static class AnnotationWrittenEvent {
+    }
 }

@@ -909,9 +909,7 @@ public class GpsLoggingService extends Service  {
         }
 
         Session.clearDescription();
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnClearAnnotation();
-        }
+        EventBus.getDefault().post(new ServiceEvents.AnnotationWrittenEvent());
 
     }
 
