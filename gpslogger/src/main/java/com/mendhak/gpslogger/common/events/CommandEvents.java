@@ -23,13 +23,25 @@ public class CommandEvents {
      * Requests auto sending to targets
      */
     public static class AutoSend {
-
+        public boolean force;
+        public AutoSend(boolean force){
+            this.force = force;
+        }
     }
 
+    /**
+     * Set a description for the next point
+     */
     public static class Annotate {
         public String annotation;
         public Annotate(String annotation) {
             this.annotation = annotation;
         }
+    }
+
+    /**
+     * Log once and stop
+     */
+    public static class LogOnce {
     }
 }

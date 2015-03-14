@@ -67,7 +67,7 @@ public class GpsMainActivity extends ActionBarActivity
         ActionBar.OnNavigationListener {
 
     private static Intent serviceIntent;
-    private GpsLoggingService loggingService;
+    //private GpsLoggingService loggingService;
     private ActionBarDrawerToggle drawerToggle;
     private org.slf4j.Logger tracer;
 
@@ -112,6 +112,11 @@ public class GpsMainActivity extends ActionBarActivity
         super.onResume();
         GetPreferences();
         StartAndBindService();
+
+        if (Session.hasDescription()) {
+            SetAnnotationReady();
+        }
+
         enableDisableMenuItems();
     }
 
@@ -398,8 +403,7 @@ public class GpsMainActivity extends ActionBarActivity
                         startActivity(faqtivity);
                         break;
                     case 11:
-                        loggingService.StopLogging();
-                        loggingService.stopSelf();
+                        EventBus.getDefault().post(new CommandEvents.RequestStartStop(false));
                         finish();
                         break;
                 }
@@ -623,11 +627,8 @@ public class GpsMainActivity extends ActionBarActivity
         tracer.debug("Auto send now");
 
         if (AppSettings.isAutoSendEnabled()) {
-
-            Utilities.ShowProgress(this, getString(R.string.autosend_sending),
-                    getString(R.string.please_wait));
-            loggingService.ForceAutoSendNow();
-
+            Utilities.ShowProgress(this, getString(R.string.autosend_sending),getString(R.string.please_wait));
+            EventBus.getDefault().post(new CommandEvents.AutoSend(true));
 
         } else {
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
@@ -635,7 +636,7 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     private void LogSinglePoint() {
-        loggingService.LogOnce();
+        EventBus.getDefault().post(new CommandEvents.LogOnce());
         enableDisableMenuItems();
     }
 
@@ -894,17 +895,12 @@ public class GpsMainActivity extends ActionBarActivity
 
         public void onServiceDisconnected(ComponentName name) {
             tracer.debug("Disconnected from GPSLoggingService from MainActivity");
-            loggingService = null;
+            //loggingService = null;
         }
 
         public void onServiceConnected(ComponentName name, IBinder service) {
             tracer.debug("Connected to GPSLoggingService from MainActivity");
-            loggingService = ((GpsLoggingService.GpsLoggingBinder) service).getService();
-
-            if (Session.hasDescription()) {
-                SetAnnotationReady();
-            }
-
+            //loggingService = ((GpsLoggingService.GpsLoggingBinder) service).getService();
         }
     };
 
@@ -945,9 +941,7 @@ public class GpsMainActivity extends ActionBarActivity
             } catch (Exception e) {
                 tracer.error("Could not stop the service", e);
             }
-
         }
-
     }
 
     private void SetBulbStatus(boolean started) {
@@ -1027,7 +1021,6 @@ public class GpsMainActivity extends ActionBarActivity
         else {
             SetAnnotationReady();
         }
-
     }
 
     @EventBusHook

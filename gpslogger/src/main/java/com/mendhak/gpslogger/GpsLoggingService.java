@@ -143,7 +143,7 @@ public class GpsLoggingService extends Service  {
 
                 if (bundle.getBoolean(IntentConstants.AUTOSEND_NOW)) {
                     tracer.debug("Intent received - Send Email Now");
-                    EventBus.getDefault().postSticky(new CommandEvents.AutoSend());
+                    EventBus.getDefault().postSticky(new CommandEvents.AutoSend(true));
                 }
 
                 if (bundle.getBoolean(IntentConstants.GET_NEXT_POINT)) {
@@ -156,8 +156,7 @@ public class GpsLoggingService extends Service  {
                     EventBus.getDefault().post(new CommandEvents.Annotate(bundle.getString(IntentConstants.SET_DESCRIPTION)));
                 }
 
-                SharedPreferences prefs = PreferenceManager
-                        .getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
                 if (bundle.get(IntentConstants.PREFER_CELLTOWER) != null) {
                     boolean preferCellTower = bundle.getBoolean(IntentConstants.PREFER_CELLTOWER);
@@ -251,18 +250,6 @@ public class GpsLoggingService extends Service  {
     }
 
 
-    protected void ForceAutoSendNow() {
-
-        tracer.debug(".");
-        if (AppSettings.isAutoSendEnabled() && Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0) {
-            SetStatus(R.string.autosend_sending);
-
-            tracer.info("Force emailing Log File");
-            FileSenderFactory.SendFiles(getApplicationContext());
-        }
-    }
-
-
     public void LogOnce() {
         tracer.debug(".");
 
@@ -296,28 +283,28 @@ public class GpsLoggingService extends Service  {
 
         if (AppSettings.isAutoSendEnabled() && AppSettings.shouldAutoSendWhenIPressStop()) {
             Session.setReadyToBeAutoSent(true);
-            AutoSendLogFile();
+            AutoSendLogFile(false);
         }
     }
 
     /**
-     * Calls the Auto Email Helper which processes the file and sends it.
+     * Calls the Auto Senders which process the files and send it.
      */
-    private void AutoSendLogFile() {
+    private void AutoSendLogFile(boolean force) {
 
         tracer.debug("isReadyToBeAutoSent - " + Session.isReadyToBeAutoSent());
 
-        // Check that auto emailing is enabled, there's a valid location and
-        // file name.
-        if (Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0
-                && Session.isReadyToBeAutoSent() && Session.hasValidLocation()) {
+        // Check that auto emailing is enabled, there's a valid location and file name.
+        // Unless we're forcing it.
+        if (
+               Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0 &&
+               ( force || (Session.isReadyToBeAutoSent() && Session.hasValidLocation()) )
+           ) {
 
             tracer.info("Sending Log File");
-
             FileSenderFactory.SendFiles(getApplicationContext());
-            Session.setReadyToBeAutoSent(true);
+            Session.setReadyToBeAutoSent(false);
             SetupAutoSendTimers();
-
         }
     }
 
@@ -940,7 +927,7 @@ public class GpsLoggingService extends Service  {
     public void onEvent(CommandEvents.AutoSend autoSend){
         tracer.debug(".");
         Session.setReadyToBeAutoSent(true);
-        AutoSendLogFile();
+        AutoSendLogFile(autoSend.force);
 
         EventBus.getDefault().removeStickyEvent(CommandEvents.AutoSend.class);
     }
