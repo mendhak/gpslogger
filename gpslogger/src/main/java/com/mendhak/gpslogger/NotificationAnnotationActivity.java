@@ -27,7 +27,8 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.mendhak.gpslogger.common.IntentConstants;
+import com.mendhak.gpslogger.common.events.CommandEvents;
+import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
 public class NotificationAnnotationActivity extends Activity {
@@ -65,8 +66,9 @@ public class NotificationAnnotationActivity extends Activity {
                         EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
                         tracer.info("Notification annotation: " + userInput.getText().toString());
 
+                        EventBus.getDefault().postSticky(new CommandEvents.Annotate(userInput.getText().toString()));
+
                         Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
-                        serviceIntent.putExtra(IntentConstants.SET_DESCRIPTION, userInput.getText().toString());
                         getApplicationContext().startService(serviceIntent);
 
                         finish();

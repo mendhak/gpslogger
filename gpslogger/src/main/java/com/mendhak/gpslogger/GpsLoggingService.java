@@ -151,19 +151,9 @@ public class GpsLoggingService extends Service  {
                     needToStartGpsManager = true;
                 }
 
-                String setNextPointDescription = bundle.getString(IntentConstants.SET_DESCRIPTION);
-                if (setNextPointDescription != null) {
-                    tracer.debug("Intent received - Set Next Point Description: " + setNextPointDescription);
-
-                    final String desc = Utilities.CleanDescription(setNextPointDescription);
-                    if (desc.length() == 0) {
-                        tracer.debug("Clearing annotation");
-                        Session.clearDescription();
-                    } else {
-                        tracer.debug("Setting annotation: " + desc);
-                        Session.setDescription(desc);
-                    }
-                    needToStartGpsManager = true;
+                if (bundle.getString(IntentConstants.SET_DESCRIPTION) != null) {
+                    tracer.debug("Intent received - Set Next Point Description: " + bundle.getString(IntentConstants.SET_DESCRIPTION));
+                    EventBus.getDefault().post(new CommandEvents.Annotate(bundle.getString(IntentConstants.SET_DESCRIPTION)));
                 }
 
                 SharedPreferences prefs = PreferenceManager
@@ -431,7 +421,6 @@ public class GpsLoggingService extends Service  {
 
         Intent annotateIntent = new Intent(this, NotificationAnnotationActivity.class);
         annotateIntent.setAction("com.mendhak.gpslogger.NOTIFICATION_BUTTON");
-        annotateIntent.putExtra(IntentConstants.SET_DESCRIPTION, "This is from the notification...");
         PendingIntent piAnnotate = PendingIntent.getActivity(this,0, annotateIntent,0);
 
         // What happens when the notification item is clicked
@@ -954,6 +943,24 @@ public class GpsLoggingService extends Service  {
         AutoSendLogFile();
 
         EventBus.getDefault().removeStickyEvent(CommandEvents.AutoSend.class);
+    }
+
+    @EventBusHook
+    public void onEvent(CommandEvents.Annotate annotate){
+        final String desc = Utilities.CleanDescription(annotate.annotation);
+        if (desc.length() == 0) {
+            tracer.debug("Clearing annotation");
+            Session.clearDescription();
+        } else {
+            tracer.debug("Setting annotation: " + desc);
+            Session.setDescription(desc);
+
+            if(Session.isStarted()){
+                StartGpsManager();
+            }
+        }
+
+        EventBus.getDefault().removeStickyEvent(CommandEvents.Annotate.class);
     }
 
 }

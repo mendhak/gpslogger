@@ -25,4 +25,11 @@ public class CommandEvents {
     public static class AutoSend {
 
     }
+
+    public static class Annotate {
+        public String annotation;
+        public Annotate(String annotation) {
+            this.annotation = annotation;
+        }
+    }
 }
