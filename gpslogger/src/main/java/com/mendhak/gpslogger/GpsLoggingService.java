@@ -927,9 +927,7 @@ public class GpsLoggingService extends Service  {
      */
     void SetSatelliteInfo(int count) {
         Session.setSatelliteCount(count);
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnSatelliteCount(count);
-        }
+        EventBus.getDefault().post(new ServiceEvents.SatelliteCountEvent(count));
     }
 
     private boolean IsMainFormVisible() {

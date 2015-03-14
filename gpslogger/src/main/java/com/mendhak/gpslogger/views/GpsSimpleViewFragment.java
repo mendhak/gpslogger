@@ -289,6 +289,11 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         DisplayLocationInfo(locationUpdateEvent.location);
     }
 
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.SatelliteCountEvent satelliteCountEvent){
+        SetSatelliteCount(satelliteCountEvent.satelliteCount);
+    }
+
     public void DisplayLocationInfo(Location locationInfo){
         showPreferencesSummary();
 
@@ -419,7 +424,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
 
 
-    @Override
     public void SetSatelliteCount(int count) {
         ImageView imgSatelliteCount = (ImageView) rootView.findViewById(R.id.simpleview_imgSatelliteCount);
         TextView txtSatelliteCount = (TextView) rootView.findViewById(R.id.simpleview_txtSatelliteCount);

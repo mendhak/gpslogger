@@ -50,7 +50,6 @@ public abstract class GenericViewFragment extends Fragment {
     // Mechanism to talk back to parent
     protected IGpsViewCallback gpsCallback;
 
-    public abstract void SetSatelliteCount(int count);
 
     public abstract void SetLoggingStarted();
 

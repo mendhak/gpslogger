@@ -966,14 +966,6 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     @Override
-    public void OnSatelliteCount(int count) {
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.SetSatelliteCount(count);
-        }
-    }
-
-    @Override
     public void OnStartLogging() {
         tracer.debug(".");
 

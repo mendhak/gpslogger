@@ -24,4 +24,11 @@ public class ServiceEvents {
             this.location = loc;
         }
     }
+
+    public static class SatelliteCountEvent {
+        public int satelliteCount;
+        public SatelliteCountEvent(int count) {
+            this.satelliteCount = count;
+        }
+    }
 }

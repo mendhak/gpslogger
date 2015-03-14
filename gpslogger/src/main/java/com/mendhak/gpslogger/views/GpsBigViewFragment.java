@@ -95,11 +95,6 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
     }
 
     @Override
-    public void SetSatelliteCount(int count) {
-
-    }
-
-    @Override
     public void SetLoggingStarted() {
         TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
         TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);

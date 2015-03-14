@@ -241,9 +241,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     }
 
 
-    @Override
     public void SetSatelliteCount(int count) {
-
         TextView txtSatellites = (TextView) rootView.findViewById(R.id.detailedview_satellites_text);
         txtSatellites.setText(String.valueOf(count));
     }
@@ -311,6 +309,11 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LocationUpdateEvent locationEvent){
         DisplayLocationInfo(locationEvent.location);
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.SatelliteCountEvent satelliteCountEvent){
+        SetSatelliteCount(satelliteCountEvent.satelliteCount);
     }
 
     public void DisplayLocationInfo(Location locationInfo){

@@ -23,13 +23,6 @@ interface IGpsLoggerServiceClient {
 
 
     /**
-     * New satellite count has been obtained.
-     *
-     * @param count
-     */
-    public void OnSatelliteCount(int count);
-
-    /**
      * Asking the calling activity form to clear itself.
      */
     public void OnStartLogging();
