@@ -61,6 +61,20 @@ public class ServiceEvents {
         }
     }
 
+    /**
+     * Requests starting or stopping the logging service.
+     * Called from the fragment button click events
+     */
     public static class RequestToggleEvent {
+    }
+
+    /**
+     * Requests starting the logging service
+     */
+    public static class RequestStartStopEvent {
+        public boolean start;
+        public RequestStartStopEvent(boolean start){
+            this.start = start;
+        }
     }
 }

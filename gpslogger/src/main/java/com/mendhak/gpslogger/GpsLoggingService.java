@@ -90,7 +90,7 @@ public class GpsLoggingService extends Service  {
     }
 
     private void RegisterEventBus() {
-        EventBus.getDefault().register(this);
+        EventBus.getDefault().registerSticky(this);
     }
 
     private void UnregisterEventBus(){
@@ -144,12 +144,12 @@ public class GpsLoggingService extends Service  {
 
                 if (startRightNow) {
                     tracer.info("Intent received - Start Logging Now");
-                    StartLogging();
+                    EventBus.getDefault().postSticky(new ServiceEvents.RequestStartStopEvent(true));
                 }
 
                 if (stopRightNow) {
                     tracer.info("Intent received - Stop logging now");
-                    StopLogging();
+                    EventBus.getDefault().postSticky(new ServiceEvents.RequestStartStopEvent(false));
                 }
 
                 if (sendEmailNow) {
@@ -948,6 +948,19 @@ public class GpsLoggingService extends Service  {
             tracer.info("Toggle requested - starting");
             StartLogging();
         }
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.RequestStartStopEvent immediateStartEvent){
+        tracer.debug(".");
+        if(immediateStartEvent.start){
+            StartLogging();
+        }
+        else {
+            StopLogging();
+        }
+
+        EventBus.getDefault().removeStickyEvent(ServiceEvents.RequestStartStopEvent.class);
     }
 
 }

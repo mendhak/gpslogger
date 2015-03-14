@@ -21,6 +21,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import com.mendhak.gpslogger.GpsLoggingService;
+import com.mendhak.gpslogger.common.events.ServiceEvents;
+import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
 public class ShortcutStop extends Activity {
@@ -32,8 +34,9 @@ public class ShortcutStop extends Activity {
         super.onCreate(savedInstanceState);
 
         tracer.info("Shortcut - stop logging");
+        EventBus.getDefault().postSticky(new ServiceEvents.RequestStartStopEvent(false));
+
         Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
-        serviceIntent.putExtra("immediatestop", true);
         getApplicationContext().startService(serviceIntent);
 
         finish();
