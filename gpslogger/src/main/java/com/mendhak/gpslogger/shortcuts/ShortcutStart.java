@@ -21,7 +21,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import com.mendhak.gpslogger.GpsLoggingService;
-import com.mendhak.gpslogger.common.events.ServiceEvents;
+import com.mendhak.gpslogger.common.events.CommandEvents;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +32,7 @@ public class ShortcutStart extends Activity {
         super.onCreate(savedInstanceState);
 
         tracer.info("Shortcut - start logging");
-        EventBus.getDefault().postSticky(new ServiceEvents.RequestStartStopEvent(true));
+        EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
 
         Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
         getApplicationContext().startService(serviceIntent);

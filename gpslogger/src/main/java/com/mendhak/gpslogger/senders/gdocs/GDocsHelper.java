@@ -130,7 +130,7 @@ public class GDocsHelper implements IFileSender {
 
     public void UploadFile(final String fileName) {
         if (!IsLinked(context)) {
-            EventBus.getDefault().post(new UploadEvents.GDocsEvent(false));
+            EventBus.getDefault().post(new UploadEvents.GDocs(false));
             return;
         }
 
@@ -141,7 +141,7 @@ public class GDocsHelper implements IFileSender {
             tracer.debug("Sending file to GDocs: " + fileName);
             new GDocsTokenAsyncTask(gpxFile).execute(context);
         } catch (Exception e) {
-            EventBus.getDefault().post(new UploadEvents.GDocsEvent(false));
+            EventBus.getDefault().post(new UploadEvents.GDocs(false));
             tracer.error("GDocsHelper.UploadFile", e);
         }
     }

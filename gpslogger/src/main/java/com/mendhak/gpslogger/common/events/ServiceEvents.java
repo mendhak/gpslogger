@@ -5,76 +5,60 @@ import android.location.Location;
 public class ServiceEvents {
 
 
-    public static class StatusMessageEvent{
+    public static class StatusMessage {
         public String status;
-        public StatusMessageEvent(String message){
+        public StatusMessage(String message){
             this.status = message;
         }
 
     }
 
-    public static class FatalMessageEvent {
+    public static class FatalMessage {
         public String message;
-        public FatalMessageEvent(String message) {
+        public FatalMessage(String message) {
             this.message = message;
         }
     }
 
-    public static class LocationUpdateEvent {
+    public static class LocationUpdate {
         public Location location;
-        public LocationUpdateEvent(Location loc) {
+        public LocationUpdate(Location loc) {
             this.location = loc;
         }
     }
 
-    public static class SatelliteCountEvent {
+    public static class SatelliteCount {
         public int satelliteCount;
-        public SatelliteCountEvent(int count) {
+        public SatelliteCount(int count) {
             this.satelliteCount = count;
         }
     }
 
-    public static class WaitingForLocationEvent {
+    public static class WaitingForLocation {
         public boolean waiting;
-        public WaitingForLocationEvent(boolean waiting) {
+        public WaitingForLocation(boolean waiting) {
             this.waiting = waiting;
         }
     }
 
-    public static class LocationServicesUnavailableEvent {
+    public static class LocationServicesUnavailable {
     }
 
-    public static class AnnotationWrittenEvent {
+    public static class AnnotationWritten {
     }
 
-    public static class LoggingStatusEvent {
+    public static class LoggingStatus {
         public boolean loggingStarted;
-        public LoggingStatusEvent(boolean loggingStarted) {
+        public LoggingStatus(boolean loggingStarted) {
             this.loggingStarted = loggingStarted;
         }
     }
 
-    public static class FileNameEvent {
+    public static class FileNamed {
         public String newFileName;
-        public FileNameEvent(String newFileName) {
+        public FileNamed(String newFileName) {
             this.newFileName = newFileName;
         }
     }
 
-    /**
-     * Requests starting or stopping the logging service.
-     * Called from the fragment button click events
-     */
-    public static class RequestToggleEvent {
-    }
-
-    /**
-     * Requests starting the logging service
-     */
-    public static class RequestStartStopEvent {
-        public boolean start;
-        public RequestStartStopEvent(boolean start){
-            this.start = start;
-        }
-    }
 }

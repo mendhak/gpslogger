@@ -271,31 +271,31 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.StatusMessageEvent event){
+    public void onEventMainThread(ServiceEvents.StatusMessage event){
         TextView txtStatus = (TextView) rootView.findViewById(R.id.detailedview_txtstatus);
         txtStatus.setText(event.status);
         showPreferencesSummary();
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.FatalMessageEvent event){
+    public void onEventMainThread(ServiceEvents.FatalMessage event){
         TextView txtStatus = (TextView) rootView.findViewById(R.id.detailedview_txtstatus);
         txtStatus.setText(event.message);
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.LocationUpdateEvent locationEvent){
+    public void onEventMainThread(ServiceEvents.LocationUpdate locationEvent){
         DisplayLocationInfo(locationEvent.location);
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.SatelliteCountEvent satelliteCountEvent){
-        SetSatelliteCount(satelliteCountEvent.satelliteCount);
+    public void onEventMainThread(ServiceEvents.SatelliteCount satelliteCount){
+        SetSatelliteCount(satelliteCount.satelliteCount);
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.LoggingStatusEvent loggingStatusEvent){
-        if(loggingStatusEvent.loggingStarted){
+    public void onEventMainThread(ServiceEvents.LoggingStatus loggingStatus){
+        if(loggingStatus.loggingStarted){
             setActionButtonStop();
             showPreferencesSummary();
             ClearDisplay();
@@ -306,8 +306,8 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.FileNameEvent fileNameEvent){
-        showCurrentFileName(fileNameEvent.newFileName);
+    public void onEventMainThread(ServiceEvents.FileNamed fileNamed){
+        showCurrentFileName(fileNamed.newFileName);
     }
 
     public void DisplayLocationInfo(Location locationInfo){

@@ -173,15 +173,15 @@ public class FtpJob extends Job {
     @Override
     public void onRun() throws Throwable {
         if (Upload(server, username, password, directory, port, useFtps, protocol, implicit, gpxFile, fileName)) {
-            EventBus.getDefault().post(new UploadEvents.FtpEvent(true));
+            EventBus.getDefault().post(new UploadEvents.Ftp(true));
         } else {
-            EventBus.getDefault().post(new UploadEvents.FtpEvent(false));
+            EventBus.getDefault().post(new UploadEvents.Ftp(false));
         }
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new UploadEvents.FtpEvent(false));
+        EventBus.getDefault().post(new UploadEvents.Ftp(false));
     }
 
     @Override

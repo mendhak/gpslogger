@@ -23,7 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import com.mendhak.gpslogger.common.events.ServiceEvents;
+import com.mendhak.gpslogger.common.events.CommandEvents;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +44,7 @@ public class StartupReceiver extends BroadcastReceiver {
             if (startImmediately) {
                 tracer.info("Launching GPSLoggingService");
 
-                EventBus.getDefault().postSticky(new ServiceEvents.RequestStartStopEvent(true));
+                EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
 
                 Intent serviceIntent = new Intent(context, GpsLoggingService.class);
                 context.startService(serviceIntent);

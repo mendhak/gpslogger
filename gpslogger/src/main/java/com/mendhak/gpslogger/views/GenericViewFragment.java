@@ -34,6 +34,7 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import de.greenrobot.event.EventBus;
 
@@ -71,7 +72,7 @@ public abstract class GenericViewFragment extends Fragment {
 
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.LocationServicesUnavailableEvent locationServicesUnavailableEvent){
+    public void onEventMainThread(ServiceEvents.LocationServicesUnavailable locationServicesUnavailable){
         new MaterialDialog.Builder(getActivity())
                 //.title("Location services unavailable")
                 .content(R.string.gpsprovider_unavailable)
@@ -145,7 +146,7 @@ public abstract class GenericViewFragment extends Fragment {
     }
 
     public void ToggleLogging(){
-        EventBus.getDefault().post(new ServiceEvents.RequestToggleEvent());
+        EventBus.getDefault().post(new CommandEvents.RequestToggle());
     }
 
 

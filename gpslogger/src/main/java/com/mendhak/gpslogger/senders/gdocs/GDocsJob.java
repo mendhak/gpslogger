@@ -46,7 +46,7 @@ public class GDocsJob extends Job {
             gpsLoggerFolderId = CreateEmptyFile(token, "GPSLogger For Android", "application/vnd.google-apps.folder", "root");
 
             if (Utilities.IsNullOrEmpty(gpsLoggerFolderId)) {
-                EventBus.getDefault().post(new UploadEvents.GDocsEvent(false));
+                EventBus.getDefault().post(new UploadEvents.GDocs(false));
                 return;
             }
         }
@@ -59,7 +59,7 @@ public class GDocsJob extends Job {
             gpxFileId = CreateEmptyFile(token, fileName, GetMimeTypeFromFileName(fileName), gpsLoggerFolderId);
 
             if (Utilities.IsNullOrEmpty(gpxFileId)) {
-                EventBus.getDefault().post(new UploadEvents.GDocsEvent(false));
+                EventBus.getDefault().post(new UploadEvents.GDocs(false));
                 return;
             }
         }
@@ -68,7 +68,7 @@ public class GDocsJob extends Job {
             //Set file's contents
             UpdateFileContents(token, gpxFileId, Utilities.GetByteArrayFromInputStream(fis), fileName);
         }
-        EventBus.getDefault().post(new UploadEvents.GDocsEvent(true));
+        EventBus.getDefault().post(new UploadEvents.GDocs(true));
     }
 
     private String UpdateFileContents(String authToken, String gpxFileId, byte[] fileContents, String fileName) {
@@ -256,7 +256,7 @@ public class GDocsJob extends Job {
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new UploadEvents.GDocsEvent(false));
+        EventBus.getDefault().post(new UploadEvents.GDocs(false));
     }
 
     @Override

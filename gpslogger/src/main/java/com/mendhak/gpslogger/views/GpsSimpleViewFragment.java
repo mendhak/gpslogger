@@ -280,25 +280,25 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.LocationUpdateEvent locationUpdateEvent){
-        DisplayLocationInfo(locationUpdateEvent.location);
+    public void onEventMainThread(ServiceEvents.LocationUpdate locationUpdate){
+        DisplayLocationInfo(locationUpdate.location);
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.SatelliteCountEvent satelliteCountEvent){
-        SetSatelliteCount(satelliteCountEvent.satelliteCount);
+    public void onEventMainThread(ServiceEvents.SatelliteCount satelliteCount){
+        SetSatelliteCount(satelliteCount.satelliteCount);
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.WaitingForLocationEvent waitingForLocationEvent){
-        OnWaitingForLocation(waitingForLocationEvent.waiting);
+    public void onEventMainThread(ServiceEvents.WaitingForLocation waitingForLocation){
+        OnWaitingForLocation(waitingForLocation.waiting);
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.LoggingStatusEvent loggingStatusEvent){
+    public void onEventMainThread(ServiceEvents.LoggingStatus loggingStatus){
         tracer.debug(".");
 
-        if(loggingStatusEvent.loggingStarted){
+        if(loggingStatus.loggingStarted){
             showPreferencesSummary();
             clearLocationDisplay();
             setActionButtonStop();
@@ -310,8 +310,8 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.FileNameEvent fileNameEvent){
-        showCurrentFileName(fileNameEvent.newFileName);
+    public void onEventMainThread(ServiceEvents.FileNamed fileNamed){
+        showCurrentFileName(fileNamed.newFileName);
     }
 
     public void DisplayLocationInfo(Location locationInfo){

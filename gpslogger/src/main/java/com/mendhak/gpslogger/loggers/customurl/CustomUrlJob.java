@@ -83,12 +83,12 @@ public class CustomUrlJob extends Job {
             }
         }
 
-        EventBus.getDefault().post(new UploadEvents.CustomUrlLoggedEvent(true));
+        EventBus.getDefault().post(new UploadEvents.CustomUrl(true));
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new UploadEvents.CustomUrlLoggedEvent(false));
+        EventBus.getDefault().post(new UploadEvents.CustomUrl(false));
     }
 
     @Override

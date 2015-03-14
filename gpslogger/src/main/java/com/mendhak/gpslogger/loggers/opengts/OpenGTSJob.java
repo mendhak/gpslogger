@@ -49,12 +49,12 @@ public class OpenGTSJob extends Job {
             openGTSClient.sendHTTP(deviceId, accountName, locations);
         }
 
-        EventBus.getDefault().post(new UploadEvents.OpenGTSLoggedEvent(true));
+        EventBus.getDefault().post(new UploadEvents.OpenGTS(true));
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new UploadEvents.OpenGTSLoggedEvent(false));
+        EventBus.getDefault().post(new UploadEvents.OpenGTS(false));
     }
 
     @Override

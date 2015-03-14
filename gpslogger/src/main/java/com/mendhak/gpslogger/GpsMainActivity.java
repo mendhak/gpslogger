@@ -22,7 +22,6 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
@@ -994,53 +993,53 @@ public class GpsMainActivity extends ActionBarActivity
 
 
     @EventBusHook
-    public void onEventMainThread(UploadEvents.OpenGTSLoggedEvent o){
-        tracer.debug("Open GTS Event completed, success: " + o.success);
+    public void onEventMainThread(UploadEvents.OpenGTS upload){
+        tracer.debug("Open GTS Event completed, success: " + upload.success);
         Utilities.HideProgress();
     }
 
     @EventBusHook
-    public void onEventMainThread(UploadEvents.AutoEmailEvent o){
-        tracer.debug("Auto Email Event completed, success: " + o.success);
+    public void onEventMainThread(UploadEvents.AutoEmail upload){
+        tracer.debug("Auto Email Event completed, success: " + upload.success);
         Utilities.HideProgress();
     }
 
     @EventBusHook
-    public void onEventMainThread(UploadEvents.OpenStreetMapEvent o){
-        tracer.debug("OSM Event completed, success: " + o.success);
+    public void onEventMainThread(UploadEvents.OpenStreetMap upload){
+        tracer.debug("OSM Event completed, success: " + upload.success);
         Utilities.HideProgress();
     }
 
     @EventBusHook
-    public void onEventMainThread(UploadEvents.DropboxEvent o){
-        tracer.debug("Dropbox Event completed, success: " + o.success);
+    public void onEventMainThread(UploadEvents.Dropbox upload){
+        tracer.debug("Dropbox Event completed, success: " + upload.success);
         Utilities.HideProgress();
     }
 
     @EventBusHook
-    public void onEventMainThread(UploadEvents.GDocsEvent o){
-        tracer.debug("GDocs Event completed, success: " + o.success);
+    public void onEventMainThread(UploadEvents.GDocs upload){
+        tracer.debug("GDocs Event completed, success: " + upload.success);
         Utilities.HideProgress();
     }
 
     @EventBusHook
-    public void onEventMainThread(UploadEvents.FtpEvent o){
-        tracer.debug("FTP Event completed, success: " + o.success);
+    public void onEventMainThread(UploadEvents.Ftp upload){
+        tracer.debug("FTP Event completed, success: " + upload.success);
         Utilities.HideProgress();
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.WaitingForLocationEvent waitingForLocationEvent){
-        OnWaitingForLocation(waitingForLocationEvent.waiting);
+    public void onEventMainThread(ServiceEvents.WaitingForLocation waitingForLocation){
+        OnWaitingForLocation(waitingForLocation.waiting);
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.AnnotationWrittenEvent annotationWrittenEvent){
+    public void onEventMainThread(ServiceEvents.AnnotationWritten annotationWritten){
         SetAnnotationDone();
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.LoggingStatusEvent loggingStatusEvent){
+    public void onEventMainThread(ServiceEvents.LoggingStatus loggingStatus){
             enableDisableMenuItems();
     }
 }

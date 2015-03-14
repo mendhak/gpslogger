@@ -74,15 +74,15 @@ public class AutoEmailJob extends Job {
 
         tracer.info("Sending email...");
         if (m.send()) {
-            EventBus.getDefault().post(new UploadEvents.AutoEmailEvent(true));
+            EventBus.getDefault().post(new UploadEvents.AutoEmail(true));
         } else {
-            EventBus.getDefault().post(new UploadEvents.AutoEmailEvent(false));
+            EventBus.getDefault().post(new UploadEvents.AutoEmail(false));
         }
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new UploadEvents.AutoEmailEvent(false));
+        EventBus.getDefault().post(new UploadEvents.AutoEmail(false));
     }
 
     @Override

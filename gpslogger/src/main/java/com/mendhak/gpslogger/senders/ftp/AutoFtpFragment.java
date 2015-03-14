@@ -118,7 +118,7 @@ public class AutoFtpFragment
     }
 
     @EventBusHook
-    public void onEventMainThread(UploadEvents.FtpEvent o){
+    public void onEventMainThread(UploadEvents.Ftp o){
         tracer.debug("FTP Event completed, success: " + o.success);
         Utilities.HideProgress();
         if(!o.success){

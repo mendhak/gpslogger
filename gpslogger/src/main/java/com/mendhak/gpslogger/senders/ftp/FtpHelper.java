@@ -59,7 +59,7 @@ public class FtpHelper implements IFileSender {
             }
 
         } catch (Exception ex) {
-            EventBus.getDefault().post(new UploadEvents.FtpEvent(false));
+            EventBus.getDefault().post(new UploadEvents.Ftp(false));
         }
 
         JobManager jobManager = AppSettings.GetJobManager();
@@ -71,7 +71,7 @@ public class FtpHelper implements IFileSender {
     public void UploadFile(List<File> files) {
         if (!ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(), AppSettings.getFtpPassword(),
                 AppSettings.getFtpPort(), AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit())) {
-            EventBus.getDefault().post(new UploadEvents.FtpEvent(false));
+            EventBus.getDefault().post(new UploadEvents.Ftp(false));
         }
 
         for (File f : files) {

@@ -67,12 +67,12 @@ public class OSMJob extends Job {
         HttpResponse response = httpClient.execute(request);
         int statusCode = response.getStatusLine().getStatusCode();
         tracer.debug("OSM Upload - " + String.valueOf(statusCode));
-        EventBus.getDefault().post(new UploadEvents.OpenStreetMapEvent(true));
+        EventBus.getDefault().post(new UploadEvents.OpenStreetMap(true));
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new UploadEvents.OpenStreetMapEvent(false));
+        EventBus.getDefault().post(new UploadEvents.OpenStreetMap(false));
     }
 
     @Override

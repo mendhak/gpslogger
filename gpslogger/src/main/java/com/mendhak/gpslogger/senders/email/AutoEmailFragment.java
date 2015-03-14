@@ -186,7 +186,7 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
     }
 
     @EventBusHook
-    public void onEventMainThread(UploadEvents.AutoEmailEvent o){
+    public void onEventMainThread(UploadEvents.AutoEmail o){
 
         Utilities.HideProgress();
 

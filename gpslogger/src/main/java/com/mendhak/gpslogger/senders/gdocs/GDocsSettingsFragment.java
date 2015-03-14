@@ -267,7 +267,7 @@ public class GDocsSettingsFragment extends PreferenceFragment
             }
 
         } catch (Exception ex) {
-            EventBus.getDefault().post(new UploadEvents.GDocsEvent(false));
+            EventBus.getDefault().post(new UploadEvents.GDocs(false));
         }
 
 
@@ -283,7 +283,7 @@ public class GDocsSettingsFragment extends PreferenceFragment
 
 
     @EventBusHook
-    public void onEventMainThread(UploadEvents.GDocsEvent o){
+    public void onEventMainThread(UploadEvents.GDocs o){
         tracer.debug("GDocs Event completed, success: " + o.success);
         Utilities.HideProgress();
         if(!o.success){

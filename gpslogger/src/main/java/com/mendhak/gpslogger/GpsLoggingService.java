@@ -37,6 +37,7 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.nmea.NmeaFileLogger;
@@ -144,12 +145,12 @@ public class GpsLoggingService extends Service  {
 
                 if (startRightNow) {
                     tracer.info("Intent received - Start Logging Now");
-                    EventBus.getDefault().postSticky(new ServiceEvents.RequestStartStopEvent(true));
+                    EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
                 }
 
                 if (stopRightNow) {
                     tracer.info("Intent received - Stop logging now");
-                    EventBus.getDefault().postSticky(new ServiceEvents.RequestStartStopEvent(false));
+                    EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(false));
                 }
 
                 if (sendEmailNow) {
@@ -398,7 +399,7 @@ public class GpsLoggingService extends Service  {
      * Asks the main service client to clear its form.
      */
     private void NotifyClientStarted() {
-        EventBus.getDefault().post(new ServiceEvents.LoggingStatusEvent(true));
+        EventBus.getDefault().post(new ServiceEvents.LoggingStatus(true));
     }
 
     /**
@@ -563,7 +564,7 @@ public class GpsLoggingService extends Service  {
         }
 
 
-        EventBus.getDefault().post(new ServiceEvents.WaitingForLocationEvent(true));
+        EventBus.getDefault().post(new ServiceEvents.WaitingForLocation(true));
         Session.setWaitingForLocation(true);
 
         SetStatus(R.string.started);
@@ -618,7 +619,7 @@ public class GpsLoggingService extends Service  {
         }
 
         Session.setWaitingForLocation(false);
-        EventBus.getDefault().post(new ServiceEvents.WaitingForLocationEvent(false));
+        EventBus.getDefault().post(new ServiceEvents.WaitingForLocation(false));
 
         SetStatus(getString(R.string.stopped));
     }
@@ -656,7 +657,7 @@ public class GpsLoggingService extends Service  {
             Session.setCurrentFileName(newFileName);
         }
 
-        EventBus.getDefault().post(new ServiceEvents.FileNameEvent(newFileName));
+        EventBus.getDefault().post(new ServiceEvents.FileNamed(newFileName));
 
     }
 
@@ -667,12 +668,12 @@ public class GpsLoggingService extends Service  {
      */
     void SetStatus(String status) {
         tracer.info(status);
-        EventBus.getDefault().post(new ServiceEvents.StatusMessageEvent(status));
+        EventBus.getDefault().post(new ServiceEvents.StatusMessage(status));
     }
 
     void SetLocationServiceUnavailable(){
         tracer.error("Location services not enabled");
-        EventBus.getDefault().post(new ServiceEvents.LocationServicesUnavailableEvent());
+        EventBus.getDefault().post(new ServiceEvents.LocationServicesUnavailable());
     }
 
     /**
@@ -682,7 +683,7 @@ public class GpsLoggingService extends Service  {
      */
     void SetFatalMessage(int messageId) {
         tracer.error(getString(messageId));
-        EventBus.getDefault().post(new ServiceEvents.FatalMessageEvent(getString(messageId)));
+        EventBus.getDefault().post(new ServiceEvents.FatalMessage(getString(messageId)));
     }
 
     /**
@@ -699,7 +700,7 @@ public class GpsLoggingService extends Service  {
      * Notifies main form that logging has stopped
      */
     void NotifyClientStopped() {
-        EventBus.getDefault().post(new ServiceEvents.LoggingStatusEvent(false));
+        EventBus.getDefault().post(new ServiceEvents.LoggingStatus(false));
     }
 
     /**
@@ -806,7 +807,7 @@ public class GpsLoggingService extends Service  {
         GetPreferences();
         StopManagerAndResetAlarm();
 
-        EventBus.getDefault().post(new ServiceEvents.LocationUpdateEvent(loc));
+        EventBus.getDefault().post(new ServiceEvents.LocationUpdate(loc));
 
         if (Session.isSinglePointMode()) {
             tracer.debug("Single point mode - stopping logging now");
@@ -905,7 +906,7 @@ public class GpsLoggingService extends Service  {
         }
 
         Session.clearDescription();
-        EventBus.getDefault().post(new ServiceEvents.AnnotationWrittenEvent());
+        EventBus.getDefault().post(new ServiceEvents.AnnotationWritten());
 
     }
 
@@ -916,7 +917,7 @@ public class GpsLoggingService extends Service  {
      */
     void SetSatelliteInfo(int count) {
         Session.setSatelliteCount(count);
-        EventBus.getDefault().post(new ServiceEvents.SatelliteCountEvent(count));
+        EventBus.getDefault().post(new ServiceEvents.SatelliteCount(count));
     }
 
     public void OnNmeaSentence(long timestamp, String nmeaSentence) {
@@ -940,7 +941,7 @@ public class GpsLoggingService extends Service  {
 
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.RequestToggleEvent requestToggleEvent){
+    public void onEvent(CommandEvents.RequestToggle requestToggle){
         if (Session.isStarted()) {
             tracer.info("Toggle requested - stopping");
             StopLogging();
@@ -951,16 +952,16 @@ public class GpsLoggingService extends Service  {
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.RequestStartStopEvent immediateStartEvent){
+    public void onEvent(CommandEvents.RequestStartStop startStop){
         tracer.debug(".");
-        if(immediateStartEvent.start){
+        if(startStop.start){
             StartLogging();
         }
         else {
             StopLogging();
         }
 
-        EventBus.getDefault().removeStickyEvent(ServiceEvents.RequestStartStopEvent.class);
+        EventBus.getDefault().removeStickyEvent(CommandEvents.RequestStartStop.class);
     }
 
 }
