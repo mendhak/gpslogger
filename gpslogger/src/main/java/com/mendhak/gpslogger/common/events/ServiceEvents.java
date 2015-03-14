@@ -5,6 +5,9 @@ import android.location.Location;
 public class ServiceEvents {
 
 
+    /**
+     * Status message
+     */
     public static class StatusMessage {
         public String status;
         public StatusMessage(String message){
@@ -13,6 +16,9 @@ public class ServiceEvents {
 
     }
 
+    /**
+     * Error message
+     */
     public static class FatalMessage {
         public String message;
         public FatalMessage(String message) {
@@ -20,6 +26,9 @@ public class ServiceEvents {
         }
     }
 
+    /**
+     * New location
+     */
     public static class LocationUpdate {
         public Location location;
         public LocationUpdate(Location loc) {
@@ -27,6 +36,9 @@ public class ServiceEvents {
         }
     }
 
+    /**
+     * Number of visible satellites
+     */
     public static class SatelliteCount {
         public int satelliteCount;
         public SatelliteCount(int count) {
@@ -34,6 +46,9 @@ public class ServiceEvents {
         }
     }
 
+    /**
+     * Whether the logging service is still waiting for a location fix
+     */
     public static class WaitingForLocation {
         public boolean waiting;
         public WaitingForLocation(boolean waiting) {
@@ -41,9 +56,15 @@ public class ServiceEvents {
         }
     }
 
+    /**
+     * Indicates that GPS/Network location services have temporarily gone away
+     */
     public static class LocationServicesUnavailable {
     }
 
+    /**
+     * Status of the user's annotation, whether it has been written or is pending
+     */
     public static class AnnotationStatus {
         public boolean annotationWritten;
         public AnnotationStatus(boolean written){
@@ -51,6 +72,9 @@ public class ServiceEvents {
         }
     }
 
+    /**
+     * Whether GPS logging has started; raised after the start/stop button is pressed
+     */
     public static class LoggingStatus {
         public boolean loggingStarted;
         public LoggingStatus(boolean loggingStarted) {
@@ -58,6 +82,9 @@ public class ServiceEvents {
         }
     }
 
+    /**
+     * The file name has been set
+     */
     public static class FileNamed {
         public String newFileName;
         public FileNamed(String newFileName) {
