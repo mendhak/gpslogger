@@ -51,9 +51,4 @@ interface IGpsLoggerServiceClient {
     public void onFileName(String newFileName);
 
 
-
-    /**
-     * Indicates that location services aren't enabled, so logging will not occur.
-     */
-    public void OnLocationServicesUnavailable();
 }

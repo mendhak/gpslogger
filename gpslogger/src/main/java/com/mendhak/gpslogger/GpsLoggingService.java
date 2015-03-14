@@ -674,9 +674,7 @@ public class GpsLoggingService extends Service  {
 
     void SetLocationServiceUnavailable(){
         tracer.error("Location services not enabled");
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnLocationServicesUnavailable();
-        }
+        EventBus.getDefault().post(new ServiceEvents.LocationServicesUnavailableEvent());
     }
 
     /**

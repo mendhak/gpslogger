@@ -1022,15 +1022,6 @@ public class GpsMainActivity extends ActionBarActivity
         fixBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
     }
 
-    @Override
-    public void OnLocationServicesUnavailable() {
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null){
-            fragment.OnLocationServicesUnavailable();
-        }
-    }
-
-
     //IGpsViewCallback callbacks
     //These methods come from the fragments
     @Override

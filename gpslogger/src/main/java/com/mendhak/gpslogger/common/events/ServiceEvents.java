@@ -38,4 +38,7 @@ public class ServiceEvents {
             this.waiting = waiting;
         }
     }
+
+    public static class LocationServicesUnavailableEvent {
+    }
 }

@@ -26,6 +26,7 @@ import android.provider.Settings;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.events.ServiceEvents;
 import de.greenrobot.event.EventBus;
 
 
@@ -57,8 +58,8 @@ public abstract class GenericViewFragment extends Fragment {
 
     public abstract void OnFileNameChange(String newFileName);
 
-    public void OnLocationServicesUnavailable() {
-
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LocationServicesUnavailableEvent locationServicesUnavailableEvent){
         new MaterialDialog.Builder(getActivity())
                 //.title("Location services unavailable")
                 .content(R.string.gpsprovider_unavailable)
@@ -74,7 +75,6 @@ public abstract class GenericViewFragment extends Fragment {
                 })
                 .show();
     }
-
 
     protected void requestStartLogging() {
         if (gpsCallback != null) {
