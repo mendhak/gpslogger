@@ -1017,16 +1017,9 @@ public class GpsMainActivity extends ActionBarActivity
         }
     }
 
-    @Override
     public void OnWaitingForLocation(boolean inProgress) {
         ProgressBar fixBar = (ProgressBar) findViewById(R.id.progressBarGpsFix);
         fixBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
-
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null){
-            fragment.OnWaitingForLocation(inProgress);
-        }
-
     }
 
     @Override
@@ -1163,5 +1156,10 @@ public class GpsMainActivity extends ActionBarActivity
     public void onEventMainThread(UploadEvents.FtpEvent o){
         tracer.debug("FTP Event completed, success: " + o.success);
         Utilities.HideProgress();
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.WaitingForLocationEvent waitingForLocationEvent){
+        OnWaitingForLocation(waitingForLocationEvent.waiting);
     }
 }

@@ -55,8 +55,6 @@ public abstract class GenericViewFragment extends Fragment {
 
     public abstract void SetLoggingStopped();
 
-    public abstract void OnWaitingForLocation(boolean inProgress);
-
     public abstract void OnFileNameChange(String newFileName);
 
     public void OnLocationServicesUnavailable() {

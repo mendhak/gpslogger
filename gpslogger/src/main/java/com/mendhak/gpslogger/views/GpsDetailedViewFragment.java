@@ -288,11 +288,6 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         setActionButtonStart();
     }
 
-    @Override
-    public void OnWaitingForLocation(boolean inProgress) {
-
-    }
-
     @EventBusHook
     public void onEventMainThread(ServiceEvents.StatusMessageEvent event){
         TextView txtStatus = (TextView) rootView.findViewById(R.id.detailedview_txtstatus);

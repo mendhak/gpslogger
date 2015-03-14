@@ -562,10 +562,9 @@ public class GpsLoggingService extends Service  {
             return;
         }
 
-        if (mainServiceClient != null) {
-            mainServiceClient.OnWaitingForLocation(true);
-            Session.setWaitingForLocation(true);
-        }
+
+        EventBus.getDefault().post(new ServiceEvents.WaitingForLocationEvent(true));
+        Session.setWaitingForLocation(true);
 
         SetStatus(R.string.started);
     }
@@ -618,11 +617,9 @@ public class GpsLoggingService extends Service  {
             gpsLocationManager.removeGpsStatusListener(gpsLocationListener);
         }
 
+        Session.setWaitingForLocation(false);
+        EventBus.getDefault().post(new ServiceEvents.WaitingForLocationEvent(false));
 
-        if (mainServiceClient != null) {
-            Session.setWaitingForLocation(false);
-            mainServiceClient.OnWaitingForLocation(false);
-        }
         SetStatus(getString(R.string.stopped));
     }
 

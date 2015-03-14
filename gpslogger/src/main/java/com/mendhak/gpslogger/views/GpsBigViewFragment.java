@@ -108,11 +108,6 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
     }
 
     @Override
-    public void OnWaitingForLocation(boolean inProgress) {
-
-    }
-
-    @Override
     public void OnFileNameChange(String newFileName) {
 
     }

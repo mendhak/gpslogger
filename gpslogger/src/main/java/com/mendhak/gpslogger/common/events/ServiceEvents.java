@@ -31,4 +31,11 @@ public class ServiceEvents {
             this.satelliteCount = count;
         }
     }
+
+    public static class WaitingForLocationEvent {
+        public boolean waiting;
+        public WaitingForLocationEvent(boolean waiting) {
+            this.waiting = waiting;
+        }
+    }
 }
