@@ -21,9 +21,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.location.Location;
+import android.os.Bundle;
 import android.provider.Settings;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.EventBusHook;
+import de.greenrobot.event.EventBus;
 
 
 /**
@@ -31,6 +34,19 @@ import com.mendhak.gpslogger.R;
  * GpsViewCallbacks
  */
 public abstract class GenericViewFragment extends Fragment {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
     // Mechanism to talk back to parent
     protected IGpsViewCallback gpsCallback;
 
@@ -44,7 +60,7 @@ public abstract class GenericViewFragment extends Fragment {
 
     public abstract void OnWaitingForLocation(boolean inProgress);
 
-    public abstract void SetStatusMessage(String message);
+//    public abstract void SetStatusMessage(String message);
 
     public abstract void SetFatalMessage(String message);
 

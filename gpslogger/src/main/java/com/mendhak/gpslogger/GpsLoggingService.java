@@ -36,10 +36,12 @@ import android.support.v4.app.TaskStackBuilder;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.nmea.NmeaFileLogger;
 import com.mendhak.gpslogger.senders.AlarmReceiver;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
+import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -670,9 +672,7 @@ public class GpsLoggingService extends Service  {
      */
     void SetStatus(String status) {
         tracer.info(status);
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnStatusMessage(status);
-        }
+        EventBus.getDefault().post(new ServiceEvents.StatusMessageEvent(status));
     }
 
     void SetLocationServiceUnavailable(){

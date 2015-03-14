@@ -34,6 +34,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import de.greenrobot.event.EventBus;
@@ -278,7 +279,7 @@ public class GDocsSettingsFragment extends PreferenceFragment
 
 
 
-    @SuppressWarnings("UnusedDeclaration")
+    @EventBusHook
     public void onEventMainThread(UploadEvents.GDocsEvent o){
         tracer.debug("GDocs Event completed, success: " + o.success);
         Utilities.HideProgress();

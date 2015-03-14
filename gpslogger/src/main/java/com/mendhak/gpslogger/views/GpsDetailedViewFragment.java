@@ -17,30 +17,25 @@
 
 package com.mendhak.gpslogger.views;
 
-import android.content.ComponentName;
-import android.content.Intent;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -213,7 +208,6 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             txtAccuracy.setText(R.string.not_applicable);
         }
 
-
         double distanceValue = Session.getTotalTravelled();
         txtTravelled.setText(Utilities.GetDistanceDisplay(getActivity(), distanceValue, AppSettings.shouldUseImperial()) + " (" + Session.getNumLegs() + " points)");
 
@@ -226,7 +220,6 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());
         txtTime.setText(duration + " (started at " + dateFormat.format(d) + " " + timeFormat.format(d) + ")");
-
     }
 
 
@@ -396,14 +389,13 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     }
 
-    @Override
-    public void SetStatusMessage(String message) {
-
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.StatusMessageEvent event){
         TextView txtStatus = (TextView) rootView.findViewById(R.id.detailedview_txtstatus);
-
-        txtStatus.setText(message);
+        txtStatus.setText(event.status);
         showPreferencesSummary();
     }
+
 
     @Override
     public void SetFatalMessage(String message) {

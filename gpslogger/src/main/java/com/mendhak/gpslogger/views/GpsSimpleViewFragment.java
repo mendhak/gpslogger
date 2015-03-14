@@ -36,6 +36,7 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.events.ServiceEvents;
 import org.slf4j.LoggerFactory;
 import java.text.NumberFormat;
 
@@ -473,11 +474,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             actionButton.setProgress(0);
             setActionButtonStop();
         }
-    }
-
-    @Override
-    public void SetStatusMessage(String message) {
-
     }
 
     @Override

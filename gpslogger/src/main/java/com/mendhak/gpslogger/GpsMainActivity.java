@@ -965,17 +965,6 @@ public class GpsMainActivity extends ActionBarActivity
 
     }
 
-    //IGpsLoggerServiceClient callbacks
-    @Override
-    public void OnStatusMessage(String message) {
-        tracer.debug(message);
-
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.SetStatusMessage(message);
-        }
-    }
-
     @Override
     public void OnFatalMessage(String message) {
         tracer.debug(message);
@@ -1175,37 +1164,37 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
 
-    @SuppressWarnings("UnusedDeclaration")
+    @EventBusHook
     public void onEventMainThread(UploadEvents.OpenGTSLoggedEvent o){
         tracer.debug("Open GTS Event completed, success: " + o.success);
         Utilities.HideProgress();
     }
 
-    @SuppressWarnings("UnusedDeclaration")
+    @EventBusHook
     public void onEventMainThread(UploadEvents.AutoEmailEvent o){
         tracer.debug("Auto Email Event completed, success: " + o.success);
         Utilities.HideProgress();
     }
 
-    @SuppressWarnings("UnusedDeclaration")
+    @EventBusHook
     public void onEventMainThread(UploadEvents.OpenStreetMapEvent o){
         tracer.debug("OSM Event completed, success: " + o.success);
         Utilities.HideProgress();
     }
 
-    @SuppressWarnings("UnusedDeclaration")
+    @EventBusHook
     public void onEventMainThread(UploadEvents.DropboxEvent o){
         tracer.debug("Dropbox Event completed, success: " + o.success);
         Utilities.HideProgress();
     }
 
-    @SuppressWarnings("UnusedDeclaration")
+    @EventBusHook
     public void onEventMainThread(UploadEvents.GDocsEvent o){
         tracer.debug("GDocs Event completed, success: " + o.success);
         Utilities.HideProgress();
     }
 
-    @SuppressWarnings("UnusedDeclaration")
+    @EventBusHook
     public void onEventMainThread(UploadEvents.FtpEvent o){
         tracer.debug("FTP Event completed, success: " + o.success);
         Utilities.HideProgress();

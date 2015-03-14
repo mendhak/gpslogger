@@ -25,6 +25,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
@@ -181,7 +182,7 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
         return IsFormValid();
     }
 
-    @SuppressWarnings("UnusedDeclaration")
+    @EventBusHook
     public void onEventMainThread(UploadEvents.AutoEmailEvent o){
 
         Utilities.HideProgress();
