@@ -966,14 +966,6 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     @Override
-    public void OnNmeaSentence(long timestamp, String nmeaSentence) {
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.OnNmeaSentence(timestamp, nmeaSentence);
-        }
-    }
-
-    @Override
     public void OnSatelliteCount(int count) {
         GenericViewFragment fragment = GetCurrentFragment();
         if(fragment != null) {

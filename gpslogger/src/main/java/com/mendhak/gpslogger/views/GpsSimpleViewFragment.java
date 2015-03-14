@@ -487,11 +487,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     }
 
     @Override
-    public void OnNmeaSentence(long timestamp, String nmeaSentence) {
-
-    }
-
-    @Override
     public void onClick(View view) {
         Toast toast = new Toast(getActivity());
         switch (view.getId()) {

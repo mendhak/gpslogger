@@ -942,10 +942,6 @@ public class GpsLoggingService extends Service  {
             NmeaFileLogger nmeaLogger = new NmeaFileLogger(Session.getCurrentFileName());
             nmeaLogger.Write(timestamp, nmeaSentence);
         }
-
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnNmeaSentence(timestamp, nmeaSentence);
-        }
     }
 
     /**

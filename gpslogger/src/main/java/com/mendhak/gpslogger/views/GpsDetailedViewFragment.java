@@ -409,8 +409,5 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         showCurrentFileName(newFileName);
     }
 
-    @Override
-    public void OnNmeaSentence(long timestamp, String nmeaSentence) {
 
-    }
 }
