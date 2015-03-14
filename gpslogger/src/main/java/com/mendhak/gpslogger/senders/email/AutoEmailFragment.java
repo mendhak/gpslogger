@@ -62,11 +62,7 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
 
     @Override
     public void onDestroy() {
-        try {
-            EventBus.getDefault().unregister(this);
-        } catch (Throwable t){
-            //this may crash if registration did not go through. just be safe
-        }
+        UnregisterEventBus();
         super.onDestroy();
     }
 
@@ -74,6 +70,13 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
         EventBus.getDefault().register(this);
     }
 
+    private void UnregisterEventBus(){
+        try {
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
+    }
 
     public boolean onPreferenceClick(Preference preference) {
 

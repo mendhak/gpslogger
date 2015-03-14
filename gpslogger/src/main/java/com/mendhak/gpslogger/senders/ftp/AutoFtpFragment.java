@@ -46,16 +46,20 @@ public class AutoFtpFragment
     @Override
     public void onDestroy() {
 
-        try {
-            EventBus.getDefault().unregister(this);
-        } catch (Throwable t){
-            //this may crash if registration did not go through. just be safe
-        }
+        UnregisterEventBus();
         super.onDestroy();
     }
 
     private void RegisterEventBus() {
         EventBus.getDefault().register(this);
+    }
+
+    private void UnregisterEventBus(){
+        try {
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
     }
 
     private boolean IsFormValid() {

@@ -47,12 +47,24 @@ public abstract class GenericViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RegisterEventBus();
+    }
+
+    private void RegisterEventBus() {
         EventBus.getDefault().register(this);
+    }
+
+    private void UnregisterEventBus(){
+        try {
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
     }
 
     @Override
     public void onDestroy() {
-        EventBus.getDefault().unregister(this);
+        UnregisterEventBus();
         super.onDestroy();
     }
 

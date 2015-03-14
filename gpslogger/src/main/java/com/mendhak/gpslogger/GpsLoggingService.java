@@ -93,6 +93,14 @@ public class GpsLoggingService extends Service  {
         EventBus.getDefault().register(this);
     }
 
+    private void UnregisterEventBus(){
+        try {
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
@@ -104,11 +112,7 @@ public class GpsLoggingService extends Service  {
     @Override
     public void onDestroy() {
         tracer.warn("GpsLoggingService is being destroyed by Android OS.");
-        try {
-            EventBus.getDefault().unregister(this);
-        } catch (Throwable t){
-            //this may crash if registration did not go through. just be safe
-        }
+        UnregisterEventBus();
         super.onDestroy();
     }
 

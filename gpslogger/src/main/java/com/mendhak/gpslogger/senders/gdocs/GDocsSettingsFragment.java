@@ -70,14 +70,17 @@ public class GDocsSettingsFragment extends PreferenceFragment
     @Override
     public void onDestroy() {
 
+        UnregisterEventBus();
+        super.onDestroy();
+    }
+
+    private void UnregisterEventBus(){
         try {
             EventBus.getDefault().unregister(this);
         } catch (Throwable t){
             //this may crash if registration did not go through. just be safe
         }
-        super.onDestroy();
     }
-
     private void RegisterEventBus() {
         EventBus.getDefault().register(this);
     }

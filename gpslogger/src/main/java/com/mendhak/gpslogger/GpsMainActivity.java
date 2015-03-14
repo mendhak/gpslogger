@@ -94,6 +94,13 @@ public class GpsMainActivity extends ActionBarActivity
         EventBus.getDefault().register(this);
     }
 
+    private void UnregisterEventBus(){
+        try {
+        EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
+    }
 
     @Override
     protected void onStart() {
@@ -118,11 +125,7 @@ public class GpsMainActivity extends ActionBarActivity
     @Override
     protected void onDestroy() {
         StopAndUnbindServiceIfRequired();
-        try {
-            EventBus.getDefault().unregister(this);
-        } catch (Throwable t){
-            //this may crash if registration did not go through. just be safe
-        }
+        UnregisterEventBus();
         super.onDestroy();
 
     }
