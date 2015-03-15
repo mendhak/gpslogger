@@ -73,24 +73,22 @@ public class FtpJob extends Job {
 
 
         try {
-            tracer.debug("Connecting to FTP");
+
             client.connect(server, port);
             showServerReply(client);
 
-            tracer.debug("Logging in to FTP server");
+
             if (client.login(username, password)) {
                 client.enterLocalPassiveMode();
                 showServerReply(client);
 
                 tracer.debug("Uploading file to FTP server " + server);
-
                 tracer.debug("Checking for FTP directory " + directory);
                 FTPFile[] existingDirectory = client.listFiles(directory);
                 showServerReply(client);
 
                 if (existingDirectory.length <= 0) {
                     tracer.debug("Attempting to create FTP directory " + directory);
-                    //client.makeDirectory(directory);
                     ftpCreateDirectoryTree(client, directory);
                     showServerReply(client);
                 }
@@ -117,11 +115,9 @@ public class FtpJob extends Job {
             return false;
         } finally {
             try {
-                tracer.debug("Logging out of FTP server");
                 client.logout();
                 showServerReply(client);
 
-                tracer.debug("Disconnecting from FTP server");
                 client.disconnect();
                 showServerReply(client);
             } catch (Exception e) {

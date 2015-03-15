@@ -71,6 +71,7 @@ public class FileSenderFactory {
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
         if (Utilities.GetFilesInFolder(gpxFolder).length < 1) {
+            tracer.warn("No files found to send.");
             return;
         }
 
@@ -84,6 +85,7 @@ public class FileSenderFactory {
         List<File> zipFiles = new ArrayList<>();
 
         if (files.size() == 0) {
+            tracer.warn("No files found to send after filtering.");
             return;
         }
 
@@ -123,38 +125,32 @@ public class FileSenderFactory {
     }
 
 
-    public static List<IFileSender> GetFileSenders(Context applicationContext) {
+    private static List<IFileSender> GetFileSenders(Context applicationContext) {
         List<IFileSender> senders = new ArrayList<IFileSender>();
 
         if (AppSettings.isGDocsAutoSendEnabled() && GDocsHelper.IsLinked(applicationContext)) {
-            tracer.debug("Google Docs Sender picked");
             senders.add(new GDocsHelper(applicationContext));
         }
 
         if (AppSettings.isOsmAutoSendEnabled() && OSMHelper.IsOsmAuthorized(applicationContext)) {
-            tracer.debug("OSM Sender picked");
             senders.add(new OSMHelper(applicationContext));
         }
 
         if (AppSettings.isEmailAutoSendEnabled()) {
-            tracer.debug("Email Sender picked");
             senders.add(new AutoEmailHelper());
         }
 
         DropBoxHelper dh = new DropBoxHelper(applicationContext);
 
         if (AppSettings.isDropboxAutoSendEnabled() &&  dh.IsLinked()) {
-            tracer.debug("DropBox Sender picked");
             senders.add(dh);
         }
 
         if (AppSettings.isOpenGtsAutoSendEnabled()) {
-            tracer.debug("OpenGTS Sender picked");
             senders.add(new OpenGTSHelper());
         }
 
         if (AppSettings.isFtpAutoSendEnabled()) {
-            tracer.debug("FTP Sender picked");
             senders.add(new FtpHelper());
         }
 

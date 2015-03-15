@@ -34,8 +34,6 @@ public class OpenGTSFragment extends PreferenceValidationFragment implements
         OnPreferenceChangeListener,
         OnPreferenceClickListener {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSFragment.class.getSimpleName());
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

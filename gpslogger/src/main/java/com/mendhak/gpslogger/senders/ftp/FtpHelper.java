@@ -80,16 +80,12 @@ public class FtpHelper implements IFileSender {
     }
 
     public void UploadFile(File f) {
-        try {
-            JobManager jobManager = AppSettings.GetJobManager();
-            jobManager.addJobInBackground(new FtpJob(AppSettings.getFtpServerName(), AppSettings.getFtpPort(),
-                    AppSettings.getFtpUsername(), AppSettings.getFtpPassword(), AppSettings.getFtpDirectory(),
-                    AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit(),
-                    f, f.getName()));
 
-        } catch (Exception e) {
-            tracer.error("Could not prepare file for upload.", e);
-        }
+        JobManager jobManager = AppSettings.GetJobManager();
+        jobManager.addJobInBackground(new FtpJob(AppSettings.getFtpServerName(), AppSettings.getFtpPort(),
+                AppSettings.getFtpUsername(), AppSettings.getFtpPassword(), AppSettings.getFtpDirectory(),
+                AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit(),
+                f, f.getName()));
     }
 
     @Override

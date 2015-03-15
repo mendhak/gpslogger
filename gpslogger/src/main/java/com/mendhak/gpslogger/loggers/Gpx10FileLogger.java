@@ -43,7 +43,6 @@ public class Gpx10FileLogger implements IFileLogger {
     private final boolean addNewTrackSegment;
     private final int satelliteCount;
     protected final String name = "GPX";
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Gpx10FileLogger.class.getSimpleName());
 
     Gpx10FileLogger(File gpxFile, boolean addNewTrackSegment, int satelliteCount) {
         this.gpxFile = gpxFile;
@@ -60,7 +59,6 @@ public class Gpx10FileLogger implements IFileLogger {
         String dateTimeString = Utilities.GetIsoDateTime(new Date(time));
 
         Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(dateTimeString, gpxFile, loc, addNewTrackSegment, satelliteCount);
-        tracer.debug(String.format("There are currently %s tasks waiting on the GPX10 EXECUTOR.", EXECUTOR.getQueue().size()));
         EXECUTOR.execute(writeHandler);
     }
 
@@ -73,9 +71,7 @@ public class Gpx10FileLogger implements IFileLogger {
         String dateTimeString = Utilities.GetIsoDateTime(new Date(time));
 
         Gpx10AnnotateHandler annotateHandler = new Gpx10AnnotateHandler(description, gpxFile, loc, dateTimeString);
-        tracer.debug(String.format("There are currently %s tasks waiting on the GPX10 EXECUTOR.", EXECUTOR.getQueue().size()));
         EXECUTOR.execute(annotateHandler);
-
     }
 
     @Override

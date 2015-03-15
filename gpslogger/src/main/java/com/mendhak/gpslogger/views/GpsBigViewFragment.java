@@ -36,8 +36,6 @@ import java.text.NumberFormat;
 public class GpsBigViewFragment extends GenericViewFragment implements View.OnTouchListener {
 
     View rootView;
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GpsBigViewFragment.class.getSimpleName());
-
 
     public static final GpsBigViewFragment newInstance() {
         GpsBigViewFragment fragment = new GpsBigViewFragment();

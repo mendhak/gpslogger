@@ -207,12 +207,14 @@ public class GDocsSettingsFragment extends PreferenceFragment
                     REQUEST_CODE_RECOVERED);
 
         } catch (IOException transientEx) {
+            tracer.error("Temporary failure", transientEx);
             // network or server error, the call is expected to succeed if you try again later.
             // Don't attempt to call again immediately - the request is likely to
             // fail, you'll hit quotas or back-off.
 
 
         } catch (GoogleAuthException authEx) {
+            tracer.error("Authentication failure", authEx);
             // Failure. The call is not expected to ever succeed so it should not be
             // retried.
 
@@ -267,6 +269,7 @@ public class GDocsSettingsFragment extends PreferenceFragment
             }
 
         } catch (Exception ex) {
+            tracer.error("Could not create local test file", ex);
             EventBus.getDefault().post(new UploadEvents.GDocs(false));
         }
 

@@ -32,14 +32,14 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         try {
-            tracer.info("Email alarm received");
+            tracer.info("Alarm received");
 
             EventBus.getDefault().postSticky(new CommandEvents.AutoSend(false));
 
             Intent serviceIntent = new Intent(context.getPackageName() + ".GpsLoggingService");
             context.startService(serviceIntent);
         } catch (Exception ex) {
-            tracer.error("AlarmReceiver.onReceive", ex);
+            tracer.error("AlarmReceiver", ex);
         }
     }
 }

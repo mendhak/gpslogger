@@ -63,7 +63,6 @@ import java.util.*;
 
 public class Utilities {
 
-    private static final int LOGLEVEL = 5;
     private static MaterialDialog pd;
     private static org.slf4j.Logger tracer = LoggerFactory.getLogger(Utilities.class.getSimpleName());
 
@@ -147,8 +146,7 @@ public class Utilities {
     public static void PopulateAppSettings(Context context) {
 
         tracer.info("Getting preferences");
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(context);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
         AppSettings.setUseImperial(prefs.getBoolean("useImperial", false));
 

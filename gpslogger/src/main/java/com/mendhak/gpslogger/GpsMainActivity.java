@@ -438,7 +438,6 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void LoadDefaultFragmentView() {
         int currentSelectedPosition = GetUserSelectedNavigationItem();
-        tracer.debug("Loading fragment view: " + currentSelectedPosition);
         LoadFragmentView(currentSelectedPosition);
     }
 
@@ -470,7 +469,6 @@ public class GpsMainActivity extends ActionBarActivity
 
     @Override
     public boolean onNavigationItemSelected(int position, long itemId) {
-        tracer.debug("Changing main view: " + String.valueOf(position));
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("SPINNER_SELECTED_POSITION", position);
@@ -624,7 +622,7 @@ public class GpsMainActivity extends ActionBarActivity
 
 
     private void ForceAutoSendNow() {
-        tracer.debug("Auto send now");
+        tracer.debug("User forced an auto send");
 
         if (AppSettings.isAutoSendEnabled()) {
             Utilities.ShowProgress(this, getString(R.string.autosend_sending),getString(R.string.please_wait));
@@ -648,7 +646,6 @@ public class GpsMainActivity extends ActionBarActivity
     private void Annotate() {
 
         if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml() && !AppSettings.shouldLogToCustomUrl()) {
-            tracer.debug("GPX, KML, URL disabled; annotation shouldn't work");
             Toast.makeText(getApplicationContext(), getString(R.string.annotation_requires_logging), Toast.LENGTH_SHORT).show();
             return;
         }
@@ -676,7 +673,6 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void UploadToOpenStreetMap() {
         if (!OSMHelper.IsOsmAuthorized(getApplicationContext())) {
-            tracer.debug("Not authorized, opening OSM activity");
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
             return;
         }
@@ -688,7 +684,6 @@ public class GpsMainActivity extends ActionBarActivity
         final DropBoxHelper dropBoxHelper = new DropBoxHelper(getApplicationContext());
 
         if (!dropBoxHelper.IsLinked()) {
-            tracer.debug("Not linked, opening Dropbox activity");
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
             return;
         }
@@ -698,7 +693,6 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void SendToOpenGTS() {
         if (!Utilities.IsOpenGTSSetup()) {
-            tracer.debug("Not set up, opening OpenGTS activity");
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
         } else {
             IFileSender fs = FileSenderFactory.GetOpenGTSSender(getApplicationContext());
@@ -708,7 +702,6 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void UploadToGoogleDocs() {
         if (!GDocsHelper.IsLinked(getApplicationContext())) {
-            tracer.debug("Not linked, opening Google Docs setup activity");
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
             return;
         }
@@ -718,7 +711,6 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void SendToFtp() {
         if (!Utilities.IsFtpSetup()) {
-            tracer.debug("Not setup, opening FTP setup activity");
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
         } else {
             IFileSender fs = FileSenderFactory.GetFtpSender(getApplicationContext());
@@ -728,7 +720,6 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void SelectAndEmailFile() {
         if (!Utilities.IsEmailSetup()) {
-            tracer.debug("Not set up, opening email setup activity");
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
         } else {
             ShowFileListDialog(FileSenderFactory.GetEmailSender(this));
@@ -804,7 +795,7 @@ public class GpsMainActivity extends ActionBarActivity
      * an intent (Facebook, SMS, Twitter, Email, K-9, Bluetooth)
      */
     private void Share() {
-        tracer.debug("GpsMainActivity.Share");
+
         try {
 
             final String locationOnly = getString(R.string.sharing_location_only);
@@ -846,7 +837,6 @@ public class GpsMainActivity extends ActionBarActivity
 
                                 if (selectedItems.contains(0)) {
 
-                                    tracer.debug("User selected location only");
                                     intent.setType("text/plain");
 
                                     intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing_mylocation));
@@ -883,7 +873,7 @@ public class GpsMainActivity extends ActionBarActivity
                 Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
             }
         } catch (Exception ex) {
-            tracer.error("Share", ex);
+            tracer.error("Sharing problem", ex);
         }
     }
 
@@ -909,7 +899,6 @@ public class GpsMainActivity extends ActionBarActivity
      * Starts the service and binds the activity to it.
      */
     private void StartAndBindService() {
-        tracer.debug(".");
         serviceIntent = new Intent(this, GpsLoggingService.class);
         // Start the service in case it isn't already running
         startService(serviceIntent);
@@ -923,7 +912,6 @@ public class GpsMainActivity extends ActionBarActivity
      * Stops the service if it isn't logging. Also unbinds.
      */
     private void StopAndUnbindServiceIfRequired() {
-        tracer.debug(".");
         if (Session.isBoundToService()) {
 
             try {
@@ -950,13 +938,11 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     public void SetAnnotationReady() {
-        tracer.debug(".");
         Session.setAnnotationMarked(true);
         enableDisableMenuItems();
     }
 
     public void SetAnnotationDone() {
-        tracer.debug(".");
         Session.setAnnotationMarked(false);
         enableDisableMenuItems();
     }

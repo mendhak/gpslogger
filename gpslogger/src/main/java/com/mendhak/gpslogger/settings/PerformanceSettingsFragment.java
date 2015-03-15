@@ -14,7 +14,6 @@ import java.util.*;
 
 public class PerformanceSettingsFragment  extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(LoggingSettingsFragment.class.getSimpleName());
     SharedPreferences prefs;
 
     @Override
@@ -56,7 +55,6 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
                             final Set<String> chosenListeners = new HashSet<String>();
 
                             for (Integer selectedItem : selectedItems) {
-                                tracer.debug(defaultListeners.get(selectedItem));
                                 chosenListeners.add(defaultListeners.get(selectedItem));
                             }
 

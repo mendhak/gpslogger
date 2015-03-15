@@ -129,7 +129,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
      * on the main form
      */
     private void showPreferencesSummary() {
-        tracer.debug("GpsDetailedViewFragment.showPreferencesSummary");
+
         try {
             TextView txtLoggingTo = (TextView) rootView.findViewById(R.id.detailedview_loggingto_text);
             TextView txtFrequency = (TextView) rootView.findViewById(R.id.detailedview_frequency_text);

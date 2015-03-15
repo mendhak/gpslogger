@@ -41,7 +41,6 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     protected String dgpsId;
 
     GeneralLocationListener(GpsLoggingService activity, String name) {
-        tracer.debug("GeneralLocationListener constructor");
         loggingService = activity;
         listenerName = name;
     }
@@ -92,16 +91,16 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
     public void onStatusChanged(String provider, int status, Bundle extras) {
         if (status == LocationProvider.OUT_OF_SERVICE) {
-            tracer.debug(provider + " is out of service");
+            tracer.info(provider + " is out of service");
             loggingService.StopManagerAndResetAlarm();
         }
 
         if (status == LocationProvider.AVAILABLE) {
-            tracer.debug(provider + " is available");
+            tracer.info(provider + " is available");
         }
 
         if (status == LocationProvider.TEMPORARILY_UNAVAILABLE) {
-            tracer.debug(provider + " is temporarily unavailable");
+            tracer.info(provider + " is temporarily unavailable");
             loggingService.StopManagerAndResetAlarm();
         }
     }

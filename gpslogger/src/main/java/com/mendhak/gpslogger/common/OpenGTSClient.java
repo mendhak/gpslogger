@@ -90,14 +90,9 @@ public class OpenGTSClient {
                     tracer.error(s.useDelimiter("\\A").next());
                 }
             } else {
-                s = new Scanner(conn.getInputStream());
                 tracer.debug("Status code: " + String.valueOf(conn.getResponseCode()));
-                if(s.hasNext()){
-                    tracer.debug(s.useDelimiter("\\A").next());
-                }
             }
         }
-
     }
 
 
@@ -110,7 +105,7 @@ public class OpenGTSClient {
                 DatagramSocket socket = new DatagramSocket();
                 byte[] buffer = message.getBytes();
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length, InetAddress.getByName(server), port);
-                tracer.debug("Sending " + message + " over UDP");
+                tracer.debug("Sending UDP " + message );
                 socket.send(packet);
                 socket.close();
         }

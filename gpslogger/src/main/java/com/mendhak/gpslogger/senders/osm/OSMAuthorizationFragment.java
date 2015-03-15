@@ -78,7 +78,7 @@ public class OSMAuthorizationFragment extends PreferenceFragment {
                 editor.apply();
 
             } catch (Exception e) {
-                tracer.error("OSMAuthorizationActivity.onCreate - user has returned", e);
+                tracer.error("OSM authorization error", e);
                 Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error), getActivity());
             }
         }
@@ -144,7 +144,7 @@ public class OSMAuthorizationFragment extends PreferenceFragment {
                         startActivity(intent);
 
                     } catch (Exception e) {
-                        tracer.error("OSMAuthorizationActivity.onClick", e);
+                        tracer.error("onClick", e);
                         Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error),
                                 getActivity());
                     }

@@ -31,15 +31,12 @@ import org.slf4j.LoggerFactory;
 public class Faqtivity extends ActionBarActivity {
 
     WebView browser;
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Faqtivity.class.getSimpleName());
 
     /**
      * Event raised when the form is created for the first time
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
-        tracer.debug("Faqtivity.onCreate");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq);
@@ -53,6 +50,7 @@ public class Faqtivity extends ActionBarActivity {
         settings.setLoadWithOverviewMode(true);
         settings.setUseWideViewPort(true);
         settings.setBuiltInZoomControls(true);
+        settings.setDisplayZoomControls(false);
         settings.setJavaScriptEnabled(true);
 
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
@@ -60,6 +58,17 @@ public class Faqtivity extends ActionBarActivity {
         browser.loadUrl("http://code.mendhak.com/gpslogger/index.html");
     }
 
+    @Override
+    protected void onDestroy() {
+        setVisible(false);
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        setVisible(false);
+    }
 
     @Override
     protected void onStop() {

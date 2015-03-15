@@ -27,7 +27,6 @@ public class CustomUrlJob extends Job {
 
     public CustomUrlJob(String customLoggingUrl, Location loc, String annotation, int satellites, float batteryLevel, String androidId) {
         super(new Params(1).requireNetwork().persist());
-        tracer.debug("CustomUrlJob constructor called");
         this.loc = new SerializableLocation(loc);
         this.annotation = annotation;
         this.satellites = satellites;
@@ -42,7 +41,6 @@ public class CustomUrlJob extends Job {
 
     @Override
     public void onRun() throws Throwable {
-        tracer.debug("onRun");
         HttpURLConnection conn;
 
         //String logUrl = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV
@@ -68,19 +66,10 @@ public class CustomUrlJob extends Job {
         conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
 
-        Scanner s;
         if(conn.getResponseCode() != 200){
-            s = new Scanner(conn.getErrorStream());
             tracer.error("Status code: " + String.valueOf(conn.getResponseCode()));
-            if(s.hasNext()){
-                tracer.error(s.useDelimiter("\\A").next());
-            }
         } else {
-            s = new Scanner(conn.getInputStream());
             tracer.debug("Status code: " + String.valueOf(conn.getResponseCode()));
-            if(s.hasNext()){
-                tracer.debug(s.useDelimiter("\\A").next());
-            }
         }
 
         EventBus.getDefault().post(new UploadEvents.CustomUrl(true));

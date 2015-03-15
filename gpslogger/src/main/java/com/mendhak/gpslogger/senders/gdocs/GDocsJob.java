@@ -35,7 +35,6 @@ public class GDocsJob extends Job {
 
     @Override
     public void onRun() throws Throwable {
-        tracer.debug("Running GDocsJob item " + this.getRunGroupId());
         FileInputStream fis = new FileInputStream(gpxFile);
         String fileName = gpxFile.getName();
 
@@ -110,7 +109,7 @@ public class GDocsJob extends Job {
             tracer.debug("File updated : " + fileId);
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            tracer.error("Could not update contents", e);
         } finally {
             if (conn != null) {
                 conn.disconnect();
@@ -172,9 +171,7 @@ public class GDocsJob extends Job {
             tracer.debug("File created with ID " + fileId + " of type " + mimeType);
 
         } catch (Exception e) {
-
-            System.out.println(e.getMessage());
-            System.out.println(e.getMessage());
+            tracer.error("Could not create file", e);
         } finally {
             if (conn != null) {
                 conn.disconnect();

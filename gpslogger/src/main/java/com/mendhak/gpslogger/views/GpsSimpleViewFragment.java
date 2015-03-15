@@ -296,7 +296,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LoggingStatus loggingStatus){
-        tracer.debug(".");
 
         if(loggingStatus.loggingStarted){
             showPreferencesSummary();

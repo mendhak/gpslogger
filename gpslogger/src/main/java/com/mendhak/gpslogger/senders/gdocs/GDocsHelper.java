@@ -164,7 +164,7 @@ public class GDocsHelper implements IFileSender {
                 return GoogleAuthUtil.getTokenWithNotification(params[0], GetAccountName(params[0]), GetOauth2Scope(), new Bundle());
             }
             catch (Exception e) {
-                e.printStackTrace();
+                tracer.error("Could not get token",e);
             }
 
             return null;
@@ -172,7 +172,7 @@ public class GDocsHelper implements IFileSender {
 
         @Override
         protected void onPostExecute(String token) {
-            tracer.debug("On Post Execute with token: " + token);
+            tracer.debug("GDocs token: " + token);
             GDocsHelper.SaveAuthToken(context, token);
 
             JobManager jobManager = AppSettings.GetJobManager();
