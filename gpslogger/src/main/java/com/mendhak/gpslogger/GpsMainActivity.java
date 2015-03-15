@@ -279,6 +279,7 @@ public class GpsMainActivity extends ActionBarActivity
         drawerLayout.setDrawerListener(drawerToggle);
         drawerLayout.closeDrawer(drawer);
 
+        drawer.addDivider();
         drawer.addItem(new DrawerItem()
                         .setId(0)
                         .setImage(getResources().getDrawable(R.drawable.settings))
