@@ -324,6 +324,7 @@ public class GpsLoggingService extends Service  {
 
         GetPreferences();
         ShowNotification();
+        SetupAutoSendTimers();
         ResetCurrentFileName(true);
         NotifyClientStarted();
         StartPassiveManager();
