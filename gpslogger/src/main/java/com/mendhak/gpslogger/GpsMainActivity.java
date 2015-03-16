@@ -67,7 +67,6 @@ public class GpsMainActivity extends ActionBarActivity
         ActionBar.OnNavigationListener {
 
     private static Intent serviceIntent;
-    //private GpsLoggingService loggingService;
     private ActionBarDrawerToggle drawerToggle;
     private org.slf4j.Logger tracer;
 
@@ -236,20 +235,27 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     public void SetUpToolbar(){
-        Toolbar toolbar = GetToolbar();
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        try{
+            Toolbar toolbar = GetToolbar();
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        //Deprecated in Lollipop but required if targeting 4.x
-        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.gps_main_views, R.layout.spinner_dropdown_item);
-        getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, this);
-        getSupportActionBar().setSelectedNavigationItem(GetUserSelectedNavigationItem());
+            //Deprecated in Lollipop but required if targeting 4.x
+            SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.gps_main_views, R.layout.spinner_dropdown_item);
+            getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+            getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, this);
+            getSupportActionBar().setSelectedNavigationItem(GetUserSelectedNavigationItem());
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            }
         }
+        catch(Exception ex){
+            //http://stackoverflow.com/questions/26657348/appcompat-v7-v21-0-0-causing-crash-on-samsung-devices-with-android-v4-2-2
+            tracer.error("Thanks for this, Samsung", ex);
+        }
+
     }
 
     public void SetUpNavigationDrawer() {
@@ -736,7 +742,7 @@ public class GpsMainActivity extends ActionBarActivity
 
         final File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
-        if (gpxFolder != null && gpxFolder.exists()) {
+        if (gpxFolder != null && gpxFolder.exists() && Utilities.GetFilesInFolder(gpxFolder, sender).length > 0) {
             File[] enumeratedFiles = Utilities.GetFilesInFolder(gpxFolder, sender);
 
             //Order by last modified
@@ -756,9 +762,6 @@ public class GpsMainActivity extends ActionBarActivity
             }
 
             final String[] files = fileList.toArray(new String[fileList.size()]);
-
-
-            //final ArrayList selectedItems = new ArrayList();  // Where we track the selected items
 
             new MaterialDialog.Builder(this)
                     .title(R.string.osm_pick_file)
