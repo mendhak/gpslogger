@@ -200,7 +200,7 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="autosend_sendzip_title">Küld a zip-fájlt</string>
   <string name="autosend_sendzip_summary">Zip-fájl küldése. Kikapcsolja az egyes fájlok küldését, ha a zip opció nem működik az Önnél     </string>
   <string name="autosend_targets_category">Automatikus küldés célok</string>
-  <string name="menu_email_now">Automatikus küldés most</string>
+  <string name="menu_autosend_now">Automatikus küldés most</string>
   <string name="autosend_sending">Automatikus küldés</string>
   <string name="summary_autosend">Automatikus küldés:</string>
   <string name="pref_autosend_title">Automatikus küldése, email és feltöltés</string>

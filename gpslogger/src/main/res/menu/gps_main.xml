@@ -9,7 +9,7 @@
 
     <item android:id="@+id/mnuUpload" android:title="@string/menu_upload" android:icon="@drawable/upload" app:showAsAction="always">
         <menu>
-            <item android:id="@+id/mnuAutoSendNow" android:title="@string/menu_email_now" />
+            <item android:id="@+id/mnuAutoSendNow" android:title="@string/menu_autosend_now" />
             <item android:id="@+id/mnuDropBox" android:title="@string/dropbox_upload" />
             <item android:id="@+id/mnuOSM" android:title="@string/osm_upload" />
             <item android:id="@+id/mnuGDocs" android:title="@string/gdocs_upload" />

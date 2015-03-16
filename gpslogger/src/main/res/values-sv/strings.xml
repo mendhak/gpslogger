@@ -206,7 +206,7 @@
   <string name="autosend_sendzip_title">Skicka zip-fil</string>
   <string name="autosend_sendzip_summary">Sänd zip-filer då det passar. Inaktivera för att sända individuella filer eller om zip-alternativet inte fungerar</string>
   <string name="autosend_targets_category">Mål för autosänd</string>
-  <string name="menu_email_now">Autosänd nu</string>
+  <string name="menu_autosend_now">Autosänd nu</string>
   <string name="autosend_sending">Autosänder</string>
   <string name="summary_autosend">Autosänd:</string>
   <string name="pref_autosend_title">Autosänd, mail och uppladdning</string>

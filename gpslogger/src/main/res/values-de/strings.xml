@@ -194,7 +194,7 @@
   <string name="autosend_sendzip_title">Sende Zip-Datei</string>
   <string name="autosend_sendzip_summary">Sende Zip-Datei wo anwendbar. Deaktiviere diese Option, um einzelne Dateien zu senden oder wenn die Zip-Option bei dir nicht funktioniert.</string>
   <string name="autosend_targets_category">Ziele für automatisches Senden</string>
-  <string name="menu_email_now">Jetzt automatisch senden</string>
+  <string name="menu_autosend_now">Jetzt automatisch senden</string>
   <string name="autosend_sending">Automatisch senden</string>
   <string name="summary_autosend">Automatisches Senden:</string>
   <string name="pref_autosend_title">Automatisches Senden, E-Mail und Hochladen</string>

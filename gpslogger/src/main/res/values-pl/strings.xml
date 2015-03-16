@@ -188,7 +188,7 @@
   <string name="autosend_frequency">Jak często?</string>
   <string name="autosend_sendzip_title">Wyślij plik zip</string>
   <string name="autosend_targets_category">Synchronizacja pozycji</string>
-  <string name="menu_email_now">Synchronizuj teraz</string>
+  <string name="menu_autosend_now">Synchronizuj teraz</string>
   <string name="autosend_sending">Synchronizuje</string>
   <string name="summary_autosend">Synchronizacja :</string>
   <string name="pref_autosend_summary">E-mail, opcje udostępniania i przesłania</string>

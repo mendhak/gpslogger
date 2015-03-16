@@ -314,7 +314,7 @@
         working for you
     </string>
     <string name="autosend_targets_category">Auto Send Targets</string>
-    <string name="menu_email_now">Auto Send Now</string>
+    <string name="menu_autosend_now">Auto Send Now</string>
     <string name="autosend_sending">Auto sending</string>
     <string name="summary_autosend">Auto send:</string>
 

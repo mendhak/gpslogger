@@ -198,7 +198,7 @@ une plus grande précision à basses fréquences.</string>
   <string name="autosend_sendzip_title">Envoyer le fichier zip</string>
   <string name="autosend_sendzip_summary">Si possible, envoyer un fichier zip. Désactiver pour envoyer en fichiers individuels, ou si l\'option zip ne fonctionne pas     </string>
   <string name="autosend_targets_category">Cibles d\'envoi automatique</string>
-  <string name="menu_email_now">Envoyer automatiquement maintenant</string>
+  <string name="menu_autosend_now">Envoyer automatiquement maintenant</string>
   <string name="autosend_sending">Envoi automatique</string>
   <string name="summary_autosend">Envoi automatique:</string>
   <string name="pref_autosend_title">Envoi automatique, courriel et téléchargement</string>

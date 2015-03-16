@@ -187,7 +187,7 @@
   <string name="autosend_sendzip_title">Enviar arquivo zipado</string>
   <string name="autosend_sendzip_summary">Envie arquivo zip, se for caso. Desabilitar para enviar arquivos individuais, ou se a opção zip não está funcionando para você     </string>
   <string name="autosend_targets_category">Enviar automaticamente aos destinos</string>
-  <string name="menu_email_now">Enviar automaticamente agora</string>
+  <string name="menu_autosend_now">Enviar automaticamente agora</string>
   <string name="autosend_sending">Envio automático</string>
   <string name="summary_autosend">Auto enviar:</string>
   <string name="pref_autosend_title">Envio automático, e-mail e upload</string>

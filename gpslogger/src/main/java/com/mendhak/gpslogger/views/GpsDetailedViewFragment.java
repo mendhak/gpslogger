@@ -186,28 +186,28 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
 
             StringBuilder sb = new StringBuilder();
-            if (Utilities.IsEmailSetup()) {
-                sb.append("Email\n");
+            if (AppSettings.isEmailAutoSendEnabled() && Utilities.IsEmailSetup()) {
+                sb.append(getString(R.string.autoemail_title)).append("\n");
             }
 
-            if (Utilities.IsFtpSetup()) {
-                sb.append("FTP\n");
+            if (AppSettings.isFtpAutoSendEnabled() && Utilities.IsFtpSetup()) {
+                sb.append(getString(R.string.autoftp_setup_title)).append("\n");
             }
 
-            if (GDocsHelper.IsLinked(getActivity().getApplicationContext())) {
-                sb.append("Google Docs\n");
+            if (AppSettings.isGDocsAutoSendEnabled() && GDocsHelper.IsLinked(getActivity().getApplicationContext())) {
+                sb.append(getString(R.string.gdocs_setup_title)).append("\n");
             }
 
-            if (OSMHelper.IsOsmAuthorized(getActivity().getApplicationContext())) {
-                sb.append("OpenStreetMap\n");
+            if (AppSettings.isOsmAutoSendEnabled() && OSMHelper.IsOsmAuthorized(getActivity().getApplicationContext())) {
+                sb.append(getString(R.string.osm_setup_title)).append("\n");
             }
 
-            if (Utilities.IsDropBoxSetup(getActivity().getApplicationContext())) {
-                sb.append("Dropbox\n");
+            if (AppSettings.isDropboxAutoSendEnabled() && Utilities.IsDropBoxSetup(getActivity().getApplicationContext())) {
+                sb.append(getString(R.string.dropbox_setup_title)).append("\n");
             }
 
-            if (Utilities.IsOpenGTSSetup()) {
-                sb.append("OpenGTS\n");
+            if (AppSettings.isOpenGtsAutoSendEnabled() && Utilities.IsOpenGTSSetup()) {
+                sb.append(getString(R.string.opengts_setup_title)).append("\n");
             }
 
             TextView txtTargets = (TextView) rootView.findViewById(R.id.detailedview_autosendtargets_text);

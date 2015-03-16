@@ -208,7 +208,7 @@
   <string name="autosend_sendzip_title">Отправить zip файл</string>
   <string name="autosend_sendzip_summary">Отправить zip-файл если применимо. Отключите, чтобы отправлять файлы по одиночке, или если zip параметр для вас не работает     </string>
   <string name="autosend_targets_category">Места назначения для авто отправки</string>
-  <string name="menu_email_now">Авто отправить сейчас</string>
+  <string name="menu_autosend_now">Авто отправить сейчас</string>
   <string name="autosend_sending">Автоматическая отправка</string>
   <string name="summary_autosend">Автоматическая отправка:</string>
   <string name="pref_autosend_title">Автоматическая отправка, электронная почта и выгрузка</string>

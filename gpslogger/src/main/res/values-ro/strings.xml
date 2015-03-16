@@ -189,7 +189,7 @@
   <string name="autosend_sendzip_title">Trimite fişier zip</string>
   <string name="autosend_sendzip_summary">Trimite fişier zip după caz. Scoate aceasta optiune pentru a trimite fişiere individuale, sau în cazul în care opţiunea zip nu este functionala pentru tine     </string>
   <string name="autosend_targets_category">Destinatii pentru Auto trimitere</string>
-  <string name="menu_email_now">Auto trimite acum</string>
+  <string name="menu_autosend_now">Auto trimite acum</string>
   <string name="autosend_sending">Trimitere automata</string>
   <string name="summary_autosend">Auto trimite:</string>
   <string name="pref_autosend_title">Auto trimitere, e-mail şi încărcare</string>

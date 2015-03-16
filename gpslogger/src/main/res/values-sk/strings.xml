@@ -229,7 +229,7 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
   <string name="autosend_sendzip_summary">Odoslať súbor ZIP ak je to možné. Vypnite pre odoslanie jednotlivých súborov, alebo ak táto funkcia nefunguje
     </string>
   <string name="autosend_targets_category">Automatické odoslanie na</string>
-  <string name="menu_email_now">Automaticky odoslať teraz</string>
+  <string name="menu_autosend_now">Automaticky odoslať teraz</string>
   <string name="autosend_sending">Automatické odosielanie</string>
   <string name="summary_autosend">Automaticky odoslať:</string>
   <string name="pref_autosend_title">Autom. odoslať, emailom a odoslaním do služby</string>

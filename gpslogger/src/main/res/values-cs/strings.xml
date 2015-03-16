@@ -204,7 +204,7 @@
   <string name="autosend_sendzip_title">Odeslat soubor zip</string>
   <string name="autosend_sendzip_summary">Odeslat soubor zip, pokud možno. Zakažte pokud chcete odesílate jednotlivé soubory, nebo pokud nefunguje možnost zip     </string>
   <string name="autosend_targets_category">Cíle automatického odesílání</string>
-  <string name="menu_email_now">Automaticky odeslat nyní</string>
+  <string name="menu_autosend_now">Automaticky odeslat nyní</string>
   <string name="autosend_sending">Automatické odesílání</string>
   <string name="summary_autosend">Automaticky odeslat:</string>
   <string name="pref_autosend_title">Automaticky odeslat, poslat email a uploadnout</string>
