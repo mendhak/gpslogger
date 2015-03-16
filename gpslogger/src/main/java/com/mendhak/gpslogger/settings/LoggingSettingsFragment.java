@@ -197,14 +197,16 @@ public class LoggingSettingsFragment extends PreferenceFragment
                                     ((CustomSwitchPreference) preference).setChecked(false);
                                     return false;
                                 }
-                                return true;
+                                return false;
                             }
                         })
                         .build();
 
                 EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
-                userInput.setText(prefs.getString("log_customurl_url","http://localhost/log?lat=%LAT&amp;longitude=%LON&amp;time=%TIME&amp;s=%SPD"));
-                userInput.setSingleLine(false);
+                userInput.setText(prefs.getString("log_customurl_url","http://localhost/log?lat=%LAT&longitude=%LON&time=%TIME&s=%SPD"));
+                userInput.setSingleLine(true);
+                userInput.setLines(4);
+                userInput.setHorizontallyScrolling(false);
                 TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
 
                 String legend = MessageFormat.format("{0} %LAT\n{1} %LON\n{2} %DESC\n{3} %SAT\n{4} %ALT\n{5} %SPD\n{6} %ACC\n{7} %DIR\n{8} %PROV\n{9} %TIME\n{10} %BATT\n{11} %AID\n{12} %SER",
