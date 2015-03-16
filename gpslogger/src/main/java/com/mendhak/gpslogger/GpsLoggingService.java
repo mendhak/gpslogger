@@ -409,7 +409,7 @@ public class GpsLoggingService extends Service  {
             nfc = new NotificationCompat.Builder(getApplicationContext())
                     .setSmallIcon(R.drawable.notification)
                     .setPriority(Notification.PRIORITY_MAX)
-                    .setContentTitle(getString(R.string.gpslogger_still_running))
+                    .setContentTitle(contentText)
                     .setOngoing(true)
                     .setContentIntent(pending)
                     .addAction(R.drawable.annotate2, getString(R.string.menu_annotate), piAnnotate)
@@ -417,7 +417,8 @@ public class GpsLoggingService extends Service  {
 
         }
 
-        nfc.setContentText(contentText);
+        nfc.setContentTitle(contentText);
+        nfc.setContentText(getString(R.string.app_name));
         nfc.setWhen(notificationTime);
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
