@@ -138,8 +138,11 @@ public class GDocsHelper implements IFileSender {
             File gpsDir = new File(AppSettings.getGpsLoggerFolder());
             File gpxFile = new File(gpsDir, fileName);
 
-            tracer.debug("Sending file to GDocs: " + fileName);
-            new GDocsTokenAsyncTask(gpxFile).execute(context);
+            tracer.debug("Submitting Google Docs job");
+
+            JobManager jobManager = AppSettings.GetJobManager();
+            jobManager.addJobInBackground(new GDocsJob(gpxFile));
+
         } catch (Exception e) {
             EventBus.getDefault().post(new UploadEvents.GDocs(false));
             tracer.error("GDocsHelper.UploadFile", e);
@@ -149,35 +152,6 @@ public class GDocsHelper implements IFileSender {
     @Override
     public boolean accept(File dir, String name) {
         return true;
-    }
-
-    private class GDocsTokenAsyncTask extends AsyncTask<Context, Void, String> {
-
-        File gpxFile;
-        public GDocsTokenAsyncTask(File gpxFile){
-            this.gpxFile = gpxFile;
-        }
-
-        @Override
-        protected String doInBackground(Context... params) {
-            try {
-                return GoogleAuthUtil.getTokenWithNotification(params[0], GetAccountName(params[0]), GetOauth2Scope(), new Bundle());
-            }
-            catch (Exception e) {
-                tracer.error("Could not get token",e);
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String token) {
-            tracer.debug("GDocs token: " + token);
-            GDocsHelper.SaveAuthToken(context, token);
-
-            JobManager jobManager = AppSettings.GetJobManager();
-            jobManager.addJobInBackground(new GDocsJob(token, gpxFile));
-        }
     }
 
 }

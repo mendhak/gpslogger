@@ -38,6 +38,16 @@ public class AppSettings extends Application {
         return jobManager;
     }
 
+
+    private static AppSettings instance;
+    public AppSettings() {
+        instance = this;
+    }
+
+    public static AppSettings getInstance() {
+        return instance;
+    }
+
     // ---------------------------------------------------
     // User Preferences
     // ---------------------------------------------------
