@@ -188,7 +188,7 @@
   <string name="autosend_sendzip_title">Надіслати файл zip</string>
   <string name="autosend_sendzip_summary">Надіслати файл zip, де це доречно. Вимкніть, щоб надсилати окремі файли, або якщо параметр zip не працює для вас     </string>
   <string name="autosend_targets_category">Місця для автонадсилання</string>
-  <string name="menu_email_now">Автонадіслати зараз</string>
+  <string name="menu_autosend_now">Автонадіслати зараз</string>
   <string name="autosend_sending">Автоматичне надсилання</string>
   <string name="summary_autosend">Авт. надіслати:</string>
   <string name="pref_autosend_title">Авт. надіслання, пошта і завантаженя</string>

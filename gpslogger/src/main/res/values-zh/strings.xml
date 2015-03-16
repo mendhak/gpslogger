@@ -168,7 +168,7 @@
   <string name="autosend_enabled_summary">允许发送文件到多处</string>
   <string name="autosend_sendzip_title">发送zip 文件</string>
   <string name="autosend_targets_category">自动发送目标</string>
-  <string name="menu_email_now">立刻自动发送</string>
+  <string name="menu_autosend_now">立刻自动发送</string>
   <string name="autosend_sending">自动发送中...</string>
   <string name="summary_autosend">自动发送：</string>
   <string name="pref_autosend_title">自动发送、 电子邮件和上传</string>

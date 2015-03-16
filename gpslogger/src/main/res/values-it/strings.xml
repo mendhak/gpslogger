@@ -202,7 +202,7 @@
   <string name="autosend_sendzip_title">Invia file ZIP</string>
   <string name="autosend_sendzip_summary">Invia file ZIP (se possibile). Disabilita per inviare files singoli</string>
   <string name="autosend_targets_category">Configurazioni per invio automatico</string>
-  <string name="menu_email_now">Invia automaticamente ora</string>
+  <string name="menu_autosend_now">Invia automaticamente ora</string>
   <string name="autosend_sending">Invio automatico</string>
   <string name="summary_autosend">Invio automatico:</string>
   <string name="pref_autosend_title">Invio automatico, email e upload</string>
