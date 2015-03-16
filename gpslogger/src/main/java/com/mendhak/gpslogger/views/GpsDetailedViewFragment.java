@@ -185,33 +185,40 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             showCurrentFileName(Session.getCurrentFileName());
 
 
-            StringBuilder sb = new StringBuilder();
-            if (AppSettings.isEmailAutoSendEnabled() && Utilities.IsEmailSetup()) {
-                sb.append(getString(R.string.autoemail_title)).append("\n");
-            }
-
-            if (AppSettings.isFtpAutoSendEnabled() && Utilities.IsFtpSetup()) {
-                sb.append(getString(R.string.autoftp_setup_title)).append("\n");
-            }
-
-            if (AppSettings.isGDocsAutoSendEnabled() && GDocsHelper.IsLinked(getActivity().getApplicationContext())) {
-                sb.append(getString(R.string.gdocs_setup_title)).append("\n");
-            }
-
-            if (AppSettings.isOsmAutoSendEnabled() && OSMHelper.IsOsmAuthorized(getActivity().getApplicationContext())) {
-                sb.append(getString(R.string.osm_setup_title)).append("\n");
-            }
-
-            if (AppSettings.isDropboxAutoSendEnabled() && Utilities.IsDropBoxSetup(getActivity().getApplicationContext())) {
-                sb.append(getString(R.string.dropbox_setup_title)).append("\n");
-            }
-
-            if (AppSettings.isOpenGtsAutoSendEnabled() && Utilities.IsOpenGTSSetup()) {
-                sb.append(getString(R.string.opengts_setup_title)).append("\n");
-            }
-
             TextView txtTargets = (TextView) rootView.findViewById(R.id.detailedview_autosendtargets_text);
-            txtTargets.setText(sb.toString());
+
+            if(AppSettings.isAutoSendEnabled()){
+                StringBuilder sb = new StringBuilder();
+                if (AppSettings.isEmailAutoSendEnabled() && Utilities.IsEmailSetup()) {
+                    sb.append(getString(R.string.autoemail_title)).append("\n");
+                }
+
+                if (AppSettings.isFtpAutoSendEnabled() && Utilities.IsFtpSetup()) {
+                    sb.append(getString(R.string.autoftp_setup_title)).append("\n");
+                }
+
+                if (AppSettings.isGDocsAutoSendEnabled() && GDocsHelper.IsLinked(getActivity().getApplicationContext())) {
+                    sb.append(getString(R.string.gdocs_setup_title)).append("\n");
+                }
+
+                if (AppSettings.isOsmAutoSendEnabled() && OSMHelper.IsOsmAuthorized(getActivity().getApplicationContext())) {
+                    sb.append(getString(R.string.osm_setup_title)).append("\n");
+                }
+
+                if (AppSettings.isDropboxAutoSendEnabled() && Utilities.IsDropBoxSetup(getActivity().getApplicationContext())) {
+                    sb.append(getString(R.string.dropbox_setup_title)).append("\n");
+                }
+
+                if (AppSettings.isOpenGtsAutoSendEnabled() && Utilities.IsOpenGTSSetup()) {
+                    sb.append(getString(R.string.opengts_setup_title)).append("\n");
+                }
+
+                txtTargets.setText(sb.toString());
+            }
+            else {
+                txtTargets.setText("");
+            }
+
 
 
         } catch (Exception ex) {
