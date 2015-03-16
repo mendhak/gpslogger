@@ -17,13 +17,26 @@
 
 package com.mendhak.gpslogger.views;
 
-import android.app.Activity;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Location;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.view.KeyEvent;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.events.CommandEvents;
+import com.mendhak.gpslogger.common.events.ServiceEvents;
+import de.greenrobot.event.EventBus;
 
 
 /**
@@ -31,30 +44,35 @@ import com.mendhak.gpslogger.R;
  * GpsViewCallbacks
  */
 public abstract class GenericViewFragment extends Fragment {
-    // Mechanism to talk back to parent
-    protected IGpsViewCallback gpsCallback;
 
-    public abstract void SetLocation(Location locationInfo);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        RegisterEventBus();
+    }
 
-    public abstract void SetSatelliteCount(int count);
+    private void RegisterEventBus() {
+        EventBus.getDefault().register(this);
+    }
 
-    public abstract void SetLoggingStarted();
+    private void UnregisterEventBus(){
+        try {
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
+    }
 
-    public abstract void SetLoggingStopped();
-
-    public abstract void OnWaitingForLocation(boolean inProgress);
-
-    public abstract void SetStatusMessage(String message);
-
-    public abstract void SetFatalMessage(String message);
-
-    public abstract void OnFileNameChange(String newFileName);
-
-    public abstract void OnNmeaSentence(long timestamp, String nmeaSentence);
+    @Override
+    public void onDestroy() {
+        UnregisterEventBus();
+        super.onDestroy();
+    }
 
 
-    public void OnLocationServicesUnavailable() {
 
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LocationServicesUnavailable locationServicesUnavailable){
         new MaterialDialog.Builder(getActivity())
                 //.title("Location services unavailable")
                 .content(R.string.gpsprovider_unavailable)
@@ -72,54 +90,64 @@ public abstract class GenericViewFragment extends Fragment {
     }
 
 
-    protected void requestStartLogging() {
-        if (gpsCallback != null) {
-            gpsCallback.onRequestStartLogging();
+    public void RequestToggleLogging(){
+
+        if(Session.isStarted()){
+            ToggleLogging();
+            return;
+        }
+
+        Utilities.PopulateAppSettings(getActivity());
+        if(AppSettings.isCustomFile()  && AppSettings.shouldAskCustomFileNameEachTime()){
+
+            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+            MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
+                    .title(R.string.new_file_custom_title)
+                    .customView(R.layout.alertview)
+                    .positiveText(R.string.ok)
+                    .callback(new MaterialDialog.ButtonCallback() {
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                            String chosenFileName = AppSettings.getCustomFileName();
+                            EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
+
+                            if (!Utilities.IsNullOrEmpty(userInput.getText().toString()) && !userInput.getText().toString().equalsIgnoreCase(chosenFileName)) {
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString("new_file_custom_name", userInput.getText().toString());
+                                editor.apply();
+                            }
+                            ToggleLogging();
+                        }
+                    })
+                    .keyListener(new DialogInterface.OnKeyListener() {
+                        @Override
+                        public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                                ToggleLogging();
+                                dialog.dismiss();
+                            }
+                            return true;
+                        }
+                    })
+                    .build();
+
+            EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
+            userInput.setText(AppSettings.getCustomFileName());
+            TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
+            tvMessage.setText(R.string.new_file_custom_message);
+            alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            alertDialog.show();
+
+        }
+        else {
+            ToggleLogging();
         }
     }
 
-    protected void requestStopLogging() {
-        if (gpsCallback != null) {
-            gpsCallback.onRequestStopLogging();
-        }
-    }
-
-    protected void requestToggleLogging() {
-        if (gpsCallback != null) {
-            gpsCallback.onRequestToggleLogging();
-        }
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        if (activity instanceof IGpsViewCallback) {
-            gpsCallback = (IGpsViewCallback) activity;
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-        if (gpsCallback != null) {
-            gpsCallback = null;
-        }
+    public void ToggleLogging(){
+        EventBus.getDefault().post(new CommandEvents.RequestToggle());
     }
 
 
-
-
-    /**
-     * Interface used by the different fragments to communicate with the parent activity
-     * which should implement this interface.
-     */
-    public static interface IGpsViewCallback {
-        public void onRequestStartLogging();
-
-        public void onRequestStopLogging();
-
-        public void onRequestToggleLogging();
-    }
 }

@@ -19,26 +19,21 @@ package com.mendhak.gpslogger.senders.email;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.*;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.IActionListener;
+import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
-import org.slf4j.LoggerFactory;
+import de.greenrobot.event.EventBus;
 
 public class AutoEmailFragment extends PreferenceValidationFragment implements
-        OnPreferenceChangeListener,  IActionListener,
-        OnPreferenceClickListener {
-
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoEmailFragment.class.getSimpleName());
-    private final Handler handler = new Handler();
-
+        OnPreferenceChangeListener,  OnPreferenceClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,8 +57,26 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
 
         testEmailPref.setOnPreferenceClickListener(this);
 
+        RegisterEventBus();
     }
 
+    @Override
+    public void onDestroy() {
+        UnregisterEventBus();
+        super.onDestroy();
+    }
+
+    private void RegisterEventBus() {
+        EventBus.getDefault().register(this);
+    }
+
+    private void UnregisterEventBus(){
+        try {
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
+    }
 
     public boolean onPreferenceClick(Preference preference) {
 
@@ -71,7 +84,12 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
             Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
                     getString(R.string.autoemail_invalid_form_message),
                     getActivity());
-            return false;
+            return true;
+        }
+
+        if (!Utilities.isNetworkAvailable(getActivity())) {
+            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.no_network_message), getActivity());
+            return true;
         }
 
         Utilities.ShowProgress(getActivity(), getString(R.string.autoemail_sendingtest),
@@ -85,12 +103,10 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
         MaterialEditTextPreference txtTarget = (MaterialEditTextPreference) findPreference("autoemail_target");
         MaterialEditTextPreference txtFrom = (MaterialEditTextPreference) findPreference("smtp_from");
 
-
-        AutoEmailHelper aeh = new AutoEmailHelper(null);
+        AutoEmailHelper aeh = new AutoEmailHelper();
         aeh.SendTestEmail(txtSmtpServer.getText(), txtSmtpPort.getText(),
                 txtUsername.getText(), txtPassword.getText(),
-                chkUseSsl.isChecked(), txtTarget.getText(), txtFrom.getText(),
-                AutoEmailFragment.this);
+                chkUseSsl.isChecked(), txtTarget.getText(), txtFrom.getText());
 
         return true;
     }
@@ -159,47 +175,26 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
         chkUseSsl.setChecked(useSsl);
         editor.putBoolean("smtp_ssl", useSsl);
 
-        editor.commit();
+        editor.apply();
 
     }
 
-
-    private final Runnable successfullySent = new Runnable() {
-        public void run() {
-            SuccessfulSending();
-        }
-    };
-
-    private final Runnable failedSend = new Runnable() {
-
-        public void run() {
-            FailureSending();
-        }
-    };
-
-    private void FailureSending() {
-        Utilities.HideProgress();
-        Utilities.MsgBox(getString(R.string.sorry), getString(R.string.error_connection), getActivity());
-    }
-
-    private void SuccessfulSending() {
-        Utilities.HideProgress();
-        Utilities.MsgBox(getString(R.string.success),
-                getString(R.string.autoemail_testresult_success), getActivity());
-    }
-
-    public void OnComplete() {
-        handler.post(successfullySent);
-    }
-
-    public void OnFailure() {
-
-        handler.post(failedSend);
-
-    }
 
     @Override
     public boolean IsValid() {
         return IsFormValid();
+    }
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.AutoEmail o){
+
+        Utilities.HideProgress();
+
+        if(o.success){
+            Utilities.MsgBox(getString(R.string.success),
+                    getString(R.string.autoemail_testresult_success), getActivity());
+        } else {
+            Utilities.MsgBox(getString(R.string.sorry), getString(R.string.error_connection), getActivity());
+        }
     }
 }

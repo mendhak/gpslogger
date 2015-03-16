@@ -31,7 +31,6 @@
   <string name="summary_dist_regardless">maxim</string>
   <string name="summary_current_filename">Fişier:</string>
   <string name="sharing_location_only">Doar locaţie</string>
-  <string name="sharing_pick_file">Alegeţi un fişier pentru a distribui</string>
   <string name="sharing_mylocation">Locaţia mea</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Distribuie prin</string>
@@ -41,7 +40,6 @@
   <string name="meters">&#160;metri</string>
   <string name="error">Eroare</string>
   <string name="error_connection">Eroare de conexiune. Vă rugăm să verificaţi setările telefonului.</string>
-  <string name="gpsprovider_unavailable">Nici un GPS provider disponibil. Vă rugăm să verificaţi setările de locaţie şi  activati un furnizor de locaţie GPS.</string>
   <string name="started">Pornit</string>
   <string name="providername_gps">Sateliţi GPS</string>
   <string name="providername_celltower">antene de GSM</string>
@@ -113,8 +111,6 @@
   <string name="startonbootup_summary">Porneste aplicatia şi începe înregistrarea atunci când telefonul este pornit.</string>
   <string name="autoemail_summary">Trimite e-mailuri automat cu fisierele de log la o adresă prestabilita.</string>
   <string name="please_wait">Vă rugăm aşteptaţi.</string>
-  <string name="autoemail_autosend">Permite E-mailuri</string>
-  <string name="autoemail_autosend_summary">Permite trimiterea fisierelor de log la o adresă de e-mail de alegerea dvs.     </string>
   <string name="autoemail_target">Adrese de email destinaţie</string>
   <string name="autoemail_frequency_whenistop">Atunci când apăsaţi stop</string>
   <string name="autoemail_smtp_category">Setări de e-mail</string>
@@ -142,7 +138,6 @@
   <string name="stopped">Oprit</string>
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Seteaza Tag-uri, descriere, vizibilitate şi autorizare pentru încărcarea traseelor GPS</string>
-  <string name="osm_preferences_title">Preferinţe OpenStreetMap</string>
   <string name="osm_lbl_authorize">Autorizeaza aceasta aplicatie</string>
   <string name="osm_lbl_authorize_description">Va trebui să acordati acestei aplicatii permisiuni pentru a încărca trasee GPS la OpenStreetMap. Puteţi seta Tag-uri, descrieri şi vizibilitate aici după ce ati autorizat aceasta aplicatie.</string>
   <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
@@ -163,7 +158,6 @@
   <string name="osm_pick_file">Alege un fisier pentru a încărca</string>
   <string name="debuglog_title">Scrie in fişier de debug</string>
   <string name="debuglog_summary">Scrie mesaje de debug intr-un fişier de pe cardul SD. Avertisment: Fişierul creste foarte repede.     </string>
-  <string name="pref_logging_summary">Timp, distanta, creere fişier</string>
   <string name="pref_general_title">Opţiuni generale</string>
   <string name="pref_general_summary">Opţiunile de pornire şi afişare</string>
   <string name="emailprovider_google">Google Mail</string>
@@ -207,7 +201,6 @@
   <string name="log_opengts_summary">Trimite GPRMC data la un server de OpenGTS online.</string>
   <string name="opengts_setup_summary">Trimite trasee GPS la un server de OpenGTS predefinit.</string>
   <string name="opengts_enabled">Activeaza OpenGTS</string>
-  <string name="opengts_enabled_summary">Activeaza acest server OpenGTS.</string>
   <string name="autoopengts_autosend">Activează trimitere automata</string>
   <string name="autoopengts_autosend_summary">Permite trimiterea automata a traseelor de GPS.</string>
   <string name="autoopengts_server_category">Setările OpenGTS</string>
@@ -242,7 +235,6 @@
   <string name="autoftp_testing">Testare incarcare fisier pe FTP</string>
   <string name="autoftp_invalid_settings">Setări invalide</string>
   <string name="autoftp_invalid_summary">Unele dintre setări sunt incorecte. Asiguraţi-vă că aţi completat toate câmpurile relevante.     </string>
-  <string name="autoftp_enabled">FTP activat</string>
   <string name="ftp_upload">FTP upload</string>
   <string name="autoftp_setup_summary">Încărcaţi fişierele la un server FTP (S). Notă: Aceasta setare nu acoperă SFTP.</string>
   <string name="faq_screen_title">Întrebări frecvente</string>
@@ -251,7 +243,6 @@
   <string name="gpsf_missing_description">Veţi avea nevoie de Google Play Services Framework pentru a utiliza această functionalitate.</string>
   <string name="log_customurl_title">Logheaza in URL-ul personalizat</string>
   <string name="log_customurl_summary">Trimite informaţii de conectare pentru propriul server prin HTTP</string>
-  <string name="log_customurl_urlparameters">Parametrii de URL</string>
   <string name="txt_annotation">Adnotare:</string>
   <string name="txt_time_isoformat">Ora UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Furnizor:</string>

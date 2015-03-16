@@ -19,7 +19,6 @@ package com.mendhak.gpslogger.senders;
 
 import android.content.Context;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
@@ -40,36 +39,31 @@ public class FileSenderFactory {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FileSenderFactory.class.getSimpleName());
 
-    public static IFileSender GetOsmSender(Context applicationContext, IActionListener callback) {
-        return new OSMHelper(applicationContext, callback);
+    public static IFileSender GetOsmSender(Context applicationContext) {
+        return new OSMHelper(applicationContext);
     }
 
-    public static IFileSender GetDropBoxSender(Context applicationContext, IActionListener callback) {
-        return new DropBoxHelper(applicationContext, callback);
+    public static IFileSender GetDropBoxSender(Context applicationContext) {
+        return new DropBoxHelper(applicationContext);
     }
 
-    public static IFileSender GetGDocsSender(Context applicationContext, IActionListener callback) {
-        return new GDocsHelper(applicationContext, callback);
+    public static IFileSender GetGDocsSender(Context applicationContext) {
+        return new GDocsHelper(applicationContext);
     }
 
-    public static IFileSender GetEmailSender(IActionListener callback) {
-        return new AutoEmailHelper(callback);
+    public static IFileSender GetEmailSender(Context applicationContext) {
+        return new AutoEmailHelper();
     }
 
-    public static IFileSender GetOpenGTSSender(Context applicationContext, IActionListener callback) {
-        return new OpenGTSHelper(applicationContext, callback);
+    public static IFileSender GetOpenGTSSender(Context applicationContext) {
+        return new OpenGTSHelper();
     }
 
-    public static IFileSender GetFtpSender(Context applicationContext, IActionListener callback) {
-        return new FtpHelper(callback);
+    public static IFileSender GetFtpSender(Context applicationContext) {
+        return new FtpHelper();
     }
 
-    public static void SendFiles(Context applicationContext, IActionListener callback) {
-
-        if(!Utilities.isNetworkAvailable(applicationContext)){
-            tracer.error("No network available, files will not be auto-sent.");
-            return;
-        }
+    public static void SendFiles(Context applicationContext) {
 
         final String currentFileName = Session.getCurrentFileName();
         tracer.info("Sending file " + currentFileName);
@@ -77,7 +71,7 @@ public class FileSenderFactory {
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
         if (Utilities.GetFilesInFolder(gpxFolder).length < 1) {
-            callback.OnFailure();
+            tracer.warn("No files found to send.");
             return;
         }
 
@@ -88,8 +82,10 @@ public class FileSenderFactory {
             }
         })));
 
+        List<File> zipFiles = new ArrayList<>();
+
         if (files.size() == 0) {
-            callback.OnFailure();
+            tracer.warn("No files found to send after filtering.");
             return;
         }
 
@@ -105,51 +101,57 @@ public class FileSenderFactory {
             ZipHelper zh = new ZipHelper(filePaths.toArray(new String[filePaths.size()]), zipFile.getAbsolutePath());
             zh.Zip();
 
-            files.clear();
-            files.add(zipFile);
+            zipFiles.clear();
+            zipFiles.add(zipFile);
         }
 
-        List<IFileSender> senders = GetFileSenders(applicationContext, callback);
+        List<IFileSender> senders = GetFileSenders(applicationContext);
 
         for (IFileSender sender : senders) {
-            sender.UploadFile(files);
+            tracer.debug("Sender: " + sender.getClass().getName());
+            //Special case for OSM Uploader
+            if(!sender.accept(null, ".zip")){
+                sender.UploadFile(files);
+                continue;
+            }
+
+            if(AppSettings.shouldSendZipFile()){
+                sender.UploadFile(zipFiles);
+            } else {
+                sender.UploadFile(files);
+            }
+
         }
     }
 
 
-    public static List<IFileSender> GetFileSenders(Context applicationContext, IActionListener callback) {
+    private static List<IFileSender> GetFileSenders(Context applicationContext) {
         List<IFileSender> senders = new ArrayList<IFileSender>();
 
-        if (GDocsHelper.IsLinked(applicationContext)) {
-            tracer.debug("Google Docs Sender picked");
-            senders.add(new GDocsHelper(applicationContext, callback));
+        if (AppSettings.isGDocsAutoSendEnabled() && GDocsHelper.IsLinked(applicationContext)) {
+            senders.add(new GDocsHelper(applicationContext));
         }
 
-        if (OSMHelper.IsOsmAuthorized(applicationContext)) {
-            tracer.debug("OSM Sender picked");
-            senders.add(new OSMHelper(applicationContext, callback));
+        if (AppSettings.isOsmAutoSendEnabled() && OSMHelper.IsOsmAuthorized(applicationContext)) {
+            senders.add(new OSMHelper(applicationContext));
         }
 
-        if (AppSettings.isAutoEmailEnabled()) {
-            tracer.debug("Email Sender picked");
-            senders.add(new AutoEmailHelper(callback));
+        if (AppSettings.isEmailAutoSendEnabled()) {
+            senders.add(new AutoEmailHelper());
         }
 
-        DropBoxHelper dh = new DropBoxHelper(applicationContext, callback);
+        DropBoxHelper dh = new DropBoxHelper(applicationContext);
 
-        if (dh.IsLinked()) {
-            tracer.debug("DropBox Sender picked");
+        if (AppSettings.isDropboxAutoSendEnabled() &&  dh.IsLinked()) {
             senders.add(dh);
         }
 
-        if (AppSettings.isAutoOpenGTSEnabled()) {
-            tracer.debug("OpenGTS Sender picked");
-            senders.add(new OpenGTSHelper(applicationContext, callback));
+        if (AppSettings.isOpenGtsAutoSendEnabled()) {
+            senders.add(new OpenGTSHelper());
         }
 
-        if (AppSettings.isAutoFtpEnabled()) {
-            tracer.debug("FTP Sender picked");
-            senders.add(new FtpHelper(callback));
+        if (AppSettings.isFtpAutoSendEnabled()) {
+            senders.add(new FtpHelper());
         }
 
         return senders;

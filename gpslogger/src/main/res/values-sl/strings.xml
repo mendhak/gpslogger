@@ -33,7 +33,6 @@
   <string name="summary_dist_regardless">največja</string>
   <string name="summary_current_filename">Datoteka:</string>
   <string name="sharing_location_only">Samo lokacija</string>
-  <string name="sharing_pick_file">Izberite datoteko za deliti</string>
   <string name="sharing_mylocation">Moja lokacija</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Deli preko</string>
@@ -43,7 +42,6 @@
   <string name="meters">&#160;metrov</string>
   <string name="error">Napaka</string>
   <string name="error_connection">Napake pri povezavi. Prosimo, preverite vaše nastavitve telefona.</string>
-  <string name="gpsprovider_unavailable">Ponudnik GPS ni na voljo. Preverite nastavitve mesta in omogoči namestitev ponudnika     </string>
   <string name="started">Začel</string>
   <string name="providername_gps">GPS sateliti</string>
   <string name="providername_celltower">GSM stolpi</string>
@@ -92,8 +90,6 @@
   <string name="startonbootup_summary">Zagon app in začetek pisanja dnevnika, ko prižgete telefon</string>
   <string name="autoemail_summary">Samodejno pošlje email dnevnik na naslov po vaši izbiri</string>
   <string name="please_wait">Počakaj, prosim.</string>
-  <string name="autoemail_autosend">Omogoči e-pošto</string>
-  <string name="autoemail_autosend_summary">Omogoča pošiljanje dnevnika na e-poštni naslov po vaši izbiri.     </string>
   <string name="autoemail_target">Ciljni e-poštni naslovi</string>
   <string name="autoemail_frequency_whenistop">Kdaj pritisnem stop</string>
   <string name="autoemail_smtp_category">Nastavitve e-pošte</string>
@@ -136,6 +132,5 @@
   <string name="log_opengts_summary">Pošlji GPRMC podatke v spletni strežnik OpenGTS.</string>
   <string name="opengts_setup_summary">Pošlji GPS sledi v OpenGTS strežnik po vaši izbiri.</string>
   <string name="opengts_enabled">Omogoči OpenGTS</string>
-  <string name="opengts_enabled_summary">Omogoči ta strežnik OpenGTS.</string>
   <string name="autoopengts_autosend">Omogoči samodejno pošiljanje</string>
 </resources>

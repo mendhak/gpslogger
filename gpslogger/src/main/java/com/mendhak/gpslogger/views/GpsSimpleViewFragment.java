@@ -34,8 +34,10 @@ import android.widget.Toast;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.events.ServiceEvents;
 import org.slf4j.LoggerFactory;
 import java.text.NumberFormat;
 
@@ -86,18 +88,13 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Session.isStarted()){
-                    requestStopLogging();
-                }
-                else {
-                    requestStartLogging();
-                }
+                RequestToggleLogging();
             }
         });
 
 
         if (Session.hasValidLocation()) {
-            SetLocation(Session.getCurrentLocationInfo());
+            DisplayLocationInfo(Session.getCurrentLocationInfo());
         }
 
 
@@ -282,9 +279,41 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     }
 
 
-    @Override
-    public void SetLocation(Location locationInfo) {
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LocationUpdate locationUpdate){
+        DisplayLocationInfo(locationUpdate.location);
+    }
 
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.SatelliteCount satelliteCount){
+        SetSatelliteCount(satelliteCount.satelliteCount);
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.WaitingForLocation waitingForLocation){
+        OnWaitingForLocation(waitingForLocation.waiting);
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LoggingStatus loggingStatus){
+
+        if(loggingStatus.loggingStarted){
+            showPreferencesSummary();
+            clearLocationDisplay();
+            setActionButtonStop();
+        }
+        else {
+            SetSatelliteCount(-1);
+            setActionButtonStart();
+        }
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.FileNamed fileNamed){
+        showCurrentFileName(fileNamed.newFileName);
+    }
+
+    public void DisplayLocationInfo(Location locationInfo){
         showPreferencesSummary();
 
         NumberFormat nf = NumberFormat.getInstance();
@@ -368,8 +397,8 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         if (!providerName.equalsIgnoreCase("gps")) {
             SetSatelliteCount(-1);
         }
-
     }
+
 
     private void clearLocationDisplay() {
 
@@ -414,7 +443,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
 
 
-    @Override
     public void SetSatelliteCount(int count) {
         ImageView imgSatelliteCount = (ImageView) rootView.findViewById(R.id.simpleview_imgSatelliteCount);
         TextView txtSatelliteCount = (TextView) rootView.findViewById(R.id.simpleview_txtSatelliteCount);
@@ -435,26 +463,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     }
 
-    @Override
-    public void SetLoggingStarted() {
-        tracer.debug("GpsSimpleViewFragment.SetLoggingStarted");
-        showPreferencesSummary();
-        clearLocationDisplay();
-
-        tracer.debug(".");
-        setActionButtonStop();
-    }
-
-    @Override
-    public void SetLoggingStopped() {
-
-        tracer.debug(".");
-        SetSatelliteCount(-1);
-
-        setActionButtonStart();
-    }
-
-    @Override
     public void OnWaitingForLocation(boolean inProgress) {
 
         tracer.debug(inProgress + "");
@@ -475,25 +483,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         }
     }
 
-    @Override
-    public void SetStatusMessage(String message) {
-
-    }
-
-    @Override
-    public void SetFatalMessage(String message) {
-
-    }
-
-    @Override
-    public void OnFileNameChange(String newFileName) {
-        showCurrentFileName(newFileName);
-    }
-
-    @Override
-    public void OnNmeaSentence(long timestamp, String nmeaSentence) {
-
-    }
 
     @Override
     public void onClick(View view) {

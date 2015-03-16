@@ -1,24 +1,10 @@
-/*
-*    This file is part of GPSLogger for Android.
-*
-*    GPSLogger for Android is free software: you can redistribute it and/or modify
-*    it under the terms of the GNU General Public License as published by
-*    the Free Software Foundation, either version 3 of the License, or
-*    (at your option) any later version.
-*
-*    GPSLogger for Android is distributed in the hope that it will be useful,
-*    but WITHOUT ANY WARRANTY; without even the implied warranty of
-*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*    GNU General Public License for more details.
-*
-*    You should have received a copy of the GNU General Public License
-*    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-
 package com.mendhak.gpslogger.senders.ftp;
 
 
+import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.path.android.jobqueue.Job;
+import com.path.android.jobqueue.Params;
+import de.greenrobot.event.EventBus;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPSClient;
@@ -26,17 +12,47 @@ import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
-public class Ftp {
+public class FtpJob extends Job {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Ftp.class.getSimpleName());
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FtpJob.class.getSimpleName());
+
+    String server;
+    int port;
+    String username;
+    String password;
+    boolean useFtps;
+    String protocol;
+    boolean implicit;
+    File gpxFile;
+    String fileName;
+    String directory;
+
+    protected FtpJob(String server, int port, String username,
+                     String password, String directory, boolean useFtps, String protocol, boolean implicit,
+                     File gpxFile, String fileName) {
+        super(new Params(1).requireNetwork().persist());
+
+        this.server = server;
+        this.port = port;
+        this.username = username;
+        this.password = password;
+        this.useFtps = useFtps;
+        this.protocol = protocol;
+        this.implicit = implicit;
+        this.gpxFile = gpxFile;
+        this.fileName = fileName;
+        this.directory = directory;
+
+    }
 
     public synchronized static boolean Upload(String server, String username, String password, String directory, int port,
-                                 boolean useFtps, String protocol, boolean implicit,
-                                 InputStream inputStream, String fileName) {
-        FTPClient client = null;
+                                              boolean useFtps, String protocol, boolean implicit,
+                                              File gpxFile, String fileName) {
+        FTPClient client;
 
         try {
             if (useFtps) {
@@ -57,29 +73,27 @@ public class Ftp {
 
 
         try {
-            tracer.debug("Connecting to FTP");
+
             client.connect(server, port);
             showServerReply(client);
 
-            tracer.debug("Logging in to FTP server");
+
             if (client.login(username, password)) {
                 client.enterLocalPassiveMode();
                 showServerReply(client);
 
                 tracer.debug("Uploading file to FTP server " + server);
-
                 tracer.debug("Checking for FTP directory " + directory);
                 FTPFile[] existingDirectory = client.listFiles(directory);
                 showServerReply(client);
 
                 if (existingDirectory.length <= 0) {
                     tracer.debug("Attempting to create FTP directory " + directory);
-                    //client.makeDirectory(directory);
                     ftpCreateDirectoryTree(client, directory);
                     showServerReply(client);
-
                 }
 
+                FileInputStream inputStream = new FileInputStream(gpxFile);
                 client.changeWorkingDirectory(directory);
                 boolean result = client.storeFile(fileName, inputStream);
                 inputStream.close();
@@ -101,11 +115,9 @@ public class Ftp {
             return false;
         } finally {
             try {
-                tracer.debug("Logging out of FTP server");
                 client.logout();
                 showServerReply(client);
 
-                tracer.debug("Disconnecting from FTP server");
                 client.disconnect();
                 showServerReply(client);
             } catch (Exception e) {
@@ -147,5 +159,30 @@ public class Ftp {
                 tracer.debug("FTP SERVER: " + aReply);
             }
         }
+    }
+
+    @Override
+    public void onAdded() {
+
+    }
+
+    @Override
+    public void onRun() throws Throwable {
+        if (Upload(server, username, password, directory, port, useFtps, protocol, implicit, gpxFile, fileName)) {
+            EventBus.getDefault().post(new UploadEvents.Ftp(true));
+        } else {
+            EventBus.getDefault().post(new UploadEvents.Ftp(false));
+        }
+    }
+
+    @Override
+    protected void onCancel() {
+        EventBus.getDefault().post(new UploadEvents.Ftp(false));
+    }
+
+    @Override
+    protected boolean shouldReRunOnThrowable(Throwable throwable) {
+        tracer.error("Could not FTP file", throwable);
+        return false;
     }
 }

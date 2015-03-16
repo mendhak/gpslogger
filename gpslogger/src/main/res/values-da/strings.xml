@@ -31,7 +31,6 @@
   <string name="summary_dist_regardless">maksimal</string>
   <string name="summary_current_filename">Fil:</string>
   <string name="sharing_location_only">Kun placering</string>
-  <string name="sharing_pick_file">Vælg en fil til at dele</string>
   <string name="sharing_mylocation">Min placering</string>
   <string name="sharing_via">Del via</string>
   <string name="foot">&#160;fod</string>
@@ -40,7 +39,6 @@
   <string name="meters">&#160;meter</string>
   <string name="error">Fejl</string>
   <string name="error_connection">Forbindelsesfejl. Kontrollere dine telefonindstillinger.</string>
-  <string name="gpsprovider_unavailable">Ingen GPS udbydere tilgængelige. Kontroller indstillingerne for placering, og aktivere en udbyder af placering.</string>
   <string name="started">Startet</string>
   <string name="providername_gps">GPS-satellitter</string>
   <string name="providername_celltower">mobilmaster</string>
@@ -106,7 +104,6 @@
   <string name="startonbootup_summary">Åbn app og start logføring, når telefonen starter</string>
   <string name="autoemail_summary">Automatisk e-mail logfilen til en adresse efter eget valg</string>
   <string name="please_wait">Vent venligst.</string>
-  <string name="autoemail_autosend_summary">Aktiverer afsendelse logfilen til en e-mail-adresse du vælger.     </string>
   <string name="autoemail_frequency_whenistop">Når jeg trykker på stop</string>
   <string name="autoemail_smtp_category">E-mail-indstillinger</string>
   <string name="autoemail_username">Brugernavn</string>
@@ -133,7 +130,6 @@
   <string name="stopped">Afbrudt</string>
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Angive mærker, beskrivelse, synlighed og tilladelse til at uploade GPS spor     </string>
-  <string name="osm_preferences_title">OpenStreetMap Indstillinger</string>
   <string name="osm_lbl_authorize">Godkend denne app</string>
   <string name="osm_lbl_authorize_description">Du skal tildele denne app tilladelser for at uploade GPS spor til OpenStreetMap. Du kan angive mærker, beskrivelser og synlighed her efter du har tilladt dette app.</string>
   <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
@@ -154,7 +150,6 @@
   <string name="osm_pick_file">Vælg en fil til upload</string>
   <string name="debuglog_title">Skriv til debug-fil</string>
   <string name="debuglog_summary">Skriver debug beskeder til en fil på SD-kortet. Advarsel: Filen vokser meget hurtigt.</string>
-  <string name="pref_logging_summary">Tid, afstand, filoprettelse</string>
   <string name="pref_general_title">Generelle indstillinger</string>
   <string name="pref_general_summary">Start og visningsindstillinger</string>
   <string name="emailprovider_google">Google Mail</string>

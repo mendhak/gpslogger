@@ -31,7 +31,6 @@
   <string name="summary_dist_regardless">maksimum</string>
   <string name="summary_current_filename">Fil:</string>
   <string name="sharing_location_only">Berre plassering</string>
-  <string name="sharing_pick_file">Velj ei fil å dele</string>
   <string name="sharing_mylocation">Mi plassering</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Del via</string>
@@ -41,7 +40,6 @@
   <string name="meters">&#160;meter</string>
   <string name="error">Feil</string>
   <string name="error_connection">Tilkoblingsfeil. Sjekk telefoninnstillingane dine.</string>
-  <string name="gpsprovider_unavailable">Inga posisjonsteneste er tilgjengeleg. Sjekk posisjonsinnstillingane<br /> dine og slå på ei posisjonsteneste.<br /></string>
   <string name="started">Starta</string>
   <string name="providername_gps">GPS satellitter</string>
   <string name="providername_celltower">mobilnett</string>
@@ -111,8 +109,6 @@
   <string name="startonbootup_summary">Start app og start logging når telefonen blir slått på</string>
   <string name="autoemail_summary">Sender automatisk e-post med GPS-sporet til ei adresse du vel</string>
   <string name="please_wait">Vent.</string>
-  <string name="autoemail_autosend">Aktivere e-post</string>
-  <string name="autoemail_autosend_summary">Slår på automatisk sending av loggfila til ei e-postadresse du vel.<br /></string>
   <string name="autoemail_target">E-postadressen du vil sende til</string>
   <string name="autoemail_frequency_whenistop">Når eg trykker på stop</string>
   <string name="autoemail_smtp_category">Email Innstillinger</string>
@@ -140,7 +136,6 @@
   <string name="stopped">Stoppet</string>
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Set tag, beskrivelse, visning og bekreftelse for opplasting av GPS sport</string>
-  <string name="osm_preferences_title">OpenStreetMap innstillinger</string>
   <string name="osm_lbl_authorize">Godkjenn app\'en</string>
   <string name="osm_lbl_authorize_description">Du må gi denne app-tillatelser for å laste opp GPS spor til OpenStreetMap. Du kan angi koder, beskrivelser og synlighet her etter at du har godkjent app\'en.</string>
   <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
@@ -161,7 +156,6 @@
   <string name="osm_pick_file">Velg en fil du vil laste opp</string>
   <string name="debuglog_title">Skriv debug fil</string>
   <string name="debuglog_summary">Skriv debug fil på SD-kortet. Advarsel: Filen vokser veldig fort.     </string>
-  <string name="pref_logging_summary">Tid, avstand, filoppretting</string>
   <string name="pref_general_title">Generelle instillingar</string>
   <string name="pref_general_summary">Oppstarts- og visingsval</string>
   <string name="emailprovider_google">Gmail</string>
@@ -192,7 +186,6 @@
   <string name="autoftp_testing">Testing FTP Opplasting</string>
   <string name="autoftp_invalid_settings">Ugyldige innstillinger</string>
   <string name="autoftp_invalid_summary">Innstillingene er ugyldige. Kontroller at du har fylt ut alle relevante felt.</string>
-  <string name="autoftp_enabled">FTP aktivert</string>
   <string name="ftp_upload">FTP Opplasting</string>
   <string name="autoftp_setup_summary">Last opp filer til en FTP(S)-server. Merk: Dette gjelder ikke SFTP.</string>
   <string name="faq_screen_title">Vanlige spørsmål</string>

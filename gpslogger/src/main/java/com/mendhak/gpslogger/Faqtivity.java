@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -31,21 +32,24 @@ import org.slf4j.LoggerFactory;
 public class Faqtivity extends ActionBarActivity {
 
     WebView browser;
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Faqtivity.class.getSimpleName());
-
+    private org.slf4j.Logger tracer = LoggerFactory.getLogger(Faqtivity.class.getSimpleName());
     /**
      * Event raised when the form is created for the first time
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        try{
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_faq);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        tracer.debug("Faqtivity.onCreate");
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_faq);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        catch(Exception ex){
+            //http://stackoverflow.com/questions/26657348/appcompat-v7-v21-0-0-causing-crash-on-samsung-devices-with-android-v4-2-2
+            tracer.error("Thanks for this, Samsung", ex);
+        }
 
 
         browser = (WebView) findViewById(R.id.faqwebview);
@@ -53,13 +57,26 @@ public class Faqtivity extends ActionBarActivity {
         settings.setLoadWithOverviewMode(true);
         settings.setUseWideViewPort(true);
         settings.setBuiltInZoomControls(true);
+        settings.setDisplayZoomControls(false);
         settings.setJavaScriptEnabled(true);
 
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
         browser.loadUrl("http://code.mendhak.com/gpslogger/index.html");
+
     }
 
+    @Override
+    protected void onDestroy() {
+        setVisible(false);
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        setVisible(false);
+    }
 
     @Override
     protected void onStop() {

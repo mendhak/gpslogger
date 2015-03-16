@@ -17,30 +17,25 @@
 
 package com.mendhak.gpslogger.views;
 
-import android.content.ComponentName;
-import android.content.Intent;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -81,19 +76,13 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Session.isStarted()){
-                    requestStopLogging();
-                }
-                else {
-                    requestStartLogging();
-                }
+                RequestToggleLogging();
             }
         });
 
 
-
         if (Session.hasValidLocation()) {
-            SetLocation(Session.getCurrentLocationInfo());
+            DisplayLocationInfo(Session.getCurrentLocationInfo());
         }
 
         showPreferencesSummary();
@@ -135,107 +124,12 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         super.onResume();
     }
 
-    @Override
-    public void SetLocation(Location locationInfo) {
-        if (locationInfo == null) {
-            return;
-        }
-
-        showPreferencesSummary();
-
-        TextView tvLatitude = (TextView) rootView.findViewById(R.id.detailedview_lat_text);
-        TextView tvLongitude = (TextView) rootView.findViewById(R.id.detailedview_lon_text);
-        TextView tvDateTime = (TextView) rootView.findViewById(R.id.detailedview_datetime_text);
-
-        TextView tvAltitude = (TextView) rootView.findViewById(R.id.detailedview_altitude_text);
-
-        TextView txtSpeed = (TextView) rootView.findViewById(R.id.detailedview_speed_text);
-
-        TextView txtSatellites = (TextView) rootView.findViewById(R.id.detailedview_satellites_text);
-        TextView txtDirection = (TextView) rootView.findViewById(R.id.detailedview_direction_text);
-        TextView txtAccuracy = (TextView) rootView.findViewById(R.id.detailedview_accuracy_text);
-        TextView txtTravelled = (TextView) rootView.findViewById(R.id.detailedview_travelled_text);
-        TextView txtTime = (TextView) rootView.findViewById(R.id.detailedview_duration_text);
-        String providerName = locationInfo.getProvider();
-        if (providerName.equalsIgnoreCase("gps")) {
-            providerName = getString(R.string.providername_gps);
-        } else {
-            providerName = getString(R.string.providername_celltower);
-        }
-
-        tvDateTime.setText(new Date(Session.getLatestTimeStamp()).toLocaleString() + " - " + providerName);
-
-        NumberFormat nf = NumberFormat.getInstance();
-
-
-        nf.setMaximumFractionDigits(6);
-        tvLatitude.setText(String.valueOf(nf.format(locationInfo.getLatitude())));
-        tvLongitude.setText(String.valueOf(nf.format(locationInfo.getLongitude())));
-
-        nf.setMaximumFractionDigits(3);
-
-        if (locationInfo.hasAltitude()) {
-            tvAltitude.setText(Utilities.GetDistanceDisplay(getActivity(), locationInfo.getAltitude(), AppSettings.shouldUseImperial()));
-        } else {
-            tvAltitude.setText(R.string.not_applicable);
-        }
-
-        if (locationInfo.hasSpeed()) {
-            txtSpeed.setText(Utilities.GetSpeedDisplay(getActivity(), locationInfo.getSpeed(), AppSettings.shouldUseImperial()));
-
-        } else {
-            txtSpeed.setText(R.string.not_applicable);
-        }
-
-        if (locationInfo.hasBearing()) {
-
-            float bearingDegrees = locationInfo.getBearing();
-            String direction;
-
-            direction = Utilities.GetBearingDescription(bearingDegrees, getActivity().getApplicationContext());
-
-            txtDirection.setText(direction + "(" + String.valueOf(Math.round(bearingDegrees))
-                    + getString(R.string.degree_symbol) + ")");
-        } else {
-            txtDirection.setText(R.string.not_applicable);
-        }
-
-        if (!Session.isUsingGps()) {
-            txtSatellites.setText(R.string.not_applicable);
-        }
-
-        if (locationInfo.hasAccuracy()) {
-
-            float accuracy = locationInfo.getAccuracy();
-            txtAccuracy.setText(getString(R.string.accuracy_within, Utilities.GetDistanceDisplay(getActivity(), accuracy, AppSettings.shouldUseImperial()), ""));
-
-        } else {
-            txtAccuracy.setText(R.string.not_applicable);
-        }
-
-
-        double distanceValue = Session.getTotalTravelled();
-        txtTravelled.setText(Utilities.GetDistanceDisplay(getActivity(), distanceValue, AppSettings.shouldUseImperial()) + " (" + Session.getNumLegs() + " points)");
-
-        long startTime = Session.getStartTimeStamp();
-        Date d = new Date(startTime);
-        long currentTime = System.currentTimeMillis();
-
-        String duration = Utilities.GetDescriptiveTimeString((int)(currentTime - startTime)/1000, getActivity());
-
-        DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());
-        txtTime.setText(duration + " (started at " + dateFormat.format(d) + " " + timeFormat.format(d) + ")");
-
-    }
-
-
     /**
      * Displays a human readable summary of the preferences chosen by the user
      * on the main form
      */
     private void showPreferencesSummary() {
-        tracer.debug("GpsDetailedViewFragment.showPreferencesSummary");
+
         try {
             TextView txtLoggingTo = (TextView) rootView.findViewById(R.id.detailedview_loggingto_text);
             TextView txtFrequency = (TextView) rootView.findViewById(R.id.detailedview_frequency_text);
@@ -342,18 +236,9 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     }
 
 
-    @Override
     public void SetSatelliteCount(int count) {
-
         TextView txtSatellites = (TextView) rootView.findViewById(R.id.detailedview_satellites_text);
         txtSatellites.setText(String.valueOf(count));
-    }
-
-    @Override
-    public void SetLoggingStarted() {
-        setActionButtonStop();
-        showPreferencesSummary();
-        ClearDisplay();
     }
 
     private void ClearDisplay() {
@@ -385,40 +270,135 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     }
 
-    @Override
-    public void SetLoggingStopped() {
-
-        setActionButtonStart();
-    }
-
-    @Override
-    public void OnWaitingForLocation(boolean inProgress) {
-
-    }
-
-    @Override
-    public void SetStatusMessage(String message) {
-
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.StatusMessage event){
         TextView txtStatus = (TextView) rootView.findViewById(R.id.detailedview_txtstatus);
-
-        txtStatus.setText(message);
+        txtStatus.setText(event.status);
         showPreferencesSummary();
     }
 
-    @Override
-    public void SetFatalMessage(String message) {
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.FatalMessage event){
         TextView txtStatus = (TextView) rootView.findViewById(R.id.detailedview_txtstatus);
-
-        txtStatus.setText(message);
+        txtStatus.setText(event.message);
     }
 
-    @Override
-    public void OnFileNameChange(String newFileName) {
-        showCurrentFileName(newFileName);
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LocationUpdate locationEvent){
+        DisplayLocationInfo(locationEvent.location);
     }
 
-    @Override
-    public void OnNmeaSentence(long timestamp, String nmeaSentence) {
-
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.SatelliteCount satelliteCount){
+        SetSatelliteCount(satelliteCount.satelliteCount);
     }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LoggingStatus loggingStatus){
+        if(loggingStatus.loggingStarted){
+            setActionButtonStop();
+            showPreferencesSummary();
+            ClearDisplay();
+        }
+        else {
+            setActionButtonStart();
+        }
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.FileNamed fileNamed){
+        showCurrentFileName(fileNamed.newFileName);
+    }
+
+    public void DisplayLocationInfo(Location locationInfo){
+        if (locationInfo == null) {
+            return;
+        }
+
+        showPreferencesSummary();
+
+        TextView tvLatitude = (TextView) rootView.findViewById(R.id.detailedview_lat_text);
+        TextView tvLongitude = (TextView) rootView.findViewById(R.id.detailedview_lon_text);
+        TextView tvDateTime = (TextView) rootView.findViewById(R.id.detailedview_datetime_text);
+
+        TextView tvAltitude = (TextView) rootView.findViewById(R.id.detailedview_altitude_text);
+
+        TextView txtSpeed = (TextView) rootView.findViewById(R.id.detailedview_speed_text);
+
+        TextView txtSatellites = (TextView) rootView.findViewById(R.id.detailedview_satellites_text);
+        TextView txtDirection = (TextView) rootView.findViewById(R.id.detailedview_direction_text);
+        TextView txtAccuracy = (TextView) rootView.findViewById(R.id.detailedview_accuracy_text);
+        TextView txtTravelled = (TextView) rootView.findViewById(R.id.detailedview_travelled_text);
+        TextView txtTime = (TextView) rootView.findViewById(R.id.detailedview_duration_text);
+        String providerName = locationInfo.getProvider();
+        if (providerName.equalsIgnoreCase("gps")) {
+            providerName = getString(R.string.providername_gps);
+        } else {
+            providerName = getString(R.string.providername_celltower);
+        }
+
+        tvDateTime.setText(new Date(Session.getLatestTimeStamp()).toLocaleString() + " - " + providerName);
+
+        NumberFormat nf = NumberFormat.getInstance();
+
+
+        nf.setMaximumFractionDigits(6);
+        tvLatitude.setText(String.valueOf(nf.format(locationInfo.getLatitude())));
+        tvLongitude.setText(String.valueOf(nf.format(locationInfo.getLongitude())));
+
+        nf.setMaximumFractionDigits(3);
+
+        if (locationInfo.hasAltitude()) {
+            tvAltitude.setText(Utilities.GetDistanceDisplay(getActivity(), locationInfo.getAltitude(), AppSettings.shouldUseImperial()));
+        } else {
+            tvAltitude.setText(R.string.not_applicable);
+        }
+
+        if (locationInfo.hasSpeed()) {
+            txtSpeed.setText(Utilities.GetSpeedDisplay(getActivity(), locationInfo.getSpeed(), AppSettings.shouldUseImperial()));
+
+        } else {
+            txtSpeed.setText(R.string.not_applicable);
+        }
+
+        if (locationInfo.hasBearing()) {
+
+            float bearingDegrees = locationInfo.getBearing();
+            String direction;
+
+            direction = Utilities.GetBearingDescription(bearingDegrees, getActivity().getApplicationContext());
+
+            txtDirection.setText(direction + "(" + String.valueOf(Math.round(bearingDegrees))
+                    + getString(R.string.degree_symbol) + ")");
+        } else {
+            txtDirection.setText(R.string.not_applicable);
+        }
+
+        if (!Session.isUsingGps()) {
+            txtSatellites.setText(R.string.not_applicable);
+        }
+
+        if (locationInfo.hasAccuracy()) {
+
+            float accuracy = locationInfo.getAccuracy();
+            txtAccuracy.setText(getString(R.string.accuracy_within, Utilities.GetDistanceDisplay(getActivity(), accuracy, AppSettings.shouldUseImperial()), ""));
+
+        } else {
+            txtAccuracy.setText(R.string.not_applicable);
+        }
+
+        double distanceValue = Session.getTotalTravelled();
+        txtTravelled.setText(Utilities.GetDistanceDisplay(getActivity(), distanceValue, AppSettings.shouldUseImperial()) + " (" + Session.getNumLegs() + " points)");
+
+        long startTime = Session.getStartTimeStamp();
+        Date d = new Date(startTime);
+        long currentTime = System.currentTimeMillis();
+
+        String duration = Utilities.GetDescriptiveTimeString((int)(currentTime - startTime)/1000, getActivity());
+
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());
+        txtTime.setText(duration + " (started at " + dateFormat.format(d) + " " + timeFormat.format(d) + ")");
+    }
+
 }

@@ -16,7 +16,6 @@
 */
 
 //TODO: Simplify email logic (too many methods)
-//TODO: Allow messages in IActionListener callback methods
 
 package com.mendhak.gpslogger;
 
@@ -34,27 +33,23 @@ import android.os.*;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.IActionListener;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.*;
+import com.mendhak.gpslogger.common.events.CommandEvents;
+import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
-import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.loggers.nmea.NmeaFileLogger;
 import com.mendhak.gpslogger.senders.AlarmReceiver;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
+import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
-public class GpsLoggingService extends Service implements IActionListener {
+public class GpsLoggingService extends Service  {
     private static NotificationManager notificationManager;
     private static int NOTIFICATION_ID = 8675309;
-    private static IGpsLoggerServiceClient mainServiceClient;
     private final IBinder binder = new GpsLoggingBinder();
     AlarmManager nextPointAlarmManager;
     private NotificationCompat.Builder nfc = null;
@@ -74,19 +69,9 @@ public class GpsLoggingService extends Service implements IActionListener {
     private long firstRetryTimeStamp;
     // ---------------------------------------------------
 
-    /**
-     * Sets the activity form for this service. The activity form needs to
-     * implement IGpsLoggerServiceClient.
-     *
-     * @param mainForm The calling client
-     */
-    protected static void SetServiceClient(IGpsLoggerServiceClient mainForm) {
-        mainServiceClient = mainForm;
-    }
 
     @Override
     public IBinder onBind(Intent arg0) {
-        tracer.debug(".");
         return binder;
     }
 
@@ -95,15 +80,26 @@ public class GpsLoggingService extends Service implements IActionListener {
         Utilities.ConfigureLogbackDirectly(getApplicationContext());
         tracer = LoggerFactory.getLogger(GpsLoggingService.class.getSimpleName());
 
-        tracer.debug(".");
         nextPointAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        RegisterEventBus();
     }
 
+    private void RegisterEventBus() {
+        EventBus.getDefault().registerSticky(this);
+    }
+
+    private void UnregisterEventBus(){
+        try {
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
+    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        tracer.debug(".");
         HandleIntent(intent);
         return START_REDELIVER_INTENT;
     }
@@ -111,19 +107,17 @@ public class GpsLoggingService extends Service implements IActionListener {
     @Override
     public void onDestroy() {
         tracer.warn("GpsLoggingService is being destroyed by Android OS.");
-        mainServiceClient = null;
+        UnregisterEventBus();
         super.onDestroy();
     }
 
     @Override
     public void onLowMemory() {
-        tracer.warn("Android is low on memory.");
+        tracer.warn("Android is low on memory!");
         super.onLowMemory();
     }
 
     private void HandleIntent(Intent intent) {
-
-        tracer.debug(".");
         GetPreferences();
 
         if (intent != null) {
@@ -132,100 +126,77 @@ public class GpsLoggingService extends Service implements IActionListener {
             if (bundle != null) {
                 boolean needToStartGpsManager = false;
 
-                boolean stopRightNow = bundle.getBoolean("immediatestop");
-                boolean startRightNow = bundle.getBoolean("immediatestart");
-                boolean sendEmailNow = bundle.getBoolean("emailAlarm");
-                boolean getNextPoint = bundle.getBoolean("getnextpoint");
-
-                tracer.debug("stopRightNow - " + String.valueOf(stopRightNow) + ", startRightNow - "
-                        + String.valueOf(startRightNow) + ", sendEmailNow - " + String.valueOf(sendEmailNow)
-                        + ", getNextPoint - " + String.valueOf(getNextPoint));
-
-                if (startRightNow) {
+                if (bundle.getBoolean(IntentConstants.IMMEDIATE_START)) {
                     tracer.info("Intent received - Start Logging Now");
-                    StartLogging();
+                    EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
                 }
 
-                if (stopRightNow) {
+                if (bundle.getBoolean(IntentConstants.IMMEDIATE_STOP)) {
                     tracer.info("Intent received - Stop logging now");
-                    StopLogging();
+                    EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(false));
                 }
 
-                if (sendEmailNow) {
-
+                if (bundle.getBoolean(IntentConstants.AUTOSEND_NOW)) {
                     tracer.debug("Intent received - Send Email Now");
-
-                    Session.setReadyToBeAutoSent(true);
-                    AutoSendLogFile();
+                    EventBus.getDefault().postSticky(new CommandEvents.AutoSend(true));
                 }
 
-                if (getNextPoint) {
+                if (bundle.getBoolean(IntentConstants.GET_NEXT_POINT)) {
                     tracer.debug("Intent received - Get Next Point");
                     needToStartGpsManager = true;
                 }
 
-                String setNextPointDescription = bundle.getString("setnextpointdescription");
-                if (setNextPointDescription != null) {
-                    tracer.debug("Intent received - Set Next Point Description: " + setNextPointDescription);
-
-                    final String desc = Utilities.CleanDescription(setNextPointDescription);
-                    if (desc.length() == 0) {
-                        tracer.debug("Clearing annotation");
-                        Session.clearDescription();
-                    } else {
-                        tracer.debug("Setting annotation: " + desc);
-                        Session.setDescription(desc);
-                    }
-                    needToStartGpsManager = true;
+                if (bundle.getString(IntentConstants.SET_DESCRIPTION) != null) {
+                    tracer.debug("Intent received - Set Next Point Description: " + bundle.getString(IntentConstants.SET_DESCRIPTION));
+                    EventBus.getDefault().post(new CommandEvents.Annotate(bundle.getString(IntentConstants.SET_DESCRIPTION)));
                 }
 
-                SharedPreferences prefs = PreferenceManager
-                        .getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-                if (bundle.get("setprefercelltower") != null) {
-                    boolean preferCellTower = bundle.getBoolean("setprefercelltower");
+                if (bundle.get(IntentConstants.PREFER_CELLTOWER) != null) {
+                    boolean preferCellTower = bundle.getBoolean(IntentConstants.PREFER_CELLTOWER);
                     tracer.debug("Intent received - Set Prefer Cell Tower: " + String.valueOf(preferCellTower));
-                    prefs.edit().putBoolean("prefer_celltower", preferCellTower).commit();
+                    prefs.edit().putBoolean("prefer_celltower", preferCellTower).apply();
                     needToStartGpsManager = true;
                 }
 
-                if (bundle.get("settimebeforelogging") != null) {
-                    int timeBeforeLogging = bundle.getInt("settimebeforelogging");
+                if (bundle.get(IntentConstants.TIME_BEFORE_LOGGING) != null) {
+                    int timeBeforeLogging = bundle.getInt(IntentConstants.TIME_BEFORE_LOGGING);
                     tracer.debug("Intent received - Set Time Before Logging: " + String.valueOf(timeBeforeLogging));
-                    prefs.edit().putString("time_before_logging", String.valueOf(timeBeforeLogging)).commit();
+                    prefs.edit().putString("time_before_logging", String.valueOf(timeBeforeLogging)).apply();
                     needToStartGpsManager = true;
                 }
 
-                if (bundle.get("setdistancebeforelogging") != null) {
-                    int distanceBeforeLogging = bundle.getInt("setdistancebeforelogging");
+                if (bundle.get(IntentConstants.DISTANCE_BEFORE_LOGGING) != null) {
+                    int distanceBeforeLogging = bundle.getInt(IntentConstants.DISTANCE_BEFORE_LOGGING);
                     tracer.debug("Intent received - Set Distance Before Logging: " + String.valueOf(distanceBeforeLogging));
-                    prefs.edit().putString("distance_before_logging", String.valueOf(distanceBeforeLogging)).commit();
+                    prefs.edit().putString("distance_before_logging", String.valueOf(distanceBeforeLogging)).apply();
                     needToStartGpsManager = true;
                 }
 
-                if (bundle.get("setkeepbetweenfix") != null) {
-                    boolean keepBetweenFix = bundle.getBoolean("setkeepbetweenfix");
+                if (bundle.get(IntentConstants.GPS_ON_BETWEEN_FIX) != null) {
+                    boolean keepBetweenFix = bundle.getBoolean(IntentConstants.GPS_ON_BETWEEN_FIX);
                     tracer.debug("Intent received - Set Keep Between Fix: " + String.valueOf(keepBetweenFix));
-                    prefs.edit().putBoolean("keep_fix", keepBetweenFix).commit();
+                    prefs.edit().putBoolean("keep_fix", keepBetweenFix).apply();
                     needToStartGpsManager = true;
                 }
 
-                if (bundle.get("setretrytime") != null) {
-                    int retryTime = bundle.getInt("setretrytime");
+                if (bundle.get(IntentConstants.RETRY_TIME) != null) {
+                    int retryTime = bundle.getInt(IntentConstants.RETRY_TIME);
                     tracer.debug("Intent received - Set Retry Time: " + String.valueOf(retryTime));
-                    prefs.edit().putString("retry_time", String.valueOf(retryTime)).commit();
+                    prefs.edit().putString("retry_time", String.valueOf(retryTime)).apply();
                     needToStartGpsManager = true;
                 }
 
-                if (bundle.get("setabsolutetimeout") != null) {
-                    int absolumeTimeOut = bundle.getInt("setabsolutetimeout");
+                if (bundle.get(IntentConstants.ABSOLUTE_TIMEOUT) != null) {
+                    int absolumeTimeOut = bundle.getInt(IntentConstants.ABSOLUTE_TIMEOUT);
                     tracer.debug("Intent received - Set Retry Time: " + String.valueOf(absolumeTimeOut));
-                    prefs.edit().putString("absolute_timeout", String.valueOf(absolumeTimeOut)).commit();
+                    prefs.edit().putString("absolute_timeout", String.valueOf(absolumeTimeOut)).apply();
                     needToStartGpsManager = true;
                 }
 
-                if(bundle.get("logonce") != null){
-                    boolean logOnceIntent = bundle.getBoolean("logonce");
+                if(bundle.get(IntentConstants.LOG_ONCE) != null){
+                    boolean logOnceIntent = bundle.getBoolean(IntentConstants.LOG_ONCE);
                     tracer.debug("Intent received - Log Once: " + String.valueOf(logOnceIntent));
                     needToStartGpsManager = false;
                     LogOnce();
@@ -236,22 +207,10 @@ public class GpsLoggingService extends Service implements IActionListener {
                 }
             }
         } else {
-            // A null intent is passed in if the service has been killed and
-            // restarted.
+            // A null intent is passed in if the service has been killed and restarted.
             tracer.debug("Service restarted with null intent. Start logging.");
             StartLogging();
-
         }
-    }
-
-    @Override
-    public void OnComplete() {
-        Utilities.HideProgress();
-    }
-
-    @Override
-    public void OnFailure() {
-        Utilities.HideProgress();
     }
 
     /**
@@ -262,15 +221,12 @@ public class GpsLoggingService extends Service implements IActionListener {
                 + ", Auto Send Delay - " + String.valueOf(Session.getAutoSendDelay()));
 
         if (AppSettings.isAutoSendEnabled() && Session.getAutoSendDelay() > 0) {
-            tracer.debug("Setting up autosend alarm");
-            long triggerTime = System.currentTimeMillis()
-                    + (long) (Session.getAutoSendDelay() * 60 * 1000);
+            long triggerTime = System.currentTimeMillis() + (long) (Session.getAutoSendDelay() * 60 * 1000);
 
             alarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
             CancelAlarm();
 
-            PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
             am.set(AlarmManager.RTC_WAKEUP, triggerTime, sender);
             tracer.debug("Autosend alarm has been set");
@@ -284,23 +240,7 @@ public class GpsLoggingService extends Service implements IActionListener {
     }
 
 
-    protected void ForceAutoSendNow() {
-
-        tracer.debug(".");
-        if (AppSettings.isAutoSendEnabled() && Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0) {
-            if (IsMainFormVisible()) {
-                SetStatus(R.string.autosend_sending);
-            }
-
-            tracer.info("Force emailing Log File");
-            FileSenderFactory.SendFiles(getApplicationContext(), this);
-        }
-    }
-
-
     public void LogOnce() {
-        tracer.debug(".");
-
         Session.setSinglePointMode(true);
 
         if (Session.isStarted()) {
@@ -311,13 +251,9 @@ public class GpsLoggingService extends Service implements IActionListener {
     }
 
     private void CancelAlarm() {
-        tracer.debug(".");
-
         if (alarmIntent != null) {
             AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-            PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-            tracer.debug("Pending alarm intent was null? " + String.valueOf(sender == null));
+            PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             am.cancel(sender);
         }
     }
@@ -327,33 +263,27 @@ public class GpsLoggingService extends Service implements IActionListener {
      * stops logging
      */
     private void AutoSendLogFileOnStop() {
-        tracer.debug("Auto send on stop enabled: " + String.valueOf(AppSettings.shouldAutoSendWhenIPressStop()));
-
         if (AppSettings.isAutoSendEnabled() && AppSettings.shouldAutoSendWhenIPressStop()) {
             Session.setReadyToBeAutoSent(true);
-            AutoSendLogFile();
+            AutoSendLogFile(true);
         }
     }
 
     /**
-     * Calls the Auto Email Helper which processes the file and sends it.
+     * Calls the Auto Senders which process the files and send it.
      */
-    private void AutoSendLogFile() {
+    private void AutoSendLogFile(boolean force) {
 
-        tracer.debug("isReadyToBeAutoSent - " + Session.isReadyToBeAutoSent());
+        tracer.debug("Ready to be sent - " + Session.isReadyToBeAutoSent() + ", force - " + force + ", valid location: " + Session.hasValidLocation());
 
-        // Check that auto emailing is enabled, there's a valid location and
-        // file name.
-        if (Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0
-                && Session.isReadyToBeAutoSent() && Session.hasValidLocation()) {
+        if (
+               Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0 &&
+               ( force || (Session.isReadyToBeAutoSent() && Session.hasValidLocation()) )
+           ) {
 
-            //Don't show a progress bar when auto-sending
-            tracer.info("Sending Log File");
-
-            FileSenderFactory.SendFiles(getApplicationContext(), this);
-            Session.setReadyToBeAutoSent(true);
+            FileSenderFactory.SendFiles(getApplicationContext());
+            Session.setReadyToBeAutoSent(false);
             SetupAutoSendTimers();
-
         }
     }
 
@@ -362,12 +292,9 @@ public class GpsLoggingService extends Service implements IActionListener {
      * Also sets up email timers if required.
      */
     private void GetPreferences() {
-        tracer.debug(".");
         Utilities.PopulateAppSettings(getApplicationContext());
 
         if (Session.getAutoSendDelay() != AppSettings.getAutoSendDelay()) {
-            tracer.debug("Old autoSendDelay - " + String.valueOf(Session.getAutoSendDelay())
-                    + "; New -" + String.valueOf(AppSettings.getAutoSendDelay()));
             Session.setAutoSendDelay(AppSettings.getAutoSendDelay());
             SetupAutoSendTimers();
         }
@@ -388,17 +315,16 @@ public class GpsLoggingService extends Service implements IActionListener {
 
 
         try {
-            tracer.info("Starting GpsLoggingService in foreground");
             startForeground(NOTIFICATION_ID, new Notification());
         } catch (Exception ex) {
             tracer.error("Could not start GPSLoggingService in foreground. ", ex);
         }
 
-
         Session.setStarted(true);
 
         GetPreferences();
         ShowNotification();
+        SetupAutoSendTimers();
         ResetCurrentFileName(true);
         NotifyClientStarted();
         StartPassiveManager();
@@ -410,16 +336,14 @@ public class GpsLoggingService extends Service implements IActionListener {
      * Asks the main service client to clear its form.
      */
     private void NotifyClientStarted() {
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnStartLogging();
-        }
+        EventBus.getDefault().post(new ServiceEvents.LoggingStatus(true));
     }
 
     /**
      * Stops logging, removes notification, stops GPS manager, stops email timer
      */
     public void StopLogging() {
-        tracer.debug("GpsLoggingService.StopLogging");
+        tracer.debug(".");
         Session.setAddNewTrackSegment(true);
 
         Session.setStarted(false);
@@ -450,16 +374,14 @@ public class GpsLoggingService extends Service implements IActionListener {
      * Shows a notification icon in the status bar for GPS Logger
      */
     private void ShowNotification() {
-        tracer.debug("GpsLoggingService.ShowNotification");
 
         Intent stopLoggingIntent = new Intent(this, GpsLoggingService.class);
         stopLoggingIntent.setAction("NotificationButton_STOP");
-        stopLoggingIntent.putExtra("immediatestop", true);
+        stopLoggingIntent.putExtra(IntentConstants.IMMEDIATE_STOP, true);
         PendingIntent piStop = PendingIntent.getService(this, 0, stopLoggingIntent, 0);
 
         Intent annotateIntent = new Intent(this, NotificationAnnotationActivity.class);
         annotateIntent.setAction("com.mendhak.gpslogger.NOTIFICATION_BUTTON");
-        annotateIntent.putExtra("setnextpointdescription", "This is from the notification...");
         PendingIntent piAnnotate = PendingIntent.getActivity(this,0, annotateIntent,0);
 
         // What happens when the notification item is clicked
@@ -522,7 +444,6 @@ public class GpsLoggingService extends Service implements IActionListener {
      * then nothing is requested.
      */
     private void StartGpsManager() {
-        tracer.debug("GpsLoggingService.StartGpsManager");
 
         GetPreferences();
 
@@ -542,32 +463,25 @@ public class GpsLoggingService extends Service implements IActionListener {
         if (Session.isGpsEnabled() && AppSettings.getChosenListeners().contains("gps")) {
             tracer.info("Requesting GPS location updates");
             // gps satellite based
-            gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    1000, 0,
-                    gpsLocationListener);
-
+            gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, gpsLocationListener);
             gpsLocationManager.addGpsStatusListener(gpsLocationListener);
             gpsLocationManager.addNmeaListener(gpsLocationListener);
 
             Session.setUsingGps(true);
             startAbsoluteTimer();
-
         }
 
         if (Session.isTowerEnabled() &&  ( AppSettings.getChosenListeners().contains("network")  || !Session.isGpsEnabled() ) ) {
             tracer.info("Requesting tower location updates");
             Session.setUsingGps(false);
             // Cell tower and wifi based
-            towerLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                    1000, 0,
-                    towerLocationListener);
+            towerLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, towerLocationListener);
 
             startAbsoluteTimer();
-
         }
 
         if(!Session.isTowerEnabled() && !Session.isGpsEnabled()) {
-            tracer.info("No provider available");
+            tracer.error("No provider available!");
             Session.setUsingGps(false);
             SetStatus(R.string.gpsprovider_unavailable);
             SetFatalMessage(R.string.gpsprovider_unavailable);
@@ -576,17 +490,13 @@ public class GpsLoggingService extends Service implements IActionListener {
             return;
         }
 
-        if (mainServiceClient != null) {
-            mainServiceClient.OnWaitingForLocation(true);
-            Session.setWaitingForLocation(true);
-        }
-
+        EventBus.getDefault().post(new ServiceEvents.WaitingForLocation(true));
+        Session.setWaitingForLocation(true);
         SetStatus(R.string.started);
     }
 
     private void startAbsoluteTimer() {
         if (AppSettings.getAbsoluteTimeout() >= 1) {
-            tracer.debug("Starting absolute timer");
             handler.postDelayed(stopManagerRunnable, AppSettings.getAbsoluteTimeout() * 1000);
         }
     }
@@ -600,7 +510,6 @@ public class GpsLoggingService extends Service implements IActionListener {
     };
 
     private void stopAbsoluteTimer() {
-        tracer.debug("Stopping absolute timer");
         handler.removeCallbacks(stopManagerRunnable);
     }
 
@@ -619,8 +528,6 @@ public class GpsLoggingService extends Service implements IActionListener {
      */
     private void StopGpsManager() {
 
-        tracer.debug("GpsLoggingService.StopGpsManager");
-
         if (towerLocationListener != null) {
             tracer.debug("Removing towerLocationManager updates");
             towerLocationManager.removeUpdates(towerLocationListener);
@@ -632,11 +539,9 @@ public class GpsLoggingService extends Service implements IActionListener {
             gpsLocationManager.removeGpsStatusListener(gpsLocationListener);
         }
 
+        Session.setWaitingForLocation(false);
+        EventBus.getDefault().post(new ServiceEvents.WaitingForLocation(false));
 
-        if (mainServiceClient != null) {
-            Session.setWaitingForLocation(false);
-            mainServiceClient.OnWaitingForLocation(false);
-        }
         SetStatus(getString(R.string.stopped));
     }
 
@@ -651,8 +556,6 @@ public class GpsLoggingService extends Service implements IActionListener {
      * Sets the current file name based on user preference.
      */
     private void ResetCurrentFileName(boolean newLogEachStart) {
-
-        tracer.debug(".");
 
         /* Pick up saved settings, if any. (Saved static file) */
         String newFileName = Session.getCurrentFileName();
@@ -673,10 +576,9 @@ public class GpsLoggingService extends Service implements IActionListener {
             Session.setCurrentFileName(newFileName);
         }
 
-        if (IsMainFormVisible()) {
-            tracer.info("File name: " + newFileName);
-            mainServiceClient.onFileName(newFileName);
-        }
+        tracer.info("Filename: " + newFileName);
+        EventBus.getDefault().post(new ServiceEvents.FileNamed(newFileName));
+
     }
 
     /**
@@ -686,16 +588,11 @@ public class GpsLoggingService extends Service implements IActionListener {
      */
     void SetStatus(String status) {
         tracer.info(status);
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnStatusMessage(status);
-        }
+        EventBus.getDefault().post(new ServiceEvents.StatusMessage(status));
     }
 
     void SetLocationServiceUnavailable(){
-        tracer.error("Location services not enabled");
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnLocationServicesUnavailable();
-        }
+        EventBus.getDefault().post(new ServiceEvents.LocationServicesUnavailable());
     }
 
     /**
@@ -705,9 +602,7 @@ public class GpsLoggingService extends Service implements IActionListener {
      */
     void SetFatalMessage(int messageId) {
         tracer.error(getString(messageId));
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnFatalMessage(getString(messageId));
-        }
+        EventBus.getDefault().post(new ServiceEvents.FatalMessage(getString(messageId)));
     }
 
     /**
@@ -724,16 +619,14 @@ public class GpsLoggingService extends Service implements IActionListener {
      * Notifies main form that logging has stopped
      */
     void NotifyClientStopped() {
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnStopLogging();
-        }
+        EventBus.getDefault().post(new ServiceEvents.LoggingStatus(false));
     }
 
     /**
      * Stops location manager, then starts it.
      */
     void RestartGpsManagers() {
-        tracer.debug("GpsLoggingService.RestartGpsManagers");
+        tracer.debug("Restarting location managers");
         StopGpsManager();
         StartGpsManager();
     }
@@ -746,7 +639,6 @@ public class GpsLoggingService extends Service implements IActionListener {
      * @param loc Location object
      */
     void OnLocationChanged(Location loc) {
-
         if (!Session.isStarted()) {
             tracer.debug("OnLocationChanged called, but Session.isStarted is false");
             StopLogging();
@@ -754,6 +646,8 @@ public class GpsLoggingService extends Service implements IActionListener {
         }
 
         long currentTimeStamp = System.currentTimeMillis();
+
+        tracer.debug("Has description? " + Session.hasDescription() + ", Single point? " + Session.isSinglePointMode() + ", Last timestamp: " + Session.getLatestTimeStamp());
 
         // Don't log a point until the user-defined time has elapsed
         // However, if user has set an annotation, just log the point, disregard any filters
@@ -765,7 +659,7 @@ public class GpsLoggingService extends Service implements IActionListener {
             return;
         }
 
-        tracer.debug("GpsLoggingService.OnLocationChanged");
+
         boolean isPassiveLocation = loc.getExtras().getBoolean("PASSIVE");
 
         // Don't do anything until the user-defined accuracy is reached
@@ -833,13 +727,10 @@ public class GpsLoggingService extends Service implements IActionListener {
         GetPreferences();
         StopManagerAndResetAlarm();
 
-        if (IsMainFormVisible()) {
-
-            mainServiceClient.OnLocationUpdate(loc);
-        }
+        EventBus.getDefault().post(new ServiceEvents.LocationUpdate(loc));
 
         if (Session.isSinglePointMode()) {
-            tracer.debug("Single point mode - stopping logging now");
+            tracer.debug("Single point mode - stopping now");
             StopLogging();
         }
     }
@@ -878,7 +769,6 @@ public class GpsLoggingService extends Service implements IActionListener {
     }
 
     protected void StopManagerAndResetAlarm() {
-        tracer.debug("GpsLoggingService.StopManagerAndResetAlarm");
         if (!AppSettings.shouldkeepFix()) {
             StopGpsManager();
         }
@@ -889,27 +779,22 @@ public class GpsLoggingService extends Service implements IActionListener {
 
 
     private void StopAlarm() {
-        tracer.debug("GpsLoggingService.StopAlarm");
         Intent i = new Intent(this, GpsLoggingService.class);
-        i.putExtra("getnextpoint", true);
+        i.putExtra(IntentConstants.GET_NEXT_POINT, true);
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
         nextPointAlarmManager.cancel(pi);
     }
 
     private void SetAlarmForNextPoint() {
-
-        tracer.debug("GpsLoggingService.SetAlarmForNextPoint");
+        tracer.debug(".");
 
         Intent i = new Intent(this, GpsLoggingService.class);
-
-        i.putExtra("getnextpoint", true);
-
+        i.putExtra(IntentConstants.GET_NEXT_POINT, true);
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
         nextPointAlarmManager.cancel(pi);
 
         nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime() + AppSettings.getMinimumSeconds() * 1000, pi);
-
     }
 
 
@@ -919,30 +804,24 @@ public class GpsLoggingService extends Service implements IActionListener {
      * @param loc Location object
      */
     private void WriteToFile(Location loc) {
-        tracer.debug("GpsLoggingService.WriteToFile");
-        List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers(getApplicationContext());
         Session.setAddNewTrackSegment(false);
-        boolean atLeastOneAnnotationSuccess = false;
 
-        for (IFileLogger logger : loggers) {
-            try {
-                logger.Write(loc);
-                if (Session.hasDescription()) {
-                    tracer.debug("Setting annotation: " + Session.getDescription());
-                    logger.Annotate(Session.getDescription(), loc);
-                    atLeastOneAnnotationSuccess = true;
-                }
-            } catch (Exception e) {
-                SetStatus(R.string.could_not_write_to_file);
+        try {
+            tracer.debug("Calling file writers");
+            FileLoggerFactory.Write(getApplicationContext(), loc);
+
+            if (Session.hasDescription()) {
+                tracer.debug("Writing annotation: " + Session.getDescription());
+                FileLoggerFactory.Annotate(getApplicationContext(), Session.getDescription(), loc);
             }
         }
-
-        if (atLeastOneAnnotationSuccess) {
-            Session.clearDescription();
-            if (IsMainFormVisible()) {
-                mainServiceClient.OnClearAnnotation();
-            }
+        catch(Exception e){
+            tracer.error("Could not write to file", e);
+             SetStatus(R.string.could_not_write_to_file);
         }
+
+        Session.clearDescription();
+        EventBus.getDefault().post(new ServiceEvents.AnnotationStatus(true));
     }
 
     /**
@@ -952,13 +831,7 @@ public class GpsLoggingService extends Service implements IActionListener {
      */
     void SetSatelliteInfo(int count) {
         Session.setSatelliteCount(count);
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnSatelliteCount(count);
-        }
-    }
-
-    private boolean IsMainFormVisible() {
-        return mainServiceClient != null;
+        EventBus.getDefault().post(new ServiceEvents.SatelliteCount(count));
     }
 
     public void OnNmeaSentence(long timestamp, String nmeaSentence) {
@@ -966,10 +839,6 @@ public class GpsLoggingService extends Service implements IActionListener {
         if (AppSettings.shouldLogToNmea()) {
             NmeaFileLogger nmeaLogger = new NmeaFileLogger(Session.getCurrentFileName());
             nmeaLogger.Write(timestamp, nmeaSentence);
-        }
-
-        if (IsMainFormVisible()) {
-            mainServiceClient.OnNmeaSentence(timestamp, nmeaSentence);
         }
     }
 
@@ -979,10 +848,60 @@ public class GpsLoggingService extends Service implements IActionListener {
      */
     public class GpsLoggingBinder extends Binder {
         public GpsLoggingService getService() {
-            tracer.debug("GpsLoggingBinder.getService");
             return GpsLoggingService.this;
         }
     }
 
+
+    @EventBusHook
+    public void onEvent(CommandEvents.RequestToggle requestToggle){
+        if (Session.isStarted()) {
+            StopLogging();
+        } else {
+            StartLogging();
+        }
+    }
+
+    @EventBusHook
+    public void onEvent(CommandEvents.RequestStartStop startStop){
+        if(startStop.start){
+            StartLogging();
+        }
+        else {
+            StopLogging();
+        }
+
+        EventBus.getDefault().removeStickyEvent(CommandEvents.RequestStartStop.class);
+    }
+
+    @EventBusHook
+    public void onEvent(CommandEvents.AutoSend autoSend){
+        Session.setReadyToBeAutoSent(true);
+        AutoSendLogFile(autoSend.force);
+
+        EventBus.getDefault().removeStickyEvent(CommandEvents.AutoSend.class);
+    }
+
+    @EventBusHook
+    public void onEvent(CommandEvents.Annotate annotate){
+        final String desc = Utilities.CleanDescription(annotate.annotation);
+        if (desc.length() == 0) {
+            tracer.debug("Clearing annotation");
+            Session.clearDescription();
+        } else {
+            tracer.debug("Pending annotation: " + desc);
+            Session.setDescription(desc);
+            EventBus.getDefault().post(new ServiceEvents.AnnotationStatus(false));
+
+            if(Session.isStarted()){
+                StartGpsManager();
+            }
+            else {
+                LogOnce();
+            }
+        }
+
+        EventBus.getDefault().removeStickyEvent(CommandEvents.Annotate.class);
+    }
 
 }

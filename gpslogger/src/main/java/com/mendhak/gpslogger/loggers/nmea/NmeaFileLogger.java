@@ -77,7 +77,7 @@ class NmeaWriteHandler implements Runnable {
                 writer.close();
 
             } catch (IOException e) {
-                e.printStackTrace();
+
             }
         }
 

@@ -22,12 +22,10 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.location.Location;
 import android.net.Uri;
 import android.os.*;
 import android.preference.PreferenceManager;
@@ -45,6 +43,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.heinrichreimersoftware.materialdrawer.DrawerView;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.mendhak.gpslogger.common.*;
+import com.mendhak.gpslogger.common.events.*;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
@@ -54,6 +53,7 @@ import com.mendhak.gpslogger.views.GenericViewFragment;
 import com.mendhak.gpslogger.views.GpsBigViewFragment;
 import com.mendhak.gpslogger.views.GpsDetailedViewFragment;
 import com.mendhak.gpslogger.views.GpsSimpleViewFragment;
+import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
@@ -62,14 +62,11 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class GpsMainActivity extends ActionBarActivity
-        implements GenericViewFragment.IGpsViewCallback,
-        IGpsLoggerServiceClient,
-        IActionListener,
+        implements
         Toolbar.OnMenuItemClickListener,
         ActionBar.OnNavigationListener {
 
     private static Intent serviceIntent;
-    private GpsLoggingService loggingService;
     private ActionBarDrawerToggle drawerToggle;
     private org.slf4j.Logger tracer;
 
@@ -88,8 +85,20 @@ public class GpsMainActivity extends ActionBarActivity
         SetUpNavigationDrawer();
         LoadDefaultFragmentView();
         StartAndBindService();
+        RegisterEventBus();
     }
 
+    private void RegisterEventBus() {
+        EventBus.getDefault().register(this);
+    }
+
+    private void UnregisterEventBus(){
+        try {
+        EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
+    }
 
     @Override
     protected void onStart() {
@@ -102,6 +111,11 @@ public class GpsMainActivity extends ActionBarActivity
         super.onResume();
         GetPreferences();
         StartAndBindService();
+
+        if (Session.hasDescription()) {
+            SetAnnotationReady();
+        }
+
         enableDisableMenuItems();
     }
 
@@ -114,6 +128,7 @@ public class GpsMainActivity extends ActionBarActivity
     @Override
     protected void onDestroy() {
         StopAndUnbindServiceIfRequired();
+        UnregisterEventBus();
         super.onDestroy();
 
     }
@@ -190,7 +205,7 @@ public class GpsMainActivity extends ActionBarActivity
                 else {
                     editor.putString(key.toString(), value);
                 }
-                editor.commit();
+                editor.apply();
             }
 
         } catch (Exception e) {
@@ -220,20 +235,27 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     public void SetUpToolbar(){
-        Toolbar toolbar = GetToolbar();
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        try{
+            Toolbar toolbar = GetToolbar();
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        //Deprecated in Lollipop but required if targeting 4.x
-        SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.gps_main_views, R.layout.spinner_dropdown_item);
-        getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, this);
-        getSupportActionBar().setSelectedNavigationItem(GetUserSelectedNavigationItem());
+            //Deprecated in Lollipop but required if targeting 4.x
+            SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.gps_main_views, R.layout.spinner_dropdown_item);
+            getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+            getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, this);
+            getSupportActionBar().setSelectedNavigationItem(GetUserSelectedNavigationItem());
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            }
         }
+        catch(Exception ex){
+            //http://stackoverflow.com/questions/26657348/appcompat-v7-v21-0-0-causing-crash-on-samsung-devices-with-android-v4-2-2
+            tracer.error("Thanks for this, Samsung", ex);
+        }
+
     }
 
     public void SetUpNavigationDrawer() {
@@ -263,19 +285,23 @@ public class GpsMainActivity extends ActionBarActivity
         drawerLayout.setDrawerListener(drawerToggle);
         drawerLayout.closeDrawer(drawer);
 
+        drawer.addDivider();
         drawer.addItem(new DrawerItem()
+                        .setId(0)
                         .setImage(getResources().getDrawable(R.drawable.settings))
                         .setTextPrimary(getString(R.string.pref_general_title))
                         .setTextSecondary(getString(R.string.pref_general_summary))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(1)
                         .setImage(getResources().getDrawable(R.drawable.loggingsettings))
                         .setTextPrimary(getString(R.string.pref_logging_title))
                         .setTextSecondary(getString(R.string.pref_logging_summary))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(2)
                         .setImage(getResources().getDrawable(R.drawable.performance))
                         .setTextPrimary(getString(R.string.pref_performance_title))
                         .setTextSecondary(getString(R.string.pref_performance_summary))
@@ -286,36 +312,43 @@ public class GpsMainActivity extends ActionBarActivity
 
 
         drawer.addItem(new DrawerItem()
+                .setId(3)
                 .setImage(getResources().getDrawable(R.drawable.autosend))
                 .setTextPrimary(getString(R.string.pref_autosend_title))
                 .setTextSecondary(getString(R.string.pref_autosend_summary)));
 
         drawer.addItem(new DrawerItem()
+                        .setId(4)
                         .setImage(getResources().getDrawable(R.drawable.googledrive))
                         .setTextPrimary(getString(R.string.gdocs_setup_title))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(5)
                         .setImage(getResources().getDrawable(R.drawable.dropbox))
                         .setTextPrimary(getString(R.string.dropbox_setup_title))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(6)
                         .setImage(getResources().getDrawable(R.drawable.email))
                         .setTextPrimary(getString(R.string.autoemail_title))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(7)
                         .setImage(getResources().getDrawable(R.drawable.ftp))
                         .setTextPrimary(getString(R.string.autoftp_setup_title))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(8)
                         .setImage(getResources().getDrawable(R.drawable.opengts))
                         .setTextPrimary(getString(R.string.opengts_setup_title))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(9)
                         .setImage(getResources().getDrawable(R.drawable.openstreetmap))
                         .setTextPrimary(getString(R.string.osm_setup_title))
         );
@@ -323,11 +356,13 @@ public class GpsMainActivity extends ActionBarActivity
         drawer.addDivider();
 
         drawer.addItem(new DrawerItem()
+                        .setId(10)
                         .setImage(getResources().getDrawable(R.drawable.helpfaq))
                         .setTextPrimary(getString(R.string.menu_faq))
         );
 
         drawer.addItem(new DrawerItem()
+                        .setId(11)
                         .setImage(getResources().getDrawable(R.drawable.exit))
                         .setTextPrimary(getString(R.string.menu_exit)));
 
@@ -339,7 +374,7 @@ public class GpsMainActivity extends ActionBarActivity
                 //drawer.selectItem(3);
                 drawerLayout.closeDrawer(drawer);
 
-                switch(position){
+                switch(id){
                     case 0:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GENERAL);
                         break;
@@ -349,38 +384,36 @@ public class GpsMainActivity extends ActionBarActivity
                     case 2:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.PERFORMANCE);
                         break;
-                    case 4:
+                    case 3:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
                         break;
-                    case 5:
+                    case 4:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
                         break;
-                    case 6:
+                    case 5:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
                         break;
-                    case 7:
+                    case 6:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
                         break;
-                    case 8:
+                    case 7:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
                         break;
-                    case 9:
+                    case 8:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
                         break;
-                    case 10:
+                    case 9:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
                         break;
-                    case 12:
+                    case 10:
                         Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
                         startActivity(faqtivity);
                         break;
-                    case 13:
-                        loggingService.StopLogging();
-                        loggingService.stopSelf();
+                    case 11:
+                        EventBus.getDefault().post(new CommandEvents.RequestStartStop(false));
                         finish();
                         break;
                 }
-
             }
         });
 
@@ -412,7 +445,6 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void LoadDefaultFragmentView() {
         int currentSelectedPosition = GetUserSelectedNavigationItem();
-        tracer.debug("Loading fragment view: " + currentSelectedPosition);
         LoadFragmentView(currentSelectedPosition);
     }
 
@@ -444,11 +476,10 @@ public class GpsMainActivity extends ActionBarActivity
 
     @Override
     public boolean onNavigationItemSelected(int position, long itemId) {
-        tracer.debug("Changing main view: " + String.valueOf(position));
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("SPINNER_SELECTED_POSITION", position);
-        editor.commit();
+        editor.apply();
 
         LoadFragmentView(position);
         return true;
@@ -598,14 +629,11 @@ public class GpsMainActivity extends ActionBarActivity
 
 
     private void ForceAutoSendNow() {
-        tracer.debug("Auto send now");
+        tracer.debug("User forced an auto send");
 
         if (AppSettings.isAutoSendEnabled()) {
-
-            Utilities.ShowProgress(this, getString(R.string.autosend_sending),
-                    getString(R.string.please_wait));
-            loggingService.ForceAutoSendNow();
-
+            Utilities.ShowProgress(this, getString(R.string.autosend_sending),getString(R.string.please_wait));
+            EventBus.getDefault().post(new CommandEvents.AutoSend(true));
 
         } else {
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
@@ -613,7 +641,7 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     private void LogSinglePoint() {
-        loggingService.LogOnce();
+        EventBus.getDefault().post(new CommandEvents.LogOnce());
         enableDisableMenuItems();
     }
 
@@ -625,7 +653,6 @@ public class GpsMainActivity extends ActionBarActivity
     private void Annotate() {
 
         if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml() && !AppSettings.shouldLogToCustomUrl()) {
-            tracer.debug("GPX, KML, URL disabled; annotation shouldn't work");
             Toast.makeText(getApplicationContext(), getString(R.string.annotation_requires_logging), Toast.LENGTH_SHORT).show();
             return;
         }
@@ -638,21 +665,7 @@ public class GpsMainActivity extends ActionBarActivity
                     @Override
                     public void onPositive(MaterialDialog dialog) {
                         EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
-                        final String desc = Utilities.CleanDescription(userInput.getText().toString());
-                        if (desc.length() == 0) {
-                            tracer.debug("Clearing annotation");
-                            Session.clearDescription();
-                            OnClearAnnotation();
-                        } else {
-                            tracer.debug("Setting annotation: " + desc);
-                            Session.setDescription(desc);
-                            OnSetAnnotation();
-                            // logOnce will start single point mode.
-                            if (!Session.isStarted()) {
-                                tracer.debug("Will start log-single-point");
-                                LogSinglePoint();
-                            }
-                        }
+                        EventBus.getDefault().postSticky(new CommandEvents.Annotate(userInput.getText().toString()));
                     }
                 }).build();
 
@@ -667,59 +680,53 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void UploadToOpenStreetMap() {
         if (!OSMHelper.IsOsmAuthorized(getApplicationContext())) {
-            tracer.debug("Not authorized, opening OSM activity");
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
             return;
         }
 
-        ShowFileListDialog(FileSenderFactory.GetOsmSender(getApplicationContext(), this));
+        ShowFileListDialog(FileSenderFactory.GetOsmSender(getApplicationContext()));
     }
 
     private void UploadToDropBox() {
-        final DropBoxHelper dropBoxHelper = new DropBoxHelper(getApplicationContext(), this);
+        final DropBoxHelper dropBoxHelper = new DropBoxHelper(getApplicationContext());
 
         if (!dropBoxHelper.IsLinked()) {
-            tracer.debug("Not linked, opening Dropbox activity");
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
             return;
         }
 
-        ShowFileListDialog(FileSenderFactory.GetDropBoxSender(getApplication(), this));
+        ShowFileListDialog(FileSenderFactory.GetDropBoxSender(getApplication()));
     }
 
     private void SendToOpenGTS() {
         if (!Utilities.IsOpenGTSSetup()) {
-            tracer.debug("Not set up, opening OpenGTS activity");
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
         } else {
-            IFileSender fs = FileSenderFactory.GetOpenGTSSender(getApplicationContext(), this);
+            IFileSender fs = FileSenderFactory.GetOpenGTSSender(getApplicationContext());
             ShowFileListDialog(fs);
         }
     }
 
     private void UploadToGoogleDocs() {
         if (!GDocsHelper.IsLinked(getApplicationContext())) {
-            tracer.debug("Not linked, opening Google Docs setup activity");
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
             return;
         }
 
-        ShowFileListDialog(FileSenderFactory.GetGDocsSender(getApplicationContext(), this));
+        ShowFileListDialog(FileSenderFactory.GetGDocsSender(getApplicationContext()));
     }
 
     private void SendToFtp() {
         if (!Utilities.IsFtpSetup()) {
-            tracer.debug("Not setup, opening FTP setup activity");
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
         } else {
-            IFileSender fs = FileSenderFactory.GetFtpSender(getApplicationContext(), this);
+            IFileSender fs = FileSenderFactory.GetFtpSender(getApplicationContext());
             ShowFileListDialog(fs);
         }
     }
 
     private void SelectAndEmailFile() {
         if (!Utilities.IsEmailSetup()) {
-            tracer.debug("Not set up, opening email setup activity");
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
         } else {
             ShowFileListDialog(FileSenderFactory.GetEmailSender(this));
@@ -735,7 +742,7 @@ public class GpsMainActivity extends ActionBarActivity
 
         final File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
-        if (gpxFolder != null && gpxFolder.exists()) {
+        if (gpxFolder != null && gpxFolder.exists() && Utilities.GetFilesInFolder(gpxFolder, sender).length > 0) {
             File[] enumeratedFiles = Utilities.GetFilesInFolder(gpxFolder, sender);
 
             //Order by last modified
@@ -755,9 +762,6 @@ public class GpsMainActivity extends ActionBarActivity
             }
 
             final String[] files = fileList.toArray(new String[fileList.size()]);
-
-
-            //final ArrayList selectedItems = new ArrayList();  // Where we track the selected items
 
             new MaterialDialog.Builder(this)
                     .title(R.string.osm_pick_file)
@@ -795,7 +799,7 @@ public class GpsMainActivity extends ActionBarActivity
      * an intent (Facebook, SMS, Twitter, Email, K-9, Bluetooth)
      */
     private void Share() {
-        tracer.debug("GpsMainActivity.Share");
+
         try {
 
             final String locationOnly = getString(R.string.sharing_location_only);
@@ -837,7 +841,6 @@ public class GpsMainActivity extends ActionBarActivity
 
                                 if (selectedItems.contains(0)) {
 
-                                    tracer.debug("User selected location only");
                                     intent.setType("text/plain");
 
                                     intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing_mylocation));
@@ -874,7 +877,7 @@ public class GpsMainActivity extends ActionBarActivity
                 Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
             }
         } catch (Exception ex) {
-            tracer.error("Share", ex);
+            tracer.error("Sharing problem", ex);
         }
     }
 
@@ -886,18 +889,12 @@ public class GpsMainActivity extends ActionBarActivity
 
         public void onServiceDisconnected(ComponentName name) {
             tracer.debug("Disconnected from GPSLoggingService from MainActivity");
-            loggingService = null;
+            //loggingService = null;
         }
 
         public void onServiceConnected(ComponentName name, IBinder service) {
             tracer.debug("Connected to GPSLoggingService from MainActivity");
-            loggingService = ((GpsLoggingService.GpsLoggingBinder) service).getService();
-            GpsLoggingService.SetServiceClient(GpsMainActivity.this);
-
-            if (Session.hasDescription()) {
-                OnSetAnnotation();
-            }
-
+            //loggingService = ((GpsLoggingService.GpsLoggingBinder) service).getService();
         }
     };
 
@@ -906,7 +903,6 @@ public class GpsMainActivity extends ActionBarActivity
      * Starts the service and binds the activity to it.
      */
     private void StartAndBindService() {
-        tracer.debug(".");
         serviceIntent = new Intent(this, GpsLoggingService.class);
         // Start the service in case it isn't already running
         startService(serviceIntent);
@@ -920,7 +916,6 @@ public class GpsMainActivity extends ActionBarActivity
      * Stops the service if it isn't logging. Also unbinds.
      */
     private void StopAndUnbindServiceIfRequired() {
-        tracer.debug(".");
         if (Session.isBoundToService()) {
 
             try {
@@ -938,79 +933,7 @@ public class GpsMainActivity extends ActionBarActivity
             } catch (Exception e) {
                 tracer.error("Could not stop the service", e);
             }
-
         }
-
-    }
-
-    //IGpsLoggerServiceClient callbacks
-    @Override
-    public void OnStatusMessage(String message) {
-        tracer.debug(message);
-
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.SetStatusMessage(message);
-        }
-    }
-
-    @Override
-    public void OnFatalMessage(String message) {
-        tracer.debug(message);
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.SetFatalMessage(message);
-        }
-    }
-
-    @Override
-    public void OnLocationUpdate(Location loc) {
-        tracer.debug(".");
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.SetLocation(loc);
-        }
-
-    }
-
-    @Override
-    public void OnNmeaSentence(long timestamp, String nmeaSentence) {
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.OnNmeaSentence(timestamp, nmeaSentence);
-        }
-    }
-
-    @Override
-    public void OnSatelliteCount(int count) {
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.SetSatelliteCount(count);
-        }
-    }
-
-    @Override
-    public void OnStartLogging() {
-        tracer.debug(".");
-
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.SetLoggingStarted();
-        }
-
-        enableDisableMenuItems();
-
-    }
-
-    @Override
-    public void OnStopLogging() {
-        tracer.debug(".");
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.SetLoggingStopped();
-        }
-
-        enableDisableMenuItems();
     }
 
     private void SetBulbStatus(boolean started) {
@@ -1018,150 +941,80 @@ public class GpsMainActivity extends ActionBarActivity
         bulb.setImageResource(started ? R.drawable.circle_green : R.drawable.circle_none);
     }
 
-    @Override
-    public void OnSetAnnotation() {
-        tracer.debug(".");
+    public void SetAnnotationReady() {
         Session.setAnnotationMarked(true);
         enableDisableMenuItems();
     }
 
-    @Override
-    public void OnClearAnnotation() {
-        tracer.debug(".");
+    public void SetAnnotationDone() {
         Session.setAnnotationMarked(false);
         enableDisableMenuItems();
     }
 
-
-    @Override
-    public void onFileName(String newFileName) {
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null) {
-            fragment.OnFileNameChange(newFileName);
-        }
-    }
-
-    @Override
     public void OnWaitingForLocation(boolean inProgress) {
         ProgressBar fixBar = (ProgressBar) findViewById(R.id.progressBarGpsFix);
         fixBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
-
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null){
-            fragment.OnWaitingForLocation(inProgress);
-        }
-
-    }
-
-    @Override
-    public void OnLocationServicesUnavailable() {
-        GenericViewFragment fragment = GetCurrentFragment();
-        if(fragment != null){
-            fragment.OnLocationServicesUnavailable();
-        }
-    }
-
-
-    // IActionListener callbacks
-    @Override
-    public void OnComplete() {
-        tracer.debug(".");
-        Utilities.HideProgress();
-    }
-
-    @Override
-    public void OnFailure() {
-        tracer.debug(".");
-        Utilities.HideProgress();
-    }
-
-    //IGpsViewCallback callbacks
-    //These methods come from the fragments
-    @Override
-    public void onRequestStartLogging() {
-        tracer.info(".");
-
-        if(AppSettings.isCustomFile()  && AppSettings.shouldAskCustomFileNameEachTime()){
-
-            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-            MaterialDialog alertDialog = new MaterialDialog.Builder(GpsMainActivity.this)
-                    .title(R.string.new_file_custom_title)
-                    .customView(R.layout.alertview)
-                    .positiveText(R.string.ok)
-                    .callback(new MaterialDialog.ButtonCallback() {
-                        @Override
-                        public void onPositive(MaterialDialog dialog) {
-                            String chosenFileName = AppSettings.getCustomFileName();
-                            EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
-
-                            if (!Utilities.IsNullOrEmpty(userInput.getText().toString()) && !userInput.getText().toString().equalsIgnoreCase(chosenFileName)) {
-                                SharedPreferences.Editor editor = prefs.edit();
-                                editor.putString("new_file_custom_name", userInput.getText().toString());
-                                editor.commit();
-                            }
-                            StartLogging();
-                        }
-                    })
-                    .keyListener(new DialogInterface.OnKeyListener() {
-                        @Override
-                        public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                                StartLogging();
-                                dialog.dismiss();
-                            }
-                            return true;
-                        }
-                    })
-                    .build();
-
-            EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
-            userInput.setText(AppSettings.getCustomFileName());
-            TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
-            tvMessage.setText(R.string.new_file_custom_message);
-            alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-            alertDialog.show();
-
-        }
-        else {
-            StartLogging();
-        }
-
-    }
-
-    @Override
-    public void onRequestStopLogging() {
-        tracer.info(".");
-        StopLogging();
-    }
-
-    @Override
-    public void onRequestToggleLogging() {
-        tracer.info(".");
-
-        if (Session.isStarted()) {
-            tracer.info("Toggle requested - stopping");
-            StopLogging();
-        } else {
-            tracer.info("Toggle requested - starting");
-            StartLogging();
-        }
-    }
-
-    private void StartLogging() {
-        GetPreferences();
-        loggingService.SetupAutoSendTimers();
-        loggingService.StartLogging();
-        enableDisableMenuItems();
-    }
-
-    private void StopLogging() {
-        loggingService.StopLogging();
-        enableDisableMenuItems();
     }
 
 
     private void GetPreferences() {
         Utilities.PopulateAppSettings(getApplicationContext());
+    }
+
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.OpenGTS upload){
+        tracer.debug("Open GTS Event completed, success: " + upload.success);
+        Utilities.HideProgress();
+    }
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.AutoEmail upload){
+        tracer.debug("Auto Email Event completed, success: " + upload.success);
+        Utilities.HideProgress();
+    }
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.OpenStreetMap upload){
+        tracer.debug("OSM Event completed, success: " + upload.success);
+        Utilities.HideProgress();
+    }
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.Dropbox upload){
+        tracer.debug("Dropbox Event completed, success: " + upload.success);
+        Utilities.HideProgress();
+    }
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.GDocs upload){
+        tracer.debug("GDocs Event completed, success: " + upload.success);
+        Utilities.HideProgress();
+    }
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.Ftp upload){
+        tracer.debug("FTP Event completed, success: " + upload.success);
+        Utilities.HideProgress();
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.WaitingForLocation waitingForLocation){
+        OnWaitingForLocation(waitingForLocation.waiting);
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.AnnotationStatus annotationStatus){
+        if(annotationStatus.annotationWritten){
+            SetAnnotationDone();
+        }
+        else {
+            SetAnnotationReady();
+        }
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LoggingStatus loggingStatus){
+            enableDisableMenuItems();
     }
 }

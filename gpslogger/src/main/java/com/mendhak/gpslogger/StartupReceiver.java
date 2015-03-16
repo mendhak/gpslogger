@@ -23,6 +23,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import com.mendhak.gpslogger.common.events.CommandEvents;
+import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
 
@@ -36,13 +38,13 @@ public class StartupReceiver extends BroadcastReceiver {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean startImmediately = prefs.getBoolean("startonbootup", false);
 
-            tracer.info("Did the user ask for start on bootup? - "
-                    + String.valueOf(startImmediately));
+            tracer.info("Start on bootup? - "  + String.valueOf(startImmediately));
 
             if (startImmediately) {
-                tracer.info("Launching GPSLoggingService");
+
+                EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
+
                 Intent serviceIntent = new Intent(context, GpsLoggingService.class);
-                serviceIntent.putExtra("immediatestart", true);
                 context.startService(serviceIntent);
             }
         } catch (Exception ex) {

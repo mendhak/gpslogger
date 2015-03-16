@@ -18,22 +18,21 @@
 package com.mendhak.gpslogger.senders.ftp;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.Preference;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.IActionListener;
+import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
+import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
 public class AutoFtpFragment
-        extends PreferenceValidationFragment implements IActionListener, Preference.OnPreferenceClickListener {
+        extends PreferenceValidationFragment implements Preference.OnPreferenceClickListener {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoFtpFragment.class.getSimpleName());
-
-    private final Handler handler = new Handler();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +40,27 @@ public class AutoFtpFragment
 
         Preference testFtp = findPreference("autoftp_test");
         testFtp.setOnPreferenceClickListener(this);
+        RegisterEventBus();
     }
 
+    @Override
+    public void onDestroy() {
+
+        UnregisterEventBus();
+        super.onDestroy();
+    }
+
+    private void RegisterEventBus() {
+        EventBus.getDefault().register(this);
+    }
+
+    private void UnregisterEventBus(){
+        try {
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
+    }
 
     private boolean IsFormValid() {
 
@@ -59,47 +77,10 @@ public class AutoFtpFragment
 
     }
 
-
-    private final Runnable successfullySent = new Runnable() {
-        public void run() {
-            SuccessfulSending();
-        }
-    };
-
-    private final Runnable failedSend = new Runnable() {
-
-        public void run() {
-            FailureSending();
-        }
-    };
-
-    private void FailureSending() {
-        Utilities.HideProgress();
-        Utilities.MsgBox(getString(R.string.sorry), "FTP Test Failed", getActivity());
-    }
-
-    private void SuccessfulSending() {
-        Utilities.HideProgress();
-        Utilities.MsgBox(getString(R.string.success),
-                "FTP Test Succeeded", getActivity());
-    }
-
-    @Override
-    public void OnComplete() {
-        Utilities.HideProgress();
-        handler.post(successfullySent);
-    }
-
-    @Override
-    public void OnFailure() {
-        Utilities.HideProgress();
-        handler.post(failedSend);
-    }
-
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
-        FtpHelper helper = new FtpHelper(this);
+        FtpHelper helper = new FtpHelper();
 
         MaterialEditTextPreference servernamePreference = (MaterialEditTextPreference) findPreference("autoftp_server");
         MaterialEditTextPreference usernamePreference = (MaterialEditTextPreference) findPreference("autoftp_username");
@@ -134,5 +115,17 @@ public class AutoFtpFragment
     @Override
     public boolean IsValid() {
         return IsFormValid();
+    }
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.Ftp o){
+        tracer.debug("FTP Event completed, success: " + o.success);
+        Utilities.HideProgress();
+        if(!o.success){
+            Utilities.MsgBox(getString(R.string.sorry), "FTP Test Failed", getActivity());
+        }
+        else {
+            Utilities.MsgBox(getString(R.string.success), "FTP Test Succeeded", getActivity());
+        }
     }
 }

@@ -41,7 +41,7 @@ public class DropboxAuthorizationFragment extends PreferenceFragment {
 
         Preference pref = findPreference("dropbox_resetauth");
 
-        helper = new DropBoxHelper(getActivity(), null);
+        helper = new DropBoxHelper(getActivity());
 
         if (helper.IsLinked()) {
             pref.setTitle(R.string.dropbox_unauthorize);
@@ -63,7 +63,7 @@ public class DropboxAuthorizationFragment extends PreferenceFragment {
                     try {
                         helper.StartAuthentication(DropboxAuthorizationFragment.this);
                     } catch (Exception e) {
-                        tracer.error("DropBoxAuthorizationActivity.onPreferenceClick", e);
+                        tracer.error(".", e);
                     }
                 }
 
@@ -85,7 +85,7 @@ public class DropboxAuthorizationFragment extends PreferenceFragment {
         } catch (Exception e) {
             Utilities.MsgBox(getString(R.string.error), getString(R.string.dropbox_couldnotauthorize),
                     getActivity());
-            tracer.error("DropBoxAuthorizationActivity.onResume", e);
+            tracer.error(".", e);
         }
 
     }

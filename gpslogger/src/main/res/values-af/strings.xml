@@ -30,7 +30,6 @@
   <string name="summary_dist_regardless">maksimum</string>
   <string name="summary_current_filename">Lêer:</string>
   <string name="sharing_location_only">Slegs ligging</string>
-  <string name="sharing_pick_file">Kies \'n lêer om te deel</string>
   <string name="sharing_mylocation">My ligging</string>
   <string name="sharing_via">Deel met</string>
   <string name="foot">&#160;voet</string>
@@ -39,7 +38,6 @@
   <string name="meters">&#160;meters</string>
   <string name="error">Fout</string>
   <string name="error_connection">Konneksiefout. Kontroleer asseblief jou selfoon instellings.</string>
-  <string name="gpsprovider_unavailable">Geen GPS verskaffer beskikbaar nie. Kontroleer asseblief jou ligging-instellings en ​​stel \'n ligging verskaffer in staat.     </string>
   <string name="settings_distance_in_meters">Afstand in meters</string>
   <string name="settings_enter_meters">Tik meters (max 9999)</string>
   <string name="enabledisablegps_summary">Gaan na die telefoon instellings om verskaffers in of uit staat te stel.</string>

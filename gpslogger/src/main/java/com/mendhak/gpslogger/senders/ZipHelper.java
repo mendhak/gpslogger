@@ -17,6 +17,8 @@
 
 package com.mendhak.gpslogger.senders;
 
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -26,7 +28,7 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipHelper {
     private static final int BUFFER = 2048;
-
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(ZipHelper.class.getSimpleName());
     private final String[] files;
     private final String zipFile;
 
@@ -59,7 +61,7 @@ public class ZipHelper {
 
             out.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            tracer.error("Could not create zip file",e);
         }
 
     }

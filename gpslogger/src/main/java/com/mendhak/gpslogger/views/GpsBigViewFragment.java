@@ -26,7 +26,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.events.ServiceEvents;
 import org.slf4j.LoggerFactory;
 
 import java.text.NumberFormat;
@@ -34,8 +36,6 @@ import java.text.NumberFormat;
 public class GpsBigViewFragment extends GenericViewFragment implements View.OnTouchListener {
 
     View rootView;
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GpsBigViewFragment.class.getSimpleName());
-
 
     public static final GpsBigViewFragment newInstance() {
         GpsBigViewFragment fragment = new GpsBigViewFragment();
@@ -58,7 +58,7 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
         txtLong.setOnTouchListener(this);
 
-        SetLocation(Session.getCurrentLocationInfo());
+        DisplayLocationInfo(Session.getCurrentLocationInfo());
 
         if (Session.isStarted()) {
             Toast.makeText(getActivity().getApplicationContext(), R.string.bigview_taptotoggle, Toast.LENGTH_SHORT).show();
@@ -68,8 +68,23 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         return rootView;
     }
 
-    @Override
-    public void SetLocation(Location locationInfo) {
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LocationUpdate locationUpdate){
+        DisplayLocationInfo(locationUpdate.location);
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LoggingStatus loggingStatus){
+        if(loggingStatus.loggingStarted){
+            TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
+            TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
+            txtLat.setText("");
+            txtLong.setText("");
+        }
+    }
+
+    public void DisplayLocationInfo(Location locationInfo){
+
         TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
         TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
 
@@ -88,54 +103,9 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
     }
 
     @Override
-    public void SetSatelliteCount(int count) {
-
-    }
-
-    @Override
-    public void SetLoggingStarted() {
-        TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
-        TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
-        txtLat.setText("");
-        txtLong.setText("");
-    }
-
-    @Override
-    public void SetLoggingStopped() {
-
-    }
-
-    @Override
-    public void OnWaitingForLocation(boolean inProgress) {
-
-    }
-
-    @Override
-    public void SetStatusMessage(String message) {
-
-    }
-
-    @Override
-    public void SetFatalMessage(String message) {
-
-    }
-
-    @Override
-    public void OnFileNameChange(String newFileName) {
-
-    }
-
-    @Override
-    public void OnNmeaSentence(long timestamp, String nmeaSentence) {
-
-    }
-
-
-    @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-            tracer.debug("Big frame - onTouch event");
-            requestToggleLogging();
+            RequestToggleLogging();
             return true;
         }
 

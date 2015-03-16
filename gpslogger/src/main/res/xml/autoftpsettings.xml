@@ -5,7 +5,7 @@
 
     <com.mendhak.gpslogger.views.component.CustomSwitchPreference
         android:key="autoftp_enabled"
-        android:title="@string/autoftp_enabled" />
+        android:title="@string/autosend_enabled" />
 
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference

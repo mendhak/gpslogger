@@ -30,7 +30,6 @@
   <string name="summary_dist_regardless">Pinakamalaki</string>
   <string name="summary_current_filename">File:</string>
   <string name="sharing_location_only">Lokasyon lamang</string>
-  <string name="sharing_pick_file">Piliin ang file na ibabahagi</string>
   <string name="sharing_mylocation">Aking lokasyon</string>
   <string name="sharing_via">Pagbabahagi sa pamamagitan ng</string>
   <string name="foot">&#160;talampakan</string>
@@ -39,7 +38,6 @@
   <string name="meters">&#160;metro</string>
   <string name="error">Mali</string>
   <string name="error_connection">Hindi makakonekta. Suriin ng mabuti ang mga opsyon sa phone.</string>
-  <string name="gpsprovider_unavailable">Walang nagtagpoang tagapagtustos ng GPS. Suriing mabuti ang iyong mga opsyon para sa lokasyon at tikayin na mayroong tagapagtustos ng GPS.</string>
   <string name="providername_gps">Mga GPS satelayt</string>
   <string name="providername_celltower">Mga tore ng cellphone</string>
   <string name="not_applicable">n/a</string>
@@ -120,7 +118,6 @@
   <string name="osm_pick_file">Pumili ng file na i-upload</string>
   <string name="debuglog_title">Isulat sa debug file</string>
   <string name="debuglog_summary">Magsulat ng mga debug na mensahe sa file sa SD card. Babala: ang file ay mabilis na lalaki     </string>
-  <string name="pref_logging_summary">Oras, distansya, ng paglikha ng file</string>
   <string name="pref_general_title">Pangkalahatang opsyon</string>
   <string name="pref_general_summary">Mga pang-umpisa at pakitang opsyon</string>
   <string name="emailprovider_google">Google Mail</string>

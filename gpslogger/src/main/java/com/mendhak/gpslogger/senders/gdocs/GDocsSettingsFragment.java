@@ -22,7 +22,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import com.google.android.gms.auth.GoogleAuthException;
@@ -35,8 +34,10 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.IActionListener;
+import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.events.UploadEvents;
+import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedOutputStream;
@@ -47,13 +48,10 @@ import java.util.ArrayList;
 
 
 public class GDocsSettingsFragment extends PreferenceFragment
-        implements Preference.OnPreferenceClickListener, IActionListener {
+        implements Preference.OnPreferenceClickListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GDocsSettingsFragment.class.getSimpleName());
-    private final Handler handler = new Handler();
     boolean messageShown = false;
-    String accountName;
-
 
     static final int REQUEST_CODE_MISSING_GPSF = 1;
     static final int REQUEST_CODE_ACCOUNT_PICKER = 2;
@@ -66,8 +64,25 @@ public class GDocsSettingsFragment extends PreferenceFragment
         addPreferencesFromResource(R.xml.gdocssettings);
 
         VerifyGooglePlayServices();
+        RegisterEventBus();
+    }
 
+    @Override
+    public void onDestroy() {
 
+        UnregisterEventBus();
+        super.onDestroy();
+    }
+
+    private void UnregisterEventBus(){
+        try {
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
+    }
+    private void RegisterEventBus() {
+        EventBus.getDefault().register(this);
     }
 
     private void VerifyGooglePlayServices() {
@@ -175,9 +190,8 @@ public class GDocsSettingsFragment extends PreferenceFragment
         try {
             // Retrieve a token for the given account and scope. It will always return either
             // a non-empty String or throw an exception.
-            final String token = GoogleAuthUtil.getToken(getActivity(), GDocsHelper.GetAccountName(getActivity()), GDocsHelper.GetOauth2Scope());
 
-            return token;
+            return GoogleAuthUtil.getToken(getActivity(), GDocsHelper.GetAccountName(getActivity()), GDocsHelper.GetOauth2Scope());
         } catch (GooglePlayServicesAvailabilityException playEx) {
             Dialog alert = GooglePlayServicesUtil.getErrorDialog(
                     playEx.getConnectionStatusCode(),
@@ -193,12 +207,14 @@ public class GDocsSettingsFragment extends PreferenceFragment
                     REQUEST_CODE_RECOVERED);
 
         } catch (IOException transientEx) {
+            tracer.error("Temporary failure", transientEx);
             // network or server error, the call is expected to succeed if you try again later.
             // Don't attempt to call again immediately - the request is likely to
             // fail, you'll hit quotas or back-off.
 
 
         } catch (GoogleAuthException authEx) {
+            tracer.error("Authentication failure", authEx);
             // Failure. The call is not expected to ever succeed so it should not be
             // retried.
 
@@ -247,19 +263,18 @@ public class GDocsSettingsFragment extends PreferenceFragment
                 FileOutputStream initialWriter = new FileOutputStream(testFile, true);
                 BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
 
-                StringBuilder initialString = new StringBuilder();
-                initialString.append("<x>This is a test file</x>");
-                initialOutput.write(initialString.toString().getBytes());
+                initialOutput.write("<x>This is a test file</x>".getBytes());
                 initialOutput.flush();
                 initialOutput.close();
             }
 
         } catch (Exception ex) {
-            OnFailure();
+            tracer.error("Could not create local test file", ex);
+            EventBus.getDefault().post(new UploadEvents.GDocs(false));
         }
 
 
-        GDocsHelper helper = new GDocsHelper(getActivity(), this);
+        GDocsHelper helper = new GDocsHelper(getActivity());
 
         ArrayList<File> files = new ArrayList<File>();
         files.add(testFile);
@@ -268,40 +283,18 @@ public class GDocsSettingsFragment extends PreferenceFragment
 
     }
 
-    @Override
-    public void OnComplete() {
+
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.GDocs o){
+        tracer.debug("GDocs Event completed, success: " + o.success);
         Utilities.HideProgress();
-        handler.post(successUpload);
-    }
-
-    @Override
-    public void OnFailure() {
-        Utilities.HideProgress();
-        handler.post(failedUpload);
-
-    }
-
-
-    private final Runnable failedUpload = new Runnable() {
-        public void run() {
-            FailureUploading();
+        if(!o.success){
+            Utilities.MsgBox(getString(R.string.sorry), getString(R.string.gdocs_testupload_error), getActivity());
         }
-    };
-
-    private final Runnable successUpload = new Runnable() {
-        public void run() {
-            SuccessUploading();
+        else {
+            Utilities.MsgBox(getString(R.string.success), getString(R.string.gdocs_testupload_success), getActivity());
         }
-    };
-
-
-    private void FailureUploading() {
-        Utilities.MsgBox(getString(R.string.sorry), getString(R.string.gdocs_testupload_error), getActivity());
     }
-
-    private void SuccessUploading() {
-        Utilities.MsgBox(getString(R.string.success), getString(R.string.gdocs_testupload_success), getActivity());
-    }
-
 
 }

@@ -32,7 +32,6 @@
   <string name="summary_dist_regardless">maksimumas</string>
   <string name="summary_current_filename">Failas:</string>
   <string name="sharing_location_only">Tik vieta</string>
-  <string name="sharing_pick_file">Pasirinkite failą, kuriuo norite dalintis</string>
   <string name="sharing_mylocation">Mano vieta</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Dalintis per</string>
@@ -42,7 +41,6 @@
   <string name="meters">&#160;metrai</string>
   <string name="error">Klaida</string>
   <string name="error_connection">Klaida prisijungiant: Prašau patikrinti jūsų telefono nustatymus.</string>
-  <string name="gpsprovider_unavailable">Nėra GPS vietos nustatymo tiekėjų. Prašau patikrinti jūsų vietos nustatymo nustatymus ir įjungti/pateikti vietos nustatymo tiekėją.</string>
   <string name="started">Pradėta</string>
   <string name="providername_gps">GPS satelitai</string>
   <string name="providername_celltower">telefonų bokštai</string>
@@ -108,7 +106,6 @@
   <string name="startonbootup_summary">Paleidžia programą ir pradeda įrašinėti, kai telefonas įjungiamas</string>
   <string name="autoemail_summary">Automatiškai siunčia el. laiškus su įrašytom koordinatėm į jūsų parinktą adresą</string>
   <string name="please_wait">Prašau palaukti.</string>
-  <string name="autoemail_autosend_summary">Įjungia automatinį el. laiškų su įrašytom kordinatėm siuntimą pasirinktu adresu</string>
   <string name="autoemail_target">Pasirinkti el. pašto adresatus</string>
   <string name="autoemail_frequency_whenistop">Kai paspaudžiu stabdyti</string>
   <string name="autoemail_smtp_category">El. pašto nustatymai</string>

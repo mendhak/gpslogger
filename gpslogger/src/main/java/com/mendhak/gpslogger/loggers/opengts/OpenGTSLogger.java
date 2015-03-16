@@ -15,13 +15,14 @@
 *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.mendhak.gpslogger.loggers;
+package com.mendhak.gpslogger.loggers.opengts;
 
+import android.content.Context;
 import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.IActionListener;
-import com.mendhak.gpslogger.common.OpenGTSClient;
-
+import com.mendhak.gpslogger.common.SerializableLocation;
+import com.mendhak.gpslogger.loggers.IFileLogger;
+import com.path.android.jobqueue.JobManager;
 
 /**
  * Send locations directly to an OpenGTS server <br/>
@@ -31,13 +32,14 @@ import com.mendhak.gpslogger.common.OpenGTSClient;
 public class OpenGTSLogger implements IFileLogger {
 
     protected final String name = "OpenGTS";
+    final Context context;
 
-    public OpenGTSLogger() {
+    public OpenGTSLogger(Context context) {
+        this.context = context;
     }
 
     @Override
     public void Write(Location loc) throws Exception {
-
 
         String server = AppSettings.getOpenGTSServer();
         int port = Integer.parseInt(AppSettings.getOpenGTSServerPort());
@@ -46,25 +48,8 @@ public class OpenGTSLogger implements IFileLogger {
         String deviceId = AppSettings.getOpenGTSDeviceId();
         String communication = AppSettings.getOpenGTSServerCommunicationMethod();
 
-        IActionListener al = new IActionListener() {
-            @Override
-            public void OnComplete() {
-            }
-
-            @Override
-            public void OnFailure() {
-            }
-        };
-
-        OpenGTSClient openGTSClient = new OpenGTSClient(server, port, path, al, null);
-
-        if(communication.equalsIgnoreCase("UDP")){
-            openGTSClient.sendRAW(deviceId, accountName, loc);
-        }
-        else{
-            openGTSClient.sendHTTP(deviceId, accountName, loc);
-        }
-
+        JobManager jobManager = AppSettings.GetJobManager();
+        jobManager.addJobInBackground(new OpenGTSJob(server, port, accountName, path, deviceId, communication, new SerializableLocation[]{new SerializableLocation(loc)}));
     }
 
     @Override
@@ -77,3 +62,4 @@ public class OpenGTSLogger implements IFileLogger {
     }
 
 }
+

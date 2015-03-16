@@ -31,7 +31,6 @@
   <string name="summary_dist_regardless">максимум</string>
   <string name="summary_current_filename">Файл:</string>
   <string name="sharing_location_only">Розташування лише</string>
-  <string name="sharing_pick_file">Вибрати файл для обміну</string>
   <string name="sharing_mylocation">Моє місцезнаходження</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Як поділитися за допомогою</string>
@@ -41,7 +40,6 @@
   <string name="meters">метри</string>
   <string name="error">Помилка</string>
   <string name="error_connection">Помилка підключення. Будь ласка, перевірте настройки телефону.</string>
-  <string name="gpsprovider_unavailable">Постачальник GPS недоступний. Перевірте настройки розташування і включіть виявлення розташування.     </string>
   <string name="started">Розпочав</string>
   <string name="providername_gps">GPS супутники</string>
   <string name="providername_celltower">стільникові вежі</string>
@@ -112,8 +110,6 @@
   <string name="startonbootup_summary">Запускати програму та запис журналу при увімкненні телефону</string>
   <string name="autoemail_summary">Автоматично надсилати журнал листом на вказану вами адресу</string>
   <string name="please_wait">Будь ласка, зачекайте.</string>
-  <string name="autoemail_autosend">Увімкнути електронну пошту</string>
-  <string name="autoemail_autosend_summary">Вмикає надсилання файлу журналу на вибрану вами електронну адресу</string>
   <string name="autoemail_target">Електронна пошта одержувачів</string>
   <string name="autoemail_frequency_whenistop">Коли я натисну, зупинити</string>
   <string name="autoemail_smtp_category">Параметри електронної пошти</string>
@@ -141,7 +137,6 @@
   <string name="stopped">Зупинено</string>
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Встановіть теґи, опис, параметри видимості та авторизації для надсилання GPS-треків</string>
-  <string name="osm_preferences_title">Налаштування OpenStreetMap</string>
   <string name="osm_lbl_authorize">Авторизувати цю програму</string>
   <string name="osm_lbl_authorize_description">Вам потрібно дозволити програмі GPSLogger завантажувати треки під Вашим профілем на OpenStreetMap. Після цього Ви зможете додавати теґи, описи і т. п.</string>
   <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
@@ -162,7 +157,6 @@
   <string name="osm_pick_file">Вибрати файл для надсилання</string>
   <string name="debuglog_title">Записувати інформацію для відлагодження у файл</string>
   <string name="debuglog_summary">Записувати інформацію для відлагодження у файл на SD-карту. Попередження: розмір файлу збільшується дуже швидко.</string>
-  <string name="pref_logging_summary">Час, відстань, створення файлу</string>
   <string name="pref_general_title">Загальні налаштування</string>
   <string name="pref_general_summary">Параметри автозапуску та показу</string>
   <string name="emailprovider_google">Пошта Google</string>
@@ -206,7 +200,6 @@
   <string name="log_opengts_summary">Надсилати дані GPRMC на сервер OpenGTS.</string>
   <string name="opengts_setup_summary">Надсилання координат на сервер OpenGTS за вашим вибором.</string>
   <string name="opengts_enabled">Увімкнути OpenGTS</string>
-  <string name="opengts_enabled_summary">Увімкніть цей OpenGTS сервер.</string>
   <string name="autoopengts_autosend">Включити автоматичне надсилання</string>
   <string name="autoopengts_autosend_summary">Включає автоматичне надсилання координат.</string>
   <string name="autoopengts_server_category">Параметри OpenGTS</string>
@@ -241,7 +234,6 @@
   <string name="autoftp_testing">Тестування завантаження FTP</string>
   <string name="autoftp_invalid_settings">Неприпустимі параметри</string>
   <string name="autoftp_invalid_summary">Деякі параметри неприпустимі. Будь ласка, переконайтеся, що ви заповнили всі відповідні поля.     </string>
-  <string name="autoftp_enabled">FTP включений</string>
   <string name="ftp_upload">Надсилання FTP</string>
   <string name="autoftp_setup_summary">Завантажити файли на сервер FTP(S). Примітка: Це не охоплює SFTP.</string>
   <string name="faq_screen_title">Часті запитання</string>
@@ -250,7 +242,6 @@
   <string name="gpsf_missing_description">Для використання цієї функції необхідний доступ до Google Play Services Framework.</string>
   <string name="log_customurl_title">Запис до обраного URL</string>
   <string name="log_customurl_summary">Надсилання даних до обраного сервера через HTTP</string>
-  <string name="log_customurl_urlparameters">Параметри URL</string>
   <string name="txt_annotation">Анотація:</string>
   <string name="txt_time_isoformat">Час UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Постачальник:</string>

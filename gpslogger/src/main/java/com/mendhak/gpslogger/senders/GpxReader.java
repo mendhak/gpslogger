@@ -15,9 +15,10 @@
 *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.mendhak.gpslogger.senders.opengts;
+package com.mendhak.gpslogger.senders;
 
 import android.location.Location;
+import com.mendhak.gpslogger.common.SerializableLocation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -44,8 +45,8 @@ public class GpxReader {
 
     private static final SimpleDateFormat gpxDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
-    public static List<Location> getPoints(File gpxFile) throws Exception {
-        List<Location> points;
+    public static List<SerializableLocation> getPoints(File gpxFile) throws Exception {
+        List<SerializableLocation> points;
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -55,7 +56,7 @@ public class GpxReader {
         Element root = dom.getDocumentElement();
         NodeList items = root.getElementsByTagName("trkpt");
 
-        points = new ArrayList<Location>();
+        points = new ArrayList<SerializableLocation>();
 
         for (int j = 0; j < items.getLength(); j++) {
             Node item = items.item(j);
@@ -98,7 +99,7 @@ public class GpxReader {
                 pt.setAltitude(Double.parseDouble(item3.getFirstChild().getNodeValue()));
             }
 
-            points.add(pt);
+            points.add(new SerializableLocation(pt));
 
         }
 

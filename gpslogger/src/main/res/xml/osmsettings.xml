@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android" android:key="osm_preferences">
-  
+
+    <com.mendhak.gpslogger.views.component.CustomSwitchPreference android:key="osm_enabled"
+                                                                  android:title="@string/autosend_enabled"/>
  
 	 <Preference android:key="osm_resetauth" android:summary="@string/osm_resetauth_summary" 
 	 	android:title="@string/osm_resetauth"/>
@@ -21,6 +23,5 @@
 		android:title="@string/osm_tags"
 		android:summary="@string/osm_tags_summary"
 		android:dialogTitle="@string/osm_tags" />
- 
-  
+
 </PreferenceScreen>

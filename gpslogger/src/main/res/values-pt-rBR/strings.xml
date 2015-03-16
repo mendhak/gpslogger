@@ -31,7 +31,6 @@
   <string name="summary_dist_regardless">maximo</string>
   <string name="summary_current_filename">Arquivo:</string>
   <string name="sharing_location_only">Localização somente</string>
-  <string name="sharing_pick_file">Selecione um arquivo para compartilhar</string>
   <string name="sharing_mylocation">Minha localização</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Compartilhar via</string>
@@ -41,10 +40,6 @@
   <string name="meters">&#160;metros</string>
   <string name="error">Erro</string>
   <string name="error_connection">Erro de conexão. Favor verificar as opções do seu telefone.</string>
-  <string name="gpsprovider_unavailable">Sem provedor GPS disponível. Favor checar suas opções de localização e 
-        habilitar um provedor de localização.
-
-    </string>
   <string name="started">Iniciou</string>
   <string name="providername_gps">Satélites GPS</string>
   <string name="providername_celltower">Torres de celular</string>
@@ -114,8 +109,6 @@
   <string name="startonbootup_summary">Rodar o app e gravar log quando telefone iniciar</string>
   <string name="autoemail_summary">Envia automaticamente um e-mail com o arquivo de log para um endereço de sua escolha</string>
   <string name="please_wait">Aguarde.</string>
-  <string name="autoemail_autosend">Habilitar e-mails</string>
-  <string name="autoemail_autosend_summary">Habilita o envio do arquivo de log para um endereço de e-mail de sua escolha.     </string>
   <string name="autoemail_target">Endereços de e-mail de destino</string>
   <string name="autoemail_frequency_whenistop">Quando eu pressionar Parar</string>
   <string name="autoemail_smtp_category">Configurações de e-mail</string>
@@ -143,7 +136,6 @@
   <string name="stopped">Parou</string>
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Definir etiquetas, descrição, visibilidade e a autorização para efetuar upload de rastreamento GPS     </string>
-  <string name="osm_preferences_title">Preferências do OpenStreetMap</string>
   <string name="osm_lbl_authorize">Autorizar este app</string>
   <string name="osm_lbl_authorize_description">Você precisará conceder este app permissões para poder carregar rastreamento GPS para o OpenStreetMap. Você pode definir tags, descrições e visibilidade aqui depois que tenha autorizado este app.     </string>
   <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
@@ -164,7 +156,6 @@
   <string name="osm_pick_file">Escolher um arquivo para upload</string>
   <string name="debuglog_title">Escreva para depurar arquivo</string>
   <string name="debuglog_summary">Escreve depurar mensagens para um arquivo no cartão SD. Aviso: O arquivo cresce muito rápido.     </string>
-  <string name="pref_logging_summary">Tempo, distância, criação de arquivo</string>
   <string name="pref_general_title">Opções gerais</string>
   <string name="pref_general_summary">Opções de inicialização e exibição</string>
   <string name="emailprovider_google">Email do Google</string>
@@ -208,7 +199,6 @@
   <string name="log_opengts_summary">Envie dados GPRMC para um servidor de OpenGTS online.</string>
   <string name="opengts_setup_summary">Envie o rastreamento GPS para um servidor de OpenGTS de sua escolha.</string>
   <string name="opengts_enabled">Habilitar OpenGTS</string>
-  <string name="opengts_enabled_summary">Habilitar este servidor de OpenGTS.</string>
   <string name="autoopengts_autosend">Habilitar o envio automático</string>
   <string name="autoopengts_autosend_summary">Permite enviar automaticamente o rastreamento GPS.</string>
   <string name="autoopengts_server_category">Configurações OpenGTS</string>
@@ -243,7 +233,6 @@
   <string name="autoftp_testing">Teste de upload FTP</string>
   <string name="autoftp_invalid_settings">Configurações inválidas</string>
   <string name="autoftp_invalid_summary">Algumas de suas configurações são inválidas. Certifique-se de que preencheu todos os campos relevantes.     </string>
-  <string name="autoftp_enabled">FTP habilitado</string>
   <string name="ftp_upload">Upload FTP</string>
   <string name="autoftp_setup_summary">Upload de seus arquivos para um servidor de FTP. Atenção: Isto não cobre SFTP.</string>
   <string name="faq_screen_title">Perguntas mais frequentes</string>

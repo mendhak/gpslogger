@@ -27,30 +27,28 @@ import com.dropbox.client2.session.AppKeyPair;
 import com.dropbox.client2.session.Session;
 import com.dropbox.client2.session.TokenPair;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.IActionListener;
 import com.mendhak.gpslogger.senders.IFileSender;
+import com.path.android.jobqueue.JobManager;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.List;
 
 
-public class DropBoxHelper implements IActionListener, IFileSender {
+public class DropBoxHelper implements IFileSender {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropBoxHelper.class.getSimpleName());
     final static public String ACCESS_KEY_NAME = "DROPBOX_ACCESS_KEY";
     final static public String ACCESS_SECRET_NAME = "DROPBOX_ACCESS_SECRET";
     final static private Session.AccessType ACCESS_TYPE = Session.AccessType.APP_FOLDER;
-    Context ctx;
-    DropboxAPI<AndroidAuthSession> dropboxApi;
-    IActionListener callback;
 
-    public DropBoxHelper(Context context, IActionListener listener) {
-        ctx = context;
+    Context context;
+    DropboxAPI<AndroidAuthSession> dropboxApi;
+
+    public DropBoxHelper(Context context) {
+        this.context = context;
         AndroidAuthSession session = buildSession();
         dropboxApi = new DropboxAPI<AndroidAuthSession>(session);
-        callback = listener;
     }
 
     /**
@@ -89,27 +87,26 @@ public class DropBoxHelper implements IActionListener, IFileSender {
     private void storeKeys(String key, String secret) {
 
         SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(ctx);
+                .getDefaultSharedPreferences(context);
         SharedPreferences.Editor edit = prefs.edit();
         edit.putString(ACCESS_KEY_NAME, key);
         edit.putString(ACCESS_SECRET_NAME, secret);
-        edit.commit();
+        edit.apply();
     }
 
     private void clearKeys() {
         SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(ctx);
+                .getDefaultSharedPreferences(context);
         SharedPreferences.Editor edit = prefs.edit();
         edit.remove(ACCESS_KEY_NAME);
         edit.remove(ACCESS_SECRET_NAME);
-        edit.commit();
+        edit.apply();
     }
 
-
     private AndroidAuthSession buildSession() {
-        int dropboxAppKey = ctx.getResources().getIdentifier("dropbox_appkey", "string", ctx.getPackageName());
-        int dropboxAppSecret = ctx.getResources().getIdentifier("dropbox_appsecret", "string", ctx.getPackageName());
-        AppKeyPair appKeyPair = new AppKeyPair(ctx.getString(dropboxAppKey), ctx.getString(dropboxAppSecret));
+        int dropboxAppKey = context.getResources().getIdentifier("dropbox_appkey", "string", context.getPackageName());
+        int dropboxAppSecret = context.getResources().getIdentifier("dropbox_appsecret", "string", context.getPackageName());
+        AppKeyPair appKeyPair = new AppKeyPair(context.getString(dropboxAppKey), context.getString(dropboxAppSecret));
         AndroidAuthSession session;
 
         String[] stored = getKeys();
@@ -131,7 +128,7 @@ public class DropBoxHelper implements IActionListener, IFileSender {
      * @return Array of [access_key, access_secret], or null if none stored
      */
     private String[] getKeys() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String key = prefs.getString(ACCESS_KEY_NAME, null);
         String secret = prefs.getString(ACCESS_SECRET_NAME, null);
         if (key != null && secret != null) {
@@ -159,54 +156,23 @@ public class DropBoxHelper implements IActionListener, IFileSender {
 
     @Override
     public void UploadFile(List<File> files) {
-
         for (File f : files) {
             UploadFile(f.getName());
         }
     }
 
     public void UploadFile(String fileName) {
-        Thread t = new Thread(new DropBoxUploadHandler(fileName, dropboxApi, this));
-        t.start();
+        int dropboxAppKey = context.getResources().getIdentifier("dropbox_appkey", "string", context.getPackageName());
+        int dropboxAppSecret = context.getResources().getIdentifier("dropbox_appsecret", "string", context.getPackageName());
+
+        JobManager jobManager = AppSettings.GetJobManager();
+        jobManager.addJobInBackground(new DropboxJob(fileName, context.getString(dropboxAppKey), context.getString(dropboxAppSecret), getKeys()));
     }
 
-    public void OnComplete() {
-        callback.OnComplete();
-    }
-
-    public void OnFailure() {
-
-    }
 
     @Override
     public boolean accept(File dir, String name) {
         return true;
-    }
-
-    public class DropBoxUploadHandler implements Runnable {
-        DropboxAPI<AndroidAuthSession> api;
-        String fileName;
-        IActionListener helper;
-
-        public DropBoxUploadHandler(String file, DropboxAPI<AndroidAuthSession> dbApi, IActionListener dbHelper) {
-            fileName = file;
-            api = dbApi;
-            helper = dbHelper;
-        }
-
-        public void run() {
-            try {
-                File gpsDir = new File(AppSettings.getGpsLoggerFolder());
-                File gpxFile = new File(gpsDir, fileName);
-
-                FileInputStream fis = new FileInputStream(gpxFile);
-                DropboxAPI.Entry upEntry = api.putFileOverwrite(gpxFile.getName(), fis, gpxFile.length(), null);
-                tracer.info("DropBox uploaded file rev is: " + upEntry.rev);
-                helper.OnComplete();
-            } catch (Exception e) {
-                tracer.error("DropBoxHelper.UploadFile", e);
-            }
-        }
     }
 
 }

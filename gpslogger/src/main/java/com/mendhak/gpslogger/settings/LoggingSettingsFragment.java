@@ -60,7 +60,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
         if (prefs.getString("new_file_creation", "onceaday").equals("static")) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("new_file_creation", "custom");
-            editor.commit();
+            editor.apply();
 
             MaterialListPreference newFileCreation = (MaterialListPreference) findPreference("new_file_creation");
             if(newFileCreation !=null){
@@ -137,7 +137,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
                             EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
                             SharedPreferences.Editor editor = prefs.edit();
                             editor.putString("new_file_custom_name", userInput.getText().toString());
-                            editor.commit();
+                            editor.apply();
                         }
                     }).build();
 
@@ -187,7 +187,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
                                 EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putString("log_customurl_url", userInput.getText().toString());
-                                editor.commit();
+                                editor.apply();
                             }
                         })
                         .keyListener(new DialogInterface.OnKeyListener() {
@@ -267,7 +267,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("gpslogger_folder", filePath);
-        editor.commit();
+        editor.apply();
 
         Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
         gpsloggerFolder.setSummary(filePath);
