@@ -23,8 +23,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 56
-        versionName "56"
+        versionCode 57
+        versionName "57"
 
         //This allows us to run Robotium and Unit tests separately using
         //connectedAndroidTest -PtestSize=small
