@@ -33,6 +33,7 @@ import android.os.*;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
@@ -903,6 +904,11 @@ public class GpsLoggingService extends Service  {
         }
 
         EventBus.getDefault().removeStickyEvent(CommandEvents.Annotate.class);
+    }
+
+    @EventBusHook
+    public void onEvent(CommandEvents.LogOnce logOnce){
+        LogOnce();
     }
 
 }
