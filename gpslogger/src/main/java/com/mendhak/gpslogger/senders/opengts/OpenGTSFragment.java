@@ -68,6 +68,11 @@ public class OpenGTSFragment extends PreferenceValidationFragment implements
 
     private boolean IsFormValid() {
 
+        CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("autoopengts_enabled");
+        if(!chkEnabled.isChecked()) {
+            return true;
+        }
+
         MaterialEditTextPreference txtOpenGTSServer = (MaterialEditTextPreference) findPreference("opengts_server");
         MaterialEditTextPreference txtOpenGTSServerPort = (MaterialEditTextPreference) findPreference("opengts_server_port");
         MaterialListPreference txtOpenGTSCommunicationMethod = (MaterialListPreference) findPreference("opengts_server_communication_method");
