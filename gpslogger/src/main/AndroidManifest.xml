@@ -135,6 +135,9 @@
                 <category android:name="com.mendhak.gpslogger.NOTIFICATION_BUTTON" />
             </intent-filter>
         </activity>
+
+        <provider android:name=".common.ContentApi" android:authorities="com.mendhak.gpslogger" android:exported="true" />
+
     </application>
 
 </manifest>
