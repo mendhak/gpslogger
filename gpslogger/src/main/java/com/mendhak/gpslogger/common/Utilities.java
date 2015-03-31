@@ -148,6 +148,8 @@ public class Utilities {
         tracer.info("Getting preferences");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
+        AppSettings.setHideNotificationButtons(prefs.getBoolean("hide_notification_buttons", false));
+
         AppSettings.setUseImperial(prefs.getBoolean("useImperial", false));
 
         AppSettings.setLogToKml(prefs.getBoolean("log_kml", false));

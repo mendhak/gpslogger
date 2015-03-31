@@ -52,6 +52,7 @@ public class AppSettings extends Application {
     // User Preferences
     // ---------------------------------------------------
     private static boolean useImperial = false;
+    private static boolean hideNotificationButtons = false;
     private static boolean newFileOnceADay;
 
     private static boolean logToKml;
@@ -642,5 +643,15 @@ public class AppSettings extends Application {
 
     public static boolean shouldAutoSendWhenIPressStop() {
         return autoSendWhenIPressStop;
+    }
+
+
+
+    public static void setHideNotificationButtons(boolean hideNotificationButtons) {
+        AppSettings.hideNotificationButtons = hideNotificationButtons;
+    }
+
+    public static boolean shouldHideNotificationButtons() {
+        return hideNotificationButtons;
     }
 }

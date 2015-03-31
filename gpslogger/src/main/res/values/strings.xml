@@ -431,5 +431,7 @@
     <string name="donate_bitcoin">Donate (Bitcoin)</string>
 
     <string name="no_network_message">There is no network available</string>
+    <string name="hide_notification_buttons">Hide notification buttons</string>
+    <string name="hide_notification_buttons_summary">You will need to restart GPSLogger for this setting to take effect</string>
 
 </resources>

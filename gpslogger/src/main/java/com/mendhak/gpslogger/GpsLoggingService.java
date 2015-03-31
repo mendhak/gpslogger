@@ -412,11 +412,15 @@ public class GpsLoggingService extends Service  {
                     .setPriority(Notification.PRIORITY_MAX)
                     .setContentTitle(contentText)
                     .setOngoing(true)
-                    .setContentIntent(pending)
-                    .addAction(R.drawable.annotate2, getString(R.string.menu_annotate), piAnnotate)
-                    .addAction(android.R.drawable.ic_menu_close_clear_cancel, getString(R.string.shortcut_stop), piStop);
+                    .setContentIntent(pending);
 
+            if(!AppSettings.shouldHideNotificationButtons()){
+                nfc.addAction(R.drawable.annotate2, getString(R.string.menu_annotate), piAnnotate)
+                        .addAction(android.R.drawable.ic_menu_close_clear_cancel, getString(R.string.shortcut_stop), piStop);
+            }
         }
+
+
 
         nfc.setContentTitle(contentText);
         nfc.setContentText(getString(R.string.app_name));

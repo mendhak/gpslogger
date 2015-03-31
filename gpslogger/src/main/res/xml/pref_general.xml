@@ -12,6 +12,13 @@
         android:title="@string/display_imperial_title"
         android:summary="@string/display_imperial_summary"
         android:key="useImperial"/>
+
+    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+        android:title="@string/hide_notification_buttons"
+        android:summary="@string/hide_notification_buttons_summary"
+        android:key="hide_notification_buttons"
+        >
+    </com.mendhak.gpslogger.views.component.CustomSwitchPreference>
     <Preference
         android:title="@string/enabledisablegps_title"
         android:summary="@string/enabledisablegps_summary"
