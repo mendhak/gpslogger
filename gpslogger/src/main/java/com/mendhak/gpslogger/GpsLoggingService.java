@@ -31,9 +31,9 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.*;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.util.Log;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
@@ -139,7 +139,7 @@ public class GpsLoggingService extends Service  {
 
                 if (bundle.getBoolean(IntentConstants.AUTOSEND_NOW)) {
                     tracer.debug("Intent received - Send Email Now");
-                    EventBus.getDefault().postSticky(new CommandEvents.AutoSend(true));
+                    EventBus.getDefault().postSticky(new CommandEvents.AutoSend(null));
                 }
 
                 if (bundle.getBoolean(IntentConstants.GET_NEXT_POINT)) {
@@ -265,25 +265,20 @@ public class GpsLoggingService extends Service  {
      */
     private void AutoSendLogFileOnStop() {
         if (AppSettings.isAutoSendEnabled() && AppSettings.shouldAutoSendWhenIPressStop()) {
-            Session.setReadyToBeAutoSent(true);
-            AutoSendLogFile(true);
+            AutoSendLogFile(null);
         }
     }
 
     /**
      * Calls the Auto Senders which process the files and send it.
      */
-    private void AutoSendLogFile(boolean force) {
+    private void AutoSendLogFile(@Nullable String formattedFileName) {
 
-        tracer.debug("Ready to be sent - " + Session.isReadyToBeAutoSent() + ", force - " + force + ", valid location: " + Session.hasValidLocation());
+        tracer.debug("Filename: " + formattedFileName);
 
-        if (
-               Session.getCurrentFileName() != null && Session.getCurrentFileName().length() > 0 &&
-               ( force || (Session.isReadyToBeAutoSent() && Session.hasValidLocation()) )
-           ) {
-
-            FileSenderFactory.SendFiles(getApplicationContext());
-            Session.setReadyToBeAutoSent(false);
+        if ( !Utilities.IsNullOrEmpty(formattedFileName) || !Utilities.IsNullOrEmpty(Session.getCurrentFileName()) ) {
+            String fileToSend = Utilities.IsNullOrEmpty(formattedFileName) ? Session.getCurrentFileName() : formattedFileName;
+            FileSenderFactory.SendFiles(getApplicationContext(), fileToSend);
             SetupAutoSendTimers();
         }
     }
@@ -563,6 +558,8 @@ public class GpsLoggingService extends Service  {
      */
     private void ResetCurrentFileName(boolean newLogEachStart) {
 
+        String currentFileName = Session.getCurrentFormattedFileName();
+
         /* Pick up saved settings, if any. (Saved static file) */
         String newFileName = Session.getCurrentFileName();
 
@@ -581,6 +578,15 @@ public class GpsLoggingService extends Service  {
             newFileName = sdf.format(new Date());
             Session.setCurrentFileName(newFileName);
         }
+
+        if(!Utilities.IsNullOrEmpty(currentFileName)
+                && !currentFileName.equalsIgnoreCase(Utilities.GetFormattedCustomFileName(newFileName))
+                && Session.isStarted()){
+            tracer.info("New file name, should auto upload.");
+            EventBus.getDefault().post(new CommandEvents.AutoSend(currentFileName));
+        }
+
+        Session.setCurrentFormattedFileName(Session.getCurrentFileName());
 
         tracer.info("Filename: " + newFileName);
         EventBus.getDefault().post(new ServiceEvents.FileNamed(newFileName));
@@ -882,8 +888,7 @@ public class GpsLoggingService extends Service  {
 
     @EventBusHook
     public void onEvent(CommandEvents.AutoSend autoSend){
-        Session.setReadyToBeAutoSent(true);
-        AutoSendLogFile(autoSend.force);
+        AutoSendLogFile(autoSend.formattedFileName);
 
         EventBus.getDefault().removeStickyEvent(CommandEvents.AutoSend.class);
     }

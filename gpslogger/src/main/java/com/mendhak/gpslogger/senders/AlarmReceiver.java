@@ -34,7 +34,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         try {
             tracer.info("Alarm received");
 
-            EventBus.getDefault().postSticky(new CommandEvents.AutoSend(false));
+            EventBus.getDefault().postSticky(new CommandEvents.AutoSend(null));
 
             Intent serviceIntent = new Intent(context.getPackageName() + ".GpsLoggingService");
             context.startService(serviceIntent);

@@ -633,7 +633,7 @@ public class GpsMainActivity extends ActionBarActivity
 
         if (AppSettings.isAutoSendEnabled()) {
             Utilities.ShowProgress(this, getString(R.string.autosend_sending),getString(R.string.please_wait));
-            EventBus.getDefault().post(new CommandEvents.AutoSend(true));
+            EventBus.getDefault().post(new CommandEvents.AutoSend(null));
 
         } else {
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);

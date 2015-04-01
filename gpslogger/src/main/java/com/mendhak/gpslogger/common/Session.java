@@ -44,12 +44,12 @@ public class Session extends Application {
     private static double totalTravelled;
     private static int numLegs;
     private static boolean isBound;
-    private static boolean readyToBeAutoSent = false;
     private static String description = "";
     private static boolean isSinglePointMode = false;
     private static int retryTimeout = 0;
     private static boolean waitingForLocation;
     private static boolean annotationMarked;
+    private static String currentFormattedFileName;
 
     public static boolean isSinglePointMode() {
         return isSinglePointMode;
@@ -299,24 +299,6 @@ public class Session extends Application {
         return isBound;
     }
 
-    /**
-     * Sets whether an email is ready to be sent
-     *
-     * @param readyToBeAutoSent
-     */
-    public static void setReadyToBeAutoSent(boolean readyToBeAutoSent) {
-        Session.readyToBeAutoSent = readyToBeAutoSent;
-    }
-
-    /**
-     * Gets whether an email is waiting to be sent
-     *
-     * @return
-     */
-    public static boolean isReadyToBeAutoSent() {
-        return readyToBeAutoSent;
-    }
-
     public static boolean hasDescription() {
         return !(description.length() == 0);
     }
@@ -347,5 +329,13 @@ public class Session extends Application {
 
     public static void setAnnotationMarked(boolean annotationMarked) {
         Session.annotationMarked = annotationMarked;
+    }
+
+    public static String getCurrentFormattedFileName() {
+        return currentFormattedFileName;
+    }
+
+    public static void setCurrentFormattedFileName(String currentFormattedFileName) {
+        Session.currentFormattedFileName = currentFormattedFileName;
     }
 }

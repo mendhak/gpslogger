@@ -1,6 +1,8 @@
 package com.mendhak.gpslogger.common.events;
 
 
+import android.support.annotation.Nullable;
+
 public class CommandEvents {
     /**
      * Requests starting or stopping the logging service.
@@ -23,9 +25,9 @@ public class CommandEvents {
      * Requests auto sending to targets
      */
     public static class AutoSend {
-        public boolean force;
-        public AutoSend(boolean force){
-            this.force = force;
+        public String formattedFileName;
+        public AutoSend(@Nullable String formattedFileName){
+            this.formattedFileName = formattedFileName;
         }
     }
 

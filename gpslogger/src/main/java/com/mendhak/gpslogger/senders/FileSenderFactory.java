@@ -63,10 +63,9 @@ public class FileSenderFactory {
         return new FtpHelper();
     }
 
-    public static void SendFiles(Context applicationContext) {
+    public static void SendFiles(Context applicationContext, final String fileToSend) {
 
-        final String currentFileName = Session.getCurrentFileName();
-        tracer.info("Sending file " + currentFileName);
+        tracer.info("Sending file " + fileToSend);
 
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
@@ -78,7 +77,7 @@ public class FileSenderFactory {
         List<File> files = new ArrayList<File>(Arrays.asList(Utilities.GetFilesInFolder(gpxFolder, new FilenameFilter() {
             @Override
             public boolean accept(File file, String s) {
-                return s.contains(currentFileName) && !s.contains("zip");
+                return s.contains(fileToSend) && !s.contains("zip");
             }
         })));
 
@@ -90,7 +89,7 @@ public class FileSenderFactory {
         }
 
         if (AppSettings.shouldSendZipFile()) {
-            File zipFile = new File(gpxFolder.getPath(), currentFileName + ".zip");
+            File zipFile = new File(gpxFolder.getPath(), fileToSend + ".zip");
             ArrayList<String> filePaths = new ArrayList<String>();
 
             for (File f : files) {
