@@ -187,7 +187,6 @@
   <string name="autosend_sendzip_title">Hantar fail zip</string>
   <string name="autosend_sendzip_summary">Hantar fail zip jika diperlukan.  Jangan benarkan penghantaran fail individu atau jika opsyen zip tidak berjalan untuk anda.</string>
   <string name="autosend_targets_category">Hantar Sasaran Automatik</string>
-  <string name="menu_autosend_now">Hantar Sekarang Automatik</string>
   <string name="autosend_sending">Penghantaran Automatik</string>
   <string name="summary_autosend">Hantar Automatik:</string>
   <string name="pref_autosend_title">Hantar automatik, emel dan muat naik</string>

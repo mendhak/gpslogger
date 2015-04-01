@@ -7,7 +7,7 @@
   <string name="cancel">Cancelar</string>
   <string name="could_not_write_to_file">No se pudo escribir al archivo</string>
   <string name="add_description">Añadir una descripción</string>
-  <string name="letters_numbers">Usar sólo letras y números</string>
+  <string name="letters_numbers">Use sólo letras y números</string>
   <string name="menu_settings">Configuración</string>
   <string name="menu_annotate">Anotar</string>
   <string name="menu_share">Compartir</string>
@@ -95,6 +95,7 @@
   <string name="new_file_creation_summary">Crear un nuevo archivo por día, o cada vez que inicie.</string>
   <string name="new_file_creation_onceaday">Una vez al día</string>
   <string name="new_file_creation_everystart">Cada vez que inicia</string>
+  <string name="new_file_creation_custom">Archivo personalizado</string>
   <string name="pref_performance_title">Rendimiento</string>
   <string name="time_before_logging_title">Tiempo entre cada registro</string>
   <string name="time_before_logging_summary">Use 0 para máxima frecuencia, pero es mejor reducirla para conservar batería.</string>
@@ -175,6 +176,8 @@
   <string name="menu_upload">Subir</string>
   <string name="autoemail_from">Desde dirección</string>
   <string name="autoemail_from_summary">Algunos servidores requieren una dirección de origen. Usar sólo si es necesario.</string>
+  <string name="gdocs_startauthorization">Autorizar con Google Drive</string>
+  <string name="gdocs_authorize_summary">Ir a Google Docs para autorizar a GPSLogger</string>
   <string name="gdocs_clearauthorization">Borrar autorización</string>
   <string name="gdocs_clearauthorization_summary">Borrar ajustes GDocs. Puede revocar los permisos desde su cuenta Google</string>
   <string name="gdocs_test_title">Prueba de carga</string>
@@ -190,7 +193,6 @@
   <string name="autosend_sendzip_title">Enviar archivo zip</string>
   <string name="autosend_sendzip_summary">Enviar archivo comprimido en zip. No habilitar para enviar archivos individuales, o si falla por algún motivo</string>
   <string name="autosend_targets_category">Destinos de envío automático</string>
-  <string name="menu_autosend_now">Envío automático ahora</string>
   <string name="autosend_sending">Envío automático</string>
   <string name="summary_autosend">Enviar automáticamente:</string>
   <string name="pref_autosend_title">Envío automático y email</string>
@@ -249,6 +251,7 @@
   <string name="txt_provider">Proveedor:</string>
   <string name="gpslogger_folder_title">Guardar en carpeta</string>
   <string name="autoftp_directory">Directorio</string>
+  <string name="txt_travel_duration">Duración:</string>
   <string name="view_simple">Vista Simple</string>
   <string name="view_detailed">Vista Detallada</string>
   <string name="view_big">Vista Ampliada</string>
@@ -274,4 +277,8 @@
   <string name="listeners_summary">Qué proveedores de contenido usar cuando se encuentran disponibles; GPS para satélites, Red para torres de celdas/wifi, Pasivo es un proveedor especial que escucha ubicaciones solicitadas por otras aplicaciones.</string>
   <string name="listeners_title">Proveedores de contenido</string>
   <string name="autosend_frequency_hint">Número de minutos</string>
+  <string name="pref_logging_file_no_permissions">Esa carpeta no es escribible por GPSLogger</string>
+  <string name="donate_app">Donar (app)</string>
+  <string name="donate_bitcoin">Donar (Bitcoin)</string>
+  <string name="no_network_message">No hay ninguna red disponible</string>
 </resources>

@@ -203,7 +203,6 @@
   <string name="autosend_sendzip_title">Zip-bestand verzenden</string>
   <string name="autosend_sendzip_summary">Zipbestand verzenden indien van toepassing. Uitschakelen voor het verzenden van individuele bestanden, of als de zip-optie niet voor u werkt     </string>
   <string name="autosend_targets_category">Doelinstellingen van automatisch verzenden</string>
-  <string name="menu_autosend_now">Nu automatisch verzenden</string>
   <string name="autosend_sending">Automatisch verzenden</string>
   <string name="summary_autosend">Automatisch verzenden:</string>
   <string name="pref_autosend_title">Automatisch verzenden, e-mailen en uploaden</string>

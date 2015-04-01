@@ -45,6 +45,11 @@
   <string name="meters">metre</string>
   <string name="error">Chyba</string>
   <string name="error_connection">Chyba pripojenia. Prosím skontrolujte nastavenia telefónu.</string>
+  <string name="seconds">&#160;s</string>
+  <string name="minutes">&#160;min</string>
+  <string name="hours">&#160;hrs</string>
+  <string name="gpsprovider_unavailable">Nie je dostupný žiadny poskytovateľ GPS. Prosím skontrolujte nastavenia svojej pozície a zapnite poskytovateľa pozície.
+    </string>
   <string name="started">Spustené</string>
   <string name="providername_gps">Satelity GPS</string>
   <string name="providername_celltower">vykrývače mobilným signálom</string>
@@ -106,6 +111,7 @@
 Môžete pridať aj niekoľko dynamických parametrov, ako je sériové číslo, rok, hodina, minúta a pod. Priveľmi dynamické názvy
 súborov možno nebudú fungovať v kombinácii s automatickým odosielaním, pretože sa odosiela len najnovší súbor.</string>
   <string name="pref_performance_title">Výkon</string>
+  <string name="pref_performance_summary">Časovanie, filtre a poslucháči</string>
   <string name="time_before_logging_title">Čas pred záznamom</string>
   <string name="time_before_logging_summary">Pre maximálnu frekvenciu zadajte hodnotu 0. Čím bude hodnota menšia, tým viac energie sa ušetrí.
     </string>
@@ -183,6 +189,7 @@ udeliť oprávnenia tejto aplikácii. Po autorizovaní môžete nastaviť tagy, 
   <string name="debuglog_title">Zapísať do súboru pre ladenie</string>
   <string name="debuglog_summary">Zapíše správy pre ladenie do súboru na karte SD. Upozornenie: Súbor sa veľmi rýchlo zväčšuje.
      </string>
+  <string name="pref_logging_summary">Typy súborov, vytváranie a pomenovanie</string>
   <string name="pref_general_title">Všeobecné nastavenia</string>
   <string name="pref_general_summary">Možnosti spustenia a zobrazenia</string>
   <string name="emailprovider_google">Google Mail</string>
@@ -229,7 +236,6 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
   <string name="autosend_sendzip_summary">Odoslať súbor ZIP ak je to možné. Vypnite pre odoslanie jednotlivých súborov, alebo ak táto funkcia nefunguje
     </string>
   <string name="autosend_targets_category">Automatické odoslanie na</string>
-  <string name="menu_autosend_now">Automaticky odoslať teraz</string>
   <string name="autosend_sending">Automatické odosielanie</string>
   <string name="summary_autosend">Automaticky odoslať:</string>
   <string name="pref_autosend_title">Autom. odoslať, emailom a odoslaním do služby</string>
@@ -332,4 +338,5 @@ polia.
   <string name="new_file_custom_each_time_summary">Pri každom spustení zaznamenávania sa opýtať na používateľom určený názov súboru</string>
   <string name="donate_app">Podporiť (ap.)</string>
   <string name="donate_bitcoin">Podporiť (Bitcoin)</string>
+  <string name="no_network_message">Nie je dostupná žiadna sieť</string>
 </resources>
