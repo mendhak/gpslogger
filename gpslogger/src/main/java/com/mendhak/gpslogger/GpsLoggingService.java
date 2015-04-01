@@ -341,7 +341,8 @@ public class GpsLoggingService extends Service  {
     public void StopLogging() {
         tracer.debug(".");
         Session.setAddNewTrackSegment(true);
-
+        Session.setTotalTravelled(0);
+        Session.setPreviousLocationInfo(null);
         Session.setStarted(false);
         stopAbsoluteTimer();
         // Email log file before setting location info to null
