@@ -27,10 +27,12 @@ public class GDocsJob extends Job {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GDocsJob.class.getSimpleName());
     String token;
     File gpxFile;
+    String googleDriveFolderName;
 
-    protected GDocsJob(File gpxFile) {
+    protected GDocsJob(File gpxFile, String googleDriveFolderName) {
         super(new Params(1).requireNetwork().persist());
         this.gpxFile = gpxFile;
+        this.googleDriveFolderName = googleDriveFolderName;
     }
 
     @Override
@@ -48,11 +50,11 @@ public class GDocsJob extends Job {
         FileInputStream fis = new FileInputStream(gpxFile);
         String fileName = gpxFile.getName();
 
-        String gpsLoggerFolderId = GetFileIdFromFileName(token, "GPSLogger For Android");
+        String gpsLoggerFolderId = GetFileIdFromFileName(token, googleDriveFolderName, null);
 
         if (Utilities.IsNullOrEmpty(gpsLoggerFolderId)) {
             //Couldn't find folder, must create it
-            gpsLoggerFolderId = CreateEmptyFile(token, "GPSLogger For Android", "application/vnd.google-apps.folder", "root");
+            gpsLoggerFolderId = CreateEmptyFile(token, googleDriveFolderName, "application/vnd.google-apps.folder", "root");
 
             if (Utilities.IsNullOrEmpty(gpsLoggerFolderId)) {
                 EventBus.getDefault().post(new UploadEvents.GDocs(false));
@@ -61,7 +63,7 @@ public class GDocsJob extends Job {
         }
 
         //Now search for the file
-        String gpxFileId = GetFileIdFromFileName(token, fileName);
+        String gpxFileId = GetFileIdFromFileName(token, fileName, gpsLoggerFolderId);
 
         if (Utilities.IsNullOrEmpty(gpxFileId)) {
             //Create empty file first
@@ -205,7 +207,7 @@ public class GDocsJob extends Job {
     }
 
 
-    private String GetFileIdFromFileName(String authToken, String fileName) {
+    private String GetFileIdFromFileName(String authToken, String fileName, String inFolderId) {
 
         HttpURLConnection conn = null;
         String fileId = "";
@@ -213,8 +215,14 @@ public class GDocsJob extends Job {
         try {
 
             fileName = URLEncoder.encode(fileName, "UTF-8");
-            String searchUrl = "https://www.googleapis.com/drive/v2/files?q=title%20%3D%20%27" + fileName + "%27%20and%20trashed%20%3D%20false";
 
+            String inFolderParam = "";
+            if(!Utilities.IsNullOrEmpty(inFolderId)){
+                inFolderParam = "+and+'" + inFolderId + "'+in+parents";
+            }
+
+            //To search in a folder:
+            String searchUrl = "https://www.googleapis.com/drive/v2/files?q=title%20%3D%20%27" + fileName + "%27%20and%20trashed%20%3D%20false" + inFolderParam;
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
                 //Due to a pre-froyo bug

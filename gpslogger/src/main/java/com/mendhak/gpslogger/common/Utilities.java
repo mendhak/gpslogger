@@ -285,6 +285,8 @@ public class Utilities {
         } else {
             AppSettings.setAbsoluteTimeout(120);
         }
+
+        AppSettings.setGoogleDriveFolderName(prefs.getString("gdocs_foldername", "GPSLogger for Android"));
     }
 
 

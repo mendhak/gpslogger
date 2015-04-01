@@ -116,6 +116,7 @@ public class AppSettings extends Application {
     private static boolean dropboxAutoSendEnabled;
     private static boolean osmAutoSendEnabled;
 
+    private static String googleDriveFolderName;
 
 
     public static boolean isOsmAutoSendEnabled() {
@@ -653,5 +654,15 @@ public class AppSettings extends Application {
 
     public static boolean shouldHideNotificationButtons() {
         return hideNotificationButtons;
+    }
+
+
+
+    public static String getGoogleDriveFolderName() {
+        return googleDriveFolderName;
+    }
+
+    public static void setGoogleDriveFolderName(String googleDriveFolderName) {
+        AppSettings.googleDriveFolderName = googleDriveFolderName;
     }
 }

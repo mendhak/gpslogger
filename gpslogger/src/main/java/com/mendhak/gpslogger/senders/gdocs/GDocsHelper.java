@@ -19,11 +19,10 @@ package com.mendhak.gpslogger.senders.gdocs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
-import com.google.android.gms.auth.GoogleAuthUtil;
+import android.support.annotation.Nullable;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
@@ -124,11 +123,16 @@ public class GDocsHelper implements IFileSender {
     @Override
     public void UploadFile(List<File> files) {
         for (File f : files) {
-            UploadFile(f.getName());
+            UploadFile(f.getName(), null);
         }
     }
 
-    public void UploadFile(final String fileName) {
+    public void UploadTestFile(File file, String googleDriveFolderName){
+
+        UploadFile(file.getName(), googleDriveFolderName);
+    }
+
+    public void UploadFile(final String fileName, @Nullable String googleDriveFolderName) {
         if (!IsLinked(context)) {
             EventBus.getDefault().post(new UploadEvents.GDocs(false));
             return;
@@ -140,8 +144,18 @@ public class GDocsHelper implements IFileSender {
 
             tracer.debug("Submitting Google Docs job");
 
+            String uploadFolderName = googleDriveFolderName;
+
+            if(Utilities.IsNullOrEmpty(googleDriveFolderName)){
+                uploadFolderName = AppSettings.getGoogleDriveFolderName();
+            }
+
+            if(Utilities.IsNullOrEmpty(uploadFolderName)){
+                uploadFolderName = "GPSLogger for Android";
+            }
+
             JobManager jobManager = AppSettings.GetJobManager();
-            jobManager.addJobInBackground(new GDocsJob(gpxFile));
+            jobManager.addJobInBackground(new GDocsJob(gpxFile, uploadFolderName));
 
         } catch (Exception e) {
             EventBus.getDefault().post(new UploadEvents.GDocs(false));

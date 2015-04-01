@@ -24,6 +24,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.GooglePlayServicesAvailabilityException;
@@ -88,12 +89,14 @@ public class GDocsSettingsFragment extends PreferenceFragment
     private void VerifyGooglePlayServices() {
         Preference resetPref = findPreference("gdocs_resetauth");
         Preference testPref = findPreference("gdocs_test");
+        Preference folderPref = findPreference("gdocs_foldername");
 
         int availability = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
 
         if (availability != ConnectionResult.SUCCESS) {
             resetPref.setEnabled(false);
             testPref.setEnabled(false);
+            folderPref.setEnabled(false);
 
             if (!messageShown) {
                 Dialog d = GooglePlayServicesUtil.getErrorDialog(availability, getActivity(), REQUEST_CODE_MISSING_GPSF);
@@ -106,7 +109,7 @@ public class GDocsSettingsFragment extends PreferenceFragment
             }
 
         } else {
-            ResetPreferenceAppearance(resetPref, testPref);
+            ResetPreferenceAppearance(resetPref, testPref, folderPref);
 
             testPref.setOnPreferenceClickListener(this);
             resetPref.setOnPreferenceClickListener(this);
@@ -121,13 +124,15 @@ public class GDocsSettingsFragment extends PreferenceFragment
 
     }
 
-    private void ResetPreferenceAppearance(Preference resetPref, Preference testPref) {
+    private void ResetPreferenceAppearance(Preference resetPref, Preference testPref, Preference folderPref) {
         if (GDocsHelper.IsLinked(getActivity())) {
             resetPref.setTitle(R.string.gdocs_clearauthorization);
             resetPref.setSummary(R.string.gdocs_clearauthorization_summary);
             testPref.setEnabled(true);
+            folderPref.setEnabled(true);
         } else {
             testPref.setEnabled(false);
+            folderPref.setEnabled(false);
         }
 
     }
@@ -273,13 +278,9 @@ public class GDocsSettingsFragment extends PreferenceFragment
             EventBus.getDefault().post(new UploadEvents.GDocs(false));
         }
 
-
+        MaterialEditTextPreference folderPref = (MaterialEditTextPreference)findPreference("gdocs_foldername");
         GDocsHelper helper = new GDocsHelper(getActivity());
-
-        ArrayList<File> files = new ArrayList<File>();
-        files.add(testFile);
-
-        helper.UploadFile(files);
+        helper.UploadTestFile(testFile, folderPref.getText());
 
     }
 
