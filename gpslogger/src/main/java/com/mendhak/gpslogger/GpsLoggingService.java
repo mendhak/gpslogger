@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 public class GpsLoggingService extends Service  {
     private static NotificationManager notificationManager;
@@ -157,7 +157,16 @@ public class GpsLoggingService extends Service  {
                 if (bundle.get(IntentConstants.PREFER_CELLTOWER) != null) {
                     boolean preferCellTower = bundle.getBoolean(IntentConstants.PREFER_CELLTOWER);
                     tracer.debug("Intent received - Set Prefer Cell Tower: " + String.valueOf(preferCellTower));
-                    prefs.edit().putBoolean("prefer_celltower", preferCellTower).apply();
+
+                    List<String> listeners = Utilities.GetListeners();
+                    if(preferCellTower){
+                        listeners.remove(listeners.indexOf("gps"));
+                    } else {
+                        listeners.remove(listeners.indexOf("network"));
+                        listeners.remove(listeners.indexOf("passive"));
+                    }
+                    Set<String> listenersSet = new HashSet<String>(listeners);
+                    prefs.edit().putStringSet("listeners", listenersSet).apply();
                     needToStartGpsManager = true;
                 }
 
