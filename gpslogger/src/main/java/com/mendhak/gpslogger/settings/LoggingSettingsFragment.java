@@ -117,7 +117,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
     public boolean onPreferenceClick(Preference preference) {
 
         if (preference.getKey().equals("gpslogger_folder")) {
-            FolderSelectorDialog fsd = new FolderSelectorDialog();
+            FolderSelectorDialog fsd = new FolderSelectorDialog(Utilities.GetDefaultStorageFolder(getActivity()));
             fsd.SetCallback(this);
             fsd.show(getActivity());
             return true;

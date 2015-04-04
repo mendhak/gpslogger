@@ -5,12 +5,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.Utilities;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -46,8 +44,8 @@ public class FolderSelectorDialog extends DialogFragment implements MaterialDial
         void onFolderSelection(File folder);
     }
 
-    public FolderSelectorDialog() {
-        parentFolder = Environment.getExternalStorageDirectory();
+    public FolderSelectorDialog(File defaultStorageFolder) {
+        parentFolder = defaultStorageFolder;
         parentContents = listFiles();
     }
 
@@ -66,9 +64,12 @@ public class FolderSelectorDialog extends DialogFragment implements MaterialDial
     File[] listFiles() {
         File[] contents = parentFolder.listFiles();
         List<File> results = new ArrayList<>();
-        for (File fi : contents) {
-            if (fi.isDirectory() && fi.canWrite()) results.add(fi);
+        if(contents != null){
+            for (File fi : contents) {
+                if (fi.isDirectory() && fi.canWrite()) results.add(fi);
+            }
         }
+
         Collections.sort(results, new FolderSorter());
         return results.toArray(new File[results.size()]);
     }
@@ -90,7 +91,7 @@ public class FolderSelectorDialog extends DialogFragment implements MaterialDial
     public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence s) {
         if (canGoUp && i == 0) {
             parentFolder = parentFolder.getParentFile();
-            canGoUp = parentFolder.getParent() != null;
+            canGoUp = parentFolder.getParent() != null && parentFolder.getParentFile().canRead();
         } else {
             parentFolder = parentContents[canGoUp ? i - 1 : i];
             canGoUp = true;

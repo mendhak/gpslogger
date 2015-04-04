@@ -803,7 +803,11 @@ public class Utilities {
 
 
     public static File GetDefaultStorageFolder(Context context){
-        return context.getExternalFilesDir(null);
+        File storageFolder = context.getExternalFilesDir(null);
+        if(storageFolder == null){
+            storageFolder = context.getFilesDir();
+        }
+        return storageFolder;
     }
 
     public static boolean IsPackageInstalled(String targetPackage, Context context){
