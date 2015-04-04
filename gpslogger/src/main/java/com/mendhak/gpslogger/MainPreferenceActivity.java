@@ -58,7 +58,11 @@ public class MainPreferenceActivity extends ActionBarActivity {
 
         tracer = LoggerFactory.getLogger(MainPreferenceActivity.class.getSimpleName());
 
-        String whichFragment = getIntent().getExtras().getString("preference_fragment");
+        String whichFragment = PreferenceConstants.GENERAL;
+
+        if(getIntent().getExtras() != null) {
+           whichFragment = getIntent().getExtras().getString("preference_fragment");
+        }
 
         //If OpenStreetMap has returned with OAuth token
         if(getIntent().getData() != null) {
