@@ -72,6 +72,8 @@ public class OpenGTSClient {
                 params.put("acct", accountName);
             }
 
+            //OpenGTS 2.5.5 requires batt param or it throws exception...
+            params.put("batt","0");
             params.put("code", "0xF020");
             params.put("gprmc", OpenGTSClient.GPRMCEncode(loc));
             params.put("alt", String.valueOf(loc.getAltitude()));
