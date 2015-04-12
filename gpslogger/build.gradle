@@ -14,6 +14,9 @@ apply plugin: 'android'
 repositories {
     mavenCentral()
     jcenter()
+    maven {
+        url  "http://dl.bintray.com/mendhak/maven"
+    }
 }
 
 android {
@@ -150,6 +153,12 @@ dependencies {
 
     //Event bus
     compile 'de.greenrobot:eventbus:2.4.0'
+
+    //JARs which aren't on maven
+    compile 'com.mendhak.gpsloggersupport:activation:0.0.1'
+    compile 'com.mendhak.gpsloggersupport:additionnal:0.0.1'
+    compile 'com.mendhak.gpsloggersupport:mail:0.0.1'
+    compile 'com.mendhak.gpsloggersupport:dropbox-android-sdk:1.6.3'
 
 }
 
