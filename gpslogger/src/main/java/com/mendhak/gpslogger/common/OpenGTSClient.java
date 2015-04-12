@@ -18,16 +18,16 @@
 package com.mendhak.gpslogger.common;
 
 
-import com.loopj.android.http.RequestParams;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIUtils;
+import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.LoggerFactory;
 import java.net.*;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Scanner;
-import java.util.TimeZone;
+import java.util.*;
 
 
 /**
@@ -63,23 +63,25 @@ public class OpenGTSClient {
     public void sendHTTP(String id, String accountName, SerializableLocation[] locations) throws Exception {
 
         for (SerializableLocation loc : locations) {
-            RequestParams params = new RequestParams();
-            params.put("id", id);
-            params.put("dev", id);
 
-            params.put("acct", id);
-            if(!Utilities.IsNullOrEmpty(accountName)){
-                params.put("acct", accountName);
+            List<NameValuePair> qparams = new ArrayList<NameValuePair>();
+            qparams.add(new BasicNameValuePair("id", id));
+            qparams.add(new BasicNameValuePair("dev", id));
+            if (!Utilities.IsNullOrEmpty(accountName)) {
+                qparams.add(new BasicNameValuePair("acct", accountName));
+            } else {
+                qparams.add(new BasicNameValuePair("acct", id));
             }
 
             //OpenGTS 2.5.5 requires batt param or it throws exception...
-            params.put("batt","0");
-            params.put("code", "0xF020");
-            params.put("gprmc", OpenGTSClient.GPRMCEncode(loc));
-            params.put("alt", String.valueOf(loc.getAltitude()));
+            qparams.add(new BasicNameValuePair("batt", "0"));
+            qparams.add(new BasicNameValuePair("code", "0xF020"));
+            qparams.add(new BasicNameValuePair("alt", String.valueOf(loc.getAltitude())));
+            qparams.add(new BasicNameValuePair("gprmc", OpenGTSClient.GPRMCEncode(loc)));
 
-            URL url = new URL("http://" + getURL() + "?" + params.toString());
-            tracer.debug("Sending URL " + url.toString());
+            URI uri = URIUtils.createURI("http", server, port, path, getQuery(qparams), null);
+            HttpGet httpget = new HttpGet(uri);
+            URL url = httpget.getURI().toURL();
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -94,9 +96,32 @@ public class OpenGTSClient {
             } else {
                 tracer.debug("Status code: " + String.valueOf(conn.getResponseCode()));
             }
+
         }
+
     }
 
+    private String getQuery(List<NameValuePair> params)
+    {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+
+        for (NameValuePair pair : params)
+        {
+            if (first) {
+                first = false;
+            }
+            else {
+                result.append("&");
+            }
+
+            result.append(pair.getName());
+            result.append("=");
+            result.append(pair.getValue());
+        }
+
+        return result.toString();
+    }
 
     public void sendRAW(String id, String accountName, SerializableLocation[] locations) throws Exception {
         for (SerializableLocation loc : locations) {
