@@ -12,11 +12,11 @@ buildscript {
 apply plugin: 'android'
 
 repositories {
-    mavenCentral()
-    jcenter()
     maven {
         url  "http://dl.bintray.com/mendhak/maven"
     }
+    mavenCentral()
+    jcenter()
 }
 
 android {
