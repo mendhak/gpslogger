@@ -3,20 +3,17 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        //When releasing APK:
         classpath 'com.android.tools.build:gradle:1.0.0'
-        //When developing:
-        //classpath 'com.android.tools.build:gradle:0.10.+'
     }
 }
 apply plugin: 'android'
 
 repositories {
+    mavenCentral()
+    jcenter()
     maven {
         url  "http://dl.bintray.com/mendhak/maven"
     }
-    mavenCentral()
-    jcenter()
 }
 
 android {
