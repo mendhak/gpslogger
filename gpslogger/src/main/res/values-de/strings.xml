@@ -288,7 +288,7 @@
   <string name="bigview_taptotoggle">Tippen für start/stop</string>
   <string name="summary_autosendtargets">Hochladen:</string>
   <string name="accuracy_filter_title">Genauigkeit</string>
-  <string name="accuracy_filter_summary">Die Mindestgenauigkeit des GPS-Signales in Metern, welches benötigt wird um einen Punkt zu speicehrn. Bei einer höheren Ungenauigkeit wird die Position verworfen.</string>
+  <string name="accuracy_filter_summary">Die Mindestgenauigkeit des GPS-Signales in Metern, welches benötigt wird um einen Punkt zu speichern. Bei einer höheren Ungenauigkeit wird die Position verworfen.</string>
   <string name="distance_filter_title">Distanz zwischen zwei Punkten</string>
   <string name="distance_filter_summary">Mindestabstand zwischen dem aktuellen und dem zuletzt gesicherten Punkt. Punkte mit kürzeren Abständ werden verworfen.</string>
   <string name="points">Punkte</string>
