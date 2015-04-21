@@ -27,6 +27,7 @@ public class AppSettings extends Application {
 
     private static JobManager jobManager;
 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -117,6 +118,8 @@ public class AppSettings extends Application {
     private static boolean osmAutoSendEnabled;
 
     private static String googleDriveFolderName;
+
+    private static boolean dontLogIfUserIsStill;
 
 
     public static boolean isOsmAutoSendEnabled() {
@@ -664,5 +667,13 @@ public class AppSettings extends Application {
 
     public static void setGoogleDriveFolderName(String googleDriveFolderName) {
         AppSettings.googleDriveFolderName = googleDriveFolderName;
+    }
+
+    public static boolean shouldNotLogIfUserIsStill() {
+        return AppSettings.dontLogIfUserIsStill;
+    }
+
+    public static void setShouldNotLogIfUserIsStill(boolean check){
+        AppSettings.dontLogIfUserIsStill = check;
     }
 }

@@ -1003,6 +1003,12 @@ public class GpsLoggingService extends Service  {
 
     @EventBusHook
     public void onEvent(ServiceEvents.ActivityRecognitionEvent activityRecognitionEvent){
+
+        if(!AppSettings.shouldNotLogIfUserIsStill()){
+            Session.setUserStillSinceTimeStamp(0);
+            return;
+        }
+
         if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.STILL){
             tracer.info(activityRecognitionEvent.result.getMostProbableActivity().toString());
             if(Session.getUserStillSinceTimeStamp() == 0){
