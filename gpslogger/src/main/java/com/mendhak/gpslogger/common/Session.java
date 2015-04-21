@@ -20,7 +20,6 @@ package com.mendhak.gpslogger.common;
 
 import android.app.Application;
 import android.location.Location;
-import org.slf4j.LoggerFactory;
 
 public class Session extends Application {
 
@@ -50,6 +49,7 @@ public class Session extends Application {
     private static boolean waitingForLocation;
     private static boolean annotationMarked;
     private static String currentFormattedFileName;
+    private static long userStillSinceTimeStamp;
 
     public static boolean isSinglePointMode() {
         return isSinglePointMode;
@@ -337,5 +337,13 @@ public class Session extends Application {
 
     public static void setCurrentFormattedFileName(String currentFormattedFileName) {
         Session.currentFormattedFileName = currentFormattedFileName;
+    }
+
+    public static long getUserStillSinceTimeStamp() {
+        return userStillSinceTimeStamp;
+    }
+
+    public static void setUserStillSinceTimeStamp(long lastUserStillTimeStamp) {
+        Session.userStillSinceTimeStamp = lastUserStillTimeStamp;
     }
 }

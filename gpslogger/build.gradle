@@ -97,7 +97,7 @@ dependencies {
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.1'
 
     compile 'com.android.support:support-v4:19.1.0'
-    compile 'com.google.android.gms:play-services:4.0.30'
+    compile 'com.google.android.gms:play-services:7.0.0'
     compile fileTree(dir:'./src/main/libs', include: '*.jar')
 
     compile('commons-net:commons-net:2.0')
