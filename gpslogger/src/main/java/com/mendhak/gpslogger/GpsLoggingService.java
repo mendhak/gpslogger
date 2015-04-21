@@ -639,7 +639,7 @@ public class GpsLoggingService extends Service  {
      */
     private void ResetCurrentFileName(boolean newLogEachStart) {
 
-        String currentFileName = Session.getCurrentFormattedFileName();
+        String oldFileName = Session.getCurrentFormattedFileName();
 
         /* Pick up saved settings, if any. (Saved static file) */
         String newFileName = Session.getCurrentFileName();
@@ -660,17 +660,17 @@ public class GpsLoggingService extends Service  {
             Session.setCurrentFileName(newFileName);
         }
 
-        if(!Utilities.IsNullOrEmpty(currentFileName)
-                && !currentFileName.equalsIgnoreCase(Utilities.GetFormattedCustomFileName(newFileName))
+        if(!Utilities.IsNullOrEmpty(oldFileName)
+                && !oldFileName.equalsIgnoreCase(Session.getCurrentFileName())
                 && Session.isStarted()){
-            tracer.info("New file name, should auto upload.");
-            EventBus.getDefault().post(new CommandEvents.AutoSend(currentFileName));
+            tracer.info("New file name, should auto upload the old one");
+            EventBus.getDefault().post(new CommandEvents.AutoSend(oldFileName));
         }
 
         Session.setCurrentFormattedFileName(Session.getCurrentFileName());
 
-        tracer.info("Filename: " + newFileName);
-        EventBus.getDefault().post(new ServiceEvents.FileNamed(newFileName));
+        tracer.info("Filename: " + Session.getCurrentFileName());
+        EventBus.getDefault().post(new ServiceEvents.FileNamed(Session.getCurrentFileName()));
 
     }
 
