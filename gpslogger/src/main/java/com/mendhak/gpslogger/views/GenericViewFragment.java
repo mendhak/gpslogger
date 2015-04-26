@@ -104,7 +104,7 @@ public abstract class GenericViewFragment extends Fragment {
 
             MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
                     .title(R.string.new_file_custom_title)
-                    .customView(R.layout.alertview)
+                    .customView(R.layout.alertview, true)
                     .positiveText(R.string.ok)
                     .callback(new MaterialDialog.ButtonCallback() {
                         @Override

@@ -47,9 +47,9 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
                     .items(R.array.listeners)
                     .positiveText(R.string.ok)
                     .negativeText(R.string.cancel)
-                    .itemsCallbackMultiChoice(chosenIndices.toArray(new Integer[0]), new MaterialDialog.ListCallbackMulti() {
+                    .itemsCallbackMultiChoice(chosenIndices.toArray(new Integer[0]), new MaterialDialog.ListCallbackMultiChoice() {
                         @Override
-                        public void onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
+                        public boolean onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
 
                             List<Integer> selectedItems = Arrays.asList(integers);
                             final Set<String> chosenListeners = new HashSet<String>();
@@ -63,6 +63,7 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
                                 editor.apply();
                             }
 
+                            return true;
                         }
                     }).show();
 
