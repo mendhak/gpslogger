@@ -86,6 +86,10 @@ android {
             }
         }
     }
+
+    dexOptions {
+        preDexLibraries = false
+    }
 }
 
 dependencies {
