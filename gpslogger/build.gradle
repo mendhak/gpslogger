@@ -6,7 +6,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:1.0.0'
     }
 }
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 repositories {
     mavenCentral()
@@ -26,10 +26,6 @@ android {
         versionCode 61
         versionName "61-activityrecognition"
 
-        //This allows us to run Robotium and Unit tests separately using
-        //connectedAndroidTest -PtestSize=small
-        testApplicationId "com.mendhak.gpslogger.test"
-        testInstrumentationRunner getInstrumentationTestRunner();
     }
 
     buildTypes {
@@ -94,9 +90,7 @@ android {
 
 dependencies {
 
-    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.1'
-
-    compile 'com.android.support:support-v4:19.1.0'
+    compile 'com.android.support:support-v4:22.1.1'
     compile 'com.google.android.gms:play-services:7.0.0'
     compile fileTree(dir:'./src/main/libs', include: '*.jar')
 
@@ -131,7 +125,7 @@ dependencies {
 
 
     //Android lollipop/material features including the Toolbar
-    compile "com.android.support:appcompat-v7:21.0.+"
+    compile "com.android.support:appcompat-v7:22.1.1"
 
     //Cardviews
     compile "com.android.support:cardview-v7:21.0.0"
@@ -179,25 +173,3 @@ tasks.whenTaskAdded { task ->
     }
 }
 
-def getInstrumentationTestRunner() {
-
-    def result = "android.test.InstrumentationTestRunner";
-
-    if (project.hasProperty("testSize")) {
-
-        switch (project.getProperties().get("testSize")) {
-
-            case "small":
-                result = "com.mendhak.gpslogger.SmallInstrumentationTestRunner";
-                break;
-
-            case "medium":
-                result = "com.mendhak.gpslogger.MediumInstrumentationTestRunner";
-                break
-        }
-    }
-
-    logger.lifecycle("Using TestRunner: " + result)
-
-    return result
-}
