@@ -4,6 +4,9 @@ android:
   components:
     - build-tools-22.0.0
     - extra-android-support
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
 
 jdk: oraclejdk7
 
