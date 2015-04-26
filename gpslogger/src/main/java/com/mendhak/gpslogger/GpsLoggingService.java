@@ -1012,6 +1012,8 @@ public class GpsLoggingService extends Service  {
         if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.STILL){
             tracer.info(activityRecognitionEvent.result.getMostProbableActivity().toString());
             if(Session.getUserStillSinceTimeStamp() == 0){
+                tracer.debug("Just entered still state, attempt to log");
+                StartGpsManager();
                 Session.setUserStillSinceTimeStamp(System.currentTimeMillis());
             }
 
@@ -1020,6 +1022,8 @@ public class GpsLoggingService extends Service  {
             tracer.info(activityRecognitionEvent.result.getMostProbableActivity().toString());
             //Reset the still-since timestamp
             Session.setUserStillSinceTimeStamp(0);
+            tracer.debug("Just exited still state, attempt to log");
+            StartGpsManager();
         }
     }
 
