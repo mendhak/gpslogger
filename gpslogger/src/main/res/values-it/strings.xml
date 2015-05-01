@@ -45,6 +45,10 @@
   <string name="meters">Metri</string>
   <string name="error">Errore</string>
   <string name="error_connection">Errore di connessione. Per favore verifica le impostazioni di rete del cellulare.</string>
+  <string name="seconds">s</string>
+  <string name="minutes">min</string>
+  <string name="hours">ore</string>
+  <string name="gpsprovider_unavailable">Nessun provider GPS disponibile. Si prega di controllare le impostazioni di posizione e abilita un provider.</string>
   <string name="started">Iniziato</string>
   <string name="providername_gps">Satelliti GPS</string>
   <string name="providername_celltower">Ponti radio cellulari</string>
@@ -104,6 +108,7 @@
   <string name="new_file_custom_title">Nome del file custom</string>
   <string name="new_file_custom_summary">Si può usare un nome del file personalizzato in modo dinamico. Si possono aggiungere alcuni parametri dinamici come il numero seriale, anno, ora, minuti, etc. Potrebbe non funzionare correttamente con le funzioni di auto-invio perchè inviano solo l\'ultimo file.</string>
   <string name="pref_performance_title">Prestazioni</string>
+  <string name="pref_performance_summary">Tempi, filtri e provider di posizione</string>
   <string name="time_before_logging_title">Tempo fra le registrazioni</string>
   <string name="time_before_logging_summary">Usa 0 per la massima frequenza, più lento fa durare di più la batteria.</string>
   <string name="time_before_logging_dialog_title">Tempo in secondi</string>
@@ -120,6 +125,7 @@
   <string name="enabledisablegps_summary">Vai ai settaggi del cellulare per abilitare o disabilitare i provider.</string>
   <string name="startonbootup_title">Avvia all\'accensione</string>
   <string name="startonbootup_summary">Avvia GPSLogger all\'accensione del cellulare ed inizia subito la registrazione</string>
+  <string name="autoemail_title">Email</string>
   <string name="autoemail_summary">Invia automaticamente i files ad un indirizzo Email a tua scelta</string>
   <string name="please_wait">Attendere prego.</string>
   <string name="autoemail_target">Indirizzi Email di destinazione</string>
@@ -170,6 +176,7 @@
   <string name="osm_pick_file">Seleziona un file da caricare</string>
   <string name="debuglog_title">Attiva debug</string>
   <string name="debuglog_summary">Scrive un file sulla scheda SD con le informazioni di debug. Attenzione: Il file cresce molto in fretta.</string>
+  <string name="pref_logging_summary">Tipi di file, nomi e come crearli</string>
   <string name="pref_general_title">Opzioni generiche</string>
   <string name="pref_general_summary">Opzioni avvio e display</string>
   <string name="emailprovider_google">Google Mail</string>
@@ -187,8 +194,14 @@
   <string name="menu_upload">Caricamento</string>
   <string name="autoemail_from">Da: (mittente)</string>
   <string name="autoemail_from_summary">Alcuni provider di posta richiedono nella Email il mittente (Da:), usalo solo se richiesto.</string>
+  <string name="gdocs_upload">Google Drive</string>
+  <string name="gdocs_startauthorization">Autorizza Google Drive</string>
+  <string name="gdocs_authorize_summary">Autorizza GPSLogger ad accedere a Google Drive</string>
   <string name="gdocs_clearauthorization">Rimuovi Autorizzazione</string>
   <string name="gdocs_clearauthorization_summary">Elimina l\'autorizzazione per Google Drive. Per eliminare definitivamente l\'accesso, vai nelle impostazioni di Google Accounts</string>
+  <string name="gdocs_setup_title">Google Drive</string>
+  <string name="gdocs_setup_summary">Autorizza Google Drive ad accettare i files di GPSLogger</string>
+  <string name="gdocs_test_summary">Carica un file di test su Google Drive</string>
   <string name="gdocs_test_title">Test di caricamento</string>
   <string name="gdocs_testupload_error">Non riesco a caricare il file di test</string>
   <string name="gdocs_testupload_success">Caricato! Vai su Google Drive e controlla il file.</string>
@@ -202,6 +215,7 @@
   <string name="autosend_sendzip_title">Invia file ZIP</string>
   <string name="autosend_sendzip_summary">Invia file ZIP (se possibile). Disabilita per inviare files singoli</string>
   <string name="autosend_targets_category">Configurazioni per invio automatico</string>
+  <string name="menu_autosend_now">Invia automaticamente adesso</string>
   <string name="autosend_sending">Invio automatico</string>
   <string name="summary_autosend">Invio automatico:</string>
   <string name="pref_autosend_title">Invio automatico, email e upload</string>
@@ -211,6 +225,7 @@
   <string name="shortcut_pickaction">Scegli una azione</string>
   <string name="log_opengts_title">Registra su un server OpenGTS</string>
   <string name="log_opengts_summary">Invia dati GPRMC ad un server OpenGTS.</string>
+  <string name="opengts_setup_title">OpenGTS</string>
   <string name="opengts_setup_summary">Invia le tracce GPS a un server OpenGTS.</string>
   <string name="opengts_enabled">Abilita OpenGTS</string>
   <string name="autoopengts_autosend">Abilita invio automatico</string>
@@ -248,6 +263,7 @@
   <string name="autoftp_invalid_settings">Impostazioni non valide</string>
   <string name="autoftp_invalid_summary">Alcune impostazioni non sono valide. Assicurati di avere compilato tutti i campi.</string>
   <string name="ftp_upload">Caricamento FTP</string>
+  <string name="autoftp_setup_title">FTP</string>
   <string name="autoftp_setup_summary">Carica i file su un server FTP(S). Nota: non supporta SFTP.</string>
   <string name="faq_screen_title">Domande frequenti</string>
   <string name="menu_faq">Aiuto e FAQ</string>
@@ -293,4 +309,11 @@
   <string name="listeners_summary">Quali fornitori di posizione usare se disponibili; GPS da satellite, rete cellulare/wifi, Passivo è un fornitore speciale che intercetta le richieste di posizione dalla altre applicazioni.</string>
   <string name="listeners_title">Fornitori di posizione</string>
   <string name="autosend_frequency_hint">Numero di minuti</string>
+  <string name="pref_logging_file_no_permissions">La cartella non è scrivibile da GPSLogger</string>
+  <string name="pref_gpsvisualizer">Visualizza statistiche e grafici</string>
+  <string name="new_file_custom_each_time_title">Chiedi il nome del file ogni volta che inizia una registrazione</string>
+  <string name="new_file_custom_each_time_summary">Chiedi il nome del file ogni volta che inizia una registrazione</string>
+  <string name="donate_app">Fai una donazione (app)</string>
+  <string name="donate_bitcoin">Fai una donazione (BitCoin)</string>
+  <string name="no_network_message">Rete dati non disponibile</string>
 </resources>

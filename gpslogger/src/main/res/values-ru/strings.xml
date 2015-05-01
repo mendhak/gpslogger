@@ -45,6 +45,10 @@
   <string name="meters">&#160;метры</string>
   <string name="error">Ошибка</string>
   <string name="error_connection">Ошибка соединения. Пожайлуйста, проверьте настройки телефона.</string>
+  <string name="seconds">сек.</string>
+  <string name="minutes">мин.</string>
+  <string name="hours">час.</string>
+  <string name="gpsprovider_unavailable">Нет доступных источников GPS-данных. Проверьте настройки местоположения и выберите поставщика координат.</string>
   <string name="started">Начато</string>
   <string name="providername_gps">спутники GPS</string>
   <string name="providername_celltower">сотовые вышки</string>
@@ -106,6 +110,7 @@
   <string name="new_file_custom_summary">Вы можете сами придумать имя файла. 
 При необходимости добавьте несколько динамически изменяемых параметров, таких как серийный номер, год, часы, минуты и т.д. Слишком сложные динамически составляемые имена файлов мало помогут при автоматической отправке, т.к в данном случае отправляется только последний файл.</string>
   <string name="pref_performance_title">Настройки производительности</string>
+  <string name="pref_performance_summary">Тайминги, периоды, фильтры</string>
   <string name="time_before_logging_title">Период логирования точки</string>
   <string name="time_before_logging_summary">Укажите 0 для обработки на максимальной частоте. Хотя, чем медленнее работает процессор, тем дольше протянет аккумулятор.
     </string>
@@ -123,9 +128,11 @@
   <string name="enabledisablegps_summary">Перейти в настройки GPS телефона.</string>
   <string name="startonbootup_title">Автозапуск</string>
   <string name="startonbootup_summary">Запускать приложение и запись лога при старте операционной системы</string>
+  <string name="autoemail_title">E-mail</string>
   <string name="autoemail_summary">Автоматически отправлять лог файл письмом на адрес по Вашему выбору</string>
   <string name="please_wait">Пожалуйста, подождите.</string>
   <string name="autoemail_target">Адреса электронной почты получателей</string>
+  <string name="autosend_frequency_display">После %s минут</string>
   <string name="autoemail_frequency_whenistop">Когда я останавливаю логирование</string>
   <string name="autoemail_smtp_category">Настройки Email</string>
   <string name="autoemail_username">Имя пользователя</string>
@@ -176,6 +183,7 @@
   <string name="debuglog_summary">Писать отладочную информацию в файл на SD card. Предупреждение: размер файла
         увеличивается очень быстро.
     </string>
+  <string name="pref_logging_summary">Типы файлов, имена</string>
   <string name="pref_general_title">Основные настройки</string>
   <string name="pref_general_summary">Автозапуск и настройки отображения</string>
   <string name="emailprovider_google">Google Почта</string>
@@ -194,8 +202,14 @@
   <string name="menu_upload">Загрузить</string>
   <string name="autoemail_from">Адрес отправителя</string>
   <string name="autoemail_from_summary">Некоторые поставщики услуг электронной почты требуют адреса отправителя. Используйте эту опцию только если вы в ней нуждаетесь.     </string>
+  <string name="gdocs_upload">Диск Google</string>
+  <string name="gdocs_startauthorization">Авторизация на диске Google</string>
+  <string name="gdocs_authorize_summary">Отправляет вас к диску Google, для авторизации GPSLogger</string>
   <string name="gdocs_clearauthorization">Убрать авторизацию</string>
   <string name="gdocs_clearauthorization_summary">Забывает частные настройки GDocs. Чтобы полностью отменить доступ, перейдите к настройкам вашего Google аккаунта</string>
+  <string name="gdocs_setup_title">Диск Google</string>
+  <string name="gdocs_setup_summary">Авторизация на диске Google, чтобы позволить загрузку файлов</string>
+  <string name="gdocs_test_summary">Загрузить тестовый файл на Google-диск</string>
   <string name="gdocs_test_title">Испытать загрузку файла</string>
   <string name="gdocs_testupload_error">Не смог загрузить пробный файл</string>
   <string name="gdocs_testupload_success">Загрузка завершена. Проверте наличее файла в ваших Google Documents.</string>
@@ -204,12 +218,14 @@
   <string name="autoemail_sendto_csv">Адреса электронной почты разделённые запятыми</string>
   <string name="autosend_enabled">Разрешить авто отправку</string>
   <string name="autosend_enabled_summary">Позволяет отправку файлов в различные цели</string>
+  <string name="autosend_frequency_summary">Как часто лог-файлы должны отсылаться, в минутах. Установите 0, чтобы отключить это.</string>
   <string name="autosend_frequency">Как часто?</string>
   <string name="autosend_sendzip_title">Отправить zip файл</string>
   <string name="autosend_sendzip_summary">Отправить zip-файл если применимо. Отключите, чтобы отправлять файлы по одиночке, или если zip параметр для вас не работает     </string>
   <string name="autosend_targets_category">Места назначения для авто отправки</string>
+  <string name="menu_autosend_now">Автоотправка сейчас</string>
   <string name="autosend_sending">Автоматическая отправка</string>
-  <string name="summary_autosend">Автоматическая отправка:</string>
+  <string name="summary_autosend">Автоотправка:</string>
   <string name="pref_autosend_title">Автоматическая отправка, электронная почта и выгрузка</string>
   <string name="pref_autosend_summary">Настройки электронной почты, публикаций и выгрузки</string>
   <string name="shortcut_start">Старт</string>
@@ -217,6 +233,7 @@
   <string name="shortcut_pickaction">Выбрать действие</string>
   <string name="log_opengts_title">Отправлять координаты на сервер OpenGTS</string>
   <string name="log_opengts_summary">Отправлять данные GPRMC на сервер OpenGTS.</string>
+  <string name="opengts_setup_title">Сервер OpenGTS</string>
   <string name="opengts_setup_summary">Отправка координат на сервер OpenGTS по вашему выбору.</string>
   <string name="opengts_enabled">Включить OpenGTS</string>
   <string name="autoopengts_autosend">Включить автоматическую отправку</string>
@@ -254,6 +271,7 @@
   <string name="autoftp_invalid_settings">Неправильные параметры</string>
   <string name="autoftp_invalid_summary">Некоторые из ваших настроек заданы неверно. Убедитесь, что вы заполнили все поля.</string>
   <string name="ftp_upload">FTP загрузка</string>
+  <string name="autoftp_setup_title">FTP-сервер</string>
   <string name="autoftp_setup_summary">Загрузите ваши файлы на FTP(S) сервер. Примечание: Это не охватывает SFTP.</string>
   <string name="faq_screen_title">Часто задаваемые вопросы</string>
   <string name="menu_faq">Помощь и ЧаВо</string>
@@ -292,4 +310,18 @@
   <string name="txt_longitude_short">Долгота</string>
   <string name="log_nmea_title">Вести журнал в стандарте NMEA</string>
   <string name="log_nmea_summary">Делает запись в NMEA-файл при каждй попытке определения местоположения. Этот файл растет очень быстро. Записи добавляются только во время использования GPS.</string>
+  <string name="autoopengts_accountname">Имя аккаунта</string>
+  <string name="listeners_gps">GPS</string>
+  <string name="listeners_cell">Сеть</string>
+  <string name="listeners_passive">Пассивно</string>
+  <string name="listeners_summary">Способ определения местоположения; GPS - для спутников, Сеть - для сотовых вышек/WiFi, Пассивно - сканирование мест расположения, запрашиваемое из других приложений.</string>
+  <string name="listeners_title">Источники определения местоположения</string>
+  <string name="autosend_frequency_hint">Количество минут</string>
+  <string name="pref_logging_file_no_permissions">Эта папка не доступна для записи GPSLogger</string>
+  <string name="pref_gpsvisualizer">Визуализация статистики GPS и просмотр графиков</string>
+  <string name="new_file_custom_each_time_title">Задавать имя файла при каждом запуске</string>
+  <string name="new_file_custom_each_time_summary">Запрашивать имя файла каждый раз при запуске логирования</string>
+  <string name="donate_app">Пожертвовать (Play Маркет)</string>
+  <string name="donate_bitcoin">Пожертвовать (Bitcoin)</string>
+  <string name="no_network_message">Нет доступной сети</string>
 </resources>

@@ -4,8 +4,10 @@
   <string name="title_drawer_generalsettings">Configurações gerais</string>
   <string name="title_drawer_loggingsettings">Configurações de log</string>
   <string name="title_drawer_uploadsettings">Definições de upload</string>
+  <string name="navigation_drawer_open">Abrir gaveta de navegação</string>
+  <string name="navigation_drawer_close">Fechar gaveta de navegação</string>
   <string name="app_name">GPSLogger</string>
-  <string name="settings_screen_name">Opções do GPSLogger</string>
+  <string name="settings_screen_name">Configurações do GPSLogger</string>
   <string name="ok">OK</string>
   <string name="cancel">Cancelar</string>
   <string name="could_not_write_to_file">Não pode gravar no arquivo</string>
@@ -104,7 +106,11 @@
   <string name="new_file_creation_everystart">Toda vez que eu inicio</string>
   <string name="new_file_creation_custom">Arquivo personalizado</string>
   <string name="new_file_custom_title">Nome de arquivo personalizado</string>
+  <string name="new_file_custom_summary">Você pode usar seu próprio nome de arquivo.
+        Opcionalmente, adicione alguns parâmetros dinâmicos, como o número de série, ano, hora, minuto, etc. Nomes de arquivo muito dinâmicos
+        podem não funcionar bem com recursos auto enviar, pois só envia o arquivo mais recente.</string>
   <string name="pref_performance_title">Desempenho</string>
+  <string name="pref_performance_summary">Sincronizações, Filtros e Interlocutores</string>
   <string name="time_before_logging_title">Tempo antes de logar</string>
   <string name="time_before_logging_summary">Use 0 para a freqüência máxima, porém mais lento é melhor para a duração da bateria.
     </string>
@@ -117,6 +123,7 @@
   <string name="retry_time_dialog_title">Tempo em segundos</string>
   <string name="retry_time_hint">Digite segundos (máximo de 9999)</string>
   <string name="display_imperial_title">Unidades imperiais</string>
+  <string name="display_imperial_summary">Exibir em pés, milhas e semi-litros, nenhuma dessas unidades da métrica moderna. (Preferências devem ainda ser em unidades métricas)</string>
   <string name="enabledisablegps_title">Ativar/desativar GPS</string>
   <string name="enabledisablegps_summary">Vá para as configurações do telefone para ativar ou desativar os provedores.</string>
   <string name="startonbootup_title">Carregar na inicialização</string>
@@ -170,8 +177,9 @@
   <string name="osm_tags_summary">As estiquetas para aplicar quando o upload de um caminho</string>
   <string name="no_files_found">Nenhum arquivo encontrado, nada para compartilhar ou fazer o upload.</string>
   <string name="osm_pick_file">Escolher um arquivo para upload</string>
-  <string name="debuglog_title">Escreva para depurar arquivo</string>
-  <string name="debuglog_summary">Escreve depurar mensagens para um arquivo no cartão SD. Aviso: O arquivo cresce muito rápido.     </string>
+  <string name="debuglog_title">Gravar em arquivo de depuração</string>
+  <string name="debuglog_summary">Grava mensagens de depuração para um arquivo no cartão SD. Aviso: O arquivo cresce muito rápido.
+    </string>
   <string name="pref_logging_summary">Tipos de arquivo, criação e identificação</string>
   <string name="pref_general_title">Opções gerais</string>
   <string name="pref_general_summary">Opções de inicialização e exibição</string>
@@ -192,9 +200,11 @@
   <string name="autoemail_from_summary">Alguns provedores de e-mail exigem um endereço. Use isso somente se você precisar dele.     </string>
   <string name="gdocs_upload">Google Drive</string>
   <string name="gdocs_startauthorization">Autorizar com Google Drive</string>
+  <string name="gdocs_authorize_summary">Leva o usuário para o Google Drive onde precisará autorizar GPSLogger</string>
   <string name="gdocs_clearauthorization">Excluir autorização</string>
   <string name="gdocs_clearauthorization_summary">Esquece as configurações locais do GDocs. Para revogar o acesso permanentemente, vá para configurações da conta do Google</string>
   <string name="gdocs_setup_title">Google Drive</string>
+  <string name="gdocs_setup_summary">Autorizar com Google Drive para permitir o upload de arquivos</string>
   <string name="gdocs_test_summary">Carregar um arquivo de teste no Google Drive</string>
   <string name="gdocs_test_title">Upload de teste</string>
   <string name="gdocs_testupload_error">Não pude fazer upload de um arquivo de teste</string>
@@ -209,6 +219,7 @@
   <string name="autosend_sendzip_title">Enviar arquivo zipado</string>
   <string name="autosend_sendzip_summary">Envie arquivo zip, se for caso. Desabilitar para enviar arquivos individuais, ou se a opção zip não está funcionando para você     </string>
   <string name="autosend_targets_category">Enviar automaticamente aos destinos</string>
+  <string name="menu_autosend_now">Enviar automaticamente agora</string>
   <string name="autosend_sending">Envio automático</string>
   <string name="summary_autosend">Auto enviar:</string>
   <string name="pref_autosend_title">Envio automático, e-mail e upload</string>
@@ -271,9 +282,11 @@
   <string name="gpslogger_folder_title">Salvar na pasta</string>
   <string name="gpslogger_folder_summary">Onde deseja salvar os arquivos de log, padronizado para /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Pasta</string>
+  <string name="new_file_custom_message">Você pode usar o %SER para número de série do dispositivo, % ano, % mês, %DAY, %HOUR, % MIN</string>
   <string name="new_file_prefix_serial_title">Prefixar o número de série do dispositivo para o nome do arquivo</string>
   <string name="new_file_prefix_serial_summary">Este é o número de série encontrado no seu status do telefone </string>
   <string name="txt_travel_duration">Duração:</string>
+  <string name="menu_onepoint">Registrar um ponto</string>
   <string name="view_simple">Exibição Simples</string>
   <string name="view_detailed">Exibição Detalhada</string>
   <string name="view_big">Exibição Ampliada</string>
@@ -287,15 +300,21 @@
   <string name="txt_number_of_points">Número de pontos</string>
   <string name="save">Salvar</string>
   <string name="pref_filedetails_title">Arquivo e Detalhes da Pasta</string>
+  <string name="absolute_timeout_title">Tempo limite total</string>
+  <string name="absolute_timeout_summary">Número de segundos após o qual o app desiste de tentar adquirir uma correção, independentemente de outras configurações. Isto é especialmente útil para quando você estiver no interior de edifícios para evitar o esgotamento da bateria pelo GPS.  Defina como 0 para nenhum tempo limite.</string>
   <string name="txt_latitude_short">Lat</string>
   <string name="txt_longitude_short">Lon</string>
   <string name="log_nmea_title">Log para NMEA</string>
+  <string name="log_nmea_summary">Cria um arquivo base NMEA ao tentar obter uma correção. Este arquivo cresce muito rapidamente. Só funciona enquanto o GPS está sendo utilizado.</string>
   <string name="autoopengts_accountname">Nome da conta</string>
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Rede</string>
   <string name="listeners_passive">Passivo</string>
+  <string name="listeners_summary">Quais provedores de localização utilizar quando eles estão disponíveis; GPS para satélites, rede para torre de celular/Wi-Fi, Passivo é um provedor especial que atende à locais abrangidos por outras aplicações.</string>
+  <string name="listeners_title">Provedores de localização</string>
   <string name="autosend_frequency_hint">Número de minutos</string>
   <string name="pref_logging_file_no_permissions">Essa pasta não permite a gravação pelo GPSLogger</string>
+  <string name="pref_gpsvisualizer">Visualizar gráficos e estatísticas do log GPS</string>
   <string name="new_file_custom_each_time_title">Pedir um nome de arquivo em cada início</string>
   <string name="new_file_custom_each_time_summary">Solicitar um nome de arquivo personalizado cada vez que o Log é iniciado</string>
   <string name="donate_app">Doar (app)</string>
