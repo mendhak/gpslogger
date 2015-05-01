@@ -1009,15 +1009,9 @@ public class GpsLoggingService extends Service  {
             return;
         }
 
-        if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.STILL
-                 ){
+        if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.STILL){
             tracer.info(activityRecognitionEvent.result.getMostProbableActivity().toString());
-            if(Session.getUserStillSinceTimeStamp() == 0  &&
-                    ( Session.getPreviousLocationInfo() == null
-                            || !Session.getPreviousLocationInfo().hasSpeed()
-                            || (Session.getPreviousLocationInfo() != null && Session.getPreviousLocationInfo().hasSpeed() && Session.getPreviousLocationInfo().getSpeed() < 0.00447f)
-                    )
-            ){
+            if(Session.getUserStillSinceTimeStamp() == 0){
                 tracer.debug("Just entered still state, attempt to log");
                 StartGpsManager();
                 Session.setUserStillSinceTimeStamp(System.currentTimeMillis());
