@@ -182,6 +182,8 @@ class Kml22WriteHandler implements Runnable {
                     initialOutput.flush();
                     initialOutput.close();
 
+                    Utilities.AddFileToMediaDatabase(kmlFile, "text/xml");
+
                     //New file, so new track segment
                     addNewTrackSegment = true;
                 }

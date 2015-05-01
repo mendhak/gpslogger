@@ -215,6 +215,9 @@ class Gpx10WriteHandler implements Runnable {
                     initialOutput.flush();
                     initialOutput.close();
 
+                    Utilities.AddFileToMediaDatabase(gpxFile, "text/plain");
+
+
                     //New file, so new segment.
                     addNewTrackSegment = true;
                 }

@@ -271,6 +271,8 @@ public class GDocsSettingsFragment extends PreferenceFragment
                 initialOutput.write("<x>This is a test file</x>".getBytes());
                 initialOutput.flush();
                 initialOutput.close();
+
+                Utilities.AddFileToMediaDatabase(testFile, "text/xml");
             }
 
         } catch (Exception ex) {

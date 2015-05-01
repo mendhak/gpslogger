@@ -54,6 +54,8 @@ public class PlainTextFileLogger implements IFileLogger {
             output.write(header.getBytes());
             output.flush();
             output.close();
+
+            Utilities.AddFileToMediaDatabase(file, "text/csv");
         }
 
         FileOutputStream writer = new FileOutputStream(file, true);

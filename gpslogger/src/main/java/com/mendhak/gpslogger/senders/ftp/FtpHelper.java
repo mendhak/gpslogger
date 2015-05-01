@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.senders.ftp;
 
 
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
@@ -56,6 +57,8 @@ public class FtpHelper implements IFileSender {
                 initialOutput.write("<x>This is a test file</x>".getBytes());
                 initialOutput.flush();
                 initialOutput.close();
+
+                Utilities.AddFileToMediaDatabase(testFile, "text/xml");
             }
 
         } catch (Exception ex) {

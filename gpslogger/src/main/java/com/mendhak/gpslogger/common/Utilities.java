@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.content.*;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.media.MediaScannerConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -930,6 +931,14 @@ public class Utilities {
         }
 
         return result;
+    }
+
+    public static void AddFileToMediaDatabase(File file, String mimeType){
+
+        MediaScannerConnection.scanFile(AppSettings.getInstance(),
+                new String[] { file.getPath() },
+                new String[] { mimeType },
+                null);
     }
 
 }
