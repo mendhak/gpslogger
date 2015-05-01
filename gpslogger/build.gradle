@@ -18,13 +18,13 @@ repositories {
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "22"
+    buildToolsVersion "22.0.1"
 
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
         versionCode 61
-        versionName "61-activityrecognition"
+        versionName "61"
 
     }
 
