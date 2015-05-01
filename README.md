@@ -32,7 +32,7 @@ Setting up the code
 
 
 The project is based on the new [Android build system](http://tools.android.com/tech-docs/new-build-system/user-guide) plugin for Gradle.
-Feel free to adopt and document your own OS and IDEs.  These instructions are for Ubuntu Linux with IntelliJ 13.1.2 onwards.
+Feel free to adopt and document your own OS and IDEs.  These instructions are for Ubuntu Linux with IntelliJ IDEA.
 
 ### Set up your Android Development Environment
 
@@ -41,7 +41,7 @@ Follow the instructions on the [Android Developer Website](http://developer.andr
 On Ubuntu 64bit, you may also need `ia32-libs`, follow [these instructions](http://stackoverflow.com/a/21956268/974369).  I did not need this for Ubuntu 14.04.
 
 
-### Get IntelliJ IDEA
+![intellij](https://www.jetbrains.com/idea/docs/logo_intellij_idea.png)
 
 Download and install [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/download/index.html), which is free.
 Note that the Android build system version 0.9 does not work well with anything earlier than IntelliJ 13.1.2.
@@ -193,8 +193,13 @@ Overview
 
 GPSLogger is composed of a few main components;
 
-![test](https://drive.google.com/uc?export=view&id=0B6IOK82n4BkAankxcFJmYk90Y0U)
+![design](https://lh4.googleusercontent.com/q8pxSRg0fXClL6U6G8IFLOwNkPphuEgmvQcE5hdp_CU7l64WFhd5yVycF7PzEgQENIqvJDJmj8FzjPs=w1896-h947)
 
+### Event Bus
+
+The Event Bus is where all the cross communication happens.  Various components raise their events on the Event Bus, 
+and other parts of the application listen for those events.  The most important one is when a location is obtained, 
+ it is placed on the event bus and consumed by many fragments.
 
 ### GPS Logging Service
 
@@ -202,15 +207,15 @@ GPSLoggingService is where all the work happens.  This service talks to the loca
 It sets up timers and alarms for the next GPS point to be requested.  It passes location info to the various loggers
 so that they can write files.  It also invokes the auto-uploaders so that they may send their files to Dropbox, etc.
 
-It also passes information to the GPSMainActivity.
+It also passes information to the Event Bus.
 
 ### GPS Main Activity
 
 This is the main visible form in the app.   It consists of several 'fragments' - the simple view, detailed view and big view.
 
-It takes care of the main screen, the menus and passing information from the GPSLoggingService to the various fragments.
+It takes care of the main screen, the menus and toolbars.
 
-It also passes requests from the fragments to start or stop logging.
+The fragments listen to the Event Bus for location changes and display it in their own way.
 
 ### Session and AppSettings
 
