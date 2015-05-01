@@ -128,7 +128,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
             MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
                     .title(R.string.new_file_custom_title)
-                    .customView(R.layout.alertview)
+                    .customView(R.layout.alertview, true)
                     .positiveText(R.string.ok)
                     .negativeText(R.string.cancel)
                     .callback(new MaterialDialog.ButtonCallback() {

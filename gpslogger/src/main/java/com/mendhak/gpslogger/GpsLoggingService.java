@@ -34,6 +34,11 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.ActivityRecognition;
+import com.google.android.gms.location.ActivityRecognitionResult;
+import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
@@ -68,6 +73,9 @@ public class GpsLoggingService extends Service  {
     private Intent alarmIntent;
     private Handler handler = new Handler();
     private long firstRetryTimeStamp;
+
+    PendingIntent activityRecognitionPendingIntent;
+    GoogleApiClient googleApiClient;
     // ---------------------------------------------------
 
 
@@ -84,6 +92,47 @@ public class GpsLoggingService extends Service  {
         nextPointAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         RegisterEventBus();
+    }
+
+    private void RequestActivityRecognitionUpdates() {
+        GoogleApiClient.Builder builder = new GoogleApiClient.Builder(getApplicationContext())
+                .addApi(ActivityRecognition.API)
+                .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+
+                    @Override
+                    public void onConnectionSuspended(int arg) {
+                    }
+
+                    @Override
+                    public void onConnected(Bundle arg0) {
+                        tracer.info("Requesting activity recognition updates");
+                        Intent intent = new Intent(getApplicationContext(), GpsLoggingService.class);
+                        activityRecognitionPendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(googleApiClient, AppSettings.getMinimumSeconds()*1000, activityRecognitionPendingIntent);
+                    }
+
+                })
+                .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(ConnectionResult arg0) {
+
+                    }
+                });
+
+        googleApiClient = builder.build();
+        googleApiClient.connect();
+    }
+
+    private void StopActivityRecognitionUpdates(){
+        try{
+            tracer.info("Stopping activity recognition updates");
+            ActivityRecognition.ActivityRecognitionApi.removeActivityUpdates(googleApiClient, activityRecognitionPendingIntent);
+            googleApiClient.disconnect();
+        }
+        catch(Throwable t){
+            tracer.error("Tried to stop activity recognition updates", t);
+        }
+
     }
 
     private void RegisterEventBus() {
@@ -119,7 +168,14 @@ public class GpsLoggingService extends Service  {
     }
 
     private void HandleIntent(Intent intent) {
+
         GetPreferences();
+
+        ActivityRecognitionResult arr = ActivityRecognitionResult.extractResult(intent);
+        if(arr != null){
+            EventBus.getDefault().post(new ServiceEvents.ActivityRecognitionEvent(arr));
+            return;
+        }
 
         if (intent != null) {
             Bundle bundle = intent.getExtras();
@@ -210,6 +266,10 @@ public class GpsLoggingService extends Service  {
                     tracer.debug("Intent received - Log Once: " + String.valueOf(logOnceIntent));
                     needToStartGpsManager = false;
                     LogOnce();
+                }
+
+                if(bundle.getInt(Intent.EXTRA_ALARM_COUNT) != 0){
+                    needToStartGpsManager = true;
                 }
 
                 if (needToStartGpsManager && Session.isStarted()) {
@@ -334,6 +394,7 @@ public class GpsLoggingService extends Service  {
         NotifyClientStarted();
         StartPassiveManager();
         StartGpsManager();
+        RequestActivityRecognitionUpdates();
 
     }
 
@@ -353,6 +414,7 @@ public class GpsLoggingService extends Service  {
         Session.setTotalTravelled(0);
         Session.setPreviousLocationInfo(null);
         Session.setStarted(false);
+        Session.setUserStillSinceTimeStamp(0);
         stopAbsoluteTimer();
         // Email log file before setting location info to null
         AutoSendLogFileOnStop();
@@ -365,6 +427,7 @@ public class GpsLoggingService extends Service  {
         StopAlarm();
         StopGpsManager();
         StopPassiveManager();
+        StopActivityRecognitionUpdates();
         NotifyClientStopped();
     }
 
@@ -457,6 +520,14 @@ public class GpsLoggingService extends Service  {
     private void StartGpsManager() {
 
         GetPreferences();
+
+        //If the user has been still for more than the minimum seconds
+        if(Session.getUserStillSinceTimeStamp() > 0
+                && (System.currentTimeMillis() - Session.getUserStillSinceTimeStamp()) > (AppSettings.getMinimumSeconds() * 1000)){
+            tracer.info("No movement in the past interval, resetting alarm");
+            SetAlarmForNextPoint();
+            return;
+        }
 
         if (gpsLocationListener == null) {
             gpsLocationListener = new GeneralLocationListener(this, "GPS");
@@ -808,7 +879,7 @@ public class GpsLoggingService extends Service  {
     }
 
     private void SetAlarmForNextPoint() {
-        tracer.debug(".");
+        tracer.debug("Set alarm for " + AppSettings.getMinimumSeconds() + " seconds");
 
         Intent i = new Intent(this, GpsLoggingService.class);
         i.putExtra(IntentConstants.GET_NEXT_POINT, true);
@@ -928,6 +999,32 @@ public class GpsLoggingService extends Service  {
     @EventBusHook
     public void onEvent(CommandEvents.LogOnce logOnce){
         LogOnce();
+    }
+
+    @EventBusHook
+    public void onEvent(ServiceEvents.ActivityRecognitionEvent activityRecognitionEvent){
+
+        if(!AppSettings.shouldNotLogIfUserIsStill()){
+            Session.setUserStillSinceTimeStamp(0);
+            return;
+        }
+
+        if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.STILL){
+            tracer.info(activityRecognitionEvent.result.getMostProbableActivity().toString());
+            if(Session.getUserStillSinceTimeStamp() == 0){
+                tracer.debug("Just entered still state, attempt to log");
+                StartGpsManager();
+                Session.setUserStillSinceTimeStamp(System.currentTimeMillis());
+            }
+
+        }
+        else {
+            tracer.info(activityRecognitionEvent.result.getMostProbableActivity().toString());
+            //Reset the still-since timestamp
+            Session.setUserStillSinceTimeStamp(0);
+            tracer.debug("Just exited still state, attempt to log");
+            StartGpsManager();
+        }
     }
 
 }

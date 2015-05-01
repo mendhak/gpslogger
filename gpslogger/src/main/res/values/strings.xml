@@ -433,5 +433,18 @@
     <string name="no_network_message">There is no network available</string>
     <string name="hide_notification_buttons">Hide notification buttons</string>
     <string name="hide_notification_buttons_summary">You will need to restart GPSLogger for this setting to take effect</string>
+    <string name="pref_performance_activityrecognition">Activity Recognition</string>
+    <string name="activityrecognition_dont_log_if_still">Don\'t log if I\'m not moving</string>
+    <string name="activityrecognition_dont_log_if_still_summary">If there is no accelerometer movement since the last point, logging will pause until you move again</string>
+    <string name="txt_activity">Activity:</string>
+    <string name="activity_in_vehicle">In Vehicle</string>
+    <string name="activity_confidence">Confidence</string>
+    <string name="activity_still">Still</string>
+    <string name="activity_on_bicycle">On bicycle</string>
+    <string name="activity_on_foot">On foot</string>
+    <string name="activity_running">Running</string>
+    <string name="activity_tilting">Tilting</string>
+    <string name="activity_walking">Walking</string>
+    <string name="activity_unknown">Unknown</string>
 
 </resources>

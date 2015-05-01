@@ -64,4 +64,13 @@
         android:maxLength="4"
         android:defaultValue="120"
         android:hint="@string/retry_time_hint"/>
+
+    <PreferenceCategory android:title="@string/pref_performance_activityrecognition">
+        <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+            android:key="activityrecognition_dont_log_if_still"
+            android:summary="@string/activityrecognition_dont_log_if_still_summary"
+            android:title="@string/activityrecognition_dont_log_if_still"
+            android:defaultValue="true"
+            />
+    </PreferenceCategory>
 </PreferenceScreen>

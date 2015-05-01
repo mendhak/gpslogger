@@ -86,6 +86,7 @@ public class GpsMainActivity extends ActionBarActivity
         LoadDefaultFragmentView();
         StartAndBindService();
         RegisterEventBus();
+        AppCompatActivityMenuKeyInterceptor.intercept(this);
     }
 
     private void RegisterEventBus() {
@@ -659,7 +660,7 @@ public class GpsMainActivity extends ActionBarActivity
 
         MaterialDialog alertDialog = new MaterialDialog.Builder(GpsMainActivity.this)
                 .title(R.string.add_description)
-                .customView(R.layout.alertview)
+                .customView(R.layout.alertview, true)
                 .positiveText(R.string.ok)
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
@@ -767,9 +768,9 @@ public class GpsMainActivity extends ActionBarActivity
                     .title(R.string.osm_pick_file)
                     .items(files)
                     .positiveText(R.string.ok)
-                    .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMulti() {
+                    .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMultiChoice() {
                         @Override
-                        public void onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
+                        public boolean onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
 
                             List<Integer> selectedItems = Arrays.asList(integers);
 
@@ -785,6 +786,7 @@ public class GpsMainActivity extends ActionBarActivity
                                         getString(R.string.please_wait));
                                 sender.UploadFile(chosenFiles);
                             }
+                            return true;
                         }
                     }).show();
 
@@ -827,16 +829,16 @@ public class GpsMainActivity extends ActionBarActivity
                         .title(R.string.osm_pick_file)
                         .items(files)
                         .positiveText(R.string.ok)
-                        .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMulti() {
+                        .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMultiChoice() {
                             @Override
-                            public void onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
+                            public boolean onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
                                 List<Integer> selectedItems = Arrays.asList(integers);
 
                                 final Intent intent = new Intent(Intent.ACTION_SEND);
                                 intent.setType("*/*");
 
                                 if (selectedItems.size() <= 0) {
-                                    return;
+                                    return false;
                                 }
 
                                 if (selectedItems.contains(0)) {
@@ -869,6 +871,7 @@ public class GpsMainActivity extends ActionBarActivity
                                     intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, chosenFiles);
                                     startActivity(Intent.createChooser(intent, getString(R.string.sharing_via)));
                                 }
+                                return true;
                             }
                         }).show();
 

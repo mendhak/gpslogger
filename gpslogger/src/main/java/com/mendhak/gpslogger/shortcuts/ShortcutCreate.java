@@ -36,9 +36,9 @@ public class ShortcutCreate extends Activity {
         new MaterialDialog.Builder(this)
                 .title(R.string.shortcut_pickaction)
                 .items(items)
-                .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallback() {
+                .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
-                    public void onSelection(MaterialDialog materialDialog, View view, int item, CharSequence charSequence) {
+                    public boolean onSelection(MaterialDialog materialDialog, View view, int item, CharSequence charSequence) {
                         Intent shortcutIntent;
                         String shortcutLabel;
 
@@ -59,6 +59,7 @@ public class ShortcutCreate extends Activity {
                         setResult(RESULT_OK, intent);
 
                         finish();
+                        return true;
                     }
                 }).show();
 
