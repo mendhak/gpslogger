@@ -372,6 +372,34 @@
                         />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/txt_activity"
+                        android:id="@+id/detailedview_activity_label"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:minWidth="@dimen/view_text_width"
+                        android:id="@+id/detailedview_activity_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"
+                        android:background="@null"
+                        />
+                </LinearLayout>
+
 
             </LinearLayout>
         </android.support.v7.widget.CardView>

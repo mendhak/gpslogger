@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.dd.processbutton.iml.ActionProcessButton;
+import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.EventBusHook;
@@ -263,6 +264,8 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         TextView txtTravelled = (TextView) rootView.findViewById(R.id.detailedview_travelled_text);
         TextView txtTime = (TextView) rootView.findViewById(R.id.detailedview_duration_text);
 
+        TextView txtStill = (TextView) rootView.findViewById(R.id.detailedview_activity_text);
+
         tvLatitude.setText("");
         tvLongitude.setText("");
         tvDateTime.setText("");
@@ -273,6 +276,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         txtDirection.setText("");
         txtTravelled.setText("");
         txtTime.setText("");
+        txtStill.setText("");
 
 
     }
@@ -406,6 +410,47 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());
         txtTime.setText(duration + " (started at " + dateFormat.format(d) + " " + timeFormat.format(d) + ")");
+
+
+
+    }
+
+    @EventBusHook
+    public void onEvent(ServiceEvents.ActivityRecognitionEvent activityRecognitionEvent){
+        TextView txtActivity = (TextView) rootView.findViewById(R.id.detailedview_activity_text);
+
+        String detectedActivity = "";
+        if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.IN_VEHICLE){
+            detectedActivity = getString(R.string.activity_in_vehicle);
+        }
+        if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.STILL){
+            detectedActivity = getString(R.string.activity_still);
+        }
+        if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.ON_BICYCLE){
+            detectedActivity = getString(R.string.activity_on_bicycle);
+        }
+        if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.ON_FOOT){
+            detectedActivity = getString(R.string.activity_on_foot);
+        }
+        if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.RUNNING){
+            detectedActivity = getString(R.string.activity_running);
+        }
+        if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.TILTING){
+            detectedActivity = getString(R.string.activity_tilting);
+        }
+        if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.WALKING){
+            detectedActivity = getString(R.string.activity_walking);
+        }
+        if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.UNKNOWN){
+            detectedActivity = getString(R.string.activity_unknown);
+        }
+
+        detectedActivity +=  " - "
+                + getString(R.string.activity_confidence)
+                + " "
+                + activityRecognitionEvent.result.getMostProbableActivity().getConfidence()
+                + "%";
+        txtActivity.setText(detectedActivity);
     }
 
 }
