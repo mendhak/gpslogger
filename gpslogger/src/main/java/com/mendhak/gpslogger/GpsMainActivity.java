@@ -371,11 +371,11 @@ public class GpsMainActivity extends ActionBarActivity
 
         drawer.setOnItemClickListener(new DrawerItem.OnItemClickListener() {
             @Override
-            public void onClick(DrawerItem drawerItem, int id, int position) {
+            public void onClick(DrawerItem drawerItem, long id, int position) {
                 //drawer.selectItem(3);
                 drawerLayout.closeDrawer(drawer);
 
-                switch(id){
+                switch((int)id){
                     case 0:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GENERAL);
                         break;
