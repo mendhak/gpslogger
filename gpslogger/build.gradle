@@ -183,17 +183,19 @@ tasks.whenTaskAdded { task ->
 }
 
 
-crowdinDownload{
-    apiKey = CROWDIN_API_KEY
-    destination = "$projectDir/src/main/res"
-    projectId = 'gpslogger-for-android'
+if (project.hasProperty("CROWDIN_API_KEY")) {
+    crowdinDownload {
+        apiKey = CROWDIN_API_KEY
+        destination = "$projectDir/src/main/res"
+        projectId = 'gpslogger-for-android'
 
-    //Optional
-    //Android projects
-    renameMapping  = [
-            from:  '^(.*)/(.*)$',
-            to:  /values-\1\/\2/
-    ]
-    //Optional
-    excludePattern = '**/*.txt'
+        //Optional
+        //Android projects
+        renameMapping = [
+                from: '^(.*)/(.*)$',
+                to  : /values-\1\/\2/
+        ]
+        //Optional
+        excludePattern = '**/*.txt'
+    }
 }
