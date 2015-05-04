@@ -49,6 +49,7 @@ import com.mendhak.gpslogger.senders.IFileSender;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
+import com.mendhak.gpslogger.senders.owncloud.OwnCloudHelper;
 import com.mendhak.gpslogger.views.GenericViewFragment;
 import com.mendhak.gpslogger.views.GpsBigViewFragment;
 import com.mendhak.gpslogger.views.GpsDetailedViewFragment;
@@ -354,16 +355,22 @@ public class GpsMainActivity extends ActionBarActivity
                         .setTextPrimary(getString(R.string.osm_setup_title))
         );
 
+        drawer.addItem(new DrawerItem()
+                        .setId(10)
+                        .setImage(getResources().getDrawable(R.drawable.owncloud))
+                        .setTextPrimary(getString(R.string.owncloud_setup_title))
+        );
+
         drawer.addDivider();
 
         drawer.addItem(new DrawerItem()
-                        .setId(10)
+                        .setId(11)
                         .setImage(getResources().getDrawable(R.drawable.helpfaq))
                         .setTextPrimary(getString(R.string.menu_faq))
         );
 
         drawer.addItem(new DrawerItem()
-                        .setId(11)
+                        .setId(12)
                         .setImage(getResources().getDrawable(R.drawable.exit))
                         .setTextPrimary(getString(R.string.menu_exit)));
 
@@ -407,10 +414,13 @@ public class GpsMainActivity extends ActionBarActivity
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
                         break;
                     case 10:
+                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OWNCLOUD);
+                        break;
+                    case 11:
                         Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
                         startActivity(faqtivity);
                         break;
-                    case 11:
+                    case 12:
                         EventBus.getDefault().post(new CommandEvents.RequestStartStop(false));
                         finish();
                         break;
@@ -623,6 +633,9 @@ public class GpsMainActivity extends ActionBarActivity
                 return true;
             case R.id.mnuAutoSendNow:
                 ForceAutoSendNow();
+            case R.id.mnuOwnCloud:
+                UploadToOwnCloud();
+                return true;
             default:
                 return true;
         }
@@ -697,6 +710,19 @@ public class GpsMainActivity extends ActionBarActivity
         }
 
         ShowFileListDialog(FileSenderFactory.GetDropBoxSender(getApplication()));
+    }
+
+
+
+    private void UploadToOwnCloud() {
+        final OwnCloudHelper ownCloudHelper = new OwnCloudHelper();
+
+        if (!ownCloudHelper.IsLinked()) {
+            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OWNCLOUD);
+            return;
+        }
+
+        ShowFileListDialog(FileSenderFactory.GetOwnCloudSender(getApplication()));
     }
 
     private void SendToOpenGTS() {
@@ -998,6 +1024,13 @@ public class GpsMainActivity extends ActionBarActivity
     @EventBusHook
     public void onEventMainThread(UploadEvents.Ftp upload){
         tracer.debug("FTP Event completed, success: " + upload.success);
+        Utilities.HideProgress();
+    }
+
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.OwnCloud upload){
+        tracer.debug("OwnCloud Event completed, success: " + upload.success);
         Utilities.HideProgress();
     }
 

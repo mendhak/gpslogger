@@ -44,6 +44,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.ftp.FtpHelper;
+import com.mendhak.gpslogger.senders.owncloud.OwnCloudHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -275,6 +276,15 @@ public class Utilities {
         AppSettings.setFtpUseFtps(prefs.getBoolean("autoftp_useftps", false));
         AppSettings.setFtpProtocol(prefs.getString("autoftp_ssltls", ""));
         AppSettings.setFtpImplicit(prefs.getBoolean("autoftp_implicit", false));
+
+        AppSettings.setOwnCloudAutoSendEnabled(prefs.getBoolean("owncloud_enabled", false));
+        AppSettings.setOwnCloudServerName(prefs.getString("owncloud_server", ""));
+        AppSettings.setOwnCloudUsername(prefs.getString("owncloud_username", ""));
+        AppSettings.setOwnCloudPassword(prefs.getString("owncloud_password", ""));
+        AppSettings.setOwnCloudDirectory(prefs.getString("owncloud_directory", "GPSLogger"));
+        AppSettings.setOwnCloudUseHttps(prefs.getBoolean("owncloud_https", true));
+        AppSettings.setOwnCloudPort(Integer.valueOf(prefs.getString("owncloud_port", "443")));
+
         AppSettings.setGpsLoggerFolder(prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(context).getAbsolutePath()));
         AppSettings.setFileNamePrefixSerial(prefs.getBoolean("new_file_prefix_serial", false));
 
@@ -563,6 +573,19 @@ public class Utilities {
         return helper.ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(),
                 AppSettings.getFtpPassword(), AppSettings.getFtpPort(), AppSettings.FtpUseFtps(),
                 AppSettings.getFtpProtocol(), AppSettings.FtpImplicit());
+    }
+
+
+    public static boolean IsOwnCloudSetup(Context context) {
+
+        OwnCloudHelper helper = new OwnCloudHelper();
+
+        return helper.ValidSettings(AppSettings.getOwnCloudServerName(),
+                AppSettings.getOwnCloudUsername(),
+                AppSettings.getOwnCloudPassword(),
+                AppSettings.getOwnCloudPort(),
+                AppSettings.OwnCloudUseHttps(),
+                AppSettings.getOwnCloudDirectory());
     }
 
     public static boolean IsDropBoxSetup(Context context) {

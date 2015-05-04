@@ -101,6 +101,14 @@ public class AppSettings extends Application {
     private static String ftpProtocol;
     private static boolean ftpImplicit;
 
+    private static boolean ownCloudAutoSendEnabled;
+    private static String ownCloudServerName;
+    private static int ownCloudPort;
+    private static String ownCloudUsername;
+    private static String ownCloudPassword;
+    private static String ownCloudDirectory;
+    private static boolean ownCloudUseHttps;
+
     private static String customFileName;
     private static boolean isCustomFile;
     private static boolean askCustomFileNameEachTime;
@@ -549,6 +557,59 @@ public class AppSettings extends Application {
 
     public static void setFtpAutoSendEnabled(boolean ftpAutoSendEnabled) {
         AppSettings.ftpAutoSendEnabled = ftpAutoSendEnabled;
+    }
+
+    public static String getOwnCloudServerName() {
+        return ownCloudServerName;
+    }
+
+    public static void setOwnCloudServerName(String ownCloudServerName) {
+        AppSettings.ownCloudServerName = ownCloudServerName;
+    }
+
+    public static int getOwnCloudPort() {
+        return ownCloudPort;
+    }
+
+    public static void setOwnCloudPort(int ownCloudPort) {
+        AppSettings.ownCloudPort = ownCloudPort;
+    }
+    public static boolean OwnCloudUseHttps() {
+        return ownCloudUseHttps;
+    }
+
+    public static void setOwnCloudUseHttps(boolean ownCloudUseHttps) {
+        AppSettings.ownCloudUseHttps = ownCloudUseHttps;
+    }
+
+    public static String getOwnCloudUsername() {
+        return ownCloudUsername;
+    }
+
+    public static void setOwnCloudUsername(String ownCloudUsername) {
+        AppSettings.ownCloudUsername = ownCloudUsername;
+    }
+
+    public static String getOwnCloudPassword() {
+        return ownCloudPassword;
+    }
+
+    public static void setOwnCloudPassword(String ownCloudPassword) {
+        AppSettings.ownCloudPassword = ownCloudPassword;
+    }
+
+    public static String getOwnCloudDirectory() { return ownCloudDirectory; }
+
+    public static void setOwnCloudDirectory(String ownCloudDirectory) {
+        AppSettings.ownCloudDirectory = ownCloudDirectory;
+    }
+
+    public static boolean isOwnCloudAutoSendEnabled() {
+        return ownCloudAutoSendEnabled;
+    }
+
+    public static void setOwnCloudAutoSendEnabled(boolean ownCloudAutoSendEnabled) {
+        AppSettings.ownCloudAutoSendEnabled = ownCloudAutoSendEnabled;
     }
 
     public static String getCustomFileName() {

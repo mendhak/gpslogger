@@ -19,6 +19,9 @@ repositories {
     maven {
         url  "https://dl.bintray.com/mendhak/maven"
     }
+    flatDir{
+        dirs 'aars'
+    }
 }
 
 android {
@@ -170,6 +173,16 @@ dependencies {
     compile 'com.mendhak.gpsloggersupport:additionnal:0.0.1'
     compile 'com.mendhak.gpsloggersupport:mail:0.0.1'
     compile 'com.mendhak.gpsloggersupport:dropbox-android-sdk:1.6.3'
+
+    compile 'com.owncloud.android.lib:oc-android-library-release@aar'
+}
+
+preBuild.doFirst {
+    if (!file("./src/main/res/values/test.xml").exists()) {
+        // Ensure that the developer at least knows of 'test.xml'.
+        logger.warn("Please create a file at ./src/main/res/values/test.xml. If you just want to build, leave the file empty. If you want to use DropBox or OpenStreetMap features, this file must contain OAuth keys (instructions in README).")
+        //throw new GradleScriptException("Please create a file at ./src/main/res/values/test.xml. If you just want to build, leave the file empty. If you want to use DropBox or OpenStreetMap features, this file must contain OAuth keys (instructions in README).", null)
+    }
 }
 
 tasks.whenTaskAdded { task ->
