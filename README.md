@@ -79,11 +79,11 @@ Open up IntelliJ and choose to import a project.  Select the topmost `build.grad
 
 If you get an Import dialog, choose to *Import project from external model*
 
-![import](https://farm3.staticflickr.com/2808/13543335914_3b709dca56_o.png)
+![import](assets/import_1.png)
 
 On the next screen, choose the defaults and proceed (default gradle wrapper)
 
-![import](https://farm3.staticflickr.com/2861/13543635053_042a02c11d_b.jpg)
+![import](assets/import_2.jpg)
 
 Give it a minute and IntelliJ/Gradle will configure the projects and download the various libraries.
 
@@ -99,7 +99,7 @@ Click on 'Register your application'
 
 Fill in the form with these details
 
-![Oauth settings](http://farm9.staticflickr.com/8147/7645348952_f2834d18e9_o.png)
+![Oauth settings](assets/osm_oauth_settings.png)
 
 After registering the application, you will receive a 'Consumer Key' and a 'Consumer Secret'.  
 Place the keys in your `~/.gradle/gradle.properties` like this:
@@ -116,11 +116,11 @@ Go to the [Dropbox Developers page](https://www.dropbox.com/developers/apps) and
 
 Use these settings, but choose a unique name
 
-![Dropbox settings](http://farm8.staticflickr.com/7139/7645470952_5c75ac3ac2_o.png)
+![Dropbox settings](assets/dropbox_settings_create.png)
 
 After creating the app, you will receive an app key and secret (the ones in the screenshot are fake)
 
-![Dropbox settings](http://farm8.staticflickr.com/7267/7645470752_ae9a7e4ed2_o.png)
+![Dropbox settings](assets/dropbox_settings.png)
 
 Place the keys in your `~/.gradle/gradle.properties` like this:
 
@@ -144,48 +144,22 @@ Choose "Installed Application" and then under Installed Application Type, choose
 [Learn More](https://developers.google.com/console/help/#installed_applications) to specify the package name and
 the SHA1 fingerprint of your debug certificate.
 
-![GAPI Console](http://farm3.staticflickr.com/2866/9113223789_222f62a51a_c.jpg)
+![GAPI Console](assets/gapi_console.jpg)
 
 The Google Docs feature requires the [Google Play Services Framework](http://developer.android.com/google/play-services/index.html),
 so ensure that the emulator you are using is Android 4.2.2 (API level 17) or greater if you want to use this feature.
 
-![AVD](http://farm6.staticflickr.com/5322/9113255381_9fba026576_o.png)
+![AVD](assets/avd.png)
 
 You can also debug directly against your phone - all phones Android 2.2 and above should have this framework installed.
 
-
-### Running tests
-
-This solution has a few [Robotium](https://code.google.com/p/robotium/) tests.  To run them, first ensure that you
-have an emulator up and running or your phone is connected.  In other words, `adb devices` should show a connected device.
-
-Then run the tests using the gradle wrapper
-
-     ./gradlew connectedAndroidTest --info
-
-If a test fails and you want a little more info, you can add the `stacktrace` and `debug` flags
-
-    ./gradlew connectedAndroidTest --debug --stacktrace
-
-You can also try running the tests straight from the IDE.  Right click on a test class such as `GpsMainActivityTests`
-or on the `src/test/java` folder and choose to run it with the Android test instrumentation runner.
-
-![Android tests](https://farm8.staticflickr.com/7248/13943655031_7ee4e7e92f_z.jpg)
-
-And you should get results in the Run tab.
-
-![tests](https://farm8.staticflickr.com/7424/13796700395_021e03cd8e_o.png)
-
-You can run just the quicker `@SmallTest`s using
-
-    ./gradlew connectedAndroidTest -PtestSize=small --info
 
 Overview
 ======
 
 GPSLogger is composed of a few main components;
 
-![design](https://lh4.googleusercontent.com/q8pxSRg0fXClL6U6G8IFLOwNkPphuEgmvQcE5hdp_CU7l64WFhd5yVycF7PzEgQENIqvJDJmj8FzjPs=w1896-h947)
+![design](assets/gpslogger_architecture.png)
 
 ### Event Bus
 

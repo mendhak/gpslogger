@@ -32,6 +32,7 @@ android {
         versionName "61"
     }
 
+    //Adding API keys to BuildConfig
     defaultConfig {
         //Set these values in ~/.gradle/gradle.properties
         buildConfigField "String", "OSM_CONSUMER_KEY", "\"" + GPSLOGGER_OSM_CONSUMERKEY + "\""
@@ -71,6 +72,7 @@ android {
     }
 
 
+    //Release signing key
     if (project.hasProperty("RELEASE_STORE_FILE")) {
         signingConfigs {
             release {
@@ -88,6 +90,7 @@ android {
         }
     }
 
+    //Copies final APK to this directory
     assembleRelease.doLast {
         copy{
             from "build/outputs/apk/gpslogger-release.apk"
@@ -100,6 +103,7 @@ android {
         }
     }
 
+    //Predexing libraries takes up too much memory and causes travis-ci to choke
     dexOptions {
         preDexLibraries = false
     }
@@ -175,27 +179,21 @@ tasks.whenTaskAdded { task ->
     if (task.name.contains("lint")) {
         task.enabled = false
     }
-
-    //Force the APK to be uninstalled before running tests
-    if(task.name.equals("connectedAndroidTest")){
-        task.dependsOn(uninstallAll)
-    }
 }
 
-
+//Download translations from Crowdin
 if (project.hasProperty("CROWDIN_API_KEY")) {
     crowdinDownload {
         apiKey = CROWDIN_API_KEY
         destination = "$projectDir/src/main/res"
         projectId = 'gpslogger-for-android'
 
-        //Optional
         //Android projects
         renameMapping = [
                 from: '^(.*)/(.*)$',
                 to  : /values-\1\/\2/
         ]
-        //Optional
+
         excludePattern = '**/*.txt'
     }
 }
