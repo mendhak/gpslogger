@@ -8,7 +8,7 @@ buildscript {
 }
 
 plugins {
-    id "com.mendhak.gradlecrowdin" version "0.0.4"
+    id "com.mendhak.gradlecrowdin" version "0.0.5"
 }
 
 apply plugin: 'com.android.application'
@@ -30,7 +30,6 @@ android {
         targetSdkVersion 19
         versionCode 61
         versionName "61"
-
     }
 
     buildTypes {
