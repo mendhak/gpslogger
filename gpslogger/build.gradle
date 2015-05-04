@@ -32,6 +32,15 @@ android {
         versionName "61"
     }
 
+    defaultConfig {
+        //Set these values in ~/.gradle/gradle.properties
+        buildConfigField "String", "OSM_CONSUMER_KEY", "\"" + GPSLOGGER_OSM_CONSUMERKEY + "\""
+        buildConfigField "String", "OSM_CONSUMER_SECRET", "\"" + GPSLOGGER_OSM_CONSUMERSECRET + "\""
+        buildConfigField "String", "DROPBOX_APP_KEY", "\"" + GPSLOGGER_DROPBOX_APPKEY + "\""
+        buildConfigField "String", "DROPBOX_APP_SECRET", "\"" + GPSLOGGER_DROPBOX_APPSECRET + "\""
+        resValue "string", "DROPBOX_DB_SCHEME", "\"db-" + GPSLOGGER_DROPBOX_APPKEY + "\""
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -159,14 +168,6 @@ dependencies {
     compile 'com.mendhak.gpsloggersupport:mail:0.0.1'
     compile 'com.mendhak.gpsloggersupport:dropbox-android-sdk:1.6.3'
 
-}
-
-preBuild.doFirst {
-    if (!file("./src/main/res/values/test.xml").exists()) {
-        // Ensure that the developer at least knows of 'test.xml'.
-        logger.warn("Please create a file at ./src/main/res/values/test.xml. If you just want to build, leave the file empty. If you want to use DropBox or OpenStreetMap features, this file must contain OAuth keys (instructions in README).")
-        //throw new GradleScriptException("Please create a file at ./src/main/res/values/test.xml. If you just want to build, leave the file empty. If you want to use DropBox or OpenStreetMap features, this file must contain OAuth keys (instructions in README).", null)
-    }
 }
 
 tasks.whenTaskAdded { task ->

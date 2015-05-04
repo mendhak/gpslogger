@@ -89,15 +89,6 @@ Give it a minute and IntelliJ/Gradle will configure the projects and download th
 
 IntelliJ may not know where your Android SDK is.  You can find this under *File > Project Structure...* where you should set the Project SDK.  You will want to use Java 1.6 with Android 4 or above.
 
-
-### Test.xml
-
-Create a test.xml in the project at res/values/test.xml with an empty resources tag
-
-    <resource />
-
-This file can be used to store OAuth keys if you want OpenStreetMap and DropBox functionality (below).  This file is ignored in the .gitignore file and will not be committed.
-
 ### OpenStreetMap Setup (Optional)
 
 Sign up for an account with [OpenStreetMap](http://openstreetmap.org) and log in.
@@ -110,10 +101,11 @@ Fill in the form with these details
 
 ![Oauth settings](http://farm9.staticflickr.com/8147/7645348952_f2834d18e9_o.png)
 
-After registering the application, you will receive a 'Consumer Key' and a 'Consumer Secret'.  Place the keys in your test.xml like this:
+After registering the application, you will receive a 'Consumer Key' and a 'Consumer Secret'.  
+Place the keys in your `~/.gradle/gradle.properties` like this:
 
-    <string name="osm_consumerkey">ABCDEF</string>
-    <string name="osm_consumersecret">GHIJKLMNOP</string>
+    GPSLOGGER_OSM_CONSUMERKEY=abcdefgh
+    GPSLOGGER_OSM_CONSUMERSECRET=1234123456
 
 
 ### Dropbox Setup (Optional)
@@ -130,11 +122,11 @@ After creating the app, you will receive an app key and secret (the ones in the 
 
 ![Dropbox settings](http://farm8.staticflickr.com/7267/7645470752_ae9a7e4ed2_o.png)
 
-Add the Dropbox app key to your test.xml file
+Place the keys in your `~/.gradle/gradle.properties` like this:
 
 
-    <string name="dropbox_appkey">12341234</string>
-    <string name="dropbox_appsecret">abcdabcdefg</string>
+    GPSLOGGER_DROPBOX_APPKEY=abcdefgh
+    GPSLOGGER_DROPBOX_APPSECRET=1234123456
 
 
 Replace the Dropbox app key to your AndroidManifest.xml file

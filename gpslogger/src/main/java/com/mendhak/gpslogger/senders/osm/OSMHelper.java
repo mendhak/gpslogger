@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.senders.osm;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.senders.IFileSender;
@@ -62,13 +63,10 @@ public class OSMHelper implements IFileSender {
         OAuthConsumer consumer = null;
 
         try {
-            int osmConsumerKey = context.getResources().getIdentifier(
-                    "osm_consumerkey", "string", context.getPackageName());
-            int osmConsumerSecret = context.getResources().getIdentifier(
-                    "osm_consumersecret", "string", context.getPackageName());
+
             consumer = new CommonsHttpOAuthConsumer(
-                    context.getString(osmConsumerKey),
-                    context.getString(osmConsumerSecret));
+                    BuildConfig.OSM_CONSUMER_KEY,
+                    BuildConfig.OSM_CONSUMER_SECRET);
 
             SharedPreferences prefs = PreferenceManager
                     .getDefaultSharedPreferences(context);

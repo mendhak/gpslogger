@@ -78,8 +78,9 @@
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />
 
             <intent-filter>
-                <!-- Change this to be db- followed by your app key -->
-                <data android:scheme="db-0unjsn38gpe3rwv" />
+                <!-- Set from build.gradle, see defaultConfig -->
+                <!--suppress AndroidDomInspection -->
+                <data android:scheme="@string/DROPBOX_DB_SCHEME" />
 
                 <action android:name="android.intent.action.VIEW" />
 

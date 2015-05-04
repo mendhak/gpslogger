@@ -26,6 +26,7 @@ import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 import com.dropbox.client2.session.Session;
 import com.dropbox.client2.session.TokenPair;
+import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
@@ -104,9 +105,7 @@ public class DropBoxHelper implements IFileSender {
     }
 
     private AndroidAuthSession buildSession() {
-        int dropboxAppKey = context.getResources().getIdentifier("dropbox_appkey", "string", context.getPackageName());
-        int dropboxAppSecret = context.getResources().getIdentifier("dropbox_appsecret", "string", context.getPackageName());
-        AppKeyPair appKeyPair = new AppKeyPair(context.getString(dropboxAppKey), context.getString(dropboxAppSecret));
+        AppKeyPair appKeyPair = new AppKeyPair(BuildConfig.DROPBOX_APP_KEY, BuildConfig.DROPBOX_APP_SECRET);
         AndroidAuthSession session;
 
         String[] stored = getKeys();
@@ -162,13 +161,9 @@ public class DropBoxHelper implements IFileSender {
     }
 
     public void UploadFile(String fileName) {
-        int dropboxAppKey = context.getResources().getIdentifier("dropbox_appkey", "string", context.getPackageName());
-        int dropboxAppSecret = context.getResources().getIdentifier("dropbox_appsecret", "string", context.getPackageName());
-
         JobManager jobManager = AppSettings.GetJobManager();
-        jobManager.addJobInBackground(new DropboxJob(fileName, context.getString(dropboxAppKey), context.getString(dropboxAppSecret), getKeys()));
+        jobManager.addJobInBackground(new DropboxJob(fileName, BuildConfig.DROPBOX_APP_KEY, BuildConfig.DROPBOX_APP_SECRET, getKeys()));
     }
-
 
     @Override
     public boolean accept(File dir, String name) {
