@@ -522,8 +522,7 @@ public class GpsLoggingService extends Service  {
         GetPreferences();
 
         //If the user has been still for more than the minimum seconds
-        if(Session.getUserStillSinceTimeStamp() > 0
-                && (System.currentTimeMillis() - Session.getUserStillSinceTimeStamp()) > (AppSettings.getMinimumSeconds() * 1000)){
+        if(userHasBeenStillForTooLong()) {
             tracer.info("No movement in the past interval, resetting alarm");
             SetAlarmForNextPoint();
             return;
@@ -575,6 +574,11 @@ public class GpsLoggingService extends Service  {
         EventBus.getDefault().post(new ServiceEvents.WaitingForLocation(true));
         Session.setWaitingForLocation(true);
         SetStatus(R.string.started);
+    }
+
+    private boolean userHasBeenStillForTooLong() {
+        return !Session.hasDescription() && !Session.isSinglePointMode() &&
+                (Session.getUserStillSinceTimeStamp() > 0 && (System.currentTimeMillis() - Session.getUserStillSinceTimeStamp()) > (AppSettings.getMinimumSeconds() * 1000));
     }
 
     private void startAbsoluteTimer() {
@@ -745,6 +749,13 @@ public class GpsLoggingService extends Service  {
         // Don't log a point until the user-defined time has elapsed
         // However, if user has set an annotation, just log the point, disregard any filters
         if (!Session.hasDescription() && !Session.isSinglePointMode() && (currentTimeStamp - Session.getLatestTimeStamp()) < (AppSettings.getMinimumSeconds() * 1000)) {
+            return;
+        }
+
+        //Don't log a point if user has been still
+        // However, if user has set an annotation, just log the point, disregard any filters
+        if(userHasBeenStillForTooLong()) {
+            tracer.info("Received location but the user hasn't moved, ignoring");
             return;
         }
 
