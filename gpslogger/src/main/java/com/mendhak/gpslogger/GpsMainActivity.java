@@ -288,7 +288,7 @@ public class GpsMainActivity extends ActionBarActivity
 
         drawer.addDivider();
         drawer.addItem(new DrawerItem()
-                        .setId(0)
+                        .setId(1000)
                         .setImage(getResources().getDrawable(R.drawable.settings))
                         .setTextPrimary(getString(R.string.pref_general_title))
                         .setTextSecondary(getString(R.string.pref_general_summary))
@@ -376,7 +376,7 @@ public class GpsMainActivity extends ActionBarActivity
                 drawerLayout.closeDrawer(drawer);
 
                 switch((int)id){
-                    case 0:
+                    case 1000:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GENERAL);
                         break;
                     case 1:
