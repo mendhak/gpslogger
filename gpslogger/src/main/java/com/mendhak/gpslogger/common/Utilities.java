@@ -289,7 +289,7 @@ public class Utilities {
 
         AppSettings.setGoogleDriveFolderName(prefs.getString("gdocs_foldername", "GPSLogger for Android"));
 
-        AppSettings.setShouldNotLogIfUserIsStill(prefs.getBoolean("activityrecognition_dont_log_if_still", true));
+        AppSettings.setShouldNotLogIfUserIsStill(prefs.getBoolean("activityrecognition_dontlogifstill", false));
     }
 
 

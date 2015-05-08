@@ -67,10 +67,10 @@
 
     <PreferenceCategory android:title="@string/pref_performance_activityrecognition">
         <com.mendhak.gpslogger.views.component.CustomSwitchPreference
-            android:key="activityrecognition_dont_log_if_still"
+            android:key="activityrecognition_dontlogifstill"
             android:summary="@string/activityrecognition_dont_log_if_still_summary"
             android:title="@string/activityrecognition_dont_log_if_still"
-            android:defaultValue="true"
+            android:defaultValue="false"
             />
     </PreferenceCategory>
 </PreferenceScreen>
