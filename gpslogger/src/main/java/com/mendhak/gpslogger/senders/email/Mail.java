@@ -161,6 +161,7 @@ class Mail extends javax.mail.Authenticator {
         props.put("mail.smtp.socketFactory.port", _sport);
 
         props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.imaps.ssl.trust", "*");
 
         if (_ssl) {
             props.put("mail.smtp.socketFactory.class",
