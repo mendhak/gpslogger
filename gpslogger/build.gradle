@@ -28,8 +28,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 62
-        versionName "62"
+        versionCode 63
+        versionName "63"
     }
 
     //Adding API keys to BuildConfig
@@ -113,7 +113,6 @@ dependencies {
 
     compile 'com.android.support:support-v4:22.1.1'
     compile 'com.google.android.gms:play-services:7.0.0'
-    compile fileTree(dir:'./src/main/libs', include: '*.jar')
 
     compile('commons-net:commons-net:2.0')
 
@@ -171,7 +170,6 @@ dependencies {
     compile 'com.mendhak.gpsloggersupport:additionnal:0.0.1'
     compile 'com.mendhak.gpsloggersupport:mail:0.0.1'
     compile 'com.mendhak.gpsloggersupport:dropbox-android-sdk:1.6.3'
-
 }
 
 tasks.whenTaskAdded { task ->
