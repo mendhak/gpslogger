@@ -196,4 +196,10 @@ if (project.hasProperty("CROWDIN_API_KEY")) {
 
         excludePattern = '**/*.txt'
     }
+
+    crowdinUpload {
+        apiKey = CROWDIN_API_KEY
+        projectId = 'gpslogger-for-android'
+        sourceFile = "$projectDir/src/main/res/values/strings.xml"
+    }
 }
