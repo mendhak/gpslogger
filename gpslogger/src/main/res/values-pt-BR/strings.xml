@@ -320,4 +320,19 @@
   <string name="donate_app">Doar (app)</string>
   <string name="donate_bitcoin">Doar (Bitcoin)</string>
   <string name="no_network_message">Não existe rede disponível</string>
+  <string name="hide_notification_buttons">Ocultar botões de notificação</string>
+  <string name="hide_notification_buttons_summary">Você precisará reiniciar o GPSLogger para que esta configuração tenha efeito</string>
+  <string name="pref_performance_activityrecognition">Reconhecimento de Atividade</string>
+  <string name="activityrecognition_dont_log_if_still">Não registre se não estou em movimento</string>
+  <string name="activityrecognition_dont_log_if_still_summary">Se não houver movimento do acelerômetro desde o último ponto, o log ativo fará uma pausa até que você se mova novamente. Pontos passivos ainda podem ser registrados.</string>
+  <string name="txt_activity">Atividade:</string>
+  <string name="activity_in_vehicle">No Veículo</string>
+  <string name="activity_confidence">Confiabilidade</string>
+  <string name="activity_still">Parado</string>
+  <string name="activity_on_bicycle">De bicicleta</string>
+  <string name="activity_on_foot">A pé</string>
+  <string name="activity_running">Corrida</string>
+  <string name="activity_tilting">Inclinação</string>
+  <string name="activity_walking">Caminhada</string>
+  <string name="activity_unknown">Desconhecido</string>
 </resources>

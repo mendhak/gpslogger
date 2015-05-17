@@ -173,7 +173,7 @@ une plus grande précision à basses fréquences.</string>
   <string name="osm_description_summary">La description à employer lors du téléchargement d\'une trace</string>
   <string name="osm_tags">Labels</string>
   <string name="osm_tags_summary">Labels à appliquer lors du déchargement d\'une trace</string>
-  <string name="no_files_found">Aucuns fichiers trouvés, rien à partager ou à charger.</string>
+  <string name="no_files_found">Aucun fichier trouvé, rien à partager ou à charger.</string>
   <string name="osm_pick_file">Choisissez un fichier à décharger</string>
   <string name="debuglog_title">Écrire dans le fichier de débogage</string>
   <string name="debuglog_summary">Écrire les messages de débogage dans un fichier sur la carte SD. Avertissement : La taille du fichier augmente très rapidement.     </string>
@@ -317,4 +317,18 @@ une plus grande précision à basses fréquences.</string>
   <string name="donate_app">Faire un don (app)</string>
   <string name="donate_bitcoin">Faire un don (Bitcoin)</string>
   <string name="no_network_message">Il n\'y a pas de réseau disponible</string>
+  <string name="hide_notification_buttons">Cacher les icones de notification</string>
+  <string name="hide_notification_buttons_summary">Vous aurez besoin de redémarrer GPSLogger pour que le changement soit effectif</string>
+  <string name="pref_performance_activityrecognition">Reconnaissance d\'activité</string>
+  <string name="activityrecognition_dont_log_if_still">N\'enregistre pas en l\'absence de mouvement</string>
+  <string name="activityrecognition_dont_log_if_still_summary">S\'il n\'y a pas de mouvement depuis le dernier point, l\'enregistrement est mis en pause jusqu\'à reprise du mouvement. Les points passifs peuvent toujours être enregistrés.</string>
+  <string name="txt_activity">Activité :</string>
+  <string name="activity_in_vehicle">Dans un véhicule</string>
+  <string name="activity_confidence">Confiance</string>
+  <string name="activity_still">Immobile</string>
+  <string name="activity_on_bicycle">A vélo</string>
+  <string name="activity_on_foot">A pieds</string>
+  <string name="activity_running">Course à pied</string>
+  <string name="activity_walking">Marche à pied</string>
+  <string name="activity_unknown">Inconnu</string>
 </resources>

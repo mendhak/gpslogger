@@ -340,4 +340,18 @@ polia.
   <string name="donate_app">Podporiť (ap.)</string>
   <string name="donate_bitcoin">Podporiť (Bitcoin)</string>
   <string name="no_network_message">Nie je dostupná žiadna sieť</string>
+  <string name="hide_notification_buttons">Skryť notifikačné tlačidlá</string>
+  <string name="hide_notification_buttons_summary">Pre aktivovanie toto nastavenia je potrebné reštartovať GPSLogger</string>
+  <string name="pref_performance_activityrecognition">Rozpoznávanie aktivity</string>
+  <string name="activityrecognition_dont_log_if_still">Nezaznamenávať v prípade státia</string>
+  <string name="activityrecognition_dont_log_if_still_summary">Ak merač zrýchlenia nezaznamená žiadny pohyb z posledného bodu, aktívne zaznamenávanie sa pozastaví až do vykonania ďalšieho pohybu. Pasívne body je možné zaznamenávať.</string>
+  <string name="txt_activity">Aktivita:</string>
+  <string name="activity_in_vehicle">Vo vozidle</string>
+  <string name="activity_confidence">Utajenie</string>
+  <string name="activity_still">Státie</string>
+  <string name="activity_on_bicycle">Na bicykli</string>
+  <string name="activity_on_foot">Pešo</string>
+  <string name="activity_running">Beh</string>
+  <string name="activity_walking">Chôdza</string>
+  <string name="activity_unknown">Neznáma</string>
 </resources>
