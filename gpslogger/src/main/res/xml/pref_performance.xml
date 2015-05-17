@@ -71,6 +71,13 @@
             android:summary="@string/altitude_subtractgeoidheight_summary"
             android:title="@string/altitude_subtractgeoidheight_title"
             android:defaultValue="false"/>
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+            android:key="altitude_subtractoffset"
+            android:title="@string/altitude_subtractoffset_title"
+            android:summary="@string/altitude_subtractoffset_summary"
+            android:dialogTitle="@string/settings_enter_meters"
+            android:numeric="integer"
+            android:defaultValue="0"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_performance_activityrecognition">

@@ -122,6 +122,7 @@ public class AppSettings extends Application {
     private static boolean dontLogIfUserIsStill;
 
     private static boolean adjustAltitudeFromGeoIdHeight;
+    private static int subtractAltitudeOffset;
 
 
     public static boolean isOsmAutoSendEnabled() {
@@ -687,4 +688,14 @@ public class AppSettings extends Application {
     public static void setAdjustAltitudeFromGeoIdHeight(boolean adjustAltitudeFromGeoIdHeight) {
         AppSettings.adjustAltitudeFromGeoIdHeight = adjustAltitudeFromGeoIdHeight;
     }
+
+
+    public static int getSubtractAltitudeOffset() {
+        return subtractAltitudeOffset;
+    }
+
+    public static void setSubtractAltitudeOffset(int subtractAltitudeOffset) {
+        AppSettings.subtractAltitudeOffset = subtractAltitudeOffset;
+    }
+
 }

@@ -448,5 +448,7 @@
     <string name="activity_unknown">Unknown</string>
     <string name="altitude_subtractgeoidheight_summary">Uses Mean Sea Level (MSL) instead of WGS84 height by subtracting geoidheight from GPS altitude. Only applies to GPS satellite points, not network or NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">Use MSL instead of WGS84</string>
+    <string name="altitude_subtractoffset_title">Subtract altitude offset</string>
+    <string name="altitude_subtractoffset_summary">A value in meters to subtract from GPS altitudes. Use a negative number to add a value to the altitude. Only applies to GPS satellite points, not network or NMEA.</string>
 
 </resources>

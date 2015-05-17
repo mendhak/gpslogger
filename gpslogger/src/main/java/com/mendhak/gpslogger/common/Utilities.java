@@ -292,6 +292,7 @@ public class Utilities {
         AppSettings.setShouldNotLogIfUserIsStill(prefs.getBoolean("activityrecognition_dontlogifstill", false));
 
         AppSettings.setAdjustAltitudeFromGeoIdHeight(prefs.getBoolean("altitude_subtractgeoidheight", false));
+        AppSettings.setSubtractAltitudeOffset(Integer.valueOf(prefs.getString("altitude_subtractoffset", "0")));
     }
 
 
