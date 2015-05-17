@@ -65,6 +65,14 @@
         android:defaultValue="120"
         android:hint="@string/retry_time_hint"/>
 
+    <PreferenceCategory android:title="Altitude">
+        <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+            android:key="altitude_subtractgeoidheight"
+            android:summary="@string/altitude_subtractgeoidheight_summary"
+            android:title="@string/altitude_subtractgeoidheight_title"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/pref_performance_activityrecognition">
         <com.mendhak.gpslogger.views.component.CustomSwitchPreference
             android:key="activityrecognition_dontlogifstill"
@@ -73,4 +81,5 @@
             android:defaultValue="false"
             />
     </PreferenceCategory>
+
 </PreferenceScreen>

@@ -290,6 +290,8 @@ public class Utilities {
         AppSettings.setGoogleDriveFolderName(prefs.getString("gdocs_foldername", "GPSLogger for Android"));
 
         AppSettings.setShouldNotLogIfUserIsStill(prefs.getBoolean("activityrecognition_dontlogifstill", false));
+
+        AppSettings.setAdjustAltitudeFromGeoIdHeight(prefs.getBoolean("altitude_subtractgeoidheight", false));
     }
 
 

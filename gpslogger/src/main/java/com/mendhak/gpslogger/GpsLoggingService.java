@@ -817,6 +817,7 @@ public class GpsLoggingService extends Service  {
 
 
         tracer.info("Location to update: " + String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getLongitude()));
+        AdjustAltitudeFromGeoId(loc);
         ResetCurrentFileName(false);
         Session.setLatestTimeStamp(System.currentTimeMillis());
         Session.setCurrentLocationInfo(loc);
@@ -836,6 +837,15 @@ public class GpsLoggingService extends Service  {
         if (Session.isSinglePointMode()) {
             tracer.debug("Single point mode - stopping now");
             StopLogging();
+        }
+    }
+
+    private void AdjustAltitudeFromGeoId(Location loc) {
+        if(AppSettings.shouldAdjustAltitudeFromGeoIdHeight() && loc.getExtras() != null){
+            String geoidheight = loc.getExtras().getString("GEOIDHEIGHT");
+            if (!Utilities.IsNullOrEmpty(geoidheight)) {
+                loc.setAltitude((float)loc.getAltitude() - Float.valueOf(geoidheight));
+            }
         }
     }
 

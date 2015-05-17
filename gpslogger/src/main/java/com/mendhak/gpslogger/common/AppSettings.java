@@ -121,6 +121,8 @@ public class AppSettings extends Application {
 
     private static boolean dontLogIfUserIsStill;
 
+    private static boolean adjustAltitudeFromGeoIdHeight;
+
 
     public static boolean isOsmAutoSendEnabled() {
         return osmAutoSendEnabled;
@@ -675,5 +677,14 @@ public class AppSettings extends Application {
 
     public static void setShouldNotLogIfUserIsStill(boolean check){
         AppSettings.dontLogIfUserIsStill = check;
+    }
+
+
+    public static boolean shouldAdjustAltitudeFromGeoIdHeight() {
+        return adjustAltitudeFromGeoIdHeight;
+    }
+
+    public static void setAdjustAltitudeFromGeoIdHeight(boolean adjustAltitudeFromGeoIdHeight) {
+        AppSettings.adjustAltitudeFromGeoIdHeight = adjustAltitudeFromGeoIdHeight;
     }
 }
