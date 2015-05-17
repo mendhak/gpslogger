@@ -415,6 +415,7 @@ public class GpsLoggingService extends Service  {
         Session.setPreviousLocationInfo(null);
         Session.setStarted(false);
         Session.setUserStillSinceTimeStamp(0);
+        Session.setLatestTimeStamp(0);
         stopAbsoluteTimer();
         // Email log file before setting location info to null
         AutoSendLogFileOnStop();
