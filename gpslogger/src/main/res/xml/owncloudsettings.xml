@@ -13,19 +13,6 @@
             android:summary="@string/owncloud_server_summary"
             android:dialogTitle="@string/owncloud_server"
             android:hint="@string/owncloud_server_summary"/>
-
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
-            android:key="owncloud_port"
-            android:title="@string/owncloud_port"
-            android:dialogTitle="@string/owncloud_port"
-            android:defaultValue="443"
-            android:inputType="number"/>
-
-    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
-                android:key="owncloud_usehttps"
-                android:title="@string/owncloud_usehttps"
-                android:defaultValue="true"
-                android:summary="@string/owncloud_usehttps_summary"/>
                 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="owncloud_username"

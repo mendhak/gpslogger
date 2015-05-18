@@ -21,6 +21,7 @@ repositories {
     }
     flatDir{
         dirs 'aars'
+        dirs 'libs'
     }
 }
 
@@ -109,6 +110,7 @@ android {
     //Predexing libraries takes up too much memory and causes travis-ci to choke
     dexOptions {
         preDexLibraries = false
+        javaMaxHeapSize "4g"
     }
 }
 
@@ -175,6 +177,9 @@ dependencies {
     compile 'com.mendhak.gpsloggersupport:dropbox-android-sdk:1.6.3'
 
     compile 'com.owncloud.android.lib:oc-android-library-release@aar'
+    compile ('commons-httpclient:commons-httpclient:3.1') {
+        exclude module: 'commons-logging'
+    }
 }
 
 preBuild.doFirst {

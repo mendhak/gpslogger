@@ -65,6 +65,11 @@
             android:summary="@string/autoftp_setup_summary"
             android:key="autoftp_setup">
         </Preference>
+        <Preference
+            android:title="@string/owncloud_setup_title"
+            android:summary="@string/owncloud_setup_summary"
+            android:key="owncloud_setup">
+        </Preference>
     </PreferenceCategory>
 
 

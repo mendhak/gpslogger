@@ -1,7 +1,5 @@
 package com.mendhak.gpslogger.senders.owncloud;
 
-import android.content.Context;
-
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
@@ -21,11 +19,10 @@ public class OwnCloudHelper implements IFileSender
 {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OwnCloudSettingsFragment.class.getSimpleName());
 
-
     public OwnCloudHelper() {
     }
 
-    void TestOwnCloud(String servername, String username, String password, String directory, int port, boolean useHttps) {
+    void TestOwnCloud(String servername, String username, String password, String directory) {
 
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
@@ -51,48 +48,45 @@ public class OwnCloudHelper implements IFileSender
 
         } catch (Exception ex) {
             EventBus.getDefault().post(new UploadEvents.Ftp(false));
+            tracer.error("Error while testing ownCloud upload: "+ ex.getMessage());
         }
 
         JobManager jobManager = AppSettings.GetJobManager();
-        jobManager.addJobInBackground(new OwnCloudJob(servername, port, username, password, directory,
-                useHttps, testFile, "gpslogger_test.txt"));
+        jobManager.addJobInBackground(new OwnCloudJob(servername, username, password, directory,
+                testFile, "gpslogger_test.txt"));
+        tracer.debug("Added background ownCloud upload job");
+        jobManager.start();
     }
 
-    public boolean ValidSettings(String servername, String username, String password, Integer port, boolean useSSL,
-                                 String directory) {
-        boolean retVal = servername != null && servername.length() > 0 && port != null && port > 0;
-
-        if (useSSL) {
-            retVal = false;
-        }
+    public static boolean ValidSettings(
+            String servername,
+            String username,
+            String password,
+            String directory) {
+        boolean retVal = servername != null && servername.length() > 0;
 
         return retVal;
     }
 
     @Override
-    public void UploadFile(List<File> files) {
-
-
-        JobManager jobManager = AppSettings.GetJobManager();
+    public void UploadFile(List<File> files)
+    {
         for (File f : files) {
-            //UploadFile(f.getName());
-            jobManager.addJobInBackground(new OwnCloudJob(
-                    AppSettings.getOwnCloudServerName(),
-                    AppSettings.getOwnCloudPort(),
-                    AppSettings.getOwnCloudUsername(),
-                    AppSettings.getOwnCloudPassword(),
-                    AppSettings.getOwnCloudDirectory(),
-                    AppSettings.OwnCloudUseHttps(),
-                    f, f.getName()));
+            UploadFile(f);
         }
     }
-/*
-    public void UploadFile(String fileName) {
 
-
-        jobManager.addJobInBackground(new (fileName));
+    public void UploadFile(File f)
+    {
+        JobManager jobManager = AppSettings.GetJobManager();
+        jobManager.addJobInBackground(new OwnCloudJob(
+                AppSettings.getOwnCloudServerName(),
+                AppSettings.getOwnCloudUsername(),
+                AppSettings.getOwnCloudPassword(),
+                AppSettings.getOwnCloudDirectory(),
+                f, f.getName()));
     }
-*/
+
     @Override
     public boolean accept(File dir, String name) {
         return true;

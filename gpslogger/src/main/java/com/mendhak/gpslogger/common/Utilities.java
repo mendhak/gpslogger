@@ -281,9 +281,7 @@ public class Utilities {
         AppSettings.setOwnCloudServerName(prefs.getString("owncloud_server", ""));
         AppSettings.setOwnCloudUsername(prefs.getString("owncloud_username", ""));
         AppSettings.setOwnCloudPassword(prefs.getString("owncloud_password", ""));
-        AppSettings.setOwnCloudDirectory(prefs.getString("owncloud_directory", "GPSLogger"));
-        AppSettings.setOwnCloudUseHttps(prefs.getBoolean("owncloud_https", true));
-        AppSettings.setOwnCloudPort(Integer.valueOf(prefs.getString("owncloud_port", "443")));
+        AppSettings.setOwnCloudDirectory(prefs.getString("owncloud_directory", "/gpslogger"));
 
         AppSettings.setGpsLoggerFolder(prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(context).getAbsolutePath()));
         AppSettings.setFileNamePrefixSerial(prefs.getBoolean("new_file_prefix_serial", false));
@@ -576,15 +574,13 @@ public class Utilities {
     }
 
 
-    public static boolean IsOwnCloudSetup(Context context) {
+    public static boolean IsOwnCloudSetup() {
 
         OwnCloudHelper helper = new OwnCloudHelper();
 
         return helper.ValidSettings(AppSettings.getOwnCloudServerName(),
                 AppSettings.getOwnCloudUsername(),
                 AppSettings.getOwnCloudPassword(),
-                AppSettings.getOwnCloudPort(),
-                AppSettings.OwnCloudUseHttps(),
                 AppSettings.getOwnCloudDirectory());
     }
 

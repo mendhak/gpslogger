@@ -277,24 +277,21 @@
     <string name="dropbox_couldnotauthorize">Could not authorize with Dropbox, please try again later</string>
     <string name="dropbox_upload">Dropbox</string>
 
-    <string name="owncloud_setup_title">OwnCloud</string>
-    <string name="owncloud_setup_summary">Upload your files to an OwnCloud server.</string>
+    <string name="owncloud_setup_title">ownCloud</string>
+    <string name="owncloud_setup_summary">Upload your files to an ownCloud server.</string>
     <string name="owncloud_server">Server</string>
     <string name="owncloud_server_summary">IP address or hostname</string>
     <string name="owncloud_username">Username</string>
     <string name="owncloud_password">Password</string>
     <string name="owncloud_directory">Folder</string>
-    <string name="owncloud_directory_summary">Folder to use on OwnCloud server.</string>
-    <string name="owncloud_port">Port</string>
-    <string name="owncloud_usehttps">Use HTTPS</string>
-    <string name="owncloud_usehttps_summary">Access OwnCloud via HTTPS (SSL/TLS)</string>
-    <string name="owncloud_test">Test OwnCloud Upload</string>
-    <string name="owncloud_test_summary">Upload a test file to the OwnCloud server</string>
+    <string name="owncloud_directory_summary">Folder to use on ownCloud server.</string>
+    <string name="owncloud_test">Test ownCloud Upload</string>
+    <string name="owncloud_test_summary">Upload a test file to the ownCloud server</string>
    
-    <string name="owncloud_testing">Testing OwnCloud upload</string>
+    <string name="owncloud_testing">Testing ownCloud upload</string>
     <string name="owncloud_invalid_settings">Invalid settings</string>
     <string name="owncloud_invalid_summary">Some of your settings are invalid. Please ensure that you have filled out all relevant fields. </string>
-    <string name="owncloud_upload">OwnCloud upload</string>
+    <string name="owncloud_upload">ownCloud upload</string>
 
     <string name="menu_upload">Upload</string>
 
