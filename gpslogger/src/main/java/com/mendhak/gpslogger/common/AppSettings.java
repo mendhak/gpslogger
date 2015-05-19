@@ -103,11 +103,9 @@ public class AppSettings extends Application {
 
     private static boolean ownCloudAutoSendEnabled;
     private static String ownCloudServerName;
-    private static int ownCloudPort;
     private static String ownCloudUsername;
     private static String ownCloudPassword;
     private static String ownCloudDirectory;
-    private static boolean ownCloudUseHttps;
 
     private static String customFileName;
     private static boolean isCustomFile;
@@ -565,21 +563,6 @@ public class AppSettings extends Application {
 
     public static void setOwnCloudServerName(String ownCloudServerName) {
         AppSettings.ownCloudServerName = ownCloudServerName;
-    }
-
-    public static int getOwnCloudPort() {
-        return ownCloudPort;
-    }
-
-    public static void setOwnCloudPort(int ownCloudPort) {
-        AppSettings.ownCloudPort = ownCloudPort;
-    }
-    public static boolean OwnCloudUseHttps() {
-        return ownCloudUseHttps;
-    }
-
-    public static void setOwnCloudUseHttps(boolean ownCloudUseHttps) {
-        AppSettings.ownCloudUseHttps = ownCloudUseHttps;
     }
 
     public static String getOwnCloudUsername() {

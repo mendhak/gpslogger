@@ -64,7 +64,9 @@ public class FileSenderFactory {
         return new FtpHelper();
     }
 
-    public static IFileSender GetOwnCloudSender(Context applicationContext) { return new OwnCloudHelper(); }
+    public static IFileSender GetOwnCloudSender(Context applicationContext) {
+        return new OwnCloudHelper();
+    }
 
     public static void SendFiles(Context applicationContext, final String fileToSend) {
 
