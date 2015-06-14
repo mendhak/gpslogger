@@ -182,8 +182,6 @@ class Kml22WriteHandler implements Runnable {
                     initialOutput.flush();
                     initialOutput.close();
 
-                    Utilities.AddFileToMediaDatabase(kmlFile, "text/xml");
-
                     //New file, so new track segment
                     addNewTrackSegment = true;
                 }
@@ -213,6 +211,7 @@ class Kml22WriteHandler implements Runnable {
                 raf.seek(kmlFile.length() - 42);
                 raf.write(coords.toString().getBytes());
                 raf.close();
+                Utilities.AddFileToMediaDatabase(kmlFile, "text/xml");
                 tracer.debug("Finished writing to KML22 File");
             }
 

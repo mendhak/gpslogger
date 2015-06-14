@@ -215,9 +215,6 @@ class Gpx10WriteHandler implements Runnable {
                     initialOutput.flush();
                     initialOutput.close();
 
-                    Utilities.AddFileToMediaDatabase(gpxFile, "text/plain");
-
-
                     //New file, so new segment.
                     addNewTrackSegment = true;
                 }
@@ -230,6 +227,7 @@ class Gpx10WriteHandler implements Runnable {
                 raf.seek(startPosition);
                 raf.write(trackPoint.getBytes());
                 raf.close();
+                Utilities.AddFileToMediaDatabase(gpxFile, "text/plain");
                 tracer.debug("Finished writing to GPX10 file");
 
             } catch (Exception e) {
