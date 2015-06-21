@@ -30,6 +30,7 @@ import com.mendhak.gpslogger.senders.ftp.AutoFtpFragment;
 import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsFragment;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSFragment;
 import com.mendhak.gpslogger.senders.osm.OSMAuthorizationFragment;
+import com.mendhak.gpslogger.senders.owncloud.OwnCloudSettingsFragment;
 import com.mendhak.gpslogger.settings.GeneralSettingsFragment;
 import com.mendhak.gpslogger.settings.LoggingSettingsFragment;
 import com.mendhak.gpslogger.settings.PerformanceSettingsFragment;
@@ -111,7 +112,10 @@ public class MainPreferenceActivity extends ActionBarActivity {
                 setTitle(R.string.osm_setup_title);
                 preferenceFragment = new OSMAuthorizationFragment();
                 break;
-
+            case PreferenceConstants.OWNCLOUD:
+                setTitle("OwnCloud");
+                preferenceFragment = new OwnCloudSettingsFragment();
+                break;
         }
 
         getFragmentManager().beginTransaction()
@@ -163,6 +167,7 @@ public class MainPreferenceActivity extends ActionBarActivity {
         public static final String OPENGTS = "OpenGTSFragment";
         public static final String GDOCS = "GDocsSettingsFragment";
         public static final String DROPBOX = "DropBoxAuthorizationFragment";
+        public static final String OWNCLOUD = "OwnCloudAuthorizationFragment";
         public static final String OSM = "OSMAuthorizationFragment";
     }
 

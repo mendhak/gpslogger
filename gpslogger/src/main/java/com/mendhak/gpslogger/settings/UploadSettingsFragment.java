@@ -51,6 +51,7 @@ public class UploadSettingsFragment extends PreferenceFragment implements Prefer
         Preference gdocsPref     = findPreference("gdocs_setup");
         Preference opengtsPref   = findPreference("opengts_setup");
         Preference autoftpPref   = findPreference("autoftp_setup");
+        Preference ownCloudPref  = findPreference("owncloud_setup");
 
 
         osmSetupPref.setOnPreferenceClickListener(this);
@@ -59,6 +60,7 @@ public class UploadSettingsFragment extends PreferenceFragment implements Prefer
         gdocsPref.setOnPreferenceClickListener(this);
         opengtsPref.setOnPreferenceClickListener(this);
         autoftpPref.setOnPreferenceClickListener(this);
+        ownCloudPref.setOnPreferenceClickListener(this);
     }
 
 
@@ -91,6 +93,9 @@ public class UploadSettingsFragment extends PreferenceFragment implements Prefer
             launchFragment = MainPreferenceActivity.PreferenceConstants.FTP;
         }
 
+        if(preference.getKey().equalsIgnoreCase("owncloud_setup")) {
+            launchFragment = MainPreferenceActivity.PreferenceConstants.OWNCLOUD;
+        }
 
         if(!Utilities.IsNullOrEmpty(launchFragment)){
             Intent intent = new Intent(getActivity(), MainPreferenceActivity.class);

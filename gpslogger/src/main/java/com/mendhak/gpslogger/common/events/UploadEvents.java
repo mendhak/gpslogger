@@ -51,4 +51,9 @@ public class UploadEvents {
             this.success = success;
         }
     }
+
+    public static class OwnCloud {
+        public boolean success;
+        public OwnCloud(boolean success) { this.success = success; }
+    }
 }

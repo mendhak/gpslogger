@@ -19,6 +19,10 @@ repositories {
     maven {
         url  "https://dl.bintray.com/mendhak/maven"
     }
+    flatDir{
+        dirs 'aars'
+        dirs 'libs'
+    }
 }
 
 android {
@@ -106,6 +110,7 @@ android {
     //Predexing libraries takes up too much memory and causes travis-ci to choke
     dexOptions {
         preDexLibraries = false
+        javaMaxHeapSize "4g"
     }
 
     testOptions {
@@ -177,9 +182,15 @@ dependencies {
     compile 'com.mendhak.gpsloggersupport:dropbox-android-sdk:1.6.3'
     compile 'com.mendhak.gpsloggersupport:material-dialogs:0.7.2.8'
 
+    compile 'com.owncloud.android.lib:oc-android-library-release@aar'
+    compile ('commons-httpclient:commons-httpclient:3.1') {
+        exclude module: 'commons-logging'
+    }
+
     testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:1.9.5"
 }
+
 
 tasks.whenTaskAdded { task ->
     //Don't run lint. Takes too long.
