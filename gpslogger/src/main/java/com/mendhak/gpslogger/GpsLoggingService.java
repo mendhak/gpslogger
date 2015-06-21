@@ -105,10 +105,16 @@ public class GpsLoggingService extends Service  {
 
                     @Override
                     public void onConnected(Bundle arg0) {
-                        tracer.info("Requesting activity recognition updates");
-                        Intent intent = new Intent(getApplicationContext(), GpsLoggingService.class);
-                        activityRecognitionPendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                        ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(googleApiClient, AppSettings.getMinimumSeconds()*1000, activityRecognitionPendingIntent);
+                        try {
+                            tracer.info("Requesting activity recognition updates");
+                            Intent intent = new Intent(getApplicationContext(), GpsLoggingService.class);
+                            activityRecognitionPendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                            ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(googleApiClient, AppSettings.getMinimumSeconds() * 1000, activityRecognitionPendingIntent);
+                        }
+                        catch(Throwable t){
+                            tracer.warn("Can't connect to activity recognition service", t);
+                        }
+
                     }
 
                 })
@@ -130,7 +136,7 @@ public class GpsLoggingService extends Service  {
             googleApiClient.disconnect();
         }
         catch(Throwable t){
-            tracer.error("Tried to stop activity recognition updates", t);
+            tracer.warn("Tried to stop activity recognition updates", t);
         }
 
     }
