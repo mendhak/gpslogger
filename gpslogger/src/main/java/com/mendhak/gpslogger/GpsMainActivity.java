@@ -86,7 +86,6 @@ public class GpsMainActivity extends ActionBarActivity
         LoadDefaultFragmentView();
         StartAndBindService();
         RegisterEventBus();
-        AppCompatActivityMenuKeyInterceptor.intercept(this);
     }
 
     private void RegisterEventBus() {
