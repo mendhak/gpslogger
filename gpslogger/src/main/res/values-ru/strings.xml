@@ -324,4 +324,14 @@
   <string name="donate_app">Пожертвовать (Play Маркет)</string>
   <string name="donate_bitcoin">Пожертвовать (Bitcoin)</string>
   <string name="no_network_message">Нет доступной сети</string>
+  <string name="hide_notification_buttons">Скрыть кнопки уведомления</string>
+  <string name="hide_notification_buttons_summary">Необходимо будет перезапустить GPSLogger, чтобы установка вступила в силу</string>
+  <string name="pref_performance_activityrecognition">Распознание движения</string>
+  <string name="activityrecognition_dont_log_if_still">Не записывать если я не двигаюсь</string>
+  <string name="activityrecognition_dont_log_if_still_summary">Если после последнего пункта, акселерометр не зарегистрировал движений, запись точек будет приостановлена. Пассивные точки будут записаны.</string>
+  <string name="activity_in_vehicle">На автомобиле</string>
+  <string name="activity_on_bicycle">На велосипеде</string>
+  <string name="activity_on_foot">Пешком</string>
+  <string name="activity_running">Бег</string>
+  <string name="altitude_subtractoffset_title">Вычесть смещение высоты</string>
 </resources>

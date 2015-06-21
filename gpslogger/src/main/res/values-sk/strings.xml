@@ -352,6 +352,11 @@ polia.
   <string name="activity_on_bicycle">Na bicykli</string>
   <string name="activity_on_foot">Pešo</string>
   <string name="activity_running">Beh</string>
+  <string name="activity_tilting">Náklon</string>
   <string name="activity_walking">Chôdza</string>
   <string name="activity_unknown">Neznáma</string>
+  <string name="altitude_subtractgeoidheight_summary">Použije strednú hladinu mora (MSL) namiesto výšky podľa WGS84. Hodnota je tvorená odpočítaním výšky geoidu od nadm. výšky podľa GPS. Aplikuje sa len na sat. body GPS, nie na sieť/NMEA.</string>
+  <string name="altitude_subtractgeoidheight_title">Použiť MSL namiesto WG584</string>
+  <string name="altitude_subtractoffset_title">Odčítanie posunu nadmorskej výšky</string>
+  <string name="altitude_subtractoffset_summary">Hodnota v metroch, ktorá sa odčíta od nadmorských výšok podľa GPS. Ak chcete k nadmorskej výške pripočítať hodnotu, zadajte sem záporné číslo. Aplikuje sa len na body z GPS satelitov, nie na sieť či NMEA.</string>
 </resources>

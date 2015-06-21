@@ -87,7 +87,7 @@
   <string name="time_halfhour">30分</string>
   <string name="time_oneandhalfhours">1時間半</string>
   <string name="time_twoandhalfhours">2 時間半</string>
-  <string name="time_hms_format" formatted="false">%s時 %s分 %s秒</string>
+  <string name="time_hms_format" formatted="false">%s時間 %s分 %s秒</string>
   <string name="accuracy_within" formatted="false">誤差 %s %s 以内</string>
   <string name="degree_symbol">度</string>
   <string name="settings_distance_in_meters">距離（m）</string>
@@ -188,7 +188,7 @@
   <string name="dropbox_authorize_description">Dropboxのこの機能を使うには、GPSLoggerがアップロードできるように承認しなければなりません。</string>
   <string name="dropbox_authorize">承認</string>
   <string name="dropbox_unauthorize">承認の取り消し</string>
-  <string name="dropbox_unauthorize_description">Drobpoxで承認されました。ファイルは\'Apps\GPSLogger for Android\'にアップロードされます。また、Dropbox からGPSLoggerのリンクを解除することができます。</string>
+  <string name="dropbox_unauthorize_description">Drobpoxで承認されました。ファイルは\'Apps\\GPSLogger for Android\'にアップロードされます。また、Dropbox からGPSLoggerのリンクを解除することができます。</string>
   <string name="dropbox_couldnotauthorize">Dropboxの承認に失敗しました。少し待ってから再度実行してください。</string>
   <string name="dropbox_upload">Dropbox</string>
   <string name="menu_upload">アップロード</string>
@@ -322,14 +322,19 @@
   <string name="pref_performance_activityrecognition">活動状況の自動認識</string>
   <string name="activityrecognition_dont_log_if_still">移動していないときはログファイルを書かない</string>
   <string name="activityrecognition_dont_log_if_still_summary">最後の点から加速度計に変化がない時は動き出すまで活動記録は書き込みしません。移動記録は書き込みを続けます。</string>
-  <string name="txt_activity">活動記録:</string>
+  <string name="txt_activity">活動状況:</string>
   <string name="activity_in_vehicle">車で移動</string>
   <string name="activity_confidence">確度</string>
   <string name="activity_still">静止</string>
-  <string name="activity_on_bicycle">自転車で</string>
-  <string name="activity_on_foot">徒歩で</string>
-  <string name="activity_running">走っています</string>
+  <string name="activity_on_bicycle">自転車で移動</string>
+  <string name="activity_on_foot">徒歩で移動</string>
+  <string name="activity_running">ランニング中</string>
   <string name="activity_tilting">傾いています</string>
-  <string name="activity_walking">歩いています</string>
+  <string name="activity_walking">歩行中</string>
   <string name="activity_unknown">不明</string>
+  <string name="altitude_subtractgeoidheight_summary">GPSの高度情報から高さを求めるために、WGS84ではなく、MSL(平均海面)を用いて計算します。これはGPS衛星の情報のみに適用され、ネットワークから得られた情報やNMEAには影響しません。</string>
+  <string name="altitude_subtractgeoidheight_title">WGS84の代わりにMSLを使用</string>
+  <string name="altitude_subtractoffset_title">高度からオフセットを差し引く</string>
+  <string name="altitude_subtractoffset_summary">GPS高度から差し引く値をメートルで与えます。負の値を入力すると、高度に加算します。これはGPSの情報にのみに適用され、ネットワークから得られた値
+やNMEAの値には影響ありません。</string>
 </resources>

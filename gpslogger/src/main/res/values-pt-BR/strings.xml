@@ -335,4 +335,8 @@
   <string name="activity_tilting">Inclinação</string>
   <string name="activity_walking">Caminhada</string>
   <string name="activity_unknown">Desconhecido</string>
+  <string name="altitude_subtractgeoidheight_summary">Utiliza o Nível Médio do Mar (MSL) ao invés da altura WGS84, pela subtração da altura geoidal da altitude GPS. Aplicável somente a pontos do satélite GPS, excluíndo-se os de rede ou NMEA.</string>
+  <string name="altitude_subtractgeoidheight_title">Use MSL ao invés de WGS84</string>
+  <string name="altitude_subtractoffset_title">Deduzir o desvio de altitude</string>
+  <string name="altitude_subtractoffset_summary">Um valor em metros a ser subtraído das altitudes GPS. Use um número negativo para adicionar um valor à altitude. Aplicável somente a pontos do satélite GPS, excluíndo-se os de rede ou NMEA.</string>
 </resources>
