@@ -924,7 +924,7 @@ public class GpsMainActivity extends ActionBarActivity
                 unbindService(gpsServiceConnection);
                 Session.setBoundToService(false);
             } catch (Exception e) {
-                tracer.error("Could not unbind service", e);
+                tracer.warn("Could not unbind service", e);
             }
         }
 
