@@ -53,7 +53,6 @@ public class NmeaFileLogger {
         if (!nmeaFile.exists()) {
             try {
                 nmeaFile.createNewFile();
-                Utilities.AddFileToMediaDatabase(nmeaFile, "text/plain");
             } catch (IOException e) {
 
             }
@@ -84,6 +83,7 @@ class NmeaWriteHandler implements Runnable {
                 writer.write(nmeaSentence);
                 writer.newLine();
                 writer.close();
+                Utilities.AddFileToMediaDatabase(gpxFile, "text/plain");
 
             } catch (IOException e) {
 
