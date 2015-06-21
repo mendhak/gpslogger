@@ -107,10 +107,6 @@ android {
     dexOptions {
         preDexLibraries = false
     }
-
-    testOptions {
-        unitTests.returnDefaultValues = true
-    }
 }
 
 dependencies {
@@ -152,11 +148,10 @@ dependencies {
     compile "com.android.support:appcompat-v7:22.2.0"
 
     //Cardviews
-    compile "com.android.support:cardview-v7:21.0.0"
+    compile "com.android.support:cardview-v7:22.2.0"
 
     //Material dialogs
-    //Author deleted from bintray, self hosting now
-    //compile('com.afollestad:material-dialogs:0.7.2.8')
+    compile('com.afollestad:material-dialogs:0.7.6.0')
 
     //The material drawer
     compile 'com.heinrichreimersoftware.materialdrawer:library:2.1'
@@ -175,10 +170,7 @@ dependencies {
     compile 'com.mendhak.gpsloggersupport:additionnal:0.0.1'
     compile 'com.mendhak.gpsloggersupport:mail:0.0.1'
     compile 'com.mendhak.gpsloggersupport:dropbox-android-sdk:1.6.3'
-    compile 'com.mendhak.gpsloggersupport:material-dialogs:0.7.2.8'
 
-    testCompile 'junit:junit:4.12'
-    testCompile "org.mockito:mockito-core:1.9.5"
 }
 
 tasks.whenTaskAdded { task ->
@@ -187,11 +179,9 @@ tasks.whenTaskAdded { task ->
         task.enabled = false
     }
 
-    //Tests not mocking properly, perhaps in the future...
     if (task.name.contains("test")) {
         task.enabled = false
     }
-
 }
 
 //Download translations from Crowdin
