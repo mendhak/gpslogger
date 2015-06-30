@@ -27,6 +27,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.*;
@@ -484,6 +485,7 @@ public class GpsLoggingService extends Service  {
         if (nfc == null) {
             nfc = new NotificationCompat.Builder(getApplicationContext())
                     .setSmallIcon(R.drawable.notification)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.gpsloggericon3))
                     .setPriority(Notification.PRIORITY_MAX)
                     .setContentTitle(contentText)
                     .setOngoing(true)
