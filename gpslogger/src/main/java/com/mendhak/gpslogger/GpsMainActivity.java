@@ -716,7 +716,7 @@ public class GpsMainActivity extends ActionBarActivity
     private void UploadToOwnCloud() {
         final OwnCloudHelper ownCloudHelper = new OwnCloudHelper();
 
-        if (!ownCloudHelper.IsLinked()) {
+        if (!Utilities.IsOwnCloudSetup()) {
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OWNCLOUD);
             return;
         }

@@ -3,10 +3,7 @@ package com.mendhak.gpslogger.senders.owncloud;
 
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
-
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
-import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
@@ -82,8 +79,7 @@ public class OwnCloudSettingsFragment
             return false;
         }
 
-        Utilities.ShowProgress(getActivity(), getString(R.string.owncloud_testing),
-                getString(R.string.please_wait));
+        Utilities.ShowProgress(getActivity(), getString(R.string.owncloud_testing), getString(R.string.please_wait));
         OwnCloudHelper helper = new OwnCloudHelper();
         helper.TestOwnCloud(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
                 directoryPreference.getText());

@@ -21,7 +21,6 @@ import android.app.Application;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.config.Configuration;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 
