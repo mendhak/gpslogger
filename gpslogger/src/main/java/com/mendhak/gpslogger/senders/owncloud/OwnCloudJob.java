@@ -29,9 +29,11 @@ import de.greenrobot.event.EventBus;
 import com.owncloud.android.lib.common.OwnCloudClientFactory;
 import com.owncloud.android.lib.common.OwnCloudClient;
 
-public class OwnCloudJob extends Job {
+public class OwnCloudJob extends Job implements OnRemoteOperationListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OwnCloudJob.class.getSimpleName());
+
+    private Handler mHandler = new Handler();
 
     // OwnCloudClient mClient;
     String servername;
@@ -77,7 +79,8 @@ public class OwnCloudJob extends Job {
         */
 
         tracer.debug("ownCloud Job: Uploading  '"+localFile.getName()+"'");
-        OwnCloudClient client = new OwnCloudClient(Uri.parse(servername), NetworkUtils.getMultiThreadedConnManager());
+        //OwnCloudClient client = new OwnCloudClient(Uri.parse(servername), NetworkUtils.getMultiThreadedConnManager());
+        OwnCloudClient client = OwnCloudClientFactory.createOwnCloudClient(Uri.parse(servername), AppSettings.getInstance(), true);
         client.setDefaultTimeouts('\uea60', '\uea60');
         client.setFollowRedirects(true);
         client.setCredentials(
@@ -88,13 +91,8 @@ public class OwnCloudJob extends Job {
         String remotePath = directory + FileUtils.PATH_SEPARATOR + localFile.getName();
         String mimeType = "application/gpx+xml";
         UploadRemoteFileOperation uploadOperation = new UploadRemoteFileOperation(localFile.getAbsolutePath(), remotePath, mimeType);
-        RemoteOperationResult result = uploadOperation.run(client);
-        if (!result.isSuccess()) {
-            tracer.error(result.getLogMessage(), result.getException());
-            EventBus.getDefault().post(new UploadEvents.OwnCloud(false));
-        } else  {
-            EventBus.getDefault().post(new UploadEvents.OwnCloud(true));
-        }
+        uploadOperation.execute(client,this,mHandler);
+
         tracer.debug("ownCloud Job: onRun finished");
     }
     @Override
@@ -109,4 +107,14 @@ public class OwnCloudJob extends Job {
         return false;
     }
 
+    @Override
+    public void onRemoteOperationFinish(RemoteOperation remoteOperation, RemoteOperationResult result) {
+
+        if (!result.isSuccess()) {
+            tracer.error(result.getLogMessage(), result.getException());
+            EventBus.getDefault().post(new UploadEvents.OwnCloud(false));
+        } else  {
+            EventBus.getDefault().post(new UploadEvents.OwnCloud(true));
+        }
+    }
 }

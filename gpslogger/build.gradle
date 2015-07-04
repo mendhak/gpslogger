@@ -112,7 +112,9 @@ android {
 dependencies {
 
     compile 'com.android.support:support-v4:22.2.0'
-    compile 'com.google.android.gms:play-services:7.5.0'
+    compile 'com.google.android.gms:play-services-base:7.5.0'
+    compile 'com.google.android.gms:play-services-location:7.5.0'
+    compile 'com.google.android.gms:play-services-drive:7.5.0'
 
     compile('commons-net:commons-net:2.0')
 
@@ -170,6 +172,12 @@ dependencies {
     compile 'com.mendhak.gpsloggersupport:additionnal:0.0.1'
     compile 'com.mendhak.gpsloggersupport:mail:0.0.1'
     compile 'com.mendhak.gpsloggersupport:dropbox-android-sdk:1.6.3'
+    compile 'com.mendhak.gpsloggersupport:owncloud-android-library:0.0.1@aar'
+
+    //Required by owncloud library
+    compile ('commons-httpclient:commons-httpclient:3.1') {
+                exclude module: 'commons-logging'
+    }
 
 }
 
