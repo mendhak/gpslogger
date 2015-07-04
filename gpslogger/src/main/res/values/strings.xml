@@ -280,7 +280,7 @@
     <string name="owncloud_setup_title">ownCloud</string>
     <string name="owncloud_setup_summary">Upload your files to an ownCloud server.</string>
     <string name="owncloud_server">Server</string>
-    <string name="owncloud_server_summary">IP address or hostname</string>
+    <string name="owncloud_server_summary">ownCloud Base URL</string>
     <string name="owncloud_username">Username</string>
     <string name="owncloud_password">Password</string>
     <string name="owncloud_directory">Folder</string>
@@ -291,7 +291,7 @@
     <string name="owncloud_testing">Testing ownCloud upload</string>
     <string name="owncloud_invalid_settings">Invalid settings</string>
     <string name="owncloud_invalid_summary">Some of your settings are invalid. Please ensure that you have filled out all relevant fields. </string>
-    <string name="owncloud_upload">ownCloud upload</string>
+    <string name="owncloud_upload">ownCloud</string>
 
     <string name="menu_upload">Upload</string>
 

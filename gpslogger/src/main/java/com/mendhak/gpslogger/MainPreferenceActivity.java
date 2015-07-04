@@ -113,7 +113,7 @@ public class MainPreferenceActivity extends ActionBarActivity {
                 preferenceFragment = new OSMAuthorizationFragment();
                 break;
             case PreferenceConstants.OWNCLOUD:
-                setTitle("OwnCloud");
+                setTitle(R.string.owncloud_setup_title);
                 preferenceFragment = new OwnCloudSettingsFragment();
                 break;
         }

@@ -11,6 +11,7 @@
             android:key="owncloud_server"
             android:title="@string/owncloud_server"
             android:summary="@string/owncloud_server_summary"
+            android:defaultValue="http://127.0.0.1"
             android:dialogTitle="@string/owncloud_server"
             android:hint="@string/owncloud_server_summary"/>
                 
