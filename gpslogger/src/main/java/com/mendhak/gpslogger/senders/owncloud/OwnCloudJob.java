@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
 
+import android.os.Looper;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.owncloud.android.lib.common.OwnCloudClient;
@@ -33,7 +34,6 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OwnCloudJob.class.getSimpleName());
 
-    private Handler mHandler = new Handler();
 
     // OwnCloudClient mClient;
     String servername;
@@ -79,6 +79,14 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
         */
 
         tracer.debug("ownCloud Job: Uploading  '"+localFile.getName()+"'");
+
+        if (Looper.myLooper() == null)
+        {
+            Looper.prepare();
+        }
+        Handler mHandler = new Handler();
+
+
         //OwnCloudClient client = new OwnCloudClient(Uri.parse(servername), NetworkUtils.getMultiThreadedConnManager());
         OwnCloudClient client = OwnCloudClientFactory.createOwnCloudClient(Uri.parse(servername), AppSettings.getInstance(), true);
         client.setDefaultTimeouts('\uea60', '\uea60');
@@ -93,7 +101,7 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
         UploadRemoteFileOperation uploadOperation = new UploadRemoteFileOperation(localFile.getAbsolutePath(), remotePath, mimeType);
         uploadOperation.execute(client,this,mHandler);
 
-        tracer.debug("ownCloud Job: onRun finished");
+        Looper.loop();
     }
     @Override
     protected void onCancel() {
@@ -116,5 +124,7 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
         } else  {
             EventBus.getDefault().post(new UploadEvents.OwnCloud(true));
         }
+
+        tracer.debug("ownCloud Job: onRun finished");
     }
 }

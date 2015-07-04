@@ -178,6 +178,7 @@ dependencies {
     compile ('commons-httpclient:commons-httpclient:3.1') {
                 exclude module: 'commons-logging'
     }
+    compile 'org.apache.jackrabbit:jackrabbit-webdav:2.10.1'
 
 }
 
