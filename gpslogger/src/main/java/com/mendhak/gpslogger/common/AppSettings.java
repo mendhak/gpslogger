@@ -19,7 +19,9 @@ package com.mendhak.gpslogger.common;
 
 import android.app.Application;
 import com.path.android.jobqueue.JobManager;
+import com.path.android.jobqueue.config.Configuration;
 import de.greenrobot.event.EventBus;
+import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 
@@ -32,7 +34,9 @@ public class AppSettings extends Application {
     public void onCreate() {
         super.onCreate();
         EventBus.builder().logNoSubscriberMessages(false).sendNoSubscriberEvent(false).installDefaultEventBus();
-        jobManager = new JobManager(this);
+
+        Configuration config = new Configuration.Builder(getInstance()).consumerKeepAlive(60).minConsumerCount(2).build();
+        jobManager = new JobManager(this, config);
     }
 
     public static JobManager GetJobManager(){

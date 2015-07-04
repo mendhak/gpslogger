@@ -48,7 +48,7 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
                          File localFile, String remoteFileName
                          /*, OwnCloudClient client, Handler handler */ )
     {
-        super(new Params(1).requireNetwork().persist());
+        super(new Params(1).requireNetwork().persist().addTags("OWNCLOUD"));
         this.servername = servername;
         this.username = username;
         this.password = password;
