@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:key="owncloud_preferences">
+
+    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+        android:key="owncloud_enabled"
+        android:title="@string/autosend_enabled" />
+
+    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+            android:key="owncloud_server"
+            android:title="@string/owncloud_server"
+            android:summary="@string/owncloud_server_summary"
+            android:dialogTitle="@string/owncloud_server"
+            android:hint="@string/owncloud_server_summary"/>
+                
+    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+            android:key="owncloud_username"
+            android:title="@string/owncloud_username"
+            android:dialogTitle="@string/owncloud_username"/>
+
+    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+            android:key="owncloud_password"
+            android:title="@string/owncloud_password"
+            android:dialogTitle="@string/owncloud_password"
+            android:password="true"/>
+
+    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+            android:key="owncloud_directory"
+            android:title="@string/owncloud_directory"
+            android:defaultValue="gpslogger"
+            android:dialogTitle="@string/owncloud_directory"
+            android:summary="@string/owncloud_directory_summary"
+            />
+
+    <Preference android:title="@string/owncloud_test"
+                android:summary="@string/owncloud_test_summary" android:key="owncloud_test"/>
+
+</PreferenceScreen>
