@@ -192,6 +192,16 @@ une plus grande précision à basses fréquences.</string>
   <string name="dropbox_unauthorize_description">Vous êtes authentifié à Dropbox. Les fichiers seront déchargés vers \'Apps\\GPSLogger for Android\'. Vous pouvez dissocier GPSLogger de Dropbox si vous le souhaitez.     </string>
   <string name="dropbox_couldnotauthorize">Ne peut pas être authentifié par Dropbox. Essayer ultérieurement.</string>
   <string name="dropbox_upload">Dropbox</string>
+  <string name="owncloud_setup_title">ownCloud</string>
+  <string name="owncloud_setup_summary">Charger vos fichiers sur un serveur ownCloud.</string>
+  <string name="owncloud_server">Serveur</string>
+  <string name="owncloud_username">Nom d\'utilisateur</string>
+  <string name="owncloud_password">Mot de passe</string>
+  <string name="owncloud_directory">Dossier</string>
+  <string name="owncloud_test">Vérifier le chargement sur ownCloud</string>
+  <string name="owncloud_test_summary">Charger un fichier test sur le serveur ownCloud</string>
+  <string name="owncloud_invalid_settings">Paramètres invalides</string>
+  <string name="owncloud_upload">ownCloud</string>
   <string name="menu_upload">Décharger</string>
   <string name="autoemail_from">A partir de l\'adresse</string>
   <string name="autoemail_from_summary">Certains fournisseurs de messagerie électronique requièrent une adresse \'De\'. Utiliser uniquement si vous en avez besoin.     </string>
@@ -331,4 +341,5 @@ une plus grande précision à basses fréquences.</string>
   <string name="activity_running">Course à pied</string>
   <string name="activity_walking">Marche à pied</string>
   <string name="activity_unknown">Inconnu</string>
+  <string name="altitude_subtractoffset_summary">Valeur en mètres à soustraire de l\'altitude fournie par le GPS. Utilisez un nombre négatif pour ajouter une valeur à l\'altitude. S\'applique uniquement aux relevés par satellite, pas à ceux calculés de réseaux ou de NMEA.</string>
 </resources>
