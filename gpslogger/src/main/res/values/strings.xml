@@ -284,7 +284,7 @@
     <string name="owncloud_username">Username</string>
     <string name="owncloud_password">Password</string>
     <string name="owncloud_directory">Folder</string>
-    <string name="owncloud_directory_summary">Folder to use on ownCloud server.</string>
+    <string name="owncloud_directory_summary">Folder to use on ownCloud server. Ensure that it exists or upload will fail.</string>
     <string name="owncloud_test">Test ownCloud Upload</string>
     <string name="owncloud_test_summary">Upload a test file to the ownCloud server</string>
    
