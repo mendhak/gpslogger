@@ -9,11 +9,11 @@ import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Date;
-import java.util.Scanner;
 
 public class CustomUrlJob extends Job {
 
@@ -63,7 +63,14 @@ public class CustomUrlJob extends Job {
         tracer.debug("Sending to URL: " + logUrl);
         URL url = new URL(logUrl);
 
-        conn = (HttpURLConnection) url.openConnection();
+        if(url.getProtocol().equalsIgnoreCase("https")){
+            HttpsURLConnection.setDefaultSSLSocketFactory(CustomUrlTrustEverything.GetSSLContextSocketFactory());
+            conn = (HttpsURLConnection)url.openConnection();
+            ((HttpsURLConnection)conn).setHostnameVerifier(new CustomUrlTrustEverything.VerifyEverythingHostnameVerifier());
+        } else {
+            conn = (HttpURLConnection) url.openConnection();
+        }
+
         conn.setRequestMethod("GET");
 
         if(conn.getResponseCode() != 200){
