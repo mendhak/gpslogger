@@ -85,6 +85,8 @@ public class OpenGTSClient {
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
+			conn.setConnectTimeout(10000);
+		    conn.setReadTimeout(30000);
 
             Scanner s;
             if(conn.getResponseCode() != 200){

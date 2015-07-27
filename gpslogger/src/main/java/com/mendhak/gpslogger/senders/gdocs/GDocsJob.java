@@ -12,7 +12,7 @@ import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
-import de.greenrobot.event.EventBus;
+
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +22,8 @@ import java.io.FileInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import de.greenrobot.event.EventBus;
 
 public class GDocsJob extends Job {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GDocsJob.class.getSimpleName());
@@ -120,6 +122,9 @@ public class GDocsJob extends Job {
             conn.setDoInput(true);
             conn.setDoOutput(true);
 
+			conn.setConnectTimeout(10000);
+			conn.setReadTimeout(30000);
+
             DataOutputStream wr = new DataOutputStream(
                     conn.getOutputStream());
             wr.write(fileContents);
@@ -180,6 +185,9 @@ public class GDocsJob extends Job {
             conn.setDoInput(true);
             conn.setDoOutput(true);
 
+			conn.setConnectTimeout(10000);
+			conn.setReadTimeout(30000);
+
             DataOutputStream wr = new DataOutputStream(
                     conn.getOutputStream());
             wr.writeBytes(createFilePayload);
@@ -236,7 +244,9 @@ public class GDocsJob extends Job {
             conn.setRequestMethod("GET");
             conn.setRequestProperty("User-Agent", "GPSLogger for Android");
             conn.setRequestProperty("Authorization", "OAuth " + authToken);
-
+			conn.setConnectTimeout(10000);
+			conn.setReadTimeout(30000);
+	
             String fileMetadata = Utilities.GetStringFromInputStream(conn.getInputStream());
 
 

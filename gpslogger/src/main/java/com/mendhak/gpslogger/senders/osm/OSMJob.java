@@ -3,8 +3,7 @@ package com.mendhak.gpslogger.senders.osm;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
-import de.greenrobot.event.EventBus;
-import oauth.signpost.OAuthConsumer;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
@@ -12,9 +11,14 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+
+import de.greenrobot.event.EventBus;
+import oauth.signpost.OAuthConsumer;
 
 public class OSMJob extends Job {
 
@@ -63,6 +67,9 @@ public class OSMJob extends Job {
 
         request.setEntity(entity);
         DefaultHttpClient httpClient = new DefaultHttpClient();
+		HttpParams params = httpClient.getParams();
+		HttpConnectionParams.setConnectionTimeout(params, 10000);
+		HttpConnectionParams.setSoTimeout(params, 30000);
 
         HttpResponse response = httpClient.execute(request);
         int statusCode = response.getStatusLine().getStatusCode();
