@@ -27,7 +27,11 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.*;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -37,13 +41,34 @@ import android.support.v7.internal.view.menu.ActionMenuItemView;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.view.*;
-import android.widget.*;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.SpinnerAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.heinrichreimersoftware.materialdrawer.DrawerView;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
-import com.mendhak.gpslogger.common.*;
-import com.mendhak.gpslogger.common.events.*;
+import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.events.CommandEvents;
+import com.mendhak.gpslogger.common.events.ServiceEvents;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
@@ -54,13 +79,14 @@ import com.mendhak.gpslogger.views.GenericViewFragment;
 import com.mendhak.gpslogger.views.GpsBigViewFragment;
 import com.mendhak.gpslogger.views.GpsDetailedViewFragment;
 import com.mendhak.gpslogger.views.GpsSimpleViewFragment;
-import de.greenrobot.event.EventBus;
+
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.*;
+import de.greenrobot.event.EventBus;
 
 public class GpsMainActivity extends ActionBarActivity
         implements
@@ -994,36 +1020,48 @@ public class GpsMainActivity extends ActionBarActivity
     public void onEventMainThread(UploadEvents.OpenGTS upload){
         tracer.debug("Open GTS Event completed, success: " + upload.success);
         Utilities.HideProgress();
+        if(!upload.success)
+            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
     }
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.AutoEmail upload){
         tracer.debug("Auto Email Event completed, success: " + upload.success);
         Utilities.HideProgress();
+        if(!upload.success)
+            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
     }
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.OpenStreetMap upload){
         tracer.debug("OSM Event completed, success: " + upload.success);
         Utilities.HideProgress();
+        if(!upload.success)
+            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
     }
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.Dropbox upload){
         tracer.debug("Dropbox Event completed, success: " + upload.success);
         Utilities.HideProgress();
+        if(!upload.success)
+            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
     }
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.GDocs upload){
         tracer.debug("GDocs Event completed, success: " + upload.success);
         Utilities.HideProgress();
+        if(!upload.success)
+            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
     }
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.Ftp upload){
         tracer.debug("FTP Event completed, success: " + upload.success);
         Utilities.HideProgress();
+        if(!upload.success)
+            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
     }
 
 
@@ -1031,6 +1069,8 @@ public class GpsMainActivity extends ActionBarActivity
     public void onEventMainThread(UploadEvents.OwnCloud upload){
         tracer.debug("OwnCloud Event completed, success: " + upload.success);
         Utilities.HideProgress();
+        if(!upload.success)
+            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
     }
 
     @EventBusHook
