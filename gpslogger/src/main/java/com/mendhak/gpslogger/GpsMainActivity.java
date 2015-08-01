@@ -1020,48 +1020,42 @@ public class GpsMainActivity extends ActionBarActivity
     public void onEventMainThread(UploadEvents.OpenGTS upload){
         tracer.debug("Open GTS Event completed, success: " + upload.success);
         Utilities.HideProgress();
-        if(!upload.success)
-            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+
     }
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.AutoEmail upload){
         tracer.debug("Auto Email Event completed, success: " + upload.success);
         Utilities.HideProgress();
-        if(!upload.success)
-            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+
     }
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.OpenStreetMap upload){
         tracer.debug("OSM Event completed, success: " + upload.success);
         Utilities.HideProgress();
-        if(!upload.success)
-            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+
     }
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.Dropbox upload){
         tracer.debug("Dropbox Event completed, success: " + upload.success);
         Utilities.HideProgress();
-        if(!upload.success)
-            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+
     }
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.GDocs upload){
         tracer.debug("GDocs Event completed, success: " + upload.success);
         Utilities.HideProgress();
-        if(!upload.success)
-            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+
     }
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.Ftp upload){
         tracer.debug("FTP Event completed, success: " + upload.success);
         Utilities.HideProgress();
-        if(!upload.success)
-            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+
     }
 
 
@@ -1069,8 +1063,12 @@ public class GpsMainActivity extends ActionBarActivity
     public void onEventMainThread(UploadEvents.OwnCloud upload){
         tracer.debug("OwnCloud Event completed, success: " + upload.success);
         Utilities.HideProgress();
-        if(!upload.success)
-            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+
+        if(!upload.success){
+            EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.owncloud_setup_title)
+                    + "-"
+                    + getString(R.string.upload_failure)));
+        }
     }
 
     @EventBusHook

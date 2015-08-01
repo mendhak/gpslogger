@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.views;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +28,7 @@ import android.widget.TextView;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
@@ -40,9 +38,7 @@ import org.slf4j.LoggerFactory;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 
 public class GpsDetailedViewFragment extends GenericViewFragment {
@@ -123,6 +119,13 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
         showPreferencesSummary();
         super.onResume();
+    }
+
+    private void SetTextStatus(String s){
+        Session.Statuses.add(s);
+
+        TextView txtStatus = (TextView) rootView.findViewById(R.id.detailedview_txtstatus);
+        txtStatus.setText(TextUtils.join("\r\n", Session.Statuses));
     }
 
     /**
@@ -283,15 +286,13 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.StatusMessage event){
-        TextView txtStatus = (TextView) rootView.findViewById(R.id.detailedview_txtstatus);
-        txtStatus.setText(event.status);
+        SetTextStatus(event.status);
         showPreferencesSummary();
     }
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.FatalMessage event){
-        TextView txtStatus = (TextView) rootView.findViewById(R.id.detailedview_txtstatus);
-        txtStatus.setText(event.message);
+        SetTextStatus(event.message);
     }
 
     @EventBusHook

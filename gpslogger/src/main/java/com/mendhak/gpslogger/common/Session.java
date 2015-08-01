@@ -23,6 +23,7 @@ import android.location.Location;
 
 public class Session extends Application {
 
+    public static FifoDeque Statuses = new FifoDeque(10);
 
     // ---------------------------------------------------
     // Session values - updated as the app runs
