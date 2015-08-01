@@ -37,7 +37,7 @@ public class ExpandableTextView extends TextView {
             public void onClick(View v) {
                 trim = !trim;
                 setText();
-                requestFocusFromTouch();
+                //requestFocusFromTouch();
             }
         });
     }

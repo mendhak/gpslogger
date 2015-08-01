@@ -466,4 +466,6 @@
     <string name="altitude_subtractoffset_title">Subtract altitude offset</string>
     <string name="altitude_subtractoffset_summary">A value in meters to subtract from GPS altitudes. Use a negative number to add a value to the altitude. Only applies to GPS satellite points, not network or NMEA.</string>
 	<string name="upload_failure">Could not upload the file</string>
+    <string name="inaccurate_point_discarded">Inaccurate point discarded</string>
+    <string name="not_enough_distance_traveled">Only %s m traveled. Point discarded.</string>
 </resources>

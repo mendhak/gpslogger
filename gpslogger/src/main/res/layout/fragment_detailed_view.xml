@@ -102,14 +102,14 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_alignParentRight="true"
+                    android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content">
                     <com.dd.processbutton.iml.ActionProcessButton
                         android:id="@+id/btnActionProcess"
                         android:layout_width="wrap_content"
-                        android:width="180dp"
+                        android:width="240dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="22dp"
                         android:layout_marginTop="24dp"
@@ -134,12 +134,14 @@
 
         </RelativeLayout>
 
+
         <com.mendhak.gpslogger.views.component.ExpandableTextView
             android:id="@+id/detailedview_txtstatus"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             custom:trimLength="100"
             android:layout_marginLeft="12dp"
+            android:layout_marginBottom="5dp"
             android:typeface="monospace"
             android:fontFamily="monospace"
             android:text=""

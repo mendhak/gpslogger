@@ -24,7 +24,7 @@ import com.mendhak.gpslogger.common.events.ServiceEvents;
 
 public class Session extends Application {
 
-    public static FifoDeque<ServiceEvents.StatusMessage> Statuses = new FifoDeque<>(10);
+    public static FifoDeque<ServiceEvents.StatusMessage> Statuses = new FifoDeque<>(25);
 
     // ---------------------------------------------------
     // Session values - updated as the app runs
