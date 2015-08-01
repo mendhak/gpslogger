@@ -33,6 +33,7 @@ import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
+import com.mendhak.gpslogger.views.component.ExpandableTextView;
 import org.slf4j.LoggerFactory;
 import java.text.DateFormat;
 import java.text.NumberFormat;
@@ -122,7 +123,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     private void ShowStatusMessages(){
 
-        TextView txtStatus = (TextView) rootView.findViewById(R.id.detailedview_txtstatus);
+        ExpandableTextView txtStatus = (ExpandableTextView) rootView.findViewById(R.id.detailedview_txtstatus);
         StringBuilder sb = new StringBuilder();
         for(ServiceEvents.StatusMessage message : Session.Statuses){
 

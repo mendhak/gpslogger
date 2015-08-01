@@ -134,26 +134,18 @@
 
         </RelativeLayout>
 
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            card_view:cardCornerRadius="4dp"
-            android:layout_margin="5dp">
+        <com.mendhak.gpslogger.views.component.ExpandableTextView
+            android:id="@+id/detailedview_txtstatus"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            custom:trimLength="100"
+            android:layout_marginLeft="12dp"
+            android:typeface="monospace"
+            android:fontFamily="monospace"
+            android:text=""
+            android:layout_gravity="center_vertical"
+            />
 
-            <TextView
-                android:id="@+id/detailedview_txtstatus"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:typeface="monospace"
-                android:fontFamily="monospace"
-                android:text=""
-                android:layout_gravity="center_vertical"
-                />
-
-        </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
