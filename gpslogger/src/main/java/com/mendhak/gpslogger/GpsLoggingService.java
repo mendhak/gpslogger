@@ -708,7 +708,7 @@ public class GpsLoggingService extends Service  {
      */
     void SetFatalMessage(int messageId) {
         tracer.error(getString(messageId));
-        EventBus.getDefault().post(new ServiceEvents.FatalMessage(getString(messageId)));
+        EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(messageId),false));
     }
 
     /**

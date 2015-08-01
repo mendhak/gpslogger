@@ -20,7 +20,6 @@ package com.mendhak.gpslogger.views;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +81,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             DisplayLocationInfo(Session.getCurrentLocationInfo());
         }
 
-        showPreferencesSummary();
+        ShowPreferencesAndMessages();
 
         return rootView;
     }
@@ -117,22 +116,37 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             setActionButtonStart();
         }
 
-        showPreferencesSummary();
+        ShowPreferencesAndMessages();
         super.onResume();
     }
 
-    private void SetTextStatus(String s){
-        Session.Statuses.add(s);
+    private void ShowStatusMessages(){
 
         TextView txtStatus = (TextView) rootView.findViewById(R.id.detailedview_txtstatus);
-        txtStatus.setText(TextUtils.join("\r\n", Session.Statuses));
+        StringBuilder sb = new StringBuilder();
+        for(ServiceEvents.StatusMessage message : Session.Statuses){
+
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            sb.append(sdf.format(new Date(message.timestamp)));
+            sb.append(" ");
+            if(!message.success) {
+                sb.append("<font color='red'>" + message.status + "</font>");
+            }
+            else {
+                sb.append(message.status);
+            }
+            sb.append("<br />");
+        }
+        txtStatus.setText(Html.fromHtml(sb.toString()));
     }
 
     /**
      * Displays a human readable summary of the preferences chosen by the user
      * on the main form
      */
-    private void showPreferencesSummary() {
+    private void ShowPreferencesAndMessages() {
+
+        ShowStatusMessages();
 
         try {
             TextView txtLoggingTo = (TextView) rootView.findViewById(R.id.detailedview_loggingto_text);
@@ -226,7 +240,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
 
         } catch (Exception ex) {
-            tracer.error("showPreferencesSummary", ex);
+            tracer.error("ShowPreferencesAndMessages", ex);
         }
 
 
@@ -241,7 +255,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         txtFilename.setText(Session.getCurrentFileName() + "\n (" + AppSettings.getGpsLoggerFolder() + ")");
 
         Utilities.SetFileExplorerLink(txtFilename,
-                Html.fromHtml( Session.getCurrentFileName() + "<br /> (" + "<font color='blue'><u>" +  AppSettings.getGpsLoggerFolder() + "</u></font>" + ")"),
+                Html.fromHtml(Session.getCurrentFileName() + "<br /> (" + "<font color='blue'><u>" + AppSettings.getGpsLoggerFolder() + "</u></font>" + ")"),
                 AppSettings.getGpsLoggerFolder(),
                 getActivity().getApplicationContext());
     }
@@ -286,13 +300,9 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.StatusMessage event){
-        SetTextStatus(event.status);
-        showPreferencesSummary();
-    }
-
-    @EventBusHook
-    public void onEventMainThread(ServiceEvents.FatalMessage event){
-        SetTextStatus(event.message);
+        Session.Statuses.add(event);
+        ShowStatusMessages();
+        ShowPreferencesAndMessages();
     }
 
     @EventBusHook
@@ -309,7 +319,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     public void onEventMainThread(ServiceEvents.LoggingStatus loggingStatus){
         if(loggingStatus.loggingStarted){
             setActionButtonStop();
-            showPreferencesSummary();
+            ShowPreferencesAndMessages();
             ClearDisplay();
         }
         else {
@@ -327,7 +337,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             return;
         }
 
-        showPreferencesSummary();
+        ShowPreferencesAndMessages();
 
         TextView tvLatitude = (TextView) rootView.findViewById(R.id.detailedview_lat_text);
         TextView tvLongitude = (TextView) rootView.findViewById(R.id.detailedview_lon_text);

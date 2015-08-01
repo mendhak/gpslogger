@@ -1067,7 +1067,7 @@ public class GpsMainActivity extends ActionBarActivity
         if(!upload.success){
             EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.owncloud_setup_title)
                     + "-"
-                    + getString(R.string.upload_failure)));
+                    + getString(R.string.upload_failure),false));
         }
     }
 

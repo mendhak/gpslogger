@@ -2,7 +2,7 @@ package com.mendhak.gpslogger.common;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
-public class FifoDeque extends LinkedBlockingDeque<String> {
+public class FifoDeque<T> extends LinkedBlockingDeque<T> {
 
     private final int maxSize;
 
@@ -11,7 +11,7 @@ public class FifoDeque extends LinkedBlockingDeque<String> {
     }
 
     @Override
-    public boolean add(String object) {
+    public boolean add(T object) {
 
         if(size()>maxSize){
             removeFirst();
