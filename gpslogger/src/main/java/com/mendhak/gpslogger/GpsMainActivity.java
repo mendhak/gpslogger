@@ -1021,6 +1021,11 @@ public class GpsMainActivity extends ActionBarActivity
         tracer.debug("Open GTS Event completed, success: " + upload.success);
         Utilities.HideProgress();
 
+        if(!upload.success){
+            EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.opengts_setup_title)
+                    + "-"
+                    + getString(R.string.upload_failure),false));
+        }
     }
 
     @EventBusHook
@@ -1028,6 +1033,11 @@ public class GpsMainActivity extends ActionBarActivity
         tracer.debug("Auto Email Event completed, success: " + upload.success);
         Utilities.HideProgress();
 
+        if(!upload.success){
+            EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.autoemail_title)
+                    + "-"
+                    + getString(R.string.upload_failure),false));
+        }
     }
 
     @EventBusHook
@@ -1035,6 +1045,11 @@ public class GpsMainActivity extends ActionBarActivity
         tracer.debug("OSM Event completed, success: " + upload.success);
         Utilities.HideProgress();
 
+        if(!upload.success){
+            EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.osm_setup_title)
+                    + "-"
+                    + getString(R.string.upload_failure),false));
+        }
     }
 
     @EventBusHook
@@ -1042,6 +1057,11 @@ public class GpsMainActivity extends ActionBarActivity
         tracer.debug("Dropbox Event completed, success: " + upload.success);
         Utilities.HideProgress();
 
+        if(!upload.success){
+            EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.dropbox_setup_title)
+                    + "-"
+                    + getString(R.string.upload_failure),false));
+        }
     }
 
     @EventBusHook
@@ -1049,6 +1069,11 @@ public class GpsMainActivity extends ActionBarActivity
         tracer.debug("GDocs Event completed, success: " + upload.success);
         Utilities.HideProgress();
 
+        if(!upload.success){
+            EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.gdocs_setup_title)
+                    + "-"
+                    + getString(R.string.upload_failure),false));
+        }
     }
 
     @EventBusHook
@@ -1056,6 +1081,11 @@ public class GpsMainActivity extends ActionBarActivity
         tracer.debug("FTP Event completed, success: " + upload.success);
         Utilities.HideProgress();
 
+        if(!upload.success){
+            EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.autoftp_setup_title)
+                    + "-"
+                    + getString(R.string.upload_failure),false));
+        }
     }
 
 
