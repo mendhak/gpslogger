@@ -93,6 +93,7 @@ public class GpsMainActivity extends ActionBarActivity
         Toolbar.OnMenuItemClickListener,
         ActionBar.OnNavigationListener {
 
+    private static boolean userInvokedUpload;
     private static Intent serviceIntent;
     private ActionBarDrawerToggle drawerToggle;
     private org.slf4j.Logger tracer;
@@ -835,7 +836,9 @@ public class GpsMainActivity extends ActionBarActivity
                             if (chosenFiles.size() > 0) {
                                 Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.please_wait),
                                         getString(R.string.please_wait));
+                                userInvokedUpload = true;
                                 sender.UploadFile(chosenFiles);
+
                             }
                             return true;
                         }
@@ -1025,6 +1028,10 @@ public class GpsMainActivity extends ActionBarActivity
             EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.opengts_setup_title)
                     + "-"
                     + getString(R.string.upload_failure),false));
+            if(userInvokedUpload){
+                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+                userInvokedUpload = false;
+            }
         }
     }
 
@@ -1037,6 +1044,10 @@ public class GpsMainActivity extends ActionBarActivity
             EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.autoemail_title)
                     + "-"
                     + getString(R.string.upload_failure),false));
+            if(userInvokedUpload){
+                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+                userInvokedUpload = false;
+            }
         }
     }
 
@@ -1049,6 +1060,10 @@ public class GpsMainActivity extends ActionBarActivity
             EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.osm_setup_title)
                     + "-"
                     + getString(R.string.upload_failure),false));
+            if(userInvokedUpload){
+                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+                userInvokedUpload = false;
+            }
         }
     }
 
@@ -1061,6 +1076,10 @@ public class GpsMainActivity extends ActionBarActivity
             EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.dropbox_setup_title)
                     + "-"
                     + getString(R.string.upload_failure),false));
+            if(userInvokedUpload){
+                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+                userInvokedUpload = false;
+            }
         }
     }
 
@@ -1073,6 +1092,10 @@ public class GpsMainActivity extends ActionBarActivity
             EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.gdocs_setup_title)
                     + "-"
                     + getString(R.string.upload_failure),false));
+            if(userInvokedUpload){
+                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+                userInvokedUpload = false;
+            }
         }
     }
 
@@ -1085,6 +1108,10 @@ public class GpsMainActivity extends ActionBarActivity
             EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.autoftp_setup_title)
                     + "-"
                     + getString(R.string.upload_failure),false));
+            if(userInvokedUpload){
+                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+                userInvokedUpload = false;
+            }
         }
     }
 
@@ -1098,6 +1125,11 @@ public class GpsMainActivity extends ActionBarActivity
             EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.owncloud_setup_title)
                     + "-"
                     + getString(R.string.upload_failure),false));
+
+            if(userInvokedUpload){
+                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+                userInvokedUpload = false;
+            }
         }
     }
 
