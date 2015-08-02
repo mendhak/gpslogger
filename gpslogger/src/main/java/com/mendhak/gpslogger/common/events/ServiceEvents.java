@@ -2,6 +2,7 @@ package com.mendhak.gpslogger.common.events;
 
 import android.location.Location;
 import com.google.android.gms.location.ActivityRecognitionResult;
+import com.mendhak.gpslogger.common.Session;
 
 public class ServiceEvents {
 
@@ -22,6 +23,7 @@ public class ServiceEvents {
             this.timestamp = System.currentTimeMillis();
             this.success = success;
             this.status = message;
+            Session.Statuses.add(this);
         }
 
     }
