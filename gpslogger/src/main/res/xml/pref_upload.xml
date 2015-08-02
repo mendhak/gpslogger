@@ -32,6 +32,10 @@
             android:title="@string/autosend_sendzip_title"
             android:summary="@string/autosend_sendzip_summary"/>
 
+    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+        android:key="autosend_wifionly"
+        android:defaultValue="false"
+        android:title="@string/autosend_wifionly_title" />
 
     <PreferenceCategory android:title="@string/autosend_targets_category">
         <Preference

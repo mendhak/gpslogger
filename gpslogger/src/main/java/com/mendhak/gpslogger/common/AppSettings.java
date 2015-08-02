@@ -34,7 +34,11 @@ public class AppSettings extends Application {
         super.onCreate();
         EventBus.builder().logNoSubscriberMessages(false).sendNoSubscriberEvent(false).installDefaultEventBus();
 
-        Configuration config = new Configuration.Builder(getInstance()).consumerKeepAlive(60).minConsumerCount(2).build();
+        Configuration config = new Configuration.Builder(getInstance())
+                .networkUtil(new WifiNetworkUtil(getInstance()))
+                .consumerKeepAlive(60)
+                .minConsumerCount(2)
+                .build();
         jobManager = new JobManager(this, config);
     }
 
