@@ -210,6 +210,20 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
          </string>
   <string name="dropbox_couldnotauthorize">Nemožno autorizovať Dropbox, prosím skúste to neskôr</string>
   <string name="dropbox_upload">Dropbox</string>
+  <string name="owncloud_setup_title">ownCloud</string>
+  <string name="owncloud_setup_summary">Odošlite svoje súbor na server ownCloud.</string>
+  <string name="owncloud_server">Server</string>
+  <string name="owncloud_server_summary">Základná URL pre ownCloud</string>
+  <string name="owncloud_username">Meno používateľa</string>
+  <string name="owncloud_password">Heslo</string>
+  <string name="owncloud_directory">Priečinok</string>
+  <string name="owncloud_directory_summary">Priečinok na serveri ownCloud.</string>
+  <string name="owncloud_test">Test odosielania do ownCloud</string>
+  <string name="owncloud_test_summary">Odoslať testovací súbor na server ownCloud</string>
+  <string name="owncloud_testing">Prebieha test odosielanie do ownCloud</string>
+  <string name="owncloud_invalid_settings">Neplatné nastavenia</string>
+  <string name="owncloud_invalid_summary">Niektoré nastavenia nie sú platné. Prosím uistite sa, že sú vyplnené všetky relevantné polia. </string>
+  <string name="owncloud_upload">ownCloud</string>
   <string name="menu_upload">Odoslať</string>
   <string name="autoemail_from">Z adresy</string>
   <string name="autoemail_from_summary">Niektorí poskytovatelia služieb elektronickej pošty vyžadujú adresy odosielateľa. Použiť ju však iba vtedy, ak je to potrebné.
