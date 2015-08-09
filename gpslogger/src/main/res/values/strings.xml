@@ -471,4 +471,5 @@
     <string name="not_enough_distance_traveled">Only %s m traveled. Point discarded.</string>
     <string name="autosend_wifionly_title">Send on Wi-Fi only</string>
     <string name="logview_showlocationsonly">Locations only</string>
+    <string name="logview_autoscroll">Auto Scroll</string>
 </resources>

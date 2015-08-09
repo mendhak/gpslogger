@@ -7,6 +7,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -23,6 +24,7 @@ public class GpsLogViewFragment extends GenericViewFragment {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GpsLogViewFragment.class.getSimpleName());
     long startTime = 0;
     TextView logTextView;
+    ScrollView scrollView;
 
     Handler timerHandler = new Handler();
 
@@ -35,6 +37,7 @@ public class GpsLogViewFragment extends GenericViewFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_log_view, container, false);
         logTextView = (TextView) rootView.findViewById(R.id.logview_txtstatus);
+        scrollView = (ScrollView) rootView.findViewById(R.id.logview_scrollView);
 
         return rootView;
     }
@@ -87,6 +90,8 @@ public class GpsLogViewFragment extends GenericViewFragment {
             sb.append("<br />");
         }
         logTextView.setText(Html.fromHtml(sb.toString()));
+
+        scrollView.fullScroll(View.FOCUS_DOWN);
     }
 
 

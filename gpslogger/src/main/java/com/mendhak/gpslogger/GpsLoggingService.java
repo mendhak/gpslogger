@@ -573,8 +573,7 @@ public class GpsLoggingService extends Service  {
         if(!Session.isTowerEnabled() && !Session.isGpsEnabled()) {
             tracer.error("No provider available!");
             Session.setUsingGps(false);
-            SetStatus(R.string.gpsprovider_unavailable);
-            SetFatalMessage(R.string.gpsprovider_unavailable);
+            tracer.error(getString(R.string.gpsprovider_unavailable));
             StopLogging();
             SetLocationServiceUnavailable();
             return;
@@ -582,7 +581,7 @@ public class GpsLoggingService extends Service  {
 
         EventBus.getDefault().post(new ServiceEvents.WaitingForLocation(true));
         Session.setWaitingForLocation(true);
-        SetStatus(R.string.started);
+        tracer.debug(getString(R.string.started));
     }
 
     private boolean userHasBeenStillForTooLong() {
@@ -637,7 +636,7 @@ public class GpsLoggingService extends Service  {
         Session.setWaitingForLocation(false);
         EventBus.getDefault().post(new ServiceEvents.WaitingForLocation(false));
 
-        SetStatus(getString(R.string.stopped));
+        tracer.debug(getString(R.string.stopped));
     }
 
     private void StopPassiveManager(){
@@ -687,37 +686,12 @@ public class GpsLoggingService extends Service  {
 
     }
 
-    /**
-     * Gives a status message to the main service client to display
-     *
-     * @param status The status message
-     */
-    void SetStatus(String status) {
-        tracer.info(status);
-    }
+
 
     void SetLocationServiceUnavailable(){
         EventBus.getDefault().post(new ServiceEvents.LocationServicesUnavailable());
     }
 
-    /**
-     * Gives an error message to the main service client to display
-     *
-     * @param messageId ID of string to lookup
-     */
-    void SetFatalMessage(int messageId) {
-        tracer.error(getString(messageId));
-    }
-
-    /**
-     * Gets string from given resource ID, passes to SetStatus(String)
-     *
-     * @param stringId ID of string to lookup
-     */
-    private void SetStatus(int stringId) {
-        String s = getString(stringId);
-        SetStatus(s);
-    }
 
     /**
      * Notifies main form that logging has stopped
@@ -786,14 +760,14 @@ public class GpsLoggingService extends Service  {
 
                 if (currentTimeStamp - this.firstRetryTimeStamp <= AppSettings.getRetryInterval() * 1000) {
                     tracer.warn("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " m. Point discarded.");
-                    SetStatus(R.string.inaccurate_point_discarded);
+                    tracer.warn(getString(R.string.inaccurate_point_discarded));
                     //return and keep trying
                     return;
                 }
 
                 if (currentTimeStamp - this.firstRetryTimeStamp > AppSettings.getRetryInterval() * 1000) {
                     tracer.warn("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " m and timeout reached");
-                    SetStatus(R.string.inaccurate_point_discarded);
+                    tracer.warn(getString(R.string.inaccurate_point_discarded));
                     //Give up for now
                     StopManagerAndResetAlarm();
 
@@ -815,7 +789,7 @@ public class GpsLoggingService extends Service  {
                     Session.getCurrentLatitude(), Session.getCurrentLongitude());
 
             if (AppSettings.getMinimumDistanceInMeters() > distanceTraveled) {
-                SetStatus(String.format(getString(R.string.not_enough_distance_traveled), String.valueOf(Math.floor(distanceTraveled))));
+                tracer.warn(String.format(getString(R.string.not_enough_distance_traveled), String.valueOf(Math.floor(distanceTraveled))));
                 tracer.warn("Only " + String.valueOf(Math.floor(distanceTraveled)) + " m traveled. Point discarded.");
                 StopManagerAndResetAlarm();
                 return;
@@ -942,8 +916,7 @@ public class GpsLoggingService extends Service  {
             }
         }
         catch(Exception e){
-            tracer.error("Could not write to file", e);
-             SetStatus(R.string.could_not_write_to_file);
+             tracer.error(getString(R.string.could_not_write_to_file), e);
         }
 
         Session.clearDescription();

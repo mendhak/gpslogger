@@ -20,7 +20,7 @@ public class SessionLogcatAppender extends AppenderBase<ILoggingEvent> {
 
     @Override
     protected void append(ILoggingEvent eventObject) {
-        if(eventObject.getLevel().toInt() < Level.INFO.toInt()){ return; }
+        //if(eventObject.getLevel().toInt() < Level.INFO.toInt()){ return; }
 
         Statuses.add(eventObject);
     }

@@ -73,7 +73,6 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
         } catch (Exception ex) {
             tracer.error("GeneralLocationListener.onLocationChanged", ex);
-            loggingService.SetStatus(ex.getMessage());
         }
 
     }
@@ -109,8 +108,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
         switch (event) {
             case GpsStatus.GPS_EVENT_FIRST_FIX:
-                tracer.debug("GPS Event First Fix");
-                loggingService.SetStatus(loggingService.getString(R.string.fix_obtained));
+                tracer.debug(loggingService.getString(R.string.fix_obtained));
                 break;
 
             case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
@@ -132,13 +130,11 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 break;
 
             case GpsStatus.GPS_EVENT_STARTED:
-                tracer.info("GPS started, waiting for fix");
-                loggingService.SetStatus(loggingService.getString(R.string.started_waiting));
+                tracer.info(loggingService.getString(R.string.started_waiting));
                 break;
 
             case GpsStatus.GPS_EVENT_STOPPED:
-                tracer.info("GPS Event Stopped");
-                loggingService.SetStatus(loggingService.getString(R.string.gps_stopped));
+                tracer.info(loggingService.getString(R.string.gps_stopped));
                 break;
 
         }

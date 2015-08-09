@@ -23,12 +23,18 @@
             android:layout_height="wrap_content"
             android:text="@string/debuglog_title"
             android:id="@+id/logview_chkDebugFile"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/logview_autoscroll"
+            android:id="@+id/logview_chkAutoScroll"/>
     </LinearLayout>
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/scrollView"
+        android:id="@+id/logview_scrollView"
         android:layout_gravity="center_horizontal"
         android:fadeScrollbars="false">
 
@@ -39,7 +45,8 @@
             android:text=""
             android:id="@+id/logview_txtstatus"
             android:fontFamily="monospace"
-            android:typeface="monospace"/>
+            android:typeface="monospace"
+            android:layout_marginBottom="5dp" />
     </ScrollView>
 
 </LinearLayout>
