@@ -81,7 +81,7 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
         tracer.error("Could not upload to OwnCloud", throwable);
-        return true;
+        return false;
     }
 
     @Override

@@ -139,7 +139,7 @@ public class GpsLoggingService extends Service  {
             googleApiClient.disconnect();
         }
         catch(Throwable t){
-            tracer.warn("Tried to stop activity recognition updates", t);
+            tracer.debug("Tried to stop activity recognition updates", t);
         }
 
     }
