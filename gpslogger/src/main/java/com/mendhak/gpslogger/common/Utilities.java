@@ -667,7 +667,7 @@ public class Utilities {
             try {
                 is.close();
             } catch (Exception e) {
-                tracer.warn("GetStringFromInputStream - could not close stream");
+                tracer.warn(SessionLogcatAppender.MARKER_INTERNAL, "GetStringFromInputStream - could not close stream");
             }
         }
 
@@ -699,7 +699,7 @@ public class Utilities {
             try {
                 is.close();
             } catch (Exception e) {
-                tracer.warn("GetStringFromInputStream - could not close stream");
+                tracer.warn(SessionLogcatAppender.MARKER_INTERNAL, "GetStringFromInputStream - could not close stream");
             }
         }
 

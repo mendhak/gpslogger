@@ -69,6 +69,7 @@ import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
@@ -980,7 +981,7 @@ public class GpsMainActivity extends ActionBarActivity
                 unbindService(gpsServiceConnection);
                 Session.setBoundToService(false);
             } catch (Exception e) {
-                tracer.warn("Could not unbind service", e);
+                tracer.warn(SessionLogcatAppender.MARKER_INTERNAL, "Could not unbind service", e);
             }
         }
 

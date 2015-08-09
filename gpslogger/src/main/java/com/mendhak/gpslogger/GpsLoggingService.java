@@ -43,6 +43,7 @@ import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
+import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.nmea.NmeaFileLogger;
 import com.mendhak.gpslogger.senders.AlarmReceiver;
@@ -115,7 +116,7 @@ public class GpsLoggingService extends Service  {
                             ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(googleApiClient, AppSettings.getMinimumSeconds() * 1000, activityRecognitionPendingIntent);
                         }
                         catch(Throwable t){
-                            tracer.warn("Can't connect to activity recognition service", t);
+                            tracer.warn(SessionLogcatAppender.MARKER_INTERNAL, "Can't connect to activity recognition service", t);
                         }
 
                     }
@@ -139,7 +140,7 @@ public class GpsLoggingService extends Service  {
             googleApiClient.disconnect();
         }
         catch(Throwable t){
-            tracer.debug("Tried to stop activity recognition updates", t);
+            tracer.warn(SessionLogcatAppender.MARKER_INTERNAL, "Tried to stop activity recognition updates", t);
         }
 
     }
@@ -172,7 +173,7 @@ public class GpsLoggingService extends Service  {
 
     @Override
     public void onLowMemory() {
-        tracer.warn("Android is low on memory!");
+        tracer.error("Android is low on memory!");
         super.onLowMemory();
     }
 
@@ -411,6 +412,7 @@ public class GpsLoggingService extends Service  {
      * Asks the main service client to clear its form.
      */
     private void NotifyClientStarted() {
+        tracer.info(getString(R.string.started));
         EventBus.getDefault().post(new ServiceEvents.LoggingStatus(true));
     }
 
@@ -583,7 +585,6 @@ public class GpsLoggingService extends Service  {
 
         EventBus.getDefault().post(new ServiceEvents.WaitingForLocation(true));
         Session.setWaitingForLocation(true);
-        tracer.info(getString(R.string.started));
     }
 
     private boolean userHasBeenStillForTooLong() {
@@ -638,7 +639,6 @@ public class GpsLoggingService extends Service  {
         Session.setWaitingForLocation(false);
         EventBus.getDefault().post(new ServiceEvents.WaitingForLocation(false));
 
-        tracer.info(getString(R.string.stopped));
     }
 
     private void StopPassiveManager(){
@@ -699,6 +699,7 @@ public class GpsLoggingService extends Service  {
      * Notifies main form that logging has stopped
      */
     void NotifyClientStopped() {
+        tracer.info(getString(R.string.stopped));
         EventBus.getDefault().post(new ServiceEvents.LoggingStatus(false));
     }
 
@@ -761,15 +762,13 @@ public class GpsLoggingService extends Service  {
                 }
 
                 if (currentTimeStamp - this.firstRetryTimeStamp <= AppSettings.getRetryInterval() * 1000) {
-                    tracer.warn("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " m. Point discarded.");
-                    tracer.warn(getString(R.string.inaccurate_point_discarded));
+                    tracer.warn("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " m. Point discarded." + getString(R.string.inaccurate_point_discarded));
                     //return and keep trying
                     return;
                 }
 
                 if (currentTimeStamp - this.firstRetryTimeStamp > AppSettings.getRetryInterval() * 1000) {
-                    tracer.warn("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " m and timeout reached");
-                    tracer.warn(getString(R.string.inaccurate_point_discarded));
+                    tracer.warn("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " m and timeout reached." + getString(R.string.inaccurate_point_discarded));
                     //Give up for now
                     StopManagerAndResetAlarm();
 
@@ -791,15 +790,14 @@ public class GpsLoggingService extends Service  {
                     Session.getCurrentLatitude(), Session.getCurrentLongitude());
 
             if (AppSettings.getMinimumDistanceInMeters() > distanceTraveled) {
-                tracer.warn(String.format(getString(R.string.not_enough_distance_traveled), String.valueOf(Math.floor(distanceTraveled))));
-                tracer.warn("Only " + String.valueOf(Math.floor(distanceTraveled)) + " m traveled. Point discarded.");
+                tracer.warn(String.format(getString(R.string.not_enough_distance_traveled), String.valueOf(Math.floor(distanceTraveled))) + ", point discarded");
                 StopManagerAndResetAlarm();
                 return;
             }
         }
 
 
-        tracer.info(MarkerFactory.getMarker("LOCATION"), String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getLongitude()));
+        tracer.info(SessionLogcatAppender.MARKER_LOCATION, String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getLongitude()));
         AdjustAltitude(loc);
         ResetCurrentFileName(false);
         Session.setLatestTimeStamp(System.currentTimeMillis());

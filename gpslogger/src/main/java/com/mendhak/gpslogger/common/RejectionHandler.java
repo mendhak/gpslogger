@@ -17,6 +17,7 @@
 
 package com.mendhak.gpslogger.common;
 
+import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.RejectedExecutionHandler;
@@ -28,7 +29,7 @@ public class RejectionHandler implements RejectedExecutionHandler {
 
     @Override
     public void rejectedExecution(Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
-        tracer.warn("Could not queue task, some points may not be logged.");
+        tracer.warn(SessionLogcatAppender.MARKER_INTERNAL, "Could not queue task, some points may not be logged.");
     }
 }
 
