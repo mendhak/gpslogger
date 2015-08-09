@@ -29,12 +29,10 @@ import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
-import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
-import com.mendhak.gpslogger.views.component.ExpandableTextView;
 import org.slf4j.LoggerFactory;
 import java.text.DateFormat;
 import java.text.NumberFormat;
@@ -122,33 +120,11 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         super.onResume();
     }
 
-    private void ShowStatusMessages(){
-
-        ExpandableTextView txtStatus = (ExpandableTextView) rootView.findViewById(R.id.detailedview_txtstatus);
-        StringBuilder sb = new StringBuilder();
-        for(ServiceEvents.StatusMessage message : SessionLogcatAppender.Statuses){
-
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-            sb.append(sdf.format(new Date(message.timestamp)));
-            sb.append(" ");
-            if(!message.success) {
-                sb.append("<font color='red'>" + message.status + "</font>");
-            }
-            else {
-                sb.append(message.status);
-            }
-            sb.append("<br />");
-        }
-        txtStatus.setText(Html.fromHtml(sb.toString()));
-    }
-
     /**
      * Displays a human readable summary of the preferences chosen by the user
      * on the main form
      */
     private void ShowPreferencesAndMessages() {
-
-        ShowStatusMessages();
 
         try {
             TextView txtLoggingTo = (TextView) rootView.findViewById(R.id.detailedview_loggingto_text);
@@ -302,7 +278,6 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.StatusMessage event){
-        ShowStatusMessages();
         ShowPreferencesAndMessages();
     }
 

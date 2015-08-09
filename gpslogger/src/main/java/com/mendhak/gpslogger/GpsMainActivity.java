@@ -75,10 +75,7 @@ import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
 import com.mendhak.gpslogger.senders.osm.OSMHelper;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudHelper;
-import com.mendhak.gpslogger.views.GenericViewFragment;
-import com.mendhak.gpslogger.views.GpsBigViewFragment;
-import com.mendhak.gpslogger.views.GpsDetailedViewFragment;
-import com.mendhak.gpslogger.views.GpsSimpleViewFragment;
+import com.mendhak.gpslogger.views.*;
 
 import org.slf4j.LoggerFactory;
 
@@ -489,16 +486,20 @@ public class GpsMainActivity extends ActionBarActivity
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
         switch (position) {
+            default:
             case 0:
                 transaction.replace(R.id.container, GpsSimpleViewFragment.newInstance());
                 break;
             case 1:
                 transaction.replace(R.id.container, GpsDetailedViewFragment.newInstance());
                 break;
-            default:
             case 2:
                 transaction.replace(R.id.container, GpsBigViewFragment.newInstance());
                 break;
+            case 3:
+                transaction.replace(R.id.container, GpsLogViewFragment.newInstance());
+                break;
+
         }
         transaction.commitAllowingStateLoss();
     }
