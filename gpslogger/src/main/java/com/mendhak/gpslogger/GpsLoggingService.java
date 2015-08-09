@@ -694,7 +694,6 @@ public class GpsLoggingService extends Service  {
      */
     void SetStatus(String status) {
         tracer.info(status);
-        EventBus.getDefault().post(new ServiceEvents.StatusMessage(status));
     }
 
     void SetLocationServiceUnavailable(){

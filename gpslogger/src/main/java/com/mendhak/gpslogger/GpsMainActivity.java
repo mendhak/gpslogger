@@ -1026,9 +1026,10 @@ public class GpsMainActivity extends ActionBarActivity
         Utilities.HideProgress();
 
         if(!upload.success){
-            EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.opengts_setup_title)
+            tracer.error(getString(R.string.opengts_setup_title)
                     + "-"
-                    + getString(R.string.upload_failure),false));
+                    + getString(R.string.upload_failure));
+
             if(userInvokedUpload){
                 Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
                 userInvokedUpload = false;
@@ -1042,9 +1043,9 @@ public class GpsMainActivity extends ActionBarActivity
         Utilities.HideProgress();
 
         if(!upload.success){
-            EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.autoemail_title)
+            tracer.error(getString(R.string.autoemail_title)
                     + "-"
-                    + getString(R.string.upload_failure),false));
+                    + getString(R.string.upload_failure));
             if(userInvokedUpload){
                 Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
                 userInvokedUpload = false;
@@ -1058,9 +1059,9 @@ public class GpsMainActivity extends ActionBarActivity
         Utilities.HideProgress();
 
         if(!upload.success){
-            EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.osm_setup_title)
+            tracer.error(getString(R.string.osm_setup_title)
                     + "-"
-                    + getString(R.string.upload_failure),false));
+                    + getString(R.string.upload_failure));
             if(userInvokedUpload){
                 Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
                 userInvokedUpload = false;
@@ -1074,9 +1075,9 @@ public class GpsMainActivity extends ActionBarActivity
         Utilities.HideProgress();
 
         if(!upload.success){
-            EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.dropbox_setup_title)
+            tracer.error(getString(R.string.dropbox_setup_title)
                     + "-"
-                    + getString(R.string.upload_failure),false));
+                    + getString(R.string.upload_failure));
             if(userInvokedUpload){
                 Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
                 userInvokedUpload = false;
@@ -1090,9 +1091,9 @@ public class GpsMainActivity extends ActionBarActivity
         Utilities.HideProgress();
 
         if(!upload.success){
-            EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.gdocs_setup_title)
+            tracer.error(getString(R.string.gdocs_setup_title)
                     + "-"
-                    + getString(R.string.upload_failure),false));
+                    + getString(R.string.upload_failure));
             if(userInvokedUpload){
                 Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
                 userInvokedUpload = false;
@@ -1106,9 +1107,9 @@ public class GpsMainActivity extends ActionBarActivity
         Utilities.HideProgress();
 
         if(!upload.success){
-            EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.autoftp_setup_title)
+            tracer.error(getString(R.string.autoftp_setup_title)
                     + "-"
-                    + getString(R.string.upload_failure),false));
+                    + getString(R.string.upload_failure));
             if(userInvokedUpload){
                 Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
                 userInvokedUpload = false;
@@ -1123,9 +1124,9 @@ public class GpsMainActivity extends ActionBarActivity
         Utilities.HideProgress();
 
         if(!upload.success){
-            EventBus.getDefault().post(new ServiceEvents.StatusMessage(getString(R.string.owncloud_setup_title)
+            tracer.error(getString(R.string.owncloud_setup_title)
                     + "-"
-                    + getString(R.string.upload_failure),false));
+                    + getString(R.string.upload_failure));
 
             if(userInvokedUpload){
                 Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);

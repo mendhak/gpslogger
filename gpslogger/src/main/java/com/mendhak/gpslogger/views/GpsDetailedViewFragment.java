@@ -277,11 +277,6 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.StatusMessage event){
-        ShowPreferencesAndMessages();
-    }
-
-    @EventBusHook
     public void onEventMainThread(ServiceEvents.LocationUpdate locationEvent){
         DisplayLocationInfo(locationEvent.location);
     }

@@ -8,27 +8,6 @@ public class ServiceEvents {
 
 
     /**
-     * Status message
-     */
-    public static class StatusMessage {
-        public String status;
-        public long timestamp;
-        public boolean success;
-
-        public StatusMessage(String message){
-            this(message, true);
-        }
-
-        public StatusMessage(String message, boolean success){
-            this.timestamp = System.currentTimeMillis();
-            this.success = success;
-            this.status = message;
-        }
-
-    }
-
-
-    /**
      * New location
      */
     public static class LocationUpdate {

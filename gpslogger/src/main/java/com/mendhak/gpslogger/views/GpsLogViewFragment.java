@@ -8,8 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.spi.ILoggingEvent;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import org.slf4j.LoggerFactory;
 
@@ -62,27 +63,26 @@ public class GpsLogViewFragment extends GenericViewFragment {
             int minutes = seconds / 60;
             seconds = seconds % 60;
 
-            //logTextView.setText(logTextView.getText() + "\r\n" + String.format("%d:%02d", minutes, seconds));
-            ShowStatusMessages();
+            ShowLogcatMessages();
             timerHandler.postDelayed(this, 1500);
         }
     };
 
 
-    private void ShowStatusMessages(){
+    private void ShowLogcatMessages(){
 
 
         StringBuilder sb = new StringBuilder();
-        for(ServiceEvents.StatusMessage message : SessionLogcatAppender.Statuses){
+        for(ILoggingEvent message : SessionLogcatAppender.Statuses){
 
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-            sb.append(sdf.format(new Date(message.timestamp)));
+            sb.append(sdf.format(new Date(message.getTimeStamp())));
             sb.append(" ");
-            if(!message.success) {
-                sb.append("<font color='red'>" + message.status + "</font>");
+            if(message.getLevel() == Level.ERROR) {
+                sb.append("<font color='red'>" + message.getMessage() + "</font>");
             }
             else {
-                sb.append(message.status);
+                sb.append(message.getMessage());
             }
             sb.append("<br />");
         }
