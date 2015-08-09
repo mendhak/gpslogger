@@ -56,6 +56,12 @@ public class GpsLogViewFragment extends GenericViewFragment {
         timerHandler.removeCallbacks(timerRunnable);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        startTime = System.currentTimeMillis();
+        timerHandler.postDelayed(timerRunnable, 0);
+    }
 
     Runnable timerRunnable = new Runnable() {
 
@@ -82,7 +88,14 @@ public class GpsLogViewFragment extends GenericViewFragment {
             sb.append(sdf.format(new Date(message.getTimeStamp())));
             sb.append(" ");
             if(message.getLevel() == Level.ERROR) {
-                sb.append("<font color='red'>" + message.getMessage() + "</font>");
+                sb.append("<font color='#" + Integer.toHexString(getActivity().getResources().getColor(R.color.errorColor)).substring(2) + "'>" + message.getMessage() + "</font>");
+            }
+            else if(message.getLevel() == Level.WARN){
+                sb.append("<font color='#" + Integer.toHexString(getActivity().getResources().getColor(R.color.warningColor)).substring(2) + "'>" + message.getMessage() + "</font>");
+            }
+            else if(message.getMarker()!= null && message.getMarker().contains("LOCATION")){
+
+                sb.append("<font color='#" + Integer.toHexString(getActivity().getResources().getColor(R.color.accentColorComplementary)).substring(2) + "'><strong>" + message.getMessage() + "</strong></font>");
             }
             else {
                 sb.append(message.getMessage());

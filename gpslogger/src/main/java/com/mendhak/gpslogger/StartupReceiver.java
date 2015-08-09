@@ -38,7 +38,7 @@ public class StartupReceiver extends BroadcastReceiver {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean startImmediately = prefs.getBoolean("startonbootup", false);
 
-            tracer.info("Start on bootup? - "  + String.valueOf(startImmediately));
+            tracer.info("Start on bootup - "  + String.valueOf(startImmediately));
 
             if (startImmediately) {
 

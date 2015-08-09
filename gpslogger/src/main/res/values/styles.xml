@@ -31,7 +31,8 @@
     <color name="primaryColor">#607d8b</color>
     <color name="primaryColorDark">#455a64</color>
     <color name="accentColor">#448aff</color>
-    <!--<color name="accentColorComplementary">#FF5252</color>-->
+    <color name="errorColor">#FF5252</color>
+    <color name="warningColor">#ffbd60</color>
     <color name="accentColorComplementary">#4CAF50</color>
     <color name="primaryColorLight">#CFD8DC</color>
     <color name="primaryColorText">#212121</color>

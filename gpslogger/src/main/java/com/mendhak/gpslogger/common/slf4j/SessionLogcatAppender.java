@@ -9,7 +9,7 @@ import com.mendhak.gpslogger.common.FifoDeque;
 
 public class SessionLogcatAppender extends AppenderBase<ILoggingEvent> {
 
-    public static FifoDeque<ILoggingEvent> Statuses = new FifoDeque<>(25);
+    public static FifoDeque<ILoggingEvent> Statuses = new FifoDeque<>(325);
 
     public void close() {
     }
@@ -20,7 +20,7 @@ public class SessionLogcatAppender extends AppenderBase<ILoggingEvent> {
 
     @Override
     protected void append(ILoggingEvent eventObject) {
-        //if(eventObject.getLevel().toInt() < Level.INFO.toInt()){ return; }
+        if(eventObject.getLevel().toInt() < Level.INFO.toInt()){ return; }
 
         Statuses.add(eventObject);
     }

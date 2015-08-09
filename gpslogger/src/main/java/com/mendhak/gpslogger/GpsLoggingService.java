@@ -49,6 +49,8 @@ import com.mendhak.gpslogger.senders.AlarmReceiver;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MarkerFactory;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -107,7 +109,7 @@ public class GpsLoggingService extends Service  {
                     @Override
                     public void onConnected(Bundle arg0) {
                         try {
-                            tracer.info("Requesting activity recognition updates");
+                            tracer.debug("Requesting activity recognition updates");
                             Intent intent = new Intent(getApplicationContext(), GpsLoggingService.class);
                             activityRecognitionPendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                             ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(googleApiClient, AppSettings.getMinimumSeconds() * 1000, activityRecognitionPendingIntent);
@@ -132,7 +134,7 @@ public class GpsLoggingService extends Service  {
 
     private void StopActivityRecognitionUpdates(){
         try{
-            tracer.info("Stopping activity recognition updates");
+            tracer.debug("Stopping activity recognition updates");
             ActivityRecognition.ActivityRecognitionApi.removeActivityUpdates(googleApiClient, activityRecognitionPendingIntent);
             googleApiClient.disconnect();
         }
@@ -201,17 +203,17 @@ public class GpsLoggingService extends Service  {
                 }
 
                 if (bundle.getBoolean(IntentConstants.AUTOSEND_NOW)) {
-                    tracer.debug("Intent received - Send Email Now");
+                    tracer.info("Intent received - Send Email Now");
                     EventBus.getDefault().postSticky(new CommandEvents.AutoSend(null));
                 }
 
                 if (bundle.getBoolean(IntentConstants.GET_NEXT_POINT)) {
-                    tracer.debug("Intent received - Get Next Point");
+                    tracer.info("Intent received - Get Next Point");
                     needToStartGpsManager = true;
                 }
 
                 if (bundle.getString(IntentConstants.SET_DESCRIPTION) != null) {
-                    tracer.debug("Intent received - Set Next Point Description: " + bundle.getString(IntentConstants.SET_DESCRIPTION));
+                    tracer.info("Intent received - Set Next Point Description: " + bundle.getString(IntentConstants.SET_DESCRIPTION));
                     EventBus.getDefault().post(new CommandEvents.Annotate(bundle.getString(IntentConstants.SET_DESCRIPTION)));
                 }
 
@@ -562,7 +564,7 @@ public class GpsLoggingService extends Service  {
         }
 
         if (Session.isTowerEnabled() &&  ( AppSettings.getChosenListeners().contains("network")  || !Session.isGpsEnabled() ) ) {
-            tracer.info("Requesting tower location updates");
+            tracer.info("Requesting cell and wifi location updates");
             Session.setUsingGps(false);
             // Cell tower and wifi based
             towerLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, towerLocationListener);
@@ -581,7 +583,7 @@ public class GpsLoggingService extends Service  {
 
         EventBus.getDefault().post(new ServiceEvents.WaitingForLocation(true));
         Session.setWaitingForLocation(true);
-        tracer.debug(getString(R.string.started));
+        tracer.info(getString(R.string.started));
     }
 
     private boolean userHasBeenStillForTooLong() {
@@ -636,7 +638,7 @@ public class GpsLoggingService extends Service  {
         Session.setWaitingForLocation(false);
         EventBus.getDefault().post(new ServiceEvents.WaitingForLocation(false));
 
-        tracer.debug(getString(R.string.stopped));
+        tracer.info(getString(R.string.stopped));
     }
 
     private void StopPassiveManager(){
@@ -675,7 +677,7 @@ public class GpsLoggingService extends Service  {
         if(!Utilities.IsNullOrEmpty(oldFileName)
                 && !oldFileName.equalsIgnoreCase(Session.getCurrentFileName())
                 && Session.isStarted()){
-            tracer.info("New file name, should auto upload the old one");
+            tracer.debug("New file name, should auto upload the old one");
             EventBus.getDefault().post(new CommandEvents.AutoSend(oldFileName));
         }
 
@@ -797,7 +799,7 @@ public class GpsLoggingService extends Service  {
         }
 
 
-        tracer.info("Location to update: " + String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getLongitude()));
+        tracer.info(MarkerFactory.getMarker("LOCATION"), String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getLongitude()));
         AdjustAltitude(loc);
         ResetCurrentFileName(false);
         Session.setLatestTimeStamp(System.currentTimeMillis());
@@ -911,7 +913,7 @@ public class GpsLoggingService extends Service  {
             FileLoggerFactory.Write(getApplicationContext(), loc);
 
             if (Session.hasDescription()) {
-                tracer.debug("Writing annotation: " + Session.getDescription());
+                tracer.info("Writing annotation: " + Session.getDescription());
                 FileLoggerFactory.Annotate(getApplicationContext(), Session.getDescription(), loc);
             }
         }
@@ -1025,7 +1027,7 @@ public class GpsLoggingService extends Service  {
 
         }
         else {
-            tracer.info(activityRecognitionEvent.result.getMostProbableActivity().toString());
+            tracer.debug(activityRecognitionEvent.result.getMostProbableActivity().toString());
             //Reset the still-since timestamp
             Session.setUserStillSinceTimeStamp(0);
             tracer.debug("Just exited still state, attempt to log");

@@ -153,7 +153,7 @@ public class Utilities {
      */
     public static void PopulateAppSettings(Context context) {
 
-        tracer.info("Getting preferences");
+        tracer.debug("Getting preferences");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
         AppSettings.setHideNotificationButtons(prefs.getBoolean("hide_notification_buttons", false));

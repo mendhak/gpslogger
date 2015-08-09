@@ -32,7 +32,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         try {
-            tracer.info("Alarm received");
+            tracer.debug("Alarm received");
 
             EventBus.getDefault().postSticky(new CommandEvents.AutoSend(null));
 

@@ -43,7 +43,7 @@ public class OpenGTSHelper implements IFileSender {
         for (File f : files) {
             if (f.getName().endsWith(".gpx")) {
                 List<SerializableLocation> locations = getLocationsFromGPX(f);
-                tracer.info(locations.size() + " points were read from " + f.getName());
+                tracer.debug(locations.size() + " points were read from " + f.getName());
 
                 if (locations.size() > 0) {
 

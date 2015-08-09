@@ -42,7 +42,7 @@ public class NotificationAnnotationActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        tracer = LoggerFactory.getLogger(GpsLoggingService.class.getSimpleName());
+        tracer = LoggerFactory.getLogger(NotificationAnnotationActivity.class.getSimpleName());
 
         MaterialDialog alertDialog = new MaterialDialog.Builder(this)
                 .title(R.string.add_description)
@@ -64,7 +64,7 @@ public class NotificationAnnotationActivity extends Activity {
                     public void onPositive(MaterialDialog dialog) {
 
                         EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
-                        tracer.info("Notification annotation: " + userInput.getText().toString());
+                        tracer.info("Annotation from notification: " + userInput.getText().toString());
 
                         EventBus.getDefault().postSticky(new CommandEvents.Annotate(userInput.getText().toString()));
 
