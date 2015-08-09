@@ -1,15 +1,15 @@
 package com.mendhak.gpslogger.views;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.*;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import com.mendhak.gpslogger.R;
@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class GpsLogViewFragment extends GenericViewFragment {
+public class GpsLogViewFragment extends GenericViewFragment implements CompoundButton.OnCheckedChangeListener {
 
     private View rootView;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GpsLogViewFragment.class.getSimpleName());
@@ -40,6 +40,10 @@ public class GpsLogViewFragment extends GenericViewFragment {
         logTextView = (TextView) rootView.findViewById(R.id.logview_txtstatus);
         scrollView = (ScrollView) rootView.findViewById(R.id.logview_scrollView);
 
+        CheckBox chkDebugFile = (CheckBox) rootView.findViewById(R.id.logview_chkDebugFile);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        chkDebugFile.setChecked(prefs.getBoolean("debugtofile", false));
+        chkDebugFile.setOnCheckedChangeListener(this);
         return rootView;
     }
 
@@ -129,4 +133,18 @@ public class GpsLogViewFragment extends GenericViewFragment {
     }
 
 
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+
+        if(compoundButton.getId() == R.id.logview_chkDebugFile){
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("debugtofile", checked);
+            editor.apply();
+
+            if(checked){
+                Toast.makeText(getActivity(), R.string.debuglog_summary, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 }
