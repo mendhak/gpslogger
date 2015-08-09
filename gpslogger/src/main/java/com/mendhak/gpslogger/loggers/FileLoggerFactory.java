@@ -31,12 +31,17 @@ import java.util.List;
 
 public class FileLoggerFactory {
     public static List<IFileLogger> GetFileLoggers(Context context) {
+
+        List<IFileLogger> loggers = new ArrayList<IFileLogger>();
+
+        if(Utilities.IsNullOrEmpty(AppSettings.getGpsLoggerFolder())){
+            return loggers;
+        }
+
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
             gpxFolder.mkdirs();
         }
-
-        List<IFileLogger> loggers = new ArrayList<IFileLogger>();
 
         if (AppSettings.shouldLogToGpx()) {
             File gpxFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".gpx");

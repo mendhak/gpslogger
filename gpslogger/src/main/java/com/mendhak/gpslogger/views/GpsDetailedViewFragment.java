@@ -29,6 +29,7 @@ import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
+import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
@@ -125,7 +126,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
         ExpandableTextView txtStatus = (ExpandableTextView) rootView.findViewById(R.id.detailedview_txtstatus);
         StringBuilder sb = new StringBuilder();
-        for(ServiceEvents.StatusMessage message : Session.Statuses){
+        for(ServiceEvents.StatusMessage message : SessionLogcatAppender.Statuses){
 
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             sb.append(sdf.format(new Date(message.timestamp)));
@@ -241,7 +242,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
 
         } catch (Exception ex) {
-            tracer.error("ShowPreferencesAndMessages", ex);
+            tracer.error("ShowPreferencesAndMessages " + ex.getMessage(), ex);
         }
 
 

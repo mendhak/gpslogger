@@ -42,6 +42,8 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.rolling.TimeBasedRollingPolicy;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.slf4j.GpsRollingFileAppender;
+import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.ftp.FtpHelper;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudHelper;
@@ -117,16 +119,21 @@ public class Utilities {
             logcatAppender.setEncoder(encoder2);
             logcatAppender.start();
 
+            SessionLogcatAppender sessionAppender = new SessionLogcatAppender();
+            sessionAppender.setContext(lc);
+            sessionAppender.start();
+
             // add the newly created appenders to the root logger;
             // qualify Logger to disambiguate from org.slf4j.Logger
             ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
             root.addAppender(rollingFileAppender);
             root.addAppender(logcatAppender);
+            root.addAppender(sessionAppender);
+
         }
         catch(Exception ex){
               System.out.println("Could not configure logging!");
         }
-
 
     }
 

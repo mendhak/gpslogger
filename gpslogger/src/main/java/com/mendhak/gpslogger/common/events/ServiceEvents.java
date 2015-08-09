@@ -23,7 +23,6 @@ public class ServiceEvents {
             this.timestamp = System.currentTimeMillis();
             this.success = success;
             this.status = message;
-            Session.Statuses.add(this);
         }
 
     }
