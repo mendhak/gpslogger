@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/logview_autoscroll"
+            android:checked="true"
             android:id="@+id/logview_chkAutoScroll"/>
     </LinearLayout>
 

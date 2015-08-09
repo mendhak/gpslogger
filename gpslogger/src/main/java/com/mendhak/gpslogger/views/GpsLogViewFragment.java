@@ -7,6 +7,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import ch.qos.logback.classic.Level;
@@ -80,33 +81,52 @@ public class GpsLogViewFragment extends GenericViewFragment {
 
     private void ShowLogcatMessages(){
 
+        CheckBox chkLocationsOnly = (CheckBox) rootView.findViewById(R.id.logview_chkLocationsOnly);
+        CheckBox chkAutoScroll = (CheckBox) rootView.findViewById(R.id.logview_chkAutoScroll);
+
 
         StringBuilder sb = new StringBuilder();
         for(ILoggingEvent message : SessionLogcatAppender.Statuses){
 
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-            sb.append(sdf.format(new Date(message.getTimeStamp())));
-            sb.append(" ");
-            if(message.getLevel() == Level.ERROR) {
-                sb.append("<font color='#" + Integer.toHexString(getActivity().getResources().getColor(R.color.errorColor)).substring(2) + "'>" + message.getMessage() + "</font>");
+            if(message.getMarker() == SessionLogcatAppender.MARKER_LOCATION){
+                sb.append(getFormattedMessage(message.getMessage(), R.color.accentColorComplementary, message.getTimeStamp()));
             }
-            else if(message.getLevel() == Level.WARN){
-                sb.append("<font color='#" + Integer.toHexString(getActivity().getResources().getColor(R.color.warningColor)).substring(2) + "'>" + message.getMessage() + "</font>");
-            }
-            else if(message.getMarker()!= null && message.getMarker().contains("LOCATION")){
 
-                sb.append("<font color='#" + Integer.toHexString(getActivity().getResources().getColor(R.color.accentColorComplementary)).substring(2) + "'><strong>" + message.getMessage() + "</strong></font>");
+            else if(!chkLocationsOnly.isChecked()){
+                if(message.getLevel() == Level.ERROR) {
+                    sb.append(getFormattedMessage(message.getMessage(), R.color.errorColor, message.getTimeStamp()));
+
+                }
+                else if(message.getLevel() == Level.WARN){
+                    sb.append(getFormattedMessage(message.getMessage(), R.color.warningColor, message.getTimeStamp()));
+
+                }
+                else {
+                    sb.append(getFormattedMessage(message.getMessage(), R.color.secondaryColorText, message.getTimeStamp()));
+                }
             }
-            else {
-                sb.append(message.getMessage());
-            }
-            sb.append("<br />");
+
         }
         logTextView.setText(Html.fromHtml(sb.toString()));
 
-        scrollView.fullScroll(View.FOCUS_DOWN);
+        if(chkAutoScroll.isChecked()){
+            scrollView.fullScroll(View.FOCUS_DOWN);
+        }
+
     }
 
+    private String getFormattedMessage(String message, int colorResourceId, long timeStamp){
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        String dateStamp = sdf.format(new Date(timeStamp)) + " ";
+
+        String messageFormat = "%s<font color='#%s'>%s</font><br />";
+
+        return String.format(messageFormat,
+                dateStamp,
+                Integer.toHexString(getActivity().getResources().getColor(colorResourceId)).substring(2),
+                message);
+
+    }
 
 
 }
