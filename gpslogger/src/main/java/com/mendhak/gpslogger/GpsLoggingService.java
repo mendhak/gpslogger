@@ -166,8 +166,9 @@ public class GpsLoggingService extends Service  {
 
     @Override
     public void onDestroy() {
-        tracer.warn("GpsLoggingService is being destroyed by Android OS.");
+        tracer.warn(SessionLogcatAppender.MARKER_INTERNAL, "GpsLoggingService is being destroyed by Android OS.");
         UnregisterEventBus();
+        RemoveNotification();
         super.onDestroy();
     }
 
