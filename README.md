@@ -24,7 +24,7 @@ Licensed under [GPL v2](http://www.gnu.org/licenses/gpl-2.0.html).
 
 ## Donate
 
-You can donate Bitcoins to `18wQWVNWDyuaei9yged6onkZ5Go4kbkJV2`
+You can donate Bitcoins [here](https://www.coinbase.com/mendhak)
 
 
 Setting up the code

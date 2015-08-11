@@ -537,7 +537,7 @@ public class GpsLoggingService extends Service  {
 
         //If the user has been still for more than the minimum seconds
         if(userHasBeenStillForTooLong()) {
-            tracer.info("No movement in the past interval, resetting alarm");
+            tracer.info("No movement detected in the past interval, will not log");
             SetAlarmForNextPoint();
             return;
         }
@@ -1017,7 +1017,7 @@ public class GpsLoggingService extends Service  {
         }
 
         if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.STILL){
-            tracer.info(activityRecognitionEvent.result.getMostProbableActivity().toString());
+            tracer.debug(activityRecognitionEvent.result.getMostProbableActivity().toString());
             if(Session.getUserStillSinceTimeStamp() == 0){
                 tracer.debug("Just entered still state, attempt to log");
                 StartGpsManager();
