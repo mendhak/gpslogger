@@ -77,7 +77,7 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
 
         if(preference.getKey().equalsIgnoreCase("bitcoindonate_link")){
 
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("bitcoin:18wQWVNWDyuaei9yged6onkZ5Go4kbkJV2"));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("bitcoin:1DhQCEkzEJkEQRFVLbGqv6Qksoc4aGpuAS"));
             if( intent.resolveActivity(getActivity().getPackageManager()) == null){
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.coinbase.com/mendhak")));
             }
