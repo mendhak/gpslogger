@@ -285,7 +285,7 @@ public class GpsLoggingService extends Service  {
                     }
                 }
                 catch (Throwable t){
-                    tracer.error("Received a weird EXTRA_ALARM_COUNT", t);
+                    tracer.error(SessionLogcatAppender.MARKER_INTERNAL, "Received a weird EXTRA_ALARM_COUNT", t);
                 }
 
 
