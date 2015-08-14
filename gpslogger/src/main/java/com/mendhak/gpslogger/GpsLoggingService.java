@@ -279,9 +279,15 @@ public class GpsLoggingService extends Service  {
                     LogOnce();
                 }
 
-                if(bundle.getInt(Intent.EXTRA_ALARM_COUNT) != 0){
-                    needToStartGpsManager = true;
+                try {
+                    if(bundle.getInt(Intent.EXTRA_ALARM_COUNT) != 0){
+                        needToStartGpsManager = true;
+                    }
                 }
+                catch (Throwable t){
+                    tracer.error("Received a weird EXTRA_ALARM_COUNT", t);
+                }
+
 
                 if (needToStartGpsManager && Session.isStarted()) {
                     StartGpsManager();
