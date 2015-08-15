@@ -285,8 +285,12 @@ public class GpsLoggingService extends Service  {
                     }
                 }
                 catch (Throwable t){
-                    tracer.warn(SessionLogcatAppender.MARKER_INTERNAL, "Received a weird EXTRA_ALARM_COUNT", t);
-                    needToStartGpsManager = true;
+                    //Moto G appears to make these Longs instead of ints.
+                    if(bundle.getLong(Intent.EXTRA_ALARM_COUNT) != 0L){
+                        needToStartGpsManager = true;
+                    }
+
+                    needToStartGpsManager = false;
                 }
 
 
