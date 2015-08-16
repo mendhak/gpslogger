@@ -136,8 +136,10 @@ public class GpsLoggingService extends Service  {
     private void StopActivityRecognitionUpdates(){
         try{
             tracer.debug("Stopping activity recognition updates");
-            ActivityRecognition.ActivityRecognitionApi.removeActivityUpdates(googleApiClient, activityRecognitionPendingIntent);
-            googleApiClient.disconnect();
+            if(googleApiClient != null && googleApiClient.isConnected()){
+                ActivityRecognition.ActivityRecognitionApi.removeActivityUpdates(googleApiClient, activityRecognitionPendingIntent);
+                googleApiClient.disconnect();
+            }
         }
         catch(Throwable t){
             tracer.warn(SessionLogcatAppender.MARKER_INTERNAL, "Tried to stop activity recognition updates", t);
