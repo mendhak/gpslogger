@@ -337,12 +337,16 @@
   <string name="activityrecognition_dont_log_if_still_summary">Wenn der Beschleunigungssensor keine Bewegung seit dem letzten Punkt feststellt, wird das aktive Aufzeichnen pausiert, bis du dich wieder bewegst. Passive Punkte werden werden evtl. dennoch aufgezeichnet.</string>
   <string name="txt_activity">Aktivität:</string>
   <string name="activity_in_vehicle">Im Fahrzeug</string>
+  <string name="activity_confidence">Zuverlässigkeit</string>
   <string name="activity_still">Still</string>
   <string name="activity_on_bicycle">Auf Fahrrad</string>
   <string name="activity_on_foot">Zu Fuß</string>
   <string name="activity_running">Rennen</string>
+  <string name="activity_tilting">Neigung</string>
   <string name="activity_walking">Gehen</string>
   <string name="activity_unknown">Unbekannt</string>
+  <string name="altitude_subtractgeoidheight_summary">Verwendet den Mittleren Meeresspiegel (MSL) anstelle der WGS84-Höhe, indem die Geoidhöhe von der GPS-Höhe abgezogen wird. Gilt nur für Punkte, die mittels GPS-Satelliten und nicht über Netzwerk oder NMEA bestimmt wurden.</string>
+  <string name="altitude_subtractgeoidheight_title">MSL statt WGS84 verwenden</string>
   <string name="altitude_subtractoffset_title">Subtrahiere Höhenoffset</string>
   <string name="altitude_subtractoffset_summary">Ein Wert in Metern, der von der festgestellten GPS-Höhe subtrahiert wird. Nutze eine negative Zahl, um einen Wert zu addieren. Wird nur für GPS-Punkte benutzt, nicht für Netzwerk oder NMEA.</string>
 </resources>
