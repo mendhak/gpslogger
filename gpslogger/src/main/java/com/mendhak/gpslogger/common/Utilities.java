@@ -854,9 +854,12 @@ public class Utilities {
 
     public static void SetFileExplorerLink(TextView txtFilename, Spanned htmlString, final String pathToLinkTo, final Context context) {
 
-        if(Utilities.IsPackageInstalled("com.estrongs.android.pop", context)
-                || Utilities.IsPackageInstalled("com.metago.astro", context)){
+        final Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setDataAndType(Uri.parse("file://" + pathToLinkTo), "resource/folder");
+        intent.setAction(Intent.ACTION_VIEW);
 
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
             txtFilename.setLinksClickable(true);
             txtFilename.setClickable(true);
             txtFilename.setMovementMethod(LinkMovementMethod.getInstance());
@@ -867,28 +870,12 @@ public class Utilities {
             txtFilename.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent shareIntent = new Intent(Intent.ACTION_VIEW);
-                    shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                    shareIntent.setType("resource/folder");
-                    shareIntent.setData(Uri.fromFile(new File(pathToLinkTo)));
-
-                    if(Utilities.IsPackageInstalled("com.estrongs.android.pop", context) ){
-                        shareIntent.setComponent(ComponentName.unflattenFromString("com.estrongs.android.pop/.view.FileExplorerActivity"));
-                        shareIntent.setPackage("com.estrongs.android.pop");
-                    }
-
-                    if(Utilities.IsPackageInstalled("com.metago.astro", context)){
-                        shareIntent.setPackage("com.metago.astro");
-                        shareIntent.setComponent(ComponentName.unflattenFromString("com.metago.astro/.MainActivity"));
-                    }
-
-                    context.startActivity(shareIntent);
+                    Intent chooser = Intent.createChooser(intent, "blah");
+                    chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(chooser);
                 }
             });
-
         }
-
     }
 
     private static NetworkInfo getActiveNetworkInfo(Context context) {
