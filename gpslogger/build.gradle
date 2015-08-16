@@ -29,7 +29,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 19
         versionCode 65
-        versionName "65-logview3"
+        versionName "65-logview4"
     }
 
     //Adding API keys to BuildConfig
