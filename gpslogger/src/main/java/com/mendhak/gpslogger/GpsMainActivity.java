@@ -228,7 +228,20 @@ public class GpsMainActivity extends ActionBarActivity
                 if(value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")){
                     editor.putBoolean(key.toString(), Boolean.parseBoolean(value));
                 }
-                else {
+                else if(key.equals("listeners")){
+                    List<String> availableListeners = Utilities.GetListeners();
+                    Set<String> chosenListeners = new HashSet<>();
+                    String[] csvListeners = value.split(",");
+                    for(String l : csvListeners){
+                        if(availableListeners.contains(l)){
+                            chosenListeners.add(l);
+                        }
+                    }
+                    if(chosenListeners.size() > 0){
+                        prefs.edit().putStringSet("listeners", chosenListeners).apply();
+                    }
+
+                } else {
                     editor.putString(key.toString(), value);
                 }
                 editor.apply();
