@@ -870,7 +870,7 @@ public class Utilities {
             txtFilename.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent chooser = Intent.createChooser(intent, "blah");
+                    Intent chooser = Intent.createChooser(intent, null);
                     chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(chooser);
                 }
