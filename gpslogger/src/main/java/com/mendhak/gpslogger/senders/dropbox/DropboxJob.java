@@ -17,6 +17,8 @@ import java.io.FileInputStream;
 
 public class DropboxJob extends Job {
 
+    public static final String JOB_TAG = "DROPBOX";
+
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropboxJob.class.getSimpleName());
     String fileName;
     DropboxAPI<AndroidAuthSession> dropboxApi;
@@ -26,7 +28,7 @@ public class DropboxJob extends Job {
     final static private Session.AccessType ACCESS_TYPE = Session.AccessType.APP_FOLDER;
 
     protected DropboxJob(String fileName, String dropboxAppkey, String dropboxAppSecret, String[] storedKeys) {
-        super(new Params(1).requireNetwork().persist());
+        super(new Params(1).requireNetwork().persist().addTags(JOB_TAG));
 
         this.fileName = fileName;
         this.dropboxAppKey = dropboxAppkey;

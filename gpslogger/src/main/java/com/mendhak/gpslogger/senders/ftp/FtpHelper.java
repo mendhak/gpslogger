@@ -24,6 +24,7 @@ import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
+import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
@@ -66,6 +67,7 @@ public class FtpHelper implements IFileSender {
         }
 
         JobManager jobManager = AppSettings.GetJobManager();
+        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, FtpJob.JOB_TAG);
         jobManager.addJobInBackground(new FtpJob(servername, port, username, password, directory,
                 useFtps, protocol, implicit, testFile, "gpslogger_test.txt"));
     }
@@ -85,6 +87,7 @@ public class FtpHelper implements IFileSender {
     public void UploadFile(File f) {
 
         JobManager jobManager = AppSettings.GetJobManager();
+        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, FtpJob.JOB_TAG);
         jobManager.addJobInBackground(new FtpJob(AppSettings.getFtpServerName(), AppSettings.getFtpPort(),
                 AppSettings.getFtpUsername(), AppSettings.getFtpPassword(), AppSettings.getFtpDirectory(),
                 AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit(),

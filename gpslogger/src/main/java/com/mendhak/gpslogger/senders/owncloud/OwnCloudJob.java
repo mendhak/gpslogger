@@ -25,6 +25,7 @@ import com.owncloud.android.lib.common.OwnCloudClient;
 
 public class OwnCloudJob extends Job implements OnRemoteOperationListener {
 
+    public static final String JOB_TAG="OWNCLOUD";
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OwnCloudJob.class.getSimpleName());
 
 
@@ -38,7 +39,7 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
     protected OwnCloudJob(String servername, String username, String password, String directory,
                          File localFile, String remoteFileName)
     {
-        super(new Params(1).requireNetwork().persist());
+        super(new Params(1).requireNetwork().persist().addTags(JOB_TAG));
         this.servername = servername;
         this.username = username;
         this.password = password;

@@ -26,6 +26,7 @@ import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
+import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 import java.io.*;
@@ -155,6 +156,7 @@ public class GDocsHelper implements IFileSender {
             }
 
             JobManager jobManager = AppSettings.GetJobManager();
+            jobManager.cancelJobsInBackground(null, TagConstraint.ANY, GDocsJob.JOB_TAG);
             jobManager.addJobInBackground(new GDocsJob(gpxFile, uploadFolderName));
 
         } catch (Exception e) {

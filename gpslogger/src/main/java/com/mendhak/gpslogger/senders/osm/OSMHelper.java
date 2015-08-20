@@ -25,6 +25,7 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
+import com.path.android.jobqueue.TagConstraint;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
@@ -109,6 +110,7 @@ public class OSMHelper implements IFileSender {
         String visibility = prefs.getString("osm_visibility", "private");
 
         JobManager jobManager = AppSettings.GetJobManager();
+        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OSMJob.JOB_TAG);
         jobManager.addJobInBackground(new OSMJob( consumer, gpsTraceUrl, chosenFile, description, tags, visibility));
     }
 

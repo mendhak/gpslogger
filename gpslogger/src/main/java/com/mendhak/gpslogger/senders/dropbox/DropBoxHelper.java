@@ -30,6 +30,7 @@ import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
+import com.path.android.jobqueue.TagConstraint;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
@@ -162,6 +163,7 @@ public class DropBoxHelper implements IFileSender {
 
     public void UploadFile(String fileName) {
         JobManager jobManager = AppSettings.GetJobManager();
+        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, DropboxJob.JOB_TAG);
         jobManager.addJobInBackground(new DropboxJob(fileName, BuildConfig.DROPBOX_APP_KEY, BuildConfig.DROPBOX_APP_SECRET, getKeys()));
     }
 

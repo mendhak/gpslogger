@@ -22,6 +22,7 @@ import oauth.signpost.OAuthConsumer;
 
 public class OSMJob extends Job {
 
+    public static final String JOB_TAG="OSM";
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OSMJob.class.getSimpleName());
     OAuthConsumer consumer;
     String gpsTraceUrl;
@@ -31,7 +32,7 @@ public class OSMJob extends Job {
     String visibility;
 
     protected OSMJob(OAuthConsumer consumer, String gpsTraceUrl, File chosenFile, String description, String tags, String visibility) {
-        super(new Params(1).requireNetwork().persist());
+        super(new Params(1).requireNetwork().persist().addTags(JOB_TAG));
 
         this.consumer = consumer;
         this.gpsTraceUrl = gpsTraceUrl;

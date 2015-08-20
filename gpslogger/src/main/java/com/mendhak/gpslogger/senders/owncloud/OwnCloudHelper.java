@@ -5,6 +5,7 @@ import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
+import com.path.android.jobqueue.TagConstraint;
 import org.slf4j.LoggerFactory;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -50,6 +51,7 @@ public class OwnCloudHelper implements IFileSender
         }
 
         JobManager jobManager = AppSettings.GetJobManager();
+        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OwnCloudJob.JOB_TAG);
         jobManager.addJobInBackground(new OwnCloudJob(servername, username, password, directory,
                 testFile, "gpslogger_test.txt"));
         tracer.debug("Added background ownCloud upload job");
@@ -76,6 +78,7 @@ public class OwnCloudHelper implements IFileSender
     public void UploadFile(File f)
     {
         JobManager jobManager = AppSettings.GetJobManager();
+        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OwnCloudJob.JOB_TAG);
         jobManager.addJobInBackground(new OwnCloudJob(
                 AppSettings.getOwnCloudServerName(),
                 AppSettings.getOwnCloudUsername(),

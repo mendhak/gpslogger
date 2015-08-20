@@ -10,6 +10,7 @@ import java.io.File;
 
 public class AutoEmailJob extends Job {
 
+    public static final String JOB_TAG = "EMAIL";
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoEmailJob.class.getSimpleName());
     String smtpServer;
     String smtpPort;
@@ -27,7 +28,7 @@ public class AutoEmailJob extends Job {
                            String smtpPort, String smtpUsername, String smtpPassword,
                            boolean smtpUseSsl, String csvEmailTargets, String fromAddress,
                             String subject, String body, File[] files) {
-        super(new Params(1).requireNetwork().persist());
+        super(new Params(1).requireNetwork().persist().addTags(JOB_TAG));
         this.smtpServer = smtpServer;
         this.smtpPort = smtpPort;
         this.smtpPassword = smtpPassword;
