@@ -202,8 +202,22 @@ if (project.hasProperty("CROWDIN_API_KEY")) {
 
         //Android projects
         renameMapping = [
-                from: '^(.*)/(.*)$',
+                from: '^([^-]*)/(.*)$',
                 to  : /values-\1\/\2/
+        ]
+
+        excludePattern = '**/*.txt'
+    }
+
+    crowdinDownload {
+        apiKey = CROWDIN_API_KEY
+        destination = "$projectDir/src/main/res"
+        projectId = 'gpslogger-for-android'
+
+        //Android projects
+        renameMapping = [
+                from: '^([^-]*)-([^-]*)/(.*)$',
+                to  : /values-\1-r\2\/\3/
         ]
 
         excludePattern = '**/*.txt'
