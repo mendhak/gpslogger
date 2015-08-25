@@ -29,7 +29,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 19
         versionCode 66
-        versionName "66"
+        versionName "66-issue346"
     }
 
     //Adding API keys to BuildConfig

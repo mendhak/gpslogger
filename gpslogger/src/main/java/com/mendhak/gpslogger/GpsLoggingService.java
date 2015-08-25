@@ -840,9 +840,15 @@ public class GpsLoggingService extends Service  {
             if (!Utilities.IsNullOrEmpty(geoidheight)) {
                 loc.setAltitude((float) loc.getAltitude() - Float.valueOf(geoidheight));
             }
+            else {
+                //If geoid height not present for adjustment, don't record an elevation at all.
+                loc.removeAltitude();
+            }
         }
 
-        loc.setAltitude(loc.getAltitude() - AppSettings.getSubtractAltitudeOffset());
+        if(loc.hasAltitude()){
+            loc.setAltitude(loc.getAltitude() - AppSettings.getSubtractAltitudeOffset());
+        }
     }
 
     private boolean isFromValidListener(Location loc) {
