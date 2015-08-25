@@ -112,6 +112,16 @@ public class GpsMainActivity extends ActionBarActivity
         LoadDefaultFragmentView();
         StartAndBindService();
         RegisterEventBus();
+
+        if(shouldStartLoggingOnAppLaunch()){
+            tracer.debug("Start logging on app launch");
+            EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
+        }
+    }
+
+    private boolean shouldStartLoggingOnAppLaunch(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        return prefs.getBoolean("startonapplaunch", false);
     }
 
     private void RegisterEventBus() {

@@ -169,6 +169,8 @@
 
     <string name="startonbootup_title">Start on bootup</string>
     <string name="startonbootup_summary">Launch app and start logging when phone starts</string>
+    <string name="startonapplaunch_title">Start on app launch</string>
+    <string name="startonapplaunch_summary">Start logging when the app is launched</string>
 
     <string name="autoemail_title">Email</string>
     <string name="autoemail_summary">Automatically emails the log file to an address of your choice</string>

@@ -9,6 +9,11 @@
         android:summary="@string/startonbootup_summary"
         android:key="startonbootup"/>
     <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+        android:title="@string/startonapplaunch_title"
+        android:summary="@string/startonapplaunch_summary"
+        android:key="startonapplaunch"/>
+
+    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
         android:title="@string/display_imperial_title"
         android:summary="@string/display_imperial_summary"
         android:key="useImperial"/>
