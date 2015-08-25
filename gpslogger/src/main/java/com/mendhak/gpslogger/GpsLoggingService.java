@@ -227,15 +227,12 @@ public class GpsLoggingService extends Service  {
                     boolean preferCellTower = bundle.getBoolean(IntentConstants.PREFER_CELLTOWER);
                     tracer.debug("Intent received - Set Prefer Cell Tower: " + String.valueOf(preferCellTower));
 
-                    List<String> listeners = AppSettings.GetDefaultListeners();
                     if(preferCellTower){
-                        listeners.remove(listeners.indexOf("gps"));
+                        AppSettings.setChosenListeners(0);
                     } else {
-                        listeners.remove(listeners.indexOf("network"));
-                        listeners.remove(listeners.indexOf("passive"));
+                        AppSettings.setChosenListeners(1,2);
                     }
-                    Set<String> listenersSet = new HashSet<String>(listeners);
-                    prefs.edit().putStringSet("listeners", listenersSet).apply();
+
                     needToStartGpsManager = true;
                 }
 

@@ -1,6 +1,6 @@
 package com.mendhak.gpslogger.settings;
 
-import android.content.SharedPreferences;
+
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -15,15 +15,12 @@ import java.util.*;
 
 public class PerformanceSettingsFragment  extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
-    SharedPreferences prefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.pref_performance);
-
-        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         Preference prefListeners = (Preference)findPreference("listeners");
         prefListeners.setOnPreferenceClickListener(this);
@@ -34,12 +31,10 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
 
         if(preference.getKey().equalsIgnoreCase("listeners")){
 
-            final SharedPreferences.Editor editor = prefs.edit();
-            final Set<String> currentListeners = AppSettings.getChosenListeners();
             ArrayList<Integer> chosenIndices = new ArrayList<Integer>();
             final List<String> defaultListeners = AppSettings.GetDefaultListeners();
 
-            for(String chosenListener : currentListeners){
+            for(String chosenListener : AppSettings.getChosenListeners()){
                 chosenIndices.add(defaultListeners.indexOf(chosenListener));
             }
 
@@ -52,17 +47,7 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
                         @Override
                         public boolean onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
 
-                            List<Integer> selectedItems = Arrays.asList(integers);
-                            final Set<String> chosenListeners = new HashSet<String>();
-
-                            for (Integer selectedItem : selectedItems) {
-                                chosenListeners.add(defaultListeners.get(selectedItem));
-                            }
-
-                            if (chosenListeners.size() > 0) {
-                                editor.putStringSet("listeners", chosenListeners);
-                                editor.apply();
-                            }
+                            AppSettings.setChosenListeners(integers);
 
                             return true;
                         }

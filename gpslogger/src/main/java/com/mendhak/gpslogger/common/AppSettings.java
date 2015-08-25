@@ -167,12 +167,45 @@ public class AppSettings extends Application {
     }
 
 
+    /**
+     * Gets a list of location providers that the app will listen to
+     */
     public static Set<String> getChosenListeners() {
         Set<String> defaultListeners = new HashSet<String>(GetDefaultListeners());
         return prefs.getStringSet("listeners", defaultListeners);
     }
 
+    /**
+     * Sets the list of location providers that the app will listen to
+     * @param chosenListeners a Set of listener names
+     */
+    public static void setChosenListeners(Set<String> chosenListeners){
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putStringSet("listeners", chosenListeners);
+        editor.apply();
+    }
 
+    /**
+     * Sets the list of location providers that the app will listen to given their array positions in {@link #GetDefaultListeners()}.
+     */
+    public static void setChosenListeners(Integer... listenerIndices){
+        List<Integer> selectedItems = Arrays.asList(listenerIndices);
+        final Set<String> chosenListeners = new HashSet<String>();
+
+        for (Integer selectedItem : selectedItems) {
+            chosenListeners.add(GetDefaultListeners().get(selectedItem));
+        }
+
+        if (chosenListeners.size() > 0) {
+            setChosenListeners(chosenListeners);
+
+        }
+    }
+
+
+    /**
+     * Default set of listeners
+     */
     public static List<String> GetDefaultListeners(){
 
         List<String> listeners = new ArrayList<String>();
@@ -290,7 +323,7 @@ public class AppSettings extends Application {
     private static boolean fileNamePrefixSerial;
 
     private static int absoluteTimeout;
-    private static Set<String> chosenListeners;
+
     private static boolean autoSendWhenIPressStop;
 
     private static boolean gDocsAutoSendEnabled;
