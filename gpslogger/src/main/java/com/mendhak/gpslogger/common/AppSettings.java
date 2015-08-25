@@ -25,10 +25,7 @@ import com.path.android.jobqueue.config.Configuration;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 public class AppSettings extends Application {
 
@@ -97,6 +94,96 @@ public class AppSettings extends Application {
         editor.apply();
     }
 
+    /**
+     * Whether to hide the buttons when displaying the app notification
+     */
+    public static boolean shouldHideNotificationButtons() {
+        return prefs.getBoolean("hide_notification_buttons", false);
+    }
+
+
+
+    /**
+     * Whether to display certain values using imperial units
+     */
+    public static boolean shouldUseImperial() {
+        return prefs.getBoolean("useImperial", false);
+    }
+
+
+
+    /**
+     * Whether to log to KML file
+     */
+    public static boolean shouldLogToKml() {
+        return prefs.getBoolean("log_kml", false);
+    }
+
+
+    /**
+     * Whether to log to GPX file
+     */
+    public static boolean shouldLogToGpx() {
+        return prefs.getBoolean("log_gpx", true);
+    }
+
+
+    /**
+     * Whether to log to a plaintext CSV file
+     */
+    public static boolean shouldLogToPlainText() {
+        return prefs.getBoolean("log_plain_text", false);
+    }
+
+
+    /**
+     * Whether to log to NMEA file
+     */
+    public static boolean shouldLogToNmea() {
+        return prefs.getBoolean("log_nmea", false);
+    }
+
+
+    /**
+     * Whether to log to a custom URL. The app will log to the URL returned by {@link #getCustomLoggingUrl()}
+     */
+    public static boolean shouldLogToCustomUrl() {
+        return prefs.getBoolean("log_customurl_enabled", false);
+    }
+
+    /**
+     * The custom URL to log to.  Relevant only if {@link #shouldLogToCustomUrl()} returns true.
+     */
+    public static String getCustomLoggingUrl() {
+        return prefs.getString("log_customurl_url", "");
+    }
+
+
+    /**
+     * Whether to log to OpenGTS.  See their <a href="http://opengts.sourceforge.net/OpenGTS_Config.pdf">installation guide</a>
+     */
+    public static boolean shouldLogToOpenGTS() {
+        return prefs.getBoolean("log_opengts", false);
+    }
+
+
+    public static Set<String> getChosenListeners() {
+        Set<String> defaultListeners = new HashSet<String>(GetDefaultListeners());
+        return prefs.getStringSet("listeners", defaultListeners);
+    }
+
+
+    public static List<String> GetDefaultListeners(){
+
+        List<String> listeners = new ArrayList<String>();
+        listeners.add("gps");
+        listeners.add("network");
+        listeners.add("passive");
+
+        return listeners;
+    }
+
+
 
     /**
      * Sets preferences in a generic manner from a .properties file
@@ -112,7 +199,7 @@ public class AppSettings extends Application {
                 editor.putBoolean(key.toString(), Boolean.parseBoolean(value));
             }
             else if(key.equals("listeners")){
-                List<String> availableListeners = Utilities.GetListeners();
+                List<String> availableListeners = GetDefaultListeners();
                 Set<String> chosenListeners = new HashSet<>();
                 String[] csvListeners = value.split(",");
                 for(String l : csvListeners){
@@ -243,19 +330,7 @@ public class AppSettings extends Application {
     }
 
 
-    /**
-     * @return the useImperial
-     */
-    public static boolean shouldUseImperial() {
-        return useImperial;
-    }
 
-    /**
-     * @param useImperial the useImperial to set
-     */
-    static void setUseImperial(boolean useImperial) {
-        AppSettings.useImperial = useImperial;
-    }
 
     /**
      * @return the newFileOnceADay
@@ -273,41 +348,10 @@ public class AppSettings extends Application {
 
 
 
-    /**
-     * @return the logToKml
-     */
-    public static boolean shouldLogToKml() {
-        return logToKml;
-    }
 
-    /**
-     * @param logToKml the logToKml to set
-     */
-    static void setLogToKml(boolean logToKml) {
-        AppSettings.logToKml = logToKml;
-    }
 
-    /**
-     * @return the logToGpx
-     */
-    public static boolean shouldLogToGpx() {
-        return logToGpx;
-    }
 
-    /**
-     * @param logToGpx the logToGpx to set
-     */
-    static void setLogToGpx(boolean logToGpx) {
-        AppSettings.logToGpx = logToGpx;
-    }
 
-    public static boolean shouldLogToPlainText() {
-        return logToPlainText;
-    }
-
-    static void setLogToPlainText(boolean logToPlainText) {
-        AppSettings.logToPlainText = logToPlainText;
-    }
 
 
 
@@ -509,13 +553,7 @@ public class AppSettings extends Application {
         AppSettings.autoSendEnabled = autoSendEnabled;
     }
 
-    public static boolean shouldLogToOpenGTS() {
-        return logToOpenGts;
-    }
 
-    public static void setLogToOpenGts(boolean logToOpenGts) {
-        AppSettings.logToOpenGts = logToOpenGts;
-    }
 
     public static boolean isOpenGtsAutoSendEnabled() {
         return openGtsAutoSendEnabled;
@@ -688,22 +726,9 @@ public class AppSettings extends Application {
 
     public static void setAskCustomFileNameEachTime(boolean askEachTime) { AppSettings.askCustomFileNameEachTime = askEachTime; }
 
-    public static boolean shouldLogToCustomUrl() {
-        return logToCustomUrl;
-    }
-
-    public static void setLogToCustomUrl(boolean logToCustomUrl) {
-        AppSettings.logToCustomUrl = logToCustomUrl;
-    }
 
 
-    public static String getCustomLoggingUrl() {
-        return customLoggingUrl;
-    }
 
-    public static void setCustomLoggingUrl(String customLoggingUrl) {
-        AppSettings.customLoggingUrl = customLoggingUrl;
-    }
 
     public static String getGpsLoggerFolder() {
         return gpsLoggerFolder;
@@ -737,13 +762,8 @@ public class AppSettings extends Application {
         AppSettings.absoluteTimeout = absoluteTimeout;
     }
 
-    public static boolean shouldLogToNmea() {
-        return logToNmea;
-    }
 
-    public static void setLogToNmea(boolean logToNmea) {
-        AppSettings.logToNmea = logToNmea;
-    }
+
 
     public static String getOpenGTSAccountName() {
         return openGTSAccountName;
@@ -753,13 +773,7 @@ public class AppSettings extends Application {
         AppSettings.openGTSAccountName = openGTSAccountName;
     }
 
-    public static void setChosenListeners(Set<String> chosenListeners) {
-        AppSettings.chosenListeners = chosenListeners;
-    }
 
-    public static Set<String> getChosenListeners() {
-        return chosenListeners;
-    }
 
     public static void setAutoSendWhenIPressStop(boolean autoSendWhenIPressStop) {
         AppSettings.autoSendWhenIPressStop = autoSendWhenIPressStop;
@@ -770,14 +784,6 @@ public class AppSettings extends Application {
     }
 
 
-
-    public static void setHideNotificationButtons(boolean hideNotificationButtons) {
-        AppSettings.hideNotificationButtons = hideNotificationButtons;
-    }
-
-    public static boolean shouldHideNotificationButtons() {
-        return hideNotificationButtons;
-    }
 
 
 

@@ -138,15 +138,7 @@ public class Utilities {
     }
 
 
-    public static List<String> GetListeners(){
 
-        List<String> listeners = new ArrayList<String>();
-        listeners.add("gps");
-        listeners.add("network");
-        listeners.add("passive");
-
-        return listeners;
-    }
 
     /**
      * Gets user preferences, populates the AppSettings class.
@@ -156,25 +148,8 @@ public class Utilities {
         tracer.debug("Getting preferences");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-        AppSettings.setHideNotificationButtons(prefs.getBoolean("hide_notification_buttons", false));
 
-        AppSettings.setUseImperial(prefs.getBoolean("useImperial", false));
 
-        AppSettings.setLogToKml(prefs.getBoolean("log_kml", false));
-
-        AppSettings.setLogToGpx(prefs.getBoolean("log_gpx", true));
-
-        AppSettings.setLogToPlainText(prefs.getBoolean("log_plain_text", false));
-
-        AppSettings.setLogToNmea(prefs.getBoolean("log_nmea", false));
-
-        AppSettings.setLogToCustomUrl(prefs.getBoolean("log_customurl_enabled", false));
-        AppSettings.setCustomLoggingUrl(prefs.getString("log_customurl_url", ""));
-
-        AppSettings.setLogToOpenGts(prefs.getBoolean("log_opengts", false));
-
-        Set<String> listeners = new HashSet<String>(GetListeners());
-        AppSettings.setChosenListeners(prefs.getStringSet("listeners", listeners));
 
         String minimumDistanceString = prefs.getString(
                 "distance_before_logging", "0");

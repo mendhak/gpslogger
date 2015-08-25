@@ -7,6 +7,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;
 
@@ -34,9 +35,9 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
         if(preference.getKey().equalsIgnoreCase("listeners")){
 
             final SharedPreferences.Editor editor = prefs.edit();
-            final Set<String> currentListeners = prefs.getStringSet("listeners", new HashSet<String>(Utilities.GetListeners()));
+            final Set<String> currentListeners = AppSettings.getChosenListeners();
             ArrayList<Integer> chosenIndices = new ArrayList<Integer>();
-            final List<String> defaultListeners = Utilities.GetListeners();
+            final List<String> defaultListeners = AppSettings.GetDefaultListeners();
 
             for(String chosenListener : currentListeners){
                 chosenIndices.add(defaultListeners.indexOf(chosenListener));

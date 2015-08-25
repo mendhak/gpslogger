@@ -227,7 +227,7 @@ public class GpsLoggingService extends Service  {
                     boolean preferCellTower = bundle.getBoolean(IntentConstants.PREFER_CELLTOWER);
                     tracer.debug("Intent received - Set Prefer Cell Tower: " + String.valueOf(preferCellTower));
 
-                    List<String> listeners = Utilities.GetListeners();
+                    List<String> listeners = AppSettings.GetDefaultListeners();
                     if(preferCellTower){
                         listeners.remove(listeners.indexOf("gps"));
                     } else {
