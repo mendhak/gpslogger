@@ -18,16 +18,24 @@
 package com.mendhak.gpslogger.common;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.config.Configuration;
 import de.greenrobot.event.EventBus;
+import org.slf4j.LoggerFactory;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 public class AppSettings extends Application {
 
     private static JobManager jobManager;
-
+    private static SharedPreferences prefs;
+    private static AppSettings instance;
+    private static org.slf4j.Logger tracer = LoggerFactory.getLogger(AppSettings.class.getSimpleName());
 
     @Override
     public void onCreate() {
@@ -40,14 +48,13 @@ public class AppSettings extends Application {
                 .minConsumerCount(2)
                 .build();
         jobManager = new JobManager(this, config);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 
     public static JobManager GetJobManager(){
         return jobManager;
     }
 
-
-    private static AppSettings instance;
     public AppSettings() {
         instance = this;
     }
@@ -55,6 +62,79 @@ public class AppSettings extends Application {
     public static AppSettings getInstance() {
         return instance;
     }
+
+
+
+    /**
+     * The minimum seconds interval between logging points
+     */
+    public static int getMinimumSeconds() {
+        String minimumSecondsString = prefs.getString("time_before_logging", "60");
+        return (Integer.valueOf(minimumSecondsString));
+    }
+
+    /**
+     * Whether to start logging on application launch
+     */
+    public static boolean shouldStartLoggingOnAppLaunch() {
+        return prefs.getBoolean("startonapplaunch", false);
+    }
+
+
+    /**
+     * Which navigation item the user selected
+     */
+    public static int getUserSelectedNavigationItem() {
+        return prefs.getInt("SPINNER_SELECTED_POSITION", 0);
+    }
+
+    /**
+     * Sets which navigation item the user selected
+     */
+    public static void setUserSelectedNavigationItem(int position) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("SPINNER_SELECTED_POSITION", position);
+        editor.apply();
+    }
+
+
+    /**
+     * Sets preferences in a generic manner from a .properties file
+     */
+    public static void SetPreferenceFromProperties(Properties props){
+        for(Object key : props.keySet()){
+
+            SharedPreferences.Editor editor = prefs.edit();
+            String value = props.getProperty(key.toString());
+            tracer.info("Setting preset property: " + key.toString() + " to " + value.toString());
+
+            if(value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")){
+                editor.putBoolean(key.toString(), Boolean.parseBoolean(value));
+            }
+            else if(key.equals("listeners")){
+                List<String> availableListeners = Utilities.GetListeners();
+                Set<String> chosenListeners = new HashSet<>();
+                String[] csvListeners = value.split(",");
+                for(String l : csvListeners){
+                    if(availableListeners.contains(l)){
+                        chosenListeners.add(l);
+                    }
+                }
+                if(chosenListeners.size() > 0){
+                    prefs.edit().putStringSet("listeners", chosenListeners).apply();
+                }
+
+            } else {
+                editor.putString(key.toString(), value);
+            }
+            editor.apply();
+        }
+    }
+
+
+
+
+
 
     // ---------------------------------------------------
     // User Preferences
@@ -229,20 +309,6 @@ public class AppSettings extends Application {
         AppSettings.logToPlainText = logToPlainText;
     }
 
-
-    /**
-     * @return the minimumSeconds
-     */
-    public static int getMinimumSeconds() {
-        return minimumSeconds;
-    }
-
-    /**
-     * @param minimumSeconds the minimumSeconds to set
-     */
-    static void setMinimumSeconds(int minimumSeconds) {
-        AppSettings.minimumSeconds = minimumSeconds;
-    }
 
 
     /**

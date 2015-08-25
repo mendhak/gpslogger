@@ -196,15 +196,7 @@ public class Utilities {
             AppSettings.setMinimumAccuracyInMeters(0);
         }
 
-        String minimumSecondsString = prefs.getString("time_before_logging",
-                "60");
 
-        if (minimumSecondsString != null && minimumSecondsString.length() > 0) {
-            AppSettings
-                    .setMinimumSeconds(Integer.valueOf(minimumSecondsString));
-        } else {
-            AppSettings.setMinimumSeconds(60);
-        }
 
         AppSettings.setKeepFix(prefs.getBoolean("keep_fix",
                 false));
