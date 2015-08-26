@@ -217,6 +217,207 @@ public class AppSettings extends Application {
     }
 
 
+    /**
+     * The minimum distance to have traveled before a point is recorded
+     */
+    public static int getMinimumDistanceInMeters() {
+        String minimumDistanceString = prefs.getString("distance_before_logging", "0");
+
+        if (minimumDistanceString != null && minimumDistanceString.length() > 0) {
+            return (Integer.valueOf(minimumDistanceString));
+        }
+
+        return 0;
+
+    }
+
+
+    /**
+     * The minimum accuracy of a point before the point is recorded
+     */
+    public static int getMinimumAccuracyInMeters() {
+        String minimumAccuracyString = prefs.getString("accuracy_before_logging", "0");
+
+        if (minimumAccuracyString != null && minimumAccuracyString.length() > 0) {
+            return (Integer.valueOf(minimumAccuracyString));
+        }
+
+        return 0;
+    }
+
+
+
+    /**
+     * Whether to keep GPS on between fixes
+     */
+    public static boolean shouldkeepFix() {
+        return prefs.getBoolean("keep_fix", false);
+    }
+
+
+    /**
+     * How long to keep retrying for a fix if one with the user-specified accuracy hasn't been found
+     */
+    public static int getRetryInterval() {
+        String retryIntervalString = prefs.getString("retry_time", "60");
+
+        if (retryIntervalString != null && retryIntervalString.length() > 0) {
+            return (Integer.valueOf(retryIntervalString));
+        }
+
+        return 60;
+    }
+
+
+    /**
+     * New file creation preference:
+     *     onceaday - once a day,
+     *     customfile - custom file (static),
+     *     everystart - every time the service starts
+     */
+    static String getNewFileCreation() {
+        return prefs.getString("new_file_creation", "onceaday");
+    }
+
+
+    /**
+     * Whether a new file should be created daily
+     */
+    public static boolean shouldCreateNewFileOnceADay() {
+        return (getNewFileCreation().equals("onceaday"));
+    }
+
+
+    /**
+     * Whether only a custom file should be created
+     */
+    public static boolean isCustomFile() {
+        return getNewFileCreation().equals("custom") || getNewFileCreation().equals("static");
+    }
+
+
+    /**
+     * The custom filename to use if {@link #isCustomFile()} returns true
+     */
+    public static String getCustomFileName() {
+        return prefs.getString("new_file_custom_name", "gpslogger");
+    }
+
+    /**
+     * Whether to prompt for a custom file name each time logging starts, if {@link #isCustomFile()} returns true
+     */
+    public static boolean shouldAskCustomFileNameEachTime() {
+        return prefs.getBoolean("new_file_custom_each_time", true);
+    }
+
+
+    /**
+     * Whether automatic sending to various targets (email,ftp, dropbox, etc) is enabled
+     * @return
+     */
+    public static boolean isAutoSendEnabled() {
+        return prefs.getBoolean("autosend_enabled", false);
+    }
+
+
+
+    /**
+     * The time, in minutes, before files are sent to the auto-send targets
+     */
+    public static Float getAutoSendDelay() {
+        try{
+            return Float.valueOf(prefs.getString("autosend_frequency_minutes", "60"));
+        }
+        catch (Exception e)  {
+            return 60f;
+        }
+    }
+
+
+    /**
+     * Whether to auto send to targets when logging is stopped
+     */
+    public static boolean shouldAutoSendWhenIPressStop() {
+        return prefs.getBoolean("autosend_frequency_whenstoppressed", false);
+    }
+
+
+    /**
+     * SMTP Server to use when sending emails
+     * @return
+     */
+    public static String getSmtpServer() {
+        return prefs.getString("smtp_server", "");
+    }
+
+    /**
+     * Whether automatic sending to email is enabled
+     */
+    public static boolean isEmailAutoSendEnabled() {
+        return prefs.getBoolean("autoemail_enabled", false);
+    }
+
+    /**
+     * SMTP Port to use when sending emails
+     */
+    public static String getSmtpPort() {
+        return prefs.getString("smtp_port", "25");
+    }
+
+    /**
+     * SMTP Username to use when sending emails
+     */
+    public static String getSmtpUsername() {
+        return prefs.getString("smtp_username", "");
+    }
+
+
+    /**
+     * SMTP Password to use when sending emails
+     */
+    public static String getSmtpPassword() {
+        return prefs.getString("smtp_password", "");
+    }
+
+
+    /**
+     * Whether SSL is enabled when sending emails
+     */
+    public static boolean isSmtpSsl() {
+        return prefs.getBoolean("smtp_ssl", true);
+    }
+
+    /**
+     * Email addresses to send to
+     */
+    public static String getAutoEmailTargets() {
+        return prefs.getString("autoemail_target", "");
+    }
+
+
+    /**
+     * SMTP from address to use
+
+     */
+    private static String getSmtpFrom() {
+        return prefs.getString("smtp_from", "");
+    }
+
+    /**
+     * The from address to use when sending an email, uses {@link #getSmtpUsername()} if {@link #getSmtpFrom()} is not specified
+     *
+     */
+    public static String getSenderAddress() {
+        if (getSmtpFrom() != null && getSmtpFrom().length() > 0) {
+            return getSmtpFrom();
+        }
+
+        return getSmtpUsername();
+    }
+
+
+
+
 
     /**
      * Sets preferences in a generic manner from a .properties file
@@ -365,19 +566,6 @@ public class AppSettings extends Application {
 
 
 
-    /**
-     * @return the newFileOnceADay
-     */
-    public static boolean shouldCreateNewFileOnceADay() {
-        return newFileOnceADay;
-    }
-
-    /**
-     * @param newFileOnceADay the newFileOnceADay to set
-     */
-    static void setNewFileOnceADay(boolean newFileOnceADay) {
-        AppSettings.newFileOnceADay = newFileOnceADay;
-    }
 
 
 
@@ -388,157 +576,24 @@ public class AppSettings extends Application {
 
 
 
-    /**
-     * @return the keepFix
-     */
-    public static boolean shouldkeepFix() {
-        return keepFix;
-    }
-
-    /**
-     * @param keepFix the keepFix to set
-     */
-    static void setKeepFix(boolean keepFix) {
-        AppSettings.keepFix = keepFix;
-    }
-
-    /**
-     * @return the retryInterval
-     */
-    public static int getRetryInterval() {
-        return retryInterval;
-    }
-
-    /**
-     * @param retryInterval the retryInterval to set
-     */
-    static void setRetryInterval(int retryInterval) {
-        AppSettings.retryInterval = retryInterval;
-    }
 
 
-    /**
-     * @return the minimumDistance
-     */
-    public static int getMinimumDistanceInMeters() {
-        return minimumDistance;
-    }
-
-    /**
-     * @param minimumDistance the minimumDistance to set
-     */
-    static void setMinimumDistanceInMeters(int minimumDistance) {
-        AppSettings.minimumDistance = minimumDistance;
-    }
-
-    /**
-     * @return the minimumAccuracy
-     */
-    public static int getMinimumAccuracyInMeters() {
-        return minimumAccuracy;
-    }
-
-    /**
-     * @param minimumAccuracy the minimumAccuracy to set
-     */
-    static void setMinimumAccuracyInMeters(int minimumAccuracy) {
-        AppSettings.minimumAccuracy = minimumAccuracy;
-    }
 
 
-    /**
-     * @return the newFileCreation
-     */
-    static String getNewFileCreation() {
-        return newFileCreation;
-    }
-
-    /**
-     * @param newFileCreation the newFileCreation to set
-     */
-    static void setNewFileCreation(String newFileCreation) {
-        AppSettings.newFileCreation = newFileCreation;
-    }
 
 
-    /**
-     * @return the autoSendDelay
-     */
-    public static Float getAutoSendDelay() {
-            return autoSendDelay;
-    }
-
-    /**
-     * @param autoSendDelay the autoSendDelay to set
-     */
-    static void setAutoSendDelay(Float autoSendDelay) {
-
-            AppSettings.autoSendDelay = autoSendDelay;
-    }
-
-    /**
-     * @return the emailAutoSendEnabled
-     */
-    public static boolean isEmailAutoSendEnabled() {
-        return emailAutoSendEnabled;
-    }
-
-    /**
-     * @param emailAutoSendEnabled the emailAutoSendEnabled to set
-     */
-    static void setEmailAutoSendEnabled(boolean emailAutoSendEnabled) {
-        AppSettings.emailAutoSendEnabled = emailAutoSendEnabled;
-    }
 
 
-    static void setSmtpServer(String smtpServer) {
-        AppSettings.smtpServer = smtpServer;
-    }
-
-    public static String getSmtpServer() {
-        return smtpServer;
-    }
-
-    static void setSmtpPort(String smtpPort) {
-        AppSettings.smtpPort = smtpPort;
-    }
-
-    public static String getSmtpPort() {
-        return smtpPort;
-    }
-
-    static void setSmtpUsername(String smtpUsername) {
-        AppSettings.smtpUsername = smtpUsername;
-    }
-
-    public static String getSmtpUsername() {
-        return smtpUsername;
-    }
 
 
-    static void setSmtpPassword(String smtpPassword) {
-        AppSettings.smtpPassword = smtpPassword;
-    }
 
-    public static String getSmtpPassword() {
-        return smtpPassword;
-    }
 
-    static void setSmtpSsl(boolean smtpSsl) {
-        AppSettings.smtpSsl = smtpSsl;
-    }
 
-    public static boolean isSmtpSsl() {
-        return smtpSsl;
-    }
 
-    static void setAutoEmailTargets(String autoEmailTargets) {
-        AppSettings.autoEmailTargets = autoEmailTargets;
-    }
 
-    public static String getAutoEmailTargets() {
-        return autoEmailTargets;
-    }
+
+
+
 
     public static boolean isDebugToFile() {
         return debugToFile;
@@ -557,34 +612,9 @@ public class AppSettings extends Application {
         AppSettings.shouldSendZipFile = shouldSendZipFile;
     }
 
-    private static String getSmtpFrom() {
-        return smtpFrom;
-    }
 
-    public static void setSmtpFrom(String smtpFrom) {
-        AppSettings.smtpFrom = smtpFrom;
-    }
 
-    /**
-     * Returns the from value to use when sending an email
-     *
-     * @return
-     */
-    public static String getSenderAddress() {
-        if (getSmtpFrom() != null && getSmtpFrom().length() > 0) {
-            return getSmtpFrom();
-        }
 
-        return getSmtpUsername();
-    }
-
-    public static boolean isAutoSendEnabled() {
-        return autoSendEnabled;
-    }
-
-    public static void setAutoSendEnabled(boolean autoSendEnabled) {
-        AppSettings.autoSendEnabled = autoSendEnabled;
-    }
 
 
 
@@ -739,25 +769,11 @@ public class AppSettings extends Application {
         AppSettings.ownCloudAutoSendEnabled = ownCloudAutoSendEnabled;
     }
 
-    public static String getCustomFileName() {
-        return customFileName;
-    }
 
-    public static void setCustomFileName(String customFileName) {
-        AppSettings.customFileName = customFileName;
-    }
 
-    public static boolean isCustomFile() {
-        return isCustomFile;
-    }
 
-    public static void setCustomFile(boolean customFile) {
-        AppSettings.isCustomFile = customFile;
-    }
 
-    public static boolean shouldAskCustomFileNameEachTime() { return askCustomFileNameEachTime; }
 
-    public static void setAskCustomFileNameEachTime(boolean askEachTime) { AppSettings.askCustomFileNameEachTime = askEachTime; }
 
 
 
@@ -807,14 +823,6 @@ public class AppSettings extends Application {
     }
 
 
-
-    public static void setAutoSendWhenIPressStop(boolean autoSendWhenIPressStop) {
-        AppSettings.autoSendWhenIPressStop = autoSendWhenIPressStop;
-    }
-
-    public static boolean shouldAutoSendWhenIPressStop() {
-        return autoSendWhenIPressStop;
-    }
 
 
 

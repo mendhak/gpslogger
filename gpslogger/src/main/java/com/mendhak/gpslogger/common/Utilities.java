@@ -150,84 +150,9 @@ public class Utilities {
 
 
 
-
-        String minimumDistanceString = prefs.getString(
-                "distance_before_logging", "0");
-
-        if (minimumDistanceString != null && minimumDistanceString.length() > 0) {
-            AppSettings.setMinimumDistanceInMeters(Integer
-                    .valueOf(minimumDistanceString));
-        } else {
-            AppSettings.setMinimumDistanceInMeters(0);
-        }
-
-        String minimumAccuracyString = prefs.getString(
-                "accuracy_before_logging", "0");
-
-        if (minimumAccuracyString != null && minimumAccuracyString.length() > 0) {
-            AppSettings.setMinimumAccuracyInMeters(Integer
-                    .valueOf(minimumAccuracyString));
-        } else {
-            AppSettings.setMinimumAccuracyInMeters(0);
-        }
-
-
-
-        AppSettings.setKeepFix(prefs.getBoolean("keep_fix",
-                false));
-
-        String retryIntervalString = prefs.getString("retry_time",
-                "60");
-
-        if (retryIntervalString != null && retryIntervalString.length() > 0) {
-            AppSettings
-                    .setRetryInterval(Integer.valueOf(retryIntervalString));
-        } else {
-            AppSettings.setRetryInterval(60);
-        }
-
-        /**
-         * New file creation preference: 
-         *     onceaday, 
-         *     custom file (static),
-         *     every time the service starts 
-         */
-        AppSettings.setNewFileCreation(prefs.getString("new_file_creation",
-                "onceaday"));
-
-        if (AppSettings.getNewFileCreation().equals("onceaday")) {
-            AppSettings.setNewFileOnceADay(true);
-            AppSettings.setCustomFile(false);
-        } else if (AppSettings.getNewFileCreation().equals("custom") || AppSettings.getNewFileCreation().equals("static")) {
-            AppSettings.setCustomFile(true);
-            AppSettings.setCustomFileName(prefs.getString("new_file_custom_name", "gpslogger"));
-            AppSettings.setAskCustomFileNameEachTime(prefs.getBoolean("new_file_custom_each_time", true));
-        } else /* new log with each start */ {
-            AppSettings.setNewFileOnceADay(false);
-            AppSettings.setCustomFile(false);
-        }
-
-        AppSettings.setAutoSendEnabled(prefs.getBoolean("autosend_enabled", false));
-
-        AppSettings.setEmailAutoSendEnabled(prefs.getBoolean("autoemail_enabled",
-                false));
-
-        try{
-            AppSettings.setAutoSendDelay(Float.valueOf(prefs.getString("autosend_frequency_minutes", "60")));
-        } catch (Exception e)  { AppSettings.setAutoSendDelay(60f);  }
-
-
-        AppSettings.setAutoSendWhenIPressStop(prefs.getBoolean("autosend_frequency_whenstoppressed", false));
-
-        AppSettings.setSmtpServer(prefs.getString("smtp_server", ""));
-        AppSettings.setSmtpPort(prefs.getString("smtp_port", "25"));
-        AppSettings.setSmtpSsl(prefs.getBoolean("smtp_ssl", true));
-        AppSettings.setSmtpUsername(prefs.getString("smtp_username", ""));
-        AppSettings.setSmtpPassword(prefs.getString("smtp_password", ""));
-        AppSettings.setAutoEmailTargets(prefs.getString("autoemail_target", ""));
         AppSettings.setDebugToFile(prefs.getBoolean("debugtofile", false));
         AppSettings.setShouldSendZipFile(prefs.getBoolean("autosend_sendzip", true));
-        AppSettings.setSmtpFrom(prefs.getString("smtp_from", ""));
+
         AppSettings.setOpenGtsAutoSendEnabled(prefs.getBoolean("autoopengts_enabled", false));
         AppSettings.setOpenGTSServer(prefs.getString("opengts_server", ""));
         AppSettings.setOpenGTSServerPort(prefs.getString("opengts_server_port", ""));
