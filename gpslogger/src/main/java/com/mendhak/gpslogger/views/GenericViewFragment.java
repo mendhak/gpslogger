@@ -20,7 +20,6 @@ package com.mendhak.gpslogger.views;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
@@ -99,8 +98,6 @@ public abstract class GenericViewFragment extends Fragment {
 
         if(AppSettings.shouldCreateCustomFile()  && AppSettings.shouldAskCustomFileNameEachTime()){
 
-            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
             MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
                     .title(R.string.new_file_custom_title)
                     .customView(R.layout.alertview, true)
@@ -112,9 +109,7 @@ public abstract class GenericViewFragment extends Fragment {
                             EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
 
                             if (!Utilities.IsNullOrEmpty(userInput.getText().toString()) && !userInput.getText().toString().equalsIgnoreCase(chosenFileName)) {
-                                SharedPreferences.Editor editor = prefs.edit();
-                                editor.putString("new_file_custom_name", userInput.getText().toString());
-                                editor.apply();
+                                AppSettings.setCustomFileName(userInput.getText().toString());
                             }
                             ToggleLogging();
                         }

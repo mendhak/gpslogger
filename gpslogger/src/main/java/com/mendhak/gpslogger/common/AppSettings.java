@@ -36,7 +36,6 @@ public class AppSettings extends Application {
     private static org.slf4j.Logger tracer = LoggerFactory.getLogger(AppSettings.class.getSimpleName());
 
 
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -252,9 +251,15 @@ public class AppSettings extends Application {
      * The custom URL to log to.  Relevant only if {@link #shouldLogToCustomUrl()} returns true.
      */
     public static String getCustomLoggingUrl() {
-        return prefs.getString("log_customurl_url", "");
+        return prefs.getString("log_customurl_url", "http://localhost/log?lat=%LAT&longitude=%LON&time=%TIME&s=%SPD");
     }
 
+    /**
+     * Sets custom URL to log to, if {@link #shouldLogToCustomUrl()} returns true.
+     */
+    public static void setCustomLoggingUrl(String customLoggingUrl) {
+        prefs.edit().putString("log_customurl_url", customLoggingUrl).apply();
+    }
 
     /**
      * Whether to log to OpenGTS.  See their <a href="http://opengts.sourceforge.net/OpenGTS_Config.pdf">installation guide</a>
@@ -350,6 +355,14 @@ public class AppSettings extends Application {
      */
     public static String getCustomFileName() {
         return prefs.getString("new_file_custom_name", "gpslogger");
+    }
+
+
+    /**
+     * Sets custom filename to use if {@link #shouldCreateCustomFile()} returns true
+     */
+    public static void setCustomFileName(String customFileName) {
+        prefs.edit().putString("new_file_custom_name", customFileName).apply();
     }
 
     /**
@@ -811,6 +824,15 @@ public class AppSettings extends Application {
     public static String getGpsLoggerFolder() {
         return prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(getInstance()).getAbsolutePath());
     }
+
+
+    /**
+     * Sets GPS Logger folder path
+     */
+    public static void setGpsLoggerFolder(String folderPath) {
+        prefs.edit().putString("gpslogger_folder", folderPath).apply();
+    }
+
 
 
     /**
