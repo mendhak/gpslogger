@@ -92,6 +92,13 @@ public class AppSettings extends Application {
         return prefs.getBoolean("startonapplaunch", false);
     }
 
+    /**
+     * Whether to start logging when phone is booted up
+     */
+    public static boolean shouldStartLoggingOnBootup() {
+        return prefs.getBoolean("startonbootup", false);
+    }
+
 
     /**
      * Which navigation item the user selected
@@ -727,6 +734,13 @@ public class AppSettings extends Application {
     }
 
 
+    /**
+     * Whether to autosend only if wifi is enabled
+     */
+    public static boolean shouldAutoSendOnWifiOnly() {
+        return  prefs.getBoolean("autosend_wifionly", false);
+    }
+
 
     /**
      * Sets preferences in a generic manner from a .properties file
@@ -760,5 +774,6 @@ public class AppSettings extends Application {
             editor.apply();
         }
     }
+
 
 }

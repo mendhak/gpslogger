@@ -79,8 +79,8 @@ public class Utilities {
             lc.reset();
 
             //final String LOG_DIR = "/sdcard/GPSLogger";
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            final String LOG_DIR = prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(context).getAbsolutePath());
+            //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            final String LOG_DIR = AppSettings.getGpsLoggerFolder();
 
             GpsRollingFileAppender<ILoggingEvent> rollingFileAppender = new GpsRollingFileAppender<ILoggingEvent>();
             rollingFileAppender.setAppend(true);
