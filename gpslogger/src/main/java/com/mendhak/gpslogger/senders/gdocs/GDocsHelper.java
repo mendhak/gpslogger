@@ -18,8 +18,6 @@
 package com.mendhak.gpslogger.senders.gdocs;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Utilities;
@@ -56,69 +54,14 @@ public class GDocsHelper implements IFileSender {
         return "oauth2:https://www.googleapis.com/auth/drive.file";
     }
 
-    /**
-     * Gets the stored authToken, which may be expired
-     */
-    public static String GetAuthToken(Context applicationContext) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        return prefs.getString("GDRIVE_AUTH_TOKEN", "");
-    }
-
-    /**
-     * Gets the stored account name
-     */
-    public static String GetAccountName(Context applicationContext) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        return prefs.getString("GDRIVE_ACCOUNT_NAME", "");
-    }
-
-    public static void SetAccountName(Context applicationContext, String accountName) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        SharedPreferences.Editor editor = prefs.edit();
-
-        editor.putString("GDRIVE_ACCOUNT_NAME", accountName);
-        editor.apply();
-    }
-
-    /**
-     * Saves the authToken and account name into shared preferences
-     */
-    public static void SaveAuthToken(Context applicationContext, String authToken) {
-        try {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-            SharedPreferences.Editor editor = prefs.edit();
-
-            tracer.debug("Saving GDocs authToken: " + authToken);
-            editor.putString("GDRIVE_AUTH_TOKEN", authToken);
-            editor.apply();
-        } catch (Exception e) {
-
-            tracer.error("GDocsHelper.SaveAuthToken", e);
-        }
-    }
-
-    /**
-     * Removes the authToken and account name from storage
-     */
-    public static void ClearAuthToken(Context applicationContext) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        SharedPreferences.Editor editor = prefs.edit();
-
-        editor.remove("GDRIVE_AUTH_TOKEN");
-        editor.remove("GDRIVE_ACCOUNT_NAME");
-        editor.apply();
-    }
 
 
     /**
      * Returns whether the app is authorized to perform Google API operations
      *
      */
-    public static boolean IsLinked(Context applicationContext) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        String gdocsAuthToken = prefs.getString("GDRIVE_AUTH_TOKEN", "");
-        String gdocsAccount = prefs.getString("GDRIVE_ACCOUNT_NAME", "");
-        return gdocsAuthToken.length() > 0 && gdocsAccount.length() > 0;
+    public static boolean IsLinked() {
+        return !Utilities.IsNullOrEmpty(AppSettings.getGoogleDriveAccountName()) && !Utilities.IsNullOrEmpty(AppSettings.getGoogleDriveAuthToken());
     }
 
     @Override
@@ -134,7 +77,7 @@ public class GDocsHelper implements IFileSender {
     }
 
     public void UploadFile(final String fileName, @Nullable String googleDriveFolderName) {
-        if (!IsLinked(context)) {
+        if (!IsLinked()) {
             EventBus.getDefault().post(new UploadEvents.GDocs(false));
             return;
         }

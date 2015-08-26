@@ -745,7 +745,7 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     private void UploadToGoogleDocs() {
-        if (!GDocsHelper.IsLinked(getApplicationContext())) {
+        if (!GDocsHelper.IsLinked()) {
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
             return;
         }

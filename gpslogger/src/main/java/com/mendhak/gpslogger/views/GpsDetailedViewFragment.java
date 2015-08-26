@@ -193,7 +193,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
                     sb.append(getString(R.string.autoftp_setup_title)).append("\n");
                 }
 
-                if (AppSettings.isGDocsAutoSendEnabled() && GDocsHelper.IsLinked(getActivity().getApplicationContext())) {
+                if (AppSettings.isGDocsAutoSendEnabled() && GDocsHelper.IsLinked()) {
                     sb.append(getString(R.string.gdocs_setup_title)).append("\n");
                 }
 

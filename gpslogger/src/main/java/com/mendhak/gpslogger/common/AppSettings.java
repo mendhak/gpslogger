@@ -36,6 +36,7 @@ public class AppSettings extends Application {
     private static org.slf4j.Logger tracer = LoggerFactory.getLogger(AppSettings.class.getSimpleName());
 
 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -564,6 +565,25 @@ public class AppSettings extends Application {
     public static String getGoogleDriveFolderName() {
         return prefs.getString("gdocs_foldername", "GPSLogger for Android");
     }
+
+    public static String getGoogleDriveAuthToken(){
+        return prefs.getString("GDRIVE_AUTH_TOKEN", "");
+    }
+
+
+    public static String getGoogleDriveAccountName() {
+        return prefs.getString("GDRIVE_ACCOUNT_NAME", "");
+    }
+
+    public static void setGoogleDriveAccountName(String accountName) {
+        prefs.edit().putString("GDRIVE_ACCOUNT_NAME", accountName).apply();
+    }
+
+    public static void setGoogleDriveAuthToken(String authToken) {
+        prefs.edit().putString("GDRIVE_AUTH_TOKEN", authToken).apply();
+    }
+
+
 
 
     /**

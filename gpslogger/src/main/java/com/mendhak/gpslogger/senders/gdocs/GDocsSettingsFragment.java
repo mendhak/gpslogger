@@ -125,7 +125,7 @@ public class GDocsSettingsFragment extends PreferenceFragment
     }
 
     private void ResetPreferenceAppearance(Preference resetPref, Preference testPref, Preference folderPref) {
-        if (GDocsHelper.IsLinked(getActivity())) {
+        if (GDocsHelper.IsLinked()) {
             resetPref.setTitle(R.string.gdocs_clearauthorization);
             resetPref.setSummary(R.string.gdocs_clearauthorization_summary);
             testPref.setEnabled(true);
@@ -142,10 +142,12 @@ public class GDocsSettingsFragment extends PreferenceFragment
         if (preference.getKey().equalsIgnoreCase("gdocs_test")) {
             UploadTestFileToGoogleDocs();
         } else {
-            if (GDocsHelper.IsLinked(getActivity())) {
+            if (GDocsHelper.IsLinked()) {
                 //Clear authorization
-                GoogleAuthUtil.invalidateToken(getActivity(), GDocsHelper.GetAuthToken(getActivity()));
-                GDocsHelper.ClearAuthToken(getActivity());
+                GoogleAuthUtil.invalidateToken(getActivity(), AppSettings.getGoogleDriveAuthToken());
+                AppSettings.setGoogleDriveAuthToken("");
+                AppSettings.setGoogleDriveAccountName("");
+
                 startActivity(new Intent(getActivity(), GpsMainActivity.class));
                 getActivity().finish();
             } else {
@@ -175,8 +177,9 @@ public class GDocsSettingsFragment extends PreferenceFragment
                     String accountName = data.getStringExtra(
                             AccountManager.KEY_ACCOUNT_NAME);
 
-                    GDocsHelper.SetAccountName(getActivity(), accountName);
-                    tracer.debug(accountName);
+                    AppSettings.setGoogleDriveAccountName(accountName);
+
+                    tracer.debug("Account:" + accountName);
                     getAndUseAuthTokenInAsyncTask();
                 }
                 break;
@@ -196,7 +199,7 @@ public class GDocsSettingsFragment extends PreferenceFragment
             // Retrieve a token for the given account and scope. It will always return either
             // a non-empty String or throw an exception.
 
-            return GoogleAuthUtil.getToken(getActivity(), GDocsHelper.GetAccountName(getActivity()), GDocsHelper.GetOauth2Scope());
+            return GoogleAuthUtil.getToken(getActivity(), AppSettings.getGoogleDriveAccountName(), GDocsHelper.GetOauth2Scope());
         } catch (GooglePlayServicesAvailabilityException playEx) {
             Dialog alert = GooglePlayServicesUtil.getErrorDialog(
                     playEx.getConnectionStatusCode(),
@@ -239,8 +242,8 @@ public class GDocsSettingsFragment extends PreferenceFragment
             @Override
             protected void onPostExecute(String authToken) {
                 if (authToken != null) {
-                    GDocsHelper.SaveAuthToken(getActivity(), authToken);
-                    tracer.debug(authToken);
+                    AppSettings.setGoogleDriveAuthToken(authToken);
+                    tracer.debug("Auth token:" + authToken);
                     VerifyGooglePlayServices();
                 }
 
