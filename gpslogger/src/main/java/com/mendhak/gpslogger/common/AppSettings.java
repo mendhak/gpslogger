@@ -566,23 +566,99 @@ public class AppSettings extends Application {
         return prefs.getString("gdocs_foldername", "GPSLogger for Android");
     }
 
+    /**
+     * Google Drive OAuth token
+     */
     public static String getGoogleDriveAuthToken(){
         return prefs.getString("GDRIVE_AUTH_TOKEN", "");
     }
 
-
-    public static String getGoogleDriveAccountName() {
-        return prefs.getString("GDRIVE_ACCOUNT_NAME", "");
-    }
-
-    public static void setGoogleDriveAccountName(String accountName) {
-        prefs.edit().putString("GDRIVE_ACCOUNT_NAME", accountName).apply();
-    }
-
+    /**
+     * Sets OAuth token for Google Drive auto send
+     */
     public static void setGoogleDriveAuthToken(String authToken) {
         prefs.edit().putString("GDRIVE_AUTH_TOKEN", authToken).apply();
     }
 
+    /**
+     * Gets Google account used for Google Drive auto send
+     */
+    public static String getGoogleDriveAccountName() {
+        return prefs.getString("GDRIVE_ACCOUNT_NAME", "");
+    }
+
+    /**
+     * Sets account name to use for Google Drive auto send
+     */
+    public static void setGoogleDriveAccountName(String accountName) {
+        prefs.edit().putString("GDRIVE_ACCOUNT_NAME", accountName).apply();
+    }
+
+
+    /**
+     * Sets OpenStreetMap OAuth Token for auto send
+     */
+    public static void setOSMAccessToken(String token) {
+        prefs.edit().putString("osm_accesstoken", token).apply();
+    }
+
+
+    /**
+     * Gets access token for OpenStreetMap auto send
+     */
+    public static String getOSMAccessToken() {
+        return prefs.getString("osm_accesstoken", "");
+    }
+
+
+    /**
+     * Sets OpenStreetMap OAuth secret for auto send
+     */
+    public static void setOSMAccessTokenSecret(String secret) {
+        prefs.edit().putString("osm_accesstokensecret", secret).apply();
+    }
+
+    /**
+     * Gets access token secret for OpenStreetMap auto send
+     */
+    public static String getOSMAccessTokenSecret() {
+        return prefs.getString("osm_accesstokensecret", "");
+    }
+
+    /**
+     * Sets request token for OpenStreetMap auto send
+     */
+    public static void setOSMRequestToken(String token) {
+        prefs.edit().putString("osm_requesttoken", token).apply();
+    }
+
+    /**
+     * Sets request token secret for OpenStreetMap auto send
+     */
+    public static void setOSMRequestTokenSecret(String secret) {
+        prefs.edit().putString("osm_requesttokensecret", secret).apply();
+    }
+
+    /**
+     * Description of uploaded trace on OpenStreetMap
+     */
+    public static String getOSMDescription() {
+        return prefs.getString("osm_description", "");
+    }
+
+    /**
+     * Tags associated with uploaded trace on OpenStreetMap
+     */
+    public static String getOSMTags() {
+        return prefs.getString("osm_tags", "");
+    }
+
+    /**
+     * Visibility of uploaded trace on OpenStreetMap
+     */
+    public static String getOSMVisibility() {
+        return prefs.getString("osm_visibility", "private");
+    }
 
 
 
