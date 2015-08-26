@@ -138,7 +138,6 @@ public class GpsMainActivity extends ActionBarActivity
     @Override
     protected void onResume() {
         super.onResume();
-        GetPreferences();
         StartAndBindService();
 
         if (Session.hasDescription()) {
@@ -996,11 +995,6 @@ public class GpsMainActivity extends ActionBarActivity
     public void OnWaitingForLocation(boolean inProgress) {
         ProgressBar fixBar = (ProgressBar) findViewById(R.id.progressBarGpsFix);
         fixBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
-    }
-
-
-    private void GetPreferences() {
-        Utilities.PopulateAppSettings(getApplicationContext());
     }
 
 

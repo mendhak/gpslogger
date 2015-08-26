@@ -22,7 +22,6 @@ public class UtilitiesTests extends AndroidTestCase {
 
     public void setUp() {
         this.context = new UtilitiesMockContext(getContext());
-        Utilities.PopulateAppSettings(context);
         final SharedPreferences.Editor preferencesEditor = PreferenceManager.getDefaultSharedPreferences(context).edit();
         preferencesEditor.clear().commit();
     }

@@ -97,7 +97,6 @@ public abstract class GenericViewFragment extends Fragment {
             return;
         }
 
-        Utilities.PopulateAppSettings(getActivity());
         if(AppSettings.isCustomFile()  && AppSettings.shouldAskCustomFileNameEachTime()){
 
             final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());

@@ -140,16 +140,6 @@ public class Utilities {
 
 
 
-    /**
-     * Gets user preferences, populates the AppSettings class.
-     */
-    public static void PopulateAppSettings(Context context) {
-
-        tracer.debug("Getting preferences");
-
-    }
-
-
     public static void ShowProgress(Context context, String title, String message) {
         if (context != null) {
 

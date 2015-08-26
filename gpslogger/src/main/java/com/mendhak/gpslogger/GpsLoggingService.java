@@ -50,7 +50,6 @@ import com.mendhak.gpslogger.senders.AlarmReceiver;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
-import org.slf4j.MarkerFactory;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -181,8 +180,6 @@ public class GpsLoggingService extends Service  {
     }
 
     private void HandleIntent(Intent intent) {
-
-        GetPreferences();
 
         ActivityRecognitionResult arr = ActivityRecognitionResult.extractResult(intent);
         if(arr != null){
@@ -369,18 +366,12 @@ public class GpsLoggingService extends Service  {
         }
     }
 
-    /**
-     * Gets preferences chosen by the user and populates the AppSettings object.
-     * Also sets up email timers if required.
-     */
-    private void GetPreferences() {
-        Utilities.PopulateAppSettings(getApplicationContext());
+    private void ResetAutoSendTimersIfNecessary() {
 
         if (Session.getAutoSendDelay() != AppSettings.getAutoSendDelay()) {
             Session.setAutoSendDelay(AppSettings.getAutoSendDelay());
             SetupAutoSendTimers();
         }
-
     }
 
     /**
@@ -404,7 +395,7 @@ public class GpsLoggingService extends Service  {
 
         Session.setStarted(true);
 
-        GetPreferences();
+        ResetAutoSendTimersIfNecessary();
         ShowNotification();
         SetupAutoSendTimers();
         ResetCurrentFileName(true);
@@ -538,8 +529,6 @@ public class GpsLoggingService extends Service  {
      * then nothing is requested.
      */
     private void StartGpsManager() {
-
-        GetPreferences();
 
         //If the user has been still for more than the minimum seconds
         if(userHasBeenStillForTooLong()) {
@@ -817,7 +806,7 @@ public class GpsLoggingService extends Service  {
         }
 
         WriteToFile(loc);
-        GetPreferences();
+        ResetAutoSendTimersIfNecessary();
         StopManagerAndResetAlarm();
 
         EventBus.getDefault().post(new ServiceEvents.LocationUpdate(loc));
