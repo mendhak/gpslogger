@@ -150,16 +150,14 @@ public class Utilities {
 
 
 
-        AppSettings.setDebugToFile(prefs.getBoolean("debugtofile", false));
-        AppSettings.setShouldSendZipFile(prefs.getBoolean("autosend_sendzip", true));
 
-        AppSettings.setOpenGtsAutoSendEnabled(prefs.getBoolean("autoopengts_enabled", false));
-        AppSettings.setOpenGTSServer(prefs.getString("opengts_server", ""));
-        AppSettings.setOpenGTSServerPort(prefs.getString("opengts_server_port", ""));
-        AppSettings.setOpenGTSServerCommunicationMethod(prefs.getString("opengts_server_communication_method", ""));
-        AppSettings.setOpenGTSServerPath(prefs.getString("autoopengts_server_path", ""));
-        AppSettings.setOpenGTSDeviceId(prefs.getString("opengts_device_id", ""));
-        AppSettings.setOpenGTSAccountName(prefs.getString("opengts_accountname",""));
+
+
+
+
+
+
+
 
         AppSettings.setGDocsAutoSendEnabled(prefs.getBoolean("gdocs_enabled", false));
         AppSettings.setDropboxAutoSendEnabled(prefs.getBoolean("dropbox_enabled", false));

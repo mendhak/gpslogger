@@ -416,6 +416,78 @@ public class AppSettings extends Application {
     }
 
 
+    /**
+     * Whether to write log messages to a debuglog.txt file
+     */
+    public static boolean isDebugToFile() {
+        return prefs.getBoolean("debugtofile", false);
+    }
+
+
+    /**
+     * Whether to zip the files up before auto sending to targets
+     */
+    public static boolean shouldSendZipFile() {
+        return prefs.getBoolean("autosend_sendzip", true);
+    }
+
+
+    /**
+     * Whether to auto send to OpenGTS Server
+     */
+    public static boolean isOpenGtsAutoSendEnabled() {
+        return prefs.getBoolean("autoopengts_enabled", false);
+    }
+
+
+    /**
+     * OpenGTS Server name
+     */
+    public static String getOpenGTSServer() {
+        return prefs.getString("opengts_server", "");
+    }
+
+
+    /**
+     * OpenGTS Server Port
+     */
+    public static String getOpenGTSServerPort() {
+        return prefs.getString("opengts_server_port", "");
+    }
+
+
+    /**
+     * Communication method when talking to OpenGTS (either UDP or HTTP)
+     */
+    public static String getOpenGTSServerCommunicationMethod() {
+        return prefs.getString("opengts_server_communication_method", "");
+    }
+
+
+    /**
+     * OpenGTS Server Path
+     */
+    public static String getOpenGTSServerPath() {
+        return prefs.getString("autoopengts_server_path", "");
+    }
+
+
+    /**
+     * Device ID for OpenGTS communication
+     */
+    public static String getOpenGTSDeviceId() {
+        return prefs.getString("opengts_device_id", "");
+    }
+
+
+    /**
+     * Account name for OpenGTS communication
+     */
+    public static String getOpenGTSAccountName() {
+        return prefs.getString("opengts_accountname","");
+    }
+
+
 
 
 
@@ -595,76 +667,9 @@ public class AppSettings extends Application {
 
 
 
-    public static boolean isDebugToFile() {
-        return debugToFile;
-    }
-
-    public static void setDebugToFile(boolean debugToFile) {
-        AppSettings.debugToFile = debugToFile;
-    }
-
-
-    public static boolean shouldSendZipFile() {
-        return shouldSendZipFile;
-    }
-
-    public static void setShouldSendZipFile(boolean shouldSendZipFile) {
-        AppSettings.shouldSendZipFile = shouldSendZipFile;
-    }
 
 
 
-
-
-
-
-    public static boolean isOpenGtsAutoSendEnabled() {
-        return openGtsAutoSendEnabled;
-    }
-
-    public static void setOpenGtsAutoSendEnabled(boolean openGtsAutoSendEnabled) {
-        AppSettings.openGtsAutoSendEnabled = openGtsAutoSendEnabled;
-    }
-
-    public static String getOpenGTSServer() {
-        return openGTSServer;
-    }
-
-    public static void setOpenGTSServer(String openGTSServer) {
-        AppSettings.openGTSServer = openGTSServer;
-    }
-
-    public static String getOpenGTSServerPort() {
-        return openGTSServerPort;
-    }
-
-    public static void setOpenGTSServerPort(String openGTSServerPort) {
-        AppSettings.openGTSServerPort = openGTSServerPort;
-    }
-
-    public static String getOpenGTSServerCommunicationMethod() {
-        return openGTSServerCommunicationMethod;
-    }
-
-    public static void setOpenGTSServerCommunicationMethod(String openGTSServerCommunicationMethod) {
-        AppSettings.openGTSServerCommunicationMethod = openGTSServerCommunicationMethod;
-    }
-
-    public static String getOpenGTSServerPath() {
-        return openGTSServerPath;
-    }
-
-    public static void setOpenGTSServerPath(String openGTSServerPath) {
-        AppSettings.openGTSServerPath = openGTSServerPath;
-    }
-
-    public static String getOpenGTSDeviceId() {
-        return openGTSDeviceId;
-    }
-
-    public static void setOpenGTSDeviceId(String openGTSDeviceId) {
-        AppSettings.openGTSDeviceId = openGTSDeviceId;
-    }
 
 
     public static String getFtpServerName() {
@@ -814,13 +819,6 @@ public class AppSettings extends Application {
 
 
 
-    public static String getOpenGTSAccountName() {
-        return openGTSAccountName;
-    }
-
-    public static void setOpenGTSAccountName(String openGTSAccountName) {
-        AppSettings.openGTSAccountName = openGTSAccountName;
-    }
 
 
 
