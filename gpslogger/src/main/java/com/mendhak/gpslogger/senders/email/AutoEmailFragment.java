@@ -17,7 +17,6 @@
 
 package com.mendhak.gpslogger.senders.email;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.*;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -25,6 +24,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
 import com.mendhak.gpslogger.common.Utilities;
@@ -159,24 +159,18 @@ public class AutoEmailFragment extends PreferenceValidationFragment implements
     }
 
     private void SetSmtpValues(String server, String port, boolean useSsl) {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor editor = prefs.edit();
 
         MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
         MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
         CustomSwitchPreference chkUseSsl = (CustomSwitchPreference) findPreference("smtp_ssl");
 
-        // Yahoo
         txtSmtpServer.setText(server);
-        editor.putString("smtp_server", server);
+        AppSettings.setSmtpServer(server);
+
         txtSmtpPort.setText(port);
-        editor.putString("smtp_port", port);
+        AppSettings.setSmtpPort(port);
         chkUseSsl.setChecked(useSsl);
-        editor.putBoolean("smtp_ssl", useSsl);
-
-        editor.apply();
-
+        AppSettings.setSmtpSsl(useSsl);
     }
 
 

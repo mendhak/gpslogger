@@ -72,14 +72,93 @@ public class AppSettings extends Application {
     /**
      * The minimum seconds interval between logging points
      */
-    public static int getMinimumSeconds() {
+    public static int getMinimumLoggingInterval() {
         return (Integer.valueOf(prefs.getString("time_before_logging", "60")));
     }
 
-    public static void setMinimumSeconds(int minimumSeconds) {
+    /**
+     * Sets the minimum time interval between logging points
+     *
+     * @param minimumSeconds - in seconds
+     */
+    public static void setMinimumLoggingInterval(int minimumSeconds) {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("time_before_logging", String.valueOf(minimumSeconds));
         editor.apply();
+    }
+
+
+    /**
+     * The minimum distance, in meters, to have traveled before a point is recorded
+     */
+    public static int getMinimumDistanceInterval() {
+        return (Integer.valueOf(prefs.getString("distance_before_logging", "0")));
+    }
+
+    /**
+     * Sets the minimum distance to have traveled before a point is recorded
+     *
+     * @param distanceBeforeLogging - in meters
+     */
+    public static void setMinimumDistanceInMeters(int distanceBeforeLogging) {
+        prefs.edit().putString("distance_before_logging", String.valueOf(distanceBeforeLogging)).apply();
+    }
+
+
+    /**
+     * The minimum accuracy of a point before the point is recorded, in meters
+     */
+    public static int getMinimumAccuracy() {
+        return (Integer.valueOf(prefs.getString("accuracy_before_logging", "0")));
+    }
+
+
+    /**
+     * Whether to keep GPS on between fixes
+     */
+    public static boolean shouldKeepGPSOnBetweenFixes() {
+        return prefs.getBoolean("keep_fix", false);
+    }
+
+    /**
+     * Set whether to keep GPS on between fixes
+     */
+    public static void setShouldKeepGPSOnBetweenFixes(boolean keepFix) {
+        prefs.edit().putBoolean("keep_fix", keepFix).apply();
+    }
+
+
+    /**
+     * How long to keep retrying for a fix if one with the user-specified accuracy hasn't been found
+     */
+    public static int getLoggingRetryPeriod() {
+        return (Integer.valueOf(prefs.getString("retry_time", "60")));
+    }
+
+
+    /**
+     * Sets how long to keep trying for an accurate fix
+     *
+     * @param retryInterval in seconds
+     */
+    public static void setLoggingRetryPeriod(int retryInterval) {
+        prefs.edit().putString("retry_time", String.valueOf(retryInterval)).apply();
+    }
+
+    /**
+     * How long to keep retrying for an accurate point before giving up
+     */
+    public static int getAbsoluteTimeoutForAcquiringPosition() {
+        return (Integer.valueOf(prefs.getString("absolute_timeout", "120")));
+    }
+
+    /**
+     * Sets how long to keep retrying for an accurate point before giving up
+     *
+     * @param absoluteTimeout in seconds
+     */
+    public static void setAbsoluteTimeoutForAcquiringPosition(int absoluteTimeout) {
+        prefs.edit().putString("absolute_timeout", String.valueOf(absoluteTimeout)).apply();
     }
 
     /**
@@ -124,7 +203,7 @@ public class AppSettings extends Application {
     /**
      * Whether to display certain values using imperial units
      */
-    public static boolean shouldUseImperial() {
+    public static boolean shouldDisplayImperialUnits() {
         return prefs.getBoolean("useImperial", false);
     }
 
@@ -235,73 +314,7 @@ public class AppSettings extends Application {
     }
 
 
-    /**
-     * The minimum distance to have traveled before a point is recorded
-     */
-    public static int getMinimumDistanceInMeters() {
-        return (Integer.valueOf(prefs.getString("distance_before_logging", "0")));
-    }
 
-    public static void setMinimumDistanceInMeters(int distanceBeforeLogging) {
-        prefs.edit().putString("distance_before_logging", String.valueOf(distanceBeforeLogging)).apply();
-    }
-
-
-    /**
-     * The minimum accuracy of a point before the point is recorded
-     */
-    public static int getMinimumAccuracyInMeters() {
-        return (Integer.valueOf(prefs.getString("accuracy_before_logging", "0")));
-    }
-
-
-    /**
-     * Whether to keep GPS on between fixes
-     */
-    public static boolean shouldkeepFix() {
-        return prefs.getBoolean("keep_fix", false);
-    }
-
-    /**
-     * Set whether to keep GPS on between fixes
-     */
-    public static void setShouldKeepFix(boolean keepFix) {
-        prefs.edit().putBoolean("keep_fix", keepFix).apply();
-    }
-
-
-    /**
-     * How long to keep retrying for a fix if one with the user-specified accuracy hasn't been found
-     */
-    public static int getRetryInterval() {
-        return (Integer.valueOf(prefs.getString("retry_time", "60")));
-    }
-
-
-    /**
-     * Sets how long to keep trying for an accurate fix
-     *
-     * @param retryInterval in seconds
-     */
-    public static void setRetryInterval(int retryInterval) {
-        prefs.edit().putString("retry_time", String.valueOf(retryInterval)).apply();
-    }
-
-    /**
-     * How long to keep retrying for an accurate point before giving up
-     */
-    public static int getAbsoluteTimeout() {
-        return (Integer.valueOf(prefs.getString("absolute_timeout", "120")));
-    }
-
-    /**
-     * Sets how long to keep retrying for an accurate point before giving up
-     *
-     * @param absoluteTimeout in seconds
-     */
-    public static void setAbsoluteTimeout(int absoluteTimeout) {
-        prefs.edit().putString("absolute_timeout", String.valueOf(absoluteTimeout)).apply();
-    }
 
 
     /**
@@ -310,7 +323,7 @@ public class AppSettings extends Application {
      * customfile - custom file (static),
      * everystart - every time the service starts
      */
-    static String getNewFileCreation() {
+    static String getNewFileCreationMode() {
         return prefs.getString("new_file_creation", "onceaday");
     }
 
@@ -319,27 +332,27 @@ public class AppSettings extends Application {
      * Whether a new file should be created daily
      */
     public static boolean shouldCreateNewFileOnceADay() {
-        return (getNewFileCreation().equals("onceaday"));
+        return (getNewFileCreationMode().equals("onceaday"));
     }
 
 
     /**
      * Whether only a custom file should be created
      */
-    public static boolean isCustomFile() {
-        return getNewFileCreation().equals("custom") || getNewFileCreation().equals("static");
+    public static boolean shouldCreateCustomFile() {
+        return getNewFileCreationMode().equals("custom") || getNewFileCreationMode().equals("static");
     }
 
 
     /**
-     * The custom filename to use if {@link #isCustomFile()} returns true
+     * The custom filename to use if {@link #shouldCreateCustomFile()} returns true
      */
     public static String getCustomFileName() {
         return prefs.getString("new_file_custom_name", "gpslogger");
     }
 
     /**
-     * Whether to prompt for a custom file name each time logging starts, if {@link #isCustomFile()} returns true
+     * Whether to prompt for a custom file name each time logging starts, if {@link #shouldCreateCustomFile()} returns true
      */
     public static boolean shouldAskCustomFileNameEachTime() {
         return prefs.getBoolean("new_file_custom_each_time", true);
@@ -357,7 +370,7 @@ public class AppSettings extends Application {
     /**
      * The time, in minutes, before files are sent to the auto-send targets
      */
-    public static Float getAutoSendDelay() {
+    public static Float getAutoSendInterval() {
         return Float.valueOf(prefs.getString("autosend_frequency_minutes", "60"));
     }
 
@@ -365,8 +378,17 @@ public class AppSettings extends Application {
     /**
      * Whether to auto send to targets when logging is stopped
      */
-    public static boolean shouldAutoSendWhenIPressStop() {
+    public static boolean shouldAutoSendOnStopLogging() {
         return prefs.getBoolean("autosend_frequency_whenstoppressed", false);
+    }
+
+
+
+    /**
+     * Whether automatic sending to email is enabled
+     */
+    public static boolean isEmailAutoSendEnabled() {
+        return prefs.getBoolean("autoemail_enabled", false);
     }
 
 
@@ -378,10 +400,10 @@ public class AppSettings extends Application {
     }
 
     /**
-     * Whether automatic sending to email is enabled
+     * Sets SMTP Server to use when sending emails
      */
-    public static boolean isEmailAutoSendEnabled() {
-        return prefs.getBoolean("autoemail_enabled", false);
+    public static void setSmtpServer(String smtpServer) {
+        prefs.edit().putString("smtp_server", smtpServer).apply();
     }
 
     /**
@@ -389,6 +411,10 @@ public class AppSettings extends Application {
      */
     public static String getSmtpPort() {
         return prefs.getString("smtp_port", "25");
+    }
+
+    public static void setSmtpPort(String port) {
+        prefs.edit().putString("smtp_port", port).apply();
     }
 
     /**
@@ -415,6 +441,14 @@ public class AppSettings extends Application {
     }
 
     /**
+     * Sets whether SSL is enabled when sending emails
+     */
+    public static void setSmtpSsl(boolean smtpSsl) {
+        prefs.edit().putBoolean("smtp_ssl", smtpSsl).apply();
+    }
+
+
+    /**
      * Email addresses to send to
      */
     public static String getAutoEmailTargets() {
@@ -432,7 +466,7 @@ public class AppSettings extends Application {
     /**
      * The from address to use when sending an email, uses {@link #getSmtpUsername()} if {@link #getSmtpFrom()} is not specified
      */
-    public static String getSenderAddress() {
+    public static String getSmtpSenderAddress() {
         if (getSmtpFrom() != null && getSmtpFrom().length() > 0) {
             return getSmtpFrom();
         }
