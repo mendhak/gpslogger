@@ -26,12 +26,10 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.*;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -218,8 +216,6 @@ public class GpsLoggingService extends Service  {
                     EventBus.getDefault().post(new CommandEvents.Annotate(bundle.getString(IntentConstants.SET_DESCRIPTION)));
                 }
 
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
                 if (bundle.get(IntentConstants.PREFER_CELLTOWER) != null) {
                     boolean preferCellTower = bundle.getBoolean(IntentConstants.PREFER_CELLTOWER);
                     tracer.debug("Intent received - Set Prefer Cell Tower: " + String.valueOf(preferCellTower));
@@ -236,35 +232,35 @@ public class GpsLoggingService extends Service  {
                 if (bundle.get(IntentConstants.TIME_BEFORE_LOGGING) != null) {
                     int timeBeforeLogging = bundle.getInt(IntentConstants.TIME_BEFORE_LOGGING);
                     tracer.debug("Intent received - Set Time Before Logging: " + String.valueOf(timeBeforeLogging));
-                    prefs.edit().putString("time_before_logging", String.valueOf(timeBeforeLogging)).apply();
+                    AppSettings.setMinimumSeconds(timeBeforeLogging);
                     needToStartGpsManager = true;
                 }
 
                 if (bundle.get(IntentConstants.DISTANCE_BEFORE_LOGGING) != null) {
                     int distanceBeforeLogging = bundle.getInt(IntentConstants.DISTANCE_BEFORE_LOGGING);
                     tracer.debug("Intent received - Set Distance Before Logging: " + String.valueOf(distanceBeforeLogging));
-                    prefs.edit().putString("distance_before_logging", String.valueOf(distanceBeforeLogging)).apply();
+                    AppSettings.setMinimumDistanceInMeters(distanceBeforeLogging);
                     needToStartGpsManager = true;
                 }
 
                 if (bundle.get(IntentConstants.GPS_ON_BETWEEN_FIX) != null) {
                     boolean keepBetweenFix = bundle.getBoolean(IntentConstants.GPS_ON_BETWEEN_FIX);
                     tracer.debug("Intent received - Set Keep Between Fix: " + String.valueOf(keepBetweenFix));
-                    prefs.edit().putBoolean("keep_fix", keepBetweenFix).apply();
+                    AppSettings.setShouldKeepFix(keepBetweenFix);
                     needToStartGpsManager = true;
                 }
 
                 if (bundle.get(IntentConstants.RETRY_TIME) != null) {
                     int retryTime = bundle.getInt(IntentConstants.RETRY_TIME);
                     tracer.debug("Intent received - Set Retry Time: " + String.valueOf(retryTime));
-                    prefs.edit().putString("retry_time", String.valueOf(retryTime)).apply();
+                    AppSettings.setRetryInterval(retryTime);
                     needToStartGpsManager = true;
                 }
 
                 if (bundle.get(IntentConstants.ABSOLUTE_TIMEOUT) != null) {
-                    int absolumeTimeOut = bundle.getInt(IntentConstants.ABSOLUTE_TIMEOUT);
-                    tracer.debug("Intent received - Set Retry Time: " + String.valueOf(absolumeTimeOut));
-                    prefs.edit().putString("absolute_timeout", String.valueOf(absolumeTimeOut)).apply();
+                    int absoluteTimeout = bundle.getInt(IntentConstants.ABSOLUTE_TIMEOUT);
+                    tracer.debug("Intent received - Set Retry Time: " + String.valueOf(absoluteTimeout));
+                    AppSettings.setAbsoluteTimeout(absoluteTimeout);
                     needToStartGpsManager = true;
                 }
 

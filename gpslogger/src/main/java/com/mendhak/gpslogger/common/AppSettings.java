@@ -35,6 +35,8 @@ public class AppSettings extends Application {
     private static AppSettings instance;
     private static org.slf4j.Logger tracer = LoggerFactory.getLogger(AppSettings.class.getSimpleName());
 
+
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -75,6 +77,12 @@ public class AppSettings extends Application {
     public static int getMinimumSeconds() {
         String minimumSecondsString = prefs.getString("time_before_logging", "60");
         return (Integer.valueOf(minimumSecondsString));
+    }
+
+    public static void setMinimumSeconds(int minimumSeconds) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("time_before_logging", String.valueOf(minimumSeconds));
+        editor.apply();
     }
 
     /**
@@ -238,6 +246,10 @@ public class AppSettings extends Application {
 
     }
 
+    public static void setMinimumDistanceInMeters(int distanceBeforeLogging){
+        prefs.edit().putString("distance_before_logging", String.valueOf(distanceBeforeLogging)).apply();
+    }
+
 
     /**
      * The minimum accuracy of a point before the point is recorded
@@ -261,6 +273,10 @@ public class AppSettings extends Application {
         return prefs.getBoolean("keep_fix", false);
     }
 
+    public static void setShouldKeepFix(boolean keepFix){
+        prefs.edit().putBoolean("keep_fix", keepFix).apply();
+    }
+
 
     /**
      * How long to keep retrying for a fix if one with the user-specified accuracy hasn't been found
@@ -274,6 +290,39 @@ public class AppSettings extends Application {
 
         return 60;
     }
+
+
+    /**
+     * Sets how long to keep trying for an accurate fix
+     * @param retryInterval in seconds
+     */
+    public static void setRetryInterval(int retryInterval) {
+        prefs.edit().putString("retry_time", String.valueOf(retryInterval)).apply();
+    }
+
+
+
+    /**
+     * How long to keep retrying for an accurate point before giving up
+     */
+    public static int getAbsoluteTimeout() {
+        String absoluteTimeoutString = prefs.getString("absolute_timeout", "120");
+
+        if (absoluteTimeoutString != null && absoluteTimeoutString.length() > 0) {
+            return (Integer.valueOf(absoluteTimeoutString));
+        } else {
+            return 120;
+        }
+    }
+
+    /**
+     * Sets how long to keep retrying for an accurate point before giving up
+     * @param absoluteTimeout in seconds
+     */
+    public static void setAbsoluteTimeout(int absoluteTimeout) {
+        prefs.edit().putString("absolute_timeout", String.valueOf(absoluteTimeout)).apply();
+    }
+
 
 
     /**
@@ -652,18 +701,6 @@ public class AppSettings extends Application {
     }
 
 
-    /**
-     * How long to keep retrying for an accurate point before giving up
-     */
-    public static int getAbsoluteTimeout() {
-        String absoluteTimeoutString = prefs.getString("absolute_timeout", "120");
-
-        if (absoluteTimeoutString != null && absoluteTimeoutString.length() > 0) {
-            return (Integer.valueOf(absoluteTimeoutString));
-        } else {
-            return 120;
-        }
-    }
 
 
     /**
