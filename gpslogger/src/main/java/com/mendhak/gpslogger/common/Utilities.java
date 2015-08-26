@@ -421,8 +421,7 @@ public class Utilities {
     }
 
     public static boolean IsDropBoxSetup(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.contains(DropBoxHelper.ACCESS_KEY_NAME) && prefs.contains(DropBoxHelper.ACCESS_SECRET_NAME);
+        return AppSettings.getDropBoxAccessKeyName() != null && AppSettings.getDropBoxAccessSecretName() != null;
     }
 
     /**

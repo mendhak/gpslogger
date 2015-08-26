@@ -36,7 +36,6 @@ public class AppSettings extends Application {
     private static org.slf4j.Logger tracer = LoggerFactory.getLogger(AppSettings.class.getSimpleName());
 
 
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -54,7 +53,7 @@ public class AppSettings extends Application {
     /**
      * Returns a configured Job Queue Manager
      */
-    public static JobManager GetJobManager(){
+    public static JobManager GetJobManager() {
         return jobManager;
     }
 
@@ -70,13 +69,11 @@ public class AppSettings extends Application {
     }
 
 
-
     /**
      * The minimum seconds interval between logging points
      */
     public static int getMinimumSeconds() {
-        String minimumSecondsString = prefs.getString("time_before_logging", "60");
-        return (Integer.valueOf(minimumSecondsString));
+        return (Integer.valueOf(prefs.getString("time_before_logging", "60")));
     }
 
     public static void setMinimumSeconds(int minimumSeconds) {
@@ -124,14 +121,12 @@ public class AppSettings extends Application {
     }
 
 
-
     /**
      * Whether to display certain values using imperial units
      */
     public static boolean shouldUseImperial() {
         return prefs.getBoolean("useImperial", false);
     }
-
 
 
     /**
@@ -199,9 +194,10 @@ public class AppSettings extends Application {
 
     /**
      * Sets the list of location providers that the app will listen to
+     *
      * @param chosenListeners a Set of listener names
      */
-    public static void setChosenListeners(Set<String> chosenListeners){
+    public static void setChosenListeners(Set<String> chosenListeners) {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putStringSet("listeners", chosenListeners);
         editor.apply();
@@ -210,7 +206,7 @@ public class AppSettings extends Application {
     /**
      * Sets the list of location providers that the app will listen to given their array positions in {@link #GetDefaultListeners()}.
      */
-    public static void setChosenListeners(Integer... listenerIndices){
+    public static void setChosenListeners(Integer... listenerIndices) {
         List<Integer> selectedItems = Arrays.asList(listenerIndices);
         final Set<String> chosenListeners = new HashSet<String>();
 
@@ -228,7 +224,7 @@ public class AppSettings extends Application {
     /**
      * Default set of listeners
      */
-    public static List<String> GetDefaultListeners(){
+    public static List<String> GetDefaultListeners() {
 
         List<String> listeners = new ArrayList<String>();
         listeners.add("gps");
@@ -243,17 +239,10 @@ public class AppSettings extends Application {
      * The minimum distance to have traveled before a point is recorded
      */
     public static int getMinimumDistanceInMeters() {
-        String minimumDistanceString = prefs.getString("distance_before_logging", "0");
-
-        if (minimumDistanceString != null && minimumDistanceString.length() > 0) {
-            return (Integer.valueOf(minimumDistanceString));
-        }
-
-        return 0;
-
+        return (Integer.valueOf(prefs.getString("distance_before_logging", "0")));
     }
 
-    public static void setMinimumDistanceInMeters(int distanceBeforeLogging){
+    public static void setMinimumDistanceInMeters(int distanceBeforeLogging) {
         prefs.edit().putString("distance_before_logging", String.valueOf(distanceBeforeLogging)).apply();
     }
 
@@ -262,15 +251,8 @@ public class AppSettings extends Application {
      * The minimum accuracy of a point before the point is recorded
      */
     public static int getMinimumAccuracyInMeters() {
-        String minimumAccuracyString = prefs.getString("accuracy_before_logging", "0");
-
-        if (minimumAccuracyString != null && minimumAccuracyString.length() > 0) {
-            return (Integer.valueOf(minimumAccuracyString));
-        }
-
-        return 0;
+        return (Integer.valueOf(prefs.getString("accuracy_before_logging", "0")));
     }
-
 
 
     /**
@@ -280,7 +262,10 @@ public class AppSettings extends Application {
         return prefs.getBoolean("keep_fix", false);
     }
 
-    public static void setShouldKeepFix(boolean keepFix){
+    /**
+     * Set whether to keep GPS on between fixes
+     */
+    public static void setShouldKeepFix(boolean keepFix) {
         prefs.edit().putBoolean("keep_fix", keepFix).apply();
     }
 
@@ -289,41 +274,29 @@ public class AppSettings extends Application {
      * How long to keep retrying for a fix if one with the user-specified accuracy hasn't been found
      */
     public static int getRetryInterval() {
-        String retryIntervalString = prefs.getString("retry_time", "60");
-
-        if (retryIntervalString != null && retryIntervalString.length() > 0) {
-            return (Integer.valueOf(retryIntervalString));
-        }
-
-        return 60;
+        return (Integer.valueOf(prefs.getString("retry_time", "60")));
     }
 
 
     /**
      * Sets how long to keep trying for an accurate fix
+     *
      * @param retryInterval in seconds
      */
     public static void setRetryInterval(int retryInterval) {
         prefs.edit().putString("retry_time", String.valueOf(retryInterval)).apply();
     }
 
-
-
     /**
      * How long to keep retrying for an accurate point before giving up
      */
     public static int getAbsoluteTimeout() {
-        String absoluteTimeoutString = prefs.getString("absolute_timeout", "120");
-
-        if (absoluteTimeoutString != null && absoluteTimeoutString.length() > 0) {
-            return (Integer.valueOf(absoluteTimeoutString));
-        } else {
-            return 120;
-        }
+        return (Integer.valueOf(prefs.getString("absolute_timeout", "120")));
     }
 
     /**
      * Sets how long to keep retrying for an accurate point before giving up
+     *
      * @param absoluteTimeout in seconds
      */
     public static void setAbsoluteTimeout(int absoluteTimeout) {
@@ -331,12 +304,11 @@ public class AppSettings extends Application {
     }
 
 
-
     /**
      * New file creation preference:
-     *     onceaday - once a day,
-     *     customfile - custom file (static),
-     *     everystart - every time the service starts
+     * onceaday - once a day,
+     * customfile - custom file (static),
+     * everystart - every time the service starts
      */
     static String getNewFileCreation() {
         return prefs.getString("new_file_creation", "onceaday");
@@ -382,17 +354,11 @@ public class AppSettings extends Application {
     }
 
 
-
     /**
      * The time, in minutes, before files are sent to the auto-send targets
      */
     public static Float getAutoSendDelay() {
-        try{
-            return Float.valueOf(prefs.getString("autosend_frequency_minutes", "60"));
-        }
-        catch (Exception e)  {
-            return 60f;
-        }
+        return Float.valueOf(prefs.getString("autosend_frequency_minutes", "60"));
     }
 
 
@@ -458,7 +424,6 @@ public class AppSettings extends Application {
 
     /**
      * SMTP from address to use
-
      */
     private static String getSmtpFrom() {
         return prefs.getString("smtp_from", "");
@@ -466,7 +431,6 @@ public class AppSettings extends Application {
 
     /**
      * The from address to use when sending an email, uses {@link #getSmtpUsername()} if {@link #getSmtpFrom()} is not specified
-     *
      */
     public static String getSenderAddress() {
         if (getSmtpFrom() != null && getSmtpFrom().length() > 0) {
@@ -477,10 +441,14 @@ public class AppSettings extends Application {
     }
 
 
+    public static void setDebugToFile(boolean writeToFile) {
+        prefs.edit().putBoolean("debugtofile", writeToFile).apply();
+    }
+
     /**
      * Whether to write log messages to a debuglog.txt file
      */
-    public static boolean isDebugToFile() {
+    public static boolean shouldDebugToFile() {
         return prefs.getBoolean("debugtofile", false);
     }
 
@@ -567,8 +535,24 @@ public class AppSettings extends Application {
     /**
      * Whether to auto send to Dropbox
      */
-    public static boolean isDropboxAutoSendEnabled(){
+    public static boolean isDropboxAutoSendEnabled() {
         return prefs.getBoolean("dropbox_enabled", false);
+    }
+
+    public static String getDropBoxAccessKeyName() {
+        return prefs.getString("DROPBOX_ACCESS_KEY", null);
+    }
+
+    public static void setDropBoxAccessKeyName(String key) {
+        prefs.edit().putString("DROPBOX_ACCESS_KEY", key).apply();
+    }
+
+    public static String getDropBoxAccessSecretName() {
+        return prefs.getString("DROPBOX_ACCESS_SECRET", null);
+    }
+
+    public static void setDropBoxAccessSecret(String secret) {
+        prefs.edit().putString("DROPBOX_ACCESS_SECRET", secret).apply();
     }
 
 
@@ -678,8 +662,7 @@ public class AppSettings extends Application {
     /**
      * OwnCloud target directory for autosend
      */
-    public static String getOwnCloudDirectory()
-    {
+    public static String getOwnCloudDirectory() {
         return prefs.getString("owncloud_directory", "/gpslogger");
     }
 
@@ -706,8 +689,6 @@ public class AppSettings extends Application {
     public static boolean shouldPrefixSerialToFileName() {
         return prefs.getBoolean("new_file_prefix_serial", false);
     }
-
-
 
 
     /**
@@ -738,33 +719,32 @@ public class AppSettings extends Application {
      * Whether to autosend only if wifi is enabled
      */
     public static boolean shouldAutoSendOnWifiOnly() {
-        return  prefs.getBoolean("autosend_wifionly", false);
+        return prefs.getBoolean("autosend_wifionly", false);
     }
 
 
     /**
      * Sets preferences in a generic manner from a .properties file
      */
-    public static void SetPreferenceFromProperties(Properties props){
-        for(Object key : props.keySet()){
+    public static void SetPreferenceFromProperties(Properties props) {
+        for (Object key : props.keySet()) {
 
             SharedPreferences.Editor editor = prefs.edit();
             String value = props.getProperty(key.toString());
             tracer.info("Setting preset property: " + key.toString() + " to " + value.toString());
 
-            if(value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")){
+            if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
                 editor.putBoolean(key.toString(), Boolean.parseBoolean(value));
-            }
-            else if(key.equals("listeners")){
+            } else if (key.equals("listeners")) {
                 List<String> availableListeners = GetDefaultListeners();
                 Set<String> chosenListeners = new HashSet<>();
                 String[] csvListeners = value.split(",");
-                for(String l : csvListeners){
-                    if(availableListeners.contains(l)){
+                for (String l : csvListeners) {
+                    if (availableListeners.contains(l)) {
                         chosenListeners.add(l);
                     }
                 }
-                if(chosenListeners.size() > 0){
+                if (chosenListeners.size() > 0) {
                     prefs.edit().putStringSet("listeners", chosenListeners).apply();
                 }
 

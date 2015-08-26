@@ -1,10 +1,8 @@
 package com.mendhak.gpslogger.views;
 
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +11,7 @@ import android.widget.*;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import org.slf4j.LoggerFactory;
 
@@ -41,8 +40,7 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
         scrollView = (ScrollView) rootView.findViewById(R.id.logview_scrollView);
 
         CheckBox chkDebugFile = (CheckBox) rootView.findViewById(R.id.logview_chkDebugFile);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        chkDebugFile.setChecked(prefs.getBoolean("debugtofile", false));
+        chkDebugFile.setChecked(AppSettings.shouldDebugToFile());
         chkDebugFile.setOnCheckedChangeListener(this);
         return rootView;
     }
@@ -137,10 +135,7 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
 
         if(compoundButton.getId() == R.id.logview_chkDebugFile){
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("debugtofile", checked);
-            editor.apply();
+            AppSettings.setDebugToFile(checked);
 
             if(checked){
                 Toast.makeText(getActivity(), R.string.debuglog_summary, Toast.LENGTH_LONG).show();

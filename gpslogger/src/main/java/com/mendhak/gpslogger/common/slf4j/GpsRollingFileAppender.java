@@ -30,7 +30,7 @@ public class GpsRollingFileAppender<E> extends RollingFileAppender<E> {
         // It checks if the user has requested a
         // debug log file and only then writes
         // to a file.
-        if (AppSettings.isDebugToFile()) {
+        if (AppSettings.shouldDebugToFile()) {
             super.subAppend(e);
         }
     }
