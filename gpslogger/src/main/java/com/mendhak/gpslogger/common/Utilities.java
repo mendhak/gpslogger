@@ -146,57 +146,7 @@ public class Utilities {
     public static void PopulateAppSettings(Context context) {
 
         tracer.debug("Getting preferences");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-
-
-
-
-
-
-
-
-
-
-
-        AppSettings.setGDocsAutoSendEnabled(prefs.getBoolean("gdocs_enabled", false));
-        AppSettings.setDropboxAutoSendEnabled(prefs.getBoolean("dropbox_enabled", false));
-        AppSettings.setOsmAutoSendEnabled(prefs.getBoolean("osm_enabled", false));
-
-        AppSettings.setFtpAutoSendEnabled(prefs.getBoolean("autoftp_enabled", false));
-        AppSettings.setFtpServerName(prefs.getString("autoftp_server", ""));
-        AppSettings.setFtpUsername(prefs.getString("autoftp_username", ""));
-        AppSettings.setFtpPassword(prefs.getString("autoftp_password", ""));
-        AppSettings.setFtpDirectory(prefs.getString("autoftp_directory", "GPSLogger"));
-        AppSettings.setFtpPort(Integer.valueOf(prefs.getString("autoftp_port", "21")));
-        AppSettings.setFtpUseFtps(prefs.getBoolean("autoftp_useftps", false));
-        AppSettings.setFtpProtocol(prefs.getString("autoftp_ssltls", ""));
-        AppSettings.setFtpImplicit(prefs.getBoolean("autoftp_implicit", false));
-
-        AppSettings.setOwnCloudAutoSendEnabled(prefs.getBoolean("owncloud_enabled", false));
-        AppSettings.setOwnCloudServerName(prefs.getString("owncloud_server", ""));
-        AppSettings.setOwnCloudUsername(prefs.getString("owncloud_username", ""));
-        AppSettings.setOwnCloudPassword(prefs.getString("owncloud_password", ""));
-        AppSettings.setOwnCloudDirectory(prefs.getString("owncloud_directory", "/gpslogger"));
-
-        AppSettings.setGpsLoggerFolder(prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(context).getAbsolutePath()));
-        AppSettings.setFileNamePrefixSerial(prefs.getBoolean("new_file_prefix_serial", false));
-
-        String absoluteTimeoutString = prefs.getString("absolute_timeout",
-                "120");
-
-        if (absoluteTimeoutString != null && absoluteTimeoutString.length() > 0) {
-            AppSettings.setAbsoluteTimeout(Integer.valueOf(absoluteTimeoutString));
-        } else {
-            AppSettings.setAbsoluteTimeout(120);
-        }
-
-        AppSettings.setGoogleDriveFolderName(prefs.getString("gdocs_foldername", "GPSLogger for Android"));
-
-        AppSettings.setShouldNotLogIfUserIsStill(prefs.getBoolean("activityrecognition_dontlogifstill", false));
-
-        AppSettings.setAdjustAltitudeFromGeoIdHeight(prefs.getBoolean("altitude_subtractgeoidheight", false));
-        AppSettings.setSubtractAltitudeOffset(Integer.valueOf(prefs.getString("altitude_subtractoffset", "0")));
     }
 
 

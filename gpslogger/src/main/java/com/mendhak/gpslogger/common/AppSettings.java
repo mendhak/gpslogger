@@ -18,6 +18,7 @@
 package com.mendhak.gpslogger.common;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.path.android.jobqueue.JobManager;
@@ -48,6 +49,9 @@ public class AppSettings extends Application {
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 
+    /**
+     * Returns a configured Job Queue Manager
+     */
     public static JobManager GetJobManager(){
         return jobManager;
     }
@@ -56,6 +60,9 @@ public class AppSettings extends Application {
         instance = this;
     }
 
+    /**
+     * Returns a singleton instance of this class
+     */
     public static AppSettings getInstance() {
         return instance;
     }
@@ -313,7 +320,6 @@ public class AppSettings extends Application {
 
     /**
      * Whether automatic sending to various targets (email,ftp, dropbox, etc) is enabled
-     * @return
      */
     public static boolean isAutoSendEnabled() {
         return prefs.getBoolean("autosend_enabled", false);
@@ -344,7 +350,6 @@ public class AppSettings extends Application {
 
     /**
      * SMTP Server to use when sending emails
-     * @return
      */
     public static String getSmtpServer() {
         return prefs.getString("smtp_server", "");
@@ -484,10 +489,205 @@ public class AppSettings extends Application {
      * Account name for OpenGTS communication
      */
     public static String getOpenGTSAccountName() {
-        return prefs.getString("opengts_accountname","");
+        return prefs.getString("opengts_accountname", "");
     }
 
 
+    /**
+     * Whether to auto send to Google Drive
+     */
+    public static boolean isGDocsAutoSendEnabled() {
+        return prefs.getBoolean("gdocs_enabled", false);
+    }
+
+    /**
+     * Target directory for Google Drive auto send
+     */
+    public static String getGoogleDriveFolderName() {
+        return prefs.getString("gdocs_foldername", "GPSLogger for Android");
+    }
+
+
+    /**
+     * Whether to auto send to Dropbox
+     */
+    public static boolean isDropboxAutoSendEnabled(){
+        return prefs.getBoolean("dropbox_enabled", false);
+    }
+
+
+    /**
+     * Whether to auto send to OpenStreetMap
+     */
+    public static boolean isOsmAutoSendEnabled() {
+        return prefs.getBoolean("osm_enabled", false);
+    }
+
+
+    /**
+     * FTP Server name for auto send
+     */
+    public static String getFtpServerName() {
+        return prefs.getString("autoftp_server", "");
+    }
+
+
+    /**
+     * FTP Port for auto send
+     */
+    public static int getFtpPort() {
+        return Integer.valueOf(prefs.getString("autoftp_port", "21"));
+    }
+
+
+    /**
+     * FTP Username for auto send
+     */
+    public static String getFtpUsername() {
+        return prefs.getString("autoftp_username", "");
+    }
+
+
+    /**
+     * FTP Password for auto send
+     */
+    public static String getFtpPassword() {
+        return prefs.getString("autoftp_password", "");
+    }
+
+    /**
+     * Whether to use FTPS
+     */
+    public static boolean FtpUseFtps() {
+        return prefs.getBoolean("autoftp_useftps", false);
+    }
+
+
+    /**
+     * FTP protocol to use (SSL or TLS)
+     */
+    public static String getFtpProtocol() {
+        return prefs.getString("autoftp_ssltls", "");
+    }
+
+
+    /**
+     * Whether to use FTP Implicit mode for auto send
+     */
+    public static boolean FtpImplicit() {
+        return prefs.getBoolean("autoftp_implicit", false);
+    }
+
+
+    /**
+     * Whether to auto send to FTP target
+     */
+    public static boolean isFtpAutoSendEnabled() {
+        return prefs.getBoolean("autoftp_enabled", false);
+    }
+
+
+    /**
+     * FTP Directory on the server for auto send
+     */
+    public static String getFtpDirectory() {
+        return prefs.getString("autoftp_directory", "GPSLogger");
+    }
+
+
+    /**
+     * OwnCloud server for auto send
+     */
+    public static String getOwnCloudServerName() {
+        return prefs.getString("owncloud_server", "");
+    }
+
+
+    /**
+     * OwnCloud username for auto send
+     */
+    public static String getOwnCloudUsername() {
+        return prefs.getString("owncloud_username", "");
+    }
+
+
+    /**
+     * OwnCloud password for auto send
+     */
+    public static String getOwnCloudPassword() {
+        return prefs.getString("owncloud_password", "");
+    }
+
+
+    /**
+     * OwnCloud target directory for autosend
+     */
+    public static String getOwnCloudDirectory()
+    {
+        return prefs.getString("owncloud_directory", "/gpslogger");
+    }
+
+
+    /**
+     * Whether to auto send to OwnCloud
+     */
+    public static boolean isOwnCloudAutoSendEnabled() {
+        return prefs.getBoolean("owncloud_enabled", false);
+    }
+
+
+    /**
+     * GPS Logger folder path on phone.  Falls back to {@link Utilities#GetDefaultStorageFolder(Context)} if nothing specified.
+     */
+    public static String getGpsLoggerFolder() {
+        return prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(getInstance()).getAbsolutePath());
+    }
+
+
+    /**
+     * Whether to prefix the phone's serial number to the logging file
+     */
+    public static boolean shouldPrefixSerialToFileName() {
+        return prefs.getBoolean("new_file_prefix_serial", false);
+    }
+
+
+    /**
+     * How long to keep retrying for an accurate point before giving up
+     */
+    public static int getAbsoluteTimeout() {
+        String absoluteTimeoutString = prefs.getString("absolute_timeout", "120");
+
+        if (absoluteTimeoutString != null && absoluteTimeoutString.length() > 0) {
+            return (Integer.valueOf(absoluteTimeoutString));
+        } else {
+            return 120;
+        }
+    }
+
+
+    /**
+     * Whether to detect user activity and if the user is still, pause logging
+     */
+    public static boolean shouldNotLogIfUserIsStill() {
+        return prefs.getBoolean("activityrecognition_dontlogifstill", false);
+    }
+
+
+    /**
+     * Whether to subtract GeoID height from the reported altitude to get Mean Sea Level altitude instead of WGS84
+     */
+    public static boolean shouldAdjustAltitudeFromGeoIdHeight() {
+        return prefs.getBoolean("altitude_subtractgeoidheight", false);
+    }
+
+
+    /**
+     * How much to subtract from the altitude reported
+     */
+    public static int getSubtractAltitudeOffset() {
+        return Integer.valueOf(prefs.getString("altitude_subtractoffset", "0"));
+    }
 
 
 
@@ -522,342 +722,6 @@ public class AppSettings extends Application {
             }
             editor.apply();
         }
-    }
-
-
-
-
-
-
-    // ---------------------------------------------------
-    // User Preferences
-    // ---------------------------------------------------
-    private static boolean useImperial = false;
-    private static boolean hideNotificationButtons = false;
-    private static boolean newFileOnceADay;
-
-    private static boolean logToKml;
-    private static boolean logToGpx;
-    private static boolean logToPlainText;
-    private static boolean logToNmea;
-    private static boolean logToCustomUrl;
-    private static String customLoggingUrl;
-    private static int minimumSeconds;
-    private static boolean keepFix;
-    private static int retryInterval;
-    private static String newFileCreation;
-    private static Float autoSendDelay = 0f;
-    private static boolean autoSendEnabled = false;
-    private static boolean emailAutoSendEnabled = false;
-    private static String smtpServer;
-    private static String smtpPort;
-    private static String smtpUsername;
-    private static String smtpPassword;
-    private static String smtpFrom;
-    private static String autoEmailTargets;
-    private static boolean smtpSsl;
-    private static boolean debugToFile;
-    private static int minimumDistance;
-    private static int minimumAccuracy;
-    private static boolean shouldSendZipFile;
-
-    private static boolean logToOpenGts;
-
-    private static boolean openGtsAutoSendEnabled;
-    private static String openGTSServer;
-    private static String openGTSServerPort;
-    private static String openGTSServerCommunicationMethod;
-    private static String openGTSServerPath;
-    private static String openGTSDeviceId;
-    private static String openGTSAccountName;
-
-    private static boolean ftpAutoSendEnabled;
-    private static String ftpServerName;
-    private static int ftpPort;
-    private static String ftpUsername;
-    private static String ftpPassword;
-    private static String ftpDirectory;
-    private static boolean ftpUseFtps;
-    private static String ftpProtocol;
-    private static boolean ftpImplicit;
-
-    private static boolean ownCloudAutoSendEnabled;
-    private static String ownCloudServerName;
-    private static String ownCloudUsername;
-    private static String ownCloudPassword;
-    private static String ownCloudDirectory;
-
-    private static String customFileName;
-    private static boolean isCustomFile;
-    private static boolean askCustomFileNameEachTime;
-
-    private static String gpsLoggerFolder;
-
-    private static boolean fileNamePrefixSerial;
-
-    private static int absoluteTimeout;
-
-    private static boolean autoSendWhenIPressStop;
-
-    private static boolean gDocsAutoSendEnabled;
-    private static boolean dropboxAutoSendEnabled;
-    private static boolean osmAutoSendEnabled;
-
-    private static String googleDriveFolderName;
-
-    private static boolean dontLogIfUserIsStill;
-
-    private static boolean adjustAltitudeFromGeoIdHeight;
-    private static int subtractAltitudeOffset;
-
-
-    public static boolean isOsmAutoSendEnabled() {
-        return osmAutoSendEnabled;
-    }
-
-    public static void setOsmAutoSendEnabled(boolean osmAutoSendEnabled) {
-        AppSettings.osmAutoSendEnabled = osmAutoSendEnabled;
-    }
-
-    public static boolean isDropboxAutoSendEnabled(){
-        return dropboxAutoSendEnabled;
-    }
-
-    public static void setDropboxAutoSendEnabled(boolean enabled){
-        AppSettings.dropboxAutoSendEnabled = enabled;
-    }
-
-    public static boolean isGDocsAutoSendEnabled() {
-        return gDocsAutoSendEnabled;
-    }
-
-    public static void setGDocsAutoSendEnabled(boolean gdocsEnabled) {
-        AppSettings.gDocsAutoSendEnabled = gdocsEnabled;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public static String getFtpServerName() {
-        return ftpServerName;
-    }
-
-    public static void setFtpServerName(String ftpServerName) {
-        AppSettings.ftpServerName = ftpServerName;
-    }
-
-    public static int getFtpPort() {
-        return ftpPort;
-    }
-
-    public static void setFtpPort(int ftpPort) {
-        AppSettings.ftpPort = ftpPort;
-    }
-
-    public static String getFtpUsername() {
-        return ftpUsername;
-    }
-
-    public static void setFtpUsername(String ftpUsername) {
-        AppSettings.ftpUsername = ftpUsername;
-    }
-
-    public static String getFtpPassword() {
-        return ftpPassword;
-    }
-
-    public static void setFtpPassword(String ftpPassword) {
-        AppSettings.ftpPassword = ftpPassword;
-    }
-
-    public static boolean FtpUseFtps() {
-        return ftpUseFtps;
-    }
-
-    public static void setFtpUseFtps(boolean ftpUseFtps) {
-        AppSettings.ftpUseFtps = ftpUseFtps;
-    }
-
-    public static String getFtpProtocol() {
-        return ftpProtocol;
-    }
-
-    public static void setFtpProtocol(String ftpProtocol) {
-        AppSettings.ftpProtocol = ftpProtocol;
-    }
-
-    public static boolean FtpImplicit() {
-        return ftpImplicit;
-    }
-
-    public static void setFtpImplicit(boolean ftpImplicit) {
-        AppSettings.ftpImplicit = ftpImplicit;
-    }
-
-    public static boolean isFtpAutoSendEnabled() {
-        return ftpAutoSendEnabled;
-    }
-
-    public static void setFtpAutoSendEnabled(boolean ftpAutoSendEnabled) {
-        AppSettings.ftpAutoSendEnabled = ftpAutoSendEnabled;
-    }
-
-    public static String getOwnCloudServerName() {
-        return ownCloudServerName;
-    }
-
-    public static void setOwnCloudServerName(String ownCloudServerName) {
-        AppSettings.ownCloudServerName = ownCloudServerName;
-    }
-
-    public static String getOwnCloudUsername() {
-        return ownCloudUsername;
-    }
-
-    public static void setOwnCloudUsername(String ownCloudUsername) {
-        AppSettings.ownCloudUsername = ownCloudUsername;
-    }
-
-    public static String getOwnCloudPassword() {
-        return ownCloudPassword;
-    }
-
-    public static void setOwnCloudPassword(String ownCloudPassword) {
-        AppSettings.ownCloudPassword = ownCloudPassword;
-    }
-
-    public static String getOwnCloudDirectory() { return ownCloudDirectory; }
-
-    public static void setOwnCloudDirectory(String ownCloudDirectory) {
-        AppSettings.ownCloudDirectory = ownCloudDirectory;
-    }
-
-    public static boolean isOwnCloudAutoSendEnabled() {
-        return ownCloudAutoSendEnabled;
-    }
-
-    public static void setOwnCloudAutoSendEnabled(boolean ownCloudAutoSendEnabled) {
-        AppSettings.ownCloudAutoSendEnabled = ownCloudAutoSendEnabled;
-    }
-
-
-
-
-
-
-
-
-
-
-
-    public static String getGpsLoggerFolder() {
-        return gpsLoggerFolder;
-    }
-
-    public static void setGpsLoggerFolder(String gpsLoggerFolder) {
-        AppSettings.gpsLoggerFolder = gpsLoggerFolder;
-    }
-
-    public static String getFtpDirectory() {
-        return ftpDirectory;
-    }
-
-    public static void setFtpDirectory(String ftpDirectory) {
-        AppSettings.ftpDirectory = ftpDirectory;
-    }
-
-    public static boolean shouldPrefixSerialToFileName() {
-        return fileNamePrefixSerial;
-    }
-
-    public static void setFileNamePrefixSerial(boolean fileNamePrefixSerial) {
-        AppSettings.fileNamePrefixSerial = fileNamePrefixSerial;
-    }
-
-    public static int getAbsoluteTimeout() {
-        return absoluteTimeout;
-    }
-
-    public static void setAbsoluteTimeout(int absoluteTimeout) {
-        AppSettings.absoluteTimeout = absoluteTimeout;
-    }
-
-
-
-
-
-
-
-
-
-
-
-    public static String getGoogleDriveFolderName() {
-        return googleDriveFolderName;
-    }
-
-    public static void setGoogleDriveFolderName(String googleDriveFolderName) {
-        AppSettings.googleDriveFolderName = googleDriveFolderName;
-    }
-
-    public static boolean shouldNotLogIfUserIsStill() {
-        return AppSettings.dontLogIfUserIsStill;
-    }
-
-    public static void setShouldNotLogIfUserIsStill(boolean check){
-        AppSettings.dontLogIfUserIsStill = check;
-    }
-
-
-    public static boolean shouldAdjustAltitudeFromGeoIdHeight() {
-        return adjustAltitudeFromGeoIdHeight;
-    }
-
-    public static void setAdjustAltitudeFromGeoIdHeight(boolean adjustAltitudeFromGeoIdHeight) {
-        AppSettings.adjustAltitudeFromGeoIdHeight = adjustAltitudeFromGeoIdHeight;
-    }
-
-
-    public static int getSubtractAltitudeOffset() {
-        return subtractAltitudeOffset;
-    }
-
-    public static void setSubtractAltitudeOffset(int subtractAltitudeOffset) {
-        AppSettings.subtractAltitudeOffset = subtractAltitudeOffset;
     }
 
 }
