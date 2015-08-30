@@ -29,9 +29,9 @@
     <h3>Default logging folder path</h3>
     <p>The path is displayed on the simple/detailed screens and it may be something like
          <br /> <br />
-         <font face=\"monospace\"><b>/storage/emulated/0/Android/data/com.mendhak.gpslogger/files/</b></font>
+         <font face=\"monospace\" color=\"#4CAF50\"><b>/storage/emulated/0/Android/data/com.mendhak.gpslogger/files/</b></font>
          <br /> <br />
-         <font face=\"monospace\"><b>/sdcard/Android/data/com.mendhak.gpslogger/files/</b></font>
+         <font face=\"monospace\" color=\"#4CAF50\"><b>/sdcard/Android/data/com.mendhak.gpslogger/files/</b></font>
          <br /><br /> The initial part will be different for your device.  If you have a file explorer app installed, you can click on the folder paths in the simple/detailed screens. </p>
          <p>You can change this folder path under Logging details.  Keep in mind, due to the <a href=\"http://commonsware.com/blog/2014/04/09/storage-situation-removable-storage.html\">restrictions introduced in Android KitKat</a>, any files in the default folder will be removed if you uninstall the app.</p>
          ]]>

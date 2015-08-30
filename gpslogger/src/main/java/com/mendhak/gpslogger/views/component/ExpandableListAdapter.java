@@ -4,11 +4,8 @@ package com.mendhak.gpslogger.views.component;
 import java.util.HashMap;
 import java.util.List;
 
-import android.animation.ObjectAnimator;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -17,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 import com.mendhak.gpslogger.R;
+import com.ms.square.android.expandabletextview.ExpandableTextView;
 
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
@@ -56,30 +54,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         convertView = infalInflater.inflate(R.layout.activity_faq_list_item, null);
 
         // sample code snippet to set the text content on the ExpandableTextView
-//        final ExpandableTextView expTv1 = (ExpandableTextView) convertView.findViewById(R.id.expand_text_view);
-//        expTv1.setText(Html.fromHtml(childText));
+        final ExpandableTextView expTv1 = (ExpandableTextView) convertView.findViewById(R.id.expand_text_view);
+        expTv1.setText(Html.fromHtml(childText));
+        TextView tv = (TextView)expTv1.findViewById(R.id.expandable_text);
+        tv.setMovementMethod(LinkMovementMethod.getInstance());
 
-        TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
-
-        //txtListChild.setText(childText);
-        txtListChild.setText(Html.fromHtml(childText));
-        txtListChild.setMovementMethod(LinkMovementMethod.getInstance());
-        txtListChild.setOnClickListener(new View.OnClickListener() {
-            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onClick(View view) {
-                TextView tv = (TextView) view;
-
-                if (tv.getMaxLines() == 1) {
-                    ObjectAnimator animation = ObjectAnimator.ofInt(tv, "maxLines", 500);
-                    animation.setDuration(1000).start();
-                } else {
-                    ObjectAnimator animation = ObjectAnimator.ofInt(tv, "maxLines", 1);
-                    animation.setDuration(300).start();
-                }
-            }
-        });
-        txtListChild.setMaxLines(1);
         return convertView;
     }
 

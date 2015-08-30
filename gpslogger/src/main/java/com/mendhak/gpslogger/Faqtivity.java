@@ -21,10 +21,7 @@ package com.mendhak.gpslogger;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.webkit.WebView;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import com.mendhak.gpslogger.views.component.ExpandableListAdapter;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +36,6 @@ public class Faqtivity extends ActionBarActivity {
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
 
-    WebView browser;
     private org.slf4j.Logger tracer = LoggerFactory.getLogger(Faqtivity.class.getSimpleName());
     /**
      * Event raised when the form is created for the first time
@@ -66,7 +62,7 @@ public class Faqtivity extends ActionBarActivity {
 
             @Override
             public void onGroupExpand(int groupPosition) {
-                if(groupPosition != previousGroup)
+                if (groupPosition != previousGroup)
                     expListView.collapseGroup(previousGroup);
                 previousGroup = groupPosition;
 
@@ -74,29 +70,16 @@ public class Faqtivity extends ActionBarActivity {
         });
 
         // preparing list data
-        prepareListData();
+        prepareHelpTopics();
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
-
-//
-//        browser = (WebView) findViewById(R.id.faqwebview);
-//        WebSettings settings = browser.getSettings();
-//        settings.setLoadWithOverviewMode(true);
-//        settings.setUseWideViewPort(true);
-//        settings.setBuiltInZoomControls(true);
-//        settings.setDisplayZoomControls(false);
-//        settings.setJavaScriptEnabled(true);
-//
-//        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-//
-//        browser.loadUrl("http://code.mendhak.com/gpslogger/index.html");
-
+        expListView.expandGroup(0);
     }
 
-    private void prepareListData() {
+    private void prepareHelpTopics() {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
@@ -120,9 +103,9 @@ public class Faqtivity extends ActionBarActivity {
 
 
         List<String> advancedTopics = new ArrayList<String>();
-        advancedTopics.add(getString(R.string.faq_topic_howgpsworks));
         advancedTopics.add(getString(R.string.faq_topic_thirdpartyintegration));
         advancedTopics.add(getString(R.string.faq_topic_taskerintegration));
+        advancedTopics.add(getString(R.string.faq_topic_howgpsworks));
 
 
         listDataChild.put(listDataHeader.get(0), generalTopics);
