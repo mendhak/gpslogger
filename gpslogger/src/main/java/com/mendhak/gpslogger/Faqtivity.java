@@ -67,6 +67,16 @@ public class Faqtivity extends ActionBarActivity {
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
 
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            int previousGroup = -1;
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if(groupPosition != previousGroup)
+                    expListView.collapseGroup(previousGroup);
+                previousGroup = groupPosition;
+            }
+        });
 
         // preparing list data
         prepareListData();
@@ -103,9 +113,9 @@ public class Faqtivity extends ActionBarActivity {
         // Adding child data
         List<String> top250 = new ArrayList<String>();
         top250.add("<h3>Why isn't it accurate</h3>" +
-                "It all comes down to your hardware, settings and environment. The accuracy is only as good as your phone's GPS chip. Some phones may have 4 meter accuracies, some have 500 meters. Also, using GPS satellites will give you better accuracy but take a longer time; using network location will give worse accuracy but is quicker. You may also want to check your environment, as there can be inaccuracy due to clouds, buildings, sunspots, alien invasion, etc.");
+                "It all comes down to your hardware, settings and environment. The accuracy is only as good as your phone's GPS chip. Some phones may have 4 meter accuracies, some have 500 meters. <br /> Also, using GPS satellites will give you better accuracy but take a longer time; using network location will give worse accuracy but is quicker. You may also want to check your environment, as there can be inaccuracy due to clouds, buildings, sunspots, alien invasion, etc.");
         top250.add("<h3>How do I remove the notification?</h3>" +
-                "Unfortunately, and annoyingly, the notification needs to stay there. Android 4.x has become very restrictive and will kill foreground services that don't show notifications. There is also no way to work around this as there was in the past. This also means that more applications will start to ask for notification area space, it may get quite crowded soon. At the same time, this is with good reason; the user should know that a foreground service is running and consuming resources, however no means has been provided to allow it to be dismissed.");
+                "Unfortunately, and annoyingly, the notification needs to stay there. Android 4.x has become very restrictive and will kill foreground services that don't show notifications. There is also no way to work around this as there was in the past. This also means that more applications will start to ask for notification area space, it may get quite crowded soon.<br /> At the same time, this is with good reason; the user should know that a foreground service is running and consuming resources, however no means has been provided to allow it to be dismissed.");
         top250.add("<h3>Why isn't it logging imperial to the file?</h3>" +
                 "The imperial units are only for display purposes and nothing else. When logging, the units are always in SI units - meters and seconds.");
         top250.add("Pulp Fiction");

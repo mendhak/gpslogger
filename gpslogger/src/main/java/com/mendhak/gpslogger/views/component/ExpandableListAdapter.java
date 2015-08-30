@@ -4,13 +4,17 @@ package com.mendhak.gpslogger.views.component;
 import java.util.HashMap;
 import java.util.List;
 
+import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 import com.mendhak.gpslogger.R;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
@@ -53,15 +57,30 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         // sample code snippet to set the text content on the ExpandableTextView
-        final ExpandableTextView expTv1 = (ExpandableTextView) convertView.findViewById(R.id.expand_text_view);
+//        final ExpandableTextView expTv1 = (ExpandableTextView) convertView.findViewById(R.id.expand_text_view);
+//        expTv1.setText(Html.fromHtml(childText));
 
-// IMPORTANT - call setText on the ExpandableTextView to set the text content to display
-        expTv1.setText(Html.fromHtml(childText));
+        TextView txtListChild = (TextView) convertView
+                .findViewById(R.id.lblListItem);
 
-//        TextView txtListChild = (TextView) convertView
-//                .findViewById(R.id.lblListItem);
-//
-//        txtListChild.setText(childText);
+        //txtListChild.setText(childText);
+        txtListChild.setText(Html.fromHtml(childText));
+        txtListChild.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(View view) {
+                TextView tv = (TextView)view;
+
+                if(tv.getMaxLines() == 5){
+                    ObjectAnimator animation = ObjectAnimator.ofInt(tv, "maxLines", 500);
+                    animation.setDuration(1000).start();
+                }
+                else {
+                    ObjectAnimator animation = ObjectAnimator.ofInt(tv, "maxLines", 5);
+                    animation.setDuration(300).start();
+                }
+            }
+        });
         return convertView;
     }
 
