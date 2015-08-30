@@ -10,8 +10,13 @@
     <include layout="@layout/toolbar"/>
 
 
-    <WebView android:id="@+id/faqwebview"
-             android:layout_width="fill_parent"
-             android:layout_height="fill_parent"
-            />
+    <ExpandableListView
+        android:id="@+id/lvExp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+
+    <!--<WebView android:id="@+id/faqwebview"-->
+             <!--android:layout_width="fill_parent"-->
+             <!--android:layout_height="fill_parent"-->
+            <!--/>-->
 </LinearLayout>

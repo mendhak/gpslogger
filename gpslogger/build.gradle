@@ -180,6 +180,7 @@ dependencies {
     }
     compile 'org.apache.jackrabbit:jackrabbit-webdav:2.10.1'
 
+    compile 'com.ms-square:expandableTextView:0.1.4'
 }
 
 tasks.whenTaskAdded { task ->
