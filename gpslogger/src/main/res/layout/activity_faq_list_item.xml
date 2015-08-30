@@ -6,13 +6,11 @@
 
     <TextView
         android:id="@+id/lblListItem"
-        android:maxLines="5"
-        android:ellipsize="end"
-        android:requiresFadingEdge="horizontal"
-        android:fadingEdgeLength="190dp"
+        android:maxLines="1"
+        android:ellipsize="marquee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="14dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:textSize="16sp"

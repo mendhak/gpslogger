@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="faq_generalsection">General questions</string>
+    <string name="faq_preferencesandfilters">Preferences and filters</string>
+    <string name="faq_advancedsection">Advanced topics</string>
+    <string name="faq_topic_whyisntitaccurate"><![CDATA[<h3>How can I improve accuracy?</h3>
+    <p>Under the performance menu\'s location providers you have a few options; using <b>GPS satellites will give you better accuracy</b> but take a longer time; using network location will give worse accuracy but is quicker.</p>
+     <p>You may also want to check your environment, as there can be inaccuracy due to clouds, buildings, sunspots, etc.</p>
+    <p>Ultimately, it all comes down to your hardware, settings and environment. The accuracy is only as good as your phone\'s GPS chip, GPSLogger simply writes what it is told by the phone. Some phones may have 4 meter accuracies, some have 500 meters.</p>
+    ]]></string>
+    <string name="faq_topic_howtoremovenotification"><![CDATA[<h3>Can I remove the notification?</h3>         <p>Unfortunately, and annoyingly, the notification needs to stay there. Android 4.x <a href=\"http://commonsware.com/blog/2013/07/30/notifications-foreground-services-android-4p3.html\">became quite restrictive</a> and kills foreground services that don\'t show notifications. There is also no way to work around this as there was in the past.</p>         <p>This also means that more applications will start to ask for notification area space, it may get quite crowded soon. At the same time, this is with good reason; the user should know that a foreground service is running and consuming resources, however no means has been provided to allow it to be dismissed.</p>         <p>In the general options, you can choose to hide the notification buttons so that it takes less space</p>]]></string>
+    <string name="faq_topic_howgpsworks"><![CDATA[
+    <h3>How GPS works (detail)</h3>
+    <p>The gist of a phone using GPS is that it needs to know where every satellite in the GPS constellation is and it usually                     wants to use your data connection to do this.  The GPS satellites do broadcast this information at different intervals;  specifically, each satellite broadcasts <em>almanac</em> data and <em>ephemeris</em> data.  </p>                      <p>The almanac is not very precise and gives a rough overview of the constellation and their positions over the next few months.                         A GPS receiver can use this to get a rough idea of where it is and which satellites to select.  When a phone has been off                         for a long time, or suddenly shifted to a new location, it needs to reacquire almanac data.</p>                      <p>The ephemeris data is more precise; it is broadcast more frequently and goes stale quite quickly.  It\'s only once a GPS                         receiver has its almanac data that it knows to look for the ephemeris data.  Once the phone has both of these pieces of information,                         it can then figure out where it is.  This process can take around 12 minutes and is known to be very flaky; any interference                         or interruption in the process means that the GPS receiver in the phone needs to start over.  The satellites only broadcast at                         50 bytes/second.</p>                      <p>Because it takes so long, to assist with this, many mobile operators deploy <a href=\"http://en.wikipedia.org/wiki/Assisted_GPS#Basic_concepts\">aGPS</a> servers;                         these servers have already downloaded the almanac and ephemeris data and your phone can download it from them at a faster rate then                         from the satellites.  But it does mean that your phone has to be on a familiar network.  Being on roaming or with a restricted                         data plan will prevent this from happening.</p>                      <p>All in all, there are a lot of factors at play.  The problem could be anything from missing almanacs to data to hardware.  GPSLogger simply waits for the OS to be ready with its information.</p>
+    ]]></string>
+    <string name="faq_topic_whydoesfixtakelongtime"><![CDATA[
+    <h3>Why is it taking so long to find a fix?</h3>
+        <p>Sometimes it will feel like GPSLogger is simply doing nothing and is just unable to find a fix. There can be several reasons for this.</p>
+        <p><strong>New location</strong> - if you are at a new location after a long flight, the GPS on your phone can take a while to reorient itself. Try running GPSLogger at high frequency until it does find a location. This can take around 15-20 minutes.</p>
+        <p><strong>Interference</strong> - there may be structures nearby blocking your signal.</p>
+        <p><strong>Mid flight</strong> - if you are in a commercial aircraft, you are probably traveling too fast for your phone\'s hardware to keep up with the GPS signals. GPS</p>
+        <p><strong>Strict filters</strong> - if a fix is found and it doesn\'t match your filter criteria, GPSLogger will keep trying for a while before it gives up.  Consider being less strict with settings like accuracy or distance traveled.  Consider also using network or passive locations.</p>
+    ]]></string>
+    <string name="faq_topic_usemylocaltimezone"><![CDATA[
+    <h3>Can I log my local timezone?</h3>
+    <p>The <i>standard</i> when logging points is to use UTC. Since this is the standard, it would be incorrect to use the local time zone.  Instead, it is the responsibility of the software you use the log file on (Google Earth, GeoSetter, etc.) to adjust for your timezone.  Any application that deals with GPX or KML files will have a setting that allows you to specify your own timezone.</p>
+    ]]></string>
+    <string name="faq_topic_whereisthefilelogged"><![CDATA[
+    <h3>Default logging folder path</h3>
+    <p>The path is displayed on the simple/detailed screens and it may be something like
+         <br /> <br />
+         <font face=\"monospace\"><b>/storage/emulated/0/Android/data/com.mendhak.gpslogger/files/</b></font>
+         <br /> <br />
+         <font face=\"monospace\"><b>/sdcard/Android/data/com.mendhak.gpslogger/files/</b></font>
+         <br /><br /> The initial part will be different for your device.  If you have a file explorer app installed, you can click on the folder paths in the simple/detailed screens. </p>
+         <p>You can change this folder path under Logging details.  Keep in mind, due to the <a href=\"http://commonsware.com/blog/2014/04/09/storage-situation-removable-storage.html\">restrictions introduced in Android KitKat</a>, any files in the default folder will be removed if you uninstall the app.</p>
+         ]]>
+    </string>
+    <string name="faq_topic_imperial"><![CDATA[
+    <h3>Why aren\'t imperial units being logged?</h3>
+    <p>The imperial units are only for display purposes and nothing else. When logging, the units are always in SI units - meters and seconds.</p>]]></string>
+    <string name="faq_topic_whatvariousfiltersmean"><![CDATA[
+    <h3>Explanation of various filters</h3>
+    <strong>Time before logging</strong> - How long to wait after a point has been logged to try logging again.
+    <br /><br/><strong>Distance filter</strong> - When a point is available, the app will check to ensure that this much distance exists between the previous and current points. If it isn\'t this distance, the point is discarded.
+    <br /><br/><strong>Accuracy filter</strong> - When a point is available, the app will check to ensure that this point has a minimum accuracy specified.  If it does not match the specified accuracy, the point is discarded. This is useful if you are inside a building for a while.
+    <br /><br/><strong>Retry time interval for accuracy</strong> - If the above accuracy filter isn\'t matched, the app will keep retrying for this long.
+    <br /><br/><strong>Absolute timeout</strong> - Attempts to acquire a fix will stop after this long, regardless of other filter settings. This is useful if you are inside a building for a while.
+    ]]></string>
+    <string name="faq_topic_howtogetthefile"><![CDATA[
+    <h3>How to access the file</h3>
+    <p><strong>From a PC</strong>, you can connect your phone via USB to mount the SD card, then copy straight from the logging folder.  You can also change the default folder in the logging details screen.<p>
+    <p><strong>On the phone itself</strong>, if you have a file explorer, you can go to the logging folder &gt; <font face=\'monospace\'>Long press file &gt; Open as &gt; Text</font> to view directly, or  open it in an app that can read such files.</p>
+    <p><strong>From within the app</strong>, you can choose to share the file or auto upload it to targets such as Google Drive, Dropbox, email, etc. and access the file from there.</p>
+    ]]></string>
+    <string name="faq_topic_thirdpartyintegration"><![CDATA[
+    <h3>Third party integration</h3>
+    <p>There are a few different ways you can interact with GPSLogger from other applications.</p>
+    <p><strong>Intents</strong> - You can send various intents to get GPSLogger to do things. See the Tasker topic for details.</p>
+    <p><strong>Shortcuts</strong> - If your application doesn\'t support intents, you can invoke the Start/Stop shortcut</p>
+    <p><strong>Content Provider</strong> - Only returns the current logging folder path. An advanced topic, and experimental</p>
+    ]]></string>
+    <string name="faq_topic_taskerintegration"><![CDATA[
+    <h3>Invoking via Tasker</h3>
+    <p>If your automation app can send intents, you can send intents to GPSLogger to get it to perform a few actions.</p>
+    <p>Tasker example: create a new action under Misc &gt; Send Intent.<br/><br/>
+    Action:<br />
+    <font face=\"monospace\" color=\"#4CAF50\">com.mendhak.gpslogger.GpsLoggingService</font>
+    <br/>
+    Extra:<br />
+    <font face=\"monospace\" color=\"#4CAF50\">immediatestart:true</font>
+    <br/>
+    Target:<br />
+    <font face=\"monospace\" color=\"#4CAF50\">Service</font><br/>
+    </p>
+    <p>These are the extras you can send to GPSLogger:
+    <blockquote>
+    <font face=\"monospace\" color=\"#4CAF50\">immediatestart</font> - (true/false) Start logging immediately<br /><br />
+    <font face=\"monospace\" color=\"#4CAF50\">immediatestop</font> - (true/false) Stop logging<br /><br />
+    <font face=\"monospace\" color=\"#4CAF50\">logonce</font> - (true/false) Log a single point and stop<br /><br />
+    <font face=\"monospace\" color=\"#4CAF50\">setnextpointdescription</font> - (text) Sets the annotation text to use for the next point logged<br /><br />
+    <font face=\"monospace\" color=\"#4CAF50\">settimebeforelogging</font> - (number) Sets preference for time before logging option<br /><br />
+    <font face=\"monospace\" color=\"#4CAF50\">setdistancebeforelogging</font> - (number) Sets preference for distance before logging option<br /><br />
+    <font face=\"monospace\" color=\"#4CAF50\">setkeepbetweenfix</font> - (true/false) Sets preference whether to keep GPS on between fixes<br /><br />
+    <font face=\"monospace\" color=\"#4CAF50\">setretrytime</font> - (number) Sets preference for retry time<br /><br />
+    <font face=\"monospace\" color=\"#4CAF50\">setabsolutetimeout</font> - (number) Sets preference for absolute timeout<br /><br />
+    <font face=\"monospace\" color=\"#4CAF50\">setprefercelltower</font> - (true/false) Enables or disables the GPS or celltower listeners<br /><br />
+    </blockquote>]]></string>
+    <string name="faq_topic_loadingpresets"><![CDATA[
+    <h3>Loading preset preferences</h3>
+    <p>Many users want to distribute GPSLogger to colleagues, pre-installed on phones with some preset values. If you create a file in the default folder or at <font face=\"monospace\" color=\"#4CAF50\">/<i>&lt;sdcard&gt;</i>/gpslogger.properties</font>, then GPSLogger will read this file each time it loads and apply those settings to the application.</p>
+    <p>For example, in the file you can put <font face=\"monospace\" color=\"#4CAF50\">accuracy_before_logging=42</font> and that will reset the Accuracy Filter to 42 meters each time the application starts. There are many properties that can be applied. Here are some of the most common ones:</p>
+     <blockquote>
+     <font face=\"monospace\" color=\"#4CAF50\">log_gpx</font> - (true/false) Log to GPX<br /><br />
+     <font face=\"monospace\" color=\"#4CAF50\">log_kml</font> - (true/false) Log to KML<br /><br />
+     <font face=\"monospace\" color=\"#4CAF50\">startonbootup</font> - (true/false) Whether to start logging when the phone is booted<br /><br />
+     <font face=\"monospace\" color=\"#4CAF50\">startonapplaunch</font> - (true/false) Whether to start logging when the app is opened<br /><br />
+     <font face=\"monospace\" color=\"#4CAF50\">autosend_enabled</font> - (true/false) Whether to enable auto sending to various targets<br /><br />
+     <font face=\"monospace\" color=\"#4CAF50\">smtp_*</font> - Various settings related to auto send email targets<br /><br />
+     <font face=\"monospace\" color=\"#4CAF50\">listeners</font> - Which location providers to listen to (GPS, network, passive). Specify these using commas, for example <font face=\"monospace\" color=\"#4CAF50\">gps,passive</font> <br /><br />
+
+     </blockquote>
+    You can figure out a full list from here: <a href=\"https://github.com/mendhak/gpslogger/blob/master/gpslogger/src/main/java/com/mendhak/gpslogger/common/AppSettings.java#L75\">full list here</a>.</p>
+    ]]></string>
+
+
+</resources>

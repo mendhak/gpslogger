@@ -388,7 +388,7 @@
     <string name="autoftp_setup_title">FTP</string>
     <string name="autoftp_setup_summary">Upload your files to an FTP(S) server. Note: This does not cover SFTP.</string>
 
-    <string name="faq_screen_title">Frequently asked questions</string>
+    <string name="faq_screen_title">@string/menu_faq</string>
     <string name="menu_faq">Help and FAQ</string>
     <string name="gpsf_missing">Missing Service</string>
     <string name="gpsf_missing_description">You will need Google Play Services Framework to use this feature.</string>

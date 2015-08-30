@@ -10,14 +10,14 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.TextView;
 import com.mendhak.gpslogger.R;
-import com.ms.square.android.expandabletextview.ExpandableTextView;
+
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
@@ -25,6 +25,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
     private HashMap<String, List<String>> _listDataChild;
+
 
     public ExpandableListAdapter(Context context, List<String> listDataHeader,
                                  HashMap<String, List<String>> listChildData) {
@@ -41,7 +42,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
+        return ((groupPosition+1) * 100) + childPosition;
     }
 
     @Override
@@ -50,37 +51,35 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         final String childText = (String) getChild(groupPosition, childPosition);
 
-        if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this._context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.activity_faq_list_item, null);
-        }
+        LayoutInflater infalInflater = (LayoutInflater) this._context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = infalInflater.inflate(R.layout.activity_faq_list_item, null);
 
         // sample code snippet to set the text content on the ExpandableTextView
 //        final ExpandableTextView expTv1 = (ExpandableTextView) convertView.findViewById(R.id.expand_text_view);
 //        expTv1.setText(Html.fromHtml(childText));
 
-        TextView txtListChild = (TextView) convertView
-                .findViewById(R.id.lblListItem);
+        TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
 
         //txtListChild.setText(childText);
         txtListChild.setText(Html.fromHtml(childText));
+        txtListChild.setMovementMethod(LinkMovementMethod.getInstance());
         txtListChild.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View view) {
-                TextView tv = (TextView)view;
+                TextView tv = (TextView) view;
 
-                if(tv.getMaxLines() == 5){
+                if (tv.getMaxLines() == 1) {
                     ObjectAnimator animation = ObjectAnimator.ofInt(tv, "maxLines", 500);
                     animation.setDuration(1000).start();
-                }
-                else {
-                    ObjectAnimator animation = ObjectAnimator.ofInt(tv, "maxLines", 5);
+                } else {
+                    ObjectAnimator animation = ObjectAnimator.ofInt(tv, "maxLines", 1);
                     animation.setDuration(300).start();
                 }
             }
         });
+        txtListChild.setMaxLines(1);
         return convertView;
     }
 
@@ -109,11 +108,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
         String headerTitle = (String) getGroup(groupPosition);
-        if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this._context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.activity_faq_list_group, null);
-        }
+        LayoutInflater infalInflater = (LayoutInflater) this._context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = infalInflater.inflate(R.layout.activity_faq_list_group, null);
 
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
@@ -132,5 +129,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
+
 
 }
