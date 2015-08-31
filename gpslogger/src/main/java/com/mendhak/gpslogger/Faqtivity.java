@@ -18,20 +18,24 @@
 
 package com.mendhak.gpslogger;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.MenuItem;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
+import android.widget.ExpandableListView;
+import com.mendhak.gpslogger.views.component.ExpandableListAdapter;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Faqtivity extends ActionBarActivity {
 
-    WebView browser;
+    ExpandableListAdapter listAdapter;
+    ExpandableListView expListView;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
+
     private org.slf4j.Logger tracer = LoggerFactory.getLogger(Faqtivity.class.getSimpleName());
     /**
      * Event raised when the form is created for the first time
@@ -51,19 +55,62 @@ public class Faqtivity extends ActionBarActivity {
             tracer.error("Thanks for this, Samsung", ex);
         }
 
+        expListView = (ExpandableListView) findViewById(R.id.lvExp);
 
-        browser = (WebView) findViewById(R.id.faqwebview);
-        WebSettings settings = browser.getSettings();
-        settings.setLoadWithOverviewMode(true);
-        settings.setUseWideViewPort(true);
-        settings.setBuiltInZoomControls(true);
-        settings.setDisplayZoomControls(false);
-        settings.setJavaScriptEnabled(true);
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            int previousGroup = -1;
 
-        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if (groupPosition != previousGroup)
+                    expListView.collapseGroup(previousGroup);
+                previousGroup = groupPosition;
 
-        browser.loadUrl("http://code.mendhak.com/gpslogger/index.html");
+            }
+        });
 
+        // preparing list data
+        prepareHelpTopics();
+
+        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+
+        // setting list adapter
+        expListView.setAdapter(listAdapter);
+        expListView.expandGroup(0);
+    }
+
+    private void prepareHelpTopics() {
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
+
+        listDataHeader.add(getString(R.string.faq_generalsection));
+        listDataHeader.add(getString(R.string.faq_preferencesandfilters));
+        listDataHeader.add(getString(R.string.faq_advancedsection));
+
+        List<String> generalTopics = new ArrayList<String>();
+        generalTopics.add(getString(R.string.faq_topic_whyisntitaccurate));
+        generalTopics.add(getString(R.string.faq_topic_howtoremovenotification));
+        generalTopics.add(getString(R.string.faq_topic_usemylocaltimezone));
+        generalTopics.add(getString(R.string.faq_topic_imperial));
+        generalTopics.add(getString(R.string.faq_topic_whydoesfixtakelongtime));
+
+
+        List<String> preferencesAndFiltersTopics = new ArrayList<String>();
+        preferencesAndFiltersTopics.add(getString(R.string.faq_topic_whatvariousfiltersmean));
+        preferencesAndFiltersTopics.add(getString(R.string.faq_topic_whereisthefilelogged));
+        preferencesAndFiltersTopics.add(getString(R.string.faq_topic_howtogetthefile));
+        preferencesAndFiltersTopics.add(getString(R.string.faq_topic_loadingpresets));
+
+
+        List<String> advancedTopics = new ArrayList<String>();
+        advancedTopics.add(getString(R.string.faq_topic_thirdpartyintegration));
+        advancedTopics.add(getString(R.string.faq_topic_taskerintegration));
+        advancedTopics.add(getString(R.string.faq_topic_howgpsworks));
+
+
+        listDataChild.put(listDataHeader.get(0), generalTopics);
+        listDataChild.put(listDataHeader.get(1), preferencesAndFiltersTopics);
+        listDataChild.put(listDataHeader.get(2), advancedTopics);
     }
 
     @Override
