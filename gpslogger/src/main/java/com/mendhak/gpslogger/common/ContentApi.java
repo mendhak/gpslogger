@@ -27,8 +27,7 @@ public class ContentApi extends ContentProvider {
 
         switch(queryType){
             case "gpslogger_folder":
-                result = PreferenceManager.getDefaultSharedPreferences(getContext()).getString("gpslogger_folder",
-                        Utilities.GetDefaultStorageFolder(getContext()).getAbsolutePath());
+                result = AppSettings.getGpsLoggerFolder();
                 break;
             default:
                 result = "NULL";

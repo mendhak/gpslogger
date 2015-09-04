@@ -1,10 +1,8 @@
 package com.mendhak.gpslogger.senders.gdocs;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.mendhak.gpslogger.common.AppSettings;
@@ -46,9 +44,9 @@ public class GDocsJob extends Job {
     @Override
     public void onRun() throws Throwable {
 
-        token = GoogleAuthUtil.getTokenWithNotification(AppSettings.getInstance(), GetAccountName(AppSettings.getInstance()), GetOauth2Scope(), new Bundle());
+        token = GoogleAuthUtil.getTokenWithNotification(AppSettings.getInstance(), AppSettings.getGoogleDriveAccountName(), GetOauth2Scope(), new Bundle());
         tracer.debug("GDocs token: " + token);
-        GDocsHelper.SaveAuthToken(AppSettings.getInstance(), token);
+        AppSettings.setGoogleDriveAuthToken(token);
 
         FileInputStream fis = new FileInputStream(gpxFile);
         String fileName = gpxFile.getName();
@@ -87,14 +85,6 @@ public class GDocsJob extends Job {
 
     private static String GetOauth2Scope() {
         return "oauth2:https://www.googleapis.com/auth/drive.file";
-    }
-
-    /**
-     * Gets the stored account name
-     */
-    private String GetAccountName(Context applicationContext) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        return prefs.getString("GDRIVE_ACCOUNT_NAME", "");
     }
 
     private String UpdateFileContents(String authToken, String gpxFileId, byte[] fileContents, String fileName) {

@@ -16,7 +16,6 @@
 */
 
 package com.mendhak.gpslogger.senders.email;
-import android.content.Context;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.IFileSender;
@@ -51,7 +50,7 @@ public class AutoEmailHelper implements IFileSender {
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, AutoEmailJob.JOB_TAG);
         jobManager.addJobInBackground(new AutoEmailJob(AppSettings.getSmtpServer(),
                 AppSettings.getSmtpPort(), AppSettings.getSmtpUsername(), AppSettings.getSmtpPassword(),
-                AppSettings.isSmtpSsl(), AppSettings.getAutoEmailTargets(), AppSettings.getSenderAddress(),
+                AppSettings.isSmtpSsl(), AppSettings.getAutoEmailTargets(), AppSettings.getSmtpSenderAddress(),
                 subject, body, filesToSend.toArray(new File[filesToSend.size()])));
 
     }

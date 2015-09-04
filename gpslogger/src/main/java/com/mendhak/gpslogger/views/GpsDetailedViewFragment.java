@@ -154,8 +154,8 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
             }
 
-            if (AppSettings.getMinimumSeconds() > 0) {
-                String descriptiveTime = Utilities.GetDescriptiveTimeString(AppSettings.getMinimumSeconds(),
+            if (AppSettings.getMinimumLoggingInterval() > 0) {
+                String descriptiveTime = Utilities.GetDescriptiveTimeString(AppSettings.getMinimumLoggingInterval(),
                         getActivity().getApplicationContext());
 
                 txtFrequency.setText(descriptiveTime);
@@ -165,14 +165,14 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             }
 
 
-            if (AppSettings.getMinimumDistanceInMeters() > 0) {
-                txtDistance.setText(Utilities.GetDistanceDisplay(getActivity(), AppSettings.getMinimumDistanceInMeters(), AppSettings.shouldUseImperial()));
+            if (AppSettings.getMinimumDistanceInterval() > 0) {
+                txtDistance.setText(Utilities.GetDistanceDisplay(getActivity(), AppSettings.getMinimumDistanceInterval(), AppSettings.shouldDisplayImperialUnits()));
             } else {
                 txtDistance.setText(R.string.summary_dist_regardless);
             }
 
-            if (AppSettings.isAutoSendEnabled() && AppSettings.getAutoSendDelay() > 0) {
-                String autoEmailDisplay = String.format(getString(R.string.autosend_frequency_display), AppSettings.getAutoSendDelay().intValue());
+            if (AppSettings.isAutoSendEnabled() && AppSettings.getAutoSendInterval() > 0) {
+                String autoEmailDisplay = String.format(getString(R.string.autosend_frequency_display), AppSettings.getAutoSendInterval().intValue());
 
                 txtAutoEmail.setText(autoEmailDisplay);
             }
@@ -193,7 +193,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
                     sb.append(getString(R.string.autoftp_setup_title)).append("\n");
                 }
 
-                if (AppSettings.isGDocsAutoSendEnabled() && GDocsHelper.IsLinked(getActivity().getApplicationContext())) {
+                if (AppSettings.isGDocsAutoSendEnabled() && GDocsHelper.IsLinked()) {
                     sb.append(getString(R.string.gdocs_setup_title)).append("\n");
                 }
 
@@ -342,13 +342,13 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         nf.setMaximumFractionDigits(3);
 
         if (locationInfo.hasAltitude()) {
-            tvAltitude.setText(Utilities.GetDistanceDisplay(getActivity(), locationInfo.getAltitude(), AppSettings.shouldUseImperial()));
+            tvAltitude.setText(Utilities.GetDistanceDisplay(getActivity(), locationInfo.getAltitude(), AppSettings.shouldDisplayImperialUnits()));
         } else {
             tvAltitude.setText(R.string.not_applicable);
         }
 
         if (locationInfo.hasSpeed()) {
-            txtSpeed.setText(Utilities.GetSpeedDisplay(getActivity(), locationInfo.getSpeed(), AppSettings.shouldUseImperial()));
+            txtSpeed.setText(Utilities.GetSpeedDisplay(getActivity(), locationInfo.getSpeed(), AppSettings.shouldDisplayImperialUnits()));
 
         } else {
             txtSpeed.setText(R.string.not_applicable);
@@ -374,14 +374,14 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         if (locationInfo.hasAccuracy()) {
 
             float accuracy = locationInfo.getAccuracy();
-            txtAccuracy.setText(getString(R.string.accuracy_within, Utilities.GetDistanceDisplay(getActivity(), accuracy, AppSettings.shouldUseImperial()), ""));
+            txtAccuracy.setText(getString(R.string.accuracy_within, Utilities.GetDistanceDisplay(getActivity(), accuracy, AppSettings.shouldDisplayImperialUnits()), ""));
 
         } else {
             txtAccuracy.setText(R.string.not_applicable);
         }
 
         double distanceValue = Session.getTotalTravelled();
-        txtTravelled.setText(Utilities.GetDistanceDisplay(getActivity(), distanceValue, AppSettings.shouldUseImperial()) + " (" + Session.getNumLegs() + " points)");
+        txtTravelled.setText(Utilities.GetDistanceDisplay(getActivity(), distanceValue, AppSettings.shouldDisplayImperialUnits()) + " (" + Session.getNumLegs() + " points)");
 
         long startTime = Session.getStartTimeStamp();
         Date d = new Date(startTime);

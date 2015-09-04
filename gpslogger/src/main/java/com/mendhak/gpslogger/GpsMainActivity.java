@@ -24,7 +24,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
@@ -32,7 +31,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -113,15 +111,10 @@ public class GpsMainActivity extends ActionBarActivity
         StartAndBindService();
         RegisterEventBus();
 
-        if(shouldStartLoggingOnAppLaunch()){
+        if(AppSettings.shouldStartLoggingOnAppLaunch()){
             tracer.debug("Start logging on app launch");
             EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
         }
-    }
-
-    private boolean shouldStartLoggingOnAppLaunch(){
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        return prefs.getBoolean("startonapplaunch", false);
     }
 
     private void RegisterEventBus() {
@@ -145,7 +138,6 @@ public class GpsMainActivity extends ActionBarActivity
     @Override
     protected void onResume() {
         super.onResume();
-        GetPreferences();
         StartAndBindService();
 
         if (Session.hasDescription()) {
@@ -227,35 +219,7 @@ public class GpsMainActivity extends ActionBarActivity
             InputStreamReader reader = new InputStreamReader(new FileInputStream(file));
             props.load(reader);
 
-            for(Object key : props.keySet()){
-
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor = prefs.edit();
-
-                String value = props.getProperty(key.toString());
-                tracer.info("Setting preset property: " + key.toString() + " to " + value.toString());
-
-                if(value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")){
-                    editor.putBoolean(key.toString(), Boolean.parseBoolean(value));
-                }
-                else if(key.equals("listeners")){
-                    List<String> availableListeners = Utilities.GetListeners();
-                    Set<String> chosenListeners = new HashSet<>();
-                    String[] csvListeners = value.split(",");
-                    for(String l : csvListeners){
-                        if(availableListeners.contains(l)){
-                            chosenListeners.add(l);
-                        }
-                    }
-                    if(chosenListeners.size() > 0){
-                        prefs.edit().putStringSet("listeners", chosenListeners).apply();
-                    }
-
-                } else {
-                    editor.putString(key.toString(), value);
-                }
-                editor.apply();
-            }
+            AppSettings.SetPreferenceFromProperties(props);
 
         } catch (Exception e) {
             tracer.error("Could not load preset properties", e);
@@ -497,8 +461,7 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     private int GetUserSelectedNavigationItem(){
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        return sp.getInt("SPINNER_SELECTED_POSITION", 0);
+        return AppSettings.getUserSelectedNavigationItem();
     }
 
     private void LoadDefaultFragmentView() {
@@ -538,11 +501,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     @Override
     public boolean onNavigationItemSelected(int position, long itemId) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("SPINNER_SELECTED_POSITION", position);
-        editor.apply();
-
+        AppSettings.setUserSelectedNavigationItem(position);
         LoadFragmentView(position);
         return true;
     }
@@ -786,7 +745,7 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     private void UploadToGoogleDocs() {
-        if (!GDocsHelper.IsLinked(getApplicationContext())) {
+        if (!GDocsHelper.IsLinked()) {
             LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
             return;
         }
@@ -1036,11 +995,6 @@ public class GpsMainActivity extends ActionBarActivity
     public void OnWaitingForLocation(boolean inProgress) {
         ProgressBar fixBar = (ProgressBar) findViewById(R.id.progressBarGpsFix);
         fixBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
-    }
-
-
-    private void GetPreferences() {
-        Utilities.PopulateAppSettings(getApplicationContext());
     }
 
 

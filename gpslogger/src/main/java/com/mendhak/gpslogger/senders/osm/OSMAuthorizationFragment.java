@@ -18,15 +18,17 @@
 package com.mendhak.gpslogger.senders.osm;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
+
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Utilities;
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
@@ -54,8 +56,6 @@ public class OSMAuthorizationFragment extends PreferenceFragment {
             String oAuthVerifier = myURI.getQueryParameter("oauth_verifier");
 
             try {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
                 if (provider == null) {
                     provider = OSMHelper.GetOSMAuthProvider(getActivity());
                 }
@@ -72,10 +72,8 @@ public class OSMAuthorizationFragment extends PreferenceFragment {
                 String osmAccessTokenSecret = consumer.getTokenSecret();
 
                 //Save for use later.
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("osm_accesstoken", osmAccessToken);
-                editor.putString("osm_accesstokensecret", osmAccessTokenSecret);
-                editor.apply();
+                AppSettings.setOSMAccessToken(osmAccessToken);
+                AppSettings.setOSMAccessTokenSecret(osmAccessTokenSecret);
 
             } catch (Exception e) {
                 tracer.error("OSM authorization error", e);
@@ -108,13 +106,11 @@ public class OSMAuthorizationFragment extends PreferenceFragment {
             public boolean onPreferenceClick(Preference preference) {
 
                 if (OSMHelper.IsOsmAuthorized(getActivity())) {
-                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.remove("osm_accesstoken");
-                    editor.remove("osm_accesstokensecret");
-                    editor.remove("osm_requesttoken");
-                    editor.remove("osm_requesttokensecret");
-                    editor.apply();
+                    AppSettings.setOSMAccessToken("");
+                    AppSettings.setOSMAccessTokenSecret("");
+                    AppSettings.setOSMRequestToken("");
+                    AppSettings.setOSMRequestTokenSecret("");
+
                     startActivity(new Intent(getActivity(), GpsMainActivity.class));
                     getActivity().finish();
 
@@ -132,11 +128,9 @@ public class OSMAuthorizationFragment extends PreferenceFragment {
                         authUrl = provider.retrieveRequestToken(consumer, OAuth.OUT_OF_BAND);
 
                         //Save for later
-                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.putString("osm_requesttoken", consumer.getToken());
-                        editor.putString("osm_requesttokensecret", consumer.getTokenSecret());
-                        editor.apply();
+                        AppSettings.setOSMRequestToken(consumer.getToken());
+                        AppSettings.setOSMRequestTokenSecret(consumer.getTokenSecret());
+
 
                         //Open browser, send user to OpenStreetMap.org
                         Uri uri = Uri.parse(authUrl);

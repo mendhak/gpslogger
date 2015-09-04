@@ -22,7 +22,6 @@ public class UtilitiesTests extends AndroidTestCase {
 
     public void setUp() {
         this.context = new UtilitiesMockContext(getContext());
-        Utilities.PopulateAppSettings(context);
         final SharedPreferences.Editor preferencesEditor = PreferenceManager.getDefaultSharedPreferences(context).edit();
         preferencesEditor.clear().commit();
     }
@@ -70,17 +69,7 @@ public class UtilitiesTests extends AndroidTestCase {
 
     }
 
-    @SmallTest
-    public void testDropBoxSetup() {
 
-        assertFalse("Dropbox defaults to not set up.", Utilities.IsDropBoxSetup(context));
-
-        final SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-        editor.putString(DropBoxHelper.ACCESS_KEY_NAME, "12345");
-        editor.putString(DropBoxHelper.ACCESS_SECRET_NAME, "abcdef");
-        editor.apply();
-        assertEquals("Dropbox setup if KEY and SECRET exist in preferences", true, Utilities.IsDropBoxSetup(context));
-    }
 
     @SmallTest
     public void testIsoDateTime() {

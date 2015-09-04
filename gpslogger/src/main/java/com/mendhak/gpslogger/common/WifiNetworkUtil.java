@@ -32,11 +32,10 @@ public class WifiNetworkUtil implements NetworkUtil, NetworkEventProvider {
     public boolean isConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-        boolean isWifiRequired =  prefs.getBoolean("autosend_wifionly", false);
+        boolean isWifiRequired = AppSettings.shouldAutoSendOnWifiOnly();
         boolean isWifi = true;
-        if(isWifiRequired){
+        if(isWifiRequired && netInfo != null){
             isWifi = (netInfo.getType() == ConnectivityManager.TYPE_WIFI);
         }
 

@@ -132,7 +132,7 @@ public class FileSenderFactory {
     private static List<IFileSender> GetFileSenders(Context applicationContext) {
         List<IFileSender> senders = new ArrayList<IFileSender>();
 
-        if (AppSettings.isGDocsAutoSendEnabled() && GDocsHelper.IsLinked(applicationContext)) {
+        if (AppSettings.isGDocsAutoSendEnabled() && GDocsHelper.IsLinked()) {
             senders.add(new GDocsHelper(applicationContext));
         }
 

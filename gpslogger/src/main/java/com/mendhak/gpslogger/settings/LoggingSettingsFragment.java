@@ -19,7 +19,6 @@ package com.mendhak.gpslogger.settings;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.*;
 import android.text.Html;
@@ -31,6 +30,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.FileDialog.FolderSelectorDialog;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
@@ -48,7 +48,6 @@ public class LoggingSettingsFragment extends PreferenceFragment
 {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(LoggingSettingsFragment.class.getSimpleName());
-    SharedPreferences prefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,21 +55,9 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
         addPreferencesFromResource(R.xml.pref_logging);
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        if (prefs.getString("new_file_creation", "onceaday").equals("static")) {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("new_file_creation", "custom");
-            editor.apply();
-
-            MaterialListPreference newFileCreation = (MaterialListPreference) findPreference("new_file_creation");
-            if(newFileCreation !=null){
-                newFileCreation.setValue("custom");
-            }
-        }
-
         Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
         gpsloggerFolder.setOnPreferenceClickListener(this);
-        String gpsLoggerFolderPath = prefs.getString("gpslogger_folder", Utilities.GetDefaultStorageFolder(getActivity()).getAbsolutePath());
+        String gpsLoggerFolderPath = AppSettings.getGpsLoggerFolder();
         gpsloggerFolder.setSummary(gpsLoggerFolderPath);
         if(!(new File(gpsLoggerFolderPath)).canWrite()){
             gpsloggerFolder.setSummary(Html.fromHtml("<font color='red'>" + gpsLoggerFolderPath + "</font>"));
@@ -135,14 +122,12 @@ public class LoggingSettingsFragment extends PreferenceFragment
                         @Override
                         public void onPositive(MaterialDialog dialog) {
                             EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString("new_file_custom_name", userInput.getText().toString());
-                            editor.apply();
+                            AppSettings.setCustomFileName(userInput.getText().toString());
                         }
                     }).build();
 
             EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
-            userInput.setText(prefs.getString("new_file_custom_name","gpslogger"));
+            userInput.setText(AppSettings.getCustomFileName());
             TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
             tvMessage.setText(R.string.new_file_custom_message);
             alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -185,9 +170,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
                             @Override
                             public void onPositive(MaterialDialog dialog) {
                                 EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
-                                SharedPreferences.Editor editor = prefs.edit();
-                                editor.putString("log_customurl_url", userInput.getText().toString());
-                                editor.apply();
+                                AppSettings.setCustomLoggingUrl(userInput.getText().toString());
                             }
                         })
                         .keyListener(new DialogInterface.OnKeyListener() {
@@ -203,7 +186,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
                         .build();
 
                 EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
-                userInput.setText(prefs.getString("log_customurl_url","http://localhost/log?lat=%LAT&longitude=%LON&time=%TIME&s=%SPD"));
+                userInput.setText(AppSettings.getCustomLoggingUrl());
                 userInput.setSingleLine(true);
                 userInput.setLines(4);
                 userInput.setHorizontallyScrolling(false);
@@ -241,15 +224,13 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
     private void setPreferencesEnabledDisabled() {
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
         Preference prefFileStaticName = (Preference) findPreference("new_file_custom_name");
         Preference prefAskEachTime = (Preference)findPreference("new_file_custom_each_time");
         Preference prefSerialPrefix = (Preference) findPreference("new_file_prefix_serial");
 
-        prefFileStaticName.setEnabled(prefs.getString("new_file_creation", "onceaday").equals("custom"));
-        prefAskEachTime.setEnabled(prefs.getString("new_file_creation", "onceaday").equals("custom"));
-        prefSerialPrefix.setEnabled(!prefs.getString("new_file_creation", "onceaday").equals("custom"));
+        prefFileStaticName.setEnabled(AppSettings.shouldCreateCustomFile());
+        prefAskEachTime.setEnabled(AppSettings.shouldCreateCustomFile());
+        prefSerialPrefix.setEnabled(!AppSettings.shouldCreateCustomFile());
     }
 
     @Override
@@ -266,11 +247,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
             return;
         }
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("gpslogger_folder", filePath);
-        editor.apply();
-
+        AppSettings.setGpsLoggerFolder(filePath);
         Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
         gpsloggerFolder.setSummary(filePath);
     }

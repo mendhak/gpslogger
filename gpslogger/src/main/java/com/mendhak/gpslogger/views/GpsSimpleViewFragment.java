@@ -333,7 +333,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
             TextView txtAccuracy = (TextView) rootView.findViewById(R.id.simpleview_txtAccuracy);
             float accuracy = locationInfo.getAccuracy();
-            txtAccuracy.setText(Utilities.GetDistanceDisplay(getActivity(), accuracy, AppSettings.shouldUseImperial()));
+            txtAccuracy.setText(Utilities.GetDistanceDisplay(getActivity(), accuracy, AppSettings.shouldDisplayImperialUnits()));
 
             if (accuracy > 500) {
                 SetColor(imgAccuracy, IconColorIndicator.Warning);
@@ -353,7 +353,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             SetColor(imgAltitude, IconColorIndicator.Good);
             TextView txtAltitude = (TextView) rootView.findViewById(R.id.simpleview_txtAltitude);
 
-            txtAltitude.setText(Utilities.GetDistanceDisplay(getActivity(), locationInfo.getAltitude(), AppSettings.shouldUseImperial()));
+            txtAltitude.setText(Utilities.GetDistanceDisplay(getActivity(), locationInfo.getAltitude(), AppSettings.shouldDisplayImperialUnits()));
         }
 
         ImageView imgSpeed = (ImageView)rootView.findViewById(R.id.simpleview_imgSpeed);
@@ -364,7 +364,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             SetColor(imgSpeed, IconColorIndicator.Good);
 
             TextView txtSpeed = (TextView) rootView.findViewById(R.id.simpleview_txtSpeed);
-            txtSpeed.setText(Utilities.GetSpeedDisplay(getActivity(),locationInfo.getSpeed(),AppSettings.shouldUseImperial()));
+            txtSpeed.setText(Utilities.GetSpeedDisplay(getActivity(),locationInfo.getSpeed(),AppSettings.shouldDisplayImperialUnits()));
         }
 
         ImageView imgDirection = (ImageView) rootView.findViewById(R.id.simpleview_imgDirection);
@@ -390,7 +390,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         TextView txtPoints = (TextView) rootView.findViewById(R.id.simpleview_txtPoints);
         TextView txtTravelled = (TextView) rootView.findViewById(R.id.simpleview_txtDistance);
 
-        txtTravelled.setText(Utilities.GetDistanceDisplay(getActivity(), distanceValue, AppSettings.shouldUseImperial()));
+        txtTravelled.setText(Utilities.GetDistanceDisplay(getActivity(), distanceValue, AppSettings.shouldDisplayImperialUnits()));
         txtPoints.setText(Session.getNumLegs() + " " + getString(R.string.points));
 
         String providerName = locationInfo.getProvider();
