@@ -35,7 +35,7 @@ public class WifiNetworkUtil implements NetworkUtil, NetworkEventProvider {
 
         boolean isWifiRequired = AppSettings.shouldAutoSendOnWifiOnly();
         boolean isWifi = true;
-        if(isWifiRequired){
+        if(isWifiRequired && netInfo != null){
             isWifi = (netInfo.getType() == ConnectivityManager.TYPE_WIFI);
         }
 
