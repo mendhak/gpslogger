@@ -230,4 +230,10 @@ if (project.hasProperty("CROWDIN_API_KEY")) {
         projectId = 'gpslogger-for-android'
         sourceFile = "$projectDir/src/main/res/values/strings.xml"
     }
+
+    crowdinUpload {
+        apiKey = CROWDIN_API_KEY
+        projectId = 'gpslogger-for-android'
+        sourceFile = "$projectDir/src/main/res/values/strings_faq.xml"
+    }
 }
