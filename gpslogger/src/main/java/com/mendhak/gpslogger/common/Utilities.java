@@ -782,4 +782,12 @@ public class Utilities {
                 null);
     }
 
+    public static int parseWithDefault(String number, int defaultVal) {
+        try {
+            return Integer.parseInt(number);
+        } catch (Exception e) {
+            return defaultVal;
+        }
+    }
+
 }

@@ -73,7 +73,7 @@ public class AppSettings extends Application {
      * The minimum seconds interval between logging points
      */
     public static int getMinimumLoggingInterval() {
-        return (Integer.valueOf(prefs.getString("time_before_logging", "60")));
+        return Utilities.parseWithDefault(prefs.getString("time_before_logging", "60"), 60);
     }
 
     /**
@@ -92,7 +92,7 @@ public class AppSettings extends Application {
      * The minimum distance, in meters, to have traveled before a point is recorded
      */
     public static int getMinimumDistanceInterval() {
-        return (Integer.valueOf(prefs.getString("distance_before_logging", "0")));
+        return (Utilities.parseWithDefault(prefs.getString("distance_before_logging", "0"), 0));
     }
 
     /**
@@ -109,7 +109,7 @@ public class AppSettings extends Application {
      * The minimum accuracy of a point before the point is recorded, in meters
      */
     public static int getMinimumAccuracy() {
-        return (Integer.valueOf(prefs.getString("accuracy_before_logging", "0")));
+        return (Utilities.parseWithDefault(prefs.getString("accuracy_before_logging", "0"), 0));
     }
 
 
@@ -132,7 +132,7 @@ public class AppSettings extends Application {
      * How long to keep retrying for a fix if one with the user-specified accuracy hasn't been found
      */
     public static int getLoggingRetryPeriod() {
-        return (Integer.valueOf(prefs.getString("retry_time", "60")));
+        return (Utilities.parseWithDefault(prefs.getString("retry_time", "60"), 60));
     }
 
 
@@ -149,7 +149,7 @@ public class AppSettings extends Application {
      * How long to keep retrying for an accurate point before giving up
      */
     public static int getAbsoluteTimeoutForAcquiringPosition() {
-        return (Integer.valueOf(prefs.getString("absolute_timeout", "120")));
+        return (Utilities.parseWithDefault(prefs.getString("absolute_timeout", "120"), 120));
     }
 
     /**
@@ -719,7 +719,7 @@ public class AppSettings extends Application {
      * FTP Port for auto send
      */
     public static int getFtpPort() {
-        return Integer.valueOf(prefs.getString("autoftp_port", "21"));
+        return Utilities.parseWithDefault(prefs.getString("autoftp_port", "21"), 21);
     }
 
 
@@ -863,7 +863,7 @@ public class AppSettings extends Application {
      * How much to subtract from the altitude reported
      */
     public static int getSubtractAltitudeOffset() {
-        return Integer.valueOf(prefs.getString("altitude_subtractoffset", "0"));
+        return Utilities.parseWithDefault(prefs.getString("altitude_subtractoffset", "0"),0);
     }
 
 
