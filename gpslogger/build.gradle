@@ -19,6 +19,7 @@ repositories {
     maven {
         url  "https://dl.bintray.com/mendhak/maven"
     }
+    maven { url "https://jitpack.io" }
 }
 
 android {
@@ -153,7 +154,7 @@ dependencies {
     compile "com.android.support:cardview-v7:22.2.0"
 
     //Material dialogs
-    compile('com.afollestad:material-dialogs:0.7.6.0')
+    compile('com.afollestad:material-dialogs:a240bbe@aar')
 
     //The material drawer
     compile 'com.heinrichreimersoftware.materialdrawer:library:2.1'
