@@ -90,6 +90,11 @@ public class CustomUrlJob extends Job {
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
         tracer.error("Could not send to custom URL", throwable);
-        return false;
+        return true;
+    }
+
+    @Override
+    protected int getRetryLimit() {
+        return 2;
     }
 }
