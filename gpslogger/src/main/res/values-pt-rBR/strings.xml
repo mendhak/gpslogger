@@ -123,11 +123,13 @@
   <string name="retry_time_dialog_title">Tempo em segundos</string>
   <string name="retry_time_hint">Digite segundos (máximo de 9999)</string>
   <string name="display_imperial_title">Unidades imperiais</string>
-  <string name="display_imperial_summary">Exibir em pés, milhas e semi-litros, nenhuma dessas unidades da métrica moderna. (Preferências devem ainda ser em unidades métricas)</string>
+  <string name="display_imperial_summary">Exibir em pés, milhas e semi-litros, nenhuma dessas unidades da métrica moderna. (Preferências ainda devem estar em unidades métricas)</string>
   <string name="enabledisablegps_title">Ativar/desativar GPS</string>
   <string name="enabledisablegps_summary">Vá para as configurações do telefone para ativar ou desativar os provedores.</string>
   <string name="startonbootup_title">Carregar na inicialização</string>
   <string name="startonbootup_summary">Rodar o app e gravar log quando telefone iniciar</string>
+  <string name="startonapplaunch_title">Executar ao iniciar app</string>
+  <string name="startonapplaunch_summary">Iniciar o log quando o aplicativo for aberto</string>
   <string name="autoemail_title">Email</string>
   <string name="autoemail_summary">Envia automaticamente um e-mail com o arquivo de log para um endereço de sua escolha</string>
   <string name="please_wait">Aguarde.</string>
@@ -202,7 +204,7 @@
   <string name="owncloud_username">Nome do usuário</string>
   <string name="owncloud_password">Senha</string>
   <string name="owncloud_directory">Pasta</string>
-  <string name="owncloud_directory_summary">Pasta para uso no servidor ownCloud.</string>
+  <string name="owncloud_directory_summary">Pasta para uso no servidor do ownCloud. Certifique-se de sua existência ou o envio falhará.</string>
   <string name="owncloud_test">Teste de Envio do ownCloud</string>
   <string name="owncloud_test_summary">Transferir um arquivo de teste para o servidor do ownCloud</string>
   <string name="owncloud_testing">Teste de transferência de dados do ownCloud</string>
@@ -283,7 +285,7 @@
   <string name="ftp_upload">Upload FTP</string>
   <string name="autoftp_setup_title">FTP</string>
   <string name="autoftp_setup_summary">Upload de seus arquivos para um servidor de FTP. Atenção: Isto não cobre SFTP.</string>
-  <string name="faq_screen_title">Perguntas mais frequentes</string>
+  <string name="faq_screen_title">\@string/menu_faq</string>
   <string name="menu_faq">Ajuda e FAQ</string>
   <string name="gpsf_missing">Falta de serviço</string>
   <string name="gpsf_missing_description">Você vai precisar Services Framework do Google Play para usar esse recurso.</string>
@@ -304,6 +306,7 @@
   <string name="view_simple">Exibição Simples</string>
   <string name="view_detailed">Exibição Detalhada</string>
   <string name="view_big">Exibição Ampliada</string>
+  <string name="view_log">Exibição do Log</string>
   <string name="bigview_taptotoggle">Toque para iniciar/parar log</string>
   <string name="summary_autosendtargets">Fazer upload para:</string>
   <string name="accuracy_filter_title">Filtro de precisão</string>
@@ -353,4 +356,10 @@
   <string name="altitude_subtractgeoidheight_title">Use MSL ao invés de WGS84</string>
   <string name="altitude_subtractoffset_title">Deduzir o desvio de altitude</string>
   <string name="altitude_subtractoffset_summary">Um valor em metros a ser subtraído das altitudes GPS. Use um número negativo para adicionar um valor à altitude. Aplicável somente a pontos do satélite GPS, excluíndo-se os de rede ou NMEA.</string>
+  <string name="upload_failure">Não foi possível enviar o arquivo</string>
+  <string name="inaccurate_point_discarded">Ponto impreciso descartado</string>
+  <string name="not_enough_distance_traveled">Percorreu apenas %s m. Ponto descartado.</string>
+  <string name="autosend_wifionly_title">Enviar somente pela Wi-Fi</string>
+  <string name="logview_showlocationsonly">Somente Localizações</string>
+  <string name="logview_autoscroll">Rolagem Automática</string>
 </resources>

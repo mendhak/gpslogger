@@ -235,7 +235,6 @@
   <string name="autoftp_invalid_summary">Algunas de las preferencias no son válidas. Por favor asegúrese que ha rellenado todos los campos pertinentes.</string>
   <string name="ftp_upload">Subir FTP</string>
   <string name="autoftp_setup_summary">Sube tus archivos a un servidor FTP (S). Nota: Esto no cubre SFTP.</string>
-  <string name="faq_screen_title">Preguntas más frecuentes</string>
   <string name="menu_faq">Ayuda y FAQ</string>
   <string name="gpsf_missing">Falta de servicio</string>
   <string name="gpsf_missing_description">Necesitaras Google Play Services Framework para utilizar esta función.</string>

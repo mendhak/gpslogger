@@ -268,7 +268,6 @@
   <string name="ftp_upload">Envío a FTP</string>
   <string name="autoftp_setup_title">FTP</string>
   <string name="autoftp_setup_summary">Enviar los archivos a un servidor FTP(S). Nota: No compatible con SFTP.</string>
-  <string name="faq_screen_title">Preguntas más frecuentes</string>
   <string name="menu_faq">Ayuda y preguntas frecuentes</string>
   <string name="gpsf_missing">Servicio no disponible</string>
   <string name="gpsf_missing_description">Esta funcionalidad necesita servicios de Google Play.</string>
