@@ -40,28 +40,34 @@
     <Preference android:key="about_version_info"></Preference>
 
     <Preference
+        android:key="gpsloggerdonate_link"
+        android:title="@string/tip_coffee"
+        android:icon="@drawable/coffee" >
+        <intent android:action="android.intent.action.VIEW"
+                android:data="http://code.mendhak.com/gpslogger" />
+    </Preference>
+
+    <Preference
         android:key="gpsvisualizer_link"
         android:title="@string/pref_gpsvisualizer"
         android:summary=""
         android:icon="@drawable/gpsvisualizer"
         />
 
+    <!--<Preference-->
+        <!--android:key="gpsloggerdonate_link"-->
+        <!--android:title="@string/donate_app"-->
+        <!--android:icon="@drawable/gpsloggericon3" >-->
+        <!--<intent android:action="android.intent.action.VIEW"-->
+                <!--android:data="market://details?id=com.mendhak.gpsloggerpro" />-->
+    <!--</Preference>-->
 
-    <Preference
-        android:key="gpsloggerdonate_link"
-        android:title="@string/donate_app"
-        android:icon="@drawable/gpsloggericon3" >
-        <intent android:action="android.intent.action.VIEW"
-                android:data="market://details?id=com.mendhak.gpsloggerpro" />
-        </Preference>
+    <!--<Preference-->
+        <!--android:key="bitcoindonate_link"-->
+        <!--android:title="@string/donate_bitcoin"-->
+        <!--android:icon="@drawable/bitcoin" >-->
 
-
-    <Preference
-        android:key="bitcoindonate_link"
-        android:title="@string/donate_bitcoin"
-        android:icon="@drawable/bitcoin" >
-
-        </Preference>
+        <!--</Preference>-->
 
 
 </PreferenceScreen>
