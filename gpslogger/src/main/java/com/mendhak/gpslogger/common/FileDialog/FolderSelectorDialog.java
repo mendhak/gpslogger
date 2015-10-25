@@ -55,7 +55,7 @@ public class FolderSelectorDialog extends DialogFragment implements MaterialDial
 
     String[] getContentsArray() {
         String[] results = new String[parentContents.length + (canGoUp ? 1 : 0)];
-        if (canGoUp) results[0] = "...";
+        if (canGoUp) results[0] = "︽";
         for (int i = 0; i < parentContents.length; i++)
             results[canGoUp ? i + 1 : i] = parentContents[i].getName();
         return results;
