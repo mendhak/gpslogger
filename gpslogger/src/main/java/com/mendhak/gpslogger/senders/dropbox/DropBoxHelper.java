@@ -149,7 +149,7 @@ public class DropBoxHelper implements IFileSender {
 
     public void UploadFile(String fileName) {
         JobManager jobManager = AppSettings.GetJobManager();
-        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, DropboxJob.JOB_TAG);
+        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, DropboxJob.getJobTag(fileName));
         jobManager.addJobInBackground(new DropboxJob(fileName, BuildConfig.DROPBOX_APP_KEY, BuildConfig.DROPBOX_APP_SECRET, getKeys()));
     }
 

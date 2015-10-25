@@ -24,16 +24,19 @@ import java.net.URLEncoder;
 import de.greenrobot.event.EventBus;
 
 public class GDocsJob extends Job {
-    public static final String JOB_TAG="GOOGLEDRIVE";
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GDocsJob.class.getSimpleName());
     String token;
     File gpxFile;
     String googleDriveFolderName;
 
     protected GDocsJob(File gpxFile, String googleDriveFolderName) {
-        super(new Params(1).requireNetwork().persist().addTags(JOB_TAG));
+        super(new Params(1).requireNetwork().persist().addTags(getJobTag(gpxFile)));
         this.gpxFile = gpxFile;
         this.googleDriveFolderName = googleDriveFolderName;
+    }
+
+    public static String getJobTag(File gpxFile){
+        return "GOOGLEDRIVE" + gpxFile.getName();
     }
 
     @Override

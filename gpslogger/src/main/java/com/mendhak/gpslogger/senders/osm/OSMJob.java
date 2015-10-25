@@ -22,7 +22,7 @@ import oauth.signpost.OAuthConsumer;
 
 public class OSMJob extends Job {
 
-    public static final String JOB_TAG="OSM";
+
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OSMJob.class.getSimpleName());
     OAuthConsumer consumer;
     String gpsTraceUrl;
@@ -32,7 +32,7 @@ public class OSMJob extends Job {
     String visibility;
 
     protected OSMJob(OAuthConsumer consumer, String gpsTraceUrl, File chosenFile, String description, String tags, String visibility) {
-        super(new Params(1).requireNetwork().persist().addTags(JOB_TAG));
+        super(new Params(1).requireNetwork().persist().addTags(getJobTag(chosenFile)));
 
         this.consumer = consumer;
         this.gpsTraceUrl = gpsTraceUrl;
@@ -87,5 +87,10 @@ public class OSMJob extends Job {
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
         tracer.error("Could not send to OpenStreetMap", throwable);
         return false;
+    }
+
+    public static String getJobTag(File gpxFile) {
+        return "OSM" + gpxFile.getName();
+
     }
 }

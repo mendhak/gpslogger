@@ -106,7 +106,7 @@ public class OSMHelper implements IFileSender {
         String visibility = AppSettings.getOSMVisibility();
 
         JobManager jobManager = AppSettings.GetJobManager();
-        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OSMJob.JOB_TAG);
+        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OSMJob.getJobTag(chosenFile));
         jobManager.addJobInBackground(new OSMJob( consumer, gpsTraceUrl, chosenFile, description, tags, visibility));
     }
 

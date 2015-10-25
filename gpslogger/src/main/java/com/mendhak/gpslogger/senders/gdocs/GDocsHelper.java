@@ -99,7 +99,7 @@ public class GDocsHelper implements IFileSender {
             }
 
             JobManager jobManager = AppSettings.GetJobManager();
-            jobManager.cancelJobsInBackground(null, TagConstraint.ANY, GDocsJob.JOB_TAG);
+            jobManager.cancelJobsInBackground(null, TagConstraint.ANY, GDocsJob.getJobTag(gpxFile));
             jobManager.addJobInBackground(new GDocsJob(gpxFile, uploadFolderName));
 
         } catch (Exception e) {

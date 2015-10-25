@@ -18,7 +18,6 @@ import java.io.IOException;
 
 public class FtpJob extends Job {
 
-    public static final String JOB_TAG = "FTP";
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FtpJob.class.getSimpleName());
 
     String server;
@@ -35,7 +34,7 @@ public class FtpJob extends Job {
     protected FtpJob(String server, int port, String username,
                      String password, String directory, boolean useFtps, String protocol, boolean implicit,
                      File gpxFile, String fileName) {
-        super(new Params(1).requireNetwork().persist().addTags(JOB_TAG));
+        super(new Params(1).requireNetwork().persist().addTags(getJobTag(gpxFile)));
 
         this.server = server;
         this.port = port;
@@ -185,5 +184,9 @@ public class FtpJob extends Job {
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
         tracer.error("Could not FTP file", throwable);
         return false;
+    }
+
+    public static String getJobTag(File testFile) {
+        return "FTP"+testFile.getName();
     }
 }

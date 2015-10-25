@@ -51,7 +51,7 @@ public class OwnCloudHelper implements IFileSender
         }
 
         JobManager jobManager = AppSettings.GetJobManager();
-        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OwnCloudJob.JOB_TAG);
+        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OwnCloudJob.getJobTag(testFile));
         jobManager.addJobInBackground(new OwnCloudJob(servername, username, password, directory,
                 testFile, "gpslogger_test.txt"));
         tracer.debug("Added background ownCloud upload job");
@@ -78,7 +78,7 @@ public class OwnCloudHelper implements IFileSender
     public void UploadFile(File f)
     {
         JobManager jobManager = AppSettings.GetJobManager();
-        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OwnCloudJob.JOB_TAG);
+        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OwnCloudJob.getJobTag(f));
         jobManager.addJobInBackground(new OwnCloudJob(
                 AppSettings.getOwnCloudServerName(),
                 AppSettings.getOwnCloudUsername(),

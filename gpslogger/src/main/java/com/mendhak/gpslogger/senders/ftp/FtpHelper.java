@@ -67,7 +67,7 @@ public class FtpHelper implements IFileSender {
         }
 
         JobManager jobManager = AppSettings.GetJobManager();
-        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, FtpJob.JOB_TAG);
+        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, FtpJob.getJobTag(testFile));
         jobManager.addJobInBackground(new FtpJob(servername, port, username, password, directory,
                 useFtps, protocol, implicit, testFile, "gpslogger_test.txt"));
     }
@@ -87,7 +87,7 @@ public class FtpHelper implements IFileSender {
     public void UploadFile(File f) {
 
         JobManager jobManager = AppSettings.GetJobManager();
-        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, FtpJob.JOB_TAG);
+        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, FtpJob.getJobTag(f));
         jobManager.addJobInBackground(new FtpJob(AppSettings.getFtpServerName(), AppSettings.getFtpPort(),
                 AppSettings.getFtpUsername(), AppSettings.getFtpPassword(), AppSettings.getFtpDirectory(),
                 AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit(),
