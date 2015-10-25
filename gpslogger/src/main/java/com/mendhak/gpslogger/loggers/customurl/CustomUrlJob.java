@@ -1,6 +1,7 @@
 package com.mendhak.gpslogger.loggers.customurl;
 
 import android.location.Location;
+import android.util.Base64;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
@@ -14,6 +15,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CustomUrlJob extends Job {
 
@@ -42,6 +45,15 @@ public class CustomUrlJob extends Job {
     @Override
     public void onRun() throws Throwable {
         HttpURLConnection conn;
+
+        String basicUsername="", basicPassword="";
+        Pattern r = Pattern.compile("(\\w+):(\\w+)@.+"); //Looking for http://username:password@example.com/....
+        Matcher m =  r.matcher(logUrl);
+        while(m.find()){
+            basicUsername = m.group(1);
+            basicPassword = m.group(2);
+            logUrl = logUrl.replace(basicUsername + ":" + basicPassword+"@","");
+        }
 
         //String logUrl = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV
         // &spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER";
@@ -72,6 +84,12 @@ public class CustomUrlJob extends Job {
         }
 
         conn.setRequestMethod("GET");
+
+        if(!Utilities.IsNullOrEmpty(basicPassword) && !Utilities.IsNullOrEmpty(basicUsername) ){
+            String basicAuth = "Basic " + new String(Base64.encode((basicUsername + ":" + basicPassword).getBytes(), Base64.DEFAULT));
+            conn.setRequestProperty("Authorization", basicAuth);
+        }
+
 
         if(conn.getResponseCode() != 200){
             tracer.error("Status code: " + String.valueOf(conn.getResponseCode()));

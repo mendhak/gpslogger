@@ -150,6 +150,9 @@ dependencies {
     //Android lollipop/material features including the Toolbar
     compile "com.android.support:appcompat-v7:22.2.0"
 
+    //Recycler view required by material dialog custom URL alert box
+    compile "com.android.support:recyclerview-v7:22.2.0"
+
     //Cardviews
     compile "com.android.support:cardview-v7:22.2.0"
 
