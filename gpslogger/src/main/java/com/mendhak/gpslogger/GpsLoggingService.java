@@ -741,6 +741,15 @@ public class GpsLoggingService extends Service  {
 
 
         boolean isPassiveLocation = loc.getExtras().getBoolean("PASSIVE");
+        
+        //check if we change of day and then write the last position of yesterday as the first position of today
+        if (AppSettings.shouldCreateNewFileOnceADay()) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+            String today = sdf.format(new Date());
+            if (!today.equals(Session.getCurrentFileName()))
+                ResetCurrentFileName(false);
+        }
+        
 
         // Don't do anything until the user-defined accuracy is reached
         // However, if user has set an annotation, just log the point, disregard any filters
