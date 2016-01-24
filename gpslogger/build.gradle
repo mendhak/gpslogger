@@ -29,8 +29,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 69
-        versionName "69"
+        versionCode 70
+        versionName "70-issue376"
     }
 
     //Adding API keys to BuildConfig
