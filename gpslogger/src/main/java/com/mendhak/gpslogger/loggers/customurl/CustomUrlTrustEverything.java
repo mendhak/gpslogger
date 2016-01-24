@@ -12,7 +12,7 @@ public class CustomUrlTrustEverything {
 
         SSLContext sslContext;
         try {
-            sslContext = SSLContext.getInstance("SSL");
+            sslContext = SSLContext.getInstance("TLS");
             sslContext.init(null, trustManager, new java.security.SecureRandom());
             return sslContext.getSocketFactory();
         }
