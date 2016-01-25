@@ -21,11 +21,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.*;
+import android.support.annotation.NonNull;
 import android.text.Html;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.MainPreferenceActivity;
@@ -118,13 +120,14 @@ public class LoggingSettingsFragment extends PreferenceFragment
                     .customView(R.layout.alertview, true)
                     .positiveText(R.string.ok)
                     .negativeText(R.string.cancel)
-                    .callback(new MaterialDialog.ButtonCallback() {
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
                         @Override
-                        public void onPositive(MaterialDialog dialog) {
-                            EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
+                        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                            EditText userInput = (EditText) materialDialog.getCustomView().findViewById(R.id.alert_user_input);
                             AppSettings.setCustomFileName(userInput.getText().toString());
                         }
-                    }).build();
+                    })
+                   .build();
 
             EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
             userInput.setText(AppSettings.getCustomFileName());
@@ -166,10 +169,10 @@ public class LoggingSettingsFragment extends PreferenceFragment
                         .title(R.string.log_customurl_title)
                         .customView(R.layout.alertview, true)
                         .positiveText(R.string.ok)
-                        .callback(new MaterialDialog.ButtonCallback() {
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
-                            public void onPositive(MaterialDialog dialog) {
-                                EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
+                            public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                                EditText userInput = (EditText) materialDialog.getCustomView().findViewById(R.id.alert_user_input);
                                 AppSettings.setCustomLoggingUrl(userInput.getText().toString());
                             }
                         })

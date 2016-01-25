@@ -30,6 +30,7 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.text.Spanned;
 import android.text.format.Time;
 import android.text.method.LinkMovementMethod;
@@ -40,6 +41,7 @@ import ch.qos.logback.classic.android.LogcatAppender;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.rolling.TimeBasedRollingPolicy;
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.GpsRollingFileAppender;
@@ -184,17 +186,18 @@ public class Utilities {
                 .title(title)
                 .content(message)
                 .positiveText(R.string.ok)
-                .callback(new MaterialDialog.ButtonCallback() {
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         if (msgCallback != null) {
                             msgCallback.MessageBoxResult(0);
                         }
                     }
-
+                })
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onNegative(MaterialDialog dialog) {
-                        super.onNegative(dialog);
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+
                     }
                 })
                 .build();

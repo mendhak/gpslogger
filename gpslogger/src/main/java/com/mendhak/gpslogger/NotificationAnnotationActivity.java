@@ -22,10 +22,12 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import de.greenrobot.event.EventBus;
@@ -49,21 +51,16 @@ public class NotificationAnnotationActivity extends Activity {
                 .customView(R.layout.alertview, false)
                 .positiveText(R.string.ok)
                 .negativeText(R.string.cancel)
-                .callback(new MaterialDialog.ButtonCallback() {
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onNeutral(MaterialDialog dialog) {
-                        super.onNeutral(dialog);
-                    }
-
-                    @Override
-                    public void onNegative(MaterialDialog dialog) {
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         finish();
                     }
-
+                })
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
-
-                        EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                        EditText userInput = (EditText) materialDialog.getCustomView().findViewById(R.id.alert_user_input);
                         tracer.info("Annotation from notification: " + userInput.getText().toString());
 
                         EventBus.getDefault().postSticky(new CommandEvents.Annotate(userInput.getText().toString()));
@@ -73,7 +70,8 @@ public class NotificationAnnotationActivity extends Activity {
 
                         finish();
                     }
-                }).cancelListener(new DialogInterface.OnCancelListener() {
+                })
+               .cancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialog) {
                         dialog.dismiss();

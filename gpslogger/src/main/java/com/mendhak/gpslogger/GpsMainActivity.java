@@ -29,12 +29,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.internal.view.menu.ActionMenuItemView;
+import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
@@ -307,6 +308,7 @@ public class GpsMainActivity extends ActionBarActivity
                     @Override
                     public boolean onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
                         Utilities.MsgBox(String.valueOf(view.getId()), String.valueOf(charSequence), GpsMainActivity.this);
+                        materialDialog.dismiss();
                         return true;
                     }
                 })
@@ -327,6 +329,7 @@ public class GpsMainActivity extends ActionBarActivity
             @Override
             public void onClick(View view) {
                 Utilities.MsgBox("Negat", String.valueOf(profilesDialog.getSelectedIndex()), GpsMainActivity.this);
+                profilesDialog.dismiss();
             }
         });
 
@@ -341,9 +344,7 @@ public class GpsMainActivity extends ActionBarActivity
                             @Override
                             public void onClick(DrawerProfile drawerProfile, long id) {
                                 //Toast.makeText(getApplicationContext(), "Clicked profile #" + id, Toast.LENGTH_SHORT).show();
-
                                 profilesDialog.show();
-
                             }
                         })
         );
@@ -737,10 +738,10 @@ public class GpsMainActivity extends ActionBarActivity
                 .title(R.string.add_description)
                 .customView(R.layout.alertview, true)
                 .positiveText(R.string.ok)
-                .callback(new MaterialDialog.ButtonCallback() {
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
-                        EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                        EditText userInput = (EditText) materialDialog.getCustomView().findViewById(R.id.alert_user_input);
                         EventBus.getDefault().postSticky(new CommandEvents.Annotate(userInput.getText().toString()));
                     }
                 }).build();

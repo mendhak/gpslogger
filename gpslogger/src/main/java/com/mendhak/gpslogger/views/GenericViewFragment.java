@@ -23,10 +23,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
@@ -77,9 +79,9 @@ public abstract class GenericViewFragment extends Fragment {
                 .content(R.string.gpsprovider_unavailable)
                 .positiveText(R.string.ok)
                 .negativeText(R.string.cancel)
-                .callback(new MaterialDialog.ButtonCallback() {
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onPositive(MaterialDialog dialog) {
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         getActivity().startActivity(settingsIntent);
@@ -102,11 +104,11 @@ public abstract class GenericViewFragment extends Fragment {
                     .title(R.string.new_file_custom_title)
                     .customView(R.layout.alertview, true)
                     .positiveText(R.string.ok)
-                    .callback(new MaterialDialog.ButtonCallback() {
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
                         @Override
-                        public void onPositive(MaterialDialog dialog) {
+                        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                             String chosenFileName = AppSettings.getCustomFileName();
-                            EditText userInput = (EditText) dialog.getCustomView().findViewById(R.id.alert_user_input);
+                            EditText userInput = (EditText) materialDialog.getCustomView().findViewById(R.id.alert_user_input);
 
                             if (!Utilities.IsNullOrEmpty(userInput.getText().toString()) && !userInput.getText().toString().equalsIgnoreCase(chosenFileName)) {
                                 AppSettings.setCustomFileName(userInput.getText().toString());

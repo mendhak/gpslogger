@@ -5,8 +5,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
 
@@ -27,18 +29,23 @@ public class FolderSelectorDialog extends DialogFragment implements MaterialDial
     private boolean canGoUp = true;
     private FolderSelectCallback mCallback;
 
-    private final MaterialDialog.ButtonCallback mButtonCallback = new MaterialDialog.ButtonCallback() {
+
+    private final MaterialDialog.SingleButtonCallback positiveCallback = new MaterialDialog.SingleButtonCallback() {
         @Override
-        public void onPositive(MaterialDialog materialDialog) {
+        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
             materialDialog.dismiss();
             mCallback.onFolderSelection(parentFolder);
         }
+    };
 
+    private final MaterialDialog.SingleButtonCallback negativeCallback = new MaterialDialog.SingleButtonCallback() {
         @Override
-        public void onNegative(MaterialDialog materialDialog) {
+        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
             materialDialog.dismiss();
         }
     };
+
+
 
     public static interface FolderSelectCallback {
         void onFolderSelection(File folder);
@@ -80,7 +87,8 @@ public class FolderSelectorDialog extends DialogFragment implements MaterialDial
                 .title(parentFolder.getAbsolutePath())
                 .items(getContentsArray())
                 .itemsCallback(this)
-                .callback(mButtonCallback)
+                .onPositive(positiveCallback)
+                .onNegative(negativeCallback)
                 .autoDismiss(false)
                 .positiveText(R.string.ok)
                 .negativeText(android.R.string.cancel)
