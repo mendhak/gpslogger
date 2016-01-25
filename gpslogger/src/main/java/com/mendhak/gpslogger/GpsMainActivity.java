@@ -20,17 +20,16 @@ package com.mendhak.gpslogger;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.*;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.v4.graphics.ColorUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -57,9 +56,12 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.heinrichreimersoftware.materialdrawer.DrawerView;
+import com.heinrichreimersoftware.materialdrawer.adapter.DrawerProfileAdapter;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
@@ -297,6 +299,56 @@ public class GpsMainActivity extends ActionBarActivity
         drawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.primaryColorDark));
         drawerLayout.setDrawerListener(drawerToggle);
         drawerLayout.closeDrawer(drawer);
+
+        final MaterialDialog profilesDialog = new MaterialDialog.Builder(GpsMainActivity.this)
+                .title(R.string.osm_pick_file)
+                .items(new String[]{"a", "b", "c"})
+                .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
+                        Utilities.MsgBox(String.valueOf(view.getId()), String.valueOf(charSequence), GpsMainActivity.this);
+                        return true;
+                    }
+                })
+                .positiveText("Load profile")
+                .negativeText("Delete")
+                .negativeColor(getResources().getColor(R.color.errorColor))
+                .build();
+
+        profilesDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                profilesDialog.setSelectedIndex(-1);
+            }
+        });
+
+
+        profilesDialog.getActionButton(DialogAction.NEGATIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utilities.MsgBox("Negat", String.valueOf(profilesDialog.getSelectedIndex()), GpsMainActivity.this);
+            }
+        });
+
+
+        drawer.addProfile(new DrawerProfile()
+                        .setId(100)
+                                //.setRoundedAvatar((BitmapDrawable)getResources().getDrawable(R.drawable.profile_avatar))
+                                //.setBackground(getResources().getDrawable(R.drawable.profile_cover))
+                        .setName("Default name")
+                                //.setDescription("Default Des"))
+                        .setOnProfileClickListener(new DrawerProfile.OnProfileClickListener() {
+                            @Override
+                            public void onClick(DrawerProfile drawerProfile, long id) {
+                                //Toast.makeText(getApplicationContext(), "Clicked profile #" + id, Toast.LENGTH_SHORT).show();
+
+                                profilesDialog.show();
+
+                            }
+                        })
+        );
+
+
 
         drawer.addDivider();
         drawer.addItem(new DrawerItem()
