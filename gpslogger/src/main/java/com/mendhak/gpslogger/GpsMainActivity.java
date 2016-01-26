@@ -23,11 +23,7 @@ import android.app.FragmentTransaction;
 import android.content.*;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.IBinder;
+import android.os.*;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -81,6 +77,7 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import org.slf4j.LoggerFactory;
@@ -102,6 +99,7 @@ public class GpsMainActivity extends ActionBarActivity
     private org.slf4j.Logger tracer;
 
     Drawer materialDrawer;
+    AccountHeader drawerHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +113,8 @@ public class GpsMainActivity extends ActionBarActivity
         setContentView(R.layout.activity_gps_main);
 
         SetUpToolbar();
-        SetUpNavigationDrawer();
+        SetUpNavigationDrawer(savedInstanceState);
+
         LoadDefaultFragmentView();
         StartAndBindService();
         RegisterEventBus();
@@ -124,6 +123,17 @@ public class GpsMainActivity extends ActionBarActivity
             tracer.debug("Start logging on app launch");
             EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        //Save the drawer's selected values to bundle
+        //useful if activity recreated due to rotation
+        outState = materialDrawer.saveInstanceState(outState);
+        outState = drawerHeader.saveInstanceState(outState);
+
+        super.onSaveInstanceState(outState);
     }
 
     private void RegisterEventBus() {
@@ -280,7 +290,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     }
 
-    public void SetUpNavigationDrawer() {
+    public void SetUpNavigationDrawer(Bundle savedInstanceState) {
 
         final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -302,30 +312,26 @@ public class GpsMainActivity extends ActionBarActivity
         };
 
 
-        AccountHeader drawerHeader = new AccountHeaderBuilder()
+        drawerHeader = new AccountHeaderBuilder()
                 .withActivity(this)
+                .withSavedInstance(savedInstanceState)
                 .withProfileImagesVisible(false)
-                .withHeaderBackground(R.drawable.abc_dialog_material_background_dark)
+                .withHeaderBackground(R.drawable.header)
                 .addProfiles(
                         new ProfileDrawerItem()
-                                .withName("Default")
-                                .withSelectable(false)
+                                .withName("Default Profile")
                                 .withIdentifier(100)
-                        //.withEmail("mikepenz@gmail.com")
-                        //.withIcon(getResources().getDrawable(R.drawable.gpsloggericon3))
+                                .withTag("PROFILE_DEFAULT")
                         ,
-                        new ProfileDrawerItem()
+                        new ProfileSettingDrawerItem()
                                 .withIdentifier(101)
-                                .withName("new profile")
-                                .withIcon(R.drawable.common_plus_signin_btn_icon_dark)
-                                .withTextColor(R.color.secondaryColorText)
-                                .withSelectable(false)
+                                .withName("Add profile")
                                 .withTag("PROFILE_ADD")
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
-                        return false;
+                        return true;
                     }
                 })
                 .withOnAccountHeaderItemLongClickListener(new AccountHeader.OnAccountHeaderItemLongClickListener() {
@@ -343,10 +349,17 @@ public class GpsMainActivity extends ActionBarActivity
                 })
                 .build();
 
-        drawerHeader.addProfile(new ProfileDrawerItem().withName("Test profile").withSelectable(false), 1);
+        drawerHeader.addProfile(new ProfileDrawerItem().withName("Test profile").withIdentifier(102), 1);
+
+        if(savedInstanceState == null){
+            drawerHeader.setActiveProfile(102);
+        }
+
+
 
         materialDrawer = new DrawerBuilder()
                 .withActivity(this)
+                .withSavedInstance(savedInstanceState)
                 .withToolbar(GetToolbar())
                 .withActionBarDrawerToggle(drawerToggle)
                 .withDrawerGravity(Gravity.LEFT)
