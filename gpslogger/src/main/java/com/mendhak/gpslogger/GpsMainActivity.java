@@ -322,11 +322,15 @@ public class GpsMainActivity extends ActionBarActivity
                                 .withName("Default Profile")
                                 .withIdentifier(100)
                                 .withTag("PROFILE_DEFAULT")
+                                .withTextColorRes(R.color.primaryColorText)
                         ,
                         new ProfileSettingDrawerItem()
+                                .withIcon(android.R.drawable.ic_menu_add)
                                 .withIdentifier(101)
                                 .withName("Add profile")
                                 .withTag("PROFILE_ADD")
+                                .withTextColorRes(R.color.primaryColorText)
+
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
@@ -349,13 +353,13 @@ public class GpsMainActivity extends ActionBarActivity
                 })
                 .build();
 
-        drawerHeader.addProfile(new ProfileDrawerItem().withName("Test profile").withIdentifier(102), 1);
+        drawerHeader.addProfile(new ProfileDrawerItem().withName("Test profile").withIdentifier(102).withTextColorRes(R.color.primaryColorText), 1);
 
         if(savedInstanceState == null){
-            drawerHeader.setActiveProfile(102);
+            //Set to the user selected profile, or default
+            drawerHeader.setActiveProfile(100);
+
         }
-
-
 
         materialDrawer = new DrawerBuilder()
                 .withActivity(this)
