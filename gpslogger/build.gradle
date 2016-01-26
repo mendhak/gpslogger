@@ -167,7 +167,9 @@ dependencies {
     }
 
     //The material drawer
-    compile 'com.heinrichreimersoftware.materialdrawer:library:2.1'
+    compile('com.mikepenz:materialdrawer:4.6.4@aar') {
+        transitive = true
+    }
 
     //Progress button
     compile 'com.github.dmytrodanylyk.android-process-button:library:1.0.0'

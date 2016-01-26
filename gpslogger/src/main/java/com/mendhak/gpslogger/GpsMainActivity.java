@@ -22,7 +22,6 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.*;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,7 +29,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
-import android.support.v4.graphics.ColorUtils;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -59,10 +57,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.heinrichreimersoftware.materialdrawer.DrawerView;
-import com.heinrichreimersoftware.materialdrawer.adapter.DrawerProfileAdapter;
-import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
-import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
+
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
@@ -79,6 +74,15 @@ import com.mendhak.gpslogger.senders.osm.OSMHelper;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudHelper;
 import com.mendhak.gpslogger.views.*;
 
+import com.mendhak.gpslogger.views.component.GpsLoggerDrawerItem;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
@@ -96,6 +100,8 @@ public class GpsMainActivity extends ActionBarActivity
     private static Intent serviceIntent;
     private ActionBarDrawerToggle drawerToggle;
     private org.slf4j.Logger tracer;
+
+    Drawer materialDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -277,7 +283,6 @@ public class GpsMainActivity extends ActionBarActivity
     public void SetUpNavigationDrawer() {
 
         final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        final DrawerView drawer = (DrawerView) findViewById(R.id.drawer);
 
         drawerToggle = new ActionBarDrawerToggle(
                 this,
@@ -285,7 +290,7 @@ public class GpsMainActivity extends ActionBarActivity
                 GetToolbar(),
                 R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close
-        ){
+        ) {
 
             public void onDrawerClosed(View view) {
                 invalidateOptionsMenu();
@@ -297,200 +302,129 @@ public class GpsMainActivity extends ActionBarActivity
         };
 
 
-        drawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.primaryColorDark));
-        drawerLayout.setDrawerListener(drawerToggle);
-        drawerLayout.closeDrawer(drawer);
-
-        final MaterialDialog profilesDialog = new MaterialDialog.Builder(GpsMainActivity.this)
-                .title(R.string.osm_pick_file)
-                .items(new String[]{"a", "b", "c"})
-                .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
+        AccountHeader drawerHeader = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withProfileImagesVisible(false)
+                .withHeaderBackground(R.drawable.abc_dialog_material_background_dark)
+                .addProfiles(
+                        new ProfileDrawerItem()
+                                .withName("Default")
+                                .withSelectable(false)
+                                .withIdentifier(100)
+                        //.withEmail("mikepenz@gmail.com")
+                        //.withIcon(getResources().getDrawable(R.drawable.gpsloggericon3))
+                        ,
+                        new ProfileDrawerItem()
+                                .withIdentifier(101)
+                                .withName("new profile")
+                                .withIcon(R.drawable.common_plus_signin_btn_icon_dark)
+                                .withTextColor(R.color.secondaryColorText)
+                                .withSelectable(false)
+                                .withTag("PROFILE_ADD")
+                )
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
-                    public boolean onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
-                        Utilities.MsgBox(String.valueOf(view.getId()), String.valueOf(charSequence), GpsMainActivity.this);
-                        materialDialog.dismiss();
-                        return true;
+                    public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
+                        return false;
                     }
                 })
-                .positiveText("Load profile")
-                .negativeText("Delete")
-                .negativeColor(getResources().getColor(R.color.errorColor))
+                .withOnAccountHeaderItemLongClickListener(new AccountHeader.OnAccountHeaderItemLongClickListener() {
+                    @Override
+                    public boolean onProfileLongClick(View view, IProfile iProfile, boolean b) {
+                        if (iProfile.getIdentifier() > 101) {
+                            MaterialDialog confirmDeleteDialog = new MaterialDialog.Builder(GpsMainActivity.this)
+                                    .title("Delete profile?")
+                                    .positiveText(R.string.ok)
+                                    .negativeText(R.string.cancel)
+                                    .show();
+                        }
+                        return false;
+                    }
+                })
                 .build();
 
-        profilesDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+        drawerHeader.addProfile(new ProfileDrawerItem().withName("Test profile").withSelectable(false), 1);
+
+        materialDrawer = new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(GetToolbar())
+                .withActionBarDrawerToggle(drawerToggle)
+                .withDrawerGravity(Gravity.LEFT)
+                .withAccountHeader(drawerHeader)
+                .build();
+
+
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.pref_general_title, R.string.pref_general_summary, R.drawable.settings, 1000));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.pref_logging_title, R.string.pref_logging_summary, R.drawable.loggingsettings, 1001));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.pref_performance_title, R.string.pref_performance_summary, R.drawable.performance, 1002));
+        materialDrawer.addItem(new DividerDrawerItem());
+
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.pref_autosend_title, R.string.pref_autosend_summary, R.drawable.autosend, 1003));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.gdocs_setup_title, R.drawable.googledrive, 1004));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.dropbox_setup_title, R.drawable.dropbox, 1005));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.autoemail_title, R.drawable.email, 1006));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.autoftp_setup_title, R.drawable.ftp, 1007));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.opengts_setup_title, R.drawable.opengts, 1008));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.osm_setup_title, R.drawable.openstreetmap, 1009));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.owncloud_setup_title, R.drawable.owncloud, 1010));
+        materialDrawer.addItem(new DividerDrawerItem());
+
+        materialDrawer.addStickyFooterItem(GpsLoggerDrawerItem.newSecondary(R.string.menu_faq, R.drawable.helpfaq, 1011));
+        materialDrawer.addStickyFooterItem(GpsLoggerDrawerItem.newSecondary(R.string.menu_exit, R.drawable.exit, 1012));
+
+
+        materialDrawer.setOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
             @Override
-            public void onShow(DialogInterface dialogInterface) {
-                profilesDialog.setSelectedIndex(-1);
-            }
-        });
+            public boolean onItemClick(View view, int i, IDrawerItem iDrawerItem) {
 
-
-        profilesDialog.getActionButton(DialogAction.NEGATIVE).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utilities.MsgBox("Negat", String.valueOf(profilesDialog.getSelectedIndex()), GpsMainActivity.this);
-                profilesDialog.dismiss();
-            }
-        });
-
-
-        drawer.addProfile(new DrawerProfile()
-                        .setId(100)
-                                //.setRoundedAvatar((BitmapDrawable)getResources().getDrawable(R.drawable.profile_avatar))
-                                //.setBackground(getResources().getDrawable(R.drawable.profile_cover))
-                        .setName("Default name")
-                                //.setDescription("Default Des"))
-                        .setOnProfileClickListener(new DrawerProfile.OnProfileClickListener() {
-                            @Override
-                            public void onClick(DrawerProfile drawerProfile, long id) {
-                                //Toast.makeText(getApplicationContext(), "Clicked profile #" + id, Toast.LENGTH_SHORT).show();
-                                profilesDialog.show();
-                            }
-                        })
-        );
-
-
-
-        drawer.addDivider();
-        drawer.addItem(new DrawerItem()
-                        .setId(1000)
-                        .setImage(getResources().getDrawable(R.drawable.settings))
-                        .setTextPrimary(getString(R.string.pref_general_title))
-                        .setTextSecondary(getString(R.string.pref_general_summary))
-        );
-
-        drawer.addItem(new DrawerItem()
-                        .setId(1)
-                        .setImage(getResources().getDrawable(R.drawable.loggingsettings))
-                        .setTextPrimary(getString(R.string.pref_logging_title))
-                        .setTextSecondary(getString(R.string.pref_logging_summary))
-        );
-
-        drawer.addItem(new DrawerItem()
-                        .setId(2)
-                        .setImage(getResources().getDrawable(R.drawable.performance))
-                        .setTextPrimary(getString(R.string.pref_performance_title))
-                        .setTextSecondary(getString(R.string.pref_performance_summary))
-        );
-
-
-        drawer.addDivider();
-
-
-        drawer.addItem(new DrawerItem()
-                .setId(3)
-                .setImage(getResources().getDrawable(R.drawable.autosend))
-                .setTextPrimary(getString(R.string.pref_autosend_title))
-                .setTextSecondary(getString(R.string.pref_autosend_summary)));
-
-        drawer.addItem(new DrawerItem()
-                        .setId(4)
-                        .setImage(getResources().getDrawable(R.drawable.googledrive))
-                        .setTextPrimary(getString(R.string.gdocs_setup_title))
-        );
-
-        drawer.addItem(new DrawerItem()
-                        .setId(5)
-                        .setImage(getResources().getDrawable(R.drawable.dropbox))
-                        .setTextPrimary(getString(R.string.dropbox_setup_title))
-        );
-
-        drawer.addItem(new DrawerItem()
-                        .setId(6)
-                        .setImage(getResources().getDrawable(R.drawable.email))
-                        .setTextPrimary(getString(R.string.autoemail_title))
-        );
-
-        drawer.addItem(new DrawerItem()
-                        .setId(7)
-                        .setImage(getResources().getDrawable(R.drawable.ftp))
-                        .setTextPrimary(getString(R.string.autoftp_setup_title))
-        );
-
-        drawer.addItem(new DrawerItem()
-                        .setId(8)
-                        .setImage(getResources().getDrawable(R.drawable.opengts))
-                        .setTextPrimary(getString(R.string.opengts_setup_title))
-        );
-
-        drawer.addItem(new DrawerItem()
-                        .setId(9)
-                        .setImage(getResources().getDrawable(R.drawable.openstreetmap))
-                        .setTextPrimary(getString(R.string.osm_setup_title))
-        );
-
-        drawer.addItem(new DrawerItem()
-                        .setId(10)
-                        .setImage(getResources().getDrawable(R.drawable.owncloud))
-                        .setTextPrimary(getString(R.string.owncloud_setup_title))
-        );
-
-        drawer.addDivider();
-
-        drawer.addItem(new DrawerItem()
-                        .setId(11)
-                        .setImage(getResources().getDrawable(R.drawable.helpfaq))
-                        .setTextPrimary(getString(R.string.menu_faq))
-        );
-
-        drawer.addItem(new DrawerItem()
-                        .setId(12)
-                        .setImage(getResources().getDrawable(R.drawable.exit))
-                        .setTextPrimary(getString(R.string.menu_exit)));
-
-        //drawer.selectItem(3);
-
-        drawer.setOnItemClickListener(new DrawerItem.OnItemClickListener() {
-            @Override
-            public void onClick(DrawerItem drawerItem, long id, int position) {
-                //drawer.selectItem(3);
-                drawerLayout.closeDrawer(drawer);
-
-                switch((int)id){
+                switch (iDrawerItem.getIdentifier()) {
                     case 1000:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GENERAL);
                         break;
-                    case 1:
+                    case 1001:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.LOGGING);
                         break;
-                    case 2:
+                    case 1002:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.PERFORMANCE);
                         break;
-                    case 3:
+                    case 1003:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
                         break;
-                    case 4:
+                    case 1004:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
                         break;
-                    case 5:
+                    case 1005:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
                         break;
-                    case 6:
+                    case 1006:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
                         break;
-                    case 7:
+                    case 1007:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
                         break;
-                    case 8:
+                    case 1008:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
                         break;
-                    case 9:
+                    case 1009:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
                         break;
-                    case 10:
+                    case 1010:
                         LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OWNCLOUD);
                         break;
-                    case 11:
+                    case 1011:
                         Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
                         startActivity(faqtivity);
                         break;
-                    case 12:
+                    case 1012:
                         EventBus.getDefault().post(new CommandEvents.RequestStartStop(false));
                         finish();
                         break;
+
                 }
+                return false;
             }
         });
+
 
         ImageButton helpButton = (ImageButton) findViewById(R.id.imgHelp);
         helpButton.setOnClickListener(new View.OnClickListener() {
@@ -505,11 +439,12 @@ public class GpsMainActivity extends ActionBarActivity
 
     public void ToggleDrawer(){
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
-            drawerLayout.closeDrawer(Gravity.LEFT);
+        if(materialDrawer.isDrawerOpen()){
+            materialDrawer.closeDrawer();
+
         }
         else {
-            drawerLayout.openDrawer(Gravity.LEFT);
+            materialDrawer.openDrawer();
         }
     }
 
