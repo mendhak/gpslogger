@@ -26,6 +26,7 @@ import com.path.android.jobqueue.config.Configuration;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
+import java.io.*;
 import java.util.*;
 
 public class AppSettings extends Application {
@@ -180,7 +181,7 @@ public class AppSettings extends Application {
      * Which navigation item the user selected
      */
     public static int getUserSelectedNavigationItem() {
-        return prefs.getInt("SPINNER_SELECTED_POSITION", 0);
+        return Utilities.parseWithDefault(prefs.getString("selected_navitem", "0"),0);
     }
 
     /**
@@ -188,7 +189,7 @@ public class AppSettings extends Application {
      */
     public static void setUserSelectedNavigationItem(int position) {
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("SPINNER_SELECTED_POSITION", position);
+        editor.putString("selected_navitem", String.valueOf(position));
         editor.apply();
     }
 
@@ -875,10 +876,60 @@ public class AppSettings extends Application {
     }
 
 
+    public static String getCurrentProfileName() {
+        return prefs.getString("current_profile_name", "Default Profile");
+    }
+
+    public static void setCurrentProfileName(String profileName){
+        prefs.edit().putString("current_profile_name", profileName).apply();
+    }
+
+
+    public static void SavePropertiesFromPreferences(File f) throws IOException {
+        Map<String,?> keys = prefs.getAll();
+        Properties props = new Properties();
+
+        for(Map.Entry<String,?> entry : keys.entrySet()) {
+            if(entry.getKey().equals("listeners")){
+
+                String listeners = "";
+                Set<String> chosenListeners = (Set<String>)entry.getValue();
+
+                StringBuilder sbListeners = new StringBuilder();
+
+                for (String l : chosenListeners) {
+                    sbListeners.append(l);
+                    sbListeners.append(",");
+                }
+
+                if(sbListeners.length() > 0){
+                    listeners = sbListeners.substring(0, sbListeners.length() -1);
+                }
+                props.setProperty("listeners", listeners);
+
+            }
+            else {
+                tracer.debug(entry.getKey() + ": " + entry.getValue().toString());
+                props.setProperty(entry.getKey(), entry.getValue().toString());
+            }
+
+        }
+
+        OutputStream outStream = new FileOutputStream(f);
+        props.store(outStream,"");
+
+    }
+
+
     /**
      * Sets preferences in a generic manner from a .properties file
      */
-    public static void SetPreferenceFromProperties(Properties props) {
+
+    public static void SetPreferenceFromPropertiesFile(File file) throws IOException {
+        Properties props = new Properties();
+        InputStreamReader reader = new InputStreamReader(new FileInputStream(file));
+        props.load(reader);
+
         for (Object key : props.keySet()) {
 
             SharedPreferences.Editor editor = prefs.edit();
@@ -905,7 +956,6 @@ public class AppSettings extends Application {
             }
             editor.apply();
         }
+
     }
-
-
 }

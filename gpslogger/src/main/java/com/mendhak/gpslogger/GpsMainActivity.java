@@ -84,6 +84,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 import de.greenrobot.event.EventBus;
@@ -234,12 +235,7 @@ public class GpsMainActivity extends ActionBarActivity
         }
 
         try {
-            Properties props = new Properties();
-            InputStreamReader reader = new InputStreamReader(new FileInputStream(file));
-            props.load(reader);
-
-            AppSettings.SetPreferenceFromProperties(props);
-
+            AppSettings.SetPreferenceFromPropertiesFile(file);
         } catch (Exception e) {
             tracer.error("Could not load preset properties", e);
         }
@@ -333,8 +329,39 @@ public class GpsMainActivity extends ActionBarActivity
 
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
+
+                        if(profile.getIdentifier() == 101){
+                            //Get new profile name from dialog
+                            //Set as newProfileName
+                            //Add to list of custom user profiles
+                            return true;
+                        }
+
+                        try {
+
+                            String newProfileName = profile.getName().getText();
+
+                            //1. Save the current settings to a file (overwrite)
+                            File f = new File(Utilities.GetDefaultStorageFolder(GpsMainActivity.this), AppSettings.getCurrentProfileName()+".properties");
+                            AppSettings.SavePropertiesFromPreferences(f);
+
+                            //2. Change the current profile name to user selected profile name
+                            AppSettings.setCurrentProfileName(profile.getName().getText());
+
+
+                            //Read from a possibly existing file and load those preferences in
+                            File newProfile = new File(Utilities.GetDefaultStorageFolder(GpsMainActivity.this), newProfileName+".properties");
+                            if(newProfile.exists()){
+                                AppSettings.SetPreferenceFromPropertiesFile(newProfile);
+                            }
+
+                        } catch (IOException e) {
+                            tracer.error("Could not save profile to file", e);
+                        }
+
                         return true;
                     }
                 })
@@ -368,6 +395,7 @@ public class GpsMainActivity extends ActionBarActivity
                 .withActionBarDrawerToggle(drawerToggle)
                 .withDrawerGravity(Gravity.LEFT)
                 .withAccountHeader(drawerHeader)
+                .withSelectedItem(-1)
                 .build();
 
 
