@@ -40,6 +40,7 @@ import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.CommandEvents;
+import com.mendhak.gpslogger.common.events.ProfileEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
@@ -49,6 +50,8 @@ import com.mendhak.gpslogger.senders.FileSenderFactory;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -1037,6 +1040,35 @@ public class GpsLoggingService extends Service  {
             Session.setUserStillSinceTimeStamp(0);
             tracer.debug("Just exited still state, attempt to log");
             StartGpsManager();
+        }
+    }
+
+    @EventBusHook
+    public void onEvent(ProfileEvents.SwitchToProfile switchToProfileEvent){
+        try {
+
+            if(AppSettings.getCurrentProfileName().equals(switchToProfileEvent.newProfileName)){
+                return;
+            }
+
+            tracer.debug("Switching to profile: " + switchToProfileEvent.newProfileName);
+
+            //1. Save the current settings to a file (overwrite)
+            File f = new File(Utilities.GetDefaultStorageFolder(GpsLoggingService.this), AppSettings.getCurrentProfileName()+".properties");
+            AppSettings.SavePropertiesFromPreferences(f);
+
+            //2. Change the current profile name to user selected profile name
+            AppSettings.setCurrentProfileName(switchToProfileEvent.newProfileName);
+
+            //Read from a possibly existing file and load those preferences in
+            File newProfile = new File(Utilities.GetDefaultStorageFolder(GpsLoggingService.this), switchToProfileEvent.newProfileName+".properties");
+            if(newProfile.exists()){
+                AppSettings.SetPreferenceFromPropertiesFile(newProfile);
+            }
+
+
+        } catch (IOException e) {
+            tracer.error("Could not save profile to file", e);
         }
     }
 

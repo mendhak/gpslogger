@@ -32,6 +32,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
@@ -59,6 +60,7 @@ import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.CommandEvents;
+import com.mendhak.gpslogger.common.events.ProfileEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
@@ -83,9 +85,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 import de.greenrobot.event.EventBus;
 
@@ -313,80 +314,69 @@ public class GpsMainActivity extends ActionBarActivity
                 .withSavedInstance(savedInstanceState)
                 .withProfileImagesVisible(false)
                 .withHeaderBackground(R.drawable.header)
-                .addProfiles(
-                        new ProfileDrawerItem()
-                                .withName("Default Profile")
-                                .withIdentifier(100)
-                                .withTag("PROFILE_DEFAULT")
-                                .withTextColorRes(R.color.primaryColorText)
-                        ,
-                        new ProfileSettingDrawerItem()
-                                .withIcon(android.R.drawable.ic_menu_add)
-                                .withIdentifier(101)
-                                .withName("Add profile")
-                                .withTag("PROFILE_ADD")
-                                .withTextColorRes(R.color.primaryColorText)
-
-                )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
 
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
 
-                        if(profile.getIdentifier() == 101){
+                        if (profile.getIdentifier() == 101) {
                             //Get new profile name from dialog
                             //Set as newProfileName
                             //Add to list of custom user profiles
+
+
+                            new MaterialDialog.Builder(GpsMainActivity.this)
+                                    .title("Create new profile")
+                                    .inputType(InputType.TYPE_CLASS_TEXT)
+                                    .input("Simple name", "", false, new MaterialDialog.InputCallback() {
+                                        @Override
+                                        public void onInput(@NonNull MaterialDialog materialDialog, CharSequence charSequence) {
+                                            EventBus.getDefault().post(new ProfileEvents.CreateNewProfile(charSequence.toString()));
+                                        }
+                                    })
+                                    .show();
+
+
                             return true;
                         }
 
-                        try {
-
-                            String newProfileName = profile.getName().getText();
-
-                            //1. Save the current settings to a file (overwrite)
-                            File f = new File(Utilities.GetDefaultStorageFolder(GpsMainActivity.this), AppSettings.getCurrentProfileName()+".properties");
-                            AppSettings.SavePropertiesFromPreferences(f);
-
-                            //2. Change the current profile name to user selected profile name
-                            AppSettings.setCurrentProfileName(profile.getName().getText());
-
-
-                            //Read from a possibly existing file and load those preferences in
-                            File newProfile = new File(Utilities.GetDefaultStorageFolder(GpsMainActivity.this), newProfileName+".properties");
-                            if(newProfile.exists()){
-                                AppSettings.SetPreferenceFromPropertiesFile(newProfile);
-                            }
-
-                        } catch (IOException e) {
-                            tracer.error("Could not save profile to file", e);
-                        }
+                        String newProfileName = profile.getName().getText();
+                        EventBus.getDefault().post(new ProfileEvents.SwitchToProfile(newProfileName));
 
                         return true;
                     }
                 })
                 .withOnAccountHeaderItemLongClickListener(new AccountHeader.OnAccountHeaderItemLongClickListener() {
                     @Override
-                    public boolean onProfileLongClick(View view, IProfile iProfile, boolean b) {
-                        if (iProfile.getIdentifier() > 101) {
-                            MaterialDialog confirmDeleteDialog = new MaterialDialog.Builder(GpsMainActivity.this)
-                                    .title("Delete profile?")
-                                    .positiveText(R.string.ok)
-                                    .negativeText(R.string.cancel)
-                                    .show();
+                    public boolean onProfileLongClick(View view, final IProfile iProfile, boolean b) {
+                        if (iProfile.getIdentifier() > 101 ) {
+
+                            if( AppSettings.getCurrentProfileName().equals(iProfile.getName().getText()) ){
+                                Utilities.MsgBox(getString(R.string.sorry), "Please switch to another profile before deleting this one.", GpsMainActivity.this);
+                            }
+                            else {
+                                MaterialDialog confirmDeleteDialog = new MaterialDialog.Builder(GpsMainActivity.this)
+                                        .title("Delete profile?")
+                                        .content(iProfile.getName().getText())
+                                        .positiveText(R.string.ok)
+                                        .negativeText(R.string.cancel)
+                                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                            @Override
+                                            public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                                                EventBus.getDefault().post(new ProfileEvents.DeleteProfile(iProfile.getName().getText()));
+                                            }
+                                        })
+                                        .show();
+                            }
                         }
                         return false;
                     }
                 })
                 .build();
 
-        drawerHeader.addProfile(new ProfileDrawerItem().withName("Test profile").withIdentifier(102).withTextColorRes(R.color.primaryColorText), 1);
 
-        if(savedInstanceState == null){
-            //Set to the user selected profile, or default
-            drawerHeader.setActiveProfile(100);
+        PopulateProfilesList();
 
-        }
 
         materialDrawer = new DrawerBuilder()
                 .withActivity(this)
@@ -479,6 +469,57 @@ public class GpsMainActivity extends ActionBarActivity
                 startActivity(faqtivity);
             }
         });
+
+    }
+
+    private void PopulateProfilesList() {
+
+        tracer.debug("Current profile:" + AppSettings.getCurrentProfileName());
+
+        drawerHeader.clear();
+
+        drawerHeader.addProfiles(
+                new ProfileDrawerItem()
+                        .withName("Default Profile")
+                        .withIdentifier(100)
+                        .withTag("PROFILE_DEFAULT")
+                        .withTextColorRes(R.color.primaryColorText)
+                ,
+                new ProfileSettingDrawerItem()
+                        .withIcon(android.R.drawable.ic_menu_add)
+                        .withIdentifier(101)
+                        .withName("Add profile")
+                        .withTag("PROFILE_ADD")
+                        .withTextColorRes(R.color.primaryColorText)
+        );
+
+
+        File gpsLoggerDir = Utilities.GetDefaultStorageFolder(this);
+        File[] propertyFiles = gpsLoggerDir.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File file, String fileName) {
+                return fileName.endsWith(".properties") && !fileName.equalsIgnoreCase("Default Profile.properties");
+            }
+        });
+
+        for(File propertyFile: propertyFiles){
+
+            String name = propertyFile.getName();
+            int pos = name.lastIndexOf(".");
+            if (pos > 0) {
+                name = name.substring(0, pos);
+            }
+
+            ProfileDrawerItem pdi = new ProfileDrawerItem().withName(name).withTextColorRes(R.color.primaryColorText);
+
+            drawerHeader.addProfile(pdi, 1);
+
+            if(name.equals(AppSettings.getCurrentProfileName())){
+                pdi.withSetSelected(true);
+                drawerHeader.setActiveProfile(pdi);
+            }
+
+        }
 
     }
 
@@ -1164,5 +1205,31 @@ public class GpsMainActivity extends ActionBarActivity
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LoggingStatus loggingStatus){
             enableDisableMenuItems();
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ProfileEvents.CreateNewProfile createProfileEvent){
+
+        tracer.debug("Creating profile: " + createProfileEvent.newProfileName);
+
+        try {
+            File f = new File(Utilities.GetDefaultStorageFolder(GpsMainActivity.this), createProfileEvent.newProfileName+".properties");
+            f.createNewFile();
+
+            PopulateProfilesList();
+
+        } catch (IOException e) {
+            tracer.error("Could not create properties file for new profile ", e);
+        }
+
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ProfileEvents.DeleteProfile deleteProfileEvent){
+        tracer.debug("Deleting profile: " + deleteProfileEvent.profileName);
+        File f = new File(Utilities.GetDefaultStorageFolder(GpsMainActivity.this), deleteProfileEvent.profileName+".properties");
+        f.delete();
+
+        PopulateProfilesList();
     }
 }
