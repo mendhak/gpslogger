@@ -2,6 +2,7 @@ sudo: false
 language: android
 android:
   components:
+    - android-23
     - build-tools-23.0.2
     - extra-android-support
     - extra-google-google_play_services
@@ -13,9 +14,9 @@ jdk: oraclejdk7
 notifications:
   email: false
 
-env:
-  matrix:
-    - ANDROID_TARGET=android-23  ANDROID_ABI=armeabi-v7a
+#env:
+#  matrix:
+#    - ANDROID_TARGET=android-23  ANDROID_ABI=armeabi-v7a
 
 before_install:
   - export TERM=dumb
