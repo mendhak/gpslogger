@@ -24,12 +24,12 @@ before_install:
 
 
 
-before_script:
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - adb wait-for-device
-  - adb shell input keyevent 82 &
-  - adb devices
+#before_script:
+#  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+#  - emulator -avd test -no-skin -no-audio -no-window &
+#  - adb wait-for-device
+#  - adb shell input keyevent 82 &
+#  - adb devices
 
 script:
   # Performs tests (which will do a ./gradlew build task first)
