@@ -2,7 +2,7 @@ sudo: false
 language: android
 android:
   components:
-    - build-tools-22.0.1
+    - build-tools-23.0.2
     - extra-android-support
     - extra-google-google_play_services
     - extra-google-m2repository
@@ -15,7 +15,7 @@ notifications:
 
 env:
   matrix:
-    - ANDROID_TARGET=android-19  ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-23  ANDROID_ABI=armeabi-v7a
 
 before_install:
   - export TERM=dumb
