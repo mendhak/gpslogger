@@ -151,7 +151,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
                 if ((Boolean)newValue) {
                     Intent targetActivity = new Intent(getActivity(), MainPreferenceActivity.class);
-                    targetActivity.putExtra("preference_fragment", MainPreferenceActivity.PreferenceConstants.OPENGTS);
+                    targetActivity.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS);
                     startActivity(targetActivity);
 
                 }

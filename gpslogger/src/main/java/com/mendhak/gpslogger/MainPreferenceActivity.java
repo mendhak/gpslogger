@@ -59,7 +59,7 @@ public class MainPreferenceActivity extends ActionBarActivity {
 
         tracer = LoggerFactory.getLogger(MainPreferenceActivity.class.getSimpleName());
 
-        String whichFragment = PreferenceConstants.GENERAL;
+        String whichFragment = PREFERENCE_FRAGMENTS.GENERAL;
 
         if(getIntent().getExtras() != null) {
            whichFragment = getIntent().getExtras().getString("preference_fragment");
@@ -68,51 +68,51 @@ public class MainPreferenceActivity extends ActionBarActivity {
         //If OpenStreetMap has returned with OAuth token
         if(getIntent().getData() != null) {
             tracer.debug("OSM Authorization returned: " + getIntent().getData().getQuery());
-            whichFragment = PreferenceConstants.OSM;
+            whichFragment = PREFERENCE_FRAGMENTS.OSM;
         }
 
         switch(whichFragment){
-            case PreferenceConstants.GENERAL:
+            case PREFERENCE_FRAGMENTS.GENERAL:
                 setTitle(R.string.settings_screen_name);
                 preferenceFragment = new GeneralSettingsFragment();
                 break;
-            case PreferenceConstants.LOGGING:
+            case PREFERENCE_FRAGMENTS.LOGGING:
                 setTitle(R.string.pref_logging_title);
                 preferenceFragment = new LoggingSettingsFragment();
                 break;
-            case PreferenceConstants.PERFORMANCE:
+            case PREFERENCE_FRAGMENTS.PERFORMANCE:
                 setTitle(R.string.pref_performance_title);
                 preferenceFragment = new PerformanceSettingsFragment();
                 break;
-            case PreferenceConstants.UPLOAD:
+            case PREFERENCE_FRAGMENTS.UPLOAD:
                 setTitle(R.string.title_drawer_uploadsettings);
                 preferenceFragment = new UploadSettingsFragment();
                 break;
-            case PreferenceConstants.FTP:
+            case PREFERENCE_FRAGMENTS.FTP:
                 setTitle(R.string.autoftp_setup_title);
                 preferenceFragment = new AutoFtpFragment();
                 break;
-            case PreferenceConstants.EMAIL:
+            case PREFERENCE_FRAGMENTS.EMAIL:
                 setTitle(R.string.autoemail_title);
                 preferenceFragment = new AutoEmailFragment();
                 break;
-            case PreferenceConstants.OPENGTS:
+            case PREFERENCE_FRAGMENTS.OPENGTS:
                 setTitle(R.string.opengts_setup_title);
                 preferenceFragment = new OpenGTSFragment();
                 break;
-            case PreferenceConstants.GDOCS:
+            case PREFERENCE_FRAGMENTS.GDOCS:
                 setTitle(R.string.gdocs_setup_title);
                 preferenceFragment = new GDocsSettingsFragment();
                 break;
-            case PreferenceConstants.DROPBOX:
+            case PREFERENCE_FRAGMENTS.DROPBOX:
                 setTitle(R.string.dropbox_setup_title);
                 preferenceFragment = new DropboxAuthorizationFragment();
                 break;
-            case PreferenceConstants.OSM:
+            case PREFERENCE_FRAGMENTS.OSM:
                 setTitle(R.string.osm_setup_title);
                 preferenceFragment = new OSMAuthorizationFragment();
                 break;
-            case PreferenceConstants.OWNCLOUD:
+            case PREFERENCE_FRAGMENTS.OWNCLOUD:
                 setTitle(R.string.owncloud_setup_title);
                 preferenceFragment = new OwnCloudSettingsFragment();
                 break;
@@ -157,7 +157,7 @@ public class MainPreferenceActivity extends ActionBarActivity {
         return false;
     }
 
-    public static class PreferenceConstants{
+    public static class PREFERENCE_FRAGMENTS {
         public static final String GENERAL = "GeneralSettingsFragment";
         public static final String LOGGING = "LoggingSettingsFragment";
         public static final String PERFORMANCE = "PerformanceSettingsFragment";

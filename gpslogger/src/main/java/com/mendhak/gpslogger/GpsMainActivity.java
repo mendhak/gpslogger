@@ -423,37 +423,37 @@ public class GpsMainActivity extends ActionBarActivity
 
                 switch (iDrawerItem.getIdentifier()) {
                     case 1000:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GENERAL);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GENERAL);
                         break;
                     case 1001:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.LOGGING);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.LOGGING);
                         break;
                     case 1002:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.PERFORMANCE);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.PERFORMANCE);
                         break;
                     case 1003:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.UPLOAD);
                         break;
                     case 1004:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GDOCS);
                         break;
                     case 1005:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX);
                         break;
                     case 1006:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.EMAIL);
                         break;
                     case 1007:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.FTP);
                         break;
                     case 1008:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS);
                         break;
                     case 1009:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OSM);
                         break;
                     case 1010:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OWNCLOUD);
+                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD);
                         break;
                     case 1011:
                         Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
@@ -744,7 +744,7 @@ public class GpsMainActivity extends ActionBarActivity
             EventBus.getDefault().post(new CommandEvents.AutoSend(null));
 
         } else {
-            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.UPLOAD);
+            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.UPLOAD);
         }
     }
 
@@ -788,7 +788,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void UploadToOpenStreetMap() {
         if (!OSMHelper.IsOsmAuthorized(getApplicationContext())) {
-            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OSM);
+            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OSM);
             return;
         }
 
@@ -799,7 +799,7 @@ public class GpsMainActivity extends ActionBarActivity
         final DropBoxHelper dropBoxHelper = new DropBoxHelper(getApplicationContext());
 
         if (!dropBoxHelper.IsLinked()) {
-            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.DROPBOX);
+            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX);
             return;
         }
 
@@ -812,7 +812,7 @@ public class GpsMainActivity extends ActionBarActivity
         final OwnCloudHelper ownCloudHelper = new OwnCloudHelper();
 
         if (!Utilities.IsOwnCloudSetup()) {
-            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OWNCLOUD);
+            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD);
             return;
         }
 
@@ -821,7 +821,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void SendToOpenGTS() {
         if (!Utilities.IsOpenGTSSetup()) {
-            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.OPENGTS);
+            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS);
         } else {
             IFileSender fs = FileSenderFactory.GetOpenGTSSender(getApplicationContext());
             ShowFileListDialog(fs);
@@ -830,7 +830,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void UploadToGoogleDocs() {
         if (!GDocsHelper.IsLinked()) {
-            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.GDOCS);
+            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GDOCS);
             return;
         }
 
@@ -839,7 +839,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void SendToFtp() {
         if (!Utilities.IsFtpSetup()) {
-            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.FTP);
+            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.FTP);
         } else {
             IFileSender fs = FileSenderFactory.GetFtpSender(getApplicationContext());
             ShowFileListDialog(fs);
@@ -848,7 +848,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void SelectAndEmailFile() {
         if (!Utilities.IsEmailSetup()) {
-            LaunchPreferenceScreen(MainPreferenceActivity.PreferenceConstants.EMAIL);
+            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.EMAIL);
         } else {
             ShowFileListDialog(FileSenderFactory.GetEmailSender(this));
         }

@@ -70,31 +70,31 @@ public class UploadSettingsFragment extends PreferenceFragment implements Prefer
         String launchFragment = "";
 
         if (preference.getKey().equalsIgnoreCase("osm_setup")) {
-            launchFragment = MainPreferenceActivity.PreferenceConstants.OSM;
+            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.OSM;
         }
 
         if(preference.getKey().equalsIgnoreCase("autoemail_setup")){
-            launchFragment = MainPreferenceActivity.PreferenceConstants.EMAIL;
+            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.EMAIL;
         }
 
         if(preference.getKey().equalsIgnoreCase("dropbox_setup")){
-            launchFragment = MainPreferenceActivity.PreferenceConstants.DROPBOX;
+            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX;
         }
 
         if(preference.getKey().equalsIgnoreCase("gdocs_setup")){
-            launchFragment = MainPreferenceActivity.PreferenceConstants.GDOCS;
+            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.GDOCS;
         }
 
         if(preference.getKey().equalsIgnoreCase("opengts_setup")){
-            launchFragment = MainPreferenceActivity.PreferenceConstants.OPENGTS;
+            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS;
         }
 
         if(preference.getKey().equalsIgnoreCase("autoftp_setup")){
-            launchFragment = MainPreferenceActivity.PreferenceConstants.FTP;
+            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.FTP;
         }
 
         if(preference.getKey().equalsIgnoreCase("owncloud_setup")) {
-            launchFragment = MainPreferenceActivity.PreferenceConstants.OWNCLOUD;
+            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD;
         }
 
         if(!Utilities.IsNullOrEmpty(launchFragment)){

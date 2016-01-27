@@ -101,6 +101,7 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
 
             if (aboutClickCounter == 3) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://dQw4w9WgXcQ"));
+                intent.putExtra("force_fullscreen",true);
                 startActivity(intent);
             }
 
