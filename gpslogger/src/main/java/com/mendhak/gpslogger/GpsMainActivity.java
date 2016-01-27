@@ -328,10 +328,19 @@ public class GpsMainActivity extends ActionBarActivity
                             new MaterialDialog.Builder(GpsMainActivity.this)
                                     .title("Create new profile")
                                     .inputType(InputType.TYPE_CLASS_TEXT)
+                                    .negativeText(R.string.cancel)
                                     .input("Simple name", "", false, new MaterialDialog.InputCallback() {
                                         @Override
                                         public void onInput(@NonNull MaterialDialog materialDialog, CharSequence charSequence) {
-                                            EventBus.getDefault().post(new ProfileEvents.CreateNewProfile(charSequence.toString()));
+                                            String profileName = charSequence.toString();
+
+                                            final String[] ReservedChars = {"|", "\\", "?", "*", "<", "\"", ":", ">", ".", "/", "'", ";"};
+
+                                            for (String c : ReservedChars) {
+                                                profileName = profileName.replace(c,"");
+                                            }
+
+                                            EventBus.getDefault().post(new ProfileEvents.CreateNewProfile(profileName));
                                         }
                                     })
                                     .show();
@@ -489,6 +498,7 @@ public class GpsMainActivity extends ActionBarActivity
                         .withIcon(android.R.drawable.ic_menu_add)
                         .withIdentifier(101)
                         .withName("Add profile")
+                        .withEmail("Long press a profile to delete it")
                         .withTag("PROFILE_ADD")
                         .withTextColorRes(R.color.primaryColorText)
         );
