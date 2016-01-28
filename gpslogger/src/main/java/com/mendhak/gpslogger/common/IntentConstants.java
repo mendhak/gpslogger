@@ -15,4 +15,5 @@ public class IntentConstants {
     public static final String RETRY_TIME = "setretrytime";
     public static final String ABSOLUTE_TIMEOUT = "setabsolutetimeout";
     public static final String LOG_ONCE = "logonce";
+    public static final String SWITCH_PROFILE = "switchprofile";
 }

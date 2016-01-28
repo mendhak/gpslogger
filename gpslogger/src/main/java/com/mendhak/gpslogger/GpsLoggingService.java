@@ -219,6 +219,11 @@ public class GpsLoggingService extends Service  {
                     EventBus.getDefault().post(new CommandEvents.Annotate(bundle.getString(IntentConstants.SET_DESCRIPTION)));
                 }
 
+                if(bundle.getString(IntentConstants.SWITCH_PROFILE) != null){
+                    tracer.info("Intent received - switch profile: " + bundle.getString(IntentConstants.SWITCH_PROFILE));
+                    EventBus.getDefault().post(new ProfileEvents.SwitchToProfile(bundle.getString(IntentConstants.SWITCH_PROFILE)));
+                }
+
                 if (bundle.get(IntentConstants.PREFER_CELLTOWER) != null) {
                     boolean preferCellTower = bundle.getBoolean(IntentConstants.PREFER_CELLTOWER);
                     tracer.debug("Intent received - Set Prefer Cell Tower: " + String.valueOf(preferCellTower));
@@ -1057,12 +1062,12 @@ public class GpsLoggingService extends Service  {
             File f = new File(Utilities.GetDefaultStorageFolder(GpsLoggingService.this), AppSettings.getCurrentProfileName()+".properties");
             AppSettings.SavePropertiesFromPreferences(f);
 
-            //2. Change the current profile name to user selected profile name
-            AppSettings.setCurrentProfileName(switchToProfileEvent.newProfileName);
-
             //Read from a possibly existing file and load those preferences in
             File newProfile = new File(Utilities.GetDefaultStorageFolder(GpsLoggingService.this), switchToProfileEvent.newProfileName+".properties");
             if(newProfile.exists()){
+                //2. Change the current profile name to user selected profile name
+                AppSettings.setCurrentProfileName(switchToProfileEvent.newProfileName);
+
                 AppSettings.SetPreferenceFromPropertiesFile(newProfile);
             }
 

@@ -165,6 +165,7 @@ public class GpsMainActivity extends ActionBarActivity
             SetAnnotationReady();
         }
 
+        PopulateProfilesList();
         enableDisableMenuItems();
     }
 
