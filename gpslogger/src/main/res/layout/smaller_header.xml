@@ -43,6 +43,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingEnd="@dimen/material_drawer_vertical_padding"
@@ -51,6 +52,7 @@
             android:paddingStart="@dimen/material_drawer_vertical_padding">
 
             <com.mikepenz.materialdrawer.view.BezelImageView
+                android:visibility="gone"
                 android:id="@+id/material_drawer_account_header_current"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,8 +67,8 @@
                 android:id="@+id/profiletextletter"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginRight="7dp"
-                android:layout_marginEnd="7dp"
+                android:layout_marginRight="19dp"
+                android:layout_marginEnd="19dp"
                 />
             <TextView
                 android:id="@+id/material_drawer_account_header_name"

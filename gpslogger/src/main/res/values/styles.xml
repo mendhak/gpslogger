@@ -34,9 +34,10 @@
     <color name="errorColor">#FF5252</color>
     <color name="warningColor">#ffbd60</color>
     <color name="accentColorComplementary">#4CAF50</color>
-    <color name="primaryColorLight">#CFD8DC</color>
+    <color name="primaryColorLight">#ffdee7eb</color>
     <color name="primaryColorText">#212121</color>
     <color name="secondaryColorText">#727272</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
+    <color name="golden">#ffff8100</color>
 </resources>

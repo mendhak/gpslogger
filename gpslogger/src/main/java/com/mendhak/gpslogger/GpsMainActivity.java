@@ -23,6 +23,7 @@ import android.app.FragmentTransaction;
 import android.content.*;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.*;
 import android.support.annotation.NonNull;
@@ -318,7 +319,7 @@ public class GpsMainActivity extends ActionBarActivity
                 .withAccountHeader(R.layout.smaller_header)
                 .withSavedInstance(savedInstanceState)
                 .withProfileImagesVisible(false)
-                .withHeaderBackground(R.drawable.header2)
+                .withHeaderBackground(new ColorDrawable(getResources().getColor(R.color.accentColor)))
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
 
                     @Override
@@ -495,9 +496,10 @@ public class GpsMainActivity extends ActionBarActivity
         TextDrawable drawLetter = TextDrawable.builder()
                 .beginConfig()
                 .bold()
+                .textColor(getResources().getColor(R.color.golden))
                 .useFont(Typeface.SANS_SERIF)
                 .endConfig()
-                .buildRound(profileName.substring(0, 1), getResources().getColor(R.color.accentColor));
+                .buildRound(profileName.substring(0, 1).toUpperCase(), getResources().getColor(R.color.primaryColorLight));
 
         imgLetter.setImageDrawable(drawLetter);
     }
@@ -550,9 +552,9 @@ public class GpsMainActivity extends ActionBarActivity
                 drawerHeader.setActiveProfile(pdi);
             }
 
-            RefreshProfileLetter(AppSettings.getCurrentProfileName());
-
         }
+
+        RefreshProfileLetter(AppSettings.getCurrentProfileName());
 
 
     }
