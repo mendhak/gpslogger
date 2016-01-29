@@ -30,7 +30,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 70
-        versionName "70-profiles1"
+        versionName "70-profiles3"
     }
 
     //Adding API keys to BuildConfig

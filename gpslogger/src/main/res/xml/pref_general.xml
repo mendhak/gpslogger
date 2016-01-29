@@ -44,7 +44,7 @@
         android:title="@string/tip_coffee"
         android:icon="@drawable/coffee" >
         <intent android:action="android.intent.action.VIEW"
-                android:data="http://code.mendhak.com/gpslogger" />
+                android:data="market://details?id=com.mendhak.gpsloggerpro" />
     </Preference>
 
     <Preference
