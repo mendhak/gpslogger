@@ -195,6 +195,9 @@ dependencies {
 
     //Expandable textview in the FAQ
     compile 'com.ms-square:expandableTextView:0.1.4'
+
+    //The single letter text icons
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }
 
 tasks.whenTaskAdded { task ->

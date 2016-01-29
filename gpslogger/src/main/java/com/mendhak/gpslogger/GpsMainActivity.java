@@ -22,6 +22,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.*;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.*;
 import android.support.annotation.NonNull;
@@ -55,6 +56,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import com.amulyakhare.textdrawable.TextDrawable;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
@@ -312,9 +314,11 @@ public class GpsMainActivity extends ActionBarActivity
 
         drawerHeader = new AccountHeaderBuilder()
                 .withActivity(this)
+                .withCompactStyle(true)
+                .withAccountHeader(R.layout.smaller_header)
                 .withSavedInstance(savedInstanceState)
                 .withProfileImagesVisible(false)
-                .withHeaderBackground(R.drawable.header)
+                .withHeaderBackground(R.drawable.header2)
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
 
                     @Override
@@ -352,6 +356,8 @@ public class GpsMainActivity extends ActionBarActivity
 
                         String newProfileName = profile.getName().getText();
                         EventBus.getDefault().post(new ProfileEvents.SwitchToProfile(newProfileName));
+
+                        RefreshProfileLetter(profile.getName().getText());
 
                         return true;
                     }
@@ -397,6 +403,7 @@ public class GpsMainActivity extends ActionBarActivity
                 .withAccountHeader(drawerHeader)
                 .withSelectedItem(-1)
                 .build();
+
 
 
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.pref_general_title, R.string.pref_general_summary, R.drawable.settings, 1000));
@@ -482,6 +489,19 @@ public class GpsMainActivity extends ActionBarActivity
 
     }
 
+    private void RefreshProfileLetter(String profileName){
+
+        ImageView imgLetter = (ImageView)drawerHeader.getView().findViewById(R.id.profiletextletter);
+        TextDrawable drawLetter = TextDrawable.builder()
+                .beginConfig()
+                .bold()
+                .useFont(Typeface.SANS_SERIF)
+                .endConfig()
+                .buildRound(profileName.substring(0, 1), getResources().getColor(R.color.accentColor));
+
+        imgLetter.setImageDrawable(drawLetter);
+    }
+
     private void PopulateProfilesList() {
 
         tracer.debug("Current profile:" + AppSettings.getCurrentProfileName());
@@ -530,7 +550,10 @@ public class GpsMainActivity extends ActionBarActivity
                 drawerHeader.setActiveProfile(pdi);
             }
 
+            RefreshProfileLetter(AppSettings.getCurrentProfileName());
+
         }
+
 
     }
 
