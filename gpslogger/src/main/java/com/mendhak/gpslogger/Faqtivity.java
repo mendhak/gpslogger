@@ -90,6 +90,7 @@ public class Faqtivity extends ActionBarActivity {
         List<String> generalTopics = new ArrayList<String>();
         generalTopics.add(getString(R.string.faq_topic_whyisntitaccurate));
         generalTopics.add(getString(R.string.faq_topic_howtoremovenotification));
+        generalTopics.add(getString(R.string.faq_topic_profiles));
         generalTopics.add(getString(R.string.faq_topic_usemylocaltimezone));
         generalTopics.add(getString(R.string.faq_topic_imperial));
         generalTopics.add(getString(R.string.faq_topic_whydoesfixtakelongtime));
