@@ -189,11 +189,20 @@
     </string>
   <string name="dropbox_couldnotauthorize">Kunde inte auktorisera mot Dropbox, försök igen senare</string>
   <string name="dropbox_upload">Dropbox</string>
+  <string name="owncloud_setup_title">ownCloud</string>
+  <string name="owncloud_server">Server</string>
+  <string name="owncloud_username">Användarnamn</string>
+  <string name="owncloud_password">Lösenord</string>
+  <string name="owncloud_directory">Mapp</string>
+  <string name="owncloud_invalid_settings">Ogiltiga inställningar</string>
+  <string name="owncloud_upload">ownCloud</string>
   <string name="menu_upload">Skicka</string>
   <string name="autoemail_from">Avsändaradress</string>
   <string name="autoemail_from_summary">Vissa e-postleverantörer kräver en avsändaradress. Använd detta endast om det behövs.</string>
+  <string name="gdocs_upload">Google Drive</string>
   <string name="gdocs_clearauthorization">Ta bort auktorisering</string>
   <string name="gdocs_clearauthorization_summary">Glömmer lokala GDocs-inställningar. För att häva åtkomst permanent, gå till inställningar för Google-kontot</string>
+  <string name="gdocs_setup_title">Google Drive</string>
   <string name="gdocs_test_title">Testa uppladdning</string>
   <string name="gdocs_testupload_error">Kunde inte skicka en testfil</string>
   <string name="gdocs_testupload_success">Skickad. Se dina Google Dokuments för den nya filen.</string>
@@ -215,6 +224,7 @@
   <string name="shortcut_pickaction">Välj en åtgärd</string>
   <string name="log_opengts_title">Logga till en OpenGTS-server</string>
   <string name="log_opengts_summary">Skicka GPRMC-data till en OpenGTS-server.</string>
+  <string name="opengts_setup_title">OpenGTS</string>
   <string name="opengts_setup_summary">Skicka GPS-spår till en OpenGTS-server.</string>
   <string name="opengts_enabled">Aktivera OpenGTS</string>
   <string name="autoopengts_autosend">Skicka automatiskt</string>
@@ -253,6 +263,7 @@
   <string name="autoftp_invalid_summary">Några av dina inställningar är ogiltiga. Säkerställ att du fyllt i alla relevanta fält.
     </string>
   <string name="ftp_upload">Skicka till FTP</string>
+  <string name="autoftp_setup_title">FTP</string>
   <string name="autoftp_setup_summary">Skicka dina filer till en FTP(S)-server. Obs: Detta täcker inte SFTP.</string>
   <string name="menu_faq">Hjälp och FAQ</string>
   <string name="gpsf_missing">Saknad tjänst</string>
@@ -295,4 +306,13 @@
   <string name="listeners_cell">Nätverk</string>
   <string name="listeners_passive">Passiv</string>
   <string name="autosend_frequency_hint">Antal minuter</string>
+  <string name="no_network_message">Inget nätverk finns tillgängligt</string>
+  <string name="activityrecognition_dont_log_if_still">Logga inte om jag inte rör mig</string>
+  <string name="txt_activity">Aktivitet:</string>
+  <string name="activity_in_vehicle">I fordon</string>
+  <string name="activity_still">Stilla</string>
+  <string name="activity_on_bicycle">På cykel</string>
+  <string name="activity_on_foot">Till fots</string>
+  <string name="activity_running">Springer</string>
+  <string name="activity_walking">Går</string>
 </resources>

@@ -4,6 +4,8 @@
   <string name="title_drawer_generalsettings">Definições Gerais</string>
   <string name="title_drawer_loggingsettings">Definições de Logging</string>
   <string name="title_drawer_uploadsettings">Definições de Upload</string>
+  <string name="navigation_drawer_open">Abrir menu de navegação</string>
+  <string name="navigation_drawer_close">Fechar menu de navegação</string>
   <string name="app_name">GPSLogger</string>
   <string name="settings_screen_name">Configurações do GPSLogger</string>
   <string name="ok">Ok</string>
@@ -35,6 +37,8 @@
   <string name="summary_current_filename">Ficheiro:</string>
   <string name="sharing_location_only">Apenas localização</string>
   <string name="sharing_mylocation">Minha Localização</string>
+  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.pt/maps?q=%s,%s
+</string>
   <string name="sharing_via">Partilhar via</string>
   <string name="foot">pé</string>
   <string name="feet">pés</string>
@@ -42,15 +46,24 @@
   <string name="meters">&#160;metros</string>
   <string name="error">Erro</string>
   <string name="error_connection">Erro de conexão. Por favor, verifique as configurações do telefone.</string>
+  <string name="seconds">s</string>
+  <string name="minutes">min</string>
+  <string name="hours">hrs</string>
+  <string name="gpsprovider_unavailable">Sem acesso a localização. Por favor verifique as configurações de localização e active o acesso a localização.</string>
   <string name="started">Iniciado</string>
   <string name="providername_gps">Satélites GPS</string>
   <string name="providername_celltower">Torres de Rede</string>
+  <string name="not_applicable">n/d</string>
   <string name="meters_per_second">&#160;m/s</string>
+  <string name="feet_per_second">pés/s</string>
+  <string name="miles_per_hour">mi/h</string>
+  <string name="miles">mi</string>
   <string name="kilometers_per_hour">&#160;km/h</string>
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">desconhecido(a)</string>
   <string name="sorry">Sinto muito</string>
   <string name="success">Yay!</string>
+  <string name="direction_roughly">Aprox. %s</string>
   <string name="direction_north">Norte</string>
   <string name="direction_northnortheast">Norte pelo nordeste</string>
   <string name="direction_northeast">Nordeste</string>
@@ -77,19 +90,29 @@
   <string name="time_twoandhalfhours">duas horas e meia</string>
   <string name="time_hms_format" formatted="false">% sh % sm % ss</string>
   <string name="accuracy_within" formatted="false">dentro de %s %s</string>
+  <string name="degree_symbol">º</string>
   <string name="settings_distance_in_meters">Distância em metros</string>
   <string name="settings_accuracy_in_meters">Precisão em metros</string>
   <string name="settings_enter_meters">Digite os metros(máximo 9999)</string>
+  <string name="pref_logging_title">Detalhes de armazenamento</string>
   <string name="log_gpx_title">Log para GPX</string>
+  <string name="log_gpx_summary">Cria ficheiro GPX na pasta GPSLogger do cartão SD.</string>
   <string name="log_kml_title">Logar para KML</string>
   <string name="log_kml_summary">Cria um ficheiro KML na pasta GPSLogger no cartão SD.</string>
   <string name="log_plain_text_title">Log para texto simples</string>
+  <string name="log_plain_text_summary">Cria um ficheiro de texto simples na pasta GPSLogger to cartão SD.</string>
   <string name="new_file_creation_title">Novo arquivo criado</string>
+  <string name="new_file_creation_summary">Criar ficheiro novo a cada dia ou de cada vez que a aplicação é iniciada.</string>
   <string name="new_file_creation_onceaday">Uma vez por dia</string>
   <string name="new_file_creation_everystart">Toda vez que iniciar</string>
   <string name="new_file_creation_custom">Ficheiro personalizado</string>
   <string name="new_file_custom_title">Nome do ficheiro personalizado</string>
+  <string name="new_file_custom_summary">Pode configurar o nome do ficheiro.
+        Opcionalmente pode adicionar alguns parâmetros dinâmicos tais como número de série, ano, hora, minuto, etc.
+Nomes de ficheiro muito dinâmicos
+        Podem não funcionar correctamente com funcionalidades de envio automático pois apenas enviará último ficheiro.</string>
   <string name="pref_performance_title">Desempenho</string>
+  <string name="pref_performance_summary">Temporizações, filtros e observadores</string>
   <string name="time_before_logging_title">Tempo antes de logar</string>
   <string name="time_before_logging_dialog_title">Tempo em segundos</string>
   <string name="time_before_logging_hint">Digite segundos (máximo de 9999)</string>

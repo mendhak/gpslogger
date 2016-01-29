@@ -4,8 +4,8 @@
   <string name="title_drawer_generalsettings">Ajustes generales</string>
   <string name="title_drawer_loggingsettings">Ajustes de registro</string>
   <string name="title_drawer_uploadsettings">Ajustes de subida</string>
-  <string name="navigation_drawer_open">Abrir el cajón de navegación</string>
-  <string name="navigation_drawer_close">Cerrar el cajón de navegación</string>
+  <string name="navigation_drawer_open">Abrir menú de navegación</string>
+  <string name="navigation_drawer_close">Cerrar menú de navegación</string>
   <string name="app_name">GPSLogger</string>
   <string name="settings_screen_name">Ajustes de GPSLogger</string>
   <string name="ok">Aceptar</string>
@@ -126,6 +126,8 @@
   <string name="enabledisablegps_summary">Ir a los ajustes del dispositivo para des/activar proveedores de ubicación.</string>
   <string name="startonbootup_title">﻿Iniciar en el arranque</string>
   <string name="startonbootup_summary">Iniciar la aplicación y comenzar el registro al encender el dispositivo</string>
+  <string name="startonapplaunch_title">Iniciar al iniciar la aplicación</string>
+  <string name="startonapplaunch_summary">Iniciar sesión al iniciar la aplicación</string>
   <string name="autoemail_title">Correo electrónico</string>
   <string name="autoemail_summary">Enviar automáticamente el archivo de registro a la dirección especificada</string>
   <string name="please_wait">Espera un momento.</string>
@@ -194,6 +196,20 @@
   <string name="dropbox_unauthorize_description">Ha sido autorizado en Dropbox. Los archivos se enviarán a \'Apps\\GPSLogger for Android\'. Puede anular la autorización cuando quiera.</string>
   <string name="dropbox_couldnotauthorize">No se pudo autorizar en Dropbox, por favor vuelva a intentarlo</string>
   <string name="dropbox_upload">Dropbox</string>
+  <string name="owncloud_setup_title">ownCloud</string>
+  <string name="owncloud_setup_summary">Sube tus archivos a un servidor de ownCloud.</string>
+  <string name="owncloud_server">Servidor</string>
+  <string name="owncloud_server_summary">URL base en ownCloud</string>
+  <string name="owncloud_username">Usuario</string>
+  <string name="owncloud_password">Contraseña</string>
+  <string name="owncloud_directory">Carpeta</string>
+  <string name="owncloud_directory_summary">Carpeta a usar en el servidor de ownCloud. Asegúrate que exista o la subida fallará.</string>
+  <string name="owncloud_test">Probar la subida a ownCloud</string>
+  <string name="owncloud_test_summary">Cargar un archivo de prueba en el servidor de ownCloud</string>
+  <string name="owncloud_testing">Probando la subida de ownCloud</string>
+  <string name="owncloud_invalid_settings">Los ajustes no son correctos</string>
+  <string name="owncloud_invalid_summary">Algunos de tus ajustes no son válidos. Asegúrate de haber rellenado todos los campos relevantes. </string>
+  <string name="owncloud_upload">ownCloud</string>
   <string name="menu_upload">Subir</string>
   <string name="autoemail_from">Desde dirección</string>
   <string name="autoemail_from_summary">Algunos servidores requieren una dirección de origen. Sólo si es necesario.</string>
@@ -268,6 +284,7 @@
   <string name="ftp_upload">Envío a FTP</string>
   <string name="autoftp_setup_title">FTP</string>
   <string name="autoftp_setup_summary">Enviar los archivos a un servidor FTP(S). Nota: No compatible con SFTP.</string>
+  <string name="faq_screen_title">@string/menu_faq</string>
   <string name="menu_faq">Ayuda y preguntas frecuentes</string>
   <string name="gpsf_missing">Servicio no disponible</string>
   <string name="gpsf_missing_description">Esta funcionalidad necesita servicios de Google Play.</string>
@@ -288,6 +305,7 @@
   <string name="view_simple">Vista simple</string>
   <string name="view_detailed">Vista detallada</string>
   <string name="view_big">Vista ampliada</string>
+  <string name="view_log">Ver registro</string>
   <string name="bigview_taptotoggle">Pulsa para iniciar ó detener el registro</string>
   <string name="summary_autosendtargets">Subir a:</string>
   <string name="accuracy_filter_title">Filtrar por precisión</string>
@@ -337,4 +355,10 @@
   <string name="altitude_subtractgeoidheight_title">Usar MSL en vez de WGS84</string>
   <string name="altitude_subtractoffset_title">Restar número a altitud</string>
   <string name="altitude_subtractoffset_summary">Un valor en metros con el que restar las altitudes del GPS. Utiliza un número negativo para sumar a la altura. Sólo se aplica a los puntos GPS de satélite, y no de red o NMEA.</string>
+  <string name="upload_failure">No se ha podido subir el archivo</string>
+  <string name="inaccurate_point_discarded">Punto impreciso descartado</string>
+  <string name="not_enough_distance_traveled">Sólo te has movido %s m. Punto descartado.</string>
+  <string name="autosend_wifionly_title">Enviar solo en Wi-Fi</string>
+  <string name="logview_showlocationsonly">Solo ubicaciones</string>
+  <string name="logview_autoscroll">Autodeslizamiento</string>
 </resources>
