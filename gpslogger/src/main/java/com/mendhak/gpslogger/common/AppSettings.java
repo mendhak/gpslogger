@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.mendhak.gpslogger.PreferenceNames;
+import com.mendhak.gpslogger.R;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.config.Configuration;
 import de.greenrobot.event.EventBus;
@@ -943,7 +944,7 @@ public class AppSettings extends Application {
 
     @ProfilePreference(name= PreferenceNames.CURRENT_PROFILE_NAME)
     public static String getCurrentProfileName() {
-        return prefs.getString(PreferenceNames.CURRENT_PROFILE_NAME, "Default Profile");
+        return prefs.getString(PreferenceNames.CURRENT_PROFILE_NAME, getInstance().getString(R.string.profile_default));
     }
 
     public static void setCurrentProfileName(String profileName){

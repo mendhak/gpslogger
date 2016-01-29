@@ -1058,19 +1058,18 @@ public class GpsLoggingService extends Service  {
 
             tracer.debug("Switching to profile: " + switchToProfileEvent.newProfileName);
 
-            //1. Save the current settings to a file (overwrite)
+            //Save the current settings to a file (overwrite)
             File f = new File(Utilities.GetDefaultStorageFolder(GpsLoggingService.this), AppSettings.getCurrentProfileName()+".properties");
             AppSettings.SavePropertiesFromPreferences(f);
 
             //Read from a possibly existing file and load those preferences in
             File newProfile = new File(Utilities.GetDefaultStorageFolder(GpsLoggingService.this), switchToProfileEvent.newProfileName+".properties");
             if(newProfile.exists()){
-                //2. Change the current profile name to user selected profile name
-                AppSettings.setCurrentProfileName(switchToProfileEvent.newProfileName);
-
                 AppSettings.SetPreferenceFromPropertiesFile(newProfile);
             }
 
+            //Switch current profile name
+            AppSettings.setCurrentProfileName(switchToProfileEvent.newProfileName);
 
         } catch (IOException e) {
             tracer.error("Could not save profile to file", e);

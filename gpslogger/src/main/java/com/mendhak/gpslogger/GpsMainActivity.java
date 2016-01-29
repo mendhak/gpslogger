@@ -325,55 +325,50 @@ public class GpsMainActivity extends ActionBarActivity
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
 
+                        //Add new profile
                         if (profile.getIdentifier() == 101) {
-                            //Get new profile name from dialog
-                            //Set as newProfileName
-                            //Add to list of custom user profiles
-
-
                             new MaterialDialog.Builder(GpsMainActivity.this)
-                                    .title("Create new profile")
+                                    .title(getString(R.string.profile_create_new))
                                     .inputType(InputType.TYPE_CLASS_TEXT)
                                     .negativeText(R.string.cancel)
-                                    .input("Simple name", "", false, new MaterialDialog.InputCallback() {
+                                    .input("", "", false, new MaterialDialog.InputCallback() {
                                         @Override
                                         public void onInput(@NonNull MaterialDialog materialDialog, CharSequence charSequence) {
-                                            String profileName = charSequence.toString();
+                                            String profileName = charSequence.toString().trim();
+                                            if(!Utilities.IsNullOrEmpty(profileName)){
+                                                final String[] ReservedChars = {"|", "\\", "?", "*", "<", "\"", ":", ">", ".", "/", "'", ";"};
 
-                                            final String[] ReservedChars = {"|", "\\", "?", "*", "<", "\"", ":", ">", ".", "/", "'", ";"};
+                                                for (String c : ReservedChars) {
+                                                    profileName = profileName.replace(c,"");
+                                                }
 
-                                            for (String c : ReservedChars) {
-                                                profileName = profileName.replace(c,"");
+                                                EventBus.getDefault().post(new ProfileEvents.CreateNewProfile(profileName));
                                             }
-
-                                            EventBus.getDefault().post(new ProfileEvents.CreateNewProfile(profileName));
                                         }
                                     })
                                     .show();
-
-
                             return true;
                         }
 
+                        //Clicked on profile name
                         String newProfileName = profile.getName().getText();
                         EventBus.getDefault().post(new ProfileEvents.SwitchToProfile(newProfileName));
 
-                        RefreshProfileLetter(profile.getName().getText());
-
+                        RefreshProfileIcon(profile.getName().getText());
                         return true;
                     }
                 })
                 .withOnAccountHeaderItemLongClickListener(new AccountHeader.OnAccountHeaderItemLongClickListener() {
                     @Override
                     public boolean onProfileLongClick(View view, final IProfile iProfile, boolean b) {
-                        if (iProfile.getIdentifier() > 101 ) {
+                        if (iProfile.getIdentifier() > 150 ) {
 
                             if( AppSettings.getCurrentProfileName().equals(iProfile.getName().getText()) ){
-                                Utilities.MsgBox(getString(R.string.sorry), "Please switch to another profile before deleting this one.", GpsMainActivity.this);
+                                Utilities.MsgBox(getString(R.string.sorry), getString(R.string.profile_switch_before_delete), GpsMainActivity.this);
                             }
                             else {
                                 MaterialDialog confirmDeleteDialog = new MaterialDialog.Builder(GpsMainActivity.this)
-                                        .title("Delete profile?")
+                                        .title(getString(R.string.profile_delete))
                                         .content(iProfile.getName().getText())
                                         .positiveText(R.string.ok)
                                         .negativeText(R.string.cancel)
@@ -490,7 +485,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     }
 
-    private void RefreshProfileLetter(String profileName){
+    private void RefreshProfileIcon(String profileName){
 
         ImageView imgLetter = (ImageView)drawerHeader.getView().findViewById(R.id.profiletextletter);
         TextDrawable drawLetter = TextDrawable.builder()
@@ -512,7 +507,7 @@ public class GpsMainActivity extends ActionBarActivity
 
         drawerHeader.addProfiles(
                 new ProfileDrawerItem()
-                        .withName("Default Profile")
+                        .withName(getString(R.string.profile_default))
                         .withIdentifier(100)
                         .withTag("PROFILE_DEFAULT")
                         .withTextColorRes(R.color.primaryColorText)
@@ -520,10 +515,10 @@ public class GpsMainActivity extends ActionBarActivity
                 new ProfileSettingDrawerItem()
                         .withIcon(android.R.drawable.ic_menu_add)
                         .withIdentifier(101)
-                        .withName("Add profile")
-                        .withEmail("Long press a profile to delete it")
+                        .withName(getString(R.string.profile_add_new))
                         .withTag("PROFILE_ADD")
                         .withTextColorRes(R.color.primaryColorText)
+                , new ProfileSettingDrawerItem()
         );
 
 
@@ -531,7 +526,7 @@ public class GpsMainActivity extends ActionBarActivity
         File[] propertyFiles = gpsLoggerDir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File file, String fileName) {
-                return fileName.endsWith(".properties") && !fileName.equalsIgnoreCase("Default Profile.properties");
+                return fileName.endsWith(".properties") && !fileName.equalsIgnoreCase(getString(R.string.profile_default) + ".properties");
             }
         });
 
@@ -554,7 +549,7 @@ public class GpsMainActivity extends ActionBarActivity
 
         }
 
-        RefreshProfileLetter(AppSettings.getCurrentProfileName());
+        RefreshProfileIcon(AppSettings.getCurrentProfileName());
 
 
     }
