@@ -77,7 +77,7 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
         String remotePath = directory + FileUtils.PATH_SEPARATOR + localFile.getName();
         String mimeType = "application/octet-stream"; //unused
         UploadRemoteFileOperation uploadOperation = new UploadRemoteFileOperation(localFile.getAbsolutePath(), remotePath, mimeType);
-        uploadOperation.execute(client,this);
+        uploadOperation.execute(client,this,null);
     }
 
     @Override
