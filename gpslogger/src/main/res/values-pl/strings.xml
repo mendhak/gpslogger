@@ -8,7 +8,6 @@
   <string name="could_not_write_to_file">Nie można zapisać do pliku </string>
   <string name="add_description">Dodaj opis</string>
   <string name="letters_numbers">Używaj tylko cyfr i liter</string>
-  <string name="menu_settings">Ustawienia</string>
   <string name="menu_annotate">Opisz</string>
   <string name="menu_share">Udostępnij</string>
   <string name="menu_exit">Wyjdź</string>
@@ -180,7 +179,6 @@
   <string name="gdocs_test_title">Test wysyłania</string>
   <string name="gdocs_testupload_error">Nie można wysłać testowego pliku</string>
   <string name="gdocs_testupload_success">Wysłano. Proszę sprawdzić nowe pliki w Dokumentach Google.</string>
-  <string name="gdocs_selectgoogleaccount">Wybór konta Google</string>
   <string name="email_upload">Wysłanie pliku e-mailem</string>
   <string name="autoemail_sendto_csv">Adresy e-mail oddzielone przecinkiem.</string>
   <string name="autosend_enabled">Zezwól na automatyczne wysyłanie</string>
@@ -197,9 +195,6 @@
   <string name="log_opengts_title">Zaloguj do serwera OpenGTS</string>
   <string name="log_opengts_summary">Wyślij dane GPRMC na aktywny serwer OpenGTS.</string>
   <string name="opengts_setup_summary">Wyślij ślad GPS na wybrany serwer OpenGTS.</string>
-  <string name="opengts_enabled">Włącz OpenGTS</string>
-  <string name="autoopengts_autosend">Włącz automatyczne wysyłanie</string>
-  <string name="autoopengts_autosend_summary">Umożliwia automatyczne wysyłanie śladów GPS.</string>
   <string name="autoopengts_server_category">Ustawienia OpenGTS</string>
   <string name="autoopengts_invalid_form">Nieprawidłowe dane</string>
   <string name="autoopengts_invalid_form_message">Upewnij się, czy wszystkie pola zostały wypełnione prawidłowo</string>

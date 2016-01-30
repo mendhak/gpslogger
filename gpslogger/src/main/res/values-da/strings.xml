@@ -8,7 +8,6 @@
   <string name="could_not_write_to_file">Kunne ikke skrive til fil</string>
   <string name="add_description">Tilføje en beskrivelse</string>
   <string name="letters_numbers">Brug kun bogstaver og tal</string>
-  <string name="menu_settings">Indstillinger</string>
   <string name="menu_annotate">Kommentér</string>
   <string name="menu_share">Del</string>
   <string name="menu_exit">Afslut</string>

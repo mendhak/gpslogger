@@ -36,7 +36,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 70
-        versionName "70-profiles3"
+        versionName "70"
     }
 
     //Adding API keys to BuildConfig
@@ -120,7 +120,7 @@ android {
 
 dependencies {
 
-    compile 'com.android.support:support-v4:23.0.1'
+    compile 'com.android.support:support-v4:23.1.1'
     compile 'com.google.android.gms:play-services-base:8.4.0'
     compile 'com.google.android.gms:play-services-location:8.4.0'
     compile 'com.google.android.gms:play-services-drive:8.4.0'
@@ -156,7 +156,7 @@ dependencies {
 
 
     //Android lollipop/material features including the Toolbar
-    compile "com.android.support:appcompat-v7:23.0.1"
+    compile "com.android.support:appcompat-v7:23.1.1"
 
     //Recycler view required by material dialog custom URL alert box
     compile "com.android.support:recyclerview-v7:23.0.1"
@@ -253,9 +253,9 @@ if (project.hasProperty("CROWDIN_API_KEY")) {
         sourceFile = "$projectDir/src/main/res/values/strings.xml"
     }
 
-    crowdinUpload {
-        apiKey = CROWDIN_API_KEY
-        projectId = 'gpslogger-for-android'
-        sourceFile = "$projectDir/src/main/res/values/strings_faq.xml"
-    }
+//    crowdinUpload {
+//        apiKey = CROWDIN_API_KEY
+//        projectId = 'gpslogger-for-android'
+//        sourceFile = "$projectDir/src/main/res/values/strings_faq.xml"
+//    }
 }

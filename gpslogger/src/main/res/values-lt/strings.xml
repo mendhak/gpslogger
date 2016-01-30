@@ -9,7 +9,6 @@
   <string name="could_not_write_to_file">Negalima įrašyti į failą</string>
   <string name="add_description">Pridėti aprašymą</string>
   <string name="letters_numbers">Naudoti tik raides ir skaičius</string>
-  <string name="menu_settings">Nustatymai</string>
   <string name="menu_annotate">Anotacija</string>
   <string name="menu_share">Dalintis</string>
   <string name="menu_exit">Išeiti</string>
@@ -131,7 +130,6 @@
   <string name="gdocs_test_title">Testuoti įkėlimą</string>
   <string name="gdocs_testupload_error">Nepavyko įkelti testinio failo</string>
   <string name="gdocs_testupload_success">Įkelta. Prašau patikrinti jūsų Google Docs dokumentus, jei norite pamatyti naują failą.</string>
-  <string name="gdocs_selectgoogleaccount">Pasirinkti Google paskyrą</string>
   <string name="email_upload">Siųsti failą el. paštu</string>
   <string name="autoemail_sendto_csv">Atskiriama failus</string>
 </resources>

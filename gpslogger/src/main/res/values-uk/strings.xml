@@ -8,7 +8,6 @@
   <string name="could_not_write_to_file">Не вдалося записати до файлу</string>
   <string name="add_description">Додати Опис</string>
   <string name="letters_numbers">Використовувати лише букви і цифри</string>
-  <string name="menu_settings">Параметри</string>
   <string name="menu_annotate">Додати анотацію</string>
   <string name="menu_share">Поділитися</string>
   <string name="menu_exit">Вихід</string>
@@ -179,7 +178,6 @@
   <string name="gdocs_test_title">Тестове надсилання</string>
   <string name="gdocs_testupload_error">Не можливо надіслати тестовий файл</string>
   <string name="gdocs_testupload_success">Надіслано. Будь ласка, перевірте ваші Документи Google на наявність нового файлу.</string>
-  <string name="gdocs_selectgoogleaccount">Виберіть профіль Google</string>
   <string name="email_upload">Відправити файл листом</string>
   <string name="autoemail_sendto_csv">Адреси, відокремлені комами</string>
   <string name="autosend_enabled">Дозволити автонадсилання</string>
@@ -198,9 +196,6 @@
   <string name="log_opengts_title">Вхід до сервера OpenGTS</string>
   <string name="log_opengts_summary">Надсилати дані GPRMC на сервер OpenGTS.</string>
   <string name="opengts_setup_summary">Надсилання координат на сервер OpenGTS за вашим вибором.</string>
-  <string name="opengts_enabled">Увімкнути OpenGTS</string>
-  <string name="autoopengts_autosend">Включити автоматичне надсилання</string>
-  <string name="autoopengts_autosend_summary">Включає автоматичне надсилання координат.</string>
   <string name="autoopengts_server_category">Параметри OpenGTS</string>
   <string name="autoopengts_invalid_form">Неприпустиме значення</string>
   <string name="autoopengts_invalid_form_message">Будь ласка, переконайтеся, що всі поля заповнені вірно</string>

@@ -8,7 +8,6 @@
   <string name="could_not_write_to_file">Nu se poate scrie in fişier</string>
   <string name="add_description">Adauga o descriere</string>
   <string name="letters_numbers">Utilizează doar litere și cifre</string>
-  <string name="menu_settings">Setări</string>
   <string name="menu_annotate">Adauga nota</string>
   <string name="menu_share">Distribuie</string>
   <string name="menu_exit">Ieşire</string>
@@ -180,7 +179,6 @@
   <string name="gdocs_test_title">Test de încărcare fisier</string>
   <string name="gdocs_testupload_error">Nu se poate încărca un fişier de test</string>
   <string name="gdocs_testupload_success">Fisier incărcat. Vă rugăm să verificaţi documentele Google pentru un fişier nou.</string>
-  <string name="gdocs_selectgoogleaccount">Selectaţi un cont Google</string>
   <string name="email_upload">Trimite un fişier pe e-mail</string>
   <string name="autoemail_sendto_csv">Adrese de email separate prin virgulă</string>
   <string name="autosend_enabled">Permite trimitere automată</string>
@@ -199,9 +197,6 @@
   <string name="log_opengts_title">Salveaza in OpenGTS server</string>
   <string name="log_opengts_summary">Trimite GPRMC data la un server de OpenGTS online.</string>
   <string name="opengts_setup_summary">Trimite trasee GPS la un server de OpenGTS predefinit.</string>
-  <string name="opengts_enabled">Activeaza OpenGTS</string>
-  <string name="autoopengts_autosend">Activează trimitere automata</string>
-  <string name="autoopengts_autosend_summary">Permite trimiterea automata a traseelor de GPS.</string>
   <string name="autoopengts_server_category">Setările OpenGTS</string>
   <string name="autoopengts_invalid_form">Valori invalide</string>
   <string name="autoopengts_invalid_form_message">Asiguraţi-vă că toate câmpurile au fost completate mod corespunzător</string>

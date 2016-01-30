@@ -8,7 +8,6 @@
   <string name="could_not_write_to_file">Tidak dapat menulis ke fail</string>
   <string name="add_description">Tambah penerangan</string>
   <string name="letters_numbers">Gunakan hanya huruf dan angka</string>
-  <string name="menu_settings">Tetapan</string>
   <string name="menu_annotate">Catat</string>
   <string name="menu_share">Kongsi</string>
   <string name="menu_exit">Keluar</string>
@@ -178,7 +177,6 @@
   <string name="gdocs_test_title">Ujian muat naik</string>
   <string name="gdocs_testupload_error">Tidak dapat muat naik fail ujian</string>
   <string name="gdocs_testupload_success">Dimuat naik. Sila semak dokumen anda Google untuk fail baru.</string>
-  <string name="gdocs_selectgoogleaccount">Pilih akaun Google</string>
   <string name="email_upload">E-mel fail</string>
   <string name="autoemail_sendto_csv">Alamat e-mel dipisahkan koma</string>
   <string name="autosend_enabled">Benarkan penghantaran automatik</string>
@@ -197,9 +195,6 @@
   <string name="log_opengts_title">Log masuk ke pelayan OpenGTS</string>
   <string name="log_opengts_summary">Hantar data GPRMC ke pelayan OpenGTS dalam talian.</string>
   <string name="opengts_setup_summary">Hantar jejak GPS ke pelayan OpenGTS pilihan anda.</string>
-  <string name="opengts_enabled">Aktifkan OpenGTS</string>
-  <string name="autoopengts_autosend">Aktifkan penghantaran automatik</string>
-  <string name="autoopengts_autosend_summary">Aktifkan penghantaran automatiks jejak GPS.</string>
   <string name="autoopengts_server_category">Tetapan OpenGTS</string>
   <string name="autoopengts_invalid_form">Nilai tidak sah</string>
   <string name="autoopengts_invalid_form_message">Sila pastikan bahawa semua ruang telah telah diisi dengan betul</string>

@@ -8,7 +8,6 @@
   <string name="could_not_write_to_file">ناتوان در نوشتن در فايل</string>
   <string name="add_description">افزودن توضیحات</string>
   <string name="letters_numbers">فقط حروف و اعداد استفاده شود</string>
-  <string name="menu_settings">تنظیمات</string>
   <string name="menu_annotate">حاشیه نویسی</string>
   <string name="menu_share">اشتراک گذاشتن</string>
   <string name="menu_exit">خروج</string>

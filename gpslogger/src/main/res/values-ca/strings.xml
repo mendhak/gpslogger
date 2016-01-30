@@ -8,7 +8,6 @@
   <string name="could_not_write_to_file">No s\'ha pogut escriure a l\'arxiu</string>
   <string name="add_description">Afegir la descripció</string>
   <string name="letters_numbers">Tan sols pots utilitzar lletres i números</string>
-  <string name="menu_settings">Opcions</string>
   <string name="menu_annotate">Anotar</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_exit">Sortir</string>
@@ -95,6 +94,5 @@
   <string name="menu_upload">Carregar</string>
   <string name="gdocs_test_title">Càrrega de prova</string>
   <string name="gdocs_testupload_error">No s\'ha pogut carregar l\'arxiu de prova</string>
-  <string name="gdocs_selectgoogleaccount">Selecciona un compte de Google</string>
   <string name="email_upload">Envia per email un arxiu</string>
 </resources>

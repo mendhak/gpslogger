@@ -28,7 +28,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service android:name=".GpsLoggingService" >
+        <service android:name=".GpsLoggingService" android:exported="true">
             <intent-filter>
                 <action android:name="com.mendhak.gpslogger.GpsLoggingService" />
             </intent-filter>
@@ -143,7 +143,8 @@
             </intent-filter>
         </activity>
 
-        <provider android:name=".common.ContentApi" android:authorities="com.mendhak.gpslogger" android:exported="true" />
+        <provider android:name=".common.ContentApi" android:authorities="com.mendhak.gpslogger" android:exported="true"
+                  tools:ignore="ExportedContentProvider"/>
 
     </application>
 

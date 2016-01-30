@@ -8,7 +8,6 @@
   <string name="could_not_write_to_file">Tiedostoon kirjoittaminen epäonnistui</string>
   <string name="add_description">Lisää kuvaus</string>
   <string name="letters_numbers">Käytä vain kirjaimia ja numeroita</string>
-  <string name="menu_settings">Asetukset</string>
   <string name="menu_annotate">Muistiinpanot</string>
   <string name="menu_share">Jaa</string>
   <string name="menu_exit">Poistu</string>
@@ -82,7 +81,6 @@
   <string name="dropbox_unauthorize">Poista lupa</string>
   <string name="dropbox_upload">Dropbox</string>
   <string name="gdocs_clearauthorization">Poista lupa</string>
-  <string name="gdocs_selectgoogleaccount">Valitse Google-tili</string>
   <string name="autoemail_sendto_csv">Sähköpostiosoitteet pilkuilla erotettuna</string>
   <string name="autosend_enabled">Salli automaattinen lähettäminen</string>
   <string name="autosend_frequency">Kuinka usein?</string>

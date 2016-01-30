@@ -8,7 +8,6 @@
   <string name="could_not_write_to_file">Kunne ikkje skriva til fil</string>
   <string name="add_description">Legg til skildring</string>
   <string name="letters_numbers">Bruk berre bokstavar og tal</string>
-  <string name="menu_settings">Innstillingar</string>
   <string name="menu_annotate">Noter</string>
   <string name="menu_share">Del</string>
   <string name="menu_exit">Avslutt</string>
@@ -178,7 +177,6 @@
   <string name="gdocs_test_title">Test opplasting</string>
   <string name="gdocs_testupload_error">Kunne ikke laste opp test-fil</string>
   <string name="gdocs_testupload_success">Lastet opp. Sjekk Google dokumenter for ny fil.</string>
-  <string name="gdocs_selectgoogleaccount">Velg en Google-konto</string>
   <string name="autoftp_implicit">Implisitt FTP over SSL</string>
   <string name="autoftp_implicit_summary">Ikke marker hvis du ikke vet.</string>
   <string name="autoftp_test">Teste FTP Opplasting</string>

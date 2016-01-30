@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="title_drawer_generalsettings">General settings</string>
-    <string name="title_drawer_loggingsettings">Logging settings</string>
     <string name="title_drawer_uploadsettings">Upload settings</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -17,7 +15,6 @@
     <string name="add_description">Add a description</string>
     <string name="letters_numbers">Use only letters and numbers</string>
 
-    <string name="menu_settings">Settings</string>
 
     <string name="menu_annotate">Annotate</string>
     <string name="menu_share">Share</string>
@@ -314,7 +311,6 @@
     <string name="gdocs_test_title">Test upload</string>
     <string name="gdocs_testupload_error">Could not upload a test file</string>
     <string name="gdocs_testupload_success">Uploaded. Please check your Google Documents for a new file.</string>
-    <string name="gdocs_selectgoogleaccount">Select a Google Account</string>
 
     <string name="email_upload">Email a file</string>
 
@@ -346,9 +342,6 @@
     <string name="log_opengts_summary">Send GPRMC data to an online OpenGTS server.</string>
     <string name="opengts_setup_title">OpenGTS</string>
     <string name="opengts_setup_summary">Send GPS traces to an OpenGTS server of your choice.</string>
-    <string name="opengts_enabled">Enable OpenGTS</string>
-    <string name="autoopengts_autosend">Enable Automatically Send</string>
-    <string name="autoopengts_autosend_summary">Enables automatically sending the GPS traces.</string>
     <string name="autoopengts_server_category">OpenGTS Settings</string>
     <string name="autoopengts_invalid_form">Invalid values</string>
     <string name="autoopengts_invalid_form_message">Please ensure that all of the fields have been filled in properly</string>
@@ -480,5 +473,4 @@
     <string name="profile_delete">Delete profile?</string>
     <string name="profile_default">Default Profile</string>
     <string name="profile_add_new">Add profile</string>
-    <string name="profile_long_press_to_delete">Long press a profile to delete it</string>
 </resources>

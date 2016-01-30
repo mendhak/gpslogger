@@ -283,7 +283,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:visibility="visible"
-                        android:textSize="11sp"
+                        android:textSize="12sp"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="italic"
