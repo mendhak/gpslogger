@@ -654,11 +654,11 @@ public class Utilities {
 
         String finalFileName = baseName;
         finalFileName = finalFileName.replaceAll("(?i)%ser", String.valueOf(Utilities.GetBuildSerial()));
-        finalFileName = finalFileName.replaceAll("(?i)%hour", String.valueOf(t.hour));
-        finalFileName = finalFileName.replaceAll("(?i)%min", String.valueOf(t.minute));
-        finalFileName = finalFileName.replaceAll("(?i)%year", String.valueOf(t.year));
-        finalFileName = finalFileName.replaceAll("(?i)%month", String.valueOf(t.month+1));
-        finalFileName = finalFileName.replaceAll("(?i)%day", String.valueOf(t.monthDay));
+        finalFileName = finalFileName.replaceAll("(?i)%hour", String.format("%02d", t.hour));
+        finalFileName = finalFileName.replaceAll("(?i)%min", String.format("%02d", t.minute));
+        finalFileName = finalFileName.replaceAll("(?i)%year",  String.valueOf(t.year));
+        finalFileName = finalFileName.replaceAll("(?i)%month", String.format("%02d", t.month+1));
+        finalFileName = finalFileName.replaceAll("(?i)%day", String.format("%02d", t.monthDay));
         return finalFileName;
 
     }
