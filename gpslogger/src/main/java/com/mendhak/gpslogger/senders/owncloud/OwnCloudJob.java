@@ -1,7 +1,5 @@
 package com.mendhak.gpslogger.senders.owncloud;
 
-
-
 import android.net.Uri;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
@@ -13,11 +11,11 @@ import com.owncloud.android.lib.resources.files.FileUtils;
 import com.owncloud.android.lib.resources.files.UploadRemoteFileOperation;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
-
+import org.apache.commons.httpclient.protocol.Protocol;
+import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.slf4j.LoggerFactory;
-
 import java.io.File;
-
+import java.security.GeneralSecurityException;
 import de.greenrobot.event.EventBus;
 
 
@@ -58,6 +56,17 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
 
         tracer.debug("ownCloud Job: Uploading  '"+localFile.getName()+"'");
 
+        Protocol pr = Protocol.getProtocol("https");
+        if (pr == null || !(pr.getSocketFactory() instanceof SelfSignedConfidentSslSocketFactory)) {
+            try {
+                ProtocolSocketFactory psf = new SelfSignedConfidentSslSocketFactory();
+                Protocol.registerProtocol( "https", new Protocol("https", psf, 443));
+
+            } catch (GeneralSecurityException e) {
+                tracer.error("Self-signed confident SSL context could not be loaded", e);
+            }
+        }
+
         OwnCloudClient client = OwnCloudClientFactory.createOwnCloudClient(Uri.parse(servername), AppSettings.getInstance(), true);
         client.setDefaultTimeouts('\uea60', '\uea60');
         client.setFollowRedirects(true);
@@ -68,7 +77,7 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
         String remotePath = directory + FileUtils.PATH_SEPARATOR + localFile.getName();
         String mimeType = "application/octet-stream"; //unused
         UploadRemoteFileOperation uploadOperation = new UploadRemoteFileOperation(localFile.getAbsolutePath(), remotePath, mimeType);
-        uploadOperation.execute(client,this);
+        uploadOperation.execute(client,this,null);
     }
 
     @Override

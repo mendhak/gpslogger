@@ -19,7 +19,13 @@ repositories {
     maven {
         url  "https://dl.bintray.com/mendhak/maven"
     }
-    maven { url "https://jitpack.io" }
+    maven {
+        url "https://jitpack.io"
+    }
+    maven {
+        url "https://raw.github.com/mendhak/gpslogger-support-files/master/repository"
+    }
+
 }
 
 android {
@@ -108,8 +114,6 @@ android {
     dexOptions {
         preDexLibraries = false
     }
-
-    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
@@ -181,11 +185,11 @@ dependencies {
     compile 'de.greenrobot:eventbus:2.4.0'
 
     //JARs which aren't on maven
-    compile 'com.mendhak.gpsloggersupport:activation:0.0.1'
-    compile 'com.mendhak.gpsloggersupport:additionnal:0.0.1'
-    compile 'com.mendhak.gpsloggersupport:mail:0.0.1'
-    compile 'com.mendhak.gpsloggersupport:dropbox-android-sdk:1.6.3'
-    compile 'com.mendhak.gpsloggersupport:owncloud-android-library:0.0.1@aar'
+    compile 'com.mendhak.gpsloggersupportfiles:activation:0.0.2'
+    compile 'com.mendhak.gpsloggersupportfiles:additionnal:0.0.2'
+    compile 'com.mendhak.gpsloggersupportfiles:mail:0.0.2'
+    compile 'com.mendhak.gpsloggersupportfiles:dropbox-android-sdk:1.6.3'
+    compile 'com.mendhak.gpsloggersupportfiles:owncloud-android-library:0.0.3@aar'
 
     //Required by owncloud library
     compile ('commons-httpclient:commons-httpclient:3.1') {
