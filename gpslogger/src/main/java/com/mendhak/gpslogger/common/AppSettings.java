@@ -410,8 +410,8 @@ public class AppSettings extends Application {
      * The time, in minutes, before files are sent to the auto-send targets
      */
     @ProfilePreference(name= PreferenceNames.AUTOSEND_FREQUENCY)
-    public static Float getAutoSendInterval() {
-        return Float.valueOf(prefs.getString(PreferenceNames.AUTOSEND_FREQUENCY, "60"));
+    public static int getAutoSendInterval() {
+        return Math.round(Float.valueOf(prefs.getString(PreferenceNames.AUTOSEND_FREQUENCY, "60")));
     }
 
 
@@ -919,15 +919,16 @@ public class AppSettings extends Application {
     /**
      * Whether to subtract GeoID height from the reported altitude to get Mean Sea Level altitude instead of WGS84
      */
-    @ProfilePreference(name= PreferenceNames.ALTITUDE_SUBTRACT_OFFSET)
+    @ProfilePreference(name= PreferenceNames.ALTITUDE_SHOULD_ADJUST)
     public static boolean shouldAdjustAltitudeFromGeoIdHeight() {
-        return prefs.getBoolean(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET, false);
+        return prefs.getBoolean(PreferenceNames.ALTITUDE_SHOULD_ADJUST, false);
     }
 
 
     /**
      * How much to subtract from the altitude reported
      */
+    @ProfilePreference(name= PreferenceNames.ALTITUDE_SUBTRACT_OFFSET)
     public static int getSubtractAltitudeOffset() {
         return Utilities.parseWithDefault(prefs.getString(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET, "0"),0);
     }
