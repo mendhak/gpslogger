@@ -121,11 +121,11 @@
     <!-- Settings -->
     <string name="pref_logging_title">Logging details</string>
     <string name="log_gpx_title">Log to GPX</string>
-    <string name="log_gpx_summary">Creates a GPX file in the GPSLogger folder on the SD card.</string>
+    <string name="log_gpx_summary">Logs locations to a GPX v1.0 file</string>
     <string name="log_kml_title">Log to KML</string>
-    <string name="log_kml_summary">Creates a KML file in the GPSLogger folder on the SD card.</string>
+    <string name="log_kml_summary">Logs locations to a KML v2.2 file</string>
     <string name="log_plain_text_title">Log to Plain Text</string>
-    <string name="log_plain_text_summary">Creates a plain text file in the GPSLogger folder on the SD card.</string>
+    <string name="log_plain_text_summary">Logs locations to a CSV file</string>
     <string name="new_file_creation_title">New file creation</string>
     <string name="new_file_creation_summary">Whether to create a new file once a day or each time you start.</string>
     <string name="new_file_creation_onceaday">Once a day</string>
