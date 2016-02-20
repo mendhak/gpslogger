@@ -7,6 +7,7 @@ import com.owncloud.android.lib.common.*;
 import com.owncloud.android.lib.common.operations.OnRemoteOperationListener;
 import com.owncloud.android.lib.common.operations.RemoteOperation;
 import com.owncloud.android.lib.common.operations.RemoteOperationResult;
+import com.owncloud.android.lib.resources.files.CreateRemoteFolderOperation;
 import com.owncloud.android.lib.resources.files.FileUtils;
 import com.owncloud.android.lib.resources.files.UploadRemoteFileOperation;
 import com.path.android.jobqueue.Job;
@@ -73,6 +74,10 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
         client.setCredentials(
                 OwnCloudCredentialsFactory.newBasicCredentials(username, password)
         );
+
+        //Create the folder, in case it doesn't already exist on OwnCloud.
+        CreateRemoteFolderOperation createOperation = new CreateRemoteFolderOperation(directory, false);
+        createOperation.execute( client);
 
         String remotePath = directory + FileUtils.PATH_SEPARATOR + localFile.getName();
         String mimeType = "application/octet-stream"; //unused
