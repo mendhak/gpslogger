@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.canelmas.let.AskPermission;
 import com.google.android.gms.auth.GoogleAuthException;
@@ -38,7 +37,6 @@ import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.IMessageBoxCallback;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
@@ -49,8 +47,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class GDocsSettingsFragment extends PermissionedPreferenceFragment

@@ -1,7 +1,5 @@
 package com.mendhak.gpslogger.common;
 
-import java.lang.String;
-
 public class IntentConstants {
     public final static String IMMEDIATE_STOP = "immediatestop";
     public final static String IMMEDIATE_START =  "immediatestart";

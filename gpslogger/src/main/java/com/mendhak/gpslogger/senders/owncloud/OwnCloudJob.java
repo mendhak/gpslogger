@@ -3,7 +3,9 @@ package com.mendhak.gpslogger.senders.owncloud;
 import android.net.Uri;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
-import com.owncloud.android.lib.common.*;
+import com.owncloud.android.lib.common.OwnCloudClient;
+import com.owncloud.android.lib.common.OwnCloudClientFactory;
+import com.owncloud.android.lib.common.OwnCloudCredentialsFactory;
 import com.owncloud.android.lib.common.operations.OnRemoteOperationListener;
 import com.owncloud.android.lib.common.operations.RemoteOperation;
 import com.owncloud.android.lib.common.operations.RemoteOperationResult;
@@ -12,15 +14,13 @@ import com.owncloud.android.lib.resources.files.FileUtils;
 import com.owncloud.android.lib.resources.files.UploadRemoteFileOperation;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
+import de.greenrobot.event.EventBus;
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.security.GeneralSecurityException;
-import de.greenrobot.event.EventBus;
-
-
-import com.owncloud.android.lib.common.OwnCloudClient;
 
 public class OwnCloudJob extends Job implements OnRemoteOperationListener {
 

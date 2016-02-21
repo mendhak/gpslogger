@@ -1,6 +1,7 @@
 package com.mendhak.gpslogger.common;
 
 import android.location.Location;
+
 import java.io.Serializable;
 
 public class SerializableLocation implements Serializable {

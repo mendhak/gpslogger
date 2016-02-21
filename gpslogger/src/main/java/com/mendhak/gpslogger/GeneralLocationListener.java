@@ -17,11 +17,7 @@
 
 package com.mendhak.gpslogger;
 
-import android.location.GpsSatellite;
-import android.location.GpsStatus;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationProvider;
+import android.location.*;
 import android.os.Bundle;
 import com.mendhak.gpslogger.common.Utilities;
 import org.slf4j.LoggerFactory;

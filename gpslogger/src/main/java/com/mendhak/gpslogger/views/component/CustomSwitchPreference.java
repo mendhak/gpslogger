@@ -2,7 +2,6 @@ package com.mendhak.gpslogger.views.component;
 
 import android.content.Context;
 import android.preference.SwitchPreference;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;

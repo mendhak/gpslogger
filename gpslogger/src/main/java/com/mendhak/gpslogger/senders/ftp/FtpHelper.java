@@ -28,7 +28,9 @@ import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 public class FtpHelper implements IFileSender {

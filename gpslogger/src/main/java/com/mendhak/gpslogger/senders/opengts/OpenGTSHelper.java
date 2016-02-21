@@ -17,7 +17,6 @@
 
 package com.mendhak.gpslogger.senders.opengts;
 
-import android.content.Context;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.loggers.opengts.OpenGTSJob;

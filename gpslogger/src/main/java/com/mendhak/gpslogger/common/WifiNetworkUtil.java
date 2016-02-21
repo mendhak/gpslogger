@@ -1,12 +1,14 @@
 package com.mendhak.gpslogger.common;
 
 
-        import android.content.*;
-        import android.net.ConnectivityManager;
-        import android.net.NetworkInfo;
-        import android.preference.PreferenceManager;
-        import com.path.android.jobqueue.network.NetworkEventProvider;
-        import com.path.android.jobqueue.network.NetworkUtil;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import com.path.android.jobqueue.network.NetworkEventProvider;
+import com.path.android.jobqueue.network.NetworkUtil;
 
 /**
  * default implementation for network Utility to observe network events

@@ -19,7 +19,6 @@ package com.mendhak.gpslogger.senders;
 
 import android.content.Context;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 import com.mendhak.gpslogger.senders.email.AutoEmailHelper;

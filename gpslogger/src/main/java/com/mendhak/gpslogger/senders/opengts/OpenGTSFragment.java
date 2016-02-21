@@ -29,7 +29,6 @@ import com.mendhak.gpslogger.common.IPreferenceValidation;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
-import org.slf4j.LoggerFactory;
 
 public class OpenGTSFragment extends PermissionedPreferenceFragment implements
         IPreferenceValidation,

@@ -18,32 +18,27 @@
 package com.mendhak.gpslogger.views;
 
 import android.Manifest;
-import android.annotation.TargetApi;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.canelmas.let.*;
+import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.*;
+import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 
 /**

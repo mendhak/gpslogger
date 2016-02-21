@@ -23,7 +23,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
@@ -31,13 +30,12 @@ import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import org.slf4j.LoggerFactory;
 
-public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment {
+public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropboxAuthorizationFragment.class.getSimpleName());
     DropBoxHelper helper;
 
     @Override
-    @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -55,25 +53,7 @@ public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment
             pref.setSummary(R.string.dropbox_authorize_description);
         }
 
-        pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                // This logs you out if you're logged in, or vice versa
-                if (helper.IsLinked()) {
-                    helper.UnLink();
-                    startActivity(new Intent(getActivity(), GpsMainActivity.class));
-                    getActivity().finish();
-                } else {
-                    try {
-                        helper.StartAuthentication(DropboxAuthorizationFragment.this);
-                    } catch (Exception e) {
-                        tracer.error(".", e);
-                    }
-                }
-
-                return true;
-            }
-        });
+        pref.setOnPreferenceClickListener(this);
 
     }
 
@@ -94,4 +74,23 @@ public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment
 
     }
 
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+
+        // This logs you out if you're logged in, or vice versa
+        if (helper.IsLinked()) {
+            helper.UnLink();
+            startActivity(new Intent(getActivity(), GpsMainActivity.class));
+            getActivity().finish();
+        } else {
+            try {
+                helper.StartAuthentication(DropboxAuthorizationFragment.this);
+            } catch (Exception e) {
+                tracer.error(".", e);
+            }
+        }
+
+        return true;
+
+    }
 }

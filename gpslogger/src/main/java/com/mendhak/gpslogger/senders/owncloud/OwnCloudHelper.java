@@ -6,13 +6,13 @@ import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
+import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
-
-import de.greenrobot.event.EventBus;
 
 public class OwnCloudHelper implements IFileSender
 {

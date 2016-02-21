@@ -1,8 +1,5 @@
 package com.mendhak.gpslogger.common.events;
 
-import android.support.annotation.Nullable;
-import com.mikepenz.materialdrawer.holder.StringHolder;
-
 public class ProfileEvents {
 
     /**

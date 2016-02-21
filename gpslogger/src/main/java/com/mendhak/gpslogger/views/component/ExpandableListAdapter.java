@@ -1,9 +1,6 @@
 package com.mendhak.gpslogger.views.component;
 
 
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.Html;
@@ -15,6 +12,9 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 import com.mendhak.gpslogger.R;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
+
+import java.util.HashMap;
+import java.util.List;
 
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {

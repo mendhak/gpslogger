@@ -13,9 +13,7 @@ import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
-
 import de.greenrobot.event.EventBus;
-
 import org.slf4j.LoggerFactory;
 
 public class OwnCloudSettingsFragment

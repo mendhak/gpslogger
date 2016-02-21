@@ -18,7 +18,6 @@
 package com.mendhak.gpslogger.senders.osm;
 
 import android.content.Context;
-
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
@@ -29,7 +28,6 @@ import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.List;

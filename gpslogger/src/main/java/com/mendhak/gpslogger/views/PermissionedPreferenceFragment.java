@@ -1,7 +1,6 @@
 package com.mendhak.gpslogger.views;
 
 
-import android.app.Fragment;
 import android.preference.PreferenceFragment;
 import com.canelmas.let.DeniedPermission;
 import com.canelmas.let.Let;

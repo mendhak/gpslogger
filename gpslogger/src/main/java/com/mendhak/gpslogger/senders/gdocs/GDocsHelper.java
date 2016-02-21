@@ -27,7 +27,8 @@ import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
-import java.io.*;
+
+import java.io.File;
 import java.util.List;
 
 

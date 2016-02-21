@@ -10,7 +10,6 @@ import android.test.mock.MockContext;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.text.format.Time;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
 
 import java.io.File;
 import java.util.Date;

@@ -23,6 +23,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIUtils;
 import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.LoggerFactory;
+
 import java.net.*;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;

@@ -3,7 +3,8 @@ package com.mendhak.gpslogger.senders.osm;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
-
+import de.greenrobot.event.EventBus;
+import oauth.signpost.OAuthConsumer;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
@@ -16,9 +17,6 @@ import org.apache.http.params.HttpParams;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-
-import de.greenrobot.event.EventBus;
-import oauth.signpost.OAuthConsumer;
 
 public class OSMJob extends Job {
 

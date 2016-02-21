@@ -18,7 +18,7 @@
 package com.mendhak.gpslogger.senders.email;
 
 import android.os.Bundle;
-import android.preference.*;
+import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;

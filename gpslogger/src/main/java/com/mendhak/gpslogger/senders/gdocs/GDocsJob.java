@@ -1,16 +1,14 @@
 package com.mendhak.gpslogger.senders.gdocs;
 
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
-
+import de.greenrobot.event.EventBus;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 
@@ -20,8 +18,6 @@ import java.io.FileInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-
-import de.greenrobot.event.EventBus;
 
 public class GDocsJob extends Job {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GDocsJob.class.getSimpleName());

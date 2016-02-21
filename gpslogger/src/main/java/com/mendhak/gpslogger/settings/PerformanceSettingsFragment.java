@@ -4,14 +4,12 @@ package com.mendhak.gpslogger.settings;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.Utilities;
-import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PerformanceSettingsFragment  extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 

@@ -2,7 +2,6 @@ package com.mendhak.gpslogger.common.events;
 
 import android.location.Location;
 import com.google.android.gms.location.ActivityRecognitionResult;
-import com.mendhak.gpslogger.common.Session;
 
 public class ServiceEvents {
 

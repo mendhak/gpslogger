@@ -18,7 +18,7 @@
 package com.mendhak.gpslogger.views;
 
 import android.content.Context;
-import android.graphics.*;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.Html;
@@ -39,6 +39,7 @@ import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import org.slf4j.LoggerFactory;
+
 import java.text.NumberFormat;
 
 public class GpsSimpleViewFragment extends GenericViewFragment implements View.OnClickListener {

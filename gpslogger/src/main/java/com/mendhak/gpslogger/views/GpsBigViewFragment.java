@@ -29,7 +29,6 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
-import org.slf4j.LoggerFactory;
 
 import java.text.NumberFormat;
 
