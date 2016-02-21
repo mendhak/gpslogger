@@ -18,9 +18,9 @@
 package com.mendhak.gpslogger.common;
 
 
-import android.preference.PreferenceFragment;
+import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 
-public abstract class PreferenceValidationFragment extends PreferenceFragment {
+public abstract class PreferenceValidationFragment extends PermissionedPreferenceFragment {
 
     public abstract boolean IsValid();
 

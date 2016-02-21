@@ -35,6 +35,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.canelmas.let.*;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.CommandEvents;
@@ -42,12 +43,14 @@ import com.mendhak.gpslogger.common.events.ServiceEvents;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 
 /**
  * Common class for communicating with the parent for the
  * GpsViewCallbacks
  */
-public abstract class GenericViewFragment extends Fragment implements IMessageBoxCallback {
+public abstract class GenericViewFragment extends PermissionedFragment  {
 
     private org.slf4j.Logger tracer;
 
@@ -62,10 +65,10 @@ public abstract class GenericViewFragment extends Fragment implements IMessageBo
         EventBus.getDefault().register(this);
     }
 
-    private void UnregisterEventBus(){
+    private void UnregisterEventBus() {
         try {
             EventBus.getDefault().unregister(this);
-        } catch (Throwable t){
+        } catch (Throwable t) {
             //this may crash if registration did not go through. just be safe
         }
     }
@@ -77,9 +80,8 @@ public abstract class GenericViewFragment extends Fragment implements IMessageBo
     }
 
 
-
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.LocationServicesUnavailable locationServicesUnavailable){
+    public void onEventMainThread(ServiceEvents.LocationServicesUnavailable locationServicesUnavailable) {
         new MaterialDialog.Builder(getActivity())
                 //.title("Location services unavailable")
                 .content(R.string.gpsprovider_unavailable)
@@ -97,43 +99,15 @@ public abstract class GenericViewFragment extends Fragment implements IMessageBo
     }
 
 
-    public void RequestToggleLogging(){
+    @AskPermission({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    public void RequestToggleLogging() {
 
-        if(
-                ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                ||
-                ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                ||
-                ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                ){
-            tracer.debug("User has not granted permission to fine/coarse location or writing to storage");
-
-            if (    ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
-                    ||
-                    ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
-                    ||
-                    ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    ) {
-
-                Utilities.MsgBox(getString(R.string.gpslogger_permissions_rationale_title),  getString(R.string.gpslogger_permissions_rationale_message_basic), getActivity(), this);
-
-            } else {
-                RequestPermission();
-            }
-
-
-            return;
-        }
-
-
-
-
-        if(Session.isStarted()){
+        if (Session.isStarted()) {
             ToggleLogging();
             return;
         }
 
-        if(AppSettings.shouldCreateCustomFile()  && AppSettings.shouldAskCustomFileNameEachTime()){
+        if (AppSettings.shouldCreateCustomFile() && AppSettings.shouldAskCustomFileNameEachTime()) {
 
             MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
                     .title(R.string.new_file_custom_title)
@@ -165,55 +139,18 @@ public abstract class GenericViewFragment extends Fragment implements IMessageBo
 
             EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
             userInput.setText(AppSettings.getCustomFileName());
-            TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
+            TextView tvMessage = (TextView) alertDialog.getCustomView().findViewById(R.id.alert_user_message);
             tvMessage.setText(R.string.new_file_custom_message);
             alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             alertDialog.show();
 
-        }
-        else {
+        } else {
             ToggleLogging();
         }
     }
 
-    public void ToggleLogging(){
+    public void ToggleLogging() {
         EventBus.getDefault().post(new CommandEvents.RequestToggle());
     }
 
-
-    @TargetApi(23)
-    public void RequestPermission(){
-        tracer.debug("Requesting permissions from user");
-        requestPermissions(
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                1);
-    }
-
-    public void MessageBoxResult(int which){
-        tracer.debug("User read explanation");
-        if(which == IMessageBoxCallback.OK){
-           RequestPermission();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 1: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    for(int i=0; i<grantResults.length; i++){
-                        tracer.debug(permissions[i] + " - " + String.valueOf(grantResults[i]==PackageManager.PERMISSION_GRANTED));
-                    }
-
-                } else {
-                    tracer.debug("Permissions not granted, or user checked 'never show again'");
-                }
-            }
-
-        }
-    }
 }

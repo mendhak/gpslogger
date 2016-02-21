@@ -17,6 +17,7 @@
 
 package com.mendhak.gpslogger.senders.gdocs;
 
+import android.Manifest;
 import android.accounts.AccountManager;
 import android.app.Dialog;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
+import com.canelmas.let.AskPermission;
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.GooglePlayServicesAvailabilityException;
@@ -36,8 +38,10 @@ import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.IMessageBoxCallback;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
@@ -46,9 +50,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class GDocsSettingsFragment extends PreferenceFragment
+public class GDocsSettingsFragment extends PermissionedPreferenceFragment
         implements Preference.OnPreferenceClickListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GDocsSettingsFragment.class.getSimpleName());
@@ -138,6 +143,7 @@ public class GDocsSettingsFragment extends PreferenceFragment
     }
 
     @Override
+    @AskPermission({Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
         if (preference.getKey().equalsIgnoreCase("gdocs_test")) {
             UploadTestFileToGoogleDocs();
@@ -253,6 +259,7 @@ public class GDocsSettingsFragment extends PreferenceFragment
     }
 
 
+    @AskPermission({Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     private void UploadTestFileToGoogleDocs() {
 
         Utilities.ShowProgress(getActivity(), getString(R.string.please_wait), getString(R.string.please_wait));

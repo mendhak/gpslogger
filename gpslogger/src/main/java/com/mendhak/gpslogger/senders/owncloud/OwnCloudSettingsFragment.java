@@ -1,9 +1,11 @@
 package com.mendhak.gpslogger.senders.owncloud;
 
 
+import android.Manifest;
 import android.os.Bundle;
 import android.preference.Preference;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
+import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceValidationFragment;
@@ -61,6 +63,7 @@ public class OwnCloudSettingsFragment
 
 
     @Override
+    @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
 
         MaterialEditTextPreference servernamePreference = (MaterialEditTextPreference) findPreference("owncloud_server");
