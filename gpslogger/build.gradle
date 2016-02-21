@@ -117,16 +117,17 @@ android {
             }
         }
 
-        //PGP Sign
-        //Verify with gpg --verify ~/Downloads/gpslogger-71.apk.asc
-        signing{
-            sign releaseApk
+        if (project.hasProperty("RELEASE_STORE_FILE")) {
+            //PGP Sign
+            //Verify with gpg --verify ~/Downloads/gpslogger-71.apk.asc
+            signing {
+                sign releaseApk
+            }
+
+            //SHA256 Checksum
+            //Verify with sha256sum -c ~/Downloads/gpslogger-71.apk.SHA256
+            ant.checksum(file: releaseApk, algorithm: "SHA256", pattern: "{0} {1}")
         }
-
-        //SHA256 Checksum
-        //Verify with sha256sum -c ~/Downloads/gpslogger-71.apk.SHA256
-        ant.checksum(file:releaseApk,algorithm:"SHA256",pattern:"{0} {1}")
-
     }
 
     //Predexing libraries takes up too much memory and causes travis-ci to choke
