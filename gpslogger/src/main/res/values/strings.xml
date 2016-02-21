@@ -473,4 +473,6 @@
     <string name="profile_delete">Delete profile?</string>
     <string name="profile_default">Default Profile</string>
     <string name="profile_add_new">Add profile</string>
+    <string name="gpslogger_permissions_rationale_title">Permissions required</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[This app requires various permissions in order to function properly. <br /> <b>Device location</b> - Read location data from cell towers and phone GPS hardware.<br /><b>Photos, media, files</b> - The ability to write log files to storage and read a list of files when uploading or sharing.<br /><br/>  ]]></string>
 </resources>

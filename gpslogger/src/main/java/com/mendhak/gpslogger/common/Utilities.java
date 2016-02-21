@@ -31,6 +31,7 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.text.Html;
 import android.text.Spanned;
 import android.text.format.Time;
 import android.text.method.LinkMovementMethod;
@@ -180,24 +181,25 @@ public class Utilities {
      * @param msgCallback An object which implements IHasACallBack so that the
      *                    click event can call the callback method.
      */
-    private static void MsgBox(String title, String message, Context className,
-                               final IMessageBoxCallback msgCallback) {
+    public static void MsgBox(String title, String message, Context className, final IMessageBoxCallback msgCallback) {
         MaterialDialog alertDialog = new MaterialDialog.Builder(className)
                 .title(title)
-                .content(message)
+                .content(Html.fromHtml(message))
                 .positiveText(R.string.ok)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         if (msgCallback != null) {
-                            msgCallback.MessageBoxResult(0);
+                            msgCallback.MessageBoxResult(IMessageBoxCallback.OK);
                         }
                     }
                 })
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-
+                        if (msgCallback != null) {
+                            msgCallback.MessageBoxResult(IMessageBoxCallback.CANCEL);
+                        }
                     }
                 })
                 .build();

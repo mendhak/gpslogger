@@ -17,13 +17,18 @@
 
 package com.mendhak.gpslogger.views;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -31,24 +36,25 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import de.greenrobot.event.EventBus;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * Common class for communicating with the parent for the
  * GpsViewCallbacks
  */
-public abstract class GenericViewFragment extends Fragment {
+public abstract class GenericViewFragment extends Fragment implements IMessageBoxCallback {
+
+    private org.slf4j.Logger tracer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        tracer = LoggerFactory.getLogger(GenericViewFragment.class.getSimpleName());
         RegisterEventBus();
     }
 
@@ -92,6 +98,35 @@ public abstract class GenericViewFragment extends Fragment {
 
 
     public void RequestToggleLogging(){
+
+        if(
+                ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                ||
+                ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                ||
+                ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                ){
+            tracer.debug("User has not granted permission to fine/coarse location or writing to storage");
+
+            if (    ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                    ||
+                    ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                    ||
+                    ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    ) {
+
+                Utilities.MsgBox(getString(R.string.gpslogger_permissions_rationale_title),  getString(R.string.gpslogger_permissions_rationale_message_basic), getActivity(), this);
+
+            } else {
+                RequestPermission();
+            }
+
+
+            return;
+        }
+
+
+
 
         if(Session.isStarted()){
             ToggleLogging();
@@ -146,4 +181,39 @@ public abstract class GenericViewFragment extends Fragment {
     }
 
 
+    @TargetApi(23)
+    public void RequestPermission(){
+        tracer.debug("Requesting permissions from user");
+        requestPermissions(
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                1);
+    }
+
+    public void MessageBoxResult(int which){
+        tracer.debug("User read explanation");
+        if(which == IMessageBoxCallback.OK){
+           RequestPermission();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    for(int i=0; i<grantResults.length; i++){
+                        tracer.debug(permissions[i] + " - " + String.valueOf(grantResults[i]==PackageManager.PERMISSION_GRANTED));
+                    }
+
+                } else {
+                    tracer.debug("Permissions not granted, or user checked 'never show again'");
+                }
+            }
+
+        }
+    }
 }
