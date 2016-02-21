@@ -20,7 +20,7 @@ package com.mendhak.gpslogger.common;
 
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 
-public abstract class PreferenceValidationFragment extends PermissionedPreferenceFragment {
+public interface IPreferenceValidation  {
 
     public abstract boolean IsValid();
 

@@ -22,7 +22,7 @@ import android.preference.PreferenceFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import com.mendhak.gpslogger.common.PreferenceValidationFragment;
+import com.mendhak.gpslogger.common.IPreferenceValidation;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.dropbox.DropboxAuthorizationFragment;
 import com.mendhak.gpslogger.senders.email.AutoEmailFragment;
@@ -134,8 +134,8 @@ public class MainPreferenceActivity extends ActionBarActivity {
     }
 
     private boolean isFormValid(){
-        if(preferenceFragment instanceof  PreferenceValidationFragment){
-            if( !((PreferenceValidationFragment)preferenceFragment).IsValid() ){
+        if(preferenceFragment instanceof IPreferenceValidation){
+            if( !((IPreferenceValidation)preferenceFragment).IsValid() ){
                 Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
                         getString(R.string.autoemail_invalid_form_message),
                         this);

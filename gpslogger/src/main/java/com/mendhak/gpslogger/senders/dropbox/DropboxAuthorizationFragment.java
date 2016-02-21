@@ -19,21 +19,25 @@
 
 package com.mendhak.gpslogger.senders.dropbox;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import org.slf4j.LoggerFactory;
 
-public class DropboxAuthorizationFragment extends PreferenceFragment {
+public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropboxAuthorizationFragment.class.getSimpleName());
     DropBoxHelper helper;
 
     @Override
+    @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

@@ -17,21 +17,24 @@
 
 package com.mendhak.gpslogger.senders.ftp;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.preference.Preference;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
+import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.PreferenceValidationFragment;
+import com.mendhak.gpslogger.common.IPreferenceValidation;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
 public class AutoFtpFragment
-        extends PreferenceValidationFragment implements Preference.OnPreferenceClickListener {
+        extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener, IPreferenceValidation {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoFtpFragment.class.getSimpleName());
 
     public void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,7 @@ public class AutoFtpFragment
     }
 
     @Override
+    @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
 
         FtpHelper helper = new FtpHelper();

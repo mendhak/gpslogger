@@ -25,12 +25,14 @@ import android.webkit.URLUtil;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.PreferenceValidationFragment;
+import com.mendhak.gpslogger.common.IPreferenceValidation;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import org.slf4j.LoggerFactory;
 
-public class OpenGTSFragment extends PreferenceValidationFragment implements
+public class OpenGTSFragment extends PermissionedPreferenceFragment implements
+        IPreferenceValidation,
         OnPreferenceChangeListener,
         OnPreferenceClickListener {
 

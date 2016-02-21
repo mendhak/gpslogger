@@ -26,14 +26,15 @@ import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.PreferenceValidationFragment;
+import com.mendhak.gpslogger.common.IPreferenceValidation;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import de.greenrobot.event.EventBus;
 
-public class AutoEmailFragment extends PreferenceValidationFragment implements
-        OnPreferenceChangeListener,  OnPreferenceClickListener {
+public class AutoEmailFragment extends PermissionedPreferenceFragment implements
+        OnPreferenceChangeListener,  OnPreferenceClickListener, IPreferenceValidation {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

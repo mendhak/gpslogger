@@ -8,9 +8,10 @@ import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.PreferenceValidationFragment;
+import com.mendhak.gpslogger.common.IPreferenceValidation;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 
 import de.greenrobot.event.EventBus;
@@ -18,7 +19,7 @@ import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
 public class OwnCloudSettingsFragment
-        extends PreferenceValidationFragment implements Preference.OnPreferenceClickListener {
+        extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener, IPreferenceValidation {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OwnCloudSettingsFragment.class.getSimpleName());
 

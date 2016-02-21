@@ -17,6 +17,7 @@
 
 package com.mendhak.gpslogger.senders.osm;
 
+import android.Manifest;
 import android.content.Intent;
 
 import android.net.Uri;
@@ -24,18 +25,18 @@ import android.os.Bundle;
 import android.os.StrictMode;
 
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
+import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import org.slf4j.LoggerFactory;
 
-public class OSMAuthorizationFragment extends PreferenceFragment {
+public class OSMAuthorizationFragment extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OSMAuthorizationFragment.class.getSimpleName());
     private static OAuthProvider provider;
@@ -100,58 +101,53 @@ public class OSMAuthorizationFragment extends PreferenceFragment {
 
         }
 
-
-        resetPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-
-            public boolean onPreferenceClick(Preference preference) {
-
-                if (OSMHelper.IsOsmAuthorized(getActivity())) {
-                    AppSettings.setOSMAccessToken("");
-                    AppSettings.setOSMAccessTokenSecret("");
-                    AppSettings.setOSMRequestToken("");
-                    AppSettings.setOSMRequestTokenSecret("");
-
-                    startActivity(new Intent(getActivity(), GpsMainActivity.class));
-                    getActivity().finish();
-
-                } else {
-                    try {
-                        StrictMode.enableDefaults();
-
-                        //User clicks. Set the consumer and provider up.
-                        consumer = OSMHelper.GetOSMAuthConsumer(getActivity());
-                        provider = OSMHelper.GetOSMAuthProvider(getActivity());
-
-                        String authUrl;
-
-                        //Get the request token and request token secret
-                        authUrl = provider.retrieveRequestToken(consumer, OAuth.OUT_OF_BAND);
-
-                        //Save for later
-                        AppSettings.setOSMRequestToken(consumer.getToken());
-                        AppSettings.setOSMRequestTokenSecret(consumer.getTokenSecret());
-
-
-                        //Open browser, send user to OpenStreetMap.org
-                        Uri uri = Uri.parse(authUrl);
-                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivity(intent);
-
-                    } catch (Exception e) {
-                        tracer.error("onClick", e);
-                        Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error),
-                                getActivity());
-                    }
-                }
-
-                return true;
-
-
-            }
-        });
-
+        resetPref.setOnPreferenceClickListener(this);
 
     }
 
 
+    @Override
+    @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
+    public boolean onPreferenceClick(Preference preference) {
+        if (OSMHelper.IsOsmAuthorized(getActivity())) {
+            AppSettings.setOSMAccessToken("");
+            AppSettings.setOSMAccessTokenSecret("");
+            AppSettings.setOSMRequestToken("");
+            AppSettings.setOSMRequestTokenSecret("");
+
+            startActivity(new Intent(getActivity(), GpsMainActivity.class));
+            getActivity().finish();
+
+        } else {
+            try {
+                StrictMode.enableDefaults();
+
+                //User clicks. Set the consumer and provider up.
+                consumer = OSMHelper.GetOSMAuthConsumer(getActivity());
+                provider = OSMHelper.GetOSMAuthProvider(getActivity());
+
+                String authUrl;
+
+                //Get the request token and request token secret
+                authUrl = provider.retrieveRequestToken(consumer, OAuth.OUT_OF_BAND);
+
+                //Save for later
+                AppSettings.setOSMRequestToken(consumer.getToken());
+                AppSettings.setOSMRequestTokenSecret(consumer.getTokenSecret());
+
+
+                //Open browser, send user to OpenStreetMap.org
+                Uri uri = Uri.parse(authUrl);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
+            } catch (Exception e) {
+                tracer.error("onClick", e);
+                Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error),
+                        getActivity());
+            }
+        }
+
+        return true;
+    }
 }
