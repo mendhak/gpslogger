@@ -15,6 +15,7 @@ plugins {
 
 apply plugin: 'com.android.application'
 apply plugin: 'let'
+apply plugin: 'signing'
 
 repositories {
     mavenCentral()
@@ -103,15 +104,29 @@ android {
 
     //Copies final APK to this directory
     assembleRelease.doLast {
+        def File releaseApk
+
         copy{
             from "build/outputs/apk/gpslogger-release.apk"
             into "./"
 
             // Use a closure to map the file name
             rename { String fileName ->
-                fileName.replace('release', android.defaultConfig.versionName)
+                releaseApk = file(fileName.replace('release', android.defaultConfig.versionName))
+                releaseApk.name
             }
         }
+
+        //PGP Sign
+        //Verify with gpg --verify ~/Downloads/gpslogger-71.apk.asc
+        signing{
+            sign releaseApk
+        }
+
+        //SHA256 Checksum
+        //Verify with sha256sum -c ~/Downloads/gpslogger-71.apk.SHA256
+        ant.checksum(file:releaseApk,algorithm:"SHA256",pattern:"{0} {1}")
+
     }
 
     //Predexing libraries takes up too much memory and causes travis-ci to choke
@@ -263,3 +278,5 @@ if (project.hasProperty("CROWDIN_API_KEY")) {
 //        sourceFile = "$projectDir/src/main/res/values/strings_faq.xml"
 //    }
 }
+
+

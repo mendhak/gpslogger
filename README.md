@@ -3,13 +3,15 @@ GPSLogger [![Build Status](https://travis-ci.org/mendhak/gpslogger.svg?branch=ma
 
 GPSLogger is an Android app that logs GPS information to GPX, KML or text files and has options for annotating and sharing.
 
-[Read about GPSLogger here](http://mendhak.github.com/gpslogger/)
+[Read about GPSLogger's features here](http://mendhak.github.com/gpslogger/)
 
 ## Download
 
 You can [download it from Google Play](https://play.google.com/store/apps/details?id=com.mendhak.gpslogger).
 
-You can download the APK directly [from the releases](https://github.com/mendhak/gpslogger/releases). The oldest Android 2.x release is [here](https://github.com/mendhak/gpslogger/releases/tag/v43).
+You can download the APK directly [from the releases](https://github.com/mendhak/gpslogger/releases).
+    
+The oldest Android 2.x release is [here](https://github.com/mendhak/gpslogger/releases/tag/v43).
 
 ## Contribute
 
@@ -17,21 +19,32 @@ You can help with [translations](http://crowdin.net/project/gpslogger-for-androi
 
 You can also submit [pull requests](https://help.github.com/articles/using-pull-requests) for bug fixes and new features.
 
+I'm not very good at UIs, so any work with the layouts would be appreciated!  
+
 
 ## License
 
-Licensed under [GPL v2](http://www.gnu.org/licenses/gpl-2.0.html).
+Licensed under [GPL v2](http://www.gnu.org/licenses/gpl-2.0.html).  
 
 ## Donate
 
-You can donate Bitcoins [here](https://www.coinbase.com/mendhak)
+[Bitcoin](https://www.coinbase.com/mendhak) | [Paypal](https://paypal.me/mendhak)
 
+
+## Verifying
+
+If you download a release .asc or .sha256, you can verify like so
+
+    $ gpg --keyserver keyserver.ubuntu.com --recv-key 76CBE9A9
+    $ gpg --verify ~/Downloads/gpslogger-71.apk.asc
+    $ sha256sum -c ~/Downloads/gpslogger-71.apk.SHA256
+    
 
 Setting up the code
 =========
 
 
-The project is based on the new [Android build system](http://tools.android.com/tech-docs/new-build-system/user-guide) plugin for Gradle.
+The project is based on the [Android build system](http://tools.android.com/tech-docs/new-build-system/user-guide) plugin for Gradle.
 Feel free to adopt and document your own OS and IDEs.  These instructions are for Ubuntu Linux with IntelliJ IDEA.
 
 ### Set up your Android Development Environment
@@ -55,7 +68,7 @@ This project uses certain Google libraries, you will need to add them. Run
 
 Which brings up the Android SDK manager.  In here, choose
 
-*  Tools > Android SDK build tools 19.0.3
+*  Tools > Android SDK build tools
 *  Extras > Android Support Repository
 *  Extras > Android Support Library
 *  Extras > Google Play services
