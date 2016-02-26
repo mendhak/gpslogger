@@ -82,4 +82,5 @@ public  class PreferenceNames {
     public static final String CURRENT_PROFILE_NAME = "current_profile_name";
     public static final String SELECTED_NAVITEM = "selected_navitem";
 
+    public static final String LAST_VERSION_SEEN_BY_USER = "last_version_seen";
 }

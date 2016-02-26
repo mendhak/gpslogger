@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.common;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.preference.PreferenceManager;
 import com.mendhak.gpslogger.PreferenceNames;
 import com.mendhak.gpslogger.R;
@@ -312,14 +313,14 @@ public class AppSettings extends Application {
     }
 
     /**
-     * Sets the list of location providers that the app will listen to given their array positions in {@link #GetDefaultListeners()}.
+     * Sets the list of location providers that the app will listen to given their array positions in {@link #GetAvailableListeners()}.
      */
     public static void setChosenListeners(Integer... listenerIndices) {
         List<Integer> selectedItems = Arrays.asList(listenerIndices);
         final Set<String> chosenListeners = new HashSet<String>();
 
         for (Integer selectedItem : selectedItems) {
-            chosenListeners.add(GetDefaultListeners().get(selectedItem));
+            chosenListeners.add(GetAvailableListeners().get(selectedItem));
         }
 
         if (chosenListeners.size() > 0) {
@@ -332,13 +333,24 @@ public class AppSettings extends Application {
     /**
      * Default set of listeners
      */
-    public static List<String> GetDefaultListeners() {
+    public static List<String> GetDefaultListeners(){
+        List<String> listeners = new ArrayList<String>();
+        listeners.add(LocationManager.GPS_PROVIDER);
+        listeners.add(LocationManager.NETWORK_PROVIDER);
+        return listeners;
+    }
+
+
+    /**
+     * All the possible listeners
+     * @return
+     */
+    public static List<String> GetAvailableListeners() {
 
         List<String> listeners = new ArrayList<String>();
-        listeners.add("gps");
-        listeners.add("network");
-        listeners.add("passive");
-
+        listeners.add(LocationManager.GPS_PROVIDER);
+        listeners.add(LocationManager.NETWORK_PROVIDER);
+        listeners.add(LocationManager.PASSIVE_PROVIDER);
         return listeners;
     }
 
@@ -952,6 +964,18 @@ public class AppSettings extends Application {
         prefs.edit().putString(PreferenceNames.CURRENT_PROFILE_NAME, profileName).apply();
     }
 
+    /**
+     * A preference to keep track of version specific changes.
+     */
+    @ProfilePreference(name= PreferenceNames.LAST_VERSION_SEEN_BY_USER)
+    public static int getLastVersionSeen(){
+        return prefs.getInt(PreferenceNames.LAST_VERSION_SEEN_BY_USER, 1);
+    }
+
+    public static void setLastVersionSeen(int lastVersionSeen){
+        prefs.edit().putInt(PreferenceNames.LAST_VERSION_SEEN_BY_USER,lastVersionSeen).apply();
+    }
+
 
     public static void SavePropertiesFromPreferences(File f) throws IOException {
 
@@ -1020,7 +1044,7 @@ public class AppSettings extends Application {
             if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
                 editor.putBoolean(key.toString(), Boolean.parseBoolean(value));
             } else if (key.equals("listeners")) {
-                List<String> availableListeners = GetDefaultListeners();
+                List<String> availableListeners = GetAvailableListeners();
                 Set<String> chosenListeners = new HashSet<>();
                 String[] csvListeners = value.split(",");
                 for (String l : csvListeners) {

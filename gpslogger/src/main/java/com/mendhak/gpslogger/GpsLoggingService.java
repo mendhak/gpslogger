@@ -510,7 +510,7 @@ public class GpsLoggingService extends Service  {
     }
 
     private void StartPassiveManager() {
-        if(AppSettings.getChosenListeners().contains("passive")){
+        if(AppSettings.getChosenListeners().contains(LocationManager.PASSIVE_PROVIDER)){
             tracer.debug("Starting passive location listener");
             if(passiveLocationListener== null){
                 passiveLocationListener = new GeneralLocationListener(this, "PASSIVE");
@@ -550,7 +550,7 @@ public class GpsLoggingService extends Service  {
 
         CheckTowerAndGpsStatus();
 
-        if (Session.isGpsEnabled() && AppSettings.getChosenListeners().contains("gps")) {
+        if (Session.isGpsEnabled() && AppSettings.getChosenListeners().contains(LocationManager.GPS_PROVIDER)) {
             tracer.info("Requesting GPS location updates");
             // gps satellite based
             gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, gpsLocationListener);
@@ -561,7 +561,7 @@ public class GpsLoggingService extends Service  {
             startAbsoluteTimer();
         }
 
-        if (Session.isTowerEnabled() &&  ( AppSettings.getChosenListeners().contains("network")  || !Session.isGpsEnabled() ) ) {
+        if (Session.isTowerEnabled() &&  ( AppSettings.getChosenListeners().contains(LocationManager.NETWORK_PROVIDER)  || !Session.isGpsEnabled() ) ) {
             tracer.info("Requesting cell and wifi location updates");
             Session.setUsingGps(false);
             // Cell tower and wifi based
@@ -848,16 +848,16 @@ public class GpsLoggingService extends Service  {
 
     private boolean isFromValidListener(Location loc) {
 
-        if(!AppSettings.getChosenListeners().contains("gps") && !AppSettings.getChosenListeners().contains("network")){
+        if(!AppSettings.getChosenListeners().contains(LocationManager.GPS_PROVIDER) && !AppSettings.getChosenListeners().contains(LocationManager.NETWORK_PROVIDER)){
             return true;
         }
 
-        if(!AppSettings.getChosenListeners().contains("network")){
-            return loc.getProvider().equalsIgnoreCase("gps");
+        if(!AppSettings.getChosenListeners().contains(LocationManager.NETWORK_PROVIDER)){
+            return loc.getProvider().equalsIgnoreCase(LocationManager.GPS_PROVIDER);
         }
 
-        if(!AppSettings.getChosenListeners().contains("gps")){
-            return !loc.getProvider().equalsIgnoreCase("gps");
+        if(!AppSettings.getChosenListeners().contains(LocationManager.GPS_PROVIDER)){
+            return !loc.getProvider().equalsIgnoreCase(LocationManager.GPS_PROVIDER);
         }
 
         return true;

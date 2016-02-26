@@ -30,10 +30,10 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
         if(preference.getKey().equalsIgnoreCase("listeners")){
 
             ArrayList<Integer> chosenIndices = new ArrayList<Integer>();
-            final List<String> defaultListeners = AppSettings.GetDefaultListeners();
+            final List<String> availableListeners = AppSettings.GetAvailableListeners();
 
             for(String chosenListener : AppSettings.getChosenListeners()){
-                chosenIndices.add(defaultListeners.indexOf(chosenListener));
+                chosenIndices.add(availableListeners.indexOf(chosenListener));
             }
 
             new MaterialDialog.Builder(getActivity())

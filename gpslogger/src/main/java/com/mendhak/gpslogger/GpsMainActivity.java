@@ -24,9 +24,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.*;
 import android.support.annotation.NonNull;
@@ -76,10 +79,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class GpsMainActivity extends ActionBarActivity
         implements
@@ -102,6 +102,7 @@ public class GpsMainActivity extends ActionBarActivity
         tracer = LoggerFactory.getLogger(GpsMainActivity.class.getSimpleName());
 
         loadPresetProperties();
+        loadVersionSpecificProperties();
 
         setContentView(R.layout.activity_gps_main);
 
@@ -215,6 +216,30 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
 
+
+    private void loadVersionSpecificProperties(){
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            int versionCode = packageInfo.versionCode;
+
+            tracer.debug("Version code " +String.valueOf(versionCode));
+            if( AppSettings.getLastVersionSeen() <= 71 ){
+                tracer.debug("AppSettings.getLastVersionSeen() " + AppSettings.getLastVersionSeen() );
+                //Specifically disable passive provider... just once
+                if(AppSettings.getChosenListeners().contains("passive")){
+                    Set<String> listeners = new HashSet<>();
+                    if(AppSettings.getChosenListeners().contains(LocationManager.GPS_PROVIDER)){ listeners.add(LocationManager.GPS_PROVIDER); }
+                    if(AppSettings.getChosenListeners().contains(LocationManager.NETWORK_PROVIDER)){ listeners.add(LocationManager.NETWORK_PROVIDER); }
+                    AppSettings.setChosenListeners(listeners);
+                }
+            }
+            AppSettings.setLastVersionSeen(versionCode);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     private void loadPresetProperties() {
 

@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.views;
 import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Gravity;
@@ -75,7 +76,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: Inflates the simple layout
 
         rootView = inflater.inflate(R.layout.fragment_simple_view, container, false);
 
@@ -395,7 +395,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         txtPoints.setText(Session.getNumLegs() + " " + getString(R.string.points));
 
         String providerName = locationInfo.getProvider();
-        if (!providerName.equalsIgnoreCase("gps")) {
+        if (!providerName.equalsIgnoreCase(LocationManager.GPS_PROVIDER)) {
             SetSatelliteCount(-1);
         }
     }

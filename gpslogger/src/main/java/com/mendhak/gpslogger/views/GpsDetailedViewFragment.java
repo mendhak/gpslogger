@@ -18,6 +18,7 @@
 package com.mendhak.gpslogger.views;
 
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -68,7 +69,6 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: Inflates the detailed layout
 
         rootView = inflater.inflate(R.layout.fragment_detailed_view, container, false);
 
@@ -330,7 +330,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         TextView txtTravelled = (TextView) rootView.findViewById(R.id.detailedview_travelled_text);
         TextView txtTime = (TextView) rootView.findViewById(R.id.detailedview_duration_text);
         String providerName = locationInfo.getProvider();
-        if (providerName.equalsIgnoreCase("gps")) {
+        if (providerName.equalsIgnoreCase(LocationManager.GPS_PROVIDER)) {
             providerName = getString(R.string.providername_gps);
         } else {
             providerName = getString(R.string.providername_celltower);
