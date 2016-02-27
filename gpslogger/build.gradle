@@ -134,11 +134,16 @@ android {
         }
     }
 
-    //Predexing libraries takes up too much memory and causes travis-ci to choke
+    /**
+     * Predexing libraries takes up too much memory and causes travis-ci to choke
+     */
     dexOptions {
         preDexLibraries = false
     }
 
+    /**
+     * Apache HTTP Client removed in Android 6, this is required to keep using it for lower platforms
+     */
     useLibrary 'org.apache.http.legacy'
 }
 
@@ -236,23 +241,34 @@ dependencies {
         transitive = true
     }
 
-
-    // For unit testing
+    /**
+     * Libraries required for unit testing
+     */
     testCompile 'junit:junit:4.12'
-    //  Mockito framework
     testCompile 'org.mockito:mockito-core:1.10.19'
 
 }
 
+
+
 tasks.withType(Test) {
+    /**
+     * Tell Gradle to always run the tests even if build is up to date
+     */
     outputs.upToDateWhen { false }
+
+    /**
+     * Tell Gradle to show test output in the console
+     */
     testLogging {
         events "started", "passed", "skipped", "failed"
     }
 }
 
 tasks.whenTaskAdded { task ->
-    //Don't run lint. Takes too long.
+    /**
+     * Don't run lint. Takes too long.
+     */
     if (task.name.contains("lint")) {
         task.enabled = false
     }
