@@ -12,6 +12,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 import java.io.File;
@@ -26,7 +28,7 @@ public class UtilitiesTests  {
 
 
     @Test
-    public void testHTMLDecoder(){
+    public void HtmlDecode_WhenEntitiesPresent_EntitiesAreDecoded(){
 
 
         String actual = Utilities.HtmlDecode("Bert &amp; Ernie are here. They wish to &quot;talk&quot; to you.");
@@ -43,7 +45,7 @@ public class UtilitiesTests  {
 
 
     @Test
-    public void testIsoDateTime() {
+    public void GetIsoDateTime_DateObject_ConvertedToIso() {
 
         String actual = Utilities.GetIsoDateTime(new Date(1417726140000l));
         String expected = "2014-12-04T20:49:00Z";
@@ -51,7 +53,7 @@ public class UtilitiesTests  {
     }
 
     @Test
-    public void testCleanDescription() {
+    public void CleanDescription_WhenAnnotationHasHtml_HtmlIsRemoved() {
         String content = "This is some annotation that will end up in an " +
                 "XML file.  It will either <b>break</b> or Bert & Ernie will show up" +
                 "and cause all sorts of mayhem. Either way, it won't \"work\"";
@@ -66,7 +68,7 @@ public class UtilitiesTests  {
     }
 
     @Test
-    public void testFolderListFiles() {
+    public void GetFilesInFolder_WhenNullOrEmpty_ReturnEmptyList() {
         assertThat("Null File object should return empty list", Utilities.GetFilesInFolder(null), notNullValue());
 
         assertThat("Empty folder should return empty list", Utilities.GetFilesInFolder(new File("/")), notNullValue());
@@ -74,27 +76,48 @@ public class UtilitiesTests  {
     }
 
     @Test
-    public void testFormattedCustomFileName() {
-
+    public void GetFormattedCustomFileName_Serial_ReplacedWithBuildSerial() {
 
         String expected = "basename_" + Build.SERIAL;
         String actual = Utilities.GetFormattedCustomFileName("basename_%ser");
         assertThat("Static file name %SER should be replaced with Build Serial", actual, is(expected));
 
+    }
+
+    @Test
+    public void GetFormattedCustomFileName_HOUR_ReplaceWithPaddedHour(){
+
         Time t = new Time();
         t.setToNow();
 
-        expected = "basename_" +  String.format("%02d", t.hour);
+        String expected = "basename_" +  String.format("%02d", t.hour);
 
-        actual = Utilities.GetFormattedCustomFileName("basename_%HOUR");
+        String actual = Utilities.GetFormattedCustomFileName("basename_%HOUR");
         assertThat("Static file name %HOUR should be replaced with Hour", actual, is(expected));
 
-        actual = Utilities.GetFormattedCustomFileName("basename_%HOUR%MIN");
-        expected = "basename_" +  String.format("%02d", t.hour) + String.format("%02d", t.minute);
+    }
+
+    @Test
+    public void GetFormattedCustomFileName_MIN_ReplaceWithPaddedMinute(){
+
+        Time t = new Time();
+        t.setToNow();
+
+        String actual = Utilities.GetFormattedCustomFileName("basename_%HOUR%MIN");
+        String expected = "basename_" +  String.format("%02d", t.hour) + String.format("%02d", t.minute);
         assertThat("Static file name %HOUR, %MIN should be replaced with Hour, Minute", actual, is(expected));
 
-        actual = Utilities.GetFormattedCustomFileName("basename_%YEAR%MONTH%DAY");
-        expected = "basename_" +  String.valueOf(t.year) + String.format("%02d", t.month+1) + String.format("%02d", t.monthDay);
+
+    }
+
+    @Test
+    public void GetFormattedCustomFileName_YEARMONDAY_ReplaceWithYearMonthDay(){
+
+        Time t = new Time();
+        t.setToNow();
+
+        String actual = Utilities.GetFormattedCustomFileName("basename_%YEAR%MONTH%DAY");
+        String expected = "basename_" +  String.valueOf(t.year) + String.format("%02d", t.month+1) + String.format("%02d", t.monthDay);
         assertThat("Static file name %YEAR, %MONTH, %DAY should be replaced with Year Month and Day", actual, is(expected));
 
     }
