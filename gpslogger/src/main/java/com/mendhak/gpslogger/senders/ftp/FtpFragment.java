@@ -33,9 +33,9 @@ import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
-public class AutoFtpFragment
+public class FtpFragment
         extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener, IPreferenceValidation {
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoFtpFragment.class.getSimpleName());
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FtpFragment.class.getSimpleName());
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +84,7 @@ public class AutoFtpFragment
     @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
 
-        FtpHelper helper = new FtpHelper();
+        FtpManager helper = new FtpManager();
 
         MaterialEditTextPreference servernamePreference = (MaterialEditTextPreference) findPreference("autoftp_server");
         MaterialEditTextPreference usernamePreference = (MaterialEditTextPreference) findPreference("autoftp_username");

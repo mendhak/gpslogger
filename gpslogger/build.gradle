@@ -57,7 +57,7 @@ android {
 
     //Adding API keys to BuildConfig
     defaultConfig {
-        //Set these values in ~/.gradle/gradle.properties
+        //Set these values in ~/.gradle/gradle.properties, use in code as BuildConfig.OSM_CONSUMER_KEY
         buildConfigField "String", "OSM_CONSUMER_KEY", "\"" + GPSLOGGER_OSM_CONSUMERKEY + "\""
         buildConfigField "String", "OSM_CONSUMER_SECRET", "\"" + GPSLOGGER_OSM_CONSUMERSECRET + "\""
         buildConfigField "String", "DROPBOX_APP_KEY", "\"" + GPSLOGGER_DROPBOX_APPKEY + "\""

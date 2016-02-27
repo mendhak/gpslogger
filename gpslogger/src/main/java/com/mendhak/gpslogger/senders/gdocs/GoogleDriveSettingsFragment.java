@@ -49,21 +49,24 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 
-public class GDocsSettingsFragment extends PermissionedPreferenceFragment
+public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
         implements Preference.OnPreferenceClickListener {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GDocsSettingsFragment.class.getSimpleName());
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GoogleDriveSettingsFragment.class.getSimpleName());
     boolean messageShown = false;
 
     static final int REQUEST_CODE_MISSING_GPSF = 1;
     static final int REQUEST_CODE_ACCOUNT_PICKER = 2;
     static final int REQUEST_CODE_RECOVERED = 3;
 
+    GoogleDriveManager manager;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.gdocssettings);
+
+        manager = new GoogleDriveManager();
 
         VerifyGooglePlayServices();
         RegisterEventBus();
@@ -126,7 +129,7 @@ public class GDocsSettingsFragment extends PermissionedPreferenceFragment
     }
 
     private void ResetPreferenceAppearance(Preference resetPref, Preference testPref, Preference folderPref) {
-        if (GDocsHelper.IsLinked()) {
+        if (manager.IsLinked()) {
             resetPref.setTitle(R.string.gdocs_clearauthorization);
             resetPref.setSummary(R.string.gdocs_clearauthorization_summary);
             testPref.setEnabled(true);
@@ -144,7 +147,7 @@ public class GDocsSettingsFragment extends PermissionedPreferenceFragment
         if (preference.getKey().equalsIgnoreCase("gdocs_test")) {
             UploadTestFileToGoogleDocs();
         } else {
-            if (GDocsHelper.IsLinked()) {
+            if (manager.IsLinked()) {
                 //Clear authorization
                 GoogleAuthUtil.invalidateToken(getActivity(), AppSettings.getGoogleDriveAuthToken());
                 AppSettings.setGoogleDriveAuthToken("");
@@ -201,7 +204,7 @@ public class GDocsSettingsFragment extends PermissionedPreferenceFragment
             // Retrieve a token for the given account and scope. It will always return either
             // a non-empty String or throw an exception.
 
-            return GoogleAuthUtil.getToken(getActivity(), AppSettings.getGoogleDriveAccountName(), GDocsHelper.GetOauth2Scope());
+            return GoogleAuthUtil.getToken(getActivity(), AppSettings.getGoogleDriveAccountName(), manager.GetOauth2Scope());
         } catch (GooglePlayServicesAvailabilityException playEx) {
             Dialog alert = GooglePlayServicesUtil.getErrorDialog(
                     playEx.getConnectionStatusCode(),
@@ -287,8 +290,7 @@ public class GDocsSettingsFragment extends PermissionedPreferenceFragment
         }
 
         MaterialEditTextPreference folderPref = (MaterialEditTextPreference)findPreference("gdocs_foldername");
-        GDocsHelper helper = new GDocsHelper(getActivity());
-        helper.UploadTestFile(testFile, folderPref.getText());
+        manager.UploadTestFile(testFile, folderPref.getText());
 
     }
 

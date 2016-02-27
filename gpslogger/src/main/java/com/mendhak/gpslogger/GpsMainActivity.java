@@ -58,10 +58,6 @@ import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.senders.IFileSender;
-import com.mendhak.gpslogger.senders.dropbox.DropBoxHelper;
-import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
-import com.mendhak.gpslogger.senders.osm.OSMHelper;
-import com.mendhak.gpslogger.senders.owncloud.OwnCloudHelper;
 import com.mendhak.gpslogger.views.*;
 import com.mendhak.gpslogger.views.component.GpsLoggerDrawerItem;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -75,7 +71,6 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -821,70 +816,67 @@ public class GpsMainActivity extends ActionBarActivity
 
 
     private void UploadToOpenStreetMap() {
-        if (!OSMHelper.IsOsmAuthorized(getApplicationContext())) {
+        if (!FileSenderFactory.GetOsmSender().IsAvailable()) {
             LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OSM);
             return;
         }
 
-        ShowFileListDialog(FileSenderFactory.GetOsmSender(getApplicationContext()));
+        ShowFileListDialog(FileSenderFactory.GetOsmSender());
     }
 
     private void UploadToDropBox() {
-        final DropBoxHelper dropBoxHelper = new DropBoxHelper(getApplicationContext());
 
-        if (!dropBoxHelper.IsLinked()) {
+        if (!FileSenderFactory.GetDropBoxSender().IsAvailable()) {
             LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX);
             return;
         }
 
-        ShowFileListDialog(FileSenderFactory.GetDropBoxSender(getApplication()));
+        ShowFileListDialog(FileSenderFactory.GetDropBoxSender());
     }
 
 
 
     private void UploadToOwnCloud() {
-        final OwnCloudHelper ownCloudHelper = new OwnCloudHelper();
 
-        if (!Utilities.IsOwnCloudSetup()) {
+        if (!FileSenderFactory.GetOwnCloudSender().IsAvailable()) {
             LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD);
             return;
         }
 
-        ShowFileListDialog(FileSenderFactory.GetOwnCloudSender(getApplication()));
+        ShowFileListDialog(FileSenderFactory.GetOwnCloudSender());
     }
 
     private void SendToOpenGTS() {
-        if (!Utilities.IsOpenGTSSetup()) {
+        if (!FileSenderFactory.GetOpenGTSSender().IsAvailable()) {
             LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS);
         } else {
-            IFileSender fs = FileSenderFactory.GetOpenGTSSender(getApplicationContext());
-            ShowFileListDialog(fs);
+            ShowFileListDialog(FileSenderFactory.GetOpenGTSSender());
         }
     }
 
     private void UploadToGoogleDocs() {
-        if (!GDocsHelper.IsLinked()) {
+        if (!FileSenderFactory.GetGDocsSender().IsAvailable()) {
             LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GDOCS);
             return;
         }
 
-        ShowFileListDialog(FileSenderFactory.GetGDocsSender(getApplicationContext()));
+        ShowFileListDialog(FileSenderFactory.GetGDocsSender());
     }
 
     private void SendToFtp() {
-        if (!Utilities.IsFtpSetup()) {
+        if (!FileSenderFactory.GetFtpSender().IsAvailable()) {
             LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.FTP);
         } else {
-            IFileSender fs = FileSenderFactory.GetFtpSender(getApplicationContext());
+            IFileSender fs = FileSenderFactory.GetFtpSender();
             ShowFileListDialog(fs);
         }
     }
 
     private void SelectAndEmailFile() {
-        if (!Utilities.IsEmailSetup()) {
+        if (!FileSenderFactory.GetEmailSender().IsAvailable()) {
             LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.EMAIL);
         } else {
-            ShowFileListDialog(FileSenderFactory.GetEmailSender(this));
+            ShowFileListDialog(FileSenderFactory.GetEmailSender());
         }
     }
 

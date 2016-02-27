@@ -35,8 +35,7 @@ import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.loggers.IFileLogger;
-import com.mendhak.gpslogger.senders.gdocs.GDocsHelper;
-import com.mendhak.gpslogger.senders.osm.OSMHelper;
+import com.mendhak.gpslogger.senders.FileSenderFactory;
 import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
@@ -191,27 +190,27 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
             if(AppSettings.isAutoSendEnabled()){
                 StringBuilder sb = new StringBuilder();
-                if (AppSettings.isEmailAutoSendEnabled() && Utilities.IsEmailSetup()) {
+                if (FileSenderFactory.GetEmailSender().IsAvailable()) {
                     sb.append(getString(R.string.autoemail_title)).append("\n");
                 }
 
-                if (AppSettings.isFtpAutoSendEnabled() && Utilities.IsFtpSetup()) {
+                if (FileSenderFactory.GetFtpSender().IsAvailable()) {
                     sb.append(getString(R.string.autoftp_setup_title)).append("\n");
                 }
 
-                if (AppSettings.isGDocsAutoSendEnabled() && GDocsHelper.IsLinked()) {
+                if (FileSenderFactory.GetGDocsSender().IsAvailable()) {
                     sb.append(getString(R.string.gdocs_setup_title)).append("\n");
                 }
 
-                if (AppSettings.isOsmAutoSendEnabled() && OSMHelper.IsOsmAuthorized(getActivity().getApplicationContext())) {
+                if (FileSenderFactory.GetOsmSender().IsAvailable()) {
                     sb.append(getString(R.string.osm_setup_title)).append("\n");
                 }
 
-                if (AppSettings.isDropboxAutoSendEnabled() && Utilities.IsDropBoxSetup(getActivity().getApplicationContext())) {
+                if (FileSenderFactory.GetDropBoxSender().IsAvailable()) {
                     sb.append(getString(R.string.dropbox_setup_title)).append("\n");
                 }
 
-                if (AppSettings.isOpenGtsAutoSendEnabled() && Utilities.IsOpenGTSSetup()) {
+                if (FileSenderFactory.GetOpenGTSSender().IsAvailable()) {
                     sb.append(getString(R.string.opengts_setup_title)).append("\n");
                 }
 

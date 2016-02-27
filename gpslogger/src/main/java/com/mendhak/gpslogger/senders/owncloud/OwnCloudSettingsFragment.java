@@ -70,7 +70,7 @@ public class OwnCloudSettingsFragment
         MaterialEditTextPreference passwordPreference = (MaterialEditTextPreference) findPreference("owncloud_password");
         MaterialEditTextPreference directoryPreference = (MaterialEditTextPreference) findPreference("owncloud_directory");
 
-        if (!OwnCloudHelper.ValidSettings(
+        if (!OwnCloudManager.ValidSettings(
                 servernamePreference.getText(),
                 usernamePreference.getText(),
                 passwordPreference.getText(),
@@ -82,7 +82,7 @@ public class OwnCloudSettingsFragment
         }
 
         Utilities.ShowProgress(getActivity(), getString(R.string.owncloud_testing), getString(R.string.please_wait));
-        OwnCloudHelper helper = new OwnCloudHelper();
+        OwnCloudManager helper = new OwnCloudManager();
         helper.TestOwnCloud(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
                 directoryPreference.getText());
 

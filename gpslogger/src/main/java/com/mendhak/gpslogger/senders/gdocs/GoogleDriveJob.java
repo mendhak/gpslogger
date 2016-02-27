@@ -19,13 +19,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class GDocsJob extends Job {
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GDocsJob.class.getSimpleName());
+public class GoogleDriveJob extends Job {
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GoogleDriveJob.class.getSimpleName());
     String token;
     File gpxFile;
     String googleDriveFolderName;
 
-    protected GDocsJob(File gpxFile, String googleDriveFolderName) {
+    protected GoogleDriveJob(File gpxFile, String googleDriveFolderName) {
         super(new Params(1).requireNetwork().persist().addTags(getJobTag(gpxFile)));
         this.gpxFile = gpxFile;
         this.googleDriveFolderName = googleDriveFolderName;

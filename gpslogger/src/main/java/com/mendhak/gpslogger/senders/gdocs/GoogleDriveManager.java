@@ -17,7 +17,6 @@
 
 package com.mendhak.gpslogger.senders.gdocs;
 
-import android.content.Context;
 import android.support.annotation.Nullable;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Utilities;
@@ -32,10 +31,10 @@ import java.io.File;
 import java.util.List;
 
 
-public class GDocsHelper implements IFileSender {
+public class GoogleDriveManager implements IFileSender {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GDocsHelper.class.getSimpleName());
-    Context context;
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GoogleDriveManager.class.getSimpleName());
+
 
     /*
     To revoke permissions:
@@ -46,12 +45,10 @@ public class GDocsHelper implements IFileSender {
    ./adb -e shell 'sqlite3 /data/system/accounts.db "delete from grants;"'
      */
 
-    public GDocsHelper(Context applicationContext) {
-
-        this.context = applicationContext;
+    public GoogleDriveManager() {
     }
 
-    public static String GetOauth2Scope() {
+    public String GetOauth2Scope() {
         return "oauth2:https://www.googleapis.com/auth/drive.file";
     }
 
@@ -61,7 +58,7 @@ public class GDocsHelper implements IFileSender {
      * Returns whether the app is authorized to perform Google API operations
      *
      */
-    public static boolean IsLinked() {
+    protected boolean IsLinked() {
         return !Utilities.IsNullOrEmpty(AppSettings.getGoogleDriveAccountName()) && !Utilities.IsNullOrEmpty(AppSettings.getGoogleDriveAuthToken());
     }
 
@@ -70,6 +67,12 @@ public class GDocsHelper implements IFileSender {
         for (File f : files) {
             UploadFile(f.getName(), null);
         }
+    }
+
+
+    @Override
+    public boolean IsAvailable() {
+        return AppSettings.isGDocsAutoSendEnabled() && IsLinked();
     }
 
     public void UploadTestFile(File file, String googleDriveFolderName){
@@ -100,12 +103,12 @@ public class GDocsHelper implements IFileSender {
             }
 
             JobManager jobManager = AppSettings.GetJobManager();
-            jobManager.cancelJobsInBackground(null, TagConstraint.ANY, GDocsJob.getJobTag(gpxFile));
-            jobManager.addJobInBackground(new GDocsJob(gpxFile, uploadFolderName));
+            jobManager.cancelJobsInBackground(null, TagConstraint.ANY, GoogleDriveJob.getJobTag(gpxFile));
+            jobManager.addJobInBackground(new GoogleDriveJob(gpxFile, uploadFolderName));
 
         } catch (Exception e) {
             EventBus.getDefault().post(new UploadEvents.GDocs(false));
-            tracer.error("GDocsHelper.UploadFile", e);
+            tracer.error("GoogleDriveManager.UploadFile", e);
         }
     }
 

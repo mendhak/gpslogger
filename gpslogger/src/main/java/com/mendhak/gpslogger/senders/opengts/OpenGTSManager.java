@@ -29,11 +29,11 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-public class OpenGTSHelper implements IFileSender {
+public class OpenGTSManager implements IFileSender {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSHelper.class.getSimpleName());
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSManager.class.getSimpleName());
 
-    public OpenGTSHelper() {
+    public OpenGTSManager() {
     }
 
     @Override
@@ -60,12 +60,20 @@ public class OpenGTSHelper implements IFileSender {
         }
     }
 
+    @Override
+    public boolean IsAvailable() {
+        return  AppSettings.getOpenGTSServer().length() > 0
+                && AppSettings.getOpenGTSServerPort().length() > 0
+                && AppSettings.getOpenGTSServerCommunicationMethod().length() > 0
+                && AppSettings.getOpenGTSDeviceId().length() > 0;
+    }
+
     private List<SerializableLocation> getLocationsFromGPX(File f) {
         List<SerializableLocation> locations = Collections.emptyList();
         try {
             locations = GpxReader.getPoints(f);
         } catch (Exception e) {
-            tracer.error("OpenGTSHelper.getLocationsFromGPX", e);
+            tracer.error("OpenGTSManager.getLocationsFromGPX", e);
         }
         return locations;
     }

@@ -19,11 +19,9 @@
 
 package com.mendhak.gpslogger.senders.dropbox;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
-import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Utilities;
@@ -33,7 +31,7 @@ import org.slf4j.LoggerFactory;
 public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropboxAuthorizationFragment.class.getSimpleName());
-    DropBoxHelper helper;
+    DropBoxManager manager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,9 +41,9 @@ public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment
 
         Preference pref = findPreference("dropbox_resetauth");
 
-        helper = new DropBoxHelper(getActivity());
+        manager = new DropBoxManager();
 
-        if (helper.IsLinked()) {
+        if (manager.IsLinked()) {
             pref.setTitle(R.string.dropbox_unauthorize);
             pref.setSummary(R.string.dropbox_unauthorize_description);
         } else {
@@ -62,7 +60,7 @@ public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment
         super.onResume();
 
         try {
-            if (helper.FinishAuthorization()) {
+            if (manager.FinishAuthorization()) {
                 startActivity(new Intent(getActivity(), GpsMainActivity.class));
                 getActivity().finish();
             }
@@ -78,13 +76,13 @@ public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment
     public boolean onPreferenceClick(Preference preference) {
 
         // This logs you out if you're logged in, or vice versa
-        if (helper.IsLinked()) {
-            helper.UnLink();
+        if (manager.IsLinked()) {
+            manager.UnLink();
             startActivity(new Intent(getActivity(), GpsMainActivity.class));
             getActivity().finish();
         } else {
             try {
-                helper.StartAuthentication(DropboxAuthorizationFragment.this);
+                manager.StartAuthentication(DropboxAuthorizationFragment.this);
             } catch (Exception e) {
                 tracer.error(".", e);
             }

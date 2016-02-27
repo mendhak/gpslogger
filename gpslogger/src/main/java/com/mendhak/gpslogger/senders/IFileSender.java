@@ -22,8 +22,14 @@ import java.io.FilenameFilter;
 import java.util.List;
 
 public interface IFileSender extends FilenameFilter {
-    /// Upload or send this specific file
+    /**
+     * Upload or send these given files
+     */
     void UploadFile(List<File> files);
 
+    /**
+     * Whether the sender is enabled and ready to be used
+     */
+    boolean IsAvailable();
 
 }

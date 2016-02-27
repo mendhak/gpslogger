@@ -27,15 +27,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AutoEmailHelper implements IFileSender {
+public class AutoEmailManager implements IFileSender {
 
-    public AutoEmailHelper() {
+    public AutoEmailManager() {
     }
 
     @Override
     public void UploadFile(List<File> files) {
 
-        ArrayList<File> filesToSend = new ArrayList<File>();
+        ArrayList<File> filesToSend = new ArrayList<>();
 
         //If a zip file exists, remove others
         for (File f : files) {
@@ -53,6 +53,15 @@ public class AutoEmailHelper implements IFileSender {
                 AppSettings.isSmtpSsl(), AppSettings.getAutoEmailTargets(), AppSettings.getSmtpSenderAddress(),
                 subject, body, filesToSend.toArray(new File[filesToSend.size()])));
 
+    }
+
+    @Override
+    public boolean IsAvailable() {
+        return AppSettings.isEmailAutoSendEnabled()
+                && AppSettings.getAutoEmailTargets().length() > 0
+                && AppSettings.getSmtpServer().length() > 0
+                && AppSettings.getSmtpPort().length() > 0
+                && AppSettings.getSmtpUsername().length() > 0;
     }
 
 

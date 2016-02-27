@@ -33,7 +33,6 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.Spanned;
-import android.text.format.Time;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
@@ -47,8 +46,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.GpsRollingFileAppender;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
-import com.mendhak.gpslogger.senders.ftp.FtpHelper;
-import com.mendhak.gpslogger.senders.owncloud.OwnCloudHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -76,7 +73,7 @@ public class Utilities {
             //final String LOG_DIR = "/sdcard/GPSLogger";
             final String LOG_DIR = AppSettings.getGpsLoggerFolder();
 
-            GpsRollingFileAppender<ILoggingEvent> rollingFileAppender = new GpsRollingFileAppender<ILoggingEvent>();
+            GpsRollingFileAppender<ILoggingEvent> rollingFileAppender = new GpsRollingFileAppender<>();
             rollingFileAppender.setAppend(true);
             rollingFileAppender.setContext(lc);
 
@@ -85,7 +82,7 @@ public class Utilities {
             rollingFileAppender.setFile(LOG_DIR + "/debuglog.txt");
             rollingFileAppender.setLazy(true);
 
-            TimeBasedRollingPolicy<ILoggingEvent> rollingPolicy = new TimeBasedRollingPolicy<ILoggingEvent>();
+            TimeBasedRollingPolicy<ILoggingEvent> rollingPolicy = new TimeBasedRollingPolicy<>();
             rollingPolicy.setFileNamePattern(LOG_DIR + "/debuglog.%d.txt");
             rollingPolicy.setMaxHistory(3);
             rollingPolicy.setParent(rollingFileAppender);  // parent and context required!
@@ -374,7 +371,7 @@ public class Utilities {
     public static String GetReadableDateTime(Date dateToFormat) {
         /**
          * Similar to GetIsoDateTime(), this function is used in
-         * AutoEmailHelper, and we want machine-readable output.
+         * AutoEmailManager, and we want machine-readable output.
          */
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm",
                 Locale.US);
@@ -382,46 +379,9 @@ public class Utilities {
     }
 
 
-    public static boolean IsEmailSetup() {
-        return AppSettings.isEmailAutoSendEnabled()
-                && AppSettings.getAutoEmailTargets().length() > 0
-                && AppSettings.getSmtpServer().length() > 0
-                && AppSettings.getSmtpPort().length() > 0
-                && AppSettings.getSmtpUsername().length() > 0;
-
-    }
-
-    public static boolean IsOpenGTSSetup() {
-        return  AppSettings.getOpenGTSServer().length() > 0
-                && AppSettings.getOpenGTSServerPort().length() > 0
-                && AppSettings.getOpenGTSServerCommunicationMethod().length() > 0
-                && AppSettings.getOpenGTSDeviceId().length() > 0;
-    }
 
 
-    public static boolean IsFtpSetup() {
 
-        FtpHelper helper = new FtpHelper();
-
-        return helper.ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(),
-                AppSettings.getFtpPassword(), AppSettings.getFtpPort(), AppSettings.FtpUseFtps(),
-                AppSettings.getFtpProtocol(), AppSettings.FtpImplicit());
-    }
-
-
-    public static boolean IsOwnCloudSetup() {
-
-        OwnCloudHelper helper = new OwnCloudHelper();
-
-        return helper.ValidSettings(AppSettings.getOwnCloudServerName(),
-                AppSettings.getOwnCloudUsername(),
-                AppSettings.getOwnCloudPassword(),
-                AppSettings.getOwnCloudDirectory());
-    }
-
-    public static boolean IsDropBoxSetup(Context context) {
-        return AppSettings.getDropBoxAccessKeyName() != null && AppSettings.getDropBoxAccessSecretName() != null;
-    }
 
     /**
      * Uses the Haversine formula to calculate the distnace between to lat-long coordinates

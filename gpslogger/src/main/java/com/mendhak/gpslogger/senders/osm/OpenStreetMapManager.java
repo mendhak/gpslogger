@@ -32,38 +32,36 @@ import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
 import java.io.File;
 import java.util.List;
 
-public class OSMHelper implements IFileSender {
+public class OpenStreetMapManager implements IFileSender {
 
-    Context context;
 
-    public OSMHelper(Context context) {
 
-        this.context = context;
+
+    final String OSM_REQUESTTOKEN_URL = "http://www.openstreetmap.org/oauth/request_token";
+    final String OSM_ACCESSTOKEN_URL = "http://www.openstreetmap.org/oauth/access_token";
+    final String OSM_AUTHORIZE_URL = "http://www.openstreetmap.org/oauth/authorize";
+    final String OSM_GPSTRACE_URL = "http://www.openstreetmap.org/api/0.6/gpx/create";
+
+    public OpenStreetMapManager() {
+
     }
 
-    public static OAuthProvider GetOSMAuthProvider(Context context) {
-        return new CommonsHttpOAuthProvider(
-                context.getString(R.string.osm_requesttoken_url),
-                context.getString(R.string.osm_accesstoken_url),
-                context.getString(R.string.osm_authorize_url));
+    public OAuthProvider GetOSMAuthProvider() {
+        return new CommonsHttpOAuthProvider(OSM_REQUESTTOKEN_URL, OSM_ACCESSTOKEN_URL, OSM_AUTHORIZE_URL);
     }
 
-    public static boolean IsOsmAuthorized(Context context) {
-
+    protected boolean IsOsmAuthorized() {
         String oAuthAccessToken = AppSettings.getOSMAccessToken();
-
         return (oAuthAccessToken != null && oAuthAccessToken.length() > 0);
     }
 
-    public static OAuthConsumer GetOSMAuthConsumer(Context context) {
+    public OAuthConsumer GetOSMAuthConsumer() {
 
         OAuthConsumer consumer = null;
 
         try {
 
-            consumer = new CommonsHttpOAuthConsumer(
-                    BuildConfig.OSM_CONSUMER_KEY,
-                    BuildConfig.OSM_CONSUMER_SECRET);
+            consumer = new CommonsHttpOAuthConsumer(BuildConfig.OSM_CONSUMER_KEY, BuildConfig.OSM_CONSUMER_SECRET);
 
 
             String osmAccessToken =  AppSettings.getOSMAccessToken();
@@ -92,11 +90,16 @@ public class OSMHelper implements IFileSender {
         }
     }
 
+    @Override
+    public boolean IsAvailable() {
+        return AppSettings.isOsmAutoSendEnabled() && IsOsmAuthorized();
+    }
+
     public void UploadFile(String fileName) {
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
         File chosenFile = new File(gpxFolder, fileName);
-        OAuthConsumer consumer = GetOSMAuthConsumer(context);
-        String gpsTraceUrl = context.getString(R.string.osm_gpstrace_url);
+        OAuthConsumer consumer = GetOSMAuthConsumer();
+        String gpsTraceUrl = OSM_GPSTRACE_URL;
 
 
         String description = AppSettings.getOSMDescription();

@@ -17,7 +17,6 @@
 
 package com.mendhak.gpslogger.senders.dropbox;
 
-import android.content.Context;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AccessTokenPair;
@@ -35,18 +34,16 @@ import java.io.File;
 import java.util.List;
 
 
-public class DropBoxHelper implements IFileSender {
+public class DropBoxManager implements IFileSender {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropBoxHelper.class.getSimpleName());
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropBoxManager.class.getSimpleName());
     final static private Session.AccessType ACCESS_TYPE = Session.AccessType.APP_FOLDER;
 
-    Context context;
     DropboxAPI<AndroidAuthSession> dropboxApi;
 
-    public DropBoxHelper(Context context) {
-        this.context = context;
+    public DropBoxManager() {
         AndroidAuthSession session = buildSession();
-        dropboxApi = new DropboxAPI<AndroidAuthSession>(session);
+        dropboxApi = new DropboxAPI<>(session);
     }
 
     /**
@@ -54,7 +51,7 @@ public class DropBoxHelper implements IFileSender {
      *
      * @return True/False
      */
-    public boolean IsLinked() {
+    protected boolean IsLinked() {
         return dropboxApi.getSession().isLinked();
     }
 
@@ -145,6 +142,14 @@ public class DropBoxHelper implements IFileSender {
         for (File f : files) {
             UploadFile(f.getName());
         }
+    }
+
+    @Override
+    public boolean IsAvailable() {
+        return AppSettings.isDropboxAutoSendEnabled()
+                &&  IsLinked()
+                && AppSettings.getDropBoxAccessKeyName() != null
+                && AppSettings.getDropBoxAccessSecretName() != null;
     }
 
     public void UploadFile(String fileName) {

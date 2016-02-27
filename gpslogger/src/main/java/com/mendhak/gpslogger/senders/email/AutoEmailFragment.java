@@ -104,7 +104,7 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
         MaterialEditTextPreference txtTarget = (MaterialEditTextPreference) findPreference("autoemail_target");
         MaterialEditTextPreference txtFrom = (MaterialEditTextPreference) findPreference("smtp_from");
 
-        AutoEmailHelper aeh = new AutoEmailHelper();
+        AutoEmailManager aeh = new AutoEmailManager();
         aeh.SendTestEmail(txtSmtpServer.getText(), txtSmtpPort.getText(),
                 txtUsername.getText(), txtPassword.getText(),
                 chkUseSsl.isChecked(), txtTarget.getText(), txtFrom.getText());

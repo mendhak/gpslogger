@@ -225,10 +225,7 @@
     </string>
 
 
-    <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-    <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-    <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-    <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
+
 
     <string name="osm_upload">OpenStreetMap</string>
 

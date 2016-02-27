@@ -33,11 +33,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 
-public class FtpHelper implements IFileSender {
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FtpHelper.class.getSimpleName());
+public class FtpManager implements IFileSender {
+    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FtpManager.class.getSimpleName());
 
 
-    public FtpHelper() {
+    public FtpManager() {
     }
 
     void TestFtp(String servername, String username, String password, String directory, int port, boolean useFtps, String protocol, boolean implicit) {
@@ -84,6 +84,13 @@ public class FtpHelper implements IFileSender {
         for (File f : files) {
             UploadFile(f);
         }
+    }
+
+    @Override
+    public boolean IsAvailable() {
+        return ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(),
+                AppSettings.getFtpPassword(), AppSettings.getFtpPort(), AppSettings.FtpUseFtps(),
+                AppSettings.getFtpProtocol(), AppSettings.FtpImplicit());
     }
 
     public void UploadFile(File f) {
