@@ -135,6 +135,11 @@ public class UtilitiesTest {
         assertThat("Year 2016 Month February Day 1 should be replaced with 20160301", actual, is(expected));
 
 
+        when(gc.get(Calendar.MONTH)).thenReturn(Calendar.DECEMBER);
+        actual = Utilities.GetFormattedCustomFileName("basename_%YEAR%MONTH%DAY",gc);
+        expected = "basename_20161201";
+        assertThat("December month should be replaced with 12", actual, is(expected));
+
         when(gc.get(Calendar.MONTH)).thenReturn(0);
         actual = Utilities.GetFormattedCustomFileName("basename_%YEAR%MONTH%DAY",gc);
         expected = "basename_20160101";
