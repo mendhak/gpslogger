@@ -34,9 +34,10 @@ import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.FileDialog.FolderSelectorDialog;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
+import net.rdrei.android.dirchooser.DirectoryChooserConfig;
+import net.rdrei.android.dirchooser.DirectoryChooserFragment;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
@@ -47,10 +48,11 @@ public class LoggingSettingsFragment extends PreferenceFragment
         implements
         Preference.OnPreferenceClickListener,
         Preference.OnPreferenceChangeListener,
-        FolderSelectorDialog.FolderSelectCallback
+        DirectoryChooserFragment.OnFragmentInteractionListener
 {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(LoggingSettingsFragment.class.getSimpleName());
+    private DirectoryChooserFragment folderDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -103,13 +105,24 @@ public class LoggingSettingsFragment extends PreferenceFragment
         setPreferencesEnabledDisabled();
     }
 
+
+
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
         if (preference.getKey().equals("gpslogger_folder")) {
-            FolderSelectorDialog fsd = new FolderSelectorDialog(Utilities.GetDefaultStorageFolder(getActivity()));
-            fsd.SetCallback(this);
-            fsd.show(getActivity());
+
+            final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
+                    .initialDirectory(AppSettings.getGpsLoggerFolder())
+                    .newDirectoryName("GPSLogger")
+                    .allowReadOnlyDirectory(false)
+                    .allowNewDirectoryNameModification(true)
+                    .build();
+
+            folderDialog = DirectoryChooserFragment.newInstance(config);
+            folderDialog.setTargetFragment(this, 0);
+            folderDialog.show(getActivity().getFragmentManager(), null);
+
             return true;
         }
 
@@ -238,21 +251,29 @@ public class LoggingSettingsFragment extends PreferenceFragment
     }
 
     @Override
-    public void onFolderSelection(File folder) {
-        String filePath = folder.getPath();
+    public void onSelectDirectory(@NonNull String folderPath) {
+        folderDialog.dismiss();
+
+        tracer.debug(folderPath);
+
+        File folder = new File(folderPath);
 
         if(!folder.isDirectory()) {
-            filePath = folder.getParent();
+            folderPath = folder.getParent();
         }
-        tracer.debug("Folder path selected" + filePath);
 
         if(!folder.canWrite()){
             Utilities.MsgBox(getString(R.string.sorry), getString(R.string.pref_logging_file_no_permissions), getActivity());
             return;
         }
 
-        AppSettings.setGpsLoggerFolder(filePath);
+        AppSettings.setGpsLoggerFolder(folderPath);
         Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
-        gpsloggerFolder.setSummary(filePath);
+        gpsloggerFolder.setSummary(folderPath);
+    }
+
+    @Override
+    public void onCancelChooser() {
+        folderDialog.dismiss();
     }
 }

@@ -18,6 +18,8 @@
 # built application files
 *.apk
 *.ap_
+*.asc
+*.SHA256
 
 # files for the dex VM
 *.dex

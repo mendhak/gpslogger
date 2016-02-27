@@ -18,6 +18,7 @@
                      tools:ignore="MockLocation"/>
 
     <application
+        tools:replace="android:theme"
         android:allowBackup="true"
         android:icon="@drawable/gpsloggericon3"
         android:label="@string/app_name"
