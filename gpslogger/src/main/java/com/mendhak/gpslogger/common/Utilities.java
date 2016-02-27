@@ -205,13 +205,13 @@ public class Utilities {
     }
 
     /**
-     * Converts seconds into friendly, understandable description of time.
+     * Converts seconds into friendly, understandable description of the duration.
      *
      * @param numberOfSeconds
      * @return
      */
-    public static String GetDescriptiveTimeString(int numberOfSeconds,
-                                                  Context context) {
+    public static String GetDescriptiveDurationString(int numberOfSeconds,
+                                                      Context context) {
 
         String descriptive;
         int hours;
@@ -221,6 +221,10 @@ public class Utilities {
         int remainingSeconds;
 
         // Special cases
+        if(numberOfSeconds==0){
+            return "";
+        }
+
         if (numberOfSeconds == 1) {
             return context.getString(R.string.time_onesecond);
         }
@@ -263,9 +267,8 @@ public class Utilities {
         // Every 5 hours and 2 minutes
         // XYZ-5*2*20*
 
-        descriptive = context.getString(R.string.time_hms_format,
-                String.valueOf(hours), String.valueOf(minutes),
-                String.valueOf(seconds));
+        descriptive = String.format(context.getString(R.string.time_hms_format),
+                String.valueOf(hours), String.valueOf(minutes), String.valueOf(seconds));
 
         return descriptive;
 

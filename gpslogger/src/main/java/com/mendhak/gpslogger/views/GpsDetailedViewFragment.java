@@ -161,7 +161,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             }
 
             if (AppSettings.getMinimumLoggingInterval() > 0) {
-                String descriptiveTime = Utilities.GetDescriptiveTimeString(AppSettings.getMinimumLoggingInterval(),
+                String descriptiveTime = Utilities.GetDescriptiveDurationString(AppSettings.getMinimumLoggingInterval(),
                         getActivity().getApplicationContext());
 
                 txtFrequency.setText(descriptiveTime);
@@ -393,7 +393,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         Date d = new Date(startTime);
         long currentTime = System.currentTimeMillis();
 
-        String duration = Utilities.GetDescriptiveTimeString((int)(currentTime - startTime)/1000, getActivity());
+        String duration = Utilities.GetDescriptiveDurationString((int) (currentTime - startTime) / 1000, getActivity());
 
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());

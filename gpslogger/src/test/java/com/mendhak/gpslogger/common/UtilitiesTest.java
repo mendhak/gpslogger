@@ -1,20 +1,22 @@
-package com.mendhak.gpslogger;
+package com.mendhak.gpslogger.common;
 
-
+import android.content.Context;
 import android.os.Build;
 import android.test.suitebuilder.annotation.SmallTest;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.R;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 @SmallTest
@@ -140,5 +142,48 @@ public class UtilitiesTest {
 
     }
 
+    private Context GetDescriptiveTimeString_Context(){
+        Context ctx = mock(Context.class);
+        when(ctx.getString(R.string.time_onesecond)).thenReturn("1 second");
+        when(ctx.getString(R.string.time_halfminute)).thenReturn("&#189; minute");
+        when(ctx.getString(R.string.time_oneminute)).thenReturn("1 minute");
+        when(ctx.getString(R.string.time_onehour)).thenReturn("1 hour");
+        when(ctx.getString(R.string.time_quarterhour)).thenReturn("15 minutes");
+        when(ctx.getString(R.string.time_halfhour)).thenReturn("½ hour");
+        when(ctx.getString(R.string.time_oneandhalfhours)).thenReturn("1½ hours");
+        when(ctx.getString(R.string.time_twoandhalfhours)).thenReturn("2½ hours");
+        when(ctx.getString(R.string.time_hms_format)).thenReturn("%sh %sm %ss");
+
+        return ctx;
+    }
+
+    @Test
+    public void GetDescriptiveTimeString_ZeroSeconds_ReturnsEmptyString(){
+
+        String actual = Utilities.GetDescriptiveDurationString(0, GetDescriptiveTimeString_Context());
+        String expected = "";
+        assertThat("0 seconds is empty string", actual, is(expected));
+    }
+
+    @Test
+    public void GetDescriptiveTimeString_1800Seconds_ReturnsHalfHourString(){
+        String actual = Utilities.GetDescriptiveDurationString(1800, GetDescriptiveTimeString_Context());
+        String expected = "½ hour";
+        assertThat("1800 seconds returns half hour", actual, is(expected));
+    }
+
+    @Test
+    public void GetDescriptiveTimeString_2700Seconds_Returns45minutesString(){
+        String actual = Utilities.GetDescriptiveDurationString(2700, GetDescriptiveTimeString_Context());
+        String expected = "0h 45m 0s";
+        assertThat("2700 seconds returns 45 minutes", actual, is(expected));
+    }
+
+    @Test
+    public void GetDescriptiveTimeString_9001Seconds_ReturnsCorrespondingHours(){
+        String actual = Utilities.GetDescriptiveDurationString(9001, GetDescriptiveTimeString_Context());
+        String expected = "2h 30m 1s";
+        assertThat("9001 seconds returns correspnding time", actual, is(expected));
+    }
 
 }
