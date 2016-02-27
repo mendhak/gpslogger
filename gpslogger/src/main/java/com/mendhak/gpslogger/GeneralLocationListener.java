@@ -20,6 +20,7 @@ package com.mendhak.gpslogger;
 import android.location.*;
 import android.os.Bundle;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.loggers.nmea.NmeaSentence;
 import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
@@ -144,41 +145,14 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
             return;
         }
 
-        String[] nmeaParts = nmeaSentence.split(",");
+        NmeaSentence nmea = new NmeaSentence(nmeaSentence);
 
-        if (nmeaParts[0].equalsIgnoreCase("$GPGSA")) {
+        this.latestPdop = nmea.getLatestPdop();
+        this.latestHdop = nmea.getLatestHdop();
+        this.latestVdop = nmea.getLatestVdop();
+        this.geoIdHeight = nmea.getGeoIdHeight();
+        this.ageOfDgpsData = nmea.getAgeOfDgpsData();
+        this.dgpsId = nmea.getDgpsId();
 
-            if (nmeaParts.length > 15 && !Utilities.IsNullOrEmpty(nmeaParts[15])) {
-                this.latestPdop = nmeaParts[15];
-            }
-
-            if (nmeaParts.length > 16 &&!Utilities.IsNullOrEmpty(nmeaParts[16])) {
-                this.latestHdop = nmeaParts[16];
-            }
-
-            if (nmeaParts.length > 17 &&!Utilities.IsNullOrEmpty(nmeaParts[17]) && !nmeaParts[17].startsWith("*")) {
-
-                this.latestVdop = nmeaParts[17].split("\\*")[0];
-            }
-        }
-
-
-        if (nmeaParts[0].equalsIgnoreCase("$GPGGA")) {
-            if (nmeaParts.length > 8 &&!Utilities.IsNullOrEmpty(nmeaParts[8])) {
-                this.latestHdop = nmeaParts[8];
-            }
-
-            if (nmeaParts.length > 11 &&!Utilities.IsNullOrEmpty(nmeaParts[11])) {
-                this.geoIdHeight = nmeaParts[11];
-            }
-
-            if (nmeaParts.length > 13 &&!Utilities.IsNullOrEmpty(nmeaParts[13])) {
-                this.ageOfDgpsData = nmeaParts[13];
-            }
-
-            if (nmeaParts.length > 14 &&!Utilities.IsNullOrEmpty(nmeaParts[14]) && !nmeaParts[14].startsWith("*")) {
-                this.dgpsId = nmeaParts[14].split("\\*")[0];
-            }
-        }
     }
 }

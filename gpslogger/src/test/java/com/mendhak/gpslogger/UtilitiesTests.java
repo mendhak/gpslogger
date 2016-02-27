@@ -1,84 +1,56 @@
 package com.mendhak.gpslogger;
 
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Build;
-import android.preference.PreferenceManager;
-import android.test.AndroidTestCase;
-import android.test.mock.MockContext;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.text.format.Time;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.loggers.nmea.NmeaSentence;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 
 import java.io.File;
 import java.util.Date;
 
-
-public class UtilitiesTests extends AndroidTestCase {
-
-    Context context;
-
-    public void setUp() {
-        this.context = new UtilitiesMockContext(getContext());
-        final SharedPreferences.Editor preferencesEditor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-        preferencesEditor.clear().commit();
-    }
-
-    class UtilitiesMockContext extends MockContext {
-
-        private Context mDelegatedContext;
-        private static final String PREFIX = "com.mendhak.gpslogger.";
-
-        public UtilitiesMockContext(Context context) {
-            mDelegatedContext = context;
-        }
-
-        @Override
-        public String getPackageName(){
-            return PREFIX;
-        }
-
-        @Override
-        public SharedPreferences getSharedPreferences(String name, int mode) {
-            return mDelegatedContext.getSharedPreferences(name, mode);
-        }
-
-        @Override
-        public File getExternalFilesDir(String type){
-            return new File("/sdcard/GPSLogger");
-        }
+@SmallTest
+@RunWith(MockitoJUnitRunner.class)
+public class UtilitiesTests  {
 
 
-    }
 
 
-    @SmallTest
+
+    @Test
     public void testHTMLDecoder(){
 
 
         String actual = Utilities.HtmlDecode("Bert &amp; Ernie are here. They wish to &quot;talk&quot; to you.");
         String expected = "Bert & Ernie are here. They wish to \"talk\" to you.";
-        assertEquals("HTML Decode did not decode everything", expected, actual);
+        assertThat("HTML Decode did not decode everything", actual, is(expected));
 
         actual = Utilities.HtmlDecode(null);
         expected = null;
 
-        assertEquals("HTML Decode should handle null input", expected, actual);
+        assertThat("HTML Decode should handle null input", actual, is(expected));
 
     }
 
 
 
-    @SmallTest
+    @Test
     public void testIsoDateTime() {
 
         String actual = Utilities.GetIsoDateTime(new Date(1417726140000l));
         String expected = "2014-12-04T20:49:00Z";
-        assertEquals("Conversion of date to ISO string", expected, actual);
+        assertThat("Conversion of date to ISO string", actual, is(expected));
     }
 
-    @SmallTest
+    @Test
     public void testCleanDescription() {
         String content = "This is some annotation that will end up in an " +
                 "XML file.  It will either <b>break</b> or Bert & Ernie will show up" +
@@ -90,84 +62,42 @@ public class UtilitiesTests extends AndroidTestCase {
 
         String actual = Utilities.CleanDescription(content);
 
-        assertEquals("Clean Description should remove characters", expected, actual);
+        assertThat("Clean Description should remove characters", actual, is(expected));
     }
 
-    @SmallTest
+    @Test
     public void testFolderListFiles() {
-        assertNotNull("Null File object should return empty list", Utilities.GetFilesInFolder(null));
+        assertThat("Null File object should return empty list", Utilities.GetFilesInFolder(null), notNullValue());
 
-        assertNotNull("Empty folder should return empty list", Utilities.GetFilesInFolder(new File("/")));
+        assertThat("Empty folder should return empty list", Utilities.GetFilesInFolder(new File("/")), notNullValue());
 
     }
 
-    @SmallTest
+    @Test
     public void testFormattedCustomFileName() {
 
 
         String expected = "basename_" + Build.SERIAL;
         String actual = Utilities.GetFormattedCustomFileName("basename_%ser");
-        assertEquals("Static file name %SER should be replaced with Build Serial", expected, actual);
+        assertThat("Static file name %SER should be replaced with Build Serial", actual, is(expected));
 
         Time t = new Time();
         t.setToNow();
 
-        expected = "basename_" +  String.valueOf(t.hour);
+        expected = "basename_" +  String.format("%02d", t.hour);
 
         actual = Utilities.GetFormattedCustomFileName("basename_%HOUR");
-        assertEquals("Static file name %HOUR should be replaced with Hour", expected, actual);
+        assertThat("Static file name %HOUR should be replaced with Hour", actual, is(expected));
 
         actual = Utilities.GetFormattedCustomFileName("basename_%HOUR%MIN");
-        expected = "basename_" +  String.valueOf(t.hour) + String.valueOf(t.minute);
-        assertEquals("Static file name %HOUR, %MIN should be replaced with Hour, Minute", expected, actual);
+        expected = "basename_" +  String.format("%02d", t.hour) + String.format("%02d", t.minute);
+        assertThat("Static file name %HOUR, %MIN should be replaced with Hour, Minute", actual, is(expected));
 
         actual = Utilities.GetFormattedCustomFileName("basename_%YEAR%MONTH%DAY");
-        expected = "basename_" +  String.valueOf(t.year) + String.valueOf(t.month) + String.valueOf(t.monthDay);
-        assertEquals("Static file name %YEAR, %MONTH, %DAY should be replaced with Year Month and Day", expected, actual);
+        expected = "basename_" +  String.valueOf(t.year) + String.format("%02d", t.month+1) + String.format("%02d", t.monthDay);
+        assertThat("Static file name %YEAR, %MONTH, %DAY should be replaced with Year Month and Day", actual, is(expected));
 
     }
 
-    @SmallTest
-    public void testNmeaListenerStrings(){
-        String expected = "44";
-        GeneralLocationListener listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
-        listener.onNmeaReceived(0, "blahasdfasdf");
-        assertNull("VDOP null by default", listener.latestVdop);
-
-        listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
-        listener.onNmeaReceived(0, "$GPGGA,,,,,,,,,,,,,,*47");
-        assertNull("Empty NMEA sentence", listener.latestHdop);
-
-        listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
-        listener.onNmeaReceived(0, "$GPGGA,,");
-        assertNull("Incomplete NMEA string", listener.dgpsId);
-
-        listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
-        listener.onNmeaReceived(0, "");
-        assertNull("Empty NMEA string", listener.dgpsId);
-
-        listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
-        listener.onNmeaReceived(0, "$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,27*47");
-        assertEquals("GPGGA - read HDOP", "0.9", listener.latestHdop);
-        assertEquals("GPGGA - read GeoIdHeight",  "46.9", listener.geoIdHeight);
-        assertEquals("GPGGA - read Last dgps update", null,  listener.ageOfDgpsData);
-        assertEquals("GPGGA - read dgps station id",  "27", listener.dgpsId);
-
-        listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
-        listener.onNmeaReceived(0, "$GPGSA,A,3,04,05,,09,12,,,24,,,,,2.5,1.3,2.1*39");
-        assertEquals("GPGSA - read PDOP","2.5", listener.latestPdop );
-        assertEquals("GPGSA - read HDOP","1.3", listener.latestHdop );
-        assertEquals("GPGSA - read VDOP","2.1", listener.latestVdop );
-
-        listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
-        listener.onNmeaReceived(0, "$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545");
-        assertEquals("GPGGA - Incomplete, read HDOP", "0.9", listener.latestHdop);
-        assertEquals("GPGGA - Incomplete, no GeoIdHeight",  null, listener.geoIdHeight);
-
-        listener = new GeneralLocationListener(new GpsLoggingService(), "TEST");
-        listener.onNmeaReceived(0, null);
-        assertNull("Null NMEA string", listener.latestHdop);
-
-    }
 
 }

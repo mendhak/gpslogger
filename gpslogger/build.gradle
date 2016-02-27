@@ -84,9 +84,17 @@ android {
     }
 
     sourceSets {
-        androidTest.setRoot('src/test')
+//        test{
+//            resources {
+//                srcDir "test"
+//            }
+//        }
+       //androidTest.setRoot('src/test')
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 
     //Release signing key
     if (project.hasProperty("RELEASE_STORE_FILE")) {
@@ -141,6 +149,8 @@ android {
 
     useLibrary 'org.apache.http.legacy'
 }
+
+
 
 dependencies {
 
@@ -234,6 +244,19 @@ dependencies {
         transitive = true
     }
 
+
+    // For unit testing
+    testCompile 'junit:junit:4.12'
+    //  Mockito framework
+    testCompile 'org.mockito:mockito-core:1.10.19'
+
+}
+
+tasks.withType(Test) {
+    outputs.upToDateWhen { false }
+    testLogging {
+        events "started", "passed", "skipped", "failed"
+    }
 }
 
 tasks.whenTaskAdded { task ->
@@ -242,9 +265,9 @@ tasks.whenTaskAdded { task ->
         task.enabled = false
     }
 
-    if (task.name.contains("test")) {
-        task.enabled = false
-    }
+//    if (task.name.contains("test")) {
+//        task.enabled = false
+//    }
 }
 
 //Download translations from Crowdin
