@@ -20,7 +20,6 @@ notifications:
 #    - ANDROID_TARGET=android-23  ANDROID_ABI=armeabi-v7a
 
 before_install:
-  - export TERM=dumb
   - ./gradlew --version
 
 
