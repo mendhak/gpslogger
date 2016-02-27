@@ -134,12 +134,6 @@ android {
         }
     }
 
-    /**
-     * Predexing libraries takes up too much memory and causes travis-ci to choke
-     */
-    dexOptions {
-        preDexLibraries = false
-    }
 
     /**
      * Apache HTTP Client removed in Android 6, this is required to keep using it for lower platforms
