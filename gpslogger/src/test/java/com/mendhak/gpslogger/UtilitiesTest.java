@@ -3,9 +3,7 @@ package com.mendhak.gpslogger;
 
 import android.os.Build;
 import android.test.suitebuilder.annotation.SmallTest;
-import android.text.format.Time;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.loggers.nmea.NmeaSentence;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -14,18 +12,14 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-
 import java.io.File;
+import java.util.Calendar;
 import java.util.Date;
+
 
 @SmallTest
 @RunWith(MockitoJUnitRunner.class)
-public class UtilitiesTests  {
-
-
-
-
+public class UtilitiesTest {
 
     @Test
     public void HtmlDecode_WhenEntitiesPresent_EntitiesAreDecoded(){
@@ -87,38 +81,62 @@ public class UtilitiesTests  {
     @Test
     public void GetFormattedCustomFileName_HOUR_ReplaceWithPaddedHour(){
 
-        Time t = new Time();
-        t.setToNow();
+        Calendar gc = mock(Calendar.class);
+        when(gc.get(Calendar.HOUR_OF_DAY)).thenReturn(4);
 
-        String expected = "basename_" +  String.format("%02d", t.hour);
+        String expected = "basename_04";
+        String actual = Utilities.GetFormattedCustomFileName("basename_%HOUR", gc);
+        assertThat("%HOUR 4 AM should be replaced with 04", actual, is(expected));
 
-        String actual = Utilities.GetFormattedCustomFileName("basename_%HOUR");
-        assertThat("Static file name %HOUR should be replaced with Hour", actual, is(expected));
+        when(gc.get(Calendar.HOUR_OF_DAY)).thenReturn(23);
+        expected = "basename_23";
+        actual = Utilities.GetFormattedCustomFileName("basename_%HOUR", gc);
+        assertThat("%HOUR 11PM should be relpaced with 23", actual, is(expected));
+
+        when(gc.get(Calendar.HOUR_OF_DAY)).thenReturn(0);
+        expected = "basename_00";
+        actual = Utilities.GetFormattedCustomFileName("basename_%HOUR", gc);
+        assertThat("%HOUR 0 should be relpaced with 00", actual, is(expected));
 
     }
 
     @Test
     public void GetFormattedCustomFileName_MIN_ReplaceWithPaddedMinute(){
 
-        Time t = new Time();
-        t.setToNow();
+        Calendar gc = mock(Calendar.class);
+        when(gc.get(Calendar.HOUR_OF_DAY)).thenReturn(4);
+        when(gc.get(Calendar.MINUTE)).thenReturn(7);
 
-        String actual = Utilities.GetFormattedCustomFileName("basename_%HOUR%MIN");
-        String expected = "basename_" +  String.format("%02d", t.hour) + String.format("%02d", t.minute);
-        assertThat("Static file name %HOUR, %MIN should be replaced with Hour, Minute", actual, is(expected));
+        String actual = Utilities.GetFormattedCustomFileName("basename_%HOUR%MIN", gc);
+        String expected = "basename_0407";
+        assertThat(" %MIN 7 should be replaced with 07", actual, is(expected));
 
+        when(gc.get(Calendar.HOUR_OF_DAY)).thenReturn(0);
+        when(gc.get(Calendar.MINUTE)).thenReturn(0);
+
+        actual = Utilities.GetFormattedCustomFileName("basename_%HOUR%MIN", gc);
+        expected = "basename_0000";
+        assertThat(" %MIN 0 should be replaced with 00", actual, is(expected));
 
     }
 
     @Test
     public void GetFormattedCustomFileName_YEARMONDAY_ReplaceWithYearMonthDay(){
 
-        Time t = new Time();
-        t.setToNow();
+        Calendar gc = mock(Calendar.class);
+        when(gc.get(Calendar.YEAR)).thenReturn(2016);
+        when(gc.get(Calendar.MONTH)).thenReturn(Calendar.FEBRUARY);
+        when(gc.get(Calendar.DAY_OF_MONTH)).thenReturn(1);
 
-        String actual = Utilities.GetFormattedCustomFileName("basename_%YEAR%MONTH%DAY");
-        String expected = "basename_" +  String.valueOf(t.year) + String.format("%02d", t.month+1) + String.format("%02d", t.monthDay);
-        assertThat("Static file name %YEAR, %MONTH, %DAY should be replaced with Year Month and Day", actual, is(expected));
+        String actual = Utilities.GetFormattedCustomFileName("basename_%YEAR%MONTH%DAY",gc);
+        String expected = "basename_20160201";
+        assertThat("Year 2016 Month February Day 1 should be replaced with 20160301", actual, is(expected));
+
+
+        when(gc.get(Calendar.MONTH)).thenReturn(0);
+        actual = Utilities.GetFormattedCustomFileName("basename_%YEAR%MONTH%DAY",gc);
+        expected = "basename_20160101";
+        assertThat("Zero month should be replaced with 1", actual, is(expected));
 
     }
 

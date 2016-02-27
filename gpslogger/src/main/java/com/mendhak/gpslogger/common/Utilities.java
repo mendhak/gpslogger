@@ -58,10 +58,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.util.*;
 
 public class Utilities {
 
@@ -645,19 +642,19 @@ public class Utilities {
 
 
     public static String GetFormattedCustomFileName(String baseName) {
+        return GetFormattedCustomFileName(baseName, GregorianCalendar.getInstance());
+    }
 
-        Time t = new Time();
-        t.setToNow();
+    public static String GetFormattedCustomFileName(String baseName, Calendar calendar){
 
         String finalFileName = baseName;
         finalFileName = finalFileName.replaceAll("(?i)%ser", String.valueOf(Utilities.GetBuildSerial()));
-        finalFileName = finalFileName.replaceAll("(?i)%hour", String.format("%02d", t.hour));
-        finalFileName = finalFileName.replaceAll("(?i)%min", String.format("%02d", t.minute));
-        finalFileName = finalFileName.replaceAll("(?i)%year",  String.valueOf(t.year));
-        finalFileName = finalFileName.replaceAll("(?i)%month", String.format("%02d", t.month+1));
-        finalFileName = finalFileName.replaceAll("(?i)%day", String.format("%02d", t.monthDay));
+        finalFileName = finalFileName.replaceAll("(?i)%hour", String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY)));
+        finalFileName = finalFileName.replaceAll("(?i)%min", String.format("%02d", calendar.get(Calendar.MINUTE)));
+        finalFileName = finalFileName.replaceAll("(?i)%year",  String.valueOf(calendar.get(Calendar.YEAR)));
+        finalFileName = finalFileName.replaceAll("(?i)%month", String.format("%02d", calendar.get(Calendar.MONTH) +1));
+        finalFileName = finalFileName.replaceAll("(?i)%day", String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH) ));
         return finalFileName;
-
     }
 
 
