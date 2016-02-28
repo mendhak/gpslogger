@@ -262,6 +262,14 @@ class Gpx10WriteHandler implements Runnable {
             track.append("<speed>").append(String.valueOf(loc.getSpeed())).append("</speed>");
         }
 
+        if (loc.getExtras() != null) {
+            String geoidheight = loc.getExtras().getString("GEOIDHEIGHT");
+
+            if (!Utilities.IsNullOrEmpty(geoidheight)) {
+                track.append("<geoidheight>").append(geoidheight).append("</geoidheight>");
+            }
+        }
+
         track.append("<src>").append(loc.getProvider()).append("</src>");
 
         if (satelliteCount > 0) {
@@ -272,7 +280,6 @@ class Gpx10WriteHandler implements Runnable {
             String hdop = loc.getExtras().getString("HDOP");
             String pdop = loc.getExtras().getString("PDOP");
             String vdop = loc.getExtras().getString("VDOP");
-            String geoidheight = loc.getExtras().getString("GEOIDHEIGHT");
             String ageofdgpsdata = loc.getExtras().getString("AGEOFDGPSDATA");
             String dgpsid = loc.getExtras().getString("DGPSID");
 
@@ -286,10 +293,6 @@ class Gpx10WriteHandler implements Runnable {
 
             if (!Utilities.IsNullOrEmpty(pdop)) {
                 track.append("<pdop>").append(pdop).append("</pdop>");
-            }
-
-            if (!Utilities.IsNullOrEmpty(geoidheight)) {
-                track.append("<geoidheight>").append(geoidheight).append("</geoidheight>");
             }
 
             if (!Utilities.IsNullOrEmpty(ageofdgpsdata)) {
