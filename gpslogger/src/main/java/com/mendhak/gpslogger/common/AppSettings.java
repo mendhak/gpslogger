@@ -733,30 +733,6 @@ public class AppSettings extends Application {
 
 
 
-    /**
-     * Whether to auto send to Dropbox
-     */
-    @ProfilePreference(name= PreferenceNames.AUTOSEND_DROPBOX_ENABLED)
-    public static boolean isDropboxAutoSendEnabled() {
-        return prefs.getBoolean(PreferenceNames.AUTOSEND_DROPBOX_ENABLED, false);
-    }
-
-    public static String getDropBoxAccessKeyName() {
-        return prefs.getString(PreferenceNames.DROPBOX_ACCESS_KEY, null);
-    }
-
-    public static void setDropBoxAccessKeyName(String key) {
-        prefs.edit().putString(PreferenceNames.DROPBOX_ACCESS_KEY, key).apply();
-    }
-
-    public static String getDropBoxAccessSecretName() {
-        return prefs.getString(PreferenceNames.DROPBOX_ACCESS_SECRET, null);
-    }
-
-    public static void setDropBoxAccessSecret(String secret) {
-        prefs.edit().putString(PreferenceNames.DROPBOX_ACCESS_SECRET, secret).apply();
-    }
-
 
     /**
      * Whether to auto send to OpenStreetMap

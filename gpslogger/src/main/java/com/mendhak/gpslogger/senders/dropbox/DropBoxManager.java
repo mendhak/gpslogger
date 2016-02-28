@@ -25,6 +25,7 @@ import com.dropbox.client2.session.Session;
 import com.dropbox.client2.session.TokenPair;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
@@ -37,11 +38,13 @@ import java.util.List;
 public class DropBoxManager implements IFileSender {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropBoxManager.class.getSimpleName());
-    final static private Session.AccessType ACCESS_TYPE = Session.AccessType.APP_FOLDER;
+    private static final Session.AccessType ACCESS_TYPE = Session.AccessType.APP_FOLDER;
 
-    DropboxAPI<AndroidAuthSession> dropboxApi;
+    private final DropboxAPI<AndroidAuthSession> dropboxApi;
+    private final PreferenceHelper preferenceHelper;
 
-    public DropBoxManager() {
+    public DropBoxManager(PreferenceHelper preferenceHelper) {
+        this.preferenceHelper = preferenceHelper;
         AndroidAuthSession session = buildSession();
         dropboxApi = new DropboxAPI<>(session);
     }
@@ -80,13 +83,13 @@ public class DropBoxManager implements IFileSender {
      * @param secret The Access Secret
      */
     private void storeKeys(String key, String secret) {
-        AppSettings.setDropBoxAccessKeyName(key);
-        AppSettings.setDropBoxAccessSecret(secret);
+        preferenceHelper.setDropBoxAccessKeyName(key);
+        preferenceHelper.setDropBoxAccessSecret(secret);
     }
 
     private void clearKeys() {
-        AppSettings.setDropBoxAccessKeyName(null);
-        AppSettings.setDropBoxAccessSecret(null);
+        preferenceHelper.setDropBoxAccessKeyName(null);
+        preferenceHelper.setDropBoxAccessSecret(null);
     }
 
     private AndroidAuthSession buildSession() {
@@ -112,8 +115,8 @@ public class DropBoxManager implements IFileSender {
      * @return Array of [access_key, access_secret], or null if none stored
      */
     private String[] getKeys() {
-        String key = AppSettings.getDropBoxAccessKeyName();
-        String secret = AppSettings.getDropBoxAccessSecretName();
+        String key = preferenceHelper.getDropBoxAccessKeyName();
+        String secret = preferenceHelper.getDropBoxAccessSecretName();
         if (key != null && secret != null) {
             String[] ret = new String[2];
             ret[0] = key;
@@ -146,10 +149,10 @@ public class DropBoxManager implements IFileSender {
 
     @Override
     public boolean IsAvailable() {
-        return AppSettings.isDropboxAutoSendEnabled()
+        return preferenceHelper.isDropboxAutoSendEnabled()
                 &&  IsLinked()
-                && AppSettings.getDropBoxAccessKeyName() != null
-                && AppSettings.getDropBoxAccessSecretName() != null;
+                && preferenceHelper.getDropBoxAccessKeyName() != null
+                && preferenceHelper.getDropBoxAccessSecretName() != null;
     }
 
     public void UploadFile(String fileName) {

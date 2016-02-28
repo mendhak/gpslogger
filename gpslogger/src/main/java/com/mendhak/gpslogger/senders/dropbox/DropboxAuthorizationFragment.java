@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,7 @@ public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment
 
         Preference pref = findPreference("dropbox_resetauth");
 
-        manager = new DropBoxManager();
+        manager = new DropBoxManager(PreferenceHelper.getInstance());
 
         if (manager.IsLinked()) {
             pref.setTitle(R.string.dropbox_unauthorize);

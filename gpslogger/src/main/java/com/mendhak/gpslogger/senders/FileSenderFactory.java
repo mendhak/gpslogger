@@ -19,6 +19,7 @@ package com.mendhak.gpslogger.senders;
 
 import android.content.Context;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxManager;
 import com.mendhak.gpslogger.senders.email.AutoEmailManager;
@@ -44,7 +45,7 @@ public class FileSenderFactory {
     }
 
     public static IFileSender GetDropBoxSender() {
-        return new DropBoxManager();
+        return new DropBoxManager(PreferenceHelper.getInstance());
     }
 
     public static IFileSender GetGDocsSender() {
