@@ -44,7 +44,7 @@ public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment
 
         manager = new DropBoxManager(PreferenceHelper.getInstance());
 
-        if (manager.IsLinked()) {
+        if (manager.isLinked()) {
             pref.setTitle(R.string.dropbox_unauthorize);
             pref.setSummary(R.string.dropbox_unauthorize_description);
         } else {
@@ -61,7 +61,7 @@ public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment
         super.onResume();
 
         try {
-            if (manager.FinishAuthorization()) {
+            if (manager.finishAuthorization()) {
                 startActivity(new Intent(getActivity(), GpsMainActivity.class));
                 getActivity().finish();
             }
@@ -77,13 +77,13 @@ public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment
     public boolean onPreferenceClick(Preference preference) {
 
         // This logs you out if you're logged in, or vice versa
-        if (manager.IsLinked()) {
-            manager.UnLink();
+        if (manager.isLinked()) {
+            manager.unLink();
             startActivity(new Intent(getActivity(), GpsMainActivity.class));
             getActivity().finish();
         } else {
             try {
-                manager.StartAuthentication(DropboxAuthorizationFragment.this);
+                manager.startAuthentication(DropboxAuthorizationFragment.this);
             } catch (Exception e) {
                 tracer.error(".", e);
             }

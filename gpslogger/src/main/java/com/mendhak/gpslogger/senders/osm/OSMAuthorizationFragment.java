@@ -59,12 +59,12 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
 
             try {
                 if (provider == null) {
-                    provider = manager.GetOSMAuthProvider();
+                    provider = manager.getOSMAuthProvider();
                 }
 
                 if (consumer == null) {
                     //In case consumer is null, re-initialize from stored values.
-                    consumer = manager.GetOSMAuthConsumer();
+                    consumer = manager.getOSMAuthConsumer();
                 }
 
                 //Ask OpenStreetMap for the access token. This is the main event.
@@ -89,7 +89,7 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
         Preference tagsPref = findPreference("osm_tags");
         Preference resetPref = findPreference("osm_resetauth");
 
-        if (!manager.IsOsmAuthorized()) {
+        if (!manager.isOsmAuthorized()) {
             resetPref.setTitle(R.string.osm_lbl_authorize);
             resetPref.setSummary(R.string.osm_lbl_authorize_description);
             visibilityPref.setEnabled(false);
@@ -110,7 +110,7 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
     @Override
     @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
-        if (manager.IsOsmAuthorized()) {
+        if (manager.isOsmAuthorized()) {
             AppSettings.setOSMAccessToken("");
             AppSettings.setOSMAccessTokenSecret("");
             AppSettings.setOSMRequestToken("");
@@ -124,8 +124,8 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
                 StrictMode.enableDefaults();
 
                 //User clicks. Set the consumer and provider up.
-                consumer = manager.GetOSMAuthConsumer();
-                provider = manager.GetOSMAuthProvider();
+                consumer = manager.getOSMAuthConsumer();
+                provider = manager.getOSMAuthProvider();
 
                 String authUrl;
 

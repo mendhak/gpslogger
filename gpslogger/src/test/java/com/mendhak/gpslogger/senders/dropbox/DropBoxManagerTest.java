@@ -28,7 +28,7 @@ public class DropBoxManagerTest {
         when(pm.getDropBoxAccessSecretName()).thenReturn("bbbbbbb");
 
         DropBoxManager dropBoxManager = new DropBoxManager(pm);
-        assertThat("All values present means is available", dropBoxManager.IsAvailable(), is(true));
+        assertThat("All values present means is available", dropBoxManager.isAvailable(), is(true));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class DropBoxManagerTest {
         when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
 
         DropBoxManager dropBoxManager = new DropBoxManager(pm);
-        assertThat("A key without a secret is useless", dropBoxManager.IsAvailable(), is(false));
+        assertThat("A key without a secret is useless", dropBoxManager.isAvailable(), is(false));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class DropBoxManagerTest {
         when(pm.getDropBoxAccessSecretName()).thenReturn("bbbbbbb");
 
         DropBoxManager dropBoxManager = new DropBoxManager(pm);
-        assertThat("Keys and secret without enabled means not available", dropBoxManager.IsAvailable(), is(false));
+        assertThat("Keys and secret without enabled means not available", dropBoxManager.isAvailable(), is(false));
 
         //verify(pm).setDropBoxAccessKeyName();
     }
@@ -60,7 +60,7 @@ public class DropBoxManagerTest {
         when(pm.getDropBoxAccessSecretName()).thenReturn("bbbbbbb");
 
         DropBoxManager dropBoxManager = new DropBoxManager(pm);
-        dropBoxManager.UnLink();
+        dropBoxManager.unLink();
 
         verify(pm).setDropBoxAccessKeyName(null);
         verify(pm).setDropBoxAccessSecret(null);

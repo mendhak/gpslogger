@@ -23,7 +23,7 @@ public class Gpx10WriteHandlerTest {
 
         Location loc = MockLocations.builder("MOCK", 12.193, 19.111).build();
 
-        String actual = writeHandler.GetTrackPointXml(loc, "2011-09-17T18:45:33Z");
+        String actual = writeHandler.getTrackPointXml(loc, "2011-09-17T18:45:33Z");
         String expected = "<trkpt lat=\"12.193\" lon=\"19.111\"><time>2011-09-17T18:45:33Z</time><src>MOCK</src><sat>41</sat></trkpt>\n</trkseg></trk></gpx>";
 
         assertThat("Basic trackpoint XML", actual, is(expected));
@@ -37,7 +37,7 @@ public class Gpx10WriteHandlerTest {
 
         Location loc = MockLocations.builder("MOCK", 12.193,19.111).withAltitude(9001d).withBearing(91.88f).withSpeed(188.44f).build();
 
-        String actual = writeHandler.GetTrackPointXml(loc, "2011-09-17T18:45:33Z");
+        String actual = writeHandler.getTrackPointXml(loc, "2011-09-17T18:45:33Z");
         String expected = "<trkpt lat=\"12.193\" lon=\"19.111\"><ele>9001.0</ele><time>2011-09-17T18:45:33Z</time>" +
                 "<course>91.88</course><speed>188.44</speed><src>MOCK</src><sat>41</sat></trkpt>\n</trkseg></trk></gpx>";
 
@@ -57,7 +57,7 @@ public class Gpx10WriteHandlerTest {
                 .withAccuracy(55f)
                 .build();
 
-        String actual = writeHandler.GetTrackPointXml(loc, "2011-09-17T18:45:33Z");
+        String actual = writeHandler.getTrackPointXml(loc, "2011-09-17T18:45:33Z");
         String expected = "<trkpt lat=\"12.193\" lon=\"19.111\"><ele>9001.0</ele><time>2011-09-17T18:45:33Z</time>" +
                 "<course>91.88</course><speed>188.44</speed><src>MOCK</src></trkpt>\n</trkseg></trk></gpx>";
 
@@ -77,7 +77,7 @@ public class Gpx10WriteHandlerTest {
                 .build();
 
 
-        String actual = writeHandler.GetTrackPointXml(loc, "2011-09-17T18:45:33Z");
+        String actual = writeHandler.getTrackPointXml(loc, "2011-09-17T18:45:33Z");
         String expected = "<trkseg><trkpt lat=\"12.193\" lon=\"19.111\"><ele>9001.0</ele><time>2011-09-17T18:45:33Z</time>" +
                 "<course>91.88</course><speed>188.44</speed><src>MOCK</src></trkpt>\n</trkseg></trk></gpx>";
 
@@ -97,7 +97,7 @@ public class Gpx10WriteHandlerTest {
                 .putExtra("HDOP", "LOOKATTHISHDOP!")
                 .build();
 
-        String actual = writeHandler.GetTrackPointXml(loc, "2011-09-17T18:45:33Z");
+        String actual = writeHandler.getTrackPointXml(loc, "2011-09-17T18:45:33Z");
         String expected = "<trkseg><trkpt lat=\"12.193\" lon=\"19.111\"><ele>9001.0</ele><time>2011-09-17T18:45:33Z</time>" +
                 "<course>91.88</course><speed>188.44</speed><src>MOCK</src><hdop>LOOKATTHISHDOP!</hdop></trkpt>\n</trkseg></trk></gpx>";
 
@@ -117,7 +117,7 @@ public class Gpx10WriteHandlerTest {
                 .putExtra("GEOIDHEIGHT", "MYGEOIDHEIGHT")
                 .build();
 
-        String actual = writeHandler.GetTrackPointXml(loc, "2011-09-17T18:45:33Z");
+        String actual = writeHandler.getTrackPointXml(loc, "2011-09-17T18:45:33Z");
         String expected = "<trkseg><trkpt lat=\"12.193\" lon=\"19.111\"><ele>9001.0</ele><time>2011-09-17T18:45:33Z</time>" +
                 "<course>91.88</course><speed>188.44</speed><src>MOCK</src><geoidheight>MYGEOIDHEIGHT</geoidheight></trkpt>\n</trkseg></trk></gpx>";
 

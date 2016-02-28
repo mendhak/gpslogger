@@ -85,7 +85,7 @@ class Mail extends javax.mail.Authenticator {
     }
 
     boolean send() throws Exception {
-        Properties props = _setProperties();
+        Properties props = setProperties();
 
         if (!_user.equals("") && !_pass.equals("") && _to.length > 0
                 && !_from.equals("") && !_subject.equals("")
@@ -136,7 +136,7 @@ class Mail extends javax.mail.Authenticator {
         return new PasswordAuthentication(_user, _pass);
     }
 
-    private Properties _setProperties() {
+    private Properties setProperties() {
         Properties props = new Properties();
 
         props.put("mail.smtp.host", _host);

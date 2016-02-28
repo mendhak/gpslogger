@@ -57,7 +57,7 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
         txtLong.setOnTouchListener(this);
 
-        DisplayLocationInfo(Session.getCurrentLocationInfo());
+        displayLocationInfo(Session.getCurrentLocationInfo());
 
         if (Session.isStarted()) {
             Toast.makeText(getActivity().getApplicationContext(), R.string.bigview_taptotoggle, Toast.LENGTH_SHORT).show();
@@ -69,7 +69,7 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LocationUpdate locationUpdate){
-        DisplayLocationInfo(locationUpdate.location);
+        displayLocationInfo(locationUpdate.location);
     }
 
     @EventBusHook
@@ -82,7 +82,7 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         }
     }
 
-    public void DisplayLocationInfo(Location locationInfo){
+    public void displayLocationInfo(Location locationInfo){
 
         TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
         TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
@@ -104,7 +104,7 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-            RequestToggleLogging();
+            requestToggleLogging();
             return true;
         }
 

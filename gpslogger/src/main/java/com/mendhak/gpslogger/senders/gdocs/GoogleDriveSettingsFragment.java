@@ -68,29 +68,29 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
 
         manager = new GoogleDriveManager();
 
-        VerifyGooglePlayServices();
-        RegisterEventBus();
+        verifyGooglePlayServices();
+        registerEventBus();
     }
 
     @Override
     public void onDestroy() {
 
-        UnregisterEventBus();
+        unregisterEventBus();
         super.onDestroy();
     }
 
-    private void UnregisterEventBus(){
+    private void unregisterEventBus(){
         try {
             EventBus.getDefault().unregister(this);
         } catch (Throwable t){
             //this may crash if registration did not go through. just be safe
         }
     }
-    private void RegisterEventBus() {
+    private void registerEventBus() {
         EventBus.getDefault().register(this);
     }
 
-    private void VerifyGooglePlayServices() {
+    private void verifyGooglePlayServices() {
         Preference resetPref = findPreference("gdocs_resetauth");
         Preference testPref = findPreference("gdocs_test");
         Preference folderPref = findPreference("gdocs_foldername");
@@ -113,7 +113,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
             }
 
         } else {
-            ResetPreferenceAppearance(resetPref, testPref, folderPref);
+            resetPreferenceAppearance(resetPref, testPref, folderPref);
 
             testPref.setOnPreferenceClickListener(this);
             resetPref.setOnPreferenceClickListener(this);
@@ -124,12 +124,12 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
 
     public void onResume() {
         super.onResume();
-        VerifyGooglePlayServices();
+        verifyGooglePlayServices();
 
     }
 
-    private void ResetPreferenceAppearance(Preference resetPref, Preference testPref, Preference folderPref) {
-        if (manager.IsLinked()) {
+    private void resetPreferenceAppearance(Preference resetPref, Preference testPref, Preference folderPref) {
+        if (manager.isLinked()) {
             resetPref.setTitle(R.string.gdocs_clearauthorization);
             resetPref.setSummary(R.string.gdocs_clearauthorization_summary);
             testPref.setEnabled(true);
@@ -145,9 +145,9 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
     @AskPermission({Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
         if (preference.getKey().equalsIgnoreCase("gdocs_test")) {
-            UploadTestFileToGoogleDocs();
+            uploadTestFileToGoogleDocs();
         } else {
-            if (manager.IsLinked()) {
+            if (manager.isLinked()) {
                 //Clear authorization
                 GoogleAuthUtil.invalidateToken(getActivity(), AppSettings.getGoogleDriveAuthToken());
                 AppSettings.setGoogleDriveAuthToken("");
@@ -157,7 +157,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
                 getActivity().finish();
             } else {
                 //Re-authorize
-                Authorize();
+                authorize();
 
             }
         }
@@ -165,7 +165,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
         return true;
     }
 
-    private void Authorize() {
+    private void authorize() {
         Intent intent = AccountPicker.newChooseAccountIntent(null, null, new String[]{GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE},
                 false, null, null, null, null);
 
@@ -204,7 +204,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
             // Retrieve a token for the given account and scope. It will always return either
             // a non-empty String or throw an exception.
 
-            return GoogleAuthUtil.getToken(getActivity(), AppSettings.getGoogleDriveAccountName(), manager.GetOauth2Scope());
+            return GoogleAuthUtil.getToken(getActivity(), AppSettings.getGoogleDriveAccountName(), manager.getOauth2Scope());
         } catch (GooglePlayServicesAvailabilityException playEx) {
             Dialog alert = GooglePlayServicesUtil.getErrorDialog(
                     playEx.getConnectionStatusCode(),
@@ -249,7 +249,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
                 if (authToken != null) {
                     AppSettings.setGoogleDriveAuthToken(authToken);
                     tracer.debug("Auth token:" + authToken);
-                    VerifyGooglePlayServices();
+                    verifyGooglePlayServices();
                 }
 
             }
@@ -259,7 +259,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
 
 
     @AskPermission({Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
-    private void UploadTestFileToGoogleDocs() {
+    private void uploadTestFileToGoogleDocs() {
 
         Utilities.ShowProgress(getActivity(), getString(R.string.please_wait), getString(R.string.please_wait));
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
@@ -290,7 +290,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
         }
 
         MaterialEditTextPreference folderPref = (MaterialEditTextPreference)findPreference("gdocs_foldername");
-        manager.UploadTestFile(testFile, folderPref.getText());
+        manager.uploadTestFile(testFile, folderPref.getText());
 
     }
 

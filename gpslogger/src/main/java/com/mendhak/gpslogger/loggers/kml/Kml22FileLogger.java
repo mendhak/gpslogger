@@ -44,12 +44,12 @@ public class Kml22FileLogger implements IFileLogger {
     }
 
 
-    public void Write(Location loc) throws Exception {
+    public void write(Location loc) throws Exception {
         Kml22WriteHandler writeHandler = new Kml22WriteHandler(loc, kmlFile, addNewTrackSegment);
         EXECUTOR.execute(writeHandler);
     }
 
-    public void Annotate(String description, Location loc) throws Exception {
+    public void annotate(String description, Location loc) throws Exception {
         Kml22AnnotateHandler annotateHandler = new Kml22AnnotateHandler(kmlFile, description, loc);
         EXECUTOR.execute(annotateHandler);
     }
@@ -82,7 +82,7 @@ class Kml22AnnotateHandler implements Runnable {
         try {
             synchronized (Kml22FileLogger.lock) {
 
-                String descriptionNode = GetPlacemarkXml(description, loc);
+                String descriptionNode = getPlacemarkXml(description, loc);
 
 
                 BufferedReader bf = new BufferedReader(new FileReader(kmlFile));
@@ -110,11 +110,11 @@ class Kml22AnnotateHandler implements Runnable {
 
             }
         } catch (Exception e) {
-            tracer.error("Kml22FileLogger.Annotate", e);
+            tracer.error("Kml22FileLogger.annotate", e);
         }
     }
 
-    String GetPlacemarkXml(String description, Location loc) {
+    String getPlacemarkXml(String description, Location loc) {
         StringBuilder descriptionNode = new StringBuilder();
         descriptionNode.append("<Placemark><name>");
         descriptionNode.append(description);
@@ -212,7 +212,7 @@ class Kml22WriteHandler implements Runnable {
             }
 
         } catch (Exception e) {
-            tracer.error("Kml22FileLogger.Write", e);
+            tracer.error("Kml22FileLogger.write", e);
         }
     }
 }

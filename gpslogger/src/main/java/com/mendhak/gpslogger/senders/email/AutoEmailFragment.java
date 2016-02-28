@@ -66,20 +66,20 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
 
         testEmailPref.setOnPreferenceClickListener(this);
 
-        RegisterEventBus();
+        registerEventBus();
     }
 
     @Override
     public void onDestroy() {
-        UnregisterEventBus();
+        unregisterEventBus();
         super.onDestroy();
     }
 
-    private void RegisterEventBus() {
+    private void registerEventBus() {
         EventBus.getDefault().register(this);
     }
 
-    private void UnregisterEventBus(){
+    private void unregisterEventBus(){
         try {
             EventBus.getDefault().unregister(this);
         } catch (Throwable t){
@@ -89,7 +89,7 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
 
     public boolean onPreferenceClick(Preference preference) {
 
-        if (!IsFormValid()) {
+        if (!isFormValid()) {
             Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
                     getString(R.string.autoemail_invalid_form_message),
                     getActivity());
@@ -113,14 +113,14 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
         MaterialEditTextPreference txtFrom = (MaterialEditTextPreference) findPreference("smtp_from");
 
         AutoEmailManager aem = new AutoEmailManager(preferenceHelper);
-        aem.SendTestEmail(txtSmtpServer.getText(), txtSmtpPort.getText(),
+        aem.sendTestEmail(txtSmtpServer.getText(), txtSmtpPort.getText(),
                 txtUsername.getText(), txtPassword.getText(),
                 chkUseSsl.isChecked(), txtTarget.getText(), txtFrom.getText());
 
         return true;
     }
 
-    private boolean IsFormValid() {
+    private boolean isFormValid() {
 
         CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("autoemail_enabled");
         MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
@@ -147,15 +147,15 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
             switch (newPreset) {
                 case 0:
                     // Gmail
-                    SetSmtpValues("smtp.gmail.com", "465", true);
+                    setSmtpValues("smtp.gmail.com", "465", true);
                     break;
                 case 1:
                     // Windows live mail
-                    SetSmtpValues("smtp.live.com", "587", false);
+                    setSmtpValues("smtp.live.com", "587", false);
                     break;
                 case 2:
                     // Yahoo
-                    SetSmtpValues("smtp.mail.yahoo.com", "465", true);
+                    setSmtpValues("smtp.mail.yahoo.com", "465", true);
                     break;
                 case 99:
                     // manual
@@ -167,7 +167,7 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
         return true;
     }
 
-    private void SetSmtpValues(String server, String port, boolean useSsl) {
+    private void setSmtpValues(String server, String port, boolean useSsl) {
 
         MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
         MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
@@ -184,8 +184,8 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
 
 
     @Override
-    public boolean IsValid() {
-        return IsFormValid();
+    public boolean isValid() {
+        return isFormValid();
     }
 
     @EventBusHook

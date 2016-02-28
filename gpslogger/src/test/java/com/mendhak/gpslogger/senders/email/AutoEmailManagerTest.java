@@ -26,7 +26,7 @@ public class AutoEmailManagerTest {
         when(pm.getSmtpUsername()).thenReturn("bbbbbbb");
 
         AutoEmailManager aem = new AutoEmailManager(pm);
-        assertThat("All values present means is available", aem.IsAvailable(), is(true));
+        assertThat("All values present means is available", aem.isAvailable(), is(true));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class AutoEmailManagerTest {
         when(pm.getSmtpUsername()).thenReturn("bbbbbbb");
 
         AutoEmailManager aem = new AutoEmailManager(pm);
-        assertThat("Some values missing", aem.IsAvailable(), is(false));
+        assertThat("Some values missing", aem.isAvailable(), is(false));
     }
 
     @Test
@@ -54,6 +54,6 @@ public class AutoEmailManagerTest {
         when(pm.getSmtpUsername()).thenReturn("bbbbbbb");
 
         AutoEmailManager aem = new AutoEmailManager(pm);
-        assertThat("All values present but user unchecked", aem.IsAvailable(), is(false));
+        assertThat("All values present but user unchecked", aem.isAvailable(), is(false));
     }
 }

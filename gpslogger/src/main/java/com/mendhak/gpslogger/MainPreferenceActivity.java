@@ -135,7 +135,7 @@ public class MainPreferenceActivity extends ActionBarActivity {
 
     private boolean isFormValid(){
         if(preferenceFragment instanceof IPreferenceValidation){
-            if( !((IPreferenceValidation)preferenceFragment).IsValid() ){
+            if( !((IPreferenceValidation)preferenceFragment).isValid() ){
                 Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
                         getString(R.string.autoemail_invalid_form_message),
                         this);

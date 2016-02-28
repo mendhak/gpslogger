@@ -22,5 +22,5 @@ public interface IMessageBoxCallback {
     int CANCEL = 0;
     int OK = 1;
 
-    public void MessageBoxResult(int which);
+    public void messageBoxResult(int which);
 }

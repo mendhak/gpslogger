@@ -56,11 +56,11 @@ public class DropBoxManager implements IFileSender {
      *
      * @return True/False
      */
-    protected boolean IsLinked() {
+    protected boolean isLinked() {
         return dropboxApi.getSession().isLinked();
     }
 
-    public boolean FinishAuthorization() {
+    public boolean finishAuthorization() {
         AndroidAuthSession session = dropboxApi.getSession();
         if (!session.isLinked() && session.authenticationSuccessful()) {
             // Mandatory call to complete the auth
@@ -127,12 +127,12 @@ public class DropBoxManager implements IFileSender {
         return pair;
     }
 
-    public void StartAuthentication(DropboxAuthorizationFragment dropboxAuthorizationFragment) {
+    public void startAuthentication(DropboxAuthorizationFragment dropboxAuthorizationFragment) {
         // Start the remote authentication
         dropboxApi.getSession().startAuthentication(dropboxAuthorizationFragment.getActivity());
     }
 
-    public void UnLink() {
+    public void unLink() {
         // Remove credentials from the session
         dropboxApi.getSession().unlink();
 
@@ -141,21 +141,21 @@ public class DropBoxManager implements IFileSender {
     }
 
     @Override
-    public void UploadFile(List<File> files) {
+    public void uploadFile(List<File> files) {
         for (File f : files) {
-            UploadFile(f.getName());
+            uploadFile(f.getName());
         }
     }
 
     @Override
-    public boolean IsAvailable() {
+    public boolean isAvailable() {
         return preferenceHelper.isDropboxAutoSendEnabled()
-                &&  IsLinked()
+                &&  isLinked()
                 && preferenceHelper.getDropBoxAccessKeyName() != null
                 && preferenceHelper.getDropBoxAccessSecretName() != null;
     }
 
-    public void UploadFile(String fileName) {
+    public void uploadFile(String fileName) {
         JobManager jobManager = AppSettings.GetJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, DropboxJob.getJobTag(fileName));
         jobManager.addJobInBackground(new DropboxJob(fileName, BuildConfig.DROPBOX_APP_KEY, BuildConfig.DROPBOX_APP_SECRET, getKeys()));

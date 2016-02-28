@@ -21,7 +21,7 @@ public class OwnCloudManager implements IFileSender
     public OwnCloudManager() {
     }
 
-    void TestOwnCloud(String servername, String username, String password, String directory) {
+    void testOwnCloud(String servername, String username, String password, String directory) {
 
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
@@ -67,22 +67,22 @@ public class OwnCloudManager implements IFileSender
     }
 
     @Override
-    public void UploadFile(List<File> files)
+    public void uploadFile(List<File> files)
     {
         for (File f : files) {
-            UploadFile(f);
+            uploadFile(f);
         }
     }
 
     @Override
-    public boolean IsAvailable() {
+    public boolean isAvailable() {
         return ValidSettings(AppSettings.getOwnCloudServerName(),
                 AppSettings.getOwnCloudUsername(),
                 AppSettings.getOwnCloudPassword(),
                 AppSettings.getOwnCloudDirectory());
     }
 
-    public void UploadFile(File f)
+    public void uploadFile(File f)
     {
         JobManager jobManager = AppSettings.GetJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OwnCloudJob.getJobTag(f));

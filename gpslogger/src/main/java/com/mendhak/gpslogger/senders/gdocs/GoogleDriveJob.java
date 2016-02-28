@@ -50,11 +50,11 @@ public class GoogleDriveJob extends Job {
         FileInputStream fis = new FileInputStream(gpxFile);
         String fileName = gpxFile.getName();
 
-        String gpsLoggerFolderId = GetFileIdFromFileName(token, googleDriveFolderName, null);
+        String gpsLoggerFolderId = getFileIdFromFileName(token, googleDriveFolderName, null);
 
         if (Utilities.IsNullOrEmpty(gpsLoggerFolderId)) {
             //Couldn't find folder, must create it
-            gpsLoggerFolderId = CreateEmptyFile(token, googleDriveFolderName, "application/vnd.google-apps.folder", "root");
+            gpsLoggerFolderId = createEmptyFile(token, googleDriveFolderName, "application/vnd.google-apps.folder", "root");
 
             if (Utilities.IsNullOrEmpty(gpsLoggerFolderId)) {
                 EventBus.getDefault().post(new UploadEvents.GDocs(false));
@@ -63,11 +63,11 @@ public class GoogleDriveJob extends Job {
         }
 
         //Now search for the file
-        String gpxFileId = GetFileIdFromFileName(token, fileName, gpsLoggerFolderId);
+        String gpxFileId = getFileIdFromFileName(token, fileName, gpsLoggerFolderId);
 
         if (Utilities.IsNullOrEmpty(gpxFileId)) {
             //Create empty file first
-            gpxFileId = CreateEmptyFile(token, fileName, GetMimeTypeFromFileName(fileName), gpsLoggerFolderId);
+            gpxFileId = createEmptyFile(token, fileName, getMimeTypeFromFileName(fileName), gpsLoggerFolderId);
 
             if (Utilities.IsNullOrEmpty(gpxFileId)) {
                 EventBus.getDefault().post(new UploadEvents.GDocs(false));
@@ -77,7 +77,7 @@ public class GoogleDriveJob extends Job {
 
         if (!Utilities.IsNullOrEmpty(gpxFileId)) {
             //Set file's contents
-            UpdateFileContents(token, gpxFileId, Utilities.GetByteArrayFromInputStream(fis), fileName);
+            updateFileContents(token, gpxFileId, Utilities.GetByteArrayFromInputStream(fis), fileName);
         }
         EventBus.getDefault().post(new UploadEvents.GDocs(true));
     }
@@ -86,7 +86,7 @@ public class GoogleDriveJob extends Job {
         return "oauth2:https://www.googleapis.com/auth/drive.file";
     }
 
-    private String UpdateFileContents(String authToken, String gpxFileId, byte[] fileContents, String fileName) {
+    private String updateFileContents(String authToken, String gpxFileId, byte[] fileContents, String fileName) {
         HttpURLConnection conn = null;
         String fileId = null;
 
@@ -105,7 +105,7 @@ public class GoogleDriveJob extends Job {
             conn.setRequestMethod("PUT");
             conn.setRequestProperty("User-Agent", "GPSLogger for Android");
             conn.setRequestProperty("Authorization", "Bearer " + authToken);
-            conn.setRequestProperty("Content-Type", GetMimeTypeFromFileName(fileName));
+            conn.setRequestProperty("Content-Type", getMimeTypeFromFileName(fileName));
             conn.setRequestProperty("Content-Length", String.valueOf(fileContents.length));
 
             conn.setUseCaches(false);
@@ -138,7 +138,7 @@ public class GoogleDriveJob extends Job {
         return fileId;
     }
 
-    private String CreateEmptyFile(String authToken, String fileName, String mimeType, String parentFolderId) {
+    private String createEmptyFile(String authToken, String fileName, String mimeType, String parentFolderId) {
 
         String fileId = null;
         HttpURLConnection conn = null;
@@ -205,7 +205,7 @@ public class GoogleDriveJob extends Job {
     }
 
 
-    private String GetFileIdFromFileName(String authToken, String fileName, String inFolderId) {
+    private String getFileIdFromFileName(String authToken, String fileName, String inFolderId) {
 
         HttpURLConnection conn = null;
         String fileId = "";
@@ -257,7 +257,7 @@ public class GoogleDriveJob extends Job {
         return fileId;
     }
 
-    private String GetMimeTypeFromFileName(String fileName) {
+    private String getMimeTypeFromFileName(String fileName) {
         if (fileName.endsWith("kml")) {
             return "application/vnd.google-earth.kml+xml";
         }

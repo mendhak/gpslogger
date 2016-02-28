@@ -25,11 +25,11 @@ public interface IFileSender extends FilenameFilter {
     /**
      * Upload or send these given files
      */
-    void UploadFile(List<File> files);
+    void uploadFile(List<File> files);
 
     /**
      * Whether the sender is enabled and ready to be used
      */
-    boolean IsAvailable();
+    boolean isAvailable();
 
 }

@@ -61,7 +61,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 b.putString("LISTENER", listenerName);
 
                 loc.setExtras(b);
-                loggingService.OnLocationChanged(loc);
+                loggingService.onLocationChanged(loc);
 
                 this.latestHdop = "";
                 this.latestPdop = "";
@@ -76,19 +76,19 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
     public void onProviderDisabled(String provider) {
         tracer.info("Provider disabled: " + provider);
-        loggingService.RestartGpsManagers();
+        loggingService.restartGpsManagers();
     }
 
     public void onProviderEnabled(String provider) {
 
         tracer.info("Provider enabled: " + provider);
-        loggingService.RestartGpsManagers();
+        loggingService.restartGpsManagers();
     }
 
     public void onStatusChanged(String provider, int status, Bundle extras) {
         if (status == LocationProvider.OUT_OF_SERVICE) {
             tracer.info(provider + " is out of service");
-            loggingService.StopManagerAndResetAlarm();
+            loggingService.stopManagerAndResetAlarm();
         }
 
         if (status == LocationProvider.AVAILABLE) {
@@ -97,7 +97,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
         if (status == LocationProvider.TEMPORARILY_UNAVAILABLE) {
             tracer.info(provider + " is temporarily unavailable");
-            loggingService.StopManagerAndResetAlarm();
+            loggingService.stopManagerAndResetAlarm();
         }
     }
 
@@ -123,7 +123,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 }
 
                 tracer.debug(String.valueOf(count) + " satellites");
-                loggingService.SetSatelliteInfo(count);
+                loggingService.setSatelliteInfo(count);
                 break;
 
             case GpsStatus.GPS_EVENT_STARTED:
@@ -139,7 +139,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
     @Override
     public void onNmeaReceived(long timestamp, String nmeaSentence) {
-        loggingService.OnNmeaSentence(timestamp, nmeaSentence);
+        loggingService.onNmeaSentence(timestamp, nmeaSentence);
 
         if(Utilities.IsNullOrEmpty(nmeaSentence)){
             return;

@@ -101,12 +101,12 @@ public class GpsMainActivity extends ActionBarActivity
 
         setContentView(R.layout.activity_gps_main);
 
-        SetUpToolbar();
-        SetUpNavigationDrawer(savedInstanceState);
+        setUpToolbar();
+        setUpNavigationDrawer(savedInstanceState);
 
-        LoadDefaultFragmentView();
-        StartAndBindService();
-        RegisterEventBus();
+        loadDefaultFragmentView();
+        startAndBindService();
+        registerEventBus();
 
         if(AppSettings.shouldStartLoggingOnAppLaunch()){
             tracer.debug("Start logging on app launch");
@@ -125,11 +125,11 @@ public class GpsMainActivity extends ActionBarActivity
         super.onSaveInstanceState(outState);
     }
 
-    private void RegisterEventBus() {
+    private void registerEventBus() {
         EventBus.getDefault().register(this);
     }
 
-    private void UnregisterEventBus(){
+    private void unregisterEventBus(){
         try {
         EventBus.getDefault().unregister(this);
         } catch (Throwable t){
@@ -140,32 +140,32 @@ public class GpsMainActivity extends ActionBarActivity
     @Override
     protected void onStart() {
         super.onStart();
-        StartAndBindService();
+        startAndBindService();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        StartAndBindService();
+        startAndBindService();
 
         if (Session.hasDescription()) {
-            SetAnnotationReady();
+            setAnnotationReady();
         }
 
-        PopulateProfilesList();
+        populateProfilesList();
         enableDisableMenuItems();
     }
 
     @Override
     protected void onPause() {
-        StopAndUnbindServiceIfRequired();
+        stopAndUnbindServiceIfRequired();
         super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        StopAndUnbindServiceIfRequired();
-        UnregisterEventBus();
+        stopAndUnbindServiceIfRequired();
+        unregisterEventBus();
         super.onDestroy();
 
     }
@@ -185,7 +185,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            ToggleDrawer();
+            toggleDrawer();
         }
 
         return super.onKeyUp(keyCode, event);
@@ -196,13 +196,13 @@ public class GpsMainActivity extends ActionBarActivity
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && Session.isBoundToService()) {
-            StopAndUnbindServiceIfRequired();
+            stopAndUnbindServiceIfRequired();
         }
 
         if(keyCode == KeyEvent.KEYCODE_BACK){
             DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
             if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
-                ToggleDrawer();
+                toggleDrawer();
                 return true;
             }
         }
@@ -258,7 +258,7 @@ public class GpsMainActivity extends ActionBarActivity
     /**
      * Helper method, launches activity in a delayed handler, less stutter
      */
-    private void LaunchPreferenceScreen(final String whichFragment) {
+    private void launchPreferenceScreen(final String whichFragment) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -271,13 +271,13 @@ public class GpsMainActivity extends ActionBarActivity
 
 
 
-    public Toolbar GetToolbar(){
+    public Toolbar getToolbar(){
         return (Toolbar)findViewById(R.id.toolbar);
     }
 
-    public void SetUpToolbar(){
+    public void setUpToolbar(){
         try{
-            Toolbar toolbar = GetToolbar();
+            Toolbar toolbar = getToolbar();
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -285,7 +285,7 @@ public class GpsMainActivity extends ActionBarActivity
             SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.gps_main_views, R.layout.spinner_dropdown_item);
             getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
             getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, this);
-            getSupportActionBar().setSelectedNavigationItem(GetUserSelectedNavigationItem());
+            getSupportActionBar().setSelectedNavigationItem(getUserSelectedNavigationItem());
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Window window = getWindow();
@@ -299,14 +299,14 @@ public class GpsMainActivity extends ActionBarActivity
 
     }
 
-    public void SetUpNavigationDrawer(Bundle savedInstanceState) {
+    public void setUpNavigationDrawer(Bundle savedInstanceState) {
 
         final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         drawerToggle = new ActionBarDrawerToggle(
                 this,
                 drawerLayout,
-                GetToolbar(),
+                getToolbar(),
                 R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close
         ) {
@@ -362,7 +362,7 @@ public class GpsMainActivity extends ActionBarActivity
                         String newProfileName = profile.getName().getText();
                         EventBus.getDefault().post(new ProfileEvents.SwitchToProfile(newProfileName));
 
-                        RefreshProfileIcon(profile.getName().getText());
+                        refreshProfileIcon(profile.getName().getText());
                         return true;
                     }
                 })
@@ -395,13 +395,13 @@ public class GpsMainActivity extends ActionBarActivity
                 .build();
 
 
-        PopulateProfilesList();
+        populateProfilesList();
 
 
         materialDrawer = new DrawerBuilder()
                 .withActivity(this)
                 .withSavedInstance(savedInstanceState)
-                .withToolbar(GetToolbar())
+                .withToolbar(getToolbar())
                 .withActionBarDrawerToggle(drawerToggle)
                 .withDrawerGravity(Gravity.LEFT)
                 .withAccountHeader(drawerHeader)
@@ -435,37 +435,37 @@ public class GpsMainActivity extends ActionBarActivity
 
                 switch (iDrawerItem.getIdentifier()) {
                     case 1000:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GENERAL);
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GENERAL);
                         break;
                     case 1001:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.LOGGING);
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.LOGGING);
                         break;
                     case 1002:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.PERFORMANCE);
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.PERFORMANCE);
                         break;
                     case 1003:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.UPLOAD);
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.UPLOAD);
                         break;
                     case 1004:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GDOCS);
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GDOCS);
                         break;
                     case 1005:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX);
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX);
                         break;
                     case 1006:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.EMAIL);
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.EMAIL);
                         break;
                     case 1007:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.FTP);
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.FTP);
                         break;
                     case 1008:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS);
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS);
                         break;
                     case 1009:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OSM);
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OSM);
                         break;
                     case 1010:
-                        LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD);
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD);
                         break;
                     case 1011:
                         Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
@@ -493,7 +493,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     }
 
-    private void RefreshProfileIcon(String profileName){
+    private void refreshProfileIcon(String profileName){
 
         ImageView imgLetter = (ImageView)drawerHeader.getView().findViewById(R.id.profiletextletter);
         TextDrawable drawLetter = TextDrawable.builder()
@@ -507,7 +507,7 @@ public class GpsMainActivity extends ActionBarActivity
         imgLetter.setImageDrawable(drawLetter);
     }
 
-    private void PopulateProfilesList() {
+    private void populateProfilesList() {
 
         tracer.debug("Current profile:" + AppSettings.getCurrentProfileName());
 
@@ -557,12 +557,12 @@ public class GpsMainActivity extends ActionBarActivity
 
         }
 
-        RefreshProfileIcon(AppSettings.getCurrentProfileName());
+        refreshProfileIcon(AppSettings.getCurrentProfileName());
 
 
     }
 
-    public void ToggleDrawer(){
+    public void toggleDrawer(){
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         if(materialDrawer.isDrawerOpen()){
             materialDrawer.closeDrawer();
@@ -573,16 +573,16 @@ public class GpsMainActivity extends ActionBarActivity
         }
     }
 
-    private int GetUserSelectedNavigationItem(){
+    private int getUserSelectedNavigationItem(){
         return AppSettings.getUserSelectedNavigationItem();
     }
 
-    private void LoadDefaultFragmentView() {
-        int currentSelectedPosition = GetUserSelectedNavigationItem();
-        LoadFragmentView(currentSelectedPosition);
+    private void loadDefaultFragmentView() {
+        int currentSelectedPosition = getUserSelectedNavigationItem();
+        loadFragmentView(currentSelectedPosition);
     }
 
-    private void LoadFragmentView(int position){
+    private void loadFragmentView(int position){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
         switch (position) {
@@ -604,7 +604,7 @@ public class GpsMainActivity extends ActionBarActivity
         transaction.commitAllowingStateLoss();
     }
 
-    private GenericViewFragment GetCurrentFragment(){
+    private GenericViewFragment getCurrentFragment(){
         Fragment currentFragment = getFragmentManager().findFragmentById(R.id.container);
         if (currentFragment instanceof GenericViewFragment) {
             return ((GenericViewFragment) currentFragment);
@@ -615,7 +615,7 @@ public class GpsMainActivity extends ActionBarActivity
     @Override
     public boolean onNavigationItemSelected(int position, long itemId) {
         AppSettings.setUserSelectedNavigationItem(position);
-        LoadFragmentView(position);
+        loadFragmentView(position);
         return true;
     }
 
@@ -684,8 +684,8 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void enableDisableMenuItems() {
 
-        OnWaitingForLocation(Session.isWaitingForLocation());
-        SetBulbStatus(Session.isStarted());
+        onWaitingForLocation(Session.isWaitingForLocation());
+        setBulbStatus(Session.isStarted());
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarBottom);
         MenuItem mnuAnnotate = toolbar.getMenu().findItem(R.id.mnuAnnotate);
@@ -728,36 +728,36 @@ public class GpsMainActivity extends ActionBarActivity
 
         switch (id) {
             case R.id.mnuAnnotate:
-                Annotate();
+                annotate();
                 return true;
             case R.id.mnuOnePoint:
-                LogSinglePoint();
+                logSinglePoint();
                 return true;
             case R.id.mnuShare:
-                Share();
+                share();
                 return true;
             case R.id.mnuOSM:
-                UploadToOpenStreetMap();
+                uploadToOpenStreetMap();
                 return true;
             case R.id.mnuDropBox:
-                UploadToDropBox();
+                uploadToDropBox();
                 return true;
             case R.id.mnuGDocs:
-                UploadToGoogleDocs();
+                uploadToGoogleDocs();
                 return true;
             case R.id.mnuOpenGTS:
-                SendToOpenGTS();
+                sendToOpenGTS();
                 return true;
             case R.id.mnuFtp:
-                SendToFtp();
+                sendToFtp();
                 return true;
             case R.id.mnuEmail:
-                SelectAndEmailFile();
+                selectAndEmailFile();
                 return true;
             case R.id.mnuAutoSendNow:
-                ForceAutoSendNow();
+                forceAutoSendNow();
             case R.id.mnuOwnCloud:
-                UploadToOwnCloud();
+                uploadToOwnCloud();
                 return true;
             default:
                 return true;
@@ -765,7 +765,7 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
 
-    private void ForceAutoSendNow() {
+    private void forceAutoSendNow() {
         tracer.debug("User forced an auto send");
 
         if (AppSettings.isAutoSendEnabled()) {
@@ -773,11 +773,11 @@ public class GpsMainActivity extends ActionBarActivity
             EventBus.getDefault().post(new CommandEvents.AutoSend(null));
 
         } else {
-            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.UPLOAD);
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.UPLOAD);
         }
     }
 
-    private void LogSinglePoint() {
+    private void logSinglePoint() {
         EventBus.getDefault().post(new CommandEvents.LogOnce());
         enableDisableMenuItems();
     }
@@ -787,7 +787,7 @@ public class GpsMainActivity extends ActionBarActivity
      * The user is prompted for the content of the <name> tag. If a valid
      * description is given, the logging service starts in single point mode.
      */
-    private void Annotate() {
+    private void annotate() {
 
         if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml() && !AppSettings.shouldLogToCustomUrl()) {
             Toast.makeText(getApplicationContext(), getString(R.string.annotation_requires_logging), Toast.LENGTH_SHORT).show();
@@ -815,72 +815,72 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
 
-    private void UploadToOpenStreetMap() {
-        if (!FileSenderFactory.GetOsmSender().IsAvailable()) {
-            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OSM);
+    private void uploadToOpenStreetMap() {
+        if (!FileSenderFactory.GetOsmSender().isAvailable()) {
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OSM);
             return;
         }
 
-        ShowFileListDialog(FileSenderFactory.GetOsmSender());
+        showFileListDialog(FileSenderFactory.GetOsmSender());
     }
 
-    private void UploadToDropBox() {
+    private void uploadToDropBox() {
 
-        if (!FileSenderFactory.GetDropBoxSender().IsAvailable()) {
-            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX);
+        if (!FileSenderFactory.GetDropBoxSender().isAvailable()) {
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX);
             return;
         }
 
-        ShowFileListDialog(FileSenderFactory.GetDropBoxSender());
+        showFileListDialog(FileSenderFactory.GetDropBoxSender());
     }
 
 
 
-    private void UploadToOwnCloud() {
+    private void uploadToOwnCloud() {
 
-        if (!FileSenderFactory.GetOwnCloudSender().IsAvailable()) {
-            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD);
+        if (!FileSenderFactory.GetOwnCloudSender().isAvailable()) {
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD);
             return;
         }
 
-        ShowFileListDialog(FileSenderFactory.GetOwnCloudSender());
+        showFileListDialog(FileSenderFactory.GetOwnCloudSender());
     }
 
-    private void SendToOpenGTS() {
-        if (!FileSenderFactory.GetOpenGTSSender().IsAvailable()) {
-            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS);
+    private void sendToOpenGTS() {
+        if (!FileSenderFactory.GetOpenGTSSender().isAvailable()) {
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS);
         } else {
-            ShowFileListDialog(FileSenderFactory.GetOpenGTSSender());
+            showFileListDialog(FileSenderFactory.GetOpenGTSSender());
         }
     }
 
-    private void UploadToGoogleDocs() {
-        if (!FileSenderFactory.GetGDocsSender().IsAvailable()) {
-            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GDOCS);
+    private void uploadToGoogleDocs() {
+        if (!FileSenderFactory.GetGDocsSender().isAvailable()) {
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GDOCS);
             return;
         }
 
-        ShowFileListDialog(FileSenderFactory.GetGDocsSender());
+        showFileListDialog(FileSenderFactory.GetGDocsSender());
     }
 
-    private void SendToFtp() {
-        if (!FileSenderFactory.GetFtpSender().IsAvailable()) {
-            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.FTP);
+    private void sendToFtp() {
+        if (!FileSenderFactory.GetFtpSender().isAvailable()) {
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.FTP);
         } else {
             IFileSender fs = FileSenderFactory.GetFtpSender();
-            ShowFileListDialog(fs);
+            showFileListDialog(fs);
         }
     }
 
-    private void SelectAndEmailFile() {
-        if (!FileSenderFactory.GetEmailSender().IsAvailable()) {
-            LaunchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.EMAIL);
+    private void selectAndEmailFile() {
+        if (!FileSenderFactory.GetEmailSender().isAvailable()) {
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.EMAIL);
         } else {
-            ShowFileListDialog(FileSenderFactory.GetEmailSender());
+            showFileListDialog(FileSenderFactory.GetEmailSender());
         }
     }
 
-    private void ShowFileListDialog(final IFileSender sender) {
+    private void showFileListDialog(final IFileSender sender) {
 
         if (!Utilities.isNetworkAvailable(this)) {
             Utilities.MsgBox(getString(R.string.sorry),getString(R.string.no_network_message), this);
@@ -931,7 +931,7 @@ public class GpsMainActivity extends ActionBarActivity
                                 Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.please_wait),
                                         getString(R.string.please_wait));
                                 userInvokedUpload = true;
-                                sender.UploadFile(chosenFiles);
+                                sender.uploadFile(chosenFiles);
 
                             }
                             return true;
@@ -948,7 +948,7 @@ public class GpsMainActivity extends ActionBarActivity
      * using a provider. 'Provider' means any application that can accept such
      * an intent (Facebook, SMS, Twitter, Email, K-9, Bluetooth)
      */
-    private void Share() {
+    private void share() {
 
         try {
 
@@ -1053,7 +1053,7 @@ public class GpsMainActivity extends ActionBarActivity
     /**
      * Starts the service and binds the activity to it.
      */
-    private void StartAndBindService() {
+    private void startAndBindService() {
         serviceIntent = new Intent(this, GpsLoggingService.class);
         // Start the service in case it isn't already running
         startService(serviceIntent);
@@ -1066,7 +1066,7 @@ public class GpsMainActivity extends ActionBarActivity
     /**
      * Stops the service if it isn't logging. Also unbinds.
      */
-    private void StopAndUnbindServiceIfRequired() {
+    private void stopAndUnbindServiceIfRequired() {
         if (Session.isBoundToService()) {
 
             try {
@@ -1087,22 +1087,22 @@ public class GpsMainActivity extends ActionBarActivity
         }
     }
 
-    private void SetBulbStatus(boolean started) {
+    private void setBulbStatus(boolean started) {
         ImageView bulb = (ImageView) findViewById(R.id.notification_bulb);
         bulb.setImageResource(started ? R.drawable.circle_green : R.drawable.circle_none);
     }
 
-    public void SetAnnotationReady() {
+    public void setAnnotationReady() {
         Session.setAnnotationMarked(true);
         enableDisableMenuItems();
     }
 
-    public void SetAnnotationDone() {
+    public void setAnnotationDone() {
         Session.setAnnotationMarked(false);
         enableDisableMenuItems();
     }
 
-    public void OnWaitingForLocation(boolean inProgress) {
+    public void onWaitingForLocation(boolean inProgress) {
         ProgressBar fixBar = (ProgressBar) findViewById(R.id.progressBarGpsFix);
         fixBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
     }
@@ -1225,16 +1225,16 @@ public class GpsMainActivity extends ActionBarActivity
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.WaitingForLocation waitingForLocation){
-        OnWaitingForLocation(waitingForLocation.waiting);
+        onWaitingForLocation(waitingForLocation.waiting);
     }
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.AnnotationStatus annotationStatus){
         if(annotationStatus.annotationWritten){
-            SetAnnotationDone();
+            setAnnotationDone();
         }
         else {
-            SetAnnotationReady();
+            setAnnotationReady();
         }
     }
 
@@ -1252,7 +1252,7 @@ public class GpsMainActivity extends ActionBarActivity
             File f = new File(Utilities.GetDefaultStorageFolder(GpsMainActivity.this), createProfileEvent.newProfileName+".properties");
             f.createNewFile();
 
-            PopulateProfilesList();
+            populateProfilesList();
 
         } catch (IOException e) {
             tracer.error("Could not create properties file for new profile ", e);
@@ -1266,6 +1266,6 @@ public class GpsMainActivity extends ActionBarActivity
         File f = new File(Utilities.GetDefaultStorageFolder(GpsMainActivity.this), deleteProfileEvent.profileName+".properties");
         f.delete();
 
-        PopulateProfilesList();
+        populateProfilesList();
     }
 }

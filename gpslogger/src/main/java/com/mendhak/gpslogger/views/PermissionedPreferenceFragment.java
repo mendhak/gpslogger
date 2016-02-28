@@ -22,7 +22,7 @@ public class PermissionedPreferenceFragment extends PreferenceFragment implement
     public void onShowPermissionRationale(List<String> list, final RuntimePermissionRequest runtimePermissionRequest) {
         Utilities.MsgBox(getString(R.string.gpslogger_permissions_rationale_title), getString(R.string.gpslogger_permissions_rationale_message_basic), getActivity(), new IMessageBoxCallback() {
             @Override
-            public void MessageBoxResult(int which) {
+            public void messageBoxResult(int which) {
                 runtimePermissionRequest.retry();
             }
         });

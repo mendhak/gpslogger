@@ -53,14 +53,14 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         tracer = LoggerFactory.getLogger(GenericViewFragment.class.getSimpleName());
-        RegisterEventBus();
+        registerEventBus();
     }
 
-    private void RegisterEventBus() {
+    private void registerEventBus() {
         EventBus.getDefault().register(this);
     }
 
-    private void UnregisterEventBus() {
+    private void unregisterEventBus() {
         try {
             EventBus.getDefault().unregister(this);
         } catch (Throwable t) {
@@ -70,7 +70,7 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
 
     @Override
     public void onDestroy() {
-        UnregisterEventBus();
+        unregisterEventBus();
         super.onDestroy();
     }
 
@@ -95,10 +95,10 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
 
 
     @AskPermission({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    public void RequestToggleLogging() {
+    public void requestToggleLogging() {
 
         if (Session.isStarted()) {
-            ToggleLogging();
+            toggleLogging();
             return;
         }
 
@@ -117,14 +117,14 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
                             if (!Utilities.IsNullOrEmpty(userInput.getText().toString()) && !userInput.getText().toString().equalsIgnoreCase(chosenFileName)) {
                                 AppSettings.setCustomFileName(userInput.getText().toString());
                             }
-                            ToggleLogging();
+                            toggleLogging();
                         }
                     })
                     .keyListener(new DialogInterface.OnKeyListener() {
                         @Override
                         public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                             if (keyCode == KeyEvent.KEYCODE_BACK) {
-                                ToggleLogging();
+                                toggleLogging();
                                 dialog.dismiss();
                             }
                             return true;
@@ -140,11 +140,11 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
             alertDialog.show();
 
         } else {
-            ToggleLogging();
+            toggleLogging();
         }
     }
 
-    public void ToggleLogging() {
+    public void toggleLogging() {
         EventBus.getDefault().post(new CommandEvents.RequestToggle());
     }
 

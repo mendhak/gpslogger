@@ -17,9 +17,7 @@
 
 package com.mendhak.gpslogger.senders.osm;
 
-import android.content.Context;
 import com.mendhak.gpslogger.BuildConfig;
-import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
@@ -46,16 +44,16 @@ public class OpenStreetMapManager implements IFileSender {
 
     }
 
-    public OAuthProvider GetOSMAuthProvider() {
+    public OAuthProvider getOSMAuthProvider() {
         return new CommonsHttpOAuthProvider(OSM_REQUESTTOKEN_URL, OSM_ACCESSTOKEN_URL, OSM_AUTHORIZE_URL);
     }
 
-    protected boolean IsOsmAuthorized() {
+    protected boolean isOsmAuthorized() {
         String oAuthAccessToken = AppSettings.getOSMAccessToken();
         return (oAuthAccessToken != null && oAuthAccessToken.length() > 0);
     }
 
-    public OAuthConsumer GetOSMAuthConsumer() {
+    public OAuthConsumer getOSMAuthConsumer() {
 
         OAuthConsumer consumer = null;
 
@@ -82,23 +80,23 @@ public class OpenStreetMapManager implements IFileSender {
     }
 
     @Override
-    public void UploadFile(List<File> files) {
+    public void uploadFile(List<File> files) {
         for (File f : files) {
             if (f.getName().contains(".gpx")) {
-                UploadFile(f.getName());
+                uploadFile(f.getName());
             }
         }
     }
 
     @Override
-    public boolean IsAvailable() {
-        return AppSettings.isOsmAutoSendEnabled() && IsOsmAuthorized();
+    public boolean isAvailable() {
+        return AppSettings.isOsmAutoSendEnabled() && isOsmAuthorized();
     }
 
-    public void UploadFile(String fileName) {
+    public void uploadFile(String fileName) {
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
         File chosenFile = new File(gpxFolder, fileName);
-        OAuthConsumer consumer = GetOSMAuthConsumer();
+        OAuthConsumer consumer = getOSMAuthConsumer();
         String gpsTraceUrl = OSM_GPSTRACE_URL;
 
 

@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 
 public class NotificationAnnotationActivity extends Activity {
 
-    //Called from the 'Annotate' button in the Notification
+    //Called from the 'annotate' button in the Notification
     //This in turn captures user input and sends the input to the GPS Logging Service
 
     private org.slf4j.Logger tracer;

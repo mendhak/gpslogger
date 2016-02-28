@@ -75,13 +75,13 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
             int minutes = seconds / 60;
             seconds = seconds % 60;
 
-            ShowLogcatMessages();
+            showLogcatMessages();
             timerHandler.postDelayed(this, 1500);
         }
     };
 
 
-    private void ShowLogcatMessages(){
+    private void showLogcatMessages(){
 
         CheckBox chkLocationsOnly = (CheckBox) rootView.findViewById(R.id.logview_chkLocationsOnly);
         CheckBox chkAutoScroll = (CheckBox) rootView.findViewById(R.id.logview_chkAutoScroll);

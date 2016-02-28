@@ -27,7 +27,7 @@ public class Kml22AnnotateHandlerTest {
                 .withSpeed(188.44f)
                 .build();
 
-        String actual = kmlHandler.GetPlacemarkXml("This is the annotation",loc);
+        String actual = kmlHandler.getPlacemarkXml("This is the annotation", loc);
         String expected = "<Placemark><name>This is the annotation</name><Point><coordinates>19.111,12.193,9001.0</coordinates></Point></Placemark>\n";
 
         assertThat("Basic Placemark XML", actual, is(expected));

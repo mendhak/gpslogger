@@ -103,7 +103,7 @@ public class FileSenderFactory {
 
             tracer.info("Zipping file");
             ZipHelper zh = new ZipHelper(filePaths.toArray(new String[filePaths.size()]), zipFile.getAbsolutePath());
-            zh.Zip();
+            zh.zipFiles();
 
             zipFiles.clear();
             zipFiles.add(zipFile);
@@ -115,14 +115,14 @@ public class FileSenderFactory {
             tracer.debug("Sender: " + sender.getClass().getName());
             //Special case for OSM Uploader
             if(!sender.accept(null, ".zip")){
-                sender.UploadFile(files);
+                sender.uploadFile(files);
                 continue;
             }
 
             if(AppSettings.shouldSendZipFile()){
-                sender.UploadFile(zipFiles);
+                sender.uploadFile(zipFiles);
             } else {
-                sender.UploadFile(files);
+                sender.uploadFile(files);
             }
 
         }
@@ -135,31 +135,31 @@ public class FileSenderFactory {
 
 
         GoogleDriveManager googleDriveManager = new GoogleDriveManager();
-        if(GetGDocsSender().IsAvailable()){
+        if(GetGDocsSender().isAvailable()){
             senders.add(googleDriveManager);
         }
 
-        if(GetOsmSender().IsAvailable()){
+        if(GetOsmSender().isAvailable()){
             senders.add(GetOsmSender());
         }
 
-        if(GetEmailSender().IsAvailable()){
+        if(GetEmailSender().isAvailable()){
             senders.add(GetEmailSender());
         }
 
-        if(GetDropBoxSender().IsAvailable()){
+        if(GetDropBoxSender().isAvailable()){
             senders.add(GetDropBoxSender());
         }
 
-        if(GetOpenGTSSender().IsAvailable()){
+        if(GetOpenGTSSender().isAvailable()){
             senders.add(GetOpenGTSSender());
         }
 
-        if(GetFtpSender().IsAvailable()){
+        if(GetFtpSender().isAvailable()){
             senders.add(GetFtpSender());
         }
 
-        if(GetOwnCloudSender().IsAvailable()){
+        if(GetOwnCloudSender().isAvailable()){
             senders.add(GetOwnCloudSender());
         }
 

@@ -43,21 +43,21 @@ public class FtpFragment
 
         Preference testFtp = findPreference("autoftp_test");
         testFtp.setOnPreferenceClickListener(this);
-        RegisterEventBus();
+        registerEventBus();
     }
 
     @Override
     public void onDestroy() {
 
-        UnregisterEventBus();
+        unregisterEventBus();
         super.onDestroy();
     }
 
-    private void RegisterEventBus() {
+    private void registerEventBus() {
         EventBus.getDefault().register(this);
     }
 
-    private void UnregisterEventBus(){
+    private void unregisterEventBus(){
         try {
             EventBus.getDefault().unregister(this);
         } catch (Throwable t){
@@ -65,7 +65,7 @@ public class FtpFragment
         }
     }
 
-    private boolean IsFormValid() {
+    private boolean isFormValid() {
 
         CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("autoftp_enabled");
         MaterialEditTextPreference txtServer = (MaterialEditTextPreference) findPreference("autoftp_server");
@@ -95,7 +95,7 @@ public class FtpFragment
         CustomSwitchPreference implicitPreference = (CustomSwitchPreference) findPreference("autoftp_implicit");
         MaterialEditTextPreference directoryPreference = (MaterialEditTextPreference) findPreference("autoftp_directory");
 
-        if (!helper.ValidSettings(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
+        if (!helper.validSettings(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
                 Integer.valueOf(portPreference.getText()), useFtpsPreference.isChecked(), sslTlsPreference.getValue(),
                 implicitPreference.isChecked())) {
             Utilities.MsgBox(getString(R.string.autoftp_invalid_settings),
@@ -108,7 +108,7 @@ public class FtpFragment
                 getString(R.string.please_wait));
 
 
-        helper.TestFtp(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
+        helper.testFtp(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
                 directoryPreference.getText(), Integer.valueOf(portPreference.getText()), useFtpsPreference.isChecked(),
                 sslTlsPreference.getValue(), implicitPreference.isChecked());
 
@@ -117,8 +117,8 @@ public class FtpFragment
 
 
     @Override
-    public boolean IsValid() {
-        return IsFormValid();
+    public boolean isValid() {
+        return isFormValid();
     }
 
     @EventBusHook

@@ -39,14 +39,14 @@ public class CustomUrlLogger implements IFileLogger {
     }
 
     @Override
-    public void Write(Location loc) throws Exception {
+    public void write(Location loc) throws Exception {
         if (!Session.hasDescription()) {
-            Annotate("", loc);
+            annotate("", loc);
         }
     }
 
     @Override
-    public void Annotate(String description, Location loc) throws Exception {
+    public void annotate(String description, Location loc) throws Exception {
         JobManager jobManager = AppSettings.GetJobManager();
         jobManager.addJobInBackground(new CustomUrlJob(customLoggingUrl, loc, description, satellites, batteryLevel, androidId));
     }

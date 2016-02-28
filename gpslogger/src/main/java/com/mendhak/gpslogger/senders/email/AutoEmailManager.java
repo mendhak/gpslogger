@@ -37,7 +37,7 @@ public class AutoEmailManager implements IFileSender {
     }
 
     @Override
-    public void UploadFile(List<File> files) {
+    public void uploadFile(List<File> files) {
 
         ArrayList<File> filesToSend = new ArrayList<>();
 
@@ -60,7 +60,7 @@ public class AutoEmailManager implements IFileSender {
     }
 
     @Override
-    public boolean IsAvailable() {
+    public boolean isAvailable() {
         return preferenceHelper.isEmailAutoSendEnabled()
                 && preferenceHelper.getAutoEmailTargets().length() > 0
                 && preferenceHelper.getSmtpServer().length() > 0
@@ -69,7 +69,7 @@ public class AutoEmailManager implements IFileSender {
     }
 
 
-    void SendTestEmail(String smtpServer, String smtpPort,
+    void sendTestEmail(String smtpServer, String smtpPort,
                        String smtpUsername, String smtpPassword, boolean smtpUseSsl,
                        String emailTarget, String fromAddress) {
 

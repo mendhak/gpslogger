@@ -89,13 +89,13 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestToggleLogging();
+                requestToggleLogging();
             }
         });
 
 
         if (Session.hasValidLocation()) {
-            DisplayLocationInfo(Session.getCurrentLocationInfo());
+            displayLocationInfo(Session.getCurrentLocationInfo());
         }
 
 
@@ -195,11 +195,11 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         Inactive
     }
 
-    private void ClearColor(ImageView imgView){
-        SetColor(imgView, IconColorIndicator.Inactive);
+    private void clearColor(ImageView imgView){
+        setColor(imgView, IconColorIndicator.Inactive);
     }
 
-    private void SetColor(ImageView imgView, IconColorIndicator colorIndicator ){
+    private void setColor(ImageView imgView, IconColorIndicator colorIndicator){
         imgView.clearColorFilter();
 
         if(colorIndicator == IconColorIndicator.Inactive){
@@ -282,17 +282,17 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LocationUpdate locationUpdate){
-        DisplayLocationInfo(locationUpdate.location);
+        displayLocationInfo(locationUpdate.location);
     }
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.SatelliteCount satelliteCount){
-        SetSatelliteCount(satelliteCount.satelliteCount);
+        setSatelliteCount(satelliteCount.satelliteCount);
     }
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.WaitingForLocation waitingForLocation){
-        OnWaitingForLocation(waitingForLocation.waiting);
+        onWaitingForLocation(waitingForLocation.waiting);
     }
 
     @EventBusHook
@@ -304,7 +304,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             setActionButtonStop();
         }
         else {
-            SetSatelliteCount(-1);
+            setSatelliteCount(-1);
             setActionButtonStart();
         }
     }
@@ -314,7 +314,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         showCurrentFileName(fileNamed.newFileName);
     }
 
-    public void DisplayLocationInfo(Location locationInfo){
+    public void displayLocationInfo(Location locationInfo){
         showPreferencesSummary();
 
         NumberFormat nf = NumberFormat.getInstance();
@@ -328,7 +328,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
 
         ImageView imgAccuracy = (ImageView) rootView.findViewById(R.id.simpleview_imgAccuracy);
-        ClearColor(imgAccuracy);
+        clearColor(imgAccuracy);
 
         if (locationInfo.hasAccuracy()) {
 
@@ -337,42 +337,42 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             txtAccuracy.setText(Utilities.GetDistanceDisplay(getActivity(), accuracy, AppSettings.shouldDisplayImperialUnits()));
 
             if (accuracy > 500) {
-                SetColor(imgAccuracy, IconColorIndicator.Warning);
+                setColor(imgAccuracy, IconColorIndicator.Warning);
             }
 
             if (accuracy > 900) {
-                SetColor(imgAccuracy, IconColorIndicator.Bad);
+                setColor(imgAccuracy, IconColorIndicator.Bad);
             } else {
-                SetColor(imgAccuracy, IconColorIndicator.Good);
+                setColor(imgAccuracy, IconColorIndicator.Good);
             }
         }
 
         ImageView imgAltitude = (ImageView)rootView.findViewById(R.id.simpleview_imgAltitude);
-        ClearColor(imgAltitude);
+        clearColor(imgAltitude);
 
         if (locationInfo.hasAltitude()) {
-            SetColor(imgAltitude, IconColorIndicator.Good);
+            setColor(imgAltitude, IconColorIndicator.Good);
             TextView txtAltitude = (TextView) rootView.findViewById(R.id.simpleview_txtAltitude);
 
             txtAltitude.setText(Utilities.GetDistanceDisplay(getActivity(), locationInfo.getAltitude(), AppSettings.shouldDisplayImperialUnits()));
         }
 
         ImageView imgSpeed = (ImageView)rootView.findViewById(R.id.simpleview_imgSpeed);
-        ClearColor(imgSpeed);
+        clearColor(imgSpeed);
 
         if (locationInfo.hasSpeed()) {
 
-            SetColor(imgSpeed, IconColorIndicator.Good);
+            setColor(imgSpeed, IconColorIndicator.Good);
 
             TextView txtSpeed = (TextView) rootView.findViewById(R.id.simpleview_txtSpeed);
             txtSpeed.setText(Utilities.GetSpeedDisplay(getActivity(),locationInfo.getSpeed(),AppSettings.shouldDisplayImperialUnits()));
         }
 
         ImageView imgDirection = (ImageView) rootView.findViewById(R.id.simpleview_imgDirection);
-        ClearColor(imgDirection);
+        clearColor(imgDirection);
 
         if (locationInfo.hasBearing()) {
-            SetColor(imgDirection, IconColorIndicator.Good);
+            setColor(imgDirection, IconColorIndicator.Good);
             imgDirection.setRotation(locationInfo.getBearing());
 
             TextView txtDirection = (TextView) rootView.findViewById(R.id.simpleview_txtDirection);
@@ -396,7 +396,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
         String providerName = locationInfo.getProvider();
         if (!providerName.equalsIgnoreCase(LocationManager.GPS_PROVIDER)) {
-            SetSatelliteCount(-1);
+            setSatelliteCount(-1);
         }
     }
 
@@ -407,26 +407,26 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         txtLatitude.setText("");
 
         ImageView imgAccuracy = (ImageView)rootView.findViewById(R.id.simpleview_imgAccuracy);
-        ClearColor(imgAccuracy);
+        clearColor(imgAccuracy);
 
         TextView txtAccuracy = (TextView) rootView.findViewById(R.id.simpleview_txtAccuracy);
         txtAccuracy.setText("");
         txtAccuracy.setTextColor(getResources().getColor(android.R.color.black));
 
         ImageView imgAltitude = (ImageView)rootView.findViewById(R.id.simpleview_imgAltitude);
-        ClearColor(imgAltitude);
+        clearColor(imgAltitude);
 
         TextView txtAltitude = (TextView) rootView.findViewById(R.id.simpleview_txtAltitude);
         txtAltitude.setText("");
 
         ImageView imgDirection = (ImageView)rootView.findViewById(R.id.simpleview_imgDirection);
-        ClearColor(imgDirection);
+        clearColor(imgDirection);
 
         TextView txtDirection = (TextView) rootView.findViewById(R.id.simpleview_txtDirection);
         txtDirection.setText("");
 
         ImageView imgSpeed = (ImageView)rootView.findViewById(R.id.simpleview_imgSpeed);
-        ClearColor(imgSpeed);
+        clearColor(imgSpeed);
 
         TextView txtSpeed = (TextView) rootView.findViewById(R.id.simpleview_txtSpeed);
         txtSpeed.setText("");
@@ -444,12 +444,12 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
 
 
-    public void SetSatelliteCount(int count) {
+    public void setSatelliteCount(int count) {
         ImageView imgSatelliteCount = (ImageView) rootView.findViewById(R.id.simpleview_imgSatelliteCount);
         TextView txtSatelliteCount = (TextView) rootView.findViewById(R.id.simpleview_txtSatelliteCount);
 
         if(count > -1) {
-            SetColor(imgSatelliteCount, IconColorIndicator.Good);
+            setColor(imgSatelliteCount, IconColorIndicator.Good);
 
             AlphaAnimation fadeIn = new AlphaAnimation(0.6f, 1.0f);
             fadeIn.setDuration(1200);
@@ -458,13 +458,13 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             txtSatelliteCount.setText(String.valueOf(count));
         }
         else {
-            ClearColor(imgSatelliteCount);
+            clearColor(imgSatelliteCount);
             txtSatelliteCount.setText("");
         }
 
     }
 
-    public void OnWaitingForLocation(boolean inProgress) {
+    public void onWaitingForLocation(boolean inProgress) {
 
         tracer.debug(inProgress + "");
 

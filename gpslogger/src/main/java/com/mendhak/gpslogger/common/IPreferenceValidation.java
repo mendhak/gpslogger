@@ -20,6 +20,6 @@ package com.mendhak.gpslogger.common;
 
 public interface IPreferenceValidation  {
 
-    public abstract boolean IsValid();
+    public abstract boolean isValid();
 
 }

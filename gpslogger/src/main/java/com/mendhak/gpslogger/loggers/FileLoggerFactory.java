@@ -77,13 +77,13 @@ public class FileLoggerFactory {
 
     public static void Write(Context context, Location loc) throws Exception {
         for (IFileLogger logger : GetFileLoggers(context)) {
-            logger.Write(loc);
+            logger.write(loc);
         }
     }
 
     public static void Annotate(Context context, String description, Location loc) throws Exception {
         for (IFileLogger logger : GetFileLoggers(context)) {
-            logger.Annotate(description, loc);
+            logger.annotate(description, loc);
         }
     }
 }

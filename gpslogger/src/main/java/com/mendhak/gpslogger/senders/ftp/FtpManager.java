@@ -40,7 +40,7 @@ public class FtpManager implements IFileSender {
     public FtpManager() {
     }
 
-    void TestFtp(String servername, String username, String password, String directory, int port, boolean useFtps, String protocol, boolean implicit) {
+    void testFtp(String servername, String username, String password, String directory, int port, boolean useFtps, String protocol, boolean implicit) {
 
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
@@ -75,25 +75,25 @@ public class FtpManager implements IFileSender {
     }
 
     @Override
-    public void UploadFile(List<File> files) {
-        if (!ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(), AppSettings.getFtpPassword(),
+    public void uploadFile(List<File> files) {
+        if (!validSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(), AppSettings.getFtpPassword(),
                 AppSettings.getFtpPort(), AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit())) {
             EventBus.getDefault().post(new UploadEvents.Ftp(false));
         }
 
         for (File f : files) {
-            UploadFile(f);
+            uploadFile(f);
         }
     }
 
     @Override
-    public boolean IsAvailable() {
-        return ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(),
+    public boolean isAvailable() {
+        return validSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(),
                 AppSettings.getFtpPassword(), AppSettings.getFtpPort(), AppSettings.FtpUseFtps(),
                 AppSettings.getFtpProtocol(), AppSettings.FtpImplicit());
     }
 
-    public void UploadFile(File f) {
+    public void uploadFile(File f) {
 
         JobManager jobManager = AppSettings.GetJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, FtpJob.getJobTag(f));
@@ -109,7 +109,7 @@ public class FtpManager implements IFileSender {
     }
 
 
-    public boolean ValidSettings(String servername, String username, String password, Integer port, boolean useFtps,
+    public boolean validSettings(String servername, String username, String password, Integer port, boolean useFtps,
                                  String sslTls, boolean implicit) {
         boolean retVal = servername != null && servername.length() > 0 && port != null && port > 0;
 

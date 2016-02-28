@@ -48,7 +48,7 @@ public class GoogleDriveManager implements IFileSender {
     public GoogleDriveManager() {
     }
 
-    public String GetOauth2Scope() {
+    public String getOauth2Scope() {
         return "oauth2:https://www.googleapis.com/auth/drive.file";
     }
 
@@ -58,30 +58,30 @@ public class GoogleDriveManager implements IFileSender {
      * Returns whether the app is authorized to perform Google API operations
      *
      */
-    protected boolean IsLinked() {
+    protected boolean isLinked() {
         return !Utilities.IsNullOrEmpty(AppSettings.getGoogleDriveAccountName()) && !Utilities.IsNullOrEmpty(AppSettings.getGoogleDriveAuthToken());
     }
 
     @Override
-    public void UploadFile(List<File> files) {
+    public void uploadFile(List<File> files) {
         for (File f : files) {
-            UploadFile(f.getName(), null);
+            uploadFile(f.getName(), null);
         }
     }
 
 
     @Override
-    public boolean IsAvailable() {
-        return AppSettings.isGDocsAutoSendEnabled() && IsLinked();
+    public boolean isAvailable() {
+        return AppSettings.isGDocsAutoSendEnabled() && isLinked();
     }
 
-    public void UploadTestFile(File file, String googleDriveFolderName){
+    public void uploadTestFile(File file, String googleDriveFolderName){
 
-        UploadFile(file.getName(), googleDriveFolderName);
+        uploadFile(file.getName(), googleDriveFolderName);
     }
 
-    public void UploadFile(final String fileName, @Nullable String googleDriveFolderName) {
-        if (!IsLinked()) {
+    public void uploadFile(final String fileName, @Nullable String googleDriveFolderName) {
+        if (!isLinked()) {
             EventBus.getDefault().post(new UploadEvents.GDocs(false));
             return;
         }
@@ -108,7 +108,7 @@ public class GoogleDriveManager implements IFileSender {
 
         } catch (Exception e) {
             EventBus.getDefault().post(new UploadEvents.GDocs(false));
-            tracer.error("GoogleDriveManager.UploadFile", e);
+            tracer.error("GoogleDriveManager.uploadFile", e);
         }
     }
 

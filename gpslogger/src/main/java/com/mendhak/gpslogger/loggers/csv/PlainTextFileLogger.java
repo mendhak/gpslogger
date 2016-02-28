@@ -45,7 +45,7 @@ public class PlainTextFileLogger implements IFileLogger {
     }
 
     @Override
-    public void Write(Location loc) throws Exception {
+    public void write(Location loc) throws Exception {
         if (!file.exists()) {
             file.createNewFile();
 
@@ -78,7 +78,7 @@ public class PlainTextFileLogger implements IFileLogger {
     }
 
     @Override
-    public void Annotate(String description, Location loc) throws Exception {
+    public void annotate(String description, Location loc) throws Exception {
         // TODO Auto-generated method stub
 
     }

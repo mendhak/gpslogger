@@ -27,21 +27,21 @@ public class OwnCloudSettingsFragment
 
         Preference testOwnCloud = findPreference("owncloud_test");
         testOwnCloud.setOnPreferenceClickListener(this);
-        RegisterEventBus();
+        registerEventBus();
     }
 
     @Override
     public void onDestroy() {
 
-        UnregisterEventBus();
+        unregisterEventBus();
         super.onDestroy();
     }
 
-    private void RegisterEventBus() {
+    private void registerEventBus() {
         EventBus.getDefault().register(this);
     }
 
-    private void UnregisterEventBus(){
+    private void unregisterEventBus(){
         try {
             EventBus.getDefault().unregister(this);
         } catch (Throwable t){
@@ -50,7 +50,7 @@ public class OwnCloudSettingsFragment
     }
 
     @Override
-    public boolean IsValid() {
+    public boolean isValid() {
         CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("owncloud_enabled");
         MaterialEditTextPreference txtServer = (MaterialEditTextPreference) findPreference("owncloud_server");
         MaterialEditTextPreference txtUserName = (MaterialEditTextPreference) findPreference("owncloud_username");
@@ -83,7 +83,7 @@ public class OwnCloudSettingsFragment
 
         Utilities.ShowProgress(getActivity(), getString(R.string.owncloud_testing), getString(R.string.please_wait));
         OwnCloudManager helper = new OwnCloudManager();
-        helper.TestOwnCloud(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
+        helper.testOwnCloud(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
                 directoryPreference.getText());
 
         return true;

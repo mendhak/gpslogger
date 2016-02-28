@@ -39,7 +39,7 @@ public class OpenGTSLogger implements IFileLogger {
     }
 
     @Override
-    public void Write(Location loc) throws Exception {
+    public void write(Location loc) throws Exception {
 
         String server = AppSettings.getOpenGTSServer();
         int port = Integer.parseInt(AppSettings.getOpenGTSServerPort());
@@ -53,7 +53,7 @@ public class OpenGTSLogger implements IFileLogger {
     }
 
     @Override
-    public void Annotate(String description, Location loc) throws Exception {
+    public void annotate(String description, Location loc) throws Exception {
     }
 
     @Override

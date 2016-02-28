@@ -77,16 +77,16 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestToggleLogging();
+                requestToggleLogging();
             }
         });
 
 
         if (Session.hasValidLocation()) {
-            DisplayLocationInfo(Session.getCurrentLocationInfo());
+            displayLocationInfo(Session.getCurrentLocationInfo());
         }
 
-        ShowPreferencesAndMessages();
+        showPreferencesAndMessages();
 
         return rootView;
     }
@@ -121,7 +121,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             setActionButtonStart();
         }
 
-        ShowPreferencesAndMessages();
+        showPreferencesAndMessages();
         super.onResume();
     }
 
@@ -129,7 +129,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
      * Displays a human readable summary of the preferences chosen by the user
      * on the main form
      */
-    private void ShowPreferencesAndMessages() {
+    private void showPreferencesAndMessages() {
 
         try {
             TextView txtLoggingTo = (TextView) rootView.findViewById(R.id.detailedview_loggingto_text);
@@ -190,27 +190,27 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
             if(AppSettings.isAutoSendEnabled()){
                 StringBuilder sb = new StringBuilder();
-                if (FileSenderFactory.GetEmailSender().IsAvailable()) {
+                if (FileSenderFactory.GetEmailSender().isAvailable()) {
                     sb.append(getString(R.string.autoemail_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetFtpSender().IsAvailable()) {
+                if (FileSenderFactory.GetFtpSender().isAvailable()) {
                     sb.append(getString(R.string.autoftp_setup_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetGDocsSender().IsAvailable()) {
+                if (FileSenderFactory.GetGDocsSender().isAvailable()) {
                     sb.append(getString(R.string.gdocs_setup_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetOsmSender().IsAvailable()) {
+                if (FileSenderFactory.GetOsmSender().isAvailable()) {
                     sb.append(getString(R.string.osm_setup_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetDropBoxSender().IsAvailable()) {
+                if (FileSenderFactory.GetDropBoxSender().isAvailable()) {
                     sb.append(getString(R.string.dropbox_setup_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetOpenGTSSender().IsAvailable()) {
+                if (FileSenderFactory.GetOpenGTSSender().isAvailable()) {
                     sb.append(getString(R.string.opengts_setup_title)).append("\n");
                 }
 
@@ -223,7 +223,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
 
         } catch (Exception ex) {
-            tracer.error("ShowPreferencesAndMessages " + ex.getMessage(), ex);
+            tracer.error("showPreferencesAndMessages " + ex.getMessage(), ex);
         }
 
 
@@ -244,12 +244,12 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     }
 
 
-    public void SetSatelliteCount(int count) {
+    public void setSatelliteCount(int count) {
         TextView txtSatellites = (TextView) rootView.findViewById(R.id.detailedview_satellites_text);
         txtSatellites.setText(String.valueOf(count));
     }
 
-    private void ClearDisplay() {
+    private void clearDisplay() {
         TextView tvLatitude = (TextView) rootView.findViewById(R.id.detailedview_lat_text);
         TextView tvLongitude = (TextView) rootView.findViewById(R.id.detailedview_lon_text);
         TextView tvDateTime = (TextView) rootView.findViewById(R.id.detailedview_datetime_text);
@@ -283,20 +283,20 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LocationUpdate locationEvent){
-        DisplayLocationInfo(locationEvent.location);
+        displayLocationInfo(locationEvent.location);
     }
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.SatelliteCount satelliteCount){
-        SetSatelliteCount(satelliteCount.satelliteCount);
+        setSatelliteCount(satelliteCount.satelliteCount);
     }
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LoggingStatus loggingStatus){
         if(loggingStatus.loggingStarted){
             setActionButtonStop();
-            ShowPreferencesAndMessages();
-            ClearDisplay();
+            showPreferencesAndMessages();
+            clearDisplay();
         }
         else {
             setActionButtonStart();
@@ -308,12 +308,12 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         showCurrentFileName(fileNamed.newFileName);
     }
 
-    public void DisplayLocationInfo(Location locationInfo){
+    public void displayLocationInfo(Location locationInfo){
         if (locationInfo == null) {
             return;
         }
 
-        ShowPreferencesAndMessages();
+        showPreferencesAndMessages();
 
         TextView tvLatitude = (TextView) rootView.findViewById(R.id.detailedview_lat_text);
         TextView tvLongitude = (TextView) rootView.findViewById(R.id.detailedview_lon_text);

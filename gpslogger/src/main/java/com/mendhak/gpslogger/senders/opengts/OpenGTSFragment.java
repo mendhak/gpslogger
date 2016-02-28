@@ -58,7 +58,7 @@ public class OpenGTSFragment extends PermissionedPreferenceFragment implements
     }
 
     public boolean onPreferenceClick(Preference preference) {
-        if (!IsFormValid()) {
+        if (!isFormValid()) {
             Utilities.MsgBox(getString(R.string.autoopengts_invalid_form),
                     getString(R.string.autoopengts_invalid_form_message),
                     getActivity());
@@ -67,7 +67,7 @@ public class OpenGTSFragment extends PermissionedPreferenceFragment implements
         return true;
     }
 
-    private boolean IsFormValid() {
+    private boolean isFormValid() {
 
         CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("autoopengts_enabled");
         if(!chkEnabled.isChecked()) {
@@ -103,7 +103,7 @@ public class OpenGTSFragment extends PermissionedPreferenceFragment implements
     }
 
     @Override
-    public boolean IsValid() {
-        return IsFormValid();
+    public boolean isValid() {
+        return isFormValid();
     }
 }

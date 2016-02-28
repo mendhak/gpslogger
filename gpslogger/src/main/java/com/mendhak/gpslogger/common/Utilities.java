@@ -179,7 +179,7 @@ public class Utilities {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         if (msgCallback != null) {
-                            msgCallback.MessageBoxResult(IMessageBoxCallback.OK);
+                            msgCallback.messageBoxResult(IMessageBoxCallback.OK);
                         }
                     }
                 })
@@ -187,7 +187,7 @@ public class Utilities {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         if (msgCallback != null) {
-                            msgCallback.MessageBoxResult(IMessageBoxCallback.CANCEL);
+                            msgCallback.messageBoxResult(IMessageBoxCallback.CANCEL);
                         }
                     }
                 })

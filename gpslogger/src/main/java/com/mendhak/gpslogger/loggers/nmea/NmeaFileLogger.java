@@ -41,7 +41,7 @@ public class NmeaFileLogger {
         this.fileName = fileName;
     }
 
-    public void Write(long timestamp, String nmeaSentence)  {
+    public void write(long timestamp, String nmeaSentence)  {
 
         File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {

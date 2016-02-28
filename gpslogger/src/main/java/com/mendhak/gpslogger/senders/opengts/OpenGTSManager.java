@@ -37,7 +37,7 @@ public class OpenGTSManager implements IFileSender {
     }
 
     @Override
-    public void UploadFile(List<File> files) {
+    public void uploadFile(List<File> files) {
         // Use only gpx
         for (File f : files) {
             if (f.getName().endsWith(".gpx")) {
@@ -61,7 +61,7 @@ public class OpenGTSManager implements IFileSender {
     }
 
     @Override
-    public boolean IsAvailable() {
+    public boolean isAvailable() {
         return  AppSettings.getOpenGTSServer().length() > 0
                 && AppSettings.getOpenGTSServerPort().length() > 0
                 && AppSettings.getOpenGTSServerCommunicationMethod().length() > 0

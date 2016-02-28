@@ -47,7 +47,7 @@ public class Gpx10FileLogger implements IFileLogger {
     }
 
 
-    public void Write(Location loc) throws Exception {
+    public void write(Location loc) throws Exception {
         long time = loc.getTime();
         if (time <= 0) {
             time = System.currentTimeMillis();
@@ -58,7 +58,7 @@ public class Gpx10FileLogger implements IFileLogger {
         EXECUTOR.execute(writeHandler);
     }
 
-    public void Annotate(String description, Location loc) throws Exception {
+    public void annotate(String description, Location loc) throws Exception {
 
         long time = loc.getTime();
         if (time <= 0) {
@@ -106,11 +106,11 @@ class Gpx10AnnotateHandler implements Runnable {
 
             int startPosition = 336;
 
-            String wpt = GetWaypointXml(loc, dateTimeString, description);
+            String wpt = getWaypointXml(loc, dateTimeString, description);
 
             try {
 
-                //Write to a temp file, delete original file, move temp to original
+                //write to a temp file, delete original file, move temp to original
                 File gpxTempFile = new File(gpxFile.getAbsolutePath() + ".tmp");
 
                 BufferedInputStream bis = new BufferedInputStream(new FileInputStream(gpxFile));
@@ -140,13 +140,13 @@ class Gpx10AnnotateHandler implements Runnable {
 
                 tracer.debug("Finished annotation to GPX10 File");
             } catch (Exception e) {
-                tracer.error("Gpx10FileLogger.Annotate", e);
+                tracer.error("Gpx10FileLogger.annotate", e);
             }
 
         }
     }
 
-    String GetWaypointXml(Location loc, String dateTimeString, String description) {
+    String getWaypointXml(Location loc, String dateTimeString, String description) {
 
         StringBuilder waypoint = new StringBuilder();
 
@@ -217,7 +217,7 @@ class Gpx10WriteHandler implements Runnable {
 
                 int offsetFromEnd = (addNewTrackSegment) ? 12 : 21;
                 long startPosition = gpxFile.length() - offsetFromEnd;
-                String trackPoint = GetTrackPointXml(loc, dateTimeString);
+                String trackPoint = getTrackPointXml(loc, dateTimeString);
 
                 RandomAccessFile raf = new RandomAccessFile(gpxFile, "rw");
                 raf.seek(startPosition);
@@ -227,14 +227,14 @@ class Gpx10WriteHandler implements Runnable {
                 tracer.debug("Finished writing to GPX10 file");
 
             } catch (Exception e) {
-                tracer.error("Gpx10FileLogger.Write", e);
+                tracer.error("Gpx10FileLogger.write", e);
             }
 
         }
 
     }
 
-    String GetTrackPointXml(Location loc, String dateTimeString) {
+    String getTrackPointXml(Location loc, String dateTimeString) {
 
         StringBuilder track = new StringBuilder();
 
