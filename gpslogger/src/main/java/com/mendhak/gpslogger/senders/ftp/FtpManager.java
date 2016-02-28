@@ -19,7 +19,9 @@
 package com.mendhak.gpslogger.senders.ftp;
 
 
+
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.senders.IFileSender;
@@ -36,13 +38,15 @@ import java.util.List;
 public class FtpManager implements IFileSender {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FtpManager.class.getSimpleName());
 
+    PreferenceHelper preferenceHelper;
 
-    public FtpManager() {
+    public FtpManager(PreferenceHelper preferenceHelper) {
+        this.preferenceHelper = preferenceHelper;
     }
 
     void testFtp(String servername, String username, String password, String directory, int port, boolean useFtps, String protocol, boolean implicit) {
 
-        File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
+        File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
             gpxFolder.mkdirs();
         }
@@ -76,8 +80,8 @@ public class FtpManager implements IFileSender {
 
     @Override
     public void uploadFile(List<File> files) {
-        if (!validSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(), AppSettings.getFtpPassword(),
-                AppSettings.getFtpPort(), AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit())) {
+        if (!validSettings(preferenceHelper.getFtpServerName(), preferenceHelper.getFtpUsername(), preferenceHelper.getFtpPassword(),
+                preferenceHelper.getFtpPort(), preferenceHelper.FtpUseFtps(), preferenceHelper.getFtpProtocol(), preferenceHelper.FtpImplicit())) {
             EventBus.getDefault().post(new UploadEvents.Ftp(false));
         }
 
@@ -88,18 +92,18 @@ public class FtpManager implements IFileSender {
 
     @Override
     public boolean isAvailable() {
-        return validSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(),
-                AppSettings.getFtpPassword(), AppSettings.getFtpPort(), AppSettings.FtpUseFtps(),
-                AppSettings.getFtpProtocol(), AppSettings.FtpImplicit());
+        return validSettings(preferenceHelper.getFtpServerName(), preferenceHelper.getFtpUsername(),
+                preferenceHelper.getFtpPassword(), preferenceHelper.getFtpPort(), preferenceHelper.FtpUseFtps(),
+                preferenceHelper.getFtpProtocol(), preferenceHelper.FtpImplicit());
     }
 
     public void uploadFile(File f) {
 
         JobManager jobManager = AppSettings.GetJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, FtpJob.getJobTag(f));
-        jobManager.addJobInBackground(new FtpJob(AppSettings.getFtpServerName(), AppSettings.getFtpPort(),
-                AppSettings.getFtpUsername(), AppSettings.getFtpPassword(), AppSettings.getFtpDirectory(),
-                AppSettings.FtpUseFtps(), AppSettings.getFtpProtocol(), AppSettings.FtpImplicit(),
+        jobManager.addJobInBackground(new FtpJob(preferenceHelper.getFtpServerName(), preferenceHelper.getFtpPort(),
+                preferenceHelper.getFtpUsername(), preferenceHelper.getFtpPassword(), preferenceHelper.getFtpDirectory(),
+                preferenceHelper.FtpUseFtps(), preferenceHelper.getFtpProtocol(), preferenceHelper.FtpImplicit(),
                 f, f.getName()));
     }
 

@@ -71,7 +71,7 @@ public class Utilities {
             lc.reset();
 
             //final String LOG_DIR = "/sdcard/GPSLogger";
-            final String LOG_DIR = AppSettings.getGpsLoggerFolder();
+            final String LOG_DIR = PreferenceHelper.getInstance().getGpsLoggerFolder();
 
             GpsRollingFileAppender<ILoggingEvent> rollingFileAppender = new GpsRollingFileAppender<>();
             rollingFileAppender.setAppend(true);

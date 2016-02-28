@@ -47,10 +47,7 @@ import android.widget.*;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.amulyakhare.textdrawable.TextDrawable;
-import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ProfileEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
@@ -88,12 +85,13 @@ public class GpsMainActivity extends ActionBarActivity
 
     Drawer materialDrawer;
     AccountHeader drawerHeader;
+    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Utilities.ConfigureLogbackDirectly(getApplicationContext());
+       Utilities.ConfigureLogbackDirectly(getApplicationContext());
         tracer = LoggerFactory.getLogger(GpsMainActivity.class.getSimpleName());
 
         loadPresetProperties();
@@ -889,7 +887,7 @@ public class GpsMainActivity extends ActionBarActivity
             return;
         }
 
-        final File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
+        final File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
 
         if (gpxFolder.exists() && Utilities.GetFilesInFolder(gpxFolder, sender).length > 0) {
             File[] enumeratedFiles = Utilities.GetFilesInFolder(gpxFolder, sender);
@@ -955,7 +953,7 @@ public class GpsMainActivity extends ActionBarActivity
         try {
 
             final String locationOnly = getString(R.string.sharing_location_only);
-            final File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
+            final File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
             if (gpxFolder.exists()) {
 
                 File[] enumeratedFiles = Utilities.GetFilesInFolder(gpxFolder);

@@ -19,6 +19,7 @@ package com.mendhak.gpslogger.senders.gdocs;
 
 import android.support.annotation.Nullable;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.senders.IFileSender;
@@ -34,7 +35,7 @@ import java.util.List;
 public class GoogleDriveManager implements IFileSender {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GoogleDriveManager.class.getSimpleName());
-
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     /*
     To revoke permissions:
@@ -87,7 +88,7 @@ public class GoogleDriveManager implements IFileSender {
         }
 
         try {
-            File gpsDir = new File(AppSettings.getGpsLoggerFolder());
+            File gpsDir = new File(preferenceHelper.getGpsLoggerFolder());
             File gpxFile = new File(gpsDir, fileName);
 
             tracer.debug("Submitting Google Docs job");

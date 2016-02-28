@@ -37,6 +37,7 @@ import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
@@ -53,6 +54,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
         implements Preference.OnPreferenceClickListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GoogleDriveSettingsFragment.class.getSimpleName());
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     boolean messageShown = false;
 
     static final int REQUEST_CODE_MISSING_GPSF = 1;
@@ -262,7 +264,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
     private void uploadTestFileToGoogleDocs() {
 
         Utilities.ShowProgress(getActivity(), getString(R.string.please_wait), getString(R.string.please_wait));
-        File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
+        File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
             gpxFolder.mkdirs();
         }

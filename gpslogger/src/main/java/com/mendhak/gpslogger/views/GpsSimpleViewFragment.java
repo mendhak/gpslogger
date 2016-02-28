@@ -34,10 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import org.slf4j.LoggerFactory;
 
@@ -47,7 +44,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     Context context;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GpsSimpleViewFragment.class.getSimpleName());
-
+    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     private View rootView;
     private ActionProcessButton actionButton;
@@ -179,11 +176,11 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         }
 
         txtFilename.setVisibility(View.VISIBLE);
-        txtFilename.setText(Html.fromHtml("<em>" + AppSettings.getGpsLoggerFolder() + "/<strong><br />" + Session.getCurrentFileName() + "</strong></em>"));
+        txtFilename.setText(Html.fromHtml("<em>" + preferenceHelper.getGpsLoggerFolder() + "/<strong><br />" + Session.getCurrentFileName() + "</strong></em>"));
 
         Utilities.SetFileExplorerLink(txtFilename,
-                Html.fromHtml("<em><font color='blue'><u>" + AppSettings.getGpsLoggerFolder() + "</u></font>" + "/<strong><br />" + Session.getCurrentFileName() + "</strong></em>" ),
-                AppSettings.getGpsLoggerFolder(),
+                Html.fromHtml("<em><font color='blue'><u>" + preferenceHelper.getGpsLoggerFolder() + "</u></font>" + "/<strong><br />" + Session.getCurrentFileName() + "</strong></em>" ),
+                preferenceHelper.getGpsLoggerFolder(),
                 getActivity().getApplicationContext());
 
     }

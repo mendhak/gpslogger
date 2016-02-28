@@ -22,6 +22,7 @@ public class DropboxJob extends Job {
 
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropboxJob.class.getSimpleName());
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     String fileName;
     DropboxAPI<AndroidAuthSession> dropboxApi;
 
@@ -39,7 +40,7 @@ public class DropboxJob extends Job {
 
     @Override
     public void onRun() throws Throwable {
-        File gpsDir = new File(AppSettings.getGpsLoggerFolder());
+        File gpsDir = new File(preferenceHelper.getGpsLoggerFolder());
         File gpxFile = new File(gpsDir, fileName);
 
         FileInputStream fis = new FileInputStream(gpxFile);

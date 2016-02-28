@@ -19,6 +19,7 @@ package com.mendhak.gpslogger.senders.osm;
 
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
@@ -39,6 +40,7 @@ public class OpenStreetMapManager implements IFileSender {
     final String OSM_ACCESSTOKEN_URL = "http://www.openstreetmap.org/oauth/access_token";
     final String OSM_AUTHORIZE_URL = "http://www.openstreetmap.org/oauth/authorize";
     final String OSM_GPSTRACE_URL = "http://www.openstreetmap.org/api/0.6/gpx/create";
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     public OpenStreetMapManager() {
 
@@ -94,7 +96,7 @@ public class OpenStreetMapManager implements IFileSender {
     }
 
     public void uploadFile(String fileName) {
-        File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
+        File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
         File chosenFile = new File(gpxFolder, fileName);
         OAuthConsumer consumer = getOSMAuthConsumer();
         String gpsTraceUrl = OSM_GPSTRACE_URL;

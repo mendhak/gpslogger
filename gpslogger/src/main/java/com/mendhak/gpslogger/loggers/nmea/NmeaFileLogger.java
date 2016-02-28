@@ -17,10 +17,7 @@
 
 package com.mendhak.gpslogger.loggers.nmea;
 
-import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.RejectionHandler;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.*;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -37,13 +34,15 @@ public class NmeaFileLogger {
     private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
             new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
 
+    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+
     public NmeaFileLogger(String fileName) {
         this.fileName = fileName;
     }
 
     public void write(long timestamp, String nmeaSentence)  {
 
-        File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
+        File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
             gpxFolder.mkdirs();
         }

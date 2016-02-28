@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.loggers;
 import android.content.Context;
 import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.csv.PlainTextFileLogger;
@@ -33,15 +34,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileLoggerFactory {
+
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+
     public static List<IFileLogger> GetFileLoggers(Context context) {
 
         List<IFileLogger> loggers = new ArrayList<>();
 
-        if(Utilities.IsNullOrEmpty(AppSettings.getGpsLoggerFolder())){
+        if(Utilities.IsNullOrEmpty(preferenceHelper.getGpsLoggerFolder())){
             return loggers;
         }
 
-        File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
+        File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
             gpxFolder.mkdirs();
         }

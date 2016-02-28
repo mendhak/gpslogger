@@ -34,6 +34,7 @@ import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
@@ -53,6 +54,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(LoggingSettingsFragment.class.getSimpleName());
     private DirectoryChooserFragment folderDialog;
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
         Preference gpsloggerFolder = findPreference("gpslogger_folder");
         gpsloggerFolder.setOnPreferenceClickListener(this);
-        String gpsLoggerFolderPath = AppSettings.getGpsLoggerFolder();
+        String gpsLoggerFolderPath = preferenceHelper.getGpsLoggerFolder();
         gpsloggerFolder.setSummary(gpsLoggerFolderPath);
         if(!(new File(gpsLoggerFolderPath)).canWrite()){
             gpsloggerFolder.setSummary(Html.fromHtml("<font color='red'>" + gpsLoggerFolderPath + "</font>"));
@@ -113,7 +115,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
         if (preference.getKey().equals("gpslogger_folder")) {
 
             final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
-                    .initialDirectory(AppSettings.getGpsLoggerFolder())
+                    .initialDirectory(preferenceHelper.getGpsLoggerFolder())
                     .newDirectoryName("GPSLogger")
                     .allowReadOnlyDirectory(false)
                     .allowNewDirectoryNameModification(true)
@@ -263,7 +265,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
             return;
         }
 
-        AppSettings.setGpsLoggerFolder(folderPath);
+        preferenceHelper.setGpsLoggerFolder(folderPath);
         Preference gpsloggerFolder = findPreference("gpslogger_folder");
         gpsloggerFolder.setSummary(folderPath);
     }

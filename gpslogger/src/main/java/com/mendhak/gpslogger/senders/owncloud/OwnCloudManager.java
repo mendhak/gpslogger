@@ -1,6 +1,7 @@
 package com.mendhak.gpslogger.senders.owncloud;
 
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.senders.IFileSender;
@@ -17,13 +18,14 @@ import java.util.List;
 public class OwnCloudManager implements IFileSender
 {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OwnCloudSettingsFragment.class.getSimpleName());
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     public OwnCloudManager() {
     }
 
     void testOwnCloud(String servername, String username, String password, String directory) {
 
-        File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
+        File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
             gpxFolder.mkdirs();
         }

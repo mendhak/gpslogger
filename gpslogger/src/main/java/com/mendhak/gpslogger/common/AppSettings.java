@@ -673,84 +673,7 @@ public class AppSettings extends Application {
     }
 
 
-    /**
-     * FTP Server name for auto send
-     */
-    @ProfilePreference(name= PreferenceNames.FTP_SERVER)
-    public static String getFtpServerName() {
-        return prefs.getString(PreferenceNames.FTP_SERVER, "");
-    }
 
-
-    /**
-     * FTP Port for auto send
-     */
-    @ProfilePreference(name= PreferenceNames.FTP_PORT)
-    public static int getFtpPort() {
-        return Utilities.parseWithDefault(prefs.getString(PreferenceNames.FTP_PORT, "21"), 21);
-    }
-
-
-    /**
-     * FTP Username for auto send
-     */
-    @ProfilePreference(name= PreferenceNames.FTP_USERNAME)
-    public static String getFtpUsername() {
-        return prefs.getString(PreferenceNames.FTP_USERNAME, "");
-    }
-
-
-    /**
-     * FTP Password for auto send
-     */
-    @ProfilePreference(name= PreferenceNames.FTP_PASSWORD)
-    public static String getFtpPassword() {
-        return prefs.getString(PreferenceNames.FTP_PASSWORD, "");
-    }
-
-    /**
-     * Whether to use FTPS
-     */
-    @ProfilePreference(name= PreferenceNames.FTP_USE_FTPS)
-    public static boolean FtpUseFtps() {
-        return prefs.getBoolean(PreferenceNames.FTP_USE_FTPS, false);
-    }
-
-
-    /**
-     * FTP protocol to use (SSL or TLS)
-     */
-    @ProfilePreference(name= PreferenceNames.FTP_SSLORTLS)
-    public static String getFtpProtocol() {
-        return prefs.getString(PreferenceNames.FTP_SSLORTLS, "");
-    }
-
-
-    /**
-     * Whether to use FTP Implicit mode for auto send
-     */
-    @ProfilePreference(name= PreferenceNames.FTP_IMPLICIT)
-    public static boolean FtpImplicit() {
-        return prefs.getBoolean(PreferenceNames.FTP_IMPLICIT, false);
-    }
-
-
-    /**
-     * Whether to auto send to FTP target
-     */
-    @ProfilePreference(name= PreferenceNames.AUTOSEND_FTP_ENABLED)
-    public static boolean isFtpAutoSendEnabled() {
-        return prefs.getBoolean(PreferenceNames.AUTOSEND_FTP_ENABLED, false);
-    }
-
-
-    /**
-     * FTP Directory on the server for auto send
-     */
-    @ProfilePreference(name= PreferenceNames.FTP_DIRECTORY)
-    public static String getFtpDirectory() {
-        return prefs.getString(PreferenceNames.FTP_DIRECTORY, "GPSLogger");
-    }
 
 
     /**
@@ -797,22 +720,6 @@ public class AppSettings extends Application {
         return prefs.getBoolean(PreferenceNames.AUTOSEND_OWNCLOUD_ENABLED, false);
     }
 
-
-    /**
-     * GPS Logger folder path on phone.  Falls back to {@link Utilities#GetDefaultStorageFolder(Context)} if nothing specified.
-     */
-    @ProfilePreference(name= PreferenceNames.GPSLOGGER_FOLDER)
-    public static String getGpsLoggerFolder() {
-        return prefs.getString(PreferenceNames.GPSLOGGER_FOLDER, Utilities.GetDefaultStorageFolder(getInstance()).getAbsolutePath());
-    }
-
-
-    /**
-     * Sets GPS Logger folder path
-     */
-    public static void setGpsLoggerFolder(String folderPath) {
-        prefs.edit().putString(PreferenceNames.GPSLOGGER_FOLDER, folderPath).apply();
-    }
 
 
 

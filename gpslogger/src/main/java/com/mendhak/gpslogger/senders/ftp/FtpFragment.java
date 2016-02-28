@@ -26,6 +26,7 @@ import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.IPreferenceValidation;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
@@ -36,6 +37,7 @@ import org.slf4j.LoggerFactory;
 public class FtpFragment
         extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener, IPreferenceValidation {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FtpFragment.class.getSimpleName());
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +86,7 @@ public class FtpFragment
     @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
 
-        FtpManager helper = new FtpManager();
+        FtpManager helper = new FtpManager(preferenceHelper);
 
         MaterialEditTextPreference servernamePreference = (MaterialEditTextPreference) findPreference("autoftp_server");
         MaterialEditTextPreference usernamePreference = (MaterialEditTextPreference) findPreference("autoftp_username");

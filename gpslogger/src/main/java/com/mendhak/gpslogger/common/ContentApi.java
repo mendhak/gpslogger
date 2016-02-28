@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 public class ContentApi extends ContentProvider {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(ContentApi.class.getSimpleName());
+    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     @Override
     public boolean onCreate() {
@@ -26,7 +27,7 @@ public class ContentApi extends ContentProvider {
 
         switch(queryType){
             case "gpslogger_folder":
-                result = AppSettings.getGpsLoggerFolder();
+                result = preferenceHelper.getGpsLoggerFolder();
                 break;
             default:
                 result = "NULL";

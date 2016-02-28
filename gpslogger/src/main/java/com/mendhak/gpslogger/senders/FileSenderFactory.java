@@ -39,6 +39,7 @@ import java.util.List;
 public class FileSenderFactory {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FileSenderFactory.class.getSimpleName());
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     public static IFileSender GetOsmSender() {
         return new OpenStreetMapManager();
@@ -61,7 +62,7 @@ public class FileSenderFactory {
     }
 
     public static IFileSender GetFtpSender() {
-        return new FtpManager();
+        return new FtpManager(preferenceHelper);
     }
 
     public static IFileSender GetOwnCloudSender() {
@@ -72,7 +73,7 @@ public class FileSenderFactory {
 
         tracer.info("Sending file " + fileToSend);
 
-        File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
+        File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
 
         if (Utilities.GetFilesInFolder(gpxFolder).length < 1) {
             tracer.warn("No files found to send.");
