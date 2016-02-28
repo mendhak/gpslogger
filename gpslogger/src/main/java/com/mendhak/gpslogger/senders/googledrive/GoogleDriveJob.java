@@ -1,9 +1,8 @@
 package com.mendhak.gpslogger.senders.googledrive;
 
 import android.os.Build;
-import android.os.Bundle;
-import com.google.android.gms.auth.GoogleAuthUtil;
-import com.mendhak.gpslogger.common.AppSettings;
+
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.path.android.jobqueue.Job;
@@ -29,6 +28,7 @@ public class GoogleDriveJob extends Job {
         super(new Params(1).requireNetwork().persist().addTags(getJobTag(gpxFile)));
         this.gpxFile = gpxFile;
         this.googleDriveFolderName = googleDriveFolderName;
+
     }
 
     public static String getJobTag(File gpxFile){
@@ -43,9 +43,8 @@ public class GoogleDriveJob extends Job {
     @Override
     public void onRun() throws Throwable {
 
-        token = GoogleAuthUtil.getTokenWithNotification(AppSettings.getInstance(), AppSettings.getGoogleDriveAccountName(), GetOauth2Scope(), new Bundle());
-        tracer.debug("GDocs token: " + token);
-        AppSettings.setGoogleDriveAuthToken(token);
+        GoogleDriveManager manager = new GoogleDriveManager(PreferenceHelper.getInstance());
+        token = manager.GetToken();
 
         FileInputStream fis = new FileInputStream(gpxFile);
         String fileName = gpxFile.getName();
@@ -82,9 +81,7 @@ public class GoogleDriveJob extends Job {
         EventBus.getDefault().post(new UploadEvents.GDocs(true));
     }
 
-    private static String GetOauth2Scope() {
-        return "oauth2:https://www.googleapis.com/auth/drive.file";
-    }
+
 
     private String updateFileContents(String authToken, String gpxFileId, byte[] fileContents, String fileName) {
         HttpURLConnection conn = null;

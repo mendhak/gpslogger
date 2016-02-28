@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 import java.io.File;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -70,12 +71,12 @@ public class DropBoxManagerTest {
         DropBoxManager dropBoxManager = new DropBoxManager(pm);
         when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
 
-        assertThat("Keys are null", dropBoxManager.getKeys(), is((AccessTokenPair) null));
+        assertThat("Keys are null", dropBoxManager.getKeys(), nullValue());
 
         when(pm.getDropBoxAccessKeyName()).thenReturn("");
         when(pm.getDropBoxAccessSecretName()).thenReturn("");
 
-        assertThat("Keys are null", dropBoxManager.getKeys(), is((AccessTokenPair) null));
+        assertThat("Keys are null", dropBoxManager.getKeys(), nullValue());
     }
 
     @Test

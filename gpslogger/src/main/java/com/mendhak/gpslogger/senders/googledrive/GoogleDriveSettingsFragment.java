@@ -35,7 +35,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.AppSettings;
+
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
@@ -68,7 +68,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
 
         addPreferencesFromResource(R.xml.gdocssettings);
 
-        manager = new GoogleDriveManager();
+        manager = new GoogleDriveManager(preferenceHelper);
 
         verifyGooglePlayServices();
         registerEventBus();
@@ -151,9 +151,9 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
         } else {
             if (manager.isLinked()) {
                 //Clear authorization
-                GoogleAuthUtil.invalidateToken(getActivity(), AppSettings.getGoogleDriveAuthToken());
-                AppSettings.setGoogleDriveAuthToken("");
-                AppSettings.setGoogleDriveAccountName("");
+                GoogleAuthUtil.invalidateToken(getActivity(), preferenceHelper.getGoogleDriveAuthToken());
+                preferenceHelper.setGoogleDriveAuthToken("");
+                preferenceHelper.setGoogleDriveAccountName("");
 
                 startActivity(new Intent(getActivity(), GpsMainActivity.class));
                 getActivity().finish();
@@ -184,7 +184,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
                     String accountName = data.getStringExtra(
                             AccountManager.KEY_ACCOUNT_NAME);
 
-                    AppSettings.setGoogleDriveAccountName(accountName);
+                    preferenceHelper.setGoogleDriveAccountName(accountName);
 
                     tracer.debug("Account:" + accountName);
                     getAndUseAuthTokenInAsyncTask();
@@ -206,7 +206,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
             // Retrieve a token for the given account and scope. It will always return either
             // a non-empty String or throw an exception.
 
-            return GoogleAuthUtil.getToken(getActivity(), AppSettings.getGoogleDriveAccountName(), manager.getOauth2Scope());
+            return GoogleAuthUtil.getToken(getActivity(), preferenceHelper.getGoogleDriveAccountName(), manager.getOauth2Scope());
         } catch (GooglePlayServicesAvailabilityException playEx) {
             Dialog alert = GooglePlayServicesUtil.getErrorDialog(
                     playEx.getConnectionStatusCode(),
@@ -249,7 +249,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
             @Override
             protected void onPostExecute(String authToken) {
                 if (authToken != null) {
-                    AppSettings.setGoogleDriveAuthToken(authToken);
+                    preferenceHelper.setGoogleDriveAuthToken(authToken);
                     tracer.debug("Auth token:" + authToken);
                     verifyGooglePlayServices();
                 }

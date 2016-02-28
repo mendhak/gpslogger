@@ -17,7 +17,11 @@
 
 package com.mendhak.gpslogger.senders.googledrive;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
+
+import com.google.android.gms.auth.GoogleAuthException;
+import com.google.android.gms.auth.GoogleAuthUtil;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
@@ -29,13 +33,14 @@ import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 
 public class GoogleDriveManager implements IFileSender {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GoogleDriveManager.class.getSimpleName());
-    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    final PreferenceHelper preferenceHelper;
 
     /*
     To revoke permissions:
@@ -46,7 +51,8 @@ public class GoogleDriveManager implements IFileSender {
    ./adb -e shell 'sqlite3 /data/system/accounts.db "delete from grants;"'
      */
 
-    public GoogleDriveManager() {
+    public GoogleDriveManager(PreferenceHelper preferenceHelper) {
+        this.preferenceHelper = preferenceHelper;
     }
 
     public String getOauth2Scope() {
@@ -60,7 +66,7 @@ public class GoogleDriveManager implements IFileSender {
      *
      */
     protected boolean isLinked() {
-        return !Utilities.IsNullOrEmpty(AppSettings.getGoogleDriveAccountName()) && !Utilities.IsNullOrEmpty(AppSettings.getGoogleDriveAuthToken());
+        return !Utilities.IsNullOrEmpty(preferenceHelper.getGoogleDriveAccountName()) && !Utilities.IsNullOrEmpty(preferenceHelper.getGoogleDriveAuthToken());
     }
 
     @Override
@@ -73,7 +79,7 @@ public class GoogleDriveManager implements IFileSender {
 
     @Override
     public boolean isAvailable() {
-        return AppSettings.isGDocsAutoSendEnabled() && isLinked();
+        return preferenceHelper.isGDocsAutoSendEnabled() && isLinked();
     }
 
     public void uploadTestFile(File file, String googleDriveFolderName){
@@ -96,7 +102,7 @@ public class GoogleDriveManager implements IFileSender {
             String uploadFolderName = googleDriveFolderName;
 
             if(Utilities.IsNullOrEmpty(googleDriveFolderName)){
-                uploadFolderName = AppSettings.getGoogleDriveFolderName();
+                uploadFolderName = preferenceHelper.getGoogleDriveFolderName();
             }
 
             if(Utilities.IsNullOrEmpty(uploadFolderName)){
@@ -118,4 +124,14 @@ public class GoogleDriveManager implements IFileSender {
         return true;
     }
 
+    public String GetToken() throws GoogleAuthException, IOException {
+        String token = GoogleAuthUtil.getTokenWithNotification(AppSettings.getInstance(), preferenceHelper.getGoogleDriveAccountName(), GetOauth2Scope(), new Bundle());
+        tracer.debug("GDocs token: " + token);
+        preferenceHelper.setGoogleDriveAuthToken(token);
+        return token;
+    }
+
+    private String GetOauth2Scope() {
+        return "oauth2:https://www.googleapis.com/auth/drive.file";
+    }
 }

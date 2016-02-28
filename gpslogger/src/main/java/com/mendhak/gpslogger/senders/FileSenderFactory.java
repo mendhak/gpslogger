@@ -50,7 +50,7 @@ public class FileSenderFactory {
     }
 
     public static IFileSender GetGDocsSender() {
-        return new GoogleDriveManager();
+        return new GoogleDriveManager(PreferenceHelper.getInstance());
     }
 
     public static IFileSender GetEmailSender() {
@@ -135,9 +135,8 @@ public class FileSenderFactory {
         List<IFileSender> senders = new ArrayList<>();
 
 
-        GoogleDriveManager googleDriveManager = new GoogleDriveManager();
         if(GetGDocsSender().isAvailable()){
-            senders.add(googleDriveManager);
+            senders.add(GetGDocsSender());
         }
 
         if(GetOsmSender().isAvailable()){
