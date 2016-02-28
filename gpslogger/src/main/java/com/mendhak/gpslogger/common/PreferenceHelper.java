@@ -965,7 +965,7 @@ public class PreferenceHelper {
             Annotation a = m.getAnnotation(ProfilePreference.class);
             if(a != null){
                 try {
-                    Object val = m.invoke(null);
+                    Object val = m.invoke(this);
 
                     if(val != null){
 
