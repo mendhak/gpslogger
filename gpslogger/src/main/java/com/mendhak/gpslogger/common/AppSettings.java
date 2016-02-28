@@ -408,7 +408,6 @@ public class AppSettings extends Application {
         return prefs.getBoolean(PreferenceNames.ASK_CUSTOM_FILE_NAME, true);
     }
 
-
     /**
      * Whether automatic sending to various targets (email,ftp, dropbox, etc) is enabled
      */
@@ -434,104 +433,6 @@ public class AppSettings extends Application {
     public static boolean shouldAutoSendOnStopLogging() {
         return prefs.getBoolean(PreferenceNames.AUTOSEND_ON_STOP, false);
     }
-
-    /**
-     * Whether automatic sending to email is enabled
-     */
-    @ProfilePreference(name= PreferenceNames.AUTOSEND_EMAIL_ENABLED)
-    public static boolean isEmailAutoSendEnabled() {
-        return prefs.getBoolean(PreferenceNames.AUTOSEND_EMAIL_ENABLED, false);
-    }
-
-
-    /**
-     * SMTP Server to use when sending emails
-     */
-    @ProfilePreference(name= PreferenceNames.EMAIL_SMTP_SERVER)
-    public static String getSmtpServer() {
-        return prefs.getString(PreferenceNames.EMAIL_SMTP_SERVER, "");
-    }
-
-    /**
-     * Sets SMTP Server to use when sending emails
-     */
-    public static void setSmtpServer(String smtpServer) {
-        prefs.edit().putString(PreferenceNames.EMAIL_SMTP_SERVER, smtpServer).apply();
-    }
-
-    /**
-     * SMTP Port to use when sending emails
-     */
-    @ProfilePreference(name= PreferenceNames.EMAIL_SMTP_PORT)
-    public static String getSmtpPort() {
-        return prefs.getString(PreferenceNames.EMAIL_SMTP_PORT, "25");
-    }
-
-    public static void setSmtpPort(String port) {
-        prefs.edit().putString(PreferenceNames.EMAIL_SMTP_PORT, port).apply();
-    }
-
-    /**
-     * SMTP Username to use when sending emails
-     */
-    @ProfilePreference(name= PreferenceNames.EMAIL_SMTP_USERNAME)
-    public static String getSmtpUsername() {
-        return prefs.getString(PreferenceNames.EMAIL_SMTP_USERNAME, "");
-    }
-
-
-    /**
-     * SMTP Password to use when sending emails
-     */
-    @ProfilePreference(name= PreferenceNames.EMAIL_SMTP_PASSWORD)
-    public static String getSmtpPassword() {
-        return prefs.getString(PreferenceNames.EMAIL_SMTP_PASSWORD, "");
-    }
-
-    /**
-     * Whether SSL is enabled when sending emails
-     */
-    @ProfilePreference(name= PreferenceNames.EMAIL_SMTP_SSL)
-    public static boolean isSmtpSsl() {
-        return prefs.getBoolean(PreferenceNames.EMAIL_SMTP_SSL, true);
-    }
-
-    /**
-     * Sets whether SSL is enabled when sending emails
-     */
-    public static void setSmtpSsl(boolean smtpSsl) {
-        prefs.edit().putBoolean(PreferenceNames.EMAIL_SMTP_SSL, smtpSsl).apply();
-    }
-
-
-    /**
-     * Email addresses to send to
-     */
-    @ProfilePreference(name= PreferenceNames.EMAIL_TARGET)
-    public static String getAutoEmailTargets() {
-        return prefs.getString(PreferenceNames.EMAIL_TARGET, "");
-    }
-
-
-    /**
-     * SMTP from address to use
-     */
-    @ProfilePreference(name= PreferenceNames.EMAIL_FROM)
-    private static String getSmtpFrom() {
-        return prefs.getString(PreferenceNames.EMAIL_FROM, "");
-    }
-
-    /**
-     * The from address to use when sending an email, uses {@link #getSmtpUsername()} if {@link #getSmtpFrom()} is not specified
-     */
-    public static String getSmtpSenderAddress() {
-        if (getSmtpFrom() != null && getSmtpFrom().length() > 0) {
-            return getSmtpFrom();
-        }
-
-        return getSmtpUsername();
-    }
-
 
     public static void setDebugToFile(boolean writeToFile) {
         prefs.edit().putBoolean(PreferenceNames.DEBUG_TO_FILE, writeToFile).apply();

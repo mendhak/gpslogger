@@ -24,9 +24,10 @@ import android.preference.Preference.OnPreferenceClickListener;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.AppSettings;
+
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.IPreferenceValidation;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
@@ -35,6 +36,13 @@ import de.greenrobot.event.EventBus;
 
 public class AutoEmailFragment extends PermissionedPreferenceFragment implements
         OnPreferenceChangeListener,  OnPreferenceClickListener, IPreferenceValidation {
+
+    private final PreferenceHelper preferenceHelper;
+
+    public AutoEmailFragment(){
+        preferenceHelper = PreferenceHelper.getInstance();
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,8 +112,8 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
         MaterialEditTextPreference txtTarget = (MaterialEditTextPreference) findPreference("autoemail_target");
         MaterialEditTextPreference txtFrom = (MaterialEditTextPreference) findPreference("smtp_from");
 
-        AutoEmailManager aeh = new AutoEmailManager();
-        aeh.SendTestEmail(txtSmtpServer.getText(), txtSmtpPort.getText(),
+        AutoEmailManager aem = new AutoEmailManager(preferenceHelper);
+        aem.SendTestEmail(txtSmtpServer.getText(), txtSmtpPort.getText(),
                 txtUsername.getText(), txtPassword.getText(),
                 chkUseSsl.isChecked(), txtTarget.getText(), txtFrom.getText());
 
@@ -166,12 +174,12 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
         CustomSwitchPreference chkUseSsl = (CustomSwitchPreference) findPreference("smtp_ssl");
 
         txtSmtpServer.setText(server);
-        AppSettings.setSmtpServer(server);
+        preferenceHelper.setSmtpServer(server);
 
         txtSmtpPort.setText(port);
-        AppSettings.setSmtpPort(port);
+        preferenceHelper.setSmtpPort(port);
         chkUseSsl.setChecked(useSsl);
-        AppSettings.setSmtpSsl(useSsl);
+        preferenceHelper.setSmtpSsl(useSsl);
     }
 
 

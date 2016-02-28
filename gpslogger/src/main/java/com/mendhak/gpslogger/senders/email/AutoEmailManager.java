@@ -17,6 +17,7 @@
 
 package com.mendhak.gpslogger.senders.email;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
@@ -29,7 +30,10 @@ import java.util.List;
 
 public class AutoEmailManager implements IFileSender {
 
-    public AutoEmailManager() {
+    PreferenceHelper preferenceHelper;
+
+    public AutoEmailManager(PreferenceHelper helper) {
+        this.preferenceHelper = helper;
     }
 
     @Override
@@ -48,20 +52,20 @@ public class AutoEmailManager implements IFileSender {
 
         JobManager jobManager = AppSettings.GetJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, AutoEmailJob.getJobTag(filesToSend.toArray(new File[filesToSend.size()])));
-        jobManager.addJobInBackground(new AutoEmailJob(AppSettings.getSmtpServer(),
-                AppSettings.getSmtpPort(), AppSettings.getSmtpUsername(), AppSettings.getSmtpPassword(),
-                AppSettings.isSmtpSsl(), AppSettings.getAutoEmailTargets(), AppSettings.getSmtpSenderAddress(),
+        jobManager.addJobInBackground(new AutoEmailJob(preferenceHelper.getSmtpServer(),
+                preferenceHelper.getSmtpPort(), preferenceHelper.getSmtpUsername(), preferenceHelper.getSmtpPassword(),
+                preferenceHelper.isSmtpSsl(), preferenceHelper.getAutoEmailTargets(), preferenceHelper.getSmtpSenderAddress(),
                 subject, body, filesToSend.toArray(new File[filesToSend.size()])));
 
     }
 
     @Override
     public boolean IsAvailable() {
-        return AppSettings.isEmailAutoSendEnabled()
-                && AppSettings.getAutoEmailTargets().length() > 0
-                && AppSettings.getSmtpServer().length() > 0
-                && AppSettings.getSmtpPort().length() > 0
-                && AppSettings.getSmtpUsername().length() > 0;
+        return preferenceHelper.isEmailAutoSendEnabled()
+                && preferenceHelper.getAutoEmailTargets().length() > 0
+                && preferenceHelper.getSmtpServer().length() > 0
+                && preferenceHelper.getSmtpPort().length() > 0
+                && preferenceHelper.getSmtpUsername().length() > 0;
     }
 
 

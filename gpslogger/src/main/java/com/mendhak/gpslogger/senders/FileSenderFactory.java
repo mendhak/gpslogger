@@ -53,7 +53,7 @@ public class FileSenderFactory {
     }
 
     public static IFileSender GetEmailSender() {
-        return new AutoEmailManager();
+        return new AutoEmailManager(PreferenceHelper.getInstance());
     }
 
     public static IFileSender GetOpenGTSSender() {
