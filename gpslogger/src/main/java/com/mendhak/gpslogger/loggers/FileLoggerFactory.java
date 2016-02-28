@@ -35,7 +35,7 @@ import java.util.List;
 public class FileLoggerFactory {
     public static List<IFileLogger> GetFileLoggers(Context context) {
 
-        List<IFileLogger> loggers = new ArrayList<IFileLogger>();
+        List<IFileLogger> loggers = new ArrayList<>();
 
         if(Utilities.IsNullOrEmpty(AppSettings.getGpsLoggerFolder())){
             return loggers;

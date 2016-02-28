@@ -326,7 +326,7 @@ public class AppSettings extends Application {
      */
     @ProfilePreference(name= PreferenceNames.LOCATION_LISTENERS)
     public static Set<String> getChosenListeners() {
-        Set<String> defaultListeners = new HashSet<String>(GetDefaultListeners());
+        Set<String> defaultListeners = new HashSet<>(GetDefaultListeners());
         return prefs.getStringSet(PreferenceNames.LOCATION_LISTENERS, defaultListeners);
     }
 
@@ -346,7 +346,7 @@ public class AppSettings extends Application {
      */
     public static void setChosenListeners(Integer... listenerIndices) {
         List<Integer> selectedItems = Arrays.asList(listenerIndices);
-        final Set<String> chosenListeners = new HashSet<String>();
+        final Set<String> chosenListeners = new HashSet<>();
 
         for (Integer selectedItem : selectedItems) {
             chosenListeners.add(GetAvailableListeners().get(selectedItem));
@@ -363,7 +363,7 @@ public class AppSettings extends Application {
      * Default set of listeners
      */
     public static List<String> GetDefaultListeners(){
-        List<String> listeners = new ArrayList<String>();
+        List<String> listeners = new ArrayList<>();
         listeners.add(LocationManager.GPS_PROVIDER);
         listeners.add(LocationManager.NETWORK_PROVIDER);
         return listeners;
@@ -376,7 +376,7 @@ public class AppSettings extends Application {
      */
     public static List<String> GetAvailableListeners() {
 
-        List<String> listeners = new ArrayList<String>();
+        List<String> listeners = new ArrayList<>();
         listeners.add(LocationManager.GPS_PROVIDER);
         listeners.add(LocationManager.NETWORK_PROVIDER);
         listeners.add(LocationManager.PASSIVE_PROVIDER);

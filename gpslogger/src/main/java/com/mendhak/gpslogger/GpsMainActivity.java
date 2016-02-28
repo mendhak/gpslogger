@@ -904,7 +904,7 @@ public class GpsMainActivity extends ActionBarActivity
                 }
             });
 
-            List<String> fileList = new ArrayList<String>(enumeratedFiles.length);
+            List<String> fileList = new ArrayList<>(enumeratedFiles.length);
 
             for (File f : enumeratedFiles) {
                 fileList.add(f.getName());
@@ -922,7 +922,7 @@ public class GpsMainActivity extends ActionBarActivity
 
                             List<Integer> selectedItems = Arrays.asList(integers);
 
-                            List<File> chosenFiles = new ArrayList<File>();
+                            List<File> chosenFiles = new ArrayList<>();
 
                             for (Object item : selectedItems) {
                                 tracer.info("Selected file to upload- " + files[Integer.valueOf(item.toString())]);
@@ -966,7 +966,7 @@ public class GpsMainActivity extends ActionBarActivity
                     }
                 });
 
-                List<String> fileList = new ArrayList<String>(enumeratedFiles.length);
+                List<String> fileList = new ArrayList<>(enumeratedFiles.length);
 
                 for (File f : enumeratedFiles) {
                     fileList.add(f.getName());
@@ -1010,7 +1010,7 @@ public class GpsMainActivity extends ActionBarActivity
                                     intent.putExtra(Intent.EXTRA_SUBJECT, "Here are some files.");
                                     intent.setType("*/*");
 
-                                    ArrayList<Uri> chosenFiles = new ArrayList<Uri>();
+                                    ArrayList<Uri> chosenFiles = new ArrayList<>();
 
                                     for (Object path : selectedItems) {
                                         File file = new File(gpxFolder, files[Integer.valueOf(path.toString())]);

@@ -83,14 +83,14 @@ public class Faqtivity extends ActionBarActivity {
     }
 
     private void prepareHelpTopics() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
+        listDataHeader = new ArrayList<>();
+        listDataChild = new HashMap<>();
 
         listDataHeader.add(getString(R.string.faq_generalsection));
         listDataHeader.add(getString(R.string.faq_preferencesandfilters));
         listDataHeader.add(getString(R.string.faq_advancedsection));
 
-        List<String> generalTopics = new ArrayList<String>();
+        List<String> generalTopics = new ArrayList<>();
         generalTopics.add(getString(R.string.faq_topic_whyisntitaccurate));
         generalTopics.add(getString(R.string.faq_topic_howtoremovenotification));
         generalTopics.add(getString(R.string.faq_topic_profiles));
@@ -99,14 +99,14 @@ public class Faqtivity extends ActionBarActivity {
         generalTopics.add(getString(R.string.faq_topic_whydoesfixtakelongtime));
 
 
-        List<String> preferencesAndFiltersTopics = new ArrayList<String>();
+        List<String> preferencesAndFiltersTopics = new ArrayList<>();
         preferencesAndFiltersTopics.add(getString(R.string.faq_topic_whatvariousfiltersmean));
         preferencesAndFiltersTopics.add(getString(R.string.faq_topic_whereisthefilelogged));
         preferencesAndFiltersTopics.add(getString(R.string.faq_topic_howtogetthefile));
         preferencesAndFiltersTopics.add(getString(R.string.faq_topic_loadingpresets));
 
 
-        List<String> advancedTopics = new ArrayList<String>();
+        List<String> advancedTopics = new ArrayList<>();
         advancedTopics.add(getString(R.string.faq_topic_thirdpartyintegration));
         advancedTopics.add(getString(R.string.faq_topic_taskerintegration));
         advancedTopics.add(getString(R.string.faq_topic_howgpsworks));

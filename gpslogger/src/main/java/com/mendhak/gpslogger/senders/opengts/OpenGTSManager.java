@@ -54,7 +54,7 @@ public class OpenGTSManager implements IFileSender {
                     String communication = AppSettings.getOpenGTSServerCommunicationMethod();
 
                     JobManager jobManager = AppSettings.GetJobManager();
-                    jobManager.addJobInBackground(new OpenGTSJob(server, port, accountName, path, deviceId, communication, locations.toArray(new SerializableLocation[0])));
+                    jobManager.addJobInBackground(new OpenGTSJob(server, port, accountName, path, deviceId, communication, locations.toArray(new SerializableLocation[locations.size()])));
                 }
             }
         }

@@ -29,7 +29,7 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
 
         if(preference.getKey().equalsIgnoreCase("listeners")){
 
-            ArrayList<Integer> chosenIndices = new ArrayList<Integer>();
+            ArrayList<Integer> chosenIndices = new ArrayList<>();
             final List<String> availableListeners = AppSettings.GetAvailableListeners();
 
             for(String chosenListener : AppSettings.getChosenListeners()){
@@ -41,7 +41,7 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
                     .items(R.array.listeners)
                     .positiveText(R.string.ok)
                     .negativeText(R.string.cancel)
-                    .itemsCallbackMultiChoice(chosenIndices.toArray(new Integer[0]), new MaterialDialog.ListCallbackMultiChoice() {
+                    .itemsCallbackMultiChoice(chosenIndices.toArray(new Integer[chosenIndices.size()]), new MaterialDialog.ListCallbackMultiChoice() {
                         @Override
                         public boolean onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
 
