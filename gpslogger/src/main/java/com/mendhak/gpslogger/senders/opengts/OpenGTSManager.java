@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.senders.opengts;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
+import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.opengts.OpenGTSJob;
 import com.mendhak.gpslogger.senders.GpxReader;
 import com.mendhak.gpslogger.senders.IFileSender;
@@ -33,9 +34,10 @@ import java.util.List;
 public class OpenGTSManager extends IFileSender {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSManager.class.getSimpleName());
-    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    private PreferenceHelper preferenceHelper;
 
-    public OpenGTSManager() {
+    public OpenGTSManager(PreferenceHelper preferenceHelper) {
+        this.preferenceHelper = preferenceHelper;
     }
 
     @Override
@@ -64,15 +66,15 @@ public class OpenGTSManager extends IFileSender {
 
     @Override
     public boolean isAvailable() {
-        return  preferenceHelper.getOpenGTSServer().length() > 0
-                && preferenceHelper.getOpenGTSServerPort().length() > 0
-                && preferenceHelper.getOpenGTSServerCommunicationMethod().length() > 0
-                && preferenceHelper.getOpenGTSDeviceId().length() > 0;
+        return !Utilities.IsNullOrEmpty(preferenceHelper.getOpenGTSServer())
+                && !Utilities.IsNullOrEmpty(preferenceHelper.getOpenGTSServerPort())
+                && !Utilities.IsNullOrEmpty(preferenceHelper.getOpenGTSServerCommunicationMethod())
+                && !Utilities.IsNullOrEmpty(preferenceHelper.getOpenGTSDeviceId());
     }
 
     @Override
     protected boolean hasUserAllowedAutoSending() {
-        return false;
+        return preferenceHelper.isOpenGtsAutoSendEnabled();
     }
 
     private List<SerializableLocation> getLocationsFromGPX(File f) {

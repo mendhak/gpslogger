@@ -18,9 +18,10 @@ import java.util.List;
 public class OwnCloudManager extends IFileSender
 {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OwnCloudSettingsFragment.class.getSimpleName());
-    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    private static PreferenceHelper preferenceHelper;
 
-    public OwnCloudManager() {
+    public OwnCloudManager(PreferenceHelper preferenceHelper) {
+        this.preferenceHelper = preferenceHelper;
     }
 
     void testOwnCloud(String servername, String username, String password, String directory) {
@@ -64,7 +65,7 @@ public class OwnCloudManager extends IFileSender
             String username,
             String password,
             String directory) {
-        return servername != null && servername.length() > 0;
+        return !Utilities.IsNullOrEmpty(servername);
 
     }
 
@@ -86,7 +87,7 @@ public class OwnCloudManager extends IFileSender
 
     @Override
     protected boolean hasUserAllowedAutoSending() {
-        return false;
+        return preferenceHelper.isOwnCloudAutoSendEnabled();
     }
 
     public void uploadFile(File f)

@@ -191,27 +191,27 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
             if(preferenceHelper.isAutoSendEnabled()){
                 StringBuilder sb = new StringBuilder();
-                if (FileSenderFactory.GetEmailSender().isAvailable()) {
+                if (FileSenderFactory.GetEmailSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.autoemail_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetFtpSender().isAvailable()) {
+                if (FileSenderFactory.GetFtpSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.autoftp_setup_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetGDocsSender().isAvailable()) {
+                if (FileSenderFactory.GetGDocsSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.gdocs_setup_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetOsmSender().isAvailable()) {
+                if (FileSenderFactory.GetOsmSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.osm_setup_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetDropBoxSender().isAvailable()) {
+                if (FileSenderFactory.GetDropBoxSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.dropbox_setup_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetOpenGTSSender().isAvailable()) {
+                if (FileSenderFactory.GetOpenGTSSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.opengts_setup_title)).append("\n");
                 }
 

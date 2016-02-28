@@ -362,7 +362,7 @@ public class GpsLoggingService extends Service  {
 
         if ( !Utilities.IsNullOrEmpty(formattedFileName) || !Utilities.IsNullOrEmpty(Session.getCurrentFileName()) ) {
             String fileToSend = Utilities.IsNullOrEmpty(formattedFileName) ? Session.getCurrentFileName() : formattedFileName;
-            FileSenderFactory.SendFiles(getApplicationContext(), fileToSend);
+            FileSenderFactory.AutoSendFiles(fileToSend);
             setupAutoSendTimers();
         }
     }

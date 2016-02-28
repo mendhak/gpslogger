@@ -40,9 +40,10 @@ public class OpenStreetMapManager extends IFileSender {
     final String OSM_ACCESSTOKEN_URL = "http://www.openstreetmap.org/oauth/access_token";
     final String OSM_AUTHORIZE_URL = "http://www.openstreetmap.org/oauth/authorize";
     final String OSM_GPSTRACE_URL = "http://www.openstreetmap.org/api/0.6/gpx/create";
-    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    private static PreferenceHelper preferenceHelper;
 
-    public OpenStreetMapManager() {
+    public OpenStreetMapManager(PreferenceHelper preferenceHelper) {
+        this.preferenceHelper = preferenceHelper;
 
     }
 
@@ -92,12 +93,12 @@ public class OpenStreetMapManager extends IFileSender {
 
     @Override
     public boolean isAvailable() {
-        return preferenceHelper.isOsmAutoSendEnabled() && isOsmAuthorized();
+        return isOsmAuthorized();
     }
 
     @Override
     protected boolean hasUserAllowedAutoSending() {
-        return false;
+        return preferenceHelper.isOsmAutoSendEnabled();
     }
 
     public void uploadFile(String fileName) {

@@ -48,7 +48,7 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
 
         addPreferencesFromResource(R.xml.osmsettings);
 
-        manager = new OpenStreetMapManager();
+        manager = new OpenStreetMapManager(preferenceHelper);
 
         final Intent intent = getActivity().getIntent();
         final Uri myURI = intent.getData();

@@ -9,6 +9,7 @@ import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.IPreferenceValidation;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
@@ -82,7 +83,7 @@ public class OwnCloudSettingsFragment
         }
 
         Utilities.ShowProgress(getActivity(), getString(R.string.owncloud_testing), getString(R.string.please_wait));
-        OwnCloudManager helper = new OwnCloudManager();
+        OwnCloudManager helper = new OwnCloudManager(PreferenceHelper.getInstance());
         helper.testOwnCloud(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
                 directoryPreference.getText());
 

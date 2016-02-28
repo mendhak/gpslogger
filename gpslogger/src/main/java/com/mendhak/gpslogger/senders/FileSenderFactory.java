@@ -17,7 +17,6 @@
 
 package com.mendhak.gpslogger.senders;
 
-import android.content.Context;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxManager;
@@ -38,10 +37,10 @@ import java.util.List;
 public class FileSenderFactory {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FileSenderFactory.class.getSimpleName());
-    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+
 
     public static IFileSender GetOsmSender() {
-        return new OpenStreetMapManager();
+        return new OpenStreetMapManager(PreferenceHelper.getInstance());
     }
 
     public static IFileSender GetDropBoxSender() {
@@ -57,19 +56,20 @@ public class FileSenderFactory {
     }
 
     public static IFileSender GetOpenGTSSender() {
-        return new OpenGTSManager();
+        return new OpenGTSManager(PreferenceHelper.getInstance());
     }
 
     public static IFileSender GetFtpSender() {
-        return new FtpManager(preferenceHelper);
+        return new FtpManager(PreferenceHelper.getInstance());
     }
 
     public static IFileSender GetOwnCloudSender() {
-        return new OwnCloudManager();
+        return new OwnCloudManager(PreferenceHelper.getInstance());
     }
 
-    public static void SendFiles(Context applicationContext, final String fileToSend) {
+    public static void AutoSendFiles(final String fileToSend) {
 
+        PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
         tracer.info("Sending file " + fileToSend);
 
         File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
@@ -109,7 +109,7 @@ public class FileSenderFactory {
             zipFiles.add(zipFile);
         }
 
-        List<IFileSender> senders = GetFileSenders();
+        List<IFileSender> senders = GetFileAutosenders();
 
         for (IFileSender sender : senders) {
             tracer.debug("Sender: " + sender.getClass().getName());
@@ -129,36 +129,36 @@ public class FileSenderFactory {
     }
 
 
-    private static List<IFileSender> GetFileSenders() {
+    private static List<IFileSender> GetFileAutosenders() {
 
         List<IFileSender> senders = new ArrayList<>();
 
 
-        if(GetGDocsSender().isAvailable()){
+        if(GetGDocsSender().isAutoSendAvailable()){
             senders.add(GetGDocsSender());
         }
 
-        if(GetOsmSender().isAvailable()){
+        if(GetOsmSender().isAutoSendAvailable()){
             senders.add(GetOsmSender());
         }
 
-        if(GetEmailSender().isAvailable()){
+        if(GetEmailSender().isAutoSendAvailable()){
             senders.add(GetEmailSender());
         }
 
-        if(GetDropBoxSender().isAvailable()){
+        if(GetDropBoxSender().isAutoSendAvailable()){
             senders.add(GetDropBoxSender());
         }
 
-        if(GetOpenGTSSender().isAvailable()){
+        if(GetOpenGTSSender().isAutoSendAvailable()){
             senders.add(GetOpenGTSSender());
         }
 
-        if(GetFtpSender().isAvailable()){
+        if(GetFtpSender().isAutoSendAvailable()){
             senders.add(GetFtpSender());
         }
 
-        if(GetOwnCloudSender().isAvailable()){
+        if(GetOwnCloudSender().isAutoSendAvailable()){
             senders.add(GetOwnCloudSender());
         }
 
