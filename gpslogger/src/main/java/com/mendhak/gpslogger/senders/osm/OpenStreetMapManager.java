@@ -31,7 +31,7 @@ import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
 import java.io.File;
 import java.util.List;
 
-public class OpenStreetMapManager implements IFileSender {
+public class OpenStreetMapManager extends IFileSender {
 
 
 
@@ -93,6 +93,11 @@ public class OpenStreetMapManager implements IFileSender {
     @Override
     public boolean isAvailable() {
         return preferenceHelper.isOsmAutoSendEnabled() && isOsmAuthorized();
+    }
+
+    @Override
+    protected boolean hasUserAllowedAutoSending() {
+        return false;
     }
 
     public void uploadFile(String fileName) {

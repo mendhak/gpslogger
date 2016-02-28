@@ -2,18 +2,17 @@ package com.mendhak.gpslogger.senders.dropbox;
 
 
 import android.test.suitebuilder.annotation.SmallTest;
-import com.dropbox.client2.session.AccessTokenPair;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import java.io.File;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SmallTest
 @RunWith(MockitoJUnitRunner.class)
@@ -31,26 +30,17 @@ public class DropBoxManagerTest {
     }
 
     @Test
-    public void IsAvailable_WhenValueMissing_ReturnsFalse(){
+    public void IsAvailable_WithValuesButAutoSendDisabled_ReturnsTrue(){
         PreferenceHelper pm = mock(PreferenceHelper.class);
-        when(pm.isDropboxAutoSendEnabled()).thenReturn(true);
-        when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
-
-        DropBoxManager dropBoxManager = new DropBoxManager(pm);
-        assertThat("A key without a secret is useless", dropBoxManager.isAvailable(), is(false));
-    }
-
-    @Test
-    public void IsAvailable_WhenEnabledUnchecked_ReturnsFalse(){
-        PreferenceHelper pm = mock(PreferenceHelper.class);
+        when(pm.isDropboxAutoSendEnabled()).thenReturn(false);
         when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
         when(pm.getDropBoxAccessSecretName()).thenReturn("bbbbbbb");
 
         DropBoxManager dropBoxManager = new DropBoxManager(pm);
-        assertThat("Keys and secret without enabled means not available", dropBoxManager.isAvailable(), is(false));
-
-        //verify(pm).setDropBoxAccessKeyName();
+        assertThat("Allow normal sending even if autosend disabled", dropBoxManager.isAvailable(), is(true));
     }
+
+
 
     @Test
     public void Unlink_WhenCalled_BothKeysCleared(){
@@ -100,7 +90,7 @@ public class DropBoxManagerTest {
     }
 
     @Test
-    public void GetSession_WhenKeysPresent_SessionReturend(){
+    public void GetSession_WhenKeysPresent_SessionReturned(){
         PreferenceHelper pm = mock(PreferenceHelper.class);
         when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
         when(pm.getDropBoxAccessSecretName()).thenReturn("bbbbbbb");
@@ -108,6 +98,21 @@ public class DropBoxManagerTest {
 
         assertThat("Session holds key", dropBoxManager.getSession().getAccessTokenPair().key, is("aaaaaa"));
         assertThat("Session holds secret", dropBoxManager.getSession().getAccessTokenPair().secret, is("bbbbbbb"));
+    }
+
+    @Test
+    public void IsAutoSendAvailable_WhenUserCheckedAutoSend_IsAvailable(){
+        PreferenceHelper pm = mock(PreferenceHelper.class);
+        when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
+        when(pm.getDropBoxAccessSecretName()).thenReturn("bbbbbbb");
+        when(pm.isDropboxAutoSendEnabled()).thenReturn(true);
+
+        DropBoxManager dropBoxManager = new DropBoxManager(pm);
+        assertThat("User checked preference, auto send available", dropBoxManager.isAutoSendAvailable(), is(true));
+
+        when(pm.isDropboxAutoSendEnabled()).thenReturn(false);
+        assertThat("User checked preference, auto send available", dropBoxManager.isAutoSendAvailable(), is(false));
+
     }
 
 }

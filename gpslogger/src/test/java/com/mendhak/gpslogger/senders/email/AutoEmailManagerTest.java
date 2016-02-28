@@ -19,7 +19,6 @@ public class AutoEmailManagerTest {
     public void IsAvailable_WhenAllValuesPresent_ReturnsTrue(){
 
         PreferenceHelper pm = mock(PreferenceHelper.class);
-        when(pm.isEmailAutoSendEnabled()).thenReturn(true);
         when(pm.getAutoEmailTargets()).thenReturn("aaaaaa");
         when(pm.getSmtpServer()).thenReturn("bbbbbbb");
         when(pm.getSmtpPort()).thenReturn("bbbbbbb");
@@ -30,10 +29,23 @@ public class AutoEmailManagerTest {
     }
 
     @Test
+    public void IsAvailable_AllValuesButAutoSendUnchecked_ReturnsTrue(){
+
+        PreferenceHelper pm = mock(PreferenceHelper.class);
+        when(pm.getAutoEmailTargets()).thenReturn("aaaaaa");
+        when(pm.getSmtpServer()).thenReturn("bbbbbbb");
+        when(pm.getSmtpPort()).thenReturn("bbbbbbb");
+        when(pm.getSmtpUsername()).thenReturn("bbbbbbb");
+
+        AutoEmailManager aem = new AutoEmailManager(pm);
+        assertThat("All values present but auto-send unchecked, still available", aem.isAvailable(), is(true));
+    }
+
+
+    @Test
     public void IsAvailable_WhenSomeValuesMissing_ReturnsFalse(){
 
         PreferenceHelper pm = mock(PreferenceHelper.class);
-        when(pm.isEmailAutoSendEnabled()).thenReturn(true);
         when(pm.getAutoEmailTargets()).thenReturn("aaaaaa");
         when(pm.getSmtpServer()).thenReturn("");
         when(pm.getSmtpPort()).thenReturn("bbbbbbb");
@@ -44,16 +56,19 @@ public class AutoEmailManagerTest {
     }
 
     @Test
-    public void IsAvailable_WhenUserUnchecked_ReturnsFalse(){
+    public void IsAutoSendAvailable_WhenAutoSendEnabled_ReturnsTrue(){
 
         PreferenceHelper pm = mock(PreferenceHelper.class);
-        when(pm.isEmailAutoSendEnabled()).thenReturn(false);
+        when(pm.isEmailAutoSendEnabled()).thenReturn(true);
         when(pm.getAutoEmailTargets()).thenReturn("aaaaaa");
         when(pm.getSmtpServer()).thenReturn("bbbbbbb");
         when(pm.getSmtpPort()).thenReturn("bbbbbbb");
         when(pm.getSmtpUsername()).thenReturn("bbbbbbb");
 
         AutoEmailManager aem = new AutoEmailManager(pm);
-        assertThat("All values present but user unchecked", aem.isAvailable(), is(false));
+        assertThat("User checked auto send means allow autosending", aem.isAutoSendAvailable(), is(true));
     }
+
+
+
 }

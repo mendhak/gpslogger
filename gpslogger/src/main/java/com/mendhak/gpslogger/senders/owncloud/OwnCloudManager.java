@@ -15,7 +15,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 
-public class OwnCloudManager implements IFileSender
+public class OwnCloudManager extends IFileSender
 {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OwnCloudSettingsFragment.class.getSimpleName());
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
@@ -82,6 +82,11 @@ public class OwnCloudManager implements IFileSender
                 preferenceHelper.getOwnCloudUsername(),
                 preferenceHelper.getOwnCloudPassword(),
                 preferenceHelper.getOwnCloudDirectory());
+    }
+
+    @Override
+    protected boolean hasUserAllowedAutoSending() {
+        return false;
     }
 
     public void uploadFile(File f)

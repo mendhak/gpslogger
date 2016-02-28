@@ -32,11 +32,12 @@ import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.util.List;
 
 
-public class DropBoxManager implements IFileSender {
+public class DropBoxManager extends IFileSender {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropBoxManager.class.getSimpleName());
     private static final Session.AccessType ACCESS_TYPE = Session.AccessType.APP_FOLDER;
@@ -152,10 +153,16 @@ public class DropBoxManager implements IFileSender {
 
     @Override
     public boolean isAvailable() {
-        return preferenceHelper.isDropboxAutoSendEnabled()
-                &&  isLinked()
+        return
+                 isLinked()
                 && preferenceHelper.getDropBoxAccessKeyName() != null
                 && preferenceHelper.getDropBoxAccessSecretName() != null;
+    }
+
+
+    @Override
+    protected boolean hasUserAllowedAutoSending() {
+        return  preferenceHelper.isDropboxAutoSendEnabled();
     }
 
     public void uploadFile(String fileName) {

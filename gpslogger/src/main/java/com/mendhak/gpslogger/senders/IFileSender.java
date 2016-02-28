@@ -21,15 +21,31 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.List;
 
-public interface IFileSender extends FilenameFilter {
+public abstract class IFileSender implements FilenameFilter {
     /**
      * Upload or send these given files
      */
-    void uploadFile(List<File> files);
+    public abstract void uploadFile(List<File> files);
 
     /**
-     * Whether the sender is enabled and ready to be used
+     * Whether the sender is enabled and ready to be used for manual uploads
      */
-    boolean isAvailable();
+    public abstract boolean isAvailable();
+
+    /**
+     * Whether the user has enabled this preference for automatic sending
+     */
+    protected abstract boolean hasUserAllowedAutoSending();
+
+    /**
+     * Whether this sender is available and allowed to automatically send files.
+     * It checks both {@link #isAvailable()} and {@link #hasUserAllowedAutoSending()}
+     */
+    public boolean isAutoSendAvailable() {
+        return hasUserAllowedAutoSending() && isAvailable();
+    }
+
+
+    //public boolean isAutoSendAvailable()
 
 }

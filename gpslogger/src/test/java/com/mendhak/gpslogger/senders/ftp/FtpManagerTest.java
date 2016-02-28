@@ -61,6 +61,47 @@ public class FtpManagerTest {
         assertThat("If FTPS specified, a protocol is required", aem.isAvailable(), is(true));
     }
 
+    @Test
+    public void IsAvailable_AutoSendUnchecked_IsAvailable(){
+        PreferenceHelper pm = mock(PreferenceHelper.class);
+        when(pm.getFtpServerName()).thenReturn("example.com");
+        when(pm.isFtpAutoSendEnabled()).thenReturn(false);
+        when(pm.getFtpUsername()).thenReturn("aaa");
+        when(pm.getFtpPassword()).thenReturn("BBBB");
+        when(pm.getFtpPort()).thenReturn(9001);
+        when(pm.FtpUseFtps()).thenReturn(true);
+        when(pm.getFtpProtocol()).thenReturn("SSL");
+        when(pm.FtpImplicit()).thenReturn(false);
+
+        FtpManager aem = new FtpManager(pm);
+
+        assertThat("IsAvailable even if user unchecked autosend", aem.isAvailable(), is(true));
+
+        when(pm.getFtpProtocol()).thenReturn("TLS");
+        assertThat("If FTPS specified, a protocol is required", aem.isAvailable(), is(true));
+    }
+
+    @Test
+    public void IsAutoSendAvailable_AutoSendChecked_IsAvailable(){
+        PreferenceHelper pm = mock(PreferenceHelper.class);
+        when(pm.getFtpServerName()).thenReturn("example.com");
+        when(pm.getFtpUsername()).thenReturn("aaa");
+        when(pm.getFtpPassword()).thenReturn("BBBB");
+        when(pm.getFtpPort()).thenReturn(9001);
+        when(pm.FtpUseFtps()).thenReturn(true);
+        when(pm.getFtpProtocol()).thenReturn("SSL");
+        when(pm.FtpImplicit()).thenReturn(false);
+
+        when(pm.isFtpAutoSendEnabled()).thenReturn(true);
+
+        FtpManager aem = new FtpManager(pm);
+
+        assertThat("Is-Auto-send-Available only  if user checked autosend", aem.isAutoSendAvailable(), is(true));
+
+        when(pm.isFtpAutoSendEnabled()).thenReturn(false);
+        assertThat("Autosend disabled if user unchecked autosend", aem.isAutoSendAvailable(), is(false));
+    }
+
 
 
 

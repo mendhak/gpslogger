@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AutoEmailManager implements IFileSender {
+public class AutoEmailManager extends IFileSender {
 
     PreferenceHelper preferenceHelper;
 
@@ -61,11 +61,16 @@ public class AutoEmailManager implements IFileSender {
 
     @Override
     public boolean isAvailable() {
-        return preferenceHelper.isEmailAutoSendEnabled()
-                && preferenceHelper.getAutoEmailTargets().length() > 0
+        return
+                 preferenceHelper.getAutoEmailTargets().length() > 0
                 && preferenceHelper.getSmtpServer().length() > 0
                 && preferenceHelper.getSmtpPort().length() > 0
                 && preferenceHelper.getSmtpUsername().length() > 0;
+    }
+
+    @Override
+    protected boolean hasUserAllowedAutoSending() {
+        return preferenceHelper.isEmailAutoSendEnabled();
     }
 
 

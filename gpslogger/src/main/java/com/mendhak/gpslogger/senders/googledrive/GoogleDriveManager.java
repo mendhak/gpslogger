@@ -19,7 +19,6 @@ package com.mendhak.gpslogger.senders.googledrive;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.mendhak.gpslogger.common.AppSettings;
@@ -37,7 +36,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class GoogleDriveManager implements IFileSender {
+public class GoogleDriveManager extends IFileSender {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GoogleDriveManager.class.getSimpleName());
     final PreferenceHelper preferenceHelper;
@@ -79,7 +78,12 @@ public class GoogleDriveManager implements IFileSender {
 
     @Override
     public boolean isAvailable() {
-        return preferenceHelper.isGDocsAutoSendEnabled() && isLinked();
+        return isLinked();
+    }
+
+    @Override
+    protected boolean hasUserAllowedAutoSending() {
+        return preferenceHelper.isGDocsAutoSendEnabled();
     }
 
     public void uploadTestFile(File file, String googleDriveFolderName){

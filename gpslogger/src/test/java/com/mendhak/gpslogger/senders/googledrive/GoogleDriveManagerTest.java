@@ -16,25 +16,30 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class GoogleDriveManagerTest {
 
-    @Test
-    public void IsAvailable_DefaultValues_NotAvailable(){
-        PreferenceHelper pm = mock(PreferenceHelper.class);
-
-        GoogleDriveManager gdm = new GoogleDriveManager(pm);
-        assertThat("Default google drive availability", gdm.isAvailable(), is(false));
-    }
-
 
     @Test
     public void IsAvailable_AccountAndToken_IsAvailable(){
         PreferenceHelper pm = mock(PreferenceHelper.class);
         when(pm.getGoogleDriveAccountName()).thenReturn("XXXXXXX");
         when(pm.getGoogleDriveAuthToken()).thenReturn("YYYYYYYYYYY");
-        when(pm.isGDocsAutoSendEnabled()).thenReturn(true);
+        when(pm.isGDocsAutoSendEnabled()).thenReturn(false);
 
         GoogleDriveManager gdm = new GoogleDriveManager(pm);
         assertThat("Account and token indicate availability", gdm.isAvailable(), is(true));
     }
+
+    @Test
+    public void IsAutoSendAvailable_UserCheckedAutosend_IsAvailable(){
+        PreferenceHelper pm = mock(PreferenceHelper.class);
+        when(pm.getGoogleDriveAccountName()).thenReturn("XXXXXXX");
+        when(pm.getGoogleDriveAuthToken()).thenReturn("YYYYYYYYYYY");
+        when(pm.isGDocsAutoSendEnabled()).thenReturn(true);
+
+        GoogleDriveManager gdm = new GoogleDriveManager(pm);
+        assertThat("Account and token indicate availability", gdm.isAutoSendAvailable(), is(true));
+    }
+
+
 
 
 }

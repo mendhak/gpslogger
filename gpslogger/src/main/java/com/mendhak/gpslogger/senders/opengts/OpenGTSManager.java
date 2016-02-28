@@ -30,7 +30,7 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-public class OpenGTSManager implements IFileSender {
+public class OpenGTSManager extends IFileSender {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSManager.class.getSimpleName());
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
@@ -68,6 +68,11 @@ public class OpenGTSManager implements IFileSender {
                 && preferenceHelper.getOpenGTSServerPort().length() > 0
                 && preferenceHelper.getOpenGTSServerCommunicationMethod().length() > 0
                 && preferenceHelper.getOpenGTSDeviceId().length() > 0;
+    }
+
+    @Override
+    protected boolean hasUserAllowedAutoSending() {
+        return false;
     }
 
     private List<SerializableLocation> getLocationsFromGPX(File f) {

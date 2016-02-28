@@ -35,7 +35,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 
-public class FtpManager implements IFileSender {
+public class FtpManager extends IFileSender {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FtpManager.class.getSimpleName());
 
     PreferenceHelper preferenceHelper;
@@ -95,6 +95,11 @@ public class FtpManager implements IFileSender {
         return validSettings(preferenceHelper.getFtpServerName(), preferenceHelper.getFtpUsername(),
                 preferenceHelper.getFtpPassword(), preferenceHelper.getFtpPort(), preferenceHelper.FtpUseFtps(),
                 preferenceHelper.getFtpProtocol(), preferenceHelper.FtpImplicit());
+    }
+
+    @Override
+    protected boolean hasUserAllowedAutoSending() {
+        return preferenceHelper.isFtpAutoSendEnabled();
     }
 
     public void uploadFile(File f) {
