@@ -15,11 +15,12 @@
 *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.mendhak.gpslogger.loggers;
+package com.mendhak.gpslogger.loggers.gpx;
 
 import android.location.Location;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.loggers.IFileLogger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
@@ -39,7 +40,7 @@ public class Gpx10FileLogger implements IFileLogger {
     private final int satelliteCount;
     protected final String name = "GPX";
 
-    Gpx10FileLogger(File gpxFile, boolean addNewTrackSegment, int satelliteCount) {
+    public Gpx10FileLogger(File gpxFile, boolean addNewTrackSegment, int satelliteCount) {
         this.gpxFile = gpxFile;
         this.addNewTrackSegment = addNewTrackSegment;
         this.satelliteCount = satelliteCount;

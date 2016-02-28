@@ -1,6 +1,7 @@
 package com.mendhak.gpslogger.senders.dropbox;
 
 
+import android.support.v4.util.Pair;
 import android.test.suitebuilder.annotation.SmallTest;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import org.junit.Test;
@@ -63,6 +64,31 @@ public class DropBoxManagerTest {
 
         verify(pm).setDropBoxAccessKeyName(null);
         verify(pm).setDropBoxAccessSecret(null);
+    }
+
+    @Test
+    public void GetKeys_WhenOneValueNotPresent_ReturnsNull(){
+        PreferenceHelper pm = mock(PreferenceHelper.class);
+        DropBoxManager dropBoxManager = new DropBoxManager(pm);
+        when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
+
+        assertThat("Keys are null", dropBoxManager.getKeys(), is((Pair) null));
+
+        when(pm.getDropBoxAccessKeyName()).thenReturn("");
+        when(pm.getDropBoxAccessSecretName()).thenReturn("");
+
+        assertThat("Keys are null", dropBoxManager.getKeys(), is((Pair) null));
+    }
+
+    @Test
+    public void GetKeys_WhenBothValuesPresent_ReturnsKeys(){
+        PreferenceHelper pm = mock(PreferenceHelper.class);
+        DropBoxManager dropBoxManager = new DropBoxManager(pm);
+        when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
+        when(pm.getDropBoxAccessSecretName()).thenReturn("bbbbbbb");
+
+        assertThat("Keys are present", dropBoxManager.getKeys().first, is("aaaaaa"));
+        assertThat("Keys are present", dropBoxManager.getKeys().second, is("bbbbbbb"));
     }
 
     @Test

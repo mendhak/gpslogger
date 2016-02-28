@@ -1,14 +1,15 @@
-package com.mendhak.gpslogger.loggers;
+package com.mendhak.gpslogger.loggers.kml;
+
 
 import android.location.Location;
 import android.test.suitebuilder.annotation.SmallTest;
+import com.mendhak.gpslogger.loggers.MockLocations;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-
 
 @SmallTest
 @RunWith(MockitoJUnitRunner.class)
@@ -20,7 +21,7 @@ public class Kml22AnnotateHandlerTest {
     public void GetPlacemarkXml_BasicLocation_BasicPlacemarkNodeReturned() {
 
         Kml22AnnotateHandler kmlHandler = new Kml22AnnotateHandler(null, null, null);
-        Location loc = MockLocations.builder("MOCK", 12.193,19.111)
+        Location loc = MockLocations.builder("MOCK", 12.193, 19.111)
                 .withAltitude(9001d)
                 .withBearing(91.88f)
                 .withSpeed(188.44f)

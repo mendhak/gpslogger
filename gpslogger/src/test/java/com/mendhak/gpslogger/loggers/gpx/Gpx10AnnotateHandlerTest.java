@@ -1,16 +1,15 @@
-package com.mendhak.gpslogger.loggers;
+package com.mendhak.gpslogger.loggers.gpx;
 
 import android.location.Location;
 import android.test.suitebuilder.annotation.SmallTest;
+import com.mendhak.gpslogger.loggers.MockLocations;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
-
 
 @SmallTest
 @RunWith(MockitoJUnitRunner.class)

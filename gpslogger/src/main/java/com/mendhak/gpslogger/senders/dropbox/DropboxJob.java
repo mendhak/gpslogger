@@ -1,5 +1,6 @@
 package com.mendhak.gpslogger.senders.dropbox;
 
+import android.support.v4.util.Pair;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AccessTokenPair;
@@ -23,10 +24,10 @@ public class DropboxJob extends Job {
     DropboxAPI<AndroidAuthSession> dropboxApi;
     String dropboxAppKey;
     String dropboxAppSecret;
-    String[] storedKeys;
+    Pair<String,String> storedKeys;
     final static private Session.AccessType ACCESS_TYPE = Session.AccessType.APP_FOLDER;
 
-    protected DropboxJob(String fileName, String dropboxAppkey, String dropboxAppSecret, String[] storedKeys) {
+    protected DropboxJob(String fileName, String dropboxAppkey, String dropboxAppSecret, Pair<String,String> storedKeys) {
         super(new Params(1).requireNetwork().persist().addTags(getJobTag(fileName)));
 
         this.fileName = fileName;
@@ -59,7 +60,7 @@ public class DropboxJob extends Job {
         AndroidAuthSession session;
 
         if (storedKeys != null) {
-            AccessTokenPair accessToken = new AccessTokenPair(storedKeys[0], storedKeys[1]);
+            AccessTokenPair accessToken = new AccessTokenPair(storedKeys.first, storedKeys.second);
             session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE, accessToken);
         } else {
             session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE);

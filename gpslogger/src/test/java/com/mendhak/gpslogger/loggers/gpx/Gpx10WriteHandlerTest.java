@@ -1,13 +1,15 @@
-package com.mendhak.gpslogger.loggers;
+package com.mendhak.gpslogger.loggers.gpx;
 
 import android.location.Location;
 import android.test.suitebuilder.annotation.SmallTest;
+import com.mendhak.gpslogger.loggers.MockLocations;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+
 
 
 @SmallTest
@@ -19,7 +21,7 @@ public class Gpx10WriteHandlerTest {
 
         Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(null, null, null, false, 41);
 
-        Location loc = MockLocations.builder("MOCK", 12.193,19.111).build();
+        Location loc = MockLocations.builder("MOCK", 12.193, 19.111).build();
 
         String actual = writeHandler.GetTrackPointXml(loc, "2011-09-17T18:45:33Z");
         String expected = "<trkpt lat=\"12.193\" lon=\"19.111\"><time>2011-09-17T18:45:33Z</time><src>MOCK</src><sat>41</sat></trkpt>\n</trkseg></trk></gpx>";

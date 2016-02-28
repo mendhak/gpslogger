@@ -15,10 +15,11 @@
 *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.mendhak.gpslogger.loggers;
+package com.mendhak.gpslogger.loggers.csv;
 
 import android.location.Location;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.loggers.IFileLogger;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

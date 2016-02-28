@@ -17,6 +17,7 @@
 
 package com.mendhak.gpslogger.senders.dropbox;
 
+import android.support.v4.util.Pair;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AccessTokenPair;
@@ -26,6 +27,7 @@ import com.dropbox.client2.session.TokenPair;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
@@ -96,9 +98,9 @@ public class DropBoxManager implements IFileSender {
         AppKeyPair appKeyPair = new AppKeyPair(BuildConfig.DROPBOX_APP_KEY, BuildConfig.DROPBOX_APP_SECRET);
         AndroidAuthSession session;
 
-        String[] stored = getKeys();
-        if (stored != null) {
-            AccessTokenPair accessToken = new AccessTokenPair(stored[0], stored[1]);
+        Pair<String,String> storedKeys = getKeys();
+        if (storedKeys != null) {
+            AccessTokenPair accessToken = new AccessTokenPair(storedKeys.first, storedKeys.second);
             session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE, accessToken);
         } else {
             session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE);
@@ -114,17 +116,15 @@ public class DropBoxManager implements IFileSender {
      *
      * @return Array of [access_key, access_secret], or null if none stored
      */
-    private String[] getKeys() {
+    public Pair<String,String> getKeys() {
+
+        Pair<String, String> pair = null;
         String key = preferenceHelper.getDropBoxAccessKeyName();
         String secret = preferenceHelper.getDropBoxAccessSecretName();
-        if (key != null && secret != null) {
-            String[] ret = new String[2];
-            ret[0] = key;
-            ret[1] = secret;
-            return ret;
-        } else {
-            return null;
+        if (!Utilities.IsNullOrEmpty(key) && !Utilities.IsNullOrEmpty(secret)) {
+            pair = Pair.create(key,secret);
         }
+        return pair;
     }
 
     public void StartAuthentication(DropboxAuthorizationFragment dropboxAuthorizationFragment) {
