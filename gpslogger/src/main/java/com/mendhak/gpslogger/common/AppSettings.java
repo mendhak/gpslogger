@@ -22,10 +22,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.preference.PreferenceManager;
+import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.PreferenceNames;
 import com.mendhak.gpslogger.R;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.config.Configuration;
+import com.path.android.jobqueue.log.CustomLogger;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
@@ -42,6 +44,7 @@ public class AppSettings extends Application {
     private static org.slf4j.Logger tracer = LoggerFactory.getLogger(AppSettings.class.getSimpleName());
 
 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -51,6 +54,7 @@ public class AppSettings extends Application {
                 .networkUtil(new WifiNetworkUtil(getInstance()))
                 .consumerKeepAlive(60)
                 .minConsumerCount(2)
+                .customLogger(jobQueueLogger)
                 .build();
         jobManager = new JobManager(this, config);
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -73,6 +77,31 @@ public class AppSettings extends Application {
     public static AppSettings getInstance() {
         return instance;
     }
+
+
+    private final CustomLogger jobQueueLogger = new CustomLogger() {
+        @Override
+        public boolean isDebugEnabled() {
+            return BuildConfig.DEBUG;
+        }
+
+        @Override
+        public void d(String text, Object... args) {
+
+            tracer.debug(text);
+        }
+
+        @Override
+        public void e(Throwable t, String text, Object... args) {
+            tracer.error(text, t);
+        }
+
+        @Override
+        public void e(String text, Object... args) {
+
+            tracer.error(text);
+        }
+    };
 
 
     /**
@@ -888,7 +917,7 @@ public class AppSettings extends Application {
                         }
                     }
                     else {
-                        tracer.debug("Null value: " +((ProfilePreference)a).name() + " : " + String.valueOf(val) );
+                        tracer.debug("Null value: " +((ProfilePreference)a).name() + " is null.");
                     }
 
                 } catch (Exception e) {

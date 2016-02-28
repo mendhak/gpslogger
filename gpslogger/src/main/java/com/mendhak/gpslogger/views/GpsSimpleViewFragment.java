@@ -56,7 +56,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     }
 
-    public static final GpsSimpleViewFragment newInstance() {
+    public static GpsSimpleViewFragment newInstance() {
 
         GpsSimpleViewFragment fragment = new GpsSimpleViewFragment();
         Bundle bundle = new Bundle(1);

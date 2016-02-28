@@ -53,7 +53,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     private ActionProcessButton actionButton;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GpsDetailedViewFragment.class.getSimpleName());
 
-    public static final GpsDetailedViewFragment newInstance() {
+    public static GpsDetailedViewFragment newInstance() {
 
         GpsDetailedViewFragment fragment = new GpsDetailedViewFragment();
         Bundle bundle = new Bundle(1);

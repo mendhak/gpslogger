@@ -213,7 +213,7 @@ public class GpsMainActivity extends ActionBarActivity
 
 
     private void loadVersionSpecificProperties(){
-        PackageInfo packageInfo = null;
+        PackageInfo packageInfo;
         try {
             packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             int versionCode = packageInfo.versionCode;
@@ -279,7 +279,10 @@ public class GpsMainActivity extends ActionBarActivity
         try{
             Toolbar toolbar = getToolbar();
             setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            if(getSupportActionBar() != null){
+                getSupportActionBar().setDisplayShowTitleEnabled(false);
+            }
+
 
             //Deprecated in Lollipop but required if targeting 4.x
             SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.gps_main_views, R.layout.spinner_dropdown_item);
@@ -375,7 +378,7 @@ public class GpsMainActivity extends ActionBarActivity
                                 Utilities.MsgBox(getString(R.string.sorry), getString(R.string.profile_switch_before_delete), GpsMainActivity.this);
                             }
                             else {
-                                MaterialDialog confirmDeleteDialog = new MaterialDialog.Builder(GpsMainActivity.this)
+                                new MaterialDialog.Builder(GpsMainActivity.this)
                                         .title(getString(R.string.profile_delete))
                                         .content(iProfile.getName().getText())
                                         .positiveText(R.string.ok)
@@ -563,7 +566,6 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     public void toggleDrawer(){
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         if(materialDrawer.isDrawerOpen()){
             materialDrawer.closeDrawer();
 
@@ -889,7 +891,7 @@ public class GpsMainActivity extends ActionBarActivity
 
         final File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
 
-        if (gpxFolder != null && gpxFolder.exists() && Utilities.GetFilesInFolder(gpxFolder, sender).length > 0) {
+        if (gpxFolder.exists() && Utilities.GetFilesInFolder(gpxFolder, sender).length > 0) {
             File[] enumeratedFiles = Utilities.GetFilesInFolder(gpxFolder, sender);
 
             //Order by last modified

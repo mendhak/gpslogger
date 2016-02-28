@@ -28,7 +28,7 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
 
     Handler timerHandler = new Handler();
 
-    public static final GpsLogViewFragment newInstance() {
+    public static GpsLogViewFragment newInstance() {
         GpsLogViewFragment fragment = new GpsLogViewFragment();
         return fragment;
     }
@@ -70,11 +70,6 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
 
         @Override
         public void run() {
-            long millis = System.currentTimeMillis() - startTime;
-            int seconds = (int) (millis / 1000);
-            int minutes = seconds / 60;
-            seconds = seconds % 60;
-
             showLogcatMessages();
             timerHandler.postDelayed(this, 1500);
         }

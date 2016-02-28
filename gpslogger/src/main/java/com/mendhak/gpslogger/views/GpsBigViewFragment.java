@@ -36,7 +36,7 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
 
     View rootView;
 
-    public static final GpsBigViewFragment newInstance() {
+    public static GpsBigViewFragment newInstance() {
         GpsBigViewFragment fragment = new GpsBigViewFragment();
         Bundle bundle = new Bundle(1);
         bundle.putInt("a_number", 1);

@@ -1,15 +1,13 @@
 package com.mendhak.gpslogger.senders.dropbox;
 
 
-import android.support.v4.util.Pair;
 import android.test.suitebuilder.annotation.SmallTest;
+import com.dropbox.client2.session.AccessTokenPair;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-
 import java.io.File;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -72,12 +70,12 @@ public class DropBoxManagerTest {
         DropBoxManager dropBoxManager = new DropBoxManager(pm);
         when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
 
-        assertThat("Keys are null", dropBoxManager.getKeys(), is((Pair) null));
+        assertThat("Keys are null", dropBoxManager.getKeys(), is((AccessTokenPair) null));
 
         when(pm.getDropBoxAccessKeyName()).thenReturn("");
         when(pm.getDropBoxAccessSecretName()).thenReturn("");
 
-        assertThat("Keys are null", dropBoxManager.getKeys(), is((Pair) null));
+        assertThat("Keys are null", dropBoxManager.getKeys(), is((AccessTokenPair) null));
     }
 
     @Test
@@ -87,8 +85,8 @@ public class DropBoxManagerTest {
         when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
         when(pm.getDropBoxAccessSecretName()).thenReturn("bbbbbbb");
 
-        assertThat("Keys are present", dropBoxManager.getKeys().first, is("aaaaaa"));
-        assertThat("Keys are present", dropBoxManager.getKeys().second, is("bbbbbbb"));
+        assertThat("Keys are present", dropBoxManager.getKeys().key, is("aaaaaa"));
+        assertThat("Keys are present", dropBoxManager.getKeys().secret, is("bbbbbbb"));
     }
 
     @Test
@@ -98,6 +96,17 @@ public class DropBoxManagerTest {
 
         assertThat("Any file type", dropBoxManager.accept(null,null), is(true));
         assertThat("Any file type", dropBoxManager.accept(new File("/"),"abc.xyz"), is(true));
+    }
+
+    @Test
+    public void GetSession_WhenKeysPresent_SessionReturend(){
+        PreferenceHelper pm = mock(PreferenceHelper.class);
+        when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
+        when(pm.getDropBoxAccessSecretName()).thenReturn("bbbbbbb");
+        DropBoxManager dropBoxManager = new DropBoxManager(pm);
+
+        assertThat("Session holds key", dropBoxManager.getSession().getAccessTokenPair().key, is("aaaaaa"));
+        assertThat("Session holds secret", dropBoxManager.getSession().getAccessTokenPair().secret, is("bbbbbbb"));
     }
 
 }

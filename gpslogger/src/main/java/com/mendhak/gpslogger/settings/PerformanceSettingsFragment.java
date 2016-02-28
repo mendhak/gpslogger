@@ -20,7 +20,7 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
 
         addPreferencesFromResource(R.xml.pref_performance);
 
-        Preference prefListeners = (Preference)findPreference("listeners");
+        Preference prefListeners = findPreference("listeners");
         prefListeners.setOnPreferenceClickListener(this);
     }
 

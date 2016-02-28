@@ -22,7 +22,7 @@ public class ContentApi extends ContentProvider {
 
         String queryType = uri.getPathSegments().get(0);
         tracer.debug(queryType);
-        String result = "";
+        String result;
 
         switch(queryType){
             case "gpslogger_folder":

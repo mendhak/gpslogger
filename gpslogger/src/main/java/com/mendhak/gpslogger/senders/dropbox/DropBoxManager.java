@@ -17,7 +17,7 @@
 
 package com.mendhak.gpslogger.senders.dropbox;
 
-import android.support.v4.util.Pair;
+
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AccessTokenPair;
@@ -32,7 +32,6 @@ import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.util.List;
 
@@ -47,7 +46,7 @@ public class DropBoxManager implements IFileSender {
 
     public DropBoxManager(PreferenceHelper preferenceHelper) {
         this.preferenceHelper = preferenceHelper;
-        AndroidAuthSession session = buildSession();
+        AndroidAuthSession session = getSession();
         dropboxApi = new DropboxAPI<>(session);
     }
 
@@ -94,14 +93,17 @@ public class DropBoxManager implements IFileSender {
         preferenceHelper.setDropBoxAccessSecret(null);
     }
 
-    private AndroidAuthSession buildSession() {
+    /**
+     * Returns a Dropbox API session, which holds various auth and operational methods on it
+     * @return
+     */
+    protected AndroidAuthSession getSession() {
         AppKeyPair appKeyPair = new AppKeyPair(BuildConfig.DROPBOX_APP_KEY, BuildConfig.DROPBOX_APP_SECRET);
         AndroidAuthSession session;
 
-        Pair<String,String> storedKeys = getKeys();
+        AccessTokenPair storedKeys = getKeys();
         if (storedKeys != null) {
-            AccessTokenPair accessToken = new AccessTokenPair(storedKeys.first, storedKeys.second);
-            session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE, accessToken);
+            session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE, storedKeys);
         } else {
             session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE);
         }
@@ -116,13 +118,13 @@ public class DropBoxManager implements IFileSender {
      *
      * @return Array of [access_key, access_secret], or null if none stored
      */
-    public Pair<String,String> getKeys() {
+    public AccessTokenPair getKeys() {
 
-        Pair<String, String> pair = null;
+        AccessTokenPair pair = null;
         String key = preferenceHelper.getDropBoxAccessKeyName();
         String secret = preferenceHelper.getDropBoxAccessSecretName();
         if (!Utilities.IsNullOrEmpty(key) && !Utilities.IsNullOrEmpty(secret)) {
-            pair = Pair.create(key,secret);
+            pair = new AccessTokenPair(key, secret);
         }
         return pair;
     }
@@ -143,6 +145,7 @@ public class DropBoxManager implements IFileSender {
     @Override
     public void uploadFile(List<File> files) {
         for (File f : files) {
+            tracer.debug(f.getName());
             uploadFile(f.getName());
         }
     }
@@ -158,7 +161,7 @@ public class DropBoxManager implements IFileSender {
     public void uploadFile(String fileName) {
         JobManager jobManager = AppSettings.GetJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, DropboxJob.getJobTag(fileName));
-        jobManager.addJobInBackground(new DropboxJob(fileName, BuildConfig.DROPBOX_APP_KEY, BuildConfig.DROPBOX_APP_SECRET, getKeys()));
+        jobManager.addJobInBackground(new DropboxJob(fileName));
     }
 
     @Override

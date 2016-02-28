@@ -54,7 +54,10 @@ public class MainPreferenceActivity extends ActionBarActivity {
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
 
 
         tracer = LoggerFactory.getLogger(MainPreferenceActivity.class.getSimpleName());

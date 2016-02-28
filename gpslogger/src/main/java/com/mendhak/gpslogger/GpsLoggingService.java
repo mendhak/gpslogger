@@ -651,23 +651,17 @@ public class GpsLoggingService extends Service  {
 
         String oldFileName = Session.getCurrentFormattedFileName();
 
-        /* Pick up saved settings, if any. (Saved static file) */
-        String newFileName = Session.getCurrentFileName();
-
         /* Update the file name, if required. (New day, Re-start service) */
         if (AppSettings.shouldCreateCustomFile()) {
-            newFileName = AppSettings.getCustomFileName();
             Session.setCurrentFileName(AppSettings.getCustomFileName());
         } else if (AppSettings.shouldCreateNewFileOnceADay()) {
             // 20100114.gpx
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-            newFileName = sdf.format(new Date());
-            Session.setCurrentFileName(newFileName);
+            Session.setCurrentFileName(sdf.format(new Date()));
         } else if (newLogEachStart) {
             // 20100114183329.gpx
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-            newFileName = sdf.format(new Date());
-            Session.setCurrentFileName(newFileName);
+            Session.setCurrentFileName(sdf.format(new Date()));
         }
 
         if(!Utilities.IsNullOrEmpty(oldFileName)

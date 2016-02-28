@@ -60,7 +60,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
         addPreferencesFromResource(R.xml.pref_logging);
 
-        Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
+        Preference gpsloggerFolder = findPreference("gpslogger_folder");
         gpsloggerFolder.setOnPreferenceClickListener(this);
         String gpsLoggerFolderPath = AppSettings.getGpsLoggerFolder();
         gpsloggerFolder.setSummary(gpsLoggerFolderPath);
@@ -86,7 +86,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
         }
 
 
-        Preference prefNewFileCustomName = (Preference)findPreference("new_file_custom_name");
+        Preference prefNewFileCustomName = findPreference("new_file_custom_name");
         prefNewFileCustomName.setOnPreferenceClickListener(this);
 
 
@@ -161,14 +161,10 @@ public class LoggingSettingsFragment extends PreferenceFragment
         if (preference.getKey().equalsIgnoreCase("log_opengts")) {
 
             if(!((CustomSwitchPreference) preference).isChecked() && (Boolean)newValue  ) {
-                CustomSwitchPreference chkLog_opengts = (CustomSwitchPreference) findPreference("log_opengts");
 
-                if ((Boolean)newValue) {
-                    Intent targetActivity = new Intent(getActivity(), MainPreferenceActivity.class);
-                    targetActivity.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS);
-                    startActivity(targetActivity);
-
-                }
+                Intent targetActivity = new Intent(getActivity(), MainPreferenceActivity.class);
+                targetActivity.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS);
+                startActivity(targetActivity);
             }
 
             return true;
@@ -226,9 +222,9 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
         if (preference.getKey().equals("new_file_creation")) {
 
-            Preference prefFileStaticName = (Preference) findPreference("new_file_custom_name");
-            Preference prefAskEachTime = (Preference)findPreference("new_file_custom_each_time");
-            Preference prefSerialPrefix = (Preference) findPreference("new_file_prefix_serial");
+            Preference prefFileStaticName = findPreference("new_file_custom_name");
+            Preference prefAskEachTime = findPreference("new_file_custom_each_time");
+            Preference prefSerialPrefix = findPreference("new_file_prefix_serial");
             prefAskEachTime.setEnabled(newValue.equals("custom"));
             prefFileStaticName.setEnabled(newValue.equals("custom"));
             prefSerialPrefix.setEnabled(!newValue.equals("custom"));
@@ -241,9 +237,9 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
     private void setPreferencesEnabledDisabled() {
 
-        Preference prefFileStaticName = (Preference) findPreference("new_file_custom_name");
-        Preference prefAskEachTime = (Preference)findPreference("new_file_custom_each_time");
-        Preference prefSerialPrefix = (Preference) findPreference("new_file_prefix_serial");
+        Preference prefFileStaticName = findPreference("new_file_custom_name");
+        Preference prefAskEachTime = findPreference("new_file_custom_each_time");
+        Preference prefSerialPrefix = findPreference("new_file_prefix_serial");
 
         prefFileStaticName.setEnabled(AppSettings.shouldCreateCustomFile());
         prefAskEachTime.setEnabled(AppSettings.shouldCreateCustomFile());
@@ -268,7 +264,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
         }
 
         AppSettings.setGpsLoggerFolder(folderPath);
-        Preference gpsloggerFolder = (Preference) findPreference("gpslogger_folder");
+        Preference gpsloggerFolder = findPreference("gpslogger_folder");
         gpsloggerFolder.setSummary(folderPath);
     }
 
