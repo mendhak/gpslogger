@@ -1,4 +1,4 @@
-package com.mendhak.gpslogger.senders.gdocs;
+package com.mendhak.gpslogger.senders.googledrive;
 
 import android.os.Build;
 import android.os.Bundle;

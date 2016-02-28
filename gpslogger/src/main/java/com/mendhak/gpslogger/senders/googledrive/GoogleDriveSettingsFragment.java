@@ -15,7 +15,7 @@
 *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.mendhak.gpslogger.senders.gdocs;
+package com.mendhak.gpslogger.senders.googledrive;
 
 import android.Manifest;
 import android.accounts.AccountManager;

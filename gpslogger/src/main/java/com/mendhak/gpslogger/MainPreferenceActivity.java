@@ -27,7 +27,7 @@ import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.dropbox.DropboxAuthorizationFragment;
 import com.mendhak.gpslogger.senders.email.AutoEmailFragment;
 import com.mendhak.gpslogger.senders.ftp.FtpFragment;
-import com.mendhak.gpslogger.senders.gdocs.GoogleDriveSettingsFragment;
+import com.mendhak.gpslogger.senders.googledrive.GoogleDriveSettingsFragment;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSFragment;
 import com.mendhak.gpslogger.senders.osm.OSMAuthorizationFragment;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudSettingsFragment;
