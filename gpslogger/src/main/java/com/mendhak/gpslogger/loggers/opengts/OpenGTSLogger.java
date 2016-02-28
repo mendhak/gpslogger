@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.loggers.opengts;
 import android.content.Context;
 import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.path.android.jobqueue.JobManager;
@@ -33,6 +34,7 @@ public class OpenGTSLogger implements IFileLogger {
 
     protected final String name = "OpenGTS";
     final Context context;
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     public OpenGTSLogger(Context context) {
         this.context = context;
@@ -41,12 +43,12 @@ public class OpenGTSLogger implements IFileLogger {
     @Override
     public void write(Location loc) throws Exception {
 
-        String server = AppSettings.getOpenGTSServer();
-        int port = Integer.parseInt(AppSettings.getOpenGTSServerPort());
-        String accountName = AppSettings.getOpenGTSAccountName();
-        String path = AppSettings.getOpenGTSServerPath();
-        String deviceId = AppSettings.getOpenGTSDeviceId();
-        String communication = AppSettings.getOpenGTSServerCommunicationMethod();
+        String server = preferenceHelper.getOpenGTSServer();
+        int port = Integer.parseInt(preferenceHelper.getOpenGTSServerPort());
+        String accountName = preferenceHelper.getOpenGTSAccountName();
+        String path = preferenceHelper.getOpenGTSServerPath();
+        String deviceId = preferenceHelper.getOpenGTSDeviceId();
+        String communication = preferenceHelper.getOpenGTSServerCommunicationMethod();
 
         JobManager jobManager = AppSettings.GetJobManager();
         jobManager.addJobInBackground(new OpenGTSJob(server, port, accountName, path, deviceId, communication, new SerializableLocation[]{new SerializableLocation(loc)}));

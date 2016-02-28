@@ -18,7 +18,6 @@
 package com.mendhak.gpslogger.senders;
 
 import android.content.Context;
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxManager;
@@ -94,7 +93,7 @@ public class FileSenderFactory {
             return;
         }
 
-        if (AppSettings.shouldSendZipFile()) {
+        if (preferenceHelper.shouldSendZipFile()) {
             File zipFile = new File(gpxFolder.getPath(), fileToSend + ".zip");
             ArrayList<String> filePaths = new ArrayList<>();
 
@@ -120,7 +119,7 @@ public class FileSenderFactory {
                 continue;
             }
 
-            if(AppSettings.shouldSendZipFile()){
+            if(preferenceHelper.shouldSendZipFile()){
                 sender.uploadFile(zipFiles);
             } else {
                 sender.uploadFile(files);

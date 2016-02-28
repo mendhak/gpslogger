@@ -34,7 +34,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.*;
+import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import org.slf4j.LoggerFactory;
 
@@ -127,41 +130,41 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         ImageView imgNmea = (ImageView) rootView.findViewById(R.id.simpleview_imgNmea);
         ImageView imgLink = (ImageView) rootView.findViewById(R.id.simpleview_imgLink);
 
-        if (AppSettings.shouldLogToGpx()) {
+        if (preferenceHelper.shouldLogToGpx()) {
 
             imgGpx.setVisibility(View.VISIBLE);
         } else {
             imgGpx.setVisibility(View.GONE);
         }
 
-        if (AppSettings.shouldLogToKml()) {
+        if (preferenceHelper.shouldLogToKml()) {
 
             imgKml.setVisibility(View.VISIBLE);
         } else {
             imgKml.setVisibility(View.GONE);
         }
 
-        if (AppSettings.shouldLogToNmea()) {
+        if (preferenceHelper.shouldLogToNmea()) {
             imgNmea.setVisibility(View.VISIBLE);
         } else {
             imgNmea.setVisibility(View.GONE);
         }
 
-        if (AppSettings.shouldLogToPlainText()) {
+        if (preferenceHelper.shouldLogToPlainText()) {
 
             imgCsv.setVisibility(View.VISIBLE);
         } else {
             imgCsv.setVisibility(View.GONE);
         }
 
-        if (AppSettings.shouldLogToCustomUrl()) {
+        if (preferenceHelper.shouldLogToCustomUrl()) {
             imgLink.setVisibility(View.VISIBLE);
         } else {
             imgLink.setVisibility(View.GONE);
         }
 
-        if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml()
-                && !AppSettings.shouldLogToPlainText()) {
+        if (!preferenceHelper.shouldLogToGpx() && !preferenceHelper.shouldLogToKml()
+                && !preferenceHelper.shouldLogToPlainText()) {
             showCurrentFileName(null);
         }
 
@@ -331,7 +334,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
             TextView txtAccuracy = (TextView) rootView.findViewById(R.id.simpleview_txtAccuracy);
             float accuracy = locationInfo.getAccuracy();
-            txtAccuracy.setText(Utilities.GetDistanceDisplay(getActivity(), accuracy, AppSettings.shouldDisplayImperialUnits()));
+            txtAccuracy.setText(Utilities.GetDistanceDisplay(getActivity(), accuracy, preferenceHelper.shouldDisplayImperialUnits()));
 
             if (accuracy > 500) {
                 setColor(imgAccuracy, IconColorIndicator.Warning);
@@ -351,7 +354,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             setColor(imgAltitude, IconColorIndicator.Good);
             TextView txtAltitude = (TextView) rootView.findViewById(R.id.simpleview_txtAltitude);
 
-            txtAltitude.setText(Utilities.GetDistanceDisplay(getActivity(), locationInfo.getAltitude(), AppSettings.shouldDisplayImperialUnits()));
+            txtAltitude.setText(Utilities.GetDistanceDisplay(getActivity(), locationInfo.getAltitude(), preferenceHelper.shouldDisplayImperialUnits()));
         }
 
         ImageView imgSpeed = (ImageView)rootView.findViewById(R.id.simpleview_imgSpeed);
@@ -362,7 +365,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             setColor(imgSpeed, IconColorIndicator.Good);
 
             TextView txtSpeed = (TextView) rootView.findViewById(R.id.simpleview_txtSpeed);
-            txtSpeed.setText(Utilities.GetSpeedDisplay(getActivity(),locationInfo.getSpeed(),AppSettings.shouldDisplayImperialUnits()));
+            txtSpeed.setText(Utilities.GetSpeedDisplay(getActivity(),locationInfo.getSpeed(),preferenceHelper.shouldDisplayImperialUnits()));
         }
 
         ImageView imgDirection = (ImageView) rootView.findViewById(R.id.simpleview_imgDirection);
@@ -388,7 +391,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         TextView txtPoints = (TextView) rootView.findViewById(R.id.simpleview_txtPoints);
         TextView txtTravelled = (TextView) rootView.findViewById(R.id.simpleview_txtDistance);
 
-        txtTravelled.setText(Utilities.GetDistanceDisplay(getActivity(), distanceValue, AppSettings.shouldDisplayImperialUnits()));
+        txtTravelled.setText(Utilities.GetDistanceDisplay(getActivity(), distanceValue, preferenceHelper.shouldDisplayImperialUnits()));
         txtPoints.setText(Session.getNumLegs() + " " + getString(R.string.points));
 
         String providerName = locationInfo.getProvider();
@@ -518,7 +521,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
                 break;
 
             case R.id.simpleview_imgLink:
-                toast = getToast(AppSettings.getCustomLoggingUrl());
+                toast = getToast(preferenceHelper.getCustomLoggingUrl());
                 break;
 
         }

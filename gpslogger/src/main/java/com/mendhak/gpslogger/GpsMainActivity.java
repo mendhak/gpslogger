@@ -47,7 +47,10 @@ import android.widget.*;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.amulyakhare.textdrawable.TextDrawable;
-import com.mendhak.gpslogger.common.*;
+import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ProfileEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
@@ -68,6 +71,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -106,7 +110,7 @@ public class GpsMainActivity extends ActionBarActivity
         startAndBindService();
         registerEventBus();
 
-        if(AppSettings.shouldStartLoggingOnAppLaunch()){
+        if(preferenceHelper.shouldStartLoggingOnAppLaunch()){
             tracer.debug("Start logging on app launch");
             EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
         }
@@ -217,17 +221,17 @@ public class GpsMainActivity extends ActionBarActivity
             int versionCode = packageInfo.versionCode;
 
             tracer.debug("Version code " +String.valueOf(versionCode));
-            if( AppSettings.getLastVersionSeen() <= 71 ){
-                tracer.debug("AppSettings.getLastVersionSeen() " + AppSettings.getLastVersionSeen() );
+            if( preferenceHelper.getLastVersionSeen() <= 71 ){
+                tracer.debug("preferenceHelper.getLastVersionSeen() " + preferenceHelper.getLastVersionSeen() );
                 //Specifically disable passive provider... just once
-                if(AppSettings.getChosenListeners().contains("passive")){
+                if(preferenceHelper.getChosenListeners().contains("passive")){
                     Set<String> listeners = new HashSet<>();
-                    if(AppSettings.getChosenListeners().contains(LocationManager.GPS_PROVIDER)){ listeners.add(LocationManager.GPS_PROVIDER); }
-                    if(AppSettings.getChosenListeners().contains(LocationManager.NETWORK_PROVIDER)){ listeners.add(LocationManager.NETWORK_PROVIDER); }
-                    AppSettings.setChosenListeners(listeners);
+                    if(preferenceHelper.getChosenListeners().contains(LocationManager.GPS_PROVIDER)){ listeners.add(LocationManager.GPS_PROVIDER); }
+                    if(preferenceHelper.getChosenListeners().contains(LocationManager.NETWORK_PROVIDER)){ listeners.add(LocationManager.NETWORK_PROVIDER); }
+                    preferenceHelper.setChosenListeners(listeners);
                 }
             }
-            AppSettings.setLastVersionSeen(versionCode);
+            preferenceHelper.setLastVersionSeen(versionCode);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -246,7 +250,7 @@ public class GpsMainActivity extends ActionBarActivity
         }
 
         try {
-            AppSettings.SetPreferenceFromPropertiesFile(file);
+            preferenceHelper.SetPreferenceFromPropertiesFile(file);
         } catch (Exception e) {
             tracer.error("Could not load preset properties", e);
         }
@@ -372,7 +376,7 @@ public class GpsMainActivity extends ActionBarActivity
                     public boolean onProfileLongClick(View view, final IProfile iProfile, boolean b) {
                         if (iProfile.getIdentifier() > 150 ) {
 
-                            if( AppSettings.getCurrentProfileName().equals(iProfile.getName().getText()) ){
+                            if( preferenceHelper.getCurrentProfileName().equals(iProfile.getName().getText()) ){
                                 Utilities.MsgBox(getString(R.string.sorry), getString(R.string.profile_switch_before_delete), GpsMainActivity.this);
                             }
                             else {
@@ -510,7 +514,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     private void populateProfilesList() {
 
-        tracer.debug("Current profile:" + AppSettings.getCurrentProfileName());
+        tracer.debug("Current profile:" + preferenceHelper.getCurrentProfileName());
 
         drawerHeader.clear();
 
@@ -551,14 +555,14 @@ public class GpsMainActivity extends ActionBarActivity
 
             drawerHeader.addProfile(pdi, 1);
 
-            if(name.equals(AppSettings.getCurrentProfileName())){
+            if(name.equals(preferenceHelper.getCurrentProfileName())){
                 pdi.withSetSelected(true);
                 drawerHeader.setActiveProfile(pdi);
             }
 
         }
 
-        refreshProfileIcon(AppSettings.getCurrentProfileName());
+        refreshProfileIcon(preferenceHelper.getCurrentProfileName());
 
 
     }
@@ -574,7 +578,7 @@ public class GpsMainActivity extends ActionBarActivity
     }
 
     private int getUserSelectedNavigationItem(){
-        return AppSettings.getUserSelectedNavigationItem();
+        return preferenceHelper.getUserSelectedNavigationItem();
     }
 
     private void loadDefaultFragmentView() {
@@ -614,7 +618,7 @@ public class GpsMainActivity extends ActionBarActivity
 
     @Override
     public boolean onNavigationItemSelected(int position, long itemId) {
-        AppSettings.setUserSelectedNavigationItem(position);
+        preferenceHelper.setUserSelectedNavigationItem(position);
         loadFragmentView(position);
         return true;
     }
@@ -703,7 +707,7 @@ public class GpsMainActivity extends ActionBarActivity
 
         if (mnuAnnotate != null) {
 
-            if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml() && !AppSettings.shouldLogToCustomUrl()) {
+            if (!preferenceHelper.shouldLogToGpx() && !preferenceHelper.shouldLogToKml() && !preferenceHelper.shouldLogToCustomUrl()) {
                 mnuAnnotate.setIcon(R.drawable.annotate2_disabled);
                 mnuAnnotate.setEnabled(false);
             } else {
@@ -768,7 +772,7 @@ public class GpsMainActivity extends ActionBarActivity
     private void forceAutoSendNow() {
         tracer.debug("User forced an auto send");
 
-        if (AppSettings.isAutoSendEnabled()) {
+        if (preferenceHelper.isAutoSendEnabled()) {
             Utilities.ShowProgress(this, getString(R.string.autosend_sending),getString(R.string.please_wait));
             EventBus.getDefault().post(new CommandEvents.AutoSend(null));
 
@@ -789,7 +793,7 @@ public class GpsMainActivity extends ActionBarActivity
      */
     private void annotate() {
 
-        if (!AppSettings.shouldLogToGpx() && !AppSettings.shouldLogToKml() && !AppSettings.shouldLogToCustomUrl()) {
+        if (!preferenceHelper.shouldLogToGpx() && !preferenceHelper.shouldLogToKml() && !preferenceHelper.shouldLogToCustomUrl()) {
             Toast.makeText(getApplicationContext(), getString(R.string.annotation_requires_logging), Toast.LENGTH_SHORT).show();
             return;
         }

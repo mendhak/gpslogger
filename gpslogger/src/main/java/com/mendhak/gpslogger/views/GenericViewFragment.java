@@ -31,8 +31,8 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.CommandEvents;
@@ -48,6 +48,7 @@ import org.slf4j.LoggerFactory;
 public abstract class GenericViewFragment extends PermissionedFragment  {
 
     private org.slf4j.Logger tracer;
+    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,7 +103,7 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
             return;
         }
 
-        if (AppSettings.shouldCreateCustomFile() && AppSettings.shouldAskCustomFileNameEachTime()) {
+        if (preferenceHelper.shouldCreateCustomFile() && preferenceHelper.shouldAskCustomFileNameEachTime()) {
 
             MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
                     .title(R.string.new_file_custom_title)
@@ -111,11 +112,11 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
                     .onPositive(new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                            String chosenFileName = AppSettings.getCustomFileName();
+                            String chosenFileName = preferenceHelper.getCustomFileName();
                             EditText userInput = (EditText) materialDialog.getCustomView().findViewById(R.id.alert_user_input);
 
                             if (!Utilities.IsNullOrEmpty(userInput.getText().toString()) && !userInput.getText().toString().equalsIgnoreCase(chosenFileName)) {
-                                AppSettings.setCustomFileName(userInput.getText().toString());
+                                preferenceHelper.setCustomFileName(userInput.getText().toString());
                             }
                             toggleLogging();
                         }
@@ -133,7 +134,7 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
                     .build();
 
             EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
-            userInput.setText(AppSettings.getCustomFileName());
+            userInput.setText(preferenceHelper.getCustomFileName());
             TextView tvMessage = (TextView) alertDialog.getCustomView().findViewById(R.id.alert_user_message);
             tvMessage.setText(R.string.new_file_custom_message);
             alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);

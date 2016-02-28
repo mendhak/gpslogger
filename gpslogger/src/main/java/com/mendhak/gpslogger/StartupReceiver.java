@@ -20,7 +20,7 @@ package com.mendhak.gpslogger;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,7 @@ public class StartupReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         try {
-            boolean startImmediately = AppSettings.shouldStartLoggingOnBootup();
+            boolean startImmediately = PreferenceHelper.getInstance().shouldStartLoggingOnBootup();
 
             tracer.info("Start on bootup - "  + String.valueOf(startImmediately));
 

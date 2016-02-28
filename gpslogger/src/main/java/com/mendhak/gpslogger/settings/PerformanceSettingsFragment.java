@@ -6,13 +6,15 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PerformanceSettingsFragment  extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
+
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,9 +32,9 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
         if(preference.getKey().equalsIgnoreCase("listeners")){
 
             ArrayList<Integer> chosenIndices = new ArrayList<>();
-            final List<String> availableListeners = AppSettings.GetAvailableListeners();
+            final List<String> availableListeners = preferenceHelper.GetAvailableListeners();
 
-            for(String chosenListener : AppSettings.getChosenListeners()){
+            for(String chosenListener : preferenceHelper.getChosenListeners()){
                 chosenIndices.add(availableListeners.indexOf(chosenListener));
             }
 
@@ -45,7 +47,7 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
                         @Override
                         public boolean onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
 
-                            AppSettings.setChosenListeners(integers);
+                            preferenceHelper.setChosenListeners(integers);
 
                             return true;
                         }

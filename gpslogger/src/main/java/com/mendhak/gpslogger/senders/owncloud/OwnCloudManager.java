@@ -78,10 +78,10 @@ public class OwnCloudManager implements IFileSender
 
     @Override
     public boolean isAvailable() {
-        return ValidSettings(AppSettings.getOwnCloudServerName(),
-                AppSettings.getOwnCloudUsername(),
-                AppSettings.getOwnCloudPassword(),
-                AppSettings.getOwnCloudDirectory());
+        return ValidSettings(preferenceHelper.getOwnCloudServerName(),
+                preferenceHelper.getOwnCloudUsername(),
+                preferenceHelper.getOwnCloudPassword(),
+                preferenceHelper.getOwnCloudDirectory());
     }
 
     public void uploadFile(File f)
@@ -89,10 +89,10 @@ public class OwnCloudManager implements IFileSender
         JobManager jobManager = AppSettings.GetJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OwnCloudJob.getJobTag(f));
         jobManager.addJobInBackground(new OwnCloudJob(
-                AppSettings.getOwnCloudServerName(),
-                AppSettings.getOwnCloudUsername(),
-                AppSettings.getOwnCloudPassword(),
-                AppSettings.getOwnCloudDirectory(),
+                preferenceHelper.getOwnCloudServerName(),
+                preferenceHelper.getOwnCloudUsername(),
+                preferenceHelper.getOwnCloudPassword(),
+                preferenceHelper.getOwnCloudDirectory(),
                 f, f.getName()));
     }
 

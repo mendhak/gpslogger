@@ -18,6 +18,7 @@
 package com.mendhak.gpslogger.senders.opengts;
 
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.loggers.opengts.OpenGTSJob;
 import com.mendhak.gpslogger.senders.GpxReader;
@@ -32,6 +33,7 @@ import java.util.List;
 public class OpenGTSManager implements IFileSender {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSManager.class.getSimpleName());
+    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     public OpenGTSManager() {
     }
@@ -46,12 +48,12 @@ public class OpenGTSManager implements IFileSender {
 
                 if (locations.size() > 0) {
 
-                    String server = AppSettings.getOpenGTSServer();
-                    int port = Integer.parseInt(AppSettings.getOpenGTSServerPort());
-                    String path = AppSettings.getOpenGTSServerPath();
-                    String deviceId = AppSettings.getOpenGTSDeviceId();
-                    String accountName = AppSettings.getOpenGTSAccountName();
-                    String communication = AppSettings.getOpenGTSServerCommunicationMethod();
+                    String server = preferenceHelper.getOpenGTSServer();
+                    int port = Integer.parseInt(preferenceHelper.getOpenGTSServerPort());
+                    String path = preferenceHelper.getOpenGTSServerPath();
+                    String deviceId = preferenceHelper.getOpenGTSDeviceId();
+                    String accountName = preferenceHelper.getOpenGTSAccountName();
+                    String communication = preferenceHelper.getOpenGTSServerCommunicationMethod();
 
                     JobManager jobManager = AppSettings.GetJobManager();
                     jobManager.addJobInBackground(new OpenGTSJob(server, port, accountName, path, deviceId, communication, locations.toArray(new SerializableLocation[locations.size()])));
@@ -62,10 +64,10 @@ public class OpenGTSManager implements IFileSender {
 
     @Override
     public boolean isAvailable() {
-        return  AppSettings.getOpenGTSServer().length() > 0
-                && AppSettings.getOpenGTSServerPort().length() > 0
-                && AppSettings.getOpenGTSServerCommunicationMethod().length() > 0
-                && AppSettings.getOpenGTSDeviceId().length() > 0;
+        return  preferenceHelper.getOpenGTSServer().length() > 0
+                && preferenceHelper.getOpenGTSServerPort().length() > 0
+                && preferenceHelper.getOpenGTSServerCommunicationMethod().length() > 0
+                && preferenceHelper.getOpenGTSDeviceId().length() > 0;
     }
 
     private List<SerializableLocation> getLocationsFromGPX(File f) {

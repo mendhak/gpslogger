@@ -51,7 +51,7 @@ public class OpenStreetMapManager implements IFileSender {
     }
 
     protected boolean isOsmAuthorized() {
-        String oAuthAccessToken = AppSettings.getOSMAccessToken();
+        String oAuthAccessToken = preferenceHelper.getOSMAccessToken();
         return (oAuthAccessToken != null && oAuthAccessToken.length() > 0);
     }
 
@@ -64,8 +64,8 @@ public class OpenStreetMapManager implements IFileSender {
             consumer = new CommonsHttpOAuthConsumer(BuildConfig.OSM_CONSUMER_KEY, BuildConfig.OSM_CONSUMER_SECRET);
 
 
-            String osmAccessToken =  AppSettings.getOSMAccessToken();
-            String osmAccessTokenSecret = AppSettings.getOSMAccessTokenSecret();
+            String osmAccessToken =  preferenceHelper.getOSMAccessToken();
+            String osmAccessTokenSecret = preferenceHelper.getOSMAccessTokenSecret();
 
             if (osmAccessToken != null && osmAccessToken.length() > 0
                     && osmAccessTokenSecret != null
@@ -92,7 +92,7 @@ public class OpenStreetMapManager implements IFileSender {
 
     @Override
     public boolean isAvailable() {
-        return AppSettings.isOsmAutoSendEnabled() && isOsmAuthorized();
+        return preferenceHelper.isOsmAutoSendEnabled() && isOsmAuthorized();
     }
 
     public void uploadFile(String fileName) {
@@ -102,9 +102,9 @@ public class OpenStreetMapManager implements IFileSender {
         String gpsTraceUrl = OSM_GPSTRACE_URL;
 
 
-        String description = AppSettings.getOSMDescription();
-        String tags = AppSettings.getOSMTags();
-        String visibility = AppSettings.getOSMVisibility();
+        String description = preferenceHelper.getOSMDescription();
+        String tags = preferenceHelper.getOSMTags();
+        String visibility = preferenceHelper.getOSMVisibility();
 
         JobManager jobManager = AppSettings.GetJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OSMJob.getJobTag(chosenFile));

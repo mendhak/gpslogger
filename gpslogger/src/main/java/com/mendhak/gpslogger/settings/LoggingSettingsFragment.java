@@ -33,7 +33,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
@@ -140,13 +139,13 @@ public class LoggingSettingsFragment extends PreferenceFragment
                         @Override
                         public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                             EditText userInput = (EditText) materialDialog.getCustomView().findViewById(R.id.alert_user_input);
-                            AppSettings.setCustomFileName(userInput.getText().toString());
+                            preferenceHelper.setCustomFileName(userInput.getText().toString());
                         }
                     })
                    .build();
 
             EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
-            userInput.setText(AppSettings.getCustomFileName());
+            userInput.setText(preferenceHelper.getCustomFileName());
             TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
             tvMessage.setText(R.string.new_file_custom_message);
             alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -185,7 +184,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
                             @Override
                             public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                                 EditText userInput = (EditText) materialDialog.getCustomView().findViewById(R.id.alert_user_input);
-                                AppSettings.setCustomLoggingUrl(userInput.getText().toString());
+                                preferenceHelper.setCustomLoggingUrl(userInput.getText().toString());
                             }
                         })
                         .keyListener(new DialogInterface.OnKeyListener() {
@@ -201,7 +200,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
                         .build();
 
                 EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
-                userInput.setText(AppSettings.getCustomLoggingUrl());
+                userInput.setText(preferenceHelper.getCustomLoggingUrl());
                 userInput.setSingleLine(true);
                 userInput.setLines(4);
                 userInput.setHorizontallyScrolling(false);
@@ -243,9 +242,9 @@ public class LoggingSettingsFragment extends PreferenceFragment
         Preference prefAskEachTime = findPreference("new_file_custom_each_time");
         Preference prefSerialPrefix = findPreference("new_file_prefix_serial");
 
-        prefFileStaticName.setEnabled(AppSettings.shouldCreateCustomFile());
-        prefAskEachTime.setEnabled(AppSettings.shouldCreateCustomFile());
-        prefSerialPrefix.setEnabled(!AppSettings.shouldCreateCustomFile());
+        prefFileStaticName.setEnabled(preferenceHelper.shouldCreateCustomFile());
+        prefAskEachTime.setEnabled(preferenceHelper.shouldCreateCustomFile());
+        prefSerialPrefix.setEnabled(!preferenceHelper.shouldCreateCustomFile());
     }
 
     @Override
