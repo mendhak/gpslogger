@@ -118,8 +118,7 @@ public class Gpx10WriteHandlerTest {
                 .build();
 
         String actual = writeHandler.getTrackPointXml(loc, "2011-09-17T18:45:33Z");
-        String expected = "<trkseg><trkpt lat=\"12.193\" lon=\"19.111\"><ele>9001.0</ele><time>2011-09-17T18:45:33Z</time>" +
-                "<course>91.88</course><speed>188.44</speed><src>MOCK</src><geoidheight>MYGEOIDHEIGHT</geoidheight></trkpt>\n</trkseg></trk></gpx>";
+        String expected = "<trkseg><trkpt lat=\"12.193\" lon=\"19.111\"><ele>9001.0</ele><time>2011-09-17T18:45:33Z</time><course>91.88</course><speed>188.44</speed><geoidheight>MYGEOIDHEIGHT</geoidheight><src>MOCK</src></trkpt>\n</trkseg></trk></gpx>";
 
         assertThat("Trackpoint XML with a geoid height", actual, is(expected));
     }
