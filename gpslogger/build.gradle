@@ -21,6 +21,8 @@ apply plugin: 'com.mendhak.gradlecrowdin'
 apply plugin: 'let'
 //Generating PGP
 apply plugin: 'signing'
+//Generating colorful output
+apply from: '../gradle/colored-test-output.gradle'
 
 repositories {
     mavenCentral()
@@ -249,12 +251,14 @@ dependencies {
 
 
 tasks.withType(Test) {
-     //Tell Gradle to always run the tests even if build is up to date
+    //Tell Gradle to always run the tests even if build is up to date
     outputs.upToDateWhen { false }
 
     //Tell Gradle to show test output in the console
     testLogging {
-        events "started", "passed", "skipped", "failed"
+        events  "failed"
+        exceptionFormat = 'full'
+        showStandardStreams true
     }
 }
 
