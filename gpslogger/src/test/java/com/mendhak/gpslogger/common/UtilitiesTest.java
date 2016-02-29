@@ -191,4 +191,35 @@ public class UtilitiesTest {
         assertThat("9001 seconds returns correspnding time", actual, is(expected));
     }
 
+    @Test
+    public void GetFormattedErrorMessageForDisplay() {
+        String message = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.";
+        Throwable t = new Throwable("Parameter not set.\r\nException handling not configured.\r\nEat oranges they are great.\r\n");
+        t.setStackTrace(new StackTraceElement[]{new StackTraceElement("XXX", "yyy", "BBB", 99)});
+
+        String expected = "<b>An error occurred.<br />220 ----------------- There was a problem<br />No username specified.<br />Server not configured properly.</b> <br /><br />Parameter not set.<br />Exception handling not configured.<br />Eat oranges they are great.<br /><br />";
+        assertThat("Message formatted for error display", Utilities.GetFormattedErrorMessageForDisplay(message, t), is(expected));
+
+        expected = "<b>An error occurred.<br />220 ----------------- There was a problem<br />No username specified.<br />Server not configured properly.</b> <br /><br /><br />";
+        assertThat("Message formatted even without exception object", Utilities.GetFormattedErrorMessageForDisplay(message, null), is(expected));
+    }
+
+    @Test
+    public void GetFormattedErrorMessageForPlainText(){
+        String message = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.";
+        Throwable t = new Throwable("Parameter not set.\r\nException handling not configured.\r\nEat oranges they are great.\r\n");
+        t.setStackTrace(new StackTraceElement[]{new StackTraceElement("XXX", "yyy", "BBB", 99)});
+
+        String plainText = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.\r\nParameter not set.\r\nException handling not configured.\r\nEat oranges they are great.\r\n\r\n[XXX.yyy(BBB:99)]";
+        assertThat("Message formatted for emailing copying", Utilities.GetFormattedErrorMessageForPlainText(message, t), is(plainText));
+
+        plainText = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.\r\nThis is a detailed message\r\n";
+        t = new Throwable("This is a detailed message");
+        t.setStackTrace(new StackTraceElement[0]);
+        assertThat("Message formatted without stacktrace fully present", Utilities.GetFormattedErrorMessageForPlainText(message, t), is(plainText));
+
+        plainText = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.\r\n";
+        assertThat("Message formatted without stacktrace fully present", Utilities.GetFormattedErrorMessageForPlainText(message, null), is(plainText));
+    }
+
 }

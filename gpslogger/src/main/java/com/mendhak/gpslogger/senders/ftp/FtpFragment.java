@@ -99,7 +99,8 @@ public class FtpFragment
         MaterialEditTextPreference directoryPreference = (MaterialEditTextPreference) findPreference("autoftp_directory");
 
         if (!helper.validSettings(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
-                Integer.valueOf(portPreference.getText()), useFtpsPreference.isChecked(), sslTlsPreference.getValue(),
+                Utilities.parseIntWithDefault(portPreference.getText(), 21),
+                 useFtpsPreference.isChecked(), sslTlsPreference.getValue(),
                 implicitPreference.isChecked())) {
             Utilities.MsgBox(getString(R.string.autoftp_invalid_settings),
                     getString(R.string.autoftp_invalid_summary),
@@ -112,7 +113,7 @@ public class FtpFragment
 
 
         helper.testFtp(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
-                directoryPreference.getText(), Integer.valueOf(portPreference.getText()), useFtpsPreference.isChecked(),
+                directoryPreference.getText(), Utilities.parseIntWithDefault(portPreference.getText(),21), useFtpsPreference.isChecked(),
                 sslTlsPreference.getValue(), implicitPreference.isChecked());
 
         return true;
@@ -126,13 +127,14 @@ public class FtpFragment
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.Ftp o){
-        tracer.debug("FTP Event completed, success: " + o.success);
-        Utilities.HideProgress();
-        if(!o.success){
-            Utilities.ErrorMsgBox(getString(R.string.sorry), o.message + "<br />" + TextUtils.join("<br />", o.ftpMessages), o.throwable, getActivity());
-        }
-        else {
-            Utilities.MsgBox(getString(R.string.success), "FTP Test Succeeded", getActivity());
-        }
+            tracer.debug("FTP Event completed, success: " + o.success);
+            Utilities.HideProgress();
+            if(!o.success){
+                String ftpMessages = (o.ftpMessages == null) ? "" : TextUtils.join("",o.ftpMessages);
+                Utilities.ErrorMsgBox(getString(R.string.sorry), o.message + "\r\n" + ftpMessages, o.throwable, getActivity());
+            }
+            else {
+                Utilities.MsgBox(getString(R.string.success), "FTP Test Succeeded", getActivity());
+            }
     }
 }

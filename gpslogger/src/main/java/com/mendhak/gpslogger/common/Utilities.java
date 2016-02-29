@@ -148,9 +148,28 @@ public class Utilities {
         }
     }
 
+    static String GetFormattedErrorMessageForDisplay(String message, Throwable throwable) {
+        return  "<b>" + message.replace("\r\n","<br />") + "</b> <br /><br />" + ((throwable==null) ? "": throwable.getMessage().replace("\r\n","<br />")) + "<br />";
+    }
+
+    static String GetFormattedErrorMessageForPlainText(String message, Throwable throwable){
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(message).append("\r\n");
+        if(throwable != null){
+            sb.append(throwable.getMessage()).append("\r\n");
+            if(throwable.getStackTrace().length > 0){
+                sb.append(Arrays.toString(throwable.getStackTrace()));
+            }
+        }
+
+        return sb.toString();
+
+    }
 
     public static void ErrorMsgBox(String title, final String message, final Throwable throwable, final Context context){
-        final String messageFormatted = "<b>" + message + "</b> <br /><br />" + ((throwable==null) ? "": throwable.getMessage()) + "<br />";
+
+        String messageFormatted = GetFormattedErrorMessageForDisplay(message, throwable);
 
         MaterialDialog alertDialog = new MaterialDialog.Builder(context)
                 .title(title)
@@ -162,12 +181,7 @@ public class Utilities {
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
 
                         android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                        String clipboardText = message.replace("<br />", "\r\n") + "\r\n";
-                        if (throwable != null) {
-                            clipboardText += throwable.getMessage().replace("<br />","\r\n") + "\r\n\r\n" + Arrays.toString(throwable.getStackTrace());
-                        }
-
-                        android.content.ClipData clip = android.content.ClipData.newPlainText("Gpslogger error message", clipboardText);
+                        android.content.ClipData clip = android.content.ClipData.newPlainText("Gpslogger error message", GetFormattedErrorMessageForPlainText(message, throwable));
                         clipboard.setPrimaryClip(clip);
                     }
                 })
