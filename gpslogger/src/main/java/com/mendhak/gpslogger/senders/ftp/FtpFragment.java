@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.senders.ftp;
 import android.Manifest;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.text.TextUtils;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.canelmas.let.AskPermission;
@@ -128,7 +129,7 @@ public class FtpFragment
         tracer.debug("FTP Event completed, success: " + o.success);
         Utilities.HideProgress();
         if(!o.success){
-            Utilities.MsgBox(getString(R.string.sorry), "FTP Test Failed", getActivity());
+            Utilities.ErrorMsgBox(getString(R.string.sorry), o.message + "<br />" + TextUtils.join("<br />", o.ftpMessages), o.throwable, getActivity());
         }
         else {
             Utilities.MsgBox(getString(R.string.success), "FTP Test Succeeded", getActivity());

@@ -94,9 +94,10 @@ public class OwnCloudSettingsFragment
     @EventBusHook
     public void onEventMainThread(UploadEvents.OwnCloud o){
         tracer.debug("OwnCloud Event completed, success: " + o.success);
+
         Utilities.HideProgress();
         if(!o.success){
-            Utilities.MsgBox(getString(R.string.sorry), "OwnCloud Test Failed", getActivity());
+            Utilities.ErrorMsgBox(getString(R.string.sorry), o.message, o.throwable, getActivity());
         }
         else {
             Utilities.MsgBox(getString(R.string.success), "OwnCloud Test Succeeded", getActivity());

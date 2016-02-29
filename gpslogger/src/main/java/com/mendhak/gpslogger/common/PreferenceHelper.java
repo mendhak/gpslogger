@@ -177,7 +177,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.FTP_PORT)
     public int getFtpPort() {
-        return Utilities.parseWithDefault(prefs.getString(PreferenceNames.FTP_PORT, "21"), 21);
+        return Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.FTP_PORT, "21"), 21);
     }
 
 
@@ -317,7 +317,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.MINIMUM_INTERVAL)
     public int getMinimumLoggingInterval() {
-        return Utilities.parseWithDefault(prefs.getString(PreferenceNames.MINIMUM_INTERVAL, "60"), 60);
+        return Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.MINIMUM_INTERVAL, "60"), 60);
     }
 
     /**
@@ -337,7 +337,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.MINIMUM_DISTANCE)
     public int getMinimumDistanceInterval() {
-        return (Utilities.parseWithDefault(prefs.getString(PreferenceNames.MINIMUM_DISTANCE, "0"), 0));
+        return (Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.MINIMUM_DISTANCE, "0"), 0));
     }
 
     /**
@@ -355,7 +355,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.MINIMUM_ACCURACY)
     public int getMinimumAccuracy() {
-        return (Utilities.parseWithDefault(prefs.getString(PreferenceNames.MINIMUM_ACCURACY, "0"), 0));
+        return (Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.MINIMUM_ACCURACY, "0"), 0));
     }
 
 
@@ -380,7 +380,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.LOGGING_RETRY_TIME)
     public int getLoggingRetryPeriod() {
-        return (Utilities.parseWithDefault(prefs.getString(PreferenceNames.LOGGING_RETRY_TIME, "60"), 60));
+        return (Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.LOGGING_RETRY_TIME, "60"), 60));
     }
 
 
@@ -398,7 +398,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.ABSOLUTE_TIMEOUT)
     public int getAbsoluteTimeoutForAcquiringPosition() {
-        return (Utilities.parseWithDefault(prefs.getString(PreferenceNames.ABSOLUTE_TIMEOUT, "120"), 120));
+        return (Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.ABSOLUTE_TIMEOUT, "120"), 120));
     }
 
     /**
@@ -431,7 +431,7 @@ public class PreferenceHelper {
      * Which navigation item the user selected
      */
     public int getUserSelectedNavigationItem() {
-        return Utilities.parseWithDefault(prefs.getString(PreferenceNames.SELECTED_NAVITEM, "0"),0);
+        return Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.SELECTED_NAVITEM, "0"), 0);
     }
 
     /**
@@ -919,7 +919,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.ALTITUDE_SUBTRACT_OFFSET)
     public int getSubtractAltitudeOffset() {
-        return Utilities.parseWithDefault(prefs.getString(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET, "0"),0);
+        return Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET, "0"), 0);
     }
 
 
@@ -946,11 +946,11 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.LAST_VERSION_SEEN_BY_USER)
     public int getLastVersionSeen(){
-        return prefs.getInt(PreferenceNames.LAST_VERSION_SEEN_BY_USER, 1);
+        return Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.LAST_VERSION_SEEN_BY_USER, "1"), 1);
     }
 
     public void setLastVersionSeen(int lastVersionSeen){
-        prefs.edit().putInt(PreferenceNames.LAST_VERSION_SEEN_BY_USER,lastVersionSeen).apply();
+        prefs.edit().putString(PreferenceNames.LAST_VERSION_SEEN_BY_USER, String.valueOf(lastVersionSeen)).apply();
     }
 
 

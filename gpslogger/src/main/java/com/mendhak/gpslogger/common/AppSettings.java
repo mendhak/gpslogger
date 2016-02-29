@@ -20,7 +20,6 @@ package com.mendhak.gpslogger.common;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import com.mendhak.gpslogger.BuildConfig;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.config.Configuration;
 import com.path.android.jobqueue.log.CustomLogger;
@@ -73,7 +72,8 @@ public class AppSettings extends Application {
     private final CustomLogger jobQueueLogger = new CustomLogger() {
         @Override
         public boolean isDebugEnabled() {
-            return BuildConfig.DEBUG;
+            //return BuildConfig.DEBUG;
+            return false;
         }
 
         @Override

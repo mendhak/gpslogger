@@ -148,16 +148,36 @@ public class Utilities {
         }
     }
 
-    /**
-     * Displays a message box to the user with an OK button.
-     *
-     * @param title
-     * @param message
-     * @param className The calling class, such as GpsMainActivity.this or
-     *                  mainActivity.
-     */
-    public static void MsgBox(String title, String message, Context className) {
-        MsgBox(title, message, className, null);
+
+    public static void ErrorMsgBox(String title, final String message, final Throwable throwable, final Context context){
+        final String messageFormatted = "<b>" + message + "</b> <br /><br />" + ((throwable==null) ? "": throwable.getMessage()) + "<br />";
+
+        MaterialDialog alertDialog = new MaterialDialog.Builder(context)
+                .title(title)
+                .content(Html.fromHtml(messageFormatted))
+                .positiveText(R.string.ok)
+                .neutralText("Copy")
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+
+                        android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                        String clipboardText = message.replace("<br />", "\r\n") + "\r\n";
+                        if (throwable != null) {
+                            clipboardText += throwable.getMessage().replace("<br />","\r\n") + "\r\n\r\n" + Arrays.toString(throwable.getStackTrace());
+                        }
+
+                        android.content.ClipData clip = android.content.ClipData.newPlainText("Gpslogger error message", clipboardText);
+                        clipboard.setPrimaryClip(clip);
+                    }
+                })
+                .build();
+
+        if (context instanceof Activity && !((Activity) context).isFinishing()) {
+            alertDialog.show();
+        } else {
+            alertDialog.show();
+        }
     }
 
     /**
@@ -165,13 +185,25 @@ public class Utilities {
      *
      * @param title
      * @param message
-     * @param className   The calling class, such as GpsMainActivity.this or
+     * @param context The calling class, such as GpsMainActivity.this or
+     *                  mainActivity.
+     */
+    public static void MsgBox(String title, String message, Context context) {
+        MsgBox(title, message, context, null);
+    }
+
+    /**
+     * Displays a message box to the user with an OK button.
+     *
+     * @param title
+     * @param message
+     * @param context   The calling class, such as GpsMainActivity.this or
      *                    mainActivity.
      * @param msgCallback An object which implements IHasACallBack so that the
      *                    click event can call the callback method.
      */
-    public static void MsgBox(String title, String message, Context className, final IMessageBoxCallback msgCallback) {
-        MaterialDialog alertDialog = new MaterialDialog.Builder(className)
+    public static void MsgBox(String title, String message, Context context, final IMessageBoxCallback msgCallback) {
+        MaterialDialog alertDialog = new MaterialDialog.Builder(context)
                 .title(title)
                 .content(Html.fromHtml(message))
                 .positiveText(R.string.ok)
@@ -193,7 +225,7 @@ public class Utilities {
                 })
                 .build();
 
-        if (className instanceof Activity && !((Activity) className).isFinishing()) {
+        if (context instanceof Activity && !((Activity) context).isFinishing()) {
             alertDialog.show();
         } else {
             alertDialog.show();
@@ -742,7 +774,7 @@ public class Utilities {
                 null);
     }
 
-    public static int parseWithDefault(String number, int defaultVal) {
+    public static int parseIntWithDefault(String number, int defaultVal) {
         try {
             return Integer.parseInt(number);
         } catch (Exception e) {

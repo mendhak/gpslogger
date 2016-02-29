@@ -103,7 +103,7 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
 
         if (!result.isSuccess()) {
             tracer.error(result.getLogMessage(), result.getException());
-            EventBus.getDefault().post(new UploadEvents.OwnCloud(false));
+            EventBus.getDefault().post(new UploadEvents.OwnCloud(false, result.getLogMessage(), result.getException()));
         } else  {
             EventBus.getDefault().post(new UploadEvents.OwnCloud(true));
         }

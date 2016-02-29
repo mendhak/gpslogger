@@ -69,7 +69,7 @@ public class FtpManager extends IFileSender {
             }
 
         } catch (Exception ex) {
-            EventBus.getDefault().post(new UploadEvents.Ftp(false));
+            EventBus.getDefault().post(new UploadEvents.Ftp(false, ex.getMessage(), ex));
         }
 
         JobManager jobManager = AppSettings.GetJobManager();

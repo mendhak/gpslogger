@@ -1,6 +1,8 @@
 package com.mendhak.gpslogger.common.events;
 
 
+import java.util.ArrayList;
+
 public class UploadEvents {
 
     public static class AutoEmail {
@@ -26,8 +28,16 @@ public class UploadEvents {
 
     public static class Ftp {
         public boolean success;
+        public String message;
+        public ArrayList<String> ftpMessages;
+        public Throwable throwable;
         public Ftp(boolean success){
             this.success = success;
+        }
+        public Ftp(boolean success, String message, Throwable throwable){
+            this.success = success;
+            this.message = message;
+            this.throwable = throwable;
         }
     }
 
@@ -54,6 +64,13 @@ public class UploadEvents {
 
     public static class OwnCloud {
         public boolean success;
+        public String message;
+        public Throwable throwable;
         public OwnCloud(boolean success) { this.success = success; }
+        public OwnCloud(boolean success, String message, Throwable throwable){
+            this.success = success;
+            this.message = message;
+            this.throwable = throwable;
+        }
     }
 }
