@@ -20,10 +20,10 @@ package com.mendhak.gpslogger.loggers.customurl;
 import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.loggers.IFileLogger;
+import com.mendhak.gpslogger.loggers.FileLogger;
 import com.path.android.jobqueue.JobManager;
 
-public class CustomUrlLogger implements IFileLogger {
+public class CustomUrlLogger implements FileLogger {
 
     private final String name = "URL";
     private final int satellites;

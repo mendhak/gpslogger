@@ -19,7 +19,7 @@ package com.mendhak.gpslogger.senders.email;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.senders.IFileSender;
+import com.mendhak.gpslogger.senders.FileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AutoEmailManager extends IFileSender {
+public class AutoEmailManager extends FileSender {
 
     PreferenceHelper preferenceHelper;
 

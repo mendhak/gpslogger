@@ -33,8 +33,8 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
+import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
-import com.mendhak.gpslogger.loggers.IFileLogger;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import org.slf4j.LoggerFactory;
 
@@ -138,11 +138,11 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             TextView txtDistance = (TextView) rootView.findViewById(R.id.detailedview_distance_text);
             TextView txtAutoEmail = (TextView) rootView.findViewById(R.id.detailedview_autosend_text);
 
-            List<IFileLogger> loggers = FileLoggerFactory.GetFileLoggers(getActivity().getApplicationContext());
+            List<FileLogger> loggers = FileLoggerFactory.GetFileLoggers(getActivity().getApplicationContext());
 
             if (loggers.size() > 0) {
 
-                ListIterator<IFileLogger> li = loggers.listIterator();
+                ListIterator<FileLogger> li = loggers.listIterator();
                 String logTo = li.next().getName();
                 while (li.hasNext()) {
                     logTo += ", " + li.next().getName();

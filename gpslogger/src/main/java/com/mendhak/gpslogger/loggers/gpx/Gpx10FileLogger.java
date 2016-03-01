@@ -20,7 +20,7 @@ package com.mendhak.gpslogger.loggers.gpx;
 import android.location.Location;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.loggers.IFileLogger;
+import com.mendhak.gpslogger.loggers.FileLogger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
@@ -30,7 +30,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 
-public class Gpx10FileLogger implements IFileLogger {
+public class Gpx10FileLogger implements FileLogger {
     protected final static Object lock = new Object();
 
     private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,

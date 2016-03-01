@@ -20,7 +20,7 @@ package com.mendhak.gpslogger.senders.osm;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.senders.IFileSender;
+import com.mendhak.gpslogger.senders.FileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import oauth.signpost.OAuthConsumer;
@@ -31,7 +31,7 @@ import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
 import java.io.File;
 import java.util.List;
 
-public class OpenStreetMapManager extends IFileSender {
+public class OpenStreetMapManager extends FileSender {
 
 
 

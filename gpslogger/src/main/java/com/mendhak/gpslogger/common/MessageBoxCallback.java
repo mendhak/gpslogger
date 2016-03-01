@@ -17,9 +17,10 @@
 
 package com.mendhak.gpslogger.common;
 
+public interface MessageBoxCallback {
 
-public interface IPreferenceValidation  {
+    int CANCEL = 0;
+    int OK = 1;
 
-    public abstract boolean isValid();
-
+    void messageBoxResult(int which);
 }

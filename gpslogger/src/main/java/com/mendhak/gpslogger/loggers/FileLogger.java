@@ -19,7 +19,7 @@ package com.mendhak.gpslogger.loggers;
 
 import android.location.Location;
 
-public interface IFileLogger {
+public interface FileLogger {
 
     void write(Location loc) throws Exception;
 

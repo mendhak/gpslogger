@@ -15,12 +15,11 @@
 *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.mendhak.gpslogger.common;
+package com.mendhak.gpslogger.senders;
 
-public interface IMessageBoxCallback {
 
-    int CANCEL = 0;
-    int OK = 1;
+public interface PreferenceValidator {
 
-    public void messageBoxResult(int which);
+    boolean isValid();
+
 }

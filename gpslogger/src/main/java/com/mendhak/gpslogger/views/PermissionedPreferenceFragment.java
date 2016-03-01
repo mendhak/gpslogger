@@ -7,7 +7,7 @@ import com.canelmas.let.Let;
 import com.canelmas.let.RuntimePermissionListener;
 import com.canelmas.let.RuntimePermissionRequest;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.IMessageBoxCallback;
+import com.mendhak.gpslogger.common.MessageBoxCallback;
 import com.mendhak.gpslogger.common.Utilities;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class PermissionedPreferenceFragment extends PreferenceFragment implement
 
     @Override
     public void onShowPermissionRationale(List<String> list, final RuntimePermissionRequest runtimePermissionRequest) {
-        Utilities.MsgBox(getString(R.string.gpslogger_permissions_rationale_title), getString(R.string.gpslogger_permissions_rationale_message_basic), getActivity(), new IMessageBoxCallback() {
+        Utilities.MsgBox(getString(R.string.gpslogger_permissions_rationale_title), getString(R.string.gpslogger_permissions_rationale_message_basic), getActivity(), new MessageBoxCallback() {
             @Override
             public void messageBoxResult(int which) {
                 runtimePermissionRequest.retry();

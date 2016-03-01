@@ -24,18 +24,17 @@ import android.preference.Preference.OnPreferenceClickListener;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
-
 import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.IPreferenceValidation;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import de.greenrobot.event.EventBus;
 
 public class AutoEmailFragment extends PermissionedPreferenceFragment implements
-        OnPreferenceChangeListener,  OnPreferenceClickListener, IPreferenceValidation {
+        OnPreferenceChangeListener,  OnPreferenceClickListener, PreferenceValidator {
 
     private final PreferenceHelper preferenceHelper;
 

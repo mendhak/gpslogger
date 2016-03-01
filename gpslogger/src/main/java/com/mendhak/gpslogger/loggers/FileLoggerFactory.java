@@ -36,9 +36,9 @@ public class FileLoggerFactory {
 
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
-    public static List<IFileLogger> GetFileLoggers(Context context) {
+    public static List<FileLogger> GetFileLoggers(Context context) {
 
-        List<IFileLogger> loggers = new ArrayList<>();
+        List<FileLogger> loggers = new ArrayList<>();
 
         if(Utilities.IsNullOrEmpty(preferenceHelper.getGpsLoggerFolder())){
             return loggers;
@@ -79,13 +79,13 @@ public class FileLoggerFactory {
     }
 
     public static void Write(Context context, Location loc) throws Exception {
-        for (IFileLogger logger : GetFileLoggers(context)) {
+        for (FileLogger logger : GetFileLoggers(context)) {
             logger.write(loc);
         }
     }
 
     public static void Annotate(Context context, String description, Location loc) throws Exception {
-        for (IFileLogger logger : GetFileLoggers(context)) {
+        for (FileLogger logger : GetFileLoggers(context)) {
             logger.annotate(description, loc);
         }
     }

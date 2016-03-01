@@ -22,8 +22,8 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.loggers.opengts.OpenGTSJob;
+import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.senders.GpxReader;
-import com.mendhak.gpslogger.senders.IFileSender;
 import com.path.android.jobqueue.JobManager;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +31,7 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-public class OpenGTSManager extends IFileSender {
+public class OpenGTSManager extends FileSender {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSManager.class.getSimpleName());
     private PreferenceHelper preferenceHelper;

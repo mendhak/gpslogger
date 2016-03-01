@@ -39,31 +39,31 @@ public class FileSenderFactory {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FileSenderFactory.class.getSimpleName());
 
 
-    public static IFileSender GetOsmSender() {
+    public static FileSender GetOsmSender() {
         return new OpenStreetMapManager(PreferenceHelper.getInstance());
     }
 
-    public static IFileSender GetDropBoxSender() {
+    public static FileSender GetDropBoxSender() {
         return new DropBoxManager(PreferenceHelper.getInstance());
     }
 
-    public static IFileSender GetGDocsSender() {
+    public static FileSender GetGDocsSender() {
         return new GoogleDriveManager(PreferenceHelper.getInstance());
     }
 
-    public static IFileSender GetEmailSender() {
+    public static FileSender GetEmailSender() {
         return new AutoEmailManager(PreferenceHelper.getInstance());
     }
 
-    public static IFileSender GetOpenGTSSender() {
+    public static FileSender GetOpenGTSSender() {
         return new OpenGTSManager(PreferenceHelper.getInstance());
     }
 
-    public static IFileSender GetFtpSender() {
+    public static FileSender GetFtpSender() {
         return new FtpManager(PreferenceHelper.getInstance());
     }
 
-    public static IFileSender GetOwnCloudSender() {
+    public static FileSender GetOwnCloudSender() {
         return new OwnCloudManager(PreferenceHelper.getInstance());
     }
 
@@ -109,9 +109,9 @@ public class FileSenderFactory {
             zipFiles.add(zipFile);
         }
 
-        List<IFileSender> senders = GetFileAutosenders();
+        List<FileSender> senders = GetFileAutosenders();
 
-        for (IFileSender sender : senders) {
+        for (FileSender sender : senders) {
             tracer.debug("Sender: " + sender.getClass().getName());
             //Special case for OSM Uploader
             if(!sender.accept(null, ".zip")){
@@ -129,9 +129,9 @@ public class FileSenderFactory {
     }
 
 
-    private static List<IFileSender> GetFileAutosenders() {
+    private static List<FileSender> GetFileAutosenders() {
 
-        List<IFileSender> senders = new ArrayList<>();
+        List<FileSender> senders = new ArrayList<>();
 
 
         if(GetGDocsSender().isAutoSendAvailable()){

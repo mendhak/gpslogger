@@ -21,7 +21,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.List;
 
-public abstract class IFileSender implements FilenameFilter {
+public abstract class FileSender implements FilenameFilter {
     /**
      * Upload or send these given files
      */
@@ -46,6 +46,5 @@ public abstract class IFileSender implements FilenameFilter {
     }
 
 
-    //public boolean isAutoSendAvailable()
 
 }

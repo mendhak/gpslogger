@@ -56,8 +56,8 @@ import com.mendhak.gpslogger.common.events.ProfileEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
+import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
-import com.mendhak.gpslogger.senders.IFileSender;
 import com.mendhak.gpslogger.views.*;
 import com.mendhak.gpslogger.views.component.GpsLoggerDrawerItem;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -871,8 +871,7 @@ public class GpsMainActivity extends ActionBarActivity
         if (!FileSenderFactory.GetFtpSender().isAvailable()) {
             launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.FTP);
         } else {
-            IFileSender fs = FileSenderFactory.GetFtpSender();
-            showFileListDialog(fs);
+            showFileListDialog(FileSenderFactory.GetFtpSender());
         }
     }
 
@@ -884,7 +883,7 @@ public class GpsMainActivity extends ActionBarActivity
         }
     }
 
-    private void showFileListDialog(final IFileSender sender) {
+    private void showFileListDialog(final FileSender sender) {
 
         if (!Utilities.isNetworkAvailable(this)) {
             Utilities.MsgBox(getString(R.string.sorry),getString(R.string.no_network_message), this);

@@ -216,7 +216,7 @@ public class Utilities {
      * @param msgCallback An object which implements IHasACallBack so that the
      *                    click event can call the callback method.
      */
-    public static void MsgBox(String title, String message, Context context, final IMessageBoxCallback msgCallback) {
+    public static void MsgBox(String title, String message, Context context, final MessageBoxCallback msgCallback) {
         MaterialDialog alertDialog = new MaterialDialog.Builder(context)
                 .title(title)
                 .content(Html.fromHtml(message))
@@ -225,7 +225,7 @@ public class Utilities {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         if (msgCallback != null) {
-                            msgCallback.messageBoxResult(IMessageBoxCallback.OK);
+                            msgCallback.messageBoxResult(MessageBoxCallback.OK);
                         }
                     }
                 })
@@ -233,7 +233,7 @@ public class Utilities {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         if (msgCallback != null) {
-                            msgCallback.messageBoxResult(IMessageBoxCallback.CANCEL);
+                            msgCallback.messageBoxResult(MessageBoxCallback.CANCEL);
                         }
                     }
                 })

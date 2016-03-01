@@ -20,7 +20,7 @@ package com.mendhak.gpslogger.loggers.kml;
 import android.location.Location;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.loggers.IFileLogger;
+import com.mendhak.gpslogger.loggers.FileLogger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
@@ -29,7 +29,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class Kml22FileLogger implements IFileLogger {
+public class Kml22FileLogger implements FileLogger {
     protected final static Object lock = new Object();
     private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
             new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());

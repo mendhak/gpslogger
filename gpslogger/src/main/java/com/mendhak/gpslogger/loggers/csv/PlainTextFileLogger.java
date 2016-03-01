@@ -19,7 +19,7 @@ package com.mendhak.gpslogger.loggers.csv;
 
 import android.location.Location;
 import com.mendhak.gpslogger.common.Utilities;
-import com.mendhak.gpslogger.loggers.IFileLogger;
+import com.mendhak.gpslogger.loggers.FileLogger;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -35,7 +35,7 @@ import java.util.Locale;
  * @author Jeroen van Wilgenburg
  *         https://github.com/jvwilge/gpslogger/commit/a7d45bcc1d5012513ff2246022ce4da2708adf47
  */
-public class PlainTextFileLogger implements IFileLogger {
+public class PlainTextFileLogger implements FileLogger {
 
     private File file;
     protected final String name = "TXT";

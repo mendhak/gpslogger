@@ -22,7 +22,7 @@ import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
-import com.mendhak.gpslogger.loggers.IFileLogger;
+import com.mendhak.gpslogger.loggers.FileLogger;
 import com.path.android.jobqueue.JobManager;
 
 /**
@@ -30,7 +30,7 @@ import com.path.android.jobqueue.JobManager;
  *
  * @author Francisco Reynoso
  */
-public class OpenGTSLogger implements IFileLogger {
+public class OpenGTSLogger implements FileLogger {
 
     protected final String name = "OpenGTS";
     final Context context;
