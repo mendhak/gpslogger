@@ -153,11 +153,8 @@ public class MainPreferenceActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         final int id = item.getItemId();
-        if (id == android.R.id.home) {
-           return !isFormValid();
-        }
+        return id == android.R.id.home && !isFormValid();
 
-        return false;
     }
 
     public static class PREFERENCE_FRAGMENTS {

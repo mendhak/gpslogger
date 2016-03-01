@@ -18,7 +18,7 @@ import java.util.List;
 public class OwnCloudManager extends FileSender
 {
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OwnCloudSettingsFragment.class.getSimpleName());
-    private static PreferenceHelper preferenceHelper;
+    private PreferenceHelper preferenceHelper;
 
     public OwnCloudManager(PreferenceHelper preferenceHelper) {
         this.preferenceHelper = preferenceHelper;

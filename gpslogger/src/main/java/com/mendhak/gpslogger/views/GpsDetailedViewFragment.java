@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.views;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +74,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         rootView = inflater.inflate(R.layout.fragment_detailed_view, container, false);
 
         actionButton = (ActionProcessButton)rootView.findViewById(R.id.btnActionProcess);
-        actionButton.setBackgroundColor(getResources().getColor(R.color.accentColor));
+        actionButton.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.accentColor ));
 
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,13 +96,13 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     private void setActionButtonStart(){
         actionButton.setText(R.string.btn_start_logging);
-        actionButton.setBackgroundColor(getResources().getColor(R.color.accentColor));
+        actionButton.setBackgroundColor( ContextCompat.getColor(getActivity(), R.color.accentColor));
         actionButton.setAlpha(0.8f);
     }
 
     private void setActionButtonStop(){
         actionButton.setText(R.string.btn_stop_logging);
-        actionButton.setBackgroundColor(getResources().getColor(R.color.accentColorComplementary));
+        actionButton.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.accentColorComplementary));
         actionButton.setAlpha(0.8f);
     }
 
@@ -336,7 +337,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             providerName = getString(R.string.providername_celltower);
         }
 
-        tvDateTime.setText(new Date(Session.getLatestTimeStamp()).toLocaleString() + " - " + providerName);
+        tvDateTime.setText(android.text.format.DateFormat.getDateFormat(getActivity()).format(new Date(Session.getLatestTimeStamp())) + " - " + providerName);
 
         NumberFormat nf = NumberFormat.getInstance();
 
