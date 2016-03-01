@@ -22,7 +22,7 @@ apply plugin: 'let'
 //Generating PGP
 apply plugin: 'signing'
 //Generating colorful output
-apply from: '../gradle/colored-test-output.gradle'
+apply from: 'https://raw.githubusercontent.com/mendhak/Gradle-Travis-Colored-Output/master/ColoredOutput.gradle'
 
 repositories {
     mavenCentral()
