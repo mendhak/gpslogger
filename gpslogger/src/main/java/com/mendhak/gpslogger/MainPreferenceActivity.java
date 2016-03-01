@@ -19,7 +19,7 @@ package com.mendhak.gpslogger;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.common.Utilities;
@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory;
 
 
 
-public class MainPreferenceActivity extends ActionBarActivity {
+public class MainPreferenceActivity extends AppCompatActivity {
 
     private org.slf4j.Logger tracer;
 

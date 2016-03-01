@@ -35,8 +35,8 @@ import android.os.*;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
@@ -77,7 +77,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.*;
 
-public class GpsMainActivity extends ActionBarActivity
+public class GpsMainActivity extends AppCompatActivity
         implements
         Toolbar.OnMenuItemClickListener,
         ActionBar.OnNavigationListener {
@@ -220,7 +220,6 @@ public class GpsMainActivity extends ActionBarActivity
             packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             int versionCode = packageInfo.versionCode;
 
-            tracer.debug("Version code " +String.valueOf(versionCode));
             if( preferenceHelper.getLastVersionSeen() <= 71 ){
                 tracer.debug("preferenceHelper.getLastVersionSeen() " + preferenceHelper.getLastVersionSeen() );
                 //Specifically disable passive provider... just once

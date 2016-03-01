@@ -17,11 +17,11 @@
 
 package com.mendhak.gpslogger;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -32,7 +32,7 @@ import com.mendhak.gpslogger.common.events.CommandEvents;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
-public class NotificationAnnotationActivity extends Activity {
+public class NotificationAnnotationActivity extends AppCompatActivity {
 
     //Called from the 'annotate' button in the Notification
     //This in turn captures user input and sends the input to the GPS Logging Service
