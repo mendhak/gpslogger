@@ -18,8 +18,6 @@
 package com.mendhak.gpslogger.common;
 
 import android.app.Application;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import com.mendhak.gpslogger.BuildConfig;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.config.Configuration;
@@ -30,7 +28,6 @@ import org.slf4j.LoggerFactory;
 public class AppSettings extends Application {
 
     private static JobManager jobManager;
-    private static SharedPreferences prefs;
     private static AppSettings instance;
     private static org.slf4j.Logger tracer = LoggerFactory.getLogger(AppSettings.class.getSimpleName());
 
@@ -44,11 +41,10 @@ public class AppSettings extends Application {
         Configuration config = new Configuration.Builder(getInstance())
                 .networkUtil(new WifiNetworkUtil(getInstance()))
                 .consumerKeepAlive(60)
-                .minConsumerCount(2)
+                .minConsumerCount(0)
                 .customLogger(jobQueueLogger)
                 .build();
         jobManager = new JobManager(this, config);
-        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 
     /**
