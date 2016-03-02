@@ -151,7 +151,7 @@ public class Utilities {
     static String GetFormattedErrorMessageForDisplay(String message, Throwable throwable) {
         String html = "";
         if(!IsNullOrEmpty(message)){
-            html += "<b>" + message.replace("\r\n","<br />") + "</b> <br /><br />";
+            html += "<b>" + message.replace("\r\n","<br />").replace("\n","<br />") + "</b> <br /><br />";
         }
 
         if(throwable != null){

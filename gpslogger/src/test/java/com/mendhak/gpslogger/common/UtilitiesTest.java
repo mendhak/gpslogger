@@ -192,7 +192,7 @@ public class UtilitiesTest {
     }
 
     @Test
-    public void GetFormattedErrorMessageForDisplay() {
+    public void GetFormattedErrorMessageForDisplay_WithMessageAndThrowable() {
         String message = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.";
         Throwable t = new Throwable("Parameter not set.\r\nException handling not configured.\r\nEat oranges they are great.\r\n");
         t.setStackTrace(new StackTraceElement[]{new StackTraceElement("XXX", "yyy", "BBB", 99)});
@@ -200,18 +200,34 @@ public class UtilitiesTest {
         String expected = "<b>An error occurred.<br />220 ----------------- There was a problem<br />No username specified.<br />Server not configured properly.</b> <br /><br />Parameter not set.<br />Exception handling not configured.<br />Eat oranges they are great.<br /><br />";
         assertThat("Message formatted for error display", Utilities.GetFormattedErrorMessageForDisplay(message, t), is(expected));
 
-        expected = "<b>An error occurred.<br />220 ----------------- There was a problem<br />No username specified.<br />Server not configured properly.</b> <br /><br />";
+    }
+
+    @Test
+    public void GetFormattedErrorMessageForDisplay_WithMessageOrThrowableMissing(){
+        String message = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.";
+        String expected = "<b>An error occurred.<br />220 ----------------- There was a problem<br />No username specified.<br />Server not configured properly.</b> <br /><br />";
         assertThat("Message formatted even without exception object", Utilities.GetFormattedErrorMessageForDisplay(message, null), is(expected));
 
         expected = "";
         assertThat("Null message handled gracefully", Utilities.GetFormattedErrorMessageForDisplay(null, null), is(expected));
 
-        t = new Throwable((String)null);
+        Throwable t = new Throwable((String)null);
         assertThat("Null message handled gracefully", Utilities.GetFormattedErrorMessageForDisplay(null, t), is(expected));
     }
 
     @Test
-    public void GetFormattedErrorMessageForPlainText(){
+    public void GetFormattedErrorMessageForDisplay_NewLinesReplaced(){
+        String message = "An error occurred.\r\nThis is the next line.";
+        String expected = "<b>An error occurred.<br />This is the next line.</b> <br /><br />";
+        assertThat("Backslash r backslash n replaced", Utilities.GetFormattedErrorMessageForDisplay(message, null), is(expected));
+
+        message = "An error occurred.\nThis is the next line.";
+        assertThat("Backslash n replaced", Utilities.GetFormattedErrorMessageForDisplay(message, null), is(expected));
+
+    }
+
+    @Test
+    public void GetFormattedErrorMessageForPlainText_WithMessageOrThrowable(){
         String message = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.";
         Throwable t = new Throwable("Parameter not set.\r\nException handling not configured.\r\nEat oranges they are great.\r\n");
         t.setStackTrace(new StackTraceElement[]{new StackTraceElement("XXX", "yyy", "BBB", 99)});
@@ -224,13 +240,20 @@ public class UtilitiesTest {
         t.setStackTrace(new StackTraceElement[0]);
         assertThat("Message formatted without stacktrace fully present", Utilities.GetFormattedErrorMessageForPlainText(message, t), is(plainText));
 
-        plainText = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.\r\n";
+    }
+
+    @Test
+    public void GetFormattedErrorMessageForPlainText_WithMessageOrThrowableMissing(){
+        String message = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.";
+
+
+        String plainText = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.\r\n";
         assertThat("Message formatted without stacktrace fully present", Utilities.GetFormattedErrorMessageForPlainText(message, null), is(plainText));
 
         plainText = "";
         assertThat("Null message handled gracefully", Utilities.GetFormattedErrorMessageForPlainText(null, null), is(plainText));
 
-        t = new Throwable((String)null);
+        Throwable t = new Throwable((String)null);
         t.setStackTrace(new StackTraceElement[0]);
         assertThat("Null message handled gracefully", Utilities.GetFormattedErrorMessageForPlainText(null, t), is(plainText));
     }
