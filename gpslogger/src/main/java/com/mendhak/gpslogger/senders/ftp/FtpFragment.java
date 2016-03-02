@@ -118,7 +118,7 @@ public class FtpFragment
             Utilities.HideProgress();
             if(!o.success){
                 String ftpMessages = (o.ftpMessages == null) ? "" : TextUtils.join("",o.ftpMessages);
-                Utilities.ErrorMsgBox(getString(R.string.sorry), o.message + "\r\n" + ftpMessages, o.throwable, getActivity());
+                Utilities.ErrorMsgBox(getString(R.string.sorry), "FTP Test Failed", o.message + "\r\n" + ftpMessages, o.throwable, getActivity());
             }
             else {
                 Utilities.MsgBox(getString(R.string.success), "FTP Test Succeeded", getActivity());

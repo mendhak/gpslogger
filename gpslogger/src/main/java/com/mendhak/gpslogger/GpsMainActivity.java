@@ -1137,7 +1137,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Utilities.ErrorMsgBox(getString(R.string.upload_failure),  upload.message, upload.throwable, this);
+                Utilities.ErrorMsgBox(getString(R.string.sorry), getString(R.string.upload_failure),  upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }

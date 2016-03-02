@@ -97,7 +97,7 @@ public class OwnCloudSettingsFragment
 
         Utilities.HideProgress();
         if(!o.success){
-            Utilities.ErrorMsgBox(getString(R.string.sorry), o.message, o.throwable, getActivity());
+            Utilities.ErrorMsgBox(getString(R.string.sorry), "OwnCloud Test Failed", o.message, o.throwable, getActivity());
         }
         else {
             Utilities.MsgBox(getString(R.string.success), "OwnCloud Test Succeeded", getActivity());

@@ -181,7 +181,7 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
             Utilities.MsgBox(getString(R.string.success),
                     getString(R.string.autoemail_testresult_success), getActivity());
         } else {
-            Utilities.ErrorMsgBox(getString(R.string.sorry),  o.message, o.throwable, getActivity());
+            Utilities.ErrorMsgBox(getString(R.string.sorry), getString(R.string.error_connection),  o.message, o.throwable, getActivity());
         }
     }
 }

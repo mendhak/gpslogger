@@ -46,6 +46,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.GpsRollingFileAppender;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
+import com.ms.square.android.expandabletextview.ExpandableTextView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -183,25 +184,53 @@ public class Utilities {
 
     }
 
-    public static void ErrorMsgBox(String title, final String message, final Throwable throwable, final Context context){
+    public static void ErrorMsgBox(String title, final String friendlyMessage, final String errorMessage, final Throwable throwable, final Context context){
 
-        String messageFormatted = GetFormattedErrorMessageForDisplay(message, throwable);
+        final String messageFormatted = GetFormattedErrorMessageForDisplay(errorMessage, throwable);
 
         MaterialDialog alertDialog = new MaterialDialog.Builder(context)
                 .title(title)
-                .content(Html.fromHtml(messageFormatted))
+                .customView(R.layout.error_alertview, false)
+                .autoDismiss(false)
+                .negativeText("Copy")
                 .positiveText(R.string.ok)
-                .neutralText("Copy")
+                .neutralText("Details")
                 .onNeutral(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
 
+                        final ExpandableTextView expTv1 = (ExpandableTextView) materialDialog.getCustomView().findViewById(R.id.error_expand_text_view);
+                        expTv1.findViewById(R.id.expand_collapse).performClick();
+
+                    }
+                })
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+
                         android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                        android.content.ClipData clip = android.content.ClipData.newPlainText("Gpslogger error message", GetFormattedErrorMessageForPlainText(message, throwable));
+                        android.content.ClipData clip = android.content.ClipData.newPlainText("Gpslogger error message", GetFormattedErrorMessageForPlainText(errorMessage, throwable));
                         clipboard.setPrimaryClip(clip);
+
+                        materialDialog.dismiss();
+                    }
+                })
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                        materialDialog.dismiss();
                     }
                 })
                 .build();
+
+
+        final ExpandableTextView expTv1 = (ExpandableTextView) alertDialog.getCustomView().findViewById(R.id.error_expand_text_view);
+        expTv1.setText(Html.fromHtml(messageFormatted));
+        TextView tv = (TextView) expTv1.findViewById(R.id.expandable_text);
+        tv.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView tvFriendly = (TextView)alertDialog.getCustomView().findViewById(R.id.error_friendly_message);
+        tvFriendly.setText(friendlyMessage);
 
         if (context instanceof Activity && !((Activity) context).isFinishing()) {
             alertDialog.show();
