@@ -68,21 +68,6 @@ public class FtpFragment
         }
     }
 
-    private boolean isFormValid() {
-
-        CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("autoftp_enabled");
-        MaterialEditTextPreference txtServer = (MaterialEditTextPreference) findPreference("autoftp_server");
-        MaterialEditTextPreference txtUserName = (MaterialEditTextPreference) findPreference("autoftp_username");
-        MaterialEditTextPreference txtPort = (MaterialEditTextPreference) findPreference("autoftp_port");
-
-
-        return !chkEnabled.isChecked() || txtServer.getText() != null
-                && txtServer.getText().length() > 0 && txtUserName.getText() != null
-                && txtUserName.getText().length() > 0 && txtPort.getText() != null
-                && txtPort.getText().length() > 0;
-
-    }
-
     @Override
     @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
@@ -122,7 +107,9 @@ public class FtpFragment
 
     @Override
     public boolean isValid() {
-        return isFormValid();
+        FtpManager manager = new FtpManager(preferenceHelper);
+
+        return !manager.hasUserAllowedAutoSending() || manager.isAvailable();
     }
 
     @EventBusHook
