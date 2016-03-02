@@ -61,11 +61,7 @@ public class AutoEmailManager extends FileSender {
 
     @Override
     public boolean isAvailable() {
-        return
-                 preferenceHelper.getAutoEmailTargets().length() > 0
-                && preferenceHelper.getSmtpServer().length() > 0
-                && preferenceHelper.getSmtpPort().length() > 0
-                && preferenceHelper.getSmtpUsername().length() > 0;
+        return isValid( preferenceHelper.getSmtpServer(), preferenceHelper.getSmtpPort(), preferenceHelper.getSmtpUsername(), preferenceHelper.getSmtpPassword(), preferenceHelper.getAutoEmailTargets());
     }
 
     @Override
@@ -93,5 +89,9 @@ public class AutoEmailManager extends FileSender {
         return true;
     }
 
+    protected boolean isValid( String server, String port, String username, String password, String target) {
+                return !Utilities.IsNullOrEmpty(server) && !Utilities.IsNullOrEmpty(port) && !Utilities.IsNullOrEmpty(username) && !Utilities.IsNullOrEmpty(target);
+
+    }
 }
 

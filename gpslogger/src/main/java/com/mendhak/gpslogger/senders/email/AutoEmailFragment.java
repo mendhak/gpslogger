@@ -37,9 +37,11 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
         OnPreferenceChangeListener,  OnPreferenceClickListener, PreferenceValidator {
 
     private final PreferenceHelper preferenceHelper;
+    AutoEmailManager aem;
 
     public AutoEmailFragment(){
-        preferenceHelper = PreferenceHelper.getInstance();
+        this.preferenceHelper = PreferenceHelper.getInstance();
+        this.aem = new AutoEmailManager(preferenceHelper);
     }
 
 
@@ -88,7 +90,15 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
 
     public boolean onPreferenceClick(Preference preference) {
 
-        if (!isFormValid()) {
+        CustomSwitchPreference chkUseSsl = (CustomSwitchPreference) findPreference("smtp_ssl");
+        MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
+        MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
+        MaterialEditTextPreference txtUsername = (MaterialEditTextPreference) findPreference("smtp_username");
+        MaterialEditTextPreference txtPassword = (MaterialEditTextPreference) findPreference("smtp_password");
+        MaterialEditTextPreference txtTarget = (MaterialEditTextPreference) findPreference("autoemail_target");
+        MaterialEditTextPreference txtFrom = (MaterialEditTextPreference) findPreference("smtp_from");
+
+        if (!aem.isValid(txtSmtpServer.getText(), txtSmtpPort.getText(), txtUsername.getText(), txtPassword.getText(),txtTarget.getText())) {
             Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
                     getString(R.string.autoemail_invalid_form_message),
                     getActivity());
@@ -103,38 +113,13 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
         Utilities.ShowProgress(getActivity(), getString(R.string.autoemail_sendingtest),
                 getString(R.string.please_wait));
 
-        CustomSwitchPreference chkUseSsl = (CustomSwitchPreference) findPreference("smtp_ssl");
-        MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
-        MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
-        MaterialEditTextPreference txtUsername = (MaterialEditTextPreference) findPreference("smtp_username");
-        MaterialEditTextPreference txtPassword = (MaterialEditTextPreference) findPreference("smtp_password");
-        MaterialEditTextPreference txtTarget = (MaterialEditTextPreference) findPreference("autoemail_target");
-        MaterialEditTextPreference txtFrom = (MaterialEditTextPreference) findPreference("smtp_from");
 
-        AutoEmailManager aem = new AutoEmailManager(preferenceHelper);
+
         aem.sendTestEmail(txtSmtpServer.getText(), txtSmtpPort.getText(),
                 txtUsername.getText(), txtPassword.getText(),
                 chkUseSsl.isChecked(), txtTarget.getText(), txtFrom.getText());
 
         return true;
-    }
-
-    private boolean isFormValid() {
-
-        CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("autoemail_enabled");
-        MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
-        MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
-        MaterialEditTextPreference txtUsername = (MaterialEditTextPreference) findPreference("smtp_username");
-        MaterialEditTextPreference txtPassword = (MaterialEditTextPreference) findPreference("smtp_password");
-        MaterialEditTextPreference txtTarget = (MaterialEditTextPreference) findPreference("autoemail_target");
-
-        return !chkEnabled.isChecked() || txtSmtpServer.getText() != null
-                && txtSmtpServer.getText().length() > 0 && txtSmtpPort.getText() != null
-                && txtSmtpPort.getText().length() > 0 && txtUsername.getText() != null
-                && txtUsername.getText().length() > 0 && txtPassword.getText() != null
-                && txtPassword.getText().length() > 0 && txtTarget.getText() != null
-                && txtTarget.getText().length() > 0;
-
     }
 
 
@@ -184,7 +169,7 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
 
     @Override
     public boolean isValid() {
-        return isFormValid();
+        return !aem.hasUserAllowedAutoSending() || aem.isAvailable();
     }
 
     @EventBusHook
@@ -196,7 +181,7 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
             Utilities.MsgBox(getString(R.string.success),
                     getString(R.string.autoemail_testresult_success), getActivity());
         } else {
-            Utilities.MsgBox(getString(R.string.sorry), getString(R.string.error_connection), getActivity());
+            Utilities.ErrorMsgBox(getString(R.string.sorry),  o.message, o.throwable, getActivity());
         }
     }
 }

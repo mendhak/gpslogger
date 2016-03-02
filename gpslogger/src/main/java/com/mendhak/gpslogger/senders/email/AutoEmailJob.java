@@ -22,6 +22,8 @@ public class AutoEmailJob extends Job {
     String subject;
     String body;
     File[] files;
+    Mail m;
+
 
 
     protected AutoEmailJob(String smtpServer,
@@ -48,7 +50,7 @@ public class AutoEmailJob extends Job {
 
     @Override
     public void onRun() throws Throwable {
-        Mail m = new Mail(smtpUsername, smtpPassword);
+        m = new Mail(smtpUsername, smtpPassword);
 
         String[] toArr = csvEmailTargets.split(",");
         m.setTo(toArr);
@@ -71,24 +73,26 @@ public class AutoEmailJob extends Job {
             m.addAttachment(f.getName(), f.getAbsolutePath());
         }
 
-        m.setDebuggable(false);
+        m.setDebuggable(true);
 
         tracer.info("Sending email...");
         if (m.send()) {
-            EventBus.getDefault().post(new UploadEvents.AutoEmail(true));
+            EventBus.getDefault().post(new UploadEvents.AutoEmail().succeeded());
         } else {
-            EventBus.getDefault().post(new UploadEvents.AutoEmail(false));
+            EventBus.getDefault().post(new UploadEvents.AutoEmail().failed());
         }
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new UploadEvents.AutoEmail(false));
     }
 
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
+
         tracer.error("Could not send email", throwable);
+        EventBus.getDefault().post(new UploadEvents.AutoEmail().failed(m.getSmtpMessages(), throwable));
+
         return false;
     }
 

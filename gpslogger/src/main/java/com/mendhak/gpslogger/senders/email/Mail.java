@@ -28,6 +28,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Date;
 import java.util.Properties;
 
@@ -52,6 +54,9 @@ class Mail extends javax.mail.Authenticator {
     private boolean _debuggable;
 
     private Multipart _multipart;
+
+    private Session session;
+    private String smtpMessages;
 
     public Mail() {
         _user = ""; // username
@@ -90,7 +95,13 @@ class Mail extends javax.mail.Authenticator {
         if (!_user.equals("") && !_pass.equals("") && _to.length > 0
                 && !_from.equals("") && !_subject.equals("")
                 && !_body.equals("")) {
-            Session session = Session.getInstance(props, this);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            PrintStream ps = new PrintStream(baos);
+
+            session = Session.getInstance(props, this);
+            session.setDebug(_debuggable);
+            session.setDebugOut(ps);
 
             MimeMessage msg = new MimeMessage(session);
 
@@ -113,8 +124,15 @@ class Mail extends javax.mail.Authenticator {
             // Put parts in message
             msg.setContent(_multipart);
 
-            // send email
-            Transport.send(msg);
+            try {
+                // send email
+                Transport.send(msg);
+            } finally {
+                String content = baos.toString("UTF8");
+                ps.close();
+                setSmtpMessages(content);
+            }
+
 
             return true;
         } else {
@@ -201,4 +219,11 @@ class Mail extends javax.mail.Authenticator {
         this._debuggable = debug;
     }
 
+    public void setSmtpMessages(String smtpMessages) {
+        this.smtpMessages = smtpMessages;
+    }
+
+    public String getSmtpMessages(){
+        return this.smtpMessages;
+    }
 }

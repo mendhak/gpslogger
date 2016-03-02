@@ -52,7 +52,7 @@ public class AutoEmailManagerTest {
         when(pm.getSmtpUsername()).thenReturn("bbbbbbb");
 
         AutoEmailManager aem = new AutoEmailManager(pm);
-        assertThat("Some values missing", aem.isAvailable(), is(false));
+        assertThat("Some values missing indicates invalid email settings", aem.isAvailable(), is(false));
     }
 
     @Test

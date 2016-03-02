@@ -200,8 +200,14 @@ public class UtilitiesTest {
         String expected = "<b>An error occurred.<br />220 ----------------- There was a problem<br />No username specified.<br />Server not configured properly.</b> <br /><br />Parameter not set.<br />Exception handling not configured.<br />Eat oranges they are great.<br /><br />";
         assertThat("Message formatted for error display", Utilities.GetFormattedErrorMessageForDisplay(message, t), is(expected));
 
-        expected = "<b>An error occurred.<br />220 ----------------- There was a problem<br />No username specified.<br />Server not configured properly.</b> <br /><br /><br />";
+        expected = "<b>An error occurred.<br />220 ----------------- There was a problem<br />No username specified.<br />Server not configured properly.</b> <br /><br />";
         assertThat("Message formatted even without exception object", Utilities.GetFormattedErrorMessageForDisplay(message, null), is(expected));
+
+        expected = "";
+        assertThat("Null message handled gracefully", Utilities.GetFormattedErrorMessageForDisplay(null, null), is(expected));
+
+        t = new Throwable((String)null);
+        assertThat("Null message handled gracefully", Utilities.GetFormattedErrorMessageForDisplay(null, t), is(expected));
     }
 
     @Test
@@ -220,6 +226,13 @@ public class UtilitiesTest {
 
         plainText = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.\r\n";
         assertThat("Message formatted without stacktrace fully present", Utilities.GetFormattedErrorMessageForPlainText(message, null), is(plainText));
+
+        plainText = "";
+        assertThat("Null message handled gracefully", Utilities.GetFormattedErrorMessageForPlainText(null, null), is(plainText));
+
+        t = new Throwable((String)null);
+        t.setStackTrace(new StackTraceElement[0]);
+        assertThat("Null message handled gracefully", Utilities.GetFormattedErrorMessageForPlainText(null, t), is(plainText));
     }
 
 }

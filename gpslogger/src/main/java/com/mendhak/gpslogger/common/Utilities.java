@@ -149,16 +149,32 @@ public class Utilities {
     }
 
     static String GetFormattedErrorMessageForDisplay(String message, Throwable throwable) {
-        return  "<b>" + message.replace("\r\n","<br />") + "</b> <br /><br />" + ((throwable==null) ? "": throwable.getMessage().replace("\r\n","<br />")) + "<br />";
+        String html = "";
+        if(!IsNullOrEmpty(message)){
+            html += "<b>" + message.replace("\r\n","<br />") + "</b> <br /><br />";
+        }
+
+        if(throwable != null){
+            if(!IsNullOrEmpty(throwable.getMessage())){
+                html += throwable.getMessage().replace("\r\n","<br />") + "<br />";
+            }
+        }
+       return html;
     }
 
     static String GetFormattedErrorMessageForPlainText(String message, Throwable throwable){
 
         StringBuilder sb = new StringBuilder();
-        sb.append(message).append("\r\n");
+        if(!IsNullOrEmpty(message)){
+            sb.append(message).append("\r\n");
+        }
+
         if(throwable != null){
-            sb.append(throwable.getMessage()).append("\r\n");
-            if(throwable.getStackTrace().length > 0){
+            if(!IsNullOrEmpty(throwable.getMessage())){
+                sb.append(throwable.getMessage()).append("\r\n");
+            }
+
+            if(throwable.getStackTrace().length > 0) {
                 sb.append(Arrays.toString(throwable.getStackTrace()));
             }
         }
