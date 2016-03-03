@@ -61,6 +61,24 @@
         android:icon="@drawable/gpsvisualizer"/>
 
     <Preference
+        android:key="gpslogger_repo"
+        android:title="Source Code"
+        android:icon="@drawable/github"
+        >
+        <intent android:action="android.intent.action.VIEW"
+                android:data="https://github.com/mendhak/gpslogger/"/>
+    </Preference>
+
+    <Preference
+        android:key="gpslogger_crowdin"
+        android:title="Translations"
+        android:icon="@drawable/translate"
+        >
+        <intent android:action="android.intent.action.VIEW"
+                android:data="https://crowdin.com/project/gpslogger-for-android"/>
+    </Preference>
+
+    <Preference
         android:key="gpslogger_thirdparty"
         android:title="Open Source Libraries">
         <intent android:action="android.intent.action.VIEW"
