@@ -54,9 +54,6 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         Preference gpsvisualizerPref = findPreference("gpsvisualizer_link");
         gpsvisualizerPref.setOnPreferenceClickListener(this);
 
-//        Preference btcPref = findPreference("bitcoindonate_link");
-//        btcPref.setOnPreferenceClickListener(this);
-
         Preference aboutInfo = findPreference("about_version_info");
         try {
 
@@ -74,20 +71,6 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
             startActivity(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"));
             return true;
         }
-
-//        if(preference.getKey().equalsIgnoreCase("bitcoindonate_link")){
-//
-//            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("bitcoin:1DhQCEkzEJkEQRFVLbGqv6Qksoc4aGpuAS"));
-//            if( intent.resolveActivity(getActivity().getPackageManager()) == null){
-//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.coinbase.com/mendhak")));
-//            }
-//            else {
-//                startActivity(intent);
-//            }
-//
-//            return true;
-//
-//        }
 
         if(preference.getKey().equalsIgnoreCase("gpsvisualizer_link")){
             Intent intent = new Intent(Intent.ACTION_VIEW,
