@@ -1121,7 +1121,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + getString(R.string.upload_failure));
 
             if(userInvokedUpload){
-                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+                Utilities.ErrorMsgBox(getString(R.string.sorry),getString(R.string.upload_failure),upload.message, upload.throwable,this);
                 userInvokedUpload = false;
             }
         }
@@ -1153,7 +1153,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+                Utilities.ErrorMsgBox(getString(R.string.sorry),getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1169,7 +1169,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+                Utilities.ErrorMsgBox(getString(R.string.sorry),getString(R.string.upload_failure), upload.message, upload.throwable,  this);
                 userInvokedUpload = false;
             }
         }
@@ -1185,7 +1185,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+                Utilities.ErrorMsgBox(getString(R.string.sorry),getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1201,7 +1201,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+                Utilities.ErrorMsgBox(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1219,7 +1219,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + getString(R.string.upload_failure));
 
             if(userInvokedUpload){
-                Utilities.MsgBox(getString(R.string.sorry),getString(R.string.upload_failure), this);
+                Utilities.ErrorMsgBox(getString(R.string.sorry),getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }

@@ -73,17 +73,18 @@ public class OSMJob extends Job {
         HttpResponse response = httpClient.execute(request);
         int statusCode = response.getStatusLine().getStatusCode();
         tracer.debug("OSM Upload - " + String.valueOf(statusCode));
-        EventBus.getDefault().post(new UploadEvents.OpenStreetMap(true));
+        EventBus.getDefault().post(new UploadEvents.OpenStreetMap().succeeded());
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new UploadEvents.OpenStreetMap(false));
+
     }
 
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
         tracer.error("Could not send to OpenStreetMap", throwable);
+        EventBus.getDefault().post(new UploadEvents.OpenStreetMap().failed("Could not send to OpenStreetMap", throwable));
         return false;
     }
 

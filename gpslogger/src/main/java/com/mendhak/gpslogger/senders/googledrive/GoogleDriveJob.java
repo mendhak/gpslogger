@@ -1,7 +1,6 @@
 package com.mendhak.gpslogger.senders.googledrive;
 
 import android.os.Build;
-
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
@@ -56,7 +55,7 @@ public class GoogleDriveJob extends Job {
             gpsLoggerFolderId = createEmptyFile(token, googleDriveFolderName, "application/vnd.google-apps.folder", "root");
 
             if (Utilities.IsNullOrEmpty(gpsLoggerFolderId)) {
-                EventBus.getDefault().post(new UploadEvents.GDocs(false));
+                EventBus.getDefault().post(new UploadEvents.GDocs().failed("Could not create folder"));
                 return;
             }
         }
@@ -69,7 +68,7 @@ public class GoogleDriveJob extends Job {
             gpxFileId = createEmptyFile(token, fileName, getMimeTypeFromFileName(fileName), gpsLoggerFolderId);
 
             if (Utilities.IsNullOrEmpty(gpxFileId)) {
-                EventBus.getDefault().post(new UploadEvents.GDocs(false));
+                EventBus.getDefault().post(new UploadEvents.GDocs().failed("Could not create file"));
                 return;
             }
         }
@@ -78,7 +77,7 @@ public class GoogleDriveJob extends Job {
             //Set file's contents
             updateFileContents(token, gpxFileId, Utilities.GetByteArrayFromInputStream(fis), fileName);
         }
-        EventBus.getDefault().post(new UploadEvents.GDocs(true));
+        EventBus.getDefault().post(new UploadEvents.GDocs().succeeded());
     }
 
 
@@ -280,12 +279,13 @@ public class GoogleDriveJob extends Job {
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new UploadEvents.GDocs(false));
+
     }
 
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
         tracer.error("Could not upload to Google Drive", throwable);
+        EventBus.getDefault().post(new UploadEvents.GDocs().failed("Could not upload to Google Drive", throwable));
         return false;
     }
 }

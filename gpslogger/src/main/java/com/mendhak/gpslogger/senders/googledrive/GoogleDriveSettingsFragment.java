@@ -35,7 +35,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
-
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
@@ -288,7 +287,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
 
         } catch (Exception ex) {
             tracer.error("Could not create local test file", ex);
-            EventBus.getDefault().post(new UploadEvents.GDocs(false));
+            EventBus.getDefault().post(new UploadEvents.GDocs().failed("Could not create local test file", ex));
         }
 
         MaterialEditTextPreference folderPref = (MaterialEditTextPreference)findPreference("gdocs_foldername");

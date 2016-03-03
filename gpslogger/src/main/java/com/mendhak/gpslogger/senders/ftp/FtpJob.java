@@ -76,7 +76,7 @@ public class FtpJob extends Job {
             }
 
         } catch (Exception e) {
-            jobResult = new UploadEvents.Ftp(false, "Could not create FTP Client" , e);
+            jobResult = new UploadEvents.Ftp().failed( "Could not create FTP Client" , e);
             tracer.error("Could not create FTP Client", e);
             return false;
         }
@@ -111,21 +111,21 @@ public class FtpJob extends Job {
                 if (result) {
                     tracer.debug("Successfully FTPd file " + fileName);
                 } else {
-                    jobResult = new UploadEvents.Ftp(false, "Failed to FTP file " + fileName , null);
+                    jobResult = new UploadEvents.Ftp().failed( "Failed to FTP file " + fileName , null);
                     tracer.debug("Failed to FTP file " + fileName);
                     return false;
                 }
 
             } else {
                 logServerReply(client);
-                jobResult = new UploadEvents.Ftp(false, "Could not log in to FTP server" , null);
+                jobResult = new UploadEvents.Ftp().failed( "Could not log in to FTP server" , null);
                 tracer.debug("Could not log in to FTP server");
                 return false;
             }
 
         } catch (Exception e) {
             logServerReply(client);
-            jobResult = new UploadEvents.Ftp(false, "Could not connect or upload to FTP server.", e);
+            jobResult = new UploadEvents.Ftp().failed( "Could not connect or upload to FTP server.", e);
             tracer.error("Could not connect or upload to FTP server.", e);
             return false;
         } finally {
@@ -137,7 +137,7 @@ public class FtpJob extends Job {
                 logServerReply(client);
             } catch (Exception e) {
                 if(jobResult == null){
-                    jobResult = new UploadEvents.Ftp(false, "Could not logout or disconnect", e);
+                    jobResult = new UploadEvents.Ftp().failed( "Could not logout or disconnect", e);
                 }
 
                 tracer.error("Could not logout or disconnect", e);
@@ -198,7 +198,7 @@ public class FtpJob extends Job {
     @Override
     public void onRun() throws Throwable {
         if (Upload(server, username, password, directory, port, useFtps, protocol, implicit, gpxFile, fileName)) {
-            EventBus.getDefault().post(new UploadEvents.Ftp(true));
+            EventBus.getDefault().post(new UploadEvents.Ftp().succeeded());
         } else {
             jobResult.ftpMessages = ftpServerResponses;
             EventBus.getDefault().post(jobResult);
@@ -207,11 +207,12 @@ public class FtpJob extends Job {
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new UploadEvents.Ftp(false));
+
     }
 
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
+        EventBus.getDefault().post(new UploadEvents.Ftp().failed("Could not FTP file", throwable));
         tracer.error("Could not FTP file", throwable);
         return false;
     }

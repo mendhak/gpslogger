@@ -97,16 +97,17 @@ public class CustomUrlJob extends Job {
             tracer.debug("Status code: " + String.valueOf(conn.getResponseCode()));
         }
 
-        EventBus.getDefault().post(new UploadEvents.CustomUrl(true));
+        EventBus.getDefault().post(new UploadEvents.CustomUrl().succeeded());
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new UploadEvents.CustomUrl(false));
+
     }
 
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
+        EventBus.getDefault().post(new UploadEvents.CustomUrl().failed("Could not send to custom URL", throwable));
         tracer.error("Could not send to custom URL", throwable);
         return true;
     }

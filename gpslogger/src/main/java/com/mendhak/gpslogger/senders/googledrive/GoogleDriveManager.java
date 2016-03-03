@@ -93,7 +93,7 @@ public class GoogleDriveManager extends FileSender {
 
     public void uploadFile(final String fileName, @Nullable String googleDriveFolderName) {
         if (!isLinked()) {
-            EventBus.getDefault().post(new UploadEvents.GDocs(false));
+            EventBus.getDefault().post(new UploadEvents.GDocs().failed("Not authorized"));
             return;
         }
 
@@ -118,7 +118,7 @@ public class GoogleDriveManager extends FileSender {
             jobManager.addJobInBackground(new GoogleDriveJob(gpxFile, uploadFolderName));
 
         } catch (Exception e) {
-            EventBus.getDefault().post(new UploadEvents.GDocs(false));
+            EventBus.getDefault().post(new UploadEvents.GDocs().failed("Failed to upload file", e));
             tracer.error("GoogleDriveManager.uploadFile", e);
         }
     }

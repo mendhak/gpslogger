@@ -89,12 +89,12 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
     protected void onCancel() {
 
         tracer.debug("ownCloud Job: onCancel");
-        EventBus.getDefault().post(new UploadEvents.OwnCloud(false));
     }
 
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
         tracer.error("Could not upload to OwnCloud", throwable);
+        EventBus.getDefault().post(new UploadEvents.OwnCloud().failed("Could not upload to OwnCloud", throwable));
         return false;
     }
 
@@ -103,9 +103,9 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
 
         if (!result.isSuccess()) {
             tracer.error(result.getLogMessage(), result.getException());
-            EventBus.getDefault().post(new UploadEvents.OwnCloud(false, result.getLogMessage(), result.getException()));
+            EventBus.getDefault().post(new UploadEvents.OwnCloud().failed(result.getLogMessage(), result.getException()));
         } else  {
-            EventBus.getDefault().post(new UploadEvents.OwnCloud(true));
+            EventBus.getDefault().post(new UploadEvents.OwnCloud().succeeded());
         }
 
         tracer.debug("ownCloud Job: onRun finished");

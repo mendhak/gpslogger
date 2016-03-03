@@ -49,7 +49,7 @@ public class OwnCloudManager extends FileSender
             }
 
         } catch (Exception ex) {
-            EventBus.getDefault().post(new UploadEvents.Ftp(false));
+            EventBus.getDefault().post(new UploadEvents.Ftp().failed());
             tracer.error("Error while testing ownCloud upload: "+ ex.getMessage());
         }
 

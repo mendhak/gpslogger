@@ -48,18 +48,19 @@ public class DropboxJob extends Job {
         dropboxApi = new DropboxAPI<>(session);
         DropboxAPI.Entry upEntry = dropboxApi.putFileOverwrite(gpxFile.getName(), fis, gpxFile.length(), null);
         tracer.info("DropBox upload complete. Rev: " + upEntry.rev);
-        EventBus.getDefault().post(new UploadEvents.Dropbox(true));
         fis.close();
+        EventBus.getDefault().post(new UploadEvents.Dropbox().succeeded());
+
     }
 
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new UploadEvents.Dropbox(false));
     }
 
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
+        EventBus.getDefault().post(new UploadEvents.Dropbox().failed("Could not upload to Dropbox", throwable));
         tracer.error("Could not upload to Dropbox", throwable);
         return false;
     }
