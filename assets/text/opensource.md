@@ -952,7 +952,7 @@ limitations under the License.
 
 
 
-    ## [SLF4J](http://www.slf4j.org/)
+## [SLF4J](http://www.slf4j.org/)
 
 
          Copyright (c) 2004-2013 QOS.ch
@@ -980,7 +980,7 @@ limitations under the License.
 
 
 
-    ## [tony19/logback-android](https://github.com/tony19/logback-android)
+## [tony19/logback-android](https://github.com/tony19/logback-android)
 
         ```
         Copyright (C) 1999-2014, QOS.ch. All rights reserved.
@@ -998,7 +998,7 @@ limitations under the License.
          [1]: http://www.eclipse.org/legal/epl-v10.html
          [2]: http://www.gnu.org/licenses/lgpl-2.1.html
 
-    ## [afollestad/material-dialogs](https://github.com/afollestad/material-dialogs)
+## [afollestad/material-dialogs](https://github.com/afollestad/material-dialogs)
 
         The MIT License (MIT)
 
