@@ -40,6 +40,13 @@
     <Preference android:key="about_version_info"></Preference>
 
     <Preference
+        android:key="gpslogger_privacypolicy"
+        android:title="@string/privacy_policy">
+        <intent android:action="android.intent.action.VIEW"
+                android:data="https://github.com/mendhak/gpslogger/blob/master/assets/text/privacypolicy.md#privacy-policy"/>
+    </Preference>
+
+    <Preference
         android:key="gpsloggerdonate_link"
         android:title="@string/tip_coffee"
         android:icon="@drawable/coffee" >
@@ -51,17 +58,14 @@
         android:key="gpsvisualizer_link"
         android:title="@string/pref_gpsvisualizer"
         android:summary=""
-        android:icon="@drawable/gpsvisualizer"
-        />
+        android:icon="@drawable/gpsvisualizer"/>
 
     <Preference
         android:key="gpslogger_thirdparty"
-        android:title="Open Source Libraries"
-        >
+        android:title="Open Source Libraries">
         <intent android:action="android.intent.action.VIEW"
                 android:data="https://github.com/mendhak/gpslogger/blob/master/assets/text/opensource.md#open-source-libraries"/>
-        </Preference>
-
+    </Preference>
 
 
 </PreferenceScreen>

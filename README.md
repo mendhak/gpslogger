@@ -10,7 +10,7 @@ GPSLogger is an Android app that logs GPS information to GPX, KML or text files 
 You can [download it from Google Play](https://play.google.com/store/apps/details?id=com.mendhak.gpslogger).
 
 You can download the APK directly [from the releases](https://github.com/mendhak/gpslogger/releases).
-    
+
 The oldest Android 2.x release is [here](https://github.com/mendhak/gpslogger/releases/tag/v43).
 
 ## Contribute
@@ -24,7 +24,7 @@ I'm not very good at UIs, so any work with the layouts would be appreciated!
 
 ## License
 
-Licensed under [GPL v2](http://www.gnu.org/licenses/gpl-2.0.html).  
+Licensed under [GPL v2](LICENSE.md).  
 
 ## Donate
 
@@ -38,7 +38,7 @@ If you download a release .asc or .sha256, you can verify like so
     $ gpg --keyserver keyserver.ubuntu.com --recv-key 76CBE9A9
     $ gpg --verify ~/Downloads/gpslogger-71.apk.asc
     $ sha256sum -c ~/Downloads/gpslogger-71.apk.SHA256
-    
+
 
 Setting up the code
 =========
@@ -176,8 +176,8 @@ GPSLogger is composed of a few main components;
 
 ### Event Bus
 
-The Event Bus is where all the cross communication happens.  Various components raise their events on the Event Bus, 
-and other parts of the application listen for those events.  The most important one is when a location is obtained, 
+The Event Bus is where all the cross communication happens.  Various components raise their events on the Event Bus,
+and other parts of the application listen for those events.  The most important one is when a location is obtained,
  it is placed on the event bus and consumed by many fragments.
 
 ### GPS Logging Service
