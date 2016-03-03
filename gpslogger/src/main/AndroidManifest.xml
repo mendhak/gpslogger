@@ -132,10 +132,11 @@
         </receiver>
         <receiver android:name=".senders.AlarmReceiver" />
 
+        <!--android:theme="@style/Theme.AppCompat.Translucent"-->
         <activity
             android:name=".NotificationAnnotationActivity"
-            android:label="..."
-            android:theme="@style/AppTheme"
+            android:label=""
+            android:theme="@style/Theme.AppCompat.Translucent"
             android:excludeFromRecents="true"
             >
             <intent-filter>

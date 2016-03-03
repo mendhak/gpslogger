@@ -18,15 +18,11 @@
 package com.mendhak.gpslogger.views;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.view.KeyEvent;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.text.InputType;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.canelmas.let.AskPermission;
@@ -105,40 +101,28 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
 
         if (preferenceHelper.shouldCreateCustomFile() && preferenceHelper.shouldAskCustomFileNameEachTime()) {
 
-            MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
+            new MaterialDialog.Builder(getActivity())
                     .title(R.string.new_file_custom_title)
-                    .customView(R.layout.alertview, true)
+                    .content(R.string.new_file_custom_message)
                     .positiveText(R.string.ok)
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    .negativeText(R.string.cancel)
+                    .inputType(InputType.TYPE_CLASS_TEXT)
+                    .negativeText(R.string.cancel)
+                    .input(getString(R.string.letters_numbers), preferenceHelper.getCustomFileName(), new MaterialDialog.InputCallback() {
                         @Override
-                        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                            String chosenFileName = preferenceHelper.getCustomFileName();
-                            EditText userInput = (EditText) materialDialog.getCustomView().findViewById(R.id.alert_user_input);
+                        public void onInput(MaterialDialog materialDialog, CharSequence input) {
+                            tracer.info("Custom file name chosen : " + input.toString());
 
-                            if (!Utilities.IsNullOrEmpty(userInput.getText().toString()) && !userInput.getText().toString().equalsIgnoreCase(chosenFileName)) {
-                                preferenceHelper.setCustomFileName(userInput.getText().toString());
+                            String chosenFileName = preferenceHelper.getCustomFileName();
+
+                            if (!Utilities.IsNullOrEmpty(input.toString()) && !input.toString().equalsIgnoreCase(chosenFileName)) {
+                                preferenceHelper.setCustomFileName(input.toString());
                             }
                             toggleLogging();
-                        }
-                    })
-                    .keyListener(new DialogInterface.OnKeyListener() {
-                        @Override
-                        public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                                toggleLogging();
-                                dialog.dismiss();
-                            }
-                            return true;
-                        }
-                    })
-                    .build();
 
-            EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
-            userInput.setText(preferenceHelper.getCustomFileName());
-            TextView tvMessage = (TextView) alertDialog.getCustomView().findViewById(R.id.alert_user_message);
-            tvMessage.setText(R.string.new_file_custom_message);
-            alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-            alertDialog.show();
+                        }
+                    })
+                    .show();
 
         } else {
             toggleLogging();

@@ -24,10 +24,8 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.annotation.NonNull;
 import android.text.Html;
-import android.view.KeyEvent;
-import android.view.WindowManager;
+import android.text.InputType;
 import android.widget.EditText;
-import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
@@ -130,26 +128,22 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
         if(preference.getKey().equalsIgnoreCase("new_file_custom_name")){
 
-            MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
+
+            new MaterialDialog.Builder(getActivity())
                     .title(R.string.new_file_custom_title)
-                    .customView(R.layout.alertview, true)
+                    .content(R.string.new_file_custom_message)
                     .positiveText(R.string.ok)
                     .negativeText(R.string.cancel)
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    .inputType(InputType.TYPE_CLASS_TEXT)
+                    .negativeText(R.string.cancel)
+                    .input(getString(R.string.letters_numbers), preferenceHelper.getCustomFileName(), new MaterialDialog.InputCallback() {
                         @Override
-                        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                            EditText userInput = (EditText) materialDialog.getCustomView().findViewById(R.id.alert_user_input);
-                            preferenceHelper.setCustomFileName(userInput.getText().toString());
+                        public void onInput(MaterialDialog materialDialog, CharSequence input) {
+                            preferenceHelper.setCustomFileName(input.toString());
                         }
                     })
-                   .build();
+                    .show();
 
-            EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
-            userInput.setText(preferenceHelper.getCustomFileName());
-            TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
-            tvMessage.setText(R.string.new_file_custom_message);
-            alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-            alertDialog.show();
         }
 
         return false;
@@ -176,35 +170,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
             // Bug in SwitchPreference: http://stackoverflow.com/questions/19503931/switchpreferences-calls-multiple-times-the-onpreferencechange-method
             // Check if isChecked == false && newValue == true
             if(!((CustomSwitchPreference) preference).isChecked() && (Boolean)newValue  ) {
-                MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
-                        .title(R.string.log_customurl_title)
-                        .customView(R.layout.alertview, true)
-                        .positiveText(R.string.ok)
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                                EditText userInput = (EditText) materialDialog.getCustomView().findViewById(R.id.alert_user_input);
-                                preferenceHelper.setCustomLoggingUrl(userInput.getText().toString());
-                            }
-                        })
-                        .keyListener(new DialogInterface.OnKeyListener() {
-                            @Override
-                            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                                    ((CustomSwitchPreference) preference).setChecked(false);
-                                    return false;
-                                }
-                                return false;
-                            }
-                        })
-                        .build();
 
-                EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
-                userInput.setText(preferenceHelper.getCustomLoggingUrl());
-                userInput.setSingleLine(true);
-                userInput.setLines(4);
-                userInput.setHorizontallyScrolling(false);
-                TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
 
                 String legend = MessageFormat.format("{0} %LAT\n{1} %LON\n{2} %DESC\n{3} %SAT\n{4} %ALT\n{5} %SPD\n{6} %ACC\n{7} %DIR\n{8} %PROV\n{9} %TIME\n{10} %BATT\n{11} %AID\n{12} %SER",
                         getString(R.string.txt_latitude), getString(R.string.txt_longitude), getString(R.string.txt_annotation),
@@ -212,9 +178,46 @@ public class LoggingSettingsFragment extends PreferenceFragment
                         getString(R.string.txt_accuracy), getString(R.string.txt_direction), getString(R.string.txt_provider),
                         getString(R.string.txt_time_isoformat), "Battery:", "Android ID:", "Serial:");
 
-                tvMessage.setText(legend);
-                alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-                alertDialog.show();
+                MaterialDialog md = new MaterialDialog.Builder(getActivity())
+                        .title(R.string.log_customurl_title)
+                        .content(legend)
+                        .positiveText(R.string.ok)
+                        .negativeText(R.string.cancel)
+                        .inputType(InputType.TYPE_CLASS_TEXT)
+                        .negativeText(R.string.cancel)
+                        .input(getString(R.string.letters_numbers), preferenceHelper.getCustomLoggingUrl(), new MaterialDialog.InputCallback() {
+                            @Override
+                            public void onInput(MaterialDialog materialDialog, CharSequence input) {
+                                tracer.info("Custom URL chosen : " + input.toString());
+
+                                preferenceHelper.setCustomLoggingUrl(input.toString());
+
+                            }
+                        })
+                        .cancelListener(new DialogInterface.OnCancelListener() {
+                            @Override
+                            public void onCancel(DialogInterface dialogInterface) {
+                                ((CustomSwitchPreference) preference).setChecked(false);
+                            }
+                        })
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                                ((CustomSwitchPreference) preference).setChecked(false);
+                            }
+                        })
+                        .build();
+
+
+                //Not part of material dialog functionality at present
+                EditText ed = (EditText)md.findViewById(android.R.id.input);
+                ed.setTextSize(17);
+                ed.setLines(4);
+                ed.setSingleLine(true);
+                ed.setMaxLines(5);
+                ed.setHorizontallyScrolling(false);
+                md.show();
+
             }
 
 

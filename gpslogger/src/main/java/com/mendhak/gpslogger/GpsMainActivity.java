@@ -797,24 +797,25 @@ public class GpsMainActivity extends AppCompatActivity
             return;
         }
 
-        MaterialDialog alertDialog = new MaterialDialog.Builder(GpsMainActivity.this)
+        new MaterialDialog.Builder(this)
                 .title(R.string.add_description)
-                .customView(R.layout.alertview, true)
-                .positiveText(R.string.ok)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                .inputType(InputType.TYPE_CLASS_TEXT)
+                .negativeText(R.string.cancel)
+                .input(getString(R.string.letters_numbers), "", new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(MaterialDialog materialDialog, CharSequence input) {
+                        tracer.info("Annotation entered : " + input.toString());
+                        EventBus.getDefault().postSticky(new CommandEvents.Annotate(input.toString()));
+                    }
+                })
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                        EditText userInput = (EditText) materialDialog.getCustomView().findViewById(R.id.alert_user_input);
-                        EventBus.getDefault().postSticky(new CommandEvents.Annotate(userInput.getText().toString()));
+                        materialDialog.dismiss();
                     }
-                }).build();
+                })
+                .show();
 
-        EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
-        userInput.setText(Session.getDescription());
-        TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
-        tvMessage.setText(R.string.letters_numbers);
-        alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        alertDialog.show();
     }
 
 
