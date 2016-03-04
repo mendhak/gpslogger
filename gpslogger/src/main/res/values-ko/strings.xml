@@ -6,8 +6,11 @@
   <string name="settings_screen_name">GPSLogger 설정</string>
   <string name="ok">확인</string>
   <string name="cancel">취소</string>
+  <string name="could_not_write_to_file">파일에 쓸 수 없습니다.</string>
+  <string name="add_description">설명 추가</string>
   <string name="menu_share">공유</string>
   <string name="menu_exit">종료</string>
+  <!-- main form labels -->
   <string name="txt_latitude">위도:</string>
   <string name="txt_longitude">경도:</string>
   <string name="txt_altitude">고도:</string>
@@ -18,19 +21,34 @@
   <string name="btn_start_logging">로깅 시작</string>
   <string name="btn_stop_logging">로깅 중지</string>
   <string name="gpslogger_still_running">GPSLogger가 실행중입니다.</string>
+  <string name="summary_loggingto_screen">화면 전용</string>
+  <string name="summary_freq_every">주파수:</string>
+  <string name="summary_freq_max">최대</string>
   <string name="summary_dist">거리:</string>
+  <string name="summary_dist_regardless">최소</string>
+  <string name="summary_current_filename">파일:</string>
   <string name="sharing_mylocation">내 위치</string>
+  <string name="sharing_via">공유하기</string>
+  <!-- general -->
   <string name="foot">&#160;피트</string>
   <string name="feet">&#160;피트</string>
   <string name="meter">&#160;미터</string>
   <string name="meters">&#160;미터</string>
   <string name="error">오류</string>
+  <string name="error_connection">연결 오류 발생. 핸드폰 설정을 확인 하시기바랍니다.</string>
+  <string name="minutes">뷰ㅜㄴ</string>
+  <string name="hours">시간</string>
+  <string name="gpsprovider_unavailable">GPS 를 사용할수 없습니다. 위치 설정을 확인하고 위치 공급자를 사용 하도록 설정 하세요.
+    </string>
+  <string name="started">시작됨</string>
+  <string name="providername_gps">GPS 위성</string>
   <string name="meters_per_second">&#160;m/s</string>
   <string name="feet_per_second">&#160;ft/s</string>
   <string name="miles_per_hour">&#160;mi/h</string>
   <string name="miles">&#160;mi</string>
   <string name="kilometers_per_hour">&#160;km/h</string>
   <string name="kilometers">&#160;km</string>
+  <string name="sorry">죄송합니다.</string>
   <string name="direction_roughly">대략 %s</string>
   <string name="direction_north">북</string>
   <string name="direction_northnortheast">북북동</string>
@@ -58,15 +76,23 @@
   <string name="time_twoandhalfhours">2시간30분</string>
   <string name="time_hms_format" formatted="false">%s시간 %s분 %s초</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">거리(미터)</string>
   <string name="settings_accuracy_in_meters">정확도(미터)</string>
   <string name="settings_enter_meters">거리입력(최대 9999미터)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">로깅 세부사항</string>
   <string name="log_gpx_title">GPX로 기록하기</string>
-  <string name="log_gpx_summary">GPX로그를 SD 카드에 생성합니다.</string>
   <string name="log_kml_title">KML로 기록하기</string>
-  <string name="log_kml_summary">KML로그를 SD 카드에 생성합니다.</string>
+  <string name="time_before_logging_hint">초 입력 (최대 9999)</string>
+  <string name="enabledisablegps_title">GPS 켜기/끄기</string>
+  <string name="enabledisablegps_summary">공급자 설정을 켜거나 끄기 위해 폰 설정화면으로 가기</string>
+  <string name="autoemail_title">이메일</string>
+  <string name="autoemail_summary">로그 파일을 당신이 선택한 주소로 자동으로 이메일 발송</string>
+  <string name="autoemail_target">대상 이메일 주소</string>
   <string name="autoemail_smtp_category">이메일 설정</string>
+  <string name="autoemail_sendingtest">테스트 메일 발송</string>
+  <string name="autoemail_testresult_success">이메일이 전송되었습니다.</string>
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">네트워크</string>
 </resources>

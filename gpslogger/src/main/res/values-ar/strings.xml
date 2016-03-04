@@ -14,6 +14,7 @@
   <string name="menu_annotate">تعليق</string>
   <string name="menu_share">مشاركة</string>
   <string name="menu_exit">خروج</string>
+  <!-- main form labels -->
   <string name="txt_latitude">خط العرض:</string>
   <string name="txt_longitude">خط الطول:</string>
   <string name="txt_altitude">ارتفاع:</string>
@@ -35,6 +36,7 @@
   <string name="sharing_location_only">الموقع فقط</string>
   <string name="sharing_mylocation">موقعي</string>
   <string name="sharing_via">المشاركة بأستخدام</string>
+  <!-- general -->
   <string name="foot">&#160;قدم</string>
   <string name="feet">&#160;أقدام</string>
   <string name="meter">متر</string>
@@ -82,9 +84,11 @@
   <string name="time_hms_format" formatted="false">%sس %sق %ss</string>
   <string name="accuracy_within" formatted="false">خلال %s %s</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">المسافة بالأمتار</string>
   <string name="settings_accuracy_in_meters">الدقة في الأمتار</string>
   <string name="settings_enter_meters">أدخل متر (أقصى 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">تفاصيل  الدخول</string>
   <string name="log_gpx_title">دخول إلى GPX</string>
   <string name="new_file_creation_title">إنشاء ملف جديد</string>
@@ -131,10 +135,6 @@
   <string name="osm_setup_title">خريطة الشارع المفتوح</string>
   <string name="osm_setup_summary">تعيين العلامات، والوصف، والرؤية والإذن لتحميل \"تعقبات نظام تحديد المواقع\"     </string>
   <string name="osm_lbl_authorize">تخويل هذا التطبيق</string>
-  <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-  <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-  <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-  <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">إزالة التصريح</string>
   <string name="osm_visibility">الرؤية</string>

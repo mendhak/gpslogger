@@ -14,6 +14,7 @@
   <string name="menu_annotate">注釈</string>
   <string name="menu_share">共有</string>
   <string name="menu_exit">終了</string>
+  <!-- main form labels -->
   <string name="txt_latitude">緯度:</string>
   <string name="txt_longitude">経度:</string>
   <string name="txt_altitude">高度:</string>
@@ -36,6 +37,7 @@
   <string name="sharing_mylocation">位置情報</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.co.jp/maps?q=%s,%s</string>
   <string name="sharing_via">共有法</string>
+  <!-- general -->
   <string name="foot">&#160;フィート</string>
   <string name="feet">&#160;フィート</string>
   <string name="meter">m</string>
@@ -87,16 +89,15 @@
   <string name="time_hms_format" formatted="false">%s時間 %s分 %s秒</string>
   <string name="accuracy_within" formatted="false">誤差 %s %s 以内</string>
   <string name="degree_symbol">度</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">距離（m）</string>
   <string name="settings_accuracy_in_meters">精度（m）</string>
   <string name="settings_enter_meters">入力（m、最大 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">ログ設定詳細</string>
   <string name="log_gpx_title">GPXで保存</string>
-  <string name="log_gpx_summary">SDカード上のGPSLoggerフォルダにGPXファイルを作成します。</string>
   <string name="log_kml_title">KMLで保存</string>
-  <string name="log_kml_summary">SDカード上のGPSLoggerフォルダにKMLファイルを作成します。</string>
   <string name="log_plain_text_title">プレーンテキストで保存</string>
-  <string name="log_plain_text_summary">SDカード上のGPSLoggerフォルダにプレーンテキストファイルを作成します。</string>
   <string name="new_file_creation_title">新規ファイル作成</string>
   <string name="new_file_creation_summary">一日毎、あるいは起動毎にファイルを作成するかの設定。</string>
   <string name="new_file_creation_onceaday">1 日 1 回</string>
@@ -122,6 +123,8 @@
   <string name="enabledisablegps_summary">携帯電話の設定でプロバイダの有効／無効の設定を行います。</string>
   <string name="startonbootup_title">ブート時に開始</string>
   <string name="startonbootup_summary">携帯電話が起動された時にアプリケーションを起動し、ログを開始します。</string>
+  <string name="startonapplaunch_title">アプリ起動時に開始</string>
+  <string name="startonapplaunch_summary">アプリ起動時にログ開始</string>
   <string name="autoemail_title">Email</string>
   <string name="autoemail_summary">選択したメールアドレスにログファイルを自動的に送信します。</string>
   <string name="please_wait">お待ちください。</string>
@@ -155,10 +158,6 @@
   <string name="osm_setup_summary">タグ、説明、可視性、承認</string>
   <string name="osm_lbl_authorize">このアプリの承認</string>
   <string name="osm_lbl_authorize_description">OpenStreetMap に GPS の軌跡をアップロードするためにこのアプリに許可を与える必要があります。アプリの承認後、タグ、説明および可視性を設定することができます。</string>
-  <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-  <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-  <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-  <string name="osm_gpstrace_url">http://www.openstreetmap.org/oauth/authorize</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">承認を取り消します</string>
   <string name="osm_resetauth_summary">ローカルに保存されたOSMアカウントへの承認を取り消します。</string>
@@ -188,6 +187,20 @@
   <string name="dropbox_unauthorize_description">Drobpoxで承認されました。ファイルは\'Apps\\GPSLogger for Android\'にアップロードされます。また、Dropbox からGPSLoggerのリンクを解除することができます。</string>
   <string name="dropbox_couldnotauthorize">Dropboxの承認に失敗しました。少し待ってから再度実行してください。</string>
   <string name="dropbox_upload">Dropbox</string>
+  <string name="owncloud_setup_title">OwnCloud</string>
+  <string name="owncloud_setup_summary">OwnCloud サーバにアップロードします。</string>
+  <string name="owncloud_server">サーバ</string>
+  <string name="owncloud_server_summary">OwnCloudのベースURL</string>
+  <string name="owncloud_username">ユーザ名</string>
+  <string name="owncloud_password">パスワード</string>
+  <string name="owncloud_directory">フォルダ</string>
+  <string name="owncloud_directory_summary">OwnCloud上のフォルダー。存在することを確認してください。無い場合、アップロードに失敗します。</string>
+  <string name="owncloud_test">OwnCloudへのアップロードテスト</string>
+  <string name="owncloud_test_summary">テストファイルをOwnCloudにアップロードします</string>
+  <string name="owncloud_testing">OwnCloudのアップロードテスト中</string>
+  <string name="owncloud_invalid_settings">不正な文字列です</string>
+  <string name="owncloud_invalid_summary">設定に間違いがあります。関連する項目が全て設定してあるか確かめてください。</string>
+  <string name="owncloud_upload">OwnCloud</string>
   <string name="menu_upload">アップロード</string>
   <string name="autoemail_from">From アドレス</string>
   <string name="autoemail_from_summary">一部のメール プロバイダーはFromアドレスを必要とします。必要な場合のみこの設定を行ってください。</string>
@@ -258,7 +271,7 @@
   <string name="ftp_upload">FTPアップロード</string>
   <string name="autoftp_setup_title">FTP</string>
   <string name="autoftp_setup_summary">FTP(S) サーバーにファイルをアップロードします。注意: これは SFTP を含みません</string>
-  <string name="faq_screen_title">よく寄せられる質問</string>
+  <string name="faq_screen_title">@string/menu_faq</string>
   <string name="menu_faq">ヘルプとFAQ</string>
   <string name="gpsf_missing">不足しているサービス</string>
   <string name="gpsf_missing_description">この機能を使用するには Google Playサービス フレームワークが必要になります。</string>
@@ -280,6 +293,7 @@
   <string name="view_simple">簡易表示</string>
   <string name="view_detailed">詳細表示</string>
   <string name="view_big">拡大表示</string>
+  <string name="view_log">ログ表示</string>
   <string name="bigview_taptotoggle">タップでログの開始／終了</string>
   <string name="summary_autosendtargets">アップロード先:</string>
   <string name="accuracy_filter_title">精度フィルター</string>
@@ -308,7 +322,6 @@
   <string name="new_file_custom_each_time_title">起動の度にファイル名の入力を要求する</string>
   <string name="new_file_custom_each_time_summary">ログを開始する度にカスタムファイル名の入力プロンプトを表示する</string>
   <string name="donate_app">GPSLogger(寄付版)</string>
-  <string name="donate_bitcoin">Bitcoinで寄付</string>
   <string name="no_network_message">利用可能なネットワークがありません。</string>
   <string name="hide_notification_buttons">通知ボタンを非表示します。</string>
   <string name="hide_notification_buttons_summary">この設定を有効にするには GPSLogger を再起動する必要があります。</string>
@@ -330,4 +343,10 @@
   <string name="altitude_subtractoffset_title">高度からオフセットを差し引く</string>
   <string name="altitude_subtractoffset_summary">GPS高度から差し引く値をメートルで与えます。負の値を入力すると、高度に加算します。これはGPSの情報にのみに適用され、ネットワークから得られた値
 やNMEAの値には影響ありません。</string>
+  <string name="upload_failure">ファイルをアップロードできませんでした。</string>
+  <string name="inaccurate_point_discarded">不正確な点を破棄します</string>
+  <string name="not_enough_distance_traveled">%s mしか移動していません。ポイントを破棄します。</string>
+  <string name="autosend_wifionly_title">Wi-Fi使用時のみ送信</string>
+  <string name="logview_showlocationsonly">位置情報のみ</string>
+  <string name="logview_autoscroll">オートスクロール</string>
 </resources>

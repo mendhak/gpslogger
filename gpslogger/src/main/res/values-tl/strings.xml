@@ -11,6 +11,7 @@
   <string name="menu_annotate">Anotahin</string>
   <string name="menu_share">Ibahagi</string>
   <string name="menu_exit">Labas</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Latitud:</string>
   <string name="txt_longitude">Longhitud:</string>
   <string name="txt_altitude">Altitud:</string>
@@ -31,6 +32,7 @@
   <string name="sharing_location_only">Lokasyon lamang</string>
   <string name="sharing_mylocation">Aking lokasyon</string>
   <string name="sharing_via">Pagbabahagi sa pamamagitan ng</string>
+  <!-- general -->
   <string name="foot">&#160;talampakan</string>
   <string name="feet">&#160;talampakan</string>
   <string name="meter">&#160;metro</string>
@@ -69,11 +71,12 @@
   <string name="time_oneandhalfhours">1½ oras</string>
   <string name="time_twoandhalfhours">2½ oras</string>
   <string name="accuracy_within" formatted="false">sa loob ng %s %s</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Distansya sa metro</string>
   <string name="settings_enter_meters">Itala ang metro (hindi tataas sa 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Mga detalye ng talaarawan ng GPS</string>
   <string name="log_gpx_title">Itala sa GPX</string>
-  <string name="log_gpx_summary">Lumikha ng GPX file sa directoryo ng GPSLogger sa SD card.</string>
   <string name="log_kml_title">Itala sa KML</string>
   <string name="please_wait">Maghintay Sandali.</string>
   <string name="autoemail_frequency_whenistop">Kapag pinindot ko ang Tigil</string>

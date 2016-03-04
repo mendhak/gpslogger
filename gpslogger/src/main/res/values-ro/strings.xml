@@ -11,6 +11,7 @@
   <string name="menu_annotate">Adauga nota</string>
   <string name="menu_share">Distribuie</string>
   <string name="menu_exit">Ieşire</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Latitudine:</string>
   <string name="txt_longitude">Longitudine:</string>
   <string name="txt_altitude">Altitudine:</string>
@@ -33,6 +34,7 @@
   <string name="sharing_mylocation">Locaţia mea</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Distribuie prin</string>
+  <!-- general -->
   <string name="foot">&#160;picior</string>
   <string name="feet">&#160;picioare</string>
   <string name="meter">&#160;metru</string>
@@ -80,16 +82,15 @@
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">în limita %s %s</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Distanţa în metri</string>
   <string name="settings_accuracy_in_meters">Precizia în metri</string>
   <string name="settings_enter_meters">Introduceţi metri (max 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Detalii de inregistrare</string>
   <string name="log_gpx_title">Inregistreaza in GPX</string>
-  <string name="log_gpx_summary">Creează un fişier GPX în folderul GPSLogger de pe SD card.</string>
   <string name="log_kml_title">Înregistrează in KML</string>
-  <string name="log_kml_summary">Creează un fişier KML în folderul GPSLogger de pe SD card.</string>
   <string name="log_plain_text_title">Înregistrează in fisier text</string>
-  <string name="log_plain_text_summary">Creează un fişier text în folderul GPSLogger de pe SD card.</string>
   <string name="new_file_creation_title">Creare de fişier nou</string>
   <string name="new_file_creation_summary">Fişierul nou se creeaza in fiecare zi sau de fiecare dată când pornesti inregistrarea.</string>
   <string name="new_file_creation_onceaday">O dată pe zi</string>
@@ -139,10 +140,6 @@
   <string name="osm_setup_summary">Seteaza Tag-uri, descriere, vizibilitate şi autorizare pentru încărcarea traseelor GPS</string>
   <string name="osm_lbl_authorize">Autorizeaza aceasta aplicatie</string>
   <string name="osm_lbl_authorize_description">Va trebui să acordati acestei aplicatii permisiuni pentru a încărca trasee GPS la OpenStreetMap. Puteţi seta Tag-uri, descrieri şi vizibilitate aici după ce ati autorizat aceasta aplicatie.</string>
-  <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-  <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-  <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-  <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">Sterge autorizare</string>
   <string name="osm_resetauth_summary">Elimina locala autorizaţia folosita pentru a comunica cu contul OSM.</string>
@@ -231,7 +228,6 @@
   <string name="autoftp_invalid_summary">Unele dintre setări sunt incorecte. Asiguraţi-vă că aţi completat toate câmpurile relevante.     </string>
   <string name="ftp_upload">FTP upload</string>
   <string name="autoftp_setup_summary">Încărcaţi fişierele la un server FTP (S). Notă: Aceasta setare nu acoperă SFTP.</string>
-  <string name="faq_screen_title">Întrebări frecvente</string>
   <string name="menu_faq">Ajutor si Întrebări frecvente</string>
   <string name="gpsf_missing">Lipsă serviciu</string>
   <string name="gpsf_missing_description">Veţi avea nevoie de Google Play Services Framework pentru a utiliza această functionalitate.</string>

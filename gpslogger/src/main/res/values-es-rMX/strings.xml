@@ -11,6 +11,7 @@
   <string name="menu_annotate">Anotar</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_exit">Salir</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Latitud:</string>
   <string name="txt_longitude">Longitud:</string>
   <string name="txt_altitude">Altitud:</string>
@@ -33,6 +34,7 @@
   <string name="sharing_mylocation">Mi ubicación</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Compartir a través de</string>
+  <!-- general -->
   <string name="foot">&#160;pie</string>
   <string name="feet">&#160;pies</string>
   <string name="meter">&#160;metro</string>
@@ -80,16 +82,15 @@
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">dentro de %s %s</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Distancia en metros</string>
   <string name="settings_accuracy_in_meters">Precisión en metros</string>
   <string name="settings_enter_meters">Introduzca metros (máx. 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Detalles de registro</string>
   <string name="log_gpx_title">Registro a GPX</string>
-  <string name="log_gpx_summary">Crea un archivo GPX en la carpeta GPSLogger en la tarjeta SD.</string>
   <string name="log_kml_title">Registro a KML</string>
-  <string name="log_kml_summary">Crea un archivo GPX en la carpeta GPSLogger de la tarjeta SD.</string>
   <string name="log_plain_text_title">Registro en texto sin formato</string>
-  <string name="log_plain_text_summary">Crea un archivo de texto en la carpeta GPSLogger en la tarjeta SD.</string>
   <string name="new_file_creation_title">Creación de archivos nuevos</string>
   <string name="new_file_creation_summary">Si desea crear un nuevo archivo una vez al día o cada vez que inicie.</string>
   <string name="new_file_creation_onceaday">Una vez al día</string>
@@ -138,10 +139,6 @@
   <string name="osm_setup_summary">Establecer etiquetas, descripción, visibilidad y autorización para cargar GPS trazas     </string>
   <string name="osm_lbl_authorize">Autorizar esta app</string>
   <string name="osm_lbl_authorize_description">Debe conceder los permisos de este app para cargar GPS traza a OpenStreetMap. Se pueden definir etiquetas, descripciones y visibilidad aquí después de que usted ha autorizado esta app.     </string>
-  <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-  <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-  <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-  <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">Remover Autorización</string>
   <string name="osm_resetauth_summary">Retire la autorización local usada para enviar a su cuenta OSM.</string>

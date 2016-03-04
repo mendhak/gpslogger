@@ -14,6 +14,7 @@
   <string name="menu_annotate">Annoter</string>
   <string name="menu_share">Partager</string>
   <string name="menu_exit">Quitter</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Latitude :</string>
   <string name="txt_longitude">Longitude :</string>
   <string name="txt_altitude">Altitude :</string>
@@ -36,6 +37,7 @@
   <string name="sharing_mylocation">Ma location</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Partager par</string>
+  <!-- general -->
   <string name="foot">Pied</string>
   <string name="feet">Pieds</string>
   <string name="meter">Mètre</string>
@@ -87,16 +89,15 @@
   <string name="time_hms_format" formatted="false">﻿%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">entre %s %s</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Distance en mètres</string>
   <string name="settings_accuracy_in_meters">Précision en mètres</string>
   <string name="settings_enter_meters">Entrez mètres (max 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Détails de l\'enregistrement</string>
   <string name="log_gpx_title">Enregistrement sur GPX</string>
-  <string name="log_gpx_summary">Crée un fichier GPX dans le dossier GPSLogger sur la carte SD.</string>
   <string name="log_kml_title">Enregistrement sur KML</string>
-  <string name="log_kml_summary">Crée un fichier KML dans le dossier GPSLogger sur la carte SD.</string>
   <string name="log_plain_text_title">Enregistrer au format texte brut</string>
-  <string name="log_plain_text_summary">Crée un fichier au format texte brut dans le dossier GPSLogger de la carte SD.</string>
   <string name="new_file_creation_title">Nouvelle création du fichier</string>
   <string name="new_file_creation_summary">Que ce soit de créer un nouveau fichier une fois par jour ou chaque fois que vous démarrez.</string>
   <string name="new_file_creation_onceaday">Une fois par jour</string>
@@ -123,6 +124,8 @@ une plus grande précision à basses fréquences.</string>
   <string name="enabledisablegps_summary">Accédez aux paramètres du cellulaire pour activer ou désactiver les fournisseurs du service.</string>
   <string name="startonbootup_title">Démarrer au démarrage du cellulaire</string>
   <string name="startonbootup_summary">Lancement application et démarrage enregistrement lorsque le cellulaire démarre</string>
+  <string name="startonapplaunch_title">Démarre au lancement de l\'aplication</string>
+  <string name="startonapplaunch_summary">Démarrer l\'enregistrement au lancement de l\'application</string>
   <string name="autoemail_title">Email</string>
   <string name="autoemail_summary">Emails automatique du  fichier d\'enregistrement à une adresse de votre choix</string>
   <string name="please_wait">Attendre s\'il vous plaît.</string>
@@ -156,10 +159,6 @@ une plus grande précision à basses fréquences.</string>
   <string name="osm_setup_summary">Définition de : balises, description, visibilité et autorisations pour le téléchargement des traces GPS     </string>
   <string name="osm_lbl_authorize">Autoriser cette application</string>
   <string name="osm_lbl_authorize_description">Vous devez accorder à cette application les autorisations pour décharger les traces GPS vers OpenStreetMap. Vous pouvez définir les labels, les descriptions et la visibilité ici après avoir autorisé cette application.     </string>
-  <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-  <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-  <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-  <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">Effacer les autorisations</string>
   <string name="osm_resetauth_summary">Supprimer l\'autorisation locale utilisée pour communiquer avec votre compte OSM.</string>
@@ -169,8 +168,8 @@ une plus grande précision à basses fréquences.</string>
   <string name="osm_description">Description</string>
   <string name="osm_description_summary">La description à employer lors du téléchargement d\'une trace</string>
   <string name="osm_tags">Labels</string>
-  <string name="osm_tags_summary">Labels à appliquer lors du déchargement d\'une trace</string>
-  <string name="no_files_found">Aucun fichier trouvé, rien à partager ou à charger.</string>
+  <string name="osm_tags_summary">Étiquettes à appliquer lors de la mise en ligne d\'une trace</string>
+  <string name="no_files_found">Aucun fichier trouvé, rien à partager ou à mettre en ligne.</string>
   <string name="osm_pick_file">Choisissez un fichier à décharger</string>
   <string name="debuglog_title">Écrire dans le fichier de débogage</string>
   <string name="debuglog_summary">Écrire les messages de débogage dans un fichier sur la carte SD. Avertissement : La taille du fichier augmente très rapidement.     </string>
@@ -182,8 +181,8 @@ une plus grande précision à basses fréquences.</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
   <string name="emailprovider_manual">Entrée manuelle</string>
   <string name="dropbox_setup_title">Dropbox</string>
-  <string name="dropbox_setup_summary">Autoriser le déchargement de fichier avec Dropbox</string>
-  <string name="dropbox_authorize_description">Pour utiliser les fonctionnalités de Dropbox, vous devrez autoriser GPSLogger à décharger des fichiers vers votre compte.     </string>
+  <string name="dropbox_setup_summary">Autoriser la mise en ligne de fichiers avec Dropbox</string>
+  <string name="dropbox_authorize_description">Pour utiliser les fonctionnalités de Dropbox, vous devrez autoriser GPSLogger à mettre en ligne des fichiers vers votre compte.    </string>
   <string name="dropbox_authorize">Permettre</string>
   <string name="dropbox_unauthorize">Supprimer la permission</string>
   <string name="dropbox_unauthorize_description">Vous êtes authentifié à Dropbox. Les fichiers seront déchargés vers \'Apps\\GPSLogger for Android\'. Vous pouvez dissocier GPSLogger de Dropbox si vous le souhaitez.     </string>
@@ -196,7 +195,7 @@ une plus grande précision à basses fréquences.</string>
   <string name="owncloud_username">Nom d\'utilisateur</string>
   <string name="owncloud_password">Mot de passe</string>
   <string name="owncloud_directory">Dossier</string>
-  <string name="owncloud_directory_summary">Dossier à utiliser sur le serveur ownCloud.</string>
+  <string name="owncloud_directory_summary">Dossier à utiliser sur le serveur ownCloud. S\'assurer qu\'il existe ou l\'envoie échouera.</string>
   <string name="owncloud_test">Vérifier le chargement sur ownCloud</string>
   <string name="owncloud_test_summary">Charger un fichier test sur le serveur ownCloud</string>
   <string name="owncloud_testing">Tester le chargement sur ownCloud</string>
@@ -214,9 +213,9 @@ une plus grande précision à basses fréquences.</string>
   <string name="gdocs_setup_title">Google Drive</string>
   <string name="gdocs_setup_summary">Autoriser le déchargement de fichiers avec Google Drive</string>
   <string name="gdocs_test_summary">Tester le déchargement d\'un fichier fichier vers Google Drive</string>
-  <string name="gdocs_test_title">Essai d\'envoi</string>
-  <string name="gdocs_testupload_error">Impossible d\'envoyer le fichier test</string>
-  <string name="gdocs_testupload_success">Envoyé. Veuillez vérifier vos nouveaux documents Google.</string>
+  <string name="gdocs_test_title">Essai de mise en ligne</string>
+  <string name="gdocs_testupload_error">Envoi du fichier test impossible</string>
+  <string name="gdocs_testupload_success">Mis en ligne. Veuillez vérifier vos nouveaux documents Google.</string>
   <string name="email_upload">Envoyer un fichier par courriel</string>
   <string name="autoemail_sendto_csv">Adresses de courriel séparées par une virgule</string>
   <string name="autosend_enabled">Autoriser l\'envoi automatique</string>
@@ -230,7 +229,7 @@ une plus grande précision à basses fréquences.</string>
   <string name="autosend_sending">Envoi automatique</string>
   <string name="summary_autosend">Envoi automatique :</string>
   <string name="pref_autosend_title">Envoi automatique, courriel et téléchargement</string>
-  <string name="pref_autosend_summary">Options de courriel, partage et téléchargement</string>
+  <string name="pref_autosend_summary">Options de courriel, partage et mise en ligne</string>
   <string name="shortcut_start">Démarrer</string>
   <string name="shortcut_stop">Arrêter</string>
   <string name="shortcut_pickaction">Choisir une action</string>
@@ -265,15 +264,15 @@ une plus grande précision à basses fréquences.</string>
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit">FTP implicite sur SSL</string>
   <string name="autoftp_implicit_summary">Laisser décoché si vous ne savez pas.</string>
-  <string name="autoftp_test">Tester l\'envoi FTP</string>
-  <string name="autoftp_test_summary">Envoyer un fichier de test sur le serveur FTP</string>
+  <string name="autoftp_test">Essai de mise en ligne FTP</string>
+  <string name="autoftp_test_summary">Mettre en ligne un fichier d\'essai sur le serveur FTP</string>
   <string name="autoftp_testing">Test de l\'envoi FTP en cours</string>
   <string name="autoftp_invalid_settings">Paramètres invalides</string>
   <string name="autoftp_invalid_summary">Certains de vos paramètres sont invalides. Veuillez vous assurer que vous avez bien rempli tous les champs.</string>
-  <string name="ftp_upload">Transfert FTP</string>
+  <string name="ftp_upload">Mise en ligne FTP</string>
   <string name="autoftp_setup_title">FTP</string>
   <string name="autoftp_setup_summary">Transférer vos fichiers vers un serveur FTP (S). Remarque : Ceci ne concerne pas SFTP.</string>
-  <string name="faq_screen_title">Questions fréquemment posées</string>
+  <string name="faq_screen_title">@string/menu_faq</string>
   <string name="menu_faq">Aide et questions fréquemment posées</string>
   <string name="gpsf_missing">Service Manquant</string>
   <string name="gpsf_missing_description">Vous aurez besoin de Google Play Services Framework pour utiliser cette fonction.</string>
@@ -290,10 +289,11 @@ une plus grande précision à basses fréquences.</string>
   <string name="new_file_prefix_serial_title">Préfixer le numéro de série au nom de fichier</string>
   <string name="new_file_prefix_serial_summary">Voici le numéro de série trouvé dans le status de votre telephone</string>
   <string name="txt_travel_duration">Durée :</string>
-  <string name="menu_onepoint">Journaliser un point</string>
+  <string name="menu_onepoint">Enregistrer un point</string>
   <string name="view_simple">Vue simple</string>
   <string name="view_detailed">Vue détaillée</string>
   <string name="view_big">Vue large</string>
+  <string name="view_log">Affichage du journal</string>
   <string name="bigview_taptotoggle">Appuyez pour démarrer/arrêter la journalisation</string>
   <string name="summary_autosendtargets">Envoyer vers :</string>
   <string name="accuracy_filter_title">Filtre de précision</string>
@@ -322,7 +322,7 @@ une plus grande précision à basses fréquences.</string>
   <string name="new_file_custom_each_time_title">Demander un nom de fichier à chaque démarrage</string>
   <string name="new_file_custom_each_time_summary">Demande un nom de fichier à chaque fois que l\'enregistrement est lancé</string>
   <string name="donate_app">Faire un don (app)</string>
-  <string name="donate_bitcoin">Faire un don (Bitcoin)</string>
+  <string name="tip_coffee">Offrez moi un café</string>
   <string name="no_network_message">Il n\'y a pas de réseau disponible</string>
   <string name="hide_notification_buttons">Cacher les icones de notification</string>
   <string name="hide_notification_buttons_summary">Vous aurez besoin de redémarrer GPSLogger pour que le changement soit effectif</string>
@@ -336,10 +336,22 @@ une plus grande précision à basses fréquences.</string>
   <string name="activity_on_bicycle">A vélo</string>
   <string name="activity_on_foot">A pieds</string>
   <string name="activity_running">Course à pied</string>
+  <string name="activity_tilting">Inclinaison</string>
   <string name="activity_walking">Marche à pied</string>
   <string name="activity_unknown">Inconnu</string>
   <string name="altitude_subtractgeoidheight_summary">Utilise le niveau moyen des mers (MSL) au lieu de l’altitude WGS84 en soustrayant « geoidheight » de l\'altitude GPS. S\'applique uniquement aux points GPS relevés par satellite, pas ceux de réseaux si de NMEA.</string>
   <string name="altitude_subtractgeoidheight_title">Utilise le niveau de la mer au lieu de WGS84</string>
   <string name="altitude_subtractoffset_title">Soustraire le décalage d’altitude</string>
   <string name="altitude_subtractoffset_summary">Valeur en mètres à soustraire de l\'altitude fournie par le GPS. Utilisez un nombre négatif pour ajouter une valeur à l\'altitude. S\'applique uniquement aux relevés par satellite, pas à ceux calculés de réseaux ou de NMEA.</string>
+  <string name="upload_failure">L\'envoie a échoué</string>
+  <string name="inaccurate_point_discarded">Point inexacte ignoré</string>
+  <string name="not_enough_distance_traveled">Seulement %s m effectuer. Point ignoré.</string>
+  <string name="autosend_wifionly_title">Envoyer en Wi-fi uniquement</string>
+  <string name="logview_showlocationsonly">Localisation uniquement</string>
+  <string name="logview_autoscroll">Défilement automatique</string>
+  <string name="profile_create_new">Créer un nouveau profil</string>
+  <string name="profile_switch_before_delete">Veuillez changer de profil avant de supprimer celui-ci.</string>
+  <string name="profile_delete">Supprimer le profile?</string>
+  <string name="profile_default">Profil par défault</string>
+  <string name="profile_add_new">Ajouter un profil</string>
 </resources>

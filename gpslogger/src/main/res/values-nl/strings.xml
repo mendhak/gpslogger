@@ -14,6 +14,7 @@
   <string name="menu_annotate">﻿Aantekening maken</string>
   <string name="menu_share">Delen</string>
   <string name="menu_exit">Afsluiten</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Breedtegraad:</string>
   <string name="txt_longitude">﻿Lengtegraad:</string>
   <string name="txt_altitude">Hoogte:</string>
@@ -36,12 +37,17 @@
   <string name="sharing_mylocation">Mijn locatie</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Delen via</string>
+  <!-- general -->
   <string name="foot">&#160;﻿voet</string>
   <string name="feet">&#160;﻿voeten</string>
   <string name="meter">&#160;meter</string>
   <string name="meters">&#160;meter</string>
   <string name="error">Fout</string>
   <string name="error_connection">﻿Verbindingsfout. Controleer de telefooninstellingen.</string>
+  <string name="seconds">s</string>
+  <string name="minutes">min</string>
+  <string name="hours">hr</string>
+  <string name="gpsprovider_unavailable">Geen GPS beschikbaar. Controleer uw locatie instellingen en stel een locatie provider in.</string>
   <string name="started">Gestart</string>
   <string name="providername_gps">GPS-satellieten</string>
   <string name="providername_celltower">celtorens</string>
@@ -83,16 +89,15 @@
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">binnen de %s %s</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Afstand in meter</string>
   <string name="settings_accuracy_in_meters">Nauwkeurigheid in meters</string>
   <string name="settings_enter_meters">Voer meter in(max 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Logging details</string>
   <string name="log_gpx_title">Loggen naar GPX</string>
-  <string name="log_gpx_summary">﻿Maakt een KML-bestand in de GPSLogger map op de SD-kaart.</string>
   <string name="log_kml_title">Loggen naar KML</string>
-  <string name="log_kml_summary">﻿Maakt een KML-bestand in de GPSLogger map op de SD-kaart.</string>
   <string name="log_plain_text_title">Log naar tekst zonder opmaak</string>
-  <string name="log_plain_text_summary">Maakt een bestand met tekst zonder opmaak in de map GPSLogger op de SD kaart.</string>
   <string name="new_file_creation_title">﻿Nieuw bestand maken</string>
   <string name="new_file_creation_summary">﻿Of u een keer per dag een nieuw bestand wilt maken of elke keer dat u start.</string>
   <string name="new_file_creation_onceaday">﻿Een keer per dag</string>
@@ -102,6 +107,7 @@
   <string name="new_file_custom_summary">Je kan je eigen bestandsnaam opgeven.
            Je hebt de mogelijkheid om bijkomende dynamische parameters op te geven zoals serienummer, jaar, uur, minuut, enz. Té dynamische bestandsnamen werken minder goed met automatische verzending, aangezien die steeds het laatste bestand versturen.</string>
   <string name="pref_performance_title">Performantie</string>
+  <string name="pref_performance_summary">Tijdinstellingen, filters en luisteraars</string>
   <string name="time_before_logging_title">﻿Tijd tussen de logpunten</string>
   <string name="time_before_logging_summary">Gebruik 0 als maximale frequentie, maar een hogere waarde bevordert de accuduur.
     </string>
@@ -119,6 +125,9 @@
   <string name="enabledisablegps_summary">﻿Ga naar de telefooninstellingen om locatieaanbieders in of uit te schakelen.</string>
   <string name="startonbootup_title">﻿Start bij het opstarten</string>
   <string name="startonbootup_summary">Start de app en start ook het loggen als de smartphone opstart</string>
+  <string name="startonapplaunch_title">Start als de app gestart wordt</string>
+  <string name="startonapplaunch_summary">Start loggen wanneer app wordt gestart</string>
+  <string name="autoemail_title">E-mail</string>
   <string name="autoemail_summary">Verstuurt automatisch een e-mails met het logbestand naar een adres van uw keuze</string>
   <string name="please_wait">Een ogenblik geduld.</string>
   <string name="autoemail_target">Doel e-mailadressen</string>
@@ -151,10 +160,6 @@
   <string name="osm_setup_summary">Tags, beschrijving, zichtbaarheid en autorisatie voor het uploaden van GPS tracks instellen     </string>
   <string name="osm_lbl_authorize">Deze app goedkeuren</string>
   <string name="osm_lbl_authorize_description">U moet deze app goedkeuren om GPS tracks te kunnen uploaden naar OpenStreetMap. U kunt tags, beschrijvingen en zichtbaarheid instellen nadat u deze app hier heeft goedgekeurd.     </string>
-  <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-  <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-  <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-  <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">Verwijder goedkeuring</string>
   <string name="osm_resetauth_summary">De lokale goedkeuring voor uw OSM account verwijderen.</string>
@@ -169,6 +174,7 @@
   <string name="osm_pick_file">Kies een bestand om te uploaden</string>
   <string name="debuglog_title">Schrijven naar debug bestand</string>
   <string name="debuglog_summary">Schrijft debug informatie naar een bestand op de SD-kaart. Waarschuwing: Het bestand groeit zeer snel.     </string>
+  <string name="pref_logging_summary">Bestandstypen, maken en naam geven</string>
   <string name="pref_general_title">Algemene opties</string>
   <string name="pref_general_summary">Opstart- en weergaveopties</string>
   <string name="emailprovider_google">Google Mail</string>
@@ -183,11 +189,31 @@
   <string name="dropbox_unauthorize_description">U bent gemachtigd voor Dropbox. Bestanden worden geüpload naar \'Apps\\GPSLogger voor Android\'. U kunt GPSLogger ontkoppelen van Dropbox als u wenst.     </string>
   <string name="dropbox_couldnotauthorize">Kon niet autoriseren met Dropbox, gelieve later opnieuw te proberen</string>
   <string name="dropbox_upload">Dropbox</string>
+  <string name="owncloud_setup_title">ownCloud</string>
+  <string name="owncloud_setup_summary">Upload je bestanden naar een ownCloud server.</string>
+  <string name="owncloud_server">Server</string>
+  <string name="owncloud_server_summary">ownCloud basis URL</string>
+  <string name="owncloud_username">Gebruikersnaam</string>
+  <string name="owncloud_password">Wachtwoord</string>
+  <string name="owncloud_directory">Map</string>
+  <string name="owncloud_directory_summary">Map op de ownCloud server. Zorg ervoor dat de map bestaat anders werkt de upload niet.</string>
+  <string name="owncloud_test">Test ownCloud upload</string>
+  <string name="owncloud_test_summary">Upload een test bestand naar de ownCloud server</string>
+  <string name="owncloud_testing">Testen van de ownCloud upload</string>
+  <string name="owncloud_invalid_settings">Ongeldige instellingen</string>
+  <string name="owncloud_invalid_summary">Er zijn een aantal instellingen ongeldig. Zorg ervoor dat je alle velden correct hebt ingevuld.</string>
+  <string name="owncloud_upload">ownCloud</string>
   <string name="menu_upload">Uploaden</string>
   <string name="autoemail_from">Verzendadres</string>
   <string name="autoemail_from_summary">Sommige e-mailproviders vereisen een verzendadres. Gebruik dit alleen als je het nodig hebt.     </string>
+  <string name="gdocs_upload">Google Drive</string>
+  <string name="gdocs_startauthorization">Autoriseren voor Google Drive</string>
+  <string name="gdocs_authorize_summary">Brengt u naar Google Drive waar u GPSLogger moet autoriseren</string>
   <string name="gdocs_clearauthorization">Verwijder autorisatie</string>
   <string name="gdocs_clearauthorization_summary">Verwijdert lokale GDocs instellingen. Als u permanent de toegang wilt intrekken, ga dan naar Google-Account instellingen</string>
+  <string name="gdocs_setup_title">Google Drive</string>
+  <string name="gdocs_setup_summary">Autoriseren bij Google Drive om uploads toe te staan</string>
+  <string name="gdocs_test_summary">Een testbestand uploaden naar Google Drive</string>
   <string name="gdocs_test_title">Test upload</string>
   <string name="gdocs_testupload_error">Kon het testbestand niet uploaden</string>
   <string name="gdocs_testupload_success">Geüpload. Controleer uw Google documenten voor een nieuw bestand.</string>
@@ -195,10 +221,12 @@
   <string name="autoemail_sendto_csv">E-mailadressen gescheiden door een komma</string>
   <string name="autosend_enabled">Automatisch verzenden toestaan</string>
   <string name="autosend_enabled_summary">Staat het verzenden van de bestanden naar verschillende doelen toe</string>
+  <string name="autosend_frequency_summary">Hoe vaak logboekbestanden moeten worden verzonden, in minuten. Op 0 instellen om dit uitschakelen.</string>
   <string name="autosend_frequency">Hoe vaak?</string>
   <string name="autosend_sendzip_title">Zip-bestand verzenden</string>
   <string name="autosend_sendzip_summary">Zipbestand verzenden indien van toepassing. Uitschakelen voor het verzenden van individuele bestanden, of als de zip-optie niet voor u werkt     </string>
   <string name="autosend_targets_category">Doelinstellingen van automatisch verzenden</string>
+  <string name="menu_autosend_now">Nu automatisch verzenden</string>
   <string name="autosend_sending">Automatisch verzenden</string>
   <string name="summary_autosend">Automatisch verzenden:</string>
   <string name="pref_autosend_title">Automatisch verzenden, e-mailen en uploaden</string>
@@ -208,6 +236,7 @@
   <string name="shortcut_pickaction">Kies een actie</string>
   <string name="log_opengts_title">Log naar OpenGTS Server</string>
   <string name="log_opengts_summary">GPRMC gegevens verzenden naar een online OpenGTS server.</string>
+  <string name="opengts_setup_title">OpenGTS</string>
   <string name="opengts_setup_summary">GPS tracks verzenden op een OpenGTS server van uw keuze.</string>
   <string name="autoopengts_server_category">OpenGTS instellingen</string>
   <string name="autoopengts_invalid_form">Ongeldige waarden</string>
@@ -242,8 +271,9 @@
   <string name="autoftp_invalid_settings">Ongeldige settings</string>
   <string name="autoftp_invalid_summary">Sommige settings zijn ongeldig. Controleer of alle noodzakelijke velden zijn ingevuld.</string>
   <string name="ftp_upload">FTP upload</string>
+  <string name="autoftp_setup_title">FTP</string>
   <string name="autoftp_setup_summary">Upload uw bestanden naar een FTP server. Let op: geen SFTP.</string>
-  <string name="faq_screen_title">Veel gestelde vragen</string>
+  <string name="faq_screen_title">@string/menu_faq</string>
   <string name="menu_faq">Help en veel gestelde vragen (FAQ)</string>
   <string name="gpsf_missing">Ontbrekende Service</string>
   <string name="gpsf_missing_description">U heeft Google Play Services Framework nodig voor deze functie.</string>
@@ -264,6 +294,7 @@
   <string name="view_simple">Eenvoudige weergave</string>
   <string name="view_detailed">Gedetailleerde weergave</string>
   <string name="view_big">Grote weergave</string>
+  <string name="view_log">Weergave log</string>
   <string name="bigview_taptotoggle">Tik om het loggen te starten/stoppen</string>
   <string name="summary_autosendtargets">Uploaden naar:</string>
   <string name="accuracy_filter_title">Nauwkeurigheidsfilter</string>
@@ -287,4 +318,35 @@
   <string name="listeners_summary">Welke providers gebruikt Worden Als ,ze beshikbaar zijn. GPS voor satelieten, netwerk voor cell toren/WiFi, passief is een provider die localizeringsaanvragen van andere toepassingen onderschept.</string>
   <string name="listeners_title">Localisering providers</string>
   <string name="autosend_frequency_hint">Aantal minuten</string>
+  <string name="pref_logging_file_no_permissions">GPSLogger kan niet in die map schrijven</string>
+  <string name="pref_gpsvisualizer">Laat GPS statestieken en grafieken zien</string>
+  <string name="new_file_custom_each_time_title">Vraag elke elke keer om een bestandsnaam bij starten</string>
+  <string name="new_file_custom_each_time_summary">Vraag elke keer om een bestandsnaam als het loggen wordt gestart</string>
+  <string name="donate_app">Doneer (app)</string>
+  <string name="no_network_message">Er is geen netwerk beschikbaar</string>
+  <string name="hide_notification_buttons">Notificatie knoppen verbergen</string>
+  <string name="hide_notification_buttons_summary">Je moet de GPSLogger opnieuw opstarten om deze instelling te laten werken</string>
+  <string name="pref_performance_activityrecognition">Activiteit herkenning</string>
+  <string name="activityrecognition_dont_log_if_still">Niet loggen als ik niet beweeg</string>
+  <string name="activityrecognition_dont_log_if_still_summary">Als de accelerometer geen beweging heeft geregistreerd na het laatste punt, pauzeer het loggen totdat je weer beweegt. Passieve punten worden nog wel gelogd.</string>
+  <string name="txt_activity">Activiteit:</string>
+  <string name="activity_in_vehicle">Met de auto</string>
+  <string name="activity_confidence">Zekerheid</string>
+  <string name="activity_still">Stil</string>
+  <string name="activity_on_bicycle">Fietsen</string>
+  <string name="activity_on_foot">Wandelen</string>
+  <string name="activity_running">Rennen</string>
+  <string name="activity_tilting">Kantelen/draaien</string>
+  <string name="activity_walking">Lopen</string>
+  <string name="activity_unknown">Onbekend</string>
+  <string name="altitude_subtractgeoidheight_summary">Gebruikt Mean Sea Level (MSL) in plaats van hoogte van WGS84, door geoidheight van hoogte van GPS af te trekken. Geldt alleen voor GPS-satellietpunten, niet voor netwerk of NMEA.</string>
+  <string name="altitude_subtractgeoidheight_title">MSL gebruiken in plaats van WGS84</string>
+  <string name="altitude_subtractoffset_title">Verschuiving van hoogte aftrekken</string>
+  <string name="altitude_subtractoffset_summary">Een waarde in meters om van hoogten van GPS af te trekken. Gebruik een negatief getal om een waarde toe te voegen aan de hoogte. Geldt alleen voor GPS-satellietpunten, niet voor netwerk of NMEA.</string>
+  <string name="upload_failure">Kan het bestand niet uploaden</string>
+  <string name="inaccurate_point_discarded">Onnauwkeurig punt verwijderd</string>
+  <string name="not_enough_distance_traveled">Slechts %s m gereisd. Punt verwijderd.</string>
+  <string name="autosend_wifionly_title">Alleen op Wi-Fi verzenden</string>
+  <string name="logview_showlocationsonly">Alleen locaties</string>
+  <string name="logview_autoscroll">Scroll automatisch</string>
 </resources>

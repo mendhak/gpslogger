@@ -11,6 +11,7 @@
   <string name="menu_annotate">Noter</string>
   <string name="menu_share">Del</string>
   <string name="menu_exit">Avslutt</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Breddegrad:</string>
   <string name="txt_longitude">Lengdegrad:</string>
   <string name="txt_altitude">Høgd over havet:</string>
@@ -33,6 +34,7 @@
   <string name="sharing_mylocation">Mi plassering</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Del via</string>
+  <!-- general -->
   <string name="foot">&#160;fot</string>
   <string name="feet">&#160;fot</string>
   <string name="meter">&#160;meter</string>
@@ -80,16 +82,15 @@
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">innenfor %s %s</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Avstanden i meter</string>
   <string name="settings_accuracy_in_meters">Nøyaktighet i meter</string>
   <string name="settings_enter_meters">Angi meter (maks 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Logg detaljer</string>
   <string name="log_gpx_title">Logg til GPX</string>
-  <string name="log_gpx_summary">Lagar ei GPX-fil i GPSLogger-mappa på SD-kortet.</string>
   <string name="log_kml_title">Logg til KML</string>
-  <string name="log_kml_summary">Lagar ei KML-fil i GPSLogger-mappa på SD-kortet.</string>
   <string name="log_plain_text_title">Logg til tekstfil</string>
-  <string name="log_plain_text_summary">Oppretter en tekst-fil i mappen GPSLogger på SD-kortet.</string>
   <string name="new_file_creation_title">Filoppretting</string>
   <string name="new_file_creation_summary">Skal ny fil opprettast ein gong om dagen eller kvar gong du byrjar.</string>
   <string name="new_file_creation_onceaday">Ein gong om dagen</string>
@@ -137,10 +138,6 @@
   <string name="osm_setup_summary">Set tag, beskrivelse, visning og bekreftelse for opplasting av GPS sport</string>
   <string name="osm_lbl_authorize">Godkjenn app\'en</string>
   <string name="osm_lbl_authorize_description">Du må gi denne app-tillatelser for å laste opp GPS spor til OpenStreetMap. Du kan angi koder, beskrivelser og synlighet her etter at du har godkjent app\'en.</string>
-  <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-  <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-  <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-  <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">Fjern autorisasjon</string>
   <string name="osm_resetauth_summary">Fjerne app\'en sin fullmakten til å kommunisere med OSM kontoen.</string>
@@ -186,7 +183,6 @@
   <string name="autoftp_invalid_summary">Innstillingene er ugyldige. Kontroller at du har fylt ut alle relevante felt.</string>
   <string name="ftp_upload">FTP Opplasting</string>
   <string name="autoftp_setup_summary">Last opp filer til en FTP(S)-server. Merk: Dette gjelder ikke SFTP.</string>
-  <string name="faq_screen_title">Vanlige spørsmål</string>
   <string name="menu_faq">Help pg FAQ</string>
   <string name="gpsf_missing">Service mangler</string>
   <string name="gpsf_missing_description">Du må ha Google Play Services Framework for å bruke denne funksjonen.</string>

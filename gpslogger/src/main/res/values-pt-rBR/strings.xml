@@ -14,6 +14,7 @@
   <string name="menu_annotate">Marcar</string>
   <string name="menu_share">Compartilhar</string>
   <string name="menu_exit">Sair</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Latitude:</string>
   <string name="txt_longitude">Longitude:</string>
   <string name="txt_altitude">Altitude:</string>
@@ -36,6 +37,7 @@
   <string name="sharing_mylocation">Minha localização</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Compartilhar via</string>
+  <!-- general -->
   <string name="foot">&#160;pé</string>
   <string name="feet">&#160;pés</string>
   <string name="meter">&#160;metro</string>
@@ -87,16 +89,15 @@
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">dentro de %s %s</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Distância em metros</string>
   <string name="settings_accuracy_in_meters">Precisão em metros</string>
   <string name="settings_enter_meters">Digite metros (máximo de 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Detalhes de log</string>
   <string name="log_gpx_title">Log para GPX</string>
-  <string name="log_gpx_summary">Cria um arquivo GPX na pasta GPSLogger no cartão SD.</string>
   <string name="log_kml_title">Log para KML</string>
-  <string name="log_kml_summary">Cria um arquivo GPX na pasta GPSLogger no cartão SD.</string>
   <string name="log_plain_text_title">Log em texto sem formatação</string>
-  <string name="log_plain_text_summary">Cria um arquivo de texto sem formatação na pasta GPSLogger no cartão SD.</string>
   <string name="new_file_creation_title">Nova criação de arquivo</string>
   <string name="new_file_creation_summary">Se deseja criar um novo arquivo de uma vez por dia ou cada vez que você iniciar.</string>
   <string name="new_file_creation_onceaday">Uma vez por dia</string>
@@ -160,10 +161,6 @@
   <string name="osm_setup_summary">Definir etiquetas, descrição, visibilidade e a autorização para efetuar upload de rastreamento GPS     </string>
   <string name="osm_lbl_authorize">Autorizar este app</string>
   <string name="osm_lbl_authorize_description">Você precisará conceder este app permissões para poder carregar rastreamento GPS para o OpenStreetMap. Você pode definir tags, descrições e visibilidade aqui depois que tenha autorizado este app.     </string>
-  <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-  <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-  <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-  <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">Excluir autorização</string>
   <string name="osm_resetauth_summary">Remova a autorização local usada para conectar com sua conta OSM.</string>
@@ -328,7 +325,7 @@
   <string name="new_file_custom_each_time_title">Pedir um nome de arquivo em cada início</string>
   <string name="new_file_custom_each_time_summary">Solicitar um nome de arquivo personalizado cada vez que o Log é iniciado</string>
   <string name="donate_app">Doar (app)</string>
-  <string name="donate_bitcoin">Doar (Bitcoin)</string>
+  <string name="tip_coffee">Compre-me um café</string>
   <string name="no_network_message">Não existe rede disponível</string>
   <string name="hide_notification_buttons">Ocultar botões de notificação</string>
   <string name="hide_notification_buttons_summary">Você precisará reiniciar o GPSLogger para que esta configuração tenha efeito</string>
@@ -355,4 +352,9 @@
   <string name="autosend_wifionly_title">Enviar somente pela Wi-Fi</string>
   <string name="logview_showlocationsonly">Somente Localizações</string>
   <string name="logview_autoscroll">Rolagem Automática</string>
+  <string name="profile_create_new">Criar novo perfil</string>
+  <string name="profile_switch_before_delete">Por favor, alterne para outro perfil antes de excluir este aqui.</string>
+  <string name="profile_delete">Excluir o perfil?</string>
+  <string name="profile_default">Perfil padrão</string>
+  <string name="profile_add_new">Adicionar perfil</string>
 </resources>

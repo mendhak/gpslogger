@@ -14,6 +14,7 @@
   <string name="menu_annotate">Jegyzet</string>
   <string name="menu_share">Megosztás</string>
   <string name="menu_exit">Kilépés</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Szélesség:</string>
   <string name="txt_longitude">Hosszúság:</string>
   <string name="txt_altitude">Tengerszint feletti magasság:</string>
@@ -36,12 +37,17 @@
   <string name="sharing_mylocation">Helyzetem</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Megosztás</string>
+  <!-- general -->
   <string name="foot">&#160;láb</string>
   <string name="feet">&#160;láb</string>
   <string name="meter">&#160;méter</string>
   <string name="meters">&#160;méter</string>
   <string name="error">Hiba</string>
   <string name="error_connection">Kapcsolódási hiba. Kérjük, ellenőrizze a telefon beállításait.</string>
+  <string name="seconds">mp</string>
+  <string name="minutes">perc</string>
+  <string name="hours">óra</string>
+  <string name="gpsprovider_unavailable">Nincs GPS szolgáltató, ellenőrizze a beállításait.    </string>
   <string name="started">Kezdés</string>
   <string name="providername_gps">GPS műholdak</string>
   <string name="providername_celltower">GSM tornyok</string>
@@ -83,16 +89,15 @@
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">belül: %s%s</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Távolság méterben</string>
   <string name="settings_accuracy_in_meters">Méteres pontossággal</string>
   <string name="settings_enter_meters">Adja meg a métert (max 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Naplózási részletek</string>
   <string name="log_gpx_title">GPX napló</string>
-  <string name="log_gpx_summary">Létrehoz egy GPX-fájlt a GPSLogger mappába az SD kártyán.</string>
   <string name="log_kml_title">KML napló</string>
-  <string name="log_kml_summary">Létrehoz egy KML-fájlt a GPSLogger mappába az SD kártyán.</string>
   <string name="log_plain_text_title">Egyszerű szöveges napló</string>
-  <string name="log_plain_text_summary">Létrehoz egy sima szöveges fájlt a GPSLogger mappába az SD kártyán.</string>
   <string name="new_file_creation_title">Új fájl létrehozása</string>
   <string name="new_file_creation_summary">Létrehoz egy új fájlt, naponta egyszer, vagy minden induláskor.</string>
   <string name="new_file_creation_onceaday">Naponta egyszer</string>
@@ -102,6 +107,7 @@
   <string name="new_file_custom_summary">Használhat tetszőleges fájlnevet.
 Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év, óra, perc, stb. A nagyon dinamikus fájlnevek nem biztos, hogy jól működnek, mert az automatikus küldés funkció csak az utolsó fájlt küldi el.</string>
   <string name="pref_performance_title">Teljesítmény</string>
+  <string name="pref_performance_summary">Időzítések, szűrők és figyelők</string>
   <string name="time_before_logging_title">Logolás előtt</string>
   <string name="time_before_logging_summary">A 0 a legnagyobb gyakoriság, de a ritkább jótékonyan hat az akkumulátor élettartamára.</string>
   <string name="time_before_logging_dialog_title">Idő másodpercben</string>
@@ -117,9 +123,13 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="enabledisablegps_summary">A telefon beállítások engedélyezése vagy tiltása</string>
   <string name="startonbootup_title">Boot-nál indul</string>
   <string name="startonbootup_summary">A GPS logger a telefon bekapcsolásakor induljon</string>
+  <string name="startonapplaunch_title">Indítás app indításakor</string>
+  <string name="startonapplaunch_summary">Elindítja a naplózást az app indulásakor</string>
+  <string name="autoemail_title">Email</string>
   <string name="autoemail_summary">Automatikusan e-mail küldés az ön által kiválasztott címre</string>
   <string name="please_wait">Kérem várjon.</string>
   <string name="autoemail_target">Cél e-mail cím</string>
+  <string name="autosend_frequency_display">%s perc után</string>
   <string name="autoemail_frequency_whenistop">Nyomja meg a megállításhoz</string>
   <string name="autoemail_smtp_category">E-mail beállítások</string>
   <string name="autoemail_username">Felhasználónév</string>
@@ -148,10 +158,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="osm_setup_summary">Állítsa be a címkéket, a leírást, a láthatóságot és a engedélyeket a GPS nyomkövetés feltöltéséhez     </string>
   <string name="osm_lbl_authorize">Program engedélyezése</string>
   <string name="osm_lbl_authorize_description">Szüksége lesz engedélyre, hogy a GPS útvonalat feltöltse az OpenStreetMap-ra. Beállíthatja a címkék, a leírások és a láthatóságnál.     </string>
-  <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-  <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-  <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-  <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">Meghatalmazás tisztázása</string>
   <string name="osm_resetauth_summary">Lépjen ki és használja a OSM bejelentkezését.</string>
@@ -166,6 +172,7 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="osm_pick_file">Válasszon egy fájlt a feltöltéshez</string>
   <string name="debuglog_title">Hibakeresési fájl készítése</string>
   <string name="debuglog_summary">Figyelmeztetés: A hibakeresési fájl az SD-kártyán nagyon gyorsan növekszik.     </string>
+  <string name="pref_logging_summary">Fájl típusok, létrehozás és elnevezés</string>
   <string name="pref_general_title">Általános beállítások</string>
   <string name="pref_general_summary">Indítás és megjelenítési beállítások</string>
   <string name="emailprovider_google">Google Mail</string>
@@ -180,11 +187,26 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="dropbox_unauthorize_description">A Dropbox hitelesítés megtörtént. Fájlok feltöltve, \"Apps\\GPSLogger for Android\" könyvtárból. Bármikor leállíthatja a további feltöltést     </string>
   <string name="dropbox_couldnotauthorize">Nem engedélyezett a Dropbox, próbálja meg később</string>
   <string name="dropbox_upload">Dropbox</string>
+  <string name="owncloud_setup_title">ownCloud</string>
+  <string name="owncloud_server">Szerver</string>
+  <string name="owncloud_server_summary">ownCloud URL</string>
+  <string name="owncloud_username">Felhasználónév</string>
+  <string name="owncloud_password">Jelszó</string>
+  <string name="owncloud_directory">Mappa</string>
+  <string name="owncloud_directory_summary">Könyvtár az ownCould szerveren. Léteznie kell, különben a feltöltés meghiúsul.</string>
+  <string name="owncloud_test">ownCloud feltöltés teszt</string>
+  <string name="owncloud_test_summary">Teszt fájl feltöltése az ownCloud szerverre</string>
+  <string name="owncloud_testing">OwnCloud feltöltés tesztelése</string>
+  <string name="owncloud_invalid_settings">Hibás beállítások</string>
+  <string name="owncloud_invalid_summary">Néhány beállítás érvénytelen. Győződjön meg arról, hogy minden vonatkozó mezőt kitöltött. </string>
+  <string name="owncloud_upload">ownCloud</string>
   <string name="menu_upload">Feltöltés</string>
   <string name="autoemail_from">Címről</string>
   <string name="autoemail_from_summary">Egyes szolgáltatók megkövetelik az e-mail címet. Csak abban az esetben kell megadni.     </string>
+  <string name="gdocs_upload">Google Drive</string>
   <string name="gdocs_clearauthorization">Meghatalmazás tisztázása</string>
   <string name="gdocs_clearauthorization_summary">Ideiglenesen törli a helyi GDocs beállításokat. Véglegesen a Google fiókjának beállításainál törölheti a hozzáférést</string>
+  <string name="gdocs_setup_title">Google Drive</string>
   <string name="gdocs_test_title">Próba feltöltés</string>
   <string name="gdocs_testupload_error">Nem lehet feltölteni a próba fájlt</string>
   <string name="gdocs_testupload_success">Kész a feltöltés. Kérjük, ellenőrizze a Google dokumentumokban az új fájlt.</string>
@@ -196,6 +218,7 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="autosend_sendzip_title">Küld a zip-fájlt</string>
   <string name="autosend_sendzip_summary">Zip-fájl küldése. Kikapcsolja az egyes fájlok küldését, ha a zip opció nem működik az Önnél     </string>
   <string name="autosend_targets_category">Automatikus küldés célok</string>
+  <string name="menu_autosend_now">Automatikus küldés most</string>
   <string name="autosend_sending">Automatikus küldés</string>
   <string name="summary_autosend">Automatikus küldés:</string>
   <string name="pref_autosend_title">Automatikus küldése, email és feltöltés</string>
@@ -205,6 +228,7 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="shortcut_pickaction">Válasszon műveletet</string>
   <string name="log_opengts_title">OpenGTS Server logolás</string>
   <string name="log_opengts_summary">GPRMC adat küldése OpenGTS szerverhez.</string>
+  <string name="opengts_setup_title">OpenGTS</string>
   <string name="opengts_setup_summary">GPS utvonal küldése a OpenGTS szervernek.</string>
   <string name="autoopengts_server_category">OpenGTS beállítások</string>
   <string name="autoopengts_invalid_form">Érvénytelen értékek</string>
@@ -239,10 +263,61 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="autoftp_invalid_settings">Érvénytelen beállítások</string>
   <string name="autoftp_invalid_summary">Néhány beállításod érvénytelen. Kérlek ellenőrizd, hogy minden szükséges mezőt kitöltöttél.</string>
   <string name="ftp_upload">FTP feltöltés</string>
+  <string name="autoftp_setup_title">FTP</string>
   <string name="autoftp_setup_summary">Fáj feltöltése FTP(S) szerverre. Mj.: Ez nem azonos az SFTP-vel.</string>
-  <string name="faq_screen_title">Gyakran ismételt kérdések</string>
   <string name="menu_faq">Súgó és GYIK</string>
   <string name="gpsf_missing">Hiányzó szolgáltatás</string>
   <string name="gpsf_missing_description">Ehhez a szolgáltatáshoz a Google Play Services Framework-re lesz szükséged.</string>
   <string name="log_customurl_title">Mentés URL-re</string>
+  <string name="log_customurl_summary">Helyinformációk küldése saját szerverre HTTP protokollal</string>
+  <string name="txt_annotation">Jegyzet:</string>
+  <string name="txt_time_isoformat">UTC idő (2011-12-25T15:27:33Z):</string>
+  <string name="txt_provider">Szolgáltató:</string>
+  <string name="gpslogger_folder_title">Mentés könyvtárba</string>
+  <string name="gpslogger_folder_summary">Log fájlok mentési helye, /sdcard/GPSLogger az alapértelmezett</string>
+  <string name="autoftp_directory">Könyvtár</string>
+  <string name="new_file_custom_message">Használható: %SER készülék sorozatszám, %YEAR, %MONTH, %DAY, %HOUR, %MIN</string>
+  <string name="new_file_prefix_serial_title">Készülék sorszám használata fájlnév előtagként</string>
+  <string name="txt_travel_duration">Időtartam:</string>
+  <string name="menu_onepoint">Egy pont mentése</string>
+  <string name="view_simple">Egyszerű nézet</string>
+  <string name="view_detailed">Részletes nézet</string>
+  <string name="view_big">Nagy nézet</string>
+  <string name="view_log">Napló nézet</string>
+  <string name="bigview_taptotoggle">Érintsd meg a logolás elindításához/befejezéséhez</string>
+  <string name="summary_autosendtargets">Feltöltés:</string>
+  <string name="accuracy_filter_title">Pontosság szűrő</string>
+  <string name="distance_filter_title">Távolság-szűrő</string>
+  <string name="points">pontok</string>
+  <string name="txt_number_of_points">Pontok száma</string>
+  <string name="save">Mentés</string>
+  <string name="pref_filedetails_title">Fájl- és mappa részletek</string>
+  <string name="absolute_timeout_title">Abszolút időtúllépés</string>
+  <string name="txt_latitude_short">Szél</string>
+  <string name="txt_longitude_short">Hossz</string>
+  <string name="autoopengts_accountname">Fiók neve</string>
+  <string name="listeners_gps">GPS</string>
+  <string name="listeners_cell">Hálózat</string>
+  <string name="listeners_passive">Passzív</string>
+  <string name="listeners_title">Helyszolgáltatók</string>
+  <string name="autosend_frequency_hint">Percek száma</string>
+  <string name="donate_app">Támogatás (app)</string>
+  <string name="pref_performance_activityrecognition">Tevékenység felismerés</string>
+  <string name="activityrecognition_dont_log_if_still">Ne ments, ha nem mozgok</string>
+  <string name="txt_activity">Tevékenység:</string>
+  <string name="activity_in_vehicle">Járműben</string>
+  <string name="activity_confidence">Megbízhatóság</string>
+  <string name="activity_still">Mozdulatlan</string>
+  <string name="activity_on_bicycle">Biciklin</string>
+  <string name="activity_on_foot">Séta</string>
+  <string name="activity_running">Futás</string>
+  <string name="activity_tilting">Billentés</string>
+  <string name="activity_walking">Gyaloglás</string>
+  <string name="activity_unknown">Ismeretlen</string>
+  <string name="altitude_subtractgeoidheight_title">MSL használata WGS84 helyett</string>
+  <string name="upload_failure">Nem lehetett feltölteni a fájlt</string>
+  <string name="inaccurate_point_discarded">Pontatlan pozíció eldobva</string>
+  <string name="autosend_wifionly_title">Küldés csak Wi-Fi-n</string>
+  <string name="logview_showlocationsonly">Csak pozíció</string>
+  <string name="logview_autoscroll">Automatikus görgetés</string>
 </resources>

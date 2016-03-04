@@ -14,6 +14,7 @@
   <string name="menu_annotate">Kommentera</string>
   <string name="menu_share">Dela</string>
   <string name="menu_exit">Avsluta</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Latitud:</string>
   <string name="txt_longitude">Longitud:</string>
   <string name="txt_altitude">Höjd:</string>
@@ -36,6 +37,7 @@
   <string name="sharing_mylocation">Min plats</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Dela via</string>
+  <!-- general -->
   <string name="foot">&#160;fot</string>
   <string name="feet">&#160;fot</string>
   <string name="meter">&#160;meter</string>
@@ -83,16 +85,15 @@
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">inom %s %s</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Avstånd i meter</string>
   <string name="settings_accuracy_in_meters">Noggrannhet i meter</string>
   <string name="settings_enter_meters">Ange meter (max 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Loggningsdetaljer</string>
   <string name="log_gpx_title">Logga till GPX</string>
-  <string name="log_gpx_summary">Skapar en GPX-fil i mappen GPSLogger på SD-kortet.</string>
   <string name="log_kml_title">Logga till KML</string>
-  <string name="log_kml_summary">Skapar en KML-fil i mappen GPSLogger på SD-kortet.</string>
   <string name="log_plain_text_title">Logga som klartext</string>
-  <string name="log_plain_text_summary">Skapar en klartextfil i GPSLogger-mappen på SD-kortet.</string>
   <string name="new_file_creation_title">Ny fil skapas</string>
   <string name="new_file_creation_summary">Om du vill skapa en ny fil en gång per dag eller varje gång du startar.</string>
   <string name="new_file_creation_onceaday">En gång om dagen</string>
@@ -152,10 +153,6 @@
   <string name="osm_lbl_authorize">Auktorisera denna app</string>
   <string name="osm_lbl_authorize_description">Du måste ge appen tillstånd för att kunna skicka GPS-spår till OpenStreetMap. Du kan ställa in taggar, beskrivningar och synlighet här efter att appen auktoriserats.
     </string>
-  <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-  <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-  <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-  <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">Ta bort auktorisering</string>
   <string name="osm_resetauth_summary">Ta bort den lokala auktorisering som talar med ditt OSM-konto.</string>
