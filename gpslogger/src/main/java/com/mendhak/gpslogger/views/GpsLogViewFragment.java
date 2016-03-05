@@ -3,6 +3,7 @@ package com.mendhak.gpslogger.views;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +32,7 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
     Handler timerHandler = new Handler();
 
     public static GpsLogViewFragment newInstance() {
-        GpsLogViewFragment fragment = new GpsLogViewFragment();
-        return fragment;
+        return new GpsLogViewFragment();
     }
 
     @Override
@@ -78,7 +78,7 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
     };
 
 
-    private void showLogcatMessages(){
+    void showLogcatMessages(){
 
         CheckBox chkLocationsOnly = (CheckBox) rootView.findViewById(R.id.logview_chkLocationsOnly);
         CheckBox chkAutoScroll = (CheckBox) rootView.findViewById(R.id.logview_chkAutoScroll);
@@ -122,8 +122,7 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
 
         return String.format(messageFormat,
                 dateStamp,
-                Integer.toHexString(getActivity().getResources().getColor(colorResourceId)).substring(2),
-                message);
+                Integer.toHexString(ContextCompat.getColor(getActivity(), colorResourceId)).substring(2), message);
 
     }
 

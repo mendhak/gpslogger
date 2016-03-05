@@ -22,6 +22,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -80,12 +81,18 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
         rootView = inflater.inflate(R.layout.fragment_simple_view, container, false);
 
+
+        if (getActivity() != null) {
+            this.context = getActivity().getApplicationContext();
+
+        }
+
         setImageTooltips();
         showPreferencesSummary();
 
         actionButton = (ActionProcessButton)rootView.findViewById(R.id.btnActionProcess);
         actionButton.setMode(ActionProcessButton.Mode.ENDLESS);
-        actionButton.setBackgroundColor(getResources().getColor(R.color.accentColor));
+        actionButton.setBackgroundColor(ContextCompat.getColor(context, (R.color.accentColor)));
 
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,10 +107,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         }
 
 
-        if (getActivity() != null) {
-            this.context = getActivity().getApplicationContext();
-
-        }
 
 
         return rootView;
@@ -111,13 +114,13 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     private void setActionButtonStart(){
         actionButton.setText(R.string.btn_start_logging);
-        actionButton.setBackgroundColor(getResources().getColor(R.color.accentColor));
+        actionButton.setBackgroundColor(ContextCompat.getColor(context, R.color.accentColor));
         actionButton.setAlpha(0.8f);
     }
 
     private void setActionButtonStop(){
         actionButton.setText(R.string.btn_stop_logging);
-        actionButton.setBackgroundColor(getResources().getColor(R.color.accentColorComplementary));
+        actionButton.setBackgroundColor( ContextCompat.getColor(context, R.color.accentColorComplementary));
         actionButton.setAlpha(0.8f);
     }
 
@@ -185,7 +188,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         Utilities.SetFileExplorerLink(txtFilename,
                 Html.fromHtml("<em><font color='blue'><u>" + preferenceHelper.getGpsLoggerFolder() + "</u></font>" + "/<strong><br />" + Session.getCurrentFileName() + "</strong></em>" ),
                 preferenceHelper.getGpsLoggerFolder(),
-                getActivity().getApplicationContext());
+                context);
 
     }
 
@@ -213,7 +216,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
                 color = Color.parseColor("#FFEEEE");
                 break;
             case Good:
-                color = getResources().getColor(R.color.accentColor);
+                color = ContextCompat.getColor(context, R.color.accentColor);
                 break;
             case Warning:
                 color = Color.parseColor("#D4FFA300");
@@ -412,7 +415,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
         TextView txtAccuracy = (TextView) rootView.findViewById(R.id.simpleview_txtAccuracy);
         txtAccuracy.setText("");
-        txtAccuracy.setTextColor(getResources().getColor(android.R.color.black));
+        txtAccuracy.setTextColor(ContextCompat.getColor(context, android.R.color.black));
 
         ImageView imgAltitude = (ImageView)rootView.findViewById(R.id.simpleview_imgAltitude);
         clearColor(imgAltitude);

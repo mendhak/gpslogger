@@ -56,7 +56,7 @@ public class NotificationAnnotationActivity extends AppCompatActivity {
                 })
                 .input(getString(R.string.letters_numbers), "", new MaterialDialog.InputCallback() {
                     @Override
-                    public void onInput(MaterialDialog materialDialog, CharSequence input) {
+                    public void onInput(@NonNull MaterialDialog materialDialog, @NonNull CharSequence input) {
 
                         LOG.info("Annotation from notification: " + input.toString());
                         EventBus.getDefault().postSticky(new CommandEvents.Annotate(input.toString()));
