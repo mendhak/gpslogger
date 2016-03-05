@@ -3,7 +3,7 @@
                   android:key="gpslogger_preferences" android:title="@string/pref_autosend_title" android:summary="@string/pref_autosend_summary">
 
 
-        <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+        <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
             android:key="autosend_enabled"
             android:title="@string/autosend_enabled"
             android:summary="@string/autosend_enabled_summary"/>
@@ -19,20 +19,20 @@
             android:hint="@string/autosend_frequency_hint"
             />
 
-    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:key="autosend_frequency_whenstoppressed"
         android:defaultValue="false"
         android:title="@string/autoemail_frequency_whenistop"
 
         />
 
-    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
             android:key="autosend_sendzip"
             android:defaultValue="true"
             android:title="@string/autosend_sendzip_title"
             android:summary="@string/autosend_sendzip_summary"/>
 
-    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:key="autosend_wifionly"
         android:defaultValue="false"
         android:title="@string/autosend_wifionly_title" />

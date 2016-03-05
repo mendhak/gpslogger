@@ -20,7 +20,7 @@ package com.mendhak.gpslogger.senders.opengts;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.opengts.OpenGTSJob;
 import com.mendhak.gpslogger.senders.FileSender;
@@ -58,7 +58,7 @@ public class OpenGTSManager extends FileSender {
                     String accountName = preferenceHelper.getOpenGTSAccountName();
                     String communication = preferenceHelper.getOpenGTSServerCommunicationMethod();
 
-                    JobManager jobManager = AppSettings.GetJobManager();
+                    JobManager jobManager = AppSettings.getJobManager();
                     jobManager.addJobInBackground(new OpenGTSJob(server, port, accountName, path, deviceId, communication, locations.toArray(new SerializableLocation[locations.size()])));
                 }
             }
@@ -67,11 +67,11 @@ public class OpenGTSManager extends FileSender {
 
     @Override
     public boolean isAvailable() {
-        return !Utilities.IsNullOrEmpty(preferenceHelper.getOpenGTSServer())
-                && !Utilities.IsNullOrEmpty(preferenceHelper.getOpenGTSServerPort())
-                && Utilities.parseIntWithDefault(preferenceHelper.getOpenGTSServerPort(), 0) != 0
-                && !Utilities.IsNullOrEmpty(preferenceHelper.getOpenGTSServerCommunicationMethod())
-                && !Utilities.IsNullOrEmpty(preferenceHelper.getOpenGTSDeviceId());
+        return !Strings.isNullOrEmpty(preferenceHelper.getOpenGTSServer())
+                && !Strings.isNullOrEmpty(preferenceHelper.getOpenGTSServerPort())
+                && Strings.toInt(preferenceHelper.getOpenGTSServerPort(), 0) != 0
+                && !Strings.isNullOrEmpty(preferenceHelper.getOpenGTSServerCommunicationMethod())
+                && !Strings.isNullOrEmpty(preferenceHelper.getOpenGTSDeviceId());
     }
 
     @Override

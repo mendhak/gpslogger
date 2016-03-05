@@ -22,9 +22,9 @@ package com.mendhak.gpslogger.senders.ftp;
 
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
@@ -66,14 +66,14 @@ public class FtpManager extends FileSender {
                 initialOutput.flush();
                 initialOutput.close();
 
-                Utilities.AddFileToMediaDatabase(testFile, "text/xml");
+                Files.addToMediaDatabase(testFile, "text/xml");
             }
 
         } catch (Exception ex) {
             EventBus.getDefault().post(new UploadEvents.Ftp().failed(ex.getMessage(), ex));
         }
 
-        JobManager jobManager = AppSettings.GetJobManager();
+        JobManager jobManager = AppSettings.getJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, FtpJob.getJobTag(testFile));
         jobManager.addJobInBackground(new FtpJob(servername, port, username, password, directory,
                 useFtps, protocol, implicit, testFile, "gpslogger_test.txt"));
@@ -105,7 +105,7 @@ public class FtpManager extends FileSender {
 
     public void uploadFile(File f) {
 
-        JobManager jobManager = AppSettings.GetJobManager();
+        JobManager jobManager = AppSettings.getJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, FtpJob.getJobTag(f));
         jobManager.addJobInBackground(new FtpJob(preferenceHelper.getFtpServerName(), preferenceHelper.getFtpPort(),
                 preferenceHelper.getFtpUsername(), preferenceHelper.getFtpPassword(), preferenceHelper.getFtpDirectory(),

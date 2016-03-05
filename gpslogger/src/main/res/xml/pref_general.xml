@@ -4,33 +4,33 @@
 
 
 
-    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:title="@string/startonbootup_title"
         android:summary="@string/startonbootup_summary"
         android:key="startonbootup"/>
-    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:title="@string/startonapplaunch_title"
         android:summary="@string/startonapplaunch_summary"
         android:key="startonapplaunch"/>
 
-    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:title="@string/display_imperial_title"
         android:summary="@string/display_imperial_summary"
         android:key="useImperial"/>
 
-    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:title="@string/hide_notification_buttons"
         android:summary="@string/hide_notification_buttons_summary"
         android:key="hide_notification_buttons"
         >
-    </com.mendhak.gpslogger.views.component.CustomSwitchPreference>
+    </com.mendhak.gpslogger.ui.components.CustomSwitchPreference>
     <Preference
         android:title="@string/enabledisablegps_title"
         android:summary="@string/enabledisablegps_summary"
         android:key="enableDisableGps"
         android:defaultValue="false"/>
 
-    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:title="@string/debuglog_title"
         android:summary="@string/debuglog_summary"
         android:key="debugtofile"

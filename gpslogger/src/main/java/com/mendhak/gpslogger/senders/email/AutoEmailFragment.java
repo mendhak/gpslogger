@@ -26,11 +26,12 @@ import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
-import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
-import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
+import com.mendhak.gpslogger.ui.Dialogs;
+import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
+import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import de.greenrobot.event.EventBus;
 
 public class AutoEmailFragment extends PermissionedPreferenceFragment implements
@@ -99,18 +100,18 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
         MaterialEditTextPreference txtFrom = (MaterialEditTextPreference) findPreference("smtp_from");
 
         if (!aem.isValid(txtSmtpServer.getText(), txtSmtpPort.getText(), txtUsername.getText(), txtPassword.getText(),txtTarget.getText())) {
-            Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
+            Dialogs.alert(getString(R.string.autoemail_invalid_form),
                     getString(R.string.autoemail_invalid_form_message),
                     getActivity());
             return true;
         }
 
-        if (!Utilities.isNetworkAvailable(getActivity())) {
-            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.no_network_message), getActivity());
+        if (!Systems.isNetworkAvailable(getActivity())) {
+            Dialogs.alert(getString(R.string.sorry), getString(R.string.no_network_message), getActivity());
             return true;
         }
 
-        Utilities.ShowProgress(getActivity(), getString(R.string.autoemail_sendingtest),
+        Dialogs.progress(getActivity(), getString(R.string.autoemail_sendingtest),
                 getString(R.string.please_wait));
 
 
@@ -175,13 +176,13 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
     @EventBusHook
     public void onEventMainThread(UploadEvents.AutoEmail o){
 
-        Utilities.HideProgress();
+        Dialogs.hideProgress();
 
         if(o.success){
-            Utilities.MsgBox(getString(R.string.success),
+            Dialogs.alert(getString(R.string.success),
                     getString(R.string.autoemail_testresult_success), getActivity());
         } else {
-            Utilities.ErrorMsgBox(getString(R.string.sorry), getString(R.string.error_connection),  o.message, o.throwable, getActivity());
+            Dialogs.error(getString(R.string.sorry), getString(R.string.error_connection), o.message, o.throwable, getActivity());
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.mendhak.gpslogger.senders.ftp;
 
 
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.path.android.jobqueue.Job;
@@ -59,7 +59,7 @@ public class FtpJob extends Job {
 
     }
 
-    public synchronized static boolean Upload(String server, String username, String password, String directory, int port,
+    public synchronized static boolean upload(String server, String username, String password, String directory, int port,
                                               boolean useFtps, String protocol, boolean implicit,
                                               File gpxFile, String fileName) {
         FTPClient client;
@@ -175,7 +175,7 @@ public class FtpJob extends Job {
 
     private static void logServerReply(FTPClient client) {
         String singleReply = client.getReplyString();
-        if(!Utilities.IsNullOrEmpty(singleReply)){
+        if(!Strings.isNullOrEmpty(singleReply)){
             ftpServerResponses.add(singleReply);
             LOG.debug("FTP SERVER: " + singleReply);
         }
@@ -183,7 +183,7 @@ public class FtpJob extends Job {
         String[] replies = client.getReplyStrings();
         if (replies != null && replies.length > 0) {
             for (String aReply : replies) {
-                if(!Utilities.IsNullOrEmpty(aReply)){
+                if(!Strings.isNullOrEmpty(aReply)){
                     ftpServerResponses.add(aReply);
                     LOG.debug("FTP SERVER: " + aReply);
                 }
@@ -198,7 +198,7 @@ public class FtpJob extends Job {
 
     @Override
     public void onRun() throws Throwable {
-        if (Upload(server, username, password, directory, port, useFtps, protocol, implicit, gpxFile, fileName)) {
+        if (upload(server, username, password, directory, port, useFtps, protocol, implicit, gpxFile, fileName)) {
             EventBus.getDefault().post(new UploadEvents.Ftp().succeeded());
         } else {
             jobResult.ftpMessages = ftpServerResponses;

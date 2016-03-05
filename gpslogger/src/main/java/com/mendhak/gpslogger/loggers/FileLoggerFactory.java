@@ -21,7 +21,8 @@ import android.content.Context;
 import android.location.Location;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.loggers.csv.PlainTextFileLogger;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlLogger;
 import com.mendhak.gpslogger.loggers.gpx.Gpx10FileLogger;
@@ -36,11 +37,11 @@ public class FileLoggerFactory {
 
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
-    public static List<FileLogger> GetFileLoggers(Context context) {
+    public static List<FileLogger> getFileLoggers(Context context) {
 
         List<FileLogger> loggers = new ArrayList<>();
 
-        if(Utilities.IsNullOrEmpty(preferenceHelper.getGpsLoggerFolder())){
+        if(Strings.isNullOrEmpty(preferenceHelper.getGpsLoggerFolder())){
             return loggers;
         }
 
@@ -69,8 +70,8 @@ public class FileLoggerFactory {
         }
 
         if (preferenceHelper.shouldLogToCustomUrl()) {
-            float batteryLevel = Utilities.GetBatteryLevel(context);
-            String androidId = Utilities.GetAndroidId(context);
+            float batteryLevel = Systems.getBatteryLevel(context);
+            String androidId = Systems.getAndroidId(context);
             loggers.add(new CustomUrlLogger(preferenceHelper.getCustomLoggingUrl(), Session.getSatelliteCount(), batteryLevel, androidId));
         }
 
@@ -78,14 +79,14 @@ public class FileLoggerFactory {
         return loggers;
     }
 
-    public static void Write(Context context, Location loc) throws Exception {
-        for (FileLogger logger : GetFileLoggers(context)) {
+    public static void write(Context context, Location loc) throws Exception {
+        for (FileLogger logger : getFileLoggers(context)) {
             logger.write(loc);
         }
     }
 
-    public static void Annotate(Context context, String description, Location loc) throws Exception {
-        for (FileLogger logger : GetFileLoggers(context)) {
+    public static void annotate(Context context, String description, Location loc) throws Exception {
+        for (FileLogger logger : getFileLoggers(context)) {
             logger.annotate(description, loc);
         }
     }

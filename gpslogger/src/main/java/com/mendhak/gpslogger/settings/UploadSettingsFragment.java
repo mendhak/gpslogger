@@ -23,7 +23,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 
 /**
  * A {@link android.preference.PreferenceActivity} that presents a set of application settings. On
@@ -97,7 +97,7 @@ public class UploadSettingsFragment extends PreferenceFragment implements Prefer
             launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD;
         }
 
-        if(!Utilities.IsNullOrEmpty(launchFragment)){
+        if(!Strings.isNullOrEmpty(launchFragment)){
             Intent intent = new Intent(getActivity(), MainPreferenceActivity.class);
             intent.putExtra("preference_fragment", launchFragment);
             startActivity(intent);

@@ -2,9 +2,10 @@ package com.mendhak.gpslogger.senders.googledrive;
 
 import android.os.Build;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Streams;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
@@ -51,11 +52,11 @@ public class GoogleDriveJob extends Job {
 
         String gpsLoggerFolderId = getFileIdFromFileName(token, googleDriveFolderName, null);
 
-        if (Utilities.IsNullOrEmpty(gpsLoggerFolderId)) {
+        if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
             //Couldn't find folder, must create it
             gpsLoggerFolderId = createEmptyFile(token, googleDriveFolderName, "application/vnd.google-apps.folder", "root");
 
-            if (Utilities.IsNullOrEmpty(gpsLoggerFolderId)) {
+            if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
                 EventBus.getDefault().post(new UploadEvents.GDocs().failed("Could not create folder"));
                 return;
             }
@@ -64,19 +65,19 @@ public class GoogleDriveJob extends Job {
         //Now search for the file
         String gpxFileId = getFileIdFromFileName(token, fileName, gpsLoggerFolderId);
 
-        if (Utilities.IsNullOrEmpty(gpxFileId)) {
+        if (Strings.isNullOrEmpty(gpxFileId)) {
             //Create empty file first
             gpxFileId = createEmptyFile(token, fileName, getMimeTypeFromFileName(fileName), gpsLoggerFolderId);
 
-            if (Utilities.IsNullOrEmpty(gpxFileId)) {
+            if (Strings.isNullOrEmpty(gpxFileId)) {
                 EventBus.getDefault().post(new UploadEvents.GDocs().failed("Could not create file"));
                 return;
             }
         }
 
-        if (!Utilities.IsNullOrEmpty(gpxFileId)) {
+        if (!Strings.isNullOrEmpty(gpxFileId)) {
             //Set file's contents
-            updateFileContents(token, gpxFileId, Utilities.GetByteArrayFromInputStream(fis), fileName);
+            updateFileContents(token, gpxFileId, Streams.getByteArrayFromInputStream(fis), fileName);
         }
         EventBus.getDefault().post(new UploadEvents.GDocs().succeeded());
     }
@@ -118,7 +119,7 @@ public class GoogleDriveJob extends Job {
             wr.flush();
             wr.close();
 
-            String fileMetadata = Utilities.GetStringFromInputStream(conn.getInputStream());
+            String fileMetadata = Streams.getStringFromInputStream(conn.getInputStream());
 
             JSONObject fileMetadataJson = new JSONObject(fileMetadata);
             fileId = fileMetadataJson.getString("id");
@@ -183,7 +184,7 @@ public class GoogleDriveJob extends Job {
 
             fileId = null;
 
-            String fileMetadata = Utilities.GetStringFromInputStream(conn.getInputStream());
+            String fileMetadata = Streams.getStringFromInputStream(conn.getInputStream());
 
             JSONObject fileMetadataJson = new JSONObject(fileMetadata);
             fileId = fileMetadataJson.getString("id");
@@ -212,7 +213,7 @@ public class GoogleDriveJob extends Job {
             fileName = URLEncoder.encode(fileName, "UTF-8");
 
             String inFolderParam = "";
-            if(!Utilities.IsNullOrEmpty(inFolderId)){
+            if(!Strings.isNullOrEmpty(inFolderId)){
                 inFolderParam = "+and+'" + inFolderId + "'+in+parents";
             }
 
@@ -234,7 +235,7 @@ public class GoogleDriveJob extends Job {
 			conn.setConnectTimeout(10000);
 			conn.setReadTimeout(30000);
 	
-            String fileMetadata = Utilities.GetStringFromInputStream(conn.getInputStream());
+            String fileMetadata = Streams.getStringFromInputStream(conn.getInputStream());
 
 
             JSONObject fileMetadataJson = new JSONObject(fileMetadata);

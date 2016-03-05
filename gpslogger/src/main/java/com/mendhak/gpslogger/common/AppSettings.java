@@ -60,7 +60,7 @@ public class AppSettings extends Application {
     /**
      * Returns a configured Job Queue Manager
      */
-    public static JobManager GetJobManager() {
+    public static JobManager getJobManager() {
         return jobManager;
     }
 

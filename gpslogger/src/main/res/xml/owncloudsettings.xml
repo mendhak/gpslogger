@@ -3,7 +3,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   android:key="owncloud_preferences">
 
-    <com.mendhak.gpslogger.views.component.CustomSwitchPreference
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:key="owncloud_enabled"
         android:title="@string/autosend_enabled" />
 

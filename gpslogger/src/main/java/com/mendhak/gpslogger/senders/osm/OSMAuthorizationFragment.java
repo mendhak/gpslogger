@@ -27,9 +27,9 @@ import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
+import com.mendhak.gpslogger.ui.Dialogs;
+import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
@@ -81,7 +81,7 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
 
             } catch (Exception e) {
                 LOG.error("OSM authorization error", e);
-                Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error), getActivity());
+                Dialogs.alert(getString(R.string.sorry), getString(R.string.osm_auth_error), getActivity());
             }
         }
 
@@ -146,7 +146,7 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
 
             } catch (Exception e) {
                 LOG.error("onClick", e);
-                Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error),
+                Dialogs.alert(getString(R.string.sorry), getString(R.string.osm_auth_error),
                         getActivity());
             }
         }

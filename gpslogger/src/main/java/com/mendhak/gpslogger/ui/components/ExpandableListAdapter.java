@@ -1,4 +1,4 @@
-package com.mendhak.gpslogger.views.component;
+package com.mendhak.gpslogger.ui.components;
 
 
 import android.content.Context;

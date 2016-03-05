@@ -47,20 +47,19 @@ import android.widget.*;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.amulyakhare.textdrawable.TextDrawable;
-import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ProfileEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
+import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
-import com.mendhak.gpslogger.views.*;
-import com.mendhak.gpslogger.views.component.GpsLoggerDrawerItem;
+import com.mendhak.gpslogger.ui.Dialogs;
+import com.mendhak.gpslogger.ui.components.GpsLoggerDrawerItem;
+import com.mendhak.gpslogger.ui.fragments.*;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -238,7 +237,7 @@ public class GpsMainActivity extends AppCompatActivity
     private void loadPresetProperties() {
 
         //Either look for /<appfolder>/gpslogger.properties or /sdcard/gpslogger.properties
-        File file =  new File(Utilities.GetDefaultStorageFolder(getApplicationContext()) + "/gpslogger.properties");
+        File file =  new File(Files.storageFolder(getApplicationContext()) + "/gpslogger.properties");
         if(!file.exists()){
             file = new File(Environment.getExternalStorageDirectory() + "/gpslogger.properties");
             if(!file.exists()){
@@ -345,7 +344,7 @@ public class GpsMainActivity extends AppCompatActivity
                                         @Override
                                         public void onInput(@NonNull MaterialDialog materialDialog, CharSequence charSequence) {
                                             String profileName = charSequence.toString().trim();
-                                            if(!Utilities.IsNullOrEmpty(profileName)){
+                                            if(!Strings.isNullOrEmpty(profileName)){
                                                 final String[] ReservedChars = {"|", "\\", "?", "*", "<", "\"", ":", ">", ".", "/", "'", ";"};
 
                                                 for (String c : ReservedChars) {
@@ -374,7 +373,7 @@ public class GpsMainActivity extends AppCompatActivity
                         if (iProfile.getIdentifier() > 150 ) {
 
                             if( preferenceHelper.getCurrentProfileName().equals(iProfile.getName().getText()) ){
-                                Utilities.MsgBox(getString(R.string.sorry), getString(R.string.profile_switch_before_delete), GpsMainActivity.this);
+                                Dialogs.alert(getString(R.string.sorry), getString(R.string.profile_switch_before_delete), GpsMainActivity.this);
                             }
                             else {
                                 new MaterialDialog.Builder(GpsMainActivity.this)
@@ -532,7 +531,7 @@ public class GpsMainActivity extends AppCompatActivity
         );
 
 
-        File gpsLoggerDir = Utilities.GetDefaultStorageFolder(this);
+        File gpsLoggerDir = Files.storageFolder(this);
         File[] propertyFiles = gpsLoggerDir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File file, String fileName) {
@@ -770,7 +769,7 @@ public class GpsMainActivity extends AppCompatActivity
         LOG.debug("User forced an auto send");
 
         if (preferenceHelper.isAutoSendEnabled()) {
-            Utilities.ShowProgress(this, getString(R.string.autosend_sending),getString(R.string.please_wait));
+            Dialogs.progress(this, getString(R.string.autosend_sending), getString(R.string.please_wait));
             EventBus.getDefault().post(new CommandEvents.AutoSend(null));
 
         } else {
@@ -818,80 +817,80 @@ public class GpsMainActivity extends AppCompatActivity
 
 
     private void uploadToOpenStreetMap() {
-        if (!FileSenderFactory.GetOsmSender().isAvailable()) {
+        if (!FileSenderFactory.getOsmSender().isAvailable()) {
             launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OSM);
             return;
         }
 
-        showFileListDialog(FileSenderFactory.GetOsmSender());
+        showFileListDialog(FileSenderFactory.getOsmSender());
     }
 
     private void uploadToDropBox() {
 
-        if (!FileSenderFactory.GetDropBoxSender().isAvailable()) {
+        if (!FileSenderFactory.getDropBoxSender().isAvailable()) {
             launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX);
             return;
         }
 
-        showFileListDialog(FileSenderFactory.GetDropBoxSender());
+        showFileListDialog(FileSenderFactory.getDropBoxSender());
     }
 
 
 
     private void uploadToOwnCloud() {
 
-        if (!FileSenderFactory.GetOwnCloudSender().isAvailable()) {
+        if (!FileSenderFactory.getOwnCloudSender().isAvailable()) {
             launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD);
             return;
         }
 
-        showFileListDialog(FileSenderFactory.GetOwnCloudSender());
+        showFileListDialog(FileSenderFactory.getOwnCloudSender());
     }
 
     private void sendToOpenGTS() {
-        if (!FileSenderFactory.GetOpenGTSSender().isAvailable()) {
+        if (!FileSenderFactory.getOpenGTSSender().isAvailable()) {
             launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS);
         } else {
-            showFileListDialog(FileSenderFactory.GetOpenGTSSender());
+            showFileListDialog(FileSenderFactory.getOpenGTSSender());
         }
     }
 
     private void uploadToGoogleDocs() {
-        if (!FileSenderFactory.GetGDocsSender().isAvailable()) {
+        if (!FileSenderFactory.getGoogleDriveSender().isAvailable()) {
             launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GDOCS);
             return;
         }
 
-        showFileListDialog(FileSenderFactory.GetGDocsSender());
+        showFileListDialog(FileSenderFactory.getGoogleDriveSender());
     }
 
     private void sendToFtp() {
-        if (!FileSenderFactory.GetFtpSender().isAvailable()) {
+        if (!FileSenderFactory.getFtpSender().isAvailable()) {
             launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.FTP);
         } else {
-            showFileListDialog(FileSenderFactory.GetFtpSender());
+            showFileListDialog(FileSenderFactory.getFtpSender());
         }
     }
 
     private void selectAndEmailFile() {
-        if (!FileSenderFactory.GetEmailSender().isAvailable()) {
+        if (!FileSenderFactory.getEmailSender().isAvailable()) {
             launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.EMAIL);
         } else {
-            showFileListDialog(FileSenderFactory.GetEmailSender());
+            showFileListDialog(FileSenderFactory.getEmailSender());
         }
     }
 
     private void showFileListDialog(final FileSender sender) {
 
-        if (!Utilities.isNetworkAvailable(this)) {
-            Utilities.MsgBox(getString(R.string.sorry),getString(R.string.no_network_message), this);
+        if (!Systems.isNetworkAvailable(this)) {
+            Dialogs.alert(getString(R.string.sorry), getString(R.string.no_network_message), this);
             return;
         }
 
         final File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
 
-        if (gpxFolder.exists() && Utilities.GetFilesInFolder(gpxFolder, sender).length > 0) {
-            File[] enumeratedFiles = Utilities.GetFilesInFolder(gpxFolder, sender);
+        if (gpxFolder.exists() && Files.fromFolder(gpxFolder, sender).length > 0) {
+            File[] enumeratedFiles = Files.fromFolder(gpxFolder, sender);
 
             //Order by last modified
             Arrays.sort(enumeratedFiles, new Comparator<File>() {
@@ -929,7 +928,7 @@ public class GpsMainActivity extends AppCompatActivity
                             }
 
                             if (chosenFiles.size() > 0) {
-                                Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.please_wait), getString(R.string.please_wait));
+                                Dialogs.progress(GpsMainActivity.this, getString(R.string.please_wait), getString(R.string.please_wait));
                                 userInvokedUpload = true;
                                 sender.uploadFile(chosenFiles);
 
@@ -939,7 +938,7 @@ public class GpsMainActivity extends AppCompatActivity
                     }).show();
 
         } else {
-            Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
+            Dialogs.alert(getString(R.string.sorry), getString(R.string.no_files_found), this);
         }
     }
 
@@ -956,7 +955,7 @@ public class GpsMainActivity extends AppCompatActivity
             final File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
             if (gpxFolder.exists()) {
 
-                File[] enumeratedFiles = Utilities.GetFilesInFolder(gpxFolder);
+                File[] enumeratedFiles = Files.fromFolder(gpxFolder);
 
                 Arrays.sort(enumeratedFiles, new Comparator<File>() {
                     public int compare(File f1, File f2) {
@@ -1025,7 +1024,7 @@ public class GpsMainActivity extends AppCompatActivity
 
 
             } else {
-                Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
+                Dialogs.alert(getString(R.string.sorry), getString(R.string.no_files_found), this);
             }
         } catch (Exception ex) {
             LOG.error("Sharing problem", ex);
@@ -1111,7 +1110,7 @@ public class GpsMainActivity extends AppCompatActivity
     @EventBusHook
     public void onEventMainThread(UploadEvents.OpenGTS upload){
         LOG.debug("Open GTS Event completed, success: " + upload.success);
-        Utilities.HideProgress();
+        Dialogs.hideProgress();
 
         if(!upload.success){
             LOG.error(getString(R.string.opengts_setup_title)
@@ -1119,7 +1118,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + getString(R.string.upload_failure));
 
             if(userInvokedUpload){
-                Utilities.ErrorMsgBox(getString(R.string.sorry),getString(R.string.upload_failure),upload.message, upload.throwable,this);
+                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1128,14 +1127,14 @@ public class GpsMainActivity extends AppCompatActivity
     @EventBusHook
     public void onEventMainThread(UploadEvents.AutoEmail upload){
         LOG.debug("Auto Email Event completed, success: " + upload.success);
-        Utilities.HideProgress();
+        Dialogs.hideProgress();
 
         if(!upload.success){
             LOG.error(getString(R.string.autoemail_title)
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Utilities.ErrorMsgBox(getString(R.string.sorry), getString(R.string.upload_failure),  upload.message, upload.throwable, this);
+                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1144,14 +1143,14 @@ public class GpsMainActivity extends AppCompatActivity
     @EventBusHook
     public void onEventMainThread(UploadEvents.OpenStreetMap upload){
         LOG.debug("OSM Event completed, success: " + upload.success);
-        Utilities.HideProgress();
+        Dialogs.hideProgress();
 
         if(!upload.success){
             LOG.error(getString(R.string.osm_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Utilities.ErrorMsgBox(getString(R.string.sorry),getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1160,14 +1159,14 @@ public class GpsMainActivity extends AppCompatActivity
     @EventBusHook
     public void onEventMainThread(UploadEvents.Dropbox upload){
         LOG.debug("Dropbox Event completed, success: " + upload.success);
-        Utilities.HideProgress();
+        Dialogs.hideProgress();
 
         if(!upload.success){
             LOG.error(getString(R.string.dropbox_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Utilities.ErrorMsgBox(getString(R.string.sorry),getString(R.string.upload_failure), upload.message, upload.throwable,  this);
+                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1176,14 +1175,14 @@ public class GpsMainActivity extends AppCompatActivity
     @EventBusHook
     public void onEventMainThread(UploadEvents.GDocs upload){
         LOG.debug("GDocs Event completed, success: " + upload.success);
-        Utilities.HideProgress();
+        Dialogs.hideProgress();
 
         if(!upload.success){
             LOG.error(getString(R.string.gdocs_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Utilities.ErrorMsgBox(getString(R.string.sorry),getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1192,14 +1191,14 @@ public class GpsMainActivity extends AppCompatActivity
     @EventBusHook
     public void onEventMainThread(UploadEvents.Ftp upload){
         LOG.debug("FTP Event completed, success: " + upload.success);
-        Utilities.HideProgress();
+        Dialogs.hideProgress();
 
         if(!upload.success){
             LOG.error(getString(R.string.autoftp_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Utilities.ErrorMsgBox(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1209,7 +1208,7 @@ public class GpsMainActivity extends AppCompatActivity
     @EventBusHook
     public void onEventMainThread(UploadEvents.OwnCloud upload){
         LOG.debug("OwnCloud Event completed, success: " + upload.success);
-        Utilities.HideProgress();
+        Dialogs.hideProgress();
 
         if(!upload.success){
             LOG.error(getString(R.string.owncloud_setup_title)
@@ -1217,7 +1216,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + getString(R.string.upload_failure));
 
             if(userInvokedUpload){
-                Utilities.ErrorMsgBox(getString(R.string.sorry),getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1249,7 +1248,7 @@ public class GpsMainActivity extends AppCompatActivity
         LOG.debug("Creating profile: " + createProfileEvent.newProfileName);
 
         try {
-            File f = new File(Utilities.GetDefaultStorageFolder(GpsMainActivity.this), createProfileEvent.newProfileName+".properties");
+            File f = new File(Files.storageFolder(GpsMainActivity.this), createProfileEvent.newProfileName+".properties");
             f.createNewFile();
 
             populateProfilesList();
@@ -1263,7 +1262,7 @@ public class GpsMainActivity extends AppCompatActivity
     @EventBusHook
     public void onEventMainThread(ProfileEvents.DeleteProfile deleteProfileEvent){
         LOG.debug("Deleting profile: " + deleteProfileEvent.profileName);
-        File f = new File(Utilities.GetDefaultStorageFolder(GpsMainActivity.this), deleteProfileEvent.profileName+".properties");
+        File f = new File(Files.storageFolder(GpsMainActivity.this), deleteProfileEvent.profileName+".properties");
         f.delete();
 
         populateProfilesList();

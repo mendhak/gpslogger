@@ -1,6 +1,5 @@
 package com.mendhak.gpslogger.loggers.opengts;
 
-import com.mendhak.gpslogger.common.OpenGTSClient;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;

@@ -42,6 +42,7 @@ import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
+import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.loggers.nmea.NmeaFileLogger;
 import com.mendhak.gpslogger.senders.AlarmReceiver;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
@@ -361,9 +362,9 @@ public class GpsLoggingService extends Service  {
 
         LOG.debug("Filename: " + formattedFileName);
 
-        if ( !Utilities.IsNullOrEmpty(formattedFileName) || !Utilities.IsNullOrEmpty(Session.getCurrentFileName()) ) {
-            String fileToSend = Utilities.IsNullOrEmpty(formattedFileName) ? Session.getCurrentFileName() : formattedFileName;
-            FileSenderFactory.AutoSendFiles(fileToSend);
+        if ( !Strings.isNullOrEmpty(formattedFileName) || !Strings.isNullOrEmpty(Session.getCurrentFileName()) ) {
+            String fileToSend = Strings.isNullOrEmpty(formattedFileName) ? Session.getCurrentFileName() : formattedFileName;
+            FileSenderFactory.autoSendFiles(fileToSend);
             setupAutoSendTimers();
         }
     }
@@ -666,7 +667,7 @@ public class GpsLoggingService extends Service  {
             Session.setCurrentFileName(sdf.format(new Date()));
         }
 
-        if(!Utilities.IsNullOrEmpty(oldFileName)
+        if(!Strings.isNullOrEmpty(oldFileName)
                 && !oldFileName.equalsIgnoreCase(Session.getCurrentFileName())
                 && Session.isStarted()){
             LOG.debug("New file name, should auto upload the old one");
@@ -787,7 +788,7 @@ public class GpsLoggingService extends Service  {
         // However, if user has set an annotation, just log the point, disregard any filters
         if (!Session.hasDescription() && !Session.isSinglePointMode() && preferenceHelper.getMinimumDistanceInterval() > 0 && Session.hasValidLocation()) {
 
-            double distanceTraveled = Utilities.CalculateDistance(loc.getLatitude(), loc.getLongitude(),
+            double distanceTraveled = Maths.calculateDistance(loc.getLatitude(), loc.getLongitude(),
                     Session.getCurrentLatitude(), Session.getCurrentLongitude());
 
             if (preferenceHelper.getMinimumDistanceInterval() > distanceTraveled) {
@@ -828,7 +829,7 @@ public class GpsLoggingService extends Service  {
 
         if(preferenceHelper.shouldAdjustAltitudeFromGeoIdHeight() && loc.getExtras() != null){
             String geoidheight = loc.getExtras().getString("GEOIDHEIGHT");
-            if (!Utilities.IsNullOrEmpty(geoidheight)) {
+            if (!Strings.isNullOrEmpty(geoidheight)) {
                 loc.setAltitude((float) loc.getAltitude() - Float.valueOf(geoidheight));
             }
             else {
@@ -866,7 +867,7 @@ public class GpsLoggingService extends Service  {
         }
         // Calculate this location and the previous location location and add to the current running total distance.
         // NOTE: Should be used in conjunction with 'distance required before logging' for more realistic values.
-        double distance = Utilities.CalculateDistance(
+        double distance = Maths.calculateDistance(
                 Session.getPreviousLatitude(),
                 Session.getPreviousLongitude(),
                 loc.getLatitude(),
@@ -901,7 +902,7 @@ public class GpsLoggingService extends Service  {
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
         nextPointAlarmManager.cancel(pi);
 
-        if(WifiNetworkUtil.isDozing(this)){
+        if(Systems.isDozing(this)){
             //Only invoked once per 15 minutes in doze mode
             LOG.debug("Device is dozing, using infrequent alarm");
             nextPointAlarmManager.setAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
@@ -922,11 +923,11 @@ public class GpsLoggingService extends Service  {
 
         try {
             LOG.debug("Calling file writers");
-            FileLoggerFactory.Write(getApplicationContext(), loc);
+            FileLoggerFactory.write(getApplicationContext(), loc);
 
             if (Session.hasDescription()) {
                 LOG.info("Writing annotation: " + Session.getDescription());
-                FileLoggerFactory.Annotate(getApplicationContext(), Session.getDescription(), loc);
+                FileLoggerFactory.annotate(getApplicationContext(), Session.getDescription(), loc);
             }
         }
         catch(Exception e){
@@ -996,7 +997,7 @@ public class GpsLoggingService extends Service  {
 
     @EventBusHook
     public void onEvent(CommandEvents.Annotate annotate){
-        final String desc = Utilities.CleanDescription(annotate.annotation);
+        final String desc = Strings.cleanDescription(annotate.annotation);
         if (desc.length() == 0) {
             LOG.debug("Clearing annotation");
             Session.clearDescription();
@@ -1058,11 +1059,11 @@ public class GpsLoggingService extends Service  {
             LOG.debug("Switching to profile: " + switchToProfileEvent.newProfileName);
 
             //Save the current settings to a file (overwrite)
-            File f = new File(Utilities.GetDefaultStorageFolder(GpsLoggingService.this), preferenceHelper.getCurrentProfileName()+".properties");
+            File f = new File(Files.storageFolder(GpsLoggingService.this), preferenceHelper.getCurrentProfileName()+".properties");
             preferenceHelper.savePropertiesFromPreferences(f);
 
             //Read from a possibly existing file and load those preferences in
-            File newProfile = new File(Utilities.GetDefaultStorageFolder(GpsLoggingService.this), switchToProfileEvent.newProfileName+".properties");
+            File newProfile = new File(Files.storageFolder(GpsLoggingService.this), switchToProfileEvent.newProfileName+".properties");
             if(newProfile.exists()){
                 preferenceHelper.setPreferenceFromPropertiesFile(newProfile);
             }

@@ -27,7 +27,7 @@ import com.dropbox.client2.session.TokenPair;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.path.android.jobqueue.JobManager;
@@ -125,7 +125,7 @@ public class DropBoxManager extends FileSender {
         AccessTokenPair pair = null;
         String key = preferenceHelper.getDropBoxAccessKeyName();
         String secret = preferenceHelper.getDropBoxAccessSecretName();
-        if (!Utilities.IsNullOrEmpty(key) && !Utilities.IsNullOrEmpty(secret)) {
+        if (!Strings.isNullOrEmpty(key) && !Strings.isNullOrEmpty(secret)) {
             pair = new AccessTokenPair(key, secret);
         }
         return pair;
@@ -167,7 +167,7 @@ public class DropBoxManager extends FileSender {
     }
 
     public void uploadFile(String fileName) {
-        JobManager jobManager = AppSettings.GetJobManager();
+        JobManager jobManager = AppSettings.getJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, DropboxJob.getJobTag(fileName));
         jobManager.addJobInBackground(new DropboxJob(fileName));
     }

@@ -36,7 +36,7 @@ public class WifiNetworkUtil implements NetworkUtil, NetworkEventProvider {
     @Override
     public boolean isConnected(Context context) {
 
-        if (isDozing(context)) {
+        if (Systems.isDozing(context)) {
             return false;
         }
 
@@ -59,22 +59,6 @@ public class WifiNetworkUtil implements NetworkUtil, NetworkEventProvider {
             networkIntentFilter.addAction(PowerManager.ACTION_DEVICE_IDLE_MODE_CHANGED);
         }
         return networkIntentFilter;
-    }
-
-    /**
-     * Returns true if the device is in Doze/Idle mode. Should be called before checking the network connection because
-     * the ConnectionManager may report the device is connected when it isn't during Idle mode.
-     * https://github.com/yigit/android-priority-jobqueue/blob/master/jobqueue/src/main/java/com/path/android/jobqueue/network/NetworkUtilImpl.java#L60
-     */
-    @TargetApi(23)
-    public static boolean isDozing(Context context) {
-        if (Build.VERSION.SDK_INT >= 23) {
-            PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-            return powerManager.isDeviceIdleMode() &&
-                    !powerManager.isIgnoringBatteryOptimizations(context.getPackageName());
-        } else {
-            return false;
-        }
     }
 
     @Override

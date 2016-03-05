@@ -25,9 +25,9 @@ import android.preference.Preference;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
+import com.mendhak.gpslogger.ui.Dialogs;
+import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import org.slf4j.Logger;
 
 public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener {
@@ -67,7 +67,7 @@ public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment
                 getActivity().finish();
             }
         } catch (Exception e) {
-            Utilities.MsgBox(getString(R.string.error), getString(R.string.dropbox_couldnotauthorize),
+            Dialogs.alert(getString(R.string.error), getString(R.string.dropbox_couldnotauthorize),
                     getActivity());
             LOG.error(".", e);
         }

@@ -22,7 +22,6 @@ import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.dropbox.DropboxAuthorizationFragment;
@@ -36,6 +35,7 @@ import com.mendhak.gpslogger.settings.GeneralSettingsFragment;
 import com.mendhak.gpslogger.settings.LoggingSettingsFragment;
 import com.mendhak.gpslogger.settings.PerformanceSettingsFragment;
 import com.mendhak.gpslogger.settings.UploadSettingsFragment;
+import com.mendhak.gpslogger.ui.Dialogs;
 import org.slf4j.Logger;
 
 
@@ -139,7 +139,7 @@ public class MainPreferenceActivity extends AppCompatActivity {
     private boolean isFormValid(){
         if(preferenceFragment instanceof PreferenceValidator){
             if( !((PreferenceValidator)preferenceFragment).isValid() ){
-                Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
+                Dialogs.alert(getString(R.string.autoemail_invalid_form),
                         getString(R.string.autoemail_invalid_form_message),
                         this);
                 return false;

@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.preference.PreferenceManager;
-import com.mendhak.gpslogger.PreferenceNames;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Files;
 import org.slf4j.Logger;
 
 import java.io.*;
@@ -178,7 +178,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.FTP_PORT)
     public int getFtpPort() {
-        return Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.FTP_PORT, "21"), 21);
+        return Strings.toInt(prefs.getString(PreferenceNames.FTP_PORT, "21"), 21);
     }
 
 
@@ -247,11 +247,11 @@ public class PreferenceHelper {
 
 
     /**
-     * GPS Logger folder path on phone.  Falls back to {@link Utilities#GetDefaultStorageFolder(Context)} if nothing specified.
+     * GPS Logger folder path on phone.  Falls back to {@link Files#storageFolder(Context)} if nothing specified.
      */
     @ProfilePreference(name= PreferenceNames.GPSLOGGER_FOLDER)
     public String getGpsLoggerFolder() {
-        return prefs.getString(PreferenceNames.GPSLOGGER_FOLDER, Utilities.GetDefaultStorageFolder(AppSettings.getInstance().getApplicationContext()).getAbsolutePath());
+        return prefs.getString(PreferenceNames.GPSLOGGER_FOLDER, Files.storageFolder(AppSettings.getInstance().getApplicationContext()).getAbsolutePath());
     }
 
 
@@ -318,7 +318,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.MINIMUM_INTERVAL)
     public int getMinimumLoggingInterval() {
-        return Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.MINIMUM_INTERVAL, "60"), 60);
+        return Strings.toInt(prefs.getString(PreferenceNames.MINIMUM_INTERVAL, "60"), 60);
     }
 
     /**
@@ -338,7 +338,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.MINIMUM_DISTANCE)
     public int getMinimumDistanceInterval() {
-        return (Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.MINIMUM_DISTANCE, "0"), 0));
+        return (Strings.toInt(prefs.getString(PreferenceNames.MINIMUM_DISTANCE, "0"), 0));
     }
 
     /**
@@ -356,7 +356,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.MINIMUM_ACCURACY)
     public int getMinimumAccuracy() {
-        return (Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.MINIMUM_ACCURACY, "0"), 0));
+        return (Strings.toInt(prefs.getString(PreferenceNames.MINIMUM_ACCURACY, "0"), 0));
     }
 
 
@@ -381,7 +381,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.LOGGING_RETRY_TIME)
     public int getLoggingRetryPeriod() {
-        return (Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.LOGGING_RETRY_TIME, "60"), 60));
+        return (Strings.toInt(prefs.getString(PreferenceNames.LOGGING_RETRY_TIME, "60"), 60));
     }
 
 
@@ -399,7 +399,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.ABSOLUTE_TIMEOUT)
     public int getAbsoluteTimeoutForAcquiringPosition() {
-        return (Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.ABSOLUTE_TIMEOUT, "120"), 120));
+        return (Strings.toInt(prefs.getString(PreferenceNames.ABSOLUTE_TIMEOUT, "120"), 120));
     }
 
     /**
@@ -432,7 +432,7 @@ public class PreferenceHelper {
      * Which navigation item the user selected
      */
     public int getUserSelectedNavigationItem() {
-        return Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.SELECTED_NAVITEM, "0"), 0);
+        return Strings.toInt(prefs.getString(PreferenceNames.SELECTED_NAVITEM, "0"), 0);
     }
 
     /**
@@ -920,7 +920,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.ALTITUDE_SUBTRACT_OFFSET)
     public int getSubtractAltitudeOffset() {
-        return Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET, "0"), 0);
+        return Strings.toInt(prefs.getString(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET, "0"), 0);
     }
 
 
@@ -947,7 +947,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.LAST_VERSION_SEEN_BY_USER)
     public int getLastVersionSeen(){
-        return Utilities.parseIntWithDefault(prefs.getString(PreferenceNames.LAST_VERSION_SEEN_BY_USER, "1"), 1);
+        return Strings.toInt(prefs.getString(PreferenceNames.LAST_VERSION_SEEN_BY_USER, "1"), 1);
     }
 
     public void setLastVersionSeen(int lastVersionSeen){

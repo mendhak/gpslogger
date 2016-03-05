@@ -3,7 +3,7 @@ package com.mendhak.gpslogger.loggers.customurl;
 import android.location.Location;
 import android.util.Base64;
 import com.mendhak.gpslogger.common.SerializableLocation;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.path.android.jobqueue.Job;
@@ -62,22 +62,22 @@ public class CustomUrlJob extends Job {
         logUrl = logUrl.replaceAll("(?i)%lat", String.valueOf(loc.getLatitude()));
         logUrl = logUrl.replaceAll("(?i)%lon", String.valueOf(loc.getLongitude()));
         logUrl = logUrl.replaceAll("(?i)%sat", String.valueOf(satellites));
-        logUrl = logUrl.replaceAll("(?i)%desc", String.valueOf(URLEncoder.encode(Utilities.HtmlDecode(annotation), "UTF-8")));
+        logUrl = logUrl.replaceAll("(?i)%desc", String.valueOf(URLEncoder.encode(Strings.htmlDecode(annotation), "UTF-8")));
         logUrl = logUrl.replaceAll("(?i)%alt", String.valueOf(loc.getAltitude()));
         logUrl = logUrl.replaceAll("(?i)%acc", String.valueOf(loc.getAccuracy()));
         logUrl = logUrl.replaceAll("(?i)%dir", String.valueOf(loc.getBearing()));
         logUrl = logUrl.replaceAll("(?i)%prov", String.valueOf(loc.getProvider()));
         logUrl = logUrl.replaceAll("(?i)%spd", String.valueOf(loc.getSpeed()));
-        logUrl = logUrl.replaceAll("(?i)%time", String.valueOf(Utilities.GetIsoDateTime(new Date(loc.getTime()))));
+        logUrl = logUrl.replaceAll("(?i)%time", String.valueOf(Strings.getIsoDateTime(new Date(loc.getTime()))));
         logUrl = logUrl.replaceAll("(?i)%batt", String.valueOf(batteryLevel));
         logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));
-        logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(Utilities.GetBuildSerial()));
+        logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(Strings.getBuildSerial()));
 
         LOG.debug("Sending to URL: " + logUrl);
         URL url = new URL(logUrl);
 
         if(url.getProtocol().equalsIgnoreCase("https")){
-            HttpsURLConnection.setDefaultSSLSocketFactory(CustomUrlTrustEverything.GetSSLContextSocketFactory());
+            HttpsURLConnection.setDefaultSSLSocketFactory(CustomUrlTrustEverything.getSSLContextSocketFactory());
             conn = (HttpsURLConnection)url.openConnection();
             ((HttpsURLConnection)conn).setHostnameVerifier(new CustomUrlTrustEverything.VerifyEverythingHostnameVerifier());
         } else {
@@ -86,7 +86,7 @@ public class CustomUrlJob extends Job {
 
         conn.setRequestMethod("GET");
 
-        if(!Utilities.IsNullOrEmpty(basicPassword) && !Utilities.IsNullOrEmpty(basicUsername) ){
+        if(!Strings.isNullOrEmpty(basicPassword) && !Strings.isNullOrEmpty(basicUsername) ){
             String basicAuth = "Basic " + new String(Base64.encode((basicUsername + ":" + basicPassword).getBytes(), Base64.DEFAULT));
             conn.setRequestProperty("Authorization", basicAuth);
         }

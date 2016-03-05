@@ -2,7 +2,8 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.mendhak.gpslogger.views.component.CustomSwitchPreference android:key="gdocs_enabled"
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+        android:key="gdocs_enabled"
                                                                   android:title="@string/autosend_enabled"/>
 
     <Preference android:key="gdocs_resetauth" android:summary="@string/gdocs_authorize_summary"

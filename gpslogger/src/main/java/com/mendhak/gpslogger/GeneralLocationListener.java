@@ -19,7 +19,7 @@ package com.mendhak.gpslogger;
 
 import android.location.*;
 import android.os.Bundle;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.nmea.NmeaSentence;
 import org.slf4j.Logger;
@@ -142,7 +142,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     public void onNmeaReceived(long timestamp, String nmeaSentence) {
         loggingService.onNmeaSentence(timestamp, nmeaSentence);
 
-        if(Utilities.IsNullOrEmpty(nmeaSentence)){
+        if(Strings.isNullOrEmpty(nmeaSentence)){
             return;
         }
 

@@ -4,7 +4,8 @@
 
 
 
-    <com.mendhak.gpslogger.views.component.CustomSwitchPreference android:key="autoopengts_enabled"
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+        android:key="autoopengts_enabled"
                         android:title="@string/autosend_enabled"/>
 
     <PreferenceCategory android:title="@string/autoopengts_server_category">

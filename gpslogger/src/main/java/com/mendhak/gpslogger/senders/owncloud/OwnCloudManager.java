@@ -2,9 +2,10 @@ package com.mendhak.gpslogger.senders.owncloud;
 
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
@@ -46,7 +47,7 @@ public class OwnCloudManager extends FileSender
                 initialOutput.flush();
                 initialOutput.close();
 
-                Utilities.AddFileToMediaDatabase(testFile, "text/xml");
+                Files.addToMediaDatabase(testFile, "text/xml");
             }
 
         } catch (Exception ex) {
@@ -54,19 +55,19 @@ public class OwnCloudManager extends FileSender
             LOG.error("Error while testing ownCloud upload: " + ex.getMessage());
         }
 
-        JobManager jobManager = AppSettings.GetJobManager();
+        JobManager jobManager = AppSettings.getJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OwnCloudJob.getJobTag(testFile));
         jobManager.addJobInBackground(new OwnCloudJob(servername, username, password, directory,
                 testFile, "gpslogger_test.txt"));
         LOG.debug("Added background ownCloud upload job");
     }
 
-    public static boolean ValidSettings(
+    public static boolean validSettings(
             String servername,
             String username,
             String password,
             String directory) {
-        return !Utilities.IsNullOrEmpty(servername);
+        return !Strings.isNullOrEmpty(servername);
 
     }
 
@@ -80,7 +81,7 @@ public class OwnCloudManager extends FileSender
 
     @Override
     public boolean isAvailable() {
-        return ValidSettings(preferenceHelper.getOwnCloudServerName(),
+        return validSettings(preferenceHelper.getOwnCloudServerName(),
                 preferenceHelper.getOwnCloudUsername(),
                 preferenceHelper.getOwnCloudPassword(),
                 preferenceHelper.getOwnCloudDirectory());
@@ -93,7 +94,7 @@ public class OwnCloudManager extends FileSender
 
     public void uploadFile(File f)
     {
-        JobManager jobManager = AppSettings.GetJobManager();
+        JobManager jobManager = AppSettings.getJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OwnCloudJob.getJobTag(f));
         jobManager.addJobInBackground(new OwnCloudJob(
                 preferenceHelper.getOwnCloudServerName(),

@@ -15,7 +15,7 @@
  * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package com.mendhak.gpslogger.views;
+package com.mendhak.gpslogger.ui.fragments;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -38,9 +38,10 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Files;
 import org.slf4j.Logger;
 
 import java.text.NumberFormat;
@@ -185,8 +186,8 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         txtFilename.setVisibility(View.VISIBLE);
         txtFilename.setText(Html.fromHtml("<em>" + preferenceHelper.getGpsLoggerFolder() + "/<strong><br />" + Session.getCurrentFileName() + "</strong></em>"));
 
-        Utilities.SetFileExplorerLink(txtFilename,
-                Html.fromHtml("<em><font color='blue'><u>" + preferenceHelper.getGpsLoggerFolder() + "</u></font>" + "/<strong><br />" + Session.getCurrentFileName() + "</strong></em>" ),
+        Files.setFileExplorerLink(txtFilename,
+                Html.fromHtml("<em><font color='blue'><u>" + preferenceHelper.getGpsLoggerFolder() + "</u></font>" + "/<strong><br />" + Session.getCurrentFileName() + "</strong></em>"),
                 preferenceHelper.getGpsLoggerFolder(),
                 context);
 
@@ -338,7 +339,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
             TextView txtAccuracy = (TextView) rootView.findViewById(R.id.simpleview_txtAccuracy);
             float accuracy = locationInfo.getAccuracy();
-            txtAccuracy.setText(Utilities.GetDistanceDisplay(getActivity(), accuracy, preferenceHelper.shouldDisplayImperialUnits()));
+            txtAccuracy.setText(Strings.getDistanceDisplay(getActivity(), accuracy, preferenceHelper.shouldDisplayImperialUnits()));
 
             if (accuracy > 500) {
                 setColor(imgAccuracy, IconColorIndicator.Warning);
@@ -358,7 +359,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             setColor(imgAltitude, IconColorIndicator.Good);
             TextView txtAltitude = (TextView) rootView.findViewById(R.id.simpleview_txtAltitude);
 
-            txtAltitude.setText(Utilities.GetDistanceDisplay(getActivity(), locationInfo.getAltitude(), preferenceHelper.shouldDisplayImperialUnits()));
+            txtAltitude.setText(Strings.getDistanceDisplay(getActivity(), locationInfo.getAltitude(), preferenceHelper.shouldDisplayImperialUnits()));
         }
 
         ImageView imgSpeed = (ImageView)rootView.findViewById(R.id.simpleview_imgSpeed);
@@ -369,7 +370,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             setColor(imgSpeed, IconColorIndicator.Good);
 
             TextView txtSpeed = (TextView) rootView.findViewById(R.id.simpleview_txtSpeed);
-            txtSpeed.setText(Utilities.GetSpeedDisplay(getActivity(),locationInfo.getSpeed(),preferenceHelper.shouldDisplayImperialUnits()));
+            txtSpeed.setText(Strings.getSpeedDisplay(getActivity(), locationInfo.getSpeed(), preferenceHelper.shouldDisplayImperialUnits()));
         }
 
         ImageView imgDirection = (ImageView) rootView.findViewById(R.id.simpleview_imgDirection);
@@ -388,14 +389,14 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         long startTime = Session.getStartTimeStamp();
         long currentTime = System.currentTimeMillis();
 
-        txtDuration.setText(Utilities.GetTimeDisplay(getActivity(), currentTime-startTime));
+        txtDuration.setText(Strings.getTimeDisplay(getActivity(), currentTime - startTime));
 
         double distanceValue = Session.getTotalTravelled();
 
         TextView txtPoints = (TextView) rootView.findViewById(R.id.simpleview_txtPoints);
         TextView txtTravelled = (TextView) rootView.findViewById(R.id.simpleview_txtDistance);
 
-        txtTravelled.setText(Utilities.GetDistanceDisplay(getActivity(), distanceValue, preferenceHelper.shouldDisplayImperialUnits()));
+        txtTravelled.setText(Strings.getDistanceDisplay(getActivity(), distanceValue, preferenceHelper.shouldDisplayImperialUnits()));
         txtPoints.setText(Session.getNumLegs() + " " + getString(R.string.points));
 
         String providerName = locationInfo.getProvider();

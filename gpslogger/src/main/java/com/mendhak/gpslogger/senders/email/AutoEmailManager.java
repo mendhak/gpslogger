@@ -18,7 +18,7 @@
 package com.mendhak.gpslogger.senders.email;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
@@ -46,11 +46,11 @@ public class AutoEmailManager extends FileSender {
             filesToSend.add(f);
         }
 
-        String subject = "GPS Log file generated at "+ Utilities.GetReadableDateTime(new Date());
+        String subject = "GPS Log file generated at "+ Strings.getReadableDateTime(new Date());
 
-        String body = "GPS Log file generated at "+ Utilities.GetReadableDateTime(new Date());
+        String body = "GPS Log file generated at "+ Strings.getReadableDateTime(new Date());
 
-        JobManager jobManager = AppSettings.GetJobManager();
+        JobManager jobManager = AppSettings.getJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, AutoEmailJob.getJobTag(filesToSend.toArray(new File[filesToSend.size()])));
         jobManager.addJobInBackground(new AutoEmailJob(preferenceHelper.getSmtpServer(),
                 preferenceHelper.getSmtpPort(), preferenceHelper.getSmtpUsername(), preferenceHelper.getSmtpPassword(),
@@ -74,10 +74,10 @@ public class AutoEmailManager extends FileSender {
                        String smtpUsername, String smtpPassword, boolean smtpUseSsl,
                        String emailTarget, String fromAddress) {
 
-        String subject = "Test Email from GPSLogger at " + Utilities.GetReadableDateTime(new Date());
-        String body ="Test Email from GPSLogger at " + Utilities.GetReadableDateTime(new Date());
+        String subject = "Test Email from GPSLogger at " + Strings.getReadableDateTime(new Date());
+        String body ="Test Email from GPSLogger at " + Strings.getReadableDateTime(new Date());
 
-        JobManager jobManager = AppSettings.GetJobManager();
+        JobManager jobManager = AppSettings.getJobManager();
         jobManager.addJobInBackground(new AutoEmailJob(smtpServer,
                 smtpPort, smtpUsername, smtpPassword, smtpUseSsl,
                 emailTarget, fromAddress, subject, body, new File[]{}));
@@ -90,7 +90,7 @@ public class AutoEmailManager extends FileSender {
     }
 
     protected boolean isValid( String server, String port, String username, String password, String target) {
-                return !Utilities.IsNullOrEmpty(server) && !Utilities.IsNullOrEmpty(port) && !Utilities.IsNullOrEmpty(username) && !Utilities.IsNullOrEmpty(target);
+                return !Strings.isNullOrEmpty(server) && !Strings.isNullOrEmpty(port) && !Strings.isNullOrEmpty(username) && !Strings.isNullOrEmpty(target);
 
     }
 }

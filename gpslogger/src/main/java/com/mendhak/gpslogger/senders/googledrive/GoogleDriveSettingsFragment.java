@@ -37,10 +37,11 @@ import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
+import com.mendhak.gpslogger.loggers.Files;
+import com.mendhak.gpslogger.ui.Dialogs;
+import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
@@ -109,7 +110,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
                 if (d != null) {
                     d.show();
                 } else {
-                    Utilities.MsgBox(getString(R.string.gpsf_missing), getString(R.string.gpsf_missing_description), getActivity());
+                    Dialogs.alert(getString(R.string.gpsf_missing), getString(R.string.gpsf_missing_description), getActivity());
                 }
                 messageShown = true;
             }
@@ -263,7 +264,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
     @AskPermission({Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     private void uploadTestFileToGoogleDocs() {
 
-        Utilities.ShowProgress(getActivity(), getString(R.string.please_wait), getString(R.string.please_wait));
+        Dialogs.progress(getActivity(), getString(R.string.please_wait), getString(R.string.please_wait));
         File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
             gpxFolder.mkdirs();
@@ -283,7 +284,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
                 initialOutput.flush();
                 initialOutput.close();
 
-                Utilities.AddFileToMediaDatabase(testFile, "text/xml");
+                Files.addToMediaDatabase(testFile, "text/xml");
             }
 
         } catch (Exception ex) {
@@ -301,12 +302,12 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
     @EventBusHook
     public void onEventMainThread(UploadEvents.GDocs o){
         LOG.debug("GDocs Event completed, success: " + o.success);
-        Utilities.HideProgress();
+        Dialogs.hideProgress();
         if(!o.success){
-            Utilities.MsgBox(getString(R.string.sorry), getString(R.string.gdocs_testupload_error), getActivity());
+            Dialogs.alert(getString(R.string.sorry), getString(R.string.gdocs_testupload_error), getActivity());
         }
         else {
-            Utilities.MsgBox(getString(R.string.success), getString(R.string.gdocs_testupload_success), getActivity());
+            Dialogs.alert(getString(R.string.success), getString(R.string.gdocs_testupload_success), getActivity());
         }
     }
 

@@ -18,8 +18,9 @@
 package com.mendhak.gpslogger.loggers.csv;
 
 import android.location.Location;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.FileLogger;
+import com.mendhak.gpslogger.loggers.Files;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -61,7 +62,7 @@ public class PlainTextFileLogger implements FileLogger {
         FileOutputStream writer = new FileOutputStream(file, true);
         BufferedOutputStream output = new BufferedOutputStream(writer);
 
-        String dateTimeString = Utilities.GetIsoDateTime(new Date(loc.getTime()));
+        String dateTimeString = Strings.getIsoDateTime(new Date(loc.getTime()));
 
         String outputString = String.format(Locale.US, "%s,%f,%f,%f,%f,%f,%f\n", dateTimeString,
                 loc.getLatitude(),
@@ -74,7 +75,7 @@ public class PlainTextFileLogger implements FileLogger {
         output.write(outputString.getBytes());
         output.flush();
         output.close();
-        Utilities.AddFileToMediaDatabase(file, "text/csv");
+        Files.addToMediaDatabase(file, "text/csv");
     }
 
     @Override

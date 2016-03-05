@@ -1,4 +1,4 @@
-package com.mendhak.gpslogger.common;
+package com.mendhak.gpslogger.common.slf4j;
 
 import java.util.concurrent.LinkedBlockingDeque;
 

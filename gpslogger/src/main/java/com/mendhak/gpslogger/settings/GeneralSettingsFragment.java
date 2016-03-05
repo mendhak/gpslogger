@@ -27,7 +27,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.loggers.Files;
 
 import java.io.File;
 
@@ -92,7 +92,7 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
 
 
             intent.putExtra(Intent.EXTRA_TEXT, diagnostics.toString());
-            File root = Utilities.GetDefaultStorageFolder(getActivity());
+            File root = Files.storageFolder(getActivity());
             File file = new File(root, "/debuglog.txt");
             if (file.exists() && file.canRead()) {
                 Uri uri = Uri.parse("file://" + file);

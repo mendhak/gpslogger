@@ -15,9 +15,12 @@
 *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.mendhak.gpslogger.common;
+package com.mendhak.gpslogger.loggers.opengts;
 
 
+import com.mendhak.gpslogger.common.Maths;
+import com.mendhak.gpslogger.common.SerializableLocation;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpGet;
@@ -70,7 +73,7 @@ public class OpenGTSClient {
             List<NameValuePair> qparams = new ArrayList<NameValuePair>();
             qparams.add(new BasicNameValuePair("id", id));
             qparams.add(new BasicNameValuePair("dev", id));
-            if (!Utilities.IsNullOrEmpty(accountName)) {
+            if (!Strings.isNullOrEmpty(accountName)) {
                 qparams.add(new BasicNameValuePair("acct", accountName));
             } else {
                 qparams.add(new BasicNameValuePair("acct", id));
@@ -80,7 +83,7 @@ public class OpenGTSClient {
             qparams.add(new BasicNameValuePair("batt", "0"));
             qparams.add(new BasicNameValuePair("code", "0xF020"));
             qparams.add(new BasicNameValuePair("alt", String.valueOf(loc.getAltitude())));
-            qparams.add(new BasicNameValuePair("gprmc", OpenGTSClient.GPRMCEncode(loc)));
+            qparams.add(new BasicNameValuePair("gprmc", OpenGTSClient.gprmcEncode(loc)));
 
             URI uri = URIUtils.createURI("http", server, port, path, getQuery(qparams), null);
             HttpGet httpget = new HttpGet(uri);
@@ -130,10 +133,10 @@ public class OpenGTSClient {
 
     public void sendRAW(String id, String accountName, SerializableLocation[] locations) throws Exception {
         for (SerializableLocation loc : locations) {
-            if(Utilities.IsNullOrEmpty(accountName)){
+            if(Strings.isNullOrEmpty(accountName)){
                 accountName = id;
             }
-            String message = accountName + "/" + id + "/" + GPRMCEncode(loc);
+            String message = accountName + "/" + id + "/" + gprmcEncode(loc);
                 DatagramSocket socket = new DatagramSocket();
                 byte[] buffer = message.getBytes();
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length, InetAddress.getByName(server), port);
@@ -166,41 +169,41 @@ public class OpenGTSClient {
      * @param loc location
      * @return GPRMC data
      */
-    public static String GPRMCEncode(SerializableLocation loc) {
+    public static String gprmcEncode(SerializableLocation loc) {
         DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.US);
         DecimalFormat f = new DecimalFormat("0.000000", dfs);
 
         String gprmc = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,,",
                 "$GPRMC",
-                NMEAGPRMCTime(new Date(loc.getTime())),
+                getNmeaGprmcTime(new Date(loc.getTime())),
                 "A",
-                NMEAGPRMCCoord(Math.abs(loc.getLatitude())),
+                getNmeaGprmcCoordinates(Math.abs(loc.getLatitude())),
                 (loc.getLatitude() >= 0) ? "N" : "S",
-                NMEAGPRMCCoord(Math.abs(loc.getLongitude())),
+                getNmeaGprmcCoordinates(Math.abs(loc.getLongitude())),
                 (loc.getLongitude() >= 0) ? "E" : "W",
-                f.format(MetersPerSecondToKnots(loc.getSpeed())),
+                f.format(Maths.mpsToKnots(loc.getSpeed())),
                 f.format(loc.getBearing()),
-                NMEAGPRMCDate(new Date(loc.getTime()))
+                getNmeaGprmcDate(new Date(loc.getTime()))
         );
 
-        gprmc += "*" + NMEACheckSum(gprmc);
+        gprmc += "*" + getNmeaChecksum(gprmc);
 
         return gprmc;
     }
 
-    public static String NMEAGPRMCTime(Date dateToFormat) {
+    public static String getNmeaGprmcTime(Date dateToFormat) {
         SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         return sdf.format(dateToFormat);
     }
 
-    public static String NMEAGPRMCDate(Date dateToFormat) {
+    public static String getNmeaGprmcDate(Date dateToFormat) {
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyy");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         return sdf.format(dateToFormat);
     }
 
-    public static String NMEAGPRMCCoord(double coord) {
+    public static String getNmeaGprmcCoordinates(double coord) {
         // “DDDMM.MMMMM”
         int degrees = (int) coord;
         double minutes = (coord - degrees) * 60;
@@ -214,7 +217,7 @@ public class OpenGTSClient {
     }
 
 
-    public static String NMEACheckSum(String msg) {
+    public static String getNmeaChecksum(String msg) {
         int chk = 0;
         for (int i = 1; i < msg.length(); i++) {
             chk ^= msg.charAt(i);
@@ -224,17 +227,6 @@ public class OpenGTSClient {
             chk_s = "0" + chk_s;
         }
         return chk_s;
-    }
-
-    /**
-     * Converts given meters/second to nautical mile/hour.
-     *
-     * @param mps meters per second
-     * @return knots
-     */
-    public static double MetersPerSecondToKnots(double mps) {
-        // Google "meters per second to knots"
-        return mps * 1.94384449;
     }
 
 }

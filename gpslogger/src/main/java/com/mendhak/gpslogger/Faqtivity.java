@@ -23,7 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ExpandableListView;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.views.component.ExpandableListAdapter;
+import com.mendhak.gpslogger.ui.components.ExpandableListAdapter;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;

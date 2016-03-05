@@ -32,9 +32,10 @@ import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
+import com.mendhak.gpslogger.ui.Dialogs;
+import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 import net.rdrei.android.dirchooser.DirectoryChooserFragment;
 import org.slf4j.Logger;
@@ -78,11 +79,11 @@ public class LoggingSettingsFragment extends PreferenceFragment
                 .onPreferenceChange(newFilePref, newFilePref.getValue());
 
         CustomSwitchPreference chkfile_prefix_serial = (CustomSwitchPreference) findPreference("new_file_prefix_serial");
-        if (Utilities.IsNullOrEmpty(Utilities.GetBuildSerial())) {
+        if (Strings.isNullOrEmpty(Strings.getBuildSerial())) {
             chkfile_prefix_serial.setEnabled(false);
             chkfile_prefix_serial.setSummary("This option not available on older phones or if a serial id is not present");
         } else {
-            chkfile_prefix_serial.setSummary(chkfile_prefix_serial.getSummary().toString() + "(" + Utilities.GetBuildSerial() + ")");
+            chkfile_prefix_serial.setSummary(chkfile_prefix_serial.getSummary().toString() + "(" + Strings.getBuildSerial() + ")");
         }
 
 
@@ -264,7 +265,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
         }
 
         if(!folder.canWrite()){
-            Utilities.MsgBox(getString(R.string.sorry), getString(R.string.pref_logging_file_no_permissions), getActivity());
+            Dialogs.alert(getString(R.string.sorry), getString(R.string.pref_logging_file_no_permissions), getActivity());
             return;
         }
 

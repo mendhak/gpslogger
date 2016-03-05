@@ -17,7 +17,10 @@
 
 package com.mendhak.gpslogger.loggers.nmea;
 
-import com.mendhak.gpslogger.common.*;
+import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.RejectionHandler;
+import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.loggers.Files;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -82,7 +85,7 @@ class NmeaWriteHandler implements Runnable {
                 writer.write(nmeaSentence);
                 writer.newLine();
                 writer.close();
-                Utilities.AddFileToMediaDatabase(gpxFile, "text/plain");
+                Files.addToMediaDatabase(gpxFile, "text/plain");
 
             } catch (IOException e) {
 

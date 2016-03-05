@@ -1,7 +1,8 @@
-package com.mendhak.gpslogger.views.component;
+package com.mendhak.gpslogger.ui.components;
 
 import android.content.Context;
 import android.preference.SwitchPreference;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
@@ -27,7 +28,7 @@ public class CustomSwitchPreference extends SwitchPreference {
     }
 
     @Override
-    protected void onBindView(View view) {
+    protected void onBindView(@NonNull View view) {
         super.onBindView(view);
 
         TextView titleView = (TextView) view.findViewById(android.R.id.title);

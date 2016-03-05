@@ -27,12 +27,13 @@ import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
-import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
-import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
+import com.mendhak.gpslogger.ui.Dialogs;
+import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
+import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
@@ -85,21 +86,21 @@ public class FtpFragment
         MaterialEditTextPreference directoryPreference = (MaterialEditTextPreference) findPreference("autoftp_directory");
 
         if (!helper.validSettings(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
-                Utilities.parseIntWithDefault(portPreference.getText(), 21),
+                Strings.toInt(portPreference.getText(), 21),
                  useFtpsPreference.isChecked(), sslTlsPreference.getValue(),
                 implicitPreference.isChecked())) {
-            Utilities.MsgBox(getString(R.string.autoftp_invalid_settings),
+            Dialogs.alert(getString(R.string.autoftp_invalid_settings),
                     getString(R.string.autoftp_invalid_summary),
                     getActivity());
             return false;
         }
 
-        Utilities.ShowProgress(getActivity(), getString(R.string.autoftp_testing),
+        Dialogs.progress(getActivity(), getString(R.string.autoftp_testing),
                 getString(R.string.please_wait));
 
 
         helper.testFtp(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
-                directoryPreference.getText(), Utilities.parseIntWithDefault(portPreference.getText(),21), useFtpsPreference.isChecked(),
+                directoryPreference.getText(), Strings.toInt(portPreference.getText(), 21), useFtpsPreference.isChecked(),
                 sslTlsPreference.getValue(), implicitPreference.isChecked());
 
         return true;
@@ -116,13 +117,13 @@ public class FtpFragment
     @EventBusHook
     public void onEventMainThread(UploadEvents.Ftp o){
             LOG.debug("FTP Event completed, success: " + o.success);
-            Utilities.HideProgress();
+            Dialogs.hideProgress();
             if(!o.success){
                 String ftpMessages = (o.ftpMessages == null) ? "" : TextUtils.join("",o.ftpMessages);
-                Utilities.ErrorMsgBox(getString(R.string.sorry), "FTP Test Failed", o.message + "\r\n" + ftpMessages, o.throwable, getActivity());
+                Dialogs.error(getString(R.string.sorry), "FTP Test Failed", o.message + "\r\n" + ftpMessages, o.throwable, getActivity());
             }
             else {
-                Utilities.MsgBox(getString(R.string.success), "FTP Test Succeeded", getActivity());
+                Dialogs.alert(getString(R.string.success), "FTP Test Succeeded", getActivity());
             }
     }
 }

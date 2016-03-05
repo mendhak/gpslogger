@@ -19,9 +19,10 @@ package com.mendhak.gpslogger.loggers.kml;
 
 import android.location.Location;
 import com.mendhak.gpslogger.common.RejectionHandler;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.FileLogger;
+import com.mendhak.gpslogger.loggers.Files;
 import org.slf4j.Logger;
 
 import java.io.*;
@@ -153,7 +154,7 @@ class Kml22WriteHandler implements Runnable {
 
             RandomAccessFile raf;
 
-            String dateTimeString = Utilities.GetIsoDateTime(new Date(loc.getTime()));
+            String dateTimeString = Strings.getIsoDateTime(new Date(loc.getTime()));
             String placemarkHead = "<Placemark>\n<gx:Track>\n";
             String placemarkTail = "</gx:Track>\n</Placemark></Document></kml>\n";
 
@@ -208,7 +209,7 @@ class Kml22WriteHandler implements Runnable {
                 raf.seek(kmlFile.length() - 42);
                 raf.write(coords.toString().getBytes());
                 raf.close();
-                Utilities.AddFileToMediaDatabase(kmlFile, "text/xml");
+                Files.addToMediaDatabase(kmlFile, "text/xml");
                 LOG.debug("Finished writing to KML22 File");
             }
 

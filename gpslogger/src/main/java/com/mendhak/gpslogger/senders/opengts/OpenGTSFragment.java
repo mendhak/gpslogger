@@ -25,10 +25,10 @@ import android.webkit.URLUtil;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
-import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
-import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
+import com.mendhak.gpslogger.ui.Dialogs;
+import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
+import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 
 public class OpenGTSFragment extends PermissionedPreferenceFragment implements
         PreferenceValidator,
@@ -59,7 +59,7 @@ public class OpenGTSFragment extends PermissionedPreferenceFragment implements
 
     public boolean onPreferenceClick(Preference preference) {
         if (!isFormValid()) {
-            Utilities.MsgBox(getString(R.string.autoopengts_invalid_form),
+            Dialogs.alert(getString(R.string.autoopengts_invalid_form),
                     getString(R.string.autoopengts_invalid_form_message),
                     getActivity());
             return false;

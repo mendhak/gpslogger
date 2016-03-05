@@ -23,7 +23,7 @@ import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
@@ -65,7 +65,7 @@ public class GoogleDriveManager extends FileSender {
      *
      */
     protected boolean isLinked() {
-        return !Utilities.IsNullOrEmpty(preferenceHelper.getGoogleDriveAccountName()) && !Utilities.IsNullOrEmpty(preferenceHelper.getGoogleDriveAuthToken());
+        return !Strings.isNullOrEmpty(preferenceHelper.getGoogleDriveAccountName()) && !Strings.isNullOrEmpty(preferenceHelper.getGoogleDriveAuthToken());
     }
 
     @Override
@@ -105,15 +105,15 @@ public class GoogleDriveManager extends FileSender {
 
             String uploadFolderName = googleDriveFolderName;
 
-            if(Utilities.IsNullOrEmpty(googleDriveFolderName)){
+            if(Strings.isNullOrEmpty(googleDriveFolderName)){
                 uploadFolderName = preferenceHelper.getGoogleDriveFolderName();
             }
 
-            if(Utilities.IsNullOrEmpty(uploadFolderName)){
+            if(Strings.isNullOrEmpty(uploadFolderName)){
                 uploadFolderName = "GPSLogger for Android";
             }
 
-            JobManager jobManager = AppSettings.GetJobManager();
+            JobManager jobManager = AppSettings.getJobManager();
             jobManager.cancelJobsInBackground(null, TagConstraint.ANY, GoogleDriveJob.getJobTag(gpxFile));
             jobManager.addJobInBackground(new GoogleDriveJob(gpxFile, uploadFolderName));
 

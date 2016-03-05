@@ -50,7 +50,7 @@ public class OpenGTSLogger implements FileLogger {
         String deviceId = preferenceHelper.getOpenGTSDeviceId();
         String communication = preferenceHelper.getOpenGTSServerCommunicationMethod();
 
-        JobManager jobManager = AppSettings.GetJobManager();
+        JobManager jobManager = AppSettings.getJobManager();
         jobManager.addJobInBackground(new OpenGTSJob(server, port, accountName, path, deviceId, communication, new SerializableLocation[]{new SerializableLocation(loc)}));
     }
 

@@ -15,7 +15,7 @@
  * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package com.mendhak.gpslogger.views;
+package com.mendhak.gpslogger.ui.fragments;
 
 import android.location.Location;
 import android.location.LocationManager;
@@ -32,11 +32,12 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
+import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import org.slf4j.Logger;
 
@@ -140,7 +141,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             TextView txtDistance = (TextView) rootView.findViewById(R.id.detailedview_distance_text);
             TextView txtAutoEmail = (TextView) rootView.findViewById(R.id.detailedview_autosend_text);
 
-            List<FileLogger> loggers = FileLoggerFactory.GetFileLoggers(getActivity().getApplicationContext());
+            List<FileLogger> loggers = FileLoggerFactory.getFileLoggers(getActivity().getApplicationContext());
 
             if (loggers.size() > 0) {
 
@@ -163,7 +164,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             }
 
             if (preferenceHelper.getMinimumLoggingInterval() > 0) {
-                String descriptiveTime = Utilities.GetDescriptiveDurationString(preferenceHelper.getMinimumLoggingInterval(),
+                String descriptiveTime = Strings.getDescriptiveDurationString(preferenceHelper.getMinimumLoggingInterval(),
                         getActivity().getApplicationContext());
 
                 txtFrequency.setText(descriptiveTime);
@@ -174,7 +175,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
 
             if (preferenceHelper.getMinimumDistanceInterval() > 0) {
-                txtDistance.setText(Utilities.GetDistanceDisplay(getActivity(), preferenceHelper.getMinimumDistanceInterval(), preferenceHelper.shouldDisplayImperialUnits()));
+                txtDistance.setText(Strings.getDistanceDisplay(getActivity(), preferenceHelper.getMinimumDistanceInterval(), preferenceHelper.shouldDisplayImperialUnits()));
             } else {
                 txtDistance.setText(R.string.summary_dist_regardless);
             }
@@ -193,27 +194,27 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
             if(preferenceHelper.isAutoSendEnabled()){
                 StringBuilder sb = new StringBuilder();
-                if (FileSenderFactory.GetEmailSender().isAutoSendAvailable()) {
+                if (FileSenderFactory.getEmailSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.autoemail_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetFtpSender().isAutoSendAvailable()) {
+                if (FileSenderFactory.getFtpSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.autoftp_setup_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetGDocsSender().isAutoSendAvailable()) {
+                if (FileSenderFactory.getGoogleDriveSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.gdocs_setup_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetOsmSender().isAutoSendAvailable()) {
+                if (FileSenderFactory.getOsmSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.osm_setup_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetDropBoxSender().isAutoSendAvailable()) {
+                if (FileSenderFactory.getDropBoxSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.dropbox_setup_title)).append("\n");
                 }
 
-                if (FileSenderFactory.GetOpenGTSSender().isAutoSendAvailable()) {
+                if (FileSenderFactory.getOpenGTSSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.opengts_setup_title)).append("\n");
                 }
 
@@ -240,7 +241,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         TextView txtFilename = (TextView) rootView.findViewById(R.id.detailedview_file_text);
         txtFilename.setText(Session.getCurrentFileName() + "\n (" + preferenceHelper.getGpsLoggerFolder() + ")");
 
-        Utilities.SetFileExplorerLink(txtFilename,
+        Files.setFileExplorerLink(txtFilename,
                 Html.fromHtml(Session.getCurrentFileName() + "<br /> (" + "<font color='blue'><u>" + preferenceHelper.getGpsLoggerFolder() + "</u></font>" + ")"),
                 preferenceHelper.getGpsLoggerFolder(),
                 getActivity().getApplicationContext());
@@ -350,13 +351,13 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         nf.setMaximumFractionDigits(3);
 
         if (locationInfo.hasAltitude()) {
-            tvAltitude.setText(Utilities.GetDistanceDisplay(getActivity(), locationInfo.getAltitude(), preferenceHelper.shouldDisplayImperialUnits()));
+            tvAltitude.setText(Strings.getDistanceDisplay(getActivity(), locationInfo.getAltitude(), preferenceHelper.shouldDisplayImperialUnits()));
         } else {
             tvAltitude.setText(R.string.not_applicable);
         }
 
         if (locationInfo.hasSpeed()) {
-            txtSpeed.setText(Utilities.GetSpeedDisplay(getActivity(), locationInfo.getSpeed(), preferenceHelper.shouldDisplayImperialUnits()));
+            txtSpeed.setText(Strings.getSpeedDisplay(getActivity(), locationInfo.getSpeed(), preferenceHelper.shouldDisplayImperialUnits()));
 
         } else {
             txtSpeed.setText(R.string.not_applicable);
@@ -367,7 +368,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             float bearingDegrees = locationInfo.getBearing();
             String direction;
 
-            direction = Utilities.GetBearingDescription(bearingDegrees, getActivity().getApplicationContext());
+            direction = Strings.getBearingDescription(bearingDegrees, getActivity().getApplicationContext());
 
             txtDirection.setText(direction + "(" + String.valueOf(Math.round(bearingDegrees))
                     + getString(R.string.degree_symbol) + ")");
@@ -382,20 +383,20 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         if (locationInfo.hasAccuracy()) {
 
             float accuracy = locationInfo.getAccuracy();
-            txtAccuracy.setText(getString(R.string.accuracy_within, Utilities.GetDistanceDisplay(getActivity(), accuracy, preferenceHelper.shouldDisplayImperialUnits()), ""));
+            txtAccuracy.setText(getString(R.string.accuracy_within, Strings.getDistanceDisplay(getActivity(), accuracy, preferenceHelper.shouldDisplayImperialUnits()), ""));
 
         } else {
             txtAccuracy.setText(R.string.not_applicable);
         }
 
         double distanceValue = Session.getTotalTravelled();
-        txtTravelled.setText(Utilities.GetDistanceDisplay(getActivity(), distanceValue, preferenceHelper.shouldDisplayImperialUnits()) + " (" + Session.getNumLegs() + " points)");
+        txtTravelled.setText(Strings.getDistanceDisplay(getActivity(), distanceValue, preferenceHelper.shouldDisplayImperialUnits()) + " (" + Session.getNumLegs() + " points)");
 
         long startTime = Session.getStartTimeStamp();
         Date d = new Date(startTime);
         long currentTime = System.currentTimeMillis();
 
-        String duration = Utilities.GetDescriptiveDurationString((int) (currentTime - startTime) / 1000, getActivity());
+        String duration = Strings.getDescriptiveDurationString((int) (currentTime - startTime) / 1000, getActivity());
 
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());

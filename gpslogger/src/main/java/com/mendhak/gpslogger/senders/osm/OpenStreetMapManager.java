@@ -112,7 +112,7 @@ public class OpenStreetMapManager extends FileSender {
         String tags = preferenceHelper.getOSMTags();
         String visibility = preferenceHelper.getOSMVisibility();
 
-        JobManager jobManager = AppSettings.GetJobManager();
+        JobManager jobManager = AppSettings.getJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OSMJob.getJobTag(chosenFile));
         jobManager.addJobInBackground(new OSMJob( consumer, gpsTraceUrl, chosenFile, description, tags, visibility));
     }

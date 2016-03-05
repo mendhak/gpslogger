@@ -19,9 +19,10 @@ package com.mendhak.gpslogger.loggers.gpx;
 
 import android.location.Location;
 import com.mendhak.gpslogger.common.RejectionHandler;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.FileLogger;
+import com.mendhak.gpslogger.loggers.Files;
 import org.slf4j.Logger;
 
 import java.io.*;
@@ -53,7 +54,7 @@ public class Gpx10FileLogger implements FileLogger {
         if (time <= 0) {
             time = System.currentTimeMillis();
         }
-        String dateTimeString = Utilities.GetIsoDateTime(new Date(time));
+        String dateTimeString = Strings.getIsoDateTime(new Date(time));
 
         Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(dateTimeString, gpxFile, loc, addNewTrackSegment, satelliteCount);
         EXECUTOR.execute(writeHandler);
@@ -65,7 +66,7 @@ public class Gpx10FileLogger implements FileLogger {
         if (time <= 0) {
             time = System.currentTimeMillis();
         }
-        String dateTimeString = Utilities.GetIsoDateTime(new Date(time));
+        String dateTimeString = Strings.getIsoDateTime(new Date(time));
 
         Gpx10AnnotateHandler annotateHandler = new Gpx10AnnotateHandler(description, gpxFile, loc, dateTimeString);
         EXECUTOR.execute(annotateHandler);
@@ -224,7 +225,7 @@ class Gpx10WriteHandler implements Runnable {
                 raf.seek(startPosition);
                 raf.write(trackPoint.getBytes());
                 raf.close();
-                Utilities.AddFileToMediaDatabase(gpxFile, "text/plain");
+                Files.addToMediaDatabase(gpxFile, "text/plain");
                 LOG.debug("Finished writing to GPX10 file");
 
             } catch (Exception e) {
@@ -266,7 +267,7 @@ class Gpx10WriteHandler implements Runnable {
         if (loc.getExtras() != null) {
             String geoidheight = loc.getExtras().getString("GEOIDHEIGHT");
 
-            if (!Utilities.IsNullOrEmpty(geoidheight)) {
+            if (!Strings.isNullOrEmpty(geoidheight)) {
                 track.append("<geoidheight>").append(geoidheight).append("</geoidheight>");
             }
         }
@@ -284,23 +285,23 @@ class Gpx10WriteHandler implements Runnable {
             String ageofdgpsdata = loc.getExtras().getString("AGEOFDGPSDATA");
             String dgpsid = loc.getExtras().getString("DGPSID");
 
-            if (!Utilities.IsNullOrEmpty(hdop)) {
+            if (!Strings.isNullOrEmpty(hdop)) {
                 track.append("<hdop>").append(hdop).append("</hdop>");
             }
 
-            if (!Utilities.IsNullOrEmpty(vdop)) {
+            if (!Strings.isNullOrEmpty(vdop)) {
                 track.append("<vdop>").append(vdop).append("</vdop>");
             }
 
-            if (!Utilities.IsNullOrEmpty(pdop)) {
+            if (!Strings.isNullOrEmpty(pdop)) {
                 track.append("<pdop>").append(pdop).append("</pdop>");
             }
 
-            if (!Utilities.IsNullOrEmpty(ageofdgpsdata)) {
+            if (!Strings.isNullOrEmpty(ageofdgpsdata)) {
                 track.append("<ageofdgpsdata>").append(ageofdgpsdata).append("</ageofdgpsdata>");
             }
 
-            if (!Utilities.IsNullOrEmpty(dgpsid)) {
+            if (!Strings.isNullOrEmpty(dgpsid)) {
                 track.append("<dgpsid>").append(dgpsid).append("</dgpsid>");
             }
         }

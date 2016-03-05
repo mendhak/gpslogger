@@ -4,7 +4,6 @@ package com.mendhak.gpslogger.common.slf4j;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.AppenderBase;
-import com.mendhak.gpslogger.common.FifoDeque;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 

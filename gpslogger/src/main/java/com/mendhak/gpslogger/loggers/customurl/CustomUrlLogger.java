@@ -47,7 +47,7 @@ public class CustomUrlLogger implements FileLogger {
 
     @Override
     public void annotate(String description, Location loc) throws Exception {
-        JobManager jobManager = AppSettings.GetJobManager();
+        JobManager jobManager = AppSettings.getJobManager();
         jobManager.addJobInBackground(new CustomUrlJob(customLoggingUrl, loc, description, satellites, batteryLevel, androidId));
     }
 

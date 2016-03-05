@@ -1,4 +1,4 @@
-package com.mendhak.gpslogger;
+package com.mendhak.gpslogger.common;
 
 
 public  class PreferenceNames {

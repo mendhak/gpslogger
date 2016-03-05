@@ -15,7 +15,7 @@
  * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package com.mendhak.gpslogger.views;
+package com.mendhak.gpslogger.ui.fragments;
 
 import android.Manifest;
 import android.content.Intent;
@@ -30,7 +30,7 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -116,7 +116,7 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
 
                             String chosenFileName = preferenceHelper.getCustomFileName();
 
-                            if (!Utilities.IsNullOrEmpty(input.toString()) && !input.toString().equalsIgnoreCase(chosenFileName)) {
+                            if (!Strings.isNullOrEmpty(input.toString()) && !input.toString().equalsIgnoreCase(chosenFileName)) {
                                 preferenceHelper.setCustomFileName(input.toString());
                             }
                             toggleLogging();

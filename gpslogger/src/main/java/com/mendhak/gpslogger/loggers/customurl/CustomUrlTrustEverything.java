@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 //This class allows HttpsUrlConnection to trust self signed certificates
 public class CustomUrlTrustEverything {
 
-    public static SSLSocketFactory GetSSLContextSocketFactory() {
+    public static SSLSocketFactory getSSLContextSocketFactory() {
         TrustManager[] trustManager = new TrustManager[] {new CustomUrlTrustEverything.TrustEverythingTrustManager()};
 
         SSLContext sslContext;

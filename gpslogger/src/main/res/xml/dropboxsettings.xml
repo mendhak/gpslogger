@@ -2,7 +2,8 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.mendhak.gpslogger.views.component.CustomSwitchPreference android:key="dropbox_enabled"
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+        android:key="dropbox_enabled"
                                                                   android:title="@string/autosend_enabled"/>
 
     <Preference android:key="dropbox_resetauth" android:summary="@string/dropbox_authorize_description"

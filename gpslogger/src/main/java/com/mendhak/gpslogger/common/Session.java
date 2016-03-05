@@ -126,11 +126,11 @@ public class Session extends Application {
      */
     public static String getCurrentFileName() {
         PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
-        if (preferenceHelper.shouldCreateCustomFile() && !Utilities.IsNullOrEmpty(currentFileName)) {
-            return Utilities.GetFormattedCustomFileName(currentFileName);
+        if (preferenceHelper.shouldCreateCustomFile() && !Strings.isNullOrEmpty(currentFileName)) {
+            return Strings.getFormattedCustomFileName(currentFileName);
         } else {
-            if (!Utilities.IsNullOrEmpty(currentFileName) && preferenceHelper.shouldPrefixSerialToFileName() && !currentFileName.contains(Utilities.GetBuildSerial())) {
-                currentFileName = String.valueOf(Utilities.GetBuildSerial()) + "_" + currentFileName;
+            if (!Strings.isNullOrEmpty(currentFileName) && preferenceHelper.shouldPrefixSerialToFileName() && !currentFileName.contains(Strings.getBuildSerial())) {
+                currentFileName = String.valueOf(Strings.getBuildSerial()) + "_" + currentFileName;
             }
         }
         return currentFileName;
