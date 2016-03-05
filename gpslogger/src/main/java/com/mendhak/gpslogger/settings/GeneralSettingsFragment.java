@@ -20,11 +20,16 @@ package com.mendhak.gpslogger.settings;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import android.widget.Toast;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.Utilities;
+
+import java.io.File;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -48,11 +53,11 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
 
         addPreferencesFromResource(R.xml.pref_general);
 
-        Preference enableDisablePref = findPreference("enableDisableGps");
-        enableDisablePref.setOnPreferenceClickListener(this);
+        findPreference("enableDisableGps").setOnPreferenceClickListener(this);
 
-        Preference gpsvisualizerPref = findPreference("gpsvisualizer_link");
-        gpsvisualizerPref.setOnPreferenceClickListener(this);
+        findPreference("gpsvisualizer_link").setOnPreferenceClickListener(this);
+
+        findPreference("debuglogtoemail").setOnPreferenceClickListener(this);
 
         Preference aboutInfo = findPreference("about_version_info");
         try {
@@ -70,6 +75,34 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         if (preference.getKey().equals("enableDisableGps")) {
             startActivity(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"));
             return true;
+        }
+
+        if(preference.getKey().equals("debuglogtoemail")){
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "GPSLogger Debug Log");
+
+            StringBuilder diagnostics = new StringBuilder();
+            diagnostics.append("Android version: ").append(Build.VERSION.SDK_INT).append("\r\n");
+            diagnostics.append("OS version: ").append(System.getProperty("os.version")).append("\r\n");
+            diagnostics.append("Manufacturer: ").append(Build.MANUFACTURER).append("\r\n");
+            diagnostics.append("Model: ").append(Build.MODEL).append("\r\n");
+            diagnostics.append("Product: ").append(Build.PRODUCT).append("\r\n");
+            diagnostics.append("Brand: ").append(Build.BRAND).append("\r\n");
+
+
+            intent.putExtra(Intent.EXTRA_TEXT, diagnostics.toString());
+            File root = Utilities.GetDefaultStorageFolder(getActivity());
+            File file = new File(root, "/debuglog.txt");
+            if (file.exists() && file.canRead()) {
+                Uri uri = Uri.parse("file://" + file);
+                intent.putExtra(Intent.EXTRA_STREAM, uri);
+                startActivity(Intent.createChooser(intent, "Send debug log"));
+            }
+            else {
+                Toast.makeText(getActivity(), "debuglog.txt not found", Toast.LENGTH_LONG).show();
+            }
+
         }
 
         if(preference.getKey().equalsIgnoreCase("gpsvisualizer_link")){

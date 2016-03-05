@@ -36,6 +36,13 @@
         android:key="debugtofile"
         android:defaultValue="false"/>
 
+    <Preference
+        android:title="@string/debuglog_attach_to_email"
+        android:summary="@string/debuglog_attach_to_email_summary"
+        android:key="debuglogtoemail"
+        android:enabled="true"/>
+
+
 
     <Preference android:key="about_version_info"></Preference>
 
