@@ -1051,12 +1051,12 @@ public class GpsLoggingService extends Service  {
 
             //Save the current settings to a file (overwrite)
             File f = new File(Utilities.GetDefaultStorageFolder(GpsLoggingService.this), preferenceHelper.getCurrentProfileName()+".properties");
-            preferenceHelper.SavePropertiesFromPreferences(f);
+            preferenceHelper.savePropertiesFromPreferences(f);
 
             //Read from a possibly existing file and load those preferences in
             File newProfile = new File(Utilities.GetDefaultStorageFolder(GpsLoggingService.this), switchToProfileEvent.newProfileName+".properties");
             if(newProfile.exists()){
-                preferenceHelper.SetPreferenceFromPropertiesFile(newProfile);
+                preferenceHelper.setPreferenceFromPropertiesFile(newProfile);
             }
 
             //Switch current profile name

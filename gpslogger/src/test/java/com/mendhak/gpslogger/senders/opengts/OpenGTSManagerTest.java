@@ -46,4 +46,19 @@ public class OpenGTSManagerTest {
     }
 
 
+    @Test
+    public void IsAutoSendAvailable_WhenPortIsNotNumberic_False(){
+        PreferenceHelper pm = mock(PreferenceHelper.class);
+
+        OpenGTSManager manager = new OpenGTSManager(pm);
+        assertThat("Default state is unavailable", manager.isAvailable(), is(false));
+
+        when(pm.getOpenGTSServer()).thenReturn("XXXXXXXXXXXX");
+        when(pm.getOpenGTSServerPort()).thenReturn("aaaaaaaaaaaaa");
+        when(pm.getOpenGTSServerCommunicationMethod()).thenReturn("UDPTLSSSLSSH");
+        when(pm.getOpenGTSDeviceId()).thenReturn("99");
+
+        assertThat("When port is non numeric, validation fails", manager.isAvailable(), is(false));
+    }
+
 }

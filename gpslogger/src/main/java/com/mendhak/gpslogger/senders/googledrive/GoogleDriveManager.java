@@ -59,7 +59,6 @@ public class GoogleDriveManager extends FileSender {
     }
 
 
-
     /**
      * Returns whether the app is authorized to perform Google API operations
      *
@@ -128,14 +127,12 @@ public class GoogleDriveManager extends FileSender {
         return true;
     }
 
-    public String GetToken() throws GoogleAuthException, IOException {
-        String token = GoogleAuthUtil.getTokenWithNotification(AppSettings.getInstance(), preferenceHelper.getGoogleDriveAccountName(), GetOauth2Scope(), new Bundle());
+    public String getToken() throws GoogleAuthException, IOException {
+        String token = GoogleAuthUtil.getTokenWithNotification(AppSettings.getInstance(), preferenceHelper.getGoogleDriveAccountName(), getOauth2Scope(), new Bundle());
         tracer.debug("GDocs token: " + token);
         preferenceHelper.setGoogleDriveAuthToken(token);
         return token;
     }
 
-    private String GetOauth2Scope() {
-        return "oauth2:https://www.googleapis.com/auth/drive.file";
-    }
+
 }

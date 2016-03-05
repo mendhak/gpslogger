@@ -81,7 +81,7 @@ public class FtpManager extends FileSender {
     @Override
     public void uploadFile(List<File> files) {
         if (!validSettings(preferenceHelper.getFtpServerName(), preferenceHelper.getFtpUsername(), preferenceHelper.getFtpPassword(),
-                preferenceHelper.getFtpPort(), preferenceHelper.FtpUseFtps(), preferenceHelper.getFtpProtocol(), preferenceHelper.FtpImplicit())) {
+                preferenceHelper.getFtpPort(), preferenceHelper.shouldFtpUseFtps(), preferenceHelper.getFtpProtocol(), preferenceHelper.isFtpImplicit())) {
             EventBus.getDefault().post(new UploadEvents.Ftp().failed());
         }
 
@@ -93,8 +93,8 @@ public class FtpManager extends FileSender {
     @Override
     public boolean isAvailable() {
         return validSettings(preferenceHelper.getFtpServerName(), preferenceHelper.getFtpUsername(),
-                preferenceHelper.getFtpPassword(), preferenceHelper.getFtpPort(), preferenceHelper.FtpUseFtps(),
-                preferenceHelper.getFtpProtocol(), preferenceHelper.FtpImplicit());
+                preferenceHelper.getFtpPassword(), preferenceHelper.getFtpPort(), preferenceHelper.shouldFtpUseFtps(),
+                preferenceHelper.getFtpProtocol(), preferenceHelper.isFtpImplicit());
     }
 
     @Override
@@ -108,7 +108,7 @@ public class FtpManager extends FileSender {
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, FtpJob.getJobTag(f));
         jobManager.addJobInBackground(new FtpJob(preferenceHelper.getFtpServerName(), preferenceHelper.getFtpPort(),
                 preferenceHelper.getFtpUsername(), preferenceHelper.getFtpPassword(), preferenceHelper.getFtpDirectory(),
-                preferenceHelper.FtpUseFtps(), preferenceHelper.getFtpProtocol(), preferenceHelper.FtpImplicit(),
+                preferenceHelper.shouldFtpUseFtps(), preferenceHelper.getFtpProtocol(), preferenceHelper.isFtpImplicit(),
                 f, f.getName()));
     }
 

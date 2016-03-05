@@ -249,7 +249,7 @@ public class GpsMainActivity extends AppCompatActivity
         }
 
         try {
-            preferenceHelper.SetPreferenceFromPropertiesFile(file);
+            preferenceHelper.setPreferenceFromPropertiesFile(file);
         } catch (Exception e) {
             tracer.error("Could not load preset properties", e);
         }

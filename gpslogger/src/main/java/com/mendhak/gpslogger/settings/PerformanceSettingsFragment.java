@@ -32,7 +32,7 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
         if(preference.getKey().equalsIgnoreCase("listeners")){
 
             ArrayList<Integer> chosenIndices = new ArrayList<>();
-            final List<String> availableListeners = preferenceHelper.GetAvailableListeners();
+            final List<String> availableListeners = preferenceHelper.getAvailableListeners();
 
             for(String chosenListener : preferenceHelper.getChosenListeners()){
                 chosenIndices.add(availableListeners.indexOf(chosenListener));
