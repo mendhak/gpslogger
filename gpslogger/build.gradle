@@ -9,7 +9,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
         classpath 'com.canelmas.let:let-plugin:0.1.9'
-        classpath "com.mendhak.gradlecrowdin:crowdin-plugin:0.0.7"
+        classpath "com.mendhak.gradlecrowdin:crowdin-plugin:0.0.8"
         classpath 'org.jacoco:org.jacoco.core:0.7.4.201502262128'
     }
 }
