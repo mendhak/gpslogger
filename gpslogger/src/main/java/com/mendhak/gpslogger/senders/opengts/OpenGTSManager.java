@@ -68,6 +68,7 @@ public class OpenGTSManager extends FileSender {
     public boolean isAvailable() {
         return !Utilities.IsNullOrEmpty(preferenceHelper.getOpenGTSServer())
                 && !Utilities.IsNullOrEmpty(preferenceHelper.getOpenGTSServerPort())
+                && Utilities.parseIntWithDefault(preferenceHelper.getOpenGTSServerPort(), 0) != 0
                 && !Utilities.IsNullOrEmpty(preferenceHelper.getOpenGTSServerCommunicationMethod())
                 && !Utilities.IsNullOrEmpty(preferenceHelper.getOpenGTSDeviceId());
     }
