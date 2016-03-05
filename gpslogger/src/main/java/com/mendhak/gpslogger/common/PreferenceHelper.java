@@ -202,7 +202,7 @@ public class PreferenceHelper {
      * Whether to use FTPS
      */
     @ProfilePreference(name= PreferenceNames.FTP_USE_FTPS)
-    public boolean FtpUseFtps() {
+    public boolean shouldFtpUseFtps() {
         return prefs.getBoolean(PreferenceNames.FTP_USE_FTPS, false);
     }
 
@@ -220,7 +220,7 @@ public class PreferenceHelper {
      * Whether to use FTP Implicit mode for auto send
      */
     @ProfilePreference(name= PreferenceNames.FTP_IMPLICIT)
-    public boolean FtpImplicit() {
+    public boolean isFtpImplicit() {
         return prefs.getBoolean(PreferenceNames.FTP_IMPLICIT, false);
     }
 
@@ -534,7 +534,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.LOCATION_LISTENERS)
     public Set<String> getChosenListeners() {
-        Set<String> defaultListeners = new HashSet<>(GetDefaultListeners());
+        Set<String> defaultListeners = new HashSet<>(getDefaultListeners());
         return prefs.getStringSet(PreferenceNames.LOCATION_LISTENERS, defaultListeners);
     }
 
@@ -550,14 +550,14 @@ public class PreferenceHelper {
     }
 
     /**
-     * Sets the list of location providers that the app will listen to given their array positions in {@link #GetAvailableListeners()}.
+     * Sets the list of location providers that the app will listen to given their array positions in {@link #getAvailableListeners()}.
      */
     public void setChosenListeners(Integer... listenerIndices) {
         List<Integer> selectedItems = Arrays.asList(listenerIndices);
         final Set<String> chosenListeners = new HashSet<>();
 
         for (Integer selectedItem : selectedItems) {
-            chosenListeners.add(GetAvailableListeners().get(selectedItem));
+            chosenListeners.add(getAvailableListeners().get(selectedItem));
         }
 
         if (chosenListeners.size() > 0) {
@@ -570,7 +570,7 @@ public class PreferenceHelper {
     /**
      * Default set of listeners
      */
-    public List<String> GetDefaultListeners(){
+    public List<String> getDefaultListeners(){
         List<String> listeners = new ArrayList<>();
         listeners.add(LocationManager.GPS_PROVIDER);
         listeners.add(LocationManager.NETWORK_PROVIDER);
@@ -582,7 +582,7 @@ public class PreferenceHelper {
      * All the possible listeners
      * @return
      */
-    public List<String> GetAvailableListeners() {
+    public List<String> getAvailableListeners() {
 
         List<String> listeners = new ArrayList<>();
         listeners.add(LocationManager.GPS_PROVIDER);
@@ -955,7 +955,7 @@ public class PreferenceHelper {
 
 
 
-    public void SavePropertiesFromPreferences(File f) throws IOException {
+    public void savePropertiesFromPreferences(File f) throws IOException {
 
         Properties props = new Properties();
 
@@ -1008,7 +1008,7 @@ public class PreferenceHelper {
      * Sets preferences in a generic manner from a .properties file
      */
 
-    public void SetPreferenceFromPropertiesFile(File file) throws IOException {
+    public void setPreferenceFromPropertiesFile(File file) throws IOException {
         Properties props = new Properties();
         InputStreamReader reader = new InputStreamReader(new FileInputStream(file));
         props.load(reader);
@@ -1022,7 +1022,7 @@ public class PreferenceHelper {
             if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
                 editor.putBoolean(key.toString(), Boolean.parseBoolean(value));
             } else if (key.equals("listeners")) {
-                List<String> availableListeners = GetAvailableListeners();
+                List<String> availableListeners = getAvailableListeners();
                 Set<String> chosenListeners = new HashSet<>();
                 String[] csvListeners = value.split(",");
                 for (String l : csvListeners) {

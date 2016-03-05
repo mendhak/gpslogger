@@ -43,7 +43,7 @@ public class GoogleDriveJob extends Job {
     public void onRun() throws Throwable {
 
         GoogleDriveManager manager = new GoogleDriveManager(PreferenceHelper.getInstance());
-        token = manager.GetToken();
+        token = manager.getToken();
 
         FileInputStream fis = new FileInputStream(gpxFile);
         String fileName = gpxFile.getName();

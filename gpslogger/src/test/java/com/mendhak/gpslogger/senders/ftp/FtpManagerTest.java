@@ -23,9 +23,9 @@ public class FtpManagerTest {
         when(pm.getFtpUsername()).thenReturn("aaa");
         when(pm.getFtpPassword()).thenReturn("BBBB");
         when(pm.getFtpPort()).thenReturn(9001);
-        when(pm.FtpUseFtps()).thenReturn(true);
+        when(pm.shouldFtpUseFtps()).thenReturn(true);
         when(pm.getFtpProtocol()).thenReturn("SSL");
-        when(pm.FtpImplicit()).thenReturn(false);
+        when(pm.isFtpImplicit()).thenReturn(false);
 
         FtpManager aem = new FtpManager(pm);
         assertThat("ALL FTP values indicate valid", aem.isAvailable(), is(true));
@@ -51,7 +51,7 @@ public class FtpManagerTest {
         PreferenceHelper pm = mock(PreferenceHelper.class);
         when(pm.getFtpServerName()).thenReturn("example.com");
         when(pm.getFtpPort()).thenReturn(9001);
-        when(pm.FtpUseFtps()).thenReturn(true);
+        when(pm.shouldFtpUseFtps()).thenReturn(true);
 
         FtpManager aem = new FtpManager(pm);
 
@@ -69,9 +69,9 @@ public class FtpManagerTest {
         when(pm.getFtpUsername()).thenReturn("aaa");
         when(pm.getFtpPassword()).thenReturn("BBBB");
         when(pm.getFtpPort()).thenReturn(9001);
-        when(pm.FtpUseFtps()).thenReturn(true);
+        when(pm.shouldFtpUseFtps()).thenReturn(true);
         when(pm.getFtpProtocol()).thenReturn("SSL");
-        when(pm.FtpImplicit()).thenReturn(false);
+        when(pm.isFtpImplicit()).thenReturn(false);
 
         FtpManager aem = new FtpManager(pm);
 
@@ -88,9 +88,9 @@ public class FtpManagerTest {
         when(pm.getFtpUsername()).thenReturn("aaa");
         when(pm.getFtpPassword()).thenReturn("BBBB");
         when(pm.getFtpPort()).thenReturn(9001);
-        when(pm.FtpUseFtps()).thenReturn(true);
+        when(pm.shouldFtpUseFtps()).thenReturn(true);
         when(pm.getFtpProtocol()).thenReturn("SSL");
-        when(pm.FtpImplicit()).thenReturn(false);
+        when(pm.isFtpImplicit()).thenReturn(false);
 
         when(pm.isFtpAutoSendEnabled()).thenReturn(true);
 
