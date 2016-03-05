@@ -15,7 +15,7 @@
 *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.mendhak.gpslogger.senders.opengts;
+package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.os.Bundle;
 import android.preference.Preference;

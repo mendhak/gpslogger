@@ -15,7 +15,7 @@
 *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.mendhak.gpslogger.senders.email;
+package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.os.Bundle;
 import android.preference.Preference;
@@ -29,6 +29,7 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
+import com.mendhak.gpslogger.senders.email.AutoEmailManager;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;

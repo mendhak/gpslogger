@@ -17,7 +17,7 @@
 
 //https://www.dropbox.com/developers/start/setup#android
 
-package com.mendhak.gpslogger.senders.dropbox;
+package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +26,7 @@ import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.senders.dropbox.DropBoxManager;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import org.slf4j.Logger;

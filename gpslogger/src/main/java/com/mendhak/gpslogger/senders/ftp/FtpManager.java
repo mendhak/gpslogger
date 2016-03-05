@@ -45,7 +45,7 @@ public class FtpManager extends FileSender {
         this.preferenceHelper = preferenceHelper;
     }
 
-    void testFtp(String servername, String username, String password, String directory, int port, boolean useFtps, String protocol, boolean implicit) {
+    public void testFtp(String servername, String username, String password, String directory, int port, boolean useFtps, String protocol, boolean implicit) {
 
         File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
@@ -99,7 +99,7 @@ public class FtpManager extends FileSender {
     }
 
     @Override
-    protected boolean hasUserAllowedAutoSending() {
+    public boolean hasUserAllowedAutoSending() {
         return preferenceHelper.isFtpAutoSendEnabled();
     }
 

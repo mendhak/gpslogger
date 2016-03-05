@@ -15,6 +15,7 @@ import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
+import com.mendhak.gpslogger.ui.fragments.settings.OwnCloudManager;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 

@@ -15,7 +15,7 @@
 *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.mendhak.gpslogger.senders.ftp;
+package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.Manifest;
 import android.os.Bundle;
@@ -31,6 +31,7 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
+import com.mendhak.gpslogger.senders.ftp.FtpManager;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;

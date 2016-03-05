@@ -15,7 +15,7 @@
  * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package com.mendhak.gpslogger.settings;
+package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -42,7 +42,7 @@ import java.io.File;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
-@SuppressWarnings("deprecation")
+
 public class GeneralSettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
     int aboutClickCounter = 0;

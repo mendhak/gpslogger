@@ -64,7 +64,7 @@ public class GoogleDriveManager extends FileSender {
      * Returns whether the app is authorized to perform Google API operations
      *
      */
-    protected boolean isLinked() {
+    public boolean isLinked() {
         return !Strings.isNullOrEmpty(preferenceHelper.getGoogleDriveAccountName()) && !Strings.isNullOrEmpty(preferenceHelper.getGoogleDriveAuthToken());
     }
 
@@ -82,7 +82,7 @@ public class GoogleDriveManager extends FileSender {
     }
 
     @Override
-    protected boolean hasUserAllowedAutoSending() {
+    public boolean hasUserAllowedAutoSending() {
         return preferenceHelper.isGDocsAutoSendEnabled();
     }
 

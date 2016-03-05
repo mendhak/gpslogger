@@ -30,6 +30,7 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
+import com.mendhak.gpslogger.ui.fragments.settings.DropboxAuthorizationFragment;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import org.slf4j.Logger;
@@ -57,7 +58,7 @@ public class DropBoxManager extends FileSender {
      *
      * @return True/False
      */
-    protected boolean isLinked() {
+    public boolean isLinked() {
         return dropboxApi.getSession().isLinked();
     }
 
@@ -162,7 +163,7 @@ public class DropBoxManager extends FileSender {
 
 
     @Override
-    protected boolean hasUserAllowedAutoSending() {
+    public boolean hasUserAllowedAutoSending() {
         return  preferenceHelper.isDropboxAutoSendEnabled();
     }
 

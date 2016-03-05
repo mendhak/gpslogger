@@ -24,18 +24,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
-import com.mendhak.gpslogger.senders.dropbox.DropboxAuthorizationFragment;
-import com.mendhak.gpslogger.senders.email.AutoEmailFragment;
-import com.mendhak.gpslogger.senders.ftp.FtpFragment;
-import com.mendhak.gpslogger.senders.googledrive.GoogleDriveSettingsFragment;
-import com.mendhak.gpslogger.senders.opengts.OpenGTSFragment;
-import com.mendhak.gpslogger.senders.osm.OSMAuthorizationFragment;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudSettingsFragment;
-import com.mendhak.gpslogger.settings.GeneralSettingsFragment;
-import com.mendhak.gpslogger.settings.LoggingSettingsFragment;
-import com.mendhak.gpslogger.settings.PerformanceSettingsFragment;
-import com.mendhak.gpslogger.settings.UploadSettingsFragment;
 import com.mendhak.gpslogger.ui.Dialogs;
+import com.mendhak.gpslogger.ui.fragments.settings.*;
 import org.slf4j.Logger;
 
 

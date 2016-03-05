@@ -51,7 +51,7 @@ public class OpenStreetMapManager extends FileSender {
         return new CommonsHttpOAuthProvider(OSM_REQUESTTOKEN_URL, OSM_ACCESSTOKEN_URL, OSM_AUTHORIZE_URL);
     }
 
-    protected boolean isOsmAuthorized() {
+    public boolean isOsmAuthorized() {
         String oAuthAccessToken = preferenceHelper.getOSMAccessToken();
         return (oAuthAccessToken != null && oAuthAccessToken.length() > 0);
     }
@@ -97,7 +97,7 @@ public class OpenStreetMapManager extends FileSender {
     }
 
     @Override
-    protected boolean hasUserAllowedAutoSending() {
+    public boolean hasUserAllowedAutoSending() {
         return preferenceHelper.isOsmAutoSendEnabled();
     }
 

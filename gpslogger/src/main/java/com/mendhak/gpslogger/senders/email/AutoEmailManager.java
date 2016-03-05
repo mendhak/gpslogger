@@ -65,12 +65,12 @@ public class AutoEmailManager extends FileSender {
     }
 
     @Override
-    protected boolean hasUserAllowedAutoSending() {
+    public boolean hasUserAllowedAutoSending() {
         return preferenceHelper.isEmailAutoSendEnabled();
     }
 
 
-    void sendTestEmail(String smtpServer, String smtpPort,
+    public void sendTestEmail(String smtpServer, String smtpPort,
                        String smtpUsername, String smtpPassword, boolean smtpUseSsl,
                        String emailTarget, String fromAddress) {
 
@@ -89,7 +89,7 @@ public class AutoEmailManager extends FileSender {
         return true;
     }
 
-    protected boolean isValid( String server, String port, String username, String password, String target) {
+    public boolean isValid(String server, String port, String username, String password, String target) {
                 return !Strings.isNullOrEmpty(server) && !Strings.isNullOrEmpty(port) && !Strings.isNullOrEmpty(username) && !Strings.isNullOrEmpty(target);
 
     }

@@ -1,4 +1,4 @@
-package com.mendhak.gpslogger.settings;
+package com.mendhak.gpslogger.ui.fragments.settings;
 
 
 import android.os.Bundle;

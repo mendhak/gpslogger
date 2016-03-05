@@ -1,4 +1,4 @@
-package com.mendhak.gpslogger.senders.owncloud;
+package com.mendhak.gpslogger.ui.fragments.settings;
 
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -7,6 +7,8 @@ import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.FileSender;
+import com.mendhak.gpslogger.senders.owncloud.OwnCloudJob;
+import com.mendhak.gpslogger.senders.owncloud.OwnCloudSettingsFragment;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;
@@ -26,7 +28,7 @@ public class OwnCloudManager extends FileSender
         this.preferenceHelper = preferenceHelper;
     }
 
-    void testOwnCloud(String servername, String username, String password, String directory) {
+    public void testOwnCloud(String servername, String username, String password, String directory) {
 
         File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
@@ -88,7 +90,7 @@ public class OwnCloudManager extends FileSender
     }
 
     @Override
-    protected boolean hasUserAllowedAutoSending() {
+    public boolean hasUserAllowedAutoSending() {
         return preferenceHelper.isOwnCloudAutoSendEnabled();
     }
 

@@ -75,7 +75,7 @@ public class OpenGTSManager extends FileSender {
     }
 
     @Override
-    protected boolean hasUserAllowedAutoSending() {
+    public boolean hasUserAllowedAutoSending() {
         return preferenceHelper.isOpenGtsAutoSendEnabled();
     }
 

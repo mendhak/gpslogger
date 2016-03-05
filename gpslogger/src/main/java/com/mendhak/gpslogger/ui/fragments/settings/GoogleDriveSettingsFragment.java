@@ -15,7 +15,7 @@
 *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.mendhak.gpslogger.senders.googledrive;
+package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.Manifest;
 import android.accounts.AccountManager;
@@ -40,6 +40,7 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
+import com.mendhak.gpslogger.senders.googledrive.GoogleDriveManager;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import de.greenrobot.event.EventBus;

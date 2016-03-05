@@ -35,7 +35,7 @@ public abstract class FileSender implements FilenameFilter {
     /**
      * Whether the user has enabled this preference for automatic sending
      */
-    protected abstract boolean hasUserAllowedAutoSending();
+    public abstract boolean hasUserAllowedAutoSending();
 
     /**
      * Whether this sender is available and allowed to automatically send files.

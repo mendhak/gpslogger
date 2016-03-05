@@ -15,7 +15,7 @@
  * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package com.mendhak.gpslogger.ui.fragments;
+package com.mendhak.gpslogger.ui.fragments.display;
 
 import android.content.Context;
 import android.graphics.Color;

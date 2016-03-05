@@ -15,7 +15,7 @@
 *    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.mendhak.gpslogger.senders.osm;
+package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.Manifest;
 import android.content.Intent;
@@ -28,6 +28,7 @@ import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.senders.osm.OpenStreetMapManager;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import oauth.signpost.OAuth;

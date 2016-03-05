@@ -35,7 +35,7 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
     File localFile;
     String remoteFileName;
 
-    protected OwnCloudJob(String servername, String username, String password, String directory,
+    public OwnCloudJob(String servername, String username, String password, String directory,
                          File localFile, String remoteFileName)
     {
         super(new Params(1).requireNetwork().persist().addTags(getJobTag(localFile)));

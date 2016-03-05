@@ -26,7 +26,7 @@ import com.mendhak.gpslogger.senders.ftp.FtpManager;
 import com.mendhak.gpslogger.senders.googledrive.GoogleDriveManager;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSManager;
 import com.mendhak.gpslogger.senders.osm.OpenStreetMapManager;
-import com.mendhak.gpslogger.senders.owncloud.OwnCloudManager;
+import com.mendhak.gpslogger.ui.fragments.settings.OwnCloudManager;
 import org.slf4j.Logger;
 
 import java.io.File;
