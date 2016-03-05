@@ -1,4 +1,4 @@
-package com.mendhak.gpslogger.ui.fragments.settings;
+package com.mendhak.gpslogger.senders.owncloud;
 
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -7,8 +7,7 @@ import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.FileSender;
-import com.mendhak.gpslogger.senders.owncloud.OwnCloudJob;
-import com.mendhak.gpslogger.senders.owncloud.OwnCloudSettingsFragment;
+import com.mendhak.gpslogger.ui.fragments.settings.OwnCloudSettingsFragment;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;

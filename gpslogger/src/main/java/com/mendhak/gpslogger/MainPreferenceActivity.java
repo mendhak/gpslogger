@@ -24,7 +24,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
-import com.mendhak.gpslogger.senders.owncloud.OwnCloudSettingsFragment;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.fragments.settings.*;
 import org.slf4j.Logger;

@@ -56,6 +56,11 @@ public final class MockLocations {
         return this;
     }
 
+    public MockLocations withTime(long date){
+        when(loc.getTime()).thenReturn(date);
+        return this;
+    }
+
     public MockLocations putExtra(String k, String v) {
 
 //            Bundle b = new Bundle();
