@@ -303,6 +303,7 @@ public class GpsLoggingService extends Service  {
     /**
      * Sets up the auto email timers based on user preferences.
      */
+    @TargetApi(23)
     public void setupAutoSendTimers() {
         LOG.debug("Setting up autosend timers. Auto Send Enabled - " + String.valueOf(preferenceHelper.isAutoSendEnabled())
                 + ", Auto Send Delay - " + String.valueOf(Session.getAutoSendDelay()));
@@ -310,12 +311,17 @@ public class GpsLoggingService extends Service  {
         if (preferenceHelper.isAutoSendEnabled() && Session.getAutoSendDelay() > 0) {
             long triggerTime = System.currentTimeMillis() + (long) (Session.getAutoSendDelay() * 60 * 1000);
 
-            alarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
+            alarmIntent = new Intent(this, AlarmReceiver.class);
             cancelAlarm();
 
             PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-            am.set(AlarmManager.RTC_WAKEUP, triggerTime, sender);
+            if(Systems.isDozing(this)) {
+                am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTime, sender);
+            }
+            else {
+                am.set(AlarmManager.RTC_WAKEUP, triggerTime, sender);
+            }
             LOG.debug("Autosend alarm has been set");
 
         } else {
