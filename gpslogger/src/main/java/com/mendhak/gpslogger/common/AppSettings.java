@@ -30,7 +30,7 @@ public class AppSettings extends Application {
 
     private static JobManager jobManager;
     private static AppSettings instance;
-    private static Logger tracer;
+    private static Logger LOG;
 
 
     @Override
@@ -39,12 +39,12 @@ public class AppSettings extends Application {
 
         //Configure the slf4j logger
         Logs.configure();
-         tracer = Logs.of(this.getClass());
-        tracer.debug("Log4J configured");
+        LOG = Logs.of(this.getClass());
+        LOG.debug("Log4J configured");
 
         //Configure the Event Bus
         EventBus.builder().logNoSubscriberMessages(false).sendNoSubscriberEvent(false).installDefaultEventBus();
-        tracer.debug("EventBus configured");
+        LOG.debug("EventBus configured");
 
         //Configure the Job Queue
         Configuration config = new Configuration.Builder(getInstance())
@@ -54,7 +54,7 @@ public class AppSettings extends Application {
                 .customLogger(jobQueueLogger)
                 .build();
         jobManager = new JobManager(this, config);
-        tracer.debug("Job Queue configured");
+        LOG.debug("Job Queue configured");
     }
 
     /**
@@ -86,18 +86,18 @@ public class AppSettings extends Application {
         @Override
         public void d(String text, Object... args) {
 
-            tracer.debug(text);
+            LOG.debug(text);
         }
 
         @Override
         public void e(Throwable t, String text, Object... args) {
-            tracer.error(text, t);
+            LOG.error(text, t);
         }
 
         @Override
         public void e(String text, Object... args) {
 
-            tracer.error(text);
+            LOG.error(text);
         }
     };
 

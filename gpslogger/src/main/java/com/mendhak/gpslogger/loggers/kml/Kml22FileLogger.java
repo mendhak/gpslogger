@@ -20,8 +20,9 @@ package com.mendhak.gpslogger.loggers.kml;
 import android.location.Location;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.FileLogger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.*;
 import java.util.Date;
@@ -61,7 +62,7 @@ public class Kml22FileLogger implements FileLogger {
 }
 
 class Kml22AnnotateHandler implements Runnable {
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Kml22AnnotateHandler.class.getSimpleName());
+    private static final Logger LOG = Logs.of(Kml22AnnotateHandler.class);
     File kmlFile;
     String description;
     Location loc;
@@ -110,7 +111,7 @@ class Kml22AnnotateHandler implements Runnable {
 
             }
         } catch (Exception e) {
-            tracer.error("Kml22FileLogger.annotate", e);
+            LOG.error("Kml22FileLogger.annotate", e);
         }
     }
 
@@ -132,7 +133,7 @@ class Kml22AnnotateHandler implements Runnable {
 
 class Kml22WriteHandler implements Runnable {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Kml22WriteHandler.class.getSimpleName());
+    private static final Logger LOG = Logs.of(Kml22WriteHandler.class);
     boolean addNewTrackSegment;
     File kmlFile;
     Location loc;
@@ -208,11 +209,11 @@ class Kml22WriteHandler implements Runnable {
                 raf.write(coords.toString().getBytes());
                 raf.close();
                 Utilities.AddFileToMediaDatabase(kmlFile, "text/xml");
-                tracer.debug("Finished writing to KML22 File");
+                LOG.debug("Finished writing to KML22 File");
             }
 
         } catch (Exception e) {
-            tracer.error("Kml22FileLogger.write", e);
+            LOG.error("Kml22FileLogger.write", e);
         }
     }
 }

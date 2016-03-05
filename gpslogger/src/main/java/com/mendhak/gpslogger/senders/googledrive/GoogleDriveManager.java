@@ -25,11 +25,12 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,7 +39,7 @@ import java.util.List;
 
 public class GoogleDriveManager extends FileSender {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GoogleDriveManager.class.getSimpleName());
+    private static final Logger LOG = Logs.of(GoogleDriveManager.class);
     final PreferenceHelper preferenceHelper;
 
     /*
@@ -100,7 +101,7 @@ public class GoogleDriveManager extends FileSender {
             File gpsDir = new File(preferenceHelper.getGpsLoggerFolder());
             File gpxFile = new File(gpsDir, fileName);
 
-            tracer.debug("Submitting Google Docs job");
+            LOG.debug("Submitting Google Docs job");
 
             String uploadFolderName = googleDriveFolderName;
 
@@ -118,7 +119,7 @@ public class GoogleDriveManager extends FileSender {
 
         } catch (Exception e) {
             EventBus.getDefault().post(new UploadEvents.GDocs().failed("Failed to upload file", e));
-            tracer.error("GoogleDriveManager.uploadFile", e);
+            LOG.error("GoogleDriveManager.uploadFile", e);
         }
     }
 
@@ -129,7 +130,7 @@ public class GoogleDriveManager extends FileSender {
 
     public String getToken() throws GoogleAuthException, IOException {
         String token = GoogleAuthUtil.getTokenWithNotification(AppSettings.getInstance(), preferenceHelper.getGoogleDriveAccountName(), getOauth2Scope(), new Bundle());
-        tracer.debug("GDocs token: " + token);
+        LOG.debug("GDocs token: " + token);
         preferenceHelper.setGoogleDriveAuthToken(token);
         return token;
     }

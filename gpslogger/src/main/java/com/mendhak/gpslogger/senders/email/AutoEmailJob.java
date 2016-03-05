@@ -1,17 +1,18 @@
 package com.mendhak.gpslogger.senders.email;
 
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.File;
 
 
 public class AutoEmailJob extends Job {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AutoEmailJob.class.getSimpleName());
+    private static final Logger LOG = Logs.of(AutoEmailJob.class);
     String smtpServer;
     String smtpPort;
     String smtpUsername;
@@ -75,7 +76,7 @@ public class AutoEmailJob extends Job {
 
         m.setDebuggable(true);
 
-        tracer.info("Sending email...");
+        LOG.info("Sending email...");
         if (m.send()) {
             EventBus.getDefault().post(new UploadEvents.AutoEmail().succeeded());
         } else {
@@ -90,7 +91,7 @@ public class AutoEmailJob extends Job {
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
 
-        tracer.error("Could not send email", throwable);
+        LOG.error("Could not send email", throwable);
         EventBus.getDefault().post(new UploadEvents.AutoEmail().failed(m.getSmtpMessages(), throwable));
 
         return false;

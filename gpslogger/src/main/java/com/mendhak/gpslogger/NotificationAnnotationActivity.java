@@ -27,21 +27,20 @@ import android.view.KeyEvent;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.common.events.CommandEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 public class NotificationAnnotationActivity extends AppCompatActivity {
 
     //Called from the 'annotate' button in the Notification
     //This in turn captures user input and sends the input to the GPS Logging Service
 
-    private org.slf4j.Logger tracer;
+    private static final Logger LOG = Logs.of(NotificationAnnotationActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        tracer = LoggerFactory.getLogger(NotificationAnnotationActivity.class.getSimpleName());
 
         new MaterialDialog.Builder(this)
                 .title(R.string.add_description)
@@ -59,7 +58,7 @@ public class NotificationAnnotationActivity extends AppCompatActivity {
                     @Override
                     public void onInput(MaterialDialog materialDialog, CharSequence input) {
 
-                        tracer.info("Annotation from notification: " + input.toString());
+                        LOG.info("Annotation from notification: " + input.toString());
                         EventBus.getDefault().postSticky(new CommandEvents.Annotate(input.toString()));
                         Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
                         getApplicationContext().startService(serviceIntent);

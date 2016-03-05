@@ -28,15 +28,16 @@ import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 public class OSMAuthorizationFragment extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OSMAuthorizationFragment.class.getSimpleName());
+    private static final Logger LOG = Logs.of(OSMAuthorizationFragment.class);
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     private OAuthProvider provider;
     private OAuthConsumer consumer;
@@ -79,7 +80,7 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
                 preferenceHelper.setOSMAccessTokenSecret(osmAccessTokenSecret);
 
             } catch (Exception e) {
-                tracer.error("OSM authorization error", e);
+                LOG.error("OSM authorization error", e);
                 Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error), getActivity());
             }
         }
@@ -144,7 +145,7 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
                 startActivity(intent);
 
             } catch (Exception e) {
-                tracer.error("onClick", e);
+                LOG.error("onClick", e);
                 Utilities.MsgBox(getString(R.string.sorry), getString(R.string.osm_auth_error),
                         getActivity());
             }

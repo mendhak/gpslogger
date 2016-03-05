@@ -7,10 +7,11 @@ import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,7 +20,7 @@ import java.io.FileInputStream;
 public class DropboxJob extends Job {
 
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropboxJob.class.getSimpleName());
+    private static final Logger LOG = Logs.of(DropboxJob.class);
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     String fileName;
     DropboxAPI<AndroidAuthSession> dropboxApi;
@@ -47,7 +48,7 @@ public class DropboxJob extends Job {
         AndroidAuthSession session = manager.getSession();
         dropboxApi = new DropboxAPI<>(session);
         DropboxAPI.Entry upEntry = dropboxApi.putFileOverwrite(gpxFile.getName(), fis, gpxFile.length(), null);
-        tracer.info("DropBox upload complete. Rev: " + upEntry.rev);
+        LOG.info("DropBox upload complete. Rev: " + upEntry.rev);
         fis.close();
         EventBus.getDefault().post(new UploadEvents.Dropbox().succeeded());
 
@@ -61,7 +62,7 @@ public class DropboxJob extends Job {
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
         EventBus.getDefault().post(new UploadEvents.Dropbox().failed("Could not upload to Dropbox", throwable));
-        tracer.error("Could not upload to Dropbox", throwable);
+        LOG.error("Could not upload to Dropbox", throwable);
         return false;
     }
 

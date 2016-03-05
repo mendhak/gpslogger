@@ -39,9 +39,10 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -54,7 +55,7 @@ import java.util.*;
 public class Utilities {
 
     private static MaterialDialog pd;
-    private static org.slf4j.Logger tracer = LoggerFactory.getLogger(Utilities.class.getSimpleName());
+    private static final Logger LOG = Logs.of(Utilities.class);
 
 
     public static void ShowProgress(Context context, String title, String message) {
@@ -471,7 +472,7 @@ public class Utilities {
             try {
                 is.close();
             } catch (Exception e) {
-                tracer.warn(SessionLogcatAppender.MARKER_INTERNAL, "GetStringFromInputStream - could not close stream");
+                LOG.warn(SessionLogcatAppender.MARKER_INTERNAL, "GetStringFromInputStream - could not close stream");
             }
         }
 
@@ -503,7 +504,7 @@ public class Utilities {
             try {
                 is.close();
             } catch (Exception e) {
-                tracer.warn(SessionLogcatAppender.MARKER_INTERNAL, "GetStringFromInputStream - could not close stream");
+                LOG.warn(SessionLogcatAppender.MARKER_INTERNAL, "GetStringFromInputStream - could not close stream");
             }
         }
 

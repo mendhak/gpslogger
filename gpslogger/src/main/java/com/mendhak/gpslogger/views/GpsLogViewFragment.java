@@ -12,8 +12,9 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +22,7 @@ import java.util.Date;
 public class GpsLogViewFragment extends GenericViewFragment implements CompoundButton.OnCheckedChangeListener {
 
     private View rootView;
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GpsLogViewFragment.class.getSimpleName());
+    private static final Logger LOG = Logs.of(GpsLogViewFragment.class);
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     long startTime = 0;
     TextView logTextView;

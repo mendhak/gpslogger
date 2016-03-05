@@ -33,10 +33,11 @@ import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 import net.rdrei.android.dirchooser.DirectoryChooserFragment;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -49,7 +50,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
         DirectoryChooserFragment.OnFragmentInteractionListener
 {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(LoggingSettingsFragment.class.getSimpleName());
+    private static final Logger LOG = Logs.of(LoggingSettingsFragment.class);
     private DirectoryChooserFragment folderDialog;
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
@@ -188,7 +189,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
                         .input(getString(R.string.letters_numbers), preferenceHelper.getCustomLoggingUrl(), new MaterialDialog.InputCallback() {
                             @Override
                             public void onInput(MaterialDialog materialDialog, CharSequence input) {
-                                tracer.info("Custom URL chosen : " + input.toString());
+                                LOG.info("Custom URL chosen : " + input.toString());
 
                                 preferenceHelper.setCustomLoggingUrl(input.toString());
 
@@ -254,7 +255,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
     public void onSelectDirectory(@NonNull String folderPath) {
         folderDialog.dismiss();
 
-        tracer.debug(folderPath);
+        LOG.debug(folderPath);
 
         File folder = new File(folderPath);
 

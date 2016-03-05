@@ -1,6 +1,7 @@
 package com.mendhak.gpslogger.senders.osm;
 
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
@@ -14,14 +15,14 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.File;
 
 public class OSMJob extends Job {
 
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OSMJob.class.getSimpleName());
+    private static final Logger LOG = Logs.of(OSMJob.class);
     OAuthConsumer consumer;
     String gpsTraceUrl;
     File chosenFile;
@@ -72,7 +73,7 @@ public class OSMJob extends Job {
 
         HttpResponse response = httpClient.execute(request);
         int statusCode = response.getStatusLine().getStatusCode();
-        tracer.debug("OSM Upload - " + String.valueOf(statusCode));
+        LOG.debug("OSM Upload - " + String.valueOf(statusCode));
         EventBus.getDefault().post(new UploadEvents.OpenStreetMap().succeeded());
     }
 
@@ -83,7 +84,7 @@ public class OSMJob extends Job {
 
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
-        tracer.error("Could not send to OpenStreetMap", throwable);
+        LOG.error("Could not send to OpenStreetMap", throwable);
         EventBus.getDefault().post(new UploadEvents.OpenStreetMap().failed("Could not send to OpenStreetMap", throwable));
         return false;
     }

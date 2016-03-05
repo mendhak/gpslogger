@@ -28,10 +28,11 @@ import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.util.List;
@@ -39,7 +40,7 @@ import java.util.List;
 
 public class DropBoxManager extends FileSender {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropBoxManager.class.getSimpleName());
+    private static final Logger LOG = Logs.of(DropBoxManager.class);
     private static final Session.AccessType ACCESS_TYPE = Session.AccessType.APP_FOLDER;
 
     private final DropboxAPI<AndroidAuthSession> dropboxApi;
@@ -146,7 +147,7 @@ public class DropBoxManager extends FileSender {
     @Override
     public void uploadFile(List<File> files) {
         for (File f : files) {
-            tracer.debug(f.getName());
+            LOG.debug(f.getName());
             uploadFile(f.getName());
         }
     }

@@ -21,25 +21,26 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import com.mendhak.gpslogger.common.events.CommandEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 
 public class AlarmReceiver extends BroadcastReceiver {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(AlarmReceiver.class.getSimpleName());
+    private static final Logger LOG = Logs.of(AlarmReceiver.class);
 
     @Override
     public void onReceive(Context context, Intent intent) {
         try {
-            tracer.debug("Alarm received");
+            LOG.debug("Alarm received");
 
             EventBus.getDefault().postSticky(new CommandEvents.AutoSend(null));
 
             Intent serviceIntent = new Intent(context.getPackageName() + ".GpsLoggingService");
             context.startService(serviceIntent);
         } catch (Exception ex) {
-            tracer.error("AlarmReceiver", ex);
+            LOG.error("AlarmReceiver", ex);
         }
     }
 }

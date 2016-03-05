@@ -11,16 +11,17 @@ import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 public class OwnCloudSettingsFragment
         extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener, PreferenceValidator {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OwnCloudSettingsFragment.class.getSimpleName());
+    private static final Logger LOG = Logs.of(OwnCloudSettingsFragment.class);
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +94,7 @@ public class OwnCloudSettingsFragment
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.OwnCloud o){
-        tracer.debug("OwnCloud Event completed, success: " + o.success);
+        LOG.debug("OwnCloud Event completed, success: " + o.success);
 
         Utilities.HideProgress();
         if(!o.success){

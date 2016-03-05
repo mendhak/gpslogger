@@ -21,11 +21,12 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.opengts.OpenGTSJob;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.senders.GpxReader;
 import com.path.android.jobqueue.JobManager;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.util.Collections;
@@ -33,7 +34,7 @@ import java.util.List;
 
 public class OpenGTSManager extends FileSender {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSManager.class.getSimpleName());
+    private static final Logger LOG = Logs.of(OpenGTSManager.class);
     private PreferenceHelper preferenceHelper;
 
     public OpenGTSManager(PreferenceHelper preferenceHelper) {
@@ -46,7 +47,7 @@ public class OpenGTSManager extends FileSender {
         for (File f : files) {
             if (f.getName().endsWith(".gpx")) {
                 List<SerializableLocation> locations = getLocationsFromGPX(f);
-                tracer.debug(locations.size() + " points were read from " + f.getName());
+                LOG.debug(locations.size() + " points were read from " + f.getName());
 
                 if (locations.size() > 0) {
 
@@ -83,7 +84,7 @@ public class OpenGTSManager extends FileSender {
         try {
             locations = GpxReader.getPoints(f);
         } catch (Exception e) {
-            tracer.error("OpenGTSManager.getLocationsFromGPX", e);
+            LOG.error("OpenGTSManager.getLocationsFromGPX", e);
         }
         return locations;
     }

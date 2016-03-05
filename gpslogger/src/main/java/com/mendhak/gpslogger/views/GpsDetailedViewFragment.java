@@ -34,10 +34,11 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;
@@ -52,7 +53,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     private View rootView;
     private ActionProcessButton actionButton;
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GpsDetailedViewFragment.class.getSimpleName());
+    private static final Logger LOG = Logs.of(GpsDetailedViewFragment.class);
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     public static GpsDetailedViewFragment newInstance() {
@@ -225,7 +226,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
 
         } catch (Exception ex) {
-            tracer.error("showPreferencesAndMessages " + ex.getMessage(), ex);
+            LOG.error("showPreferencesAndMessages " + ex.getMessage(), ex);
         }
 
 

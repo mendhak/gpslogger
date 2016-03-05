@@ -19,6 +19,7 @@ package com.mendhak.gpslogger.senders;
 
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxManager;
 import com.mendhak.gpslogger.senders.email.AutoEmailManager;
 import com.mendhak.gpslogger.senders.ftp.FtpManager;
@@ -26,7 +27,7 @@ import com.mendhak.gpslogger.senders.googledrive.GoogleDriveManager;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSManager;
 import com.mendhak.gpslogger.senders.osm.OpenStreetMapManager;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudManager;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -36,7 +37,7 @@ import java.util.List;
 
 public class FileSenderFactory {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FileSenderFactory.class.getSimpleName());
+    private static final Logger LOG = Logs.of(FileSenderFactory.class);
 
 
     public static FileSender GetOsmSender() {
@@ -70,12 +71,12 @@ public class FileSenderFactory {
     public static void AutoSendFiles(final String fileToSend) {
 
         PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
-        tracer.info("Sending file " + fileToSend);
+        LOG.info("Sending file " + fileToSend);
 
         File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
 
         if (Utilities.GetFilesInFolder(gpxFolder).length < 1) {
-            tracer.warn("No files found to send.");
+            LOG.warn("No files found to send.");
             return;
         }
 
@@ -89,7 +90,7 @@ public class FileSenderFactory {
         List<File> zipFiles = new ArrayList<>();
 
         if (files.size() == 0) {
-            tracer.warn("No files found to send after filtering.");
+            LOG.warn("No files found to send after filtering.");
             return;
         }
 
@@ -101,7 +102,7 @@ public class FileSenderFactory {
                 filePaths.add(f.getAbsolutePath());
             }
 
-            tracer.info("Zipping file");
+            LOG.info("Zipping file");
             ZipHelper zh = new ZipHelper(filePaths.toArray(new String[filePaths.size()]), zipFile.getAbsolutePath());
             zh.zipFiles();
 
@@ -112,7 +113,7 @@ public class FileSenderFactory {
         List<FileSender> senders = GetFileAutosenders();
 
         for (FileSender sender : senders) {
-            tracer.debug("Sender: " + sender.getClass().getName());
+            LOG.debug("Sender: " + sender.getClass().getName());
             //Special case for OSM Uploader
             if(!sender.accept(null, ".zip")){
                 sender.uploadFile(files);

@@ -24,11 +24,12 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -36,7 +37,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 public class FtpManager extends FileSender {
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FtpManager.class.getSimpleName());
+    private static final Logger LOG = Logs.of(FtpManager.class);
 
     PreferenceHelper preferenceHelper;
 
@@ -51,7 +52,7 @@ public class FtpManager extends FileSender {
             gpxFolder.mkdirs();
         }
 
-        tracer.debug("Creating gpslogger_test.xml");
+        LOG.debug("Creating gpslogger_test.xml");
         File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
 
         try {

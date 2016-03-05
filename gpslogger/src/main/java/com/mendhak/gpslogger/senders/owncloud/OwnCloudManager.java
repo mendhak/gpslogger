@@ -4,11 +4,12 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class OwnCloudManager extends FileSender
 {
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OwnCloudSettingsFragment.class.getSimpleName());
+    private static final Logger LOG = Logs.of(OwnCloudSettingsFragment.class);
     private PreferenceHelper preferenceHelper;
 
     public OwnCloudManager(PreferenceHelper preferenceHelper) {
@@ -31,7 +32,7 @@ public class OwnCloudManager extends FileSender
             gpxFolder.mkdirs();
         }
 
-        tracer.debug("Creating gpslogger_test.xml");
+        LOG.debug("Creating gpslogger_test.xml");
         File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
 
         try {
@@ -50,14 +51,14 @@ public class OwnCloudManager extends FileSender
 
         } catch (Exception ex) {
             EventBus.getDefault().post(new UploadEvents.Ftp().failed());
-            tracer.error("Error while testing ownCloud upload: "+ ex.getMessage());
+            LOG.error("Error while testing ownCloud upload: " + ex.getMessage());
         }
 
         JobManager jobManager = AppSettings.GetJobManager();
         jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OwnCloudJob.getJobTag(testFile));
         jobManager.addJobInBackground(new OwnCloudJob(servername, username, password, directory,
                 testFile, "gpslogger_test.txt"));
-        tracer.debug("Added background ownCloud upload job");
+        LOG.debug("Added background ownCloud upload job");
     }
 
     public static boolean ValidSettings(

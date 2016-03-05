@@ -39,14 +39,15 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
-import org.slf4j.LoggerFactory;
+import com.mendhak.gpslogger.common.slf4j.Logs;
+import org.slf4j.Logger;
 
 import java.text.NumberFormat;
 
 public class GpsSimpleViewFragment extends GenericViewFragment implements View.OnClickListener {
 
     Context context;
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GpsSimpleViewFragment.class.getSimpleName());
+    private static final Logger LOG = Logs.of(GpsSimpleViewFragment.class);
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     private View rootView;
@@ -466,7 +467,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     public void onWaitingForLocation(boolean inProgress) {
 
-        tracer.debug(inProgress + "");
+        LOG.debug(inProgress + "");
 
         if(!Session.isStarted()){
             actionButton.setProgress(0);

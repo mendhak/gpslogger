@@ -18,11 +18,12 @@
 package com.mendhak.gpslogger.common;
 
 
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIUtils;
 import org.apache.http.message.BasicNameValuePair;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.net.*;
 import java.text.DecimalFormat;
@@ -39,7 +40,7 @@ import java.util.*;
  */
 public class OpenGTSClient {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OpenGTSClient.class.getSimpleName());
+    private static final Logger LOG = Logs.of(OpenGTSClient.class);
 
     private String server;
     private Integer port;
@@ -93,12 +94,12 @@ public class OpenGTSClient {
             Scanner s;
             if(conn.getResponseCode() != 200){
                 s = new Scanner(conn.getErrorStream());
-                tracer.error("Status code: " + String.valueOf(conn.getResponseCode()));
+                LOG.error("Status code: " + String.valueOf(conn.getResponseCode()));
                 if(s.hasNext()){
-                    tracer.error(s.useDelimiter("\\A").next());
+                    LOG.error(s.useDelimiter("\\A").next());
                 }
             } else {
-                tracer.debug("Status code: " + String.valueOf(conn.getResponseCode()));
+                LOG.debug("Status code: " + String.valueOf(conn.getResponseCode()));
             }
 
         }
@@ -136,7 +137,7 @@ public class OpenGTSClient {
                 DatagramSocket socket = new DatagramSocket();
                 byte[] buffer = message.getBytes();
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length, InetAddress.getByName(server), port);
-                tracer.debug("Sending UDP " + message );
+                LOG.debug("Sending UDP " + message);
                 socket.send(packet);
                 socket.close();
         }

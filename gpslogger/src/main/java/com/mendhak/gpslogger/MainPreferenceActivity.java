@@ -23,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.dropbox.DropboxAuthorizationFragment;
 import com.mendhak.gpslogger.senders.email.AutoEmailFragment;
@@ -35,13 +36,12 @@ import com.mendhak.gpslogger.settings.GeneralSettingsFragment;
 import com.mendhak.gpslogger.settings.LoggingSettingsFragment;
 import com.mendhak.gpslogger.settings.PerformanceSettingsFragment;
 import com.mendhak.gpslogger.settings.UploadSettingsFragment;
-import org.slf4j.LoggerFactory;
-
+import org.slf4j.Logger;
 
 
 public class MainPreferenceActivity extends AppCompatActivity {
 
-    private org.slf4j.Logger tracer;
+    private static final Logger LOG = Logs.of(MainPreferenceActivity.class);
 
     PreferenceFragment preferenceFragment = null;
 
@@ -60,7 +60,7 @@ public class MainPreferenceActivity extends AppCompatActivity {
 
 
 
-        tracer = LoggerFactory.getLogger(MainPreferenceActivity.class.getSimpleName());
+
 
         String whichFragment = PREFERENCE_FRAGMENTS.GENERAL;
 
@@ -70,7 +70,7 @@ public class MainPreferenceActivity extends AppCompatActivity {
 
         //If OpenStreetMap has returned with OAuth token
         if(getIntent().getData() != null) {
-            tracer.debug("OSM Authorization returned: " + getIntent().getData().getQuery());
+            LOG.debug("OSM Authorization returned: " + getIntent().getData().getQuery());
             whichFragment = PREFERENCE_FRAGMENTS.OSM;
         }
 

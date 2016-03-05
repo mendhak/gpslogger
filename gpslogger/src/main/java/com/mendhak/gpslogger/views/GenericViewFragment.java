@@ -33,8 +33,9 @@ import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 
 /**
@@ -43,13 +44,13 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class GenericViewFragment extends PermissionedFragment  {
 
-    private org.slf4j.Logger tracer;
+    private static final Logger LOG = Logs.of(GenericViewFragment.class);
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        tracer = LoggerFactory.getLogger(GenericViewFragment.class.getSimpleName());
+
         registerEventBus();
     }
 
@@ -111,7 +112,7 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
                     .input(getString(R.string.letters_numbers), preferenceHelper.getCustomFileName(), new MaterialDialog.InputCallback() {
                         @Override
                         public void onInput(MaterialDialog materialDialog, CharSequence input) {
-                            tracer.info("Custom file name chosen : " + input.toString());
+                            LOG.info("Custom file name chosen : " + input.toString());
 
                             String chosenFileName = preferenceHelper.getCustomFileName();
 

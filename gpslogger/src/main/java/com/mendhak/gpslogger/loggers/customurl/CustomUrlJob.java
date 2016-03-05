@@ -5,10 +5,11 @@ import android.util.Base64;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.net.HttpURLConnection;
@@ -20,7 +21,7 @@ import java.util.regex.Pattern;
 
 public class CustomUrlJob extends Job {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(CustomUrlJob.class.getSimpleName());
+    private static final Logger LOG = Logs.of(CustomUrlJob.class);
     private SerializableLocation loc;
     private String annotation;
     private int satellites;
@@ -72,7 +73,7 @@ public class CustomUrlJob extends Job {
         logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));
         logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(Utilities.GetBuildSerial()));
 
-        tracer.debug("Sending to URL: " + logUrl);
+        LOG.debug("Sending to URL: " + logUrl);
         URL url = new URL(logUrl);
 
         if(url.getProtocol().equalsIgnoreCase("https")){
@@ -92,9 +93,9 @@ public class CustomUrlJob extends Job {
 
 
         if(conn.getResponseCode() != 200){
-            tracer.error("Status code: " + String.valueOf(conn.getResponseCode()));
+            LOG.error("Status code: " + String.valueOf(conn.getResponseCode()));
         } else {
-            tracer.debug("Status code: " + String.valueOf(conn.getResponseCode()));
+            LOG.debug("Status code: " + String.valueOf(conn.getResponseCode()));
         }
 
         EventBus.getDefault().post(new UploadEvents.CustomUrl().succeeded());
@@ -108,7 +109,7 @@ public class CustomUrlJob extends Job {
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
         EventBus.getDefault().post(new UploadEvents.CustomUrl().failed("Could not send to custom URL", throwable));
-        tracer.error("Could not send to custom URL", throwable);
+        LOG.error("Could not send to custom URL", throwable);
         return true;
     }
 

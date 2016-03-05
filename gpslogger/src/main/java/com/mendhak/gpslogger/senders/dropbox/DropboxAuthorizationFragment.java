@@ -26,12 +26,13 @@ import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(DropboxAuthorizationFragment.class.getSimpleName());
+    private static final Logger LOG = Logs.of(DropboxAuthorizationFragment.class);
     DropBoxManager manager;
 
     @Override
@@ -68,7 +69,7 @@ public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment
         } catch (Exception e) {
             Utilities.MsgBox(getString(R.string.error), getString(R.string.dropbox_couldnotauthorize),
                     getActivity());
-            tracer.error(".", e);
+            LOG.error(".", e);
         }
 
     }
@@ -85,7 +86,7 @@ public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment
             try {
                 manager.startAuthentication(DropboxAuthorizationFragment.this);
             } catch (Exception e) {
-                tracer.error(".", e);
+                LOG.error(".", e);
             }
         }
 

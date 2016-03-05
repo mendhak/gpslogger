@@ -4,11 +4,12 @@ import android.os.Build;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
 import org.json.JSONObject;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -18,7 +19,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class GoogleDriveJob extends Job {
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GoogleDriveJob.class.getSimpleName());
+    private static final Logger LOG = Logs.of(GoogleDriveJob.class);
     String token;
     File gpxFile;
     String googleDriveFolderName;
@@ -121,10 +122,10 @@ public class GoogleDriveJob extends Job {
 
             JSONObject fileMetadataJson = new JSONObject(fileMetadata);
             fileId = fileMetadataJson.getString("id");
-            tracer.debug("File updated : " + fileId);
+            LOG.debug("File updated : " + fileId);
 
         } catch (Exception e) {
-            tracer.error("Could not update contents", e);
+            LOG.error("Could not update contents", e);
         } finally {
             if (conn != null) {
                 conn.disconnect();
@@ -186,10 +187,10 @@ public class GoogleDriveJob extends Job {
 
             JSONObject fileMetadataJson = new JSONObject(fileMetadata);
             fileId = fileMetadataJson.getString("id");
-            tracer.debug("File created with ID " + fileId + " of type " + mimeType);
+            LOG.debug("File created with ID " + fileId + " of type " + mimeType);
 
         } catch (Exception e) {
-            tracer.error("Could not create file", e);
+            LOG.error("Could not create file", e);
         } finally {
             if (conn != null) {
                 conn.disconnect();
@@ -239,11 +240,11 @@ public class GoogleDriveJob extends Job {
             JSONObject fileMetadataJson = new JSONObject(fileMetadata);
             if (fileMetadataJson.getJSONArray("items") != null && fileMetadataJson.getJSONArray("items").length() > 0) {
                 fileId = fileMetadataJson.getJSONArray("items").getJSONObject(0).get("id").toString();
-                tracer.debug("Found file with ID " + fileId);
+                LOG.debug("Found file with ID " + fileId);
             }
 
         } catch (Exception e) {
-            tracer.error("SearchForGPSLoggerFile", e);
+            LOG.error("SearchForGPSLoggerFile", e);
         } finally {
             if (conn != null) {
                 conn.disconnect();
@@ -284,7 +285,7 @@ public class GoogleDriveJob extends Job {
 
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
-        tracer.error("Could not upload to Google Drive", throwable);
+        LOG.error("Could not upload to Google Drive", throwable);
         EventBus.getDefault().post(new UploadEvents.GDocs().failed("Could not upload to Google Drive", throwable));
         return false;
     }

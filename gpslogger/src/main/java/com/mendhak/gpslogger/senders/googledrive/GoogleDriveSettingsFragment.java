@@ -39,9 +39,10 @@ import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -52,7 +53,7 @@ import java.io.IOException;
 public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
         implements Preference.OnPreferenceClickListener {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GoogleDriveSettingsFragment.class.getSimpleName());
+    private static final Logger LOG = Logs.of(GoogleDriveSettingsFragment.class);
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     boolean messageShown = false;
 
@@ -185,7 +186,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
 
                     preferenceHelper.setGoogleDriveAccountName(accountName);
 
-                    tracer.debug("Account:" + accountName);
+                    LOG.debug("Account:" + accountName);
                     getAndUseAuthTokenInAsyncTask();
                 }
                 break;
@@ -221,14 +222,14 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
                     REQUEST_CODE_RECOVERED);
 
         } catch (IOException transientEx) {
-            tracer.error("Temporary failure", transientEx);
+            LOG.error("Temporary failure", transientEx);
             // network or server error, the call is expected to succeed if you try again later.
             // Don't attempt to call again immediately - the request is likely to
             // fail, you'll hit quotas or back-off.
 
 
         } catch (GoogleAuthException authEx) {
-            tracer.error("Authentication failure", authEx);
+            LOG.error("Authentication failure", authEx);
             // Failure. The call is not expected to ever succeed so it should not be
             // retried.
 
@@ -249,7 +250,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
             protected void onPostExecute(String authToken) {
                 if (authToken != null) {
                     preferenceHelper.setGoogleDriveAuthToken(authToken);
-                    tracer.debug("Auth token:" + authToken);
+                    LOG.debug("Auth token:" + authToken);
                     verifyGooglePlayServices();
                 }
 
@@ -268,7 +269,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
             gpxFolder.mkdirs();
         }
 
-        tracer.debug("Creating gpslogger_test.xml");
+        LOG.debug("Creating gpslogger_test.xml");
         File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
 
         try {
@@ -286,7 +287,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
             }
 
         } catch (Exception ex) {
-            tracer.error("Could not create local test file", ex);
+            LOG.error("Could not create local test file", ex);
             EventBus.getDefault().post(new UploadEvents.GDocs().failed("Could not create local test file", ex));
         }
 
@@ -299,7 +300,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.GDocs o){
-        tracer.debug("GDocs Event completed, success: " + o.success);
+        LOG.debug("GDocs Event completed, success: " + o.success);
         Utilities.HideProgress();
         if(!o.success){
             Utilities.MsgBox(getString(R.string.sorry), getString(R.string.gdocs_testupload_error), getActivity());

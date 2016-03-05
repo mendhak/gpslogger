@@ -20,8 +20,9 @@ package com.mendhak.gpslogger.loggers.gpx;
 import android.location.Location;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.FileLogger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.*;
 import java.util.Date;
@@ -79,7 +80,7 @@ public class Gpx10FileLogger implements FileLogger {
 }
 
 class Gpx10AnnotateHandler implements Runnable {
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Gpx10AnnotateHandler.class.getSimpleName());
+    private static final Logger LOG = Logs.of(Gpx10AnnotateHandler.class);
     String description;
     File gpxFile;
     Location loc;
@@ -138,9 +139,9 @@ class Gpx10AnnotateHandler implements Runnable {
                 gpxFile.delete();
                 gpxTempFile.renameTo(gpxFile);
 
-                tracer.debug("Finished annotation to GPX10 File");
+                LOG.debug("Finished annotation to GPX10 File");
             } catch (Exception e) {
-                tracer.error("Gpx10FileLogger.annotate", e);
+                LOG.error("Gpx10FileLogger.annotate", e);
             }
 
         }
@@ -172,7 +173,7 @@ class Gpx10AnnotateHandler implements Runnable {
 
 
 class Gpx10WriteHandler implements Runnable {
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(Gpx10WriteHandler.class.getSimpleName());
+    private static final Logger LOG = Logs.of(Gpx10WriteHandler.class);
     String dateTimeString;
     Location loc;
     private File gpxFile = null;
@@ -224,10 +225,10 @@ class Gpx10WriteHandler implements Runnable {
                 raf.write(trackPoint.getBytes());
                 raf.close();
                 Utilities.AddFileToMediaDatabase(gpxFile, "text/plain");
-                tracer.debug("Finished writing to GPX10 file");
+                LOG.debug("Finished writing to GPX10 file");
 
             } catch (Exception e) {
-                tracer.error("Gpx10FileLogger.write", e);
+                LOG.error("Gpx10FileLogger.write", e);
             }
 
         }

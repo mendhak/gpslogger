@@ -6,11 +6,12 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
-import org.slf4j.LoggerFactory;
+import com.mendhak.gpslogger.common.slf4j.Logs;
+import org.slf4j.Logger;
 
 public class ContentApi extends ContentProvider {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(ContentApi.class.getSimpleName());
+    private static final Logger LOG = Logs.of(ContentApi.class);
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     @Override
@@ -22,7 +23,7 @@ public class ContentApi extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
         String queryType = uri.getPathSegments().get(0);
-        tracer.debug(queryType);
+        LOG.debug(queryType);
         String result;
 
         switch(queryType){
@@ -35,7 +36,7 @@ public class ContentApi extends ContentProvider {
         }
 
 
-        tracer.debug(result);
+        LOG.debug(result);
         MatrixCursor matrixCursor = new MatrixCursor(new String[] { "Column1" });
 
         matrixCursor.newRow().add(result);

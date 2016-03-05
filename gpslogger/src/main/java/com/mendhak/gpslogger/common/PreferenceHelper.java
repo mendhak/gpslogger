@@ -7,7 +7,8 @@ import android.location.LocationManager;
 import android.preference.PreferenceManager;
 import com.mendhak.gpslogger.PreferenceNames;
 import com.mendhak.gpslogger.R;
-import org.slf4j.LoggerFactory;
+import com.mendhak.gpslogger.common.slf4j.Logs;
+import org.slf4j.Logger;
 
 import java.io.*;
 import java.lang.annotation.Annotation;
@@ -18,7 +19,7 @@ public class PreferenceHelper {
 
     private static PreferenceHelper instance = null;
     private SharedPreferences prefs;
-    private static org.slf4j.Logger tracer = LoggerFactory.getLogger(PreferenceHelper.class.getSimpleName());
+    private static final Logger LOG = Logs.of(PreferenceHelper.class);
 
     /**
      * Use PreferenceHelper.getInstance()
@@ -980,20 +981,20 @@ public class PreferenceHelper {
                             if(sbListeners.length() > 0){
                                 listeners = sbListeners.substring(0, sbListeners.length() -1);
                             }
-                            tracer.debug("LISTENERS - " + listeners);
+                            LOG.debug("LISTENERS - " + listeners);
                             props.setProperty("listeners", listeners);
                         }
                         else {
                             props.setProperty(((ProfilePreference)a).name(),String.valueOf(val));
-                            tracer.debug(((ProfilePreference)a).name() + " : " + String.valueOf(val) );
+                            LOG.debug(((ProfilePreference) a).name() + " : " + String.valueOf(val));
                         }
                     }
                     else {
-                        tracer.debug("Null value: " +((ProfilePreference)a).name() + " is null.");
+                        LOG.debug("Null value: " + ((ProfilePreference) a).name() + " is null.");
                     }
 
                 } catch (Exception e) {
-                    tracer.error("Could not save preferences to profile", e);
+                    LOG.error("Could not save preferences to profile", e);
                 }
             }
         }
@@ -1017,7 +1018,7 @@ public class PreferenceHelper {
 
             SharedPreferences.Editor editor = prefs.edit();
             String value = props.getProperty(key.toString());
-            tracer.info("Setting preset property: " + key.toString() + " to " + value.toString());
+            LOG.info("Setting preset property: " + key.toString() + " to " + value.toString());
 
             if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
                 editor.putBoolean(key.toString(), Boolean.parseBoolean(value));

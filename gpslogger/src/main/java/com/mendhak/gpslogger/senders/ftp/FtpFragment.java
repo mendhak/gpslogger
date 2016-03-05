@@ -29,15 +29,16 @@ import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 public class FtpFragment
         extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener, PreferenceValidator {
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(FtpFragment.class.getSimpleName());
+    private static final Logger LOG = Logs.of(FtpFragment.class);
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     public void onCreate(Bundle savedInstanceState) {
@@ -114,7 +115,7 @@ public class FtpFragment
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.Ftp o){
-            tracer.debug("FTP Event completed, success: " + o.success);
+            LOG.debug("FTP Event completed, success: " + o.success);
             Utilities.HideProgress();
             if(!o.success){
                 String ftpMessages = (o.ftpMessages == null) ? "" : TextUtils.join("",o.ftpMessages);

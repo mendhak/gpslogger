@@ -20,8 +20,9 @@ package com.mendhak.gpslogger;
 import android.location.*;
 import android.os.Bundle;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.nmea.NmeaSentence;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.util.Iterator;
 
@@ -29,7 +30,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
     private static String listenerName;
     private static GpsLoggingService loggingService;
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GeneralLocationListener.class.getSimpleName());
+    private static final Logger LOG = Logs.of(GeneralLocationListener.class);
     protected String latestHdop;
     protected String latestPdop;
     protected String latestVdop;
@@ -69,34 +70,34 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
             }
 
         } catch (Exception ex) {
-            tracer.error("GeneralLocationListener.onLocationChanged", ex);
+            LOG.error("GeneralLocationListener.onLocationChanged", ex);
         }
 
     }
 
     public void onProviderDisabled(String provider) {
-        tracer.info("Provider disabled: " + provider);
+        LOG.info("Provider disabled: " + provider);
         loggingService.restartGpsManagers();
     }
 
     public void onProviderEnabled(String provider) {
 
-        tracer.info("Provider enabled: " + provider);
+        LOG.info("Provider enabled: " + provider);
         loggingService.restartGpsManagers();
     }
 
     public void onStatusChanged(String provider, int status, Bundle extras) {
         if (status == LocationProvider.OUT_OF_SERVICE) {
-            tracer.info(provider + " is out of service");
+            LOG.info(provider + " is out of service");
             loggingService.stopManagerAndResetAlarm();
         }
 
         if (status == LocationProvider.AVAILABLE) {
-            tracer.info(provider + " is available");
+            LOG.info(provider + " is available");
         }
 
         if (status == LocationProvider.TEMPORARILY_UNAVAILABLE) {
-            tracer.info(provider + " is temporarily unavailable");
+            LOG.info(provider + " is temporarily unavailable");
             loggingService.stopManagerAndResetAlarm();
         }
     }
@@ -105,7 +106,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
         switch (event) {
             case GpsStatus.GPS_EVENT_FIRST_FIX:
-                tracer.debug(loggingService.getString(R.string.fix_obtained));
+                LOG.debug(loggingService.getString(R.string.fix_obtained));
                 break;
 
             case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
@@ -122,16 +123,16 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                     count++;
                 }
 
-                tracer.debug(String.valueOf(count) + " satellites");
+                LOG.debug(String.valueOf(count) + " satellites");
                 loggingService.setSatelliteInfo(count);
                 break;
 
             case GpsStatus.GPS_EVENT_STARTED:
-                tracer.info(loggingService.getString(R.string.started_waiting));
+                LOG.info(loggingService.getString(R.string.started_waiting));
                 break;
 
             case GpsStatus.GPS_EVENT_STOPPED:
-                tracer.info(loggingService.getString(R.string.gps_stopped));
+                LOG.info(loggingService.getString(R.string.gps_stopped));
                 break;
 
         }

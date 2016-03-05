@@ -22,20 +22,21 @@ import android.content.Context;
 import android.content.Intent;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.events.CommandEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 
 public class StartupReceiver extends BroadcastReceiver {
 
-    private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(StartupReceiver.class.getSimpleName());
+    private static final Logger LOG = Logs.of(StartupReceiver.class);
 
     @Override
     public void onReceive(Context context, Intent intent) {
         try {
             boolean startImmediately = PreferenceHelper.getInstance().shouldStartLoggingOnBootup();
 
-            tracer.info("Start on bootup - "  + String.valueOf(startImmediately));
+            LOG.info("Start on bootup - " + String.valueOf(startImmediately));
 
             if (startImmediately) {
 
@@ -45,7 +46,7 @@ public class StartupReceiver extends BroadcastReceiver {
                 context.startService(serviceIntent);
             }
         } catch (Exception ex) {
-            tracer.error("StartupReceiver", ex);
+            LOG.error("StartupReceiver", ex);
 
         }
 

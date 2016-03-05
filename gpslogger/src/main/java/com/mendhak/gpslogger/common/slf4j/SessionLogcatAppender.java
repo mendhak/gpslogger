@@ -12,11 +12,11 @@ import org.slf4j.MarkerFactory;
 public class SessionLogcatAppender extends AppenderBase<ILoggingEvent> {
 
     /**
-     * Marker to indicate that this tracer entry is special
+     * Marker to indicate that this logger entry is special
      */
     public static Marker MARKER_LOCATION = MarkerFactory.getMarker("LOCATION");
     /**
-     * Marker to indicate that this tracer entry is for debug log files only
+     * Marker to indicate that this logger entry is for debug log files only
      */
     public static Marker MARKER_INTERNAL = MarkerFactory.getMarker("INTERNAL");
     public static FifoDeque<ILoggingEvent> Statuses = new FifoDeque<>(325);
