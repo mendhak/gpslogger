@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:paddingLeft="22dp"
+        android:paddingRight="22dp"
+        android:paddingBottom="22dp"
+        android:textColor="#80000000"
+        android:id="@+id/error_friendly_message" />
+
+    <com.ms.square.android.expandabletextview.ExpandableTextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/error_expand_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        expandableTextView:expandDrawable="@android:color/transparent"
+        expandableTextView:collapseDrawable="@android:color/transparent"
+        expandableTextView:animAlphaStart="1"
+        expandableTextView:maxCollapsedLines="0"
+        expandableTextView:animDuration="0">
+        <TextView
+            android:id="@id/expandable_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="10dp"
+            android:textSize="16sp"
+            android:textColor="#666666" />
+        <ImageButton
+            android:id="@id/expand_collapse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_gravity="center|bottom"
+            android:background="@android:color/transparent"/>
+    </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+</LinearLayout>

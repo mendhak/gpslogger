@@ -7,6 +7,7 @@
   <string name="add_description">ஒரு விளக்கம் சேர்</string>
   <string name="menu_share">பகிர்</string>
   <string name="menu_exit">வெளியேறு</string>
+  <!-- main form labels -->
   <string name="txt_latitude">அட்சரேகை:</string>
   <string name="txt_longitude">தீர்க்கரேகை:</string>
   <string name="txt_altitude">உயரம்:</string>
@@ -24,6 +25,7 @@
   <string name="sharing_mylocation">எனது இருப்பிடம்</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">பகிர் வழி</string>
+  <!-- general -->
   <string name="foot">&#160;அடி</string>
   <string name="feet">&#160;அடி</string>
   <string name="meter">&#160;மீட்டர்</string>
@@ -34,6 +36,8 @@
   <string name="providername_celltower">தொலைபேசி கோபுரங்கள்</string>
   <string name="sorry">வருந்துகிறேன்</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
+  <!-- Settings -->
   <string name="osm_description">விளக்கம்</string>
   <string name="osm_tags">குறிச்சொற்கள்</string>
   <string name="shortcut_start">தொடங்கு</string>

@@ -17,24 +17,22 @@
 
 package com.mendhak.gpslogger;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.KeyEvent;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
-public class NotificationAnnotationActivity extends Activity {
+public class NotificationAnnotationActivity extends AppCompatActivity {
 
-    //Called from the 'Annotate' button in the Notification
+    //Called from the 'annotate' button in the Notification
     //This in turn captures user input and sends the input to the GPS Logging Service
 
     private org.slf4j.Logger tracer;
@@ -45,42 +43,39 @@ public class NotificationAnnotationActivity extends Activity {
 
         tracer = LoggerFactory.getLogger(NotificationAnnotationActivity.class.getSimpleName());
 
-        MaterialDialog alertDialog = new MaterialDialog.Builder(this)
+        new MaterialDialog.Builder(this)
                 .title(R.string.add_description)
-                .customView(R.layout.alertview, false)
-                .positiveText(R.string.ok)
+                .inputType(InputType.TYPE_CLASS_TEXT)
                 .negativeText(R.string.cancel)
+                .autoDismiss(true)
+                .canceledOnTouchOutside(true)
+                .cancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        finish();
+                    }
+                })
+                .input(getString(R.string.letters_numbers), "", new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(MaterialDialog materialDialog, CharSequence input) {
+
+                        tracer.info("Annotation from notification: " + input.toString());
+                        EventBus.getDefault().postSticky(new CommandEvents.Annotate(input.toString()));
+                        Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
+                        getApplicationContext().startService(serviceIntent);
+                        materialDialog.dismiss();
+                        finish();
+                    }
+                })
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                        materialDialog.hide();
+                        materialDialog.dismiss();
                         finish();
                     }
                 })
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                        EditText userInput = (EditText) materialDialog.getCustomView().findViewById(R.id.alert_user_input);
-                        tracer.info("Annotation from notification: " + userInput.getText().toString());
-
-                        EventBus.getDefault().postSticky(new CommandEvents.Annotate(userInput.getText().toString()));
-
-                        Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
-                        getApplicationContext().startService(serviceIntent);
-
-                        finish();
-                    }
-                })
-               .cancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        dialog.dismiss();
-                        finish();
-                    }
-                }).build();
-        TextView tvMessage = (TextView)alertDialog.getCustomView().findViewById(R.id.alert_user_message);
-        tvMessage.setText(R.string.letters_numbers);
-        alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        alertDialog.show();
+                .show();
     }
 
     @Override

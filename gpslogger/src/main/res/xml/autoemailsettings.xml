@@ -31,6 +31,7 @@
                             android:summary="@string/autoemail_server_summary"
                             android:dialogTitle="@string/autoemail_server"/>
         <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_port" android:title="@string/autoemail_port"
+                            android:defaultValue="25"
                             android:summary="@string/autoemail_port_summary"
                             android:dialogTitle="@string/autoemail_port"/>
         <com.mendhak.gpslogger.views.component.CustomSwitchPreference android:key="smtp_ssl" android:title="@string/autoemail_ssl"

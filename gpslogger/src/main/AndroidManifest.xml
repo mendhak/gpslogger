@@ -97,7 +97,7 @@
 
         <activity
             android:name=".shortcuts.ShortcutCreate"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            android:theme="@style/Theme.AppCompat.Translucent" >
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
 
@@ -106,14 +106,14 @@
         </activity>
         <activity
             android:name=".shortcuts.ShortcutStart"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            android:theme="@style/Theme.AppCompat.Translucent" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
         <activity
             android:name=".shortcuts.ShortcutStop"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            android:theme="@style/Theme.AppCompat.Translucent" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
@@ -132,10 +132,11 @@
         </receiver>
         <receiver android:name=".senders.AlarmReceiver" />
 
+        <!--android:theme="@style/Theme.AppCompat.Translucent"-->
         <activity
             android:name=".NotificationAnnotationActivity"
-            android:label="..."
-            android:theme="@android:style/Theme.Dialog"
+            android:label=""
+            android:theme="@style/Theme.AppCompat.Translucent"
             android:excludeFromRecents="true"
             >
             <intent-filter>

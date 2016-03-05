@@ -20,6 +20,7 @@ package com.mendhak.gpslogger;
 import android.location.*;
 import android.os.Bundle;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.loggers.nmea.NmeaSentence;
 import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
@@ -60,7 +61,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 b.putString("LISTENER", listenerName);
 
                 loc.setExtras(b);
-                loggingService.OnLocationChanged(loc);
+                loggingService.onLocationChanged(loc);
 
                 this.latestHdop = "";
                 this.latestPdop = "";
@@ -75,19 +76,19 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
     public void onProviderDisabled(String provider) {
         tracer.info("Provider disabled: " + provider);
-        loggingService.RestartGpsManagers();
+        loggingService.restartGpsManagers();
     }
 
     public void onProviderEnabled(String provider) {
 
         tracer.info("Provider enabled: " + provider);
-        loggingService.RestartGpsManagers();
+        loggingService.restartGpsManagers();
     }
 
     public void onStatusChanged(String provider, int status, Bundle extras) {
         if (status == LocationProvider.OUT_OF_SERVICE) {
             tracer.info(provider + " is out of service");
-            loggingService.StopManagerAndResetAlarm();
+            loggingService.stopManagerAndResetAlarm();
         }
 
         if (status == LocationProvider.AVAILABLE) {
@@ -96,7 +97,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
         if (status == LocationProvider.TEMPORARILY_UNAVAILABLE) {
             tracer.info(provider + " is temporarily unavailable");
-            loggingService.StopManagerAndResetAlarm();
+            loggingService.stopManagerAndResetAlarm();
         }
     }
 
@@ -122,7 +123,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 }
 
                 tracer.debug(String.valueOf(count) + " satellites");
-                loggingService.SetSatelliteInfo(count);
+                loggingService.setSatelliteInfo(count);
                 break;
 
             case GpsStatus.GPS_EVENT_STARTED:
@@ -138,47 +139,20 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
     @Override
     public void onNmeaReceived(long timestamp, String nmeaSentence) {
-        loggingService.OnNmeaSentence(timestamp, nmeaSentence);
+        loggingService.onNmeaSentence(timestamp, nmeaSentence);
 
         if(Utilities.IsNullOrEmpty(nmeaSentence)){
             return;
         }
 
-        String[] nmeaParts = nmeaSentence.split(",");
+        NmeaSentence nmea = new NmeaSentence(nmeaSentence);
 
-        if (nmeaParts[0].equalsIgnoreCase("$GPGSA")) {
+        this.latestPdop = nmea.getLatestPdop();
+        this.latestHdop = nmea.getLatestHdop();
+        this.latestVdop = nmea.getLatestVdop();
+        this.geoIdHeight = nmea.getGeoIdHeight();
+        this.ageOfDgpsData = nmea.getAgeOfDgpsData();
+        this.dgpsId = nmea.getDgpsId();
 
-            if (nmeaParts.length > 15 && !Utilities.IsNullOrEmpty(nmeaParts[15])) {
-                this.latestPdop = nmeaParts[15];
-            }
-
-            if (nmeaParts.length > 16 &&!Utilities.IsNullOrEmpty(nmeaParts[16])) {
-                this.latestHdop = nmeaParts[16];
-            }
-
-            if (nmeaParts.length > 17 &&!Utilities.IsNullOrEmpty(nmeaParts[17]) && !nmeaParts[17].startsWith("*")) {
-
-                this.latestVdop = nmeaParts[17].split("\\*")[0];
-            }
-        }
-
-
-        if (nmeaParts[0].equalsIgnoreCase("$GPGGA")) {
-            if (nmeaParts.length > 8 &&!Utilities.IsNullOrEmpty(nmeaParts[8])) {
-                this.latestHdop = nmeaParts[8];
-            }
-
-            if (nmeaParts.length > 11 &&!Utilities.IsNullOrEmpty(nmeaParts[11])) {
-                this.geoIdHeight = nmeaParts[11];
-            }
-
-            if (nmeaParts.length > 13 &&!Utilities.IsNullOrEmpty(nmeaParts[13])) {
-                this.ageOfDgpsData = nmeaParts[13];
-            }
-
-            if (nmeaParts.length > 14 &&!Utilities.IsNullOrEmpty(nmeaParts[14]) && !nmeaParts[14].startsWith("*")) {
-                this.dgpsId = nmeaParts[14].split("\\*")[0];
-            }
-        }
     }
 }

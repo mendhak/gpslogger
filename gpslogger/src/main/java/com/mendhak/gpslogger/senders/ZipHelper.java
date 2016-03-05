@@ -37,7 +37,7 @@ public class ZipHelper {
         this.zipFile = zipFile;
     }
 
-    public void Zip() {
+    public void zipFiles() {
         try {
             BufferedInputStream origin;
             FileOutputStream dest = new FileOutputStream(zipFile);

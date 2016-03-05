@@ -11,6 +11,7 @@
   <string name="menu_annotate">Anotar</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_exit">Sortir</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Latitud:</string>
   <string name="txt_longitude">Longitud:</string>
   <string name="txt_altitude">Altitud:</string>
@@ -31,6 +32,7 @@
   <string name="sharing_location_only">Només ubicació</string>
   <string name="sharing_mylocation">La meva ubicació</string>
   <string name="sharing_via">Compartir via</string>
+  <!-- general -->
   <string name="foot">&#160;peu</string>
   <string name="feet">&#160;peus</string>
   <string name="meter">&#160;metre</string>
@@ -64,8 +66,10 @@
   <string name="time_halfhour">½ hora</string>
   <string name="time_oneandhalfhours">1 hora i mitja</string>
   <string name="time_twoandhalfhours">2 hores i mitja</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Distància en metres</string>
   <string name="settings_enter_meters">Introdueixi metres (màx 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Dades del registre</string>
   <string name="new_file_creation_onceaday">Un cop al dia</string>
   <string name="new_file_creation_everystart">Cada cop que iniciï</string>

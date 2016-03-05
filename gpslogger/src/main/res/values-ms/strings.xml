@@ -11,6 +11,7 @@
   <string name="menu_annotate">Catat</string>
   <string name="menu_share">Kongsi</string>
   <string name="menu_exit">Keluar</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Latitud:</string>
   <string name="txt_longitude">Longitud:</string>
   <string name="txt_altitude">Altitud:</string>
@@ -33,6 +34,7 @@
   <string name="sharing_mylocation">Lokasi saya</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Kongsi melalui</string>
+  <!-- general -->
   <string name="foot">kaki&#160;</string>
   <string name="feet">&#160;kaki</string>
   <string name="meter">&#160;meter</string>
@@ -80,16 +82,15 @@
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">antara %s %s</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Jarak dalam meter</string>
   <string name="settings_accuracy_in_meters">Ketepatan dalam meter</string>
   <string name="settings_enter_meters">Masukkan meter (maksimum 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Mengelog perincian</string>
   <string name="log_gpx_title">Log kedalam GPX</string>
-  <string name="log_gpx_summary">Cipta satu fail GPX dalam GPSLogger folder pada kad SD.</string>
   <string name="log_kml_title">Log kedalam KML</string>
-  <string name="log_kml_summary">Cipta satu fail KML dalam GPSLogger folder pada kad SD.</string>
   <string name="log_plain_text_title">Log kedalam teks biasa</string>
-  <string name="log_plain_text_summary">Mencipta satu fail teks dalam GPSLogger folder pada kad SD.</string>
   <string name="new_file_creation_title">Cipta fail baru</string>
   <string name="new_file_creation_summary">Sama ada untuk mencipta fail baru setiap hari atau setiap kali anda mula.</string>
   <string name="new_file_creation_onceaday">Sekali sehari</string>
@@ -137,10 +138,6 @@
   <string name="osm_setup_summary">Set tag, keterangan, keterlihatan dan kebenaran untuk memuat naik jejak GPS</string>
   <string name="osm_lbl_authorize">Sahkan aplikasi ini</string>
   <string name="osm_lbl_authorize_description">Anda perlu mengizinkan aplikasi ini sebelum memuat naik jejak GPS kedalam OpenStreetMap. Anda boleh menetapkan tag, penerangan dan keterlihatan disini selepas anda mengesahkan aplikasi ini.</string>
-  <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-  <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-  <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-  <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">Bersihkan pengesahan</string>
   <string name="osm_resetauth_summary">Membuang pengesahan tempatan yang digunakan berhubung dengan akaun OSM anda.</string>
@@ -229,7 +226,6 @@
   <string name="autoftp_invalid_summary">Sesetengah tetapan anda tidak sah. Sila pastikan bahawa semua ruang berkenaan terisi.</string>
   <string name="ftp_upload">Muatnaik secara FTP</string>
   <string name="autoftp_setup_summary">Muat naik fail ke pelayan FTP (S). Nota: Tidak meliputi SFTP.</string>
-  <string name="faq_screen_title">Soalan-Soalan Lazim</string>
   <string name="menu_faq">Bantuan dan soalan-soalan lazim</string>
   <string name="gpsf_missing">Perkhidmatan tiada</string>
   <string name="gpsf_missing_description">Anda memerlukan Google Play Services Framework untuk menggunakan ciri ini.</string>

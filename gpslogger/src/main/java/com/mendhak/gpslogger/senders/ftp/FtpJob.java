@@ -1,6 +1,7 @@
 package com.mendhak.gpslogger.senders.ftp;
 
 
+import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
@@ -15,6 +16,8 @@ import javax.net.ssl.KeyManagerFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+
 
 public class FtpJob extends Job {
 
@@ -31,6 +34,9 @@ public class FtpJob extends Job {
     String fileName;
     String directory;
 
+    static UploadEvents.Ftp jobResult;
+    static ArrayList<String> ftpServerResponses;
+
     protected FtpJob(String server, int port, String username,
                      String password, String directory, boolean useFtps, String protocol, boolean implicit,
                      File gpxFile, String fileName) {
@@ -46,6 +52,9 @@ public class FtpJob extends Job {
         this.gpxFile = gpxFile;
         this.fileName = fileName;
         this.directory = directory;
+
+        ftpServerResponses = new ArrayList<>();
+        jobResult = null;
 
     }
 
@@ -67,6 +76,7 @@ public class FtpJob extends Job {
             }
 
         } catch (Exception e) {
+            jobResult = new UploadEvents.Ftp().failed( "Could not create FTP Client" , e);
             tracer.error("Could not create FTP Client", e);
             return false;
         }
@@ -75,52 +85,61 @@ public class FtpJob extends Job {
         try {
 
             client.connect(server, port);
-            showServerReply(client);
+            logServerReply(client);
 
 
             if (client.login(username, password)) {
                 client.enterLocalPassiveMode();
-                showServerReply(client);
+                logServerReply(client);
 
                 tracer.debug("Uploading file to FTP server " + server);
                 tracer.debug("Checking for FTP directory " + directory);
                 FTPFile[] existingDirectory = client.listFiles(directory);
-                showServerReply(client);
+                logServerReply(client);
 
                 if (existingDirectory.length <= 0) {
                     tracer.debug("Attempting to create FTP directory " + directory);
                     ftpCreateDirectoryTree(client, directory);
-                    showServerReply(client);
+                    logServerReply(client);
                 }
 
                 FileInputStream inputStream = new FileInputStream(gpxFile);
                 client.changeWorkingDirectory(directory);
                 boolean result = client.storeFile(fileName, inputStream);
                 inputStream.close();
-                showServerReply(client);
+                logServerReply(client);
                 if (result) {
                     tracer.debug("Successfully FTPd file " + fileName);
                 } else {
+                    jobResult = new UploadEvents.Ftp().failed( "Failed to FTP file " + fileName , null);
                     tracer.debug("Failed to FTP file " + fileName);
                     return false;
                 }
 
             } else {
+                logServerReply(client);
+                jobResult = new UploadEvents.Ftp().failed( "Could not log in to FTP server" , null);
                 tracer.debug("Could not log in to FTP server");
                 return false;
             }
 
         } catch (Exception e) {
+            logServerReply(client);
+            jobResult = new UploadEvents.Ftp().failed( "Could not connect or upload to FTP server.", e);
             tracer.error("Could not connect or upload to FTP server.", e);
             return false;
         } finally {
             try {
                 client.logout();
-                showServerReply(client);
+                logServerReply(client);
 
                 client.disconnect();
-                showServerReply(client);
+                logServerReply(client);
             } catch (Exception e) {
+                if(jobResult == null){
+                    jobResult = new UploadEvents.Ftp().failed( "Could not logout or disconnect", e);
+                }
+
                 tracer.error("Could not logout or disconnect", e);
                 return false;
             }
@@ -140,23 +159,33 @@ public class FtpJob extends Job {
             if (dir.length() > 0) {
                 if (dirExists) {
                     dirExists = client.changeWorkingDirectory(dir);
-                    showServerReply(client);
+                    logServerReply(client);
                 }
                 if (!dirExists) {
                     client.makeDirectory(dir);
-                    showServerReply(client);
+                    logServerReply(client);
                     client.changeWorkingDirectory(dir);
-                    showServerReply(client);
+                    logServerReply(client);
                 }
             }
         }
     }
 
-    private static void showServerReply(FTPClient client) {
+
+    private static void logServerReply(FTPClient client) {
+        String singleReply = client.getReplyString();
+        if(!Utilities.IsNullOrEmpty(singleReply)){
+            ftpServerResponses.add(singleReply);
+            tracer.debug("FTP SERVER: " + singleReply);
+        }
+
         String[] replies = client.getReplyStrings();
         if (replies != null && replies.length > 0) {
             for (String aReply : replies) {
-                tracer.debug("FTP SERVER: " + aReply);
+                if(!Utilities.IsNullOrEmpty(aReply)){
+                    ftpServerResponses.add(aReply);
+                    tracer.debug("FTP SERVER: " + aReply);
+                }
             }
         }
     }
@@ -169,19 +198,21 @@ public class FtpJob extends Job {
     @Override
     public void onRun() throws Throwable {
         if (Upload(server, username, password, directory, port, useFtps, protocol, implicit, gpxFile, fileName)) {
-            EventBus.getDefault().post(new UploadEvents.Ftp(true));
+            EventBus.getDefault().post(new UploadEvents.Ftp().succeeded());
         } else {
-            EventBus.getDefault().post(new UploadEvents.Ftp(false));
+            jobResult.ftpMessages = ftpServerResponses;
+            EventBus.getDefault().post(jobResult);
         }
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new UploadEvents.Ftp(false));
+
     }
 
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
+        EventBus.getDefault().post(new UploadEvents.Ftp().failed("Could not FTP file", throwable));
         tracer.error("Could not FTP file", throwable);
         return false;
     }

@@ -181,9 +181,9 @@ public class SelfSignedConfidentSslSocketFactory implements SecureProtocolSocket
         private X509TrustManager findX509TrustManager(TrustManagerFactory factory)
                 throws CertStoreException {
             TrustManager tms[] = factory.getTrustManagers();
-            for (int i = 0; i < tms.length; i++) {
-                if (tms[i] instanceof X509TrustManager) {
-                    return (X509TrustManager) tms[i];
+            for (TrustManager tm : tms) {
+                if (tm instanceof X509TrustManager) {
+                    return (X509TrustManager) tm;
                 }
             }
             return null;

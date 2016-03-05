@@ -30,6 +30,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+//TODO: Remove BasicNameValuePair, use Httpurlconnection or OKHTTP client
 
 /**
  * OpenGTS Client

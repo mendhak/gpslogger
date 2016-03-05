@@ -49,17 +49,18 @@ public class OpenGTSJob extends Job {
             openGTSClient.sendHTTP(deviceId, accountName, locations);
         }
 
-        EventBus.getDefault().post(new UploadEvents.OpenGTS(true));
+        EventBus.getDefault().post(new UploadEvents.OpenGTS().succeeded());
     }
 
     @Override
     protected void onCancel() {
-        EventBus.getDefault().post(new UploadEvents.OpenGTS(false));
+
     }
 
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
         tracer.error("Could not send to OpenGTS", throwable);
+        EventBus.getDefault().post(new UploadEvents.OpenGTS().failed("Could not send to OpenGTS", throwable));
         return false;
     }
 }

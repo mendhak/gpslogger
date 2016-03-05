@@ -12,6 +12,7 @@
   <string name="menu_annotate">Zabeležijo</string>
   <string name="menu_share">Deli</string>
   <string name="menu_exit">Izhod</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Zemljepisna širina:</string>
   <string name="txt_longitude">Zemljepisna dolžina:</string>
   <string name="txt_altitude">Nadmorska višina:</string>
@@ -34,12 +35,17 @@
   <string name="sharing_mylocation">Moja lokacija</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Deli preko</string>
+  <!-- general -->
   <string name="foot">&#160;foot</string>
   <string name="feet">&#160;feet</string>
   <string name="meter">&#160;meter</string>
   <string name="meters">&#160;metrov</string>
   <string name="error">Napaka</string>
   <string name="error_connection">Napake pri povezavi. Prosimo, preverite vaše nastavitve telefona.</string>
+  <string name="minutes">min</string>
+  <string name="hours">ur</string>
+  <string name="gpsprovider_unavailable">Ponudnik GPS ni na voljo. Preverite nastavitve mesta in omogoči namestitev ponudnika.
+    </string>
   <string name="started">Začel</string>
   <string name="providername_gps">GPS sateliti</string>
   <string name="providername_celltower">GSM stolpi</string>
@@ -52,6 +58,8 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">unknown</string>
   <string name="sorry">Oprostite</string>
+  <string name="success">Bravo!</string>
+  <string name="direction_roughly">Približno %s</string>
   <string name="direction_north">Sever</string>
   <string name="direction_northeast">Severovzhod</string>
   <string name="direction_east">Vzhod</string>
@@ -64,22 +72,37 @@
   <string name="time_halfminute">pol minute</string>
   <string name="time_oneminute">1 minuta</string>
   <string name="time_onehour">1 ura</string>
+  <string name="time_quarterhour">15 minut</string>
   <string name="time_halfhour">pol ure</string>
   <string name="time_oneandhalfhours">1 ura in pol</string>
   <string name="time_twoandhalfhours">2 uri in pol</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Razdalja v metrih</string>
   <string name="settings_accuracy_in_meters">Natančnost v metrih</string>
-  <string name="log_kml_summary">Ustvari datoteko KML v GPSLogger mapo na SD kartici.</string>
+  <string name="settings_enter_meters">Vnesite metrov (max 9999)</string>
+  <!-- Settings -->
+  <string name="log_gpx_title">Dnevnik GPX</string>
+  <string name="log_gpx_summary">Dnevniki lokacijah v GPX datoteki v1.0</string>
+  <string name="log_kml_title">Dnevnik KML</string>
+  <string name="log_kml_summary">Dnevniki lokacijah v datoteki KML v2.2</string>
   <string name="log_plain_text_title">Piši dnevnik v golo besedilo</string>
-  <string name="log_plain_text_summary">Ustvari navadno besedilno datoteko v mapi GPSLogger na SD kartici.</string>
+  <string name="log_plain_text_summary">Dnevniki lokacijah v datoteki CSV</string>
   <string name="new_file_creation_title">Ustvarjanje nove datoteke</string>
   <string name="new_file_creation_summary">Ali želite ustvariti novo datoteko enkrat na dan, ali vsakič ko boste začeli.</string>
   <string name="new_file_creation_onceaday">Enkrat na dan</string>
   <string name="new_file_creation_everystart">Vsakič, ko zaženete</string>
+  <string name="new_file_creation_custom">Datoteke po meri</string>
+  <string name="new_file_custom_title">Ime datoteke po meri</string>
+  <string name="new_file_custom_summary">Uporabite ime datoteke. Po želji dodamo nekaj dinamičnih parametrov, kot so serijska številka, let, ur, minut, itd. Zelo dinamična imena
+ lahko ne dela tudi z avtomatskim  pošiljajem funkcije, ker samo pošilja zadnje datoteke.</string>
   <string name="pref_performance_title">Uspešno delovanje</string>
+  <string name="pref_performance_summary">Časi, filtri in poslušalci</string>
   <string name="time_before_logging_title">Čas pred vpisom</string>
+  <string name="time_before_logging_summary">Uporaba 0 za največjo frekvenco, vendar počasnejše je bolje za baterijo.
+    </string>
   <string name="time_before_logging_dialog_title">Čas v sekundah</string>
   <string name="time_before_logging_hint">Vnesite sekunde (max 9999)</string>
+  <string name="keep_fix_title">GPS naprej med popravki</string>
   <string name="retry_time_dialog_title">Čas v sekundah</string>
   <string name="retry_time_hint">Vnesite sekunde (max 9999)</string>
   <string name="enabledisablegps_title">Omogoči/onemogoči GPS</string>

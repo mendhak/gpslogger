@@ -16,8 +16,7 @@ public class CustomUrlTrustEverything {
             sslContext.init(null, trustManager, new java.security.SecureRandom());
             return sslContext.getSocketFactory();
         }
-        catch (NoSuchAlgorithmException ignored) {}
-        catch (KeyManagementException ignored) {}
+        catch (NoSuchAlgorithmException | KeyManagementException ignored) {}
 
         return null;
 

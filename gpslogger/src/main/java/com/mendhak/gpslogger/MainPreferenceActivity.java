@@ -19,15 +19,15 @@ package com.mendhak.gpslogger;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import com.mendhak.gpslogger.common.IPreferenceValidation;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.dropbox.DropboxAuthorizationFragment;
 import com.mendhak.gpslogger.senders.email.AutoEmailFragment;
-import com.mendhak.gpslogger.senders.ftp.AutoFtpFragment;
-import com.mendhak.gpslogger.senders.gdocs.GDocsSettingsFragment;
+import com.mendhak.gpslogger.senders.ftp.FtpFragment;
+import com.mendhak.gpslogger.senders.googledrive.GoogleDriveSettingsFragment;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSFragment;
 import com.mendhak.gpslogger.senders.osm.OSMAuthorizationFragment;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudSettingsFragment;
@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory;
 
 
 
-public class MainPreferenceActivity extends ActionBarActivity {
+public class MainPreferenceActivity extends AppCompatActivity {
 
     private org.slf4j.Logger tracer;
 
@@ -54,7 +54,10 @@ public class MainPreferenceActivity extends ActionBarActivity {
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
 
 
         tracer = LoggerFactory.getLogger(MainPreferenceActivity.class.getSimpleName());
@@ -90,7 +93,7 @@ public class MainPreferenceActivity extends ActionBarActivity {
                 break;
             case PREFERENCE_FRAGMENTS.FTP:
                 setTitle(R.string.autoftp_setup_title);
-                preferenceFragment = new AutoFtpFragment();
+                preferenceFragment = new FtpFragment();
                 break;
             case PREFERENCE_FRAGMENTS.EMAIL:
                 setTitle(R.string.autoemail_title);
@@ -102,7 +105,7 @@ public class MainPreferenceActivity extends ActionBarActivity {
                 break;
             case PREFERENCE_FRAGMENTS.GDOCS:
                 setTitle(R.string.gdocs_setup_title);
-                preferenceFragment = new GDocsSettingsFragment();
+                preferenceFragment = new GoogleDriveSettingsFragment();
                 break;
             case PREFERENCE_FRAGMENTS.DROPBOX:
                 setTitle(R.string.dropbox_setup_title);
@@ -134,8 +137,8 @@ public class MainPreferenceActivity extends ActionBarActivity {
     }
 
     private boolean isFormValid(){
-        if(preferenceFragment instanceof IPreferenceValidation){
-            if( !((IPreferenceValidation)preferenceFragment).IsValid() ){
+        if(preferenceFragment instanceof PreferenceValidator){
+            if( !((PreferenceValidator)preferenceFragment).isValid() ){
                 Utilities.MsgBox(getString(R.string.autoemail_invalid_form),
                         getString(R.string.autoemail_invalid_form_message),
                         this);
@@ -150,11 +153,8 @@ public class MainPreferenceActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         final int id = item.getItemId();
-        if (id == android.R.id.home) {
-           return !isFormValid();
-        }
+        return id == android.R.id.home && !isFormValid();
 
-        return false;
     }
 
     public static class PREFERENCE_FRAGMENTS {
@@ -162,10 +162,10 @@ public class MainPreferenceActivity extends ActionBarActivity {
         public static final String LOGGING = "LoggingSettingsFragment";
         public static final String PERFORMANCE = "PerformanceSettingsFragment";
         public static final String UPLOAD = "UploadSettingsFragment";
-        public static final String FTP = "AutoFtpFragment";
+        public static final String FTP = "FtpFragment";
         public static final String EMAIL = "AutoEmailFragment";
         public static final String OPENGTS = "OpenGTSFragment";
-        public static final String GDOCS = "GDocsSettingsFragment";
+        public static final String GDOCS = "GoogleDriveSettingsFragment";
         public static final String DROPBOX = "DropBoxAuthorizationFragment";
         public static final String OWNCLOUD = "OwnCloudAuthorizationFragment";
         public static final String OSM = "OSMAuthorizationFragment";

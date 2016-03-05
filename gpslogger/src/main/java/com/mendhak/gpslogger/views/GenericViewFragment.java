@@ -18,21 +18,17 @@
 package com.mendhak.gpslogger.views;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.view.KeyEvent;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.text.InputType;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.CommandEvents;
@@ -48,19 +44,20 @@ import org.slf4j.LoggerFactory;
 public abstract class GenericViewFragment extends PermissionedFragment  {
 
     private org.slf4j.Logger tracer;
+    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         tracer = LoggerFactory.getLogger(GenericViewFragment.class.getSimpleName());
-        RegisterEventBus();
+        registerEventBus();
     }
 
-    private void RegisterEventBus() {
+    private void registerEventBus() {
         EventBus.getDefault().register(this);
     }
 
-    private void UnregisterEventBus() {
+    private void unregisterEventBus() {
         try {
             EventBus.getDefault().unregister(this);
         } catch (Throwable t) {
@@ -70,7 +67,7 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
 
     @Override
     public void onDestroy() {
-        UnregisterEventBus();
+        unregisterEventBus();
         super.onDestroy();
     }
 
@@ -95,56 +92,44 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
 
 
     @AskPermission({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    public void RequestToggleLogging() {
+    public void requestToggleLogging() {
 
         if (Session.isStarted()) {
-            ToggleLogging();
+            toggleLogging();
             return;
         }
 
-        if (AppSettings.shouldCreateCustomFile() && AppSettings.shouldAskCustomFileNameEachTime()) {
+        if (preferenceHelper.shouldCreateCustomFile() && preferenceHelper.shouldAskCustomFileNameEachTime()) {
 
-            MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
+            new MaterialDialog.Builder(getActivity())
                     .title(R.string.new_file_custom_title)
-                    .customView(R.layout.alertview, true)
+                    .content(R.string.new_file_custom_message)
                     .positiveText(R.string.ok)
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    .negativeText(R.string.cancel)
+                    .inputType(InputType.TYPE_CLASS_TEXT)
+                    .negativeText(R.string.cancel)
+                    .input(getString(R.string.letters_numbers), preferenceHelper.getCustomFileName(), new MaterialDialog.InputCallback() {
                         @Override
-                        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                            String chosenFileName = AppSettings.getCustomFileName();
-                            EditText userInput = (EditText) materialDialog.getCustomView().findViewById(R.id.alert_user_input);
+                        public void onInput(MaterialDialog materialDialog, CharSequence input) {
+                            tracer.info("Custom file name chosen : " + input.toString());
 
-                            if (!Utilities.IsNullOrEmpty(userInput.getText().toString()) && !userInput.getText().toString().equalsIgnoreCase(chosenFileName)) {
-                                AppSettings.setCustomFileName(userInput.getText().toString());
+                            String chosenFileName = preferenceHelper.getCustomFileName();
+
+                            if (!Utilities.IsNullOrEmpty(input.toString()) && !input.toString().equalsIgnoreCase(chosenFileName)) {
+                                preferenceHelper.setCustomFileName(input.toString());
                             }
-                            ToggleLogging();
+                            toggleLogging();
+
                         }
                     })
-                    .keyListener(new DialogInterface.OnKeyListener() {
-                        @Override
-                        public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                                ToggleLogging();
-                                dialog.dismiss();
-                            }
-                            return true;
-                        }
-                    })
-                    .build();
-
-            EditText userInput = (EditText) alertDialog.getCustomView().findViewById(R.id.alert_user_input);
-            userInput.setText(AppSettings.getCustomFileName());
-            TextView tvMessage = (TextView) alertDialog.getCustomView().findViewById(R.id.alert_user_message);
-            tvMessage.setText(R.string.new_file_custom_message);
-            alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-            alertDialog.show();
+                    .show();
 
         } else {
-            ToggleLogging();
+            toggleLogging();
         }
     }
 
-    public void ToggleLogging() {
+    public void toggleLogging() {
         EventBus.getDefault().post(new CommandEvents.RequestToggle());
     }
 

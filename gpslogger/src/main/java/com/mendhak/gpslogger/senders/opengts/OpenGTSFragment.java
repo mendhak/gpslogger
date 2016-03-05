@@ -25,13 +25,13 @@ import android.webkit.URLUtil;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.IPreferenceValidation;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 
 public class OpenGTSFragment extends PermissionedPreferenceFragment implements
-        IPreferenceValidation,
+        PreferenceValidator,
         OnPreferenceChangeListener,
         OnPreferenceClickListener {
 
@@ -58,7 +58,7 @@ public class OpenGTSFragment extends PermissionedPreferenceFragment implements
     }
 
     public boolean onPreferenceClick(Preference preference) {
-        if (!IsFormValid()) {
+        if (!isFormValid()) {
             Utilities.MsgBox(getString(R.string.autoopengts_invalid_form),
                     getString(R.string.autoopengts_invalid_form_message),
                     getActivity());
@@ -67,7 +67,7 @@ public class OpenGTSFragment extends PermissionedPreferenceFragment implements
         return true;
     }
 
-    private boolean IsFormValid() {
+    private boolean isFormValid() {
 
         CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("autoopengts_enabled");
         if(!chkEnabled.isChecked()) {
@@ -103,7 +103,7 @@ public class OpenGTSFragment extends PermissionedPreferenceFragment implements
     }
 
     @Override
-    public boolean IsValid() {
-        return IsFormValid();
+    public boolean isValid() {
+        return isFormValid();
     }
 }

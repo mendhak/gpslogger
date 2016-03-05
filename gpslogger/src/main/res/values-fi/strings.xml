@@ -11,6 +11,7 @@
   <string name="menu_annotate">Muistiinpanot</string>
   <string name="menu_share">Jaa</string>
   <string name="menu_exit">Poistu</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Leveysaste:</string>
   <string name="txt_longitude">Pituusaste:</string>
   <string name="txt_altitude">Korkeus:</string>
@@ -26,6 +27,7 @@
   <string name="summary_current_filename">Tiedosto:</string>
   <string name="sharing_location_only">Vain sijainti</string>
   <string name="sharing_mylocation">Sijaintini</string>
+  <!-- general -->
   <string name="foot">&#160;jalka</string>
   <string name="feet">&#160;jalkaa</string>
   <string name="meter">&#160;metri</string>
@@ -34,8 +36,10 @@
   <string name="started">Käynnistetty</string>
   <string name="providername_gps">GPS satelliitit</string>
   <string name="providername_celltower">matkapuhelintukiasemat</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Etäisyys metreinä</string>
   <string name="settings_accuracy_in_meters">Tarkkuus metreinä</string>
+  <!-- Settings -->
   <string name="new_file_creation_onceaday">Kerran päivässä</string>
   <string name="new_file_creation_everystart">Aina käynnistettäessä</string>
   <string name="pref_performance_title">Suorituskyky</string>
@@ -104,7 +108,6 @@
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit_summary">Jätä valitsematta jos et tiedä.</string>
   <string name="autoftp_invalid_settings">Virheelliset asetukset</string>
-  <string name="faq_screen_title">Usein kysyttyjä kysymyksiä</string>
   <string name="menu_faq">Apu ja UKK</string>
   <string name="gpsf_missing">Puuttuva palvelu</string>
 </resources>

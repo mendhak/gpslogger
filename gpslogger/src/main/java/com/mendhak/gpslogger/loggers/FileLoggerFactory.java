@@ -19,10 +19,13 @@ package com.mendhak.gpslogger.loggers;
 
 import android.content.Context;
 import android.location.Location;
-import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Utilities;
+import com.mendhak.gpslogger.loggers.csv.PlainTextFileLogger;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlLogger;
+import com.mendhak.gpslogger.loggers.gpx.Gpx10FileLogger;
+import com.mendhak.gpslogger.loggers.kml.Kml22FileLogger;
 import com.mendhak.gpslogger.loggers.opengts.OpenGTSLogger;
 
 import java.io.File;
@@ -30,42 +33,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileLoggerFactory {
-    public static List<IFileLogger> GetFileLoggers(Context context) {
 
-        List<IFileLogger> loggers = new ArrayList<IFileLogger>();
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
-        if(Utilities.IsNullOrEmpty(AppSettings.getGpsLoggerFolder())){
+    public static List<FileLogger> GetFileLoggers(Context context) {
+
+        List<FileLogger> loggers = new ArrayList<>();
+
+        if(Utilities.IsNullOrEmpty(preferenceHelper.getGpsLoggerFolder())){
             return loggers;
         }
 
-        File gpxFolder = new File(AppSettings.getGpsLoggerFolder());
+        File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
             gpxFolder.mkdirs();
         }
 
-        if (AppSettings.shouldLogToGpx()) {
+        if (preferenceHelper.shouldLogToGpx()) {
             File gpxFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".gpx");
             loggers.add(new Gpx10FileLogger(gpxFile, Session.shouldAddNewTrackSegment(), Session.getSatelliteCount()));
         }
 
-        if (AppSettings.shouldLogToKml()) {
+        if (preferenceHelper.shouldLogToKml()) {
             File kmlFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".kml");
             loggers.add(new Kml22FileLogger(kmlFile, Session.shouldAddNewTrackSegment()));
         }
 
-        if (AppSettings.shouldLogToPlainText()) {
+        if (preferenceHelper.shouldLogToPlainText()) {
             File file = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".txt");
             loggers.add(new PlainTextFileLogger(file));
         }
 
-        if (AppSettings.shouldLogToOpenGTS()) {
+        if (preferenceHelper.shouldLogToOpenGTS()) {
             loggers.add(new OpenGTSLogger(context));
         }
 
-        if (AppSettings.shouldLogToCustomUrl()) {
+        if (preferenceHelper.shouldLogToCustomUrl()) {
             float batteryLevel = Utilities.GetBatteryLevel(context);
             String androidId = Utilities.GetAndroidId(context);
-            loggers.add(new CustomUrlLogger(AppSettings.getCustomLoggingUrl(), Session.getSatelliteCount(), batteryLevel, androidId));
+            loggers.add(new CustomUrlLogger(preferenceHelper.getCustomLoggingUrl(), Session.getSatelliteCount(), batteryLevel, androidId));
         }
 
 
@@ -73,14 +79,14 @@ public class FileLoggerFactory {
     }
 
     public static void Write(Context context, Location loc) throws Exception {
-        for (IFileLogger logger : GetFileLoggers(context)) {
-            logger.Write(loc);
+        for (FileLogger logger : GetFileLoggers(context)) {
+            logger.write(loc);
         }
     }
 
     public static void Annotate(Context context, String description, Location loc) throws Exception {
-        for (IFileLogger logger : GetFileLoggers(context)) {
-            logger.Annotate(description, loc);
+        for (FileLogger logger : GetFileLoggers(context)) {
+            logger.annotate(description, loc);
         }
     }
 }

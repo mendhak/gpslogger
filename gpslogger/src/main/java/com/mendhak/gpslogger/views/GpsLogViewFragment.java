@@ -11,7 +11,7 @@ import android.widget.*;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import org.slf4j.LoggerFactory;
 
@@ -22,13 +22,14 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
 
     private View rootView;
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(GpsLogViewFragment.class.getSimpleName());
+    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     long startTime = 0;
     TextView logTextView;
     ScrollView scrollView;
 
     Handler timerHandler = new Handler();
 
-    public static final GpsLogViewFragment newInstance() {
+    public static GpsLogViewFragment newInstance() {
         GpsLogViewFragment fragment = new GpsLogViewFragment();
         return fragment;
     }
@@ -40,7 +41,7 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
         scrollView = (ScrollView) rootView.findViewById(R.id.logview_scrollView);
 
         CheckBox chkDebugFile = (CheckBox) rootView.findViewById(R.id.logview_chkDebugFile);
-        chkDebugFile.setChecked(AppSettings.shouldDebugToFile());
+        chkDebugFile.setChecked(preferenceHelper.shouldDebugToFile());
         chkDebugFile.setOnCheckedChangeListener(this);
         return rootView;
     }
@@ -70,18 +71,13 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
 
         @Override
         public void run() {
-            long millis = System.currentTimeMillis() - startTime;
-            int seconds = (int) (millis / 1000);
-            int minutes = seconds / 60;
-            seconds = seconds % 60;
-
-            ShowLogcatMessages();
+            showLogcatMessages();
             timerHandler.postDelayed(this, 1500);
         }
     };
 
 
-    private void ShowLogcatMessages(){
+    private void showLogcatMessages(){
 
         CheckBox chkLocationsOnly = (CheckBox) rootView.findViewById(R.id.logview_chkLocationsOnly);
         CheckBox chkAutoScroll = (CheckBox) rootView.findViewById(R.id.logview_chkAutoScroll);
@@ -135,7 +131,7 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
 
         if(compoundButton.getId() == R.id.logview_chkDebugFile){
-            AppSettings.setDebugToFile(checked);
+            preferenceHelper.setDebugToFile(checked);
 
             if(checked){
                 Toast.makeText(getActivity(), R.string.debuglog_summary, Toast.LENGTH_LONG).show();

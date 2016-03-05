@@ -52,7 +52,7 @@ public class GpxReader {
         Element root = dom.getDocumentElement();
         NodeList items = root.getElementsByTagName("trkpt");
 
-        points = new ArrayList<SerializableLocation>();
+        points = new ArrayList<>();
 
         for (int j = 0; j < items.getLength(); j++) {
             Node item = items.item(j);

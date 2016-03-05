@@ -14,6 +14,7 @@
   <string name="menu_annotate">Annota</string>
   <string name="menu_share">Condividi</string>
   <string name="menu_exit">Esci</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Latitudine:</string>
   <string name="txt_longitude">Longitudine:</string>
   <string name="txt_altitude">Altitudine:</string>
@@ -36,6 +37,7 @@
   <string name="sharing_mylocation">Mia posizione</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Condividi tramite</string>
+  <!-- general -->
   <string name="foot">Piede</string>
   <string name="feet">Piedi</string>
   <string name="meter">Metro</string>
@@ -87,16 +89,15 @@
   <string name="time_hms_format" formatted="false">%so %sm %ss</string>
   <string name="accuracy_within" formatted="false">in %s %s</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Distanza in metri</string>
   <string name="settings_accuracy_in_meters">Precisione in metri</string>
   <string name="settings_enter_meters">Inserisci i metri (max 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Dettagli registrazione</string>
   <string name="log_gpx_title">Salva in GPX</string>
-  <string name="log_gpx_summary">Crea un file GPX nella cartella GPSLogger su scheda SD.</string>
   <string name="log_kml_title">Salva in KML</string>
-  <string name="log_kml_summary">Crea un file KML nella cartella GPSLogger su scheda SD.</string>
   <string name="log_plain_text_title">Registra in un file di testo</string>
-  <string name="log_plain_text_summary">Crea un file di testo nella cartella GPSLogger sulla scheda SD.</string>
   <string name="new_file_creation_title">Creazione di nuovi file</string>
   <string name="new_file_creation_summary">Creare un nuovo file per ogni giorno oppure ad ogni avvio di registrazione.</string>
   <string name="new_file_creation_onceaday">Un file al giorno</string>
@@ -122,6 +123,8 @@
   <string name="enabledisablegps_summary">Vai ai settaggi del cellulare per abilitare o disabilitare i provider.</string>
   <string name="startonbootup_title">Avvia all\'accensione</string>
   <string name="startonbootup_summary">Avvia GPSLogger all\'accensione del cellulare ed inizia subito la registrazione</string>
+  <string name="startonapplaunch_title">Avvia quando viene lanciata l\'app</string>
+  <string name="startonapplaunch_summary">Avviare la registrazione quando viene lanciata l\'app</string>
   <string name="autoemail_title">Email</string>
   <string name="autoemail_summary">Invia automaticamente i files ad un indirizzo Email a tua scelta</string>
   <string name="please_wait">Attendere prego.</string>
@@ -155,10 +158,6 @@
   <string name="osm_setup_summary">Imposta etichette, descrizione, visibilità ed autorizzazioni per caricare le tracce GPS</string>
   <string name="osm_lbl_authorize">Autorizza questa applicazione</string>
   <string name="osm_lbl_authorize_description">È necessario autorizzare questa applicazione per permettere di caricare le tracce GPS sul server di OpenStreetMap. Puoi impostare etichette, descrizioni e visibilità dopo aver autorizzato questa applicazione.</string>
-  <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-  <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-  <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-  <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">Rimuovi autorizzazione</string>
   <string name="osm_resetauth_summary">Rimuovi l\'autorizzazione utilizzate per comunicare con il tuo account OpenStreeMap.</string>
@@ -188,6 +187,20 @@
   <string name="dropbox_unauthorize_description">Sei autorizzato ad usare DropBox. I file saranno caricati in \'Apps\\GPSLogger for Android\'. Potrai cancellare GPSLogger da DropBox quando vorrai.</string>
   <string name="dropbox_couldnotauthorize">Non riesco ad autorizzarti a DropBox, riprova più tardi.</string>
   <string name="dropbox_upload">Dropbox</string>
+  <string name="owncloud_setup_title">ownCloud</string>
+  <string name="owncloud_setup_summary">Carica i files su un server ownCloud.</string>
+  <string name="owncloud_server">Server</string>
+  <string name="owncloud_server_summary">URL base di ownCloud</string>
+  <string name="owncloud_username">Nome utente</string>
+  <string name="owncloud_password">Password</string>
+  <string name="owncloud_directory">Cartella</string>
+  <string name="owncloud_directory_summary">Cartella da utilizzare sul server ownCloud. Assicurarsi che esista o il caricamento avrà esito negativo.</string>
+  <string name="owncloud_test">Prova l\'upload su ownCloud</string>
+  <string name="owncloud_test_summary">Carica un file di test sul server ownCloud</string>
+  <string name="owncloud_testing">Test l\'upload ownCloud</string>
+  <string name="owncloud_invalid_settings">Impostazioni non valide</string>
+  <string name="owncloud_invalid_summary">Alcune impostazioni non sono valide. Si prega di assicurarsi di aver compilato tutti i campi necessari. </string>
+  <string name="owncloud_upload">ownCloud</string>
   <string name="menu_upload">Caricamento</string>
   <string name="autoemail_from">Da: (mittente)</string>
   <string name="autoemail_from_summary">Alcuni provider di posta richiedono nella Email il mittente (Da:), usalo solo se richiesto.</string>
@@ -258,7 +271,6 @@
   <string name="ftp_upload">Caricamento FTP</string>
   <string name="autoftp_setup_title">FTP</string>
   <string name="autoftp_setup_summary">Carica i file su un server FTP(S). Nota: non supporta SFTP.</string>
-  <string name="faq_screen_title">Domande frequenti</string>
   <string name="menu_faq">Aiuto e FAQ</string>
   <string name="gpsf_missing">Servizio non presente/inattivo</string>
   <string name="gpsf_missing_description">Per usare questa funzione devi avere installato il Google Play Services Framework.</string>
@@ -279,6 +291,7 @@
   <string name="view_simple">Vista Semplice</string>
   <string name="view_detailed">Vista Dettaglio</string>
   <string name="view_big">Vista Grande</string>
+  <string name="view_log">Visualizzazione Log</string>
   <string name="bigview_taptotoggle">Tocca per start/stop registrazione</string>
   <string name="summary_autosendtargets">Upload su:</string>
   <string name="accuracy_filter_title">Filtro precisione</string>
@@ -307,6 +320,21 @@
   <string name="new_file_custom_each_time_title">Chiedi il nome del file ogni volta che inizia una registrazione</string>
   <string name="new_file_custom_each_time_summary">Chiedi il nome del file ogni volta che inizia una registrazione</string>
   <string name="donate_app">Fai una donazione (app)</string>
-  <string name="donate_bitcoin">Fai una donazione (BitCoin)</string>
   <string name="no_network_message">Rete dati non disponibile</string>
+  <string name="hide_notification_buttons">Nascondere i pulsanti di notifica</string>
+  <string name="hide_notification_buttons_summary">Sarà necessario riavviare GPSLogger perchè questa impostazione abbia effetto</string>
+  <string name="activityrecognition_dont_log_if_still">Non caricare il log se non mi muovo</string>
+  <string name="activityrecognition_dont_log_if_still_summary">Se non c\'è nessun attività dell\'accelerometro dall\'ultimo punto, la registrazione verrà sospesa fino a quando vi sposterete nuovamente. Potrebbero ancora essere registrati i punti passivi.</string>
+  <string name="txt_activity">Attività:</string>
+  <string name="activity_in_vehicle">In Auto</string>
+  <string name="activity_on_bicycle">In bici</string>
+  <string name="activity_on_foot">A piedi</string>
+  <string name="activity_walking">A piedi</string>
+  <string name="activity_unknown">Sconosciuto</string>
+  <string name="altitude_subtractgeoidheight_title">Uso MSL invece di WGS84</string>
+  <string name="altitude_subtractoffset_title">Sottrarre offset altitudine</string>
+  <string name="upload_failure">Impossibile caricare il file</string>
+  <string name="inaccurate_point_discarded">Punto impreciso scartato</string>
+  <string name="autosend_wifionly_title">Solo tramite Wi-Fi</string>
+  <string name="logview_autoscroll">Scorrimento automatico</string>
 </resources>

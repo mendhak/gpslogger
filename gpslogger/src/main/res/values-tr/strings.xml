@@ -14,6 +14,7 @@
   <string name="menu_annotate">Açıklama ekleme</string>
   <string name="menu_share">Paylaş</string>
   <string name="menu_exit">Çıkış</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Enlem:</string>
   <string name="txt_longitude">Boylam:</string>
   <string name="txt_altitude">Yükseklik:</string>
@@ -34,13 +35,20 @@
   <string name="summary_current_filename">Dosya:</string>
   <string name="sharing_location_only">Sadece konum</string>
   <string name="sharing_mylocation">Konumum</string>
+  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Şununla paylaş</string>
+  <!-- general -->
   <string name="foot">&#160;ayak</string>
   <string name="feet">fit</string>
   <string name="meter">&#160;metre</string>
   <string name="meters">&#160;metre</string>
   <string name="error">Hata</string>
   <string name="error_connection">Bağlantı hatası. Lütfen telefon ayarları gözden geçirin.</string>
+  <string name="seconds">s</string>
+  <string name="minutes">dk</string>
+  <string name="hours">sa</string>
+  <string name="gpsprovider_unavailable">GPS sağlayıcı yok. Lütfen konum ayarlarınızı denetleyip konum sağlayıcıyı etkinleştiriniz.
+    </string>
   <string name="started">Başladı</string>
   <string name="providername_gps">GPS Uyduları</string>
   <string name="providername_celltower">baz istasyonları</string>
@@ -82,16 +90,15 @@
   <string name="time_hms_format" formatted="false">%ssa %sd %ss</string>
   <string name="accuracy_within" formatted="false">%s %s içinde</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Metre olarak mesafe</string>
   <string name="settings_accuracy_in_meters">Doğruluk(Metre)</string>
   <string name="settings_enter_meters">Metre giriniz (max 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Kayıt detayları</string>
   <string name="log_gpx_title">GPX olarak kaydet</string>
-  <string name="log_gpx_summary">SD karttaki GPSLogger dosyasında bir GPX dosyası oluşturur.</string>
   <string name="log_kml_title">KML olarak kaydet</string>
-  <string name="log_kml_summary">SD karttaki GPSLogger dosyasında bir KML dosyası oluşturur.</string>
   <string name="log_plain_text_title">Düz metin olarak kaydet</string>
-  <string name="log_plain_text_summary">SD kartta GPSLogger klasöründe düz bir metin dosyası oluşturur.</string>
   <string name="new_file_creation_title">Yeni dosya oluşturma</string>
   <string name="new_file_creation_summary">Hergün yeni dosya oluşturmak yada program her açıldığında yeni dosya oluşturmak.</string>
   <string name="new_file_creation_onceaday">Günlük</string>
@@ -101,7 +108,34 @@
   <string name="new_file_custom_summary">Kendi dosya adınızı kullanabilirsiniz. İsteğe bağlı olarak seri numarası, yıl, saat, dakika vb. dinamik parametre ekleyin
 Otomatik gönderme özellikleri ile çok iyi çalışmayabilir. Çünkü sadece son dosyayı gönderir</string>
   <string name="pref_performance_title">Performans</string>
+  <string name="pref_performance_summary">Zamanlamalar, filtreler ve dinleyiciler</string>
   <string name="time_before_logging_title">Kayıttan önce zaman</string>
+  <string name="time_before_logging_summary">Maksimum frekans için 0, bu yavaştır ama pil ömrü için en iyisidir.
+    </string>
+  <string name="time_before_logging_dialog_title">Saniye cinsinden</string>
+  <string name="time_before_logging_hint">Saniye (9999 max) girin</string>
+  <string name="keep_fix_summary">Dikkat et, bu dramatik ömrünü azaltacaktır. Sadece düşük frekansları ile daha yüksek kesinlik için kullanın.    </string>
+  <string name="keep_fix_title">Düzeltmeler arasında GPS Kullan</string>
+  <string name="retry_time_title">Doğruluk filtre için zaman aralığını yeniden deneyin</string>
+  <string name="retry_time_dialog_title">Saniye cinsinden</string>
+  <string name="retry_time_hint">Saniye girin (maks 9999)</string>
+  <string name="enabledisablegps_title">GPS Aç/Kapat</string>
+  <string name="startonapplaunch_title">Başlangıçta çalıştır</string>
+  <string name="autoemail_title">E-posta</string>
+  <string name="please_wait">Lütfen bekleyin.</string>
+  <string name="autoemail_target">Hedef e-posta adresleri</string>
+  <string name="autosend_frequency_display">%s dakika sonra</string>
+  <string name="autoemail_smtp_category">E-posta ayarları</string>
+  <string name="autoemail_username">Kullanıcı adı</string>
+  <string name="autoemail_password">Şifre</string>
+  <string name="autoemail_port">Bağlantı noktası</string>
+  <string name="autoemail_port_summary">SMTP bağlantı noktası</string>
+  <string name="autoemail_ssl">SSL kullanılsın mı?</string>
+  <string name="autoemail_server">SMTP Sunucusu</string>
+  <string name="autoemail_choosepreset">Posta sağlayıcısı</string>
+  <string name="autoemail_smtp_testemail">Sınama e-postası</string>
+  <string name="autoemail_testresult_success">E-posta gönderildi</string>
+  <string name="autoemail_invalid_form">Geçersiz değerler</string>
   <string name="fix_obtained">Konum belirlendi</string>
   <string name="started_waiting">GPS başlatıldı, düzeltme bekleniyor</string>
   <string name="gps_stopped">GPS duraklatıldı</string>
@@ -109,4 +143,59 @@ Otomatik gönderme özellikleri ile çok iyi çalışmayabilir. Çünkü sadece 
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_setup_summary">Etiketler, açıklama, görünürlük ve GPS izi yükleme izinlerini ayarlayın</string>
   <string name="osm_lbl_authorize">Bu uygulamaya izin ver</string>
+  <string name="osm_visibility">Görünürlük</string>
+  <string name="osm_description">Açıklama</string>
+  <string name="osm_tags">Etiketler</string>
+  <string name="osm_pick_file">Karşıya yüklenecek dosyayı seçin</string>
+  <string name="pref_general_title">Genel Ayarlar</string>
+  <string name="emailprovider_google">Google Posta</string>
+  <string name="emailprovider_yahoo">Yahoo! Posta</string>
+  <string name="emailprovider_msn">Windows Live Mail</string>
+  <string name="emailprovider_manual">El ile</string>
+  <string name="dropbox_setup_title">Dropbox</string>
+  <string name="dropbox_authorize">Yetki</string>
+  <string name="dropbox_unauthorize">Yetkilendirmeyi kaldır</string>
+  <string name="dropbox_upload">Dropbox</string>
+  <string name="owncloud_server">Sunucu</string>
+  <string name="owncloud_username">Kullanıcı adı</string>
+  <string name="owncloud_password">Şifre</string>
+  <string name="owncloud_directory">Klasör</string>
+  <string name="menu_upload">Karşıya yükleme</string>
+  <string name="autoemail_from">Adresinden</string>
+  <string name="gdocs_upload">Google Drive</string>
+  <string name="gdocs_setup_title">Google Drive</string>
+  <string name="gdocs_test_title">Test yükleme</string>
+  <string name="menu_autosend_now">Şimdi otomatik gönder</string>
+  <string name="autosend_sending">Otomatik gönderme</string>
+  <string name="summary_autosend">Otomatik gönder:</string>
+  <string name="shortcut_start">Başlat</string>
+  <string name="shortcut_stop">Dur</string>
+  <string name="autoopengts_invalid_form">Geçersiz değerler</string>
+  <string name="autoopengts_server">Sunucu</string>
+  <string name="autoopengts_server_summary">Ana bilgisayar adı veya IP</string>
+  <string name="opengts_server_port">Bağlantı noktası</string>
+  <string name="autoftp_server">FTP sunucusu</string>
+  <string name="autoftp_username">Kullanıcı adı</string>
+  <string name="autoftp_password">Şifre</string>
+  <string name="autoftp_port">Bağlantı noktası</string>
+  <string name="autoftp_useftps">FTPS Kullan</string>
+  <string name="autoftp_ssltls">SSL/TLS</string>
+  <string name="autoftp_ssltls_none">Hiçbiri</string>
+  <string name="autoftp_ssltls_ssl">SSL</string>
+  <string name="autoftp_ssltls_tls">TLS</string>
+  <string name="ftp_upload">FTP yükleme</string>
+  <string name="autoftp_setup_title">FTP</string>
+  <string name="menu_faq">Yardım ve SSS</string>
+  <string name="txt_provider">Sağlayıcı:</string>
+  <string name="autoftp_directory">Dizin</string>
+  <string name="txt_travel_duration">Süre:</string>
+  <string name="view_simple">Basit görünüm</string>
+  <string name="view_detailed">Ayrıntılı Görünüm</string>
+  <string name="view_big">Büyük görünüm</string>
+  <string name="save">Kaydet</string>
+  <string name="autoopengts_accountname">Hesap adı</string>
+  <string name="listeners_gps">GPS</string>
+  <string name="listeners_cell">Ağ</string>
+  <string name="listeners_passive">Pasif</string>
+  <string name="activity_unknown">Bilinmiyor</string>
 </resources>

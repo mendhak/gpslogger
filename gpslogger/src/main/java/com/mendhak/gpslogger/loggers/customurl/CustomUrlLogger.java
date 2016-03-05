@@ -20,10 +20,10 @@ package com.mendhak.gpslogger.loggers.customurl;
 import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.loggers.IFileLogger;
+import com.mendhak.gpslogger.loggers.FileLogger;
 import com.path.android.jobqueue.JobManager;
 
-public class CustomUrlLogger implements IFileLogger {
+public class CustomUrlLogger implements FileLogger {
 
     private final String name = "URL";
     private final int satellites;
@@ -39,14 +39,14 @@ public class CustomUrlLogger implements IFileLogger {
     }
 
     @Override
-    public void Write(Location loc) throws Exception {
+    public void write(Location loc) throws Exception {
         if (!Session.hasDescription()) {
-            Annotate("", loc);
+            annotate("", loc);
         }
     }
 
     @Override
-    public void Annotate(String description, Location loc) throws Exception {
+    public void annotate(String description, Location loc) throws Exception {
         JobManager jobManager = AppSettings.GetJobManager();
         jobManager.addJobInBackground(new CustomUrlJob(customLoggingUrl, loc, description, satellites, batteryLevel, androidId));
     }

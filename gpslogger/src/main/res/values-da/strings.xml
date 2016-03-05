@@ -11,6 +11,7 @@
   <string name="menu_annotate">Kommentér</string>
   <string name="menu_share">Del</string>
   <string name="menu_exit">Afslut</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Bredegrad:</string>
   <string name="txt_longitude">Længdegrad:</string>
   <string name="txt_altitude">Højde:</string>
@@ -32,6 +33,7 @@
   <string name="sharing_location_only">Kun placering</string>
   <string name="sharing_mylocation">Min placering</string>
   <string name="sharing_via">Del via</string>
+  <!-- general -->
   <string name="foot">&#160;fod</string>
   <string name="feet">&#160;fod</string>
   <string name="meter">&#160;meter</string>
@@ -79,16 +81,15 @@
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">inden for %s %s</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Afstand i meter</string>
   <string name="settings_accuracy_in_meters">Nøjagtighed i meter</string>
   <string name="settings_enter_meters">Angiv meter (max 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Logføring detaljer</string>
   <string name="log_gpx_title">Log til GPX</string>
-  <string name="log_gpx_summary">Opretter en GPX-fil i mappen GPSLogger på SD-kortet.</string>
   <string name="log_kml_title">Log til KML</string>
-  <string name="log_kml_summary">Opretter en KML-fil i mappen GPSLogger på SD-kortet.</string>
   <string name="log_plain_text_title">Log til almindelig tekst</string>
-  <string name="log_plain_text_summary">Opretter en almindelig tekstfil i mappen GPSLogger på SD-kortet.</string>
   <string name="new_file_creation_title">Ny filoprettelse</string>
   <string name="new_file_creation_summary">Om du vil oprette en ny fil en gang om dagen eller hver gang du starter.</string>
   <string name="new_file_creation_onceaday">En gang om dagen</string>
@@ -131,10 +132,6 @@
   <string name="osm_setup_summary">Angive mærker, beskrivelse, synlighed og tilladelse til at uploade GPS spor     </string>
   <string name="osm_lbl_authorize">Godkend denne app</string>
   <string name="osm_lbl_authorize_description">Du skal tildele denne app tilladelser for at uploade GPS spor til OpenStreetMap. Du kan angive mærker, beskrivelser og synlighed her efter du har tilladt dette app.</string>
-  <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-  <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-  <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-  <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">Fjern tilladelse</string>
   <string name="osm_resetauth_summary">Fjern den lokale tilladelse til at tale med din OSM konto.</string>

@@ -8,16 +8,17 @@ import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.IPreferenceValidation;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import com.mendhak.gpslogger.views.component.CustomSwitchPreference;
 import de.greenrobot.event.EventBus;
 import org.slf4j.LoggerFactory;
 
 public class OwnCloudSettingsFragment
-        extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener, IPreferenceValidation {
+        extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener, PreferenceValidator {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OwnCloudSettingsFragment.class.getSimpleName());
 
@@ -27,21 +28,21 @@ public class OwnCloudSettingsFragment
 
         Preference testOwnCloud = findPreference("owncloud_test");
         testOwnCloud.setOnPreferenceClickListener(this);
-        RegisterEventBus();
+        registerEventBus();
     }
 
     @Override
     public void onDestroy() {
 
-        UnregisterEventBus();
+        unregisterEventBus();
         super.onDestroy();
     }
 
-    private void RegisterEventBus() {
+    private void registerEventBus() {
         EventBus.getDefault().register(this);
     }
 
-    private void UnregisterEventBus(){
+    private void unregisterEventBus(){
         try {
             EventBus.getDefault().unregister(this);
         } catch (Throwable t){
@@ -50,7 +51,7 @@ public class OwnCloudSettingsFragment
     }
 
     @Override
-    public boolean IsValid() {
+    public boolean isValid() {
         CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("owncloud_enabled");
         MaterialEditTextPreference txtServer = (MaterialEditTextPreference) findPreference("owncloud_server");
         MaterialEditTextPreference txtUserName = (MaterialEditTextPreference) findPreference("owncloud_username");
@@ -70,7 +71,7 @@ public class OwnCloudSettingsFragment
         MaterialEditTextPreference passwordPreference = (MaterialEditTextPreference) findPreference("owncloud_password");
         MaterialEditTextPreference directoryPreference = (MaterialEditTextPreference) findPreference("owncloud_directory");
 
-        if (!OwnCloudHelper.ValidSettings(
+        if (!OwnCloudManager.ValidSettings(
                 servernamePreference.getText(),
                 usernamePreference.getText(),
                 passwordPreference.getText(),
@@ -82,8 +83,8 @@ public class OwnCloudSettingsFragment
         }
 
         Utilities.ShowProgress(getActivity(), getString(R.string.owncloud_testing), getString(R.string.please_wait));
-        OwnCloudHelper helper = new OwnCloudHelper();
-        helper.TestOwnCloud(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
+        OwnCloudManager helper = new OwnCloudManager(PreferenceHelper.getInstance());
+        helper.testOwnCloud(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
                 directoryPreference.getText());
 
         return true;
@@ -93,9 +94,10 @@ public class OwnCloudSettingsFragment
     @EventBusHook
     public void onEventMainThread(UploadEvents.OwnCloud o){
         tracer.debug("OwnCloud Event completed, success: " + o.success);
+
         Utilities.HideProgress();
         if(!o.success){
-            Utilities.MsgBox(getString(R.string.sorry), "OwnCloud Test Failed", getActivity());
+            Utilities.ErrorMsgBox(getString(R.string.sorry), "OwnCloud Test Failed", o.message, o.throwable, getActivity());
         }
         else {
             Utilities.MsgBox(getString(R.string.success), "OwnCloud Test Succeeded", getActivity());

@@ -33,7 +33,6 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.Spanned;
-import android.text.format.Time;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
@@ -47,8 +46,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.GpsRollingFileAppender;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
-import com.mendhak.gpslogger.senders.ftp.FtpHelper;
-import com.mendhak.gpslogger.senders.owncloud.OwnCloudHelper;
+import com.ms.square.android.expandabletextview.ExpandableTextView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -58,10 +56,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.util.*;
 
 public class Utilities {
 
@@ -77,9 +72,9 @@ public class Utilities {
             lc.reset();
 
             //final String LOG_DIR = "/sdcard/GPSLogger";
-            final String LOG_DIR = AppSettings.getGpsLoggerFolder();
+            final String LOG_DIR = PreferenceHelper.getInstance().getGpsLoggerFolder();
 
-            GpsRollingFileAppender<ILoggingEvent> rollingFileAppender = new GpsRollingFileAppender<ILoggingEvent>();
+            GpsRollingFileAppender<ILoggingEvent> rollingFileAppender = new GpsRollingFileAppender<>();
             rollingFileAppender.setAppend(true);
             rollingFileAppender.setContext(lc);
 
@@ -88,7 +83,7 @@ public class Utilities {
             rollingFileAppender.setFile(LOG_DIR + "/debuglog.txt");
             rollingFileAppender.setLazy(true);
 
-            TimeBasedRollingPolicy<ILoggingEvent> rollingPolicy = new TimeBasedRollingPolicy<ILoggingEvent>();
+            TimeBasedRollingPolicy<ILoggingEvent> rollingPolicy = new TimeBasedRollingPolicy<>();
             rollingPolicy.setFileNamePattern(LOG_DIR + "/debuglog.%d.txt");
             rollingPolicy.setMaxHistory(3);
             rollingPolicy.setParent(rollingFileAppender);  // parent and context required!
@@ -154,16 +149,94 @@ public class Utilities {
         }
     }
 
-    /**
-     * Displays a message box to the user with an OK button.
-     *
-     * @param title
-     * @param message
-     * @param className The calling class, such as GpsMainActivity.this or
-     *                  mainActivity.
-     */
-    public static void MsgBox(String title, String message, Context className) {
-        MsgBox(title, message, className, null);
+    static String GetFormattedErrorMessageForDisplay(String message, Throwable throwable) {
+        String html = "";
+        if(!IsNullOrEmpty(message)){
+            html += "<b>" + message.replace("\r\n","<br />").replace("\n","<br />") + "</b> <br /><br />";
+        }
+
+        if(throwable != null){
+            if(!IsNullOrEmpty(throwable.getMessage())){
+                html += throwable.getMessage().replace("\r\n","<br />") + "<br />";
+            }
+        }
+       return html;
+    }
+
+    static String GetFormattedErrorMessageForPlainText(String message, Throwable throwable){
+
+        StringBuilder sb = new StringBuilder();
+        if(!IsNullOrEmpty(message)){
+            sb.append(message).append("\r\n");
+        }
+
+        if(throwable != null){
+            if(!IsNullOrEmpty(throwable.getMessage())){
+                sb.append(throwable.getMessage()).append("\r\n");
+            }
+
+            if(throwable.getStackTrace().length > 0) {
+                sb.append(Arrays.toString(throwable.getStackTrace()));
+            }
+        }
+
+        return sb.toString();
+
+    }
+
+    public static void ErrorMsgBox(String title, final String friendlyMessage, final String errorMessage, final Throwable throwable, final Context context){
+
+        final String messageFormatted = GetFormattedErrorMessageForDisplay(errorMessage, throwable);
+
+        MaterialDialog alertDialog = new MaterialDialog.Builder(context)
+                .title(title)
+                .customView(R.layout.error_alertview, false)
+                .autoDismiss(false)
+                .negativeText("Copy")
+                .positiveText(R.string.ok)
+                .neutralText("Details")
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+
+                        final ExpandableTextView expTv1 = (ExpandableTextView) materialDialog.getCustomView().findViewById(R.id.error_expand_text_view);
+                        expTv1.findViewById(R.id.expand_collapse).performClick();
+
+                    }
+                })
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+
+                        android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                        android.content.ClipData clip = android.content.ClipData.newPlainText("Gpslogger error message", GetFormattedErrorMessageForPlainText(errorMessage, throwable));
+                        clipboard.setPrimaryClip(clip);
+
+                        materialDialog.dismiss();
+                    }
+                })
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                        materialDialog.dismiss();
+                    }
+                })
+                .build();
+
+
+        final ExpandableTextView expTv1 = (ExpandableTextView) alertDialog.getCustomView().findViewById(R.id.error_expand_text_view);
+        expTv1.setText(Html.fromHtml(messageFormatted));
+        TextView tv = (TextView) expTv1.findViewById(R.id.expandable_text);
+        tv.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView tvFriendly = (TextView)alertDialog.getCustomView().findViewById(R.id.error_friendly_message);
+        tvFriendly.setText(friendlyMessage);
+
+        if (context instanceof Activity && !((Activity) context).isFinishing()) {
+            alertDialog.show();
+        } else {
+            alertDialog.show();
+        }
     }
 
     /**
@@ -171,13 +244,25 @@ public class Utilities {
      *
      * @param title
      * @param message
-     * @param className   The calling class, such as GpsMainActivity.this or
+     * @param context The calling class, such as GpsMainActivity.this or
+     *                  mainActivity.
+     */
+    public static void MsgBox(String title, String message, Context context) {
+        MsgBox(title, message, context, null);
+    }
+
+    /**
+     * Displays a message box to the user with an OK button.
+     *
+     * @param title
+     * @param message
+     * @param context   The calling class, such as GpsMainActivity.this or
      *                    mainActivity.
      * @param msgCallback An object which implements IHasACallBack so that the
      *                    click event can call the callback method.
      */
-    public static void MsgBox(String title, String message, Context className, final IMessageBoxCallback msgCallback) {
-        MaterialDialog alertDialog = new MaterialDialog.Builder(className)
+    public static void MsgBox(String title, String message, Context context, final MessageBoxCallback msgCallback) {
+        MaterialDialog alertDialog = new MaterialDialog.Builder(context)
                 .title(title)
                 .content(Html.fromHtml(message))
                 .positiveText(R.string.ok)
@@ -185,7 +270,7 @@ public class Utilities {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         if (msgCallback != null) {
-                            msgCallback.MessageBoxResult(IMessageBoxCallback.OK);
+                            msgCallback.messageBoxResult(MessageBoxCallback.OK);
                         }
                     }
                 })
@@ -193,13 +278,13 @@ public class Utilities {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         if (msgCallback != null) {
-                            msgCallback.MessageBoxResult(IMessageBoxCallback.CANCEL);
+                            msgCallback.messageBoxResult(MessageBoxCallback.CANCEL);
                         }
                     }
                 })
                 .build();
 
-        if (className instanceof Activity && !((Activity) className).isFinishing()) {
+        if (context instanceof Activity && !((Activity) context).isFinishing()) {
             alertDialog.show();
         } else {
             alertDialog.show();
@@ -208,13 +293,13 @@ public class Utilities {
     }
 
     /**
-     * Converts seconds into friendly, understandable description of time.
+     * Converts seconds into friendly, understandable description of the duration.
      *
      * @param numberOfSeconds
      * @return
      */
-    public static String GetDescriptiveTimeString(int numberOfSeconds,
-                                                  Context context) {
+    public static String GetDescriptiveDurationString(int numberOfSeconds,
+                                                      Context context) {
 
         String descriptive;
         int hours;
@@ -224,6 +309,10 @@ public class Utilities {
         int remainingSeconds;
 
         // Special cases
+        if(numberOfSeconds==0){
+            return "";
+        }
+
         if (numberOfSeconds == 1) {
             return context.getString(R.string.time_onesecond);
         }
@@ -266,9 +355,8 @@ public class Utilities {
         // Every 5 hours and 2 minutes
         // XYZ-5*2*20*
 
-        descriptive = context.getString(R.string.time_hms_format,
-                String.valueOf(hours), String.valueOf(minutes),
-                String.valueOf(seconds));
+        descriptive = String.format(context.getString(R.string.time_hms_format),
+                String.valueOf(hours), String.valueOf(minutes), String.valueOf(seconds));
 
         return descriptive;
 
@@ -374,7 +462,7 @@ public class Utilities {
     public static String GetReadableDateTime(Date dateToFormat) {
         /**
          * Similar to GetIsoDateTime(), this function is used in
-         * AutoEmailHelper, and we want machine-readable output.
+         * AutoEmailManager, and we want machine-readable output.
          */
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm",
                 Locale.US);
@@ -382,46 +470,9 @@ public class Utilities {
     }
 
 
-    public static boolean IsEmailSetup() {
-        return AppSettings.isEmailAutoSendEnabled()
-                && AppSettings.getAutoEmailTargets().length() > 0
-                && AppSettings.getSmtpServer().length() > 0
-                && AppSettings.getSmtpPort().length() > 0
-                && AppSettings.getSmtpUsername().length() > 0;
-
-    }
-
-    public static boolean IsOpenGTSSetup() {
-        return  AppSettings.getOpenGTSServer().length() > 0
-                && AppSettings.getOpenGTSServerPort().length() > 0
-                && AppSettings.getOpenGTSServerCommunicationMethod().length() > 0
-                && AppSettings.getOpenGTSDeviceId().length() > 0;
-    }
 
 
-    public static boolean IsFtpSetup() {
 
-        FtpHelper helper = new FtpHelper();
-
-        return helper.ValidSettings(AppSettings.getFtpServerName(), AppSettings.getFtpUsername(),
-                AppSettings.getFtpPassword(), AppSettings.getFtpPort(), AppSettings.FtpUseFtps(),
-                AppSettings.getFtpProtocol(), AppSettings.FtpImplicit());
-    }
-
-
-    public static boolean IsOwnCloudSetup() {
-
-        OwnCloudHelper helper = new OwnCloudHelper();
-
-        return helper.ValidSettings(AppSettings.getOwnCloudServerName(),
-                AppSettings.getOwnCloudUsername(),
-                AppSettings.getOwnCloudPassword(),
-                AppSettings.getOwnCloudDirectory());
-    }
-
-    public static boolean IsDropBoxSetup(Context context) {
-        return AppSettings.getDropBoxAccessKeyName() != null && AppSettings.getDropBoxAccessSecretName() != null;
-    }
 
     /**
      * Uses the Haversine formula to calculate the distnace between to lat-long coordinates
@@ -594,8 +645,8 @@ public class Utilities {
 
     public static float GetBatteryLevel(Context context) {
         Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        int level = batteryIntent != null ? batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) : 0;
+        int scale = batteryIntent != null ? batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1) : 0;
 
         if (level == -1 || scale == -1) {
             return 50.0f;
@@ -645,19 +696,19 @@ public class Utilities {
 
 
     public static String GetFormattedCustomFileName(String baseName) {
+        return GetFormattedCustomFileName(baseName, GregorianCalendar.getInstance());
+    }
 
-        Time t = new Time();
-        t.setToNow();
+    public static String GetFormattedCustomFileName(String baseName, Calendar calendar){
 
         String finalFileName = baseName;
         finalFileName = finalFileName.replaceAll("(?i)%ser", String.valueOf(Utilities.GetBuildSerial()));
-        finalFileName = finalFileName.replaceAll("(?i)%hour", String.format("%02d", t.hour));
-        finalFileName = finalFileName.replaceAll("(?i)%min", String.format("%02d", t.minute));
-        finalFileName = finalFileName.replaceAll("(?i)%year",  String.valueOf(t.year));
-        finalFileName = finalFileName.replaceAll("(?i)%month", String.format("%02d", t.month+1));
-        finalFileName = finalFileName.replaceAll("(?i)%day", String.format("%02d", t.monthDay));
+        finalFileName = finalFileName.replaceAll("(?i)%hour", String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY)));
+        finalFileName = finalFileName.replaceAll("(?i)%min", String.format("%02d", calendar.get(Calendar.MINUTE)));
+        finalFileName = finalFileName.replaceAll("(?i)%year",  String.valueOf(calendar.get(Calendar.YEAR)));
+        finalFileName = finalFileName.replaceAll("(?i)%month", String.format("%02d", calendar.get(Calendar.MONTH) +1));
+        finalFileName = finalFileName.replaceAll("(?i)%day", String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH) ));
         return finalFileName;
-
     }
 
 
@@ -782,7 +833,7 @@ public class Utilities {
                 null);
     }
 
-    public static int parseWithDefault(String number, int defaultVal) {
+    public static int parseIntWithDefault(String number, int defaultVal) {
         try {
             return Integer.parseInt(number);
         } catch (Exception e) {

@@ -26,7 +26,7 @@ import android.preference.Preference;
 import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Utilities;
 import com.mendhak.gpslogger.views.PermissionedPreferenceFragment;
 import oauth.signpost.OAuth;
@@ -37,14 +37,18 @@ import org.slf4j.LoggerFactory;
 public class OSMAuthorizationFragment extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener {
 
     private static final org.slf4j.Logger tracer = LoggerFactory.getLogger(OSMAuthorizationFragment.class.getSimpleName());
-    private static OAuthProvider provider;
-    private static OAuthConsumer consumer;
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    private OAuthProvider provider;
+    private OAuthConsumer consumer;
+    OpenStreetMapManager manager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.osmsettings);
+
+        manager = new OpenStreetMapManager(preferenceHelper);
 
         final Intent intent = getActivity().getIntent();
         final Uri myURI = intent.getData();
@@ -56,12 +60,12 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
 
             try {
                 if (provider == null) {
-                    provider = OSMHelper.GetOSMAuthProvider(getActivity());
+                    provider = manager.getOSMAuthProvider();
                 }
 
                 if (consumer == null) {
                     //In case consumer is null, re-initialize from stored values.
-                    consumer = OSMHelper.GetOSMAuthConsumer(getActivity());
+                    consumer = manager.getOSMAuthConsumer();
                 }
 
                 //Ask OpenStreetMap for the access token. This is the main event.
@@ -71,8 +75,8 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
                 String osmAccessTokenSecret = consumer.getTokenSecret();
 
                 //Save for use later.
-                AppSettings.setOSMAccessToken(osmAccessToken);
-                AppSettings.setOSMAccessTokenSecret(osmAccessTokenSecret);
+                preferenceHelper.setOSMAccessToken(osmAccessToken);
+                preferenceHelper.setOSMAccessTokenSecret(osmAccessTokenSecret);
 
             } catch (Exception e) {
                 tracer.error("OSM authorization error", e);
@@ -86,7 +90,7 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
         Preference tagsPref = findPreference("osm_tags");
         Preference resetPref = findPreference("osm_resetauth");
 
-        if (!OSMHelper.IsOsmAuthorized(getActivity())) {
+        if (!manager.isOsmAuthorized()) {
             resetPref.setTitle(R.string.osm_lbl_authorize);
             resetPref.setSummary(R.string.osm_lbl_authorize_description);
             visibilityPref.setEnabled(false);
@@ -107,11 +111,11 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
     @Override
     @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
-        if (OSMHelper.IsOsmAuthorized(getActivity())) {
-            AppSettings.setOSMAccessToken("");
-            AppSettings.setOSMAccessTokenSecret("");
-            AppSettings.setOSMRequestToken("");
-            AppSettings.setOSMRequestTokenSecret("");
+        if (manager.isOsmAuthorized()) {
+            preferenceHelper.setOSMAccessToken("");
+            preferenceHelper.setOSMAccessTokenSecret("");
+            preferenceHelper.setOSMRequestToken("");
+            preferenceHelper.setOSMRequestTokenSecret("");
 
             startActivity(new Intent(getActivity(), GpsMainActivity.class));
             getActivity().finish();
@@ -121,8 +125,8 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
                 StrictMode.enableDefaults();
 
                 //User clicks. Set the consumer and provider up.
-                consumer = OSMHelper.GetOSMAuthConsumer(getActivity());
-                provider = OSMHelper.GetOSMAuthProvider(getActivity());
+                consumer = manager.getOSMAuthConsumer();
+                provider = manager.getOSMAuthProvider();
 
                 String authUrl;
 
@@ -130,8 +134,8 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
                 authUrl = provider.retrieveRequestToken(consumer, OAuth.OUT_OF_BAND);
 
                 //Save for later
-                AppSettings.setOSMRequestToken(consumer.getToken());
-                AppSettings.setOSMRequestTokenSecret(consumer.getTokenSecret());
+                preferenceHelper.setOSMRequestToken(consumer.getToken());
+                preferenceHelper.setOSMRequestTokenSecret(consumer.getTokenSecret());
 
 
                 //Open browser, send user to OpenStreetMap.org

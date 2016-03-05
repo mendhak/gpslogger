@@ -14,6 +14,7 @@
   <string name="menu_annotate">Добавить примечания</string>
   <string name="menu_share">Опубликовать</string>
   <string name="menu_exit">Выход</string>
+  <!-- main form labels -->
   <string name="txt_latitude">Широта:</string>
   <string name="txt_longitude">Долгота:</string>
   <string name="txt_altitude">Высота:</string>
@@ -36,6 +37,7 @@
   <string name="sharing_mylocation">Мои координаты</string>
   <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Опубликовать через</string>
+  <!-- general -->
   <string name="foot">&#160;фут</string>
   <string name="feet">&#160;футы</string>
   <string name="meter">&#160;метр</string>
@@ -87,16 +89,15 @@
   <string name="time_hms_format" formatted="false">%s:%s:%s</string>
   <string name="accuracy_within" formatted="false">в интервале %s %s</string>
   <string name="degree_symbol">°</string>
+  <!-- Settings activity -->
   <string name="settings_distance_in_meters">Дистанция в метрах</string>
   <string name="settings_accuracy_in_meters">Точность в метрах</string>
   <string name="settings_enter_meters">Введите число метров (max 9999)</string>
+  <!-- Settings -->
   <string name="pref_logging_title">Настройки записи лога</string>
   <string name="log_gpx_title">Писать лог в GPX</string>
-  <string name="log_gpx_summary">Создается GPX файл в GPSLogger папке на SD карте.</string>
   <string name="log_kml_title">Писать лог в KML</string>
-  <string name="log_kml_summary">Создается KML файл в GPSLogger папке на SD карте.</string>
   <string name="log_plain_text_title">Записывать в обычный текст</string>
-  <string name="log_plain_text_summary">Создает текстовый файл в папке GPSLogger на SD-карте.</string>
   <string name="new_file_creation_title">Создать новый файл</string>
   <string name="new_file_creation_summary">Создвать файл лога один раз в день или каждый раз при старте записи лога.
     </string>
@@ -160,10 +161,6 @@
   <string name="osm_lbl_authorize_description">Вам нужно разрешить приложению GPSLogger загружать треки под Вашим
         аккаунтом на OpenStreetMap. После этого Вы сможете добавлять теги, описания и т.п.
     </string>
-  <string name="osm_requesttoken_url">http://www.openstreetmap.org/oauth/request_token</string>
-  <string name="osm_accesstoken_url">http://www.openstreetmap.org/oauth/access_token</string>
-  <string name="osm_authorize_url">http://www.openstreetmap.org/oauth/authorize</string>
-  <string name="osm_gpstrace_url">http://www.openstreetmap.org/api/0.6/gpx/create</string>
   <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_resetauth">Убрать информацию об авторизации</string>
   <string name="osm_resetauth_summary">Удалить с телефона информацицю об авторизации приложения на OSM.</string>
@@ -266,7 +263,6 @@
   <string name="ftp_upload">FTP загрузка</string>
   <string name="autoftp_setup_title">FTP-сервер</string>
   <string name="autoftp_setup_summary">Загрузите ваши файлы на FTP(S) сервер. Примечание: Это не охватывает SFTP.</string>
-  <string name="faq_screen_title">Часто задаваемые вопросы</string>
   <string name="menu_faq">Помощь и ЧаВо</string>
   <string name="gpsf_missing">Отсутствует Служба</string>
   <string name="gpsf_missing_description">Вам понадобится Google Play Services Framework для использования этой функции.</string>
@@ -315,7 +311,6 @@
   <string name="new_file_custom_each_time_title">Задавать имя файла при каждом запуске</string>
   <string name="new_file_custom_each_time_summary">Запрашивать имя файла каждый раз при запуске логирования</string>
   <string name="donate_app">Пожертвовать (Play Маркет)</string>
-  <string name="donate_bitcoin">Пожертвовать (Bitcoin)</string>
   <string name="no_network_message">Нет доступной сети</string>
   <string name="hide_notification_buttons">Скрыть кнопки уведомления</string>
   <string name="hide_notification_buttons_summary">Необходимо будет перезапустить GPSLogger, чтобы установка вступила в силу</string>

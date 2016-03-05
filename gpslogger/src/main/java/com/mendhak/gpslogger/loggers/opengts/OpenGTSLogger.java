@@ -20,8 +20,9 @@ package com.mendhak.gpslogger.loggers.opengts;
 import android.content.Context;
 import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
-import com.mendhak.gpslogger.loggers.IFileLogger;
+import com.mendhak.gpslogger.loggers.FileLogger;
 import com.path.android.jobqueue.JobManager;
 
 /**
@@ -29,31 +30,32 @@ import com.path.android.jobqueue.JobManager;
  *
  * @author Francisco Reynoso
  */
-public class OpenGTSLogger implements IFileLogger {
+public class OpenGTSLogger implements FileLogger {
 
     protected final String name = "OpenGTS";
     final Context context;
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     public OpenGTSLogger(Context context) {
         this.context = context;
     }
 
     @Override
-    public void Write(Location loc) throws Exception {
+    public void write(Location loc) throws Exception {
 
-        String server = AppSettings.getOpenGTSServer();
-        int port = Integer.parseInt(AppSettings.getOpenGTSServerPort());
-        String accountName = AppSettings.getOpenGTSAccountName();
-        String path = AppSettings.getOpenGTSServerPath();
-        String deviceId = AppSettings.getOpenGTSDeviceId();
-        String communication = AppSettings.getOpenGTSServerCommunicationMethod();
+        String server = preferenceHelper.getOpenGTSServer();
+        int port = Integer.parseInt(preferenceHelper.getOpenGTSServerPort());
+        String accountName = preferenceHelper.getOpenGTSAccountName();
+        String path = preferenceHelper.getOpenGTSServerPath();
+        String deviceId = preferenceHelper.getOpenGTSDeviceId();
+        String communication = preferenceHelper.getOpenGTSServerCommunicationMethod();
 
         JobManager jobManager = AppSettings.GetJobManager();
         jobManager.addJobInBackground(new OpenGTSJob(server, port, accountName, path, deviceId, communication, new SerializableLocation[]{new SerializableLocation(loc)}));
     }
 
     @Override
-    public void Annotate(String description, Location loc) throws Exception {
+    public void annotate(String description, Location loc) throws Exception {
     }
 
     @Override

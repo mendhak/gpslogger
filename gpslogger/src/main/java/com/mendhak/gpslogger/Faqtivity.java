@@ -19,7 +19,7 @@
 package com.mendhak.gpslogger;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ExpandableListView;
 import com.mendhak.gpslogger.views.component.ExpandableListAdapter;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Faqtivity extends ActionBarActivity {
+public class Faqtivity extends AppCompatActivity {
 
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
@@ -47,7 +47,10 @@ public class Faqtivity extends ActionBarActivity {
             setContentView(R.layout.activity_faq);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            if(getSupportActionBar() != null){
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+
 
         }
         catch(Exception ex){
@@ -80,14 +83,14 @@ public class Faqtivity extends ActionBarActivity {
     }
 
     private void prepareHelpTopics() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
+        listDataHeader = new ArrayList<>();
+        listDataChild = new HashMap<>();
 
         listDataHeader.add(getString(R.string.faq_generalsection));
         listDataHeader.add(getString(R.string.faq_preferencesandfilters));
         listDataHeader.add(getString(R.string.faq_advancedsection));
 
-        List<String> generalTopics = new ArrayList<String>();
+        List<String> generalTopics = new ArrayList<>();
         generalTopics.add(getString(R.string.faq_topic_whyisntitaccurate));
         generalTopics.add(getString(R.string.faq_topic_howtoremovenotification));
         generalTopics.add(getString(R.string.faq_topic_profiles));
@@ -96,14 +99,14 @@ public class Faqtivity extends ActionBarActivity {
         generalTopics.add(getString(R.string.faq_topic_whydoesfixtakelongtime));
 
 
-        List<String> preferencesAndFiltersTopics = new ArrayList<String>();
+        List<String> preferencesAndFiltersTopics = new ArrayList<>();
         preferencesAndFiltersTopics.add(getString(R.string.faq_topic_whatvariousfiltersmean));
         preferencesAndFiltersTopics.add(getString(R.string.faq_topic_whereisthefilelogged));
         preferencesAndFiltersTopics.add(getString(R.string.faq_topic_howtogetthefile));
         preferencesAndFiltersTopics.add(getString(R.string.faq_topic_loadingpresets));
 
 
-        List<String> advancedTopics = new ArrayList<String>();
+        List<String> advancedTopics = new ArrayList<>();
         advancedTopics.add(getString(R.string.faq_topic_thirdpartyintegration));
         advancedTopics.add(getString(R.string.faq_topic_taskerintegration));
         advancedTopics.add(getString(R.string.faq_topic_howgpsworks));
