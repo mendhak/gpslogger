@@ -55,6 +55,7 @@ import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ProfileEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
@@ -70,7 +71,7 @@ import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -85,7 +86,7 @@ public class GpsMainActivity extends AppCompatActivity
     private static boolean userInvokedUpload;
     private static Intent serviceIntent;
     private ActionBarDrawerToggle drawerToggle;
-    private org.slf4j.Logger tracer;
+    private static final Logger LOG = Logs.of(GpsMainActivity.class);
 
     Drawer materialDrawer;
     AccountHeader drawerHeader;
@@ -94,9 +95,6 @@ public class GpsMainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-       Utilities.ConfigureLogbackDirectly(getApplicationContext());
-        tracer = LoggerFactory.getLogger(GpsMainActivity.class.getSimpleName());
 
         loadPresetProperties();
         loadVersionSpecificProperties();
@@ -111,7 +109,7 @@ public class GpsMainActivity extends AppCompatActivity
         registerEventBus();
 
         if(preferenceHelper.shouldStartLoggingOnAppLaunch()){
-            tracer.debug("Start logging on app launch");
+            LOG.debug("Start logging on app launch");
             EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
         }
     }
@@ -221,7 +219,7 @@ public class GpsMainActivity extends AppCompatActivity
             int versionCode = packageInfo.versionCode;
 
             if( preferenceHelper.getLastVersionSeen() <= 71 ){
-                tracer.debug("preferenceHelper.getLastVersionSeen() " + preferenceHelper.getLastVersionSeen() );
+                LOG.debug("preferenceHelper.getLastVersionSeen() " + preferenceHelper.getLastVersionSeen());
                 //Specifically disable passive provider... just once
                 if(preferenceHelper.getChosenListeners().contains("passive")){
                     Set<String> listeners = new HashSet<>();
@@ -251,7 +249,7 @@ public class GpsMainActivity extends AppCompatActivity
         try {
             preferenceHelper.setPreferenceFromPropertiesFile(file);
         } catch (Exception e) {
-            tracer.error("Could not load preset properties", e);
+            LOG.error("Could not load preset properties", e);
         }
     }
 
@@ -298,7 +296,7 @@ public class GpsMainActivity extends AppCompatActivity
         }
         catch(Exception ex){
             //http://stackoverflow.com/questions/26657348/appcompat-v7-v21-0-0-causing-crash-on-samsung-devices-with-android-v4-2-2
-            tracer.error("Thanks for this, Samsung", ex);
+            LOG.error("Thanks for this, Samsung", ex);
         }
 
     }
@@ -513,7 +511,7 @@ public class GpsMainActivity extends AppCompatActivity
 
     private void populateProfilesList() {
 
-        tracer.debug("Current profile:" + preferenceHelper.getCurrentProfileName());
+        LOG.debug("Current profile:" + preferenceHelper.getCurrentProfileName());
 
         drawerHeader.clear();
 
@@ -727,7 +725,7 @@ public class GpsMainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        tracer.debug("Menu Item: " + String.valueOf(item.getTitle()));
+        LOG.debug("Menu Item: " + String.valueOf(item.getTitle()));
 
         switch (id) {
             case R.id.mnuAnnotate:
@@ -769,7 +767,7 @@ public class GpsMainActivity extends AppCompatActivity
 
 
     private void forceAutoSendNow() {
-        tracer.debug("User forced an auto send");
+        LOG.debug("User forced an auto send");
 
         if (preferenceHelper.isAutoSendEnabled()) {
             Utilities.ShowProgress(this, getString(R.string.autosend_sending),getString(R.string.please_wait));
@@ -804,7 +802,7 @@ public class GpsMainActivity extends AppCompatActivity
                 .input(getString(R.string.letters_numbers), "", new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(MaterialDialog materialDialog, CharSequence input) {
-                        tracer.info("Annotation entered : " + input.toString());
+                        LOG.info("Annotation entered : " + input.toString());
                         EventBus.getDefault().postSticky(new CommandEvents.Annotate(input.toString()));
                     }
                 })
@@ -926,13 +924,12 @@ public class GpsMainActivity extends AppCompatActivity
                             List<File> chosenFiles = new ArrayList<>();
 
                             for (Object item : selectedItems) {
-                                tracer.info("Selected file to upload- " + files[Integer.valueOf(item.toString())]);
+                                LOG.info("Selected file to upload- " + files[Integer.valueOf(item.toString())]);
                                 chosenFiles.add(new File(gpxFolder, files[Integer.valueOf(item.toString())]));
                             }
 
                             if (chosenFiles.size() > 0) {
-                                Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.please_wait),
-                                        getString(R.string.please_wait));
+                                Utilities.ShowProgress(GpsMainActivity.this, getString(R.string.please_wait), getString(R.string.please_wait));
                                 userInvokedUpload = true;
                                 sender.uploadFile(chosenFiles);
 
@@ -1031,7 +1028,7 @@ public class GpsMainActivity extends AppCompatActivity
                 Utilities.MsgBox(getString(R.string.sorry), getString(R.string.no_files_found), this);
             }
         } catch (Exception ex) {
-            tracer.error("Sharing problem", ex);
+            LOG.error("Sharing problem", ex);
         }
     }
 
@@ -1042,12 +1039,12 @@ public class GpsMainActivity extends AppCompatActivity
     private final ServiceConnection gpsServiceConnection = new ServiceConnection() {
 
         public void onServiceDisconnected(ComponentName name) {
-            tracer.debug("Disconnected from GPSLoggingService from MainActivity");
+            LOG.debug("Disconnected from GPSLoggingService from MainActivity");
             //loggingService = null;
         }
 
         public void onServiceConnected(ComponentName name, IBinder service) {
-            tracer.debug("Connected to GPSLoggingService from MainActivity");
+            LOG.debug("Connected to GPSLoggingService from MainActivity");
             //loggingService = ((GpsLoggingService.GpsLoggingBinder) service).getService();
         }
     };
@@ -1076,16 +1073,16 @@ public class GpsMainActivity extends AppCompatActivity
                 unbindService(gpsServiceConnection);
                 Session.setBoundToService(false);
             } catch (Exception e) {
-                tracer.warn(SessionLogcatAppender.MARKER_INTERNAL, "Could not unbind service", e);
+                LOG.warn(SessionLogcatAppender.MARKER_INTERNAL, "Could not unbind service", e);
             }
         }
 
         if (!Session.isStarted()) {
-            tracer.debug("Stopping the service");
+            LOG.debug("Stopping the service");
             try {
                 stopService(serviceIntent);
             } catch (Exception e) {
-                tracer.error("Could not stop the service", e);
+                LOG.error("Could not stop the service", e);
             }
         }
     }
@@ -1113,11 +1110,11 @@ public class GpsMainActivity extends AppCompatActivity
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.OpenGTS upload){
-        tracer.debug("Open GTS Event completed, success: " + upload.success);
+        LOG.debug("Open GTS Event completed, success: " + upload.success);
         Utilities.HideProgress();
 
         if(!upload.success){
-            tracer.error(getString(R.string.opengts_setup_title)
+            LOG.error(getString(R.string.opengts_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
 
@@ -1130,11 +1127,11 @@ public class GpsMainActivity extends AppCompatActivity
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.AutoEmail upload){
-        tracer.debug("Auto Email Event completed, success: " + upload.success);
+        LOG.debug("Auto Email Event completed, success: " + upload.success);
         Utilities.HideProgress();
 
         if(!upload.success){
-            tracer.error(getString(R.string.autoemail_title)
+            LOG.error(getString(R.string.autoemail_title)
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
@@ -1146,11 +1143,11 @@ public class GpsMainActivity extends AppCompatActivity
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.OpenStreetMap upload){
-        tracer.debug("OSM Event completed, success: " + upload.success);
+        LOG.debug("OSM Event completed, success: " + upload.success);
         Utilities.HideProgress();
 
         if(!upload.success){
-            tracer.error(getString(R.string.osm_setup_title)
+            LOG.error(getString(R.string.osm_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
@@ -1162,11 +1159,11 @@ public class GpsMainActivity extends AppCompatActivity
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.Dropbox upload){
-        tracer.debug("Dropbox Event completed, success: " + upload.success);
+        LOG.debug("Dropbox Event completed, success: " + upload.success);
         Utilities.HideProgress();
 
         if(!upload.success){
-            tracer.error(getString(R.string.dropbox_setup_title)
+            LOG.error(getString(R.string.dropbox_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
@@ -1178,11 +1175,11 @@ public class GpsMainActivity extends AppCompatActivity
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.GDocs upload){
-        tracer.debug("GDocs Event completed, success: " + upload.success);
+        LOG.debug("GDocs Event completed, success: " + upload.success);
         Utilities.HideProgress();
 
         if(!upload.success){
-            tracer.error(getString(R.string.gdocs_setup_title)
+            LOG.error(getString(R.string.gdocs_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
@@ -1194,11 +1191,11 @@ public class GpsMainActivity extends AppCompatActivity
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.Ftp upload){
-        tracer.debug("FTP Event completed, success: " + upload.success);
+        LOG.debug("FTP Event completed, success: " + upload.success);
         Utilities.HideProgress();
 
         if(!upload.success){
-            tracer.error(getString(R.string.autoftp_setup_title)
+            LOG.error(getString(R.string.autoftp_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
@@ -1211,11 +1208,11 @@ public class GpsMainActivity extends AppCompatActivity
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.OwnCloud upload){
-        tracer.debug("OwnCloud Event completed, success: " + upload.success);
+        LOG.debug("OwnCloud Event completed, success: " + upload.success);
         Utilities.HideProgress();
 
         if(!upload.success){
-            tracer.error(getString(R.string.owncloud_setup_title)
+            LOG.error(getString(R.string.owncloud_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
 
@@ -1249,7 +1246,7 @@ public class GpsMainActivity extends AppCompatActivity
     @EventBusHook
     public void onEventMainThread(ProfileEvents.CreateNewProfile createProfileEvent){
 
-        tracer.debug("Creating profile: " + createProfileEvent.newProfileName);
+        LOG.debug("Creating profile: " + createProfileEvent.newProfileName);
 
         try {
             File f = new File(Utilities.GetDefaultStorageFolder(GpsMainActivity.this), createProfileEvent.newProfileName+".properties");
@@ -1258,14 +1255,14 @@ public class GpsMainActivity extends AppCompatActivity
             populateProfilesList();
 
         } catch (IOException e) {
-            tracer.error("Could not create properties file for new profile ", e);
+            LOG.error("Could not create properties file for new profile ", e);
         }
 
     }
 
     @EventBusHook
     public void onEventMainThread(ProfileEvents.DeleteProfile deleteProfileEvent){
-        tracer.debug("Deleting profile: " + deleteProfileEvent.profileName);
+        LOG.debug("Deleting profile: " + deleteProfileEvent.profileName);
         File f = new File(Utilities.GetDefaultStorageFolder(GpsMainActivity.this), deleteProfileEvent.profileName+".properties");
         f.delete();
 

@@ -30,7 +30,10 @@ public class SessionLogcatAppender extends AppenderBase<ILoggingEvent> {
 
     @Override
     protected void append(ILoggingEvent eventObject) {
+        //Prevents certain entries from appearing in GPS Log View screen
         if(eventObject.getLevel().toInt() < Level.INFO.toInt()){ return; }
+
+        //Prevents certain entries from appearing in device logcat
         if(eventObject.getMarker() == MARKER_INTERNAL){ return; }
 
         Statuses.add(eventObject);

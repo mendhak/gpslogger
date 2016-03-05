@@ -19,25 +19,34 @@ package com.mendhak.gpslogger.common;
 
 import android.app.Application;
 import com.mendhak.gpslogger.BuildConfig;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.config.Configuration;
 import com.path.android.jobqueue.log.CustomLogger;
 import de.greenrobot.event.EventBus;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 public class AppSettings extends Application {
 
     private static JobManager jobManager;
     private static AppSettings instance;
-    private static org.slf4j.Logger tracer = LoggerFactory.getLogger(AppSettings.class.getSimpleName());
-
+    private static Logger tracer;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
-        EventBus.builder().logNoSubscriberMessages(false).sendNoSubscriberEvent(false).installDefaultEventBus();
 
+        //Configure the slf4j logger
+        Logs.configure();
+         tracer = Logs.of(this.getClass());
+        tracer.debug("Log4J configured");
+
+        //Configure the Event Bus
+        EventBus.builder().logNoSubscriberMessages(false).sendNoSubscriberEvent(false).installDefaultEventBus();
+        tracer.debug("EventBus configured");
+
+        //Configure the Job Queue
         Configuration config = new Configuration.Builder(getInstance())
                 .networkUtil(new WifiNetworkUtil(getInstance()))
                 .consumerKeepAlive(60)
@@ -45,6 +54,7 @@ public class AppSettings extends Application {
                 .customLogger(jobQueueLogger)
                 .build();
         jobManager = new JobManager(this, config);
+        tracer.debug("Job Queue configured");
     }
 
     /**
