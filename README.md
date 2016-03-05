@@ -22,9 +22,9 @@ You can also submit [pull requests](https://help.github.com/articles/using-pull-
 I'm not very good at UIs, so any work with the layouts would be appreciated!  
 
 
-## License
+## License and policy
 
-Licensed under [GPL v2](LICENSE.md).  
+[Licensed under GPL v2](LICENSE.md) | [Third party licenses](assets/text/opensource.md) | [Privacy policy](assets/text/privacypolicy.md)
 
 ## Donate
 
