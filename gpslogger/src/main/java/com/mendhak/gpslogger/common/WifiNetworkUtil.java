@@ -1,12 +1,15 @@
 package com.mendhak.gpslogger.common;
 
 
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
+import android.os.PowerManager;
 import com.path.android.jobqueue.network.NetworkEventProvider;
 import com.path.android.jobqueue.network.NetworkUtil;
 
@@ -27,22 +30,51 @@ public class WifiNetworkUtil implements NetworkUtil, NetworkEventProvider {
                 // through getActiveNetworkInfo() or getAllNetworkInfo().
                 listener.onNetworkChange(isConnected(context));
             }
-        }, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        }, getNetworkIntentFilter());
     }
 
     @Override
     public boolean isConnected(Context context) {
+
+        if (isDozing(context)) {
+            return false;
+        }
+
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
 
         boolean isWifiRequired = PreferenceHelper.getInstance().shouldAutoSendOnWifiOnly();
-        boolean isWifi = true;
+        boolean isDeviceOnWifi = true;
         if(isWifiRequired && netInfo != null){
-            isWifi = (netInfo.getType() == ConnectivityManager.TYPE_WIFI);
+            isDeviceOnWifi = (netInfo.getType() == ConnectivityManager.TYPE_WIFI);
         }
 
+        return netInfo != null && netInfo.isConnectedOrConnecting() && isDeviceOnWifi;
+    }
 
-        return netInfo != null && netInfo.isConnectedOrConnecting() && isWifi;
+    @TargetApi(23)
+    private static IntentFilter getNetworkIntentFilter() {
+        IntentFilter networkIntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        if (Build.VERSION.SDK_INT >= 23) {
+            networkIntentFilter.addAction(PowerManager.ACTION_DEVICE_IDLE_MODE_CHANGED);
+        }
+        return networkIntentFilter;
+    }
+
+    /**
+     * Returns true if the device is in Doze/Idle mode. Should be called before checking the network connection because
+     * the ConnectionManager may report the device is connected when it isn't during Idle mode.
+     * https://github.com/yigit/android-priority-jobqueue/blob/master/jobqueue/src/main/java/com/path/android/jobqueue/network/NetworkUtilImpl.java#L60
+     */
+    @TargetApi(23)
+    public static boolean isDozing(Context context) {
+        if (Build.VERSION.SDK_INT >= 23) {
+            PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+            return powerManager.isDeviceIdleMode() &&
+                    !powerManager.isIgnoringBatteryOptimizations(context.getPackageName());
+        } else {
+            return false;
+        }
     }
 
     @Override

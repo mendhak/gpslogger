@@ -19,6 +19,7 @@
 
 package com.mendhak.gpslogger;
 
+import android.annotation.TargetApi;
 import android.app.*;
 import android.content.Context;
 import android.content.Intent;
@@ -891,6 +892,7 @@ public class GpsLoggingService extends Service  {
         nextPointAlarmManager.cancel(pi);
     }
 
+    @TargetApi(23)
     private void setAlarmForNextPoint() {
         tracer.debug("Set alarm for " + preferenceHelper.getMinimumLoggingInterval() + " seconds");
 
@@ -899,8 +901,14 @@ public class GpsLoggingService extends Service  {
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
         nextPointAlarmManager.cancel(pi);
 
-        nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
+        if(WifiNetworkUtil.isDozing(this)){
+            //Only invoked once per 15 minutes in doze mode
+            tracer.debug("Device is dozing, using infrequent alarm");
+            nextPointAlarmManager.setAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
+        }
+        else {
+            nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
+        }
     }
 
 
