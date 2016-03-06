@@ -83,7 +83,7 @@ public class CustomUrlJob extends Job {
             conn = (HttpURLConnection) url.openConnection();
         }
 
-        conn.setRequestMethod("GET");
+        conn.setRequestMethod("POST");
 
         if(!Utilities.IsNullOrEmpty(basicPassword) && !Utilities.IsNullOrEmpty(basicUsername) ){
             String basicAuth = "Basic " + new String(Base64.encode((basicUsername + ":" + basicPassword).getBytes(), Base64.DEFAULT));
