@@ -44,8 +44,10 @@ public class NmeaSentence {
             }
         }
 
-        else if (nmeaParts.length > 16 &&!Utilities.IsNullOrEmpty(nmeaParts[16])) {
-            return nmeaParts[16];
+        else if (nmeaParts[0].equalsIgnoreCase("$GPGSA")) {
+            if (nmeaParts.length > 16 &&!Utilities.IsNullOrEmpty(nmeaParts[16])) {
+                return nmeaParts[16];
+            }
         }
 
         return null;
