@@ -1,29 +1,29 @@
 package com.mendhak.gpslogger.senders.osm;
 
+import com.mendhak.gpslogger.BuildConfig;
+import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
 import oauth.signpost.OAuthConsumer;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
+import okhttp3.*;
+
 import org.slf4j.Logger;
+import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer;
+import se.akerfeldt.okhttp.signpost.OkHttpOAuthProvider;
+import se.akerfeldt.okhttp.signpost.SigningInterceptor;
 
 import java.io.File;
+import java.io.IOException;
 
 public class OSMJob extends Job {
 
 
     private static final Logger LOG = Logs.of(OSMJob.class);
-    OAuthConsumer consumer;
+    //OAuthConsumer consumer;
     String gpsTraceUrl;
     File chosenFile;
     String description;
@@ -33,7 +33,7 @@ public class OSMJob extends Job {
     protected OSMJob(OAuthConsumer consumer, String gpsTraceUrl, File chosenFile, String description, String tags, String visibility) {
         super(new Params(1).requireNetwork().persist().addTags(getJobTag(chosenFile)));
 
-        this.consumer = consumer;
+//        this.consumer = consumer;
         this.gpsTraceUrl = gpsTraceUrl;
         this.chosenFile = chosenFile;
         this.description = description;
@@ -44,42 +44,52 @@ public class OSMJob extends Job {
     @Override
     public void onAdded() {
 
+        LOG.debug("OSM Job added");
     }
 
     @Override
     public void onRun() throws Throwable {
-        HttpPost request = new HttpPost(gpsTraceUrl);
 
-        consumer.sign(request);
 
-        MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+        OkHttpOAuthConsumer consumer = new OkHttpOAuthConsumer(BuildConfig.OSM_CONSUMER_KEY, BuildConfig.OSM_CONSUMER_SECRET);
+        consumer.setTokenWithSecret(PreferenceHelper.getInstance().getOSMAccessToken(), PreferenceHelper.getInstance().getOSMAccessTokenSecret());
 
-        FileBody gpxBody = new FileBody(chosenFile);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new SigningInterceptor(consumer)).build();
 
-        entity.addPart("file", gpxBody);
-        if (description == null || description.length() <= 0) {
-            description = "GPSLogger for Android";
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("file", chosenFile.getName(), RequestBody.create(MediaType.parse("application/xml+gpx"), chosenFile))
+                .addFormDataPart("description", Strings.isNullOrEmpty(description) ? "GPSLogger for Android" : description)
+                .addFormDataPart("tags", tags)
+                .addFormDataPart("visibility",visibility)
+                .build();
+
+//        consumer.sign(requestBody);
+
+
+        Request request = new Request.Builder()
+                .url(gpsTraceUrl)
+                .post(requestBody)
+                .build();
+
+
+        Response response = client.newCall(request).execute();
+        ResponseBody body = response.body();
+
+        if(response.isSuccessful()){
+            String message = body.string();
+            LOG.debug("OSM Response body: " + message);
+            EventBus.getDefault().post(new UploadEvents.OpenStreetMap().succeeded());
         }
-
-        entity.addPart("description", new StringBody(description));
-        entity.addPart("tags", new StringBody(tags));
-        entity.addPart("visibility", new StringBody(visibility));
-
-        request.setEntity(entity);
-        DefaultHttpClient httpClient = new DefaultHttpClient();
-		HttpParams params = httpClient.getParams();
-		HttpConnectionParams.setConnectionTimeout(params, 10000);
-		HttpConnectionParams.setSoTimeout(params, 30000);
-
-        HttpResponse response = httpClient.execute(request);
-        int statusCode = response.getStatusLine().getStatusCode();
-        LOG.debug("OSM Upload - " + String.valueOf(statusCode));
-        EventBus.getDefault().post(new UploadEvents.OpenStreetMap().succeeded());
+        else {
+            body.close();
+            EventBus.getDefault().post(new UploadEvents.OpenStreetMap().failed());
+        }
     }
 
     @Override
     protected void onCancel() {
-
+        LOG.debug("OSM Job cancelled ");
     }
 
     @Override

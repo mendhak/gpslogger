@@ -15,3 +15,181 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-dontobfuscate
+-dontpreverify
+#-dontshrink
+-dontoptimize
+
+
+-keep,includedescriptorclasses class com.mendhak.gpslogger.** { *; }
+
+## GreenRobot EventBus specific rules ##
+# https://github.com/greenrobot/EventBus/blob/master/HOWTO.md#proguard-configuration
+
+-keepclassmembers,includedescriptorclasses class ** {
+    public void onEvent*(***);
+}
+
+# Only required if you use AsyncExecutor
+-keepclassmembers class * extends de.greenrobot.event.util.ThrowableFailureEvent {
+    public <init>(java.lang.Throwable);
+}
+
+-keep,includedescriptorclasses class de.greenrobot.event.util.ErrorDialogManager.** { *; }
+
+# Don't warn for missing support classes
+-dontwarn de.greenrobot.event.util.*$Support
+-dontwarn de.greenrobot.event.util.*$SupportManagerFragment
+
+#
+### Google Play Services 4.3.23 specific rules ##
+### https://developer.android.com/google/play-services/setup.html#Proguard ##
+#
+#-keep class * extends java.util.ListResourceBundle {
+#    protected Object[][] getContents();
+#}
+#
+#-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+#    public static final *** NULL;
+#}
+#
+#-keepnames @com.google.android.gms.common.annotation.KeepName class *
+#-keepclassmembernames class * {
+#    @com.google.android.gms.common.annotation.KeepName *;
+#}
+#
+#-keepnames class * implements android.os.Parcelable {
+#    public static final ** CREATOR;
+#}
+#
+## Logback for Android
+##
+## Tested on the following *.gradle dependencies
+##
+##    compile 'org.slf4j:slf4j-api:1.7.7'
+##    compile 'com.github.tony19:logback-android-core:1.1.1-3'
+##    compile 'com.github.tony19:logback-android-classic:1.1.1-3'
+##
+#
+#-keep class ch.qos.** { *; }
+#-keep class org.slf4j.** { *; }
+#-keepattributes *Annotation*
+#-dontwarn ch.qos.logback.core.net.*
+#
+#
+## Android iconics library - https://github.com/mikepenz/Android-Iconics
+## Warning: works ONLY with iconics > 1.0.0
+##
+## Tested on gradle config:
+##
+##  compile 'com.mikepenz:iconics-core:1.7.1@aar'
+##
+#
+#-keep class com.mikepenz.iconics.** { *; }
+#-keep class com.mikepenz.community_material_typeface_library.CommunityMaterial
+#-keep class com.mikepenz.fontawesome_typeface_library.FontAwesome
+#-keep class com.mikepenz.google_material_typeface_library.GoogleMaterial
+#-keep class com.mikepenz.meteocons_typeface_library.Meteoconcs
+#-keep class com.mikepenz.octicons_typeface_library.Octicons
+#
+#
+# OkHttp
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-dontwarn okhttp3.**
+-dontwarn java.nio.**
+-dontwarn org.codehaus.**
+-dontnote okhttp3.internal.**
+-dontnote okhttp3.**
+-dontnote okio.**
+
+#OKHTTP OauthSignpost
+
+#
+#
+#-keep public class android.support.v7.widget.** { *; }
+#-keep public class android.support.v7.internal.widget.** { *; }
+#-keep public class android.support.v7.internal.view.menu.** { *; }
+#
+#-keep public class * extends android.support.v4.view.ActionProvider {
+#    public <init>(android.content.Context);
+#}
+#
+#
+## http://stackoverflow.com/questions/29679177/cardview-shadow-not-appearing-in-lollipop-after-obfuscate-with-proguard/29698051
+#-keep class android.support.v7.widget.RoundRectDrawable { *; }
+
+
+#---------------------------------------- Works so far (below) ---------------
+#
+#-dontshrink
+#-dontoptimize
+#
+#
+-dontwarn org.apache.tools.ant.**
+-dontwarn javax.servlet.**
+-dontwarn javax.naming.**
+-dontwarn org.apache.log4j.**
+-dontwarn org.apache.log.**
+-dontwarn org.apache.oro.**
+-dontwarn autovalue.shaded.org.**
+-dontwarn org.jdom.**
+-dontwarn com.werken.**
+-dontwarn org.apache.velocity.**
+-dontwarn java.awt.**
+-dontwarn javax.security.**
+-dontwarn javax.lang.**
+-dontwarn javax.annotation.**
+-dontwarn javax.tools.**
+-dontwarn javax.xml.stream.**
+-dontwarn com.google.vending.**
+-dontwarn org.apache.**
+-dontwarn java.beans.**
+-dontwarn java.lang.**
+-dontwarn com.google.auto.**
+#
+
+-dontnote org.apache.**
+-dontnote com.google.vending.**
+-dontnote org.aspectj.**
+-dontnote android.net.http.**
+-dontnote com.android.vending.**
+-dontnote ch.qos.logback.**
+-dontnote autovalue.shaded.org.**
+-dontnote android.support.v4.**
+-dontnote com.google.**
+-dontnote android.graphics.**
+
+-dontnote org.apache.commons.codec.**
+-dontnote org.apache.http.**
+-dontnote autovalue.shaded.com.**
+-dontnote com.afollestad.materialdialogs.internal.MDTintHelper
+
+-keep,includedescriptorclasses class android.support.v4.app.NotificationCompat$Action { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.ActionBarContainer { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.ActionBarOverlayLayout { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.ActionMenuView { *; }
+-keep,includedescriptorclasses class android.support.v7.view.menu.ActionMenuItemView { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.ActivityChooserView { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.ContentFrameLayout { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.FitWindowsFrameLayout { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.FitWindowsLinearLayout { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.RecyclerView { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.SearchView { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.SearchView$SearchAutoComplete { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.Toolbar { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.ViewStubCompat { *; }
+-keep,includedescriptorclasses class com.afollestad.materialdialogs.** { *; }
+-keep,includedescriptorclasses class com.dd.processbutton.iml.ActionProcessButton { *; }
+-keep,includedescriptorclasses class com.mikepenz.iconics.view.IconicsImageView { *; }
+-keep class com.mikepenz.iconics.typeface.ITypeface {*;}
+-keep,includedescriptorclasses class com.path.android.** {*;}
+-keep,includedescriptorclasses class com.mikepenz.materialize.view.ScrimInsetsFrameLayout { *; }
+-keep,includedescriptorclasses class com.ms.square.android.expandabletextview.ExpandableTextView { *; }
+
+# SMTP Mail
+-keep,includedescriptorclasses class com.sun.mail.** {*;}
+

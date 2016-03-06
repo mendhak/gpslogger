@@ -40,8 +40,10 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
 
     private static final Logger LOG = Logs.of(OSMAuthorizationFragment.class);
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
-    private OAuthProvider provider;
-    private OAuthConsumer consumer;
+
+    //Must be static - when user returns from OSM, this needs to be set already
+    private static OAuthProvider provider;
+    private static OAuthConsumer consumer;
     OpenStreetMapManager manager;
 
     @Override
@@ -62,12 +64,12 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
 
             try {
                 if (provider == null) {
-                    provider = manager.getOSMAuthProvider();
+                    provider = OpenStreetMapManager.getOSMAuthProvider();
                 }
 
                 if (consumer == null) {
                     //In case consumer is null, re-initialize from stored values.
-                    consumer = manager.getOSMAuthConsumer();
+                    consumer = OpenStreetMapManager.getOSMAuthConsumer();
                 }
 
                 //Ask OpenStreetMap for the access token. This is the main event.

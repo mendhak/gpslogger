@@ -86,6 +86,7 @@ public class AutoEmailJob extends Job {
 
     @Override
     protected void onCancel() {
+        LOG.debug("Email job cancelled");
     }
 
     @Override

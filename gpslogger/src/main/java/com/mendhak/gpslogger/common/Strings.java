@@ -193,7 +193,7 @@ public class Strings {
      * @return
      */
     public static boolean isNullOrEmpty(String text) {
-        return text == null || text.length() == 0;
+        return text == null ||  text.trim().length() == 0;
     }
 
     public static String htmlDecode(String text) {

@@ -20,13 +20,17 @@ package com.mendhak.gpslogger.senders.osm;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
-import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
-import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
+import org.slf4j.Logger;
+import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer;
+import se.akerfeldt.okhttp.signpost.OkHttpOAuthProvider;
+
 
 import java.io.File;
 import java.util.List;
@@ -35,11 +39,11 @@ public class OpenStreetMapManager extends FileSender {
 
 
 
-
-    final String OSM_REQUESTTOKEN_URL = "http://www.openstreetmap.org/oauth/request_token";
-    final String OSM_ACCESSTOKEN_URL = "http://www.openstreetmap.org/oauth/access_token";
-    final String OSM_AUTHORIZE_URL = "http://www.openstreetmap.org/oauth/authorize";
-    final String OSM_GPSTRACE_URL = "http://www.openstreetmap.org/api/0.6/gpx/create";
+    private static final Logger LOG = Logs.of(OpenStreetMapManager.class);
+    static final String OSM_REQUESTTOKEN_URL = "http://www.openstreetmap.org/oauth/request_token";
+    static final String OSM_ACCESSTOKEN_URL = "http://www.openstreetmap.org/oauth/access_token";
+    static final String OSM_AUTHORIZE_URL = "http://www.openstreetmap.org/oauth/authorize";
+    static final String OSM_GPSTRACE_URL = "http://www.openstreetmap.org/api/0.6/gpx/create";
     private PreferenceHelper preferenceHelper;
 
     public OpenStreetMapManager(PreferenceHelper preferenceHelper) {
@@ -47,8 +51,8 @@ public class OpenStreetMapManager extends FileSender {
 
     }
 
-    public OAuthProvider getOSMAuthProvider() {
-        return new CommonsHttpOAuthProvider(OSM_REQUESTTOKEN_URL, OSM_ACCESSTOKEN_URL, OSM_AUTHORIZE_URL);
+    public static OAuthProvider getOSMAuthProvider() {
+        return new OkHttpOAuthProvider(OSM_REQUESTTOKEN_URL, OSM_ACCESSTOKEN_URL, OSM_AUTHORIZE_URL);
     }
 
     public boolean isOsmAuthorized() {
@@ -56,27 +60,26 @@ public class OpenStreetMapManager extends FileSender {
         return (oAuthAccessToken != null && oAuthAccessToken.length() > 0);
     }
 
-    public OAuthConsumer getOSMAuthConsumer() {
+    public static OAuthConsumer getOSMAuthConsumer() {
 
         OAuthConsumer consumer = null;
 
         try {
 
-            consumer = new CommonsHttpOAuthConsumer(BuildConfig.OSM_CONSUMER_KEY, BuildConfig.OSM_CONSUMER_SECRET);
+            consumer = new OkHttpOAuthConsumer(BuildConfig.OSM_CONSUMER_KEY, BuildConfig.OSM_CONSUMER_SECRET);
 
 
-            String osmAccessToken =  preferenceHelper.getOSMAccessToken();
-            String osmAccessTokenSecret = preferenceHelper.getOSMAccessTokenSecret();
+            String osmAccessToken =  PreferenceHelper.getInstance().getOSMAccessToken();
+            String osmAccessTokenSecret = PreferenceHelper.getInstance().getOSMAccessTokenSecret();
 
-            if (osmAccessToken != null && osmAccessToken.length() > 0
-                    && osmAccessTokenSecret != null
-                    && osmAccessTokenSecret.length() > 0) {
-                consumer.setTokenWithSecret(osmAccessToken,
-                        osmAccessTokenSecret);
+            if (Strings.isNullOrEmpty(osmAccessToken) || Strings.isNullOrEmpty(osmAccessTokenSecret)) {
+                return consumer;
+            } else {
+                consumer.setTokenWithSecret(osmAccessToken, osmAccessTokenSecret);
             }
 
         } catch (Exception e) {
-            //Swallow the exception
+            LOG.error("Error getting OAuth Consumer", e);
         }
 
         return consumer;

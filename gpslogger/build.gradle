@@ -69,8 +69,12 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
@@ -147,6 +151,7 @@ android {
 
 
     // Apache HTTP Client removed in Android 6, this is required to keep using it for lower platforms
+    // Dropbox SDK still uses this
     useLibrary 'org.apache.http.legacy'
 }
 
@@ -159,31 +164,14 @@ dependencies {
     compile 'com.google.android.gms:play-services-location:8.4.0'
     compile 'com.google.android.gms:play-services-drive:8.4.0'
 
+    //FTP operations
     compile('commons-net:commons-net:2.0')
 
-    compile('org.apache.httpcomponents:httpmime:4.0.3'){
-        exclude module: 'commons-logging'
-        exclude module: 'httpcore'
-        exclude module: 'httpclient'
-    }
 
-    compile('org.apache.james:apache-mime4j:0.6.1'){
-        exclude module: 'commons-logging'
-    }
-
-    compile('oauth.signpost:signpost-commonshttp4:1.2.1.1'){
-        exclude module: 'commons-logging'
-        exclude module: 'httpcore'
-        exclude module: 'httpclient'
-    }
-
-    compile('oauth.signpost:signpost-core:1.2.1.1'){
-        exclude module: 'commons-codec'
-    }
-
+    //Required by Dropbox for its API calls
     compile('com.googlecode.json-simple:json-simple:1.1')
 
-    //Logging
+    //Debug Logging
     compile('org.slf4j:slf4j-api:1.7.6')
     compile('com.github.tony19:logback-android-classic:1.1.1-2')
     compile('com.github.tony19:logback-android-core:1.1.1-2')
@@ -242,6 +230,17 @@ dependencies {
     //Directory chooser
     compile ('net.rdrei.android.dirchooser:library:3.2@aar') {
         transitive = true
+    }
+
+    //OKHTTP client
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+
+    //OKHTTP interceptor, works with oauth signpost
+    compile 'se.akerfeldt:okhttp-signpost:1.1.0'
+
+    //OAuth signing
+    compile('oauth.signpost:signpost-core:1.2.1.1'){
+        exclude module: 'commons-codec'
     }
 
      //Libraries required for unit testing
