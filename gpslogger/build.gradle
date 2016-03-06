@@ -187,10 +187,11 @@ dependencies {
     compile "com.android.support:cardview-v7:23.0.1"
 
     //Material dialogs
-    compile('com.github.afollestad.material-dialogs:core:0.8.5.3@aar') {
+    //Change to 0.8.5.7 when released
+    compile('com.github.afollestad.material-dialogs:core:d7edc91e76@aar') {
         transitive = true
     }
-    compile('com.github.afollestad.material-dialogs:commons:0.8.5.3@aar') {
+    compile('com.github.afollestad.material-dialogs:commons:d7edc91e76@aar') {
         transitive = true
     }
 
