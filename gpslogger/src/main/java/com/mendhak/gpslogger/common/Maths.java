@@ -1,6 +1,8 @@
 package com.mendhak.gpslogger.common;
 
 
+import android.location.Location;
+
 public class Maths {
     /**
      * Uses the Haversine formula to calculate the distnace between to lat-long coordinates
@@ -44,5 +46,25 @@ public class Maths {
     public static double mpsToKnots(double mps) {
         // Google "meters per second to knots"
         return mps * 1.94384449;
+    }
+
+    /**
+     * Checks bundle in the Location object for satellties used in fix.
+     * @param loc The location object to query
+     * @return satellites used in fix, or 0 if no value found.
+     */
+    public static int getBundledSatelliteCount(Location loc){
+        int sat = 0;
+
+        if(loc.getExtras() != null){
+            sat = loc.getExtras().getInt("satellites",0);
+
+            if (sat == 0) {
+                //Provider gave us nothing, let's look at our bundled count
+                sat = loc.getExtras().getInt("SATELLITES_FIX", 0);
+            }
+        }
+
+        return sat;
     }
 }

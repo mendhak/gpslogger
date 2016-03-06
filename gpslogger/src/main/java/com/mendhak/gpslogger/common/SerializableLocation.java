@@ -35,19 +35,7 @@ public class SerializableLocation implements Serializable {
         hasAccuracy = loc.hasAccuracy();
         hasBearing = loc.hasBearing();
         hasSpeed = loc.hasSpeed();
-        satelliteCount = 0;
-
-        if(loc.getExtras() != null){
-            int sat = loc.getExtras().getInt("satellites",0);
-
-            if (sat == 0) {
-                sat = loc.getExtras().getInt("SATELLITES_FIX", -1);
-            }
-            if(sat > 0){
-                satelliteCount = sat;
-            }
-        }
-
+        satelliteCount = Maths.getBundledSatelliteCount(loc);
     }
 
     public Location getLocation() {

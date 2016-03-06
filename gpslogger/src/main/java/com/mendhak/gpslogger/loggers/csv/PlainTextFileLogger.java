@@ -18,6 +18,7 @@
 package com.mendhak.gpslogger.loggers.csv;
 
 import android.location.Location;
+import com.mendhak.gpslogger.common.Maths;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.loggers.Files;
@@ -52,7 +53,7 @@ public class PlainTextFileLogger implements FileLogger {
 
             FileOutputStream writer = new FileOutputStream(file, true);
             BufferedOutputStream output = new BufferedOutputStream(writer);
-            String header = "time,lat,lon,elevation,accuracy,bearing,speed\n";
+            String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider\n";
             output.write(header.getBytes());
             output.flush();
             output.close();
@@ -64,13 +65,16 @@ public class PlainTextFileLogger implements FileLogger {
 
         String dateTimeString = Strings.getIsoDateTime(new Date(loc.getTime()));
 
-        String outputString = String.format(Locale.US, "%s,%f,%f,%f,%f,%f,%f\n", dateTimeString,
+        String outputString = String.format(Locale.US, "%s,%f,%f,%f,%f,%f,%f,%d,%s\n", dateTimeString,
                 loc.getLatitude(),
                 loc.getLongitude(),
                 loc.getAltitude(),
                 loc.getAccuracy(),
                 loc.getBearing(),
-                loc.getSpeed());
+                loc.getSpeed(),
+                Maths.getBundledSatelliteCount(loc),
+                loc.getProvider()
+        );
 
         output.write(outputString.getBytes());
         output.flush();

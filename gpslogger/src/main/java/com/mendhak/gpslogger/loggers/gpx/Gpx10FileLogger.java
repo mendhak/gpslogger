@@ -18,6 +18,7 @@
 package com.mendhak.gpslogger.loggers.gpx;
 
 import android.location.Location;
+import com.mendhak.gpslogger.common.Maths;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -273,12 +274,7 @@ class Gpx10WriteHandler implements Runnable {
 
         if (loc.getExtras() != null) {
 
-            int sat = loc.getExtras().getInt("satellites",0);
-
-            if (sat == 0) {
-                //Provider gave us nothing, let's look at our bundled count
-                sat = loc.getExtras().getInt("SATELLITES_FIX", 0);
-            }
+            int sat = Maths.getBundledSatelliteCount(loc);
 
             if(sat > 0){
                 track.append("<sat>").append(String.valueOf(sat)).append("</sat>");
