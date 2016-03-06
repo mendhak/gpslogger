@@ -20,6 +20,7 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.senders.FileSender;
+import com.path.android.jobqueue.CancelResult;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 
@@ -39,23 +40,28 @@ public class AutoEmailManager extends FileSender {
     @Override
     public void uploadFile(List<File> files) {
 
-        ArrayList<File> filesToSend = new ArrayList<>();
+        final ArrayList<File> filesToSend = new ArrayList<>();
 
         //If a zip file exists, remove others
         for (File f : files) {
             filesToSend.add(f);
         }
 
-        String subject = "GPS Log file generated at "+ Strings.getReadableDateTime(new Date());
+        final String subject = "GPS Log file generated at "+ Strings.getReadableDateTime(new Date());
 
-        String body = "GPS Log file generated at "+ Strings.getReadableDateTime(new Date());
+        final String body = "GPS Log file generated at "+ Strings.getReadableDateTime(new Date());
 
-        JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, AutoEmailJob.getJobTag(filesToSend.toArray(new File[filesToSend.size()])));
-        jobManager.addJobInBackground(new AutoEmailJob(preferenceHelper.getSmtpServer(),
-                preferenceHelper.getSmtpPort(), preferenceHelper.getSmtpUsername(), preferenceHelper.getSmtpPassword(),
-                preferenceHelper.isSmtpSsl(), preferenceHelper.getAutoEmailTargets(), preferenceHelper.getSmtpSenderAddress(),
-                subject, body, filesToSend.toArray(new File[filesToSend.size()])));
+        final JobManager jobManager = AppSettings.getJobManager();
+        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
+            @Override
+            public void onCancelled(CancelResult cancelResult) {
+                jobManager.addJobInBackground(new AutoEmailJob(preferenceHelper.getSmtpServer(),
+                        preferenceHelper.getSmtpPort(), preferenceHelper.getSmtpUsername(), preferenceHelper.getSmtpPassword(),
+                        preferenceHelper.isSmtpSsl(), preferenceHelper.getAutoEmailTargets(), preferenceHelper.getSmtpSenderAddress(),
+                        subject, body, filesToSend.toArray(new File[filesToSend.size()])));
+            }
+        }, TagConstraint.ANY, AutoEmailJob.getJobTag(filesToSend.toArray(new File[filesToSend.size()])));
+
 
     }
 

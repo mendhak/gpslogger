@@ -59,7 +59,7 @@ public class Dialogs {
 
         MaterialDialog alertDialog = new MaterialDialog.Builder(context)
                 .title(title)
-                .customView(R.layout.error_alertview, false)
+                .customView(R.layout.error_alertview, true)
                 .autoDismiss(false)
                 .negativeText("Copy")
                 .positiveText(R.string.ok)

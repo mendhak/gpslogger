@@ -27,6 +27,7 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
+import com.path.android.jobqueue.CancelResult;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;
@@ -99,7 +100,7 @@ public class GoogleDriveManager extends FileSender {
 
         try {
             File gpsDir = new File(preferenceHelper.getGpsLoggerFolder());
-            File gpxFile = new File(gpsDir, fileName);
+            final File gpxFile = new File(gpsDir, fileName);
 
             LOG.debug("Submitting Google Docs job");
 
@@ -113,9 +114,15 @@ public class GoogleDriveManager extends FileSender {
                 uploadFolderName = "GPSLogger for Android";
             }
 
-            JobManager jobManager = AppSettings.getJobManager();
-            jobManager.cancelJobsInBackground(null, TagConstraint.ANY, GoogleDriveJob.getJobTag(gpxFile));
-            jobManager.addJobInBackground(new GoogleDriveJob(gpxFile, uploadFolderName));
+            final JobManager jobManager = AppSettings.getJobManager();
+            final String finalUploadFolderName = uploadFolderName;
+            jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
+                @Override
+                public void onCancelled(CancelResult cancelResult) {
+                    jobManager.addJobInBackground(new GoogleDriveJob(gpxFile, finalUploadFolderName));
+                }
+            }, TagConstraint.ANY, GoogleDriveJob.getJobTag(gpxFile));
+
 
         } catch (Exception e) {
             EventBus.getDefault().post(new UploadEvents.GDocs().failed("Failed to upload file", e));

@@ -23,6 +23,7 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
+import com.path.android.jobqueue.CancelResult;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import oauth.signpost.OAuthConsumer;
@@ -106,18 +107,23 @@ public class OpenStreetMapManager extends FileSender {
 
     public void uploadFile(String fileName) {
         File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
-        File chosenFile = new File(gpxFolder, fileName);
-        OAuthConsumer consumer = getOSMAuthConsumer();
-        String gpsTraceUrl = OSM_GPSTRACE_URL;
+        final File chosenFile = new File(gpxFolder, fileName);
+        final OAuthConsumer consumer = getOSMAuthConsumer();
+        final String gpsTraceUrl = OSM_GPSTRACE_URL;
 
 
-        String description = preferenceHelper.getOSMDescription();
-        String tags = preferenceHelper.getOSMTags();
-        String visibility = preferenceHelper.getOSMVisibility();
+        final String description = preferenceHelper.getOSMDescription();
+        final String tags = preferenceHelper.getOSMTags();
+        final String visibility = preferenceHelper.getOSMVisibility();
 
-        JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OSMJob.getJobTag(chosenFile));
-        jobManager.addJobInBackground(new OSMJob( consumer, gpsTraceUrl, chosenFile, description, tags, visibility));
+        final JobManager jobManager = AppSettings.getJobManager();
+        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
+            @Override
+            public void onCancelled(CancelResult cancelResult) {
+                jobManager.addJobInBackground(new OSMJob( consumer, gpsTraceUrl, chosenFile, description, tags, visibility));
+            }
+        }, TagConstraint.ANY, OSMJob.getJobTag(chosenFile));
+
     }
 
     @Override

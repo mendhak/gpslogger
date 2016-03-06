@@ -26,6 +26,7 @@ import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.FileSender;
+import com.path.android.jobqueue.CancelResult;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;
@@ -45,7 +46,7 @@ public class FtpManager extends FileSender {
         this.preferenceHelper = preferenceHelper;
     }
 
-    public void testFtp(String servername, String username, String password, String directory, int port, boolean useFtps, String protocol, boolean implicit) {
+    public void testFtp(final String servername, final String username, final String password, final String directory, final int port, final boolean useFtps, final String protocol, final boolean implicit) {
 
         File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
@@ -53,7 +54,7 @@ public class FtpManager extends FileSender {
         }
 
         LOG.debug("Creating gpslogger_test.xml");
-        File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
+        final File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
 
         try {
             if (!testFile.exists()) {
@@ -73,10 +74,15 @@ public class FtpManager extends FileSender {
             EventBus.getDefault().post(new UploadEvents.Ftp().failed(ex.getMessage(), ex));
         }
 
-        JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, FtpJob.getJobTag(testFile));
-        jobManager.addJobInBackground(new FtpJob(servername, port, username, password, directory,
-                useFtps, protocol, implicit, testFile, "gpslogger_test.txt"));
+        final JobManager jobManager = AppSettings.getJobManager();
+        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
+            @Override
+            public void onCancelled(CancelResult cancelResult) {
+                jobManager.addJobInBackground(new FtpJob(servername, port, username, password, directory,
+                        useFtps, protocol, implicit, testFile, "gpslogger_test.txt"));
+            }
+        }, TagConstraint.ANY, FtpJob.getJobTag(testFile));
+
     }
 
     @Override
@@ -103,14 +109,19 @@ public class FtpManager extends FileSender {
         return preferenceHelper.isFtpAutoSendEnabled();
     }
 
-    public void uploadFile(File f) {
+    public void uploadFile(final File f) {
 
-        JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, FtpJob.getJobTag(f));
-        jobManager.addJobInBackground(new FtpJob(preferenceHelper.getFtpServerName(), preferenceHelper.getFtpPort(),
-                preferenceHelper.getFtpUsername(), preferenceHelper.getFtpPassword(), preferenceHelper.getFtpDirectory(),
-                preferenceHelper.shouldFtpUseFtps(), preferenceHelper.getFtpProtocol(), preferenceHelper.isFtpImplicit(),
-                f, f.getName()));
+        final JobManager jobManager = AppSettings.getJobManager();
+        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
+            @Override
+            public void onCancelled(CancelResult cancelResult) {
+                jobManager.addJobInBackground(new FtpJob(preferenceHelper.getFtpServerName(), preferenceHelper.getFtpPort(),
+                        preferenceHelper.getFtpUsername(), preferenceHelper.getFtpPassword(), preferenceHelper.getFtpDirectory(),
+                        preferenceHelper.shouldFtpUseFtps(), preferenceHelper.getFtpProtocol(), preferenceHelper.isFtpImplicit(),
+                        f, f.getName()));
+            }
+        }, TagConstraint.ANY, FtpJob.getJobTag(f));
+
     }
 
     @Override

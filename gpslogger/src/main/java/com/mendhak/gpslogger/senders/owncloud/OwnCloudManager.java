@@ -8,6 +8,7 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.ui.fragments.settings.OwnCloudSettingsFragment;
+import com.path.android.jobqueue.CancelResult;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;
@@ -27,7 +28,7 @@ public class OwnCloudManager extends FileSender
         this.preferenceHelper = preferenceHelper;
     }
 
-    public void testOwnCloud(String servername, String username, String password, String directory) {
+    public void testOwnCloud(final String servername, final String username, final String password, final String directory) {
 
         File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
         if (!gpxFolder.exists()) {
@@ -35,7 +36,7 @@ public class OwnCloudManager extends FileSender
         }
 
         LOG.debug("Creating gpslogger_test.xml");
-        File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
+        final File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
 
         try {
             if (!testFile.exists()) {
@@ -56,10 +57,15 @@ public class OwnCloudManager extends FileSender
             LOG.error("Error while testing ownCloud upload: " + ex.getMessage());
         }
 
-        JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OwnCloudJob.getJobTag(testFile));
-        jobManager.addJobInBackground(new OwnCloudJob(servername, username, password, directory,
-                testFile, "gpslogger_test.txt"));
+        final JobManager jobManager = AppSettings.getJobManager();
+        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
+            @Override
+            public void onCancelled(CancelResult cancelResult) {
+                jobManager.addJobInBackground(new OwnCloudJob(servername, username, password, directory,
+                        testFile, "gpslogger_test.txt"));
+            }
+        }, TagConstraint.ANY, OwnCloudJob.getJobTag(testFile));
+
         LOG.debug("Added background ownCloud upload job");
     }
 
@@ -93,16 +99,21 @@ public class OwnCloudManager extends FileSender
         return preferenceHelper.isOwnCloudAutoSendEnabled();
     }
 
-    public void uploadFile(File f)
+    public void uploadFile(final File f)
     {
-        JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, OwnCloudJob.getJobTag(f));
-        jobManager.addJobInBackground(new OwnCloudJob(
-                preferenceHelper.getOwnCloudServerName(),
-                preferenceHelper.getOwnCloudUsername(),
-                preferenceHelper.getOwnCloudPassword(),
-                preferenceHelper.getOwnCloudDirectory(),
-                f, f.getName()));
+        final JobManager jobManager = AppSettings.getJobManager();
+        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
+            @Override
+            public void onCancelled(CancelResult cancelResult) {
+                jobManager.addJobInBackground(new OwnCloudJob(
+                        preferenceHelper.getOwnCloudServerName(),
+                        preferenceHelper.getOwnCloudUsername(),
+                        preferenceHelper.getOwnCloudPassword(),
+                        preferenceHelper.getOwnCloudDirectory(),
+                        f, f.getName()));
+            }
+        }, TagConstraint.ANY, OwnCloudJob.getJobTag(f));
+
     }
 
     @Override
