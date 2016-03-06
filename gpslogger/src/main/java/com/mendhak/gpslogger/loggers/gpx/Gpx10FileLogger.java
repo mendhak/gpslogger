@@ -39,13 +39,11 @@ public class Gpx10FileLogger implements FileLogger {
             new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
     private File gpxFile = null;
     private final boolean addNewTrackSegment;
-    private final int satelliteCount;
     protected final String name = "GPX";
 
-    public Gpx10FileLogger(File gpxFile, boolean addNewTrackSegment, int satelliteCount) {
+    public Gpx10FileLogger(File gpxFile, boolean addNewTrackSegment) {
         this.gpxFile = gpxFile;
         this.addNewTrackSegment = addNewTrackSegment;
-        this.satelliteCount = satelliteCount;
     }
 
 
@@ -56,7 +54,7 @@ public class Gpx10FileLogger implements FileLogger {
         }
         String dateTimeString = Strings.getIsoDateTime(new Date(time));
 
-        Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(dateTimeString, gpxFile, loc, addNewTrackSegment, satelliteCount);
+        Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(dateTimeString, gpxFile, loc, addNewTrackSegment);
         EXECUTOR.execute(writeHandler);
     }
 
@@ -179,14 +177,12 @@ class Gpx10WriteHandler implements Runnable {
     Location loc;
     private File gpxFile = null;
     private boolean addNewTrackSegment;
-    private int satelliteCount;
 
-    public Gpx10WriteHandler(String dateTimeString, File gpxFile, Location loc, boolean addNewTrackSegment, int satelliteCount) {
+    public Gpx10WriteHandler(String dateTimeString, File gpxFile, Location loc, boolean addNewTrackSegment) {
         this.dateTimeString = dateTimeString;
         this.addNewTrackSegment = addNewTrackSegment;
         this.gpxFile = gpxFile;
         this.loc = loc;
-        this.satelliteCount = satelliteCount;
     }
 
 
@@ -274,11 +270,21 @@ class Gpx10WriteHandler implements Runnable {
 
         track.append("<src>").append(loc.getProvider()).append("</src>");
 
-        if (satelliteCount > 0) {
-            track.append("<sat>").append(String.valueOf(satelliteCount)).append("</sat>");
-        }
 
         if (loc.getExtras() != null) {
+
+            int sat = loc.getExtras().getInt("satellites",0);
+
+            if (sat == 0) {
+                //Provider gave us nothing, let's look at our bundled count
+                sat = loc.getExtras().getInt("SATELLITES_FIX", 0);
+            }
+
+            if(sat > 0){
+                track.append("<sat>").append(String.valueOf(sat)).append("</sat>");
+            }
+
+
             String hdop = loc.getExtras().getString("HDOP");
             String pdop = loc.getExtras().getString("PDOP");
             String vdop = loc.getExtras().getString("VDOP");

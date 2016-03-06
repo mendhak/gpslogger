@@ -37,6 +37,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     protected String geoIdHeight;
     protected String ageOfDgpsData;
     protected String dgpsId;
+    protected int satellitesUsedInFix;
 
     GeneralLocationListener(GpsLoggingService activity, String name) {
         loggingService = activity;
@@ -60,6 +61,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
                 b.putBoolean("PASSIVE", listenerName.equalsIgnoreCase("PASSIVE"));
                 b.putString("LISTENER", listenerName);
+                b.putInt("SATELLITES_FIX", satellitesUsedInFix);
 
                 loc.setExtras(b);
                 loggingService.onLocationChanged(loc);
@@ -116,15 +118,19 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 int maxSatellites = status.getMaxSatellites();
 
                 Iterator<GpsSatellite> it = status.getSatellites().iterator();
-                int count = 0;
+                int satellitesVisible = 0;
+                satellitesUsedInFix=0;
 
-                while (it.hasNext() && count <= maxSatellites) {
-                    it.next();
-                    count++;
+                while (it.hasNext() && satellitesVisible <= maxSatellites) {
+                    GpsSatellite sat = it.next();
+                    if(sat.usedInFix()){
+                        satellitesUsedInFix++;
+                    }
+                    satellitesVisible++;
                 }
 
-                LOG.debug(String.valueOf(count) + " satellites");
-                loggingService.setSatelliteInfo(count);
+                LOG.debug(String.valueOf(satellitesVisible) + " satellites");
+                loggingService.setSatelliteInfo(satellitesVisible);
                 break;
 
             case GpsStatus.GPS_EVENT_STARTED:

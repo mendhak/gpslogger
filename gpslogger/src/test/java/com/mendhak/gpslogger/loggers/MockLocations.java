@@ -3,6 +3,8 @@ package com.mendhak.gpslogger.loggers;
 import android.location.Location;
 import android.os.Bundle;
 
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -63,12 +65,20 @@ public final class MockLocations {
 
     public MockLocations putExtra(String k, String v) {
 
-//            Bundle b = new Bundle();
-//            b.putString("HDOP", "LOOKATTHISHDOP!");
-
         when(loc.getExtras()).thenReturn(bundle);
         when(bundle.getString(eq(k))).thenReturn(v);
+        when(bundle.getString(eq(k),anyString())).thenReturn(v);
 
         return this;
     }
+
+    public MockLocations putExtra(String k, int v) {
+
+        when(loc.getExtras()).thenReturn(bundle);
+        when(bundle.getInt(eq(k))).thenReturn(v);
+        when(bundle.getInt(eq(k),anyInt())).thenReturn(v);
+
+        return this;
+    }
+
 }

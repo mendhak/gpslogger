@@ -52,7 +52,7 @@ public class FileLoggerFactory {
 
         if (preferenceHelper.shouldLogToGpx()) {
             File gpxFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".gpx");
-            loggers.add(new Gpx10FileLogger(gpxFile, Session.shouldAddNewTrackSegment(), Session.getSatelliteCount()));
+            loggers.add(new Gpx10FileLogger(gpxFile, Session.shouldAddNewTrackSegment()));
         }
 
         if (preferenceHelper.shouldLogToKml()) {
@@ -72,7 +72,7 @@ public class FileLoggerFactory {
         if (preferenceHelper.shouldLogToCustomUrl()) {
             float batteryLevel = Systems.getBatteryLevel(context);
             String androidId = Systems.getAndroidId(context);
-            loggers.add(new CustomUrlLogger(preferenceHelper.getCustomLoggingUrl(), Session.getSatelliteCount(), batteryLevel, androidId));
+            loggers.add(new CustomUrlLogger(preferenceHelper.getCustomLoggingUrl(), batteryLevel, androidId));
         }
 
 

@@ -147,14 +147,14 @@ public class Session extends Application {
     /**
      * @return the number of satellites visible
      */
-    public static int getSatelliteCount() {
+    public static int getVisibleSatelliteCount() {
         return satellites;
     }
 
     /**
      * @param satellites sets the number of visible satellites
      */
-    public static void setSatelliteCount(int satellites) {
+    public static void setVisibleSatelliteCount(int satellites) {
         Session.satellites = satellites;
     }
 

@@ -295,8 +295,8 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.SatelliteCount satelliteCount){
-        setSatelliteCount(satelliteCount.satelliteCount);
+    public void onEventMainThread(ServiceEvents.SatellitesVisible satellitesVisible){
+        setSatelliteCount(satellitesVisible.satelliteCount);
     }
 
     @EventBusHook

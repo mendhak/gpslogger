@@ -950,8 +950,8 @@ public class GpsLoggingService extends Service  {
      * @param count Number of Satellites
      */
     void setSatelliteInfo(int count) {
-        Session.setSatelliteCount(count);
-        EventBus.getDefault().post(new ServiceEvents.SatelliteCount(count));
+        Session.setVisibleSatelliteCount(count);
+        EventBus.getDefault().post(new ServiceEvents.SatellitesVisible(count));
     }
 
     public void onNmeaSentence(long timestamp, String nmeaSentence) {

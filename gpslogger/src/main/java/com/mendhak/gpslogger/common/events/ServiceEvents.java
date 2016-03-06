@@ -19,9 +19,9 @@ public class ServiceEvents {
     /**
      * Number of visible satellites
      */
-    public static class SatelliteCount {
+    public static class SatellitesVisible {
         public int satelliteCount;
-        public SatelliteCount(int count) {
+        public SatellitesVisible(int count) {
             this.satelliteCount = count;
         }
     }

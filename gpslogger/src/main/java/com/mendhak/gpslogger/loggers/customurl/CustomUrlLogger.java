@@ -26,13 +26,11 @@ import com.path.android.jobqueue.JobManager;
 public class CustomUrlLogger implements FileLogger {
 
     private final String name = "URL";
-    private final int satellites;
     private final String customLoggingUrl;
     private final float batteryLevel;
     private final String androidId;
 
-    public CustomUrlLogger(String customLoggingUrl, int satellites, float batteryLevel, String androidId) {
-        this.satellites = satellites;
+    public CustomUrlLogger(String customLoggingUrl, float batteryLevel, String androidId) {
         this.customLoggingUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
         this.androidId = androidId;
@@ -48,7 +46,7 @@ public class CustomUrlLogger implements FileLogger {
     @Override
     public void annotate(String description, Location loc) throws Exception {
         JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new CustomUrlJob(customLoggingUrl, loc, description, satellites, batteryLevel, androidId));
+        jobManager.addJobInBackground(new CustomUrlJob(customLoggingUrl, loc, description,  batteryLevel, androidId));
     }
 
     @Override

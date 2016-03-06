@@ -24,16 +24,14 @@ public class CustomUrlJob extends Job {
     private static final Logger LOG = Logs.of(CustomUrlJob.class);
     private SerializableLocation loc;
     private String annotation;
-    private int satellites;
     private String logUrl;
     private float batteryLevel;
     private String androidId;
 
-    public CustomUrlJob(String customLoggingUrl, Location loc, String annotation, int satellites, float batteryLevel, String androidId) {
+    public CustomUrlJob(String customLoggingUrl, Location loc, String annotation, float batteryLevel, String androidId) {
         super(new Params(1).requireNetwork().persist());
         this.loc = new SerializableLocation(loc);
         this.annotation = annotation;
-        this.satellites = satellites;
         this.logUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
         this.androidId = androidId;
@@ -61,7 +59,7 @@ public class CustomUrlJob extends Job {
 
         logUrl = logUrl.replaceAll("(?i)%lat", String.valueOf(loc.getLatitude()));
         logUrl = logUrl.replaceAll("(?i)%lon", String.valueOf(loc.getLongitude()));
-        logUrl = logUrl.replaceAll("(?i)%sat", String.valueOf(satellites));
+        logUrl = logUrl.replaceAll("(?i)%sat", String.valueOf(loc.getSatelliteCount()));
         logUrl = logUrl.replaceAll("(?i)%desc", String.valueOf(URLEncoder.encode(Strings.htmlDecode(annotation), "UTF-8")));
         logUrl = logUrl.replaceAll("(?i)%alt", String.valueOf(loc.getAltitude()));
         logUrl = logUrl.replaceAll("(?i)%acc", String.valueOf(loc.getAccuracy()));
