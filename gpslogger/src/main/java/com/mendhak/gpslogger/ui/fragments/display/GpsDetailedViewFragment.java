@@ -218,6 +218,10 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
                     sb.append(getString(R.string.opengts_setup_title)).append("\n");
                 }
 
+                if (FileSenderFactory.getOwnCloudSender().isAutoSendAvailable()) {
+                    sb.append(getString(R.string.owncloud_setup_title)).append("\n");
+                }
+
                 txtTargets.setText(sb.toString());
             }
             else {

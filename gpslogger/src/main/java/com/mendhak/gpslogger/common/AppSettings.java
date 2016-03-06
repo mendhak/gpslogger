@@ -80,24 +80,23 @@ public class AppSettings extends Application {
         @Override
         public boolean isDebugEnabled() {
             return BuildConfig.DEBUG;
-//            return false;
         }
 
         @Override
         public void d(String text, Object... args) {
 
-            LOG.debug(text);
+            LOG.debug(String.format(text, args));
         }
 
         @Override
         public void e(Throwable t, String text, Object... args) {
-            LOG.error(text, t);
+            LOG.error(String.format(text, args), t);
         }
 
         @Override
         public void e(String text, Object... args) {
 
-            LOG.error(text);
+            LOG.error(String.format(text, args));
         }
     };
 

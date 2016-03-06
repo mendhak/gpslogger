@@ -31,6 +31,7 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.ui.fragments.settings.DropboxAuthorizationFragment;
+import com.path.android.jobqueue.CancelResult;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
 import org.slf4j.Logger;
@@ -167,10 +168,15 @@ public class DropBoxManager extends FileSender {
         return  preferenceHelper.isDropboxAutoSendEnabled();
     }
 
-    public void uploadFile(String fileName) {
-        JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(null, TagConstraint.ANY, DropboxJob.getJobTag(fileName));
-        jobManager.addJobInBackground(new DropboxJob(fileName));
+    public void uploadFile(final String fileName) {
+        final JobManager jobManager = AppSettings.getJobManager();
+        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
+            @Override
+            public void onCancelled(CancelResult cancelResult) {
+                jobManager.addJobInBackground(new DropboxJob(fileName));
+            }
+        }, TagConstraint.ANY, DropboxJob.getJobTag(fileName));
+
     }
 
     @Override

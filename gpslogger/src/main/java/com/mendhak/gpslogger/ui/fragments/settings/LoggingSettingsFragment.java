@@ -83,6 +83,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
             chkfile_prefix_serial.setEnabled(false);
             chkfile_prefix_serial.setSummary("This option not available on older phones or if a serial id is not present");
         } else {
+            chkfile_prefix_serial.setEnabled(true);
             chkfile_prefix_serial.setSummary(chkfile_prefix_serial.getSummary().toString() + "(" + Strings.getBuildSerial() + ")");
         }
 
