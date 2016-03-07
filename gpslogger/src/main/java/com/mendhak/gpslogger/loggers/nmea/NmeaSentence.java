@@ -16,6 +16,10 @@ public class NmeaSentence {
 
     }
 
+    public boolean isLocationSentence(){
+        return nmeaParts[0].equalsIgnoreCase("$GPGSA") || nmeaParts[0].equalsIgnoreCase("$GPGGA");
+    }
+
     public String getLatestPdop(){
         if (nmeaParts[0].equalsIgnoreCase("$GPGSA")) {
 

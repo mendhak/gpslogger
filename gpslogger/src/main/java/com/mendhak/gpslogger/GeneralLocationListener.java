@@ -154,12 +154,32 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
         NmeaSentence nmea = new NmeaSentence(nmeaSentence);
 
-        this.latestPdop = nmea.getLatestPdop();
-        this.latestHdop = nmea.getLatestHdop();
-        this.latestVdop = nmea.getLatestVdop();
-        this.geoIdHeight = nmea.getGeoIdHeight();
-        this.ageOfDgpsData = nmea.getAgeOfDgpsData();
-        this.dgpsId = nmea.getDgpsId();
+        if(nmea.isLocationSentence()){
+            if(nmea.getLatestPdop() != null){
+                this.latestPdop = nmea.getLatestPdop();
+            }
+
+            if(nmea.getLatestHdop() != null){
+                this.latestHdop = nmea.getLatestHdop();
+            }
+
+            if(nmea.getLatestVdop() != null){
+                this.latestVdop = nmea.getLatestVdop();
+            }
+
+            if(nmea.getGeoIdHeight() != null){
+                this.geoIdHeight = nmea.getGeoIdHeight();
+            }
+
+            if(nmea.getAgeOfDgpsData() != null){
+                this.ageOfDgpsData = nmea.getAgeOfDgpsData();
+            }
+
+            if(nmea.getDgpsId() != null){
+                this.dgpsId = nmea.getDgpsId();
+            }
+
+        }
 
     }
 }

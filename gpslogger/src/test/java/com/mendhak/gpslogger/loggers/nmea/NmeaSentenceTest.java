@@ -69,4 +69,17 @@ public class NmeaSentenceTest {
         NmeaSentence nmeaSentence = new NmeaSentence(null);
         assertThat("Null NMEA string", nmeaSentence.getLatestHdop(), nullValue());
     }
+
+    @Test
+    public void NmeaSentence_CheckForRelevantSentence(){
+
+        NmeaSentence nmeaSentence = new NmeaSentence(null);
+        assertThat("Null NMEA is not a valid location", nmeaSentence.isLocationSentence(), is(false));
+
+        nmeaSentence = new NmeaSentence("$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545");
+        assertThat("GPGGA is a valid location", nmeaSentence.isLocationSentence(), is(true));
+
+        nmeaSentence = new NmeaSentence("$GPGSA,A,3,04,05,,09,12,,,24,,,,,2.5,1.3,2.1*39");
+        assertThat("GPGSA is a valid location", nmeaSentence.isLocationSentence(), is(true));
+    }
 }
