@@ -149,10 +149,6 @@ android {
         }
     }
 
-
-    // Apache HTTP Client removed in Android 6, this is required to keep using it for lower platforms
-    // Dropbox SDK still uses this
-    useLibrary 'org.apache.http.legacy'
 }
 
 
@@ -167,9 +163,6 @@ dependencies {
     //FTP operations
     compile('commons-net:commons-net:2.0')
 
-
-    //Required by Dropbox for its API calls
-    compile('com.googlecode.json-simple:json-simple:1.1')
 
     //Debug Logging
     compile('org.slf4j:slf4j-api:1.7.6')
@@ -213,7 +206,6 @@ dependencies {
     compile 'com.mendhak.gpsloggersupportfiles:activation:0.0.2'
     compile 'com.mendhak.gpsloggersupportfiles:additionnal:0.0.2'
     compile 'com.mendhak.gpsloggersupportfiles:mail:0.0.2'
-    compile 'com.mendhak.gpsloggersupportfiles:dropbox-android-sdk:1.6.3'
     compile 'com.mendhak.gpsloggersupportfiles:owncloud-android-library:0.0.3@aar'
 
     //Required by owncloud library
@@ -243,6 +235,9 @@ dependencies {
     compile('oauth.signpost:signpost-core:1.2.1.1'){
         exclude module: 'commons-codec'
     }
+
+    //Dropbox API 2
+    compile 'com.dropbox.core:dropbox-core-sdk:2.0.1'
 
      //Libraries required for unit testing
     testCompile 'junit:junit:4.12'

@@ -53,13 +53,7 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.DROPBOX_ACCESS_KEY, key).apply();
     }
 
-    public  String getDropBoxAccessSecretName() {
-        return prefs.getString(PreferenceNames.DROPBOX_ACCESS_SECRET, null);
-    }
 
-    public  void setDropBoxAccessSecret(String secret) {
-        prefs.edit().putString(PreferenceNames.DROPBOX_ACCESS_SECRET, secret).apply();
-    }
 
 
 

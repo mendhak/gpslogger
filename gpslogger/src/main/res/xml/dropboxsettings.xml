@@ -9,4 +9,6 @@
     <Preference android:key="dropbox_resetauth" android:summary="@string/dropbox_authorize_description"
                 android:title="@string/dropbox_authorize" />
 
+    <Preference android:key="dropbox_test_upload" android:title="@string/gdocs_test_title"/>
+
 </PreferenceScreen>

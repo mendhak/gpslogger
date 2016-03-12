@@ -42,6 +42,24 @@
 -dontwarn de.greenrobot.event.util.*$Support
 -dontwarn de.greenrobot.event.util.*$SupportManagerFragment
 
+
+# Dropbox SDK Serialization
+
+-keepattributes *Annotation*,EnclosingMethod,InnerClasses,Signature
+-keepnames class com.fasterxml.jackson.** { *; }
+-dontwarn com.fasterxml.jackson.databind.**
+
+# OkHttp and Servlet optional dependencies
+-dontwarn okio.**
+-dontwarn javax.servlet.**
+
+# Support classes for compatibility with older API versions
+
+-dontwarn android.support.**
+-dontnote android.support.**
+-dontnote java.nio.file.Path
+
+-dontwarn com.squareup.okhttp.**
 #
 ### Google Play Services 4.3.23 specific rules ##
 ### https://developer.android.com/google/play-services/setup.html#Proguard ##

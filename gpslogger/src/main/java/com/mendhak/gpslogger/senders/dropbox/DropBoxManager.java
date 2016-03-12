@@ -18,19 +18,14 @@
 package com.mendhak.gpslogger.senders.dropbox;
 
 
-import com.dropbox.client2.DropboxAPI;
-import com.dropbox.client2.android.AndroidAuthSession;
-import com.dropbox.client2.session.AccessTokenPair;
-import com.dropbox.client2.session.AppKeyPair;
-import com.dropbox.client2.session.Session;
-import com.dropbox.client2.session.TokenPair;
+import android.content.Context;
+import com.dropbox.core.android.Auth;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
-import com.mendhak.gpslogger.ui.fragments.settings.DropboxAuthorizationFragment;
 import com.path.android.jobqueue.CancelResult;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
@@ -43,15 +38,10 @@ import java.util.List;
 public class DropBoxManager extends FileSender {
 
     private static final Logger LOG = Logs.of(DropBoxManager.class);
-    private static final Session.AccessType ACCESS_TYPE = Session.AccessType.APP_FOLDER;
-
-    private final DropboxAPI<AndroidAuthSession> dropboxApi;
     private final PreferenceHelper preferenceHelper;
 
     public DropBoxManager(PreferenceHelper preferenceHelper) {
         this.preferenceHelper = preferenceHelper;
-        AndroidAuthSession session = getSession();
-        dropboxApi = new DropboxAPI<>(session);
     }
 
     /**
@@ -60,19 +50,16 @@ public class DropBoxManager extends FileSender {
      * @return True/False
      */
     public boolean isLinked() {
-        return dropboxApi.getSession().isLinked();
+        return !Strings.isNullOrEmpty(preferenceHelper.getDropBoxAccessKeyName());
     }
 
     public boolean finishAuthorization() {
-        AndroidAuthSession session = dropboxApi.getSession();
-        if (!session.isLinked() && session.authenticationSuccessful()) {
-            // Mandatory call to complete the auth
-            session.finishAuthentication();
-
-            // Store it locally in our app for later use
-            TokenPair tokens = session.getAccessTokenPair();
-            storeKeys(tokens.key, tokens.secret);
-            return true;
+        if(!isLinked()){
+            String accessToken = Auth.getOAuth2Token();
+            if(!Strings.isNullOrEmpty(accessToken)){
+                storeKeys(accessToken);
+                return true;
+            }
         }
 
         return false;
@@ -85,65 +72,18 @@ public class DropBoxManager extends FileSender {
      * time (which is not to be done, ever).
      *
      * @param key    The Access Key
-     * @param secret The Access Secret
      */
-    private void storeKeys(String key, String secret) {
+    private void storeKeys(String key) {
         preferenceHelper.setDropBoxAccessKeyName(key);
-        preferenceHelper.setDropBoxAccessSecret(secret);
     }
 
-    private void clearKeys() {
-        preferenceHelper.setDropBoxAccessKeyName(null);
-        preferenceHelper.setDropBoxAccessSecret(null);
-    }
+    public void startAuthentication(Context context) {
 
-    /**
-     * Returns a Dropbox API session, which holds various auth and operational methods on it
-     * @return
-     */
-    protected AndroidAuthSession getSession() {
-        AppKeyPair appKeyPair = new AppKeyPair(BuildConfig.DROPBOX_APP_KEY, BuildConfig.DROPBOX_APP_SECRET);
-        AndroidAuthSession session;
-
-        AccessTokenPair storedKeys = getKeys();
-        if (storedKeys != null) {
-            session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE, storedKeys);
-        } else {
-            session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE);
-        }
-
-        return session;
-    }
-
-    /**
-     * Shows keeping the access keys returned from Trusted Authenticator in a local
-     * store, rather than storing user name & password, and re-authenticating each
-     * time (which is not to be done, ever).
-     *
-     * @return Array of [access_key, access_secret], or null if none stored
-     */
-    public AccessTokenPair getKeys() {
-
-        AccessTokenPair pair = null;
-        String key = preferenceHelper.getDropBoxAccessKeyName();
-        String secret = preferenceHelper.getDropBoxAccessSecretName();
-        if (!Strings.isNullOrEmpty(key) && !Strings.isNullOrEmpty(secret)) {
-            pair = new AccessTokenPair(key, secret);
-        }
-        return pair;
-    }
-
-    public void startAuthentication(DropboxAuthorizationFragment dropboxAuthorizationFragment) {
-        // Start the remote authentication
-        dropboxApi.getSession().startAuthentication(dropboxAuthorizationFragment.getActivity());
+        Auth.startOAuth2Authentication(context, BuildConfig.DROPBOX_APP_KEY);
     }
 
     public void unLink() {
-        // Remove credentials from the session
-        dropboxApi.getSession().unlink();
-
-        // Clear our stored keys
-        clearKeys();
+        preferenceHelper.setDropBoxAccessKeyName(null);
     }
 
     @Override
@@ -156,10 +96,7 @@ public class DropBoxManager extends FileSender {
 
     @Override
     public boolean isAvailable() {
-        return
-                 isLinked()
-                && preferenceHelper.getDropBoxAccessKeyName() != null
-                && preferenceHelper.getDropBoxAccessSecretName() != null;
+        return isLinked() && preferenceHelper.getDropBoxAccessKeyName() != null;
     }
 
 

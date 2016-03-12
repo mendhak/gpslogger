@@ -3,8 +3,9 @@ package com.mendhak.gpslogger.senders.dropbox;
 
 
 
-import com.dropbox.client2.DropboxAPI;
-import com.dropbox.client2.android.AndroidAuthSession;
+import com.dropbox.core.DbxRequestConfig;
+import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.WriteMode;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -15,6 +16,8 @@ import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Locale;
 
 
 public class DropboxJob extends Job {
@@ -23,8 +26,6 @@ public class DropboxJob extends Job {
     private static final Logger LOG = Logs.of(DropboxJob.class);
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     String fileName;
-    DropboxAPI<AndroidAuthSession> dropboxApi;
-
 
 
     protected DropboxJob(String fileName) {
@@ -35,6 +36,7 @@ public class DropboxJob extends Job {
 
     @Override
     public void onAdded() {
+        LOG.debug("Dropbox job added");
     }
 
     @Override
@@ -42,15 +44,19 @@ public class DropboxJob extends Job {
         File gpsDir = new File(preferenceHelper.getGpsLoggerFolder());
         File gpxFile = new File(gpsDir, fileName);
 
-        FileInputStream fis = new FileInputStream(gpxFile);
-
-        DropBoxManager manager = new DropBoxManager(PreferenceHelper.getInstance());
-        AndroidAuthSession session = manager.getSession();
-        dropboxApi = new DropboxAPI<>(session);
-        DropboxAPI.Entry upEntry = dropboxApi.putFileOverwrite(gpxFile.getName(), fis, gpxFile.length(), null);
-        LOG.info("DropBox upload complete. Rev: " + upEntry.rev);
-        fis.close();
-        EventBus.getDefault().post(new UploadEvents.Dropbox().succeeded());
+        try {
+            LOG.debug("Beginning upload to dropbox...");
+            InputStream inputStream = new FileInputStream(gpxFile);
+            DbxRequestConfig requestConfig = new DbxRequestConfig(
+                    "GPSLogger",
+                    Locale.getDefault().toString());
+            DbxClientV2 mDbxClient = new DbxClientV2(requestConfig, PreferenceHelper.getInstance().getDropBoxAccessKeyName());
+            mDbxClient.files().uploadBuilder("/" + fileName).withMode(WriteMode.OVERWRITE).uploadAndFinish(inputStream);
+            EventBus.getDefault().post(new UploadEvents.Dropbox().succeeded());
+        } catch (Exception e) {
+            LOG.error("Could not upload to Dropbox" , e);
+            EventBus.getDefault().post(new UploadEvents.Dropbox().failed(e.getMessage(), e));
+        }
 
     }
 
