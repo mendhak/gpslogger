@@ -1,0 +1,4 @@
+
+owncloudstorage/*
+!owncloudstorage/config/
+owncloudstorage/config/config.php

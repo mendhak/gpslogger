@@ -1,0 +1,51 @@
+owncloud-server:
+  container_name: gpslogger-owncloud-server
+  image: jchaney/owncloud
+  ports:
+    - "80:80"
+    - "443:443"
+  volumes:
+    - ./owncloudstorage/data:/var/www/owncloud/data
+    - ./owncloudstorage/additional_apps:/var/www/owncloud/apps_persistent
+    - ./owncloudstorage/config:/owncloud
+    - /etc/ssl/certs/ssl-cert-snakeoil.pem:/owncloud.cert:ro
+    - /etc/ssl/private/ssl-cert-snakeoil.key:/owncloud.key:ro
+  environment:
+    - OWNCLOUD_IN_ROOTPATH=1
+    - OWNCLOUD_SERVERNAME="${SERVERIP}"
+    - SSL_CERT="/owncloud.cert"
+    - SSL_KEY="/owncloud.key"
+
+
+ftpd-server:
+  container_name: gpslogger-ftpd-server
+  image: stilliard/pure-ftpd
+  ports:
+    - "21:21"
+    - "30000-30009:30000-30009"
+  environment:
+    PUBLICHOST: ${SERVERIP}
+
+mail:
+  container_name: gpslogger-mail-server
+  image: mailhog/mailhog
+  ports:
+  - "1025:1025"
+  - "8025:8025"
+
+
+udp:
+  container_name: gpslogger-udp-server
+  image: mendhak/udp-listener
+  environment:
+    - UDPPORT=4001
+  ports:
+  - "0.0.0.0:4001:4001"
+  - "0.0.0.0:4001:4001/udp"
+
+https:
+  container_name: gpslogger-https-server
+  image: bitnami/apache
+  ports:
+    - "8080:80"
+    - "8443:443"
