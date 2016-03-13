@@ -161,7 +161,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-drive:8.4.0'
 
     //FTP operations
-    compile('commons-net:commons-net:2.0')
+    compile('commons-net:commons-net:3.4')
 
 
     //Debug Logging
