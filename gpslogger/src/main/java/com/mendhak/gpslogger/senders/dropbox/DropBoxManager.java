@@ -19,20 +19,25 @@ package com.mendhak.gpslogger.senders.dropbox;
 
 
 import android.content.Context;
+import android.os.AsyncTask;
+import com.dropbox.core.*;
 import com.dropbox.core.android.Auth;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.path.android.jobqueue.CancelResult;
 import com.path.android.jobqueue.JobManager;
 import com.path.android.jobqueue.TagConstraint;
+import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
 import java.io.File;
 import java.util.List;
+import java.util.Locale;
 
 
 public class DropBoxManager extends FileSender {
@@ -84,6 +89,7 @@ public class DropBoxManager extends FileSender {
 
     public void unLink() {
         preferenceHelper.setDropBoxAccessKeyName(null);
+        preferenceHelper.setDropBoxOauth1Secret(null);
     }
 
     @Override
@@ -106,6 +112,12 @@ public class DropBoxManager extends FileSender {
     }
 
     public void uploadFile(final String fileName) {
+
+        if(!Strings.isNullOrEmpty(preferenceHelper.getDropBoxOauth1Secret())){
+            convertOauth1ToOauth2Token(fileName);
+            return;
+        }
+
         final JobManager jobManager = AppSettings.getJobManager();
         jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
             @Override
@@ -115,6 +127,55 @@ public class DropBoxManager extends FileSender {
         }, TagConstraint.ANY, DropboxJob.getJobTag(fileName));
 
     }
+
+    /**
+     * Attempts to upgrade Oauth1 tokens to Oauth2 before performing a file upload
+     * @param pendingFileName
+     */
+    void convertOauth1ToOauth2Token(final String pendingFileName) {
+        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
+
+            DbxOAuth1Upgrader upgrader;
+            DbxOAuth1AccessToken oAuth1AccessToken;
+
+            @Override
+            protected String doInBackground(Void... params) {
+
+                LOG.warn("Found old Dropbox Oauth1 tokens! Attempting upgrade now.");
+                try {
+                    DbxRequestConfig requestConfig = new DbxRequestConfig("GPSLogger", Locale.getDefault().toString());
+                    DbxAppInfo appInfo = new DbxAppInfo(BuildConfig.DROPBOX_APP_KEY, BuildConfig.DROPBOX_APP_SECRET);
+                    upgrader = new DbxOAuth1Upgrader(requestConfig, appInfo);
+                    oAuth1AccessToken = new DbxOAuth1AccessToken(preferenceHelper.getDropBoxAccessKeyName(), preferenceHelper.getDropBoxOauth1Secret());
+                    LOG.debug("Requesting Oauth2 token...");
+                    String newToken = upgrader.createOAuth2AccessToken(oAuth1AccessToken);
+                    LOG.debug("New token is " + newToken);
+                    LOG.debug("Disabling the old Oauth1 token ");
+                    upgrader.disableOAuth1AccessToken(oAuth1AccessToken);
+                    return newToken;
+
+                } catch (Exception e) {
+                    EventBus.getDefault().post(new UploadEvents.Dropbox().failed("DropBox Oauth2 Token upgrade failed. Please reauthorize DropBox from the settings.", e));
+                    LOG.error("Could not upgrade to Oauth2", e);
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String authToken) {
+                if (authToken != null) {
+                    unLink();
+                    storeKeys(authToken);
+                    uploadFile(pendingFileName);
+                }
+
+            }
+        };
+        task.execute();
+    }
+
+
 
     @Override
     public boolean accept(File dir, String name) {

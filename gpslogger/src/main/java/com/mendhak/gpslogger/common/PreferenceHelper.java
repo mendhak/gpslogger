@@ -54,7 +54,17 @@ public class PreferenceHelper {
     }
 
 
+    /**
+     * Legacy - only used to check if user is still on Oauth1 and to upgrade them.
+     * @return
+     */
+    public String getDropBoxOauth1Secret() {
+        return prefs.getString(PreferenceNames.DROPBOX_ACCESS_SECRET, null);
+    }
 
+    public void setDropBoxOauth1Secret(String secret) {
+        prefs.edit().putString(PreferenceNames.DROPBOX_ACCESS_SECRET, secret).apply();
+    }
 
 
 
