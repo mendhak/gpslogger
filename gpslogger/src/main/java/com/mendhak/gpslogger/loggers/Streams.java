@@ -102,4 +102,28 @@ public class Streams {
 
         return doc;
     }
+
+    public static long copyIntoStream(InputStream inputStream, OutputStream outputStream){
+        try{
+            long res = 0;
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, read);
+                outputStream.flush();
+                res += read;
+            }
+
+            inputStream.close();
+            outputStream.close();
+            return res;
+        }
+        catch (Exception ex){
+
+            LOG.error("Could not close a stream properly", ex);
+        }
+
+        return 0;
+
+    }
 }

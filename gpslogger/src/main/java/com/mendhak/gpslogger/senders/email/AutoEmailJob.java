@@ -1,8 +1,11 @@
 package com.mendhak.gpslogger.senders.email;
 
+import android.util.Base64;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Files;
+import com.mendhak.gpslogger.loggers.Streams;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlTrustEverything;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
@@ -12,9 +15,10 @@ import org.apache.commons.net.ProtocolCommandListener;
 import org.apache.commons.net.smtp.*;
 import org.slf4j.Logger;
 
-import java.io.File;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.UUID;
 
 
 public class AutoEmailJob extends Job {
@@ -96,7 +100,7 @@ public class AutoEmailJob extends Job {
             // optionally set a timeout to have a faster feedback on errors
             client.setDefaultTimeout(10 * 1000);
             checkReply(client);
-            // you connect to the SMTP server
+            LOG.debug("Connecting to SMTP Server");
             client.connect(smtpServer, port);
             checkReply(client);
             // you say ehlo  and you specify the host you are connecting from, could be anything
@@ -114,18 +118,47 @@ public class AutoEmailJob extends Job {
             client.setSender(fromAddress);
             checkReply(client);
 
-            for (String target : csvEmailTargets.split(",")) {
-                client.addRecipient(target);
-            }
+            String target = csvEmailTargets.split(",")[0];
+            client.addRecipient(target);
 
             checkReply(client);
 
             Writer writer = client.sendMessageData();
 
             if (writer != null) {
-                SimpleSMTPHeader header = new SimpleSMTPHeader(fromAddress, csvEmailTargets.split(",")[0], subject);
-                writer.write(header.toString());
-                writer.write(body);
+
+
+                SimpleSMTPHeader header = new SimpleSMTPHeader(fromAddress, target, subject);
+
+                //Multiple email targets?
+                for (String ccTarget : csvEmailTargets.split(",")) {
+                    if (!ccTarget.equalsIgnoreCase(target)) {
+                        header.addCC(ccTarget);
+                    }
+                }
+
+                // Regular email with just a body
+                if (files == null || files.length == 0) {
+                    header.addHeaderField("Content-Type", "text/plain; charset=UTF-8");
+                    writer.write(header.toString());
+                    writer.write(body);
+                }
+                // Attach files in a multipart way
+                else {
+                    String boundary = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9);
+                    header.addHeaderField("Content-Type", "multipart/mixed; boundary=" + boundary);
+                    writer.write(header.toString());
+
+                    writer.write("--" + boundary + "\n");
+                    writer.write("Content-Type: text/plain; charset=UTF-8" + "\n\n");
+                    writer.write(body);
+                    writer.write("\n");
+
+                    attachFilesToWriter(writer, boundary, files);
+                    writer.write("--" + boundary + "--\n\n");
+                }
+
+
                 writer.close();
                 if (!client.completePendingCommand()) {// failure
                     smtpFailureEvent = new UploadEvents.AutoEmail().failed("Failure to send the email");
@@ -153,43 +186,35 @@ public class AutoEmailJob extends Job {
 
             if(smtpFailureEvent != null){
                 smtpFailureEvent.smtpMessages = smtpServerResponses;
+                if(smtpFailureEvent.smtpMessages.isEmpty()){
+                    smtpFailureEvent.smtpMessages = new ArrayList<>(Arrays.asList(client.getReplyStrings()));
+                }
                 EventBus.getDefault().post(smtpFailureEvent);
             }
         }
 
+    }
 
 
-//        m = new Mail(smtpUsername, smtpPassword);
-//
-//        String[] toArr = csvEmailTargets.split(",");
-//        m.setTo(toArr);
-//
-//        if (fromAddress != null && fromAddress.length() > 0) {
-//            m.setFrom(fromAddress);
-//        } else {
-//            m.setFrom(smtpUsername);
-//        }
-//
-//        m.setSubject(subject);
-//        m.setBody(body);
-//
-//        m.setPort(smtpPort);
-//        m.setSecurePort(smtpPort);
-//        m.setSmtpHost(smtpServer);
-//        m.setSsl(smtpUseSsl);
-//
-//        for (File f : files) {
-//            m.addAttachment(f.getName(), f.getAbsolutePath());
-//        }
-//
-//        m.setDebuggable(true);
-//
-//        LOG.info("Sending email...");
-//        if (m.send()) {
-//            EventBus.getDefault().post(new UploadEvents.AutoEmail().succeeded());
-//        } else {
-//            EventBus.getDefault().post(new UploadEvents.AutoEmail().failed());
-//        }
+    /**
+     * Append the given attachments to the message which is being written by the given writer.
+     *
+     * @param boundary separates each file attachment
+     */
+    private static void attachFilesToWriter(Writer writer, String boundary, File[] files) throws IOException {
+        for (File f : files) {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream((int) f.length());
+            FileInputStream inputStream = new FileInputStream(f);
+            Streams.copyIntoStream(inputStream, outputStream);
+
+            writer.write("--" + boundary + "\n");
+            writer.write("Content-Type: application/" + Files.getMimeType(f.getName()) + "; name=\"" + f.getName() + "\"\n");
+            writer.write("Content-Disposition: attachment; filename=\"" + f.getName() + "\"\n");
+            writer.write("Content-Transfer-Encoding: base64\n\n");
+            String encodedFile = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
+            writer.write(encodedFile);
+            writer.write("\n");
+        }
     }
 
 

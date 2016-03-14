@@ -47,7 +47,7 @@ https:
   container_name: gpslogger-https-server
   image: bitnami/apache
   ports:
-    - "8080:80"
+    - "8081:80"
     - "8443:443"
 
 postfix:
