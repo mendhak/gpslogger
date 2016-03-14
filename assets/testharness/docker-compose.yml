@@ -49,3 +49,15 @@ https:
   ports:
     - "8080:80"
     - "8443:443"
+
+postfix:
+  container_name: gpslogger-securemail-server
+  image: catatnight/postfix
+  ports:
+    - "525:25"
+    - "587:587"
+  environment: #noreply@COFFEE.home username is case sensitive
+    - maildomain=COFFEE.home
+    - smtp_user=noreply:docker
+  volumes:
+    - ./postfixstorage/postfix/main.cf:/etc/postfix/main.cf

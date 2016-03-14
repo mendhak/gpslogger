@@ -11,10 +11,11 @@ docker exec gpslogger-ftpd-server bash -c 'echo -e "Passw0rd\nPassw0rd" > /tmp/b
 docker exec gpslogger-ftpd-server bash -c 'pure-pw useradd bob -u ftpuser -d /home/ftpusers/bob < /tmp/bobp.txt'
 docker exec gpslogger-ftpd-server pure-pw mkdb
 
-echo "--------------"
-echo "FTP: $SERVERIP, bob Passw0rd"
-echo "OwnCloud: $SERVERIP"
-echo "SMTP: $SERVERIP:1025 - but no TLS!"
-echo "UDP: $SERVERIP:4001"
-echo "HTTPS: http://$SERVERIP:8080 and https://$SERVERIP:8443"
-echo "--------------"
+echo "----------------------------------------------------------------------"
+echo "FTP            : $SERVERIP:21, bob Passw0rd"
+echo "SMTP w/ TLS    : $SERVERIP:525 noreply@COFFEE.home:docker relays to :1025"
+echo "SMTP no TLS    : $SERVERIP:1025 view on http://$SERVERIP:8025"
+echo "UDP            : $SERVERIP:4001"
+echo "OwnCloud       : https://$SERVERIP"
+echo "HTTPS          : http://$SERVERIP:8080 and https://$SERVERIP:8443"
+echo "----------------------------------------------------------------------"
