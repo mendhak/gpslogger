@@ -203,9 +203,6 @@ dependencies {
     compile 'de.greenrobot:eventbus:2.4.0'
 
     //JARs which aren't on maven
-    compile 'com.mendhak.gpsloggersupportfiles:activation:0.0.2'
-    compile 'com.mendhak.gpsloggersupportfiles:additionnal:0.0.2'
-    compile 'com.mendhak.gpsloggersupportfiles:mail:0.0.2'
     compile 'com.mendhak.gpsloggersupportfiles:owncloud-android-library:0.0.3@aar'
 
     //Required by owncloud library
