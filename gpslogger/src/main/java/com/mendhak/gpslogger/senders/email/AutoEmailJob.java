@@ -34,7 +34,6 @@ public class AutoEmailJob extends Job {
     String subject;
     String body;
     File[] files;
-    //Mail m;
     static ArrayList<String> smtpServerResponses;
     static UploadEvents.AutoEmail smtpFailureEvent;
 
@@ -233,10 +232,7 @@ public class AutoEmailJob extends Job {
 
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
-
         LOG.error("Could not send email", throwable);
-        //EventBus.getDefault().post(new UploadEvents.AutoEmail().failed(m.getSmtpMessages(), throwable));
-
         return false;
     }
 
