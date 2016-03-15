@@ -19,9 +19,17 @@ package com.mendhak.gpslogger.loggers.customurl;
 
 import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.path.android.jobqueue.JobManager;
+
+import java.net.URLEncoder;
+import java.util.AbstractMap;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CustomUrlLogger implements FileLogger {
 
@@ -45,9 +53,52 @@ public class CustomUrlLogger implements FileLogger {
 
     @Override
     public void annotate(String description, Location loc) throws Exception {
+
+        AbstractMap.SimpleEntry<String,String> credentials = getBasicAuth(customLoggingUrl);
+        String finalUrl  = removeCredentialsFromUrl(customLoggingUrl, credentials.getKey(), credentials.getValue());
+        finalUrl = getFormattedUrl(finalUrl, loc, description, androidId, batteryLevel, Strings.getBuildSerial());
+
         JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new CustomUrlJob(customLoggingUrl, loc, description,  batteryLevel, androidId));
+        jobManager.addJobInBackground(new CustomUrlJob(finalUrl, credentials.getKey(), credentials.getValue()));
     }
+
+    public String getFormattedUrl(String customLoggingUrl, Location loc, String description, String androidId, float batteryLevel, String buildSerial) throws Exception {
+
+        String logUrl = customLoggingUrl;
+        SerializableLocation sLoc = new SerializableLocation(loc);
+        logUrl = logUrl.replaceAll("(?i)%lat", String.valueOf(sLoc.getLatitude()));
+        logUrl = logUrl.replaceAll("(?i)%lon", String.valueOf(sLoc.getLongitude()));
+        logUrl = logUrl.replaceAll("(?i)%sat", String.valueOf(sLoc.getSatelliteCount()));
+        logUrl = logUrl.replaceAll("(?i)%desc", String.valueOf(URLEncoder.encode(Strings.htmlDecode(description), "UTF-8")));
+        logUrl = logUrl.replaceAll("(?i)%alt", String.valueOf(sLoc.getAltitude()));
+        logUrl = logUrl.replaceAll("(?i)%acc", String.valueOf(sLoc.getAccuracy()));
+        logUrl = logUrl.replaceAll("(?i)%dir", String.valueOf(sLoc.getBearing()));
+        logUrl = logUrl.replaceAll("(?i)%prov", String.valueOf(sLoc.getProvider()));
+        logUrl = logUrl.replaceAll("(?i)%spd", String.valueOf(sLoc.getSpeed()));
+        logUrl = logUrl.replaceAll("(?i)%time", String.valueOf(Strings.getIsoDateTime(new Date(sLoc.getTime()))));
+        logUrl = logUrl.replaceAll("(?i)%batt", String.valueOf(batteryLevel));
+        logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));
+        logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(buildSerial));
+
+        return logUrl;
+    }
+
+    public AbstractMap.SimpleEntry<String,String> getBasicAuth(String customLoggingUrl){
+        String basicUsername="", basicPassword="";
+        Pattern r = Pattern.compile("(\\w+):(\\w+)@.+"); //Looking for http://username:password@example.com/....
+        Matcher m =  r.matcher(customLoggingUrl);
+        while(m.find()){
+            basicUsername = m.group(1);
+            basicPassword = m.group(2);
+        }
+
+        return new AbstractMap.SimpleEntry<>(basicUsername, basicPassword);
+    }
+
+    public String removeCredentialsFromUrl(String customLoggingUrl, String user, String pass){
+        return customLoggingUrl.replace(user + ":" + pass+"@","");
+    }
+
 
     @Override
     public String getName() {
