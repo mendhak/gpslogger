@@ -19,11 +19,10 @@ package com.mendhak.gpslogger.loggers.opengts;
 
 import android.content.Context;
 import android.location.Location;
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.loggers.FileLogger;
-import com.path.android.jobqueue.JobManager;
+import com.mendhak.gpslogger.senders.opengts.OpenGTSManager;
 
 /**
  * Send locations directly to an OpenGTS server <br/>
@@ -43,15 +42,8 @@ public class OpenGTSLogger implements FileLogger {
     @Override
     public void write(Location loc) throws Exception {
 
-        String server = preferenceHelper.getOpenGTSServer();
-        int port = Integer.parseInt(preferenceHelper.getOpenGTSServerPort());
-        String accountName = preferenceHelper.getOpenGTSAccountName();
-        String path = preferenceHelper.getOpenGTSServerPath();
-        String deviceId = preferenceHelper.getOpenGTSDeviceId();
-        String communication = preferenceHelper.getOpenGTSServerCommunicationMethod();
-
-        JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new OpenGTSJob(server, port, accountName, path, deviceId, communication, new SerializableLocation[]{new SerializableLocation(loc)}));
+        OpenGTSManager manager = new OpenGTSManager(preferenceHelper);
+        manager.sendLocations(new SerializableLocation[]{new SerializableLocation(loc)});
     }
 
     @Override

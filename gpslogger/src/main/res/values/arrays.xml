@@ -35,15 +35,12 @@
         <item>identifiable</item>
     </string-array>
 
-    <string-array name="opengts_server_communication_methods">
-        <item>HTTP GET</item>
-        <item>UDP Raw</item>
-    </string-array>
-
     <string-array name="opengts_server_communication_methods_values">
         <item>HTTP</item>
+        <item>HTTPS</item>
         <item>UDP</item>
     </string-array>
+
     <string-array name="autoftp_ssltls_entries">
         <item>@string/autoftp_ssltls_none</item>
         <item>@string/autoftp_ssltls_ssl</item>

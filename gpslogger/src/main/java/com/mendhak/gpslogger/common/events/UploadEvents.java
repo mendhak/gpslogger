@@ -10,7 +10,7 @@ public class UploadEvents {
     // new Baseuploadvent.   b.message = "X";
     // public class AutoEmailEvent extends thebaseone {}
 
-    static abstract class BaseUploadEvent{
+    public static abstract class BaseUploadEvent implements java.io.Serializable{
         public boolean success;
         public String message;
         public Throwable throwable;
