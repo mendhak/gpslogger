@@ -24,8 +24,10 @@
 
 -keep,includedescriptorclasses class com.mendhak.gpslogger.** { *; }
 
-## GreenRobot EventBus specific rules ##
+# --------------------------------------------------------------------------------- #
+# GreenRobot EventBus
 # https://github.com/greenrobot/EventBus/blob/master/HOWTO.md#proguard-configuration
+# --------------------------------------------------------------------------------- #
 
 -keepclassmembers,includedescriptorclasses class ** {
     public void onEvent*(***);
@@ -43,7 +45,17 @@
 -dontwarn de.greenrobot.event.util.*$SupportManagerFragment
 
 
-# Dropbox SDK Serialization
+# --------------------------------------------------------------------------------- #
+# Job Queue
+# --------------------------------------------------------------------------------- #
+-keep,includedescriptorclasses class com.path.android.** {*;}
+
+
+
+# --------------------------------------------------------------------------------- #
+# DropBox
+# https://github.com/dropbox/dropbox-sdk-java#does-this-sdk-require-any-special-proguard-rules-for-shrink-optimizations
+# --------------------------------------------------------------------------------- #
 
 -keepattributes *Annotation*,EnclosingMethod,InnerClasses,Signature
 -keepnames class com.fasterxml.jackson.** { *; }
@@ -60,9 +72,12 @@
 -dontnote java.nio.file.Path
 
 -dontwarn com.squareup.okhttp.**
+
+# --------------------------------------------------------------------------------- #
+# Google Play Services
+# https://developer.android.com/google/play-services/setup.html#Proguard
+# --------------------------------------------------------------------------------- #
 #
-### Google Play Services 4.3.23 specific rules ##
-### https://developer.android.com/google/play-services/setup.html#Proguard ##
 #
 #-keep class * extends java.util.ListResourceBundle {
 #    protected Object[][] getContents();
@@ -80,39 +95,39 @@
 #-keepnames class * implements android.os.Parcelable {
 #    public static final ** CREATOR;
 #}
-#
-## Logback for Android
-##
-## Tested on the following *.gradle dependencies
-##
-##    compile 'org.slf4j:slf4j-api:1.7.7'
-##    compile 'com.github.tony19:logback-android-core:1.1.1-3'
-##    compile 'com.github.tony19:logback-android-classic:1.1.1-3'
-##
-#
-#-keep class ch.qos.** { *; }
-#-keep class org.slf4j.** { *; }
-#-keepattributes *Annotation*
-#-dontwarn ch.qos.logback.core.net.*
-#
-#
-## Android iconics library - https://github.com/mikepenz/Android-Iconics
-## Warning: works ONLY with iconics > 1.0.0
-##
-## Tested on gradle config:
-##
-##  compile 'com.mikepenz:iconics-core:1.7.1@aar'
-##
-#
-#-keep class com.mikepenz.iconics.** { *; }
-#-keep class com.mikepenz.community_material_typeface_library.CommunityMaterial
-#-keep class com.mikepenz.fontawesome_typeface_library.FontAwesome
-#-keep class com.mikepenz.google_material_typeface_library.GoogleMaterial
-#-keep class com.mikepenz.meteocons_typeface_library.Meteoconcs
-#-keep class com.mikepenz.octicons_typeface_library.Octicons
-#
-#
-# OkHttp
+
+
+# --------------------------------------------------------------------------------- #
+# LogBack for Android
+# --------------------------------------------------------------------------------- #
+
+-keep class ch.qos.** { *; }
+-keep class org.slf4j.** { *; }
+-keepattributes *Annotation*
+-dontwarn ch.qos.logback.core.net.*
+-dontwarn javax.naming.**
+-dontwarn org.apache.log4j.**
+-dontwarn org.apache.log.**
+-dontwarn org.apache.oro.**
+-dontwarn autovalue.shaded.org.**
+-dontwarn org.jdom.**
+-dontwarn org.apache.velocity.**
+-dontwarn javax.xml.stream.**
+-dontwarn org.apache.commons.logging.**
+
+
+# --------------------------------------------------------------------------------- #
+# Material Drawer and Iconics Library
+# --------------------------------------------------------------------------------- #
+
+-keep,includedescriptorclasses class com.mikepenz.iconics.view.IconicsImageView { *; }
+-keep class com.mikepenz.iconics.typeface.ITypeface {*;}
+-keep,includedescriptorclasses class com.mikepenz.materialize.view.ScrimInsetsFrameLayout { *; }
+
+
+# --------------------------------------------------------------------------------- #
+# OKHTTP
+# --------------------------------------------------------------------------------- #
 -keepattributes Signature
 -keepattributes *Annotation*
 -keep class okhttp3.** { *; }
@@ -124,10 +139,33 @@
 -dontnote okhttp3.**
 -dontnote okio.**
 
-#OKHTTP OauthSignpost
 
-#
-#
+# --------------------------------------------------------------------------------- #
+# Manabu-GT/ExpandableTextView
+# --------------------------------------------------------------------------------- #
+-keep,includedescriptorclasses class com.ms.square.android.expandabletextview.ExpandableTextView { *; }
+
+
+
+# --------------------------------------------------------------------------------- #
+# Android Support Libraries
+# --------------------------------------------------------------------------------- #
+-keep,includedescriptorclasses class android.support.v4.app.NotificationCompat$Action { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.ActionBarContainer { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.ActionBarOverlayLayout { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.ActionMenuView { *; }
+-keep,includedescriptorclasses class android.support.v7.view.menu.ActionMenuItemView { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.ActivityChooserView { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.ContentFrameLayout { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.FitWindowsFrameLayout { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.FitWindowsLinearLayout { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.RecyclerView { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.SearchView { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.SearchView$SearchAutoComplete { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.Toolbar { *; }
+-keep,includedescriptorclasses class android.support.v7.widget.ViewStubCompat { *; }
+
+
 #-keep public class android.support.v7.widget.** { *; }
 #-keep public class android.support.v7.internal.widget.** { *; }
 #-keep public class android.support.v7.internal.view.menu.** { *; }
@@ -141,34 +179,49 @@
 #-keep class android.support.v7.widget.RoundRectDrawable { *; }
 
 
-#---------------------------------------- Works so far (below) ---------------
-#
-#-dontshrink
-#-dontoptimize
-#
-#
--dontwarn org.apache.tools.ant.**
+# --------------------------------------------------------------------------------- #
+# Material Dialogs
+# --------------------------------------------------------------------------------- #
+-dontnote com.afollestad.materialdialogs.internal.MDTintHelper
+-keep,includedescriptorclasses class com.afollestad.materialdialogs.** { *; }
+
+# --------------------------------------------------------------------------------- #
+# Action button
+# --------------------------------------------------------------------------------- #
+-keep,includedescriptorclasses class com.dd.processbutton.iml.ActionProcessButton { *; }
+
+
+# --------------------------------------------------------------------------------- #
+# OwnCloud library
+# --------------------------------------------------------------------------------- #
 -dontwarn javax.servlet.**
--dontwarn javax.naming.**
--dontwarn org.apache.log4j.**
--dontwarn org.apache.log.**
--dontwarn org.apache.oro.**
--dontwarn autovalue.shaded.org.**
--dontwarn org.jdom.**
--dontwarn com.werken.**
--dontwarn org.apache.velocity.**
--dontwarn java.awt.**
--dontwarn javax.security.**
+-dontwarn org.apache.jackrabbit.**
+
+
+# --------------------------------------------------------------------------------- #
+# Other warnings, origins unknown
+# --------------------------------------------------------------------------------- #
+
+-dontwarn org.apache.tools.ant.**
+-dontwarn java.lang.**
 -dontwarn javax.lang.**
 -dontwarn javax.annotation.**
+-dontwarn java.beans.**
+-dontwarn com.google.auto.**
+
+
+-dontwarn com.werken.**
+-dontwarn java.awt.**
+-dontwarn javax.security.**
 -dontwarn javax.tools.**
--dontwarn javax.xml.stream.**
+
 -dontwarn com.google.vending.**
 -dontwarn org.apache.**
--dontwarn java.beans.**
--dontwarn java.lang.**
--dontwarn com.google.auto.**
-#
+
+
+# --------------------------------------------------------------------------------- #
+# Notes
+# --------------------------------------------------------------------------------- #
 
 -dontnote org.apache.**
 -dontnote com.google.vending.**
@@ -184,30 +237,9 @@
 -dontnote org.apache.commons.codec.**
 -dontnote org.apache.http.**
 -dontnote autovalue.shaded.com.**
--dontnote com.afollestad.materialdialogs.internal.MDTintHelper
 
--keep,includedescriptorclasses class android.support.v4.app.NotificationCompat$Action { *; }
--keep,includedescriptorclasses class android.support.v7.widget.ActionBarContainer { *; }
--keep,includedescriptorclasses class android.support.v7.widget.ActionBarOverlayLayout { *; }
--keep,includedescriptorclasses class android.support.v7.widget.ActionMenuView { *; }
--keep,includedescriptorclasses class android.support.v7.view.menu.ActionMenuItemView { *; }
--keep,includedescriptorclasses class android.support.v7.widget.ActivityChooserView { *; }
--keep,includedescriptorclasses class android.support.v7.widget.ContentFrameLayout { *; }
--keep,includedescriptorclasses class android.support.v7.widget.FitWindowsFrameLayout { *; }
--keep,includedescriptorclasses class android.support.v7.widget.FitWindowsLinearLayout { *; }
--keep,includedescriptorclasses class android.support.v7.widget.RecyclerView { *; }
--keep,includedescriptorclasses class android.support.v7.widget.SearchView { *; }
--keep,includedescriptorclasses class android.support.v7.widget.SearchView$SearchAutoComplete { *; }
--keep,includedescriptorclasses class android.support.v7.widget.Toolbar { *; }
--keep,includedescriptorclasses class android.support.v7.widget.ViewStubCompat { *; }
--keep,includedescriptorclasses class com.afollestad.materialdialogs.** { *; }
--keep,includedescriptorclasses class com.dd.processbutton.iml.ActionProcessButton { *; }
--keep,includedescriptorclasses class com.mikepenz.iconics.view.IconicsImageView { *; }
--keep class com.mikepenz.iconics.typeface.ITypeface {*;}
--keep,includedescriptorclasses class com.path.android.** {*;}
--keep,includedescriptorclasses class com.mikepenz.materialize.view.ScrimInsetsFrameLayout { *; }
--keep,includedescriptorclasses class com.ms.square.android.expandabletextview.ExpandableTextView { *; }
 
-# SMTP Mail
--keep,includedescriptorclasses class com.sun.mail.** {*;}
+
+
+
 

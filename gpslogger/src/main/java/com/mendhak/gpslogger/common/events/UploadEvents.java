@@ -65,7 +65,10 @@ public class UploadEvents {
         }
     }
 
-    public static class AutoEmail extends BaseUploadEvent  {}
+    public static class AutoEmail extends BaseUploadEvent  {
+        public ArrayList<String> smtpMessages;
+
+    }
 
 
     public static class CustomUrl extends BaseUploadEvent {}
