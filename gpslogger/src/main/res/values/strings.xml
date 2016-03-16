@@ -476,5 +476,7 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="debuglog_attach_to_email">Attach debug log to email</string>
     <string name="debuglog_attach_to_email_summary">Attaches debug log to an email along with some diagnostic information</string>
+    <string name="change_language_title">Change Language</string>
+    <string name="change_language_summary">Not all languages are fully translated! You must restart the app for the settings to take effect.</string>
 
 </resources>

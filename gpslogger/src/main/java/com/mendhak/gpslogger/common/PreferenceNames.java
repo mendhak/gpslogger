@@ -83,4 +83,5 @@ public  class PreferenceNames {
     public static final String SELECTED_NAVITEM = "selected_navitem";
 
     public static final String LAST_VERSION_SEEN_BY_USER = "last_version_seen";
+    public static final String USER_SPECIFIED_LANGUAGE = "user_specified_locale";
 }

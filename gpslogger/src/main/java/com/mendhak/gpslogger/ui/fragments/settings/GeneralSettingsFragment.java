@@ -26,10 +26,16 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.widget.Toast;
+import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
+import org.slf4j.Logger;
 
 import java.io.File;
+import java.util.*;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -43,8 +49,9 @@ import java.io.File;
  * API Guide</a> for more information on developing a Settings UI.
  */
 
-public class GeneralSettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
+public class GeneralSettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
+    Logger LOG = Logs.of(GeneralSettingsFragment.class);
     int aboutClickCounter = 0;
 
     @Override
@@ -58,6 +65,21 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         findPreference("gpsvisualizer_link").setOnPreferenceClickListener(this);
 
         findPreference("debuglogtoemail").setOnPreferenceClickListener(this);
+
+        MaterialListPreference langs = (MaterialListPreference)findPreference("changelanguage");
+
+
+        Map<String,String> localeDisplayNames = Strings.getAvailableLocales(getActivity());
+
+        String[] locales = localeDisplayNames.keySet().toArray(new String[localeDisplayNames.keySet().size()]);
+        String[] displayValues = localeDisplayNames.values().toArray(new String[localeDisplayNames.values().size()]);
+
+        langs.setEntries(displayValues);
+        langs.setEntryValues(locales);
+        langs.setDefaultValue("en");
+        langs.setOnPreferenceChangeListener(this);
+
+
 
         Preference aboutInfo = findPreference("about_version_info");
         try {
@@ -121,6 +143,17 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
                 startActivity(intent);
             }
 
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+        if(preference.getKey().equals("changelanguage")){
+            PreferenceHelper.getInstance().setUserSpecifiedLocale((String) newValue);
+            LOG.debug("Language chosen: " + PreferenceHelper.getInstance().getUserSpecifiedLocale());
+            return true;
         }
         return false;
     }

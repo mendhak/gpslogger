@@ -3,6 +3,7 @@ package com.mendhak.gpslogger.common;
 
 import android.content.Context;
 import android.os.Build;
+import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 
 import java.text.DecimalFormat;
@@ -287,4 +288,33 @@ public class Strings {
 
         return result;
     }
+
+    public static Map<String, String> getAvailableLocales(Context context) {
+
+        Map<String, String> locales = new TreeMap<>();
+
+        String[] availableLocales = BuildConfig.TRANSLATION_ARRAY;
+
+        for (String foundLocale : availableLocales) {
+
+            String displayName = new Locale(foundLocale).getDisplayName(new Locale(foundLocale));
+            if (!displayName.equalsIgnoreCase(foundLocale)) {
+                displayName = new Locale(foundLocale).getDisplayName(new Locale("en"));
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                displayName = Locale.forLanguageTag(foundLocale).getDisplayName(Locale.forLanguageTag(foundLocale));
+
+                if (displayName.equalsIgnoreCase(foundLocale)) {
+                    displayName = Locale.forLanguageTag(foundLocale).getDisplayName(Locale.forLanguageTag("en"));
+                }
+            }
+
+            locales.put(foundLocale, displayName);
+        }
+
+
+        return locales;
+    }
+
 }

@@ -43,6 +43,14 @@
         android:enabled="true"/>
 
 
+    <com.afollestad.materialdialogs.prefs.MaterialListPreference
+        android:key="changelanguage"
+        android:title="@string/change_language_title"
+        android:summary="@string/change_language_summary"
+        android:icon="@drawable/translate"
+        />
+
+
 
     <Preference android:key="about_version_info"></Preference>
 
@@ -79,7 +87,6 @@
     <Preference
         android:key="gpslogger_crowdin"
         android:title="Translations"
-        android:icon="@drawable/translate"
         >
         <intent android:action="android.intent.action.VIEW"
                 android:data="https://crowdin.com/project/gpslogger-for-android"/>

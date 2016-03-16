@@ -263,6 +263,27 @@ tasks.whenTaskAdded { task ->
     }
 }
 
+task buildTranslationArray << {
+    def foundLocales = new StringBuilder()
+    foundLocales.append("new String[]{")
+
+    fileTree("src/main/res").visit { FileVisitDetails details ->
+        if(details.file.path.endsWith("strings.xml")){
+            def languageCode = details.file.parent.tokenize('/').last().replaceAll('values-','').replaceAll('-r','-')
+            languageCode = (languageCode == "values") ? "en" : languageCode;
+            foundLocales.append("\"").append(languageCode).append("\"").append(",")
+        }
+    }
+
+    foundLocales.append("}")
+    //Don't forget to remove the trailing comma
+    def foundLocalesString = foundLocales.toString().replaceAll(',}','}')
+    android.defaultConfig.buildConfigField "String[]", "TRANSLATION_ARRAY", foundLocalesString
+
+}
+preBuild.dependsOn buildTranslationArray
+
+
 
 
 //Download translations from Crowdin

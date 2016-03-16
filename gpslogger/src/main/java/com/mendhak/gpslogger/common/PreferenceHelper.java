@@ -959,6 +959,15 @@ public class PreferenceHelper {
     }
 
 
+    @ProfilePreference(name=PreferenceNames.USER_SPECIFIED_LANGUAGE)
+    public String getUserSpecifiedLocale() {
+        return prefs.getString(PreferenceNames.USER_SPECIFIED_LANGUAGE, "");
+    }
+
+    public void setUserSpecifiedLocale(String userSpecifiedLocale) {
+        prefs.edit().putString(PreferenceNames.USER_SPECIFIED_LANGUAGE, userSpecifiedLocale).apply();
+    }
+
 
     public void savePropertiesFromPreferences(File f) throws IOException {
 
@@ -1046,6 +1055,7 @@ public class PreferenceHelper {
         }
 
     }
+
 
 
 }

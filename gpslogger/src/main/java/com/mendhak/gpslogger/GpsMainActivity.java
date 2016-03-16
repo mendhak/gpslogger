@@ -97,6 +97,7 @@ public class GpsMainActivity extends AppCompatActivity
 
         loadPresetProperties();
         loadVersionSpecificProperties();
+        setLocale();
 
         setContentView(R.layout.activity_gps_main);
 
@@ -210,6 +211,27 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
 
+    private void setLocale() {
+
+        if (!Strings.isNullOrEmpty(preferenceHelper.getUserSpecifiedLocale())) {
+            LOG.debug("Setting language to " + preferenceHelper.getUserSpecifiedLocale());
+
+            String language, country="";
+
+            if(preferenceHelper.getUserSpecifiedLocale().contains("-")){
+                language = preferenceHelper.getUserSpecifiedLocale().split("-")[0];
+                country = preferenceHelper.getUserSpecifiedLocale().split("-")[1];
+            }
+            else {
+                language = preferenceHelper.getUserSpecifiedLocale();
+            }
+
+            Locale locale = new Locale(language, country);
+            Locale.setDefault(locale);
+            getResources().getConfiguration().locale = locale;
+            getBaseContext().getResources().updateConfiguration(getResources().getConfiguration(), getBaseContext().getResources().getDisplayMetrics());
+        }
+    }
 
     private void loadVersionSpecificProperties(){
         PackageInfo packageInfo;
