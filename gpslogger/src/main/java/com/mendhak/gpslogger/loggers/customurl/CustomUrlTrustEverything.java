@@ -24,7 +24,7 @@ public class CustomUrlTrustEverything {
 
     public static class TrustEverythingTrustManager implements X509TrustManager {
         public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-            return null;
+            return new java.security.cert.X509Certificate[]{};
         }
 
         public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) {   }
