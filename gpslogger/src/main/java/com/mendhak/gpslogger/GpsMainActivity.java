@@ -561,6 +561,10 @@ public class GpsMainActivity extends AppCompatActivity
             }
         });
 
+        if(propertyFiles == null){
+            return;
+        }
+
         for(File propertyFile: propertyFiles){
 
             String name = propertyFile.getName();
