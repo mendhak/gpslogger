@@ -87,7 +87,7 @@
   <string name="time_oneandhalfhours">1,5 óra</string>
   <string name="time_twoandhalfhours">2,5 óra</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
-  <string name="accuracy_within" formatted="false">belül: %s%s</string>
+  <string name="accuracy_within" formatted="false">%s %s belül</string>
   <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Távolság méterben</string>
@@ -213,7 +213,7 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="email_upload">E-mail fájl</string>
   <string name="autoemail_sendto_csv">Vesszővel elválasztott e-mail címek</string>
   <string name="autosend_enabled">Automatikus küldés engedélyezése</string>
-  <string name="autosend_enabled_summary">Lehetővé teszi a fájlok küldése különböző célokra</string>
+  <string name="autosend_enabled_summary">Lehetővé teszi a fájlok különböző célokra küldését</string>
   <string name="autosend_frequency">Milyen gyakran?</string>
   <string name="autosend_sendzip_title">Küld a zip-fájlt</string>
   <string name="autosend_sendzip_summary">Zip-fájl küldése. Kikapcsolja az egyes fájlok küldését, ha a zip opció nem működik az Önnél     </string>

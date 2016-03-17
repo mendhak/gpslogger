@@ -49,8 +49,9 @@
     <br /><br/><strong>Časový interval opakovania pre filtre presnosti</strong> – Ak nie sú splnené podmienky horeuvedeného filtra, aplikácia sa bude počas tu zadaného času pokúšať o zistenie nového bodu.
     <br /><br/><strong>Absol. časový limit</strong> – Po uplynutí tohto limitu budú pozastavené pokusy o získanie opravy, bez ohľadu na ostatné nastavenia filtra. Táto funkcia je užitočná napríklad vtedy, keď sa chvíľkovo nachádzate v budove.
     ]]></string>
-  <string name="faq_topic_howtogetthefile"><![CDATA[<h3>Ako získať prístup k súboru</h3>
-    <p><strong>Z PC</strong>, môžete prepojiť svoj telefón pomocou USB, čím dôjde k pripojeniu SD karty, následne môžete kopírovať priamo z priečinka so zaznamenanými údajmi. Takisto môžete zmeniť predvolený priečinok na obrazovke pre podrobnosti zaznamenávania.<p>
+  <string name="faq_topic_howtogetthefile"><![CDATA[
+    <h3>Ako získať prístup k súboru</h3>
+    <p><strong>Z PC</strong>, môžete prepojiť svoj telefón pomocou USB, čím dôjde k pripojeniu SD karty, následne môžete kopírovať priamo z priečinka so zaznamenanými údajmi. Takisto môžete zmeniť predvolený priečinok na obrazovke pre podrobnosti zaznamenávania.<p>
     <p><strong>Priamo na samotnom telefóne</strong>, ak máte nainštalovaný prehliadač súborov, môžete prejsť do priečinka pre zaznamenávanie údajov &gt; <font face=\'monospace\'>Dlhším podržaním súboru a výberom funkcie &gt; Otvoriť ako &gt; text</font>. Takto si môžete súbor prezerať priamo alebo v aplikácii, ktorá dokáže pracovať s takýmito súbormi.</p>
     <p><strong>Z aplikácie</strong>, môžete si vybrať zdieľanie súboru alebo jeho automatické odoslanie na niektorú cieľovú službu, ako je napríklad Google Drive, Dropbox, e-mail, a podobne. Získate tak prístup k súboru priamo v tejto službe.</p>
     ]]></string>

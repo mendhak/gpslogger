@@ -96,8 +96,11 @@
   <!-- Settings -->
   <string name="pref_logging_title">Detalhes de log</string>
   <string name="log_gpx_title">Log para GPX</string>
+  <string name="log_gpx_summary">Posições de registros para um arquivo GPX v 1.0</string>
   <string name="log_kml_title">Log para KML</string>
+  <string name="log_kml_summary">Posições de registros para um arquivo KML v 2.2</string>
   <string name="log_plain_text_title">Log em texto sem formatação</string>
+  <string name="log_plain_text_summary">Posições de registros para um arquivo CSV</string>
   <string name="new_file_creation_title">Nova criação de arquivo</string>
   <string name="new_file_creation_summary">Se deseja criar um novo arquivo de uma vez por dia ou cada vez que você iniciar.</string>
   <string name="new_file_creation_onceaday">Uma vez por dia</string>
@@ -325,6 +328,7 @@
   <string name="new_file_custom_each_time_title">Pedir um nome de arquivo em cada início</string>
   <string name="new_file_custom_each_time_summary">Solicitar um nome de arquivo personalizado cada vez que o Log é iniciado</string>
   <string name="donate_app">Doar (app)</string>
+  <string name="donate_bitcoin">Bitcoin</string>
   <string name="tip_coffee">Compre-me um café</string>
   <string name="no_network_message">Não existe rede disponível</string>
   <string name="hide_notification_buttons">Ocultar botões de notificação</string>
@@ -357,4 +361,10 @@
   <string name="profile_delete">Excluir o perfil?</string>
   <string name="profile_default">Perfil padrão</string>
   <string name="profile_add_new">Adicionar perfil</string>
+  <string name="gpslogger_permissions_rationale_title">Permissões necessárias</string>
+  <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Este aplicativo precisa de várias permissões para funcionar corretamente. <br /> <b>Localização de dispositivo</b> - Esta permissão possibilita a leitura dos dados de localização de torres de celulares e do hardware GPS contido no dispostivo.<br /><b>Fotos, midia, arquivos</b> - Esta permissão possibilita a gravação de arquivos de log, checar arquivos para o armazenamento e leitura de uma lista de arquivos para carregamento ou compartilhamento. Este app não vai acessar as suas fotos ou midia.<br /><b>Acesso aos seus contatos</b> - No caso da  funcionalidade do Google Drive, esta permissão possibilita a listagem das contas registradas no Google contidas em seu dispositivo. Sua lista de contatos não é acessada por este app.<br /><br/>  ]]></string>
+  <string name="gpslogger_permissions_permanently_denied">Você negou de maneira permanente uma ou mais permissões que este aplicativo necessita. Desse modo, precisará ir à tela de configurações do aplicativo para conceder ou redefinir essas permissões.</string>
+  <string name="privacy_policy">Política de Privacidade</string>
+  <string name="debuglog_attach_to_email">Anexar o log de depuração para o e-mail</string>
+  <string name="debuglog_attach_to_email_summary">Anexa o log de depuração para um e-mail juntamente com algumas informações de diagnóstico</string>
 </resources>

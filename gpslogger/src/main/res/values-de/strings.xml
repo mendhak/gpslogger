@@ -127,7 +127,7 @@
   <string name="startonbootup_title">Beim Booten starten</string>
   <string name="startonbootup_summary">Starten der App und des Loggens beim Einschalten des Telefons</string>
   <string name="startonapplaunch_title">Loggen bei Start der App</string>
-  <string name="startonapplaunch_summary">Starten des Loggens beim Öffnen der App</string>
+  <string name="startonapplaunch_summary">Startet das Loggen direkt beim Öffnen der App</string>
   <string name="autoemail_title">E-Mail</string>
   <string name="autoemail_summary">Automatisch die Log-Datei an eine frei ausgewählte Email-Adresse senden</string>
   <string name="please_wait">Bitte warten.</string>
@@ -211,9 +211,9 @@
   <string name="gdocs_startauthorization">GPSLogger in Google Drive autorisieren</string>
   <string name="gdocs_authorize_summary">Mit Google Drive verbinden um GPSLogger zu autorisieren</string>
   <string name="gdocs_clearauthorization">Verknüpfung löschen</string>
-  <string name="gdocs_clearauthorization_summary">Lokale Google Docs-Einstellung entfernen. Um den Zugriff dauerhaft zu entfernen müssen die Google-Kontoeinstellungen angepasst werden!</string>
+  <string name="gdocs_clearauthorization_summary">Lokale Google Drive-Einstellungen entfernen. Um den Zugriff dauerhaft zu entfernen, müssen die Google-Kontoeinstellungen angepasst werden</string>
   <string name="gdocs_setup_title">Google Drive</string>
-  <string name="gdocs_setup_summary">Autorisiere GPSLogger in Google Docs um Daten hochladen zu können</string>
+  <string name="gdocs_setup_summary">Autorisiere GPSLogger in Google Drive um Daten hochladen zu können</string>
   <string name="gdocs_test_summary">Testdatei auf Google Drive hochladen</string>
   <string name="gdocs_test_title">Teste Upload</string>
   <string name="gdocs_testupload_error">Eine Testdatei konnte nicht hochgeladen werden.</string>
@@ -301,13 +301,13 @@
   <string name="accuracy_filter_title">Genauigkeit</string>
   <string name="accuracy_filter_summary">Die Mindestgenauigkeit des GPS-Signales in Metern, welches benötigt wird um einen Punkt zu speichern. Bei einer höheren Ungenauigkeit wird die Position verworfen.</string>
   <string name="distance_filter_title">Distanz zwischen zwei Punkten</string>
-  <string name="distance_filter_summary">Mindestabstand zwischen dem aktuellen und dem zuletzt gesicherten Punkt. Punkte mit kürzeren Abständ werden verworfen.</string>
+  <string name="distance_filter_summary">Dies ist der Mindestabstand zwischen dem aktuellen und dem zuletzt gesicherten Punkt. Punkte die innerhalb des Mindestabstandes liegen, werden verworfen.</string>
   <string name="points">Punkte</string>
   <string name="txt_number_of_points">Anzahl der Punkte</string>
   <string name="save">Speichern</string>
   <string name="pref_filedetails_title">Datei und Ordner Informationen</string>
   <string name="absolute_timeout_title">Maximale Unterbrechung</string>
-  <string name="absolute_timeout_summary">Sekunden in denen versucht wird eine gültige Position vom System zu erhalten bevor die Aufzeichnung abgeschalten wird. Innerhalb von Gebäuden wird dadurch zB eine Entleerung Ihres Akku verhindert. Setzen Sie die Zeit auf 0 um eine Abschaltung zu verhindern.</string>
+  <string name="absolute_timeout_summary">Zeit in welcher versucht wird eine gültige Position zu erhalten bevor das Loggen beendet wird. Soll z.B. eine Entleerung des Akkus innerhalb von Gebäuden verhindern. Setzen auf 0 beendet das Loggen nicht.</string>
   <string name="txt_latitude_short">Lat</string>
   <string name="txt_longitude_short">Lon</string>
   <string name="log_nmea_title">Logge zu NMEA</string>
@@ -324,6 +324,7 @@
   <string name="new_file_custom_each_time_title">Bei jedem Start nach einem Dateinamen fragen</string>
   <string name="new_file_custom_each_time_summary">Eingabeaufforderung für einen Dateinamen, jedes Mal wenn die Protokollierung gestartet wird</string>
   <string name="donate_app">Spenden (App)</string>
+  <string name="donate_bitcoin">Bitcoin</string>
   <string name="tip_coffee">Spende mir einen Kaffee</string>
   <string name="no_network_message">Netzwerk nicht verfügbar</string>
   <string name="hide_notification_buttons">Verberge Benachrichtigungs-Schaltflächen</string>
@@ -356,4 +357,10 @@
   <string name="profile_delete">Profil löschen?</string>
   <string name="profile_default">Standardprofil</string>
   <string name="profile_add_new">Neues Profil</string>
+  <string name="gpslogger_permissions_rationale_title">Erforderliche Berechtigungen</string>
+  <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Diese Anwendung erfordert verschiedene Berechtigungen, um richtig zu funktionieren.<br /> <b>Standort</b> - Diese Berechtigung ermöglicht der App das Lesen der aktuellen Standortdaten.<br /> <b>Fotos/Medien/Dateien</b> - Diese Berechtigung ermöglicht es Log-Dateien und Test-Dateien zu speichern, wie auch das Lesen einer Liste von Dateien, um sie hochladen zu können oder zu teilen. Diese App greift nicht auf deine Fotos oder Medien zu.<br /> <b>Kontakte</b> - Wenn die Google Drive Funktionalität verwendet wird, ermöglicht diese Berechtigung das Auflisten der Google-Konten dieses Gerätes. Es wird nicht auf deine Kontakte zugegriffen.<br /> <br/>  ]]></string>
+  <string name="gpslogger_permissions_permanently_denied">Sie haben dieser App eine oder mehrere Berechtigungen verweigert, die von dieser App benötigt werden. In den Einstellungen zu dieser App, musst du die entsprechenden Berechtigungen erteilen oder diese zurücksetzen.</string>
+  <string name="privacy_policy">Datenschutzbestimmungen</string>
+  <string name="debuglog_attach_to_email">Debug-Log and E-Mail anhängen</string>
+  <string name="debuglog_attach_to_email_summary">Das Debug-Log wird zusammen mit anderen Diagnoseinformationen an die E-Mail angefügt</string>
 </resources>

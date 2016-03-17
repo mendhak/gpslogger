@@ -22,7 +22,7 @@
   <string name="txt_direction">方向：</string>
   <string name="txt_satellites">衛星：</string>
   <string name="txt_accuracy">精確度：</string>
-  <string name="txt_travel_distance">行進了</string>
+  <string name="txt_travel_distance">已行進:</string>
   <string name="btn_start_logging">開始記錄</string>
   <string name="btn_stop_logging">停止記錄</string>
   <string name="gpslogger_still_running">GPSLogger 仍在執行中。</string>
@@ -44,9 +44,9 @@
   <string name="meters">&#160;米</string>
   <string name="error">錯誤</string>
   <string name="error_connection">連接錯誤。請檢查你的手機設定。</string>
-  <string name="seconds">&#160;s</string>
-  <string name="minutes">&#160;min</string>
-  <string name="hours">&#160;hrs</string>
+  <string name="seconds">&#160;秒</string>
+  <string name="minutes">&#160;分</string>
+  <string name="hours">&#160;時</string>
   <string name="gpsprovider_unavailable">No GPS provider available. Please check your location settings and enable a  location provider.
     </string>
   <string name="started">已開始</string>
@@ -97,11 +97,11 @@
   <!-- Settings -->
   <string name="pref_logging_title">記錄細節</string>
   <string name="log_gpx_title">記錄到 GPX 檔案</string>
-  <string name="log_gpx_summary">Logs locations to a GPX v1.0 file</string>
+  <string name="log_gpx_summary">記錄到 GPX v1.0 檔案</string>
   <string name="log_kml_title">記錄到 KML 檔案</string>
-  <string name="log_kml_summary">Logs locations to a KML v2.2 file</string>
+  <string name="log_kml_summary">記錄到 KML v2.2 檔案</string>
   <string name="log_plain_text_title">紀錄到文字檔</string>
-  <string name="log_plain_text_summary">Logs locations to a CSV file</string>
+  <string name="log_plain_text_summary">記錄到 CSV 檔案</string>
   <string name="new_file_creation_title">新檔案的建立</string>
   <string name="new_file_creation_summary">選取是一天僅建立一個檔案呢還是每次開始都建立一個檔案。</string>
   <string name="new_file_creation_onceaday">一天僅一次</string>
@@ -138,28 +138,27 @@
   <string name="autoemail_summary">自動的通過Email傳送日誌到你選取的Email位址。</string>
   <string name="please_wait">請稍等。</string>
   <string name="autoemail_target">Target email addresses</string>
-  <string name="autosend_frequency_display">After %s minutes</string>
+  <string name="autosend_frequency_display">%s 分鐘後</string>
   <string name="autoemail_frequency_whenistop">當我點擊停止</string>
   <string name="autoemail_smtp_category">Email 設定</string>
   <string name="autoemail_username">帳號</string>
-  <string name="autoemail_username_summary">你接送電郵的用戶名</string>
+  <string name="autoemail_username_summary">使用者名與您的電子郵件供應商</string>
   <string name="autoemail_password">密碼</string>
-  <string name="autoemail_password_summary">你接送電郵的密碼</string>
+  <string name="autoemail_password_summary">你的電子郵件密碼</string>
   <string name="autoemail_port">Port</string>
-  <string name="autoemail_port_summary">SMTP Port</string>
-  <string name="autoemail_ssl">Use SSL?</string>
-  <string name="autoemail_ssl_summary">Try toggling this if you cannot connect</string>
-  <string name="autoemail_server">SMTP Server</string>
-  <string name="autoemail_server_summary">Hostname of the SMTP server to use</string>
+  <string name="autoemail_port_summary">SMTP 埠</string>
+  <string name="autoemail_ssl">是否使用 SSL?</string>
+  <string name="autoemail_ssl_summary">如果連線失敗請嘗試切換這個選項</string>
+  <string name="autoemail_server">SMTP 伺服器</string>
+  <string name="autoemail_server_summary">SMTP 伺服器的名稱</string>
   <string name="autoemail_choosepreset">Mail Provider</string>
   <string name="autoemail_choosepreset_summary">Pick a provider or choose manual</string>
   <string name="autoemail_smtp_testemail">電子郵件測試</string>
   <string name="autoemail_test">用上列的設定發送測試電子信</string>
-  <string name="autoemail_sendingtest">正在送出電子信</string>
-  <string name="autoemail_testresult_success">電子信已送出</string>
-  <string name="autoemail_invalid_form">Invalid values</string>
-  <string name="autoemail_invalid_form_message">Please ensure that all of the fields have been filled in properly
-    </string>
+  <string name="autoemail_sendingtest">正在送出測試郵件</string>
+  <string name="autoemail_testresult_success">電子郵件已送出</string>
+  <string name="autoemail_invalid_form">不正確的值</string>
+  <string name="autoemail_invalid_form_message">請確認每個欄位均已填妥    </string>
   <string name="fix_obtained">已獲得修正</string>
   <string name="started_waiting">GPS 已啟動，正在等待修正</string>
   <string name="gps_stopped">GPS 已停止</string>
@@ -226,4 +225,16 @@
   <string name="autoemail_from_summary">Some email providers require a from address. Use this only if you need it.
     </string>
   <string name="gdocs_upload">Google Drive</string>
+  <string name="gdocs_startauthorization">Authorize with Google Drive</string>
+  <string name="gdocs_test_summary">上傳一個測試檔到Google雲端硬碟</string>
+  <string name="gdocs_test_title">上傳測試</string>
+  <string name="gdocs_testupload_error">無法上傳測試檔案</string>
+  <string name="gdocs_testupload_success">已上傳完成，請檢查您的Google雲端文件。</string>
+  <string name="email_upload">利用電子郵件傳送檔案</string>
+  <string name="autoemail_sendto_csv">用逗號隔開的郵件地址</string>
+  <string name="autosend_enabled">允許自動傳送</string>
+  <string name="autosend_enabled_summary">允許傳送至不同的目的地</string>
+  <string name="autosend_frequency_summary">自動傳送記錄檔的頻率，以分鐘為單位。0分鐘則為不自動傳送。</string>
+  <string name="autosend_sendzip_title">傳送zip檔案</string>
+  <string name="autoopengts_invalid_form_message">請確認每個欄位均已填妥</string>
 </resources>
