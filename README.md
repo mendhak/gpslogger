@@ -33,10 +33,16 @@ I'm not very good at UIs, so any work with the layouts would be appreciated!
 
 ## Verifying
 
-If you download a release .asc or .sha256, you can verify like so
+It's good practice to verify downloads.  In recent releases, a PGP signature and an SHA256 checksum will accompany each `.apk`.
 
-    $ gpg --keyserver keyserver.ubuntu.com --recv-key 76CBE9A9
+Import PGP Public Key from [Keybase.io](https://keybase.io/mendhak) or just `gpg --recv-key 76CBE9A9`
+
+To verify the integrity and signature:
+
     $ gpg --verify ~/Downloads/gpslogger-71.apk.asc
+    
+To verify checksum:    
+    
     $ sha256sum -c ~/Downloads/gpslogger-71.apk.SHA256
 
 
