@@ -94,7 +94,9 @@ public class FileSenderFactory {
             return;
         }
 
-        if (preferenceHelper.shouldSendZipFile()) {
+        List<FileSender> senders = getFileAutosenders();
+
+        if (!senders.isEmpty() && preferenceHelper.shouldSendZipFile()) {
             File zipFile = new File(gpxFolder.getPath(), fileToSend + ".zip");
             ArrayList<String> filePaths = new ArrayList<>();
 
@@ -110,7 +112,6 @@ public class FileSenderFactory {
             zipFiles.add(zipFile);
         }
 
-        List<FileSender> senders = getFileAutosenders();
 
         for (FileSender sender : senders) {
             LOG.debug("Sender: " + sender.getClass().getName());
