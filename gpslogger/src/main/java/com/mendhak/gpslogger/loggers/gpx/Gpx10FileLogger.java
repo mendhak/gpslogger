@@ -18,6 +18,7 @@
 package com.mendhak.gpslogger.loggers.gpx;
 
 import android.location.Location;
+import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.Maths;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Strings;
@@ -200,7 +201,7 @@ class Gpx10WriteHandler implements Runnable {
 
                     StringBuilder initialXml = new StringBuilder();
                     initialXml.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
-                    initialXml.append("<gpx version=\"1.0\" creator=\"GPSLogger - http://gpslogger.mendhak.com/\" ");
+                    initialXml.append("<gpx version=\"1.0\" creator=\"GPSLogger " + BuildConfig.VERSION_NAME + " - http://gpslogger.mendhak.com/\" ");
                     initialXml.append("xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ");
                     initialXml.append("xmlns=\"http://www.topografix.com/GPX/1/0\" ");
                     initialXml.append("xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 ");
