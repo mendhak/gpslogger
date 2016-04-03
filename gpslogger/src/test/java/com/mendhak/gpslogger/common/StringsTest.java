@@ -3,6 +3,7 @@ package com.mendhak.gpslogger.common;
 import android.content.Context;
 import android.os.Build;
 import android.test.suitebuilder.annotation.SmallTest;
+import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -69,6 +70,15 @@ public class StringsTest {
         String expected = "basename_" + Build.SERIAL;
         String actual = Strings.getFormattedCustomFileName("basename_%ser");
         assertThat("Static file name %SER should be replaced with Build Serial", actual, is(expected));
+
+    }
+
+    @Test
+    public void GetFormattedCustomFileName_Version_ReplacedWithBuildVersion() {
+
+        String expected = "basename_" + BuildConfig.VERSION_NAME;
+        String actual = Strings.getFormattedCustomFileName("basename_%ver");
+        assertThat("Static file name %VER should be replaced with Build Version", actual, is(expected));
 
     }
 

@@ -221,6 +221,7 @@ public class Strings {
 
         String finalFileName = baseName;
         finalFileName = finalFileName.replaceAll("(?i)%ser", String.valueOf(getBuildSerial()));
+        finalFileName = finalFileName.replaceAll("(?i)%ver", String.valueOf(BuildConfig.VERSION_NAME));
         finalFileName = finalFileName.replaceAll("(?i)%hour", String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY)));
         finalFileName = finalFileName.replaceAll("(?i)%min", String.format("%02d", calendar.get(Calendar.MINUTE)));
         finalFileName = finalFileName.replaceAll("(?i)%year",  String.valueOf(calendar.get(Calendar.YEAR)));
