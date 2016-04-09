@@ -51,11 +51,12 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
+        applicationId "com.mendhak.gpslogger"
         minSdkVersion 14
         targetSdkVersion 23
 
         versionCode 74
-        versionName "74"
+        versionName "74-wear"
     }
 
     //Adding API keys to BuildConfig
@@ -159,6 +160,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-base:8.4.0'
     compile 'com.google.android.gms:play-services-location:8.4.0'
     compile 'com.google.android.gms:play-services-drive:8.4.0'
+    compile 'com.google.android.gms:play-services-wearable:8.4.0'
 
     //FTP operations
     compile('commons-net:commons-net:3.4')
@@ -235,6 +237,8 @@ dependencies {
 
     //Dropbox API 2
     compile 'com.dropbox.core:dropbox-core-sdk:2.0.1'
+
+    wearApp project(":gpsloggerwear")
 
      //Libraries required for unit testing
     testCompile 'junit:junit:4.12'
