@@ -1,27 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <android.support.wearable.view.BoxInsetLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/container">
+
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_box="all">-->
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/container"
-    tools:context="com.mendhak.gpslogger.MainWearActivity"
-    tools:deviceIds="wear">
-
+    android:gravity="center_vertical"
+    android:orientation="vertical">
     <TextView
-        android:id="@+id/text"
-        app:layout_box="all"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_world" />
-
-    <TextView
-        android:id="@+id/clock"
-        app:layout_box="all"
-        android:layout_gravity="bottom|start"
-        android:layout_width="wrap_content"
+        android:id="@+id/txtLatitude"
+        android:gravity="center"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white" />
+        android:layout_width="match_parent"
+        android:text=""
+        android:textSize="35sp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/txtLongitude"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text=""
+        android:textSize="35sp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/txtFixTime"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text=""
+        android:textStyle="italic"
+        android:textSize="12sp"
+        android:textColor="@color/black"/>
 
+
+
+
+</LinearLayout>
+    <ImageButton
+        android:id="@+id/btnStartStop"
+        android:background="@null"
+        android:layout_gravity="bottom|center"
+        android:layout_height="55dp"
+        android:layout_width="55dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"/>
+
+    <!--</FrameLayout>-->
 </android.support.wearable.view.BoxInsetLayout>
+
+<!--<android.support.wearable.view.BoxInsetLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+
+    <!--tools:context="com.mendhak.gpslogger.MainWearActivity"-->
+    <!--tools:deviceIds="wear">-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/text"-->
+        <!--app:layout_box="all"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="asdf" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/clock"-->
+        <!--app:layout_box="all"-->
+        <!--android:layout_gravity="bottom|start"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="@android:color/white" />-->
+
+<!--</android.support.wearable.view.BoxInsetLayout>-->

@@ -28,6 +28,7 @@ import com.mendhak.gpslogger.loggers.customurl.CustomUrlLogger;
 import com.mendhak.gpslogger.loggers.gpx.Gpx10FileLogger;
 import com.mendhak.gpslogger.loggers.kml.Kml22FileLogger;
 import com.mendhak.gpslogger.loggers.opengts.OpenGTSLogger;
+import com.mendhak.gpslogger.loggers.wear.AndroidWearLogger;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -73,6 +74,10 @@ public class FileLoggerFactory {
             float batteryLevel = Systems.getBatteryLevel(context);
             String androidId = Systems.getAndroidId(context);
             loggers.add(new CustomUrlLogger(preferenceHelper.getCustomLoggingUrl(), batteryLevel, androidId));
+        }
+
+        if(/* Should log to Android Wear */  true){
+            loggers.add(new AndroidWearLogger(context));
         }
 
 
