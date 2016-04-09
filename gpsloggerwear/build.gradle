@@ -30,6 +30,11 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
+
     //Release signing key
     if (project.hasProperty("RELEASE_STORE_FILE")) {
         signingConfigs {
