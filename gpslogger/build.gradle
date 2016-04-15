@@ -55,7 +55,7 @@ android {
         targetSdkVersion 23
 
         versionCode 74
-        versionName "74"
+        versionName "74-issue413"
     }
 
     //Adding API keys to BuildConfig
