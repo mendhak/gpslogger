@@ -109,7 +109,9 @@ public class AutoEmailJob extends Job {
             LOG.debug("Checking TLS...");
 
             client.setTrustManager(new CustomUrlTrustEverything.TrustEverythingTrustManager());
-            boolean tlsAccepted = client.execTLS();
+            if(client.execTLS()){
+                client.ehlo("localhost");
+            }
 
             client.auth(AuthenticatingSMTPClient.AUTH_METHOD.LOGIN, smtpUsername, smtpPassword);
             checkReply(client);
