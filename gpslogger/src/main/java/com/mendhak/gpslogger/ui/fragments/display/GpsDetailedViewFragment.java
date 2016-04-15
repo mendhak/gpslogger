@@ -145,17 +145,19 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
             if (loggers.size() > 0) {
 
-                ListIterator<FileLogger> li = loggers.listIterator();
-                String logTo = li.next().getName();
-                while (li.hasNext()) {
-                    logTo += ", " + li.next().getName();
+                StringBuilder enabledLoggers = new StringBuilder();
+
+                for(FileLogger l : loggers){
+                    if(!Strings.isNullOrEmpty(l.getName())){
+                        enabledLoggers.append(l.getName() + " ");
+                    }
                 }
 
                 if (preferenceHelper.shouldLogToNmea()) {
-                    logTo += ", NMEA";
+                    enabledLoggers.append("NMEA ");
                 }
 
-                txtLoggingTo.setText(logTo);
+                txtLoggingTo.setText(enabledLoggers.toString());
 
             } else {
 

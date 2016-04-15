@@ -35,6 +35,13 @@
             </intent-filter>
         </service>
 
+        <service android:name=".AndroidWearListenerService">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".GpsMainActivity"
             android:configChanges="locale"
