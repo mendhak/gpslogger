@@ -160,6 +160,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-base:8.4.0'
     compile 'com.google.android.gms:play-services-location:8.4.0'
     compile 'com.google.android.gms:play-services-drive:8.4.0'
+    compile 'com.google.android.gms:play-services-wearable:8.4.0'
 
     //FTP operations
     compile('commons-net:commons-net:3.4')
