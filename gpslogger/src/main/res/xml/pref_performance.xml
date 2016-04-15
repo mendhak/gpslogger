@@ -42,7 +42,7 @@
         android:dialogTitle="@string/settings_accuracy_in_meters"
         android:numeric="integer"
         android:maxLength="4"
-        android:defaultValue="0"
+        android:defaultValue="40"
         android:hint="@string/settings_enter_meters"/>
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference

@@ -762,6 +762,11 @@ public class GpsLoggingService extends Service  {
         // However, if user has set an annotation, just log the point, disregard any filters
         if (!Session.hasDescription() &&  preferenceHelper.getMinimumAccuracy() > 0) {
 
+
+            if(!loc.hasAccuracy()){
+                return;
+            }
+
             //Don't apply the retry interval to passive locations
             if (!isPassiveLocation && preferenceHelper.getMinimumAccuracy() < Math.abs(loc.getAccuracy())) {
 

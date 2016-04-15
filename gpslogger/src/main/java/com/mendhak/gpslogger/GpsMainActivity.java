@@ -249,6 +249,16 @@ public class GpsMainActivity extends AppCompatActivity
                     preferenceHelper.setChosenListeners(listeners);
                 }
             }
+
+            if(preferenceHelper.getLastVersionSeen() <= 74){
+                LOG.debug("preferenceHelper.getLastVersionSeen() " + preferenceHelper.getLastVersionSeen());
+                LOG.debug("Overriding minimum accuracy to 40");
+
+                if(preferenceHelper.getMinimumAccuracy() == 0){
+                    preferenceHelper.setMinimumAccuracy(40);
+                }
+            }
+
             preferenceHelper.setLastVersionSeen(versionCode);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
