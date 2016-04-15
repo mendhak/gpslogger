@@ -99,7 +99,7 @@
   <string name="log_gpx_summary">Bilježi lokacije u GPX v1.0 datoteku</string>
   <string name="log_kml_title">Zapis u KML</string>
   <string name="log_kml_summary">Bilježi lokacije u KML v2.2 datoteku</string>
-  <string name="log_plain_text_title">Zapisn u običan tekst</string>
+  <string name="log_plain_text_title">Zapis u običan tekst</string>
   <string name="log_plain_text_summary">Bilježi lokacije u CSV datoteku</string>
   <string name="new_file_creation_title">Stvaranje novih datoteka</string>
   <string name="new_file_creation_summary">Želite li stvoriti novu datoteku jedanput dnevno ili kod svakog početka.</string>
@@ -242,7 +242,7 @@
   <string name="autoopengts_server_category">OpenGTS postavke</string>
   <string name="autoopengts_invalid_form">Neispravne vrijednosti</string>
   <string name="autoopengts_invalid_form_message">Molimo vas da osigurajte da sva polja biti ispunjeno kako treba</string>
-  <string name="opengts_upload">Poslati na OpenGTS</string>
+  <string name="opengts_upload">Pošalji na OpenGTS</string>
   <string name="autoopengts_server">Poslužitelj</string>
   <string name="autoopengts_server_summary">Ime hosta ili IP</string>
   <string name="opengts_server_port">Port</string>
@@ -292,10 +292,10 @@
   <string name="new_file_prefix_serial_summary">Serijski broj nađen u statusu telefona </string>
   <string name="txt_travel_duration">Trajanje:</string>
   <string name="menu_onepoint">Zapis jedne točke</string>
-  <string name="view_simple">Jednostavan prikaz</string>
-  <string name="view_detailed">Detaljan prikaz</string>
+  <string name="view_simple">Jednostavni prikaz</string>
+  <string name="view_detailed">Detaljni prikaz</string>
   <string name="view_big">Veliki prikaz</string>
-  <string name="view_log">Zapisnik prikaz</string>
+  <string name="view_log">Zapisnčki prikaz</string>
   <string name="bigview_taptotoggle">Dodirnite za pokretanje/zaustavljanje zapisivanja</string>
   <string name="summary_autosendtargets">Prijenos na:</string>
   <string name="accuracy_filter_title">Točnost filtar</string>
@@ -363,4 +363,6 @@
   <string name="privacy_policy">Pravilnik o zaštiti privatnosti</string>
   <string name="debuglog_attach_to_email">Priloži zapisnik otklanjanja pogrešaka u e-pošti</string>
   <string name="debuglog_attach_to_email_summary">Priloži zapisnik otklanjanja pogrešaka u e-pošti uz neke dijagnostičke informacije</string>
+  <string name="change_language_title">Promjeni jezik</string>
+  <string name="change_language_summary">Nisu svi jezici potpuno prevedeni! Morate ponovno pokrenuti aplikaciju kako bi postavke stupile na snagu.</string>
 </resources>

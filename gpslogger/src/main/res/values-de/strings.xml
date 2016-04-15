@@ -363,4 +363,6 @@
   <string name="privacy_policy">Datenschutzbestimmungen</string>
   <string name="debuglog_attach_to_email">Debug-Log and E-Mail anhängen</string>
   <string name="debuglog_attach_to_email_summary">Das Debug-Log wird zusammen mit anderen Diagnoseinformationen an die E-Mail angefügt</string>
+  <string name="change_language_title">Sprache ändern</string>
+  <string name="change_language_summary">Sie müssen neu starten, damit die Einstellungen wirksam werden.</string>
 </resources>

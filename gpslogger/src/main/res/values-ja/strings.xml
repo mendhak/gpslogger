@@ -96,8 +96,11 @@
   <!-- Settings -->
   <string name="pref_logging_title">ログ設定詳細</string>
   <string name="log_gpx_title">GPXで保存</string>
+  <string name="log_gpx_summary">GPX v1.0 形式のファイルへ位置を記録する</string>
   <string name="log_kml_title">KMLで保存</string>
+  <string name="log_kml_summary">KML v2.2 形式のファイルへ位置を記録する</string>
   <string name="log_plain_text_title">プレーンテキストで保存</string>
+  <string name="log_plain_text_summary">CSV 形式のファイルへの位置を記録する</string>
   <string name="new_file_creation_title">新規ファイル作成</string>
   <string name="new_file_creation_summary">一日毎、あるいは起動毎にファイルを作成するかの設定。</string>
   <string name="new_file_creation_onceaday">1 日 1 回</string>
@@ -322,6 +325,8 @@
   <string name="new_file_custom_each_time_title">起動の度にファイル名の入力を要求する</string>
   <string name="new_file_custom_each_time_summary">ログを開始する度にカスタムファイル名の入力プロンプトを表示する</string>
   <string name="donate_app">GPSLogger(寄付版)</string>
+  <string name="donate_bitcoin">ビットコイン</string>
+  <string name="tip_coffee">コーヒーを買う</string>
   <string name="no_network_message">利用可能なネットワークがありません。</string>
   <string name="hide_notification_buttons">通知ボタンを非表示します。</string>
   <string name="hide_notification_buttons_summary">この設定を有効にするには GPSLogger を再起動する必要があります。</string>
@@ -349,4 +354,5 @@
   <string name="autosend_wifionly_title">Wi-Fi使用時のみ送信</string>
   <string name="logview_showlocationsonly">位置情報のみ</string>
   <string name="logview_autoscroll">オートスクロール</string>
+  <string name="change_language_title">言語を変更する</string>
 </resources>

@@ -387,4 +387,6 @@ polia.
   <string name="privacy_policy">Politika ochrany osobných údajov</string>
   <string name="debuglog_attach_to_email">Pripojiť k e-mailu aj záznam pre ladenie</string>
   <string name="debuglog_attach_to_email_summary">K e-mailu sa pripojí záznam pre ladenie, spolu s niektorými diagnostickými informáciami</string>
+  <string name="change_language_title">Zmeniť jazyk</string>
+  <string name="change_language_summary">Nie všetky preklady sú úplne dokončené! Na aplikovanie nastavení je nutné reštartovať aplikáciu.</string>
 </resources>

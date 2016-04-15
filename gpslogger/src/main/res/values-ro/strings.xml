@@ -41,6 +41,10 @@
   <string name="meters">&#160;metri</string>
   <string name="error">Eroare</string>
   <string name="error_connection">Eroare de conexiune. Vă rugăm să verificaţi setările telefonului.</string>
+  <string name="seconds">secunde</string>
+  <string name="minutes">minute</string>
+  <string name="hours">ore</string>
+  <string name="gpsprovider_unavailable">Nici un furnizor de GPS disponibil. Vă rugăm să verificaţi setările de locație și permite un furnizor de locaţie.    </string>
   <string name="started">Pornit</string>
   <string name="providername_gps">Sateliţi GPS</string>
   <string name="providername_celltower">antene de GSM</string>
@@ -89,12 +93,17 @@
   <!-- Settings -->
   <string name="pref_logging_title">Detalii de inregistrare</string>
   <string name="log_gpx_title">Inregistreaza in GPX</string>
+  <string name="log_gpx_summary">Jurnalele de locații într-un fişier GPX de v1.0</string>
   <string name="log_kml_title">Înregistrează in KML</string>
+  <string name="log_kml_summary">Jurnalele locațiilor într-un fişier KML v2.2</string>
   <string name="log_plain_text_title">Înregistrează in fisier text</string>
+  <string name="log_plain_text_summary">Jurnalele locațiilor într-un fişier CSV</string>
   <string name="new_file_creation_title">Creare de fişier nou</string>
   <string name="new_file_creation_summary">Fişierul nou se creeaza in fiecare zi sau de fiecare dată când pornesti inregistrarea.</string>
   <string name="new_file_creation_onceaday">O dată pe zi</string>
   <string name="new_file_creation_everystart">De fiecare dată când încep</string>
+  <string name="new_file_creation_custom">Fişier particularizat</string>
+  <string name="new_file_custom_title">Nume de fişier particularizat</string>
   <string name="pref_performance_title">Performanţă</string>
   <string name="time_before_logging_title">Timp înainte de inregistrare</string>
   <string name="time_before_logging_summary">Utilizeaza 0 pentru frecventa maxima, dar o valoare mai mica este mai buna pentru viaţa bateriei.

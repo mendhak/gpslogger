@@ -103,16 +103,19 @@
   <string name="new_file_custom_title">Nazwa niestandardowego pliku</string>
   <string name="pref_performance_title">Wydajność</string>
   <string name="time_before_logging_title">Odstępy czasu</string>
+  <string name="time_before_logging_summary">Wpisz 0 dla maksymalnej częstotliwości, lecz mniejsza częstotliwość jest lepsza dla życia baterii.    </string>
   <string name="time_before_logging_dialog_title">Czas w sekundach</string>
   <string name="time_before_logging_hint">Wprowadź czas (max 9999)</string>
   <string name="keep_fix_summary">Uważaj, to zmniejszy żywotność baterii. Użyj tylko i wyłącznie dla większej precyzji z niskimi częstotliwościami.     </string>
   <string name="keep_fix_title">Zachować GPS między poprawkami</string>
   <string name="retry_time_dialog_title">Czas w sekundach</string>
   <string name="retry_time_hint">Wprowadź sekundy (max 9999)</string>
+  <string name="display_imperial_title">Wyświetl anglosaskie jednostki</string>
   <string name="enabledisablegps_title">Włącz/Wyłącz GPS</string>
   <string name="enabledisablegps_summary">Przejście do ustawień telefonu w celu zarządzania dostawcami.</string>
   <string name="startonbootup_title">Uruchom na starcie</string>
   <string name="startonbootup_summary">Uruchamianie programu i logowania po uruchomieniu telefonu</string>
+  <string name="startonapplaunch_title">Uruchom przy starcie aplikacji</string>
   <string name="autoemail_title">Adres e-mail</string>
   <string name="autoemail_summary">Automatyczne wysyłanie maila z plikiem logu na podany adres</string>
   <string name="please_wait">Proszę czekać.</string>
@@ -197,6 +200,7 @@
   <string name="gdocs_clearauthorization">Usunięcie autoryzacji</string>
   <string name="gdocs_clearauthorization_summary">Porzuć lokalne ustawienia Dokumentów Google. W celu całkowitego odebrania dostępu należy przejść do ustawień Dokumentów Google.</string>
   <string name="gdocs_setup_title">Dysk Google</string>
+  <string name="gdocs_setup_summary">Autoryzuj za pomocą Google Drive, aby umożliwić przekazywanie plików</string>
   <string name="gdocs_test_summary">Wyślij plik testowy na dysku Google</string>
   <string name="gdocs_test_title">Test wysyłania</string>
   <string name="gdocs_testupload_error">Nie można wysłać testowego pliku</string>
@@ -257,6 +261,7 @@
   <string name="menu_faq">Pomoc i FAQ</string>
   <string name="gpsf_missing">Brak usługi</string>
   <string name="gpsf_missing_description">Potrzebujesz Google Play Services Framework, aby użyć tej funkcji.</string>
+  <string name="txt_annotation">Adnotacja:</string>
   <string name="txt_time_isoformat">Czas UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Dostawca:</string>
   <string name="gpslogger_folder_title">Zapissz w folderze</string>
@@ -265,6 +270,7 @@
   <string name="view_simple">Widok prosty</string>
   <string name="view_detailed">Widok szczegółowy</string>
   <string name="view_big">Widok duży</string>
+  <string name="view_log">Podgląd Logów</string>
   <string name="bigview_taptotoggle">Dotknij aby uruchomić/zatrzymać rejestrowanie</string>
   <string name="summary_autosendtargets">Wyślij do:</string>
   <string name="accuracy_filter_title">Filtr dokładności</string>
@@ -276,7 +282,11 @@
   <string name="autoopengts_accountname">Nazwa konta</string>
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Sieć</string>
+  <string name="listeners_title">Dostawcy usług lokalizacji</string>
+  <string name="pref_logging_file_no_permissions">GPSLogger nie posiada możliwości zapisu w tym folderze</string>
   <string name="new_file_custom_each_time_title">Pytaj o nazwy pliku przy każdym starcie</string>
+  <string name="donate_app">Przekaż darowiznę (aplikacja)</string>
+  <string name="donate_bitcoin">Bitcoin</string>
   <string name="pref_performance_activityrecognition">Rozpoznawanie aktywności</string>
   <string name="activityrecognition_dont_log_if_still">Nie rejestruj jeśli się nie ruszam</string>
   <string name="txt_activity">Aktywność:</string>
@@ -286,4 +296,13 @@
   <string name="activity_running">Bieg</string>
   <string name="activity_walking">Spacer</string>
   <string name="activity_unknown">Nieznana</string>
+  <string name="autosend_wifionly_title">Wysyłaj tylko za pomocą Wi-Fi</string>
+  <string name="logview_autoscroll">Automatyczne Przewijanie</string>
+  <string name="profile_create_new">Utwórz nowy profil</string>
+  <string name="profile_switch_before_delete">Przełącz się na inny profil przed usunięciem aktualnego.</string>
+  <string name="profile_delete">Usunąć profil?</string>
+  <string name="profile_default">Domyślny Profil</string>
+  <string name="profile_add_new">Dodaj profil</string>
+  <string name="gpslogger_permissions_rationale_title">Wymagane uprawnienia</string>
+  <string name="privacy_policy">Polityka Prywatności</string>
 </resources>

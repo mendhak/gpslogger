@@ -367,4 +367,6 @@
   <string name="privacy_policy">Política de Privacidade</string>
   <string name="debuglog_attach_to_email">Anexar o log de depuração para o e-mail</string>
   <string name="debuglog_attach_to_email_summary">Anexa o log de depuração para um e-mail juntamente com algumas informações de diagnóstico</string>
+  <string name="change_language_title">Alterar o Idioma</string>
+  <string name="change_language_summary">Nem todos os idiomas estão totalmente traduzidos! É necessário reiniciar o aplicativo para que as configurações tenham efeito.</string>
 </resources>
