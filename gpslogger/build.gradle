@@ -51,12 +51,12 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.mendhak.gpslogger"
+        applicationId project.APP_ID
         minSdkVersion 14
         targetSdkVersion 23
 
-        versionCode 74
-        versionName "74"
+        versionCode project.APP_VERSION_CODE
+        versionName project.APP_VERSION_NAME
     }
 
     //Adding API keys to BuildConfig

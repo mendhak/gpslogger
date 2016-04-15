@@ -15,12 +15,12 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.mendhak.gpslogger"
+        applicationId project.APP_ID
         minSdkVersion 20
         targetSdkVersion 23
 
-        versionCode 75
-        versionName "75-wear"
+        versionCode project.APP_VERSION_CODE
+        versionName project.APP_VERSION_NAME
     }
 
     buildTypes {
