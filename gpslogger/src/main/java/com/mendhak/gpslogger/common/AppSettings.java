@@ -51,6 +51,7 @@ public class AppSettings extends Application {
                 .networkUtil(new WifiNetworkUtil(getInstance()))
                 .consumerKeepAlive(60)
                 .minConsumerCount(0)
+                .maxConsumerCount(1)
                 .customLogger(jobQueueLogger)
                 .build();
         jobManager = new JobManager(this, config);
