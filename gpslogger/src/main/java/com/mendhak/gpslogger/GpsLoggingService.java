@@ -162,7 +162,7 @@ public class GpsLoggingService extends Service  {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         handleIntent(intent);
-        return START_REDELIVER_INTENT;
+        return START_STICKY;
     }
 
     @Override
@@ -295,8 +295,11 @@ public class GpsLoggingService extends Service  {
             }
         } else {
             // A null intent is passed in if the service has been killed and restarted.
-            LOG.debug("Service restarted with null intent. Start logging.");
-            startLogging();
+            LOG.debug("Service restarted with null intent. Were we logging previously - " + Session.isStarted());
+            if(Session.isStarted()){
+                startLogging();
+            }
+
         }
     }
 
@@ -390,10 +393,6 @@ public class GpsLoggingService extends Service  {
         LOG.debug(".");
         Session.setAddNewTrackSegment(true);
 
-        if (Session.isStarted()) {
-            LOG.debug("Session already started, ignoring");
-            return;
-        }
 
 
         try {

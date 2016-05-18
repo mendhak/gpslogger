@@ -19,7 +19,9 @@ package com.mendhak.gpslogger.common;
 
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.location.Location;
+import android.preference.PreferenceManager;
 
 public class Session extends Application {
 
@@ -30,7 +32,7 @@ public class Session extends Application {
     // ---------------------------------------------------
     private static boolean towerEnabled;
     private static boolean gpsEnabled;
-    private static boolean isStarted;
+
     private static boolean isUsingGps;
     private static String currentFileName;
     private static int satellites;
@@ -94,14 +96,19 @@ public class Session extends Application {
      * @return whether logging has started
      */
     public static boolean isStarted() {
-        return isStarted;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppSettings.getInstance().getApplicationContext());
+        return prefs.getBoolean("LOGGING_STARTED", false);
+
     }
 
     /**
      * @param isStarted set whether logging has started
      */
     public static void setStarted(boolean isStarted) {
-        Session.isStarted = isStarted;
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AppSettings.getInstance().getApplicationContext());
+        prefs.edit().putBoolean("LOGGING_STARTED",isStarted).apply();
+
         if (isStarted) {
             Session.startTimeStamp = System.currentTimeMillis();
         }
