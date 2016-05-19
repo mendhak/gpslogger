@@ -9,7 +9,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
         classpath 'com.canelmas.let:let-plugin:0.1.10'
-        classpath "com.mendhak.gradlecrowdin:crowdin-plugin:0.0.8"
+        classpath "com.mendhak.gradlecrowdin:crowdin-plugin:0.0.9"
         classpath 'org.jacoco:org.jacoco.core:0.7.4.201502262128'
     }
 }
@@ -362,7 +362,9 @@ if (project.hasProperty("CROWDIN_API_KEY")) {
     crowdinUpload {
         apiKey = CROWDIN_API_KEY
         projectId = 'gpslogger-for-android'
-        sourceFile = "$projectDir/src/main/res/values/strings.xml"
+        sourceFiles = [
+                ["strings.xml","$projectDir/src/main/res/values/strings.xml"]
+        ]
     }
 
 //    crowdinUpload {
