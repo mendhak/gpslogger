@@ -77,7 +77,6 @@ public class GpsLoggingService extends Service  {
     private GeneralLocationListener passiveLocationListener;
     private Intent alarmIntent;
     private Handler handler = new Handler();
-    private long firstRetryTimeStamp;
 
     PendingIntent activityRecognitionPendingIntent;
     GoogleApiClient googleApiClient;
@@ -517,6 +516,7 @@ public class GpsLoggingService extends Service  {
         notificationManager.notify(NOTIFICATION_ID, nfc.build());
     }
 
+    @SuppressWarnings("ResourceType")
     private void startPassiveManager() {
         if(preferenceHelper.getChosenListeners().contains(LocationManager.PASSIVE_PROVIDER)){
             LOG.debug("Starting passive location listener");
@@ -536,6 +536,7 @@ public class GpsLoggingService extends Service  {
      * prefer cell towers, then cell towers are used. If neither is enabled,
      * then nothing is requested.
      */
+    @SuppressWarnings("ResourceType")
     private void startGpsManager() {
 
         //If the user has been still for more than the minimum seconds
@@ -627,6 +628,7 @@ public class GpsLoggingService extends Service  {
     /**
      * Stops the location managers
      */
+    @SuppressWarnings("ResourceType")
     private void stopGpsManager() {
 
         if (towerLocationListener != null) {
@@ -645,6 +647,7 @@ public class GpsLoggingService extends Service  {
 
     }
 
+    @SuppressWarnings("ResourceType")
     private void stopPassiveManager(){
         if(passiveLocationManager!=null){
             LOG.debug("Removing passiveLocationManager updates");
@@ -769,28 +772,28 @@ public class GpsLoggingService extends Service  {
             //Don't apply the retry interval to passive locations
             if (!isPassiveLocation && preferenceHelper.getMinimumAccuracy() < Math.abs(loc.getAccuracy())) {
 
-                if (this.firstRetryTimeStamp == 0) {
-                    this.firstRetryTimeStamp = System.currentTimeMillis();
+                if(Session.getFirstRetryTimeStamp() == 0){
+                    Session.setFirstRetryTimeStamp(System.currentTimeMillis());
                 }
 
-                if (currentTimeStamp - this.firstRetryTimeStamp <= preferenceHelper.getLoggingRetryPeriod() * 1000) {
-                    LOG.warn("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " m. Point discarded." + getString(R.string.inaccurate_point_discarded));
+                if (currentTimeStamp - Session.getFirstRetryTimeStamp() <= preferenceHelper.getLoggingRetryPeriod() * 1000) {
+                    LOG.warn("Only accuracy of " + String.valueOf(loc.getAccuracy()) + " m. Point discarded." + getString(R.string.inaccurate_point_discarded));
                     //return and keep trying
                     return;
                 }
 
-                if (currentTimeStamp - this.firstRetryTimeStamp > preferenceHelper.getLoggingRetryPeriod() * 1000) {
-                    LOG.warn("Only accuracy of " + String.valueOf(Math.floor(loc.getAccuracy())) + " m and timeout reached." + getString(R.string.inaccurate_point_discarded));
+                if (currentTimeStamp - Session.getFirstRetryTimeStamp() > preferenceHelper.getLoggingRetryPeriod() * 1000) {
+                    LOG.warn("Only accuracy of " + String.valueOf(loc.getAccuracy()) + " m and timeout reached." + getString(R.string.inaccurate_point_discarded));
                     //Give up for now
                     stopManagerAndResetAlarm();
 
                     //reset timestamp for next time.
-                    this.firstRetryTimeStamp = 0;
+                    Session.setFirstRetryTimeStamp(0);
                     return;
                 }
 
                 //Success, reset timestamp for next time.
-                this.firstRetryTimeStamp = 0;
+                Session.setFirstRetryTimeStamp(0);
             }
         }
 
@@ -813,6 +816,7 @@ public class GpsLoggingService extends Service  {
         adjustAltitude(loc);
         resetCurrentFileName(false);
         Session.setLatestTimeStamp(System.currentTimeMillis());
+        Session.setFirstRetryTimeStamp(0);
         Session.setCurrentLocationInfo(loc);
         setDistanceTraveled(loc);
         showNotification();

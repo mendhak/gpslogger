@@ -53,6 +53,7 @@ public class Session extends Application {
     private static boolean annotationMarked;
     private static String currentFormattedFileName;
     private static long userStillSinceTimeStamp;
+    private static long firstRetryTimeStamp;
 
     public static boolean isSinglePointMode() {
         return isSinglePointMode;
@@ -354,5 +355,13 @@ public class Session extends Application {
 
     public static void setUserStillSinceTimeStamp(long lastUserStillTimeStamp) {
         Session.userStillSinceTimeStamp = lastUserStillTimeStamp;
+    }
+
+    public static void setFirstRetryTimeStamp(long firstRetryTimeStamp) {
+        Session.firstRetryTimeStamp = firstRetryTimeStamp;
+    }
+
+    public static long getFirstRetryTimeStamp() {
+        return firstRetryTimeStamp;
     }
 }
