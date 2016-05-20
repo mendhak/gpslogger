@@ -50,6 +50,27 @@
   <string name="gpsprovider_unavailable">Nav GPS pasniedzēja pieejama. Lūdzu pārbaudiet jūsu atrašanās vietas iestatījumus un izvēlaties lokācijas pasniedzēju.</string>
   <string name="started">Sākts</string>
   <string name="providername_gps">GPS satelīti</string>
+  <string name="providername_celltower">šūnas torņi</string>
+  <string name="not_applicable">neattiecas</string>
+  <string name="meters_per_second">m/s</string>
+  <string name="feet_per_second">ft/s</string>
+  <string name="miles_per_hour">mi/h</string>
+  <string name="miles">mi</string>
+  <string name="kilometers_per_hour">km/h</string>
+  <string name="kilometers">km</string>
+  <string name="unknown_direction">nezināms</string>
+  <string name="sorry">Diemžēl</string>
+  <string name="success">Izdevās!</string>
+  <string name="direction_roughly">Aptuveni %s</string>
+  <string name="direction_north">Ziemeļi</string>
+  <string name="direction_northnortheast">Ziemeļi-ziemeļaustrumi</string>
+  <string name="direction_northeast">Ziemeļaustrumi</string>
+  <string name="direction_eastnortheast">Austrumi-ziemeļaustrumi</string>
+  <string name="direction_east">Austrumi</string>
+  <string name="direction_eastsoutheast">Austrumi-dienvidaustrumi</string>
+  <string name="direction_southeast">Dienvidaustrumi</string>
+  <string name="direction_southsoutheast">Dienvidi-dienvidaustrumi</string>
+  <string name="direction_south">Dienvidi</string>
   <!-- Settings activity -->
   <!-- Settings -->
 </resources>

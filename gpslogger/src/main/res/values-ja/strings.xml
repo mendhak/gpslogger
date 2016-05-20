@@ -354,5 +354,17 @@
   <string name="autosend_wifionly_title">Wi-Fi使用時のみ送信</string>
   <string name="logview_showlocationsonly">位置情報のみ</string>
   <string name="logview_autoscroll">オートスクロール</string>
+  <string name="profile_create_new">新しいプロファイルを作成</string>
+  <string name="profile_switch_before_delete">このプロファイルを消去する前に別のプロファイルを選択してください。</string>
+  <string name="profile_delete">プロファイルを削除しますか？</string>
+  <string name="profile_default">既定のプロファイル</string>
+  <string name="profile_add_new">プロファイルを追加</string>
+  <string name="gpslogger_permissions_rationale_title">権限が不足しています。</string>
+  <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[このアプリを正しく動作させるために、様々な権限を必要とします。<br /><b>位置情報</b> - この権限は基地局やGPSから位置情報を取得するのに必要です。<b>画像/メディア/ファイル</b> - この権限は、ログやテストファイルの書き込みや、アップロードや共有をする際、ファイルのリストを読み込むために必要とされます。このアプリはあなたの写真やメディアファイルにアクセスすることはありません。<br /><b>連絡先</b> - Google Drive の機能を使用する時に、スマートフォンに登録されたGoogleのアカウント一覧を取得するために必要な権限です。あなたの連絡先一覧へのアクセスはありません。<br /><br />]]></string>
+  <string name="gpslogger_permissions_permanently_denied">このアプリが必要とする一つ以上の権限の取り消しを行いました。アプリの設定画面で権限を許可するか、リセットを行う必要があります。</string>
+  <string name="privacy_policy">プライバシーポリシー</string>
+  <string name="debuglog_attach_to_email">デバッグ用ログをメールに添付する</string>
+  <string name="debuglog_attach_to_email_summary">デバッグログの他に診断結果を添付する</string>
   <string name="change_language_title">言語を変更する</string>
+  <string name="change_language_summary">全ての言語が完全に翻訳されているとは限りません！この設定を有効にするためには、アプリをリスタートする必要があります。</string>
 </resources>

@@ -99,7 +99,7 @@
   <string name="log_gpx_summary">Erstellt GPS-Track in einer GPX v1.0-Datei</string>
   <string name="log_kml_title">Logge zu KML</string>
   <string name="log_kml_summary">Erstellt GPS-Track in einer KML v2.2-Datei</string>
-  <string name="log_plain_text_title">Logge als Klartext</string>
+  <string name="log_plain_text_title">Logge als einfachen Text</string>
   <string name="log_plain_text_summary">Erstellt GPS-Track in einer CSV-Datei</string>
   <string name="new_file_creation_title">Neue Datei erstellen</string>
   <string name="new_file_creation_summary">Ob eine neue Datei einmal am Tag erstellt werden soll oder nach jedem Start.</string>
@@ -109,12 +109,12 @@
   <string name="new_file_custom_title">Benutzerdefinierter Dateiname</string>
   <string name="new_file_custom_summary">Sie können eigene Dateinamen verwenden. Fügen Sie optional noch ein paar Parameter wie Geräteseriennummer, Jahr, Monat, Tag, Stunde und Minute ein. Sehr komplexe Dateinamen funktionieren möglicherweise nicht richtig.</string>
   <string name="pref_performance_title">Leistung</string>
-  <string name="pref_performance_summary">Standortbestimmung, Intervall, Filterung</string>
+  <string name="pref_performance_summary">Intervalle, Filter und Standortbestimmung</string>
   <string name="time_before_logging_title">Zeit vor dem Loggen</string>
-  <string name="time_before_logging_summary">Verwenden Sie 0 für die höchste Abtastfrequenz, aber eine geringere Frequenz schont den Akku.    </string>
+  <string name="time_before_logging_summary">Verwenden Sie 0 für den niedrigsten Intervall. Ein höherer Intervall schont den Akku.    </string>
   <string name="time_before_logging_dialog_title">Zeit in Sekunden</string>
   <string name="time_before_logging_hint">Eingabe in Sekunden (max. 9999)</string>
-  <string name="keep_fix_summary">Vorsicht, dies senkt die Betriebszeit des Akkus erheblich. Nur für hohe Präzision bei niedrigen Frequenzen verwenden.</string>
+  <string name="keep_fix_summary">Vorsicht, wirkt sich erheblich auf die Akkulaufzeit aus. Nur für höhere Genauigkeit mit geringem Intervall verwenden.</string>
   <string name="keep_fix_title">GPS zwischen Fixes aktiviert lassen</string>
   <string name="retry_time_title">Zeitintervall für GPS Genauigkeit</string>
   <string name="retry_time_summary">Nach einer Positionsbestimmumg wird der Punkt eine anzugebende Zeitspanne lang aufbewahrt bzw. solange bis die GPS Genauigkeit dem oben eingestellten Wert entspricht.</string>
@@ -126,8 +126,8 @@
   <string name="enabledisablegps_summary">Gehe zu den Telefon-Einstellungen zum Aktivieren oder Deaktivieren der Anbieter.</string>
   <string name="startonbootup_title">Beim Booten starten</string>
   <string name="startonbootup_summary">Starten der App und des Loggens beim Einschalten des Telefons</string>
-  <string name="startonapplaunch_title">Loggen bei Start der App</string>
-  <string name="startonapplaunch_summary">Startet das Loggen direkt beim Öffnen der App</string>
+  <string name="startonapplaunch_title">Loggen beim Öffnen der App</string>
+  <string name="startonapplaunch_summary">Startet das Loggen beim Öffnen der App</string>
   <string name="autoemail_title">E-Mail</string>
   <string name="autoemail_summary">Automatisch die Log-Datei an eine frei ausgewählte Email-Adresse senden</string>
   <string name="please_wait">Bitte warten.</string>
@@ -236,7 +236,7 @@
   <string name="shortcut_stop">Stopp</string>
   <string name="shortcut_pickaction">Wähle eine Aktion</string>
   <string name="log_opengts_title">Logge zu einem OpenGTS-Server</string>
-  <string name="log_opengts_summary">Sende GPRMC-Daten an einen OpenGTS-Server.</string>
+  <string name="log_opengts_summary">GPRMC-Daten an einen OpenGTS-Server senden.</string>
   <string name="opengts_setup_title">OpenGTS</string>
   <string name="opengts_setup_summary">Sende GPS-Tracks an einen OpenGTS-Server deiner Wahl.</string>
   <string name="autoopengts_server_category">OpenGTS-Einstellungen</string>
@@ -279,7 +279,7 @@
   <string name="gpsf_missing">kein GPS-Signal</string>
   <string name="gpsf_missing_description">Für dieses Feature wird das \"Google Play Services Framework\" benötigt.</string>
   <string name="log_customurl_title">Logge zu einem Server</string>
-  <string name="log_customurl_summary">Sende Log über HTTP auf deinen eigenen Server</string>
+  <string name="log_customurl_summary">Log über HTTP an eigenen Server senden</string>
   <string name="txt_annotation">Anmerkung:</string>
   <string name="txt_time_isoformat">Zeit UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Anbieter:</string>
@@ -316,7 +316,7 @@
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Netzwerk</string>
   <string name="listeners_passive">Passiv</string>
-  <string name="listeners_summary">Wählen Sie die Art der Standortbestimmung, welche für die Erfassung Ihrer Position herangezogen werden soll: GPS-Satelliten,  Netzwerk (WLAN u. Mobilfunknetz), Passiv Standortbestimmung welche über andere Anwendungen angefordert wird.</string>
+  <string name="listeners_summary">Welche Standortbestimmung je nach Verfügbarkeit genutzt werden soll; GPS-Satelliten, Netzwerk (WLAN / Mobilfunknetz), Passiv (nutzt Standortbestimmungsanfragen welche von anderen Apps angefordert werden).</string>
   <string name="listeners_title">Standortbestimmung mittels</string>
   <string name="autosend_frequency_hint">Minuten</string>
   <string name="pref_logging_file_no_permissions">GPSLogger hat in diesem Ordner keine Berechtigung zum Schreiben</string>
@@ -327,7 +327,7 @@
   <string name="donate_bitcoin">Bitcoin</string>
   <string name="tip_coffee">Spende mir einen Kaffee</string>
   <string name="no_network_message">Netzwerk nicht verfügbar</string>
-  <string name="hide_notification_buttons">Verberge Benachrichtigungs-Schaltflächen</string>
+  <string name="hide_notification_buttons">Benachrichtigungs-Schaltflächen verbergen</string>
   <string name="hide_notification_buttons_summary">Du musst GPSLogger neu starten, damit diese Einstellung wirksam wird</string>
   <string name="pref_performance_activityrecognition">Aktivitätserkennung</string>
   <string name="activityrecognition_dont_log_if_still">Aufzeichnung pausieren wenn keine Bewegung</string>
@@ -361,8 +361,8 @@
   <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Diese Anwendung erfordert verschiedene Berechtigungen, um richtig zu funktionieren.<br /> <b>Standort</b> - Diese Berechtigung ermöglicht der App das Lesen der aktuellen Standortdaten.<br /> <b>Fotos/Medien/Dateien</b> - Diese Berechtigung ermöglicht es Log-Dateien und Test-Dateien zu speichern, wie auch das Lesen einer Liste von Dateien, um sie hochladen zu können oder zu teilen. Diese App greift nicht auf deine Fotos oder Medien zu.<br /> <b>Kontakte</b> - Wenn die Google Drive Funktionalität verwendet wird, ermöglicht diese Berechtigung das Auflisten der Google-Konten dieses Gerätes. Es wird nicht auf deine Kontakte zugegriffen.<br /> <br/>  ]]></string>
   <string name="gpslogger_permissions_permanently_denied">Sie haben dieser App eine oder mehrere Berechtigungen verweigert, die von dieser App benötigt werden. In den Einstellungen zu dieser App, musst du die entsprechenden Berechtigungen erteilen oder diese zurücksetzen.</string>
   <string name="privacy_policy">Datenschutzbestimmungen</string>
-  <string name="debuglog_attach_to_email">Debug-Log and E-Mail anhängen</string>
-  <string name="debuglog_attach_to_email_summary">Das Debug-Log wird zusammen mit anderen Diagnoseinformationen an die E-Mail angefügt</string>
+  <string name="debuglog_attach_to_email">Fehlerprotokolldatei and E-Mail anhängen</string>
+  <string name="debuglog_attach_to_email_summary">Die Fehlerprotokolldatei wird zusammen mit anderen Diagnoseinformationen an die E-Mail angehängt</string>
   <string name="change_language_title">Sprache ändern</string>
-  <string name="change_language_summary">Sie müssen neu starten, damit die Einstellungen wirksam werden.</string>
+  <string name="change_language_summary">Zum Übernehmen der Einstellungen muss die App neu gestartet werden.</string>
 </resources>

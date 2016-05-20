@@ -320,6 +320,8 @@
   <string name="new_file_custom_each_time_title">Chiedi il nome del file ogni volta che inizia una registrazione</string>
   <string name="new_file_custom_each_time_summary">Chiedi il nome del file ogni volta che inizia una registrazione</string>
   <string name="donate_app">Fai una donazione (app)</string>
+  <string name="donate_bitcoin">Bitcoin</string>
+  <string name="tip_coffee">Comprami un caffè</string>
   <string name="no_network_message">Rete dati non disponibile</string>
   <string name="hide_notification_buttons">Nascondere i pulsanti di notifica</string>
   <string name="hide_notification_buttons_summary">Sarà necessario riavviare GPSLogger perchè questa impostazione abbia effetto</string>
@@ -337,4 +339,5 @@
   <string name="inaccurate_point_discarded">Punto impreciso scartato</string>
   <string name="autosend_wifionly_title">Solo tramite Wi-Fi</string>
   <string name="logview_autoscroll">Scorrimento automatico</string>
+  <string name="change_language_title">Cambia lingua</string>
 </resources>
