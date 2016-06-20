@@ -66,9 +66,11 @@ public class StringsTest {
 
     @Test
     public void GetFormattedCustomFileName_Serial_ReplacedWithBuildSerial() {
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+        Calendar gc = mock(Calendar.class);
 
         String expected = "basename_" + Build.SERIAL;
-        String actual = Strings.getFormattedCustomFileName("basename_%ser");
+        String actual = Strings.getFormattedCustomFileName("basename_%ser", gc, ph);
         assertThat("Static file name %SER should be replaced with Build Serial", actual, is(expected));
 
     }
@@ -76,8 +78,11 @@ public class StringsTest {
     @Test
     public void GetFormattedCustomFileName_Version_ReplacedWithBuildVersion() {
 
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+        Calendar gc = mock(Calendar.class);
+
         String expected = "basename_" + BuildConfig.VERSION_NAME;
-        String actual = Strings.getFormattedCustomFileName("basename_%ver");
+        String actual = Strings.getFormattedCustomFileName("basename_%ver", gc,ph);
         assertThat("Static file name %VER should be replaced with Build Version", actual, is(expected));
 
     }
@@ -85,21 +90,22 @@ public class StringsTest {
     @Test
     public void GetFormattedCustomFileName_HOUR_ReplaceWithPaddedHour(){
 
+        PreferenceHelper ph = mock(PreferenceHelper.class);
         Calendar gc = mock(Calendar.class);
         when(gc.get(Calendar.HOUR_OF_DAY)).thenReturn(4);
 
         String expected = "basename_04";
-        String actual = Strings.getFormattedCustomFileName("basename_%HOUR", gc);
+        String actual = Strings.getFormattedCustomFileName("basename_%HOUR", gc, ph);
         assertThat("%HOUR 4 AM should be replaced with 04", actual, is(expected));
 
         when(gc.get(Calendar.HOUR_OF_DAY)).thenReturn(23);
         expected = "basename_23";
-        actual = Strings.getFormattedCustomFileName("basename_%HOUR", gc);
+        actual = Strings.getFormattedCustomFileName("basename_%HOUR", gc, ph);
         assertThat("%HOUR 11PM should be relpaced with 23", actual, is(expected));
 
         when(gc.get(Calendar.HOUR_OF_DAY)).thenReturn(0);
         expected = "basename_00";
-        actual = Strings.getFormattedCustomFileName("basename_%HOUR", gc);
+        actual = Strings.getFormattedCustomFileName("basename_%HOUR", gc, ph);
         assertThat("%HOUR 0 should be relpaced with 00", actual, is(expected));
 
     }
@@ -107,18 +113,19 @@ public class StringsTest {
     @Test
     public void GetFormattedCustomFileName_MIN_ReplaceWithPaddedMinute(){
 
+        PreferenceHelper ph = mock(PreferenceHelper.class);
         Calendar gc = mock(Calendar.class);
         when(gc.get(Calendar.HOUR_OF_DAY)).thenReturn(4);
         when(gc.get(Calendar.MINUTE)).thenReturn(7);
 
-        String actual = Strings.getFormattedCustomFileName("basename_%HOUR%MIN", gc);
+        String actual = Strings.getFormattedCustomFileName("basename_%HOUR%MIN", gc, ph);
         String expected = "basename_0407";
         assertThat(" %MIN 7 should be replaced with 07", actual, is(expected));
 
         when(gc.get(Calendar.HOUR_OF_DAY)).thenReturn(0);
         when(gc.get(Calendar.MINUTE)).thenReturn(0);
 
-        actual = Strings.getFormattedCustomFileName("basename_%HOUR%MIN", gc);
+        actual = Strings.getFormattedCustomFileName("basename_%HOUR%MIN", gc, ph);
         expected = "basename_0000";
         assertThat(" %MIN 0 should be replaced with 00", actual, is(expected));
 
@@ -127,25 +134,40 @@ public class StringsTest {
     @Test
     public void GetFormattedCustomFileName_YEARMONDAY_ReplaceWithYearMonthDay(){
 
+        PreferenceHelper ph = mock(PreferenceHelper.class);
         Calendar gc = mock(Calendar.class);
         when(gc.get(Calendar.YEAR)).thenReturn(2016);
         when(gc.get(Calendar.MONTH)).thenReturn(Calendar.FEBRUARY);
         when(gc.get(Calendar.DAY_OF_MONTH)).thenReturn(1);
 
-        String actual = Strings.getFormattedCustomFileName("basename_%YEAR%MONTH%DAY", gc);
+        String actual = Strings.getFormattedCustomFileName("basename_%YEAR%MONTH%DAY", gc, ph);
         String expected = "basename_20160201";
         assertThat("Year 2016 Month February Day 1 should be replaced with 20160301", actual, is(expected));
 
 
         when(gc.get(Calendar.MONTH)).thenReturn(Calendar.DECEMBER);
-        actual = Strings.getFormattedCustomFileName("basename_%YEAR%MONTH%DAY", gc);
+        actual = Strings.getFormattedCustomFileName("basename_%YEAR%MONTH%DAY", gc, ph);
         expected = "basename_20161201";
         assertThat("December month should be replaced with 12", actual, is(expected));
 
         when(gc.get(Calendar.MONTH)).thenReturn(0);
-        actual = Strings.getFormattedCustomFileName("basename_%YEAR%MONTH%DAY", gc);
+        actual = Strings.getFormattedCustomFileName("basename_%YEAR%MONTH%DAY", gc, ph);
         expected = "basename_20160101";
         assertThat("Zero month should be replaced with 1", actual, is(expected));
+
+    }
+
+    @Test
+    public void GetFormattedCustomFileName_PROFILE_ReplaceWithProfileName(){
+
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+        Calendar gc = mock(Calendar.class);
+        when(ph.getCurrentProfileName()).thenReturn("OOMPALOOMPA");
+
+        String actual = Strings.getFormattedCustomFileName("basename_%PROFILE",gc, ph);
+        String expected = "basename_OOMPALOOMPA";
+
+        assertThat("Profile replaced with profile name", actual, is(expected));
 
     }
 

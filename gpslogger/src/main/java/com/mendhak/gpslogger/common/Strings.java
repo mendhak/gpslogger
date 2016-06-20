@@ -214,10 +214,10 @@ public class Strings {
     }
 
     public static String getFormattedCustomFileName(String baseName) {
-        return getFormattedCustomFileName(baseName, GregorianCalendar.getInstance());
+        return getFormattedCustomFileName(baseName, GregorianCalendar.getInstance(), PreferenceHelper.getInstance());
     }
 
-    public static String getFormattedCustomFileName(String baseName, Calendar calendar){
+    public static String getFormattedCustomFileName(String baseName, Calendar calendar, PreferenceHelper ph){
 
         String finalFileName = baseName;
         finalFileName = finalFileName.replaceAll("(?i)%ser", String.valueOf(getBuildSerial()));
@@ -227,6 +227,7 @@ public class Strings {
         finalFileName = finalFileName.replaceAll("(?i)%year",  String.valueOf(calendar.get(Calendar.YEAR)));
         finalFileName = finalFileName.replaceAll("(?i)%month", String.format("%02d", calendar.get(Calendar.MONTH) +1));
         finalFileName = finalFileName.replaceAll("(?i)%day", String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH) ));
+        finalFileName = finalFileName.replaceAll("(?i)%profile", String.valueOf(ph.getCurrentProfileName()));
         return finalFileName;
     }
 
