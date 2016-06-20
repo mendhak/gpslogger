@@ -173,56 +173,10 @@ public class LoggingSettingsFragment extends PreferenceFragment
             // Bug in SwitchPreference: http://stackoverflow.com/questions/19503931/switchpreferences-calls-multiple-times-the-onpreferencechange-method
             // Check if isChecked == false && newValue == true
             if(!((CustomSwitchPreference) preference).isChecked() && (Boolean)newValue  ) {
-
-
-                String legend = MessageFormat.format("{0} %LAT\n{1} %LON\n{2} %DESC\n{3} %SAT\n{4} %ALT\n{5} %SPD\n{6} %ACC\n{7} %DIR\n{8} %PROV\n{9} %TIME\n{10} %BATT\n{11} %AID\n{12} %SER",
-                        getString(R.string.txt_latitude), getString(R.string.txt_longitude), getString(R.string.txt_annotation),
-                        getString(R.string.txt_satellites), getString(R.string.txt_altitude), getString(R.string.txt_speed),
-                        getString(R.string.txt_accuracy), getString(R.string.txt_direction), getString(R.string.txt_provider),
-                        getString(R.string.txt_time_isoformat), "Battery:", "Android ID:", "Serial:");
-
-                MaterialDialog md = new MaterialDialog.Builder(getActivity())
-                        .title(R.string.log_customurl_title)
-                        .content(legend)
-                        .positiveText(R.string.ok)
-                        .negativeText(R.string.cancel)
-                        .inputType(InputType.TYPE_CLASS_TEXT)
-                        .negativeText(R.string.cancel)
-                        .input(getString(R.string.letters_numbers), preferenceHelper.getCustomLoggingUrl(), new MaterialDialog.InputCallback() {
-                            @Override
-                            public void onInput(MaterialDialog materialDialog, CharSequence input) {
-                                LOG.info("Custom URL chosen : " + input.toString());
-
-                                preferenceHelper.setCustomLoggingUrl(input.toString());
-
-                            }
-                        })
-                        .cancelListener(new DialogInterface.OnCancelListener() {
-                            @Override
-                            public void onCancel(DialogInterface dialogInterface) {
-                                ((CustomSwitchPreference) preference).setChecked(false);
-                            }
-                        })
-                        .onNegative(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                                ((CustomSwitchPreference) preference).setChecked(false);
-                            }
-                        })
-                        .build();
-
-
-                //Not part of material dialog functionality at present
-                EditText ed = (EditText)md.findViewById(android.R.id.input);
-                ed.setTextSize(17);
-                ed.setLines(4);
-                ed.setSingleLine(true);
-                ed.setMaxLines(5);
-                ed.setHorizontallyScrolling(false);
-                md.show();
-
-            }
-
+                Intent targetActivity = new Intent(getActivity(), MainPreferenceActivity.class);
+                targetActivity.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL);
+                startActivity(targetActivity);
+           }
 
             return true;
         }

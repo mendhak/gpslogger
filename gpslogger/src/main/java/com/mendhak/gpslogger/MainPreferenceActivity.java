@@ -93,6 +93,10 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 setTitle(R.string.opengts_setup_title);
                 preferenceFragment = new OpenGTSFragment();
                 break;
+            case PREFERENCE_FRAGMENTS.CUSTOMURL:
+                setTitle(R.string.log_customurl_title);
+                preferenceFragment = new CustomUrlFragment();
+                break;
             case PREFERENCE_FRAGMENTS.GDOCS:
                 setTitle(R.string.gdocs_setup_title);
                 preferenceFragment = new GoogleDriveSettingsFragment();
@@ -155,6 +159,7 @@ public class MainPreferenceActivity extends AppCompatActivity {
         public static final String FTP = "FtpFragment";
         public static final String EMAIL = "AutoEmailFragment";
         public static final String OPENGTS = "OpenGTSFragment";
+        public static final String CUSTOMURL = "CustomUrlFragment";
         public static final String GDOCS = "GoogleDriveSettingsFragment";
         public static final String DROPBOX = "DropBoxAuthorizationFragment";
         public static final String OWNCLOUD = "OwnCloudAuthorizationFragment";

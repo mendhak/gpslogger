@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:key="customurl_preferences">
+
+    <EditTextPreference
+        android:key="log_customurl_url"
+        android:title="URL"
+
+        />
+
+    <Preference
+        android:key="customurl_legend_1"
+        android:selectable="false"
+        android:enabled="true"
+        android:summary="" />
+
+    <Preference
+        android:key="customurl_legend_2"
+        android:selectable="false"
+        android:enabled="true"
+        android:summary="" />
+
+    <Preference
+        android:key="customurl_legend_3"
+        android:selectable="false"
+        android:enabled="true"
+        android:summary="" />
+
+</PreferenceScreen>
