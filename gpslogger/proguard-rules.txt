@@ -57,9 +57,10 @@
 # https://github.com/dropbox/dropbox-sdk-java#does-this-sdk-require-any-special-proguard-rules-for-shrink-optimizations
 # --------------------------------------------------------------------------------- #
 
--keepattributes *Annotation*,EnclosingMethod,InnerClasses,Signature
--keepnames class com.fasterxml.jackson.** { *; }
--dontwarn com.fasterxml.jackson.databind.**
+-dontwarn okhttp3.**
+-dontwarn com.squareup.okhttp.**
+-dontwarn com.google.appengine.**
+-dontwarn javax.servlet.**
 
 # OkHttp and Servlet optional dependencies
 -dontwarn okio.**

@@ -236,7 +236,7 @@ dependencies {
     }
 
     //Dropbox API 2
-    compile 'com.dropbox.core:dropbox-core-sdk:2.0.1'
+    compile 'com.dropbox.core:dropbox-core-sdk:2.0.5'
 
     //Need to specify the companion wearable app
     wearApp project(":gpsloggerwear")
