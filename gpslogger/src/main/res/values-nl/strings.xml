@@ -323,6 +323,8 @@
   <string name="new_file_custom_each_time_title">Vraag elke elke keer om een bestandsnaam bij starten</string>
   <string name="new_file_custom_each_time_summary">Vraag elke keer om een bestandsnaam als het loggen wordt gestart</string>
   <string name="donate_app">Doneer (app)</string>
+  <string name="donate_bitcoin">Bitcoin</string>
+  <string name="tip_coffee">Koop een kopje koffie voor me</string>
   <string name="no_network_message">Er is geen netwerk beschikbaar</string>
   <string name="hide_notification_buttons">Notificatie knoppen verbergen</string>
   <string name="hide_notification_buttons_summary">Je moet de GPSLogger opnieuw opstarten om deze instelling te laten werken</string>
@@ -349,4 +351,13 @@
   <string name="autosend_wifionly_title">Alleen op Wi-Fi verzenden</string>
   <string name="logview_showlocationsonly">Alleen locaties</string>
   <string name="logview_autoscroll">Scroll automatisch</string>
+  <string name="profile_create_new">Maak nieuw profiel aan</string>
+  <string name="profile_switch_before_delete">Gelieve naar een ander profiel te schakelen voordat u deze verwijdert.</string>
+  <string name="profile_delete">Profiel verwijderen?</string>
+  <string name="profile_default">Standaardprofiel</string>
+  <string name="profile_add_new">Profiel toevoegen</string>
+  <string name="gpslogger_permissions_rationale_title">Machtigingen vereist</string>
+  <string name="privacy_policy">Privacybeleid</string>
+  <string name="change_language_title">Taal wijzigen</string>
+  <string name="change_language_summary">Niet alle talen zijn volledig vertaald! U moet de app opnieuw opstarten voordat de instellingen van kracht zijn.</string>
 </resources>
