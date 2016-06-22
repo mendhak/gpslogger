@@ -345,7 +345,9 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             providerName = getString(R.string.providername_celltower);
         }
 
-        tvDateTime.setText(android.text.format.DateFormat.getDateFormat(getActivity()).format(new Date(Session.getLatestTimeStamp())) + " - " + providerName);
+        tvDateTime.setText(android.text.format.DateFormat.getDateFormat(getActivity()).format(new Date(Session.getLatestTimeStamp()))
+                + " " + new SimpleDateFormat("HH:mm:ss").format(new Date(Session.getLatestTimeStamp()))
+                + " - " + providerName);
 
         NumberFormat nf = NumberFormat.getInstance();
 
