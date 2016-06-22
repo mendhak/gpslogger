@@ -972,6 +972,15 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.USER_SPECIFIED_LANGUAGE, userSpecifiedLocale).apply();
     }
 
+    @ProfilePreference(name=PreferenceNames.CUSTOM_FILE_NAME_KEEP_CHANGING)
+    public boolean shouldChangeFileNameDynamically() {
+        return prefs.getBoolean(PreferenceNames.CUSTOM_FILE_NAME_KEEP_CHANGING, true);
+    }
+
+    public void setShouldChangeFileNameDynamically(boolean keepChanging){
+        prefs.edit().putBoolean(PreferenceNames.CUSTOM_FILE_NAME_KEEP_CHANGING, keepChanging).apply();
+    }
+
 
     public void savePropertiesFromPreferences(File f) throws IOException {
 

@@ -446,6 +446,7 @@ public class GpsLoggingService extends Service  {
         stopPassiveManager();
         stopActivityRecognitionUpdates();
         notifyClientStopped();
+        Session.setCurrentFileName("");
     }
 
     /**
@@ -664,7 +665,17 @@ public class GpsLoggingService extends Service  {
 
         /* Update the file name, if required. (New day, Re-start service) */
         if (preferenceHelper.shouldCreateCustomFile()) {
-            Session.setCurrentFileName(preferenceHelper.getCustomFileName());
+            if(Strings.isNullOrEmpty(Session.getCurrentFileName())){
+                Session.setCurrentFileName(preferenceHelper.getCustomFileName());
+            }
+
+            LOG.debug("Should change file name dynamically: " + preferenceHelper.shouldChangeFileNameDynamically());
+
+            if(!preferenceHelper.shouldChangeFileNameDynamically()){
+                Session.setCurrentFileName(Session.getCurrentFileName());
+            }
+
+
         } else if (preferenceHelper.shouldCreateNewFileOnceADay()) {
             // 20100114.gpx
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");

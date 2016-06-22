@@ -435,6 +435,8 @@
     <string name="pref_gpsvisualizer">Visualize GPS log stats and graphs</string>
     <string name="new_file_custom_each_time_title">Ask for a file name on every start</string>
     <string name="new_file_custom_each_time_summary">Prompt for a custom file name each time the logging is started</string>
+    <string name="new_file_custom_keep_changing_title">Allow custom file name to change dynamically</string>
+    <string name="new_file_custom_keep_changing_summary">As custom file name values change, let the current file name change. For example, if %HOUR is used, a new file is created every hour. Uncheck if you want it to remain static.</string>
     <string name="donate_app">Donate (app)</string>
     <string name="donate_bitcoin">Bitcoin</string>
     <string name="tip_coffee">Buy me a coffee</string>

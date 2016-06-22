@@ -17,7 +17,6 @@
 
 package com.mendhak.gpslogger.ui.fragments.settings;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -25,13 +24,12 @@ import android.preference.PreferenceFragment;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.InputType;
-import android.widget.EditText;
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.ui.Dialogs;
@@ -39,9 +37,8 @@ import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 import net.rdrei.android.dirchooser.DirectoryChooserFragment;
 import org.slf4j.Logger;
-
 import java.io.File;
-import java.text.MessageFormat;
+
 
 
 public class LoggingSettingsFragment extends PreferenceFragment
@@ -183,11 +180,13 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
         if (preference.getKey().equals("new_file_creation")) {
 
-            Preference prefFileStaticName = findPreference("new_file_custom_name");
-            Preference prefAskEachTime = findPreference("new_file_custom_each_time");
-            Preference prefSerialPrefix = findPreference("new_file_prefix_serial");
+            Preference prefFileCustomName = findPreference(PreferenceNames.CUSTOM_FILE_NAME);
+            Preference prefAskEachTime = findPreference(PreferenceNames.ASK_CUSTOM_FILE_NAME);
+            Preference prefSerialPrefix = findPreference(PreferenceNames.PREFIX_SERIAL_TO_FILENAME);
+            Preference prefDynamicFileName = findPreference(PreferenceNames.CUSTOM_FILE_NAME_KEEP_CHANGING);
             prefAskEachTime.setEnabled(newValue.equals("custom"));
-            prefFileStaticName.setEnabled(newValue.equals("custom"));
+            prefFileCustomName.setEnabled(newValue.equals("custom"));
+            prefDynamicFileName.setEnabled(newValue.equals("custom"));
             prefSerialPrefix.setEnabled(!newValue.equals("custom"));
 
 
@@ -198,13 +197,15 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
     private void setPreferencesEnabledDisabled() {
 
-        Preference prefFileStaticName = findPreference("new_file_custom_name");
-        Preference prefAskEachTime = findPreference("new_file_custom_each_time");
-        Preference prefSerialPrefix = findPreference("new_file_prefix_serial");
+        Preference prefFileCustomName = findPreference(PreferenceNames.CUSTOM_FILE_NAME);
+        Preference prefAskEachTime = findPreference(PreferenceNames.ASK_CUSTOM_FILE_NAME);
+        Preference prefSerialPrefix = findPreference(PreferenceNames.PREFIX_SERIAL_TO_FILENAME);
+        Preference prefDynamicFileName = findPreference(PreferenceNames.CUSTOM_FILE_NAME_KEEP_CHANGING);
 
-        prefFileStaticName.setEnabled(preferenceHelper.shouldCreateCustomFile());
+        prefFileCustomName.setEnabled(preferenceHelper.shouldCreateCustomFile());
         prefAskEachTime.setEnabled(preferenceHelper.shouldCreateCustomFile());
         prefSerialPrefix.setEnabled(!preferenceHelper.shouldCreateCustomFile());
+        prefDynamicFileName.setEnabled(preferenceHelper.shouldCreateCustomFile());
     }
 
     @Override

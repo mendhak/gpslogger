@@ -20,6 +20,7 @@ public  class PreferenceNames {
     public static final String LOCATION_LISTENERS = "listeners";
     public static final String NEW_FILE_CREATION_MODE = "new_file_creation";
     public static final String CUSTOM_FILE_NAME = "new_file_custom_name";
+    public static final String CUSTOM_FILE_NAME_KEEP_CHANGING = "new_file_custom_keep_changing";
     public static final String ASK_CUSTOM_FILE_NAME = "new_file_custom_each_time";
     public static final String AUTOSEND_ENABLED = "autosend_enabled";
     public static final String AUTOSEND_FREQUENCY = "autosend_frequency_minutes";
