@@ -64,6 +64,16 @@ public class PlainTextFileLogger implements FileLogger {
         BufferedOutputStream output = new BufferedOutputStream(writer);
 
         String dateTimeString = Strings.getIsoDateTime(new Date(loc.getTime()));
+        String csvLine = getCsvLine(loc, dateTimeString);
+
+
+        output.write(csvLine.getBytes());
+        output.flush();
+        output.close();
+        Files.addToMediaDatabase(file, "text/csv");
+    }
+
+    String getCsvLine(Location loc, String dateTimeString) {
 
         String outputString = String.format(Locale.US, "%s,%f,%f,%f,%f,%f,%f,%d,%s\n", dateTimeString,
                 loc.getLatitude(),
@@ -75,11 +85,7 @@ public class PlainTextFileLogger implements FileLogger {
                 Maths.getBundledSatelliteCount(loc),
                 loc.getProvider()
         );
-
-        output.write(outputString.getBytes());
-        output.flush();
-        output.close();
-        Files.addToMediaDatabase(file, "text/csv");
+        return outputString;
     }
 
     @Override
