@@ -53,7 +53,7 @@ public class PlainTextFileLogger implements FileLogger {
 
             FileOutputStream writer = new FileOutputStream(file, true);
             BufferedOutputStream output = new BufferedOutputStream(writer);
-            String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider\n";
+            String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider,hdop,vdop,pdop\n";
             output.write(header.getBytes());
             output.flush();
             output.close();
@@ -75,15 +75,18 @@ public class PlainTextFileLogger implements FileLogger {
 
     String getCsvLine(Location loc, String dateTimeString) {
 
-        String outputString = String.format(Locale.US, "%s,%f,%f,%f,%f,%f,%f,%d,%s\n", dateTimeString,
+        String outputString = String.format(Locale.US, "%s,%f,%f,%s,%s,%s,%s,%d,%s,%s,%s,%s\n", dateTimeString,
                 loc.getLatitude(),
                 loc.getLongitude(),
-                loc.getAltitude(),
-                loc.getAccuracy(),
-                loc.getBearing(),
-                loc.getSpeed(),
+                loc.hasAltitude() ? loc.getAltitude() : "",
+                loc.hasAccuracy() ? loc.getAccuracy() : "",
+                loc.hasBearing() ? loc.getBearing() : "",
+                loc.hasSpeed() ? loc.getSpeed() : "",
                 Maths.getBundledSatelliteCount(loc),
-                loc.getProvider()
+                loc.getProvider(),
+                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("HDOP"))) ? loc.getExtras().getString("HDOP") : "",
+                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("VDOP"))) ? loc.getExtras().getString("VDOP") : "",
+                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("PDOP"))) ? loc.getExtras().getString("PDOP") : ""
         );
         return outputString;
     }
