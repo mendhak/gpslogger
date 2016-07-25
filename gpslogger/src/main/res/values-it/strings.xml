@@ -283,7 +283,6 @@
   <string name="gpslogger_folder_title">Salva nella cartella</string>
   <string name="gpslogger_folder_summary">Dove salvare i files, default in /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Cartella</string>
-  <string name="new_file_custom_message">Puoi usare %YEAR, %MONTH, %DAY, %HOUR, %MIN, %SER (numero seriale del telefono)</string>
   <string name="new_file_prefix_serial_title">Premetti al nome del file il numero seriale del dispositivo</string>
   <string name="new_file_prefix_serial_summary">Questo è il numero seriale del tuo dispositivo </string>
   <string name="txt_travel_duration">Durata:</string>

@@ -288,7 +288,7 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="gpslogger_folder_title">Mentés könyvtárba</string>
   <string name="gpslogger_folder_summary">Log fájlok mentési helye, /sdcard/GPSLogger az alapértelmezett</string>
   <string name="autoftp_directory">Könyvtár</string>
-  <string name="new_file_custom_message">Használható: %SER készülék sorozatszám, %YEAR, %MONTH, %DAY, %HOUR, %MIN</string>
+  <string name="new_file_custom_message">Használható változók: %SER (eszköz sorozatszám), %YEAR (év), %MONTH (hónap), %DAY (nap), %HOUR (óra), %MIN (perc), %PROFILE (profil), %VER (verzió)</string>
   <string name="new_file_prefix_serial_title">Készülék sorszám használata fájlnév előtagként</string>
   <string name="new_file_prefix_serial_summary">Ez a telefon sorozatszáma az állapot menüből </string>
   <string name="txt_travel_duration">Időtartam:</string>
@@ -324,6 +324,8 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="pref_gpsvisualizer">GPS napló statisztika és grafikák megjelenítése</string>
   <string name="new_file_custom_each_time_title">Fájlnév kérése minden indításkor</string>
   <string name="new_file_custom_each_time_summary">Egyedi fájlnevet kér a naplózás minden indításakor</string>
+  <string name="new_file_custom_keep_changing_title">Dinamikus egyéni fájlnév</string>
+  <string name="new_file_custom_keep_changing_summary">Az egyéni fájlnév értékeinek változásával változik a használt fájl neve. Például a %HOUR mező használata esetén minden órában új fájl jön létre. Kapcsolja ki, ha nem szeretne dinamikus fájlneveket.</string>
   <string name="donate_app">Támogatás (app)</string>
   <string name="donate_bitcoin">Bitcoin</string>
   <string name="tip_coffee">Hívj meg egy kávéra</string>

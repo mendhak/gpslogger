@@ -287,7 +287,6 @@
   <string name="gpslogger_folder_title">Spremi u mapu</string>
   <string name="gpslogger_folder_summary">Gdje da sprema datoteku zapisivanja, zadano je/sdcard/GPSLogger</string>
   <string name="autoftp_directory">Imenik</string>
-  <string name="new_file_custom_message">Koristite %SER za serijskog broja uređaja, %YEAR, %MONTH, %DAY, %HOUR, %MIN</string>
   <string name="new_file_prefix_serial_title">Prefiks serijskog broja uređaja za naziv datoteke</string>
   <string name="new_file_prefix_serial_summary">Serijski broj nađen u statusu telefona </string>
   <string name="txt_travel_duration">Trajanje:</string>

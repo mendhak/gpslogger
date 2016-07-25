@@ -14,4 +14,10 @@
 <p>In den allgemeinen Einstellungen können die Schaltflächen der Benachrichtigung verborgen werden, so dass weniger Platz benötigt wird.</p>]]></string>
   <string name="faq_topic_profiles"><![CDATA[<h3>Was sind Profile?</h3>
 <p>Mit Profilen können je nach Bedarf verschiedene Einstellungen gespeichert werden. So können beispielsweise ein Profil \'Nacht\' und ein Profil \'Wandern\' mit unterschiedlichen Log-Frequenzen erstellt werden um bei Bedarf zwischen diesen wechseln zu können.</p><p>Um ein neues Profil zu erstellen muss auf den Profiltitel getippt werden und dann auf Neues Profil. Das neue Profil hat die gleichen Einstellungen wie das derzeit aktive, die dann entsprechend angepasst werden können.</p><p>Die geänderten Einstellungen werden nur im neuen Profil gespeichert, das ursprünglich vorhandene Profil bleibt unberührt. Es wird empfohlen die gewünschten Grundeinstellungen zuerst im Standardprofil vorzunehmen.</p><p>Zum löschen eines Profils muss dieses lange gedrückt werden.</p>]]></string>
+  <string name="faq_topic_thirdpartyintegration"><![CDATA[
+<h3>Third party Integration</h3>
+    <p>Es gibt ein paar verschiedene Wege um mit GPSLogger aus anderen Apps heraus zu interagieren.</p>
+    <p><strong>Intents</strong> - Sie können verschiedene intents senden damit GPSLogger etwas tut. Weitere Deteils finden Sie Tasker Abschnitt.</p>
+    <p><strong>Verknüpfungen</strong> - Wenn Ihre App keine intents untersützt, können Sie die Aufzeichnung über Verknüpfungen starten oder stoppen</p>
+    <p><strong>Content Provider</strong> - Gibt nur den aktuellen logging Pfad aus. Dies ist ein  An fortgeschrittenes thema und experimentell</p>    ]]></string>
 </resources>

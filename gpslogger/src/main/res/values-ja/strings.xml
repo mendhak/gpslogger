@@ -20,7 +20,7 @@
   <string name="txt_altitude">高度:</string>
   <string name="txt_speed">速度:</string>
   <string name="txt_direction">方向:</string>
-  <string name="txt_satellites">衛星:</string>
+  <string name="txt_satellites">受信衛星数:</string>
   <string name="txt_accuracy">精度:</string>
   <string name="txt_travel_distance">移動距離:</string>
   <string name="btn_start_logging">ログ開始</string>
@@ -153,7 +153,7 @@
   <string name="autoemail_testresult_success">メールを送信しました。</string>
   <string name="autoemail_invalid_form">無効な値です。</string>
   <string name="autoemail_invalid_form_message">全てのフィールドが正しく入力されていることを確認してください。</string>
-  <string name="fix_obtained">位置情報を取得</string>
+  <string name="fix_obtained">位置情報を確定</string>
   <string name="started_waiting">GPSを起動しました。位置情報を待っています。</string>
   <string name="gps_stopped">GPSを一時停止しました。</string>
   <string name="stopped">停止しました</string>
@@ -287,8 +287,7 @@
   <string name="gpslogger_folder_title">フォルダーに保存します。</string>
   <string name="gpslogger_folder_summary">ログファイルの保存場所（デフォルト /sdcard/GPSLogger）</string>
   <string name="autoftp_directory">ディレクトリ</string>
-  <string name="new_file_custom_message">シリアル番号や日時として、%SER, %YEAR, %MONTH, %DAY, %HOUR, %MIN 等の変数が使えます。
-</string>
+  <string name="new_file_custom_message">以下を利用可能: %SER(端末シリアル番号), %YEAR, %MONTH, %DAY, %HOUR, %MIN, %PROFILE, %VER</string>
   <string name="new_file_prefix_serial_title">ファイル名の先頭にデバイスシリアル番号を付加します。</string>
   <string name="new_file_prefix_serial_summary">このシリアル番号はスマートフォンから取得されたものです。</string>
   <string name="txt_travel_duration">実行時間：</string>
@@ -303,7 +302,7 @@
   <string name="accuracy_filter_summary">ポイントを保存する時の最大許容誤差。この値より大きい場合保存されません。</string>
   <string name="distance_filter_title">距離フィルター</string>
   <string name="distance_filter_summary">次のポイントを保存する際の最小距離。この距離より短い場合は保存しません。</string>
-  <string name="points">点</string>
+  <string name="points">ポイント</string>
   <string name="txt_number_of_points">ポイント数</string>
   <string name="save">保存</string>
   <string name="pref_filedetails_title">ファイルとフォルダーの詳細</string>
@@ -324,6 +323,8 @@
   <string name="pref_gpsvisualizer">GPS のログの統計情報とグラフ表示</string>
   <string name="new_file_custom_each_time_title">起動の度にファイル名の入力を要求する</string>
   <string name="new_file_custom_each_time_summary">ログを開始する度にカスタムファイル名の入力プロンプトを表示する</string>
+  <string name="new_file_custom_keep_changing_title">ファイル名を自動的に変更</string>
+  <string name="new_file_custom_keep_changing_summary">現在のファイル名を自動的に変更できます。たとえば %HOUR を使用すると新しいファイルは 1 時間ごとに作成されます。ファイル名を固定するにはオフにします。</string>
   <string name="donate_app">GPSLogger(寄付版)</string>
   <string name="donate_bitcoin">ビットコイン</string>
   <string name="tip_coffee">コーヒーを買う</string>
@@ -343,13 +344,13 @@
   <string name="activity_tilting">傾いています</string>
   <string name="activity_walking">歩行中</string>
   <string name="activity_unknown">不明</string>
-  <string name="altitude_subtractgeoidheight_summary">GPSの高度情報から高さを求めるために、WGS84ではなく、MSL(平均海面)を用いて計算します。これはGPS衛星の情報のみに適用され、ネットワークから得られた情報やNMEAには影響しません。</string>
+  <string name="altitude_subtractgeoidheight_summary">GPSの高度情報から高さを求めるために、WGS84ではなく、MSL(平均海水面) を用いて計算します。これはGPS衛星の情報のみに適用され、ネットワークから得られた情報やNMEAには影響しません。</string>
   <string name="altitude_subtractgeoidheight_title">WGS84の代わりにMSLを使用</string>
   <string name="altitude_subtractoffset_title">高度からオフセットを差し引く</string>
   <string name="altitude_subtractoffset_summary">GPS高度から差し引く値をメートルで与えます。負の値を入力すると、高度に加算します。これはGPSの情報にのみに適用され、ネットワークから得られた値
 やNMEAの値には影響ありません。</string>
   <string name="upload_failure">ファイルをアップロードできませんでした。</string>
-  <string name="inaccurate_point_discarded">不正確な点を破棄します</string>
+  <string name="inaccurate_point_discarded">低精度な点を破棄します</string>
   <string name="not_enough_distance_traveled">%s mしか移動していません。ポイントを破棄します。</string>
   <string name="autosend_wifionly_title">Wi-Fi使用時のみ送信</string>
   <string name="logview_showlocationsonly">位置情報のみ</string>

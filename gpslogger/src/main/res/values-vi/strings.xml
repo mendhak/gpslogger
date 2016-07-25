@@ -284,7 +284,6 @@
   <string name="gpslogger_folder_title">Lưu vào thư mục</string>
   <string name="gpslogger_folder_summary">Nơi để lưu các file log, mặc định là /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Thư mục</string>
-  <string name="new_file_custom_message">Bạn có thể sử dụng %SER cho serial của máy, % năm, % tháng, %DAY, %HOUR, % MIN</string>
   <string name="new_file_prefix_serial_title">Thêm số serial vào trước tên file</string>
   <string name="new_file_prefix_serial_summary">Đây là số serial máy của bạn </string>
   <string name="txt_travel_duration">Thời gian:</string>

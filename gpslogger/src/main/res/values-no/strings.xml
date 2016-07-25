@@ -275,7 +275,6 @@
   <string name="gpslogger_folder_title">Lagre i mappe</string>
   <string name="gpslogger_folder_summary">Hvor å lagre loggfiler, standard er /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Mappe</string>
-  <string name="new_file_custom_message">Du kan bruke %SER for enhetsserienummer, %YEAR %MONTH, %DAY, %HOUR, % MIN</string>
   <string name="new_file_prefix_serial_title">Prefiks enhetsserienummer i filnavnet</string>
   <string name="txt_travel_duration">Varighet:</string>
   <string name="menu_onepoint">Logg ett punkt</string>

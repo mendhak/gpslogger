@@ -289,7 +289,6 @@
   <string name="gpslogger_folder_title">Зберегти до папки</string>
   <string name="gpslogger_folder_summary">Де зберігати файли журналов, за замовчуванням /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Каталог</string>
-  <string name="new_file_custom_message">Ви можете використовувати %SER для серійного номера пристрою, %YEAR, %MONTH, %DAY, %HOUR, %MIN</string>
   <string name="new_file_prefix_serial_title">Приставляти серійний номер пристрою на початку імені файлу</string>
   <string name="new_file_prefix_serial_summary">Цей серійний номер знайдено в статусі вашого телефону </string>
   <string name="txt_travel_duration">Тривалість:</string>

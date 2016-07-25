@@ -96,8 +96,11 @@
   <!-- Settings -->
   <string name="pref_logging_title">Détails de l\'enregistrement</string>
   <string name="log_gpx_title">Enregistrement sur GPX</string>
+  <string name="log_gpx_summary">Enregistrement des emplacements au format GPX v1.0</string>
   <string name="log_kml_title">Enregistrement sur KML</string>
+  <string name="log_kml_summary">Enregistrement des emplacements au format KML v2.2</string>
   <string name="log_plain_text_title">Enregistrer au format texte brut</string>
+  <string name="log_plain_text_summary">Enregistrement des emplacements au format CSV</string>
   <string name="new_file_creation_title">Nouvelle création du fichier</string>
   <string name="new_file_creation_summary">Que ce soit de créer un nouveau fichier une fois par jour ou chaque fois que vous démarrez.</string>
   <string name="new_file_creation_onceaday">Une fois par jour</string>
@@ -285,7 +288,6 @@ une plus grande précision à basses fréquences.</string>
   <string name="gpslogger_folder_title">Enregistrer dans le dossier</string>
   <string name="gpslogger_folder_summary">Où enregistrer les fichiers de log, par défaut dans /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Répertoire</string>
-  <string name="new_file_custom_message">Vous pouvez utiliser %SER pour le numéro de série du périphérique, %YEAR pour l\'année, %MONTH pour le mois, %DAY pour la journée, %HOUR pour l\'heure, % MIN pour la minute</string>
   <string name="new_file_prefix_serial_title">Préfixer le numéro de série au nom de fichier</string>
   <string name="new_file_prefix_serial_summary">Voici le numéro de série trouvé dans le status de votre telephone</string>
   <string name="txt_travel_duration">Durée :</string>
@@ -322,6 +324,7 @@ une plus grande précision à basses fréquences.</string>
   <string name="new_file_custom_each_time_title">Demander un nom de fichier à chaque démarrage</string>
   <string name="new_file_custom_each_time_summary">Demande un nom de fichier à chaque fois que l\'enregistrement est lancé</string>
   <string name="donate_app">Faire un don (app)</string>
+  <string name="donate_bitcoin">Bitcoin</string>
   <string name="tip_coffee">Offrez moi un café</string>
   <string name="no_network_message">Il n\'y a pas de réseau disponible</string>
   <string name="hide_notification_buttons">Cacher les icones de notification</string>
@@ -354,4 +357,12 @@ une plus grande précision à basses fréquences.</string>
   <string name="profile_delete">Supprimer le profile?</string>
   <string name="profile_default">Profil par défault</string>
   <string name="profile_add_new">Ajouter un profil</string>
+  <string name="gpslogger_permissions_rationale_title">Autorisations requises</string>
+  <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Cette application nécessite diverses autorisations pour pouvoir fonctionner correctement. <br /> <b>Emplacement du périphérique</b> - Cette autorisation permet la lecture des données de localisation qui proviennent des stations cellulaires et du GPS intégré au smartphone.<br /><b>Photos, media, fichiers</b> - Cette autorisation permet l\'écriture pour le stockage des fichiers de journalisation et test, ainsi que la lecture d\'une liste de fichiers pour leur téléversement ou leur partage. Cette application n\'accédera pas à vos photos, ni à vos médias.<br /><b>Accéder à vos contacts</b> - Cette autorisation permet si vous utilisez la fonctionnalité Google Drive, l\'énumération des comptes Google enregistrés sur cet appareil. L\'application ne consulte pas votre liste de contacts.<br /><br/>  ]]></string>
+  <string name="gpslogger_permissions_permanently_denied">Vous avez refusé de manière permanente une ou plusieurs permissions que cette application requiert. Vous devez allez à l\'écran des paramètres de l\'application pour garantir ou réinitialiser ces permissions.</string>
+  <string name="privacy_policy">Politique de confidentialité</string>
+  <string name="debuglog_attach_to_email">Joignez le journal de débogage à un e-mail</string>
+  <string name="debuglog_attach_to_email_summary">Joindre le journal de débogage à un e-mail avec quelques informations de diagnostic</string>
+  <string name="change_language_title">Changer la langue</string>
+  <string name="change_language_summary">Tous les langages ne sont pas entièrement traduits ! Vous devez redémarrer l’application pour que les paramètres prennent effet.</string>
 </resources>

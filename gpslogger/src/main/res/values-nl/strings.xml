@@ -286,7 +286,6 @@
   <string name="gpslogger_folder_title">Opslaan in map</string>
   <string name="gpslogger_folder_summary">Locatie waar de logbestanden worden weggeschreven, standaardlocatie: /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Map</string>
-  <string name="new_file_custom_message">Je kan %SER gebruiken als serienummer voor het toestel, %YEAR, %MONTH, %DAY, %HOUR, %MIN</string>
   <string name="new_file_prefix_serial_title">Voeg het serienummer van het apparaat toe vooraan de bestandsnaam</string>
   <string name="new_file_prefix_serial_summary">Dit is het serienummer zoals vermeld in de status van je telefoon </string>
   <string name="txt_travel_duration">Duur:</string>
