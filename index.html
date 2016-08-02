@@ -297,8 +297,20 @@
                     <li>The accuracy was below your <em>Accuracy filter</em> settings, or the distance was below your <em>Distance filter</em> settings, so GPSLogger didn't log it.
                         You can try setting a <em>Retry interval</em> in which GPSLogger can wait for a more accurate point to show up and then use it.</li>
                 </ul>
+				
+				<p>Additionally, on Android 6+ (Marshmallow), a new feature called <a href="https://developer.android.com/training/monitoring-device-state/doze-standby.html">doze mode</a> was introduced, which severely restricts activity on the device after certain periods of inactivity.  You can choose to <a href="http://www.cnet.com/uk/how-to/stop-specific-apps-from-using-doze-on-android-6-0-marshmallow/">whitelist GPSLogger</a> which does not bypass doze mode but occasionally provides logging windows in which to work.  It will not make a great difference though, doze mode is quite aggressive.  
             </div>
 
+			
+            <div class="a-left">
+                <a href="#3" name="3"><h3>Why does the app sometimes not log for long periods</h3></a>
+                <p>There are two possible reasons for this.</p>
+                <ul>
+                    <li>The GPS will have attempted to find its location and given up after a while.  This means that Android OS will not have given a location to GPSLogger</li>
+                    <li>The accuracy was below your <em>Accuracy filter</em> settings, or the distance was below your <em>Distance filter</em> settings, so GPSLogger didn't log it.
+                        You can try setting a <em>Retry interval</em> in which GPSLogger can wait for a more accurate point to show up and then use it.</li>
+                </ul>
+            </div>
 
             <div class="a-left">
                 <a href="#4" name="4"><h3>How do I remove the notification?</h3></a>
