@@ -60,7 +60,7 @@ Follow the instructions on the [Android Developer Website](http://developer.andr
 On Ubuntu 64bit, you may also need `ia32-libs`, follow [these instructions](http://stackoverflow.com/a/21956268/974369).  I did not need this for Ubuntu 14.04.
 
 
-![intellij](https://www.jetbrains.com/idea/docs/logo_intellij_idea.png)
+![intellij](assets/logo_IntelliJIDEA.png)
 
 Download and install [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/download/index.html), which is free.
 Note that the Android build system version 0.9 does not work well with anything earlier than IntelliJ 13.1.2.
