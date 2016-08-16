@@ -35,7 +35,7 @@ I'm not very good at UIs, so any work with the layouts would be appreciated!
 
 It's good practice to verify downloads.  In recent releases, a PGP signature and an SHA256 checksum will accompany each `.apk`.
 
-Import PGP Public Key from [Keybase.io](https://keybase.io/mendhak) or just `gpg --recv-key 76CBE9A9`
+Import PGP Public Key from [Keybase.io](https://keybase.io/mendhak) or just `gpg --recv-key 6989CF77490369CFFDCBCD8995E7D75C76CBE9A9`
 
 To verify the integrity and signature:
 
