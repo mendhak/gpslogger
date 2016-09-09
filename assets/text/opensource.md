@@ -1,4 +1,4 @@
-## Open source libraries
+# Open source libraries
 
 GPSLogger uses several open source libraries.  This document lists third party libraries and displays their attribution notices.  
 

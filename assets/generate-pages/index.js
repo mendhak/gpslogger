@@ -65,7 +65,7 @@ function getBottom(includePics){
 
 function getTitleFromContents(markdown){
   var firstPosition = markdown.indexOf('#');
-  var endPosition = markdown.indexOf('\r');
+  var endPosition = markdown.indexOf('\n');
   return markdown.substring(firstPosition, endPosition).replace('#','').trim();
 }
 
@@ -182,4 +182,5 @@ function copyFaqImagesToOutput(callback){
 
 
 async.series([copyStaticToOutput, copyContentImagesToOutput, copyFaqImagesToOutput, renderMainPage, renderFullPages]);
+
 
