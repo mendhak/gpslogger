@@ -1,0 +1,31 @@
+## Features
+
+> Can log to *GPX, KML, CSV, NMEA and CSV* formats. Can also log to a custom URL or just the screen.  
+
+> Logs GPX points as tracks and track segments 
+
+> Also logs *speed, direction and altitude* if available
+
+> *Add a description* to a point using the annotate menu, gets added as a waypoint
+
+> Configure *time intervals* between points
+
+> Configure a *minimum distance* filter between points or an accuracy filter
+
+> *Notification* icon with coordinates and quick actions
+
+> Uses cell towers for location when GPS is disabled
+
+> Selectively choose network, gps and passive *location providers*
+
+> Automatically *upload or email* the file at set intervals to destinations such as *Email, FTP, Dropbox, Google Docs, OpenStreetMap*.
+
+> Share location or log files via SMS/Email (and other apps such as Facebook or Twitter depending on what you've got installed)
+
+> Start logging on phone bootup
+
+> Invoke operations from Tasker or other automation apps.
+
+> You can give it a *preset file* with your own values for distribution
+
+> *Multiple profiles* with different settings are possible

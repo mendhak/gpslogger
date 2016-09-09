@@ -1,0 +1,3 @@
+## I've changed the settings, but it's still showing/using the old settings
+
+If the app is logging, and you make changes to the settings, the changes will take effect *after* the next point is logged. This means that if you've set your interval as 1 hour, you have a long wait ahead of you. If you want the changes to take effect immediately, then stop logging and start it again so that the changes are refreshed.

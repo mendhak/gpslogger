@@ -1,0 +1,13 @@
+### Menus
+
+![3](images/3.png)
+
+Many menu items
+
+**Profiles** - Group preferences under profile names, such as default, nighttime, trekking, etc.
+
+**General options** - Startup, imperial, debug file and version info
+
+**Logging details** - File formats, folder, new file creation, frequency, accuracy
+
+**Auto send, email and upload** - Settings for various destinations such as Google Docs, FTP, Dropbox

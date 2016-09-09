@@ -1,0 +1,3 @@
+## The app doesn't log at exactly *x* seconds as I've specified
+
+It's how the Android OS has implemented its GPS system. When you say you want a point every 60 seconds (for example), that's actually a suggestion rather than an imperative, and so the time interval between GPS points is never guaranteed. GPSLogger has logic that checks the time difference, though, and will make sure that at least 60 seconds have passed before logging again.  It is not meant for sub-second logging, as that will require aggressive wakelocks.

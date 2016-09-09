@@ -1,636 +1,344 @@
 <!DOCTYPE html>
-<!--[if lt IE 8 ]>
-<html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]>
-<html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 8)|!(IE)]><!-->
-<html lang="en"> <!--<![endif]-->
-<head>
-
-    <!--- Basic Page items
-    ================================================== -->
+<html lang="en">
+  <head>
     <meta charset="utf-8">
-    <title>GPSLogger for Android</title>
-    <meta name="description" content="GPS Logging application for Android">
-    <meta name="author" content="Mendhak">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
-    <!-- CSS
-   ================================================== -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-<div id="content-wrap">
-
-
-<!-- latest article
-================================================== -->
-<article id="latest-article" class="container">
-
-    <h2><a href="#">GPSLogger for Android</a><span class="pull-right" style="text-align:center;"><a href="https://www.paypal.me/mendhak"><img src="Paypal-Donate-Button-Image.png" height="120px" /></a></span>
-</h2>
-
-
-
-    <p class="post-info">A battery efficient GPS logging application for Android</p>
-
-    <div class="dcontent cf">
-        <p>GPSLogger uses the GPS capabilities of your Android phone to log coordinates to GPS format files at
-            regular intervals. This can be particularly useful if you want to geotag your photos after a day out or
-            share your travel route with someone. The purpose of this application is to be battery efficient to save
-            you battery power when abroad and last as long as possible.</p>
-
-        <a href="#tour" class="button">Tour</a>
-        <a href="#faq" class="button">FAQ</a>
-        <a href="#screenshots" class="button">Screenshots</a>
-
-        <a class="pull-right" href="https://play.google.com/store/apps/details?id=com.mendhak.gpslogger"><img height="50px" alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge-border.png" /></a>
-            <a class="pull-right" href="https://github.com/mendhak/gpslogger"><img src="images/social/GitHub-Mark-64px.png" height="40px"/><img
-                    src="images/social/GitHub_Logo.png" height="40px"/></a>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title> GPSLogger for Android
+    </title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
+    <link rel="stylesheet" href="main.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  </head>
+  <body>
+    <header class="header">
+  <div class="container"><img src="images/gps_icon05.png" class="pull-left logo">
+    <h1><a href="http://code.mendhak.com/gpslogger/">GPSLogger for Android</a></h1>
+    <p class="description">A battery efficient GPS logging application</p>
+    <section class="blurb">GPSLogger uses the GPS capabilities of your Android phone to log coordinates to GPS format files at regular intervals.
+      This can be particularly useful if you want to geotag your photos after a day out or share your travel route with someone.
+      The purpose of this application is to be battery efficient to save you battery power when abroad and last as long as
+      possible.</section><a href="#quicktour" class="button">Tour</a> <a href="#frequentlyaskedquestionsandissues" class="button">FAQ</a> <a href="#morescreenshots" class="button">Screenshots</a>
+    <a href="https://paypal.me/mendhak/" class="pull-right"><img src="images/Paypal-Donate-Button-Image.png" height="55px" class="pull-right"> </a>
+    <a href="https://github.com/mendhak/gpslogger/"
+      class="pull-right"><img src="images/social/GitHub_Logo.png" height="40px" class="pull-right"> <img src="images/social/GitHub-Mark-64px.png"
+        height="40px" class="pull-right"></a>
+    <a href="https://play.google.com/store/apps/details?id=com.mendhak.gpslogger"
+      class="pull-right"><img src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge-border.png" height="50px" class="pull-right">      </a>
+  </div>
+</header>
+    <div class="container">
+      <main>
 
 
+<section><div class='lead'><h2><a name="quicktour" href="#quicktour">Quick Tour</a></h2><h3>Menus and Icons</h3>
 
+<p><img src="images/2.png" alt="2"></p>
+<p>Use the views dropdown to navigate between the different presentations.  </p>
+<p>While you are logging, the green indicator will stay on.</p>
+<p>The spinner only appears when the GPS is trying to get a fix.  </p>
+
+</div></section>
+
+<section><div class='lead'><h3>Menus</h3>
+
+<p><img src="images/3.png" alt="3"></p>
+<p>Many menu items</p>
+<p><strong>Profiles</strong> - Group preferences under profile names, such as default, nighttime, trekking, etc.</p>
+<p><strong>General options</strong> - Startup, imperial, debug file and version info</p>
+<p><strong>Logging details</strong> - File formats, folder, new file creation, frequency, accuracy</p>
+<p><strong>Auto send, email and upload</strong> - Settings for various destinations such as Google Docs, FTP, Dropbox</p>
+
+</div></section>
+
+<section><div class='lead'><h3>Simple view</h3>
+
+<p><img src="images/1.png" alt="1"></p>
+<p>Shows your last recorded GPS point, updates when new point available  </p>
+<p>Tap any field to highlight the text</p>
+<p>Big start/stop button. You can&#39;t miss it</p>
+<p>Distance travelled is the total distance between all points.</p>
+
+</div></section>
+
+<section><div class='lead'><h3>Detailed view</h3>
+
+<p><img src="images/4.png" alt="4"></p>
+<p>Detailed view of last recorded GPS point</p>
+<p>Smaller start/stop button</p>
+
+</div></section>
+
+<section><div class='lead'><h3>Big View</h3>
+
+<p><img src="images/5.png" alt="5"></p>
+<p>Big text</p>
+<p>Meant for landscape mode</p>
+<p>Awkward in portrait mode</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="features" href="#features">Features</a></h2><blockquote>
+<p>Can log to <em>GPX, KML, CSV, NMEA and CSV</em> formats. Can also log to a custom URL or just the screen.  </p>
+<p>Logs GPX points as tracks and track segments </p>
+<p>Also logs <em>speed, direction and altitude</em> if available</p>
+<p><em>Add a description</em> to a point using the annotate menu, gets added as a waypoint</p>
+<p>Configure <em>time intervals</em> between points</p>
+<p>Configure a <em>minimum distance</em> filter between points or an accuracy filter</p>
+<p><em>Notification</em> icon with coordinates and quick actions</p>
+<p>Uses cell towers for location when GPS is disabled</p>
+<p>Selectively choose network, gps and passive <em>location providers</em></p>
+<p>Automatically <em>upload or email</em> the file at set intervals to destinations such as <em>Email, FTP, Dropbox, Google Docs, OpenStreetMap</em>.</p>
+<p>Share location or log files via SMS/Email (and other apps such as Facebook or Twitter depending on what you&#39;ve got installed)</p>
+<p>Start logging on phone bootup</p>
+<p>Invoke operations from Tasker or other automation apps.</p>
+<p>You can give it a <em>preset file</em> with your own values for distribution</p>
+<p><em>Multiple profiles</em> with different settings are possible</p>
+</blockquote>
+
+</div></section>
+
+<section><div class='lead'><h1><a name="frequentlyaskedquestionsandissues" href="#frequentlyaskedquestionsandissues">Frequently asked questions and issues</a></h1><h2><a name="whyisittakingsolongtofindafix" href="#whyisittakingsolongtofindafix">Why is it taking so long to find a fix?</a></h2><p>There can be several reasons reasons for this.</p>
+<p><strong>New location</strong> - if you are at a new location after a long flight, the GPS on your phone can take a while to reorient itself. Try running GPSLogger at high frequency until it does find a location.</p>
+<p><strong>Interference</strong> - there may be structures nearby blocking your signal.</p>
+<p><strong>Mid flight</strong> - if you are in a commercial aircraft, you are probably traveling too fast for your phone&#39;s hardware to keep up with the GPS signals.</p>
+<p>You can read more a little more on what&#39;s involved <a href="gps-fix-details.html">here</a></p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="whyarethefixessometimesinaccurate" href="#whyarethefixessometimesinaccurate">Why are the fixes sometimes inaccurate?</a></h2><p>It all comes down to your hardware, settings and environment. The accuracy is only as good as your phone&#39;s GPS chip. Some phones may have 4 meter accuracies, some have 500 meters. Also, using GPS satellites will give you better accuracy but take a longer time; using network location will give worse accuracy but is quicker. You may also want to check your environment, as there can be inaccuracy due to clouds, buildings, sunspots, alien invasion, etc.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="mytimeintervalhaspassedbutnopointwaslogged" href="#mytimeintervalhaspassedbutnopointwaslogged">My time interval has passed, but no point was logged</a></h2><h2><a name="sometimestheappwillnotlogforlongperiodsoftime" href="#sometimestheappwillnotlogforlongperiodsoftime">Sometimes, the app will not log for long periods of time</a></h2><p>Sometimes your specified time interval will have passed, but no point was logged.  There are a few reasons this could happens. </p>
+<ul>
+<li><p>The GPS system will have attempted to find its location and given up after a while. This in turn means that Android OS will not have given a location to GPSLogger</p>
+</li>
+<li><p>The accuracy was below your <em>Accuracy filter</em> settings, or the distance was below your <em>Distance filter</em> settings, so GPSLogger didn&#39;t log it. You can try setting a <em>retry interval</em> in which GPSLogger can wait for a more accurate point to show up and then use it.  Or you can allow for slightly more inaccurate fixes - your mileage may vary as every phone is different in terms of how accurate a fix it can get on a regular basis. </p>
+</li>
+<li><p>Additionally, on Android 6+ (Marshmallow), a new feature called <em><a href="https://developer.android.com/training/monitoring-device-state/doze-standby.html">doze mode</a></em> was introduced, which severely restricts activity on the device after certain periods of inactivity. You can choose to <a href="http://www.cnet.com/uk/how-to/stop-specific-apps-from-using-doze-on-android-6-0-marshmallow/">whitelist GPSLogger</a> which does not bypass doze mode but occasionally provides logging windows in which to work. It will not make a great difference though, doze mode is quite aggressive.</p>
+</li>
+</ul>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="itsusingthewrongtimezonecanyoumakeitusemytimezone" href="#itsusingthewrongtimezonecanyoumakeitusemytimezone">It&#39;s using the wrong timezone, can you make it use my timezone?</a></h2><p>The standard when logging points is to use UTC. Since this is the standard, it would be wrong to use the the local time zone, the file is considered invalid. Instead, it is the responsibility of the software you use the log file on (Google Earth, GeoSetter, etc.) to adjust for your timezone. Any application that deals with GPX or KML files will have a setting that allows you to specify your own timezone.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="iamdisplayingimperialunitsbutwhyisntitloggingimperialtothefile" href="#iamdisplayingimperialunitsbutwhyisntitloggingimperialtothefile">I am displaying imperial units but why isn&#39;t it logging imperial to the file?</a></h2><h2><a name="whataretheunitsinwhichthevaluesarelogged" href="#whataretheunitsinwhichthevaluesarelogged">What are the units in which the values are logged?</a></h2><p><img src="images/18imperial.png" alt="imperial"></p>
+<p>The imperial units are only for display purposes and nothing else. However, when logging, the units are always in <strong>SI units</strong> - meters and seconds.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="whereisthefilebeingloggedhowdoigettoit" href="#whereisthefilebeingloggedhowdoigettoit">Where is the file being logged? How do I get to it?</a></h2><h2><a name="whatisthedefaultfolderpath" href="#whatisthedefaultfolderpath">What is the default folder path?</a></h2><p>Due to recent restrictions, the default GPSLogger folder is different per device. You can see it on the simple/detailed screens and it may be something like </p>
+<blockquote>
+<p>Example: <code>/storage/emulated/0/Android/data/com.mendhak.gpslogger/files/</code></p>
+<p>Example: <code>/sdcard/Android/data/com.mendhak.gpslogger/files/</code> </p>
+</blockquote>
+<p>The initial part will be different for your device. </p>
+<p>If you have a file explorer installed, you can click on the folder paths in the simple/detailed screens.</p>
+<p>To copy the GPSLogger files, you can connect your phone to your computer and mount the SD card, then copy straight from the above folder. You can also change the default folder in the app settings. </p>
+<p>Finally, note that due to the <a href="http://commonsware.com/blog/2014/04/09/storage-situation-removable-storage.html">restrictions introduced in Android KitKat</a>, any files in the default folder will be removed if you uninstall the app.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="ivechangedthesettingsbutitsstillshowingusingtheoldsettings" href="#ivechangedthesettingsbutitsstillshowingusingtheoldsettings">I&#39;ve changed the settings, but it&#39;s still showing/using the old settings</a></h2><p>If the app is logging, and you make changes to the settings, the changes will take effect <em>after</em> the next point is logged. This means that if you&#39;ve set your interval as 1 hour, you have a long wait ahead of you. If you want the changes to take effect immediately, then stop logging and start it again so that the changes are refreshed.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="whatdothevarioussettingsmeanaccuracyretryintervalforaccuracyetc" href="#whatdothevarioussettingsmeanaccuracyretryintervalforaccuracyetc">What do the various settings mean? (Accuracy, retry interval for accuracy, etc)</a></h2><p><img src="images/7b.png" alt="7b"></p>
+<p><strong>Time before logging</strong> - How long to wait after a point has been logged to try logging again.</p>
+<p><strong>Distance filter</strong> - When a point becomes available, the app will check to ensure that this much distance exists between the previous and current points. If it isn&#39;t this distance, the point is discarded.</p>
+<p><strong>Accuracy filter</strong> - When a point becomes available, the app will check to ensure that this point has a minimum accuracy specified. If it does not match the specified accuracy, the point is discarded. This is useful if you are inside a building for a while.</p>
+<p><strong>Time interval for accuracy</strong> - When searching for a point, the app can continue searching for this many seconds until it finds a point that meets the accuracy and distance filter criteria above.</p>
+<p><strong>Absolute timeout</strong> - When searching for a point and trying over and over, the app will give up when this timeout is reached.  This is useful for when you&#39;re inside buildings, GPS tends to keep searching and finding nothing.  </p>
+<p><strong>Keep GPS on between fixes</strong> - Normally, the app stops using GPS between points, to save battery.  This means when it&#39;s time to log the next point, the GPS needs to be &#39;woken up&#39; again and this takes a little time.  Keeping GPS on between fixes causes this &#39;wake up&#39; time to be reduced.</p>
+<p><strong>Don&#39;t log if I&#39;m not moving</strong> - Some Android phones come with activity recognition; the app can use this to determine if you are not moving and if so, it will not attempt to log a point. </p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="howdoimaketheapplastlonger" href="#howdoimaketheapplastlonger">How do I make the app last longer?</a></h2><h2><a name="arethereanyrecommendedsettings" href="#arethereanyrecommendedsettings">Are there any recommended settings?</a></h2><p>Mainly, turn wifi off, turn mobile data off, turn background synchronization off, turn bluetooth off. </p>
+<p>If you turn mobile data off, you&#39;ll probably want to inject aGPS data regularly, there are apps that can do it for you. You can also try going into airplane mode which turns many things off. </p>
+<p>When it comes to choosing between <em>location sources</em> - GPS vs network - GPS will be more battery hungry, but has better accuracy; network location is easier on the battery but isn&#39;t as accurate.</p>
+<p>For <em>time intervals</em>, consider using 60 seconds or more.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="theappdoesntlogatexactlyemxemsecondsasivespecified" href="#theappdoesntlogatexactlyemxemsecondsasivespecified">The app doesn&#39;t log at exactly <em>x</em> seconds as I&#39;ve specified</a></h2><p>It&#39;s how the Android OS has implemented its GPS system. When you say you want a point every 60 seconds (for example), that&#39;s actually a suggestion rather than an imperative, and so the time interval between GPS points is never guaranteed. GPSLogger has logic that checks the time difference, though, and will make sure that at least 60 seconds have passed before logging again.  It is not meant for sub-second logging, as that will require aggressive wakelocks.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="whycantiremovethenotification" href="#whycantiremovethenotification">Why can&#39;t I remove the notification?</a></h2><p><img src="images/17notif.png" alt="notif"></p>
+<p>As of newer versions of Android, removing the notification will cause the service to be killed. As a result, the notification now needs to stay there. You may have seen a recent increase in the number of apps that need to sit in the notification bar for the same reason - to perform background services without being killed.  </p>
+<p>There is an option in the app&#39;s settings that allows you to remove the notification buttons if you want a smaller notification.  </p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="whatsettingsarerequiredfortaskmanagers" href="#whatsettingsarerequiredfortaskmanagers">What settings are required for task managers?</a></h2><p>Task managers don&#39;t like GPSLogger and will <em>frequently</em> kill the service.  </p>
+<p>Due to the varied nature of the way task managers and task killers work, I simply cannot help or advise with any problems where you have one of these installed, and <a href="http://www.howtogeek.com/166140/you-dont-need-to-install-a-task-manager-how-to-manage-running-apps-on-android/">would advise against it as well</a></p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="howisthisdifferentfromotherloggingapps" href="#howisthisdifferentfromotherloggingapps">How is this different from other logging apps?</a></h2><p>It&#39;s meant to be more battery efficient. A lot of other apps, such as MyTracks, usually go with the assumption that you have a data connection available and your routes won&#39;t be very long. They use CPU wakelocks and log points extremely frequently with high accuracy. The aim of GPSLogger is to log points and stay quiet.  </p>
+<p>To put it another way, MyTracks or similar are better suited for runs; GPSLogger is suited for days out, hiking, photography.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="howdoesthisintegratewithtaskerllamaorotherautomationframeworks" href="#howdoesthisintegratewithtaskerllamaorotherautomationframeworks">How does this integrate with Tasker/Llama or other automation frameworks?</a></h2><p>If your automation app can send intents, you can use those intents to control GPSLogger and get it to perform a few actions. 
+For example, in Tasker, create a new action under Misc &gt; Send Intent. </p>
+<blockquote>
+<p>Action: <code>com.mendhak.gpslogger.GpsLoggingService</code><br>Extra: <code>immediatestart:true (others below)</code><br>Target: <code>Service</code></p>
+</blockquote>
+<p>These are the extras you can send to GPSLogger:</p>
+<blockquote>
+<p><code>immediatestart</code> - (true/false) Start logging immediately  </p>
+<p><code>immediatestop</code> - (true/false) Stop logging</p>
+<p><code>setnextpointdescription</code> - (text) Sets the annotation text to use for the next point logged</p>
+<p><code>settimebeforelogging</code> - (number) Sets preference for time before logging option  </p>
+<p><code>setdistancebeforelogging</code> - (number) Sets preference for distance before logging option</p>
+<p><code>setkeepbetweenfix</code> - (true/false) Sets preference whether to keep GPS on between fixes</p>
+<p><code>setretrytime</code> - (number) Sets preference for retry time</p>
+<p><code>setabsolutetimeout</code> - (number) Sets preference for absolute timeout</p>
+<p><code>setprefercelltower</code> - (true/false) Enables or disables the GPS or celltower listeners</p>
+<p><code>logonce</code> - (true/false) Log a single point, then stop</p>
+<p><code>switchprofile</code> - (text) The name of the profile to switch to</p>
+</blockquote>
+<p>You can also invoke the Start and Stop <strong>shortcuts</strong> that GPSLogger comes with.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="howcanidefineapresetfilewithmyownvalues" href="#howcanidefineapresetfilewithmyownvalues">How can I define a preset file with my own values?</a></h2><p>Many people actually distribute GPSLogger to colleagues preinstalled on phones, with some preset values. </p>
+<p>If you create a file in the default folder or at <code>/sdcard/gpslogger.properties</code>, then GPSLogger will read this file each time it loads and apply those settings to the application. </p>
+<p>For example, in the file you can put <code>accuracy_before_logging=42</code> and that will reset the <em>Accuracy Filter</em> to 42 meters each time the application starts. There are many properties that can be applied and you can glean a <a href="https://github.com/mendhak/gpslogger/blob/master/gpslogger/src/main/java/com/mendhak/gpslogger/common/PreferenceNames.java">full list here</a>.</p>
+<p>The most common examples of properties would be <code>log_gpx</code>, <code>log_kml</code>, <code>time_before_logging</code>, <code>opengts_*</code> for OpenGTS settings, <code>smtp_*</code> for email settings.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="howdoidownloadit" href="#howdoidownloadit">How do I download it?</a></h2><p><a href="market://details?id=com.mendhak.gpslogger"><img src="images/qrcode.gpslogger.png" alt="qrcode"></a></p>
+<p>Search for GPS Logger for Android in Google Play, or follow <a href="https://play.google.com/store/apps/details?id=com.mendhak.gpslogger">this direct link</a>.</p>
+<p>You can also download the <a href="https://github.com/mendhak/gpslogger/releases">APK directly here</a>.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="howcanthesegpslogfilesbeused" href="#howcanthesegpslogfilesbeused">How can these GPS log files be used?</a></h2><h2><a name="howdoigeotagphotoswithagpslogfile" href="#howdoigeotagphotoswithagpslogfile">How do I geotag photos with a GPS log file?</a></h2><p>The GPS files produced by this app are generally used for processing <em>other</em> things.  </p>
+<p>A common use case is to geotag photos.  Many cameras, especially SLRs, don&#39;t have built-in GPS.  After a day (or days) out of photography, you may have hundreds of photos that need to be geotagged so that their locations can appear properly when used elsewhere.  </p>
+<p>I have had success with:</p>
+<ul>
+<li><a href="http://www.geosetter.de/en/">GeoSetter</a> - GUI, comprehensive options with map display</li>
+<li><a href="http://askubuntu.com/questions/599395/how-can-i-batch-tag-several-hundred-photos-with-separately-recorded-gps-data">ExifTool</a> - command line, lots of options</li>
+<li>Lightroom&#39;s map module - very basic and limited</li>
+</ul>
+<p> There are of course other uses of the produced files, these are a few I&#39;ve seen over the years; it&#39;s usually a combination of a log file produced from GPSLogger with a secondary software to process the files.  </p>
+<ul>
+<li>Recording your hike, paragliding, flight</li>
+<li>View it in Google Earth, Google Maps</li>
+<li>OpenStreetMap tracing</li>
+<li>Track fleets of trucks or vehicles</li>
+<li>Volunteer organisations use it as rescue reports</li>
+<li>Drivers and salespeople using it as a timesheet</li>
+<li>Tracking of geocaches, gravestones, repair sites, etc.</li>
+<li>Tracking friends and family on holiday</li>
+</ul>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="caniuseyourappinaresearchproject" href="#caniuseyourappinaresearchproject">Can I use your app in a research project?</a></h2><p>This is actually the most commonly asked question!  Yes, feel free to use GPSLogger in your research.  </p>
+<p>The source code is <a href="https://github.com/mendhak/gpslogger/">available on Github</a> if you want to dig through it.  Feel free to link back to the <a href="https://github.com/mendhak/gpslogger/">Github repo</a> for credit/citation.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="whatareprofiles" href="#whatareprofiles">What are profiles?</a></h2><p><img src="images/19profiles.gif" alt="profilesdemo"></p>
+<p>Profiles are basically different settings, grouped under a name. For example you can have a <em>night</em> profile and a <em>trekking</em> profile with different logging frequencies, and switch between the two when you need to.</p>
+<p>Tap the profile header and then &quot;Add profile&quot; to create a new profile. The new profile will have the same settings as the one you&#39;re currently on.  You can then modify a few settings and those should be specific to your new profile.</p>
+<p>Conversely, any settings you change in one profile won&#39;t automatically be saved in other <em>existing</em> profiles.  It is recommended that you do your basic setup in the <em>Default Profile</em> first.  </p>
+<p>You can delete a profile by long pressing it.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="troubleshooting" href="#troubleshooting">Troubleshooting</a></h2><p>Sometimes the app might not behave in an expected way.  </p>
+<p>You can troubleshoot it yourself by going to <em>General Options</em> and enabling the <em>Write to debug file</em> option.  </p>
+<p>Next, reproduce the behavior or problem, and this creates a <code>debuglog.txt</code> file in the GPSLogger directory.  </p>
+<p>You can then grab the file off your phone and have a look through it, or email it to yourself from the same screen (<em>Attach debug log to email</em>).  Be sure to turn it off afterwards as this file grows very fast.   </p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="otherlinks" href="#otherlinks">Other links</a></h2><p>Submit your <a href="https://github.com/mendhak/gpslogger/issues">feature requests on Github</a>.</p>
+<p>Please note that I work on GPSLogger in my spare time and I may not always have the time or resources to implement a feature. However, GPSLogger is open source. You are encouraged to contribute or get someone else to contribute a feature.</p>
+<h3><a href="https://github.com/mendhak/gpslogger/">Source code</a></h3>
+
+<h3><a href="https://crowdin.com/project/gpslogger-for-android">Contribute translations on Crowdin</a></h3>
+
+<h3><a href="license.html">Licensed under GPLv2</a></h3>
+
+<h3><a href="privacypolicy.html">Read the privacy policy</a></h3>
+
+<h3><a href="opensourcelibraries.html">Open source libraries used</a></h3>
+
+<h3><a href="https://paypal.me/mendhak/">Donate Paypal</a></h3>
+
+<h3><a href="https://coinbase.com/mendhak">Donate Bitcoin</a></h3>
+
+
+</div></section>
+
+<section><div class='lead'><h2><a name="morescreenshots" href="#morescreenshots">More screenshots</a></h2><h3>General settings</h3>
+
+<p><img src="images/6.png" alt="6"></p>
+
+</div></section>
+
+<section><div class='lead'><h3>Logging details</h3>
+
+<p><img src="images/7.png" alt="7"></p>
+
+</div></section>
+
+<section><div class='lead'><p><img src="images/7a.png" alt="7a"></p>
+
+</div></section>
+
+<section><div class='lead'><p><img src="images/7b.png" alt="7b"></p>
+
+</div></section>
+
+<section><div class='lead'><h3>Auto send</h3>
+
+<p><img src="images/8.png" alt="8"></p>
+
+</div></section>
+
+<section><div class='lead'><h3>FTP Setup</h3>
+
+<p><img src="images/9.png" alt="9"></p>
+
+</div></section>
+
+<section><div class='lead'><h3>Auto Email Setup</h3>
+
+<p><img src="images/10.png" alt="10"></p>
+
+</div></section>
+
+<section><div class='lead'><h3>Open GTS Setup</h3>
+
+<p><img src="images/11.png" alt="11"></p>
+
+</div></section>
+
+<section><div class='lead'><h3>OpenStreetMap setup</h3>
+
+<p><img src="images/13.png" alt="13"></p>
+
+</div></section>
+
+
+
+
+ </main>
     </div>
-
-
-
-
-
-</article>
-
-<div id="more-articles" class="container">
-
-   <a href="#tour" name="tour"><h2 class="subheader">Quick Tour</h2></a>
-    <p></p>
-
-    <article class="cf">
-
-        <div class="grid4 a-left first">
-            <h3>Menu and icons</h3>
-            <ul>
-                <li>Use the views dropdown to navigate between the different presentations.</li>
-                <li>While you are logging, the green indicator will stay on.</li>
-                <li>The spinner only appears when the GPS is trying to get a fix.</li>
-            </ul>
-
-        </div>
-
-        <div class="grid8 a-right">
-            <img src="2.png" title="General view"/>
-            <hr/>
-        </div>
-
-    </article>
-
-
-    <article class="cf">
-
-        <div class="grid4 a-left first">
-            <h3>Simple view</h3>
-
-            <ul>
-                <li>Shows your last recorded GPS point, updates when new point available</li>
-                <li>Tap any field to highlight the text</li>
-                <li>Big start/stop button. You can't miss it</li>
-                <li>Distance travelled is the total distance between all points.</li>
-            </ul>
-        </div>
-
-        <div class="grid8 a-right">
-            <img src="1.png" title="Simple View"/>
-
-
-            <hr/>
-
-
-        </div>
-
-    </article>
-
-
-    <article class="cf">
-
-        <div class="grid4 a-left first">
-            <h3>Menus</h3>
-
-            <ul>
-                <li>
-                    Many menu items
-                </li>
-                <li><em>Profiles</em> - Group preferences under profile names, such as default, nighttime, trekking, etc. </li>
-                <li><em>General options</em> - Startup, imperial, debug file and version info</li>
-                <li><em>Logging details</em> - File formats, folder, new file creation, frequency, accuracy</li>
-                <li><em>Auto send, email and upload</em>  - Settings for various destinations such as Google Docs, FTP, Dropbox</li>
-            </ul>
-        </div>
-
-        <div class="grid8 a-right">
-
-            <img src="3.png" title="Drawer"/>
-            <hr />
-        </div>
-
-    </article>
-
-    <article class="cf">
-
-        <div class="grid4 a-left first">
-            <h3>Detailed view</h3>
-
-            <ul>
-                <li>Detailed view of last recorded GPS point</li>
-                <li>Smaller start/stop button</li>
-            </ul>
-        </div>
-
-        <div class="grid8 a-right">
-            <img src="4.png" title="Detailed View"/>
-
-            <hr />
-
-
-        </div>
-
-    </article>
-
-    <article class="cf">
-
-        <div class="grid4 a-left first">
-            <h3>Big View</h3>
-
-            <ul>
-                <li>Big text</li>
-                <li>Meant for landscape mode</li>
-                <li>Awkward in portrait mode</li>
-
-            </ul>
-        </div>
-
-        <div class="grid8 a-right">
-            <img src="5.png" title="Big View"/>
-
-            <hr/>
-
-
-        </div>
-
-    </article>
-
-    <article class="cf">
-
-        <div class="grid4 a-left first">
-            <h3>Features</h3>
-        </div>
-
-        <div class="grid8 a-right">
-            <ul>
-                <li>Can log to GPX, KML, CSV, NMEA formats.  Can also log to a custom URL or just the screen.</li>
-
-                <li>Logs GPX points as tracks and track segments</li>
-
-                <li>Also logs speed, direction and altitude if available</li>
-
-                <li>Add a description to a point using the annotate menu</li>
-
-                <li>Configure time intervals between points</li>
-
-                <li>Configure a minimum distance filter between points or an accuracy filter</li>
-
-                <li>Notification icon with coordinates</li>
-
-                <li>Uses cell towers for location when GPS is disabled</li>
-
-                <li>Selectively choose network, gps and passive location providers</li>
-
-                <li>Changes you make on the settings screen will take effect after the next
-                    point is logged</li>
-
-                <li>Automatically upload or email the file at set intervals to destinations such as Email, FTP, Dropbox, Google Docs, OpenStreetMap.</li>
-
-                <li>Share location or log files via SMS/Email (and other apps such as Facebook or Twitter
-                    depending on what you've got installed)</li>
-
-
-                <li>You can have it start logging on phone bootup</li>
-
-                <li>You can invoke operations from Tasker or other automation apps.</li>
-
-                <li>You can give it a preset file with your own values for distribution</li>
-
-            </ul>
-
-            <hr/>
-
-
-        </div>
-
-    </article>
-
-</div>
-
-<div id="content" class="container">
-    <section id="main" class="grid9 first faq">
-        <article>
-            <a href="#faq" name="faq"><h2 class="subheader">Frequently Asked Questions</h2></a>
-
-            <p></p>
-
-            <div class="a-left">
-                <a href="#1" name="1"><h3>Why is it taking so long to find a fix? </h3></a>
-
-                <p>There can be several reasons reasons for this.</p>
-
-                <ul>
-                    <li><strong>New location</strong> - if you are at a new location after a long flight, the GPS on your phone can take a while to reorient itself. Try running GPSLogger at high frequency until it does find a location.</li>
-                    <li><strong>Interference</strong> - there may be structures nearby blocking your signal.</li>
-                    <li><strong>Mid flight</strong> - if you are in a commercial aircraft, you are probably traveling too fast for your phone's hardware to keep up with the GPS signals.</li>
-                </ul>
-
-
-                <a href="javascript:void(0);" class="toggle">(more detail)</a><br/>
-
-                <div class="hiddentext"> <p>The gist of a phone using GPS is that it needs to know where every satellite in the GPS constellation is and it usually
-                    wants to use your data connection to do this.  The GPS satellites do broadcast this information at different intervals;
-                    specifically, each satellite broadcasts <em>almanac</em> data and <em>ephemeris</em> data.  </p>
-
-                    <p>The almanac is not very precise and gives a rough overview of the constellation and their positions over the next few months.
-                        A GPS receiver can use this to get a rough idea of where it is and which satellites to select.  When a phone has been off
-                        for a long time, or suddenly shifted to a new location, it needs to reacquire almanac data.</p>
-
-                    <p>The ephemeris data is more precise; it is broadcast more frequently and goes stale quite quickly.  It's only once a GPS
-                        receiver has its almanac data that it knows to look for the ephemeris data.  Once the phone has both of these pieces of information,
-                        it can then figure out where it is.  This process can take around 12 minutes and is known to be very flaky; any interference
-                        or interruption in the process means that the GPS receiver in the phone needs to start over.  The satellites only broadcast at
-                        50 bytes/second.</p>
-
-                    <p>Because it takes so long, to assist with this, many mobile operators deploy <a href="http://en.wikipedia.org/wiki/Assisted_GPS#Basic_concepts">aGPS</a> servers;
-                        these servers have already downloaded the almanac and ephemeris data and your phone can download it from them at a faster rate then
-                        from the satellites.  But it does mean that your phone has to be on a familiar network.  Being on roaming or with a restricted
-                        data plan will prevent this from happening.</p>
-
-                    <p>All in all, there are a lot of factors at play.  The problem could be anything from missing almanacs to data to hardware.  GPSLogger simply waits for the OS to be ready with its information.</p>
-
-                </div>
-
-                </p>
-            </div>
-            <div class="a-left">
-                <a href="#2" name="2"><h3>It's not accurate!</h3></a>
-                <p>It all comes down to your hardware, settings and environment. The accuracy is only as good as your phone's GPS chip.
-                    Some phones may have 4 meter accuracies, some have 500 meters.  Also, using GPS satellites will give you better accuracy but take a longer time; using network location will give worse accuracy but is quicker. You may also want to check your environment, as there can be inaccuracy due to clouds, buildings, sunspots, alien invasion, etc.
-                </p>
-            </div>
-
-
-            <div class="a-left">
-                <a href="#3" name="3"><h3>My time interval has passed, but no point was logged</h3></a>
-                <p>There are two possible reasons for this.</p>
-                <ul>
-                    <li>The GPS will have attempted to find its location and given up after a while.  This means that Android OS will not have given a location to GPSLogger</li>
-                    <li>The accuracy was below your <em>Accuracy filter</em> settings, or the distance was below your <em>Distance filter</em> settings, so GPSLogger didn't log it.
-                        You can try setting a <em>Retry interval</em> in which GPSLogger can wait for a more accurate point to show up and then use it.</li>
-                </ul>
-				
-				<p>Additionally, on Android 6+ (Marshmallow), a new feature called <a href="https://developer.android.com/training/monitoring-device-state/doze-standby.html">doze mode</a> was introduced, which severely restricts activity on the device after certain periods of inactivity.  You can choose to <a href="http://www.cnet.com/uk/how-to/stop-specific-apps-from-using-doze-on-android-6-0-marshmallow/">whitelist GPSLogger</a> which does not bypass doze mode but occasionally provides logging windows in which to work.  It will not make a great difference though, doze mode is quite aggressive.  
-            </div>
-
-			
-            <div class="a-left">
-                <a href="#3" name="3"><h3>Why does the app sometimes not log for long periods</h3></a>
-                <p>There are two possible reasons for this.</p>
-                <ul>
-                    <li>The GPS will have attempted to find its location and given up after a while.  This means that Android OS will not have given a location to GPSLogger</li>
-                    <li>The accuracy was below your <em>Accuracy filter</em> settings, or the distance was below your <em>Distance filter</em> settings, so GPSLogger didn't log it.
-                        You can try setting a <em>Retry interval</em> in which GPSLogger can wait for a more accurate point to show up and then use it.</li>
-                </ul>
-            </div>
-
-            <div class="a-left">
-                <a href="#4" name="4"><h3>How do I remove the notification?</h3></a>
-                <p>Unfortunately, and annoyingly, the notification needs to stay there.  Android 4.x has become very restrictive and will kill foreground services that don't show notifications.  There is also
-			<a href="http://commonsware.com/blog/2013/07/30/notifications-foreground-services-android-4p3.html" onclick="window.open(this.href);return false;">no way to work around this</a> as there
-			was in the past.  This also means that more applications will start to ask for notification area space, it may get quite crowded soon. At the same time, this is with good reason;
-			the user should know that a foreground service is running and consuming resources, however no means has been provided to allow it to be dismissed.</p>
-
-            </div>
-
-
-            <div class="a-left">
-                <a href="#5" name="5"><h3>It's using the wrong timezone, can you make it use my timezone?</h3></a>
-                <p>The standard when logging points is to use UTC.  Since this is the standard, it would be wrong to use the the local time zone.  Instead, it is the responsibility of the software you use the log file on (Google Earth, GeoSetter, etc.) to adjust for your timezone.
-                    Any application that deals with GPX or KML files will have a setting that allows you to specify your own timezone.</p>
-
-            </div>
-
-            <div class="a-left">
-                <a href="#6" name="6"><h3>I am displaying imperial units but why isn't it logging imperial to the file?</h3></a>
-                <h3>What are the units in which the values are logged?</h3>
-                <p>The imperial units are only for display purposes and nothing else. When logging, the units are always in SI units - meters and seconds.</p>
-
-            </div>
-
-            <div class="a-left">
-                <a href="#7" name="7"><h3>Where is the file being logged?  How do I get to it?</h3></a>
-                <h3>What is the default folder path?</h3>
-                <p>Due to recent restrictions, the default GPSLogger folder is different per device. You can see it on the simple/detailed screens and it may be something like <br /> <br />
-
-                    Example: <code>/storage/emulated/0/Android/data/com.mendhak.gpslogger/files/</code>
-
-                    <br />
-                    Example: <code>/sdcard/Android/data/com.mendhak.gpslogger/files/</code>
-
-
-                    <br /><br />
-
-                    The initial part will be different for your device.  If you have ES File Explorer or Astro File Explorer installed, you can click on the folder paths in the simple/detailed screens.
-                </p>
-                <p>To copy the GPSLogger files, you can connect your phone to your computer and mount the SD card, then copy straight from the above folder.  You can also change the default folder in the settings.
-
-                    To view it on the phone itself, if you have a file explorer, then you can go to the above folder &gt; Long
-                    press file &gt; Open as &gt; Text</p>
-
-                <p>Finally, note that due to the <a href="http://commonsware.com/blog/2014/04/09/storage-situation-removable-storage.html">restrictions introduced in Android KitKat</a>, any files in the default folder will be removed if you uninstall the app.</p>
-
-            </div>
-
-            <div class="a-left">
-                <a href="#8" name="8"><h3>I've changed the settings, but it's still showing/using the old settings</h3></a>
-                <p>If the app is logging, and you make changes to the settings, the changes will
-                    take effect <em>after</em> the next point is logged. This means that if you've set
-                    your interval as 1 hour, you have a long wait ahead of you. If you want the
-                    changes to take effect immediately, then stop logging and start it again so that
-                    the changes are refreshed.</p>
-            </div>
-
-            <div class="a-left">
-                <a href="#9" name="9"><h3>What do the various settings mean? (Accuracy, retry interval for accuracy, etc)</h3></a>
-                <ul>
-                    <li><strong>Time before logging</strong> - How long to wait after a point has been logged to try logging again.</li>
-                    <li><strong>Distance filter</strong> - When a point is available, the app will check to ensure that this much distance exists between the previous and current points. If it isn't this distance, the point is discarded.</li>
-                    <li><strong>Accuracy filter</strong> - When a point is available, the app will check to ensure that this point has a minimum accuracy specified.  If it does not match the specified accuracy, the point is discarded. This is useful if you are inside a building for a while.</li>
-                    <li><strong>Time interval for accuracy</strong> - When searching for a point, the app can continue searching for this many seconds until it finds a point that meets the accuracy and distance filter criteria above. </li>
-                </ul>
-            </div>
-
-
-            <div class="a-left">
-                <a href="#11" name="11"><h3>How do I make it last longer?</h3></a>
-                <p> Mainly, turn wifi off, turn mobile data off, turn background synchronization off, turn bluetooth off.  If you turn data off, you'll probably want to inject aGPS data regularly, there are apps that can do it for you.
-                    You can also try going into airplane mode which turns many things off.  When it comes to choosing between location sources - GPS vs network - GPS will be more battery hungry while network location is easier on the battery.</p>
-
-            </div>
-
-            <div class="a-left">
-                <a href="#12" name="12"><h3>I see the Android GPS icon active between the intervals I've set, why is that?</h3></a>
-                <p>It's how the Android OS has implemented its GPS system. When you say you want a
-                    point every 60 seconds (for example), that's actually a suggestion rather than an
-                    imperative, and so the time interval between GPS points is never guaranteed.
-                    GPSLogger has logic that checks the time difference, though, and will make sure
-                    that at least 60 seconds have passed before logging again.</p>
-
-            </div>
-
-            <div class="a-left">
-                <a href="#13" name="13"><h3>Why can't I remove the notification?</h3></a>
-                <p>As of newer versions of Android, removing the notification will cause the service to be killed.  As a result, the notification now needs to stay there.
-                    You may have seen a recent increase in the number of apps that need to sit in the notification bar for the same reason - to perform background services without being killed.</p>
-
-            </div>
-
-            <div class="a-left">
-                <a href="#14" name="14"><h3>Why haven't you developed <em>XYZ</em> feature?</h3></a>
-                <p>I work on GPSLogger in my spare time and I don't always have the time or resources to implement a feature. However, GPSLogger is open source. You are encouraged to contribute or get someone else to contribute a feature.</p>
-
-            </div>
-
-            <div class="a-left">
-                <a href="#15" name="15"><h3>Where can I contribute code and features?</h3></a>
-                <p>On <a href="https://github.com/mendhak/gpslogger" onclick="window.open(this.href);return false;">Github</a></p>
-
-            </div>
-
-            <div class="a-left">
-                <a href="#16" name="16"><h3>I've found a mistake in a translation!</h3></a>
-                <h3>Where can I contribute translations?</h3>
-                <p>On <a href="http://crowdin.net/project/gpslogger-for-android">Crowdin</a></p>
-
-            </div>
-
-
-            <div class="a-left">
-                <a href="#17" name="17"><h3>How is this different from other logging apps?</h3></a>
-                <p>It's meant to be more battery efficient. A lot of other apps, such as MyTracks,
-                    usually go with the assumption that you have a data connection available and your
-                    routes won't be very long.  They use CPU wakelocks and log points extremely frequently with high accuracy.
-                    The aim of GPSLogger is to log points and stay quiet.</p>
-
-            </div>
-
-            <div class="a-left">
-                <a href="#18" name="18"><h3>How does this integrate with Tasker/Llama or other automation frameworks?</h3></a>
-                <p>
-                    If your automation app can send intents, you can send intents to GPSLogger to get it to perform a few actions.
-                    For example, in Tasker, create a new action under Misc > Send Intent.
-                    <br/><br/>
-                    Action: <code>com.mendhak.gpslogger.GpsLoggingService</code><br/>
-                    Extra: <code>immediatestart:true</code> (others below)<br/>
-                    Target: <code>Service</code><br/>
-                </p>
-
-                    These are the extras you can send to GPSLogger:
-
-                <blockquote><ul>
-                    <li><code>immediatestart</code> - (true/false) Start logging immediately</li>
-                    <li><code>immediatestop</code> - (true/false) Stop logging</li>
-                    <li><code>logonce</code> - (true/false) Log a single point and stop</li>
-                    <li><code>setnextpointdescription</code> - (text) Sets the annotation text to use for the next point logged</li>
-                    <li><code>settimebeforelogging</code> - (number) Sets preference for time before logging option</li>
-                    <li><code>setdistancebeforelogging</code> - (number) Sets preference for distance before logging option</li>
-                    <li><code>setkeepbetweenfix</code> - (true/false) Sets preference whether to keep GPS on between fixes</li>
-                    <li><code>setretrytime</code> - (number) Sets preference for retry time</li>
-                    <li><code>setabsolutetimeout</code> - (number) Sets preference for absolute timeout</li>
-                    <li><code>setprefercelltower</code> - (true/false) Enables or disables the GPS or celltower listeners</li>
-
-                </ul></blockquote>
-
-                <p>You can also invoke the Start and Stop shortcuts that GPSLogger comes with.</p>
-
-            </div>
-
-            <div class="a-left">
-                <a href="#19" name="19"><h3>What are some recommended settings to save battery life?</h3></a>
-                <p>From location providers, choose only network and passive. Preferring to use network (cell towers) over GPS saves more battery.  You will also save more battery life if you keep the interval between points to about 60 seconds or more.  Note that any option to save on battery life will not guarantee accuracy.</p>
-            </div>
-
-            <div class="a-left">
-                <a href="#20" name="20"><h3>How can I define a preset file with my own values?</h3></a>
-                <p>Many people distribute GPSLogger to other people along with phones, with some preset values. If you create a file in the <a href="#7">default folder</a> or at <code>/sdcard/gpslogger.properties</code>, then GPSLogger will read this file each time it loads and apply those settings to the application.
-                <br />For example, in the file you can put <code>accuracy_before_logging=42</code> and that will reset the Accuracy Filter to 42 meters each time the application starts. There are many properties that can be applied and you can glean a <a href="https://github.com/mendhak/gpslogger/blob/master/gpslogger/src/main/java/com/mendhak/gpslogger/common/Utilities.java#L124">full list here</a>.</p>
-                <p>The most common examples of properties would be <code>log_gpx</code>, <code>log_kml</code>, <code>time_before_logging</code>, <code>opengts_*</code> for OpenGTS settings, <code>smtp_*</code> for email settings.</p>
-
-            </div>
-
-            <div class="a-left">
-                <a href="#100" name="100"><h3>How do I download it?</h3></a>
-                <p>Search for GPS Logger for Android in Google Play, or follow <a href="market://details?id=com.mendhak.gpslogger">this direct link</a>.</p>
-            </div>
-
-            <div class="a-left">
-                <a href="#101" name="101"><h3>How do I download it without using the Android market?</h3></a>
-                <p>You can download the APK file <a href="https://github.com/mendhak/gpslogger/releases">here</a>.</p>
-            </div>
-
-
-            <div class="a-left">
-                <a href="#102" name="102"><h3><i>Bugs, issues, code?</i></h3></a>
-                <p>You can add issues and view the source code at <a href="http://github.com/mendhak/gpslogger">github.com/mendhak/gpslogger</a></p>
-            </div>
-        </article>
-    </section>
-</div>
-
-<!-- search section
-================================================== -->
-<div id="search-section" class="container">
-
-    <a href="#screenshots" name="screenshots"><h2 class="subheader">More Screenshots</h2></a>
-
-    <article class="cf">
-
-        <div class="grid4 a-left first">
-            <h3>General Settings</h3>
-        </div>
-
-        <div class="grid8 a-right">
-            <img src="6.png" title="General Settings"/>
-            <hr/>
-        </div>
-
-    </article>
-
-    <article class="cf">
-
-        <div class="grid4 a-left first">
-            <h3>Logging Details</h3>
-        </div>
-
-        <div class="grid8 a-right">
-            <img src="7.png" title="Logging Details"/>
-            <hr/>
-
-            <img src="7a.png" title="Logging Details"/>
-            <hr/>
-
-            <img src="7b.png" title="Logging Details"/>
-            <hr/>
-        </div>
-
-    </article>
-
-    <article class="cf">
-
-        <div class="grid4 a-left first">
-            <h3>Auto send</h3>
-        </div>
-
-        <div class="grid8 a-right">
-            <img src="8.png" title="Auto send"/>
-            <hr/>
-        </div>
-
-    </article>
-
-    <article class="cf">
-
-        <div class="grid4 a-left first">
-            <h3>FTP Setup</h3>
-        </div>
-
-        <div class="grid8 a-right">
-            <img src="9.png" title="FTP"/>
-            <hr/>
-        </div>
-
-    </article>
-
-    <article class="cf">
-
-        <div class="grid4 a-left first">
-            <h3>Auto Email Setup</h3>
-        </div>
-
-        <div class="grid8 a-right">
-            <img src="10.png" title="Auto Email"/>
-            <hr/>
-        </div>
-
-    </article>
-
-    <article class="cf">
-
-        <div class="grid4 a-left first">
-            <h3>Open GTS Setup</h3>
-        </div>
-
-        <div class="grid8 a-right">
-            <img src="11.png" title="Open GTS"/>
-            <hr/>
-        </div>
-
-    </article>
-
-
-
-    <article class="cf">
-
-        <div class="grid4 a-left first">
-            <h3>OpenStreetMap Settings</h3>
-        </div>
-
-        <div class="grid8 a-right">
-            <img src="13.png" title="OSM Settings"/>
-            <hr/>
-        </div>
-
-    </article>
-
-
-
-</div>
-
-</div>
-<!-- end content-wrap -->
-
-<!-- footer
-================================================== -->
-<footer class="container">
-
-    <div class="grid3 first">
-
-        <h3>Links</h3>
-
-        <ul class="link-list">
-            <li><a href="https://github.com/mendhak/">Github</a></li>
-            <li><a href="http://mendhak.com/">Flickr Tools</a></li>
-            <li><a href="http://code.mendhak.com/">Other projects</a></li>
-            <li><a href="https://www.flickr.com/photos/mendhak/">Photos</a></li>
-            <li><a href="https://github.com/mendhak/gpslogger/blob/master/assets/text/privacypolicy.md#privacy-policy">Privacy Policy</a></li>
-        </ul>
-
-    </div>
-
-    <div class="grid3">
-
-        <h3>Photostream</h3>
-
-        <ul class="photostream">
+    <footer class="container">
+              <ul class="photostream">
             <li><a href="http://mendhak.com/url/69135870@N00/1"><img width="150" height="150" alt="thumbnail" src="http://mendhak.com/img/69135870@N00/1/q"></a></li>
             <li><a href="http://mendhak.com/url/69135870@N00/2"><img width="150" height="150" alt="thumbnail" src="http://mendhak.com/img/69135870@N00/2/q"></a></li>
             <li><a href="http://mendhak.com/url/69135870@N00/3"><img width="150" height="150" alt="thumbnail" src="http://mendhak.com/img/69135870@N00/3/q"></a></li>
@@ -638,40 +346,9 @@
             <li><a href="http://mendhak.com/url/69135870@N00/5"><img width="150" height="150" alt="thumbnail" src="http://mendhak.com/img/69135870@N00/5/q"></a></li>
             <li><a href="http://mendhak.com/url/69135870@N00/6"><img width="150" height="150" alt="thumbnail" src="http://mendhak.com/img/69135870@N00/6/q"></a></li>
         </ul>
-
-    </div>
-
-    <!-- footer-bottom
-    ================================================== -->
-    <div id="footer-bottom" class="grid12 first">
-
-        <p>
-
-            Design by <a href="http://www.styleshout.com/">styleshout</a>
-        </p>
-
-        <!-- Back To Top Button -->
-        <div id="go-top"><a href="#" title="Back to Top">Go To Top</a></div>
-
-    </div>
-
-</footer>
-
-<!-- Java Script
-================================================== -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
-
-<script src="js/custom.js"></script>
-
-<script type="text/javascript">
-    // expanding, collapsing div script
-    $(document).ready(function () {
-        $(".toggle").click(function () {
-            $(".hiddentext").slideToggle(500);
-        });
-    });
-</script>
-</body>
-
+      <section class="copy">
+        <p>&mdash; &copy; 2016 Mendhak &mdash;</p>
+      </section>
+    </footer>
+  </body>
 </html>

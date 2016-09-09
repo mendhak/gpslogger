@@ -1,0 +1,19 @@
+## Other links
+Submit your [feature requests on Github](https://github.com/mendhak/gpslogger/issues).
+
+Please note that I work on GPSLogger in my spare time and I may not always have the time or resources to implement a feature. However, GPSLogger is open source. You are encouraged to contribute or get someone else to contribute a feature.
+
+
+### [Source code](https://github.com/mendhak/gpslogger/)
+
+### [Contribute translations on Crowdin](https://crowdin.com/project/gpslogger-for-android)
+
+### [Licensed under GPLv2](license.html)
+
+### [Read the privacy policy](privacypolicy.html)
+
+### [Open source libraries used](opensourcelibraries.html)
+
+### [Donate Paypal](https://paypal.me/mendhak/)
+
+### [Donate Bitcoin](https://coinbase.com/mendhak)
