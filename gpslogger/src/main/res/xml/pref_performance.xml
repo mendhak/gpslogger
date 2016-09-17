@@ -76,7 +76,7 @@
             android:title="@string/altitude_subtractoffset_title"
             android:summary="@string/altitude_subtractoffset_summary"
             android:dialogTitle="@string/settings_enter_meters"
-            android:numeric="integer"
+            android:inputType="numberSigned"
             android:defaultValue="0"/>
     </PreferenceCategory>
 
