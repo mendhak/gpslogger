@@ -1,7 +1,8 @@
 var fs = require('fs');
+var fse = require('fs-extra');
 var marked = require('marked');
 var async = require('async');
-var ncp = require('ncp').ncp;
+
 
 var docsOutPath = '../../docs/';
 var gpsLoggerFaqsPath = '../text/faq/';
@@ -153,17 +154,16 @@ function renderFullPages(callback){
 }
 
 function copyStaticToOutput(callback) {
-  ncp('static', docsOutPath, function (err) {
-    if (err) {
-      return console.error(err);
-    }
-
-    callback()
-  });
+    fse.copy('static', docsOutPath, function(err){
+        if (err) {
+            return console.error(err);
+        }
+        callback();
+    });
 }
 
 function copyContentImagesToOutput(callback) {
-  ncp('content/images', docsOutPath + 'images', function (err) {
+    fse.copy('content/images', docsOutPath + 'images', function (err) {
     if (err) {
       return console.error(err);
     }
@@ -172,7 +172,7 @@ function copyContentImagesToOutput(callback) {
 }
 
 function copyFaqImagesToOutput(callback){
-  ncp('../text/faq/images', docsOutPath+'images', function(err){
+    fse.copy('../text/faq/images', docsOutPath+'images', function(err){
         if (err) {
           return console.error(err);
         }

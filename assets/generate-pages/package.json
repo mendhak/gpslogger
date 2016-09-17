@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "async": "~2.0.1",
+    "fs-extra": "~0.30.0",
     "marked": "~0.3.6",
-    "ncp": "~2.0.0"
   }
 }
