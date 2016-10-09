@@ -327,7 +327,6 @@
   <string name="listeners_summary">Способ определения местоположения; GPS - для спутников, Сеть - для сотовых вышек/WiFi, Пассивно - сканирование мест расположения, запрашиваемое из других приложений.</string>
   <string name="listeners_title">Источники определения местоположения</string>
   <string name="autosend_frequency_hint">Количество минут</string>
-  <string name="pref_logging_file_no_permissions">Эта папка не доступна для записи GPSLogger</string>
   <string name="pref_gpsvisualizer">Визуализация статистики GPS и просмотр графиков</string>
   <string name="new_file_custom_each_time_title">Задавать имя файла при каждом запуске</string>
   <string name="new_file_custom_each_time_summary">Запрашивать имя файла каждый раз при запуске логирования</string>

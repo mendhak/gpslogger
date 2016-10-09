@@ -320,7 +320,6 @@
   <string name="listeners_summary">Які провайдери використовуються коли доступні; GPS для супутників, Мережа для стільниковіх веж та Wi-Fi, Пасивно - це спеціальний провайдер, який використовує дані з інших додатків.</string>
   <string name="listeners_title">Провайдери розташування</string>
   <string name="autosend_frequency_hint">Кількість хвилин</string>
-  <string name="pref_logging_file_no_permissions">Ця папка не доступна GPSLogger для запису</string>
   <string name="pref_gpsvisualizer">Візуалізація статистики журналу GPS та графіки</string>
   <string name="new_file_custom_each_time_title">Запросити ім\'я файлу при кожному старті</string>
   <string name="new_file_custom_each_time_summary">Запитувати власне ім\'я файлу кожного разу, коли починаєтся запис</string>

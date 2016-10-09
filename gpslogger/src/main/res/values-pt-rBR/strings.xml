@@ -291,6 +291,7 @@
   <string name="gpslogger_folder_title">Salvar na pasta</string>
   <string name="gpslogger_folder_summary">Onde deseja salvar os arquivos de log, padronizado para /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Pasta</string>
+  <string name="new_file_custom_message">Você pode usar %SER para número de série do dispositivo, %YEAR, %MONTH, %DAY, %HOUR, %MIN, %PROFILE, %VER para a versão</string>
   <string name="new_file_prefix_serial_title">Prefixar o número de série do dispositivo para o nome do arquivo</string>
   <string name="new_file_prefix_serial_summary">Este é o número de série encontrado no seu status do telefone </string>
   <string name="txt_travel_duration">Duração:</string>
@@ -322,10 +323,11 @@
   <string name="listeners_summary">Quais provedores de localização utilizar quando eles estão disponíveis; GPS para satélites, rede para torre de celular/Wi-Fi, Passivo é um provedor especial que atende à locais abrangidos por outras aplicações.</string>
   <string name="listeners_title">Provedores de localização</string>
   <string name="autosend_frequency_hint">Número de minutos</string>
-  <string name="pref_logging_file_no_permissions">Essa pasta não permite a gravação pelo GPSLogger</string>
   <string name="pref_gpsvisualizer">Visualizar gráficos e estatísticas do log GPS</string>
   <string name="new_file_custom_each_time_title">Pedir um nome de arquivo em cada início</string>
   <string name="new_file_custom_each_time_summary">Solicitar um nome de arquivo personalizado cada vez que o Log é iniciado</string>
+  <string name="new_file_custom_keep_changing_title">Permitir nome de arquivo customizado para modificar dinamicamente</string>
+  <string name="new_file_custom_keep_changing_summary">A alteração de configurações de nomes de arquivos altera os nomes dos arquivos. Por exemplo, se usar %HOUR, um novo arquivo será criado a cada hora. Desmarque para manter um nome fixo.</string>
   <string name="donate_app">Doar (app)</string>
   <string name="donate_bitcoin">Bitcoin</string>
   <string name="tip_coffee">Compre-me um café</string>

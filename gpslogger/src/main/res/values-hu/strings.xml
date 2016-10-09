@@ -320,7 +320,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="listeners_summary">Használható helyszolgáltatók. Műhold alapú GPS, mobil adótornyok vagy wifi alapú hálózati, vagy passzív; ez egy speciális szolgáltató, amely a más alkalmazásokban lekérdezett pozíciókat figyeli.</string>
   <string name="listeners_title">Helyszolgáltatók</string>
   <string name="autosend_frequency_hint">Percek száma</string>
-  <string name="pref_logging_file_no_permissions">Ez a mappa nem írható a GPSLogger számára</string>
   <string name="pref_gpsvisualizer">GPS napló statisztika és grafikák megjelenítése</string>
   <string name="new_file_custom_each_time_title">Fájlnév kérése minden indításkor</string>
   <string name="new_file_custom_each_time_summary">Egyedi fájlnevet kér a naplózás minden indításakor</string>

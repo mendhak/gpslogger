@@ -294,6 +294,7 @@
   <string name="txt_number_of_points">Liczba punktów</string>
   <string name="save">Zapisz</string>
   <string name="pref_filedetails_title">Szczegóły pliku i folderu</string>
+  <string name="absolute_timeout_summary">Liczba sekund, po których aplikacja przestaje próbować określić lokalizację, niezależnie od innych ustawień. Jest to szczególnie przydatne w przypadku, gdy jesteś wewnątrz budynków, by zapobiec nadmiernemu zużyciu baterii. Ustaw na 0 dla braku limitu.</string>
   <string name="txt_latitude_short">Dług.</string>
   <string name="txt_longitude_short">Szer.</string>
   <string name="log_nmea_title">Zapisz do pliku NMEA</string>
@@ -303,11 +304,11 @@
   <string name="listeners_passive">Pasywne</string>
   <string name="listeners_title">Dostawcy usług lokalizacji</string>
   <string name="autosend_frequency_hint">Liczba minut</string>
-  <string name="pref_logging_file_no_permissions">GPSLogger nie posiada praw do zapisu w tym folderze</string>
   <string name="pref_gpsvisualizer">Wizualizuj statystyki logowania</string>
   <string name="new_file_custom_each_time_title">Pytaj o nazwę pliku przy każdym uruchomieniu</string>
   <string name="donate_app">Przekaż darowiznę (aplikacja)</string>
   <string name="donate_bitcoin">Bitcoin</string>
+  <string name="tip_coffee">Kup mi kawę</string>
   <string name="pref_performance_activityrecognition">Rozpoznawanie aktywności</string>
   <string name="activityrecognition_dont_log_if_still">Nie loguj, jeśli się nie ruszam</string>
   <string name="txt_activity">Aktywność:</string>
@@ -320,6 +321,7 @@
   <string name="activity_walking">Spacer</string>
   <string name="activity_unknown">Nieznana</string>
   <string name="altitude_subtractgeoidheight_title">Użyj MSL zamiast WGS84</string>
+  <string name="upload_failure">Nie udało się przesłać pliku</string>
   <string name="autosend_wifionly_title">Wysyłaj wyłącznie przez Wi-Fi</string>
   <string name="logview_showlocationsonly">Tylko lokalizacje</string>
   <string name="logview_autoscroll">Automatyczne przewijanie</string>

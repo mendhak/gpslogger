@@ -319,7 +319,6 @@
   <string name="listeners_summary">どの位置プロバイダを利用するか？。GPS：衛星、ネットワーク：携帯基地局/Wifi、パッシブ:他のアプリケーションで取得された位置情報を使う特別なプロバイダ</string>
   <string name="listeners_title">位置情報プロバイダ</string>
   <string name="autosend_frequency_hint">何分？</string>
-  <string name="pref_logging_file_no_permissions">指定されたフォルダはGPSLoggerで書き込みできません</string>
   <string name="pref_gpsvisualizer">GPS のログの統計情報とグラフ表示</string>
   <string name="new_file_custom_each_time_title">起動の度にファイル名の入力を要求する</string>
   <string name="new_file_custom_each_time_summary">ログを開始する度にカスタムファイル名の入力プロンプトを表示する</string>

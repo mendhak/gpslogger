@@ -299,7 +299,6 @@
   <string name="listeners_cell">Nettverk</string>
   <string name="listeners_passive">Passiv</string>
   <string name="autosend_frequency_hint">Antall minutter</string>
-  <string name="pref_logging_file_no_permissions">Mappen er ikke skrivbar for GPSLogger</string>
   <string name="pref_gpsvisualizer">Visualiser GPS Logg statistikk og diagrammer</string>
   <string name="new_file_custom_each_time_title">Be om et filnavn ved hver oppstart</string>
   <string name="new_file_custom_each_time_summary">Be om et egendefinert filnavn hver gang logging startes</string>

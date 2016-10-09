@@ -287,6 +287,7 @@
   <string name="gpslogger_folder_title">In Ordner speichern</string>
   <string name="gpslogger_folder_summary">Wo soll das Protokoll gespeichert werden?(normalerweise in /sdcard/GPSLogger)</string>
   <string name="autoftp_directory">Verzeichnis</string>
+  <string name="new_file_custom_message">Du kannst %SER für Geräteseriennummer, sowie %YEAR, %MONTH, %DAY, %HOUR, %MIN, %PROFILE und %VER für Version nutzen</string>
   <string name="new_file_prefix_serial_title">Geräteseriennummer an den Dateinamen anhängen</string>
   <string name="new_file_prefix_serial_summary">Die Seriennummer deines Gerätes lautet: </string>
   <string name="txt_travel_duration">Dauer:</string>
@@ -318,11 +319,11 @@
   <string name="listeners_summary">Welche Standortbestimmung je nach Verfügbarkeit genutzt werden soll; GPS-Satelliten, Netzwerk (WLAN / Mobilfunknetz), Passiv (nutzt Standortbestimmungsanfragen welche von anderen Apps angefordert werden).</string>
   <string name="listeners_title">Standortbestimmung mittels</string>
   <string name="autosend_frequency_hint">Minuten</string>
-  <string name="pref_logging_file_no_permissions">GPSLogger hat in diesem Ordner keine Berechtigung zum Schreiben</string>
   <string name="pref_gpsvisualizer">GPS Logs und Diagramme visualisieren</string>
   <string name="new_file_custom_each_time_title">Bei jedem Start nach einem Dateinamen fragen</string>
   <string name="new_file_custom_each_time_summary">Eingabeaufforderung für einen Dateinamen, jedes Mal wenn die Protokollierung gestartet wird</string>
   <string name="new_file_custom_keep_changing_title">Erlaube, dass sich benutzerdefinierte Dateinamen dynamisch ändern</string>
+  <string name="new_file_custom_keep_changing_summary">Erlaube Änderungen des Dateinamens bei Änderungen benutzerdefinierter Werte. Beispielsweise wird jede Stunde eine neue Datei erzeugt, wenn %HOUR genutzt wird. Haken entfernen um statisch zu bleiben.</string>
   <string name="donate_app">Spenden (App)</string>
   <string name="donate_bitcoin">Bitcoin</string>
   <string name="tip_coffee">Spende mir einen Kaffee</string>

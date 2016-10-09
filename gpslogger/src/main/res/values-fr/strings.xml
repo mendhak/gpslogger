@@ -132,7 +132,7 @@ une plus grande précision à basses fréquences.</string>
   <string name="autoemail_title">Email</string>
   <string name="autoemail_summary">Emails automatique du  fichier d\'enregistrement à une adresse de votre choix</string>
   <string name="please_wait">Attendre s\'il vous plaît.</string>
-  <string name="autoemail_target">Adresses de courriel ciblées</string>
+  <string name="autoemail_target">Envoyer à ces adresses</string>
   <string name="autosend_frequency_display">Après %s minutes</string>
   <string name="autoemail_frequency_whenistop">Lorsque j\'appuie sur arrêt</string>
   <string name="autoemail_smtp_category">Paramètres de courriel</string>
@@ -319,7 +319,6 @@ une plus grande précision à basses fréquences.</string>
   <string name="listeners_summary">Quels fournisseurs de position utiliser lorsqu\'ils sont disponibles : satellites GPS, réseau de téléphonie cellulaire/wifi. Passif est un fournisseur spécial qui écoute les positions demandées par d\'autres applications.</string>
   <string name="listeners_title">Fournisseurs de position</string>
   <string name="autosend_frequency_hint">Nombre de minutes</string>
-  <string name="pref_logging_file_no_permissions">GPSLogger ne peut pas écrire dans ce fichier</string>
   <string name="pref_gpsvisualizer">Visualiser les statistiques et graphiques des logs du GPS</string>
   <string name="new_file_custom_each_time_title">Demander un nom de fichier à chaque démarrage</string>
   <string name="new_file_custom_each_time_summary">Demande un nom de fichier à chaque fois que l\'enregistrement est lancé</string>
