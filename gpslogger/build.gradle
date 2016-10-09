@@ -23,7 +23,7 @@ apply plugin: 'let'
 //Generating PGP
 apply plugin: 'signing'
 //Generating colorful output
-apply from: 'https://raw.githubusercontent.com/mendhak/Gradle-Travis-Colored-Output/master/ColoredOutput.gradle'
+apply from: 'buildtools/ColoredOutput.gradle'
 
 repositories {
     mavenCentral()
@@ -37,11 +37,6 @@ repositories {
     maven {
         //GPSLogger's own 3rd party JARs not in any repo
         url "https://raw.github.com/mendhak/gpslogger-support-files/master/repository"
-    }
-
-    maven {
-        //dirchooser needs com.gu needs this
-        url "https://guardian.github.com/maven/repo-releases"
     }
 
 }
@@ -219,10 +214,8 @@ dependencies {
     //The single letter text icons
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 
-    //Directory chooser
-    compile ('net.rdrei.android.dirchooser:library:3.2@aar') {
-        transitive = true
-    }
+    //Directory chooser - https://github.com/spacecowboy/NoNonsense-FilePicker
+    compile 'com.nononsenseapps:filepicker:3.0.0'
 
     //OKHTTP client
     compile 'com.squareup.okhttp3:okhttp:3.2.0'

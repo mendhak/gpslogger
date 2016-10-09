@@ -318,7 +318,6 @@
   <string name="listeners_summary">Koje lokacijske pružatelje koristiti kada su na raspolaganju; GPS satelite, mreža za baznu stanicu/wifi, pasivno je posebna usluga koja prima lokacije primljene iz druge aplikacije.</string>
   <string name="listeners_title">Pružatelji lokacije</string>
   <string name="autosend_frequency_hint">Broj minuta</string>
-  <string name="pref_logging_file_no_permissions">U tu mapu nemože pisati GPSLogger</string>
   <string name="pref_gpsvisualizer">Vizualizirajte GPS log statistike i grafove</string>
   <string name="new_file_custom_each_time_title">Pitati za ime datoteke kod svakog starta</string>
   <string name="new_file_custom_each_time_summary">Upitaj za naziv prilagođene datoteke svaki put kada počinje zapisivanje</string>

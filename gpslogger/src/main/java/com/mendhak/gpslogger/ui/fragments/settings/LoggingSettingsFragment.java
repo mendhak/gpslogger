@@ -17,11 +17,14 @@
 
 package com.mendhak.gpslogger.ui.fragments.settings;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.InputType;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -32,25 +35,22 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
-import net.rdrei.android.dirchooser.DirectoryChooserConfig;
-import net.rdrei.android.dirchooser.DirectoryChooserFragment;
+import com.nononsenseapps.filepicker.FilePickerActivity;
 import org.slf4j.Logger;
 import java.io.File;
-
-
 
 public class LoggingSettingsFragment extends PreferenceFragment
         implements
         Preference.OnPreferenceClickListener,
-        Preference.OnPreferenceChangeListener,
-        DirectoryChooserFragment.OnFragmentInteractionListener
+        Preference.OnPreferenceChangeListener
 {
 
     private static final Logger LOG = Logs.of(LoggingSettingsFragment.class);
-    private DirectoryChooserFragment folderDialog;
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    private static int NONONSENSE_DIRPICKER_ACTIVITYID = 919191;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,16 +111,24 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
         if (preference.getKey().equals("gpslogger_folder")) {
 
-            final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
-                    .initialDirectory(preferenceHelper.getGpsLoggerFolder())
-                    .newDirectoryName("GPSLogger")
-                    .allowReadOnlyDirectory(false)
-                    .allowNewDirectoryNameModification(true)
-                    .build();
 
-            folderDialog = DirectoryChooserFragment.newInstance(config);
-            folderDialog.setTargetFragment(this, 0);
-            folderDialog.show(getActivity().getFragmentManager(), null);
+            // This always works
+            Intent i = new Intent(getActivity(), FilePickerActivity.class);
+            // This works if you defined the intent filter
+            // Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+
+            // Set these depending on your use case. These are the defaults.
+            i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
+            i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, true);
+            i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_DIR);
+
+            // Configure initial directory by specifying a String.
+            // You could specify a String like "/storage/emulated/0/", but that can
+            // dangerous. Always use Android's API calls to get paths to the SD-card or
+            // internal memory.
+            i.putExtra(FilePickerActivity.EXTRA_START_PATH, preferenceHelper.getGpsLoggerFolder());
+
+            startActivityForResult(i, NONONSENSE_DIRPICKER_ACTIVITYID);
 
             return true;
         }
@@ -147,6 +155,26 @@ public class LoggingSettingsFragment extends PreferenceFragment
         }
 
         return false;
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == NONONSENSE_DIRPICKER_ACTIVITYID && resultCode == Activity.RESULT_OK) {
+
+            Uri uri = data.getData();
+            LOG.debug("Directory chosen - " + uri.getPath());
+
+            if(! Files.isAllowedToWriteTo(uri.getPath())){
+                Dialogs.alert(getString(R.string.error),getString(R.string.pref_logging_file_no_permissions),getActivity());
+            }
+            else {
+                preferenceHelper.setGpsLoggerFolder(uri.getPath());
+                Preference gpsloggerFolder = findPreference("gpslogger_folder");
+                gpsloggerFolder.setSummary(uri.getPath());
+            }
+
+        }
     }
 
 
@@ -208,30 +236,5 @@ public class LoggingSettingsFragment extends PreferenceFragment
         prefDynamicFileName.setEnabled(preferenceHelper.shouldCreateCustomFile());
     }
 
-    @Override
-    public void onSelectDirectory(@NonNull String folderPath) {
-        folderDialog.dismiss();
 
-        LOG.debug(folderPath);
-
-        File folder = new File(folderPath);
-
-        if(!folder.isDirectory()) {
-            folderPath = folder.getParent();
-        }
-
-        if(!folder.canWrite()){
-            Dialogs.alert(getString(R.string.sorry), getString(R.string.pref_logging_file_no_permissions), getActivity());
-            return;
-        }
-
-        preferenceHelper.setGpsLoggerFolder(folderPath);
-        Preference gpsloggerFolder = findPreference("gpslogger_folder");
-        gpsloggerFolder.setSummary(folderPath);
-    }
-
-    @Override
-    public void onCancelChooser() {
-        folderDialog.dismiss();
-    }
 }

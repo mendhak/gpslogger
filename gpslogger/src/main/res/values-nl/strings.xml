@@ -317,7 +317,6 @@
   <string name="listeners_summary">Welke providers gebruikt Worden Als ,ze beshikbaar zijn. GPS voor satelieten, netwerk voor cell toren/WiFi, passief is een provider die localizeringsaanvragen van andere toepassingen onderschept.</string>
   <string name="listeners_title">Localisering providers</string>
   <string name="autosend_frequency_hint">Aantal minuten</string>
-  <string name="pref_logging_file_no_permissions">GPSLogger kan niet in die map schrijven</string>
   <string name="pref_gpsvisualizer">Laat GPS statestieken en grafieken zien</string>
   <string name="new_file_custom_each_time_title">Vraag elke elke keer om een bestandsnaam bij starten</string>
   <string name="new_file_custom_each_time_summary">Vraag elke keer om een bestandsnaam als het loggen wordt gestart</string>

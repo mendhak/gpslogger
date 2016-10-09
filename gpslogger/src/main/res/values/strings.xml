@@ -431,7 +431,7 @@
     <string name="listeners_summary">Which location providers to use when they are available; GPS for satellites, Network for cell tower/wifi, Passive is a special provider that listens for locations requested from other applications.</string>
     <string name="listeners_title">Location providers</string>
     <string name="autosend_frequency_hint">Number of minutes</string>
-    <string name="pref_logging_file_no_permissions">That folder is not writable by GPSLogger</string>
+    <string name="pref_logging_file_no_permissions">That directory is not writable by GPSLogger. Please select another directory to write to.</string>
     <string name="pref_gpsvisualizer">Visualize GPS log stats and graphs</string>
     <string name="new_file_custom_each_time_title">Ask for a file name on every start</string>
     <string name="new_file_custom_each_time_summary">Prompt for a custom file name each time the logging is started</string>

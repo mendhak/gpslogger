@@ -208,7 +208,9 @@
   <string name="pref_autosend_summary">이메일, 공유, 업로드 설정</string>
   <string name="shortcut_start">시작</string>
   <string name="shortcut_stop">중지</string>
+  <string name="shortcut_pickaction">작업 선택</string>
   <string name="log_opengts_title">OpenGTS 서버에 로깅 하기</string>
+  <string name="log_opengts_summary">GPRMC 데이터를 OpenGTS 온라인 서버에 전송.</string>
   <string name="opengts_setup_title">OpenGTS</string>
   <string name="autoopengts_server_category">OpenGTS 설정</string>
   <string name="autoopengts_server">서버</string>

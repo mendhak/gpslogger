@@ -315,7 +315,6 @@
   <string name="listeners_summary">Dịch vụ cung cấp vị trí nào sẽ sử dụng khi có: GPS cho vệ tinh, Mạng cho 3G/WiFi. Passive là dịch vụ đặc biệt để nhận vị trí được yêu cầu từ các ứng dụng khác.</string>
   <string name="listeners_title">Nhà cung cấp vị trí</string>
   <string name="autosend_frequency_hint">Số phút</string>
-  <string name="pref_logging_file_no_permissions">GPSLogger không thể ghi được vào thư mục đó</string>
   <string name="pref_gpsvisualizer">Hiển thị trạng thái và đồ họa GPS</string>
   <string name="new_file_custom_each_time_title">Yêu cầu tên file mỗi khi chạy</string>
   <string name="new_file_custom_each_time_summary">Nhắc nhập tên file mỗi khi chạy log</string>

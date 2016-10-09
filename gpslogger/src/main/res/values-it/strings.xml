@@ -96,8 +96,11 @@
   <!-- Settings -->
   <string name="pref_logging_title">Dettagli registrazione</string>
   <string name="log_gpx_title">Salva in GPX</string>
+  <string name="log_gpx_summary">Registra le posizioni su file GPX v 1.0</string>
   <string name="log_kml_title">Salva in KML</string>
+  <string name="log_kml_summary">Registra le posizioni su file KML v 2.2</string>
   <string name="log_plain_text_title">Registra in un file di testo</string>
+  <string name="log_plain_text_summary">Registra le posizioni su file CSV</string>
   <string name="new_file_creation_title">Creazione di nuovi file</string>
   <string name="new_file_creation_summary">Creare un nuovo file per ogni giorno oppure ad ogni avvio di registrazione.</string>
   <string name="new_file_creation_onceaday">Un file al giorno</string>
@@ -283,6 +286,7 @@
   <string name="gpslogger_folder_title">Salva nella cartella</string>
   <string name="gpslogger_folder_summary">Dove salvare i files, default in /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Cartella</string>
+  <string name="new_file_custom_message">È possibile utilizzare %SER per il seriale del dispositivo, %YEAR, %MONTH, %DAY, %HOUR, %MIN, %PROFILE, %VER per la versione</string>
   <string name="new_file_prefix_serial_title">Premetti al nome del file il numero seriale del dispositivo</string>
   <string name="new_file_prefix_serial_summary">Questo è il numero seriale del tuo dispositivo </string>
   <string name="txt_travel_duration">Durata:</string>
@@ -314,7 +318,6 @@
   <string name="listeners_summary">Quali fornitori di posizione usare se disponibili; GPS da satellite, rete cellulare/wifi, Passivo è un fornitore speciale che intercetta le richieste di posizione dalla altre applicazioni.</string>
   <string name="listeners_title">Fornitori di posizione</string>
   <string name="autosend_frequency_hint">Numero di minuti</string>
-  <string name="pref_logging_file_no_permissions">La cartella non è scrivibile da GPSLogger</string>
   <string name="pref_gpsvisualizer">Visualizza statistiche e grafici</string>
   <string name="new_file_custom_each_time_title">Chiedi il nome del file ogni volta che inizia una registrazione</string>
   <string name="new_file_custom_each_time_summary">Chiedi il nome del file ogni volta che inizia una registrazione</string>
