@@ -105,4 +105,8 @@ public class Files {
             });
         }
     }
+
+    public static boolean isAllowedToWriteTo(String gpsLoggerFolder) {
+        return new File(gpsLoggerFolder).canWrite();
+    }
 }

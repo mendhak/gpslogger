@@ -34,6 +34,8 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Files;
+import com.mendhak.gpslogger.ui.Dialogs;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
@@ -97,6 +99,11 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
 
         if (Session.isStarted()) {
             toggleLogging();
+            return;
+        }
+
+        if(! Files.isAllowedToWriteTo(preferenceHelper.getGpsLoggerFolder())){
+            Dialogs.alert(getString(R.string.error),getString(R.string.pref_logging_file_no_permissions) + "<br />" + preferenceHelper.getGpsLoggerFolder(), getActivity());
             return;
         }
 

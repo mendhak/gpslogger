@@ -35,6 +35,7 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 import com.nononsenseapps.filepicker.FilePickerActivity;
@@ -164,7 +165,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
             Uri uri = data.getData();
             LOG.debug("Directory chosen - " + uri.getPath());
 
-            if(! new File(uri.getPath()).canWrite()){
+            if(! Files.isAllowedToWriteTo(uri.getPath())){
                 Dialogs.alert(getString(R.string.error),getString(R.string.pref_logging_file_no_permissions),getActivity());
             }
             else {
