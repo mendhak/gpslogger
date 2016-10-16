@@ -11,6 +11,7 @@ buildscript {
         classpath 'com.canelmas.let:let-plugin:0.1.10'
         classpath "com.mendhak.gradlecrowdin:crowdin-plugin:0.0.9"
         classpath 'org.jacoco:org.jacoco.core:0.7.4.201502262128'
+        classpath "com.moowork.gradle:gradle-node-plugin:0.13"
     }
 }
 
@@ -24,6 +25,8 @@ apply plugin: 'let'
 apply plugin: 'signing'
 //Generating colorful output
 apply from: 'buildtools/ColoredOutput.gradle'
+//Generate help pages
+apply plugin: 'com.moowork.node'
 
 repositories {
     mavenCentral()
@@ -365,6 +368,21 @@ if (project.hasProperty("CROWDIN_API_KEY")) {
 //        projectId = 'gpslogger-for-android'
 //        sourceFile = "$projectDir/src/main/res/values/strings_faq.xml"
 //    }
+}
+
+task buildDocs(group: "docs", type: NodeTask, dependsOn:"installNodeModules") {
+    npmInstall
+    script = file('../assets/generate-pages/index.js')
+    execOverrides {
+        it.workingDir = '../assets/generate-pages'
+    }
+}
+
+task installNodeModules(group:"docs", type:NpmTask){
+    args = ['install']
+    execOverrides {
+        it.workingDir = '../assets/generate-pages'
+    }
 }
 
 
