@@ -11,8 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import com.mendhak.gpslogger.common.AppSettings;
 
-import java.io.File;
-import java.io.FilenameFilter;
+import java.io.*;
 
 public class Files {
     /**
@@ -109,4 +108,39 @@ public class Files {
     public static boolean isAllowedToWriteTo(String gpsLoggerFolder) {
         return new File(gpsLoggerFolder).canWrite();
     }
+
+    public static String getAssetFileAsString(String pathToAsset, Context context){
+        BufferedReader in = null;
+        try {
+            StringBuilder buf = new StringBuilder();
+            InputStream is = context.getAssets().open(pathToAsset);
+            in = new BufferedReader(new InputStreamReader(is));
+
+            String str;
+            boolean isFirst = true;
+            while ( (str = in.readLine()) != null ) {
+                if (isFirst)
+                    isFirst = false;
+                else
+                    buf.append('\n');
+                buf.append(str);
+            }
+            return buf.toString();
+        } catch (IOException e) {
+//            Log.e(TAG, "Error opening asset " + name);
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+//                    Log.e(TAG, "Error closing asset " + name);
+                }
+            }
+        }
+
+        return null;
+
+    }
+
+
 }

@@ -42,6 +42,9 @@ repositories {
         url "https://raw.github.com/mendhak/gpslogger-support-files/master/repository"
     }
 
+    maven {
+        url "https://s3.amazonaws.com/repo.commonsware.com"
+    }
 }
 
 android {
@@ -234,6 +237,9 @@ dependencies {
     //Dropbox API 2
     compile 'com.dropbox.core:dropbox-core-sdk:2.0.5'
 
+    //Markdown to HTML library
+    compile 'com.commonsware.cwac:anddown:0.2.4'
+
     //Need to specify the companion wearable app
     wearApp project(":gpsloggerwear")
 
@@ -362,12 +368,6 @@ if (project.hasProperty("CROWDIN_API_KEY")) {
                 ["strings.xml","$projectDir/src/main/res/values/strings.xml"]
         ]
     }
-
-//    crowdinUpload {
-//        apiKey = CROWDIN_API_KEY
-//        projectId = 'gpslogger-for-android'
-//        sourceFile = "$projectDir/src/main/res/values/strings_faq.xml"
-//    }
 }
 
 task buildDocs(group: "docs", type: NodeTask, dependsOn:"installNodeModules") {
@@ -384,4 +384,20 @@ task installNodeModules(group:"docs", type:NpmTask){
     }
 }
 
+task copyFAQsIntoAssets(group:"docs", type:Copy){
+    from '../assets/text/faq'
+    into 'src/main/assets/faq/'
+    include('*.md')
+}
+
+task deleteFAQsAssets(group:"docs", type:Delete){
+    def dirName = 'src/main/assets/faq'
+    fileTree( dirName ).include('*.md').each{
+            f ->
+                delete "${dirName}/${f}"
+        }
+}
+
+preBuild.dependsOn copyFAQsIntoAssets
+clean.dependsOn deleteFAQsAssets
 

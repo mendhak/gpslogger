@@ -9,6 +9,8 @@ import com.mendhak.gpslogger.R;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Strings {
     /**
@@ -317,6 +319,28 @@ public class Strings {
 
 
         return locales;
+    }
+
+    public static String getSanitizedMarkdownForFaqView(String md){
+        if(Strings.isNullOrEmpty(md)){ return "";}
+
+        //         \[[^\]]+\]\(((?!http)[^\)]+)\)
+        //         Matches any Markdown link that isn't starting with http...
+        String output = md;
+
+        Matcher imgMatcher = Pattern.compile("(!\\[[^\\]]+\\]\\((?!http)[^\\)]+\\))", Pattern.MULTILINE).matcher(md);
+        while(imgMatcher.find()){
+            String group = imgMatcher.group(1);
+            output = output.replace(group,"");
+        }
+
+        Matcher linkMatcher = Pattern.compile("\\[[^\\]]+\\]\\(((?!http)[^\\)]+)\\)", Pattern.MULTILINE).matcher(md);
+        while(linkMatcher.find()){
+            String group = linkMatcher.group(1);
+            output = output.replace(group,"http://code.mendhak.com/gpslogger/"+group);
+        }
+
+        return output;
     }
 
 }

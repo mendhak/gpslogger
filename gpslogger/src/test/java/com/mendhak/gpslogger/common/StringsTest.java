@@ -215,5 +215,52 @@ public class StringsTest {
         assertThat("9001 seconds returns correspnding time", actual, is(expected));
     }
 
+    @Test
+    public void SanitizeMarkdownForHelpView_WhenLocalLinkPresent_ReturnsCodeWebsite() {
+        String md = "### [Open source libraries used](opensourcelibraries.html)\n" +
+                "\n" +
+                "### [Donate Paypal](https://paypal.me/mendhak/)\r\n" +
+                "This is [my screenshot](ss01.png)";
+        String expected = "### [Open source libraries used](http://code.mendhak.com/gpslogger/opensourcelibraries.html)\n" +
+                "\n" +
+                "### [Donate Paypal](https://paypal.me/mendhak/)\r\n" +
+                "This is [my screenshot](http://code.mendhak.com/gpslogger/ss01.png)";
+        assertThat("html link replaced with full URL", Strings.getSanitizedMarkdownForFaqView(md), is(expected));
+    }
+
+    @Test
+    public void SanitizeMarkdownForHelpView_WhenAbsoluteUrlLinkPresent_DoesNotReplace() {
+        String md = "First line \r\n " +
+                "### [Donate Paypal](https://paypal.me/mendhak/)\r\n " +
+                "[Donate coffee grounds](https://example.com/) ";
+
+        String expected = "First line \r\n " +
+                "### [Donate Paypal](https://paypal.me/mendhak/)\r\n " +
+                "[Donate coffee grounds](https://example.com/) ";
+        assertThat("Full URL not replaced", Strings.getSanitizedMarkdownForFaqView(md), is(expected));
+    }
+
+    @Test
+    public void SanitizeMarkdownForHelpView_WhenNull_ReturnsEmpty() {
+        String md = null;
+
+        String expected = "";
+
+        assertThat("markdown returned is empty", Strings.getSanitizedMarkdownForFaqView(md), is(expected));
+    }
+
+    @Test
+    public void SanitizeMarkdownForHelpView_WhenImagePresent_ImageRemoved(){
+        String md = "First line \r\n " +
+                "![badge](This is my badge)\r\n " +
+                "[Donate coffee grounds](https://example.com/) ";
+
+        String expected = "First line \r\n " +
+                "\r\n " +
+                "[Donate coffee grounds](https://example.com/) ";
+
+        assertThat("Image in MD is removed", Strings.getSanitizedMarkdownForFaqView(md), is(expected));
+
+    }
 
 }

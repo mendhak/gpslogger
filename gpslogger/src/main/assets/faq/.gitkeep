@@ -1,0 +1,1 @@
+Gradle task "copyFAQsIntoAssets" will copy files from /assets/text/faq into this folder

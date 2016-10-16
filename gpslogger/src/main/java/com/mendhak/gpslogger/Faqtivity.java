@@ -22,7 +22,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ExpandableListView;
+import com.commonsware.cwac.anddown.AndDown;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.components.ExpandableListAdapter;
 import org.slf4j.Logger;
 
@@ -88,34 +91,36 @@ public class Faqtivity extends AppCompatActivity {
         listDataChild = new HashMap<>();
 
         listDataHeader.add(getString(R.string.faq_generalsection));
-        listDataHeader.add(getString(R.string.faq_preferencesandfilters));
-        listDataHeader.add(getString(R.string.faq_advancedsection));
 
         List<String> generalTopics = new ArrayList<>();
-        generalTopics.add(getString(R.string.faq_topic_whyisntitaccurate));
-        generalTopics.add(getString(R.string.faq_topic_howtoremovenotification));
-        generalTopics.add(getString(R.string.faq_topic_profiles));
-        generalTopics.add(getString(R.string.faq_topic_usemylocaltimezone));
-        generalTopics.add(getString(R.string.faq_topic_imperial));
-        generalTopics.add(getString(R.string.faq_topic_whydoesfixtakelongtime));
+
+        generalTopics.add(getTopic("faq/faq01-why-taking-so-long.md"));
+        generalTopics.add(getTopic("faq/faq02-why-sometimes-inaccurate.md"));
+        generalTopics.add(getTopic("faq/faq03-no-point-logged.md"));
+        generalTopics.add(getTopic("faq/faq04-what-timezone.md"));
+        generalTopics.add(getTopic("faq/faq05-what-units.md"));
+        generalTopics.add(getTopic("faq/faq06-where-are-gps-files.md"));
+
+        generalTopics.add(getTopic("faq/faq07-settings-changed.md"));
+        generalTopics.add(getTopic("faq/faq08-what-settings-mean.md"));
+        generalTopics.add(getTopic("faq/faq09-recommended-settings.md"));
+        generalTopics.add(getTopic("faq/faq10-exact-time-settings.md"));
 
 
-        List<String> preferencesAndFiltersTopics = new ArrayList<>();
-        preferencesAndFiltersTopics.add(getString(R.string.faq_topic_whatvariousfiltersmean));
-        preferencesAndFiltersTopics.add(getString(R.string.faq_topic_whereisthefilelogged));
-        preferencesAndFiltersTopics.add(getString(R.string.faq_topic_howtogetthefile));
-        preferencesAndFiltersTopics.add(getString(R.string.faq_topic_loadingpresets));
-
-
-        List<String> advancedTopics = new ArrayList<>();
-        advancedTopics.add(getString(R.string.faq_topic_thirdpartyintegration));
-        advancedTopics.add(getString(R.string.faq_topic_taskerintegration));
-        advancedTopics.add(getString(R.string.faq_topic_howgpsworks));
+        generalTopics.add(getTopic("faq/faq11-remove-notification.md"));
+        generalTopics.add(getTopic("faq/faq12-task-managers.md"));
+        generalTopics.add(getTopic("faq/faq14-tasker-automation.md"));
+        generalTopics.add(getTopic("faq/faq15-preset-files.md"));
+        generalTopics.add(getTopic("faq/faq19-profiles.md"));
+        generalTopics.add(getTopic("faq/faq20-troubleshooting.md"));
 
 
         listDataChild.put(listDataHeader.get(0), generalTopics);
-        listDataChild.put(listDataHeader.get(1), preferencesAndFiltersTopics);
-        listDataChild.put(listDataHeader.get(2), advancedTopics);
+    }
+
+    protected String getTopic(String assetPath){
+        String md = Strings.getSanitizedMarkdownForFaqView(Files.getAssetFileAsString(assetPath,getApplicationContext()));
+        return new AndDown().markdownToHtml(md);
     }
 
     @Override
