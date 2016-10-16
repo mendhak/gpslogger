@@ -361,12 +361,16 @@ task copyFAQsIntoAssets(group:"docs", type:Copy){
 
 task deleteFAQsAssets(group:"docs", type:Delete){
     def dirName = 'src/main/assets/faq'
-    fileTree( dirName ).include('*.md').each{
-            f ->
-                delete "${dirName}/${f}"
+    fileTree( dirName ).include('**/*.md').each{
+            f -> delete f
         }
 }
 
 preBuild.dependsOn copyFAQsIntoAssets
 clean.dependsOn deleteFAQsAssets
 
+task deleteReleaseAPKs(group:"build", type:Delete){
+    delete fileTree(dir:'./', include:'*.apk*')
+}
+
+clean.dependsOn deleteReleaseAPKs
