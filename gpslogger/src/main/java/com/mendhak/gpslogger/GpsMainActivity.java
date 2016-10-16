@@ -514,16 +514,6 @@ public class GpsMainActivity extends AppCompatActivity
             }
         });
 
-
-        ImageButton helpButton = (ImageButton) findViewById(R.id.imgHelp);
-        helpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
-                startActivity(faqtivity);
-            }
-        });
-
     }
 
     private void refreshProfileIcon(String profileName){

@@ -21,25 +21,21 @@ package com.mendhak.gpslogger;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.ExpandableListView;
 import android.widget.ListView;
 import com.commonsware.cwac.anddown.AndDown;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
-import com.mendhak.gpslogger.ui.components.ExpandableListAdapter;
+import com.mendhak.gpslogger.ui.components.FaqExpandableListAdapter;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Faqtivity extends AppCompatActivity {
 
-    ExpandableListAdapter listAdapter;
+    FaqExpandableListAdapter listAdapter;
     ListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
 
     private static final Logger LOG = Logs.of(Faqtivity.class);
     /**
@@ -56,7 +52,6 @@ public class Faqtivity extends AppCompatActivity {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
 
-
         }
         catch(Exception ex){
             //http://stackoverflow.com/questions/26657348/appcompat-v7-v21-0-0-causing-crash-on-samsung-devices-with-android-v4-2-2
@@ -64,20 +59,6 @@ public class Faqtivity extends AppCompatActivity {
         }
 
         expListView = (ListView) findViewById(R.id.lvExp);
-//
-//        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-//            int previousGroup = -1;
-//
-//            @Override
-//            public void onGroupExpand(int groupPosition) {
-//                if (groupPosition != previousGroup)
-//                    expListView.collapseGroup(previousGroup);
-//                previousGroup = groupPosition;
-//
-//            }
-//        });
-
-        // preparing list data
 
         List<String> generalTopics = new ArrayList<>();
 
@@ -93,7 +74,6 @@ public class Faqtivity extends AppCompatActivity {
         generalTopics.add(getTopic("faq/faq09-recommended-settings.md"));
         generalTopics.add(getTopic("faq/faq10-exact-time-settings.md"));
 
-
         generalTopics.add(getTopic("faq/faq11-remove-notification.md"));
         generalTopics.add(getTopic("faq/faq12-task-managers.md"));
         generalTopics.add(getTopic("faq/faq14-tasker-automation.md"));
@@ -101,7 +81,7 @@ public class Faqtivity extends AppCompatActivity {
         generalTopics.add(getTopic("faq/faq19-profiles.md"));
         generalTopics.add(getTopic("faq/faq20-troubleshooting.md"));
 
-        listAdapter = new ExpandableListAdapter(this, generalTopics);
+        listAdapter = new FaqExpandableListAdapter(this, generalTopics);
 
         // setting list adapter
         expListView.setAdapter(listAdapter);

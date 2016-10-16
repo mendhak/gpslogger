@@ -326,38 +326,7 @@ if (project.hasProperty("CROWDIN_API_KEY")) {
         excludePattern = '**/*.txt'
     }
 
-    task crowdin3(group:"crowdin", type:com.mendhak.gradlecrowdin.DownloadTranslationsTask, dependsOn:"crowdin2"){
-
-        apiKey = CROWDIN_API_KEY
-        destination = "$projectDir/src/main/res"
-        projectId = 'gpslogger-for-android'
-
-        //Android projects
-        renameMapping = [
-                from: '^([^-]*)/strings_faq.xml$',
-                to  : /values-\1\/strings_faq.xml/
-        ]
-
-        excludePattern = '**/*.txt'
-    }
-
-
-    task crowdin4(group:"crowdin", type:com.mendhak.gradlecrowdin.DownloadTranslationsTask, dependsOn:"crowdin3"){
-
-        apiKey = CROWDIN_API_KEY
-        destination = "$projectDir/src/main/res"
-        projectId = 'gpslogger-for-android'
-
-        //Android projects
-        renameMapping = [
-                from: '^([^-]*)-([^-]*)/strings_faq.xml$',
-                to  : /values-\1-r\2\/strings_faq.xml/
-        ]
-
-        excludePattern = '**/*.txt'
-    }
-
-    task getallTranslations(group:"crowdin", dependsOn:"crowdin4")  {
+    task getallTranslations(group:"crowdin", dependsOn:"crowdin2")  {
     }
 
 
