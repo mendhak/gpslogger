@@ -371,7 +371,6 @@ if (project.hasProperty("CROWDIN_API_KEY")) {
 }
 
 task buildDocs(group: "docs", type: NodeTask, dependsOn:"installNodeModules") {
-    npmInstall
     script = file('../assets/generate-pages/index.js')
     execOverrides {
         it.workingDir = '../assets/generate-pages'
