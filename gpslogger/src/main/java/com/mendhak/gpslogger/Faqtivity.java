@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 import com.commonsware.cwac.anddown.AndDown;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -36,7 +37,7 @@ import java.util.List;
 public class Faqtivity extends AppCompatActivity {
 
     ExpandableListAdapter listAdapter;
-    ExpandableListView expListView;
+    ListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
 
@@ -62,35 +63,21 @@ public class Faqtivity extends AppCompatActivity {
             LOG.error("Thanks for this, Samsung", ex);
         }
 
-        expListView = (ExpandableListView) findViewById(R.id.lvExp);
-
-        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            int previousGroup = -1;
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                if (groupPosition != previousGroup)
-                    expListView.collapseGroup(previousGroup);
-                previousGroup = groupPosition;
-
-            }
-        });
+        expListView = (ListView) findViewById(R.id.lvExp);
+//
+//        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+//            int previousGroup = -1;
+//
+//            @Override
+//            public void onGroupExpand(int groupPosition) {
+//                if (groupPosition != previousGroup)
+//                    expListView.collapseGroup(previousGroup);
+//                previousGroup = groupPosition;
+//
+//            }
+//        });
 
         // preparing list data
-        prepareHelpTopics();
-
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-
-        // setting list adapter
-        expListView.setAdapter(listAdapter);
-        expListView.expandGroup(0);
-    }
-
-    private void prepareHelpTopics() {
-        listDataHeader = new ArrayList<>();
-        listDataChild = new HashMap<>();
-
-        listDataHeader.add(getString(R.string.faq_generalsection));
 
         List<String> generalTopics = new ArrayList<>();
 
@@ -114,9 +101,13 @@ public class Faqtivity extends AppCompatActivity {
         generalTopics.add(getTopic("faq/faq19-profiles.md"));
         generalTopics.add(getTopic("faq/faq20-troubleshooting.md"));
 
+        listAdapter = new ExpandableListAdapter(this, generalTopics);
 
-        listDataChild.put(listDataHeader.get(0), generalTopics);
+        // setting list adapter
+        expListView.setAdapter(listAdapter);
     }
+
+
 
     protected String getTopic(String assetPath){
         String md = Strings.getSanitizedMarkdownForFaqView(Files.getAssetFileAsString(assetPath,getApplicationContext()));
