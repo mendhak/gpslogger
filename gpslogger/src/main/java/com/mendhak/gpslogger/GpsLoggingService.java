@@ -237,7 +237,7 @@ public class GpsLoggingService extends Service  {
 
                 if (bundle.get(IntentConstants.TIME_BEFORE_LOGGING) != null) {
                     int timeBeforeLogging = bundle.getInt(IntentConstants.TIME_BEFORE_LOGGING);
-                    LOG.debug("Intent received - Set Time Before Logging: " + String.valueOf(timeBeforeLogging));
+                    LOG.debug("Intent received - logging interval: " + String.valueOf(timeBeforeLogging));
                     preferenceHelper.setMinimumLoggingInterval(timeBeforeLogging);
                     needToStartGpsManager = true;
                 }
@@ -258,14 +258,14 @@ public class GpsLoggingService extends Service  {
 
                 if (bundle.get(IntentConstants.RETRY_TIME) != null) {
                     int retryTime = bundle.getInt(IntentConstants.RETRY_TIME);
-                    LOG.debug("Intent received - Set Retry Time: " + String.valueOf(retryTime));
+                    LOG.debug("Intent received - Set duration to match accuracy: " + String.valueOf(retryTime));
                     preferenceHelper.setLoggingRetryPeriod(retryTime);
                     needToStartGpsManager = true;
                 }
 
                 if (bundle.get(IntentConstants.ABSOLUTE_TIMEOUT) != null) {
                     int absoluteTimeout = bundle.getInt(IntentConstants.ABSOLUTE_TIMEOUT);
-                    LOG.debug("Intent received - Set Retry Time: " + String.valueOf(absoluteTimeout));
+                    LOG.debug("Intent received - Set absolute timeout: " + String.valueOf(absoluteTimeout));
                     preferenceHelper.setAbsoluteTimeoutForAcquiringPosition(absoluteTimeout);
                     needToStartGpsManager = true;
                 }

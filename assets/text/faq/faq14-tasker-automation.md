@@ -16,13 +16,13 @@ These are the extras you can send to GPSLogger:
 
 > `setnextpointdescription` - (text) Sets the annotation text to use for the next point logged
 
-> `settimebeforelogging` - (number) Sets preference for time before logging option  
+> `settimebeforelogging` - (number) Sets preference for logging interval option  
 
 > `setdistancebeforelogging` - (number) Sets preference for distance before logging option
 
 > `setkeepbetweenfix` - (true/false) Sets preference whether to keep GPS on between fixes
 
-> `setretrytime` - (number) Sets preference for retry time
+> `setretrytime` - (number) Sets preference for duration to match accuracy
 
 > `setabsolutetimeout` - (number) Sets preference for absolute timeout
   

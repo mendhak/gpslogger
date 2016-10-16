@@ -141,7 +141,7 @@
     <string name="pref_performance_summary">Timings, filters and listeners</string>
 
 
-    <string name="time_before_logging_title">Time before logging</string>
+    <string name="time_before_logging_title">Logging interval</string>
     <string name="time_before_logging_summary">Use 0 for maximum frequency, but slower is better for battery life.
     </string>
     <string name="time_before_logging_dialog_title">Time in seconds</string>
@@ -151,8 +151,8 @@
     </string>
     <string name="keep_fix_title">Keep GPS on between fixes</string>
 
-    <string name="retry_time_title">Retry time interval for accuracy filter</string>
-    <string name="retry_time_summary">After acquiring a fix, keep retrying for this long to get an accurate point to match the accuracy filter setting.</string>
+    <string name="retry_time_title">Duration to match accuracy</string>
+    <string name="retry_time_summary">After acquiring an initial fix, keep trying for this long to get an accurate point to match the accuracy filter setting.</string>
     <string name="retry_time_dialog_title">Time in seconds</string>
     <string name="retry_time_hint">Enter seconds (max 9999)</string>
 
@@ -417,7 +417,7 @@
     <string name="save">Save</string>
 
     <string name="pref_filedetails_title">File and Folder Details</string>
-    <string name="absolute_timeout_title">Absolute Timeout</string>
+    <string name="absolute_timeout_title">Absolute time to GPS fix</string>
     <string name="absolute_timeout_summary">Number of seconds after which the app gives up on trying to acquire a fix, regardless of other settings. This is especially useful for when you are inside buildings to prevent the GPS from draining battery.  Set to 0 for no timeout.</string>
     <string name="txt_latitude_short">Lat</string>
     <string name="txt_longitude_short">Lon</string>
