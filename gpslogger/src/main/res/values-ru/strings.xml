@@ -112,15 +112,12 @@
 При необходимости добавьте несколько динамически изменяемых параметров, таких как серийный номер, год, часы, минуты и т.д. Слишком сложные динамически составляемые имена файлов мало помогут при автоматической отправке, т.к в данном случае отправляется только последний файл.</string>
   <string name="pref_performance_title">Настройки производительности</string>
   <string name="pref_performance_summary">Тайминги, периоды, фильтры</string>
-  <string name="time_before_logging_title">Период логирования точки</string>
   <string name="time_before_logging_summary">Укажите 0 для обработки на максимальной частоте. Хотя, чем медленнее работает процессор, тем дольше протянет аккумулятор.
     </string>
   <string name="time_before_logging_dialog_title">Время в секундах</string>
   <string name="time_before_logging_hint">Введите число секунд (max 9999)</string>
   <string name="keep_fix_summary">Будьте осторожны, это значительно сократит жизнь батареи. Используйте только для высокой точности с низкими интервалами.</string>
   <string name="keep_fix_title">Держать GPS включенным между местоопределениями</string>
-  <string name="retry_time_title">Времменной интервал повтора для задания точности</string>
-  <string name="retry_time_summary">При опрелении местоположения, продолжать фиксацию геокоординат до тех пор, пока не будет достигнута точность, заданная в настройках.</string>
   <string name="retry_time_dialog_title">Время в секундах</string>
   <string name="retry_time_hint">Введите интервал в секундах (максимум 9999)</string>
   <string name="display_imperial_title">Единицы отображения</string>
@@ -314,7 +311,6 @@
   <string name="txt_number_of_points">Количество точек</string>
   <string name="save">Сохранить</string>
   <string name="pref_filedetails_title">Файл и папка, детали</string>
-  <string name="absolute_timeout_title">Абсолютное время ожидания</string>
   <string name="absolute_timeout_summary">Количество секунд, по прошествии которых приложение делает очередную попытку определить местоположение, независимо от других параметров. Это особенно полезно, когда вы находитесь внутри зданий, чтобы не давать GPS быстро сажать аккумулятор.  Установите 0 если задержка не требуется.</string>
   <string name="txt_latitude_short">Широта</string>
   <string name="txt_longitude_short">Долгота</string>
@@ -327,6 +323,7 @@
   <string name="listeners_summary">Способ определения местоположения; GPS - для спутников, Сеть - для сотовых вышек/WiFi, Пассивно - сканирование мест расположения, запрашиваемое из других приложений.</string>
   <string name="listeners_title">Источники определения местоположения</string>
   <string name="autosend_frequency_hint">Количество минут</string>
+  <string name="pref_logging_file_no_permissions">Этот каталог не доступен программе GPSLogger для записи. Пожалуйста, выберите другой каталог.</string>
   <string name="pref_gpsvisualizer">Визуализация статистики GPS и просмотр графиков</string>
   <string name="new_file_custom_each_time_title">Задавать имя файла при каждом запуске</string>
   <string name="new_file_custom_each_time_summary">Запрашивать имя файла каждый раз при запуске логирования</string>

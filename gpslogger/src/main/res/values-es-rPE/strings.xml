@@ -59,7 +59,6 @@
   <string name="new_file_custom_title">Nombre de archivo personalizado</string>
   <string name="pref_performance_title">Rendimiento</string>
   <string name="pref_performance_summary">Tiempos, filtros y orígenes</string>
-  <string name="time_before_logging_title">Tiempo antes de registro</string>
   <string name="time_before_logging_summary">Use 0 para máxima frecuencia, pero es mejor reducirla para conservar batería.    </string>
   <string name="time_before_logging_dialog_title">Tiempo en segundos</string>
   <string name="time_before_logging_hint">Ingrese segundos (máx. 9999)</string>

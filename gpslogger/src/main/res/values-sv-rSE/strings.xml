@@ -102,7 +102,6 @@
   <string name="new_file_custom_title">Anpassat filnamn</string>
   <string name="new_file_custom_summary">Du kan använda ditt eget filnamn. Alternativt lägga till några dynamiska parametrar såsom serienummer, år, timme, minut, etc. Mycket dynamiska filnamn kan fungera dåligt eftersom den bara sänder den senaste filen.</string>
   <string name="pref_performance_title">Prestanda</string>
-  <string name="time_before_logging_title">Tid innan loggning</string>
   <string name="time_before_logging_summary">Använd 0 för maximal frekvens, men långsammare drar mindre batteri.
     </string>
   <string name="time_before_logging_dialog_title">Tid i sekunder</string>
@@ -110,8 +109,6 @@
   <string name="keep_fix_summary">Observera att detta minskar batterilivslängden drastiskt. Använd endast för högre precision vid låga frekvenser.
     </string>
   <string name="keep_fix_title">Behåll GPS på mellan fixeringar</string>
-  <string name="retry_time_title">Återförsöksintervall för noggrannhetsfilter</string>
-  <string name="retry_time_summary">Efter att en fixering erhållits, försök på nytt så här länge för att få en punkt som uppfyller noggrannhetsfiltrets krav.</string>
   <string name="retry_time_dialog_title">Tid i sekunder</string>
   <string name="retry_time_hint">Ange sekunder (max 9999)</string>
   <string name="display_imperial_title">Visa brittiska måttenheter</string>
@@ -284,7 +281,6 @@
   <string name="txt_number_of_points">Antal punkter</string>
   <string name="save">Spara</string>
   <string name="pref_filedetails_title">Fil- och mappdetaljer</string>
-  <string name="absolute_timeout_title">Absolut timeout</string>
   <string name="absolute_timeout_summary">Antal sekunder efter vilket appen ger upp om att erhålla en fixering, oberoende av andra inställningar. Detta är speciellt användbart när du är inne i byggnader för att hindra GPS:en från att tömma batteriet.  Sätt till 0 för ingen timeout.</string>
   <string name="txt_latitude_short">Lat</string>
   <string name="txt_longitude_short">Lon</string>

@@ -110,14 +110,11 @@
   <string name="new_file_custom_summary">Si può usare un nome del file personalizzato in modo dinamico. Si possono aggiungere alcuni parametri dinamici come il numero seriale, anno, ora, minuti, etc. Potrebbe non funzionare correttamente con le funzioni di auto-invio perchè inviano solo l\'ultimo file.</string>
   <string name="pref_performance_title">Prestazioni</string>
   <string name="pref_performance_summary">Tempi, filtri e provider di posizione</string>
-  <string name="time_before_logging_title">Tempo fra le registrazioni</string>
   <string name="time_before_logging_summary">Usa 0 per la massima frequenza, più lento fa durare di più la batteria.</string>
   <string name="time_before_logging_dialog_title">Tempo in secondi</string>
   <string name="time_before_logging_hint">Inserisci i secondi (max 9999)</string>
   <string name="keep_fix_summary">Attenzione: riduce di molto la vita della batteria. Usatelo solo per ottenere alte precisioni con basse frequenze di campionatura.</string>
   <string name="keep_fix_title">Lascia sempre acceso il GPS</string>
-  <string name="retry_time_title">Tempo usato per il filtro di precisione</string>
-  <string name="retry_time_summary">Dopo aver ottenuto un fix GPS, continua a rimanere agganciato al segnale GPS per questo tempo in modo da ottenere una precisione migliore.</string>
   <string name="retry_time_dialog_title">Tempo in secondi</string>
   <string name="retry_time_hint">Inserisci i secondi (max 9999)</string>
   <string name="display_imperial_title">Mostra unità imperiali</string>
@@ -305,7 +302,6 @@
   <string name="txt_number_of_points">Numero di punti</string>
   <string name="save">Salva</string>
   <string name="pref_filedetails_title">Dettagli sul file e cartella</string>
-  <string name="absolute_timeout_title">Timeout</string>
   <string name="absolute_timeout_summary">Numero di secondi dopo i quali si interrompe la ricerca del fix GPS. Utile nel caso si sia in un edificio e il telefono continua per molto tempo la ricerca del fix. Interrompendo prima la ricerca si evita un eccessivo consumo della batteria. Usa 0 per non avere timeout.</string>
   <string name="txt_latitude_short">Lat</string>
   <string name="txt_longitude_short">Lon</string>

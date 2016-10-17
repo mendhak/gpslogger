@@ -110,15 +110,12 @@
   <string name="new_file_custom_summary">Vous pouvez utiliser votre propre nom de fichier. Ajouter éventuellement quelques paramètres dynamiques tels que le numéro de série, année, heure, minute, etc.. Les noms de fichier très dynamiques peuvent ne pas fonctionner correctement avec la fonction d\'envoi automatique car seul le dernier fichier est envoyé.</string>
   <string name="pref_performance_title">Performance</string>
   <string name="pref_performance_summary">délais, filtres et pauses</string>
-  <string name="time_before_logging_title">Temps avant l\'enregistrement</string>
   <string name="time_before_logging_summary">Choisir 0 pour une fréquence maximum, mais une basse fréquence augmente l\'autonomie de la batterie.</string>
   <string name="time_before_logging_dialog_title">Temps en secondes</string>
   <string name="time_before_logging_hint">Entrez secondes (max 9999)</string>
   <string name="keep_fix_summary">Attention, cela va réduire considérablement la vie de la batterie. Utiliser uniquement pour
 une plus grande précision à basses fréquences.</string>
   <string name="keep_fix_title">Gardez le GPS allumé entre les différents enregistrements de positions</string>
-  <string name="retry_time_title">Intervalle de réessai pour le filtre de précision</string>
-  <string name="retry_time_summary">Après avoir déterminé la position, essayer au moins pendant ce temps pour essayer de trouver un point qui rempli la condition du filtre de précision défini.</string>
   <string name="retry_time_dialog_title">Temps en secondes</string>
   <string name="retry_time_hint">Entrer les secondes (max. 9999)</string>
   <string name="display_imperial_title">Afficher les unités Impériales</string>
@@ -306,7 +303,6 @@ une plus grande précision à basses fréquences.</string>
   <string name="txt_number_of_points">Nombre de points</string>
   <string name="save">Enregistrer</string>
   <string name="pref_filedetails_title">Détails des dossiers et fichiers</string>
-  <string name="absolute_timeout_title">Délai d\'expiration absolu</string>
   <string name="absolute_timeout_summary">Le nombre de secondes après lesquelles l\'app ne tente plus de déterminer la position, défini selon les autres réglages. C\'est particulièrement utile pour économiser la batterie quand vous êtes à l’intérieur d\'un bâtiment. Mettre a 0 pour une limite infinie.</string>
   <string name="txt_latitude_short">Lat</string>
   <string name="txt_longitude_short">Lon</string>

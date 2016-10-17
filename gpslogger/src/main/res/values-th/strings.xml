@@ -101,7 +101,6 @@
   <string name="new_file_creation_custom">กำหนดไฟล์เอง</string>
   <string name="new_file_custom_title">กำหนดชื่อไฟล์</string>
   <string name="pref_performance_title">ประสิทธิภาพ</string>
-  <string name="time_before_logging_title">เวลาหน่วงระหว่างบันทึก</string>
   <string name="time_before_logging_dialog_title">เวลาเป็นวินาที</string>
   <string name="time_before_logging_hint">ใส่ค่าเป็นวินาที (สูงสุด 9999)</string>
   <string name="keep_fix_summary">ระวัง เปิดค่านี้ทำให้แบตเตอรรี่หมดเร็วขึ้นกว่าเดิมมาก ใช้เฉพาะเมื่อต้องการความแม่นยำสูง แต่ระยะห่างระหว่างบันทึกต่ำ</string>
@@ -213,7 +212,6 @@
   <string name="txt_number_of_points">จำนวนจุด</string>
   <string name="save">บันทึก</string>
   <string name="pref_filedetails_title">รายละเอียดแฟ้มและโฟลเดอร์</string>
-  <string name="absolute_timeout_title">เวลาหมดอายุ</string>
   <string name="autoopengts_accountname">ชื่อบัญชี</string>
   <string name="listeners_title">ตัวให้ตำแหน่ง</string>
   <string name="autosend_frequency_hint">จำนวนนาที</string>

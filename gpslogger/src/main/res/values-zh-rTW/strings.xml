@@ -113,7 +113,6 @@
         may not work well with auto send features because it only sends the latest file.</string>
   <string name="pref_performance_title">性能</string>
   <string name="pref_performance_summary">Timings, filters and listeners</string>
-  <string name="time_before_logging_title">在記錄之前的時間</string>
   <string name="time_before_logging_summary">Use 0 for maximum frequency, but slower is better for battery life.
     </string>
   <string name="time_before_logging_dialog_title">以秒計的時間</string>
@@ -122,8 +121,6 @@
         higher precision with low frequencies.
     </string>
   <string name="keep_fix_title">Keep GPS on between fixes</string>
-  <string name="retry_time_title">Retry time interval for accuracy filter</string>
-  <string name="retry_time_summary">After acquiring a fix, keep retrying for this long to get an accurate point to match the accuracy filter setting.</string>
   <string name="retry_time_dialog_title">以秒計</string>
   <string name="retry_time_hint">輸入秒數 (最大9999)</string>
   <string name="display_imperial_title">Display Imperial units</string>

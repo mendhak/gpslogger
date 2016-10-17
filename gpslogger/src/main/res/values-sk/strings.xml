@@ -113,7 +113,6 @@ Môžete pridať aj niekoľko dynamických parametrov, ako je sériové číslo,
 súborov možno nebudú fungovať v kombinácii s automatickým odosielaním, pretože sa odosiela len najnovší súbor.</string>
   <string name="pref_performance_title">Výkon</string>
   <string name="pref_performance_summary">Časovanie, filtre a poslucháči</string>
-  <string name="time_before_logging_title">Čas pred záznamom</string>
   <string name="time_before_logging_summary">Pre maximálnu frekvenciu zadajte hodnotu 0. Čím bude hodnota menšia, tým viac energie sa ušetrí.
     </string>
   <string name="time_before_logging_dialog_title">Čas v sekundách</string>
@@ -123,8 +122,6 @@ Použite iba pre
 vyššiu presnosť s nízkymi frekvenciami.
     </string>
   <string name="keep_fix_title">Ponechať GPS zapnuté medzi korekciami</string>
-  <string name="retry_time_title">Časový interval opakovania pre filtre presnosti</string>
-  <string name="retry_time_summary">Po získaní korekcie sa bude získavanie opakovať tak dlho, pokiaľ nebude presnosť bodu v súlade s filtrom presnosti.</string>
   <string name="retry_time_dialog_title">Čas v sekundách</string>
   <string name="retry_time_hint">Zadajte sekundy (max. 9999)</string>
   <string name="display_imperial_title">Zobrazovať imperiálne jednotky</string>
@@ -330,7 +327,6 @@ polia.
   <string name="txt_number_of_points">Počet bodov</string>
   <string name="save">Uložiť</string>
   <string name="pref_filedetails_title">Podrobnosti o súbore a priečinku</string>
-  <string name="absolute_timeout_title">Absol. časový limit</string>
   <string name="absolute_timeout_summary">Počet sekúnd po ktorých sa aplikácia vzdá pokusov a načítanie korekcie, bez ohľadu na iné nastavenia. Toto nastavenie je užitočné napr. vo vnútri budov, aby sa zabránilo zbytočnému vybíjaniu batérie. Časový limit zrušíte nastavením hodnoty 0.</string>
   <string name="txt_latitude_short">Zem. šír.</string>
   <string name="txt_longitude_short">Zem. dĺž.</string>

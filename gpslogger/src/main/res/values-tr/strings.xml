@@ -109,14 +109,12 @@
 Otomatik gönderme özellikleri ile çok iyi çalışmayabilir. Çünkü sadece son dosyayı gönderir</string>
   <string name="pref_performance_title">Performans</string>
   <string name="pref_performance_summary">Zamanlamalar, filtreler ve dinleyiciler</string>
-  <string name="time_before_logging_title">Kayıttan önce zaman</string>
   <string name="time_before_logging_summary">Maksimum frekans için 0, bu yavaştır ama pil ömrü için en iyisidir.
     </string>
   <string name="time_before_logging_dialog_title">Saniye cinsinden</string>
   <string name="time_before_logging_hint">Saniye (9999 max) girin</string>
   <string name="keep_fix_summary">Dikkat et, bu dramatik ömrünü azaltacaktır. Sadece düşük frekansları ile daha yüksek kesinlik için kullanın.    </string>
   <string name="keep_fix_title">Düzeltmeler arasında GPS Kullan</string>
-  <string name="retry_time_title">Doğruluk filtre için zaman aralığını yeniden deneyin</string>
   <string name="retry_time_dialog_title">Saniye cinsinden</string>
   <string name="retry_time_hint">Saniye girin (maks 9999)</string>
   <string name="enabledisablegps_title">GPS Aç/Kapat</string>

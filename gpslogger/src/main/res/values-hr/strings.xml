@@ -110,14 +110,11 @@
   <string name="new_file_custom_summary">Možete koristiti vlastito ime.         Po želji možete dodati nekoliko promjenjljive parametre kao što su serijski broj, godine, sat, minute, itd. Jako promjenjljive imena datoteke         možda neće raditi sa automatskim slanjem značajke jer ona šalje samo najnovije datoteke.</string>
   <string name="pref_performance_title">Performanse</string>
   <string name="pref_performance_summary">Vremenski rasporedi, filtri i prijamnici</string>
-  <string name="time_before_logging_title">Vrijeme prije zapisivanja</string>
   <string name="time_before_logging_summary">Koristi 0 za najbržu frekvenciju, ali sporije je bolje jer ne troši toliko bateriju.    </string>
   <string name="time_before_logging_dialog_title">Vrijeme u sekundama</string>
   <string name="time_before_logging_hint">Unos u sekundama(max 9999)</string>
   <string name="keep_fix_summary">Oprez, to će se dramatično smanjiti trajanje baterije. Koristite samo za         veću preciznost sa sporijim frekvencijama.    </string>
   <string name="keep_fix_title">Drži GPS između dobivanja informacija o poziciji</string>
-  <string name="retry_time_title">Ponovi vremenski interval za točnost filtar</string>
-  <string name="retry_time_summary">Nakon dobivanja informacije o lokaciji, ponoviti ovoliko dugo da biste dobili točne točke koje odgovaraju postavljenoj točnosti.</string>
   <string name="retry_time_dialog_title">Vrijeme u sekundama</string>
   <string name="retry_time_hint">Unos u sekundama(max 9999)</string>
   <string name="display_imperial_title">Prikaži imperijalne jedinice</string>
@@ -305,7 +302,6 @@
   <string name="txt_number_of_points">Broj točaka</string>
   <string name="save">Spremi</string>
   <string name="pref_filedetails_title">Detalji datoteke i mape</string>
-  <string name="absolute_timeout_title">Apsolutno vrijeme zaustavljanja</string>
   <string name="absolute_timeout_summary">Broj sekundi nakon čega aplikacija ne traži više informaciju o poziciji, bez obzira na ostale postavke. To je posebno korisno u zgradi kako bi se spriječilo da GPS isprazni bateriju.  Postavite na 0 za timeout.</string>
   <string name="txt_latitude_short">Šir</string>
   <string name="txt_longitude_short">Duž</string>

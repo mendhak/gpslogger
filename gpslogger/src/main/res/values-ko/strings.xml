@@ -113,13 +113,11 @@
 자동전송은 마지막 파일만 전송하기에 여러 동적 파일은 잘 작동 하지 않을 수 있습니다.</string>
   <string name="pref_performance_title">성능</string>
   <string name="pref_performance_summary">주기, 필터 및 수신기</string>
-  <string name="time_before_logging_title">기록전 시간</string>
   <string name="time_before_logging_summary">최대 빈도를 위해선 0 사용, 허나 배터리 수명을 감소시킴.    </string>
   <string name="time_before_logging_dialog_title">시간 (초)</string>
   <string name="time_before_logging_hint">초 입력 (최대 9999)</string>
   <string name="keep_fix_summary">주의, 이 설정은 배터리 수명을 극적으로 감소 시킵니다. 높은 정밀도와 낮은 빈도로만 사용하세요.    </string>
   <string name="keep_fix_title">고정시까지 GPS를 유지</string>
-  <string name="retry_time_title">정확성 필터의 재시도 간격</string>
   <string name="retry_time_dialog_title">시간 (초)</string>
   <string name="retry_time_hint">초 (최대 9999) 입력</string>
   <string name="display_imperial_title">제국 단위(Imperial) 로 표시</string>

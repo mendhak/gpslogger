@@ -110,15 +110,12 @@
   <string name="new_file_custom_summary">Můžete použít svůj vlastní název souboru. Volitelně přidáte pár dynamických parametrů, například sériové číslo, rok, hodinu, minutu, atd. Velký počet souborů s dynamickými názvy nemusí fungovat dobře s funkcí automatického odesílání, protože ta odesílá pouze poslední soubor.</string>
   <string name="pref_performance_title">Výkon</string>
   <string name="pref_performance_summary">Časování, filtry a posluchači</string>
-  <string name="time_before_logging_title">Čas před záznamem</string>
   <string name="time_before_logging_summary">Použijte 0 pro maximální frekvenci, ale pomalejší je lepší pro výdrž baterie.
     </string>
   <string name="time_before_logging_dialog_title">Čas v sekundách</string>
   <string name="time_before_logging_hint">Zadejte sekundy (maximum 9999)</string>
   <string name="keep_fix_summary">Buďte opatrní, toto dramaticky sníží výdrž na baterii. Použijte pouze pro vyšší přesnost při nízkých frekvencích.</string>
   <string name="keep_fix_title">Ponechat GPS zapnutou mezi odečty polohy</string>
-  <string name="retry_time_title">Časový interval opakování pro filtr přesnosti</string>
-  <string name="retry_time_summary">Po určení polohy se bude její určování opakovat tak dlouho, aby to odpovídalo nastavení filtru.</string>
   <string name="retry_time_dialog_title">Čas v sekundách</string>
   <string name="retry_time_hint">Zadejte sekundy (max 9999)</string>
   <string name="display_imperial_title">Zobrazit imperiální jednotky</string>
@@ -310,7 +307,6 @@
   <string name="txt_number_of_points">Počet bodů</string>
   <string name="save">Uložit</string>
   <string name="pref_filedetails_title">Podrobnosti souborů a složek</string>
-  <string name="absolute_timeout_title">Absolutní časový limit</string>
   <string name="absolute_timeout_summary">Počet sekund, po jejichž vypršení aplikace vzdá snahu o zjištění polohy, bez ohledu na ostatní nastavení. To je zvláště užitečné, když jste uvnitř budov a chcete zabránit vybíjení baterie kvůli GPS. Pokud chcete limit vypnout, nastavte na 0.</string>
   <string name="txt_latitude_short">Lat</string>
   <string name="txt_longitude_short">Lon</string>

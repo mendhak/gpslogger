@@ -112,14 +112,11 @@
         можуть не добре працювати з автоматичним надсиланням, оскільки надсилається тільки останній файл.</string>
   <string name="pref_performance_title">Продуктивність</string>
   <string name="pref_performance_summary">Інтервали, фільтри та провайдери</string>
-  <string name="time_before_logging_title">Час до початку запису</string>
   <string name="time_before_logging_summary">Для максимальної частоти запису використовуйте 0, але повільніший режим є кращім для збереження заряду батареї. </string>
   <string name="time_before_logging_dialog_title">Час в секундах</string>
   <string name="time_before_logging_hint">Введіть секунди (макс. 9999)</string>
   <string name="keep_fix_summary">Обережно, це суттєво зменшує заряд батареї. Використовуйте лише для більшої точності з малою частотою.</string>
   <string name="keep_fix_title">Не вимикати GPS між замірами</string>
-  <string name="retry_time_title">Інтервал часу повторних спроб для фільтру точності</string>
-  <string name="retry_time_summary">Після отримання фіксаціі, як довго намагатися отримати точну позицію, яка б відповідала настройкам фільтру точності.</string>
   <string name="retry_time_dialog_title">Час в секундах</string>
   <string name="retry_time_hint">Введіть секунди (макс. 9999)</string>
   <string name="display_imperial_title">Відображати імперські одиниці</string>
@@ -307,7 +304,6 @@
   <string name="txt_number_of_points">Кількість точок</string>
   <string name="save">Зберегти</string>
   <string name="pref_filedetails_title">Інформація про файли і папки</string>
-  <string name="absolute_timeout_title">Остаточний тайм-аут</string>
   <string name="absolute_timeout_summary">Кількість секунд, після чого застосунок зупиняє спроби зафіксувати місцеположення, незалежно від інших параметрів. Це особливо корисно, коли ви знаходитесь всередині будівлі, щоб завадити GPS використовувати заряд аккумулятора. Установіть 0 для відключення тайм-ауту.</string>
   <string name="txt_latitude_short">Широта</string>
   <string name="txt_longitude_short">Довгота</string>

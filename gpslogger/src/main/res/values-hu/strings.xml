@@ -111,14 +111,11 @@
 Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év, óra, perc, stb. A nagyon dinamikus fájlnevek nem biztos, hogy jól működnek, mert az automatikus küldés funkció csak az utolsó fájlt küldi el.</string>
   <string name="pref_performance_title">Teljesítmény</string>
   <string name="pref_performance_summary">Időzítések, szűrők és figyelők</string>
-  <string name="time_before_logging_title">Logolás előtt</string>
   <string name="time_before_logging_summary">A 0 a legnagyobb gyakoriság, de a ritkább jótékonyan hat az akkumulátor élettartamára.</string>
   <string name="time_before_logging_dialog_title">Idő másodpercben</string>
   <string name="time_before_logging_hint">Adja meg másodpercben (max 9999)</string>
   <string name="keep_fix_summary">Legyen óvatos, ez drámaian csökkenteni fogja az akkumulátora élettartamát. A nagyobb pontossághoz használja alacsonyabb frekvencia használatával.</string>
   <string name="keep_fix_title">GPS bekapcsolva tartása</string>
-  <string name="retry_time_title">Újrapróbálási idő a pontosság alapú szűréshez</string>
-  <string name="retry_time_summary">Egy fix pozíció megszerzése után ennyi ideig próbálkozik újra, hogy a pont megfeleljen a pontossági szűrőnek.</string>
   <string name="retry_time_dialog_title">Idő másodpercben</string>
   <string name="retry_time_hint">Adja meg másodpercben (max 9999)</string>
   <string name="display_imperial_title">Angolszász mértékegységek használata</string>
@@ -307,7 +304,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="txt_number_of_points">Pontok száma</string>
   <string name="save">Mentés</string>
   <string name="pref_filedetails_title">Fájl- és mappa részletek</string>
-  <string name="absolute_timeout_title">Abszolút időtúllépés</string>
   <string name="absolute_timeout_summary">Időkorlát másodpercben, az app maximum ennyi ideig próbálkozik egy fix pozíció megszerzésével, függetlenül más beállításoktól. Hasznos ha épületben tartózkodik: így a GPS nem meríti le az akkut. Ha 0-t ad meg, nincs időkorlát.</string>
   <string name="txt_latitude_short">Szél</string>
   <string name="txt_longitude_short">Hossz</string>

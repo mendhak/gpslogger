@@ -107,14 +107,11 @@
   <string name="new_file_custom_summary">Bạn có thể sử dụng tên file riêng của bạn như thêm vài tham số: serial, năm, giờ, phút,... Tên file quá phức tạp có thể sẽ không tương thích với chức năng gửi tự động vì nó luôn gửi file mới nhất.</string>
   <string name="pref_performance_title">Hiệu suất</string>
   <string name="pref_performance_summary">Thời gian, bộ lọc, nhận</string>
-  <string name="time_before_logging_title">Thời gian trước khi log</string>
   <string name="time_before_logging_summary">Dùng không cho tần suất tối đa nhưng chậm hơn sẽ đỡ tốn pin.    </string>
   <string name="time_before_logging_dialog_title">Thời gian bằng giây</string>
   <string name="time_before_logging_hint">Nhập giây (tối đa 9999)</string>
   <string name="keep_fix_summary">Hãy cẩn thận, điều này sẽ làm giảm đáng kể tuổi thọ pin. Chỉ sử dụng cho độ chính xác cao với tần suất thấp.    </string>
   <string name="keep_fix_title">Giữ GPS giữa các lần điều chỉnh</string>
-  <string name="retry_time_title">Khoảng thời gian thử lại cho bộ lọc chính xác</string>
-  <string name="retry_time_summary">Sau khi yêu cầu điều chỉnh, cố gắng giữ lâu để được điểm chính xác phù hợp với bộ lọc.</string>
   <string name="retry_time_dialog_title">Thời gian bằng giây</string>
   <string name="retry_time_hint">Nhập giây (tối đa 9999)</string>
   <string name="display_imperial_title">Đơn vị đo lường của Anh</string>
@@ -302,7 +299,6 @@
   <string name="txt_number_of_points">Số điểm</string>
   <string name="save">Lưu</string>
   <string name="pref_filedetails_title">Chi tiết thư mục và file</string>
-  <string name="absolute_timeout_title">Thời gian chờ tuyệt đối</string>
   <string name="absolute_timeout_summary">Số giây mà sau đó các ứng dụng sẽ hủy việc cố gắng để yêu cầu điều chỉnh, bỏ qua cài đặt khác. Đặc biệt hữu ích khi bạn đang ở trong tòa nhà để ngăn chặn GPS làm tốn pin.  Đặt là 0 để không có thời gian chờ.</string>
   <string name="txt_latitude_short">Vĩ độ</string>
   <string name="txt_longitude_short">Kinh độ</string>

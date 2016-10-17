@@ -106,13 +106,11 @@
   <string name="new_file_custom_title">Niestandardowa nazwa pliku</string>
   <string name="pref_performance_title">Wydajność</string>
   <string name="pref_performance_summary">Opcje czasu, filtry i nasłuch</string>
-  <string name="time_before_logging_title">Odstępy czasu</string>
   <string name="time_before_logging_summary">Wpisz 0 dla maksymalnej częstotliwości; mniejsza częstotliwość zmniejsza zużycie baterii.    </string>
   <string name="time_before_logging_dialog_title">Czas w sekundach</string>
   <string name="time_before_logging_hint">Wprowadź czas (max 9999)</string>
   <string name="keep_fix_summary">Uważaj, zużycie baterii drastycznie wzrośnie. Używaj wyłącznie dla większej precyzji przy niskich częstotliwościach.    </string>
   <string name="keep_fix_title">Utrzymuj połączenie z GPS po zaprzestaniu logowania</string>
-  <string name="retry_time_title">Czas ponownej próby dla filtru dokładności</string>
   <string name="retry_time_dialog_title">Czas w sekundach</string>
   <string name="retry_time_hint">Wprowadź sekundy (maks. 9999)</string>
   <string name="display_imperial_title">Wyświetl anglosaskie jednostki</string>

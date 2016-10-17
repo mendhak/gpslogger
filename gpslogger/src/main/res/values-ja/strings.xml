@@ -110,14 +110,11 @@
   <string name="new_file_custom_summary">任意のファイル名を使う事ができます。必要に応じて、シリアル番号、年、時、分等の動的なパラメタを付加することができます。ただし、最新のファイルのみを送信するため、更新頻度が高い場合、うまく反映されないことがあります。</string>
   <string name="pref_performance_title">パフォーマンス</string>
   <string name="pref_performance_summary">プロバイダ、周期、フィルタ</string>
-  <string name="time_before_logging_title">保存周期</string>
   <string name="time_before_logging_summary">0にすると書き込み頻度が最大になりますが、バッテリーの持ちが悪くなります。</string>
   <string name="time_before_logging_dialog_title">時間（秒）</string>
   <string name="time_before_logging_hint">時間（秒、最大9999）を入力してください</string>
   <string name="keep_fix_summary">注意。この設定はバッテリを著しく消費します。書込頻度を抑えて高精度を得たい場合のみ使用してください。</string>
   <string name="keep_fix_title">GPSを常にON</string>
-  <string name="retry_time_title">精度フィルタのリトライ間隔</string>
-  <string name="retry_time_summary">精度フィルターにマッチする位置情報を取得するまでリトライします。</string>
   <string name="retry_time_dialog_title">時間（秒）</string>
   <string name="retry_time_hint">入力（秒、最大 9999)</string>
   <string name="display_imperial_title">ヤード法で表示</string>
@@ -306,7 +303,6 @@
   <string name="txt_number_of_points">ポイント数</string>
   <string name="save">保存</string>
   <string name="pref_filedetails_title">ファイルとフォルダーの詳細</string>
-  <string name="absolute_timeout_title">タイムアウト時間</string>
   <string name="absolute_timeout_summary">設定の如何に関わらず、位置情報取得のリトライを中止するまでの時間（秒）。この設定は建物の中でGPS情報が取得できない場合にバッテリの消費を抑えるのに役立ちます。0にセットするとタイムアウトしません。</string>
   <string name="txt_latitude_short">緯度</string>
   <string name="txt_longitude_short">経度</string>

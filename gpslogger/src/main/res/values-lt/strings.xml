@@ -106,7 +106,6 @@
   <string name="new_file_creation_custom">Pasirinktinis failas</string>
   <string name="new_file_custom_title">Pasirinktinio failo pavadinimas</string>
   <string name="pref_performance_title">Vykdymas</string>
-  <string name="time_before_logging_title">Laikas iki įrašymo</string>
   <string name="time_before_logging_dialog_title">Laikas sekundėmis</string>
   <string name="time_before_logging_hint">Įveskite sekundes (maks. 9999)</string>
   <string name="retry_time_dialog_title">Laikas sekundėmis</string>

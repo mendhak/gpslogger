@@ -62,7 +62,6 @@
         μπορούν να μη λειτουργήσουν σωστά με τη λειτουργία αυτόματης αποστολής επειδεί στέλνει μόνο τα τελευταία αρχεία.</string>
   <string name="pref_performance_title">Απόδοση</string>
   <string name="pref_performance_summary">Χρονισμός, φίλτρα και ακροατές</string>
-  <string name="time_before_logging_title">Χρόνος πρίν τη καταγραφή</string>
   <string name="time_before_logging_summary">Κάντε τη χρήση του 0 για μέγιστη συχνότητα, αλλά πιο αργά είναι καλύτερο για τη ζωή της μπαταρίας.
     </string>
   <string name="time_before_logging_dialog_title">Χρόνος σε δευτερόλεπτα</string>

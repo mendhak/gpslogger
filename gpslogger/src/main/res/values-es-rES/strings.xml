@@ -111,14 +111,11 @@
   <string name="new_file_custom_summary">Puedes utilizar tu propio nombre de archivo. De forma opcional puedes añadir algunos variables dinámicas tales como el número de serie, el año, la hora, los minutos actuales y demás. Puede que los nombres de archivo demasiado dinámicos no funcionen demasiado bien junto con el autoenvío ya que sólo sube el último archivo encontrado.</string>
   <string name="pref_performance_title">Rendimiento</string>
   <string name="pref_performance_summary">Tiempos, filtros y orígenes</string>
-  <string name="time_before_logging_title">Tiempo entre cada registro</string>
   <string name="time_before_logging_summary">Use 0 para máxima frecuencia, pero es mejor reducirla para conservar batería.</string>
   <string name="time_before_logging_dialog_title">Tiempo en segundos</string>
   <string name="time_before_logging_hint">Ingrese segundos (máx. 9999)</string>
   <string name="keep_fix_summary">Cuidado, esto reduce considerablemente la duración de la batería. Sólo se debe usar para obtener una precisión mejor al usarse con el registro de puntos de frecuencia más larga.     </string>
   <string name="keep_fix_title">Mantenga GPS entre puntos</string>
-  <string name="retry_time_title">Intervalo de reintento para filtrado de precisión</string>
-  <string name="retry_time_summary">Tras encontrar la ubicación, evitar intentarlo durante cierto tiempo para conseguir un punto exacto que coincida con los ajustes de filtrado de precisión.</string>
   <string name="retry_time_dialog_title">Tiempo en segundos</string>
   <string name="retry_time_hint">Ingrese segundos (máx. 9999)</string>
   <string name="display_imperial_title">Utilizar unidades imperiales</string>
@@ -309,7 +306,6 @@
   <string name="txt_number_of_points">Número de puntos</string>
   <string name="save">Guardar</string>
   <string name="pref_filedetails_title">Detalles de archivo y carpeta</string>
-  <string name="absolute_timeout_title">Tiempo de espera absoluto</string>
   <string name="absolute_timeout_summary">Número de segundos tras los que la aplicación cancela la búsqueda de posición, ignorando los demás ajustes. Especialmente útil cuando estás en interiores para evitar que el GPS gaste batería. Establecer en 0 para evitar el tiempo de espera.</string>
   <string name="txt_latitude_short">Lat</string>
   <string name="txt_longitude_short">Lon</string>
