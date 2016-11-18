@@ -67,4 +67,52 @@ public class Maths {
 
         return sat;
     }
+
+    public static String DecimalDegreesToDegreesMinutesSeconds(double decimaldegrees, boolean isLatitude) {
+        String cardinality = (decimaldegrees<0) ? "S":"N";
+
+        if(!isLatitude){
+            cardinality = (decimaldegrees<0) ? "W":"E";
+        }
+
+        //Remove negative sign
+        decimaldegrees = Math.abs(decimaldegrees);
+
+        int deg =  (int) Math.floor(decimaldegrees);
+        double minfloat = (decimaldegrees-deg)*60;
+        int min = (int) Math.floor(minfloat);
+        double secfloat = (minfloat-min)*60;
+        double sec = Math.round(secfloat * 10000.0)/10000.0;
+
+        // After rounding, the seconds might become 60. These two
+        // if-tests are not necessary if no rounding is done.
+        if (sec==60) {
+            min++;
+            sec=0;
+        }
+        if (min==60) {
+            deg++;
+            min=0;
+        }
+
+
+        return ("" + deg + "° " + min + "' " + sec + "\" " + cardinality);
+    }
+
+    public static String DecimalDegreesToDegreesDecimalMinutes(double decimaldegrees, boolean isLatitude) {
+        String cardinality = (decimaldegrees<0) ? "S":"N";
+
+        if(!isLatitude){
+            cardinality = (decimaldegrees<0) ? "W":"E";
+        }
+
+        //Remove negative sign
+        decimaldegrees = Math.abs(decimaldegrees);
+
+        int deg =  (int) Math.floor(decimaldegrees);
+        double minfloat = (decimaldegrees-deg)*60;
+        double min = Math.round(minfloat*10000.0)/10000.0;
+
+        return ("" + deg + "° " + min + "' " + cardinality);
+    }
 }
