@@ -200,7 +200,7 @@ public class Session extends Application {
 
     public static void setTotalTravelled(double totalTravelled) {
         if (totalTravelled == 0) {
-            Session.numLegs = 0;
+            Session.numLegs = 1;
         } else {
             Session.numLegs++;
         }
