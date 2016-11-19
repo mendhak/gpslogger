@@ -42,11 +42,9 @@ import com.mendhak.gpslogger.senders.FileSenderFactory;
 import org.slf4j.Logger;
 
 import java.text.DateFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.ListIterator;
 
 
 public class GpsDetailedViewFragment extends GenericViewFragment {
@@ -349,14 +347,8 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
                 + " " + new SimpleDateFormat("HH:mm:ss").format(new Date(Session.getLatestTimeStamp()))
                 + " - " + providerName);
 
-        NumberFormat nf = NumberFormat.getInstance();
-
-
-        nf.setMaximumFractionDigits(6);
-        tvLatitude.setText(String.valueOf(nf.format(locationInfo.getLatitude())));
-        tvLongitude.setText(String.valueOf(nf.format(locationInfo.getLongitude())));
-
-        nf.setMaximumFractionDigits(3);
+        tvLatitude.setText(String.valueOf(Strings.DecimalDegreesFormatted(locationInfo.getLatitude())));
+        tvLongitude.setText(String.valueOf(Strings.DecimalDegreesFormatted(locationInfo.getLongitude())));
 
         if (locationInfo.hasAltitude()) {
             tvAltitude.setText(Strings.getDistanceDisplay(getActivity(), locationInfo.getAltitude(), preferenceHelper.shouldDisplayImperialUnits()));

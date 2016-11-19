@@ -44,7 +44,7 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import org.slf4j.Logger;
 
-import java.text.NumberFormat;
+
 
 public class GpsSimpleViewFragment extends GenericViewFragment implements View.OnClickListener {
 
@@ -322,15 +322,8 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     public void displayLocationInfo(Location locationInfo){
         showPreferencesSummary();
 
-        NumberFormat nf = NumberFormat.getInstance();
-        nf.setMaximumFractionDigits(3);
-
         EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
-        txtLatitude.setText(String.valueOf(nf.format(locationInfo.getLatitude())) + ", " + String.valueOf(nf.format(locationInfo.getLongitude())));
-
-
-        nf.setMaximumFractionDigits(3);
-
+        txtLatitude.setText(Strings.DecimalDegreesFormatted(locationInfo.getLatitude(),3) + ", " + Strings.DecimalDegreesFormatted(locationInfo.getLongitude(),3));
 
         ImageView imgAccuracy = (ImageView) rootView.findViewById(R.id.simpleview_imgAccuracy);
         clearColor(imgAccuracy);

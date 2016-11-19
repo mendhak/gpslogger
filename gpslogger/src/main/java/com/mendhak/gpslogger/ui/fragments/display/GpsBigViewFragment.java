@@ -28,9 +28,9 @@ import android.widget.Toast;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 
-import java.text.NumberFormat;
 
 public class GpsBigViewFragment extends GenericViewFragment implements View.OnTouchListener {
 
@@ -88,12 +88,9 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
 
         if (locationInfo != null) {
-            NumberFormat nf = NumberFormat.getInstance();
-            nf.setMaximumFractionDigits(6);
+            txtLat.setText(String.valueOf(Strings.DecimalDegreesFormatted(locationInfo.getLatitude())));
 
-            txtLat.setText(String.valueOf(nf.format(locationInfo.getLatitude())));
-
-            txtLong.setText(String.valueOf(nf.format(locationInfo.getLongitude())));
+            txtLong.setText(String.valueOf(Strings.DecimalDegreesFormatted(locationInfo.getLongitude())));
         } else if (Session.isStarted()) {
             txtLat.setText("...");
         } else {
