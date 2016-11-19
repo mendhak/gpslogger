@@ -263,10 +263,6 @@ tasks.withType(Test) {
     }
 }
 
-tasks.withType(JavaCompile) {
-    options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
-}
-
 tasks.whenTaskAdded { task ->
     //Don't run lint. Takes too long.
     if (task.name.contains("lint")) {

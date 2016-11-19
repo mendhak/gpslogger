@@ -143,7 +143,7 @@ public class DropBoxManager extends FileSender {
 
                 LOG.warn("Found old Dropbox Oauth1 tokens! Attempting upgrade now.");
                 try {
-                    DbxRequestConfig requestConfig = new DbxRequestConfig("GPSLogger", Locale.getDefault().toString());
+                    DbxRequestConfig requestConfig = DbxRequestConfig.newBuilder("GPSLogger").build();
                     DbxAppInfo appInfo = new DbxAppInfo(BuildConfig.DROPBOX_APP_KEY, BuildConfig.DROPBOX_APP_SECRET);
                     upgrader = new DbxOAuth1Upgrader(requestConfig, appInfo);
                     oAuth1AccessToken = new DbxOAuth1AccessToken(preferenceHelper.getDropBoxAccessKeyName(), preferenceHelper.getDropBoxOauth1Secret());

@@ -33,6 +33,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.*;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -305,6 +306,7 @@ public class GpsMainActivity extends AppCompatActivity
         return (Toolbar)findViewById(R.id.toolbar);
     }
 
+    @SuppressWarnings("deprecation")
     public void setUpToolbar(){
         try{
             Toolbar toolbar = getToolbar();
@@ -360,7 +362,7 @@ public class GpsMainActivity extends AppCompatActivity
                 .withAccountHeader(R.layout.smaller_header)
                 .withSavedInstance(savedInstanceState)
                 .withProfileImagesVisible(false)
-                .withHeaderBackground(new ColorDrawable(getResources().getColor(R.color.accentColor)))
+                .withHeaderBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.accentColor)))
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
 
                     @Override
@@ -522,10 +524,10 @@ public class GpsMainActivity extends AppCompatActivity
         TextDrawable drawLetter = TextDrawable.builder()
                 .beginConfig()
                 .bold()
-                .textColor(getResources().getColor(R.color.golden))
+                .textColor(ContextCompat.getColor(getApplicationContext(),R.color.golden))
                 .useFont(Typeface.SANS_SERIF)
                 .endConfig()
-                .buildRound(profileName.substring(0, 1).toUpperCase(), getResources().getColor(R.color.primaryColorLight));
+                .buildRound(profileName.substring(0, 1).toUpperCase(), ContextCompat.getColor(getApplicationContext(), R.color.primaryColorLight));
 
         imgLetter.setImageDrawable(drawLetter);
     }

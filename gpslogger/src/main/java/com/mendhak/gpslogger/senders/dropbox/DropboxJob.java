@@ -47,9 +47,7 @@ public class DropboxJob extends Job {
         try {
             LOG.debug("Beginning upload to dropbox...");
             InputStream inputStream = new FileInputStream(gpxFile);
-            DbxRequestConfig requestConfig = new DbxRequestConfig(
-                    "GPSLogger",
-                    Locale.getDefault().toString());
+            DbxRequestConfig requestConfig = DbxRequestConfig.newBuilder("GPSLogger").build();
             DbxClientV2 mDbxClient = new DbxClientV2(requestConfig, PreferenceHelper.getInstance().getDropBoxAccessKeyName());
             mDbxClient.files().uploadBuilder("/" + fileName).withMode(WriteMode.OVERWRITE).uploadAndFinish(inputStream);
             EventBus.getDefault().post(new UploadEvents.Dropbox().succeeded());
