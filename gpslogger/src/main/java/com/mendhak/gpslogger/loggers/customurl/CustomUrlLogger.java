@@ -80,6 +80,7 @@ public class CustomUrlLogger implements FileLogger {
         logUrl = logUrl.replaceAll("(?i)%batt", String.valueOf(batteryLevel));
         logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));
         logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(buildSerial));
+        logUrl = logUrl.replaceAll("(?i)%act", String.valueOf(sLoc.getDetectedActivity()));
 
         return logUrl;
     }

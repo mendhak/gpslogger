@@ -19,6 +19,7 @@ public class SerializableLocation implements Serializable {
     private boolean hasBearing;
     private boolean hasSpeed;
     private int satelliteCount;
+    private String detectedActivity;
 
 
     public SerializableLocation(Location loc) {
@@ -36,19 +37,7 @@ public class SerializableLocation implements Serializable {
         hasBearing = loc.hasBearing();
         hasSpeed = loc.hasSpeed();
         satelliteCount = Maths.getBundledSatelliteCount(loc);
-    }
-
-    public Location getLocation() {
-        Location loc = new Location(provider);
-        loc.setAltitude(altitude);
-        loc.setAccuracy((float) accuracy);
-        loc.setBearing(bearing);
-        loc.setLatitude(latitude);
-        loc.setLongitude(longitude);
-        loc.setSpeed(speed);
-        loc.setProvider(provider);
-        loc.setTime(time);
-        return loc;
+        detectedActivity = (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("DETECTED_ACTIVITY"))) ? loc.getExtras().getString("DETECTED_ACTIVITY") : "";
     }
 
     public boolean hasAltitude(){
@@ -135,5 +124,6 @@ public class SerializableLocation implements Serializable {
         return satelliteCount;
     }
 
+    public String getDetectedActivity() { return detectedActivity; }
 
 }

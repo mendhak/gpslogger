@@ -30,13 +30,6 @@ import java.util.Date;
 import java.util.Locale;
 
 
-/**
- * Writes a comma separated plain text file.<br/>
- * First line of file is a header with the logged fields: time,lat,lon,elevation,accuracy,bearing,speed
- *
- * @author Jeroen van Wilgenburg
- *         https://github.com/jvwilge/gpslogger/commit/a7d45bcc1d5012513ff2246022ce4da2708adf47
- */
 public class PlainTextFileLogger implements FileLogger {
 
     private File file;
@@ -53,7 +46,7 @@ public class PlainTextFileLogger implements FileLogger {
 
             FileOutputStream writer = new FileOutputStream(file, true);
             BufferedOutputStream output = new BufferedOutputStream(writer);
-            String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider,hdop,vdop,pdop,geoidheight,ageofdgpsdata,dgpsid\n";
+            String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider,hdop,vdop,pdop,geoidheight,ageofdgpsdata,dgpsid,activity\n";
             output.write(header.getBytes());
             output.flush();
             output.close();
@@ -75,7 +68,7 @@ public class PlainTextFileLogger implements FileLogger {
 
     String getCsvLine(Location loc, String dateTimeString) {
 
-        String outputString = String.format(Locale.US, "%s,%f,%f,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s\n", dateTimeString,
+        String outputString = String.format(Locale.US, "%s,%f,%f,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s\n", dateTimeString,
                 loc.getLatitude(),
                 loc.getLongitude(),
                 loc.hasAltitude() ? loc.getAltitude() : "",
@@ -89,7 +82,8 @@ public class PlainTextFileLogger implements FileLogger {
                 (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("PDOP"))) ? loc.getExtras().getString("PDOP") : "",
                 (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("GEOIDHEIGHT"))) ? loc.getExtras().getString("GEOIDHEIGHT") : "",
                 (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("AGEOFDGPSDATA"))) ? loc.getExtras().getString("AGEOFDGPSDATA") : "",
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("DGPSID"))) ? loc.getExtras().getString("DGPSID") : ""
+                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("DGPSID"))) ? loc.getExtras().getString("DGPSID") : "",
+                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("DETECTED_ACTIVITY"))) ? loc.getExtras().getString("DETECTED_ACTIVITY") : ""
         );
         return outputString;
     }

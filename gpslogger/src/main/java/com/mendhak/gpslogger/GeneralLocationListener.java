@@ -19,6 +19,7 @@ package com.mendhak.gpslogger;
 
 import android.location.*;
 import android.os.Bundle;
+import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.nmea.NmeaSentence;
@@ -62,6 +63,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 b.putBoolean("PASSIVE", listenerName.equalsIgnoreCase("PASSIVE"));
                 b.putString("LISTENER", listenerName);
                 b.putInt("SATELLITES_FIX", satellitesUsedInFix);
+                b.putString("DETECTED_ACTIVITY", Session.getLatestDetectedActivityName());
 
                 loc.setExtras(b);
                 loggingService.onLocationChanged(loc);
@@ -69,6 +71,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 this.latestHdop = "";
                 this.latestPdop = "";
                 this.latestVdop = "";
+                Session.setLatestDetectedActivity(null);
             }
 
         } catch (Exception ex) {

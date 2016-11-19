@@ -1050,6 +1050,8 @@ public class GpsLoggingService extends Service  {
     @EventBusHook
     public void onEvent(ServiceEvents.ActivityRecognitionEvent activityRecognitionEvent){
 
+        Session.setLatestDetectedActivity(activityRecognitionEvent.result.getMostProbableActivity());
+
         if(!preferenceHelper.shouldNotLogIfUserIsStill()){
             Session.setUserStillSinceTimeStamp(0);
             return;

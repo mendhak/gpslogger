@@ -22,6 +22,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.preference.PreferenceManager;
+import com.google.android.gms.location.DetectedActivity;
 
 public class Session extends Application {
 
@@ -54,6 +55,7 @@ public class Session extends Application {
     private static String currentFormattedFileName;
     private static long userStillSinceTimeStamp;
     private static long firstRetryTimeStamp;
+    private static DetectedActivity latestDetectedActivity;
 
     public static boolean isSinglePointMode() {
         return isSinglePointMode;
@@ -363,5 +365,37 @@ public class Session extends Application {
 
     public static long getFirstRetryTimeStamp() {
         return firstRetryTimeStamp;
+    }
+
+    public static void setLatestDetectedActivity(DetectedActivity latestDetectedActivity) {
+        Session.latestDetectedActivity = latestDetectedActivity;
+    }
+
+    public static String getLatestDetectedActivityName() {
+
+        if(latestDetectedActivity == null){
+            return "";
+        }
+
+        switch(latestDetectedActivity.getType()) {
+            case DetectedActivity.IN_VEHICLE:
+                return "IN_VEHICLE";
+            case DetectedActivity.ON_BICYCLE:
+                return "ON_BICYCLE";
+            case DetectedActivity.ON_FOOT:
+                return "ON_FOOT";
+            case DetectedActivity.STILL:
+                return "STILL";
+            case DetectedActivity.UNKNOWN:
+            case 6:
+            default:
+                return "UNKNOWN";
+            case DetectedActivity.TILTING:
+                return "TILTING";
+            case DetectedActivity.WALKING:
+                return "WALKING";
+            case DetectedActivity.RUNNING:
+                return "RUNNING";
+        }
     }
 }

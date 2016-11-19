@@ -60,8 +60,8 @@ public class CustomUrlFragment extends PermissionedPreferenceFragment implements
         Preference urlLegendPreference2 = (Preference)findPreference("customurl_legend_2");
         urlLegendPreference2.setSummary(legend2);
 
-        String legend3 = MessageFormat.format("{0} %TIME\n{1} %BATT\n{2} %AID\n{3} %SER",
-                getString(R.string.txt_time_isoformat), "Battery:", "Android ID:", "Serial:"
+        String legend3 = MessageFormat.format("{0} %TIME\n{1} %BATT\n{2} %AID\n{3} %SER\n{4} %ACT",
+                getString(R.string.txt_time_isoformat), "Battery:", "Android ID:", "Serial:", getString(R.string.txt_activity)
                 );
 
         Preference urlLegendPreference3 = (Preference)findPreference("customurl_legend_3");
