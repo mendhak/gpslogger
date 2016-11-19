@@ -55,7 +55,7 @@ public class WifiNetworkUtil implements NetworkUtil, NetworkEventProvider {
     @TargetApi(23)
     private static IntentFilter getNetworkIntentFilter() {
         IntentFilter networkIntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             networkIntentFilter.addAction(PowerManager.ACTION_DEVICE_IDLE_MODE_CHANGED);
         }
         return networkIntentFilter;

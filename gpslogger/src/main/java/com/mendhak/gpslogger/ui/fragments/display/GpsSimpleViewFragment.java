@@ -107,9 +107,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             displayLocationInfo(Session.getCurrentLocationInfo());
         }
 
-
-
-
         return rootView;
     }
 
@@ -323,7 +320,10 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         showPreferencesSummary();
 
         EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
-        txtLatitude.setText(Strings.DecimalDegreesFormatted(locationInfo.getLatitude(),3) + ", " + Strings.DecimalDegreesFormatted(locationInfo.getLongitude(),3));
+        txtLatitude.setText(Strings.getFormattedLatitude(locationInfo.getLatitude()));
+
+        EditText txtLongitude = (EditText) rootView.findViewById(R.id.simple_lon_text);
+        txtLongitude.setText(Strings.getFormattedLongitude(locationInfo.getLongitude()));
 
         ImageView imgAccuracy = (ImageView) rootView.findViewById(R.id.simpleview_imgAccuracy);
         clearColor(imgAccuracy);
@@ -403,6 +403,9 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
         EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
         txtLatitude.setText("");
+
+        EditText txtLongitude = (EditText) rootView.findViewById(R.id.simple_lon_text);
+        txtLongitude.setText("");
 
         ImageView imgAccuracy = (ImageView)rootView.findViewById(R.id.simpleview_imgAccuracy);
         clearColor(imgAccuracy);

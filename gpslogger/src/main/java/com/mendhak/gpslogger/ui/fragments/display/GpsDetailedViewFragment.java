@@ -347,8 +347,8 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
                 + " " + new SimpleDateFormat("HH:mm:ss").format(new Date(Session.getLatestTimeStamp()))
                 + " - " + providerName);
 
-        tvLatitude.setText(String.valueOf(Strings.DecimalDegreesFormatted(locationInfo.getLatitude())));
-        tvLongitude.setText(String.valueOf(Strings.DecimalDegreesFormatted(locationInfo.getLongitude())));
+        tvLatitude.setText(String.valueOf(Strings.getFormattedLatitude(locationInfo.getLatitude())));
+        tvLongitude.setText(String.valueOf(Strings.getFormattedLongitude(locationInfo.getLongitude())));
 
         if (locationInfo.hasAltitude()) {
             tvAltitude.setText(Strings.getDistanceDisplay(getActivity(), locationInfo.getAltitude(), preferenceHelper.shouldDisplayImperialUnits()));

@@ -9,7 +9,7 @@ public class UploadEvents {
 
     // new Baseuploadvent.   b.message = "X";
     // public class AutoEmailEvent extends thebaseone {}
-
+    @SuppressWarnings("unchecked")
     public static abstract class BaseUploadEvent implements java.io.Serializable{
         public boolean success;
         public String message;

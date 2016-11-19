@@ -88,9 +88,9 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
 
         if (locationInfo != null) {
-            txtLat.setText(String.valueOf(Strings.DecimalDegreesFormatted(locationInfo.getLatitude())));
+            txtLat.setText(String.valueOf(Strings.getFormattedLatitude(locationInfo.getLatitude())));
 
-            txtLong.setText(String.valueOf(Strings.DecimalDegreesFormatted(locationInfo.getLongitude())));
+            txtLong.setText(String.valueOf(Strings.getFormattedLongitude(locationInfo.getLongitude())));
         } else if (Session.isStarted()) {
             txtLat.setText("...");
         } else {

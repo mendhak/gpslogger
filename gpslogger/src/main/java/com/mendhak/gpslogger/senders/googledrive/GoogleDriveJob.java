@@ -91,11 +91,6 @@ public class GoogleDriveJob extends Job {
         String fileUpdateUrl = "https://www.googleapis.com/upload/drive/v2/files/" + gpxFileId + "?uploadType=media";
 
         try {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
-                //Due to a pre-froyo bug
-                //http://android-developers.blogspot.com/2011/09/androids-http-clients.html
-                System.setProperty("http.keepAlive", "false");
-            }
 
             URL url = new URL(fileUpdateUrl);
 
@@ -155,12 +150,6 @@ public class GoogleDriveJob extends Job {
 
         try {
 
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
-                //Due to a pre-froyo bug
-                //http://android-developers.blogspot.com/2011/09/androids-http-clients.html
-                System.setProperty("http.keepAlive", "false");
-            }
-
             URL url = new URL(createFileUrl);
 
             conn = (HttpURLConnection) url.openConnection();
@@ -219,12 +208,6 @@ public class GoogleDriveJob extends Job {
 
             //To search in a folder:
             String searchUrl = "https://www.googleapis.com/drive/v2/files?q=title%20%3D%20%27" + fileName + "%27%20and%20trashed%20%3D%20false" + inFolderParam;
-
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
-                //Due to a pre-froyo bug
-                //http://android-developers.blogspot.com/2011/09/androids-http-clients.html
-                System.setProperty("http.keepAlive", "false");
-            }
 
             URL url = new URL(searchUrl);
 

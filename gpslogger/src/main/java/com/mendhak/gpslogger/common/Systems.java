@@ -70,7 +70,7 @@ public class Systems {
      */
     @TargetApi(23)
     public static boolean isDozing(Context context) {
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
             return powerManager.isDeviceIdleMode() &&
                     !powerManager.isIgnoringBatteryOptimizations(context.getPackageName());

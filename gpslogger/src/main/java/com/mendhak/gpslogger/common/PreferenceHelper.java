@@ -469,6 +469,20 @@ public class PreferenceHelper {
         return prefs.getBoolean(PreferenceNames.DISPLAY_IMPERIAL, false);
     }
 
+    /**
+     * Display format to use for lat long coordinates on screen
+     * DEGREES_MINUTES_SECONDS, DEGREES_DECIMAL_MINUTES, DECIMAL_DEGREES
+     */
+    @ProfilePreference(name=PreferenceNames.LATLONG_DISPLAY_FORMAT)
+    public PreferenceNames.DegreesDisplayFormat getDisplayLatLongFormat(){
+        String chosenValue = prefs.getString(PreferenceNames.LATLONG_DISPLAY_FORMAT,"DEGREES_MINUTES_SECONDS");
+        return PreferenceNames.DegreesDisplayFormat.valueOf(chosenValue);
+    }
+
+    public void setDisplayLatLongFormat(PreferenceNames.DegreesDisplayFormat displayFormat){
+        prefs.edit().putString(PreferenceNames.LATLONG_DISPLAY_FORMAT, displayFormat.toString()).apply();
+    }
+
 
     /**
      * Whether to log to KML file
@@ -981,7 +995,7 @@ public class PreferenceHelper {
         prefs.edit().putBoolean(PreferenceNames.CUSTOM_FILE_NAME_KEEP_CHANGING, keepChanging).apply();
     }
 
-
+    @SuppressWarnings("unchecked")
     public void savePropertiesFromPreferences(File f) throws IOException {
 
         Properties props = new Properties();

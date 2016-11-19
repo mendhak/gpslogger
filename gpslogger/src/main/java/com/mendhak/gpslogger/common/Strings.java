@@ -344,7 +344,7 @@ public class Strings {
         return output;
     }
 
-    public static String DecimalDegreesToDegreesMinutesSeconds(double decimaldegrees, boolean isLatitude) {
+    public static String getDegreesMinutesSeconds(double decimaldegrees, boolean isLatitude) {
         String cardinality = (decimaldegrees<0) ? "S":"N";
 
         if(!isLatitude){
@@ -375,7 +375,7 @@ public class Strings {
         return ("" + deg + "° " + min + "' " + sec + "\" " + cardinality);
     }
 
-    public static String DecimalDegreesToDegreesDecimalMinutes(double decimaldegrees, boolean isLatitude) {
+    public static String getDegreesDecimalMinutes(double decimaldegrees, boolean isLatitude) {
         String cardinality = (decimaldegrees<0) ? "S":"N";
 
         if(!isLatitude){
@@ -392,13 +392,34 @@ public class Strings {
         return ("" + deg + "° " + min + "' " + cardinality);
     }
 
-    public static String DecimalDegreesFormatted(double decimaldegrees) {
-        return DecimalDegreesFormatted(decimaldegrees, 6);
-    }
-
-    public static String DecimalDegreesFormatted(double decimaldegrees, int maxDecimalPoints) {
+    public static String getDecimalDegrees(double decimaldegrees) {
         NumberFormat nf = NumberFormat.getInstance();
-        nf.setMaximumFractionDigits(maxDecimalPoints);
+        nf.setMaximumFractionDigits(6);
         return nf.format(decimaldegrees);
     }
+
+    public static String getFormattedLatitude(double decimaldegrees){
+        return getFormattedDegrees(decimaldegrees, true, PreferenceHelper.getInstance());
+    }
+
+    public static String getFormattedLongitude(double decimaldegrees){
+        return getFormattedDegrees(decimaldegrees, false, PreferenceHelper.getInstance());
+    }
+
+    public static String getFormattedDegrees(double decimaldegrees, boolean isLatitude, PreferenceHelper ph){
+        switch(ph.getDisplayLatLongFormat()){
+
+            case DEGREES_MINUTES_SECONDS:
+                return getDegreesMinutesSeconds(decimaldegrees, isLatitude);
+
+            case DEGREES_DECIMAL_MINUTES:
+                return getDegreesDecimalMinutes(decimaldegrees, isLatitude);
+
+            case DECIMAL_DEGREES:
+            default:
+                return getDecimalDegrees(decimaldegrees);
+
+        }
+    }
+
 }

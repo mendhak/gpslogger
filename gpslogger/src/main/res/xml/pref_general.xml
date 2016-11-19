@@ -18,6 +18,11 @@
         android:summary="@string/display_imperial_summary"
         android:key="useImperial"/>
 
+    <com.afollestad.materialdialogs.prefs.MaterialListPreference
+        android:key="coordinatedisplayformat"
+        android:title="@string/coordinate_display_format"
+        />
+
     <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:title="@string/hide_notification_buttons"
         android:summary="@string/hide_notification_buttons_summary"
