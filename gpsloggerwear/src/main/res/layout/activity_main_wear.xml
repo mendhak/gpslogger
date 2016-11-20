@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text=""
-        android:textSize="35sp"
+        android:textSize="30sp"
         android:textColor="@color/black"/>
     <TextView
         android:id="@+id/txtLongitude"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text=""
-        android:textSize="35sp"
+        android:textSize="30sp"
         android:textColor="@color/black"/>
     <TextView
         android:id="@+id/txtFixTime"

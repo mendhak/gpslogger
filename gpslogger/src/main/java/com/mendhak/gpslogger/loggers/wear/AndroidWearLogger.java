@@ -10,6 +10,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.*;
 import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import org.slf4j.Logger;
@@ -63,8 +64,8 @@ public class AndroidWearLogger implements FileLogger, GoogleApiClient.Connection
 
         if(loc != null){
             dataMap.putLong("fixtime", loc.getTime());
-            dataMap.putDouble("latitude", loc.getLatitude());
-            dataMap.putDouble("longitude", loc.getLongitude());
+            dataMap.putString("latitude", Strings.getFormattedLatitude(loc.getLatitude()));
+            dataMap.putString("longitude", Strings.getFormattedLongitude(loc.getLongitude()));
             dataMap.putDouble("altitude", loc.getAltitude());
         }
 

@@ -13,11 +13,9 @@ import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.*;
-
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
+
 
 public class MainWearActivity extends WearableActivity implements
         DataApi.DataListener,
@@ -240,16 +238,12 @@ public class MainWearActivity extends WearableActivity implements
                 return;
             }
 
-            NumberFormat nf = NumberFormat.getInstance();
-            nf.setMaximumFractionDigits(3);
-
-
             if(dataMap.containsKey("latitude")){
-                textViewAnimatedChange(txtLatitude, nf.format(dataMap.getDouble("latitude")));
+                textViewAnimatedChange(txtLatitude, dataMap.getString("latitude"));
             }
 
             if(dataMap.containsKey("longitude")){
-                textViewAnimatedChange(txtLongitude, nf.format(dataMap.getDouble("longitude")));
+                textViewAnimatedChange(txtLongitude, dataMap.getString("longitude"));
             }
 
             if(dataMap.containsKey("fixtime")){
