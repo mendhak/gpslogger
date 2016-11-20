@@ -479,15 +479,12 @@ public class GpsLoggingService extends Service  {
 
         PendingIntent pending = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-
-        NumberFormat nf = new DecimalFormat("###.#####");
-
         String contentText = getString(R.string.gpslogger_still_running);
         long notificationTime = System.currentTimeMillis();
 
         if (Session.hasValidLocation()) {
-            contentText = getString(R.string.txt_latitude_short) + ": " + nf.format(Session.getCurrentLatitude()) + ", "
-                    + getString(R.string.txt_longitude_short) + ": " + nf.format(Session.getCurrentLongitude());
+            contentText =  Strings.getFormattedLatitude(Session.getCurrentLatitude()) + ", "
+                     + Strings.getFormattedLongitude(Session.getCurrentLongitude());
 
             notificationTime = Session.getCurrentLocationInfo().getTime();
         }
