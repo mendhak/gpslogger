@@ -5,7 +5,7 @@ import android.location.Location;
 
 public class Maths {
     /**
-     * Uses the Haversine formula to calculate the distnace between to lat-long coordinates
+     * Uses the Haversine formula to calculate the distance (meters) between to lat-long coordinates
      *
      * @param latitude1  The first point's latitude
      * @param longitude1 The first point's longitude

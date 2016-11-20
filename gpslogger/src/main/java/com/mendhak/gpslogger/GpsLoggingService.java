@@ -771,12 +771,23 @@ public class GpsLoggingService extends Service  {
         }
         
 
+        //Check if a ridiculous distance has been travelled since previous point - could be a bad GPS jump
+        if(Session.getCurrentLocationInfo() != null){
+            double distanceTravelled = Maths.calculateDistance(loc.getLatitude(), loc.getLongitude(), Session.getCurrentLocationInfo().getLatitude(), Session.getCurrentLocationInfo().getLongitude());
+            long timeDifference = Math.abs(loc.getTime() - Session.getCurrentLocationInfo().getTime())/1000;
+            double speed = distanceTravelled/timeDifference;
+            if(speed > 170){ //170 m/s ~=  600 km/h
+                LOG.warn(String.format("Very large jump detected - %d meters in %d sec - discarding point", (long)distanceTravelled, timeDifference));
+                return;
+            }
+        }
+
         // Don't do anything until the user-defined accuracy is reached
         // However, if user has set an annotation, just log the point, disregard any filters
         if (!Session.hasDescription() &&  preferenceHelper.getMinimumAccuracy() > 0) {
 
 
-            if(!loc.hasAccuracy()){
+            if(!loc.hasAccuracy() || loc.getAccuracy() == 0){
                 return;
             }
 
