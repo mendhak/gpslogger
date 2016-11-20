@@ -51,8 +51,6 @@ import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -672,7 +670,6 @@ public class GpsLoggingService extends Service  {
                 Session.setCurrentFileName(Session.getCurrentFileName());
             }
 
-
         } else if (preferenceHelper.shouldCreateNewFileOnceADay()) {
             // 20100114.gpx
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -763,8 +760,9 @@ public class GpsLoggingService extends Service  {
         if (preferenceHelper.shouldCreateNewFileOnceADay()) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
             String today = sdf.format(new Date());
-            if (!today.equals(Session.getCurrentFileName()))
+            if (!today.equals(Session.getCurrentFileName())) {
                 resetCurrentFileName(false);
+            }
         }
         
 
@@ -832,7 +830,7 @@ public class GpsLoggingService extends Service  {
 
 
         LOG.info(SessionLogcatAppender.MARKER_LOCATION, String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getLongitude()));
-        adjustAltitude(loc);
+        loc = Locations.getLocationWithAdjustedAltitude(loc, preferenceHelper);
         resetCurrentFileName(false);
         Session.setLatestTimeStamp(System.currentTimeMillis());
         Session.setFirstRetryTimeStamp(0);
@@ -853,26 +851,6 @@ public class GpsLoggingService extends Service  {
         if (Session.isSinglePointMode()) {
             LOG.debug("Single point mode - stopping now");
             stopLogging();
-        }
-    }
-
-    private void adjustAltitude(Location loc) {
-
-        if(!loc.hasAltitude()){ return; }
-
-        if(preferenceHelper.shouldAdjustAltitudeFromGeoIdHeight() && loc.getExtras() != null){
-            String geoidheight = loc.getExtras().getString("GEOIDHEIGHT");
-            if (!Strings.isNullOrEmpty(geoidheight)) {
-                loc.setAltitude((float) loc.getAltitude() - Float.valueOf(geoidheight));
-            }
-            else {
-                //If geoid height not present for adjustment, don't record an elevation at all.
-                loc.removeAltitude();
-            }
-        }
-
-        if(loc.hasAltitude()){
-            loc.setAltitude(loc.getAltitude() - preferenceHelper.getSubtractAltitudeOffset());
         }
     }
 
