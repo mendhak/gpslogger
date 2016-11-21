@@ -39,6 +39,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     protected String ageOfDgpsData;
     protected String dgpsId;
     protected int satellitesUsedInFix;
+    private Session session = Session.getInstance();
 
     GeneralLocationListener(GpsLoggingService activity, String name) {
         loggingService = activity;
@@ -63,7 +64,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 b.putBoolean("PASSIVE", listenerName.equalsIgnoreCase("PASSIVE"));
                 b.putString("LISTENER", listenerName);
                 b.putInt("SATELLITES_FIX", satellitesUsedInFix);
-                b.putString("DETECTED_ACTIVITY", Session.getLatestDetectedActivityName());
+                b.putString("DETECTED_ACTIVITY", session.getLatestDetectedActivityName());
 
                 loc.setExtras(b);
                 loggingService.onLocationChanged(loc);
@@ -71,7 +72,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 this.latestHdop = "";
                 this.latestPdop = "";
                 this.latestVdop = "";
-                Session.setLatestDetectedActivity(null);
+                session.setLatestDetectedActivity(null);
             }
 
         } catch (Exception ex) {

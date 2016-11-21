@@ -37,6 +37,7 @@ import java.util.List;
 public class FileLoggerFactory {
 
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    private static Session session = Session.getInstance();
 
     public static List<FileLogger> getFileLoggers(Context context) {
 
@@ -52,17 +53,17 @@ public class FileLoggerFactory {
         }
 
         if (preferenceHelper.shouldLogToGpx()) {
-            File gpxFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".gpx");
-            loggers.add(new Gpx10FileLogger(gpxFile, Session.shouldAddNewTrackSegment()));
+            File gpxFile = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".gpx");
+            loggers.add(new Gpx10FileLogger(gpxFile, session.shouldAddNewTrackSegment()));
         }
 
         if (preferenceHelper.shouldLogToKml()) {
-            File kmlFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".kml");
-            loggers.add(new Kml22FileLogger(kmlFile, Session.shouldAddNewTrackSegment()));
+            File kmlFile = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".kml");
+            loggers.add(new Kml22FileLogger(kmlFile, session.shouldAddNewTrackSegment()));
         }
 
         if (preferenceHelper.shouldLogToPlainText()) {
-            File file = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".txt");
+            File file = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".txt");
             loggers.add(new PlainTextFileLogger(file));
         }
 

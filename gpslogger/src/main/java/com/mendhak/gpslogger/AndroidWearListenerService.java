@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 
 public class AndroidWearListenerService extends WearableListenerService {
     private static final Logger LOG = Logs.of(AndroidWearListenerService.class);
-
+    private Session session = Session.getInstance();
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
@@ -24,10 +24,10 @@ public class AndroidWearListenerService extends WearableListenerService {
             LOG.debug("Message path received on mob is: " + messageEvent.getPath());
             LOG.debug("Message received on mob is: " + message);
 
-            LOG.debug("Session started: " + Session.isStarted());
+            LOG.debug("Session started: " + session.isStarted());
 
             Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
-            if(Session.isStarted()){
+            if(session.isStarted()){
                 serviceIntent.putExtra(IntentConstants.IMMEDIATE_STOP,true);
             }
             else {
@@ -42,7 +42,7 @@ public class AndroidWearListenerService extends WearableListenerService {
 
             try {
 
-                Location loc = Session.getCurrentLocationInfo() == null ?  Session.getPreviousLocationInfo(): Session.getCurrentLocationInfo();
+                Location loc = session.getCurrentLocationInfo() == null ?  session.getPreviousLocationInfo(): session.getCurrentLocationInfo();
                 AndroidWearLogger logger = new AndroidWearLogger(getApplicationContext());
                 logger.write(loc);
 

@@ -25,6 +25,7 @@ public class AndroidWearLogger implements FileLogger, GoogleApiClient.Connection
     private GoogleApiClient googleClient;
     private Context context;
     Location loc;
+    private Session session = Session.getInstance();
 
     public AndroidWearLogger(Context context){
         this.context = context;
@@ -69,7 +70,7 @@ public class AndroidWearLogger implements FileLogger, GoogleApiClient.Connection
             dataMap.putDouble("altitude", loc.getAltitude());
         }
 
-        dataMap.putBoolean("session", Session.isStarted());
+        dataMap.putBoolean("session", session.isStarted());
 
         new SendToDataLayerThread("/latest_gps", dataMap).start();
 

@@ -20,6 +20,7 @@ package com.mendhak.gpslogger.loggers.nmea;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.Files;
 
 import java.io.BufferedWriter;
@@ -38,6 +39,7 @@ public class NmeaFileLogger {
             new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
 
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    private Session session = Session.getInstance();
 
     public NmeaFileLogger(String fileName) {
         this.fileName = fileName;
@@ -50,7 +52,7 @@ public class NmeaFileLogger {
             gpxFolder.mkdirs();
         }
 
-        File nmeaFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".nmea");
+        File nmeaFile = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".nmea");
 
         if (!nmeaFile.exists()) {
             try {

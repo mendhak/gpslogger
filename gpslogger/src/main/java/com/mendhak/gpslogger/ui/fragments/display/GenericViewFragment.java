@@ -48,6 +48,7 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
 
     private static final Logger LOG = Logs.of(GenericViewFragment.class);
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    private Session session = Session.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,7 +98,7 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
     @AskPermission({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public void requestToggleLogging() {
 
-        if (Session.isStarted()) {
+        if (session.isStarted()) {
             toggleLogging();
             return;
         }

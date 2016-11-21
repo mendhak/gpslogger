@@ -35,6 +35,7 @@ import com.mendhak.gpslogger.common.events.ServiceEvents;
 public class GpsBigViewFragment extends GenericViewFragment implements View.OnTouchListener {
 
     View rootView;
+    private Session session = Session.getInstance();
 
     public static GpsBigViewFragment newInstance() {
         GpsBigViewFragment fragment = new GpsBigViewFragment();
@@ -57,9 +58,9 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
         txtLong.setOnTouchListener(this);
 
-        displayLocationInfo(Session.getCurrentLocationInfo());
+        displayLocationInfo(session.getCurrentLocationInfo());
 
-        if (Session.isStarted()) {
+        if (session.isStarted()) {
             Toast.makeText(getActivity().getApplicationContext(), R.string.bigview_taptotoggle, Toast.LENGTH_SHORT).show();
         }
 
@@ -91,7 +92,7 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
             txtLat.setText(String.valueOf(Strings.getFormattedLatitude(locationInfo.getLatitude())));
 
             txtLong.setText(String.valueOf(Strings.getFormattedLongitude(locationInfo.getLongitude())));
-        } else if (Session.isStarted()) {
+        } else if (session.isStarted()) {
             txtLat.setText("...");
         } else {
             txtLat.setText(R.string.bigview_taptotoggle);

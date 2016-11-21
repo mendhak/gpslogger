@@ -3,6 +3,7 @@ package com.mendhak.gpslogger.common;
 
 import android.content.Context;
 import android.os.Build;
+import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 
@@ -216,8 +217,20 @@ public class Strings {
         }
     }
 
-    public static String getFormattedCustomFileName(String baseName) {
-        return getFormattedCustomFileName(baseName, GregorianCalendar.getInstance(), PreferenceHelper.getInstance());
+    public static String getFormattedFileName(){
+        return getFormattedFileName(Session.getInstance(), PreferenceHelper.getInstance());
+    }
+
+    public static String getFormattedFileName(Session session, PreferenceHelper ph) {
+        String currentFileName = session.getCurrentFileName();
+        if (ph.shouldCreateCustomFile() && !Strings.isNullOrEmpty(currentFileName)) {
+            return getFormattedCustomFileName(currentFileName, GregorianCalendar.getInstance(), ph);
+        } else {
+            if (!Strings.isNullOrEmpty(currentFileName) && ph.shouldPrefixSerialToFileName() && !currentFileName.contains(String.valueOf(getBuildSerial()))) {
+                currentFileName = String.valueOf(getBuildSerial()) + "_" + currentFileName;
+            }
+        }
+        return currentFileName;
     }
 
     public static String getFormattedCustomFileName(String baseName, Calendar calendar, PreferenceHelper ph){
@@ -406,7 +419,7 @@ public class Strings {
         return getFormattedDegrees(decimaldegrees, false, PreferenceHelper.getInstance());
     }
 
-    public static String getFormattedDegrees(double decimaldegrees, boolean isLatitude, PreferenceHelper ph){
+    static String getFormattedDegrees(double decimaldegrees, boolean isLatitude, PreferenceHelper ph){
         switch(ph.getDisplayLatLongFormat()){
 
             case DEGREES_MINUTES_SECONDS:
@@ -419,6 +432,34 @@ public class Strings {
             default:
                 return getDecimalDegrees(decimaldegrees);
 
+        }
+    }
+
+    public static  String getDetectedActivityName(DetectedActivity detectedActivity) {
+
+        if(detectedActivity == null){
+            return "";
+        }
+
+        switch(detectedActivity.getType()) {
+            case DetectedActivity.IN_VEHICLE:
+                return "IN_VEHICLE";
+            case DetectedActivity.ON_BICYCLE:
+                return "ON_BICYCLE";
+            case DetectedActivity.ON_FOOT:
+                return "ON_FOOT";
+            case DetectedActivity.STILL:
+                return "STILL";
+            case DetectedActivity.UNKNOWN:
+            case 6:
+            default:
+                return "UNKNOWN";
+            case DetectedActivity.TILTING:
+                return "TILTING";
+            case DetectedActivity.WALKING:
+                return "WALKING";
+            case DetectedActivity.RUNNING:
+                return "RUNNING";
         }
     }
 

@@ -397,5 +397,64 @@ public class StringsTest {
         assertThat("Preference DDM returns DDM", actual, is(expected));
     }
 
+    @Test
+    public void getFormattedFileName_BasicFileName_ReturnsAsIs(){
+        Session sess = mock(Session.class);
+        when(sess.getCurrentFileName()).thenReturn("hello");
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+
+        String expected = "hello";
+        String actual = Strings.getFormattedFileName(sess, ph);
+
+        assertThat("Basic file name unchanged", actual, is(expected));
+
+        when(sess.getCurrentFileName()).thenReturn("");
+        expected = "";
+        actual = Strings.getFormattedFileName(sess, ph);
+        assertThat("Empty file name returns empty string", actual, is(expected));
+    }
+
+    @Test
+    public void getFormattedFileName_CreateCustomFileName_ReturnsFormatted(){
+        Session sess = mock(Session.class);
+        when(sess.getCurrentFileName()).thenReturn("basename_%ver");
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+        when(ph.shouldCreateCustomFile()).thenReturn(true);
+
+        String expected = "basename_" + BuildConfig.VERSION_NAME;
+        String actual = Strings.getFormattedFileName(sess, ph);
+
+        assertThat("Custom file name should do substitutions", actual, is(expected));
+
+
+    }
+
+    @Test
+    public void getFormattedFileName_shouldPrefixSerialToFileName(){
+        Session sess = mock(Session.class);
+        when(sess.getCurrentFileName()).thenReturn("somefile");
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+        when(ph.shouldPrefixSerialToFileName()).thenReturn(true);
+
+        String expected = Build.SERIAL + "_somefile";
+        String actual = Strings.getFormattedFileName(sess,ph);
+
+        assertThat("Build serial is prefixed to file name", actual, is(expected));
+
+    }
+
+
+    @Test
+    public void getFormattedFileName_shouldPrefixSerialToFileName_SerialOnlyIncludedOnce(){
+        Session sess = mock(Session.class);
+        when(sess.getCurrentFileName()).thenReturn(Build.SERIAL + "___somefile");
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+        when(ph.shouldPrefixSerialToFileName()).thenReturn(true);
+
+        String expected = Build.SERIAL + "___somefile";
+        String actual = Strings.getFormattedFileName(sess, ph);
+        assertThat("Build serial only included once", actual, is(expected));
+
+    }
 
 }

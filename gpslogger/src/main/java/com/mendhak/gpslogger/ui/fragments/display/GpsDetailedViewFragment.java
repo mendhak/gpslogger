@@ -1,19 +1,19 @@
-/*******************************************************************************
- * This file is part of GPSLogger for Android.
- *
- * GPSLogger for Android is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * GPSLogger for Android is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************/
+/******************************************************************************
+ This file is part of GPSLogger for Android.
+
+ GPSLogger for Android is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 2 of the License, or
+ (at your option) any later version.
+
+ GPSLogger for Android is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 package com.mendhak.gpslogger.ui.fragments.display;
 
@@ -54,6 +54,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     private ActionProcessButton actionButton;
     private static final Logger LOG = Logs.of(GpsDetailedViewFragment.class);
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    private Session session = Session.getInstance();
 
     public static GpsDetailedViewFragment newInstance() {
 
@@ -84,8 +85,8 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         });
 
 
-        if (Session.hasValidLocation()) {
-            displayLocationInfo(Session.getCurrentLocationInfo());
+        if (session.hasValidLocation()) {
+            displayLocationInfo(session.getCurrentLocationInfo());
         }
 
         showPreferencesAndMessages();
@@ -116,7 +117,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     @Override
     public void onResume() {
 
-        if(Session.isStarted()){
+        if(session.isStarted()){
             setActionButtonStop();
         }
         else {
@@ -187,7 +188,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             }
 
 
-            showCurrentFileName(Session.getCurrentFileName());
+            showCurrentFileName(Strings.getFormattedFileName());
 
 
             TextView txtTargets = (TextView) rootView.findViewById(R.id.detailedview_autosendtargets_text);
@@ -243,10 +244,10 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         }
 
         TextView txtFilename = (TextView) rootView.findViewById(R.id.detailedview_file_text);
-        txtFilename.setText(Session.getCurrentFileName() + "\n (" + preferenceHelper.getGpsLoggerFolder() + ")");
+        txtFilename.setText(Strings.getFormattedFileName() + "\n (" + preferenceHelper.getGpsLoggerFolder() + ")");
 
         Files.setFileExplorerLink(txtFilename,
-                Html.fromHtml(Session.getCurrentFileName() + "<br /> (" + "<font color='blue'><u>" + preferenceHelper.getGpsLoggerFolder() + "</u></font>" + ")"),
+                Html.fromHtml(Strings.getFormattedFileName() + "<br /> (" + "<font color='blue'><u>" + preferenceHelper.getGpsLoggerFolder() + "</u></font>" + ")"),
                 preferenceHelper.getGpsLoggerFolder(),
                 getActivity().getApplicationContext());
     }
@@ -343,8 +344,8 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             providerName = getString(R.string.providername_celltower);
         }
 
-        tvDateTime.setText(android.text.format.DateFormat.getDateFormat(getActivity()).format(new Date(Session.getLatestTimeStamp()))
-                + " " + new SimpleDateFormat("HH:mm:ss").format(new Date(Session.getLatestTimeStamp()))
+        tvDateTime.setText(android.text.format.DateFormat.getDateFormat(getActivity()).format(new Date(session.getLatestTimeStamp()))
+                + " " + new SimpleDateFormat("HH:mm:ss").format(new Date(session.getLatestTimeStamp()))
                 + " - " + providerName);
 
         tvLatitude.setText(String.valueOf(Strings.getFormattedLatitude(locationInfo.getLatitude())));
@@ -376,7 +377,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             txtDirection.setText(R.string.not_applicable);
         }
 
-        if (!Session.isUsingGps()) {
+        if (!session.isUsingGps()) {
             txtSatellites.setText(R.string.not_applicable);
         }
 
@@ -389,10 +390,10 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             txtAccuracy.setText(R.string.not_applicable);
         }
 
-        double distanceValue = Session.getTotalTravelled();
-        txtTravelled.setText(Strings.getDistanceDisplay(getActivity(), distanceValue, preferenceHelper.shouldDisplayImperialUnits()) + " (" + Session.getNumLegs() + " points)");
+        double distanceValue = session.getTotalTravelled();
+        txtTravelled.setText(Strings.getDistanceDisplay(getActivity(), distanceValue, preferenceHelper.shouldDisplayImperialUnits()) + " (" + session.getNumLegs() + " points)");
 
-        long startTime = Session.getStartTimeStamp();
+        long startTime = session.getStartTimeStamp();
         Date d = new Date(startTime);
         long currentTime = System.currentTimeMillis();
 
