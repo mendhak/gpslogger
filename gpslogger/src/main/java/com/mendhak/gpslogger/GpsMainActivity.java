@@ -1,4 +1,6 @@
-/*******************************************************************************
+/*
+ * Copyright (C) 2016 mendhak
+ *
  * This file is part of GPSLogger for Android.
  *
  * GPSLogger for Android is free software: you can redistribute it and/or modify
@@ -13,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************/
+ */
 
 package com.mendhak.gpslogger;
 
@@ -33,6 +35,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.*;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -90,6 +93,7 @@ public class GpsMainActivity extends AppCompatActivity
     Drawer materialDrawer;
     AccountHeader drawerHeader;
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    private Session session = Session.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +152,7 @@ public class GpsMainActivity extends AppCompatActivity
         super.onResume();
         startAndBindService();
 
-        if (Session.hasDescription()) {
+        if (session.hasDescription()) {
             setAnnotationReady();
         }
 
@@ -195,7 +199,7 @@ public class GpsMainActivity extends AppCompatActivity
      * Handles the hardware back-button press
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && Session.isBoundToService()) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && session.isBoundToService()) {
             stopAndUnbindServiceIfRequired();
         }
 
@@ -305,6 +309,7 @@ public class GpsMainActivity extends AppCompatActivity
         return (Toolbar)findViewById(R.id.toolbar);
     }
 
+    @SuppressWarnings("deprecation")
     public void setUpToolbar(){
         try{
             Toolbar toolbar = getToolbar();
@@ -360,7 +365,7 @@ public class GpsMainActivity extends AppCompatActivity
                 .withAccountHeader(R.layout.smaller_header)
                 .withSavedInstance(savedInstanceState)
                 .withProfileImagesVisible(false)
-                .withHeaderBackground(new ColorDrawable(getResources().getColor(R.color.accentColor)))
+                .withHeaderBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.accentColor)))
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
 
                     @Override
@@ -522,10 +527,10 @@ public class GpsMainActivity extends AppCompatActivity
         TextDrawable drawLetter = TextDrawable.builder()
                 .beginConfig()
                 .bold()
-                .textColor(getResources().getColor(R.color.golden))
+                .textColor(ContextCompat.getColor(getApplicationContext(),R.color.golden))
                 .useFont(Typeface.SANS_SERIF)
                 .endConfig()
-                .buildRound(profileName.substring(0, 1).toUpperCase(), getResources().getColor(R.color.primaryColorLight));
+                .buildRound(profileName.substring(0, 1).toUpperCase(), ContextCompat.getColor(getApplicationContext(), R.color.primaryColorLight));
 
         imgLetter.setImageDrawable(drawLetter);
     }
@@ -710,8 +715,8 @@ public class GpsMainActivity extends AppCompatActivity
 
     private void enableDisableMenuItems() {
 
-        onWaitingForLocation(Session.isWaitingForLocation());
-        setBulbStatus(Session.isStarted());
+        onWaitingForLocation(session.isWaitingForLocation());
+        setBulbStatus(session.isStarted());
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarBottom);
         MenuItem mnuAnnotate = toolbar.getMenu().findItem(R.id.mnuAnnotate);
@@ -719,12 +724,12 @@ public class GpsMainActivity extends AppCompatActivity
         MenuItem mnuAutoSendNow = toolbar.getMenu().findItem(R.id.mnuAutoSendNow);
 
         if (mnuOnePoint != null) {
-            mnuOnePoint.setEnabled(!Session.isStarted());
-            mnuOnePoint.setIcon((Session.isStarted() ? R.drawable.singlepoint_disabled : R.drawable.singlepoint));
+            mnuOnePoint.setEnabled(!session.isStarted());
+            mnuOnePoint.setIcon((session.isStarted() ? R.drawable.singlepoint_disabled : R.drawable.singlepoint));
         }
 
         if (mnuAutoSendNow != null) {
-            mnuAutoSendNow.setEnabled(Session.isStarted());
+            mnuAutoSendNow.setEnabled(session.isStarted());
         }
 
         if (mnuAnnotate != null) {
@@ -733,7 +738,7 @@ public class GpsMainActivity extends AppCompatActivity
                 mnuAnnotate.setIcon(R.drawable.annotate2_disabled);
                 mnuAnnotate.setEnabled(false);
             } else {
-                if (Session.isAnnotationMarked()) {
+                if (session.isAnnotationMarked()) {
                     mnuAnnotate.setIcon(R.drawable.annotate2_active);
                 } else {
                     mnuAnnotate.setIcon(R.drawable.annotate2);
@@ -1019,10 +1024,10 @@ public class GpsMainActivity extends AppCompatActivity
                                     intent.setType("text/plain");
 
                                     intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing_mylocation));
-                                    if (Session.hasValidLocation()) {
+                                    if (session.hasValidLocation()) {
                                         String bodyText = getString(R.string.sharing_googlemaps_link,
-                                                String.valueOf(Session.getCurrentLatitude()),
-                                                String.valueOf(Session.getCurrentLongitude()));
+                                                String.valueOf(session.getCurrentLatitude()),
+                                                String.valueOf(session.getCurrentLongitude()));
                                         intent.putExtra(Intent.EXTRA_TEXT, bodyText);
                                         intent.putExtra("sms_body", bodyText);
                                         startActivity(Intent.createChooser(intent, getString(R.string.sharing_via)));
@@ -1084,7 +1089,7 @@ public class GpsMainActivity extends AppCompatActivity
         startService(serviceIntent);
         // Now bind to service
         bindService(serviceIntent, gpsServiceConnection, Context.BIND_AUTO_CREATE);
-        Session.setBoundToService(true);
+        session.setBoundToService(true);
     }
 
 
@@ -1092,17 +1097,17 @@ public class GpsMainActivity extends AppCompatActivity
      * Stops the service if it isn't logging. Also unbinds.
      */
     private void stopAndUnbindServiceIfRequired() {
-        if (Session.isBoundToService()) {
+        if (session.isBoundToService()) {
 
             try {
                 unbindService(gpsServiceConnection);
-                Session.setBoundToService(false);
+                session.setBoundToService(false);
             } catch (Exception e) {
                 LOG.warn(SessionLogcatAppender.MARKER_INTERNAL, "Could not unbind service", e);
             }
         }
 
-        if (!Session.isStarted()) {
+        if (!session.isStarted()) {
             LOG.debug("Stopping the service");
             try {
                 stopService(serviceIntent);
@@ -1118,12 +1123,12 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
     public void setAnnotationReady() {
-        Session.setAnnotationMarked(true);
+        session.setAnnotationMarked(true);
         enableDisableMenuItems();
     }
 
     public void setAnnotationDone() {
-        Session.setAnnotationMarked(false);
+        session.setAnnotationMarked(false);
         enableDisableMenuItems();
     }
 

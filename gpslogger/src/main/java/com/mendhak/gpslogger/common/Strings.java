@@ -1,12 +1,33 @@
+/*
+ * Copyright (C) 2016 mendhak
+ *
+ * This file is part of GPSLogger for Android.
+ *
+ * GPSLogger for Android is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GPSLogger for Android is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.mendhak.gpslogger.common;
 
 
 import android.content.Context;
 import android.os.Build;
+import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -215,8 +236,20 @@ public class Strings {
         }
     }
 
-    public static String getFormattedCustomFileName(String baseName) {
-        return getFormattedCustomFileName(baseName, GregorianCalendar.getInstance(), PreferenceHelper.getInstance());
+    public static String getFormattedFileName(){
+        return getFormattedFileName(Session.getInstance(), PreferenceHelper.getInstance());
+    }
+
+    public static String getFormattedFileName(Session session, PreferenceHelper ph) {
+        String currentFileName = session.getCurrentFileName();
+        if (ph.shouldCreateCustomFile() && !Strings.isNullOrEmpty(currentFileName)) {
+            return getFormattedCustomFileName(currentFileName, GregorianCalendar.getInstance(), ph);
+        } else {
+            if (!Strings.isNullOrEmpty(currentFileName) && ph.shouldPrefixSerialToFileName() && !currentFileName.contains(String.valueOf(getBuildSerial()))) {
+                currentFileName = String.valueOf(getBuildSerial()) + "_" + currentFileName;
+            }
+        }
+        return currentFileName;
     }
 
     public static String getFormattedCustomFileName(String baseName, Calendar calendar, PreferenceHelper ph){
@@ -341,6 +374,112 @@ public class Strings {
         }
 
         return output;
+    }
+
+    public static String getDegreesMinutesSeconds(double decimaldegrees, boolean isLatitude) {
+        String cardinality = (decimaldegrees<0) ? "S":"N";
+
+        if(!isLatitude){
+            cardinality = (decimaldegrees<0) ? "W":"E";
+        }
+
+        //Remove negative sign
+        decimaldegrees = Math.abs(decimaldegrees);
+
+        int deg =  (int) Math.floor(decimaldegrees);
+        double minfloat = (decimaldegrees-deg)*60;
+        int min = (int) Math.floor(minfloat);
+        double secfloat = (minfloat-min)*60;
+        double sec = Math.round(secfloat * 10000.0)/10000.0;
+
+        // After rounding, the seconds might become 60. These two
+        // if-tests are not necessary if no rounding is done.
+        if (sec==60) {
+            min++;
+            sec=0;
+        }
+        if (min==60) {
+            deg++;
+            min=0;
+        }
+
+
+        return ("" + deg + "° " + min + "' " + sec + "\" " + cardinality);
+    }
+
+    public static String getDegreesDecimalMinutes(double decimaldegrees, boolean isLatitude) {
+        String cardinality = (decimaldegrees<0) ? "S":"N";
+
+        if(!isLatitude){
+            cardinality = (decimaldegrees<0) ? "W":"E";
+        }
+
+        //Remove negative sign
+        decimaldegrees = Math.abs(decimaldegrees);
+
+        int deg =  (int) Math.floor(decimaldegrees);
+        double minfloat = (decimaldegrees-deg)*60;
+        double min = Math.round(minfloat*10000.0)/10000.0;
+
+        return ("" + deg + "° " + min + "' " + cardinality);
+    }
+
+    public static String getDecimalDegrees(double decimaldegrees) {
+        NumberFormat nf = NumberFormat.getInstance();
+        nf.setMaximumFractionDigits(6);
+        return nf.format(decimaldegrees);
+    }
+
+    public static String getFormattedLatitude(double decimaldegrees){
+        return getFormattedDegrees(decimaldegrees, true, PreferenceHelper.getInstance());
+    }
+
+    public static String getFormattedLongitude(double decimaldegrees){
+        return getFormattedDegrees(decimaldegrees, false, PreferenceHelper.getInstance());
+    }
+
+    static String getFormattedDegrees(double decimaldegrees, boolean isLatitude, PreferenceHelper ph){
+        switch(ph.getDisplayLatLongFormat()){
+
+            case DEGREES_MINUTES_SECONDS:
+                return getDegreesMinutesSeconds(decimaldegrees, isLatitude);
+
+            case DEGREES_DECIMAL_MINUTES:
+                return getDegreesDecimalMinutes(decimaldegrees, isLatitude);
+
+            case DECIMAL_DEGREES:
+            default:
+                return getDecimalDegrees(decimaldegrees);
+
+        }
+    }
+
+    public static  String getDetectedActivityName(DetectedActivity detectedActivity) {
+
+        if(detectedActivity == null){
+            return "";
+        }
+
+        switch(detectedActivity.getType()) {
+            case DetectedActivity.IN_VEHICLE:
+                return "IN_VEHICLE";
+            case DetectedActivity.ON_BICYCLE:
+                return "ON_BICYCLE";
+            case DetectedActivity.ON_FOOT:
+                return "ON_FOOT";
+            case DetectedActivity.STILL:
+                return "STILL";
+            case DetectedActivity.UNKNOWN:
+            case 6:
+            default:
+                return "UNKNOWN";
+            case DetectedActivity.TILTING:
+                return "TILTING";
+            case DetectedActivity.WALKING:
+                return "WALKING";
+            case DetectedActivity.RUNNING:
+                return "RUNNING";
+        }
     }
 
 }

@@ -1,19 +1,21 @@
 /*
-*    This file is part of GPSLogger for Android.
-*
-*    GPSLogger for Android is free software: you can redistribute it and/or modify
-*    it under the terms of the GNU General Public License as published by
-*    the Free Software Foundation, either version 2 of the License, or
-*    (at your option) any later version.
-*
-*    GPSLogger for Android is distributed in the hope that it will be useful,
-*    but WITHOUT ANY WARRANTY; without even the implied warranty of
-*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*    GNU General Public License for more details.
-*
-*    You should have received a copy of the GNU General Public License
-*    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Copyright (C) 2016 mendhak
+ *
+ * This file is part of GPSLogger for Android.
+ *
+ * GPSLogger for Android is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GPSLogger for Android is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 
 package com.mendhak.gpslogger.ui.fragments.settings;
@@ -60,8 +62,8 @@ public class CustomUrlFragment extends PermissionedPreferenceFragment implements
         Preference urlLegendPreference2 = (Preference)findPreference("customurl_legend_2");
         urlLegendPreference2.setSummary(legend2);
 
-        String legend3 = MessageFormat.format("{0} %TIME\n{1} %BATT\n{2} %AID\n{3} %SER",
-                getString(R.string.txt_time_isoformat), "Battery:", "Android ID:", "Serial:"
+        String legend3 = MessageFormat.format("{0} %TIME\n{1} %BATT\n{2} %AID\n{3} %SER\n{4} %ACT",
+                getString(R.string.txt_time_isoformat), "Battery:", "Android ID:", "Serial:", getString(R.string.txt_activity)
                 );
 
         Preference urlLegendPreference3 = (Preference)findPreference("customurl_legend_3");

@@ -1,4 +1,6 @@
-/*******************************************************************************
+/*
+ * Copyright (C) 2016 mendhak
+ *
  * This file is part of GPSLogger for Android.
  *
  * GPSLogger for Android is free software: you can redistribute it and/or modify
@@ -13,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************/
+ */
 
 package com.mendhak.gpslogger.ui.fragments.display;
 
@@ -28,13 +30,14 @@ import android.widget.Toast;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 
-import java.text.NumberFormat;
 
 public class GpsBigViewFragment extends GenericViewFragment implements View.OnTouchListener {
 
     View rootView;
+    private Session session = Session.getInstance();
 
     public static GpsBigViewFragment newInstance() {
         GpsBigViewFragment fragment = new GpsBigViewFragment();
@@ -57,9 +60,9 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
         txtLong.setOnTouchListener(this);
 
-        displayLocationInfo(Session.getCurrentLocationInfo());
+        displayLocationInfo(session.getCurrentLocationInfo());
 
-        if (Session.isStarted()) {
+        if (session.isStarted()) {
             Toast.makeText(getActivity().getApplicationContext(), R.string.bigview_taptotoggle, Toast.LENGTH_SHORT).show();
         }
 
@@ -88,13 +91,10 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
 
         if (locationInfo != null) {
-            NumberFormat nf = NumberFormat.getInstance();
-            nf.setMaximumFractionDigits(6);
+            txtLat.setText(String.valueOf(Strings.getFormattedLatitude(locationInfo.getLatitude())));
 
-            txtLat.setText(String.valueOf(nf.format(locationInfo.getLatitude())));
-
-            txtLong.setText(String.valueOf(nf.format(locationInfo.getLongitude())));
-        } else if (Session.isStarted()) {
+            txtLong.setText(String.valueOf(Strings.getFormattedLongitude(locationInfo.getLongitude())));
+        } else if (session.isStarted()) {
             txtLat.setText("...");
         } else {
             txtLat.setText(R.string.bigview_taptotoggle);

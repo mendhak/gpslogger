@@ -1,19 +1,21 @@
 /*
-*    This file is part of GPSLogger for Android.
-*
-*    GPSLogger for Android is free software: you can redistribute it and/or modify
-*    it under the terms of the GNU General Public License as published by
-*    the Free Software Foundation, either version 2 of the License, or
-*    (at your option) any later version.
-*
-*    GPSLogger for Android is distributed in the hope that it will be useful,
-*    but WITHOUT ANY WARRANTY; without even the implied warranty of
-*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*    GNU General Public License for more details.
-*
-*    You should have received a copy of the GNU General Public License
-*    along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Copyright (C) 2016 mendhak
+ *
+ * This file is part of GPSLogger for Android.
+ *
+ * GPSLogger for Android is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GPSLogger for Android is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 package com.mendhak.gpslogger.loggers;
 
@@ -37,6 +39,7 @@ import java.util.List;
 public class FileLoggerFactory {
 
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    private static Session session = Session.getInstance();
 
     public static List<FileLogger> getFileLoggers(Context context) {
 
@@ -52,17 +55,17 @@ public class FileLoggerFactory {
         }
 
         if (preferenceHelper.shouldLogToGpx()) {
-            File gpxFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".gpx");
-            loggers.add(new Gpx10FileLogger(gpxFile, Session.shouldAddNewTrackSegment()));
+            File gpxFile = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".gpx");
+            loggers.add(new Gpx10FileLogger(gpxFile, session.shouldAddNewTrackSegment()));
         }
 
         if (preferenceHelper.shouldLogToKml()) {
-            File kmlFile = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".kml");
-            loggers.add(new Kml22FileLogger(kmlFile, Session.shouldAddNewTrackSegment()));
+            File kmlFile = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".kml");
+            loggers.add(new Kml22FileLogger(kmlFile, session.shouldAddNewTrackSegment()));
         }
 
         if (preferenceHelper.shouldLogToPlainText()) {
-            File file = new File(gpxFolder.getPath(), Session.getCurrentFileName() + ".txt");
+            File file = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".txt");
             loggers.add(new PlainTextFileLogger(file));
         }
 

@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2016 mendhak
+ *
+ * This file is part of GPSLogger for Android.
+ *
+ * GPSLogger for Android is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GPSLogger for Android is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.mendhak.gpslogger.senders.googledrive;
 
 import android.os.Build;
@@ -91,11 +110,6 @@ public class GoogleDriveJob extends Job {
         String fileUpdateUrl = "https://www.googleapis.com/upload/drive/v2/files/" + gpxFileId + "?uploadType=media";
 
         try {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
-                //Due to a pre-froyo bug
-                //http://android-developers.blogspot.com/2011/09/androids-http-clients.html
-                System.setProperty("http.keepAlive", "false");
-            }
 
             URL url = new URL(fileUpdateUrl);
 
@@ -155,12 +169,6 @@ public class GoogleDriveJob extends Job {
 
         try {
 
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
-                //Due to a pre-froyo bug
-                //http://android-developers.blogspot.com/2011/09/androids-http-clients.html
-                System.setProperty("http.keepAlive", "false");
-            }
-
             URL url = new URL(createFileUrl);
 
             conn = (HttpURLConnection) url.openConnection();
@@ -219,12 +227,6 @@ public class GoogleDriveJob extends Job {
 
             //To search in a folder:
             String searchUrl = "https://www.googleapis.com/drive/v2/files?q=title%20%3D%20%27" + fileName + "%27%20and%20trashed%20%3D%20false" + inFolderParam;
-
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
-                //Due to a pre-froyo bug
-                //http://android-developers.blogspot.com/2011/09/androids-http-clients.html
-                System.setProperty("http.keepAlive", "false");
-            }
 
             URL url = new URL(searchUrl);
 

@@ -57,6 +57,7 @@
         </activity>
         <activity
             android:name=".MainPreferenceActivity"
+            android:exported="false"
             android:label="@string/settings_screen_name"
             android:parentActivityName=".GpsMainActivity" >
             <meta-data

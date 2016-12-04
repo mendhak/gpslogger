@@ -1,4 +1,6 @@
-/*******************************************************************************
+/*
+ * Copyright (C) 2016 mendhak
+ *
  * This file is part of GPSLogger for Android.
  *
  * GPSLogger for Android is free software: you can redistribute it and/or modify
@@ -13,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************/
+ */
 
 package com.mendhak.gpslogger.ui.fragments.display;
 
@@ -48,6 +50,7 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
 
     private static final Logger LOG = Logs.of(GenericViewFragment.class);
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    private Session session = Session.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,7 +100,7 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
     @AskPermission({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public void requestToggleLogging() {
 
-        if (Session.isStarted()) {
+        if (session.isStarted()) {
             toggleLogging();
             return;
         }

@@ -1,4 +1,6 @@
-/*******************************************************************************
+/*
+ * Copyright (C) 2016 mendhak
+ *
  * This file is part of GPSLogger for Android.
  *
  * GPSLogger for Android is free software: you can redistribute it and/or modify
@@ -13,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************/
+ */
 
 package com.mendhak.gpslogger.ui.fragments.display;
 
@@ -44,13 +46,14 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import org.slf4j.Logger;
 
-import java.text.NumberFormat;
+
 
 public class GpsSimpleViewFragment extends GenericViewFragment implements View.OnClickListener {
 
     Context context;
     private static final Logger LOG = Logs.of(GpsSimpleViewFragment.class);
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    private Session session = Session.getInstance();
 
     private View rootView;
     private ActionProcessButton actionButton;
@@ -103,12 +106,9 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         });
 
 
-        if (Session.hasValidLocation()) {
-            displayLocationInfo(Session.getCurrentLocationInfo());
+        if (session.hasValidLocation()) {
+            displayLocationInfo(session.getCurrentLocationInfo());
         }
-
-
-
 
         return rootView;
     }
@@ -126,7 +126,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     }
 
     private void showPreferencesSummary() {
-        showCurrentFileName(Session.getCurrentFileName());
+        showCurrentFileName(Strings.getFormattedFileName());
 
 
         ImageView imgGpx = (ImageView) rootView.findViewById(R.id.simpleview_imgGpx);
@@ -184,10 +184,10 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         }
 
         txtFilename.setVisibility(View.VISIBLE);
-        txtFilename.setText(Html.fromHtml("<em>" + preferenceHelper.getGpsLoggerFolder() + "/<strong><br />" + Session.getCurrentFileName() + "</strong></em>"));
+        txtFilename.setText(Html.fromHtml("<em>" + preferenceHelper.getGpsLoggerFolder() + "/<strong><br />" + Strings.getFormattedFileName() + "</strong></em>"));
 
         Files.setFileExplorerLink(txtFilename,
-                Html.fromHtml("<em><font color='blue'><u>" + preferenceHelper.getGpsLoggerFolder() + "</u></font>" + "/<strong><br />" + Session.getCurrentFileName() + "</strong></em>"),
+                Html.fromHtml("<em><font color='blue'><u>" + preferenceHelper.getGpsLoggerFolder() + "</u></font>" + "/<strong><br />" + Strings.getFormattedFileName() + "</strong></em>"),
                 preferenceHelper.getGpsLoggerFolder(),
                 context);
 
@@ -269,7 +269,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     public void onResume() {
         showPreferencesSummary();
 
-        if(Session.isStarted()){
+        if(session.isStarted()){
             setActionButtonStop();
         }
         else {
@@ -322,15 +322,11 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     public void displayLocationInfo(Location locationInfo){
         showPreferencesSummary();
 
-        NumberFormat nf = NumberFormat.getInstance();
-        nf.setMaximumFractionDigits(3);
-
         EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
-        txtLatitude.setText(String.valueOf(nf.format(locationInfo.getLatitude())) + ", " + String.valueOf(nf.format(locationInfo.getLongitude())));
+        txtLatitude.setText(Strings.getFormattedLatitude(locationInfo.getLatitude()));
 
-
-        nf.setMaximumFractionDigits(3);
-
+        EditText txtLongitude = (EditText) rootView.findViewById(R.id.simple_lon_text);
+        txtLongitude.setText(Strings.getFormattedLongitude(locationInfo.getLongitude()));
 
         ImageView imgAccuracy = (ImageView) rootView.findViewById(R.id.simpleview_imgAccuracy);
         clearColor(imgAccuracy);
@@ -386,18 +382,18 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
         TextView txtDuration = (TextView) rootView.findViewById(R.id.simpleview_txtDuration);
 
-        long startTime = Session.getStartTimeStamp();
+        long startTime = session.getStartTimeStamp();
         long currentTime = System.currentTimeMillis();
 
         txtDuration.setText(Strings.getTimeDisplay(getActivity(), currentTime - startTime));
 
-        double distanceValue = Session.getTotalTravelled();
+        double distanceValue = session.getTotalTravelled();
 
         TextView txtPoints = (TextView) rootView.findViewById(R.id.simpleview_txtPoints);
         TextView txtTravelled = (TextView) rootView.findViewById(R.id.simpleview_txtDistance);
 
         txtTravelled.setText(Strings.getDistanceDisplay(getActivity(), distanceValue, preferenceHelper.shouldDisplayImperialUnits()));
-        txtPoints.setText(Session.getNumLegs() + " " + getString(R.string.points));
+        txtPoints.setText(session.getNumLegs() + " " + getString(R.string.points));
 
         String providerName = locationInfo.getProvider();
         if (!providerName.equalsIgnoreCase(LocationManager.GPS_PROVIDER)) {
@@ -410,6 +406,9 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
         EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
         txtLatitude.setText("");
+
+        EditText txtLongitude = (EditText) rootView.findViewById(R.id.simple_lon_text);
+        txtLongitude.setText("");
 
         ImageView imgAccuracy = (ImageView)rootView.findViewById(R.id.simpleview_imgAccuracy);
         clearColor(imgAccuracy);
@@ -473,7 +472,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
         LOG.debug(inProgress + "");
 
-        if(!Session.isStarted()){
+        if(!session.isStarted()){
             actionButton.setProgress(0);
             setActionButtonStart();
             return;

@@ -53,7 +53,7 @@ android {
 
     defaultConfig {
         applicationId project.APP_ID
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 23
 
         versionCode project.APP_VERSION_CODE

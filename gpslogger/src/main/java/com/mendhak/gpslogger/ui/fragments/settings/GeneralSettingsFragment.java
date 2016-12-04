@@ -1,4 +1,6 @@
-/*******************************************************************************
+/*
+ * Copyright (C) 2016 mendhak
+ *
  * This file is part of GPSLogger for Android.
  *
  * GPSLogger for Android is free software: you can redistribute it and/or modify
@@ -13,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************/
+ */
 
 package com.mendhak.gpslogger.ui.fragments.settings;
 
@@ -29,6 +31,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
@@ -66,8 +69,20 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
 
         findPreference("debuglogtoemail").setOnPreferenceClickListener(this);
 
-        MaterialListPreference langs = (MaterialListPreference)findPreference("changelanguage");
+        setCoordinatesFormatPreferenceItem();
+        setLanguagesPreferenceItem();
 
+        Preference aboutInfo = findPreference("about_version_info");
+        try {
+
+            aboutInfo.setTitle("GPSLogger version " + getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName);
+            aboutInfo.setOnPreferenceClickListener(this);
+        } catch (PackageManager.NameNotFoundException e) {
+        }
+    }
+
+    private void setLanguagesPreferenceItem() {
+        MaterialListPreference langs = (MaterialListPreference)findPreference("changelanguage");
 
         Map<String,String> localeDisplayNames = Strings.getAvailableLocales(getActivity());
 
@@ -78,16 +93,16 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         langs.setEntryValues(locales);
         langs.setDefaultValue("en");
         langs.setOnPreferenceChangeListener(this);
+    }
 
-
-
-        Preference aboutInfo = findPreference("about_version_info");
-        try {
-
-            aboutInfo.setTitle("GPSLogger version " + getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName);
-            aboutInfo.setOnPreferenceClickListener(this);
-        } catch (PackageManager.NameNotFoundException e) {
-        }
+    private void setCoordinatesFormatPreferenceItem() {
+        MaterialListPreference coordFormats = (MaterialListPreference)findPreference("coordinatedisplayformat");
+        String[] coordinateDisplaySamples = new String[]{"12° 34' 56.7890\" S","12° 34.5678' S","-12.345678"};
+        coordFormats.setEntries(coordinateDisplaySamples);
+        coordFormats.setEntryValues(new String[]{PreferenceNames.DegreesDisplayFormat.DEGREES_MINUTES_SECONDS.toString(),PreferenceNames.DegreesDisplayFormat.DEGREES_DECIMAL_MINUTES.toString(),PreferenceNames.DegreesDisplayFormat.DECIMAL_DEGREES.toString()});
+        coordFormats.setDefaultValue("0");
+        coordFormats.setOnPreferenceChangeListener(this);
+        coordFormats.setSummary(coordinateDisplaySamples[PreferenceHelper.getInstance().getDisplayLatLongFormat().ordinal()]);
     }
 
 
@@ -153,6 +168,12 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         if(preference.getKey().equals("changelanguage")){
             PreferenceHelper.getInstance().setUserSpecifiedLocale((String) newValue);
             LOG.debug("Language chosen: " + PreferenceHelper.getInstance().getUserSpecifiedLocale());
+            return true;
+        }
+        if(preference.getKey().equals("coordinatedisplayformat")){
+            PreferenceHelper.getInstance().setDisplayLatLongFormat(PreferenceNames.DegreesDisplayFormat.valueOf(newValue.toString()));
+            LOG.debug("Coordinate format chosen: " + PreferenceHelper.getInstance().getDisplayLatLongFormat());
+            setCoordinatesFormatPreferenceItem();
             return true;
         }
         return false;

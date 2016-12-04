@@ -43,10 +43,38 @@
                         android:gravity="center"
                         />
 
+                </LinearLayout>
+            </TableRow>
+            <TableRow>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <EditText
+                        android:layout_alignParentRight="true"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/simple_lon_text"
+                        android:editable="false"
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:textSize="@dimen/simpleview_latlong_textsize"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="italic"
+                        android:background="@null"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        />
+
+
 
                 </LinearLayout>
             </TableRow>
-
             <TableRow>
                 <LinearLayout
                     android:gravity="center"

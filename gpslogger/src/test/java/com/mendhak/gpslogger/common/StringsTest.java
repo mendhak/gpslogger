@@ -263,4 +263,198 @@ public class StringsTest {
 
     }
 
+
+    @Test
+    public void getDegreesMinutesSeconds_BasicConversion(){
+        double lat = 11.812244d;
+        String expected = "11° 48' 44.0784\" N";
+        String actual = Strings.getDegreesMinutesSeconds(lat, true);
+
+        assertThat("Degree Decimals converted to Degree Minute Seconds", actual, is(expected));
+    }
+
+    @Test
+    public void getDegreesMinutesSeconds_NegativeIsSouth(){
+        double lat = -16.44299d;
+        String expected = "16° 26' 34.764\" S";
+        String actual = Strings.getDegreesMinutesSeconds(lat, true);
+
+        assertThat("Negative degree decimals converted to southerly degree minute second", actual, is(expected));
+    }
+
+    @Test
+    public void getDegreesMinutesSeconds_Longitude_ReturnsEastWest(){
+        double lon = 17.072754d;
+        String expected = "17° 4' 21.9144\" E";
+        String actual = Strings.getDegreesMinutesSeconds(lon, false);
+
+        assertThat("Longitude values have east west cardinality", actual, is(expected));
+
+        lon = -137.072754;
+        expected = "137° 4' 21.9144\" W";
+        actual = Strings.getDegreesMinutesSeconds(lon, false);
+
+        assertThat("Longitude values have east west cardinality", actual, is(expected));
+    }
+
+
+    @Test
+    public void getDegreesDecimalMinutes_BasicConversion(){
+        double lat = 14.24231d;
+        String expected = "14° 14.5386' N";
+        String actual = Strings.getDegreesDecimalMinutes(lat, true);
+
+        assertThat("Degree Decimals converted to Degree Decimal Minutes", actual, is(expected));
+    }
+
+    @Test
+    public void getDegreesDecimalMinutes_NegativeIsSouth(){
+        double lat = -54.81774d;
+        String expected = "54° 49.0644' S";
+        String actual = Strings.getDegreesDecimalMinutes(lat, true);
+
+        assertThat("Negative Degree Decimals converted to southerly Degree Decimal Minutes", actual, is(expected));
+    }
+
+    @Test
+    public void getDegreesDecimalMinutes_Longitude_ReturnsEastWest(){
+        double lat = 101.898d;
+        String expected = "101° 53.88' E";
+        String actual = Strings.getDegreesDecimalMinutes(lat, false);
+
+        assertThat("Longitude values have east west cardinality", actual, is(expected));
+
+        lat = -111.111d;
+        expected = "111° 6.66' W";
+        actual = Strings.getDegreesDecimalMinutes(lat, false);
+
+        assertThat("Longitude values have east west cardinality", actual, is(expected));
+    }
+
+    @Test
+    public void getDecimalDegrees_BasicLatitude(){
+        double lat = 59.28392417439d;
+        String expected = "59.283924";
+        String actual = Strings.getDecimalDegrees(lat);
+
+        assertThat("Decimal degrees formatted to 6 places", actual, is(expected));
+    }
+
+
+    @Test
+    public void getDecimalDegrees_ShortLocation_NoPaddedZeros(){
+        double lat = 59.28d;
+        String expected = "59.28";
+        String actual = Strings.getDecimalDegrees(lat);
+
+        assertThat("Decimal degrees no padded zero", actual, is(expected));
+    }
+
+
+
+    @Test
+    public void getFormattedDegrees_DecimalDegrees_ReturnsDD(){
+        double lat = 51.2828223838d;
+        String expected = "51.282822";
+
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+        when(ph.getDisplayLatLongFormat()).thenReturn(PreferenceNames.DegreesDisplayFormat.DECIMAL_DEGREES);
+        String actual = Strings.getFormattedDegrees(lat, true, ph);
+        assertThat("Preference DD returns DD", actual, is(expected));
+    }
+
+    @Test
+    public void getFormattedDegrees_DegreeMinuteSeconds_ReturnsDMS(){
+        double lat = 51.2828223838d;
+        String expected = "51° 16' 58.1606\" N";
+
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+        when(ph.getDisplayLatLongFormat()).thenReturn(PreferenceNames.DegreesDisplayFormat.DEGREES_MINUTES_SECONDS);
+        String actual = Strings.getFormattedDegrees(lat, true, ph);
+        assertThat("Preference DMS returns DMS", actual, is(expected));
+
+        double lon = -151.2828223838d;
+        expected = "151° 16' 58.1606\" W";
+
+        actual = Strings.getFormattedDegrees(lon, false, ph);
+        assertThat("Preference DMS returns DMS", actual, is(expected));
+    }
+
+    @Test
+    public void getFormattedDegrees_DegreesDecimalMinutes_ReturnsDDM(){
+        double lat = 44.18923372d;
+        String expected = "44° 11.354' N";
+
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+        when(ph.getDisplayLatLongFormat()).thenReturn(PreferenceNames.DegreesDisplayFormat.DEGREES_DECIMAL_MINUTES);
+        String actual = Strings.getFormattedDegrees(lat, true, ph);
+        assertThat("Preference DDM returns DDM", actual, is(expected));
+
+        double lon = -151.2828223838d;
+        expected = "151° 16.9693' W";
+
+        actual = Strings.getFormattedDegrees(lon, false, ph);
+        assertThat("Preference DDM returns DDM", actual, is(expected));
+    }
+
+    @Test
+    public void getFormattedFileName_BasicFileName_ReturnsAsIs(){
+        Session sess = mock(Session.class);
+        when(sess.getCurrentFileName()).thenReturn("hello");
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+
+        String expected = "hello";
+        String actual = Strings.getFormattedFileName(sess, ph);
+
+        assertThat("Basic file name unchanged", actual, is(expected));
+
+        when(sess.getCurrentFileName()).thenReturn("");
+        expected = "";
+        actual = Strings.getFormattedFileName(sess, ph);
+        assertThat("Empty file name returns empty string", actual, is(expected));
+    }
+
+    @Test
+    public void getFormattedFileName_CreateCustomFileName_ReturnsFormatted(){
+        Session sess = mock(Session.class);
+        when(sess.getCurrentFileName()).thenReturn("basename_%ver");
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+        when(ph.shouldCreateCustomFile()).thenReturn(true);
+
+        String expected = "basename_" + BuildConfig.VERSION_NAME;
+        String actual = Strings.getFormattedFileName(sess, ph);
+
+        assertThat("Custom file name should do substitutions", actual, is(expected));
+
+
+    }
+
+    @Test
+    public void getFormattedFileName_shouldPrefixSerialToFileName(){
+        Session sess = mock(Session.class);
+        when(sess.getCurrentFileName()).thenReturn("somefile");
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+        when(ph.shouldPrefixSerialToFileName()).thenReturn(true);
+
+        String expected = Build.SERIAL + "_somefile";
+        String actual = Strings.getFormattedFileName(sess,ph);
+
+        assertThat("Build serial is prefixed to file name", actual, is(expected));
+
+    }
+
+
+    @Test
+    public void getFormattedFileName_shouldPrefixSerialToFileName_SerialOnlyIncludedOnce(){
+        Session sess = mock(Session.class);
+        when(sess.getCurrentFileName()).thenReturn(Build.SERIAL + "___somefile");
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+        when(ph.shouldPrefixSerialToFileName()).thenReturn(true);
+
+        String expected = Build.SERIAL + "___somefile";
+        String actual = Strings.getFormattedFileName(sess, ph);
+        assertThat("Build serial only included once", actual, is(expected));
+
+    }
+
 }

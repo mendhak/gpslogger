@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2016 mendhak
+ *
+ * This file is part of GPSLogger for Android.
+ *
+ * GPSLogger for Android is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GPSLogger for Android is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.mendhak.gpslogger.common;
 
 
@@ -467,6 +486,20 @@ public class PreferenceHelper {
     @ProfilePreference(name= PreferenceNames.DISPLAY_IMPERIAL)
     public boolean shouldDisplayImperialUnits() {
         return prefs.getBoolean(PreferenceNames.DISPLAY_IMPERIAL, false);
+    }
+
+    /**
+     * Display format to use for lat long coordinates on screen
+     * DEGREES_MINUTES_SECONDS, DEGREES_DECIMAL_MINUTES, DECIMAL_DEGREES
+     */
+    @ProfilePreference(name=PreferenceNames.LATLONG_DISPLAY_FORMAT)
+    public PreferenceNames.DegreesDisplayFormat getDisplayLatLongFormat(){
+        String chosenValue = prefs.getString(PreferenceNames.LATLONG_DISPLAY_FORMAT,"DEGREES_MINUTES_SECONDS");
+        return PreferenceNames.DegreesDisplayFormat.valueOf(chosenValue);
+    }
+
+    public void setDisplayLatLongFormat(PreferenceNames.DegreesDisplayFormat displayFormat){
+        prefs.edit().putString(PreferenceNames.LATLONG_DISPLAY_FORMAT, displayFormat.toString()).apply();
     }
 
 
@@ -981,7 +1014,7 @@ public class PreferenceHelper {
         prefs.edit().putBoolean(PreferenceNames.CUSTOM_FILE_NAME_KEEP_CHANGING, keepChanging).apply();
     }
 
-
+    @SuppressWarnings("unchecked")
     public void savePropertiesFromPreferences(File f) throws IOException {
 
         Properties props = new Properties();

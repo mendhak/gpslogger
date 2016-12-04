@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2016 mendhak
+ *
+ * This file is part of GPSLogger for Android.
+ *
+ * GPSLogger for Android is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GPSLogger for Android is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.mendhak.gpslogger.common;
 
 import android.location.Location;
@@ -19,6 +38,7 @@ public class SerializableLocation implements Serializable {
     private boolean hasBearing;
     private boolean hasSpeed;
     private int satelliteCount;
+    private String detectedActivity;
 
 
     public SerializableLocation(Location loc) {
@@ -36,19 +56,7 @@ public class SerializableLocation implements Serializable {
         hasBearing = loc.hasBearing();
         hasSpeed = loc.hasSpeed();
         satelliteCount = Maths.getBundledSatelliteCount(loc);
-    }
-
-    public Location getLocation() {
-        Location loc = new Location(provider);
-        loc.setAltitude(altitude);
-        loc.setAccuracy((float) accuracy);
-        loc.setBearing(bearing);
-        loc.setLatitude(latitude);
-        loc.setLongitude(longitude);
-        loc.setSpeed(speed);
-        loc.setProvider(provider);
-        loc.setTime(time);
-        return loc;
+        detectedActivity = (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("DETECTED_ACTIVITY"))) ? loc.getExtras().getString("DETECTED_ACTIVITY") : "";
     }
 
     public boolean hasAltitude(){
@@ -135,5 +143,6 @@ public class SerializableLocation implements Serializable {
         return satelliteCount;
     }
 
+    public String getDetectedActivity() { return detectedActivity; }
 
 }
