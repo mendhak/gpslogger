@@ -113,6 +113,7 @@ Môžete pridať aj niekoľko dynamických parametrov, ako je sériové číslo,
 súborov možno nebudú fungovať v kombinácii s automatickým odosielaním, pretože sa odosiela len najnovší súbor.</string>
   <string name="pref_performance_title">Výkon</string>
   <string name="pref_performance_summary">Časovanie, filtre a poslucháči</string>
+  <string name="time_before_logging_title">Interval zaznamenávania</string>
   <string name="time_before_logging_summary">Pre maximálnu frekvenciu zadajte hodnotu 0. Čím bude hodnota menšia, tým viac energie sa ušetrí.
     </string>
   <string name="time_before_logging_dialog_title">Čas v sekundách</string>
@@ -122,6 +123,8 @@ Použite iba pre
 vyššiu presnosť s nízkymi frekvenciami.
     </string>
   <string name="keep_fix_title">Ponechať GPS zapnuté medzi korekciami</string>
+  <string name="retry_time_title">Trvanie porovnávania presnosti</string>
+  <string name="retry_time_summary">Po získaní počiatočnej opravy sa pokúšať o získanie presného bodu až do dosiahnutia zhody s nastavením filtra presnosti.</string>
   <string name="retry_time_dialog_title">Čas v sekundách</string>
   <string name="retry_time_hint">Zadajte sekundy (max. 9999)</string>
   <string name="display_imperial_title">Zobrazovať imperiálne jednotky</string>
@@ -327,6 +330,7 @@ polia.
   <string name="txt_number_of_points">Počet bodov</string>
   <string name="save">Uložiť</string>
   <string name="pref_filedetails_title">Podrobnosti o súbore a priečinku</string>
+  <string name="absolute_timeout_title">Absol. čas pre opravu GPS</string>
   <string name="absolute_timeout_summary">Počet sekúnd po ktorých sa aplikácia vzdá pokusov a načítanie korekcie, bez ohľadu na iné nastavenia. Toto nastavenie je užitočné napr. vo vnútri budov, aby sa zabránilo zbytočnému vybíjaniu batérie. Časový limit zrušíte nastavením hodnoty 0.</string>
   <string name="txt_latitude_short">Zem. šír.</string>
   <string name="txt_longitude_short">Zem. dĺž.</string>
@@ -339,6 +343,7 @@ polia.
   <string name="listeners_summary">Určuje, ktorí poskytovatelia lokalizačných údajov sa majú použiť, ak sú dostupní; GPS pre satelity, Sieť pre wifi/celulárne vysielače, Pasívni (špeciálni poskytovatelia ktorí prijímajú lokalizačné údaje požadované inými aplikáciami).</string>
   <string name="listeners_title">Poskytovatelia lokalizácie</string>
   <string name="autosend_frequency_hint">Počet minút</string>
+  <string name="pref_logging_file_no_permissions">GPSLogger nemôže zapisovať do tohto priečinka. Prosím vyberte iný zapisovací priečinok.</string>
   <string name="pref_gpsvisualizer">Vizualizovať štat. záznam GPS a grafy</string>
   <string name="new_file_custom_each_time_title">Pri každom spustení sa opýtať na názov súboru</string>
   <string name="new_file_custom_each_time_summary">Pri každom spustení zaznamenávania sa opýtať na používateľom určený názov súboru</string>

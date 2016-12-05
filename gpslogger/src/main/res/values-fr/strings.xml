@@ -110,12 +110,15 @@
   <string name="new_file_custom_summary">Vous pouvez utiliser votre propre nom de fichier. Ajouter éventuellement quelques paramètres dynamiques tels que le numéro de série, année, heure, minute, etc.. Les noms de fichier très dynamiques peuvent ne pas fonctionner correctement avec la fonction d\'envoi automatique car seul le dernier fichier est envoyé.</string>
   <string name="pref_performance_title">Performance</string>
   <string name="pref_performance_summary">délais, filtres et pauses</string>
+  <string name="time_before_logging_title">Intervalle de journalisation</string>
   <string name="time_before_logging_summary">Choisir 0 pour une fréquence maximum, mais une basse fréquence augmente l\'autonomie de la batterie.</string>
   <string name="time_before_logging_dialog_title">Temps en secondes</string>
   <string name="time_before_logging_hint">Entrez secondes (max 9999)</string>
   <string name="keep_fix_summary">Attention, cela va réduire considérablement la vie de la batterie. Utiliser uniquement pour
 une plus grande précision à basses fréquences.</string>
   <string name="keep_fix_title">Gardez le GPS allumé entre les différents enregistrements de positions</string>
+  <string name="retry_time_title">Durée pour faire correspondre la précision</string>
+  <string name="retry_time_summary">Après avoir déterminé une position initiale, réessayer pendant ce temps pour trouver un point précis correspondant à la précision définie.</string>
   <string name="retry_time_dialog_title">Temps en secondes</string>
   <string name="retry_time_hint">Entrer les secondes (max. 9999)</string>
   <string name="display_imperial_title">Afficher les unités Impériales</string>
@@ -285,6 +288,7 @@ une plus grande précision à basses fréquences.</string>
   <string name="gpslogger_folder_title">Enregistrer dans le dossier</string>
   <string name="gpslogger_folder_summary">Où enregistrer les fichiers de log, par défaut dans /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Répertoire</string>
+  <string name="new_file_custom_message">Il est possible d\'utiliser %SER pour le périphérique série, %YEAR, %MONTH, %DAY, %HOUR, %MIN, %PROFILE, %VER pour la version</string>
   <string name="new_file_prefix_serial_title">Préfixer le numéro de série au nom de fichier</string>
   <string name="new_file_prefix_serial_summary">Voici le numéro de série trouvé dans le status de votre telephone</string>
   <string name="txt_travel_duration">Durée :</string>
@@ -303,6 +307,7 @@ une plus grande précision à basses fréquences.</string>
   <string name="txt_number_of_points">Nombre de points</string>
   <string name="save">Enregistrer</string>
   <string name="pref_filedetails_title">Détails des dossiers et fichiers</string>
+  <string name="absolute_timeout_title">Temps absolu pour un positionnement GPS</string>
   <string name="absolute_timeout_summary">Le nombre de secondes après lesquelles l\'app ne tente plus de déterminer la position, défini selon les autres réglages. C\'est particulièrement utile pour économiser la batterie quand vous êtes à l’intérieur d\'un bâtiment. Mettre a 0 pour une limite infinie.</string>
   <string name="txt_latitude_short">Lat</string>
   <string name="txt_longitude_short">Lon</string>
@@ -315,9 +320,12 @@ une plus grande précision à basses fréquences.</string>
   <string name="listeners_summary">Quels fournisseurs de position utiliser lorsqu\'ils sont disponibles : satellites GPS, réseau de téléphonie cellulaire/wifi. Passif est un fournisseur spécial qui écoute les positions demandées par d\'autres applications.</string>
   <string name="listeners_title">Fournisseurs de position</string>
   <string name="autosend_frequency_hint">Nombre de minutes</string>
+  <string name="pref_logging_file_no_permissions">Ce dossier n’est pas accessible en écriture par GPSLogger. Merci de sélectionner un autre dossier où écrire.</string>
   <string name="pref_gpsvisualizer">Visualiser les statistiques et graphiques des logs du GPS</string>
   <string name="new_file_custom_each_time_title">Demander un nom de fichier à chaque démarrage</string>
   <string name="new_file_custom_each_time_summary">Demande un nom de fichier à chaque fois que l\'enregistrement est lancé</string>
+  <string name="new_file_custom_keep_changing_title">Autoriser le nom de fichier personnalisé à être modifié dynamiquement</string>
+  <string name="new_file_custom_keep_changing_summary">Comme les valeurs du nom de fichier personnalisé changent, le nom du fichier actif est modifié. Par ex., si %HOUR est utilisé, un nouveau fichier est créé chaque heure. Décocher la case pour qu’il demeure inchangé.</string>
   <string name="donate_app">Faire un don (app)</string>
   <string name="donate_bitcoin">Bitcoin</string>
   <string name="tip_coffee">Offrez moi un café</string>

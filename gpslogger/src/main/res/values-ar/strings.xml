@@ -35,6 +35,7 @@
   <string name="summary_current_filename">ملف:</string>
   <string name="sharing_location_only">الموقع فقط</string>
   <string name="sharing_mylocation">موقعي</string>
+  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">المشاركة بأستخدام</string>
   <!-- general -->
   <string name="foot">&#160;قدم</string>
@@ -43,6 +44,9 @@
   <string name="meters">&#160;أمتار</string>
   <string name="error">خطاء</string>
   <string name="error_connection">خطاء في الأتصال , الرجاء التأكد من أعدادات الجهاز.</string>
+  <string name="seconds">ث</string>
+  <string name="minutes">د</string>
+  <string name="hours">س</string>
   <string name="started">بدأ</string>
   <string name="providername_gps">أقمار GPS</string>
   <string name="providername_celltower">أبراج الهاتف</string>
@@ -153,6 +157,7 @@
   <string name="dropbox_authorize">تصريح</string>
   <string name="dropbox_unauthorize">إزالة التصريح</string>
   <string name="dropbox_upload">Dropbox</string>
+  <string name="owncloud_server">خادم</string>
   <string name="menu_upload">تحميل</string>
   <string name="autoemail_from">من عنوان</string>
   <string name="gdocs_clearauthorization">إزالة التصريح</string>

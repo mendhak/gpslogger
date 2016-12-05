@@ -111,11 +111,13 @@
 Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év, óra, perc, stb. A nagyon dinamikus fájlnevek nem biztos, hogy jól működnek, mert az automatikus küldés funkció csak az utolsó fájlt küldi el.</string>
   <string name="pref_performance_title">Teljesítmény</string>
   <string name="pref_performance_summary">Időzítések, szűrők és figyelők</string>
+  <string name="time_before_logging_title">Mentési időköz</string>
   <string name="time_before_logging_summary">A 0 a legnagyobb gyakoriság, de a ritkább jótékonyan hat az akkumulátor élettartamára.</string>
   <string name="time_before_logging_dialog_title">Idő másodpercben</string>
   <string name="time_before_logging_hint">Adja meg másodpercben (max 9999)</string>
   <string name="keep_fix_summary">Legyen óvatos, ez drámaian csökkenteni fogja az akkumulátora élettartamát. A nagyobb pontossághoz használja alacsonyabb frekvencia használatával.</string>
   <string name="keep_fix_title">GPS bekapcsolva tartása</string>
+  <string name="retry_time_summary">Miután megvan az első GPS fix, ennyi ideig próbáljon meg az app pontosabb pozíciót keresni, hogy a pozíció megfeleljen a pontosság szűrő beállításainak.</string>
   <string name="retry_time_dialog_title">Idő másodpercben</string>
   <string name="retry_time_hint">Adja meg másodpercben (max 9999)</string>
   <string name="display_imperial_title">Angolszász mértékegységek használata</string>
@@ -316,6 +318,7 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="listeners_summary">Használható helyszolgáltatók. Műhold alapú GPS, mobil adótornyok vagy wifi alapú hálózati, vagy passzív; ez egy speciális szolgáltató, amely a más alkalmazásokban lekérdezett pozíciókat figyeli.</string>
   <string name="listeners_title">Helyszolgáltatók</string>
   <string name="autosend_frequency_hint">Percek száma</string>
+  <string name="pref_logging_file_no_permissions">A GPSLogger nem tudja írni a mappát. Kérlek válassz egy másik mappát íráshoz.</string>
   <string name="pref_gpsvisualizer">GPS napló statisztika és grafikák megjelenítése</string>
   <string name="new_file_custom_each_time_title">Fájlnév kérése minden indításkor</string>
   <string name="new_file_custom_each_time_summary">Egyedi fájlnevet kér a naplózás minden indításakor</string>

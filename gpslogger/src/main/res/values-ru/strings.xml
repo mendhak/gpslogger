@@ -112,12 +112,15 @@
 При необходимости добавьте несколько динамически изменяемых параметров, таких как серийный номер, год, часы, минуты и т.д. Слишком сложные динамически составляемые имена файлов мало помогут при автоматической отправке, т.к в данном случае отправляется только последний файл.</string>
   <string name="pref_performance_title">Настройки производительности</string>
   <string name="pref_performance_summary">Тайминги, периоды, фильтры</string>
+  <string name="time_before_logging_title">Интервал записи</string>
   <string name="time_before_logging_summary">Укажите 0 для обработки на максимальной частоте. Хотя, чем медленнее работает процессор, тем дольше протянет аккумулятор.
     </string>
   <string name="time_before_logging_dialog_title">Время в секундах</string>
   <string name="time_before_logging_hint">Введите число секунд (max 9999)</string>
   <string name="keep_fix_summary">Будьте осторожны, это значительно сократит жизнь батареи. Используйте только для высокой точности с низкими интервалами.</string>
   <string name="keep_fix_title">Держать GPS включенным между местоопределениями</string>
+  <string name="retry_time_title">Продолжительность определения точности</string>
+  <string name="retry_time_summary">Как долго необходимо продолжать попытки определения местоположения, после получения первоначального местоположения, чтобы получить местоположение, которое будет соответствовать настройкам точности фильтрации.</string>
   <string name="retry_time_dialog_title">Время в секундах</string>
   <string name="retry_time_hint">Введите интервал в секундах (максимум 9999)</string>
   <string name="display_imperial_title">Единицы отображения</string>
@@ -311,6 +314,7 @@
   <string name="txt_number_of_points">Количество точек</string>
   <string name="save">Сохранить</string>
   <string name="pref_filedetails_title">Файл и папка, детали</string>
+  <string name="absolute_timeout_title">Время между определениями местоположения</string>
   <string name="absolute_timeout_summary">Количество секунд, по прошествии которых приложение делает очередную попытку определить местоположение, независимо от других параметров. Это особенно полезно, когда вы находитесь внутри зданий, чтобы не давать GPS быстро сажать аккумулятор.  Установите 0 если задержка не требуется.</string>
   <string name="txt_latitude_short">Широта</string>
   <string name="txt_longitude_short">Долгота</string>
