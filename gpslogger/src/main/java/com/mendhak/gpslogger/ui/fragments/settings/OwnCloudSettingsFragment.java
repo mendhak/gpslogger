@@ -27,6 +27,7 @@ import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.Networks;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -38,6 +39,9 @@ import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class OwnCloudSettingsFragment
         extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener, PreferenceValidator {
 
@@ -47,8 +51,9 @@ public class OwnCloudSettingsFragment
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.owncloudsettings);
 
-        Preference testOwnCloud = findPreference("owncloud_test");
-        testOwnCloud.setOnPreferenceClickListener(this);
+        findPreference("owncloud_test").setOnPreferenceClickListener(this);
+        findPreference("owncloud_validatecustomsslcert").setOnPreferenceClickListener(this);
+
         registerEventBus();
     }
 
@@ -87,26 +92,38 @@ public class OwnCloudSettingsFragment
     @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
 
-        MaterialEditTextPreference servernamePreference = (MaterialEditTextPreference) findPreference("owncloud_server");
-        MaterialEditTextPreference usernamePreference = (MaterialEditTextPreference) findPreference("owncloud_username");
-        MaterialEditTextPreference passwordPreference = (MaterialEditTextPreference) findPreference("owncloud_password");
-        MaterialEditTextPreference directoryPreference = (MaterialEditTextPreference) findPreference("owncloud_directory");
+        if(preference.getKey().equals("owncloud_validatecustomsslcert")){
+            try {
+                URL u = new URL(PreferenceHelper.getInstance().getOwnCloudServerName());
+                Networks.performCertificateValidationWorkflow(getActivity(), u.getHost(), u.getPort() < 0 ? u.getDefaultPort() : u.getPort());
+            } catch (MalformedURLException e) {
+                LOG.error("Could not validate certificate, OwnCloud URL is not valid", e);
+            }
 
-        if (!OwnCloudManager.validSettings(
-                servernamePreference.getText(),
-                usernamePreference.getText(),
-                passwordPreference.getText(),
-                directoryPreference.getText())) {
-            Dialogs.alert(getString(R.string.owncloud_invalid_settings),
-                    getString(R.string.owncloud_invalid_summary),
-                    getActivity());
-            return false;
+        }
+        else if(preference.getKey().equals("owncloud_test")){
+            MaterialEditTextPreference servernamePreference = (MaterialEditTextPreference) findPreference("owncloud_server");
+            MaterialEditTextPreference usernamePreference = (MaterialEditTextPreference) findPreference("owncloud_username");
+            MaterialEditTextPreference passwordPreference = (MaterialEditTextPreference) findPreference("owncloud_password");
+            MaterialEditTextPreference directoryPreference = (MaterialEditTextPreference) findPreference("owncloud_directory");
+
+            if (!OwnCloudManager.validSettings(
+                    servernamePreference.getText(),
+                    usernamePreference.getText(),
+                    passwordPreference.getText(),
+                    directoryPreference.getText())) {
+                Dialogs.alert(getString(R.string.owncloud_invalid_settings),
+                        getString(R.string.owncloud_invalid_summary),
+                        getActivity());
+                return false;
+            }
+
+            Dialogs.progress(getActivity(), getString(R.string.owncloud_testing), getString(R.string.please_wait));
+            OwnCloudManager helper = new OwnCloudManager(PreferenceHelper.getInstance());
+            helper.testOwnCloud(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
+                    directoryPreference.getText());
         }
 
-        Dialogs.progress(getActivity(), getString(R.string.owncloud_testing), getString(R.string.please_wait));
-        OwnCloudManager helper = new OwnCloudManager(PreferenceHelper.getInstance());
-        helper.testOwnCloud(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
-                directoryPreference.getText());
 
         return true;
     }

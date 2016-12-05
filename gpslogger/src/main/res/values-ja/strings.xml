@@ -325,7 +325,7 @@
   <string name="tip_coffee">コーヒーを買う</string>
   <string name="no_network_message">利用可能なネットワークがありません。</string>
   <string name="hide_notification_buttons">通知ボタンを非表示します。</string>
-  <string name="hide_notification_buttons_summary">この設定を有効にするには GPSLogger を再起動する必要があります。</string>
+  <string name="restart_required">この設定を有効にするには GPSLogger を再起動する必要があります。</string>
   <string name="pref_performance_activityrecognition">活動状況の自動認識</string>
   <string name="activityrecognition_dont_log_if_still">移動していないときはログファイルを書かない</string>
   <string name="activityrecognition_dont_log_if_still_summary">最後の点から加速度計に変化がない時は動き出すまで活動記録は書き込みしません。移動記録は書き込みを続けます。</string>

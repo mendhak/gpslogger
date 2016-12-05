@@ -17,10 +17,9 @@
  * along with gpslogger.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.mendhak.gpslogger.loggers.customurl;
+package com.mendhak.gpslogger.common;
 
 
-import com.mendhak.gpslogger.common.CertificateValidationException;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import org.slf4j.Logger;
 import java.security.KeyStore;
@@ -32,7 +31,6 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateExpiredException;
 import java.security.cert.CertificateNotYetValidException;
 import java.security.cert.X509Certificate;
-import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;

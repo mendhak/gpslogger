@@ -334,7 +334,7 @@
   <string name="tip_coffee">Купи мне кофе</string>
   <string name="no_network_message">Нет доступной сети</string>
   <string name="hide_notification_buttons">Скрыть кнопки уведомления</string>
-  <string name="hide_notification_buttons_summary">Необходимо будет перезапустить GPSLogger, чтобы установка вступила в силу</string>
+  <string name="restart_required">Необходимо будет перезапустить GPSLogger, чтобы установка вступила в силу</string>
   <string name="pref_performance_activityrecognition">Распознание движения</string>
   <string name="activityrecognition_dont_log_if_still">Не записывать если я не двигаюсь</string>
   <string name="activityrecognition_dont_log_if_still_summary">Если после последнего пункта, акселерометр не зарегистрировал движений, запись точек будет приостановлена. Пассивные точки будут записаны.</string>

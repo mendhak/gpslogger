@@ -326,7 +326,7 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="tip_coffee">Hívj meg egy kávéra</string>
   <string name="no_network_message">Hálózat nem áll rendelkezésre</string>
   <string name="hide_notification_buttons">Gombok elrejtése az értesítési sávon</string>
-  <string name="hide_notification_buttons_summary">A beállítás érvénybe léptetéséhez indítsa újra a GPSLoggert</string>
+  <string name="restart_required">A beállítás érvénybe léptetéséhez indítsa újra a GPSLoggert</string>
   <string name="pref_performance_activityrecognition">Tevékenység felismerés</string>
   <string name="activityrecognition_dont_log_if_still">Ne ments, ha nem mozgok</string>
   <string name="activityrecognition_dont_log_if_still_summary">Naplózás szüneteltetése, ha a gyorsulásmérő nem érzékelt mozgást az utolsó pont rögzítése óta. Passzív pontok ekkor is rögzítődhetnek.</string>

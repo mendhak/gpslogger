@@ -25,7 +25,7 @@
 
     <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:title="@string/hide_notification_buttons"
-        android:summary="@string/hide_notification_buttons_summary"
+        android:summary="@string/restart_required"
         android:key="hide_notification_buttons"
         >
     </com.mendhak.gpslogger.ui.components.CustomSwitchPreference>

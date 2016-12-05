@@ -329,7 +329,7 @@
   <string name="tip_coffee">Kupte mi kafe</string>
   <string name="no_network_message">Není dostupná žádná síť</string>
   <string name="hide_notification_buttons">Skrýt tlačítka notifikací</string>
-  <string name="hide_notification_buttons_summary">Budete muset restartovat GPSLogger aby se toto nastavení projevilo</string>
+  <string name="restart_required">Budete muset restartovat GPSLogger aby se toto nastavení projevilo</string>
   <string name="pref_performance_activityrecognition">Rozpoznání aktivity</string>
   <string name="activityrecognition_dont_log_if_still">Nezaznamenávat pokud se nehýbu</string>
   <string name="activityrecognition_dont_log_if_still_summary">Pokud akcelerometr nedetekuje žádný pohyb od posledního bodu, aktivní záznam bude pozastaven, dokud se znovu nepohnete. Pasivní body by jinak byly dále nahrávány.</string>

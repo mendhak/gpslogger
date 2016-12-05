@@ -329,7 +329,7 @@
   <string name="tip_coffee">Compre-me um café</string>
   <string name="no_network_message">Não existe rede disponível</string>
   <string name="hide_notification_buttons">Ocultar botões de notificação</string>
-  <string name="hide_notification_buttons_summary">Você precisará reiniciar o GPSLogger para que esta configuração tenha efeito</string>
+  <string name="restart_required">Você precisará reiniciar o GPSLogger para que esta configuração tenha efeito</string>
   <string name="pref_performance_activityrecognition">Reconhecimento de Atividade</string>
   <string name="activityrecognition_dont_log_if_still">Não registre se não estou em movimento</string>
   <string name="activityrecognition_dont_log_if_still_summary">Se não houver movimento do acelerômetro desde o último ponto, o log ativo fará uma pausa até que você se mova novamente. Pontos passivos ainda podem ser registrados.</string>

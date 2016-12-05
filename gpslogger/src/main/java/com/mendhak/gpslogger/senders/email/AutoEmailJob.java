@@ -27,7 +27,7 @@ import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.loggers.Streams;
-import com.mendhak.gpslogger.loggers.customurl.LocalX509TrustManager;
+import com.mendhak.gpslogger.common.LocalX509TrustManager;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;

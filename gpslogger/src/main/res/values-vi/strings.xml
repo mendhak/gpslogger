@@ -317,7 +317,7 @@
   <string name="donate_app">Tặng (ứng dụng)</string>
   <string name="no_network_message">Không có mạng</string>
   <string name="hide_notification_buttons">Ẩn nút thông báo</string>
-  <string name="hide_notification_buttons_summary">Bạn sẽ cần phải khởi động lại GPSLogger để cái đặt này có hiệu lực</string>
+  <string name="restart_required">Bạn sẽ cần phải khởi động lại GPSLogger để cái đặt này có hiệu lực</string>
   <string name="pref_performance_activityrecognition">Nhận dạng các hoạt động</string>
   <string name="activityrecognition_dont_log_if_still">Không ghi nếu tôi không di chuyển</string>
   <string name="activityrecognition_dont_log_if_still_summary">Nếu không có chuyển động tính từ điểm cuối cùng, log sẽ tạm dừng đến khi bạn tiếp tục di chuyển</string>

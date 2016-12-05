@@ -21,19 +21,23 @@ package com.mendhak.gpslogger.common;
 
 
 import android.content.Context;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.text.Html;
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
-import com.mendhak.gpslogger.loggers.customurl.LocalX509TrustManager;
+import com.mendhak.gpslogger.ui.Dialogs;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
+import javax.net.ssl.*;
 import java.io.*;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertStoreException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 
@@ -125,4 +129,107 @@ public class Networks {
 
         return null;
     }
+
+    public static void performCertificateValidationWorkflow(Context context, String host, int port) {
+        Handler postValidationHandler = new Handler();
+        Dialogs.progress(context, context.getString(R.string.please_wait), context.getString(R.string.please_wait));
+        new Thread(new CertificateFetcher(context, host, port, postValidationHandler)).start();
+    }
+
+    private static void onCertificateFetched(final Context context, Exception e, boolean isValid) {
+
+        Dialogs.hideProgress();
+
+        if (!isValid) {
+            final CertificateValidationException cve = Networks.extractCertificateValidationException(e);
+
+            if (cve != null) {
+                LOG.debug(cve.getCertificate().getIssuerDN().getName());
+                try {
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append(cve.getMessage());
+                    sb.append("<br /><br /><strong>").append("Subject: ").append("</strong>").append(cve.getCertificate().getSubjectDN().getName());
+                    sb.append("<br /><br /><strong>").append("Issuer: ").append("</strong>").append(cve.getCertificate().getIssuerDN().getName());
+                    sb.append("<br /><br /><strong>").append("Fingerprint: ").append("</strong>").append(DigestUtils.shaHex(cve.getCertificate().getEncoded()));
+                    sb.append("<br /><br /><strong>").append("Issued on: ").append("</strong>").append(cve.getCertificate().getNotBefore());
+                    sb.append("<br /><br /><strong>").append("Expires on: ").append("</strong>").append(cve.getCertificate().getNotBefore());
+
+                    new MaterialDialog.Builder(context)
+                            .title("Add this certificate to local keystore?")
+                            .content(Html.fromHtml(sb.toString()))
+                            .positiveText(R.string.ok)
+                            .negativeText(R.string.cancel)
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    try {
+                                        Networks.addCertToKnownServersStore(cve.getCertificate(), context.getApplicationContext());
+                                        Dialogs.alert("",context.getString(R.string.restart_required),context);
+                                    } catch (Exception e) {
+                                        LOG.error("Could not add to the keystore", e);
+                                    }
+
+                                    dialog.dismiss();
+                                }
+                            }).show();
+
+                } catch (Exception e1) {
+                    LOG.error("Could not get fingerprint of certificate", e1);
+                }
+
+            } else {
+                LOG.error("Error while attempting to fetch server certificate", e);
+                Dialogs.error(context.getString(R.string.error), "Error while attempting to fetch server certificate", e.getMessage(), e, context);
+            }
+        } else {
+            Dialogs.alert(context.getString(R.string.success), "The certificate is valid or in the local keystore." , context);
+        }
+    }
+
+    private static class CertificateFetcher implements Runnable {
+
+        Handler postValidationHandler;
+        Context context;
+        String host;
+        int port;
+
+        CertificateFetcher(Context context, String host, int port, Handler postValidationHandler) {
+            this.context = context;
+            this.host = host;
+            this.port = port;
+            this.postValidationHandler = postValidationHandler;
+        }
+
+        @Override
+        public void run() {
+            try {
+
+                SSLSocketFactory factory = Networks.getSocketFactory(context);
+                SSLSocket socket = (SSLSocket) factory.createSocket(host, port);
+                socket.startHandshake();
+                SSLSession session = socket.getSession();
+                java.security.cert.Certificate[] servercerts = session.getPeerCertificates();
+
+                postValidationHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        onCertificateFetched(context, null, true);
+                    }
+                });
+
+
+            } catch (final Exception e) {
+
+                postValidationHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        onCertificateFetched(context, e, false);
+                    }
+                });
+            }
+
+        }
+    }
+
+
 }

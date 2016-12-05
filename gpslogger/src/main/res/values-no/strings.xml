@@ -306,7 +306,7 @@
   <string name="tip_coffee">Kjøp en kaffe til meg</string>
   <string name="no_network_message">Ingen nettverk tilgjengelig</string>
   <string name="hide_notification_buttons">Skjul notifikasjonsknapp</string>
-  <string name="hide_notification_buttons_summary">Du må starte GPSLogger på nytt for at denne innstillingen skal tre i kraft</string>
+  <string name="restart_required">Du må starte GPSLogger på nytt for at denne innstillingen skal tre i kraft</string>
   <string name="pref_performance_activityrecognition">Aktivitetsgjenkjennelse</string>
   <string name="activityrecognition_dont_log_if_still">Ikke logg om jeg ikke beveger meg</string>
   <string name="activityrecognition_dont_log_if_still_summary">Hvis det ikke er akselerometerbevegelse siden det siste punktet, vil logging stoppe midlertidig til du beveger deg igjen. Passiv punkt kan fortsatt bli logget.</string>

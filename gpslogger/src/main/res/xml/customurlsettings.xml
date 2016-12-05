@@ -6,7 +6,7 @@
         android:title="URL"
         />
 
-    <Preference android:key="customurl_getcustomsslcert"
+    <Preference android:key="customurl_validatecustomsslcert"
                 android:title="Validate SSL cert" />
 
     <Preference

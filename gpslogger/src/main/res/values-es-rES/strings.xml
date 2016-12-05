@@ -329,7 +329,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
   <string name="tip_coffee">Invitame a un cafe</string>
   <string name="no_network_message">No hay ninguna red disponible</string>
   <string name="hide_notification_buttons">Ocultar botones de notificación</string>
-  <string name="hide_notification_buttons_summary">Es necesario reiniciar GPSLogger para que la configuración surta efecto</string>
+  <string name="restart_required">Es necesario reiniciar GPSLogger para que la configuración surta efecto</string>
   <string name="pref_performance_activityrecognition">Reconocimiento de actividad</string>
   <string name="activityrecognition_dont_log_if_still">No registrar si no hay movimiento</string>
   <string name="activityrecognition_dont_log_if_still_summary">Si no hay ningún movimiento de acelerómetro desde el último punto se pausará el registro, reanudándose cuando haya actividad. Los puntos pasivos todavía se pueden registrar.</string>

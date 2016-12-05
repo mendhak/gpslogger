@@ -309,7 +309,7 @@
   <string name="tip_coffee">Osta minulle kahvi</string>
   <string name="no_network_message">Verkkoa ei ole saatavilla</string>
   <string name="hide_notification_buttons">Piilota ilmoituspainikkeet</string>
-  <string name="hide_notification_buttons_summary">Joudut käynnistämään GPSLoggerin uudelleen, jotta tämä asetus tulee voimaan</string>
+  <string name="restart_required">Joudut käynnistämään GPSLoggerin uudelleen, jotta tämä asetus tulee voimaan</string>
   <string name="txt_activity">Aktiivisuus:</string>
   <string name="activity_unknown">Tuntematon</string>
   <string name="logview_showlocationsonly">Vain sijainnit</string>

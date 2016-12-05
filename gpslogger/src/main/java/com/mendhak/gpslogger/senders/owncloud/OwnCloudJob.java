@@ -21,10 +21,10 @@ package com.mendhak.gpslogger.senders.owncloud;
 
 import android.net.Uri;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.LocalX509TrustManager;
 import com.mendhak.gpslogger.common.Networks;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.loggers.customurl.LocalX509TrustManager;
 import com.owncloud.android.lib.common.OwnCloudClient;
 import com.owncloud.android.lib.common.OwnCloudClientFactory;
 import com.owncloud.android.lib.common.OwnCloudCredentialsFactory;
@@ -84,25 +84,24 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
         LOG.debug("ownCloud Job: Uploading  '" + localFile.getName() + "'");
 
         Protocol pr = Protocol.getProtocol("https");
-        if (pr == null || !(pr.getSocketFactory() instanceof AdvancedSslSocketFactory)) {
 
-            try {
-                SSLContext sslContext = SSLContext.getInstance("TLS");
-                sslContext.init(
-                        null,
-                        new TrustManager[] { new LocalX509TrustManager(Networks.getKnownServersStore(AppSettings.getInstance())) },
-                        null
-                );
+        try {
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(
+                    null,
+                    new TrustManager[] { new LocalX509TrustManager(Networks.getKnownServersStore(AppSettings.getInstance())) },
+                    null
+            );
 
-                ProtocolSocketFactory psf = new AdvancedSslSocketFactory(sslContext, new AdvancedX509TrustManager(Networks.getKnownServersStore(AppSettings.getInstance())), null);
+            ProtocolSocketFactory psf = new AdvancedSslSocketFactory(sslContext, new AdvancedX509TrustManager(Networks.getKnownServersStore(AppSettings.getInstance())), null);
 
 
-                Protocol.registerProtocol( "https", new Protocol("https", psf, 443));
+            Protocol.registerProtocol( "https", new Protocol("https", psf, 443));
 
-            } catch (GeneralSecurityException e) {
-                LOG.error("Self-signed confident SSL context could not be loaded", e);
-            }
+        } catch (GeneralSecurityException e) {
+            LOG.error("Self-signed confident SSL context could not be loaded", e);
         }
+
 
         OwnCloudClient client = OwnCloudClientFactory.createOwnCloudClient(Uri.parse(servername), AppSettings.getInstance(), true);
         client.setDefaultTimeouts('\uea60', '\uea60');

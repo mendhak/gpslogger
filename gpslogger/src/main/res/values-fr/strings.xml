@@ -323,7 +323,7 @@ une plus grande précision à basses fréquences.</string>
   <string name="tip_coffee">Offrez moi un café</string>
   <string name="no_network_message">Il n\'y a pas de réseau disponible</string>
   <string name="hide_notification_buttons">Cacher les icones de notification</string>
-  <string name="hide_notification_buttons_summary">Vous aurez besoin de redémarrer GPSLogger pour que le changement soit effectif</string>
+  <string name="restart_required">Vous aurez besoin de redémarrer GPSLogger pour que le changement soit effectif</string>
   <string name="pref_performance_activityrecognition">Reconnaissance d\'activité</string>
   <string name="activityrecognition_dont_log_if_still">N\'enregistre pas en l\'absence de mouvement</string>
   <string name="activityrecognition_dont_log_if_still_summary">S\'il n\'y a pas de mouvement depuis le dernier point, l\'enregistrement est mis en pause jusqu\'à reprise du mouvement. Les points passifs peuvent toujours être enregistrés.</string>

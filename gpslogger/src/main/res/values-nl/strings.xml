@@ -327,7 +327,7 @@
   <string name="tip_coffee">Koop een kopje koffie voor me</string>
   <string name="no_network_message">Er is geen netwerk beschikbaar</string>
   <string name="hide_notification_buttons">Notificatie knoppen verbergen</string>
-  <string name="hide_notification_buttons_summary">Je moet de GPSLogger opnieuw opstarten om deze instelling te laten werken</string>
+  <string name="restart_required">Je moet de GPSLogger opnieuw opstarten om deze instelling te laten werken</string>
   <string name="pref_performance_activityrecognition">Activiteit herkenning</string>
   <string name="activityrecognition_dont_log_if_still">Niet loggen als ik niet beweeg</string>
   <string name="activityrecognition_dont_log_if_still_summary">Als de accelerometer geen beweging heeft geregistreerd na het laatste punt, pauzeer het loggen totdat je weer beweegt. Passieve punten worden nog wel gelogd.</string>

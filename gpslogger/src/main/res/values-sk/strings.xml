@@ -349,7 +349,7 @@ polia.
   <string name="tip_coffee">Kúpiť mi kávu</string>
   <string name="no_network_message">Nie je dostupná žiadna sieť</string>
   <string name="hide_notification_buttons">Skryť notifikačné tlačidlá</string>
-  <string name="hide_notification_buttons_summary">Pre aktivovanie toto nastavenia je potrebné reštartovať GPSLogger</string>
+  <string name="restart_required">Pre aktivovanie toto nastavenia je potrebné reštartovať GPSLogger</string>
   <string name="pref_performance_activityrecognition">Rozpoznávanie aktivity</string>
   <string name="activityrecognition_dont_log_if_still">Nezaznamenávať pri státí</string>
   <string name="activityrecognition_dont_log_if_still_summary">Ak merač zrýchlenia nezaznamená žiadny pohyb z posledného bodu, aktívne zaznamenávanie sa pozastaví až do vykonania ďalšieho pohybu. Pasívne body je možné zaznamenávať.</string>

@@ -20,34 +20,19 @@
 
 package com.mendhak.gpslogger.ui.fragments.settings;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
-import android.support.annotation.NonNull;
-import android.text.Html;
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.CertificateValidationException;
 import com.mendhak.gpslogger.common.Networks;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.loggers.customurl.LocalX509TrustManager;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
-import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
-import okhttp3.*;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
-import javax.net.ssl.*;
-import java.io.IOException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.MessageFormat;
 
 public class CustomUrlFragment extends PermissionedPreferenceFragment implements
@@ -91,7 +76,7 @@ public class CustomUrlFragment extends PermissionedPreferenceFragment implements
         Preference urlLegendPreference3 = (Preference)findPreference("customurl_legend_3");
         urlLegendPreference3.setSummary(legend3);
 
-        Preference getCustomCert = (Preference)findPreference("customurl_getcustomsslcert");
+        Preference getCustomCert = (Preference)findPreference("customurl_validatecustomsslcert");
         getCustomCert.setOnPreferenceClickListener(this);
 
     }
@@ -111,99 +96,24 @@ public class CustomUrlFragment extends PermissionedPreferenceFragment implements
     }
 
 
-    public Handler postValidationHandler = new Handler();
+
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if(preference.getKey().equals("customurl_getcustomsslcert")){
-            Dialogs.progress(getActivity(),getString(R.string.please_wait), getString(R.string.please_wait));
-            new Thread(fetchCert).start();
+        if(preference.getKey().equals("customurl_validatecustomsslcert")){
+
+            try {
+                URL u = new URL(PreferenceHelper.getInstance().getCustomLoggingUrl());
+                Networks.performCertificateValidationWorkflow(getActivity(), u.getHost(), u.getPort() < 0 ? u.getDefaultPort() : u.getPort());
+            } catch (MalformedURLException e) {
+                LOG.error("Could not start certificate validation", e);
+            }
+
             return true;
         }
         return false;
     }
 
-    public void onCertificateFetched(Exception e, boolean isValid){
 
-        Dialogs.hideProgress();
-
-        if(!isValid){
-            final CertificateValidationException cve = Networks.extractCertificateValidationException(e);
-
-            if(cve != null){
-                LOG.debug(cve.getCertificate().getIssuerDN().getName());
-                try {
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("<br /><br /><strong>").append("Subject: ").append("</strong>").append(cve.getCertificate().getSubjectDN().getName());
-                    sb.append("<br /><br /><strong>").append("Issuer: ").append("</strong>").append(cve.getCertificate().getIssuerDN().getName());
-                    sb.append("<br /><br /><strong>").append("Fingerprint: ").append("</strong>").append(DigestUtils.shaHex(cve.getCertificate().getEncoded()));
-                    sb.append("<br /><br /><strong>").append("Issued on: ").append("</strong>").append(cve.getCertificate().getNotBefore());
-                    sb.append("<br /><br /><strong>").append("Expires on: ").append("</strong>").append(cve.getCertificate().getNotBefore());
-
-                    new MaterialDialog.Builder(getActivity())
-                            .title(cve.getMessage())
-                            .content(Html.fromHtml("Add this certificate to local keystore?<br />" + sb.toString()))
-                            .positiveText(R.string.ok)
-                            .negativeText(R.string.cancel)
-                            .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    try {
-                                        Networks.addCertToKnownServersStore(cve.getCertificate(), getActivity().getApplicationContext());
-                                    } catch (Exception e) {
-                                        LOG.error("Could not add to the keystore", e);
-                                    }
-
-                                    dialog.dismiss();
-                                }
-                            }).show();
-
-                } catch (Exception e1) {
-                    LOG.error("Could not get fingerprint of certificate", e1);
-                }
-
-            }
-            else {
-                LOG.error("Error while attempting to fetch server certificate", e);
-                Dialogs.error(getString(R.string.error), "Error while attempting to fetch server certificate", e.getMessage(),e,getActivity());
-            }
-        }
-        else {
-            Dialogs.alert(getString(R.string.success),getString(R.string.success),getActivity());
-        }
-    }
-
-    private Runnable fetchCert = new Runnable() {
-        @Override
-        public void run() {
-            try {
-
-                OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
-                okBuilder.sslSocketFactory(Networks.getSocketFactory(getActivity()));
-                OkHttpClient client = okBuilder.build();
-                Request request = new Request.Builder().url(PreferenceHelper.getInstance().getCustomLoggingUrl()).build();
-                Response resp = client.newCall(request).execute();
-                LOG.debug("Page responded with HTTP " + Integer.toString(resp.code()));
-                resp.body().close();
-                postValidationHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        onCertificateFetched(null, true);
-                    }
-                });
-
-            }
-            catch (final Exception e) {
-
-                postValidationHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        onCertificateFetched(e, false);
-                    }
-                });
-            }
-
-        }
-    };
 
 }

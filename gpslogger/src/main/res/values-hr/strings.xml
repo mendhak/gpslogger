@@ -322,7 +322,7 @@
   <string name="tip_coffee">Kupi mi kavu</string>
   <string name="no_network_message">Nema dostupne mreže</string>
   <string name="hide_notification_buttons">Sakrij obavijest gumbe</string>
-  <string name="hide_notification_buttons_summary">Potrebno je ponovno pokrenuti GPSLogger da bi postavke stupile na snagu</string>
+  <string name="restart_required">Potrebno je ponovno pokrenuti GPSLogger da bi postavke stupile na snagu</string>
   <string name="pref_performance_activityrecognition">Prepoznavanje aktivnosti</string>
   <string name="activityrecognition_dont_log_if_still">Ne zapiši, ako ne krećem</string>
   <string name="activityrecognition_dont_log_if_still_summary">Ako brzinomjer ne primijeti kretanje od zadnje točke, aktivno zapisivanje datoteka će pauzirati dok ne počne kretanje. Pasivne točke još uvijek mogu biti zapisivani.</string>

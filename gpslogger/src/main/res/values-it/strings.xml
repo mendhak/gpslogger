@@ -322,7 +322,7 @@
   <string name="tip_coffee">Comprami un caffè</string>
   <string name="no_network_message">Rete dati non disponibile</string>
   <string name="hide_notification_buttons">Nascondere i pulsanti di notifica</string>
-  <string name="hide_notification_buttons_summary">Sarà necessario riavviare GPSLogger perchè questa impostazione abbia effetto</string>
+  <string name="restart_required">Sarà necessario riavviare GPSLogger perchè questa impostazione abbia effetto</string>
   <string name="activityrecognition_dont_log_if_still">Non caricare il log se non mi muovo</string>
   <string name="activityrecognition_dont_log_if_still_summary">Se non c\'è nessun attività dell\'accelerometro dall\'ultimo punto, la registrazione verrà sospesa fino a quando vi sposterete nuovamente. Potrebbero ancora essere registrati i punti passivi.</string>
   <string name="txt_activity">Attività:</string>
