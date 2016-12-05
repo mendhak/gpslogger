@@ -20,6 +20,8 @@
 package com.mendhak.gpslogger.loggers.customurl;
 
 
+import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.Networks;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -28,9 +30,6 @@ import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
 import okhttp3.*;
 import org.slf4j.Logger;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLSession;
 import java.io.IOException;
 
 
@@ -60,7 +59,6 @@ public class CustomUrlJob extends Job {
 
         LOG.debug("Sending to URL: " + logUrl);
 
-
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
 
         if(!Strings.isNullOrEmpty(basicAuthUser)){
@@ -73,14 +71,7 @@ public class CustomUrlJob extends Job {
             });
         }
 
-
-        okBuilder.sslSocketFactory(CustomUrlTrustEverything.getSSLContextSocketFactory());
-        okBuilder.hostnameVerifier(new HostnameVerifier() {
-            @Override
-            public boolean verify(String s, SSLSession sslSession) {
-                return true;
-            }
-        });
+        okBuilder.sslSocketFactory(Networks.getSocketFactory(AppSettings.getInstance()));
 
         OkHttpClient client = okBuilder.build();
 

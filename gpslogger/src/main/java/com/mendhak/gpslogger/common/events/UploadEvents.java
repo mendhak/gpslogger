@@ -20,6 +20,7 @@
 package com.mendhak.gpslogger.common.events;
 
 
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 
 public class UploadEvents {

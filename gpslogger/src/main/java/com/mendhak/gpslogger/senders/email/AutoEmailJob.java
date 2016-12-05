@@ -20,12 +20,14 @@
 package com.mendhak.gpslogger.senders.email;
 
 import android.util.Base64;
+import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.Networks;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.loggers.Streams;
-import com.mendhak.gpslogger.loggers.customurl.CustomUrlTrustEverything;
+import com.mendhak.gpslogger.loggers.customurl.LocalX509TrustManager;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
@@ -127,7 +129,7 @@ public class AutoEmailJob extends Job {
             // if your host accepts STARTTLS, we're good everything will be encrypted, otherwise we're done here
             LOG.debug("Checking TLS...");
 
-            client.setTrustManager(new CustomUrlTrustEverything.TrustEverythingTrustManager());
+            client.setTrustManager(new LocalX509TrustManager(Networks.getKnownServersStore(AppSettings.getInstance())));
             if(client.execTLS()){
                 client.ehlo("localhost");
             }

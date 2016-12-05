@@ -6,6 +6,9 @@
         android:title="URL"
         />
 
+    <Preference android:key="customurl_getcustomsslcert"
+                android:title="Validate SSL cert" />
+
     <Preference
         android:key="customurl_legend_1"
         android:selectable="false"

@@ -21,11 +21,15 @@ package com.mendhak.gpslogger.senders.owncloud;
 
 import android.net.Uri;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.Networks;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.customurl.LocalX509TrustManager;
 import com.owncloud.android.lib.common.OwnCloudClient;
 import com.owncloud.android.lib.common.OwnCloudClientFactory;
 import com.owncloud.android.lib.common.OwnCloudCredentialsFactory;
+import com.owncloud.android.lib.common.network.AdvancedSslSocketFactory;
+import com.owncloud.android.lib.common.network.AdvancedX509TrustManager;
 import com.owncloud.android.lib.common.operations.OnRemoteOperationListener;
 import com.owncloud.android.lib.common.operations.RemoteOperation;
 import com.owncloud.android.lib.common.operations.RemoteOperationResult;
@@ -39,6 +43,8 @@ import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.slf4j.Logger;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
 import java.io.File;
 import java.security.GeneralSecurityException;
 
@@ -78,9 +84,19 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
         LOG.debug("ownCloud Job: Uploading  '" + localFile.getName() + "'");
 
         Protocol pr = Protocol.getProtocol("https");
-        if (pr == null || !(pr.getSocketFactory() instanceof SelfSignedConfidentSslSocketFactory)) {
+        if (pr == null || !(pr.getSocketFactory() instanceof AdvancedSslSocketFactory)) {
+
             try {
-                ProtocolSocketFactory psf = new SelfSignedConfidentSslSocketFactory();
+                SSLContext sslContext = SSLContext.getInstance("TLS");
+                sslContext.init(
+                        null,
+                        new TrustManager[] { new LocalX509TrustManager(Networks.getKnownServersStore(AppSettings.getInstance())) },
+                        null
+                );
+
+                ProtocolSocketFactory psf = new AdvancedSslSocketFactory(sslContext, new AdvancedX509TrustManager(Networks.getKnownServersStore(AppSettings.getInstance())), null);
+
+
                 Protocol.registerProtocol( "https", new Protocol("https", psf, 443));
 
             } catch (GeneralSecurityException e) {
