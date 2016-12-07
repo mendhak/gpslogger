@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 
 import javax.net.ssl.*;
 import java.io.*;
+import java.net.Socket;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -97,7 +98,11 @@ public class Networks {
     }
 
     public static CertificateValidationException extractCertificateValidationException(Exception e) {
+
+        if (e == null) { return null ; }
+
         CertificateValidationException result = null;
+
         if (e instanceof CertificateValidationException) {
             return (CertificateValidationException)e;
         }
@@ -130,10 +135,10 @@ public class Networks {
         return null;
     }
 
-    public static void performCertificateValidationWorkflow(Context context, String host, int port) {
+    public static void performCertificateValidationWorkflow(Context context, String host, int port, ServerType serverType) {
         Handler postValidationHandler = new Handler();
         Dialogs.progress(context, context.getString(R.string.please_wait), context.getString(R.string.please_wait));
-        new Thread(new CertificateFetcher(context, host, port, postValidationHandler)).start();
+        new Thread(new CertificateFetcher(context, host, port, serverType, postValidationHandler)).start();
     }
 
     private static void onCertificateFetched(final Context context, Exception e, boolean isValid) {
@@ -179,43 +184,109 @@ public class Networks {
 
             } else {
                 LOG.error("Error while attempting to fetch server certificate", e);
-                Dialogs.error(context.getString(R.string.error), "Error while attempting to fetch server certificate", e.getMessage(), e, context);
+                Dialogs.error(context.getString(R.string.error), "Error while attempting to fetch server certificate", "", e, context);
             }
         } else {
             Dialogs.alert(context.getString(R.string.success), "The certificate is valid or in the local keystore." , context);
         }
     }
 
+    public enum ServerType {
+        HTTPS,
+        FTP,
+        SMTP
+    }
+
     private static class CertificateFetcher implements Runnable {
+
+
 
         Handler postValidationHandler;
         Context context;
         String host;
         int port;
+        ServerType serverType;
 
-        CertificateFetcher(Context context, String host, int port, Handler postValidationHandler) {
+        CertificateFetcher(Context context, String host, int port, ServerType serverType, Handler postValidationHandler) {
             this.context = context;
             this.host = host;
             this.port = port;
+            this.serverType = serverType;
             this.postValidationHandler = postValidationHandler;
+
         }
 
         @Override
         public void run() {
             try {
 
-                SSLSocketFactory factory = Networks.getSocketFactory(context);
-                SSLSocket socket = (SSLSocket) factory.createSocket(host, port);
-                socket.startHandshake();
-                SSLSession session = socket.getSession();
-                java.security.cert.Certificate[] servercerts = session.getPeerCertificates();
+                if (serverType == ServerType.HTTPS) {
+                    connectToSSLSocket(null);
+                    postValidationHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            onCertificateFetched(context, null, true);
+                        }
+                    });
+                } else {
 
-                postValidationHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        onCertificateFetched(context, null, true);
+                    String command = "", replyToSearchFor = "";
+                    if (serverType == ServerType.FTP) {
+                        command = "AUTH SSL\r\n";
+                        replyToSearchFor = "234";
+                    } else if (serverType == ServerType.SMTP) {
+                        command = "STARTTLS\r\n";
+                        replyToSearchFor = "Ready";
                     }
-                });
+
+                    try {
+                        //Try connecting right away in case the socket is expecting TLS right away
+                        connectToSSLSocket(null);
+                        postValidationHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                onCertificateFetched(context, null, true);
+                            }
+                        });
+                    } catch (Exception e) {
+                        if (Networks.extractCertificateValidationException(e) != null) {
+                            throw e;
+                        }
+
+                        //Now attempt elevation based TLS flow - issue command, wrap socket, try again
+                        Socket plainSocket = new Socket(host, port);
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(plainSocket.getInputStream()));
+                        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(plainSocket.getOutputStream()));
+                        String line;
+                        writer.write(command);
+                        writer.flush();
+
+                        while ((line = reader.readLine()) != null) {
+                            if (line.contains(replyToSearchFor)) {
+                                connectToSSLSocket(plainSocket);
+                                postValidationHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        onCertificateFetched(context, null, true);
+                                    }
+                                });
+//                            reader.close();
+//                            writer.close();
+                                break;
+                            }
+                        }
+
+                        //If all else fails, it's invalid
+                        postValidationHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                onCertificateFetched(context, null, false);
+                            }
+                        });
+                    }
+
+                }
+
 
 
             } catch (final Exception e) {
@@ -227,6 +298,25 @@ public class Networks {
                     }
                 });
             }
+
+        }
+
+        private void connectToSSLSocket(Socket plainSocket) throws IOException {
+            SSLSocketFactory factory = Networks.getSocketFactory(context);
+            SSLSocket socket = (SSLSocket) factory.createSocket(host, port);
+            if(plainSocket!=null){
+                socket = (SSLSocket)factory.createSocket(plainSocket,host,port,true);
+            }
+
+            if(serverType == ServerType.SMTP){
+                socket.setUseClientMode(true);
+                socket.setNeedClientAuth(true);
+            }
+
+            socket.setSoTimeout(5000);
+            socket.startHandshake();
+            SSLSession session = socket.getSession();
+            Certificate[] servercerts = session.getPeerCertificates();
 
         }
     }

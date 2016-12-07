@@ -95,7 +95,7 @@ public class OwnCloudSettingsFragment
         if(preference.getKey().equals("owncloud_validatecustomsslcert")){
             try {
                 URL u = new URL(PreferenceHelper.getInstance().getOwnCloudServerName());
-                Networks.performCertificateValidationWorkflow(getActivity(), u.getHost(), u.getPort() < 0 ? u.getDefaultPort() : u.getPort());
+                Networks.performCertificateValidationWorkflow(getActivity(), u.getHost(), u.getPort() < 0 ? u.getDefaultPort() : u.getPort(), Networks.ServerType.HTTPS);
             } catch (MalformedURLException e) {
                 LOG.error("Could not validate certificate, OwnCloud URL is not valid", e);
             }

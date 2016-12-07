@@ -27,20 +27,24 @@ import android.text.TextUtils;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Systems;
+import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.email.AutoEmailManager;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import de.greenrobot.event.EventBus;
+import org.slf4j.Logger;
+
+import java.net.MalformedURLException;
+
 
 public class AutoEmailFragment extends PermissionedPreferenceFragment implements
         OnPreferenceChangeListener,  OnPreferenceClickListener, PreferenceValidator {
 
+    private static final Logger LOG = Logs.of(AutoEmailFragment.class);
     private final PreferenceHelper preferenceHelper;
     AutoEmailManager aem;
 
@@ -72,6 +76,8 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
 
         testEmailPref.setOnPreferenceClickListener(this);
 
+        findPreference("smtp_validatecustomsslcert").setOnPreferenceClickListener(this);
+
         registerEventBus();
     }
 
@@ -95,34 +101,40 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
 
     public boolean onPreferenceClick(Preference preference) {
 
-        CustomSwitchPreference chkUseSsl = (CustomSwitchPreference) findPreference("smtp_ssl");
-        MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
-        MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
-        MaterialEditTextPreference txtUsername = (MaterialEditTextPreference) findPreference("smtp_username");
-        MaterialEditTextPreference txtPassword = (MaterialEditTextPreference) findPreference("smtp_password");
-        MaterialEditTextPreference txtTarget = (MaterialEditTextPreference) findPreference("autoemail_target");
-        MaterialEditTextPreference txtFrom = (MaterialEditTextPreference) findPreference("smtp_from");
+        if(preference.getKey().equals("smtp_validatecustomsslcert")){
+                Networks.performCertificateValidationWorkflow(getActivity(), preferenceHelper.getSmtpServer(), Strings.toInt(preferenceHelper.getSmtpPort(),25), Networks.ServerType.SMTP);
+        }
+        else if (preference.getKey().equals("smtp_testemail")){
+            CustomSwitchPreference chkUseSsl = (CustomSwitchPreference) findPreference("smtp_ssl");
+            MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
+            MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
+            MaterialEditTextPreference txtUsername = (MaterialEditTextPreference) findPreference("smtp_username");
+            MaterialEditTextPreference txtPassword = (MaterialEditTextPreference) findPreference("smtp_password");
+            MaterialEditTextPreference txtTarget = (MaterialEditTextPreference) findPreference("autoemail_target");
+            MaterialEditTextPreference txtFrom = (MaterialEditTextPreference) findPreference("smtp_from");
 
-        if (!aem.isValid(txtSmtpServer.getText(), txtSmtpPort.getText(), txtUsername.getText(), txtPassword.getText(),txtTarget.getText())) {
-            Dialogs.alert(getString(R.string.autoemail_invalid_form),
-                    getString(R.string.autoemail_invalid_form_message),
-                    getActivity());
-            return true;
+            if (!aem.isValid(txtSmtpServer.getText(), txtSmtpPort.getText(), txtUsername.getText(), txtPassword.getText(),txtTarget.getText())) {
+                Dialogs.alert(getString(R.string.autoemail_invalid_form),
+                        getString(R.string.autoemail_invalid_form_message),
+                        getActivity());
+                return true;
+            }
+
+            if (!Systems.isNetworkAvailable(getActivity())) {
+                Dialogs.alert(getString(R.string.sorry), getString(R.string.no_network_message), getActivity());
+                return true;
+            }
+
+            Dialogs.progress(getActivity(), getString(R.string.autoemail_sendingtest),
+                    getString(R.string.please_wait));
+
+
+
+            aem.sendTestEmail(txtSmtpServer.getText(), txtSmtpPort.getText(),
+                    txtUsername.getText(), txtPassword.getText(),
+                    chkUseSsl.isChecked(), txtTarget.getText(), txtFrom.getText());
         }
 
-        if (!Systems.isNetworkAvailable(getActivity())) {
-            Dialogs.alert(getString(R.string.sorry), getString(R.string.no_network_message), getActivity());
-            return true;
-        }
-
-        Dialogs.progress(getActivity(), getString(R.string.autoemail_sendingtest),
-                getString(R.string.please_wait));
-
-
-
-        aem.sendTestEmail(txtSmtpServer.getText(), txtSmtpPort.getText(),
-                txtUsername.getText(), txtPassword.getText(),
-                chkUseSsl.isChecked(), txtTarget.getText(), txtFrom.getText());
 
         return true;
     }

@@ -28,6 +28,7 @@ import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.Networks;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
@@ -51,6 +52,9 @@ public class FtpFragment
 
         Preference testFtp = findPreference("autoftp_test");
         testFtp.setOnPreferenceClickListener(this);
+
+        findPreference("ftp_validatecustomsslcert").setOnPreferenceClickListener(this);
+
         registerEventBus();
     }
 
@@ -77,34 +81,42 @@ public class FtpFragment
     @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
 
-        FtpManager helper = new FtpManager(preferenceHelper);
+        if(preference.getKey().equals("ftp_validatecustomsslcert")){
 
-        MaterialEditTextPreference servernamePreference = (MaterialEditTextPreference) findPreference("autoftp_server");
-        MaterialEditTextPreference usernamePreference = (MaterialEditTextPreference) findPreference("autoftp_username");
-        MaterialEditTextPreference passwordPreference = (MaterialEditTextPreference) findPreference("autoftp_password");
-        MaterialEditTextPreference portPreference = (MaterialEditTextPreference) findPreference("autoftp_port");
-        CustomSwitchPreference useFtpsPreference = (CustomSwitchPreference) findPreference("autoftp_useftps");
-        MaterialListPreference sslTlsPreference = (MaterialListPreference) findPreference("autoftp_ssltls");
-        CustomSwitchPreference implicitPreference = (CustomSwitchPreference) findPreference("autoftp_implicit");
-        MaterialEditTextPreference directoryPreference = (MaterialEditTextPreference) findPreference("autoftp_directory");
+            Networks.performCertificateValidationWorkflow(getActivity(), preferenceHelper.getFtpServerName(), preferenceHelper.getFtpPort(), Networks.ServerType.FTP);
 
-        if (!helper.validSettings(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
-                Strings.toInt(portPreference.getText(), 21),
-                 useFtpsPreference.isChecked(), sslTlsPreference.getValue(),
-                implicitPreference.isChecked())) {
-            Dialogs.alert(getString(R.string.autoftp_invalid_settings),
-                    getString(R.string.autoftp_invalid_summary),
-                    getActivity());
-            return false;
+        } else {
+            FtpManager helper = new FtpManager(preferenceHelper);
+
+            MaterialEditTextPreference servernamePreference = (MaterialEditTextPreference) findPreference("autoftp_server");
+            MaterialEditTextPreference usernamePreference = (MaterialEditTextPreference) findPreference("autoftp_username");
+            MaterialEditTextPreference passwordPreference = (MaterialEditTextPreference) findPreference("autoftp_password");
+            MaterialEditTextPreference portPreference = (MaterialEditTextPreference) findPreference("autoftp_port");
+            CustomSwitchPreference useFtpsPreference = (CustomSwitchPreference) findPreference("autoftp_useftps");
+            MaterialListPreference sslTlsPreference = (MaterialListPreference) findPreference("autoftp_ssltls");
+            CustomSwitchPreference implicitPreference = (CustomSwitchPreference) findPreference("autoftp_implicit");
+            MaterialEditTextPreference directoryPreference = (MaterialEditTextPreference) findPreference("autoftp_directory");
+
+            if (!helper.validSettings(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
+                    Strings.toInt(portPreference.getText(), 21),
+                    useFtpsPreference.isChecked(), sslTlsPreference.getValue(),
+                    implicitPreference.isChecked())) {
+                Dialogs.alert(getString(R.string.autoftp_invalid_settings),
+                        getString(R.string.autoftp_invalid_summary),
+                        getActivity());
+                return false;
+            }
+
+            Dialogs.progress(getActivity(), getString(R.string.autoftp_testing),
+                    getString(R.string.please_wait));
+
+
+            helper.testFtp(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
+                    directoryPreference.getText(), Strings.toInt(portPreference.getText(), 21), useFtpsPreference.isChecked(),
+                    sslTlsPreference.getValue(), implicitPreference.isChecked());
         }
 
-        Dialogs.progress(getActivity(), getString(R.string.autoftp_testing),
-                getString(R.string.please_wait));
 
-
-        helper.testFtp(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
-                directoryPreference.getText(), Strings.toInt(portPreference.getText(), 21), useFtpsPreference.isChecked(),
-                sslTlsPreference.getValue(), implicitPreference.isChecked());
 
         return true;
     }

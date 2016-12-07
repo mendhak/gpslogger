@@ -104,7 +104,7 @@ public class CustomUrlFragment extends PermissionedPreferenceFragment implements
 
             try {
                 URL u = new URL(PreferenceHelper.getInstance().getCustomLoggingUrl());
-                Networks.performCertificateValidationWorkflow(getActivity(), u.getHost(), u.getPort() < 0 ? u.getDefaultPort() : u.getPort());
+                Networks.performCertificateValidationWorkflow(getActivity(), u.getHost(), u.getPort() < 0 ? u.getDefaultPort() : u.getPort(), Networks.ServerType.HTTPS);
             } catch (MalformedURLException e) {
                 LOG.error("Could not start certificate validation", e);
             }

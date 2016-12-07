@@ -38,6 +38,8 @@
         <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
             android:key="smtp_ssl" android:title="@string/autoemail_ssl"
                             android:summary="@string/autoemail_ssl_summary"/>
+        <Preference android:key="smtp_validatecustomsslcert"
+                    android:title="Validate SSL cert" />
         <Preference android:title="@string/autoemail_smtp_testemail"
                     android:summary="@string/autoemail_test" android:key="smtp_testemail"/>
     </PreferenceCategory>
