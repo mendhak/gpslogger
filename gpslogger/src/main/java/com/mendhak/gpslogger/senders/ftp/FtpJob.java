@@ -20,6 +20,8 @@
 package com.mendhak.gpslogger.senders.ftp;
 
 
+import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.Networks;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -90,7 +92,10 @@ public class FtpJob extends Job {
                 KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
                 kmf.init(null, null);
                 KeyManager km = kmf.getKeyManagers()[0];
+
+                client.setSocketFactory(Networks.getSocketFactory(AppSettings.getInstance()));
                 ((FTPSClient) client).setKeyManager(km);
+
             } else {
                 client = new FTPClient();
             }

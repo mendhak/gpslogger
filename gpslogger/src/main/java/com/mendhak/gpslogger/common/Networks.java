@@ -149,7 +149,7 @@ public class Networks {
             final CertificateValidationException cve = Networks.extractCertificateValidationException(e);
 
             if (cve != null) {
-                LOG.debug(cve.getCertificate().getIssuerDN().getName());
+                LOG.debug("Untrusted certificate found, " + cve.getCertificate().toString());
                 try {
                     final StringBuilder sb = new StringBuilder();
                     sb.append(cve.getMessage());
@@ -184,7 +184,7 @@ public class Networks {
 
             } else {
                 LOG.error("Error while attempting to fetch server certificate", e);
-                Dialogs.error(context.getString(R.string.error), "Error while attempting to fetch server certificate", "", e, context);
+                Dialogs.error(context.getString(R.string.error), "Error while attempting to fetch server certificate", e!= null ? e.getMessage(): "", e, context);
             }
         } else {
             Dialogs.alert(context.getString(R.string.success), "The certificate is valid or in the local keystore." , context);
@@ -198,8 +198,6 @@ public class Networks {
     }
 
     private static class CertificateFetcher implements Runnable {
-
-
 
         Handler postValidationHandler;
         Context context;
@@ -220,7 +218,10 @@ public class Networks {
         public void run() {
             try {
 
+                LOG.debug("Beginning certificate validation - will connect directly to {} port {}", host, String.valueOf(port));
+
                 if (serverType == ServerType.HTTPS) {
+                    LOG.debug("HTTPS type server, attempting SSL handshake");
                     connectToSSLSocket(null);
                     postValidationHandler.post(new Runnable() {
                         @Override
@@ -230,17 +231,19 @@ public class Networks {
                     });
                 } else {
 
-                    String command = "", replyToSearchFor = "";
+                    String command = "", regexToMatch = "";
                     if (serverType == ServerType.FTP) {
+                        LOG.debug("FTP type server");
                         command = "AUTH SSL\r\n";
-                        replyToSearchFor = "234";
+                        regexToMatch = "(?:234.*)";
                     } else if (serverType == ServerType.SMTP) {
+                        LOG.debug("SMTP type server");
                         command = "STARTTLS\r\n";
-                        replyToSearchFor = "Ready";
+                        regexToMatch = "(?i:220 .* Ready.*)";
                     }
 
                     try {
-                        //Try connecting right away in case the socket is expecting TLS right away
+                        LOG.debug("Trying handshake first in case the socket is SSL/TLS only");
                         connectToSSLSocket(null);
                         postValidationHandler.post(new Runnable() {
                             @Override
@@ -249,20 +252,36 @@ public class Networks {
                             }
                         });
                     } catch (Exception e) {
+
                         if (Networks.extractCertificateValidationException(e) != null) {
                             throw e;
                         }
 
-                        //Now attempt elevation based TLS flow - issue command, wrap socket, try again
+                        LOG.debug("Direct connection failed or no certificate was presented", e);
+
+                        LOG.debug("Attempting to connect over plain socket");
                         Socket plainSocket = new Socket(host, port);
+                        plainSocket.setSoTimeout(30000);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(plainSocket.getInputStream()));
                         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(plainSocket.getOutputStream()));
                         String line;
+
+                        if(serverType==ServerType.SMTP){
+                            LOG.debug("CLIENT: EHLO localhost");
+                            writer.write("EHLO localhost\r\n");
+                            writer.flush();
+                            line = reader.readLine();
+                            LOG.debug("SERVER: " + line);
+                        }
+
+                        LOG.debug("CLIENT: " + command);
+                        LOG.debug("(Expecting {} in response)", regexToMatch);
                         writer.write(command);
                         writer.flush();
-
                         while ((line = reader.readLine()) != null) {
-                            if (line.contains(replyToSearchFor)) {
+                            LOG.debug("SERVER: " + line);
+                            if (line.matches(regexToMatch)) {
+                                LOG.debug("Elevating socket and attempting handshake");
                                 connectToSSLSocket(plainSocket);
                                 postValidationHandler.post(new Runnable() {
                                     @Override
@@ -270,13 +289,11 @@ public class Networks {
                                         onCertificateFetched(context, null, true);
                                     }
                                 });
-//                            reader.close();
-//                            writer.close();
-                                break;
+                                return;
                             }
                         }
 
-                        //If all else fails, it's invalid
+                        LOG.debug("No certificates found.  Giving up.");
                         postValidationHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -287,10 +304,9 @@ public class Networks {
 
                 }
 
-
-
             } catch (final Exception e) {
 
+                LOG.debug("",e);
                 postValidationHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -314,6 +330,7 @@ public class Networks {
             }
 
             socket.setSoTimeout(5000);
+            LOG.debug("Starting handshake...");
             socket.startHandshake();
             SSLSession session = socket.getSession();
             Certificate[] servercerts = session.getPeerCertificates();

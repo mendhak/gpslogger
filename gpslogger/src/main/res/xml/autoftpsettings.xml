@@ -32,8 +32,6 @@
             android:dialogTitle="@string/autoftp_directory"
             />
 
-    <Preference android:key="ftp_validatecustomsslcert"
-                android:title="Validate SSL cert" />
     <Preference android:title="@string/autoftp_test"
                 android:summary="@string/autoftp_test_summary" android:key="autoftp_test"/>
 
@@ -60,6 +58,9 @@
                 android:dialogTitle="@string/autoftp_ssltls"
                 android:defaultValue=""
                 android:shouldDisableView="false"/>
+
+        <Preference android:key="ftp_validatecustomsslcert"
+                    android:title="@string/validate_ssl_certificate" />
 
         <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
                 android:key="autoftp_implicit"

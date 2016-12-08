@@ -142,7 +142,7 @@ public class LocalX509TrustManager implements X509TrustManager {
 
     public boolean isKnownServer(X509Certificate cert) {
         try {
-            LOG.debug("Checking for certificate - HashCode: " + cert.hashCode() + " " + Boolean.toString(knownServersKeyStore.isCertificateEntry(Integer.toString(cert.hashCode()))));
+            LOG.debug("Checking for certificate - HashCode: " + cert.hashCode() + ", Subject: " + cert.getSubjectDN().getName() + ", in keystore: " + Boolean.toString(knownServersKeyStore.isCertificateEntry(Integer.toString(cert.hashCode()))));
             return (knownServersKeyStore.isCertificateEntry(Integer.toString(cert.hashCode())));
         }
         catch (KeyStoreException e) {

@@ -34,7 +34,7 @@
             android:summary="@string/owncloud_directory_summary"
             />
     <Preference android:key="owncloud_validatecustomsslcert"
-                android:title="Validate SSL cert" />
+                android:title="@string/validate_ssl_certificate" />
 
     <Preference android:title="@string/owncloud_test"
                 android:summary="@string/owncloud_test_summary" android:key="owncloud_test"/>
