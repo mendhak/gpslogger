@@ -22,10 +22,7 @@ package com.mendhak.gpslogger;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.*;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -34,6 +31,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.*;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -43,6 +41,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.*;
@@ -261,6 +260,35 @@ public class GpsMainActivity extends AppCompatActivity
                 if(preferenceHelper.getMinimumAccuracy() == 0){
                     preferenceHelper.setMinimumAccuracy(40);
                 }
+            }
+
+            if(preferenceHelper.getLastVersionSeen() <= 80){
+
+                boolean usingCustomEmailProvider = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("autoemail_preset","") == "99";
+
+                if(preferenceHelper.getCustomLoggingUrl().toLowerCase().contains("https") ||
+                        preferenceHelper.getOwnCloudServerName().toLowerCase().contains("https") ||
+                        preferenceHelper.getOpenGTSServerCommunicationMethod().toLowerCase().contains("https") ||
+                        preferenceHelper.shouldFtpUseFtps() ||
+                        preferenceHelper.getFtpProtocol().toLowerCase().contains("ssl") ||
+                        preferenceHelper.getFtpProtocol().toLowerCase().contains("tls") ||
+                        (preferenceHelper.isSmtpSsl() && usingCustomEmailProvider) ) {
+
+                    new MaterialDialog.Builder(this)
+                            .title("Using SSL Certificates?")
+                            .negativeText(R.string.cancel)
+                            .positiveText(R.string.faq_screen_title)
+                            .content(Html.fromHtml("If you use a <strong>custom SSL certificate</strong> you will need to validate it with this app. Please see the FAQ for more information.<br /><br />If you don't know what an SSL certificate is you can probably cancel this message."))
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
+                                    faqtivity.putExtra("singlefaq", "faq/faq21-custom-ssl-certificates.md");
+                                    startActivity(faqtivity);
+                                }
+                            }).show();
+                }
+
             }
 
             preferenceHelper.setLastVersionSeen(versionCode);

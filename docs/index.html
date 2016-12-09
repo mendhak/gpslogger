@@ -148,10 +148,10 @@
 </div></section>
 
 <section><div class='lead'><h2><a name="whatdothevarioussettingsmeanaccuracyretryintervalforaccuracyetc" href="#whatdothevarioussettingsmeanaccuracyretryintervalforaccuracyetc">What do the various settings mean? (Accuracy, retry interval for accuracy, etc)</a></h2><p><img src="images/7b.png" alt="7b"></p>
-<p><strong>Time before logging</strong> - How long to wait after a point has been logged to try logging again.</p>
+<p><strong>Logging interval</strong> - How long to wait after a point has been logged to try logging again.</p>
 <p><strong>Distance filter</strong> - When a point becomes available, the app will check to ensure that this much distance exists between the previous and current points. If it isn&#39;t this distance, the point is discarded.</p>
 <p><strong>Accuracy filter</strong> - When a point becomes available, the app will check to ensure that this point has a minimum accuracy specified. If it does not match the specified accuracy, the point is discarded. This is useful if you are inside a building for a while.</p>
-<p><strong>Time interval for accuracy</strong> - When searching for a point, the app can continue searching for this many seconds until it finds a point that meets the accuracy and distance filter criteria above.</p>
+<p><strong>Duration to match accuracy</strong> - When searching for a point, the app can continue searching for this many seconds until it finds a point that meets the accuracy and distance filter criteria above.</p>
 <p><strong>Absolute timeout</strong> - When searching for a point and trying over and over, the app will give up when this timeout is reached.  This is useful for when you&#39;re inside buildings, GPS tends to keep searching and finding nothing.  </p>
 <p><strong>Keep GPS on between fixes</strong> - Normally, the app stops using GPS between points, to save battery.  This means when it&#39;s time to log the next point, the GPS needs to be &#39;woken up&#39; again and this takes a little time.  Keeping GPS on between fixes causes this &#39;wake up&#39; time to be reduced.</p>
 <p><strong>Don&#39;t log if I&#39;m not moving</strong> - Some Android phones come with activity recognition; the app can use this to determine if you are not moving and if so, it will not attempt to log a point. </p>
@@ -195,10 +195,10 @@ For example, in Tasker, create a new action under Misc &gt; Send Intent. </p>
 <p><code>immediatestart</code> - (true/false) Start logging immediately  </p>
 <p><code>immediatestop</code> - (true/false) Stop logging</p>
 <p><code>setnextpointdescription</code> - (text) Sets the annotation text to use for the next point logged</p>
-<p><code>settimebeforelogging</code> - (number) Sets preference for time before logging option  </p>
+<p><code>settimebeforelogging</code> - (number) Sets preference for logging interval option  </p>
 <p><code>setdistancebeforelogging</code> - (number) Sets preference for distance before logging option</p>
 <p><code>setkeepbetweenfix</code> - (true/false) Sets preference whether to keep GPS on between fixes</p>
-<p><code>setretrytime</code> - (number) Sets preference for retry time</p>
+<p><code>setretrytime</code> - (number) Sets preference for duration to match accuracy</p>
 <p><code>setabsolutetimeout</code> - (number) Sets preference for absolute timeout</p>
 <p><code>setprefercelltower</code> - (true/false) Enables or disables the GPS or celltower listeners</p>
 <p><code>logonce</code> - (true/false) Log a single point, then stop</p>
@@ -254,6 +254,13 @@ For example, in Tasker, create a new action under Misc &gt; Send Intent. </p>
 <p>You can troubleshoot it yourself by going to <em>General Options</em> and enabling the <em>Write to debug file</em> option.  </p>
 <p>Next, reproduce the behavior or problem, and this creates a <code>debuglog.txt</code> file in the GPSLogger directory.  </p>
 <p>You can then grab the file off your phone and have a look through it, or email it to yourself from the same screen (<em>Attach debug log to email</em>).  Be sure to turn it off afterwards as this file grows very fast.   </p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="customsslcertificates" href="#customsslcertificates">Custom SSL Certificates</a></h2><p><img src="images/21sslvalidation.gif" alt="SSLValidation"></p>
+<p>You can use custom SSL certificates with Custom URL, OwnCloud, OpenGTS, SMTP and FTP.  If you use self signed certificates then you will need to get GPSLogger to recognize and store your custom certificates.  </p>
+<p>To do this, go into each setting screen and click <strong>Validate SSL Certificate</strong>.  You will be prompted with the certificate&#39;s details, you can then choose to accept; the certificate will be stored in the local keystore.  </p>
+<p> Note that in the case of OwnCloud, OpenGTS and Custom URL, the certificate must match the domain you&#39;re connecting to.   </p>
 
 </div></section>
 

@@ -52,11 +52,11 @@ public class FaqExpandableListAdapter extends ArrayAdapter<String> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = infalInflater.inflate(R.layout.activity_faq_list_item, null);
 
-        // sample code snippet to set the text content on the ExpandableTextView
         final ExpandableTextView expTv1 = (ExpandableTextView) convertView.findViewById(R.id.expand_text_view);
         expTv1.setText(Html.fromHtml(values.get(position)));
         TextView tv = (TextView)expTv1.findViewById(R.id.expandable_text);
         tv.setMovementMethod(LinkMovementMethod.getInstance());
+        tv.setTag(String.valueOf(position));
 
         return convertView;
     }

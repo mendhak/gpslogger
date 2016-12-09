@@ -60,40 +60,59 @@ public class Faqtivity extends AppCompatActivity {
             LOG.error("Thanks for this, Samsung", ex);
         }
 
+        String singleFaqItem = "";
+        Bundle extras = getIntent().getExtras();
+        if(extras != null && !Strings.isNullOrEmpty(extras.getString("singlefaq"))){
+            singleFaqItem = extras.getString("singlefaq");
+        }
+
         expListView = (ListView) findViewById(R.id.lvExp);
 
         List<String> generalTopics = new ArrayList<>();
 
-        generalTopics.add(getTopic("faq/faq01-why-taking-so-long.md"));
-        generalTopics.add(getTopic("faq/faq02-why-sometimes-inaccurate.md"));
-        generalTopics.add(getTopic("faq/faq03-no-point-logged.md"));
-        generalTopics.add(getTopic("faq/faq04-what-timezone.md"));
-        generalTopics.add(getTopic("faq/faq05-what-units.md"));
-        generalTopics.add(getTopic("faq/faq06-where-are-gps-files.md"));
+        if(Strings.isNullOrEmpty(singleFaqItem)){
+            generalTopics.add(getTopic("faq/faq01-why-taking-so-long.md"));
+            generalTopics.add(getTopic("faq/faq02-why-sometimes-inaccurate.md"));
+            generalTopics.add(getTopic("faq/faq03-no-point-logged.md"));
+            generalTopics.add(getTopic("faq/faq04-what-timezone.md"));
+            generalTopics.add(getTopic("faq/faq05-what-units.md"));
+            generalTopics.add(getTopic("faq/faq06-where-are-gps-files.md"));
 
-        generalTopics.add(getTopic("faq/faq07-settings-changed.md"));
-        generalTopics.add(getTopic("faq/faq08-what-settings-mean.md"));
-        generalTopics.add(getTopic("faq/faq09-recommended-settings.md"));
-        generalTopics.add(getTopic("faq/faq10-exact-time-settings.md"));
+            generalTopics.add(getTopic("faq/faq07-settings-changed.md"));
+            generalTopics.add(getTopic("faq/faq08-what-settings-mean.md"));
+            generalTopics.add(getTopic("faq/faq09-recommended-settings.md"));
+            generalTopics.add(getTopic("faq/faq10-exact-time-settings.md"));
 
-        generalTopics.add(getTopic("faq/faq11-remove-notification.md"));
-        generalTopics.add(getTopic("faq/faq12-task-managers.md"));
-        generalTopics.add(getTopic("faq/faq14-tasker-automation.md"));
-        generalTopics.add(getTopic("faq/faq15-preset-files.md"));
-        generalTopics.add(getTopic("faq/faq19-profiles.md"));
-        generalTopics.add(getTopic("faq/faq20-troubleshooting.md"));
+            generalTopics.add(getTopic("faq/faq11-remove-notification.md"));
+            generalTopics.add(getTopic("faq/faq12-task-managers.md"));
+            generalTopics.add(getTopic("faq/faq14-tasker-automation.md"));
+            generalTopics.add(getTopic("faq/faq15-preset-files.md"));
+            generalTopics.add(getTopic("faq/faq19-profiles.md"));
+            generalTopics.add(getTopic("faq/faq20-troubleshooting.md"));
+            generalTopics.add(getTopic("faq/faq21-custom-ssl-certificates.md"));
+        }
+        else {
+            generalTopics.add(getTopic(singleFaqItem));
+        }
 
         listAdapter = new FaqExpandableListAdapter(this, generalTopics);
-
-        // setting list adapter
         expListView.setAdapter(listAdapter);
-    }
 
+        if(!Strings.isNullOrEmpty(singleFaqItem)){
+            expListView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    //expListView.setSelection(15);
+                    expListView.findViewWithTag("0").performClick();
+                }
+            }, 100l);
+        }
+    }
 
 
     protected String getTopic(String assetPath){
         String md = Strings.getSanitizedMarkdownForFaqView(Files.getAssetFileAsString(assetPath,getApplicationContext()));
-        return new AndDown().markdownToHtml(md);
+        return new AndDown().markdownToHtml(md).replace("<code>","<strong><tt><font color='#008800'>").replace("</code>","</font></tt></strong>");
     }
 
     @Override
