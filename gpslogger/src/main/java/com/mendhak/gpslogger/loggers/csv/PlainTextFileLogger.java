@@ -92,7 +92,6 @@ public class PlainTextFileLogger implements FileLogger {
 
     @Override
     public void annotate(String description, Location loc) throws Exception {
-        // TODO Auto-generated method stub
 
     }
 

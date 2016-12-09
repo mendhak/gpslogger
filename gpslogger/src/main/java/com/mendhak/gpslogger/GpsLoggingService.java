@@ -17,8 +17,6 @@
  * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//TODO: Simplify email logic (too many methods)
-
 package com.mendhak.gpslogger;
 
 import android.annotation.TargetApi;
