@@ -72,7 +72,7 @@ public class CertificateValidationWorkflow implements Runnable {
                         onWorkflowFinished(context, null, true);
                     }
                 });
-            } catch (Exception e) {
+            } catch (final Exception e) {
 
                 if (Networks.extractCertificateValidationException(e) != null) {
                     throw e;
@@ -84,7 +84,7 @@ public class CertificateValidationWorkflow implements Runnable {
                     postValidationHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            onWorkflowFinished(context, null, false);
+                            onWorkflowFinished(context, e, false);
                         }
                     });
                     return;

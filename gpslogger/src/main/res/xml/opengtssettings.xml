@@ -34,6 +34,8 @@
 
         <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="opengts_device_id" android:title="@string/autoopengts_device_id"
                             android:dialogTitle="@string/autoopengts_device_id"/>
+        <Preference android:key="opengts_validatecustomsslcert"
+                    android:title="@string/ssl_certificate_validate" />
     </PreferenceCategory>
 
 </PreferenceScreen>

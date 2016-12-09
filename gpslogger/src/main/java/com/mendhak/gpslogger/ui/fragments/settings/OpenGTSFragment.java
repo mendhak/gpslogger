@@ -27,6 +27,10 @@ import android.webkit.URLUtil;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.network.Networks;
+import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
@@ -49,10 +53,19 @@ public class OpenGTSFragment extends PermissionedPreferenceFragment implements
         findPreference("opengts_server_communication_method").setOnPreferenceChangeListener(this);
         findPreference("autoopengts_server_path").setOnPreferenceChangeListener(this);
         findPreference("opengts_device_id").setOnPreferenceChangeListener(this);
+        findPreference("opengts_validatecustomsslcert").setOnPreferenceClickListener(this);
 
     }
 
     public boolean onPreferenceClick(Preference preference) {
+        if(preference.getKey().equals("opengts_validatecustomsslcert")){
+            Networks.beginCertificateValidationWorkflow(
+                    getActivity(),
+                    PreferenceHelper.getInstance().getOpenGTSServer(),
+                    Strings.toInt(PreferenceHelper.getInstance().getOpenGTSServerPort(),443),
+                    ServerType.HTTPS
+            );
+        }
         if (!isFormValid()) {
             Dialogs.alert(getString(R.string.autoopengts_invalid_form),
                     getString(R.string.autoopengts_invalid_form_message),
