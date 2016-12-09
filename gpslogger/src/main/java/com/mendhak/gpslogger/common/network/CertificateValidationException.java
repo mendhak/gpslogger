@@ -17,7 +17,7 @@
  * along with gpslogger.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.mendhak.gpslogger.common;
+package com.mendhak.gpslogger.common.network;
 
 import java.security.cert.X509Certificate;
 

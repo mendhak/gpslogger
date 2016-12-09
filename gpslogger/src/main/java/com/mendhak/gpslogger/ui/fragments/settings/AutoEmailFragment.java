@@ -25,26 +25,21 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.text.TextUtils;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
-import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.UploadEvents;
-import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.common.network.Networks;
+import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.email.AutoEmailManager;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import de.greenrobot.event.EventBus;
-import org.slf4j.Logger;
-
-import java.net.MalformedURLException;
-
 
 public class AutoEmailFragment extends PermissionedPreferenceFragment implements
         OnPreferenceChangeListener,  OnPreferenceClickListener, PreferenceValidator {
 
-    private static final Logger LOG = Logs.of(AutoEmailFragment.class);
     private final PreferenceHelper preferenceHelper;
     AutoEmailManager aem;
 
@@ -60,22 +55,11 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.autoemailsettings);
 
-        CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("autoemail_enabled");
-
-        chkEnabled.setOnPreferenceChangeListener(this);
-
-        MaterialListPreference lstPresets = (MaterialListPreference) findPreference("autoemail_preset");
-        lstPresets.setOnPreferenceChangeListener(this);
-
-        MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
-        MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
-        txtSmtpServer.setOnPreferenceChangeListener(this);
-        txtSmtpPort.setOnPreferenceChangeListener(this);
-
-        Preference testEmailPref = findPreference("smtp_testemail");
-
-        testEmailPref.setOnPreferenceClickListener(this);
-
+        findPreference("autoemail_enabled").setOnPreferenceChangeListener(this);
+        findPreference("autoemail_preset").setOnPreferenceChangeListener(this);
+        findPreference("smtp_server").setOnPreferenceChangeListener(this);
+        findPreference("smtp_port").setOnPreferenceChangeListener(this);
+        findPreference("smtp_testemail").setOnPreferenceClickListener(this);
         findPreference("smtp_validatecustomsslcert").setOnPreferenceClickListener(this);
 
         registerEventBus();
@@ -102,7 +86,7 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
     public boolean onPreferenceClick(Preference preference) {
 
         if(preference.getKey().equals("smtp_validatecustomsslcert")){
-                Networks.performCertificateValidationWorkflow(getActivity(), preferenceHelper.getSmtpServer(), Strings.toInt(preferenceHelper.getSmtpPort(),25), Networks.ServerType.SMTP);
+                Networks.beginCertificateValidationWorkflow(getActivity(), preferenceHelper.getSmtpServer(), Strings.toInt(preferenceHelper.getSmtpPort(),25), ServerType.SMTP);
         }
         else if (preference.getKey().equals("smtp_testemail")){
             CustomSwitchPreference chkUseSsl = (CustomSwitchPreference) findPreference("smtp_ssl");

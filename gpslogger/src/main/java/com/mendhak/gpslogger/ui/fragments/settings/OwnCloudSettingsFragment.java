@@ -27,9 +27,10 @@ import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.Networks;
+import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudManager;
@@ -95,7 +96,7 @@ public class OwnCloudSettingsFragment
         if(preference.getKey().equals("owncloud_validatecustomsslcert")){
             try {
                 URL u = new URL(PreferenceHelper.getInstance().getOwnCloudServerName());
-                Networks.performCertificateValidationWorkflow(getActivity(), u.getHost(), u.getPort() < 0 ? u.getDefaultPort() : u.getPort(), Networks.ServerType.HTTPS);
+                Networks.beginCertificateValidationWorkflow(getActivity(), u.getHost(), u.getPort() < 0 ? u.getDefaultPort() : u.getPort(), ServerType.HTTPS);
             } catch (MalformedURLException e) {
                 LOG.error("Could not validate certificate, OwnCloud URL is not valid", e);
             }

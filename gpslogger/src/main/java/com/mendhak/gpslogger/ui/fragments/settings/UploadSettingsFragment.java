@@ -47,22 +47,13 @@ public class UploadSettingsFragment extends PreferenceFragment implements Prefer
 
         addPreferencesFromResource(R.xml.pref_upload);
 
-        Preference osmSetupPref  = findPreference("osm_setup");
-        Preference autoEmailPref = findPreference("autoemail_setup");
-        Preference dropboxPref   = findPreference("dropbox_setup");
-        Preference gdocsPref     = findPreference("gdocs_setup");
-        Preference opengtsPref   = findPreference("opengts_setup");
-        Preference autoftpPref   = findPreference("autoftp_setup");
-        Preference ownCloudPref  = findPreference("owncloud_setup");
-
-
-        osmSetupPref.setOnPreferenceClickListener(this);
-        autoEmailPref.setOnPreferenceClickListener(this);
-        dropboxPref.setOnPreferenceClickListener(this);
-        gdocsPref.setOnPreferenceClickListener(this);
-        opengtsPref.setOnPreferenceClickListener(this);
-        autoftpPref.setOnPreferenceClickListener(this);
-        ownCloudPref.setOnPreferenceClickListener(this);
+        findPreference("osm_setup").setOnPreferenceClickListener(this);
+        findPreference("autoemail_setup").setOnPreferenceClickListener(this);
+        findPreference("dropbox_setup").setOnPreferenceClickListener(this);
+        findPreference("gdocs_setup").setOnPreferenceClickListener(this);
+        findPreference("opengts_setup").setOnPreferenceClickListener(this);
+        findPreference("autoftp_setup").setOnPreferenceClickListener(this);
+        findPreference("owncloud_setup").setOnPreferenceClickListener(this);
     }
 
 

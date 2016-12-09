@@ -24,11 +24,13 @@ import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.Networks;
+import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
+import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
+import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import org.slf4j.Logger;
 import java.net.MalformedURLException;
@@ -53,31 +55,8 @@ public class CustomUrlFragment extends PermissionedPreferenceFragment implements
         urlPathPreference.setText(PreferenceHelper.getInstance().getCustomLoggingUrl());
         urlPathPreference.setOnPreferenceChangeListener(this);
 
-
-        String legend1 = MessageFormat.format("{0} %LAT\n{1} %LON\n{2} %DESC\n{3} %SAT\n{4} %ALT",
-                getString(R.string.txt_latitude), getString(R.string.txt_longitude), getString(R.string.txt_annotation),
-                getString(R.string.txt_satellites), getString(R.string.txt_altitude));
-
-        Preference urlLegendPreference1 = (Preference)findPreference("customurl_legend_1");
-        urlLegendPreference1.setSummary(legend1);
-
-        String legend2 = MessageFormat.format("{0} %SPD\n{1} %ACC\n{2} %DIR\n{3} %PROV",
-                getString(R.string.txt_speed),
-                getString(R.string.txt_accuracy), getString(R.string.txt_direction), getString(R.string.txt_provider)
-                );
-
-        Preference urlLegendPreference2 = (Preference)findPreference("customurl_legend_2");
-        urlLegendPreference2.setSummary(legend2);
-
-        String legend3 = MessageFormat.format("{0} %TIME\n{1} %BATT\n{2} %AID\n{3} %SER\n{4} %ACT",
-                getString(R.string.txt_time_isoformat), "Battery:", "Android ID:", "Serial:", getString(R.string.txt_activity)
-                );
-
-        Preference urlLegendPreference3 = (Preference)findPreference("customurl_legend_3");
-        urlLegendPreference3.setSummary(legend3);
-
-        Preference getCustomCert = (Preference)findPreference("customurl_validatecustomsslcert");
-        getCustomCert.setOnPreferenceClickListener(this);
+        findPreference("customurl_legend_1").setOnPreferenceClickListener(this);
+        findPreference("customurl_validatecustomsslcert").setOnPreferenceClickListener(this);
 
     }
 
@@ -96,15 +75,23 @@ public class CustomUrlFragment extends PermissionedPreferenceFragment implements
     }
 
 
-
-
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if(preference.getKey().equals("customurl_validatecustomsslcert")){
+        if(preference.getKey().equals("customurl_legend_1")){
+
+            String legend1 = MessageFormat.format("{0} %LAT<br />{1} %LON<br />{2} %DESC<br />{3} %SAT<br />{4} %ALT<br />{5} %SPD<br />{6} %ACC<br />{7} %DIR<br />{8} %PROV<br />{9} %TIME<br />{10} %BATT<br />{11} %AID<br />{12} %SER<br />{13} %ACT",
+                    getString(R.string.txt_latitude), getString(R.string.txt_longitude), getString(R.string.txt_annotation),
+                    getString(R.string.txt_satellites), getString(R.string.txt_altitude), getString(R.string.txt_speed),
+                    getString(R.string.txt_accuracy), getString(R.string.txt_direction), getString(R.string.txt_provider),
+                    getString(R.string.txt_time_isoformat), "Battery:", "Android ID:", "Serial:", getString(R.string.txt_activity));
+            Dialogs.alert(getString(R.string.parameters), legend1, getActivity());
+
+        }
+        else if(preference.getKey().equals("customurl_validatecustomsslcert")){
 
             try {
                 URL u = new URL(PreferenceHelper.getInstance().getCustomLoggingUrl());
-                Networks.performCertificateValidationWorkflow(getActivity(), u.getHost(), u.getPort() < 0 ? u.getDefaultPort() : u.getPort(), Networks.ServerType.HTTPS);
+                Networks.beginCertificateValidationWorkflow(getActivity(), u.getHost(), u.getPort() < 0 ? u.getDefaultPort() : u.getPort(), ServerType.HTTPS);
             } catch (MalformedURLException e) {
                 LOG.error("Could not start certificate validation", e);
             }

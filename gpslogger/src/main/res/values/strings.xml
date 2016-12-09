@@ -481,6 +481,9 @@
     <string name="change_language_title">Change Language</string>
     <string name="change_language_summary">Not all languages are fully translated! You must restart the app for the settings to take effect.</string>
     <string name="coordinate_display_format">Coordinates display format</string>
-    <string name="validate_ssl_certificate">Validate SSL Certificate</string>
+    <string name="ssl_certificate_validate">Validate SSL Certificate</string>
+    <string name="parameters">Parameters</string>
+    <string name="ssl_certificate_add_to_keystore">Add this certificate to local keystore?</string>
+    <string name="ssl_certificate_is_valid">The certificate is valid</string>
 
 </resources>

@@ -17,7 +17,7 @@
  * along with gpslogger.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.mendhak.gpslogger.common;
+package com.mendhak.gpslogger.common.network;
 
 
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -62,7 +62,6 @@ public class LocalX509TrustManager implements X509TrustManager {
 
         this.knownServersKeyStore = knownServersKeyStore;
     }
-
 
 
     /**
@@ -150,8 +149,6 @@ public class LocalX509TrustManager implements X509TrustManager {
             return false;
         }
     }
-
-
 
 
 }

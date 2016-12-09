@@ -28,10 +28,11 @@ import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.Networks;
+import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.ftp.FtpManager;
@@ -50,9 +51,7 @@ public class FtpFragment
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.autoftpsettings);
 
-        Preference testFtp = findPreference("autoftp_test");
-        testFtp.setOnPreferenceClickListener(this);
-
+        findPreference("autoftp_test").setOnPreferenceClickListener(this);
         findPreference("ftp_validatecustomsslcert").setOnPreferenceClickListener(this);
 
         registerEventBus();
@@ -83,7 +82,7 @@ public class FtpFragment
 
         if(preference.getKey().equals("ftp_validatecustomsslcert")){
 
-            Networks.performCertificateValidationWorkflow(getActivity(), preferenceHelper.getFtpServerName(), preferenceHelper.getFtpPort(), Networks.ServerType.FTP);
+            Networks.beginCertificateValidationWorkflow(getActivity(), preferenceHelper.getFtpServerName(), preferenceHelper.getFtpPort(), ServerType.FTP);
 
         } else {
             FtpManager helper = new FtpManager(preferenceHelper);

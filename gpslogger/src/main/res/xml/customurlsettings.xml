@@ -6,25 +6,15 @@
         android:title="URL"
         />
 
-    <Preference android:key="customurl_validatecustomsslcert"
-                android:title="@string/validate_ssl_certificate" />
-
     <Preference
         android:key="customurl_legend_1"
-        android:selectable="false"
         android:enabled="true"
+        android:title="@string/parameters"
         android:summary="" />
 
-    <Preference
-        android:key="customurl_legend_2"
-        android:selectable="false"
-        android:enabled="true"
-        android:summary="" />
 
-    <Preference
-        android:key="customurl_legend_3"
-        android:selectable="false"
-        android:enabled="true"
-        android:summary="" />
+    <Preference android:key="customurl_validatecustomsslcert"
+                android:title="@string/ssl_certificate_validate" />
+
 
 </PreferenceScreen>

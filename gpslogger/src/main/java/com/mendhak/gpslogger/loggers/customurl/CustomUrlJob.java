@@ -21,7 +21,7 @@ package com.mendhak.gpslogger.loggers.customurl;
 
 
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.Networks;
+import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -88,7 +88,6 @@ public class CustomUrlJob extends Job {
         }
 
         response.body().close();
-
     }
 
     @Override

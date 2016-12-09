@@ -64,9 +64,7 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         addPreferencesFromResource(R.xml.pref_general);
 
         findPreference("enableDisableGps").setOnPreferenceClickListener(this);
-
         findPreference("gpsvisualizer_link").setOnPreferenceClickListener(this);
-
         findPreference("debuglogtoemail").setOnPreferenceClickListener(this);
 
         setCoordinatesFormatPreferenceItem();

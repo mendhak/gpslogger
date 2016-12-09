@@ -21,8 +21,8 @@ package com.mendhak.gpslogger.senders.owncloud;
 
 import android.net.Uri;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.LocalX509TrustManager;
-import com.mendhak.gpslogger.common.Networks;
+import com.mendhak.gpslogger.common.network.LocalX509TrustManager;
+import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.owncloud.android.lib.common.OwnCloudClient;

@@ -87,15 +87,9 @@ public class LoggingSettingsFragment extends PreferenceFragment
         }
 
 
-        Preference prefNewFileCustomName = findPreference("new_file_custom_name");
-        prefNewFileCustomName.setOnPreferenceClickListener(this);
-
-
-        CustomSwitchPreference prefCustomUrl = (CustomSwitchPreference)findPreference("log_customurl_enabled");
-        prefCustomUrl.setOnPreferenceChangeListener(this);
-
-        CustomSwitchPreference chkLog_opengts = (CustomSwitchPreference) findPreference("log_opengts");
-        chkLog_opengts.setOnPreferenceChangeListener(this);
+        findPreference("new_file_custom_name").setOnPreferenceClickListener(this);
+        findPreference("log_customurl_enabled").setOnPreferenceChangeListener(this);
+        findPreference("log_opengts").setOnPreferenceChangeListener(this);
     }
 
 
@@ -172,8 +166,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
             }
             else {
                 preferenceHelper.setGpsLoggerFolder(uri.getPath());
-                Preference gpsloggerFolder = findPreference("gpslogger_folder");
-                gpsloggerFolder.setSummary(uri.getPath());
+                findPreference("gpslogger_folder").setSummary(uri.getPath());
             }
 
         }
@@ -210,14 +203,10 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
         if (preference.getKey().equals("new_file_creation")) {
 
-            Preference prefFileCustomName = findPreference(PreferenceNames.CUSTOM_FILE_NAME);
-            Preference prefAskEachTime = findPreference(PreferenceNames.ASK_CUSTOM_FILE_NAME);
-            Preference prefSerialPrefix = findPreference(PreferenceNames.PREFIX_SERIAL_TO_FILENAME);
-            Preference prefDynamicFileName = findPreference(PreferenceNames.CUSTOM_FILE_NAME_KEEP_CHANGING);
-            prefAskEachTime.setEnabled(newValue.equals("custom"));
-            prefFileCustomName.setEnabled(newValue.equals("custom"));
-            prefDynamicFileName.setEnabled(newValue.equals("custom"));
-            prefSerialPrefix.setEnabled(!newValue.equals("custom"));
+            findPreference(PreferenceNames.ASK_CUSTOM_FILE_NAME).setEnabled(newValue.equals("custom"));
+            findPreference(PreferenceNames.CUSTOM_FILE_NAME).setEnabled(newValue.equals("custom"));
+            findPreference(PreferenceNames.CUSTOM_FILE_NAME_KEEP_CHANGING).setEnabled(newValue.equals("custom"));
+            findPreference(PreferenceNames.PREFIX_SERIAL_TO_FILENAME).setEnabled(!newValue.equals("custom"));
 
 
             return true;

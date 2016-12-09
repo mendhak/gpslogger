@@ -20,15 +20,10 @@
 package com.mendhak.gpslogger.common.events;
 
 
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 
 public class UploadEvents {
 
-    // baseeventclass
-
-    // new Baseuploadvent.   b.message = "X";
-    // public class AutoEmailEvent extends thebaseone {}
     @SuppressWarnings("unchecked")
     public static abstract class BaseUploadEvent implements java.io.Serializable{
         public boolean success;
