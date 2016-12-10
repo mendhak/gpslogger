@@ -37,14 +37,7 @@ repositories {
         url "https://jitpack.io"
     }
 
-    maven {
-        //GPSLogger's own 3rd party JARs not in any repo
-        url "https://raw.github.com/mendhak/gpslogger-support-files/master/repository"
-    }
 
-    maven {
-        url "https://s3.amazonaws.com/repo.commonsware.com"
-    }
 }
 
 android {
@@ -206,7 +199,8 @@ dependencies {
     compile 'de.greenrobot:eventbus:2.4.0'
 
     //JARs which aren't on maven
-    compile 'com.mendhak.gpsloggersupportfiles:owncloud-android-library:0.0.3@aar'
+    //compile 'com.mendhak.gpsloggersupportfiles:owncloud-android-library:0.0.3@aar'
+    compile 'com.github.owncloud:android-library:oc-android-library-0.9.14'
 
     //Required by owncloud library
     compile ('commons-httpclient:commons-httpclient:3.1') {
@@ -238,7 +232,8 @@ dependencies {
     compile 'com.dropbox.core:dropbox-core-sdk:2.0.5'
 
     //Markdown to HTML library
-    compile 'com.commonsware.cwac:anddown:0.2.4'
+    compile 'com.github.commonsguy:cwac-anddown:dedb48ec0f'
+
 
     //Need to specify the companion wearable app
     wearApp project(":gpsloggerwear")
