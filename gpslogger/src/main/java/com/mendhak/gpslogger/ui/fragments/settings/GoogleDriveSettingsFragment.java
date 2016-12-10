@@ -155,7 +155,12 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
         } else {
             if (manager.isLinked()) {
                 //Clear authorization
-                GoogleAuthUtil.invalidateToken(getActivity(), preferenceHelper.getGoogleDriveAuthToken());
+                try {
+                    GoogleAuthUtil.clearToken(getActivity(), preferenceHelper.getGoogleDriveAuthToken());
+                }
+                catch(Exception e){
+                    LOG.error("Could not clear token", e);
+                }
                 preferenceHelper.setGoogleDriveAuthToken("");
                 preferenceHelper.setGoogleDriveAccountName("");
 

@@ -4,6 +4,7 @@
 
     <ImageView
         android:id="@+id/material_drawer_account_header_background"
+        android:contentDescription="Profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY" />
@@ -65,6 +66,7 @@
 
             <ImageView
                 android:id="@+id/profiletextletter"
+                android:contentDescription="Profile"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="19dp"
@@ -86,6 +88,7 @@
 
             <ImageView
                 android:id="@+id/material_drawer_account_header_text_switcher"
+                android:contentDescription="Switch profile"
                 android:layout_width="@dimen/material_drawer_account_header_dropdown"
                 android:layout_height="@dimen/material_drawer_account_header_dropdown"
                 android:layout_marginEnd="2dp"
@@ -101,6 +104,7 @@
 
             <ImageView
                 android:id="@+id/material_drawer_account_header_toggle"
+                android:contentDescription="Switch profile"
                 android:layout_width="24dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerInside" />

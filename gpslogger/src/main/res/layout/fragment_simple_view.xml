@@ -9,7 +9,7 @@
             android:layout_height="fill_parent">
 
     <RelativeLayout android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
 
         <TableLayout
@@ -330,30 +330,35 @@
 
                         <ImageView
                             android:id="@+id/simpleview_imgGpx"
+                            android:contentDescription="@string/log_gpx_title"
                             android:visibility="invisible"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:src="@drawable/gpx"/>
                         <ImageView
                             android:id="@+id/simpleview_imgKml"
+                            android:contentDescription="@string/log_kml_title"
                             android:visibility="invisible"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:src="@drawable/kml"/>
                         <ImageView
                             android:id="@+id/simpleview_imgCsv"
+                            android:contentDescription="@string/log_plain_text_title"
                             android:visibility="invisible"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:src="@drawable/csv"/>
                         <ImageView
                             android:id="@+id/simpleview_imgNmea"
+                            android:contentDescription="@string/log_nmea_title"
                             android:visibility="invisible"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:src="@drawable/nmea"/>
                         <ImageView
                             android:id="@+id/simpleview_imgLink"
+                            android:contentDescription="@string/log_customurl_title"
                             android:visibility="invisible"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
