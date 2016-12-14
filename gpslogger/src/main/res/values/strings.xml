@@ -79,7 +79,7 @@
     <string name="unknown_direction">unknown</string>
 
     <string name="sorry">Sorry</string>
-    <string name="success">Yay!</string>
+    <string name="success">Success</string>
 
 
     <string name="direction_roughly">Roughly %s</string>
@@ -175,7 +175,7 @@
 
 
 
-    <string name="please_wait">Please wait.</string>
+    <string name="please_wait">Please wait</string>
 
 
     <string name="autoemail_target">Target email addresses</string>
