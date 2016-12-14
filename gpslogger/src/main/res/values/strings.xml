@@ -393,7 +393,7 @@
 
     <string name="gpslogger_folder_title">Save to folder</string>
     <string name="gpslogger_folder_summary">Where to save the log files to, defaults to /sdcard/GPSLogger</string>
-    <string name="autoftp_directory">Directory</string>
+    <string name="autoftp_directory">Folder</string>
     <string name="new_file_custom_message">You can use %SER for device serial, %YEAR, %MONTH, %DAY, %HOUR, %MIN, %PROFILE, %VER for version</string>
     <string name="new_file_prefix_serial_title">Prefix the device serial number to the file name</string>
     <string name="new_file_prefix_serial_summary">This is the serial number found in your phone status </string>
@@ -431,7 +431,7 @@
     <string name="listeners_summary">Which location providers to use when they are available; GPS for satellites, Network for cell tower/wifi, Passive is a special provider that listens for locations requested from other applications.</string>
     <string name="listeners_title">Location providers</string>
     <string name="autosend_frequency_hint">Number of minutes</string>
-    <string name="pref_logging_file_no_permissions">That directory is not writable by GPSLogger. Please select another directory to write to.</string>
+    <string name="pref_logging_file_no_permissions">That folder is not writable by GPSLogger. Please select another folder to write to.</string>
     <string name="pref_gpsvisualizer">Visualize GPS log stats and graphs</string>
     <string name="new_file_custom_each_time_title">Ask for a file name on every start</string>
     <string name="new_file_custom_each_time_summary">Prompt for a custom file name each time the logging is started</string>
