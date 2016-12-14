@@ -60,7 +60,7 @@
   <string name="kilometers">km</string>
   <string name="unknown_direction">không rõ</string>
   <string name="sorry">Xin lỗi</string>
-  <string name="success">Yay!</string>
+  <string name="success">Thành công</string>
   <string name="direction_roughly">Khoảng %s</string>
   <string name="direction_north">Bắc</string>
   <string name="direction_northnortheast">Bắc Đông Bắc</string>
@@ -88,7 +88,6 @@
   <string name="time_twoandhalfhours">2. 5 giờ</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">trong %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Khoảng cách theo mét</string>
   <string name="settings_accuracy_in_meters">Chính xác theo mét</string>
@@ -124,7 +123,6 @@
   <string name="startonapplaunch_summary">Bắt đầu log khi chạy ứng dụng</string>
   <string name="autoemail_title">Email</string>
   <string name="autoemail_summary">Tự động gửi file log tới địa chỉ bạn đã chọn</string>
-  <string name="please_wait">Xin chờ.</string>
   <string name="autoemail_target">Địa chỉ email nhận</string>
   <string name="autosend_frequency_display">Sau %s phút</string>
   <string name="autoemail_frequency_whenistop">Khi tôi bấm dừng lại</string>

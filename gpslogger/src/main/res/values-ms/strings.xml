@@ -53,7 +53,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">tidak diketahui</string>
   <string name="sorry">maaf</string>
-  <string name="success">Yay!</string>
+  <string name="success">Kejayaan</string>
   <string name="direction_roughly">Lebih kurang %s</string>
   <string name="direction_north">Utara</string>
   <string name="direction_northnortheast">Utara Timur Laut</string>
@@ -81,7 +81,6 @@
   <string name="time_twoandhalfhours">2½ jam</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">antara %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Jarak dalam meter</string>
   <string name="settings_accuracy_in_meters">Ketepatan dalam meter</string>
@@ -107,7 +106,6 @@
   <string name="startonbootup_title">Mula semasa bootup</string>
   <string name="startonbootup_summary">Lancarkan aplikasi dan mula mengelog apabila telefon bermula</string>
   <string name="autoemail_summary">Emel fail log secara automatik kepada alamat pilihan anda</string>
-  <string name="please_wait">sila tunggu.</string>
   <string name="autoemail_target">Alamat emel sasaran</string>
   <string name="autoemail_frequency_whenistop">Apabila saya menekan berhenti</string>
   <string name="autoemail_smtp_category">Tetapan e-mel</string>

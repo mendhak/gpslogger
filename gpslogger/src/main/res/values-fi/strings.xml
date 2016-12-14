@@ -60,7 +60,7 @@
   <string name="kilometers">km</string>
   <string name="unknown_direction">tuntematon</string>
   <string name="sorry">Anteeksi</string>
-  <string name="success">Yay!</string>
+  <string name="success">Menestys</string>
   <string name="direction_roughly">Noin %s</string>
   <string name="direction_north">Pohjoinen</string>
   <string name="direction_northnortheast">Pohjoiskoillinen</string>
@@ -88,7 +88,6 @@
   <string name="time_twoandhalfhours">2 ½ tuntia</string>
   <string name="time_hms_format" formatted="false">%st %sm %ss</string>
   <string name="accuracy_within" formatted="false">%s %s sisällä</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Etäisyys metreinä</string>
   <string name="settings_accuracy_in_meters">Tarkkuus metreinä</string>
@@ -130,7 +129,6 @@
   <string name="startonapplaunch_summary">Aloita loggaaminen kun sovellus on avattu</string>
   <string name="autoemail_title">Sähköposti</string>
   <string name="autoemail_summary">Lähettää lokitiedoston automaattisesti sähköpostiin valitsemaasi osoitteeseen</string>
-  <string name="please_wait">Ole hyvä ja odota.</string>
   <string name="autoemail_target">Kohdesähköpostiosoite</string>
   <string name="autosend_frequency_display">%s minuutin jälkeen</string>
   <string name="autoemail_frequency_whenistop">Kun painan pysäytä</string>
@@ -272,7 +270,7 @@
   <string name="txt_provider">Tarjoaja:</string>
   <string name="annotation_requires_logging">Huomautukset vaativat lokikirjauksen muotoon GPX/KML/Muokattu URL</string>
   <string name="gpslogger_folder_title">Tallenna kansioon</string>
-  <string name="autoftp_directory">Hakemisto</string>
+  <string name="autoftp_directory">Kansio</string>
   <string name="txt_travel_duration">Kesto:</string>
   <string name="menu_onepoint">Loggaa yksi piste</string>
   <string name="view_simple">Yksinkertainen näkymä</string>
@@ -319,6 +317,5 @@
   <string name="profile_add_new">Lisää profiili</string>
   <string name="privacy_policy">Yksityisyyskäytäntö</string>
   <string name="debuglog_attach_to_email">Liitä vianmääritystiedot sähköpostiin</string>
-  <string name="change_language_title">Vaihda kieltä</string>
   <string name="change_language_summary">Kaikkia kieliä ei ole täysin käännetty! Sinun täytyy käynnistää sovellus uudelleen, jotta asetus tulee voimaan.</string>
 </resources>

@@ -61,7 +61,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">알수없음</string>
   <string name="sorry">죄송합니다.</string>
-  <string name="success">성공!</string>
+  <string name="success">성공</string>
   <string name="direction_roughly">대략 %s</string>
   <string name="direction_north">북</string>
   <string name="direction_northnortheast">북북동</string>
@@ -89,7 +89,6 @@
   <string name="time_twoandhalfhours">2시간30분</string>
   <string name="time_hms_format" formatted="false">%s시간 %s분 %s초</string>
   <string name="accuracy_within" formatted="false">%s %s 이내</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">거리(미터)</string>
   <string name="settings_accuracy_in_meters">정확도(미터)</string>
@@ -129,7 +128,6 @@
   <string name="startonapplaunch_summary">앱 시작시 기록을 시작합니다</string>
   <string name="autoemail_title">이메일</string>
   <string name="autoemail_summary">로그 파일을 당신이 선택한 주소로 자동으로 이메일 발송</string>
-  <string name="please_wait">잠시만 기다려 주십시오.</string>
   <string name="autoemail_target">대상 이메일 주소</string>
   <string name="autosend_frequency_display">%s 분 후</string>
   <string name="autoemail_frequency_whenistop">중지를 누를 때</string>
@@ -242,7 +240,7 @@
   <string name="txt_time_isoformat">UTC 시간 지역 (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">제공자:</string>
   <string name="gpslogger_folder_title">폴더에 저장</string>
-  <string name="autoftp_directory">경로</string>
+  <string name="autoftp_directory">폴더</string>
   <string name="txt_travel_duration">기간:</string>
   <string name="view_simple">간단히 보기</string>
   <string name="view_detailed">자세히 보기</string>
@@ -292,5 +290,4 @@
   <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[이 애플리케이션이 제대로 작동 하기 위해서는 다음 권한이 필요합니다.<br /><b>기기 위치 정보</b> - 이 권한은 기지국 과 GPS 하드웨어 에서 위치 정보를 받아 올수 있게 허용 합니다.<br /><b>사진, 미디어, 파일</b> - 이 권한은 로그 파일과 테스트 파일을 저장소에 저장 하는것을 허용 하고 업로드 할것 이나 공유 할것의 목록을 읽습니다. 이 앱은 사용자의 사진이나 미디어에 접근 하지 않습니다.<br /><b>연락처 접근</b> - 만약 구글 드라이브 업로드 를 사용 한다면,  이 권한은 구글 계정의 정보를 읽어 업로드에 사용 됩니다. 하지만 당신의 연락처 에는 접근 하지 않습니다.<br /><br/>  ]]></string>
   <string name="privacy_policy">개인 정보 보호 정책</string>
   <string name="debuglog_attach_to_email">이메일에 디버그 로그 첨부</string>
-  <string name="change_language_title">언어 변경</string>
 </resources>

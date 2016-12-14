@@ -30,6 +30,7 @@
   <string name="error">Грешка</string>
   <string name="error_connection">Грешка при повезивању. Молимо да провјерите подешавања телефона.</string>
   <string name="seconds">с</string>
+  <string name="success">Uspeh</string>
   <!-- Settings activity -->
   <!-- Settings -->
 </resources>

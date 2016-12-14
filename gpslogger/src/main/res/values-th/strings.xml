@@ -56,7 +56,7 @@
   <string name="kilometers">&#160;กิโลเมตร</string>
   <string name="unknown_direction">ไม่รู้จัก</string>
   <string name="sorry">ขออภัย</string>
-  <string name="success">เย้!</string>
+  <string name="success">ประสบความสำเร็จ</string>
   <string name="direction_roughly">คร่าวๆ %s</string>
   <string name="direction_north">เหนือ</string>
   <string name="direction_northnortheast">มุ่งเหนือ จากตะวันออกเฉียงเหนือ</string>
@@ -84,7 +84,6 @@
   <string name="time_twoandhalfhours">2 ชั่วโมงครึ่ง</string>
   <string name="time_hms_format" formatted="false">%s ชม. %s น. %s วิ.</string>
   <string name="accuracy_within" formatted="false">ภายใน %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">ระยะทางเป็นเมตร</string>
   <string name="settings_accuracy_in_meters">ความแม่นยำเป็นเมตร</string>
@@ -111,7 +110,6 @@
   <string name="enabledisablegps_summary">ไปที่การตั้งค่าของโทรศัพท์เพื่อเปิดหรือปิดผู้ให้บริการ</string>
   <string name="startonbootup_title">เริ่มเมื่อบูตเครื่อง</string>
   <string name="startonbootup_summary">เปิดแอพพร้อมเริ่มบันทึกเมื่อเปิดโทรศัพท์</string>
-  <string name="please_wait">กรุณารอสักครู่</string>
   <string name="autoemail_target">ที่อยู่อีเมล์ปลายทาง</string>
   <string name="autoemail_frequency_whenistop">เมื่อฉันกดหยุด</string>
   <string name="autoemail_smtp_category">การตั้งค่าอีเมล์</string>
@@ -200,7 +198,6 @@
   <string name="menu_faq">วิธีใช้และ FAQ</string>
   <string name="gpsf_missing">Missing Service</string>
   <string name="gpsf_missing_description">คุณต้องการ Google Play Services Framework เพื่อใช้ความสามารถนี้</string>
-  <string name="autoftp_directory">ไดเรกทอรี</string>
   <string name="txt_travel_duration">ระยะเวลา:</string>
   <string name="view_simple">แสดงผลอย่างง่าย</string>
   <string name="view_detailed">แสดงผลละเอียด</string>

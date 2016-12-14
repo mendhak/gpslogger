@@ -61,7 +61,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">neznáme</string>
   <string name="sorry">Prepáčte</string>
-  <string name="success">Joj!</string>
+  <string name="success">Úspech</string>
   <string name="direction_roughly">Zhruba %s</string>
   <string name="direction_north">Sever</string>
   <string name="direction_northnortheast">Severo-severovýchod</string>
@@ -89,7 +89,6 @@
   <string name="time_twoandhalfhours">2½ hodiny</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">v %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Vzdialenosť v metroch</string>
   <string name="settings_accuracy_in_meters">Presnosť v metroch</string>
@@ -137,7 +136,6 @@ vyššiu presnosť s nízkymi frekvenciami.
   <string name="startonapplaunch_summary">Spustiť záznam pri spustení aplikácie</string>
   <string name="autoemail_title">E-mail</string>
   <string name="autoemail_summary">Automaticky odošle súbor so záznamom e-mailom na adresu podľa vášho výberu</string>
-  <string name="please_wait">Prosím počkajte.</string>
   <string name="autoemail_target">Cieľové e-mailové adresy</string>
   <string name="autosend_frequency_display">Po %s minútach</string>
   <string name="autoemail_frequency_whenistop">Pri stlačení tlačidla STOP</string>
@@ -391,4 +389,5 @@ polia.
   <string name="debuglog_attach_to_email_summary">K e-mailu sa pripojí záznam pre ladenie, spolu s niektorými diagnostickými informáciami</string>
   <string name="change_language_title">Zmeniť jazyk</string>
   <string name="change_language_summary">Nie všetky preklady sú úplne dokončené! Na aplikovanie nastavení je nutné reštartovať aplikáciu.</string>
+  <string name="parameters">Parametre adresy URL</string>
 </resources>

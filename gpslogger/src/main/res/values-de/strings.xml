@@ -60,7 +60,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">unbekannt</string>
   <string name="sorry">Tut mir Leid</string>
-  <string name="success">Yay!</string>
+  <string name="success">Erfolg</string>
   <string name="direction_roughly">Etwa %s</string>
   <string name="direction_north">Norden</string>
   <string name="direction_northnortheast">Nord / Nordost</string>
@@ -88,7 +88,6 @@
   <string name="time_twoandhalfhours">2 ½ Stunden</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">innerhalb %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Entfernung in Metern</string>
   <string name="settings_accuracy_in_meters">Genauigkeit in Metern</string>
@@ -128,7 +127,6 @@
   <string name="startonapplaunch_summary">Startet das Loggen beim Öffnen der App</string>
   <string name="autoemail_title">E-Mail</string>
   <string name="autoemail_summary">Automatisch die Log-Datei an eine frei ausgewählte Email-Adresse senden</string>
-  <string name="please_wait">Bitte warten.</string>
   <string name="autoemail_target">Ziel-E-Mail-Adressen</string>
   <string name="autosend_frequency_display">Nach %s Minuten</string>
   <string name="autoemail_frequency_whenistop">Wenn ich die Stop Taste drücke</string>
@@ -284,7 +282,7 @@
   <string name="annotation_requires_logging">Anmerkungen sind vorgesehen für Aufzeichnung in GPX oder KML-format bzw. für benutzerdefinierte URLs</string>
   <string name="gpslogger_folder_title">In Ordner speichern</string>
   <string name="gpslogger_folder_summary">Wo soll das Protokoll gespeichert werden, normalerweise in /sdcard/GPSLogger</string>
-  <string name="autoftp_directory">Verzeichnis</string>
+  <string name="autoftp_directory">Ordner</string>
   <string name="new_file_custom_message">Du kannst %SER für Geräteseriennummer, sowie %YEAR, %MONTH, %DAY, %HOUR, %MIN, %PROFILE und %VER für Version nutzen</string>
   <string name="new_file_prefix_serial_title">Geräteseriennummer an den Dateinamen anhängen</string>
   <string name="new_file_prefix_serial_summary">Die Seriennummer deines Gerätes lautet: </string>
@@ -316,7 +314,6 @@
   <string name="listeners_summary">Welche Standortbestimmung je nach Verfügbarkeit genutzt werden soll; GPS-Satelliten, Netzwerk (WLAN / Mobilfunknetz), Passiv (nutzt Standortbestimmungsanfragen welche von anderen Apps angefordert werden).</string>
   <string name="listeners_title">Standortbestimmung mittels</string>
   <string name="autosend_frequency_hint">Minuten</string>
-  <string name="pref_logging_file_no_permissions">Dieses Verzeichnis ist durch GPSLogger nicht beschreibbar. Bitte wählen Sie ein anderes Verzeichnis zum schreiben.</string>
   <string name="pref_gpsvisualizer">GPS Logs und Diagramme visualisieren</string>
   <string name="new_file_custom_each_time_title">Bei jedem Start nach einem Dateinamen fragen</string>
   <string name="new_file_custom_each_time_summary">Eingabeaufforderung für einen Dateinamen, jedes Mal wenn die Protokollierung gestartet wird</string>
@@ -362,6 +359,5 @@
   <string name="privacy_policy">Datenschutzbestimmungen</string>
   <string name="debuglog_attach_to_email">Fehlerprotokolldatei and E-Mail anhängen</string>
   <string name="debuglog_attach_to_email_summary">Die Fehlerprotokolldatei wird zusammen mit anderen Diagnoseinformationen an die E-Mail angehängt</string>
-  <string name="change_language_title">Sprache ändern</string>
   <string name="change_language_summary">Zum Übernehmen der Einstellungen muss die App neu gestartet werden.</string>
 </resources>

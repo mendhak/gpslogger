@@ -57,6 +57,7 @@
   <string name="miles">مایل</string>
   <string name="kilometers_per_hour">کیلومتر/ساعت</string>
   <string name="kilometers">کیلومتر</string>
+  <string name="success">موفقیت</string>
   <string name="direction_roughly">تقریبا %s</string>
   <string name="direction_north">شمال</string>
   <string name="direction_northeast">شمال شرقی</string>
@@ -75,7 +76,6 @@
   <string name="time_oneandhalfhours">یک‌ونیم ساعت</string>
   <string name="time_twoandhalfhours">دو و نیم ساعت</string>
   <string name="time_hms_format" formatted="false">%sساعت %sدقیقه %sثانیه</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_accuracy_in_meters">دقت (متر)</string>
   <!-- Settings -->
@@ -105,6 +105,7 @@
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_setup_title">FTP</string>
+  <string name="autoftp_directory">پوشه</string>
   <string name="txt_travel_duration">مدت:</string>
   <string name="save">ذخیره</string>
   <string name="txt_latitude_short">عرض جغرافیایی</string>

@@ -60,7 +60,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">neznámý</string>
   <string name="sorry">Pardon</string>
-  <string name="success">Juchů!</string>
+  <string name="success">Úspěch</string>
   <string name="direction_roughly">Zhruba %s</string>
   <string name="direction_north">Sever</string>
   <string name="direction_northnortheast">Sever až severovýchod</string>
@@ -88,7 +88,6 @@
   <string name="time_twoandhalfhours">2½ hodiny</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">v rámci %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Vzdálenost v metrech</string>
   <string name="settings_accuracy_in_meters">Přesnost v metrech</string>
@@ -128,7 +127,6 @@
   <string name="startonapplaunch_summary">Zahájit záznam po spuštění aplikace</string>
   <string name="autoemail_title">Email</string>
   <string name="autoemail_summary">Automaticky odesílá soubor se záznamy na vámi zvolenou email adresu</string>
-  <string name="please_wait">Čekejte prosím.</string>
   <string name="autoemail_target">Cílové emailové adresy</string>
   <string name="autosend_frequency_display">Po %s minutách</string>
   <string name="autoemail_frequency_whenistop">Když stisknu stop</string>
@@ -364,6 +362,5 @@
   <string name="privacy_policy">Zásady ochrany osobních údajů</string>
   <string name="debuglog_attach_to_email">Přiložit záznamy o ladění do emailu</string>
   <string name="debuglog_attach_to_email_summary">Přiloží záznam o ladění do emailu spolu s některými diagnostickými informacemi</string>
-  <string name="change_language_title">Změnit jazyk</string>
   <string name="change_language_summary">Ne všechny jazyky jsou plně přeložené! Změna nastavení se projeví až po restartu aplikace.</string>
 </resources>

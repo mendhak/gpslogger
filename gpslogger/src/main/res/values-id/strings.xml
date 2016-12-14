@@ -10,6 +10,7 @@
   <string name="cancel">Batal</string>
   <!-- main form labels -->
   <!-- general -->
+  <string name="success">Sukses</string>
   <!-- Settings activity -->
   <!-- Settings -->
 </resources>

@@ -61,7 +61,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">Bilinmiyor</string>
   <string name="sorry">Pardon</string>
-  <string name="success">Amanın!</string>
+  <string name="success">Başarı</string>
   <string name="direction_roughly">Kabaca %s</string>
   <string name="direction_north">Kuzey</string>
   <string name="direction_northnortheast">Kuzey kuzeydoğu tarafından</string>
@@ -89,7 +89,6 @@
   <string name="time_twoandhalfhours">İki buçuk saat</string>
   <string name="time_hms_format" formatted="false">%ssa %sd %ss</string>
   <string name="accuracy_within" formatted="false">%s %s içinde</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Metre olarak mesafe</string>
   <string name="settings_accuracy_in_meters">Doğruluk(Metre)</string>
@@ -120,7 +119,6 @@ Otomatik gönderme özellikleri ile çok iyi çalışmayabilir. Çünkü sadece 
   <string name="enabledisablegps_title">GPS Aç/Kapat</string>
   <string name="startonapplaunch_title">Başlangıçta çalıştır</string>
   <string name="autoemail_title">E-posta</string>
-  <string name="please_wait">Lütfen bekleyin.</string>
   <string name="autoemail_target">Hedef e-posta adresleri</string>
   <string name="autosend_frequency_display">%s dakika sonra</string>
   <string name="autoemail_smtp_category">E-posta ayarları</string>
@@ -185,7 +183,7 @@ Otomatik gönderme özellikleri ile çok iyi çalışmayabilir. Çünkü sadece 
   <string name="autoftp_setup_title">FTP</string>
   <string name="menu_faq">Yardım ve SSS</string>
   <string name="txt_provider">Sağlayıcı:</string>
-  <string name="autoftp_directory">Dizin</string>
+  <string name="autoftp_directory">Klasör</string>
   <string name="txt_travel_duration">Süre:</string>
   <string name="view_simple">Basit görünüm</string>
   <string name="view_detailed">Ayrıntılı Görünüm</string>

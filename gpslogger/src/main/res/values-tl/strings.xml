@@ -44,7 +44,6 @@
   <string name="not_applicable">n/a</string>
   <string name="unknown_direction">hindi batid</string>
   <string name="sorry">Pasensya</string>
-  <string name="success">Yey!</string>
   <string name="direction_roughly">Halos %s</string>
   <string name="direction_north">Hilaga</string>
   <string name="direction_northnortheast">Hilaga ng hilagang-silangan</string>
@@ -78,7 +77,6 @@
   <string name="pref_logging_title">Mga detalye ng talaarawan ng GPS</string>
   <string name="log_gpx_title">Itala sa GPX</string>
   <string name="log_kml_title">Itala sa KML</string>
-  <string name="please_wait">Maghintay Sandali.</string>
   <string name="autoemail_frequency_whenistop">Kapag pinindot ko ang Tigil</string>
   <string name="autoemail_smtp_category">Mag opsyon para sa Email</string>
   <string name="autoemail_username">Pangalan</string>

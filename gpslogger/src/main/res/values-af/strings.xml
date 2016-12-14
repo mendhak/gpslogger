@@ -39,6 +39,7 @@
   <string name="meters">&#160;meters</string>
   <string name="error">Fout</string>
   <string name="error_connection">Konneksiefout. Kontroleer asseblief jou selfoon instellings.</string>
+  <string name="success">Sukses</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Afstand in meters</string>
   <string name="settings_enter_meters">Tik meters (max 9999)</string>

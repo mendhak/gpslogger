@@ -60,7 +60,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">onbekend</string>
   <string name="sorry">Sorry</string>
-  <string name="success">Yay!</string>
+  <string name="success">Succes</string>
   <string name="direction_roughly">Ongeveer %s</string>
   <string name="direction_north">Noord</string>
   <string name="direction_northnortheast">Noord-noord-oost</string>
@@ -88,7 +88,6 @@
   <string name="time_twoandhalfhours">2½ uur</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">binnen de %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Afstand in meter</string>
   <string name="settings_accuracy_in_meters">Nauwkeurigheid in meters</string>
@@ -128,7 +127,6 @@
   <string name="startonapplaunch_summary">Start loggen wanneer app wordt gestart</string>
   <string name="autoemail_title">E-mail</string>
   <string name="autoemail_summary">Verstuurt automatisch een e-mails met het logbestand naar een adres van uw keuze</string>
-  <string name="please_wait">Een ogenblik geduld.</string>
   <string name="autoemail_target">Doel e-mailadressen</string>
   <string name="autosend_frequency_display">Na %s minuten</string>
   <string name="autoemail_frequency_whenistop">Wanneer ik op stop druk</string>
@@ -316,7 +314,6 @@
   <string name="listeners_summary">Welke providers gebruikt Worden Als ,ze beshikbaar zijn. GPS voor satelieten, netwerk voor cell toren/WiFi, passief is een provider die localizeringsaanvragen van andere toepassingen onderschept.</string>
   <string name="listeners_title">Localisering providers</string>
   <string name="autosend_frequency_hint">Aantal minuten</string>
-  <string name="pref_logging_file_no_permissions">Die map is niet schrijfbaar voor GPSLogger. Kies een andere map om naar te schrijven.</string>
   <string name="pref_gpsvisualizer">Laat GPS statestieken en grafieken zien</string>
   <string name="new_file_custom_each_time_title">Vraag elke elke keer om een bestandsnaam bij starten</string>
   <string name="new_file_custom_each_time_summary">Vraag elke keer om een bestandsnaam als het loggen wordt gestart</string>
@@ -362,6 +359,5 @@
   <string name="privacy_policy">Privacybeleid</string>
   <string name="debuglog_attach_to_email">Voeg debug-log toe aan e-mail</string>
   <string name="debuglog_attach_to_email_summary">Voegt debug-log toe aan e-mail, samen met wat diagnostische informatie</string>
-  <string name="change_language_title">Taal wijzigen</string>
   <string name="change_language_summary">Niet alle talen zijn volledig vertaald! U moet de app opnieuw opstarten voordat de instellingen van kracht zijn.</string>
 </resources>

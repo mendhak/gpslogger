@@ -5,6 +5,8 @@
   <string name="app_name">GPSLogger</string>
   <!-- main form labels -->
   <!-- general -->
+  <string name="success">Succès</string>
   <!-- Settings activity -->
   <!-- Settings -->
+  <string name="autoftp_directory">Dossier</string>
 </resources>

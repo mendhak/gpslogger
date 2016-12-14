@@ -60,7 +60,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">ismeretlen</string>
   <string name="sorry">Sajnálom</string>
-  <string name="success">Yay!</string>
+  <string name="success">Siker</string>
   <string name="direction_roughly">Durván: %s</string>
   <string name="direction_north">Észak</string>
   <string name="direction_northnortheast">Észak-északkeleti</string>
@@ -88,7 +88,6 @@
   <string name="time_twoandhalfhours">2,5 óra</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">%s %s belül</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Távolság méterben</string>
   <string name="settings_accuracy_in_meters">Méteres pontossággal</string>
@@ -130,7 +129,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="startonapplaunch_summary">Elindítja a naplózást az app indulásakor</string>
   <string name="autoemail_title">Email</string>
   <string name="autoemail_summary">Automatikusan e-mail küldés az ön által kiválasztott címre</string>
-  <string name="please_wait">Kérem várjon.</string>
   <string name="autoemail_target">Cél e-mail cím</string>
   <string name="autosend_frequency_display">%s perc után</string>
   <string name="autoemail_frequency_whenistop">Nyomja meg a megállításhoz</string>
@@ -286,7 +284,7 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="annotation_requires_logging">Széljegyzetekhez GPX, KML vagy saját URL logolás szükséges</string>
   <string name="gpslogger_folder_title">Mentés könyvtárba</string>
   <string name="gpslogger_folder_summary">Log fájlok mentési helye, /sdcard/GPSLogger az alapértelmezett</string>
-  <string name="autoftp_directory">Könyvtár</string>
+  <string name="autoftp_directory">Mappa</string>
   <string name="new_file_custom_message">Használható változók: %SER (eszköz sorozatszám), %YEAR (év), %MONTH (hónap), %DAY (nap), %HOUR (óra), %MIN (perc), %PROFILE (profil), %VER (verzió)</string>
   <string name="new_file_prefix_serial_title">Készülék sorszám használata fájlnév előtagként</string>
   <string name="new_file_prefix_serial_summary">Ez a telefon sorozatszáma az állapot menüből </string>
@@ -318,7 +316,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="listeners_summary">Használható helyszolgáltatók. Műhold alapú GPS, mobil adótornyok vagy wifi alapú hálózati, vagy passzív; ez egy speciális szolgáltató, amely a más alkalmazásokban lekérdezett pozíciókat figyeli.</string>
   <string name="listeners_title">Helyszolgáltatók</string>
   <string name="autosend_frequency_hint">Percek száma</string>
-  <string name="pref_logging_file_no_permissions">A GPSLogger nem tudja írni a mappát. Kérlek válassz egy másik mappát íráshoz.</string>
   <string name="pref_gpsvisualizer">GPS napló statisztika és grafikák megjelenítése</string>
   <string name="new_file_custom_each_time_title">Fájlnév kérése minden indításkor</string>
   <string name="new_file_custom_each_time_summary">Egyedi fájlnevet kér a naplózás minden indításakor</string>
@@ -364,6 +361,5 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="privacy_policy">Adatvédelmi irányelvek</string>
   <string name="debuglog_attach_to_email">Hibakeresési napló csatolása az e-mailhez</string>
   <string name="debuglog_attach_to_email_summary">Hibakeresési naplót mellékel az e-mailhez néhány diagnosztikai információval</string>
-  <string name="change_language_title">Nyelvváltás</string>
   <string name="change_language_summary">Nincs minden nyelvhez teljes fordítás! Újra kell indítani a programot a beállítás érvénybelépéséhez.</string>
 </resources>

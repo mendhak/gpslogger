@@ -60,7 +60,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">Sconosciuta</string>
   <string name="sorry">Spiacente</string>
-  <string name="success">Ok!</string>
+  <string name="success">Successo</string>
   <string name="direction_roughly">All\'incirca %s</string>
   <string name="direction_north">Nord</string>
   <string name="direction_northnortheast">Nord-NordEst</string>
@@ -88,7 +88,6 @@
   <string name="time_twoandhalfhours">2½ ore</string>
   <string name="time_hms_format" formatted="false">%so %sm %ss</string>
   <string name="accuracy_within" formatted="false">in %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Distanza in metri</string>
   <string name="settings_accuracy_in_meters">Precisione in metri</string>
@@ -127,7 +126,6 @@
   <string name="startonapplaunch_summary">Avviare la registrazione quando viene lanciata l\'app</string>
   <string name="autoemail_title">Email</string>
   <string name="autoemail_summary">Invia automaticamente i files ad un indirizzo Email a tua scelta</string>
-  <string name="please_wait">Attendere prego.</string>
   <string name="autoemail_target">Indirizzi Email di destinazione</string>
   <string name="autosend_frequency_display">Dopo %s minuti</string>
   <string name="autoemail_frequency_whenistop">Ad ogni registrazione</string>
@@ -337,5 +335,4 @@
   <string name="inaccurate_point_discarded">Punto impreciso scartato</string>
   <string name="autosend_wifionly_title">Solo tramite Wi-Fi</string>
   <string name="logview_autoscroll">Scorrimento automatico</string>
-  <string name="change_language_title">Cambia lingua</string>
 </resources>

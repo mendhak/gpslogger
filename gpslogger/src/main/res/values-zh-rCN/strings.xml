@@ -59,7 +59,7 @@
   <string name="kilometers">公里</string>
   <string name="unknown_direction">未知</string>
   <string name="sorry">抱歉</string>
-  <string name="success">吔！</string>
+  <string name="success">成功</string>
   <string name="direction_roughly">大致为 %s</string>
   <string name="direction_north">北</string>
   <string name="direction_northnortheast">东北偏北</string>
@@ -87,7 +87,6 @@
   <string name="time_twoandhalfhours">2½ 小时</string>
   <string name="time_hms_format" formatted="false">%s小时 %s分钟 %s秒</string>
   <string name="accuracy_within" formatted="false">%s %s内</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">以米算的距离</string>
   <string name="settings_accuracy_in_meters">精确到米</string>
@@ -117,7 +116,6 @@
   <string name="startonbootup_title">开机自启动</string>
   <string name="startonbootup_summary">当手机开机的时候自动启动本程序</string>
   <string name="autoemail_summary">自动的通过Email发送日志到你选择的Email地址。</string>
-  <string name="please_wait">请稍等。</string>
   <string name="autoemail_target">目标电子邮件地址</string>
   <string name="autoemail_frequency_whenistop">当我点击停止</string>
   <string name="autoemail_smtp_category">电子邮件设置</string>

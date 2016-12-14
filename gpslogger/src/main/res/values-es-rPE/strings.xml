@@ -51,6 +51,7 @@
   <string name="providername_celltower">torres de celular</string>
   <string name="not_applicable">n/a</string>
   <string name="meters_per_second">m/s</string>
+  <string name="success">Éxito</string>
   <!-- Settings activity -->
   <!-- Settings -->
   <string name="new_file_creation_onceaday">Una vez al día</string>
@@ -69,7 +70,6 @@
   <string name="startonbootup_title">Iniciar en el arranque</string>
   <string name="startonapplaunch_title">Iniciar al iniciar la aplicación</string>
   <string name="autoemail_title">Correo electrónico</string>
-  <string name="please_wait">Espere un momento.</string>
   <string name="autoemail_target">Direcciones de destinatarios</string>
   <string name="autosend_frequency_display">Después de %s minutos</string>
   <string name="autoemail_frequency_whenistop">Al presionar detener</string>

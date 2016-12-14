@@ -61,7 +61,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">desconocido</string>
   <string name="sorry">Lo siento</string>
-  <string name="success">¡Genial!</string>
+  <string name="success">Éxito</string>
   <string name="direction_roughly">Aprox. %s</string>
   <string name="direction_north">Norte</string>
   <string name="direction_northnortheast">Norte-noreste</string>
@@ -89,7 +89,6 @@
   <string name="time_twoandhalfhours">2½ horas</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">precisión de %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Distancia en metros</string>
   <string name="settings_accuracy_in_meters">Precisión en metros</string>
@@ -128,7 +127,6 @@
   <string name="startonapplaunch_summary">Iniciar sesión al iniciar la aplicación</string>
   <string name="autoemail_title">Correo electrónico</string>
   <string name="autoemail_summary">Enviar automáticamente el archivo de registro a la dirección especificada</string>
-  <string name="please_wait">Espera un momento.</string>
   <string name="autoemail_target">Direcciones de destinatarios</string>
   <string name="autosend_frequency_display">Tras %s minutos</string>
   <string name="autoemail_frequency_whenistop">Al presionar detener</string>
@@ -361,6 +359,5 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
   <string name="gpslogger_permissions_rationale_title">Se necesitan permisos</string>
   <string name="gpslogger_permissions_permanently_denied">Has denegado algunos de los permisos que esta aplicación necesita. Debes acceder a la pantalla de configuración de la aplicación para cambiar el acceso a estos permisos.</string>
   <string name="privacy_policy">Política de Privacidad</string>
-  <string name="change_language_title">Cambiar Idioma</string>
   <string name="change_language_summary">No todos los idiomas estàn traducidos por completo! Debes reiniciar la aplicación para que esta configuración funcione.</string>
 </resources>

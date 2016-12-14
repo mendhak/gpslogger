@@ -3,6 +3,7 @@
 <resources>
   <!-- main form labels -->
   <!-- general -->
+  <string name="success">सफलता</string>
   <!-- Settings activity -->
   <!-- Settings -->
 </resources>

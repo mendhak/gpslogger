@@ -61,7 +61,7 @@
   <string name="kilometers">公里</string>
   <string name="unknown_direction">未知</string>
   <string name="sorry">抱歉</string>
-  <string name="success">吔！</string>
+  <string name="success">成功</string>
   <string name="direction_roughly">大致為 %s</string>
   <string name="direction_north">北</string>
   <string name="direction_northnortheast">東北偏北</string>
@@ -89,7 +89,6 @@
   <string name="time_twoandhalfhours">2½ 小時</string>
   <string name="time_hms_format" formatted="false">%s小時 %s分鐘 %s秒</string>
   <string name="accuracy_within" formatted="false">%s %s內</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">以米算的距離</string>
   <string name="settings_accuracy_in_meters">精確度〈公尺〉</string>
@@ -113,6 +112,7 @@
         may not work well with auto send features because it only sends the latest file.</string>
   <string name="pref_performance_title">性能</string>
   <string name="pref_performance_summary">Timings, filters and listeners</string>
+  <string name="time_before_logging_title">記錄間隔</string>
   <string name="time_before_logging_summary">Use 0 for maximum frequency, but slower is better for battery life.
     </string>
   <string name="time_before_logging_dialog_title">以秒計的時間</string>
@@ -121,6 +121,8 @@
         higher precision with low frequencies.
     </string>
   <string name="keep_fix_title">Keep GPS on between fixes</string>
+  <string name="retry_time_title">足夠精確度重試時間</string>
+  <string name="retry_time_summary">取得一筆起始的修正後，持續嘗試得到符合精確度過濾器標準的時間。</string>
   <string name="retry_time_dialog_title">以秒計</string>
   <string name="retry_time_hint">輸入秒數 (最大9999)</string>
   <string name="display_imperial_title">Display Imperial units</string>
@@ -133,7 +135,6 @@
   <string name="startonapplaunch_summary">Start logging when the app is launched</string>
   <string name="autoemail_title">Email</string>
   <string name="autoemail_summary">自動的通過Email傳送日誌到你選取的Email位址。</string>
-  <string name="please_wait">請稍等。</string>
   <string name="autoemail_target">Target email addresses</string>
   <string name="autosend_frequency_display">%s 分鐘後</string>
   <string name="autoemail_frequency_whenistop">當我點擊停止</string>
@@ -223,6 +224,11 @@
     </string>
   <string name="gdocs_upload">Google Drive</string>
   <string name="gdocs_startauthorization">Authorize with Google Drive</string>
+  <string name="gdocs_authorize_summary">導至Google Drive以授權給GPSLogger</string>
+  <string name="gdocs_clearauthorization">清除授權</string>
+  <string name="gdocs_clearauthorization_summary">清除本機端Google文件設定。若要永久撤銷授權，請至Google帳戶設定。</string>
+  <string name="gdocs_setup_title">Google雲端硬碟</string>
+  <string name="gdocs_setup_summary">授權Google雲端硬碟以上傳資料</string>
   <string name="gdocs_test_summary">上傳一個測試檔到Google雲端硬碟</string>
   <string name="gdocs_test_title">上傳測試</string>
   <string name="gdocs_testupload_error">無法上傳測試檔案</string>
@@ -232,6 +238,40 @@
   <string name="autosend_enabled">允許自動傳送</string>
   <string name="autosend_enabled_summary">允許傳送至不同的目的地</string>
   <string name="autosend_frequency_summary">自動傳送記錄檔的頻率，以分鐘為單位。0分鐘則為不自動傳送。</string>
+  <string name="autosend_frequency">傳送頻率</string>
   <string name="autosend_sendzip_title">傳送zip檔案</string>
+  <string name="autosend_sendzip_summary">當可用時傳送Zip壓縮檔。關掉則傳送個別檔案，或是Zip選項並無效果。</string>
+  <string name="autosend_targets_category">自動傳送目標</string>
+  <string name="menu_autosend_now">立即自動傳送</string>
+  <string name="autosend_sending">自動傳送中</string>
+  <string name="summary_autosend">自動傳送至：</string>
+  <string name="pref_autosend_title">自動傳送、發電子郵件和上傳</string>
+  <string name="pref_autosend_summary">發電子郵件、分享和上傳的選項</string>
+  <string name="shortcut_start">開始</string>
+  <string name="shortcut_stop">停止</string>
+  <string name="shortcut_pickaction">選擇一項操作</string>
+  <string name="log_opengts_title">記錄至OpenGTS伺服器</string>
+  <string name="log_opengts_summary">傳送GPRMC資料至線上OpenGTS伺服器</string>
+  <string name="opengts_setup_title">OpenGTS</string>
+  <string name="opengts_setup_summary">將 GPS 軌跡發送到您所選擇的 OpenGTS 伺服器</string>
+  <string name="autoopengts_server_category">OpenGTS 設定</string>
+  <string name="autoopengts_invalid_form">不正確的值</string>
   <string name="autoopengts_invalid_form_message">請確認每個欄位均已填妥</string>
+  <string name="opengts_upload">發送至 OpenGTS</string>
+  <string name="autoopengts_server">伺服器</string>
+  <string name="autoopengts_server_summary">主機名稱或 IP</string>
+  <string name="opengts_server_port">埠</string>
+  <string name="opengts_server_communication_method">通訊方式</string>
+  <string name="opengts_server_communication_method_summary">基於 HTTP 或原始 Socket 的通訊</string>
+  <string name="autoopengts_server_path">伺服器路徑</string>
+  <string name="autoopengts_server_path_summary">非必選，限基於 HTTP 的通訊。例如 \' / gprmc/Data\'</string>
+  <string name="autoopengts_device_id">裝置 ID</string>
+  <string name="autoftp_server">FTP 伺服器</string>
+  <string name="autoftp_server_summary">IP 位址或主機名稱</string>
+  <string name="autoftp_username">使用者名稱</string>
+  <string name="autoftp_password">密碼</string>
+  <string name="autoftp_advanced_settings">進階設定</string>
+  <string name="autoftp_port">埠</string>
+  <string name="autoftp_useftps">使用 FTPS</string>
+  <string name="autoftp_directory">Folder</string>
 </resources>

@@ -3,6 +3,8 @@
 <resources>
   <!-- main form labels -->
   <!-- general -->
+  <string name="success">成功</string>
   <!-- Settings activity -->
   <!-- Settings -->
+  <string name="autoftp_directory">Folder</string>
 </resources>

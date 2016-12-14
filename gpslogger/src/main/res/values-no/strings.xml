@@ -57,7 +57,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">ukjent</string>
   <string name="sorry">Beklager</string>
-  <string name="success">Hurra!</string>
+  <string name="success">Suksess</string>
   <string name="direction_roughly">Omtrent %s</string>
   <string name="direction_north">Nord</string>
   <string name="direction_northnortheast">Nord nordøst</string>
@@ -85,7 +85,6 @@
   <string name="time_twoandhalfhours">2½ time</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">innenfor %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Avstanden i meter</string>
   <string name="settings_accuracy_in_meters">Nøyaktighet i meter</string>
@@ -120,7 +119,6 @@
   <string name="startonapplaunch_summary">Start logging når appen startes</string>
   <string name="autoemail_title">E-post</string>
   <string name="autoemail_summary">Sender automatisk e-post med GPS-sporet til ei adresse du vel</string>
-  <string name="please_wait">Vent.</string>
   <string name="autoemail_target">E-postadressen du vil sende til</string>
   <string name="autosend_frequency_display">Etter %s minutter</string>
   <string name="autoemail_frequency_whenistop">Når eg trykker på stop</string>
@@ -330,6 +328,5 @@
   <string name="privacy_policy">Personvern</string>
   <string name="debuglog_attach_to_email">Legg ved feilsøkingslogg til e-post</string>
   <string name="debuglog_attach_to_email_summary">Legger ved feilsøkingslogg til epost med diagnostiseringsinformasjon</string>
-  <string name="change_language_title">Endre språk</string>
   <string name="change_language_summary">Ikke alle språk er fullstendig oversatt! Du må starte programmet på nytt før innstillingene trer i kraft.</string>
 </resources>

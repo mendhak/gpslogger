@@ -110,7 +110,7 @@
     <string name="time_twoandhalfhours">2&#189; hours</string>
     <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
     <string name="accuracy_within" formatted="false">within %s %s</string>
-    <string name="degree_symbol">&#176;</string>
+    <string name="degree_symbol" translatable="false">&#176;</string>
 
 
     <!-- Settings activity -->

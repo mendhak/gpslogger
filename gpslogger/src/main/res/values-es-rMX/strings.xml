@@ -53,7 +53,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">desconocido</string>
   <string name="sorry">Lo siento</string>
-  <string name="success">Yay!</string>
+  <string name="success">Éxito</string>
   <string name="direction_roughly">Proximo de %s</string>
   <string name="direction_north">Norte</string>
   <string name="direction_northnortheast">Norte noreste</string>
@@ -81,7 +81,6 @@
   <string name="time_twoandhalfhours">2½ horas</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">dentro de %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Distancia en metros</string>
   <string name="settings_accuracy_in_meters">Precisión en metros</string>
@@ -108,7 +107,6 @@
   <string name="startonbootup_title">Iniciar en el arranque</string>
   <string name="startonbootup_summary">Lanzar app y el registro de inicio cuando se inicia el teléfono</string>
   <string name="autoemail_summary">Emails automáticamente el archivo de registro a la dirección de su elección</string>
-  <string name="please_wait">Espera.</string>
   <string name="autoemail_target">Direcciones de correo electrónico de destino</string>
   <string name="autoemail_frequency_whenistop">Cuando presiono stop</string>
   <string name="autoemail_smtp_category">Configuración de correo electrónico</string>
@@ -234,4 +232,5 @@
   <string name="txt_annotation">Anotación:</string>
   <string name="txt_time_isoformat">Hora UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Proveedor:</string>
+  <string name="autoftp_directory">Carpeta</string>
 </resources>

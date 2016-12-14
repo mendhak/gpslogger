@@ -58,7 +58,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">unknown</string>
   <string name="sorry">Oprostite</string>
-  <string name="success">Bravo!</string>
+  <string name="success">Uspeh</string>
   <string name="direction_roughly">Približno %s</string>
   <string name="direction_north">Sever</string>
   <string name="direction_northeast">Severovzhod</string>
@@ -110,7 +110,6 @@
   <string name="startonbootup_summary">Zagon app in začetek pisanja dnevnika, ko prižgete telefon</string>
   <string name="autoemail_title">E-pošta</string>
   <string name="autoemail_summary">Samodejno pošlje email dnevnik na naslov po vaši izbiri</string>
-  <string name="please_wait">Počakaj, prosim.</string>
   <string name="autoemail_target">Ciljni e-poštni naslovi</string>
   <string name="autosend_frequency_display">Po %s minutah</string>
   <string name="autoemail_frequency_whenistop">Kdaj pritisnem stop</string>

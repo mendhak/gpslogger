@@ -60,7 +60,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">desconhecido</string>
   <string name="sorry">Desculpe</string>
-  <string name="success">Oba!</string>
+  <string name="success">Sucesso</string>
   <string name="direction_roughly">Cerca de %s</string>
   <string name="direction_north">Norte</string>
   <string name="direction_northnortheast">Norte pelo nordeste</string>
@@ -88,7 +88,6 @@
   <string name="time_twoandhalfhours">2h30</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">dentro de %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Distância em metros</string>
   <string name="settings_accuracy_in_meters">Precisão em metros</string>
@@ -133,7 +132,6 @@
   <string name="startonapplaunch_summary">Iniciar o log quando o aplicativo for aberto</string>
   <string name="autoemail_title">Email</string>
   <string name="autoemail_summary">Envia automaticamente um e-mail com o arquivo de log para um endereço de sua escolha</string>
-  <string name="please_wait">Aguarde.</string>
   <string name="autoemail_target">Endereços de e-mail de destino</string>
   <string name="autosend_frequency_display">Depois de %s minutos</string>
   <string name="autoemail_frequency_whenistop">Quando eu pressionar Parar</string>
@@ -323,7 +321,6 @@
   <string name="listeners_summary">Quais provedores de localização utilizar quando eles estão disponíveis; GPS para satélites, rede para torre de celular/Wi-Fi, Passivo é um provedor especial que atende à locais abrangidos por outras aplicações.</string>
   <string name="listeners_title">Provedores de localização</string>
   <string name="autosend_frequency_hint">Número de minutos</string>
-  <string name="pref_logging_file_no_permissions">Essa pasta não permite gravação pelo GPSLogger. Por favor, escolha outra pasta para gravar.</string>
   <string name="pref_gpsvisualizer">Visualizar gráficos e estatísticas do log GPS</string>
   <string name="new_file_custom_each_time_title">Pedir um nome de arquivo em cada início</string>
   <string name="new_file_custom_each_time_summary">Solicitar um nome de arquivo personalizado cada vez que o Log é iniciado</string>
@@ -369,6 +366,5 @@
   <string name="privacy_policy">Política de Privacidade</string>
   <string name="debuglog_attach_to_email">Anexar o log de depuração para o e-mail</string>
   <string name="debuglog_attach_to_email_summary">Anexa o log de depuração para um e-mail juntamente com algumas informações de diagnóstico</string>
-  <string name="change_language_title">Alterar o Idioma</string>
   <string name="change_language_summary">Nem todos os idiomas estão totalmente traduzidos! É necessário reiniciar o aplicativo para que as configurações tenham efeito.</string>
 </resources>

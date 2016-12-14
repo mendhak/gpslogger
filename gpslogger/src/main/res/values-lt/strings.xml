@@ -61,7 +61,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">nežinoma</string>
   <string name="sorry">Atsiprašome</string>
-  <string name="success">Ura!</string>
+  <string name="success">Sėkmės</string>
   <string name="direction_roughly">Apie %s</string>
   <string name="direction_north">Šiaurės</string>
   <string name="direction_northnortheast">Šiaurės Šiaurės Rytų</string>
@@ -89,7 +89,6 @@
   <string name="time_twoandhalfhours">2½ valandos</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">Iki %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Atstumas metrais</string>
   <string name="settings_accuracy_in_meters">Tikslumas metrais</string>
@@ -116,7 +115,6 @@
   <string name="startonbootup_summary">Paleidžia programą ir pradeda įrašinėti, kai telefonas įjungiamas</string>
   <string name="autoemail_title">El. paštas</string>
   <string name="autoemail_summary">Automatiškai siunčia el. laiškus su įrašytom koordinatėm į jūsų parinktą adresą</string>
-  <string name="please_wait">Prašau palaukti.</string>
   <string name="autoemail_target">Pasirinkti el. pašto adresatus</string>
   <string name="autosend_frequency_display">Po %s minučių</string>
   <string name="autoemail_frequency_whenistop">Kai paspaudžiu stabdyti</string>
@@ -177,5 +175,6 @@
   <string name="autoftp_setup_title">FTP</string>
   <string name="menu_faq">Pagalba ir DUK</string>
   <string name="txt_time_isoformat">Laikas UTC (2011-12-25T15:27:33Z):</string>
+  <string name="autoftp_directory">Aplankas</string>
   <string name="save">Išsaugoti</string>
 </resources>

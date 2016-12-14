@@ -35,7 +35,7 @@
   <string name="providername_gps">GPS செயற்கைக்கோள்கள்</string>
   <string name="providername_celltower">தொலைபேசி கோபுரங்கள்</string>
   <string name="sorry">வருந்துகிறேன்</string>
-  <string name="degree_symbol">°</string>
+  <string name="success">வெற்றி</string>
   <!-- Settings activity -->
   <!-- Settings -->
   <string name="osm_description">விளக்கம்</string>

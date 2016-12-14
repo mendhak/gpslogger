@@ -61,7 +61,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">desconhecido(a)</string>
   <string name="sorry">Sinto muito</string>
-  <string name="success">Yay!</string>
+  <string name="success">Sucesso</string>
   <string name="direction_roughly">Aprox. %s</string>
   <string name="direction_north">Norte</string>
   <string name="direction_northnortheast">Norte pelo nordeste</string>
@@ -89,7 +89,6 @@
   <string name="time_twoandhalfhours">duas horas e meia</string>
   <string name="time_hms_format" formatted="false">% sh % sm % ss</string>
   <string name="accuracy_within" formatted="false">dentro de %s %s</string>
-  <string name="degree_symbol">º</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Distância em metros</string>
   <string name="settings_accuracy_in_meters">Precisão em metros</string>
@@ -131,7 +130,6 @@ Nomes de ficheiro muito dinâmicos
   <string name="startonapplaunch_summary">Iniciar o log quando a aplicação for lançada</string>
   <string name="autoemail_title">Email</string>
   <string name="autoemail_summary">E-mails automaticamente o arquivo de log para um endereço de sua escolha</string>
-  <string name="please_wait">Aguarde.</string>
   <string name="autoemail_target">Endereços de e-mail de destino</string>
   <string name="autosend_frequency_display">Depois de %s minutos</string>
   <string name="autoemail_frequency_whenistop">Quando eu pressionar stop</string>
@@ -310,7 +308,6 @@ Nomes de ficheiro muito dinâmicos
   <string name="listeners_passive">Passivo</string>
   <string name="listeners_title">Fornecedores de localização</string>
   <string name="autosend_frequency_hint">Número de minutos</string>
-  <string name="pref_logging_file_no_permissions">Esta directoria não pode ser usada pelo GPSLogger para gravação. Por favor escolha outra diretoria para gravar.</string>
   <string name="pref_gpsvisualizer">Visualizar gráficos e estatísticas do log GPS</string>
   <string name="new_file_custom_each_time_title">Pedir um nome de ficheiro em cada início</string>
   <string name="new_file_custom_each_time_summary">Solicitar um nome de ficheiro personalizado cada vez que o Log é iniciado</string>
@@ -355,6 +352,5 @@ Nomes de ficheiro muito dinâmicos
   <string name="privacy_policy">Política de Privacidade</string>
   <string name="debuglog_attach_to_email">Anexar o log de correção de erros ao e-mail</string>
   <string name="debuglog_attach_to_email_summary">Anexa o log de correcção de erros ao e-mail em conjunto com alguma informação de diagnóstico</string>
-  <string name="change_language_title">Alterar Idioma</string>
   <string name="change_language_summary">Nem todos os idiomas estão totalmente traduzidos! É necessário reiniciar a aplicação para que as configurações tenham efeito.</string>
 </resources>

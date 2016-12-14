@@ -58,7 +58,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">necunoscut</string>
   <string name="sorry">Ne pare rău</string>
-  <string name="success">Yay!</string>
+  <string name="success">Succesul</string>
   <string name="direction_roughly">Aproximativ %s</string>
   <string name="direction_north">Nord</string>
   <string name="direction_northnortheast">Nord Nord-Est</string>
@@ -86,7 +86,6 @@
   <string name="time_twoandhalfhours">2½ ore</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">în limita %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Distanţa în metri</string>
   <string name="settings_accuracy_in_meters">Precizia în metri</string>
@@ -119,7 +118,6 @@
   <string name="startonbootup_title">Starteaza aplicatia la pornirea telefonului</string>
   <string name="startonbootup_summary">Porneste aplicatia şi începe înregistrarea atunci când telefonul este pornit.</string>
   <string name="autoemail_summary">Trimite e-mailuri automat cu fisierele de log la o adresă prestabilita.</string>
-  <string name="please_wait">Vă rugăm aşteptaţi.</string>
   <string name="autoemail_target">Adrese de email destinaţie</string>
   <string name="autoemail_frequency_whenistop">Atunci când apăsaţi stop</string>
   <string name="autoemail_smtp_category">Setări de e-mail</string>

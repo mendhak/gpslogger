@@ -49,7 +49,7 @@
   <string name="kilometers_per_hour">&#160;km/h</string>
   <string name="unknown_direction">desconegut</string>
   <string name="sorry">Ho sento</string>
-  <string name="success">Sí!</string>
+  <string name="success">Èxit</string>
   <string name="direction_north">Nord</string>
   <string name="direction_northeast">Nord-Est</string>
   <string name="direction_east">Est</string>
@@ -76,7 +76,6 @@
   <string name="pref_performance_title">Rendiment</string>
   <string name="time_before_logging_dialog_title">Temps en segons</string>
   <string name="enabledisablegps_title">Activar/Desactivar GPS</string>
-  <string name="please_wait">Espera si us plau.</string>
   <string name="autoemail_username">Nom d\'usuari</string>
   <string name="autoemail_password">Contrasenya</string>
   <string name="autoemail_port">Port</string>

@@ -57,7 +57,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">nieznany</string>
   <string name="sorry">Przepraszam</string>
-  <string name="success">Sukces!</string>
+  <string name="success">Sukces</string>
   <string name="direction_roughly">Mniej więcej %s</string>
   <string name="direction_north">Północ</string>
   <string name="direction_northnortheast">Północ--Północny wschód</string>
@@ -85,7 +85,6 @@
   <string name="time_twoandhalfhours">2½ godzin</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">wewnątrz %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Odległość w metrach</string>
   <string name="settings_accuracy_in_meters">Dokładność w metrach</string>
@@ -122,7 +121,6 @@
   <string name="startonapplaunch_summary">Rozpocznij logowanie po uruchomieniu aplikacji</string>
   <string name="autoemail_title">Adres e-mail</string>
   <string name="autoemail_summary">Automatyczne wysyłanie maila z plikiem logu na podany adres</string>
-  <string name="please_wait">Proszę czekać.</string>
   <string name="autoemail_target">Adresy docelowe</string>
   <string name="autosend_frequency_display">Po %s minutach</string>
   <string name="autoemail_frequency_whenistop">Po zatrzymaniu logowania</string>
@@ -330,5 +328,4 @@
   <string name="profile_add_new">Dodaj profil</string>
   <string name="gpslogger_permissions_rationale_title">Wymagane uprawnienia</string>
   <string name="privacy_policy">Polityka prywatności</string>
-  <string name="change_language_title">Zmień język</string>
 </resources>

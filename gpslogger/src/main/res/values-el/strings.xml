@@ -60,7 +60,7 @@
   <string name="kilometers">&#160;km</string>
   <string name="unknown_direction">άγνωστο</string>
   <string name="sorry">Συγνώμη</string>
-  <string name="success">Ναί!</string>
+  <string name="success">Επιτυχία</string>
   <string name="direction_roughly">Περίπου %s</string>
   <string name="direction_north">Βόρεια</string>
   <string name="direction_northnortheast">Βόρεια βορειοανατολικά</string>
@@ -88,7 +88,6 @@
   <string name="time_twoandhalfhours">2½ ώρες</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">εντός %s %s</string>
-  <string name="degree_symbol">°</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Απόσταση σε μέτρα</string>
   <string name="settings_accuracy_in_meters">Ακρίβεια σε μέτρα</string>
@@ -168,4 +167,5 @@
   <string name="autoftp_ssltls">SSL/TLS</string>
   <string name="autoftp_ssltls_summary">Κανένα, SSL ή TLS. Χρησιμοποιήστε την επιλογή κανένα για κανονικές μη ασφαλείς συνδέσεις.</string>
   <string name="autoftp_ssltls_none">Κανένα</string>
+  <string name="autoftp_directory">Φάκελος</string>
 </resources>
