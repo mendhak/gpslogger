@@ -446,6 +446,7 @@ public class GpsLoggingService extends Service  {
         stopActivityRecognitionUpdates();
         notifyClientStopped();
         session.setCurrentFileName("");
+        session.setCurrentFormattedFileName("");
     }
 
     /**
