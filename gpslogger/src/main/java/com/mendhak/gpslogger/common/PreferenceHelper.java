@@ -480,6 +480,11 @@ public class PreferenceHelper {
     }
 
 
+    @ProfilePreference(name=PreferenceNames.HIDE_NOTIFICATION_FROM_STATUS_BAR)
+    public boolean shouldHideNotificationFromStatusBar(){
+        return prefs.getBoolean(PreferenceNames.HIDE_NOTIFICATION_FROM_STATUS_BAR, false);
+    }
+
     /**
      * Whether to display certain values using imperial units
      */
