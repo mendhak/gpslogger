@@ -67,8 +67,8 @@ public class OpenGTSFragment extends PermissionedPreferenceFragment implements
             );
         }
         if (!isFormValid()) {
-            Dialogs.alert(getString(R.string.autoopengts_invalid_form),
-                    getString(R.string.autoopengts_invalid_form_message),
+            Dialogs.alert(getString(R.string.autoftp_invalid_settings),
+                    getString(R.string.autoftp_invalid_summary),
                     getActivity());
             return false;
         }

@@ -31,11 +31,9 @@
   <string name="summary_freq_every">Biežums:</string>
   <string name="summary_freq_max">maksimums</string>
   <string name="summary_dist">Distance:</string>
-  <string name="summary_dist_regardless">maksimums</string>
   <string name="summary_current_filename">Fails:</string>
   <string name="sharing_location_only">Atrašanās vieta tikai</string>
   <string name="sharing_mylocation">Mana atrašanās vieta</string>
-  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Dalīties caur</string>
   <!-- general -->
   <string name="foot">pēda</string>

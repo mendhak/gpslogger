@@ -1053,7 +1053,7 @@ public class GpsMainActivity extends AppCompatActivity
 
                                     intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing_mylocation));
                                     if (session.hasValidLocation()) {
-                                        String bodyText = getString(R.string.sharing_googlemaps_link,
+                                        String bodyText = String.format("http://maps.google.com/maps?q=%s,%s",
                                                 String.valueOf(session.getCurrentLatitude()),
                                                 String.valueOf(session.getCurrentLongitude()));
                                         intent.putExtra(Intent.EXTRA_TEXT, bodyText);

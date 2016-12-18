@@ -57,10 +57,10 @@ public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment
         manager = new DropBoxManager(PreferenceHelper.getInstance());
 
         if (manager.isLinked()) {
-            pref.setTitle(R.string.dropbox_unauthorize);
+            pref.setTitle(R.string.osm_resetauth);
             pref.setSummary(R.string.dropbox_unauthorize_description);
         } else {
-            pref.setTitle(R.string.dropbox_authorize);
+            pref.setTitle(R.string.osm_lbl_authorize);
             pref.setSummary(R.string.dropbox_authorize_description);
         }
 

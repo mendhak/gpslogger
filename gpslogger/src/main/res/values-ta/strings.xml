@@ -20,10 +20,8 @@
   <string name="btn_stop_logging">பதிகை நிறுத்து</string>
   <string name="summary_freq_max">அதிகபட்ச</string>
   <string name="summary_dist">தூரம்:</string>
-  <string name="summary_dist_regardless">அதிகபட்ச</string>
   <string name="summary_current_filename">கோப்பு:</string>
   <string name="sharing_mylocation">எனது இருப்பிடம்</string>
-  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">பகிர் வழி</string>
   <!-- general -->
   <string name="foot">&#160;அடி</string>
@@ -44,10 +42,8 @@
   <string name="shortcut_stop">நிறுத்து</string>
   <string name="autoopengts_server">சேவையகம்</string>
   <string name="autoopengts_server_summary">சேவையகபெயர் அல்லது IP</string>
-  <string name="opengts_server_port">முணையம்</string>
   <string name="opengts_server_communication_method">தகவல் தொடர்பு முறை</string>
   <string name="autoopengts_device_id">சாதன ID</string>
-  <string name="autoftp_server">FTP சேவையகம்</string>
   <string name="autoftp_username">பயனர் பெயர்</string>
   <string name="autoftp_password">கடவுச்சொல்</string>
   <string name="autoftp_port">முணையம்</string>

@@ -31,11 +31,9 @@
   <string name="summary_freq_every">Frekvencia:</string>
   <string name="summary_freq_max">maximum</string>
   <string name="summary_dist">Vzdialen.:</string>
-  <string name="summary_dist_regardless">maximum</string>
   <string name="summary_current_filename">Súbor:</string>
   <string name="sharing_location_only">Len polohu</string>
   <string name="sharing_mylocation">Moja poloha</string>
-  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Zdieľať cez</string>
   <!-- general -->
   <string name="foot">stopa</string>
@@ -124,7 +122,6 @@ vyššiu presnosť s nízkymi frekvenciami.
   <string name="keep_fix_title">Ponechať GPS zapnuté medzi korekciami</string>
   <string name="retry_time_title">Trvanie porovnávania presnosti</string>
   <string name="retry_time_summary">Po získaní počiatočnej opravy sa pokúšať o získanie presného bodu až do dosiahnutia zhody s nastavením filtra presnosti.</string>
-  <string name="retry_time_dialog_title">Čas v sekundách</string>
   <string name="retry_time_hint">Zadajte sekundy (max. 9999)</string>
   <string name="display_imperial_title">Zobrazovať imperiálne jednotky</string>
   <string name="display_imperial_summary">Zobrazí stopy, míle a iné imperiálne jednotky, nie metrický systém. (Nastavenia však musia zostať v metrickom systéme)</string>
@@ -135,43 +132,30 @@ vyššiu presnosť s nízkymi frekvenciami.
   <string name="startonapplaunch_title">Štart pri spustení aplikácie</string>
   <string name="startonapplaunch_summary">Spustiť záznam pri spustení aplikácie</string>
   <string name="autoemail_title">E-mail</string>
-  <string name="autoemail_summary">Automaticky odošle súbor so záznamom e-mailom na adresu podľa vášho výberu</string>
   <string name="autoemail_target">Cieľové e-mailové adresy</string>
   <string name="autosend_frequency_display">Po %s minútach</string>
   <string name="autoemail_frequency_whenistop">Pri stlačení tlačidla STOP</string>
   <string name="autoemail_smtp_category">Nastavenia e-mailu</string>
-  <string name="autoemail_username">Meno používateľa</string>
   <string name="autoemail_username_summary">Meno používateľa pre e-mailovú schránku</string>
-  <string name="autoemail_password">Heslo</string>
   <string name="autoemail_password_summary">Heslo pre e-mailovú schránku</string>
-  <string name="autoemail_port">Port</string>
-  <string name="autoemail_port_summary">Port SMTP</string>
   <string name="autoemail_ssl">Použiť SSL?</string>
   <string name="autoemail_ssl_summary">Skúste prepnúť, ak nie je možné nadviazať spojenie</string>
-  <string name="autoemail_server">SMTP server</string>
-  <string name="autoemail_server_summary">Názov hostiteľa SMTP servera</string>
   <string name="autoemail_choosepreset">Poskytovateľ e-mailu</string>
   <string name="autoemail_choosepreset_summary">Určite poskytovateľa alebo vyberte manuálne</string>
   <string name="autoemail_smtp_testemail">Otestovať e-mail</string>
   <string name="autoemail_test">Poslať testovací e-mail pomocou vyššie uvedených nastavení</string>
   <string name="autoemail_sendingtest">Odoslanie testovacieho e-mailu</string>
   <string name="autoemail_testresult_success">Email bol odoslaný</string>
-  <string name="autoemail_invalid_form">Neplatné hodnoty</string>
-  <string name="autoemail_invalid_form_message">Prosím uistite sa, že všetky políčka boli vyplnené správne
-    </string>
   <string name="fix_obtained">Získaná korekcia</string>
   <string name="started_waiting">GPS spustené, čaká na korekciu (fix)</string>
   <string name="gps_stopped">GPS pozastavené</string>
   <string name="stopped">Zastavené</string>
   <string name="osm_setup_title">OpenStreetMap</string>
-  <string name="osm_setup_summary">Nastaví tagy, opis, viditeľnosť a autorizáciu pre odoslanie záznamov z GPS
-    </string>
   <string name="osm_lbl_authorize">Autorizovať túto aplikáciu</string>
+  <string name="osm_resetauth">Odstrániť autorizáciu</string>
   <string name="osm_lbl_authorize_description">Ak chcete odoslať záznamy z GPS do služby OpenStreetMap, musíte
 udeliť oprávnenia tejto aplikácii. Po autorizovaní môžete nastaviť tagy, opisy, a viditeľnosť.
     </string>
-  <string name="osm_upload">OpenStreetMap</string>
-  <string name="osm_resetauth">Odstrániť autorizáciu</string>
   <string name="osm_resetauth_summary">Odstrániť lokálnu autorizáciu použitú ku kontu OSM.</string>
   <string name="osm_auth_error">Pri pokuse o kontaktovanie serverov služby OpenStreetMap sa vyskytla chyba. Skontrolujte či je váš telefón pripojený alebo to skúste znova neskôr.
     </string>
@@ -194,49 +178,28 @@ udeliť oprávnenia tejto aplikácii. Po autorizovaní môžete nastaviť tagy, 
   <string name="emailprovider_msn">Windows Live Mail</string>
   <string name="emailprovider_manual">Manuálne</string>
   <string name="dropbox_setup_title">Dropbox</string>
-  <string name="dropbox_setup_summary">Autorizovať Dropbox na ukladanie súboru</string>
   <string name="dropbox_authorize_description">Ak chcete použiť funkcie služby Dropbox, musíte autorizovať GPSLogger na ukladanie súborov
 na váš účet.
     </string>
-  <string name="dropbox_authorize">Autorizovať</string>
-  <string name="dropbox_unauthorize">Odvolať autorizáciu</string>
   <string name="dropbox_unauthorize_description">Autorizácia k službe Dropbox bola udelená. Súbory sa budú
 ukladať do zložky
 \'Apps\\GPSLogger for Android\'. Ak si to budete želať, môžete
 zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
          </string>
   <string name="dropbox_couldnotauthorize">Nemožno autorizovať Dropbox, prosím skúste to neskôr</string>
-  <string name="dropbox_upload">Dropbox</string>
   <string name="owncloud_setup_title">ownCloud</string>
-  <string name="owncloud_setup_summary">Odošlite svoje súbor na server ownCloud.</string>
-  <string name="owncloud_server">Server</string>
   <string name="owncloud_server_summary">Základná URL pre ownCloud</string>
-  <string name="owncloud_username">Meno používateľa</string>
-  <string name="owncloud_password">Heslo</string>
-  <string name="owncloud_directory">Priečinok</string>
   <string name="owncloud_directory_summary">Priečinok v službe ownCloud. Musí existovať, inak bude odoslanie neúspešné.</string>
-  <string name="owncloud_test">Test odosielania do ownCloud</string>
   <string name="owncloud_test_summary">Odoslať testovací súbor na server ownCloud</string>
   <string name="owncloud_testing">Prebieha test odosielanie do ownCloud</string>
-  <string name="owncloud_invalid_settings">Neplatné nastavenia</string>
-  <string name="owncloud_invalid_summary">Niektoré nastavenia nie sú platné. Prosím uistite sa, že sú vyplnené všetky relevantné polia. </string>
-  <string name="owncloud_upload">ownCloud</string>
   <string name="menu_upload">Odoslať</string>
   <string name="autoemail_from">Z adresy</string>
   <string name="autoemail_from_summary">Niektorí poskytovatelia služieb elektronickej pošty vyžadujú adresy odosielateľa. Použiť ju však iba vtedy, ak je to potrebné.
     </string>
-  <string name="gdocs_upload">Google Drive</string>
-  <string name="gdocs_startauthorization">Autorizácia s Google Drive</string>
-  <string name="gdocs_authorize_summary">Umožní prechod do služby Google Drive, kde musíte autorizovať aplikáciu GPSLogger</string>
-  <string name="gdocs_clearauthorization">Odvolať autorizáciu</string>
-  <string name="gdocs_clearauthorization_summary">Vymaže lokálne nastavenia pre GDocs. Ak chcete natrvalo zrušiť prístup, prejdite na nastavenia účtu Google</string>
   <string name="gdocs_setup_title">Google Drive</string>
-  <string name="gdocs_setup_summary">Autorizovať s Google Drive pre umožnenie odosielania</string>
   <string name="gdocs_test_summary">Odoslať testovací súbor do služby Google Drive</string>
   <string name="gdocs_test_title">Test odosielania</string>
-  <string name="gdocs_testupload_error">Nepodarilo sa odoslať testovací súbor</string>
   <string name="gdocs_testupload_success">Odoslané. Skontrolujte či služba Google Documents obsahuje nový súbor.</string>
-  <string name="email_upload">Odoslať súbor e-mailom</string>
   <string name="autoemail_sendto_csv">E-mailové adresy oddelené čiarkou</string>
   <string name="autosend_enabled">Povoliť autom. odosielanie</string>
   <string name="autosend_enabled_summary">Umožňuje posielať súbory rôznym adresátom</string>
@@ -257,21 +220,14 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
   <string name="log_opengts_title">Záznam na server OpenGTS</string>
   <string name="log_opengts_summary">GPRMC údaje zaslať na online server OpenGTS.</string>
   <string name="opengts_setup_title">OpenGTS</string>
-  <string name="opengts_setup_summary">Odoslať záznamy z GPS na server OpenGTS podľa vášho výberu.</string>
   <string name="autoopengts_server_category">Nastavenia OpenGTS</string>
-  <string name="autoopengts_invalid_form">Neplatné hodnoty</string>
-  <string name="autoopengts_invalid_form_message">Prosím uistite sa, že všetky polia boli vyplnené správne</string>
-  <string name="opengts_upload">Odoslať na OpenGTS</string>
   <string name="autoopengts_server">Server</string>
   <string name="autoopengts_server_summary">Meno hostiteľa alebo IP</string>
-  <string name="opengts_server_port">Port</string>
   <string name="opengts_server_communication_method">Spôsob komunikácie</string>
   <string name="opengts_server_communication_method_summary">Komunikácia založená na HTTP alebo raw-socket komunikácia</string>
   <string name="autoopengts_server_path">Cesta na serveri</string>
   <string name="autoopengts_server_path_summary">Voliteľné a len pre komunikáciu založenú na HTTP. Napríklad \'/gprmc/Data\'</string>
   <string name="autoopengts_device_id">ID zariadenia</string>
-  <string name="autoftp_server">FTP server</string>
-  <string name="autoftp_server_summary">IP adresa alebo meno hostiteľa</string>
   <string name="autoftp_username">Meno používateľa</string>
   <string name="autoftp_password">Heslo</string>
   <string name="autoftp_advanced_settings">Rozšírené nastavenia</string>
@@ -285,7 +241,6 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit">Predvolene FTP cez SSL</string>
   <string name="autoftp_implicit_summary">Nechajte prázdne, ak neviete čo zadať.</string>
-  <string name="autoftp_test">Otestovať odosielanie cez FTP</string>
   <string name="autoftp_test_summary">Odoslať testovací súbor na FTP server</string>
   <string name="autoftp_testing">Test odoslania na FTP</string>
   <string name="autoftp_invalid_settings">Neplatné nastavenia</string>
@@ -293,10 +248,7 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
 všetky dôležité
 polia.
     </string>
-  <string name="ftp_upload">Odoslanie na FTP</string>
   <string name="autoftp_setup_title">FTP</string>
-  <string name="autoftp_setup_summary">Odoslať súbory na server FTP(S). Poznámka: nezahŕňa SFTP.</string>
-  <string name="faq_screen_title">@string/menu_faq</string>
   <string name="menu_faq">Pomocník a FAQ</string>
   <string name="gpsf_missing">Chýbajúca služba</string>
   <string name="gpsf_missing_description">Na použitie tejto funkcie budete potrebovať Google Play Services Framework.</string>

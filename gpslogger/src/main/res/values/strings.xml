@@ -41,13 +41,11 @@
     <string name="summary_freq_every">Frequency:</string>
     <string name="summary_freq_max">maximum</string>
     <string name="summary_dist">Distance:</string>
-    <string name="summary_dist_regardless">maximum</string>
     <string name="summary_current_filename">File:</string>
 
 
     <string name="sharing_location_only">Location only</string>
     <string name="sharing_mylocation">My location</string>
-    <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
     <string name="sharing_via">Share via</string>
 
     <!-- general -->
@@ -153,7 +151,6 @@
 
     <string name="retry_time_title">Duration to match accuracy</string>
     <string name="retry_time_summary">After acquiring an initial fix, keep trying for this long to get an accurate point to match the accuracy filter setting.</string>
-    <string name="retry_time_dialog_title">Time in seconds</string>
     <string name="retry_time_hint">Enter seconds (max 9999)</string>
 
 
@@ -170,10 +167,6 @@
     <string name="startonapplaunch_summary">Start logging when the app is launched</string>
 
     <string name="autoemail_title">Email</string>
-    <string name="autoemail_summary">Automatically emails the log file to an address of your choice</string>
-
-
-
 
     <string name="please_wait">Please wait</string>
 
@@ -187,26 +180,17 @@
 
 
     <string name="autoemail_smtp_category">Email Settings</string>
-    <string name="autoemail_username">Username</string>
     <string name="autoemail_username_summary">Username with your email provider</string>
-    <string name="autoemail_password">Password</string>
     <string name="autoemail_password_summary">Password with your email provider</string>
-    <string name="autoemail_port">Port</string>
-    <string name="autoemail_port_summary">SMTP Port</string>
     <string name="autoemail_ssl">Use SSL?</string>
     <string name="autoemail_ssl_summary">Try toggling this if you cannot connect</string>
-    <string name="autoemail_server">SMTP Server</string>
-    <string name="autoemail_server_summary">Hostname of the SMTP server to use</string>
+
     <string name="autoemail_choosepreset">Mail Provider</string>
     <string name="autoemail_choosepreset_summary">Pick a provider or choose manual</string>
     <string name="autoemail_smtp_testemail">Test email</string>
     <string name="autoemail_test">Send a test email using the above settings</string>
     <string name="autoemail_sendingtest">Sending a test email</string>
     <string name="autoemail_testresult_success">Email was sent</string>
-
-    <string name="autoemail_invalid_form">Invalid values</string>
-    <string name="autoemail_invalid_form_message">Please ensure that all of the fields have been filled in properly
-    </string>
 
     <string name="fix_obtained">Fix obtained</string>
     <string name="started_waiting">GPS started, waiting for fix</string>
@@ -216,20 +200,13 @@
 
 
     <string name="osm_setup_title">OpenStreetMap</string>
-    <string name="osm_setup_summary">Set tags, description, visibility and authorization for uploading GPS Traces
-    </string>
 
     <string name="osm_lbl_authorize">Authorize this app</string>
+    <string name="osm_resetauth">Clear authorization</string>
     <string name="osm_lbl_authorize_description">You will need to grant this app permissions in order to upload GPS
         traces to OpenStreetMap. You can set tags, descriptions and visibility here after you have authorized this app.
     </string>
 
-
-
-
-    <string name="osm_upload">OpenStreetMap</string>
-
-    <string name="osm_resetauth">Clear authorization</string>
     <string name="osm_resetauth_summary">Remove the local authorization used to talk to your OSM account.</string>
     <string name="osm_auth_error">An error occurred while trying to contact the OpenStreetMap servers. Check that your
         phone has a connection or please try again later.
@@ -261,55 +238,34 @@
     <string name="emailprovider_manual">Manual</string>
 
     <string name="dropbox_setup_title">Dropbox</string>
-    <string name="dropbox_setup_summary">Authorize with Dropbox to allow file uploads</string>
     <string name="dropbox_authorize_description">To use Dropbox features, you will need to authorize GPSLogger to upload
         files to your account.
     </string>
-    <string name="dropbox_authorize">Authorize</string>
-    <string name="dropbox_unauthorize">Remove Authorization</string>
+
     <string name="dropbox_unauthorize_description">You are authorized with Dropbox. Files will be uploaded to
         \'Apps\\GPSLogger for Android\' You can unlink GPSLogger from Dropbox if you wish.
     </string>
     <string name="dropbox_couldnotauthorize">Could not authorize with Dropbox, please try again later</string>
-    <string name="dropbox_upload">Dropbox</string>
 
     <string name="owncloud_setup_title">ownCloud</string>
-    <string name="owncloud_setup_summary">Upload your files to an ownCloud server.</string>
-    <string name="owncloud_server">Server</string>
     <string name="owncloud_server_summary">ownCloud Base URL</string>
-    <string name="owncloud_username">Username</string>
-    <string name="owncloud_password">Password</string>
-    <string name="owncloud_directory">Folder</string>
     <string name="owncloud_directory_summary">Folder to use on ownCloud server. Ensure that it exists or upload will fail.</string>
-    <string name="owncloud_test">Test ownCloud Upload</string>
     <string name="owncloud_test_summary">Upload a test file to the ownCloud server</string>
    
     <string name="owncloud_testing">Testing ownCloud upload</string>
-    <string name="owncloud_invalid_settings">Invalid settings</string>
-    <string name="owncloud_invalid_summary">Some of your settings are invalid. Please ensure that you have filled out all relevant fields. </string>
-    <string name="owncloud_upload">ownCloud</string>
 
     <string name="menu_upload">Upload</string>
-
 
     <string name="autoemail_from">From address</string>
     <string name="autoemail_from_summary">Some email providers require a from address. Use this only if you need it.
     </string>
 
-    <string name="gdocs_upload">Google Drive</string>
-
-    <string name="gdocs_startauthorization">Authorize with Google Drive</string>
-    <string name="gdocs_authorize_summary">Takes you to Google Drive where you need to authorize GPSLogger</string>
-    <string name="gdocs_clearauthorization">Clear Authorization</string>
-    <string name="gdocs_clearauthorization_summary">Forgets local GDocs settings. To permanently revoke access, go to Google Account settings</string>
+    <string name="gdocs_clearauthorization_summary">Forgets local Google Drive settings. To permanently revoke access, go to Google Account settings</string>
     <string name="gdocs_setup_title">Google Drive</string>
-    <string name="gdocs_setup_summary">Authorize with Google Drive to allow uploads</string>
     <string name="gdocs_test_summary">Upload a test file to Google Drive</string>
     <string name="gdocs_test_title">Test upload</string>
-    <string name="gdocs_testupload_error">Could not upload a test file</string>
-    <string name="gdocs_testupload_success">Uploaded. Please check your Google Documents for a new file.</string>
 
-    <string name="email_upload">Email a file</string>
+    <string name="gdocs_testupload_success">Uploaded. Please check your Google Documents for a new file.</string>
 
     <string name="autoemail_sendto_csv">Comma separated email addresses</string>
 
@@ -338,21 +294,14 @@
     <string name="log_opengts_title">Log to OpenGTS Server</string>
     <string name="log_opengts_summary">Send GPRMC data to an online OpenGTS server.</string>
     <string name="opengts_setup_title">OpenGTS</string>
-    <string name="opengts_setup_summary">Send GPS traces to an OpenGTS server of your choice.</string>
     <string name="autoopengts_server_category">OpenGTS Settings</string>
-    <string name="autoopengts_invalid_form">Invalid values</string>
-    <string name="autoopengts_invalid_form_message">Please ensure that all of the fields have been filled in properly</string>
-    <string name="opengts_upload">Send to OpenGTS</string>
     <string name="autoopengts_server">Server</string>
     <string name="autoopengts_server_summary">Hostname or IP</string>
-    <string name="opengts_server_port">Port</string>
     <string name="opengts_server_communication_method">Communication Method</string>
     <string name="opengts_server_communication_method_summary">HTTP-based or Raw Socket Based communication</string>
     <string name="autoopengts_server_path">Server Path</string>
     <string name="autoopengts_server_path_summary">Optional and only for HTTP-based communication. For example \'/gprmc/Data\'</string>
     <string name="autoopengts_device_id">Device ID</string>
-    <string name="autoftp_server">FTP Server</string>
-    <string name="autoftp_server_summary">IP address or hostname</string>
     <string name="autoftp_username">Username</string>
     <string name="autoftp_password">Password</string>
     <string name="autoftp_advanced_settings">Advanced settings</string>
@@ -366,19 +315,16 @@
     <string name="autoftp_ssltls_tls">TLS</string>
     <string name="autoftp_implicit">Implicit FTP over SSL</string>
     <string name="autoftp_implicit_summary">Leave unchecked if you don\'t know.</string>
-    <string name="autoftp_test">Test FTP Upload</string>
     <string name="autoftp_test_summary">Upload a test file to the FTP server</string>
     <string name="autoftp_testing">Testing FTP upload</string>
     <string name="autoftp_invalid_settings">Invalid settings</string>
     <string name="autoftp_invalid_summary">Some of your settings are invalid. Please ensure that you have filled out all
         relevant fields.
     </string>
-    <string name="ftp_upload">FTP upload</string>
 
     <string name="autoftp_setup_title">FTP</string>
-    <string name="autoftp_setup_summary">Upload your files to an FTP(S) server. Note: This does not cover SFTP.</string>
 
-    <string name="faq_screen_title">@string/menu_faq</string>
+    <string name="faq_screen_title" translatable="false">@string/menu_faq</string>
     <string name="menu_faq">Help and FAQ</string>
     <string name="gpsf_missing">Missing Service</string>
     <string name="gpsf_missing_description">You will need Google Play Services Framework to use this feature.</string>

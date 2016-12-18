@@ -27,7 +27,6 @@
   <string name="summary_freq_every">Frekwensie:</string>
   <string name="summary_freq_max">maksimum</string>
   <string name="summary_dist">Afstand:</string>
-  <string name="summary_dist_regardless">maksimum</string>
   <string name="summary_current_filename">Lêer:</string>
   <string name="sharing_location_only">Slegs ligging</string>
   <string name="sharing_mylocation">My ligging</string>
@@ -47,6 +46,5 @@
   <string name="enabledisablegps_summary">Gaan na die telefoon instellings om verskaffers in of uit staat te stel.</string>
   <string name="autoemail_smtp_category">Epos Instellings</string>
   <string name="autoemail_test">Stuur \'n toets epos met die instellings hierbo</string>
-  <string name="gdocs_clearauthorization_summary">Vergeet plaaslike GDocs instellings. Om toegang permanent te herroep, gaan na Google Rekening instellings</string>
   <string name="autoopengts_server_category">OpenGTS Instellings</string>
 </resources>

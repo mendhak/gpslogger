@@ -10,10 +10,10 @@
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="autoftp_server"
-            android:title="@string/autoftp_server"
-            android:summary="@string/autoftp_server_summary"
-            android:dialogTitle="@string/autoftp_server"
-            android:hint="@string/autoftp_server_summary"/>
+            android:title="@string/autoopengts_server"
+            android:summary="@string/autoopengts_server_summary"
+            android:dialogTitle="@string/autoopengts_server"
+            android:hint="@string/autoopengts_server_summary"/>
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="autoftp_username"
@@ -32,7 +32,7 @@
             android:dialogTitle="@string/autoftp_directory"
             />
 
-    <Preference android:title="@string/autoftp_test"
+    <Preference android:title="@string/gdocs_test_title"
                 android:summary="@string/autoftp_test_summary" android:key="autoftp_test"/>
 
     <PreferenceCategory android:title="@string/autoftp_advanced_settings">

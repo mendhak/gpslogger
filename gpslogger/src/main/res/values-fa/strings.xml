@@ -31,11 +31,9 @@
   <string name="summary_freq_every">فراواني:</string>
   <string name="summary_freq_max">حداکثر</string>
   <string name="summary_dist">فاصله:</string>
-  <string name="summary_dist_regardless">حداکثر</string>
   <string name="summary_current_filename">پرونده:</string>
   <string name="sharing_location_only">مکان فقط</string>
   <string name="sharing_mylocation">مکان من</string>
-  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">اشتراک از طریق</string>
   <!-- general -->
   <string name="foot">&#160;فوت</string>
@@ -81,11 +79,7 @@
   <!-- Settings -->
   <string name="new_file_creation_onceaday">روزی یک بار</string>
   <string name="time_before_logging_dialog_title">زمان (ثانیه)</string>
-  <string name="retry_time_dialog_title">زمان (ثانیه)</string>
   <string name="autoemail_title">رایانامه</string>
-  <string name="autoemail_username">نام کاربری</string>
-  <string name="autoemail_password">گذرواژه</string>
-  <string name="autoemail_port">شماره Port</string>
   <string name="autoemail_ssl">استفاده از SSL؟</string>
   <string name="autoemail_testresult_success">رایانامه فرستاده شد</string>
   <string name="osm_setup_title">OpenStreetMap</string>
@@ -93,11 +87,7 @@
   <string name="emailprovider_google">Google Mail</string>
   <string name="emailprovider_yahoo">Yahoo! Mail</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
-  <string name="owncloud_username">نام کاربری</string>
-  <string name="owncloud_password">گذرواژه</string>
-  <string name="owncloud_directory">پوشه</string>
   <string name="gdocs_setup_title">Google Drive</string>
-  <string name="email_upload">فرستادن فایل با رایانامه</string>
   <string name="autosend_sendzip_title">ارسال پرونده‌ی zip</string>
   <string name="autosend_sending">فرستادن خودکار</string>
   <string name="shortcut_start">آغاز</string>

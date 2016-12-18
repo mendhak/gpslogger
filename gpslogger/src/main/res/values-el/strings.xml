@@ -31,11 +31,9 @@
   <string name="summary_freq_every">Συχνότητα:</string>
   <string name="summary_freq_max">μέγιστο</string>
   <string name="summary_dist">Απόσταση:</string>
-  <string name="summary_dist_regardless">ελάχιστο</string>
   <string name="summary_current_filename">Αρχείο:</string>
   <string name="sharing_location_only">Μόνο τοποθεσία</string>
   <string name="sharing_mylocation">Η τοποθεσία μου</string>
-  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Μοιραστείτε μέσω</string>
   <!-- general -->
   <string name="foot">πόδι</string>
@@ -118,7 +116,6 @@
   <string name="keep_fix_summary">Να είστε προσεκτικοί, αυτό θα μειώσει δραματικά τη διάρκεια ζωής της μπαταρίας. Χρήση μόνο
     για μεγαλύτερη ακρίβεια με χαμηλές συχνότητες.
     </string>
-  <string name="retry_time_dialog_title">Χρόνος σε δευτερόλεπτα</string>
   <string name="retry_time_hint">Εισάγετε δευτερόλεπτα (έως 9999)</string>
   <string name="display_imperial_title">Προβολή μονάδων στο imperial σύστημα</string>
   <string name="osm_description">Περιγραφή</string>
@@ -137,33 +134,15 @@
   <string name="emailprovider_yahoo">Yahoo! Mail</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
   <string name="dropbox_setup_title">Dropbox</string>
-  <string name="dropbox_setup_summary">Εξουσιοδότηση με το Dropbox για το ανέβασμα αρχείων</string>
-  <string name="dropbox_authorize">Εξουσιοδότηση</string>
-  <string name="dropbox_unauthorize">Κατάργηση εξουσιοδότησης</string>
   <string name="dropbox_couldnotauthorize">Δεν μπόρεσε να γίνει εξουσιοδότηση με το Dropbox, παρακαλώ δοκιμάστε αργότερα</string>
-  <string name="dropbox_upload">Dropbox</string>
   <string name="owncloud_setup_title">ownCloud</string>
-  <string name="owncloud_setup_summary">Ανεβάσετε τα αρχεία σας σε ένα διακομιστή ownCloud.</string>
-  <string name="owncloud_server">Διακομιστή</string>
   <string name="owncloud_server_summary">ownCloud βασικό URL</string>
-  <string name="owncloud_username">Όνομα χρήστη</string>
-  <string name="owncloud_password">Κωδικό πρόσβασης</string>
-  <string name="owncloud_directory">Φάκελος</string>
-  <string name="owncloud_test">Δοκιμή για αποστολή στο ownCloud</string>
   <string name="owncloud_test_summary">Ανέβασμα δοκιμαστικού αρχείου στο διακομιστή του ownCloud</string>
   <string name="owncloud_testing">Δοκιμή ανεβάσματος στο ownCloud</string>
-  <string name="owncloud_invalid_settings">Λανθασμένες ρυθμίσεις</string>
-  <string name="owncloud_invalid_summary">Μερικές από τις ρυθμίσεις σας είναι λανθασμένες. Παρακαλώ, βεβαιωθείτε ότι έχετε συμπληρώσει όλα τα απαραίτητα πεδία. </string>
-  <string name="owncloud_upload">ownCloud</string>
   <string name="menu_upload">Ανέβασμα</string>
   <string name="autoemail_from">Από τη διεύθυνση</string>
   <string name="autoemail_from_summary">Ορισμένοι πάροχη ηλεκτρονικού ταχυδρομίου απαιτούν την χρήση της επιλογή από διεύθυνση. Κάντε χρήση μόνο αν απαιτείται.    </string>
-  <string name="gdocs_upload">Google Drive</string>
-  <string name="gdocs_startauthorization">Εξουσιοδότηση με το Google Drive</string>
-  <string name="gdocs_authorize_summary">Σας μεταφέρει στο Google Drive, όπου θα πρέπει να εξουσιοδοτήσετε το GPSLogger</string>
-  <string name="gdocs_clearauthorization">Κατάργηση εξουσιοδότησης</string>
   <string name="gdocs_setup_title">Google Drive</string>
-  <string name="gdocs_testupload_error">Δεν μπόρεσα να ανεβάσω το αρχείο δοκιμής</string>
   <string name="autoftp_ssltls">SSL/TLS</string>
   <string name="autoftp_ssltls_summary">Κανένα, SSL ή TLS. Χρησιμοποιήστε την επιλογή κανένα για κανονικές μη ασφαλείς συνδέσεις.</string>
   <string name="autoftp_ssltls_none">Κανένα</string>

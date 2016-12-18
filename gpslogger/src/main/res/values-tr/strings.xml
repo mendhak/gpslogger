@@ -31,11 +31,9 @@
   <string name="summary_freq_every">Frekans:</string>
   <string name="summary_freq_max">maksimum</string>
   <string name="summary_dist">Mesafe:</string>
-  <string name="summary_dist_regardless">maksimum</string>
   <string name="summary_current_filename">Dosya:</string>
   <string name="sharing_location_only">Sadece konum</string>
   <string name="sharing_mylocation">Konumum</string>
-  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Şununla paylaş</string>
   <!-- general -->
   <string name="foot">&#160;ayak</string>
@@ -114,7 +112,6 @@ Otomatik gönderme özellikleri ile çok iyi çalışmayabilir. Çünkü sadece 
   <string name="time_before_logging_hint">Saniye (9999 max) girin</string>
   <string name="keep_fix_summary">Dikkat et, bu dramatik ömrünü azaltacaktır. Sadece düşük frekansları ile daha yüksek kesinlik için kullanın.    </string>
   <string name="keep_fix_title">Düzeltmeler arasında GPS Kullan</string>
-  <string name="retry_time_dialog_title">Saniye cinsinden</string>
   <string name="retry_time_hint">Saniye girin (maks 9999)</string>
   <string name="enabledisablegps_title">GPS Aç/Kapat</string>
   <string name="startonapplaunch_title">Başlangıçta çalıştır</string>
@@ -122,22 +119,15 @@ Otomatik gönderme özellikleri ile çok iyi çalışmayabilir. Çünkü sadece 
   <string name="autoemail_target">Hedef e-posta adresleri</string>
   <string name="autosend_frequency_display">%s dakika sonra</string>
   <string name="autoemail_smtp_category">E-posta ayarları</string>
-  <string name="autoemail_username">Kullanıcı adı</string>
-  <string name="autoemail_password">Şifre</string>
-  <string name="autoemail_port">Bağlantı noktası</string>
-  <string name="autoemail_port_summary">SMTP bağlantı noktası</string>
   <string name="autoemail_ssl">SSL kullanılsın mı?</string>
-  <string name="autoemail_server">SMTP Sunucusu</string>
   <string name="autoemail_choosepreset">Posta sağlayıcısı</string>
   <string name="autoemail_smtp_testemail">Sınama e-postası</string>
   <string name="autoemail_testresult_success">E-posta gönderildi</string>
-  <string name="autoemail_invalid_form">Geçersiz değerler</string>
   <string name="fix_obtained">Konum belirlendi</string>
   <string name="started_waiting">GPS başlatıldı, düzeltme bekleniyor</string>
   <string name="gps_stopped">GPS duraklatıldı</string>
   <string name="stopped">Durdu</string>
   <string name="osm_setup_title">OpenStreetMap</string>
-  <string name="osm_setup_summary">Etiketler, açıklama, görünürlük ve GPS izi yükleme izinlerini ayarlayın</string>
   <string name="osm_lbl_authorize">Bu uygulamaya izin ver</string>
   <string name="osm_visibility">Görünürlük</string>
   <string name="osm_description">Açıklama</string>
@@ -149,16 +139,8 @@ Otomatik gönderme özellikleri ile çok iyi çalışmayabilir. Çünkü sadece 
   <string name="emailprovider_msn">Windows Live Mail</string>
   <string name="emailprovider_manual">El ile</string>
   <string name="dropbox_setup_title">Dropbox</string>
-  <string name="dropbox_authorize">Yetki</string>
-  <string name="dropbox_unauthorize">Yetkilendirmeyi kaldır</string>
-  <string name="dropbox_upload">Dropbox</string>
-  <string name="owncloud_server">Sunucu</string>
-  <string name="owncloud_username">Kullanıcı adı</string>
-  <string name="owncloud_password">Şifre</string>
-  <string name="owncloud_directory">Klasör</string>
   <string name="menu_upload">Karşıya yükleme</string>
   <string name="autoemail_from">Adresinden</string>
-  <string name="gdocs_upload">Google Drive</string>
   <string name="gdocs_setup_title">Google Drive</string>
   <string name="gdocs_test_title">Test yükleme</string>
   <string name="menu_autosend_now">Şimdi otomatik gönder</string>
@@ -166,11 +148,8 @@ Otomatik gönderme özellikleri ile çok iyi çalışmayabilir. Çünkü sadece 
   <string name="summary_autosend">Otomatik gönder:</string>
   <string name="shortcut_start">Başlat</string>
   <string name="shortcut_stop">Dur</string>
-  <string name="autoopengts_invalid_form">Geçersiz değerler</string>
   <string name="autoopengts_server">Sunucu</string>
   <string name="autoopengts_server_summary">Ana bilgisayar adı veya IP</string>
-  <string name="opengts_server_port">Bağlantı noktası</string>
-  <string name="autoftp_server">FTP sunucusu</string>
   <string name="autoftp_username">Kullanıcı adı</string>
   <string name="autoftp_password">Şifre</string>
   <string name="autoftp_port">Bağlantı noktası</string>
@@ -179,7 +158,6 @@ Otomatik gönderme özellikleri ile çok iyi çalışmayabilir. Çünkü sadece 
   <string name="autoftp_ssltls_none">Hiçbiri</string>
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
-  <string name="ftp_upload">FTP yükleme</string>
   <string name="autoftp_setup_title">FTP</string>
   <string name="menu_faq">Yardım ve SSS</string>
   <string name="txt_provider">Sağlayıcı:</string>

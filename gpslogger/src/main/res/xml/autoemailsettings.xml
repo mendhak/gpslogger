@@ -17,24 +17,23 @@
                         android:entries="@array/autoemail_presets" android:defaultValue="0"
                         android:entryValues="@array/autoemail_presetvalues"/>
 
-        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_username" android:title="@string/autoemail_username"
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_username" android:title="@string/autoftp_username"
                             android:summary="@string/autoemail_username_summary"
-                            android:dialogTitle="@string/autoemail_username"/>
+                            android:dialogTitle="@string/autoftp_username"/>
         <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_from" android:title="@string/autoemail_from"
                             android:summary="@string/autoemail_from_summary"
                             android:dialogTitle="@string/autoemail_from" android:defaultValue=""/>
-        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_password" android:title="@string/autoemail_password"
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_password" android:title="@string/autoftp_password"
                             android:summary="@string/autoemail_password_summary"
-                            android:dialogTitle="@string/autoemail_password"
+                            android:dialogTitle="@string/autoftp_password"
                             android:password="true"
                 />
-        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_server" android:title="@string/autoemail_server"
-                            android:summary="@string/autoemail_server_summary"
-                            android:dialogTitle="@string/autoemail_server"/>
-        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_port" android:title="@string/autoemail_port"
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_server" android:title="@string/autoopengts_server"
+                            android:summary="@string/autoopengts_server_summary"
+                            android:dialogTitle="@string/autoopengts_server"/>
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="smtp_port" android:title="@string/autoftp_port"
                             android:defaultValue="25"
-                            android:summary="@string/autoemail_port_summary"
-                            android:dialogTitle="@string/autoemail_port"/>
+                            android:dialogTitle="@string/autoftp_port"/>
         <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
             android:key="smtp_ssl" android:title="@string/autoemail_ssl"
                             android:summary="@string/autoemail_ssl_summary"/>

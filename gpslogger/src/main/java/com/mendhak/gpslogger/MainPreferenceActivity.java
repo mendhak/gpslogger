@@ -135,8 +135,8 @@ public class MainPreferenceActivity extends AppCompatActivity {
     private boolean isFormValid(){
         if(preferenceFragment instanceof PreferenceValidator){
             if( !((PreferenceValidator)preferenceFragment).isValid() ){
-                Dialogs.alert(getString(R.string.autoemail_invalid_form),
-                        getString(R.string.autoemail_invalid_form_message),
+                Dialogs.alert(getString(R.string.autoftp_invalid_settings),
+                        getString(R.string.autoftp_invalid_summary),
                         this);
                 return false;
             }

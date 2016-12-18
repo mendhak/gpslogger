@@ -16,9 +16,9 @@
                             android:summary="@string/autoopengts_server_summary"
                             android:dialogTitle="@string/autoopengts_server"/>
         <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="opengts_server_port"
-                            android:title="@string/opengts_server_port"
+                            android:title="@string/autoftp_port"
                             android:inputType="number"
-                            android:dialogTitle="@string/opengts_server_port"/>
+                            android:dialogTitle="@string/autoftp_port"/>
         <com.afollestad.materialdialogs.prefs.MaterialListPreference android:key="opengts_server_communication_method"
                         android:title="@string/opengts_server_communication_method"
                         android:summary="@string/opengts_server_communication_method_summary"

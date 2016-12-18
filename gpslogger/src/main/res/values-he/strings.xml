@@ -26,11 +26,9 @@
   <string name="summary_freq_every">תדירות:</string>
   <string name="summary_freq_max">מרבית</string>
   <string name="summary_dist">מרחק:</string>
-  <string name="summary_dist_regardless">מרבי</string>
   <string name="summary_current_filename">קובץ:</string>
   <string name="sharing_location_only">מיקום בלבד</string>
   <string name="sharing_mylocation">המיקום שלי</string>
-  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.co.il/maps?q=%s,%s</string>
   <string name="sharing_via">שתף דרך</string>
   <!-- general -->
   <string name="foot">רגל</string>

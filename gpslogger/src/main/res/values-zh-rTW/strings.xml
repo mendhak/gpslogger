@@ -31,11 +31,9 @@
   <string name="summary_freq_every">頻率：</string>
   <string name="summary_freq_max">最大值</string>
   <string name="summary_dist">距離：</string>
-  <string name="summary_dist_regardless">最大值</string>
   <string name="summary_current_filename">檔案：</string>
   <string name="sharing_location_only">僅位置</string>
   <string name="sharing_mylocation">我的位置</string>
-  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">分享方式</string>
   <!-- general -->
   <string name="foot">&#160;英尺</string>
@@ -123,7 +121,6 @@
   <string name="keep_fix_title">Keep GPS on between fixes</string>
   <string name="retry_time_title">足夠精確度重試時間</string>
   <string name="retry_time_summary">取得一筆起始的修正後，持續嘗試得到符合精確度過濾器標準的時間。</string>
-  <string name="retry_time_dialog_title">以秒計</string>
   <string name="retry_time_hint">輸入秒數 (最大9999)</string>
   <string name="display_imperial_title">Display Imperial units</string>
   <string name="display_imperial_summary">Display feet, miles and pints, none of that newfangled metric stuff. (Preferences must still be in metrics)</string>
@@ -134,42 +131,30 @@
   <string name="startonapplaunch_title">Start on app launch</string>
   <string name="startonapplaunch_summary">Start logging when the app is launched</string>
   <string name="autoemail_title">Email</string>
-  <string name="autoemail_summary">自動的通過Email傳送日誌到你選取的Email位址。</string>
   <string name="autoemail_target">Target email addresses</string>
   <string name="autosend_frequency_display">%s 分鐘後</string>
   <string name="autoemail_frequency_whenistop">當我點擊停止</string>
   <string name="autoemail_smtp_category">Email 設定</string>
-  <string name="autoemail_username">帳號</string>
   <string name="autoemail_username_summary">使用者名與您的電子郵件供應商</string>
-  <string name="autoemail_password">密碼</string>
   <string name="autoemail_password_summary">你的電子郵件密碼</string>
-  <string name="autoemail_port">Port</string>
-  <string name="autoemail_port_summary">SMTP 埠</string>
   <string name="autoemail_ssl">是否使用 SSL?</string>
   <string name="autoemail_ssl_summary">如果連線失敗請嘗試切換這個選項</string>
-  <string name="autoemail_server">SMTP 伺服器</string>
-  <string name="autoemail_server_summary">SMTP 伺服器的名稱</string>
   <string name="autoemail_choosepreset">Mail Provider</string>
   <string name="autoemail_choosepreset_summary">Pick a provider or choose manual</string>
   <string name="autoemail_smtp_testemail">電子郵件測試</string>
   <string name="autoemail_test">用上列的設定發送測試電子信</string>
   <string name="autoemail_sendingtest">正在送出測試郵件</string>
   <string name="autoemail_testresult_success">電子郵件已送出</string>
-  <string name="autoemail_invalid_form">不正確的值</string>
-  <string name="autoemail_invalid_form_message">請確認每個欄位均已填妥    </string>
   <string name="fix_obtained">已獲得修正</string>
   <string name="started_waiting">GPS 已啟動，正在等待修正</string>
   <string name="gps_stopped">GPS 已停止</string>
   <string name="stopped">已停止</string>
   <string name="osm_setup_title">OpenStreetMap</string>
-  <string name="osm_setup_summary">Set tags, description, visibility and authorization for uploading GPS Traces
-    </string>
   <string name="osm_lbl_authorize">授權這軟件</string>
+  <string name="osm_resetauth">Clear authorization</string>
   <string name="osm_lbl_authorize_description">You will need to grant this app permissions in order to upload GPS
         traces to OpenStreetMap. You can set tags, descriptions and visibility here after you have authorized this app.
     </string>
-  <string name="osm_upload">OpenStreetMap</string>
-  <string name="osm_resetauth">Clear authorization</string>
   <string name="osm_resetauth_summary">Remove the local authorization used to talk to your OSM account.</string>
   <string name="osm_auth_error">An error occurred while trying to contact the OpenStreetMap servers. Check that your
         phone has a connection or please try again later.
@@ -193,47 +178,26 @@
   <string name="emailprovider_msn">Windows Live Mail</string>
   <string name="emailprovider_manual">Manual</string>
   <string name="dropbox_setup_title">Dropbox</string>
-  <string name="dropbox_setup_summary">Authorize with Dropbox to allow file uploads</string>
   <string name="dropbox_authorize_description">To use Dropbox features, you will need to authorize GPSLogger to upload
         files to your account.
     </string>
-  <string name="dropbox_authorize">Authorize</string>
-  <string name="dropbox_unauthorize">Remove Authorization</string>
   <string name="dropbox_unauthorize_description">You are authorized with Dropbox. Files will be uploaded to
         \'Apps\\GPSLogger for Android\' You can unlink GPSLogger from Dropbox if you wish.
     </string>
   <string name="dropbox_couldnotauthorize">Could not authorize with Dropbox, please try again later</string>
-  <string name="dropbox_upload">Dropbox</string>
   <string name="owncloud_setup_title">ownCloud</string>
-  <string name="owncloud_setup_summary">Upload your files to an ownCloud server.</string>
-  <string name="owncloud_server">Server</string>
   <string name="owncloud_server_summary">ownCloud Base URL</string>
-  <string name="owncloud_username">Username</string>
-  <string name="owncloud_password">Password</string>
-  <string name="owncloud_directory">Folder</string>
   <string name="owncloud_directory_summary">Folder to use on ownCloud server. Ensure that it exists or upload will fail.</string>
-  <string name="owncloud_test">Test ownCloud Upload</string>
   <string name="owncloud_test_summary">Upload a test file to the ownCloud server</string>
   <string name="owncloud_testing">Testing ownCloud upload</string>
-  <string name="owncloud_invalid_settings">Invalid settings</string>
-  <string name="owncloud_invalid_summary">Some of your settings are invalid. Please ensure that you have filled out all relevant fields. </string>
-  <string name="owncloud_upload">ownCloud</string>
   <string name="menu_upload">Upload</string>
   <string name="autoemail_from">From address</string>
   <string name="autoemail_from_summary">Some email providers require a from address. Use this only if you need it.
     </string>
-  <string name="gdocs_upload">Google Drive</string>
-  <string name="gdocs_startauthorization">Authorize with Google Drive</string>
-  <string name="gdocs_authorize_summary">導至Google Drive以授權給GPSLogger</string>
-  <string name="gdocs_clearauthorization">清除授權</string>
-  <string name="gdocs_clearauthorization_summary">清除本機端Google文件設定。若要永久撤銷授權，請至Google帳戶設定。</string>
   <string name="gdocs_setup_title">Google雲端硬碟</string>
-  <string name="gdocs_setup_summary">授權Google雲端硬碟以上傳資料</string>
   <string name="gdocs_test_summary">上傳一個測試檔到Google雲端硬碟</string>
   <string name="gdocs_test_title">上傳測試</string>
-  <string name="gdocs_testupload_error">無法上傳測試檔案</string>
   <string name="gdocs_testupload_success">已上傳完成，請檢查您的Google雲端文件。</string>
-  <string name="email_upload">利用電子郵件傳送檔案</string>
   <string name="autoemail_sendto_csv">用逗號隔開的郵件地址</string>
   <string name="autosend_enabled">允許自動傳送</string>
   <string name="autosend_enabled_summary">允許傳送至不同的目的地</string>
@@ -253,21 +217,14 @@
   <string name="log_opengts_title">記錄至OpenGTS伺服器</string>
   <string name="log_opengts_summary">傳送GPRMC資料至線上OpenGTS伺服器</string>
   <string name="opengts_setup_title">OpenGTS</string>
-  <string name="opengts_setup_summary">將 GPS 軌跡發送到您所選擇的 OpenGTS 伺服器</string>
   <string name="autoopengts_server_category">OpenGTS 設定</string>
-  <string name="autoopengts_invalid_form">不正確的值</string>
-  <string name="autoopengts_invalid_form_message">請確認每個欄位均已填妥</string>
-  <string name="opengts_upload">發送至 OpenGTS</string>
   <string name="autoopengts_server">伺服器</string>
   <string name="autoopengts_server_summary">主機名稱或 IP</string>
-  <string name="opengts_server_port">埠</string>
   <string name="opengts_server_communication_method">通訊方式</string>
   <string name="opengts_server_communication_method_summary">基於 HTTP 或原始 Socket 的通訊</string>
   <string name="autoopengts_server_path">伺服器路徑</string>
   <string name="autoopengts_server_path_summary">非必選，限基於 HTTP 的通訊。例如 \' / gprmc/Data\'</string>
   <string name="autoopengts_device_id">裝置 ID</string>
-  <string name="autoftp_server">FTP 伺服器</string>
-  <string name="autoftp_server_summary">IP 位址或主機名稱</string>
   <string name="autoftp_username">使用者名稱</string>
   <string name="autoftp_password">密碼</string>
   <string name="autoftp_advanced_settings">進階設定</string>

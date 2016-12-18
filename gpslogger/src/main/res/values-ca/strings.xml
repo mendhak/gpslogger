@@ -27,7 +27,6 @@
   <string name="summary_freq_every">Freqüència:</string>
   <string name="summary_freq_max">màxim</string>
   <string name="summary_dist">Distància:</string>
-  <string name="summary_dist_regardless">màxim</string>
   <string name="summary_current_filename">Arxiu:</string>
   <string name="sharing_location_only">Només ubicació</string>
   <string name="sharing_mylocation">La meva ubicació</string>
@@ -76,26 +75,14 @@
   <string name="pref_performance_title">Rendiment</string>
   <string name="time_before_logging_dialog_title">Temps en segons</string>
   <string name="enabledisablegps_title">Activar/Desactivar GPS</string>
-  <string name="autoemail_username">Nom d\'usuari</string>
-  <string name="autoemail_password">Contrasenya</string>
-  <string name="autoemail_port">Port</string>
-  <string name="autoemail_port_summary">Port de SMTP</string>
   <string name="autoemail_ssl">Utilitzar SSL?</string>
-  <string name="autoemail_server">Servidor SMTP</string>
   <string name="autoemail_choosepreset">Proveïdor de correu</string>
-  <string name="autoemail_invalid_form">Dades invàlides</string>
   <string name="stopped">Aturat</string>
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_lbl_authorize">Autoritzar aquest aplicació</string>
-  <string name="osm_upload">OpenStreetMap</string>
   <string name="osm_visibility">Visibilitat</string>
   <string name="osm_description">Descripció</string>
   <string name="dropbox_setup_title">Dropbox</string>
-  <string name="dropbox_authorize">Autoritza</string>
-  <string name="dropbox_unauthorize">Treure l\'autorització</string>
-  <string name="dropbox_upload">Dropbox</string>
   <string name="menu_upload">Carregar</string>
   <string name="gdocs_test_title">Càrrega de prova</string>
-  <string name="gdocs_testupload_error">No s\'ha pogut carregar l\'arxiu de prova</string>
-  <string name="email_upload">Envia per email un arxiu</string>
 </resources>

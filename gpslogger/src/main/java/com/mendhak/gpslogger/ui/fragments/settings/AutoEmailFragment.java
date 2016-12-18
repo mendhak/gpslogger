@@ -98,8 +98,8 @@ public class AutoEmailFragment extends PermissionedPreferenceFragment implements
             MaterialEditTextPreference txtFrom = (MaterialEditTextPreference) findPreference("smtp_from");
 
             if (!aem.isValid(txtSmtpServer.getText(), txtSmtpPort.getText(), txtUsername.getText(), txtPassword.getText(),txtTarget.getText())) {
-                Dialogs.alert(getString(R.string.autoemail_invalid_form),
-                        getString(R.string.autoemail_invalid_form_message),
+                Dialogs.alert(getString(R.string.autoftp_invalid_settings),
+                        getString(R.string.autoftp_invalid_summary),
                         getActivity());
                 return true;
             }

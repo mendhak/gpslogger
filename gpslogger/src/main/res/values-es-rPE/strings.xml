@@ -29,11 +29,9 @@
   <string name="summary_freq_every">Frecuencia:</string>
   <string name="summary_freq_max">máximo</string>
   <string name="summary_dist">Distancia:</string>
-  <string name="summary_dist_regardless">máximo</string>
   <string name="summary_current_filename">Archivo:</string>
   <string name="sharing_location_only">Sólo ubicación</string>
   <string name="sharing_mylocation">Mi ubicación</string>
-  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Compartir vía</string>
   <!-- general -->
   <string name="foot">pie</string>
@@ -64,7 +62,6 @@
   <string name="time_before_logging_dialog_title">Tiempo en segundos</string>
   <string name="time_before_logging_hint">Ingrese segundos (máx. 9999)</string>
   <string name="keep_fix_title">Mantenga GPS entre puntos</string>
-  <string name="retry_time_dialog_title">Tiempo en segundos</string>
   <string name="retry_time_hint">Ingrese segundos (máx. 9999)</string>
   <string name="enabledisablegps_title">Activar/desactivar GPS</string>
   <string name="startonbootup_title">Iniciar en el arranque</string>
@@ -74,36 +71,19 @@
   <string name="autosend_frequency_display">Después de %s minutos</string>
   <string name="autoemail_frequency_whenistop">Al presionar detener</string>
   <string name="autoemail_smtp_category">﻿Ajustes de correo electrónico</string>
-  <string name="autoemail_username">Nombre de usuario</string>
-  <string name="autoemail_password">Contraseña</string>
   <string name="autoemail_password_summary">Contraseña del proveedor de correo</string>
-  <string name="autoemail_port">Puerto</string>
-  <string name="autoemail_port_summary">Puerto SMTP</string>
   <string name="autoemail_ssl">¿Utilizar SSL?</string>
-  <string name="autoemail_server">Servidor SMTP</string>
   <string name="autoemail_smtp_testemail">Probar envío de correo</string>
   <string name="autoemail_sendingtest">Enviando un correo de prueba</string>
   <string name="autoemail_testresult_success">Se ha enviado el correo</string>
-  <string name="autoemail_invalid_form">Valores incorrectos</string>
-  <string name="autoemail_invalid_form_message">Asegúrese de completar todos los campos correctamente
-    </string>
-  <string name="dropbox_authorize">Autorizar</string>
-  <string name="dropbox_upload">Dropbox</string>
   <string name="owncloud_setup_title">ownCloud</string>
-  <string name="owncloud_setup_summary">Sube tus archivos a un servidor de ownCloud.</string>
-  <string name="owncloud_upload">ownCloud</string>
   <string name="menu_upload">Subir</string>
   <string name="shortcut_start">Iniciar</string>
-  <string name="autoopengts_invalid_form">Valores incorrectos</string>
-  <string name="opengts_upload">Enviar a OpenGTS</string>
   <string name="autoopengts_server">Servidor</string>
   <string name="autoopengts_server_summary">Nombre de host o IP</string>
-  <string name="opengts_server_port">Puerto</string>
   <string name="opengts_server_communication_method">Método de comunicación</string>
   <string name="autoopengts_server_path">Ruta del servidor</string>
   <string name="autoopengts_device_id">ID de dispositivo</string>
-  <string name="autoftp_server">Servidor FTP</string>
-  <string name="autoftp_server_summary">Dirección IP o nombre de host</string>
   <string name="autoftp_username">Nombre de usuario</string>
   <string name="autoftp_password">Contraseña</string>
   <string name="autoftp_advanced_settings">Configuración avanzada</string>
@@ -113,13 +93,10 @@
   <string name="autoftp_ssltls_none">Ninguno</string>
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
-  <string name="autoftp_test">Prueba de carga FTP</string>
   <string name="autoftp_test_summary">Cargar un archivo de prueba en el servidor FTP</string>
   <string name="autoftp_testing">Probando subida a FTP</string>
   <string name="autoftp_invalid_settings">Configuración incorrecta</string>
-  <string name="ftp_upload">Subir a FTP</string>
   <string name="autoftp_setup_title">FTP</string>
-  <string name="faq_screen_title">@string/menu_faq</string>
   <string name="menu_faq">Ayuda y preguntas frecuentes</string>
   <string name="gpsf_missing">Servicio no disponible</string>
   <string name="log_customurl_title">Enviar a URL personalizada</string>

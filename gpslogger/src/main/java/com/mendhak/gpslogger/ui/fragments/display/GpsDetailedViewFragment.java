@@ -177,15 +177,11 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             }
 
 
-            if (preferenceHelper.getMinimumDistanceInterval() > 0) {
-                txtDistance.setText(Strings.getDistanceDisplay(getActivity(), preferenceHelper.getMinimumDistanceInterval(), preferenceHelper.shouldDisplayImperialUnits()));
-            } else {
-                txtDistance.setText(R.string.summary_dist_regardless);
-            }
+            txtDistance.setText(Strings.getDistanceDisplay(getActivity(), preferenceHelper.getMinimumDistanceInterval(), preferenceHelper.shouldDisplayImperialUnits()));
+
 
             if (preferenceHelper.isAutoSendEnabled() && preferenceHelper.getAutoSendInterval() > 0) {
-                String autoEmailDisplay = String.format(getString(R.string.autosend_frequency_display), preferenceHelper.getAutoSendInterval());
-
+                String autoEmailDisplay = String.format(getString(R.string.autosend_frequency_display), String.valueOf(preferenceHelper.getAutoSendInterval()));
                 txtAutoEmail.setText(autoEmailDisplay);
             }
 

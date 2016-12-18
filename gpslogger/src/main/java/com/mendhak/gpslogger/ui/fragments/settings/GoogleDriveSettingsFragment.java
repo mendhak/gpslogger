@@ -136,7 +136,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
 
     private void resetPreferenceAppearance(Preference resetPref, Preference testPref, Preference folderPref) {
         if (manager.isLinked()) {
-            resetPref.setTitle(R.string.gdocs_clearauthorization);
+            resetPref.setTitle(R.string.osm_resetauth);
             resetPref.setSummary(R.string.gdocs_clearauthorization_summary);
             testPref.setEnabled(true);
             folderPref.setEnabled(true);
@@ -312,7 +312,7 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
         LOG.debug("GDocs Event completed, success: " + o.success);
         Dialogs.hideProgress();
         if(!o.success){
-            Dialogs.alert(getString(R.string.sorry), getString(R.string.gdocs_testupload_error), getActivity());
+            Dialogs.alert(getString(R.string.sorry), getString(R.string.upload_failure), getActivity());
         }
         else {
             Dialogs.alert(getString(R.string.success), getString(R.string.gdocs_testupload_success), getActivity());

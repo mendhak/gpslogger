@@ -6,8 +6,8 @@
         android:key="gdocs_enabled"
                                                                   android:title="@string/autosend_enabled"/>
 
-    <Preference android:key="gdocs_resetauth" android:summary="@string/gdocs_authorize_summary"
-                android:title="@string/gdocs_startauthorization" />
+    <Preference android:key="gdocs_resetauth"
+                android:title="@string/osm_lbl_authorize" />
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="gdocs_foldername"
                                                                      android:title="Folder name"

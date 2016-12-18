@@ -29,11 +29,9 @@
   <string name="summary_freq_every">Pogostost:</string>
   <string name="summary_freq_max">največja</string>
   <string name="summary_dist">Oddaljenost:</string>
-  <string name="summary_dist_regardless">največja</string>
   <string name="summary_current_filename">Datoteka:</string>
   <string name="sharing_location_only">Samo lokacija</string>
   <string name="sharing_mylocation">Moja lokacija</string>
-  <string name="sharing_googlemaps_link" formatted="false">http://maps.google.com/maps?q=%s,%s</string>
   <string name="sharing_via">Deli preko</string>
   <!-- general -->
   <string name="foot">&#160;foot</string>
@@ -102,44 +100,30 @@
   <string name="time_before_logging_dialog_title">Čas v sekundah</string>
   <string name="time_before_logging_hint">Vnesite sekunde (max 9999)</string>
   <string name="keep_fix_title">GPS naprej med popravki</string>
-  <string name="retry_time_dialog_title">Čas v sekundah</string>
   <string name="retry_time_hint">Vnesite sekunde (max 9999)</string>
   <string name="enabledisablegps_title">Omogoči/onemogoči GPS</string>
   <string name="enabledisablegps_summary">Pojdite na nastavitve telefona za vključitev ali izključitev ponudnikov.</string>
   <string name="startonbootup_title">Zaženi ob vklopu</string>
   <string name="startonbootup_summary">Zagon app in začetek pisanja dnevnika, ko prižgete telefon</string>
   <string name="autoemail_title">E-pošta</string>
-  <string name="autoemail_summary">Samodejno pošlje email dnevnik na naslov po vaši izbiri</string>
   <string name="autoemail_target">Ciljni e-poštni naslovi</string>
   <string name="autosend_frequency_display">Po %s minutah</string>
   <string name="autoemail_frequency_whenistop">Kdaj pritisnem stop</string>
   <string name="autoemail_smtp_category">Nastavitve e-pošte</string>
-  <string name="autoemail_username">Uporabniško ime</string>
   <string name="autoemail_username_summary">Uporabniško ime pri ponudniku e-pošte</string>
-  <string name="autoemail_password">Geslo</string>
   <string name="autoemail_password_summary">Geslo pri ponudniku e-pošte</string>
-  <string name="autoemail_port">Port</string>
-  <string name="autoemail_port_summary">SMTP Port</string>
   <string name="autoemail_ssl">Uporabi SSL?</string>
   <string name="autoemail_smtp_testemail">Test e-pošte</string>
   <string name="emailprovider_manual">Priročnik</string>
   <string name="dropbox_setup_title">Dropbox</string>
-  <string name="dropbox_setup_summary">Z Dropbox omogoči prenos datotek</string>
   <string name="dropbox_authorize_description">Za uporabo Dropbox funkcij, boste morali dovoliti GPSLogger-ju nalaganje datotek na vaš račun.     </string>
-  <string name="dropbox_authorize">Odobritev</string>
-  <string name="dropbox_unauthorize">Odstrani dovoljenja</string>
   <string name="dropbox_unauthorize_description">Imate dovoljenje za Dropbox. Datoteke se bodo naložile na \"Apps\\GPSLogger za Android\" lahko prekličete povezavo GPSLogger-ja z Dropbox-a, če želite.     </string>
   <string name="dropbox_couldnotauthorize">Ne dobim odobritve iz Dropbox, prosim poskusite znova pozneje</string>
-  <string name="dropbox_upload">Dropbox</string>
   <string name="menu_upload">Nalaganje</string>
   <string name="autoemail_from">Iz naslova</string>
   <string name="autoemail_from_summary">Nekateri ponudniki e-pošte zahtevajo polje: iz naslova. To uporabite le, če potrebujete.     </string>
-  <string name="gdocs_clearauthorization">Počistite odobritev</string>
-  <string name="gdocs_clearauthorization_summary">Pozabi lokalne nastavitve GDocs. Če želite trajno onemogočiti dostop, pojdite na nastavitve za Google račun</string>
   <string name="gdocs_test_title">Preskusni upload</string>
-  <string name="gdocs_testupload_error">Ne morem naložiti preizkusno datoteko</string>
   <string name="gdocs_testupload_success">Naloženo. Prosimo, preverite vaše Google Docs za novo datoteko.</string>
-  <string name="email_upload">Pošlji datoteko po e-mailu</string>
   <string name="autoemail_sendto_csv">E-poštni naslovi ločeni z vejicami</string>
   <string name="autosend_enabled">Omogoči samodejno pošiljanje</string>
   <string name="autosend_enabled_summary">Omogoča pošiljanje datotek na različne cilje</string>
@@ -156,5 +140,4 @@
   <string name="shortcut_pickaction">Izberi dejanje</string>
   <string name="log_opengts_title">Dnevnik nalagaj v OpenGTS strežnik</string>
   <string name="log_opengts_summary">Pošlji GPRMC podatke v spletni strežnik OpenGTS.</string>
-  <string name="opengts_setup_summary">Pošlji GPS sledi v OpenGTS strežnik po vaši izbiri.</string>
 </resources>

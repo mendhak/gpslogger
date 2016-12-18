@@ -113,8 +113,8 @@ public class OwnCloudSettingsFragment
                     usernamePreference.getText(),
                     passwordPreference.getText(),
                     directoryPreference.getText())) {
-                Dialogs.alert(getString(R.string.owncloud_invalid_settings),
-                        getString(R.string.owncloud_invalid_summary),
+                Dialogs.alert(getString(R.string.autoftp_invalid_settings),
+                        getString(R.string.autoftp_invalid_summary),
                         getActivity());
                 return false;
             }
