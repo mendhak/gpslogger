@@ -154,22 +154,10 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
             uploadTestFileToGoogleDocs();
         } else {
             if (manager.isLinked()) {
-                //Clear authorization
-                try {
-                    GoogleAuthUtil.clearToken(getActivity(), preferenceHelper.getGoogleDriveAuthToken());
-                }
-                catch(Exception e){
-                    LOG.error("Could not clear token", e);
-                }
-                preferenceHelper.setGoogleDriveAuthToken("");
-                preferenceHelper.setGoogleDriveAccountName("");
-
-                startActivity(new Intent(getActivity(), GpsMainActivity.class));
-                getActivity().finish();
+                new GoogleDriveClearAuth().execute();
             } else {
                 //Re-authorize
                 authorize();
-
             }
         }
 
@@ -316,6 +304,33 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
         }
         else {
             Dialogs.alert(getString(R.string.success), getString(R.string.gdocs_testupload_success), getActivity());
+        }
+    }
+
+    private class GoogleDriveClearAuth extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            //Clear authorization
+            try {
+                GoogleAuthUtil.clearToken(getActivity(), preferenceHelper.getGoogleDriveAuthToken());
+            }
+            catch(Exception e){
+                LOG.error("Could not clear token", e);
+            }
+            preferenceHelper.setGoogleDriveAuthToken("");
+            preferenceHelper.setGoogleDriveAccountName("");
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+
+            startActivity(new Intent(getActivity(), GpsMainActivity.class));
+            getActivity().finish();
+
         }
     }
 
