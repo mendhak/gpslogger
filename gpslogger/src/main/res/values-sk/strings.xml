@@ -122,7 +122,6 @@ vyššiu presnosť s nízkymi frekvenciami.
   <string name="keep_fix_title">Ponechať GPS zapnuté medzi korekciami</string>
   <string name="retry_time_title">Trvanie porovnávania presnosti</string>
   <string name="retry_time_summary">Po získaní počiatočnej opravy sa pokúšať o získanie presného bodu až do dosiahnutia zhody s nastavením filtra presnosti.</string>
-  <string name="retry_time_hint">Zadajte sekundy (max. 9999)</string>
   <string name="display_imperial_title">Zobrazovať imperiálne jednotky</string>
   <string name="display_imperial_summary">Zobrazí stopy, míle a iné imperiálne jednotky, nie metrický systém. (Nastavenia však musia zostať v metrickom systéme)</string>
   <string name="enabledisablegps_title">Zapnúť/vypnúť GPS</string>
@@ -240,7 +239,6 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit">Predvolene FTP cez SSL</string>
-  <string name="autoftp_implicit_summary">Nechajte prázdne, ak neviete čo zadať.</string>
   <string name="autoftp_test_summary">Odoslať testovací súbor na FTP server</string>
   <string name="autoftp_testing">Test odoslania na FTP</string>
   <string name="autoftp_invalid_settings">Neplatné nastavenia</string>

@@ -112,7 +112,6 @@
   <string name="time_before_logging_hint">Inserisci i secondi (max 9999)</string>
   <string name="keep_fix_summary">Attenzione: riduce di molto la vita della batteria. Usatelo solo per ottenere alte precisioni con basse frequenze di campionatura.</string>
   <string name="keep_fix_title">Lascia sempre acceso il GPS</string>
-  <string name="retry_time_hint">Inserisci i secondi (max 9999)</string>
   <string name="display_imperial_title">Mostra unità imperiali</string>
   <string name="display_imperial_summary">Visualizza piedi, miglia e pinte. (Le preferenze devono ancora essere nelle unità metriche)</string>
   <string name="enabledisablegps_title">Abilita/Disabilita GPS</string>
@@ -218,7 +217,6 @@
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit">FTP su SSL</string>
-  <string name="autoftp_implicit_summary">Lasciala non selezionata se non lo sai.</string>
   <string name="autoftp_test_summary">Carica un file di test sul server FTP</string>
   <string name="autoftp_testing">Sto testando il caricamento FTP</string>
   <string name="autoftp_invalid_settings">Impostazioni non valide</string>

@@ -102,7 +102,6 @@
   <string name="time_before_logging_hint">أدخل ثواني (الاقصى 9999)</string>
   <string name="keep_fix_summary">كن حذراً، هذا سوف يقلل من عمر البطارية بشكل جذري. استخدمه فقط للدقة العالية مع عدم التكرار كثيرا.     </string>
   <string name="keep_fix_title">الحفاظ على نظام تحديد المواقع بين الإصلاحات</string>
-  <string name="retry_time_hint">أدخل ثواني (الاقصى 9999)</string>
   <string name="display_imperial_title">عرض بالقياس الأمريكي</string>
   <string name="display_imperial_summary">عرض أقدام وكم ومكاييل، وليس من الوحدات المترية الحديثة. (يجب أن تكون المقايس على النظام المتري)</string>
   <string name="enabledisablegps_title">تمكين/تعطيل GPS</string>
@@ -167,7 +166,6 @@
   <string name="autoftp_ssltls_none">لا شيء</string>
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
-  <string name="autoftp_implicit_summary">اتركه بلا إختيار إذا كنت لا تعرف.</string>
   <string name="autoftp_testing">اختبار تحميل FTP</string>
   <string name="autoftp_invalid_settings">إعدادات غير صحيحة</string>
   <string name="autoftp_invalid_summary">بعض إعداداتك غير صحيحة. الرجاء التأكد أنك قمت بتعبئة كافة الحقول ذات الصلة.     </string>

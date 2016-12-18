@@ -118,7 +118,6 @@
   <string name="keep_fix_title">Держать GPS включенным между местоопределениями</string>
   <string name="retry_time_title">Продолжительность определения точности</string>
   <string name="retry_time_summary">Как долго необходимо продолжать попытки определения местоположения, после получения первоначального местоположения, чтобы получить местоположение, которое будет соответствовать настройкам точности фильтрации.</string>
-  <string name="retry_time_hint">Введите интервал в секундах (максимум 9999)</string>
   <string name="display_imperial_title">Единицы отображения</string>
   <string name="display_imperial_summary">Показать футы, мили и пинты и ни каких этих новомодных метрических штучек (при том, что в настройках метрические единицы)</string>
   <string name="enabledisablegps_title">Вкл/Выкл GPS</string>
@@ -229,7 +228,6 @@
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit">Безусловно FTP через SSL</string>
-  <string name="autoftp_implicit_summary">Оставьте неотмеченным, если вы не знаете.</string>
   <string name="autoftp_test_summary">Выгрузить тестовый файл на FTP сервер</string>
   <string name="autoftp_testing">Проверяется выгрузка на FTP</string>
   <string name="autoftp_invalid_settings">Неправильные параметры</string>

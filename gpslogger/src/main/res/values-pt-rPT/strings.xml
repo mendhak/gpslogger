@@ -118,7 +118,6 @@ Nomes de ficheiro muito dinâmicos
   <string name="keep_fix_title">Mantenha GPS activo entre correções</string>
   <string name="retry_time_title">Duração para verificar precisão</string>
   <string name="retry_time_summary">Após adquirir uma posição inicial, continuar tentando durante este tempo para obter um ponto preciso que corresponda à configuração do filtro de precisão.</string>
-  <string name="retry_time_hint">Digite segundos (máximo de 9999)</string>
   <string name="display_imperial_title">Mostrar métricas imperiais</string>
   <string name="display_imperial_summary">Apresentar em pés, milhas e quartilhos, nenhuma dessas unidades métricas moderna. (Preferências devem continuar em unidades métricas)</string>
   <string name="enabledisablegps_title">Ativar/desativar o GPS</string>
@@ -150,6 +149,7 @@ Nomes de ficheiro muito dinâmicos
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_lbl_authorize">Autorizar esta aplicação</string>
   <string name="osm_resetauth">Limpar autorização</string>
+  <string name="osm_lbl_authorize_description">Precisa conceder a esta app permissões para carregar rastos GPS para o OpenStreetMap. Pode definir aqui etiquetas, descrições e visibilidade depois de autorizar esta app.    </string>
   <string name="osm_resetauth_summary">Remover a autorização local usada para conectar com sua conta OSM.</string>
   <string name="osm_auth_error">Ocorreu um erro a tentar contactar o servidor OpenStreetMap. Verifique que o seu telefone tem uma conexão ou por favor tente mais tarde.    </string>
   <string name="osm_visibility">Visibilidade</string>
@@ -172,6 +172,7 @@ Nomes de ficheiro muito dinâmicos
   <string name="emailprovider_manual">Manual</string>
   <string name="dropbox_setup_title">Dropbox</string>
   <string name="dropbox_authorize_description">Para usar as funcionalidades do Dropbox necessita autorizar o carregamento de ficheiros do GPSLogger na sua conta.    </string>
+  <string name="dropbox_unauthorize_description">Você está autorizado pelo Dropbox. Os ficheiros serão enviados para \'Apps\\GPSLogger for Android\' Pode desligar GPSLogger do Dropbox se desejar.    </string>
   <string name="dropbox_couldnotauthorize">Não autorizado com o Dropbox, Tente novamente mais tarde</string>
   <string name="owncloud_setup_title">ownCloud</string>
   <string name="owncloud_server_summary">URL Base do ownCloud</string>
@@ -225,7 +226,6 @@ Nomes de ficheiro muito dinâmicos
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit">FTP sobre SSL implicio</string>
-  <string name="autoftp_implicit_summary">Deixe desmarcada se não souber.</string>
   <string name="autoftp_test_summary">Carregar ficheiro de teste para o servidor FTP</string>
   <string name="autoftp_testing">A testar carregamento por FTP</string>
   <string name="autoftp_invalid_settings">Configurações inválidas</string>
@@ -272,6 +272,7 @@ Nomes de ficheiro muito dinâmicos
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Rede</string>
   <string name="listeners_passive">Passivo</string>
+  <string name="listeners_summary">Que fornecedores de localização utilizar quando disponíveis; GPS para satélites, rede para torre de celular/Wi-Fi, Passivo é um fornecedor especial que recebe localizações de outras aplicações.</string>
   <string name="listeners_title">Fornecedores de localização</string>
   <string name="autosend_frequency_hint">Número de minutos</string>
   <string name="pref_logging_file_no_permissions">Essa pasta não permite gravação pelo GPSLogger. Por favor, escolha outra pasta para gravação.</string>
@@ -315,6 +316,7 @@ Nomes de ficheiro muito dinâmicos
   <string name="profile_default">Perfil padrão</string>
   <string name="profile_add_new">Adicionar perfil</string>
   <string name="gpslogger_permissions_rationale_title">Permissões necessárias</string>
+  <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Esta app necessita várias permissões para funcionar correctamente. <br /> <b>Localização</b> - Esta permissão autoriza a leitura dos dados de localização da rede celular e do equipamento GPS.<br /><b>Fotos, media, ficheiros</b> - Esta permissão autoriza a escrita de ficheiros de registos e testes para o armazenamento, e a leitura de uma lista de ficheiros para carregamento ou partilha. Esta app não acede aos seus ficheiros de fotos ou media.<br /><b>Contactos</b> - Se utilizar a funcionalidade Google Drive, esta permissão autoriza o acesso a Google accounts registadas neste dispositivo.  A sua lista de contactos não é acedida por esta app.<br /><br/>  ]]></string>
   <string name="gpslogger_permissions_permanently_denied">Negou permanentemente uma ou ais permissões que esta app necessita. Deverá ir às configurações desta app para garantir ou inicializar essas permissões.</string>
   <string name="privacy_policy">Política de Privacidade</string>
   <string name="debuglog_attach_to_email">Anexar o log de correção de erros ao e-mail</string>
@@ -324,5 +326,6 @@ Nomes de ficheiro muito dinâmicos
   <string name="coordinate_display_format">Formato de apresentação de coordenadas</string>
   <string name="ssl_certificate_validate">Validar Certificado SSL</string>
   <string name="parameters">Parâmetros</string>
+  <string name="ssl_certificate_add_to_keystore">Adicionar este certificado ao armazenamento local de chaves?</string>
   <string name="ssl_certificate_is_valid">O certificado é válido</string>
 </resources>

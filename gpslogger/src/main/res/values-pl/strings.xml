@@ -108,7 +108,6 @@
   <string name="time_before_logging_hint">Wprowadź czas (max 9999)</string>
   <string name="keep_fix_summary">Uważaj, zużycie baterii drastycznie wzrośnie. Używaj wyłącznie dla większej precyzji przy niskich częstotliwościach.    </string>
   <string name="keep_fix_title">Utrzymuj połączenie z GPS po zaprzestaniu logowania</string>
-  <string name="retry_time_hint">Wprowadź sekundy (maks. 9999)</string>
   <string name="display_imperial_title">Wyświetl anglosaskie jednostki</string>
   <string name="enabledisablegps_title">Włącz/Wyłącz GPS</string>
   <string name="enabledisablegps_summary">Przejście do ustawień telefonu w celu zarządzania dostawcami.</string>
@@ -211,7 +210,6 @@
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit">FTP (implicit) przez SSL</string>
-  <string name="autoftp_implicit_summary">Pozostaw niezaznaczone, jeżeli nie rozumiesz.</string>
   <string name="autoftp_test_summary">Wgraj plik testowy na serwer FTP</string>
   <string name="autoftp_testing">Sprawdzanie komunikacji FTP</string>
   <string name="autoftp_invalid_settings">Nieprawidłowe ustawienia</string>

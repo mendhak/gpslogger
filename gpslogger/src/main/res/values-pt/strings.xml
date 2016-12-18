@@ -91,7 +91,6 @@
   <string name="time_before_logging_hint">Digite segundos (máximo de 9999)</string>
   <string name="keep_fix_summary">Tome cuidado, isto consumirá muita bateria. Use apenas para alta precisão com baixa frequência.</string>
   <string name="keep_fix_title">Mantenha GPS activo entre correções</string>
-  <string name="retry_time_hint">Digite segundos (máximo de 9999)</string>
   <string name="display_imperial_title">Mostrar métricas imperiais</string>
   <string name="enabledisablegps_title">Ativar/desativar o GPS</string>
   <string name="enabledisablegps_summary">Vá para as configurações do telefone para ativar ou desativar os provedores.</string>

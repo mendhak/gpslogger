@@ -100,7 +100,6 @@
   <string name="time_before_logging_title">在记录之前的时间</string>
   <string name="time_before_logging_dialog_title">以秒计的时间</string>
   <string name="time_before_logging_hint">输入秒数(最大 9999)</string>
-  <string name="retry_time_hint">请输入秒 (最大 9999）</string>
   <string name="enabledisablegps_title">启用/禁用 GPS</string>
   <string name="enabledisablegps_summary">转到手机的设置来启用或禁用提供器。</string>
   <string name="startonbootup_title">开机自启动</string>

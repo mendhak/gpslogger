@@ -116,7 +116,6 @@
   <string name="keep_fix_summary">Να είστε προσεκτικοί, αυτό θα μειώσει δραματικά τη διάρκεια ζωής της μπαταρίας. Χρήση μόνο
     για μεγαλύτερη ακρίβεια με χαμηλές συχνότητες.
     </string>
-  <string name="retry_time_hint">Εισάγετε δευτερόλεπτα (έως 9999)</string>
   <string name="display_imperial_title">Προβολή μονάδων στο imperial σύστημα</string>
   <string name="osm_description">Περιγραφή</string>
   <string name="osm_description_summary">Η περιγραγή που θα χρησιμοποιείτε όταν ανεβάζετε ένα ίχνος σας</string>

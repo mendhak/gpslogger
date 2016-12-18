@@ -115,7 +115,6 @@
   <string name="time_before_logging_hint">초 입력 (최대 9999)</string>
   <string name="keep_fix_summary">주의, 이 설정은 배터리 수명을 극적으로 감소 시킵니다. 높은 정밀도와 낮은 빈도로만 사용하세요.    </string>
   <string name="keep_fix_title">고정시까지 GPS를 유지</string>
-  <string name="retry_time_hint">초 (최대 9999) 입력</string>
   <string name="display_imperial_title">제국 단위(Imperial) 로 표시</string>
   <string name="enabledisablegps_title">GPS 켜기/끄기</string>
   <string name="enabledisablegps_summary">공급자 설정을 켜거나 끄기 위해 폰 설정화면으로 가기</string>

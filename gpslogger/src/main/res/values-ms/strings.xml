@@ -97,7 +97,6 @@
   <string name="time_before_logging_hint">Masukkan saat (maksimum 9999)</string>
   <string name="keep_fix_summary">Peringatan, tetapan ini boleh mengurangkan hayat bateri secara mendadak.  Gunakan hanya untuk ketepatan yang lebih tinggi dengan frekuensi rendah. </string>
   <string name="keep_fix_title">Kekalkan GPS diantara penguncian</string>
-  <string name="retry_time_hint">Masukkan saat (maksimum 9999)</string>
   <string name="enabledisablegps_title">Aktif/Padam GPS</string>
   <string name="enabledisablegps_summary">Pergi ke tetapan telefon untuk membolehkan atau mematikan penyedia.</string>
   <string name="startonbootup_title">Mula semasa bootup</string>
@@ -186,7 +185,6 @@
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit">FTP tersirat melalui SSL</string>
-  <string name="autoftp_implicit_summary">Tinggalkan jika tidak tahu.</string>
   <string name="autoftp_test_summary">Muat naik fail ujian ke pelayan FTP</string>
   <string name="autoftp_testing">Menguji FTP upload</string>
   <string name="autoftp_invalid_settings">Tetapan tidak sah</string>

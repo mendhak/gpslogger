@@ -116,7 +116,6 @@ une plus grande précision à basses fréquences.    </string>
   <string name="keep_fix_title">Conserver le GPS allumé entre les différents positionnements</string>
   <string name="retry_time_title">Durée pour correspondre à la précision</string>
   <string name="retry_time_summary">Après avoir déterminé une position initiale, réessayer pendant ce temps pour trouver un point précis correspondant à la précision définie.</string>
-  <string name="retry_time_hint">Saisir en seconde (max. 9999)</string>
   <string name="display_imperial_title">Afficher en unités impériales</string>
   <string name="display_imperial_summary">Afficher en pieds, milles, aucune unité du système métrique. (Les préférences doivent rester en métrique)</string>
   <string name="enabledisablegps_title">Activer / Désactiver le GPS</string>
@@ -223,7 +222,6 @@ une plus grande précision à basses fréquences.    </string>
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit">FTP implicite sur SSL</string>
-  <string name="autoftp_implicit_summary">Laisser décoché si vous ne savez pas.</string>
   <string name="autoftp_test_summary">Envoyer un fichier test sur le serveur FTP</string>
   <string name="autoftp_testing">Test de l\'envoi par FTP en cours</string>
   <string name="autoftp_invalid_settings">Paramètres invalides</string>

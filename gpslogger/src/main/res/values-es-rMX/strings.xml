@@ -98,7 +98,6 @@
   <string name="time_before_logging_hint">Introduzca a segundos (máx. 9999)</string>
   <string name="keep_fix_summary">Con cuidado, esto disminuirá considerablemente la duración de la batería. Utilice únicamente para obtener mayor precisión usando frecuencias bajas.</string>
   <string name="keep_fix_title">Mantener el GPS prendido entre posiciones</string>
-  <string name="retry_time_hint">Ingrese segundos (máx. 9999)</string>
   <string name="enabledisablegps_title">Activar/desactivar GPS</string>
   <string name="enabledisablegps_summary">Ir a la configuración del teléfono para activar o desactivar a los proveedores.</string>
   <string name="startonbootup_title">Iniciar en el arranque</string>
@@ -187,7 +186,6 @@
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit">Implicit FTP sobre SSL</string>
-  <string name="autoftp_implicit_summary">Dejar sin marcar si no sabes.</string>
   <string name="autoftp_test_summary">Cargar un archivo de prueba en el servidor FTP</string>
   <string name="autoftp_testing">Probando subida a FTP</string>
   <string name="autoftp_invalid_settings">Configuración no válida</string>

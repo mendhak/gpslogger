@@ -114,7 +114,6 @@
   <string name="keep_fix_summary">注意。この設定はバッテリを著しく消費します。書込頻度を抑えて高精度を得たい場合のみ使用してください。</string>
   <string name="keep_fix_title">GPSを常にON</string>
   <string name="retry_time_summary">初期の位置情報の取得後は、この値の間、精度フィルタにマッチする値が来るのを待ちます。</string>
-  <string name="retry_time_hint">入力（秒、最大 9999)</string>
   <string name="display_imperial_title">ヤード法で表示</string>
   <string name="display_imperial_summary">ヤード法（フィート、マイル等）で表示します。単位の変更は表示に対してのみ有効です。</string>
   <string name="enabledisablegps_title">GPS 有効/無効</string>
@@ -220,7 +219,6 @@
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit">Implicit方式によるFTP over SSL </string>
-  <string name="autoftp_implicit_summary">不明な場合はチェックしないでください。</string>
   <string name="autoftp_test_summary">テストファイルをFTPサーバにアップロードします</string>
   <string name="autoftp_testing">FTPアップロードテスト中</string>
   <string name="autoftp_invalid_settings">無効な設定です</string>

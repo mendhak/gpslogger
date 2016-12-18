@@ -102,7 +102,6 @@
   <string name="time_before_logging_hint">ใส่ค่าเป็นวินาที (สูงสุด 9999)</string>
   <string name="keep_fix_summary">ระวัง เปิดค่านี้ทำให้แบตเตอรรี่หมดเร็วขึ้นกว่าเดิมมาก ใช้เฉพาะเมื่อต้องการความแม่นยำสูง แต่ระยะห่างระหว่างบันทึกต่ำ</string>
   <string name="keep_fix_title">เปิดจีพีเอสค้างไว้ระหว่างล็อคตำแหน่ง</string>
-  <string name="retry_time_hint">ใส่ค่าเป็นวินาที (สูงสุด 9999)</string>
   <string name="enabledisablegps_title">เปิด/ปิด จีพีเอส</string>
   <string name="enabledisablegps_summary">ไปที่การตั้งค่าของโทรศัพท์เพื่อเปิดหรือปิดผู้ให้บริการ</string>
   <string name="startonbootup_title">เริ่มเมื่อบูตเครื่อง</string>
@@ -165,7 +164,6 @@
   <string name="autoftp_ssltls_none">None</string>
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
-  <string name="autoftp_implicit_summary">ไม่ต้องติ้กถ้าคุณไม่รู้มันคืออะไร</string>
   <string name="autoftp_test_summary">อัพโหลดไฟล์ทดสอบผ่าน FTP</string>
   <string name="autoftp_testing">กำลังทดสอบอัพโหลดผ่าน FTP</string>
   <string name="autoftp_invalid_settings">การตั้งค่าไม่ถูกต้อง</string>

@@ -113,7 +113,6 @@
   <string name="time_before_logging_hint">Zadejte sekundy (maximum 9999)</string>
   <string name="keep_fix_summary">Buďte opatrní, toto dramaticky sníží výdrž na baterii. Použijte pouze pro vyšší přesnost při nízkých frekvencích.</string>
   <string name="keep_fix_title">Ponechat GPS zapnutou mezi odečty polohy</string>
-  <string name="retry_time_hint">Zadejte sekundy (max 9999)</string>
   <string name="display_imperial_title">Zobrazit imperiální jednotky</string>
   <string name="display_imperial_summary">Zobrazí stopy, míle a ostatní imperiální jednotky. (nastavení musí zůstat v metrickém systému)</string>
   <string name="enabledisablegps_title">Povolit/zakázat GPS</string>
@@ -221,7 +220,6 @@
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit">Implicitní FTP přes SSL</string>
-  <string name="autoftp_implicit_summary">Nechejte nezaškrtnuté, pokud nevíte.</string>
   <string name="autoftp_test_summary">Nahrát testovací soubor na FTP server</string>
   <string name="autoftp_testing">Testování FTP uploadu</string>
   <string name="autoftp_invalid_settings">Neplatné nastavení</string>

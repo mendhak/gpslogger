@@ -151,8 +151,6 @@
 
     <string name="retry_time_title">Duration to match accuracy</string>
     <string name="retry_time_summary">After acquiring an initial fix, keep trying for this long to get an accurate point to match the accuracy filter setting.</string>
-    <string name="retry_time_hint">Enter seconds (max 9999)</string>
-
 
     <string name="display_imperial_title">Display Imperial units</string>
     <string name="display_imperial_summary">Display feet, miles and pints, none of that newfangled metric stuff. (Preferences must still be in metrics)</string>
@@ -314,7 +312,6 @@
     <string name="autoftp_ssltls_ssl">SSL</string>
     <string name="autoftp_ssltls_tls">TLS</string>
     <string name="autoftp_implicit">Implicit FTP over SSL</string>
-    <string name="autoftp_implicit_summary">Leave unchecked if you don\'t know.</string>
     <string name="autoftp_test_summary">Upload a test file to the FTP server</string>
     <string name="autoftp_testing">Testing FTP upload</string>
     <string name="autoftp_invalid_settings">Invalid settings</string>

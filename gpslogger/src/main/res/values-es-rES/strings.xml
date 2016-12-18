@@ -113,7 +113,6 @@
   <string name="time_before_logging_hint">Ingrese segundos (máx. 9999)</string>
   <string name="keep_fix_summary">Cuidado, esto reduce considerablemente la duración de la batería. Sólo se debe usar para obtener una precisión mejor al usarse con el registro de puntos de frecuencia más larga.     </string>
   <string name="keep_fix_title">Mantenga GPS entre puntos</string>
-  <string name="retry_time_hint">Ingrese segundos (máx. 9999)</string>
   <string name="display_imperial_title">Utilizar unidades imperiales</string>
   <string name="display_imperial_summary">Medir en pies, millas y pintas, nada de extrañas unidades métricas. (Los ajustes todavía aparecen en sistema métrico)</string>
   <string name="enabledisablegps_title">Activar/desactivar GPS</string>
@@ -220,7 +219,6 @@
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
   <string name="autoftp_implicit">FTP implícito sobre SSL</string>
-  <string name="autoftp_implicit_summary">No lo marques si tienes dudas.</string>
   <string name="autoftp_test_summary">Cargar un archivo de prueba en el servidor FTP</string>
   <string name="autoftp_testing">Probando subida a FTP</string>
   <string name="autoftp_invalid_settings">Configuración incorrecta</string>

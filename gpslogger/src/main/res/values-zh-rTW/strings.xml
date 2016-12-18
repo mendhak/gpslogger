@@ -121,7 +121,6 @@
   <string name="keep_fix_title">Keep GPS on between fixes</string>
   <string name="retry_time_title">足夠精確度重試時間</string>
   <string name="retry_time_summary">取得一筆起始的修正後，持續嘗試得到符合精確度過濾器標準的時間。</string>
-  <string name="retry_time_hint">輸入秒數 (最大9999)</string>
   <string name="display_imperial_title">Display Imperial units</string>
   <string name="display_imperial_summary">Display feet, miles and pints, none of that newfangled metric stuff. (Preferences must still be in metrics)</string>
   <string name="enabledisablegps_title">啟用/禁用 GPS</string>
