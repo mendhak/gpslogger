@@ -184,10 +184,10 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         }
 
         txtFilename.setVisibility(View.VISIBLE);
-        txtFilename.setText(Html.fromHtml("<em>" + preferenceHelper.getGpsLoggerFolder() + "/<strong><br />" + Strings.getFormattedFileName() + "</strong></em>"));
+        txtFilename.setText(Html.fromHtml("<strong>" + Strings.getFormattedFileName() + "</strong>"));
 
         Files.setFileExplorerLink(txtFilename,
-                Html.fromHtml("<em><font color='blue'><u>" + preferenceHelper.getGpsLoggerFolder() + "</u></font>" + "/<strong><br />" + Strings.getFormattedFileName() + "</strong></em>"),
+                Html.fromHtml("<strong><font color='blue'>" + Strings.getFormattedFileName() + "</font></strong>"),
                 preferenceHelper.getGpsLoggerFolder(),
                 context);
 
