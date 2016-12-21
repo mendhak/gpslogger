@@ -773,7 +773,7 @@ public class GpsLoggingService extends Service  {
             double distanceTravelled = Maths.calculateDistance(loc.getLatitude(), loc.getLongitude(), session.getCurrentLocationInfo().getLatitude(), session.getCurrentLocationInfo().getLongitude());
             long timeDifference = Math.abs(loc.getTime() - session.getCurrentLocationInfo().getTime())/1000;
             double speed = distanceTravelled/timeDifference;
-            if(speed > 170){ //170 m/s ~=  600 km/h
+            if(speed > 357){ //357 m/s ~=  1285 km/h
                 LOG.warn(String.format("Very large jump detected - %d meters in %d sec - discarding point", (long)distanceTravelled, timeDifference));
                 return;
             }
