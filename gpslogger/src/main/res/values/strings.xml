@@ -428,5 +428,6 @@
     <string name="parameters">Parameters</string>
     <string name="ssl_certificate_add_to_keystore">Add this certificate to local keystore?</string>
     <string name="ssl_certificate_is_valid">The certificate is valid</string>
+    <string name="hide_notification_from_status_bar">Hide notification from status bar</string>
 
 </resources>

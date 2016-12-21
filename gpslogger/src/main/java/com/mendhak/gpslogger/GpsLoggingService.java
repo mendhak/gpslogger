@@ -493,7 +493,9 @@ public class GpsLoggingService extends Service  {
             nfc = new NotificationCompat.Builder(getApplicationContext())
                     .setSmallIcon(R.drawable.notification)
                     .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.gpsloggericon3))
-                    .setPriority(Notification.PRIORITY_MAX)
+                    .setPriority( preferenceHelper.shouldHideNotificationFromStatusBar() ? NotificationCompat.PRIORITY_MIN : NotificationCompat.PRIORITY_LOW)
+                    .setCategory(NotificationCompat.CATEGORY_SERVICE)
+                    .setVisibility(NotificationCompat.VISIBILITY_SECRET) //This hides the notification from lock screen
                     .setContentTitle(contentText)
                     .setOngoing(true)
                     .setContentIntent(pending);
