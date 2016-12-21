@@ -44,9 +44,19 @@ public class StringsTest {
     public void GetIsoDateTime_DateObject_ConvertedToIso() {
 
         String actual = Strings.getIsoDateTime(new Date(1417726140000l));
-        String expected = "2014-12-04T20:49:00Z";
+        String expected = "2014-12-04T20:49:00.000Z";
         assertThat("Conversion of date to ISO string", actual, is(expected));
     }
+
+    @Test
+    public void GetIsoDateTime_HigherResolutionMilliseconds_ConvertedToIso() {
+
+        String actual = Strings.getIsoDateTime(new Date(1417726140001l));
+        String expected = "2014-12-04T20:49:00.001Z";
+        assertThat("Conversion of date to ISO string", actual, is(expected));
+    }
+
+
 
     @Test
     public void CleanDescription_WhenAnnotationHasHtml_HtmlIsRemoved() {

@@ -193,7 +193,7 @@ public class Strings {
          */
 
         // GPX specs say that time given should be in UTC, no local time.
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
                 Locale.US);
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 

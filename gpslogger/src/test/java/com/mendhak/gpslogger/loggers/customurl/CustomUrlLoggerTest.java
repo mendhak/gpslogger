@@ -29,7 +29,7 @@ public class CustomUrlLoggerTest {
 
 
         CustomUrlLogger logger = new CustomUrlLogger("",0,"");
-        String expected ="http://192.168.1.65:8000/test?lat=12.193&lon=19.111&sat=9&desc=blah&alt=45.0&acc=8.0&dir=359.0&prov=MOCK&spd=9001.0&time=2016-03-05T19:24:29Z&battery=91.0&androidId=22&serial=SRS11&activity=TILTED";
+        String expected ="http://192.168.1.65:8000/test?lat=12.193&lon=19.111&sat=9&desc=blah&alt=45.0&acc=8.0&dir=359.0&prov=MOCK&spd=9001.0&time=2016-03-05T19:24:29.949Z&battery=91.0&androidId=22&serial=SRS11&activity=TILTED";
         String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER&activity=%act";
         assertThat("Placeholders are substituted", logger.getFormattedUrl(urlTemplate,loc, "blah", "22", 91, "SRS11"), is(expected));
     }
@@ -44,7 +44,7 @@ public class CustomUrlLoggerTest {
 
 
         CustomUrlLogger logger = new CustomUrlLogger("",0,"");
-        String expected ="http://192.168.1.65:8000/test?lat=12.193&lon=19.111&sat=0&desc=&alt=0.0&acc=0.0&dir=0.0&prov=MOCK&spd=0.0&time=2016-03-05T19:24:29Z&battery=0.0&androidId=&serial=&activity=";
+        String expected ="http://192.168.1.65:8000/test?lat=12.193&lon=19.111&sat=0&desc=&alt=0.0&acc=0.0&dir=0.0&prov=MOCK&spd=0.0&time=2016-03-05T19:24:29.949Z&battery=0.0&androidId=&serial=&activity=";
         String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER&activity=%ACT";
         assertThat("Placeholders are substituted", logger.getFormattedUrl(urlTemplate,loc, "", "", 0, ""), is(expected));
     }
