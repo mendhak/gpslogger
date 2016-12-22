@@ -131,6 +131,7 @@ vyššiu presnosť s nízkymi frekvenciami.
   <string name="startonapplaunch_title">Štart pri spustení aplikácie</string>
   <string name="startonapplaunch_summary">Spustiť záznam pri spustení aplikácie</string>
   <string name="autoemail_title">E-mail</string>
+  <string name="please_wait">Prosím čakajte</string>
   <string name="autoemail_target">Cieľové e-mailové adresy</string>
   <string name="autosend_frequency_display">Po %s minútach</string>
   <string name="autoemail_frequency_whenistop">Pri stlačení tlačidla STOP</string>
@@ -195,6 +196,7 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
   <string name="autoemail_from">Z adresy</string>
   <string name="autoemail_from_summary">Niektorí poskytovatelia služieb elektronickej pošty vyžadujú adresy odosielateľa. Použiť ju však iba vtedy, ak je to potrebné.
     </string>
+  <string name="gdocs_clearauthorization_summary">Vymazať lokálne nastavenia Google Drive. Na permanentné odmietnutie prístupu prejdite na nastavenia účtu Google</string>
   <string name="gdocs_setup_title">Google Drive</string>
   <string name="gdocs_test_summary">Odoslať testovací súbor do služby Google Drive</string>
   <string name="gdocs_test_title">Test odosielania</string>
@@ -339,5 +341,9 @@ polia.
   <string name="debuglog_attach_to_email_summary">K e-mailu sa pripojí záznam pre ladenie, spolu s niektorými diagnostickými informáciami</string>
   <string name="change_language_title">Zmeniť jazyk</string>
   <string name="change_language_summary">Nie všetky preklady sú úplne dokončené! Na aplikovanie nastavení je nutné reštartovať aplikáciu.</string>
+  <string name="coordinate_display_format">Formát zobrazenia súradníc</string>
+  <string name="ssl_certificate_validate">Validovať certifikát SSL</string>
   <string name="parameters">Parametre adresy URL</string>
+  <string name="ssl_certificate_add_to_keystore">Pridať certifikát do lokálneho úložiska?</string>
+  <string name="ssl_certificate_is_valid">Certifikát je platný</string>
 </resources>
