@@ -252,15 +252,22 @@ For example, in Tasker, create a new action under Misc &gt; Send Intent. </p>
 
 <section><div class='lead'><h2><a name="troubleshooting" href="#troubleshooting">Troubleshooting</a></h2><p>Sometimes the app might not behave in an expected way.  </p>
 <p>You can troubleshoot it yourself by going to <em>General Options</em> and enabling the <em>Write to debug file</em> option.  </p>
-<p>Next, reproduce the behavior or problem, and this creates a <code>debuglog.txt</code> file in the GPSLogger directory.  </p>
+<p>Next, reproduce the behavior or problem, and this creates a <code>debuglog.txt</code> file in the GPSLogger folder.  </p>
 <p>You can then grab the file off your phone and have a look through it, or email it to yourself from the same screen (<em>Attach debug log to email</em>).  Be sure to turn it off afterwards as this file grows very fast.   </p>
 
 </div></section>
 
 <section><div class='lead'><h2><a name="customsslcertificates" href="#customsslcertificates">Custom SSL Certificates</a></h2><p><img src="images/21sslvalidation.gif" alt="SSLValidation"></p>
-<p>You can use custom SSL certificates with Custom URL, OwnCloud, OpenGTS, SMTP and FTP.  If you use self signed certificates then you will need to get GPSLogger to recognize and store your custom certificates.  </p>
-<p>To do this, go into each setting screen and click <strong>Validate SSL Certificate</strong>.  You will be prompted with the certificate&#39;s details, you can then choose to accept; the certificate will be stored in the local keystore.  </p>
-<p> Note that in the case of OwnCloud, OpenGTS and Custom URL, the certificate must match the domain you&#39;re connecting to.   </p>
+<p>If you use <strong>self signed certificates</strong> or <strong>custom CA certificates</strong> in Custom URL, OwnCloud, OpenGTS, FTP or SMTP then you will need to get GPSLogger to recognize and store your custom certificates.    </p>
+<p>It&#39;s easy.  Just go into a setting screen where you have specified a custom SSL URL or server, and click <code>Validate SSL Certificate</code>.  You will be prompted with the certificate&#39;s details, you can then choose to accept; the certificate will be stored in the local keystore.  </p>
+<p>This validation is required as it&#39;s a security best practice. It helps protect your information between your device and the server, it prevents attackers from listening in.  The Google Play Store is also asking developers to be stricter with SSL based verifications.</p>
+<p>In the case of OwnCloud, OpenGTS and Custom URL, the certificate must match the domain you&#39;re connecting to.   In other words, if your certificate is issued to <code>example.com</code> then the URL you are connecting to must match <code>example.com</code>. More specifically this means that the certificate <em>Common Name</em> or <em>Subject Alternative Name</em> must match the host of the URL you are connecting to. </p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="whydoesgpsdriftwheniamstationary" href="#whydoesgpsdriftwheniamstationary">Why does GPS drift when I am stationary?</a></h2><h2><a name="whydoesmygpsspeedsometimesshowmassivespikes" href="#whydoesmygpsspeedsometimesshowmassivespikes">Why does my GPS speed sometimes show massive spikes?</a></h2><p>This is normal with GPS receivers, especially in areas where there are objects nearby (trees, people, buildings, mountains).  GPS receivers receive their signals over multiple paths.  The main path of course is the satellites themselves, but it also receives signals due to reflection off those nearby objects.  The receiver now sees more signal sources than are actually present and based on various algorithms, chooses to believe one of them.  Due to the reflected signals, the distance and clock offset from the satellite also differs and the calculation based on this is now slightly incorrect.  Considering that there may be several satellite signals being reflected, the overall outcome is the GPS drift that you see. </p>
+<p>To deal with this you can either include a distance filter in the performance settings, or you can try the activity recognition setting so that it doesn&#39;t log when you are still.  </p>
+<p>For more details on multipath, see <a href="https://www.e-education.psu.edu/geog862/node/1721">this page</a>.</p>
 
 </div></section>
 
