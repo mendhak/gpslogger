@@ -2,10 +2,14 @@ package com.mendhak.gpslogger.loggers.gpx;
 
 import android.location.Location;
 import android.test.suitebuilder.annotation.SmallTest;
+import com.mendhak.gpslogger.BuildConfig;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.MockLocations;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -168,5 +172,39 @@ public class Gpx10WriteHandlerTest {
         String expected = "<trkseg><trkpt lat=\"12.193\" lon=\"19.111\"><ele>9001.0</ele><time>2011-09-17T18:45:33Z</time><course>91.88</course><speed>188.44</speed><geoidheight>MYGEOIDHEIGHT</geoidheight><src>MOCK</src></trkpt>\n</trkseg></trk></gpx>";
 
         assertThat("Trackpoint XML with a geoid height", actual, is(expected));
+    }
+
+    @Test
+    public void GetBeginningXml_Verify(){
+        Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(null, null, null, true);
+
+
+        String actual = writeHandler.getBeginningXml(Strings.getIsoDateTime(new Date(1483054318298l)));
+        String expected =   "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><gpx version=\"1.0\" creator=\"GPSLogger "+ BuildConfig.VERSION_CODE  +" - http://gpslogger.mendhak.com/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\"><time>2016-12-29T23:31:58.298Z</time>";
+
+        assertThat("InitialXml matches", actual, is(expected));
+        assertThat("Initial XML Length is correct", actual.length(), is(343));
+        assertThat("Initial XML length constant is set for others to use", actual.length(), is(Gpx10WriteHandler.INITIAL_XML_LENGTH));
+    }
+
+    @Test
+    public void GetEndXml_Verify(){
+        Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(null, null, null, true);
+        String expected = "</trk></gpx>";
+        String actual = writeHandler.getEndXml();
+
+        assertThat("End XML Matches", actual, is(expected));
+        assertThat("End XML length matches", actual.length(), is(12));
+    }
+
+    @Test
+    public void GetEndXmlWithSegment_Verify(){
+        Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(null, null, null, true);
+        String expected = "</trkseg></trk></gpx>";
+        String actual = writeHandler.getEndXmlWithSegment();
+
+        assertThat("End Xml with track segment matches", actual, is(expected));
+        assertThat("End Xml length matches", actual.length(), is(21));
+
     }
 }

@@ -108,7 +108,7 @@ class Gpx10AnnotateHandler implements Runnable {
                 return;
             }
 
-            int startPosition = 339;
+
 
             String wpt = getWaypointXml(loc, dateTimeString, description);
 
@@ -122,14 +122,14 @@ class Gpx10AnnotateHandler implements Runnable {
 
                 int written = 0;
                 int readSize;
-                byte[] buffer = new byte[startPosition];
+                byte[] buffer = new byte[Gpx10WriteHandler.INITIAL_XML_LENGTH];
                 while ((readSize = bis.read(buffer)) > 0) {
                     bos.write(buffer, 0, readSize);
                     written += readSize;
 
                     System.out.println(written);
 
-                    if (written == startPosition) {
+                    if (written == Gpx10WriteHandler.INITIAL_XML_LENGTH) {
                         bos.write(wpt.getBytes());
                         buffer = new byte[20480];
                     }
@@ -181,6 +181,7 @@ class Gpx10WriteHandler implements Runnable {
     Location loc;
     private File gpxFile = null;
     private boolean addNewTrackSegment;
+    static final int INITIAL_XML_LENGTH = 343;
 
     public Gpx10WriteHandler(String dateTimeString, File gpxFile, Location loc, boolean addNewTrackSegment) {
         this.dateTimeString = dateTimeString;
@@ -188,7 +189,6 @@ class Gpx10WriteHandler implements Runnable {
         this.gpxFile = gpxFile;
         this.loc = loc;
     }
-
 
     @Override
     public void run() {
@@ -201,15 +201,9 @@ class Gpx10WriteHandler implements Runnable {
                     FileOutputStream initialWriter = new FileOutputStream(gpxFile, true);
                     BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
 
-                    StringBuilder initialXml = new StringBuilder();
-                    initialXml.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
-                    initialXml.append("<gpx version=\"1.0\" creator=\"GPSLogger " + BuildConfig.VERSION_NAME + " - http://gpslogger.mendhak.com/\" ");
-                    initialXml.append("xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ");
-                    initialXml.append("xmlns=\"http://www.topografix.com/GPX/1/0\" ");
-                    initialXml.append("xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 ");
-                    initialXml.append("http://www.topografix.com/GPX/1/0/gpx.xsd\">");
-                    initialXml.append("<time>").append(dateTimeString).append("</time>").append("<trk></trk></gpx>");
-                    initialOutput.write(initialXml.toString().getBytes());
+                    initialOutput.write(getBeginningXml(dateTimeString).getBytes());
+                    initialOutput.write("<trk>".getBytes());
+                    initialOutput.write(getEndXml().getBytes());
                     initialOutput.flush();
                     initialOutput.close();
 
@@ -217,7 +211,7 @@ class Gpx10WriteHandler implements Runnable {
                     addNewTrackSegment = true;
                 }
 
-                int offsetFromEnd = (addNewTrackSegment) ? 12 : 21;
+                int offsetFromEnd = (addNewTrackSegment) ? getEndXml().length() : getEndXmlWithSegment().length();
                 long startPosition = gpxFile.length() - offsetFromEnd;
                 String trackPoint = getTrackPointXml(loc, dateTimeString);
 
@@ -234,6 +228,26 @@ class Gpx10WriteHandler implements Runnable {
 
         }
 
+    }
+
+    String getBeginningXml(String dateTimeString){
+        StringBuilder initialXml = new StringBuilder();
+        initialXml.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
+        initialXml.append("<gpx version=\"1.0\" creator=\"GPSLogger " + BuildConfig.VERSION_CODE + " - http://gpslogger.mendhak.com/\" ");
+        initialXml.append("xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ");
+        initialXml.append("xmlns=\"http://www.topografix.com/GPX/1/0\" ");
+        initialXml.append("xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 ");
+        initialXml.append("http://www.topografix.com/GPX/1/0/gpx.xsd\">");
+        initialXml.append("<time>").append(dateTimeString).append("</time>");
+        return initialXml.toString();
+    }
+
+    String getEndXml(){
+        return "</trk></gpx>";
+    }
+
+    String getEndXmlWithSegment(){
+        return "</trkseg></trk></gpx>";
     }
 
     String getTrackPointXml(Location loc, String dateTimeString) {
