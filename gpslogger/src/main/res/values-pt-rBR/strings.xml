@@ -182,6 +182,7 @@
   <string name="menu_upload">Fazer upload</string>
   <string name="autoemail_from">Do endereço</string>
   <string name="autoemail_from_summary">Alguns provedores de e-mail exigem um endereço. Use isso somente se você precisar dele.     </string>
+  <string name="gdocs_clearauthorization_summary">Ignorar as configurações locais do Google Drive. Para cancelar o acesso de forma permanente, utilize as configurações da conta do Google</string>
   <string name="gdocs_setup_title">Google Drive</string>
   <string name="gdocs_test_summary">Carregar um arquivo de teste no Google Drive</string>
   <string name="gdocs_test_title">Upload de teste</string>
@@ -327,4 +328,5 @@
   <string name="parameters">Parâmetros</string>
   <string name="ssl_certificate_add_to_keystore">Adicionar este certificado ao armazenamento de chave local?</string>
   <string name="ssl_certificate_is_valid">O certificado é válido</string>
+  <string name="hide_notification_from_status_bar">Ocultar notificação da barra de status</string>
 </resources>

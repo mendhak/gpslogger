@@ -325,4 +325,5 @@ une plus grande précision à basses fréquences.    </string>
   <string name="parameters">Paramètres</string>
   <string name="ssl_certificate_add_to_keystore">Ajouter ce certificat au magasin de clés local ?</string>
   <string name="ssl_certificate_is_valid">Le certificat est valide</string>
+  <string name="hide_notification_from_status_bar">Masquer les notifications de la barre d’état</string>
 </resources>

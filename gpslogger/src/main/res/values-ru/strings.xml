@@ -44,7 +44,7 @@
   <string name="error_connection">Ошибка соединения. Пожайлуйста, проверьте настройки телефона.</string>
   <string name="seconds">сек.</string>
   <string name="minutes">мин.</string>
-  <string name="hours">час.</string>
+  <string name="hours">час</string>
   <string name="gpsprovider_unavailable">Нет доступных источников GPS-данных. Проверьте настройки местоположения и выберите поставщика координат.</string>
   <string name="started">Начато</string>
   <string name="providername_gps">спутники GPS</string>
@@ -58,7 +58,7 @@
   <string name="kilometers">&#160;км</string>
   <string name="unknown_direction">неизвестно</string>
   <string name="sorry">Извините</string>
-  <string name="success">Успех</string>
+  <string name="success">Успешно</string>
   <string name="direction_roughly">Приблизительно %s</string>
   <string name="direction_north">Север</string>
   <string name="direction_northnortheast">Севернее северо-востока</string>
@@ -103,7 +103,7 @@
     </string>
   <string name="new_file_creation_onceaday">Один раз в день</string>
   <string name="new_file_creation_everystart">При старте записи лога</string>
-  <string name="new_file_creation_custom">Файл</string>
+  <string name="new_file_creation_custom">Пользовательский файл</string>
   <string name="new_file_custom_title">Имя файла</string>
   <string name="new_file_custom_summary">Вы можете сами придумать имя файла. 
 При необходимости добавьте несколько динамически изменяемых параметров, таких как серийный номер, год, часы, минуты и т.д. Слишком сложные динамически составляемые имена файлов мало помогут при автоматической отправке, т.к в данном случае отправляется только последний файл.</string>
@@ -114,7 +114,7 @@
     </string>
   <string name="time_before_logging_dialog_title">Время в секундах</string>
   <string name="time_before_logging_hint">Введите число секунд (max 9999)</string>
-  <string name="keep_fix_summary">Будьте осторожны, это значительно сократит жизнь батареи. Используйте только для высокой точности с низкими интервалами.</string>
+  <string name="keep_fix_summary">Будьте осторожны, это значительно сократит жизнь батареи. Используйте только для высокой точности с низкой частотой.    </string>
   <string name="keep_fix_title">Держать GPS включенным между местоопределениями</string>
   <string name="retry_time_title">Продолжительность определения точности</string>
   <string name="retry_time_summary">Как долго необходимо продолжать попытки определения местоположения, после получения первоначального местоположения, чтобы получить местоположение, которое будет соответствовать настройкам точности фильтрации.</string>
@@ -127,6 +127,7 @@
   <string name="startonapplaunch_title">Начать при запуске приложения</string>
   <string name="startonapplaunch_summary">Начать запись при запуске приложения</string>
   <string name="autoemail_title">E-mail</string>
+  <string name="please_wait">Пожалуйста, подождите</string>
   <string name="autoemail_target">Адреса электронной почты получателей</string>
   <string name="autosend_frequency_display">После %s минут</string>
   <string name="autoemail_frequency_whenistop">Когда я останавливаю логирование</string>
@@ -185,6 +186,7 @@
   <string name="menu_upload">Загрузить</string>
   <string name="autoemail_from">Адрес отправителя</string>
   <string name="autoemail_from_summary">Некоторые поставщики услуг электронной почты требуют адреса отправителя. Используйте эту опцию только если вы в ней нуждаетесь.     </string>
+  <string name="gdocs_clearauthorization_summary">Очистить настройки Google Drive. Чтобы полностью отменить доступ, перейдите в настройки Google аккаунта</string>
   <string name="gdocs_setup_title">Диск Google</string>
   <string name="gdocs_test_summary">Загрузить тестовый файл на Google-диск</string>
   <string name="gdocs_test_title">Испытать загрузку файла</string>
@@ -325,5 +327,10 @@
   <string name="debuglog_attach_to_email_summary">Послать лог отладки по электронной почте, а также некоторых диагностические сведения</string>
   <string name="change_language_title">Изменение языка</string>
   <string name="change_language_summary">Не все языки полностью переведены! Необходимо перезапустить приложение чтобы изменения вступили в силу.</string>
+  <string name="coordinate_display_format">Формат отображения координат</string>
+  <string name="ssl_certificate_validate">Проверка SSL-сертификата</string>
   <string name="parameters">Параметры URL-адреса</string>
+  <string name="ssl_certificate_add_to_keystore">Добавить этот сертификат в локальное хранилище ключей?</string>
+  <string name="ssl_certificate_is_valid">Сертификат действителен</string>
+  <string name="hide_notification_from_status_bar">Спрятать уведомления</string>
 </resources>

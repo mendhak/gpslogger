@@ -328,4 +328,5 @@ Nomes de ficheiro muito dinâmicos
   <string name="parameters">Parâmetros</string>
   <string name="ssl_certificate_add_to_keystore">Adicionar este certificado ao armazenamento local de chaves?</string>
   <string name="ssl_certificate_is_valid">O certificado é válido</string>
+  <string name="hide_notification_from_status_bar">Esconder notificação da barra de status</string>
 </resources>
