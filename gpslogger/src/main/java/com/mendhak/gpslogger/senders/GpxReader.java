@@ -21,6 +21,7 @@ package com.mendhak.gpslogger.senders;
 
 import android.location.Location;
 import com.mendhak.gpslogger.common.SerializableLocation;
+import com.mendhak.gpslogger.common.Strings;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -41,7 +42,7 @@ import java.util.TimeZone;
  */
 public class GpxReader {
 
-    private static final SimpleDateFormat gpxDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    private static final SimpleDateFormat gpxDate = new SimpleDateFormat(Strings.getIsoDateTimeFormat());
 
     public static List<SerializableLocation> getPoints(File gpxFile) throws Exception {
         List<SerializableLocation> points;
