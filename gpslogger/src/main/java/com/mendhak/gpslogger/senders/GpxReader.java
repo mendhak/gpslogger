@@ -41,7 +41,7 @@ import java.util.TimeZone;
  */
 public class GpxReader {
 
-    private static final SimpleDateFormat gpxDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    private static final SimpleDateFormat gpxDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
     public static List<SerializableLocation> getPoints(File gpxFile) throws Exception {
         List<SerializableLocation> points;
