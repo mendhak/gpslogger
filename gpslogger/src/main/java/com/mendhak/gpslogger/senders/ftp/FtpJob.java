@@ -28,6 +28,7 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPSClient;
@@ -130,6 +131,7 @@ public class FtpJob extends Job {
 
                 FileInputStream inputStream = new FileInputStream(gpxFile);
                 client.changeWorkingDirectory(directory);
+                client.setFileType(FTP.BINARY_FILE_TYPE);
                 boolean result = client.storeFile(fileName, inputStream);
                 inputStream.close();
                 logServerReply(client);
