@@ -72,6 +72,9 @@ import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import de.greenrobot.event.EventBus;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.slf4j.Logger;
 
 import java.io.File;
@@ -111,10 +114,36 @@ public class GpsMainActivity extends AppCompatActivity
         startAndBindService();
         registerEventBus();
 
+        mqttTest();
+
         if(preferenceHelper.shouldStartLoggingOnAppLaunch()){
             LOG.debug("Start logging on app launch");
             EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
         }
+    }
+
+    private void mqttTest() {
+
+        try {
+            MqttClient client = new MqttClient(
+                    "tcp://broker.mqttdashboard.com:1883", //URI
+                    MqttClient.generateClientId(), //ClientId
+                    new MemoryPersistence()); //Persistence
+            client.connect();
+            LOG.debug("Connected status " + client.isConnected());
+
+            client.publish(
+                    "argument/1", // topic
+                    "payload".getBytes(), // payload
+                    2, // QoS
+                    false); // retained?
+
+            client.disconnect();
+
+        } catch (MqttException e) {
+            LOG.error("Could not connect", e);
+        }
+
     }
 
     @Override

@@ -42,6 +42,9 @@
             </intent-filter>
         </service>
 
+        <service android:name="org.eclipse.paho.android.service.MqttService" >
+        </service>
+
         <activity
             android:name=".GpsMainActivity"
             android:configChanges="locale"

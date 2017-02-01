@@ -24,6 +24,10 @@
 
 -keep,includedescriptorclasses class com.mendhak.gpslogger.** { *; }
 
+## PAHO
+-keep class org.eclipse.paho.client.mqttv3.* { *; }
+-keep class org.eclipse.paho.client.mqttv3.*$* { *; }
+
 # --------------------------------------------------------------------------------- #
 # GreenRobot EventBus
 # https://github.com/greenrobot/EventBus/blob/master/HOWTO.md#proguard-configuration

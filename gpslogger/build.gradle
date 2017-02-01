@@ -234,6 +234,9 @@ dependencies {
     //Markdown to HTML library
     compile 'com.github.commonsguy:cwac-anddown:dedb48ec0f'
 
+    //MQTT library
+    compile 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
+
 
     //Need to specify the companion wearable app
     wearApp project(":gpsloggerwear")
