@@ -32,6 +32,7 @@ import java.io.*;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertStoreException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 
@@ -135,4 +136,8 @@ public class Networks {
     }
 
 
+    public static TrustManager getTrustManager(Context context)
+            throws CertificateException, NoSuchAlgorithmException, KeyStoreException, IOException, CertStoreException {
+        return new LocalX509TrustManager(getKnownServersStore(context));
+    }
 }

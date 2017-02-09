@@ -24,10 +24,12 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.slf4j.LoggingOutputStream;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
+import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -39,6 +41,7 @@ import javax.net.ssl.KeyManagerFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
@@ -91,11 +94,11 @@ public class FtpJob extends Job {
                 client = new FTPSClient(protocol, implicit);
 
                 KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-                kmf.init(null, null);
+                kmf.init(Networks.getKnownServersStore(AppSettings.getInstance()), null);
                 KeyManager km = kmf.getKeyManagers()[0];
 
-                client.setSocketFactory(Networks.getSocketFactory(AppSettings.getInstance()));
                 ((FTPSClient) client).setKeyManager(km);
+                ((FTPSClient) client).setTrustManager(Networks.getTrustManager(AppSettings.getInstance()));
 
             } else {
                 client = new FTPClient();
@@ -110,11 +113,25 @@ public class FtpJob extends Job {
 
         try {
 
+            client.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(new LoggingOutputStream(LOG))));
+            client.setDefaultTimeout(60000);
+            client.setConnectTimeout(60000);
             client.connect(server, port);
+            client.setSoTimeout(60000);
+            client.setDataTimeout(60000);
             logServerReply(client);
 
 
             if (client.login(username, password)) {
+
+                if(useFtps){
+                    ((FTPSClient)client).execPBSZ(0);
+                    logServerReply(client);
+                    ((FTPSClient)client).execPROT("P");
+                    logServerReply(client);
+                }
+
+
                 client.enterLocalPassiveMode();
                 logServerReply(client);
 
@@ -203,7 +220,6 @@ public class FtpJob extends Job {
         String singleReply = client.getReplyString();
         if(!Strings.isNullOrEmpty(singleReply)){
             ftpServerResponses.add(singleReply);
-            LOG.debug("FTP SERVER: " + singleReply);
         }
 
         String[] replies = client.getReplyStrings();
@@ -211,7 +227,6 @@ public class FtpJob extends Job {
             for (String aReply : replies) {
                 if(!Strings.isNullOrEmpty(aReply)){
                     ftpServerResponses.add(aReply);
-                    LOG.debug("FTP SERVER: " + aReply);
                 }
             }
         }
