@@ -107,7 +107,7 @@ class Kml22AnnotateHandler implements Runnable {
                 bf.close();
 
                 RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
-                raf.seek(255);
+                raf.seek(258);
                 raf.write(descriptionNode.getBytes());
                 raf.write(restOfFile.toString().getBytes());
                 raf.close();
