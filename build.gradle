@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 project.ext.APP_ID = "com.mendhak.gpslogger"
-project.ext.APP_VERSION_CODE = 85
-project.ext.APP_VERSION_NAME = "85"
+project.ext.APP_VERSION_CODE = 86
+project.ext.APP_VERSION_NAME = "86"
 
