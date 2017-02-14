@@ -346,4 +346,5 @@ polia.
   <string name="parameters">Parametre adresy URL</string>
   <string name="ssl_certificate_add_to_keystore">Pridať certifikát do lokálneho úložiska?</string>
   <string name="ssl_certificate_is_valid">Certifikát je platný</string>
+  <string name="hide_notification_from_status_bar">Skryť notifikáciu v stavovom riadku</string>
 </resources>

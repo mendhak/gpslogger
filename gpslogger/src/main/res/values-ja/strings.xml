@@ -113,6 +113,7 @@
   <string name="time_before_logging_hint">時間（秒、最大9999）を入力してください</string>
   <string name="keep_fix_summary">注意。この設定はバッテリを著しく消費します。書込頻度を抑えて高精度を得たい場合のみ使用してください。</string>
   <string name="keep_fix_title">GPSを常にON</string>
+  <string name="retry_time_title">精度にマッチするまでの待ち時間</string>
   <string name="retry_time_summary">初期の位置情報の取得後は、この値の間、精度フィルタにマッチする値が来るのを待ちます。</string>
   <string name="display_imperial_title">ヤード法で表示</string>
   <string name="display_imperial_summary">ヤード法（フィート、マイル等）で表示します。単位の変更は表示に対してのみ有効です。</string>
@@ -123,6 +124,7 @@
   <string name="startonapplaunch_title">アプリ起動時に開始</string>
   <string name="startonapplaunch_summary">アプリ起動時にログ開始</string>
   <string name="autoemail_title">Email</string>
+  <string name="please_wait">お待ちください。</string>
   <string name="autoemail_target">送信先メール アドレス</string>
   <string name="autosend_frequency_display">%s 分後</string>
   <string name="autoemail_frequency_whenistop">停止を押した時</string>
@@ -176,6 +178,7 @@
   <string name="menu_upload">アップロード</string>
   <string name="autoemail_from">From アドレス</string>
   <string name="autoemail_from_summary">一部のメール プロバイダーはFromアドレスを必要とします。必要な場合のみこの設定を行ってください。</string>
+  <string name="gdocs_clearauthorization_summary">Googleドライブの設定を破棄します。恒久的なアクセスを取り消すには、Googleアカウントの設定で行います。</string>
   <string name="gdocs_setup_title">Google ドライブ</string>
   <string name="gdocs_test_summary">Google ドライブにテストファイルをアップロードします。</string>
   <string name="gdocs_test_title">テスト アップロード</string>
@@ -255,6 +258,7 @@
   <string name="txt_number_of_points">ポイント数</string>
   <string name="save">保存</string>
   <string name="pref_filedetails_title">ファイルとフォルダーの詳細</string>
+  <string name="absolute_timeout_title">GPS信号受信までの最大待ち時間</string>
   <string name="absolute_timeout_summary">設定の如何に関わらず、位置情報取得のリトライを中止するまでの時間（秒）。この設定は建物の中でGPS情報が取得できない場合にバッテリの消費を抑えるのに役立ちます。0にセットするとタイムアウトしません。</string>
   <string name="txt_latitude_short">緯度</string>
   <string name="txt_longitude_short">経度</string>
@@ -321,4 +325,5 @@
   <string name="parameters">パラメタ</string>
   <string name="ssl_certificate_add_to_keystore">ローカルキーストアに証明書を保存しますか？</string>
   <string name="ssl_certificate_is_valid">証明書は有効です。</string>
+  <string name="hide_notification_from_status_bar">ステータスバーに情報を表示しない</string>
 </resources>

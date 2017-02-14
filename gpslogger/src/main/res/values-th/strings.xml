@@ -42,6 +42,11 @@
   <string name="meters">&#160;เมตร</string>
   <string name="error">ผิดพลาด</string>
   <string name="error_connection">การเชื่อมต่อผิดพลาด กรุณาตรวจสอบการตั้งค่าโทรศัพท์ของคุณ</string>
+  <string name="seconds">ว</string>
+  <string name="minutes">นาที</string>
+  <string name="hours">ชม</string>
+  <string name="gpsprovider_unavailable">ไม่มีข้อมูลจาก GPS กรุณาตรวจสอบการตั้งค่าและเปิดใช้งานบริการระบุตำแหน่ง.
+    </string>
   <string name="started">เริ่มแล้ว</string>
   <string name="providername_gps">ดาวเทียม GPS</string>
   <string name="providername_celltower">เสาสัญญานมือถือ</string>
@@ -89,8 +94,11 @@
   <!-- Settings -->
   <string name="pref_logging_title">รายละเอียดการบันทึก</string>
   <string name="log_gpx_title">บันทึกลงไฟล์ GPX</string>
+  <string name="log_gpx_summary">ตำแหน่งของ log ไปยังไฟล์ GPX v1.0</string>
   <string name="log_kml_title">บันทึกลงไฟล์ KML</string>
+  <string name="log_kml_summary">ตำแหน่งของ log ไปยังไฟล์ KML v2.2</string>
   <string name="log_plain_text_title">บันทึกลงไฟล์ Text</string>
+  <string name="log_plain_text_summary">ตำแหน่งของ log ไปยังไฟล์ CSV</string>
   <string name="new_file_creation_title">สร้างไฟล์ใหม่</string>
   <string name="new_file_creation_summary">ไม่ว่าจะสร้างไฟล์ใหม่วันละครั้ง หรือทุกครั้งที่คุณเริ่มบันทึก</string>
   <string name="new_file_creation_onceaday">วันละครั้ง</string>
@@ -98,20 +106,31 @@
   <string name="new_file_creation_custom">กำหนดไฟล์เอง</string>
   <string name="new_file_custom_title">กำหนดชื่อไฟล์</string>
   <string name="pref_performance_title">ประสิทธิภาพ</string>
+  <string name="pref_performance_summary">เวลา กรอง และผู้ฟัง</string>
+  <string name="time_before_logging_title">ช่วงเวลาการบันทึก</string>
+  <string name="time_before_logging_summary">ใช้ 0 สำหรับความ ถี่สูงสุด แต่ช้ากว่าการใช้งานแบตเตอรี่เพื่อประหยัดพลังงาน
+    </string>
   <string name="time_before_logging_dialog_title">เวลาเป็นวินาที</string>
   <string name="time_before_logging_hint">ใส่ค่าเป็นวินาที (สูงสุด 9999)</string>
   <string name="keep_fix_summary">ระวัง เปิดค่านี้ทำให้แบตเตอรรี่หมดเร็วขึ้นกว่าเดิมมาก ใช้เฉพาะเมื่อต้องการความแม่นยำสูง แต่ระยะห่างระหว่างบันทึกต่ำ</string>
   <string name="keep_fix_title">เปิดจีพีเอสค้างไว้ระหว่างล็อคตำแหน่ง</string>
+  <string name="retry_time_title">ระยะเวลาให้ตรงกับความแม่นยำ</string>
+  <string name="retry_time_summary">หลังจากได้รับการแก้ไขเริ่มต้น ให้พยายามนานก่อนที่จะได้รับการจุดที่ถูกต้องให้ตรงกับตัวกรองความถูกต้องการตั้งค่า</string>
+  <string name="display_imperial_title">แสดงหน่วยอิมพีเรียล</string>
   <string name="enabledisablegps_title">เปิด/ปิด จีพีเอส</string>
   <string name="enabledisablegps_summary">ไปที่การตั้งค่าของโทรศัพท์เพื่อเปิดหรือปิดผู้ให้บริการ</string>
   <string name="startonbootup_title">เริ่มเมื่อบูตเครื่อง</string>
   <string name="startonbootup_summary">เปิดแอพพร้อมเริ่มบันทึกเมื่อเปิดโทรศัพท์</string>
+  <string name="autoemail_title">อีเมล</string>
+  <string name="please_wait">กรุณารอสักครู่</string>
   <string name="autoemail_target">ที่อยู่อีเมล์ปลายทาง</string>
+  <string name="autosend_frequency_display">หลังจาก %s นาที</string>
   <string name="autoemail_frequency_whenistop">เมื่อฉันกดหยุด</string>
   <string name="autoemail_smtp_category">การตั้งค่าอีเมล์</string>
   <string name="autoemail_username_summary">ชื่อผู้ใช้กับผู้ให้บริการอีเมล์ของคุณ</string>
   <string name="autoemail_password_summary">รหัสผ่านกับผู้ให้บริการอีเมล์ของคุณ</string>
   <string name="autoemail_ssl">ใช้ SSL?</string>
+  <string name="autoemail_ssl_summary">ลองสลับนี้ถ้าคุณไม่สามารถเชื่อมต่อได้</string>
   <string name="autoemail_choosepreset">ผู้ให้บริการอีเมล์</string>
   <string name="autoemail_choosepreset_summary">เลือกผู้ให้บริการหรือกำหนดค่าเอง</string>
   <string name="autoemail_smtp_testemail">อีเมล์ทดสอบ</string>

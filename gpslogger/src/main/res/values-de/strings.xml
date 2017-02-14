@@ -176,6 +176,7 @@
   <string name="menu_upload">Upload</string>
   <string name="autoemail_from">Absender-Adresse</string>
   <string name="autoemail_from_summary">Einige Email-Anbieter verlangen eine Absender-Adresse. Verwende das nur, wenn du das musst.</string>
+  <string name="gdocs_clearauthorization_summary">Lokale Google Drive-Einstellungen entfernen. Um den Zugriff dauerhaft zu entfernen, müssen die Google-Kontoeinstellungen angepasst werden</string>
   <string name="gdocs_setup_title">Google Drive</string>
   <string name="gdocs_test_summary">Testdatei auf Google Drive hochladen</string>
   <string name="gdocs_test_title">Teste Upload</string>
@@ -320,4 +321,5 @@
   <string name="parameters">Parameter</string>
   <string name="ssl_certificate_add_to_keystore">Soll dieses Zertifikat in den lokalen Speicher hinzugefügt werden?</string>
   <string name="ssl_certificate_is_valid">Das Zertifikat ist gültig</string>
+  <string name="hide_notification_from_status_bar">Benachrichtigung von Statusleiste ausblenden</string>
 </resources>
