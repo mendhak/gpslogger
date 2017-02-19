@@ -141,7 +141,7 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
 
         return String.format(messageFormat,
                 dateStamp,
-                Integer.toHexString(ContextCompat.getColor(getActivity(), colorResourceId)).substring(2), message);
+                Integer.toHexString(ContextCompat.getColor(rootView.getContext(), colorResourceId)).substring(2), message);
 
     }
 
