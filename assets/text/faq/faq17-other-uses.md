@@ -22,5 +22,11 @@ I have had success with:
   - Drivers and salespeople using it as a timesheet
   - Tracking of geocaches, gravestones, repair sites, etc.
   - Tracking friends and family on holiday
+  - Recording gravestone locations
+
+
+### Programmatic access
+
+There is a [project](https://github.com/export-mike/gpslogger-android-dropbox-restapi) that can expose the GPX files in Dropbox as a RESTful API, and a hosted [Heroku app](https://github.com/mendhak/gpslogger/issues/452). 
 
 
