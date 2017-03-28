@@ -140,6 +140,11 @@
 <p>If you have a file explorer installed, you can click on the folder paths in the simple/detailed screens.</p>
 <p>To copy the GPSLogger files, you can connect your phone to your computer and mount the SD card, then copy straight from the above folder. You can also change the default folder in the app settings. </p>
 <p>Finally, note that due to the <a href="http://commonsware.com/blog/2014/04/09/storage-situation-removable-storage.html">restrictions introduced in Android KitKat</a>, any files in the default folder will be removed if you uninstall the app.</p>
+<h2><a name="howtologtoanexternalsdcard" href="#howtologtoanexternalsdcard">How to log to an external SD card?</a></h2><p>Under logging details, pick the &#39;save to folder&#39; dialog.  Keep navigating upwards using the <code>..</code> until you see the label of your SD card.  Pick that and then navigate down into the GPSLogger data folder.  Your path may end up looking like this:</p>
+<blockquote>
+<p>Example: <code>/storage/1b04-100a/Android/data/com.mendhak.gpslogger/files</code></p>
+</blockquote>
+<p>Note that GPSLogger can only write to its application folders.  File explorers are able to write to any location but they make use of a special media hack which this app cannot rely on. </p>
 
 </div></section>
 
@@ -361,7 +366,7 @@ For example, in Tasker, create a new action under Misc &gt; Send Intent. </p>
             <li><a href="http://mendhak.com/url/69135870@N00/6"><img width="150" height="150" alt="thumbnail" src="http://mendhak.com/img/69135870@N00/6/q"></a></li>
         </ul>
       <section class="copy">
-        <p>&mdash; &copy; 2016 Mendhak &mdash;</p>
+        <p>&mdash; &copy; 2017 Mendhak &mdash;</p>
       </section>
     </footer>
   </body>
