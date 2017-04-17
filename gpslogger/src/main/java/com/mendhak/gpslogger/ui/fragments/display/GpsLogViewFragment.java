@@ -32,6 +32,7 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import com.mendhak.gpslogger.ui.components.InteractiveScrollView;
@@ -49,6 +50,7 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
     TextView logTextView;
     InteractiveScrollView scrollView;
     private boolean doAutomaticScroll = true;
+    private Session session = Session.getInstance();
 
     Handler timerHandler = new Handler();
 
@@ -75,9 +77,9 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
             }
         });
 
-        CheckBox chkDebugFile = (CheckBox) rootView.findViewById(R.id.logview_chkDebugFile);
-        chkDebugFile.setChecked(preferenceHelper.shouldDebugToFile());
-        chkDebugFile.setOnCheckedChangeListener(this);
+        CheckBox chkStartLogging = (CheckBox) rootView.findViewById(R.id.logview_startLogging);
+        chkStartLogging.setChecked(session.isStarted());
+        chkStartLogging.setOnCheckedChangeListener(this);
         return rootView;
     }
 
@@ -159,12 +161,8 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
 
-        if(compoundButton.getId() == R.id.logview_chkDebugFile){
-            preferenceHelper.setDebugToFile(checked);
-
-            if(checked){
-                Toast.makeText(getActivity(), R.string.debuglog_summary, Toast.LENGTH_LONG).show();
-            }
+        if(compoundButton.getId() == R.id.logview_startLogging){
+            requestToggleLogging();
         }
     }
 }

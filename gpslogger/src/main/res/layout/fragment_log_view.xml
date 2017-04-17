@@ -22,8 +22,8 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/debuglog_title"
-            android:id="@+id/logview_chkDebugFile"/>
+            android:text="@string/btn_start_logging"
+            android:id="@+id/logview_startLogging"/>
 
     </LinearLayout>
 
