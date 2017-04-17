@@ -34,6 +34,7 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
+import com.mendhak.gpslogger.ui.components.InteractiveScrollView;
 import org.slf4j.Logger;
 
 import java.text.SimpleDateFormat;
@@ -46,7 +47,8 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     long startTime = 0;
     TextView logTextView;
-    ScrollView scrollView;
+    InteractiveScrollView scrollView;
+    private boolean doAutomaticScroll = true;
 
     Handler timerHandler = new Handler();
 
@@ -58,7 +60,20 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_log_view, container, false);
         logTextView = (TextView) rootView.findViewById(R.id.logview_txtstatus);
-        scrollView = (ScrollView) rootView.findViewById(R.id.logview_scrollView);
+        scrollView = (InteractiveScrollView) rootView.findViewById(R.id.logview_scrollView);
+        scrollView.setOnScrolledUpListener(new InteractiveScrollView.OnScrolledUpListener() {
+            @Override
+            public void onScrolledUp(int scrollY) {
+                doAutomaticScroll=false;
+            }
+        });
+
+        scrollView.setOnBottomReachedListener(new InteractiveScrollView.OnBottomReachedListener() {
+            @Override
+            public void onBottomReached(int scrollY) {
+                doAutomaticScroll=true;
+            }
+        });
 
         CheckBox chkDebugFile = (CheckBox) rootView.findViewById(R.id.logview_chkDebugFile);
         chkDebugFile.setChecked(preferenceHelper.shouldDebugToFile());
@@ -69,9 +84,6 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
     @Override
     public void onStart() {
         super.onStart();
-
-        startTime = System.currentTimeMillis();
-        timerHandler.postDelayed(timerRunnable, 0);
     }
 
     @Override
@@ -100,8 +112,6 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
     void showLogcatMessages(){
 
         CheckBox chkLocationsOnly = (CheckBox) rootView.findViewById(R.id.logview_chkLocationsOnly);
-        CheckBox chkAutoScroll = (CheckBox) rootView.findViewById(R.id.logview_chkAutoScroll);
-
 
         StringBuilder sb = new StringBuilder();
         for(ILoggingEvent message : SessionLogcatAppender.Statuses){
@@ -127,7 +137,7 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
         }
         logTextView.setText(Html.fromHtml(sb.toString()));
 
-        if(chkAutoScroll.isChecked()){
+        if(doAutomaticScroll){
             scrollView.fullScroll(View.FOCUS_DOWN);
         }
 

@@ -25,15 +25,9 @@
             android:text="@string/debuglog_title"
             android:id="@+id/logview_chkDebugFile"/>
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/logview_autoscroll"
-            android:checked="true"
-            android:id="@+id/logview_chkAutoScroll"/>
     </LinearLayout>
 
-    <ScrollView
+    <com.mendhak.gpslogger.ui.components.InteractiveScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/logview_scrollView"
@@ -49,6 +43,6 @@
             android:fontFamily="monospace"
             android:typeface="monospace"
             />
-    </ScrollView>
+    </com.mendhak.gpslogger.ui.components.InteractiveScrollView>
 
 </LinearLayout>
