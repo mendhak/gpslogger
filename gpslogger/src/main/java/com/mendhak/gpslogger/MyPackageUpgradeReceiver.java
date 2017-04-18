@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 mendhak
+ * Copyright (C) 2017 mendhak
  *
  * This file is part of GPSLogger for Android.
  *
@@ -22,35 +22,30 @@ package com.mendhak.gpslogger;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
-public class StartupReceiver extends BroadcastReceiver {
+public class MyPackageUpgradeReceiver extends BroadcastReceiver {
 
-    private static final Logger LOG = Logs.of(StartupReceiver.class);
+    private static final Logger LOG = Logs.of(MyPackageUpgradeReceiver.class);
 
     @Override
     public void onReceive(Context context, Intent intent) {
         try {
-            boolean startImmediately = PreferenceHelper.getInstance().shouldStartLoggingOnBootup();
+            boolean shouldResumeLogging = Session.getInstance().isStarted();
+            LOG.debug("Package has been replaced. Should resume logging: " + shouldResumeLogging);
 
-            LOG.info("Start on bootup - " + String.valueOf(startImmediately));
-
-            if (startImmediately) {
-
+            if(shouldResumeLogging){
                 EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
 
                 Intent serviceIntent = new Intent(context, GpsLoggingService.class);
                 context.startService(serviceIntent);
             }
         } catch (Exception ex) {
-            LOG.error("StartupReceiver", ex);
-
+            LOG.error("Package upgrade receiver", ex);
         }
-
     }
-
 }

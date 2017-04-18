@@ -148,6 +148,12 @@
         </receiver>
         <receiver android:name=".senders.AlarmReceiver" />
 
+        <receiver android:name=".MyPackageUpgradeReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
         <!--android:theme="@style/Theme.AppCompat.Translucent"-->
         <activity
             android:name=".NotificationAnnotationActivity"
