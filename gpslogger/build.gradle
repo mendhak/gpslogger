@@ -92,6 +92,10 @@ android {
         abortOnError false
     }
 
+    dexOptions {
+        incremental true
+    }
+
 
     testOptions {
         unitTests.returnDefaultValues = true

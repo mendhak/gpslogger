@@ -527,10 +527,10 @@ public class PreferenceHelper {
 
 
     /**
-     * Whether to log to a plaintext CSV file
+     * Whether to log to a CSV file
      */
     @ProfilePreference(name= PreferenceNames.LOG_TO_CSV)
-    public boolean shouldLogToPlainText() {
+    public boolean shouldLogToCSV() {
         return prefs.getBoolean(PreferenceNames.LOG_TO_CSV, false);
     }
 

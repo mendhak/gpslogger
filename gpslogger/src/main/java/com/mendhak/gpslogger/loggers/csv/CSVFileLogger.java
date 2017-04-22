@@ -20,6 +20,7 @@
 package com.mendhak.gpslogger.loggers.csv;
 
 import android.location.Location;
+import android.support.annotation.Nullable;
 import com.mendhak.gpslogger.common.Maths;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.FileLogger;
@@ -32,13 +33,15 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class PlainTextFileLogger implements FileLogger {
+public class CSVFileLogger implements FileLogger {
 
+    private final Float batteryLevel;
     private File file;
     protected final String name = "TXT";
 
-    public PlainTextFileLogger(File file) {
+    public CSVFileLogger(File file, @Nullable Float batteryLevel) {
         this.file = file;
+        this.batteryLevel = batteryLevel;
     }
 
     @Override
@@ -48,7 +51,7 @@ public class PlainTextFileLogger implements FileLogger {
 
             FileOutputStream writer = new FileOutputStream(file, true);
             BufferedOutputStream output = new BufferedOutputStream(writer);
-            String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider,hdop,vdop,pdop,geoidheight,ageofdgpsdata,dgpsid,activity\n";
+            String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider,hdop,vdop,pdop,geoidheight,ageofdgpsdata,dgpsid,activity,battery\n";
             output.write(header.getBytes());
             output.flush();
             output.close();
@@ -70,7 +73,7 @@ public class PlainTextFileLogger implements FileLogger {
 
     String getCsvLine(Location loc, String dateTimeString) {
 
-        String outputString = String.format(Locale.US, "%s,%f,%f,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s\n", dateTimeString,
+        String outputString = String.format(Locale.US, "%s,%f,%f,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", dateTimeString,
                 loc.getLatitude(),
                 loc.getLongitude(),
                 loc.hasAltitude() ? loc.getAltitude() : "",
@@ -85,7 +88,8 @@ public class PlainTextFileLogger implements FileLogger {
                 (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("GEOIDHEIGHT"))) ? loc.getExtras().getString("GEOIDHEIGHT") : "",
                 (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("AGEOFDGPSDATA"))) ? loc.getExtras().getString("AGEOFDGPSDATA") : "",
                 (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("DGPSID"))) ? loc.getExtras().getString("DGPSID") : "",
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("DETECTED_ACTIVITY"))) ? loc.getExtras().getString("DETECTED_ACTIVITY") : ""
+                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("DETECTED_ACTIVITY"))) ? loc.getExtras().getString("DETECTED_ACTIVITY") : "",
+                (batteryLevel != null) ? batteryLevel : ""
         );
         return outputString;
     }

@@ -155,7 +155,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             imgNmea.setVisibility(View.GONE);
         }
 
-        if (preferenceHelper.shouldLogToPlainText()) {
+        if (preferenceHelper.shouldLogToCSV()) {
 
             imgCsv.setVisibility(View.VISIBLE);
         } else {
@@ -169,7 +169,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         }
 
         if (!preferenceHelper.shouldLogToGpx() && !preferenceHelper.shouldLogToKml()
-                && !preferenceHelper.shouldLogToPlainText()) {
+                && !preferenceHelper.shouldLogToCSV()) {
             showCurrentFileName(null);
         }
 

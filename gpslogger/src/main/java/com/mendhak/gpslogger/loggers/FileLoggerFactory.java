@@ -25,7 +25,7 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
-import com.mendhak.gpslogger.loggers.csv.PlainTextFileLogger;
+import com.mendhak.gpslogger.loggers.csv.CSVFileLogger;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlLogger;
 import com.mendhak.gpslogger.loggers.gpx.Gpx10FileLogger;
 import com.mendhak.gpslogger.loggers.kml.Kml22FileLogger;
@@ -64,9 +64,10 @@ public class FileLoggerFactory {
             loggers.add(new Kml22FileLogger(kmlFile, session.shouldAddNewTrackSegment()));
         }
 
-        if (preferenceHelper.shouldLogToPlainText()) {
-            File file = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".txt");
-            loggers.add(new PlainTextFileLogger(file));
+        if (preferenceHelper.shouldLogToCSV()) {
+            float batteryLevel = Systems.getBatteryLevel(context);
+            File file = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".csv");
+            loggers.add(new CSVFileLogger(file, batteryLevel));
         }
 
         if (preferenceHelper.shouldLogToOpenGTS()) {
