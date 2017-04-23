@@ -43,6 +43,7 @@
   <string name="seconds">s</string>
   <string name="minutes">min.</string>
   <string name="hours">godz.</string>
+  <string name="gpsprovider_unavailable">Brak dostępnej usługi GPS. Sprawdź swoje ustawienia lokalizacji.</string>
   <string name="started">Rozpoczęte</string>
   <string name="providername_gps">Satelity GPS</string>
   <string name="providername_celltower">Wieże telefonii</string>
@@ -103,6 +104,7 @@
   <string name="new_file_custom_title">Niestandardowa nazwa pliku</string>
   <string name="pref_performance_title">Wydajność</string>
   <string name="pref_performance_summary">Opcje czasu, filtry i nasłuch</string>
+  <string name="time_before_logging_title">Interwał rejestrowania</string>
   <string name="time_before_logging_summary">Wpisz 0 dla maksymalnej częstotliwości; mniejsza częstotliwość zmniejsza zużycie baterii.    </string>
   <string name="time_before_logging_dialog_title">Czas w sekundach</string>
   <string name="time_before_logging_hint">Wprowadź czas (max 9999)</string>
@@ -116,6 +118,7 @@
   <string name="startonapplaunch_title">Uruchom przy starcie aplikacji</string>
   <string name="startonapplaunch_summary">Rozpocznij logowanie po uruchomieniu aplikacji</string>
   <string name="autoemail_title">Adres e-mail</string>
+  <string name="please_wait">Proszę czekać</string>
   <string name="autoemail_target">Adresy docelowe</string>
   <string name="autosend_frequency_display">Po %s minutach</string>
   <string name="autoemail_frequency_whenistop">Po zatrzymaniu logowania</string>
@@ -184,6 +187,7 @@
   <string name="menu_autosend_now">Automatycznie wyślij teraz</string>
   <string name="autosend_sending">Wysyłam automatycznie</string>
   <string name="summary_autosend">Automatyczne wysyłanie:</string>
+  <string name="pref_autosend_title">Auto-wysyłanie, email i upload</string>
   <string name="pref_autosend_summary">E-mail, opcje udostępniania i wysyłania</string>
   <string name="shortcut_start">Rozpocznij</string>
   <string name="shortcut_stop">Zatrzymaj</string>
@@ -195,6 +199,7 @@
   <string name="autoopengts_server">Serwer</string>
   <string name="autoopengts_server_summary">Nazwa hosta lub adres IP</string>
   <string name="opengts_server_communication_method">Metoda komunikacji</string>
+  <string name="opengts_server_communication_method_summary">Komunikacja oparta o HTTP lub gniaza RAW</string>
   <string name="autoopengts_server_path">Ścieżka serwera</string>
   <string name="autoopengts_server_path_summary">Opcjonalne i tylko dla protokołu opartego o HTTP. Na przykład \'/gprmc/Data\'</string>
   <string name="autoopengts_device_id">ID urządzenia</string>
@@ -244,6 +249,7 @@
   <string name="txt_number_of_points">Liczba punktów</string>
   <string name="save">Zapisz</string>
   <string name="pref_filedetails_title">Szczegóły pliku i folderu</string>
+  <string name="absolute_timeout_title">Całkowity czas ustalenia pozycji GPS</string>
   <string name="absolute_timeout_summary">Liczba sekund, po których aplikacja przestaje próbować określić lokalizację, niezależnie od innych ustawień. Jest to szczególnie przydatne w przypadku, gdy jesteś wewnątrz budynków, by zapobiec nadmiernemu zużyciu baterii. Ustaw na 0 dla braku limitu.</string>
   <string name="txt_latitude_short">Dług.</string>
   <string name="txt_longitude_short">Szer.</string>
@@ -254,11 +260,16 @@
   <string name="listeners_passive">Pasywne</string>
   <string name="listeners_title">Dostawcy usług lokalizacji</string>
   <string name="autosend_frequency_hint">Liczba minut</string>
+  <string name="pref_logging_file_no_permissions">Ten folder nie jest zapisywany przez GPSLogger. Wybierz inny folder do zapisu.</string>
   <string name="pref_gpsvisualizer">Wizualizuj statystyki logowania</string>
   <string name="new_file_custom_each_time_title">Pytaj o nazwę pliku przy każdym uruchomieniu</string>
+  <string name="new_file_custom_each_time_summary">Pytaj o nazwę pliku za każdym razem kiedy rozpoczyna się rejestracja</string>
   <string name="donate_app">Przekaż darowiznę (aplikacja)</string>
   <string name="donate_bitcoin">Bitcoin</string>
   <string name="tip_coffee">Kup mi kawę</string>
+  <string name="no_network_message">Sieć jest niedostępna</string>
+  <string name="hide_notification_buttons">Ukryj przyciski powiadomień</string>
+  <string name="restart_required">Musisz uruchomić ponownie GPSLogger aby użyć tych ustawień</string>
   <string name="pref_performance_activityrecognition">Rozpoznawanie aktywności</string>
   <string name="activityrecognition_dont_log_if_still">Nie loguj, jeśli się nie ruszam</string>
   <string name="txt_activity">Aktywność:</string>
@@ -282,4 +293,9 @@
   <string name="profile_add_new">Dodaj profil</string>
   <string name="gpslogger_permissions_rationale_title">Wymagane uprawnienia</string>
   <string name="privacy_policy">Polityka prywatności</string>
+  <string name="change_language_title">Zmień Język</string>
+  <string name="parameters">Parametry</string>
+  <string name="ssl_certificate_add_to_keystore">Dodać ten certyfikat do magazynu certyfikatów?</string>
+  <string name="ssl_certificate_is_valid">Certyfikat poprawny</string>
+  <string name="hide_notification_from_status_bar">Ukryj powiadomienia z paska stanu</string>
 </resources>

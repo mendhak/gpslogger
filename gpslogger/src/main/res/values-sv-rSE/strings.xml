@@ -42,6 +42,9 @@
   <string name="meters">&#160;meter</string>
   <string name="error">Fel</string>
   <string name="error_connection">Anslutningsfel. Kontrollera telefonens inställningar.</string>
+  <string name="seconds">s</string>
+  <string name="minutes">minut</string>
+  <string name="hours">timmar</string>
   <string name="started">Startad</string>
   <string name="providername_gps">GPS-satelliter</string>
   <string name="providername_celltower">mobilmaster</string>
@@ -99,6 +102,7 @@
   <string name="new_file_custom_title">Anpassat filnamn</string>
   <string name="new_file_custom_summary">Du kan använda ditt eget filnamn. Alternativt lägga till några dynamiska parametrar såsom serienummer, år, timme, minut, etc. Mycket dynamiska filnamn kan fungera dåligt eftersom den bara sänder den senaste filen.</string>
   <string name="pref_performance_title">Prestanda</string>
+  <string name="time_before_logging_title">Loggningsintervall</string>
   <string name="time_before_logging_summary">Använd 0 för maximal frekvens, men långsammare drar mindre batteri.
     </string>
   <string name="time_before_logging_dialog_title">Tid i sekunder</string>
@@ -106,12 +110,17 @@
   <string name="keep_fix_summary">Observera att detta minskar batterilivslängden drastiskt. Använd endast för högre precision vid låga frekvenser.
     </string>
   <string name="keep_fix_title">Behåll GPS på mellan fixeringar</string>
+  <string name="retry_time_title">Tid för att uppnå önskad noggrannhet</string>
   <string name="display_imperial_title">Visa brittiska måttenheter</string>
   <string name="display_imperial_summary">Visa fot, mile and pint i stället för metriska enheter. (Inställningar måste fortfarande vara metriska)</string>
   <string name="enabledisablegps_title">Aktivera/Inaktivera GPS</string>
   <string name="enabledisablegps_summary">Gå till telefoninställningarna för att aktivera eller inaktivera leverantörer.</string>
   <string name="startonbootup_title">Starta vid systemstart</string>
   <string name="startonbootup_summary">Kör app och starta loggning då telefonen startas</string>
+  <string name="startonapplaunch_title">Starta vid app-uppstart</string>
+  <string name="startonapplaunch_summary">Startar loggning när appen startar upp</string>
+  <string name="autoemail_title">E-post</string>
+  <string name="please_wait">Vänta</string>
   <string name="autoemail_target">Mottagaradresser</string>
   <string name="autosend_frequency_display">Efter %s minuter</string>
   <string name="autoemail_frequency_whenistop">När jag trycker stopp</string>
@@ -147,6 +156,7 @@
   <string name="osm_pick_file">Välj en fil att ladda upp</string>
   <string name="debuglog_title">Skriv till felsökningsfil</string>
   <string name="debuglog_summary">Skriver felsökningsmeddelanden till en fil på SD-kortet. Varning: Filen växer mycket snabbt.</string>
+  <string name="pref_logging_summary">Filtyper, skapande och namngivning</string>
   <string name="pref_general_title">Allmänna inställningar</string>
   <string name="pref_general_summary">Start- och visningsinställningar</string>
   <string name="emailprovider_google">Google Mail</string>
@@ -160,19 +170,26 @@
     </string>
   <string name="dropbox_couldnotauthorize">Kunde inte auktorisera mot Dropbox, försök igen senare</string>
   <string name="owncloud_setup_title">ownCloud</string>
+  <string name="owncloud_server_summary">ownCloud bas-URL</string>
+  <string name="owncloud_directory_summary">Mapp som ska användas på ownCloud server. Se till att den existerar annars kommer uppladdningen att misslyckas.</string>
+  <string name="owncloud_test_summary">Ladda upp en testfil till ownCloud servern</string>
+  <string name="owncloud_testing">Testar uppladdning till ownCloud</string>
   <string name="menu_upload">Skicka</string>
   <string name="autoemail_from">Avsändaradress</string>
   <string name="autoemail_from_summary">Vissa e-postleverantörer kräver en avsändaradress. Använd detta endast om det behövs.</string>
   <string name="gdocs_setup_title">Google Drive</string>
+  <string name="gdocs_test_summary">Ladda upp en testfil till Google Drive</string>
   <string name="gdocs_test_title">Testa uppladdning</string>
   <string name="gdocs_testupload_success">Skickad. Se dina Google Dokuments för den nya filen.</string>
   <string name="autoemail_sendto_csv">E-postadresser separerade av kommatecken</string>
   <string name="autosend_enabled">Tillåt autosändning</string>
   <string name="autosend_enabled_summary">Tillåt att filerna skickas till valfritt mål</string>
+  <string name="autosend_frequency_summary">Hur ofta loggfiler ska skickas, i minuter. Sätt till 0 för att inaktivera.</string>
   <string name="autosend_frequency">Hur ofta?</string>
   <string name="autosend_sendzip_title">Skicka zip-fil</string>
   <string name="autosend_sendzip_summary">Sänd zip-filer då det passar. Inaktivera för att sända individuella filer eller om zip-alternativet inte fungerar</string>
   <string name="autosend_targets_category">Mål för autosänd</string>
+  <string name="menu_autosend_now">Skicka automatiskt nu</string>
   <string name="autosend_sending">Autosänder</string>
   <string name="summary_autosend">Autosänd:</string>
   <string name="pref_autosend_title">Autosänd, mail och uppladdning</string>
@@ -228,6 +245,7 @@
   <string name="view_simple">Enkel vy</string>
   <string name="view_detailed">Detaljerad vy</string>
   <string name="view_big">Stor vy</string>
+  <string name="view_log">Loggvy</string>
   <string name="bigview_taptotoggle">Tryck för att starta/stoppa loggning</string>
   <string name="summary_autosendtargets">Skicka till:</string>
   <string name="accuracy_filter_title">Noggrannhetsfilter</string>
@@ -238,6 +256,7 @@
   <string name="txt_number_of_points">Antal punkter</string>
   <string name="save">Spara</string>
   <string name="pref_filedetails_title">Fil- och mappdetaljer</string>
+  <string name="absolute_timeout_title">Absolut tid till GPS-fix</string>
   <string name="absolute_timeout_summary">Antal sekunder efter vilket appen ger upp om att erhålla en fixering, oberoende av andra inställningar. Detta är speciellt användbart när du är inne i byggnader för att hindra GPS:en från att tömma batteriet.  Sätt till 0 för ingen timeout.</string>
   <string name="txt_latitude_short">Lat</string>
   <string name="txt_longitude_short">Lon</string>
@@ -247,7 +266,11 @@
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Nätverk</string>
   <string name="listeners_passive">Passiv</string>
+  <string name="listeners_title">Positionskällor</string>
   <string name="autosend_frequency_hint">Antal minuter</string>
+  <string name="pref_logging_file_no_permissions">Mappen är inte skrivbar av GPSLogger. Vänligen välj en annan mapp att skriva till.</string>
+  <string name="pref_gpsvisualizer">GPS logstatistik och grafer</string>
+  <string name="new_file_custom_each_time_title">Fråga efter filnamn vid varje loggnings-start</string>
   <string name="no_network_message">Inget nätverk finns tillgängligt</string>
   <string name="activityrecognition_dont_log_if_still">Logga inte om jag inte rör mig</string>
   <string name="txt_activity">Aktivitet:</string>

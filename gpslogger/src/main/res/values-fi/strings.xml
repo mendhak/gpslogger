@@ -109,12 +109,14 @@
         eivät välttämättä toimi hyvin automaattisen lähetyksen kanssa, koska se lähettää vain viimeisimmän tiedoston.</string>
   <string name="pref_performance_title">Suorituskyky</string>
   <string name="pref_performance_summary">Ajoitukset, suodattimet ja kuuntelijat</string>
+  <string name="time_before_logging_title">Kirjaamisen taajuus</string>
   <string name="time_before_logging_summary">Käytä arvoa 0 maksimitaajuudeksi, mutta hitaampi on akun kannalta parempi.    </string>
   <string name="time_before_logging_dialog_title">Aika sekunteina</string>
   <string name="time_before_logging_hint">Syötä sekunnit (max 9999)</string>
   <string name="keep_fix_summary">Ole huolellinen, tämä tulee lyhentämään akunkestoa dramaattisesti. Käytä vain
         suurempaan tarkkuuteen matalampien taajuuksien kanssa.    </string>
   <string name="keep_fix_title">Pidä aina GPS päällä</string>
+  <string name="retry_time_title">Käytetty aika tarkkuuden saavuttamiseksi</string>
   <string name="display_imperial_title">Näytä brittiläiset yksiköt</string>
   <string name="display_imperial_summary">Näytä jalat, mailit ja pintit, ei yhtään uusia ja hienoja metrejä. (Asetuksien täytyy silti olla metreissä)</string>
   <string name="enabledisablegps_title">Ota/Poista GPS käytöstä</string>

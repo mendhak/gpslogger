@@ -314,6 +314,9 @@
   <string name="gpslogger_permissions_rationale_title">Izin diperlukan</string>
   <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Aplikasi ini butuh bermacam ijin agar dapat berfungsi. <br /> <b>lokasi perangkat</b> - perijinin ini mengijinkan membaca lokasi data dari menara selular dan hardware GPS pada perangkat.<br /><b> Foto, media, file.</b> - perijinan ini mengijinkan membaca catatan file dan mengecek file ke penyimpanan, dan membaca dari daftar file untuk diunggah atau dibagi. aplikasi ini tidak akan mengakses foto atau media Anda.<br /><b> mengakses kontak Anda</b> - jika prnggunaan google drive berfungsi, perijinan ini mengijinkan membuat daftar akun google yang terdaftar pada perangkat ini. daftar kontak Anda tidak diakses oleh aplikasi ini.<br /><br/>  ]]></string>
   <string name="gpslogger_permissions_permanently_denied">Anda secara permanen telah menolak izin satu atau lebih perijinan yang dibutuhkan aplikasi ini.  Anda akan perlu pergi ke aplikasi pengaturan layar untuk memberikan atau reset izin ini.</string>
+  <string name="privacy_policy">Kebijakan Privasi</string>
+  <string name="debuglog_attach_to_email">Melampirkan catatan debug ke email</string>
+  <string name="debuglog_attach_to_email_summary">Melampirkan catatan debug ke email dengan beberapa informasi diagnostik</string>
   <string name="change_language_title">Ubah bahasa</string>
   <string name="change_language_summary">Tidak semua bahasa sepenuhnya diterjemahkan! Anda harus me-restart applikasi agar pengaturan diterapkan.</string>
   <string name="coordinate_display_format">Koordinat menampilkan format</string>

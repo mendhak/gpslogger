@@ -107,12 +107,15 @@
   <string name="new_file_custom_summary">Je kan je eigen bestandsnaam opgeven.        Je hebt de mogelijkheid om bijkomende dynamische parameters op te geven zoals serienummer, jaar, uur, minuut, enz. Té dynamische bestandsnamen        werken minder goed met automatische verzending, aangezien die steeds het laatste bestand versturen.</string>
   <string name="pref_performance_title">Performantie</string>
   <string name="pref_performance_summary">Tijdinstellingen, filters en luisteraars</string>
+  <string name="time_before_logging_title">Registratie-interval</string>
   <string name="time_before_logging_summary">Gebruik 0 als maximale frequentie, maar een hogere waarde bevordert de accuduur.
     </string>
   <string name="time_before_logging_dialog_title">﻿Tijd in seconden</string>
   <string name="time_before_logging_hint">﻿Voer seconden in (max 9999)</string>
   <string name="keep_fix_summary">Pas op, verkort de accuduur sterk. Alleen gebruiken voor hogere nauwkeurigheid met lagere frequenties.</string>
   <string name="keep_fix_title">Houdt GPS ingeschakeld tussen \"fixes\"</string>
+  <string name="retry_time_title">Tijdsduurvoor nauwkerigheid bepaling</string>
+  <string name="retry_time_summary">Blijf deze tijd proberen, ook na het verkrijgen van de eerste fix, om zo aan de ingestelde nauwkeurigheidscriteria te voldoen.</string>
   <string name="display_imperial_title">Weergave in US (imperial) eenheden</string>
   <string name="display_imperial_summary">Weergave in voet, mijl en pint, niks van dat nieuwerwets metrisch gedoe (instellingen moeten steeds metrisch opgegeven worden).</string>
   <string name="enabledisablegps_title">GPS in- of uitschakelen</string>
@@ -122,6 +125,7 @@
   <string name="startonapplaunch_title">Start als de app gestart wordt</string>
   <string name="startonapplaunch_summary">Start loggen wanneer app wordt gestart</string>
   <string name="autoemail_title">E-mail</string>
+  <string name="please_wait">Een moment geduld a.u.b.</string>
   <string name="autoemail_target">Doel e-mailadressen</string>
   <string name="autosend_frequency_display">Na %s minuten</string>
   <string name="autoemail_frequency_whenistop">Wanneer ik op stop druk</string>
@@ -175,6 +179,7 @@
   <string name="menu_upload">Uploaden</string>
   <string name="autoemail_from">Verzendadres</string>
   <string name="autoemail_from_summary">Sommige e-mailproviders vereisen een verzendadres. Gebruik dit alleen als je het nodig hebt.     </string>
+  <string name="gdocs_clearauthorization_summary">Vergeet de lokale instellingen van Google Drive. Permanente blokkade van toegang kunt u instellen bij de Google-Account instellingen</string>
   <string name="gdocs_setup_title">Google Drive</string>
   <string name="gdocs_test_summary">Een testbestand uploaden naar Google Drive</string>
   <string name="gdocs_test_title">Test upload</string>
@@ -254,6 +259,7 @@
   <string name="txt_number_of_points">Aantal punten</string>
   <string name="save">Opslaan</string>
   <string name="pref_filedetails_title">Bestands- en mapdetails</string>
+  <string name="absolute_timeout_title">Absolute tijd tot GPS fix</string>
   <string name="absolute_timeout_summary">Aantal seconden vooraleer de app opgeeft om even nieuwe fix the verkrijgen, niettegenstaande andere parameters. Dit is vooral nuttig binnen gebouwen on batterij verlies the vermijden. Zet op 0 indien opgeving niet gewenst is.</string>
   <string name="txt_latitude_short">Lat</string>
   <string name="txt_longitude_short">Lon</string>
@@ -266,6 +272,7 @@
   <string name="listeners_summary">Welke providers gebruikt Worden Als ,ze beshikbaar zijn. GPS voor satelieten, netwerk voor cell toren/WiFi, passief is een provider die localizeringsaanvragen van andere toepassingen onderschept.</string>
   <string name="listeners_title">Localisering providers</string>
   <string name="autosend_frequency_hint">Aantal minuten</string>
+  <string name="pref_logging_file_no_permissions">Die map is niet beschrijfbaar met GPSLogger. Selecteer een andere map om naar te schrijven.</string>
   <string name="pref_gpsvisualizer">Laat GPS statestieken en grafieken zien</string>
   <string name="new_file_custom_each_time_title">Vraag elke elke keer om een bestandsnaam bij starten</string>
   <string name="new_file_custom_each_time_summary">Vraag elke keer om een bestandsnaam als het loggen wordt gestart</string>
@@ -311,5 +318,12 @@
   <string name="privacy_policy">Privacybeleid</string>
   <string name="debuglog_attach_to_email">Voeg debug-log toe aan e-mail</string>
   <string name="debuglog_attach_to_email_summary">Voegt debug-log toe aan e-mail, samen met wat diagnostische informatie</string>
+  <string name="change_language_title">Taal wijzigen</string>
   <string name="change_language_summary">Niet alle talen zijn volledig vertaald! U moet de app opnieuw opstarten voordat de instellingen van kracht zijn.</string>
+  <string name="coordinate_display_format">Weergaveformaat coördinaten</string>
+  <string name="ssl_certificate_validate">SSL certificaat valideren</string>
+  <string name="parameters">Parameters</string>
+  <string name="ssl_certificate_add_to_keystore">Dit certificaat toevoegen aan de lokale keystore?</string>
+  <string name="ssl_certificate_is_valid">Het certificaat is geldig</string>
+  <string name="hide_notification_from_status_bar">Verberg notificaties op statusbalk</string>
 </resources>

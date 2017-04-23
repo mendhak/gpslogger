@@ -69,6 +69,29 @@
   <string name="direction_southeast">Dienvidaustrumi</string>
   <string name="direction_southsoutheast">Dienvidi-dienvidaustrumi</string>
   <string name="direction_south">Dienvidi</string>
+  <string name="direction_southsouthwest">Uz dienvidiem-dienvidrietumiem</string>
+  <string name="direction_southwest">Uz dienvidrietumiem</string>
+  <string name="direction_westsouthwest">Uz rietumiem-dienvidrietumiem</string>
+  <string name="direction_west">Uz rietumiem</string>
+  <string name="direction_westnorthwest">Uz rietumiem-ziemeļrietumiem</string>
+  <string name="direction_northwest">Uz ziemeļrietumiem</string>
+  <string name="direction_northnorthwest">Uz ziemeļiem-ziemeļrietumiem</string>
+  <string name="time_onesecond">1 sekunde</string>
+  <string name="time_halfminute">Pusminūte</string>
+  <string name="time_oneminute">1 minūte</string>
+  <string name="time_onehour">1 stunda</string>
+  <string name="time_quarterhour">15 minūtes</string>
+  <string name="time_halfhour">Pusstunda</string>
+  <string name="time_oneandhalfhours">Pusotra stunda</string>
+  <string name="time_twoandhalfhours">Divarpus stundas</string>
+  <string name="time_hms_format" formatted="false">%sh %smin %ss</string>
   <!-- Settings activity -->
   <!-- Settings -->
+  <string name="pref_logging_title">Rakstīšana</string>
+  <string name="pref_performance_title">Izpildījums</string>
+  <string name="pref_performance_summary">Intervāli, filtri, apstākļi</string>
+  <string name="pref_logging_summary">Failu tipi, izveide, nosaukumi</string>
+  <string name="view_simple">Vienkāršais skats</string>
+  <string name="view_detailed">Detalizētais skats</string>
+  <string name="view_log">Žurnāla skats</string>
 </resources>

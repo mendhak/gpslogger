@@ -113,6 +113,8 @@
   <string name="time_before_logging_hint">Eingabe in Sekunden (max. 9999)</string>
   <string name="keep_fix_summary">Vorsicht, wirkt sich erheblich auf die Akkulaufzeit aus. Nur für höhere Genauigkeit mit geringem Intervall verwenden.</string>
   <string name="keep_fix_title">GPS zwischen Fixes aktiviert lassen</string>
+  <string name="retry_time_title">Zeit, bis die Genauigkeit erreicht ist</string>
+  <string name="retry_time_summary">Nach dem Erhalten des ersten Fixes solange auf die eingestellte Genauigkeit warten.</string>
   <string name="display_imperial_title">Angloamerikanische Maßeinheiten</string>
   <string name="display_imperial_summary">Anzeigen in Fuß und Meilen - also nicht in der metrischen Maßeinheit</string>
   <string name="enabledisablegps_title">Aktvieren / Deaktivieren des GPS</string>
@@ -249,7 +251,7 @@
   <string name="bigview_taptotoggle">Tippen für Start/Stop</string>
   <string name="summary_autosendtargets">Hochladen:</string>
   <string name="accuracy_filter_title">Genauigkeit</string>
-  <string name="accuracy_filter_summary">Die Mindestgenauigkeit des GPS-Signales in Metern, welches benötigt wird um einen Punkt zu speichern. Bei einer höheren Ungenauigkeit wird die Position verworfen.</string>
+  <string name="accuracy_filter_summary">Die Mindestgenauigkeit des GPS-Signales in Metern, welche benötigt wird, um einen Punkt zu speichern. Bei einer höheren Ungenauigkeit wird die Position verworfen.</string>
   <string name="distance_filter_title">Distanz zwischen zwei Punkten</string>
   <string name="distance_filter_summary">Dies ist der Mindestabstand zwischen dem aktuellen und dem zuletzt gesicherten Punkt. Punkte die innerhalb des Mindestabstandes liegen, werden verworfen.</string>
   <string name="points">Punkte</string>
@@ -266,7 +268,7 @@
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Netzwerk</string>
   <string name="listeners_passive">Passiv</string>
-  <string name="listeners_summary">Welche Standortbestimmung je nach Verfügbarkeit genutzt werden soll; GPS-Satelliten, Netzwerk (WLAN / Mobilfunknetz), Passiv (nutzt Standortbestimmungsanfragen welche von anderen Apps angefordert werden).</string>
+  <string name="listeners_summary">Welche Standortbestimmung je nach Verfügbarkeit genutzt werden soll; GPS-Satelliten, Netzwerk (WLAN / Mobilfunknetz), Passiv (nutzt Standortbestimmungsanfragen, welche von anderen Apps angefordert werden).</string>
   <string name="listeners_title">Standortbestimmung mittels</string>
   <string name="autosend_frequency_hint">Minuten</string>
   <string name="pref_logging_file_no_permissions">Dieser Ordner kann von GPSLogger nicht beschrieben werden. Bitte wählen sie einen anderen Ordner zum Schreiben aus.</string>
@@ -282,7 +284,7 @@
   <string name="hide_notification_buttons">Benachrichtigungs-Schaltflächen verbergen</string>
   <string name="restart_required">Du musst GPSLogger neu starten, damit diese Einstellung wirksam wird</string>
   <string name="pref_performance_activityrecognition">Aktivitätserkennung</string>
-  <string name="activityrecognition_dont_log_if_still">Aufzeichnung pausieren wenn keine Bewegung</string>
+  <string name="activityrecognition_dont_log_if_still">Aufzeichnung pausieren, wenn keine Bewegung</string>
   <string name="activityrecognition_dont_log_if_still_summary">Wenn der Beschleunigungssensor keine Bewegung seit dem letzten Punkt feststellt, wird das aktive Loggen pausiert, bis du dich wieder bewegst. Passive Punkte werden werden evtl. dennoch aufgezeichnet.</string>
   <string name="txt_activity">Aktivität:</string>
   <string name="activity_in_vehicle">Im Fahrzeug</string>
@@ -318,6 +320,7 @@
   <string name="change_language_title">Sprache ändern</string>
   <string name="change_language_summary">Zum Übernehmen der Einstellungen muss die App neu gestartet werden.</string>
   <string name="coordinate_display_format">Koordinaten-Anzeigeformat</string>
+  <string name="ssl_certificate_validate">SSL Zertifikat überprüfen</string>
   <string name="parameters">Parameter</string>
   <string name="ssl_certificate_add_to_keystore">Soll dieses Zertifikat in den lokalen Speicher hinzugefügt werden?</string>
   <string name="ssl_certificate_is_valid">Das Zertifikat ist gültig</string>
