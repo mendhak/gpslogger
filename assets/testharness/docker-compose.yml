@@ -70,4 +70,6 @@ scppasswd:
   environment:
     - SSH_USER=joe
     - SSH_USER_PASSWORD=hunter2
+#You need the vagrant private key to connect to this container:
+#https://github.com/mitchellh/vagrant/blob/master/keys/vagrant
 
