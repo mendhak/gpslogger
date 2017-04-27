@@ -49,41 +49,25 @@ public class OwnCloudManager extends FileSender
 
     public void testOwnCloud(final String servername, final String username, final String password, final String directory) {
 
-        File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
-        if (!gpxFolder.exists()) {
-            gpxFolder.mkdirs();
-        }
 
-        LOG.debug("Creating gpslogger_test.xml");
-        final File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
 
         try {
-            if (!testFile.exists()) {
-                testFile.createNewFile();
-
-                FileOutputStream initialWriter = new FileOutputStream(testFile, true);
-                BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
-
-                initialOutput.write("<x>This is a test file</x>".getBytes());
-                initialOutput.flush();
-                initialOutput.close();
-
-                Files.addToMediaDatabase(testFile, "text/xml");
-            }
+            final File testFile = Files.createTestFile();
+            final JobManager jobManager = AppSettings.getJobManager();
+            jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
+                @Override
+                public void onCancelled(CancelResult cancelResult) {
+                    jobManager.addJobInBackground(new OwnCloudJob(servername, username, password, directory,
+                            testFile, testFile.getName()));
+                }
+            }, TagConstraint.ANY, OwnCloudJob.getJobTag(testFile));
 
         } catch (Exception ex) {
             EventBus.getDefault().post(new UploadEvents.Ftp().failed());
             LOG.error("Error while testing ownCloud upload: " + ex.getMessage());
         }
 
-        final JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
-            @Override
-            public void onCancelled(CancelResult cancelResult) {
-                jobManager.addJobInBackground(new OwnCloudJob(servername, username, password, directory,
-                        testFile, "gpslogger_test.txt"));
-            }
-        }, TagConstraint.ANY, OwnCloudJob.getJobTag(testFile));
+
 
         LOG.debug("Added background ownCloud upload job");
     }

@@ -171,69 +171,7 @@ public class GpsMainActivity extends AppCompatActivity
         populateProfilesList();
         enableDisableMenuItems();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
 
-                com.jcraft.jsch.Session session = null;
-                final JSch jsch = new JSch();
-                try {
-                    String keystring = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("target_hostkey","");
-
-                    if(!Strings.isNullOrEmpty(keystring)){
-                        byte[] key = Base64.decode ( keystring, Base64.DEFAULT );
-                        jsch.getHostKeyRepository().add(new HostKey("192.168.1.91", key ), null);
-                    }
-
-                    jsch.addIdentity("/storage/emulated/0/test_id_rsa", "");
-
-                    session = jsch.getSession("joe", "192.168.1.91", 2999);
-
-                    session.setPassword("hunter2");
-
-                    // Avoid asking for key confirmation
-                    Properties prop = new Properties();
-                    prop.put("StrictHostKeyChecking", "yes");
-                    session.setConfig(prop);
-
-                    session.connect();
-
-                    if(session.isConnected()){
-                        LOG.debug(this.getClass().getSimpleName() + " CONNECTED");
-                        LOG.debug(this.getClass().getSimpleName() + " YOO " + jsch.getIdentityRepository().getName()+" "+session.getClientVersion() + " " + session.isConnected());
-                    }else{
-                        LOG.debug(this.getClass().getSimpleName() + " NOT CONNECTED");
-                    }
-                }
-                catch(final JSchException jex){
-                    LOG.error("J Ex", jex);
-                    LOG.debug(session.getHostKey().getKey());
-                    final com.jcraft.jsch.Session finalSession = session;
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            new MaterialDialog.Builder(GpsMainActivity.this)
-                                    .title("Accept this host with fingerprint:")
-                                    .negativeText(R.string.cancel)
-                                    .positiveText(R.string.ok)
-                                    .content(finalSession.getHostKey().getFingerPrint(jsch))
-                                    .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                        @Override
-                                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("target_hostkey", finalSession.getHostKey().getKey()).apply();
-                                        }
-                                    }).show();
-                        }
-                    });
-
-                }
-                catch (Exception e){
-                    LOG.error("Could not JSCH", e);
-                }
-            }
-        }).start();
     }
 
     @Override

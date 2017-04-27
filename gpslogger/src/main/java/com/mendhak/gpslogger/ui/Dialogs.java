@@ -136,7 +136,13 @@ public class Dialogs {
      *                  mainActivity.
      */
     public static void alert(String title, String message, Context context) {
-        alert(title, message, context, null);
+        alert(title, message, context, false, null);
+    }
+
+
+
+    public static void alert(String title, String message, Context context, final MessageBoxCallback msgCallback){
+        alert(title, message, context, false, msgCallback);
     }
 
     /**
@@ -149,11 +155,12 @@ public class Dialogs {
      * @param msgCallback An object which implements IHasACallBack so that the
      *                    click event can call the callback method.
      */
-    public static void alert(String title, String message, Context context, final MessageBoxCallback msgCallback) {
-        MaterialDialog alertDialog = new MaterialDialog.Builder(context)
+    public static void alert(String title, String message, Context context, boolean includeCancel, final MessageBoxCallback msgCallback) {
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(context)
                 .title(title)
                 .content(Html.fromHtml(message))
                 .positiveText(R.string.ok)
+
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
@@ -162,15 +169,22 @@ public class Dialogs {
                         }
                     }
                 })
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                        if (msgCallback != null) {
-                            msgCallback.messageBoxResult(MessageBoxCallback.CANCEL);
-                        }
+                ;
+
+        if(includeCancel){
+            builder.negativeText(R.string.cancel);
+            builder.onNegative(new MaterialDialog.SingleButtonCallback() {
+                @Override
+                public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                    if (msgCallback != null) {
+                        msgCallback.messageBoxResult(MessageBoxCallback.CANCEL);
                     }
-                })
-                .build();
+                }
+            });
+        }
+
+
+         MaterialDialog alertDialog = builder.build();
 
         if (context instanceof Activity && !((Activity) context).isFinishing()) {
             alertDialog.show();

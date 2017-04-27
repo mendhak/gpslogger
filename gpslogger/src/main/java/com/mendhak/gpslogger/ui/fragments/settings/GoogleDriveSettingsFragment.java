@@ -261,36 +261,16 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
     private void uploadTestFileToGoogleDocs() {
 
         Dialogs.progress(getActivity(), getString(R.string.please_wait), getString(R.string.please_wait));
-        File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
-        if (!gpxFolder.exists()) {
-            gpxFolder.mkdirs();
-        }
-
-        LOG.debug("Creating gpslogger_test.xml");
-        File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
 
         try {
-            if (!testFile.exists()) {
-                testFile.createNewFile();
-
-                FileOutputStream initialWriter = new FileOutputStream(testFile, true);
-                BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
-
-                initialOutput.write("<x>This is a test file</x>".getBytes());
-                initialOutput.flush();
-                initialOutput.close();
-
-                Files.addToMediaDatabase(testFile, "text/xml");
-            }
+            File testFile = Files.createTestFile();
+            MaterialEditTextPreference folderPref = (MaterialEditTextPreference)findPreference("gdocs_foldername");
+            manager.uploadTestFile(testFile, folderPref.getText());
 
         } catch (Exception ex) {
             LOG.error("Could not create local test file", ex);
             EventBus.getDefault().post(new UploadEvents.GDocs().failed("Could not create local test file", ex));
         }
-
-        MaterialEditTextPreference folderPref = (MaterialEditTextPreference)findPreference("gdocs_foldername");
-        manager.uploadTestFile(testFile, folderPref.getText());
-
     }
 
 

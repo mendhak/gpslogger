@@ -29,6 +29,7 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 
 import java.io.*;
 
@@ -161,5 +162,27 @@ public class Files {
 
     }
 
+    public static File createTestFile() throws IOException {
+        File gpxFolder = new File(PreferenceHelper.getInstance().getGpsLoggerFolder());
+        if (!gpxFolder.exists()) {
+            gpxFolder.mkdirs();
+        }
+
+        File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
+        if (!testFile.exists()) {
+            testFile.createNewFile();
+
+            FileOutputStream initialWriter = new FileOutputStream(testFile, true);
+            BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
+
+            initialOutput.write("<x>This is a test file</x>".getBytes());
+            initialOutput.flush();
+            initialOutput.close();
+
+            Files.addToMediaDatabase(testFile, "text/xml");
+        }
+
+        return testFile;
+    }
 
 }

@@ -50,40 +50,25 @@ public class FtpManager extends FileSender {
 
     public void testFtp(final String servername, final String username, final String password, final String directory, final int port, final boolean useFtps, final String protocol, final boolean implicit) {
 
-        File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
-        if (!gpxFolder.exists()) {
-            gpxFolder.mkdirs();
-        }
-
-        LOG.debug("Creating gpslogger_test.xml");
-        final File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
 
         try {
-            if (!testFile.exists()) {
-                testFile.createNewFile();
+            final File testFile = Files.createTestFile();
 
-                FileOutputStream initialWriter = new FileOutputStream(testFile, true);
-                BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
+            final JobManager jobManager = AppSettings.getJobManager();
 
-                initialOutput.write("<x>This is a test file</x>".getBytes());
-                initialOutput.flush();
-                initialOutput.close();
-
-                Files.addToMediaDatabase(testFile, "text/xml");
-            }
+            jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
+                @Override
+                public void onCancelled(CancelResult cancelResult) {
+                    jobManager.addJobInBackground(new FtpJob(servername, port, username, password, directory,
+                            useFtps, protocol, implicit, testFile, testFile.getName()));
+                }
+            }, TagConstraint.ANY, FtpJob.getJobTag(testFile));
 
         } catch (Exception ex) {
             EventBus.getDefault().post(new UploadEvents.Ftp().failed(ex.getMessage(), ex));
         }
 
-        final JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
-            @Override
-            public void onCancelled(CancelResult cancelResult) {
-                jobManager.addJobInBackground(new FtpJob(servername, port, username, password, directory,
-                        useFtps, protocol, implicit, testFile, "gpslogger_test.txt"));
-            }
-        }, TagConstraint.ANY, FtpJob.getJobTag(testFile));
+
 
     }
 

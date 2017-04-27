@@ -115,6 +115,10 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 setTitle(R.string.owncloud_setup_title);
                 preferenceFragment = new OwnCloudSettingsFragment();
                 break;
+            case PREFERENCE_FRAGMENTS.SSH:
+                setTitle("SSH");
+                preferenceFragment = new SSHSettingsFragment();
+                break;
         }
 
         getFragmentManager().beginTransaction()
@@ -166,6 +170,7 @@ public class MainPreferenceActivity extends AppCompatActivity {
         public static final String DROPBOX = "DropBoxAuthorizationFragment";
         public static final String OWNCLOUD = "OwnCloudAuthorizationFragment";
         public static final String OSM = "OSMAuthorizationFragment";
+        public static final String SSH = "SSHSettingsFragment";
     }
 
 }

@@ -119,34 +119,16 @@ public class DropboxAuthorizationFragment extends PermissionedPreferenceFragment
 
     private void uploadTestFile() {
         Dialogs.progress(getActivity(), getString(R.string.please_wait), getString(R.string.please_wait));
-        File gpxFolder = new File(PreferenceHelper.getInstance().getGpsLoggerFolder());
-        if (!gpxFolder.exists()) {
-            gpxFolder.mkdirs();
-        }
-
-        LOG.debug("Creating gpslogger_test.xml");
-        File testFile = new File(gpxFolder.getPath(), "gpslogger_test.xml");
 
         try {
-            if (!testFile.exists()) {
-                testFile.createNewFile();
-
-                FileOutputStream initialWriter = new FileOutputStream(testFile, true);
-                BufferedOutputStream initialOutput = new BufferedOutputStream(initialWriter);
-
-                initialOutput.write("<x>This is a test file</x>".getBytes());
-                initialOutput.flush();
-                initialOutput.close();
-
-                Files.addToMediaDatabase(testFile, "text/xml");
-            }
+            File testFile = Files.createTestFile();
+            manager.uploadFile(testFile.getName());
 
         } catch (Exception ex) {
             LOG.error("Could not create local test file", ex);
             EventBus.getDefault().post(new UploadEvents.Dropbox().failed("Could not create local test file", ex));
         }
 
-        manager.uploadFile(testFile.getName());
     }
 
     @EventBusHook

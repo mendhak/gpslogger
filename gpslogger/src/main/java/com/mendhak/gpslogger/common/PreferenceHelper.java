@@ -1019,6 +1019,8 @@ public class PreferenceHelper {
         prefs.edit().putBoolean(PreferenceNames.CUSTOM_FILE_NAME_KEEP_CHANGING, keepChanging).apply();
     }
 
+
+
     @SuppressWarnings("unchecked")
     public void savePropertiesFromPreferences(File f) throws IOException {
 
