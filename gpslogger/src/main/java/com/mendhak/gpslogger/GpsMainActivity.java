@@ -20,6 +20,7 @@
 package com.mendhak.gpslogger;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.*;
@@ -122,68 +123,9 @@ public class GpsMainActivity extends AppCompatActivity
         }
 
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                com.jcraft.jsch.Session session = null;
-                JSch jsch;
-                try {
-                    jsch = new JSch();
-                    String keystring = "AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==";
-
-                    byte[] key = Base64.decode ( keystring, Base64.DEFAULT );
-                    jsch.getHostKeyRepository().add(new HostKey("github.com", key ), null);
-                    jsch.addIdentity("/storage/emulated/0/id_rsa", "hunter2");
-
-                    session = jsch.getSession("git", "github.com", 22);
-
-                    session.setPassword("hunter2");
-
-                    // Avoid asking for key confirmation
-                    Properties prop = new Properties();
-                    prop.put("StrictHostKeyChecking", "yes");
-                    session.setConfig(prop);
-
-                    session.connect();
-
-
-                    if(session.isConnected()){
-                        LOG.debug(this.getClass().getSimpleName() + " CONNECTED");
-                        LOG.debug(this.getClass().getSimpleName() + " YOO " + jsch.getIdentityRepository().getName()+" "+session.getClientVersion() + " " + session.isConnected());
-                    }else{
-                        LOG.debug(this.getClass().getSimpleName() + " NOT CONNECTED");
-                    }
-                }
-                catch(JSchException jex){
-                    LOG.error("J Ex", jex);
-                    LOG.debug(session.getHostKey().getKey());
-                }
-                catch (Exception e){
-                    LOG.error("Could not JSCH", e);
-                }
-            }
-        }).start();
-
     }
 
-    public static class MyLogger implements com.jcraft.jsch.Logger {
-        static java.util.Hashtable name=new java.util.Hashtable();
-        static{
-            name.put(new Integer(DEBUG), "DEBUG: ");
-            name.put(new Integer(INFO), "INFO: ");
-            name.put(new Integer(WARN), "WARN: ");
-            name.put(new Integer(ERROR), "ERROR: ");
-            name.put(new Integer(FATAL), "FATAL: ");
-        }
-        public boolean isEnabled(int level){
-            return true;
-        }
-        public void log(int level, String message){
-//            System.err.print(name.get(new Integer(level)));
-            LOG.debug(message);
-        }
-    }
+
 
 
     @Override
@@ -215,6 +157,8 @@ public class GpsMainActivity extends AppCompatActivity
         startAndBindService();
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -226,6 +170,70 @@ public class GpsMainActivity extends AppCompatActivity
 
         populateProfilesList();
         enableDisableMenuItems();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                com.jcraft.jsch.Session session = null;
+                final JSch jsch = new JSch();
+                try {
+                    String keystring = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("target_hostkey","");
+
+                    if(!Strings.isNullOrEmpty(keystring)){
+                        byte[] key = Base64.decode ( keystring, Base64.DEFAULT );
+                        jsch.getHostKeyRepository().add(new HostKey("192.168.1.91", key ), null);
+                    }
+
+                    jsch.addIdentity("/storage/emulated/0/test_id_rsa", "");
+
+                    session = jsch.getSession("joe", "192.168.1.91", 2999);
+
+                    session.setPassword("hunter2");
+
+                    // Avoid asking for key confirmation
+                    Properties prop = new Properties();
+                    prop.put("StrictHostKeyChecking", "yes");
+                    session.setConfig(prop);
+
+                    session.connect();
+
+                    if(session.isConnected()){
+                        LOG.debug(this.getClass().getSimpleName() + " CONNECTED");
+                        LOG.debug(this.getClass().getSimpleName() + " YOO " + jsch.getIdentityRepository().getName()+" "+session.getClientVersion() + " " + session.isConnected());
+                    }else{
+                        LOG.debug(this.getClass().getSimpleName() + " NOT CONNECTED");
+                    }
+                }
+                catch(final JSchException jex){
+                    LOG.error("J Ex", jex);
+                    LOG.debug(session.getHostKey().getKey());
+                    final com.jcraft.jsch.Session finalSession = session;
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            new MaterialDialog.Builder(GpsMainActivity.this)
+                                    .title("Accept this host with fingerprint:")
+                                    .negativeText(R.string.cancel)
+                                    .positiveText(R.string.ok)
+                                    .content(finalSession.getHostKey().getFingerPrint(jsch))
+                                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                        @Override
+                                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("target_hostkey", finalSession.getHostKey().getKey()).apply();
+                                        }
+                                    }).show();
+                        }
+                    });
+
+                }
+                catch (Exception e){
+                    LOG.error("Could not JSCH", e);
+                }
+            }
+        }).start();
     }
 
     @Override
