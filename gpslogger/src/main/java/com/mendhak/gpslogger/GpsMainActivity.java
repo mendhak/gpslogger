@@ -43,13 +43,16 @@ import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.InputType;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.*;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.amulyakhare.textdrawable.TextDrawable;
+import com.jcraft.jsch.*;
 import com.mendhak.gpslogger.common.*;
+import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ProfileEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
@@ -74,9 +77,11 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class GpsMainActivity extends AppCompatActivity
@@ -115,7 +120,71 @@ public class GpsMainActivity extends AppCompatActivity
             LOG.debug("Start logging on app launch");
             EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
         }
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                com.jcraft.jsch.Session session = null;
+                JSch jsch;
+                try {
+                    jsch = new JSch();
+                    String keystring = "AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==";
+
+                    byte[] key = Base64.decode ( keystring, Base64.DEFAULT );
+                    jsch.getHostKeyRepository().add(new HostKey("github.com", key ), null);
+                    jsch.addIdentity("/storage/emulated/0/id_rsa", "hunter2");
+
+                    session = jsch.getSession("git", "github.com", 22);
+
+                    session.setPassword("hunter2");
+
+                    // Avoid asking for key confirmation
+                    Properties prop = new Properties();
+                    prop.put("StrictHostKeyChecking", "yes");
+                    session.setConfig(prop);
+
+                    session.connect();
+
+
+                    if(session.isConnected()){
+                        LOG.debug(this.getClass().getSimpleName() + " CONNECTED");
+                        LOG.debug(this.getClass().getSimpleName() + " YOO " + jsch.getIdentityRepository().getName()+" "+session.getClientVersion() + " " + session.isConnected());
+                    }else{
+                        LOG.debug(this.getClass().getSimpleName() + " NOT CONNECTED");
+                    }
+                }
+                catch(JSchException jex){
+                    LOG.error("J Ex", jex);
+                    LOG.debug(session.getHostKey().getKey());
+                }
+                catch (Exception e){
+                    LOG.error("Could not JSCH", e);
+                }
+            }
+        }).start();
+
     }
+
+    public static class MyLogger implements com.jcraft.jsch.Logger {
+        static java.util.Hashtable name=new java.util.Hashtable();
+        static{
+            name.put(new Integer(DEBUG), "DEBUG: ");
+            name.put(new Integer(INFO), "INFO: ");
+            name.put(new Integer(WARN), "WARN: ");
+            name.put(new Integer(ERROR), "ERROR: ");
+            name.put(new Integer(FATAL), "FATAL: ");
+        }
+        public boolean isEnabled(int level){
+            return true;
+        }
+        public void log(int level, String message){
+//            System.err.print(name.get(new Integer(level)));
+            LOG.debug(message);
+        }
+    }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
