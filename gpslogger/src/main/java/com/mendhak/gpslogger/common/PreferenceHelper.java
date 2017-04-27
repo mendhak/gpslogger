@@ -1020,6 +1020,44 @@ public class PreferenceHelper {
     }
 
 
+    @ProfilePreference(name=PreferenceNames.SSH_HOST)
+    public String getSSHHost(){
+        return prefs.getString(PreferenceNames.SSH_HOST, "127.0.0.1");
+    }
+
+    @ProfilePreference(name=PreferenceNames.SSH_PORT)
+    public int getSSHPort(){
+        return Strings.toInt(prefs.getString(PreferenceNames.SSH_PORT, "22"),22);
+    }
+
+
+    @ProfilePreference(name=PreferenceNames.SSH_USER)
+    public String getSSHUser(){
+        return prefs.getString(PreferenceNames.SSH_USER, "");
+    }
+
+
+    @ProfilePreference(name=PreferenceNames.SSH_PASSWORD)
+    public String getSSHPassword(){
+        return prefs.getString(PreferenceNames.SSH_PASSWORD, "");
+    }
+
+    @ProfilePreference(name=PreferenceNames.SSH_PRIVATE_KEY_PATH)
+    public String getSSHPrivateKeyFilePath(){
+        return prefs.getString(PreferenceNames.SSH_PRIVATE_KEY_PATH, "");
+    }
+
+    @ProfilePreference(name=PreferenceNames.SSH_PRIVATE_KEY_PASSPHRASE)
+    public String getSSHPrivateKeyPassphrase(){
+        return prefs.getString(PreferenceNames.SSH_PRIVATE_KEY_PASSPHRASE, "");
+    }
+
+    @ProfilePreference(name=PreferenceNames.SSH_KNOWN_HOST_KEY)
+    public String getSSHKnownHostKey(){
+        return prefs.getString(PreferenceNames.SSH_KNOWN_HOST_KEY, "");
+    }
+
+
 
     @SuppressWarnings("unchecked")
     public void savePropertiesFromPreferences(File f) throws IOException {

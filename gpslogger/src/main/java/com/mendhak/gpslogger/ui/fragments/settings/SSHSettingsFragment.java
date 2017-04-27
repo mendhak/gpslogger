@@ -32,7 +32,7 @@ public class SSHSettingsFragment extends PermissionedPreferenceFragment implemen
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.sshsettings);
 
-        manager = new SSHManager();
+        manager = new SSHManager(PreferenceHelper.getInstance());
 
         findPreference("ssh_validateserver").setOnPreferenceClickListener(this);
         registerEventBus();

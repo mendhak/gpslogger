@@ -1,6 +1,7 @@
 package com.mendhak.gpslogger.senders.ssh;
 
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.path.android.jobqueue.CancelResult;
 import com.path.android.jobqueue.JobManager;
@@ -10,6 +11,13 @@ import java.io.File;
 import java.util.List;
 
 public class SSHManager extends FileSender {
+
+    private PreferenceHelper preferenceHelper;
+
+    public SSHManager(PreferenceHelper preferenceHelper){
+        this.preferenceHelper = preferenceHelper;
+    }
+
     @Override
     public void uploadFile(List<File> files) {
 
@@ -20,7 +28,8 @@ public class SSHManager extends FileSender {
         jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
             @Override
             public void onCancelled(CancelResult cancelResult) {
-                jobManager.addJobInBackground(new SSHJob(file,"192.168.1.91",2999,"/storage/emulated/0/test_id_rsa", "","joe","hunter2",""));
+                jobManager.addJobInBackground(new SSHJob(file,preferenceHelper.getSSHHost(),preferenceHelper.getSSHPort(),preferenceHelper.getSSHPrivateKeyFilePath(),
+                        preferenceHelper.getSSHPrivateKeyPassphrase(),preferenceHelper.getSSHUser(),preferenceHelper.getSSHPassword(),preferenceHelper.getSSHKnownHostKey()));
             }
         }, TagConstraint.ANY, SSHJob.getJobTag(file));
     }
