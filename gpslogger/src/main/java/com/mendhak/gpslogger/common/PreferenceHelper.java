@@ -1019,6 +1019,10 @@ public class PreferenceHelper {
         prefs.edit().putBoolean(PreferenceNames.CUSTOM_FILE_NAME_KEEP_CHANGING, keepChanging).apply();
     }
 
+    @ProfilePreference(name=PreferenceNames.SSH_ENABLED)
+    public boolean isSSHEnabled(){
+        return prefs.getBoolean(PreferenceNames.SSH_ENABLED, false);
+    }
 
     @ProfilePreference(name=PreferenceNames.SSH_HOST)
     public String getSSHHost(){
@@ -1047,6 +1051,10 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.SSH_PRIVATE_KEY_PATH, "");
     }
 
+    public void setSSHPrivateKeyFilePath(String filePath){
+        prefs.edit().putString(PreferenceNames.SSH_PRIVATE_KEY_PATH, filePath).apply();
+    }
+
     @ProfilePreference(name=PreferenceNames.SSH_PRIVATE_KEY_PASSPHRASE)
     public String getSSHPrivateKeyPassphrase(){
         return prefs.getString(PreferenceNames.SSH_PRIVATE_KEY_PASSPHRASE, "");
@@ -1057,6 +1065,14 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.SSH_KNOWN_HOST_KEY, "");
     }
 
+    public void setSSHKnownHostKey(String hostKey){
+        prefs.edit().putString(PreferenceNames.SSH_KNOWN_HOST_KEY, hostKey).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.SSH_REMOTE_SERVER_PATH)
+    public String getSSHRemoteServerPath(){
+        return prefs.getString(PreferenceNames.SSH_REMOTE_SERVER_PATH, "/tmp");
+    }
 
 
     @SuppressWarnings("unchecked")

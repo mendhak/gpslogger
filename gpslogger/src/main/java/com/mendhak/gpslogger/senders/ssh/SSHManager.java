@@ -28,7 +28,7 @@ public class SSHManager extends FileSender {
         jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
             @Override
             public void onCancelled(CancelResult cancelResult) {
-                jobManager.addJobInBackground(new SSHJob(file,preferenceHelper.getSSHHost(),preferenceHelper.getSSHPort(),preferenceHelper.getSSHPrivateKeyFilePath(),
+                jobManager.addJobInBackground(new SSHJob(file, preferenceHelper.getSSHRemoteServerPath(), preferenceHelper.getSSHHost(),preferenceHelper.getSSHPort(),preferenceHelper.getSSHPrivateKeyFilePath(),
                         preferenceHelper.getSSHPrivateKeyPassphrase(),preferenceHelper.getSSHUser(),preferenceHelper.getSSHPassword(),preferenceHelper.getSSHKnownHostKey()));
             }
         }, TagConstraint.ANY, SSHJob.getJobTag(file));

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:key="ssh_preferences">
 
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+        android:key="ssh_enabled"
+        android:title="@string/autosend_enabled"/>
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
         android:key="ssh_host"
         android:title="Host"
         android:defaultValue="127.0.0.1"
         android:dialogTitle="Hostname or IP address"
+        android:inputType="text"
         />
 
 
@@ -23,6 +27,7 @@
         android:title="Username"
         android:defaultValue=""
         android:dialogTitle="Username"
+        android:inputType="text"
         />
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
@@ -33,23 +38,23 @@
         android:password="true"
         />
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
-        android:key="ssh_private_key_path"
-        android:title="Private Key File"
-        android:defaultValue=""
-        android:dialogTitle="Path to private key"
-        />
+    <Preference android:key="ssh_private_key_path" android:title="Private key file"  />
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
         android:key="ssh_private_key_passphrase"
-        android:title="Private Key Passphrase"
+        android:title="Private key passphrase"
         android:defaultValue=""
         android:dialogTitle="Private key passphrase"
         android:password="true"
         />
 
-
-
+    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+        android:key="ssh_remote_server_path"
+        android:title="Remote server directory path"
+        android:defaultValue="/tmp"
+        android:dialogTitle="Directory path on remote server"
+        android:inputType="text"
+        />
 
 
     <Preference android:key="ssh_validateserver"
