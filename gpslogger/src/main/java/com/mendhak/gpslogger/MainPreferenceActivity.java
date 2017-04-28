@@ -116,7 +116,7 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 preferenceFragment = new OwnCloudSettingsFragment();
                 break;
             case PREFERENCE_FRAGMENTS.SSH:
-                setTitle("SSH");
+                setTitle("SFTP");
                 preferenceFragment = new SSHSettingsFragment();
                 break;
         }

@@ -67,7 +67,7 @@
             android:title="@string/owncloud_setup_title"
             android:key="owncloud_setup">
         </Preference>
-        <Preference android:title="SSH" android:key="ssh_setup">
+        <Preference android:title="SFTP" android:key="ssh_setup">
         </Preference>
     </PreferenceCategory>
 

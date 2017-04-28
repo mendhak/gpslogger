@@ -137,11 +137,11 @@ public class SSHSettingsFragment extends PermissionedPreferenceFragment implemen
 
         Dialogs.hideProgress();
         if(!o.success){
-            if(o.message.contains("reject HostKey") || o.message.contains("HostKey has been changed")){
+            if( !Strings.isNullOrEmpty(o.hostKey)){
                 LOG.debug("SSH HostKey " + o.hostKey);
                 LOG.debug("SSH Fingerprint " + o.fingerprint);
 
-                Dialogs.alert("Do you accept the following host?", "Fingerprint: <code>" + o.fingerprint +"</code>", getActivity(), true, new Dialogs.MessageBoxCallback() {
+                Dialogs.alert("Do you accept the following host?", "Fingerprint: " + o.fingerprint +" <br /> Host Key:" + o.hostKey, getActivity(), true, new Dialogs.MessageBoxCallback() {
                     @Override
                     public void messageBoxResult(int which) {
                         if(which==Dialogs.MessageBoxCallback.OK){
