@@ -62,8 +62,8 @@ postfix:
   volumes:
     - ./postfixstorage/postfix/main.cf:/etc/postfix/main.cf
 
-scppasswd:
-  container_name: gpslogger-scp-passwd
+sftpserver:
+  container_name: gpslogger-sftp
   image: jdeathe/centos-ssh:centos-7
   ports:
     - "2999:22"
