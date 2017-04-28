@@ -430,5 +430,9 @@
     <string name="ssl_certificate_is_valid">The certificate is valid</string>
     <string name="hide_notification_from_status_bar">Hide notification from status bar</string>
     <string name="sftp_setup_title">SFTP</string>
+    <string name="sftp_private_key_path">Private key</string>
+    <string name="sftp_private_key_passphrase">Private key passphrase</string>
+    <string name="sftp_validate_test_upload">Validate host key and test upload</string>
+
 
 </resources>

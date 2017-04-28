@@ -7,57 +7,58 @@
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
         android:key="sftp_host"
-        android:title="Host"
+        android:title="@string/autoopengts_server_summary"
         android:defaultValue="127.0.0.1"
-        android:dialogTitle="Hostname or IP address"
+        android:dialogTitle="@string/autoopengts_server_summary"
         android:inputType="text"
         />
 
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
         android:key="sftp_port"
-        android:title="Port"
-        android:dialogTitle="Port"
+        android:title="@string/autoftp_port"
+        android:dialogTitle="@string/autoftp_port"
         android:defaultValue="22"
         android:inputType="number"/>
 
+    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+        android:key="sftp_remote_server_path"
+        android:title="@string/autoftp_directory"
+        android:defaultValue="/tmp"
+        android:dialogTitle="@string/autoftp_directory"
+        android:inputType="text"
+        />
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
         android:key="sftp_user"
-        android:title="Username"
+        android:title="@string/autoftp_username"
         android:defaultValue=""
-        android:dialogTitle="Username"
+        android:dialogTitle="@string/autoftp_username"
         android:inputType="text"
         />
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
         android:key="sftp_password"
-        android:title="Password"
+        android:title="@string/autoftp_password"
         android:defaultValue=""
-        android:dialogTitle="Password"
+        android:dialogTitle="@string/autoftp_password"
         android:password="true"
         />
 
-    <Preference android:key="sftp_private_key_path" android:title="Private key file"  />
+    <Preference android:key="sftp_private_key_path" android:title="@string/sftp_private_key_path"  />
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
         android:key="sftp_private_key_passphrase"
-        android:title="Private key passphrase"
+        android:title="@string/sftp_private_key_passphrase"
         android:defaultValue=""
-        android:dialogTitle="Private key passphrase"
+        android:dialogTitle="@string/sftp_private_key_passphrase"
         android:password="true"
         />
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
-        android:key="sftp_remote_server_path"
-        android:title="Remote server directory path"
-        android:defaultValue="/tmp"
-        android:dialogTitle="Directory path on remote server"
-        android:inputType="text"
-        />
+
 
 
     <Preference android:key="sftp_validateserver"
-                android:title="Test upload" />
+                android:title="@string/sftp_validate_test_upload" />
 
 </PreferenceScreen>
