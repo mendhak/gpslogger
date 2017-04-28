@@ -29,6 +29,7 @@ import com.mendhak.gpslogger.senders.googledrive.GoogleDriveManager;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSManager;
 import com.mendhak.gpslogger.senders.osm.OpenStreetMapManager;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudManager;
+import com.mendhak.gpslogger.senders.sftp.SFTPManager;
 import org.slf4j.Logger;
 
 import java.io.File;
@@ -68,6 +69,10 @@ public class FileSenderFactory {
 
     public static FileSender getOwnCloudSender() {
         return new OwnCloudManager(PreferenceHelper.getInstance());
+    }
+
+    public static FileSender getSFTPSender() {
+        return new SFTPManager(PreferenceHelper.getInstance());
     }
 
     public static void autoSendFiles(final String fileToSend) {
@@ -164,6 +169,10 @@ public class FileSenderFactory {
 
         if(getOwnCloudSender().isAutoSendAvailable()){
             senders.add(getOwnCloudSender());
+        }
+
+        if(getSFTPSender().isAutoSendAvailable()){
+            senders.add(getSFTPSender());
         }
 
         return senders;

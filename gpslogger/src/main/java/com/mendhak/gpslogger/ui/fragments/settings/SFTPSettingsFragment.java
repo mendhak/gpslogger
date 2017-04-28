@@ -1,11 +1,9 @@
 package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.Preference;
@@ -20,7 +18,7 @@ import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
-import com.mendhak.gpslogger.senders.ssh.SSHManager;
+import com.mendhak.gpslogger.senders.sftp.SFTPManager;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import com.nononsenseapps.filepicker.FilePickerActivity;
@@ -29,10 +27,10 @@ import org.slf4j.Logger;
 
 import java.io.File;
 
-public class SSHSettingsFragment extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener, PreferenceValidator {
+public class SFTPSettingsFragment extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener, PreferenceValidator {
 
-    private static final Logger LOG = Logs.of(SSHSettingsFragment.class);
-    SSHManager manager;
+    private static final Logger LOG = Logs.of(SFTPSettingsFragment.class);
+    SFTPManager manager;
     PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     private static int NONONSENSE_DIRPICKER_ACTIVITYID = 929292;
 
@@ -40,13 +38,13 @@ public class SSHSettingsFragment extends PermissionedPreferenceFragment implemen
     public void onCreate(Bundle savedInstanceState) {
         LOG.debug("on create");
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.sshsettings);
+        addPreferencesFromResource(R.xml.sftpsettings);
 
-        manager = new SSHManager(preferenceHelper);
+        manager = new SFTPManager(preferenceHelper);
 
-        findPreference("ssh_validateserver").setOnPreferenceClickListener(this);
-        findPreference(PreferenceNames.SSH_PRIVATE_KEY_PATH).setOnPreferenceClickListener(this);
-        findPreference(PreferenceNames.SSH_PRIVATE_KEY_PATH).setSummary(preferenceHelper.getSSHPrivateKeyFilePath());
+        findPreference("sftp_validateserver").setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setSummary(preferenceHelper.getSFTPPrivateKeyFilePath());
         registerEventBus();
     }
 
@@ -75,13 +73,13 @@ public class SSHSettingsFragment extends PermissionedPreferenceFragment implemen
     @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
 
-        if (preference.getKey().equals(PreferenceNames.SSH_PRIVATE_KEY_PATH)) {
+        if (preference.getKey().equals(PreferenceNames.SFTP_PRIVATE_KEY_PATH)) {
 
             Intent i = new Intent(getActivity(), FilePickerActivity.class);
             i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
             i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false);
 
-            String filePath = preferenceHelper.getSSHPrivateKeyFilePath();
+            String filePath = preferenceHelper.getSFTPPrivateKeyFilePath();
 
             if(Strings.isNullOrEmpty(filePath)){
                 filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -92,7 +90,7 @@ public class SSHSettingsFragment extends PermissionedPreferenceFragment implemen
 
             return true;
         }
-        else if(preference.getKey().equals("ssh_validateserver")) {
+        else if(preference.getKey().equals("sftp_validateserver")) {
             uploadTestFile();
         }
 
@@ -107,7 +105,7 @@ public class SSHSettingsFragment extends PermissionedPreferenceFragment implemen
             testFile = Files.createTestFile();
         } catch (Exception ex) {
             LOG.error("Could not create local test file", ex);
-            EventBus.getDefault().post(new UploadEvents.SSH().failed("Could not create local test file", ex));
+            EventBus.getDefault().post(new UploadEvents.SFTP().failed("Could not create local test file", ex));
         }
 
         manager.uploadFile(testFile);
@@ -120,44 +118,43 @@ public class SSHSettingsFragment extends PermissionedPreferenceFragment implemen
             Uri uri = data.getData();
             LOG.debug("Private key chosen - " + uri.getPath());
 
-            preferenceHelper.setSSHPrivateKeyFilePath(uri.getPath());
-            findPreference(PreferenceNames.SSH_PRIVATE_KEY_PATH).setSummary(uri.getPath());
+            preferenceHelper.setSFTPPrivateKeyFilePath(uri.getPath());
+            findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setSummary(uri.getPath());
 
         }
     }
 
     @Override
     public boolean isValid() {
-        return true;
+        return !manager.hasUserAllowedAutoSending() || manager.isAvailable();
     }
 
     @EventBusHook
-    public void onEventMainThread(final UploadEvents.SSH o){
-        LOG.debug("SSH Event completed, success: " + o.success);
+    public void onEventMainThread(final UploadEvents.SFTP o){
+        LOG.debug("SFTP Event completed, success: " + o.success);
 
         Dialogs.hideProgress();
         if(!o.success){
             if( !Strings.isNullOrEmpty(o.hostKey)){
-                LOG.debug("SSH HostKey " + o.hostKey);
-                LOG.debug("SSH Fingerprint " + o.fingerprint);
+                LOG.debug("SFTP HostKey " + o.hostKey);
+                LOG.debug("SFTP Fingerprint " + o.fingerprint);
 
                 Dialogs.alert("Do you accept the following host?", "Fingerprint: " + o.fingerprint +" <br /> Host Key:" + o.hostKey, getActivity(), true, new Dialogs.MessageBoxCallback() {
                     @Override
                     public void messageBoxResult(int which) {
                         if(which==Dialogs.MessageBoxCallback.OK){
-                            preferenceHelper.setSSHKnownHostKey(o.hostKey);
+                            preferenceHelper.setSFTPKnownHostKey(o.hostKey);
                             uploadTestFile();
                         }
                     }
                 });
             }
             else {
-                String sshMessages = (o.sshMessages == null) ? "" : TextUtils.join(" ",o.sshMessages);
-                Dialogs.error(getString(R.string.sorry), "SSH Test Failed", o.message + "\r\n" + sshMessages, o.throwable, getActivity());
+                Dialogs.error(getString(R.string.sorry), "SFTP Test Failed", o.message , o.throwable, getActivity());
             }
         }
         else {
-            Dialogs.alert(getString(R.string.success), "SSH Test Succeeded", getActivity());
+            Dialogs.alert(getString(R.string.success), "SFTP Test Succeeded", getActivity());
         }
     }
 }

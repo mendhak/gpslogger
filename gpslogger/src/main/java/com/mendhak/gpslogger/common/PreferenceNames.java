@@ -111,15 +111,15 @@ public  class PreferenceNames {
         DEGREES_MINUTES_SECONDS, DEGREES_DECIMAL_MINUTES, DECIMAL_DEGREES
     }
 
-    public static final String SSH_ENABLED="ssh_enabled";
-    public static final String SSH_HOST="ssh_host";
-    public static final String SSH_PORT="ssh_port";
-    public static final String SSH_USER="ssh_user";
-    public static final String SSH_PASSWORD="ssh_password";
-    public static final String SSH_PRIVATE_KEY_PATH="ssh_private_key_path";
-    public static final String SSH_PRIVATE_KEY_PASSPHRASE="ssh_private_key_passphrase";
-    public static final String SSH_KNOWN_HOST_KEY="ssh_known_host_key";
-    public static final String SSH_REMOTE_SERVER_PATH="ssh_remote_server_path";
+    public static final String SFTP_ENABLED ="sftp_enabled";
+    public static final String SFTP_HOST ="sftp_host";
+    public static final String SFTP_PORT ="sftp_port";
+    public static final String SFTP_USER ="sftp_user";
+    public static final String SFTP_PASSWORD ="sftp_password";
+    public static final String SFTP_PRIVATE_KEY_PATH ="sftp_private_key_path";
+    public static final String SFTP_PRIVATE_KEY_PASSPHRASE ="sftp_private_key_passphrase";
+    public static final String SFTP_KNOWN_HOST_KEY ="sftp_known_host_key";
+    public static final String SFTP_REMOTE_SERVER_PATH ="sftp_remote_server_path";
 
 
 }

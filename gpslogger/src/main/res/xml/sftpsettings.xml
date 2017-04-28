@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:key="ssh_preferences">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:key="sftp_preferences">
 
     <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
-        android:key="ssh_enabled"
+        android:key="sftp_enabled"
         android:title="@string/autosend_enabled"/>
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
-        android:key="ssh_host"
+        android:key="sftp_host"
         android:title="Host"
         android:defaultValue="127.0.0.1"
         android:dialogTitle="Hostname or IP address"
@@ -15,7 +15,7 @@
 
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
-        android:key="ssh_port"
+        android:key="sftp_port"
         android:title="Port"
         android:dialogTitle="Port"
         android:defaultValue="22"
@@ -23,7 +23,7 @@
 
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
-        android:key="ssh_user"
+        android:key="sftp_user"
         android:title="Username"
         android:defaultValue=""
         android:dialogTitle="Username"
@@ -31,17 +31,17 @@
         />
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
-        android:key="ssh_password"
+        android:key="sftp_password"
         android:title="Password"
         android:defaultValue=""
         android:dialogTitle="Password"
         android:password="true"
         />
 
-    <Preference android:key="ssh_private_key_path" android:title="Private key file"  />
+    <Preference android:key="sftp_private_key_path" android:title="Private key file"  />
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
-        android:key="ssh_private_key_passphrase"
+        android:key="sftp_private_key_passphrase"
         android:title="Private key passphrase"
         android:defaultValue=""
         android:dialogTitle="Private key passphrase"
@@ -49,7 +49,7 @@
         />
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
-        android:key="ssh_remote_server_path"
+        android:key="sftp_remote_server_path"
         android:title="Remote server directory path"
         android:defaultValue="/tmp"
         android:dialogTitle="Directory path on remote server"
@@ -57,7 +57,7 @@
         />
 
 
-    <Preference android:key="ssh_validateserver"
+    <Preference android:key="sftp_validateserver"
                 android:title="Test upload" />
 
 </PreferenceScreen>

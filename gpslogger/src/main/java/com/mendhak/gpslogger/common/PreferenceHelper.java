@@ -1019,59 +1019,59 @@ public class PreferenceHelper {
         prefs.edit().putBoolean(PreferenceNames.CUSTOM_FILE_NAME_KEEP_CHANGING, keepChanging).apply();
     }
 
-    @ProfilePreference(name=PreferenceNames.SSH_ENABLED)
-    public boolean isSSHEnabled(){
-        return prefs.getBoolean(PreferenceNames.SSH_ENABLED, false);
+    @ProfilePreference(name=PreferenceNames.SFTP_ENABLED)
+    public boolean isSFTPEnabled(){
+        return prefs.getBoolean(PreferenceNames.SFTP_ENABLED, false);
     }
 
-    @ProfilePreference(name=PreferenceNames.SSH_HOST)
-    public String getSSHHost(){
-        return prefs.getString(PreferenceNames.SSH_HOST, "127.0.0.1");
+    @ProfilePreference(name=PreferenceNames.SFTP_HOST)
+    public String getSFTPHost(){
+        return prefs.getString(PreferenceNames.SFTP_HOST, "127.0.0.1");
     }
 
-    @ProfilePreference(name=PreferenceNames.SSH_PORT)
-    public int getSSHPort(){
-        return Strings.toInt(prefs.getString(PreferenceNames.SSH_PORT, "22"),22);
-    }
-
-
-    @ProfilePreference(name=PreferenceNames.SSH_USER)
-    public String getSSHUser(){
-        return prefs.getString(PreferenceNames.SSH_USER, "");
+    @ProfilePreference(name=PreferenceNames.SFTP_PORT)
+    public int getSFTPPort(){
+        return Strings.toInt(prefs.getString(PreferenceNames.SFTP_PORT, "22"),22);
     }
 
 
-    @ProfilePreference(name=PreferenceNames.SSH_PASSWORD)
-    public String getSSHPassword(){
-        return prefs.getString(PreferenceNames.SSH_PASSWORD, "");
+    @ProfilePreference(name=PreferenceNames.SFTP_USER)
+    public String getSFTPUser(){
+        return prefs.getString(PreferenceNames.SFTP_USER, "");
     }
 
-    @ProfilePreference(name=PreferenceNames.SSH_PRIVATE_KEY_PATH)
-    public String getSSHPrivateKeyFilePath(){
-        return prefs.getString(PreferenceNames.SSH_PRIVATE_KEY_PATH, "");
+
+    @ProfilePreference(name=PreferenceNames.SFTP_PASSWORD)
+    public String getSFTPPassword(){
+        return prefs.getString(PreferenceNames.SFTP_PASSWORD, "");
     }
 
-    public void setSSHPrivateKeyFilePath(String filePath){
-        prefs.edit().putString(PreferenceNames.SSH_PRIVATE_KEY_PATH, filePath).apply();
+    @ProfilePreference(name=PreferenceNames.SFTP_PRIVATE_KEY_PATH)
+    public String getSFTPPrivateKeyFilePath(){
+        return prefs.getString(PreferenceNames.SFTP_PRIVATE_KEY_PATH, "");
     }
 
-    @ProfilePreference(name=PreferenceNames.SSH_PRIVATE_KEY_PASSPHRASE)
-    public String getSSHPrivateKeyPassphrase(){
-        return prefs.getString(PreferenceNames.SSH_PRIVATE_KEY_PASSPHRASE, "");
+    public void setSFTPPrivateKeyFilePath(String filePath){
+        prefs.edit().putString(PreferenceNames.SFTP_PRIVATE_KEY_PATH, filePath).apply();
     }
 
-    @ProfilePreference(name=PreferenceNames.SSH_KNOWN_HOST_KEY)
-    public String getSSHKnownHostKey(){
-        return prefs.getString(PreferenceNames.SSH_KNOWN_HOST_KEY, "");
+    @ProfilePreference(name=PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE)
+    public String getSFTPPrivateKeyPassphrase(){
+        return prefs.getString(PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE, "");
     }
 
-    public void setSSHKnownHostKey(String hostKey){
-        prefs.edit().putString(PreferenceNames.SSH_KNOWN_HOST_KEY, hostKey).apply();
+    @ProfilePreference(name=PreferenceNames.SFTP_KNOWN_HOST_KEY)
+    public String getSFTPKnownHostKey(){
+        return prefs.getString(PreferenceNames.SFTP_KNOWN_HOST_KEY, "");
     }
 
-    @ProfilePreference(name=PreferenceNames.SSH_REMOTE_SERVER_PATH)
-    public String getSSHRemoteServerPath(){
-        return prefs.getString(PreferenceNames.SSH_REMOTE_SERVER_PATH, "/tmp");
+    public void setSFTPKnownHostKey(String hostKey){
+        prefs.edit().putString(PreferenceNames.SFTP_KNOWN_HOST_KEY, hostKey).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.SFTP_REMOTE_SERVER_PATH)
+    public String getSFTPRemoteServerPath(){
+        return prefs.getString(PreferenceNames.SFTP_REMOTE_SERVER_PATH, "/tmp");
     }
 
 

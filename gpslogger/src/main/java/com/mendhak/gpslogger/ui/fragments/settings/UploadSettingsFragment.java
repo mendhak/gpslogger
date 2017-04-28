@@ -54,7 +54,7 @@ public class UploadSettingsFragment extends PreferenceFragment implements Prefer
         findPreference("opengts_setup").setOnPreferenceClickListener(this);
         findPreference("autoftp_setup").setOnPreferenceClickListener(this);
         findPreference("owncloud_setup").setOnPreferenceClickListener(this);
-        findPreference("ssh_setup").setOnPreferenceClickListener(this);
+        findPreference("sftp_setup").setOnPreferenceClickListener(this);
     }
 
 
@@ -91,8 +91,8 @@ public class UploadSettingsFragment extends PreferenceFragment implements Prefer
             launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD;
         }
 
-        if(preference.getKey().equalsIgnoreCase("ssh_setup")){
-            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.SSH;
+        if(preference.getKey().equalsIgnoreCase("sftp_setup")){
+            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.SFTP;
         }
 
         if(!Strings.isNullOrEmpty(launchFragment)){

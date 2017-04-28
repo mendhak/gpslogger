@@ -20,7 +20,6 @@
 package com.mendhak.gpslogger;
 
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.*;
@@ -44,14 +43,12 @@ import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.InputType;
-import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.*;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.amulyakhare.textdrawable.TextDrawable;
-import com.jcraft.jsch.*;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.events.CommandEvents;
@@ -78,11 +75,9 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class GpsMainActivity extends AppCompatActivity
@@ -499,6 +494,7 @@ public class GpsMainActivity extends AppCompatActivity
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.pref_autosend_title, R.string.pref_autosend_summary, R.drawable.autosend, 1003));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.gdocs_setup_title, R.drawable.googledrive, 1004));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.dropbox_setup_title, R.drawable.dropbox, 1005));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.sftp_setup_title, R.drawable.settings, 1015));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.autoemail_title, R.drawable.email, 1006));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.autoftp_setup_title, R.drawable.ftp, 1007));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.opengts_setup_title, R.drawable.opengts, 1008));
@@ -506,8 +502,8 @@ public class GpsMainActivity extends AppCompatActivity
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.owncloud_setup_title, R.drawable.owncloud, 1010));
         materialDrawer.addItem(new DividerDrawerItem());
 
-        materialDrawer.addStickyFooterItem(GpsLoggerDrawerItem.newSecondary(R.string.menu_faq, R.drawable.helpfaq, 1011));
-        materialDrawer.addStickyFooterItem(GpsLoggerDrawerItem.newSecondary(R.string.menu_exit, R.drawable.exit, 1012));
+        materialDrawer.addStickyFooterItem(GpsLoggerDrawerItem.newSecondary(R.string.menu_faq, R.drawable.helpfaq, 9000));
+        materialDrawer.addStickyFooterItem(GpsLoggerDrawerItem.newSecondary(R.string.menu_exit, R.drawable.exit, 9001));
 
 
         materialDrawer.setOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -548,11 +544,14 @@ public class GpsMainActivity extends AppCompatActivity
                     case 1010:
                         launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD);
                         break;
-                    case 1011:
+                    case 1015:
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.SFTP);
+                        break;
+                    case 9000:
                         Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
                         startActivity(faqtivity);
                         break;
-                    case 1012:
+                    case 9001:
                         EventBus.getDefault().post(new CommandEvents.RequestStartStop(false));
                         finish();
                         break;
@@ -833,6 +832,9 @@ public class GpsMainActivity extends AppCompatActivity
             case R.id.mnuOwnCloud:
                 uploadToOwnCloud();
                 return true;
+            case R.id.mnuSFTP:
+                uploadToSFTP();
+                return true;
             default:
                 return true;
         }
@@ -910,6 +912,14 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
 
+    private void uploadToSFTP(){
+        if(!FileSenderFactory.getSFTPSender().isAvailable()){
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.SFTP);
+            return;
+        }
+
+        showFileListDialog(FileSenderFactory.getSFTPSender());
+    }
 
     private void uploadToOwnCloud() {
 
@@ -1278,6 +1288,20 @@ public class GpsMainActivity extends AppCompatActivity
         }
     }
 
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.SFTP upload){
+
+        LOG.debug("SFTP Event completed, success: " + upload.success);
+        Dialogs.hideProgress();
+
+        if(!upload.success){
+            LOG.error(getString(R.string.sftp_setup_title) + "- " + getString(R.string.upload_failure));
+            if(userInvokedUpload){
+                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                userInvokedUpload = false;
+            }
+        }
+    }
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.OwnCloud upload){

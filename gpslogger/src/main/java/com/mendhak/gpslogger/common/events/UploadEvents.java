@@ -102,9 +102,8 @@ public class UploadEvents {
 
     public static class OwnCloud extends BaseUploadEvent {}
 
-    public static class SSH extends BaseUploadEvent {
+    public static class SFTP extends BaseUploadEvent {
         public String fingerprint;
         public String hostKey;
-        public ArrayList<String> sshMessages;
     }
 }
