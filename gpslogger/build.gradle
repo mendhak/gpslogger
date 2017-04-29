@@ -66,10 +66,12 @@ android {
     buildTypes {
         debug {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
@@ -157,7 +159,6 @@ dependencies {
     compile 'com.android.support:support-v4:23.1.1'
     compile 'com.google.android.gms:play-services-base:8.4.0'
     compile 'com.google.android.gms:play-services-location:8.4.0'
-    compile 'com.google.android.gms:play-services-drive:8.4.0'
     compile 'com.google.android.gms:play-services-wearable:8.4.0'
 
     //FTP operations
