@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.Preference;
-import android.text.TextUtils;
+import android.support.v4.content.ContextCompat;
 import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
@@ -43,6 +43,7 @@ public class SFTPSettingsFragment extends PermissionedPreferenceFragment impleme
         manager = new SFTPManager(preferenceHelper);
 
         findPreference("sftp_validateserver").setOnPreferenceClickListener(this);
+        findPreference("sftp_reset_authorisation").setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setSummary(preferenceHelper.getSFTPPrivateKeyFilePath());
         registerEventBus();
@@ -93,6 +94,10 @@ public class SFTPSettingsFragment extends PermissionedPreferenceFragment impleme
         else if(preference.getKey().equals("sftp_validateserver")) {
             uploadTestFile();
         }
+        else if (preference.getKey().equals("sftp_reset_authorisation")){
+            preferenceHelper.setSFTPKnownHostKey("");
+            getActivity().finish();
+        }
 
         return false;
     }
@@ -138,8 +143,11 @@ public class SFTPSettingsFragment extends PermissionedPreferenceFragment impleme
             if( !Strings.isNullOrEmpty(o.hostKey)){
                 LOG.debug("SFTP HostKey " + o.hostKey);
                 LOG.debug("SFTP Fingerprint " + o.fingerprint);
+                String codeGreen = Integer.toHexString(ContextCompat.getColor(getActivity(), R.color.accentColorComplementary)).substring(2);
+                String promptMessage = String.format("Fingerprint: <br /><font color='#%s' face='monospace'>%s</font> <br /><br /> Host Key: <br /><font color='#%s' face='monospace'>%s</font>",
+                                                        codeGreen, o.fingerprint, codeGreen, o.hostKey);
 
-                Dialogs.alert("Do you accept the following host?", "Fingerprint: " + o.fingerprint +" <br /> Host Key:" + o.hostKey, getActivity(), true, new Dialogs.MessageBoxCallback() {
+                Dialogs.alert("Accept this host key?", promptMessage , getActivity(), true, new Dialogs.MessageBoxCallback() {
                     @Override
                     public void messageBoxResult(int which) {
                         if(which==Dialogs.MessageBoxCallback.OK){
