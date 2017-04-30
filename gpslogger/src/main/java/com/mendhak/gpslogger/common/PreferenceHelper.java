@@ -1019,34 +1019,27 @@ public class PreferenceHelper {
         prefs.edit().putBoolean(PreferenceNames.CUSTOM_FILE_NAME_KEEP_CHANGING, keepChanging).apply();
     }
 
-    @ProfilePreference(name=PreferenceNames.SFTP_ENABLED)
     public boolean isSFTPEnabled(){
         return prefs.getBoolean(PreferenceNames.SFTP_ENABLED, false);
     }
 
-    @ProfilePreference(name=PreferenceNames.SFTP_HOST)
     public String getSFTPHost(){
         return prefs.getString(PreferenceNames.SFTP_HOST, "127.0.0.1");
     }
 
-    @ProfilePreference(name=PreferenceNames.SFTP_PORT)
     public int getSFTPPort(){
         return Strings.toInt(prefs.getString(PreferenceNames.SFTP_PORT, "22"),22);
     }
 
-
-    @ProfilePreference(name=PreferenceNames.SFTP_USER)
     public String getSFTPUser(){
         return prefs.getString(PreferenceNames.SFTP_USER, "");
     }
 
 
-    @ProfilePreference(name=PreferenceNames.SFTP_PASSWORD)
     public String getSFTPPassword(){
         return prefs.getString(PreferenceNames.SFTP_PASSWORD, "");
     }
 
-    @ProfilePreference(name=PreferenceNames.SFTP_PRIVATE_KEY_PATH)
     public String getSFTPPrivateKeyFilePath(){
         return prefs.getString(PreferenceNames.SFTP_PRIVATE_KEY_PATH, "");
     }
@@ -1055,12 +1048,10 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.SFTP_PRIVATE_KEY_PATH, filePath).apply();
     }
 
-    @ProfilePreference(name=PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE)
     public String getSFTPPrivateKeyPassphrase(){
         return prefs.getString(PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE, "");
     }
 
-    @ProfilePreference(name=PreferenceNames.SFTP_KNOWN_HOST_KEY)
     public String getSFTPKnownHostKey(){
         return prefs.getString(PreferenceNames.SFTP_KNOWN_HOST_KEY, "");
     }
@@ -1069,7 +1060,6 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.SFTP_KNOWN_HOST_KEY, hostKey).apply();
     }
 
-    @ProfilePreference(name=PreferenceNames.SFTP_REMOTE_SERVER_PATH)
     public String getSFTPRemoteServerPath(){
         return prefs.getString(PreferenceNames.SFTP_REMOTE_SERVER_PATH, "/tmp");
     }

@@ -1,6 +1,6 @@
 # Privacy Policy
 
-Last updated: April 28 2017
+Last updated: April 30 2017
 
 #### In short - We do not collect any personal information from you.   
 
@@ -8,7 +8,7 @@ Last updated: April 28 2017
 
 Welcome to GPSLogger for Android ("us", "we", "GPSLogger" or "our").
 
-GPSLogger does not collect any personal information, analytics, tracking or profiling data.  Read below to understand what happens to the information that you provide to GPSLogger.
+GPSLogger does not collect or send to any third-parties, any personal information, analytics, tracking or profiling data.  Read below to understand what happens to the information that you provide to GPSLogger.
 
 When GPSLogger records your **location**, it is only recorded to the file formats or destinations specified by you - such as GPX, KML, NMEA, CSV, Custom URL, OpenGTS - and where applicable, over the secure connections of *those* services and your device.  The files stay on your device.  This information is not collected in any way by us.
 
