@@ -19,8 +19,13 @@
 
 package com.mendhak.gpslogger;
 
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.*;
 import android.os.Bundle;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -28,8 +33,9 @@ import com.mendhak.gpslogger.loggers.nmea.NmeaSentence;
 import org.slf4j.Logger;
 
 import java.util.Iterator;
+import java.util.Vector;
 
-class GeneralLocationListener implements LocationListener, GpsStatus.Listener, GpsStatus.NmeaListener {
+class GeneralLocationListener implements LocationListener, GpsStatus.Listener, GpsStatus.NmeaListener, SensorEventListener {
 
     private static String listenerName;
     private static GpsLoggingService loggingService;
@@ -42,6 +48,19 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     protected String dgpsId;
     protected int satellitesUsedInFix;
     private Session session = Session.getInstance();
+
+    // Sensor Data Extensions
+    protected float[] mGravity = null;
+    protected float[] mGeomagnetic = null;
+
+    protected long nextTimestampToSave = 0;
+    protected long lastTimestamp = 0;
+    protected Vector<SensorDataObject.Accelerometer> latestAccelerometer = new Vector();
+    protected Vector<SensorDataObject.Compass> latestCompass  = new Vector();
+    protected Vector<SensorDataObject.Orientation> latestOrientation = new Vector();
+
+    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+
 
     GeneralLocationListener(GpsLoggingService activity, String name) {
         loggingService = activity;
@@ -68,12 +87,21 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 b.putInt("SATELLITES_FIX", satellitesUsedInFix);
                 b.putString("DETECTED_ACTIVITY", session.getLatestDetectedActivityName());
 
+                //Extras for Sensordatalogging
+                b.putSerializable("ACCELEROMETER", latestAccelerometer);
+                b.putSerializable("COMPASS", latestCompass);
+                b.putSerializable("ORIENTATION", latestOrientation);
+
                 loc.setExtras(b);
                 loggingService.onLocationChanged(loc);
 
                 this.latestHdop = "";
                 this.latestPdop = "";
                 this.latestVdop = "";
+
+                this.latestAccelerometer = new Vector();
+                this.latestCompass = new Vector();
+                this.latestOrientation  = new Vector();
                 session.setLatestDetectedActivity(null);
             }
 
@@ -186,6 +214,75 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
             }
 
         }
+
+    }
+
+    @Override
+    /**
+     * Based on code found here: https://github.com/shiptrail/android-main
+     */
+    public void onSensorChanged(SensorEvent event) {
+        //check if we want to get sensor data already
+        long current = System.currentTimeMillis();
+        if (current >= nextTimestampToSave) {
+            lastTimestamp = nextTimestampToSave;
+            nextTimestampToSave = current;
+
+
+            if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
+                mGravity = event.values.clone();
+            if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
+                mGeomagnetic = event.values.clone();
+            if (mGravity != null && mGeomagnetic != null) {
+                float R[] = new float[9];
+                float I[] = new float[9];
+                boolean success = SensorManager.getRotationMatrix(R, I, mGravity, mGeomagnetic);
+                if (success) {
+                    float orientation[] = new float[3];
+                    SensorManager.getOrientation(R, orientation);
+
+                    float azimuth = orientation[0] * (180 / (float) Math.PI);
+                    float compass = azimuth;
+                    if (azimuth < 0){
+                        compass = 360+azimuth;
+                    } else if (azimuth >= 360) {
+                        compass = azimuth-360;
+                    }
+
+                    float pitch = orientation[1]* (180 / (float) Math.PI);
+                    float roll = orientation[2]* (180 / (float) Math.PI);
+
+                    //save ORIENTATION data
+                    long toffset = current - lastTimestamp;
+                    int toffsetInteger = -1;
+                    if (toffset < Integer.MAX_VALUE && toffset > Integer.MIN_VALUE) {
+                        toffsetInteger = (int) toffset;
+                    }
+                    this.latestOrientation.addElement(new SensorDataObject.Orientation(compass,pitch,roll,toffsetInteger));
+
+                    //acceleration
+                    float x = mGravity[0];
+                    float y = mGravity[1];
+                    float z = mGravity[2];
+
+                    //save acceleration
+                    this.latestAccelerometer.addElement(new SensorDataObject.Accelerometer(x,y,z,toffsetInteger));
+
+                    //save compass
+                    this.latestCompass.addElement(new SensorDataObject.Compass(compass, toffsetInteger));
+
+                    //determine when the next sensor data shall be monitored
+                    nextTimestampToSave += preferenceHelper.getMinimumLoggingInterval()/10;
+
+                    mGravity = null;
+                    mGeomagnetic = null;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
 }

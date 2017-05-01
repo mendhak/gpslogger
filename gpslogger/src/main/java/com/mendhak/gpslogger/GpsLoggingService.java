@@ -24,6 +24,8 @@ import android.app.*;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.*;
@@ -74,6 +76,11 @@ public class GpsLoggingService extends Service  {
     private GeneralLocationListener gpsLocationListener;
     private GeneralLocationListener towerLocationListener;
     private GeneralLocationListener passiveLocationListener;
+    // Extra Sensor-Data-Stuff
+    private GeneralLocationListener sensorDataListener;
+    protected SensorManager sensorManager;
+    protected Sensor accelerometer, magnetometer;
+
     private Intent alarmIntent;
     private Handler handler = new Handler();
 
