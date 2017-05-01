@@ -94,7 +94,7 @@ public class UploadEvents {
         public ArrayList<String> ftpMessages;
     }
 
-    public static class GDocs extends BaseUploadEvent {}
+    public static class GDrive extends BaseUploadEvent {}
 
     public static class OpenGTS extends BaseUploadEvent {}
 

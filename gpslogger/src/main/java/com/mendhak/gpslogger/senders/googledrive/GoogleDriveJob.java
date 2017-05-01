@@ -19,7 +19,6 @@
 
 package com.mendhak.gpslogger.senders.googledrive;
 
-import android.os.Build;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
@@ -76,7 +75,7 @@ public class GoogleDriveJob extends Job {
             gpsLoggerFolderId = createEmptyFile(token, googleDriveFolderName, "application/vnd.google-apps.folder", "root");
 
             if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
-                EventBus.getDefault().post(new UploadEvents.GDocs().failed("Could not create folder"));
+                EventBus.getDefault().post(new UploadEvents.GDrive().failed("Could not create folder"));
                 return;
             }
         }
@@ -89,7 +88,7 @@ public class GoogleDriveJob extends Job {
             gpxFileId = createEmptyFile(token, fileName, getMimeTypeFromFileName(fileName), gpsLoggerFolderId);
 
             if (Strings.isNullOrEmpty(gpxFileId)) {
-                EventBus.getDefault().post(new UploadEvents.GDocs().failed("Could not create file"));
+                EventBus.getDefault().post(new UploadEvents.GDrive().failed("Could not create file"));
                 return;
             }
         }
@@ -98,7 +97,7 @@ public class GoogleDriveJob extends Job {
             //Set file's contents
             updateFileContents(token, gpxFileId, Streams.getByteArrayFromInputStream(fis), fileName);
         }
-        EventBus.getDefault().post(new UploadEvents.GDocs().succeeded());
+        EventBus.getDefault().post(new UploadEvents.GDrive().succeeded());
     }
 
 
@@ -289,7 +288,7 @@ public class GoogleDriveJob extends Job {
     @Override
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
         LOG.error("Could not upload to Google Drive", throwable);
-        EventBus.getDefault().post(new UploadEvents.GDocs().failed("Could not upload to Google Drive", throwable));
+        EventBus.getDefault().post(new UploadEvents.GDrive().failed("Could not upload to Google Drive", throwable));
         return false;
     }
 }

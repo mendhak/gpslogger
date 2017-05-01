@@ -50,7 +50,7 @@ public class UploadSettingsFragment extends PreferenceFragment implements Prefer
         findPreference("osm_setup").setOnPreferenceClickListener(this);
         findPreference("autoemail_setup").setOnPreferenceClickListener(this);
         findPreference("dropbox_setup").setOnPreferenceClickListener(this);
-        findPreference("gdocs_setup").setOnPreferenceClickListener(this);
+        findPreference("gdrive_setup").setOnPreferenceClickListener(this);
         findPreference("opengts_setup").setOnPreferenceClickListener(this);
         findPreference("autoftp_setup").setOnPreferenceClickListener(this);
         findPreference("owncloud_setup").setOnPreferenceClickListener(this);
@@ -75,7 +75,7 @@ public class UploadSettingsFragment extends PreferenceFragment implements Prefer
             launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX;
         }
 
-        if(preference.getKey().equalsIgnoreCase("gdocs_setup")){
+        if(preference.getKey().equalsIgnoreCase("gdrive_setup")){
             launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.GDOCS;
         }
 

@@ -48,9 +48,7 @@ import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 
@@ -269,15 +267,15 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
 
         } catch (Exception ex) {
             LOG.error("Could not create local test file", ex);
-            EventBus.getDefault().post(new UploadEvents.GDocs().failed("Could not create local test file", ex));
+            EventBus.getDefault().post(new UploadEvents.GDrive().failed("Could not create local test file", ex));
         }
     }
 
 
 
     @EventBusHook
-    public void onEventMainThread(UploadEvents.GDocs o){
-        LOG.debug("GDocs Event completed, success: " + o.success);
+    public void onEventMainThread(UploadEvents.GDrive o){
+        LOG.debug("GDrive Event completed, success: " + o.success);
         Dialogs.hideProgress();
         if(!o.success){
             Dialogs.alert(getString(R.string.sorry), getString(R.string.upload_failure), getActivity());

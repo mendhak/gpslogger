@@ -96,7 +96,7 @@ public class GoogleDriveManager extends FileSender {
 
     public void uploadFile(final String fileName, @Nullable String googleDriveFolderName) {
         if (!isLinked()) {
-            EventBus.getDefault().post(new UploadEvents.GDocs().failed("Not authorized"));
+            EventBus.getDefault().post(new UploadEvents.GDrive().failed("Not authorized"));
             return;
         }
 
@@ -127,7 +127,7 @@ public class GoogleDriveManager extends FileSender {
 
 
         } catch (Exception e) {
-            EventBus.getDefault().post(new UploadEvents.GDocs().failed("Failed to upload file", e));
+            EventBus.getDefault().post(new UploadEvents.GDrive().failed("Failed to upload file", e));
             LOG.error("GoogleDriveManager.uploadFile", e);
         }
     }
@@ -139,7 +139,7 @@ public class GoogleDriveManager extends FileSender {
 
     public String getToken() throws GoogleAuthException, IOException {
         String token = GoogleAuthUtil.getTokenWithNotification(AppSettings.getInstance(), preferenceHelper.getGoogleDriveAccountName(), getOauth2Scope(), new Bundle());
-        LOG.debug("GDocs token: " + token);
+        LOG.debug("GDrive token: " + token);
         preferenceHelper.setGoogleDriveAuthToken(token);
         return token;
     }

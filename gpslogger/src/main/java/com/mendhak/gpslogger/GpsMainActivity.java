@@ -1258,8 +1258,8 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
     @EventBusHook
-    public void onEventMainThread(UploadEvents.GDocs upload){
-        LOG.debug("GDocs Event completed, success: " + upload.success);
+    public void onEventMainThread(UploadEvents.GDrive upload){
+        LOG.debug("GDrive Event completed, success: " + upload.success);
         Dialogs.hideProgress();
 
         if(!upload.success){

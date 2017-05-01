@@ -38,37 +38,42 @@
         android:title="@string/autosend_wifionly_title" />
 
     <PreferenceCategory android:title="@string/autosend_targets_category">
-        <Preference
-            android:title="@string/autoemail_title"
-            android:key="autoemail_setup">
-        </Preference>
+
 
         <Preference
-            android:title="@string/osm_setup_title"
-            android:key="osm_setup">
+            android:title="@string/gdocs_setup_title"
+            android:key="gdrive_setup">
         </Preference>
         <Preference
             android:title="@string/dropbox_setup_title"
             android:key="dropbox_setup">
         </Preference>
         <Preference
-            android:title="@string/gdocs_setup_title"
-            android:key="gdocs_setup">
+            android:title="@string/sftp_setup_title"
+            android:key="sftp_setup">
         </Preference>
         <Preference
             android:title="@string/opengts_setup_title"
             android:key="opengts_setup">
         </Preference>
         <Preference
-            android:title="@string/autoftp_setup_title"
-            android:key="autoftp_setup">
+            android:title="@string/osm_setup_title"
+            android:key="osm_setup">
+        </Preference>
+        <Preference
+            android:title="@string/autoemail_title"
+            android:key="autoemail_setup">
         </Preference>
         <Preference
             android:title="@string/owncloud_setup_title"
             android:key="owncloud_setup">
         </Preference>
-        <Preference android:title="@string/sftp_setup_title" android:key="sftp_setup">
+        <Preference
+            android:title="@string/autoftp_setup_title"
+            android:key="autoftp_setup">
         </Preference>
+
+
     </PreferenceCategory>
 
 
