@@ -78,6 +78,7 @@ public class CustomUrlLogger implements FileLogger {
         logUrl = logUrl.replaceAll("(?i)%dir", String.valueOf(sLoc.getBearing()));
         logUrl = logUrl.replaceAll("(?i)%prov", String.valueOf(sLoc.getProvider()));
         logUrl = logUrl.replaceAll("(?i)%spd", String.valueOf(sLoc.getSpeed()));
+        logUrl = logUrl.replaceAll("(?i)%timestamp", String.valueOf(sLoc.getTime()/1000));
         logUrl = logUrl.replaceAll("(?i)%time", String.valueOf(Strings.getIsoDateTime(new Date(sLoc.getTime()))));
         logUrl = logUrl.replaceAll("(?i)%batt", String.valueOf(batteryLevel));
         logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));

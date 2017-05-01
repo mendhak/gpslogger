@@ -50,6 +50,21 @@ public class CustomUrlLoggerTest {
     }
 
     @Test
+    public void getFormattedUrl_WhenTimeStamp_UseUnixEpoch() throws Exception {
+        Location loc = MockLocations.builder("MOCK", 12.193, 19.456).withTime(1457205869949l).build();
+        CustomUrlLogger logger = new CustomUrlLogger("",0,"");
+        String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&sat=0&desc=&alt=0.0&acc=0.0&dir=0.0&prov=MOCK&spd=0.0&time=2016-03-05T19:24:29.949Z&battery=0.0&androidId=&serial=&activity=&epoch=1457205869";
+        String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER&activity=%ACT&epoch=%TIMESTAMP";
+        assertThat("Unix timestamp is in seconds", logger.getFormattedUrl(urlTemplate, loc, "", "", 0, ""), is(expected));
+
+        expected = "http://192.168.1.65:8000/test?lat=12.193&lon=19.456&sat=0&desc=&alt=0.0&acc=0.0&dir=0.0&prov=MOCK&spd=0.0&time=2016-03-05T19:24:29.949Z&battery=0.0&androidId=&serial=&activity=&epoch=1457205869000";
+        urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER&activity=%ACT&epoch=%TIMESTAMP000";
+
+        assertThat("Unix timestamp with 000 to fake milliseconds", logger.getFormattedUrl(urlTemplate, loc, "", "", 0, ""), is(expected));
+
+    }
+
+    @Test
     public void getBasicAuth_BasicAuthPresent_ReturnsUsernamePassword() throws Exception {
         CustomUrlLogger logger = new CustomUrlLogger("",0,"");
 
