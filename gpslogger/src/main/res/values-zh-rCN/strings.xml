@@ -97,7 +97,6 @@
   <string name="log_gpx_summary">记录到 GPX v1.0 文件</string>
   <string name="log_kml_title">记录到 KML 文件</string>
   <string name="log_kml_summary">记录到 KML v2.2 文件</string>
-  <string name="log_plain_text_title">纪录到文本档</string>
   <string name="log_plain_text_summary">记录到 CSV 文件</string>
   <string name="new_file_creation_title">新文件的创建</string>
   <string name="new_file_creation_summary">选择是一天仅创建一个文件呢还是每次开始都创建一个文件。</string>

@@ -94,7 +94,6 @@
   <string name="log_gpx_summary">Zapisuj pozycje do pliku GPX v1.0</string>
   <string name="log_kml_title">Loguj do KML</string>
   <string name="log_kml_summary">Zapisuj pozycje do pliku KML v2.2</string>
-  <string name="log_plain_text_title">Loguj do surowego pliku tekstowego</string>
   <string name="log_plain_text_summary">Zapisuj pozycje do pliku CSV</string>
   <string name="new_file_creation_title">Tworzenie nowego pliku</string>
   <string name="new_file_creation_summary">Tworzenie pliku raz na dzień lub za każdym uruchomieniem programu.</string>

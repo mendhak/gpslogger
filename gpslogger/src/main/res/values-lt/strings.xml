@@ -95,7 +95,6 @@
   <string name="pref_logging_title">Registruojami duomenys</string>
   <string name="log_gpx_title">Rašoma į GPX</string>
   <string name="log_kml_title">Saugoti į KML</string>
-  <string name="log_plain_text_title">Rašoma prastu tekstu</string>
   <string name="new_file_creation_title">Naujas failas</string>
   <string name="new_file_creation_summary">Priklauso ar failas sukuriamas kasdien, ar kiekvieną kartą paleidžiant programą.</string>
   <string name="new_file_creation_onceaday">Kasdien</string>

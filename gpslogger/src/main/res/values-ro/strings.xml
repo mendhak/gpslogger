@@ -94,7 +94,6 @@
   <string name="log_gpx_summary">Jurnalele de locații într-un fişier GPX de v1.0</string>
   <string name="log_kml_title">Înregistrează in KML</string>
   <string name="log_kml_summary">Jurnalele locațiilor într-un fişier KML v2.2</string>
-  <string name="log_plain_text_title">Înregistrează in fisier text</string>
   <string name="log_plain_text_summary">Jurnalele locațiilor într-un fişier CSV</string>
   <string name="new_file_creation_title">Creare de fişier nou</string>
   <string name="new_file_creation_summary">Fişierul nou se creeaza in fiecare zi sau de fiecare dată când pornesti inregistrarea.</string>

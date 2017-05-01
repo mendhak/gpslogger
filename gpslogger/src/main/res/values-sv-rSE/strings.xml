@@ -93,7 +93,6 @@
   <string name="pref_logging_title">Loggningsdetaljer</string>
   <string name="log_gpx_title">Logga till GPX</string>
   <string name="log_kml_title">Logga till KML</string>
-  <string name="log_plain_text_title">Logga som klartext</string>
   <string name="new_file_creation_title">Ny fil skapas</string>
   <string name="new_file_creation_summary">Om du vill skapa en ny fil en gång per dag eller varje gång du startar.</string>
   <string name="new_file_creation_onceaday">En gång om dagen</string>

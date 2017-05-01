@@ -96,7 +96,6 @@
   <string name="log_gpx_summary">Registos das localizações para um ficheiro GPX v1.0</string>
   <string name="log_kml_title">Logar para KML</string>
   <string name="log_kml_summary">Registos das localizações para um ficheiro KML v2.2</string>
-  <string name="log_plain_text_title">Log para texto simples</string>
   <string name="log_plain_text_summary">Registos das localizações para um ficheiro CSV</string>
   <string name="new_file_creation_title">Novo arquivo criado</string>
   <string name="new_file_creation_summary">Criar ficheiro novo a cada dia ou de cada vez que a aplicação é iniciada.</string>

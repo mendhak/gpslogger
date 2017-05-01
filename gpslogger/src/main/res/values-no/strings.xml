@@ -93,7 +93,6 @@
   <string name="log_gpx_summary">Logger posisjoner til en GPX v1.0-fil</string>
   <string name="log_kml_title">Logg til KML</string>
   <string name="log_kml_summary">Logger posisjoner til en GPX v1.0-fil</string>
-  <string name="log_plain_text_title">Logg til tekstfil</string>
   <string name="log_plain_text_summary">Logger posisjoner til en CSV-fil</string>
   <string name="new_file_creation_title">Filoppretting</string>
   <string name="new_file_creation_summary">Skal ny fil opprettast ein gong om dagen eller kvar gong du byrjar.</string>

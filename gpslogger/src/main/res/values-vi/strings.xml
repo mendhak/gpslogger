@@ -94,7 +94,6 @@
   <string name="pref_logging_title">Chi tiết log</string>
   <string name="log_gpx_title">Ghi vào GPX</string>
   <string name="log_kml_title">Ghi vào file KML</string>
-  <string name="log_plain_text_title">Ghi vào file văn bản</string>
   <string name="new_file_creation_title">Tạo file mới</string>
   <string name="new_file_creation_summary">Tạo file mới mỗi lần một ngày hoặc mỗi khi chạy.</string>
   <string name="new_file_creation_onceaday">Ngày một lần</string>

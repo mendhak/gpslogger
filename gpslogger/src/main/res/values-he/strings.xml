@@ -84,7 +84,6 @@
   <string name="log_gpx_summary">שמור מיקומים בקובץ GPX v1.0</string>
   <string name="log_kml_title">שמור קובץ KML</string>
   <string name="log_kml_summary">שמור מיקומים בקובץ KML v2.2</string>
-  <string name="log_plain_text_title">שמור קובץ טקסט</string>
   <string name="log_plain_text_summary">שמור מיקומים בקובץ CSV</string>
   <string name="autoemail_smtp_category">הגדרות דואר</string>
   <string name="started_waiting">GPS אותחל, ממתין למיקום</string>

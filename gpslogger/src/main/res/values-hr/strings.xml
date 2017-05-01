@@ -96,7 +96,6 @@
   <string name="log_gpx_summary">Bilježi lokacije u GPX v1.0 datoteku</string>
   <string name="log_kml_title">Zapis u KML</string>
   <string name="log_kml_summary">Bilježi lokacije u KML v2.2 datoteku</string>
-  <string name="log_plain_text_title">Zapis u običan tekst</string>
   <string name="log_plain_text_summary">Bilježi lokacije u CSV datoteku</string>
   <string name="new_file_creation_title">Stvaranje novih datoteka</string>
   <string name="new_file_creation_summary">Želite li stvoriti novu datoteku jedanput dnevno ili kod svakog početka.</string>

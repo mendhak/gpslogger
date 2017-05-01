@@ -95,7 +95,6 @@
   <string name="log_gpx_summary">محل ذخیره فایل لاگ های GPX نسخه 1.0</string>
   <string name="log_kml_title">ذخیره لاگ KML</string>
   <string name="log_kml_summary">محل ذخیره فایل لاگ KML نسخه 2.2</string>
-  <string name="log_plain_text_title">ذخیره لاگ در قالب متنی ساده</string>
   <string name="log_plain_text_summary">محل ذخیره فایل لاگ های CSV</string>
   <string name="new_file_creation_title">ایجاد فایل جدید</string>
   <string name="new_file_creation_summary">ساخت فایل جدید برای هر روز یا هر زمان که برنامه را اجرا می کنید.</string>

@@ -83,7 +83,6 @@
   <string name="log_gpx_summary">Dnevniki lokacijah v GPX datoteki v1.0</string>
   <string name="log_kml_title">Dnevnik KML</string>
   <string name="log_kml_summary">Dnevniki lokacijah v datoteki KML v2.2</string>
-  <string name="log_plain_text_title">Piši dnevnik v golo besedilo</string>
   <string name="log_plain_text_summary">Dnevniki lokacijah v datoteki CSV</string>
   <string name="new_file_creation_title">Ustvarjanje nove datoteke</string>
   <string name="new_file_creation_summary">Ali želite ustvariti novo datoteko enkrat na dan, ali vsakič ko boste začeli.</string>

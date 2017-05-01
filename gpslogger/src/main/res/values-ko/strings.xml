@@ -97,7 +97,6 @@
   <string name="log_gpx_summary">GPX v1.0 파일로 위치 기록</string>
   <string name="log_kml_title">KML로 기록하기</string>
   <string name="log_kml_summary">KML v2.2 파일로 위치 기록</string>
-  <string name="log_plain_text_title">일반 텍스트 파일로 위치 기록</string>
   <string name="log_plain_text_summary">CSV 파일로 위치 기록</string>
   <string name="new_file_creation_title">새 파일 생성</string>
   <string name="new_file_creation_summary">새 파일을 생성을 하루에 한번 혹은 매 시작시 마다 할지를 지정.</string>

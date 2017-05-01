@@ -97,7 +97,6 @@
   <string name="log_gpx_summary">Escribe las posiciones en un archivo GPX v1.0</string>
   <string name="log_kml_title">Registrar en formato KML</string>
   <string name="log_kml_summary">Escribe las posiciones en un archivo KML v2.2</string>
-  <string name="log_plain_text_title">Registrar en texto plano</string>
   <string name="log_plain_text_summary">Escribe las posiciones en un archivo CSV</string>
   <string name="new_file_creation_title">Creación de archivos</string>
   <string name="new_file_creation_summary">Crear un nuevo archivo por día, o cada vez que inicie.</string>

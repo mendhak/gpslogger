@@ -96,7 +96,6 @@
   <string name="log_gpx_summary">Pozíciók naplózása egy GPX v1.0 fájlba</string>
   <string name="log_kml_title">KML napló</string>
   <string name="log_kml_summary">Pozíciók naplózása egy KML v2.2 fájlba</string>
-  <string name="log_plain_text_title">Egyszerű szöveges napló</string>
   <string name="log_plain_text_summary">Pozíciók naplózása egy CSV fájlba</string>
   <string name="new_file_creation_title">Új fájl létrehozása</string>
   <string name="new_file_creation_summary">Létrehoz egy új fájlt, naponta egyszer, vagy minden induláskor.</string>

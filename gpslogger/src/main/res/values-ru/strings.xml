@@ -96,7 +96,6 @@
   <string name="log_gpx_summary">Логи местоположения в файл GPX v1.0</string>
   <string name="log_kml_title">Писать лог в KML</string>
   <string name="log_kml_summary">Логи местоположения в файл KML v2.2</string>
-  <string name="log_plain_text_title">Записывать в обычный текст</string>
   <string name="log_plain_text_summary">Логи местоположения в файл CSV</string>
   <string name="new_file_creation_title">Создать новый файл</string>
   <string name="new_file_creation_summary">Создвать файл лога один раз в день или каждый раз при старте записи лога.

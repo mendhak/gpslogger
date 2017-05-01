@@ -96,7 +96,6 @@
   <string name="log_gpx_summary">Lokisijainnit GPX v1.0 tiedostoon</string>
   <string name="log_kml_title">Loki muodossa KML</string>
   <string name="log_kml_summary">Lokisijainnit KML v2.2 tiedostoon</string>
-  <string name="log_plain_text_title">Lokit pelkkänä tekstinä</string>
   <string name="log_plain_text_summary">Lokisijainnit CSV tiedostoon</string>
   <string name="new_file_creation_title">Uuden tiedoston luominen</string>
   <string name="new_file_creation_summary">Luodaanko uusi tiedosto kerran päivässä vai joka aloittamiskerta.</string>

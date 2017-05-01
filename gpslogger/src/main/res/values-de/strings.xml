@@ -96,7 +96,6 @@
   <string name="log_gpx_summary">Erstellt GPS-Track in einer GPX v1.0-Datei</string>
   <string name="log_kml_title">Logge zu KML</string>
   <string name="log_kml_summary">Erstellt GPS-Track in einer KML v2.2-Datei</string>
-  <string name="log_plain_text_title">Logge als einfachen Text</string>
   <string name="log_plain_text_summary">Erstellt GPS-Track in einer CSV-Datei</string>
   <string name="new_file_creation_title">Neue Datei erstellen</string>
   <string name="new_file_creation_summary">Ob eine neue Datei einmal am Tag erstellt werden soll oder nach jedem Start.</string>

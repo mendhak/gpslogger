@@ -96,7 +96,6 @@
   <string name="log_gpx_summary">Záznam umístění do GPX v1.0 souboru</string>
   <string name="log_kml_title">Zapisovat do KML</string>
   <string name="log_kml_summary">Záznam umístění do GPX v2.2 souboru</string>
-  <string name="log_plain_text_title">Zaznamenávat do prostého textu</string>
   <string name="log_plain_text_summary">Záznam umístění do CSV souboru</string>
   <string name="new_file_creation_title">Vytvoření nového souboru</string>
   <string name="new_file_creation_summary">Zda chcete vytvořit nový soubor jednou denně, nebo při každém spuštění.</string>

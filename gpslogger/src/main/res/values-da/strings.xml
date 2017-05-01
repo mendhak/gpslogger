@@ -97,7 +97,6 @@
   <string name="log_gpx_summary">Logger placeringer til en GPX v1.0 fil</string>
   <string name="log_kml_title">Log til KML</string>
   <string name="log_kml_summary">Logger placeringer til en KML v2.2 fil</string>
-  <string name="log_plain_text_title">Log til almindelig tekst</string>
   <string name="log_plain_text_summary">Logger placeringer til en CSV-fil</string>
   <string name="new_file_creation_title">Ny filoprettelse</string>
   <string name="new_file_creation_summary">Om der skal oprettes en ny fil dagligt eller ved hver opstart.</string>

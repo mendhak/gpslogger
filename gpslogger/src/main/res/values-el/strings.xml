@@ -96,7 +96,6 @@
   <string name="log_gpx_summary">Καταγραφή τοποθεσιών σε αρχείο GPX v1.0</string>
   <string name="log_kml_title">Καταγραφή σε KML</string>
   <string name="log_kml_summary">Καταγραφή τοποθεσιών σε αρχείο KML v2.2</string>
-  <string name="log_plain_text_title">Καταγραφή σε μορφή απλού κειμένου</string>
   <string name="log_plain_text_summary">Καταγραφή τοποθεσιών σε αρχείο CSV</string>
   <string name="new_file_creation_title">Δημιουργία νέoυ αρχείου</string>
   <string name="new_file_creation_summary">Αν θέλετε να δημιουργήσετε ένα νέο αρχείο μία φορά την ημέρα ή κάθε φορά που ξεκινάτε.</string>

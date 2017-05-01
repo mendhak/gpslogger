@@ -97,7 +97,6 @@
   <string name="log_gpx_summary">Zaznamená polohy do súboru GPX v1.0</string>
   <string name="log_kml_title">Záznam do KML</string>
   <string name="log_kml_summary">Zaznamená polohy do súboru KML v2.2</string>
-  <string name="log_plain_text_title">Záznam do TXT súboru</string>
   <string name="log_plain_text_summary">Zaznemaená polohy do súboru CSV</string>
   <string name="new_file_creation_title">Vytvorenie nového súboru</string>
   <string name="new_file_creation_summary">Nastavte vytvorenie nového súboru jedenkrát denne alebo pri každom spustení.</string>

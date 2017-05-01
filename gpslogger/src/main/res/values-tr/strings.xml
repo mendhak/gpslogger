@@ -95,7 +95,6 @@
   <string name="pref_logging_title">Kayıt detayları</string>
   <string name="log_gpx_title">GPX olarak kaydet</string>
   <string name="log_kml_title">KML olarak kaydet</string>
-  <string name="log_plain_text_title">Düz metin olarak kaydet</string>
   <string name="new_file_creation_title">Yeni dosya oluşturma</string>
   <string name="new_file_creation_summary">Hergün yeni dosya oluşturmak yada program her açıldığında yeni dosya oluşturmak.</string>
   <string name="new_file_creation_onceaday">Günlük</string>

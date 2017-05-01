@@ -87,7 +87,6 @@
   <string name="pref_logging_title">Detalles de registro</string>
   <string name="log_gpx_title">Registro a GPX</string>
   <string name="log_kml_title">Registro a KML</string>
-  <string name="log_plain_text_title">Registro en texto sin formato</string>
   <string name="new_file_creation_title">Creación de archivos nuevos</string>
   <string name="new_file_creation_summary">Si desea crear un nuevo archivo una vez al día o cada vez que inicie.</string>
   <string name="new_file_creation_onceaday">Una vez al día</string>

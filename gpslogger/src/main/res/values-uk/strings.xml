@@ -96,7 +96,6 @@
   <string name="log_gpx_summary">Записує розташування у GPX v1.0 file</string>
   <string name="log_kml_title">Записувати у KML</string>
   <string name="log_kml_summary">Записує розташування у KML v2.2 file</string>
-  <string name="log_plain_text_title">Записувати як звичайний текст</string>
   <string name="log_plain_text_summary">Записує розташування у CSV file</string>
   <string name="new_file_creation_title">Створення нового файлу</string>
   <string name="new_file_creation_summary">Створювати новий файл один раз на день або під час кожного запуску.</string>

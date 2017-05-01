@@ -96,7 +96,6 @@
   <string name="log_gpx_summary">Lokasi log untuk file GPX v1.0</string>
   <string name="log_kml_title">Log untuk KML</string>
   <string name="log_kml_summary">Lokasi log file KML v2.2</string>
-  <string name="log_plain_text_title">Log untuk teks biasa</string>
   <string name="log_plain_text_summary">Lokasi log untuk file CSV</string>
   <string name="new_file_creation_title">Pembuatan file baru</string>
   <string name="new_file_creation_summary">Apakah akan membuat file baru setelah sehari atau setiap kali Anda memulai.</string>

@@ -96,7 +96,6 @@
   <string name="log_gpx_summary">Enregistrer les localisations au format GPX v1.0</string>
   <string name="log_kml_title">Enregistrer en KML</string>
   <string name="log_kml_summary">Enregistrer les localisations au format KML v2.2</string>
-  <string name="log_plain_text_title">Enregistrer au format texte brut</string>
   <string name="log_plain_text_summary">Enregistrer les localisations au format CSV</string>
   <string name="new_file_creation_title">Nouvelle création du fichier</string>
   <string name="new_file_creation_summary">Que ce soit pour créer un nouveau fichier une fois par jour ou chaque fois que vous démarrez.</string>

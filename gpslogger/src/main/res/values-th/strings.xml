@@ -97,7 +97,6 @@
   <string name="log_gpx_summary">ตำแหน่งของ log ไปยังไฟล์ GPX v1.0</string>
   <string name="log_kml_title">บันทึกลงไฟล์ KML</string>
   <string name="log_kml_summary">ตำแหน่งของ log ไปยังไฟล์ KML v2.2</string>
-  <string name="log_plain_text_title">บันทึกลงไฟล์ Text</string>
   <string name="log_plain_text_summary">ตำแหน่งของ log ไปยังไฟล์ CSV</string>
   <string name="new_file_creation_title">สร้างไฟล์ใหม่</string>
   <string name="new_file_creation_summary">ไม่ว่าจะสร้างไฟล์ใหม่วันละครั้ง หรือทุกครั้งที่คุณเริ่มบันทึก</string>

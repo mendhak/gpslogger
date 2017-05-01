@@ -87,7 +87,6 @@
   <string name="pref_logging_title">Mengelog perincian</string>
   <string name="log_gpx_title">Log kedalam GPX</string>
   <string name="log_kml_title">Log kedalam KML</string>
-  <string name="log_plain_text_title">Log kedalam teks biasa</string>
   <string name="new_file_creation_title">Cipta fail baru</string>
   <string name="new_file_creation_summary">Sama ada untuk mencipta fail baru setiap hari atau setiap kali anda mula.</string>
   <string name="new_file_creation_onceaday">Sekali sehari</string>

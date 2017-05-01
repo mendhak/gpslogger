@@ -96,7 +96,6 @@
   <string name="log_gpx_summary">Logt locaties naar een GPX v1.0 bestand</string>
   <string name="log_kml_title">Loggen naar KML</string>
   <string name="log_kml_summary">Logt locaties naar een KML v2.2 bestand</string>
-  <string name="log_plain_text_title">Log naar tekst zonder opmaak</string>
   <string name="log_plain_text_summary">Logt locaties naar een CSV bestand</string>
   <string name="new_file_creation_title">﻿Nieuw bestand maken</string>
   <string name="new_file_creation_summary">﻿Of u een keer per dag een nieuw bestand wilt maken of elke keer dat u start.</string>
