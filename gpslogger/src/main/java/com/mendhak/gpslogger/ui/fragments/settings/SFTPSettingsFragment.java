@@ -147,7 +147,7 @@ public class SFTPSettingsFragment extends PermissionedPreferenceFragment impleme
                 String promptMessage = String.format("Fingerprint: <br /><font color='#%s' face='monospace'>%s</font> <br /><br /> Host Key: <br /><font color='#%s' face='monospace'>%s</font>",
                                                         codeGreen, o.fingerprint, codeGreen, o.hostKey);
 
-                Dialogs.alert("Accept this host key?", promptMessage , getActivity(), true, new Dialogs.MessageBoxCallback() {
+                Dialogs.alert(getString(R.string.sftp_validate_accept_host_key), promptMessage , getActivity(), true, new Dialogs.MessageBoxCallback() {
                     @Override
                     public void messageBoxResult(int which) {
                         if(which==Dialogs.MessageBoxCallback.OK){
