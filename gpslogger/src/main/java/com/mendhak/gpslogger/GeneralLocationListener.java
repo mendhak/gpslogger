@@ -32,6 +32,7 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.nmea.NmeaSentence;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -55,9 +56,9 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
     protected long nextTimestampToSave = 0;
     protected long lastTimestamp = 0;
-    protected Vector<SensorDataObject.Accelerometer> latestAccelerometer = new Vector();
-    protected Vector<SensorDataObject.Compass> latestCompass  = new Vector();
-    protected Vector<SensorDataObject.Orientation> latestOrientation = new Vector();
+    protected ArrayList<SensorDataObject.Accelerometer> latestAccelerometer = new ArrayList<>();
+    protected ArrayList<SensorDataObject.Compass> latestCompass  = new ArrayList<>();
+    protected ArrayList<SensorDataObject.Orientation> latestOrientation = new ArrayList<>();
 
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
@@ -99,9 +100,9 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 this.latestPdop = "";
                 this.latestVdop = "";
 
-                this.latestAccelerometer = new Vector();
-                this.latestCompass = new Vector();
-                this.latestOrientation  = new Vector();
+                this.latestAccelerometer = new ArrayList<>();
+                this.latestCompass = new ArrayList<>();
+                this.latestOrientation  = new ArrayList<>();
                 session.setLatestDetectedActivity(null);
             }
 
@@ -258,7 +259,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                     if (toffset < Integer.MAX_VALUE && toffset > Integer.MIN_VALUE) {
                         toffsetInteger = (int) toffset;
                     }
-                    this.latestOrientation.addElement(new SensorDataObject.Orientation(compass,pitch,roll,toffsetInteger));
+                    this.latestOrientation.add(new SensorDataObject.Orientation(compass,pitch,roll,toffsetInteger));
 
                     //acceleration
                     float x = mGravity[0];
@@ -266,13 +267,13 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                     float z = mGravity[2];
 
                     //save acceleration
-                    this.latestAccelerometer.addElement(new SensorDataObject.Accelerometer(x,y,z,toffsetInteger));
+                    this.latestAccelerometer.add(new SensorDataObject.Accelerometer(x,y,z,toffsetInteger));
 
                     //save compass
-                    this.latestCompass.addElement(new SensorDataObject.Compass(compass, toffsetInteger));
+                    this.latestCompass.add(new SensorDataObject.Compass(compass, toffsetInteger));
 
                     //determine when the next sensor data shall be monitored
-                    nextTimestampToSave += preferenceHelper.getMinimumLoggingInterval()/10;
+                    nextTimestampToSave += preferenceHelper.getMinimumLoggingInterval(); // had a /10, should be placed somewhere else
 
                     mGravity = null;
                     mGeomagnetic = null;

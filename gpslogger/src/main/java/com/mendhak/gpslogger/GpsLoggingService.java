@@ -415,6 +415,7 @@ public class GpsLoggingService extends Service  {
         notifyClientStarted();
         startPassiveManager();
         startGpsManager();
+        startSensorManager();
         requestActivityRecognitionUpdates();
 
     }
@@ -536,6 +537,59 @@ public class GpsLoggingService extends Service  {
     }
 
     /**
+     * Starts the sensor manager
+     */
+    private void startSensorManager() {
+        if (sensorDataListener == null) {
+            sensorDataListener = new GeneralLocationListener(this, "SENSOR");
+        }
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD); // Compass
+
+        //checkTowerAndGpsStatus();
+
+        if (session.isSensorAccelerometerEnabled()) {
+            LOG.info("Requesting accelerometer sensor updates");
+            // Accelerometer based
+            //gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, gpsLocationListener);
+            //gpsLocationManager.addGpsStatusListener(gpsLocationListener);
+            //gpsLocationManager.addNmeaListener(gpsLocationListener);
+
+            //registering for sensor data
+
+            sensorManager.registerListener(sensorDataListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+            //sensorManager.registerListener(sensorListener, magnetometer, SensorManager.SENSOR_DELAY_NORMAL);
+
+
+            session.setUsingAccelerometer(true);
+
+        }
+
+        if (session.isSensorMagneticFieldEnabled()) {
+            LOG.info("Requesting magnetic field sensor updates");
+            // Accelerometer based
+            //gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, gpsLocationListener);
+            //gpsLocationManager.addGpsStatusListener(gpsLocationListener);
+            //gpsLocationManager.addNmeaListener(gpsLocationListener);
+
+            //registering for sensor data
+
+            //sensorManager.registerListener(sensorDataListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(sensorDataListener, magnetometer, SensorManager.SENSOR_DELAY_NORMAL);
+
+
+            session.setUsingMagneticField(true);
+        }
+
+
+        startAbsoluteTimer();
+
+    }
+
+
+    /**
      * Starts the location manager. There are two location managers - GPS and
      * Cell Tower. This code determines which manager to request updates from
      * based on user preference and whichever is enabled. If GPS is enabled on
@@ -654,6 +708,17 @@ public class GpsLoggingService extends Service  {
 
     }
 
+    /**
+     * Stops the sensor data collection
+     */
+    private void stopSensorManager(){
+
+        if (sensorDataListener != null) {
+            LOG.debug("Removing sensorDataListener updates");
+            sensorManager.unregisterListener(sensorDataListener);
+        }
+    }
+
     @SuppressWarnings("ResourceType")
     private void stopPassiveManager(){
         if(passiveLocationManager!=null){
@@ -727,6 +792,15 @@ public class GpsLoggingService extends Service  {
         LOG.debug("Restarting location managers");
         stopGpsManager();
         startGpsManager();
+    }
+
+    /**
+     * Stops location manager, then starts it.
+     */
+    void restartSensorManager() {
+        LOG.debug("Restarting sensor manager ");
+        stopSensorManager();
+        startSensorManager();
     }
 
     /**

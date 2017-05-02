@@ -92,6 +92,32 @@ public class Session {
     }
 
     /**
+     * @return whether accelerometer sensor is enabled
+     */
+    public boolean isSensorAccelerometerEnabled() {
+        return Boolean.valueOf(get("accelerometerEnabled", "false"));
+    }
+
+    /**
+     * @param accelerometerEnabled set whether accelerometer sensor is enabled
+     */
+    public void setSensorAccelerometerEnabled(boolean accelerometerEnabled) { set("accelerometerEnabled", String.valueOf(accelerometerEnabled));
+    }
+
+    /**
+     * @return whether magnetic field sensor (compass) is enabled
+     */
+    public boolean isSensorMagneticFieldEnabled() {
+        return Boolean.valueOf(get("magneticFieldEnabled", "false"));
+    }
+
+    /**
+     * @param magneticFieldEnabled set whether magnetic field sensor (compass) is enabled
+     */
+    public void setSensorMagneticFieldEnabled(boolean magneticFieldEnabled) { set("magneticFieldEnabled", String.valueOf(magneticFieldEnabled));
+    }
+
+    /**
      * @return whether logging has started
      */
     public boolean isStarted() {
@@ -123,6 +149,33 @@ public class Session {
     public void setUsingGps(boolean isUsingGps) {
         set("isUsingGps", String.valueOf(isUsingGps));
     }
+
+    /**
+     * @return the isUsingAccelerometer
+     */
+    public boolean isUsingAccelerometer() {
+        return Boolean.valueOf(get("isUsingAccelerometer", "false"));
+    }
+
+    /**
+     * @param isUsingAccelerometer the isUsingAccelerometer to set
+     */
+    public void setUsingAccelerometer(boolean isUsingAccelerometer) { set("isUsingAccelerometer", String.valueOf(isUsingAccelerometer));
+    }
+
+    /**
+     * @return the isUsingAccelerometer
+     */
+    public boolean isUsingMagneticField() {
+        return Boolean.valueOf(get("isUsingMagneticField", "false"));
+    }
+
+    /**
+     * @param isUsingMagneticField the isUsingAccelerometer to set
+     */
+    public void setUsingMagneticField(boolean isUsingMagneticField) { set("isUsingMagneticField", String.valueOf(isUsingMagneticField));
+    }
+
 
     /**
      * @return the currentFileName (without extension)
