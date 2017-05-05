@@ -1065,6 +1065,36 @@ public class PreferenceHelper {
     }
 
 
+    //TODO: Extension for sensor data recording ACCELEROMETER
+    @ProfilePreference(name=PreferenceNames.SENSORDATA_ENABLE_ACCELEROMETER)
+    public boolean getSensorDataEnabledAcclerometer() {
+        return prefs.getBoolean(PreferenceNames.SENSORDATA_ENABLE_ACCELEROMETER, false);
+    }
+
+    public void setSensorDataEnabledAcclerometer(boolean enableAcclerometer){
+        prefs.edit().putBoolean(PreferenceNames.SENSORDATA_ENABLE_ACCELEROMETER, enableAcclerometer).apply();
+    }
+
+    //TODO: Extension for sensor data recording MAGNETIC FIELD
+    @ProfilePreference(name=PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD)
+    public boolean getSensorDataEnabledMagneticField() {
+        return prefs.getBoolean(PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD, false);
+    }
+
+    public void setSensorDataEnabledMagneticFeild(boolean enableMagneticField){
+        prefs.edit().putBoolean(PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD, enableMagneticField).apply();
+    }
+
+    //TODO: Extension for sensor data recording INTERVAL
+    @ProfilePreference(name= PreferenceNames.SENSORDATA_INTERVAL)
+    public int getSensorDataInterval(){
+        return Strings.toInt(prefs.getString(PreferenceNames.SENSORDATA_INTERVAL, "1"), 1);
+    }
+
+    public void setSensorDataInterval(int interval){
+        prefs.edit().putString(PreferenceNames.SENSORDATA_INTERVAL, String.valueOf(interval)).apply();
+    }
+
     @SuppressWarnings("unchecked")
     public void savePropertiesFromPreferences(File f) throws IOException {
 

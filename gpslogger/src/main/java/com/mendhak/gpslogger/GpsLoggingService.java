@@ -346,6 +346,7 @@ public class GpsLoggingService extends Service  {
 
         if (session.isStarted()) {
             startGpsManager();
+            //TODO: Decide if sensor logging needs to be toggled here
         } else {
             startLogging();
         }
@@ -451,6 +452,7 @@ public class GpsLoggingService extends Service  {
         stopAlarm();
         stopGpsManager();
         stopPassiveManager();
+        stopSensorManager(); // Sensor Data addition
         stopActivityRecognitionUpdates();
         notifyClientStopped();
         session.setCurrentFileName("");
@@ -1104,6 +1106,7 @@ public class GpsLoggingService extends Service  {
 
             if(session.isStarted()){
                 startGpsManager();
+                //TODO: Decide of SensorManager needs to go in here too.
             }
             else {
                 logOnce();
@@ -1120,7 +1123,7 @@ public class GpsLoggingService extends Service  {
 
     @EventBusHook
     public void onEvent(ServiceEvents.ActivityRecognitionEvent activityRecognitionEvent){
-
+        //TODO Appears to be for Play Services detection only. SensorData should only be collected together with real GPS
         session.setLatestDetectedActivity(activityRecognitionEvent.result.getMostProbableActivity());
 
         if(!preferenceHelper.shouldNotLogIfUserIsStill()){
