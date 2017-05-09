@@ -1073,6 +1073,7 @@ public class PreferenceHelper {
 
     public void setSensorDataEnabledAcclerometer(boolean enableAcclerometer){
         prefs.edit().putBoolean(PreferenceNames.SENSORDATA_ENABLE_ACCELEROMETER, enableAcclerometer).apply();
+        LOG.debug("preference helper set enable accel: "+enableAcclerometer);
     }
 
     //TODO: Extension for sensor data recording MAGNETIC FIELD

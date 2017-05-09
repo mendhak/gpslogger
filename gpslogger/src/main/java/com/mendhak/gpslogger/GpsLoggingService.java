@@ -416,7 +416,7 @@ public class GpsLoggingService extends Service  {
         notifyClientStarted();
         startPassiveManager();
         startGpsManager();
-        startSensorManager();
+        startSensorManager(); //Sensordata addition
         requestActivityRecognitionUpdates();
 
     }
@@ -552,7 +552,12 @@ public class GpsLoggingService extends Service  {
 
         //checkTowerAndGpsStatus();
 
-        if (session.isSensorAccelerometerEnabled()) {
+        LOG.debug("SESSION: Accel enabled:"+session.isSensorAccelerometerEnabled()+" compass enabled:"+session.isSensorMagneticFieldEnabled());
+        LOG.debug("PREFHELPER: Accel enabled:"+preferenceHelper.getSensorDataEnabledAcclerometer()+" compass enabled:"+preferenceHelper.getSensorDataEnabledMagneticField());
+
+        //session.setSensorAccelerometerEnabled(true);
+
+        if (preferenceHelper.getSensorDataEnabledAcclerometer()) {
             LOG.info("Requesting accelerometer sensor updates");
             // Accelerometer based
             //gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, gpsLocationListener);
@@ -565,11 +570,11 @@ public class GpsLoggingService extends Service  {
             //sensorManager.registerListener(sensorListener, magnetometer, SensorManager.SENSOR_DELAY_NORMAL);
 
 
-            session.setUsingAccelerometer(true);
+            session.setSensorAccelerometerEnabled(true);
 
         }
 
-        if (session.isSensorMagneticFieldEnabled()) {
+        if (preferenceHelper.getSensorDataEnabledMagneticField()) {
             LOG.info("Requesting magnetic field sensor updates");
             // Accelerometer based
             //gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, gpsLocationListener);
@@ -582,7 +587,7 @@ public class GpsLoggingService extends Service  {
             sensorManager.registerListener(sensorDataListener, magnetometer, SensorManager.SENSOR_DELAY_NORMAL);
 
 
-            session.setUsingMagneticField(true);
+            session.setSensorMagneticFieldEnabled(true);
         }
 
 
@@ -940,6 +945,8 @@ public class GpsLoggingService extends Service  {
             stopLogging();
         }
     }
+
+    //TODO: onLocationChanged equivalent for sensor data here?
 
     private boolean isFromValidListener(Location loc) {
 

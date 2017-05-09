@@ -66,7 +66,7 @@ public class CustomUrlLogger implements FileLogger {
     }
 
     public String getFormattedUrl(String customLoggingUrl, Location loc, String description, String androidId, float batteryLevel, String buildSerial) throws Exception {
-
+        //TODO: Possibly consider adding a field for the sensor data here
         String logUrl = customLoggingUrl;
         SerializableLocation sLoc = new SerializableLocation(loc);
         logUrl = logUrl.replaceAll("(?i)%lat", String.valueOf(sLoc.getLatitude()));

@@ -257,6 +257,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     }
 
     private void clearDisplay() {
+        //TODO: Handle clearing sensor data info here
         TextView tvLatitude = (TextView) rootView.findViewById(R.id.detailedview_lat_text);
         TextView tvLongitude = (TextView) rootView.findViewById(R.id.detailedview_lon_text);
         TextView tvDateTime = (TextView) rootView.findViewById(R.id.detailedview_datetime_text);
@@ -290,6 +291,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LocationUpdate locationEvent){
+        //TODO: Handle passing sensor data info here
         displayLocationInfo(locationEvent.location);
     }
 
@@ -316,6 +318,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     }
 
     public void displayLocationInfo(Location locationInfo){
+        //TODO: Handle sensor data display here
         if (locationInfo == null) {
             return;
         }

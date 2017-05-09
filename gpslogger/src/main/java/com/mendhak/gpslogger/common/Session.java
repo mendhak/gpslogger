@@ -151,33 +151,6 @@ public class Session {
     }
 
     /**
-     * @return the isUsingAccelerometer
-     */
-    public boolean isUsingAccelerometer() {
-        return Boolean.valueOf(get("isUsingAccelerometer", "false"));
-    }
-
-    /**
-     * @param isUsingAccelerometer the isUsingAccelerometer to set
-     */
-    public void setUsingAccelerometer(boolean isUsingAccelerometer) { set("isUsingAccelerometer", String.valueOf(isUsingAccelerometer));
-    }
-
-    /**
-     * @return the isUsingAccelerometer
-     */
-    public boolean isUsingMagneticField() {
-        return Boolean.valueOf(get("isUsingMagneticField", "false"));
-    }
-
-    /**
-     * @param isUsingMagneticField the isUsingAccelerometer to set
-     */
-    public void setUsingMagneticField(boolean isUsingMagneticField) { set("isUsingMagneticField", String.valueOf(isUsingMagneticField));
-    }
-
-
-    /**
      * @return the currentFileName (without extension)
      */
     public String getCurrentFileName() {

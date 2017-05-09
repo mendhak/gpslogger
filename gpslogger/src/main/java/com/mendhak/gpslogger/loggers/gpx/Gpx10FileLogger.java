@@ -333,6 +333,7 @@ class Gpx10WriteHandler implements Runnable {
         return track.toString();
     }
 
+    //TODO: Figure out the additional data / sensor point formulation for gpx xml and add the required parts to the waypoints
 }
 
 

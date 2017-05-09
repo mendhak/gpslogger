@@ -94,6 +94,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 b.putSerializable("ORIENTATION", latestOrientation);
 
                 loc.setExtras(b);
+                LOG.debug("general loc listener on loc changed, latest accel:"+latestAccelerometer.toString()+" latestCompass:"+latestCompass.toString()+" latestOrientation:"+latestOrientation.toString());
                 loggingService.onLocationChanged(loc);
 
                 this.latestHdop = "";
@@ -223,6 +224,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
      * Based on code found here: https://github.com/shiptrail/android-main
      */
     public void onSensorChanged(SensorEvent event) {
+        LOG.debug("onSensorChanged Event. event.sensor="+event.sensor.toString()+" event.values="+event.values.toString() );
         //check if we want to get sensor data already
         long current = System.currentTimeMillis();
         if (current >= nextTimestampToSave) {
@@ -273,7 +275,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                     this.latestCompass.add(new SensorDataObject.Compass(compass, toffsetInteger));
 
                     //determine when the next sensor data shall be monitored
-                    nextTimestampToSave += preferenceHelper.getMinimumLoggingInterval(); // had a /10, should be placed somewhere else
+                    nextTimestampToSave += preferenceHelper.getSensorDataInterval(); // had a /10, should be placed somewhere else
 
                     mGravity = null;
                     mGeomagnetic = null;

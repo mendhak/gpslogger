@@ -51,6 +51,7 @@ public class CSVFileLogger implements FileLogger {
 
             FileOutputStream writer = new FileOutputStream(file, true);
             BufferedOutputStream output = new BufferedOutputStream(writer);
+            //TODO: Add matching header info for sensor data here -> consider if series of sensor data per one gps point are representable in csv
             String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider,hdop,vdop,pdop,geoidheight,ageofdgpsdata,dgpsid,activity,battery\n";
             output.write(header.getBytes());
             output.flush();
@@ -72,7 +73,7 @@ public class CSVFileLogger implements FileLogger {
     }
 
     String getCsvLine(Location loc, String dateTimeString) {
-
+        //TODO: Add sensor data rendering here
         String outputString = String.format(Locale.US, "%s,%f,%f,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", dateTimeString,
                 loc.getLatitude(),
                 loc.getLongitude(),
