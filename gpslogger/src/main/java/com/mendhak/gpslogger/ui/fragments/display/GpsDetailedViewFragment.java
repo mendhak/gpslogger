@@ -31,6 +31,7 @@ import android.widget.TextView;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.SensorDataObject;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
@@ -45,6 +46,7 @@ import org.slf4j.Logger;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -274,6 +276,11 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
         TextView txtStill = (TextView) rootView.findViewById(R.id.detailedview_activity_text);
 
+        //Sensor data extension
+        TextView txtAccelerometer = (TextView) rootView.findViewById(R.id.detailedview_accelerometer_text);
+        TextView txtCompass = (TextView) rootView.findViewById(R.id.detailedview_compass_text);
+        TextView txtOrientation = (TextView) rootView.findViewById(R.id.detailedview_orientation_text);
+
         tvLatitude.setText("");
         tvLongitude.setText("");
         tvDateTime.setText("");
@@ -286,6 +293,9 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         txtTime.setText("");
         txtStill.setText("");
 
+        txtAccelerometer.setText("");
+        txtCompass.setText("");
+        txtOrientation.setText("");
 
     }
 
@@ -338,6 +348,12 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         TextView txtAccuracy = (TextView) rootView.findViewById(R.id.detailedview_accuracy_text);
         TextView txtTravelled = (TextView) rootView.findViewById(R.id.detailedview_travelled_text);
         TextView txtTime = (TextView) rootView.findViewById(R.id.detailedview_duration_text);
+
+        //Sensor data extension
+        TextView txtAccelerometer = (TextView) rootView.findViewById(R.id.detailedview_accelerometer_text);
+        TextView txtCompass = (TextView) rootView.findViewById(R.id.detailedview_compass_text);
+        TextView txtOrientation = (TextView) rootView.findViewById(R.id.detailedview_orientation_text);
+
         String providerName = locationInfo.getProvider();
         if (providerName.equalsIgnoreCase(LocationManager.GPS_PROVIDER)) {
             providerName = getString(R.string.providername_gps);
@@ -404,6 +420,25 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());
         txtTime.setText(duration + " (started at " + dateFormat.format(d) + " " + timeFormat.format(d) + ")");
 
+        if (locationInfo.getExtras() != null){
+            Bundle extras = locationInfo.getExtras();
+            ArrayList<SensorDataObject.Accelerometer> accelerometer = (ArrayList<SensorDataObject.Accelerometer>) extras.getSerializable("ACCELEROMETER");
+            ArrayList<SensorDataObject.Compass> compass = (ArrayList<SensorDataObject.Compass>) extras.getSerializable("COMPASS");
+            ArrayList<SensorDataObject.Orientation> orientation = (ArrayList<SensorDataObject.Orientation>) extras.getSerializable("ORIENTATION");
+
+            if (accelerometer != null && accelerometer.size() > 0){
+                txtAccelerometer.setText(String.format("Num: %d, First: %s", accelerometer.size(), accelerometer.get(0).toString()));
+            }
+
+            if (compass != null && compass.size() > 0){
+                txtCompass.setText(String.format("Num: %d, First: %s", compass.size(), compass.get(0).toString()));
+            }
+
+            if (orientation != null && orientation.size() > 0){
+                txtOrientation.setText(String.format("Num: %d, First: %s", orientation.size(), orientation.get(0).toString()));
+            }
+
+        }
 
 
     }

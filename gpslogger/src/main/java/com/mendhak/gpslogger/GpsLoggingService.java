@@ -54,6 +54,8 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class GpsLoggingService extends Service  {
@@ -61,6 +63,7 @@ public class GpsLoggingService extends Service  {
     private static int NOTIFICATION_ID = 8675309;
     private final IBinder binder = new GpsLoggingBinder();
     AlarmManager nextPointAlarmManager;
+    AlarmManager nextSensorDataAlarmManager;
     private NotificationCompat.Builder nfc = null;
 
     private static final Logger LOG = Logs.of(GpsLoggingService.class);
@@ -197,6 +200,7 @@ public class GpsLoggingService extends Service  {
 
             if (bundle != null) {
                 boolean needToStartGpsManager = false;
+                boolean needToStartSensorDataManager = false;
 
                 if (bundle.getBoolean(IntentConstants.IMMEDIATE_START)) {
                     LOG.info("Intent received - Start Logging Now");
@@ -216,6 +220,16 @@ public class GpsLoggingService extends Service  {
                 if (bundle.getBoolean(IntentConstants.GET_NEXT_POINT)) {
                     LOG.info("Intent received - Get Next Point");
                     needToStartGpsManager = true;
+                }
+
+                if (bundle.getBoolean(IntentConstants.GET_NEXT_ACCELEROMETER)) {
+                    LOG.info("Intent received - Get Next Accelerometer");
+                    needToStartSensorDataManager = true;
+                }
+
+                if (bundle.getBoolean(IntentConstants.GET_NEXT_MAGNETICFIELD)) {
+                    LOG.info("Intent received - Get Next MagneticField");
+                    needToStartSensorDataManager = true;
                 }
 
                 if (bundle.getString(IntentConstants.SET_DESCRIPTION) != null) {
@@ -296,6 +310,10 @@ public class GpsLoggingService extends Service  {
 
                 if (needToStartGpsManager && session.isStarted()) {
                     startGpsManager();
+                }
+
+                if (needToStartSensorDataManager && session.isStarted()) {
+                    startSensorManager();
                 }
             }
         } else {
@@ -450,6 +468,8 @@ public class GpsLoggingService extends Service  {
 
         removeNotification();
         stopAlarm();
+        stopAccelerometerAlarm(); //SensorData
+        stopMagneticFieldAlarm(); //SensorData
         stopGpsManager();
         stopPassiveManager();
         stopSensorManager(); // Sensor Data addition
@@ -591,7 +611,9 @@ public class GpsLoggingService extends Service  {
         }
 
 
-        startAbsoluteTimer();
+        if (session.isSensorAccelerometerEnabled() || session.isSensorMagneticFieldEnabled()){
+            startAbsoluteTimer();
+        }
 
     }
 
@@ -922,6 +944,26 @@ public class GpsLoggingService extends Service  {
 
 
         LOG.info(SessionLogcatAppender.MARKER_LOCATION, String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getLongitude()));
+
+        if (session.isSensorAccelerometerEnabled()){
+            Bundle extras = loc.getExtras();
+            ArrayList<SensorDataObject.Accelerometer> accelerometer = (ArrayList<SensorDataObject.Accelerometer>) extras.getSerializable("ACCELEROMETER");
+            //ArrayList<SensorDataObject.Compass> compass = (ArrayList<SensorDataObject.Compass>) extras.getSerializable("COMPASS");
+            //ArrayList<SensorDataObject.Orientation> orientation = (ArrayList<SensorDataObject.Orientation>) extras.getSerializable("ORIENTATION");
+
+            if (accelerometer != null && accelerometer.size() > 0){
+                LOG.info(SessionLogcatAppender.MARKER_SENSOR, String.format("Num: %d, First: %s", accelerometer.size(), Arrays.toString(accelerometer.toArray())));
+            }
+
+            /*if (compass != null && compass.size() > 0){
+                txtCompass.setText(String.format("Num: %d, First: %s", compass.size(), compass.get(0).toString()));
+            }
+
+            if (orientation != null && orientation.size() > 0){
+                txtOrientation.setText(String.format("Num: %d, First: %s", orientation.size(), orientation.get(0).toString()));
+            }*/
+        }
+
         loc = Locations.getLocationWithAdjustedAltitude(loc, preferenceHelper);
         resetCurrentFileName(false);
         session.setLatestTimeStamp(System.currentTimeMillis());
@@ -936,6 +978,7 @@ public class GpsLoggingService extends Service  {
 
         writeToFile(loc);
         resetAutoSendTimersIfNecessary();
+        //TODO: Reset Sensordata for next alarm as well if used
         stopManagerAndResetAlarm();
 
         EventBus.getDefault().post(new ServiceEvents.LocationUpdate(loc));
@@ -982,39 +1025,73 @@ public class GpsLoggingService extends Service  {
     }
 
     protected void stopManagerAndResetAlarm() {
+        //TODO: either stop + reset + reschedule for sensor data here or separate method
         if (!preferenceHelper.shouldKeepGPSOnBetweenFixes()) {
             stopGpsManager();
         }
+        //TODO: Need to stop in any case, would create too much data otherwise
+        stopSensorManager();
 
         stopAbsoluteTimer();
         setAlarmForNextPoint();
+
+        setAlarmForNextAccelerometer();// TODO: Maybe only re-enable if selected in preferences to save alarms?
+        setAlarmForNextMagneticField();
     }
 
 
-    private void stopAlarm() {
+    private void stopAlarmExec(AlarmManager alarmManager, String intentConstant) {
         Intent i = new Intent(this, GpsLoggingService.class);
-        i.putExtra(IntentConstants.GET_NEXT_POINT, true);
+        i.putExtra(intentConstant, true);
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
-        nextPointAlarmManager.cancel(pi);
+        alarmManager.cancel(pi);
+    }
+
+    private void stopAlarm(){
+        stopAlarmExec(nextPointAlarmManager, IntentConstants.GET_NEXT_POINT);
+    }
+
+    private void stopAccelerometerAlarm(){
+        stopAlarmExec(nextSensorDataAlarmManager, IntentConstants.GET_NEXT_ACCELEROMETER);
+    }
+
+    private void stopMagneticFieldAlarm(){
+        stopAlarmExec(nextSensorDataAlarmManager, IntentConstants.GET_NEXT_MAGNETICFIELD);
     }
 
     @TargetApi(23)
-    private void setAlarmForNextPoint() {
-        LOG.debug("Set alarm for " + preferenceHelper.getMinimumLoggingInterval() + " seconds");
+    private void setAlarmForNextData(AlarmManager alarmManager, String intentConstant, int loggingInterval) {
+        LOG.debug(intentConstant + ": Set alarm for " + loggingInterval + " seconds");
 
         Intent i = new Intent(this, GpsLoggingService.class);
-        i.putExtra(IntentConstants.GET_NEXT_POINT, true);
+        i.putExtra(intentConstant, true);
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
-        nextPointAlarmManager.cancel(pi);
+        alarmManager.cancel(pi);
 
         if(Systems.isDozing(this)){
             //Only invoked once per 15 minutes in doze mode
             LOG.warn("Device is dozing, using infrequent alarm");
-            nextPointAlarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + loggingInterval, pi);
         }
         else {
-            nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
+            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + loggingInterval, pi);
         }
+    }
+
+
+    @TargetApi(23)
+    private void setAlarmForNextPoint() {
+        setAlarmForNextData(nextPointAlarmManager, IntentConstants.GET_NEXT_POINT, preferenceHelper.getMinimumLoggingInterval() * 1000);
+    }
+
+    @TargetApi(23)
+    private void setAlarmForNextAccelerometer() {
+        setAlarmForNextData(nextSensorDataAlarmManager, IntentConstants.GET_NEXT_ACCELEROMETER, (preferenceHelper.getMinimumLoggingInterval()/preferenceHelper.getSensorDataInterval()) * 1000);
+    }
+
+    @TargetApi(23)
+    private void setAlarmForNextMagneticField() {
+        setAlarmForNextData(nextSensorDataAlarmManager, IntentConstants.GET_NEXT_MAGNETICFIELD, (preferenceHelper.getMinimumLoggingInterval()/preferenceHelper.getSensorDataInterval()) * 1000);
     }
 
 

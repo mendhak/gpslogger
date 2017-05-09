@@ -440,5 +440,8 @@
     <string name="sftp_private_key_passphrase">Private key passphrase</string>
     <string name="sftp_validate_test_upload">Validate host key and test upload</string>
     <string name="sftp_validate_accept_host_key">Accept this host key?</string>
+    <string name="txt_accelerometer">Accelerometer:</string>
+    <string name="txt_compass">Compass:</string>
+    <string name="txt_orientation">Orientation:</string>
 
 </resources>

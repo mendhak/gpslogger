@@ -257,6 +257,13 @@ public class Session {
     }
 
     /**
+     * @return the latestSensorDataTimeStamp (for location info)
+     */
+    public long getLatestSensorDataTimeStamp() {
+        return Long.valueOf(get("latestSensorDataTimeStamp", "0"));
+    }
+
+    /**
      * @return the timestamp when measuring was started
      */
     public long getStartTimeStamp() {
@@ -269,6 +276,14 @@ public class Session {
     public void setLatestTimeStamp(long latestTimeStamp) {
         set("latestTimeStamp", String.valueOf(latestTimeStamp));
     }
+
+    /**
+     * @param latestSensorDataTimeStamp the latestTimeStamp (for location info) to set
+     */
+    public void setLatestSensorDataTimeStamp(long latestSensorDataTimeStamp) {
+        set("latestSensorDataTimeStamp", String.valueOf(latestSensorDataTimeStamp));
+    }
+
 
     /**
      * @return whether to create a new track segment

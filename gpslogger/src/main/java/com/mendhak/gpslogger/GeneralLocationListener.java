@@ -33,6 +33,7 @@ import com.mendhak.gpslogger.loggers.nmea.NmeaSentence;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -89,12 +90,12 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 b.putString("DETECTED_ACTIVITY", session.getLatestDetectedActivityName());
 
                 //Extras for Sensordatalogging
-                b.putSerializable("ACCELEROMETER", latestAccelerometer);
-                b.putSerializable("COMPASS", latestCompass);
-                b.putSerializable("ORIENTATION", latestOrientation);
+                b.putSerializable("ACCELEROMETER", this.latestAccelerometer);
+                b.putSerializable("COMPASS", this.latestCompass);
+                b.putSerializable("ORIENTATION", this.latestOrientation);
 
                 loc.setExtras(b);
-                LOG.debug("general loc listener on loc changed, latest accel:"+latestAccelerometer.toString()+" latestCompass:"+latestCompass.toString()+" latestOrientation:"+latestOrientation.toString());
+                LOG.debug("general loc listener on loc changed, latest accel:"+Arrays.toString(this.latestAccelerometer.toArray())+"\n latestCompass:"+Arrays.toString(this.latestCompass.toArray())+"\n latestOrientation:"+Arrays.toString(this.latestOrientation.toArray()));
                 loggingService.onLocationChanged(loc);
 
                 this.latestHdop = "";
@@ -224,12 +225,13 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
      * Based on code found here: https://github.com/shiptrail/android-main
      */
     public void onSensorChanged(SensorEvent event) {
-        LOG.debug("onSensorChanged Event. event.sensor="+event.sensor.toString()+" event.values="+event.values.toString() );
+        //LOG.debug("onSensorChanged Event. event.sensor="+event.sensor.toString()+"\n event.values="+ Arrays.toString(event.values));
         //check if we want to get sensor data already
         long current = System.currentTimeMillis();
-        if (current >= nextTimestampToSave) {
-            lastTimestamp = nextTimestampToSave;
-            nextTimestampToSave = current;
+        session.setLatestSensorDataTimeStamp(current);
+        //if (current >= nextTimestampToSave) {
+        //    lastTimestamp = nextTimestampToSave;
+        //    nextTimestampToSave = current;
 
 
             if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
@@ -261,7 +263,10 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                     if (toffset < Integer.MAX_VALUE && toffset > Integer.MIN_VALUE) {
                         toffsetInteger = (int) toffset;
                     }
-                    this.latestOrientation.add(new SensorDataObject.Orientation(compass,pitch,roll,toffsetInteger));
+
+                    SensorDataObject.Orientation oo = new SensorDataObject.Orientation(compass,pitch,roll,toffsetInteger);
+                    this.latestOrientation.add(oo);
+                    //LOG.debug(String.format("onSensorChanged orient obj added: %s \n orient array: %s",oo.toString(),Arrays.toString(this.latestOrientation.toArray())));
 
                     //acceleration
                     float x = mGravity[0];
@@ -269,10 +274,14 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                     float z = mGravity[2];
 
                     //save acceleration
-                    this.latestAccelerometer.add(new SensorDataObject.Accelerometer(x,y,z,toffsetInteger));
+                    SensorDataObject.Accelerometer ao = new SensorDataObject.Accelerometer(x,y,z,toffsetInteger);
+                    this.latestAccelerometer.add(ao);
+                    //LOG.debug(String.format("onSensorChanged accel obj added: %s \n accel array: %s",ao.toString(),Arrays.toString(this.latestAccelerometer.toArray())));
 
                     //save compass
-                    this.latestCompass.add(new SensorDataObject.Compass(compass, toffsetInteger));
+                    SensorDataObject.Compass co = new SensorDataObject.Compass(compass, toffsetInteger);
+                    this.latestCompass.add(co);
+                    //LOG.debug(String.format("onSensorChanged compass obj added: %s \n compass array: %s",co.toString(),Arrays.toString(this.latestCompass.toArray())));
 
                     //determine when the next sensor data shall be monitored
                     nextTimestampToSave += preferenceHelper.getSensorDataInterval(); // had a /10, should be placed somewhere else
@@ -281,7 +290,9 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                     mGeomagnetic = null;
                 }
             }
-        }
+        //}
+
+        //TODO: Would need onLocationChanged similar call here that processes + deactivates sensors and reschedules sensors here
     }
 
     @Override
