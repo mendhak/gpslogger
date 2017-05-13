@@ -25,6 +25,7 @@ apply plugin: 'let'
 apply plugin: 'signing'
 //Generating colorful output
 apply from: 'buildtools/ColoredOutput.gradle'
+project.ext.set("TRAVIS_FOLDING", true)
 //Generate help pages
 apply plugin: 'com.moowork.node'
 
