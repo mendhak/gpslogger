@@ -2,6 +2,8 @@ package com.mendhak.gpslogger.loggers.customurl;
 
 import android.location.Location;
 import android.test.suitebuilder.annotation.SmallTest;
+
+import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.loggers.MockLocations;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +26,7 @@ public class CustomUrlLoggerTest {
                 .withBearing(359)
                 .withSpeed(9001)
                 .withTime(1457205869949l)
-                .putExtra("DETECTED_ACTIVITY", "TILTED")
+                .putExtra(BundleConstants.DETECTED_ACTIVITY, "TILTED")
                 .build();
 
 

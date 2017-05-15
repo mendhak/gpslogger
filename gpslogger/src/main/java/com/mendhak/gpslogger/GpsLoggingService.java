@@ -551,7 +551,7 @@ public class GpsLoggingService extends Service  {
         if(preferenceHelper.getChosenListeners().contains(LocationManager.PASSIVE_PROVIDER)){
             LOG.debug("Starting passive location listener");
             if(passiveLocationListener== null){
-                passiveLocationListener = new GeneralLocationListener(this, "PASSIVE");
+                passiveLocationListener = new GeneralLocationListener(this, BundleConstants.PASSIVE);
             }
             passiveLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             passiveLocationManager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 1000, 0, passiveLocationListener);
@@ -868,7 +868,7 @@ public class GpsLoggingService extends Service  {
         }
 
 
-        boolean isPassiveLocation = loc.getExtras().getBoolean("PASSIVE");
+        boolean isPassiveLocation = loc.getExtras().getBoolean(BundleConstants.PASSIVE);
         
         //check if we change of day and then write the last position of yesterday as the first position of today
         if (preferenceHelper.shouldCreateNewFileOnceADay()) {
@@ -947,9 +947,9 @@ public class GpsLoggingService extends Service  {
 
         if (session.isSensorAccelerometerEnabled()){
             Bundle extras = loc.getExtras();
-            ArrayList<SensorDataObject.Accelerometer> accelerometer = (ArrayList<SensorDataObject.Accelerometer>) extras.getSerializable("ACCELEROMETER");
-            //ArrayList<SensorDataObject.Compass> compass = (ArrayList<SensorDataObject.Compass>) extras.getSerializable("COMPASS");
-            //ArrayList<SensorDataObject.Orientation> orientation = (ArrayList<SensorDataObject.Orientation>) extras.getSerializable("ORIENTATION");
+            ArrayList<SensorDataObject.Accelerometer> accelerometer = (ArrayList<SensorDataObject.Accelerometer>) extras.getSerializable(BundleConstants.ACCELEROMETER);
+            //ArrayList<SensorDataObject.Compass> compass = (ArrayList<SensorDataObject.Compass>) extras.getSerializable(BundleConstants.COMPASS);
+            //ArrayList<SensorDataObject.Orientation> orientation = (ArrayList<SensorDataObject.Orientation>) extras.getSerializable(BundleConstants.ORIENTATION);
 
             if (accelerometer != null && accelerometer.size() > 0){
                 LOG.info(SessionLogcatAppender.MARKER_SENSOR, String.format("Num: %d, First: %s", accelerometer.size(), Arrays.toString(accelerometer.toArray())));

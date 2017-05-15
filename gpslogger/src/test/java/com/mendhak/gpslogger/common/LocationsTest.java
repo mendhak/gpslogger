@@ -47,7 +47,7 @@ public class LocationsTest {
         PreferenceHelper ph = mock(PreferenceHelper.class);
         when(ph.shouldAdjustAltitudeFromGeoIdHeight()).thenReturn(true);
 
-        Location loc = MockLocations.builder("MOCK", 12.193, 19.111).withAltitude(100).putExtra("GEOIDHEIGHT", "15").build();
+        Location loc = MockLocations.builder("MOCK", 12.193, 19.111).withAltitude(100).putExtra(BundleConstants.GEOIDHEIGHT, "15").build();
         Location actual = Locations.getLocationWithAdjustedAltitude(loc, ph);
         verify(loc, times(1)).setAltitude(85);
     }
@@ -68,7 +68,7 @@ public class LocationsTest {
         when(ph.shouldAdjustAltitudeFromGeoIdHeight()).thenReturn(false);
         when(ph.getSubtractAltitudeOffset()).thenReturn(20);
 
-        Location loc = MockLocations.builder("MOCK", 12.193,19.111).withAltitude(100).putExtra("GEOIDHEIGHT","15").build();
+        Location loc = MockLocations.builder("MOCK", 12.193,19.111).withAltitude(100).putExtra(BundleConstants.GEOIDHEIGHT,"15").build();
         Location actual = Locations.getLocationWithAdjustedAltitude(loc,ph);
         verify(loc, times(1)).setAltitude(80);
         verify(loc, times(0)).setAltitude(85);

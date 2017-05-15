@@ -21,6 +21,7 @@ package com.mendhak.gpslogger.loggers.gpx;
 
 import android.location.Location;
 import com.mendhak.gpslogger.BuildConfig;
+import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.Maths;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Strings;
@@ -34,6 +35,10 @@ import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+/*/
+TODO: GPX Standard http://www.topografix.com/GPX/1/1/
+*/
 
 
 public class Gpx10FileLogger implements FileLogger {
@@ -279,7 +284,7 @@ class Gpx10WriteHandler implements Runnable {
         }
 
         if (loc.getExtras() != null) {
-            String geoidheight = loc.getExtras().getString("GEOIDHEIGHT");
+            String geoidheight = loc.getExtras().getString(BundleConstants.GEOIDHEIGHT);
 
             if (!Strings.isNullOrEmpty(geoidheight)) {
                 track.append("<geoidheight>").append(geoidheight).append("</geoidheight>");
@@ -298,11 +303,11 @@ class Gpx10WriteHandler implements Runnable {
             }
 
 
-            String hdop = loc.getExtras().getString("HDOP");
-            String pdop = loc.getExtras().getString("PDOP");
-            String vdop = loc.getExtras().getString("VDOP");
-            String ageofdgpsdata = loc.getExtras().getString("AGEOFDGPSDATA");
-            String dgpsid = loc.getExtras().getString("DGPSID");
+            String hdop = loc.getExtras().getString(BundleConstants.HDOP);
+            String pdop = loc.getExtras().getString(BundleConstants.PDOP);
+            String vdop = loc.getExtras().getString(BundleConstants.VDOP);
+            String ageofdgpsdata = loc.getExtras().getString(BundleConstants.AGEOFDGPSDATA);
+            String dgpsid = loc.getExtras().getString(BundleConstants.DGPSID);
 
             if (!Strings.isNullOrEmpty(hdop)) {
                 track.append("<hdop>").append(hdop).append("</hdop>");
@@ -323,6 +328,11 @@ class Gpx10WriteHandler implements Runnable {
             if (!Strings.isNullOrEmpty(dgpsid)) {
                 track.append("<dgpsid>").append(dgpsid).append("</dgpsid>");
             }
+        }
+
+        if (loc.getExtras() != null){
+            //TODO: Render our sensor data extensions here
+
         }
 
 

@@ -32,6 +32,7 @@ import com.dd.processbutton.iml.ActionProcessButton;
 import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.SensorDataObject;
+import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
@@ -422,9 +423,9 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
         if (locationInfo.getExtras() != null){
             Bundle extras = locationInfo.getExtras();
-            ArrayList<SensorDataObject.Accelerometer> accelerometer = (ArrayList<SensorDataObject.Accelerometer>) extras.getSerializable("ACCELEROMETER");
-            ArrayList<SensorDataObject.Compass> compass = (ArrayList<SensorDataObject.Compass>) extras.getSerializable("COMPASS");
-            ArrayList<SensorDataObject.Orientation> orientation = (ArrayList<SensorDataObject.Orientation>) extras.getSerializable("ORIENTATION");
+            ArrayList<SensorDataObject.Accelerometer> accelerometer = (ArrayList<SensorDataObject.Accelerometer>) extras.getSerializable(BundleConstants.ACCELEROMETER);
+            ArrayList<SensorDataObject.Compass> compass = (ArrayList<SensorDataObject.Compass>) extras.getSerializable(BundleConstants.COMPASS);
+            ArrayList<SensorDataObject.Orientation> orientation = (ArrayList<SensorDataObject.Orientation>) extras.getSerializable(BundleConstants.ORIENTATION);
 
             if (accelerometer != null && accelerometer.size() > 0){
                 txtAccelerometer.setText(String.format("Num: %d, First: %s", accelerometer.size(), accelerometer.get(0).toString()));

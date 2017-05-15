@@ -25,6 +25,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.*;
 import android.os.Bundle;
+
+import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
@@ -77,22 +79,22 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
         try {
             if (loc != null) {
                 Bundle b = new Bundle();
-                b.putString("HDOP", this.latestHdop);
-                b.putString("PDOP", this.latestPdop);
-                b.putString("VDOP", this.latestVdop);
-                b.putString("GEOIDHEIGHT", this.geoIdHeight);
-                b.putString("AGEOFDGPSDATA", this.ageOfDgpsData);
-                b.putString("DGPSID", this.dgpsId);
+                b.putString(BundleConstants.HDOP, this.latestHdop);
+                b.putString(BundleConstants.PDOP, this.latestPdop);
+                b.putString(BundleConstants.VDOP, this.latestVdop);
+                b.putString(BundleConstants.GEOIDHEIGHT, this.geoIdHeight);
+                b.putString(BundleConstants.AGEOFDGPSDATA, this.ageOfDgpsData);
+                b.putString(BundleConstants.DGPSID, this.dgpsId);
 
-                b.putBoolean("PASSIVE", listenerName.equalsIgnoreCase("PASSIVE"));
-                b.putString("LISTENER", listenerName);
-                b.putInt("SATELLITES_FIX", satellitesUsedInFix);
-                b.putString("DETECTED_ACTIVITY", session.getLatestDetectedActivityName());
+                b.putBoolean(BundleConstants.PASSIVE, listenerName.equalsIgnoreCase(BundleConstants.PASSIVE));
+                b.putString(BundleConstants.LISTENER, listenerName);
+                b.putInt(BundleConstants.SATELLITES_FIX, satellitesUsedInFix);
+                b.putString(BundleConstants.DETECTED_ACTIVITY, session.getLatestDetectedActivityName());
 
                 //Extras for Sensordatalogging
-                b.putSerializable("ACCELEROMETER", this.latestAccelerometer);
-                b.putSerializable("COMPASS", this.latestCompass);
-                b.putSerializable("ORIENTATION", this.latestOrientation);
+                b.putSerializable(BundleConstants.ACCELEROMETER, this.latestAccelerometer);
+                b.putSerializable(BundleConstants.COMPASS, this.latestCompass);
+                b.putSerializable(BundleConstants.ORIENTATION, this.latestOrientation);
 
                 loc.setExtras(b);
                 LOG.debug("general loc listener on loc changed, latest accel:"+Arrays.toString(this.latestAccelerometer.toArray())+"\n latestCompass:"+Arrays.toString(this.latestCompass.toArray())+"\n latestOrientation:"+Arrays.toString(this.latestOrientation.toArray()));

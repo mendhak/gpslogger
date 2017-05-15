@@ -2,6 +2,8 @@ package com.mendhak.gpslogger.loggers.csv;
 
 import android.location.Location;
 import android.test.suitebuilder.annotation.SmallTest;
+
+import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.loggers.MockLocations;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,7 +52,7 @@ public class CSVFileLoggerTest {
         CSVFileLogger plain = new CSVFileLogger(null,null);
         Location loc = MockLocations.builder("MOCK", 12.193, 19.111).withAltitude(101).withAccuracy(41).withBearing(119).withSpeed(9)
                 .putExtra("satellites",7)
-                .putExtra("SATELLITES_FIX",22)
+                .putExtra(BundleConstants.SATELLITES_FIX,22)
                 .build();
 
         String actual = plain.getCsvLine(loc,"2011-09-17T18:45:33Z");
@@ -63,7 +65,7 @@ public class CSVFileLoggerTest {
         CSVFileLogger plain = new CSVFileLogger(null,null);
         Location loc = MockLocations.builder("MOCK", 12.193, 19.111).withAltitude(101).withAccuracy(41).withBearing(119).withSpeed(9)
                 .putExtra("satellites",7)
-                .putExtra("HDOP", "LOOKATTHISHDOP!")
+                .putExtra(BundleConstants.HDOP, "LOOKATTHISHDOP!")
                 .build();
 
         String actual = plain.getCsvLine(loc,"2011-09-17T18:45:33Z");
@@ -72,9 +74,9 @@ public class CSVFileLoggerTest {
 
         Location loc2 = MockLocations.builder("MOCK", 12.193, 19.111).withAltitude(101).withAccuracy(41).withBearing(119).withSpeed(9)
                 .putExtra("satellites",7)
-                .putExtra("HDOP", "LOOKATTHISHDOP!")
-                .putExtra("VDOP", "392.13")
-                .putExtra("PDOP", "Papepeodpe")
+                .putExtra(BundleConstants.HDOP, "LOOKATTHISHDOP!")
+                .putExtra(BundleConstants.VDOP, "392.13")
+                .putExtra(BundleConstants.PDOP, "Papepeodpe")
                 .build();
 
         actual = plain.getCsvLine(loc2,"2011-09-17T18:45:33Z");
@@ -87,9 +89,9 @@ public class CSVFileLoggerTest {
         CSVFileLogger plain = new CSVFileLogger(null,null);
         Location loc = MockLocations.builder("MOCK", 12.193, 19.111).withAltitude(101).withAccuracy(41).withBearing(119).withSpeed(9)
                 .putExtra("satellites",7)
-                .putExtra("GEOIDHEIGHT","tall")
-                .putExtra("AGEOFDGPSDATA", "oldddd")
-                .putExtra("DGPSID","777")
+                .putExtra(BundleConstants.GEOIDHEIGHT,"tall")
+                .putExtra(BundleConstants.AGEOFDGPSDATA, "oldddd")
+                .putExtra(BundleConstants.DGPSID,"777")
                 .build();
 
 
@@ -99,12 +101,12 @@ public class CSVFileLoggerTest {
 
         Location loc2 = MockLocations.builder("MOCK", 12.193, 19.111).withAltitude(101).withAccuracy(41).withBearing(119).withSpeed(9)
                 .putExtra("satellites",7)
-                .putExtra("HDOP", "LOOKATTHISHDOP!")
-                .putExtra("VDOP", "392.13")
-                .putExtra("PDOP", "Papepeodpe")
-                .putExtra("GEOIDHEIGHT","tall")
-                .putExtra("AGEOFDGPSDATA", "oldddd")
-                .putExtra("DGPSID","777")
+                .putExtra(BundleConstants.HDOP, "LOOKATTHISHDOP!")
+                .putExtra(BundleConstants.VDOP, "392.13")
+                .putExtra(BundleConstants.PDOP, "Papepeodpe")
+                .putExtra(BundleConstants.GEOIDHEIGHT,"tall")
+                .putExtra(BundleConstants.AGEOFDGPSDATA, "oldddd")
+                .putExtra(BundleConstants.DGPSID,"777")
                 .build();
 
         actual = plain.getCsvLine(loc2,"2011-09-17T18:45:33Z");
@@ -115,7 +117,7 @@ public class CSVFileLoggerTest {
     @Test
     public void getCsvLine_LocationWithActivity_ReturnsCSVLine(){
         CSVFileLogger plain = new CSVFileLogger(null,null);
-        Location loc = MockLocations.builder("MOCK", 12.222,14.151).putExtra("DETECTED_ACTIVITY","WALKING").build();
+        Location loc = MockLocations.builder("MOCK", 12.222,14.151).putExtra(BundleConstants.DETECTED_ACTIVITY,"WALKING").build();
 
         String actual = plain.getCsvLine(loc,"2011-09-17T18:45:33Z");
         String expected = "2011-09-17T18:45:33Z,12.222000,14.151000,,,,,0,MOCK,,,,,,,WALKING,\n";
@@ -124,13 +126,13 @@ public class CSVFileLoggerTest {
 
         Location loc2 = MockLocations.builder("MOCK", 12.193, 19.111).withAltitude(101).withAccuracy(41).withBearing(119).withSpeed(9)
                 .putExtra("satellites",7)
-                .putExtra("HDOP", "LOOKATTHISHDOP!")
-                .putExtra("VDOP", "392.13")
-                .putExtra("PDOP", "Papepeodpe")
-                .putExtra("GEOIDHEIGHT","tall")
-                .putExtra("AGEOFDGPSDATA", "oldddd")
-                .putExtra("DGPSID","777")
-                .putExtra("DETECTED_ACTIVITY","UNKNOWN")
+                .putExtra(BundleConstants.HDOP, "LOOKATTHISHDOP!")
+                .putExtra(BundleConstants.VDOP, "392.13")
+                .putExtra(BundleConstants.PDOP, "Papepeodpe")
+                .putExtra(BundleConstants.GEOIDHEIGHT,"tall")
+                .putExtra(BundleConstants.AGEOFDGPSDATA, "oldddd")
+                .putExtra(BundleConstants.DGPSID,"777")
+                .putExtra(BundleConstants.DETECTED_ACTIVITY,"UNKNOWN")
                 .build();
 
         actual = plain.getCsvLine(loc2,"2011-09-17T18:45:33Z");
