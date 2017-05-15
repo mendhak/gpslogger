@@ -27,6 +27,7 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.loggers.csv.CSVFileLogger;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlLogger;
+import com.mendhak.gpslogger.loggers.geojson.GeoJSONLogger;
 import com.mendhak.gpslogger.loggers.gpx.Gpx10FileLogger;
 import com.mendhak.gpslogger.loggers.kml.Kml22FileLogger;
 import com.mendhak.gpslogger.loggers.opengts.OpenGTSLogger;
@@ -82,6 +83,11 @@ public class FileLoggerFactory {
 
         if(/* Should log to Android Wear */  true){
             loggers.add(new AndroidWearLogger(context));
+        }
+
+        if(true){//FIXME
+            File file = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".geojson");
+            loggers.add(new GeoJSONLogger(file));
         }
 
 
