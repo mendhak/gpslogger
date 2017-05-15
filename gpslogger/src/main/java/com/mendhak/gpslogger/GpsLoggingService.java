@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -82,7 +83,7 @@ public class GpsLoggingService extends Service  {
     // Extra Sensor-Data-Stuff
     private GeneralLocationListener sensorDataListener;
     protected SensorManager sensorManager;
-    protected Sensor accelerometer, magnetometer;
+    protected Sensor accelerometer, magnetometer, gyroscope;
 
     private Intent alarmIntent;
     private Handler handler = new Handler();
@@ -101,6 +102,8 @@ public class GpsLoggingService extends Service  {
     public void onCreate() {
 
         nextPointAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        //nextSensorDataAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        nextSensorDataAlarmManager = nextPointAlarmManager;
 
         registerEventBus();
     }
@@ -195,10 +198,12 @@ public class GpsLoggingService extends Service  {
             return;
         }
 
+        LOG.info("handleIntent: "+intent.toString());
         if (intent != null) {
             Bundle bundle = intent.getExtras();
 
             if (bundle != null) {
+                LOG.info("handleIntent: "+intent.toString() + " bundle="+bundle.toString());
                 boolean needToStartGpsManager = false;
                 boolean needToStartSensorDataManager = false;
 
@@ -300,6 +305,7 @@ public class GpsLoggingService extends Service  {
                 try {
                     if(bundle.get(Intent.EXTRA_ALARM_COUNT) != "0"){
                         needToStartGpsManager = true;
+                        needToStartSensorDataManager = true;
                     }
                 }
                 catch (Throwable t){
@@ -562,13 +568,17 @@ public class GpsLoggingService extends Service  {
      * Starts the sensor manager
      */
     private void startSensorManager() {
-        if (sensorDataListener == null) {
-            sensorDataListener = new GeneralLocationListener(this, "SENSOR");
-        }
+        /*if (sensorDataListener == null) {
+            sensorDataListener = new GeneralLocationListener(this, "GPS");
+        }*/
+        sensorDataListener = gpsLocationListener;
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD); // Compass
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);// equiv: gravity, avail in software
+        magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD); // Compass -> basically only useful for compass / heading usage
+        //gyroscope = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE); // rate of rotation in rad/s
+
+
 
         //checkTowerAndGpsStatus();
 
@@ -586,7 +596,7 @@ public class GpsLoggingService extends Service  {
 
             //registering for sensor data
 
-            sensorManager.registerListener(sensorDataListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(sensorDataListener, accelerometer, SensorManager.SENSOR_DELAY_GAME);
             //sensorManager.registerListener(sensorListener, magnetometer, SensorManager.SENSOR_DELAY_NORMAL);
 
 
@@ -604,12 +614,13 @@ public class GpsLoggingService extends Service  {
             //registering for sensor data
 
             //sensorManager.registerListener(sensorDataListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-            sensorManager.registerListener(sensorDataListener, magnetometer, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(sensorDataListener, magnetometer, SensorManager.SENSOR_DELAY_GAME);
 
 
             session.setSensorMagneticFieldEnabled(true);
         }
 
+       // sensorManager.registerListener(sensorDataListener, gyroscope, SensorManager.SENSOR_DELAY_GAME);
 
         if (session.isSensorAccelerometerEnabled() || session.isSensorMagneticFieldEnabled()){
             startAbsoluteTimer();
@@ -698,6 +709,7 @@ public class GpsLoggingService extends Service  {
         public void run() {
             LOG.warn("Absolute timeout reached, giving up on this point");
             stopManagerAndResetAlarm();
+            stopSensorManagerAndResetAlarm(0,null,null,null);
         }
     };
 
@@ -1030,13 +1042,29 @@ public class GpsLoggingService extends Service  {
             stopGpsManager();
         }
         //TODO: Need to stop in any case, would create too much data otherwise
-        stopSensorManager();
+        //stopSensorManager();
 
         stopAbsoluteTimer();
         setAlarmForNextPoint();
 
+        //setAlarmForNextAccelerometer();// TODO: Maybe only re-enable if selected in preferences to save alarms?
+        //setAlarmForNextMagneticField();
+    }
+
+    protected void stopSensorManagerAndResetAlarm(long timestamp, SensorDataObject.Accelerometer ac, SensorDataObject.Orientation orient, SensorDataObject.Compass co){
+        if (ac != null && orient != null && co != null){
+            LOG.debug(String.format("stopSensorAndResetAlarm: timestamp: %d, ac: %s, or: %s, co: %s",timestamp,ac.toString(),orient.toString(),co.toString()));
+        } else {
+            LOG.debug(String.format("stopSensorAndResetAlarm: timestamp: %d",timestamp));
+        }
+        stopSensorManager();
+        LOG.debug("stopSensorAndResetAlarm: stopped sensor mananger");
+
+        stopAbsoluteTimer();
+
         setAlarmForNextAccelerometer();// TODO: Maybe only re-enable if selected in preferences to save alarms?
         setAlarmForNextMagneticField();
+        LOG.debug("stopSensorAndResetAlarm: setup new alarms");
     }
 
 
@@ -1060,15 +1088,17 @@ public class GpsLoggingService extends Service  {
     }
 
     @TargetApi(23)
-    private void setAlarmForNextData(AlarmManager alarmManager, String intentConstant, int loggingInterval) {
-        LOG.debug(intentConstant + ": Set alarm for " + loggingInterval + " seconds");
+    private void setAlarmForNextData(AlarmManager alarmManager, String intentConstant, long loggingInterval) {
+        LOG.debug(intentConstant + ": Set alarm for " + loggingInterval + " milliseconds = "+loggingInterval/1000 + " seconds");
+        LOG.debug(intentConstant + ": Cur timestamp:" + SystemClock.elapsedRealtime() + "msecs next alarm: " + (SystemClock.elapsedRealtime()+loggingInterval) + " msecs");
+        LOG.debug(intentConstant + ": Cur timestamp:" + SystemClock.elapsedRealtime()/1000 + "secs next alarm: " + (SystemClock.elapsedRealtime()+loggingInterval)/1000+" secs");
 
         Intent i = new Intent(this, GpsLoggingService.class);
         i.putExtra(intentConstant, true);
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
         alarmManager.cancel(pi);
 
-        if(Systems.isDozing(this)){
+        if(Systems.isDozing(this) && !(intentConstant.equals(IntentConstants.GET_NEXT_ACCELEROMETER) || intentConstant.equals(IntentConstants.GET_NEXT_MAGNETICFIELD))){
             //Only invoked once per 15 minutes in doze mode
             LOG.warn("Device is dozing, using infrequent alarm");
             alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + loggingInterval, pi);
@@ -1086,12 +1116,22 @@ public class GpsLoggingService extends Service  {
 
     @TargetApi(23)
     private void setAlarmForNextAccelerometer() {
-        setAlarmForNextData(nextSensorDataAlarmManager, IntentConstants.GET_NEXT_ACCELEROMETER, (preferenceHelper.getMinimumLoggingInterval()/preferenceHelper.getSensorDataInterval()) * 1000);
+        long mls = (preferenceHelper.getMinimumLoggingInterval()*1000)/preferenceHelper.getSensorDataInterval();
+        LOG.debug(String.format("next accel alarm: minlogintv: %d, sensordataintv: %d, minlog*1000/sensor=%d",
+                preferenceHelper.getMinimumLoggingInterval(),
+                preferenceHelper.getSensorDataInterval(),
+                mls));
+        setAlarmForNextData(nextSensorDataAlarmManager, IntentConstants.GET_NEXT_ACCELEROMETER, mls);
     }
 
     @TargetApi(23)
     private void setAlarmForNextMagneticField() {
-        setAlarmForNextData(nextSensorDataAlarmManager, IntentConstants.GET_NEXT_MAGNETICFIELD, (preferenceHelper.getMinimumLoggingInterval()/preferenceHelper.getSensorDataInterval()) * 1000);
+        long mls = (preferenceHelper.getMinimumLoggingInterval()*1000)/preferenceHelper.getSensorDataInterval();
+        LOG.debug(String.format("next magnetic alarm: minlogintv: %d, sensordataintv: %d, minlog*1000/sensor=%d",
+                preferenceHelper.getMinimumLoggingInterval(),
+                preferenceHelper.getSensorDataInterval(),
+                mls));
+        setAlarmForNextData(nextSensorDataAlarmManager, IntentConstants.GET_NEXT_MAGNETICFIELD, mls);
     }
 
 

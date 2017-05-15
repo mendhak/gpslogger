@@ -260,7 +260,6 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     }
 
     private void clearDisplay() {
-        //TODO: Handle clearing sensor data info here
         TextView tvLatitude = (TextView) rootView.findViewById(R.id.detailedview_lat_text);
         TextView tvLongitude = (TextView) rootView.findViewById(R.id.detailedview_lon_text);
         TextView tvDateTime = (TextView) rootView.findViewById(R.id.detailedview_datetime_text);
@@ -294,6 +293,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         txtTime.setText("");
         txtStill.setText("");
 
+        //Handle clearing sensor data info here
         txtAccelerometer.setText("");
         txtCompass.setText("");
         txtOrientation.setText("");
@@ -302,7 +302,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LocationUpdate locationEvent){
-        //TODO: Handle passing sensor data info here
+        //Our sensor data is passed in the locationEvent using the extras bundle
         displayLocationInfo(locationEvent.location);
     }
 
@@ -329,7 +329,6 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     }
 
     public void displayLocationInfo(Location locationInfo){
-        //TODO: Handle sensor data display here
         if (locationInfo == null) {
             return;
         }
@@ -422,21 +421,22 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         txtTime.setText(duration + " (started at " + dateFormat.format(d) + " " + timeFormat.format(d) + ")");
 
         if (locationInfo.getExtras() != null){
+            //Sensor data display is handled here
             Bundle extras = locationInfo.getExtras();
             ArrayList<SensorDataObject.Accelerometer> accelerometer = (ArrayList<SensorDataObject.Accelerometer>) extras.getSerializable(BundleConstants.ACCELEROMETER);
             ArrayList<SensorDataObject.Compass> compass = (ArrayList<SensorDataObject.Compass>) extras.getSerializable(BundleConstants.COMPASS);
             ArrayList<SensorDataObject.Orientation> orientation = (ArrayList<SensorDataObject.Orientation>) extras.getSerializable(BundleConstants.ORIENTATION);
 
             if (accelerometer != null && accelerometer.size() > 0){
-                txtAccelerometer.setText(String.format("Num: %d, First: %s", accelerometer.size(), accelerometer.get(0).toString()));
+                txtAccelerometer.setText(String.format("%s #%d", accelerometer.get(accelerometer.size()-1).toString(), accelerometer.size()));
             }
 
             if (compass != null && compass.size() > 0){
-                txtCompass.setText(String.format("Num: %d, First: %s", compass.size(), compass.get(0).toString()));
+                txtCompass.setText(String.format("%s #%d", compass.get(compass.size()-1).toString(), compass.size()));
             }
 
             if (orientation != null && orientation.size() > 0){
-                txtOrientation.setText(String.format("Num: %d, First: %s", orientation.size(), orientation.get(0).toString()));
+                txtOrientation.setText(String.format("%s #%d", orientation.get(orientation.size()-1).toString(), orientation.size()));
             }
 
         }

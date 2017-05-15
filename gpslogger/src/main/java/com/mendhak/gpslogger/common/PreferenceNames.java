@@ -122,7 +122,7 @@ public  class PreferenceNames {
     public static final String SFTP_REMOTE_SERVER_PATH ="sftp_remote_server_path";
 
 
-    //TODO: Extension for Sensor data recording
+    //Extension for Sensor data recording
     public static final String SENSORDATA_ENABLE_ACCELEROMETER = "sensordata_enable_accelerometer";
     public static final String SENSORDATA_ENABLE_MAGNETICFIELD = "sensordata_enable_magneticfield";
     public static final String SENSORDATA_INTERVAL = "sensordata_interval";

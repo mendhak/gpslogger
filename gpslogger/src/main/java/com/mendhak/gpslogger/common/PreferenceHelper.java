@@ -1065,7 +1065,7 @@ public class PreferenceHelper {
     }
 
 
-    //TODO: Extension for sensor data recording ACCELEROMETER
+    //Extension for sensor data recording ACCELEROMETER
     @ProfilePreference(name=PreferenceNames.SENSORDATA_ENABLE_ACCELEROMETER)
     public boolean getSensorDataEnabledAcclerometer() {
         return prefs.getBoolean(PreferenceNames.SENSORDATA_ENABLE_ACCELEROMETER, false);
@@ -1076,7 +1076,7 @@ public class PreferenceHelper {
         LOG.debug("preference helper set enable accel: "+enableAcclerometer);
     }
 
-    //TODO: Extension for sensor data recording MAGNETIC FIELD
+    //Extension for sensor data recording MAGNETIC FIELD
     @ProfilePreference(name=PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD)
     public boolean getSensorDataEnabledMagneticField() {
         return prefs.getBoolean(PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD, false);
@@ -1086,7 +1086,7 @@ public class PreferenceHelper {
         prefs.edit().putBoolean(PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD, enableMagneticField).apply();
     }
 
-    //TODO: Extension for sensor data recording INTERVAL
+    //Extension for sensor data recording INTERVAL
     @ProfilePreference(name= PreferenceNames.SENSORDATA_INTERVAL)
     public int getSensorDataInterval(){
         return Strings.toInt(prefs.getString(PreferenceNames.SENSORDATA_INTERVAL, "1"), 1);

@@ -63,6 +63,8 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     protected ArrayList<SensorDataObject.Compass> latestCompass  = new ArrayList<>();
     protected ArrayList<SensorDataObject.Orientation> latestOrientation = new ArrayList<>();
 
+
+
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
 
@@ -221,14 +223,21 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
         }
 
     }
+    
 
     @Override
     /**
      * Based on code found here: https://github.com/shiptrail/android-main
+     * Records sensordata to be shipped with next location
+     * https://developer.android.com/guide/topics/sensors/sensors_overview.html
+     * orientation is created from accel + magnetic -> billig gyro
      */
     public void onSensorChanged(SensorEvent event) {
-        //LOG.debug("onSensorChanged Event. event.sensor="+event.sensor.toString()+"\n event.values="+ Arrays.toString(event.values));
+        LOG.debug("onSensorChanged Event. event.sensor="+event.sensor.toString()+"\n event.values="+ Arrays.toString(event.values));
         //check if we want to get sensor data already
+        SensorDataObject.Orientation oo = null;
+        SensorDataObject.Accelerometer ao = null;
+        SensorDataObject.Compass co = null;
         long current = System.currentTimeMillis();
         session.setLatestSensorDataTimeStamp(current);
         //if (current >= nextTimestampToSave) {
@@ -266,9 +275,9 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                         toffsetInteger = (int) toffset;
                     }
 
-                    SensorDataObject.Orientation oo = new SensorDataObject.Orientation(compass,pitch,roll,toffsetInteger);
+                    oo = new SensorDataObject.Orientation(compass,pitch,roll,toffsetInteger);
                     this.latestOrientation.add(oo);
-                    //LOG.debug(String.format("onSensorChanged orient obj added: %s \n orient array: %s",oo.toString(),Arrays.toString(this.latestOrientation.toArray())));
+                    LOG.debug(String.format("onSensorChanged orient obj added: %s \n orient array: %s",oo.toString(),Arrays.toString(this.latestOrientation.toArray())));
 
                     //acceleration
                     float x = mGravity[0];
@@ -276,14 +285,14 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                     float z = mGravity[2];
 
                     //save acceleration
-                    SensorDataObject.Accelerometer ao = new SensorDataObject.Accelerometer(x,y,z,toffsetInteger);
+                    ao = new SensorDataObject.Accelerometer(x,y,z,toffsetInteger);
                     this.latestAccelerometer.add(ao);
-                    //LOG.debug(String.format("onSensorChanged accel obj added: %s \n accel array: %s",ao.toString(),Arrays.toString(this.latestAccelerometer.toArray())));
+                    LOG.debug(String.format("onSensorChanged accel obj added: %s \n accel array: %s",ao.toString(),Arrays.toString(this.latestAccelerometer.toArray())));
 
                     //save compass
-                    SensorDataObject.Compass co = new SensorDataObject.Compass(compass, toffsetInteger);
+                    co = new SensorDataObject.Compass(compass, toffsetInteger);
                     this.latestCompass.add(co);
-                    //LOG.debug(String.format("onSensorChanged compass obj added: %s \n compass array: %s",co.toString(),Arrays.toString(this.latestCompass.toArray())));
+                    LOG.debug(String.format("onSensorChanged compass obj added: %s \n compass array: %s",co.toString(),Arrays.toString(this.latestCompass.toArray())));
 
                     //determine when the next sensor data shall be monitored
                     nextTimestampToSave += preferenceHelper.getSensorDataInterval(); // had a /10, should be placed somewhere else
@@ -293,7 +302,9 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 }
             }
         //}
-
+        //loggingService.onSensorChanged();
+        LOG.debug("processed sensor data calling loggingservice, ts="+current);
+        //loggingService.stopSensorManagerAndResetAlarm(current,ao,oo,co);
         //TODO: Would need onLocationChanged similar call here that processes + deactivates sensors and reschedules sensors here
     }
 
