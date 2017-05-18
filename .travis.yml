@@ -22,9 +22,9 @@ notifications:
 before_install:
   - ./gradlew --version
 
+before_script:
+  - ./gradlew assembleDebugUnitTest -Dpre-dex=false
 
-
-#before_script:
 #  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
 #  - emulator -avd test -no-skin -no-audio -no-window &
 #  - adb wait-for-device
@@ -37,4 +37,4 @@ script:
   # Does a logcat dump if anything fails
   #- ./gradlew connectedAndroidTest -x uninstallAll -PtestSize=small --info  || (adb logcat -d && echo "TESTS FAILED" && exit  1)
   # -Dpre-dex=false skips predex on travis, takes too long, too much memory
-  ./gradlew testDebugUnitTest -Dpre-dex=false
+  ./gradlew testDebugUnitTest -Dpre-dex=false --quiet

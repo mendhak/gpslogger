@@ -96,6 +96,7 @@ public class SFTPSettingsFragment extends PermissionedPreferenceFragment impleme
         }
         else if (preference.getKey().equals("sftp_reset_authorisation")){
             preferenceHelper.setSFTPKnownHostKey("");
+            preferenceHelper.setSFTPPrivateKeyFilePath("");
             getActivity().finish();
         }
 
