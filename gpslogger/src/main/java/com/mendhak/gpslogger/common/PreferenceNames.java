@@ -32,6 +32,7 @@ public  class PreferenceNames {
     public static final String LOG_TO_KML = "log_kml";
     public static final String LOG_TO_GPX = "log_gpx";
     public static final String LOG_TO_CSV = "log_plain_text";
+    public static final String LOG_TO_GEOJSON = "log_geojson";
     public static final String LOG_TO_NMEA = "log_nmea";
     public static final String LOG_TO_URL = "log_customurl_enabled";
     public static final String LOG_TO_URL_PATH = "log_customurl_url";

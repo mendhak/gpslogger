@@ -534,6 +534,14 @@ public class PreferenceHelper {
         return prefs.getBoolean(PreferenceNames.LOG_TO_CSV, false);
     }
 
+    /**
+     * Whether to log to a GeoJSON file
+     */
+    @ProfilePreference(name= PreferenceNames.LOG_TO_GEOJSON)
+    public boolean shouldLogToGeoJSON() {
+        return prefs.getBoolean(PreferenceNames.LOG_TO_GEOJSON, false);
+    }
+
 
     /**
      * Whether to log to NMEA file

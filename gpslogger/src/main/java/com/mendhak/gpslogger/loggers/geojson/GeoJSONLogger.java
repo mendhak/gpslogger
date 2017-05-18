@@ -16,31 +16,37 @@ import java.util.concurrent.TimeUnit;
 
 public class GeoJSONLogger implements FileLogger {
     final static Object lock = new Object();
-    private final ThreadPoolExecutor executor;
+    private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
     private final File file;
     protected final String name;
+    private final boolean addNewTrackSegment;
 
-    public GeoJSONLogger(File file) {
-        executor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
+    public GeoJSONLogger(File file, boolean addNewTrackSegment) {
         this.file = file;
         name = "GeoJSON";
+        this.addNewTrackSegment = addNewTrackSegment;
     }
 
     @Override
     public void write(Location loc) throws Exception {
-        GeoJSONWriter gw = new GeoJSONWriter(file, loc, "");
-        executor.execute(gw);
+        annotate(null, loc);
     }
 
     @Override
     public void annotate(String description, Location loc) throws Exception {
-        GeoJSONWriter gw = new GeoJSONWriter(file, loc, description);
-        executor.execute(gw);
+        //GeoJSONWriter gw = new GeoJSONWriterLine(file, loc, description, addNewTrackSegment);
+        //GeoJSONWriter gw = new GeoJSONWriterFeatureCollections(file, loc, description, addNewTrackSegment);
+        GeoJSONWriter gw = new GeoJSONWriterPoints(file, loc, description, addNewTrackSegment);
+        EXECUTOR.execute(gw);
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
+    }
+
+    public static int getCount(){
+        return EXECUTOR.getActiveCount();
     }
 }
 

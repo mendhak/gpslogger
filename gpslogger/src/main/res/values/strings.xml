@@ -124,6 +124,8 @@
     <string name="log_kml_summary">Logs locations to a KML v2.2 file</string>
     <string name="log_plain_text_title">Log to CSV</string>
     <string name="log_plain_text_summary">Logs locations to a CSV file</string>
+    <string name="log_json_title">Log to GeoJSON</string>
+    <string name="log_json_summary">Logs locations to a GeoJSON file</string>
     <string name="new_file_creation_title">New file creation</string>
     <string name="new_file_creation_summary">Whether to create a new file once a day or each time you start.</string>
     <string name="new_file_creation_onceaday">Once a day</string>

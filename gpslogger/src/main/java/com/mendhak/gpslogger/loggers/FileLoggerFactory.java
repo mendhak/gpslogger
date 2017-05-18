@@ -85,9 +85,9 @@ public class FileLoggerFactory {
             loggers.add(new AndroidWearLogger(context));
         }
 
-        if(true){//FIXME
+        if(preferenceHelper.shouldLogToGeoJSON()){
             File file = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".geojson");
-            loggers.add(new GeoJSONLogger(file));
+            loggers.add(new GeoJSONLogger(file, session.shouldAddNewTrackSegment()));
         }
 
 

@@ -362,6 +362,13 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:src="@drawable/link"/>
+                        <ImageView
+                            android:id="@+id/simpleview_imgjson"
+                            android:contentDescription="@string/log_json_title"
+                            android:visibility="invisible"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/geojson"/>
                     </LinearLayout>
 
                     <Space

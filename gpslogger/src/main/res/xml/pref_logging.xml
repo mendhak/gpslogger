@@ -32,6 +32,11 @@
             android:summary="@string/log_plain_text_summary"
             android:title="@string/log_plain_text_title"/>
 
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+        android:key="log_geojson"
+        android:summary="@string/log_json_summary"
+        android:title="@string/log_json_title"/>
+
         <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
             android:key="log_nmea"
             android:title="@string/log_nmea_title"
