@@ -24,7 +24,10 @@ before_install:
 
 
 
-#before_script:
+before_script:
+  - echo '"Build..."' && echo -en 'travis_fold:start:script.build\\r'
+  - ./gradlew assembleDebugUnitTest
+  - echo -en 'travis_fold:end:script.build\\r'
 #  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
 #  - emulator -avd test -no-skin -no-audio -no-window &
 #  - adb wait-for-device
