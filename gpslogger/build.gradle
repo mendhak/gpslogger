@@ -240,22 +240,26 @@ tasks.whenTaskAdded { task ->
     }
 }
 
-task buildTranslationArray << {
-    def foundLocales = new StringBuilder()
-    foundLocales.append("new String[]{")
+task buildTranslationArray {
 
-    fileTree("src/main/res").visit { FileVisitDetails details ->
-        if(details.file.path.endsWith("strings.xml")){
-            def languageCode = details.file.parent.tokenize(File.separator).last().replaceAll('values-','').replaceAll('-r','-')
-            languageCode = (languageCode == "values") ? "en" : languageCode;
-            foundLocales.append("\"").append(languageCode).append("\"").append(",")
+    doLast {
+        def foundLocales = new StringBuilder()
+        foundLocales.append("new String[]{")
+
+        fileTree("src/main/res").visit { FileVisitDetails details ->
+            if(details.file.path.endsWith("strings.xml")){
+                def languageCode = details.file.parent.tokenize(File.separator).last().replaceAll('values-','').replaceAll('-r','-')
+                languageCode = (languageCode == "values") ? "en" : languageCode;
+                foundLocales.append("\"").append(languageCode).append("\"").append(",")
+            }
         }
+
+        foundLocales.append("}")
+        //Don't forget to remove the trailing comma
+        def foundLocalesString = foundLocales.toString().replaceAll(',}','}')
+        android.defaultConfig.buildConfigField "String[]", "TRANSLATION_ARRAY", foundLocalesString
     }
 
-    foundLocales.append("}")
-    //Don't forget to remove the trailing comma
-    def foundLocalesString = foundLocales.toString().replaceAll(',}','}')
-    android.defaultConfig.buildConfigField "String[]", "TRANSLATION_ARRAY", foundLocalesString
 
 }
 preBuild.dependsOn buildTranslationArray
@@ -336,9 +340,9 @@ task deleteFAQsAssets(group:"docs", type:Delete){
         }
 }
 
-task copyFinalAPK(dependsOn: 'assembleRelease', type:Copy) {
+task copyFinalAPK(group:'build') {
     //Copies final APK to this directory
-    def File releaseApk
+    def finalApkName = "gpslogger-"+android.defaultConfig.versionName+".apk"
 
     copy{
         from "build/outputs/apk/gpslogger-release.apk"
@@ -346,22 +350,21 @@ task copyFinalAPK(dependsOn: 'assembleRelease', type:Copy) {
 
         // Use a closure to map the file name
         rename { String fileName ->
-            releaseApk = file(fileName.replace('release', android.defaultConfig.versionName))
-            releaseApk.name
+            fileName.replace("gpslogger-release.apk", finalApkName)
         }
     }
-
-    if (project.hasProperty("RELEASE_STORE_FILE")) {
         //PGP Sign
         //Verify with gpg --verify ~/Downloads/gpslogger-71.apk.asc
+    if(file(finalApkName).isFile()){
         signing {
-            sign releaseApk
+            sign file(finalApkName)
         }
 
         //SHA256 Checksum
         //Verify with sha256sum -c ~/Downloads/gpslogger-71.apk.SHA256
-        ant.checksum(file: releaseApk, algorithm: "SHA256", pattern: "{0} {1}")
+        ant.checksum(file: finalApkName, algorithm: "SHA256", pattern: "{0} {1}")
     }
+
 }
 
 preBuild.dependsOn copyFAQsIntoAssets
