@@ -79,7 +79,6 @@
   <string name="time_twoandhalfhours">2½ 小时</string>
   <string name="time_hms_format" formatted="false">%s小时 %s分钟 %s秒</string>
   <string name="accuracy_within" formatted="false">%s %s内</string>
-  <string name="degree_symbol">°</string>
   <string name="settings_distance_in_meters">以米算的距离</string>
   <string name="settings_accuracy_in_meters">精确到米</string>
   <string name="settings_enter_meters">输入米数(最大 9999)</string>

@@ -4,13 +4,13 @@ android:
   components:
     - tools
     - android-23
-    - build-tools-23.0.2
+    - build-tools-25.0.3
     - extra-android-support
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
 
-jdk: oraclejdk7
+jdk: oraclejdk8
 
 notifications:
   email: false
@@ -22,9 +22,12 @@ notifications:
 before_install:
   - ./gradlew --version
 
-before_script:
-  - ./gradlew assembleDebugUnitTest -Dpre-dex=false
 
+
+before_script:
+  - echo '"Build..."' && echo -en 'travis_fold:start:script.build\\r'
+  - ./gradlew assembleDebugUnitTest -Dpre-dex=false
+  - echo -en 'travis_fold:end:script.build\\r'
 #  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
 #  - emulator -avd test -no-skin -no-audio -no-window &
 #  - adb wait-for-device
@@ -37,4 +40,4 @@ script:
   # Does a logcat dump if anything fails
   #- ./gradlew connectedAndroidTest -x uninstallAll -PtestSize=small --info  || (adb logcat -d && echo "TESTS FAILED" && exit  1)
   # -Dpre-dex=false skips predex on travis, takes too long, too much memory
-  ./gradlew testDebugUnitTest -Dpre-dex=false --quiet
+  ./gradlew testDebugUnitTest -Dpre-dex=false -q
