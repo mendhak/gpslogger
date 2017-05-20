@@ -7,8 +7,7 @@ notifications:
   email: false
 
 env:
-  - ANDROID_HOME=$HOME/android-sdk
-  - ZIPNAME=sdk-tools-linux-3859397.zip
+  - ANDROID_HOME=$HOME/android-sdk ZIPNAME=sdk-tools-linux-3859397.zip
 
 
 before_cache:
