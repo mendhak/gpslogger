@@ -33,7 +33,7 @@ before_install:
 
 install:
   # Download and unzip the Android SDK tools (if not already there thanks to the cache mechanism)
-  - if test ! -e $HOME/android-sdk-dl/$ZIPNAME ; then curl https://dl.google.com/android/repository/$ZIPNAME > $HOME/android-sdk-dl/$ZIPNAME ; fi
+  - if test ! -e $HOME/android-sdk-dl/$ZIPNAME ; then curl --fail --show-error --silent https://dl.google.com/android/repository/$ZIPNAME > $HOME/android-sdk-dl/$ZIPNAME ; fi
   - unzip -n $HOME/android-sdk-dl/$ZIPNAME -d $HOME/android-sdk
   # Install or update Android SDK components (will not do anything if already up to date thanks to the cache mechanism)
   - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'tools'
