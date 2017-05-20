@@ -70,10 +70,15 @@ Download and install [IntelliJ IDEA Community Edition](http://www.jetbrains.com/
 
 ### Get the Android SDK extra repositories
 
-This project uses certain Google libraries, listed in [packages.txt](packages.txt). You can install them using `sdkmanager`:
+This project uses certain Android libraries, you can install them using Google's poorly implemented [`sdkmanager`](https://developer.android.com/studio/command-line/sdkmanager.html):
 
-    cd gpslogger
-    <AndroidSDK>/tools/bin/sdkmanager --package_file=packages.txt
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'tools'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platform-tools'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'build-tools;25.0.3'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platforms;android-23'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;m2repository'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;android;m2repository'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;google_play_services'
 
 
 ### Create local.properties
