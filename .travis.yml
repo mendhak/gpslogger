@@ -8,6 +8,7 @@ notifications:
 
 env:
   - ANDROID_HOME=$HOME/android-sdk
+  - ZIPNAME=sdk-tools-linux-3859397.zip
 
 
 before_cache:
@@ -33,8 +34,8 @@ before_install:
 
 install:
   # Download and unzip the Android SDK tools (if not already there thanks to the cache mechanism)
-  - if test ! -e $HOME/android-sdk-dl/tools_r25.2.5-linux.zip ; then curl https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip > $HOME/android-sdk-dl/sdk-tools-linux-3859397.zip ; fi
-  - unzip -n $HOME/android-sdk-dl/sdk-tools-linux-3859397.zip -d $HOME/android-sdk
+  - if test ! -e $HOME/android-sdk-dl/$ZIPNAME ; then curl https://dl.google.com/android/repository/$ZIPNAME > $HOME/android-sdk-dl/$ZIPNAME ; fi
+  - unzip -n $HOME/android-sdk-dl/$ZIPNAME -d $HOME/android-sdk
   # Install or update Android SDK components (will not do anything if already up to date thanks to the cache mechanism)
   - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'tools'
   - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platform-tools'
