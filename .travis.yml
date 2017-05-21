@@ -1,43 +1,54 @@
 sudo: false
 language: android
-android:
-  components:
-    - tools
-    - android-23
-    - build-tools-25.0.3
-    - extra-android-support
-    - extra-google-google_play_services
-    - extra-google-m2repository
-    - extra-android-m2repository
 
 jdk: oraclejdk8
 
 notifications:
   email: false
 
-#env:
-#  matrix:
-#    - ANDROID_TARGET=android-23  ANDROID_ABI=armeabi-v7a
+env:
+  - ANDROID_HOME=$HOME/android-sdk ZIPNAME=sdk-tools-linux-3859397.zip
+
+
+before_cache:
+  # Do not cache a few Gradle files/directories (see https://docs.travis-ci.com/user/languages/java/#Caching)
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    # Android SDK
+    - $HOME/android-sdk-dl
+    - $HOME/android-sdk
+
+    # Gradle dependencies
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+    # Android build cache (see http://tools.android.com/tech-docs/build-cache)
+    - $HOME/.android/build-cache
 
 before_install:
   - ./gradlew --version
 
-
+install:
+  # Download and unzip the Android SDK tools (if not already there thanks to the cache mechanism)
+  - if test ! -e $HOME/android-sdk-dl/$ZIPNAME ; then curl --fail --show-error --silent https://dl.google.com/android/repository/$ZIPNAME > $HOME/android-sdk-dl/$ZIPNAME ; fi
+  - unzip -n $HOME/android-sdk-dl/$ZIPNAME -d $HOME/android-sdk
+  # Install or update Android SDK components (will not do anything if already up to date thanks to the cache mechanism)
+  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'tools'
+  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platform-tools'
+  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'build-tools;25.0.3'
+  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platforms;android-23'
+  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;m2repository'
+  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;android;m2repository'
+  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;google_play_services'
 
 before_script:
   - echo '"Build..."' && echo -en 'travis_fold:start:script.build\\r'
   - ./gradlew assembleDebugUnitTest -Dpre-dex=false
   - echo -en 'travis_fold:end:script.build\\r'
-#  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-#  - emulator -avd test -no-skin -no-audio -no-window &
-#  - adb wait-for-device
-#  - adb shell input keyevent 82 &
-#  - adb devices
 
 script:
-  # Performs tests (which will do a ./gradlew build task first)
-  # Skips the uninstallAll task as it's always a fresh emulator
-  # Does a logcat dump if anything fails
-  #- ./gradlew connectedAndroidTest -x uninstallAll -PtestSize=small --info  || (adb logcat -d && echo "TESTS FAILED" && exit  1)
-  # -Dpre-dex=false skips predex on travis, takes too long, too much memory
+  # skips predex on travis, takes too long, too much memory
   ./gradlew testDebugUnitTest -Dpre-dex=false -q
