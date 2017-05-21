@@ -77,7 +77,6 @@
   <string name="time_twoandhalfhours">2½ horas</string>
   <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
   <string name="accuracy_within" formatted="false">dentro de %s %s</string>
-  <string name="degree_symbol">°</string>
   <string name="settings_distance_in_meters">Distancia en metros</string>
   <string name="settings_accuracy_in_meters">Precisión (en metros)</string>
   <string name="settings_enter_meters">Ingrese metros (máx. 9999)</string>
@@ -197,7 +196,6 @@
   <string name="autoftp_testing">Probando subida a FTP</string>
   <string name="autoftp_invalid_settings">Configuración no válida</string>
   <string name="autoftp_invalid_summary">Algunos ajustes no son válidos. Compruebe todos los valores importantes.</string>
-  <string name="faq_screen_title">Preguntas Frecuentes</string>
   <string name="menu_faq">Ayuda y PPFF</string>
   <string name="gpsf_missing">Servicio no disponible</string>
   <string name="gpsf_missing_description">Esta funcionalidad necesita servicios de Google Play.</string>
