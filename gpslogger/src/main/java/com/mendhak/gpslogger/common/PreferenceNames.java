@@ -123,7 +123,7 @@ public  class PreferenceNames {
 
 
     //Extension for Sensor data recording
-    public static final String SENSORDATA_ENABLE_ACCELEROMETER = "sensordata_enable_accelerometer";
-    public static final String SENSORDATA_ENABLE_MAGNETICFIELD = "sensordata_enable_magneticfield";
+    public static final String SENSORDATA_ENABLE = "sensordata_enable";
+    //public static final String SENSORDATA_ENABLE_MAGNETICFIELD = "sensordata_enable_magneticfield";
     public static final String SENSORDATA_INTERVAL = "sensordata_interval";
 }

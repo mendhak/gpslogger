@@ -1065,26 +1065,26 @@ public class PreferenceHelper {
     }
 
 
-    //Extension for sensor data recording ACCELEROMETER
-    @ProfilePreference(name=PreferenceNames.SENSORDATA_ENABLE_ACCELEROMETER)
-    public boolean getSensorDataEnabledAcclerometer() {
-        return prefs.getBoolean(PreferenceNames.SENSORDATA_ENABLE_ACCELEROMETER, false);
+    //Extension for sensor data recording
+    @ProfilePreference(name=PreferenceNames.SENSORDATA_ENABLE)
+    public boolean isSensorDataEnabled() {
+        return prefs.getBoolean(PreferenceNames.SENSORDATA_ENABLE, false);
     }
 
-    public void setSensorDataEnabledAcclerometer(boolean enableAcclerometer){
-        prefs.edit().putBoolean(PreferenceNames.SENSORDATA_ENABLE_ACCELEROMETER, enableAcclerometer).apply();
-        LOG.debug("preference helper set enable accel: "+enableAcclerometer);
+    public void setSensorDataEnabled(boolean enableSensordata){
+        prefs.edit().putBoolean(PreferenceNames.SENSORDATA_ENABLE, enableSensordata).apply();
+        LOG.debug("preference helper set enable: "+enableSensordata);
     }
 
-    //Extension for sensor data recording MAGNETIC FIELD
-    @ProfilePreference(name=PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD)
-    public boolean getSensorDataEnabledMagneticField() {
-        return prefs.getBoolean(PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD, false);
-    }
-
-    public void setSensorDataEnabledMagneticFeild(boolean enableMagneticField){
-        prefs.edit().putBoolean(PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD, enableMagneticField).apply();
-    }
+//    //Extension for sensor data recording MAGNETIC FIELD
+//    @ProfilePreference(name=PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD)
+//    public boolean getSensorDataEnabledMagneticField() {
+//        return prefs.getBoolean(PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD, false);
+//    }
+//
+//    public void setSensorDataEnabledMagneticFeild(boolean enableMagneticField){
+//        prefs.edit().putBoolean(PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD, enableMagneticField).apply();
+//    }
 
     //Extension for sensor data recording INTERVAL
     @ProfilePreference(name= PreferenceNames.SENSORDATA_INTERVAL)

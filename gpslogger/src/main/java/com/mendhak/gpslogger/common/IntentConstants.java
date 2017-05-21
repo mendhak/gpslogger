@@ -34,6 +34,7 @@ public class IntentConstants {
     public static final String LOG_ONCE = "logonce";
     public static final String SWITCH_PROFILE = "switchprofile";
 
-    public static final String GET_NEXT_ACCELEROMETER = "getnextaccelerometer";
-    public static final String GET_NEXT_MAGNETICFIELD = "getnextmagneticfield";
+    //public static final String GET_NEXT_ACCELEROMETER = "getnextaccelerometer";
+    //public static final String GET_NEXT_MAGNETICFIELD = "getnextmagneticfield";
+    public static final String GET_NEXT_SENSORSAMPLE = "getnextsensorsample";
 }

@@ -26,12 +26,12 @@
     <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:key="sensordata_enable_accelerometer"
         android:summary="@string/keep_fix_summary"
-        android:title="@string/sensordata_enable_accelerometer"/>
+        android:title="@string/sensordata_enable"/>
 
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
-        android:key="sensordata_enable_magneticfield"
-        android:summary="@string/keep_fix_summary"
-        android:title="@string/sensordata_enable_magneticfield"/>
+    <!--<com.mendhak.gpslogger.ui.components.CustomSwitchPreference-->
+        <!--android:key="sensordata_enable_magneticfield"-->
+        <!--android:summary="@string/keep_fix_summary"-->
+        <!--android:title="@string/sensordata_enable_magneticfield"/>-->
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
         android:key="sensordata_interval"

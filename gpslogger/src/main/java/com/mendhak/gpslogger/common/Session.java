@@ -94,28 +94,28 @@ public class Session {
     /**
      * @return whether accelerometer sensor is enabled
      */
-    public boolean isSensorAccelerometerEnabled() {
-        return Boolean.valueOf(get("accelerometerEnabled", "false"));
+    public boolean isSensorEnabled() {
+        return Boolean.valueOf(get("sensordataEnabled", "false"));
     }
 
     /**
-     * @param accelerometerEnabled set whether accelerometer sensor is enabled
+     * @param sensordataEnabled set whether accelerometer sensor is enabled
      */
-    public void setSensorAccelerometerEnabled(boolean accelerometerEnabled) { set("accelerometerEnabled", String.valueOf(accelerometerEnabled));
+    public void setSensorEnabled(boolean sensordataEnabled) { set("sensordataEnabled", String.valueOf(sensordataEnabled));
     }
 
-    /**
-     * @return whether magnetic field sensor (compass) is enabled
-     */
-    public boolean isSensorMagneticFieldEnabled() {
-        return Boolean.valueOf(get("magneticFieldEnabled", "false"));
-    }
-
-    /**
-     * @param magneticFieldEnabled set whether magnetic field sensor (compass) is enabled
-     */
-    public void setSensorMagneticFieldEnabled(boolean magneticFieldEnabled) { set("magneticFieldEnabled", String.valueOf(magneticFieldEnabled));
-    }
+//    /**
+//     * @return whether magnetic field sensor (compass) is enabled
+//     */
+//    public boolean isSensorMagneticFieldEnabled() {
+//        return Boolean.valueOf(get("magneticFieldEnabled", "false"));
+//    }
+//
+//    /**
+//     * @param magneticFieldEnabled set whether magnetic field sensor (compass) is enabled
+//     */
+//    public void setSensorMagneticFieldEnabled(boolean magneticFieldEnabled) { set("magneticFieldEnabled", String.valueOf(magneticFieldEnabled));
+//    }
 
     /**
      * @return whether logging has started

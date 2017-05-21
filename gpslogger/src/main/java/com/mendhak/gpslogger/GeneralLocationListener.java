@@ -63,7 +63,8 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     protected ArrayList<SensorDataObject.Compass> latestCompass  = new ArrayList<>();
     protected ArrayList<SensorDataObject.Orientation> latestOrientation = new ArrayList<>();
 
-
+    protected ArrayList<SensorEvent> accelerometer = new ArrayList<SensorEvent>();
+    protected ArrayList<SensorEvent> magneticField = new ArrayList<SensorEvent>();
 
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
@@ -223,16 +224,31 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
         }
 
     }
-    
-
     @Override
+    public void onSensorChanged(SensorEvent event){
+        LOG.debug("onSensorChanged Event. event.sensor="+event.sensor.toString()+"\n event.values="+ Arrays.toString(event.values));
+
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
+            accelerometer.add(event);
+            mGravity = event.values.clone();
+        if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
+            magneticField.add(event);
+            mGeomagnetic = event.values.clone();
+
+        calculateSensors(event);
+        //mGravity = null;
+        //mGeomagnetic = null;
+        loggingService.onSensorChanged(event);
+    }
+
+    
     /**
      * Based on code found here: https://github.com/shiptrail/android-main
      * Records sensordata to be shipped with next location
      * https://developer.android.com/guide/topics/sensors/sensors_overview.html
      * orientation is created from accel + magnetic -> billig gyro
      */
-    public void onSensorChanged(SensorEvent event) {
+    public void calculateSensors(SensorEvent event) {
         LOG.debug("onSensorChanged Event. event.sensor="+event.sensor.toString()+"\n event.values="+ Arrays.toString(event.values));
         //check if we want to get sensor data already
         SensorDataObject.Orientation oo = null;

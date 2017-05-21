@@ -29,7 +29,9 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
-
+/**
+ * Required to enable auto send-off for logs.
+ */
 public class AlarmReceiver extends BroadcastReceiver {
 
     private static final Logger LOG = Logs.of(AlarmReceiver.class);

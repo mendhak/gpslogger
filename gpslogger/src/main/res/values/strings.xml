@@ -149,8 +149,8 @@
     </string>
     <string name="keep_fix_title">Keep GPS on between fixes</string>
 
-    <string name="sensordata_enable_accelerometer">Enable acccelerometer data collection</string>
-    <string name="sensordata_enable_magneticfield">Enable compass data collection</string>
+    <string name="sensordata_enable">Enable sensordata collection</string>
+    <!--<string name="sensordata_enable_magneticfield">Enable compass data collection</string>-->
     <string name="sensordata_interval">Sensordata collection interval</string>
     <string name="sensordata_interval_title">Times between fixes</string>
     <string name="sensordata_interval_hint">Enter number (max 99)</string>
