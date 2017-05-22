@@ -152,7 +152,7 @@
     <string name="sensordata_enable">Enable sensordata collection</string>
     <!--<string name="sensordata_enable_magneticfield">Enable compass data collection</string>-->
     <string name="sensordata_interval">Sensordata collection interval</string>
-    <string name="sensordata_interval_title">Times between fixes</string>
+    <string name="sensordata_interval_title">Number of sensor samples between one GPS fix</string>
     <string name="sensordata_interval_hint">Enter number (max 99)</string>
 
     <string name="retry_time_title">Duration to match accuracy</string>
@@ -443,5 +443,10 @@
     <string name="txt_accelerometer">Accelerometer:</string>
     <string name="txt_compass">Compass:</string>
     <string name="txt_orientation">Orientation:</string>
+    <string name="sensor_samplesize">Sampling duration</string>
+    <string name="sensordata_samplesize_dialogtitle">Sample duration in ms</string>
+    <string name="sensordata_samplesize_hint">Time in ms (max 9999)</string>
+    <string name="sensordata_interval_summary">Number of samples between one GPS fix</string>
+    <string name="sensordata_interval_number">Number of samples</string>
 
 </resources>

@@ -58,6 +58,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class GpsLoggingService extends Service  {
     private static NotificationManager notificationManager;
@@ -104,6 +105,15 @@ public class GpsLoggingService extends Service  {
         nextPointAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         //nextSensorDataAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         nextSensorDataAlarmManager = nextPointAlarmManager;
+
+        sensorManager = (SensorManager) getApplicationContext().getSystemService(Context.SENSOR_SERVICE);
+        List<Sensor> sensorList = sensorManager.getSensorList(Sensor.TYPE_ALL);
+
+        LOG.debug("---- GPSservice onCreate, SensorList start");
+        for (Sensor s: sensorList){
+            LOG.debug(s.toString() + "\n");
+        }
+        LOG.debug("---- GPSservice onCreate, SensorList end");
 
         registerEventBus();
     }
@@ -311,6 +321,7 @@ public class GpsLoggingService extends Service  {
                     if(bundle.get(Intent.EXTRA_ALARM_COUNT) != "0"){
                         needToStartGpsManager = true;
                         needToStartSensorDataManager = true;
+                        LOG.debug("Start sensormanager due to alarmcount intent extra");
                     }
                 }
                 catch (Throwable t){
@@ -327,6 +338,8 @@ public class GpsLoggingService extends Service  {
                 if (needToStartSensorDataManager && session.isStarted()) {
                     startSensorManager();
                 }
+            } else {
+                LOG.debug(String.format("HandleIntent recieved Intent %s with null bundle",intent.toString()));
             }
         } else {
             // A null intent is passed in if the service has been killed and restarted.
@@ -586,14 +599,15 @@ public class GpsLoggingService extends Service  {
             sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
             accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);// equiv: gravity, avail in software
             magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD); // Compass -> basically only useful for compass / heading usage
-            //gyroscope = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE); // rate of rotation in rad/s //FIXME: Check for avail and if avail create
+            gyroscope = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE); // rate of rotation in rad/s //FIXME: Check for avail and if avail create
 
             //LOG.debug("SESSION: Accel enabled:"+session.isSensorEnabled()+" compass enabled:"+session.isSensorMagneticFieldEnabled());
             LOG.debug("SESSION: Sensordata enabled:"+session.isSensorEnabled());
             //LOG.debug("PREFHELPER: Accel enabled:"+preferenceHelper.isSensorDataEnabled()+" compass enabled:"+preferenceHelper.getSensorDataEnabledMagneticField());
             LOG.debug("PREFHELPER: Sensordata enabled:"+preferenceHelper.isSensorDataEnabled());
 
-            LOG.info("Requesting sensor updates");
+            long timestamp = System.currentTimeMillis();
+            LOG.info(String.format("Requesting sensor updates: %d", timestamp));
             /*
                 analog zum gps:
                     - normalfall listener aktivieren je nach bedingung
@@ -603,10 +617,14 @@ public class GpsLoggingService extends Service  {
                         - nicht relevant für sensordaten
              */
 
-            sensorManager.registerListener(gpsLocationListener, accelerometer, SensorManager.SENSOR_DELAY_GAME);
-            sensorManager.registerListener(gpsLocationListener, magnetometer, SensorManager.SENSOR_DELAY_GAME);
+            sensorManager.registerListener(gpsLocationListener, accelerometer, SensorManager.SENSOR_DELAY_UI);
+            sensorManager.registerListener(gpsLocationListener, magnetometer, SensorManager.SENSOR_DELAY_FASTEST);
+            //sensorManager.registerListener(gpsLocationListener, gyroscope, SensorManager.SENSOR_DELAY_UI);
 
+
+            //session.setLatestSensorDataTimeStamp(timestamp);
             session.setSensorEnabled(true);
+
 
 //            if (session.isSensorEnabled()){
 //                startAbsoluteTimer(); //FIXME: Probably only needed for GPS and retry for fixes.
@@ -742,10 +760,11 @@ public class GpsLoggingService extends Service  {
      * Stops the sensor data collection
      */
     private void stopSensorManager(){
-
-        if (gpsLocationListener != null) {
-            LOG.debug("Removing sensorDataListener updates");
-            sensorManager.unregisterListener(gpsLocationListener);
+        if (preferenceHelper.isSensorDataEnabled() || session.isSensorEnabled()){
+            if (gpsLocationListener != null) {
+                LOG.debug("Removing sensorDataListener updates");
+                sensorManager.unregisterListener(gpsLocationListener);
+            }
         }
     }
 
@@ -997,10 +1016,14 @@ public class GpsLoggingService extends Service  {
     void onSensorChanged (SensorEvent event){
         //TODO: onLocationChanged equivalent for sensor data here?
         long timestamp = System.currentTimeMillis();
-        if ((session.getLatestSensorDataTimeStamp() + 100) < timestamp){
+        if ((session.getLatestSensorDataTimeStamp() + preferenceHelper.getSensorDataSampleSize()) <= timestamp){
             LOG.debug("sensorChanged: below sampling time limit, continue, sensor object: " + event.toString());
         } else {
-            LOG.debug("sensorChanged: reached sampling time limit, disabled sensors, sensor object: " + event.toString());
+            LOG.debug(String.format("sensorChanged: reached sampling time limit, disabled sensors, " +
+                    "\n sensor object: %s, \n latestSensorTS: %d + prefDuration: %d < curTs: %d condition: %b",
+                    "sensor="+event.sensor.toString()+" event.values="+ Arrays.toString(event.values),
+                    session.getLatestSensorDataTimeStamp(),preferenceHelper.getSensorDataSampleSize(),timestamp,
+                    (session.getLatestSensorDataTimeStamp() + preferenceHelper.getSensorDataSampleSize()) <= timestamp));
             session.setLatestSensorDataTimeStamp(timestamp);
             stopSensorManagerAndResetAlarm(timestamp, null, null, null);
         }

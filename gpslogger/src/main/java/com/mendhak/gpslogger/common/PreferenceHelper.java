@@ -1096,6 +1096,15 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.SENSORDATA_INTERVAL, String.valueOf(interval)).apply();
     }
 
+    @ProfilePreference(name= PreferenceNames.SENSORDATA_SAMPLESIZE)
+    public int getSensorDataSampleSize(){
+        return Strings.toInt(prefs.getString(PreferenceNames.SENSORDATA_SAMPLESIZE, "1"), 200);
+    }
+
+    public void setSensorDataSampleSize(int size){
+        prefs.edit().putString(PreferenceNames.SENSORDATA_SAMPLESIZE, String.valueOf(size)).apply();
+    }
+
     @SuppressWarnings("unchecked")
     public void savePropertiesFromPreferences(File f) throws IOException {
 

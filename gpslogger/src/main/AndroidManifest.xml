@@ -18,7 +18,7 @@
                      tools:ignore="MockLocation"/>
     <!-- https://developer.android.com/reference/android/Manifest.permission.html#REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
          Required to ask for Doze mode deactivation -->
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <!--<uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />-->
 
     <application
         tools:replace="android:theme"

@@ -126,4 +126,5 @@ public  class PreferenceNames {
     public static final String SENSORDATA_ENABLE = "sensordata_enable";
     //public static final String SENSORDATA_ENABLE_MAGNETICFIELD = "sensordata_enable_magneticfield";
     public static final String SENSORDATA_INTERVAL = "sensordata_interval";
+    public static final String SENSORDATA_SAMPLESIZE = "sensordata_samplesize";
 }

@@ -56,6 +56,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     // Sensor Data Extensions
     protected float[] mGravity = null;
     protected float[] mGeomagnetic = null;
+    protected int numSensorSamples = 0;
 
     protected long nextTimestampToSave = 0;
     protected long lastTimestamp = 0;
@@ -228,20 +229,43 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     public void onSensorChanged(SensorEvent event){
         LOG.debug("onSensorChanged Event. event.sensor="+event.sensor.toString()+"\n event.values="+ Arrays.toString(event.values));
 
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
-            accelerometer.add(event);
-            mGravity = event.values.clone();
-        if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
-            magneticField.add(event);
-            mGeomagnetic = event.values.clone();
+        switch (event.sensor.getType()){
+            case Sensor.TYPE_ACCELEROMETER:
+                this.accelerometer.add(event);
+                this.mGravity = event.values.clone();
+                break;
+            case Sensor.TYPE_MAGNETIC_FIELD:
+                this.magneticField.add(event);
+                this.mGeomagnetic = event.values.clone();
+                break;
+            default:
+                LOG.debug(String.format("onSensorChanged undesired type recieved: %d sensor: %s, values: %s",event.sensor.getType(),event.sensor.toString(),Arrays.toString(event.values)));
+        }
 
-        calculateSensors(event);
+        LOG.debug(String.format("onSensorChanged \n accel event list size: %d content %s \n magnetic event list size: %d content %s  " +
+                "\n this.accel=%s this.magnetic=%s \n reported accuracy %d \n reported type: %s"
+                ,this.accelerometer.size(),Arrays.toString(this.accelerometer.toArray()),
+                this.magneticField.size(),Arrays.toString(this.magneticField.toArray()),
+                Arrays.toString(this.mGravity),
+                Arrays.toString(this.mGeomagnetic),
+                event.accuracy,
+                event.sensor.toString()+":"+event.sensor.getStringType()));
+
+        if (this.numSensorSamples >= 10) {
+            LOG.debug("Stopping sensor manager, recorded more than 5 samples without success completion of measurement");
+            loggingService.stopSensorManagerAndResetAlarm(System.currentTimeMillis(),null,null,null);
+            this.numSensorSamples = 0;
+        } else {
+            this.numSensorSamples++;
+            LOG.debug(String.format("onSensorChanged current number of samples %d of 5",this.numSensorSamples));
+            calculateSensors(event);
+        }
         //mGravity = null;
         //mGeomagnetic = null;
-        loggingService.onSensorChanged(event);
+        //loggingService.onSensorChanged(event);
     }
 
-    
+
     /**
      * Based on code found here: https://github.com/shiptrail/android-main
      * Records sensordata to be shipped with next location
@@ -249,29 +273,34 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
      * orientation is created from accel + magnetic -> billig gyro
      */
     public void calculateSensors(SensorEvent event) {
-        LOG.debug("onSensorChanged Event. event.sensor="+event.sensor.toString()+"\n event.values="+ Arrays.toString(event.values));
+        LOG.debug("calculateSensors Event. event.sensor="+event.sensor.toString()+"\n event.values="+ Arrays.toString(event.values));
         //check if we want to get sensor data already
         SensorDataObject.Orientation oo = null;
         SensorDataObject.Accelerometer ao = null;
         SensorDataObject.Compass co = null;
         long current = System.currentTimeMillis();
-        session.setLatestSensorDataTimeStamp(current);
+        //session.setLatestSensorDataTimeStamp(current);
         //if (current >= nextTimestampToSave) {
         //    lastTimestamp = nextTimestampToSave;
         //    nextTimestampToSave = current;
 
 
-            if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
-                mGravity = event.values.clone();
-            if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
-                mGeomagnetic = event.values.clone();
-            if (mGravity != null && mGeomagnetic != null) {
-                float R[] = new float[9];
+//            if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
+//                mGravity = event.values.clone();
+//            if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
+//                mGeomagnetic = event.values.clone();
+        LOG.debug(String.format("calculate sensors: ts: %d mGravity!=null: %b, mGeomagnetic!=null: %b, gravity: %s, geomag: %s",
+                    current,this.mGravity!=null,this.mGeomagnetic!=null
+                    ,Arrays.toString(this.mGravity),Arrays.toString(this.mGeomagnetic)));
+            if (this.mGravity != null && this.mGeomagnetic != null) {
+                float Rs[] = new float[9];
                 float I[] = new float[9];
-                boolean success = SensorManager.getRotationMatrix(R, I, mGravity, mGeomagnetic);
+                boolean success = SensorManager.getRotationMatrix(Rs, I, this.mGravity, this.mGeomagnetic);
+                LOG.debug(String.format("calcSensors in getRotationMatrix, success=%b, R=%s,I=%s",success, Arrays.toString(Rs),Arrays.toString(I)));
                 if (success) {
+                    LOG.debug(String.format("calcSensors in getRotationMatrix, in success"));
                     float orientation[] = new float[3];
-                    SensorManager.getOrientation(R, orientation);
+                    SensorManager.getOrientation(Rs, orientation);
 
                     float azimuth = orientation[0] * (180 / (float) Math.PI);
                     float compass = azimuth;
@@ -311,10 +340,14 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                     LOG.debug(String.format("onSensorChanged compass obj added: %s \n compass array: %s",co.toString(),Arrays.toString(this.latestCompass.toArray())));
 
                     //determine when the next sensor data shall be monitored
-                    nextTimestampToSave += preferenceHelper.getSensorDataInterval(); // had a /10, should be placed somewhere else
+                    //nextTimestampToSave += preferenceHelper.getSensorDataInterval(); // had a /10, should be placed somewhere else
 
                     mGravity = null;
                     mGeomagnetic = null;
+
+                    LOG.debug("all sensor readings present, calculated data + stop,reset&reschedule sensormanager now");
+                    loggingService.stopSensorManagerAndResetAlarm(current, ao, oo, co);
+                    this.numSensorSamples = 0;
                 }
             }
         //}

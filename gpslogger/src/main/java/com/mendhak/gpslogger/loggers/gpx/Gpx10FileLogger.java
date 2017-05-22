@@ -351,7 +351,7 @@ class Gpx10WriteHandler implements Runnable {
             if (accelerometer != null && accelerometer.size() > 0) {
                 accelString.append("<sensordata:accelerometer>");
                 for (SensorDataObject.Accelerometer accel : accelerometer) {
-                    accelString.append(String.format("(%1$.3f,%1$.3f,%1$.3f),", accel.x, accel.y, accel.z));
+                    accelString.append(String.format("(%1$.3f;%1$.3f;%1$.3f),", accel.x, accel.y, accel.z));
                 }
                 accelString.append("</sensordata:accelerometer>\n");
             }
@@ -360,7 +360,7 @@ class Gpx10WriteHandler implements Runnable {
             if (compass != null && compass.size() > 0) {
                 compassString.append("<sensordata:compass>");
                 for (SensorDataObject.Compass comp : compass) {
-                    compassString.append(String.format("%1$.3f,", comp.deg));
+                    compassString.append(String.format("%1$.3f;", comp.deg));
                 }
                 compassString.append("</sensordata:compass>\n");
             }
@@ -369,7 +369,7 @@ class Gpx10WriteHandler implements Runnable {
             if (orientation != null && orientation.size() > 0) {
                 orientationString.append("<sensordata:orientation>");
                 for (SensorDataObject.Orientation orient : orientation) {
-                    orientationString.append(String.format("(%1$.3f,%1$.3f,%1$.3f),", orient.azimuth, orient.pitch, orient.roll));
+                    orientationString.append(String.format("(%1$.3f;%1$.3f;%1$.3f),", orient.azimuth, orient.pitch, orient.roll));
                 }
                 orientationString.append("</sensordata:orientation>\n");
             }
