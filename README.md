@@ -57,32 +57,28 @@ Feel free to adopt and document your own OS and IDEs.  These instructions are fo
 
 Follow the instructions on the [Android Developer Website](http://developer.android.com/sdk/installing/index.html) to set up your computer for development.
 
-On Ubuntu 64bit, you may also need `ia32-libs`, follow [these instructions](http://stackoverflow.com/a/21956268/974369).  I did not need this for Ubuntu 14.04.
 
 
 ![intellij](assets/logo_IntelliJIDEA.png)
 
 Download and install [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/download/index.html), which is free.
-Note that the Android build system version 0.9 does not work well with anything earlier than IntelliJ 13.1.2.
 
-
-### Get the Android SDK extra repositories
-
-This project uses certain Google libraries, you will need to add them. Run
-
-    <AndroidSDK>/tools/android
-
-Which brings up the Android SDK manager.  In here, choose
-
-*  Tools > Android SDK build tools
-*  Extras > Android Support Repository
-*  Extras > Android Support Library
-*  Extras > Google Play services
-*  Extras > Google Repository
 
 ### Clone the GPSLogger repository
 
     git clone git://github.com/mendhak/gpslogger.git
+
+### Get the Android SDK extra repositories
+
+This project uses certain Android libraries, you can install them using Google's poorly implemented [`sdkmanager`](https://developer.android.com/studio/command-line/sdkmanager.html):
+
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'tools'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platform-tools'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'build-tools;25.0.3'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platforms;android-23'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;m2repository'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;android;m2repository'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;google_play_services'
 
 
 ### Create local.properties
