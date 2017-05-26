@@ -229,7 +229,7 @@
   <string name="txt_annotation">Obilježavanje:</string>
   <string name="txt_time_isoformat">UTC vrijeme (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Pružatelj:</string>
-  <string name="annotation_requires_logging">Obilježavanje zahtijeva zapisivanje u GPX/KML/Prilagođen URL</string>
+  <string name="annotation_requires_logging">Obilježavanje zahtijeva zapisivanje u CSV/GPX/KML/Prilagođen URL</string>
   <string name="gpslogger_folder_title">Spremi u mapu</string>
   <string name="gpslogger_folder_summary">Gdje da sprema datoteku zapisivanja, zadano je/sdcard/GPSLogger</string>
   <string name="autoftp_directory">Mapa</string>

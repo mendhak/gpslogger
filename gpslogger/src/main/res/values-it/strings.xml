@@ -235,7 +235,7 @@
   <string name="txt_annotation">Annotazione:</string>
   <string name="txt_time_isoformat">Tempo UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Fornitore:</string>
-  <string name="annotation_requires_logging">Le annotazioni richiedono che sia attivato il salvataggio su GPX/KML/servercustom</string>
+  <string name="annotation_requires_logging">Le annotazioni richiedono che sia attivato il salvataggio su CSV/GPX/KML/servercustom</string>
   <string name="gpslogger_folder_title">Salva file nella cartella</string>
   <string name="gpslogger_folder_summary">Dove salvare i files, default in /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Cartella</string>
