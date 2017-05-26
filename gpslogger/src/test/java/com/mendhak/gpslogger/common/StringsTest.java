@@ -11,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -180,6 +181,34 @@ public class StringsTest {
         assertThat("Profile replaced with profile name", actual, is(expected));
 
     }
+
+
+    @Test
+    public void getFormattedCustomFileName_DAYNAME_ReplaceWithThreeLetterDayName(){
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+        GregorianCalendar greg = new GregorianCalendar();
+        greg.setTimeInMillis(1495663380828l); //24 May 2017
+
+        String actual = Strings.getFormattedCustomFileName("basename_%DAYNAME", greg, ph);
+        String expected = "basename_wed";
+
+        assertThat("Day name substituted in file name", actual, is(expected));
+    }
+
+    @Test
+    public void getFormattedCustomFileName_MONTHNAME_ReplaceWithThreeLetterDayName(){
+        PreferenceHelper ph = mock(PreferenceHelper.class);
+        GregorianCalendar greg = new GregorianCalendar();
+        greg.setTimeInMillis(1495663380828l); //24 May 2017
+
+        String actual = Strings.getFormattedCustomFileName("basename_%MONTHNAME", greg, ph);
+        String expected = "basename_may";
+
+        assertThat("Month name substituted in file name", actual, is(expected));
+    }
+
+
+
 
     private Context GetDescriptiveTimeString_Context(){
         Context ctx = mock(Context.class);
