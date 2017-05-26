@@ -63,7 +63,9 @@ public class Gpx10FileLogger implements FileLogger {
     }
 
     public void annotate(String description, Location loc) throws Exception {
-
+        
+        description = Strings.cleanDescription(description);
+        
         long time = loc.getTime();
         if (time <= 0) {
             time = System.currentTimeMillis();

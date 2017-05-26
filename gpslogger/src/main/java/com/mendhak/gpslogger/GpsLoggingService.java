@@ -1012,7 +1012,7 @@ public class GpsLoggingService extends Service  {
 
     @EventBusHook
     public void onEvent(CommandEvents.Annotate annotate){
-        final String desc = Strings.cleanDescription(annotate.annotation);
+        final String desc = annotate.annotation;
         if (desc.length() == 0) {
             LOG.debug("Clearing annotation");
             session.clearDescription();
