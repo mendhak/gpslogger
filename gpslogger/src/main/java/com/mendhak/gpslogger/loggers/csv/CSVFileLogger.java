@@ -22,6 +22,7 @@ package com.mendhak.gpslogger.loggers.csv;
 import android.location.Location;
 import android.support.annotation.Nullable;
 import com.mendhak.gpslogger.common.Maths;
+import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.loggers.Files;
@@ -46,34 +47,18 @@ public class CSVFileLogger implements FileLogger {
 
     @Override
     public void write(Location loc) throws Exception {
-        if (!file.exists()) {
-            file.createNewFile();
-
-            FileOutputStream writer = new FileOutputStream(file, true);
-            BufferedOutputStream output = new BufferedOutputStream(writer);
-            String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider,hdop,vdop,pdop,geoidheight,ageofdgpsdata,dgpsid,activity,battery\n";
-            output.write(header.getBytes());
-            output.flush();
-            output.close();
-
+        if (!Session.getInstance().hasDescription()) {
+            annotate("", loc);
         }
-
-        FileOutputStream writer = new FileOutputStream(file, true);
-        BufferedOutputStream output = new BufferedOutputStream(writer);
-
-        String dateTimeString = Strings.getIsoDateTime(new Date(loc.getTime()));
-        String csvLine = getCsvLine(loc, dateTimeString);
-
-
-        output.write(csvLine.getBytes());
-        output.flush();
-        output.close();
-        Files.addToMediaDatabase(file, "text/csv");
     }
 
-    String getCsvLine(Location loc, String dateTimeString) {
+    String getCsvLine(String description, Location loc, String dateTimeString) {
 
-        String outputString = String.format(Locale.US, "%s,%f,%f,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", dateTimeString,
+        if (description.length() > 0) {
+            description = "\"" + description.replaceAll("\"", "\"\"") + "\"";
+        }
+
+        String outputString = String.format(Locale.US, "%s,%f,%f,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", dateTimeString,
                 loc.getLatitude(),
                 loc.getLongitude(),
                 loc.hasAltitude() ? loc.getAltitude() : "",
@@ -89,14 +74,37 @@ public class CSVFileLogger implements FileLogger {
                 (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("AGEOFDGPSDATA"))) ? loc.getExtras().getString("AGEOFDGPSDATA") : "",
                 (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("DGPSID"))) ? loc.getExtras().getString("DGPSID") : "",
                 (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("DETECTED_ACTIVITY"))) ? loc.getExtras().getString("DETECTED_ACTIVITY") : "",
-                (batteryLevel != null) ? batteryLevel : ""
+                (batteryLevel != null) ? batteryLevel : "",
+                description
         );
         return outputString;
     }
 
     @Override
     public void annotate(String description, Location loc) throws Exception {
+        if (!file.exists()) {
+            file.createNewFile();
 
+            FileOutputStream writer = new FileOutputStream(file, true);
+            BufferedOutputStream output = new BufferedOutputStream(writer);
+            String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider,hdop,vdop,pdop,geoidheight,ageofdgpsdata,dgpsid,activity,battery,annotation\n";
+            output.write(header.getBytes());
+            output.flush();
+            output.close();
+
+        }
+
+        FileOutputStream writer = new FileOutputStream(file, true);
+        BufferedOutputStream output = new BufferedOutputStream(writer);
+
+        String dateTimeString = Strings.getIsoDateTime(new Date(loc.getTime()));
+        String csvLine = getCsvLine(description, loc, dateTimeString);
+
+
+        output.write(csvLine.getBytes());
+        output.flush();
+        output.close();
+        Files.addToMediaDatabase(file, "text/csv");
     }
 
     @Override
