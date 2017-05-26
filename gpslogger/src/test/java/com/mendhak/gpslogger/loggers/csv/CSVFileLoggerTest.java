@@ -1,8 +1,8 @@
-package com.mendhak.gpslogger_XYZ.loggers.csv;
+package com.mendhak.gpslogger.loggers.csv;
 
 import android.location.Location;
 import android.test.suitebuilder.annotation.SmallTest;
-import com.mendhak.gpslogger_XYZ.loggers.MockLocations;
+import com.mendhak.gpslogger.loggers.MockLocations;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
