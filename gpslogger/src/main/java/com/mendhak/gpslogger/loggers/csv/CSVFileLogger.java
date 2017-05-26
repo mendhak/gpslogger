@@ -52,6 +52,10 @@ public class CSVFileLogger implements FileLogger {
         }
     }
 
+    String getCsvLine(Location loc, String dateTimeString) {
+        return getCsvLine("", loc, dateTimeString);
+    }
+
     String getCsvLine(String description, Location loc, String dateTimeString) {
 
         if (description.length() > 0) {
