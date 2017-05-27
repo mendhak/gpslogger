@@ -79,12 +79,17 @@ public class CustomUrlFragment extends PermissionedPreferenceFragment implements
     public boolean onPreferenceClick(Preference preference) {
         if(preference.getKey().equals("customurl_legend_1")){
 
-            String legend1 = MessageFormat.format("{0} %LAT<br />{1} %LON<br />{2} %DESC<br />{3} %SAT<br />{4} %ALT<br />{5} %SPD<br />{6} %ACC<br />{7} %DIR<br />{8} %PROV<br />{9} %TIMESTAMP<br />{10} %TIME<br /> {11} %BATT<br />{12} %AID<br />{13} %SER<br />{14} %ACT",
+            String legend1 = MessageFormat.format("{0} %LAT<br />{1} %LON<br />{2} %DESC<br />{3} %SAT<br />{4} %ALT<br />" +
+                            "{5} %SPD<br />{6} %ACC<br />{7} %DIR<br />{8} %PROV<br />{9} %TIMESTAMP<br />" +
+                            "{10} %TIME<br />{11} %STARTTIMESTAMP<br />{12} %BATT<br />{13} %AID<br />{14} %SER<br />" +
+                            "{15} %ACT",
                     getString(R.string.txt_latitude), getString(R.string.txt_longitude), getString(R.string.txt_annotation),
                     getString(R.string.txt_satellites), getString(R.string.txt_altitude), getString(R.string.txt_speed),
                     getString(R.string.txt_accuracy), getString(R.string.txt_direction), getString(R.string.txt_provider),
-                    "Timestamp (epoch seconds)",
-                    getString(R.string.txt_time_isoformat), "Battery:", "Android ID:", "Serial:", getString(R.string.txt_activity));
+                    getString(R.string.txt_timestamp_epoch),
+                    getString(R.string.txt_time_isoformat),
+                    getString(R.string.txt_starttimestamp_epoch),
+                    getString(R.string.txt_battery), "Android ID ", "Serial ", getString(R.string.txt_activity));
             Dialogs.alert(getString(R.string.parameters), legend1, getActivity());
 
         }

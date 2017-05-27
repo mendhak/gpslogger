@@ -59,13 +59,13 @@ public class CustomUrlLogger implements FileLogger {
 
         AbstractMap.SimpleEntry<String,String> credentials = getBasicAuth(customLoggingUrl);
         String finalUrl  = removeCredentialsFromUrl(customLoggingUrl, credentials.getKey(), credentials.getValue());
-        finalUrl = getFormattedUrl(finalUrl, loc, description, androidId, batteryLevel, Strings.getBuildSerial());
+        finalUrl = getFormattedUrl(finalUrl, loc, description, androidId, batteryLevel, Strings.getBuildSerial(), Session.getInstance().getStartTimeStamp());
 
         JobManager jobManager = AppSettings.getJobManager();
         jobManager.addJobInBackground(new CustomUrlJob(finalUrl, credentials.getKey(), credentials.getValue(), new UploadEvents.CustomUrl()));
     }
 
-    public String getFormattedUrl(String customLoggingUrl, Location loc, String description, String androidId, float batteryLevel, String buildSerial) throws Exception {
+    public String getFormattedUrl(String customLoggingUrl, Location loc, String description, String androidId, float batteryLevel, String buildSerial, long sessionStartTimeStamp) throws Exception {
 
         String logUrl = customLoggingUrl;
         SerializableLocation sLoc = new SerializableLocation(loc);
@@ -80,6 +80,7 @@ public class CustomUrlLogger implements FileLogger {
         logUrl = logUrl.replaceAll("(?i)%spd", String.valueOf(sLoc.getSpeed()));
         logUrl = logUrl.replaceAll("(?i)%timestamp", String.valueOf(sLoc.getTime()/1000));
         logUrl = logUrl.replaceAll("(?i)%time", String.valueOf(Strings.getIsoDateTime(new Date(sLoc.getTime()))));
+        logUrl = logUrl.replaceAll("(?i)%starttimestamp", String.valueOf(sessionStartTimeStamp/1000));
         logUrl = logUrl.replaceAll("(?i)%batt", String.valueOf(batteryLevel));
         logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));
         logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(buildSerial));
