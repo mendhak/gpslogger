@@ -59,13 +59,16 @@ public class CustomUrlLogger implements FileLogger {
 
         AbstractMap.SimpleEntry<String,String> credentials = getBasicAuth(customLoggingUrl);
         String finalUrl  = removeCredentialsFromUrl(customLoggingUrl, credentials.getKey(), credentials.getValue());
-        finalUrl = getFormattedUrl(finalUrl, loc, description, androidId, batteryLevel, Strings.getBuildSerial(), Session.getInstance().getStartTimeStamp());
+        finalUrl = getFormattedUrl(finalUrl, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
+                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
 
         JobManager jobManager = AppSettings.getJobManager();
         jobManager.addJobInBackground(new CustomUrlJob(finalUrl, credentials.getKey(), credentials.getValue(), new UploadEvents.CustomUrl()));
     }
 
-    public String getFormattedUrl(String customLoggingUrl, Location loc, String description, String androidId, float batteryLevel, String buildSerial, long sessionStartTimeStamp) throws Exception {
+    public String getFormattedUrl(String customLoggingUrl, Location loc, String description, String androidId,
+                                  float batteryLevel, String buildSerial, long sessionStartTimeStamp, String fileName)
+            throws Exception {
 
         String logUrl = customLoggingUrl;
         SerializableLocation sLoc = new SerializableLocation(loc);
@@ -85,6 +88,7 @@ public class CustomUrlLogger implements FileLogger {
         logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));
         logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(buildSerial));
         logUrl = logUrl.replaceAll("(?i)%act", String.valueOf(sLoc.getDetectedActivity()));
+        logUrl = logUrl.replaceAll("(?i)%filename", fileName);
 
         return logUrl;
     }
