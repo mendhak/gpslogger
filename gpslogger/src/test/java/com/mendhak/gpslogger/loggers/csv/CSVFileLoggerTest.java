@@ -165,6 +165,18 @@ public class CSVFileLoggerTest {
 
     }
 
+    @Test
+    public void getCsvLine_DescriptionContainsDoubleQuote_ReturnsCSVLineWithEscapedQuote(){
+        CSVFileLogger plain = new CSVFileLogger(null,47.238f);
+        Location loc = MockLocations.builder("MOCK", 12.222,14.151).build();
+
+        String actual = plain.getCsvLine("a..\"b\"..'c'", loc, "2011-09-17T18:45:33Z");
+        String expected = "2011-09-17T18:45:33Z,12.222000,14.151000,,,,,0,MOCK,,,,,,,,47.238,\"a..\"\"b\"\"..'c'\"\n";
+
+        assertThat("CSV With annotation", actual, is(expected));
+
+    }
+
 
 
 
