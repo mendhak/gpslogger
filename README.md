@@ -2,7 +2,7 @@ GPSLogger [![Build Status](https://travis-ci.org/mendhak/gpslogger.svg?branch=ma
 =========
 
 
-GPSLogger is an Android app that logs GPS information to GPX, KML or text files and has options for annotating and sharing.
+GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, Google Drive, Dropbox, Email). This app aims to be as battery efficient as possible.
 
 [Read about GPSLogger's features here](http://mendhak.github.com/gpslogger/)
 
@@ -12,11 +12,11 @@ You can [download it from Google Play](https://play.google.com/store/apps/detail
 
 You can download the APK directly [from the releases](https://github.com/mendhak/gpslogger/releases).
 
-The oldest Android 2.x release is [here](https://github.com/mendhak/gpslogger/releases/tag/v43).
+The last Android 2.x release is [here](https://github.com/mendhak/gpslogger/releases/tag/v43).
 
 ## Contribute
 
-You can help with [translations](http://crowdin.net/project/gpslogger-for-android)
+You can help with [translations](http://crowdin.net/project/gpslogger-for-android) on Crowdin.
 
 You can also submit [pull requests](https://help.github.com/articles/using-pull-requests) for bug fixes and new features.
 
@@ -29,7 +29,7 @@ I'm not very good at UIs, so any work with the layouts would be appreciated!
 
 ## Donate
 
-[Bitcoin](https://www.coinbase.com/mendhak) | [Paypal](https://paypal.me/mendhak)
+[Bitcoin](https://blockchain.info/payment_request?address=14bKk4sR1AD7avuJfBx2izy2FwyqMXEvcY) | [Paypal](https://paypal.me/mendhak) | [LTC](http://ltc.blockr.io/address/info/LP6gPtk1rkXyKYazyUJAkJpyc4Ghp8qxGs)
 
 
 ## Verifying
@@ -84,7 +84,7 @@ This project uses certain Android libraries, you can install them using Google's
 
 ### Create local.properties
 
-IntelliJ/Android Studio [may not detect](http://stackoverflow.com/questions/19794200/gradle-android-and-the-android-home-sdk-location) your `ANDROID_HOME` environment variable, so create a file called `local.properties`, pointing at your Android SDK directory.
+Create a file called `local.properties`, pointing at your Android SDK directory.
 
     cd gpslogger
     echo "sdk.dir=/home/mendhak/Programs/Android" > local.properties
