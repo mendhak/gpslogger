@@ -22,7 +22,6 @@ package com.mendhak.gpslogger.loggers.csv;
 import android.location.Location;
 import android.support.annotation.Nullable;
 import com.mendhak.gpslogger.common.Maths;
-import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.loggers.Files;
@@ -47,9 +46,7 @@ public class CSVFileLogger implements FileLogger {
 
     @Override
     public void write(Location loc) throws Exception {
-        if (!Session.getInstance().hasDescription()) {
             annotate("", loc);
-        }
     }
 
     String getCsvLine(Location loc, String dateTimeString) {
