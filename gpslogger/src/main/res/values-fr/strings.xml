@@ -96,6 +96,7 @@
   <string name="log_gpx_summary">Enregistrer les localisations au format GPX v1.0</string>
   <string name="log_kml_title">Enregistrer en KML</string>
   <string name="log_kml_summary">Enregistrer les localisations au format KML v2.2</string>
+  <string name="log_plain_text_title">Journaliser au format CSV</string>
   <string name="log_plain_text_summary">Enregistrer les localisations au format CSV</string>
   <string name="new_file_creation_title">Nouvelle création du fichier</string>
   <string name="new_file_creation_summary">Que ce soit pour créer un nouveau fichier une fois par jour ou chaque fois que vous démarrez.</string>
@@ -235,7 +236,7 @@ une plus grande précision à basses fréquences.    </string>
   <string name="txt_annotation">Annotation :</string>
   <string name="txt_time_isoformat">Heure UTC (2011-12-25T15:27:33Z) :</string>
   <string name="txt_provider">Fournisseur :</string>
-  <string name="annotation_requires_logging">Les annotations nécessitent l\'enregistrement en CSV/GPX/KML/URL personnalisée</string>
+  <string name="annotation_requires_logging">Les annotations nécessitent l\'enregistrement en GPX/KML/URL personnalisée</string>
   <string name="gpslogger_folder_title">Enregistrer dans le dossier</string>
   <string name="gpslogger_folder_summary">Où enregistrer les fichiers, par défaut dans /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Dossier</string>
@@ -325,4 +326,9 @@ une plus grande précision à basses fréquences.    </string>
   <string name="ssl_certificate_add_to_keystore">Ajouter ce certificat au magasin de clés local ?</string>
   <string name="ssl_certificate_is_valid">Le certificat est valide</string>
   <string name="hide_notification_from_status_bar">Masquer les notifications de la barre d’état</string>
+  <string name="sftp_setup_title">SFTP</string>
+  <string name="sftp_private_key_path">Clé privée</string>
+  <string name="sftp_private_key_passphrase">Mot de passe de clé privée</string>
+  <string name="sftp_validate_test_upload">Valider la clé d’hôte et tester l\'envoi</string>
+  <string name="sftp_validate_accept_host_key">Faut-il accepter cette clé d’hôte ?</string>
 </resources>

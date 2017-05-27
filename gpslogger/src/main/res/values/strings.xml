@@ -443,9 +443,9 @@
     <string name="txt_accelerometer">Accelerometer:</string>
     <string name="txt_compass">Compass:</string>
     <string name="txt_orientation">Orientation:</string>
-    <string name="sensor_samplesize">Sampling duration</string>
-    <string name="sensordata_samplesize_dialogtitle">Sample duration in ms</string>
-    <string name="sensordata_samplesize_hint">Time in ms (max 9999)</string>
+    <string name="sensor_samplesize">Sampling attempts</string>
+    <string name="sensordata_samplesize_dialogtitle">Number of sensor events accepted</string>
+    <string name="sensordata_samplesize_hint">Number of sensor events accepted (max 9)</string>
     <string name="sensordata_interval_summary">Number of samples between one GPS fix</string>
     <string name="sensordata_interval_number">Number of samples</string>
 

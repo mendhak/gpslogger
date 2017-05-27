@@ -40,16 +40,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/*/
-GPX Standard http://www.topografix.com/GPX/1/1/
-Metadaten wie generierendes Schiff, / Schiffsklasse kann in metadataType abgelegt werden, 1x pro xml
- http://geo.javawa.nl/schemas/GpxExtensionsv3.xsd
- extensionType geht sowohl im hauptknoten als auch in allen waypoints, wird nicht gecheckt, ist also frei für uns
- https://de.wikipedia.org/wiki/GPS_Exchange_Format
- track sind sortierte punkte, also will man vermutlich eher da die extensions reinbauen, waypoints sind more explicit, so wie annotationen
- http://www.topografix.com/gpx.asp
-*/
-
 
 public class Gpx10FileLogger implements FileLogger {
     protected final static Object lock = new Object();
@@ -377,11 +367,16 @@ class Gpx10WriteHandler implements Runnable {
             }
 
             if (accelString.length() > 0 || compassString.length() > 0 || orientationString.length() > 0) {
-                track.append("<extensions>\n");
+                /*
+                    GPX10 does not support the extensions container of GPX11.
+                    However it does support custom "private extensions", this writer is GPX10 compliant, thus omit the extension container.
+                    See also: http://www.topografix.com/GPX/1/0/gpx.xsd and http://www.topografix.com/GPX/1/1/gpx.xsd
+                 */
+                //track.append("<extensions>\n");
                 track.append(accelString);
                 track.append(compassString);
                 track.append(orientationString);
-                track.append("</extensions>");
+                //track.append("</extensions>");
             }
         }
 

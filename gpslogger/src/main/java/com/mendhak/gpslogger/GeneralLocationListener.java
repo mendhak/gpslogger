@@ -58,12 +58,12 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     protected float[] mGeomagnetic = null;
     protected int numSensorSamples = 0;
 
-    protected long nextTimestampToSave = 0;
     protected long lastTimestamp = 0;
     protected ArrayList<SensorDataObject.Accelerometer> latestAccelerometer = new ArrayList<>();
     protected ArrayList<SensorDataObject.Compass> latestCompass  = new ArrayList<>();
     protected ArrayList<SensorDataObject.Orientation> latestOrientation = new ArrayList<>();
 
+    //FIXME: These two arrays and their usage is for debug usage. Remove once sensor collection is done.
     protected ArrayList<SensorEvent> accelerometer = new ArrayList<SensorEvent>();
     protected ArrayList<SensorEvent> magneticField = new ArrayList<SensorEvent>();
 
@@ -225,6 +225,9 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
         }
 
     }
+
+    //This is the main part for sensordata collection
+    //FIXME: Remove excess debugging parts once sensor collection is in desired state
     @Override
     public void onSensorChanged(SensorEvent event){
         LOG.debug("onSensorChanged Event. event.sensor="+event.sensor.toString()+"\n event.values="+ Arrays.toString(event.values));
@@ -251,18 +254,28 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 event.accuracy,
                 event.sensor.toString()+":"+event.sensor.getStringType()));
 
-        if (this.numSensorSamples >= 10) {
-            LOG.debug("Stopping sensor manager, recorded more than 5 samples without success completion of measurement");
+        /*
+            Main problem here: accelerometer and magnetic field are required to calculate the metrics visible above and below.
+            However, the magnetic field sensor delivers data vastly slower and lesser in quantity such that it may happen that
+            within a reasonable amount of time only accelerometer events arrived making it impossible to calculate the required
+            metrics.
+            Thus a configurable amount of sensor events is accepted to have a sufficiently high possibility to see all required
+            events.
+            If that amount is exceeded collection is stopped.
+            If this is set too high or data collection is not stopped at all, this creates unneeded strain on battery and cpu
+            due to the frequency of event delivery especially in the case of the accelerometer.
+            In the case of the emulator and a recent Samsung Galaxy phone between 5 and 10 sensor event empirically have been
+            found to work well.
+         */
+        if (this.numSensorSamples >= preferenceHelper.getSensorDataSampleSize()) {
+            LOG.debug(String.format("Stopping sensor manager, recorded more than %d samples without success completion of measurement",preferenceHelper.getSensorDataSampleSize()));
             loggingService.stopSensorManagerAndResetAlarm(System.currentTimeMillis(),null,null,null);
             this.numSensorSamples = 0;
         } else {
             this.numSensorSamples++;
-            LOG.debug(String.format("onSensorChanged current number of samples %d of 5",this.numSensorSamples));
+            LOG.debug(String.format("onSensorChanged current number of samples %d of %d",this.numSensorSamples, preferenceHelper.getSensorDataSampleSize()));
             calculateSensors(event);
         }
-        //mGravity = null;
-        //mGeomagnetic = null;
-        //loggingService.onSensorChanged(event);
     }
 
 
@@ -270,8 +283,10 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
      * Based on code found here: https://github.com/shiptrail/android-main
      * Records sensordata to be shipped with next location
      * https://developer.android.com/guide/topics/sensors/sensors_overview.html
-     * orientation is created from accel + magnetic -> billig gyro
+     * orientation is created from accel + magnetic -> cheap gyro
+     * Other, cleaner approaches to position calculation are possible
      */
+    //FIXME: Remove excess debugging once sensor data logging is done
     public void calculateSensors(SensorEvent event) {
         LOG.debug("calculateSensors Event. event.sensor="+event.sensor.toString()+"\n event.values="+ Arrays.toString(event.values));
         //check if we want to get sensor data already
@@ -279,16 +294,7 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
         SensorDataObject.Accelerometer ao = null;
         SensorDataObject.Compass co = null;
         long current = System.currentTimeMillis();
-        //session.setLatestSensorDataTimeStamp(current);
-        //if (current >= nextTimestampToSave) {
-        //    lastTimestamp = nextTimestampToSave;
-        //    nextTimestampToSave = current;
 
-
-//            if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
-//                mGravity = event.values.clone();
-//            if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
-//                mGeomagnetic = event.values.clone();
         LOG.debug(String.format("calculate sensors: ts: %d mGravity!=null: %b, mGeomagnetic!=null: %b, gravity: %s, geomag: %s",
                     current,this.mGravity!=null,this.mGeomagnetic!=null
                     ,Arrays.toString(this.mGravity),Arrays.toString(this.mGeomagnetic)));
@@ -339,9 +345,6 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                     this.latestCompass.add(co);
                     LOG.debug(String.format("onSensorChanged compass obj added: %s \n compass array: %s",co.toString(),Arrays.toString(this.latestCompass.toArray())));
 
-                    //determine when the next sensor data shall be monitored
-                    //nextTimestampToSave += preferenceHelper.getSensorDataInterval(); // had a /10, should be placed somewhere else
-
                     mGravity = null;
                     mGeomagnetic = null;
 
@@ -350,11 +353,6 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                     this.numSensorSamples = 0;
                 }
             }
-        //}
-        //loggingService.onSensorChanged();
-        LOG.debug("processed sensor data calling loggingservice, ts="+current);
-        //loggingService.stopSensorManagerAndResetAlarm(current,ao,oo,co);
-        //TODO: Would need onLocationChanged similar call here that processes + deactivates sensors and reschedules sensors here
     }
 
     @Override

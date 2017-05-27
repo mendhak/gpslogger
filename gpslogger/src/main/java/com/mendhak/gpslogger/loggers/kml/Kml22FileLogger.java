@@ -249,11 +249,9 @@ class Kml22WriteHandler implements Runnable {
                     }
 
                     if (accelString.length() > 0 || compassString.length() > 0 || orientationString.length() > 0) {
-                        //track.append("<extensions>\n");
                         coords.append(accelString);
                         coords.append(compassString);
                         coords.append(orientationString);
-                        //track.append("</extensions>");
                     }
                 }
 

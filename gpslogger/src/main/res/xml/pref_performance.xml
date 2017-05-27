@@ -46,12 +46,12 @@
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
         android:key="sensordata_samplesize"
         android:title="@string/sensor_samplesize"
-        android:summary="Sensor sampling duration in ms"
+        android:summary="Number of attempts to catch required sensor samples per sampling attempt"
         android:dialogTitle="@string/sensordata_samplesize_dialogtitle"
         android:numeric="integer"
-        android:maxLength="4"
+        android:maxLength="1"
         android:hint="@string/sensordata_samplesize_hint"
-        android:defaultValue="200"/>
+        android:defaultValue="9"/>
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
         android:key="distance_before_logging"
