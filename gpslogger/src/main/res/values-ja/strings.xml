@@ -234,7 +234,7 @@
   <string name="txt_annotation">注釈:</string>
   <string name="txt_time_isoformat">UTC 時間 (2011-12-25T15:27:33Z)。</string>
   <string name="txt_provider">プロバイダー:</string>
-  <string name="annotation_requires_logging">GPX/KML/カスタム URLに保存する際の注釈</string>
+  <string name="annotation_requires_logging">CSV/GPX/KML/カスタム URLに保存する際の注釈</string>
   <string name="gpslogger_folder_title">フォルダーに保存します。</string>
   <string name="gpslogger_folder_summary">ログファイルの保存場所（デフォルト /sdcard/GPSLogger）</string>
   <string name="autoftp_directory">フォルダ</string>

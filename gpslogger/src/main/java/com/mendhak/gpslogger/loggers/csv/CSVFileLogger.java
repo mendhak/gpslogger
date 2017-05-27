@@ -21,9 +21,8 @@ package com.mendhak.gpslogger.loggers.csv;
 
 import android.location.Location;
 import android.support.annotation.Nullable;
-
-import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.Maths;
+import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.loggers.Files;
@@ -48,13 +47,51 @@ public class CSVFileLogger implements FileLogger {
 
     @Override
     public void write(Location loc) throws Exception {
+        if (!Session.getInstance().hasDescription()) {
+            annotate("", loc);
+        }
+    }
+
+    String getCsvLine(Location loc, String dateTimeString) {
+        return getCsvLine("", loc, dateTimeString);
+    }
+
+    String getCsvLine(String description, Location loc, String dateTimeString) {
+
+        if (description.length() > 0) {
+            description = "\"" + description.replaceAll("\"", "\"\"") + "\"";
+        }
+
+        String outputString = String.format(Locale.US, "%s,%f,%f,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", dateTimeString,
+                loc.getLatitude(),
+                loc.getLongitude(),
+                loc.hasAltitude() ? loc.getAltitude() : "",
+                loc.hasAccuracy() ? loc.getAccuracy() : "",
+                loc.hasBearing() ? loc.getBearing() : "",
+                loc.hasSpeed() ? loc.getSpeed() : "",
+                Maths.getBundledSatelliteCount(loc),
+                loc.getProvider(),
+                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("HDOP"))) ? loc.getExtras().getString("HDOP") : "",
+                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("VDOP"))) ? loc.getExtras().getString("VDOP") : "",
+                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("PDOP"))) ? loc.getExtras().getString("PDOP") : "",
+                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("GEOIDHEIGHT"))) ? loc.getExtras().getString("GEOIDHEIGHT") : "",
+                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("AGEOFDGPSDATA"))) ? loc.getExtras().getString("AGEOFDGPSDATA") : "",
+                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("DGPSID"))) ? loc.getExtras().getString("DGPSID") : "",
+                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("DETECTED_ACTIVITY"))) ? loc.getExtras().getString("DETECTED_ACTIVITY") : "",
+                (batteryLevel != null) ? batteryLevel : "",
+                description
+        );
+        return outputString;
+    }
+
+    @Override
+    public void annotate(String description, Location loc) throws Exception {
         if (!file.exists()) {
             file.createNewFile();
 
             FileOutputStream writer = new FileOutputStream(file, true);
             BufferedOutputStream output = new BufferedOutputStream(writer);
-            //TODO: Add matching header info for sensor data here -> consider if series of sensor data per one gps point are representable in csv
-            String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider,hdop,vdop,pdop,geoidheight,ageofdgpsdata,dgpsid,activity,battery\n";
+            String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider,hdop,vdop,pdop,geoidheight,ageofdgpsdata,dgpsid,activity,battery,annotation\n";
             output.write(header.getBytes());
             output.flush();
             output.close();
@@ -65,41 +102,13 @@ public class CSVFileLogger implements FileLogger {
         BufferedOutputStream output = new BufferedOutputStream(writer);
 
         String dateTimeString = Strings.getIsoDateTime(new Date(loc.getTime()));
-        String csvLine = getCsvLine(loc, dateTimeString);
+        String csvLine = getCsvLine(description, loc, dateTimeString);
 
 
         output.write(csvLine.getBytes());
         output.flush();
         output.close();
         Files.addToMediaDatabase(file, "text/csv");
-    }
-
-    String getCsvLine(Location loc, String dateTimeString) {
-        //TODO: Add sensor data rendering here
-        String outputString = String.format(Locale.US, "%s,%f,%f,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", dateTimeString,
-                loc.getLatitude(),
-                loc.getLongitude(),
-                loc.hasAltitude() ? loc.getAltitude() : "",
-                loc.hasAccuracy() ? loc.getAccuracy() : "",
-                loc.hasBearing() ? loc.getBearing() : "",
-                loc.hasSpeed() ? loc.getSpeed() : "",
-                Maths.getBundledSatelliteCount(loc),
-                loc.getProvider(),
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.HDOP))) ? loc.getExtras().getString(BundleConstants.HDOP) : "",
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.VDOP))) ? loc.getExtras().getString(BundleConstants.VDOP) : "",
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.PDOP))) ? loc.getExtras().getString(BundleConstants.PDOP) : "",
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.GEOIDHEIGHT))) ? loc.getExtras().getString(BundleConstants.GEOIDHEIGHT) : "",
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.AGEOFDGPSDATA))) ? loc.getExtras().getString(BundleConstants.AGEOFDGPSDATA) : "",
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.DGPSID))) ? loc.getExtras().getString(BundleConstants.DGPSID) : "",
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY))) ? loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY) : "",
-                (batteryLevel != null) ? batteryLevel : ""
-        );
-        return outputString;
-    }
-
-    @Override
-    public void annotate(String description, Location loc) throws Exception {
-
     }
 
     @Override
