@@ -45,4 +45,9 @@ GPSLogger sends an intent to Tasker on start/stop of logging, which you can rece
   Action: net.dinglisch.android.tasker.ACTION_TASK  
   Scheme: gpsloggerevent  
   
-From there in your task, look at the variable `%gpsloggerevent` which will set to be `started` or `stopped`  
+From there in your task, you can look at the following variables
+ 
+ * `%gpsloggerevent` - `started` or `stopped`
+ * `%filename` - the base filename that was chosen (no extension)
+ * `%startedtimestamp` - timestamp when logging was started (epoch)
+    

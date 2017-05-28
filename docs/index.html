@@ -204,7 +204,12 @@ For example, in Tasker, create a new action under Misc &gt; Send Intent. </p>
 <blockquote>
 <p>Event: Intent Received<br>  Action: net.dinglisch.android.tasker.ACTION_TASK<br>  Scheme: gpsloggerevent  </p>
 </blockquote>
-<p>From there in your task, look at the variable <code>%gpsloggerevent</code> which will set to be <code>started</code> or <code>stopped</code>  </p>
+<p>From there in your task, you can look at the following variables</p>
+<ul>
+<li><code>%gpsloggerevent</code> - <code>started</code> or <code>stopped</code></li>
+<li><code>%filename</code> - the base filename that was chosen (no extension)</li>
+<li><code>%startedtimestamp</code> - timestamp when logging was started (epoch)</li>
+</ul>
 
 </div></section>
 

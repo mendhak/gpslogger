@@ -414,13 +414,17 @@ public class GpsLoggingService extends Service  {
     }
 
     private void informTasker(boolean loggingStarted) {
-        LOG.debug("Sending a custom broadcast to tasker");
-        String event = (loggingStarted) ? "started" : "stopped";
-        Intent sendIntent = new Intent();
-        sendIntent.setData(Uri.parse("gpsloggerevent://" + event));
-        sendIntent.setAction("net.dinglisch.android.tasker.ACTION_TASK");
-        sendIntent.putExtra("gpsloggerevent", event);
-        sendBroadcast(sendIntent);
+        if(Systems.isPackageInstalled("net.dinglisch.android.taskerm",getApplicationContext())){
+            LOG.debug("Sending a custom broadcast to tasker");
+            String event = (loggingStarted) ? "started" : "stopped";
+            Intent sendIntent = new Intent();
+            sendIntent.setData(Uri.parse("gpsloggerevent://" + event));
+            sendIntent.setAction("net.dinglisch.android.tasker.ACTION_TASK");
+            sendIntent.putExtra("gpsloggerevent", event);
+            sendIntent.putExtra("filename", session.getCurrentFormattedFileName());
+            sendIntent.putExtra("startedtimestamp", session.getStartTimeStamp());
+            sendBroadcast(sendIntent);
+        }
     }
 
     /**
