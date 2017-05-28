@@ -1,5 +1,7 @@
 ## How does this integrate with Tasker/Llama or other automation frameworks?
 
+### Controlling GPSLogger
+
 If your automation app can send intents, you can use those intents to control GPSLogger and get it to perform a few actions. 
 For example, in Tasker, create a new action under Misc > Send Intent. 
 
@@ -34,3 +36,13 @@ These are the extras you can send to GPSLogger:
 
 You can also invoke the Start and Stop **shortcuts** that GPSLogger comes with.
 
+### Tasker Event 
+
+
+GPSLogger sends an intent to Tasker on start/stop of logging, which you can receive as an event.
+  
+> Event: Intent Received  
+  Action: net.dinglisch.android.tasker.ACTION_TASK  
+  Scheme: gpsloggerevent  
+  
+From there in your task, look at the variable `%gpsloggerevent` which will set to be `started` or `stopped`  
