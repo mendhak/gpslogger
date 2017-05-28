@@ -434,5 +434,8 @@
     <string name="sftp_private_key_passphrase">Private key passphrase</string>
     <string name="sftp_validate_test_upload">Validate host key and test upload</string>
     <string name="sftp_validate_accept_host_key">Accept this host key?</string>
+    <string name="txt_timestamp_epoch">Timestamp (epoch)</string>
+    <string name="txt_starttimestamp_epoch">Start timestamp (epoch)</string>
+    <string name="txt_battery">Battery</string>
 
 </resources>
