@@ -126,6 +126,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     }
 
     private void showPreferencesSummary() {
+        //TODO: Handle enable/disable of sensor data images here
         showCurrentFileName(Strings.getFormattedFileName());
 
 
@@ -229,6 +230,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     }
 
     private void setImageTooltips() {
+        //TODO: Sensor data image here
         ImageView imgSatellites = (ImageView) rootView.findViewById(R.id.simpleview_imgSatelliteCount);
         imgSatellites.setOnClickListener(this);
 
@@ -288,6 +290,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LocationUpdate locationUpdate){
         displayLocationInfo(locationUpdate.location);
+        //TODO: Get sensordata stuff passed here too if present
     }
 
     @EventBusHook
@@ -320,6 +323,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     }
 
     public void displayLocationInfo(Location locationInfo){
+        //TODO: Add sensordata representation here
         showPreferencesSummary();
 
         EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
@@ -403,6 +407,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
 
     private void clearLocationDisplay() {
+        //TODO: Handle sensor data representation clearing here
 
         EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
         txtLatitude.setText("");

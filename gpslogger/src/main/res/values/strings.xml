@@ -149,6 +149,12 @@
     </string>
     <string name="keep_fix_title">Keep GPS on between fixes</string>
 
+    <string name="sensordata_enable">Enable sensordata collection</string>
+    <!--<string name="sensordata_enable_magneticfield">Enable compass data collection</string>-->
+    <string name="sensordata_interval">Sensordata collection interval</string>
+    <string name="sensordata_interval_title">Number of sensor samples between one GPS fix</string>
+    <string name="sensordata_interval_hint">Enter number (max 99)</string>
+
     <string name="retry_time_title">Duration to match accuracy</string>
     <string name="retry_time_summary">After acquiring an initial fix, keep trying for this long to get an accurate point to match the accuracy filter setting.</string>
 
@@ -437,5 +443,13 @@
     <string name="txt_timestamp_epoch">Timestamp (epoch)</string>
     <string name="txt_starttimestamp_epoch">Start timestamp (epoch)</string>
     <string name="txt_battery">Battery</string>
+    <string name="txt_accelerometer">Accelerometer:</string>
+    <string name="txt_compass">Compass:</string>
+    <string name="txt_orientation">Orientation:</string>
+    <string name="sensor_samplesize">Sampling attempts</string>
+    <string name="sensordata_samplesize_dialogtitle">Number of sensor events accepted</string>
+    <string name="sensordata_samplesize_hint">Number of sensor events accepted (max 9)</string>
+    <string name="sensordata_interval_summary">Number of samples between one GPS fix</string>
+    <string name="sensordata_interval_number">Number of samples</string>
 
 </resources>

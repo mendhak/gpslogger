@@ -25,6 +25,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.*;
 import android.os.Bundle;
+
+import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
@@ -33,6 +35,7 @@ import com.mendhak.gpslogger.loggers.nmea.NmeaSentence;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -53,12 +56,16 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
     // Sensor Data Extensions
     protected float[] mGravity = null;
     protected float[] mGeomagnetic = null;
+    protected int numSensorSamples = 0;
 
-    protected long nextTimestampToSave = 0;
     protected long lastTimestamp = 0;
     protected ArrayList<SensorDataObject.Accelerometer> latestAccelerometer = new ArrayList<>();
     protected ArrayList<SensorDataObject.Compass> latestCompass  = new ArrayList<>();
     protected ArrayList<SensorDataObject.Orientation> latestOrientation = new ArrayList<>();
+
+    //FIXME: These two arrays and their usage is for debug usage. Remove once sensor collection is done.
+    protected ArrayList<SensorEvent> accelerometer = new ArrayList<SensorEvent>();
+    protected ArrayList<SensorEvent> magneticField = new ArrayList<SensorEvent>();
 
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
@@ -76,24 +83,25 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
         try {
             if (loc != null) {
                 Bundle b = new Bundle();
-                b.putString("HDOP", this.latestHdop);
-                b.putString("PDOP", this.latestPdop);
-                b.putString("VDOP", this.latestVdop);
-                b.putString("GEOIDHEIGHT", this.geoIdHeight);
-                b.putString("AGEOFDGPSDATA", this.ageOfDgpsData);
-                b.putString("DGPSID", this.dgpsId);
+                b.putString(BundleConstants.HDOP, this.latestHdop);
+                b.putString(BundleConstants.PDOP, this.latestPdop);
+                b.putString(BundleConstants.VDOP, this.latestVdop);
+                b.putString(BundleConstants.GEOIDHEIGHT, this.geoIdHeight);
+                b.putString(BundleConstants.AGEOFDGPSDATA, this.ageOfDgpsData);
+                b.putString(BundleConstants.DGPSID, this.dgpsId);
 
-                b.putBoolean("PASSIVE", listenerName.equalsIgnoreCase("PASSIVE"));
-                b.putString("LISTENER", listenerName);
-                b.putInt("SATELLITES_FIX", satellitesUsedInFix);
-                b.putString("DETECTED_ACTIVITY", session.getLatestDetectedActivityName());
+                b.putBoolean(BundleConstants.PASSIVE, listenerName.equalsIgnoreCase(BundleConstants.PASSIVE));
+                b.putString(BundleConstants.LISTENER, listenerName);
+                b.putInt(BundleConstants.SATELLITES_FIX, satellitesUsedInFix);
+                b.putString(BundleConstants.DETECTED_ACTIVITY, session.getLatestDetectedActivityName());
 
                 //Extras for Sensordatalogging
-                b.putSerializable("ACCELEROMETER", latestAccelerometer);
-                b.putSerializable("COMPASS", latestCompass);
-                b.putSerializable("ORIENTATION", latestOrientation);
+                b.putSerializable(BundleConstants.ACCELEROMETER, this.latestAccelerometer);
+                b.putSerializable(BundleConstants.COMPASS, this.latestCompass);
+                b.putSerializable(BundleConstants.ORIENTATION, this.latestOrientation);
 
                 loc.setExtras(b);
+                LOG.debug("general loc listener on loc changed, latest accel:"+Arrays.toString(this.latestAccelerometer.toArray())+"\n latestCompass:"+Arrays.toString(this.latestCompass.toArray())+"\n latestOrientation:"+Arrays.toString(this.latestOrientation.toArray()));
                 loggingService.onLocationChanged(loc);
 
                 this.latestHdop = "";
@@ -218,29 +226,87 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
     }
 
+    //This is the main part for sensordata collection
+    //FIXME: Remove excess debugging parts once sensor collection is in desired state
     @Override
+    public void onSensorChanged(SensorEvent event){
+        LOG.debug("onSensorChanged Event. event.sensor="+event.sensor.toString()+"\n event.values="+ Arrays.toString(event.values));
+
+        switch (event.sensor.getType()){
+            case Sensor.TYPE_ACCELEROMETER:
+                this.accelerometer.add(event);
+                this.mGravity = event.values.clone();
+                break;
+            case Sensor.TYPE_MAGNETIC_FIELD:
+                this.magneticField.add(event);
+                this.mGeomagnetic = event.values.clone();
+                break;
+            default:
+                LOG.debug(String.format("onSensorChanged undesired type recieved: %d sensor: %s, values: %s",event.sensor.getType(),event.sensor.toString(),Arrays.toString(event.values)));
+        }
+
+        LOG.debug(String.format("onSensorChanged \n accel event list size: %d content %s \n magnetic event list size: %d content %s  " +
+                "\n this.accel=%s this.magnetic=%s \n reported accuracy %d \n reported type: %s"
+                ,this.accelerometer.size(),Arrays.toString(this.accelerometer.toArray()),
+                this.magneticField.size(),Arrays.toString(this.magneticField.toArray()),
+                Arrays.toString(this.mGravity),
+                Arrays.toString(this.mGeomagnetic),
+                event.accuracy,
+                event.sensor.toString()+":"+event.sensor.getStringType()));
+
+        /*
+            Main problem here: accelerometer and magnetic field are required to calculate the metrics visible above and below.
+            However, the magnetic field sensor delivers data vastly slower and lesser in quantity such that it may happen that
+            within a reasonable amount of time only accelerometer events arrived making it impossible to calculate the required
+            metrics.
+            Thus a configurable amount of sensor events is accepted to have a sufficiently high possibility to see all required
+            events.
+            If that amount is exceeded collection is stopped.
+            If this is set too high or data collection is not stopped at all, this creates unneeded strain on battery and cpu
+            due to the frequency of event delivery especially in the case of the accelerometer.
+            In the case of the emulator and a recent Samsung Galaxy phone between 5 and 10 sensor event empirically have been
+            found to work well.
+         */
+        if (this.numSensorSamples >= preferenceHelper.getSensorDataSampleSize()) {
+            LOG.debug(String.format("Stopping sensor manager, recorded more than %d samples without success completion of measurement",preferenceHelper.getSensorDataSampleSize()));
+            loggingService.stopSensorManagerAndResetAlarm(System.currentTimeMillis(),null,null,null);
+            this.numSensorSamples = 0;
+        } else {
+            this.numSensorSamples++;
+            LOG.debug(String.format("onSensorChanged current number of samples %d of %d",this.numSensorSamples, preferenceHelper.getSensorDataSampleSize()));
+            calculateSensors(event);
+        }
+    }
+
+
     /**
      * Based on code found here: https://github.com/shiptrail/android-main
+     * Records sensordata to be shipped with next location
+     * https://developer.android.com/guide/topics/sensors/sensors_overview.html
+     * orientation is created from accel + magnetic -> cheap gyro
+     * Other, cleaner approaches to position calculation are possible
      */
-    public void onSensorChanged(SensorEvent event) {
+    //FIXME: Remove excess debugging once sensor data logging is done
+    public void calculateSensors(SensorEvent event) {
+        LOG.debug("calculateSensors Event. event.sensor="+event.sensor.toString()+"\n event.values="+ Arrays.toString(event.values));
         //check if we want to get sensor data already
+        SensorDataObject.Orientation oo = null;
+        SensorDataObject.Accelerometer ao = null;
+        SensorDataObject.Compass co = null;
         long current = System.currentTimeMillis();
-        if (current >= nextTimestampToSave) {
-            lastTimestamp = nextTimestampToSave;
-            nextTimestampToSave = current;
 
-
-            if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
-                mGravity = event.values.clone();
-            if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
-                mGeomagnetic = event.values.clone();
-            if (mGravity != null && mGeomagnetic != null) {
-                float R[] = new float[9];
+        LOG.debug(String.format("calculate sensors: ts: %d mGravity!=null: %b, mGeomagnetic!=null: %b, gravity: %s, geomag: %s",
+                    current,this.mGravity!=null,this.mGeomagnetic!=null
+                    ,Arrays.toString(this.mGravity),Arrays.toString(this.mGeomagnetic)));
+            if (this.mGravity != null && this.mGeomagnetic != null) {
+                float Rs[] = new float[9];
                 float I[] = new float[9];
-                boolean success = SensorManager.getRotationMatrix(R, I, mGravity, mGeomagnetic);
+                boolean success = SensorManager.getRotationMatrix(Rs, I, this.mGravity, this.mGeomagnetic);
+                LOG.debug(String.format("calcSensors in getRotationMatrix, success=%b, R=%s,I=%s",success, Arrays.toString(Rs),Arrays.toString(I)));
                 if (success) {
+                    LOG.debug(String.format("calcSensors in getRotationMatrix, in success"));
                     float orientation[] = new float[3];
-                    SensorManager.getOrientation(R, orientation);
+                    SensorManager.getOrientation(Rs, orientation);
 
                     float azimuth = orientation[0] * (180 / (float) Math.PI);
                     float compass = azimuth;
@@ -259,7 +325,10 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                     if (toffset < Integer.MAX_VALUE && toffset > Integer.MIN_VALUE) {
                         toffsetInteger = (int) toffset;
                     }
-                    this.latestOrientation.add(new SensorDataObject.Orientation(compass,pitch,roll,toffsetInteger));
+
+                    oo = new SensorDataObject.Orientation(compass,pitch,roll,toffsetInteger);
+                    this.latestOrientation.add(oo);
+                    LOG.debug(String.format("onSensorChanged orient obj added: %s \n orient array: %s",oo.toString(),Arrays.toString(this.latestOrientation.toArray())));
 
                     //acceleration
                     float x = mGravity[0];
@@ -267,19 +336,23 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                     float z = mGravity[2];
 
                     //save acceleration
-                    this.latestAccelerometer.add(new SensorDataObject.Accelerometer(x,y,z,toffsetInteger));
+                    ao = new SensorDataObject.Accelerometer(x,y,z,toffsetInteger);
+                    this.latestAccelerometer.add(ao);
+                    LOG.debug(String.format("onSensorChanged accel obj added: %s \n accel array: %s",ao.toString(),Arrays.toString(this.latestAccelerometer.toArray())));
 
                     //save compass
-                    this.latestCompass.add(new SensorDataObject.Compass(compass, toffsetInteger));
-
-                    //determine when the next sensor data shall be monitored
-                    nextTimestampToSave += preferenceHelper.getMinimumLoggingInterval(); // had a /10, should be placed somewhere else
+                    co = new SensorDataObject.Compass(compass, toffsetInteger);
+                    this.latestCompass.add(co);
+                    LOG.debug(String.format("onSensorChanged compass obj added: %s \n compass array: %s",co.toString(),Arrays.toString(this.latestCompass.toArray())));
 
                     mGravity = null;
                     mGeomagnetic = null;
+
+                    LOG.debug("all sensor readings present, calculated data + stop,reset&reschedule sensormanager now");
+                    loggingService.stopSensorManagerAndResetAlarm(current, ao, oo, co);
+                    this.numSensorSamples = 0;
                 }
             }
-        }
     }
 
     @Override

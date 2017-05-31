@@ -31,6 +31,8 @@ import android.widget.TextView;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.SensorDataObject;
+import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
@@ -45,6 +47,7 @@ import org.slf4j.Logger;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -273,6 +276,11 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
         TextView txtStill = (TextView) rootView.findViewById(R.id.detailedview_activity_text);
 
+        //Sensor data extension
+        TextView txtAccelerometer = (TextView) rootView.findViewById(R.id.detailedview_accelerometer_text);
+        TextView txtCompass = (TextView) rootView.findViewById(R.id.detailedview_compass_text);
+        TextView txtOrientation = (TextView) rootView.findViewById(R.id.detailedview_orientation_text);
+
         tvLatitude.setText("");
         tvLongitude.setText("");
         tvDateTime.setText("");
@@ -285,11 +293,16 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         txtTime.setText("");
         txtStill.setText("");
 
+        //Handle clearing sensor data info here
+        txtAccelerometer.setText("");
+        txtCompass.setText("");
+        txtOrientation.setText("");
 
     }
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LocationUpdate locationEvent){
+        //Our sensor data is passed in the locationEvent using the extras bundle
         displayLocationInfo(locationEvent.location);
     }
 
@@ -335,6 +348,12 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         TextView txtAccuracy = (TextView) rootView.findViewById(R.id.detailedview_accuracy_text);
         TextView txtTravelled = (TextView) rootView.findViewById(R.id.detailedview_travelled_text);
         TextView txtTime = (TextView) rootView.findViewById(R.id.detailedview_duration_text);
+
+        //Sensor data extension
+        TextView txtAccelerometer = (TextView) rootView.findViewById(R.id.detailedview_accelerometer_text);
+        TextView txtCompass = (TextView) rootView.findViewById(R.id.detailedview_compass_text);
+        TextView txtOrientation = (TextView) rootView.findViewById(R.id.detailedview_orientation_text);
+
         String providerName = locationInfo.getProvider();
         if (providerName.equalsIgnoreCase(LocationManager.GPS_PROVIDER)) {
             providerName = getString(R.string.providername_gps);
@@ -401,6 +420,26 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());
         txtTime.setText(duration + " (started at " + dateFormat.format(d) + " " + timeFormat.format(d) + ")");
 
+        if (locationInfo.getExtras() != null){
+            //Sensor data display is handled here
+            Bundle extras = locationInfo.getExtras();
+            ArrayList<SensorDataObject.Accelerometer> accelerometer = (ArrayList<SensorDataObject.Accelerometer>) extras.getSerializable(BundleConstants.ACCELEROMETER);
+            ArrayList<SensorDataObject.Compass> compass = (ArrayList<SensorDataObject.Compass>) extras.getSerializable(BundleConstants.COMPASS);
+            ArrayList<SensorDataObject.Orientation> orientation = (ArrayList<SensorDataObject.Orientation>) extras.getSerializable(BundleConstants.ORIENTATION);
+
+            if (accelerometer != null && accelerometer.size() > 0){
+                txtAccelerometer.setText(String.format("%s #%d", accelerometer.get(accelerometer.size()-1).toString(), accelerometer.size()));
+            }
+
+            if (compass != null && compass.size() > 0){
+                txtCompass.setText(String.format("%s #%d", compass.get(compass.size()-1).toString(), compass.size()));
+            }
+
+            if (orientation != null && orientation.size() > 0){
+                txtOrientation.setText(String.format("%s #%d", orientation.get(orientation.size()-1).toString(), orientation.size()));
+            }
+
+        }
 
 
     }

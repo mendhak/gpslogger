@@ -1065,27 +1065,28 @@ public class PreferenceHelper {
     }
 
 
-    //TODO: Extension for sensor data recording ACCELEROMETER
-    @ProfilePreference(name=PreferenceNames.SENSORDATA_ENABLE_ACCELEROMETER)
-    public boolean getSensorDataEnabledAcclerometer() {
-        return prefs.getBoolean(PreferenceNames.SENSORDATA_ENABLE_ACCELEROMETER, false);
+    //Extension for sensor data recording
+    @ProfilePreference(name=PreferenceNames.SENSORDATA_ENABLE)
+    public boolean isSensorDataEnabled() {
+        return prefs.getBoolean(PreferenceNames.SENSORDATA_ENABLE, false);
     }
 
-    public void setSensorDataEnabledAcclerometer(boolean enableAcclerometer){
-        prefs.edit().putBoolean(PreferenceNames.SENSORDATA_ENABLE_ACCELEROMETER, enableAcclerometer).apply();
+    public void setSensorDataEnabled(boolean enableSensordata){
+        prefs.edit().putBoolean(PreferenceNames.SENSORDATA_ENABLE, enableSensordata).apply();
+        LOG.debug("preference helper set enable: "+enableSensordata);
     }
 
-    //TODO: Extension for sensor data recording MAGNETIC FIELD
-    @ProfilePreference(name=PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD)
-    public boolean getSensorDataEnabledMagneticField() {
-        return prefs.getBoolean(PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD, false);
-    }
+//    //Extension for sensor data recording MAGNETIC FIELD
+//    @ProfilePreference(name=PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD)
+//    public boolean getSensorDataEnabledMagneticField() {
+//        return prefs.getBoolean(PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD, false);
+//    }
+//
+//    public void setSensorDataEnabledMagneticFeild(boolean enableMagneticField){
+//        prefs.edit().putBoolean(PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD, enableMagneticField).apply();
+//    }
 
-    public void setSensorDataEnabledMagneticFeild(boolean enableMagneticField){
-        prefs.edit().putBoolean(PreferenceNames.SENSORDATA_ENABLE_MAGNETICFIELD, enableMagneticField).apply();
-    }
-
-    //TODO: Extension for sensor data recording INTERVAL
+    //Extension for sensor data recording INTERVAL
     @ProfilePreference(name= PreferenceNames.SENSORDATA_INTERVAL)
     public int getSensorDataInterval(){
         return Strings.toInt(prefs.getString(PreferenceNames.SENSORDATA_INTERVAL, "1"), 1);
@@ -1093,6 +1094,15 @@ public class PreferenceHelper {
 
     public void setSensorDataInterval(int interval){
         prefs.edit().putString(PreferenceNames.SENSORDATA_INTERVAL, String.valueOf(interval)).apply();
+    }
+
+    @ProfilePreference(name= PreferenceNames.SENSORDATA_SAMPLESIZE)
+    public int getSensorDataSampleSize(){
+        return Strings.toInt(prefs.getString(PreferenceNames.SENSORDATA_SAMPLESIZE, "1"), 200);
+    }
+
+    public void setSensorDataSampleSize(int size){
+        prefs.edit().putString(PreferenceNames.SENSORDATA_SAMPLESIZE, String.valueOf(size)).apply();
     }
 
     @SuppressWarnings("unchecked")

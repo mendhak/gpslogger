@@ -11,6 +11,11 @@ public class SensorDataObject implements Serializable{
             this.deg = deg;
             this.time_offset = time_offset;
         }
+
+        @Override
+        public String toString() {
+            return String.format("Degree: %1$.3f", this.deg);
+        }
     }
 
     public static class Accelerometer extends BaseInfo {
@@ -24,6 +29,11 @@ public class SensorDataObject implements Serializable{
             this.z = z;
             this.time_offset = time_offset;
         }
+
+        @Override
+        public String toString() {
+            return String.format("X: %1$.3f, Y: %1$.3f, Z: %1$.3f", this.x, this.y, this.z);
+        }
     }
 
     public static class Orientation extends BaseInfo {
@@ -36,6 +46,11 @@ public class SensorDataObject implements Serializable{
             this.pitch = pitch;
             this.roll = roll;
             this.time_offset = time_offset;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Azimuth/Yaw: %1$.3f, Pitch: %1$.3f, Roll: %1$.3f", this.azimuth, this.pitch, this.roll);
         }
     }
 

@@ -20,6 +20,10 @@
 package com.mendhak.gpslogger.loggers.kml;
 
 import android.location.Location;
+import android.os.Bundle;
+
+import com.mendhak.gpslogger.SensorDataObject;
+import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -28,6 +32,7 @@ import com.mendhak.gpslogger.loggers.Files;
 import org.slf4j.Logger;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -208,6 +213,48 @@ class Kml22WriteHandler implements Runnable {
                 coords.append(" ");
                 coords.append(String.valueOf(loc.getAltitude()));
                 coords.append("</gx:coord>\n");
+
+                if (loc.getExtras() != null) {
+                    //Render our sensor data extensions here
+                    Bundle extras = loc.getExtras();
+                    StringBuilder accelString = new StringBuilder();
+                    StringBuilder compassString = new StringBuilder();
+                    StringBuilder orientationString = new StringBuilder();
+
+                    ArrayList<SensorDataObject.Accelerometer> accelerometer = (ArrayList<SensorDataObject.Accelerometer>) extras.getSerializable(BundleConstants.ACCELEROMETER);
+                    if (accelerometer != null && accelerometer.size() > 0) {
+                        accelString.append("<sensordata:accelerometer>");
+                        for (SensorDataObject.Accelerometer accel : accelerometer) {
+                            accelString.append(String.format("(%1$.3f;%1$.3f;%1$.3f),", accel.x, accel.y, accel.z));
+                        }
+                        accelString.append("</sensordata:accelerometer>\n");
+                    }
+
+                    ArrayList<SensorDataObject.Compass> compass = (ArrayList<SensorDataObject.Compass>) extras.getSerializable(BundleConstants.COMPASS);
+                    if (compass != null && compass.size() > 0) {
+                        compassString.append("<sensordata:compass>");
+                        for (SensorDataObject.Compass comp : compass) {
+                            compassString.append(String.format("%1$.3f;", comp.deg));
+                        }
+                        compassString.append("</sensordata:compass>\n");
+                    }
+
+                    ArrayList<SensorDataObject.Orientation> orientation = (ArrayList<SensorDataObject.Orientation>) extras.getSerializable(BundleConstants.ORIENTATION);
+                    if (orientation != null && orientation.size() > 0) {
+                        orientationString.append("<sensordata:orientation>");
+                        for (SensorDataObject.Orientation orient : orientation) {
+                            orientationString.append(String.format("(%1$.3f;%1$.3f;%1$.3f),", orient.azimuth, orient.pitch, orient.roll));
+                        }
+                        orientationString.append("</sensordata:orientation>\n");
+                    }
+
+                    if (accelString.length() > 0 || compassString.length() > 0 || orientationString.length() > 0) {
+                        coords.append(accelString);
+                        coords.append(compassString);
+                        coords.append(orientationString);
+                    }
+                }
+
                 coords.append(placemarkTail);
 
                 raf = new RandomAccessFile(kmlFile, "rw");

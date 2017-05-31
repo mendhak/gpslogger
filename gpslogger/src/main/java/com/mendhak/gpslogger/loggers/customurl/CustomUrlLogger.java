@@ -35,6 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CustomUrlLogger implements FileLogger {
+    //TODO: Also a version doing POST could be added in here somehow Extend using POST? Bulk here or elsewhere?
 
     private final String name = "URL";
     private final String customLoggingUrl;
@@ -69,7 +70,7 @@ public class CustomUrlLogger implements FileLogger {
     public String getFormattedUrl(String customLoggingUrl, Location loc, String description, String androidId,
                                   float batteryLevel, String buildSerial, long sessionStartTimeStamp, String fileName)
             throws Exception {
-
+        //TODO: Possibly consider adding a field for the sensor data here.
         String logUrl = customLoggingUrl;
         SerializableLocation sLoc = new SerializableLocation(loc);
         logUrl = logUrl.replaceAll("(?i)%lat", String.valueOf(sLoc.getLatitude()));

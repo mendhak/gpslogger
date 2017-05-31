@@ -33,6 +33,7 @@ public class SessionLogcatAppender extends AppenderBase<ILoggingEvent> {
      * Marker to indicate that this logger entry is special
      */
     public static Marker MARKER_LOCATION = MarkerFactory.getMarker("LOCATION");
+    public static Marker MARKER_SENSOR = MarkerFactory.getMarker("SENSORDATA");
     /**
      * Marker to indicate that this logger entry is for debug log files only
      */
