@@ -264,7 +264,9 @@ public class Strings {
         finalFileName = finalFileName.replaceAll("(?i)%hour", String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY)));
         finalFileName = finalFileName.replaceAll("(?i)%min", String.format("%02d", calendar.get(Calendar.MINUTE)));
         finalFileName = finalFileName.replaceAll("(?i)%year",  String.valueOf(calendar.get(Calendar.YEAR)));
+        finalFileName = finalFileName.replaceAll("(?i)%monthname", new SimpleDateFormat("MMM", Locale.ENGLISH).format(calendar.getTime()).toLowerCase());
         finalFileName = finalFileName.replaceAll("(?i)%month", String.format("%02d", calendar.get(Calendar.MONTH) +1));
+        finalFileName = finalFileName.replaceAll("(?i)%dayname", new SimpleDateFormat("EE", Locale.ENGLISH).format(calendar.getTime()).toLowerCase());
         finalFileName = finalFileName.replaceAll("(?i)%day", String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH) ));
         finalFileName = finalFileName.replaceAll("(?i)%profile", String.valueOf(ph.getCurrentProfileName()));
         return finalFileName;

@@ -1,7 +1,8 @@
-GPSLogger [![Build Status](https://travis-ci.org/mendhak/gpslogger.svg?branch=master)](https://travis-ci.org/mendhak/gpslogger)
+GPSLogger [![Build Status](https://travis-ci.org/mendhak/gpslogger.svg?branch=master)](https://travis-ci.org/mendhak/gpslogger) [![Join the chat at https://gitter.im/gpslogger/Lobby](https://badges.gitter.im/gpslogger/Lobby.svg)](https://gitter.im/gpslogger/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 =========
 
-GPSLogger is an Android app that logs GPS information to GPX, KML or text files and has options for annotating and sharing.
+
+GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, Google Drive, Dropbox, Email). This app aims to be as battery efficient as possible.
 
 [Read about GPSLogger's features here](http://mendhak.github.com/gpslogger/)
 
@@ -11,11 +12,11 @@ You can [download it from Google Play](https://play.google.com/store/apps/detail
 
 You can download the APK directly [from the releases](https://github.com/mendhak/gpslogger/releases).
 
-The oldest Android 2.x release is [here](https://github.com/mendhak/gpslogger/releases/tag/v43).
+The last Android 2.x release is [here](https://github.com/mendhak/gpslogger/releases/tag/v43).
 
 ## Contribute
 
-You can help with [translations](http://crowdin.net/project/gpslogger-for-android)
+You can help with [translations](http://crowdin.net/project/gpslogger-for-android) on Crowdin.
 
 You can also submit [pull requests](https://help.github.com/articles/using-pull-requests) for bug fixes and new features.
 
@@ -28,7 +29,7 @@ I'm not very good at UIs, so any work with the layouts would be appreciated!
 
 ## Donate
 
-[Bitcoin](https://www.coinbase.com/mendhak) | [Paypal](https://paypal.me/mendhak)
+[Bitcoin](https://blockchain.info/payment_request?address=14bKk4sR1AD7avuJfBx2izy2FwyqMXEvcY) | [Paypal](https://paypal.me/mendhak) | [LTC](http://ltc.blockr.io/address/info/LP6gPtk1rkXyKYazyUJAkJpyc4Ghp8qxGs)
 
 
 ## Verifying
@@ -57,37 +58,33 @@ Feel free to adopt and document your own OS and IDEs.  These instructions are fo
 
 Follow the instructions on the [Android Developer Website](http://developer.android.com/sdk/installing/index.html) to set up your computer for development.
 
-On Ubuntu 64bit, you may also need `ia32-libs`, follow [these instructions](http://stackoverflow.com/a/21956268/974369).  I did not need this for Ubuntu 14.04.
 
 
 ![intellij](assets/logo_IntelliJIDEA.png)
 
 Download and install [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/download/index.html), which is free.
-Note that the Android build system version 0.9 does not work well with anything earlier than IntelliJ 13.1.2.
 
-
-### Get the Android SDK extra repositories
-
-This project uses certain Google libraries, you will need to add them. Run
-
-    <AndroidSDK>/tools/android
-
-Which brings up the Android SDK manager.  In here, choose
-
-*  Tools > Android SDK build tools
-*  Extras > Android Support Repository
-*  Extras > Android Support Library
-*  Extras > Google Play services
-*  Extras > Google Repository
 
 ### Clone the GPSLogger repository
 
     git clone git://github.com/mendhak/gpslogger.git
 
+### Get the Android SDK extra repositories
+
+This project uses certain Android libraries, you can install them using Google's poorly implemented [`sdkmanager`](https://developer.android.com/studio/command-line/sdkmanager.html):
+
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'tools'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platform-tools'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'build-tools;25.0.3'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platforms;android-23'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;m2repository'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;android;m2repository'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;google_play_services'
+
 
 ### Create local.properties
 
-IntelliJ/Android Studio [may not detect](http://stackoverflow.com/questions/19794200/gradle-android-and-the-android-home-sdk-location) your `ANDROID_HOME` environment variable, so create a file called `local.properties`, pointing at your Android SDK directory.
+Create a file called `local.properties`, pointing at your Android SDK directory.
 
     cd gpslogger
     echo "sdk.dir=/home/mendhak/Programs/Android" > local.properties

@@ -28,6 +28,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.*;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -413,7 +414,7 @@ public class GpsLoggingService extends Service  {
         showNotification();
         setupAutoSendTimers();
         resetCurrentFileName(true);
-        notifyClientStarted();
+        notifyClientsStarted(true);
         startPassiveManager();
         startGpsManager();
         startSensorManager();
@@ -421,12 +422,27 @@ public class GpsLoggingService extends Service  {
 
     }
 
+    private void informTasker(boolean loggingStarted) {
+        if(Systems.isPackageInstalled("net.dinglisch.android.taskerm",getApplicationContext())){
+            LOG.debug("Sending a custom broadcast to tasker");
+            String event = (loggingStarted) ? "started" : "stopped";
+            Intent sendIntent = new Intent();
+            sendIntent.setData(Uri.parse("gpsloggerevent://" + event));
+            sendIntent.setAction("net.dinglisch.android.tasker.ACTION_TASK");
+            sendIntent.putExtra("gpsloggerevent", event);
+            sendIntent.putExtra("filename", session.getCurrentFormattedFileName());
+            sendIntent.putExtra("startedtimestamp", session.getStartTimeStamp());
+            sendBroadcast(sendIntent);
+        }
+    }
+
     /**
-     * Asks the main service client to clear its form.
+     * Informs main activity and other listeners like tasker whether logging has started/stopped
      */
-    private void notifyClientStarted() {
-        LOG.info(getString(R.string.started));
-        EventBus.getDefault().post(new ServiceEvents.LoggingStatus(true));
+    private void notifyClientsStarted(boolean started) {
+        LOG.info((started)? getString(R.string.started) : getString(R.string.stopped));
+        informTasker(started);
+        EventBus.getDefault().post(new ServiceEvents.LoggingStatus(started));
     }
 
     /**
@@ -454,7 +470,7 @@ public class GpsLoggingService extends Service  {
         stopPassiveManager();
         stopSensorManager(); // Sensor Data addition
         stopActivityRecognitionUpdates();
-        notifyClientStopped();
+        notifyClientsStarted(false);
         session.setCurrentFileName("");
         session.setCurrentFormattedFileName("");
     }
@@ -778,15 +794,6 @@ public class GpsLoggingService extends Service  {
         EventBus.getDefault().post(new ServiceEvents.LocationServicesUnavailable());
     }
 
-
-    /**
-     * Notifies main form that logging has stopped
-     */
-    void notifyClientStopped() {
-        LOG.info(getString(R.string.stopped));
-        EventBus.getDefault().post(new ServiceEvents.LoggingStatus(false));
-    }
-
     /**
      * Stops location manager, then starts it.
      */
@@ -1095,7 +1102,7 @@ public class GpsLoggingService extends Service  {
 
     @EventBusHook
     public void onEvent(CommandEvents.Annotate annotate){
-        final String desc = Strings.cleanDescription(annotate.annotation);
+        final String desc = annotate.annotation;
         if (desc.length() == 0) {
             LOG.debug("Clearing annotation");
             session.clearDescription();

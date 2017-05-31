@@ -59,7 +59,10 @@ public class SFTPJob extends Job {
                 jsch.getHostKeyRepository().add(new HostKey(host, key), null);
             }
 
-            jsch.addIdentity(this.pathToPrivateKey, this.privateKeyPassphrase);
+            if(!Strings.isNullOrEmpty(this.pathToPrivateKey)){
+                jsch.addIdentity(this.pathToPrivateKey, this.privateKeyPassphrase);
+            }
+
             session = jsch.getSession(this.username, this.host, this.port);
             session.setPassword(this.password);
 

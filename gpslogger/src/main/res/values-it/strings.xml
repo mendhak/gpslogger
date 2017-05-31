@@ -329,4 +329,5 @@
   <string name="sftp_private_key_path">Chiave privata</string>
   <string name="sftp_private_key_passphrase">Password chiave privata</string>
   <string name="sftp_validate_test_upload">Convalida chiave server e test di caricamento</string>
+  <string name="sftp_validate_accept_host_key">Accetto la chiave dell\'host?</string>
 </resources>

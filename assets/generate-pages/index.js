@@ -16,7 +16,7 @@ marked.options({
 
 renderer.heading = function (text, level) {
   var escapedText = text.toLowerCase().replace(/[^a-zA-Z]+/g, '');
-  if(level <= 2){
+  if(level <= 3){
       return `<h${level}><a name="${escapedText}" href="#${escapedText}">${text}</a></h${level}>`;
   } 
   else {

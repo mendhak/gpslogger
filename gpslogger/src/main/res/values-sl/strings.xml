@@ -40,6 +40,7 @@
   <string name="meters">&#160;metrov</string>
   <string name="error">Napaka</string>
   <string name="error_connection">Napake pri povezavi. Prosimo, preverite vaše nastavitve telefona.</string>
+  <string name="seconds">s</string>
   <string name="minutes">min</string>
   <string name="hours">ur</string>
   <string name="gpsprovider_unavailable">Ponudnik GPS ni na voljo. Preverite nastavitve mesta in omogoči namestitev ponudnika.

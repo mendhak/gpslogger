@@ -97,6 +97,7 @@
   <string name="log_gpx_summary">Logger placeringer til en GPX v1.0 fil</string>
   <string name="log_kml_title">Log til KML</string>
   <string name="log_kml_summary">Logger placeringer til en KML v2.2 fil</string>
+  <string name="log_plain_text_title">Log til CSV</string>
   <string name="log_plain_text_summary">Logger placeringer til en CSV-fil</string>
   <string name="new_file_creation_title">Ny filoprettelse</string>
   <string name="new_file_creation_summary">Om der skal oprettes en ny fil dagligt eller ved hver opstart.</string>
@@ -337,4 +338,9 @@ præcision ved lavere frekvenser.    </string>
   <string name="ssl_certificate_add_to_keystore">Føj dette certifikat til lokalt nøglelager?</string>
   <string name="ssl_certificate_is_valid">Certifikatet er gyldigt</string>
   <string name="hide_notification_from_status_bar">Skjul notifikationer fra statusbjælke</string>
+  <string name="sftp_setup_title">SFTP</string>
+  <string name="sftp_private_key_path">Privat nøgle</string>
+  <string name="sftp_private_key_passphrase">Privat nøgle adgangsstreng</string>
+  <string name="sftp_validate_test_upload">Validér værtsnøgle og test upload</string>
+  <string name="sftp_validate_accept_host_key">Acceptér denne værtsnøgle?</string>
 </resources>
