@@ -16,4 +16,4 @@ Please note that I work on GPSLogger in my spare time and I may not always have 
 
 ### [Donate Paypal](https://paypal.me/mendhak/)
 
-### [Donate Bitcoin](https://coinbase.com/mendhak)
+### [Donate Bitcoin](https://blockchain.info/payment_request?address=14bKk4sR1AD7avuJfBx2izy2FwyqMXEvcY)
