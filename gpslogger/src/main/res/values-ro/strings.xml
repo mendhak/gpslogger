@@ -208,5 +208,4 @@
   <string name="txt_annotation">Adnotare:</string>
   <string name="txt_time_isoformat">Ora UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Furnizor:</string>
-  <string name="annotation_requires_logging">Adnotările necesita logare in GPX/KML/Custom URL</string>
 </resources>
