@@ -393,6 +393,95 @@
                         />
                 </LinearLayout>
 
+                <!-- Sensor data extension accelerometer start -->
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/txt_accelerometer"
+                        android:id="@+id/detailedview_accelerometer_label"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:minWidth="@dimen/view_text_width"
+                        android:id="@+id/detailedview_accelerometer_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"
+                        android:background="@null"
+                        />
+                </LinearLayout>
+                <!-- Sensor data extension accelerometer end -->
+
+                <!-- Sensor data extension compass field start -->
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/txt_compass"
+                        android:id="@+id/detailedview_compass_label"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:minWidth="@dimen/view_text_width"
+                        android:id="@+id/detailedview_compass_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"
+                        android:background="@null"
+                        />
+                </LinearLayout>
+                <!-- Sensor data extension compass field end -->
+
+                <!-- Sensor data extension orientation field start -->
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_label_weight"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/txt_orientation"
+                        android:id="@+id/detailedview_orientation_label"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="@integer/detailedview_text_weight"
+                        android:layout_height="wrap_content"
+                        android:minWidth="@dimen/view_text_width"
+                        android:id="@+id/detailedview_orientation_text"
+                        android:text=""
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:editable="false"
+                        android:background="@null"
+                        />
+                </LinearLayout>
+                <!-- Sensor data extension orientation end -->
 
             </LinearLayout>
         </android.support.v7.widget.CardView>

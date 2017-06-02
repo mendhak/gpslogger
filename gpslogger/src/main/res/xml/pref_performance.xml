@@ -23,6 +23,35 @@
         android:summary="@string/keep_fix_summary"
         android:title="@string/keep_fix_title"/>
 
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+        android:key="sensordata_enable"
+        android:summary="@string/keep_fix_summary"
+        android:title="@string/sensordata_enable"/>
+
+    <!--<com.mendhak.gpslogger.ui.components.CustomSwitchPreference-->
+        <!--android:key="sensordata_enable_magneticfield"-->
+        <!--android:summary="@string/keep_fix_summary"-->
+        <!--android:title="@string/sensordata_enable_magneticfield"/>-->
+
+    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+        android:key="sensordata_interval"
+        android:title="@string/sensordata_interval"
+        android:summary="@string/sensordata_interval_summary"
+        android:dialogTitle="@string/sensordata_interval_title"
+        android:numeric="integer"
+        android:maxLength="2"
+        android:hint="@string/sensordata_interval_hint"
+        android:defaultValue="10"/>
+
+    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+        android:key="sensordata_samplesize"
+        android:title="@string/sensor_samplesize"
+        android:summary="Number of attempts to catch required sensor samples per sampling attempt"
+        android:dialogTitle="@string/sensordata_samplesize_dialogtitle"
+        android:numeric="integer"
+        android:maxLength="1"
+        android:hint="@string/sensordata_samplesize_hint"
+        android:defaultValue="9"/>
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
         android:key="distance_before_logging"

@@ -255,7 +255,7 @@ public class GpsMainActivity extends AppCompatActivity
             if( preferenceHelper.getLastVersionSeen() <= 71 ){
                 LOG.debug("preferenceHelper.getLastVersionSeen() " + preferenceHelper.getLastVersionSeen());
                 //Specifically disable passive provider... just once
-                if(preferenceHelper.getChosenListeners().contains("passive")){
+                if(preferenceHelper.getChosenListeners().contains(BundleConstants.PASSIVE)){
                     Set<String> listeners = new HashSet<>();
                     if(preferenceHelper.getChosenListeners().contains(LocationManager.GPS_PROVIDER)){ listeners.add(LocationManager.GPS_PROVIDER); }
                     if(preferenceHelper.getChosenListeners().contains(LocationManager.NETWORK_PROVIDER)){ listeners.add(LocationManager.NETWORK_PROVIDER); }

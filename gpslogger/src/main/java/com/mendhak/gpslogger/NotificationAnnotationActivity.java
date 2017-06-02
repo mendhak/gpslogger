@@ -35,6 +35,8 @@ import org.slf4j.Logger;
 
 public class NotificationAnnotationActivity extends AppCompatActivity {
 
+    //TODO: Would be the right location to extend for shortcut annotations
+
     //Called from the 'annotate' button in the Notification
     //This in turn captures user input and sends the input to the GPS Logging Service
 

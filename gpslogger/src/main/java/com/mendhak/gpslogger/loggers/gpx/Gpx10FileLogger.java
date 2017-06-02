@@ -20,7 +20,11 @@
 package com.mendhak.gpslogger.loggers.gpx;
 
 import android.location.Location;
+import android.os.Bundle;
+
 import com.mendhak.gpslogger.BuildConfig;
+import com.mendhak.gpslogger.SensorDataObject;
+import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.Maths;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Strings;
@@ -30,6 +34,7 @@ import com.mendhak.gpslogger.loggers.Files;
 import org.slf4j.Logger;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -166,7 +171,7 @@ class Gpx10AnnotateHandler implements Runnable {
             waypoint.append("<ele>").append(String.valueOf(loc.getAltitude())).append("</ele>");
         }
 
-        waypoint.append("<time>").append(dateTimeString).append("</time>");
+        waypoint.append("<time>").append(dateTimeString).append("</time>\n");
         waypoint.append("<name>").append(description).append("</name>");
 
         waypoint.append("<src>").append(loc.getProvider()).append("</src>");
@@ -232,7 +237,7 @@ class Gpx10WriteHandler implements Runnable {
 
     }
 
-    String getBeginningXml(String dateTimeString){
+    String getBeginningXml(String dateTimeString) {
         StringBuilder initialXml = new StringBuilder();
         initialXml.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
         initialXml.append("<gpx version=\"1.0\" creator=\"GPSLogger " + BuildConfig.VERSION_CODE + " - http://gpslogger.mendhak.com/\" ");
@@ -240,15 +245,15 @@ class Gpx10WriteHandler implements Runnable {
         initialXml.append("xmlns=\"http://www.topografix.com/GPX/1/0\" ");
         initialXml.append("xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 ");
         initialXml.append("http://www.topografix.com/GPX/1/0/gpx.xsd\">");
-        initialXml.append("<time>").append(dateTimeString).append("</time>");
+        initialXml.append("<time>").append(dateTimeString).append("</time>\n");
         return initialXml.toString();
     }
 
-    String getEndXml(){
+    String getEndXml() {
         return "</trk></gpx>";
     }
 
-    String getEndXmlWithSegment(){
+    String getEndXmlWithSegment() {
         return "</trkseg></trk></gpx>";
     }
 
@@ -257,7 +262,7 @@ class Gpx10WriteHandler implements Runnable {
         StringBuilder track = new StringBuilder();
 
         if (addNewTrackSegment) {
-            track.append("<trkseg>");
+            track.append("<trkseg>\n");
         }
 
         track.append("<trkpt lat=\"")
@@ -281,7 +286,7 @@ class Gpx10WriteHandler implements Runnable {
         }
 
         if (loc.getExtras() != null) {
-            String geoidheight = loc.getExtras().getString("GEOIDHEIGHT");
+            String geoidheight = loc.getExtras().getString(BundleConstants.GEOIDHEIGHT);
 
             if (!Strings.isNullOrEmpty(geoidheight)) {
                 track.append("<geoidheight>").append(geoidheight).append("</geoidheight>");
@@ -295,16 +300,16 @@ class Gpx10WriteHandler implements Runnable {
 
             int sat = Maths.getBundledSatelliteCount(loc);
 
-            if(sat > 0){
+            if (sat > 0) {
                 track.append("<sat>").append(String.valueOf(sat)).append("</sat>");
             }
 
 
-            String hdop = loc.getExtras().getString("HDOP");
-            String pdop = loc.getExtras().getString("PDOP");
-            String vdop = loc.getExtras().getString("VDOP");
-            String ageofdgpsdata = loc.getExtras().getString("AGEOFDGPSDATA");
-            String dgpsid = loc.getExtras().getString("DGPSID");
+            String hdop = loc.getExtras().getString(BundleConstants.HDOP);
+            String pdop = loc.getExtras().getString(BundleConstants.PDOP);
+            String vdop = loc.getExtras().getString(BundleConstants.VDOP);
+            String ageofdgpsdata = loc.getExtras().getString(BundleConstants.AGEOFDGPSDATA);
+            String dgpsid = loc.getExtras().getString(BundleConstants.DGPSID);
 
             if (!Strings.isNullOrEmpty(hdop)) {
                 track.append("<hdop>").append(hdop).append("</hdop>");
@@ -327,6 +332,54 @@ class Gpx10WriteHandler implements Runnable {
             }
         }
 
+        if (loc.getExtras() != null) {
+            //Render our sensor data extensions here
+            Bundle extras = loc.getExtras();
+            StringBuilder accelString = new StringBuilder();
+            StringBuilder compassString = new StringBuilder();
+            StringBuilder orientationString = new StringBuilder();
+
+            ArrayList<SensorDataObject.Accelerometer> accelerometer = (ArrayList<SensorDataObject.Accelerometer>) extras.getSerializable(BundleConstants.ACCELEROMETER);
+            if (accelerometer != null && accelerometer.size() > 0) {
+                accelString.append("<sensordata:accelerometer>");
+                for (SensorDataObject.Accelerometer accel : accelerometer) {
+                    accelString.append(String.format("(%1$.3f;%1$.3f;%1$.3f),", accel.x, accel.y, accel.z));
+                }
+                accelString.append("</sensordata:accelerometer>\n");
+            }
+
+            ArrayList<SensorDataObject.Compass> compass = (ArrayList<SensorDataObject.Compass>) extras.getSerializable(BundleConstants.COMPASS);
+            if (compass != null && compass.size() > 0) {
+                compassString.append("<sensordata:compass>");
+                for (SensorDataObject.Compass comp : compass) {
+                    compassString.append(String.format("%1$.3f;", comp.deg));
+                }
+                compassString.append("</sensordata:compass>\n");
+            }
+
+            ArrayList<SensorDataObject.Orientation> orientation = (ArrayList<SensorDataObject.Orientation>) extras.getSerializable(BundleConstants.ORIENTATION);
+            if (orientation != null && orientation.size() > 0) {
+                orientationString.append("<sensordata:orientation>");
+                for (SensorDataObject.Orientation orient : orientation) {
+                    orientationString.append(String.format("(%1$.3f;%1$.3f;%1$.3f),", orient.azimuth, orient.pitch, orient.roll));
+                }
+                orientationString.append("</sensordata:orientation>\n");
+            }
+
+            if (accelString.length() > 0 || compassString.length() > 0 || orientationString.length() > 0) {
+                /*
+                    GPX10 does not support the extensions container of GPX11.
+                    However it does support custom "private extensions", this writer is GPX10 compliant, thus omit the extension container.
+                    See also: http://www.topografix.com/GPX/1/0/gpx.xsd and http://www.topografix.com/GPX/1/1/gpx.xsd
+                 */
+                //track.append("<extensions>\n");
+                track.append(accelString);
+                track.append(compassString);
+                track.append(orientationString);
+                //track.append("</extensions>");
+            }
+        }
+
 
         track.append("</trkpt>\n");
 
@@ -334,7 +387,6 @@ class Gpx10WriteHandler implements Runnable {
 
         return track.toString();
     }
-
 }
 
 
