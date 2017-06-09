@@ -36,18 +36,20 @@ These are the extras you can send to GPSLogger:
 
 You can also invoke the Start and Stop **shortcuts** that GPSLogger comes with.
 
-### Tasker Event 
+### GPSLogger Events Broadcast
 
 
-GPSLogger sends an intent to Tasker on start/stop of logging, which you can receive as an event.
+GPSLogger sends a broadcast start/stop of logging, which you can receive as an event.
+  
+In Tasker, this would look like:  
   
 > Event: Intent Received  
-  Action: net.dinglisch.android.tasker.ACTION_TASK  
-  Scheme: gpsloggerevent  
+  Action: com.mendhak.gpslogger.EVENT 
   
 From there in your task, you can look at the following variables
  
  * `%gpsloggerevent` - `started` or `stopped`
  * `%filename` - the base filename that was chosen (no extension)
  * `%startedtimestamp` - timestamp when logging was started (epoch)
-    
+
+In a custom application, receive the `com.mendhak.gpslogger.EVENT` broadcast and have a look inside the extras.
