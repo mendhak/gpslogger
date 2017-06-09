@@ -413,26 +413,24 @@ public class GpsLoggingService extends Service  {
 
     }
 
-    private void informTasker(boolean loggingStarted) {
-        if(Systems.isPackageInstalled("net.dinglisch.android.taskerm",getApplicationContext())){
-            LOG.debug("Sending a custom broadcast to tasker");
+    private void notifyByBroadcast(boolean loggingStarted) {
+            LOG.debug("Sending a custom broadcast");
             String event = (loggingStarted) ? "started" : "stopped";
             Intent sendIntent = new Intent();
             sendIntent.setData(Uri.parse("gpsloggerevent://" + event));
-            sendIntent.setAction("net.dinglisch.android.tasker.ACTION_TASK");
+            sendIntent.setAction("com.mendhak.gpslogger.EVENT");
             sendIntent.putExtra("gpsloggerevent", event);
             sendIntent.putExtra("filename", session.getCurrentFormattedFileName());
             sendIntent.putExtra("startedtimestamp", session.getStartTimeStamp());
             sendBroadcast(sendIntent);
-        }
     }
 
     /**
-     * Informs main activity and other listeners like tasker whether logging has started/stopped
+     * Informs main activity and broadcast listeners whether logging has started/stopped
      */
     private void notifyClientsStarted(boolean started) {
         LOG.info((started)? getString(R.string.started) : getString(R.string.stopped));
-        informTasker(started);
+        notifyByBroadcast(started);
         EventBus.getDefault().post(new ServiceEvents.LoggingStatus(started));
     }
 
