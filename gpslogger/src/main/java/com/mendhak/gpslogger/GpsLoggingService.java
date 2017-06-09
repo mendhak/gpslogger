@@ -417,7 +417,6 @@ public class GpsLoggingService extends Service  {
             LOG.debug("Sending a custom broadcast");
             String event = (loggingStarted) ? "started" : "stopped";
             Intent sendIntent = new Intent();
-            sendIntent.setData(Uri.parse("gpsloggerevent://" + event));
             sendIntent.setAction("com.mendhak.gpslogger.EVENT");
             sendIntent.putExtra("gpsloggerevent", event);
             sendIntent.putExtra("filename", session.getCurrentFormattedFileName());
