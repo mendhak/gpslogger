@@ -92,6 +92,8 @@
   <!-- Settings -->
   <string name="pref_logging_title">تفاصيل  الدخول</string>
   <string name="log_gpx_title">دخول إلى GPX</string>
+  <string name="log_kml_title">ثفتى لقفع يثغا</string>
+  <string name="log_kml_summary">اهلا وسهلا</string>
   <string name="new_file_creation_title">إنشاء ملف جديد</string>
   <string name="new_file_creation_onceaday">مرة في اليوم</string>
   <string name="new_file_creation_everystart">في كل مرة ابدأ</string>

@@ -96,6 +96,7 @@
   <string name="log_gpx_summary">Posições de registros para um arquivo GPX v 1.0</string>
   <string name="log_kml_title">Log para KML</string>
   <string name="log_kml_summary">Posições de registros para um arquivo KML v 2.2</string>
+  <string name="log_plain_text_title">Log para CSV</string>
   <string name="log_plain_text_summary">Posições de registros para um arquivo CSV</string>
   <string name="new_file_creation_title">Nova criação de arquivo</string>
   <string name="new_file_creation_summary">Se deseja criar um novo arquivo de uma vez por dia ou cada vez que você iniciar.</string>
@@ -325,4 +326,5 @@
   <string name="ssl_certificate_add_to_keystore">Adicionar este certificado ao armazenamento de chave local?</string>
   <string name="ssl_certificate_is_valid">O certificado é válido</string>
   <string name="hide_notification_from_status_bar">Ocultar notificação da barra de status</string>
+  <string name="txt_battery">Bateria</string>
 </resources>

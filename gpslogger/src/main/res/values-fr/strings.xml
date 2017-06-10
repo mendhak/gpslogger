@@ -236,9 +236,11 @@ une plus grande précision à basses fréquences.    </string>
   <string name="txt_annotation">Annotation :</string>
   <string name="txt_time_isoformat">Heure UTC (2011-12-25T15:27:33Z) :</string>
   <string name="txt_provider">Fournisseur :</string>
+  <string name="annotation_requires_logging">Les annotations nécessitent la journalisation en GPX/KML/URL personnalisée</string>
   <string name="gpslogger_folder_title">Enregistrer dans le dossier</string>
   <string name="gpslogger_folder_summary">Où enregistrer les fichiers, par défaut dans /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Dossier</string>
+  <string name="new_file_custom_message">Il est possible d\'utiliser %SER pour le périphérique série, %YEAR, %MONTH, %DAY, %HOUR, %MIN, %PROFILE, %VER pour la version</string>
   <string name="new_file_prefix_serial_title">Préfixer le numéro de série au nom de fichier</string>
   <string name="new_file_prefix_serial_summary">Voici le numéro de série trouvé dans les paramètres de votre appareil </string>
   <string name="txt_travel_duration">Durée :</string>
@@ -267,6 +269,7 @@ une plus grande précision à basses fréquences.    </string>
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Réseau</string>
   <string name="listeners_passive">Passif</string>
+  <string name="listeners_summary">Quels fournisseurs de positionnement utiliser lorsqu\'ils sont disponibles : satellites GPS, réseau de téléphonie cellulaire/Wi-Fi. Passif est un fournisseur spécial qui écoute les positions demandées par d\'autres applications.</string>
   <string name="listeners_title">Fournisseurs de positionnement</string>
   <string name="autosend_frequency_hint">Nombre de minutes</string>
   <string name="pref_logging_file_no_permissions">Ce dossier n’est pas accessible en écriture par GPSLogger. Merci de sélectionner un autre dossier où écrire.</string>
@@ -328,4 +331,7 @@ une plus grande précision à basses fréquences.    </string>
   <string name="sftp_private_key_passphrase">Mot de passe de clé privée</string>
   <string name="sftp_validate_test_upload">Valider la clé d’hôte et tester l\'envoi</string>
   <string name="sftp_validate_accept_host_key">Faut-il accepter cette clé d’hôte ?</string>
+  <string name="txt_timestamp_epoch">Horadatage (epoch)</string>
+  <string name="txt_starttimestamp_epoch">Démarrer horadatage (epoch)</string>
+  <string name="txt_battery">Batterie</string>
 </resources>
