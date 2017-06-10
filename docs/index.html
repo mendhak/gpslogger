@@ -180,12 +180,17 @@
 
 </div></section>
 
-<section><div class='lead'><h2><a name="howdoesthisintegratewithtaskerllamaorotherautomationframeworks" href="#howdoesthisintegratewithtaskerllamaorotherautomationframeworks">How does this integrate with Tasker/Llama or other automation frameworks?</a></h2><h3><a name="controllinggpslogger" href="#controllinggpslogger">Controlling GPSLogger</a></h3><p>If your automation app can send intents, you can use those intents to control GPSLogger and get it to perform a few actions. 
-For example, in Tasker, create a new action under Misc &gt; Send Intent. </p>
+<section><div class='lead'><h2><a name="howdoesthisintegratewithtaskerllamaorotherautomationframeworks" href="#howdoesthisintegratewithtaskerllamaorotherautomationframeworks">How does this integrate with Tasker/Llama or other automation frameworks?</a></h2><h2><a name="howtoautomategpslogger" href="#howtoautomategpslogger">How to automate GPSLogger?</a></h2><h3><a name="controllinggpslogger" href="#controllinggpslogger">Controlling GPSLogger</a></h3><p>If your automation app can send intents, you can use those intents to control GPSLogger and get it to perform a few actions. </p>
+<p>To invoke it from Tasker, create a new action under Misc &gt; Send Intent. </p>
 <blockquote>
 <p>Action: <code>com.mendhak.gpslogger.GpsLoggingService</code><br>Extra: <code>immediatestart:true (others below)</code><br>Target: <code>Service</code></p>
 </blockquote>
-<p>These are the extras you can send to GPSLogger:</p>
+<p>To invoke it from your own Android code:</p>
+<pre><code>Intent i = new Intent(&quot;com.mendhak.gpslogger.GpsLoggingService&quot;);
+i.setPackage(&quot;com.mendhak.gpslogger&quot;);
+i.putExtra(&quot;immediatestart&quot;, true);
+startService(i);
+</code></pre><p><strong>These are the extras you can send to GPSLogger</strong>:</p>
 <blockquote>
 <p><code>immediatestart</code> - (true/false) Start logging immediately  </p>
 <p><code>immediatestop</code> - (true/false) Stop logging</p>
@@ -198,9 +203,11 @@ For example, in Tasker, create a new action under Misc &gt; Send Intent. </p>
 <p><code>setprefercelltower</code> - (true/false) Enables or disables the GPS or celltower listeners</p>
 <p><code>logonce</code> - (true/false) Log a single point, then stop</p>
 <p><code>switchprofile</code> - (text) The name of the profile to switch to</p>
+<p><code>getstatus</code> - (true) Asks GPSLogger to send its current events broadcast</p>
 </blockquote>
-<p>You can also invoke the Start and Stop <strong>shortcuts</strong> that GPSLogger comes with.</p>
-<h3><a name="taskerevent" href="#taskerevent">Tasker Event</a></h3><p>GPSLogger sends an intent to Tasker on start/stop of logging, which you can receive as an event.</p>
+<h3><a name="shortcuts" href="#shortcuts">Shortcuts</a></h3><p>The app comes with a Start and a Stop <strong>shortcut</strong> (long press home screen, add widget), you can invoke those from some automation apps.</p>
+<h3><a name="gpsloggereventsbroadcast" href="#gpsloggereventsbroadcast">GPSLogger Events Broadcast</a></h3><h3><a name="listeningtogpslogger" href="#listeningtogpslogger">Listening to GPSLogger</a></h3><p>(Experimental feature) GPSLogger sends a broadcast start/stop of logging, which you can receive as an event.</p>
+<p>In Tasker, this would look like:  </p>
 <blockquote>
 <p>Event: Intent Received<br>  Action: com.mendhak.gpslogger.EVENT </p>
 </blockquote>
@@ -210,6 +217,7 @@ For example, in Tasker, create a new action under Misc &gt; Send Intent. </p>
 <li><code>%filename</code> - the base filename that was chosen (no extension)</li>
 <li><code>%startedtimestamp</code> - timestamp when logging was started (epoch)</li>
 </ul>
+<p>In a custom application, receive the <code>com.mendhak.gpslogger.EVENT</code> broadcast and have a look inside the extras.</p>
 
 </div></section>
 
