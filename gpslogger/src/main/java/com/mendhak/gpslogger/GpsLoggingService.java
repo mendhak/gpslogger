@@ -445,7 +445,6 @@ public class GpsLoggingService extends Service  {
     private void notifyStatus(boolean started) {
         LOG.info((started)? getString(R.string.started) : getString(R.string.stopped));
         notifyByBroadcast(started);
-//        EventBus.getDefault().post(new ServiceEvents.LoggingStatus(started));
     }
 
     /**
