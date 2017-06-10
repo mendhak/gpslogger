@@ -41,6 +41,13 @@ public class CommandEvents {
     }
 
     /**
+     * Requests to get status of Logger
+     */
+    public static class GetStatus {
+    }
+
+
+    /**
      * Requests auto sending to targets
      */
     public static class AutoSend {
