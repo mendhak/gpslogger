@@ -238,11 +238,9 @@ Nomes de ficheiro muito dinâmicos
   <string name="txt_annotation">Anotação:</string>
   <string name="txt_time_isoformat">Hora UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Fornecedor:</string>
-  <string name="annotation_requires_logging">Anotações exigem Log para GPX/KML/URL Personalizado</string>
   <string name="gpslogger_folder_title">Salvar na pasta</string>
   <string name="gpslogger_folder_summary">Onde deseja salvar os arquivos de log, para /sdcard/GPSLogger por omissão</string>
   <string name="autoftp_directory">Pasta</string>
-  <string name="new_file_custom_message">Pode usar %SER para número de série do dispositivo, %YEAR, %MONTH, %DAY, %HOUR, %MIN, %PROFILE, %VER para versão</string>
   <string name="new_file_prefix_serial_title">Usar o número de série do dispositivo como prefixo do nome do ficheiro</string>
   <string name="new_file_prefix_serial_summary">Este é o número de série disponível na informação de Estado do telefone </string>
   <string name="txt_travel_duration">Duração:</string>
@@ -271,7 +269,6 @@ Nomes de ficheiro muito dinâmicos
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Rede</string>
   <string name="listeners_passive">Passivo</string>
-  <string name="listeners_summary">Que fornecedores de localização utilizar quando disponíveis; GPS para satélites, rede para torre de celular/Wi-Fi, Passivo é um fornecedor especial que recebe localizações de outras aplicações.</string>
   <string name="listeners_title">Fornecedores de localização</string>
   <string name="autosend_frequency_hint">Número de minutos</string>
   <string name="pref_logging_file_no_permissions">Essa pasta não permite gravação pelo GPSLogger. Por favor, escolha outra pasta para gravação.</string>

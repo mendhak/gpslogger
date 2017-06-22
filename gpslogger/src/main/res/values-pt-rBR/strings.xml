@@ -96,6 +96,7 @@
   <string name="log_gpx_summary">Posições de registros para um arquivo GPX v 1.0</string>
   <string name="log_kml_title">Log para KML</string>
   <string name="log_kml_summary">Posições de registros para um arquivo KML v 2.2</string>
+  <string name="log_plain_text_title">Log para CSV</string>
   <string name="log_plain_text_summary">Posições de registros para um arquivo CSV</string>
   <string name="new_file_creation_title">Nova criação de arquivo</string>
   <string name="new_file_creation_summary">Se deseja criar um novo arquivo de uma vez por dia ou cada vez que você iniciar.</string>
@@ -238,11 +239,9 @@
   <string name="txt_annotation">Anotação:</string>
   <string name="txt_time_isoformat">Hora UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Provedor:</string>
-  <string name="annotation_requires_logging">Anotações exigem Log para GPX/KML/URL Personalizado</string>
   <string name="gpslogger_folder_title">Salvar na pasta</string>
   <string name="gpslogger_folder_summary">Onde deseja salvar os arquivos de log, padronizado para /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Pasta</string>
-  <string name="new_file_custom_message">Você pode usar %SER para número de série do dispositivo, %YEAR, %MONTH, %DAY, %HOUR, %MIN, %PROFILE, %VER para a versão</string>
   <string name="new_file_prefix_serial_title">Prefixar o número de série do dispositivo para o nome do arquivo</string>
   <string name="new_file_prefix_serial_summary">Este é o número de série encontrado no seu status do telefone </string>
   <string name="txt_travel_duration">Duração:</string>
@@ -271,7 +270,6 @@
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Rede</string>
   <string name="listeners_passive">Passivo</string>
-  <string name="listeners_summary">Quais provedores de localização utilizar quando eles estão disponíveis; GPS para satélites, rede para torre de celular/Wi-Fi, Passivo é um provedor especial que atende à locais abrangidos por outras aplicações.</string>
   <string name="listeners_title">Provedores de localização</string>
   <string name="autosend_frequency_hint">Número de minutos</string>
   <string name="pref_logging_file_no_permissions">Essa pasta não permite gravação pelo GPSLogger. Por favor, escolha outra pasta para gravar.</string>
@@ -328,4 +326,5 @@
   <string name="ssl_certificate_add_to_keystore">Adicionar este certificado ao armazenamento de chave local?</string>
   <string name="ssl_certificate_is_valid">O certificado é válido</string>
   <string name="hide_notification_from_status_bar">Ocultar notificação da barra de status</string>
+  <string name="txt_battery">Bateria</string>
 </resources>

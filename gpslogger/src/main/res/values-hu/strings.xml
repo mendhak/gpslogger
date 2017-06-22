@@ -96,6 +96,7 @@
   <string name="log_gpx_summary">Pozíciók naplózása egy GPX v1.0 fájlba</string>
   <string name="log_kml_title">KML napló</string>
   <string name="log_kml_summary">Pozíciók naplózása egy KML v2.2 fájlba</string>
+  <string name="log_plain_text_title">Naplózás CSV-be</string>
   <string name="log_plain_text_summary">Pozíciók naplózása egy CSV fájlba</string>
   <string name="new_file_creation_title">Új fájl létrehozása</string>
   <string name="new_file_creation_summary">Létrehoz egy új fájlt, naponta egyszer, vagy minden induláskor.</string>
@@ -113,6 +114,7 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="time_before_logging_hint">Adja meg másodpercben (max 9999)</string>
   <string name="keep_fix_summary">Legyen óvatos, ez drámaian csökkenteni fogja az akkumulátora élettartamát. A nagyobb pontossághoz használja alacsonyabb frekvencia használatával.</string>
   <string name="keep_fix_title">GPS bekapcsolva tartása</string>
+  <string name="retry_time_title">Pontosítási idõkorlát</string>
   <string name="retry_time_summary">Miután megvan az első GPS fix, ennyi ideig próbáljon meg az app pontosabb pozíciót keresni, hogy a pozíció megfeleljen a pontosság szűrő beállításainak.</string>
   <string name="display_imperial_title">Angolszász mértékegységek használata</string>
   <string name="display_imperial_summary">Mérföld, láb és öl használata a hipermodern metrikus cuccok helyett. (A beállításokat továbbra is metrikusan kell megadni)</string>
@@ -177,6 +179,7 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="menu_upload">Feltöltés</string>
   <string name="autoemail_from">Címről</string>
   <string name="autoemail_from_summary">Egyes szolgáltatók megkövetelik az e-mail címet. Csak abban az esetben kell megadni.     </string>
+  <string name="gdocs_clearauthorization_summary">Elfelejti a helyi Google Drive beállításokat. Ahhoz, hogy véglegesen el legyen távolítva a hozzáférési engedély, keresd fel a Google Fiókbeállításokat</string>
   <string name="gdocs_setup_title">Google Drive</string>
   <string name="gdocs_test_summary">Tesztfájl feltöltése Google Drive-ba</string>
   <string name="gdocs_test_title">Próba feltöltés</string>
@@ -233,11 +236,9 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="txt_annotation">Jegyzet:</string>
   <string name="txt_time_isoformat">UTC idő (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Szolgáltató:</string>
-  <string name="annotation_requires_logging">Széljegyzetekhez GPX, KML vagy saját URL logolás szükséges</string>
   <string name="gpslogger_folder_title">Mentés könyvtárba</string>
   <string name="gpslogger_folder_summary">Log fájlok mentési helye, /sdcard/GPSLogger az alapértelmezett</string>
   <string name="autoftp_directory">Mappa</string>
-  <string name="new_file_custom_message">Használható változók: %SER (eszköz sorozatszám), %YEAR (év), %MONTH (hónap), %DAY (nap), %HOUR (óra), %MIN (perc), %PROFILE (profil), %VER (verzió)</string>
   <string name="new_file_prefix_serial_title">Készülék sorszám használata fájlnév előtagként</string>
   <string name="new_file_prefix_serial_summary">Ez a telefon sorozatszáma az állapot menüből </string>
   <string name="txt_travel_duration">Időtartam:</string>
@@ -256,6 +257,7 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="txt_number_of_points">Pontok száma</string>
   <string name="save">Mentés</string>
   <string name="pref_filedetails_title">Fájl- és mappa részletek</string>
+  <string name="absolute_timeout_title">Abszolút idõ a GPS helyreállításáig</string>
   <string name="absolute_timeout_summary">Időkorlát másodpercben, az app maximum ennyi ideig próbálkozik egy fix pozíció megszerzésével, függetlenül más beállításoktól. Hasznos ha épületben tartózkodik: így a GPS nem meríti le az akkut. Ha 0-t ad meg, nincs időkorlát.</string>
   <string name="txt_latitude_short">Szél</string>
   <string name="txt_longitude_short">Hossz</string>
@@ -265,9 +267,9 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Hálózat</string>
   <string name="listeners_passive">Passzív</string>
-  <string name="listeners_summary">Használható helyszolgáltatók. Műhold alapú GPS, mobil adótornyok vagy wifi alapú hálózati, vagy passzív; ez egy speciális szolgáltató, amely a más alkalmazásokban lekérdezett pozíciókat figyeli.</string>
   <string name="listeners_title">Helyszolgáltatók</string>
   <string name="autosend_frequency_hint">Percek száma</string>
+  <string name="pref_logging_file_no_permissions">A GPSLogger nem tudja írni a választott mappát. Kérlek válassz egy másik mappát.</string>
   <string name="pref_gpsvisualizer">GPS napló statisztika és grafikák megjelenítése</string>
   <string name="new_file_custom_each_time_title">Fájlnév kérése minden indításkor</string>
   <string name="new_file_custom_each_time_summary">Egyedi fájlnevet kér a naplózás minden indításakor</string>
@@ -313,6 +315,17 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="privacy_policy">Adatvédelmi irányelvek</string>
   <string name="debuglog_attach_to_email">Hibakeresési napló csatolása az e-mailhez</string>
   <string name="debuglog_attach_to_email_summary">Hibakeresési naplót mellékel az e-mailhez néhány diagnosztikai információval</string>
+  <string name="change_language_title">Nyelv Váltása</string>
   <string name="change_language_summary">Nincs minden nyelvhez teljes fordítás! Újra kell indítani a programot a beállítás érvénybelépéséhez.</string>
+  <string name="coordinate_display_format">Koórdináta megjelenítési formátuma</string>
+  <string name="ssl_certificate_validate">SSL Tanúsítvány Ellenõrzése</string>
   <string name="parameters">Paraméterek</string>
+  <string name="ssl_certificate_add_to_keystore">Hozzáadja a tanúsítványt a helyi kulcstárhoz?</string>
+  <string name="ssl_certificate_is_valid">Ez a tanúsítvány érvényes</string>
+  <string name="hide_notification_from_status_bar">Értesítés elrejtése az állapotsávról</string>
+  <string name="sftp_setup_title">SFTP</string>
+  <string name="sftp_private_key_path">Privát kulcs</string>
+  <string name="sftp_private_key_passphrase">Privát kulcs jelszava</string>
+  <string name="sftp_validate_test_upload">Kiszolgáló ellenõrzése és próbafeltöltés</string>
+  <string name="sftp_validate_accept_host_key">Elfogadja ezt a kiszolgálókulcsot?</string>
 </resources>

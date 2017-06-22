@@ -229,7 +229,6 @@
   <string name="txt_annotation">Obilježavanje:</string>
   <string name="txt_time_isoformat">UTC vrijeme (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Pružatelj:</string>
-  <string name="annotation_requires_logging">Obilježavanje zahtijeva zapisivanje u GPX/KML/Prilagođen URL</string>
   <string name="gpslogger_folder_title">Spremi u mapu</string>
   <string name="gpslogger_folder_summary">Gdje da sprema datoteku zapisivanja, zadano je/sdcard/GPSLogger</string>
   <string name="autoftp_directory">Mapa</string>
@@ -260,7 +259,6 @@
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Mreža</string>
   <string name="listeners_passive">Pasivni</string>
-  <string name="listeners_summary">Koje lokacijske pružatelje koristiti kada su na raspolaganju; GPS satelite, mreža za baznu stanicu/wifi, pasivno je posebna usluga koja prima lokacije primljene iz druge aplikacije.</string>
   <string name="listeners_title">Pružatelji lokacije</string>
   <string name="autosend_frequency_hint">Broj minuta</string>
   <string name="pref_gpsvisualizer">Vizualizirajte GPS log statistike i grafove</string>

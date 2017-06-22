@@ -31,18 +31,14 @@
       <main>
 
 
-<section><div class='lead'><h2><a name="quicktour" href="#quicktour">Quick Tour</a></h2><h3>Menus and Icons</h3>
-
-<p><img src="images/2.png" alt="2"></p>
+<section><div class='lead'><h2><a name="quicktour" href="#quicktour">Quick Tour</a></h2><h3><a name="menusandicons" href="#menusandicons">Menus and Icons</a></h3><p><img src="images/2.png" alt="2"></p>
 <p>Use the views dropdown to navigate between the different presentations.  </p>
 <p>While you are logging, the green indicator will stay on.</p>
 <p>The spinner only appears when the GPS is trying to get a fix.  </p>
 
 </div></section>
 
-<section><div class='lead'><h3>Menus</h3>
-
-<p><img src="images/3.png" alt="3"></p>
+<section><div class='lead'><h3><a name="menus" href="#menus">Menus</a></h3><p><img src="images/3.png" alt="3"></p>
 <p>Many menu items</p>
 <p><strong>Profiles</strong> - Group preferences under profile names, such as default, nighttime, trekking, etc.</p>
 <p><strong>General options</strong> - Startup, imperial, debug file and version info</p>
@@ -51,9 +47,7 @@
 
 </div></section>
 
-<section><div class='lead'><h3>Simple view</h3>
-
-<p><img src="images/1.png" alt="1"></p>
+<section><div class='lead'><h3><a name="simpleview" href="#simpleview">Simple view</a></h3><p><img src="images/1.png" alt="1"></p>
 <p>Shows your last recorded GPS point, updates when new point available  </p>
 <p>Tap any field to highlight the text</p>
 <p>Big start/stop button. You can&#39;t miss it</p>
@@ -61,17 +55,13 @@
 
 </div></section>
 
-<section><div class='lead'><h3>Detailed view</h3>
-
-<p><img src="images/4.png" alt="4"></p>
+<section><div class='lead'><h3><a name="detailedview" href="#detailedview">Detailed view</a></h3><p><img src="images/4.png" alt="4"></p>
 <p>Detailed view of last recorded GPS point</p>
 <p>Smaller start/stop button</p>
 
 </div></section>
 
-<section><div class='lead'><h3>Big View</h3>
-
-<p><img src="images/5.png" alt="5"></p>
+<section><div class='lead'><h3><a name="bigview" href="#bigview">Big View</a></h3><p><img src="images/5.png" alt="5"></p>
 <p>Big text</p>
 <p>Meant for landscape mode</p>
 <p>Awkward in portrait mode</p>
@@ -190,12 +180,17 @@
 
 </div></section>
 
-<section><div class='lead'><h2><a name="howdoesthisintegratewithtaskerllamaorotherautomationframeworks" href="#howdoesthisintegratewithtaskerllamaorotherautomationframeworks">How does this integrate with Tasker/Llama or other automation frameworks?</a></h2><p>If your automation app can send intents, you can use those intents to control GPSLogger and get it to perform a few actions. 
-For example, in Tasker, create a new action under Misc &gt; Send Intent. </p>
+<section><div class='lead'><h2><a name="howdoesthisintegratewithtaskerllamaorotherautomationframeworks" href="#howdoesthisintegratewithtaskerllamaorotherautomationframeworks">How does this integrate with Tasker/Llama or other automation frameworks?</a></h2><h2><a name="howtoautomategpslogger" href="#howtoautomategpslogger">How to automate GPSLogger?</a></h2><h3><a name="controllinggpslogger" href="#controllinggpslogger">Controlling GPSLogger</a></h3><p>If your automation app can send intents, you can use those intents to control GPSLogger and get it to perform a few actions. </p>
+<p>To invoke it from Tasker, create a new action under Misc &gt; Send Intent. </p>
 <blockquote>
 <p>Action: <code>com.mendhak.gpslogger.GpsLoggingService</code><br>Extra: <code>immediatestart:true (others below)</code><br>Target: <code>Service</code></p>
 </blockquote>
-<p>These are the extras you can send to GPSLogger:</p>
+<p>To invoke it from your own Android code:</p>
+<pre><code>Intent i = new Intent(&quot;com.mendhak.gpslogger.GpsLoggingService&quot;);
+i.setPackage(&quot;com.mendhak.gpslogger&quot;);
+i.putExtra(&quot;immediatestart&quot;, true);
+startService(i);
+</code></pre><p><strong>These are the extras you can send to GPSLogger</strong>:</p>
 <blockquote>
 <p><code>immediatestart</code> - (true/false) Start logging immediately  </p>
 <p><code>immediatestop</code> - (true/false) Stop logging</p>
@@ -208,8 +203,21 @@ For example, in Tasker, create a new action under Misc &gt; Send Intent. </p>
 <p><code>setprefercelltower</code> - (true/false) Enables or disables the GPS or celltower listeners</p>
 <p><code>logonce</code> - (true/false) Log a single point, then stop</p>
 <p><code>switchprofile</code> - (text) The name of the profile to switch to</p>
+<p><code>getstatus</code> - (true) Asks GPSLogger to send its current events broadcast</p>
 </blockquote>
-<p>You can also invoke the Start and Stop <strong>shortcuts</strong> that GPSLogger comes with.</p>
+<h3><a name="shortcuts" href="#shortcuts">Shortcuts</a></h3><p>The app comes with a Start and a Stop <strong>shortcut</strong> (long press home screen, add widget), you can invoke those from some automation apps.</p>
+<h3><a name="gpsloggereventsbroadcast" href="#gpsloggereventsbroadcast">GPSLogger Events Broadcast</a></h3><h3><a name="listeningtogpslogger" href="#listeningtogpslogger">Listening to GPSLogger</a></h3><p>(Experimental feature) GPSLogger sends a broadcast start/stop of logging, which you can receive as an event.</p>
+<p>In Tasker, this would look like:  </p>
+<blockquote>
+<p>Event: Intent Received<br>  Action: com.mendhak.gpslogger.EVENT </p>
+</blockquote>
+<p>From there in your task, you can look at the following variables</p>
+<ul>
+<li><code>%gpsloggerevent</code> - <code>started</code> or <code>stopped</code></li>
+<li><code>%filename</code> - the base filename that was chosen (no extension)</li>
+<li><code>%startedtimestamp</code> - timestamp when logging was started (epoch)</li>
+</ul>
+<p>In a custom application, receive the <code>com.mendhak.gpslogger.EVENT</code> broadcast and have a look inside the extras.</p>
 
 </div></section>
 
@@ -240,9 +248,7 @@ For example, in Tasker, create a new action under Misc &gt; Send Intent. </p>
 <li>Tracking friends and family on holiday</li>
 <li>Recording gravestone locations</li>
 </ul>
-<h3>Programmatic access</h3>
-
-<p>There is a <a href="https://github.com/export-mike/gpslogger-android-dropbox-restapi">project</a> that can expose the GPX files in Dropbox as a RESTful API, and a hosted <a href="https://github.com/mendhak/gpslogger/issues/452">Heroku app</a>. </p>
+<h3><a name="programmaticaccess" href="#programmaticaccess">Programmatic access</a></h3><p>There is a <a href="https://github.com/export-mike/gpslogger-android-dropbox-restapi">project</a> that can expose the GPX files in Dropbox as a RESTful API, and a hosted <a href="https://github.com/mendhak/gpslogger/issues/452">Heroku app</a>. </p>
 
 </div></section>
 
@@ -296,32 +302,14 @@ For example, in Tasker, create a new action under Misc &gt; Send Intent. </p>
 
 <section><div class='lead'><h2><a name="otherlinks" href="#otherlinks">Other links</a></h2><p>Submit your <a href="https://github.com/mendhak/gpslogger/issues">feature requests on Github</a>.</p>
 <p>Please note that I work on GPSLogger in my spare time and I may not always have the time or resources to implement a feature. However, GPSLogger is open source. You are encouraged to contribute or get someone else to contribute a feature.</p>
-<h3><a href="https://github.com/mendhak/gpslogger/">Source code</a></h3>
+<h3><a name="ahrefhttpsgithubcommendhakgpsloggersourcecodea" href="#ahrefhttpsgithubcommendhakgpsloggersourcecodea"><a href="https://github.com/mendhak/gpslogger/">Source code</a></a></h3><h3><a name="ahrefhttpscrowdincomprojectgpsloggerforandroidcontributetranslationsoncrowdina" href="#ahrefhttpscrowdincomprojectgpsloggerforandroidcontributetranslationsoncrowdina"><a href="https://crowdin.com/project/gpslogger-for-android">Contribute translations on Crowdin</a></a></h3><h3><a name="ahreflicensehtmllicensedundergplva" href="#ahreflicensehtmllicensedundergplva"><a href="license.html">Licensed under GPLv2</a></a></h3><h3><a name="ahrefprivacypolicyhtmlreadtheprivacypolicya" href="#ahrefprivacypolicyhtmlreadtheprivacypolicya"><a href="privacypolicy.html">Read the privacy policy</a></a></h3><h3><a name="ahrefopensourcelibrarieshtmlopensourcelibrariesuseda" href="#ahrefopensourcelibrarieshtmlopensourcelibrariesuseda"><a href="opensourcelibraries.html">Open source libraries used</a></a></h3><h3><a name="ahrefhttpspaypalmemendhakdonatepaypala" href="#ahrefhttpspaypalmemendhakdonatepaypala"><a href="https://paypal.me/mendhak/">Donate Paypal</a></a></h3><h3><a name="ahrefhttpsblockchaininfopaymentrequestaddressbkksradavujfbxizyfwyqmxevcydonatebitcoina" href="#ahrefhttpsblockchaininfopaymentrequestaddressbkksradavujfbxizyfwyqmxevcydonatebitcoina"><a href="https://blockchain.info/payment_request?address=14bKk4sR1AD7avuJfBx2izy2FwyqMXEvcY">Donate Bitcoin</a></a></h3>
+</div></section>
 
-<h3><a href="https://crowdin.com/project/gpslogger-for-android">Contribute translations on Crowdin</a></h3>
-
-<h3><a href="license.html">Licensed under GPLv2</a></h3>
-
-<h3><a href="privacypolicy.html">Read the privacy policy</a></h3>
-
-<h3><a href="opensourcelibraries.html">Open source libraries used</a></h3>
-
-<h3><a href="https://paypal.me/mendhak/">Donate Paypal</a></h3>
-
-<h3><a href="https://coinbase.com/mendhak">Donate Bitcoin</a></h3>
-
+<section><div class='lead'><h2><a name="morescreenshots" href="#morescreenshots">More screenshots</a></h2><h3><a name="generalsettings" href="#generalsettings">General settings</a></h3><p><img src="images/6.png" alt="6"></p>
 
 </div></section>
 
-<section><div class='lead'><h2><a name="morescreenshots" href="#morescreenshots">More screenshots</a></h2><h3>General settings</h3>
-
-<p><img src="images/6.png" alt="6"></p>
-
-</div></section>
-
-<section><div class='lead'><h3>Logging details</h3>
-
-<p><img src="images/7.png" alt="7"></p>
+<section><div class='lead'><h3><a name="loggingdetails" href="#loggingdetails">Logging details</a></h3><p><img src="images/7.png" alt="7"></p>
 
 </div></section>
 
@@ -333,33 +321,23 @@ For example, in Tasker, create a new action under Misc &gt; Send Intent. </p>
 
 </div></section>
 
-<section><div class='lead'><h3>Auto send</h3>
-
-<p><img src="images/8.png" alt="8"></p>
+<section><div class='lead'><h3><a name="autosend" href="#autosend">Auto send</a></h3><p><img src="images/8.png" alt="8"></p>
 
 </div></section>
 
-<section><div class='lead'><h3>FTP Setup</h3>
-
-<p><img src="images/9.png" alt="9"></p>
+<section><div class='lead'><h3><a name="ftpsetup" href="#ftpsetup">FTP Setup</a></h3><p><img src="images/9.png" alt="9"></p>
 
 </div></section>
 
-<section><div class='lead'><h3>Auto Email Setup</h3>
-
-<p><img src="images/10.png" alt="10"></p>
+<section><div class='lead'><h3><a name="autoemailsetup" href="#autoemailsetup">Auto Email Setup</a></h3><p><img src="images/10.png" alt="10"></p>
 
 </div></section>
 
-<section><div class='lead'><h3>Open GTS Setup</h3>
-
-<p><img src="images/11.png" alt="11"></p>
+<section><div class='lead'><h3><a name="opengtssetup" href="#opengtssetup">Open GTS Setup</a></h3><p><img src="images/11.png" alt="11"></p>
 
 </div></section>
 
-<section><div class='lead'><h3>OpenStreetMap setup</h3>
-
-<p><img src="images/13.png" alt="13"></p>
+<section><div class='lead'><h3><a name="openstreetmapsetup" href="#openstreetmapsetup">OpenStreetMap setup</a></h3><p><img src="images/13.png" alt="13"></p>
 
 </div></section>
 

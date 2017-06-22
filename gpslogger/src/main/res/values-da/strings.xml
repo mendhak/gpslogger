@@ -97,6 +97,7 @@
   <string name="log_gpx_summary">Logger placeringer til en GPX v1.0 fil</string>
   <string name="log_kml_title">Log til KML</string>
   <string name="log_kml_summary">Logger placeringer til en KML v2.2 fil</string>
+  <string name="log_plain_text_title">Log til CSV</string>
   <string name="log_plain_text_summary">Logger placeringer til en CSV-fil</string>
   <string name="new_file_creation_title">Ny filoprettelse</string>
   <string name="new_file_creation_summary">Om der skal oprettes en ny fil dagligt eller ved hver opstart.</string>
@@ -104,9 +105,9 @@
   <string name="new_file_creation_everystart">Ved hver opstart</string>
   <string name="new_file_creation_custom">Tilpasset fil</string>
   <string name="new_file_custom_title">Tilpasset filnavn</string>
-  <string name="new_file_custom_summary">Du kan benytte dir eget filnavn.
-        Muligt at tilføje ogle få dynamiske parametre såsom serienummer, år, time, minut etc. Meget dynamiske filnavne
-        fungerer muligvis ikke med autoafsendelsesfunktioner, da disse kun afsender den seneste fil.</string>
+  <string name="new_file_custom_summary">Du kan benytte dit eget filnavn.
+        Mulighed for at tilføje nogle få dynamiske parametre såsom serienummer, år, time, minut etc. Meget dynamiske filnavne
+        fungerer muligvis ikke med auto-afsendelsesfunktioner, da disse kun afsender den seneste fil.</string>
   <string name="pref_performance_title">Ydeevne</string>
   <string name="pref_performance_summary">Tidsindstillinger, filtre og lyttere</string>
   <string name="time_before_logging_title">Logningsinterval</string>
@@ -114,15 +115,15 @@
     </string>
   <string name="time_before_logging_dialog_title">Tid i sekunder</string>
   <string name="time_before_logging_hint">Angiv sekunder (maks. 9999)</string>
-  <string name="keep_fix_summary">Benyt med omtanke, da dette drastisk vil reducere batteritiden. Benyt kun for større         
+  <string name="keep_fix_summary">Benyt med omtanke, da dette vil reducere batteritiden drastisk. Benyt kun for større         
 præcision ved lavere frekvenser.    </string>
   <string name="keep_fix_title">Hold GPS aktiv mellem låsninger</string>
   <string name="retry_time_title">Varighed for match af nøjagtighed</string>
-  <string name="retry_time_summary">Efter opnåelse af første låsning, vedbliv i det angivne tidsrum med at forsøge at opnå et præcist punkt for at matche indstillingen for nøjagtighedsfiltret.</string>
+  <string name="retry_time_summary">Efter opnåelse af første låsning, vedbliv i det angivne tidsrum med at forsøge at opnå et nøjagtigt punkt for at matche indstillingen for nøjagtighedsfiltret.</string>
   <string name="display_imperial_title">Empiriske Visningsenheder</string>
-  <string name="display_imperial_summary">Vise fod, mil og pints, ingen af disse nymodens metriske størrelser (præferencer skal stadig være metrisk).</string>
+  <string name="display_imperial_summary">Vise fod, mil og pints, ingen af disse nymodens metriske størrelser (præferencer skal stadig være angivet metrisk).</string>
   <string name="enabledisablegps_title">Aktivér/Deaktivér GPS</string>
-  <string name="enabledisablegps_summary">Gå til mobilindstillingerne for at slå udbydere til eller fra.</string>
+  <string name="enabledisablegps_summary">Gå til mobilens indstillingerne for at slå udbydere til eller fra.</string>
   <string name="startonbootup_title">Start når mobilen opstartes</string>
   <string name="startonbootup_summary">Åbn app og start logføring, når mobilen starter</string>
   <string name="startonapplaunch_title">Begynd ved app-start</string>
@@ -133,32 +134,32 @@ præcision ved lavere frekvenser.    </string>
   <string name="autosend_frequency_display">Efter %s minutter</string>
   <string name="autoemail_frequency_whenistop">Når jeg trykker på stop</string>
   <string name="autoemail_smtp_category">E-mail-indstillinger</string>
-  <string name="autoemail_username_summary">Brugernavn til din e-mail-udbyder</string>
+  <string name="autoemail_username_summary">Brugernavn hos din e-mail-udbyder</string>
   <string name="autoemail_password_summary">Adgangskode til din e-mail-udbyder</string>
   <string name="autoemail_ssl">Benyt SSL?</string>
   <string name="autoemail_ssl_summary">Prøv at skifte dette, hvis du ikke kan oprette forbindelse</string>
-  <string name="autoemail_choosepreset">Mail-udbyder</string>
+  <string name="autoemail_choosepreset">E-mail-udbyder</string>
   <string name="autoemail_choosepreset_summary">Vælg en udbyder eller angiv manuelt</string>
   <string name="autoemail_smtp_testemail">Test e-mail</string>
-  <string name="autoemail_test">Afsend en test e-mail v.h.a. ovenstående indstillinger</string>
-  <string name="autoemail_sendingtest">Afsender en test e-mail</string>
+  <string name="autoemail_test">Afsend en test-e-mail v.h.a. ovenstående indstillinger</string>
+  <string name="autoemail_sendingtest">Afsender en test-e-mail</string>
   <string name="autoemail_testresult_success">E-mail er afsendt</string>
   <string name="fix_obtained">Låsning opnået</string>
   <string name="started_waiting">GPS startet, afventer låsning</string>
   <string name="gps_stopped">GPS på pause</string>
-  <string name="stopped">Afbrudt</string>
+  <string name="stopped">Stoppede</string>
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_lbl_authorize">Godkend denne app</string>
   <string name="osm_resetauth">Fjern godkendelse</string>
   <string name="osm_lbl_authorize_description">Du skal tildele denne app rettigheder for at kunne uploade GPS-sporinger til OpenStreetMap. Du kan angive etiketter, beskrivelser og synlighed her, efter du har godkendt denne app.    </string>
-  <string name="osm_resetauth_summary">Fjern den lokale tilladelse til at tale med din OSM konto.</string>
-  <string name="osm_auth_error">Der opstod en fejl under forsøg på at kontakte OpenStreetMap serverne. Kontroller, at din telefon har en internetforbindelse, eller prøv igen senere.</string>
+  <string name="osm_resetauth_summary">Fjern den lokale tilladelse til at kommunikere med din OSM konto.</string>
+  <string name="osm_auth_error">En fejl opstod under forsøget på at kontakte OpenStreetMap-serverne. Tjek venligst at din mobil er på nettet, eller forsøg igen senere.    </string>
   <string name="osm_visibility">Synlighed</string>
-  <string name="osm_visibility_summary">Indstil synligheden af ​​dine GPS Spor uploads</string>
+  <string name="osm_visibility_summary">Indstil synligheden af ​​dine GPS sporings-uploads</string>
   <string name="osm_description">Beskrivelse</string>
   <string name="osm_description_summary">Anvendt beskrivelse, når du uploader en sporing</string>
   <string name="osm_tags">Etiketter</string>
-  <string name="osm_tags_summary">Anvendte etiketter, når du uploader en sporing</string>
+  <string name="osm_tags_summary">Etiketter at benytte, når du uploader en sporing</string>
   <string name="no_files_found">Ingen filer fundet, intet at dele eller uploade.</string>
   <string name="osm_pick_file">Vælg en fil at uploade</string>
   <string name="debuglog_title">Skriv til fejlfindingsfil</string>
@@ -175,12 +176,12 @@ præcision ved lavere frekvenser.    </string>
        filer til din konto.
     </string>
   <string name="dropbox_unauthorize_description">Du er godkendt af Dropbox. Filer uploadedes til
-        \'Apps\\GPSLogger for Android\'. Du kan fjerne tilknytningen af GPSLogger til Dropbox, hvis du ønsker det.
+        \'Apps\\GPSLogger for Android\'. Du kan fjerne GPSLoggers tilknytning til Dropbox, hvis du ønsker det.
     </string>
   <string name="dropbox_couldnotauthorize">Kunne ikke godkende med Dropbox, forsøg venligst igen senere</string>
   <string name="owncloud_setup_title">ownCloud</string>
   <string name="owncloud_server_summary">ownCloud basis-URL</string>
-  <string name="owncloud_directory_summary">Mappe at benytte på ownCloud-server. Vær sikker på at den findes, ellers mislykkes upload.</string>
+  <string name="owncloud_directory_summary">Mappe at benytte på ownCloud-server. Tjek at den findes, ellers mislykkes upload.</string>
   <string name="owncloud_test_summary">Upload en testfil til ownCloud-serveren</string>
   <string name="owncloud_testing">Tester ownCloud-upload</string>
   <string name="menu_upload">Upload</string>
@@ -190,8 +191,8 @@ præcision ved lavere frekvenser.    </string>
   <string name="gdocs_setup_title">Google Drev</string>
   <string name="gdocs_test_summary">Upload en testfil til Google Drev</string>
   <string name="gdocs_test_title">Test af upload</string>
-  <string name="gdocs_testupload_success">Uploadet. Se venligst efter en nu fil i dine Google Dokumenter.</string>
-  <string name="autoemail_sendto_csv">Kommasepareret e-mails</string>
+  <string name="gdocs_testupload_success">Uploadet. Se venligst efter en ny fil i dine Google Dokumenter.</string>
+  <string name="autoemail_sendto_csv">Kommaseparerede e-mails</string>
   <string name="autosend_enabled">Tillad auto-afsendelse</string>
   <string name="autosend_enabled_summary">Tillad filafsendelser til forskellige adressater</string>
   <string name="autosend_frequency_summary">Minutangivelse for hvor ofte logfiler skal afsendes. Sæt til 0 for at deaktivere dette.</string>
@@ -205,7 +206,7 @@ præcision ved lavere frekvenser.    </string>
   <string name="autosend_sending">Auto-afsender</string>
   <string name="summary_autosend">Auto-afsendelse:</string>
   <string name="pref_autosend_title">Auto-afsendelse, e-mail og upload</string>
-  <string name="pref_autosend_summary">E-mail, deling og overførselsmuligheder</string>
+  <string name="pref_autosend_summary">E-mail, deling og upload-muligheder</string>
   <string name="shortcut_start">Start</string>
   <string name="shortcut_stop">Stop</string>
   <string name="shortcut_pickaction">Vælg en handling</string>
@@ -218,16 +219,16 @@ præcision ved lavere frekvenser.    </string>
   <string name="opengts_server_communication_method">Kommunikationsmetode</string>
   <string name="opengts_server_communication_method_summary">HTTP- eller Raw Socket-baseret kommunikation</string>
   <string name="autoopengts_server_path">Serversti</string>
-  <string name="autoopengts_server_path_summary">Valgfri, og kun til HTTP-baseret kommunikation, f.eks. \'/ gprmc/Data\'</string>
+  <string name="autoopengts_server_path_summary">Valgfri, og kun til HTTP-baseret kommunikation, f.eks. \'/gprmc/Data\'</string>
   <string name="autoopengts_device_id">Enheds-ID</string>
   <string name="autoftp_username">Brugernavn</string>
   <string name="autoftp_password">Adgangskode</string>
   <string name="autoftp_advanced_settings">Avancerede Indstillinger</string>
   <string name="autoftp_port">Port</string>
   <string name="autoftp_useftps">Benyt FTPS</string>
-  <string name="autoftp_useftps_summary">Aktivér FTP via SSL. SSL/TLS og implicitte ignoreres, hvis dette er afmarkeret.</string>
+  <string name="autoftp_useftps_summary">Aktivér FTP via SSL. SSL/TLS og implicitte ignoreres, hvis denne er inaktiv.</string>
   <string name="autoftp_ssltls">SSL/TLS</string>
-  <string name="autoftp_ssltls_summary">Ingen, SSL eller TLS. Benyt ingen ved regelmæssig, usikrede forbindelser.</string>
+  <string name="autoftp_ssltls_summary">Ingen, SSL eller TLS. Benyt Ingen ved almindelige, ikke-sikrede forbindelser.</string>
   <string name="autoftp_ssltls_none">Ingen</string>
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
@@ -235,7 +236,7 @@ præcision ved lavere frekvenser.    </string>
   <string name="autoftp_test_summary">Upload en testfil til FTP-serveren</string>
   <string name="autoftp_testing">Tester FTP-upload</string>
   <string name="autoftp_invalid_settings">Ugyldige indstillinger</string>
-  <string name="autoftp_invalid_summary">Visse af dine indstillinger er ugyldige. Tjek venligst, at du har udfyldt samtlige
+  <string name="autoftp_invalid_summary">Visse af dine indstillinger er ugyldige. Tjek venligst, at du har udfyldt alle
         relevante felter.
     </string>
   <string name="autoftp_setup_title">FTP</string>
@@ -248,10 +249,10 @@ præcision ved lavere frekvenser.    </string>
   <string name="txt_time_isoformat">Tid UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Udbyder:</string>
   <string name="annotation_requires_logging">Anmærkninger kræver logføring til GPX/KML/Tilpasset URL</string>
-  <string name="gpslogger_folder_title">Gem til mappe</string>
+  <string name="gpslogger_folder_title">Gem i mappe</string>
   <string name="gpslogger_folder_summary">Hvor logfiler skal gemmes, standarddestination er /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Mappe</string>
-  <string name="new_file_custom_message">Du kan benytte %SER som enheds-SN, %YEAR, %MONTH, %DAY, %HOUR, %MIN, %PROFILE, %VER for version</string>
+  <string name="new_file_custom_message">Du kan benytte %SER som enheds-SN, %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER for version</string>
   <string name="new_file_prefix_serial_title">Præfiks enhedens serienummer til filnavnet</string>
   <string name="new_file_prefix_serial_summary">Dette er serienummeret, som findes under telefonstatus </string>
   <string name="txt_travel_duration">Varighed:</string>
@@ -263,7 +264,7 @@ præcision ved lavere frekvenser.    </string>
   <string name="bigview_taptotoggle">Tryk for at starte/stoppe logføring</string>
   <string name="summary_autosendtargets">Upload til:</string>
   <string name="accuracy_filter_title">Nøjagtighedsfilter</string>
-  <string name="accuracy_filter_summary">Den krævede minimumspræcision, for at gemme et punkt. Punkter med ringere præcision kasseres.</string>
+  <string name="accuracy_filter_summary">Den krævede minimumspræcision for at gemme et punkt. Punkter med ringere præcision kasseres.</string>
   <string name="distance_filter_title">Afstandsfilter</string>
   <string name="distance_filter_summary">Krævede minimumsafstand mellem nuværende og foregående placering for kunne gemme et punkt, da punktet ellers kasseres.</string>
   <string name="points">punkter</string>
@@ -271,24 +272,24 @@ præcision ved lavere frekvenser.    </string>
   <string name="save">Gem</string>
   <string name="pref_filedetails_title">Fil- og mappedetaljer</string>
   <string name="absolute_timeout_title">Absolut tid til GPS-lås</string>
-  <string name="absolute_timeout_summary">Antal sekunder efter hvilke app\'en opgiver forsøget på at opnå en GPS-låsning uanset øvrige indstillinger. Dette er især nyttigt, når du er indendørs for at forhindre GPS\'en i at dræner batteriet. Sæt til 0, for ingen timeout.</string>
+  <string name="absolute_timeout_summary">Antal sekunder efter hvilke app\'en opgiver forsøget på at opnå en GPS-låsning uanset øvrige indstillinger. Dette er især nyttigt til at forhindre GPS\'en i at dræner batteriet, når du er indendørs. Sæt til 0, for ingen timeout.</string>
   <string name="txt_latitude_short">Br.gr.</string>
   <string name="txt_longitude_short">Læ.gr.</string>
-  <string name="log_nmea_title">Log til NMEA</string>
+  <string name="log_nmea_title">Logfør til NMEA</string>
   <string name="log_nmea_summary">Opretter en rå NMEA-fil under forsøg på at opnå en GPS-låsning. Denne fil vokser meget hurtigt. Virker kun, når GPS benyttes.</string>
   <string name="autoopengts_accountname">Kontonavn</string>
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Netværk</string>
   <string name="listeners_passive">Passiv</string>
-  <string name="listeners_summary">Placeringsudbydere at benytte, når tilgængelige; GPS-satellitter, netværksmaster til telefoni/data/Wi-Fi. Passiv er en speciel udbyder, der lytter efter placeringsforespørgsler fra andre apps.</string>
+  <string name="listeners_summary">Placeringsudbydere, der skal benyttes, når de er tilgængelige; GPS-satellitter, netværksmaster til telefoni/data/Wi-Fi. Passiv er en speciel udbyder, der lytter efter placeringsforespørgsler fra andre apps.</string>
   <string name="listeners_title">Placeringsudbydere</string>
   <string name="autosend_frequency_hint">Antal minutter</string>
   <string name="pref_logging_file_no_permissions">GPSLogger kan ikke skrive til denne mappe. Vælg venligst en andet mappe at skrive til.</string>
   <string name="pref_gpsvisualizer">Visualisere GPS-logstatistik og grafer</string>
   <string name="new_file_custom_each_time_title">Spørg om filnavn ved hver opstart</string>
-  <string name="new_file_custom_each_time_summary">Spørg om tilpasset filnavn hver gang logføring startes</string>
+  <string name="new_file_custom_each_time_summary">Spørg om tilpasset filnavn, hver gang logføring påbegyndes</string>
   <string name="new_file_custom_keep_changing_title">Tillad dynamisk ændring af tilpasset filnavn</string>
-  <string name="new_file_custom_keep_changing_summary">Når tilpassede filnavnsværdierne ændres, lad det aktuelle filnavn ændre sig. Hvis f.eks. %HOUR er anvendt, så oprettes en ny fil hver time. Fjern markeringen, hvis du ønsker at forblive statisk.</string>
+  <string name="new_file_custom_keep_changing_summary">Når tilpassede filnavnsværdier ændres, lad det aktuelle filnavn ændre sig. Hvis f.eks. %HOUR er anvendt, så oprettes en ny fil hver time. Fjern markeringen, hvis du ønsker at forblive statisk.</string>
   <string name="donate_app">Donere (app)</string>
   <string name="donate_bitcoin">Bitcoin</string>
   <string name="tip_coffee">Købe mig en kop kaffe</string>
@@ -297,44 +298,52 @@ præcision ved lavere frekvenser.    </string>
   <string name="restart_required">Du er nødt til at genstarte GPSLogger for at effektuere denne indstilling</string>
   <string name="pref_performance_activityrecognition">Aktivitetsgenkendelse</string>
   <string name="activityrecognition_dont_log_if_still">Log ikke, hvis jeg ikke bevæger mig</string>
-  <string name="activityrecognition_dont_log_if_still_summary">Hvis der ikke er nogen accelerometerregistrering siden sidste punkt, vil active logføring sættes på pause, indtil du igen bevæger dig. Passive punkter logges muligvis stadig.</string>
+  <string name="activityrecognition_dont_log_if_still_summary">Hvis der ikke er nogen accelerometerregistrering siden sidste punkt, vil aktiv logføring sættes på pause, indtil du igen bevæger dig. Passive punkter logføres muligvis stadig.</string>
   <string name="txt_activity">Aktivitet:</string>
   <string name="activity_in_vehicle">I køretøj</string>
-  <string name="activity_confidence">Tillid</string>
-  <string name="activity_still">Stille</string>
+  <string name="activity_confidence">Pålidelighed</string>
+  <string name="activity_still">Ubevægelig</string>
   <string name="activity_on_bicycle">På cykel</string>
   <string name="activity_on_foot">Til fods</string>
   <string name="activity_running">Løber</string>
   <string name="activity_tilting">Vipnet</string>
   <string name="activity_walking">Spadserer</string>
   <string name="activity_unknown">Ukendt</string>
-  <string name="altitude_subtractgeoidheight_summary">Benytter MSL-højde i stedet for WGS84-højde ved at trække geoid-højde fra GP-højde. Gælder kun for GPS-satellitpunkter, ikke for netværk eller NMEA.</string>
+  <string name="altitude_subtractgeoidheight_summary">Benytter MSL-højde (Mean Sea Level) i stedet for WGS84-højde ved at trække geo-ID-højde fra GPS-højde. Gælder kun for GPS-satellitpunkter, ikke for netværk eller NMEA.</string>
   <string name="altitude_subtractgeoidheight_title">Benyt MSL i stedet for WGS84</string>
   <string name="altitude_subtractoffset_title">Fratræk højdeforskydning</string>
-  <string name="altitude_subtractoffset_summary">En værdi i meter skal trækkes fra GPS-højder. Benyt et negativt tal for at føje en værdi til højden. Gælder kun for GPS-satellitpunkter, ikke for netværk eller NMEA.</string>
-  <string name="upload_failure">Mislykkedes at uploade filen</string>
-  <string name="inaccurate_point_discarded">Upræcist punkt kasseret</string>
-  <string name="not_enough_distance_traveled">Kun tilbagelagt %s m. Punkt kasseret.</string>
+  <string name="altitude_subtractoffset_summary">En værdi i meter, som skal fratrækkes GPS-højder. Benyt et negativt tal for at føje en værdi til højden. Gælder kun for GPS-satellitpunkter, ikke for netværk eller NMEA.</string>
+  <string name="upload_failure">Fil-upload mislykkedes</string>
+  <string name="inaccurate_point_discarded">Unøjagtigt punkt kasseret</string>
+  <string name="not_enough_distance_traveled">Kun %s m tilbagelagt. Punkt kasseret.</string>
   <string name="autosend_wifionly_title">Send kun via Wi-Fi</string>
   <string name="logview_showlocationsonly">Kun placeringer</string>
   <string name="logview_autoscroll">Auto-rul</string>
   <string name="profile_create_new">Opret ny profil</string>
-  <string name="profile_switch_before_delete">Skift venligst til en anden profil inden du sletter denne.</string>
+  <string name="profile_switch_before_delete">Skift venligst til en anden profil inden denne slettes.</string>
   <string name="profile_delete">Slet profil?</string>
   <string name="profile_default">Standardprofil</string>
   <string name="profile_add_new">Tilføj profil</string>
   <string name="gpslogger_permissions_rationale_title">Tilladelser kræves</string>
-  <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Denne app kræver forskellige rettigheder for at fungere korrekt. <br/><b>Enhedsplacering</b> - Denne rettighed tillader læsning af placeringsdata fra mobilmaster og enhedens GPS-hardware. <br/><b>Fotos, medier, filer</b> - Denne rettighed tillader skrivning af log- og testfiler til lagerpladsen samt læsning fra en liste af filer til upload eller deling. Denne app vil ikke tilgå dine fotos eller medier. <br/><b>Tilgå dine Kontakter</b> - Benyttes Google Drev-funktionalitet, tillader rettigheden oplistning af Google-konti registreret på enheden.  Denne app tilgår dog ikke din liste over kontakter. <br/><br/>  ]]></string>
+  <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Denne app kræver forskellige rettigheder for at fungere korrekt. <br/><b>Enhedsplacering</b> - Denne rettighed tillader læsning af placeringsdata fra mobilmaster og enhedens GPS-hardware. <br/><b>Fotos, medier, filer</b> - Denne rettighed tillader skrivning af log- og testfiler til lagerpladsen samt læsning fra en liste af filer til upload eller deling. Denne app vil ikke tilgå dine fotos eller medier. <br/><b>Tilgå dine Kontakter</b> - Benyttes Google Drev-funktionalitet, muliggør rettigheden oversigtsgenerering af Google-konti registreret på enheden.  Denne app tilgår dog ikke din kontaktoversigt. <br/><br/>  ]]></string>
   <string name="gpslogger_permissions_permanently_denied">Du har permanent nægtet en eller flere rettigheder, som kræves af denne app.  Du bliver nødt til at gå til app-indstillingsskærmen for at tildele eller nulstille disse rettigheder.</string>
   <string name="privacy_policy">Fortrolighedspolitik</string>
   <string name="debuglog_attach_to_email">Vedhæft fejlfindingslogfil til e-mail</string>
   <string name="debuglog_attach_to_email_summary">Vedhæft fejlfindingslogfil til en e-mail sammen med nogle diagnostiskoplysninger</string>
   <string name="change_language_title">Skift sprog</string>
-  <string name="change_language_summary">Ikke alle sprog er fuldt ud oversat! Du skal genstarte app\'en, før indstillinger træder i kraft.</string>
+  <string name="change_language_summary">Ikke alle sprog er fuldt ud oversat! Du skal genstarte app\'en for at effektuere indstillingerne.</string>
   <string name="coordinate_display_format">Koordinaters visningsformat</string>
   <string name="ssl_certificate_validate">Validere SSL-certifikat</string>
   <string name="parameters">Parametre</string>
   <string name="ssl_certificate_add_to_keystore">Føj dette certifikat til lokalt nøglelager?</string>
   <string name="ssl_certificate_is_valid">Certifikatet er gyldigt</string>
   <string name="hide_notification_from_status_bar">Skjul notifikationer fra statusbjælke</string>
+  <string name="sftp_setup_title">SFTP</string>
+  <string name="sftp_private_key_path">Privat nøgle</string>
+  <string name="sftp_private_key_passphrase">Privat nøgle adgangsfrase</string>
+  <string name="sftp_validate_test_upload">Validér værtsnøgle og test upload</string>
+  <string name="sftp_validate_accept_host_key">Acceptér denne værtsnøgle?</string>
+  <string name="txt_timestamp_epoch">Tidsstemplet (epoke)</string>
+  <string name="txt_starttimestamp_epoch">Starttidsstemplet (epoke)</string>
+  <string name="txt_battery">Batteri</string>
 </resources>

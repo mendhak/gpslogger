@@ -96,6 +96,7 @@
   <string name="log_gpx_summary">Záznam umístění do GPX v1.0 souboru</string>
   <string name="log_kml_title">Zapisovat do KML</string>
   <string name="log_kml_summary">Záznam umístění do GPX v2.2 souboru</string>
+  <string name="log_plain_text_title">Protokolovat do CSV</string>
   <string name="log_plain_text_summary">Záznam umístění do CSV souboru</string>
   <string name="new_file_creation_title">Vytvoření nového souboru</string>
   <string name="new_file_creation_summary">Zda chcete vytvořit nový soubor jednou denně, nebo při každém spuštění.</string>
@@ -106,6 +107,7 @@
   <string name="new_file_custom_summary">Můžete použít svůj vlastní název souboru. Volitelně přidáte pár dynamických parametrů, například sériové číslo, rok, hodinu, minutu, atd. Velký počet souborů s dynamickými názvy nemusí fungovat dobře s funkcí automatického odesílání, protože ta odesílá pouze poslední soubor.</string>
   <string name="pref_performance_title">Výkon</string>
   <string name="pref_performance_summary">Časování, filtry a posluchači</string>
+  <string name="time_before_logging_title">Interval protokolování</string>
   <string name="time_before_logging_summary">Použijte 0 pro maximální frekvenci, ale pomalejší je lepší pro výdrž baterie.
     </string>
   <string name="time_before_logging_dialog_title">Čas v sekundách</string>
@@ -121,6 +123,7 @@
   <string name="startonapplaunch_title">Spustit po startu aplikace</string>
   <string name="startonapplaunch_summary">Zahájit záznam po spuštění aplikace</string>
   <string name="autoemail_title">Email</string>
+  <string name="please_wait">Počkejte prosím</string>
   <string name="autoemail_target">Cílové emailové adresy</string>
   <string name="autosend_frequency_display">Po %s minutách</string>
   <string name="autoemail_frequency_whenistop">Když stisknu stop</string>
@@ -232,11 +235,9 @@
   <string name="txt_annotation">Poznámka:</string>
   <string name="txt_time_isoformat">Čas UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Poskytovatel:</string>
-  <string name="annotation_requires_logging">Poznámky vyžadují záznam do GPX, KML nebo Vlastní URL</string>
   <string name="gpslogger_folder_title">Uložit do složky</string>
   <string name="gpslogger_folder_summary">Kam uložit soubory záznamů, výchozí hodnota je /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Složka</string>
-  <string name="new_file_custom_message">Můžete použít %SER pro sériové číslo zařízení, % rok, % měsíc, %DAY, %HOUR, % MIN, %PROFILE, % VER pro verzi</string>
   <string name="new_file_prefix_serial_title">Předpona sériového čísla zařízení v názvu souboru</string>
   <string name="new_file_prefix_serial_summary">Toto je sériové číslo vašeho telefonu </string>
   <string name="txt_travel_duration">Doba trvání:</string>
@@ -264,9 +265,9 @@
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Síť</string>
   <string name="listeners_passive">Pasivní</string>
-  <string name="listeners_summary">Které poskytovatelé polohy se mají použít, když jsou k dispozici; \"GPS\" pro satelity, \"Síť\" pro mobilní vysílače/wifi, \"Pasivní\" je zvláštní poskytovatel, který naslouchá a přebírá umístění po vyžádání jinou aplikací.</string>
   <string name="listeners_title">Zjišťování polohy</string>
   <string name="autosend_frequency_hint">Počet minut</string>
+  <string name="pref_logging_file_no_permissions">GPSLogger nemůže do této složky nic zapisovat. Prosím zvol jinou složku pro zápis.</string>
   <string name="pref_gpsvisualizer">Vizualizovat statistiky GPS záznamů a grafy</string>
   <string name="new_file_custom_each_time_title">Požádat o název souboru při každém spuštění</string>
   <string name="new_file_custom_each_time_summary">Při každém spuštění záznamu se dotázat na vlastní název souboru</string>
@@ -312,5 +313,15 @@
   <string name="privacy_policy">Zásady ochrany osobních údajů</string>
   <string name="debuglog_attach_to_email">Přiložit záznamy o ladění do emailu</string>
   <string name="debuglog_attach_to_email_summary">Přiloží záznam o ladění do emailu spolu s některými diagnostickými informacemi</string>
+  <string name="change_language_title">Změnit jazyk</string>
   <string name="change_language_summary">Ne všechny jazyky jsou plně přeložené! Změna nastavení se projeví až po restartu aplikace.</string>
+  <string name="parameters">Parametry</string>
+  <string name="ssl_certificate_add_to_keystore">Přidat certifikát do místního úložiště klíčů?</string>
+  <string name="ssl_certificate_is_valid">Certifikát je platný</string>
+  <string name="hide_notification_from_status_bar">Skrýt upozornění ze stavového řádku</string>
+  <string name="sftp_setup_title">SFTP</string>
+  <string name="sftp_private_key_path">Soukromý klíč</string>
+  <string name="sftp_private_key_passphrase">Heslo soukromého klíče</string>
+  <string name="sftp_validate_test_upload">Ověřit klíč hostitele a otestovat nahrání</string>
+  <string name="sftp_validate_accept_host_key">Přijmout tento klíč hostitele?</string>
 </resources>

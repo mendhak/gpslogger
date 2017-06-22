@@ -226,7 +226,6 @@
   <string name="txt_annotation">Chú thích:</string>
   <string name="txt_time_isoformat">Thời gian UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Nhà cung cấp:</string>
-  <string name="annotation_requires_logging">Chú thích đòi hỏi phải đăng nhập KML/GPX/URL</string>
   <string name="gpslogger_folder_title">Lưu vào thư mục</string>
   <string name="gpslogger_folder_summary">Nơi để lưu các file log, mặc định là /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Thư mục</string>
@@ -257,7 +256,6 @@
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Mạng</string>
   <string name="listeners_passive">Thụ động</string>
-  <string name="listeners_summary">Dịch vụ cung cấp vị trí nào sẽ sử dụng khi có: GPS cho vệ tinh, Mạng cho 3G/WiFi. Passive là dịch vụ đặc biệt để nhận vị trí được yêu cầu từ các ứng dụng khác.</string>
   <string name="listeners_title">Nhà cung cấp vị trí</string>
   <string name="autosend_frequency_hint">Số phút</string>
   <string name="pref_gpsvisualizer">Hiển thị trạng thái và đồ họa GPS</string>

@@ -97,6 +97,7 @@
   <string name="log_gpx_summary">Escribe las posiciones en un archivo GPX v1.0</string>
   <string name="log_kml_title">Registrar en formato KML</string>
   <string name="log_kml_summary">Escribe las posiciones en un archivo KML v2.2</string>
+  <string name="log_plain_text_title">Registro a CSV</string>
   <string name="log_plain_text_summary">Escribe las posiciones en un archivo CSV</string>
   <string name="new_file_creation_title">Creación de archivos</string>
   <string name="new_file_creation_summary">Crear un nuevo archivo por día, o cada vez que inicie.</string>
@@ -107,11 +108,14 @@
   <string name="new_file_custom_summary">Puedes utilizar tu propio nombre de archivo. De forma opcional puedes añadir algunos variables dinámicas tales como el número de serie, el año, la hora, los minutos actuales y demás. Puede que los nombres de archivo demasiado dinámicos no funcionen demasiado bien junto con el autoenvío ya que sólo sube el último archivo encontrado.</string>
   <string name="pref_performance_title">Rendimiento</string>
   <string name="pref_performance_summary">Tiempos, filtros y orígenes</string>
+  <string name="time_before_logging_title">Intervalo de registro</string>
   <string name="time_before_logging_summary">Use 0 para máxima frecuencia, pero es mejor reducirla para conservar batería.</string>
   <string name="time_before_logging_dialog_title">Tiempo en segundos</string>
   <string name="time_before_logging_hint">Ingrese segundos (máx. 9999)</string>
   <string name="keep_fix_summary">Cuidado, esto reduce considerablemente la duración de la batería. Sólo se debe usar para obtener una precisión mejor al usarse con el registro de puntos de frecuencia más larga.     </string>
   <string name="keep_fix_title">Mantenga GPS entre puntos</string>
+  <string name="retry_time_title">Duración para que coincida con exactitud</string>
+  <string name="retry_time_summary">Después de adquirir una fijación inicial, siga intentando durante tanto tiempo para obtener un punto preciso que coincida con la configuración del filtro de precisión.</string>
   <string name="display_imperial_title">Utilizar unidades imperiales</string>
   <string name="display_imperial_summary">Medir en pies, millas y pintas, nada de extrañas unidades métricas. (Los ajustes todavía aparecen en sistema métrico)</string>
   <string name="enabledisablegps_title">Activar/desactivar GPS</string>
@@ -121,6 +125,7 @@
   <string name="startonapplaunch_title">Iniciar al iniciar la aplicación</string>
   <string name="startonapplaunch_summary">Iniciar sesión al iniciar la aplicación</string>
   <string name="autoemail_title">Correo electrónico</string>
+  <string name="please_wait">Espera un momento</string>
   <string name="autoemail_target">Direcciones de destinatarios</string>
   <string name="autosend_frequency_display">Tras %s minutos</string>
   <string name="autoemail_frequency_whenistop">Al presionar detener</string>
@@ -175,6 +180,7 @@
   <string name="menu_upload">Subir</string>
   <string name="autoemail_from">Desde dirección</string>
   <string name="autoemail_from_summary">Algunos servidores requieren una dirección de origen. Sólo si es necesario.</string>
+  <string name="gdocs_clearauthorization_summary">Se olvida de la configuración local de Google Drive Docs. Puedes revocar el acceso desde el menú de ajustes de tu cuenta de Google</string>
   <string name="gdocs_setup_title">Google Drive</string>
   <string name="gdocs_test_summary">Subir un archivo de prueba a Google Drive</string>
   <string name="gdocs_test_title">Subida de prueba</string>
@@ -231,11 +237,9 @@
   <string name="txt_annotation">Comentarios:</string>
   <string name="txt_time_isoformat">Hora UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Proveedor:</string>
-  <string name="annotation_requires_logging">Para usar anotaciones es necesario registrar en formato GPX/KML ó URL personalizada</string>
   <string name="gpslogger_folder_title">Guardar en carpeta</string>
   <string name="gpslogger_folder_summary">Donde guardar los archivos de registro, por defecto en «/sdcard/GPSLogger»</string>
   <string name="autoftp_directory">Carpeta</string>
-  <string name="new_file_custom_message">Puedes usar %SER para el numero de serie del dispositivo, %YEAR, %MONTH, %DAY, %HOUR, %MIN, %PROFILE, %VER para version</string>
   <string name="new_file_prefix_serial_title">Utilizar el número de serie del dispositivo como prefijo para el nombre del archivo</string>
   <string name="new_file_prefix_serial_summary">Este es el número de serie del teléfono </string>
   <string name="txt_travel_duration">Duración:</string>
@@ -254,6 +258,7 @@
   <string name="txt_number_of_points">Número de puntos</string>
   <string name="save">Guardar</string>
   <string name="pref_filedetails_title">Detalles de archivo y carpeta</string>
+  <string name="absolute_timeout_title">Tiempo absoluto para fijar al GPS</string>
   <string name="absolute_timeout_summary">Número de segundos tras los que la aplicación cancela la búsqueda de posición, ignorando los demás ajustes. Especialmente útil cuando estás en interiores para evitar que el GPS gaste batería. Establecer en 0 para evitar el tiempo de espera.</string>
   <string name="txt_latitude_short">Lat</string>
   <string name="txt_longitude_short">Lon</string>
@@ -263,9 +268,9 @@
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Red</string>
   <string name="listeners_passive">Pasivo</string>
-  <string name="listeners_summary">Qué proveedores de contenido usar cuando se encuentran disponibles; GPS para satélites, Red para torres de celdas/WiFi, Pasivo es un proveedor especial que escucha ubicaciones solicitadas por otras aplicaciones.</string>
   <string name="listeners_title">Proveedores de ubicación</string>
   <string name="autosend_frequency_hint">Número de minutos</string>
+  <string name="pref_logging_file_no_permissions">Esa carpeta no se escribe por GPSLogger. Por favor, seleccione otra carpeta para escribir.</string>
   <string name="pref_gpsvisualizer">Ver gráficos y estadísticas de registro GPS</string>
   <string name="new_file_custom_each_time_title">Pedir un nombre de archivo en cada inicio</string>
   <string name="new_file_custom_each_time_summary">Solicitar un nombre de archivo personalizado cada vez que se inicia el registro</string>
@@ -307,7 +312,22 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
   <string name="profile_default">Perfil por defecto</string>
   <string name="profile_add_new">Añadir perfil</string>
   <string name="gpslogger_permissions_rationale_title">Se necesitan permisos</string>
+  <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Esta aplicación requiere varios permisos en orden para funcionar correctamente. <br /><b>Ubicación del dispositivo </b>te permiso permite leer los datos de localización de las torres de celdas y el hardware GPS del dispositivo. <br /><b>Fotos, medios, archivos</b> - Este permiso permite escribir archivos de registro y archivos de prueba para almacenamiento, y lectura de una lista de archivos para subir o compartir. Esta aplicación no tendrá acceso a tus fotos o medios.<br /><b> Acceder a tus contactos</b> - si utilizas la funcionalidad de Google Drive, este permiso permite el listado de las cuentas de Google registradas en este dispositivo. Tu aplicación no accede a tu lista de contactos.<br /><br/>  ]]></string>
   <string name="gpslogger_permissions_permanently_denied">Has denegado algunos de los permisos que esta aplicación necesita. Debes acceder a la pantalla de configuración de la aplicación para cambiar el acceso a estos permisos.</string>
   <string name="privacy_policy">Política de Privacidad</string>
+  <string name="debuglog_attach_to_email">Adjuntar el registro de depuración para correo electrónico</string>
+  <string name="debuglog_attach_to_email_summary">Registro de depuración se conecta a un correo electrónico junto con algunos datos diagnóstico</string>
+  <string name="change_language_title">Cambiar Idioma</string>
   <string name="change_language_summary">No todos los idiomas estàn traducidos por completo! Debes reiniciar la aplicación para que esta configuración funcione.</string>
+  <string name="coordinate_display_format">Formato de visualización de coordenadas</string>
+  <string name="ssl_certificate_validate">Validar el certificado SSL</string>
+  <string name="parameters">Parámetros</string>
+  <string name="ssl_certificate_add_to_keystore">¿Agregar certificado al almacén de claves local?</string>
+  <string name="ssl_certificate_is_valid">El certificado es válido</string>
+  <string name="hide_notification_from_status_bar">Ocultar la notificación de la barra de estado</string>
+  <string name="sftp_setup_title">SFTP</string>
+  <string name="sftp_private_key_path">Clave privada</string>
+  <string name="sftp_private_key_passphrase">Frase de contraseña de clave privada</string>
+  <string name="sftp_validate_test_upload">Validar la clave del host y subir la prueba</string>
+  <string name="sftp_validate_accept_host_key">¿Acepta esta clave?</string>
 </resources>

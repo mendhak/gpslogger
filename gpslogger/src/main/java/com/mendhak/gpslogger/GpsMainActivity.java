@@ -777,7 +777,7 @@ public class GpsMainActivity extends AppCompatActivity
 
         if (mnuAnnotate != null) {
 
-            if (!preferenceHelper.shouldLogToGpx() && !preferenceHelper.shouldLogToKml() && !preferenceHelper.shouldLogToCustomUrl()) {
+            if (!preferenceHelper.shouldLogToCSV() && !preferenceHelper.shouldLogToGpx() && !preferenceHelper.shouldLogToKml() && !preferenceHelper.shouldLogToCustomUrl()) {
                 mnuAnnotate.setIcon(R.drawable.annotate2_disabled);
                 mnuAnnotate.setEnabled(false);
             } else {
@@ -866,7 +866,7 @@ public class GpsMainActivity extends AppCompatActivity
      */
     private void annotate() {
 
-        if (!preferenceHelper.shouldLogToGpx() && !preferenceHelper.shouldLogToKml() && !preferenceHelper.shouldLogToCustomUrl()) {
+        if (!preferenceHelper.shouldLogToCSV() && !preferenceHelper.shouldLogToGpx() && !preferenceHelper.shouldLogToKml() && !preferenceHelper.shouldLogToCustomUrl()) {
             Toast.makeText(getApplicationContext(), getString(R.string.annotation_requires_logging), Toast.LENGTH_SHORT).show();
             return;
         }

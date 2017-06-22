@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.*;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -200,6 +201,12 @@ public class GpsLoggingService extends Service  {
                     LOG.info("Intent received - Stop logging now");
                     EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(false));
                 }
+
+                if (bundle.getBoolean(IntentConstants.GET_STATUS)) {
+                    LOG.info("Intent received - Sending Status by broadcast");
+                    EventBus.getDefault().postSticky(new CommandEvents.GetStatus());
+                }
+
 
                 if (bundle.getBoolean(IntentConstants.AUTOSEND_NOW)) {
                     LOG.info("Intent received - Send Email Now");
@@ -405,19 +412,39 @@ public class GpsLoggingService extends Service  {
         showNotification();
         setupAutoSendTimers();
         resetCurrentFileName(true);
-        notifyClientStarted();
+        notifyClientsStarted(true);
         startPassiveManager();
         startGpsManager();
         requestActivityRecognitionUpdates();
 
     }
 
+    private void notifyByBroadcast(boolean loggingStarted) {
+            LOG.debug("Sending a custom broadcast");
+            String event = (loggingStarted) ? "started" : "stopped";
+            Intent sendIntent = new Intent();
+            sendIntent.setAction("com.mendhak.gpslogger.EVENT");
+            sendIntent.putExtra("gpsloggerevent", event);
+            sendIntent.putExtra("filename", session.getCurrentFormattedFileName());
+            sendIntent.putExtra("startedtimestamp", session.getStartTimeStamp());
+            sendBroadcast(sendIntent);
+    }
+
     /**
-     * Asks the main service client to clear its form.
+     * Informs main activity and broadcast listeners whether logging has started/stopped
      */
-    private void notifyClientStarted() {
-        LOG.info(getString(R.string.started));
-        EventBus.getDefault().post(new ServiceEvents.LoggingStatus(true));
+    private void notifyClientsStarted(boolean started) {
+        LOG.info((started)? getString(R.string.started) : getString(R.string.stopped));
+        notifyByBroadcast(started);
+        EventBus.getDefault().post(new ServiceEvents.LoggingStatus(started));
+    }
+
+    /**
+     * Notify status of logger
+     */
+    private void notifyStatus(boolean started) {
+        LOG.info((started)? getString(R.string.started) : getString(R.string.stopped));
+        notifyByBroadcast(started);
     }
 
     /**
@@ -444,7 +471,7 @@ public class GpsLoggingService extends Service  {
         stopGpsManager();
         stopPassiveManager();
         stopActivityRecognitionUpdates();
-        notifyClientStopped();
+        notifyClientsStarted(false);
         session.setCurrentFileName("");
         session.setCurrentFormattedFileName("");
     }
@@ -702,15 +729,6 @@ public class GpsLoggingService extends Service  {
 
     void setLocationServiceUnavailable(){
         EventBus.getDefault().post(new ServiceEvents.LocationServicesUnavailable());
-    }
-
-
-    /**
-     * Notifies main form that logging has stopped
-     */
-    void notifyClientStopped() {
-        LOG.info(getString(R.string.stopped));
-        EventBus.getDefault().post(new ServiceEvents.LoggingStatus(false));
     }
 
     /**
@@ -1004,6 +1022,11 @@ public class GpsLoggingService extends Service  {
     }
 
     @EventBusHook
+    public void onEvent(CommandEvents.GetStatus getStatus){
+        notifyStatus(session.isStarted());
+    }
+
+    @EventBusHook
     public void onEvent(CommandEvents.AutoSend autoSend){
         autoSendLogFile(autoSend.formattedFileName);
 
@@ -1012,7 +1035,7 @@ public class GpsLoggingService extends Service  {
 
     @EventBusHook
     public void onEvent(CommandEvents.Annotate annotate){
-        final String desc = Strings.cleanDescription(annotate.annotation);
+        final String desc = annotate.annotation;
         if (desc.length() == 0) {
             LOG.debug("Clearing annotation");
             session.clearDescription();

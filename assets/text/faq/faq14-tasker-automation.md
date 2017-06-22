@@ -1,14 +1,27 @@
 ## How does this integrate with Tasker/Llama or other automation frameworks?
 
+## How to automate GPSLogger?
+
+### Controlling GPSLogger
+
 If your automation app can send intents, you can use those intents to control GPSLogger and get it to perform a few actions. 
-For example, in Tasker, create a new action under Misc > Send Intent. 
+
+To invoke it from Tasker, create a new action under Misc > Send Intent. 
 
 >Action: `com.mendhak.gpslogger.GpsLoggingService`  
 Extra: `immediatestart:true (others below)`  
 Target: `Service`
 
 
-These are the extras you can send to GPSLogger:
+To invoke it from your own Android code:
+
+    Intent i = new Intent("com.mendhak.gpslogger.GpsLoggingService");
+    i.setPackage("com.mendhak.gpslogger");
+    i.putExtra("immediatestart", true);
+    startService(i);
+
+
+**These are the extras you can send to GPSLogger**:
 
 >`immediatestart` - (true/false) Start logging immediately  
 
@@ -32,5 +45,29 @@ These are the extras you can send to GPSLogger:
 
 > `switchprofile` - (text) The name of the profile to switch to
 
-You can also invoke the Start and Stop **shortcuts** that GPSLogger comes with.
+> `getstatus` - (true) Asks GPSLogger to send its current events broadcast
 
+### Shortcuts
+
+The app comes with a Start and a Stop **shortcut** (long press home screen, add widget), you can invoke those from some automation apps.
+
+
+### GPSLogger Events Broadcast
+
+### Listening to GPSLogger
+
+
+(Experimental feature) GPSLogger sends a broadcast start/stop of logging, which you can receive as an event.
+  
+In Tasker, this would look like:  
+  
+> Event: Intent Received  
+  Action: com.mendhak.gpslogger.EVENT 
+  
+From there in your task, you can look at the following variables
+ 
+ * `%gpsloggerevent` - `started` or `stopped`
+ * `%filename` - the base filename that was chosen (no extension)
+ * `%startedtimestamp` - timestamp when logging was started (epoch)
+
+In a custom application, receive the `com.mendhak.gpslogger.EVENT` broadcast and have a look inside the extras.
