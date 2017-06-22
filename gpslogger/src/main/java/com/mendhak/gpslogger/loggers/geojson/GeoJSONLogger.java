@@ -34,9 +34,7 @@ public class GeoJSONLogger implements FileLogger {
 
     @Override
     public void annotate(String description, Location loc) throws Exception {
-        //GeoJSONWriter gw = new GeoJSONWriterLine(file, loc, description, addNewTrackSegment);
-        //GeoJSONWriter gw = new GeoJSONWriterFeatureCollections(file, loc, description, addNewTrackSegment);
-        GeoJSONWriter gw = new GeoJSONWriterPoints(file, loc, description, addNewTrackSegment);
+        Runnable gw = new GeoJSONWriterPoints(file, loc, description, addNewTrackSegment);
         EXECUTOR.execute(gw);
     }
 

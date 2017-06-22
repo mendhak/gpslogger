@@ -19,7 +19,7 @@ import java.util.Date;
  */
 
 
-public class GeoJSONWriterPoints implements GeoJSONWriter {
+public class GeoJSONWriterPoints implements Runnable {
     private static final Logger LOG = Logs.of(GeoJSONWriterPoints.class);
     String desc;
     File file;
@@ -84,7 +84,7 @@ public class GeoJSONWriterPoints implements GeoJSONWriter {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            LOG.error("GeoJSONWriterLine", e);
+            LOG.error("GeoJSONWriterPoints", e);
         }
 
     }
