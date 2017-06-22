@@ -33,7 +33,7 @@ public class GeoJSONWriterPoints implements GeoJSONWriter {
                     "}," +
                     "\"geometry\":{" +
                     "\"type\":\"Point\",\"coordinates\":" +
-                    "%s}}";
+                    "%s}}\n";
     private final static String DESC_TEMPLATE = ",\"description\":\"%s\"";
     private final static String COORD_TEMPLATE = "[%s,%s]";
 
@@ -69,7 +69,7 @@ public class GeoJSONWriterPoints implements GeoJSONWriter {
                     FileOutputStream fos = new FileOutputStream(file);
                     BufferedOutputStream bos = new BufferedOutputStream(fos);
                     StringBuilder sb = new StringBuilder();
-                    sb.append("{\"type\": \"FeatureCollection\",\"features\": [");
+                    sb.append("{\"type\": \"FeatureCollection\",\"features\": [\n");
                     sb.append(value);
                     bos.write(sb.toString().getBytes());
                     bos.flush();
