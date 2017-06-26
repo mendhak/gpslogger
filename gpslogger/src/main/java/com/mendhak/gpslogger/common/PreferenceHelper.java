@@ -263,7 +263,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.FTP_DIRECTORY)
     public String getFtpDirectory() {
-        return prefs.getString(PreferenceNames.FTP_DIRECTORY, "gpslogger");
+        return prefs.getString(PreferenceNames.FTP_DIRECTORY, "GPSLogger");
     }
 
 
