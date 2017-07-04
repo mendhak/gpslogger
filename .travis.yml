@@ -43,6 +43,8 @@ install:
   - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;m2repository'
   - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;android;m2repository'
   - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;google_play_services'
+  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2'
+  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2'
 
 before_script:
   - echo '"Build..."' && echo -en 'travis_fold:start:script.build\\r'

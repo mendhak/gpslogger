@@ -170,6 +170,18 @@
         <provider android:name=".common.ContentApi" android:authorities="com.mendhak.gpslogger" android:exported="true"
                   tools:ignore="ExportedContentProvider"/>
 
+        <activity
+            android:name=".ProfileSwitchReceiverActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!--<data android:scheme="http" android:host="*" android:pathPattern=".*\\.sensorgpslogger" />-->
+                <data android:scheme="https"/>
+                <data android:host="*" />
+                <data android:mimeType="application/sensorgpslogger" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
