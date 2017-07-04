@@ -3,6 +3,7 @@ package com.mendhak.gpslogger.loggers.gpx;
 import android.location.Location;
 import android.test.suitebuilder.annotation.SmallTest;
 import com.mendhak.gpslogger.BuildConfig;
+import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.MockLocations;
 import org.junit.Test;
@@ -78,7 +79,7 @@ public class Gpx10WriteHandlerTest {
                 .withSpeed(188.44f)
                 .withAccuracy(55f)
                 .putExtra("satellites",9)
-                .putExtra("SATELLITES_FIX",22)
+                .putExtra(BundleConstants.SATELLITES_FIX,22)
                 .build();
 
         Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(null, null, null, false);
@@ -102,7 +103,7 @@ public class Gpx10WriteHandlerTest {
                 .withBearing(91.88f)
                 .withSpeed(188.44f)
                 .withAccuracy(55f)
-                .putExtra("SATELLITES_FIX",22)
+                .putExtra(BundleConstants.SATELLITES_FIX,22)
                 .build();
 
         Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(null, null, null, false);
@@ -145,7 +146,7 @@ public class Gpx10WriteHandlerTest {
                 .withAltitude(9001d)
                 .withBearing(91.88f)
                 .withSpeed(188.44f)
-                .putExtra("HDOP", "LOOKATTHISHDOP!")
+                .putExtra(BundleConstants.HDOP, "LOOKATTHISHDOP!")
                 .build();
 
         String actual = writeHandler.getTrackPointXml(loc, "2011-09-17T18:45:33Z");
@@ -165,7 +166,7 @@ public class Gpx10WriteHandlerTest {
                 .withAltitude(9001d)
                 .withBearing(91.88f)
                 .withSpeed(188.44f)
-                .putExtra("GEOIDHEIGHT", "MYGEOIDHEIGHT")
+                .putExtra(BundleConstants.GEOIDHEIGHT, "MYGEOIDHEIGHT")
                 .build();
 
         String actual = writeHandler.getTrackPointXml(loc, "2011-09-17T18:45:33Z");

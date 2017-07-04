@@ -40,7 +40,7 @@ public class UploadEvents {
         }
 
         /**
-         * Convenience function, returns a succes event with a message
+         * Convenience function, returns a success event with a message
          */
         public <T extends BaseUploadEvent> T succeeded(String message){
             this.success = true;

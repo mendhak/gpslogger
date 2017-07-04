@@ -56,7 +56,7 @@ public class SerializableLocation implements Serializable {
         hasBearing = loc.hasBearing();
         hasSpeed = loc.hasSpeed();
         satelliteCount = Maths.getBundledSatelliteCount(loc);
-        detectedActivity = (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString("DETECTED_ACTIVITY"))) ? loc.getExtras().getString("DETECTED_ACTIVITY") : "";
+        detectedActivity = (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY))) ? loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY) : "";
     }
 
     public boolean hasAltitude(){

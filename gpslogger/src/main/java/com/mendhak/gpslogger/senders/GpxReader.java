@@ -20,6 +20,8 @@
 package com.mendhak.gpslogger.senders;
 
 import android.location.Location;
+
+import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Strings;
 import org.w3c.dom.*;
@@ -80,7 +82,7 @@ public class GpxReader {
                 if (name.equalsIgnoreCase("speed")) {
                     pt.setSpeed(Float.parseFloat(item2.getFirstChild().getNodeValue()));
                 }
-                if (name.equalsIgnoreCase("hdop")) {
+                if (name.equalsIgnoreCase(BundleConstants.HDOP)) {
                     pt.setAccuracy(Float.parseFloat(item2.getFirstChild().getNodeValue()) * 5);
                 }
                 if (name.equalsIgnoreCase("time")) {
