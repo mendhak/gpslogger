@@ -80,7 +80,7 @@ public class Maths {
 
             if (sat == 0) {
                 //Provider gave us nothing, let's look at our bundled count
-                sat = loc.getExtras().getInt("SATELLITES_FIX", 0);
+                sat = loc.getExtras().getInt(BundleConstants.SATELLITES_FIX, 0);
             }
         }
 

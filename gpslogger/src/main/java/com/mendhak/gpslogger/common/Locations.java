@@ -29,7 +29,7 @@ public class Locations {
         if(!loc.hasAltitude()){ return loc; }
 
         if(ph.shouldAdjustAltitudeFromGeoIdHeight() && loc.getExtras() != null){
-            String geoidheight = loc.getExtras().getString("GEOIDHEIGHT");
+            String geoidheight = loc.getExtras().getString(BundleConstants.GEOIDHEIGHT);
             if (!Strings.isNullOrEmpty(geoidheight)) {
                 loc.setAltitude((float) loc.getAltitude() - Float.valueOf(geoidheight));
             }

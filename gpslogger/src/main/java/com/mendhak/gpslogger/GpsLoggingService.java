@@ -548,7 +548,7 @@ public class GpsLoggingService extends Service  {
         if(preferenceHelper.getChosenListeners().contains(LocationManager.PASSIVE_PROVIDER)){
             LOG.debug("Starting passive location listener");
             if(passiveLocationListener== null){
-                passiveLocationListener = new GeneralLocationListener(this, "PASSIVE");
+                passiveLocationListener = new GeneralLocationListener(this, BundleConstants.PASSIVE);
             }
             passiveLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             passiveLocationManager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 1000, 0, passiveLocationListener);
@@ -776,7 +776,7 @@ public class GpsLoggingService extends Service  {
         }
 
 
-        boolean isPassiveLocation = loc.getExtras().getBoolean("PASSIVE");
+        boolean isPassiveLocation = loc.getExtras().getBoolean(BundleConstants.PASSIVE);
         
         //check if we change of day and then write the last position of yesterday as the first position of today
         if (preferenceHelper.shouldCreateNewFileOnceADay()) {
