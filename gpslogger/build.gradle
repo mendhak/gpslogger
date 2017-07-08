@@ -206,8 +206,8 @@ dependencies {
         exclude module: 'commons-codec'
     }
 
-    //Dropbox API 2
-    compile 'com.dropbox.core:dropbox-core-sdk:2.0.5'
+    //Dropbox API 3
+    compile 'com.dropbox.core:dropbox-core-sdk:3.0.3'
 
     //Markdown to HTML library
     compile 'com.github.commonsguy:cwac-anddown:dedb48ec0f'
