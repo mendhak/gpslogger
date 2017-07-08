@@ -6,7 +6,6 @@ import android.test.suitebuilder.annotation.SmallTest;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -185,7 +184,6 @@ public class StringsTest {
     }
 
 
-    @Ignore
     public void getFormattedCustomFileName_DAYNAME_ReplaceWithThreeLetterDayName(){
         PreferenceHelper ph = mock(PreferenceHelper.class);
         GregorianCalendar greg = new GregorianCalendar();
