@@ -31,6 +31,7 @@ import de.greenrobot.event.EventBus;
 import okhttp3.*;
 import org.slf4j.Logger;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 
 public class CustomUrlJob extends Job {
@@ -40,14 +41,16 @@ public class CustomUrlJob extends Job {
     private String basicAuthUser;
     private String basicAuthPassword;
     private UploadEvents.BaseUploadEvent callbackEvent;
+    private Boolean usePost;
 
 
-    public CustomUrlJob(String logUrl, String basicAuthUser, String basicAuthPassword, UploadEvents.BaseUploadEvent callbackEvent ) {
+    public CustomUrlJob(String logUrl, String basicAuthUser, String basicAuthPassword, UploadEvents.BaseUploadEvent callbackEvent, Boolean usePost ) {
         super(new Params(1).requireNetwork().persist());
         this.logUrl = logUrl;
         this.basicAuthPassword = basicAuthPassword;
         this.basicAuthUser = basicAuthUser;
         this.callbackEvent = callbackEvent;
+        this.usePost = usePost;
     }
 
     @Override
@@ -75,7 +78,35 @@ public class CustomUrlJob extends Job {
 
         OkHttpClient client = okBuilder.build();
 
-        Request request = new Request.Builder().url(logUrl).build();
+        Request request;
+
+        if (usePost) {
+            FormBody.Builder bodyBuilder = new FormBody.Builder();
+            String[] urlSplit;
+            String[] paramSplit;
+            String baseUrl = "";
+            if (logUrl.contains("?")) {
+                urlSplit = logUrl.split("\\?");
+                if (urlSplit.length == 2) {
+                    baseUrl = urlSplit[0];
+                    paramSplit = urlSplit[1].split("\\&");
+                    for (int i = 0; i < paramSplit.length; i++) {
+                        if (paramSplit[i].contains("=")) {
+                            String[] oneParamSplit = paramSplit[i].split("=");
+                            if (oneParamSplit.length == 2) {
+                                bodyBuilder.add(URLEncoder.encode(oneParamSplit[0], "UTF-8"), URLEncoder.encode(oneParamSplit[1], "UTF-8"));
+                            }
+                        }
+                    }
+                }
+            }
+            RequestBody body = bodyBuilder.build();
+            request = new Request.Builder().url(baseUrl).post(body).build();
+        }
+        else {
+            request = new Request.Builder().url(logUrl).build();
+        }
+
         Response response = client.newCall(request).execute();
 
         if (response.isSuccessful()) {
