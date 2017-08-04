@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:key="customurl_preferences">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:key="customurl_preferences">
 
     <EditTextPreference
         android:key="log_customurl_url"
-        android:title="URL"
-        />
+        android:title="URL" />
 
     <Preference
         android:key="customurl_legend_1"
@@ -15,6 +16,11 @@
 
     <Preference android:key="customurl_validatecustomsslcert"
                 android:title="@string/ssl_certificate_validate" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="log_customurl_post"
+        android:summary="@string/use_post_method_summary"
+        android:title="@string/use_post_method" />
 
 
 </PreferenceScreen>

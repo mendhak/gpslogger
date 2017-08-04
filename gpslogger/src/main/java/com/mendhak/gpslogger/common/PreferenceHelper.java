@@ -553,6 +553,14 @@ public class PreferenceHelper {
     }
 
     /**
+     * Whether to log to a custom URL with POST method.
+     */
+    @ProfilePreference(name= PreferenceNames.LOG_TO_URL_POST)
+    public boolean shouldLogToCustomUrlPost() {
+        return prefs.getBoolean(PreferenceNames.LOG_TO_URL_POST, false);
+    }
+
+    /**
      * The custom URL to log to.  Relevant only if {@link #shouldLogToCustomUrl()} returns true.
      */
     @ProfilePreference(name= PreferenceNames.LOG_TO_URL_PATH)
