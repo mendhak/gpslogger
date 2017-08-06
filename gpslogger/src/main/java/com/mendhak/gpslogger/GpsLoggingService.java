@@ -28,6 +28,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.*;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -510,8 +511,9 @@ public class GpsLoggingService extends Service  {
         long notificationTime = System.currentTimeMillis();
 
         if (session.hasValidLocation()) {
-            contentText =  Strings.getFormattedLatitude(session.getCurrentLatitude()) + ", "
-                     + Strings.getFormattedLongitude(session.getCurrentLongitude());
+            contentText = getAltitude() + getTimeOfTrip() + getTripLength()
+                    + Strings.getFormattedLatitude(session.getCurrentLatitude()) + ", "
+                    + Strings.getFormattedLongitude(session.getCurrentLongitude());
 
             notificationTime = session.getCurrentLocationInfo().getTime();
         }
@@ -541,6 +543,30 @@ public class GpsLoggingService extends Service  {
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, nfc.build());
+    }
+
+    private String getTripLength() {
+        String distString = Strings.getDistanceDisplay(this, session.getTotalTravelled(), preferenceHelper.shouldDisplayImperialUnits());
+        return distString + "; ";
+    }
+
+    private String getTimeOfTrip() {
+        long startTime = session.getStartTimeStamp();
+        long currentTime = System.currentTimeMillis();
+
+        String duration = Strings.getDescriptiveDurationString((int) (currentTime - startTime) / 1000, this);
+        return duration + "; ";
+    }
+
+    @NonNull
+    private String getAltitude() {
+        if (session.getCurrentLocationInfo() != null) {
+            double altitude = session.getCurrentLocationInfo().getAltitude();
+            String altString = Strings.getDistanceDisplay(this, altitude, preferenceHelper.shouldDisplayImperialUnits());
+            return altString + "; ";
+        } else {
+            return "";
+        }
     }
 
     @SuppressWarnings("ResourceType")
