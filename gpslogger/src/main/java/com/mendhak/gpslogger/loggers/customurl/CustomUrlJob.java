@@ -94,7 +94,7 @@ public class CustomUrlJob extends Job {
                         if (paramSplit[i].contains("=")) {
                             String[] oneParamSplit = paramSplit[i].split("=");
                             if (oneParamSplit.length == 2) {
-                                bodyBuilder.add(URLEncoder.encode(oneParamSplit[0], "UTF-8"), URLEncoder.encode(oneParamSplit[1], "UTF-8"));
+                                bodyBuilder.add(oneParamSplit[0] , oneParamSplit[1]);
                             }
                         }
                     }
