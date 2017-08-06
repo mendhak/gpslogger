@@ -29,6 +29,7 @@ import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
 import okhttp3.*;
+import okio.Buffer;
 import org.slf4j.Logger;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -81,26 +82,10 @@ public class CustomUrlJob extends Job {
         Request request;
 
         if (usePost) {
-            FormBody.Builder bodyBuilder = new FormBody.Builder();
-            String[] urlSplit;
-            String[] paramSplit;
-            String baseUrl = "";
-            if (logUrl.contains("?")) {
-                urlSplit = logUrl.split("\\?");
-                if (urlSplit.length == 2) {
-                    baseUrl = urlSplit[0];
-                    paramSplit = urlSplit[1].split("\\&");
-                    for (int i = 0; i < paramSplit.length; i++) {
-                        if (paramSplit[i].contains("=")) {
-                            String[] oneParamSplit = paramSplit[i].split("=");
-                            if (oneParamSplit.length == 2) {
-                                bodyBuilder.add(oneParamSplit[0] , oneParamSplit[1]);
-                            }
-                        }
-                    }
-                }
-            }
-            RequestBody body = bodyBuilder.build();
+
+            String baseUrl = getBaseUrlFromUrl(logUrl);
+
+            RequestBody body = getHttpPostBodyFromUrl(logUrl);
             request = new Request.Builder().url(baseUrl).post(body).build();
         }
         else {
@@ -119,6 +104,45 @@ public class CustomUrlJob extends Job {
         }
 
         response.body().close();
+    }
+
+    private String getBaseUrlFromUrl(String logUrl) {
+
+        String[] urlSplit;
+
+        String baseUrl = "";
+        if (logUrl.contains("?")) {
+            urlSplit = logUrl.split("\\?");
+            if (urlSplit.length == 2) {
+                baseUrl = urlSplit[0];
+            }
+        }
+
+        return baseUrl;
+
+    }
+
+    RequestBody getHttpPostBodyFromUrl(String logUrl) {
+        FormBody.Builder bodyBuilder = new FormBody.Builder();
+        String[] urlSplit;
+        String[] paramSplit;
+
+        if (logUrl.contains("?")) {
+            urlSplit = logUrl.split("\\?");
+            if (urlSplit.length == 2) {
+
+                paramSplit = urlSplit[1].split("\\&");
+                for (int i = 0; i < paramSplit.length; i++) {
+                    if (paramSplit[i].contains("=")) {
+                        String[] oneParamSplit = paramSplit[i].split("=");
+                        if (oneParamSplit.length == 2) {
+                            bodyBuilder.add(oneParamSplit[0] , oneParamSplit[1]);
+                        }
+                    }
+                }
+            }
+        }
+        return bodyBuilder.build();
     }
 
     @Override
