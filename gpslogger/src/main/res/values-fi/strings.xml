@@ -183,6 +183,7 @@
   <string name="menu_upload">Lataa</string>
   <string name="autoemail_from">Osoitteesta</string>
   <string name="autoemail_from_summary">Jotkin sähköpostipalveluntarjoajat vaativat osoitteen. Käytä tätä vain jos tarvitset.    </string>
+  <string name="gdocs_clearauthorization_summary">Unohtaa paikalliset Google Drive asetukset. Peruuttaksesi pysyvästi mene Google -tilin asetuksiin</string>
   <string name="gdocs_setup_title">Google Drive</string>
   <string name="gdocs_test_summary">Lataa testitiedosto Google Driveen</string>
   <string name="gdocs_test_title">Testilähetys</string>
@@ -204,11 +205,13 @@
   <string name="shortcut_stop">Pysäytä</string>
   <string name="shortcut_pickaction">Valitse toiminto</string>
   <string name="log_opengts_title">Lähetä loki OpenGTS palvelimelle</string>
+  <string name="log_opengts_summary">Lähetä GPRMC dataa käynnissä olevaan OpenGTS palvelimeen.</string>
   <string name="opengts_setup_title">OpenGTS</string>
   <string name="autoopengts_server_category">OpenGTS asetukset</string>
   <string name="autoopengts_server">Palvelin</string>
   <string name="autoopengts_server_summary">Isäntänimi tai IP</string>
   <string name="opengts_server_communication_method">Yhteystapa</string>
+  <string name="opengts_server_communication_method_summary">HTTP- pohjainen tai raakakantainen yhteydenpito</string>
   <string name="autoopengts_server_path">Palvelimen polku</string>
   <string name="autoopengts_server_path_summary">Vapaaehtoinen ja vain HTTP- pohjaiseen kommunikointiin. Esimerkiksi \'/gprmc/Data\'</string>
   <string name="autoopengts_device_id">Laitteen tunnus</string>
@@ -279,5 +282,12 @@
   <string name="profile_add_new">Lisää profiili</string>
   <string name="privacy_policy">Yksityisyyskäytäntö</string>
   <string name="debuglog_attach_to_email">Liitä vianmääritystiedot sähköpostiin</string>
+  <string name="change_language_title">Vaihda kieli</string>
   <string name="change_language_summary">Kaikkia kieliä ei ole täysin käännetty! Sinun täytyy käynnistää sovellus uudelleen, jotta asetus tulee voimaan.</string>
+  <string name="coordinate_display_format">Koordinaattien näyttömuoto</string>
+  <string name="ssl_certificate_validate">Vahvista SSL sertifikaatti</string>
+  <string name="parameters">Säätöarvot</string>
+  <string name="ssl_certificate_add_to_keystore">Lisää tämä sertifikaatti paikalliseen avainkirjastoon?</string>
+  <string name="ssl_certificate_is_valid">Sertifikaatti on voimassa</string>
+  <string name="hide_notification_from_status_bar">Piilota ilmoitus tilapalkista</string>
 </resources>

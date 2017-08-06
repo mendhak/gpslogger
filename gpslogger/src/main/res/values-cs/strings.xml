@@ -114,6 +114,8 @@
   <string name="time_before_logging_hint">Zadejte sekundy (maximum 9999)</string>
   <string name="keep_fix_summary">Buďte opatrní, toto dramaticky sníží výdrž na baterii. Použijte pouze pro vyšší přesnost při nízkých frekvencích.</string>
   <string name="keep_fix_title">Ponechat GPS zapnutou mezi odečty polohy</string>
+  <string name="retry_time_title">Doba trvání odpovídající přesnost</string>
+  <string name="retry_time_summary">After acquiring an initial fix, keep trying for this long to get an accurate point to match the accuracy filter setting.</string>
   <string name="display_imperial_title">Zobrazit imperiální jednotky</string>
   <string name="display_imperial_summary">Zobrazí stopy, míle a ostatní imperiální jednotky. (nastavení musí zůstat v metrickém systému)</string>
   <string name="enabledisablegps_title">Povolit/zakázat GPS</string>

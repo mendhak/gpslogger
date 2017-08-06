@@ -269,13 +269,21 @@
   <string name="pref_logging_file_no_permissions">Mappen är inte skrivbar av GPSLogger. Vänligen välj en annan mapp att skriva till.</string>
   <string name="pref_gpsvisualizer">GPS logstatistik och grafer</string>
   <string name="new_file_custom_each_time_title">Fråga efter filnamn vid varje loggnings-start</string>
+  <string name="donate_bitcoin">Bitcoin</string>
+  <string name="tip_coffee">Köp mig en kaffe</string>
   <string name="no_network_message">Inget nätverk finns tillgängligt</string>
   <string name="activityrecognition_dont_log_if_still">Logga inte om jag inte rör mig</string>
   <string name="txt_activity">Aktivitet:</string>
   <string name="activity_in_vehicle">I fordon</string>
+  <string name="activity_confidence">Säkerhet</string>
   <string name="activity_still">Stilla</string>
   <string name="activity_on_bicycle">På cykel</string>
   <string name="activity_on_foot">Till fots</string>
   <string name="activity_running">Springer</string>
+  <string name="activity_tilting">Vippning</string>
   <string name="activity_walking">Går</string>
+  <string name="activity_unknown">Okänd</string>
+  <string name="profile_add_new">Lägg till profil</string>
+  <string name="parameters">Parametrar</string>
+  <string name="ssl_certificate_is_valid">Certifikatet är giltigt</string>
 </resources>
