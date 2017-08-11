@@ -546,7 +546,7 @@ public class GpsLoggingService extends Service  {
     }
 
     private String getTripLength() {
-        String distString = Strings.getDistanceDisplay(this, session.getTotalTravelled(), preferenceHelper.shouldDisplayImperialUnits());
+        String distString = Strings.getDistanceDisplay(this, session.getTotalTravelled(), preferenceHelper.shouldDisplayImperialUnits(), true);
         return distString + "; ";
     }
 
@@ -562,7 +562,7 @@ public class GpsLoggingService extends Service  {
     private String getAltitude() {
         if (session.getCurrentLocationInfo() != null) {
             double altitude = session.getCurrentLocationInfo().getAltitude();
-            String altString = Strings.getDistanceDisplay(this, altitude, preferenceHelper.shouldDisplayImperialUnits());
+            String altString = Strings.getDistanceDisplay(this, altitude, preferenceHelper.shouldDisplayImperialUnits(), false);
             return altString + "; ";
         } else {
             return "";
