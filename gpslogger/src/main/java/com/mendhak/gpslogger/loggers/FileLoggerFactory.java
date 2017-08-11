@@ -77,7 +77,7 @@ public class FileLoggerFactory {
         if (preferenceHelper.shouldLogToCustomUrl()) {
             float batteryLevel = Systems.getBatteryLevel(context);
             String androidId = Systems.getAndroidId(context);
-            loggers.add(new CustomUrlLogger(preferenceHelper.getCustomLoggingUrl(), batteryLevel, androidId));
+            loggers.add(new CustomUrlLogger(preferenceHelper.getCustomLoggingUrl(), batteryLevel, androidId, preferenceHelper.shouldLogToCustomUrlPost()));
         }
 
         if(/* Should log to Android Wear */  true){

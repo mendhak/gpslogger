@@ -343,7 +343,7 @@ præcision ved lavere frekvenser.    </string>
   <string name="sftp_private_key_passphrase">Privat nøgle adgangsfrase</string>
   <string name="sftp_validate_test_upload">Validér værtsnøgle og test upload</string>
   <string name="sftp_validate_accept_host_key">Acceptér denne værtsnøgle?</string>
-  <string name="txt_timestamp_epoch">Tidsstemplet (epoke)</string>
-  <string name="txt_starttimestamp_epoch">Starttidsstemplet (epoke)</string>
+  <string name="txt_timestamp_epoch">Tidsstemplet (epoch)</string>
+  <string name="txt_starttimestamp_epoch">Starttidsstemplet (epoch)</string>
   <string name="txt_battery">Batteri</string>
 </resources>

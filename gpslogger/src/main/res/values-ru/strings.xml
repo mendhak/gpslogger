@@ -96,6 +96,7 @@
   <string name="log_gpx_summary">Логи местоположения в файл GPX v1.0</string>
   <string name="log_kml_title">Писать лог в KML</string>
   <string name="log_kml_summary">Логи местоположения в файл KML v2.2</string>
+  <string name="log_plain_text_title">Экспорт в CSV</string>
   <string name="log_plain_text_summary">Логи местоположения в файл CSV</string>
   <string name="new_file_creation_title">Создать новый файл</string>
   <string name="new_file_creation_summary">Создвать файл лога один раз в день или каждый раз при старте записи лога.
@@ -245,6 +246,7 @@
   <string name="gpslogger_folder_title">Сохранить в папке</string>
   <string name="gpslogger_folder_summary">Куда сохранять файлы журнала (по умолчанию в /sdcard/GPSLogger)</string>
   <string name="autoftp_directory">Папка</string>
+  <string name="new_file_custom_message">Вы можете использовать %SER (серийный номер устройства), %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER (версия)</string>
   <string name="new_file_prefix_serial_title">Использовать серийный номер устройства в качестве префикса к имени файла</string>
   <string name="new_file_prefix_serial_summary">Серийный номер, полученный из статуса телефона</string>
   <string name="txt_travel_duration">Продолжительность:</string>
@@ -329,4 +331,10 @@
   <string name="ssl_certificate_add_to_keystore">Добавить этот сертификат в локальное хранилище ключей?</string>
   <string name="ssl_certificate_is_valid">Сертификат действителен</string>
   <string name="hide_notification_from_status_bar">Спрятать уведомления</string>
+  <string name="sftp_setup_title">SFTP</string>
+  <string name="sftp_private_key_path">Персональный ключ</string>
+  <string name="sftp_private_key_passphrase">Персональное кодовое слово</string>
+  <string name="txt_timestamp_epoch">Отметка времени (периода)</string>
+  <string name="txt_starttimestamp_epoch">Начальная отметка времени (периода)</string>
+  <string name="txt_battery">Батарея</string>
 </resources>

@@ -28,6 +28,7 @@ import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.path.android.jobqueue.JobManager;
 
+
 import java.net.URLEncoder;
 import java.util.AbstractMap;
 import java.util.Date;
@@ -40,11 +41,13 @@ public class CustomUrlLogger implements FileLogger {
     private final String customLoggingUrl;
     private final float batteryLevel;
     private final String androidId;
+    private final Boolean usePost;
 
-    public CustomUrlLogger(String customLoggingUrl, float batteryLevel, String androidId) {
+    public CustomUrlLogger(String customLoggingUrl, float batteryLevel, String androidId, Boolean usePost) {
         this.customLoggingUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
         this.androidId = androidId;
+        this.usePost = usePost;
     }
 
     @Override
@@ -63,7 +66,7 @@ public class CustomUrlLogger implements FileLogger {
                 Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
 
         JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new CustomUrlJob(finalUrl, credentials.getKey(), credentials.getValue(), new UploadEvents.CustomUrl()));
+        jobManager.addJobInBackground(new CustomUrlJob(finalUrl, credentials.getKey(), credentials.getValue(), new UploadEvents.CustomUrl(), usePost));
     }
 
     public String getFormattedUrl(String customLoggingUrl, Location loc, String description, String androidId,

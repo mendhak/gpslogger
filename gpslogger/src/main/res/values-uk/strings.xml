@@ -96,6 +96,7 @@
   <string name="log_gpx_summary">Записує розташування у GPX v1.0 file</string>
   <string name="log_kml_title">Записувати у KML</string>
   <string name="log_kml_summary">Записує розташування у KML v2.2 file</string>
+  <string name="log_plain_text_title">Записувати у CSV</string>
   <string name="log_plain_text_summary">Записує розташування у CSV file</string>
   <string name="new_file_creation_title">Створення нового файлу</string>
   <string name="new_file_creation_summary">Створювати новий файл один раз на день або під час кожного запуску.</string>
@@ -108,6 +109,7 @@
         можуть не добре працювати з автоматичним надсиланням, оскільки надсилається тільки останній файл.</string>
   <string name="pref_performance_title">Продуктивність</string>
   <string name="pref_performance_summary">Інтервали, фільтри та провайдери</string>
+  <string name="time_before_logging_title">Інтервал запису</string>
   <string name="time_before_logging_summary">Для максимальної частоти запису використовуйте 0, але повільніший режим є кращім для збереження заряду батареї. </string>
   <string name="time_before_logging_dialog_title">Час в секундах</string>
   <string name="time_before_logging_hint">Введіть секунди (макс. 9999)</string>
@@ -122,6 +124,7 @@
   <string name="startonapplaunch_title">Починати при запуску програми</string>
   <string name="startonapplaunch_summary">Почати запис коли програму запущено</string>
   <string name="autoemail_title">E-mail</string>
+  <string name="please_wait">Будь ласка зачекайте</string>
   <string name="autoemail_target">Електронна пошта одержувачів</string>
   <string name="autosend_frequency_display">Після %s хвилин</string>
   <string name="autoemail_frequency_whenistop">Коли я натисну, зупинити</string>
@@ -307,4 +310,9 @@
   <string name="debuglog_attach_to_email">Вкласти в e-mail журнал налагодження</string>
   <string name="debuglog_attach_to_email_summary">Приєднує до e-mail журнал налагодження разом з деякою діагностичною інформацією</string>
   <string name="change_language_summary">Не всі мови повністю переведени! Необхідно перезавантажити додаток, щоб зміни вступили в силу.</string>
+  <string name="parameters">Параметри</string>
+  <string name="sftp_setup_title">SFTP</string>
+  <string name="sftp_private_key_path">Приватний ключ</string>
+  <string name="sftp_private_key_passphrase">Пароль до приватного ключа</string>
+  <string name="txt_battery">Акумулятор</string>
 </resources>
