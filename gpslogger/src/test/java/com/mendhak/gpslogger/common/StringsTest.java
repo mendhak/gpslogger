@@ -3,6 +3,7 @@ package com.mendhak.gpslogger.common;
 import android.content.Context;
 import android.os.Build;
 import android.test.suitebuilder.annotation.SmallTest;
+
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 
@@ -10,6 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -373,7 +376,7 @@ public class StringsTest {
     @Test
     public void getDecimalDegrees_BasicLatitude(){
         double lat = 59.28392417439d;
-        String expected = "59.283924";
+        String expected = "59" + getDecimalSeparator() + "283924";
         String actual = Strings.getDecimalDegrees(lat);
 
         assertThat("Decimal degrees formatted to 6 places", actual, is(expected));
@@ -383,7 +386,7 @@ public class StringsTest {
     @Test
     public void getDecimalDegrees_ShortLocation_NoPaddedZeros(){
         double lat = 59.28d;
-        String expected = "59.28";
+        String expected = "59" + getDecimalSeparator() + "28";
         String actual = Strings.getDecimalDegrees(lat);
 
         assertThat("Decimal degrees no padded zero", actual, is(expected));
@@ -394,12 +397,18 @@ public class StringsTest {
     @Test
     public void getFormattedDegrees_DecimalDegrees_ReturnsDD(){
         double lat = 51.2828223838d;
-        String expected = "51.282822";
+        String expected = "51" + getDecimalSeparator() + "282822";
 
         PreferenceHelper ph = mock(PreferenceHelper.class);
         when(ph.getDisplayLatLongFormat()).thenReturn(PreferenceNames.DegreesDisplayFormat.DECIMAL_DEGREES);
         String actual = Strings.getFormattedDegrees(lat, true, ph);
         assertThat("Preference DD returns DD", actual, is(expected));
+    }
+
+    private char getDecimalSeparator() {
+        DecimalFormat format= (DecimalFormat) DecimalFormat.getInstance();
+        DecimalFormatSymbols symbols=format.getDecimalFormatSymbols();
+        return symbols.getDecimalSeparator();
     }
 
     @Test
