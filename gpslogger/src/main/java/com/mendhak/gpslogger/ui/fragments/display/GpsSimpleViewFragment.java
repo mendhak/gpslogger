@@ -134,6 +134,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         ImageView imgCsv = (ImageView) rootView.findViewById(R.id.simpleview_imgCsv);
         ImageView imgNmea = (ImageView) rootView.findViewById(R.id.simpleview_imgNmea);
         ImageView imgLink = (ImageView) rootView.findViewById(R.id.simpleview_imgLink);
+        ImageView imgJson = (ImageView)rootView.findViewById(R.id.simpleview_imgjson);
 
         if (preferenceHelper.shouldLogToGpx()) {
 
@@ -166,6 +167,13 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             imgLink.setVisibility(View.VISIBLE);
         } else {
             imgLink.setVisibility(View.GONE);
+        }
+
+        if(preferenceHelper.shouldLogToGeoJSON()){
+            imgJson.setVisibility(View.VISIBLE);
+        }
+        else {
+            imgJson.setVisibility(View.GONE);
         }
 
         if (!preferenceHelper.shouldLogToGpx() && !preferenceHelper.shouldLogToKml()
