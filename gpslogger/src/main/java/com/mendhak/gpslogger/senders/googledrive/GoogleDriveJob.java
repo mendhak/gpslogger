@@ -277,6 +277,10 @@ public class GoogleDriveJob extends Job {
             return "text/plain";
         }
 
+        if (fileName.endsWith("geojson")){
+            return "application/vnd.geo+json";
+        }
+
         return "application/vnd.google-apps.spreadsheet";
     }
 
