@@ -177,7 +177,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             }
 
 
-            txtDistance.setText(Strings.getDistanceDisplay(getActivity(), preferenceHelper.getMinimumDistanceInterval(), preferenceHelper.shouldDisplayImperialUnits()));
+            txtDistance.setText(Strings.getDistanceDisplay(getActivity(), preferenceHelper.getMinimumDistanceInterval(), preferenceHelper.shouldDisplayImperialUnits(), true));
 
 
             if (preferenceHelper.isAutoSendEnabled() && preferenceHelper.getAutoSendInterval() > 0) {
@@ -350,7 +350,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         tvLongitude.setText(String.valueOf(Strings.getFormattedLongitude(locationInfo.getLongitude())));
 
         if (locationInfo.hasAltitude()) {
-            tvAltitude.setText(Strings.getDistanceDisplay(getActivity(), locationInfo.getAltitude(), preferenceHelper.shouldDisplayImperialUnits()));
+            tvAltitude.setText(Strings.getDistanceDisplay(getActivity(), locationInfo.getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), false));
         } else {
             tvAltitude.setText(R.string.not_applicable);
         }
@@ -382,14 +382,14 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         if (locationInfo.hasAccuracy()) {
 
             float accuracy = locationInfo.getAccuracy();
-            txtAccuracy.setText(getString(R.string.accuracy_within, Strings.getDistanceDisplay(getActivity(), accuracy, preferenceHelper.shouldDisplayImperialUnits()), ""));
+            txtAccuracy.setText(getString(R.string.accuracy_within, Strings.getDistanceDisplay(getActivity(), accuracy, preferenceHelper.shouldDisplayImperialUnits(), true), ""));
 
         } else {
             txtAccuracy.setText(R.string.not_applicable);
         }
 
         double distanceValue = session.getTotalTravelled();
-        txtTravelled.setText(Strings.getDistanceDisplay(getActivity(), distanceValue, preferenceHelper.shouldDisplayImperialUnits()) + " (" + session.getNumLegs() + " points)");
+        txtTravelled.setText(Strings.getDistanceDisplay(getActivity(), distanceValue, preferenceHelper.shouldDisplayImperialUnits(), true) + " (" + session.getNumLegs() + " points)");
 
         long startTime = session.getStartTimeStamp();
         Date d = new Date(startTime);

@@ -328,4 +328,5 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="sftp_private_key_passphrase">Privát kulcs jelszava</string>
   <string name="sftp_validate_test_upload">Kiszolgáló ellenõrzése és próbafeltöltés</string>
   <string name="sftp_validate_accept_host_key">Elfogadja ezt a kiszolgálókulcsot?</string>
+  <string name="txt_timestamp_epoch">Időbélyeg (epoch)</string>
 </resources>

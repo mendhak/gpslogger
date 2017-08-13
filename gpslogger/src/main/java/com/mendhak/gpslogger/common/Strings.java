@@ -296,19 +296,19 @@ public class Strings {
 
     }
 
-    public static String getDistanceDisplay(Context context, double meters, boolean imperial) {
+    public static String getDistanceDisplay(Context context, double meters, boolean imperial, boolean autoscale) {
         DecimalFormat df = new DecimalFormat("#.###");
         String result = df.format(meters) + context.getString(R.string.meters);
 
         if(imperial){
-            if (meters <= 804){
+            if (!autoscale || (meters <= 804)){
                 result = df.format(meters * 3.2808399) + context.getString(R.string.feet);
             }
             else {
                 result = df.format(meters/1609.344) + context.getString(R.string.miles);
             }
         }
-        else if(meters >= 1000){
+        else if(autoscale && (meters >= 1000)) {
             result = df.format(meters/1000) + context.getString(R.string.kilometers);
         }
 

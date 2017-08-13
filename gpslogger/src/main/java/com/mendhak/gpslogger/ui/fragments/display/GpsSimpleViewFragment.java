@@ -343,7 +343,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
             TextView txtAccuracy = (TextView) rootView.findViewById(R.id.simpleview_txtAccuracy);
             float accuracy = locationInfo.getAccuracy();
-            txtAccuracy.setText(Strings.getDistanceDisplay(getActivity(), accuracy, preferenceHelper.shouldDisplayImperialUnits()));
+            txtAccuracy.setText(Strings.getDistanceDisplay(getActivity(), accuracy, preferenceHelper.shouldDisplayImperialUnits(), true));
 
             if (accuracy > 500) {
                 setColor(imgAccuracy, IconColorIndicator.Warning);
@@ -363,7 +363,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             setColor(imgAltitude, IconColorIndicator.Good);
             TextView txtAltitude = (TextView) rootView.findViewById(R.id.simpleview_txtAltitude);
 
-            txtAltitude.setText(Strings.getDistanceDisplay(getActivity(), locationInfo.getAltitude(), preferenceHelper.shouldDisplayImperialUnits()));
+            txtAltitude.setText(Strings.getDistanceDisplay(getActivity(), locationInfo.getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), false));
         }
 
         ImageView imgSpeed = (ImageView)rootView.findViewById(R.id.simpleview_imgSpeed);
@@ -400,7 +400,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         TextView txtPoints = (TextView) rootView.findViewById(R.id.simpleview_txtPoints);
         TextView txtTravelled = (TextView) rootView.findViewById(R.id.simpleview_txtDistance);
 
-        txtTravelled.setText(Strings.getDistanceDisplay(getActivity(), distanceValue, preferenceHelper.shouldDisplayImperialUnits()));
+        txtTravelled.setText(Strings.getDistanceDisplay(getActivity(), distanceValue, preferenceHelper.shouldDisplayImperialUnits(), true));
         txtPoints.setText(session.getNumLegs() + " " + getString(R.string.points));
 
         String providerName = locationInfo.getProvider();

@@ -97,6 +97,7 @@
   <string name="log_gpx_summary">ตำแหน่งของ log ไปยังไฟล์ GPX v1.0</string>
   <string name="log_kml_title">บันทึกลงไฟล์ KML</string>
   <string name="log_kml_summary">ตำแหน่งของ log ไปยังไฟล์ KML v2.2</string>
+  <string name="log_plain_text_title">บันทึกเป็น CSV</string>
   <string name="log_plain_text_summary">ตำแหน่งของ log ไปยังไฟล์ CSV</string>
   <string name="new_file_creation_title">สร้างไฟล์ใหม่</string>
   <string name="new_file_creation_summary">ไม่ว่าจะสร้างไฟล์ใหม่วันละครั้ง หรือทุกครั้งที่คุณเริ่มบันทึก</string>
@@ -104,6 +105,7 @@
   <string name="new_file_creation_everystart">ทุกครั้งที่เริ่มบันทึก</string>
   <string name="new_file_creation_custom">กำหนดไฟล์เอง</string>
   <string name="new_file_custom_title">กำหนดชื่อไฟล์</string>
+  <string name="new_file_custom_summary">Thailand</string>
   <string name="pref_performance_title">ประสิทธิภาพ</string>
   <string name="pref_performance_summary">เวลา กรอง และผู้ฟัง</string>
   <string name="time_before_logging_title">ช่วงเวลาการบันทึก</string>
