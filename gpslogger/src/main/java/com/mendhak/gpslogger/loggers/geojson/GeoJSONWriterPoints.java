@@ -90,8 +90,8 @@ public class GeoJSONWriterPoints implements Runnable {
         attributes.append("\"time\":\"").append(dateTimeString).append("\"");
         attributes.append(String.format(ATTRIBUTE_TEMPLATE, "provider", location.getProvider()));
         attributes.append(String.format(ATTRIBUTE_TEMPLATE, "time_long", location.getTime()));
-        if (desc != null) {
-            attributes.append(String.format(ATTRIBUTE_TEMPLATE, "description", desc));
+        if (!Strings.isNullOrEmpty(desc)) {
+            attributes.append(String.format(ATTRIBUTE_TEMPLATE, "description", Strings.cleanDescriptionForJson(desc)));
         }
         if (location.hasAccuracy()) {
             attributes.append(String.format(ATTRIBUTE_TEMPLATE, "accuracy", location.getAccuracy()));
