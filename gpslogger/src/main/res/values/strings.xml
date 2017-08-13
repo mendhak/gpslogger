@@ -333,7 +333,7 @@
     <string name="txt_annotation">Annotation:</string>
     <string name="txt_time_isoformat">Time UTC (2011-12-25T15:27:33Z):</string>
     <string name="txt_provider">Provider:</string>
-    <string name="annotation_requires_logging">Annotations require logging to CSV/GPX/KML/Custom URL</string>
+    <string name="annotation_requires_logging">Annotations require logging to CSV/GPX/KML/Custom URL/GeoJSON</string>
 
 
     <string name="gpslogger_folder_title">Save to folder</string>
