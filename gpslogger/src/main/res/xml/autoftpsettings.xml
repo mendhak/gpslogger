@@ -30,6 +30,7 @@
             android:key="autoftp_directory"
             android:title="@string/autoftp_directory"
             android:dialogTitle="@string/autoftp_directory"
+            android:defaultValue="GPSLogger"
             />
 
     <Preference android:title="@string/gdocs_test_title"
