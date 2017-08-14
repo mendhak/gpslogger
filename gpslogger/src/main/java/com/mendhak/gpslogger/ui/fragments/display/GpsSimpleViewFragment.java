@@ -176,11 +176,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             imgJson.setVisibility(View.GONE);
         }
 
-        if (!preferenceHelper.shouldLogToGpx() && !preferenceHelper.shouldLogToKml()
-                && !preferenceHelper.shouldLogToCSV()) {
-            showCurrentFileName(null);
-        }
-
     }
 
     private void showCurrentFileName(String newFileName) {
