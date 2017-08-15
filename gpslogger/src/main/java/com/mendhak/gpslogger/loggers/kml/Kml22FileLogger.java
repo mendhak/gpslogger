@@ -55,7 +55,7 @@ public class Kml22FileLogger implements FileLogger {
 
     public void annotate(String description, Location loc) throws Exception {
         
-        description = Strings.cleanDescription(description);
+        description = Strings.cleanDescriptionForXml(description);
         
         Kml22AnnotateHandler annotateHandler = new Kml22AnnotateHandler(kmlFile, description, loc);
         EXECUTOR.execute(annotateHandler);

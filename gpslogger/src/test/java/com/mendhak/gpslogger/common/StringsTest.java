@@ -73,7 +73,7 @@ public class StringsTest {
                 "XML file.  It will either bbreak/b or Bert &amp; Ernie will alert up" +
                 "and cause all sorts of mayhem. Either way, it won't &quot;work&quot;";
 
-        String actual = Strings.cleanDescription(content);
+        String actual = Strings.cleanDescriptionForXml(content);
 
         assertThat("Clean Description should remove characters", actual, is(expected));
     }

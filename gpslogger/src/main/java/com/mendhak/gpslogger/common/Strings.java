@@ -166,12 +166,18 @@ public class Strings {
      * @param desc
      * @return
      */
-    public static String cleanDescription(String desc) {
+    public static String cleanDescriptionForXml(String desc) {
         desc = desc.replace("<", "");
         desc = desc.replace(">", "");
         desc = desc.replace("&", "&amp;");
         desc = desc.replace("\"", "&quot;");
 
+        return desc;
+    }
+
+    public static String cleanDescriptionForJson(String desc){
+        desc = desc.replace("\"", "");
+        desc = desc.replace("\\","");
         return desc;
     }
 

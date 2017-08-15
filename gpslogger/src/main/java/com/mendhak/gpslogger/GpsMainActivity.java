@@ -777,13 +777,17 @@ public class GpsMainActivity extends AppCompatActivity
 
         if (mnuAnnotate != null) {
 
-            if (!preferenceHelper.shouldLogToCSV() && !preferenceHelper.shouldLogToGpx() && !preferenceHelper.shouldLogToKml() && !preferenceHelper.shouldLogToCustomUrl()) {
+            if (!preferenceHelper.shouldLogToCSV() && !preferenceHelper.shouldLogToGpx()
+                    && !preferenceHelper.shouldLogToKml() && !preferenceHelper.shouldLogToCustomUrl()
+                    && !preferenceHelper.shouldLogToGeoJSON()) {
                 mnuAnnotate.setIcon(R.drawable.annotate2_disabled);
                 mnuAnnotate.setEnabled(false);
-            } else {
+            }
+            else {
                 if (session.isAnnotationMarked()) {
                     mnuAnnotate.setIcon(R.drawable.annotate2_active);
-                } else {
+                }
+                else {
                     mnuAnnotate.setIcon(R.drawable.annotate2);
                 }
             }
@@ -866,7 +870,8 @@ public class GpsMainActivity extends AppCompatActivity
      */
     private void annotate() {
 
-        if (!preferenceHelper.shouldLogToCSV() && !preferenceHelper.shouldLogToGpx() && !preferenceHelper.shouldLogToKml() && !preferenceHelper.shouldLogToCustomUrl()) {
+        if (!preferenceHelper.shouldLogToCSV() && !preferenceHelper.shouldLogToGpx() && !preferenceHelper.shouldLogToKml()
+                && !preferenceHelper.shouldLogToCustomUrl() && !preferenceHelper.shouldLogToGeoJSON()) {
             Toast.makeText(getApplicationContext(), getString(R.string.annotation_requires_logging), Toast.LENGTH_SHORT).show();
             return;
         }
