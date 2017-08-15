@@ -515,11 +515,11 @@ public class GpsLoggingService extends Service  {
             contentTitle = Strings.getFormattedLatitude(session.getCurrentLatitude()) + ", "
                     + Strings.getFormattedLongitude(session.getCurrentLongitude());
 
-            contentText = getString(R.string.txt_altitude) + Strings.getDistanceDisplay(this,session.getCurrentLocationInfo().getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), false)
+            contentText = getString(R.string.txt_altitude) + " " + Strings.getDistanceDisplay(this,session.getCurrentLocationInfo().getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), false)
                     + "  "
-                    + getString(R.string.txt_accuracy) + Strings.getDistanceDisplay(this, session.getCurrentLocationInfo().getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), true)
+                    + getString(R.string.txt_accuracy) + " "  + Strings.getDistanceDisplay(this, session.getCurrentLocationInfo().getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), true)
                     + "  "
-                    + getString(R.string.txt_travel_duration) + Strings.getDescriptiveDurationString((int) (System.currentTimeMillis() - session.getStartTimeStamp()) / 1000, this);
+                    + getString(R.string.txt_travel_duration) + " "  + Strings.getDescriptiveDurationString((int) (System.currentTimeMillis() - session.getStartTimeStamp()) / 1000, this);
 
 
             notificationTime = session.getCurrentLocationInfo().getTime();
