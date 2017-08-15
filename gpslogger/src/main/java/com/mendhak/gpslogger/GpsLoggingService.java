@@ -507,13 +507,20 @@ public class GpsLoggingService extends Service  {
 
         PendingIntent pending = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        String contentText = getString(R.string.gpslogger_still_running);
+        String contentTitle = getString(R.string.gpslogger_still_running);
+        String contentText = getString(R.string.app_name);
         long notificationTime = System.currentTimeMillis();
 
         if (session.hasValidLocation()) {
-            contentText = getAltitude() + getTimeOfTrip() + getTripLength()
-                    + Strings.getFormattedLatitude(session.getCurrentLatitude()) + ", "
+            contentTitle = Strings.getFormattedLatitude(session.getCurrentLatitude()) + ", "
                     + Strings.getFormattedLongitude(session.getCurrentLongitude());
+
+            contentText = getString(R.string.txt_altitude) + Strings.getDistanceDisplay(this,session.getCurrentLocationInfo().getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), false)
+                    + "  "
+                    + getString(R.string.txt_accuracy) + Strings.getDistanceDisplay(this, session.getCurrentLocationInfo().getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), true)
+                    + "  "
+                    + getString(R.string.txt_travel_duration) + Strings.getDescriptiveDurationString((int) (System.currentTimeMillis() - session.getStartTimeStamp()) / 1000, this);
+
 
             notificationTime = session.getCurrentLocationInfo().getTime();
         }
@@ -525,7 +532,9 @@ public class GpsLoggingService extends Service  {
                     .setPriority( preferenceHelper.shouldHideNotificationFromStatusBar() ? NotificationCompat.PRIORITY_MIN : NotificationCompat.PRIORITY_LOW)
                     .setCategory(NotificationCompat.CATEGORY_SERVICE)
                     .setVisibility(NotificationCompat.VISIBILITY_SECRET) //This hides the notification from lock screen
-                    .setContentTitle(contentText)
+                    .setContentTitle(contentTitle)
+                    .setContentText(contentText)
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(contentText).setBigContentTitle(contentTitle))
                     .setOngoing(true)
                     .setContentIntent(pending);
 
@@ -537,36 +546,13 @@ public class GpsLoggingService extends Service  {
 
 
 
-        nfc.setContentTitle(contentText);
-        nfc.setContentText(getString(R.string.app_name));
+        nfc.setContentTitle(contentTitle);
+        nfc.setContentText(contentText);
+        nfc.setStyle(new NotificationCompat.BigTextStyle().bigText(contentText).setBigContentTitle(contentTitle));
         nfc.setWhen(notificationTime);
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, nfc.build());
-    }
-
-    private String getTripLength() {
-        String distString = Strings.getDistanceDisplay(this, session.getTotalTravelled(), preferenceHelper.shouldDisplayImperialUnits(), true);
-        return distString + "; ";
-    }
-
-    private String getTimeOfTrip() {
-        long startTime = session.getStartTimeStamp();
-        long currentTime = System.currentTimeMillis();
-
-        String duration = Strings.getDescriptiveDurationString((int) (currentTime - startTime) / 1000, this);
-        return duration + "; ";
-    }
-
-    @NonNull
-    private String getAltitude() {
-        if (session.getCurrentLocationInfo() != null) {
-            double altitude = session.getCurrentLocationInfo().getAltitude();
-            String altString = Strings.getDistanceDisplay(this, altitude, preferenceHelper.shouldDisplayImperialUnits(), false);
-            return altString + "; ";
-        } else {
-            return "";
-        }
     }
 
     @SuppressWarnings("ResourceType")
