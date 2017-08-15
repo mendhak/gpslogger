@@ -32,6 +32,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.text.Html;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
@@ -507,20 +508,19 @@ public class GpsLoggingService extends Service  {
 
         PendingIntent pending = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        String contentTitle = getString(R.string.gpslogger_still_running);
-        String contentText = getString(R.string.app_name);
+        CharSequence contentTitle = getString(R.string.gpslogger_still_running);
+        CharSequence contentText = getString(R.string.app_name);
         long notificationTime = System.currentTimeMillis();
 
         if (session.hasValidLocation()) {
             contentTitle = Strings.getFormattedLatitude(session.getCurrentLatitude()) + ", "
                     + Strings.getFormattedLongitude(session.getCurrentLongitude());
 
-            contentText = getString(R.string.txt_altitude) + " " + Strings.getDistanceDisplay(this,session.getCurrentLocationInfo().getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), false)
+            contentText = Html.fromHtml("<b>" + getString(R.string.txt_altitude) + "</b> " + Strings.getDistanceDisplay(this,session.getCurrentLocationInfo().getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), false)
                     + "  "
-                    + getString(R.string.txt_accuracy) + " "  + Strings.getDistanceDisplay(this, session.getCurrentLocationInfo().getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), true)
+                    + "<b>" + getString(R.string.txt_accuracy) + "</b> "  + Strings.getDistanceDisplay(this, session.getCurrentLocationInfo().getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), true)
                     + "  "
-                    + getString(R.string.txt_travel_duration) + " "  + Strings.getDescriptiveDurationString((int) (System.currentTimeMillis() - session.getStartTimeStamp()) / 1000, this);
-
+                    + "<b>" + getString(R.string.txt_travel_duration) + "</b> "  + Strings.getDescriptiveDurationString((int) (System.currentTimeMillis() - session.getStartTimeStamp()) / 1000, this));
 
             notificationTime = session.getCurrentLocationInfo().getTime();
         }
