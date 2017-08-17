@@ -66,7 +66,7 @@ public class FileLoggerFactory {
         }
 
         if (preferenceHelper.shouldLogToCSV()) {
-            float batteryLevel = Systems.getBatteryLevel(context);
+            int batteryLevel = Systems.getBatteryLevel(context);
             File file = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".csv");
             loggers.add(new CSVFileLogger(file, batteryLevel));
         }
@@ -76,7 +76,7 @@ public class FileLoggerFactory {
         }
 
         if (preferenceHelper.shouldLogToCustomUrl()) {
-            float batteryLevel = Systems.getBatteryLevel(context);
+            int batteryLevel = Systems.getBatteryLevel(context);
             String androidId = Systems.getAndroidId(context);
             loggers.add(new CustomUrlLogger(preferenceHelper.getCustomLoggingUrl(), batteryLevel, androidId, preferenceHelper.shouldLogToCustomUrlPost()));
         }

@@ -36,16 +36,16 @@ import android.provider.Settings;
 import java.util.List;
 
 public class Systems {
-    public static float getBatteryLevel(Context context) {
+    public static int getBatteryLevel(Context context) {
         Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         int level = batteryIntent != null ? batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) : 0;
         int scale = batteryIntent != null ? batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1) : 0;
 
         if (level == -1 || scale == -1) {
-            return 50.0f;
+            return 50;
         }
 
-        return ((float) level / (float) scale) * 100.0f;
+        return (int) (((float) level / (float) scale) * 100.0f);
     }
 
     public static String getAndroidId(Context context) {

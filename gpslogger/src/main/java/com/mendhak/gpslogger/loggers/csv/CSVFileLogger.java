@@ -38,11 +38,11 @@ import java.util.Locale;
 
 public class CSVFileLogger implements FileLogger {
 
-    private final Float batteryLevel;
+    private final Integer batteryLevel;
     private File file;
     protected final String name = "TXT";
 
-    public CSVFileLogger(File file, @Nullable Float batteryLevel) {
+    public CSVFileLogger(File file, @Nullable Integer batteryLevel) {
         this.file = file;
         this.batteryLevel = batteryLevel;
     }

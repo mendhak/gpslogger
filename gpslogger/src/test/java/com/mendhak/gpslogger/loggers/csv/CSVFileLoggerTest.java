@@ -144,11 +144,11 @@ public class CSVFileLoggerTest {
 
     @Test
     public void getCsvLine_LocationWithBattery_ReturnsCSVLine(){
-        CSVFileLogger plain = new CSVFileLogger(null,47.238f);
+        CSVFileLogger plain = new CSVFileLogger(null,47);
         Location loc = MockLocations.builder("MOCK", 12.222,14.151).build();
 
         String actual = plain.getCsvLine(loc, "2011-09-17T18:45:33Z");
-        String expected = "2011-09-17T18:45:33Z,12.222000,14.151000,,,,,0,MOCK,,,,,,,,47.238,\n";
+        String expected = "2011-09-17T18:45:33Z,12.222000,14.151000,,,,,0,MOCK,,,,,,,,47,\n";
 
         assertThat("CSV With battery", actual, is(expected));
 
@@ -157,11 +157,11 @@ public class CSVFileLoggerTest {
 
     @Test
     public void getCsvLine_LocationWithAnnotation_ReturnsCSVLine(){
-        CSVFileLogger plain = new CSVFileLogger(null,47.238f);
+        CSVFileLogger plain = new CSVFileLogger(null,47);
         Location loc = MockLocations.builder("MOCK", 12.222,14.151).build();
 
         String actual = plain.getCsvLine("はい", loc, "2011-09-17T18:45:33Z");
-        String expected = "2011-09-17T18:45:33Z,12.222000,14.151000,,,,,0,MOCK,,,,,,,,47.238,\"はい\"\n";
+        String expected = "2011-09-17T18:45:33Z,12.222000,14.151000,,,,,0,MOCK,,,,,,,,47,\"はい\"\n";
 
         assertThat("CSV With annotation", actual, is(expected));
 
@@ -169,11 +169,11 @@ public class CSVFileLoggerTest {
 
     @Test
     public void getCsvLine_DescriptionContainsDoubleQuote_ReturnsCSVLineWithEscapedQuote(){
-        CSVFileLogger plain = new CSVFileLogger(null,47.238f);
+        CSVFileLogger plain = new CSVFileLogger(null,47);
         Location loc = MockLocations.builder("MOCK", 12.222,14.151).build();
 
         String actual = plain.getCsvLine("a..\"b\"..'c'", loc, "2011-09-17T18:45:33Z");
-        String expected = "2011-09-17T18:45:33Z,12.222000,14.151000,,,,,0,MOCK,,,,,,,,47.238,\"a..\"\"b\"\"..'c'\"\n";
+        String expected = "2011-09-17T18:45:33Z,12.222000,14.151000,,,,,0,MOCK,,,,,,,,47,\"a..\"\"b\"\"..'c'\"\n";
 
         assertThat("CSV With annotation", actual, is(expected));
 

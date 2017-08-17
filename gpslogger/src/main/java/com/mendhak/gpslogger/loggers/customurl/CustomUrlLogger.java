@@ -39,11 +39,11 @@ public class CustomUrlLogger implements FileLogger {
 
     private final String name = "URL";
     private final String customLoggingUrl;
-    private final float batteryLevel;
+    private final int batteryLevel;
     private final String androidId;
     private final Boolean usePost;
 
-    public CustomUrlLogger(String customLoggingUrl, float batteryLevel, String androidId, Boolean usePost) {
+    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String androidId, Boolean usePost) {
         this.customLoggingUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
         this.androidId = androidId;
