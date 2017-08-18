@@ -28,6 +28,7 @@ import com.mendhak.gpslogger.loggers.Files;
 import org.slf4j.Logger;
 
 import java.io.*;
+import java.nio.channels.FileChannel;
 import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -72,6 +73,7 @@ class Kml22AnnotateHandler implements Runnable {
     File kmlFile;
     String description;
     Location loc;
+    int kmlAnnotationOffset = 258;
 
     public Kml22AnnotateHandler(File kmlFile, String description, Location loc) {
         this.kmlFile = kmlFile;
@@ -92,28 +94,24 @@ class Kml22AnnotateHandler implements Runnable {
                 String descriptionNode = getPlacemarkXml(description, loc);
 
 
-                BufferedReader bf = new BufferedReader(new FileReader(kmlFile));
+                RandomAccessFile r = new RandomAccessFile(kmlFile, "rw");
+                File tmpFile = new File(kmlFile.getAbsolutePath() + "~");
+                tmpFile.createNewFile();
+                RandomAccessFile rtemp = new RandomAccessFile(tmpFile, "rw");
+                long fileSize = r.length();
+                FileChannel sourceChannel = r.getChannel();
+                FileChannel targetChannel = rtemp.getChannel();
+                sourceChannel.transferTo(kmlAnnotationOffset, (fileSize - kmlAnnotationOffset), targetChannel);
+                sourceChannel.truncate(kmlAnnotationOffset);
+                r.seek(kmlAnnotationOffset);
+                r.write(descriptionNode.getBytes());
+                long newOffset = r.getFilePointer();
+                targetChannel.position(0L);
+                sourceChannel.transferFrom(targetChannel, newOffset, (fileSize - kmlAnnotationOffset));
+                sourceChannel.close();
+                targetChannel.close();
+                tmpFile.delete();
 
-                StringBuilder restOfFile = new StringBuilder();
-                String currentLine;
-                int lineNumber = 1;
-
-                while ((currentLine = bf.readLine()) != null) {
-                    if (lineNumber > 1) {
-                        restOfFile.append(currentLine);
-                        restOfFile.append("\n");
-                    }
-
-                    lineNumber++;
-                }
-
-                bf.close();
-
-                RandomAccessFile raf = new RandomAccessFile(kmlFile, "rw");
-                raf.seek(258);
-                raf.write(descriptionNode.getBytes());
-                raf.write(restOfFile.toString().getBytes());
-                raf.close();
 
             }
         } catch (Exception e) {
@@ -123,7 +121,7 @@ class Kml22AnnotateHandler implements Runnable {
 
     String getPlacemarkXml(String description, Location loc) {
         StringBuilder descriptionNode = new StringBuilder();
-        descriptionNode.append("<Placemark><name>");
+        descriptionNode.append("\n<Placemark><name>");
         descriptionNode.append(description);
         descriptionNode.append("</name><Point><coordinates>");
         descriptionNode.append(String.valueOf(loc.getLongitude()));

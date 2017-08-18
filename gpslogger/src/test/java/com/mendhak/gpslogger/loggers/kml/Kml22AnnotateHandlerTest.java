@@ -28,7 +28,7 @@ public class Kml22AnnotateHandlerTest {
                 .build();
 
         String actual = kmlHandler.getPlacemarkXml("This is the annotation", loc);
-        String expected = "<Placemark><name>This is the annotation</name><Point><coordinates>19.111,12.193,9001.0</coordinates></Point></Placemark>\n";
+        String expected = "\n<Placemark><name>This is the annotation</name><Point><coordinates>19.111,12.193,9001.0</coordinates></Point></Placemark>\n";
 
         assertThat("Basic Placemark XML", actual, is(expected));
     }
