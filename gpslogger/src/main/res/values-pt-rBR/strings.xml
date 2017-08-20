@@ -325,6 +325,8 @@
   <string name="change_language_summary">Nem todos os idiomas estão totalmente traduzidos! É necessário reiniciar o aplicativo para que as configurações tenham efeito.</string>
   <string name="coordinate_display_format">Formato de exibição de coordenadas</string>
   <string name="ssl_certificate_validate">Validar Certificado SSL</string>
+  <string name="use_post_method">Usar o método POST</string>
+  <string name="use_post_method_summary">Parâmetros QueryString são convertidos em parâmetros estruturais HTTP POST</string>
   <string name="parameters">Parâmetros</string>
   <string name="ssl_certificate_add_to_keystore">Adicionar este certificado ao armazenamento de chave local?</string>
   <string name="ssl_certificate_is_valid">O certificado é válido</string>

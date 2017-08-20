@@ -322,6 +322,8 @@ une plus grande précision à basses fréquences.    </string>
   <string name="change_language_summary">Tous les langues ne sont pas entièrement traduites ! Vous devrez redémarrer l’application pour que les paramètres prennent effet.</string>
   <string name="coordinate_display_format">Format d’affichage des coordonnées</string>
   <string name="ssl_certificate_validate">Valider le certificat SSL</string>
+  <string name="use_post_method">Utiliser la méthode POST</string>
+  <string name="use_post_method_summary">Les paramètres de chaîne de requête sont convertis en paramètres de corps HTTP POST</string>
   <string name="parameters">Paramètres</string>
   <string name="ssl_certificate_add_to_keystore">Ajouter ce certificat au magasin de clés local ?</string>
   <string name="ssl_certificate_is_valid">Le certificat est valide</string>

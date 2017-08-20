@@ -150,6 +150,9 @@
   <string name="menu_upload">Upload</string>
   <string name="autoemail_from">Pinagmulang address</string>
   <string name="autoemail_from_summary">Mayroong mga tagapagtustos ng email na kumakailangan ng pinagmulang address. Gamitin lamang kung kakailanganin     </string>
+  <string name="shortcut_start">Umpisa</string>
+  <string name="shortcut_stop">Tigil</string>
+  <string name="shortcut_pickaction">Pumili ng aksyon</string>
   <string name="autoopengts_device_id">Device ID</string>
   <string name="autoftp_username">Username</string>
   <string name="autoftp_password">Password</string>
