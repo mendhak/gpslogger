@@ -136,7 +136,7 @@ public class CustomUrlJob extends Job {
                     if (paramSplit[i].contains("=")) {
                         String[] oneParamSplit = paramSplit[i].split("=");
                         if (oneParamSplit.length == 2) {
-                            bodyBuilder.add(oneParamSplit[0] , oneParamSplit[1]);
+                            bodyBuilder.addEncoded(oneParamSplit[0] , oneParamSplit[1]);
                         }
                     }
                 }
