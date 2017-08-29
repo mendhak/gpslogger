@@ -218,9 +218,18 @@ public class GpsMainActivity extends AppCompatActivity
                 toggleDrawer();
                 return true;
             }
+
+            removeFragmentsAndActionBar();
         }
 
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void removeFragmentsAndActionBar(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.remove(getCurrentFragment());
+        transaction.commit();
+        getSupportActionBar().hide();
     }
 
 
