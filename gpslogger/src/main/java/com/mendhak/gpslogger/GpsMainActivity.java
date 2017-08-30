@@ -175,6 +175,13 @@ public class GpsMainActivity extends AppCompatActivity
         super.onPause();
     }
 
+    protected void onStop() {
+        super.onStop();
+        if (!isFinishing()) {
+            stopAndUnbindServiceIfRequired();
+        }
+    }
+
     @Override
     protected void onDestroy() {
         stopAndUnbindServiceIfRequired();
@@ -220,6 +227,7 @@ public class GpsMainActivity extends AppCompatActivity
             }
 
             removeFragmentsAndActionBar();
+            finish();
         }
 
         return super.onKeyDown(keyCode, event);
