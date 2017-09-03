@@ -71,6 +71,7 @@ public  class PreferenceNames {
     public static final String GOOGLEDRIVE_FOLDERNAME = "gdocs_foldername";
     public static final String GOOGLEDRIVE_ACCOUNTNAME = "GDRIVE_ACCOUNT_NAME";
     public static final String GOOGLEDRIVE_AUTHTOKEN = "GDRIVE_AUTH_TOKEN";
+    public static final String GOOGLEDRIVE_FOLDERID = "GDRIVE_FOLDER_ID";
     public static final String OPENSTREETMAP_ACCESS_TOKEN = "osm_accesstoken";
     public static final String OPENSTREETMAP_ACCESS_TOKEN_SECRET = "osm_accesstokensecret";
     public static final String OPENSTREETMAP_REQUEST_TOKEN = "osm_requesttoken";

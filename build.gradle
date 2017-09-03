@@ -2,5 +2,5 @@
 
 project.ext.APP_ID = "com.mendhak.gpslogger"
 project.ext.APP_VERSION_CODE = 89
-project.ext.APP_VERSION_NAME = "89"
+project.ext.APP_VERSION_NAME = "89-issue588"
 
