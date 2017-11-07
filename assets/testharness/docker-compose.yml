@@ -61,6 +61,8 @@ postfix:
     - smtp_user=noreply:docker
   volumes:
     - ./postfixstorage/postfix/main.cf:/etc/postfix/main.cf
+    - /etc/ssl/certs/ssl-cert-snakeoil.pem:/etc/ssl/certs/ssl-cert-snakeoil.pem:ro
+    - /etc/ssl/private/ssl-cert-snakeoil.key:/etc/ssl/private/ssl-cert-snakeoil.key:ro
 
 sftpserver:
   container_name: gpslogger-sftp

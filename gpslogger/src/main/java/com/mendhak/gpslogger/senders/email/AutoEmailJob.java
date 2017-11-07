@@ -130,7 +130,7 @@ public class AutoEmailJob extends Job {
             LOG.debug("Checking TLS...");
 
             client.setTrustManager(new LocalX509TrustManager(Networks.getKnownServersStore(AppSettings.getInstance())));
-            if(client.execTLS()){
+            if(!smtpUseSsl && client.execTLS()){
                 client.ehlo("localhost");
             }
 

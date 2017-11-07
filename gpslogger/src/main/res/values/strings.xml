@@ -182,7 +182,7 @@
     <string name="autoemail_smtp_category">Email Settings</string>
     <string name="autoemail_username_summary">Username with your email provider</string>
     <string name="autoemail_password_summary">Password with your email provider</string>
-    <string name="autoemail_ssl">Use SSL?</string>
+    <string name="autoemail_ssl">Implicit SSL</string>
     <string name="autoemail_ssl_summary">Try toggling this if you cannot connect</string>
 
     <string name="autoemail_choosepreset">Mail Provider</string>
