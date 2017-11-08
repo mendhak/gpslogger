@@ -68,16 +68,24 @@ public class GoogleDriveJob extends Job {
         FileInputStream fis = new FileInputStream(gpxFile);
         String fileName = gpxFile.getName();
 
-        String gpsLoggerFolderId = getFileIdFromFileName(token, googleDriveFolderName, null);
+        String gpsLoggerFolderId = PreferenceHelper.getInstance().getGoogleDriveFolderId();
+        LOG.debug("GPSLogger folder ID - " + gpsLoggerFolderId);
 
-        if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
-            //Couldn't find folder, must create it
-            gpsLoggerFolderId = createEmptyFile(token, googleDriveFolderName, "application/vnd.google-apps.folder", "root");
+        if(Strings.isNullOrEmpty(gpsLoggerFolderId) || !folderExists(token, gpsLoggerFolderId)){
+            LOG.debug("GPSLogger folder not found, searching by name");
+            gpsLoggerFolderId = getFileIdFromFileName(token, googleDriveFolderName, null);
+
+            if(Strings.isNullOrEmpty(gpsLoggerFolderId)){
+                LOG.debug("GPSLogger folder still not found, will create");
+                gpsLoggerFolderId = createEmptyFile(token, googleDriveFolderName, "application/vnd.google-apps.folder", "root");
+            }
 
             if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
                 EventBus.getDefault().post(new UploadEvents.GDrive().failed("Could not create folder"));
                 return;
             }
+
+            PreferenceHelper.getInstance().setGoogleDriveFolderId(gpsLoggerFolderId);
         }
 
         //Now search for the file
@@ -255,6 +263,31 @@ public class GoogleDriveJob extends Job {
 
         return fileId;
     }
+
+    private boolean folderExists(String authToken, String gpsLoggerFolderId) {
+        HttpURLConnection conn = null;
+        try{
+            String searchUrl = "https://www.googleapis.com/drive/v2/files/" + gpsLoggerFolderId;
+            URL url = new URL(searchUrl);
+
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("User-Agent", "GPSLogger for Android");
+            conn.setRequestProperty("Authorization", "OAuth " + authToken);
+            conn.setConnectTimeout(10000);
+            conn.setReadTimeout(30000);
+
+            conn.connect();
+
+            return conn.getResponseCode() == 200;
+        }
+        catch(Exception e){
+            LOG.error("folderExists", e);
+        }
+
+        return false;
+    }
+
 
     private String getMimeTypeFromFileName(String fileName) {
         if (fileName.endsWith("kml")) {
