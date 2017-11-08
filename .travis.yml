@@ -6,9 +6,21 @@ jdk: oraclejdk8
 notifications:
   email: false
 
-env:
-  - ANDROID_HOME=$HOME/android-sdk ZIPNAME=sdk-tools-linux-3859397.zip
+#env:
+#  - ANDROID_HOME=$HOME/android-sdk ZIPNAME=sdk-tools-linux-3859397.zip
 
+
+android:
+    components:
+      - tools
+      - platform-tools
+      - build-tools-25.0.3
+      - android-23
+      - extra-android-support
+      - extra-android-m2repository
+      - extra-google-m2repository
+      - extra-android-m2repository
+      - extra-google-google_play_services
 
 before_cache:
   # Do not cache a few Gradle files/directories (see https://docs.travis-ci.com/user/languages/java/#Caching)
@@ -31,18 +43,6 @@ cache:
 before_install:
   - ./gradlew --version
 
-install:
-  # Download and unzip the Android SDK tools (if not already there thanks to the cache mechanism)
-  - if test ! -e $HOME/android-sdk-dl/$ZIPNAME ; then curl --fail --show-error --silent https://dl.google.com/android/repository/$ZIPNAME > $HOME/android-sdk-dl/$ZIPNAME ; fi
-  - unzip -n $HOME/android-sdk-dl/$ZIPNAME -d $HOME/android-sdk
-  # Install or update Android SDK components (will not do anything if already up to date thanks to the cache mechanism)
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'tools'
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platform-tools'
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'build-tools;25.0.3'
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platforms;android-23'
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;m2repository'
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;android;m2repository'
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;google_play_services'
 
 before_script:
   - echo '"Build..."' && echo -en 'travis_fold:start:script.build\\r'
