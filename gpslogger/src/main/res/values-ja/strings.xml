@@ -319,6 +319,7 @@
   <string name="change_language_summary">全ての言語が完全に翻訳されているとは限りません！この設定を有効にするためには、アプリをリスタートする必要があります。</string>
   <string name="coordinate_display_format">座標の表示形式</string>
   <string name="ssl_certificate_validate">SSL証明書の認証</string>
+  <string name="use_post_method">POST メソッドを使用</string>
   <string name="parameters">パラメタ</string>
   <string name="ssl_certificate_add_to_keystore">ローカルキーストアに証明書を保存しますか？</string>
   <string name="ssl_certificate_is_valid">証明書は有効です。</string>
@@ -328,4 +329,5 @@
   <string name="sftp_private_key_passphrase">秘密鍵のパスフレーズ</string>
   <string name="sftp_validate_test_upload">ホスト鍵の検証のためアップロードを行う</string>
   <string name="sftp_validate_accept_host_key">ホスト鍵を受け入れますか?</string>
+  <string name="txt_battery">バッテリー</string>
 </resources>

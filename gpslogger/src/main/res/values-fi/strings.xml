@@ -98,6 +98,8 @@
   <string name="log_kml_summary">Lokisijainnit KML v2.2 tiedostoon</string>
   <string name="log_plain_text_title">Loki muodossa CSV</string>
   <string name="log_plain_text_summary">Lokisijainnit CSV tiedostoon</string>
+  <string name="log_json_title">Log to GeoJSON</string>
+  <string name="log_json_summary">Lokit paikoissa GeoJSON tiedostoon</string>
   <string name="new_file_creation_title">Uuden tiedoston luominen</string>
   <string name="new_file_creation_summary">Luodaanko uusi tiedosto kerran päivässä vai joka aloittamiskerta.</string>
   <string name="new_file_creation_onceaday">Kerran päivässä</string>
@@ -220,7 +222,9 @@
   <string name="autoftp_advanced_settings">Lisäasetukset</string>
   <string name="autoftp_port">Portti</string>
   <string name="autoftp_useftps">Käytä FTPS</string>
+  <string name="autoftp_useftps_summary">ö</string>
   <string name="autoftp_ssltls">SSL/TLS</string>
+  <string name="autoftp_ssltls_summary">None, SSL or TLS. Use none for regular unsecured connections.</string>
   <string name="autoftp_ssltls_none">Ei mitään</string>
   <string name="autoftp_ssltls_ssl">SSL</string>
   <string name="autoftp_ssltls_tls">TLS</string>
@@ -256,10 +260,12 @@
   <string name="absolute_timeout_summary">Sovellus luovuttaa tarkemman sijainnin hankkimisyritykset valitun sekuntimäärän jälkeen, riippumatta muista asetuksista. Tämä on erityisen hyödyllistä kun olet sisätiloissa a haluat estää sijaintipalveluita tyhjentämästä akkua. Aseta 0 välittömään luovutukseen.</string>
   <string name="txt_latitude_short">Lat</string>
   <string name="txt_longitude_short">Lon</string>
+  <string name="log_nmea_summary">Creates a raw NMEA file while trying to get a fix. This file grows very quickly. Only works while GPS is being used.</string>
   <string name="autoopengts_accountname">Tilin nimi</string>
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Verkko</string>
   <string name="listeners_passive">Passiivinen</string>
+  <string name="listeners_summary">Mitä sijaintipalveluita hyödynnetään kun ne ovat saatavilla; GPS on satelliitit, Puhelinverkko on tukiasemille/wifille, Passiivinen kerää muiden sovellusten pyytämät sijaintitiedot.</string>
   <string name="listeners_title">Sijainnin tarjoajat</string>
   <string name="autosend_frequency_hint">Minuutit</string>
   <string name="pref_gpsvisualizer">Visualisoi GPS lokitilastot ja kuvaajat</string>
@@ -275,6 +281,7 @@
   <string name="restart_required">Joudut käynnistämään GPSLoggerin uudelleen, jotta tämä asetus tulee voimaan</string>
   <string name="txt_activity">Aktiivisuus:</string>
   <string name="activity_unknown">Tuntematon</string>
+  <string name="upload_failure">Tiedostoa ei voitu ladata</string>
   <string name="logview_showlocationsonly">Vain sijainnit</string>
   <string name="profile_create_new">Luo uusi profiili</string>
   <string name="profile_delete">Poista profiili?</string>

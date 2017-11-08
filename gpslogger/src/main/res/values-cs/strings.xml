@@ -98,6 +98,7 @@
   <string name="log_kml_summary">Záznam umístění do GPX v2.2 souboru</string>
   <string name="log_plain_text_title">Protokolovat do CSV</string>
   <string name="log_plain_text_summary">Záznam umístění do CSV souboru</string>
+  <string name="log_json_summary">Záznam polohy do GeoJSON file</string>
   <string name="new_file_creation_title">Vytvoření nového souboru</string>
   <string name="new_file_creation_summary">Zda chcete vytvořit nový soubor jednou denně, nebo při každém spuštění.</string>
   <string name="new_file_creation_onceaday">Jednou za den</string>
@@ -317,6 +318,8 @@
   <string name="debuglog_attach_to_email_summary">Přiloží záznam o ladění do emailu spolu s některými diagnostickými informacemi</string>
   <string name="change_language_title">Změnit jazyk</string>
   <string name="change_language_summary">Ne všechny jazyky jsou plně přeložené! Změna nastavení se projeví až po restartu aplikace.</string>
+  <string name="ssl_certificate_validate">Ověřit SSL certifikát</string>
+  <string name="use_post_method">Použít metodu POST</string>
   <string name="parameters">Parametry</string>
   <string name="ssl_certificate_add_to_keystore">Přidat certifikát do místního úložiště klíčů?</string>
   <string name="ssl_certificate_is_valid">Certifikát je platný</string>
@@ -326,4 +329,5 @@
   <string name="sftp_private_key_passphrase">Heslo soukromého klíče</string>
   <string name="sftp_validate_test_upload">Ověřit klíč hostitele a otestovat nahrání</string>
   <string name="sftp_validate_accept_host_key">Přijmout tento klíč hostitele?</string>
+  <string name="txt_battery">Baterie</string>
 </resources>
