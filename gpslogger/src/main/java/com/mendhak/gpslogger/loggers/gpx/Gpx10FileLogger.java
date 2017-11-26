@@ -198,7 +198,7 @@ class Gpx10WriteHandler implements Runnable {
         synchronized (Gpx10FileLogger.lock) {
 
             try {
-                if (!gpxFile.exists()) {
+                if (!gpxFile.isFile()) {
                     gpxFile.createNewFile();
 
                     FileOutputStream initialWriter = new FileOutputStream(gpxFile, true);
