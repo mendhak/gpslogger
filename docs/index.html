@@ -228,6 +228,18 @@ startService(i);
 
 </div></section>
 
+<section><div class='lead'><h2><a name="usingthecustomurlfeature" href="#usingthecustomurlfeature">Using the Custom URL feature</a></h2><p>The Custom URL feature allows you to log GPS points to a public URL.  This can be a third party API that accepts <code>GET</code> requests, or an application that you&#39;ve written and are hosting on your own server.</p>
+<pre><code>https://myserver.com/log?lat=%LAT&amp;long=%LON...
+</code></pre><p>If your phone goes <strong>offline</strong>, then the app will queue these requests until a data connection becomes available.     </p>
+<p>You can add <strong>authentication</strong> by prefixing the username and password like so:</p>
+<pre><code>https://username:password@myserver.com/log?lat=%LAT&amp;long=%LON
+</code></pre><p>The credentials are sent as Basic Authentication headers, not as part of the URL.     </p>
+<p>If you use a self signed <strong>SSL</strong> certificate, be sure to <a href="#customsslcertificates">validate it first</a>.</p>
+<p>If you check the &#39;POST&#39; checkbox, then the querystring parameters are sent in the HTTP POST body as:</p>
+<pre><code>a=b&amp;c=d&amp;e=f&amp;...
+</code></pre>
+</div></section>
+
 <section><div class='lead'><h2><a name="howcanthesegpslogfilesbeused" href="#howcanthesegpslogfilesbeused">How can these GPS log files be used?</a></h2><h2><a name="howdoigeotagphotoswithagpslogfile" href="#howdoigeotagphotoswithagpslogfile">How do I geotag photos with a GPS log file?</a></h2><p>The GPS files produced by this app are generally used for processing <em>other</em> things.  </p>
 <p>A common use case is to geotag photos.  Many cameras, especially SLRs, don&#39;t have built-in GPS.  After a day (or days) out of photography, you may have hundreds of photos that need to be geotagged so that their locations can appear properly when used elsewhere.  </p>
 <p>I have had success with:</p>

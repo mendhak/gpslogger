@@ -87,6 +87,7 @@ public class Faqtivity extends AppCompatActivity {
             generalTopics.add(getTopic("faq/faq12-task-managers.md"));
             generalTopics.add(getTopic("faq/faq14-tasker-automation.md"));
             generalTopics.add(getTopic("faq/faq15-preset-files.md"));
+            generalTopics.add(getTopic("faq/faq16-custom-url.md"));
             generalTopics.add(getTopic("faq/faq19-profiles.md"));
             generalTopics.add(getTopic("faq/faq20-troubleshooting.md"));
             generalTopics.add(getTopic("faq/faq21-custom-ssl-certificates.md"));
