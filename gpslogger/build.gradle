@@ -352,7 +352,7 @@ task copyFinalAPK(group:'build') {
     def finalApkName = "gpslogger-"+android.defaultConfig.versionName+".apk"
 
     copy{
-        from "build/outputs/apk/gpslogger-release.apk"
+        from "build/outputs/apk/release/gpslogger-release.apk"
         into "./"
 
         // Use a closure to map the file name
