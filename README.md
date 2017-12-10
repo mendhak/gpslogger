@@ -77,7 +77,7 @@ This project uses certain Android libraries, you can install them using Google's
 
       echo y | $HOME/android-sdk/tools/bin/sdkmanager 'tools'
       echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platform-tools'
-      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'build-tools;25.0.3'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'build-tools;26.0.2'
       echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platforms;android-23'
       echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;m2repository'
       echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;android;m2repository'
