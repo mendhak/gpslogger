@@ -42,16 +42,20 @@ public class CustomUrlJob extends Job {
     private String basicAuthUser;
     private String basicAuthPassword;
     private UploadEvents.BaseUploadEvent callbackEvent;
-    private Boolean usePost;
+    private String httpMethod;
 
 
-    public CustomUrlJob(String logUrl, String basicAuthUser, String basicAuthPassword, UploadEvents.BaseUploadEvent callbackEvent, Boolean usePost ) {
+    public CustomUrlJob(String logUrl, String basicAuthUser, String basicAuthPassword, UploadEvents.BaseUploadEvent callbackEvent){
+        this(logUrl, basicAuthUser, basicAuthPassword, callbackEvent, "GET" );
+    }
+
+    public CustomUrlJob(String logUrl, String basicAuthUser, String basicAuthPassword, UploadEvents.BaseUploadEvent callbackEvent, String httpMethod ) {
         super(new Params(1).requireNetwork().persist());
         this.logUrl = logUrl;
         this.basicAuthPassword = basicAuthPassword;
         this.basicAuthUser = basicAuthUser;
         this.callbackEvent = callbackEvent;
-        this.usePost = usePost;
+        this.httpMethod = httpMethod;
     }
 
     @Override
@@ -81,7 +85,8 @@ public class CustomUrlJob extends Job {
 
         Request request;
 
-        if (usePost) {
+
+        if (httpMethod.equalsIgnoreCase("GET")) {
 
             String baseUrl = getBaseUrlFromUrl(logUrl);
 

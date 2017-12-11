@@ -41,13 +41,13 @@ public class CustomUrlLogger implements FileLogger {
     private final String customLoggingUrl;
     private final int batteryLevel;
     private final String androidId;
-    private final Boolean usePost;
+    private final String httpMethod;
 
-    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String androidId, Boolean usePost) {
+    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String androidId, String httpMethod) {
         this.customLoggingUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
         this.androidId = androidId;
-        this.usePost = usePost;
+        this.httpMethod = httpMethod;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class CustomUrlLogger implements FileLogger {
                 Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
 
         JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new CustomUrlJob(finalUrl, credentials.getKey(), credentials.getValue(), new UploadEvents.CustomUrl(), usePost));
+        jobManager.addJobInBackground(new CustomUrlJob(finalUrl, credentials.getKey(), credentials.getValue(), new UploadEvents.CustomUrl(), httpMethod));
     }
 
     public String getFormattedUrl(String customLoggingUrl, Location loc, String description, String androidId,

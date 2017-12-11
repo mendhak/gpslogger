@@ -18,7 +18,7 @@ public class CustomUrlJobTest {
 
     @Test
     public void getHttpPostBodyFromUrl_WhenNoQuerystring_EmptyBody() throws Exception {
-        CustomUrlJob job = new CustomUrlJob("", "", "", null, true);
+        CustomUrlJob job = new CustomUrlJob("", "", "", null, "POST");
         RequestBody body = job.getHttpPostBodyFromUrl("http://localhost/");
 
 
@@ -33,7 +33,7 @@ public class CustomUrlJobTest {
 
     @Test
     public void getHttpPostBodyFromUrl_BasicLatLong_LatLongInBody() throws Exception {
-        CustomUrlJob job = new CustomUrlJob("", "", "", null, true);
+        CustomUrlJob job = new CustomUrlJob("", "", "", null, "POST");
         RequestBody body = job.getHttpPostBodyFromUrl("http://localhost/?lat=11&lon=22");
 
         Buffer buffer = new Buffer();
@@ -46,7 +46,7 @@ public class CustomUrlJobTest {
 
     @Test
     public void getHttpPostBodyFromUrl_Time_IsEncoded() throws Exception {
-        CustomUrlJob job = new CustomUrlJob("", "", "", null, true);
+        CustomUrlJob job = new CustomUrlJob("", "", "", null, "POST");
         RequestBody body = job.getHttpPostBodyFromUrl("http://localhost/?t=2017-06-03T11:15:09Z");
 
         Buffer buffer = new Buffer();

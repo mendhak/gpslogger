@@ -13,15 +13,25 @@
         android:title="@string/parameters"
         android:summary="" />
 
-    <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="log_customurl_post"
-            android:summary="@string/use_post_method_summary"
-            android:title="@string/use_post_method" />
+    <EditTextPreference
+        android:key="log_customurl_body"
+        android:selectAllOnFocus="true"
+        android:singleLine="false"
+        android:title="Body" />
+    <EditTextPreference
+        android:key="log_customurl_headers"
+        android:selectAllOnFocus="true"
+        android:singleLine="false"
+        android:title="Headers" />
+    <EditTextPreference
+        android:defaultValue="GET"
+        android:key="log_customurl_method"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Method" />
 
     <Preference android:key="customurl_validatecustomsslcert"
                 android:title="@string/ssl_certificate_validate" />
-
 
 
 </PreferenceScreen>

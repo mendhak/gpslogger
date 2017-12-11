@@ -301,6 +301,12 @@ public class GpsMainActivity extends AppCompatActivity
 
             }
 
+            if(preferenceHelper.getLastVersionSeen() <= 90){
+                if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("log_customurl_post", false)){
+                    preferenceHelper.setCustomLoggingHTTPMethod("POST");
+                }
+            }
+
             preferenceHelper.setLastVersionSeen(versionCode);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
