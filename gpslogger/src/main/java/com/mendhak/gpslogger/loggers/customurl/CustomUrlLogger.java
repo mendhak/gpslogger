@@ -66,7 +66,7 @@ public class CustomUrlLogger implements FileLogger {
                 Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
 
         JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new CustomUrlJob(finalUrl, credentials.getKey(), credentials.getValue(), new UploadEvents.CustomUrl(), httpMethod));
+        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl,httpMethod), credentials.getKey(), credentials.getValue(), new UploadEvents.CustomUrl()));
     }
 
     public String getFormattedUrl(String customLoggingUrl, Location loc, String description, String androidId,

@@ -29,33 +29,32 @@ import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
 import okhttp3.*;
-import okio.Buffer;
+
 import org.slf4j.Logger;
 import java.io.IOException;
-import java.net.URLEncoder;
 
 
 public class CustomUrlJob extends Job {
 
     private static final Logger LOG = Logs.of(CustomUrlJob.class);
-    private String logUrl;
+//    private String logUrl;
     private String basicAuthUser;
     private String basicAuthPassword;
     private UploadEvents.BaseUploadEvent callbackEvent;
-    private String httpMethod;
+//    private String httpMethod;
+    private CustomUrlRequest urlRequest;
 
 
     public CustomUrlJob(String logUrl, String basicAuthUser, String basicAuthPassword, UploadEvents.BaseUploadEvent callbackEvent){
-        this(logUrl, basicAuthUser, basicAuthPassword, callbackEvent, "GET" );
+        this(new CustomUrlRequest(logUrl), basicAuthUser, basicAuthPassword, callbackEvent );
     }
 
-    public CustomUrlJob(String logUrl, String basicAuthUser, String basicAuthPassword, UploadEvents.BaseUploadEvent callbackEvent, String httpMethod ) {
+    public CustomUrlJob(CustomUrlRequest urlRequest, String basicAuthUser, String basicAuthPassword, UploadEvents.BaseUploadEvent callbackEvent) {
         super(new Params(1).requireNetwork().persist());
-        this.logUrl = logUrl;
         this.basicAuthPassword = basicAuthPassword;
         this.basicAuthUser = basicAuthUser;
         this.callbackEvent = callbackEvent;
-        this.httpMethod = httpMethod;
+        this.urlRequest = urlRequest;
     }
 
     @Override
@@ -65,7 +64,7 @@ public class CustomUrlJob extends Job {
     @Override
     public void onRun() throws Throwable {
 
-        LOG.debug("Sending to URL: " + logUrl);
+        LOG.debug("Sending to URL: " + urlRequest.getLogURL());
 
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
 
@@ -86,15 +85,15 @@ public class CustomUrlJob extends Job {
         Request request;
 
 
-        if (httpMethod.equalsIgnoreCase("GET")) {
+        if (urlRequest.getHttpMethod().equalsIgnoreCase("GET")) {
 
-            String baseUrl = getBaseUrlFromUrl(logUrl);
+            String baseUrl = getBaseUrlFromUrl(urlRequest.getLogURL());
 
-            RequestBody body = getHttpPostBodyFromUrl(logUrl);
+            RequestBody body = getHttpPostBodyFromUrl(urlRequest.getLogURL());
             request = new Request.Builder().url(baseUrl).post(body).build();
         }
         else {
-            request = new Request.Builder().url(logUrl).build();
+            request = new Request.Builder().url(urlRequest.getLogURL()).build();
         }
 
         Response response = client.newCall(request).execute();
