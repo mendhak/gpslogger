@@ -23,6 +23,7 @@ import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlJob;
+import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
 import com.mendhak.gpslogger.loggers.opengts.OpenGtsUdpJob;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.senders.GpxReader;
@@ -84,7 +85,7 @@ public class OpenGTSManager extends FileSender {
             String finalUrl = getUrl(deviceId, accountName, loc, communication, path, server, port );
 
             JobManager jobManager = AppSettings.getJobManager();
-            jobManager.addJobInBackground(new CustomUrlJob(finalUrl,"","", new UploadEvents.OpenGTS()));
+            jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl),"","", new UploadEvents.OpenGTS()));
         }
     }
 

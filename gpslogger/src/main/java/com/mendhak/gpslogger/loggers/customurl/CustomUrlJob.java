@@ -37,17 +37,10 @@ import java.io.IOException;
 public class CustomUrlJob extends Job {
 
     private static final Logger LOG = Logs.of(CustomUrlJob.class);
-//    private String logUrl;
     private String basicAuthUser;
     private String basicAuthPassword;
     private UploadEvents.BaseUploadEvent callbackEvent;
-//    private String httpMethod;
     private CustomUrlRequest urlRequest;
-
-
-    public CustomUrlJob(String logUrl, String basicAuthUser, String basicAuthPassword, UploadEvents.BaseUploadEvent callbackEvent){
-        this(new CustomUrlRequest(logUrl), basicAuthUser, basicAuthPassword, callbackEvent );
-    }
 
     public CustomUrlJob(CustomUrlRequest urlRequest, String basicAuthUser, String basicAuthPassword, UploadEvents.BaseUploadEvent callbackEvent) {
         super(new Params(1).requireNetwork().persist());
