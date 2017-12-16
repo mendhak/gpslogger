@@ -30,10 +30,7 @@ import com.path.android.jobqueue.JobManager;
 
 
 import java.net.URLEncoder;
-import java.util.AbstractMap;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class CustomUrlLogger implements FileLogger {
 
@@ -42,12 +39,14 @@ public class CustomUrlLogger implements FileLogger {
     private final int batteryLevel;
     private final String androidId;
     private final String httpMethod;
+    private final String httpBody;
 
-    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String androidId, String httpMethod) {
+    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String androidId, String httpMethod, String httpBody) {
         this.customLoggingUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
         this.androidId = androidId;
         this.httpMethod = httpMethod;
+        this.httpBody = httpBody;
     }
 
     @Override
@@ -60,15 +59,17 @@ public class CustomUrlLogger implements FileLogger {
     @Override
     public void annotate(String description, Location loc) throws Exception {
 
-        String finalUrl = getFormattedUrl(customLoggingUrl, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
+        String finalUrl = getFormattedTextblock(customLoggingUrl, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
+                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
+        String finalBody = getFormattedTextblock(httpBody, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
                 Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
 
         JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl,httpMethod), new UploadEvents.CustomUrl()));
+        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl,httpMethod, finalBody), new UploadEvents.CustomUrl()));
     }
 
-    public String getFormattedUrl(String customLoggingUrl, Location loc, String description, String androidId,
-                                  float batteryLevel, String buildSerial, long sessionStartTimeStamp, String fileName)
+    public String getFormattedTextblock(String customLoggingUrl, Location loc, String description, String androidId,
+                                        float batteryLevel, String buildSerial, long sessionStartTimeStamp, String fileName)
             throws Exception {
 
         String logUrl = customLoggingUrl;

@@ -5,7 +5,8 @@ import java.util.regex.Pattern
 
 
 data class CustomUrlRequest @JvmOverloads constructor (var LogURL : String,
-                                                       var HttpMethod: String = "GET" ) : java.io.Serializable  {
+                                                       var HttpMethod: String = "GET",
+                                                       var HttpBody : String = "") : java.io.Serializable  {
 
 
 

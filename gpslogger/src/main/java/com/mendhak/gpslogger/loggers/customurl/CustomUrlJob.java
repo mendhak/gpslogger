@@ -78,10 +78,8 @@ public class CustomUrlJob extends Job {
 
         if ( ! urlRequest.getHttpMethod().equalsIgnoreCase("GET")) {
 
-            String baseUrl = getBaseUrlFromUrl(urlRequest.getLogURL());
-
-            RequestBody body = getHttpPostBodyFromUrl(urlRequest.getLogURL());
-            request = new Request.Builder().url(baseUrl).method(urlRequest.getHttpMethod(), body).build();
+            RequestBody body = RequestBody.create(null, urlRequest.getHttpBody());
+            request = new Request.Builder().url(urlRequest.getLogURL()).method(urlRequest.getHttpMethod(), body).build();
         }
         else {
             request = new Request.Builder().url(urlRequest.getLogURL()).build();
@@ -99,45 +97,6 @@ public class CustomUrlJob extends Job {
         }
 
         response.body().close();
-    }
-
-    private String getBaseUrlFromUrl(String logUrl) {
-
-        String[] urlSplit;
-
-        String baseUrl = "";
-        if (logUrl.contains("?")) {
-            urlSplit = logUrl.split("\\?");
-            if (urlSplit.length == 2) {
-                baseUrl = urlSplit[0];
-            }
-        }
-
-        return baseUrl;
-
-    }
-
-    RequestBody getHttpPostBodyFromUrl(String logUrl) {
-        FormBody.Builder bodyBuilder = new FormBody.Builder();
-        String[] urlSplit;
-        String[] paramSplit;
-
-        if (logUrl.contains("?")) {
-            urlSplit = logUrl.split("\\?");
-            if (urlSplit.length == 2) {
-
-                paramSplit = urlSplit[1].split("\\&");
-                for (int i = 0; i < paramSplit.length; i++) {
-                    if (paramSplit[i].contains("=")) {
-                        String[] oneParamSplit = paramSplit[i].split("=");
-                        if (oneParamSplit.length == 2) {
-                            bodyBuilder.addEncoded(oneParamSplit[0] , oneParamSplit[1]);
-                        }
-                    }
-                }
-            }
-        }
-        return bodyBuilder.build();
     }
 
     @Override
