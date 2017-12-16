@@ -78,7 +78,7 @@ public class CustomUrlJob extends Job {
         Request request;
 
 
-        if (urlRequest.getHttpMethod().equalsIgnoreCase("GET")) {
+        if ( ! urlRequest.getHttpMethod().equalsIgnoreCase("GET")) {
 
             String baseUrl = getBaseUrlFromUrl(urlRequest.getLogURL());
 
