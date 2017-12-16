@@ -1,8 +1,8 @@
 package com.mendhak.gpslogger.loggers.customurl
 
-import android.util.Log
 import java.util.HashMap
 import java.util.regex.Pattern
+import okhttp3.Credentials
 
 
 data class CustomUrlRequest @JvmOverloads constructor (var LogURL : String,
@@ -24,19 +24,24 @@ data class CustomUrlRequest @JvmOverloads constructor (var LogURL : String,
         BasicAuthUsername = usr
         BasicAuthPassword = pwd
 
+        addAuthorizationHeader(usr,pwd)
         removeCredentialsFromUrl(usr,pwd)
     }
 
     init {
-        HttpHeaders = getHeadersFromTextBlock(RawHeaders)
+        HttpHeaders.putAll(getHeadersFromTextBlock(RawHeaders))
     }
-
-
 
     private fun removeCredentialsFromUrl(basicAuthUsername: String, basicAuthPassword: String) {
         LogURL = LogURL.replace("$basicAuthUsername:$basicAuthPassword@","")
     }
 
+    private fun addAuthorizationHeader(usr: String, pwd: String) {
+        if(!usr.isBlank() && !pwd.isBlank()){
+            val credential = Credentials.basic(usr, pwd)
+            HttpHeaders.put("Authorization", credential)
+        }
+    }
 
     private fun getBasicAuthCredentialsFromUrl(logUrl: String): Pair<String, String> {
 
@@ -65,7 +70,5 @@ data class CustomUrlRequest @JvmOverloads constructor (var LogURL : String,
         }
         return map
     }
-
-
 
 }

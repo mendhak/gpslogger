@@ -59,21 +59,7 @@ public class CustomUrlJob extends Job {
         LOG.debug("Sending to URL: " + urlRequest.getLogURL());
 
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
-
-        if(!Strings.isNullOrEmpty(urlRequest.getBasicAuthUsername())){
-            okBuilder.authenticator(new Authenticator() {
-                @Override
-                public Request authenticate(Route route, Response response) throws IOException {
-                    String credential = Credentials.basic(urlRequest.getBasicAuthUsername(), urlRequest.getBasicAuthPassword());
-                    return response.request().newBuilder().header("Authorization", credential).build();
-                }
-            });
-        }
-
         okBuilder.sslSocketFactory(Networks.getSocketFactory(AppSettings.getInstance()));
-
-        OkHttpClient client = okBuilder.build();
-
         Request.Builder requestBuilder = new Request.Builder().url(urlRequest.getLogURL());
 
         for(Map.Entry<String,String> header : urlRequest.getHttpHeaders().entrySet()){
@@ -86,9 +72,7 @@ public class CustomUrlJob extends Job {
         }
 
         Request request = requestBuilder.build();
-
-
-        Response response = client.newCall(request).execute();
+        Response response = okBuilder.build().newCall(request).execute();
 
         if (response.isSuccessful()) {
             LOG.debug("Success - response code " + response);

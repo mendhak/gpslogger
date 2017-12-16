@@ -49,6 +49,11 @@ class CustomUrlRequestTest {
     }
 
 
+    @Test
+    fun addBasicAuthorizationHeader_CredentialsPresent(){
+        val cur = CustomUrlRequest("http://bob:hunter2@example.com/%LOG")
+        assertThat("Authorization header is present", cur.HttpHeaders.get("Authorization"), `is`("Basic Ym9iOmh1bnRlcjI="))
+    }
 
 
     @Test
@@ -91,5 +96,7 @@ class CustomUrlRequestTest {
 
         assertThat("Headers block should be properly formatted with newlines and colons", cur.HttpHeaders, `is`(expectedMap))
     }
+
+
 
 }
