@@ -32,6 +32,7 @@ import okhttp3.*;
 
 import org.slf4j.Logger;
 import java.io.IOException;
+import java.util.Map;
 
 
 public class CustomUrlJob extends Job {
@@ -73,18 +74,19 @@ public class CustomUrlJob extends Job {
 
         OkHttpClient client = okBuilder.build();
 
-        Request request;
+        Request.Builder requestBuilder = new Request.Builder().url(urlRequest.getLogURL());
 
-
+        for(Map.Entry<String,String> header : urlRequest.getHttpHeaders().entrySet()){
+            requestBuilder.addHeader(header.getKey(), header.getValue());
+        }
 
         if ( ! urlRequest.getHttpMethod().equalsIgnoreCase("GET")) {
-
             RequestBody body = RequestBody.create(null, urlRequest.getHttpBody());
-            request = new Request.Builder().url(urlRequest.getLogURL()).method(urlRequest.getHttpMethod(), body).build();
+            requestBuilder = requestBuilder.method(urlRequest.getHttpMethod(),body);
         }
-        else {
-            request = new Request.Builder().url(urlRequest.getLogURL()).build();
-        }
+
+        Request request = requestBuilder.build();
+
 
         Response response = client.newCall(request).execute();
 
