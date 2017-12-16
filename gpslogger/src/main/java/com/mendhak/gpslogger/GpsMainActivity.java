@@ -305,6 +305,20 @@ public class GpsMainActivity extends AppCompatActivity
                 if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("log_customurl_post", false)){
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("log_customurl_post").apply();
                     preferenceHelper.setCustomLoggingHTTPMethod("POST");
+
+                    new MaterialDialog.Builder(this)
+                            .title("Using HTTP POST in Custom URL?")
+                            .negativeText(R.string.cancel)
+                            .positiveText(R.string.log_customurl_title)
+                            .content(Html.fromHtml("If you previously checked the <b>" + getString(R.string.use_post_method) + "</b> checkbox in the <b>'" + getString(R.string.log_customurl_title) + "'</b> screen, you will need to recreate the body yourself. The checkbox has been removed and now you can use custom method, header and body for your Custom URL requests."))
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL);
+
+                                }
+                            }).show();
+
                 }
             }
 

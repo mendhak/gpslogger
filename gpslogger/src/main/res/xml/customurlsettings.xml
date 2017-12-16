@@ -17,11 +17,14 @@
         android:key="log_customurl_body"
         android:selectAllOnFocus="true"
         android:singleLine="false"
+        android:defaultValue="lat=%LAT&amp;lon=%LON"
         android:title="Body" />
     <EditTextPreference
         android:key="log_customurl_headers"
         android:selectAllOnFocus="true"
         android:singleLine="false"
+        android:defaultValue="Content-Type: application/x-www-form-urlencoded"
+        android:hint="Content-Type: application/x-www-form-urlencoded\nAuthorization: Basic abcdefg\nApiToken: 12345"
         android:title="Headers" />
     <EditTextPreference
         android:defaultValue="GET"

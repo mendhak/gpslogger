@@ -31,6 +31,7 @@ import com.path.android.jobqueue.JobManager;
 
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.HashMap;
 
 public class CustomUrlLogger implements FileLogger {
 
@@ -40,13 +41,15 @@ public class CustomUrlLogger implements FileLogger {
     private final String androidId;
     private final String httpMethod;
     private final String httpBody;
+    private final String httpHeaders;
 
-    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String androidId, String httpMethod, String httpBody) {
+    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String androidId, String httpMethod, String httpBody, String httpHeaders) {
         this.customLoggingUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
         this.androidId = androidId;
         this.httpMethod = httpMethod;
         this.httpBody = httpBody;
+        this.httpHeaders = httpHeaders;
     }
 
     @Override
@@ -63,10 +66,14 @@ public class CustomUrlLogger implements FileLogger {
                 Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
         String finalBody = getFormattedTextblock(httpBody, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
                 Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
+        String finalHeaders = getFormattedTextblock(httpHeaders, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
+                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
+
 
         JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl,httpMethod, finalBody), new UploadEvents.CustomUrl()));
+        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl,httpMethod, finalBody, finalHeaders), new UploadEvents.CustomUrl()));
     }
+
 
     public String getFormattedTextblock(String customLoggingUrl, Location loc, String description, String androidId,
                                         float batteryLevel, String buildSerial, long sessionStartTimeStamp, String fileName)

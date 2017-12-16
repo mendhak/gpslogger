@@ -76,6 +76,7 @@ public class CustomUrlJob extends Job {
         Request request;
 
 
+
         if ( ! urlRequest.getHttpMethod().equalsIgnoreCase("GET")) {
 
             RequestBody body = RequestBody.create(null, urlRequest.getHttpBody());
