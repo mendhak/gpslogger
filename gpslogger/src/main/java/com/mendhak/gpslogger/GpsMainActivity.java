@@ -303,6 +303,7 @@ public class GpsMainActivity extends AppCompatActivity
 
             if(preferenceHelper.getLastVersionSeen() <= 90){
                 if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("log_customurl_post", false)){
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("log_customurl_post").apply();
                     preferenceHelper.setCustomLoggingHTTPMethod("POST");
                 }
             }

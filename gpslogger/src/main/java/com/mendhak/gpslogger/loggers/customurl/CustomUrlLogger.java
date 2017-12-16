@@ -60,13 +60,11 @@ public class CustomUrlLogger implements FileLogger {
     @Override
     public void annotate(String description, Location loc) throws Exception {
 
-        AbstractMap.SimpleEntry<String,String> credentials = getBasicAuth(customLoggingUrl);
-        String finalUrl  = removeCredentialsFromUrl(customLoggingUrl, credentials.getKey(), credentials.getValue());
-        finalUrl = getFormattedUrl(finalUrl, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
+        String finalUrl = getFormattedUrl(customLoggingUrl, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
                 Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
 
         JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl,httpMethod), credentials.getKey(), credentials.getValue(), new UploadEvents.CustomUrl()));
+        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl,httpMethod), new UploadEvents.CustomUrl()));
     }
 
     public String getFormattedUrl(String customLoggingUrl, Location loc, String description, String androidId,
@@ -94,22 +92,6 @@ public class CustomUrlLogger implements FileLogger {
         logUrl = logUrl.replaceAll("(?i)%filename", fileName);
 
         return logUrl;
-    }
-
-    public AbstractMap.SimpleEntry<String,String> getBasicAuth(String customLoggingUrl){
-        String basicUsername="", basicPassword="";
-        Pattern r = Pattern.compile("(\\w+):(\\w+)@.+"); //Looking for http://username:password@example.com/....
-        Matcher m =  r.matcher(customLoggingUrl);
-        while(m.find()){
-            basicUsername = m.group(1);
-            basicPassword = m.group(2);
-        }
-
-        return new AbstractMap.SimpleEntry<>(basicUsername, basicPassword);
-    }
-
-    public String removeCredentialsFromUrl(String customLoggingUrl, String user, String pass){
-        return customLoggingUrl.replace(user + ":" + pass+"@","");
     }
 
 

@@ -37,15 +37,13 @@ import java.io.IOException;
 public class CustomUrlJob extends Job {
 
     private static final Logger LOG = Logs.of(CustomUrlJob.class);
-    private String basicAuthUser;
-    private String basicAuthPassword;
+
     private UploadEvents.BaseUploadEvent callbackEvent;
     private CustomUrlRequest urlRequest;
 
-    public CustomUrlJob(CustomUrlRequest urlRequest, String basicAuthUser, String basicAuthPassword, UploadEvents.BaseUploadEvent callbackEvent) {
+    public CustomUrlJob(CustomUrlRequest urlRequest, UploadEvents.BaseUploadEvent callbackEvent) {
         super(new Params(1).requireNetwork().persist());
-        this.basicAuthPassword = basicAuthPassword;
-        this.basicAuthUser = basicAuthUser;
+
         this.callbackEvent = callbackEvent;
         this.urlRequest = urlRequest;
     }
@@ -61,11 +59,11 @@ public class CustomUrlJob extends Job {
 
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
 
-        if(!Strings.isNullOrEmpty(basicAuthUser)){
+        if(!Strings.isNullOrEmpty(urlRequest.getBasicAuthUsername())){
             okBuilder.authenticator(new Authenticator() {
                 @Override
                 public Request authenticate(Route route, Response response) throws IOException {
-                    String credential = Credentials.basic(basicAuthUser, basicAuthPassword);
+                    String credential = Credentials.basic(urlRequest.getBasicAuthUsername(), urlRequest.getBasicAuthPassword());
                     return response.request().newBuilder().header("Authorization", credential).build();
                 }
             });
@@ -83,7 +81,7 @@ public class CustomUrlJob extends Job {
             String baseUrl = getBaseUrlFromUrl(urlRequest.getLogURL());
 
             RequestBody body = getHttpPostBodyFromUrl(urlRequest.getLogURL());
-            request = new Request.Builder().url(baseUrl).post(body).build();
+            request = new Request.Builder().url(baseUrl).method(urlRequest.getHttpMethod(), body).build();
         }
         else {
             request = new Request.Builder().url(urlRequest.getLogURL()).build();

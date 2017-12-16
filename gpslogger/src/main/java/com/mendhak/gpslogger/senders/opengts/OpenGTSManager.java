@@ -85,7 +85,7 @@ public class OpenGTSManager extends FileSender {
             String finalUrl = getUrl(deviceId, accountName, loc, communication, path, server, port );
 
             JobManager jobManager = AppSettings.getJobManager();
-            jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl),"","", new UploadEvents.OpenGTS()));
+            jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl), new UploadEvents.OpenGTS()));
         }
     }
 

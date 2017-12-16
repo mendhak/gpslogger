@@ -89,28 +89,6 @@ public class CustomUrlLoggerTest {
 
     }
 
-    @Test
-    public void getBasicAuth_BasicAuthPresent_ReturnsUsernamePassword() throws Exception {
-        CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET");
 
-        assertThat("Basic auth user pass are detected", logger.getBasicAuth("http://bob:Passw0rd@example.com/%SER").getKey(), is("bob") );
-        assertThat("Basic auth user pass are detected", logger.getBasicAuth("http://bob:Passw0rd@example.com/%SER").getValue(), is("Passw0rd") );
-    }
-
-    @Test
-    public void getBasicAuth_NoCredsPresent_ReturnsEmptyPair() throws Exception {
-        CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET");
-
-        assertThat("Basic auth user pass are absent", logger.getBasicAuth("http://example.com/%SER").getKey(), is("") );
-        assertThat("Basic auth user pass are absent", logger.getBasicAuth("http://example.com/%SER").getValue(), is("") );
-    }
-
-    @Test
-    public void removeCredentialsFromUrl_CredentialsPresent_RemovedFromUrl(){
-
-        CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET");
-        assertThat("Basic auth user pass are removed", logger.removeCredentialsFromUrl("http://bob:Passw0rd@example.com/%SER","bob","Passw0rd"), is("http://example.com/%SER") );
-
-    }
 
 }
