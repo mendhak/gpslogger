@@ -89,6 +89,15 @@ class CustomUrlRequestTest {
         assertThat("Headers block should be properly formatted with newlines and colons", cur.HttpHeaders, `is`(expectedMap))
     }
 
+    @Test
+    fun getHeadersFromTextBlock_AuthorizationPresent(){
+        val headers = "Authorization: Basic aaaaaaa="
+        val expectedMap = hashMapOf<String,String>(Pair("Authorization", "Basic aaaaaaa="))
+        val cur = CustomUrlRequest(LogURL = "http://bob:hunter2@example.com", RawHeaders = headers)
+
+        assertThat("User defined headers should override URL Authorization", cur.HttpHeaders, `is`(expectedMap))
+    }
+
 
 
 }
