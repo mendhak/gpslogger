@@ -1,6 +1,7 @@
 package com.mendhak.gpslogger.loggers.customurl
 
 import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.core.IsNull
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -29,20 +30,6 @@ class CustomUrlRequestTest {
     }
 
     @Test
-    fun getBasicAuth_BasicAuthPresent_ReturnsUsernamePassword() {
-        val cur = CustomUrlRequest("http://bob:hunter2@example.com/%LOG")
-        assertThat("Basic auth username is detected", cur.BasicAuthUsername, `is`("bob"))
-        assertThat("Basic auth password is detected", cur.BasicAuthPassword, `is`("hunter2"))
-    }
-
-    @Test
-    fun getBasicAuth_NoCredentials_ReturnsEmptyPair() {
-        val cur = CustomUrlRequest("http://example.com/%LOG")
-        assertThat("Basic auth username is detected", cur.BasicAuthUsername, `is`(""))
-        assertThat("Basic auth password is detected", cur.BasicAuthPassword, `is`(""))
-    }
-
-    @Test
     fun removeCredentialsFromUrl_CredentialsPresent_RemovedFromUrl(){
         val cur = CustomUrlRequest("http://bob:hunter2@example.com/%LOG")
         assertThat("Credentials removed from URL", cur.LogURL, `is`("http://example.com/%LOG"))
@@ -53,6 +40,11 @@ class CustomUrlRequestTest {
     fun addBasicAuthorizationHeader_CredentialsPresent(){
         val cur = CustomUrlRequest("http://bob:hunter2@example.com/%LOG")
         assertThat("Authorization header is present", cur.HttpHeaders.get("Authorization"), `is`("Basic Ym9iOmh1bnRlcjI="))
+    }
+    @Test
+    fun addBasicAuthorization_CredentialsNotPresent(){
+        val cur = CustomUrlRequest("http://example.com/%SER")
+        assertThat("No authorization header is present", cur.HttpHeaders.get("Authorization"), IsNull())
     }
 
 

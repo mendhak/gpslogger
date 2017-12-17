@@ -12,8 +12,7 @@ data class CustomUrlRequest @JvmOverloads constructor (var LogURL : String,
 
 
     var HttpHeaders : HashMap<String,String> = hashMapOf()
-    var BasicAuthUsername : String = ""
-    var BasicAuthPassword : String = ""
+
 
     init {
         HttpMethod = HttpMethod.toUpperCase()
@@ -21,8 +20,6 @@ data class CustomUrlRequest @JvmOverloads constructor (var LogURL : String,
 
     init {
         val (usr,pwd) = getBasicAuthCredentialsFromUrl(LogURL)
-        BasicAuthUsername = usr
-        BasicAuthPassword = pwd
 
         addAuthorizationHeader(usr,pwd)
         removeCredentialsFromUrl(usr,pwd)
