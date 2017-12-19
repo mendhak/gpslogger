@@ -196,23 +196,23 @@ public class GpsLoggingService extends Service  {
 
                 if (bundle.getBoolean(IntentConstants.IMMEDIATE_START)) {
                     LOG.info("Intent received - Start Logging Now");
-                    EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
+                    EventBus.getDefault().post(new CommandEvents.RequestStartStop(true));
                 }
 
                 if (bundle.getBoolean(IntentConstants.IMMEDIATE_STOP)) {
                     LOG.info("Intent received - Stop logging now");
-                    EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(false));
+                    EventBus.getDefault().post(new CommandEvents.RequestStartStop(false));
                 }
 
                 if (bundle.getBoolean(IntentConstants.GET_STATUS)) {
                     LOG.info("Intent received - Sending Status by broadcast");
-                    EventBus.getDefault().postSticky(new CommandEvents.GetStatus());
+                    EventBus.getDefault().post(new CommandEvents.GetStatus());
                 }
 
 
                 if (bundle.getBoolean(IntentConstants.AUTOSEND_NOW)) {
                     LOG.info("Intent received - Send Email Now");
-                    EventBus.getDefault().postSticky(new CommandEvents.AutoSend(null));
+                    EventBus.getDefault().post(new CommandEvents.AutoSend(null));
                 }
 
                 if (bundle.getBoolean(IntentConstants.GET_NEXT_POINT)) {
@@ -1035,7 +1035,11 @@ public class GpsLoggingService extends Service  {
 
     @EventBusHook
     public void onEvent(CommandEvents.GetStatus getStatus){
-        notifyStatus(session.isStarted());
+        CommandEvents.GetStatus statusEvent = EventBus.getDefault().removeStickyEvent(CommandEvents.GetStatus.class);
+        if(statusEvent != null){
+            notifyStatus(session.isStarted());
+        }
+
     }
 
     @EventBusHook

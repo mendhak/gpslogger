@@ -61,7 +61,7 @@ public class NotificationAnnotationActivity extends AppCompatActivity {
                     public void onInput(@NonNull MaterialDialog materialDialog, @NonNull CharSequence input) {
 
                         LOG.info("Annotation from notification: " + input.toString());
-                        EventBus.getDefault().postSticky(new CommandEvents.Annotate(input.toString()));
+                        EventBus.getDefault().post(new CommandEvents.Annotate(input.toString()));
                         Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
                         getApplicationContext().startService(serviceIntent);
                         materialDialog.dismiss();

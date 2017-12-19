@@ -41,7 +41,7 @@ public class StartupReceiver extends BroadcastReceiver {
 
             if (startImmediately) {
 
-                EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
+                EventBus.getDefault().post(new CommandEvents.RequestStartStop(true));
 
                 Intent serviceIntent = new Intent(context, GpsLoggingService.class);
                 context.startService(serviceIntent);

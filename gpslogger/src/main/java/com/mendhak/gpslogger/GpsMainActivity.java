@@ -114,7 +114,7 @@ public class GpsMainActivity extends AppCompatActivity
 
         if(preferenceHelper.shouldStartLoggingOnAppLaunch()){
             LOG.debug("Start logging on app launch");
-            EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
+            EventBus.getDefault().post(new CommandEvents.RequestStartStop(true));
         }
 
 
@@ -905,7 +905,7 @@ public class GpsMainActivity extends AppCompatActivity
                     @Override
                     public void onInput(MaterialDialog materialDialog, CharSequence input) {
                         LOG.info("Annotation entered : " + input.toString());
-                        EventBus.getDefault().postSticky(new CommandEvents.Annotate(input.toString()));
+                        EventBus.getDefault().post(new CommandEvents.Annotate(input.toString()));
                     }
                 })
                 .onNegative(new MaterialDialog.SingleButtonCallback() {

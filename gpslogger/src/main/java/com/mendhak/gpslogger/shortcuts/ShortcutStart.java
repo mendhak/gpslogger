@@ -35,7 +35,7 @@ public class ShortcutStart extends Activity {
         super.onCreate(savedInstanceState);
 
         LOG.info("Shortcut - start logging");
-        EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
+        EventBus.getDefault().post(new CommandEvents.RequestStartStop(true));
 
         Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
         getApplicationContext().startService(serviceIntent);
