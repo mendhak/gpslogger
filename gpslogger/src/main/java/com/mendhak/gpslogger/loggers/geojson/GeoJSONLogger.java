@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GeoJSONLogger implements FileLogger {
     final static Object lock = new Object();
-    private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
+    private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(10), new RejectionHandler());
     private final File file;
     protected final String name;
     private final boolean addNewTrackSegment;

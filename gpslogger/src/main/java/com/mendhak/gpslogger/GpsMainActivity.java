@@ -175,6 +175,13 @@ public class GpsMainActivity extends AppCompatActivity
         super.onPause();
     }
 
+    protected void onStop() {
+        super.onStop();
+        if (!isFinishing()) {
+            stopAndUnbindServiceIfRequired();
+        }
+    }
+
     @Override
     protected void onDestroy() {
         stopAndUnbindServiceIfRequired();
@@ -218,9 +225,19 @@ public class GpsMainActivity extends AppCompatActivity
                 toggleDrawer();
                 return true;
             }
+
+            removeFragmentsAndActionBar();
+            finish();
         }
 
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void removeFragmentsAndActionBar(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.remove(getCurrentFragment());
+        transaction.commit();
+        getSupportActionBar().hide();
     }
 
 
