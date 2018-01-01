@@ -10,7 +10,7 @@ notifications:
 #  - ANDROID_HOME=$HOME/android-sdk ZIPNAME=sdk-tools-linux-3859397.zip
 
 before_install:
- - yes | sdkmanager "platforms;android-27"
+  - yes | sdkmanager "platforms;android-27"
 
 android:
     components:
