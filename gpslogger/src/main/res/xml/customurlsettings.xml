@@ -5,6 +5,7 @@
 
     <EditTextPreference
         android:key="log_customurl_url"
+        android:singleLine="true"
         android:title="URL" />
 
     <Preference
