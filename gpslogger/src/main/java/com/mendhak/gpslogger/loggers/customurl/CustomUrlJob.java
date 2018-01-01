@@ -56,7 +56,7 @@ public class CustomUrlJob extends Job {
     @Override
     public void onRun() throws Throwable {
 
-        LOG.debug("Sending to URL: " + urlRequest.getLogURL());
+        LOG.info("HTTP Request - " + urlRequest.getLogURL());
 
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
         okBuilder.sslSocketFactory(Networks.getSocketFactory(AppSettings.getInstance()));
