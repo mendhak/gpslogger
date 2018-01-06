@@ -427,8 +427,6 @@
     <string name="change_language_summary">Not all languages are fully translated! You must restart the app for the settings to take effect.</string>
     <string name="coordinate_display_format">Coordinates display format</string>
     <string name="ssl_certificate_validate">Validate SSL Certificate</string>
-    <string name="use_post_method">Use POST method</string>
-    <string name="use_post_method_summary">Querystring parameters are converted to HTTP POST body parameters</string>
     <string name="parameters">Parameters</string>
     <string name="ssl_certificate_add_to_keystore">Add this certificate to local keystore?</string>
     <string name="ssl_certificate_is_valid">The certificate is valid</string>
@@ -441,4 +439,7 @@
     <string name="txt_timestamp_epoch">Timestamp (epoch)</string>
     <string name="txt_starttimestamp_epoch">Start timestamp (epoch)</string>
     <string name="txt_battery">Battery</string>
+    <string name="customurl_http_body">HTTP Body</string>
+    <string name="customurl_http_headers">HTTP Headers</string>
+    <string name="customurl_http_method">HTTP Method</string>
 </resources>

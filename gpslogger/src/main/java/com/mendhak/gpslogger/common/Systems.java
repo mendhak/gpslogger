@@ -20,6 +20,7 @@
 package com.mendhak.gpslogger.common;
 
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +33,7 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.support.v4.content.ContextCompat;
 
 import java.util.List;
 
@@ -96,5 +98,13 @@ public class Systems {
         } else {
             return false;
         }
+    }
+
+
+    public static boolean locationPermissionsGranted(Context context) {
+        int fineCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
+        int coarseCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION);
+
+        return fineCheck == PackageManager.PERMISSION_GRANTED && coarseCheck == PackageManager.PERMISSION_GRANTED;
     }
 }

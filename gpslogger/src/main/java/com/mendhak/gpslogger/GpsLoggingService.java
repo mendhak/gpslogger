@@ -26,9 +26,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.*;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -192,6 +190,13 @@ public class GpsLoggingService extends Service  {
             Bundle bundle = intent.getExtras();
 
             if (bundle != null) {
+
+
+                if(!Systems.locationPermissionsGranted(this)){
+                    LOG.error("User has not granted permission to access location services. Will not continue!");
+                    return;
+                }
+
                 boolean needToStartGpsManager = false;
 
                 if (bundle.getBoolean(IntentConstants.IMMEDIATE_START)) {
