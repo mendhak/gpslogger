@@ -98,7 +98,6 @@
   <string name="log_kml_summary">سجل المواقع في ملف KML v2.2</string>
   <string name="log_plain_text_title">دخول إلى CSV</string>
   <string name="log_plain_text_summary">سجل المواقع في ملف CSV</string>
-  <string name="log_json_title">R</string>
   <string name="new_file_creation_title">إنشاء ملف جديد</string>
   <string name="new_file_creation_onceaday">مرة في اليوم</string>
   <string name="new_file_creation_everystart">في كل مرة ابدأ</string>
