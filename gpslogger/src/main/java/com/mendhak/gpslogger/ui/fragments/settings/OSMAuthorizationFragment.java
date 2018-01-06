@@ -28,6 +28,7 @@ import android.preference.Preference;
 import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.osm.OpenStreetMapManager;
@@ -176,7 +177,9 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
                     @Override
                     public void run() {
                         Dialogs.hideProgress();
-                        Dialogs.error(getString(R.string.sorry), getString(R.string.osm_auth_error), e.getMessage(), e, getActivity());
+                        if(getActivity()!=null && isAdded()) {
+                            Dialogs.error(getString(R.string.sorry), getString(R.string.osm_auth_error), e.getMessage(), e, getActivity());
+                        }
                     }
                 });
             }
@@ -206,8 +209,10 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
                 osmHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Dialogs.error(getString(R.string.sorry), getString(R.string.osm_auth_error), e.getMessage(), e,
-                                getActivity());
+                        if(getActivity()!=null && isAdded()){
+                            Dialogs.error(getString(R.string.sorry), getString(R.string.osm_auth_error), e.getMessage(), e,
+                                    getActivity());
+                        }
                     }
                 });
             }
