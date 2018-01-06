@@ -31,9 +31,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.Html;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
+import com.google.android.gms.location.ActivityRecognitionClient;
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.common.*;
@@ -79,7 +78,6 @@ public class GpsLoggingService extends Service  {
     private Handler handler = new Handler();
 
     PendingIntent activityRecognitionPendingIntent;
-    GoogleApiClient googleApiClient;
     // ---------------------------------------------------
 
 
@@ -97,52 +95,19 @@ public class GpsLoggingService extends Service  {
     }
 
     private void requestActivityRecognitionUpdates() {
-        GoogleApiClient.Builder builder = new GoogleApiClient.Builder(getApplicationContext())
-                .addApi(ActivityRecognition.API)
-                .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
 
-                    @Override
-                    public void onConnectionSuspended(int arg) {
-                    }
-
-                    @Override
-                    public void onConnected(Bundle arg0) {
-                        try {
-                            LOG.debug("Requesting activity recognition updates");
-                            Intent intent = new Intent(getApplicationContext(), GpsLoggingService.class);
-                            activityRecognitionPendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                            ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(googleApiClient, preferenceHelper.getMinimumLoggingInterval() * 1000, activityRecognitionPendingIntent);
-                        }
-                        catch(Throwable t){
-                            LOG.warn(SessionLogcatAppender.MARKER_INTERNAL, "Can't connect to activity recognition service", t);
-                        }
-
-                    }
-
-                })
-                .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
-                    @Override
-                    public void onConnectionFailed(ConnectionResult arg0) {
-
-                    }
-                });
-
-        googleApiClient = builder.build();
-        googleApiClient.connect();
+        LOG.debug("Requesting activity recognition updates");
+        Intent intent = new Intent(getApplicationContext(), GpsLoggingService.class);
+        activityRecognitionPendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        ActivityRecognitionClient arClient = ActivityRecognition.getClient(getApplicationContext());
+        arClient.requestActivityUpdates(preferenceHelper.getMinimumLoggingInterval() * 1000, activityRecognitionPendingIntent);
     }
 
     private void stopActivityRecognitionUpdates(){
-        try{
-            LOG.debug("Stopping activity recognition updates");
-            if(googleApiClient != null && googleApiClient.isConnected()){
-                ActivityRecognition.ActivityRecognitionApi.removeActivityUpdates(googleApiClient, activityRecognitionPendingIntent);
-                googleApiClient.disconnect();
-            }
-        }
-        catch(Throwable t){
-            LOG.warn(SessionLogcatAppender.MARKER_INTERNAL, "Tried to stop activity recognition updates", t);
-        }
 
+        LOG.debug("Stopping activity recognition updates");
+        ActivityRecognitionClient arClient = ActivityRecognition.getClient(getApplicationContext());
+        arClient.removeActivityUpdates(activityRecognitionPendingIntent);
     }
 
     private void registerEventBus() {
