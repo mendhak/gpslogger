@@ -99,6 +99,7 @@
   <string name="log_kml_summary">Konumlar KML v2.2 dosyasına kaydedilir</string>
   <string name="log_plain_text_title">CSV olarak kaydet</string>
   <string name="log_plain_text_summary">Konumlar CSV dosyasına kaydedilir</string>
+  <string name="log_json_summary">Konumları bir GeoJSON dosyasına kaydeder</string>
   <string name="new_file_creation_title">Yeni dosya oluşturma</string>
   <string name="new_file_creation_summary">Günde bir veya her açılışta bir dosya oluşturma.</string>
   <string name="new_file_creation_onceaday">Günde bir</string>
@@ -322,6 +323,7 @@
   <string name="change_language_summary">Tüm diller tam çevrilmiş değil. Ayarları etkinleştirmek için uygulamayı yeniden başlatmanız gerekir.</string>
   <string name="coordinate_display_format">Koordinat görüntüleme biçimi</string>
   <string name="ssl_certificate_validate">SSL sertifikası doğrula</string>
+  <string name="use_post_method">POST yöntemini kullan</string>
   <string name="parameters">Parametreler</string>
   <string name="ssl_certificate_add_to_keystore">Bu sertifikayı yerel anahtar deposuna ekle?</string>
   <string name="ssl_certificate_is_valid">Sertifika geçerli</string>

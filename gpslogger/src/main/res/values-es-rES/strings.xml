@@ -99,6 +99,8 @@
   <string name="log_kml_summary">Escribe las posiciones en un archivo KML v2.2</string>
   <string name="log_plain_text_title">Registro a CSV</string>
   <string name="log_plain_text_summary">Escribe las posiciones en un archivo CSV</string>
+  <string name="log_json_title">Registrarse en GeoJSON</string>
+  <string name="log_json_summary">Escribe las posiciones en un archivo Csv</string>
   <string name="new_file_creation_title">Creación de archivos</string>
   <string name="new_file_creation_summary">Crear un nuevo archivo por día, o cada vez que inicie.</string>
   <string name="new_file_creation_onceaday">Una vez al día</string>
@@ -237,9 +239,11 @@
   <string name="txt_annotation">Comentarios:</string>
   <string name="txt_time_isoformat">Hora UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Proveedor:</string>
+  <string name="annotation_requires_logging">Para usar anotaciones es necesario registrar en formato GPX/KML ó URL personalizada</string>
   <string name="gpslogger_folder_title">Guardar en carpeta</string>
   <string name="gpslogger_folder_summary">Donde guardar los archivos de registro, por defecto en «/sdcard/GPSLogger»</string>
   <string name="autoftp_directory">Carpeta</string>
+  <string name="new_file_custom_message">Puede utilizar %SER para dispositivo serial % año % mes, % MONTHNAME, %DAY, %DAYNAME, %HOUR, % MIN, %PROFILE, % VER versión</string>
   <string name="new_file_prefix_serial_title">Utilizar el número de serie del dispositivo como prefijo para el nombre del archivo</string>
   <string name="new_file_prefix_serial_summary">Este es el número de serie del teléfono </string>
   <string name="txt_travel_duration">Duración:</string>
@@ -268,6 +272,7 @@
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Red</string>
   <string name="listeners_passive">Pasivo</string>
+  <string name="listeners_summary">Qué proveedores de contenido usar cuando se encuentran disponibles; GPS para satélites, Red para torres de celdas/WiFi, Pasivo es un proveedor especial que escucha ubicaciones solicitadas por otras aplicaciones.</string>
   <string name="listeners_title">Proveedores de ubicación</string>
   <string name="autosend_frequency_hint">Número de minutos</string>
   <string name="pref_logging_file_no_permissions">Esa carpeta no se escribe por GPSLogger. Por favor, seleccione otra carpeta para escribir.</string>
@@ -321,6 +326,8 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
   <string name="change_language_summary">No todos los idiomas estàn traducidos por completo! Debes reiniciar la aplicación para que esta configuración funcione.</string>
   <string name="coordinate_display_format">Formato de visualización de coordenadas</string>
   <string name="ssl_certificate_validate">Validar el certificado SSL</string>
+  <string name="use_post_method">Utilizar el método POST</string>
+  <string name="use_post_method_summary">Parámetros QueryString son convertidos en parámetros de cuerpo HTTP POST</string>
   <string name="parameters">Parámetros</string>
   <string name="ssl_certificate_add_to_keystore">¿Agregar certificado al almacén de claves local?</string>
   <string name="ssl_certificate_is_valid">El certificado es válido</string>
@@ -330,4 +337,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
   <string name="sftp_private_key_passphrase">Frase de contraseña de clave privada</string>
   <string name="sftp_validate_test_upload">Validar la clave del host y subir la prueba</string>
   <string name="sftp_validate_accept_host_key">¿Acepta esta clave?</string>
+  <string name="txt_timestamp_epoch">Hora de inicio (época)</string>
+  <string name="txt_starttimestamp_epoch">Iniciar Hora de inicio (época)</string>
+  <string name="txt_battery">Batería</string>
 </resources>
