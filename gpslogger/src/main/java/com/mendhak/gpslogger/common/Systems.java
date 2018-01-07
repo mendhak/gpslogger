@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.BatteryManager;
@@ -35,9 +36,17 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 
+import com.mendhak.gpslogger.common.slf4j.Logs;
+
+import org.slf4j.Logger;
+
 import java.util.List;
+import java.util.Locale;
 
 public class Systems {
+
+    private static final Logger LOG = Logs.of(Systems.class);
+
     public static int getBatteryLevel(Context context) {
         Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         int level = batteryIntent != null ? batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) : 0;
@@ -106,5 +115,28 @@ public class Systems {
         int coarseCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION);
 
         return fineCheck == PackageManager.PERMISSION_GRANTED && coarseCheck == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public static void setLocale(String userSpecifiedLocale, Context baseContext, Resources resources) {
+
+        if (!Strings.isNullOrEmpty(userSpecifiedLocale)) {
+            LOG.debug("Setting language to " + userSpecifiedLocale);
+
+            String language, country="";
+
+            if(userSpecifiedLocale.contains("-")){
+                language = userSpecifiedLocale.split("-")[0];
+                country = userSpecifiedLocale.split("-")[1];
+            }
+            else {
+                language = userSpecifiedLocale;
+            }
+
+            Locale locale = new Locale(language, country);
+            Locale.setDefault(locale);
+            resources.getConfiguration().locale = locale;
+            baseContext.getResources().updateConfiguration(resources.getConfiguration(), baseContext.getResources().getDisplayMetrics());
+
+        }
     }
 }
