@@ -131,7 +131,6 @@
   <string name="autoemail_smtp_category">Impostazioni Email</string>
   <string name="autoemail_username_summary">Utente del tuo provider di posta elettronica</string>
   <string name="autoemail_password_summary">Password della posta elettronica</string>
-  <string name="autoemail_ssl">Usa SSL ?</string>
   <string name="autoemail_ssl_summary">Prova ad impostare questo se non riesci a collegarti</string>
   <string name="autoemail_choosepreset">Provider di posta</string>
   <string name="autoemail_choosepreset_summary">Seleziona un provider oppure sceglilo manualmente</string>

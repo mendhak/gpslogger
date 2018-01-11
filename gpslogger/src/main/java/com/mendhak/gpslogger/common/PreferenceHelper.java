@@ -568,12 +568,23 @@ public class PreferenceHelper {
         return prefs.getBoolean(PreferenceNames.LOG_TO_URL, false);
     }
 
-    /**
-     * Whether to log to a custom URL with POST method.
-     */
-    @ProfilePreference(name= PreferenceNames.LOG_TO_URL_POST)
-    public boolean shouldLogToCustomUrlPost() {
-        return prefs.getBoolean(PreferenceNames.LOG_TO_URL_POST, false);
+    @ProfilePreference(name=PreferenceNames.LOG_TO_URL_METHOD)
+    public String getCustomLoggingHTTPMethod(){
+        return prefs.getString(PreferenceNames.LOG_TO_URL_METHOD, "GET");
+    }
+
+    public void setCustomLoggingHTTPMethod(String method){
+        prefs.edit().putString(PreferenceNames.LOG_TO_URL_METHOD, method).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.LOG_TO_URL_BODY)
+    public String getCustomLoggingHTTPBody(){
+        return prefs.getString(PreferenceNames.LOG_TO_URL_BODY,"");
+    }
+
+    @ProfilePreference(name=PreferenceNames.LOG_TO_URL_HEADERS)
+    public String getCustomLoggingHTTPHeaders(){
+        return prefs.getString(PreferenceNames.LOG_TO_URL_HEADERS,"");
     }
 
     /**

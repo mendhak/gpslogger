@@ -39,7 +39,7 @@ public class MyPackageUpgradeReceiver extends BroadcastReceiver {
             LOG.debug("Package has been replaced. Should resume logging: " + shouldResumeLogging);
 
             if(shouldResumeLogging){
-                EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
+                EventBus.getDefault().post(new CommandEvents.RequestStartStop(true));
 
                 Intent serviceIntent = new Intent(context, GpsLoggingService.class);
                 context.startService(serviceIntent);

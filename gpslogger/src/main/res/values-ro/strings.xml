@@ -117,7 +117,6 @@
   <string name="autoemail_smtp_category">Setări de e-mail</string>
   <string name="autoemail_username_summary">Numele de utilizator de la furnizorul dvs. de e-mail</string>
   <string name="autoemail_password_summary">Parola de la furnizorul dvs. de e-mail</string>
-  <string name="autoemail_ssl">Folosire SSL?</string>
   <string name="autoemail_ssl_summary">Încercaţi sa schimbati aceasta setare dacă nu se poate conecta</string>
   <string name="autoemail_choosepreset">Furnizor de mail</string>
   <string name="autoemail_choosepreset_summary">Alege un furnizor sau alege manual</string>

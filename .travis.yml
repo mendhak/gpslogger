@@ -15,7 +15,6 @@ android:
       - tools
       - platform-tools
       - build-tools-26.0.2
-      - android-23
       - extra-android-support
       - extra-android-m2repository
       - extra-google-m2repository
@@ -42,6 +41,7 @@ cache:
 
 before_install:
   - ./gradlew --version
+  - yes | sdkmanager "platforms;android-27"
 
 
 before_script:

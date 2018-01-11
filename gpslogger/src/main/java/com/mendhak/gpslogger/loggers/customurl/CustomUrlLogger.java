@@ -30,10 +30,8 @@ import com.path.android.jobqueue.JobManager;
 
 
 import java.net.URLEncoder;
-import java.util.AbstractMap;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.HashMap;
 
 public class CustomUrlLogger implements FileLogger {
 
@@ -41,13 +39,17 @@ public class CustomUrlLogger implements FileLogger {
     private final String customLoggingUrl;
     private final int batteryLevel;
     private final String androidId;
-    private final Boolean usePost;
+    private final String httpMethod;
+    private final String httpBody;
+    private final String httpHeaders;
 
-    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String androidId, Boolean usePost) {
+    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String androidId, String httpMethod, String httpBody, String httpHeaders) {
         this.customLoggingUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
         this.androidId = androidId;
-        this.usePost = usePost;
+        this.httpMethod = httpMethod;
+        this.httpBody = httpBody;
+        this.httpHeaders = httpHeaders;
     }
 
     @Override
@@ -60,17 +62,21 @@ public class CustomUrlLogger implements FileLogger {
     @Override
     public void annotate(String description, Location loc) throws Exception {
 
-        AbstractMap.SimpleEntry<String,String> credentials = getBasicAuth(customLoggingUrl);
-        String finalUrl  = removeCredentialsFromUrl(customLoggingUrl, credentials.getKey(), credentials.getValue());
-        finalUrl = getFormattedUrl(finalUrl, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
+        String finalUrl = getFormattedTextblock(customLoggingUrl, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
+                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
+        String finalBody = getFormattedTextblock(httpBody, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
+                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
+        String finalHeaders = getFormattedTextblock(httpHeaders, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
                 Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
 
+
         JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new CustomUrlJob(finalUrl, credentials.getKey(), credentials.getValue(), new UploadEvents.CustomUrl(), usePost));
+        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl,httpMethod, finalBody, finalHeaders), new UploadEvents.CustomUrl()));
     }
 
-    public String getFormattedUrl(String customLoggingUrl, Location loc, String description, String androidId,
-                                  float batteryLevel, String buildSerial, long sessionStartTimeStamp, String fileName)
+
+    public String getFormattedTextblock(String customLoggingUrl, Location loc, String description, String androidId,
+                                        float batteryLevel, String buildSerial, long sessionStartTimeStamp, String fileName)
             throws Exception {
 
         String logUrl = customLoggingUrl;
@@ -94,22 +100,6 @@ public class CustomUrlLogger implements FileLogger {
         logUrl = logUrl.replaceAll("(?i)%filename", fileName);
 
         return logUrl;
-    }
-
-    public AbstractMap.SimpleEntry<String,String> getBasicAuth(String customLoggingUrl){
-        String basicUsername="", basicPassword="";
-        Pattern r = Pattern.compile("(\\w+):(\\w+)@.+"); //Looking for http://username:password@example.com/....
-        Matcher m =  r.matcher(customLoggingUrl);
-        while(m.find()){
-            basicUsername = m.group(1);
-            basicPassword = m.group(2);
-        }
-
-        return new AbstractMap.SimpleEntry<>(basicUsername, basicPassword);
-    }
-
-    public String removeCredentialsFromUrl(String customLoggingUrl, String user, String pass){
-        return customLoggingUrl.replace(user + ":" + pass+"@","");
     }
 
 

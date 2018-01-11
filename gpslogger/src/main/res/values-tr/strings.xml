@@ -99,6 +99,7 @@
   <string name="log_kml_summary">Konumlar KML v2.2 dosyasına kaydedilir</string>
   <string name="log_plain_text_title">CSV olarak kaydet</string>
   <string name="log_plain_text_summary">Konumlar CSV dosyasına kaydedilir</string>
+  <string name="log_json_summary">Konumları bir GeoJSON dosyasına kaydeder</string>
   <string name="new_file_creation_title">Yeni dosya oluşturma</string>
   <string name="new_file_creation_summary">Günde bir veya her açılışta bir dosya oluşturma.</string>
   <string name="new_file_creation_onceaday">Günde bir</string>
@@ -133,7 +134,6 @@
   <string name="autoemail_smtp_category">E-posta ayarları</string>
   <string name="autoemail_username_summary">E-posta sağlayıcınızdaki kullanıcı adı</string>
   <string name="autoemail_password_summary">E-posta sağlayıcınızdaki parola</string>
-  <string name="autoemail_ssl">SSL kullanılsın mı?</string>
   <string name="autoemail_ssl_summary">Bağlanamıyorsanız bunu değiştirmeyi deneyin</string>
   <string name="autoemail_choosepreset">Posta sağlayıcısı</string>
   <string name="autoemail_choosepreset_summary">Sağlayıcı seçin veya el ile seçin</string>

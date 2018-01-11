@@ -15,7 +15,8 @@
         "content/12.ftp-setup.md",
         "content/13.auto-email.md",
         "content/14.open-gts.md",
-        "content/15.openstreetmap.md"
+        "content/15.openstreetmap.md",
+        "content/17.customurl.md"
 
     ],
     "standalone": [

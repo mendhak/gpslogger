@@ -136,7 +136,6 @@
   <string name="autoemail_smtp_category">Configurações de e-mail</string>
   <string name="autoemail_username_summary">Nome de usuário com o seu provedor de e-mail</string>
   <string name="autoemail_password_summary">Senha com seu provedor de e-mail</string>
-  <string name="autoemail_ssl">Usar SSL?</string>
   <string name="autoemail_ssl_summary">Selecione isso se você não pode se conectar</string>
   <string name="autoemail_choosepreset">Provedor de email</string>
   <string name="autoemail_choosepreset_summary">Escolher um provedor ou escolher manualmente</string>
@@ -327,8 +326,6 @@
   <string name="change_language_summary">Nem todos os idiomas estão totalmente traduzidos! É necessário reiniciar o aplicativo para que as configurações tenham efeito.</string>
   <string name="coordinate_display_format">Formato de exibição de coordenadas</string>
   <string name="ssl_certificate_validate">Validar Certificado SSL</string>
-  <string name="use_post_method">Usar o método POST</string>
-  <string name="use_post_method_summary">Parâmetros QueryString são convertidos em parâmetros estruturais HTTP POST</string>
   <string name="parameters">Parâmetros</string>
   <string name="ssl_certificate_add_to_keystore">Adicionar este certificado ao armazenamento de chave local?</string>
   <string name="ssl_certificate_is_valid">O certificado é válido</string>

@@ -41,7 +41,7 @@ public class Gpx10FileLogger implements FileLogger {
     protected final static Object lock = new Object();
 
     private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
-            new LinkedBlockingQueue<Runnable>(128), new RejectionHandler());
+            new LinkedBlockingQueue<Runnable>(10), new RejectionHandler());
     private File gpxFile = null;
     private final boolean addNewTrackSegment;
     protected final String name = "GPX";
@@ -198,7 +198,7 @@ class Gpx10WriteHandler implements Runnable {
         synchronized (Gpx10FileLogger.lock) {
 
             try {
-                if (!gpxFile.exists()) {
+                if (!gpxFile.isFile()) {
                     gpxFile.createNewFile();
 
                     FileOutputStream initialWriter = new FileOutputStream(gpxFile, true);

@@ -49,6 +49,7 @@
             android:launchMode="singleTask"
             android:uiOptions="splitActionBarWhenNarrow"
             android:windowSoftInputMode="adjustNothing"
+            android:clearTaskOnLaunch="true"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

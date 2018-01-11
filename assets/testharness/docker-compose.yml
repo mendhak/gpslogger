@@ -45,7 +45,7 @@ udp:
 
 https:
   container_name: gpslogger-https-server
-  image: bitnami/apache
+  image: mendhak/http-https-echo
   ports:
     - "8081:80"
     - "8443:443"

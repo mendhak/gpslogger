@@ -36,7 +36,9 @@ public  class PreferenceNames {
     public static final String LOG_TO_NMEA = "log_nmea";
     public static final String LOG_TO_URL = "log_customurl_enabled";
     public static final String LOG_TO_URL_PATH = "log_customurl_url";
-    public static final String LOG_TO_URL_POST = "log_customurl_post";
+    public static final String LOG_TO_URL_BODY = "log_customurl_body";
+    public static final String LOG_TO_URL_HEADERS = "log_customurl_headers";
+    public static final String LOG_TO_URL_METHOD = "log_customurl_method";
     public static final String LOG_TO_OPENGTS = "log_opengts";
     public static final String LOCATION_LISTENERS = "listeners";
     public static final String NEW_FILE_CREATION_MODE = "new_file_creation";

@@ -98,6 +98,8 @@
   <string name="log_kml_summary">Pozíciók naplózása egy KML v2.2 fájlba</string>
   <string name="log_plain_text_title">Naplózás CSV-be</string>
   <string name="log_plain_text_summary">Pozíciók naplózása egy CSV fájlba</string>
+  <string name="log_json_title">Naplózás GeoJSON-ba</string>
+  <string name="log_json_summary">Pozíciók naplózása egy GeoJSON fájlba</string>
   <string name="new_file_creation_title">Új fájl létrehozása</string>
   <string name="new_file_creation_summary">Létrehoz egy új fájlt, naponta egyszer, vagy minden induláskor.</string>
   <string name="new_file_creation_onceaday">Naponta egyszer</string>
@@ -132,7 +134,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="autoemail_smtp_category">E-mail beállítások</string>
   <string name="autoemail_username_summary">Az e-mail szolgáltatótól kapott felhasználóneve</string>
   <string name="autoemail_password_summary">Az e-mail szolgáltatótól kapott jelszava</string>
-  <string name="autoemail_ssl">SSL használata?</string>
   <string name="autoemail_ssl_summary">Próbáljon a beállításokon változtatni, ha nem tud csatlakozni</string>
   <string name="autoemail_choosepreset">Mail szolgáltató</string>
   <string name="autoemail_choosepreset_summary">Válassza ki a kiszolgáltatót vagy írja be kézzel az adatait</string>
@@ -329,4 +330,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="sftp_validate_test_upload">Kiszolgáló ellenõrzése és próbafeltöltés</string>
   <string name="sftp_validate_accept_host_key">Elfogadja ezt a kiszolgálókulcsot?</string>
   <string name="txt_timestamp_epoch">Időbélyeg (epoch)</string>
+  <string name="txt_starttimestamp_epoch">Start időbélyeg (epoch)</string>
+  <string name="txt_battery">Akkumulátor</string>
 </resources>

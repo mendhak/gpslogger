@@ -22,7 +22,7 @@
   <string name="txt_direction">方向：</string>
   <string name="txt_satellites">卫星：</string>
   <string name="txt_accuracy">精确度：</string>
-  <string name="txt_travel_distance">已行进:</string>
+  <string name="txt_travel_distance">已行进：</string>
   <string name="btn_start_logging">开始记录</string>
   <string name="btn_stop_logging">停止记录</string>
   <string name="gpslogger_still_running">GPSLogger 仍在运行中。</string>
@@ -97,7 +97,10 @@
   <string name="log_gpx_summary">记录到 GPX v1.0 文件</string>
   <string name="log_kml_title">记录到 KML 文件</string>
   <string name="log_kml_summary">记录到 KML v2.2 文件</string>
+  <string name="log_plain_text_title">CSV 日志</string>
   <string name="log_plain_text_summary">记录到 CSV 文件</string>
+  <string name="log_json_title">GeoJSON 日志</string>
+  <string name="log_json_summary">记录到 GeoJSON 文件</string>
   <string name="new_file_creation_title">新文件的创建</string>
   <string name="new_file_creation_summary">选择是一天仅创建一个文件呢还是每次开始都创建一个文件。</string>
   <string name="new_file_creation_onceaday">一天仅一次</string>
@@ -131,7 +134,6 @@
   <string name="autoemail_smtp_category">Email 设置</string>
   <string name="autoemail_username_summary">用户名与您的电子邮件供应商</string>
   <string name="autoemail_password_summary">你的电子邮件密码</string>
-  <string name="autoemail_ssl">是否使用 SSL?</string>
   <string name="autoemail_ssl_summary">如果连接失败请尝试切换这个选项</string>
   <string name="autoemail_choosepreset">邮件提供商</string>
   <string name="autoemail_choosepreset_summary">选择一个服务提供商或者直接输入</string>
@@ -235,17 +237,19 @@
   <string name="txt_annotation">注释︰</string>
   <string name="txt_time_isoformat">UTC 时间（2011-12-25T15:27:33Z）：</string>
   <string name="txt_provider">提供者：</string>
+  <string name="annotation_requires_logging">只有这些记录方式支持注释：CSV/GPX/KML/ URL/GeoJSON</string>
   <string name="gpslogger_folder_title">保存到文件夹</string>
   <string name="gpslogger_folder_summary">保存到哪个文件夹，缺省是 /sdcard/GPSLogger</string>
   <string name="autoftp_directory">文件夹</string>
+  <string name="new_file_custom_message">您可使用 %SER 表示设备序号，%YEAR、%MONTH、%MONTHNAME、%DAY、%HOUR、%MIN 表示年月日时分，%DAYNAME 表示星期，%PROFILE 表示配置，%VER 表示版本</string>
   <string name="new_file_prefix_serial_title">文件名使用设备序号作为前缀</string>
   <string name="new_file_prefix_serial_summary">这是在您的手机状态中找到的序列号</string>
   <string name="txt_travel_duration">持续时间︰</string>
   <string name="menu_onepoint">记录一个点</string>
   <string name="view_simple">简单查看</string>
   <string name="view_detailed">详细查看</string>
-  <string name="view_big">大查看</string>
-  <string name="view_log">日志查看</string>
+  <string name="view_big">大视图</string>
+  <string name="view_log">日志视图</string>
   <string name="bigview_taptotoggle">点击开始/停止记录</string>
   <string name="summary_autosendtargets">上传到︰</string>
   <string name="accuracy_filter_title">按精度过滤</string>
@@ -266,6 +270,7 @@
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">网络</string>
   <string name="listeners_passive">被动</string>
+  <string name="listeners_summary">从什么地方获取位置数据：「GPS」就是卫星，「网络」是指行动基站/Wifi，「被动」比较特殊，负责监听其他应用获取的位置。</string>
   <string name="listeners_title">位置提供者</string>
   <string name="autosend_frequency_hint">分钟数</string>
   <string name="pref_logging_file_no_permissions">文件夹不可被 GPSLogger 写入。请另选一个文件夹。</string>
@@ -325,4 +330,12 @@
   <string name="ssl_certificate_add_to_keystore">是否将此证书添加到本地密钥库？</string>
   <string name="ssl_certificate_is_valid">证书有效</string>
   <string name="hide_notification_from_status_bar">从状态栏中隐藏通知</string>
+  <string name="sftp_setup_title">SFTP</string>
+  <string name="sftp_private_key_path">私钥</string>
+  <string name="sftp_private_key_passphrase">私钥密码</string>
+  <string name="sftp_validate_test_upload">验证主机密钥并测试上传</string>
+  <string name="sftp_validate_accept_host_key">接受此主机密钥？</string>
+  <string name="txt_timestamp_epoch">时间戳 (Unix)</string>
+  <string name="txt_starttimestamp_epoch">开始时间戳 (Unix)</string>
+  <string name="txt_battery">电量</string>
 </resources>

@@ -78,7 +78,7 @@ public class FileSenderFactory {
     public static void autoSendFiles(final String fileToSend) {
 
         PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
-        LOG.info("Sending file " + fileToSend);
+        LOG.info("Auto-sending file " + fileToSend);
 
         File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
 

@@ -5,6 +5,7 @@
 
     <EditTextPreference
         android:key="log_customurl_url"
+        android:singleLine="true"
         android:title="URL" />
 
     <Preference
@@ -13,15 +14,28 @@
         android:title="@string/parameters"
         android:summary="" />
 
-    <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="log_customurl_post"
-            android:summary="@string/use_post_method_summary"
-            android:title="@string/use_post_method" />
+    <EditTextPreference
+        android:key="log_customurl_body"
+        android:selectAllOnFocus="true"
+        android:singleLine="false"
+        android:defaultValue="lat=%LAT&amp;lon=%LON"
+        android:title="@string/customurl_http_body" />
+    <EditTextPreference
+        android:key="log_customurl_headers"
+        android:selectAllOnFocus="true"
+        android:singleLine="false"
+        android:defaultValue="Content-Type: application/x-www-form-urlencoded"
+        android:hint="Content-Type: application/x-www-form-urlencoded\nAuthorization: Basic abcdefg\nApiToken: 12345"
+        android:title="@string/customurl_http_headers" />
+    <EditTextPreference
+        android:defaultValue="GET"
+        android:key="log_customurl_method"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/customurl_http_method" />
 
     <Preference android:key="customurl_validatecustomsslcert"
                 android:title="@string/ssl_certificate_validate" />
-
 
 
 </PreferenceScreen>

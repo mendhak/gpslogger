@@ -128,7 +128,6 @@
   <string name="autoemail_smtp_category">이메일 설정</string>
   <string name="autoemail_username_summary">이메일 사용자 이름</string>
   <string name="autoemail_password_summary">이메일 비밀번호</string>
-  <string name="autoemail_ssl">SSL 을 사용 합니까?</string>
   <string name="autoemail_ssl_summary">연결 할수 없으면 이것을 켜보세요.</string>
   <string name="autoemail_choosepreset">메일 전달자</string>
   <string name="autoemail_smtp_testemail">이메일 전송 테스트</string>

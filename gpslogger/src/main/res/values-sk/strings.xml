@@ -140,7 +140,6 @@ vyššiu presnosť s nízkymi frekvenciami.
   <string name="autoemail_smtp_category">Nastavenia e-mailu</string>
   <string name="autoemail_username_summary">Meno používateľa pre e-mailovú schránku</string>
   <string name="autoemail_password_summary">Heslo pre e-mailovú schránku</string>
-  <string name="autoemail_ssl">Použiť SSL?</string>
   <string name="autoemail_ssl_summary">Skúste prepnúť, ak nie je možné nadviazať spojenie</string>
   <string name="autoemail_choosepreset">Poskytovateľ e-mailu</string>
   <string name="autoemail_choosepreset_summary">Určite poskytovateľa alebo vyberte manuálne</string>
@@ -345,8 +344,6 @@ polia.
   <string name="change_language_summary">Nie všetky preklady sú úplne dokončené! Na aplikovanie nastavení je nutné reštartovať aplikáciu.</string>
   <string name="coordinate_display_format">Formát zobrazenia súradníc</string>
   <string name="ssl_certificate_validate">Validovať certifikát SSL</string>
-  <string name="use_post_method">Použiť metódu POST</string>
-  <string name="use_post_method_summary">Parametre reťazca pre dopyt sa skonvertujú na parametre tela HTTP POST</string>
   <string name="parameters">Parametre adresy URL</string>
   <string name="ssl_certificate_add_to_keystore">Pridať certifikát do lokálneho úložiska?</string>
   <string name="ssl_certificate_is_valid">Certifikát je platný</string>

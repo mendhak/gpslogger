@@ -101,7 +101,7 @@ public class GpsMainActivity extends AppCompatActivity
 
         loadPresetProperties();
         loadVersionSpecificProperties();
-        setLocale();
+        Systems.setLocale(preferenceHelper.getUserSpecifiedLocale(), getBaseContext(),getResources());
 
         setContentView(R.layout.activity_gps_main);
 
@@ -114,7 +114,7 @@ public class GpsMainActivity extends AppCompatActivity
 
         if(preferenceHelper.shouldStartLoggingOnAppLaunch()){
             LOG.debug("Start logging on app launch");
-            EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
+            EventBus.getDefault().post(new CommandEvents.RequestStartStop(true));
         }
 
 
@@ -175,6 +175,13 @@ public class GpsMainActivity extends AppCompatActivity
         super.onPause();
     }
 
+    protected void onStop() {
+        super.onStop();
+        if (!isFinishing()) {
+            stopAndUnbindServiceIfRequired();
+        }
+    }
+
     @Override
     protected void onDestroy() {
         stopAndUnbindServiceIfRequired();
@@ -218,33 +225,23 @@ public class GpsMainActivity extends AppCompatActivity
                 toggleDrawer();
                 return true;
             }
+
+            removeFragmentsAndActionBar();
+            finish();
         }
 
         return super.onKeyDown(keyCode, event);
     }
 
-
-    private void setLocale() {
-
-        if (!Strings.isNullOrEmpty(preferenceHelper.getUserSpecifiedLocale())) {
-            LOG.debug("Setting language to " + preferenceHelper.getUserSpecifiedLocale());
-
-            String language, country="";
-
-            if(preferenceHelper.getUserSpecifiedLocale().contains("-")){
-                language = preferenceHelper.getUserSpecifiedLocale().split("-")[0];
-                country = preferenceHelper.getUserSpecifiedLocale().split("-")[1];
-            }
-            else {
-                language = preferenceHelper.getUserSpecifiedLocale();
-            }
-
-            Locale locale = new Locale(language, country);
-            Locale.setDefault(locale);
-            getResources().getConfiguration().locale = locale;
-            getBaseContext().getResources().updateConfiguration(getResources().getConfiguration(), getBaseContext().getResources().getDisplayMetrics());
-        }
+    private void removeFragmentsAndActionBar(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.remove(getCurrentFragment());
+        transaction.commit();
+        getSupportActionBar().hide();
     }
+
+
+
 
     private void loadVersionSpecificProperties(){
         PackageInfo packageInfo;
@@ -299,6 +296,27 @@ public class GpsMainActivity extends AppCompatActivity
                             }).show();
                 }
 
+            }
+
+            if(preferenceHelper.getLastVersionSeen() <= 90){
+                if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("log_customurl_post", false)){
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("log_customurl_post").apply();
+                    preferenceHelper.setCustomLoggingHTTPMethod("POST");
+
+                    new MaterialDialog.Builder(this)
+                            .title("Using HTTP POST in Custom URL?")
+                            .negativeText(R.string.cancel)
+                            .positiveText(R.string.log_customurl_title)
+                            .content(Html.fromHtml("If you previously checked the <b>Use POST method</b> checkbox in the <b>'" + getString(R.string.log_customurl_title) + "'</b> screen, you will need to recreate the body yourself. The checkbox has been removed and now you can use custom method, header and body for your Custom URL requests."))
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL);
+
+                                }
+                            }).show();
+
+                }
             }
 
             preferenceHelper.setLastVersionSeen(versionCode);
@@ -884,7 +902,7 @@ public class GpsMainActivity extends AppCompatActivity
                     @Override
                     public void onInput(MaterialDialog materialDialog, CharSequence input) {
                         LOG.info("Annotation entered : " + input.toString());
-                        EventBus.getDefault().postSticky(new CommandEvents.Annotate(input.toString()));
+                        EventBus.getDefault().post(new CommandEvents.Annotate(input.toString()));
                     }
                 })
                 .onNegative(new MaterialDialog.SingleButtonCallback() {

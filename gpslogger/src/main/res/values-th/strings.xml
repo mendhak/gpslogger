@@ -130,7 +130,6 @@
   <string name="autoemail_smtp_category">การตั้งค่าอีเมล์</string>
   <string name="autoemail_username_summary">ชื่อผู้ใช้กับผู้ให้บริการอีเมล์ของคุณ</string>
   <string name="autoemail_password_summary">รหัสผ่านกับผู้ให้บริการอีเมล์ของคุณ</string>
-  <string name="autoemail_ssl">ใช้ SSL?</string>
   <string name="autoemail_ssl_summary">ลองสลับนี้ถ้าคุณไม่สามารถเชื่อมต่อได้</string>
   <string name="autoemail_choosepreset">ผู้ให้บริการอีเมล์</string>
   <string name="autoemail_choosepreset_summary">เลือกผู้ให้บริการหรือกำหนดค่าเอง</string>

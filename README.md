@@ -1,4 +1,4 @@
-GPSLogger [![Build Status](https://travis-ci.org/mendhak/gpslogger.svg?branch=master)](https://travis-ci.org/mendhak/gpslogger) [![Join the chat at https://gitter.im/gpslogger/Lobby](https://badges.gitter.im/gpslogger/Lobby.svg)](https://gitter.im/gpslogger/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+GPSLogger [![Build Status](https://travis-ci.org/mendhak/gpslogger.svg?branch=master)](https://travis-ci.org/mendhak/gpslogger) [![Join the chat at https://gitter.im/gpslogger/Lobby](https://badges.gitter.im/gpslogger/Lobby.svg)](https://gitter.im/gpslogger/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![pgp](assets/pgp.png)](https://keybase.io/mendhak)
 =========
 
 
@@ -78,7 +78,7 @@ This project uses certain Android libraries, you can install them using Google's
       echo y | $HOME/android-sdk/tools/bin/sdkmanager 'tools'
       echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platform-tools'
       echo y | $HOME/android-sdk/tools/bin/sdkmanager 'build-tools;26.0.2'
-      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platforms;android-23'
+      echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platforms;android-27'
       echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;m2repository'
       echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;android;m2repository'
       echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;google_play_services'
@@ -170,6 +170,21 @@ so ensure that the emulator you are using is Android 4.2.2 (API level 17) or gre
 ![AVD](assets/avd.png)
 
 You can also debug directly against your phone - all phones Android 2.2 and above should have this framework installed.
+
+
+### Android Wear emulator
+
+You can use the Android AVD to create a Wear device. Once that's up and running it should appear in the list of `adb devices`
+
+Connect phone to computer by USB cable.
+
+Install the Android Wear application from the Play Store, pair a watch and choose to connect to an emulator.
+
+Forward the TCP port that the phone's looking for
+
+    adb -d forward tcp:5601 tcp:5601
+
+Then deploy `gpsloggerwear` straight to the emulator and `gpslogger-gpslogger` to the phone.
 
 
 Overview

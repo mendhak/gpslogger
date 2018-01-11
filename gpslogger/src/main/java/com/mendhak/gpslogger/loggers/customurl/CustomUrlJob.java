@@ -29,29 +29,24 @@ import com.path.android.jobqueue.Job;
 import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
 import okhttp3.*;
-import okio.Buffer;
+
 import org.slf4j.Logger;
 import java.io.IOException;
-import java.net.URLEncoder;
+import java.util.Map;
 
 
 public class CustomUrlJob extends Job {
 
     private static final Logger LOG = Logs.of(CustomUrlJob.class);
-    private String logUrl;
-    private String basicAuthUser;
-    private String basicAuthPassword;
+
     private UploadEvents.BaseUploadEvent callbackEvent;
-    private Boolean usePost;
+    private CustomUrlRequest urlRequest;
 
-
-    public CustomUrlJob(String logUrl, String basicAuthUser, String basicAuthPassword, UploadEvents.BaseUploadEvent callbackEvent, Boolean usePost ) {
+    public CustomUrlJob(CustomUrlRequest urlRequest, UploadEvents.BaseUploadEvent callbackEvent) {
         super(new Params(1).requireNetwork().persist());
-        this.logUrl = logUrl;
-        this.basicAuthPassword = basicAuthPassword;
-        this.basicAuthUser = basicAuthUser;
+
         this.callbackEvent = callbackEvent;
-        this.usePost = usePost;
+        this.urlRequest = urlRequest;
     }
 
     @Override
@@ -61,38 +56,23 @@ public class CustomUrlJob extends Job {
     @Override
     public void onRun() throws Throwable {
 
-        LOG.debug("Sending to URL: " + logUrl);
+        LOG.info("HTTP Request - " + urlRequest.getLogURL());
 
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
-
-        if(!Strings.isNullOrEmpty(basicAuthUser)){
-            okBuilder.authenticator(new Authenticator() {
-                @Override
-                public Request authenticate(Route route, Response response) throws IOException {
-                    String credential = Credentials.basic(basicAuthUser, basicAuthPassword);
-                    return response.request().newBuilder().header("Authorization", credential).build();
-                }
-            });
-        }
-
         okBuilder.sslSocketFactory(Networks.getSocketFactory(AppSettings.getInstance()));
+        Request.Builder requestBuilder = new Request.Builder().url(urlRequest.getLogURL());
 
-        OkHttpClient client = okBuilder.build();
-
-        Request request;
-
-        if (usePost) {
-
-            String baseUrl = getBaseUrlFromUrl(logUrl);
-
-            RequestBody body = getHttpPostBodyFromUrl(logUrl);
-            request = new Request.Builder().url(baseUrl).post(body).build();
-        }
-        else {
-            request = new Request.Builder().url(logUrl).build();
+        for(Map.Entry<String,String> header : urlRequest.getHttpHeaders().entrySet()){
+            requestBuilder.addHeader(header.getKey(), header.getValue());
         }
 
-        Response response = client.newCall(request).execute();
+        if ( ! urlRequest.getHttpMethod().equalsIgnoreCase("GET")) {
+            RequestBody body = RequestBody.create(null, urlRequest.getHttpBody());
+            requestBuilder = requestBuilder.method(urlRequest.getHttpMethod(),body);
+        }
+
+        Request request = requestBuilder.build();
+        Response response = okBuilder.build().newCall(request).execute();
 
         if (response.isSuccessful()) {
             LOG.debug("Success - response code " + response);
@@ -104,45 +84,6 @@ public class CustomUrlJob extends Job {
         }
 
         response.body().close();
-    }
-
-    private String getBaseUrlFromUrl(String logUrl) {
-
-        String[] urlSplit;
-
-        String baseUrl = "";
-        if (logUrl.contains("?")) {
-            urlSplit = logUrl.split("\\?");
-            if (urlSplit.length == 2) {
-                baseUrl = urlSplit[0];
-            }
-        }
-
-        return baseUrl;
-
-    }
-
-    RequestBody getHttpPostBodyFromUrl(String logUrl) {
-        FormBody.Builder bodyBuilder = new FormBody.Builder();
-        String[] urlSplit;
-        String[] paramSplit;
-
-        if (logUrl.contains("?")) {
-            urlSplit = logUrl.split("\\?");
-            if (urlSplit.length == 2) {
-
-                paramSplit = urlSplit[1].split("\\&");
-                for (int i = 0; i < paramSplit.length; i++) {
-                    if (paramSplit[i].contains("=")) {
-                        String[] oneParamSplit = paramSplit[i].split("=");
-                        if (oneParamSplit.length == 2) {
-                            bodyBuilder.addEncoded(oneParamSplit[0] , oneParamSplit[1]);
-                        }
-                    }
-                }
-            }
-        }
-        return bodyBuilder.build();
     }
 
     @Override

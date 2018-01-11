@@ -126,7 +126,6 @@
   <string name="autoemail_smtp_category">Postavke e-pošte</string>
   <string name="autoemail_username_summary">Lozinka od vašeg pružatelja e-pošte</string>
   <string name="autoemail_password_summary">Lozinka od vašeg pružatelja e-pošte</string>
-  <string name="autoemail_ssl">Koristiti SSL?</string>
   <string name="autoemail_ssl_summary">Pokušajte prebaciti ako se ne može spojiti</string>
   <string name="autoemail_choosepreset">Pružatelj e-pošte</string>
   <string name="autoemail_choosepreset_summary">Odaberite pružatelja usluge ili odaberite ručno</string>

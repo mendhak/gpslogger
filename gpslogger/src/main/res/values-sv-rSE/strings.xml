@@ -93,6 +93,10 @@
   <string name="pref_logging_title">Loggningsdetaljer</string>
   <string name="log_gpx_title">Logga till GPX</string>
   <string name="log_kml_title">Logga till KML</string>
+  <string name="log_plain_text_title">Logga till CSV</string>
+  <string name="log_plain_text_summary">Logga platser till CSV fil</string>
+  <string name="log_json_title">Logga till GeoJSON</string>
+  <string name="log_json_summary">Logga platser till GeoJSON fil</string>
   <string name="new_file_creation_title">Ny fil skapas</string>
   <string name="new_file_creation_summary">Om du vill skapa en ny fil en gång per dag eller varje gång du startar.</string>
   <string name="new_file_creation_onceaday">En gång om dagen</string>
@@ -126,7 +130,6 @@
   <string name="autoemail_smtp_category">Epost-inställningar</string>
   <string name="autoemail_username_summary">Användarnamn hos din epost-leverantör</string>
   <string name="autoemail_password_summary">Lösenord hos din epost-leverantör</string>
-  <string name="autoemail_ssl">Använd SSL?</string>
   <string name="autoemail_ssl_summary">Försök med detta om du inte kan ansluta</string>
   <string name="autoemail_choosepreset">Epost-leverantör</string>
   <string name="autoemail_choosepreset_summary">Välj en leverantör eller välj manuellt</string>
@@ -269,6 +272,7 @@
   <string name="pref_logging_file_no_permissions">Mappen är inte skrivbar av GPSLogger. Vänligen välj en annan mapp att skriva till.</string>
   <string name="pref_gpsvisualizer">GPS logstatistik och grafer</string>
   <string name="new_file_custom_each_time_title">Fråga efter filnamn vid varje loggnings-start</string>
+  <string name="donate_app">Donera (app)</string>
   <string name="donate_bitcoin">Bitcoin</string>
   <string name="tip_coffee">Köp mig en kaffe</string>
   <string name="no_network_message">Inget nätverk finns tillgängligt</string>
@@ -283,7 +287,21 @@
   <string name="activity_tilting">Vippning</string>
   <string name="activity_walking">Går</string>
   <string name="activity_unknown">Okänd</string>
+  <string name="logview_showlocationsonly">Enbart platser</string>
+  <string name="logview_autoscroll">Auto-scroll</string>
+  <string name="profile_create_new">Skapa ny profil</string>
+  <string name="profile_delete">Radera profil?</string>
+  <string name="profile_default">Standardprofil</string>
   <string name="profile_add_new">Lägg till profil</string>
+  <string name="gpslogger_permissions_rationale_title">Tillstånd krävs</string>
+  <string name="privacy_policy">Integritetspolicy</string>
+  <string name="change_language_title">Ändra språk</string>
+  <string name="ssl_certificate_validate">Validera SSL certifikat</string>
   <string name="parameters">Parametrar</string>
   <string name="ssl_certificate_is_valid">Certifikatet är giltigt</string>
+  <string name="sftp_setup_title">SFTP</string>
+  <string name="sftp_private_key_path">Privat nyckel</string>
+  <string name="txt_timestamp_epoch">Tidsstämpel (epoch)</string>
+  <string name="txt_starttimestamp_epoch">Starta tidsstämpel (epoch)</string>
+  <string name="txt_battery">Batteri</string>
 </resources>

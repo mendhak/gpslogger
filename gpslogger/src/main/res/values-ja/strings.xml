@@ -131,7 +131,6 @@
   <string name="autoemail_smtp_category">メール設定</string>
   <string name="autoemail_username_summary">メールブロバイダーのユーザー名</string>
   <string name="autoemail_password_summary">メールブロバイダーのパスワード</string>
-  <string name="autoemail_ssl">SSLを使用？</string>
   <string name="autoemail_ssl_summary">接続できない場合は、チェックを入れて（外して）ください。</string>
   <string name="autoemail_choosepreset">メール プロバイダー</string>
   <string name="autoemail_choosepreset_summary">プロバイダーを選択するか手動で設定してください。</string>
@@ -319,7 +318,6 @@
   <string name="change_language_summary">全ての言語が完全に翻訳されているとは限りません！この設定を有効にするためには、アプリをリスタートする必要があります。</string>
   <string name="coordinate_display_format">座標の表示形式</string>
   <string name="ssl_certificate_validate">SSL証明書の認証</string>
-  <string name="use_post_method">POST メソッドを使用</string>
   <string name="parameters">パラメタ</string>
   <string name="ssl_certificate_add_to_keystore">ローカルキーストアに証明書を保存しますか？</string>
   <string name="ssl_certificate_is_valid">証明書は有効です。</string>

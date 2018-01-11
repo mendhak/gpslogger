@@ -133,7 +133,6 @@
   <string name="autoemail_smtp_category">Nastavení e-mailu</string>
   <string name="autoemail_username_summary">Uživatelské jméno s poskytovatelem e-mailu</string>
   <string name="autoemail_password_summary">Heslo s poskytovatelem e-mailu</string>
-  <string name="autoemail_ssl">Použít SSL?</string>
   <string name="autoemail_ssl_summary">Zkuste přepnout, pokud se nemůžete připojit</string>
   <string name="autoemail_choosepreset">Poskytovatel emailu</string>
   <string name="autoemail_choosepreset_summary">Vyberte poskytovatele nebo zvolte ručně</string>
@@ -319,7 +318,6 @@
   <string name="change_language_title">Změnit jazyk</string>
   <string name="change_language_summary">Ne všechny jazyky jsou plně přeložené! Změna nastavení se projeví až po restartu aplikace.</string>
   <string name="ssl_certificate_validate">Ověřit SSL certifikát</string>
-  <string name="use_post_method">Použít metodu POST</string>
   <string name="parameters">Parametry</string>
   <string name="ssl_certificate_add_to_keystore">Přidat certifikát do místního úložiště klíčů?</string>
   <string name="ssl_certificate_is_valid">Certifikát je platný</string>

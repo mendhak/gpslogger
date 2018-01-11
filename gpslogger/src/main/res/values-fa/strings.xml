@@ -116,7 +116,6 @@
   <string name="retry_time_title">مدت زمان لازم برای رسیدن به دقت</string>
   <string name="display_imperial_title">نمایش واحدها برحسب Imperial</string>
   <string name="autoemail_title">رایانامه</string>
-  <string name="autoemail_ssl">استفاده از SSL؟</string>
   <string name="autoemail_testresult_success">رایانامه فرستاده شد</string>
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_tags">برچسب‌ها</string>

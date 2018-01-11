@@ -98,6 +98,8 @@
   <string name="log_kml_summary">Zapisuj pozycje do pliku KML v2.2</string>
   <string name="log_plain_text_title">Konwertuj Log do CSV</string>
   <string name="log_plain_text_summary">Zapisuj pozycje do pliku CSV</string>
+  <string name="log_json_title">Rejstruj do GeoJSON</string>
+  <string name="log_json_summary">Lokalizacja plików rejestru GeoJSON</string>
   <string name="new_file_creation_title">Tworzenie nowego pliku</string>
   <string name="new_file_creation_summary">Tworzenie pliku raz na dzień lub za każdym uruchomieniem programu.</string>
   <string name="new_file_creation_onceaday">Raz na dzień</string>
@@ -115,7 +117,10 @@
   <string name="time_before_logging_hint">Wprowadź czas (max 9999)</string>
   <string name="keep_fix_summary">Uważaj, zużycie baterii drastycznie wzrośnie. Używaj wyłącznie dla większej precyzji przy niskich częstotliwościach.    </string>
   <string name="keep_fix_title">Utrzymuj połączenie z GPS po zaprzestaniu logowania</string>
+  <string name="retry_time_title">Czas trwania, aby dopasować dokładność</string>
+  <string name="retry_time_summary">Po uzyskaniu wstępnej poprawki, nadal będziemy próbować, uzyskać dokładny punkt dopasowania ustawienia filtra dokładności.</string>
   <string name="display_imperial_title">Wyświetl anglosaskie jednostki</string>
+  <string name="display_imperial_summary">Wyświetlaj stopy, mile i kufle, żadnych z tych nowomodnych metrycznych rzeczy. (Preferencje nadal muszą być w systemie metrycznym)</string>
   <string name="enabledisablegps_title">Włącz/Wyłącz GPS</string>
   <string name="enabledisablegps_summary">Przejście do ustawień telefonu w celu zarządzania dostawcami.</string>
   <string name="startonbootup_title">Uruchom na starcie</string>
@@ -130,7 +135,6 @@
   <string name="autoemail_smtp_category">Ustawienia poczty</string>
   <string name="autoemail_username_summary">Nazwa użytkownika wraz z dostawcą</string>
   <string name="autoemail_password_summary">Hasło dla nazwy użytkowania</string>
-  <string name="autoemail_ssl">Użycie SSL</string>
   <string name="autoemail_ssl_summary">Należy włączyć w przypadku problemów z połączeniem.</string>
   <string name="autoemail_choosepreset">Dostawca poczty</string>
   <string name="autoemail_choosepreset_summary">Wybór lub wprowadzenie ręczne</string>
@@ -173,11 +177,13 @@
   <string name="dropbox_couldnotauthorize">Nie można uzyskać autoryzacji Dropboxa, proszę spróbować ponownie.</string>
   <string name="owncloud_setup_title">ownCloud</string>
   <string name="owncloud_server_summary">Bazowy URL ownCloud</string>
+  <string name="owncloud_directory_summary">Folder do użycia na serwerze ownCloud, upewnij się, że istnieje, lub przekazywanie nie powiedzie się.</string>
   <string name="owncloud_test_summary">Wyślij plik testowy na serwer ownCloud</string>
   <string name="owncloud_testing">Wysyłam plik na serwer ownCloud</string>
   <string name="menu_upload">Wysyłanie</string>
   <string name="autoemail_from">Adres nadawcy</string>
   <string name="autoemail_from_summary">Niektórzy dostawcy poczty wymagają adresu nadawcy. Należy używać tej opcji tylko, gdy jest to wymagane.</string>
+  <string name="gdocs_clearauthorization_summary">Zapomina lokalnych ustawień Dysku Google. Aby permanentnie odebrać dostęp, przejdź do ustawień Konta Google</string>
   <string name="gdocs_setup_title">Dysk Google</string>
   <string name="gdocs_test_summary">Wyślij plik testowy na Dysku Google</string>
   <string name="gdocs_test_title">Test wysyłania</string>
@@ -188,6 +194,9 @@
   <string name="autosend_frequency_summary">Jak często wysyłać pliki dziennika (w minutach). Ustaw 0, aby wyłączyć.</string>
   <string name="autosend_frequency">Jak często?</string>
   <string name="autosend_sendzip_title">Wyślij plik ZIP</string>
+  <string name="autosend_sendzip_summary">Wysyłanie plików zip, tam gdzie stosowane. Wyłącz wysyłanie pojedynczych plików, lub jeśli opcja zip nie         
+        działa dla ciebie
+    </string>
   <string name="autosend_targets_category">Automatyczne wysyłanie pozycji</string>
   <string name="menu_autosend_now">Automatycznie wyślij teraz</string>
   <string name="autosend_sending">Wysyłam automatycznie</string>
@@ -233,9 +242,11 @@
   <string name="txt_annotation">Adnotacja:</string>
   <string name="txt_time_isoformat">Czas UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Dostawca:</string>
+  <string name="annotation_requires_logging">Adnotacje wymagają logowania do CSV/GPX/KML/Niestandardowego URL/GeoJSON</string>
   <string name="gpslogger_folder_title">Zapisz w folderze</string>
   <string name="gpslogger_folder_summary">Gdzie zapisywać pliki logów; domyślnie do /sdcard/GPSLogger</string>
   <string name="autoftp_directory">Folder</string>
+  <string name="new_file_custom_message">Można użyć %SER for device serial, %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER dla tej wersji</string>
   <string name="new_file_prefix_serial_title">Dodaj numer seryjny urządzenia przed nazwą pliku</string>
   <string name="new_file_prefix_serial_summary">To numer seryjny, który został odczytany z Twojego telefonu </string>
   <string name="txt_travel_duration">Czas trwania:</string>
@@ -247,7 +258,9 @@
   <string name="bigview_taptotoggle">Dotknij aby uruchomić/zatrzymać logowanie</string>
   <string name="summary_autosendtargets">Wyślij do:</string>
   <string name="accuracy_filter_title">Filtr dokładności</string>
+  <string name="accuracy_filter_summary">Minimalna dokładność wymagana, aby punkt został zapisany. Punkty, które nie spełniają tego wymogu zostaną odrzucone.</string>
   <string name="distance_filter_title">Filtr odległości</string>
+  <string name="distance_filter_summary">Minimalna odległość wymagana pomiędzy bieżącym i poprzednim punktem, aby punkt został zapisany. Inaczej punkt zostanie odrzucony.</string>
   <string name="points">punkty</string>
   <string name="txt_number_of_points">Liczba punktów</string>
   <string name="save">Zapisz</string>
@@ -257,16 +270,20 @@
   <string name="txt_latitude_short">Dług.</string>
   <string name="txt_longitude_short">Szer.</string>
   <string name="log_nmea_title">Zapisz do pliku NMEA</string>
+  <string name="log_nmea_summary">Tworzy czysty plik NMEA podczas próby uzyskania rozwiązania. Ten plik rośnie bardzo szybko, Działa tylko, gdy GPS jest używany.</string>
   <string name="autoopengts_accountname">Nazwa konta</string>
   <string name="listeners_gps">GPS</string>
   <string name="listeners_cell">Sieć</string>
   <string name="listeners_passive">Pasywne</string>
+  <string name="listeners_summary">Którego dostawcy lokalizacji używać, gdy są dostępne: GPS dla satelit, Sieci dla masztu sieci komórkowej/wifi, Pasywny jest specjalnym dostawcą który nasłuchuje lokalizacji zgłoszonych z innych aplikacji.</string>
   <string name="listeners_title">Dostawcy usług lokalizacji</string>
   <string name="autosend_frequency_hint">Liczba minut</string>
   <string name="pref_logging_file_no_permissions">Ten folder nie jest zapisywany przez GPSLogger. Wybierz inny folder do zapisu.</string>
   <string name="pref_gpsvisualizer">Wizualizuj statystyki logowania</string>
   <string name="new_file_custom_each_time_title">Pytaj o nazwę pliku przy każdym uruchomieniu</string>
   <string name="new_file_custom_each_time_summary">Pytaj o nazwę pliku za każdym razem kiedy rozpoczyna się rejestracja</string>
+  <string name="new_file_custom_keep_changing_title">Zezwalaj na niestandardowe nazwy plików, aby zmieniać je dynamicznie</string>
+  <string name="new_file_custom_keep_changing_summary">Jako że wartości niestandardowej nazwy pliku się zmieniają, zezwól na zmianę nazwy bieżącego pliku. Na przykład, jeśli %HOUR jest użyte, nowy plik zostanie utworzony co godzinę. Odznacz pole, jeżeli chcesz, aby pozostał statyczny.</string>
   <string name="donate_app">Przekaż darowiznę (aplikacja)</string>
   <string name="donate_bitcoin">Bitcoin</string>
   <string name="tip_coffee">Kup mi kawę</string>
@@ -275,8 +292,10 @@
   <string name="restart_required">Musisz uruchomić ponownie GPSLogger aby użyć tych ustawień</string>
   <string name="pref_performance_activityrecognition">Rozpoznawanie aktywności</string>
   <string name="activityrecognition_dont_log_if_still">Nie loguj, jeśli się nie ruszam</string>
+  <string name="activityrecognition_dont_log_if_still_summary">Jeżeli nie istnieje ruch akcelorometru od ostatniego punktu, aktywne rejestrowanie zostanie zatrzymane, do momentu w którym ponownie się przemieścisz. Pasywne punkty nadal mogą być rejestrowane.</string>
   <string name="txt_activity">Aktywność:</string>
   <string name="activity_in_vehicle">W pojeździe</string>
+  <string name="activity_confidence">Dokładność</string>
   <string name="activity_still">W miejscu</string>
   <string name="activity_on_bicycle">Na rowerze</string>
   <string name="activity_on_foot">Pieszo</string>
@@ -284,8 +303,13 @@
   <string name="activity_tilting">Obrót</string>
   <string name="activity_walking">Spacer</string>
   <string name="activity_unknown">Nieznana</string>
+  <string name="altitude_subtractgeoidheight_summary">Używa oznaczonego poziomu morza (MSL) zamiast wysokości WGS84 poprzez odjęcie wysokości geoid od wysokości GPS. Dotyczy tylko punktów satelitarnych GPS, nie sieci lub NMEA.</string>
   <string name="altitude_subtractgeoidheight_title">Użyj MSL zamiast WGS84</string>
+  <string name="altitude_subtractoffset_title">Odjąć przesunięcie wysokości</string>
+  <string name="altitude_subtractoffset_summary">Wartość w metrach należy odjąć od wysokości GPS.</string>
   <string name="upload_failure">Nie udało się przesłać pliku</string>
+  <string name="inaccurate_point_discarded">Niedokładny punkt odrzucony</string>
+  <string name="not_enough_distance_traveled">Tylko %s przebytych. Punkt odrzucony.</string>
   <string name="autosend_wifionly_title">Wysyłaj wyłącznie przez Wi-Fi</string>
   <string name="logview_showlocationsonly">Tylko lokalizacje</string>
   <string name="logview_autoscroll">Automatyczne przewijanie</string>
@@ -295,10 +319,25 @@
   <string name="profile_default">Domyślny profil</string>
   <string name="profile_add_new">Dodaj profil</string>
   <string name="gpslogger_permissions_rationale_title">Wymagane uprawnienia</string>
+  <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ta aplikacja wymaga różnych uprawnień, aby funkcjonować prawidłowo.<br /><b>Lokalizacja urządzenia</b> - To uprawnienie zezwala na odczyt danych z masztów telefonicznych i sprzętu GPS urządzenia.<br /><b>Zdjęcia, multimedia, pliki</b> - To uprawnienie zezwala na zapisywanie plików rejestru na dysk, oraz na odczyt, przesyłanie lub udostępnianie. Aplikacja nie będzie miała dostępu do twoich zdjęć i multimediów.<br /><b>Dostęp do twoich kontaktów</b> - Jeśli używana jest funkcja Dysku Google, to uprawnienie zezwala na wyświetlanie listy kont Google zarejestrowanych na tym urządzeniu. Ta aplikacja nie będzie miała dostępu do twoich kontaktów.<br /><br/>  ]]></string>
+  <string name="gpslogger_permissions_permanently_denied">Jedno, lub więcej uprawnień wymaganych przez aplikacje, zostało permanentnie odrzucone. Należy przejść do ekranu ustawień aplikacji, aby przyznać lub zresetować te uprawnienia.</string>
   <string name="privacy_policy">Polityka prywatności</string>
+  <string name="debuglog_attach_to_email">Dołącz do wiadomości e-mail rejestr debugowania</string>
+  <string name="debuglog_attach_to_email_summary">Dołącza rejestr debugowania wraz z niektórymi informacjami diagnostycznymi do wiadomości email</string>
   <string name="change_language_title">Zmień Język</string>
+  <string name="change_language_summary">Not all languages are fully translated! You must restart the app for the settings to take effect.</string>
+  <string name="coordinate_display_format">Format wyświetlania współrzędnych</string>
+  <string name="ssl_certificate_validate">Sprawdzanie poprawności certyfikatu SSL</string>
   <string name="parameters">Parametry</string>
   <string name="ssl_certificate_add_to_keystore">Dodać ten certyfikat do magazynu certyfikatów?</string>
   <string name="ssl_certificate_is_valid">Certyfikat poprawny</string>
   <string name="hide_notification_from_status_bar">Ukryj powiadomienia z paska stanu</string>
+  <string name="sftp_setup_title">SFTP</string>
+  <string name="sftp_private_key_path">Klucz prywatny</string>
+  <string name="sftp_private_key_passphrase">Hasło klucza prywatnego</string>
+  <string name="sftp_validate_test_upload">Sprawdź poprawność klucza hosta i prześlij</string>
+  <string name="sftp_validate_accept_host_key">Zaakceptować ten klucz hosta?</string>
+  <string name="txt_timestamp_epoch">Sygntura czasowa (epoch)</string>
+  <string name="txt_starttimestamp_epoch">Sygnatura czasowa rozpoczęcia (epoch)</string>
+  <string name="txt_battery">Bateria</string>
 </resources>

@@ -105,7 +105,6 @@
   <string name="autoemail_smtp_category">Tetapan e-mel</string>
   <string name="autoemail_username_summary">Nama pengguna dengan pembekal e-mel anda</string>
   <string name="autoemail_password_summary">Laluan dengan pembekal e-mel anda</string>
-  <string name="autoemail_ssl">Gunakan SSL?</string>
   <string name="autoemail_ssl_summary">Aktifkan ini jika anda gagal membuat sambungan</string>
   <string name="autoemail_choosepreset">Penyedia emel</string>
   <string name="autoemail_choosepreset_summary">Pilih penyedia atau buat secara manual</string>

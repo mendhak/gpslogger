@@ -26,16 +26,13 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.*;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.Html;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
+import com.google.android.gms.location.ActivityRecognitionClient;
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.common.*;
@@ -81,7 +78,6 @@ public class GpsLoggingService extends Service  {
     private Handler handler = new Handler();
 
     PendingIntent activityRecognitionPendingIntent;
-    GoogleApiClient googleApiClient;
     // ---------------------------------------------------
 
 
@@ -99,52 +95,19 @@ public class GpsLoggingService extends Service  {
     }
 
     private void requestActivityRecognitionUpdates() {
-        GoogleApiClient.Builder builder = new GoogleApiClient.Builder(getApplicationContext())
-                .addApi(ActivityRecognition.API)
-                .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
 
-                    @Override
-                    public void onConnectionSuspended(int arg) {
-                    }
-
-                    @Override
-                    public void onConnected(Bundle arg0) {
-                        try {
-                            LOG.debug("Requesting activity recognition updates");
-                            Intent intent = new Intent(getApplicationContext(), GpsLoggingService.class);
-                            activityRecognitionPendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                            ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(googleApiClient, preferenceHelper.getMinimumLoggingInterval() * 1000, activityRecognitionPendingIntent);
-                        }
-                        catch(Throwable t){
-                            LOG.warn(SessionLogcatAppender.MARKER_INTERNAL, "Can't connect to activity recognition service", t);
-                        }
-
-                    }
-
-                })
-                .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
-                    @Override
-                    public void onConnectionFailed(ConnectionResult arg0) {
-
-                    }
-                });
-
-        googleApiClient = builder.build();
-        googleApiClient.connect();
+        LOG.debug("Requesting activity recognition updates");
+        Intent intent = new Intent(getApplicationContext(), GpsLoggingService.class);
+        activityRecognitionPendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        ActivityRecognitionClient arClient = ActivityRecognition.getClient(getApplicationContext());
+        arClient.requestActivityUpdates(preferenceHelper.getMinimumLoggingInterval() * 1000, activityRecognitionPendingIntent);
     }
 
     private void stopActivityRecognitionUpdates(){
-        try{
-            LOG.debug("Stopping activity recognition updates");
-            if(googleApiClient != null && googleApiClient.isConnected()){
-                ActivityRecognition.ActivityRecognitionApi.removeActivityUpdates(googleApiClient, activityRecognitionPendingIntent);
-                googleApiClient.disconnect();
-            }
-        }
-        catch(Throwable t){
-            LOG.warn(SessionLogcatAppender.MARKER_INTERNAL, "Tried to stop activity recognition updates", t);
-        }
 
+        LOG.debug("Stopping activity recognition updates");
+        ActivityRecognitionClient arClient = ActivityRecognition.getClient(getApplicationContext());
+        arClient.removeActivityUpdates(activityRecognitionPendingIntent);
     }
 
     private void registerEventBus() {
@@ -192,27 +155,34 @@ public class GpsLoggingService extends Service  {
             Bundle bundle = intent.getExtras();
 
             if (bundle != null) {
+
+
+                if(!Systems.locationPermissionsGranted(this)){
+                    LOG.error("User has not granted permission to access location services. Will not continue!");
+                    return;
+                }
+
                 boolean needToStartGpsManager = false;
 
                 if (bundle.getBoolean(IntentConstants.IMMEDIATE_START)) {
                     LOG.info("Intent received - Start Logging Now");
-                    EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
+                    EventBus.getDefault().post(new CommandEvents.RequestStartStop(true));
                 }
 
                 if (bundle.getBoolean(IntentConstants.IMMEDIATE_STOP)) {
                     LOG.info("Intent received - Stop logging now");
-                    EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(false));
+                    EventBus.getDefault().post(new CommandEvents.RequestStartStop(false));
                 }
 
                 if (bundle.getBoolean(IntentConstants.GET_STATUS)) {
                     LOG.info("Intent received - Sending Status by broadcast");
-                    EventBus.getDefault().postSticky(new CommandEvents.GetStatus());
+                    EventBus.getDefault().post(new CommandEvents.GetStatus());
                 }
 
 
                 if (bundle.getBoolean(IntentConstants.AUTOSEND_NOW)) {
                     LOG.info("Intent received - Send Email Now");
-                    EventBus.getDefault().postSticky(new CommandEvents.AutoSend(null));
+                    EventBus.getDefault().post(new CommandEvents.AutoSend(null));
                 }
 
                 if (bundle.getBoolean(IntentConstants.GET_NEXT_POINT)) {
@@ -1035,7 +1005,11 @@ public class GpsLoggingService extends Service  {
 
     @EventBusHook
     public void onEvent(CommandEvents.GetStatus getStatus){
-        notifyStatus(session.isStarted());
+        CommandEvents.GetStatus statusEvent = EventBus.getDefault().removeStickyEvent(CommandEvents.GetStatus.class);
+        if(statusEvent != null){
+            notifyStatus(session.isStarted());
+        }
+
     }
 
     @EventBusHook
