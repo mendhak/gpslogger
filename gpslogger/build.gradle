@@ -79,7 +79,7 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             useProguard true
-            debuggable true
+            debuggable false
         }
     }
 
