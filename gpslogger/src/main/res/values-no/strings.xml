@@ -119,7 +119,6 @@
   <string name="autoemail_smtp_category">Email Innstillinger</string>
   <string name="autoemail_username_summary">Brukernavn for din e-post</string>
   <string name="autoemail_password_summary">Passord for din e-post</string>
-  <string name="autoemail_ssl">Bruke SSL?</string>
   <string name="autoemail_ssl_summary">Skru av denne hvis tilkobling mislykkes</string>
   <string name="autoemail_choosepreset">E-postleverandøren</string>
   <string name="autoemail_choosepreset_summary">Velg en leverandør eller velg manuellt</string>

@@ -138,7 +138,6 @@ præcision ved lavere frekvenser.    </string>
   <string name="autoemail_smtp_category">E-mail-indstillinger</string>
   <string name="autoemail_username_summary">Brugernavn hos din e-mail-udbyder</string>
   <string name="autoemail_password_summary">Adgangskode til din e-mail-udbyder</string>
-  <string name="autoemail_ssl">Benyt SSL?</string>
   <string name="autoemail_ssl_summary">Prøv at skifte dette, hvis du ikke kan oprette forbindelse</string>
   <string name="autoemail_choosepreset">E-mail-udbyder</string>
   <string name="autoemail_choosepreset_summary">Vælg en udbyder eller angiv manuelt</string>
@@ -336,8 +335,6 @@ præcision ved lavere frekvenser.    </string>
   <string name="change_language_summary">Ikke alle sprog er fuldt ud oversat! Du skal genstarte app\'en for at effektuere indstillingerne.</string>
   <string name="coordinate_display_format">Koordinaters visningsformat</string>
   <string name="ssl_certificate_validate">Validere SSL-certifikat</string>
-  <string name="use_post_method">Benyt POST-metode</string>
-  <string name="use_post_method_summary">QueryString-parametre konverteres til HTTP POST-indholdsparametre</string>
   <string name="parameters">Parametre</string>
   <string name="ssl_certificate_add_to_keystore">Føj dette certifikat til lokalt nøglelager?</string>
   <string name="ssl_certificate_is_valid">Certifikatet er gyldigt</string>

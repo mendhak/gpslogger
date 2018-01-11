@@ -133,7 +133,6 @@
   <string name="autoemail_smtp_category">Pengaturan email</string>
   <string name="autoemail_username_summary">Nama pengguna dengan penyedia email Anda</string>
   <string name="autoemail_password_summary">Password dengan penyedia email Anda</string>
-  <string name="autoemail_ssl">Menggunakan SSL?</string>
   <string name="autoemail_ssl_summary">Coba toggling ini jika Anda tidak dapat terhubung</string>
   <string name="autoemail_choosepreset">Penyedia email</string>
   <string name="autoemail_choosepreset_summary">Memilih penyedia atau pilih manual</string>
@@ -323,8 +322,6 @@
   <string name="change_language_summary">Tidak semua bahasa sepenuhnya diterjemahkan! Anda harus me-restart applikasi agar pengaturan diterapkan.</string>
   <string name="coordinate_display_format">Koordinat menampilkan format</string>
   <string name="ssl_certificate_validate">Memvalidasi sertifikat SSL</string>
-  <string name="use_post_method">Menggunakan metode POST</string>
-  <string name="use_post_method_summary">Querystring parameters are converted to HTTP POST body parameters</string>
   <string name="parameters">Parameter</string>
   <string name="ssl_certificate_add_to_keystore">Menambahkan sertifikat ini keystore lokal?</string>
   <string name="ssl_certificate_is_valid">Sertifikat berlaku</string>

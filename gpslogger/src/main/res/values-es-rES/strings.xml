@@ -134,7 +134,6 @@
   <string name="autoemail_smtp_category">﻿Ajustes de correo electrónico</string>
   <string name="autoemail_username_summary">Usuario del proveedor de correo</string>
   <string name="autoemail_password_summary">Contraseña del proveedor de correo</string>
-  <string name="autoemail_ssl">¿Utilizar SSL?</string>
   <string name="autoemail_ssl_summary">Prueba ambas opciones si no puedes conectarte</string>
   <string name="autoemail_choosepreset">Proveedor de correo</string>
   <string name="autoemail_choosepreset_summary">Elige un proveedor o prueba el ajuste manual</string>
@@ -326,8 +325,6 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
   <string name="change_language_summary">No todos los idiomas estàn traducidos por completo! Debes reiniciar la aplicación para que esta configuración funcione.</string>
   <string name="coordinate_display_format">Formato de visualización de coordenadas</string>
   <string name="ssl_certificate_validate">Validar el certificado SSL</string>
-  <string name="use_post_method">Utilizar el método POST</string>
-  <string name="use_post_method_summary">Parámetros QueryString son convertidos en parámetros de cuerpo HTTP POST</string>
   <string name="parameters">Parámetros</string>
   <string name="ssl_certificate_add_to_keystore">¿Agregar certificado al almacén de claves local?</string>
   <string name="ssl_certificate_is_valid">El certificado es válido</string>

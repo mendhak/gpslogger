@@ -307,7 +307,7 @@ public class GpsMainActivity extends AppCompatActivity
                             .title("Using HTTP POST in Custom URL?")
                             .negativeText(R.string.cancel)
                             .positiveText(R.string.log_customurl_title)
-                            .content(Html.fromHtml("If you previously checked the <b>" + getString(R.string.use_post_method) + "</b> checkbox in the <b>'" + getString(R.string.log_customurl_title) + "'</b> screen, you will need to recreate the body yourself. The checkbox has been removed and now you can use custom method, header and body for your Custom URL requests."))
+                            .content(Html.fromHtml("If you previously checked the <b>Use POST method</b> checkbox in the <b>'" + getString(R.string.log_customurl_title) + "'</b> screen, you will need to recreate the body yourself. The checkbox has been removed and now you can use custom method, header and body for your Custom URL requests."))
                             .onPositive(new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {

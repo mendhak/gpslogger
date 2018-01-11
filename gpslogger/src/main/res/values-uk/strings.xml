@@ -131,7 +131,6 @@
   <string name="autoemail_smtp_category">Параметри електронної пошти</string>
   <string name="autoemail_username_summary">Ім’я користувача для вашого постачальника послуг електронної пошти</string>
   <string name="autoemail_password_summary">Пароль вашого постачальника послуг електронної пошти</string>
-  <string name="autoemail_ssl">Використовувати SSL?</string>
   <string name="autoemail_ssl_summary">Спробуйте перемикнути це, якщо не вдається підключитися</string>
   <string name="autoemail_choosepreset">Постачальник пошти</string>
   <string name="autoemail_choosepreset_summary">Виберіть поштовий сервіс або введіть вручну</string>

@@ -137,7 +137,6 @@
   <string name="autoemail_smtp_category">Mag opsyon para sa Email</string>
   <string name="autoemail_username_summary">Ang iyong username sa tagapagtustos ng Email</string>
   <string name="autoemail_password_summary">Ang iyong password sa tagapagtustos ng Email</string>
-  <string name="autoemail_ssl">Gagamit ka ba ng SSL?</string>
   <string name="autoemail_ssl_summary">Subokang bagohin ang opsyon dito kung sakaling hindi maka-konek</string>
   <string name="autoemail_choosepreset">Tagapagtustos ng Email</string>
   <string name="autoemail_choosepreset_summary">Pumili ng tagapagtustos o piliing magbigay ng sarili</string>
@@ -310,7 +309,6 @@
   <string name="change_language_summary">Hindi lahat ng wika ky sinalinan! Kaylangan muling i-set ang app sa settings para sa gumana.</string>
   <string name="coordinate_display_format">Ihayag ang format ng koordineyt</string>
   <string name="ssl_certificate_validate">Pagpapatibay sa SSL Certificate</string>
-  <string name="use_post_method">Gamitin ang POST method</string>
   <string name="parameters">Sadyansukat</string>
   <string name="ssl_certificate_add_to_keystore">Idagdag itong certificate sa lokal na keystore?</string>
   <string name="ssl_certificate_is_valid">Ang certificate na ito ay tunay</string>

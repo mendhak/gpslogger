@@ -111,7 +111,6 @@
   <string name="autoemail_smtp_category">Nastavitve e-pošte</string>
   <string name="autoemail_username_summary">Uporabniško ime pri ponudniku e-pošte</string>
   <string name="autoemail_password_summary">Geslo pri ponudniku e-pošte</string>
-  <string name="autoemail_ssl">Uporabi SSL?</string>
   <string name="autoemail_smtp_testemail">Test e-pošte</string>
   <string name="emailprovider_manual">Priročnik</string>
   <string name="dropbox_setup_title">Dropbox</string>

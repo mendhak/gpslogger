@@ -91,7 +91,7 @@
   <string name="settings_accuracy_in_meters">Genauigkeit in Metern</string>
   <string name="settings_enter_meters">Eingabe in Metern (max. 9999)</string>
   <!-- Settings -->
-  <string name="pref_logging_title">Logging Details</string>
+  <string name="pref_logging_title">Protokollierungsdetails</string>
   <string name="log_gpx_title">Logge zu GPX</string>
   <string name="log_gpx_summary">Erstellt GPS-Track in einer GPX v1.0-Datei</string>
   <string name="log_kml_title">Logge zu KML</string>
@@ -133,7 +133,7 @@
   <string name="autoemail_smtp_category">E-Mail-Einstellungen</string>
   <string name="autoemail_username_summary">Benutzername bei deinem e-Mail-Anbieter</string>
   <string name="autoemail_password_summary">Passwort bei deinem e-Mail-Anbieter</string>
-  <string name="autoemail_ssl">SSL verwenden?</string>
+  <string name="autoemail_ssl">SSL einschließen</string>
   <string name="autoemail_ssl_summary">Versuche das zu loggen, wenn du dich nicht verbinden kannst</string>
   <string name="autoemail_choosepreset">Mail Provider</string>
   <string name="autoemail_choosepreset_summary">Wähle einen Anbieter oder wähle manuell</string>
@@ -323,8 +323,6 @@
   <string name="change_language_summary">Zum Übernehmen der Einstellungen muss die App neu gestartet werden.</string>
   <string name="coordinate_display_format">Koordinaten-Anzeigeformat</string>
   <string name="ssl_certificate_validate">SSL Zertifikat überprüfen</string>
-  <string name="use_post_method">Nutze POST-Methode</string>
-  <string name="use_post_method_summary">Querystring-Parameter werden zu HTTP POST body-Parametern konvertiert</string>
   <string name="parameters">Parameter</string>
   <string name="ssl_certificate_add_to_keystore">Soll dieses Zertifikat in den lokalen Speicher hinzugefügt werden?</string>
   <string name="ssl_certificate_is_valid">Das Zertifikat ist gültig</string>
@@ -337,4 +335,7 @@
   <string name="txt_timestamp_epoch">Zeitstempel (Epoch)</string>
   <string name="txt_starttimestamp_epoch">Start-Zeitstempel (Epoch)</string>
   <string name="txt_battery">Batterie</string>
+  <string name="customurl_http_body">HTTP-Body</string>
+  <string name="customurl_http_headers">HTTP-Kopfzeilen</string>
+  <string name="customurl_http_method">HTTP-Methode</string>
 </resources>

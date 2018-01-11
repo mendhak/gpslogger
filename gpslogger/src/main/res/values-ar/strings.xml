@@ -98,6 +98,7 @@
   <string name="log_kml_summary">سجل المواقع في ملف KML v2.2</string>
   <string name="log_plain_text_title">دخول إلى CSV</string>
   <string name="log_plain_text_summary">سجل المواقع في ملف CSV</string>
+  <string name="log_json_title">R</string>
   <string name="new_file_creation_title">إنشاء ملف جديد</string>
   <string name="new_file_creation_onceaday">مرة في اليوم</string>
   <string name="new_file_creation_everystart">في كل مرة ابدأ</string>
@@ -123,7 +124,6 @@
   <string name="autoemail_smtp_category">إعدادات البريد</string>
   <string name="autoemail_username_summary">اسم المستخدم مع موفربريدك الإلكتروني</string>
   <string name="autoemail_password_summary">كلمة المرور مع اسم بريدك الإلكتروني</string>
-  <string name="autoemail_ssl">استخدام SSL؟</string>
   <string name="autoemail_choosepreset">مزود بريد</string>
   <string name="autoemail_smtp_testemail">اختبار البريد</string>
   <string name="autoemail_test">إرسال رسالةإختبار بريد بإستخدام الإعدادات أعلاه</string>

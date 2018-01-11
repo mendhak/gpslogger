@@ -133,7 +133,6 @@ Nomes de ficheiro muito dinâmicos
   <string name="autoemail_smtp_category">Configurações de e-mail</string>
   <string name="autoemail_username_summary">Nome de usuário com seu provedor de email</string>
   <string name="autoemail_password_summary">Senha com seu provedor de email</string>
-  <string name="autoemail_ssl">Use o SSL?</string>
   <string name="autoemail_ssl_summary">Tente alternando isso se você não pode conectar</string>
   <string name="autoemail_choosepreset">Provedor de email</string>
   <string name="autoemail_choosepreset_summary">Escolher um fornecedor ou escolha manual</string>

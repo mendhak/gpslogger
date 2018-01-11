@@ -71,7 +71,6 @@
   <string name="autoemail_frequency_whenistop">Al presionar detener</string>
   <string name="autoemail_smtp_category">﻿Ajustes de correo electrónico</string>
   <string name="autoemail_password_summary">Contraseña del proveedor de correo</string>
-  <string name="autoemail_ssl">¿Utilizar SSL?</string>
   <string name="autoemail_smtp_testemail">Probar envío de correo</string>
   <string name="autoemail_sendingtest">Enviando un correo de prueba</string>
   <string name="autoemail_testresult_success">Se ha enviado el correo</string>

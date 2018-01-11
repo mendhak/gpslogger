@@ -134,7 +134,6 @@
   <string name="autoemail_smtp_category">Email 设置</string>
   <string name="autoemail_username_summary">用户名与您的电子邮件供应商</string>
   <string name="autoemail_password_summary">你的电子邮件密码</string>
-  <string name="autoemail_ssl">是否使用 SSL?</string>
   <string name="autoemail_ssl_summary">如果连接失败请尝试切换这个选项</string>
   <string name="autoemail_choosepreset">邮件提供商</string>
   <string name="autoemail_choosepreset_summary">选择一个服务提供商或者直接输入</string>
@@ -327,8 +326,6 @@
   <string name="change_language_summary">并非所有语言都已完全翻译！您必须重新启动应用程序来使这些设置生效。</string>
   <string name="coordinate_display_format">坐标显示格式</string>
   <string name="ssl_certificate_validate">验证 SSL 证书</string>
-  <string name="use_post_method">使用 POST 方法</string>
-  <string name="use_post_method_summary">将查询参数转换为 HTTP POST 内容</string>
   <string name="parameters">参数</string>
   <string name="ssl_certificate_add_to_keystore">是否将此证书添加到本地密钥库？</string>
   <string name="ssl_certificate_is_valid">证书有效</string>

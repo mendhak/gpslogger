@@ -113,7 +113,6 @@
   <string name="autosend_frequency_display">Po %s minučių</string>
   <string name="autoemail_frequency_whenistop">Kai paspaudžiu stabdyti</string>
   <string name="autoemail_smtp_category">El. pašto nustatymai</string>
-  <string name="autoemail_ssl">Naudoti SSL?</string>
   <string name="autoemail_choosepreset">Pašto teikėjas</string>
   <string name="autoemail_smtp_testemail">Bandyti laiško siuntimą</string>
   <string name="autoemail_sendingtest">Siunčiamas bandomasis laiškas</string>

@@ -136,7 +136,6 @@
   <string name="autoemail_smtp_category">Sähköpostiasetukset</string>
   <string name="autoemail_username_summary">Sähköpostipalveluntarjoajan käyttäjätunnus</string>
   <string name="autoemail_password_summary">Sähköpostipalveluntarjoajan salasana</string>
-  <string name="autoemail_ssl">Käytä SSL:ää?</string>
   <string name="autoemail_ssl_summary">Kokeile valita tämä jos et saa yhteyttä</string>
   <string name="autoemail_choosepreset">Sähköpostipalveluntarjoaja</string>
   <string name="autoemail_choosepreset_summary">Valitse palveluntarjoaja tai valitse Manuaalinen</string>

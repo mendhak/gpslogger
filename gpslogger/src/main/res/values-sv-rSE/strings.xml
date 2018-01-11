@@ -130,7 +130,6 @@
   <string name="autoemail_smtp_category">Epost-inställningar</string>
   <string name="autoemail_username_summary">Användarnamn hos din epost-leverantör</string>
   <string name="autoemail_password_summary">Lösenord hos din epost-leverantör</string>
-  <string name="autoemail_ssl">Använd SSL?</string>
   <string name="autoemail_ssl_summary">Försök med detta om du inte kan ansluta</string>
   <string name="autoemail_choosepreset">Epost-leverantör</string>
   <string name="autoemail_choosepreset_summary">Välj en leverantör eller välj manuellt</string>
@@ -298,7 +297,6 @@
   <string name="privacy_policy">Integritetspolicy</string>
   <string name="change_language_title">Ändra språk</string>
   <string name="ssl_certificate_validate">Validera SSL certifikat</string>
-  <string name="use_post_method">Använd POST metod</string>
   <string name="parameters">Parametrar</string>
   <string name="ssl_certificate_is_valid">Certifikatet är giltigt</string>
   <string name="sftp_setup_title">SFTP</string>

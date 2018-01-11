@@ -135,7 +135,6 @@
   <string name="autoemail_smtp_category">Ustawienia poczty</string>
   <string name="autoemail_username_summary">Nazwa użytkownika wraz z dostawcą</string>
   <string name="autoemail_password_summary">Hasło dla nazwy użytkowania</string>
-  <string name="autoemail_ssl">Użycie SSL</string>
   <string name="autoemail_ssl_summary">Należy włączyć w przypadku problemów z połączeniem.</string>
   <string name="autoemail_choosepreset">Dostawca poczty</string>
   <string name="autoemail_choosepreset_summary">Wybór lub wprowadzenie ręczne</string>
@@ -329,8 +328,6 @@
   <string name="change_language_summary">Not all languages are fully translated! You must restart the app for the settings to take effect.</string>
   <string name="coordinate_display_format">Format wyświetlania współrzędnych</string>
   <string name="ssl_certificate_validate">Sprawdzanie poprawności certyfikatu SSL</string>
-  <string name="use_post_method">Używaj metody POST</string>
-  <string name="use_post_method_summary">Parametry ciągu kwerendy są konwertowane na parametry treści HTTP POST</string>
   <string name="parameters">Parametry</string>
   <string name="ssl_certificate_add_to_keystore">Dodać ten certyfikat do magazynu certyfikatów?</string>
   <string name="ssl_certificate_is_valid">Certyfikat poprawny</string>

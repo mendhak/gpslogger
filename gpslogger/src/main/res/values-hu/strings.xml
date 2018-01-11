@@ -134,7 +134,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="autoemail_smtp_category">E-mail beállítások</string>
   <string name="autoemail_username_summary">Az e-mail szolgáltatótól kapott felhasználóneve</string>
   <string name="autoemail_password_summary">Az e-mail szolgáltatótól kapott jelszava</string>
-  <string name="autoemail_ssl">SSL használata?</string>
   <string name="autoemail_ssl_summary">Próbáljon a beállításokon változtatni, ha nem tud csatlakozni</string>
   <string name="autoemail_choosepreset">Mail szolgáltató</string>
   <string name="autoemail_choosepreset_summary">Válassza ki a kiszolgáltatót vagy írja be kézzel az adatait</string>

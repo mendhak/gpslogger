@@ -112,7 +112,6 @@
   <string name="autoemail_smtp_category">Configuración de correo electrónico</string>
   <string name="autoemail_username_summary">Nombre de usuario con su proveedor de correo electrónico</string>
   <string name="autoemail_password_summary">Contraseña con tu proveedor de correo electrónico</string>
-  <string name="autoemail_ssl">¿Utilice SSL?</string>
   <string name="autoemail_ssl_summary">Trate de alternar esto si no se puede conectar</string>
   <string name="autoemail_choosepreset">Proveedor de correo</string>
   <string name="autoemail_choosepreset_summary">Escoger un proveedor o elija manual</string>

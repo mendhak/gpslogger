@@ -123,7 +123,6 @@
   <string name="autoemail_smtp_category">Cài đặt email</string>
   <string name="autoemail_username_summary">Tên người dùng với nhà cung cấp email của bạn</string>
   <string name="autoemail_password_summary">Mật khẩu với nhà cung cấp email của bạn</string>
-  <string name="autoemail_ssl">Sử dụng SSL?</string>
   <string name="autoemail_ssl_summary">Thử nếu bạn không thể kết nối</string>
   <string name="autoemail_choosepreset">Nhà cung cấp mail</string>
   <string name="autoemail_choosepreset_summary">Chon một nhà cung cấp hoặc chọn thủ công</string>

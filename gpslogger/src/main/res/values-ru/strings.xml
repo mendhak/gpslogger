@@ -134,7 +134,6 @@
   <string name="autoemail_smtp_category">Настройки Email</string>
   <string name="autoemail_username_summary">Например, user@domen.com</string>
   <string name="autoemail_password_summary">Пароль для доступа к почте</string>
-  <string name="autoemail_ssl">Использовать SSL?</string>
   <string name="autoemail_ssl_summary">Попробуйте изменить, при ошибке подключения</string>
   <string name="autoemail_choosepreset">Почтовый сервис</string>
   <string name="autoemail_choosepreset_summary">Выберите почтовый сервис из доступных или введите настройки</string>
