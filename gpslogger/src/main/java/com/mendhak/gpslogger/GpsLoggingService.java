@@ -104,10 +104,15 @@ public class GpsLoggingService extends Service  {
     }
 
     private void stopActivityRecognitionUpdates(){
-
-        LOG.debug("Stopping activity recognition updates");
-        ActivityRecognitionClient arClient = ActivityRecognition.getClient(getApplicationContext());
-        arClient.removeActivityUpdates(activityRecognitionPendingIntent);
+        try{
+            if (activityRecognitionPendingIntent != null){
+                LOG.debug("Stopping activity recognition updates");
+                ActivityRecognitionClient arClient = ActivityRecognition.getClient(getApplicationContext());
+                arClient.removeActivityUpdates(activityRecognitionPendingIntent);
+            }
+        } catch (Exception ex){
+            LOG.error("Could not stop activity recognition service", ex);
+        }
     }
 
     private void registerEventBus() {
