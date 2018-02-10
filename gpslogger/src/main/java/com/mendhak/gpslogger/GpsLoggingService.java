@@ -451,6 +451,7 @@ public class GpsLoggingService extends Service  {
         notifyClientsStarted(false);
         session.setCurrentFileName("");
         session.setCurrentFormattedFileName("");
+        stopSelf();
     }
 
     /**
