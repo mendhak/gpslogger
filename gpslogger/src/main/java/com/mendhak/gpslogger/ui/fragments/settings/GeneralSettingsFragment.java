@@ -74,7 +74,6 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         try {
 
             aboutInfo.setTitle("GPSLogger version " + getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName);
-            aboutInfo.setOnPreferenceClickListener(this);
         } catch (PackageManager.NameNotFoundException e) {
         }
     }
@@ -147,16 +146,6 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
             return true;
         }
 
-        if (preference.getKey().equals("about_version_info")) {
-            aboutClickCounter++;
-
-            if (aboutClickCounter == 3) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube://dQw4w9WgXcQ"));
-                intent.putExtra("force_fullscreen",true);
-                startActivity(intent);
-            }
-
-        }
         return false;
     }
 
