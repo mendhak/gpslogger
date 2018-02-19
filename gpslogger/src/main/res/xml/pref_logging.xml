@@ -12,6 +12,12 @@
             android:defaultValue="true"/>
 
         <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+            android:key="log_gpx_11"
+            android:title="@string/log_gpx_11_title"
+            android:summary="@string/log_gpx_11_summary"
+            android:defaultValue="false"/>
+
+        <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
             android:key="log_kml"
             android:summary="@string/log_kml_summary"
             android:title="@string/log_kml_title"/>

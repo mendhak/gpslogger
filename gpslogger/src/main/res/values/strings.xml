@@ -120,6 +120,8 @@
     <string name="pref_logging_title">Logging details</string>
     <string name="log_gpx_title">Log to GPX</string>
     <string name="log_gpx_summary">Logs locations to a GPX v1.0 file</string>
+    <string name="log_gpx_11_title">Use GPX 1.1</string>
+    <string name="log_gpx_11_summary">Uses GPX 1.1 file format instead of GPX 1.0</string>
     <string name="log_kml_title">Log to KML</string>
     <string name="log_kml_summary">Logs locations to a KML v2.2 file</string>
     <string name="log_plain_text_title">Log to CSV</string>

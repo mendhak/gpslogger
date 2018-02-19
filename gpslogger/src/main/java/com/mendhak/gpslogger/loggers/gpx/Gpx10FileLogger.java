@@ -51,7 +51,6 @@ public class Gpx10FileLogger implements FileLogger {
         this.addNewTrackSegment = addNewTrackSegment;
     }
 
-
     public void write(Location loc) throws Exception {
         long time = loc.getTime();
         if (time <= 0) {
@@ -59,14 +58,19 @@ public class Gpx10FileLogger implements FileLogger {
         }
         String dateTimeString = Strings.getIsoDateTime(new Date(time));
 
-        Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(dateTimeString, gpxFile, loc, addNewTrackSegment);
+        Runnable writeHandler = getWriteHandler(dateTimeString, gpxFile, loc, addNewTrackSegment);
         EXECUTOR.execute(writeHandler);
     }
 
+    public Runnable getWriteHandler(String dateTimeString, File gpxFile, Location loc, boolean addNewTrackSegment)
+    {
+        return new Gpx10WriteHandler(dateTimeString, gpxFile, loc, addNewTrackSegment);
+    }
+
     public void annotate(String description, Location loc) throws Exception {
-        
+
         description = Strings.cleanDescriptionForXml(description);
-        
+
         long time = loc.getTime();
         if (time <= 0) {
             time = System.currentTimeMillis();
@@ -273,13 +277,7 @@ class Gpx10WriteHandler implements Runnable {
 
         track.append("<time>").append(dateTimeString).append("</time>");
 
-        if (loc.hasBearing()) {
-            track.append("<course>").append(String.valueOf(loc.getBearing())).append("</course>");
-        }
-
-        if (loc.hasSpeed()) {
-            track.append("<speed>").append(String.valueOf(loc.getSpeed())).append("</speed>");
-        }
+        appendCourseAndSpeed(track, loc);
 
         if (loc.getExtras() != null) {
             String geoidheight = loc.getExtras().getString(BundleConstants.GEOIDHEIGHT);
@@ -290,7 +288,6 @@ class Gpx10WriteHandler implements Runnable {
         }
 
         track.append("<src>").append(loc.getProvider()).append("</src>");
-
 
         if (loc.getExtras() != null) {
 
@@ -336,6 +333,14 @@ class Gpx10WriteHandler implements Runnable {
         return track.toString();
     }
 
+    public void appendCourseAndSpeed(StringBuilder track, Location loc)
+    {
+        if (loc.hasBearing()) {
+            track.append("<course>").append(String.valueOf(loc.getBearing())).append("</course>");
+        }
+
+        if (loc.hasSpeed()) {
+            track.append("<speed>").append(String.valueOf(loc.getSpeed())).append("</speed>");
+        }
+    }
 }
-
-
