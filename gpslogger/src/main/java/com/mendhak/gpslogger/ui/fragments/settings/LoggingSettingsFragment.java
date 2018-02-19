@@ -68,6 +68,12 @@ public class LoggingSettingsFragment extends PreferenceFragment
             gpsloggerFolder.setSummary(Html.fromHtml("<font color='red'>" + gpsLoggerFolderPath + "</font>"));
         }
 
+        CustomSwitchPreference logGpx = (CustomSwitchPreference)findPreference("log_gpx");
+        CustomSwitchPreference logGpx11 = (CustomSwitchPreference)findPreference("log_gpx_11");
+        logGpx.setOnPreferenceChangeListener(this);
+        logGpx11.setEnabled(logGpx.isChecked());
+
+
         /**
          * Logging Details - New file creation
          */
@@ -175,6 +181,14 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
     @Override
     public boolean onPreferenceChange(final Preference preference, Object newValue) {
+
+
+        if(preference.getKey().equalsIgnoreCase("log_gpx")){
+            CustomSwitchPreference logGpx11 = (CustomSwitchPreference)findPreference("log_gpx_11");
+            logGpx11.setEnabled((Boolean)newValue);
+            return true;
+        }
+
 
         if (preference.getKey().equalsIgnoreCase("log_opengts")) {
 
