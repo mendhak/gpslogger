@@ -175,18 +175,7 @@ public class Gpx10WriteHandlerTest {
         assertThat("Trackpoint XML with a geoid height", actual, is(expected));
     }
 
-    @Test
-    public void GetBeginningXml_Verify(){
-        Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(null, null, null, true);
 
-
-        String actual = writeHandler.getBeginningXml(Strings.getIsoDateTime(new Date(1483054318298l)));
-        String expected =   "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><gpx version=\"1.0\" creator=\"GPSLogger "+ BuildConfig.VERSION_CODE  +" - http://gpslogger.mendhak.com/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\"><time>2016-12-29T23:31:58.298Z</time>";
-
-        assertThat("InitialXml matches", actual, is(expected));
-        assertThat("Initial XML Length is correct", actual.length(), is(343));
-        assertThat("Initial XML length constant is set for others to use", actual.length(), is(Gpx10WriteHandler.INITIAL_XML_LENGTH));
-    }
 
     @Test
     public void GetEndXml_Verify(){

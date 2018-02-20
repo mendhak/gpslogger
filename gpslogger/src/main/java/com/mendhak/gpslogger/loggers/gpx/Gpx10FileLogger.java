@@ -77,8 +77,14 @@ public class Gpx10FileLogger implements FileLogger {
         }
         String dateTimeString = Strings.getIsoDateTime(new Date(time));
 
-        Gpx10AnnotateHandler annotateHandler = new Gpx10AnnotateHandler(description, gpxFile, loc, dateTimeString);
+        Runnable annotateHandler = getAnnotateHandler(description, gpxFile, loc, dateTimeString);
         EXECUTOR.execute(annotateHandler);
+    }
+
+    public Runnable getAnnotateHandler(String description, File gpxFile, Location loc, String dateTimeString){
+        //Use the writer to calculate initial XML length, use that as offset for annotations
+        Gpx10WriteHandler writer = (Gpx10WriteHandler)getWriteHandler(dateTimeString, gpxFile, loc, true);
+        return new Gpx10AnnotateHandler(description, gpxFile, loc, dateTimeString, writer.getBeginningXml(dateTimeString).length());
     }
 
     @Override
@@ -95,12 +101,14 @@ class Gpx10AnnotateHandler implements Runnable {
     File gpxFile;
     Location loc;
     String dateTimeString;
+    int annotateOffset;
 
-    public Gpx10AnnotateHandler(String description, File gpxFile, Location loc, String dateTimeString) {
+    public Gpx10AnnotateHandler(String description, File gpxFile, Location loc, String dateTimeString, int annotateOffset) {
         this.description = description;
         this.gpxFile = gpxFile;
         this.loc = loc;
         this.dateTimeString = dateTimeString;
+        this.annotateOffset = annotateOffset;
     }
 
     @Override
@@ -129,14 +137,14 @@ class Gpx10AnnotateHandler implements Runnable {
 
                 int written = 0;
                 int readSize;
-                byte[] buffer = new byte[Gpx10WriteHandler.INITIAL_XML_LENGTH];
+                byte[] buffer = new byte[annotateOffset];
                 while ((readSize = bis.read(buffer)) > 0) {
                     bos.write(buffer, 0, readSize);
                     written += readSize;
 
                     System.out.println(written);
 
-                    if (written == Gpx10WriteHandler.INITIAL_XML_LENGTH) {
+                    if (written == annotateOffset) {
                         bos.write(wpt.getBytes());
                         buffer = new byte[20480];
                     }
@@ -188,7 +196,6 @@ class Gpx10WriteHandler implements Runnable {
     Location loc;
     private File gpxFile = null;
     private boolean addNewTrackSegment;
-    static final int INITIAL_XML_LENGTH = 343;
 
     public Gpx10WriteHandler(String dateTimeString, File gpxFile, Location loc, boolean addNewTrackSegment) {
         this.dateTimeString = dateTimeString;
