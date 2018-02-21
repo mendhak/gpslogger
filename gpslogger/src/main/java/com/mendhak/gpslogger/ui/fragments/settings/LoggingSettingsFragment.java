@@ -70,6 +70,10 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
         CustomSwitchPreference logGpx = (CustomSwitchPreference)findPreference("log_gpx");
         CustomSwitchPreference logGpx11 = (CustomSwitchPreference)findPreference("log_gpx_11");
+        logGpx11.setTitle("      " + logGpx11.getTitle());
+        logGpx11.setSummary("      " + logGpx11.getSummary());
+
+
         logGpx.setOnPreferenceChangeListener(this);
         logGpx11.setEnabled(logGpx.isChecked());
 
