@@ -533,6 +533,14 @@ public class PreferenceHelper {
         return prefs.getBoolean(PreferenceNames.LOG_TO_GPX, true);
     }
 
+    /**
+     * Whether to log to GPX in GPX 1.0 or 1.1 format
+     */
+    @ProfilePreference(name= PreferenceNames.LOG_AS_GPX_11)
+    public boolean shouldLogAsGpx11() {
+        return prefs.getBoolean(PreferenceNames.LOG_AS_GPX_11, false);
+    }
+
 
     /**
      * Whether to log to a CSV file

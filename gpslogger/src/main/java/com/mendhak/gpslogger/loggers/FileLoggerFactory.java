@@ -29,6 +29,7 @@ import com.mendhak.gpslogger.loggers.csv.CSVFileLogger;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlLogger;
 import com.mendhak.gpslogger.loggers.geojson.GeoJSONLogger;
 import com.mendhak.gpslogger.loggers.gpx.Gpx10FileLogger;
+import com.mendhak.gpslogger.loggers.gpx.Gpx11FileLogger;
 import com.mendhak.gpslogger.loggers.kml.Kml22FileLogger;
 import com.mendhak.gpslogger.loggers.opengts.OpenGTSLogger;
 import com.mendhak.gpslogger.loggers.wear.AndroidWearLogger;
@@ -57,7 +58,11 @@ public class FileLoggerFactory {
 
         if (preferenceHelper.shouldLogToGpx()) {
             File gpxFile = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".gpx");
-            loggers.add(new Gpx10FileLogger(gpxFile, session.shouldAddNewTrackSegment()));
+            if(preferenceHelper.shouldLogAsGpx11()) {
+                loggers.add(new Gpx11FileLogger(gpxFile, session.shouldAddNewTrackSegment()));
+            } else {
+                loggers.add(new Gpx10FileLogger(gpxFile, session.shouldAddNewTrackSegment()));
+            }
         }
 
         if (preferenceHelper.shouldLogToKml()) {
