@@ -95,6 +95,8 @@
   <string name="pref_logging_title">Logføringsdetaljer</string>
   <string name="log_gpx_title">Log til GPX</string>
   <string name="log_gpx_summary">Logger placeringer til en GPX v1.0 fil</string>
+  <string name="log_gpx_11_title">Brug GPX 1.1</string>
+  <string name="log_gpx_11_summary">Bruger GPX 1.1 fil format i stedet for GPX 1.0</string>
   <string name="log_kml_title">Log til KML</string>
   <string name="log_kml_summary">Logger placeringer til en KML v2.2 fil</string>
   <string name="log_plain_text_title">Log til CSV</string>
@@ -138,6 +140,7 @@ præcision ved lavere frekvenser.    </string>
   <string name="autoemail_smtp_category">E-mail-indstillinger</string>
   <string name="autoemail_username_summary">Brugernavn hos din e-mail-udbyder</string>
   <string name="autoemail_password_summary">Adgangskode til din e-mail-udbyder</string>
+  <string name="autoemail_ssl">Implicit SSL</string>
   <string name="autoemail_ssl_summary">Prøv at skifte dette, hvis du ikke kan oprette forbindelse</string>
   <string name="autoemail_choosepreset">E-mail-udbyder</string>
   <string name="autoemail_choosepreset_summary">Vælg en udbyder eller angiv manuelt</string>
@@ -347,4 +350,5 @@ præcision ved lavere frekvenser.    </string>
   <string name="txt_timestamp_epoch">Tidsstemplet (epoch)</string>
   <string name="txt_starttimestamp_epoch">Starttidsstemplet (epoch)</string>
   <string name="txt_battery">Batteri</string>
+  <string name="customurl_http_body">HTTP Samling</string>
 </resources>

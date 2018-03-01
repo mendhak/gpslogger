@@ -136,6 +136,7 @@
   <string name="autoemail_smtp_category">Configurações de e-mail</string>
   <string name="autoemail_username_summary">Nome de usuário com o seu provedor de e-mail</string>
   <string name="autoemail_password_summary">Senha com seu provedor de e-mail</string>
+  <string name="autoemail_ssl">SSL implícito</string>
   <string name="autoemail_ssl_summary">Selecione isso se você não pode se conectar</string>
   <string name="autoemail_choosepreset">Provedor de email</string>
   <string name="autoemail_choosepreset_summary">Escolher um provedor ou escolher manualmente</string>
@@ -338,4 +339,7 @@
   <string name="txt_timestamp_epoch">Linha do tempo (época)</string>
   <string name="txt_starttimestamp_epoch">Iniciar linha do tempo (época)</string>
   <string name="txt_battery">Bateria</string>
+  <string name="customurl_http_body">Estrutura HTTP</string>
+  <string name="customurl_http_headers">Cabeçalhos HTTP</string>
+  <string name="customurl_http_method">Método HTTP</string>
 </resources>

@@ -140,6 +140,7 @@ vyššiu presnosť s nízkymi frekvenciami.
   <string name="autoemail_smtp_category">Nastavenia e-mailu</string>
   <string name="autoemail_username_summary">Meno používateľa pre e-mailovú schránku</string>
   <string name="autoemail_password_summary">Heslo pre e-mailovú schránku</string>
+  <string name="autoemail_ssl">Implicitné SSL</string>
   <string name="autoemail_ssl_summary">Skúste prepnúť, ak nie je možné nadviazať spojenie</string>
   <string name="autoemail_choosepreset">Poskytovateľ e-mailu</string>
   <string name="autoemail_choosepreset_summary">Určite poskytovateľa alebo vyberte manuálne</string>
@@ -356,4 +357,7 @@ polia.
   <string name="txt_timestamp_epoch">Časová pečiatka (epocha)</string>
   <string name="txt_starttimestamp_epoch">Štart - čas. pečiatka (epocha)</string>
   <string name="txt_battery">Batéria</string>
+  <string name="customurl_http_body">HTTP - telo</string>
+  <string name="customurl_http_headers">HTTP - hlavičky</string>
+  <string name="customurl_http_method">HTTP - metóda</string>
 </resources>

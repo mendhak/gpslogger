@@ -134,6 +134,7 @@
   <string name="autoemail_smtp_category">﻿Ajustes de correo electrónico</string>
   <string name="autoemail_username_summary">Usuario del proveedor de correo</string>
   <string name="autoemail_password_summary">Contraseña del proveedor de correo</string>
+  <string name="autoemail_ssl">SSL Implícito</string>
   <string name="autoemail_ssl_summary">Prueba ambas opciones si no puedes conectarte</string>
   <string name="autoemail_choosepreset">Proveedor de correo</string>
   <string name="autoemail_choosepreset_summary">Elige un proveedor o prueba el ajuste manual</string>
@@ -337,4 +338,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
   <string name="txt_timestamp_epoch">Hora de inicio (época)</string>
   <string name="txt_starttimestamp_epoch">Iniciar Hora de inicio (época)</string>
   <string name="txt_battery">Batería</string>
+  <string name="customurl_http_body">Cuerpo HTTP</string>
+  <string name="customurl_http_headers">Encabezados HTTP</string>
+  <string name="customurl_http_method">Método HTTP</string>
 </resources>

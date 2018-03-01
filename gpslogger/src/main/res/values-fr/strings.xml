@@ -94,6 +94,8 @@
   <string name="pref_logging_title">Détails de l\'enregistrement</string>
   <string name="log_gpx_title">Enregistrer en GPX</string>
   <string name="log_gpx_summary">Enregistrer les localisations au format GPX v1.0</string>
+  <string name="log_gpx_11_title">Utiliser GPX 1.1</string>
+  <string name="log_gpx_11_summary">Utilise le format de fichier GPX 1.1 au lieu de GPX 1.0</string>
   <string name="log_kml_title">Enregistrer en KML</string>
   <string name="log_kml_summary">Enregistrer les localisations au format KML v2.2</string>
   <string name="log_plain_text_title">Journaliser au format CSV</string>
@@ -134,6 +136,7 @@ une plus grande précision à basses fréquences.    </string>
   <string name="autoemail_smtp_category">Paramètres de courriel</string>
   <string name="autoemail_username_summary">Nom d\'utilisateur avec votre fournisseur de courriel</string>
   <string name="autoemail_password_summary">Mot de passe avec votre fournisseur de courriel</string>
+  <string name="autoemail_ssl">SSL implicite</string>
   <string name="autoemail_ssl_summary">Essayer ce paramètre si vous ne pouvez pas vous connecter</string>
   <string name="autoemail_choosepreset">Fournisseur de courriel</string>
   <string name="autoemail_choosepreset_summary">Choisir un fournisseur, ou choisir manuellement</string>
@@ -335,4 +338,7 @@ une plus grande précision à basses fréquences.    </string>
   <string name="txt_timestamp_epoch">Horadatage (epoch)</string>
   <string name="txt_starttimestamp_epoch">Démarrer horadatage (epoch)</string>
   <string name="txt_battery">Batterie</string>
+  <string name="customurl_http_body">Corps HTTP</string>
+  <string name="customurl_http_headers">Entêtes HTTP</string>
+  <string name="customurl_http_method">Méthode HTTP</string>
 </resources>
