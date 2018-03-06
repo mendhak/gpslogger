@@ -203,7 +203,7 @@ dependencies {
     implementation 'com.nononsenseapps:filepicker:3.0.0'
 
     //OKHTTP client
-    implementation 'com.squareup.okhttp3:okhttp:3.2.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.7.0'
 
     //OKHTTP interceptor, works with oauth signpost
     implementation 'se.akerfeldt:okhttp-signpost:1.1.0'
