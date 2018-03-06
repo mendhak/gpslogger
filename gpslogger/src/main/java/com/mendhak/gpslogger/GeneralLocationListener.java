@@ -107,7 +107,6 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
         if (status == LocationProvider.TEMPORARILY_UNAVAILABLE) {
             LOG.info(provider + " is temporarily unavailable");
-            loggingService.stopManagerAndResetAlarm();
         }
     }
 
