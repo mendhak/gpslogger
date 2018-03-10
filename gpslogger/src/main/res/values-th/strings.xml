@@ -152,8 +152,11 @@
   <string name="emailprovider_google">Google Mail</string>
   <string name="emailprovider_yahoo">Yahoo! Mail</string>
   <string name="emailprovider_msn">Windows Live Mail</string>
+  <string name="emailprovider_manual">คู่มือ​</string>
   <string name="dropbox_setup_title">Dropbox</string>
   <string name="menu_upload">อัพโหลด</string>
+  <string name="gdocs_setup_title">Google Drive</string>
+  <string name="gdocs_test_summary">อัปโหลด​เทสไฟล์​ไป Google​ Drive​</string>
   <string name="gdocs_test_title">ทดสอบอัพโหลด</string>
   <string name="gdocs_testupload_success">อัพโหลดแล้ว กรุณาตรวจสอบ Google Docs สำหรับไฟล์ใหม่</string>
   <string name="autoemail_sendto_csv">คั่นแต่ละอีเมล์ด้วยจุลภาค</string>

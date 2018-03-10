@@ -94,6 +94,7 @@
   <string name="pref_logging_title">Rincian login</string>
   <string name="log_gpx_title">Log untuk GPX</string>
   <string name="log_gpx_summary">Lokasi log untuk file GPX v1.0</string>
+  <string name="log_gpx_11_title">Gunakan GPX 1.1</string>
   <string name="log_kml_title">Log untuk KML</string>
   <string name="log_kml_summary">Lokasi log file KML v2.2</string>
   <string name="log_plain_text_title">Log to CSV</string>
