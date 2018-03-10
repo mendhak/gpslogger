@@ -68,7 +68,7 @@ public class WifiNetworkUtil implements NetworkUtil, NetworkEventProvider {
             isDeviceOnWifi = (netInfo.getType() == ConnectivityManager.TYPE_WIFI);
         }
 
-        return netInfo != null && netInfo.isConnectedOrConnecting() && isDeviceOnWifi;
+        return netInfo != null && netInfo.isConnected() && isDeviceOnWifi;
     }
 
     @TargetApi(23)
