@@ -96,11 +96,14 @@ public class GpsLoggingService extends Service  {
 
     private void requestActivityRecognitionUpdates() {
 
-        LOG.debug("Requesting activity recognition updates");
-        Intent intent = new Intent(getApplicationContext(), GpsLoggingService.class);
-        activityRecognitionPendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        ActivityRecognitionClient arClient = ActivityRecognition.getClient(getApplicationContext());
-        arClient.requestActivityUpdates(preferenceHelper.getMinimumLoggingInterval() * 1000, activityRecognitionPendingIntent);
+        if(preferenceHelper.shouldNotLogIfUserIsStill()){
+            LOG.debug("Requesting activity recognition updates");
+            Intent intent = new Intent(getApplicationContext(), GpsLoggingService.class);
+            activityRecognitionPendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            ActivityRecognitionClient arClient = ActivityRecognition.getClient(getApplicationContext());
+            arClient.requestActivityUpdates(preferenceHelper.getMinimumLoggingInterval() * 1000, activityRecognitionPendingIntent);
+        }
+
     }
 
     private void stopActivityRecognitionUpdates(){
