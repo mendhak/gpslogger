@@ -3,4 +3,6 @@
 
 ![imperial](images/18imperial.png)
 
-The imperial units are only for display purposes and nothing else. However, when logging, the units are always in **SI units** - meters and seconds.
+When logging to file, the units are always in **SI units** - meters and seconds.
+
+Any imperial units are only for display purposes and nothing else. The same applies for times and distances which may appear as *km/h* or *m/s* - these are purely for display. 
