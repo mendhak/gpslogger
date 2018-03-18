@@ -37,6 +37,7 @@ import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.Socket;
 import java.security.cert.Certificate;
+import java.util.List;
 
 public class CertificateValidationWorkflow implements Runnable {
 
@@ -191,13 +192,25 @@ public class CertificateValidationWorkflow implements Runnable {
             if (cve != null) {
                 LOG.debug("Untrusted certificate found, " + cve.getCertificate().toString());
                 try {
+
+                    StringBuilder sans = new StringBuilder();
+                    if(cve.getCertificate().getSubjectAlternativeNames() != null && cve.getCertificate().getSubjectAlternativeNames().size() > 0){
+                        for(List item : cve.getCertificate().getSubjectAlternativeNames()){
+                            if((int)item.get(0) == 2 || (int)item.get(0) == 7){ //Alt Name type DNS or IP
+                                sans.append(String.format("<br /><font face='monospace'>%s</font>", item.get(1).toString()));
+                            }
+                        }
+                    }
+
                     final StringBuilder sb = new StringBuilder();
                     sb.append(cve.getMessage());
-                    sb.append("<br /><br /><strong>").append("Subject: ").append("</strong>").append(cve.getCertificate().getSubjectDN().getName());
-                    sb.append("<br /><br /><strong>").append("Issuer: ").append("</strong>").append(cve.getCertificate().getIssuerDN().getName());
-                    sb.append("<br /><br /><strong>").append("Fingerprint: ").append("</strong>").append(DigestUtils.shaHex(cve.getCertificate().getEncoded()));
-                    sb.append("<br /><br /><strong>").append("Issued on: ").append("</strong>").append(cve.getCertificate().getNotBefore());
-                    sb.append("<br /><br /><strong>").append("Expires on: ").append("</strong>").append(cve.getCertificate().getNotAfter());
+                    String msgformat = "<br /><br /><strong>%s: </strong><font face='monospace'>%s</font>";
+                    sb.append(String.format(msgformat, "Subject", cve.getCertificate().getSubjectDN().getName()));
+                    if(sans.length() > 0) { sb.append(String.format(msgformat, "Subject Alternative Names",sans)); }
+                    sb.append(String.format(msgformat,"Issuer", cve.getCertificate().getIssuerDN().getName()));
+                    sb.append(String.format(msgformat,"Fingerprint", DigestUtils.shaHex(cve.getCertificate().getEncoded())));
+                    sb.append(String.format(msgformat,"Issued on",cve.getCertificate().getNotBefore()));
+                    sb.append(String.format(msgformat,"Expires on",cve.getCertificate().getNotBefore()));
 
                     new MaterialDialog.Builder(context)
                             .title(R.string.ssl_certificate_add_to_keystore)
