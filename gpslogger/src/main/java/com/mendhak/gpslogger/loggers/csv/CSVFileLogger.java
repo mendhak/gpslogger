@@ -88,7 +88,7 @@ public class CSVFileLogger implements FileLogger {
 
     @Override
     public void annotate(String description, Location loc) throws Exception {
-        if (!file.exists()) {
+        if (!Files.actuallyExists(file)) {
             file.createNewFile();
 
             FileOutputStream writer = new FileOutputStream(file, true);

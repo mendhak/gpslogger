@@ -185,4 +185,9 @@ public class Files {
         return testFile;
     }
 
+    public static boolean actuallyExists(File gpxFile) {
+        // Sometimes .isFile returns false even if a file exists.
+        // This guesswork tries to determine whether file exists in a few different ways.
+        return gpxFile.isFile() || gpxFile.getAbsoluteFile().exists() || gpxFile.getAbsoluteFile().isFile();
+    }
 }
