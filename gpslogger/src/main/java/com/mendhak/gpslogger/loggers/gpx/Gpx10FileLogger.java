@@ -115,7 +115,7 @@ class Gpx10AnnotateHandler implements Runnable {
     public void run() {
 
         synchronized (Gpx10FileLogger.lock) {
-            if(!Files.actuallyExists(gpxFile)){
+            if(!Files.reallyExists(gpxFile)){
                 return;
             }
 
@@ -203,7 +203,7 @@ class Gpx10WriteHandler implements Runnable {
         synchronized (Gpx10FileLogger.lock) {
 
             try {
-                if (!Files.actuallyExists(gpxFile)) {
+                if (!Files.reallyExists(gpxFile)) {
                     gpxFile.createNewFile();
 
                     FileOutputStream initialWriter = new FileOutputStream(gpxFile, true);

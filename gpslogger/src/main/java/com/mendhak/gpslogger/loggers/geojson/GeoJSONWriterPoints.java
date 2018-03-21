@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Files;
 
 import org.slf4j.Logger;
 
@@ -49,10 +50,10 @@ public class GeoJSONWriterPoints implements Runnable {
         try {
 
             synchronized (GeoJSONLogger.lock) {
-                byte[] value = getString(file.exists()).getBytes();
+                byte[] value = getString(Files.reallyExists(file)).getBytes();
 
                 RandomAccessFile raf;
-                if (!file.exists()) {
+                if (!Files.reallyExists(file)) {
                     file.createNewFile();
                     raf = new RandomAccessFile(file, "rw");
                 } else {

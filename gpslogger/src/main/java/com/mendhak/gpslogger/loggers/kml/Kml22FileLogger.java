@@ -84,7 +84,7 @@ class Kml22AnnotateHandler implements Runnable {
 
     @Override
     public void run() {
-        if (!kmlFile.exists()) {
+        if(!Files.reallyExists(kmlFile)){
             return;
         }
 
@@ -163,7 +163,7 @@ class Kml22WriteHandler implements Runnable {
 
             synchronized (Kml22FileLogger.lock) {
 
-                if (!kmlFile.exists()) {
+                if(!Files.reallyExists(kmlFile)){
                     kmlFile.createNewFile();
 
                     FileOutputStream initialWriter = new FileOutputStream(kmlFile, true);
