@@ -24,18 +24,27 @@ import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.customurl.CustomUrlJob;
+import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
+import com.path.android.jobqueue.JobManager;
+
 import org.slf4j.Logger;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
+
+import de.greenrobot.event.EventBus;
 
 public class CustomUrlFragment extends PermissionedPreferenceFragment implements
         PreferenceValidator,
@@ -56,8 +65,15 @@ public class CustomUrlFragment extends PermissionedPreferenceFragment implements
         urlPathPreference.setOnPreferenceChangeListener(this);
 
         findPreference("customurl_legend_1").setOnPreferenceClickListener(this);
+        findPreference("customurl_http_test").setOnPreferenceClickListener(this);
         findPreference("customurl_validatecustomsslcert").setOnPreferenceClickListener(this);
 
+        registerEventBus();
+
+    }
+
+    private void registerEventBus() {
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -104,9 +120,26 @@ public class CustomUrlFragment extends PermissionedPreferenceFragment implements
 
             return true;
         }
+        else if (preference.getKey().equals("customurl_http_test")){
+            LOG.debug("Sending test HTTP GET request to " + PreferenceHelper.getInstance().getCustomLoggingUrl() );
+            Dialogs.progress(getActivity(), getString(R.string.please_wait), getString(R.string.please_wait));
+            JobManager jobManager = AppSettings.getJobManager();
+            jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(PreferenceHelper.getInstance().getCustomLoggingUrl()), new UploadEvents.CustomUrl()));
+        }
         return false;
     }
 
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.CustomUrl c){
+        LOG.debug("Custom URL test, success: " + c.success);
+        Dialogs.hideProgress();
+        if(!c.success){
+            Dialogs.error(getString(R.string.error), c.message, c.throwable.getMessage(),c.throwable, getActivity());
+        }
+        else {
+            Dialogs.alert(getString(R.string.success), "", getActivity());
+        }
+    }
 
 
 }

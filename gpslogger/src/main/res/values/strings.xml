@@ -444,4 +444,6 @@
     <string name="customurl_http_body">HTTP Body</string>
     <string name="customurl_http_headers">HTTP Headers</string>
     <string name="customurl_http_method">HTTP Method</string>
+    <string name="customurl_http_test">HTTP Test</string>
+
 </resources>

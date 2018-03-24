@@ -19,7 +19,7 @@ public class DialogsTest {
         Throwable t = new Throwable("Parameter not set.\r\nException handling not configured.\r\nEat oranges they are great.\r\n");
         t.setStackTrace(new StackTraceElement[]{new StackTraceElement("XXX", "yyy", "BBB", 99)});
 
-        String expected = "<b>An error occurred.<br />220 ----------------- There was a problem<br />No username specified.<br />Server not configured properly.</b> <br /><br />Parameter not set.<br />Exception handling not configured.<br />Eat oranges they are great.<br /><br />";
+        String expected =  "<b>An error occurred.<br />220 ----------------- There was a problem<br />No username specified.<br />Server not configured properly.</b> <br /><br />Parameter not set.<br />Exception handling not configured.<br />Eat oranges they are great.<br /><br /><br />";
         assertThat("Message formatted for error display", Dialogs.getFormattedErrorMessageForDisplay(message, t), is(expected));
 
     }
@@ -49,16 +49,20 @@ public class DialogsTest {
     }
 
     @Test
-    public void GetFormattedErrorMessageForPlainText_WithMessageOrThrowable(){
+    public void GetFormattedErrorMessageForPlainText_WithMessageAndThrowable() {
         String message = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.";
         Throwable t = new Throwable("Parameter not set.\r\nException handling not configured.\r\nEat oranges they are great.\r\n");
         t.setStackTrace(new StackTraceElement[]{new StackTraceElement("XXX", "yyy", "BBB", 99)});
 
-        String plainText = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.\r\nParameter not set.\r\nException handling not configured.\r\nEat oranges they are great.\r\n\r\n[XXX.yyy(BBB:99)]";
+        String plainText = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.\r\n\r\n\r\nParameter not set.\r\nException handling not configured.\r\nEat oranges they are great.\r\n\r\njava.lang.Throwable: Parameter not set.\r\nException handling not configured.\r\nEat oranges they are great.\r\n\n\tat XXX.yyy(BBB:99)\n";
         assertThat("Message formatted for emailing copying", Dialogs.getFormattedErrorMessageForPlainText(message, t), is(plainText));
+    }
 
-        plainText = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.\r\nThis is a detailed message\r\n";
-        t = new Throwable("This is a detailed message");
+    @Test
+    public void GetFormattedErrorMessageForPlainText_WithMessageOnly() {
+        String message = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.";
+        String plainText = "An error occurred.\r\n220 ----------------- There was a problem\r\nNo username specified.\r\nServer not configured properly.\r\n\r\n\r\nThis is a detailed message\r\n";
+        Throwable t = new Throwable("This is a detailed message");
         t.setStackTrace(new StackTraceElement[0]);
         assertThat("Message formatted without stacktrace fully present", Dialogs.getFormattedErrorMessageForPlainText(message, t), is(plainText));
 

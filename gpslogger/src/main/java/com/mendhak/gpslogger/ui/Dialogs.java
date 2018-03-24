@@ -32,23 +32,26 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Strings;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 
-import java.util.Arrays;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 public class Dialogs {
     private static MaterialDialog pd;
 
     protected static String getFormattedErrorMessageForDisplay(String message, Throwable throwable) {
-        String html = "";
+        StringBuilder html = new StringBuilder();
         if(!Strings.isNullOrEmpty(message)){
-            html += "<b>" + message.replace("\r\n","<br />").replace("\n","<br />") + "</b> <br /><br />";
+            html.append("<b>").append(message.replace("\r\n","<br />")
+                    .replace("\n","<br />")).append("</b> <br /><br />");
         }
 
-        if(throwable != null){
-            if(!Strings.isNullOrEmpty(throwable.getMessage())){
-                html += throwable.getMessage().replace("\r\n","<br />") + "<br />";
-            }
+        while(throwable != null && !Strings.isNullOrEmpty(throwable.getMessage())){
+            html.append(throwable.getMessage().replace("\r\n","<br />"))
+                    .append("<br /><br />");
+            throwable=throwable.getCause();
         }
-       return html;
+
+       return html.toString();
     }
 
     protected static String getFormattedErrorMessageForPlainText(String message, Throwable throwable){
@@ -58,14 +61,15 @@ public class Dialogs {
             sb.append(message).append("\r\n");
         }
 
-        if(throwable != null){
-            if(!Strings.isNullOrEmpty(throwable.getMessage())){
-                sb.append(throwable.getMessage()).append("\r\n");
+        while (throwable != null && !Strings.isNullOrEmpty(throwable.getMessage())) {
+            sb.append("\r\n\r\n").append(throwable.getMessage()).append("\r\n");
+            if (throwable.getStackTrace().length > 0) {
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                throwable.printStackTrace(pw);
+                sb.append(sw.toString());
             }
-
-            if(throwable.getStackTrace().length > 0) {
-                sb.append(Arrays.toString(throwable.getStackTrace()));
-            }
+            throwable = throwable.getCause();
         }
 
         return sb.toString();
@@ -97,7 +101,7 @@ public class Dialogs {
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
 
                         android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                        android.content.ClipData clip = android.content.ClipData.newPlainText("Gpslogger error message", getFormattedErrorMessageForPlainText(errorMessage, throwable));
+                        android.content.ClipData clip = android.content.ClipData.newPlainText("Gpslogger error message", getFormattedErrorMessageForPlainText(friendlyMessage, throwable));
                         clipboard.setPrimaryClip(clip);
 
                         materialDialog.dismiss();
