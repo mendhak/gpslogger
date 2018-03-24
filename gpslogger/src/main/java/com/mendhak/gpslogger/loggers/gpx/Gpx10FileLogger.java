@@ -115,15 +115,9 @@ class Gpx10AnnotateHandler implements Runnable {
     public void run() {
 
         synchronized (Gpx10FileLogger.lock) {
-            if (!gpxFile.exists()) {
+            if(!Files.reallyExists(gpxFile)){
                 return;
             }
-
-            if (!gpxFile.exists()) {
-                return;
-            }
-
-
 
             String wpt = getWaypointXml(loc, dateTimeString, description);
 
@@ -209,7 +203,7 @@ class Gpx10WriteHandler implements Runnable {
         synchronized (Gpx10FileLogger.lock) {
 
             try {
-                if (!gpxFile.isFile()) {
+                if (!Files.reallyExists(gpxFile)) {
                     gpxFile.createNewFile();
 
                     FileOutputStream initialWriter = new FileOutputStream(gpxFile, true);
