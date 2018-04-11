@@ -9,9 +9,14 @@ If your automation app can send intents, you can use those intents to control GP
 To invoke it from Tasker, create a new action under Misc > Send Intent. 
 
 >Action: `com.mendhak.gpslogger.GpsLoggingService`  
-Extra: `immediatestart:true (others below)`  
+Extra: `immediatestart:true` (others below)  
 Target: `Service`
 
+To invoke it from Automate (LlamaLab), create a Start Service block:
+
+>Package: `com.mendhak.gpslogger`  
+Service class: `com.mendhak.gpslogger.GpsLoggingService`  
+Extras: `{"immediatestart" as Boolean:"true"}`
 
 To invoke it from your own Android code:
 
