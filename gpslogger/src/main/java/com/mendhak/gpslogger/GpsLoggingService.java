@@ -782,9 +782,9 @@ public class GpsLoggingService extends Service  {
         //Check if a ridiculous distance has been travelled since previous point - could be a bad GPS jump
         if(session.getCurrentLocationInfo() != null){
             double distanceTravelled = Maths.calculateDistance(loc.getLatitude(), loc.getLongitude(), session.getCurrentLocationInfo().getLatitude(), session.getCurrentLocationInfo().getLongitude());
-            long timeDifference = Math.abs(loc.getTime() - session.getCurrentLocationInfo().getTime())/1000;
-            double speed = distanceTravelled/timeDifference;
-            if(speed > 357){ //357 m/s ~=  1285 km/h
+            long timeDifference = (int)Math.abs(loc.getTime() - session.getCurrentLocationInfo().getTime())/1000;
+
+            if( timeDifference > 0 && (distanceTravelled/timeDifference) > 357){ //357 m/s ~=  1285 km/h
                 LOG.warn(String.format("Very large jump detected - %d meters in %d sec - discarding point", (long)distanceTravelled, timeDifference));
                 return;
             }
