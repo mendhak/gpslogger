@@ -122,7 +122,7 @@ public class OpenGTSManagerTest {
         PreferenceHelper pm = mock(PreferenceHelper.class);
         OpenGTSManager client = new OpenGTSManager(pm);
         URL url = new URL("http://example.com:9001/?id=99&dev=99&acct=ACCT&batt=0&code=0xF020&alt=0.0&gprmc=$GPRMC,192429,A,5121.47965,N,011.71463,W,0.000000,0.000000,050316,,*02");
-        assertThat("URL Generated from basic location",  OpenGTSManager.getUrl("99","ACCT",sloc,"http","","example.com",9001).toString() , is(url.toString()));
+        assertThat("URL Generated from basic location",  OpenGTSManager.getUrl("99","ACCT",sloc,"http","","example.com",9001, 0).toString() , is(url.toString()));
     }
 
 
@@ -135,7 +135,7 @@ public class OpenGTSManagerTest {
         PreferenceHelper pm = mock(PreferenceHelper.class);
         OpenGTSManager client = new OpenGTSManager(pm);
         URL url = new URL("http://example.com:9001/xqa?id=99&dev=99&acct=ACCT&batt=0&code=0xF020&alt=0.0&gprmc=$GPRMC,192429,A,5121.47965,N,011.71463,W,0.000000,0.000000,050316,,*02");
-        assertThat("URL Generated without extra slashes",  OpenGTSManager.getUrl("99","ACCT",sloc,"http","/xqa","example.com",9001).toString() , is(url.toString()));
+        assertThat("URL Generated without extra slashes",  OpenGTSManager.getUrl("99","ACCT",sloc,"http","/xqa","example.com",9001, 0).toString() , is(url.toString()));
     }
 
     @Test
@@ -147,7 +147,19 @@ public class OpenGTSManagerTest {
         PreferenceHelper pm = mock(PreferenceHelper.class);
         OpenGTSManager client = new OpenGTSManager(pm);
 
-        assertThat("URL contains battery due to OpenGTS Bug >_<",  OpenGTSManager.getUrl("99","ACCT",sloc,"http","/xqa","example.com",9001).toString() , containsString("batt"));
+        assertThat("URL contains battery due to OpenGTS Bug >_<",  OpenGTSManager.getUrl("99","ACCT",sloc,"http","/xqa","example.com",9001, 0).toString() , containsString("batt"));
+    }
+
+    @Test
+    public void getUrl_IncludesBatteryValueIfPresent() throws Exception {
+
+        Location loc = MockLocations.builder("GPS", 51.3579941, -0.1952438).withTime(1457205869949l).withAccuracy(20).build();
+        SerializableLocation sloc = new SerializableLocation(loc);
+
+        PreferenceHelper pm = mock(PreferenceHelper.class);
+        OpenGTSManager client = new OpenGTSManager(pm);
+
+        assertThat("URL contains battery value",  OpenGTSManager.getUrl("99","ACCT",sloc,"http","/xqa","example.com",9001, 82).toString() , containsString("batt=82"));
     }
 
     @Test
@@ -159,7 +171,7 @@ public class OpenGTSManagerTest {
         PreferenceHelper pm = mock(PreferenceHelper.class);
         OpenGTSManager client = new OpenGTSManager(pm);
         URL url = new URL("http://example.com:9001/?id=99&dev=99&acct=99&batt=0&code=0xF020&alt=0.0&gprmc=$GPRMC,192429,A,5121.47965,N,011.71463,W,0.000000,0.000000,050316,,*02");
-        assertThat("Uses id if account name is missing",  OpenGTSManager.getUrl("99",null,sloc,"HTTP","","example.com",9001).toString() , is(url.toString()));
+        assertThat("Uses id if account name is missing",  OpenGTSManager.getUrl("99",null,sloc,"HTTP","","example.com",9001, 0).toString() , is(url.toString()));
     }
 
 
@@ -171,7 +183,7 @@ public class OpenGTSManagerTest {
         PreferenceHelper pm = mock(PreferenceHelper.class);
         OpenGTSManager client = new OpenGTSManager(pm);
         URL url = new URL("https://example.com:9001/?id=99&dev=99&acct=99&batt=0&code=0xF020&alt=0.0&gprmc=$GPRMC,192429,A,5121.47965,N,011.71463,W,0.000000,0.000000,050316,,*02");
-        assertThat("Uses id if account name is missing",  OpenGTSManager.getUrl("99",null,sloc, "HTTPS", "","example.com",9001).toString() , is(url.toString()));
+        assertThat("Uses id if account name is missing",  OpenGTSManager.getUrl("99",null,sloc, "HTTPS", "","example.com",9001, 0).toString() , is(url.toString()));
     }
 
 }

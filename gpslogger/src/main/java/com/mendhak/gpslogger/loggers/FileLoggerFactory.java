@@ -56,6 +56,8 @@ public class FileLoggerFactory {
             gpxFolder.mkdirs();
         }
 
+        int batteryLevel = Systems.getBatteryLevel(context);
+
         if (preferenceHelper.shouldLogToGpx()) {
             File gpxFile = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".gpx");
             if(preferenceHelper.shouldLogAsGpx11()) {
@@ -71,17 +73,15 @@ public class FileLoggerFactory {
         }
 
         if (preferenceHelper.shouldLogToCSV()) {
-            int batteryLevel = Systems.getBatteryLevel(context);
             File file = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".csv");
             loggers.add(new CSVFileLogger(file, batteryLevel));
         }
 
         if (preferenceHelper.shouldLogToOpenGTS()) {
-            loggers.add(new OpenGTSLogger(context));
+            loggers.add(new OpenGTSLogger(context, batteryLevel));
         }
 
         if (preferenceHelper.shouldLogToCustomUrl()) {
-            int batteryLevel = Systems.getBatteryLevel(context);
             String androidId = Systems.getAndroidId(context);
             loggers.add(new CustomUrlLogger(preferenceHelper.getCustomLoggingUrl(), batteryLevel,
                     androidId, preferenceHelper.getCustomLoggingHTTPMethod(), preferenceHelper.getCustomLoggingHTTPBody(), preferenceHelper.getCustomLoggingHTTPHeaders()));

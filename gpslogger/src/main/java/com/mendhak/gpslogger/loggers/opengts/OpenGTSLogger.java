@@ -35,16 +35,18 @@ public class OpenGTSLogger implements FileLogger {
 
     protected final String name = "OpenGTS";
     final Context context;
+    int batteryLevel;
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
-    public OpenGTSLogger(Context context) {
+    public OpenGTSLogger(Context context, int batteryLevel) {
         this.context = context;
+        this.batteryLevel=batteryLevel;
     }
 
     @Override
     public void write(Location loc) throws Exception {
 
-        OpenGTSManager manager = new OpenGTSManager(preferenceHelper);
+        OpenGTSManager manager = new OpenGTSManager(preferenceHelper, batteryLevel);
         manager.sendLocations(new SerializableLocation[]{new SerializableLocation(loc)});
     }
 

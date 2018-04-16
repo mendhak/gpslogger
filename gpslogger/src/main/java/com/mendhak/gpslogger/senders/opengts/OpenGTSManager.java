@@ -40,9 +40,15 @@ public class OpenGTSManager extends FileSender {
 
     private static final Logger LOG = Logs.of(OpenGTSManager.class);
     private PreferenceHelper preferenceHelper;
+    private int batteryLevel;
 
-    public OpenGTSManager(PreferenceHelper preferenceHelper) {
+    public OpenGTSManager(PreferenceHelper preferenceHelper)  {
+        this(preferenceHelper, 0);
+    }
+
+    public OpenGTSManager(PreferenceHelper preferenceHelper, int batteryLevel) {
         this.preferenceHelper = preferenceHelper;
+        this.batteryLevel = batteryLevel;
     }
 
     @Override
@@ -82,7 +88,7 @@ public class OpenGTSManager extends FileSender {
 
     void sendByHttp(String deviceId, String accountName, SerializableLocation[] locations, String communication, String path, String server, int port) {
         for(SerializableLocation loc:locations){
-            String finalUrl = getUrl(deviceId, accountName, loc, communication, path, server, port );
+            String finalUrl = getUrl(deviceId, accountName, loc, communication, path, server, port, batteryLevel );
 
             JobManager jobManager = AppSettings.getJobManager();
             jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl), new UploadEvents.OpenGTS()));
@@ -163,7 +169,7 @@ public class OpenGTSManager extends FileSender {
     }
 
 
-    public static String getUrl(String id, String accountName, SerializableLocation loc, String communication, String path, String server, int port) {
+    public static String getUrl(String id, String accountName, SerializableLocation loc, String communication, String path, String server, int port, int batteryLevel) {
         List<AbstractMap.SimpleEntry<String,String>> qparams = new ArrayList<>();
         qparams.add(new AbstractMap.SimpleEntry<>("id", id));
         qparams.add(new AbstractMap.SimpleEntry<>("dev", id));
@@ -174,7 +180,7 @@ public class OpenGTSManager extends FileSender {
         }
 
         //OpenGTS 2.5.5 requires batt param or it throws exception...
-        qparams.add(new AbstractMap.SimpleEntry<>("batt", "0"));
+        qparams.add(new AbstractMap.SimpleEntry<>("batt", String.valueOf(batteryLevel)));
         qparams.add(new AbstractMap.SimpleEntry<>("code", "0xF020"));
         qparams.add(new AbstractMap.SimpleEntry<>("alt", String.valueOf(loc.getAltitude())));
         qparams.add(new AbstractMap.SimpleEntry<>("gprmc", OpenGTSManager.gprmcEncode(loc)));
