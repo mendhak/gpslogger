@@ -21,6 +21,7 @@ package com.mendhak.gpslogger.loggers.customurl;
 
 import android.location.Location;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
@@ -63,11 +64,11 @@ public class CustomUrlLogger implements FileLogger {
     public void annotate(String description, Location loc) throws Exception {
 
         String finalUrl = getFormattedTextblock(customLoggingUrl, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
-                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
+                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName());
         String finalBody = getFormattedTextblock(httpBody, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
-                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
+                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName());
         String finalHeaders = getFormattedTextblock(httpHeaders, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
-                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName());
+                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName());
 
 
         JobManager jobManager = AppSettings.getJobManager();
@@ -76,7 +77,7 @@ public class CustomUrlLogger implements FileLogger {
 
 
     public String getFormattedTextblock(String customLoggingUrl, Location loc, String description, String androidId,
-                                        float batteryLevel, String buildSerial, long sessionStartTimeStamp, String fileName)
+                                        float batteryLevel, String buildSerial, long sessionStartTimeStamp, String fileName, String profileName)
             throws Exception {
 
         String logUrl = customLoggingUrl;
@@ -98,6 +99,7 @@ public class CustomUrlLogger implements FileLogger {
         logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(buildSerial));
         logUrl = logUrl.replaceAll("(?i)%act", String.valueOf(sLoc.getDetectedActivity()));
         logUrl = logUrl.replaceAll("(?i)%filename", fileName);
+        logUrl = logUrl.replaceAll("(?i)%profile",URLEncoder.encode(profileName, "UTF-8"));
 
         return logUrl;
     }
