@@ -20,6 +20,7 @@
 package com.mendhak.gpslogger.common;
 
 import android.location.Location;
+import android.os.Bundle;
 
 import java.io.Serializable;
 
@@ -39,6 +40,9 @@ public class SerializableLocation implements Serializable {
     private boolean hasSpeed;
     private int satelliteCount;
     private String detectedActivity;
+    private String hdop;
+    private String vdop;
+    private String pdop;
 
 
     public SerializableLocation(Location loc) {
@@ -56,7 +60,19 @@ public class SerializableLocation implements Serializable {
         hasBearing = loc.hasBearing();
         hasSpeed = loc.hasSpeed();
         satelliteCount = Maths.getBundledSatelliteCount(loc);
-        detectedActivity = (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY))) ? loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY) : "";
+        detectedActivity = extractExtra (loc, BundleConstants.DETECTED_ACTIVITY);
+        hdop = extractExtra(loc, BundleConstants.HDOP);
+        vdop = extractExtra(loc, BundleConstants.VDOP);
+        pdop = extractExtra(loc, BundleConstants.PDOP);
+    }
+
+    private String extractExtra(Location loc, String key) {
+        if (loc.getExtras() != null
+                && !Strings.isNullOrEmpty(loc.getExtras().getString(key))) {
+            return loc.getExtras().getString(key);
+        }
+
+        return "";
     }
 
     public boolean hasAltitude(){
@@ -145,4 +161,9 @@ public class SerializableLocation implements Serializable {
 
     public String getDetectedActivity() { return detectedActivity; }
 
+    public String getHDOP() { return hdop; }
+
+    public String getVDOP() { return vdop; }
+
+    public String getPDOP() { return pdop; }
 }

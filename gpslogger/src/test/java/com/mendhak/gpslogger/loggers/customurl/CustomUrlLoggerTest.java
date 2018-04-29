@@ -95,9 +95,39 @@ public class CustomUrlLoggerTest {
         CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET", "","");
         String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&fn=20170527abc&profile=Default+Profile";
         String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&fn=%FILENAME&profile=%PROFILE";
-        assertThat("Start timestamp is in seconds", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc", "Default Profile"), is(expected));
+        assertThat("Profile name is provided", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc", "Default Profile"), is(expected));
 
     }
+
+    @Test
+    public void getFormattedUrl_WhenHDOPAvailable_AddDopValues() throws Exception {
+        Location loc = MockLocations.builder("MOCK", 12.193, 19.456).putExtra(BundleConstants.HDOP,"4").withTime(1457205869949l).build();
+        CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET", "","");
+        String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&horizontal=4";
+        String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&horizontal=%HDOP";
+        assertThat("HDOP value is provided", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc", "Default Profile"), is(expected));
+
+    }
+
+    @Test
+    public void getFormattedUrl_WhenVDOPAvailable_AddDopValues() throws Exception {
+        Location loc = MockLocations.builder("MOCK", 12.193, 19.456).putExtra(BundleConstants.VDOP,"19").withTime(1457205869949l).build();
+        CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET", "","");
+        String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&horizontal=&vertical=19";
+        String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&horizontal=%HDOP&vertical=%VDop";
+        assertThat("VDOP value is provided", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc", "Default Profile"), is(expected));
+    }
+
+    @Test
+    public void getFormattedUrl_WhenPDOPAvailable_AddDopValues() throws Exception {
+        Location loc = MockLocations.builder("MOCK", 12.193, 19.456).putExtra(BundleConstants.PDOP,"2").withTime(1457205869949l).build();
+        CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET", "","");
+        String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&horizontal=&positional=2";
+        String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&horizontal=%HDOP&positional=%pdop";
+        assertThat("PDOP value is provided", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc", "Default Profile"), is(expected));
+    }
+
+
 
     @Test
     public void getFormattedUrl_WhenPostBody_ValuesSubstituted() throws Exception {

@@ -100,6 +100,9 @@ public class CustomUrlLogger implements FileLogger {
         logUrl = logUrl.replaceAll("(?i)%act", String.valueOf(sLoc.getDetectedActivity()));
         logUrl = logUrl.replaceAll("(?i)%filename", fileName);
         logUrl = logUrl.replaceAll("(?i)%profile",URLEncoder.encode(profileName, "UTF-8"));
+        logUrl = logUrl.replaceAll("(?i)%hdop", sLoc.getHDOP());
+        logUrl = logUrl.replaceAll("(?i)%vdop", sLoc.getVDOP());
+        logUrl = logUrl.replaceAll("(?i)%pdop", sLoc.getPDOP());
 
         return logUrl;
     }
