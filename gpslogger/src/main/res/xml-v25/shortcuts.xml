@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="0start"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_media_play"
+        android:shortcutShortLabel="@string/shortcut_start"
+        android:shortcutLongLabel="@string/shortcut_start"
+
+        android:shortcutDisabledMessage="@string/shortcut_start">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.mendhak.gpslogger"
+            android:targetClass="com.mendhak.gpslogger.shortcuts.ShortcutStart" />
+        <!-- If your shortcut is associated with multiple intents, include them
+             here. The last intent in the list determines what the user sees when
+             they launch this shortcut. -->
+
+    </shortcut>
+    <!-- Specify more shortcuts here. -->
+    <shortcut
+        android:shortcutId="1stop"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:shortcutShortLabel="@string/shortcut_stop"
+        android:shortcutLongLabel="@string/shortcut_stop"
+        android:shortcutDisabledMessage="@string/shortcut_stop">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.mendhak.gpslogger"
+            android:targetClass="com.mendhak.gpslogger.shortcuts.ShortcutStop" />
+        <!-- If your shortcut is associated with multiple intents, include them
+             here. The last intent in the list determines what the user sees when
+             they launch this shortcut. -->
+
+    </shortcut>
+    <shortcut
+        android:shortcutId="2annotate"
+        android:enabled="true"
+        android:icon="@drawable/annotate2"
+        android:shortcutShortLabel="@string/menu_annotate"
+        android:shortcutLongLabel="@string/menu_annotate"
+        android:shortcutDisabledMessage="@string/menu_annotate">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.mendhak.gpslogger"
+            android:targetClass="com.mendhak.gpslogger.NotificationAnnotationActivity" />
+        <!-- If your shortcut is associated with multiple intents, include them
+             here. The last intent in the list determines what the user sees when
+             they launch this shortcut. -->
+
+    </shortcut>
+</shortcuts>

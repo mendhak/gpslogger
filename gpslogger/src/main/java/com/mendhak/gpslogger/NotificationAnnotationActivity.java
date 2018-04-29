@@ -28,9 +28,8 @@ import android.text.InputType;
 import android.view.KeyEvent;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.mendhak.gpslogger.common.events.CommandEvents;
+import com.mendhak.gpslogger.common.IntentConstants;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
 public class NotificationAnnotationActivity extends AppCompatActivity {
@@ -61,8 +60,8 @@ public class NotificationAnnotationActivity extends AppCompatActivity {
                     public void onInput(@NonNull MaterialDialog materialDialog, @NonNull CharSequence input) {
 
                         LOG.info("Annotation from notification: " + input.toString());
-                        EventBus.getDefault().post(new CommandEvents.Annotate(input.toString()));
                         Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
+                        serviceIntent.putExtra(IntentConstants.SET_DESCRIPTION, input.toString());
                         getApplicationContext().startService(serviceIntent);
                         materialDialog.dismiss();
                         finish();
