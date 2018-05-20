@@ -382,7 +382,7 @@ public class Strings {
         Matcher linkMatcher = Pattern.compile("\\[[^\\]]+\\]\\(((?!http)[^\\)]+)\\)", Pattern.MULTILINE).matcher(md);
         while(linkMatcher.find()){
             String group = linkMatcher.group(1);
-            output = output.replace(group,"http://code.mendhak.com/gpslogger/"+group);
+            output = output.replace(group,"https://gpslogger.app/"+group);
         }
 
         return output;

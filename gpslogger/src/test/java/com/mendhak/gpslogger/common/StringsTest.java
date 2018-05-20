@@ -263,10 +263,10 @@ public class StringsTest {
                 "\n" +
                 "### [Donate Paypal](https://paypal.me/mendhak/)\r\n" +
                 "This is [my screenshot](ss01.png)";
-        String expected = "### [Open source libraries used](http://code.mendhak.com/gpslogger/opensourcelibraries.html)\n" +
+        String expected = "### [Open source libraries used](https://gpslogger.app/opensourcelibraries.html)\n" +
                 "\n" +
                 "### [Donate Paypal](https://paypal.me/mendhak/)\r\n" +
-                "This is [my screenshot](http://code.mendhak.com/gpslogger/ss01.png)";
+                "This is [my screenshot](https://gpslogger.app/ss01.png)";
         assertThat("html link replaced with full URL", Strings.getSanitizedMarkdownForFaqView(md), is(expected));
     }
 
