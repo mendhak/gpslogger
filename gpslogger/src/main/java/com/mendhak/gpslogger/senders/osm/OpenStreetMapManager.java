@@ -43,10 +43,10 @@ public class OpenStreetMapManager extends FileSender {
 
 
     private static final Logger LOG = Logs.of(OpenStreetMapManager.class);
-    static final String OSM_REQUESTTOKEN_URL = "http://www.openstreetmap.org/oauth/request_token";
-    static final String OSM_ACCESSTOKEN_URL = "http://www.openstreetmap.org/oauth/access_token";
-    static final String OSM_AUTHORIZE_URL = "http://www.openstreetmap.org/oauth/authorize";
-    static final String OSM_GPSTRACE_URL = "http://www.openstreetmap.org/api/0.6/gpx/create";
+    static final String OSM_REQUESTTOKEN_URL = "https://www.openstreetmap.org/oauth/request_token";
+    static final String OSM_ACCESSTOKEN_URL = "https://www.openstreetmap.org/oauth/access_token";
+    static final String OSM_AUTHORIZE_URL = "https://www.openstreetmap.org/oauth/authorize";
+    static final String OSM_GPSTRACE_URL = "https://www.openstreetmap.org/api/0.6/gpx/create";
     private PreferenceHelper preferenceHelper;
 
     public OpenStreetMapManager(PreferenceHelper preferenceHelper) {

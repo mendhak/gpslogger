@@ -110,7 +110,7 @@ IntelliJ may not know where your Android SDK is.  You can find this under *File 
 
 ### OpenStreetMap Setup (Optional)
 
-Sign up for an account with [OpenStreetMap](http://openstreetmap.org) and log in.
+Sign up for an account with [OpenStreetMap](https://openstreetmap.org) and log in.
 
 Click on 'oauth settings'
 
