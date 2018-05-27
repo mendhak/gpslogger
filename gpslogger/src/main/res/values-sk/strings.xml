@@ -95,6 +95,8 @@
   <string name="pref_logging_title">Detaily zaznamenávania</string>
   <string name="log_gpx_title">Záznam do GPX</string>
   <string name="log_gpx_summary">Zaznamená polohy do súboru GPX v1.0</string>
+  <string name="log_gpx_11_title">Použiť GPX 1.1</string>
+  <string name="log_gpx_11_summary">Použije sa formát súborov GPX 1.1 namiesto GPX 1.0</string>
   <string name="log_kml_title">Záznam do KML</string>
   <string name="log_kml_summary">Zaznamená polohy do súboru KML v2.2</string>
   <string name="log_plain_text_title">Záznam do súboru CSV</string>
@@ -360,4 +362,5 @@ polia.
   <string name="customurl_http_body">HTTP - telo</string>
   <string name="customurl_http_headers">HTTP - hlavičky</string>
   <string name="customurl_http_method">HTTP - metóda</string>
+  <string name="customurl_http_test">Test HTTP</string>
 </resources>

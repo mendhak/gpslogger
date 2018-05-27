@@ -9,8 +9,8 @@
   <string name="ok">OK</string>
   <string name="cancel">Annulla</string>
   <string name="could_not_write_to_file">Impossibile scrivere il file</string>
-  <string name="add_description">Aggiungi una descrizione</string>
-  <string name="letters_numbers">Usa solo lettere e numeri</string>
+  <string name="add_description">Aggiungi una nota</string>
+  <string name="letters_numbers">Utilizzare solo lettere e numeri</string>
   <string name="menu_annotate">Annota</string>
   <string name="menu_share">Condividi</string>
   <string name="menu_exit">Esci</string>
@@ -36,7 +36,7 @@
   <string name="sharing_mylocation">Mia posizione</string>
   <string name="sharing_via">Condividi tramite</string>
   <!-- general -->
-  <string name="foot">Piede</string>
+  <string name="foot">piedi</string>
   <string name="feet">Piedi</string>
   <string name="meter">Metro</string>
   <string name="meters">Metri</string>
@@ -101,7 +101,7 @@
   <string name="log_plain_text_title">Log in formato CSV</string>
   <string name="log_plain_text_summary">Registra le posizioni su file CSV</string>
   <string name="log_json_title">Log su GeoJSON</string>
-  <string name="log_json_summary">Registra le posizioni in un file di GeoJSON</string>
+  <string name="log_json_summary">Registra le posizioni in un file GeoJSON</string>
   <string name="new_file_creation_title">Creazione di nuovi file</string>
   <string name="new_file_creation_summary">Creare un nuovo file per ogni giorno oppure ad ogni avvio di registrazione.</string>
   <string name="new_file_creation_onceaday">Un file al giorno</string>
@@ -340,4 +340,5 @@
   <string name="customurl_http_body">HTTP Body</string>
   <string name="customurl_http_headers">HTTP Headers</string>
   <string name="customurl_http_method">Metodo HTTP</string>
+  <string name="customurl_http_test">Test HTTP</string>
 </resources>

@@ -150,7 +150,7 @@ une plus grande précision à basses fréquences.    </string>
   <string name="stopped">Arrêté</string>
   <string name="osm_setup_title">OpenStreetMap</string>
   <string name="osm_lbl_authorize">Autoriser cette application</string>
-  <string name="osm_resetauth">Effacer les autorisations</string>
+  <string name="osm_resetauth">Effacer l\'autorisation</string>
   <string name="osm_lbl_authorize_description">Vous devez accorder à GPSLogger les autorisations pour envoyer les traces GPS vers OpenStreetMap. Vous pouvez définir les étiquettes, les descriptions et la visibilité ici après avoir autorisé cette application.    </string>
   <string name="osm_resetauth_summary">Retirer l\'autorisation locale utilisée pour communiquer avec votre compte OSM.</string>
   <string name="osm_auth_error">Une erreur s\'est produite lors de la connexion aux serveurs OpenStreetMap. Vérifier la connectivité de votre appareil ou essayer plus tard.    </string>
@@ -341,4 +341,5 @@ une plus grande précision à basses fréquences.    </string>
   <string name="customurl_http_body">Corps HTTP</string>
   <string name="customurl_http_headers">Entêtes HTTP</string>
   <string name="customurl_http_method">Méthode HTTP</string>
+  <string name="customurl_http_test">Test de HTTP</string>
 </resources>

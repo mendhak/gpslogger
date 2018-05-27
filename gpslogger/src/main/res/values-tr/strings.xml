@@ -95,6 +95,8 @@
   <string name="pref_logging_title">Günlük ayrıntıları</string>
   <string name="log_gpx_title">GPX olarak kaydet</string>
   <string name="log_gpx_summary">Konumlar GPX v1.0 dosyasına kaydedilir</string>
+  <string name="log_gpx_11_title">GPX 1.1 kullan</string>
+  <string name="log_gpx_11_summary">GPX 1.0 yerine GPX 1.1 dosya biçimini kullanır</string>
   <string name="log_kml_title">KML olarak kaydet</string>
   <string name="log_kml_summary">Konumlar KML v2.2 dosyasına kaydedilir</string>
   <string name="log_plain_text_title">CSV olarak kaydet</string>
@@ -340,4 +342,5 @@
   <string name="customurl_http_body">HTTP Body</string>
   <string name="customurl_http_headers">HTTP Headers</string>
   <string name="customurl_http_method">HTTP Method</string>
+  <string name="customurl_http_test">HTTP testi</string>
 </resources>

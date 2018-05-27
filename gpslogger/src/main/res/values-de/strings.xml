@@ -340,4 +340,5 @@
   <string name="customurl_http_body">HTTP-Text</string>
   <string name="customurl_http_headers">HTTP-Kopfzeilen</string>
   <string name="customurl_http_method">HTTP-Methode</string>
+  <string name="customurl_http_test">Http-Test</string>
 </resources>

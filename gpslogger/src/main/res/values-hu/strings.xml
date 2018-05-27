@@ -17,7 +17,7 @@
   <!-- main form labels -->
   <string name="txt_latitude">Szélesség:</string>
   <string name="txt_longitude">Hosszúság:</string>
-  <string name="txt_altitude">Tengerszint feletti magasság:</string>
+  <string name="txt_altitude">Magasság:</string>
   <string name="txt_speed">Sebesség:</string>
   <string name="txt_direction">Irány:</string>
   <string name="txt_satellites">Műholdak:</string>
@@ -27,7 +27,7 @@
   <string name="btn_stop_logging">Naplózás leállítása</string>
   <string name="gpslogger_still_running">Még mindig működik a GPSLogger.</string>
   <string name="summary_loggingto">Bejelentkezés:</string>
-  <string name="summary_loggingto_screen">csak képernyőn</string>
+  <string name="summary_loggingto_screen">csak a képernyőn</string>
   <string name="summary_freq_every">Frekvencia:</string>
   <string name="summary_freq_max">maximális</string>
   <string name="summary_dist">Távolság:</string>
@@ -41,7 +41,8 @@
   <string name="meter">&#160;méter</string>
   <string name="meters">&#160;méter</string>
   <string name="error">Hiba</string>
-  <string name="error_connection">Kapcsolódási hiba. Kérjük, ellenőrizze a telefon beállításait.</string>
+  <string name="error_connection">Csatlakozázi hiba. Ellenőrizd a telefonod beállításait. 
+Connection Error. Please check your phone settings.</string>
   <string name="seconds">mp</string>
   <string name="minutes">perc</string>
   <string name="hours">óra</string>
@@ -88,12 +89,14 @@
   <string name="accuracy_within" formatted="false">%s %s belül</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">Távolság méterben</string>
-  <string name="settings_accuracy_in_meters">Méteres pontossággal</string>
+  <string name="settings_accuracy_in_meters">Pontosság méterben</string>
   <string name="settings_enter_meters">Adja meg a métert (max 9999)</string>
   <!-- Settings -->
   <string name="pref_logging_title">Naplózási részletek</string>
   <string name="log_gpx_title">GPX napló</string>
   <string name="log_gpx_summary">Pozíciók naplózása egy GPX v1.0 fájlba</string>
+  <string name="log_gpx_11_title">GPX 1.1 használata</string>
+  <string name="log_gpx_11_summary">GPX 1.1 formátum használata GPX 1.0 helyett</string>
   <string name="log_kml_title">KML napló</string>
   <string name="log_kml_summary">Pozíciók naplózása egy KML v2.2 fájlba</string>
   <string name="log_plain_text_title">Naplózás CSV-be</string>
@@ -339,4 +342,5 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
   <string name="customurl_http_body">HTTP Törzs</string>
   <string name="customurl_http_headers">HTTP Fejlécek</string>
   <string name="customurl_http_method">HTTP Eljárás</string>
+  <string name="customurl_http_test">HTTP teszt</string>
 </resources>

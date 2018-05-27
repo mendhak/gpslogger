@@ -112,7 +112,10 @@
   <string name="enabledisablegps_summary">Du-te la setările de telefon pentru a activa sau dezactiva furnizorii.</string>
   <string name="startonbootup_title">Starteaza aplicatia la pornirea telefonului</string>
   <string name="startonbootup_summary">Porneste aplicatia şi începe înregistrarea atunci când telefonul este pornit.</string>
+  <string name="autoemail_title">Email</string>
+  <string name="please_wait">Vă rugăm aşteptaţi</string>
   <string name="autoemail_target">Adrese de email destinaţie</string>
+  <string name="autosend_frequency_display">După %s minute</string>
   <string name="autoemail_frequency_whenistop">Atunci când apăsaţi stop</string>
   <string name="autoemail_smtp_category">Setări de e-mail</string>
   <string name="autoemail_username_summary">Numele de utilizator de la furnizorul dvs. de e-mail</string>
@@ -157,6 +160,7 @@
   <string name="menu_upload">Încărcaţi</string>
   <string name="autoemail_from">De la adresa</string>
   <string name="autoemail_from_summary">Unii furnizori de e-mail necesită o adresă from. Folositi aceasta numai în cazul în care aveţi nevoie de ea.</string>
+  <string name="gdocs_setup_title">Google Drive</string>
   <string name="gdocs_test_title">Test de încărcare fisier</string>
   <string name="gdocs_testupload_success">Fisier incărcat. Vă rugăm să verificaţi documentele Google pentru un fişier nou.</string>
   <string name="autoemail_sendto_csv">Adrese de email separate prin virgulă</string>
@@ -199,6 +203,7 @@
   <string name="autoftp_testing">Testare incarcare fisier pe FTP</string>
   <string name="autoftp_invalid_settings">Setări invalide</string>
   <string name="autoftp_invalid_summary">Unele dintre setări sunt incorecte. Asiguraţi-vă că aţi completat toate câmpurile relevante.     </string>
+  <string name="autoftp_setup_title">FTP</string>
   <string name="menu_faq">Ajutor si Întrebări frecvente</string>
   <string name="gpsf_missing">Lipsă serviciu</string>
   <string name="gpsf_missing_description">Veţi avea nevoie de Google Play Services Framework pentru a utiliza această functionalitate.</string>
@@ -207,4 +212,9 @@
   <string name="txt_annotation">Adnotare:</string>
   <string name="txt_time_isoformat">Ora UTC (2011-12-25T15:27:33Z):</string>
   <string name="txt_provider">Furnizor:</string>
+  <string name="txt_travel_duration">Durată:</string>
+  <string name="save">Salvare</string>
+  <string name="listeners_gps">GPS</string>
+  <string name="autosend_frequency_hint">Număr de minute</string>
+  <string name="donate_bitcoin">Bitcoin</string>
 </resources>
