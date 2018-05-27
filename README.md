@@ -31,7 +31,7 @@ I'm not very good at UIs, so any work with the layouts would be appreciated!
 
 ## Donate
 
-[Bitcoin](https://blockchain.info/payment_request?address=14bKk4sR1AD7avuJfBx2izy2FwyqMXEvcY) | [Paypal](https://paypal.me/mendhak) | [LTC](http://ltc.blockr.io/address/info/LP6gPtk1rkXyKYazyUJAkJpyc4Ghp8qxGs)
+[Bitcoin](https://blockchain.info/payment_request?address=14bKk4sR1AD7avuJfBx2izy2FwyqMXEvcY) | [Paypal](https://paypal.me/mendhak) 
 
 
 ## Verifying

@@ -95,6 +95,15 @@
     </Preference>
 
     <Preference
+        android:key="gpslogger_repo"
+        android:title="https://gpslogger.app"
+        android:icon="@drawable/gpsloggericon3"
+        >
+        <intent android:action="android.intent.action.VIEW"
+            android:data="https://gpslogger.app/"/>
+    </Preference>
+
+    <Preference
         android:key="gpslogger_crowdin"
         android:title="Translations"
         >
