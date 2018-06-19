@@ -64,11 +64,11 @@ public class CustomUrlLogger implements FileLogger {
     public void annotate(String description, Location loc) throws Exception {
 
         String finalUrl = getFormattedTextblock(customLoggingUrl, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
-                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName());
+                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName(), Session.getInstance().getTotalTravelled());
         String finalBody = getFormattedTextblock(httpBody, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
-                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName());
+                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName(), Session.getInstance().getTotalTravelled());
         String finalHeaders = getFormattedTextblock(httpHeaders, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
-                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName());
+                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName(), Session.getInstance().getTotalTravelled());
 
 
         JobManager jobManager = AppSettings.getJobManager();
@@ -77,7 +77,7 @@ public class CustomUrlLogger implements FileLogger {
 
 
     public String getFormattedTextblock(String customLoggingUrl, Location loc, String description, String androidId,
-                                        float batteryLevel, String buildSerial, long sessionStartTimeStamp, String fileName, String profileName)
+                                        float batteryLevel, String buildSerial, long sessionStartTimeStamp, String fileName, String profileName, double distance)
             throws Exception {
 
         String logUrl = customLoggingUrl;
@@ -103,6 +103,7 @@ public class CustomUrlLogger implements FileLogger {
         logUrl = logUrl.replaceAll("(?i)%hdop", sLoc.getHDOP());
         logUrl = logUrl.replaceAll("(?i)%vdop", sLoc.getVDOP());
         logUrl = logUrl.replaceAll("(?i)%pdop", sLoc.getPDOP());
+        logUrl = logUrl.replaceAll("(?i)%dist", String.valueOf(distance));
 
         return logUrl;
     }
