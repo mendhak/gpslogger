@@ -48,7 +48,7 @@ public class CustomUrlLoggerTest {
         CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET", "", "");
         String expected ="http://192.168.1.65:8000/test?lat=12.193&lon=19.111&sat=0&desc=&alt=0.0&acc=0.0&dir=0.0&prov=MOCK&spd=0.0&time=2016-03-05T19:24:29.949Z&battery=0.0&androidId=&serial=&activity=";
         String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER&activity=%ACT";
-        assertThat("Placeholders are substituted", logger.getFormattedTextblock(urlTemplate,loc, "", "", 0, "", 0,"","", 27.5), is(expected));
+        assertThat("Placeholders are substituted", logger.getFormattedTextblock(urlTemplate,loc, "", "", 0, "", 0,"","", 0), is(expected));
     }
 
     @Test
@@ -57,12 +57,12 @@ public class CustomUrlLoggerTest {
         CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET", "","");
         String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&sat=0&desc=&alt=0.0&acc=0.0&dir=0.0&prov=MOCK&spd=0.0&time=2016-03-05T19:24:29.949Z&battery=0.0&androidId=&serial=&activity=&epoch=1457205869";
         String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER&activity=%ACT&epoch=%TIMESTAMP";
-        assertThat("Unix timestamp is in seconds", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 0,"","", 27.5), is(expected));
+        assertThat("Unix timestamp is in seconds", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 0,"","", 0), is(expected));
 
         expected = "http://192.168.1.65:8000/test?lat=12.193&lon=19.456&sat=0&desc=&alt=0.0&acc=0.0&dir=0.0&prov=MOCK&spd=0.0&time=2016-03-05T19:24:29.949Z&battery=0.0&androidId=&serial=&activity=&epoch=1457205869000";
         urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER&activity=%ACT&epoch=%TIMESTAMP000";
 
-        assertThat("Unix timestamp with 000 to fake milliseconds", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 0,"","", 27.5), is(expected));
+        assertThat("Unix timestamp with 000 to fake milliseconds", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 0,"","", 0), is(expected));
 
     }
 
@@ -72,11 +72,11 @@ public class CustomUrlLoggerTest {
         CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET", "","");
         String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&stst=1495884681";
         String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&stst=%STARTTIMESTAMP";
-        assertThat("Start timestamp is in seconds", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l,"","", 27.5), is(expected));
+        assertThat("Start timestamp is in seconds", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l,"","", 0), is(expected));
 
         expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&stst=0";
         urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&stst=%STARTTIMESTAMP";
-        assertThat("Absence of start timestamp recorded as 0", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 0l,"","", 27.5), is(expected));
+        assertThat("Absence of start timestamp recorded as 0", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 0l,"","", 0), is(expected));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class CustomUrlLoggerTest {
         CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET", "","");
         String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&fn=20170527abc";
         String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&fn=%FILENAME";
-        assertThat("Start timestamp is in seconds", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc","", 27.5), is(expected));
+        assertThat("Start timestamp is in seconds", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc","", 0), is(expected));
 
     }
 
@@ -95,7 +95,7 @@ public class CustomUrlLoggerTest {
         CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET", "","");
         String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&fn=20170527abc&profile=Default+Profile";
         String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&fn=%FILENAME&profile=%PROFILE";
-        assertThat("Profile name is provided", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc", "Default Profile", 27.5), is(expected));
+        assertThat("Profile name is provided", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc", "Default Profile", 0), is(expected));
 
     }
 
@@ -105,7 +105,7 @@ public class CustomUrlLoggerTest {
         CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET", "","");
         String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&horizontal=4";
         String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&horizontal=%HDOP";
-        assertThat("HDOP value is provided", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc", "Default Profile", 27.5), is(expected));
+        assertThat("HDOP value is provided", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc", "Default Profile", 0), is(expected));
 
     }
 
@@ -115,7 +115,7 @@ public class CustomUrlLoggerTest {
         CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET", "","");
         String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&horizontal=&vertical=19";
         String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&horizontal=%HDOP&vertical=%VDop";
-        assertThat("VDOP value is provided", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc", "Default Profile", 27.5), is(expected));
+        assertThat("VDOP value is provided", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc", "Default Profile", 0), is(expected));
     }
 
     @Test
@@ -124,7 +124,7 @@ public class CustomUrlLoggerTest {
         CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET", "","");
         String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&horizontal=&positional=2";
         String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&horizontal=%HDOP&positional=%pdop";
-        assertThat("PDOP value is provided", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc", "Default Profile", 27.5), is(expected));
+        assertThat("PDOP value is provided", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 1495884681283l, "20170527abc", "Default Profile", 0), is(expected));
     }
 
 
