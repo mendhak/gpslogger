@@ -37,7 +37,5 @@
     <Preference android:key="customurl_validatecustomsslcert"
                 android:title="@string/ssl_certificate_validate" />
 
-    <Preference android:key="customurl_http_test" android:title="@string/customurl_http_test" />
-
 
 </PreferenceScreen>

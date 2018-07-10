@@ -65,7 +65,6 @@ public class CustomUrlFragment extends PermissionedPreferenceFragment implements
         urlPathPreference.setOnPreferenceChangeListener(this);
 
         findPreference("customurl_legend_1").setOnPreferenceClickListener(this);
-        findPreference("customurl_http_test").setOnPreferenceClickListener(this);
         findPreference("customurl_validatecustomsslcert").setOnPreferenceClickListener(this);
 
         registerEventBus();
@@ -121,12 +120,7 @@ public class CustomUrlFragment extends PermissionedPreferenceFragment implements
 
             return true;
         }
-        else if (preference.getKey().equals("customurl_http_test")){
-            LOG.debug("Sending test HTTP GET request to " + PreferenceHelper.getInstance().getCustomLoggingUrl() );
-            Dialogs.progress(getActivity(), getString(R.string.please_wait), getString(R.string.please_wait));
-            JobManager jobManager = AppSettings.getJobManager();
-            jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(PreferenceHelper.getInstance().getCustomLoggingUrl()), new UploadEvents.CustomUrl()));
-        }
+
         return false;
     }
 
