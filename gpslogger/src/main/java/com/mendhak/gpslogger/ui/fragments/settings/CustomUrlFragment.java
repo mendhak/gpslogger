@@ -37,7 +37,6 @@ import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
-import com.path.android.jobqueue.JobManager;
 
 import org.slf4j.Logger;
 import java.net.MalformedURLException;

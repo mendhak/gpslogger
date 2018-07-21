@@ -20,6 +20,12 @@
 package com.mendhak.gpslogger.senders.owncloud;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import com.birbit.android.jobqueue.Job;
+import com.birbit.android.jobqueue.Params;
+import com.birbit.android.jobqueue.RetryConstraint;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.network.LocalX509TrustManager;
 import com.mendhak.gpslogger.common.network.Networks;
@@ -36,8 +42,6 @@ import com.owncloud.android.lib.common.operations.RemoteOperationResult;
 import com.owncloud.android.lib.resources.files.CreateRemoteFolderOperation;
 import com.owncloud.android.lib.resources.files.FileUtils;
 import com.owncloud.android.lib.resources.files.UploadRemoteFileOperation;
-import com.path.android.jobqueue.Job;
-import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
@@ -121,16 +125,15 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
     }
 
     @Override
-    protected void onCancel() {
-
+    protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
         LOG.debug("ownCloud Job: onCancel");
     }
 
     @Override
-    protected boolean shouldReRunOnThrowable(Throwable throwable) {
+    protected RetryConstraint shouldReRunOnThrowable(@NonNull Throwable throwable, int runCount, int maxRunCount) {
         LOG.error("Could not upload to OwnCloud", throwable);
         EventBus.getDefault().post(new UploadEvents.OwnCloud().failed("Could not upload to OwnCloud", throwable));
-        return false;
+        return RetryConstraint.CANCEL;
     }
 
     @Override

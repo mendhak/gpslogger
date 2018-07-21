@@ -19,6 +19,7 @@
 
 package com.mendhak.gpslogger.senders.opengts;
 
+import com.birbit.android.jobqueue.JobManager;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -27,7 +28,6 @@ import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
 import com.mendhak.gpslogger.loggers.opengts.OpenGtsUdpJob;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.senders.GpxReader;
-import com.path.android.jobqueue.JobManager;
 import org.slf4j.Logger;
 
 import java.io.File;

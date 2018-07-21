@@ -22,14 +22,18 @@ package com.mendhak.gpslogger.senders.dropbox;
 
 
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import com.birbit.android.jobqueue.Job;
+import com.birbit.android.jobqueue.Params;
+import com.birbit.android.jobqueue.RetryConstraint;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.WriteMode;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.path.android.jobqueue.Job;
-import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
@@ -77,17 +81,18 @@ public class DropboxJob extends Job {
 
     }
 
-
     @Override
-    protected void onCancel() {
+    protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
+
     }
 
     @Override
-    protected boolean shouldReRunOnThrowable(Throwable throwable) {
+    protected RetryConstraint shouldReRunOnThrowable(@NonNull Throwable throwable, int runCount, int maxRunCount) {
         EventBus.getDefault().post(new UploadEvents.Dropbox().failed("Could not upload to Dropbox", throwable));
         LOG.error("Could not upload to Dropbox", throwable);
-        return false;
+        return RetryConstraint.CANCEL;
     }
+
 
     public static String getJobTag(String fileName) {
         return "DROPBOX" + fileName;

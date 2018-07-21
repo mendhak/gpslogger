@@ -21,6 +21,10 @@ package com.mendhak.gpslogger.senders.googledrive;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
+import com.birbit.android.jobqueue.CancelResult;
+import com.birbit.android.jobqueue.JobManager;
+import com.birbit.android.jobqueue.TagConstraint;
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.mendhak.gpslogger.common.AppSettings;
@@ -29,9 +33,6 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
-import com.path.android.jobqueue.CancelResult;
-import com.path.android.jobqueue.JobManager;
-import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 

@@ -19,13 +19,17 @@
 
 package com.mendhak.gpslogger.loggers.opengts;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import com.birbit.android.jobqueue.Job;
+import com.birbit.android.jobqueue.Params;
+import com.birbit.android.jobqueue.RetryConstraint;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSManager;
-import com.path.android.jobqueue.Job;
-import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
@@ -69,17 +73,16 @@ public class OpenGtsUdpJob extends Job {
     }
 
     @Override
-    protected void onCancel() {
+    protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
 
     }
 
     @Override
-    protected boolean shouldReRunOnThrowable(Throwable throwable) {
+    protected RetryConstraint shouldReRunOnThrowable(@NonNull Throwable throwable, int runCount, int maxRunCount) {
         LOG.error("Could not send to OpenGTS", throwable);
         EventBus.getDefault().post(new UploadEvents.OpenGTS().failed("Could not send to OpenGTS", throwable));
-        return false;
+        return RetryConstraint.CANCEL;
     }
-
 
 
     public void sendRAW(String id, String accountName, SerializableLocation[] locations) throws Exception {

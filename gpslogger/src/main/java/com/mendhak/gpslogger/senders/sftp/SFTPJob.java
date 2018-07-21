@@ -1,13 +1,17 @@
 package com.mendhak.gpslogger.senders.sftp;
 
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Base64;
+
+import com.birbit.android.jobqueue.Job;
+import com.birbit.android.jobqueue.Params;
+import com.birbit.android.jobqueue.RetryConstraint;
 import com.jcraft.jsch.*;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.path.android.jobqueue.Job;
-import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 import java.io.*;
@@ -119,19 +123,18 @@ public class SFTPJob extends Job {
         }
     }
 
-
     @Override
-    protected void onCancel() {
-
+    protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
         LOG.debug("SFTP Job Cancelled");
     }
 
     @Override
-    protected boolean shouldReRunOnThrowable(Throwable throwable) {
+    protected RetryConstraint shouldReRunOnThrowable(@NonNull Throwable throwable, int runCount, int maxRunCount) {
         LOG.error("Could not upload to SFTP server", throwable);
         EventBus.getDefault().post(new UploadEvents.SFTP().failed(throwable.getMessage(), throwable));
-        return false;
+        return RetryConstraint.CANCEL;
     }
+
 
     public static String getJobTag(File gpxFile) {
         return "SFTP" + gpxFile.getName();

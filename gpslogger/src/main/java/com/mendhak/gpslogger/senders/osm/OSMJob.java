@@ -19,13 +19,17 @@
 
 package com.mendhak.gpslogger.senders.osm;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import com.birbit.android.jobqueue.Job;
+import com.birbit.android.jobqueue.Params;
+import com.birbit.android.jobqueue.RetryConstraint;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.path.android.jobqueue.Job;
-import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
 import oauth.signpost.OAuthConsumer;
 import okhttp3.*;
@@ -107,15 +111,15 @@ public class OSMJob extends Job {
     }
 
     @Override
-    protected void onCancel() {
+    protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
         LOG.debug("OSM Job cancelled ");
     }
 
     @Override
-    protected boolean shouldReRunOnThrowable(Throwable throwable) {
+    protected RetryConstraint shouldReRunOnThrowable(@NonNull Throwable throwable, int runCount, int maxRunCount) {
         LOG.error("Could not send to OpenStreetMap", throwable);
         EventBus.getDefault().post(new UploadEvents.OpenStreetMap().failed("Could not send to OpenStreetMap", throwable));
-        return false;
+        return RetryConstraint.CANCEL;
     }
 
     public static String getJobTag(File gpxFile) {

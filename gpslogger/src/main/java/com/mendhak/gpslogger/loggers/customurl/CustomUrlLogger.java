@@ -20,6 +20,8 @@
 package com.mendhak.gpslogger.loggers.customurl;
 
 import android.location.Location;
+
+import com.birbit.android.jobqueue.JobManager;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
@@ -27,7 +29,6 @@ import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.loggers.FileLogger;
-import com.path.android.jobqueue.JobManager;
 
 
 import java.net.URLEncoder;

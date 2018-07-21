@@ -19,7 +19,13 @@
 
 package com.mendhak.gpslogger.senders.email;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Base64;
+
+import com.birbit.android.jobqueue.Job;
+import com.birbit.android.jobqueue.Params;
+import com.birbit.android.jobqueue.RetryConstraint;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.Strings;
@@ -28,8 +34,6 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.loggers.Streams;
 import com.mendhak.gpslogger.common.network.LocalX509TrustManager;
-import com.path.android.jobqueue.Job;
-import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
 import org.apache.commons.net.ProtocolCommandEvent;
 import org.apache.commons.net.ProtocolCommandListener;
@@ -217,6 +221,17 @@ public class AutoEmailJob extends Job {
 
     }
 
+    @Override
+    protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
+        LOG.debug("Email job cancelled");
+    }
+
+    @Override
+    protected RetryConstraint shouldReRunOnThrowable(@NonNull Throwable throwable, int runCount, int maxRunCount) {
+        LOG.error("Could not send email", throwable);
+        return RetryConstraint.CANCEL;
+    }
+
 
     /**
      * Append the given attachments to the message which is being written by the given writer.
@@ -248,16 +263,6 @@ public class AutoEmailJob extends Job {
         }
     }
 
-    @Override
-    protected void onCancel() {
-        LOG.debug("Email job cancelled");
-    }
-
-    @Override
-    protected boolean shouldReRunOnThrowable(Throwable throwable) {
-        LOG.error("Could not send email", throwable);
-        return false;
-    }
 
     public static String getJobTag(File[] files) {
         StringBuilder sb = new StringBuilder();

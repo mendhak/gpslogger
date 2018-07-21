@@ -20,11 +20,12 @@
 package com.mendhak.gpslogger.common;
 
 import android.app.Application;
+
+import com.birbit.android.jobqueue.JobManager;
+import com.birbit.android.jobqueue.config.Configuration;
+import com.birbit.android.jobqueue.log.CustomLogger;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.path.android.jobqueue.JobManager;
-import com.path.android.jobqueue.config.Configuration;
-import com.path.android.jobqueue.log.CustomLogger;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
@@ -56,7 +57,7 @@ public class AppSettings extends Application {
                 .maxConsumerCount(1)
                 .customLogger(jobQueueLogger)
                 .build();
-        jobManager = new JobManager(this, config);
+        jobManager = new JobManager(config);
         LOG.debug("Job Queue configured");
     }
 
@@ -100,6 +101,11 @@ public class AppSettings extends Application {
         public void e(String text, Object... args) {
 
             LOG.error(String.format(text, args));
+        }
+
+        @Override
+        public void v(String text, Object... args) {
+            LOG.debug(String.format(text,args));
         }
     };
 

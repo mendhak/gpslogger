@@ -22,6 +22,10 @@ package com.mendhak.gpslogger.senders.dropbox;
 
 import android.content.Context;
 import android.os.AsyncTask;
+
+import com.birbit.android.jobqueue.CancelResult;
+import com.birbit.android.jobqueue.JobManager;
+import com.birbit.android.jobqueue.TagConstraint;
 import com.dropbox.core.*;
 import com.dropbox.core.android.Auth;
 import com.mendhak.gpslogger.BuildConfig;
@@ -31,9 +35,6 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
-import com.path.android.jobqueue.CancelResult;
-import com.path.android.jobqueue.JobManager;
-import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 

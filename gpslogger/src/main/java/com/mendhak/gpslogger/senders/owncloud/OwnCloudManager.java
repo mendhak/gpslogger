@@ -19,6 +19,9 @@
 
 package com.mendhak.gpslogger.senders.owncloud;
 
+import com.birbit.android.jobqueue.CancelResult;
+import com.birbit.android.jobqueue.JobManager;
+import com.birbit.android.jobqueue.TagConstraint;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
@@ -27,9 +30,6 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.ui.fragments.settings.OwnCloudSettingsFragment;
-import com.path.android.jobqueue.CancelResult;
-import com.path.android.jobqueue.JobManager;
-import com.path.android.jobqueue.TagConstraint;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 

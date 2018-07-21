@@ -19,13 +19,17 @@
 
 package com.mendhak.gpslogger.senders.googledrive;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import com.birbit.android.jobqueue.Job;
+import com.birbit.android.jobqueue.Params;
+import com.birbit.android.jobqueue.RetryConstraint;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Streams;
-import com.path.android.jobqueue.Job;
-import com.path.android.jobqueue.Params;
 import de.greenrobot.event.EventBus;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -299,15 +303,15 @@ public class GoogleDriveJob extends Job {
     }
 
     @Override
-    protected void onCancel() {
-
+    protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
+        LOG.error("Could not upload to Google Drive", throwable);
+        EventBus.getDefault().post(new UploadEvents.GDrive().failed("Could not upload to Google Drive", throwable));
     }
 
     @Override
-    protected boolean shouldReRunOnThrowable(Throwable throwable) {
-        LOG.error("Could not upload to Google Drive", throwable);
-        EventBus.getDefault().post(new UploadEvents.GDrive().failed("Could not upload to Google Drive", throwable));
-        return true;
+    protected RetryConstraint shouldReRunOnThrowable(@NonNull Throwable throwable, int runCount, int maxRunCount) {
+        LOG.info("Retrying Google Drive upload, attempt {}", runCount);
+        return RetryConstraint.createExponentialBackoff(runCount,3000);
     }
 
     @Override
