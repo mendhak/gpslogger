@@ -278,7 +278,8 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
         LOG.debug("GDrive Event completed, success: " + o.success);
         Dialogs.hideProgress();
         if(!o.success){
-            Dialogs.alert(getString(R.string.sorry), getString(R.string.upload_failure), getActivity());
+            Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), o.message , o.throwable, getActivity());
+
         }
         else {
             Dialogs.alert(getString(R.string.success), getString(R.string.gdocs_testupload_success), getActivity());
