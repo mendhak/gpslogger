@@ -307,6 +307,11 @@ public class GoogleDriveJob extends Job {
     protected boolean shouldReRunOnThrowable(Throwable throwable) {
         LOG.error("Could not upload to Google Drive", throwable);
         EventBus.getDefault().post(new UploadEvents.GDrive().failed("Could not upload to Google Drive", throwable));
-        return false;
+        return true;
+    }
+
+    @Override
+    protected int getRetryLimit() {
+        return 3;
     }
 }
