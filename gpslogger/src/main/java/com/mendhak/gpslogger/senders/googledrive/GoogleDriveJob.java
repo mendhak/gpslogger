@@ -68,8 +68,8 @@ public class GoogleDriveJob extends Job {
         FileInputStream fis = new FileInputStream(gpxFile);
         String fileName = gpxFile.getName();
 
-        String gpsLoggerFolderId = PreferenceHelper.getInstance().getGoogleDriveFolderId();
-        LOG.debug("GPSLogger folder ID - " + gpsLoggerFolderId);
+        String gpsLoggerFolderId = "";
+
 
         if(Strings.isNullOrEmpty(gpsLoggerFolderId) || !folderExists(token, gpsLoggerFolderId)){
             LOG.debug("GPSLogger folder not found, searching by name");
@@ -85,8 +85,9 @@ public class GoogleDriveJob extends Job {
                 return;
             }
 
-            PreferenceHelper.getInstance().setGoogleDriveFolderId(gpsLoggerFolderId);
         }
+
+        LOG.debug("GPSLogger folder ID - " + gpsLoggerFolderId);
 
         //Now search for the file
         String gpxFileId = getFileIdFromFileName(token, fileName, gpsLoggerFolderId);

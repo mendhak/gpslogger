@@ -306,13 +306,6 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.GOOGLEDRIVE_FOLDERNAME, "GPSLogger for Android");
     }
 
-    public String getGoogleDriveFolderId() {
-        return prefs.getString(PreferenceNames.GOOGLEDRIVE_FOLDERID, "");
-    }
-
-    public void setGoogleDriveFolderId(String folderId){
-        prefs.edit().putString(PreferenceNames.GOOGLEDRIVE_FOLDERID, folderId).apply();
-    }
 
     /**
      * Google Drive OAuth token
