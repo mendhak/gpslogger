@@ -50,7 +50,7 @@ android {
     defaultConfig {
         applicationId project.APP_ID
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 27
 
         versionCode project.APP_VERSION_CODE
         versionName project.APP_VERSION_NAME
@@ -130,11 +130,11 @@ android {
 
 dependencies {
 
-    implementation 'com.android.support:support-v4:27.0.2'
-    implementation 'com.google.android.gms:play-services-base:11.8.0'
-    implementation 'com.google.android.gms:play-services-location:11.8.0'
-    implementation 'com.google.android.gms:play-services-wearable:11.8.0'
-    implementation 'com.google.android.gms:play-services-auth:11.8.0'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.google.android.gms:play-services-base:15.0.1'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
+    implementation 'com.google.android.gms:play-services-wearable:15.0.1'
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
 
     //FTP operations
     implementation('commons-net:commons-net:3.4')
@@ -150,13 +150,13 @@ dependencies {
 
 
     //Android lollipop/material features including the Toolbar
-    implementation "com.android.support:appcompat-v7:27.0.2"
+    implementation "com.android.support:appcompat-v7:27.1.1"
 
     //Recycler view required by material dialog custom URL alert box
-    implementation "com.android.support:recyclerview-v7:27.0.2"
+    implementation "com.android.support:recyclerview-v7:27.1.1"
 
     //Cardviews
-    implementation "com.android.support:cardview-v7:27.0.2"
+    implementation "com.android.support:cardview-v7:27.1.1"
 
     //Material dialogs
     //Change to 0.8.5.7 when released
@@ -191,7 +191,7 @@ dependencies {
     implementation ('commons-httpclient:commons-httpclient:3.1') {
                 exclude module: 'commons-logging'
     }
-    implementation 'org.apache.jackrabbit:jackrabbit-webdav:2.10.1'
+    implementation 'org.apache.jackrabbit:jackrabbit-webdav:2.12.2'
 
     //Expandable textview in the FAQ
     implementation 'com.ms-square:expandableTextView:0.1.4'

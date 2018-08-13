@@ -59,7 +59,7 @@ public class GpsLoggingService extends Service  {
     private static int NOTIFICATION_ID = 8675309;
     private final IBinder binder = new GpsLoggingBinder();
     AlarmManager nextPointAlarmManager;
-    private NotificationCompat.Builder nfc = null;
+    private NotificationCompat.Builder nfc;
 
     private static final Logger LOG = Logs.of(GpsLoggingService.class);
 
@@ -505,7 +505,21 @@ public class GpsLoggingService extends Service  {
         }
 
         if (nfc == null) {
-            nfc = new NotificationCompat.Builder(getApplicationContext())
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+                NotificationChannel channel = new NotificationChannel("gpslogger", getString(R.string.app_name), NotificationManager.IMPORTANCE_DEFAULT);
+                channel.enableLights(false);
+                channel.enableVibration(false);
+                channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+
+                channel.setShowBadge(true);
+                manager.createNotificationChannel(channel);
+
+            }
+
+            nfc = new NotificationCompat.Builder(getApplicationContext(),"gpslogger")
                     .setSmallIcon(R.drawable.notification)
                     .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.gpsloggericon3))
                     .setPriority( preferenceHelper.shouldHideNotificationFromStatusBar() ? NotificationCompat.PRIORITY_MIN : NotificationCompat.PRIORITY_LOW)

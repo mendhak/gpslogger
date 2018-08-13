@@ -28,12 +28,12 @@ repositories {
 }
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 27
 
     defaultConfig {
         applicationId project.APP_ID
         minSdkVersion 20
-        targetSdkVersion 23
+        targetSdkVersion 27
 
         versionCode project.APP_VERSION_CODE
         versionName project.APP_VERSION_NAME
