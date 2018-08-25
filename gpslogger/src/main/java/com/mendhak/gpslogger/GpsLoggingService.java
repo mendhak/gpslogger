@@ -132,7 +132,7 @@ public class GpsLoggingService extends Service  {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
+        super.onStartCommand(intent, flags, startId);
         handleIntent(intent);
         return START_STICKY;
     }
@@ -381,7 +381,7 @@ public class GpsLoggingService extends Service  {
 
 
         try {
-            startForeground(NOTIFICATION_ID, new Notification());
+            startForeground(NOTIFICATION_ID, getNotification());
         } catch (Exception ex) {
             LOG.error("Could not start GPSLoggingService in foreground. ", ex);
         }
@@ -468,7 +468,7 @@ public class GpsLoggingService extends Service  {
     /**
      * Shows a notification icon in the status bar for GPS Logger
      */
-    private void showNotification() {
+    private Notification getNotification() {
 
         Intent stopLoggingIntent = new Intent(this, GpsLoggingService.class);
         stopLoggingIntent.setAction("NotificationButton_STOP");
@@ -544,8 +544,15 @@ public class GpsLoggingService extends Service  {
         nfc.setStyle(new NotificationCompat.BigTextStyle().bigText(contentText).setBigContentTitle(contentTitle));
         nfc.setWhen(notificationTime);
 
+        //notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        //notificationManager.notify(NOTIFICATION_ID, nfc.build());
+        return nfc.build();
+    }
+
+    private void showNotification(){
+        Notification notif = getNotification();
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(NOTIFICATION_ID, nfc.build());
+        notificationManager.notify(NOTIFICATION_ID, notif);
     }
 
     @SuppressWarnings("ResourceType")

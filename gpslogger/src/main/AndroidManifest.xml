@@ -29,7 +29,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service android:name=".GpsLoggingService" android:exported="true">
+        <service android:name=".GpsLoggingService" android:exported="true" android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.mendhak.gpslogger.GpsLoggingService" />
             </intent-filter>
