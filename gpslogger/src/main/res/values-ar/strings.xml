@@ -94,6 +94,7 @@
   <string name="pref_logging_title">تفاصيل التسجيل</string>
   <string name="log_gpx_title">دخول إلى GPX</string>
   <string name="log_gpx_summary">سجل المواقع في ملف GPX v1.0</string>
+  <string name="log_gpx_11_title">استخدام GPX 1.1</string>
   <string name="log_kml_title">دخول إلى KML</string>
   <string name="log_kml_summary">سجل المواقع في ملف KML v2.2</string>
   <string name="log_plain_text_title">دخول إلى CSV</string>

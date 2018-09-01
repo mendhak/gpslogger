@@ -45,7 +45,7 @@
   <string name="seconds">&#160;秒</string>
   <string name="minutes">&#160;分</string>
   <string name="hours">&#160;時</string>
-  <string name="gpsprovider_unavailable">沒有 GPS 來源可以使用，請檢查您的位置設定並激活定位功能。
+  <string name="gpsprovider_unavailable">沒有可用的 GPS 來源，請檢查您的位置設定並啟用定位功能。
     </string>
   <string name="started">已開始</string>
   <string name="providername_gps"> </string>
@@ -53,10 +53,10 @@
   <string name="not_applicable">無</string>
   <string name="meters_per_second">&#160;米/秒</string>
   <string name="feet_per_second">&#160;英尺/秒</string>
-  <string name="miles_per_hour">英里/時</string>
-  <string name="miles">英哩</string>
-  <string name="kilometers_per_hour">千米/時</string>
-  <string name="kilometers">公里</string>
+  <string name="miles_per_hour">&#160;英哩/小時</string>
+  <string name="miles">&#160;英哩</string>
+  <string name="kilometers_per_hour">&#160;公里/小時</string>
+  <string name="kilometers">&#160;公里</string>
   <string name="unknown_direction">未知</string>
   <string name="sorry">抱歉</string>
   <string name="success">成功</string>
@@ -89,12 +89,14 @@
   <string name="accuracy_within" formatted="false">%s %s內</string>
   <!-- Settings activity -->
   <string name="settings_distance_in_meters">以米算的距離</string>
-  <string name="settings_accuracy_in_meters">精確度〈公尺〉</string>
+  <string name="settings_accuracy_in_meters">精準度（公尺）</string>
   <string name="settings_enter_meters">輸入米數(最大 9999)</string>
   <!-- Settings -->
   <string name="pref_logging_title">記錄細節</string>
   <string name="log_gpx_title">記錄到 GPX 檔案</string>
   <string name="log_gpx_summary">將位置記錄到 GPX v1.0 檔案</string>
+  <string name="log_gpx_11_title">使用 GPX 1.1</string>
+  <string name="log_gpx_11_summary">以 GPX 1.1 檔案格式取代 GPX 1.0</string>
   <string name="log_kml_title">記錄到 KML 檔案</string>
   <string name="log_kml_summary">將位置記錄到 KML v2.2 檔案</string>
   <string name="log_plain_text_title">記錄到 CSV 檔案</string>
