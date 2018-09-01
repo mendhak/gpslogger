@@ -512,6 +512,7 @@ public class GpsLoggingService extends Service  {
                 NotificationChannel channel = new NotificationChannel("gpslogger", getString(R.string.app_name), NotificationManager.IMPORTANCE_DEFAULT);
                 channel.enableLights(false);
                 channel.enableVibration(false);
+                channel.setSound(null,null);
                 channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
 
                 channel.setShowBadge(true);
