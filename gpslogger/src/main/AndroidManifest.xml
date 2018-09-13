@@ -150,11 +150,17 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".senders.AlarmReceiver" />
+        <receiver android:name=".senders.AlarmReceiver" android:exported="true" />
 
         <receiver android:name=".MyPackageUpgradeReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".TaskerReceiver">
+            <intent-filter>
+                <action android:name="com.mendhak.gpslogger.intent.TEST" />
             </intent-filter>
         </receiver>
 

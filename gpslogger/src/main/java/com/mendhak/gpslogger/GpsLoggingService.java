@@ -133,6 +133,7 @@ public class GpsLoggingService extends Service  {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
+        startForeground(NOTIFICATION_ID, getNotification());
         handleIntent(intent);
         return START_STICKY;
     }
