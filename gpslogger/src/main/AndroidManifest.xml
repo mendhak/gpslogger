@@ -150,7 +150,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".senders.AlarmReceiver" android:exported="true" />
+        <receiver android:name=".senders.AlarmReceiver" />
 
         <receiver android:name=".MyPackageUpgradeReceiver">
             <intent-filter>
