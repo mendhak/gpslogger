@@ -15,10 +15,10 @@ public class TaskerReceiver extends BroadcastReceiver {
     private static final Logger LOG = Logs.of(TaskerReceiver.class);
     @Override
     public void onReceive(Context context, Intent intent) {
-        LOG.info("---------------------WORKED-------------------");
+        LOG.info("Tasker Command Received");
 
         Intent serviceIntent = new Intent(context, GpsLoggingService.class);
-        serviceIntent.putExtra(IntentConstants.IMMEDIATE_START, true);
+        serviceIntent.putExtras(intent);
         ContextCompat.startForegroundService(context, serviceIntent);
     }
 }

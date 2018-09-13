@@ -160,7 +160,7 @@
 
         <receiver android:name=".TaskerReceiver">
             <intent-filter>
-                <action android:name="com.mendhak.gpslogger.intent.TEST" />
+                <action android:name="com.mendhak.gpslogger.TASKER_COMMAND" />
             </intent-filter>
         </receiver>
 
