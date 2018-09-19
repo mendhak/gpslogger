@@ -104,7 +104,7 @@ public class CustomUrlLogger implements FileLogger {
         logUrl = logUrl.replaceAll("(?i)%hdop", sLoc.getHDOP());
         logUrl = logUrl.replaceAll("(?i)%vdop", sLoc.getVDOP());
         logUrl = logUrl.replaceAll("(?i)%pdop", sLoc.getPDOP());
-        logUrl = logUrl.replaceAll("(?i)%dist", String.valueOf(distance));
+        logUrl = logUrl.replaceAll("(?i)%dist", String.valueOf((int)distance));
 
         return logUrl;
     }
