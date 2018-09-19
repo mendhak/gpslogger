@@ -147,21 +147,21 @@ public class AutoEmailJob extends Job {
             String target = csvEmailTargets.split(",")[0];
             client.addRecipient(target);
 
+            SimpleSMTPHeader header = new SimpleSMTPHeader(fromAddress, target, subject);
+
+            //Multiple email targets?
+            for (String ccTarget : csvEmailTargets.split(",")) {
+                if (!ccTarget.equalsIgnoreCase(target)) {
+                    header.addCC(ccTarget);
+                    client.addRecipient(ccTarget);
+                }
+            }
+
             checkReply(client);
 
             Writer writer = client.sendMessageData();
 
             if (writer != null) {
-
-
-                SimpleSMTPHeader header = new SimpleSMTPHeader(fromAddress, target, subject);
-
-                //Multiple email targets?
-                for (String ccTarget : csvEmailTargets.split(",")) {
-                    if (!ccTarget.equalsIgnoreCase(target)) {
-                        header.addCC(ccTarget);
-                    }
-                }
 
                 // Regular email with just a body
                 if (files == null || files.length == 0) {
