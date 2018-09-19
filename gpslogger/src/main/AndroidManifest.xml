@@ -180,6 +180,18 @@
         <provider android:name=".common.ContentApi" android:authorities="com.mendhak.gpslogger" android:exported="true"
                   tools:ignore="ExportedContentProvider"/>
 
+        <provider
+            android:name="com.mendhak.gpslogger.common.GpsLoggerFileProvider"
+            android:authorities="com.mendhak.gpslogger.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fileprovider"/>
+        </provider>
+
+
+
     </application>
 
 </manifest>

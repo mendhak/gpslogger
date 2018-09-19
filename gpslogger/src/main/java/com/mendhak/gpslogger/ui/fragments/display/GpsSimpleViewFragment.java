@@ -180,19 +180,14 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     private void showCurrentFileName(String newFileName) {
         TextView txtFilename = (TextView) rootView.findViewById(R.id.simpleview_txtfilepath);
-        if (newFileName == null || newFileName.length() <= 0) {
-            txtFilename.setText("");
-            txtFilename.setVisibility(View.INVISIBLE);
-            return;
-        }
 
         txtFilename.setVisibility(View.VISIBLE);
-        txtFilename.setText(Html.fromHtml("<strong>" + Strings.getFormattedFileName() + "</strong>"));
+        txtFilename.setTextIsSelectable(true);
+        txtFilename.setSelectAllOnFocus(true);
 
-        Files.setFileExplorerLink(txtFilename,
-                Html.fromHtml("<strong><font color='blue'>" + Strings.getFormattedFileName() + "</font></strong>"),
-                preferenceHelper.getGpsLoggerFolder(),
-                context);
+        txtFilename.setText(
+                Html.fromHtml( preferenceHelper.getGpsLoggerFolder() + "<br /><strong>" + Strings.getFormattedFileName() + "</strong>"));
+
 
     }
 

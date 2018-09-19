@@ -34,6 +34,7 @@ import android.os.*;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -1119,8 +1120,9 @@ public class GpsMainActivity extends AppCompatActivity
 
                                     for (Object path : selectedItems) {
                                         File file = new File(gpxFolder, files[Integer.valueOf(path.toString())]);
-                                        Uri uri = Uri.fromFile(file);
-                                        chosenFiles.add(uri);
+                                        Uri providedUri = FileProvider.getUriForFile(getApplicationContext(),
+                                                "com.mendhak.gpslogger.fileprovider", file);
+                                        chosenFiles.add(providedUri);
                                     }
 
                                     intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, chosenFiles);
