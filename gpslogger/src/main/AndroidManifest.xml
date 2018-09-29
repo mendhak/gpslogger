@@ -164,6 +164,8 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".RestarterReceiver" android:enabled="true" android:exported="false" />
+
         <!--android:theme="@style/Theme.AppCompat.Translucent"-->
         <activity
             android:name=".NotificationAnnotationActivity"

@@ -144,6 +144,13 @@ public class GpsLoggingService extends Service  {
         unregisterEventBus();
         removeNotification();
         super.onDestroy();
+
+        if(session.isStarted()){
+            LOG.error("Service unexpectedly destroyed while GPSLogger was running. Will send broadcast to RestarterReceiver.");
+            Intent broadcastIntent = new Intent(getApplicationContext(), RestarterReceiver.class);
+            broadcastIntent.putExtra("was_running", true);
+            sendBroadcast(broadcastIntent);
+        }
     }
 
     @Override
