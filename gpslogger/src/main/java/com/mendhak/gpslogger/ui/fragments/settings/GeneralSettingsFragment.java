@@ -76,7 +76,7 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
             hideNotificiationPreference.setEnabled(false);
             hideNotificiationPreference.setDefaultValue(false);
             ((CustomSwitchPreference)hideNotificiationPreference).setChecked(false);
-            hideNotificiationPreference.setSummary("Not allowed in Android 8+");
+            hideNotificiationPreference.setSummary(getString(R.string.hide_notification_from_status_bar_disallowed));
         }
 
         setCoordinatesFormatPreferenceItem();
