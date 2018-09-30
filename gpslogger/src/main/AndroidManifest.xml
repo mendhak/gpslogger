@@ -158,6 +158,14 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".TaskerReceiver">
+            <intent-filter>
+                <action android:name="com.mendhak.gpslogger.TASKER_COMMAND" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".RestarterReceiver" android:enabled="true" android:exported="false" />
+
         <!--android:theme="@style/Theme.AppCompat.Translucent"-->
         <activity
             android:name=".NotificationAnnotationActivity"
@@ -173,6 +181,18 @@
 
         <provider android:name=".common.ContentApi" android:authorities="com.mendhak.gpslogger" android:exported="true"
                   tools:ignore="ExportedContentProvider"/>
+
+        <provider
+            android:name="com.mendhak.gpslogger.common.GpsLoggerFileProvider"
+            android:authorities="com.mendhak.gpslogger.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fileprovider"/>
+        </provider>
+
+
 
     </application>
 

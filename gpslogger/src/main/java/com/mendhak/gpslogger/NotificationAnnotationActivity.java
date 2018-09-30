@@ -23,6 +23,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.KeyEvent;
@@ -62,7 +63,7 @@ public class NotificationAnnotationActivity extends AppCompatActivity {
                         LOG.info("Annotation from notification: " + input.toString());
                         Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
                         serviceIntent.putExtra(IntentConstants.SET_DESCRIPTION, input.toString());
-                        getApplicationContext().startService(serviceIntent);
+                        ContextCompat.startForegroundService(getApplicationContext(),  serviceIntent);
                         materialDialog.dismiss();
                         finish();
                     }

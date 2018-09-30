@@ -133,6 +133,7 @@ public class GpsLoggingService extends Service  {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
+        startForeground(NOTIFICATION_ID, getNotification());
         handleIntent(intent);
         return START_STICKY;
     }
@@ -143,6 +144,13 @@ public class GpsLoggingService extends Service  {
         unregisterEventBus();
         removeNotification();
         super.onDestroy();
+
+        if(session.isStarted()){
+            LOG.error("Service unexpectedly destroyed while GPSLogger was running. Will send broadcast to RestarterReceiver.");
+            Intent broadcastIntent = new Intent(getApplicationContext(), RestarterReceiver.class);
+            broadcastIntent.putExtra("was_running", true);
+            sendBroadcast(broadcastIntent);
+        }
     }
 
     @Override
@@ -531,6 +539,10 @@ public class GpsLoggingService extends Service  {
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(contentText).setBigContentTitle(contentTitle))
                     .setOngoing(true)
                     .setContentIntent(pending);
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                nfc.setPriority(NotificationCompat.PRIORITY_LOW);
+            }
 
             if(!preferenceHelper.shouldHideNotificationButtons()){
                 nfc.addAction(R.drawable.annotate2, getString(R.string.menu_annotate), piAnnotate)

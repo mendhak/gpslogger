@@ -34,6 +34,7 @@ import android.os.*;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -1119,8 +1120,9 @@ public class GpsMainActivity extends AppCompatActivity
 
                                     for (Object path : selectedItems) {
                                         File file = new File(gpxFolder, files[Integer.valueOf(path.toString())]);
-                                        Uri uri = Uri.fromFile(file);
-                                        chosenFiles.add(uri);
+                                        Uri providedUri = FileProvider.getUriForFile(getApplicationContext(),
+                                                "com.mendhak.gpslogger.fileprovider", file);
+                                        chosenFiles.add(providedUri);
                                     }
 
                                     intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, chosenFiles);
@@ -1163,7 +1165,8 @@ public class GpsMainActivity extends AppCompatActivity
     private void startAndBindService() {
         serviceIntent = new Intent(this, GpsLoggingService.class);
         // Start the service in case it isn't already running
-        startService(serviceIntent);
+        ContextCompat.startForegroundService(getApplicationContext(), serviceIntent);
+
         // Now bind to service
         bindService(serviceIntent, gpsServiceConnection, Context.BIND_AUTO_CREATE);
         session.setBoundToService(true);

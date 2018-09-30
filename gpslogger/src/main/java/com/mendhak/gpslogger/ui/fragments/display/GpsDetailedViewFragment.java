@@ -241,17 +241,13 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     }
 
     public void showCurrentFileName(String newFileName) {
-        if (newFileName == null || newFileName.length() <= 0) {
-            return;
-        }
 
         TextView txtFilename = (TextView) rootView.findViewById(R.id.detailedview_file_text);
+        txtFilename.setTextIsSelectable(true);
+        txtFilename.setSelectAllOnFocus(true);
+
         txtFilename.setText(Strings.getFormattedFileName() + "\n (" + preferenceHelper.getGpsLoggerFolder() + ")");
 
-        Files.setFileExplorerLink(txtFilename,
-                Html.fromHtml(Strings.getFormattedFileName() + "<br /> (" + "<font color='blue'><u>" + preferenceHelper.getGpsLoggerFolder() + "</u></font>" + ")"),
-                preferenceHelper.getGpsLoggerFolder(),
-                getActivity().getApplicationContext());
     }
 
 

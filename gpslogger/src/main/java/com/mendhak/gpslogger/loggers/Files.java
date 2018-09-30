@@ -21,13 +21,7 @@ package com.mendhak.gpslogger.loggers;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.media.MediaScannerConnection;
-import android.net.Uri;
-import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
-import android.view.View;
-import android.widget.TextView;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 
@@ -99,30 +93,6 @@ public class Files {
             storageFolder = context.getFilesDir();
         }
         return storageFolder;
-    }
-
-    public static void setFileExplorerLink(TextView txtFilename, Spanned htmlString, final String pathToLinkTo, final Context context) {
-
-        final Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setDataAndType(Uri.parse("file://" + pathToLinkTo), "resource/folder");
-        intent.setAction(Intent.ACTION_VIEW);
-
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
-            txtFilename.setLinksClickable(true);
-            txtFilename.setClickable(true);
-            txtFilename.setMovementMethod(LinkMovementMethod.getInstance());
-            txtFilename.setSelectAllOnFocus(false);
-            txtFilename.setTextIsSelectable(false);
-            txtFilename.setText(htmlString);
-
-            txtFilename.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    context.startActivity(intent);
-                }
-            });
-        }
     }
 
     public static boolean isAllowedToWriteTo(String gpsLoggerFolder) {

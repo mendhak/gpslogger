@@ -22,6 +22,8 @@ package com.mendhak.gpslogger;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
+
 import com.mendhak.gpslogger.common.IntentConstants;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -42,7 +44,7 @@ public class StartupReceiver extends BroadcastReceiver {
 
                 Intent serviceIntent = new Intent(context, GpsLoggingService.class);
                 serviceIntent.putExtra(IntentConstants.IMMEDIATE_START, true);
-                context.startService(serviceIntent);
+                ContextCompat.startForegroundService(context, serviceIntent);
             }
         } catch (Exception ex) {
             LOG.error("StartupReceiver", ex);

@@ -185,20 +185,20 @@
 <section><div class='lead'><h2><a name="howdoesthisintegratewithtaskerllamaorotherautomationframeworks" href="#howdoesthisintegratewithtaskerllamaorotherautomationframeworks">How does this integrate with Tasker/Llama or other automation frameworks?</a></h2><h2><a name="howtoautomategpslogger" href="#howtoautomategpslogger">How to automate GPSLogger?</a></h2><h3><a name="controllinggpslogger" href="#controllinggpslogger">Controlling GPSLogger</a></h3><p>If your automation app can send intents, you can use those intents to control GPSLogger and get it to perform a few actions. </p>
 <p>To invoke it from Tasker, create a new action under Misc &gt; Send Intent. </p>
 <blockquote>
-<p>Action: <code>com.mendhak.gpslogger.GpsLoggingService</code><br>Extra: <code>immediatestart:true</code> (others below)<br>Target: <code>Service</code></p>
+<p>Action: <code>com.mendhak.gpslogger.TASKER_COMMAND</code><br>Extra: <code>immediatestart:true</code> (others below)<br>Package: <code>com.mendhak.gpslogger</code><br>Class: <code>com.mendhak.gpslogger.TaskerReceiver</code><br>Target: <code>Broadcast Receiver</code></p>
 </blockquote>
-<p>To invoke it from Automate (LlamaLab), create a Start Service block:</p>
+<p>To invoke it from Automate (LlamaLab), create a Send Broadcast block:</p>
 <blockquote>
-<p>Package: <code>com.mendhak.gpslogger</code><br>Service class: <code>com.mendhak.gpslogger.GpsLoggingService</code><br>Extras: <code>{&quot;immediatestart&quot; as Boolean:&quot;true&quot;}</code></p>
+<p>Package: <code>com.mendhak.gpslogger</code><br>Receiver Class: <code>com.mendhak.gpslogger.TaskerReceiver</code><br>Action: <code>com.mendhak.gpslogger.TASKER_COMMAND</code><br>Extras: <code>{&quot;immediatestart&quot; as Boolean:&quot;true&quot;}</code></p>
 </blockquote>
 <p>To invoke it from your own Android code:</p>
-<pre><code>Intent i = new Intent(&quot;com.mendhak.gpslogger.GpsLoggingService&quot;);
+<pre><code>Intent i = new Intent(&quot;com.mendhak.gpslogger.TASKER_COMMAND&quot;);
 i.setPackage(&quot;com.mendhak.gpslogger&quot;);
 i.putExtra(&quot;immediatestart&quot;, true);
-startService(i);
+sendBroadcast(i);
 </code></pre><p><strong>These are the extras you can send to GPSLogger</strong>:</p>
 <blockquote>
-<p><code>immediatestart</code> - (true/false) Start logging immediately  </p>
+<p><code>immediatestart</code> - (true/false) Start logging  </p>
 <p><code>immediatestop</code> - (true/false) Stop logging</p>
 <p><code>setnextpointdescription</code> - (text) Sets the annotation text to use for the next point logged</p>
 <p><code>settimebeforelogging</code> - (number) Sets preference for logging interval option  </p>

@@ -35,6 +35,8 @@ import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
+import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
+
 import org.slf4j.Logger;
 
 import java.io.File;
@@ -66,6 +68,16 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         findPreference("enableDisableGps").setOnPreferenceClickListener(this);
         findPreference("gpsvisualizer_link").setOnPreferenceClickListener(this);
         findPreference("debuglogtoemail").setOnPreferenceClickListener(this);
+
+
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            Preference hideNotificiationPreference = findPreference("hide_notification_from_status_bar");
+            hideNotificiationPreference.setEnabled(false);
+            hideNotificiationPreference.setDefaultValue(false);
+            ((CustomSwitchPreference)hideNotificiationPreference).setChecked(false);
+            hideNotificiationPreference.setSummary(getString(R.string.hide_notification_from_status_bar_disallowed));
+        }
 
         setCoordinatesFormatPreferenceItem();
         setLanguagesPreferenceItem();

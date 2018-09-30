@@ -22,6 +22,8 @@ package com.mendhak.gpslogger;
 
 import android.content.Intent;
 import android.location.Location;
+import android.support.v4.content.ContextCompat;
+
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
 import com.mendhak.gpslogger.common.IntentConstants;
@@ -53,7 +55,7 @@ public class AndroidWearListenerService extends WearableListenerService {
                 serviceIntent.putExtra(IntentConstants.IMMEDIATE_START,true);
             }
 
-            getApplicationContext().startService(serviceIntent);
+            ContextCompat.startForegroundService(getApplicationContext(), serviceIntent);
 
         }
         else if(messageEvent.getPath().equals("/get_status")){
