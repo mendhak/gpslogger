@@ -122,6 +122,7 @@
   <string name="startonapplaunch_title">앱 시작시 기록 시작</string>
   <string name="startonapplaunch_summary">앱 시작시 기록을 시작합니다</string>
   <string name="autoemail_title">이메일</string>
+  <string name="please_wait">잠시만 기다려 주세요.</string>
   <string name="autoemail_target">대상 이메일 주소</string>
   <string name="autosend_frequency_display">%s 분 후</string>
   <string name="autoemail_frequency_whenistop">중지를 누를 때</string>
