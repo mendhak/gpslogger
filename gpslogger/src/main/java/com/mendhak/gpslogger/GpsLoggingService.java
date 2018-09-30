@@ -540,6 +540,10 @@ public class GpsLoggingService extends Service  {
                     .setOngoing(true)
                     .setContentIntent(pending);
 
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                nfc.setPriority(NotificationCompat.PRIORITY_LOW);
+            }
+
             if(!preferenceHelper.shouldHideNotificationButtons()){
                 nfc.addAction(R.drawable.annotate2, getString(R.string.menu_annotate), piAnnotate)
                         .addAction(android.R.drawable.ic_menu_close_clear_cancel, getString(R.string.shortcut_stop), piStop);
