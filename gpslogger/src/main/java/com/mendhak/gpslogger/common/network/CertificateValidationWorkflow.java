@@ -210,7 +210,7 @@ public class CertificateValidationWorkflow implements Runnable {
                     sb.append(String.format(msgformat,"Issuer", cve.getCertificate().getIssuerDN().getName()));
                     sb.append(String.format(msgformat,"Fingerprint", DigestUtils.shaHex(cve.getCertificate().getEncoded())));
                     sb.append(String.format(msgformat,"Issued on",cve.getCertificate().getNotBefore()));
-                    sb.append(String.format(msgformat,"Expires on",cve.getCertificate().getNotBefore()));
+                    sb.append(String.format(msgformat,"Expires on",cve.getCertificate().getNotAfter()));
 
                     new MaterialDialog.Builder(context)
                             .title(R.string.ssl_certificate_add_to_keystore)
