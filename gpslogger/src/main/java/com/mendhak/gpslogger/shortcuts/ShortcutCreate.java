@@ -41,17 +41,21 @@ public class ShortcutCreate extends Activity {
                     public boolean onSelection(MaterialDialog materialDialog, View view, int item, CharSequence charSequence) {
                         Intent shortcutIntent;
                         String shortcutLabel;
+                        int shortcutIcon;
 
                         if (item == 0) {
                             shortcutIntent = new Intent(getApplicationContext(), ShortcutStart.class);
                             shortcutLabel = getString(R.string.shortcut_start);
+                            shortcutIcon = R.drawable.gps_shortcut_start;
+
                         } else {
                             shortcutIntent = new Intent(getApplicationContext(), ShortcutStop.class);
                             shortcutLabel = getString(R.string.shortcut_stop);
+                            shortcutIcon = R.drawable.gps_shortcut_stop;
                         }
 
                         Intent.ShortcutIconResource iconResource = Intent.ShortcutIconResource.fromContext
-                                (getApplicationContext(), R.drawable.gpsloggericon3);
+                                (getApplicationContext(), shortcutIcon);
                         Intent intent = new Intent();
                         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
                         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, shortcutLabel);
