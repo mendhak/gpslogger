@@ -43,6 +43,8 @@ public class CustomUrlJob extends Job {
 
     private static final Logger LOG = Logs.of(CustomUrlJob.class);
 
+    private static final OkHttpClient okClient = new OkHttpClient.Builder().sslSocketFactory(Networks.getSocketFactory(AppSettings.getInstance())).build();
+    private static Request.Builder requestBuilder = new Request.Builder();
     private UploadEvents.BaseUploadEvent callbackEvent;
     private CustomUrlRequest urlRequest;
 
@@ -62,9 +64,7 @@ public class CustomUrlJob extends Job {
 
         LOG.info("HTTP Request - " + urlRequest.getLogURL());
 
-        OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
-        okBuilder.sslSocketFactory(Networks.getSocketFactory(AppSettings.getInstance()));
-        Request.Builder requestBuilder = new Request.Builder().url(urlRequest.getLogURL());
+        requestBuilder.url(urlRequest.getLogURL());
 
         for(Map.Entry<String,String> header : urlRequest.getHttpHeaders().entrySet()){
             requestBuilder.addHeader(header.getKey(), header.getValue());
@@ -76,7 +76,7 @@ public class CustomUrlJob extends Job {
         }
 
         Request request = requestBuilder.build();
-        Response response = okBuilder.build().newCall(request).execute();
+        Response response = okClient.newCall(request).execute();
 
         if (response.isSuccessful()) {
             LOG.debug("Success - response code " + response);

@@ -33,13 +33,13 @@ apply plugin: 'com.moowork.node'
 
 repositories {
     mavenCentral()
-
+    google()
     jcenter()
 
     maven {
         url "https://jitpack.io"
     }
-    google()
+
 
 
 }
@@ -184,7 +184,6 @@ dependencies {
     implementation 'de.greenrobot:eventbus:2.4.0'
 
     //JARs which aren't on maven
-    //compile 'com.mendhak.gpsloggersupportfiles:owncloud-android-library:0.0.3@aar'
     implementation 'com.github.owncloud:android-library:oc-android-library-0.9.14'
 
     //Required by owncloud library
@@ -203,7 +202,7 @@ dependencies {
     implementation 'com.nononsenseapps:filepicker:3.0.0'
 
     //OKHTTP client
-    implementation 'com.squareup.okhttp3:okhttp:3.7.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 
     //OKHTTP interceptor, works with oauth signpost
     implementation 'se.akerfeldt:okhttp-signpost:1.1.0'
