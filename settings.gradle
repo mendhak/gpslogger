@@ -1,1 +1,1 @@
-include ':gpslogger', ':gpsloggerwear'
+include ':gpslogger'
