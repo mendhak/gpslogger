@@ -456,7 +456,6 @@ public class GpsMainActivity extends AppCompatActivity
                         //Clicked on profile name
                         String newProfileName = profile.getName().getText();
                         EventBus.getDefault().post(new ProfileEvents.SwitchToProfile(newProfileName));
-
                         refreshProfileIcon(profile.getName().getText());
                         return true;
                     }
@@ -616,7 +615,7 @@ public class GpsMainActivity extends AppCompatActivity
                         .withName(getString(R.string.profile_add_new))
                         .withTag("PROFILE_ADD")
                         .withTextColorRes(R.color.primaryColorText)
-                , new ProfileSettingDrawerItem()
+
         );
 
 
