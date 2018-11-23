@@ -1,11 +1,11 @@
 buildscript {
     repositories {
+        google()
         mavenCentral()
-        jcenter()
         maven {
             url "https://plugins.gradle.org/m2/"
         }
-        google()
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
@@ -131,10 +131,10 @@ android {
 dependencies {
 
     implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.google.android.gms:play-services-base:15.0.1'
-    implementation 'com.google.android.gms:play-services-location:15.0.1'
-    implementation 'com.google.android.gms:play-services-wearable:15.0.1'
-    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.google.android.gms:play-services-base:16.0.1'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.gms:play-services-wearable:16.0.1'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
     //FTP operations
     implementation('commons-net:commons-net:3.4')
