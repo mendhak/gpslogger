@@ -20,6 +20,8 @@
 package com.mendhak.gpslogger;
 
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.*;
@@ -33,6 +35,7 @@ import android.net.Uri;
 import android.os.*;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.widget.DrawerLayout;
@@ -113,15 +116,67 @@ public class GpsMainActivity extends AppCompatActivity
         startAndBindService();
         registerEventBus();
 
-        if(preferenceHelper.shouldStartLoggingOnAppLaunch()){
-            LOG.debug("Start logging on app launch");
-            EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
+        if(!hasUserGrantedAllNecessaryPermissions()){
+            askUserForPermissions();
         }
+        else {
+            LOG.debug("Permission check OK");
 
-
+            if(preferenceHelper.shouldStartLoggingOnAppLaunch()){
+                LOG.debug("Start logging on app launch");
+                EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
+            }
+        }
     }
 
 
+    private boolean hasUserGrantedAllNecessaryPermissions(){
+        return hasUserGrantedPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                && hasUserGrantedPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                && hasUserGrantedPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                && hasUserGrantedPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                && hasUserGrantedPermission(Manifest.permission.GET_ACCOUNTS);
+    }
+
+    private boolean hasUserGrantedPermission(String permissionName){
+        boolean granted = ContextCompat.checkSelfPermission(this, permissionName) == PackageManager.PERMISSION_GRANTED;
+        LOG.debug("Permission " + permissionName + " : " + granted);
+        return granted;
+    }
+
+    private void askUserForPermissions() {
+
+        LOG.debug("User has not granted necessary permissions for this app to run.");
+
+        final Activity thisActivity = this;
+        Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title), getString(R.string.gpslogger_permissions_rationale_message_basic)
+                + "<br /> <a href='https://gpslogger.app/privacypolicy.html'>" + getString(R.string.privacy_policy) + "</a>",
+                this, new Dialogs.MessageBoxCallback() {
+
+            @Override
+            public void messageBoxResult(int which) {
+                ActivityCompat.requestPermissions(thisActivity,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.GET_ACCOUNTS },
+                    2191);
+                }
+            });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 2191: {
+                if (grantResults.length <= 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
+                            getString(R.string.gpslogger_permissions_permanently_denied), this);
+                }
+            }
+        }
+    }
 
 
     @Override

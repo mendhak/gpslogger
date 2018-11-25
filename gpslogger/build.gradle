@@ -9,7 +9,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
-        classpath 'com.canelmas.let:let-plugin:0.1.10'
         classpath "com.mendhak.gradlecrowdin:crowdin-plugin:0.1.0"
         classpath 'org.jacoco:org.jacoco.core:0.7.4.201502262128'
         classpath "com.moowork.gradle:gradle-node-plugin:0.13"
@@ -21,8 +20,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 //Crowdin task
 apply plugin: 'com.mendhak.gradlecrowdin'
-//Runtime permission annotation library
-apply plugin: 'let'
 //Generating PGP
 apply plugin: 'signing'
 //Generating colorful output

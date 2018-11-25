@@ -26,8 +26,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.PreferenceFragment;
+
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
-import com.canelmas.let.AskPermission;
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.GooglePlayServicesAvailabilityException;
@@ -44,7 +45,6 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.googledrive.GoogleDriveManager;
 import com.mendhak.gpslogger.ui.Dialogs;
-import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
@@ -52,7 +52,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
+public class GoogleDriveSettingsFragment extends PreferenceFragment
         implements Preference.OnPreferenceClickListener {
 
     private static final Logger LOG = Logs.of(GoogleDriveSettingsFragment.class);
@@ -146,7 +146,6 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
     }
 
     @Override
-    @AskPermission({Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
         if (preference.getKey().equalsIgnoreCase("gdocs_test")) {
             uploadTestFileToGoogleDocs();
@@ -255,7 +254,6 @@ public class GoogleDriveSettingsFragment extends PermissionedPreferenceFragment
     }
 
 
-    @AskPermission({Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     private void uploadTestFileToGoogleDocs() {
 
         Dialogs.progress(getActivity(), getString(R.string.please_wait), getString(R.string.please_wait));

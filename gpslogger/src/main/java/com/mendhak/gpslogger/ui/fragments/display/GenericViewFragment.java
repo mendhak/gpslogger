@@ -19,7 +19,7 @@
 
 package com.mendhak.gpslogger.ui.fragments.display;
 
-import android.Manifest;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -27,7 +27,6 @@ import android.support.annotation.NonNull;
 import android.text.InputType;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -46,7 +45,7 @@ import org.slf4j.Logger;
  * Common class for communicating with the parent for the
  * GpsViewCallbacks
  */
-public abstract class GenericViewFragment extends PermissionedFragment  {
+public abstract class GenericViewFragment extends Fragment {
 
     private static final Logger LOG = Logs.of(GenericViewFragment.class);
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
@@ -100,7 +99,6 @@ public abstract class GenericViewFragment extends PermissionedFragment  {
     }
 
 
-    @AskPermission({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public void requestToggleLogging() {
 
         if (session.isStarted()) {
