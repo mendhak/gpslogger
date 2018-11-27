@@ -175,6 +175,8 @@ public class GpsLoggingService extends Service  {
 
                 if(!Systems.locationPermissionsGranted(this)){
                     LOG.error("User has not granted permission to access location services. Will not continue!");
+                    stopLogging();
+                    stopSelf();
                     return;
                 }
 

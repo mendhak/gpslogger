@@ -32,6 +32,7 @@ import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -100,6 +101,12 @@ public abstract class GenericViewFragment extends Fragment {
 
 
     public void requestToggleLogging() {
+
+        if(!Systems.locationPermissionsGranted(getActivity())){
+            Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
+                    getString(R.string.gpslogger_permissions_permanently_denied), getActivity());
+            return;
+        }
 
         if (session.isStarted()) {
             toggleLogging();
