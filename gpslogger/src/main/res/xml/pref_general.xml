@@ -35,6 +35,10 @@
         android:defaultValue="false"
         />
     <Preference
+        android:title="@string/gpslogger_permissions_rationale_title"
+        android:key="permissions_required" />
+
+    <Preference
         android:title="@string/enabledisablegps_title"
         android:summary="@string/enabledisablegps_summary"
         android:key="enableDisableGps"

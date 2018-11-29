@@ -22,6 +22,7 @@ package com.mendhak.gpslogger.common;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -33,10 +34,14 @@ import android.net.NetworkInfo;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.PowerManager;
+import android.preference.PreferenceFragment;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
+import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.ui.Dialogs;
 
 import org.slf4j.Logger;
 
@@ -46,6 +51,7 @@ import java.util.Locale;
 public class Systems {
 
     private static final Logger LOG = Logs.of(Systems.class);
+    public final static int REQUEST_PERMISSION_CODE=2191;
 
     public static int getBatteryLevel(Context context) {
         Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -137,6 +143,65 @@ public class Systems {
             resources.getConfiguration().locale = locale;
             baseContext.getResources().updateConfiguration(resources.getConfiguration(), baseContext.getResources().getDisplayMetrics());
 
+        }
+    }
+
+    public static boolean hasUserGrantedAllNecessaryPermissions(Context context){
+        return hasUserGrantedPermission(Manifest.permission.ACCESS_COARSE_LOCATION, context)
+                && hasUserGrantedPermission(Manifest.permission.ACCESS_FINE_LOCATION, context)
+                && hasUserGrantedPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, context)
+                && hasUserGrantedPermission(Manifest.permission.READ_EXTERNAL_STORAGE, context)
+                && hasUserGrantedPermission(Manifest.permission.GET_ACCOUNTS, context);
+    }
+
+    static boolean hasUserGrantedPermission(String permissionName, Context context){
+        boolean granted = ContextCompat.checkSelfPermission(context, permissionName) == PackageManager.PERMISSION_GRANTED;
+        LOG.debug("Permission " + permissionName + " : " + granted);
+        return granted;
+    }
+
+    public static void askUserForPermissions(final Activity activity, final PreferenceFragment fragment) {
+
+        LOG.debug("User has not granted necessary permissions for this app to run.");
+
+        Dialogs.alert(activity.getString(R.string.gpslogger_permissions_rationale_title), activity.getString(R.string.gpslogger_permissions_rationale_message_basic)
+                        + "<br /> <a href='https://gpslogger.app/privacypolicy.html'>" + activity.getString(R.string.privacy_policy) + "</a>",
+                activity, new Dialogs.MessageBoxCallback() {
+
+                    @Override
+                    public void messageBoxResult(int which) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                            if (fragment != null) {
+                                //From preference fragments, requestPermissions is called differently. WHY.
+                                fragment.requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                                Manifest.permission.GET_ACCOUNTS},
+                                        REQUEST_PERMISSION_CODE);
+                            } else {
+                                ActivityCompat.requestPermissions(activity,
+                                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                                Manifest.permission.GET_ACCOUNTS},
+                                        REQUEST_PERMISSION_CODE);
+                            }
+                        }
+                    }
+                });
+    }
+
+    public static void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults, Context context) {
+        switch (requestCode) {
+            case Systems.REQUEST_PERMISSION_CODE: {
+                if (grantResults.length <= 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Dialogs.alert(context.getString(R.string.gpslogger_permissions_rationale_title),
+                            context.getString(R.string.gpslogger_permissions_permanently_denied), context);
+                }
+            }
         }
     }
 }

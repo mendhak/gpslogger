@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceFragment;
 import android.webkit.URLUtil;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
@@ -34,9 +35,8 @@ import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
-import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 
-public class OpenGTSFragment extends PermissionedPreferenceFragment implements
+public class OpenGTSFragment extends PreferenceFragment implements
         PreferenceValidator,
         OnPreferenceChangeListener,
         OnPreferenceClickListener {

@@ -33,6 +33,7 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
@@ -68,6 +69,11 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         findPreference("enableDisableGps").setOnPreferenceClickListener(this);
         findPreference("gpsvisualizer_link").setOnPreferenceClickListener(this);
         findPreference("debuglogtoemail").setOnPreferenceClickListener(this);
+
+        findPreference("permissions_required").setOnPreferenceClickListener(this);
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+            getPreferenceScreen().removePreference(findPreference("permissions_required"));
+        }
 
 
 
@@ -114,9 +120,22 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         coordFormats.setSummary(coordinateDisplaySamples[PreferenceHelper.getInstance().getDisplayLatLongFormat().ordinal()]);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        Systems.onRequestPermissionsResult(requestCode, permissions, grantResults, getActivity());
+
+    }
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
+
+        if(preference.getKey().equals("permissions_required")){
+            if(!Systems.hasUserGrantedAllNecessaryPermissions(getActivity())){
+                Systems.askUserForPermissions(getActivity(), this);
+            }
+
+            return true;
+        }
 
         if (preference.getKey().equals("enableDisableGps")) {
             startActivity(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"));

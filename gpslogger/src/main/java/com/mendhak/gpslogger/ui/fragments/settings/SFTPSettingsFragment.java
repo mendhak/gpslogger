@@ -7,8 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.Preference;
+import android.preference.PreferenceFragment;
 import android.support.v4.content.ContextCompat;
-import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -20,14 +20,13 @@ import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.sftp.SFTPManager;
 import com.mendhak.gpslogger.ui.Dialogs;
-import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import com.nononsenseapps.filepicker.FilePickerActivity;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
 import java.io.File;
 
-public class SFTPSettingsFragment extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener, PreferenceValidator {
+public class SFTPSettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, PreferenceValidator {
 
     private static final Logger LOG = Logs.of(SFTPSettingsFragment.class);
     SFTPManager manager;
@@ -71,7 +70,6 @@ public class SFTPSettingsFragment extends PermissionedPreferenceFragment impleme
 
 
     @Override
-    @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
 
         if (preference.getKey().equals(PreferenceNames.SFTP_PRIVATE_KEY_PATH)) {

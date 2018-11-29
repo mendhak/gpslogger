@@ -23,8 +23,9 @@ package com.mendhak.gpslogger.ui.fragments.settings;
 import android.Manifest;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.PreferenceFragment;
+
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
-import com.canelmas.let.AskPermission;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.network.Networks;
@@ -36,7 +37,6 @@ import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudManager;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
-import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
@@ -44,7 +44,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class OwnCloudSettingsFragment
-        extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener, PreferenceValidator {
+        extends PreferenceFragment implements Preference.OnPreferenceClickListener, PreferenceValidator {
 
     private static final Logger LOG = Logs.of(OwnCloudSettingsFragment.class);
 
@@ -90,7 +90,6 @@ public class OwnCloudSettingsFragment
 
 
     @Override
-    @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
 
         if(preference.getKey().equals("owncloud_validatecustomsslcert")){

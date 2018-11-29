@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceFragment;
 import android.text.TextUtils;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.mendhak.gpslogger.R;
@@ -34,10 +35,9 @@ import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.email.AutoEmailManager;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
-import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import de.greenrobot.event.EventBus;
 
-public class AutoEmailFragment extends PermissionedPreferenceFragment implements
+public class AutoEmailFragment extends PreferenceFragment implements
         OnPreferenceChangeListener,  OnPreferenceClickListener, PreferenceValidator {
 
     private final PreferenceHelper preferenceHelper;

@@ -25,7 +25,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.Preference;
-import com.canelmas.let.AskPermission;
+import android.preference.PreferenceFragment;
+
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
@@ -33,13 +34,12 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.osm.OpenStreetMapManager;
 import com.mendhak.gpslogger.ui.Dialogs;
-import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import org.slf4j.Logger;
 
-public class OSMAuthorizationFragment extends PermissionedPreferenceFragment implements Preference.OnPreferenceClickListener {
+public class OSMAuthorizationFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
     private static final Logger LOG = Logs.of(OSMAuthorizationFragment.class);
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
@@ -106,7 +106,6 @@ public class OSMAuthorizationFragment extends PermissionedPreferenceFragment imp
 
 
     @Override
-    @AskPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public boolean onPreferenceClick(Preference preference) {
         if (manager.isOsmAuthorized()) {
             preferenceHelper.setOSMAccessToken("");

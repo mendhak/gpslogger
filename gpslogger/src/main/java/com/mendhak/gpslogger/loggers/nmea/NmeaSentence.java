@@ -35,12 +35,21 @@ public class NmeaSentence {
 
     }
 
-    public boolean isLocationSentence(){
-        return nmeaParts[0].equalsIgnoreCase("$GPGSA") || nmeaParts[0].equalsIgnoreCase("$GPGGA");
+    private boolean isGGA() {
+        return nmeaParts[0].toUpperCase().contains("GGA");
     }
 
+    private boolean isGSA() {
+        return nmeaParts[0].toUpperCase().contains("GSA");
+    }
+
+    public boolean isLocationSentence(){
+        return isGSA() || isGGA();
+    }
+
+
     public String getLatestPdop(){
-        if (nmeaParts[0].equalsIgnoreCase("$GPGSA")) {
+        if (isGSA()) {
 
             if (nmeaParts.length > 15 && !Strings.isNullOrEmpty(nmeaParts[15])) {
                 return nmeaParts[15];
@@ -51,7 +60,7 @@ public class NmeaSentence {
     }
 
     public String getLatestVdop(){
-        if (nmeaParts[0].equalsIgnoreCase("$GPGSA")) {
+        if (isGSA()) {
             if (nmeaParts.length > 17 &&!Strings.isNullOrEmpty(nmeaParts[17]) && !nmeaParts[17].startsWith("*")) {
                 return nmeaParts[17].split("\\*")[0];
             }
@@ -61,12 +70,12 @@ public class NmeaSentence {
     }
 
     public String getLatestHdop(){
-        if (nmeaParts[0].equalsIgnoreCase("$GPGGA")) {
+        if (isGGA()) {
             if (nmeaParts.length > 8 &&!Strings.isNullOrEmpty(nmeaParts[8])) {
                 return nmeaParts[8];
             }
         }
-        else if (nmeaParts[0].equalsIgnoreCase("$GPGSA")) {
+        else if (isGSA()) {
             if (nmeaParts.length > 16 &&!Strings.isNullOrEmpty(nmeaParts[16])) {
                     return nmeaParts[16];
                 }
@@ -76,7 +85,7 @@ public class NmeaSentence {
     }
 
     public String getGeoIdHeight(){
-        if (nmeaParts[0].equalsIgnoreCase("$GPGGA")) {
+        if (isGGA()) {
             if (nmeaParts.length > 11 &&!Strings.isNullOrEmpty(nmeaParts[11])) {
                 return nmeaParts[11];
             }
@@ -86,7 +95,7 @@ public class NmeaSentence {
     }
 
     public String getAgeOfDgpsData(){
-        if (nmeaParts[0].equalsIgnoreCase("$GPGGA")) {
+        if (isGGA()) {
             if (nmeaParts.length > 13 && !Strings.isNullOrEmpty(nmeaParts[13])) {
                 return nmeaParts[13];
             }
@@ -96,7 +105,7 @@ public class NmeaSentence {
     }
 
     public String getDgpsId(){
-        if (nmeaParts[0].equalsIgnoreCase("$GPGGA")) {
+        if (isGGA()) {
             if (nmeaParts.length > 14 &&!Strings.isNullOrEmpty(nmeaParts[14]) && !nmeaParts[14].startsWith("*")) {
                 return nmeaParts[14].split("\\*")[0];
             }

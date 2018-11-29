@@ -20,6 +20,8 @@
 package com.mendhak.gpslogger;
 
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.*;
@@ -33,6 +35,7 @@ import android.net.Uri;
 import android.os.*;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.widget.DrawerLayout;
@@ -113,15 +116,24 @@ public class GpsMainActivity extends AppCompatActivity
         startAndBindService();
         registerEventBus();
 
-        if(preferenceHelper.shouldStartLoggingOnAppLaunch()){
-            LOG.debug("Start logging on app launch");
-            EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
+        if(!Systems.hasUserGrantedAllNecessaryPermissions(this)){
+            Systems.askUserForPermissions(this, null);
         }
+        else {
+            LOG.debug("Permission check OK");
 
-
+            if(preferenceHelper.shouldStartLoggingOnAppLaunch()){
+                LOG.debug("Start logging on app launch");
+                EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
+            }
+        }
     }
 
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        Systems.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
 
 
     @Override
@@ -456,7 +468,6 @@ public class GpsMainActivity extends AppCompatActivity
                         //Clicked on profile name
                         String newProfileName = profile.getName().getText();
                         EventBus.getDefault().post(new ProfileEvents.SwitchToProfile(newProfileName));
-
                         refreshProfileIcon(profile.getName().getText());
                         return true;
                     }
@@ -616,7 +627,7 @@ public class GpsMainActivity extends AppCompatActivity
                         .withName(getString(R.string.profile_add_new))
                         .withTag("PROFILE_ADD")
                         .withTextColorRes(R.color.primaryColorText)
-                , new ProfileSettingDrawerItem()
+
         );
 
 

@@ -23,8 +23,9 @@ package com.mendhak.gpslogger.ui.fragments.settings;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
+import android.preference.PreferenceFragment;
+
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.Networks;
@@ -32,11 +33,9 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.loggers.customurl.CustomUrlJob;
-import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.ui.Dialogs;
-import com.mendhak.gpslogger.ui.fragments.PermissionedPreferenceFragment;
+
 
 import org.slf4j.Logger;
 import java.net.MalformedURLException;
@@ -45,7 +44,7 @@ import java.text.MessageFormat;
 
 import de.greenrobot.event.EventBus;
 
-public class CustomUrlFragment extends PermissionedPreferenceFragment implements
+public class CustomUrlFragment extends PreferenceFragment implements
         PreferenceValidator,
         Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
