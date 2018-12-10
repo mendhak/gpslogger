@@ -19,6 +19,7 @@
 
 package com.mendhak.gpslogger.senders.googledrive;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -122,7 +123,15 @@ public class GoogleDriveJob extends Job {
             URL url = new URL(fileUpdateUrl);
 
             conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("PATCH");
+
+            if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT){
+                conn.setRequestProperty("X-HTTP-Method-Override", "PATCH");
+                conn.setRequestMethod("POST");
+            }
+            else {
+                conn.setRequestMethod("PATCH");
+            }
+
             conn.setRequestProperty("User-Agent", "GPSLogger for Android");
             conn.setRequestProperty("Authorization", "Bearer " + authToken);
             conn.setRequestProperty("Content-Type", getMimeTypeFromFileName(fileName));
