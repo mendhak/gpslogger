@@ -15,6 +15,6 @@ buildscript {
 }
 
 project.ext.APP_ID = "com.mendhak.gpslogger"
-project.ext.APP_VERSION_CODE = 97
-project.ext.APP_VERSION_NAME ="97"
+project.ext.APP_VERSION_CODE = 98
+project.ext.APP_VERSION_NAME ="98"
 
