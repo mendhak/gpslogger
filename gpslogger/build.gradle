@@ -8,7 +8,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:3.2.1'
         classpath "com.mendhak.gradlecrowdin:crowdin-plugin:0.1.0"
         classpath 'org.jacoco:org.jacoco.core:0.7.4.201502262128'
         classpath "com.moowork.gradle:gradle-node-plugin:0.13"
@@ -226,7 +226,7 @@ dependencies {
     testImplementation 'org.json:json:20160810'
 
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.50"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.71"
 
 }
 

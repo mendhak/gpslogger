@@ -32,7 +32,7 @@ import java.util.Iterator;
 
 class GeneralLocationListener implements LocationListener, GpsStatus.Listener, GpsStatus.NmeaListener {
 
-    private static String listenerName;
+    private String listenerName;
     private static GpsLoggingService loggingService;
     private static final Logger LOG = Logs.of(GeneralLocationListener.class);
     protected String latestHdop;

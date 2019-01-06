@@ -781,13 +781,14 @@ public class GpsLoggingService extends Service  {
             return;
         }
 
+        boolean isPassiveLocation = loc.getExtras().getBoolean(BundleConstants.PASSIVE);
         long currentTimeStamp = System.currentTimeMillis();
 
         LOG.debug("Has description? " + session.hasDescription() + ", Single point? " + session.isSinglePointMode() + ", Last timestamp: " + session.getLatestTimeStamp());
 
         // Don't log a point until the user-defined time has elapsed
         // However, if user has set an annotation, just log the point, disregard any filters
-        if (!session.hasDescription() && !session.isSinglePointMode() && (currentTimeStamp - session.getLatestTimeStamp()) < (preferenceHelper.getMinimumLoggingInterval() * 1000)) {
+        if (!isPassiveLocation && !session.hasDescription() && !session.isSinglePointMode() && (currentTimeStamp - session.getLatestTimeStamp()) < (preferenceHelper.getMinimumLoggingInterval() * 1000)) {
             return;
         }
 
@@ -798,13 +799,11 @@ public class GpsLoggingService extends Service  {
             return;
         }
 
-        if(!isFromValidListener(loc)){
+        if(!isPassiveLocation && !isFromValidListener(loc)){
             return;
         }
 
 
-        boolean isPassiveLocation = loc.getExtras().getBoolean(BundleConstants.PASSIVE);
-        
         //check if we change of day and then write the last position of yesterday as the first position of today
         if (preferenceHelper.shouldCreateNewFileOnceADay()) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -828,7 +827,7 @@ public class GpsLoggingService extends Service  {
 
         // Don't do anything until the user-defined accuracy is reached
         // However, if user has set an annotation, just log the point, disregard any filters
-        if (!session.hasDescription() &&  preferenceHelper.getMinimumAccuracy() > 0) {
+        if (!isPassiveLocation && !session.hasDescription() &&  preferenceHelper.getMinimumAccuracy() > 0) {
 
 
             if(!loc.hasAccuracy() || loc.getAccuracy() == 0){
