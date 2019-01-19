@@ -14,7 +14,7 @@ import static org.hamcrest.core.IsNull.nullValue;
 
 @SmallTest
 @RunWith(MockitoJUnitRunner.class)
-public class CustomUrlRequestJava {
+public class CustomUrlRequestTest {
 
     @Test
     public void getHttpMethod_IsAlwaysCapitalized(){
