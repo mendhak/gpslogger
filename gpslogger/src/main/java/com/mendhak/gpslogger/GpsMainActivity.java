@@ -1043,8 +1043,8 @@ public class GpsMainActivity extends AppCompatActivity
                             List<File> chosenFiles = new ArrayList<>();
 
                             for (Object item : selectedItems) {
-                                LOG.info("Selected file to upload- " + files[Integer.valueOf(item.toString())]);
-                                chosenFiles.add(new File(gpxFolder, files[Integer.valueOf(item.toString())]));
+                                LOG.info("Selected file to upload- " + files[Integer.parseInt(item.toString())]);
+                                chosenFiles.add(new File(gpxFolder, files[Integer.parseInt(item.toString())]));
                             }
 
                             if (chosenFiles.size() > 0) {
@@ -1130,7 +1130,7 @@ public class GpsMainActivity extends AppCompatActivity
                                     ArrayList<Uri> chosenFiles = new ArrayList<>();
 
                                     for (Object path : selectedItems) {
-                                        File file = new File(gpxFolder, files[Integer.valueOf(path.toString())]);
+                                        File file = new File(gpxFolder, files[Integer.parseInt(path.toString())]);
                                         Uri providedUri = FileProvider.getUriForFile(getApplicationContext(),
                                                 "com.mendhak.gpslogger.fileprovider", file);
                                         chosenFiles.add(providedUri);

@@ -742,7 +742,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.AUTOSEND_FREQUENCY)
     public int getAutoSendInterval() {
-        return Math.round(Float.valueOf(prefs.getString(PreferenceNames.AUTOSEND_FREQUENCY, "60")));
+        return Math.round(Float.parseFloat(prefs.getString(PreferenceNames.AUTOSEND_FREQUENCY, "60")));
     }
 
 

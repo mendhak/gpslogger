@@ -127,7 +127,7 @@ public class AutoEmailFragment extends PreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
 
         if (preference.getKey().equals("autoemail_preset")) {
-            int newPreset = Integer.valueOf(newValue.toString());
+            int newPreset = Integer.parseInt(newValue.toString());
 
             switch (newPreset) {
                 case 0:
