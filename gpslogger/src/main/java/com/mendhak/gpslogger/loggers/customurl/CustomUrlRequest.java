@@ -4,13 +4,14 @@ import android.support.v4.util.Pair;
 
 import com.mendhak.gpslogger.common.Strings;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class CustomUrlRequest {
+public class CustomUrlRequest implements Serializable {
 
 
     private HashMap<String, String> httpHeaders = new HashMap<String, String>();
