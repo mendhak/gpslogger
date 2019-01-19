@@ -31,7 +31,7 @@ public class CustomUrlRequestJava {
     public void getHttpMethod_CustomMethodNames_AlwaysCapitalized(){
         CustomUrlRequest cur = new CustomUrlRequest("http://example.com", "blaH", "", "");
         String expected = "BLAH";
-        assertThat("Custom HTTP Method shoudl also be capitalized", cur.getHttpMethod(), is(expected));
+        assertThat("Custom HTTP Method should also be capitalized", cur.getHttpMethod(), is(expected));
     }
 
     @Test
