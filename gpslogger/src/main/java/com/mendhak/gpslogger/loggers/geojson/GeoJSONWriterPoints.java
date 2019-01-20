@@ -33,6 +33,7 @@ public class GeoJSONWriterPoints implements Runnable {
                     "\"type\":\"Point\",\"coordinates\":" +
                     "%s}}\n";
     private final static String ATTRIBUTE_TEMPLATE = ",\"%s\":\"%s\"";
+    private final static String NUMERIC_ATTRIBUTE_TEMPLATE = ",\"%s\":%s";
     private final static String COORD_TEMPLATE = "[%s,%s]";
     private final static String DIVIDER = ",";
     private String desc;
@@ -90,21 +91,21 @@ public class GeoJSONWriterPoints implements Runnable {
         StringBuilder attributes = new StringBuilder();
         attributes.append("\"time\":\"").append(dateTimeString).append("\"");
         attributes.append(String.format(ATTRIBUTE_TEMPLATE, "provider", location.getProvider()));
-        attributes.append(String.format(ATTRIBUTE_TEMPLATE, "time_long", location.getTime()));
+        attributes.append(String.format(NUMERIC_ATTRIBUTE_TEMPLATE, "time_long", location.getTime()));
         if (!Strings.isNullOrEmpty(desc)) {
             attributes.append(String.format(ATTRIBUTE_TEMPLATE, "description", Strings.cleanDescriptionForJson(desc)));
         }
         if (location.hasAccuracy()) {
-            attributes.append(String.format(ATTRIBUTE_TEMPLATE, "accuracy", location.getAccuracy()));
+            attributes.append(String.format(NUMERIC_ATTRIBUTE_TEMPLATE, "accuracy", location.getAccuracy()));
         }
         if (location.hasAltitude()) {
-            attributes.append(String.format(ATTRIBUTE_TEMPLATE, "altitude", location.getAltitude()));
+            attributes.append(String.format(NUMERIC_ATTRIBUTE_TEMPLATE, "altitude", location.getAltitude()));
         }
         if (location.hasBearing()) {
-            attributes.append(String.format(ATTRIBUTE_TEMPLATE, "bearing", location.getBearing()));
+            attributes.append(String.format(NUMERIC_ATTRIBUTE_TEMPLATE, "bearing", location.getBearing()));
         }
         if (location.hasSpeed()) {
-            attributes.append(String.format(ATTRIBUTE_TEMPLATE, "speed", location.getSpeed()));
+            attributes.append(String.format(NUMERIC_ATTRIBUTE_TEMPLATE, "speed", location.getSpeed()));
         }
 
         extra = attributes.toString();

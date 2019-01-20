@@ -19,29 +19,6 @@ import static org.junit.Assert.assertTrue;
 public class GeoJSONLoggerTest {
     GeoJSONLogger log;
 
-    @Test
-    public void write() throws Exception {
-        File file = new File("test.geojson");
-        log = new GeoJSONLogger(file, false);
-        Location loc = getLocation();
-        log.write(loc);
-        Thread.sleep(1000);
-        assertEquals(0, GeoJSONLogger.getCount());
-        assertTrue(file.exists());
-
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String line;
-        StringBuilder lines = new StringBuilder();
-        while ((line=br.readLine()) != null){
-            lines.append(line);
-        }
-        file.delete();
-        assertEquals("{\"type\": \"FeatureCollection\",\"features\": [{\"type\": \"Feature\"," +
-                "\"properties\":{\"time\":\"1970-01-01T00:00:00.000Z\",\"provider\":\"MOCK\"," +
-                "\"time_long\":\"0\",\"altitude\":\"9001.0\",\"bearing\":\"91.88\",\"speed\":\"188.44\"}," +
-                "\"geometry\":{\"type\":\"Point\",\"coordinates\":[19.111,12.193]}}]}", lines.toString());
-    }
-
     private Location getLocation() {
         return MockLocations.builder("MOCK", 12.193, 19.111)
                 .withAltitude(9001d)
@@ -56,8 +33,8 @@ public class GeoJSONLoggerTest {
         String result = geojson.getString(false);
         String expected = "{\"type\": \"FeatureCollection\",\"features\": [\n" +
                 "{\"type\": \"Feature\",\"properties\":{\"time\":\"1970-01-01T00:00:00.000Z\"," +
-                "\"provider\":\"MOCK\",\"time_long\":\"0\",\"description\":\"test\"" +
-                ",\"altitude\":\"9001.0\",\"bearing\":\"91.88\",\"speed\":\"188.44\"}," +
+                "\"provider\":\"MOCK\",\"time_long\":0,\"description\":\"test\"" +
+                ",\"altitude\":9001.0,\"bearing\":91.88,\"speed\":188.44}," +
                 "\"geometry\":{\"type\":\"Point\",\"coordinates\":[19.111,12.193]}}\n]}";
         assertEquals("annotation", expected, result);
     }
@@ -68,8 +45,8 @@ public class GeoJSONLoggerTest {
         String result = geojson.getString(false);
         String expected = "{\"type\": \"FeatureCollection\",\"features\": [\n" +
                 "{\"type\": \"Feature\",\"properties\":{\"time\":\"1970-01-01T00:00:00.000Z\"," +
-                "\"provider\":\"MOCK\",\"time_long\":\"0\",\"description\":\"Double Quotes and Backslashes need to go\"" +
-                ",\"altitude\":\"9001.0\",\"bearing\":\"91.88\",\"speed\":\"188.44\"}," +
+                "\"provider\":\"MOCK\",\"time_long\":0,\"description\":\"Double Quotes and Backslashes need to go\"" +
+                ",\"altitude\":9001.0,\"bearing\":91.88,\"speed\":188.44}," +
                 "\"geometry\":{\"type\":\"Point\",\"coordinates\":[19.111,12.193]}}\n]}";
         assertEquals("annotation", expected, result);
     }
@@ -81,8 +58,8 @@ public class GeoJSONLoggerTest {
         String result = geojson.getString(false);
         String expected = "{\"type\": \"FeatureCollection\",\"features\": [\n" +
                 "{\"type\": \"Feature\",\"properties\":{\"time\":\"1970-01-01T00:00:00.000Z\"," +
-                "\"provider\":\"MOCK\",\"time_long\":\"0\",\"altitude\":\"9001.0\"," +
-                "\"bearing\":\"91.88\",\"speed\":\"188.44\"}," +
+                "\"provider\":\"MOCK\",\"time_long\":0,\"altitude\":9001.0," +
+                "\"bearing\":91.88,\"speed\":188.44}," +
                 "\"geometry\":{\"type\":\"Point\",\"coordinates\":[19.111,12.193]}}\n]}";
         assertEquals("locationString", expected, result);
 
@@ -93,8 +70,8 @@ public class GeoJSONLoggerTest {
         GeoJSONWriterPoints geojson = new GeoJSONWriterPoints(null, getLocation(), null, false);
         String result = geojson.getString(true);
         String expected = ",{\"type\": \"Feature\",\"properties\":{\"time\":\"1970-01-01T00:00:00.000Z\"," +
-                "\"provider\":\"MOCK\",\"time_long\":\"0\",\"altitude\":\"9001.0\"," +
-                "\"bearing\":\"91.88\",\"speed\":\"188.44\"}," +
+                "\"provider\":\"MOCK\",\"time_long\":0,\"altitude\":9001.0," +
+                "\"bearing\":91.88,\"speed\":188.44}," +
                 "\"geometry\":{\"type\":\"Point\",\"coordinates\":[19.111,12.193]}}\n]}";
         assertEquals("locationString", expected, result);
 
