@@ -670,8 +670,12 @@ public class PreferenceHelper {
         List<String> listeners = new ArrayList<>();
         listeners.add(LocationManager.GPS_PROVIDER);
         listeners.add(LocationManager.NETWORK_PROVIDER);
-        listeners.add(LocationManager.PASSIVE_PROVIDER);
         return listeners;
+    }
+
+    @ProfilePreference(name=PreferenceNames.LOG_PASSIVE_LOCATIONS)
+    public boolean shouldLogPassiveLocations(){
+        return prefs.getBoolean(PreferenceNames.LOG_PASSIVE_LOCATIONS, false);
     }
 
 

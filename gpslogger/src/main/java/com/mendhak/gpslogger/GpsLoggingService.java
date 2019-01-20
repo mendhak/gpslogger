@@ -572,7 +572,7 @@ public class GpsLoggingService extends Service  {
 
     @SuppressWarnings("ResourceType")
     private void startPassiveManager() {
-        if(preferenceHelper.getChosenListeners().contains(LocationManager.PASSIVE_PROVIDER)){
+        if(preferenceHelper.shouldLogPassiveLocations()){
             LOG.debug("Starting passive location listener");
             if(passiveLocationListener== null){
                 passiveLocationListener = new GeneralLocationListener(this, BundleConstants.PASSIVE);

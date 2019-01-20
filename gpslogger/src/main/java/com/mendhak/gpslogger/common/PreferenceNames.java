@@ -42,6 +42,7 @@ public  class PreferenceNames {
     public static final String LOG_TO_URL_METHOD = "log_customurl_method";
     public static final String LOG_TO_OPENGTS = "log_opengts";
     public static final String LOCATION_LISTENERS = "listeners";
+    public static final String LOG_PASSIVE_LOCATIONS="log_passive_locations";
     public static final String NEW_FILE_CREATION_MODE = "new_file_creation";
     public static final String CUSTOM_FILE_NAME = "new_file_custom_name";
     public static final String CUSTOM_FILE_NAME_KEEP_CHANGING = "new_file_custom_keep_changing";

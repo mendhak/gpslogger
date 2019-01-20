@@ -63,7 +63,6 @@
     <string-array name="listeners">
         <item>@string/listeners_gps</item>
         <item>@string/listeners_cell</item>
-        <item>@string/listeners_passive</item>
     </string-array>
 
 
