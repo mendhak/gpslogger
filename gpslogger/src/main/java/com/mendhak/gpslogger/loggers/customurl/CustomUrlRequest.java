@@ -86,7 +86,8 @@ public class CustomUrlRequest implements Serializable {
     private Pair<String, String> getBasicAuthCredentialsFromUrl(String logURL) {
         Pair<String, String> result  = new Pair<>("","");
 
-        Pattern r = Pattern.compile("(\\w+):(\\w+)@.+");
+        //Another possible match:  \/\/([^\/^:]+):(.+)@.+
+        Pattern r = Pattern.compile("\\/\\/(.+):(\\w+)@.+");
         Matcher m = r.matcher(logURL);
         while(m.find()){
             result = new Pair<>(m.group(1), m.group(2));

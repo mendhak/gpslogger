@@ -49,6 +49,21 @@ public class CustomUrlRequestTest {
     }
 
     @Test
+    public void addBasicAuthorizationHeader_EmailUsername(){
+        CustomUrlRequest cur = new CustomUrlRequest("http://bob@example.com:hunter2@example.com/%LOG");
+        String expected = "Basic Ym9iQGV4YW1wbGUuY29tOmh1bnRlcjI=";
+
+        assertThat("Authorization header uses email as username", cur.getHttpHeaders().get("Authorization"), is(expected));
+    }
+
+    @Test
+    public void removeCredentialsFromUrl_EmailUsername_RemovedFromUrl(){
+        CustomUrlRequest cur = new CustomUrlRequest("http://bob@example.com:hunter2@example.com/%LOG");
+        String expected = "http://example.com/%LOG";
+        assertThat("Credentials are removed from URL", cur.getLogURL(), is(expected));
+    }
+
+    @Test
     public void addBasicAuthorization_CredentialsNotPresent(){
         CustomUrlRequest cur = new CustomUrlRequest("http://example.com/%SER");
         assertThat("No authorization header is present", cur.getHttpHeaders().get("Authorization"), is(nullValue()));
