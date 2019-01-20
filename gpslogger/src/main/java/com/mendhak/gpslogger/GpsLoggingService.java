@@ -223,9 +223,9 @@ public class GpsLoggingService extends Service  {
                     LOG.debug("Intent received - Set Prefer Cell Tower: " + String.valueOf(preferCellTower));
 
                     if(preferCellTower){
-                        preferenceHelper.setChosenListeners(0);
+                        preferenceHelper.setChosenListeners(1);
                     } else {
-                        preferenceHelper.setChosenListeners(1,2);
+                        preferenceHelper.setChosenListeners(0);
                     }
 
                     needToStartGpsManager = true;
