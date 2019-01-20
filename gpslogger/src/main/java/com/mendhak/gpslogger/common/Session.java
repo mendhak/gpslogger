@@ -143,7 +143,7 @@ public class Session {
      * @return the number of satellites visible
      */
     public int getVisibleSatelliteCount() {
-        return Integer.valueOf(get("satellites", "0"));
+        return Integer.parseInt(get("satellites", "0"));
     }
 
     /**
@@ -176,11 +176,11 @@ public class Session {
     }
 
     public double getTotalTravelled() {
-        return Double.valueOf(get("totalTravelled", "0"));
+        return Double.parseDouble(get("totalTravelled", "0"));
     }
 
     public int getNumLegs() {
-        return Integer.valueOf(get("numLegs", "0"));
+        return Integer.parseInt(get("numLegs", "0"));
     }
 
     public void setNumLegs(int numLegs) {
@@ -227,14 +227,14 @@ public class Session {
      * @return the latestTimeStamp (for location info)
      */
     public long getLatestTimeStamp() {
-        return Long.valueOf(get("latestTimeStamp", "0"));
+        return Long.parseLong(get("latestTimeStamp", "0"));
     }
 
     /**
      * @return the timestamp when measuring was started
      */
     public long getStartTimeStamp() {
-        return Long.valueOf(get("startTimeStamp", String.valueOf(System.currentTimeMillis())));
+        return Long.parseLong(get("startTimeStamp", String.valueOf(System.currentTimeMillis())));
     }
 
     /**
@@ -269,7 +269,7 @@ public class Session {
      * @return the autoSendDelay to use for the timer
      */
     public float getAutoSendDelay() {
-        return Float.valueOf(get("autoSendDelay", "0"));
+        return Float.parseFloat(get("autoSendDelay", "0"));
     }
 
     /**
@@ -342,7 +342,7 @@ public class Session {
     }
 
     public long getUserStillSinceTimeStamp() {
-        return Long.valueOf(get("userStillSinceTimeStamp", "0"));
+        return Long.parseLong(get("userStillSinceTimeStamp", "0"));
     }
 
     public void setUserStillSinceTimeStamp(long lastUserStillTimeStamp) {
@@ -354,7 +354,7 @@ public class Session {
     }
 
     public long getFirstRetryTimeStamp() {
-        return Long.valueOf(get("firstRetryTimeStamp", "0"));
+        return Long.parseLong(get("firstRetryTimeStamp", "0"));
     }
 
     public void setLatestDetectedActivity(DetectedActivity latestDetectedActivity) {

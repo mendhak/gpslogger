@@ -31,7 +31,7 @@ public class Locations {
         if(ph.shouldAdjustAltitudeFromGeoIdHeight() && loc.getExtras() != null){
             String geoidheight = loc.getExtras().getString(BundleConstants.GEOIDHEIGHT);
             if (!Strings.isNullOrEmpty(geoidheight)) {
-                loc.setAltitude((float) loc.getAltitude() - Float.valueOf(geoidheight));
+                loc.setAltitude(loc.getAltitude() - Double.parseDouble(geoidheight));
             }
             else {
                 //If geoid height not present for adjustment, don't record an elevation at all.
