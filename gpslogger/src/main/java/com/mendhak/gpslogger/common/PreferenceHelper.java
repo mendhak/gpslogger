@@ -588,6 +588,24 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.LOG_TO_URL_HEADERS,"");
     }
 
+    @ProfilePreference(name=PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME)
+    public String getCustomLoggingBasicAuthUsername() {
+        return prefs.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME, "");
+    }
+
+    public void setCustomLoggingBasicAuthUsername(String username) {
+        prefs.edit().putString(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME, username).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD)
+    public String getCustomLoggingBasicAuthPassword() {
+        return prefs.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD, "");
+    }
+
+    public void setCustomLoggingBasicAuthPassword(String password) {
+        prefs.edit().putString(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD, password).apply();
+    }
+
     /**
      * The custom URL to log to.  Relevant only if {@link #shouldLogToCustomUrl()} returns true.
      */
@@ -1192,7 +1210,6 @@ public class PreferenceHelper {
         }
 
     }
-
 
 
 }

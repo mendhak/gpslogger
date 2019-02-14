@@ -33,6 +33,9 @@
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:title="@string/customurl_http_method" />
+    <Preference
+        android:key="log_customurl_basicauth"
+        android:title="Basic Authentication"/>
 
     <Preference android:key="customurl_validatecustomsslcert"
                 android:title="@string/ssl_certificate_validate" />
