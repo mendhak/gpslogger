@@ -23,29 +23,30 @@ public class CustomUrlRequest implements Serializable {
 
 
     public CustomUrlRequest(String logUrl, String httpMethod) {
-        this(logUrl, httpMethod, "", "");
+        this(logUrl, httpMethod, "", "", "","");
     }
 
     public CustomUrlRequest(String logUrl)  {
         this(logUrl, "GET");
     }
 
-    public CustomUrlRequest(String logURL, String httpMethod, String httpBody, String rawHeaders){
+    public CustomUrlRequest(String logURL, String httpMethod, String httpBody, String rawHeaders, String basicAuthUsername, String basicauthPassword){
         this.logURL = logURL;
         this.httpMethod = httpMethod.toUpperCase();
         this.httpBody = httpBody;
         this.rawHeaders = rawHeaders;
 
 
-        Pair<String, String> creds = getBasicAuthCredentialsFromUrl(this.logURL);
-        addAuthorizationHeader(creds);
-        removeCredentialsFromUrl(creds);
+        Pair<String, String> urlCredentials = getBasicAuthCredentialsFromUrl(this.logURL);
+        addAuthorizationHeader(urlCredentials);
+        removeCredentialsFromUrl(urlCredentials);
+
+        addAuthorizationHeader(new Pair<String, String>(basicAuthUsername, basicauthPassword));
 
         //HttpHeaders.putAll(getHeadersFromTextBlock(RawHeaders))
-        this.httpHeaders.putAll(getHeadersFromTextBlock(rawHeaders));
-
-
+        this.httpHeaders.putAll(getHeadersFromTextBlock(this.rawHeaders));
     }
+
 
     private Map<String,String> getHeadersFromTextBlock(String rawHeaders) {
 

@@ -168,6 +168,9 @@ public class CustomUrlFragment extends PreferenceFragment implements
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.CustomUrl c){
+
+        if(!isAdded()) { return; }
+
         LOG.debug("Custom URL test, success: " + c.success);
         Dialogs.hideProgress();
         if(!c.success){
