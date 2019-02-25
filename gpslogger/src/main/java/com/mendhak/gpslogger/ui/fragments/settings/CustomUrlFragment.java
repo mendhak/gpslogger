@@ -126,7 +126,7 @@ public class CustomUrlFragment extends PreferenceFragment implements
         }
         else if(preference.getKey().equals("log_customurl_basicauth")){
             MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
-                    .title("Basic Authentication")
+                    .title(R.string.customurl_http_basicauthentication)
                     .customView(R.layout.customurl_basicauthview, true)
 
                     .autoDismiss(false)
