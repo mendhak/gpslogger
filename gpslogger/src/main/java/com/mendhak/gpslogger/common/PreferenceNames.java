@@ -40,6 +40,8 @@ public  class PreferenceNames {
     public static final String LOG_TO_URL_BODY = "log_customurl_body";
     public static final String LOG_TO_URL_HEADERS = "log_customurl_headers";
     public static final String LOG_TO_URL_METHOD = "log_customurl_method";
+    public static final String LOG_TO_URL_BASICAUTH_USERNAME = "log_customurl_basicauth_username";
+    public static final String LOG_TO_URL_BASICAUTH_PASSWORD = "log_customurl_basicauth_password";
     public static final String LOG_TO_OPENGTS = "log_opengts";
     public static final String LOCATION_LISTENERS = "listeners";
     public static final String LOG_PASSIVE_LOCATIONS="log_passive_locations";
@@ -114,6 +116,8 @@ public  class PreferenceNames {
     public static final String USER_SPECIFIED_LANGUAGE = "user_specified_locale";
 
     public static final String LATLONG_DISPLAY_FORMAT="latlong_display_format";
+
+
     public static enum DegreesDisplayFormat {
         DEGREES_MINUTES_SECONDS, DEGREES_DECIMAL_MINUTES, DECIMAL_DEGREES
     }

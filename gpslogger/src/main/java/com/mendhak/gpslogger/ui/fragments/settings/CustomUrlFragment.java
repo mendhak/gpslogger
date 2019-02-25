@@ -24,7 +24,12 @@ import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-
+import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatEditText;
+import android.view.WindowManager;
+import android.widget.EditText;
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.events.UploadEvents;
@@ -64,6 +69,7 @@ public class CustomUrlFragment extends PreferenceFragment implements
 
         findPreference("customurl_legend_1").setOnPreferenceClickListener(this);
         findPreference("customurl_validatecustomsslcert").setOnPreferenceClickListener(this);
+        findPreference("log_customurl_basicauth").setOnPreferenceClickListener(this);
 
         registerEventBus();
 
@@ -118,12 +124,53 @@ public class CustomUrlFragment extends PreferenceFragment implements
 
             return true;
         }
+        else if(preference.getKey().equals("log_customurl_basicauth")){
+            MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
+                    .title("Basic Authentication")
+                    .customView(R.layout.customurl_basicauthview, true)
+
+                    .autoDismiss(false)
+                    .negativeText(R.string.cancel)
+                    .positiveText(R.string.ok)
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                            String basicAuthUsername = ((EditText)materialDialog.getView().findViewById(R.id.basicauth_username)).getText().toString();
+                            PreferenceHelper.getInstance().setCustomLoggingBasicAuthUsername(basicAuthUsername);
+
+                            String basicAuthPassword = ((EditText)materialDialog.getView().findViewById(R.id.basicauth_pwd)).getText().toString();
+                            PreferenceHelper.getInstance().setCustomLoggingBasicAuthPassword(basicAuthPassword);
+
+                            materialDialog.dismiss();
+                        }
+                    })
+                    .onNegative(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                            materialDialog.dismiss();
+                        }
+                    })
+                    .build();
+
+
+            final AppCompatEditText bauthUsernameText = (AppCompatEditText) alertDialog.getCustomView().findViewById(R.id.basicauth_username);
+            bauthUsernameText.setText(PreferenceHelper.getInstance().getCustomLoggingBasicAuthUsername());
+            final AppCompatEditText bauthPwdText = (AppCompatEditText) alertDialog.getCustomView().findViewById(R.id.basicauth_pwd);
+            bauthPwdText.setText(PreferenceHelper.getInstance().getCustomLoggingBasicAuthPassword());
+
+            alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            alertDialog.show();
+            return true;
+        }
 
         return false;
     }
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.CustomUrl c){
+
+        if(!isAdded()) { return; }
+
         LOG.debug("Custom URL test, success: " + c.success);
         Dialogs.hideProgress();
         if(!c.success){

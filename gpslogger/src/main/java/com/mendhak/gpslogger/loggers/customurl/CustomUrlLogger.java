@@ -44,14 +44,23 @@ public class CustomUrlLogger implements FileLogger {
     private final String httpMethod;
     private final String httpBody;
     private final String httpHeaders;
+    private final String basicAuthUsername;
+    private final String basicAuthPassword;
 
     public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String androidId, String httpMethod, String httpBody, String httpHeaders) {
+        this(customLoggingUrl,batteryLevel, androidId, httpMethod, httpBody, httpHeaders, "","");
+
+    }
+
+    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String androidId, String httpMethod, String httpBody, String httpHeaders, String basicAuthUsername, String basicAuthPassword) {
         this.customLoggingUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
         this.androidId = androidId;
         this.httpMethod = httpMethod;
         this.httpBody = httpBody;
         this.httpHeaders = httpHeaders;
+        this.basicAuthUsername = basicAuthUsername;
+        this.basicAuthPassword = basicAuthPassword;
     }
 
     @Override
@@ -73,7 +82,7 @@ public class CustomUrlLogger implements FileLogger {
 
 
         JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl,httpMethod, finalBody, finalHeaders), new UploadEvents.CustomUrl()));
+        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl,httpMethod, finalBody, finalHeaders, basicAuthUsername, basicAuthPassword), new UploadEvents.CustomUrl()));
     }
 
 

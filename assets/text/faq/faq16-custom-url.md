@@ -6,11 +6,7 @@ The Custom URL feature allows you to log GPS points to a public URL.  This can b
 
 If your phone goes **offline**, then the app will queue these requests until a data connection becomes available.     
 
-You can add **authentication** by prefixing the username and password like so:
-
-    https://username:password@myserver.com/log?lat=%LAT&long=%LON
-    
-The credentials are sent as Basic Authentication headers, not as part of the URL.     
+You can add your HTTP body, HTTP header, HTTP method and basic authentication credentials in the Custom URL screen.      
 
 If you use a self signed **SSL** certificate, be sure to [validate it first](#customsslcertificates).
 
