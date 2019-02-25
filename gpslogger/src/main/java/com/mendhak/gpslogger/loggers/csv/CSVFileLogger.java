@@ -64,7 +64,7 @@ public class CSVFileLogger implements FileLogger {
             description = "\"" + description.replaceAll("\"", "\"\"") + "\"";
         }
 
-        String outputString = String.format(Locale.US, "%s,%f,%f,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", dateTimeString,
+        String outputString = String.format(Locale.US, "%s,%s,%s,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", dateTimeString,
                 loc.getLatitude(),
                 loc.getLongitude(),
                 loc.hasAltitude() ? loc.getAltitude() : "",
