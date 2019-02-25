@@ -444,6 +444,7 @@
     <string name="customurl_http_body">HTTP Body</string>
     <string name="customurl_http_headers">HTTP Headers</string>
     <string name="customurl_http_method">HTTP Method</string>
+    <string name="customurl_http_basicauthentication">Basic Authentication</string>
     <string name="hide_notification_from_status_bar_disallowed">Hiding notification is disallowed in Android Oreo onwards</string>
 
 </resources>
