@@ -315,7 +315,6 @@
     <string name="profile_add_new">Profiel toevoegen</string>
     <string name="gpslogger_permissions_rationale_title">Machtigingen vereist</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Deze app vereist allerlei machtigingen om goed te functioneren. <br /><b>Apparaat locatie</b> - Deze machtiging laat toe locatiegegevens te lezen van gsm-masten en van de GPS hardware van het apparaat.<br /><b>Foto\'s, media, bestanden</b> - Deze machtiging laat toe logbestanden en testbestanden in de opslagruimte te bewaren en een lijst van bestanden te lezen om te uploaden of te delen. Deze app zal uw foto\'s of media niet benaderen.<br /><b>Toegang tot uw contacten</b> - Indien Google Drive gebruikt wordt, laat deze machtiging toe om de geregistreerde Google accounts op te lijsten. Uw contactenlijst wordt door deze app niet benaderd.<br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied">U hebt één of meer machtigingen die door deze app vereist worden permanent geweigerd. U zal naar het applicatiebeheer-scherm moeten gaan om deze machtigingen toe te kennen of te resetten.</string>
     <string name="privacy_policy">Privacybeleid</string>
     <string name="debuglog_attach_to_email">Voeg debug-log toe aan e-mail</string>
     <string name="debuglog_attach_to_email_summary">Voegt debug-log toe aan e-mail, samen met wat diagnostische informatie</string>

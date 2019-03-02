@@ -320,7 +320,6 @@
     <string name="profile_add_new">Přidat profil</string>
     <string name="gpslogger_permissions_rationale_title">Požadovaná oprávnění</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Tato aplikace vyžaduje různá oprávnění, aby mohla správně fungovat.  <br /> <b>Poloha zařízení</b> - toto oprávnění umožňuje číst údaje o poloze z GSM vysílačů a GPS modulu zařízení. <br /><b>Fotky, média, soubory</b> - toto oprávnění umožňuje zápis souborů záznamů a testovacích souborů na úložiště, a čtení ze seznamu souborů pro nahrávání nebo sdílení. Tato aplikace nebude přistupovat k vašim fotkám nebo médiím.<br /><b>Přístup ke kontaktům</b> -  používá-li se funkce Google Disk, toto oprávnění umožňuje výpis účtů Google, které jsou registrovány v tomto zařízení.  Aplikace nepřistupuje k vašim kontaktům.<br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied">Zamítli jste trvale jedno nebo více oprávnění, které aplikace vyžaduje.  Budete muset jít na obrazovku nastavení aplikace a povolit nebo obnovit tato oprávnění.</string>
     <string name="privacy_policy">Zásady ochrany osobních údajů</string>
     <string name="debuglog_attach_to_email">Přiložit záznamy o ladění do emailu</string>
     <string name="debuglog_attach_to_email_summary">Přiloží záznam o ladění do emailu spolu s některými diagnostickými informacemi</string>

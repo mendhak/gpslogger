@@ -317,7 +317,6 @@
     <string name="profile_add_new">Aggiungi profilo</string>
     <string name="gpslogger_permissions_rationale_title">Autorizzazioni necessarie</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Questa applicazione richiede varie autorizzazioni per funzionare correttamente. <br /> <b>Posizione dispositivo</b> - Questa autorizzazione permette di leggere la tua posizione basandosi sui ripetitori di telefonia mobile e sul tuo sensore GPS.<br /> <b>Foto, media, file</b> - Questa autorizzazione permette la scrittura di file di log e di test sul supporto di archiviazione locale, e la lettura di un elenco di file per il caricamento o la condivisione. Questa app non accederà alle tue foto o media.<br /> <b>Accesso ai tuoi contatti</b> - Se utilizzi la funzionalità di Google Drive, questa autorizzazione consente di elencare gli account Google registrati su questo dispositivo.  Questa app non accede alla lista dei tuoi contatti. <br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied">Hai negato definitivamente una o più autorizzazioni che questa applicazione richiede.  Sarà necessario andare sulla schermata delle impostazioni per consentire o reimpostare queste autorizzazioni.</string>
     <string name="privacy_policy">Informativa sulla privacy</string>
     <string name="debuglog_attach_to_email">Invia debug con Email</string>
     <string name="debuglog_attach_to_email_summary">Allega un file di debug ad una Email con ulteriori informazioni diagnostiche</string>

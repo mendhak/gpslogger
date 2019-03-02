@@ -319,7 +319,6 @@
     <string name="profile_add_new">Profil ekle</string>
     <string name="gpslogger_permissions_rationale_title">İzin gerekli</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Bu uygulama düzgün çalışması için çeşitli izinler gerekir. <br /> <b>Cihaz konumu</b> - Bu izin baz istasyonları ve cihaz GPS donanımının konum verilerini okumaya izin verir.<br /><b>Fotoğraflar, medya, dosyalar</b> - Bu izin günlük dosyalarını ve sınama dosyalarını yazma ve depolama, yükleme ve paylaşma için dosyaların bir listesini okumayı sağlar. Bu uygulama, fotoğraf veya medyalarınıza erişmez.<br /><b>Kişileriniz erişimi</b> - Google Drive özelliklerini kullanıyorsanız, bu izin bu cihazda kayıtlı Google hesaplarını listeler. Kişileriniz listesi bu uygulama tarafından erişilmez.<br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied">Bu uygulamanın gerektirdiği bir veya daha fazla izini kalıcı olarak reddettiniz. Bu izinleri verme ya da sıfırlamak için uygulama ayarları ekranına gitmeniz gerekir.</string>
     <string name="privacy_policy">Gizlilik Politikası</string>
     <string name="debuglog_attach_to_email">Hata ayıklama günlüğünü e-postaya ekleyin</string>
     <string name="debuglog_attach_to_email_summary">Hata ayıklama günlüğünü bazı bilgilerle birlikte bir e-postaya iliştir</string>

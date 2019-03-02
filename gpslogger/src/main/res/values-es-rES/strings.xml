@@ -45,8 +45,7 @@
     <string name="seconds">s</string>
     <string name="minutes">&#160;min</string>
     <string name="hours">&#160;hrs</string>
-    <string name="gpsprovider_unavailable">No hay ningún proveedor GPS disponible. Es necesario comprobar los ajustes de ubicación y activar algún proveedor de ubicación.
-    </string>
+    <string name="gpsprovider_unavailable">No hay ningún proveedor GPS disponible. Compruebe los ajustes de ubicación y active algún proveedor de ubicación.    </string>
     <string name="started">En ejecución</string>
     <string name="providername_gps">Satélites GPS</string>
     <string name="providername_celltower">Antenas de telefonía móvil</string>
@@ -95,6 +94,8 @@
     <string name="pref_logging_title">Detalles de registro</string>
     <string name="log_gpx_title">Registrar en formato GPX</string>
     <string name="log_gpx_summary">Escribe las posiciones en un archivo GPX v1.0</string>
+    <string name="log_gpx_11_title">Usar GPX 1.1</string>
+    <string name="log_gpx_11_summary">Usar formato de archivos GPX 1.1 en vez de GPX 1.0</string>
     <string name="log_kml_title">Registrar en formato KML</string>
     <string name="log_kml_summary">Escribe las posiciones en un archivo KML v2.2</string>
     <string name="log_plain_text_title">Registro a CSV</string>
@@ -318,7 +319,6 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="profile_add_new">Añadir perfil</string>
     <string name="gpslogger_permissions_rationale_title">Se necesitan permisos</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Esta aplicación requiere varios permisos en orden para funcionar correctamente. <br /><b>Ubicación del dispositivo </b>te permiso permite leer los datos de localización de las torres de celdas y el hardware GPS del dispositivo. <br /><b>Fotos, medios, archivos</b> - Este permiso permite escribir archivos de registro y archivos de prueba para almacenamiento, y lectura de una lista de archivos para subir o compartir. Esta aplicación no tendrá acceso a tus fotos o medios.<br /><b> Acceder a tus contactos</b> - si utilizas la funcionalidad de Google Drive, este permiso permite el listado de las cuentas de Google registradas en este dispositivo. Tu aplicación no accede a tu lista de contactos.<br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied">Has denegado algunos de los permisos que esta aplicación necesita. Debes acceder a la pantalla de configuración de la aplicación para cambiar el acceso a estos permisos.</string>
     <string name="privacy_policy">Política de Privacidad</string>
     <string name="debuglog_attach_to_email">Adjuntar el registro de depuración para correo electrónico</string>
     <string name="debuglog_attach_to_email_summary">Registro de depuración se conecta a un correo electrónico junto con algunos datos diagnóstico</string>
@@ -341,4 +341,5 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="customurl_http_body">Cuerpo HTTP</string>
     <string name="customurl_http_headers">Encabezados HTTP</string>
     <string name="customurl_http_method">Método HTTP</string>
+    <string name="hide_notification_from_status_bar_disallowed">Ocultar notificación no está permitido en Android Oreo y posteriores</string>
 </resources>

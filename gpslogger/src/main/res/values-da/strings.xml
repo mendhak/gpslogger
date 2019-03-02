@@ -330,7 +330,6 @@ præcision ved lavere frekvenser.    </string>
     <string name="profile_add_new">Tilføj profil</string>
     <string name="gpslogger_permissions_rationale_title">Tilladelser kræves</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Denne app kræver forskellige rettigheder for at fungere korrekt. <br/><b>Enhedsplacering</b> - Denne rettighed tillader læsning af placeringsdata fra mobilmaster og enhedens GPS-hardware. <br/><b>Fotos, medier, filer</b> - Denne rettighed tillader skrivning af log- og testfiler til lagerpladsen samt læsning fra en liste af filer til upload eller deling. Denne app vil ikke tilgå dine fotos eller medier. <br/><b>Tilgå dine Kontakter</b> - Benyttes Google Drev-funktionalitet, muliggør rettigheden oversigtsgenerering af Google-konti registreret på enheden.  Denne app tilgår dog ikke din kontaktoversigt. <br/><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied">Du har permanent nægtet en eller flere rettigheder, som kræves af denne app.  Du bliver nødt til at gå til app-indstillingsskærmen for at tildele eller nulstille disse rettigheder.</string>
     <string name="privacy_policy">Fortrolighedspolitik</string>
     <string name="debuglog_attach_to_email">Vedhæft fejlfindingslogfil til e-mail</string>
     <string name="debuglog_attach_to_email_summary">Vedhæft fejlfindingslogfil til en e-mail sammen med nogle diagnostiskoplysninger</string>

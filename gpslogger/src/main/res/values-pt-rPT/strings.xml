@@ -321,7 +321,6 @@ Nomes de ficheiro muito dinâmicos
     <string name="profile_add_new">Adicionar perfil</string>
     <string name="gpslogger_permissions_rationale_title">Permissões necessárias</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Esta app necessita várias permissões para funcionar correctamente. <br /> <b>Localização</b> - Esta permissão autoriza a leitura dos dados de localização da rede celular e do equipamento GPS.<br /><b>Fotos, media, ficheiros</b> - Esta permissão autoriza a escrita de ficheiros de registos e testes para o armazenamento, e a leitura de uma lista de ficheiros para carregamento ou partilha. Esta app não acede aos seus ficheiros de fotos ou media.<br /><b>Contactos</b> - Se utilizar a funcionalidade Google Drive, esta permissão autoriza o acesso a Google accounts registadas neste dispositivo.  A sua lista de contactos não é acedida por esta app.<br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied">Negou permanentemente uma ou ais permissões que esta app necessita. Deverá ir às configurações desta app para garantir ou inicializar essas permissões.</string>
     <string name="privacy_policy">Política de Privacidade</string>
     <string name="debuglog_attach_to_email">Anexar o log de correção de erros ao e-mail</string>
     <string name="debuglog_attach_to_email_summary">Anexa o log de correcção de erros ao e-mail em conjunto com alguma informação de diagnóstico</string>

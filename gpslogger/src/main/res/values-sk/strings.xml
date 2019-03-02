@@ -339,7 +339,6 @@ polia.
     <string name="profile_add_new">Pridať profil</string>
     <string name="gpslogger_permissions_rationale_title">Vyžaduje sa oprávnenie</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Táto aplikácia vyžaduje na svoje správne fungovanie rôzne oprávnenia. <br /> <b>Umiestnenie zariadenia</b> - Toto oprávnenie umožňuje čítanie údajov o lokalite z vysielačov mobilného signálu a z hardvéru pre GPS.<br /><b>Fotografie, médiá, súbory</b> – Toto oprávnenie umožňuje zápis do súborov so záznamami a vykonávanie testu ukladania súborov, čítania zoznamu súborov pre odosielanie alebo zdieľanie. Táto aplikácia nepristupuje k vaším fotografiám alebo médiu.<br /><b>Prístup k vašim kontaktom</b> - Ak používate funkciu Google Drive, toto oprávnenie umožňuje vytváranie zoznamu účtov v Google, ktoré sú registrované s týmto zariadením. K zoznamu kontaktov aplikácia nepristupuje.<br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied">Permanentne ste obmedzili jedno alebo viaceré oprávnenia, ktoré vyžaduje táto aplikácia. Ak budete chcieť oprávnenia resetovať alebo udeliť, bude potrebné prejsť na obrazovku pre nastavenia aplikácie.</string>
     <string name="privacy_policy">Politika ochrany osobných údajov</string>
     <string name="debuglog_attach_to_email">Pripojiť k e-mailu aj záznam pre ladenie</string>
     <string name="debuglog_attach_to_email_summary">K e-mailu sa pripojí záznam pre ladenie, spolu s niektorými diagnostickými informáciami</string>

@@ -95,6 +95,8 @@
     <string name="pref_logging_title">记录细节</string>
     <string name="log_gpx_title">记录到 GPX 文件</string>
     <string name="log_gpx_summary">记录到 GPX v1.0 文件</string>
+    <string name="log_gpx_11_title">使用GPX1.1规范</string>
+    <string name="log_gpx_11_summary">使用GPX 1.1规范文件格式，取代GPX 1.0规范。</string>
     <string name="log_kml_title">记录到 KML 文件</string>
     <string name="log_kml_summary">记录到 KML v2.2 文件</string>
     <string name="log_plain_text_title">CSV 日志</string>
@@ -318,7 +320,6 @@
 <b>设备位置</b>用于获取您的 GPS 或基站位置。<br />
 <b>文件媒介</b>用于读写 SD 卡上的 GPSLogger 文件夹，以供访问、上载、分享记录文件。本应用不会读取您的照片及其他媒介。<br />
 <b>联系人</b>用于列出设备上具有的 Google 账户。本应用不会读取您的联系人列表。<br /><br/>]]></string>
-    <string name="gpslogger_permissions_permanently_denied">您永久拒绝了本应用使用一些其必需的权限。请进入「应用设置」授予或重设这些权限。</string>
     <string name="privacy_policy">隐私权政策</string>
     <string name="debuglog_attach_to_email">将调试日志文件附加到电子邮件</string>
     <string name="debuglog_attach_to_email_summary">将调试日志文件以及一些诊断信息附加到电子邮件</string>
@@ -338,4 +339,5 @@
     <string name="txt_timestamp_epoch">时间戳 (Unix)</string>
     <string name="txt_starttimestamp_epoch">开始时间戳 (Unix)</string>
     <string name="txt_battery">电量</string>
+    <string name="hide_notification_from_status_bar_disallowed">从安卓8起，不允许设置隐藏状态栏通知</string>
 </resources>

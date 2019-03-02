@@ -135,6 +135,7 @@
     <string name="autoemail_smtp_category">Pengaturan email</string>
     <string name="autoemail_username_summary">Nama pengguna dengan penyedia email Anda</string>
     <string name="autoemail_password_summary">Password dengan penyedia email Anda</string>
+    <string name="autoemail_ssl">Implicit SSL</string>
     <string name="autoemail_ssl_summary">Coba toggling ini jika Anda tidak dapat terhubung</string>
     <string name="autoemail_choosepreset">Penyedia email</string>
     <string name="autoemail_choosepreset_summary">Memilih penyedia atau pilih manual</string>
@@ -316,7 +317,6 @@
     <string name="profile_add_new">Menambahkan profil</string>
     <string name="gpslogger_permissions_rationale_title">Izin diperlukan</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Aplikasi ini butuh bermacam ijin agar dapat berfungsi. <br /> <b>lokasi perangkat</b> - perijinin ini mengijinkan membaca lokasi data dari menara selular dan hardware GPS pada perangkat.<br /><b> Foto, media, file.</b> - perijinan ini mengijinkan membaca catatan file dan mengecek file ke penyimpanan, dan membaca dari daftar file untuk diunggah atau dibagi. aplikasi ini tidak akan mengakses foto atau media Anda.<br /><b> mengakses kontak Anda</b> - jika prnggunaan google drive berfungsi, perijinan ini mengijinkan membuat daftar akun google yang terdaftar pada perangkat ini. daftar kontak Anda tidak diakses oleh aplikasi ini.<br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied">Anda secara permanen telah menolak izin satu atau lebih perijinan yang dibutuhkan aplikasi ini.  Anda akan perlu pergi ke aplikasi pengaturan layar untuk memberikan atau reset izin ini.</string>
     <string name="privacy_policy">Kebijakan Privasi</string>
     <string name="debuglog_attach_to_email">Melampirkan catatan debug ke email</string>
     <string name="debuglog_attach_to_email_summary">Melampirkan catatan debug ke email dengan beberapa informasi diagnostik</string>
@@ -336,4 +336,5 @@
     <string name="txt_timestamp_epoch">Timestamp (zaman)</string>
     <string name="txt_starttimestamp_epoch">Mulai timestamp (zaman)</string>
     <string name="txt_battery">Baterai</string>
+    <string name="customurl_http_body">HTTP Body</string>
 </resources>

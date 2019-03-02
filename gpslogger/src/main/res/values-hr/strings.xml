@@ -299,7 +299,6 @@
     <string name="profile_add_new">Dodaj profil</string>
     <string name="gpslogger_permissions_rationale_title">Potrebne dozvole</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ova aplikacija zahtijeva razne dozvole kako bi pravilno funkcionirala. <br /> <b>Lokacija uređaja</b> - Ova dozvola omogućuje čitanje podataka o lokaciji iz bazne stanice i iz GPS hardvera uređaja.<br /><b>Slike, mediji, datoteke</b> - Ova dozvola omogućuje pisanje zapisivane datoteke i test datoteke u pohranu, i čitanje iz popisa datoteka za prijenos ili dijeljenje. Ova aplikacija neće pristupiti vašoj slici ili mediji.<br /><b>Pristup kontaktima</b> - Ako koristite Google disk funkcije, ova dozvola omogućuje primanje Google računa prijavljen na ovom uređaju. Ova aplikacija neće pritupiti vašem popisu kontakata.<br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied">Trajno ste odbili jednu ili više dozvolu koju je ova aplikacija zahtijevala.  Morate otići na zaslonu postavki aplikacija za odobrenje ili vraćanje ovih dozvola.</string>
     <string name="privacy_policy">Pravilnik o zaštiti privatnosti</string>
     <string name="debuglog_attach_to_email">Priloži zapisnik otklanjanja pogrešaka u e-pošti</string>
     <string name="debuglog_attach_to_email_summary">Priloži zapisnik otklanjanja pogrešaka u e-pošti uz neke dijagnostičke informacije</string>

@@ -309,7 +309,6 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="profile_add_new">Tambahan profil</string>
     <string name="gpslogger_permissions_rationale_title">Kebenaran diperlukan</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Permohonan ini memerlukan pelbagai kebenaran untuk berfungsi dengan baik.  <br /> <b>Lokasi peranti Kebenaran ini membolehkan membaca data lokasi dari menara sel dan perkakasan GPS peranti.<br /><b>Foto, media, fail</b> - Kebenaran ini membolehkan menulis fail log dan fail ujian ke penyimpanan, dan membaca dari senarai fail untuk dimuat naik atau dikongsi. Aplikasi ini tidak akan mengakses foto atau media anda.<br /><b>Akses kenalan anda</b> - Jika menggunakan fungsi Google Drive, kebenaran ini membolehkan penyenaraian akun Google yang didaftarkan pada peranti ini. Senarai kenalan anda tidak diakses oleh apl ini.<br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied">Anda telah menolak satu atau lebih kebenaran yang memerlukan aplikasi ini secara kekal. Anda mesti pergi ke skrin tetapan aplikasi untuk memberi atau menetapkan semula kebenaran ini.</string>
     <string name="privacy_policy">Dasar Privasi</string>
     <string name="debuglog_attach_to_email">Lampirkan log debug ke e-mel</string>
     <string name="debuglog_attach_to_email_summary">Melampirkan log debug ke e-mel bersama dengan beberapa maklumat diagnostik</string>

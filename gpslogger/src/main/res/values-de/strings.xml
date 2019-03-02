@@ -317,7 +317,6 @@
     <string name="profile_add_new">Neues Profil</string>
     <string name="gpslogger_permissions_rationale_title">Erforderliche Berechtigungen</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Diese Anwendung erfordert verschiedene Berechtigungen, um richtig funktionieren zu können.<br /> <b>Standort</b> - Diese Berechtigung ermöglicht der App das Lesen der aktuellen Standortdaten.<br /> <b>Fotos/Medien/Dateien</b> - Diese Berechtigung ermöglicht es, Protokolldateien und Test-Dateien zu speichern, wie auch das Lesen einer Liste von Dateien, um sie hochladen oder teilen  zu können. Diese App greift nicht auf Ihre Fotos oder Medien zu.<br /> <b>Kontakte</b> - Wenn die Google Drive-Funktionalität verwendet wird, ermöglicht diese Berechtigung das Auflisten der Google-Konten dieses Gerätes. Es wird nicht auf Ihre Kontakte zugegriffen.<br /> <br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied">Sie haben eine oder mehrere Berechtigungen dauerhaft abgelehnt, die für diese App erforderlich sind. In den Einstellungen der App können Sie diese Berechtigungen erteilen oder sie zurücksetzen.</string>
     <string name="privacy_policy">Datenschutzbestimmungen</string>
     <string name="debuglog_attach_to_email">Fehlerprotokolldatei an E-Mail anhängen</string>
     <string name="debuglog_attach_to_email_summary">Die Fehlerprotokolldatei wird zusammen mit anderen Diagnoseinformationen an die E-Mail angehängt</string>

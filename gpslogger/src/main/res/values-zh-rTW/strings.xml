@@ -320,7 +320,6 @@
 <b>設備位置</b>用於獲取您的 GPS 或基站位置。<br />
 <b>檔案媒介</b>用於讀寫 SD 卡上的 GPSLogger 資料夾，以供存取、上載、分享記錄檔案。本應用不會讀取您的照片及其他媒介。<br />
 <b>聯繫人</b>用於列出設備上具有的 Google 賬戶。本應用不會讀取您的聯繫人列表。<br /><br/>]]></string>
-    <string name="gpslogger_permissions_permanently_denied">您永久拒絕了本應用使用一些其必需的權限。請進入「應用設定」授予或重設這些權限。</string>
     <string name="privacy_policy">隱私權政策</string>
     <string name="debuglog_attach_to_email">將偵錯日誌檔案附加到電子郵件</string>
     <string name="debuglog_attach_to_email_summary">將偵錯日誌檔案以及一些診斷資訊附加到電子郵件</string>

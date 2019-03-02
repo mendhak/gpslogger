@@ -319,7 +319,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
     <string name="profile_add_new">Profil hozzáadása</string>
     <string name="gpslogger_permissions_rationale_title">Szükséges jogosultságok</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ennek a programnak különböző engedélyekre van szüksége a megfelelő működéshez. <br /> <b>Készülék pozíciója</b> - Ez engedélyezi a mobiltornyokból és a GPS-ből származó pozíció olvasását<br /><b>Képek, média, fájlok</b> - Ez engedélyezi a naplófájlok és tesztfájlok írását, és a fájllista olvasását feltöltéshez vagy megosztáshoz. A program nem fog hozzáérni a fényképeihez vagy médiafájljaihoz.<br /><b>Hozzáférés kapcsolatokhoz</b> - Ha Google Drive-ot használ, ez az engedély teszi lehetővé az eszközön regisztrált Google fiókok listázását. A kapcsolataihoz nem ér hozzá a program.<br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied">Letiltott egy vagy több az apphoz szükséges engedélyt letiltott. Engedélyezze ezeket az alkalmazás beállításokban, vagy állítsa vissza ezeket az alapértékre.</string>
     <string name="privacy_policy">Adatvédelmi irányelvek</string>
     <string name="debuglog_attach_to_email">Hibakeresési napló csatolása az e-mailhez</string>
     <string name="debuglog_attach_to_email_summary">Hibakeresési naplót mellékel az e-mailhez néhány diagnosztikai információval</string>
