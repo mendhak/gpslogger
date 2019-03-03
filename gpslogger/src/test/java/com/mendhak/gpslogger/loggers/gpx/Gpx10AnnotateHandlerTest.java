@@ -61,7 +61,7 @@ public class Gpx10AnnotateHandlerTest {
         String expected =   "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><gpx version=\"1.0\" creator=\"GPSLogger "+ BuildConfig.VERSION_CODE  +" - http://gpslogger.mendhak.com/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\"><time>2016-12-29T23:31:58.298Z</time>";
 
         assertThat("InitialXml matches", actual, is(expected));
-        assertThat("Initial XML Length is correct", actual.length(), is(343));
+        assertThat("Initial XML Length is correct", actual.length(), is(344));
         assertThat("Initial XML length constant is set for others to use", actual.length(), is(annotateHandler.annotateOffset));
     }
 
