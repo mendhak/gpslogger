@@ -103,11 +103,13 @@
 
 <section><div class='lead'><h2><a name="mytimeintervalhaspassedbutnopointwaslogged" href="#mytimeintervalhaspassedbutnopointwaslogged">My time interval has passed, but no point was logged</a></h2><h2><a name="sometimestheappwillnotlogforlongperiodsoftime" href="#sometimestheappwillnotlogforlongperiodsoftime">Sometimes, the app will not log for long periods of time</a></h2><p>Sometimes your specified time interval will have passed, but no point was logged.  There are a few reasons this could happens. </p>
 <ul>
+<li><p>On Android 6+ (Marshmallow), a new feature called <em><a href="http://lifehacker.com/how-android-doze-works-and-how-to-tweak-it-to-save-you-1785921957">doze mode</a></em> was introduced, which severely restricts activity on the device after certain periods of inactivity. You can choose to <a href="https://android.stackexchange.com/a/129075/14996">whitelist GPSLogger</a> which does not bypass doze mode but occasionally provides logging windows in which to work. It will not make a great difference though, doze mode is quite aggressive.</p>
+</li>
+<li><p>Many vendors are also known to introduce their own <em>additional</em> poorly written but aggressive battery optimization mechanisms.  App developers don&#39;t have a way of detecting or working around these, and unfortunately the apps receive all the blame.  You can see some partial workarounds on the <a href="https://dontkillmyapp.com/?app=GPSLogger">Don&#39;t Kill My App site</a></p>
+</li>
 <li><p>The GPS system will have attempted to find its location and given up after a while. This in turn means that Android OS will not have given a location to GPSLogger</p>
 </li>
 <li><p>The accuracy was below your <em>Accuracy filter</em> settings, or the distance was below your <em>Distance filter</em> settings, so GPSLogger didn&#39;t log it. You can try setting a <em>retry interval</em> in which GPSLogger can wait for a more accurate point to show up and then use it.  Or you can allow for slightly more inaccurate fixes - your mileage may vary as every phone is different in terms of how accurate a fix it can get on a regular basis. </p>
-</li>
-<li><p>Additionally, on Android 6+ (Marshmallow), a new feature called <em><a href="http://lifehacker.com/how-android-doze-works-and-how-to-tweak-it-to-save-you-1785921957">doze mode</a></em> was introduced, which severely restricts activity on the device after certain periods of inactivity. You can choose to <a href="https://android.stackexchange.com/a/129075/14996">whitelist GPSLogger</a> which does not bypass doze mode but occasionally provides logging windows in which to work. It will not make a great difference though, doze mode is quite aggressive.</p>
 </li>
 </ul>
 
