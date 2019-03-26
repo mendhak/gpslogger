@@ -323,17 +323,21 @@ public class GpsMainActivity extends AppCompatActivity
                 listeners.add(LocationManager.GPS_PROVIDER);
                 listeners.add(LocationManager.NETWORK_PROVIDER);
                 Set<String> defaultListeners = new HashSet<>(listeners);
-                Set<String> legacyListeners = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getStringSet("listeners", defaultListeners);
+                Set<String> legacyListeners = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getStringSet("listeners", null);
 
-                if(legacyListeners.contains(BundleConstants.PASSIVE)){
-                    preferenceHelper.setShouldLogPassiveLocations(true);
+                if(legacyListeners != null){
+                    if(legacyListeners.contains(BundleConstants.PASSIVE)){
+                        preferenceHelper.setShouldLogPassiveLocations(true);
+                    }
+                    if(legacyListeners.contains(LocationManager.GPS_PROVIDER)){
+                        preferenceHelper.setShouldLogSatelliteLocations(true);
+                    }
+                    if(legacyListeners.contains(LocationManager.NETWORK_PROVIDER)){
+                        preferenceHelper.setShouldLogNetworkLocations(true);
+                    }
                 }
-                if(legacyListeners.contains(LocationManager.GPS_PROVIDER)){
-                    preferenceHelper.setShouldLogSatelliteLocations(true);
-                }
-                if(legacyListeners.contains(LocationManager.NETWORK_PROVIDER)){
-                    preferenceHelper.setShouldLogNetworkLocations(true);
-                }
+
+
 
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("listeners").apply();
             }
