@@ -3,15 +3,22 @@
                   android:title="@string/pref_performance_title">
 
 
-    <Preference
-        android:key="listeners"
-        android:summary="@string/listeners_summary"
-        android:title="@string/listeners_title" />
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+        android:key="log_satellite_locations"
+        android:title="@string/listeners_gps_title"
+        android:summary="@string/listeners_gps_summary" />
+
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+        android:key="log_network_locations"
+        android:title="@string/listeners_cell_title"
+        android:summary="@string/listeners_cell_summary" />
 
     <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:key="log_passive_locations"
-        android:title="Log passive locations"
-        android:summary="Logs locations obtained from other apps, but note that most filters are ignored. This setting is also useful for external GPS receivers." />
+        android:title="@string/listeners_passive_title"
+        android:summary="@string/listeners_passive_summary" />
+
+
 
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
         android:key="time_before_logging"

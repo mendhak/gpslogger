@@ -373,8 +373,15 @@
     <string name="autoopengts_accountname">Account name</string>
 
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">Log GPS/GNSS locations</string>
+    <string name="listeners_gps_summary">Logs locations provided by the satellite based location receiver on your device</string>
     <string name="listeners_cell">Network</string>
+    <string name="listeners_cell_title">Log network locations</string>
+    <string name="listeners_cell_summary">Logs locations provided by the network based location receiver on your device</string>
     <string name="listeners_passive">Passive</string>
+    <string name="listeners_passive_title">Log passive locations</string>
+    <string name="listeners_passive_summary">Logs locations obtained from other apps, but note that most filters are ignored. This setting is also useful for external GPS receivers.</string>
+
     <string name="listeners_summary">Which location providers to use when they are available; GPS for satellites, Network for cell tower/wifi, Passive is a special provider that listens for locations requested from other apps.</string>
     <string name="listeners_title">Location providers</string>
     <string name="autosend_frequency_hint">Number of minutes</string>
