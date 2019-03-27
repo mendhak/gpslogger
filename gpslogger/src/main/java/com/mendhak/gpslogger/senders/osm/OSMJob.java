@@ -112,18 +112,22 @@ public class OSMJob extends Job {
 
     @Override
     protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
-        LOG.debug("OSM Job cancelled ");
+        LOG.error("Could not send to OpenStreetMap", throwable);
+        EventBus.getDefault().post(new UploadEvents.OpenStreetMap().failed("Could not send to OpenStreetMap", throwable));
     }
 
     @Override
     protected RetryConstraint shouldReRunOnThrowable(@NonNull Throwable throwable, int runCount, int maxRunCount) {
-        LOG.error("Could not send to OpenStreetMap", throwable);
-        EventBus.getDefault().post(new UploadEvents.OpenStreetMap().failed("Could not send to OpenStreetMap", throwable));
-        return RetryConstraint.CANCEL;
+        return RetryConstraint.createExponentialBackoff(runCount, 3000);
     }
 
     public static String getJobTag(File gpxFile) {
         return "OSM" + gpxFile.getName();
 
+    }
+
+    @Override
+    protected int getRetryLimit() {
+        return 3;
     }
 }
