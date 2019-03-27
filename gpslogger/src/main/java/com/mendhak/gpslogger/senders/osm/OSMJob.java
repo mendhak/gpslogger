@@ -101,7 +101,7 @@ public class OSMJob extends Job {
 
         if(response.isSuccessful()){
             String message = body.string();
-            LOG.debug("OSM Response body: " + message);
+            LOG.info("OpenStreetMap - file uploaded");
             EventBus.getDefault().post(new UploadEvents.OpenStreetMap().succeeded());
         }
         else {

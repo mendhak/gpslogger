@@ -74,6 +74,7 @@ public class DropboxJob extends Job {
             DbxClientV2 mDbxClient = new DbxClientV2(requestConfig, PreferenceHelper.getInstance().getDropBoxAccessKeyName());
             mDbxClient.files().uploadBuilder("/" + fileName).withMode(WriteMode.OVERWRITE).uploadAndFinish(inputStream);
             EventBus.getDefault().post(new UploadEvents.Dropbox().succeeded());
+            LOG.info("Dropbox - file uploaded");
         } catch (Exception e) {
             LOG.error("Could not upload to Dropbox" , e);
             EventBus.getDefault().post(new UploadEvents.Dropbox().failed(e.getMessage(), e));
