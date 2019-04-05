@@ -157,18 +157,6 @@ public class Systems {
                 && hasUserGrantedPermission(Manifest.permission.READ_EXTERNAL_STORAGE, context);
     }
 
-    /**
-     * Whether the user has allowed the permissions, including non-absolute ones, to run the app
-     * Currently this is location and file storage and contacts for Google Drive
-     */
-    public static boolean hasUserGrantedAllAppPermissions(Context context){
-        return hasUserGrantedPermission(Manifest.permission.ACCESS_COARSE_LOCATION, context)
-                && hasUserGrantedPermission(Manifest.permission.ACCESS_FINE_LOCATION, context)
-                && hasUserGrantedPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, context)
-                && hasUserGrantedPermission(Manifest.permission.READ_EXTERNAL_STORAGE, context)
-                && hasUserGrantedPermission(Manifest.permission.GET_ACCOUNTS, context);
-    }
-
     static boolean hasUserGrantedPermission(String permissionName, Context context){
         boolean granted = ContextCompat.checkSelfPermission(context, permissionName) == PackageManager.PERMISSION_GRANTED;
         LOG.debug("Permission " + permissionName + " : " + granted);
