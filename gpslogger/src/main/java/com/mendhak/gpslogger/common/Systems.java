@@ -146,7 +146,22 @@ public class Systems {
         }
     }
 
+    /**
+     * Whether the user has allowed the permissions absolutely required to run the app.
+     * Currently this is location and file storage.
+     */
     public static boolean hasUserGrantedAllNecessaryPermissions(Context context){
+        return hasUserGrantedPermission(Manifest.permission.ACCESS_COARSE_LOCATION, context)
+                && hasUserGrantedPermission(Manifest.permission.ACCESS_FINE_LOCATION, context)
+                && hasUserGrantedPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, context)
+                && hasUserGrantedPermission(Manifest.permission.READ_EXTERNAL_STORAGE, context);
+    }
+
+    /**
+     * Whether the user has allowed the permissions, including non-absolute ones, to run the app
+     * Currently this is location and file storage and contacts for Google Drive
+     */
+    public static boolean hasUserGrantedAllAppPermissions(Context context){
         return hasUserGrantedPermission(Manifest.permission.ACCESS_COARSE_LOCATION, context)
                 && hasUserGrantedPermission(Manifest.permission.ACCESS_FINE_LOCATION, context)
                 && hasUserGrantedPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, context)

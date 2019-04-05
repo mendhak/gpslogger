@@ -130,7 +130,7 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
     public boolean onPreferenceClick(Preference preference) {
 
         if(preference.getKey().equals("permissions_required")){
-            if(!Systems.hasUserGrantedAllNecessaryPermissions(getActivity())){
+            if(!Systems.hasUserGrantedAllAppPermissions(getActivity())){
                 Systems.askUserForPermissions(getActivity(), this);
             }
 
