@@ -210,6 +210,30 @@ public class Strings {
         return "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
     }
 
+    /**
+     * Given a Date object, returns an ISO 8601 calendar date string.
+     * Example: 2010-03-23
+     *
+     * @param dateToFormat The Date object to format.
+     * @return The ISO 8601 formatted string.
+     */
+    public static String getIsoCalendarDate(Date dateToFormat) {
+        /**
+         * This function is used in CustomUrlLogger.
+         */
+
+        // GPX specs say that time given should be in UTC, no local time.
+        SimpleDateFormat sdf = new SimpleDateFormat(getIsoCalendarDateFormat(),
+                Locale.US);
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        return sdf.format(dateToFormat);
+    }
+
+    public static String getIsoCalendarDateFormat() {
+        return "yyyy-MM-dd";
+    }
+
     public static String getReadableDateTime(Date dateToFormat) {
         /**
          * Similar to getIsoDateTime(), this function is used in

@@ -64,6 +64,24 @@ public class StringsTest {
 
 
     @Test
+    public void getIsoCalendarDate_DateObject_ConvertedToIso() {
+
+        String actual = Strings.getIsoCalendarDate(new Date(1417726140000l));
+        String expected = "2014-12-04";
+        assertThat("Conversion of date to ISO string", actual, is(expected));
+    }
+
+    @Test
+    public void getIsoCalendarDate_HigherResolutionMilliseconds_ConvertedToIso() {
+
+        String actual = Strings.getIsoCalendarDate(new Date(1417726140001l));
+        String expected = "2014-12-04";
+        assertThat("Conversion of date to ISO string", actual, is(expected));
+    }
+
+
+
+    @Test
     public void CleanDescription_WhenAnnotationHasHtml_HtmlIsRemoved() {
         String content = "This is some annotation that will end up in an " +
                 "XML file.  It will either <b>break</b> or Bert & Ernie will alert up" +
