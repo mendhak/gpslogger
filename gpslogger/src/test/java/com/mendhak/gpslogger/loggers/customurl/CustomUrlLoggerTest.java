@@ -83,6 +83,19 @@ public class CustomUrlLoggerTest {
 
     }
 
+
+    @Test
+    public void getFormattedUrl_WhenDateParameter_UseISODateFormat() throws Exception{
+        Location loc = MockLocations.builder("MOCK", 12.193, 19.456).withTime(1457205869949l).build();
+        CustomUrlLogger logger = new CustomUrlLogger("",0,"", "GET", "","");
+        String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&date=2016-03-05";
+        String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&date=%DATE";
+
+        assertThat("DATE parameter is substituted with ISO Date Format", logger.getFormattedTextblock(urlTemplate,loc,"","",0,"",0,"","",0), is(expected));
+
+
+    }
+
     @Test
     public void getFormattedUrl_WhenStartTime_AddSessionStartTime() throws Exception {
         Location loc = MockLocations.builder("MOCK", 12.193, 19.456).withTime(1457205869949l).build();
