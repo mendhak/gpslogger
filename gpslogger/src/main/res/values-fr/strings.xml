@@ -290,7 +290,6 @@ une plus grande précision à basses fréquences.    </string>
     <string name="restart_required">Il faudra redémarrer GPSLogger pour que le changement soit effectif</string>
     <string name="pref_performance_activityrecognition">Reconnaissance d\'activité</string>
     <string name="activityrecognition_dont_log_if_still">Ne pas enregistrer en l\'absence de mouvement</string>
-    <string name="activityrecognition_dont_log_if_still_summary">S\'il n\'y a pas de mouvement depuis le dernier point, l\'enregistrement est mis en pause jusqu\'à reprise du mouvement. Les points passifs peuvent toujours être enregistrés.</string>
     <string name="txt_activity">Activité :</string>
     <string name="activity_in_vehicle">Dans un véhicule</string>
     <string name="activity_confidence">Confiance</string>
@@ -317,7 +316,8 @@ une plus grande précision à basses fréquences.    </string>
     <string name="profile_default">Profil par défault</string>
     <string name="profile_add_new">Ajouter un profil</string>
     <string name="gpslogger_permissions_rationale_title">Autorisations requises</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Cette application nécessite diverses autorisations pour pouvoir fonctionner correctement. <br /> <b>Emplacement du périphérique</b> - Cette autorisation permet la lecture des données de localisation qui proviennent des relais téléphoniques et du GPS intégré à l’appareil.<br /><b>Photos, médias, fichiers</b> - Cette autorisation permet l’écriture pour le stockage des fichiers de journalisation et test, ainsi que la lecture d’une liste de fichiers pour leur envoi ou leur partage. Cette application n’accédera pas à vos photos, ni à vos médias.<br /><b>Accéder à vos contacts</b> - Cette autorisation permet si vous utilisez la fonctionnalité Google Drive, l’énumération des comptes Google enregistrés sur cet appareil. L’application ne consulte pas votre liste de contacts.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Cette application nécessite diverses autorisations pour pouvoir fonctionner correctement. <br /> <b>Emplacement du périphérique</b> - Cette autorisation permet la lecture des données de localisation qui proviennent des relais téléphoniques et du GPS intégré à l’appareil.<br /><b>Photos, médias, fichiers</b> - Cette autorisation permet l’écriture pour le stockage des fichiers de journalisation et test, ainsi que la lecture d’une liste de fichiers pour leur envoi ou leur partage. Cette application n’accédera pas à vos photos, ni à vos médias.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Une ou plusieurs autorisations requises par cette application ont été refusées. Il sera nécessaire d’aller à l’écran des paramètres de l'application pour les lui accorder.<br /><br />Si des autorisations ont été définitivement refusées, il est possible de les réinitialiser dans les paramètres du système. ]]></string>
     <string name="privacy_policy">Politique de confidentialité</string>
     <string name="debuglog_attach_to_email">Joindre le journal de débogage à un courriel</string>
     <string name="debuglog_attach_to_email_summary">Joindre le journal de débogage à un courriel avec quelques informations de diagnostic</string>
@@ -340,5 +340,6 @@ une plus grande précision à basses fréquences.    </string>
     <string name="customurl_http_body">Corps HTTP</string>
     <string name="customurl_http_headers">Entêtes HTTP</string>
     <string name="customurl_http_method">Méthode HTTP</string>
+    <string name="customurl_http_basicauthentication">Authentification de base</string>
     <string name="hide_notification_from_status_bar_disallowed">Masquer les notifications n’est pas autorisé dans Android Oreo ou supérieur</string>
 </resources>

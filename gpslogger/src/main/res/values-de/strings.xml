@@ -289,7 +289,6 @@
     <string name="restart_required">GPSLogger muss neu gestartet werden, damit diese Einstellung wirksam wird</string>
     <string name="pref_performance_activityrecognition">Aktivitätserkennung</string>
     <string name="activityrecognition_dont_log_if_still">Aufzeichnung pausieren, wenn keine Standortänderung erfolgt</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Wenn seit dem letzten Punkt keine Bewegung des Beschleunigungssensors mehr festgestellt, wird die aktive Aufzeichnung angehalten, bis Sie sich wieder bewegen. Passive Punkte können weiterhin protokolliert werden.</string>
     <string name="txt_activity">Aktivität:</string>
     <string name="activity_in_vehicle">Im Fahrzeug</string>
     <string name="activity_confidence">Zuverlässigkeit</string>
@@ -316,7 +315,8 @@
     <string name="profile_default">Standardprofil</string>
     <string name="profile_add_new">Neues Profil</string>
     <string name="gpslogger_permissions_rationale_title">Erforderliche Berechtigungen</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Diese Anwendung erfordert verschiedene Berechtigungen, um richtig funktionieren zu können.<br /> <b>Standort</b> - Diese Berechtigung ermöglicht der App das Lesen der aktuellen Standortdaten.<br /> <b>Fotos/Medien/Dateien</b> - Diese Berechtigung ermöglicht es, Protokolldateien und Test-Dateien zu speichern, wie auch das Lesen einer Liste von Dateien, um sie hochladen oder teilen  zu können. Diese App greift nicht auf Ihre Fotos oder Medien zu.<br /> <b>Kontakte</b> - Wenn die Google Drive-Funktionalität verwendet wird, ermöglicht diese Berechtigung das Auflisten der Google-Konten dieses Gerätes. Es wird nicht auf Ihre Kontakte zugegriffen.<br /> <br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Diese Anwendung erfordert verschiedene Berechtigungen, um richtig funktionieren zu können.<br /> <b>Standort</b> - Diese Berechtigung ermöglicht der App das Lesen der aktuellen Standortdaten.<br /> <b>Fotos/Medien/Dateien</b> - Diese Berechtigung ermöglicht es, Protokolldateien und Test-Dateien zu speichern, wie auch das Lesen einer Liste von Dateien, um sie hochladen oder teilen zu können. Diese App greift nicht auf Ihre Fotos oder Medien zu.<br /> <br/>  ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Sie haben eine oder mehrere Berechtigungen abgelehnt, welche die App benötigt. Sie müssen in die Appeinstellungen wechseln und der App die benötigten Berechtigungen erteilen. <br /><br /> Falls Sie die Berechtigungen permanent abgelehnt haben, so können Sie diese in den Systemeinstellungen zurücksetzen.]]></string>
     <string name="privacy_policy">Datenschutzbestimmungen</string>
     <string name="debuglog_attach_to_email">Fehlerprotokolldatei an E-Mail anhängen</string>
     <string name="debuglog_attach_to_email_summary">Die Fehlerprotokolldatei wird zusammen mit anderen Diagnoseinformationen an die E-Mail angehängt</string>
@@ -339,5 +339,6 @@
     <string name="customurl_http_body">HTTP-Text</string>
     <string name="customurl_http_headers">HTTP-Kopfzeilen</string>
     <string name="customurl_http_method">HTTP-Methode</string>
+    <string name="customurl_http_basicauthentication">Basic Authentication</string>
     <string name="hide_notification_from_status_bar_disallowed">Das Verbergen von Benachrichtigungen ist ab Android Oreo nicht mehr erlaubt.</string>
 </resources>

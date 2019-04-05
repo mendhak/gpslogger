@@ -292,7 +292,6 @@
     <string name="restart_required">Budete muset restartovat GPSLogger aby se toto nastavení projevilo</string>
     <string name="pref_performance_activityrecognition">Rozpoznání aktivity</string>
     <string name="activityrecognition_dont_log_if_still">Nezaznamenávat pokud se nehýbu</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Pokud akcelerometr nedetekuje žádný pohyb od posledního bodu, aktivní záznam bude pozastaven, dokud se znovu nepohnete. Pasivní body by jinak byly dále nahrávány.</string>
     <string name="txt_activity">Aktivita:</string>
     <string name="activity_in_vehicle">Ve vozidle</string>
     <string name="activity_confidence">Důvěra</string>
@@ -319,7 +318,7 @@
     <string name="profile_default">Výchozí profil</string>
     <string name="profile_add_new">Přidat profil</string>
     <string name="gpslogger_permissions_rationale_title">Požadovaná oprávnění</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Tato aplikace vyžaduje různá oprávnění, aby mohla správně fungovat.  <br /> <b>Poloha zařízení</b> - toto oprávnění umožňuje číst údaje o poloze z GSM vysílačů a GPS modulu zařízení. <br /><b>Fotky, média, soubory</b> - toto oprávnění umožňuje zápis souborů záznamů a testovacích souborů na úložiště, a čtení ze seznamu souborů pro nahrávání nebo sdílení. Tato aplikace nebude přistupovat k vašim fotkám nebo médiím.<br /><b>Přístup ke kontaktům</b> -  používá-li se funkce Google Disk, toto oprávnění umožňuje výpis účtů Google, které jsou registrovány v tomto zařízení.  Aplikace nepřistupuje k vašim kontaktům.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Tato aplikace vyžaduje různá oprávnění, aby mohla správně fungovat. <br /> <b>Poloha zařízení</b> - toto oprávnění umožňuje číst údaje o poloze z GSM vysílačů a GPS modulu zařízení. <br /><b>Fotky, média, soubory</b> - toto oprávnění umožňuje zápis souborů záznamů a testovacích souborů na úložiště, a čtení ze seznamu souborů pro nahrávání nebo sdílení. Tato aplikace nebude přistupovat k vašim fotkám nebo médiím.<br /><br />  ]]></string>
     <string name="privacy_policy">Zásady ochrany osobních údajů</string>
     <string name="debuglog_attach_to_email">Přiložit záznamy o ladění do emailu</string>
     <string name="debuglog_attach_to_email_summary">Přiloží záznam o ladění do emailu spolu s některými diagnostickými informacemi</string>

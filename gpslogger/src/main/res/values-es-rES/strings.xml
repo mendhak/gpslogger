@@ -291,7 +291,6 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="restart_required">Es necesario reiniciar GPSLogger para que la configuración surta efecto</string>
     <string name="pref_performance_activityrecognition">Reconocimiento de actividad</string>
     <string name="activityrecognition_dont_log_if_still">No registrar si no hay movimiento</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Si no hay ningún movimiento de acelerómetro desde el último punto se pausará el registro, reanudándose cuando haya actividad. Los puntos pasivos todavía se pueden registrar.</string>
     <string name="txt_activity">Actividad:</string>
     <string name="activity_in_vehicle">En vehículo</string>
     <string name="activity_confidence">Confianza</string>
@@ -318,7 +317,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="profile_default">Perfil por defecto</string>
     <string name="profile_add_new">Añadir perfil</string>
     <string name="gpslogger_permissions_rationale_title">Se necesitan permisos</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Esta aplicación requiere varios permisos en orden para funcionar correctamente. <br /><b>Ubicación del dispositivo </b>te permiso permite leer los datos de localización de las torres de celdas y el hardware GPS del dispositivo. <br /><b>Fotos, medios, archivos</b> - Este permiso permite escribir archivos de registro y archivos de prueba para almacenamiento, y lectura de una lista de archivos para subir o compartir. Esta aplicación no tendrá acceso a tus fotos o medios.<br /><b> Acceder a tus contactos</b> - si utilizas la funcionalidad de Google Drive, este permiso permite el listado de las cuentas de Google registradas en este dispositivo. Tu aplicación no accede a tu lista de contactos.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Esta aplicación requiere varios permisos en orden para funcionar correctamente. <br /><b>Ubicación del dispositivo </b>te permiso permite leer los datos de localización de las torres de celdas y el hardware GPS del dispositivo. <br /><b>Fotos, medios, archivos</b> - Este permiso permite escribir archivos de registro y archivos de prueba para almacenamiento, y lectura de una lista de archivos para subir o compartir. Esta aplicación no tendrá acceso a tus fotos o medios.<br /><br/>  ]]></string>
     <string name="privacy_policy">Política de Privacidad</string>
     <string name="debuglog_attach_to_email">Adjuntar el registro de depuración para correo electrónico</string>
     <string name="debuglog_attach_to_email_summary">Registro de depuración se conecta a un correo electrónico junto con algunos datos diagnóstico</string>

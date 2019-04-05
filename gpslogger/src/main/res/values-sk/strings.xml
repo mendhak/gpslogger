@@ -292,8 +292,14 @@ polia.
     <string name="log_nmea_summary">Počas pokusu o získanie korekcie sa vytvorí súbor NMEA. Tento súbor sa veľmi rýchlo zväčšuje. Nastavenie funguje iba pri používaním GPS.</string>
     <string name="autoopengts_accountname">Názov účtu</string>
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">Zaznamenať lokality GPS/GNSS</string>
+    <string name="listeners_gps_summary">Zaznamená lokality poskytované prijímačom satelitných údajov vo vašom zariadení</string>
     <string name="listeners_cell">Sieť</string>
+    <string name="listeners_cell_title">Zaznamenať sieťové lokality</string>
+    <string name="listeners_cell_summary">Zaznamená lokality na základe prijímača informácií o sieti vo vašom zariadení</string>
     <string name="listeners_passive">Pasívni</string>
+    <string name="listeners_passive_title">Zaznamenať pasívne lokality</string>
+    <string name="listeners_passive_summary">Zaznamená lokality prebraté z iných aplikácií, avšak je pritom ignorovaná väčšina filtrov. Toto nastavenie je užitočné aj pre externé GPS prijímače.</string>
     <string name="listeners_summary">Určuje, ktorí poskytovatelia lokalizačných údajov sa majú použiť, ak sú dostupní; GPS pre satelity, Sieť pre wifi/celulárne vysielače, Pasívni (špeciálni poskytovatelia ktorí prijímajú lokalizačné údaje požadované inými aplikáciami).</string>
     <string name="listeners_title">Poskytovatelia lokalizácie</string>
     <string name="autosend_frequency_hint">Počet minút</string>
@@ -311,7 +317,7 @@ polia.
     <string name="restart_required">Pre aktivovanie toto nastavenia je potrebné reštartovať GPSLogger</string>
     <string name="pref_performance_activityrecognition">Rozpoznávanie aktivity</string>
     <string name="activityrecognition_dont_log_if_still">Nezaznamenávať pri státí</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Ak merač zrýchlenia nezaznamená žiadny pohyb z posledného bodu, aktívne zaznamenávanie sa pozastaví až do vykonania ďalšieho pohybu. Pasívne body je možné zaznamenávať.</string>
+    <string name="activityrecognition_dont_log_if_still_summary">Ak sa nezaznamená žiadny pohyb od posledného bodu, aktívne zaznamenávanie sa pozastaví na dobu intervalu zaznamenávania. Aj v prípade, že sa začnete pohybovať pred uplynutím intervalu. Pasívne body sa môžu naďalej zaznamenávať.</string>
     <string name="txt_activity">Aktivita:</string>
     <string name="activity_in_vehicle">Vo vozidle</string>
     <string name="activity_confidence">Utajenie</string>
@@ -338,7 +344,8 @@ polia.
     <string name="profile_default">Predvolený profil</string>
     <string name="profile_add_new">Pridať profil</string>
     <string name="gpslogger_permissions_rationale_title">Vyžaduje sa oprávnenie</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Táto aplikácia vyžaduje na svoje správne fungovanie rôzne oprávnenia. <br /> <b>Umiestnenie zariadenia</b> - Toto oprávnenie umožňuje čítanie údajov o lokalite z vysielačov mobilného signálu a z hardvéru pre GPS.<br /><b>Fotografie, médiá, súbory</b> – Toto oprávnenie umožňuje zápis do súborov so záznamami a vykonávanie testu ukladania súborov, čítania zoznamu súborov pre odosielanie alebo zdieľanie. Táto aplikácia nepristupuje k vaším fotografiám alebo médiu.<br /><b>Prístup k vašim kontaktom</b> - Ak používate funkciu Google Drive, toto oprávnenie umožňuje vytváranie zoznamu účtov v Google, ktoré sú registrované s týmto zariadením. K zoznamu kontaktov aplikácia nepristupuje.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Táto aplikácia vyžaduje na svoje správne fungovanie rôzne oprávnenia. <br /> <b>Umiestnenie zariadenia</b> - Toto oprávnenie umožňuje čítanie údajov o lokalite z vysielačov mobilného signálu a z hardvéru pre GPS.<br /><b>Fotografie, médiá, súbory</b> – Toto oprávnenie umožňuje zápis do súborov so záznamami a vykonávanie testu ukladania súborov, čítania zoznamu súborov pre odosielanie alebo zdieľanie. Táto aplikácia nepristupuje k vaším fotografiám alebo médiu.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Odmietli ste udeliť jedno alebo niekoľko oprávnení, ktoré vyžaduje táto aplikácia. Na udelenie týchto oprávnení budete musieť prejsť na obrazovku s nastaveniami aplikácie. <br /><br />Ak ste odmietli udeliť oprávnenia natrvalo, môžete vykonať reset v nastaveniach systému. ]]></string>
     <string name="privacy_policy">Politika ochrany osobných údajov</string>
     <string name="debuglog_attach_to_email">Pripojiť k e-mailu aj záznam pre ladenie</string>
     <string name="debuglog_attach_to_email_summary">K e-mailu sa pripojí záznam pre ladenie, spolu s niektorými diagnostickými informáciami</string>
@@ -361,5 +368,6 @@ polia.
     <string name="customurl_http_body">HTTP - telo</string>
     <string name="customurl_http_headers">HTTP - hlavičky</string>
     <string name="customurl_http_method">HTTP - metóda</string>
+    <string name="customurl_http_basicauthentication">Základné overenie</string>
     <string name="hide_notification_from_status_bar_disallowed">Skrytie notifikácie je vypnuté v systéme Oreo a novších</string>
 </resources>

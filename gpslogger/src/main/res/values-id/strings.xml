@@ -289,7 +289,6 @@
     <string name="restart_required">Anda akan perlu me restart GPSLogger agar pengaturan ini diterapkan</string>
     <string name="pref_performance_activityrecognition">Mengenali kegiatan</string>
     <string name="activityrecognition_dont_log_if_still">Jangan masuk jika saya tidak bergerak</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Jika tidak ada gerakan accelerometer sejak titik terakhir, catatan aktif akan jeda sampai Anda bergerak lagi. Poin pasif mungkin masih dicatat.</string>
     <string name="txt_activity">Aktivitas:</string>
     <string name="activity_in_vehicle">Di kendaraan</string>
     <string name="activity_confidence">Percaya diri</string>
@@ -316,7 +315,7 @@
     <string name="profile_default">Profil default</string>
     <string name="profile_add_new">Menambahkan profil</string>
     <string name="gpslogger_permissions_rationale_title">Izin diperlukan</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Aplikasi ini butuh bermacam ijin agar dapat berfungsi. <br /> <b>lokasi perangkat</b> - perijinin ini mengijinkan membaca lokasi data dari menara selular dan hardware GPS pada perangkat.<br /><b> Foto, media, file.</b> - perijinan ini mengijinkan membaca catatan file dan mengecek file ke penyimpanan, dan membaca dari daftar file untuk diunggah atau dibagi. aplikasi ini tidak akan mengakses foto atau media Anda.<br /><b> mengakses kontak Anda</b> - jika prnggunaan google drive berfungsi, perijinan ini mengijinkan membuat daftar akun google yang terdaftar pada perangkat ini. daftar kontak Anda tidak diakses oleh aplikasi ini.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Aplikasi ini butuh bermacam ijin agar dapat berfungsi. <br /> <b>lokasi perangkat</b> - perijinin ini mengijinkan membaca lokasi data dari menara selular dan hardware GPS pada perangkat.<br /><b> Foto, media, file.</b> - perijinan ini mengijinkan membaca catatan file dan mengecek file ke penyimpanan, dan membaca dari daftar file untuk diunggah atau dibagi. aplikasi ini tidak akan mengakses foto atau media Anda.<br /><br/>  ]]></string>
     <string name="privacy_policy">Kebijakan Privasi</string>
     <string name="debuglog_attach_to_email">Melampirkan catatan debug ke email</string>
     <string name="debuglog_attach_to_email_summary">Melampirkan catatan debug ke email dengan beberapa informasi diagnostik</string>

@@ -297,7 +297,6 @@
     <string name="restart_required">Необходимо будет перезапустить GPSLogger, чтобы установка вступила в силу</string>
     <string name="pref_performance_activityrecognition">Распознание движения</string>
     <string name="activityrecognition_dont_log_if_still">Не записывать если я не двигаюсь</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Если после последнего пункта, акселерометр не зарегистрировал движений, запись точек будет приостановлена. Пассивные точки будут записаны.</string>
     <string name="txt_activity">Действия:</string>
     <string name="activity_in_vehicle">На автомобиле</string>
     <string name="activity_confidence">Доверие</string>
@@ -324,7 +323,7 @@
     <string name="profile_default">Профиль по умолчанию</string>
     <string name="profile_add_new">Добавить профиль</string>
     <string name="gpslogger_permissions_rationale_title">Необходимые разрешения</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Это приложение требует разрешения для работы. < br / > <b>Местоположение</b> - это разрешение позволяет считывать данные о местоположении по вышкам сети и данным GPS. < br / > <b>Фото, медиа, файлы</b> - это разрешение позволяет писать файлы лога и файлы тестов для хранения, чтения, загрузки или обмена. Этот приложение не имеет доступ к вашим фото или медиа. < br / > <b>Доступ к контактам</b> - для использования Диска Google, это разрешение доступа к  аккаунтам Google, зарегистрированным на этом устройстве.  Список контактов не доступен для этого приложения. <br /> <br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Это приложение требует разрешения для работы. <br /> <b>Местоположение</b> - это разрешение позволяет считывать данные о местоположении по вышкам сети и данным GPS. <br /> <b>Фото, медиа, файлы</b> - это разрешение позволяет писать файлы лога и файлы тестов для хранения, чтения, загрузки или обмена. Этот приложение не имеет доступ к вашим фото или медиа. <br /> <br/>  ]]></string>
     <string name="privacy_policy">Политика конфиденциальности</string>
     <string name="debuglog_attach_to_email">Послать лог отладки по электронной почте</string>
     <string name="debuglog_attach_to_email_summary">Послать лог отладки по электронной почте, а также некоторых диагностические сведения</string>

@@ -272,8 +272,14 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
     <string name="log_nmea_summary">Nyers NMEA fájl készítése, amíg fix pozíciót próbál találni. Ez a fájl nagyon gyorsan nő. Csak addig működik, míg a GPS használatban van.</string>
     <string name="autoopengts_accountname">Fiók neve</string>
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">GPS/GLNSS helymeghatározás naplózása</string>
+    <string name="listeners_gps_summary">Naplózza a műholdas helymeghatározó vevő adatait</string>
     <string name="listeners_cell">Hálózat</string>
+    <string name="listeners_cell_title">Hálózat alapú helymeghatározás naplózása</string>
+    <string name="listeners_cell_summary">Naplózza a hálózat alapú helymeghatározás adatait</string>
     <string name="listeners_passive">Passzív</string>
+    <string name="listeners_passive_title">Passzív helymeghatározás naplózása</string>
+    <string name="listeners_passive_summary">Naplózza a más alkalmazásokból származó helyeket, de vegye figyelembe, hogy a legtöbb szűrő figyelmen kívül hagyja. Ez a beállítás külső GPS-vevőkészülék esetén is hasznos.</string>
     <string name="listeners_summary">Használható helyszolgáltatók; műhold alapú GPS, mobil adótornyok vagy wifi alapú hálózati, vagy passzív; ez egy speciális szolgáltató, amely a más alkalmazásokban lekérdezett pozíciókat figyeli.</string>
     <string name="listeners_title">Helyszolgáltatók</string>
     <string name="autosend_frequency_hint">Percek száma</string>
@@ -318,7 +324,9 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
     <string name="profile_default">Alapértelmezett profil</string>
     <string name="profile_add_new">Profil hozzáadása</string>
     <string name="gpslogger_permissions_rationale_title">Szükséges jogosultságok</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ennek a programnak különböző engedélyekre van szüksége a megfelelő működéshez. <br /> <b>Készülék pozíciója</b> - Ez engedélyezi a mobiltornyokból és a GPS-ből származó pozíció olvasását<br /><b>Képek, média, fájlok</b> - Ez engedélyezi a naplófájlok és tesztfájlok írását, és a fájllista olvasását feltöltéshez vagy megosztáshoz. A program nem fog hozzáérni a fényképeihez vagy médiafájljaihoz.<br /><b>Hozzáférés kapcsolatokhoz</b> - Ha Google Drive-ot használ, ez az engedély teszi lehetővé az eszközön regisztrált Google fiókok listázását. A kapcsolataihoz nem ér hozzá a program.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ennek a programnak különböző engedélyekre van szüksége a megfelelő működéshez. <br /> <b>Készülék pozíciója</b> - Ez engedélyezi a mobiltornyokból és a GPS-ből származó pozíció olvasását<br /><b>Képek, média, fájlok</b> - Ez engedélyezi a naplófájlok és tesztfájlok írását, és a fájllista olvasását feltöltéshez vagy megosztáshoz. A program nem fog hozzáérni a fényképeihez vagy médiafájljaihoz.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Egy vagy több alkalmazás engedélyt elutasított, melyekre az alkalmazásnak szüksége van.
+Az engedélyek megadásához lépjen be az alkalmazás beállítások képernyőre. <br /> <br />Ha véglegesen megtagadta az engedélyeket, visszaállíthatja őket a rendszerbeállításokban. ]]></string>
     <string name="privacy_policy">Adatvédelmi irányelvek</string>
     <string name="debuglog_attach_to_email">Hibakeresési napló csatolása az e-mailhez</string>
     <string name="debuglog_attach_to_email_summary">Hibakeresési naplót mellékel az e-mailhez néhány diagnosztikai információval</string>
@@ -341,4 +349,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
     <string name="customurl_http_body">HTTP Törzs</string>
     <string name="customurl_http_headers">HTTP Fejlécek</string>
     <string name="customurl_http_method">HTTP Eljárás</string>
+    <string name="customurl_http_basicauthentication">Alapfokú hitelesítés</string>
+    <string name="hide_notification_from_status_bar_disallowed">Értesítés elrejtése az Android Oreo-ban nem engedélyezett</string>
 </resources>

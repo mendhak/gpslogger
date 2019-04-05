@@ -289,7 +289,6 @@
     <string name="restart_required">需要重新啟動 GPSLogger 後，此設定才會生效</string>
     <string name="pref_performance_activityrecognition">活動識別</string>
     <string name="activityrecognition_dont_log_if_still">如果我不在移動，不要記錄</string>
-    <string name="activityrecognition_dont_log_if_still_summary">如果從上個點開始加速度計未偵測到移動，那麼在您下次移動之前不會主動記錄，但可能還會被動地記錄位置。</string>
     <string name="txt_activity">活動︰</string>
     <string name="activity_in_vehicle">坐車</string>
     <string name="activity_confidence">確定性</string>
@@ -319,7 +318,7 @@
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[本應用需要不少權限以便正確工作。<br />
 <b>設備位置</b>用於獲取您的 GPS 或基站位置。<br />
 <b>檔案媒介</b>用於讀寫 SD 卡上的 GPSLogger 資料夾，以供存取、上載、分享記錄檔案。本應用不會讀取您的照片及其他媒介。<br />
-<b>聯繫人</b>用於列出設備上具有的 Google 賬戶。本應用不會讀取您的聯繫人列表。<br /><br/>]]></string>
+<br/>  ]]></string>
     <string name="privacy_policy">隱私權政策</string>
     <string name="debuglog_attach_to_email">將偵錯日誌檔案附加到電子郵件</string>
     <string name="debuglog_attach_to_email_summary">將偵錯日誌檔案以及一些診斷資訊附加到電子郵件</string>
