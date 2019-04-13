@@ -195,8 +195,6 @@ dependencies {
     //The single letter text icons
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 
-    //Directory chooser - https://github.com/spacecowboy/NoNonsense-FilePicker
-    implementation 'com.nononsenseapps:filepicker:3.0.0'
 
     //OKHTTP client
     implementation 'com.squareup.okhttp3:okhttp:3.7.0'

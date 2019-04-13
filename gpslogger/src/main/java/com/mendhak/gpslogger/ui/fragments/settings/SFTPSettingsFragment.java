@@ -20,18 +20,16 @@ import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.sftp.SFTPManager;
 import com.mendhak.gpslogger.ui.Dialogs;
-import com.nononsenseapps.filepicker.FilePickerActivity;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
 import java.io.File;
 
-public class SFTPSettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, PreferenceValidator {
+public class SFTPSettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, PreferenceValidator, Preference.OnPreferenceChangeListener {
 
     private static final Logger LOG = Logs.of(SFTPSettingsFragment.class);
     SFTPManager manager;
     PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
-    private static int NONONSENSE_DIRPICKER_ACTIVITYID = 929292;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +41,7 @@ public class SFTPSettingsFragment extends PreferenceFragment implements Preferen
 
         findPreference("sftp_validateserver").setOnPreferenceClickListener(this);
         findPreference("sftp_reset_authorisation").setOnPreferenceClickListener(this);
-        findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setOnPreferenceChangeListener(this);
         findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setSummary(preferenceHelper.getSFTPPrivateKeyFilePath());
         registerEventBus();
     }
@@ -72,24 +70,8 @@ public class SFTPSettingsFragment extends PreferenceFragment implements Preferen
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
-        if (preference.getKey().equals(PreferenceNames.SFTP_PRIVATE_KEY_PATH)) {
 
-            Intent i = new Intent(getActivity(), FilePickerActivity.class);
-            i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
-            i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false);
-
-            String filePath = preferenceHelper.getSFTPPrivateKeyFilePath();
-
-            if(Strings.isNullOrEmpty(filePath)){
-                filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
-            }
-
-            i.putExtra(FilePickerActivity.EXTRA_START_PATH, filePath);
-            startActivityForResult(i, NONONSENSE_DIRPICKER_ACTIVITYID);
-
-            return true;
-        }
-        else if(preference.getKey().equals("sftp_validateserver")) {
+        if(preference.getKey().equals("sftp_validateserver")) {
             uploadTestFile();
         }
         else if (preference.getKey().equals("sftp_reset_authorisation")){
@@ -113,19 +95,6 @@ public class SFTPSettingsFragment extends PreferenceFragment implements Preferen
         }
 
         manager.uploadFile(testFile);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == NONONSENSE_DIRPICKER_ACTIVITYID && resultCode == Activity.RESULT_OK) {
-
-            Uri uri = data.getData();
-            LOG.debug("Private key chosen - " + uri.getPath());
-
-            preferenceHelper.setSFTPPrivateKeyFilePath(uri.getPath());
-            findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setSummary(uri.getPath());
-
-        }
     }
 
     @Override
@@ -163,5 +132,17 @@ public class SFTPSettingsFragment extends PreferenceFragment implements Preferen
         else {
             Dialogs.alert(getString(R.string.success), "SFTP Test Succeeded", getActivity());
         }
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+        if(preference.getKey().equals(PreferenceNames.SFTP_PRIVATE_KEY_PATH)){
+            findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setSummary(newValue.toString());
+            return true;
+        }
+
+
+        return false;
     }
 }
