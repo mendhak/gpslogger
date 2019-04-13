@@ -52,10 +52,11 @@
         android:title="@string/pref_filedetails_title"
         >
 
-        <Preference
+
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="gpslogger_folder"
             android:title="@string/gpslogger_folder_title"
-            android:summary="@string/gpslogger_folder_summary"></Preference>
+            android:summary="@string/gpslogger_folder_summary" />
 
         <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:key="new_file_creation"
