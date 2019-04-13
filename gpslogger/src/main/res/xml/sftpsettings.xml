@@ -48,7 +48,7 @@
     <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
         android:key="sftp_private_key_path"
         android:title="@string/sftp_private_key_path"
-        android:dialogTitle="Path"
+        android:hint="/storage/emulated/0/Download/privatekey"
         android:inputType="text"
         />
 
