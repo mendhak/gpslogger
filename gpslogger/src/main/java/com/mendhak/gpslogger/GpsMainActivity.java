@@ -326,18 +326,12 @@ public class GpsMainActivity extends AppCompatActivity
                 Set<String> legacyListeners = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getStringSet("listeners", null);
 
                 if(legacyListeners != null){
-                    if(legacyListeners.contains(BundleConstants.PASSIVE)){
-                        preferenceHelper.setShouldLogPassiveLocations(true);
-                    }
-                    if(legacyListeners.contains(LocationManager.GPS_PROVIDER)){
-                        preferenceHelper.setShouldLogSatelliteLocations(true);
-                    }
-                    if(legacyListeners.contains(LocationManager.NETWORK_PROVIDER)){
-                        preferenceHelper.setShouldLogNetworkLocations(true);
-                    }
+
+                    preferenceHelper.setShouldLogPassiveLocations(legacyListeners.contains(BundleConstants.PASSIVE));
+                    preferenceHelper.setShouldLogSatelliteLocations(legacyListeners.contains(LocationManager.GPS_PROVIDER));
+                    preferenceHelper.setShouldLogNetworkLocations(legacyListeners.contains(LocationManager.NETWORK_PROVIDER));
+
                 }
-
-
 
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("listeners").apply();
             }
