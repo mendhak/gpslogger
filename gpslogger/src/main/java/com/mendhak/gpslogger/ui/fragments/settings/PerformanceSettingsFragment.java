@@ -26,14 +26,13 @@ import android.preference.PreferenceFragment;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.PreferenceNames;
+import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PerformanceSettingsFragment  extends PreferenceFragment implements Preference.OnPreferenceClickListener {
-
-
-    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+public class PerformanceSettingsFragment  extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,39 +40,32 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
 
         addPreferencesFromResource(R.xml.pref_performance);
 
-        findPreference("listeners").setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.LOG_SATELLITE_LOCATIONS).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.LOG_NETWORK_LOCATIONS).setOnPreferenceChangeListener(this);
+
+
     }
 
+
     @Override
-    public boolean onPreferenceClick(Preference preference) {
+    public boolean onPreferenceChange(Preference preference, Object o) {
 
-        if(preference.getKey().equalsIgnoreCase("listeners")){
-
-            ArrayList<Integer> chosenIndices = new ArrayList<>();
-            final List<String> availableListeners = preferenceHelper.getAvailableListeners();
-
-            for(String chosenListener : preferenceHelper.getChosenListeners()){
-                chosenIndices.add(availableListeners.indexOf(chosenListener));
+        if(preference.getKey().equals(PreferenceNames.LOG_SATELLITE_LOCATIONS)){
+            boolean newValue = Boolean.parseBoolean(o.toString());
+            if(!newValue){
+                PreferenceHelper.getInstance().setShouldLogNetworkLocations(true);
+                ((CustomSwitchPreference)findPreference(PreferenceNames.LOG_NETWORK_LOCATIONS)).setChecked(true);
             }
-
-            new MaterialDialog.Builder(getActivity())
-                    .title(R.string.listeners_title)
-                    .items(R.array.listeners)
-                    .positiveText(R.string.ok)
-                    .negativeText(R.string.cancel)
-                    .itemsCallbackMultiChoice(chosenIndices.toArray(new Integer[chosenIndices.size()]), new MaterialDialog.ListCallbackMultiChoice() {
-                        @Override
-                        public boolean onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
-
-                            preferenceHelper.setChosenListeners(integers);
-
-                            return true;
-                        }
-                    }).show();
-
-            return true;
         }
 
-        return false;
+        if(preference.getKey().equals(PreferenceNames.LOG_NETWORK_LOCATIONS)){
+            boolean newValue = Boolean.parseBoolean(o.toString());
+            if(!newValue){
+                PreferenceHelper.getInstance().setShouldLogSatelliteLocations(true);
+                ((CustomSwitchPreference)findPreference(PreferenceNames.LOG_SATELLITE_LOCATIONS)).setChecked(true);
+            }
+        }
+
+        return true;
     }
 }

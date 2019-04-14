@@ -43,8 +43,9 @@ public  class PreferenceNames {
     public static final String LOG_TO_URL_BASICAUTH_USERNAME = "log_customurl_basicauth_username";
     public static final String LOG_TO_URL_BASICAUTH_PASSWORD = "log_customurl_basicauth_password";
     public static final String LOG_TO_OPENGTS = "log_opengts";
-    public static final String LOCATION_LISTENERS = "listeners";
     public static final String LOG_PASSIVE_LOCATIONS="log_passive_locations";
+    public static final String LOG_SATELLITE_LOCATIONS = "log_satellite_locations";
+    public static final String LOG_NETWORK_LOCATIONS="log_network_locations";
     public static final String NEW_FILE_CREATION_MODE = "new_file_creation";
     public static final String CUSTOM_FILE_NAME = "new_file_custom_name";
     public static final String CUSTOM_FILE_NAME_KEEP_CHANGING = "new_file_custom_keep_changing";

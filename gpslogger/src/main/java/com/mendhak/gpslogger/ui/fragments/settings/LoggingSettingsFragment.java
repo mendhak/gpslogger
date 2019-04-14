@@ -21,6 +21,7 @@ package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -30,6 +31,7 @@ import android.preference.PreferenceFragment;
 import android.text.Html;
 import android.text.InputType;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
@@ -40,7 +42,6 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
-import com.nononsenseapps.filepicker.FilePickerActivity;
 import org.slf4j.Logger;
 import java.io.File;
 
@@ -52,7 +53,6 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
     private static final Logger LOG = Logs.of(LoggingSettingsFragment.class);
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
-    private static int NONONSENSE_DIRPICKER_ACTIVITYID = 919191;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,10 +60,14 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
         addPreferencesFromResource(R.xml.pref_logging);
 
-        Preference gpsloggerFolder = findPreference("gpslogger_folder");
-        gpsloggerFolder.setOnPreferenceClickListener(this);
+        MaterialEditTextPreference gpsloggerFolder = (MaterialEditTextPreference) findPreference("gpslogger_folder");
+
         String gpsLoggerFolderPath = preferenceHelper.getGpsLoggerFolder();
+        gpsloggerFolder.setDefaultValue(gpsLoggerFolderPath);
+        gpsloggerFolder.setText(gpsLoggerFolderPath);
         gpsloggerFolder.setSummary(gpsLoggerFolderPath);
+        gpsloggerFolder.setOnPreferenceChangeListener(this);
+
         if(!(new File(gpsLoggerFolderPath)).canWrite()){
             gpsloggerFolder.setSummary(Html.fromHtml("<font color='red'>" + gpsLoggerFolderPath + "</font>"));
         }
@@ -115,30 +119,6 @@ public class LoggingSettingsFragment extends PreferenceFragment
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
-        if (preference.getKey().equals("gpslogger_folder")) {
-
-
-            // This always works
-            Intent i = new Intent(getActivity(), FilePickerActivity.class);
-            // This works if you defined the intent filter
-            // Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-
-            // Set these depending on your use case. These are the defaults.
-            i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
-            i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, true);
-            i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_DIR);
-
-            // Configure initial directory by specifying a String.
-            // You could specify a String like "/storage/emulated/0/", but that can
-            // dangerous. Always use Android's API calls to get paths to the SD-card or
-            // internal memory.
-            i.putExtra(FilePickerActivity.EXTRA_START_PATH, preferenceHelper.getGpsLoggerFolder());
-
-            startActivityForResult(i, NONONSENSE_DIRPICKER_ACTIVITYID);
-
-            return true;
-        }
-
 
         if(preference.getKey().equalsIgnoreCase("new_file_custom_name")){
 
@@ -163,29 +143,43 @@ public class LoggingSettingsFragment extends PreferenceFragment
         return false;
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == NONONSENSE_DIRPICKER_ACTIVITYID && resultCode == Activity.RESULT_OK) {
-
-            Uri uri = data.getData();
-            LOG.debug("Directory chosen - " + uri.getPath());
-
-            if(! Files.isAllowedToWriteTo(uri.getPath())){
-                Dialogs.alert(getString(R.string.error),getString(R.string.pref_logging_file_no_permissions),getActivity());
-            }
-            else {
-                preferenceHelper.setGpsLoggerFolder(uri.getPath());
-                findPreference("gpslogger_folder").setSummary(uri.getPath());
-            }
-
-        }
-    }
-
 
     @Override
     public boolean onPreferenceChange(final Preference preference, Object newValue) {
 
+        if(preference.getKey().equalsIgnoreCase("gpslogger_folder")){
+
+            LOG.debug("Directory chosen - " + newValue);
+
+            if(Strings.isNullOrEmpty(newValue.toString())){
+                //Special case, reset the preference if value is empty
+                newValue = Files.storageFolder(getActivity()).getAbsolutePath();
+                ((MaterialEditTextPreference)findPreference("gpslogger_folder")).setText(newValue.toString());
+                findPreference("gpslogger_folder").setSummary(newValue.toString());
+                preferenceHelper.setGpsLoggerFolder(newValue.toString());
+                return false;
+            }
+
+            try{
+                File chosenDirectory = new File(newValue.toString());
+                chosenDirectory.mkdirs();
+            }
+            catch(Exception e){
+                LOG.error("Could not create chosen directory path", e);
+                Dialogs.error(getString(R.string.error), getString(R.string.pref_logging_file_no_permissions), e.getMessage(), e, getActivity());
+                return false;
+            }
+
+            if(! Files.isAllowedToWriteTo(newValue.toString())){
+                Dialogs.alert(getString(R.string.error),getString(R.string.pref_logging_file_no_permissions),getActivity());
+                return false;
+            }
+            else {
+                findPreference("gpslogger_folder").setSummary(newValue.toString());
+                return true;
+            }
+
+        }
 
         if(preference.getKey().equalsIgnoreCase("log_gpx")){
             CustomSwitchPreference logGpx11 = (CustomSwitchPreference)findPreference("log_gpx_11");

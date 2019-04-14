@@ -222,9 +222,11 @@ public class GpsLoggingService extends Service  {
                     LOG.debug("Intent received - Set Prefer Cell Tower: " + String.valueOf(preferCellTower));
 
                     if(preferCellTower){
-                        preferenceHelper.setChosenListeners(1);
+                        preferenceHelper.setShouldLogNetworkLocations(true);
+                        preferenceHelper.setShouldLogSatelliteLocations(false);
                     } else {
-                        preferenceHelper.setChosenListeners(0);
+                        preferenceHelper.setShouldLogSatelliteLocations(true);
+                        preferenceHelper.setShouldLogNetworkLocations(false);
                     }
 
                     needToStartGpsManager = true;
@@ -612,7 +614,7 @@ public class GpsLoggingService extends Service  {
 
         checkTowerAndGpsStatus();
 
-        if (session.isGpsEnabled() && preferenceHelper.getChosenListeners().contains(LocationManager.GPS_PROVIDER)) {
+        if (session.isGpsEnabled() && preferenceHelper.shouldLogSatelliteLocations()) {
             LOG.info("Requesting GPS location updates");
             // gps satellite based
             gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, gpsLocationListener);
@@ -623,7 +625,7 @@ public class GpsLoggingService extends Service  {
             startAbsoluteTimer();
         }
 
-        if (session.isTowerEnabled() &&  ( preferenceHelper.getChosenListeners().contains(LocationManager.NETWORK_PROVIDER)  || !session.isGpsEnabled() ) ) {
+        if (session.isTowerEnabled() &&  ( preferenceHelper.shouldLogNetworkLocations() || !session.isGpsEnabled() ) ) {
             LOG.info("Requesting cell and wifi location updates");
             session.setUsingGps(false);
             // Cell tower and wifi based
@@ -638,6 +640,13 @@ public class GpsLoggingService extends Service  {
             LOG.error(getString(R.string.gpsprovider_unavailable));
             stopLogging();
             setLocationServiceUnavailable();
+            return;
+        }
+
+        if(!preferenceHelper.shouldLogNetworkLocations() && !preferenceHelper.shouldLogSatelliteLocations()){
+            LOG.error("No location provider selected!");
+            session.setUsingGps(false);
+            stopLogging();
             return;
         }
 
@@ -903,15 +912,15 @@ public class GpsLoggingService extends Service  {
 
     private boolean isFromValidListener(Location loc) {
 
-        if(!preferenceHelper.getChosenListeners().contains(LocationManager.GPS_PROVIDER) && !preferenceHelper.getChosenListeners().contains(LocationManager.NETWORK_PROVIDER)){
+        if(!preferenceHelper.shouldLogSatelliteLocations() && !preferenceHelper.shouldLogNetworkLocations()){
             return true;
         }
 
-        if(!preferenceHelper.getChosenListeners().contains(LocationManager.NETWORK_PROVIDER)){
+        if(!preferenceHelper.shouldLogNetworkLocations()){
             return loc.getProvider().equalsIgnoreCase(LocationManager.GPS_PROVIDER);
         }
 
-        if(!preferenceHelper.getChosenListeners().contains(LocationManager.GPS_PROVIDER)){
+        if(!preferenceHelper.shouldLogSatelliteLocations()){
             return !loc.getProvider().equalsIgnoreCase(LocationManager.GPS_PROVIDER);
         }
 

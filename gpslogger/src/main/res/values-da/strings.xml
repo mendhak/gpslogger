@@ -302,7 +302,6 @@ præcision ved lavere frekvenser.    </string>
     <string name="restart_required">Du er nødt til at genstarte GPSLogger for at effektuere denne indstilling</string>
     <string name="pref_performance_activityrecognition">Aktivitetsgenkendelse</string>
     <string name="activityrecognition_dont_log_if_still">Log ikke, hvis jeg ikke bevæger mig</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Hvis der ikke er nogen accelerometerregistrering siden sidste punkt, vil aktiv logføring sættes på pause, indtil du igen bevæger dig. Passive punkter logføres muligvis stadig.</string>
     <string name="txt_activity">Aktivitet:</string>
     <string name="activity_in_vehicle">I køretøj</string>
     <string name="activity_confidence">Pålidelighed</string>
@@ -329,7 +328,7 @@ præcision ved lavere frekvenser.    </string>
     <string name="profile_default">Standardprofil</string>
     <string name="profile_add_new">Tilføj profil</string>
     <string name="gpslogger_permissions_rationale_title">Tilladelser kræves</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Denne app kræver forskellige rettigheder for at fungere korrekt. <br/><b>Enhedsplacering</b> - Denne rettighed tillader læsning af placeringsdata fra mobilmaster og enhedens GPS-hardware. <br/><b>Fotos, medier, filer</b> - Denne rettighed tillader skrivning af log- og testfiler til lagerpladsen samt læsning fra en liste af filer til upload eller deling. Denne app vil ikke tilgå dine fotos eller medier. <br/><b>Tilgå dine Kontakter</b> - Benyttes Google Drev-funktionalitet, muliggør rettigheden oversigtsgenerering af Google-konti registreret på enheden.  Denne app tilgår dog ikke din kontaktoversigt. <br/><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Denne app kræver forskellige rettigheder for at fungere korrekt. <br/><b>Enhedsplacering</b> - Denne rettighed tillader læsning af placeringsdata fra mobilmaster og enhedens GPS-hardware. <br/><b>Fotos, medier, filer</b> - Denne rettighed tillader skrivning af log- og testfiler til lagerpladsen samt læsning fra en liste af filer til upload eller deling. Denne app vil ikke tilgå dine fotos eller medier. <br/><br/>  ]]></string>
     <string name="privacy_policy">Fortrolighedspolitik</string>
     <string name="debuglog_attach_to_email">Vedhæft fejlfindingslogfil til e-mail</string>
     <string name="debuglog_attach_to_email_summary">Vedhæft fejlfindingslogfil til en e-mail sammen med nogle diagnostiskoplysninger</string>

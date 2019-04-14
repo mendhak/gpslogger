@@ -630,71 +630,37 @@ public class PreferenceHelper {
     }
 
 
-    /**
-     * Gets a list of location providers that the app will listen to
-     */
-    @ProfilePreference(name= PreferenceNames.LOCATION_LISTENERS)
-    public Set<String> getChosenListeners() {
-        Set<String> defaultListeners = new HashSet<>(getDefaultListeners());
-        return prefs.getStringSet(PreferenceNames.LOCATION_LISTENERS, defaultListeners);
-    }
 
-    /**
-     * Sets the list of location providers that the app will listen to
-     *
-     * @param chosenListeners a Set of listener names
-     */
-    public void setChosenListeners(Set<String> chosenListeners) {
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putStringSet(PreferenceNames.LOCATION_LISTENERS, chosenListeners);
-        editor.apply();
-    }
-
-    /**
-     * Sets the list of location providers that the app will listen to given their array positions in {@link #getAvailableListeners()}.
-     */
-    public void setChosenListeners(Integer... listenerIndices) {
-        List<Integer> selectedItems = Arrays.asList(listenerIndices);
-        final Set<String> chosenListeners = new HashSet<>();
-
-        for (Integer selectedItem : selectedItems) {
-            chosenListeners.add(getAvailableListeners().get(selectedItem));
-        }
-
-        if (chosenListeners.size() > 0) {
-            setChosenListeners(chosenListeners);
-
-        }
-    }
-
-
-    /**
-     * Default set of listeners
-     */
-    public List<String> getDefaultListeners(){
-        List<String> listeners = new ArrayList<>();
-        listeners.add(LocationManager.GPS_PROVIDER);
-        listeners.add(LocationManager.NETWORK_PROVIDER);
-        return listeners;
-    }
-
-
-    /**
-     * All the possible listeners
-     * @return
-     */
-    public List<String> getAvailableListeners() {
-
-        List<String> listeners = new ArrayList<>();
-        listeners.add(LocationManager.GPS_PROVIDER);
-        listeners.add(LocationManager.NETWORK_PROVIDER);
-        return listeners;
-    }
 
     @ProfilePreference(name=PreferenceNames.LOG_PASSIVE_LOCATIONS)
     public boolean shouldLogPassiveLocations(){
         return prefs.getBoolean(PreferenceNames.LOG_PASSIVE_LOCATIONS, false);
     }
+
+
+    public void setShouldLogPassiveLocations(boolean value){
+        prefs.edit().putBoolean(PreferenceNames.LOG_PASSIVE_LOCATIONS, value).apply();
+    }
+
+
+    @ProfilePreference(name = PreferenceNames.LOG_SATELLITE_LOCATIONS)
+    public boolean shouldLogSatelliteLocations(){
+        return  prefs.getBoolean(PreferenceNames.LOG_SATELLITE_LOCATIONS, true);
+    }
+
+    public void setShouldLogSatelliteLocations(boolean value){
+        prefs.edit().putBoolean(PreferenceNames.LOG_SATELLITE_LOCATIONS, value).apply();
+    }
+
+    @ProfilePreference(name = PreferenceNames.LOG_NETWORK_LOCATIONS)
+    public boolean shouldLogNetworkLocations(){
+        return prefs.getBoolean(PreferenceNames.LOG_NETWORK_LOCATIONS, true);
+    }
+
+    public void setShouldLogNetworkLocations(boolean value){
+        prefs.edit().putBoolean(PreferenceNames.LOG_NETWORK_LOCATIONS, value).apply();
+    }
+
 
 
 
@@ -1137,25 +1103,8 @@ public class PreferenceHelper {
                     Object val = m.invoke(this);
 
                     if(val != null){
-
-                        if(((ProfilePreference)a).name().equals("listeners")){
-                            String listeners = "";
-                            Set<String> chosenListeners = (Set<String>)val;
-                            StringBuilder sbListeners = new StringBuilder();
-                            for (String l : chosenListeners) {
-                                sbListeners.append(l);
-                                sbListeners.append(",");
-                            }
-                            if(sbListeners.length() > 0){
-                                listeners = sbListeners.substring(0, sbListeners.length() -1);
-                            }
-                            LOG.debug("LISTENERS - " + listeners);
-                            props.setProperty("listeners", listeners);
-                        }
-                        else {
-                            props.setProperty(((ProfilePreference)a).name(),String.valueOf(val));
-                            LOG.debug(((ProfilePreference) a).name() + " : " + String.valueOf(val));
-                        }
+                        props.setProperty(((ProfilePreference)a).name(),String.valueOf(val));
+                        LOG.debug(((ProfilePreference) a).name() + " : " + String.valueOf(val));
                     }
                     else {
                         LOG.debug("Null value: " + ((ProfilePreference) a).name() + " is null.");
@@ -1190,19 +1139,6 @@ public class PreferenceHelper {
 
             if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
                 editor.putBoolean(key.toString(), Boolean.parseBoolean(value));
-            } else if (key.equals("listeners")) {
-                List<String> availableListeners = getAvailableListeners();
-                Set<String> chosenListeners = new HashSet<>();
-                String[] csvListeners = value.split(",");
-                for (String l : csvListeners) {
-                    if (availableListeners.contains(l)) {
-                        chosenListeners.add(l);
-                    }
-                }
-                if (chosenListeners.size() > 0) {
-                    prefs.edit().putStringSet("listeners", chosenListeners).apply();
-                }
-
             } else {
                 editor.putString(key.toString(), value);
             }

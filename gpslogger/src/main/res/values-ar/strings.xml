@@ -225,5 +225,4 @@
     <string name="log_nmea_title">دخول إلى NMEA</string>
     <string name="pref_logging_file_no_permissions">هذا المجلد غير قابل للكتابة من GPSLogger. الرجاء تحديد مجلد آخر الكتابة.</string>
     <string name="new_file_custom_each_time_summary">المطالبة بتخصيص اسم الملف في كل مرة يتم بدء التسجيل</string>
-    <string name="activityrecognition_dont_log_if_still_summary">إذا لم يكن هناك أي حركة متسارعة من النقطة الأخيرة، سيتم إيقاف التسجيل حتى بدء الجركة مرة أخرى. تسجيل النقاط السلبيةقد يكون مستمر.</string>
 </resources>

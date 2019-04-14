@@ -266,7 +266,6 @@
     <string name="restart_required">Bạn sẽ cần phải khởi động lại GPSLogger để cái đặt này có hiệu lực</string>
     <string name="pref_performance_activityrecognition">Nhận dạng các hoạt động</string>
     <string name="activityrecognition_dont_log_if_still">Không ghi nếu tôi không di chuyển</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Nếu không có chuyển động tính từ điểm cuối cùng, log sẽ tạm dừng đến khi bạn tiếp tục di chuyển</string>
     <string name="txt_activity">Hoạt động:</string>
     <string name="activity_in_vehicle">Trên phương tiện di chuyển</string>
     <string name="activity_confidence">Tự tin</string>

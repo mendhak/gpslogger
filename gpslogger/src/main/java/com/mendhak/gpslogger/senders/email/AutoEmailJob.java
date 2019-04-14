@@ -190,6 +190,7 @@ public class AutoEmailJob extends Job {
                     smtpFailureEvent = new UploadEvents.AutoEmail().failed("Failure to send the email");
                 }
                 else {
+                    LOG.info("Email - file sent");
                     EventBus.getDefault().post(new UploadEvents.AutoEmail().succeeded());
                 }
             }

@@ -20,8 +20,6 @@
 package com.mendhak.gpslogger;
 
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.*;
@@ -35,7 +33,6 @@ import android.net.Uri;
 import android.os.*;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.widget.DrawerLayout;
@@ -256,22 +253,12 @@ public class GpsMainActivity extends AppCompatActivity
 
 
 
+
     private void loadVersionSpecificProperties(){
         PackageInfo packageInfo;
         try {
             packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             int versionCode = packageInfo.versionCode;
-
-            if( preferenceHelper.getLastVersionSeen() <= 71 ){
-                LOG.debug("preferenceHelper.getLastVersionSeen() " + preferenceHelper.getLastVersionSeen());
-                //Specifically disable passive provider... just once
-                if(preferenceHelper.getChosenListeners().contains(BundleConstants.PASSIVE)){
-                    Set<String> listeners = new HashSet<>();
-                    if(preferenceHelper.getChosenListeners().contains(LocationManager.GPS_PROVIDER)){ listeners.add(LocationManager.GPS_PROVIDER); }
-                    if(preferenceHelper.getChosenListeners().contains(LocationManager.NETWORK_PROVIDER)){ listeners.add(LocationManager.NETWORK_PROVIDER); }
-                    preferenceHelper.setChosenListeners(listeners);
-                }
-            }
 
             if(preferenceHelper.getLastVersionSeen() <= 74){
                 LOG.debug("preferenceHelper.getLastVersionSeen() " + preferenceHelper.getLastVersionSeen());
@@ -328,8 +315,25 @@ public class GpsMainActivity extends AppCompatActivity
 
                                 }
                             }).show();
+                }
+            }
+
+            if(preferenceHelper.getLastVersionSeen() <= 100){
+                List<String> listeners = new ArrayList<>();
+                listeners.add(LocationManager.GPS_PROVIDER);
+                listeners.add(LocationManager.NETWORK_PROVIDER);
+                Set<String> defaultListeners = new HashSet<>(listeners);
+                Set<String> legacyListeners = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getStringSet("listeners", null);
+
+                if(legacyListeners != null){
+
+                    preferenceHelper.setShouldLogPassiveLocations(legacyListeners.contains(BundleConstants.PASSIVE));
+                    preferenceHelper.setShouldLogSatelliteLocations(legacyListeners.contains(LocationManager.GPS_PROVIDER));
+                    preferenceHelper.setShouldLogNetworkLocations(legacyListeners.contains(LocationManager.NETWORK_PROVIDER));
 
                 }
+
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("listeners").apply();
             }
 
             preferenceHelper.setLastVersionSeen(versionCode);

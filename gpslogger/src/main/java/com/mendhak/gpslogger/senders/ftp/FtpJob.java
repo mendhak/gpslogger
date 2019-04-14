@@ -244,6 +244,7 @@ public class FtpJob extends Job {
     @Override
     public void onRun() throws Throwable {
         if (upload(server, username, password, directory, port, useFtps, protocol, implicit, gpxFile, fileName)) {
+            LOG.info("FTP - file uploaded");
             EventBus.getDefault().post(new UploadEvents.Ftp().succeeded());
         } else {
             jobResult.ftpMessages = ftpServerResponses;

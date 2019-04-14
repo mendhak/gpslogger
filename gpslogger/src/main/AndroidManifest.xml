@@ -5,15 +5,20 @@
           android:installLocation="auto"
     >
 
+    <!-- Satellite and network location services -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- Writing log files to storage -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- If the user wants the app to start on boot -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- If the user needs to send to external services like Custom URL, Google Drive, Dropbox, OSM -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <!-- To check if an internet connection exists before communicating  -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- If the user needs activity recognition -->
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION"/>
+    <!-- If the user needs to use external GPS receiver eg over bluetooth -->
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"
                      tools:ignore="MockLocation"/>
 
@@ -121,16 +126,6 @@
             android:theme="@style/Theme.AppCompat.Translucent" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.nononsenseapps.filepicker.FilePickerActivity"
-            android:label="@string/app_name"
-            android:theme="@style/FilePickerTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.GET_CONTENT" />
-                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 

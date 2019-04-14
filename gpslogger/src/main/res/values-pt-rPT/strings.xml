@@ -293,7 +293,6 @@ Nomes de ficheiro muito dinâmicos
     <string name="restart_required">É necessário reiniciar o GPSLogger para que esta configuração tenha efeito</string>
     <string name="pref_performance_activityrecognition">Reconhecimento de Atividade</string>
     <string name="activityrecognition_dont_log_if_still">Não registar se não estou em movimento</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Se não houver movimento do acelerómetro desde o último ponto, o log activo fará uma pausa até que se mova novamente. Pontos passivos ainda podem ser registados.</string>
     <string name="txt_activity">Atividade:</string>
     <string name="activity_in_vehicle">No Veículo</string>
     <string name="activity_confidence">Confiança</string>
@@ -320,7 +319,7 @@ Nomes de ficheiro muito dinâmicos
     <string name="profile_default">Perfil padrão</string>
     <string name="profile_add_new">Adicionar perfil</string>
     <string name="gpslogger_permissions_rationale_title">Permissões necessárias</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Esta app necessita várias permissões para funcionar correctamente. <br /> <b>Localização</b> - Esta permissão autoriza a leitura dos dados de localização da rede celular e do equipamento GPS.<br /><b>Fotos, media, ficheiros</b> - Esta permissão autoriza a escrita de ficheiros de registos e testes para o armazenamento, e a leitura de uma lista de ficheiros para carregamento ou partilha. Esta app não acede aos seus ficheiros de fotos ou media.<br /><b>Contactos</b> - Se utilizar a funcionalidade Google Drive, esta permissão autoriza o acesso a Google accounts registadas neste dispositivo.  A sua lista de contactos não é acedida por esta app.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Esta app necessita várias permissões para funcionar correctamente. <br /> <b>Localização</b> - Esta permissão autoriza a leitura dos dados de localização da rede celular e do equipamento GPS.<br /><b>Fotos, media, ficheiros</b> - Esta permissão autoriza a escrita de ficheiros de registos e testes para o armazenamento, e a leitura de uma lista de ficheiros para carregamento ou partilha. Esta app não acede aos seus ficheiros de fotos ou media.<br /><br/>  ]]></string>
     <string name="privacy_policy">Política de Privacidade</string>
     <string name="debuglog_attach_to_email">Anexar o log de correção de erros ao e-mail</string>
     <string name="debuglog_attach_to_email_summary">Anexa o log de correcção de erros ao e-mail em conjunto com alguma informação de diagnóstico</string>

@@ -281,7 +281,6 @@
     <string name="restart_required">この設定を有効にするには GPSLogger を再起動する必要があります。</string>
     <string name="pref_performance_activityrecognition">活動状況の自動認識</string>
     <string name="activityrecognition_dont_log_if_still">移動していないときはログファイルを書かない</string>
-    <string name="activityrecognition_dont_log_if_still_summary">最後の点から加速度計に変化がない時は動き出すまで活動記録は書き込みしません。移動記録は書き込みを続けます。</string>
     <string name="txt_activity">活動状況:</string>
     <string name="activity_in_vehicle">車で移動</string>
     <string name="activity_confidence">確度</string>
@@ -309,7 +308,7 @@
     <string name="profile_default">既定のプロファイル</string>
     <string name="profile_add_new">プロファイルを追加</string>
     <string name="gpslogger_permissions_rationale_title">権限が不足しています。</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[このアプリを正しく動作させるために、様々な権限を必要とします。<br /><b>位置情報</b> - この権限は基地局やGPSから位置情報を取得するのに必要です。<b>画像/メディア/ファイル</b> - この権限は、ログやテストファイルの書き込みや、アップロードや共有をする際、ファイルのリストを読み込むために必要とされます。このアプリはあなたの写真やメディアファイルにアクセスすることはありません。<br /><b>連絡先</b> - Google Drive の機能を使用する時に、スマートフォンに登録されたGoogleのアカウント一覧を取得するために必要な権限です。あなたの連絡先一覧へのアクセスはありません。<br /><br />]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[このアプリを正しく動作させるために、様々な権限を必要とします。<br /><b>位置情報</b> - この権限は基地局やGPSから位置情報を取得するのに必要です。<br /><b>画像/メディア/ファイル</b> - この権限は、ログやテストファイルの書き込みや、アップロードや共有をする際、ファイルのリストを読み込むために必要とされます。このアプリはあなたの写真やメディアファイルにアクセスすることはありません。<br /><br />  ]]></string>
     <string name="privacy_policy">プライバシーポリシー</string>
     <string name="debuglog_attach_to_email">デバッグ用ログをメールに添付する</string>
     <string name="debuglog_attach_to_email_summary">デバッグログの他に診断結果を添付する</string>

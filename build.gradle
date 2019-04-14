@@ -9,11 +9,11 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath 'com.android.tools.build:gradle:3.3.2'
     }
 }
 
 project.ext.APP_ID = "com.mendhak.gpslogger"
-project.ext.APP_VERSION_CODE = 100
-project.ext.APP_VERSION_NAME ="100"
+project.ext.APP_VERSION_CODE = 101
+project.ext.APP_VERSION_NAME ="101"
 

@@ -60,10 +60,6 @@
     </string-array>
 
 
-    <string-array name="listeners">
-        <item>@string/listeners_gps</item>
-        <item>@string/listeners_cell</item>
-    </string-array>
 
 
 </resources>

@@ -107,6 +107,7 @@ public class GoogleDriveJob extends Job {
             //Set file's contents
             updateFileContents(token, gpxFileId, Streams.getByteArrayFromInputStream(fis), fileName);
         }
+        LOG.info("Google Drive - file uploaded");
         EventBus.getDefault().post(new UploadEvents.GDrive().succeeded());
     }
 

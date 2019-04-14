@@ -295,7 +295,6 @@
     <string name="restart_required">Musisz uruchomić ponownie GPSLogger aby użyć tych ustawień</string>
     <string name="pref_performance_activityrecognition">Rozpoznawanie aktywności</string>
     <string name="activityrecognition_dont_log_if_still">Nie loguj, jeśli się nie ruszam</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Jeżeli nie istnieje ruch akcelorometru od ostatniego punktu, aktywne rejestrowanie zostanie zatrzymane, do momentu w którym ponownie się przemieścisz. Pasywne punkty nadal mogą być rejestrowane.</string>
     <string name="txt_activity">Aktywność:</string>
     <string name="activity_in_vehicle">W pojeździe</string>
     <string name="activity_confidence">Dokładność</string>
@@ -322,7 +321,7 @@
     <string name="profile_default">Domyślny profil</string>
     <string name="profile_add_new">Dodaj profil</string>
     <string name="gpslogger_permissions_rationale_title">Wymagane uprawnienia</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ta aplikacja wymaga różnych uprawnień, aby funkcjonować prawidłowo.<br /><b>Lokalizacja urządzenia</b> - To uprawnienie zezwala na odczyt danych z masztów telefonicznych i sprzętu GPS urządzenia.<br /><b>Zdjęcia, multimedia, pliki</b> - To uprawnienie zezwala na zapisywanie plików rejestru na dysk, oraz na odczyt, przesyłanie lub udostępnianie. Aplikacja nie będzie miała dostępu do twoich zdjęć i multimediów.<br /><b>Dostęp do twoich kontaktów</b> - Jeśli używana jest funkcja Dysku Google, to uprawnienie zezwala na wyświetlanie listy kont Google zarejestrowanych na tym urządzeniu. Ta aplikacja nie będzie miała dostępu do twoich kontaktów.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ta aplikacja wymaga różnych uprawnień, aby funkcjonować prawidłowo.<br /><b>Lokalizacja urządzenia</b> - To uprawnienie zezwala na odczyt danych z masztów telefonicznych i sprzętu GPS urządzenia.<br /><b>Zdjęcia, multimedia, pliki</b> - To uprawnienie zezwala na zapisywanie plików rejestru na dysk, oraz na odczyt, przesyłanie lub udostępnianie. Aplikacja nie będzie miała dostępu do twoich zdjęć i multimediów.<br /><br/>  ]]></string>
     <string name="privacy_policy">Polityka prywatności</string>
     <string name="debuglog_attach_to_email">Dołącz do wiadomości e-mail rejestr debugowania</string>
     <string name="debuglog_attach_to_email_summary">Dołącza rejestr debugowania wraz z niektórymi informacjami diagnostycznymi do wiadomości email</string>

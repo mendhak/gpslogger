@@ -293,7 +293,6 @@
     <string name="restart_required">Você precisará reiniciar o GPSLogger para que esta configuração tenha efeito</string>
     <string name="pref_performance_activityrecognition">Reconhecimento de Atividade</string>
     <string name="activityrecognition_dont_log_if_still">Não registre se não estou em movimento</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Se não houver movimento do acelerômetro desde o último ponto, o log ativo fará uma pausa até que você se mova novamente. Pontos passivos ainda podem ser registrados.</string>
     <string name="txt_activity">Atividade:</string>
     <string name="activity_in_vehicle">No Veículo</string>
     <string name="activity_confidence">Confiabilidade</string>
@@ -320,7 +319,7 @@
     <string name="profile_default">Perfil padrão</string>
     <string name="profile_add_new">Adicionar perfil</string>
     <string name="gpslogger_permissions_rationale_title">Permissões necessárias</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Este aplicativo precisa de várias permissões para funcionar corretamente. <br /> <b>Localização de dispositivo</b> - Esta permissão possibilita a leitura dos dados de localização de torres de celulares e do hardware GPS contido no dispostivo.<br /><b>Fotos, midia, arquivos</b> - Esta permissão possibilita a gravação de arquivos de log, checar arquivos para o armazenamento e leitura de uma lista de arquivos para carregamento ou compartilhamento. Este app não vai acessar as suas fotos ou midia.<br /><b>Acesso aos seus contatos</b> - No caso da  funcionalidade do Google Drive, esta permissão possibilita a listagem das contas registradas no Google contidas em seu dispositivo. Sua lista de contatos não é acessada por este app.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Este aplicativo precisa de várias permissões para funcionar corretamente. <br /> <b>Localização de dispositivo</b> - Esta permissão possibilita a leitura dos dados de localização de torres de celulares e do hardware GPS contido no dispostivo.<br /><b>Fotos, midia, arquivos</b> - Esta permissão possibilita a gravação de arquivos de log, checar arquivos para o armazenamento e leitura de uma lista de arquivos para carregamento ou compartilhamento. Este app não vai acessar as suas fotos ou midia.<br /><br/>  ]]></string>
     <string name="privacy_policy">Política de Privacidade</string>
     <string name="debuglog_attach_to_email">Anexar o log de depuração para o e-mail</string>
     <string name="debuglog_attach_to_email_summary">Anexa o log de depuração para um e-mail juntamente com algumas informações de diagnóstico</string>

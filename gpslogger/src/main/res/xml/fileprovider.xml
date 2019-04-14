@@ -2,7 +2,5 @@
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
     <files-path name="int" path="."/>
     <external-files-path name="ext" path="/"/>
-    <!-- root-path is undocumented and will probably break some day -->
-    <!-- https://github.com/spacecowboy/NoNonsense-FilePicker/issues/129 -->
-    <root-path name="rooty" path="/" />
+    <external-path name="extpath" path="/" />
 </paths>

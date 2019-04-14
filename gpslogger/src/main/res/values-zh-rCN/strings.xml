@@ -136,6 +136,7 @@
     <string name="autoemail_smtp_category">Email 设置</string>
     <string name="autoemail_username_summary">用户名与您的电子邮件供应商</string>
     <string name="autoemail_password_summary">你的电子邮件密码</string>
+    <string name="autoemail_ssl">隐式 SSL</string>
     <string name="autoemail_ssl_summary">如果连接失败请尝试切换这个选项</string>
     <string name="autoemail_choosepreset">邮件提供商</string>
     <string name="autoemail_choosepreset_summary">选择一个服务提供商或者直接输入</string>
@@ -270,8 +271,14 @@
     <string name="log_nmea_summary">尝试定位时创建 NMEA 源文件。这个文件的大小长得很快！只对 GPS 有效。</string>
     <string name="autoopengts_accountname">帐户名称</string>
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">记录 GPS/GNSS 位置</string>
+    <string name="listeners_gps_summary">设备上基于位置传感器提供的日志位置</string>
     <string name="listeners_cell">网络</string>
+    <string name="listeners_cell_title">记录网络位置</string>
+    <string name="listeners_cell_summary">记录设备上基于网络位置传感器提供的位置</string>
     <string name="listeners_passive">被动</string>
+    <string name="listeners_passive_title">记录被动位置</string>
+    <string name="listeners_passive_summary">记录从其他应用获得的位置, 但请注意, 大多数将被筛选。此设置对于外部 GPS 接收器很有用。</string>
     <string name="listeners_summary">从什么地方获取位置数据：「GPS」就是卫星，「网络」是指行动基站/Wifi，「被动」比较特殊，负责监听其他应用获取的位置。</string>
     <string name="listeners_title">位置提供者</string>
     <string name="autosend_frequency_hint">分钟数</string>
@@ -289,7 +296,7 @@
     <string name="restart_required">需要重新启动 GPSLogger 后，此设置才会生效</string>
     <string name="pref_performance_activityrecognition">活动识别</string>
     <string name="activityrecognition_dont_log_if_still">如果我不在移动，不要记录</string>
-    <string name="activityrecognition_dont_log_if_still_summary">如果从上个点开始加速度计未侦测到移动，那么在您下次移动之前不会主动记录，但可能还会被动地记录位置。</string>
+    <string name="activityrecognition_dont_log_if_still_summary">如果自最后一点以来没有加速度计运动, 则活动日志记录将暂停您的日志记录, 即使您在该时间之前开始移动也是如此。被动点仍可能被记录。</string>
     <string name="txt_activity">活动︰</string>
     <string name="activity_in_vehicle">坐车</string>
     <string name="activity_confidence">确定性</string>
@@ -319,7 +326,8 @@
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[本应用需要不少权限以便正确工作。<br />
 <b>设备位置</b>用于获取您的 GPS 或基站位置。<br />
 <b>文件媒介</b>用于读写 SD 卡上的 GPSLogger 文件夹，以供访问、上载、分享记录文件。本应用不会读取您的照片及其他媒介。<br />
-<b>联系人</b>用于列出设备上具有的 Google 账户。本应用不会读取您的联系人列表。<br /><br/>]]></string>
+<br/>  ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[您拒绝授予一个或多个此应用程序所需的权限。您需要前往应用程序设置页以授予这些权限。<br /><br />若您永久拒绝了这些权限，您可在系统设置中重置。 ]]></string>
     <string name="privacy_policy">隐私权政策</string>
     <string name="debuglog_attach_to_email">将调试日志文件附加到电子邮件</string>
     <string name="debuglog_attach_to_email_summary">将调试日志文件以及一些诊断信息附加到电子邮件</string>
@@ -339,5 +347,9 @@
     <string name="txt_timestamp_epoch">时间戳 (Unix)</string>
     <string name="txt_starttimestamp_epoch">开始时间戳 (Unix)</string>
     <string name="txt_battery">电量</string>
+    <string name="customurl_http_body">HTTP 内容</string>
+    <string name="customurl_http_headers">HTTP 头</string>
+    <string name="customurl_http_method">HTTP 方法</string>
+    <string name="customurl_http_basicauthentication">基础认证</string>
     <string name="hide_notification_from_status_bar_disallowed">从安卓8起，不允许设置隐藏状态栏通知</string>
 </resources>
