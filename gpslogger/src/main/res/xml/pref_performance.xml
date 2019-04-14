@@ -6,12 +6,14 @@
     <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:key="log_satellite_locations"
         android:title="@string/listeners_gps_title"
-        android:summary="@string/listeners_gps_summary" />
+        android:summary="@string/listeners_gps_summary"
+        android:defaultValue="true" />
 
     <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:key="log_network_locations"
         android:title="@string/listeners_cell_title"
-        android:summary="@string/listeners_cell_summary" />
+        android:summary="@string/listeners_cell_summary"
+        android:defaultValue="true" />
 
     <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
         android:key="log_passive_locations"
