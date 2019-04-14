@@ -271,8 +271,14 @@
     <string name="log_nmea_summary">尝试定位时创建 NMEA 源文件。这个文件的大小长得很快！只对 GPS 有效。</string>
     <string name="autoopengts_accountname">帐户名称</string>
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">记录 GPS/GNSS 位置</string>
+    <string name="listeners_gps_summary">设备上基于位置传感器提供的日志位置</string>
     <string name="listeners_cell">网络</string>
+    <string name="listeners_cell_title">记录网络位置</string>
+    <string name="listeners_cell_summary">记录设备上基于网络位置传感器提供的位置</string>
     <string name="listeners_passive">被动</string>
+    <string name="listeners_passive_title">记录被动位置</string>
+    <string name="listeners_passive_summary">记录从其他应用获得的位置, 但请注意, 大多数将被筛选。此设置对于外部 GPS 接收器很有用。</string>
     <string name="listeners_summary">从什么地方获取位置数据：「GPS」就是卫星，「网络」是指行动基站/Wifi，「被动」比较特殊，负责监听其他应用获取的位置。</string>
     <string name="listeners_title">位置提供者</string>
     <string name="autosend_frequency_hint">分钟数</string>
@@ -290,6 +296,7 @@
     <string name="restart_required">需要重新启动 GPSLogger 后，此设置才会生效</string>
     <string name="pref_performance_activityrecognition">活动识别</string>
     <string name="activityrecognition_dont_log_if_still">如果我不在移动，不要记录</string>
+    <string name="activityrecognition_dont_log_if_still_summary">如果自最后一点以来没有加速度计运动, 则活动日志记录将暂停您的日志记录, 即使您在该时间之前开始移动也是如此。被动点仍可能被记录。</string>
     <string name="txt_activity">活动︰</string>
     <string name="activity_in_vehicle">坐车</string>
     <string name="activity_confidence">确定性</string>

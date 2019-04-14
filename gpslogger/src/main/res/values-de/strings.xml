@@ -270,6 +270,8 @@
     <string name="log_nmea_summary">Erstellt eine unbearbeitete NMEA-Datei, während man versucht, eine Positionsbestimmung zu erhalten. Diese Datei wächst sehr schnell. Dies funktioniert nur während der der Verwendung von GPS.</string>
     <string name="autoopengts_accountname">Benutzername</string>
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">GPS/GNSS Standort aufzeichnen</string>
+    <string name="listeners_gps_summary">Zeichnet Standorte auf, die durch das GPS Modul des Handys generiert wurden</string>
     <string name="listeners_cell">Netzwerk</string>
     <string name="listeners_passive">Passiv</string>
     <string name="listeners_summary">Festlegen, welche Standortbestimmungsmethode je nach Verfügbarkeit genutzt werden soll; GPS-Satelliten, Netzwerke (WLAN/Mobilfunknetz), Passiv (nutzt Standortbestimmungsanfragen, welche von anderen Apps angefordert werden).</string>
@@ -289,6 +291,7 @@
     <string name="restart_required">GPSLogger muss neu gestartet werden, damit diese Einstellung wirksam wird</string>
     <string name="pref_performance_activityrecognition">Aktivitätserkennung</string>
     <string name="activityrecognition_dont_log_if_still">Aufzeichnung pausieren, wenn keine Standortänderung erfolgt</string>
+    <string name="activityrecognition_dont_log_if_still_summary">Wenn die Bewegungssensoren des Handys nach dem letzten aufgezeichneten nicht angeschlagen haben, wird das Aufzeichnen pausiert, auch wenn man sich tatsächlich bewegt. Passives Aufzeichnen wird nicht pausiert.</string>
     <string name="txt_activity">Aktivität:</string>
     <string name="activity_in_vehicle">Im Fahrzeug</string>
     <string name="activity_confidence">Zuverlässigkeit</string>

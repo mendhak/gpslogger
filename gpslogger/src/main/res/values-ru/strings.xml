@@ -278,8 +278,14 @@
     <string name="log_nmea_summary">Делает запись в NMEA-файл при каждй попытке определения местоположения. Этот файл растет очень быстро. Записи добавляются только во время использования GPS.</string>
     <string name="autoopengts_accountname">Имя аккаунта</string>
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">Журнал местоположений GPS/GNSS</string>
+    <string name="listeners_gps_summary">Журналы мест, предоставленных спутника на основе расположения приемника на вашем устройстве</string>
     <string name="listeners_cell">Сеть</string>
+    <string name="listeners_cell_title">Журнал сетевых расположений</string>
+    <string name="listeners_cell_summary">Журналы мест, предоставленных спутника на основе расположения приемника на вашем устройстве</string>
     <string name="listeners_passive">Пассивно</string>
+    <string name="listeners_passive_title">Log passive locations</string>
+    <string name="listeners_passive_summary">Logs locations obtained from other apps, but note that most filters are ignored. This setting is also useful for external GPS receivers.</string>
     <string name="listeners_summary">Какие поставщики местоположения использовать, когда они имеются; GPS для спутников, Вышки сотовой связи/wifi, Пассивный это особый режим который прослушивает местоположения запрошенные другими приложениями.</string>
     <string name="listeners_title">Источники определения местоположения</string>
     <string name="autosend_frequency_hint">Количество минут</string>
@@ -297,6 +303,7 @@
     <string name="restart_required">Необходимо будет перезапустить GPSLogger, чтобы установка вступила в силу</string>
     <string name="pref_performance_activityrecognition">Распознание движения</string>
     <string name="activityrecognition_dont_log_if_still">Не записывать если я не двигаюсь</string>
+    <string name="activityrecognition_dont_log_if_still_summary">If there is no accelerometer movement since the last point, active logging will pause for your logging interval, even if you start moving before then. Passive points may still be logged.</string>
     <string name="txt_activity">Действия:</string>
     <string name="activity_in_vehicle">На автомобиле</string>
     <string name="activity_confidence">Доверие</string>
@@ -324,6 +331,7 @@
     <string name="profile_add_new">Добавить профиль</string>
     <string name="gpslogger_permissions_rationale_title">Необходимые разрешения</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Это приложение требует разрешения для работы. <br /> <b>Местоположение</b> - это разрешение позволяет считывать данные о местоположении по вышкам сети и данным GPS. <br /> <b>Фото, медиа, файлы</b> - это разрешение позволяет писать файлы лога и файлы тестов для хранения, чтения, загрузки или обмена. Этот приложение не имеет доступ к вашим фото или медиа. <br /> <br/>  ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[You have denied one or more permissions that this app requires.  You will need to go to the app settings screen to grant these permissions.  <br /><br />If you have permanently denied permissions you can reset them in the system settings. ]]></string>
     <string name="privacy_policy">Политика конфиденциальности</string>
     <string name="debuglog_attach_to_email">Послать лог отладки по электронной почте</string>
     <string name="debuglog_attach_to_email_summary">Послать лог отладки по электронной почте, а также некоторых диагностические сведения</string>
@@ -346,5 +354,6 @@
     <string name="customurl_http_body">HTTP Body</string>
     <string name="customurl_http_headers">HTTP Заголовки</string>
     <string name="customurl_http_method">HTTP Метод</string>
+    <string name="customurl_http_basicauthentication">Обычная проверка подлинности</string>
     <string name="hide_notification_from_status_bar_disallowed">Скрытие уведомления запрещено в Android Oreo</string>
 </resources>

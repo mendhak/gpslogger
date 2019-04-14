@@ -84,8 +84,8 @@
     <string name="time_halfhour">½ години</string>
     <string name="time_oneandhalfhours">1½ години</string>
     <string name="time_twoandhalfhours">2½ години</string>
-    <string name="time_hms_format" formatted="false">%sг:%sхв:%sс</string>
-    <string name="accuracy_within" formatted="false">протягом %s %s</string>
+    <string name="time_hms_format" formatted="false">%sг %sхв %sсек</string>
+    <string name="accuracy_within" formatted="false">у межах %s %s</string>
     <!-- Settings activity -->
     <string name="settings_distance_in_meters">Відстань у метрах</string>
     <string name="settings_accuracy_in_meters">Точність у метрах</string>
@@ -272,8 +272,14 @@
     <string name="log_nmea_summary">Створює чистий NMEA-файл, при кожній спробі визначення місцерозташування. Цей файл росте дуже швидко. Працює лише під час використання GPS.</string>
     <string name="autoopengts_accountname">Ім\'я облікового запису</string>
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">Запис координати з GPS/GNSS</string>
+    <string name="listeners_gps_summary">Записує координати, надані приймачем супутникових даних на вашому пристрої</string>
     <string name="listeners_cell">Мережа</string>
+    <string name="listeners_cell_title">Запис координати з інтернету</string>
+    <string name="listeners_cell_summary">Записує координати, надані приймачем інтернет даних на вашому пристрої</string>
     <string name="listeners_passive">Пасивно</string>
+    <string name="listeners_passive_title">Запис координати з інших джерел</string>
+    <string name="listeners_passive_summary">Записує координати, отримані з інших програм, але зауважте, що більшість фільтрів ігноруються. Це налаштування буде корисним для зовнішніх приймачів GPS.</string>
     <string name="listeners_summary">Які постачальники місцезнаходження використовувати, коли вони доступні; GPS: для супутника, мережа: для базової станції / WiFi, пасивна: спеціальний провайдер, який прослуховує запити місцезнаходження інших програм.</string>
     <string name="listeners_title">Провайдери розташування</string>
     <string name="autosend_frequency_hint">Кількість хвилин</string>
@@ -291,6 +297,7 @@
     <string name="restart_required">Для застосування налаштувань Вам потрібно буде перезапустити GPSLogger</string>
     <string name="pref_performance_activityrecognition">Розпізнавання активности</string>
     <string name="activityrecognition_dont_log_if_still">Не записувати, якщо я не рухаюсь</string>
+    <string name="activityrecognition_dont_log_if_still_summary">Якщо з моменту останнього точки немає руху акселерометру, активний запис призупиняється на тривалість інтервалу запису. Навіть, якщо ви знову почнете рух. Пасивні точки все ще можуть бути записані.</string>
     <string name="txt_activity">Активність:</string>
     <string name="activity_in_vehicle">У транспортному засобі</string>
     <string name="activity_confidence">Впевненість</string>
@@ -317,7 +324,7 @@
     <string name="profile_default">Профіль за замовчуванням</string>
     <string name="profile_add_new">Додати профіль</string>
     <string name="gpslogger_permissions_rationale_title">Потрібні дозволи</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Цей застосунок вимагає різні дозволи для того, щоб функціонувати належним чином. <br /><b>Геодані</b> - Цей дозвіл дозволяє читати дані про місцезнаходження з антен мобільного зв\'язку та пристрою GPS.<br /><b>Фото, медіа, файли</b> - Цей дозвіл дозволяє писати лог-файли і тестові файли для зберігання і читання зі списку файлів для завантаження або спільного використання. Це додаток не буде отримувати доступ до фото або медіа даних.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ця програма вимагає різні дозволи для того, щоб працювати належним чином. <br /><b>Місцезнаходження</b> - Цей дозвіл дозволяє читати дані про місцезнаходження з антен мобільного зв'язку та пристрою GPS.<br /><b>Фото, мультимедія, файли</b> - Цей дозвіл дозволяє писати журнали й тестові файли для зберігання і читання зі списку файлів для завантаження або спільного використання. Це додаток не буде отримувати доступ до фото або медіа даних.<br /><br/>  ]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Ви не дали один або кілька дозволів, які вимагає дана програма. Щоб надати ці дозволи, потрібно перейти на екран налаштувань програми. <br /><br />Якщо у вас увімкнене постійне блокування дозволів ви можете скинути їх у системних налаштуваннях. ]]></string>
     <string name="privacy_policy">Політика конфіденційності</string>
     <string name="debuglog_attach_to_email">Прикріпляти журнал відлагодження до email</string>
