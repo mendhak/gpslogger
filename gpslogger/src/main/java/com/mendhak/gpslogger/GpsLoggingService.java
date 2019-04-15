@@ -797,6 +797,7 @@ public class GpsLoggingService extends Service  {
 
         // Don't log a point until the user-defined time has elapsed
         // However, if user has set an annotation, just log the point, disregard any filters
+        // However, if it's a passive location, disregard the time filter
         if (!isPassiveLocation && !session.hasDescription() && !session.isSinglePointMode() && (currentTimeStamp - session.getLatestTimeStamp()) < (preferenceHelper.getMinimumLoggingInterval() * 1000)) {
             return;
         }
@@ -836,15 +837,13 @@ public class GpsLoggingService extends Service  {
 
         // Don't do anything until the user-defined accuracy is reached
         // However, if user has set an annotation, just log the point, disregard any filters
-        if (!isPassiveLocation && !session.hasDescription() &&  preferenceHelper.getMinimumAccuracy() > 0) {
-
+        if (!session.hasDescription() &&  preferenceHelper.getMinimumAccuracy() > 0) {
 
             if(!loc.hasAccuracy() || loc.getAccuracy() == 0){
                 return;
             }
 
-            //Don't apply the retry interval to passive locations
-            if (!isPassiveLocation && preferenceHelper.getMinimumAccuracy() < Math.abs(loc.getAccuracy())) {
+            if (preferenceHelper.getMinimumAccuracy() < Math.abs(loc.getAccuracy())) {
 
                 if(session.getFirstRetryTimeStamp() == 0){
                     session.setFirstRetryTimeStamp(System.currentTimeMillis());
@@ -873,7 +872,8 @@ public class GpsLoggingService extends Service  {
 
         //Don't do anything until the user-defined distance has been traversed
         // However, if user has set an annotation, just log the point, disregard any filters
-        if (!session.hasDescription() && !session.isSinglePointMode() && preferenceHelper.getMinimumDistanceInterval() > 0 && session.hasValidLocation()) {
+        // However, if it's a passive location, ignore distance filter.
+        if (!isPassiveLocation && !session.hasDescription() && !session.isSinglePointMode() && preferenceHelper.getMinimumDistanceInterval() > 0 && session.hasValidLocation()) {
 
             double distanceTraveled = Maths.calculateDistance(loc.getLatitude(), loc.getLongitude(),
                     session.getCurrentLatitude(), session.getCurrentLongitude());
