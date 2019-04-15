@@ -32,7 +32,7 @@ import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PerformanceSettingsFragment  extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
+public class PerformanceSettingsFragment  extends PreferenceFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,32 +40,10 @@ public class PerformanceSettingsFragment  extends PreferenceFragment implements 
 
         addPreferencesFromResource(R.xml.pref_performance);
 
-        findPreference(PreferenceNames.LOG_SATELLITE_LOCATIONS).setOnPreferenceChangeListener(this);
-        findPreference(PreferenceNames.LOG_NETWORK_LOCATIONS).setOnPreferenceChangeListener(this);
+
 
 
     }
 
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object o) {
-
-        if(preference.getKey().equals(PreferenceNames.LOG_SATELLITE_LOCATIONS)){
-            boolean newValue = Boolean.parseBoolean(o.toString());
-            if(!newValue){
-                PreferenceHelper.getInstance().setShouldLogNetworkLocations(true);
-                ((CustomSwitchPreference)findPreference(PreferenceNames.LOG_NETWORK_LOCATIONS)).setChecked(true);
-            }
-        }
-
-        if(preference.getKey().equals(PreferenceNames.LOG_NETWORK_LOCATIONS)){
-            boolean newValue = Boolean.parseBoolean(o.toString());
-            if(!newValue){
-                PreferenceHelper.getInstance().setShouldLogSatelliteLocations(true);
-                ((CustomSwitchPreference)findPreference(PreferenceNames.LOG_SATELLITE_LOCATIONS)).setChecked(true);
-            }
-        }
-
-        return true;
-    }
 }

@@ -644,7 +644,7 @@ public class GpsLoggingService extends Service  {
             return;
         }
 
-        if(!preferenceHelper.shouldLogNetworkLocations() && !preferenceHelper.shouldLogSatelliteLocations()){
+        if(!preferenceHelper.shouldLogNetworkLocations() && !preferenceHelper.shouldLogSatelliteLocations() && !preferenceHelper.shouldLogPassiveLocations()){
             LOG.error("No location provider selected!");
             session.setUsingGps(false);
             stopLogging();
