@@ -1180,7 +1180,7 @@ public class GpsMainActivity extends AppCompatActivity
     private void startAndBindService() {
         serviceIntent = new Intent(this, GpsLoggingService.class);
         // Start the service in case it isn't already running
-        ContextCompat.startForegroundService(getApplicationContext(), serviceIntent);
+        startService(serviceIntent);
 
         // Now bind to service
         bindService(serviceIntent, gpsServiceConnection, Context.BIND_AUTO_CREATE);
