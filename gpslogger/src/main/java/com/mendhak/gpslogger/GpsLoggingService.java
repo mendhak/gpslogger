@@ -593,14 +593,6 @@ public class GpsLoggingService extends Service  {
      */
     @SuppressWarnings("ResourceType")
     private void startGpsManager() {
-
-        //If the user has been still for more than the minimum seconds
-        if(userHasBeenStillForTooLong()) {
-            LOG.info("No movement detected in the past interval, will not log");
-            setAlarmForNextPoint();
-            return;
-        }
-
         if (gpsLocationListener == null) {
             gpsLocationListener = new GeneralLocationListener(this, "GPS");
         }
@@ -656,6 +648,7 @@ public class GpsLoggingService extends Service  {
 
     private boolean userHasBeenStillForTooLong() {
         return !session.hasDescription() && !session.isSinglePointMode() &&
+                preferenceHelper.shouldNotLogIfUserIsStill() &&
                 (session.getUserStillSinceTimeStamp() > 0 && (System.currentTimeMillis() - session.getUserStillSinceTimeStamp()) > (preferenceHelper.getMinimumLoggingInterval() * 1000));
     }
 
@@ -1103,21 +1096,26 @@ public class GpsLoggingService extends Service  {
 
         session.setLatestDetectedActivity(activityRecognitionEvent.result.getMostProbableActivity());
 
-        if(!preferenceHelper.shouldNotLogIfUserIsStill()){
+        if (!preferenceHelper.shouldNotLogIfUserIsStill()) {
             session.setUserStillSinceTimeStamp(0);
+            stopActivityRecognitionUpdates();
+            LOG.debug("User disabled activity checking, attempt to start GpsManager");
+            startGpsManager();
             return;
         }
 
-        if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.STILL){
+        if (activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.STILL) {
             LOG.debug(activityRecognitionEvent.result.getMostProbableActivity().toString());
-            if(session.getUserStillSinceTimeStamp() == 0){
-                LOG.debug("Just entered still state, attempt to log");
-                startGpsManager();
+            if (session.getUserStillSinceTimeStamp() == 0) {
+                LOG.debug("Just entered still state");
                 session.setUserStillSinceTimeStamp(System.currentTimeMillis());
             }
 
-        }
-        else {
+            if (userHasBeenStillForTooLong()) {
+                LOG.debug("User has been still for too long, stop GpsManager");
+                stopGpsManager();
+            }
+        } else {
             LOG.debug(activityRecognitionEvent.result.getMostProbableActivity().toString());
             //Reset the still-since timestamp
             session.setUserStillSinceTimeStamp(0);
