@@ -599,6 +599,9 @@ blockquote {
     font-size: 17.5px;
     border-left: 5px solid #eee
 }
+blockquote p {
+    line-height: 2.5;
+}
 blockquote p:last-child,
 blockquote ul:last-child,
 blockquote ol:last-child {

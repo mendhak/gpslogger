@@ -70,21 +70,7 @@
 </div></section>
 
 <section><div class='lead'><h2><a name="features" href="#features">Features</a></h2><blockquote>
-<p>Can log to <em>GPX, KML, CSV, NMEA and CSV</em> formats. Can also log to a custom URL or just the screen.  </p>
-<p>Logs GPX points as tracks and track segments </p>
-<p>Also logs <em>speed, direction and altitude</em> if available</p>
-<p><em>Add a description</em> to a point using the annotate menu, gets added as a waypoint</p>
-<p>Configure <em>time intervals</em> between points</p>
-<p>Configure a <em>minimum distance</em> filter between points or an accuracy filter</p>
-<p><em>Notification</em> icon with coordinates and quick actions</p>
-<p>Uses cell towers for location when GPS is disabled</p>
-<p>Selectively choose network, gps and passive <em>location providers</em></p>
-<p>Automatically <em>upload or email</em> the file at set intervals to destinations such as <em>Email, FTP, Dropbox, Google Docs, OpenStreetMap</em>.</p>
-<p>Share location or log files via SMS/Email (and other apps such as Facebook or Twitter depending on what you&#39;ve got installed)</p>
-<p>Start logging on phone bootup</p>
-<p>Invoke operations from Tasker or other automation apps.</p>
-<p>You can give it a <em>preset file</em> with your own values for distribution</p>
-<p><em>Multiple profiles</em> with different settings are possible</p>
+<p>Can log to <em>GPX, KML, CSV, NMEA and CSV</em> formats. Can also log to a custom URL or just the screen.<br>Logs GPX points as tracks and track segments<br>Also logs <em>speed, direction and altitude</em> if available<br><em>Add a description</em> to a point using the annotate menu, gets added as a waypoint<br>Configure <em>time intervals</em> between points<br>Configure a <em>minimum distance</em> filter between points or an accuracy filter<br><em>Notification</em> icon with coordinates and quick actions<br>Uses cell towers for location when GPS is disabled<br>Selectively choose network, gps and passive <em>location providers</em><br>Automatically <em>upload or email</em> the file at set intervals to destinations such as <em>Email, FTP, Dropbox, Google Docs, OpenStreetMap</em>.<br>Share location or log files via SMS/Email (and other apps such as Facebook or Twitter depending on what you&#39;ve got installed)<br>Start logging on phone bootup<br>Invoke operations from Tasker or other automation apps.<br>You can give it a <em>preset file</em> with your own values for distribution<br><em>Multiple profiles</em> with different settings are possible  </p>
 </blockquote>
 
 </div></section>
@@ -128,6 +114,8 @@
 <section><div class='lead'><h2><a name="whereisthefilebeingloggedhowdoigettoit" href="#whereisthefilebeingloggedhowdoigettoit">Where is the file being logged? How do I get to it?</a></h2><h2><a name="whatisthedefaultfolderpath" href="#whatisthedefaultfolderpath">What is the default folder path?</a></h2><p>Due to recent restrictions, the default GPSLogger folder is different per device. You can see it on the simple/detailed screens and it may be something like </p>
 <blockquote>
 <p>Example: <code>/storage/emulated/0/Android/data/com.mendhak.gpslogger/files/</code></p>
+</blockquote>
+<blockquote>
 <p>Example: <code>/sdcard/Android/data/com.mendhak.gpslogger/files/</code> </p>
 </blockquote>
 <p>The initial part will be different for your device. </p>
@@ -200,18 +188,7 @@ i.putExtra(&quot;immediatestart&quot;, true);
 sendBroadcast(i);
 </code></pre><p><strong>These are the extras you can send to GPSLogger</strong>:</p>
 <blockquote>
-<p><code>immediatestart</code> - (true/false) Start logging  </p>
-<p><code>immediatestop</code> - (true/false) Stop logging</p>
-<p><code>setnextpointdescription</code> - (text) Sets the annotation text to use for the next point logged</p>
-<p><code>settimebeforelogging</code> - (number) Sets preference for logging interval option  </p>
-<p><code>setdistancebeforelogging</code> - (number) Sets preference for distance before logging option</p>
-<p><code>setkeepbetweenfix</code> - (true/false) Sets preference whether to keep GPS on between fixes</p>
-<p><code>setretrytime</code> - (number) Sets preference for duration to match accuracy</p>
-<p><code>setabsolutetimeout</code> - (number) Sets preference for absolute timeout</p>
-<p><code>setprefercelltower</code> - (true/false) Enables or disables the GPS or celltower listeners</p>
-<p><code>logonce</code> - (true/false) Log a single point, then stop</p>
-<p><code>switchprofile</code> - (text) The name of the profile to switch to</p>
-<p><code>getstatus</code> - (true) Asks GPSLogger to send its current events broadcast</p>
+<p><code>immediatestart</code> - (true/false) Start logging<br><code>immediatestop</code> - (true/false) Stop logging<br><code>setnextpointdescription</code> - (text) Sets the annotation text to use for the next point logged<br><code>settimebeforelogging</code> - (number) Sets preference for logging interval option<br><code>setdistancebeforelogging</code> - (number) Sets preference for distance before logging option<br><code>setkeepbetweenfix</code> - (true/false) Sets preference whether to keep GPS on between fixes<br><code>setretrytime</code> - (number) Sets preference for duration to match accuracy<br><code>setabsolutetimeout</code> - (number) Sets preference for absolute timeout<br><code>setprefercelltower</code> - (true/false) Enables or disables the GPS or celltower listeners<br><code>logonce</code> - (true/false) Log a single point, then stop<br><code>switchprofile</code> - (text) The name of the profile to switch to<br><code>getstatus</code> - (true) Asks GPSLogger to send its current events broadcast  </p>
 </blockquote>
 <h3><a name="shortcuts" href="#shortcuts">Shortcuts</a></h3><p>The app comes with a Start and a Stop <strong>shortcut</strong> (long press home screen, add widget), you can invoke those from some automation apps.</p>
 <h3><a name="gpsloggereventsbroadcast" href="#gpsloggereventsbroadcast">GPSLogger Events Broadcast</a></h3><h3><a name="listeningtogpslogger" href="#listeningtogpslogger">Listening to GPSLogger</a></h3><p>(Experimental feature) GPSLogger sends a broadcast start/stop of logging, which you can receive as an event.</p>
