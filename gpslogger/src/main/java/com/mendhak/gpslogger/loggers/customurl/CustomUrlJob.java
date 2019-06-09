@@ -79,11 +79,11 @@ public class CustomUrlJob extends Job {
         Response response = okBuilder.build().newCall(request).execute();
 
         if (response.isSuccessful()) {
-            LOG.debug("Success - response code " + response);
+            LOG.debug("HTTP request complete with successful response code " + response);
             EventBus.getDefault().post(callbackEvent.succeeded());
         }
         else {
-            LOG.error("Unexpected response code " + response );
+            LOG.error("HTTP request complete with unexpected response code " + response );
             EventBus.getDefault().post(callbackEvent.failed("Unexpected code " + response,new Throwable(response.body().string())));
         }
 
@@ -93,17 +93,18 @@ public class CustomUrlJob extends Job {
     @Override
     protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
         EventBus.getDefault().post(callbackEvent.failed("Could not send to custom URL", throwable));
-        LOG.error("Could not send to custom URL", throwable);
+        LOG.error("Custom URL: maximum attempts failed, giving up", throwable);
     }
 
     @Override
     protected RetryConstraint shouldReRunOnThrowable(@NonNull Throwable throwable, int runCount, int maxRunCount) {
-        return RetryConstraint.createExponentialBackoff(runCount, 3000);
+        LOG.warn(String.format("Custom URL: attempt %d failed, maximum %d attempts", runCount, maxRunCount));
+        return RetryConstraint.createExponentialBackoff(runCount, 5000);
     }
 
 
     @Override
     protected int getRetryLimit() {
-        return 2;
+        return 5;
     }
 }
