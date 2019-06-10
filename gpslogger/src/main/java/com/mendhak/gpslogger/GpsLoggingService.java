@@ -795,14 +795,14 @@ public class GpsLoggingService extends Service  {
         LOG.debug("Has description? " + session.hasDescription() + ", Single point? " + session.isSinglePointMode() + ", Last timestamp: " + session.getLatestTimeStamp());
 
         // Don't log a point until the user-defined time has elapsed
-        // However, if user has set an annotation, just log the point, disregard any filters
+        // However, if user has set an annotation, just log the point, disregard time and distance filters
         // However, if it's a passive location, disregard the time filter
         if (!isPassiveLocation && !session.hasDescription() && !session.isSinglePointMode() && (currentTimeStamp - session.getLatestTimeStamp()) < (preferenceHelper.getMinimumLoggingInterval() * 1000)) {
             return;
         }
 
         //Don't log a point if user has been still
-        // However, if user has set an annotation, just log the point, disregard any filters
+        // However, if user has set an annotation, just log the point, disregard time and distance filters
         if(userHasBeenStillForTooLong()) {
             LOG.info("Received location but the user hasn't moved, ignoring");
             return;
@@ -835,8 +835,8 @@ public class GpsLoggingService extends Service  {
         }
 
         // Don't do anything until the user-defined accuracy is reached
-        // However, if user has set an annotation, just log the point, disregard any filters
-        if (!session.hasDescription() &&  preferenceHelper.getMinimumAccuracy() > 0) {
+        // even for annotations
+        if (preferenceHelper.getMinimumAccuracy() > 0) {
 
             if(!loc.hasAccuracy() || loc.getAccuracy() == 0){
                 return;
@@ -870,7 +870,7 @@ public class GpsLoggingService extends Service  {
         }
 
         //Don't do anything until the user-defined distance has been traversed
-        // However, if user has set an annotation, just log the point, disregard any filters
+        // However, if user has set an annotation, just log the point, disregard time and distance filters
         // However, if it's a passive location, ignore distance filter.
         if (!isPassiveLocation && !session.hasDescription() && !session.isSinglePointMode() && preferenceHelper.getMinimumDistanceInterval() > 0 && session.hasValidLocation()) {
 
