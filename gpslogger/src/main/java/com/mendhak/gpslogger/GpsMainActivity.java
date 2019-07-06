@@ -28,10 +28,8 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.*;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -42,7 +40,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.*;
@@ -81,13 +78,11 @@ import okhttp3.Response;
 
 import org.slf4j.Logger;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.*;
 
@@ -421,7 +416,7 @@ public class GpsMainActivity extends AppCompatActivity
                                         @Override
                                         public void onInput(@NonNull MaterialDialog materialDialog, CharSequence charSequence) {
 
-                                            EventBus.getDefault().post(new ProfileEvents.DownloadProfileFromUrl(charSequence.toString()));
+                                            EventBus.getDefault().post(new ProfileEvents.DownloadProfile(charSequence.toString()));
 
                                         }
                                     })
@@ -1367,19 +1362,35 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
     @EventBusHook
-    public void onEventBackgroundThread(ProfileEvents.DownloadProfileFromUrl downloadProfileEvent){
+    public void onEventMainThread(ProfileEvents.PopulateProfiles populateProfileEvent){
+        populateProfilesList();
+    }
+
+    @EventBusHook
+    public void onEventBackgroundThread(ProfileEvents.DownloadProfile downloadProfileEvent){
 
         LOG.debug("Downloading profile from URL: " + downloadProfileEvent.profileUrl);
+        Dialogs.progress(GpsMainActivity.this,getString(R.string.please_wait),getString(R.string.please_wait));
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("http://mendhak.com/test.properties").build();
         try {
             Response response = client.newCall(request).execute();
-            InputStream inputStream = response.body().byteStream();
 
-            File destFile =  new File(Files.storageFolder(getApplicationContext()) + "/test.properties");
-            OutputStream outputStream = new FileOutputStream(destFile);
-            Streams.copyIntoStream(inputStream, outputStream);
-            response.body().close();
+            if(response.isSuccessful()){
+                InputStream inputStream = response.body().byteStream();
+
+                File destFile =  new File(Files.storageFolder(getApplicationContext()) + "/test.properties");
+                OutputStream outputStream = new FileOutputStream(destFile);
+                Streams.copyIntoStream(inputStream, outputStream);
+                response.body().close();
+
+                EventBus.getDefault().post(new ProfileEvents.SwitchToProfile("test"));
+                EventBus.getDefault().post(new ProfileEvents.PopulateProfiles());
+                Dialogs.hideProgress();
+
+            }
+
+
 
         } catch (IOException e) {
             LOG.error("Could not download properties file", e);

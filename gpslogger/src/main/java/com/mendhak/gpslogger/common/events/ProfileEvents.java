@@ -45,9 +45,16 @@ public class ProfileEvents {
     /**
      * Requests a .properties file download, profile creation and switching to new profile
      */
-    public static class DownloadProfileFromUrl{
+    public static class DownloadProfile {
         public String profileUrl;
-        public DownloadProfileFromUrl(String profileUrl) { this.profileUrl = profileUrl; }
+        public DownloadProfile(String profileUrl) { this.profileUrl = profileUrl; }
+    }
+
+    /**
+     * Requests the profiles list navigation drawer be repopulated
+     */
+    public static class PopulateProfiles{
+        public PopulateProfiles(){}
     }
 
     /**
