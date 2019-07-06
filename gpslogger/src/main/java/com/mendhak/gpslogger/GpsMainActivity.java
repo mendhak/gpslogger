@@ -1373,11 +1373,12 @@ public class GpsMainActivity extends AppCompatActivity
 
         LOG.debug("Downloading profile from URL: " + downloadProfileEvent.profileUrl);
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url("http://mendhak.com/test.properties").build();
+        Request request = new Request.Builder().url(downloadProfileEvent.profileUrl).build();
         try {
             Response response = client.newCall(request).execute();
 
             if(response.isSuccessful()){
+                LOG.debug("Response successful");
                 InputStream inputStream = response.body().byteStream();
 
                 File destFile =  new File(Files.storageFolder(getApplicationContext()) + "/test.properties");
@@ -1385,6 +1386,7 @@ public class GpsMainActivity extends AppCompatActivity
                 Streams.copyIntoStream(inputStream, outputStream);
                 response.body().close();
 
+                LOG.debug("Posting to other events");
                 EventBus.getDefault().post(new ProfileEvents.SwitchToProfile("test"));
                 EventBus.getDefault().post(new ProfileEvents.PopulateProfiles());
                 Dialogs.hideProgress();

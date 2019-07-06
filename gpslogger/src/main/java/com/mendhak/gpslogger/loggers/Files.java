@@ -160,4 +160,19 @@ public class Files {
         // This guesswork tries to determine whether file exists in a few different ways.
         return gpxFile.isFile() || gpxFile.getAbsoluteFile().exists() || gpxFile.getAbsoluteFile().isFile();
     }
+
+    public static void copyFile(File sourceLocation, File targetLocation)
+            throws FileNotFoundException, IOException {
+        InputStream in = new FileInputStream(sourceLocation);
+        OutputStream out = new FileOutputStream(targetLocation);
+
+        // Copy the bits from instream to outstream
+        byte[] buf = new byte[1024];
+        int len;
+        while ((len = in.read(buf)) > 0) {
+            out.write(buf, 0, len);
+        }
+        in.close();
+        out.close();
+    }
 }
