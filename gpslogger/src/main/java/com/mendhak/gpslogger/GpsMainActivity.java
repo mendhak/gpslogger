@@ -417,6 +417,7 @@ public class GpsMainActivity extends AppCompatActivity
                                         public void onInput(@NonNull MaterialDialog materialDialog, CharSequence charSequence) {
 
                                             EventBus.getDefault().post(new ProfileEvents.DownloadProfile(charSequence.toString()));
+                                            Dialogs.progress(GpsMainActivity.this,getString(R.string.please_wait),getString(R.string.please_wait));
 
                                         }
                                     })
@@ -581,14 +582,14 @@ public class GpsMainActivity extends AppCompatActivity
                         .withTextColorRes(R.color.primaryColorText)
                 ,
                 new ProfileSettingDrawerItem()
-                        .withIcon(android.R.drawable.ic_menu_add)
+                        .withIcon(R.drawable.library_plus)
                         .withIdentifier(101)
                         .withName(getString(R.string.profile_add_new))
                         .withTag("PROFILE_ADD")
                         .withTextColorRes(R.color.primaryColorText)
                 ,
                 new ProfileSettingDrawerItem()
-                        .withIcon(R.drawable.upload)
+                        .withIcon(R.drawable.download_outline)
                         .withIdentifier(102)
                         .withName("From URL")
                         .withTag("PROFILE_URL")
@@ -1370,7 +1371,6 @@ public class GpsMainActivity extends AppCompatActivity
     public void onEventBackgroundThread(ProfileEvents.DownloadProfile downloadProfileEvent){
 
         LOG.debug("Downloading profile from URL: " + downloadProfileEvent.profileUrl);
-        Dialogs.progress(GpsMainActivity.this,getString(R.string.please_wait),getString(R.string.please_wait));
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("http://mendhak.com/test.properties").build();
         try {
