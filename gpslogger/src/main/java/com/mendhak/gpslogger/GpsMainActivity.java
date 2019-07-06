@@ -293,6 +293,7 @@ public class GpsMainActivity extends AppCompatActivity
         }
 
         try {
+            LOG.warn("gpslogger.properties found, setting app preferences");
             preferenceHelper.setPreferenceFromPropertiesFile(file);
         } catch (Exception e) {
             LOG.error("Could not load preset properties", e);
