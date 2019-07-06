@@ -59,6 +59,7 @@ import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import com.mendhak.gpslogger.loggers.Files;
+import com.mendhak.gpslogger.loggers.Streams;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.ui.Dialogs;
@@ -74,11 +75,20 @@ import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import de.greenrobot.event.EventBus;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 import org.slf4j.Logger;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.*;
 
 public class GpsMainActivity extends AppCompatActivity
@@ -402,6 +412,23 @@ public class GpsMainActivity extends AppCompatActivity
                             return true;
                         }
 
+                        if (profile.getIdentifier() == 102) {
+                            new MaterialDialog.Builder(GpsMainActivity.this)
+                                    .title("Properties file URL")
+                                    .inputType(InputType.TYPE_CLASS_TEXT)
+                                    .negativeText(R.string.cancel)
+                                    .input("", "", false, new MaterialDialog.InputCallback() {
+                                        @Override
+                                        public void onInput(@NonNull MaterialDialog materialDialog, CharSequence charSequence) {
+
+                                            EventBus.getDefault().post(new ProfileEvents.DownloadProfileFromUrl(charSequence.toString()));
+
+                                        }
+                                    })
+                                    .show();
+                            return true;
+                        }
+
                         //Clicked on profile name
                         String newProfileName = profile.getName().getText();
                         EventBus.getDefault().post(new ProfileEvents.SwitchToProfile(newProfileName));
@@ -563,6 +590,13 @@ public class GpsMainActivity extends AppCompatActivity
                         .withIdentifier(101)
                         .withName(getString(R.string.profile_add_new))
                         .withTag("PROFILE_ADD")
+                        .withTextColorRes(R.color.primaryColorText)
+                ,
+                new ProfileSettingDrawerItem()
+                        .withIcon(R.drawable.upload)
+                        .withIdentifier(102)
+                        .withName("From URL")
+                        .withTag("PROFILE_URL")
                         .withTextColorRes(R.color.primaryColorText)
 
         );
@@ -1329,6 +1363,28 @@ public class GpsMainActivity extends AppCompatActivity
         } catch (IOException e) {
             LOG.error("Could not create properties file for new profile ", e);
         }
+
+    }
+
+    @EventBusHook
+    public void onEventBackgroundThread(ProfileEvents.DownloadProfileFromUrl downloadProfileEvent){
+
+        LOG.debug("Downloading profile from URL: " + downloadProfileEvent.profileUrl);
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url("http://mendhak.com/test.properties").build();
+        try {
+            Response response = client.newCall(request).execute();
+            InputStream inputStream = response.body().byteStream();
+
+            File destFile =  new File(Files.storageFolder(getApplicationContext()) + "/test.properties");
+            OutputStream outputStream = new FileOutputStream(destFile);
+            Streams.copyIntoStream(inputStream, outputStream);
+            response.body().close();
+
+        } catch (IOException e) {
+            LOG.error("Could not download properties file", e);
+        }
+
 
     }
 

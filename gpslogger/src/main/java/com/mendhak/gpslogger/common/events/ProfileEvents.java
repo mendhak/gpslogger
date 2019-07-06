@@ -43,6 +43,14 @@ public class ProfileEvents {
     }
 
     /**
+     * Requests a .properties file download, profile creation and switching to new profile
+     */
+    public static class DownloadProfileFromUrl{
+        public String profileUrl;
+        public DownloadProfileFromUrl(String profileUrl) { this.profileUrl = profileUrl; }
+    }
+
+    /**
      * Requests deletion of this profile
      */
     public static class DeleteProfile {
