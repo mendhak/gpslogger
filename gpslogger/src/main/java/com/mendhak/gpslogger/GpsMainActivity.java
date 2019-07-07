@@ -401,7 +401,7 @@ public class GpsMainActivity extends AppCompatActivity
 
                         if (profile.getIdentifier() == 102) {
                             new MaterialDialog.Builder(GpsMainActivity.this)
-                                    .title("Properties file URL")
+                                    .title(getString(R.string.properties_file_url))
                                     .inputType(InputType.TYPE_CLASS_TEXT)
                                     .negativeText(R.string.cancel)
                                     .input("", "", false, new MaterialDialog.InputCallback() {
@@ -589,7 +589,7 @@ public class GpsMainActivity extends AppCompatActivity
                 new ProfileSettingDrawerItem()
                         .withIcon(R.drawable.link_plus)
                         .withIdentifier(102)
-                        .withName("From URL")
+                        .withName(getString(R.string.profile_add_from_url))
                         .withTag("PROFILE_URL")
                         .withTextColorRes(R.color.primaryColorText)
                 ,

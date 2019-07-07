@@ -423,6 +423,8 @@
     <string name="logview_showlocationsonly">Locations only</string>
     <string name="logview_autoscroll">Auto Scroll</string>
     <string name="profile_create_new">Create new profile</string>
+    <string name="profile_add_from_url">From URL</string>
+    <string name="properties_file_url">Properties file URL</string>
     <string name="profile_switch_before_delete">Please switch to another profile before deleting this one.</string>
     <string name="profile_delete">Delete profile?</string>
     <string name="profile_default">Default Profile</string>
@@ -454,5 +456,6 @@
     <string name="customurl_http_method">HTTP Method</string>
     <string name="customurl_http_basicauthentication">Basic Authentication</string>
     <string name="hide_notification_from_status_bar_disallowed">Hiding notification is disallowed in Android Oreo onwards</string>
+
 
 </resources>
