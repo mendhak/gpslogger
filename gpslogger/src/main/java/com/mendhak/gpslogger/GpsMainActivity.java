@@ -1366,6 +1366,7 @@ public class GpsMainActivity extends AppCompatActivity
     @EventBusHook
     public void onEventMainThread(ProfileEvents.PopulateProfiles populateProfileEvent){
         populateProfilesList();
+        Dialogs.hideProgress();
     }
 
     @EventBusHook
@@ -1381,7 +1382,6 @@ public class GpsMainActivity extends AppCompatActivity
             LOG.debug("Posting to other events");
             EventBus.getDefault().post(new ProfileEvents.SwitchToProfile("test"));
             EventBus.getDefault().post(new ProfileEvents.PopulateProfiles());
-            Dialogs.hideProgress();
 
 
         } catch (IOException e) {
