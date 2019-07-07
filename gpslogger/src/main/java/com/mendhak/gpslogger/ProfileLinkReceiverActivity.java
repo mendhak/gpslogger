@@ -27,12 +27,12 @@ public class ProfileLinkReceiverActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        final Uri data = intent.getData();
+        final String propertiesUrl = intent.getDataString().replace("gpslogger://properties/","");
 
-        LOG.info("Received a gpslogger properties file URL to be handled. " + data.toString());
+        LOG.info("Received a gpslogger properties file URL to be handled. " + propertiesUrl);
 
         Dialogs.progress(ProfileLinkReceiverActivity.this,getString(R.string.please_wait),getString(R.string.please_wait));
-        new Thread(new DownloadProfileRunner(data.toString())).start();
+        new Thread(new DownloadProfileRunner(propertiesUrl)).start();
 
     }
 
@@ -63,12 +63,21 @@ public class ProfileLinkReceiverActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), GpsMainActivity.class);
                         startActivity(intent);
 
-                        finish();
+
                     }
                 });
 
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 LOG.error("Could not download properties file", e);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Dialogs.hideProgress();
+
+                        Dialogs.error(getString(R.string.error), e.getMessage(),e.getMessage(),e, ProfileLinkReceiverActivity.this);
+                    }
+                });
+
             }
         }
 
