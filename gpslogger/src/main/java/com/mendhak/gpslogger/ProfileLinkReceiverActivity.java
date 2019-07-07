@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mendhak.gpslogger.common.IntentConstants;
@@ -51,6 +52,22 @@ public class ProfileLinkReceiverActivity extends AppCompatActivity {
 
     }
 
+    Runnable afterDownload = new Runnable() {
+        @Override
+        public void run() {
+            Dialogs.hideProgress();
+
+            Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
+            serviceIntent.putExtra(IntentConstants.SWITCH_PROFILE, "test");
+            ContextCompat.startForegroundService(getApplicationContext(),  serviceIntent);
+
+            Intent intent = new Intent(getApplicationContext(), GpsMainActivity.class);
+            startActivity(intent);
+
+            finish();
+        }
+    };
+
 
     private class DownloadProfileRunner implements Runnable{
 
@@ -78,22 +95,15 @@ public class ProfileLinkReceiverActivity extends AppCompatActivity {
                     response.body().close();
                     LOG.debug("Wrote to file");
 
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Dialogs.hideProgress();
-                            Intent intent = new Intent(getApplicationContext(), GpsMainActivity.class);
-                            intent.putExtra(IntentConstants.SWITCH_PROFILE, "test");
-                            startActivity(intent);
-                            finish();
-                        }
-                    });
+                    handler.post(afterDownload);
                 }
 
             } catch (IOException e) {
                 LOG.error("Could not download properties file", e);
             }
         }
+
+
     }
 
 

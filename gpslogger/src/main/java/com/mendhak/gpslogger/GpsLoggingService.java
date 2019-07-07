@@ -1148,6 +1148,7 @@ public class GpsLoggingService extends Service  {
 
             //Switch current profile name
             preferenceHelper.setCurrentProfileName(switchToProfileEvent.newProfileName);
+            LOG.info("Switched to profile: " + switchToProfileEvent.newProfileName);
 
         } catch (IOException e) {
             LOG.error("Could not save profile to file", e);
