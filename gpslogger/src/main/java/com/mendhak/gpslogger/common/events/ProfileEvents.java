@@ -66,4 +66,9 @@ public class ProfileEvents {
             this.profileName = profileNameToDelete;
         }
     }
+
+    /**
+     * Requests saving the profile file
+     */
+    public static class SaveProfile { }
 }

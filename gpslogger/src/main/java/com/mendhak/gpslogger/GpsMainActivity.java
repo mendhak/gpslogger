@@ -417,6 +417,12 @@ public class GpsMainActivity extends AppCompatActivity
                             return true;
                         }
 
+                        if (profile.getIdentifier() == 103) {
+                            EventBus.getDefault().post(new ProfileEvents.SaveProfile());
+                            return true;
+                        }
+
+
                         //Clicked on profile name
                         String newProfileName = profile.getName().getText();
                         EventBus.getDefault().post(new ProfileEvents.SwitchToProfile(newProfileName));
@@ -581,10 +587,17 @@ public class GpsMainActivity extends AppCompatActivity
                         .withTextColorRes(R.color.primaryColorText)
                 ,
                 new ProfileSettingDrawerItem()
-                        .withIcon(R.drawable.download_outline)
+                        .withIcon(R.drawable.link_plus)
                         .withIdentifier(102)
                         .withName("From URL")
                         .withTag("PROFILE_URL")
+                        .withTextColorRes(R.color.primaryColorText)
+                ,
+                new ProfileSettingDrawerItem()
+                        .withIcon(R.drawable.download_outline)
+                        .withIdentifier(103)
+                        .withName(getString(R.string.save))
+                        .withTag("PROFILE_SAVE")
                         .withTextColorRes(R.color.primaryColorText)
 
         );
@@ -1389,5 +1402,26 @@ public class GpsMainActivity extends AppCompatActivity
         f.delete();
 
         populateProfilesList();
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ProfileEvents.SaveProfile saveProfileEvent){
+
+        Dialogs.progress(GpsMainActivity.this, getString(R.string.please_wait), getString(R.string.please_wait));
+        File f = new File(Files.storageFolder(GpsMainActivity.this), preferenceHelper.getCurrentProfileName()+".properties");
+        try {
+            preferenceHelper.savePropertiesFromPreferences(f);
+        } catch (Exception e) {
+            Dialogs.error(getString(R.string.error), e.getMessage(), e.getMessage(), e, this);
+            LOG.error("Could not save profile to file", e);
+        }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Dialogs.hideProgress();
+            }
+        },800);
+
     }
 }
