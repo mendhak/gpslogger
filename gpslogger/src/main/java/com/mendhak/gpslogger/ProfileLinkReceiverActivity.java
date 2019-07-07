@@ -1,35 +1,20 @@
 package com.mendhak.gpslogger;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-
 import com.mendhak.gpslogger.common.IntentConstants;
-import com.mendhak.gpslogger.common.events.ProfileEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
-import com.mendhak.gpslogger.loggers.Streams;
 import com.mendhak.gpslogger.ui.Dialogs;
-
 import org.slf4j.Logger;
-
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.concurrent.ExecutionException;
 
-import de.greenrobot.event.EventBus;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class ProfileLinkReceiverActivity extends AppCompatActivity {
 
@@ -42,7 +27,6 @@ public class ProfileLinkReceiverActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String action = intent.getAction();
         final Uri data = intent.getData();
 
         LOG.info("Received a gpslogger properties file URL to be handled. " + data.toString());
