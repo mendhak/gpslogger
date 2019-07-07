@@ -1130,15 +1130,16 @@ public class GpsLoggingService extends Service  {
     public void onEvent(ProfileEvents.SwitchToProfile switchToProfileEvent){
         try {
 
-            if(preferenceHelper.getCurrentProfileName().equals(switchToProfileEvent.newProfileName)){
-                return;
-            }
+            boolean isCurrentProfile = preferenceHelper.getCurrentProfileName().equals(switchToProfileEvent.newProfileName);
 
             LOG.debug("Switching to profile: " + switchToProfileEvent.newProfileName);
 
-            //Save the current settings to a file (overwrite)
-            File f = new File(Files.storageFolder(GpsLoggingService.this), preferenceHelper.getCurrentProfileName()+".properties");
-            preferenceHelper.savePropertiesFromPreferences(f);
+            if(!isCurrentProfile){
+                //Save the current settings to a file (overwrite)
+                File f = new File(Files.storageFolder(GpsLoggingService.this), preferenceHelper.getCurrentProfileName()+".properties");
+                preferenceHelper.savePropertiesFromPreferences(f);
+            }
+
 
             //Read from a possibly existing file and load those preferences in
             File newProfile = new File(Files.storageFolder(GpsLoggingService.this), switchToProfileEvent.newProfileName+".properties");
