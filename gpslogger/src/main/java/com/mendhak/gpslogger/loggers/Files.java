@@ -22,8 +22,11 @@ package com.mendhak.gpslogger.loggers;
 
 import android.content.Context;
 import android.media.MediaScannerConnection;
+import android.net.Uri;
+
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 
 import org.slf4j.Logger;
@@ -204,6 +207,28 @@ public class Files {
 
         }
 
+
+    }
+
+    public static String getBaseName(String url) {
+        return getBaseName(Uri.parse(url));
+    }
+
+    public static String getBaseName(Uri data) {
+        if(data == null || Strings.isNullOrEmpty(data.toString()))
+        {
+            return "";
+        }
+
+        String baseFileName = data.getLastPathSegment();
+        int pos = baseFileName.lastIndexOf(".");
+        if (pos > 0 && pos < (baseFileName.length() - 1)) {
+            baseFileName = baseFileName.substring(0, pos);
+        }
+
+
+
+        return baseFileName;
 
     }
 }

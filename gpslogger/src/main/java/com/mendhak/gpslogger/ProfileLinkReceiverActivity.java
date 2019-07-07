@@ -52,23 +52,6 @@ public class ProfileLinkReceiverActivity extends AppCompatActivity {
 
     }
 
-    Runnable afterDownload = new Runnable() {
-        @Override
-        public void run() {
-            Dialogs.hideProgress();
-
-            Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
-            serviceIntent.putExtra(IntentConstants.SWITCH_PROFILE, "test");
-            ContextCompat.startForegroundService(getApplicationContext(),  serviceIntent);
-
-            Intent intent = new Intent(getApplicationContext(), GpsMainActivity.class);
-            startActivity(intent);
-
-            finish();
-        }
-    };
-
-
     private class DownloadProfileRunner implements Runnable{
 
         private String url;
@@ -81,9 +64,24 @@ public class ProfileLinkReceiverActivity extends AppCompatActivity {
         public void run() {
 
             try {
-                File destFile =  new File(Files.storageFolder(getApplicationContext()) + "/test.properties");
+                final String profileName = Files.getBaseName(url);
+                File destFile =  new File(Files.storageFolder(getApplicationContext()) + "/" + profileName + ".properties");
                 Files.DownloadFromUrl(url, destFile);
-                handler.post(afterDownload);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Dialogs.hideProgress();
+
+                        Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
+                        serviceIntent.putExtra(IntentConstants.SWITCH_PROFILE, profileName);
+                        ContextCompat.startForegroundService(getApplicationContext(),  serviceIntent);
+
+                        Intent intent = new Intent(getApplicationContext(), GpsMainActivity.class);
+                        startActivity(intent);
+
+                        finish();
+                    }
+                });
 
             } catch (IOException e) {
                 LOG.error("Could not download properties file", e);
