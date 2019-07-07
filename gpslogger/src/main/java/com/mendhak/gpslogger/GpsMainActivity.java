@@ -1372,27 +1372,16 @@ public class GpsMainActivity extends AppCompatActivity
     public void onEventBackgroundThread(ProfileEvents.DownloadProfile downloadProfileEvent){
 
         LOG.debug("Downloading profile from URL: " + downloadProfileEvent.profileUrl);
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(downloadProfileEvent.profileUrl).build();
+
         try {
-            Response response = client.newCall(request).execute();
 
-            if(response.isSuccessful()){
-                LOG.debug("Response successful");
-                InputStream inputStream = response.body().byteStream();
+            File destFile =  new File(Files.storageFolder(getApplicationContext()) + "/test.properties");
+            Files.DownloadFromUrl(downloadProfileEvent.profileUrl, destFile);
 
-                File destFile =  new File(Files.storageFolder(getApplicationContext()) + "/test.properties");
-                OutputStream outputStream = new FileOutputStream(destFile);
-                Streams.copyIntoStream(inputStream, outputStream);
-                response.body().close();
-
-                LOG.debug("Posting to other events");
-                EventBus.getDefault().post(new ProfileEvents.SwitchToProfile("test"));
-                EventBus.getDefault().post(new ProfileEvents.PopulateProfiles());
-                Dialogs.hideProgress();
-
-            }
-
+            LOG.debug("Posting to other events");
+            EventBus.getDefault().post(new ProfileEvents.SwitchToProfile("test"));
+            EventBus.getDefault().post(new ProfileEvents.PopulateProfiles());
+            Dialogs.hideProgress();
 
 
         } catch (IOException e) {

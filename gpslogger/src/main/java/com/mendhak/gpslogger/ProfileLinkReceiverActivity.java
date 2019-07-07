@@ -79,30 +79,16 @@ public class ProfileLinkReceiverActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            LOG.debug("Runnable...");
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder().url(url).build();
+
             try {
-                Response response = client.newCall(request).execute();
-
-                if(response.isSuccessful()){
-                    LOG.debug("Response successful");
-                    InputStream inputStream = response.body().byteStream();
-
-                    File destFile =  new File(Files.storageFolder(getApplicationContext()) + "/test.properties");
-                    OutputStream outputStream = new FileOutputStream(destFile);
-                    Streams.copyIntoStream(inputStream, outputStream);
-                    response.body().close();
-                    LOG.debug("Wrote to file");
-
-                    handler.post(afterDownload);
-                }
+                File destFile =  new File(Files.storageFolder(getApplicationContext()) + "/test.properties");
+                Files.DownloadFromUrl(url, destFile);
+                handler.post(afterDownload);
 
             } catch (IOException e) {
                 LOG.error("Could not download properties file", e);
             }
         }
-
 
     }
 

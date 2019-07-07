@@ -24,10 +24,20 @@ import android.content.Context;
 import android.media.MediaScannerConnection;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.slf4j.Logs;
+
+import org.slf4j.Logger;
 
 import java.io.*;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class Files {
+
+    private static final Logger LOG = Logs.of(Files.class);
+
     /**
      * Gets the GPSLogger-specific MIME type to use for a given filename/extension
      *
@@ -174,5 +184,26 @@ public class Files {
         }
         in.close();
         out.close();
+    }
+
+    public static void DownloadFromUrl(String url, File destination) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(url).build();
+
+        Response response = client.newCall(request).execute();
+
+        if(response.isSuccessful()){
+            LOG.debug("Response successful");
+            InputStream inputStream = response.body().byteStream();
+
+
+            OutputStream outputStream = new FileOutputStream(destination);
+            Streams.copyIntoStream(inputStream, outputStream);
+            response.body().close();
+            LOG.debug("Wrote to properties file");
+
+        }
+
+
     }
 }
