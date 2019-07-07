@@ -1366,12 +1366,12 @@ public class GpsMainActivity extends AppCompatActivity
         LOG.debug("Downloading profile from URL: " + downloadProfileEvent.profileUrl);
 
         try {
-
-            File destFile =  new File(Files.storageFolder(getApplicationContext()) + "/test.properties");
+            final String profileName = Files.getBaseName(downloadProfileEvent.profileUrl);
+            File destFile =  new File(Files.storageFolder(getApplicationContext()) + "/" + profileName + ".properties");
             Files.DownloadFromUrl(downloadProfileEvent.profileUrl, destFile);
 
             LOG.debug("Posting to other events");
-            EventBus.getDefault().post(new ProfileEvents.SwitchToProfile("test"));
+            EventBus.getDefault().post(new ProfileEvents.SwitchToProfile(profileName));
             EventBus.getDefault().post(new ProfileEvents.PopulateProfiles());
 
 
