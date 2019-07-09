@@ -206,13 +206,6 @@ sendBroadcast(i);
 
 </div></section>
 
-<section><div class='lead'><h2><a name="howcanidefineapresetfilewithmyownvalues" href="#howcanidefineapresetfilewithmyownvalues">How can I define a preset file with my own values?</a></h2><p>Many people actually distribute GPSLogger to colleagues preinstalled on phones, with some preset values. </p>
-<p>If you create a file in the default folder or at <code>/sdcard/gpslogger.properties</code>, then GPSLogger will read this file each time it loads and apply those settings to the application. </p>
-<p>For example, in the file you can put <code>accuracy_before_logging=42</code> and that will reset the <em>Accuracy Filter</em> to 42 meters each time the application starts. There are many properties that can be applied and you can glean a <a href="https://github.com/mendhak/gpslogger/blob/master/gpslogger/src/main/java/com/mendhak/gpslogger/common/PreferenceNames.java">full list here</a>.</p>
-<p>The most common examples of properties would be <code>log_gpx</code>, <code>log_kml</code>, <code>time_before_logging</code>, <code>opengts_*</code> for OpenGTS settings, <code>smtp_*</code> for email settings.</p>
-
-</div></section>
-
 <section><div class='lead'><h2><a name="usingthecustomurlfeature" href="#usingthecustomurlfeature">Using the Custom URL feature</a></h2><p>The Custom URL feature allows you to log GPS points to a public URL.  This can be a third party API that accepts <code>GET</code> requests, or an application that you&#39;ve written and are hosting on your own server.</p>
 <pre><code>https://myserver.com/log?lat=%LAT&amp;long=%LON...
 </code></pre><p>If your phone goes <strong>offline</strong>, then the app will queue these requests until a data connection becomes available.     </p>
@@ -252,11 +245,47 @@ sendBroadcast(i);
 
 </div></section>
 
-<section><div class='lead'><h2><a name="whatareprofiles" href="#whatareprofiles">What are profiles?</a></h2><p><img src="images/19profiles.gif" alt="profilesdemo"></p>
-<p>Profiles are basically different settings, grouped under a name. For example you can have a <em>night</em> profile and a <em>trekking</em> profile with different logging frequencies, and switch between the two when you need to.</p>
+<section><div class='lead'><h2><a name="whatareprofiles" href="#whatareprofiles">What are profiles?</a></h2><p>Profiles are basically different settings, grouped under a name. For example you can have a <em>night</em> profile and a <em>trekking</em> profile with different logging frequencies, and switch between the two when you need to.</p>
+<h2><a name="addanddeleteprofiles" href="#addanddeleteprofiles">Add and Delete Profiles</a></h2><p><img src="images/19profiles.gif" alt="profilesdemo"></p>
 <p>Tap the profile header and then &quot;Add profile&quot; to create a new profile. The new profile will have the same settings as the one you&#39;re currently on.  You can then modify a few settings and those should be specific to your new profile.</p>
 <p>Conversely, any settings you change in one profile won&#39;t automatically be saved in other <em>existing</em> profiles.  It is recommended that you do your basic setup in the <em>Default Profile</em> first.  </p>
 <p>You can delete a profile by long pressing it.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="saveyourcurrentsettingsasaprofile" href="#saveyourcurrentsettingsasaprofile">Save your current settings as a profile</a></h2><p>Tap the profile header and then &quot;Save&quot; - this will save your current settings to a <code>.properties</code> file in your current GPSLogger directory. The file is named after your profile name.  For example, a profile named <code>xyz</code> after being saved will result in <code>xyz.properties</code></p>
+<p>You can copy this file or export it via the main share menu. </p>
+<p>Also note - the current profile&#39;s settings are automatically saved whenever you switch between profiles.</p>
+<h3><a name="creatingaprofilemanually" href="#creatingaprofilemanually">Creating a profile manually</a></h3><p>You can create your own <code>.properties</code> file and put your key value pairs in it. </p>
+<p>For example, in the file you can put <code>accuracy_before_logging=42</code> and that will reset the <em>Accuracy Filter</em> to 42 meters each time the application starts. There are many properties that can be applied and you can glean a <a href="https://github.com/mendhak/gpslogger/blob/master/gpslogger/src/main/java/com/mendhak/gpslogger/common/PreferenceNames.java">full list here</a>.</p>
+<p>The most common examples of properties would be <code>log_gpx</code>, <code>log_kml</code>, <code>time_before_logging</code>, <code>opengts_*</code> for OpenGTS settings, <code>smtp_*</code> for email settings.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="loadprofilesbyclickingalink" href="#loadprofilesbyclickingalink">Load Profiles by clicking a link</a></h2><p> <img src="images/19a_from_link_2.gif" alt="profilesdemo"></p>
+<p> You can also load a profile in GPSLogger by clicking a link on a web page.  This is also an easy way to provide your users or yourself with a preset profile - all they need to do is click a link on a page, no typing or pasting.</p>
+<p> Create a <code>.properties</code> file with your settings in it - see <a href="#saveyourcurrentsettingsasaprofile">instructions</a>.  Host it at an accessible URL, self signed URLs will not work here.</p>
+<p> You will then need to host a web page with a hyperlink to that file in it, with this structure. </p>
+<pre><code> &lt;a href=&quot;gpslogger://properties/https://www.mendhak.com/test.properties&quot;&gt;Download this profile&lt;/a&gt;
+</code></pre><p>Basically <code>gpslogger://properties/</code> followed by the actual URL of your <code>.properties</code> file. </p>
+<p>Due to deficiencies in the Chrome browser, this needs to be a hyperlink on a webpage.  The link must be clicked in a browser (Firefox, Chrome) on their Android device.     </p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="loadprofilesfromaurl" href="#loadprofilesfromaurl">Load Profiles from a URL</a></h2><p><img src="images/19a_from_url_2.gif" alt="profilesdemo"></p>
+<p>You can load a profile with your settings from a URL.  This is also an easy way of providing your users or yourself with a preset profile. </p>
+<p>Create a <code>.properties</code> file with your settings in it - see <a href="#saveyourcurrentsettingsasaprofile">instructions</a>.  Host it at an accessible URL, self signed URLs will not work here.</p>
+<p>To load the profile from the app, press the &#39;Default Profile&#39;, which switches to the profile menu, then choose &#39;From URL&#39;. In the dialog, give the URL of a properties file. GPSLogger will attempt to download the file, switch to it as a profile and apply the properties.</p>
+
+</div></section>
+
+<section><div class='lead'><h2><a name="loadprofilesfromafileonyourdevice" href="#loadprofilesfromafileonyourdevice">Load profiles from a file on your device</a></h2><h4>How can I define a preset file with my own values?</h4>
+
+<p>You can also share profiles using a file on the device.  </p>
+<p>If you create a file in the GPSLogger default directory, a profile will appear in the menu named after the file.  For example, <code>xyz.properties</code> will appear as <code>xyz</code>. </p>
+<h4>Special profile - <code>gpslogger.properties</code></h4>
+
+<p>If you create a file in the GPSLogger default folder or specifically at <code>/sdcard/gpslogger.properties</code>, then GPSLogger will read this file each time it loads and apply those settings to the application, overriding whatever settings you have currently. </p>
 
 </div></section>
 
