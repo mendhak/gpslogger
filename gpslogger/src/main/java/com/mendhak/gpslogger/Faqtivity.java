@@ -91,7 +91,7 @@ public class Faqtivity extends AppCompatActivity {
             generalTopics.add(getTopic("faq/faq20-troubleshooting.md"));
             generalTopics.add(getTopic("faq/faq21-custom-ssl-certificates.md"));
             generalTopics.add(getTopic("faq/faq22-why-gps-jumps.md"));
-            generalTopics.add(getTopic("faq/faq23-making-feature-requests.md"));
+            generalTopics.add(getTopic("faq/faq50-making-feature-requests.md"));
         }
         else {
             generalTopics.add(getTopic(singleFaqItem));
