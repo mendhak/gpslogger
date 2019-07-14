@@ -310,6 +310,11 @@ sendBroadcast(i);
 
 </div></section>
 
+<section><div class='lead'><h2><a name="whydothelogfilessometimeshavemissingdatafields" href="#whydothelogfilessometimeshavemissingdatafields">Why do the log files sometimes have missing data fields?</a></h2><h2><a name="whyisthealtitudevaluemissing" href="#whyisthealtitudevaluemissing">Why is the altitude value missing?</a></h2><p>A few fields such as <code>pdop</code>, <code>hdop</code>, <code>vdop</code>, <code>geoidheight</code>, <code>ageodfgpsdata</code>, <code>dgpsid</code> may not always appear in the logs produced.  This is because they are read from the NMEA listener which is different from the actual GPS/GNSS listener provided by Android OS.  Because they are not read simultaneously there can be periods where the NMEA listener reports nothing while GPS/GNSS continues as normal.  In those cases, no additional data is available. </p>
+<p>The altitude value may also go missing if you have MSL checked.  This feature subtracts the <code>geoidheight</code> from the reported altitude.  In cases where <code>geoidheight</code> is not available, the logic is to not report altitude at all, rather than report an incorrect value.  </p>
+
+</div></section>
+
 <section><div class='lead'><h2><a name="loggingtosmsoremail" href="#loggingtosmsoremail">Logging to SMS or email</a></h2><p>Logging to SMS (and email) is a frequently requested feature, however this has not been implemented for a few reasons. While logging can be set to be frequent (~1 second), sending an email or SMS every second would get this app banned very quickly and is also likely unsafe for the user. </p>
 <p>Although this <em>could</em> be mitigated by implementing specific logic to not allow SMS and emails to be sent so frequently, this would dramatically increase the complexity of the code and the flow of logic.  </p>
 <h2><a name="canyouimplementaspecificfeature" href="#canyouimplementaspecificfeature">Can you implement a specific feature?</a></h2><h2><a name="makingfeaturerequests" href="#makingfeaturerequests">Making feature requests</a></h2><p>Please note that I work on GPSLogger in my spare time and I may not always have the time or resources to implement a feature. However, GPSLogger is open source. You are encouraged to contribute or get someone else to contribute a feature.</p>
