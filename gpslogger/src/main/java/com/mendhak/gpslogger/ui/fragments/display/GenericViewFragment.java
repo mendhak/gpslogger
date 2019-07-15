@@ -24,9 +24,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.InputType;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -40,6 +47,13 @@ import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.Dialogs;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -120,28 +134,86 @@ public abstract class GenericViewFragment extends Fragment {
 
         if (preferenceHelper.shouldCreateCustomFile() && preferenceHelper.shouldAskCustomFileNameEachTime()) {
 
-            new MaterialDialog.Builder(getActivity())
+
+            final List<String> cachedList = Files.getListFromCacheFile("customfilename", getActivity());
+            final LinkedHashSet<String> set = new LinkedHashSet(cachedList);
+
+            MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
                     .title(R.string.new_file_custom_title)
-                    .content(R.string.new_file_custom_message)
+                    .customView(R.layout.custom_filename_view, true)
+
+                    .autoDismiss(false)
+                    .negativeText(R.string.cancel)
                     .positiveText(R.string.ok)
-                    .negativeText(R.string.cancel)
-                    .inputType(InputType.TYPE_CLASS_TEXT)
-                    .negativeText(R.string.cancel)
-                    .input(getString(R.string.letters_numbers), preferenceHelper.getCustomFileName(), new MaterialDialog.InputCallback() {
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
                         @Override
-                        public void onInput(MaterialDialog materialDialog, CharSequence input) {
-                            LOG.info("Custom file name chosen : " + input.toString());
+                        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                            AutoCompleteTextView autoComplete = materialDialog.getCustomView().findViewById(R.id.custom_filename);
 
-                            String chosenFileName = preferenceHelper.getCustomFileName();
+                            String selectedFileName = autoComplete.getText().toString();
+                            boolean addToSet = set.add(selectedFileName);
 
-                            if (!Strings.isNullOrEmpty(input.toString()) && !input.toString().equalsIgnoreCase(chosenFileName)) {
-                                preferenceHelper.setCustomFileName(input.toString());
+                            if(addToSet){
+                                List<String> finalList = new ArrayList<>(set);
+
+                                if(set.size() > 4){
+                                    finalList = finalList.subList(1, 5);
+                                }
+
+                                Files.saveListToCacheFile(finalList, "customfilename", getActivity());
+
                             }
-                            toggleLogging();
 
+
+                            materialDialog.dismiss();
                         }
                     })
-                    .show();
+                    .onNegative(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                            materialDialog.dismiss();
+                        }
+                    })
+                    .build();
+
+
+
+
+            String[] arr = set.toArray(new String[set.size()]);
+
+
+
+            final AutoCompleteTextView customFileName = (AutoCompleteTextView) alertDialog.getCustomView().findViewById(R.id.custom_filename);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_item, arr);
+            customFileName.setAdapter(adapter);
+            customFileName.setText(preferenceHelper.getCustomFileName());
+
+
+            alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            alertDialog.show();
+
+//            new MaterialDialog.Builder(getActivity())
+//                    .title(R.string.new_file_custom_title)
+//                    .content(R.string.new_file_custom_message)
+//                    .positiveText(R.string.ok)
+//                    .negativeText(R.string.cancel)
+//                    .inputType(InputType.TYPE_CLASS_TEXT)
+//                    .negativeText(R.string.cancel)
+//                    .input(getString(R.string.letters_numbers), preferenceHelper.getCustomFileName(), new MaterialDialog.InputCallback() {
+//                        @Override
+//                        public void onInput(MaterialDialog materialDialog, CharSequence input) {
+//                            LOG.info("Custom file name chosen : " + input.toString());
+//
+//                            String chosenFileName = preferenceHelper.getCustomFileName();
+//
+//                            if (!Strings.isNullOrEmpty(input.toString()) && !input.toString().equalsIgnoreCase(chosenFileName)) {
+//                                preferenceHelper.setCustomFileName(input.toString());
+//                            }
+//                            toggleLogging();
+//
+//                        }
+//                    })
+//                    .show();
 
         } else {
             toggleLogging();

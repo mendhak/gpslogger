@@ -32,6 +32,8 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import org.slf4j.Logger;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -230,5 +232,43 @@ public class Files {
 
         return baseFileName;
 
+    }
+
+    public static void saveListToCacheFile(List<String> items, String cacheKey, Context ctx){
+        try
+        {
+            File cacheFile = new File(ctx.getCacheDir(), cacheKey);
+            cacheFile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(cacheFile);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(items);
+            oos.close();
+            fos.close();
+        }
+        catch (IOException ioe)
+        {
+            LOG.error("Could not save items to cache");
+        }
+    }
+
+    public static List<String> getListFromCacheFile(String cacheKey, Context ctx){
+        ArrayList<String> items = new ArrayList<>();
+        try
+        {
+            File cacheFile = new File(ctx.getCacheDir(), cacheKey);
+            cacheFile.createNewFile();
+            FileInputStream fis = new FileInputStream(cacheFile);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            items = (ArrayList<String>) ois.readObject();
+
+            ois.close();
+            fis.close();
+
+        }
+        catch (Exception ex){
+            LOG.debug("Could not retrieve from cache", ex);
+        }
+        return items;
     }
 }
