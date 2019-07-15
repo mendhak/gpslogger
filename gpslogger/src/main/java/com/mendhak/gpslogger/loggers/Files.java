@@ -237,6 +237,11 @@ public class Files {
     public static void saveListToCacheFile(List<String> items, String cacheKey, Context ctx){
         try
         {
+
+            if(items.size() > 10) {
+                items = new ArrayList<>(items.subList(1, 11));
+            }
+
             File cacheFile = new File(ctx.getCacheDir(), cacheKey);
             cacheFile.createNewFile();
             FileOutputStream fos = new FileOutputStream(cacheFile);
@@ -245,7 +250,7 @@ public class Files {
             oos.close();
             fos.close();
         }
-        catch (IOException ioe)
+        catch (Exception ioe)
         {
             LOG.error("Could not save items to cache");
         }
@@ -257,13 +262,17 @@ public class Files {
         {
             File cacheFile = new File(ctx.getCacheDir(), cacheKey);
             cacheFile.createNewFile();
-            FileInputStream fis = new FileInputStream(cacheFile);
-            ObjectInputStream ois = new ObjectInputStream(fis);
 
-            items = (ArrayList<String>) ois.readObject();
+            if(cacheFile.length() > 0){
+                FileInputStream fis = new FileInputStream(cacheFile);
+                ObjectInputStream ois = new ObjectInputStream(fis);
 
-            ois.close();
-            fis.close();
+                items = (ArrayList<String>) ois.readObject();
+
+                ois.close();
+                fis.close();
+            }
+
 
         }
         catch (Exception ex){
