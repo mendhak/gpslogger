@@ -43,6 +43,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.*;
+import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -878,15 +879,31 @@ public class GpsMainActivity extends AppCompatActivity
             return;
         }
 
-        new MaterialDialog.Builder(this)
+        final List<String> cachedList = Files.getListFromCacheFile("annotations", getApplicationContext());
+        final LinkedHashSet<String> set = new LinkedHashSet(cachedList);
+
+        final MaterialDialog alertDialog = new MaterialDialog.Builder(GpsMainActivity.this)
                 .title(R.string.add_description)
-                .inputType(InputType.TYPE_CLASS_TEXT)
+                .customView(R.layout.custom_autocomplete_view, true)
                 .negativeText(R.string.cancel)
-                .input(getString(R.string.letters_numbers), "", new MaterialDialog.InputCallback() {
+                .positiveText(R.string.ok)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onInput(MaterialDialog materialDialog, CharSequence input) {
-                        LOG.info("Annotation entered : " + input.toString());
-                        EventBus.getDefault().post(new CommandEvents.Annotate(input.toString()));
+                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                        AutoCompleteTextView autoComplete = materialDialog.getCustomView().findViewById(R.id.custom_autocomplete);
+                        String userAnnotation = autoComplete.getText().toString();
+
+                        if (!Strings.isNullOrEmpty(userAnnotation)) {
+
+                            if(set.add(userAnnotation)){
+                                Files.saveListToCacheFile(new ArrayList<>(set), "annotations", getApplicationContext());
+                            }
+
+                            LOG.info("Annotation entered : " + userAnnotation);
+                            EventBus.getDefault().post(new CommandEvents.Annotate(userAnnotation));
+
+                        }
+                        materialDialog.dismiss();
                     }
                 })
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
@@ -895,7 +912,40 @@ public class GpsMainActivity extends AppCompatActivity
                         materialDialog.dismiss();
                     }
                 })
-                .show();
+                .build();
+
+
+        String[] arr = set.toArray(new String[set.size()]);
+
+
+        final AutoCompleteTextView userAnnotation = (AutoCompleteTextView) alertDialog.getCustomView().findViewById(R.id.custom_autocomplete);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.select_dialog_item, arr);
+        userAnnotation.setHint(getString(R.string.letters_numbers));
+        userAnnotation.setAdapter(adapter);
+
+        userAnnotation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    alertDialog.getActionButton(DialogAction.POSITIVE).callOnClick();
+
+                }
+                return false;
+            }
+        });
+
+        userAnnotation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus)
+                    userAnnotation.showDropDown();
+            }
+        });
+
+
+
+        alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        alertDialog.show();
 
     }
 

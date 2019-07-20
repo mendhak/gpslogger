@@ -6,14 +6,13 @@
 
     <AutoCompleteTextView
         android:text=""
-        android:hint="gpslogger"
         android:paddingLeft="22dp"
         android:paddingRight="22dp"
         android:paddingBottom="22dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textAutoComplete"
-        android:id="@+id/custom_filename"
+        android:id="@+id/custom_autocomplete"
         android:completionThreshold="0"
         />
 

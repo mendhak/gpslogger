@@ -131,13 +131,13 @@ public abstract class GenericViewFragment extends Fragment {
 
             MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
                     .title(R.string.new_file_custom_title)
-                    .customView(R.layout.custom_filename_view, true)
+                    .customView(R.layout.custom_autocomplete_view, true)
                     .negativeText(R.string.cancel)
                     .positiveText(R.string.ok)
                     .onPositive(new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                            AutoCompleteTextView autoComplete = materialDialog.getCustomView().findViewById(R.id.custom_filename);
+                            AutoCompleteTextView autoComplete = materialDialog.getCustomView().findViewById(R.id.custom_autocomplete);
                             String originalFileName = preferenceHelper.getCustomFileName();
                             String selectedFileName = autoComplete.getText().toString();
 
@@ -162,15 +162,14 @@ public abstract class GenericViewFragment extends Fragment {
                     .build();
 
 
-
-
             String[] arr = set.toArray(new String[set.size()]);
 
 
 
-            final AutoCompleteTextView customFileName = (AutoCompleteTextView) alertDialog.getCustomView().findViewById(R.id.custom_filename);
+            final AutoCompleteTextView customFileName = (AutoCompleteTextView) alertDialog.getCustomView().findViewById(R.id.custom_autocomplete);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_item, arr);
             customFileName.setAdapter(adapter);
+            customFileName.setHint("gpslogger");
             customFileName.setText(preferenceHelper.getCustomFileName());
 
 
