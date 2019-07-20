@@ -24,9 +24,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.view.KeyEvent;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
+
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
@@ -129,7 +134,7 @@ public abstract class GenericViewFragment extends Fragment {
             final List<String> cachedList = Files.getListFromCacheFile("customfilename", getActivity());
             final LinkedHashSet<String> set = new LinkedHashSet(cachedList);
 
-            MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
+            final MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
                     .title(R.string.new_file_custom_title)
                     .customView(R.layout.custom_autocomplete_view, true)
                     .negativeText(R.string.cancel)
@@ -167,14 +172,36 @@ public abstract class GenericViewFragment extends Fragment {
 
 
             final AutoCompleteTextView customFileName = (AutoCompleteTextView) alertDialog.getCustomView().findViewById(R.id.custom_autocomplete);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_item, arr);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, arr);
             customFileName.setAdapter(adapter);
             customFileName.setHint("gpslogger");
-            customFileName.setText(preferenceHelper.getCustomFileName());
+            customFileName.append(preferenceHelper.getCustomFileName());
 
+            customFileName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        alertDialog.getActionButton(DialogAction.POSITIVE).callOnClick();
+
+                    }
+                    return false;
+                }
+            });
+
+            customFileName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean hasFocus) {
+                    if (hasFocus) {
+                        customFileName.showDropDown();
+                        customFileName.requestFocus();
+                    }
+                }
+            });
 
             alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             alertDialog.show();
+
+
 
 //            new MaterialDialog.Builder(getActivity())
 //                    .title(R.string.new_file_custom_title)

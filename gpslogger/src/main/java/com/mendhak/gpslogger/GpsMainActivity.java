@@ -894,14 +894,12 @@ public class GpsMainActivity extends AppCompatActivity
                         String userAnnotation = autoComplete.getText().toString();
 
                         if (!Strings.isNullOrEmpty(userAnnotation)) {
-
                             if(set.add(userAnnotation)){
                                 Files.saveListToCacheFile(new ArrayList<>(set), "annotations", getApplicationContext());
                             }
 
                             LOG.info("Annotation entered : " + userAnnotation);
                             EventBus.getDefault().post(new CommandEvents.Annotate(userAnnotation));
-
                         }
                         materialDialog.dismiss();
                     }
@@ -917,11 +915,11 @@ public class GpsMainActivity extends AppCompatActivity
 
         String[] arr = set.toArray(new String[set.size()]);
 
-
         final AutoCompleteTextView userAnnotation = (AutoCompleteTextView) alertDialog.getCustomView().findViewById(R.id.custom_autocomplete);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.select_dialog_item, arr);
-        userAnnotation.setHint(getString(R.string.letters_numbers));
         userAnnotation.setAdapter(adapter);
+        userAnnotation.setHint(getString(R.string.letters_numbers));
+
 
         userAnnotation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -937,12 +935,12 @@ public class GpsMainActivity extends AppCompatActivity
         userAnnotation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus)
+                if (hasFocus) {
                     userAnnotation.showDropDown();
+                    userAnnotation.requestFocus();
+                }
             }
         });
-
-
 
         alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         alertDialog.show();
