@@ -202,30 +202,6 @@ public abstract class GenericViewFragment extends Fragment {
             alertDialog.show();
 
 
-
-//            new MaterialDialog.Builder(getActivity())
-//                    .title(R.string.new_file_custom_title)
-//                    .content(R.string.new_file_custom_message)
-//                    .positiveText(R.string.ok)
-//                    .negativeText(R.string.cancel)
-//                    .inputType(InputType.TYPE_CLASS_TEXT)
-//                    .negativeText(R.string.cancel)
-//                    .input(getString(R.string.letters_numbers), preferenceHelper.getCustomFileName(), new MaterialDialog.InputCallback() {
-//                        @Override
-//                        public void onInput(MaterialDialog materialDialog, CharSequence input) {
-//                            LOG.info("Custom file name chosen : " + input.toString());
-//
-//                            String chosenFileName = preferenceHelper.getCustomFileName();
-//
-//                            if (!Strings.isNullOrEmpty(input.toString()) && !input.toString().equalsIgnoreCase(chosenFileName)) {
-//                                preferenceHelper.setCustomFileName(input.toString());
-//                            }
-//                            toggleLogging();
-//
-//                        }
-//                    })
-//                    .show();
-
         } else {
             toggleLogging();
         }
