@@ -43,7 +43,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.*;
-import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -879,71 +878,16 @@ public class GpsMainActivity extends AppCompatActivity
             return;
         }
 
-        final List<String> cachedList = Files.getListFromCacheFile("annotations", getApplicationContext());
-        final LinkedHashSet<String> set = new LinkedHashSet(cachedList);
-
-        final MaterialDialog alertDialog = new MaterialDialog.Builder(GpsMainActivity.this)
-                .title(R.string.add_description)
-                .customView(R.layout.custom_autocomplete_view, true)
-                .negativeText(R.string.cancel)
-                .positiveText(R.string.ok)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
+        Dialogs.autoCompleteText(GpsMainActivity.this, "annotations",
+                getString(R.string.add_description), getString(R.string.letters_numbers), "",
+                new Dialogs.AutoCompleteCallback() {
                     @Override
-                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                        AutoCompleteTextView autoComplete = materialDialog.getCustomView().findViewById(R.id.custom_autocomplete);
-                        String userAnnotation = autoComplete.getText().toString();
-
-                        if (!Strings.isNullOrEmpty(userAnnotation)) {
-                            if(set.add(userAnnotation)){
-                                Files.saveListToCacheFile(new ArrayList<>(set), "annotations", getApplicationContext());
-                            }
-
-                            LOG.info("Annotation entered : " + userAnnotation);
-                            EventBus.getDefault().post(new CommandEvents.Annotate(userAnnotation));
-                        }
-                        materialDialog.dismiss();
+                    public void messageBoxResult(int which, MaterialDialog dialog, String enteredText) {
+                        LOG.info("Annotation entered : " + enteredText);
+                        EventBus.getDefault().post(new CommandEvents.Annotate(enteredText));
+                        dialog.dismiss();
                     }
-                })
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                        materialDialog.dismiss();
-                    }
-                })
-                .build();
-
-
-        String[] arr = set.toArray(new String[set.size()]);
-
-        final AutoCompleteTextView userAnnotation = (AutoCompleteTextView) alertDialog.getCustomView().findViewById(R.id.custom_autocomplete);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.select_dialog_item, arr);
-        userAnnotation.setAdapter(adapter);
-        userAnnotation.setHint(getString(R.string.letters_numbers));
-
-
-        userAnnotation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    alertDialog.getActionButton(DialogAction.POSITIVE).callOnClick();
-
-                }
-                return false;
-            }
-        });
-
-        userAnnotation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus) {
-                    userAnnotation.showDropDown();
-                    userAnnotation.requestFocus();
-                }
-            }
-        });
-
-        alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        alertDialog.show();
+                });
 
     }
 

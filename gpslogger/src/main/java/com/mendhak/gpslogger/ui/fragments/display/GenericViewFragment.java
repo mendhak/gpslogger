@@ -24,13 +24,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -38,7 +31,6 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
@@ -47,9 +39,6 @@ import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.Dialogs;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
 
 
 /**
@@ -130,76 +119,23 @@ public abstract class GenericViewFragment extends Fragment {
 
         if (preferenceHelper.shouldCreateCustomFile() && preferenceHelper.shouldAskCustomFileNameEachTime()) {
 
+            Dialogs.autoCompleteText(getActivity(), "customfilename",
+                    getString(R.string.new_file_custom_title), "gpslogger",
+                    preferenceHelper.getCustomFileName(), new Dialogs.AutoCompleteCallback() {
 
-            final List<String> cachedList = Files.getListFromCacheFile("customfilename", getActivity());
-            final LinkedHashSet<String> set = new LinkedHashSet(cachedList);
-
-            final MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
-                    .title(R.string.new_file_custom_title)
-                    .customView(R.layout.custom_autocomplete_view, true)
-                    .negativeText(R.string.cancel)
-                    .positiveText(R.string.ok)
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
                         @Override
-                        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                            AutoCompleteTextView autoComplete = materialDialog.getCustomView().findViewById(R.id.custom_autocomplete);
+                        public void messageBoxResult(int which, MaterialDialog dialog, String enteredText) {
+
                             String originalFileName = preferenceHelper.getCustomFileName();
-                            String selectedFileName = autoComplete.getText().toString();
 
-                            if (!Strings.isNullOrEmpty(selectedFileName) && !selectedFileName.equalsIgnoreCase(originalFileName)) {
-
-                                if(set.add(selectedFileName)){
-                                    Files.saveListToCacheFile(new ArrayList<>(set), "customfilename", getActivity());
-                                }
-
-                                preferenceHelper.setCustomFileName(selectedFileName);
+                            if(!originalFileName.equalsIgnoreCase(enteredText)){
+                                preferenceHelper.setCustomFileName(enteredText);
                             }
+
                             toggleLogging();
-                            materialDialog.dismiss();
+                            dialog.dismiss();
                         }
-                    })
-                    .onNegative(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                            materialDialog.dismiss();
-                        }
-                    })
-                    .build();
-
-
-            String[] arr = set.toArray(new String[set.size()]);
-
-
-
-            final AutoCompleteTextView customFileName = (AutoCompleteTextView) alertDialog.getCustomView().findViewById(R.id.custom_autocomplete);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, arr);
-            customFileName.setAdapter(adapter);
-            customFileName.setHint("gpslogger");
-            customFileName.append(preferenceHelper.getCustomFileName());
-
-            customFileName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                @Override
-                public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                    if (actionId == EditorInfo.IME_ACTION_DONE) {
-                        alertDialog.getActionButton(DialogAction.POSITIVE).callOnClick();
-
-                    }
-                    return false;
-                }
-            });
-
-            customFileName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View view, boolean hasFocus) {
-                    if (hasFocus) {
-                        customFileName.showDropDown();
-                        customFileName.requestFocus();
-                    }
-                }
-            });
-
-            alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-            alertDialog.show();
+                    });
 
 
         } else {
