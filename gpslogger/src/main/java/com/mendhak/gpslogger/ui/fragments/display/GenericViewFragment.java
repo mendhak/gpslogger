@@ -133,7 +133,6 @@ public abstract class GenericViewFragment extends Fragment {
                             }
 
                             toggleLogging();
-                            dialog.dismiss();
                         }
                     });
 

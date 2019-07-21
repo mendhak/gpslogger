@@ -885,7 +885,6 @@ public class GpsMainActivity extends AppCompatActivity
                     public void messageBoxResult(int which, MaterialDialog dialog, String enteredText) {
                         LOG.info("Annotation entered : " + enteredText);
                         EventBus.getDefault().post(new CommandEvents.Annotate(enteredText));
-                        dialog.dismiss();
                     }
                 });
 

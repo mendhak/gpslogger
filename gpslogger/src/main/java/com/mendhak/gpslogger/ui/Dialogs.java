@@ -264,6 +264,7 @@ public class Dialogs {
                         }
 
                         callback.messageBoxResult(MessageBoxCallback.OK, materialDialog, enteredText);
+                        materialDialog.dismiss();
                     }
                 })
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
