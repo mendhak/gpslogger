@@ -270,6 +270,7 @@ public class Dialogs {
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                        callback.messageBoxResult(MessageBoxCallback.CANCEL, materialDialog, "");
                         materialDialog.dismiss();
                     }
                 })

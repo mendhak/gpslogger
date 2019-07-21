@@ -30,8 +30,13 @@ import android.view.KeyEvent;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.common.IntentConstants;
+import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.ui.Dialogs;
+
 import org.slf4j.Logger;
+
+import de.greenrobot.event.EventBus;
 
 public class NotificationAnnotationActivity extends AppCompatActivity {
 
@@ -44,39 +49,22 @@ public class NotificationAnnotationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        new MaterialDialog.Builder(this)
-                .title(R.string.add_description)
-                .inputType(InputType.TYPE_CLASS_TEXT)
-                .negativeText(R.string.cancel)
-                .autoDismiss(true)
-                .canceledOnTouchOutside(true)
-                .cancelListener(new DialogInterface.OnCancelListener() {
+        Dialogs.autoCompleteText(NotificationAnnotationActivity.this, "annotations",
+                getString(R.string.add_description), getString(R.string.letters_numbers), "",
+                new Dialogs.AutoCompleteCallback() {
                     @Override
-                    public void onCancel(DialogInterface dialogInterface) {
-                        finish();
-                    }
-                })
-                .input(getString(R.string.letters_numbers), "", new MaterialDialog.InputCallback() {
-                    @Override
-                    public void onInput(@NonNull MaterialDialog materialDialog, @NonNull CharSequence input) {
+                    public void messageBoxResult(int which, MaterialDialog dialog, String enteredText) {
+                        if(which == Dialogs.AutoCompleteCallback.OK){
+                            LOG.info("Notification Annotation entered : " + enteredText);
+                            Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
+                            serviceIntent.putExtra(IntentConstants.SET_DESCRIPTION, enteredText);
+                            ContextCompat.startForegroundService(getApplicationContext(),  serviceIntent);
+                        }
 
-                        LOG.info("Annotation from notification: " + input.toString());
-                        Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
-                        serviceIntent.putExtra(IntentConstants.SET_DESCRIPTION, input.toString());
-                        ContextCompat.startForegroundService(getApplicationContext(),  serviceIntent);
-                        materialDialog.dismiss();
                         finish();
                     }
-                })
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                        materialDialog.hide();
-                        materialDialog.dismiss();
-                        finish();
-                    }
-                })
-                .show();
+                });
+
     }
 
     @Override

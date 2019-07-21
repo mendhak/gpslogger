@@ -126,6 +126,10 @@ public abstract class GenericViewFragment extends Fragment {
                         @Override
                         public void messageBoxResult(int which, MaterialDialog dialog, String enteredText) {
 
+                            if(which == Dialogs.AutoCompleteCallback.CANCEL){
+                                return;
+                            }
+
                             String originalFileName = preferenceHelper.getCustomFileName();
 
                             if(!originalFileName.equalsIgnoreCase(enteredText)){

@@ -883,6 +883,10 @@ public class GpsMainActivity extends AppCompatActivity
                 new Dialogs.AutoCompleteCallback() {
                     @Override
                     public void messageBoxResult(int which, MaterialDialog dialog, String enteredText) {
+                        if(which == Dialogs.AutoCompleteCallback.CANCEL){
+                            return;
+                        }
+
                         LOG.info("Annotation entered : " + enteredText);
                         EventBus.getDefault().post(new CommandEvents.Annotate(enteredText));
                     }
