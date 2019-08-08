@@ -308,7 +308,7 @@ public class GpsLoggingService extends Service  {
                 + ", Auto Send Delay - " + String.valueOf(session.getAutoSendDelay()));
 
         if (preferenceHelper.isAutoSendEnabled() && session.getAutoSendDelay() > 0) {
-            long triggerTime = System.currentTimeMillis() + (long) (session.getAutoSendDelay() * 60 * 1000);
+            long triggerTime = SystemClock.elapsedRealtime() + (long) (session.getAutoSendDelay() * 60 * 1000);
 
             alarmIntent = new Intent(this, AlarmReceiver.class);
             cancelAlarm();
@@ -316,10 +316,10 @@ public class GpsLoggingService extends Service  {
             PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
             if(Systems.isDozing(this)) {
-                am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTime, sender);
+                am.setAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerTime, sender);
             }
             else {
-                am.set(AlarmManager.RTC_WAKEUP, triggerTime, sender);
+                am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerTime, sender);
             }
             LOG.debug("Autosend alarm has been set");
 
