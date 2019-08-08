@@ -447,7 +447,7 @@ public class GpsLoggingService extends Service  {
         session.setTotalTravelled(0);
         session.setPreviousLocationInfo(null);
         session.setStarted(false);
-        session.setUserStillSinceTimeStamp(0);
+        session.setUserNotStill();
         session.setLatestTimeStamp(0);
         stopAbsoluteTimer();
         // Email log file before setting location info to null
@@ -595,7 +595,7 @@ public class GpsLoggingService extends Service  {
     private void startGpsManager() {
 
         //If the user has been still for more than the minimum seconds
-        if(userHasBeenStillForTooLong()) {
+        if(preferenceHelper.shouldNotLogIfUserIsStill() && userHasBeenStillForTooLong()) {
             LOG.info("No movement detected in the past interval, will not log");
             setAlarmForNextPoint();
             return;
@@ -655,8 +655,9 @@ public class GpsLoggingService extends Service  {
     }
 
     private boolean userHasBeenStillForTooLong() {
-        return !session.hasDescription() && !session.isSinglePointMode() &&
-                (session.getUserStillSinceTimeStamp() > 0 && (System.currentTimeMillis() - session.getUserStillSinceTimeStamp()) > (preferenceHelper.getMinimumLoggingInterval() * 1000));
+        return !session.hasDescription() &&
+                !session.isSinglePointMode() &&
+                (session.getUserStillDuration() > (preferenceHelper.getMinimumLoggingInterval() * 1000));
     }
 
     private void startAbsoluteTimer() {
@@ -801,9 +802,9 @@ public class GpsLoggingService extends Service  {
             return;
         }
 
-        //Don't log a point if user has been still
+        // Don't log a point if user has been still
         // However, if user has set an annotation, just log the point, disregard time and distance filters
-        if(userHasBeenStillForTooLong()) {
+        if(preferenceHelper.shouldNotLogIfUserIsStill() && userHasBeenStillForTooLong()) {
             LOG.info("Received location but the user hasn't moved, ignoring");
             return;
         }
@@ -1103,26 +1104,25 @@ public class GpsLoggingService extends Service  {
 
         session.setLatestDetectedActivity(activityRecognitionEvent.result.getMostProbableActivity());
 
-        if(!preferenceHelper.shouldNotLogIfUserIsStill()){
-            session.setUserStillSinceTimeStamp(0);
-            return;
-        }
-
         if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.STILL){
             LOG.debug(activityRecognitionEvent.result.getMostProbableActivity().toString());
-            if(session.getUserStillSinceTimeStamp() == 0){
+            if(session.getUserStillDuration() == -1) {
                 LOG.debug("Just entered still state, attempt to log");
-                startGpsManager();
-                session.setUserStillSinceTimeStamp(System.currentTimeMillis());
+                session.setUserStill();
+                if(preferenceHelper.shouldNotLogIfUserIsStill()) {
+                    startGpsManager();
+                }
             }
 
         }
         else {
             LOG.debug(activityRecognitionEvent.result.getMostProbableActivity().toString());
-            //Reset the still-since timestamp
-            session.setUserStillSinceTimeStamp(0);
             LOG.debug("Just exited still state, attempt to log");
-            startGpsManager();
+            // Reset the still-since timestamp
+            session.setUserNotStill();
+            if(preferenceHelper.shouldNotLogIfUserIsStill()) {
+                startGpsManager();
+            }
         }
     }
 

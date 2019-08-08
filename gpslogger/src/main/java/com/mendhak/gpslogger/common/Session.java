@@ -22,6 +22,7 @@ package com.mendhak.gpslogger.common;
 
 import android.content.SharedPreferences;
 import android.location.Location;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import com.google.android.gms.location.DetectedActivity;
 
@@ -341,12 +342,23 @@ public class Session {
         set("currentFormattedFileName", currentFormattedFileName);
     }
 
-    public long getUserStillSinceTimeStamp() {
-        return Long.parseLong(get("userStillSinceTimeStamp", "0"));
+    /**
+     * @return -1 if the user is not currently still, otherwise return the duration that the user has been still.
+     */
+    public long getUserStillDuration() {
+        long userStillSinceTimeStamp = Long.parseLong(get("userStillSinceTimeStamp", "-1"));
+        if (userStillSinceTimeStamp == -1) {
+            return -1;
+        }
+        return SystemClock.elapsedRealtime() - userStillSinceTimeStamp;
     }
 
-    public void setUserStillSinceTimeStamp(long lastUserStillTimeStamp) {
-        set("userStillSinceTimeStamp", String.valueOf(lastUserStillTimeStamp));
+    public void setUserStill() {
+        set("userStillSinceTimeStamp", String.valueOf(SystemClock.elapsedRealtime()));
+    }
+
+    public void setUserNotStill() {
+        set("userStillSinceTimeStamp", String.valueOf(-1));
     }
 
     public void setFirstRetryTimeStamp(long firstRetryTimeStamp) {
