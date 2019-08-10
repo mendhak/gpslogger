@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="filecreation_entries">
+        <item>@string/new_file_creation_onceamonth</item>
         <item>@string/new_file_creation_onceaday</item>
         <item>@string/new_file_creation_everystart</item>
         <item>@string/new_file_creation_custom</item>
     </string-array>
 
     <string-array name="filecreation_values">
+        <item>onceamonth</item>
         <item>onceaday</item>
         <item>everystart</item>
         <item>custom</item>
