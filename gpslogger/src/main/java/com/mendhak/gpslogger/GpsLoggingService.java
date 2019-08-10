@@ -53,6 +53,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class GpsLoggingService extends Service  {
     private static NotificationManager notificationManager;
@@ -739,10 +740,12 @@ public class GpsLoggingService extends Service  {
         } else if (preferenceHelper.shouldCreateNewFileOnceADay()) {
             // 20100114.gpx
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
             session.setCurrentFileName(sdf.format(new Date()));
         } else if (newLogEachStart) {
             // 20100114183329.gpx
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
             session.setCurrentFileName(sdf.format(new Date()));
         }
 
