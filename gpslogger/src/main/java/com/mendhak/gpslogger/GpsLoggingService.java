@@ -739,7 +739,6 @@ public class GpsLoggingService extends Service  {
         } else if (preferenceHelper.shouldCreateNewFileOnceAMonth()) {
             // 201001.gpx
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
-            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
             session.setCurrentFileName(sdf.format(new Date()));
         } else if (preferenceHelper.shouldCreateNewFileOnceADay()) {
             // 20100114.gpx
