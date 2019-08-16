@@ -812,17 +812,6 @@ public class GpsLoggingService extends Service  {
             return;
         }
 
-
-        //check if we change of day and then write the last position of yesterday as the first position of today
-        if (preferenceHelper.shouldCreateNewFileOnceADay()) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-            String today = sdf.format(new Date());
-            if (!today.equals(Strings.getFormattedFileName())) {
-                resetCurrentFileName(false);
-            }
-        }
-        
-
         //Check if a ridiculous distance has been travelled since previous point - could be a bad GPS jump
         if(session.getCurrentLocationInfo() != null){
             double distanceTravelled = Maths.calculateDistance(loc.getLatitude(), loc.getLongitude(), session.getCurrentLocationInfo().getLatitude(), session.getCurrentLocationInfo().getLongitude());
