@@ -130,6 +130,7 @@
     <string name="log_json_summary">Logs locations to a GeoJSON file</string>
     <string name="new_file_creation_title">New file creation</string>
     <string name="new_file_creation_summary">Whether to create a new file once a day or each time you start.</string>
+    <string name="new_file_creation_onceamonth">Once a month</string>
     <string name="new_file_creation_onceaday">Once a day</string>
     <string name="new_file_creation_everystart">Every time I start</string>
     <string name="new_file_creation_custom">Custom file</string>

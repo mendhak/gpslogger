@@ -736,6 +736,10 @@ public class GpsLoggingService extends Service  {
                 session.setCurrentFileName(Strings.getFormattedFileName());
             }
 
+        } else if (preferenceHelper.shouldCreateNewFileOnceAMonth()) {
+            // 201001.gpx
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+            session.setCurrentFileName(sdf.format(new Date()));
         } else if (preferenceHelper.shouldCreateNewFileOnceADay()) {
             // 20100114.gpx
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");

@@ -666,6 +666,7 @@ public class PreferenceHelper {
 
     /**
      * New file creation preference:
+     * onceamonth - once a month,
      * onceaday - once a day,
      * customfile - custom file (static),
      * everystart - every time the service starts
@@ -681,6 +682,14 @@ public class PreferenceHelper {
      */
     public boolean shouldCreateNewFileOnceADay() {
         return (getNewFileCreationMode().equals("onceaday"));
+    }
+
+
+    /**
+     * Whether a new file should be created monthly
+     */
+    public boolean shouldCreateNewFileOnceAMonth() {
+        return (getNewFileCreationMode().equals("onceamonth"));
     }
 
 
