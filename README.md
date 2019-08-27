@@ -1,4 +1,4 @@
-GPSLogger  ![githubactions](https://github.com/mendhak/gpslogger/workflows/Android%20CI/badge.svg) [![pgp](assets/pgp.png)](https://keybase.io/mendhak)
+GPSLogger  [![githubactions](https://github.com/mendhak/gpslogger/workflows/Android%20CI/badge.svg)](https://github.com/mendhak/gpslogger/actions) [![pgp](assets/pgp.png)](https://keybase.io/mendhak)
 =========
 
 
