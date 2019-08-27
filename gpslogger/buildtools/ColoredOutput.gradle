@@ -19,7 +19,8 @@ tasks.withType(Test) {
         if (suite.name.startsWith("Test Run") || suite.name.startsWith("Gradle Worker")) return
 
         if(suite.parent != null && suite.className != null){
-            if(TRAVIS_FOLDING){ out.println("travis_fold:start:" + suite.name +"\r"); }
+            //if(TRAVIS_FOLDING){ out.println("travis_fold:start:" + suite.name +"\r"); }
+            if(TRAVIS_FOLDING){ out.println("##[group]" + suite.name +"\r"); }
             out.println(ANSI_BOLD_WHITE + suite.name + ANSI_RESET )
         }
 
@@ -40,7 +41,8 @@ tasks.withType(Test) {
     afterSuite { desc, result ->
         if(desc.parent != null && desc.className != null){
 
-            if(TRAVIS_FOLDING && result.failedTestCount==0) { out.println("travis_fold:end:" + desc.name +"\r"); }
+            //if(TRAVIS_FOLDING && result.failedTestCount==0) { out.println("travis_fold:end:" + desc.name +"\r"); }
+            if(TRAVIS_FOLDING && result.failedTestCount==0) { out.println("##[endgroup]\r"); }
             out.println("")
         }
 
