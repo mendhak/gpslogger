@@ -24,7 +24,7 @@ apply plugin: 'com.mendhak.gradlecrowdin'
 apply plugin: 'signing'
 //Generating colorful output
 apply from: 'buildtools/ColoredOutput.gradle'
-project.ext.set("TRAVIS_FOLDING", true)
+project.ext.set("GHACTIONS_FOLDING", true)
 //Generate help pages
 apply plugin: 'com.moowork.node'
 
