@@ -22,6 +22,7 @@
 *.ap_
 *.asc
 *.SHA256
+*.SHA-256
 
 # files for the dex VM
 *.dex
