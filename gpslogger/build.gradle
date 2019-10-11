@@ -372,7 +372,7 @@ task copyFinalAPK(group:'build') {
 
         //SHA256 Checksum
         //Verify with sha256sum -c ~/Downloads/gpslogger-71.apk.SHA256
-        ant.checksum(file: finalApkName, algorithm: "SHA-256", pattern: "{0} {1}")
+        ant.checksum(file: finalApkName, fileext: '.SHA256', algorithm: "SHA-256", pattern: "{0} {1}")
     }
 
 }
