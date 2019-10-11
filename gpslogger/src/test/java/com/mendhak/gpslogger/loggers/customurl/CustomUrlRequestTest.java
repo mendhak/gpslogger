@@ -1,7 +1,7 @@
 package com.mendhak.gpslogger.loggers.customurl;
 
 
-import android.test.suitebuilder.annotation.SmallTest;
+import androidx.test.filters.SmallTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;

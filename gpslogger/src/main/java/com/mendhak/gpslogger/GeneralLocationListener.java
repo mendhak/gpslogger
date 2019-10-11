@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 
 import java.util.Iterator;
 
-class GeneralLocationListener implements LocationListener, GpsStatus.Listener, GpsStatus.NmeaListener {
+class GeneralLocationListener implements LocationListener, GpsStatus.Listener, GpsStatus.NmeaListener, android.location.OnNmeaMessageListener {
 
     private String listenerName;
     private static GpsLoggingService loggingService;
@@ -187,5 +187,10 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
 
         }
 
+    }
+
+    @Override
+    public void onNmeaMessage(String message, long timestamp) {
+        onNmeaReceived(timestamp, message);
     }
 }

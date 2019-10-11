@@ -2,7 +2,7 @@ package com.mendhak.gpslogger.common;
 
 import android.content.Context;
 import android.os.Build;
-import android.test.suitebuilder.annotation.SmallTest;
+import androidx.test.filters.SmallTest;
 
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;

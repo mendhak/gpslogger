@@ -1,7 +1,7 @@
 package com.mendhak.gpslogger.loggers.gpx;
 
 import android.location.Location;
-import android.test.suitebuilder.annotation.SmallTest;
+import androidx.test.filters.SmallTest;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.Strings;

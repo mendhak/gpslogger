@@ -1,7 +1,7 @@
 package com.mendhak.gpslogger.senders.dropbox;
 
 
-import android.test.suitebuilder.annotation.SmallTest;
+import androidx.test.filters.SmallTest;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -42,12 +42,12 @@ repositories {
 }
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId project.APP_ID
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 29
 
         versionCode project.APP_VERSION_CODE
         versionName project.APP_VERSION_NAME
@@ -222,6 +222,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:1.10.19'
     testImplementation 'org.json:json:20160810'
+    testImplementation 'androidx.test:runner:1.2.0'
+    testImplementation 'androidx.test:rules:1.2.0'
 
 
 }
@@ -364,12 +366,13 @@ task copyFinalAPK(group:'build') {
         //Verify with gpg --verify ~/Downloads/gpslogger-71.apk.asc
     if(file(finalApkName).isFile()){
         signing {
+            useGpgCmd()
             sign file(finalApkName)
         }
 
         //SHA256 Checksum
         //Verify with sha256sum -c ~/Downloads/gpslogger-71.apk.SHA256
-        ant.checksum(file: finalApkName, algorithm: "SHA256", pattern: "{0} {1}")
+        ant.checksum(file: finalApkName, algorithm: "SHA-256", pattern: "{0} {1}")
     }
 
 }

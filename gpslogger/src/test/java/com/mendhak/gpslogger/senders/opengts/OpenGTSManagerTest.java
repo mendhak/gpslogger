@@ -1,7 +1,7 @@
 package com.mendhak.gpslogger.senders.opengts;
 
 import android.location.Location;
-import android.test.suitebuilder.annotation.SmallTest;
+import androidx.test.filters.SmallTest;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.loggers.MockLocations;
