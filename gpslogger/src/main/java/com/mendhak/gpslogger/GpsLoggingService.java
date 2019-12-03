@@ -880,6 +880,7 @@ public class GpsLoggingService extends Service  {
 
         LOG.info(SessionLogcatAppender.MARKER_LOCATION, String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getLongitude()));
         loc = Locations.getLocationWithAdjustedAltitude(loc, preferenceHelper);
+        loc = Locations.getLocationAdjustedForGPSWeekRollover(loc);
         resetCurrentFileName(false);
         session.setLatestTimeStamp(System.currentTimeMillis());
         session.setFirstRetryTimeStamp(0);

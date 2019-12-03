@@ -45,4 +45,16 @@ public class Locations {
 
         return loc;
     }
+
+    public static Location getLocationAdjustedForGPSWeekRollover(Location loc) {
+        long recordedTime = loc.getTime();
+        //If the date is before April 6, 23:59:59, there's a GPS week rollover problem
+        if(recordedTime < 1554595199000L){
+            recordedTime = recordedTime + 619315200000L;  //add 1024 weeks
+            loc.setTime(recordedTime);
+        }
+
+        return loc;
+    }
+
 }
