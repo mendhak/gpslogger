@@ -607,6 +607,28 @@ public class PreferenceHelper {
     }
 
     /**
+     * Time required between two custom log url.
+     * This will help to have different local file logging time and URL log.
+     * Eg. URL can be ever 2min, where as local log can be every 5 sec
+     * No entry will behave as is. Refer to implementation @ FileLoggerFactory.java
+     */
+    @ProfilePreference(name= PreferenceNames.LOG_TO_URL_MIN_TIME_BETWEEN_LOG)
+    public int getLog2URLMinTimeBetweenLog() {
+        return (Strings.toInt(prefs.getString(PreferenceNames.LOG_TO_URL_MIN_TIME_BETWEEN_LOG, "0"), 0));
+    }
+
+     /**
+     * Sets the minimum time interval between customer url logging points
+     *
+     * @param minimumSeconds - in seconds
+     */
+    public void setLog2URLMinTimeBetweenLog(int minimumSeconds) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(PreferenceNames.LOG_TO_URL_MIN_TIME_BETWEEN_LOG, String.valueOf(minimumSeconds));
+        editor.apply();
+    }
+    
+    /**
      * The custom URL to log to.  Relevant only if {@link #shouldLogToCustomUrl()} returns true.
      */
     @ProfilePreference(name= PreferenceNames.LOG_TO_URL_PATH)
