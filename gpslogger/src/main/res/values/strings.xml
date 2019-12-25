@@ -456,6 +456,11 @@
     <string name="customurl_http_headers">HTTP Headers</string>
     <string name="customurl_http_method">HTTP Method</string>
     <string name="customurl_http_basicauthentication">Basic Authentication</string>
+    <string name="log_customurl_min_time_between_log_title">Custom URL logging interval</string>
+    <string name="log_customurl_min_time_between_log_summary">Use 0 to match with logging frequency, but slower is better for battery life and server load. If this value is lesser than logging frequency, lgging frequency will be followed.
+    </string>
+    <string name="log_customurl_min_time_between_log_dialog_title">Time in seconds</string>
+    <string name="log_customurl_min_time_between_log_hint">Enter seconds (max 9999)</string>  
     <string name="hide_notification_from_status_bar_disallowed">Hiding notification is disallowed in Android Oreo onwards</string>
 
 
