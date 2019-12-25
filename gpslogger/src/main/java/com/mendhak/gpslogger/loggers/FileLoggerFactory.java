@@ -37,12 +37,14 @@ import com.mendhak.gpslogger.loggers.opengts.OpenGTSLogger;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date; 
 
 public class FileLoggerFactory {
 
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     private static Session session = Session.getInstance();
-
+    private static long lastURLPostTime=0; 
+    
     public static List<FileLogger> getFileLoggers(Context context) {
 
         List<FileLogger> loggers = new ArrayList<>();
@@ -82,15 +84,19 @@ public class FileLoggerFactory {
         }
 
         if (preferenceHelper.shouldLogToCustomUrl()) {
-            String androidId = Systems.getAndroidId(context);
-            loggers.add(new CustomUrlLogger(preferenceHelper.getCustomLoggingUrl(),
-                    batteryLevel,
-                    androidId,
-                    preferenceHelper.getCustomLoggingHTTPMethod(),
-                    preferenceHelper.getCustomLoggingHTTPBody(),
-                    preferenceHelper.getCustomLoggingHTTPHeaders(),
-                    preferenceHelper.getCustomLoggingBasicAuthUsername(),
-                    preferenceHelper.getCustomLoggingBasicAuthPassword()));
+            Date date= new Date();
+            if ( (date.getTime() - lastURLPostTime ) > preferenceHelper.getLog2URLMinTimeBetweenLog() * 1000) {
+                lastURLPostTime=date.getTime();
+                String androidId = Systems.getAndroidId(context);
+                loggers.add(new CustomUrlLogger(preferenceHelper.getCustomLoggingUrl(),
+                        batteryLevel,
+                        androidId,
+                        preferenceHelper.getCustomLoggingHTTPMethod(),
+                        preferenceHelper.getCustomLoggingHTTPBody(),
+                        preferenceHelper.getCustomLoggingHTTPHeaders(),
+                        preferenceHelper.getCustomLoggingBasicAuthUsername(),
+                        preferenceHelper.getCustomLoggingBasicAuthPassword()));
+            }
         }
 
         if(preferenceHelper.shouldLogToGeoJSON()){
@@ -113,4 +119,9 @@ public class FileLoggerFactory {
             logger.annotate(description, loc);
         }
     }
+    
+    public static void resetLastURLPostTime(){
+        this.lastURLPostTime=0;
+    }
+    
 }
