@@ -398,6 +398,7 @@ public class GpsLoggingService extends Service  {
         }
 
         session.setStarted(true);
+        FileLoggerFactory.resetLastURLPostTime();
 
         resetAutoSendTimersIfNecessary();
         showNotification();
