@@ -462,6 +462,10 @@
     <string name="log_customurl_min_time_between_log_dialog_title">Time in seconds</string>
     <string name="log_customurl_min_time_between_log_hint">Enter seconds (max 9999)</string>  
     <string name="hide_notification_from_status_bar_disallowed">Hiding notification is disallowed in Android Oreo onwards</string>
-
+    <string name="current_user_defined_activity_title">Custom user activity</string>
+    <string name="current_user_defined_activity_summary">If anything is set for this option, it will get added to CSV file. This can help to tag user defined status or activities.
+    </string>
+    <string name="current_user_defined_dialog_title">Enter your activity value</string>
+    <string name="current_user_defined_activity_hint">Max 16 char. Do not include special chars</string>
 
 </resources>
