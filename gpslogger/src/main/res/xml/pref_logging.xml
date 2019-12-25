@@ -89,6 +89,14 @@
             android:summary="@string/new_file_prefix_serial_summary"
             android:defaultValue="false"
             />
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+            android:key="current_user_defined_activity"
+            android:title="@string/current_user_defined_activity_title"
+            android:summary="@string/current_user_defined_activity_summary"
+            android:dialogTitle="@string/current_user_defined_dialog_title"
+            android:hint="@string/current_user_defined_activity_hint"
+            android:defaultValue=""
+            />
     </PreferenceCategory>
 
 </PreferenceScreen>
