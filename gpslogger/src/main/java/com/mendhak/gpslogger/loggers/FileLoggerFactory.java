@@ -59,7 +59,12 @@ public class FileLoggerFactory {
         }
 
         int batteryLevel = Systems.getBatteryLevel(context);
-
+        String currentUDActivity=preferenceHelper.getCurrentUserDefinedActivity();
+        if (currentUDActivity.length() > 0) {
+            currentUDActivity =  currentUDActivity.replaceAll("\"", "") ;
+            currentUDActivity =  currentUDActivity.replaceAll("'", "") ;
+            currentUDActivity =  currentUDActivity.replaceAll(",", "") ;
+        }
         if (preferenceHelper.shouldLogToGpx()) {
             File gpxFile = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".gpx");
             if(preferenceHelper.shouldLogAsGpx11()) {
@@ -76,7 +81,7 @@ public class FileLoggerFactory {
 
         if (preferenceHelper.shouldLogToCSV()) {
             File file = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".csv");
-            loggers.add(new CSVFileLogger(file, batteryLevel));
+            loggers.add(new CSVFileLogger(file, batteryLevel,currentUDActivity));
         }
 
         if (preferenceHelper.shouldLogToOpenGTS()) {
@@ -121,7 +126,7 @@ public class FileLoggerFactory {
     }
     
     public static void resetLastURLPostTime(){
-        this.lastURLPostTime=0;
+        lastURLPostTime=0;
     }
     
 }
