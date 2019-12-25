@@ -41,10 +41,12 @@ public class CSVFileLogger implements FileLogger {
     private final Integer batteryLevel;
     private File file;
     protected final String name = "TXT";
+    private String currentUDActivity="";
 
-    public CSVFileLogger(File file, @Nullable Integer batteryLevel) {
+    public CSVFileLogger(File file, @Nullable Integer batteryLevel, String currentUDActivity) {
         this.file = file;
         this.batteryLevel = batteryLevel;
+        this.currentUDActivity=currentUDActivity;
     }
 
     @Override
@@ -64,7 +66,7 @@ public class CSVFileLogger implements FileLogger {
             description = "\"" + description.replaceAll("\"", "\"\"") + "\"";
         }
 
-        String outputString = String.format(Locale.US, "%s,%s,%s,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", dateTimeString,
+        String outputString = String.format(Locale.US, "%s,%s,%s,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", dateTimeString,
                 loc.getLatitude(),
                 loc.getLongitude(),
                 loc.hasAltitude() ? loc.getAltitude() : "",
@@ -81,7 +83,9 @@ public class CSVFileLogger implements FileLogger {
                 (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.DGPSID))) ? loc.getExtras().getString(BundleConstants.DGPSID) : "",
                 (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY))) ? loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY) : "",
                 (batteryLevel != null) ? batteryLevel : "",
-                description
+                description,
+                (currentUDActivity != null) ? currentUDActivity : "", 
+                String.valueOf(loc.getTime()/1000)
         );
         return outputString;
     }
@@ -93,7 +97,7 @@ public class CSVFileLogger implements FileLogger {
 
             FileOutputStream writer = new FileOutputStream(file, true);
             BufferedOutputStream output = new BufferedOutputStream(writer);
-            String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider,hdop,vdop,pdop,geoidheight,ageofdgpsdata,dgpsid,activity,battery,annotation\n";
+            String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider,hdop,vdop,pdop,geoidheight,ageofdgpsdata,dgpsid,activity,battery,annotation,udactivity,timestamp\n";
             output.write(header.getBytes());
             output.flush();
             output.close();
