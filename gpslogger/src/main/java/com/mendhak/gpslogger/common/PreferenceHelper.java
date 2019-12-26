@@ -336,6 +336,17 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.GOOGLEDRIVE_ACCOUNTNAME, accountName).apply();
     }
 
+    /**
+     * User defined activity, which will be added in plain text logging
+     */
+    @ProfilePreference(name= PreferenceNames.CURRENT_UD_ACTIVITY)
+    public String getCurrentUserDefinedActivity() {
+        return prefs.getString(PreferenceNames.CURRENT_UD_ACTIVITY, "");
+    }
+    
+    public void setCurrentUserDefinedActivity(String val) {
+        prefs.edit().putString(PreferenceNames.CURRENT_UD_ACTIVITY, val).apply();
+    }
 
     /**
      * The minimum seconds interval between logging points
