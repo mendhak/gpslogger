@@ -27,6 +27,7 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.loggers.FileLogger;
 
@@ -40,22 +41,20 @@ public class CustomUrlLogger implements FileLogger {
     private final String name = "URL";
     private final String customLoggingUrl;
     private final int batteryLevel;
-    private final String androidId;
     private final String httpMethod;
     private final String httpBody;
     private final String httpHeaders;
     private final String basicAuthUsername;
     private final String basicAuthPassword;
 
-    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String androidId, String httpMethod, String httpBody, String httpHeaders) {
-        this(customLoggingUrl,batteryLevel, androidId, httpMethod, httpBody, httpHeaders, "","");
+    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String httpMethod, String httpBody, String httpHeaders) {
+        this(customLoggingUrl,batteryLevel, httpMethod, httpBody, httpHeaders, "","");
 
     }
 
-    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String androidId, String httpMethod, String httpBody, String httpHeaders, String basicAuthUsername, String basicAuthPassword) {
+    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String httpMethod, String httpBody, String httpHeaders, String basicAuthUsername, String basicAuthPassword) {
         this.customLoggingUrl = customLoggingUrl;
         this.batteryLevel = batteryLevel;
-        this.androidId = androidId;
         this.httpMethod = httpMethod;
         this.httpBody = httpBody;
         this.httpHeaders = httpHeaders;
@@ -73,11 +72,11 @@ public class CustomUrlLogger implements FileLogger {
     @Override
     public void annotate(String description, Location loc) throws Exception {
 
-        String finalUrl = getFormattedTextblock(customLoggingUrl, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
+        String finalUrl = getFormattedTextblock(customLoggingUrl, loc, description, Systems.getAndroidId(), batteryLevel, Strings.getBuildSerial(),
                 Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName(), Session.getInstance().getTotalTravelled());
-        String finalBody = getFormattedTextblock(httpBody, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
+        String finalBody = getFormattedTextblock(httpBody, loc, description, Systems.getAndroidId(), batteryLevel, Strings.getBuildSerial(),
                 Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName(), Session.getInstance().getTotalTravelled());
-        String finalHeaders = getFormattedTextblock(httpHeaders, loc, description, androidId, batteryLevel, Strings.getBuildSerial(),
+        String finalHeaders = getFormattedTextblock(httpHeaders, loc, description, Systems.getAndroidId(), batteryLevel, Strings.getBuildSerial(),
                 Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName(), Session.getInstance().getTotalTravelled());
 
 

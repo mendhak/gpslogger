@@ -65,8 +65,8 @@ public class Systems {
         return (int) (((float) level / (float) scale) * 100.0f);
     }
 
-    public static String getAndroidId(Context context) {
-        return Settings.Secure.getString(context.getContentResolver(),
+    public static String getAndroidId() {
+        return Settings.Secure.getString(AppSettings.getInstance().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
 
     }

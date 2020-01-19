@@ -264,7 +264,12 @@ public class Strings {
 
     public static String getBuildSerial() {
         try {
-            return Build.SERIAL;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+                return Build.SERIAL;
+            }
+            else {
+                return Systems.getAndroidId();
+            }
         } catch (Throwable t) {
             return "";
         }

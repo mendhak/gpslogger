@@ -82,10 +82,9 @@ public class FileLoggerFactory {
         }
 
         if (preferenceHelper.shouldLogToCustomUrl()) {
-            String androidId = Systems.getAndroidId(context);
+
             loggers.add(new CustomUrlLogger(preferenceHelper.getCustomLoggingUrl(),
                     batteryLevel,
-                    androidId,
                     preferenceHelper.getCustomLoggingHTTPMethod(),
                     preferenceHelper.getCustomLoggingHTTPBody(),
                     preferenceHelper.getCustomLoggingHTTPHeaders(),
