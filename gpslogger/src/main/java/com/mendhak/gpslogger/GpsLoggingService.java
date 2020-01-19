@@ -24,6 +24,7 @@ import android.app.*;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.*;
@@ -51,6 +52,7 @@ import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -619,7 +621,29 @@ public class GpsLoggingService extends Service  {
             // gps satellite based
             gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, gpsLocationListener);
             gpsLocationManager.addGpsStatusListener(gpsLocationListener);
-            gpsLocationManager.addNmeaListener(gpsLocationListener);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                //gpsLocationManager.addNmeaListener(gpsLocationListener);
+                //GeneralNMEAListener.NMEAListenerLegacy listenerLegacy = new GeneralNMEAListener.NMEAListenerLegacy(gpsLocationListener, this);
+                GeneralNMEAListener.NMEAListener24 newListener = new GeneralNMEAListener.NMEAListener24(gpsLocationListener, this);
+                gpsLocationManager.addNmeaListener(newListener);
+                LOG.info("Added NMEA listener, new version");
+            }
+            // https://github.com/mendhak/gpslogger/issues/784#issuecomment-570920902
+            // Google accidentally removed the deprecated listener in API 29. Will reinstate in API 30.
+            // UGGHHHHHH
+            else {
+                try {
+                    GeneralNMEAListener.NMEAListenerLegacy legacyListener = new GeneralNMEAListener.NMEAListenerLegacy(gpsLocationListener,this);
+                    //noinspection JavaReflectionMemberAccess
+                    Method addNmeaListener =
+                            LocationManager.class.getMethod("addNmeaListener", GpsStatus.NmeaListener.class);
+                    addNmeaListener.invoke(gpsLocationManager, legacyListener);
+                    LOG.info("Added NMEA listener, legacy version");
+                }
+                catch (Exception ex){
+                    LOG.error("Unable to add NMEA listener via reflection", ex);
+                }
+            }
 
             session.setUsingGps(true);
             startAbsoluteTimer();
