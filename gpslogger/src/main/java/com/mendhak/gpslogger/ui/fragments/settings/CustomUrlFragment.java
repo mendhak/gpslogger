@@ -31,8 +31,6 @@ import android.widget.EditText;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
@@ -47,7 +45,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
 
-import de.greenrobot.event.EventBus;
+
 
 public class CustomUrlFragment extends PreferenceFragment implements
         PreferenceValidator,
@@ -71,13 +69,8 @@ public class CustomUrlFragment extends PreferenceFragment implements
         findPreference("customurl_validatecustomsslcert").setOnPreferenceClickListener(this);
         findPreference("log_customurl_basicauth").setOnPreferenceClickListener(this);
 
-        registerEventBus();
-
     }
 
-    private void registerEventBus() {
-        EventBus.getDefault().register(this);
-    }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -167,20 +160,7 @@ public class CustomUrlFragment extends PreferenceFragment implements
         return false;
     }
 
-    @EventBusHook
-    public void onEventMainThread(UploadEvents.CustomUrl c){
 
-        if(!isAdded()) { return; }
-
-        LOG.debug("Custom URL test, success: " + c.success);
-        Dialogs.hideProgress();
-        if(!c.success){
-            Dialogs.error(getString(R.string.error), c.message, c.throwable.getMessage(),c.throwable, getActivity());
-        }
-        else {
-            Dialogs.alert(getString(R.string.success), "", getActivity());
-        }
-    }
 
 
 }
