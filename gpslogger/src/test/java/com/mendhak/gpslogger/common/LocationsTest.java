@@ -6,6 +6,7 @@ import com.mendhak.gpslogger.loggers.MockLocations;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.verification.VerificationMode;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -74,5 +75,27 @@ public class LocationsTest {
         verify(loc, times(0)).setAltitude(85);
 
     }
+
+    @Test
+    public void AdjustDateTimeForGPSRollover_WhenDateIsVeryOld_Add1024Weeks(){
+        Location loc = MockLocations.builder("MOCK", 12.193, 19.111).withTime(1546341071000L).build();
+        Location adjusted = Locations.getLocationAdjustedForGPSWeekRollover(loc);
+
+        //Since it's a mock location, can only verify that setTime was called
+        verify(loc, times(1)).setTime(2165656271000L);
+    }
+
+
+    @Test
+    public void AdjustDateTimeForGPSRollover_WhenDateIsNew_ReturnSameLocation(){
+        Location loc = MockLocations.builder("MOCK", 12.193, 19.111).withTime(1575408651000L).build();
+        Location adjusted = Locations.getLocationAdjustedForGPSWeekRollover(loc);
+
+        //Since it's a mock location, can only verify that setTime was called
+        verify(loc, times(0)).setTime(1575408651000L);
+
+    }
+
+
 
 }

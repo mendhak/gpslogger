@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 
 import java.util.Iterator;
 
-class GeneralLocationListener implements LocationListener, GpsStatus.Listener, GpsStatus.NmeaListener, android.location.OnNmeaMessageListener {
+class GeneralLocationListener implements LocationListener, GpsStatus.Listener {
 
     private String listenerName;
     private static GpsLoggingService loggingService;
@@ -150,47 +150,4 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
         }
     }
 
-    @Override
-    public void onNmeaReceived(long timestamp, String nmeaSentence) {
-        loggingService.onNmeaSentence(timestamp, nmeaSentence);
-
-        if(Strings.isNullOrEmpty(nmeaSentence)){
-            return;
-        }
-
-        NmeaSentence nmea = new NmeaSentence(nmeaSentence);
-
-        if(nmea.isLocationSentence()){
-            if(nmea.getLatestPdop() != null){
-                this.latestPdop = nmea.getLatestPdop();
-            }
-
-            if(nmea.getLatestHdop() != null){
-                this.latestHdop = nmea.getLatestHdop();
-            }
-
-            if(nmea.getLatestVdop() != null){
-                this.latestVdop = nmea.getLatestVdop();
-            }
-
-            if(nmea.getGeoIdHeight() != null){
-                this.geoIdHeight = nmea.getGeoIdHeight();
-            }
-
-            if(nmea.getAgeOfDgpsData() != null){
-                this.ageOfDgpsData = nmea.getAgeOfDgpsData();
-            }
-
-            if(nmea.getDgpsId() != null){
-                this.dgpsId = nmea.getDgpsId();
-            }
-
-        }
-
-    }
-
-    @Override
-    public void onNmeaMessage(String message, long timestamp) {
-        onNmeaReceived(timestamp, message);
-    }
 }
