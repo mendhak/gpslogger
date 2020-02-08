@@ -270,10 +270,14 @@
     <string name="log_nmea_summary">Erstellt eine unbearbeitete NMEA-Datei, während man versucht, eine Positionsbestimmung zu erhalten. Diese Datei wächst sehr schnell. Dies funktioniert nur während der der Verwendung von GPS.</string>
     <string name="autoopengts_accountname">Benutzername</string>
     <string name="listeners_gps">GPS</string>
-    <string name="listeners_gps_title">GPS/GNSS Standort aufzeichnen</string>
+    <string name="listeners_gps_title">GPS/GNSS Standorte aufzeichnen</string>
     <string name="listeners_gps_summary">Zeichnet Standorte auf, die durch das GPS Modul des Handys generiert wurden</string>
     <string name="listeners_cell">Netzwerk</string>
+    <string name="listeners_cell_title">Netzwerk-Standorte aufzeichnen</string>
+    <string name="listeners_cell_summary">Zeichnet Standorte von ihre Gerät auf, die vom netzwerkbasierten Standort-Empfänger bereitgestellt werden</string>
     <string name="listeners_passive">Passiv</string>
+    <string name="listeners_passive_title">Passive Standorte aufzeichnen</string>
+    <string name="listeners_passive_summary">Zeichnet Standorte auf, die von anderen Anwendungen erhalten wurden. Beachten Sie, dass die meisten Filter ignoriert werden. Diese Einstellung ist auch für externe GPS-Empfänger nützlich.</string>
     <string name="listeners_summary">Festlegen, welche Standortbestimmungsmethode je nach Verfügbarkeit genutzt werden soll; GPS-Satelliten, Netzwerke (WLAN/Mobilfunknetz), Passiv (nutzt Standortbestimmungsanfragen, welche von anderen Apps angefordert werden).</string>
     <string name="listeners_title">Standortbestimmungsmethoden</string>
     <string name="autosend_frequency_hint">Minuten</string>

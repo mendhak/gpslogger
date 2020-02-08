@@ -43,6 +43,8 @@
     <string name="error">Ralat</string>
     <string name="error_connection">Ralat penyambungan. Sila semak tetapan telefon anda.</string>
     <string name="seconds">s</string>
+    <string name="minutes">minit</string>
+    <string name="hours">jam</string>
     <string name="gpsprovider_unavailable">Tiada pembekal GPS tersedia. Sila periksa tetapan lokasi anda dan dayakan pembekal lokasi.    </string>
     <string name="started">Bermula</string>
     <string name="providername_gps">Satelit GPS</string>
@@ -130,6 +132,7 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="autoemail_title">Emel</string>
     <string name="please_wait">Sila tunggu</string>
     <string name="autoemail_target">Alamat emel sasaran</string>
+    <string name="autosend_frequency_display">Selepas %s minit</string>
     <string name="autoemail_frequency_whenistop">Apabila saya menekan berhenti</string>
     <string name="autoemail_smtp_category">Tetapan e-mel</string>
     <string name="autoemail_username_summary">Nama pengguna dengan pembekal e-mel anda</string>
@@ -173,6 +176,7 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="dropbox_authorize_description">Untuk menggunakan ciri Dropbox, anda perlu membenarkan GPSLogger untuk memuat naik fail ke akaun anda.</string>
     <string name="dropbox_unauthorize_description">Anda disahkan oleh Dropbox. Fail akan dimuat naik ke \'Apps\\GPSLogger untuk Android\'.  Anda boleh menyahpaut GPSLogger daripada Dropbox jika anda mahu. </string>
     <string name="dropbox_couldnotauthorize">Gagal membenarkan dengan Dropbox, sila cuba kemudian</string>
+    <string name="owncloud_setup_title">cloud sendiri</string>
     <string name="owncloud_server_summary">uRL pangkalan sendiriCloud</string>
     <string name="owncloud_directory_summary">Folder untuk digunakan pada pelayan sendiriCloud. Pastikan ia wujud atau muat naik akan gagal.</string>
     <string name="owncloud_test_summary">Muat naik fail uji ke pelayan sendiriCloud</string>
@@ -228,6 +232,7 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="autoftp_testing">Menguji FTP upload</string>
     <string name="autoftp_invalid_settings">Tetapan tidak sah</string>
     <string name="autoftp_invalid_summary">Sesetengah tetapan anda tidak sah. Sila pastikan bahawa semua ruang berkenaan terisi.</string>
+    <string name="autoftp_setup_title">Protokol Pemindahan Fail</string>
     <string name="menu_faq">Bantuan dan soalan-soalan lazim</string>
     <string name="gpsf_missing">Perkhidmatan tiada</string>
     <string name="gpsf_missing_description">Anda memerlukan Google Play Services Framework untuk menggunakan ciri ini.</string>

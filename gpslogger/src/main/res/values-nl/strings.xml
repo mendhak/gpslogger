@@ -94,6 +94,8 @@
     <string name="pref_logging_title">Logging details</string>
     <string name="log_gpx_title">Loggen naar GPX</string>
     <string name="log_gpx_summary">Logt locaties naar een GPX v1.0 bestand</string>
+    <string name="log_gpx_11_title">Gebruik GPX 1.1</string>
+    <string name="log_gpx_11_summary">Gebruik het GPX 1.1 bestandsformaat i.p.v. GPX 1.0</string>
     <string name="log_kml_title">Loggen naar KML</string>
     <string name="log_kml_summary">Logt locaties naar een KML v2.2 bestand</string>
     <string name="log_plain_text_title">Log naar CSV</string>
@@ -134,6 +136,7 @@
     <string name="autoemail_smtp_category">E-mailinstellingen</string>
     <string name="autoemail_username_summary">Gebruikersnaam bij uw e-mailprovider</string>
     <string name="autoemail_password_summary">Wachtwoord bij uw e-mailprovider</string>
+    <string name="autoemail_ssl">Implicit SSL</string>
     <string name="autoemail_ssl_summary">Probeer dit aan of uit te zetten als u geen verbinding kan maken</string>
     <string name="autoemail_choosepreset">E-mailprovider</string>
     <string name="autoemail_choosepreset_summary">Kies een provider of kies handmatig</string>
@@ -268,7 +271,9 @@
     <string name="log_nmea_summary">Maakt een raw NMEA bestand aan tijdens het zoeken naar een fix. Dit bestand kan snel aangroeien. Werkt alleen wanneer GPS wordt gebruikt.</string>
     <string name="autoopengts_accountname">Gebruikersnaam</string>
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">Log GPS/GNSS locaties</string>
     <string name="listeners_cell">Netwerk</string>
+    <string name="listeners_cell_title">Log netwerk locaties</string>
     <string name="listeners_passive">Passief</string>
     <string name="listeners_summary">Welke locatie-providers gebruiken wanneer ze beschikbaar zijn; GPS voor satellieten, Netwerk voor gsm-mast/wifi, Passief is een speciale provider die locatieaanvragen van andere apps afluistert.</string>
     <string name="listeners_title">Locatie-providers</string>

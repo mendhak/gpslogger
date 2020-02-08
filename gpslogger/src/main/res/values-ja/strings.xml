@@ -9,8 +9,8 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="could_not_write_to_file">ファイルの書込みができません。</string>
-    <string name="add_description">説明の追加</string>
-    <string name="letters_numbers">アルファベット A～Z a～zと数字 0～9をお使いください。</string>
+    <string name="add_description">メモの追加</string>
+    <string name="letters_numbers">文字と数字のみ使用可能</string>
     <string name="menu_annotate">注釈</string>
     <string name="menu_share">共有</string>
     <string name="menu_exit">終了</string>
@@ -94,10 +94,14 @@
     <string name="pref_logging_title">ログ設定詳細</string>
     <string name="log_gpx_title">GPXで保存</string>
     <string name="log_gpx_summary">GPX v1.0 形式のファイルへ位置を記録する</string>
+    <string name="log_gpx_11_title">GPX 1.1 を使用</string>
+    <string name="log_gpx_11_summary">GPX 1.0 形式ではなくGPX 1.1 形式を使用する</string>
     <string name="log_kml_title">KMLで保存</string>
     <string name="log_kml_summary">KML v2.2 形式のファイルへ位置を記録する</string>
     <string name="log_plain_text_title">CSVで保存</string>
     <string name="log_plain_text_summary">CSV 形式のファイルへの位置を記録する</string>
+    <string name="log_json_title">GeoJSONで保存</string>
+    <string name="log_json_summary">GeoJSON 形式のファイルへ位置を記録する</string>
     <string name="new_file_creation_title">新規ファイル作成</string>
     <string name="new_file_creation_summary">一日毎、あるいは起動毎にファイルを作成するかの設定。</string>
     <string name="new_file_creation_onceaday">1 日 1 回</string>
@@ -107,9 +111,9 @@
     <string name="new_file_custom_summary">任意のファイル名を使う事ができます。必要に応じて、シリアル番号、年、時、分等の動的なパラメタを付加することができます。ただし、最新のファイルのみを送信するため、更新頻度が高い場合、うまく反映されないことがあります。</string>
     <string name="pref_performance_title">パフォーマンス</string>
     <string name="pref_performance_summary">プロバイダ、周期、フィルタ</string>
-    <string name="time_before_logging_title">ロギング・インターバル</string>
-    <string name="time_before_logging_summary">0にすると書き込み頻度が最大になりますが、バッテリーの持ちが悪くなります。</string>
-    <string name="time_before_logging_dialog_title">時間（秒）</string>
+    <string name="time_before_logging_title">記録間隔</string>
+    <string name="time_before_logging_summary">0にすると書き込み頻度が最大になりますが、間隔が長いほうがバッテリーの寿命のためにはいいでしょう。    </string>
+    <string name="time_before_logging_dialog_title">記録間隔（秒）</string>
     <string name="time_before_logging_hint">時間（秒、最大9999）を入力してください</string>
     <string name="keep_fix_summary">注意。この設定はバッテリを著しく消費します。書込頻度を抑えて高精度を得たい場合のみ使用してください。</string>
     <string name="keep_fix_title">GPSを常にON</string>
@@ -131,6 +135,7 @@
     <string name="autoemail_smtp_category">メール設定</string>
     <string name="autoemail_username_summary">メールブロバイダーのユーザー名</string>
     <string name="autoemail_password_summary">メールブロバイダーのパスワード</string>
+    <string name="autoemail_ssl">(暗黙的)SSLの使用</string>
     <string name="autoemail_ssl_summary">接続できない場合は、チェックを入れて（外して）ください。</string>
     <string name="autoemail_choosepreset">メール プロバイダー</string>
     <string name="autoemail_choosepreset_summary">プロバイダーを選択するか手動で設定してください。</string>
@@ -234,9 +239,11 @@
     <string name="txt_annotation">注釈:</string>
     <string name="txt_time_isoformat">UTC 時間 (2011-12-25T15:27:33Z)。</string>
     <string name="txt_provider">プロバイダー:</string>
+    <string name="annotation_requires_logging">注釈にはCSV/GPX/KML/Custom URL/GeoJSONへの記録が必要です</string>
     <string name="gpslogger_folder_title">フォルダーに保存します。</string>
     <string name="gpslogger_folder_summary">ログファイルの保存場所（デフォルト /sdcard/GPSLogger）</string>
     <string name="autoftp_directory">フォルダ</string>
+    <string name="new_file_custom_message">以下を利用可能: %SER(端末シリアル番号), %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER(バージョン情報)</string>
     <string name="new_file_prefix_serial_title">ファイル名の先頭にデバイスシリアル番号を付加します。</string>
     <string name="new_file_prefix_serial_summary">このシリアル番号はスマートフォンから取得されたものです。</string>
     <string name="txt_travel_duration">実行時間：</string>
@@ -263,8 +270,15 @@
     <string name="log_nmea_summary">NMEA形式で保存します。この形式はサイズが非常に大きくなります。また、GPS使用中しか使えません。</string>
     <string name="autoopengts_accountname">アカウント名</string>
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">GPS/GNSS 位置情報を記録</string>
+    <string name="listeners_gps_summary">端末の受信機から衛星による位置情報を取得します</string>
     <string name="listeners_cell">ネットワーク</string>
+    <string name="listeners_cell_title">ネットワーク位置情報を記録</string>
+    <string name="listeners_cell_summary">端末の受信機からネットワークによる位置情報を取得します</string>
     <string name="listeners_passive">パッシブ</string>
+    <string name="listeners_passive_title">パッシブ位置情報を記録</string>
+    <string name="listeners_passive_summary">他のアプリにより取得された位置情報を記録します。ほとんどのフィルターは無視されることに注意してください。この設定は外部GPS受信機を使用する際にも役立ちます。</string>
+    <string name="listeners_summary">どの位置プロバイダを利用しますか？ GPS：衛星、ネットワーク：携帯基地局/WiFi、パッシブ：他のアプリケーションで取得された位置情報</string>
     <string name="listeners_title">位置情報プロバイダ</string>
     <string name="autosend_frequency_hint">何分？</string>
     <string name="pref_logging_file_no_permissions">指定されたでディレクトリに書き込みできません。別のディレクトリを指定してください。</string>
@@ -281,6 +295,7 @@
     <string name="restart_required">この設定を有効にするには GPSLogger を再起動する必要があります。</string>
     <string name="pref_performance_activityrecognition">活動状況の自動認識</string>
     <string name="activityrecognition_dont_log_if_still">移動していないときはログファイルを書かない</string>
+    <string name="activityrecognition_dont_log_if_still_summary">加速度計に変化がない時は、それ以前に移動し始めていたとしても次の記録間隔まで記録を一時停止します。パッシブ位置は記録され続ける可能性があります。</string>
     <string name="txt_activity">活動状況:</string>
     <string name="activity_in_vehicle">車で移動</string>
     <string name="activity_confidence">確度</string>
@@ -307,8 +322,9 @@
     <string name="profile_delete">プロファイルを削除しますか？</string>
     <string name="profile_default">既定のプロファイル</string>
     <string name="profile_add_new">プロファイルを追加</string>
-    <string name="gpslogger_permissions_rationale_title">権限が不足しています。</string>
+    <string name="gpslogger_permissions_rationale_title">必須の権限</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[このアプリを正しく動作させるために、様々な権限を必要とします。<br /><b>位置情報</b> - この権限は基地局やGPSから位置情報を取得するのに必要です。<br /><b>画像/メディア/ファイル</b> - この権限は、ログやテストファイルの書き込みや、アップロードや共有をする際、ファイルのリストを読み込むために必要とされます。このアプリはあなたの写真やメディアファイルにアクセスすることはありません。<br /><br />  ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[このアプリの必要とする1つ以上の権限が拒否されています。アプリの設定画面からそれらの権限を許可する必要があるでしょう。<br /><br />もしもそれらの権限を永続的に拒否してしまったとしても、システム設定からリセットできます。 ]]></string>
     <string name="privacy_policy">プライバシーポリシー</string>
     <string name="debuglog_attach_to_email">デバッグ用ログをメールに添付する</string>
     <string name="debuglog_attach_to_email_summary">デバッグログの他に診断結果を添付する</string>
@@ -325,5 +341,12 @@
     <string name="sftp_private_key_passphrase">秘密鍵のパスフレーズ</string>
     <string name="sftp_validate_test_upload">ホスト鍵の検証のためアップロードを行う</string>
     <string name="sftp_validate_accept_host_key">ホスト鍵を受け入れますか?</string>
+    <string name="txt_timestamp_epoch">タイムスタンプ (Unix時間)</string>
+    <string name="txt_starttimestamp_epoch">開始タイムスタンプ (Unix時間)</string>
     <string name="txt_battery">バッテリー</string>
+    <string name="customurl_http_body">HTTP Body</string>
+    <string name="customurl_http_headers">HTTP Headers</string>
+    <string name="customurl_http_method">HTTP Method</string>
+    <string name="customurl_http_basicauthentication">Basic認証</string>
+    <string name="hide_notification_from_status_bar_disallowed">通知を非表示にすることはAndroid Oreo以降では許可されていません</string>
 </resources>

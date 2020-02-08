@@ -97,10 +97,10 @@
     <string name="log_gpx_11_title">Použití GPX 1.1</string>
     <string name="log_gpx_11_summary">Používá formát souboru GPX 1.1 namísto GPX 1.0</string>
     <string name="log_kml_title">Zapisovat do KML</string>
-    <string name="log_kml_summary">Záznam umístění do GPX v2.2 souboru</string>
-    <string name="log_plain_text_title">Protokolovat do CSV</string>
+    <string name="log_kml_summary">Záznam umístění do souboru KML v2.2</string>
+    <string name="log_plain_text_title">Uložit do CSV</string>
     <string name="log_plain_text_summary">Záznam umístění do CSV souboru</string>
-    <string name="log_json_title">Protokol k GeoJSON</string>
+    <string name="log_json_title">Uložit do GeoJSON</string>
     <string name="log_json_summary">Záznam polohy do GeoJSON file</string>
     <string name="new_file_creation_title">Vytvoření nového souboru</string>
     <string name="new_file_creation_summary">Zda chcete vytvořit nový soubor jednou denně, nebo při každém spuštění.</string>
@@ -111,14 +111,14 @@
     <string name="new_file_custom_summary">Můžete použít svůj vlastní název souboru. Volitelně přidáte pár dynamických parametrů, například sériové číslo, rok, hodinu, minutu, atd. Velký počet souborů s dynamickými názvy nemusí fungovat dobře s funkcí automatického odesílání, protože ta odesílá pouze poslední soubor.</string>
     <string name="pref_performance_title">Výkon</string>
     <string name="pref_performance_summary">Časování, filtry a posluchači</string>
-    <string name="time_before_logging_title">Interval protokolování</string>
+    <string name="time_before_logging_title">Interval záznamu</string>
     <string name="time_before_logging_summary">Použijte 0 pro maximální frekvenci, ale pomalejší je lepší pro výdrž baterie.
     </string>
     <string name="time_before_logging_dialog_title">Čas v sekundách</string>
     <string name="time_before_logging_hint">Zadejte sekundy (maximum 9999)</string>
     <string name="keep_fix_summary">Buďte opatrní, toto dramaticky sníží výdrž na baterii. Použijte pouze pro vyšší přesnost při nízkých frekvencích.</string>
     <string name="keep_fix_title">Ponechat GPS zapnutou mezi odečty polohy</string>
-    <string name="retry_time_title">Doba trvání odpovídající přesnost</string>
+    <string name="retry_time_title">Interval pro získání přesnosti</string>
     <string name="retry_time_summary">After acquiring an initial fix, keep trying for this long to get an accurate point to match the accuracy filter setting.</string>
     <string name="display_imperial_title">Zobrazit imperiální jednotky</string>
     <string name="display_imperial_summary">Zobrazí stopy, míle a ostatní imperiální jednotky. (nastavení musí zůstat v metrickém systému)</string>
@@ -250,12 +250,12 @@
     <string name="new_file_prefix_serial_title">Předpona sériového čísla zařízení v názvu souboru</string>
     <string name="new_file_prefix_serial_summary">Toto je sériové číslo vašeho telefonu </string>
     <string name="txt_travel_duration">Doba trvání:</string>
-    <string name="menu_onepoint">Protokolovat jeden bod</string>
+    <string name="menu_onepoint">Uložit jeden bod</string>
     <string name="view_simple">Jednoduché zobrazení</string>
     <string name="view_detailed">Detailní zobrazení</string>
     <string name="view_big">Velké zobrazení</string>
     <string name="view_log">Zobrazení záznamu</string>
-    <string name="bigview_taptotoggle">Klepnutím spustit/zastavit protokolování</string>
+    <string name="bigview_taptotoggle">Klepnutím spustit/zastavit záznam</string>
     <string name="summary_autosendtargets">Odeslat na:</string>
     <string name="accuracy_filter_title">Filtr přesnosti</string>
     <string name="accuracy_filter_summary">Minimální přesnost, aby bylo možné uložit bod. Ostatní budou zahozeny.</string>
@@ -269,12 +269,18 @@
     <string name="absolute_timeout_summary">Počet sekund, po jejichž vypršení aplikace vzdá snahu o zjištění polohy, bez ohledu na ostatní nastavení. To je zvláště užitečné, když jste uvnitř budov a chcete zabránit vybíjení baterie kvůli GPS. Pokud chcete limit vypnout, nastavte na 0.</string>
     <string name="txt_latitude_short">Lat</string>
     <string name="txt_longitude_short">Lon</string>
-    <string name="log_nmea_title">Protokol do NMEA</string>
+    <string name="log_nmea_title">Uložit do NMEA</string>
     <string name="log_nmea_summary">Vytvoří soubor NMEA při pokusu o zjišťování polohy. tento soubor se velmi rychle zvětšuje. Funguje pouze při využívání GPS.</string>
     <string name="autoopengts_accountname">Název účtu</string>
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">Záznam GPS/GNSS lokací</string>
+    <string name="listeners_gps_summary">Zaznamenává pozice získané pomocí satelitního přijímače ve vašem zařízení</string>
     <string name="listeners_cell">Síť</string>
+    <string name="listeners_cell_title">Záznam síťových lokací</string>
+    <string name="listeners_cell_summary">Zaznamenává pozice získané pomocí přijímače mobilního signálu ve vašem zařízení</string>
     <string name="listeners_passive">Pasivní</string>
+    <string name="listeners_passive_title">Pasivní záznam lokací</string>
+    <string name="listeners_passive_summary">Zaznamenává lokace poskytnuté jinými aplikacemi, ale spousta filtrů může být ignorována. Toto nastavení použijete při připojení k externímu GPS přijímači.</string>
     <string name="listeners_summary">Kteří poskytovatelé polohy se mají použít, když jsou k dispozici; \"GPS\" pro satelity, \"Síť\" pro mobilní vysílače/wifi, \"Pasivní\" je zvláštní poskytovatel, který naslouchá a přebírá umístění po vyžádání jinou aplikací.</string>
     <string name="listeners_title">Zjišťování polohy</string>
     <string name="autosend_frequency_hint">Počet minut</string>
@@ -292,6 +298,7 @@
     <string name="restart_required">Budete muset restartovat GPSLogger aby se toto nastavení projevilo</string>
     <string name="pref_performance_activityrecognition">Rozpoznání aktivity</string>
     <string name="activityrecognition_dont_log_if_still">Nezaznamenávat pokud se nehýbu</string>
+    <string name="activityrecognition_dont_log_if_still_summary">Pokud od posledního bodu akcelerometr nezaznamená žádný pohyb, aktivní záznam se pozastaví po dobu vašeho intervalu záznamu, ikdyž se jste se předtím hýbali. Záznam pasivních bodů může stále pokračovat.</string>
     <string name="txt_activity">Aktivita:</string>
     <string name="activity_in_vehicle">Ve vozidle</string>
     <string name="activity_confidence">Důvěra</string>
@@ -304,8 +311,8 @@
     <string name="activity_unknown">Neznámý</string>
     <string name="altitude_subtractgeoidheight_summary">Použije střední hodnotu úrovně hladiny moře místo WGS84 výšky odečtením výšky geoidu z GPS nadmořské výšky. Pouze se týká bodů z GPS satelitů, ne sítě nebo NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">Použít MSL místo WGS84.</string>
-    <string name="altitude_subtractoffset_title">Odečíst odsazení nadmořské výšky</string>
-    <string name="altitude_subtractoffset_summary">Hodnota v metrech odečíst od GPS. Použijte záporné číslo, přidat hodnotu nadmořské výšky. Platí pouze pro satelitní družice GPS, není síť, nebo NMEA.</string>
+    <string name="altitude_subtractoffset_title">Odečíst posunutí nadmořské výšky</string>
+    <string name="altitude_subtractoffset_summary">Hodnota v metrech odečítaná od nadmořské výšky z GPS. Použijte záporné číslo pro přidání hodnoty k nadmořské výšce. Aplikuje se pouze na body zaměřené pomocí GPS satelitů, nikoliv pomocí mobilní sítě nebo NMEA.</string>
     <string name="upload_failure">Nelze nahrát soubor</string>
     <string name="inaccurate_point_discarded">Nepřesný bod vyřazen</string>
     <string name="not_enough_distance_traveled">Pouze %s m procestováno. Bod zrušen.</string>
@@ -319,6 +326,7 @@
     <string name="profile_add_new">Přidat profil</string>
     <string name="gpslogger_permissions_rationale_title">Požadovaná oprávnění</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Tato aplikace vyžaduje různá oprávnění, aby mohla správně fungovat. <br /> <b>Poloha zařízení</b> - toto oprávnění umožňuje číst údaje o poloze z GSM vysílačů a GPS modulu zařízení. <br /><b>Fotky, média, soubory</b> - toto oprávnění umožňuje zápis souborů záznamů a testovacích souborů na úložiště, a čtení ze seznamu souborů pro nahrávání nebo sdílení. Tato aplikace nebude přistupovat k vašim fotkám nebo médiím.<br /><br />  ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Zakázal(a) jste jedno nebo více práv, které tato aplikace vyžaduje. Je potřeba přejít do nastavení aplikace a udělit práva.  <br /><br />Pokud máte trvale zakázaná práva, můžete je resetovat v nastavení systému. ]]></string>
     <string name="privacy_policy">Zásady ochrany osobních údajů</string>
     <string name="debuglog_attach_to_email">Přiložit záznamy o ladění do emailu</string>
     <string name="debuglog_attach_to_email_summary">Přiloží záznam o ladění do emailu spolu s některými diagnostickými informacemi</string>
@@ -341,4 +349,6 @@
     <string name="customurl_http_body">HTTP - Tělo</string>
     <string name="customurl_http_headers">HTTP - Hlavičky</string>
     <string name="customurl_http_method">Metoda HTTP</string>
+    <string name="customurl_http_basicauthentication">Základní autentifikace</string>
+    <string name="hide_notification_from_status_bar_disallowed">Skrytí notifikací není povoleno ve verzi Android Oreo a novějším</string>
 </resources>

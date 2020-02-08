@@ -6,7 +6,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="app_name">GPSLogger</string>
     <string name="settings_screen_name">Ustawienia GPSLogger</string>
-    <string name="ok">OK</string>
+    <string name="ok">Dobrze</string>
     <string name="cancel">Anuluj</string>
     <string name="could_not_write_to_file">Nie można zapisać do pliku </string>
     <string name="add_description">Dodaj opis</string>
@@ -22,7 +22,7 @@
     <string name="txt_direction">Kierunek:</string>
     <string name="txt_satellites">Satelity:</string>
     <string name="txt_accuracy">Dokładność:</string>
-    <string name="txt_travel_distance">Travelled:</string>
+    <string name="txt_travel_distance">Łączna odległość:</string>
     <string name="btn_start_logging">Rozpocznij logowanie</string>
     <string name="btn_stop_logging">Zatrzymaj logowanie</string>
     <string name="gpslogger_still_running">GPSLogger wciąż działa.</string>
@@ -180,7 +180,7 @@
     <string name="dropbox_couldnotauthorize">Nie można uzyskać autoryzacji Dropboxa, proszę spróbować ponownie.</string>
     <string name="owncloud_setup_title">ownCloud</string>
     <string name="owncloud_server_summary">Bazowy URL ownCloud</string>
-    <string name="owncloud_directory_summary">Folder do użycia na serwerze ownCloud, upewnij się, że istnieje, lub przekazywanie nie powiedzie się.</string>
+    <string name="owncloud_directory_summary">Katalog do użycia na serwerze ownCloud. Upewnij się, czy istnieje. W przeciwnym razie przesyłanie będzie nie możliwe.</string>
     <string name="owncloud_test_summary">Wyślij plik testowy na serwer ownCloud</string>
     <string name="owncloud_testing">Wysyłam plik na serwer ownCloud</string>
     <string name="menu_upload">Wysyłanie</string>
@@ -246,9 +246,9 @@
     <string name="txt_time_isoformat">Czas UTC (2011-12-25T15:27:33Z):</string>
     <string name="txt_provider">Dostawca:</string>
     <string name="annotation_requires_logging">Adnotacje wymagają logowania do CSV/GPX/KML/Niestandardowego URL/GeoJSON</string>
-    <string name="gpslogger_folder_title">Zapisz w folderze</string>
+    <string name="gpslogger_folder_title">Zapisz w katalogu</string>
     <string name="gpslogger_folder_summary">Gdzie zapisywać pliki logów; domyślnie do /sdcard/GPSLogger</string>
-    <string name="autoftp_directory">Folder</string>
+    <string name="autoftp_directory">Katalog</string>
     <string name="new_file_custom_message">Można użyć %SER for device serial, %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER dla tej wersji</string>
     <string name="new_file_prefix_serial_title">Dodaj numer seryjny urządzenia przed nazwą pliku</string>
     <string name="new_file_prefix_serial_summary">To numer seryjny, który został odczytany z Twojego telefonu </string>
@@ -267,21 +267,27 @@
     <string name="points">punkty</string>
     <string name="txt_number_of_points">Liczba punktów</string>
     <string name="save">Zapisz</string>
-    <string name="pref_filedetails_title">Szczegóły pliku i folderu</string>
+    <string name="pref_filedetails_title">Szczegóły pliku i katalogu</string>
     <string name="absolute_timeout_title">Całkowity czas ustalenia pozycji GPS</string>
     <string name="absolute_timeout_summary">Liczba sekund, po których aplikacja przestaje próbować określić lokalizację, niezależnie od innych ustawień. Jest to szczególnie przydatne w przypadku, gdy jesteś wewnątrz budynków, by zapobiec nadmiernemu zużyciu baterii. Ustaw na 0 dla braku limitu.</string>
     <string name="txt_latitude_short">Dług.</string>
     <string name="txt_longitude_short">Szer.</string>
     <string name="log_nmea_title">Zapisz do pliku NMEA</string>
-    <string name="log_nmea_summary">Tworzy czysty plik NMEA podczas próby uzyskania rozwiązania. Ten plik rośnie bardzo szybko, Działa tylko, gdy GPS jest używany.</string>
+    <string name="log_nmea_summary">Tworzy czysty plik NMEA podczas próby uzyskania poprawki. Ten plik rośnie bardzo szybko. Działa tylko, gdy używany jest GPS.</string>
     <string name="autoopengts_accountname">Nazwa konta</string>
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">Rejestruj lokalizacje GPS/GNSS</string>
+    <string name="listeners_gps_summary">Rejestruje lokalizacje dostarczone przez odbiornik satelitarny na urządzeniu</string>
     <string name="listeners_cell">Sieć</string>
+    <string name="listeners_cell_title">Rejestruj lokalizacje sieciowe</string>
+    <string name="listeners_cell_summary">Rejestruje lokalizacje dostarczone przez odbiornik satelitarny na urządzeniu</string>
     <string name="listeners_passive">Pasywne</string>
+    <string name="listeners_passive_title">Rejestruj lokalizacje pasywne</string>
+    <string name="listeners_passive_summary">Rejestruje lokalizacje uzyskane z innych aplikacji, ale należy pamiętać, że większość filtrów jest ignorowana. To ustawienie jest również przydatne dla zewnętrznych odbiorników GPS.</string>
     <string name="listeners_summary">Którego dostawcy lokalizacji używać, gdy są dostępne: GPS dla satelit, Sieci dla masztu sieci komórkowej/wifi, Pasywny jest specjalnym dostawcą który nasłuchuje lokalizacji zgłoszonych z innych aplikacji.</string>
     <string name="listeners_title">Dostawcy usług lokalizacji</string>
     <string name="autosend_frequency_hint">Liczba minut</string>
-    <string name="pref_logging_file_no_permissions">Ten folder nie jest zapisywany przez GPSLogger. Wybierz inny folder do zapisu.</string>
+    <string name="pref_logging_file_no_permissions">Ten katalog nie jest zapisywany przez GPSLogger. Wybierz inny katalog do zapisu.</string>
     <string name="pref_gpsvisualizer">Wizualizuj statystyki logowania</string>
     <string name="new_file_custom_each_time_title">Pytaj o nazwę pliku przy każdym uruchomieniu</string>
     <string name="new_file_custom_each_time_summary">Pytaj o nazwę pliku za każdym razem kiedy rozpoczyna się rejestracja</string>
@@ -295,6 +301,7 @@
     <string name="restart_required">Musisz uruchomić ponownie GPSLogger aby użyć tych ustawień</string>
     <string name="pref_performance_activityrecognition">Rozpoznawanie aktywności</string>
     <string name="activityrecognition_dont_log_if_still">Nie loguj, jeśli się nie ruszam</string>
+    <string name="activityrecognition_dont_log_if_still_summary">Jeżeli nie istnieje ruch akcelorometru od ostatniego punktu, aktywne rejestrowanie zostanie zatrzymane, do momentu w którym ponownie się przemieścisz. Pasywne punkty nadal mogą być rejestrowane.</string>
     <string name="txt_activity">Aktywność:</string>
     <string name="activity_in_vehicle">W pojeździe</string>
     <string name="activity_confidence">Dokładność</string>
@@ -322,6 +329,7 @@
     <string name="profile_add_new">Dodaj profil</string>
     <string name="gpslogger_permissions_rationale_title">Wymagane uprawnienia</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ta aplikacja wymaga różnych uprawnień, aby funkcjonować prawidłowo.<br /><b>Lokalizacja urządzenia</b> - To uprawnienie zezwala na odczyt danych z masztów telefonicznych i sprzętu GPS urządzenia.<br /><b>Zdjęcia, multimedia, pliki</b> - To uprawnienie zezwala na zapisywanie plików rejestru na dysk, oraz na odczyt, przesyłanie lub udostępnianie. Aplikacja nie będzie miała dostępu do twoich zdjęć i multimediów.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Odmówiłeś jednego lub więcej uprawnień wymaganych przez tę aplikację.  Aby uzyskać te uprawnienia, musisz przejść do ekranu ustawień aplikacji.<br /><br />Jeśli na stałe odmówiono Ci uprawnień, możesz je zresetować w ustawieniach systemu. ]]></string>
     <string name="privacy_policy">Polityka prywatności</string>
     <string name="debuglog_attach_to_email">Dołącz do wiadomości e-mail rejestr debugowania</string>
     <string name="debuglog_attach_to_email_summary">Dołącza rejestr debugowania wraz z niektórymi informacjami diagnostycznymi do wiadomości email</string>
@@ -344,5 +352,6 @@
     <string name="customurl_http_body">Treść HTTP</string>
     <string name="customurl_http_headers">Nagłówki HTTP</string>
     <string name="customurl_http_method">Metoda HTTP</string>
+    <string name="customurl_http_basicauthentication">Podstawowe uwierzytelnianie</string>
     <string name="hide_notification_from_status_bar_disallowed">Ukrywanie powiadomienia jest zabronione w Androidzie Oreo</string>
 </resources>

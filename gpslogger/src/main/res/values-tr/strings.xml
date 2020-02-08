@@ -272,8 +272,13 @@
     <string name="log_nmea_summary">Bir düzeltme alınırken bir ham NMEA dosyası oluşturur. Bu dosya çok hızlı bir şekilde büyür. Yalnızca GPS kullanılırken çalışır.</string>
     <string name="autoopengts_accountname">Hesap adı</string>
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">GPS/GNSS Konumlarınızın geçmiş kaydı</string>
+    <string name="listeners_gps_summary">Uydu tabanlı konum alıcısı tarafından sağlanan konumları cihazınıza kaydeder</string>
     <string name="listeners_cell">Ağ</string>
+    <string name="listeners_cell_title">İnternet ağ konumlarınızın kaydı</string>
+    <string name="listeners_cell_summary">İnternet ağı konum alıcısı tarafından sağlanan konumları cihazınıza kaydeder</string>
     <string name="listeners_passive">Pasif</string>
+    <string name="listeners_passive_title">Pasif konumlarınızın kaydı</string>
     <string name="listeners_summary">Hangi konum sağlayıcıları kullanılabilir olduklarında kullanılacak; GPS: uydular için, Ağ: baz istasyonu/wifi için, Pasif: diğer uygulamaların konum taleplerini dinleyen özel sağlayıcı için.</string>
     <string name="listeners_title">Konum sağlayıcıları</string>
     <string name="autosend_frequency_hint">Dakika sayısı</string>

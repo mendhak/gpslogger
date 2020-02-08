@@ -271,8 +271,14 @@
     <string name="log_nmea_summary">Crea un archivo NMEA en crudo durante la búsqueda de posición. Este archivo crece muy rápidamente. Sólo funciona mientras se está utilizando el GPS.</string>
     <string name="autoopengts_accountname">Nombre de cuenta</string>
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">Registrar ubicación GPS/GNSS</string>
+    <string name="listeners_gps_summary">Registrar ubicaciones provistas por el satélite basada en la ubicación del receptor en su dispositivo</string>
     <string name="listeners_cell">Red</string>
+    <string name="listeners_cell_title">Registrar ubicaciónes de la red</string>
+    <string name="listeners_cell_summary">Registrar ubicaciones provistas por la red movil en su dispositivo</string>
     <string name="listeners_passive">Pasivo</string>
+    <string name="listeners_passive_title">Registrar ubicaciones pasivas</string>
+    <string name="listeners_passive_summary">Registrar ubicaciones obtenidas desde otras aplicaciones, tener presente que los filtros son ignorados. esta configuración es también útil para receptores GPS externos.</string>
     <string name="listeners_summary">Qué proveedores de contenido usar cuando se encuentran disponibles; GPS para satélites, Red para torres de celdas/WiFi, Pasivo es un proveedor especial que escucha ubicaciones solicitadas por otras aplicaciones.</string>
     <string name="listeners_title">Proveedores de ubicación</string>
     <string name="autosend_frequency_hint">Número de minutos</string>
@@ -291,6 +297,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="restart_required">Es necesario reiniciar GPSLogger para que la configuración surta efecto</string>
     <string name="pref_performance_activityrecognition">Reconocimiento de actividad</string>
     <string name="activityrecognition_dont_log_if_still">No registrar si no hay movimiento</string>
+    <string name="activityrecognition_dont_log_if_still_summary">Si no hay ningún movimiento de acelerómetro desde el último punto se pausará el registro, reanudándose cuando haya actividad. Los puntos pasivos todavía se pueden registrar.</string>
     <string name="txt_activity">Actividad:</string>
     <string name="activity_in_vehicle">En vehículo</string>
     <string name="activity_confidence">Confianza</string>
@@ -318,6 +325,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="profile_add_new">Añadir perfil</string>
     <string name="gpslogger_permissions_rationale_title">Se necesitan permisos</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Esta aplicación requiere varios permisos en orden para funcionar correctamente. <br /><b>Ubicación del dispositivo </b>te permiso permite leer los datos de localización de las torres de celdas y el hardware GPS del dispositivo. <br /><b>Fotos, medios, archivos</b> - Este permiso permite escribir archivos de registro y archivos de prueba para almacenamiento, y lectura de una lista de archivos para subir o compartir. Esta aplicación no tendrá acceso a tus fotos o medios.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[No has concedido permiso para alguno de los requisitos de la aplicación.  usted necesitará ir a la configuración de la aplicación para dar estos permisos.  <br /><br />Si los negó permanentemente debe restaurarlos en  la configuración del sistema. ]]></string>
     <string name="privacy_policy">Política de Privacidad</string>
     <string name="debuglog_attach_to_email">Adjuntar el registro de depuración para correo electrónico</string>
     <string name="debuglog_attach_to_email_summary">Registro de depuración se conecta a un correo electrónico junto con algunos datos diagnóstico</string>
@@ -340,5 +348,6 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="customurl_http_body">Cuerpo HTTP</string>
     <string name="customurl_http_headers">Encabezados HTTP</string>
     <string name="customurl_http_method">Método HTTP</string>
+    <string name="customurl_http_basicauthentication">Autenticación i básica</string>
     <string name="hide_notification_from_status_bar_disallowed">Ocultar notificación no está permitido en Android Oreo y posteriores</string>
 </resources>

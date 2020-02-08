@@ -270,8 +270,14 @@
     <string name="log_nmea_summary">Registra un file NMEA durante il tentativo di avere un punto GPS. Le dimensioni del file crescono rapidamente. Funziona solo quando è in uso il GPS.</string>
     <string name="autoopengts_accountname">Nome utente</string>
     <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">Registra le posizioni GPS/GNSS</string>
+    <string name="listeners_gps_summary">Registra le posizioni fornite dal ricevitore basato sui satelliti del tuo dispositivo</string>
     <string name="listeners_cell">Rete</string>
+    <string name="listeners_cell_title">Registra le posizioni di rete</string>
+    <string name="listeners_cell_summary">Registra le posizioni fornite dal ricevitore basato sulla rete del tuo dispositivo</string>
     <string name="listeners_passive">Passivo</string>
+    <string name="listeners_passive_title">Registra le posizioni passive</string>
+    <string name="listeners_passive_summary">Registra le posizioni ottenute dalle altre app, ignorando la maggior parte dei filtri. Questa impostazione è utile anche per ricevitori GPS esterni.</string>
     <string name="listeners_summary">Quali provider di posizione utilizzare quando disponibili; GPS per satelliti, Ripetitori per cellulari/wifi, Passivo è un provider speciale che è in ascolto delle richieste di posizione delle altre applicazioni.</string>
     <string name="listeners_title">Fornitori di posizione</string>
     <string name="autosend_frequency_hint">Numero di minuti</string>
@@ -289,6 +295,7 @@
     <string name="restart_required">Sarà necessario riavviare GPSLogger perchè questa impostazione abbia effetto</string>
     <string name="pref_performance_activityrecognition">Riconoscimento movimento</string>
     <string name="activityrecognition_dont_log_if_still">Non registrare se sono fermo</string>
+    <string name="activityrecognition_dont_log_if_still_summary">Se non c\'è nessun movimento degli accelerometri dall\'ultimo punto, la registrazione attiva verrà messa in pausa per il tuo intervallo di registrazione, anche se inizierai a muoverti prima. I punti passivi possono continuare ad essere registrati.</string>
     <string name="txt_activity">Attività:</string>
     <string name="activity_in_vehicle">In auto</string>
     <string name="activity_confidence">Fedeltà</string>
@@ -316,6 +323,7 @@
     <string name="profile_add_new">Aggiungi profilo</string>
     <string name="gpslogger_permissions_rationale_title">Autorizzazioni necessarie</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Questa applicazione richiede varie autorizzazioni per funzionare correttamente. <br /> <b>Posizione dispositivo</b> - Questa autorizzazione permette di leggere la tua posizione basandosi sui ripetitori di telefonia mobile e sul tuo sensore GPS.<br /> <b>Foto, media, file</b> - Questa autorizzazione permette la scrittura di file di log e di test sul supporto di archiviazione locale, e la lettura di un elenco di file per il caricamento o la condivisione. Questa app non accederà alle tue foto o media.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Hai negato uno o più permessi che l'app richiede.  E' necessario accedere alla schermata delle impostazioni dell'app ed accordare questi permessi.  <br /><br />Se i permessi sono stati definitivamente negati, è possibile ripristinarli nelle impostazioni di sistema. ]]></string>
     <string name="privacy_policy">Informativa sulla privacy</string>
     <string name="debuglog_attach_to_email">Invia debug con Email</string>
     <string name="debuglog_attach_to_email_summary">Allega un file di debug ad una Email con ulteriori informazioni diagnostiche</string>
@@ -338,5 +346,6 @@
     <string name="customurl_http_body">HTTP Body</string>
     <string name="customurl_http_headers">HTTP Headers</string>
     <string name="customurl_http_method">Metodo HTTP</string>
+    <string name="customurl_http_basicauthentication">Autenticazione di base</string>
     <string name="hide_notification_from_status_bar_disallowed">Da Android Oreo in poi non è consentito nascondere la notifica</string>
 </resources>

@@ -94,9 +94,14 @@
     <string name="pref_logging_title">Detalji zapisivanja</string>
     <string name="log_gpx_title">Zapis u GPX</string>
     <string name="log_gpx_summary">Bilježi lokacije u GPX v1.0 datoteku</string>
+    <string name="log_gpx_11_title">Koristi GPX 1.1</string>
+    <string name="log_gpx_11_summary">Koristi GPX 1.1 fajl format umjesto GPX 1.0</string>
     <string name="log_kml_title">Zapis u KML</string>
     <string name="log_kml_summary">Bilježi lokacije u KML v2.2 datoteku</string>
+    <string name="log_plain_text_title">Loguj se na CSV</string>
     <string name="log_plain_text_summary">Bilježi lokacije u CSV datoteku</string>
+    <string name="log_json_title">Loguj se na GeoJSON</string>
+    <string name="log_json_summary">Log lokacije na GeoJSON datoteku</string>
     <string name="new_file_creation_title">Stvaranje novih datoteka</string>
     <string name="new_file_creation_summary">Želite li stvoriti novu datoteku jedanput dnevno ili kod svakog početka.</string>
     <string name="new_file_creation_onceaday">Jednom dnevno</string>
@@ -106,6 +111,7 @@
     <string name="new_file_custom_summary">Možete koristiti vlastito ime.         Po želji možete dodati nekoliko promjenjljive parametre kao što su serijski broj, godine, sat, minute, itd. Jako promjenjljive imena datoteke         možda neće raditi sa automatskim slanjem značajke jer ona šalje samo najnovije datoteke.</string>
     <string name="pref_performance_title">Performanse</string>
     <string name="pref_performance_summary">Vremenski rasporedi, filtri i prijamnici</string>
+    <string name="time_before_logging_title">Vremenski period logovanja</string>
     <string name="time_before_logging_summary">Koristi 0 za najbržu frekvenciju, ali sporije je bolje jer ne troši toliko bateriju.    </string>
     <string name="time_before_logging_dialog_title">Vrijeme u sekundama</string>
     <string name="time_before_logging_hint">Unos u sekundama(max 9999)</string>
@@ -120,6 +126,7 @@
     <string name="startonapplaunch_title">Započni kod pokretanja aplikacije</string>
     <string name="startonapplaunch_summary">Započni zapisivanje kod pokretanja aplikacije</string>
     <string name="autoemail_title">E-pošta</string>
+    <string name="please_wait">Molimo sačekajte</string>
     <string name="autoemail_target">Cilj e-adrese</string>
     <string name="autosend_frequency_display">Nakon %s minute</string>
     <string name="autoemail_frequency_whenistop">Kada pritisnem stop</string>
@@ -172,6 +179,7 @@
     <string name="menu_upload">Prijenos</string>
     <string name="autoemail_from">S adrese</string>
     <string name="autoemail_from_summary">Neki pružatelji usluge e-pošte tražu adresu. Koristite ovo samo ako vam je potrebno.    </string>
+    <string name="gdocs_clearauthorization_summary">Zaboravlja lokalne Google Drive postavke. Za trajno ukidanje pristupa, idite na Google Account postavke</string>
     <string name="gdocs_setup_title">Google disk</string>
     <string name="gdocs_test_summary">Prijenos testne datoteke na Google disk</string>
     <string name="gdocs_test_title">Prijenos test</string>
@@ -231,6 +239,7 @@
     <string name="gpslogger_folder_title">Spremi u mapu</string>
     <string name="gpslogger_folder_summary">Gdje da sprema datoteku zapisivanja, zadano je/sdcard/GPSLogger</string>
     <string name="autoftp_directory">Mapa</string>
+    <string name="new_file_custom_message">Možete koristiti %SER za uređajnu seriju, %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER za verziju</string>
     <string name="new_file_prefix_serial_title">Prefiks serijskog broja uređaja za naziv datoteke</string>
     <string name="new_file_prefix_serial_summary">Serijski broj nađen u statusu telefona </string>
     <string name="txt_travel_duration">Trajanje:</string>
@@ -249,6 +258,7 @@
     <string name="txt_number_of_points">Broj točaka</string>
     <string name="save">Spremi</string>
     <string name="pref_filedetails_title">Detalji datoteke i mape</string>
+    <string name="absolute_timeout_title">Ukupno vrijeme GPX popravke</string>
     <string name="absolute_timeout_summary">Broj sekundi nakon čega aplikacija ne traži više informaciju o poziciji, bez obzira na ostale postavke. To je posebno korisno u zgradi kako bi se spriječilo da GPS isprazni bateriju.  Postavite na 0 za timeout.</string>
     <string name="txt_latitude_short">Šir</string>
     <string name="txt_longitude_short">Duž</string>
