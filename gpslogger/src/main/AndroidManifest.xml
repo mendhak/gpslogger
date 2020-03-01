@@ -22,6 +22,8 @@
     <!-- If the user needs to use external GPS receiver eg over bluetooth -->
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"
                      tools:ignore="MockLocation"/>
+
+
     <!-- allow this to run as a foreground service -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
@@ -37,7 +39,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service android:name=".GpsLoggingService" android:foregroundServiceType="location" android:exported="true" android:stopWithTask="false">
+        <service android:name=".GpsLoggingService"  android:exported="true" android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.mendhak.gpslogger.GpsLoggingService" />
             </intent-filter>

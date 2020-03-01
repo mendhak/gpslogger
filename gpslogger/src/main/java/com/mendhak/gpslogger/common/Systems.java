@@ -179,7 +179,6 @@ public class Systems {
                                 //From preference fragments, requestPermissions is called differently. WHY.
                                 fragment.requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
                                                 Manifest.permission.ACCESS_FINE_LOCATION,
-                                                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
                                                 Manifest.permission.READ_EXTERNAL_STORAGE,
                                                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                                 Manifest.permission.GET_ACCOUNTS},
@@ -188,7 +187,6 @@ public class Systems {
                                 ActivityCompat.requestPermissions(activity,
                                         new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
                                                 Manifest.permission.ACCESS_FINE_LOCATION,
-                                                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
                                                 Manifest.permission.READ_EXTERNAL_STORAGE,
                                                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                                 Manifest.permission.GET_ACCOUNTS},
