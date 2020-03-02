@@ -166,7 +166,7 @@ public class GoogleDriveJob extends Job {
         return fileId;
     }
 
-    private String createEmptyFile(String authToken, String fileName, String mimeType, String parentFolderId) throws Exception {
+    private static String createEmptyFile(String authToken, String fileName, String mimeType, String parentFolderId) throws Exception {
 
         String fileId = null;
         HttpURLConnection conn = null;
