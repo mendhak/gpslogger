@@ -145,7 +145,8 @@
 
 
     <string name="time_before_logging_title">Logging interval</string>
-    <string name="time_before_logging_summary">Use 0 for maximum frequency, but slower is better for battery life.
+    <string name="time_before_logging_summary">Use 0 for maximum frequency, but slower is better for battery life. System
+        level battery configuration may override this setting, see Help and FAQ.
     </string>
     <string name="time_before_logging_dialog_title">Time in seconds</string>
     <string name="time_before_logging_hint">Enter seconds (max 9999)</string>
