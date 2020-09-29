@@ -27,9 +27,7 @@ I'm not very good at UIs, so any work with the layouts would be appreciated!
 
 ## License and policy
 
-[Licensed under GPL v2](LICENSE.md) with an additional request - if you redistribute this application (eg publishing the app to a storefront) please do not use the name "GPSLogger" or "GPSLogger for Android". 
-
-[Third party licenses](assets/text/opensource.md) | [Privacy policy](assets/text/privacypolicy.md)
+[Licensed under GPL v2](LICENSE.md) | [Third party licenses](assets/text/opensource.md) | [Privacy policy](assets/text/privacypolicy.md)
 
 
 
