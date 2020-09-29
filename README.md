@@ -1,14 +1,14 @@
 GPSLogger  [![githubactions](https://github.com/mendhak/gpslogger/workflows/Android%20CI/badge.svg)](https://github.com/mendhak/gpslogger/actions) [![pgp](assets/pgp.png)](https://keybase.io/mendhak)
 =========
 
+Note: Development has stopped, and the app is not available from the Play Store. [See this note](https://github.com/mendhak/gpslogger/issues/849)
+
 
 GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, Google Drive, Dropbox, Email). This app aims to be as battery efficient as possible.
 
 [Read about GPSLogger's features here](http://mendhak.github.com/gpslogger/)
 
 ## Download
-
-You can [download it from Google Play](https://play.google.com/store/apps/details?id=com.mendhak.gpslogger).
 
 You can download directly [from the releases](https://github.com/mendhak/gpslogger/releases).
 
@@ -29,9 +29,6 @@ I'm not very good at UIs, so any work with the layouts would be appreciated!
 
 [Licensed under GPL v2](LICENSE.md) | [Third party licenses](assets/text/opensource.md) | [Privacy policy](assets/text/privacypolicy.md)
 
-## Donate
-
-[Bitcoin](https://blockchain.info/payment_request?address=14bKk4sR1AD7avuJfBx2izy2FwyqMXEvcY) | [Paypal](https://paypal.me/mendhak) 
 
 
 ## Verifying
