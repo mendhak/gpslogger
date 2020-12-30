@@ -100,7 +100,7 @@
             <intent-filter>
                 <!-- Set from build.gradle, see defaultConfig -->
                 <!--suppress AndroidDomInspection -->
-                <data android:scheme="@string/DROPBOX_DB_SCHEME" />
+                <data android:scheme="0unjsn38gpe3rwv" />
 
                 <action android:name="android.intent.action.VIEW" />
 
