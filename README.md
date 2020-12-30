@@ -163,3 +163,25 @@ needed for the current run of GPSLogger.
 `AppSettings` is a representation of the user's preferences.
 
 These objects are visible throughout the application and can be accessed directly by any class, service, activity or fragment.
+
+
+## Working notes for F-Droid
+
+Use the fdroidserver docker image.  Clone the fdroid metadata repo and make changes to the com.mendhak.gpslogger.yml file. 
+
+    git clone https://gitlab.com/fdroid/fdroiddata.git
+    cd fdroiddata
+
+    # initialize the metadata repo
+    docker run --rm -v /home/mendhak/Android/Sdk:/opt/android-sdk -v $(pwd):/repo -e ANDROID_HOME:/opt/android-sdk registry.gitlab.com/fdroid/docker-executable-fdroidserver:master init -v
+    
+    # lint your metadata yml
+    docker run --rm -v /home/mendhak/Android/Sdk:/opt/android-sdk -v $(pwd):/repo -e ANDROID_HOME:/opt/android-sdk registry.gitlab.com/fdroid/docker-executable-fdroidserver:master lint com.mendhak.gpslogger -v
+    
+    # build
+    docker run --rm -v /home/mendhak/Android/Sdk:/opt/android-sdk -v $(pwd):/repo -e ANDROID_HOME:/opt/android-sdk registry.gitlab.com/fdroid/docker-executable-fdroidserver:master build -v -l com.mendhak.gpslogger
+    
+    
+I'll just aim for a static release.  Still some tasks remaining, need to clean up text references to GDocs, GDrive, Dropbox.  Need to hardcode the OSM keys into the code rather than an environment variable.   
+
+In the future may want to make it [auto update, and add screenshots too](https://gitlab.com/fdroid/fdroiddata/-/blob/master/CONTRIBUTING.md#after-you-added-your-app).  Example [fastlane snippet](https://gitlab.com/snippets/1895688).
