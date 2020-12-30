@@ -118,11 +118,7 @@ Fill in the form with these details
 ![Oauth settings](assets/osm_oauth_settings.png)
 
 After registering the application, you will receive a 'Consumer Key' and a 'Consumer Secret'.  
-Place the keys in your `~/.gradle/gradle.properties` like this:
-
-    GPSLOGGER_OSM_CONSUMERKEY=abcdefgh
-    GPSLOGGER_OSM_CONSUMERSECRET=1234123456
-
+Place the keys in OSMJob.java and OpenStreetMapManager.java.   
 
 
 Overview

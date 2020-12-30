@@ -21,11 +21,9 @@ package com.mendhak.gpslogger.senders.osm;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
 import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
-import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
@@ -74,7 +72,7 @@ public class OSMJob extends Job {
     public void onRun() throws Throwable {
 
 
-        OkHttpOAuthConsumer consumer = new OkHttpOAuthConsumer(BuildConfig.OSM_CONSUMER_KEY, BuildConfig.OSM_CONSUMER_SECRET);
+        OkHttpOAuthConsumer consumer = new OkHttpOAuthConsumer("NQ4ucS4F0RpQO1byUQB5JA", "liHonTgvdjxPg0INFWCWtyxyZT408YtWv7fA7zSvJA");
         consumer.setTokenWithSecret(PreferenceHelper.getInstance().getOSMAccessToken(), PreferenceHelper.getInstance().getOSMAccessTokenSecret());
 
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new SigningInterceptor(consumer)).build();
