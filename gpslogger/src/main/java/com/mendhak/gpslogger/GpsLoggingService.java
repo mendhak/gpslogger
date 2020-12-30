@@ -75,7 +75,6 @@ public class GpsLoggingService extends Service  {
     private Intent alarmIntent;
     private Handler handler = new Handler();
 
-    PendingIntent activityRecognitionPendingIntent;
     // ---------------------------------------------------
 
 

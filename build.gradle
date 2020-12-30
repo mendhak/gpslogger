@@ -14,6 +14,6 @@ buildscript {
 }
 
 project.ext.APP_ID = "com.mendhak.gpslogger"
-project.ext.APP_VERSION_CODE = 106
-project.ext.APP_VERSION_NAME ="106-fdroid"
+project.ext.APP_VERSION_CODE = 107
+project.ext.APP_VERSION_NAME ="107-fdroid"
 

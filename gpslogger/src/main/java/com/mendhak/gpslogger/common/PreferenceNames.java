@@ -102,7 +102,7 @@ public  class PreferenceNames {
     public static final String AUTOSEND_OWNCLOUD_ENABLED = "owncloud_enabled";
     public static final String GPSLOGGER_FOLDER = "gpslogger_folder";
     public static final String PREFIX_SERIAL_TO_FILENAME = "new_file_prefix_serial";
-    public static final String ACTIVITYRECOGNITION_DONTLOGIFSTILL = "activityrecognition_dontlogifstill";
+
     public static final String ALTITUDE_SUBTRACT_OFFSET = "altitude_subtractoffset";
     public static final String ALTITUDE_SHOULD_ADJUST = "altitude_subtractgeoidheight";
     public static final String AUTOSEND_WIFI_ONLY = "autosend_wifionly";

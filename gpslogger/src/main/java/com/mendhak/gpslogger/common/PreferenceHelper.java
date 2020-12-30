@@ -927,15 +927,6 @@ public class PreferenceHelper {
 
 
     /**
-     * Whether to detect user activity and if the user is still, pause logging
-     */
-    @ProfilePreference(name= PreferenceNames.ACTIVITYRECOGNITION_DONTLOGIFSTILL)
-    public boolean shouldNotLogIfUserIsStill() {
-        return prefs.getBoolean(PreferenceNames.ACTIVITYRECOGNITION_DONTLOGIFSTILL, false);
-    }
-
-
-    /**
      * Whether to subtract GeoID height from the reported altitude to get Mean Sea Level altitude instead of WGS84
      */
     @ProfilePreference(name= PreferenceNames.ALTITUDE_SHOULD_ADJUST)
