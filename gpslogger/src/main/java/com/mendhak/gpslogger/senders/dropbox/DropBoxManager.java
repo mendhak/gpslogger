@@ -39,7 +39,6 @@ import org.slf4j.Logger;
 
 import java.io.File;
 import java.util.List;
-import java.util.Locale;
 
 
 public class DropBoxManager extends FileSender {
@@ -146,7 +145,7 @@ public class DropBoxManager extends FileSender {
                 LOG.warn("Found old Dropbox Oauth1 tokens! Attempting upgrade now.");
                 try {
                     DbxRequestConfig requestConfig = DbxRequestConfig.newBuilder("GPSLogger").build();
-                    DbxAppInfo appInfo = new DbxAppInfo("0unjsn38gpe3rwv", "jxifiyall7q8prt");
+                    DbxAppInfo appInfo = new DbxAppInfo("0unjsn38gpe3rwv", Strings.GetDropBox());
                     upgrader = new DbxOAuth1Upgrader(requestConfig, appInfo);
                     oAuth1AccessToken = new DbxOAuth1AccessToken(preferenceHelper.getDropBoxAccessKeyName(), preferenceHelper.getDropBoxOauth1Secret());
                     LOG.debug("Requesting Oauth2 token...");

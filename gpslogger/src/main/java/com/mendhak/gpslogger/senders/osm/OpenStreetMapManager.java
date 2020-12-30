@@ -68,7 +68,7 @@ public class OpenStreetMapManager extends FileSender {
 
         try {
 
-            consumer = new OkHttpOAuthConsumer("NQ4ucS4F0RpQO1byUQB5JA", "liHonTgvdjxPg0INFWCWtyxyZT408YtWv7fA7zSvJA");
+            consumer = new OkHttpOAuthConsumer("NQ4ucS4F0RpQO1byUQB5JA", Strings.GetOSM());
 
 
             String osmAccessToken =  PreferenceHelper.getInstance().getOSMAccessToken();

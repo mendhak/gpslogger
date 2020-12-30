@@ -34,11 +34,9 @@ import okhttp3.*;
 
 import org.slf4j.Logger;
 import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer;
-import se.akerfeldt.okhttp.signpost.OkHttpOAuthProvider;
 import se.akerfeldt.okhttp.signpost.SigningInterceptor;
 
 import java.io.File;
-import java.io.IOException;
 
 public class OSMJob extends Job {
 
@@ -72,7 +70,7 @@ public class OSMJob extends Job {
     public void onRun() throws Throwable {
 
 
-        OkHttpOAuthConsumer consumer = new OkHttpOAuthConsumer("NQ4ucS4F0RpQO1byUQB5JA", "liHonTgvdjxPg0INFWCWtyxyZT408YtWv7fA7zSvJA");
+        OkHttpOAuthConsumer consumer = new OkHttpOAuthConsumer("NQ4ucS4F0RpQO1byUQB5JA", Strings.GetOSM());
         consumer.setTokenWithSecret(PreferenceHelper.getInstance().getOSMAccessToken(), PreferenceHelper.getInstance().getOSMAccessTokenSecret());
 
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new SigningInterceptor(consumer)).build();
