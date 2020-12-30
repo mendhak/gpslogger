@@ -22,6 +22,7 @@ package com.mendhak.gpslogger.senders;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
+import com.mendhak.gpslogger.senders.dropbox.DropBoxManager;
 import com.mendhak.gpslogger.senders.email.AutoEmailManager;
 import com.mendhak.gpslogger.senders.ftp.FtpManager;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSManager;
@@ -43,6 +44,10 @@ public class FileSenderFactory {
 
     public static FileSender getOsmSender() {
         return new OpenStreetMapManager(PreferenceHelper.getInstance());
+    }
+
+    public static FileSender getDropBoxSender() {
+        return new DropBoxManager(PreferenceHelper.getInstance());
     }
 
 
@@ -144,6 +149,9 @@ public class FileSenderFactory {
             senders.add(getEmailSender());
         }
 
+        if(getDropBoxSender().isAutoSendAvailable()){
+            senders.add(getDropBoxSender());
+        }
 
         if(getOpenGTSSender().isAutoSendAvailable()){
             senders.add(getOpenGTSSender());

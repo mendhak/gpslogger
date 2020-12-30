@@ -10,6 +10,7 @@
     <item android:id="@+id/mnuUpload" android:title="@string/menu_upload" android:icon="@drawable/upload" app:showAsAction="always">
         <menu>
             <item android:id="@+id/mnuAutoSendNow" android:title="@string/menu_autosend_now" />
+            <item android:id="@+id/mnuDropBox" android:title="@string/dropbox_setup_title" />
             <item android:id="@+id/mnuSFTP" android:title="@string/sftp_setup_title"/>
             <item android:id="@+id/mnuOpenGTS" android:title="@string/opengts_setup_title"/>
             <item android:id="@+id/mnuOSM" android:title="@string/osm_setup_title" />

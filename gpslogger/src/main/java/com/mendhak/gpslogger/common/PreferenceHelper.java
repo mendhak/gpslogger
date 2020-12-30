@@ -56,6 +56,35 @@ public class PreferenceHelper {
         return instance;
     }
 
+    /**
+     * Whether to auto send to Dropbox
+     */
+    @ProfilePreference(name= PreferenceNames.AUTOSEND_DROPBOX_ENABLED)
+    public  boolean isDropboxAutoSendEnabled() {
+        return prefs.getBoolean(PreferenceNames.AUTOSEND_DROPBOX_ENABLED, false);
+    }
+
+    public  String getDropBoxAccessKeyName() {
+        return prefs.getString(PreferenceNames.DROPBOX_ACCESS_KEY, null);
+    }
+
+    public  void setDropBoxAccessKeyName(String key) {
+        prefs.edit().putString(PreferenceNames.DROPBOX_ACCESS_KEY, key).apply();
+    }
+
+
+    /**
+     * Legacy - only used to check if user is still on Oauth1 and to upgrade them.
+     * @return
+     */
+    public String getDropBoxOauth1Secret() {
+        return prefs.getString(PreferenceNames.DROPBOX_ACCESS_SECRET, null);
+    }
+
+    public void setDropBoxOauth1Secret(String secret) {
+        prefs.edit().putString(PreferenceNames.DROPBOX_ACCESS_SECRET, secret).apply();
+    }
+
 
 
 
@@ -647,7 +676,7 @@ public class PreferenceHelper {
     }
 
     /**
-     * Whether automatic sending to various targets (email,ftp, etc) is enabled
+     * Whether automatic sending to various targets (email,ftp, dropbox, etc) is enabled
      */
     @ProfilePreference(name= PreferenceNames.AUTOSEND_ENABLED)
     public boolean isAutoSendEnabled() {

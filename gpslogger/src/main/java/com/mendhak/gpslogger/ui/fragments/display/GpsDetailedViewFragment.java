@@ -209,7 +209,9 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
                     sb.append(getString(R.string.osm_setup_title)).append("\n");
                 }
 
-
+                if (FileSenderFactory.getDropBoxSender().isAutoSendAvailable()) {
+                    sb.append(getString(R.string.dropbox_setup_title)).append("\n");
+                }
 
                 if (FileSenderFactory.getOpenGTSSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.opengts_setup_title)).append("\n");

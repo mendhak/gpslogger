@@ -4,7 +4,7 @@ GPSLogger  [![githubactions](https://github.com/mendhak/gpslogger/workflows/Andr
 _Note: Development has stopped, and the app is not available from the Play Store. [See this note](https://github.com/mendhak/gpslogger/issues/849)_
 
 
-GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, OpenStreetMap, Email). This app aims to be as battery efficient as possible.
+GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, OpenStreetMap, Dropbox, Email). This app aims to be as battery efficient as possible.
 
 [Read about GPSLogger's features here](http://mendhak.github.com/gpslogger/)
 
@@ -121,6 +121,32 @@ After registering the application, you will receive a 'Consumer Key' and a 'Cons
 Place the keys in OSMJob.java and OpenStreetMapManager.java.   
 
 
+### Dropbox Setup (Optional)
+
+Sign up for an account with Dropbox.com
+
+Go to the [Dropbox Developers page](https://www.dropbox.com/developers/apps) and click on 'Create an App'
+
+Use these settings, but choose a unique name
+
+![Dropbox settings](assets/dropbox_settings_create.png)
+
+After creating the app, you will receive an app key and secret (the ones in the screenshot are fake)
+
+![Dropbox settings](assets/dropbox_settings.png)
+
+Place the keys in your `~/.gradle/gradle.properties` like this:
+
+
+    GPSLOGGER_DROPBOX_APPKEY=abcdefgh
+    GPSLOGGER_DROPBOX_APPSECRET=1234123456
+
+
+Replace the Dropbox app key to your AndroidManifest.xml file
+
+    <!-- Change this to be db- followed by your app key -->
+    <data android:scheme="db-12341234"/>
+
 Overview
 ======
 
@@ -138,7 +164,7 @@ and other parts of the application listen for those events.  The most important 
 
 GPSLoggingService is where all the work happens.  This service talks to the location providers (network and satellite).
 It sets up timers and alarms for the next GPS point to be requested.  It passes location info to the various loggers
-so that they can write files.  It also invokes the auto-uploaders so that they may send their files to OSM, etc.
+so that they can write files.  It also invokes the auto-uploaders so that they may send their files to DropBox, OSM, etc.
 
 It also passes information to the Event Bus.
 

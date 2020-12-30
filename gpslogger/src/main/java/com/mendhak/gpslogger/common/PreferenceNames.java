@@ -82,7 +82,9 @@ public  class PreferenceNames {
     public static final String OPENSTREETMAP_DESCRIPTION = "osm_description";
     public static final String OPENSTREETMAP_TAGS = "osm_tags";
     public static final String OPENSTREETMAP_VISIBILITY = "osm_visibility";
-
+    public static final String AUTOSEND_DROPBOX_ENABLED = "dropbox_enabled";
+    public static final String DROPBOX_ACCESS_KEY = "DROPBOX_ACCESS_KEY";
+    public static final String DROPBOX_ACCESS_SECRET = "DROPBOX_ACCESS_SECRET";
     public static final String AUTOSEND_OSM_ENABLED = "osm_enabled";
     public static final String FTP_SERVER = "autoftp_server";
     public static final String FTP_PORT = "autoftp_port";

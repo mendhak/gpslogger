@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+        android:key="dropbox_enabled"
+                                                                  android:title="@string/autosend_enabled"/>
+
+    <Preference android:key="dropbox_resetauth" android:title="@string/osm_lbl_authorize" />
+
+    <Preference android:key="dropbox_test_upload" android:title="@string/gdocs_test_title"/>
+
+</PreferenceScreen>

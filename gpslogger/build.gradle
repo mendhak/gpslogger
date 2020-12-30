@@ -53,6 +53,13 @@ android {
         versionName project.APP_VERSION_NAME
     }
 
+    //Adding API keys to BuildConfig
+    defaultConfig {
+        //Set these values in ~/.gradle/gradle.properties, use in code as BuildConfig.OSM_CONSUMER_KEY
+        buildConfigField "String", "DROPBOX_APP_KEY", "\"" + GPSLOGGER_DROPBOX_APPKEY + "\""
+        buildConfigField "String", "DROPBOX_APP_SECRET", "\"" + GPSLOGGER_DROPBOX_APPSECRET + "\""
+        resValue "string", "DROPBOX_DB_SCHEME", "\"db-" + GPSLOGGER_DROPBOX_APPKEY + "\""
+    }
 
     buildTypes {
         debug {
@@ -195,6 +202,8 @@ dependencies {
         exclude module: 'commons-codec'
     }
 
+    //Dropbox API 3
+    implementation 'com.dropbox.core:dropbox-core-sdk:3.0.3'
 
     //Markdown to HTML library
     implementation 'com.github.commonsguy:cwac-anddown:dedb48ec0f'

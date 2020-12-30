@@ -39,7 +39,10 @@
 
     <PreferenceCategory android:title="@string/autosend_targets_category">
 
-
+        <Preference
+            android:title="@string/dropbox_setup_title"
+            android:key="dropbox_setup">
+        </Preference>
         <Preference
             android:title="@string/sftp_setup_title"
             android:key="sftp_setup">
