@@ -4,7 +4,7 @@ GPSLogger  [![githubactions](https://github.com/mendhak/gpslogger/workflows/Andr
 _Note: Development has stopped, and the app is not available from the Play Store. [See this note](https://github.com/mendhak/gpslogger/issues/849)_
 
 
-GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, Google Drive, Dropbox, Email). This app aims to be as battery efficient as possible.
+GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, OpenStreetMap, Email). This app aims to be as battery efficient as possible.
 
 [Read about GPSLogger's features here](http://mendhak.github.com/gpslogger/)
 
@@ -124,56 +124,6 @@ Place the keys in your `~/.gradle/gradle.properties` like this:
     GPSLOGGER_OSM_CONSUMERSECRET=1234123456
 
 
-### Dropbox Setup (Optional)
-
-Sign up for an account with Dropbox.com
-
-Go to the [Dropbox Developers page](https://www.dropbox.com/developers/apps) and click on 'Create an App'
-
-Use these settings, but choose a unique name
-
-![Dropbox settings](assets/dropbox_settings_create.png)
-
-After creating the app, you will receive an app key and secret (the ones in the screenshot are fake)
-
-![Dropbox settings](assets/dropbox_settings.png)
-
-Place the keys in your `~/.gradle/gradle.properties` like this:
-
-
-    GPSLOGGER_DROPBOX_APPKEY=abcdefgh
-    GPSLOGGER_DROPBOX_APPSECRET=1234123456
-
-
-Replace the Dropbox app key to your AndroidManifest.xml file
-
-    <!-- Change this to be db- followed by your app key -->
-    <data android:scheme="db-12341234"/>
-
-### Google Docs/Drive Setup (Optional)
-
-Go to the [Google APIs Console](https://code.google.com/apis/console/) and create a new project.
-
-After registering a project, click on API Access and click the 'Create another Client ID' button
-
-Choose "Installed Application" and then under Installed Application Type, choose "Android".  Follow the instructions under
-[Learn More](https://developers.google.com/console/help/#installed_applications) to specify the package name and
-the SHA1 fingerprint of your debug certificate.
-
-![GAPI Console](assets/gapi_console.jpg)
-
-The Google Docs feature requires the [Google Play Services Framework](http://developer.android.com/google/play-services/index.html),
-so ensure that the emulator you are using is Android 4.2.2 (API level 17) or greater if you want to use this feature.
-
-![AVD](assets/avd.png)
-
-You can also debug directly against your phone - all phones Android 2.2 and above should have this framework installed.
-
-
-### Android Wear
-
-Due to extremely low usage and the final straw when Google deleted a Play service library version, I've had to remove Android Wear from this application.
-
 
 Overview
 ======
@@ -192,7 +142,7 @@ and other parts of the application listen for those events.  The most important 
 
 GPSLoggingService is where all the work happens.  This service talks to the location providers (network and satellite).
 It sets up timers and alarms for the next GPS point to be requested.  It passes location info to the various loggers
-so that they can write files.  It also invokes the auto-uploaders so that they may send their files to Dropbox, etc.
+so that they can write files.  It also invokes the auto-uploaders so that they may send their files to OSM, etc.
 
 It also passes information to the Event Bus.
 

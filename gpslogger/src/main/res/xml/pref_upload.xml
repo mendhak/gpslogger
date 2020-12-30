@@ -41,14 +41,6 @@
 
 
         <Preference
-            android:title="@string/gdocs_setup_title"
-            android:key="gdrive_setup">
-        </Preference>
-        <Preference
-            android:title="@string/dropbox_setup_title"
-            android:key="dropbox_setup">
-        </Preference>
-        <Preference
             android:title="@string/sftp_setup_title"
             android:key="sftp_setup">
         </Preference>

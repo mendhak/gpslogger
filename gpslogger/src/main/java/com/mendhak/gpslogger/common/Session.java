@@ -23,7 +23,7 @@ package com.mendhak.gpslogger.common;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.preference.PreferenceManager;
-import com.google.android.gms.location.DetectedActivity;
+
 
 public class Session {
 
@@ -357,13 +357,7 @@ public class Session {
         return Long.parseLong(get("firstRetryTimeStamp", "0"));
     }
 
-    public void setLatestDetectedActivity(DetectedActivity latestDetectedActivity) {
-        set("latestDetectedActivity", Strings.getDetectedActivityName(latestDetectedActivity));
-    }
 
-    public String getLatestDetectedActivityName() {
-        return get("latestDetectedActivity", "");
-    }
 
 
 }

@@ -56,35 +56,6 @@ public class PreferenceHelper {
         return instance;
     }
 
-    /**
-     * Whether to auto send to Dropbox
-     */
-    @ProfilePreference(name= PreferenceNames.AUTOSEND_DROPBOX_ENABLED)
-    public  boolean isDropboxAutoSendEnabled() {
-        return prefs.getBoolean(PreferenceNames.AUTOSEND_DROPBOX_ENABLED, false);
-    }
-
-    public  String getDropBoxAccessKeyName() {
-        return prefs.getString(PreferenceNames.DROPBOX_ACCESS_KEY, null);
-    }
-
-    public  void setDropBoxAccessKeyName(String key) {
-        prefs.edit().putString(PreferenceNames.DROPBOX_ACCESS_KEY, key).apply();
-    }
-
-
-    /**
-     * Legacy - only used to check if user is still on Oauth1 and to upgrade them.
-     * @return
-     */
-    public String getDropBoxOauth1Secret() {
-        return prefs.getString(PreferenceNames.DROPBOX_ACCESS_SECRET, null);
-    }
-
-    public void setDropBoxOauth1Secret(String secret) {
-        prefs.edit().putString(PreferenceNames.DROPBOX_ACCESS_SECRET, secret).apply();
-    }
-
 
 
 
@@ -285,56 +256,6 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.GPSLOGGER_FOLDER, folderPath).apply();
     }
 
-
-
-
-
-
-    /**
-     * Whether to auto send to Google Drive
-     */
-    @ProfilePreference(name= PreferenceNames.AUTOSEND_GOOGLEDRIVE_ENABLED)
-    public boolean isGDocsAutoSendEnabled() {
-        return prefs.getBoolean(PreferenceNames.AUTOSEND_GOOGLEDRIVE_ENABLED, false);
-    }
-
-    /**
-     * Target directory for Google Drive auto send
-     */
-    @ProfilePreference(name= PreferenceNames.GOOGLEDRIVE_FOLDERNAME)
-    public String getGoogleDriveFolderName() {
-        return prefs.getString(PreferenceNames.GOOGLEDRIVE_FOLDERNAME, "GPSLogger for Android");
-    }
-
-
-    /**
-     * Google Drive OAuth token
-     */
-    public String getGoogleDriveAuthToken(){
-        return prefs.getString(PreferenceNames.GOOGLEDRIVE_AUTHTOKEN, "");
-    }
-
-    /**
-     * Sets OAuth token for Google Drive auto send
-     */
-    public void setGoogleDriveAuthToken(String authToken) {
-        prefs.edit().putString(PreferenceNames.GOOGLEDRIVE_AUTHTOKEN, authToken).apply();
-    }
-
-    /**
-     * Gets Google account used for Google Drive auto send
-     */
-    @ProfilePreference(name= PreferenceNames.GOOGLEDRIVE_ACCOUNTNAME)
-    public String getGoogleDriveAccountName() {
-        return prefs.getString(PreferenceNames.GOOGLEDRIVE_ACCOUNTNAME, "");
-    }
-
-    /**
-     * Sets account name to use for Google Drive auto send
-     */
-    public void setGoogleDriveAccountName(String accountName) {
-        prefs.edit().putString(PreferenceNames.GOOGLEDRIVE_ACCOUNTNAME, accountName).apply();
-    }
 
 
     /**
@@ -726,7 +647,7 @@ public class PreferenceHelper {
     }
 
     /**
-     * Whether automatic sending to various targets (email,ftp, dropbox, etc) is enabled
+     * Whether automatic sending to various targets (email,ftp, etc) is enabled
      */
     @ProfilePreference(name= PreferenceNames.AUTOSEND_ENABLED)
     public boolean isAutoSendEnabled() {

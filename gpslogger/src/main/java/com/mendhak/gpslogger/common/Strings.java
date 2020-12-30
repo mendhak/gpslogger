@@ -22,7 +22,6 @@ package com.mendhak.gpslogger.common;
 
 import android.content.Context;
 import android.os.Build;
-import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 
@@ -495,32 +494,6 @@ public class Strings {
         }
     }
 
-    public static  String getDetectedActivityName(DetectedActivity detectedActivity) {
 
-        if(detectedActivity == null){
-            return "";
-        }
-
-        switch(detectedActivity.getType()) {
-            case DetectedActivity.IN_VEHICLE:
-                return "IN_VEHICLE";
-            case DetectedActivity.ON_BICYCLE:
-                return "ON_BICYCLE";
-            case DetectedActivity.ON_FOOT:
-                return "ON_FOOT";
-            case DetectedActivity.STILL:
-                return "STILL";
-            case DetectedActivity.UNKNOWN:
-            case 6:
-            default:
-                return "UNKNOWN";
-            case DetectedActivity.TILTING:
-                return "TILTING";
-            case DetectedActivity.WALKING:
-                return "WALKING";
-            case DetectedActivity.RUNNING:
-                return "RUNNING";
-        }
-    }
 
 }

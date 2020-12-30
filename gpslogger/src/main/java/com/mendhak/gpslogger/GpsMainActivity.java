@@ -480,8 +480,7 @@ public class GpsMainActivity extends AppCompatActivity
         materialDrawer.addItem(new DividerDrawerItem());
 
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.pref_autosend_title, R.string.pref_autosend_summary, R.drawable.autosend, 1003));
-        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.gdocs_setup_title, R.drawable.googledrive, 1004));
-        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.dropbox_setup_title, R.drawable.dropbox, 1005));
+
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.sftp_setup_title, R.drawable.sftp, 1015));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.opengts_setup_title, R.drawable.opengts, 1008));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.osm_setup_title, R.drawable.openstreetmap, 1009));
@@ -512,12 +511,7 @@ public class GpsMainActivity extends AppCompatActivity
                     case 1003:
                         launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.UPLOAD);
                         break;
-                    case 1004:
-                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GDOCS);
-                        break;
-                    case 1005:
-                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX);
-                        break;
+
                     case 1006:
                         launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.EMAIL);
                         break;
@@ -819,12 +813,7 @@ public class GpsMainActivity extends AppCompatActivity
             case R.id.mnuOSM:
                 uploadToOpenStreetMap();
                 return true;
-            case R.id.mnuDropBox:
-                uploadToDropBox();
-                return true;
-            case R.id.mnuGDocs:
-                uploadToGoogleDocs();
-                return true;
+
             case R.id.mnuOpenGTS:
                 sendToOpenGTS();
                 return true;
@@ -904,16 +893,6 @@ public class GpsMainActivity extends AppCompatActivity
         showFileListDialog(FileSenderFactory.getOsmSender());
     }
 
-    private void uploadToDropBox() {
-
-        if (!FileSenderFactory.getDropBoxSender().isAvailable()) {
-            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX);
-            return;
-        }
-
-        showFileListDialog(FileSenderFactory.getDropBoxSender());
-    }
-
 
     private void uploadToSFTP(){
         if(!FileSenderFactory.getSFTPSender().isAvailable()){
@@ -942,14 +921,7 @@ public class GpsMainActivity extends AppCompatActivity
         }
     }
 
-    private void uploadToGoogleDocs() {
-        if (!FileSenderFactory.getGoogleDriveSender().isAvailable()) {
-            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GDOCS);
-            return;
-        }
 
-        showFileListDialog(FileSenderFactory.getGoogleDriveSender());
-    }
 
     private void sendToFtp() {
         if (!FileSenderFactory.getFtpSender().isAvailable()) {
@@ -1245,37 +1217,7 @@ public class GpsMainActivity extends AppCompatActivity
         }
     }
 
-    @EventBusHook
-    public void onEventMainThread(UploadEvents.Dropbox upload){
-        LOG.debug("Dropbox Event completed, success: " + upload.success);
-        Dialogs.hideProgress();
 
-        if(!upload.success){
-            LOG.error(getString(R.string.dropbox_setup_title)
-                    + "-"
-                    + getString(R.string.upload_failure));
-            if(userInvokedUpload){
-                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
-                userInvokedUpload = false;
-            }
-        }
-    }
-
-    @EventBusHook
-    public void onEventMainThread(UploadEvents.GDrive upload){
-        LOG.debug("GDrive Event completed, success: " + upload.success);
-        Dialogs.hideProgress();
-
-        if(!upload.success){
-            LOG.error(getString(R.string.gdocs_setup_title)
-                    + "-"
-                    + getString(R.string.upload_failure));
-            if(userInvokedUpload){
-                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
-                userInvokedUpload = false;
-            }
-        }
-    }
 
     @EventBusHook
     public void onEventMainThread(UploadEvents.Ftp upload){

@@ -32,10 +32,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.Html;
-import com.google.android.gms.location.ActivityRecognition;
-import com.google.android.gms.location.ActivityRecognitionClient;
-import com.google.android.gms.location.ActivityRecognitionResult;
-import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ProfileEvents;
@@ -96,29 +92,7 @@ public class GpsLoggingService extends Service  {
         registerEventBus();
     }
 
-    private void requestActivityRecognitionUpdates() {
 
-        if(preferenceHelper.shouldNotLogIfUserIsStill()){
-            LOG.debug("Requesting activity recognition updates");
-            Intent intent = new Intent(getApplicationContext(), GpsLoggingService.class);
-            activityRecognitionPendingIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            ActivityRecognitionClient arClient = ActivityRecognition.getClient(getApplicationContext());
-            arClient.requestActivityUpdates(preferenceHelper.getMinimumLoggingInterval() * 1000, activityRecognitionPendingIntent);
-        }
-
-    }
-
-    private void stopActivityRecognitionUpdates(){
-        try{
-            if (activityRecognitionPendingIntent != null){
-                LOG.debug("Stopping activity recognition updates");
-                ActivityRecognitionClient arClient = ActivityRecognition.getClient(getApplicationContext());
-                arClient.removeActivityUpdates(activityRecognitionPendingIntent);
-            }
-        } catch (Exception ex){
-            LOG.error("Could not stop activity recognition service", ex);
-        }
-    }
 
     private void registerEventBus() {
         EventBus.getDefault().registerSticky(this);
@@ -162,11 +136,7 @@ public class GpsLoggingService extends Service  {
 
     private void handleIntent(Intent intent) {
 
-        ActivityRecognitionResult arr = ActivityRecognitionResult.extractResult(intent);
-        if(arr != null){
-            EventBus.getDefault().post(new ServiceEvents.ActivityRecognitionEvent(arr));
-            return;
-        }
+
 
         if (intent != null) {
             Bundle bundle = intent.getExtras();
@@ -408,7 +378,6 @@ public class GpsLoggingService extends Service  {
         notifyClientsStarted(true);
         startPassiveManager();
         startGpsManager();
-        requestActivityRecognitionUpdates();
 
     }
 
@@ -463,7 +432,7 @@ public class GpsLoggingService extends Service  {
         stopAlarm();
         stopGpsManager();
         stopPassiveManager();
-        stopActivityRecognitionUpdates();
+
         notifyClientsStarted(false);
         session.setCurrentFileName("");
         session.setCurrentFormattedFileName("");
@@ -1094,33 +1063,7 @@ public class GpsLoggingService extends Service  {
         logOnce();
     }
 
-    @EventBusHook
-    public void onEvent(ServiceEvents.ActivityRecognitionEvent activityRecognitionEvent){
 
-        session.setLatestDetectedActivity(activityRecognitionEvent.result.getMostProbableActivity());
-
-        if(!preferenceHelper.shouldNotLogIfUserIsStill()){
-            session.setUserStillSinceTimeStamp(0);
-            return;
-        }
-
-        if(activityRecognitionEvent.result.getMostProbableActivity().getType() == DetectedActivity.STILL){
-            LOG.debug(activityRecognitionEvent.result.getMostProbableActivity().toString());
-            if(session.getUserStillSinceTimeStamp() == 0){
-                LOG.debug("Just entered still state, attempt to log");
-                startGpsManager();
-                session.setUserStillSinceTimeStamp(System.currentTimeMillis());
-            }
-
-        }
-        else {
-            LOG.debug(activityRecognitionEvent.result.getMostProbableActivity().toString());
-            //Reset the still-since timestamp
-            session.setUserStillSinceTimeStamp(0);
-            LOG.debug("Just exited still state, attempt to log");
-            startGpsManager();
-        }
-    }
 
     @EventBusHook
     public void onEvent(ProfileEvents.SwitchToProfile switchToProfileEvent){

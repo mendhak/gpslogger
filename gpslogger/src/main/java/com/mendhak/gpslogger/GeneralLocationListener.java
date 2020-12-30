@@ -67,7 +67,6 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 b.putBoolean(BundleConstants.PASSIVE, listenerName.equalsIgnoreCase(BundleConstants.PASSIVE));
                 b.putString(BundleConstants.LISTENER, listenerName);
                 b.putInt(BundleConstants.SATELLITES_FIX, satellitesUsedInFix);
-                b.putString(BundleConstants.DETECTED_ACTIVITY, session.getLatestDetectedActivityName());
 
                 loc.setExtras(b);
                 loggingService.onLocationChanged(loc);
@@ -75,7 +74,6 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 this.latestHdop = "";
                 this.latestPdop = "";
                 this.latestVdop = "";
-                session.setLatestDetectedActivity(null);
             }
 
         } catch (Exception ex) {

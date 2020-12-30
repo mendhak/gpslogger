@@ -22,10 +22,8 @@ package com.mendhak.gpslogger.senders;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
-import com.mendhak.gpslogger.senders.dropbox.DropBoxManager;
 import com.mendhak.gpslogger.senders.email.AutoEmailManager;
 import com.mendhak.gpslogger.senders.ftp.FtpManager;
-import com.mendhak.gpslogger.senders.googledrive.GoogleDriveManager;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSManager;
 import com.mendhak.gpslogger.senders.osm.OpenStreetMapManager;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudManager;
@@ -47,13 +45,6 @@ public class FileSenderFactory {
         return new OpenStreetMapManager(PreferenceHelper.getInstance());
     }
 
-    public static FileSender getDropBoxSender() {
-        return new DropBoxManager(PreferenceHelper.getInstance());
-    }
-
-    public static FileSender getGoogleDriveSender() {
-        return new GoogleDriveManager(PreferenceHelper.getInstance());
-    }
 
     public static FileSender getEmailSender() {
         return new AutoEmailManager(PreferenceHelper.getInstance());
@@ -143,9 +134,7 @@ public class FileSenderFactory {
         List<FileSender> senders = new ArrayList<>();
 
 
-        if(getGoogleDriveSender().isAutoSendAvailable()){
-            senders.add(getGoogleDriveSender());
-        }
+
 
         if(getOsmSender().isAutoSendAvailable()){
             senders.add(getOsmSender());
@@ -155,9 +144,6 @@ public class FileSenderFactory {
             senders.add(getEmailSender());
         }
 
-        if(getDropBoxSender().isAutoSendAvailable()){
-            senders.add(getDropBoxSender());
-        }
 
         if(getOpenGTSSender().isAutoSendAvailable()){
             senders.add(getOpenGTSSender());

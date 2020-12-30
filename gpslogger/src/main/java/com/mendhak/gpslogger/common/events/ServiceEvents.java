@@ -20,7 +20,7 @@
 package com.mendhak.gpslogger.common.events;
 
 import android.location.Location;
-import com.google.android.gms.location.ActivityRecognitionResult;
+
 
 public class ServiceEvents {
 
@@ -91,10 +91,4 @@ public class ServiceEvents {
         }
     }
 
-    public static class ActivityRecognitionEvent {
-        public ActivityRecognitionResult result;
-        public ActivityRecognitionEvent(ActivityRecognitionResult arr) {
-            this.result = arr;
-        }
-    }
 }

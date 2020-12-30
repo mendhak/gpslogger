@@ -74,11 +74,7 @@ public  class PreferenceNames {
     public static final String HIDE_NOTIFICATION_BUTTONS = "hide_notification_buttons";
     public static final String HIDE_NOTIFICATION_FROM_STATUS_BAR = "hide_notification_from_status_bar";
     public static final String DISPLAY_IMPERIAL = "useImperial";
-    public static final String AUTOSEND_GOOGLEDRIVE_ENABLED = "gdocs_enabled";
-    public static final String GOOGLEDRIVE_FOLDERNAME = "gdocs_foldername";
-    public static final String GOOGLEDRIVE_ACCOUNTNAME = "GDRIVE_ACCOUNT_NAME";
-    public static final String GOOGLEDRIVE_AUTHTOKEN = "GDRIVE_AUTH_TOKEN";
-    public static final String GOOGLEDRIVE_FOLDERID = "GDRIVE_FOLDER_ID";
+
     public static final String OPENSTREETMAP_ACCESS_TOKEN = "osm_accesstoken";
     public static final String OPENSTREETMAP_ACCESS_TOKEN_SECRET = "osm_accesstokensecret";
     public static final String OPENSTREETMAP_REQUEST_TOKEN = "osm_requesttoken";
@@ -86,9 +82,7 @@ public  class PreferenceNames {
     public static final String OPENSTREETMAP_DESCRIPTION = "osm_description";
     public static final String OPENSTREETMAP_TAGS = "osm_tags";
     public static final String OPENSTREETMAP_VISIBILITY = "osm_visibility";
-    public static final String AUTOSEND_DROPBOX_ENABLED = "dropbox_enabled";
-    public static final String DROPBOX_ACCESS_KEY = "DROPBOX_ACCESS_KEY";
-    public static final String DROPBOX_ACCESS_SECRET = "DROPBOX_ACCESS_SECRET";
+
     public static final String AUTOSEND_OSM_ENABLED = "osm_enabled";
     public static final String FTP_SERVER = "autoftp_server";
     public static final String FTP_PORT = "autoftp_port";

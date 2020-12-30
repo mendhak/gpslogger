@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- If the user wants the app to start on boot -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <!-- If the user needs to send to external services like Custom URL, Google Drive, Dropbox, OSM -->
+    <!-- If the user needs to send to external services like Custom URL, OSM -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- To check if an internet connection exists before communicating  -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -35,9 +35,7 @@
         android:name="com.mendhak.gpslogger.common.AppSettings"
         android:usesCleartextTraffic="true"
         >
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+
 
         <service android:name=".GpsLoggingService"  android:exported="true" android:stopWithTask="false">
             <intent-filter>
@@ -90,26 +88,6 @@
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />
         </activity>
 
-        <activity
-            android:name="com.dropbox.core.android.AuthActivity"
-            android:configChanges="orientation|keyboard"
-            android:launchMode="singleTask"
-            android:parentActivityName=".GpsMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
-
-            <intent-filter>
-                <!-- Set from build.gradle, see defaultConfig -->
-                <!--suppress AndroidDomInspection -->
-                <data android:scheme="@string/DROPBOX_DB_SCHEME" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".shortcuts.ShortcutCreate"
