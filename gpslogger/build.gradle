@@ -53,16 +53,6 @@ android {
         versionName project.APP_VERSION_NAME
     }
 
-    //Adding API keys to BuildConfig
-    defaultConfig {
-        //Set these values in ~/.gradle/gradle.properties, use in code as BuildConfig.OSM_CONSUMER_KEY
-        buildConfigField "String", "OSM_CONSUMER_KEY", "\"" + GPSLOGGER_OSM_CONSUMERKEY + "\""
-        buildConfigField "String", "OSM_CONSUMER_SECRET", "\"" + GPSLOGGER_OSM_CONSUMERSECRET + "\""
-        buildConfigField "String", "DROPBOX_APP_KEY", "\"" + GPSLOGGER_DROPBOX_APPKEY + "\""
-        buildConfigField "String", "DROPBOX_APP_SECRET", "\"" + GPSLOGGER_DROPBOX_APPSECRET + "\""
-        resValue "string", "DROPBOX_DB_SCHEME", "\"db-" + GPSLOGGER_DROPBOX_APPKEY + "\""
-    }
-
     buildTypes {
         debug {
             minifyEnabled true
@@ -128,9 +118,6 @@ android {
 dependencies {
 
     implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.google.android.gms:play-services-base:16.0.1'
-    implementation 'com.google.android.gms:play-services-location:16.0.0'
-    implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
     //FTP operations
     implementation('commons-net:commons-net:3.4')

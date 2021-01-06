@@ -28,7 +28,6 @@ import com.birbit.android.jobqueue.JobManager;
 import com.birbit.android.jobqueue.TagConstraint;
 import com.dropbox.core.*;
 import com.dropbox.core.android.Auth;
-import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
@@ -40,7 +39,6 @@ import org.slf4j.Logger;
 
 import java.io.File;
 import java.util.List;
-import java.util.Locale;
 
 
 public class DropBoxManager extends FileSender {
@@ -87,7 +85,7 @@ public class DropBoxManager extends FileSender {
 
     public void startAuthentication(Context context) {
 
-        Auth.startOAuth2Authentication(context, BuildConfig.DROPBOX_APP_KEY);
+        Auth.startOAuth2Authentication(context, "0unjsn38gpe3rwv");
     }
 
     public void unLink() {
@@ -147,7 +145,7 @@ public class DropBoxManager extends FileSender {
                 LOG.warn("Found old Dropbox Oauth1 tokens! Attempting upgrade now.");
                 try {
                     DbxRequestConfig requestConfig = DbxRequestConfig.newBuilder("GPSLogger").build();
-                    DbxAppInfo appInfo = new DbxAppInfo(BuildConfig.DROPBOX_APP_KEY, BuildConfig.DROPBOX_APP_SECRET);
+                    DbxAppInfo appInfo = new DbxAppInfo("0unjsn38gpe3rwv", Strings.GetDropBox());
                     upgrader = new DbxOAuth1Upgrader(requestConfig, appInfo);
                     oAuth1AccessToken = new DbxOAuth1AccessToken(preferenceHelper.getDropBoxAccessKeyName(), preferenceHelper.getDropBoxOauth1Secret());
                     LOG.debug("Requesting Oauth2 token...");

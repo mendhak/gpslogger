@@ -22,7 +22,6 @@ package com.mendhak.gpslogger.common;
 
 import android.content.Context;
 import android.os.Build;
-import com.google.android.gms.location.DetectedActivity;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 
@@ -495,32 +494,151 @@ public class Strings {
         }
     }
 
-    public static  String getDetectedActivityName(DetectedActivity detectedActivity) {
+    /**
+     * F-Droid requires API keys be kept in source control
+     * Here is a little obscurity.
+     */
+    public static String GetDropBox() {
+        return (new Object() {
+            int t;
 
-        if(detectedActivity == null){
-            return "";
-        }
+            public String toString() {
+                byte[] buf = new byte[15];
+                t = 406508688;
+                buf[0] = (byte) (t >>> 9);
+                t = -2115861152;
+                buf[1] = (byte) (t >>> 18);
+                t = 2064462109;
+                buf[2] = (byte) (t >>> 13);
+                t = 1957901922;
+                buf[3] = (byte) (t >>> 4);
+                t = 443804309;
+                buf[4] = (byte) (t >>> 22);
+                t = 1381098959;
+                buf[5] = (byte) (t >>> 10);
+                t = 1791215717;
+                buf[6] = (byte) (t >>> 17);
+                t = -333759886;
+                buf[7] = (byte) (t >>> 14);
+                t = 1700473980;
+                buf[8] = (byte) (t >>> 14);
+                t = -2146362421;
+                buf[9] = (byte) (t >>> 7);
+                t = -1132636394;
+                buf[10] = (byte) (t >>> 4);
+                t = -1171088381;
+                buf[11] = (byte) (t >>> 7);
+                t = 1889063667;
+                buf[12] = (byte) (t >>> 24);
+                t = -443656636;
+                buf[13] = (byte) (t >>> 13);
+                t = 648401020;
+                buf[14] = (byte) (t >>> 10);
+                return new String(buf);
+            }
+        }.toString());
 
-        switch(detectedActivity.getType()) {
-            case DetectedActivity.IN_VEHICLE:
-                return "IN_VEHICLE";
-            case DetectedActivity.ON_BICYCLE:
-                return "ON_BICYCLE";
-            case DetectedActivity.ON_FOOT:
-                return "ON_FOOT";
-            case DetectedActivity.STILL:
-                return "STILL";
-            case DetectedActivity.UNKNOWN:
-            case 6:
-            default:
-                return "UNKNOWN";
-            case DetectedActivity.TILTING:
-                return "TILTING";
-            case DetectedActivity.WALKING:
-                return "WALKING";
-            case DetectedActivity.RUNNING:
-                return "RUNNING";
-        }
     }
+
+    /**
+     * F-Droid requires API keys be kept in source control
+     * Here is a little obscurity.
+     */
+    public static String GetOSM(){
+        return (new Object() {
+            int t;
+
+            public String toString() {
+                byte[] buf = new byte[42];
+                t = 1630577506;
+                buf[0] = (byte) (t >>> 3);
+                t = 1300449509;
+                buf[1] = (byte) (t >>> 11);
+                t = 1378988002;
+                buf[2] = (byte) (t >>> 22);
+                t = -1202854278;
+                buf[3] = (byte) (t >>> 13);
+                t = 797718293;
+                buf[4] = (byte) (t >>> 7);
+                t = 984242259;
+                buf[5] = (byte) (t >>> 15);
+                t = -1005885689;
+                buf[6] = (byte) (t >>> 8);
+                t = 433764492;
+                buf[7] = (byte) (t >>> 18);
+                t = -260681935;
+                buf[8] = (byte) (t >>> 12);
+                t = 1779455648;
+                buf[9] = (byte) (t >>> 24);
+                t = 1935554145;
+                buf[10] = (byte) (t >>> 14);
+                t = 1456973065;
+                buf[11] = (byte) (t >>> 4);
+                t = 204895709;
+                buf[12] = (byte) (t >>> 12);
+                t = -880012697;
+                buf[13] = (byte) (t >>> 14);
+                t = 619961294;
+                buf[14] = (byte) (t >>> 23);
+                t = 1207979712;
+                buf[15] = (byte) (t >>> 8);
+                t = 1293518812;
+                buf[16] = (byte) (t >>> 18);
+                t = -2102434169;
+                buf[17] = (byte) (t >>> 17);
+                t = -773650315;
+                buf[18] = (byte) (t >>> 5);
+                t = -48054848;
+                buf[19] = (byte) (t >>> 11);
+                t = 1318983186;
+                buf[20] = (byte) (t >>> 21);
+                t = -1528174941;
+                buf[21] = (byte) (t >>> 10);
+                t = 1103163740;
+                buf[22] = (byte) (t >>> 9);
+                t = 193516488;
+                buf[23] = (byte) (t >>> 3);
+                t = 1762581203;
+                buf[24] = (byte) (t >>> 3);
+                t = -1131074653;
+                buf[25] = (byte) (t >>> 14);
+                t = 1451518128;
+                buf[26] = (byte) (t >>> 9);
+                t = -188717159;
+                buf[27] = (byte) (t >>> 18);
+                t = 946974836;
+                buf[28] = (byte) (t >>> 24);
+                t = 2000001073;
+                buf[29] = (byte) (t >>> 12);
+                t = -52017343;
+                buf[30] = (byte) (t >>> 4);
+                t = -1645904154;
+                buf[31] = (byte) (t >>> 12);
+                t = -704373344;
+                buf[32] = (byte) (t >>> 6);
+                t = -529636483;
+                buf[33] = (byte) (t >>> 4);
+                t = 187868194;
+                buf[34] = (byte) (t >>> 19);
+                t = -913821365;
+                buf[35] = (byte) (t >>> 13);
+                t = 57752068;
+                buf[36] = (byte) (t >>> 20);
+                t = -1975699846;
+                buf[37] = (byte) (t >>> 15);
+                t = -1750489267;
+                buf[38] = (byte) (t >>> 15);
+                t = -1305551221;
+                buf[39] = (byte) (t >>> 13);
+                t = -1234360133;
+                buf[40] = (byte) (t >>> 10);
+                t = -2113284386;
+                buf[41] = (byte) (t >>> 19);
+                return new String(buf);
+            }
+        }.toString());
+    }
+
+
 
 }

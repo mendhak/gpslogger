@@ -1,18 +1,18 @@
 GPSLogger  [![githubactions](https://github.com/mendhak/gpslogger/workflows/Android%20CI/badge.svg)](https://github.com/mendhak/gpslogger/actions) [![pgp](assets/pgp.png)](https://keybase.io/mendhak)
 =========
 
-_Note: Development has stopped, and the app is not available from the Play Store. [See this note](https://github.com/mendhak/gpslogger/issues/849)_
+_Note: Development has stopped, and the app is not available from the Play Store. [See this note](https://github.com/mendhak/gpslogger/issues/849).  The app is now on [F-Droid](https://f-droid.org/en/packages/com.mendhak.gpslogger/)_  
 
 
-GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, Google Drive, Dropbox, Email). This app aims to be as battery efficient as possible.
+GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, OpenStreetMap, Dropbox, Email). This app aims to be as battery efficient as possible.
 
 [Read about GPSLogger's features here](http://mendhak.github.com/gpslogger/)
 
 ## Download
 
-You can download directly [from the releases](https://github.com/mendhak/gpslogger/releases).
+You can find it on [F-Droid](https://f-droid.org/en/packages/com.mendhak.gpslogger/) 
 
-You can find it on [IzzySoft's F-Droid repo](https://apt.izzysoft.de/fdroid/repo) ([link](https://apt.izzysoft.de/fdroid/index/apk/com.mendhak.gpslogger)) 
+You can download directly [from the releases](https://github.com/mendhak/gpslogger/releases).
 
 
 
@@ -118,10 +118,7 @@ Fill in the form with these details
 ![Oauth settings](assets/osm_oauth_settings.png)
 
 After registering the application, you will receive a 'Consumer Key' and a 'Consumer Secret'.  
-Place the keys in your `~/.gradle/gradle.properties` like this:
-
-    GPSLOGGER_OSM_CONSUMERKEY=abcdefgh
-    GPSLOGGER_OSM_CONSUMERSECRET=1234123456
+Place the keys in OSMJob.java and OpenStreetMapManager.java.   
 
 
 ### Dropbox Setup (Optional)
@@ -150,31 +147,6 @@ Replace the Dropbox app key to your AndroidManifest.xml file
     <!-- Change this to be db- followed by your app key -->
     <data android:scheme="db-12341234"/>
 
-### Google Docs/Drive Setup (Optional)
-
-Go to the [Google APIs Console](https://code.google.com/apis/console/) and create a new project.
-
-After registering a project, click on API Access and click the 'Create another Client ID' button
-
-Choose "Installed Application" and then under Installed Application Type, choose "Android".  Follow the instructions under
-[Learn More](https://developers.google.com/console/help/#installed_applications) to specify the package name and
-the SHA1 fingerprint of your debug certificate.
-
-![GAPI Console](assets/gapi_console.jpg)
-
-The Google Docs feature requires the [Google Play Services Framework](http://developer.android.com/google/play-services/index.html),
-so ensure that the emulator you are using is Android 4.2.2 (API level 17) or greater if you want to use this feature.
-
-![AVD](assets/avd.png)
-
-You can also debug directly against your phone - all phones Android 2.2 and above should have this framework installed.
-
-
-### Android Wear
-
-Due to extremely low usage and the final straw when Google deleted a Play service library version, I've had to remove Android Wear from this application.
-
-
 Overview
 ======
 
@@ -192,7 +164,7 @@ and other parts of the application listen for those events.  The most important 
 
 GPSLoggingService is where all the work happens.  This service talks to the location providers (network and satellite).
 It sets up timers and alarms for the next GPS point to be requested.  It passes location info to the various loggers
-so that they can write files.  It also invokes the auto-uploaders so that they may send their files to Dropbox, etc.
+so that they can write files.  It also invokes the auto-uploaders so that they may send their files to DropBox, OSM, etc.
 
 It also passes information to the Event Bus.
 
@@ -213,3 +185,25 @@ needed for the current run of GPSLogger.
 `AppSettings` is a representation of the user's preferences.
 
 These objects are visible throughout the application and can be accessed directly by any class, service, activity or fragment.
+
+
+## Working notes for F-Droid
+
+Use the fdroidserver docker image.  Clone the fdroid metadata repo and make changes to the com.mendhak.gpslogger.yml file. 
+
+    git clone https://gitlab.com/fdroid/fdroiddata.git
+    cd fdroiddata
+
+    # initialize the metadata repo
+    docker run --rm -v /home/mendhak/Android/Sdk:/opt/android-sdk -v $(pwd):/repo -e ANDROID_HOME:/opt/android-sdk registry.gitlab.com/fdroid/docker-executable-fdroidserver:master init -v
+    
+    # lint your metadata yml
+    docker run --rm -v /home/mendhak/Android/Sdk:/opt/android-sdk -v $(pwd):/repo -e ANDROID_HOME:/opt/android-sdk registry.gitlab.com/fdroid/docker-executable-fdroidserver:master lint com.mendhak.gpslogger -v
+    
+    # build
+    docker run --rm -v /home/mendhak/Android/Sdk:/opt/android-sdk -v $(pwd):/repo -e ANDROID_HOME:/opt/android-sdk registry.gitlab.com/fdroid/docker-executable-fdroidserver:master build -v -l com.mendhak.gpslogger
+    
+    
+I'll just aim for a static release.  Still some tasks remaining, need to clean up text references to GDocs, GDrive, Dropbox, activity recognition.  Need to hardcode the OSM keys into the code rather than an environment variable.   
+
+In the future may want to make it [auto update, and add screenshots too](https://gitlab.com/fdroid/fdroiddata/-/blob/master/CONTRIBUTING.md#after-you-added-your-app).  Example [fastlane snippet](https://gitlab.com/snippets/1895688).

@@ -22,7 +22,6 @@ package com.mendhak.gpslogger.senders.osm;
 import com.birbit.android.jobqueue.CancelResult;
 import com.birbit.android.jobqueue.JobManager;
 import com.birbit.android.jobqueue.TagConstraint;
-import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
@@ -69,7 +68,7 @@ public class OpenStreetMapManager extends FileSender {
 
         try {
 
-            consumer = new OkHttpOAuthConsumer(BuildConfig.OSM_CONSUMER_KEY, BuildConfig.OSM_CONSUMER_SECRET);
+            consumer = new OkHttpOAuthConsumer("NQ4ucS4F0RpQO1byUQB5JA", Strings.GetOSM());
 
 
             String osmAccessToken =  PreferenceHelper.getInstance().getOSMAccessToken();
