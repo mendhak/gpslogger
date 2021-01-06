@@ -6,7 +6,7 @@ _Note: Development has stopped, and the app is not available from the Play Store
 
 GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, OpenStreetMap, Dropbox, Email). This app aims to be as battery efficient as possible.
 
-[Read about GPSLogger's features here](http://mendhak.github.com/gpslogger/)
+[Read about GPSLogger's features here](https://gpslogger.app/)
 
 ## Download
 
