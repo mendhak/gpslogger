@@ -1,7 +1,7 @@
 GPSLogger  [![githubactions](https://github.com/mendhak/gpslogger/workflows/Android%20CI/badge.svg)](https://github.com/mendhak/gpslogger/actions) [![pgp](assets/pgp.png)](https://keybase.io/mendhak)
 =========
 
-_Note: Development has stopped, and the app is not available from the Play Store. [See this note](https://github.com/mendhak/gpslogger/issues/849)_
+_Note: Development has stopped, and the app is not available from the Play Store. [See this note](https://github.com/mendhak/gpslogger/issues/849).  The app is now on [F-Droid](https://f-droid.org/en/packages/com.mendhak.gpslogger/)_  
 
 
 GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, OpenStreetMap, Dropbox, Email). This app aims to be as battery efficient as possible.
