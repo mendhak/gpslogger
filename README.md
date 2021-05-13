@@ -51,17 +51,13 @@ Setting up the code
 
 
 The project is based on the [Android build system](http://tools.android.com/tech-docs/new-build-system/user-guide) plugin for Gradle.
-Feel free to adopt and document your own OS and IDEs.  These instructions are for Ubuntu Linux with IntelliJ IDEA.
+These instructions are for Ubuntu Linux with Android Studio, but for other OSes, it should be roughly similar. 
 
 ### Set up your Android Development Environment
 
 Follow the instructions on the [Android Developer Website](http://developer.android.com/sdk/installing/index.html) to set up your computer for development.
 
-
-
-These instructions are for IntelliJ but the repo can be opened in Android Studio. 
-
-Download and install [IntelliJ IDEA Community Edition](http://www.jetbrains.com/idea/download/index.html), which is free.
+Download and install [Android Studio](https://developer.android.com/studio/install#linux) (there's also a [snap](https://snapcraft.io/android-studio))
 
 
 ### Clone the GPSLogger repository
@@ -91,7 +87,7 @@ Create a file called `local.properties`, pointing at your Android SDK directory.
 
 ### Import the project
 
-Open up IntelliJ and choose to import a project.  Select the topmost `build.gradle` file under GPSLogger.
+Open up Android Studio and choose to import a project.  Select the topmost `build.gradle` file under GPSLogger.
 
 If you get an Import dialog, choose to *Import project from external model*
 
@@ -101,9 +97,7 @@ On the next screen, choose the defaults and proceed (default gradle wrapper)
 
 ![import](assets/import_2.jpg)
 
-Give it a minute and IntelliJ/Gradle will configure the projects and download the various libraries.
-
-IntelliJ may not know where your Android SDK is.  You can find this under *File > Project Structure...* where you should set the Project SDK.  You will want to use Java 1.6 with Android 4 or above.
+Give it a minute and Android Studio will configure the projects and download the various libraries.
 
 ### OpenStreetMap Setup (Optional)
 

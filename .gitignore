@@ -1,4 +1,4 @@
- # IntelliJ
+ # Android Studio
 .idea/*
 .idea/tasks.xml
 .idea/workspace.xml
@@ -54,7 +54,7 @@ proguard/
 # Mac OS X clutter
 *.DS_Store
 
-# Intellij IDEA (see https://intellij-support.jetbrains.com/entries/23393067)
+# Android Studio (see https://intellij-support.jetbrains.com/entries/23393067)
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/datasources.xml
