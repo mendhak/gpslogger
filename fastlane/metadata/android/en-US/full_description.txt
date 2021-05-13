@@ -41,4 +41,3 @@ Your location - used to determine your GPS or tower based location
 
 System tools (automatically start at boot) - used if you choose to start GPSLogger on bootup
 
-Your accounts - used when authorizing against Google Docs and when uploading to Google Docs
