@@ -1,0 +1,44 @@
+A lightweight, battery efficient GPS Logger. The purpose of this app is to log your GPS coordinates at specified intervals to a file on your SD card.  This app runs in the background so that you can on a long walk, hike, flight ride or photo session or even go buy some milk and have this running as long as possible.   Once you're back at your computer, you can then use the files to geotag photos, upload to travel sites, view in Google Earth and so on.
+
+For more information, see <a href="https://gpslogger.app">https://gpslogger.app</a>
+
+<b>Features</b>
+
+<ul>
+<li>Can log to GPX, KML, CSV, NMEA and CSV formats. Can also log to a custom URL or just the screen.</li>
+<li>Logs GPX points as tracks and track segments</li>
+<li>Also logs speed, direction and altitude if available</li>
+<li>Add a description to a point using the annotate menu, gets added as a waypoint</li>
+<li>Configure time intervals between points</li>
+<li>Configure a minimum distance filter between points or an accuracy filter</li>
+<li>Notification icon with coordinates and quick actions</li>
+<li>Uses cell towers for location when GPS is disabled</li>
+<li>Selectively choose network, gps and passive location providers</li>
+<li>Automatically upload or email the file at set intervals to destinations such as Email, FTP, Dropbox, Google Docs, OpenStreetMap.</li>
+<li>Share location or log files via SMS/Email (and other apps such as Facebook or Twitter depending on what you've got installed)</li>
+<li>Start logging on phone bootup</li>
+<li>Invoke operations from Tasker or other automation apps.</li>
+<li>You can give it a preset file with your own values for distribution</li>
+<li>Multiple profiles with different settings are possible</li>
+</ul>
+
+Bugs, feature requests, questions - please submit them to github.com/mendhak/gpslogger (issue tracker).
+
+<b>Notes</b>
+
+A data connection is used by this app only if you use auto send features or Custom URL features
+
+Although the app allows 0 second frequencies, it is not recommended as the recording and logging is happening very fast; this could cause instability/hangs. Try 1-3 seconds instead.
+
+
+<b>Explanation of permissions</b>
+
+Storage - reading and writing files to the GPSLogger folder on your SD card
+
+Network communication - used when uploading the files (Dropbox, Openstreetmap) or sending emails or authorizing you with Dropbox, Openstreetmap
+
+Your location - used to determine your GPS or tower based location
+
+System tools (automatically start at boot) - used if you choose to start GPSLogger on bootup
+
+Your accounts - used when authorizing against Google Docs and when uploading to Google Docs
