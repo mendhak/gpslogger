@@ -1,5 +1,7 @@
 A lightweight, battery efficient GPS Logger. The purpose of this app is to log your GPS coordinates at specified intervals to a file on your SD card.  This app runs in the background so that you can on a long walk, hike, flight ride or photo session or even go buy some milk and have this running as long as possible.   Once you're back at your computer, you can then use the files to geotag photos, upload to travel sites, view in Google Earth and so on.
 
+<body>Test a forbidden tag</body>
+
 For more information, see <a href="https://gpslogger.app">https://gpslogger.app</a>
 
 <b>Features</b>
