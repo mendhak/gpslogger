@@ -50,7 +50,7 @@ android {
         targetSdkVersion 28
 
         versionCode 108
-        versionName 108
+        versionName "108"
     }
 
     buildTypes {
