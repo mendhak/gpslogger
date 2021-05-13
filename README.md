@@ -188,6 +188,7 @@ Use the fdroidserver docker image.  Clone the fdroid metadata repo and make chan
     git clone https://gitlab.com/fdroid/fdroiddata.git
     cd fdroiddata
 
+    # https://f-droid.org/en/docs/Submitting_to_F-Droid_Quick_Start_Guide/
     # initialize the metadata repo
     docker run --rm -v /home/mendhak/Android/Sdk:/opt/android-sdk -v $(pwd):/repo -e ANDROID_HOME:/opt/android-sdk registry.gitlab.com/fdroid/docker-executable-fdroidserver:master init -v
     
