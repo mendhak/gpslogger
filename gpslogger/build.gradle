@@ -45,7 +45,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId project.APP_ID
+        applicationId "com.mendhak.gpslogger"
         minSdkVersion 16
         targetSdkVersion 28
 
