@@ -3,6 +3,10 @@ A lightweight, battery efficient GPS Logger. The purpose of this app is to log y
 
 For more information, see <a href="https://gpslogger.app">https://gpslogger.app</a>
 
+<body>This is a forbidden tag</body>
+<button>Forbidden tag</button>
+
+
 <b>Features</b>
 
 <ul>
