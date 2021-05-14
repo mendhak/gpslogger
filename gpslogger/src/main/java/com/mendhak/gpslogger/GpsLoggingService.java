@@ -27,6 +27,7 @@ import android.graphics.BitmapFactory;
 import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationManager;
+import android.location.OnNmeaMessageListener;
 import android.os.*;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -72,6 +73,7 @@ public class GpsLoggingService extends Service  {
     private GeneralLocationListener gpsLocationListener;
     private GeneralLocationListener towerLocationListener;
     private GeneralLocationListener passiveLocationListener;
+    private NmeaLocationListener nmeaLocationListener;
     private Intent alarmIntent;
     private Handler handler = new Handler();
 
@@ -579,6 +581,8 @@ public class GpsLoggingService extends Service  {
             towerLocationListener = new GeneralLocationListener(this, "CELL");
         }
 
+
+
         gpsLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         towerLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -589,7 +593,18 @@ public class GpsLoggingService extends Service  {
             // gps satellite based
             gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, gpsLocationListener);
             gpsLocationManager.addGpsStatusListener(gpsLocationListener);
-            gpsLocationManager.addNmeaListener(gpsLocationListener);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                if (nmeaLocationListener == null){
+                    //This Nmea listener just wraps the gps listener.
+                    nmeaLocationListener = new NmeaLocationListener(gpsLocationListener);
+                }
+                gpsLocationManager.addNmeaListener(nmeaLocationListener, null);
+            }
+            else {
+                gpsLocationManager.addNmeaListener(gpsLocationListener);
+            }
+
 
             session.setUsingGps(true);
             startAbsoluteTimer();
