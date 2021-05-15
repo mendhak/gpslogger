@@ -263,6 +263,6 @@
 
 
 
-
+-dontwarn javax.mail.Authenticator
 
 

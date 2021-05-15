@@ -8,7 +8,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath 'com.android.tools.build:gradle:4.2.0'
         classpath "com.mendhak.gradlecrowdin:crowdin-plugin:0.1.0"
         classpath 'org.jacoco:org.jacoco.core:0.7.4.201502262128'
         classpath "com.moowork.gradle:gradle-node-plugin:0.13"
@@ -58,14 +58,14 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            useProguard true
+//            useProguard true
             debuggable true
         }
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            useProguard true
+//            useProguard true
             debuggable false
         }
     }
@@ -238,7 +238,7 @@ tasks.whenTaskAdded { task ->
 
 task buildTranslationArray {
 
-    doLast {
+
         def foundLocales = new StringBuilder()
         foundLocales.append("new String[]{")
 
@@ -254,13 +254,17 @@ task buildTranslationArray {
         //Don't forget to remove the trailing comma
         def foundLocalesString = foundLocales.toString().replaceAll(',}','}')
         android.defaultConfig.buildConfigField "String[]", "TRANSLATION_ARRAY", foundLocalesString
-    }
+
 
 
 }
 preBuild.dependsOn buildTranslationArray
 
-
+tasks.whenTaskAdded { task ->
+    if (task.name == 'preDebugBuild' || task.name == 'preReleaseBuild') {
+        task.dependsOn buildTranslationArray
+    }
+}
 
 
 //Download translations from Crowdin
