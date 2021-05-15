@@ -5,7 +5,7 @@ import androidx.test.filters.SmallTest;
 import com.mendhak.gpslogger.loggers.MockLocations;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.verification.VerificationMode;
 
 import static org.hamcrest.CoreMatchers.is;

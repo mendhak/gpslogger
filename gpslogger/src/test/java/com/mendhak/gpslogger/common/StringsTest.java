@@ -9,7 +9,7 @@ import com.mendhak.gpslogger.R;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -19,6 +19,7 @@ import java.util.GregorianCalendar;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -233,15 +234,15 @@ public class StringsTest {
 
     private Context GetDescriptiveTimeString_Context(){
         Context ctx = mock(Context.class);
-        when(ctx.getString(R.string.time_onesecond)).thenReturn("1 second");
-        when(ctx.getString(R.string.time_halfminute)).thenReturn("&#189; minute");
-        when(ctx.getString(R.string.time_oneminute)).thenReturn("1 minute");
-        when(ctx.getString(R.string.time_onehour)).thenReturn("1 hour");
-        when(ctx.getString(R.string.time_quarterhour)).thenReturn("15 minutes");
-        when(ctx.getString(R.string.time_halfhour)).thenReturn("½ hour");
-        when(ctx.getString(R.string.time_oneandhalfhours)).thenReturn("1½ hours");
-        when(ctx.getString(R.string.time_twoandhalfhours)).thenReturn("2½ hours");
-        when(ctx.getString(R.string.time_hms_format)).thenReturn("%sh %sm %ss");
+        lenient().when(ctx.getString(R.string.time_onesecond)).thenReturn("1 second");
+        lenient().when(ctx.getString(R.string.time_halfminute)).thenReturn("&#189; minute");
+        lenient().when(ctx.getString(R.string.time_oneminute)).thenReturn("1 minute");
+        lenient().when(ctx.getString(R.string.time_onehour)).thenReturn("1 hour");
+        lenient().when(ctx.getString(R.string.time_quarterhour)).thenReturn("15 minutes");
+        lenient().when(ctx.getString(R.string.time_halfhour)).thenReturn("½ hour");
+        lenient().when(ctx.getString(R.string.time_oneandhalfhours)).thenReturn("1½ hours");
+        lenient().when(ctx.getString(R.string.time_twoandhalfhours)).thenReturn("2½ hours");
+        lenient().when(ctx.getString(R.string.time_hms_format)).thenReturn("%sh %sm %ss");
 
         return ctx;
     }

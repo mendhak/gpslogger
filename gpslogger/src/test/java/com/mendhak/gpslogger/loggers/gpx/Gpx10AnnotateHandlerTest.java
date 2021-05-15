@@ -8,7 +8,7 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.MockLocations;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Date;
 
@@ -28,7 +28,6 @@ public class Gpx10AnnotateHandlerTest {
         Location loc = MockLocations.builder("MOCK", 12.193, 19.111).build();
 
 
-        when(loc.hasAccuracy()).thenReturn(false);
 
         String actual =  annotateHandler.getWaypointXml(loc, "2011-09-17T18:45:33Z", "This is the annotation");
         String expected = "\n<wpt lat=\"12.193\" lon=\"19.111\"><time>2011-09-17T18:45:33Z</time><name>This is the annotation</name><src>MOCK</src></wpt>\n";

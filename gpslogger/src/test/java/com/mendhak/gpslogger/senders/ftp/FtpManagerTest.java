@@ -5,7 +5,7 @@ import androidx.test.filters.SmallTest;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -65,7 +65,6 @@ public class FtpManagerTest {
     public void IsAvailable_AutoSendUnchecked_IsAvailable(){
         PreferenceHelper pm = mock(PreferenceHelper.class);
         when(pm.getFtpServerName()).thenReturn("example.com");
-        when(pm.isFtpAutoSendEnabled()).thenReturn(false);
         when(pm.getFtpUsername()).thenReturn("aaa");
         when(pm.getFtpPassword()).thenReturn("BBBB");
         when(pm.getFtpPort()).thenReturn(9001);

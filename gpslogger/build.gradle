@@ -207,7 +207,7 @@ dependencies {
 
      //Libraries required for unit testing
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:1.10.19'
+    testImplementation 'org.mockito:mockito-core:3.10.0'
     testImplementation 'org.json:json:20160810'
     testImplementation 'androidx.test:runner:1.2.0'
     testImplementation 'androidx.test:rules:1.2.0'

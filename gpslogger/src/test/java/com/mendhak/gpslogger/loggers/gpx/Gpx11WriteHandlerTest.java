@@ -5,7 +5,7 @@ import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.Strings;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Date;
 

@@ -5,7 +5,7 @@ import androidx.test.filters.SmallTest;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.File;
 
@@ -20,7 +20,6 @@ public class DropBoxManagerTest {
     @Test
     public void IsAvailable_WhenKeyPresent_ReturnsTrue(){
         PreferenceHelper pm = mock(PreferenceHelper.class);
-        when(pm.isDropboxAutoSendEnabled()).thenReturn(true);
         when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
 
         DropBoxManager dropBoxManager = new DropBoxManager(pm);
@@ -30,7 +29,6 @@ public class DropBoxManagerTest {
     @Test
     public void IsAvailable_WithKeyButAutoSendDisabled_ReturnsTrue(){
         PreferenceHelper pm = mock(PreferenceHelper.class);
-        when(pm.isDropboxAutoSendEnabled()).thenReturn(false);
         when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
 
         DropBoxManager dropBoxManager = new DropBoxManager(pm);
@@ -42,7 +40,6 @@ public class DropBoxManagerTest {
     @Test
     public void Unlink_WhenCalled_KeyCleared(){
         PreferenceHelper pm = mock(PreferenceHelper.class);
-        when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
 
         DropBoxManager dropBoxManager = new DropBoxManager(pm);
         dropBoxManager.unLink();

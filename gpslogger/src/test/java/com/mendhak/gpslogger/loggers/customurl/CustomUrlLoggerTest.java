@@ -7,7 +7,7 @@ import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.loggers.MockLocations;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 

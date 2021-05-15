@@ -7,7 +7,7 @@ import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.loggers.MockLocations;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.net.URL;
 
@@ -61,8 +61,6 @@ public class OpenGTSManagerTest {
 
         when(pm.getOpenGTSServer()).thenReturn("XXXXXXXXXXXX");
         when(pm.getOpenGTSServerPort()).thenReturn("aaaaaaaaaaaaa");
-        when(pm.getOpenGTSServerCommunicationMethod()).thenReturn("UDPTLSSSLSSH");
-        when(pm.getOpenGTSDeviceId()).thenReturn("99");
 
         assertThat("When port is non numeric, validation fails", manager.isAvailable(), is(false));
     }
