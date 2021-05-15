@@ -3,6 +3,7 @@ A lightweight, battery efficient GPS Logger. The purpose of this app is to log y
 
 For more information, see <a href="https://gpslogger.app">https://gpslogger.app</a>
 
+<b>Note</b>: Please remember to <b>Allow all the time</b> for this app in your OS settings, to allow it to log locations in the background.
 
 <b>Features</b>
 
@@ -16,7 +17,7 @@ For more information, see <a href="https://gpslogger.app">https://gpslogger.app<
 <li>Notification icon with coordinates and quick actions</li>
 <li>Uses cell towers for location when GPS is disabled</li>
 <li>Selectively choose network, gps and passive location providers</li>
-<li>Automatically upload or email the file at set intervals to destinations such as Email, FTP, Dropbox, Google Docs, OpenStreetMap.</li>
+<li>Automatically upload or email the file at set intervals to destinations such as Email, FTP, Dropbox, OpenStreetMap.</li>
 <li>Share location or log files via SMS/Email (and other apps such as Facebook or Twitter depending on what you've got installed)</li>
 <li>Start logging on phone bootup</li>
 <li>Invoke operations from Tasker or other automation apps.</li>
