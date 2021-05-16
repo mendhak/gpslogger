@@ -1,0 +1,1 @@
+* Android 10+ location background fix - the permission workflow will now ask for "allow all the time" permission
