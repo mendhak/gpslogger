@@ -45,10 +45,10 @@ udp:
 
 https:
   container_name: gpslogger-https-server
-  image: mendhak/http-https-echo
+  image: mendhak/http-https-echo:18
   ports:
-    - "8081:80"
-    - "8443:443"
+    - "0.0.0.0:8081:8080"
+    - "0.0.0.0:8443:8443"
 
 postfix:
   container_name: gpslogger-securemail-server
