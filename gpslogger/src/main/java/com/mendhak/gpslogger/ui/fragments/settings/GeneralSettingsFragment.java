@@ -70,10 +70,6 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         findPreference("gpsvisualizer_link").setOnPreferenceClickListener(this);
         findPreference("debuglogtoemail").setOnPreferenceClickListener(this);
 
-        findPreference("permissions_required").setOnPreferenceClickListener(this);
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
-            getPreferenceScreen().removePreference(findPreference("permissions_required"));
-        }
 
 
 
@@ -120,23 +116,10 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         coordFormats.setSummary(coordinateDisplaySamples[PreferenceHelper.getInstance().getDisplayLatLongFormat().ordinal()]);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        Systems.onRequestPermissionsResult(requestCode, permissions, grantResults, getActivity());
 
-    }
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-
-        if(preference.getKey().equals("permissions_required")){
-            if(!Systems.hasUserGrantedAllNecessaryPermissions(getActivity())){
-                //reinstate this later
-                //Systems.askUserForPermissions(this);
-            }
-
-            return true;
-        }
 
         if (preference.getKey().equals("enableDisableGps")) {
             startActivity(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"));

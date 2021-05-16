@@ -34,9 +34,7 @@
         android:key="hide_notification_from_status_bar"
         android:defaultValue="false"
         />
-    <Preference
-        android:title="@string/gpslogger_permissions_rationale_title"
-        android:key="permissions_required" />
+
 
     <Preference
         android:title="@string/enabledisablegps_title"
