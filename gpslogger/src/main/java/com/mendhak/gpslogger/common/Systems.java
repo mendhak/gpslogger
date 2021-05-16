@@ -36,6 +36,10 @@ import android.os.Build;
 import android.os.PowerManager;
 import android.preference.PreferenceFragment;
 import android.provider.Settings;
+
+import androidx.activity.ComponentActivity;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -151,10 +155,16 @@ public class Systems {
      * Currently this is location and file storage.
      */
     public static boolean hasUserGrantedAllNecessaryPermissions(Context context){
-        return hasUserGrantedPermission(Manifest.permission.ACCESS_COARSE_LOCATION, context)
+        boolean granted = hasUserGrantedPermission(Manifest.permission.ACCESS_COARSE_LOCATION, context)
                 && hasUserGrantedPermission(Manifest.permission.ACCESS_FINE_LOCATION, context)
                 && hasUserGrantedPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, context)
                 && hasUserGrantedPermission(Manifest.permission.READ_EXTERNAL_STORAGE, context);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+            granted = granted && hasUserGrantedPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION, context);
+        }
+
+        return granted;
     }
 
     static boolean hasUserGrantedPermission(String permissionName, Context context){
@@ -163,39 +173,58 @@ public class Systems {
         return granted;
     }
 
-    public static void askUserForPermissions(final Activity activity, final PreferenceFragment fragment) {
+    public static void askUserForPermissions(final ComponentActivity activity){
+        final String[] PERMISSIONS = {
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        };
 
-        LOG.debug("User has not granted necessary permissions for this app to run.");
-
-        Dialogs.alert(activity.getString(R.string.gpslogger_permissions_rationale_title), activity.getString(R.string.gpslogger_permissions_rationale_message_basic)
-                        + "<br /> <a href='https://gpslogger.app/privacypolicy.html'>" + activity.getString(R.string.privacy_policy) + "</a>",
-                activity, new Dialogs.MessageBoxCallback() {
-
-                    @Override
-                    public void messageBoxResult(int which) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-                            if (fragment != null) {
-                                //From preference fragments, requestPermissions is called differently. WHY.
-                                fragment.requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
-                                                Manifest.permission.ACCESS_FINE_LOCATION,
-                                                Manifest.permission.READ_EXTERNAL_STORAGE,
-                                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                                Manifest.permission.GET_ACCOUNTS},
-                                        REQUEST_PERMISSION_CODE);
-                            } else {
-                                ActivityCompat.requestPermissions(activity,
-                                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
-                                                Manifest.permission.ACCESS_FINE_LOCATION,
-                                                Manifest.permission.READ_EXTERNAL_STORAGE,
-                                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                                Manifest.permission.GET_ACCOUNTS},
-                                        REQUEST_PERMISSION_CODE);
-                            }
-                        }
-                    }
-                });
+        ActivityResultLauncher<String[]> launcher = activity.registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), grantResults -> {
+            LOG.debug("Launcher result: " + grantResults.toString());
+            if (grantResults.containsValue(false)) {
+                LOG.debug("At least one of the permissions was not granted");
+//                    launcher.launch(PERMISSIONS);
+            }
+        });
+        LOG.debug("Launching multiple contract permission launcher for ALL required permissions");
+        launcher.launch(PERMISSIONS);
     }
+
+//    public static void askUserForPermissions(final Activity activity, final PreferenceFragment fragment) {
+//
+//        LOG.debug("User has not granted necessary permissions for this app to run.");
+//
+//        Dialogs.alert(activity.getString(R.string.gpslogger_permissions_rationale_title), activity.getString(R.string.gpslogger_permissions_rationale_message_basic)
+//                        + "<br /> <a href='https://gpslogger.app/privacypolicy.html'>" + activity.getString(R.string.privacy_policy) + "</a>",
+//                activity, new Dialogs.MessageBoxCallback() {
+//
+//                    @Override
+//                    public void messageBoxResult(int which) {
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//
+//                            if (fragment != null) {
+//                                //From preference fragments, requestPermissions is called differently. WHY.
+//                                fragment.requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+//                                                Manifest.permission.ACCESS_FINE_LOCATION,
+//                                                Manifest.permission.READ_EXTERNAL_STORAGE,
+//                                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                                                Manifest.permission.GET_ACCOUNTS},
+//                                        REQUEST_PERMISSION_CODE);
+//                            } else {
+//                                ActivityCompat.requestPermissions(activity,
+//                                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+//                                                Manifest.permission.ACCESS_FINE_LOCATION,
+//                                                Manifest.permission.READ_EXTERNAL_STORAGE,
+//                                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                                                Manifest.permission.GET_ACCOUNTS},
+//                                        REQUEST_PERMISSION_CODE);
+//                            }
+//                        }
+//                    }
+//                });
+//    }
 
     public static void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults, Context context) {
         switch (requestCode) {

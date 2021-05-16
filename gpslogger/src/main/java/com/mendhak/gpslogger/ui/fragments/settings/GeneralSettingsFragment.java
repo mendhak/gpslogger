@@ -131,7 +131,8 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
 
         if(preference.getKey().equals("permissions_required")){
             if(!Systems.hasUserGrantedAllNecessaryPermissions(getActivity())){
-                Systems.askUserForPermissions(getActivity(), this);
+                //reinstate this later
+                //Systems.askUserForPermissions(this);
             }
 
             return true;

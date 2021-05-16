@@ -20,6 +20,7 @@
 package com.mendhak.gpslogger;
 
 
+import android.Manifest;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.*;
@@ -30,6 +31,8 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.*;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -110,7 +113,9 @@ public class GpsMainActivity extends AppCompatActivity
         registerEventBus();
 
         if(!Systems.hasUserGrantedAllNecessaryPermissions(this)){
-            Systems.askUserForPermissions(this, null);
+//            Systems.askUserForPermissions(this);
+            askUserForPermissions();
+
         }
         else {
             LOG.debug("Permission check OK");
@@ -122,11 +127,76 @@ public class GpsMainActivity extends AppCompatActivity
         }
     }
 
+    private final ActivityResultLauncher<String> backgroundPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(),
+                    grantResults -> {
+                        LOG.debug("Launcher result: " + grantResults.toString());
+                        if (grantResults) {
+                            LOG.debug("Background permissions granted.  We're done here.");
+                        } else {
+                            LOG.debug("Background location permission was not granted");
+                        }
+                    });
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        Systems.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    private final ActivityResultLauncher<String[]> permissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
+                    grantResults -> {
+                        LOG.debug("Launcher result: " + grantResults.toString());
+                        if (grantResults.containsValue(false)) {
+                            LOG.debug("At least one of the permissions was not granted");
+                            Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
+                                    getString(R.string.gpslogger_permissions_permanently_denied), this);
+                        } else {
+                            LOG.debug("Basic permissions granted.  Now ask for background location permissions.");
+                            askUserForBackgroundPermissions();
+                        }
+                    });
+
+    public void askUserForPermissions() {
+        ArrayList<String> permissions = new ArrayList<String>();
+        permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q) {
+            // Only on Android 10 (Q), the permission dialog can include an 'Allow all the time'
+            permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
+                    getString(R.string.gpslogger_permissions_rationale_message_basic)
+                            + "<br /> <a href='https://gpslogger.app/privacypolicy.html'>"
+                            + getString(R.string.privacy_policy) + "</a>",
+                    this, then -> {
+                        LOG.debug("Launching multiple contract permission launcher for ALL required permissions");
+                        permissionLauncher.launch(permissions.toArray(new String[0]));
+
+                    });
+        }
     }
+
+    public void askUserForBackgroundPermissions() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
+            Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
+                    "To allow GPSLogger to run in the background, you will need to grant it an additional permission." +
+                            "<br /> On the next screen please select: <br /><br />" +
+                            getPackageManager().getBackgroundPermissionOptionLabel(),
+                    this, then -> {
+                        LOG.debug("Launching multiple contract permission launcher for ALL required permissions");
+                        backgroundPermissionLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+
+                    });
+        }
+    }
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+//        Systems.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+//    }
 
 
     @Override
