@@ -117,7 +117,7 @@ android {
 
 dependencies {
 
-    implementation 'com.android.support:support-v4:28.0.0'
+//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //FTP operations
     implementation('commons-net:commons-net:3.4')
@@ -133,13 +133,13 @@ dependencies {
 
 
     //Android lollipop/material features including the Toolbar
-    implementation "com.android.support:appcompat-v7:28.0.0"
+    implementation 'androidx.appcompat:appcompat:1.0.0'
 
     //Recycler view required by material dialog custom URL alert box
-    implementation "com.android.support:recyclerview-v7:28.0.0"
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
     //Cardviews
-    implementation "com.android.support:cardview-v7:28.0.0"
+    implementation 'androidx.cardview:cardview:1.0.0'
 
     //Material dialogs
     //Change to 0.8.5.7 when released

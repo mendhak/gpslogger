@@ -22,7 +22,7 @@ package com.mendhak.gpslogger.shortcuts;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 
 import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.common.IntentConstants;

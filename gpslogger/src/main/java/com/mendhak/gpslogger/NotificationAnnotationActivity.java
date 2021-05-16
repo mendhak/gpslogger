@@ -19,24 +19,20 @@
 
 package com.mendhak.gpslogger;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.KeyEvent;
-import com.afollestad.materialdialogs.DialogAction;
+
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.common.IntentConstants;
-import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.ui.Dialogs;
 
 import org.slf4j.Logger;
-
-import de.greenrobot.event.EventBus;
 
 public class NotificationAnnotationActivity extends AppCompatActivity {
 

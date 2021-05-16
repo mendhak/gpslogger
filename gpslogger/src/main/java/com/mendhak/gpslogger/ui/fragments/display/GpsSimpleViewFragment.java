@@ -24,7 +24,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -43,7 +43,7 @@ import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.loggers.Files;
+
 import org.slf4j.Logger;
 
 

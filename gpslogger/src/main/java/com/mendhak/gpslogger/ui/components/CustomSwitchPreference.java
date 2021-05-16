@@ -21,7 +21,7 @@ package com.mendhak.gpslogger.ui.components;
 
 import android.content.Context;
 import android.preference.SwitchPreference;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;

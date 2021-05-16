@@ -20,7 +20,7 @@
 package com.mendhak.gpslogger.loggers.csv;
 
 import android.location.Location;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.Maths;

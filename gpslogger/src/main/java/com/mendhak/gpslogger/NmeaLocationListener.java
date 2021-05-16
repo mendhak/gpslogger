@@ -2,7 +2,7 @@ package com.mendhak.gpslogger;
 
 import android.location.OnNmeaMessageListener;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class NmeaLocationListener implements OnNmeaMessageListener {

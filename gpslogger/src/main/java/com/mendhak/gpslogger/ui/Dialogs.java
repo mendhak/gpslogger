@@ -22,7 +22,7 @@ package com.mendhak.gpslogger.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;

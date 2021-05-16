@@ -22,8 +22,8 @@ package com.mendhak.gpslogger.senders.dropbox;
 
 
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
@@ -40,7 +40,6 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.Locale;
 
 
 public class DropboxJob extends Job {

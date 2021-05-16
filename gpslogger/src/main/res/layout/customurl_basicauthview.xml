@@ -6,7 +6,7 @@ android:layout_height="fill_parent">
 
 
 
-    <android.support.v7.widget.AppCompatEditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:text=""
         android:hint="@string/autoftp_username"
         android:paddingLeft="22dp"
@@ -16,7 +16,7 @@ android:layout_height="fill_parent">
         android:layout_height="wrap_content"
         android:id="@+id/basicauth_username" />
 
-    <android.support.v7.widget.AppCompatEditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:text=""
         android:hint="@string/autoftp_password"
         android:paddingLeft="22dp"

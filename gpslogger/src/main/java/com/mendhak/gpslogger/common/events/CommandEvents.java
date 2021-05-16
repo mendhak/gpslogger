@@ -20,7 +20,7 @@
 package com.mendhak.gpslogger.common.events;
 
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 public class CommandEvents {
     /**

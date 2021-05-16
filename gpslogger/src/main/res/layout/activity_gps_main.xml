@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v4.widget.DrawerLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:id="@+id/supercontainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_height="55dp"
             android:layout_width="match_parent"
@@ -47,7 +47,7 @@
                     android:layout_toLeftOf="@id/notification_bulb"/>
 
             </RelativeLayout>
-            </android.support.v7.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>
         <!-- As the main content view, the view below consumes the entire
              space available using match_parent in both dimensions. -->
         <FrameLayout
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
         </FrameLayout>
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarBottom"
             android:layout_gravity="bottom"
             android:layout_height="wrap_content"
@@ -68,4 +68,4 @@
     </FrameLayout>
 
 
-</android.support.v4.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

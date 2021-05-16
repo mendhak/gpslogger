@@ -24,14 +24,12 @@ import android.app.*;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationManager;
-import android.location.OnNmeaMessageListener;
 import android.os.*;
-import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.TaskStackBuilder;
 import android.text.Html;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.CommandEvents;
@@ -49,7 +47,6 @@ import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

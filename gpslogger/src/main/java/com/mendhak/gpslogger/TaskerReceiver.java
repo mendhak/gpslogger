@@ -3,9 +3,8 @@ package com.mendhak.gpslogger;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 
-import com.mendhak.gpslogger.common.IntentConstants;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 
 import org.slf4j.Logger;

@@ -22,8 +22,8 @@ package com.mendhak.gpslogger.ui.fragments.display;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.text.Html;
+import androidx.core.content.ContextCompat;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +38,6 @@ import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
-import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import org.slf4j.Logger;
 

@@ -1,7 +1,7 @@
 package com.mendhak.gpslogger.loggers.geojson;
 
 import android.location.Location;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;

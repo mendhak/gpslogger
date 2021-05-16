@@ -1,14 +1,9 @@
 package com.mendhak.gpslogger.ui.fragments.settings;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;

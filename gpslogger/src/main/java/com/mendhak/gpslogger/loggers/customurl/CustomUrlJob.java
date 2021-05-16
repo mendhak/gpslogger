@@ -20,22 +20,21 @@
 package com.mendhak.gpslogger.loggers.customurl;
 
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.network.Networks;
-import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
 import okhttp3.*;
 
 import org.slf4j.Logger;
-import java.io.IOException;
+
 import java.util.Map;
 
 

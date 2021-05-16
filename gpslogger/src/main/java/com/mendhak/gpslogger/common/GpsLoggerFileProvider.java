@@ -1,6 +1,6 @@
 package com.mendhak.gpslogger.common;
 
-import android.support.v4.content.FileProvider;
+import androidx.core.content.FileProvider;
 
 //This class exists purely to avoid collisions with any
 //third-party libraries that might also have a
