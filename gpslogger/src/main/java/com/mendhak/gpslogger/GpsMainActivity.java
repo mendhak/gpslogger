@@ -113,12 +113,11 @@ public class GpsMainActivity extends AppCompatActivity
         registerEventBus();
 
         if(!Systems.hasUserGrantedAllNecessaryPermissions(this)){
-//            Systems.askUserForPermissions(this);
+            LOG.debug("Permission check - missing permissions");
             askUserForPermissions();
-
         }
         else {
-            LOG.debug("Permission check OK");
+            LOG.debug("Permission check - OK");
 
             if(preferenceHelper.shouldStartLoggingOnAppLaunch()){
                 LOG.debug("Start logging on app launch");
@@ -132,9 +131,11 @@ public class GpsMainActivity extends AppCompatActivity
                     grantResults -> {
                         LOG.debug("Launcher result: " + grantResults.toString());
                         if (grantResults) {
-                            LOG.debug("Background permissions granted.  We're done here.");
+                            LOG.debug("Background permissions granted.");
                         } else {
                             LOG.debug("Background location permission was not granted");
+                            Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
+                                    getString(R.string.gpslogger_permissions_permanently_denied), this);
                         }
                     });
 
@@ -147,7 +148,7 @@ public class GpsMainActivity extends AppCompatActivity
                             Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
                                     getString(R.string.gpslogger_permissions_permanently_denied), this);
                         } else {
-                            LOG.debug("Basic permissions granted.  Now ask for background location permissions.");
+                            LOG.debug("Basic permissions granted. Now ask for background location permissions.");
                             askUserForBackgroundPermissions();
                         }
                     });
@@ -170,7 +171,7 @@ public class GpsMainActivity extends AppCompatActivity
                             + "<br /> <a href='https://gpslogger.app/privacypolicy.html'>"
                             + getString(R.string.privacy_policy) + "</a>",
                     this, then -> {
-                        LOG.debug("Launching multiple contract permission launcher for ALL required permissions");
+                        LOG.debug("Beginning request for multiple permissions");
                         permissionLauncher.launch(permissions.toArray(new String[0]));
 
                     });
@@ -182,21 +183,14 @@ public class GpsMainActivity extends AppCompatActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
             Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
-                    "To allow GPSLogger to run in the background, you will need to grant it an additional permission." +
-                            "<br /> On the next screen please select: <br /><br />" +
-                            getPackageManager().getBackgroundPermissionOptionLabel(),
+                    getString(R.string.gpslogger_permissions_background_location) + "<br /><br /><b>" + getPackageManager().getBackgroundPermissionOptionLabel() + "</b>",
                     this, then -> {
-                        LOG.debug("Launching multiple contract permission launcher for ALL required permissions");
+                        LOG.debug("Beginning request for Background Location permission");
                         backgroundPermissionLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
 
                     });
         }
     }
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-//        Systems.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-//    }
 
 
     @Override
