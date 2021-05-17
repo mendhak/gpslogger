@@ -1,1 +1,2 @@
 * Android 10+ location background fix - the permission workflow will now ask for "allow all the time" permission
+* A notification will now appear when the app launches
