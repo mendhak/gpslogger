@@ -84,6 +84,11 @@ public class GpsLoggingService extends Service  {
 
     @Override
     public void onCreate() {
+        try {
+            startForeground(NOTIFICATION_ID, getNotification());
+        } catch (Exception ex) {
+            LOG.error("Could not start GPSLoggingService in foreground. ", ex);
+        }
 
         nextPointAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 

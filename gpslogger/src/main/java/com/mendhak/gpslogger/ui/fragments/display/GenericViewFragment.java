@@ -24,9 +24,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -142,6 +144,10 @@ public abstract class GenericViewFragment extends Fragment {
 
 
         } else {
+            if(!session.isStarted()){
+                Intent serviceIntent = new Intent(getActivity().getApplicationContext(), GpsLoggingService.class);
+                ContextCompat.startForegroundService(getActivity().getApplicationContext(), serviceIntent);
+            }
             toggleLogging();
         }
     }
