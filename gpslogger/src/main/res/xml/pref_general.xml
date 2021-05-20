@@ -99,7 +99,7 @@
     <Preference
         android:key="gpslogger_repo"
         android:title="https://gpslogger.app"
-        android:icon="@drawable/gpsloggericon3"
+        android:icon="@mipmap/gpsloggericon3"
         >
         <intent android:action="android.intent.action.VIEW"
             android:data="https://gpslogger.app/"/>
