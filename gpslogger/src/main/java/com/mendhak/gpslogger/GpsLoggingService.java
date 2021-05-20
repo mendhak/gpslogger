@@ -23,6 +23,7 @@ import android.annotation.TargetApi;
 import android.app.*;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ServiceInfo;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
@@ -85,7 +86,12 @@ public class GpsLoggingService extends Service  {
     @Override
     public void onCreate() {
         try {
-            startForeground(NOTIFICATION_ID, getNotification());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                startForeground(NOTIFICATION_ID, getNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+            }
+            else {
+                startForeground(NOTIFICATION_ID, getNotification());
+            }
         } catch (Exception ex) {
             LOG.error("Could not start GPSLoggingService in foreground. ", ex);
         }
@@ -367,7 +373,12 @@ public class GpsLoggingService extends Service  {
 
 
         try {
-            startForeground(NOTIFICATION_ID, getNotification());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                startForeground(NOTIFICATION_ID, getNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+            }
+            else {
+                startForeground(NOTIFICATION_ID, getNotification());
+            }
         } catch (Exception ex) {
             LOG.error("Could not start GPSLoggingService in foreground. ", ex);
         }
