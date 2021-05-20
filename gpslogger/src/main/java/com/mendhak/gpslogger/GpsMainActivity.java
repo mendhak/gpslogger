@@ -21,6 +21,7 @@ package com.mendhak.gpslogger;
 
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.*;
@@ -43,6 +44,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.appcompat.widget.ActionMenuView;
 import androidx.appcompat.widget.Toolbar;
+import android.provider.Settings;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.*;
@@ -114,7 +116,7 @@ public class GpsMainActivity extends AppCompatActivity
 
         if(!Systems.hasUserGrantedAllNecessaryPermissions(this)){
             LOG.debug("Permission check - missing permissions");
-            askUserForPermissions();
+            askUserForBasicPermissions();
         }
         else {
             LOG.debug("Permission check - OK");
@@ -131,7 +133,8 @@ public class GpsMainActivity extends AppCompatActivity
                     grantResults -> {
                         LOG.debug("Launcher result: " + grantResults.toString());
                         if (grantResults) {
-                            LOG.debug("Background permissions granted.");
+                            LOG.debug("Background permissions granted. Now request ignoring battery optimizations");
+                            askUserToDisableBatteryOptimization();
                         } else {
                             LOG.debug("Background location permission was not granted");
                             Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
@@ -153,7 +156,7 @@ public class GpsMainActivity extends AppCompatActivity
                         }
                     });
 
-    public void askUserForPermissions() {
+    public void askUserForBasicPermissions() {
         ArrayList<String> permissions = new ArrayList<String>();
         permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
         permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
@@ -189,6 +192,26 @@ public class GpsMainActivity extends AppCompatActivity
                         backgroundPermissionLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
 
                     });
+        }
+    }
+
+    @SuppressLint("BatteryLife")
+    public void askUserToDisableBatteryOptimization() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Intent intent = new Intent();
+            String packageName = getPackageName();
+            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+
+            try {
+                if (!pm.isIgnoringBatteryOptimizations(packageName)){
+                    intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                    intent.setData(Uri.parse("package:" + packageName));
+                    startActivity(intent);
+                }
+            }
+            catch(Exception e){
+                LOG.error("Unable to request ignoring battery optimizations.", e);
+            }
         }
     }
 
