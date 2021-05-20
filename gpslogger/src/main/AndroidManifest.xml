@@ -27,7 +27,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/gpsloggericon3"
+        android:icon="@mipmap/gpsloggericon3"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:name="com.mendhak.gpslogger.common.AppSettings"
