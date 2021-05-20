@@ -2,3 +2,4 @@
 * The permission workflow will also request disabling battery optimization, but only once
 * The permission workflow can be a bit annoying, sorry
 * A notification will now appear when the app launches
+* Adaptive icons, thanks to @kanru
