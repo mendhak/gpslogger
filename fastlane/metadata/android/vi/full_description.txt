@@ -1,0 +1,39 @@
+Phần mềm ghi nhật ký GPS nhẹ, tiết kiệm pin. Mục đích của ứng dụng này là ghi lại tọa độ GPS của bạn theo các khoảng thời gian cụ thể vào một tệp trên thẻ SD của bạn.  Ứng dụng này chạy trong nền do đó bạn có thể đi bộ đường dài, đi lang thang, đi máy bay hoặc chụp ảnh hoặc thậm chí đi mua một số sữa và để ứng dụng này chạy càng lâu càng tốt.   Sau khi quay lại máy tính, bạn có thể sử dụng các tệp để gắn thẻ địa lý cho ảnh, tải lên các trang web du lịch, xem trong Google Earth, v.v. 
+
+***Đặc trưng:
+
+* Chỉ định khoảng thời gian
+* Chỉ định khoảng cách
+* Tháp điện thoại di động hoặc vệ tinh GPS
+* Tệp GPX và/hoặc KML
+* Hiện thông báo
+* Sử dụng thời gian điện thoại hoặc thời gian vệ tinh
+* Hiển thị hệ đo lường Anh
+* Tự khởi động ứng dụng khi bật nguồn
+* Gửi email tự động vài giờ một lần
+* OpenStreetMap - tải lên theo dõi GPS
+* Dropbox - tải lên GPX/KML/ZIP
+
+
+Lỗi, yêu cầu tính năng, câu hỏi - vui lòng gửi đến github.com/mendhak/gpslogger (trình theo dõi vấn đề).  
+
+***Ghi chú:
+
+GPSLogger không phải là phần mềm thay thế MyTracks.  MyTracks dùng để sử dụng trong thời gian ngắn (vì nó có rất nhiều tính năng chạy), GPSLogger có nghĩa là sử dụng trong một thời gian dài.
+
+Kết nối dữ liệu chỉ được sử dụng nếu bạn sử dụng tính năng tự động gửi email hoặc OpenStreetMap hoặc Dropbox.
+
+Mặc dù ứng dụng cho phép tần số 0 giây, nó không được khuyến khích vì quá trình ghi nhật ký diễn ra rất nhanh; điều này có thể gây ra sự không ổn định/bị treo. Thay vào đó, hãy thử 1-3 giây.
+
+Nếu có một tính năng mà bạn cảm thấy ứng dụng nên có, bạn có thể gửi yêu cầu tính năng trên trang GitHub.
+
+***Giải thích về các quyền:
+
+Bộ nhớ - đọc và ghi tệp vào thư mục GPSLogger trên thẻ SD của bạn
+
+Kết nối mạng - được sử dụng khi tải lên các tệp (Dropbox, Openstreetmap) hoặc gửi email hoặc cấp quyền cho bạn với Dropbox, Openstreetmap
+
+Vị trí của bạn - được sử dụng để xác định GPS hoặc tháp của bạn dựa trên vị trí
+
+Công cụ hệ thống (tự khởi động ứng dụng khi bật nguồn) - được sử dụng nếu bạn chọn tự khởi động GPSLogger khi bật nguồn)
+
