@@ -1,0 +1,40 @@
+Isang magaan, mahusay sa baterya na GPS Logger. Ang layunin ng app na ito ay maitala ang iyong mga GPS coordinates sa mga tukoy na agwat sa isang file sa iyong SD card.  Ang app na ito ay tumatakbo sa background para ikaw ay maaaring maglakad ng mahaba, mag-hike, sumakay sa eroplano o sesyon sa pagkuha ng larawan o kahit na bumili ng gatas at panatilihin itong tumatakbo hangga't posible.   Sa sandaling bumalik ka sa iyong kompyuter, maaari mo nang gamitin ang mga files sa pag-geotag ng mga larawan, mag-upload sa mga site ng paglalakbay, tingnan sa Google Earth at iba pa. 
+
+***Mga Features:
+
+* Tukuyin ang mga agwat ng oras
+* Tukuyin ang mga agwat ng distansya
+* Tore ng cell phone o mga GPS satellites
+* Mga GPX at/o KML files
+* Nagpapakita ng notipikasyon
+* Gumamit ng oras ng telepono o oras ng satellite
+* Mga yunit ng imperyal na displey
+* Auto na simula sa pag-boot
+* Auto na email bawat ilang oras
+* OpenStreetMap - mag-upload ng mga bakas ng GPS
+* Dropbox - mag-upload ng GPX/KML/ZIP
+* Google Docs - mag-upload ng GPX/KML/ZIP
+
+Mga bug, mga kahilingan na feature, mga tanong - mangyaring isumite ang mga ito sa github.com/mendhak/gpslogger (isyu tracker).  
+
+*** Mga Tala:
+
+Ang GPSLogger ay hindi isang kapalit ng MyTracks.  Ang MyTracks ay sinadya para sa maikling paggamit (ito ay may napakaraming mga features na tumatakbo), ang GPSLogger ay sinadya upang magtagal ng mahabang panahon.
+
+Ang isang koneksyon ng datos ay ginagamit lamang ng app na ito kung gumagamit ka ng auto-email o OpenStreetMap o mga features ng Dropbox.
+
+Kahit na pinapayagan ng app ang 0 na segundong mga frequencies, hindi ito inirerekomenda sapagkat ang pag-record at pagtala ay nangyayari ng napakabilis; ito ay maaaring maging sanhi ng kawalang-tatag /mga hangs. Subukan ang 1-3 na segundo sa halip.
+
+Kung mayroong isang feature na nararamdaman mong dapat magkaroon ang app, maaari kang magsumite ng kahilingan na feature sa site ng GitHub.
+
+***Paliwanag ng mga permiso:
+
+Imbakan - pagbabasa at pagsusulat ng mga file sa folder ng GPSLogger sa iyong SD card
+
+Komunikasyon ng network - ginagamit kapag nag-upload ng mga file (Dropbox, Openstreetmap) o pagpapadala ng mga email o pinapahintulutan ka sa Dropbox, Openstreetmap
+
+Ang iyong lokasyon - ginagamit upang matukoy ang iyong GPS o lokasyon batay sa tower
+
+Mga tool ng system (awtomatikong magsisimula sa boot) - ginagamit kung pinili mong simulan ang GPSLogger sa bootup
+
+
