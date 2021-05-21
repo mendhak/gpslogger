@@ -1,0 +1,40 @@
+Jednoduchý, energeticky úsporný zaznamenávač údajov zo systému GPS. Účelom tejto aplikácie je zaznamenať vaše GPS súradnice v stanovených intervaloch do súboru na karte SD.  Táto aplikácia beží na pozadí, takže ju môžete mať spustenú na dlhej prechádzke, výlete, pri cestovaní alebo fotení, alebo aj vtedy, keď napríklad idete len do obchodu po mlieko.   Akonáhle budete späť pri svojom počítači, môžete získané súbory použiť na označovanie fotografií geografickými informáciami, môžete odoslať údaje na stránky pre cestovateľov, alebo si ich prezrieť pomocou Google Earth. 
+
+*** Vlastnosti a funkcie:
+
+* Špecifikovanie časových intervalov
+* Zadanie vzdialenostných intervalov
+* Určovanie polohy pomocou mobilného signálu alebo satelitov GPS
+* GPX a/alebo KML súbory
+* Zobrazovanie upozornenia
+* Použitie času podľa telefónu alebo satelitu
+* Podpora imperiálnych jednotiek
+* Automatické spustenie pri bootovaní
+* Automatické odosielanie e-mailom každých pár hodín
+* OpenStreetMap – nahrávanie GPS trás
+* Dropbox – odosielanie súborov GPX, KML/ZIP
+* Google Docs – nahrávanie súborov GPX, KML/ZIP
+
+Chyby, požiadavky na nové funkcie a otázky prosím zadávajte na stránke github.com/mendhak/gpslogger (issue tracker).  
+
+*** Poznámky:
+
+GPSLogger nie je náhrada aplikácie MyTracks.  Aplikácia MyTracks je určená na krátke použitie (pretože má spustených mnoho funkcií súčasne), GPSLogger môžete používať dlhšiu dobu.
+
+Dátové pripojenie sa využíva iba ak máte aktívne zasielanie e-mailom alebo odosielanie do služby OpenStreetMap či Dropbox.
+
+Aj keď aplikácia umožňuje nastaviť interval 0 sekúnd, neodporúča sa to, pretože nahrávanie a záznam vtedy prebieha príliš rýchlo. Takéto nastavenie môže spôsobiť nestabilitu alebo pád aplikácie. Odporúčame nastaviť interval 1 až 3 sekundy.
+
+Ak poznáte funkciu, ktorá podľa vás tejto aplikácii chýba, informujte nás o nej zaslaním požiadavky novú funkciu, prostredníctvom stránky GitHub.
+
+*** Vysvetlenie oprávnení:
+
+Ukladanie – čítanie a zápis súborov do priečinka aplikácie GPSLogger na karte SD
+
+Sieťová komunikácia – používa sa pri odosielaní súborov (Dropbox, Openstreetmap) alebo pri odosielaním e-mailov či autorizovaní so službou Dropbox, Openstreetmap
+
+Vaša poloha – používa na určenie vašej polohy pomocou systému GPS alebo vykrývačov mobilným signálom
+
+Systémové nástroje (automatické spustenie pri štarte) – používa sa vtedy, keď si vyberiete spustenie aplikácie pri bootovaní
+
+Vaše kontá – používa sa pri autorizovaní pre Google Docs a pri odosielaní do služby Google Docs
