@@ -1,0 +1,39 @@
+Kevés erőforrást használó, akkumulátor kímélő GPS naplózó program. A program a GPS koordinátákat naplózza az SD kártyán egy fájlba megadott időközönként.  Működés közben a háttérben fut, lehetőleg legtovább legyen ideje sétálni, kirándulni, repülni vagy fotózni.   Ha számítógéphez visszatér, akkor a fájlokban gyűjtött adatokat használhatja geotag fényképekhez, feltöltheti az internetre. Megnézheti Google Earth-on és így tovább. 
+
+*** Jellemzők:
+
+* Beállítható az adatmentési időköz
+* Beállítható hogy milyen távolság megtétele után mentése az adatot
+* Telefontornyok vagy GPS műholdak alapján pozicionálhat
+* GPX és/vagy a KML-fájlokat készíthet
+* Értesítés megjelenítése
+* Választhat a telefon órája vagy műhold által megadott idő között
+* Brit mértékegységek támogatása
+* Automatikus indulás lehetősége a telefon bekapcsolásakor
+* Automatikus e-mail küldés néhány óránként
+* GPS útvonalak feltöltése OpenStreetMap-re
+* Dropbox-ra feltöltés GPX/KML/ZIP formátumban
+
+
+Hibáknál, új funkciók kérésénél, kérdéseinél - kérjük, írjon: github.com/mendhak/gpslogger (issue tracker).  
+
+*** Megjegyzések:
+
+GPSLogger nem MyTracks helyettesítő.  A MyTracks célja a rövid ideig tartó adatrögzítés (ilyen például a futás), a GPSLogger inkább a hosszú távú nyomonkövetésre készült.
+
+Adatkapcsolatot csak akkor használ a program, ha engedélyezi az automatikus e-mail küldést, az OpenStreetMap-ra vagy Dropbox-ra feltöltést.
+
+Az alkalmazás lehetővé teszi a 0 másodperces gyakoriságot, de ez nem ajánlott, mert az adatgyűjtés és rögzítés túl gyors lesz. Ez instabilitást/lefagyást okozhat. Helyette érdemesebb 1-3 másodpercet megadni.
+
+Ha van egy funkció, amit hiányol, akkor a funkciót kérje a GitHub oldalon.
+
+*** A program által igényelt engedélyek:
+
+Tároláshoz - fájlok olvasását és írását a GPSLogger mappába az SD kártyán
+
+Hálózati kommunikáció - szükséges amikor feltölt fájlokat (Dropbox, Openstreetmap) vagy e-maileket küld vagy hitelesíti magát a Dropbox, Openstreetmap alkalmazásnál
+
+Hely meghatározás - a GPS vagy GSM torony által szolgáltatott információ alapján
+
+System tools (a program készülék bekapcsoláskori indulásának engedélyezése) - Abban az esetben ha úgy dönt, hogy a GPSLogger, boot-oláskor induljon
+
