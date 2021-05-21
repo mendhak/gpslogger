@@ -247,7 +247,11 @@
     <string name="log_nmea_summary">Cria um arquivo base NMEA ao tentar obter uma correção. Este arquivo cresce muito rapidamente. Só funciona enquanto o GPS está sendo utilizado.</string>
     <string name="autoopengts_accountname">Nome da conta</string>
     <string name="listeners_cell">Rede</string>
+    <string name="listeners_cell_title">Registro de localização de rede</string>
+    <string name="listeners_cell_summary">Registros de localização providenciados pela rede baseados na localização do seu dispositivo</string>
     <string name="listeners_passive">Passivo</string>
+    <string name="listeners_passive_title">Registro de localizações passivas</string>
+    <string name="listeners_passive_summary">Registros de localização obtidos de outros aplicativos, porém note que a maioria dos filtros são ignorados. Essa configuração também é útil com receptores de GPS externos.</string>
     <string name="listeners_summary">Quais provedores de localização utilizar quando estiverem disponíveis; GPS para satélites, Rede para torre de celular/Wi-Fi, Passivo é um provedor especial que atende à locais abrangidos por outros aplicativos.</string>
     <string name="listeners_title">Provedores de localização</string>
     <string name="autosend_frequency_hint">Número de minutos</string>
@@ -264,6 +268,7 @@
     <string name="restart_required">Você precisará reiniciar o GPSLogger para que esta configuração tenha efeito</string>
     <string name="pref_performance_activityrecognition">Reconhecimento de Atividade</string>
     <string name="activityrecognition_dont_log_if_still">Não registre se não estou em movimento</string>
+    <string name="activityrecognition_dont_log_if_still_summary">Se não houver movimento de acelerômetro desde o último ponto, o registro ativo pausará, mesmo se você se mover novamente. Pontos passivos ainda podem ser registrados.</string>
     <string name="txt_activity">Atividade:</string>
     <string name="activity_in_vehicle">No Veículo</string>
     <string name="activity_confidence">Confiabilidade</string>
@@ -291,6 +296,7 @@
     <string name="profile_add_new">Adicionar perfil</string>
     <string name="gpslogger_permissions_rationale_title">Permissões necessárias</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Este aplicativo precisa de várias permissões para funcionar corretamente. <br /> <b>Localização de dispositivo</b> - Esta permissão possibilita a leitura dos dados de localização de torres de celulares e do hardware GPS contido no dispostivo.<br /><b>Fotos, midia, arquivos</b> - Esta permissão possibilita a gravação de arquivos de log, checar arquivos para o armazenamento e leitura de uma lista de arquivos para carregamento ou compartilhamento. Este app não vai acessar as suas fotos ou midia.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Você negou uma ou mais permissões que este aplicativo requer. Você precisará ir para a tela de configurações do aplicativo para conceder essas permissões. <br /><br />Se você recusou essas permissões permanentemente, você pode as resetar nas configurações do sistema.]]></string>
     <string name="privacy_policy">Política de Privacidade</string>
     <string name="debuglog_attach_to_email">Anexar o log de depuração para o e-mail</string>
     <string name="debuglog_attach_to_email_summary">Anexa o log de depuração para um e-mail juntamente com algumas informações de diagnóstico</string>
@@ -312,4 +318,6 @@
     <string name="customurl_http_body">Estrutura HTTP</string>
     <string name="customurl_http_headers">Cabeçalhos HTTP</string>
     <string name="customurl_http_method">Método HTTP</string>
+    <string name="customurl_http_basicauthentication">Autenticação básica</string>
+    <string name="hide_notification_from_status_bar_disallowed">Esconder notificações está desabilitado no Android Oreo e subsequentes.</string>
 </resources>
