@@ -13,7 +13,7 @@ Odredite udaljenost intervala
 * Automatski e-mail svakih nekoliko sati
 * OpenStreetMap - prijenos GPS tragova
 * Dropbox - prijenos GPX/KML/ZIP
-* Google Docs - prijenos GPX/KML/ZIP
+
 
 Greške, zahtjevi, pitanja - molimo vas pošaljite ih na github.com/mendhak/gpslogger (evidencija nedostataka).  
 

@@ -13,7 +13,7 @@ Eine schnelle, stromsparende App zur Aufzeichnung von GPS-Wegpunkten. Der Zweck 
 • Automatisches Versenden von E-Mails alle paar Stunden
 • OpenStreetMap: Hochladen des GPS-Streckenverlaufs
 • Dropbox: Hochladen von GPX-, KML- oder ZIP-Dateien
-• Google Docs: Hochladen von GPX-, KML- oder ZIP-Dateien
+
 
 Fehler, Wünsche, Fragen - Diese können Sie an unser Fehlerverfolgungssystem auf github.com/mendhak/gpslogger senden.  
 

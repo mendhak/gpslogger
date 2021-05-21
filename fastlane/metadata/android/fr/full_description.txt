@@ -13,7 +13,7 @@ Un traceur GPS léger et économe en énergie. Le but de cette application est d
 * Envoi de courriel automatiquement
 * OpenStreetMap - Déchargement des traces GPS
 * Dropbox - Déchargement GPX, KML et ZIP
-* Google Docs - Déchargement GPX, KML et ZIP
+
 
 Pour les bogues, requêtes de fonctionnalité, questions, merci de les soumettre à github.com/mendhak/gpslogger (issue tracker).  
 

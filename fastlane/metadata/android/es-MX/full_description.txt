@@ -13,7 +13,7 @@ Especifíque intervalos de distancia
 * Email auto cada pocas horas
 * OpenStreetMap - cargar GPS trazas
 * Dropbox - subir GPX, KML, código postal
-* Google Docs - subir GPX, KML, código postal
+
 
 Errores, peticiones, preguntas - por favor enviarlos a github.com/mendhak/gpslogger (issue tracker).  
 
@@ -37,4 +37,4 @@ Su ubicación - se utiliza para determinar su GPS o torre según ubicación
 
 Herramientas del sistema (iniciar automáticamente durante el arranque) - Si elige iniciar GPSLogger en el arranque
 
-Sus cuentas - utilizadas al autorizar contra Google Docs y al subir a Google Docs
+

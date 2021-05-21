@@ -13,7 +13,7 @@ Isang magaan, mahusay sa baterya na GPS Logger. Ang layunin ng app na ito ay mai
 * Auto na email bawat ilang oras
 * OpenStreetMap - mag-upload ng mga bakas ng GPS
 * Dropbox - mag-upload ng GPX/KML/ZIP
-* Google Docs - mag-upload ng GPX/KML/ZIP
+
 
 Mga bug, mga kahilingan na feature, mga tanong - mangyaring isumite ang mga ito sa github.com/mendhak/gpslogger (isyu tracker).  
 

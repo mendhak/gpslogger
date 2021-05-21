@@ -13,7 +13,7 @@ Lehký, energeticky úsporný GPS logger. Účelem tohoto programu je zapisovat 
 * Automatický email každých několik hodin
 * OpenStreetMap - upload GPS tras
 * Dropbox - upload GPX/KML/ZIP
-* Google Docs - upload GPX/KML/ZIP
+
 
 Hlášení chyb, žádosti o funkce - vkládejte prosím do github.com/mendhak/gpslogger (issue tracker).  
 

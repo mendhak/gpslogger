@@ -13,7 +13,7 @@ Kevyt, akkuystävällinen GPS Logger. Tämän sovelluksen tarkoitus on tallentaa
 * Automaattiset sähköpostit muutaman tunnin välein
 * OpenStreetMap - lataa GPS jäljet
 * Dropbox - tallenna GPX/KML/ZIP tiedostoina
-* Google Docs - tallenna GPX/KML/ZIP tiedostoina
+
 
 Bugi-ilmoitukset, ominaisuusehdotukset, kysymykset - lähetä ne tänne github.com/mendhak/gpslogger (issue välilehti).  
 
@@ -37,4 +37,3 @@ Sijaintisi - käytetään selvittääksesi sijaintisi perustuen joko GPS- tai mo
 
 Järjestelmätyökalut (käynnistä automaattisesti puhelimen käynnistyessä) - käytetään jos päätät käynnistää GPSLoggerin puhelimen käynnistyessä
 
-Tunnuksesi - käytetään kun sinut kirjataan sisään Google Docsiin ja kun lataat tiedostoja Google Docsiin

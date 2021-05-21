@@ -13,7 +13,7 @@ Un Capturador de Datos GPS ligero, con poco consumo de batería. El propósito d
 * Auto envío de mails cada pocas horas
 * OpenStreetMap - Subir datos el muestreo GPS
 * Dropbox - Subir archivos GPX/KML/ZIP
-* Google Docs - Subir Archivos GPX/KML/ZIP
+
 
 Para Errores / Fallos, Peticiones de nuevas funcionalidades o preguntas, por favor envíelas a github.com/mendhak/gpslogger (Gestor de requerimientos).  
 

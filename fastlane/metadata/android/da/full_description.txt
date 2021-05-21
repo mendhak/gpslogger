@@ -13,7 +13,7 @@ En let og batterieffektiv GPS-logger. Formålet med denne app er at logge dine G
 * Auto-e-mail med få timers mellemrum
 * OpenStreetMap - upload GPS-sporinger
 * Dropbox - upload GPX/KML/ZIP
-* Google Docs - upload GPX/KML/ZIP
+
 
 Fejl, funktionsanmodninger, spørgsmål - indsend venligst disse til github.com/mendhak/gpslogger (problemsporing).  
 

@@ -13,7 +13,7 @@ Un Capturador de Datos GPS ligero, con poco consumo de batería. El propósito d
 * Envío de correos electrónicos cada pocas horas
 * OpenStreetMap - upload GPS traces
 * Dropbox - subir archivos GPX/KML/ZIP
-* Google Docs - subir archivos GPX/KML/ZIP
+
 
 Para errores, peticiones de funcionalidades, preguntas - por favor envíelas a github.com/mendhak/gpslogger (rastreador de problemas).  
 
@@ -37,4 +37,4 @@ Su ubicación - usada para determinar su ubicación basada en GPS o red celular
 
 Herramientas del sistema (iniciar automáticamente en el arranque) - usado si escoge iniciar GPSLogger en el arranque
 
-Sus cuentas - usadas cuando se autoriza Google Docs y al subir archivos a Google Docs
+
