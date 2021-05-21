@@ -304,7 +304,7 @@ Az engedélyek megadásához lépjen be az alkalmazás beállítások képernyő
     <string name="privacy_policy">Adatvédelmi irányelvek</string>
     <string name="debuglog_attach_to_email">Hibakeresési napló csatolása az e-mailhez</string>
     <string name="debuglog_attach_to_email_summary">Hibakeresési naplót mellékel az e-mailhez néhány diagnosztikai információval</string>
-    <string name="change_language_title">Nyelv Váltása</string>
+    <string name="change_language_title">Nyelvváltás</string>
     <string name="change_language_summary">Nincs minden nyelvhez teljes fordítás! Újra kell indítani a programot a beállítás érvénybelépéséhez.</string>
     <string name="coordinate_display_format">Koórdináta megjelenítési formátuma</string>
     <string name="ssl_certificate_validate">SSL Tanúsítvány Ellenõrzése</string>
