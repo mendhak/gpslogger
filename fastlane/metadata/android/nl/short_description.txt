@@ -1,0 +1,1 @@
+Een lichtgewicht GPS logger, batterij efficiënt, GPX/KML, voeg berichten toe
