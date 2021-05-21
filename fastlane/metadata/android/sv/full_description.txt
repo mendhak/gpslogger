@@ -1,0 +1,40 @@
+En liten, batterieffektiv GPS-loggare. Syftet med denna app är att logga din GPS-position med angivna intervall till en fil på ditt SD-kort.  Appen körs i bakgrunden så du kan låta den stå på under promenaden, vandringsfärden, flygturen eller fotosessionen eller till och med då du far ut och köper mjölk.   Då du är tillbaka vid din dator kan du använda filerna för att geotagga bilder, ladda upp till rese-sidor, granska i Google Earth och så vidare. 
+
+***Funktioner:
+
+* Ange tidsintervall
+* Ange avståndsintervall
+* Mobilmaster eller GPS-satelliter
+* GPX- och/eller KML-filer
+* Visa ett statusmeddelande
+* Använd telefontid eller satellittid
+* Stöder även enheter som foot, mile
+* Autostart vid systemstart
+* Maila automatiskt med några timmars mellanrum
+* OpenStreetMap - ladda upp GPS-spår
+* Dropbox - ladda upp GPX/KML/ZIP
+
+
+Meddela fel, förfrågningar om nya funktioner och frågor till github.com/mendhak/gpslogger (ärendehanteringssystem).  
+
+***Noter:
+
+GPSLogger är inte en ersättning för Mina spår.  Mina spår är tänkt för kortvarig användning (då det har många funktioner igång), medan GPSLogger är tänkt för att vara igång länge.
+
+En dataanslutning används endast av denna app om du använder funktioner för automatisk e-post, OpenStreetMap eller Dropbox.
+
+Även om appen tillåter 0 sekunders frekvens, så är det inte rekommendabelt eftersom inspelning och loggning sker så snabbt och då kan orsaka instabilitet/hängningar. Försök med 1-3 sekunder i stället.
+
+Om det finns någon funktion du önskar att appen hade så kan du skicka in en begäran på GitHub.
+
+***Förklaring av behörigheter:
+
+Lagring - läser och skriver filer till GPSLogger-mappen på ditt SD-kort
+
+Nätverkskommunikation - används vid uppladdning av filer (Dropbox, Openstreetmap), sändande av mail eller auktorisering mot Dropbox och Openstreetmap
+
+Din plats - används för att avgöra din plats baserat på GPS eller mobilmaster
+
+Systemverktyg (Starta automatiskt vid systemstart) - används om du vill starta GPSLogger vid systemstart
+
+
