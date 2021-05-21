@@ -13,7 +13,7 @@ Jednoduchý, energeticky úsporný zaznamenávač údajov zo systému GPS. Úče
 * Automatické odosielanie e-mailom každých pár hodín
 * OpenStreetMap – nahrávanie GPS trás
 * Dropbox – odosielanie súborov GPX, KML/ZIP
-* Google Docs – nahrávanie súborov GPX, KML/ZIP
+
 
 Chyby, požiadavky na nové funkcie a otázky prosím zadávajte na stránke github.com/mendhak/gpslogger (issue tracker).  
 
@@ -37,4 +37,4 @@ Vaša poloha – používa na určenie vašej polohy pomocou systému GPS alebo 
 
 Systémové nástroje (automatické spustenie pri štarte) – používa sa vtedy, keď si vyberiete spustenie aplikácie pri bootovaní
 
-Vaše kontá – používa sa pri autorizovaní pre Google Docs a pri odosielaní do služby Google Docs
+
