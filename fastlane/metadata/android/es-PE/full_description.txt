@@ -1,0 +1,40 @@
+Un Capturador de Datos GPS ligero, con poco consumo de batería. El propósito de esta app es registrar las coordenadas de su GPS en intervalos específicos en un archivo en su tarjeta SD.  Esta aplicación corre en segundo plano para que puedas dar un paseo, una caminata, estar en un vuelo o en una sesión de fotos, e incluso ir a comprar lecha, y tener la aplicación corriendo tanto tiempo sea posible.   Una vez que estés de vuelta en tu computador, puedes incluso utilizar los archivos para geoetiquetar fotos, subirlas a sitios de viajes, verlas en Google Earth y así sucesivamente. 
+
+***Funcionalidades:
+
+* Especificar intervalos de tiempo
+* Especificar intervalos de distancia
+* Geolocalización por estación base (Antena celular) o satélites GPS
+* Archivos GPX y/o KML
+* Muestra una notificación
+* Usar la hora del teléfono o la hora del satélite
+* Imperial display units
+* Inicio automático en el arranque
+* Envío de correos electrónicos cada pocas horas
+* OpenStreetMap - upload GPS traces
+* Dropbox - subir archivos GPX/KML/ZIP
+* Google Docs - subir archivos GPX/KML/ZIP
+
+Para errores, peticiones de funcionalidades, preguntas - por favor envíelas a github.com/mendhak/gpslogger (rastreador de problemas).  
+
+***Notas:
+
+GPSLogger no es un sustituto de MyTracks.  MyTracks está hecho para un uso corto (ya que tiene muchas funcionalidades ejecutándose), GPSLogger está hace para durar un tiempo largo.
+
+La conexión de datos es usada por esta aplicación sólo si usted usa las funcionalidades correos electrónicos automáticos, OpenStreetMap o Dropbox.
+
+Aunque la aplicación permite secuencias de 0 segundos, no es recomendado ya que la grabación y el registro ocurren muy rápido; esto podría causar inestabilidad/cuelgues en la aplicación. Intente 1-3 segundos en su lugar.
+
+Si hay una funcionalidad que consideras que la aplicación debería tener, puedes enviar una solicitud de funcionalidad en el sitio de GitHub.
+
+***Explicación de servicios:
+
+Almacenamiento - archivos de lectura y escritura a la carpeta de GPSLogger en su tarjeta SD
+
+Comunicación de red - usada al subir los archivos (Dropbox, Openstreetmap), al enviar correos electrónicos o al autorizarlo con Dropbox, Openstreetmap
+
+Su ubicación - usada para determinar su ubicación basada en GPS o red celular
+
+Herramientas del sistema (iniciar automáticamente en el arranque) - usado si escoge iniciar GPSLogger en el arranque
+
+Sus cuentas - usadas cuando se autoriza Google Docs y al subir archivos a Google Docs
