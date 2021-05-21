@@ -1,0 +1,40 @@
+Un Capturador de Datos GPS ligero, con poco consumo de batería. El propósito de esta aplicación es registrar tus coordenadas GPS a intervalos específicos de tiempo en un archivo en la tarjeta SD.  Esta aplicación se ejecuta en segundo plano para que usted pueda en una caminar, hecer un paseo en vuelo o sesión de fotos o incluso ir a comprar leche y tardarse todo lo que necesite.   Una vez que estás en el ordenador, entonces puede utilizar los archivos para geoetiquetar fotos, subir a sitios de viajes, ver en Google Earth y así sucesivamente. 
+
+*** Características:
+
+Especifíque intervalos de tiempo
+Especifíque intervalos de distancia
+* Torres Celulares o satélites GPS
+* Archivos GPX o KML
+* Muestra una notificación
+* Utilice el tiempo de teléfono o vía satélite
+* Unidades de visualización imperial
+* Auto start en el arranque
+* Email auto cada pocas horas
+* OpenStreetMap - cargar GPS trazas
+* Dropbox - subir GPX, KML, código postal
+* Google Docs - subir GPX, KML, código postal
+
+Errores, peticiones, preguntas - por favor enviarlos a github.com/mendhak/gpslogger (issue tracker).  
+
+*** Notas:
+
+GPSLogger no es un reemplazo de MyTracks.  MyTracks está destinado para uso corto (ya que tiene un montón de características de funcionamiento), GPSLogger va a durar mucho tiempo.
+
+Se utiliza una conexión de datos por esta aplicación únicamente si se utilizan funciones de OpenStreetMap o Dropbox o auto-correo electrónico.
+
+Aunque la app permite frecuencias desde 0 cegundos, no se recomienda como la grabación y registro está sucediendo muy rápido; Esto podría causar inestabilidad. Prueba 1-3 segundos.
+
+Si consideras que hay alguna característica que la aplicación debería de tener, puedes solicitar la característica en la web de GitHub.
+
+*** Explicación de permisos:
+
+Almacenamiento - leer y escribir archivos en la carpeta GPSLogger en la tarjeta SD
+
+Comunicación de la red - cuando carga los archivos Dropbox (Openstreetmap) o envío de correos electrónicos o le autoriza con Dropbox, Openstreetmap
+
+Su ubicación - se utiliza para determinar su GPS o torre según ubicación
+
+Herramientas del sistema (iniciar automáticamente durante el arranque) - Si elige iniciar GPSLogger en el arranque
+
+Sus cuentas - utilizadas al autorizar contra Google Docs y al subir a Google Docs
