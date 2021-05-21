@@ -1,0 +1,40 @@
+A lightweight, battery efficient GPS Logger. والغرض من هذا التطبيق لتسجيل إحداثيات GPS الخاص بك عند فواصل زمنية المحدد إلى ملف على بطاقة SD.  This app runs in the background so that you can on a long walk, hike, flight ride or photo session or even go buy some milk and have this running as long as possible.   Once you're back at your computer, you can then use the files to geotag photos, upload to travel sites, view in Google Earth and so on. 
+
+*** المزايا:
+
+* تحديد الفواصل الزمنية
+* تحديد زمن فواصل المسافة
+* أبراج الهاتف المحمول أم الأقمار الصناعية
+* ملفات GPX و /أو KML
+*إظهار كتنبيهات
+*إستخدام وقت الجهاز أو القمرالأصطناعي
+* وحدات العرض الإمبراطوري
+* التشغيل التلقائي عند بدء تشغيل الجهاز
+* ارسال بريد إليكتروني تلقائي كل بضعة ساعات 
+* OpenStreetMap -  GPS تحميل تتبعات
+* Dropbox - تحميل GPX/KML/ZIP
+مستندات جوجل - رفع GPX/KML/ZIP
+
+الأخطاء, طلبات اضافات, الأسئلة - الرجاء إضافتها إلى قسم تعقب المشاكل في  github.com/mendhak/gpslogger  
+
+:ملاحظات ***
+
+برنامج GPSLogger ليس بديلاً عن برنامج MyTracks.  برنامج MyTracks مقصود للاستخدام القصير (كما أنه يحتوي على الكثير من الميزات قيد التشغيل)، وهو يعني جبسلوجير تستمر لفترة طويلة.
+
+يتم استخدام خط اتصال بيانات لهذا التطبيق - فقط - إذا كنت تستخدم البريد الإلكتروني التلقائي أو موقع OpenStreetMap  أو Dropbox أو OpenGTS.
+
+على الرغم من أن التطبيق يسمح بـ 0 ثانية للتحديثات، فمن غير المستحسن للتسجيل ذلك، ويحدث تسجيل سريع جداً؛ هذا يمكن أن يسبب عدم الاستقرار/الاستجابة. حاول ثانية 1-3 بدلاً من ذلك.
+
+If there's a feature that you feel the app should have, you can submit a feature request on the GitHub site.
+
+*** شرح للأذونات:
+
+التخزين - قراءة وكتابة الملفات إلى مجلد GPSLogger على بطاقة SD
+
+إتصالات الشبكة - تستخدم عند رفع الملفات إلى (Dropbox أو Openstreetmap) أو عند أرسال بريد إلكتروني أو عند تخويلك لدخول Dropbox او Openstreetmap
+
+موقعك - تستخدم لتحديدموقعك بإستعمال نظام الملاحة أو ببرج الهوائي
+
+أدوات النظام (يعمل تلقائيا عن تشغيل الجهاز) - تستخدم في حال إختيارك تشغيل التطبيق عند تشغيل الجهاز
+
+حساباتك - تستخدم عند تخويل مستندات جوجل و عند التحميل إلى مستندات جوجل
