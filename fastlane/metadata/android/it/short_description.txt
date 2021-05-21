@@ -1,0 +1,1 @@
+Un GPS logger leggero, basso consumo, GPX/KML, con note, upload, condivisione.
