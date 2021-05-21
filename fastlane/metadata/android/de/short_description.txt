@@ -1,1 +1,1 @@
-Akku-sparende GPS-Werterfassung
+Eine App zur einfachen Aufzeichnung von GPS-Wegpunkten, batteriesparend, GPX

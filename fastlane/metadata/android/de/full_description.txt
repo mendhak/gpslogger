@@ -1,0 +1,40 @@
+Eine schnelle, stromsparende App zur Aufzeichnung von GPS-Wegpunkten. Der Zweck dieser App ist es, Ihre GPS-Koordinaten in bestimmten Abständen in einer Datei auf Ihrer SD-Karte zu speichern.  Diese App läuft im Hintergrund, so dass Sie bei einem langen Spaziergang, einer Wanderung, einer Flugreise oder einer Fototour oder sogar beim Milchkauf diese so lange Sie möchten laufen lassen können.   Sobald Sie wieder an Ihrem Computer sind, können Sie die Dateien verwenden, um Fotos mittels GPS geografisch einzuordnen, auf Reiseportalen hochzuladen, in Google Earth anzusehen oder anderweitig verarbeiten. 
+
+★★★Funktionen:
+
+• Einstellbare Zeitintervalle
+• Festlegen von Entfernungsintervallen
+• Mobilfunkmasten oder GPS-Satelliten
+• GPX- und/oder KML-Dateien
+• Anzeigen von Mitteilungen
+• Verwendung der Telefon- oder Satellitenzeit
+• Verwendung angloamerikanischer Maßeinheiten
+• Automatischer Start der App beim Hochfahren
+• Automatisches Versenden von E-Mails alle paar Stunden
+• OpenStreetMap: Hochladen des GPS-Streckenverlaufs
+• Dropbox: Hochladen von GPX-, KML- oder ZIP-Dateien
+
+
+Fehler, Wünsche, Fragen - Diese können Sie an unser Fehlerverfolgungssystem auf github.com/mendhak/gpslogger senden.  
+
+★★★ Hinweise:
+
+GPSLogger ist kein MyTracks-Ersatz.  MyTracks ist für den kurzen Gebrauch gedacht (da es viele Funktionen hat), GPSLogger ist für die Nutzung über einen längeren Zeitraum hinweg gedacht.
+
+Eine Datenverbindung wird von dieser Anwendung nur verwendet, wenn Sie das automatische Versenden von E-Mails, OpenStreetMap- oder Dropbox-Funktionen verwenden.
+
+Obwohl die App 0-Sekunden-intervalle zulässt, wird dies nicht empfohlen, da die Aufzeichnung und Protokollierung sehr schnell abläuft; dies könnte zu Instabilitäten/Störungen führen. Verwenden Sie stattdessen 1-3 Sekunden.
+
+Wenn Sie eine Funktion vermissen, können Sie Ihre Wünsche auf unserer Github-Seite einreichen.
+
+★★★ Erläuterung der Berechtigungen:
+
+Speicherung - Lesen und Schreiben von Dateien in den GPSLogger-Ordner auf Ihrer SD-Karte
+
+Netzwerkkommunikation - wird beim Hochladen der Dateien (Dropbox, Openstreetmap), beim Versenden von E-Mails oder bei der Autorisierung mit Dropbox, Openstreetmap verwendet
+
+Ihr Standort - zur Bestimmung Ihres GPS- oder Funkzellen-basierten Standorts
+
+Systemwerkzeuge (automatisch beim Hochfahren starten) - werden verwendet, wenn Sie GPSLogger beim Hochfahren starten möchten
+
+

@@ -1,1 +1,1 @@
-Pili verimli kullanan GPS kaydedici
+Küçük bir GPS kaydedicisi, batarya dostu, GPX/KML uyumlu, konumuza notlar

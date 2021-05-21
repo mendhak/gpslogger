@@ -1,0 +1,40 @@
+Um GPS Logger leve e de baixo consumo energético. O objectivo desta aplicação é armazenar as coordenadas GPS com intervalo especificado para um ficheiro no cartão SD.  Esta aplicação corre em background de forma a que possa ir dar uma longa caminhada, passeio de avião, sessão fotográfico ou mesmo ir comprar leite enquanto a aplicação fica a correr durante o maior tempo possível.   Quando voltar para junto do computador, as posições registadas podem ser usadas para localizar fotos, enviar para sites de viagens, ver o trajecto no Google Earth e outros fins semelhantes. 
+
+***Funcionalidades:
+
+* Especificar o intervalo de tempo entre registos
+* Especificar o intervalo de distância entre registos
+* Usar localização por triangulação GSM ou satélites GPS
+* Ficheiros GPX e/ou KML
+* Notificação para o utilizador
+* Usar hora do telefone ou do satélite GPS
+* Possibilidade de usar medidas imperiais
+* Começar automaticamente no arranque do telefone
+* Enviar email automaticamente a cada x horas
+* Envio de trajectos GPS para OpenStreetMap
+Envio de ficheiros de registo para Dropbox
+
+
+Bugs, pedidos de funcionalidades, questões - por favor enviar para github.com/mendhak/gpslogger.  
+
+***Notas:
+
+O GPSLogger não é uma substituição do MyTracks.  A aplicação MyTracks é usada para períodos curtos (uma vez que usa uma grande quantidade de funcionalidades enquanto corre), o GPSLogger ambiciona correr em background durante grandes períodos de tempo.
+
+A aplicação usa uma ligação de dados apenas se for configurada para usar as funcionaldiades de envio automático de email, envio para Dropbox ou OpenStretMap.
+
+Apesar da aplicação permitir uma frequência de medição de 0 segundos, não é recomendada a sua utilização uma vez que necessitará de uma grande quantidade de acessos ao cartão e CPU; isto pode causar instabilidades e paragens. Usar preferencialmente 1-3 segundos.
+
+Se existir uma característica que acha deva ser adicionada à app, pode submeter um pedido no site do GitHub.
+
+***Explicação dos pedidos de permissão:
+
+Armazenamento - para escrever e ler ficheiros de posições para o cartão
+
+Acesso à rede - usado quando são enviadas as posições (Dropbox, OpenStreetMap), para envio de emails e para autorização com Dropbox e OpenStreetMap.
+
+Acesso a localização - usado para determinar localização do dispositivo
+
+Ferramentas do sistema (arranque automático) - necessário no caso em o GPSLogger é configurado para arrancar automaticamente
+
+

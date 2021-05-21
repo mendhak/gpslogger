@@ -3,6 +3,7 @@
     <string name="title_drawer_uploadsettings">上傳設定</string>
     <string name="navigation_drawer_open">開啟導覽選單</string>
     <string name="navigation_drawer_close">關閉導覽選單</string>
+    <string name="app_name">GPSLogger</string>
     <string name="settings_screen_name">GPSLogger 設定</string>
     <string name="ok">確定</string>
     <string name="cancel">取消</string>
@@ -46,6 +47,7 @@
     <string name="gpsprovider_unavailable">沒有可用的 GPS 來源，請檢查您的位置設定並啟用定位功能。
     </string>
     <string name="started">已開始</string>
+    <string name="providername_gps"></string>
     <string name="providername_celltower">基站</string>
     <string name="not_applicable">無</string>
     <string name="meters_per_second">&#160;米/秒</string>
@@ -110,7 +112,7 @@
     <string name="pref_performance_title">性能</string>
     <string name="pref_performance_summary">時間、過濾器和監聽程式</string>
     <string name="time_before_logging_title">記錄間隔</string>
-    <string name="time_before_logging_summary">使用 0 為最大紀錄頻率，但降低紀錄頻率可省電。    </string>
+    <string name="time_before_logging_summary">使用 0 為最大記錄頻率，但降低記錄頻率可省電。    </string>
     <string name="time_before_logging_dialog_title">以秒計的時間</string>
     <string name="time_before_logging_hint">輸入秒數(最大 9999)</string>
     <string name="keep_fix_summary">注意，這將大大減少電池續航力。請只以低頻率使用以獲得較高的精度。    </string>
@@ -177,12 +179,12 @@
     <string name="menu_upload">上傳</string>
     <string name="autoemail_from">寄件人地址</string>
     <string name="autoemail_from_summary">一些電子郵件供應商要求您提供寄件人地址。請只在需要時使用。    </string>
-    <string name="gdocs_clearauthorization_summary">忘記本機 Google Drive 設定。要永久移除存取許可權，請至 Google 帳戶設定</string>
+    <string name="gdocs_clearauthorization_summary">忘記本機 Google 雲端硬碟設定。要永久移除存取許可權，請移至 Google 帳戶設定</string>
     <string name="gdocs_setup_title">Google 雲端硬碟</string>
     <string name="gdocs_test_summary">上傳一個測試檔到 Google 雲端硬碟</string>
     <string name="gdocs_test_title">上傳測試</string>
     <string name="gdocs_testupload_success">已上傳完成，請檢查您的 Google 雲端文件。</string>
-    <string name="autoemail_sendto_csv">用逗號隔開的郵件地址</string>
+    <string name="autoemail_sendto_csv">請使用逗號隔開不同的電子郵件地址</string>
     <string name="autosend_enabled">允許自動傳送</string>
     <string name="autosend_enabled_summary">允許將檔案傳送到各處</string>
     <string name="autosend_frequency_summary">自動傳送記錄檔的頻率，以分鐘為單位。0 分鐘則為不自動傳送。</string>
@@ -225,7 +227,7 @@
     <string name="gpsf_missing">缺少服務</string>
     <string name="gpsf_missing_description">您將需要 Google Play Services 以使用此功能。</string>
     <string name="log_customurl_title">記錄到自定義 URL</string>
-    <string name="log_customurl_summary">透過 HTTP 將紀錄檔訊息傳送到您自己的伺服器</string>
+    <string name="log_customurl_summary">透過 HTTP 將記錄檔訊息傳送到您自己的伺服器</string>
     <string name="txt_annotation">註釋︰</string>
     <string name="txt_time_isoformat">UTC 時間（2011-12-25T15:27:33Z）：</string>
     <string name="txt_provider">提供者：</string>
@@ -241,7 +243,7 @@
     <string name="view_simple">簡單檢視</string>
     <string name="view_detailed">詳細檢視</string>
     <string name="view_big">大型檢視</string>
-    <string name="view_log">紀錄檔檢視</string>
+    <string name="view_log">記錄檔檢視</string>
     <string name="bigview_taptotoggle">點選開始/停止記錄</string>
     <string name="summary_autosendtargets">上傳到︰</string>
     <string name="accuracy_filter_title">按精度過濾</string>
@@ -259,13 +261,14 @@
     <string name="log_nmea_title">記錄到 NMEA 檔案</string>
     <string name="log_nmea_summary">嘗試定位時建立 NMEA 源檔。這個檔案的大小長得很快！只對 GPS 有效。</string>
     <string name="autoopengts_accountname">帳戶名稱</string>
-    <string name="listeners_gps_title">紀錄 GPS/GNSS 所提供的位置</string>
+    <string name="listeners_gps">GPS</string>
+    <string name="listeners_gps_title">記錄 GPS/GNSS 所提供的位置</string>
     <string name="listeners_gps_summary">記錄裝置上基於衛星的位置接收器提供的位置</string>
     <string name="listeners_cell">網路</string>
     <string name="listeners_cell_title">記錄網路位置</string>
     <string name="listeners_cell_summary">記錄裝置上基於網路的位置接收器提供的位置</string>
     <string name="listeners_passive">被動</string>
-    <string name="listeners_passive_title">紀錄被動位置</string>
+    <string name="listeners_passive_title">記錄被動位置</string>
     <string name="listeners_passive_summary">記錄從其他應用程式取得的位置，但請注意，大多數過濾器都會被忽略。使用外部 GPS 接收器時，此設定很有用。</string>
     <string name="listeners_summary">從什麼地方取得位置資料：「GPS」為衛星定位，「網路」是指基地台/Wifi，「被動」比較特殊，負責監聽其他程式取得的位置。</string>
     <string name="listeners_title">位置提供者</string>
@@ -334,5 +337,9 @@
     <string name="txt_timestamp_epoch">時間戳記 (epoch)</string>
     <string name="txt_starttimestamp_epoch">開始時間戳 (epoch)</string>
     <string name="txt_battery">電池</string>
+    <string name="customurl_http_body">HTTP Body</string>
+    <string name="customurl_http_headers">HTTP Headers</string>
+    <string name="customurl_http_method">HTTP Method</string>
+    <string name="customurl_http_basicauthentication">基本認證</string>
     <string name="hide_notification_from_status_bar_disallowed">Android 8 Oreo 之後不允許將狀態列的通知隱藏</string>
 </resources>

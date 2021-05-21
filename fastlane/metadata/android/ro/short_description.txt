@@ -1,1 +1,1 @@
-Baterie eficientă GPS Logger
+O aplicație minimală și eficientă energetic de înregistrare coordonate GPS 

@@ -1,0 +1,39 @@
+Lagan, energetski efikasan GPS logger. Aplikacija služi za bilježenje GPS koordinate u određenim intervalima u datoteku na SD kartici.  Ova aplikacija radi u pozadini tako da možete ići u dugu šetnju, pješačiti, letjeti ili napraviti foto sesiju ili čak ići kupiti mlijeko. Ova aplikacija radi toliko dugo koliko Vi želite.   Nakon što ste vratili kod vašeg računala, onda ove datoteke možete koristiti za geo oznaku fotografija, prijenos na putničke web-stranice, prikaz u Google Earth-u i tako dalje. 
+
+***Značajke:
+
+* Odredite vremenske intervale
+Odredite udaljenost intervala
+* Bazne stanice ili GPS sateliti
+* GPX i/ili KML datoteke
+* Prikazuje obavijest
+* Koristiti vrijeme telefona ili satelitsko vrijeme
+* Prikaz u imperijalskim jedinicama
+* Automatski početak kod uključivanja uređaja
+* Automatski e-mail svakih nekoliko sati
+* OpenStreetMap - prijenos GPS tragova
+* Dropbox - prijenos GPX/KML/ZIP
+
+
+Greške, zahtjevi, pitanja - molimo vas pošaljite ih na github.com/mendhak/gpslogger (evidencija nedostataka).  
+
+***Napomene:
+
+GPSLogger nije zamjena za MyTracks.  MyTracks je namijenjen za kratku uporabu (jer su pokrenuti puno sadržaja), GPSLogger je za korištenje dulje vremena.
+
+Ova aplikacija koristi podatkovnu vezu samo ako koristite automatski e-mail ili OpenStreetMap ili Dropbox značajke.
+
+Iako aplikacija omogućuje 0 sekundne frekvencije, ne preporučuje se jer snimanje i zapisivanje vrlo brzo se odvija; to bi mogao izazvati nestabilnosti i/ili smrzavanje uređaja. Umjesto toga, probajte postaviti na 1-3 sekunde.
+
+If there's a feature that you feel the app should have, you can submit a feature request on the GitHub site.
+
+***Objašnjenje dozvole:
+
+Pohrana - čitanje i pisanje datoteke u mapi GPSLogger na vašem SD kartici
+
+Mrežna komunikacija - koristi se pri prijenosu datoteke (Dropbox, Openstreetmap) ili slanje e-pošte ili autorizacija sa Dropbox-om, Openstreetmap-om
+
+Vaša lokacija - koristi se za određivanje svog položaja temeljem GPS-a ili baznu stanicu
+
+Sistemski alati (automatsko izvršavanje pri pokretanja sustava) - koristiti se ako uključite GPSLogger-a da se pokrene prilikom starta uređaja
+

@@ -1,0 +1,39 @@
+Viegls, bateriju taupošs, GPS piefiksētājs. Šīs aplikācijas mērķis ir, saglabāt jūsu GPS kordinātes, noteiktos laika intervālos jūsu SD kartē.  Šī aplikācija darbojās fonā tā lai jūs varētu doties garā pastaigā, pārgājienos, lidot, braukt, vai pat doties nopirkt pienu un šī programma ies visu laiku.   Kad jūs esat atpakaļ pie sava datora, jūs tad varat izmantot failus lai geo-tagotu savas fotogrāfijas, skatītu Google Earth un tamlīdzīgi. 
+
+***Iespējas:
+
+*Norādiet laika intervālus
+*Norādiet distances intervālus
+*Mobilais tornis vai GPS satalīts
+*GPX un/vai KML faili
+*Parāda paziņojumu
+*Izmantojiet telefona laiku, vai satelīta laiku
+*Impēriālās rādāmvienības
+*Automātiski ieslēdzas līdz ar telefonu
+*Automātiski aizsūta ēpastu, katras dažas stundas
+*Ielādējiet GPS pēdas-OpenStreetMap sistēmā
+*Ielādējiet GPX/KML/ZIP failus Dropbox mākonī
+
+
+Lūdzu rakstiet-kļūdas, iespēju ierosinājumus un jautājumus: github.com/mandhak/gpslogger (problēmu izsekotājā).  
+
+***Piezīmes:
+
+GPSLogger nav MyTracks aplikācijas aizvietotājs. MyTracks aplikācija ir domāta īsa laika sprīža lietošanai (Jo tajā darbojas daudzi procesi), GPSLogger ir domāts tā, lai tas darbotos ilgu laiku.  MyTracks ir domāts priekš īsas lietošanas (Jo tas darbina vairākas opcijas), GPSLogger ir domātas ilgam laikam.
+
+Šī aplikācija izmanto interneta datu savienojumu tikai, ja jūs izmantojat auto-epasta, OpenStreetMap vai Dropbox mākoņa opcijas.
+
+Lai gan aplikācija atļauj 0 sekunžu biežumus, tas nav ieteicams, jo GPS ierakstīšana notiek ļoti ātri. Tas var izraisīt nestabilitāti! Tā vietā pamēģiniet 1-3 sekundes.
+
+If there's a feature that you feel the app should have, you can submit a feature request on the GitHub site.
+
+***Atļauju izskaidrojumi:
+
+Atmiņa- GPSLogger aplikācija izmanto atmiņas piekļuvi lai izmainītu piefiksēšanas failus
+
+Interneta savienojums - GPSLogger vajag piekļuvi interneta savienojumam lai varētu ielādēt failus mākonī (Dropbox, Openstreetmap) vai nosūtīt ēpastus jums
+
+Jūsu atrašanās vieta (GPS) - Lai varētu piefiksēt jūsu atrašanās vietu
+
+Sīstēmas rīki (Automātiski ieslēgties kad ieslēdzas telefons) - aplikācija izmanto šo atļauju lai ļautu GPSLogger ieslēgties kad jūs ieslēdziet telefonu
+

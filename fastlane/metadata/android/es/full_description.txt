@@ -1,0 +1,39 @@
+Un Capturador de Datos GPS ligero, con poco consumo de batería. El propósito de esta aplicación es registrar tus coordenadas GPS a intervalos específicos de tiempo en un archivo en la tarjeta SD.  Esta aplicación corre en segundo plano. Puedes estar caminando, dándo un paseo, en un vuelo, en una sesión de fotos o inclusive puedes ir a comprar leche y tener la aplicación corriendo tanto tiempo como sea posible.   Una vez estés de vuelta en tu PC, puedes usar los archivos para geoetiquetar fotos, subirlas a web's de viajes, verlas en Google Earth, entre otros. 
+
+***Características:
+
+* Especificar intervalos de tiempo
+* Especificar intervalos de distancias
+* Geolocalización por estación base (Antena celular) o satélites GPS
+* Archivos GPX y/o Archivos KML
+* Mostrar notificaciones
+* Usar la hora del teléfono o la hora del satélite
+* Puede usar unidades Imperiales
+* Inicio automático al encender el teléfono
+* Auto envío de mails cada pocas horas
+* OpenStreetMap - Subir datos el muestreo GPS
+* Dropbox - Subir archivos GPX/KML/ZIP
+
+
+Para Errores / Fallos, Peticiones de nuevas funcionalidades o preguntas, por favor envíelas a github.com/mendhak/gpslogger (Gestor de requerimientos).  
+
+***Notas:
+
+GPSLogger no es un sustituto de "MyTracks".  MyTracks está diseñado para ser usado durante periodos cortos de tiempo (ya que tiene muchas características ejecutándose), GPSLogger está diseñado para ejecutarse durante mucho tiempo.
+
+La conexión de datos es usada por esta aplicación sólo si se usa la opción "Auto-Email" en Dropbox u OpenStreetMap.
+
+Aunque la aplicación permite frecuencias de refresco de 0 segundos, no es recomendable, ya que el registro sucede muy rápido; Ésto puede causar inestabilidad o cuelgues en la aplicación. Es mejorprobar con 1 ó 3 segundos.
+
+Si consideras que hay alguna característica que la aplicación debería de tener, puedes solicitar la característica en la web de GitHub.
+
+***Explicación de permisos requeridos por la app:
+
+Almacenamiento - Leer y escribir archivos en la carpeta "GPSLogger" en su tarjeta SD
+
+Comunicación de red - Usada cuando se suben los archivos (Dropbox, OpenStreetMap) o cuando se envían correos electrónicos o cuando usted se autentica con Dropbox u OpenStreetMap
+
+Su localización - Usada para determinar su posición, basado en GPS o en la red celular
+
+Herramientas del sistema (Inicio automático al encender el teléfono) - Usado si usted deseea iniciar GPSLoggee en el inicio del teléfono
+

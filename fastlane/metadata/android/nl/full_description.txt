@@ -1,0 +1,39 @@
+Een eenvoudige app voor het automatisch opslaan van GPS coördinaten (met het globaal positioneringssysteem), die heel weinig energie gebruikt. Het doel van deze app is uw GPS-coördinaten in opgegeven intervallen naar een bestand op uw SD-kaart te schrijven.  Deze app draait op de achtergrond, zodat u op een lange wandeling kunt gaan, een vlucht nemen, een autorit maken of een fotosessie organiseren. Of zelfs wat melk gaan kopen terwijl deze app zo lang als mogelijk loopt.   Zodra u terug achter uw computer zit, kunt u de bestanden gebruiken om foto's te geotaggen, te uploaden naar reis-sites, te bekijken in Google Earth en zo verder. 
+
+*** Functies:
+
+* Tijdsintervallen instellen
+* Afstand intervallen opgeven
+* GSM-torens of GPS-satellieten
+* GPX- of KML-bestanden
+* Melding tonen
+• Telefoon- of satelliettijd gebruiken
+* Eenheden in Engels stelsel
+* Automatische start bij het opstarten van uw Android
+* Automatische e-mail om de paar uur
+* OpenStreetMap - upload GPS tracks
+* Dropbox - upload GPX/KML/ZIP
+
+Bugs, feature requests, vragen - maak een issue aan op github.com/mendhak/gpslogger (issue tracker).  
+
+*** Opmerkingen:
+
+GPSLogger is geen vervanging van MyTracks.  MyTracks is bedoeld voor kort gebruik (en heeft veel features actief), GPSLogger is bedoeld om permanent actief te zijn.
+
+Een data-verbinding wordt alleen gebruikt door deze app als je gebruik maken van automatische e-mail of OpenStreetMap of Dropbox functies.
+
+Hoewel de app staat 0 seconden frequenties toelaat, wordt dit niet aanbevolen omdat dan de logging zeer snel gebeurt; dit kan leiden tot instabiliteit / hangen. Probeer in plaats daarvan 1-3 seconden.
+
+Als er een functie is die volgens jou in de app zou moeten zitten, kan je een feature request plaatsen op de GitHub site.
+
+*** Uitleg van machtigingen:
+
+Opslag - lezen en schrijven van bestanden naar de map GPSLogger op uw SD-kaart
+
+Netwerkcommunicatie - gebruikt bij het uploaden van de bestanden (Dropbox, Openstreetmap) of verzenden van e-mails of authoriseren met Dropbox en Openstreetmap
+
+Uw locatie - gebruikt om uw lactie op basis van GPS of GSM-toren te bepalen
+
+System tools (automatisch starten tijdens het opstarten) - gebruikt als u ervoor kiest om GPSLogger op te starten bij het opstarten van uw Android
+
+

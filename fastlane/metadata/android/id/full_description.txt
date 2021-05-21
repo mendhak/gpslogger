@@ -1,0 +1,40 @@
+GPS logger yang ringan, efisien baterai. Tujuan dari aplikasi ini adalah untuk mencatat koordinat GPS Anda ke kartu SD pada interval yang ditetapkan.  Aplikasi ini berjalan di latar belakang sehingga Anda dapat berjalan-jalan, mendaki, naik pesawat atau sesi foto atau bahkan perjalanan membeli susu dengan aplikasi ini berjalan selama mungkin.   Setelah Anda kembali pada komputer Anda, Anda dapat menggunakan berkas untuk memberi lokasi pada foto, mengunggah ke situs perjalanan, lihat di Google Earth dan seterusnya. 
+
+Setelah Anda kembali ke komputer, Anda kemudian dapat menggunakan file untuk memberi geotag foto, mengunggah ke situs perjalanan, melihat di Google Earth, dan sebagainya:
+
+* Menetapkan interval waktu
+* Menetapkan interval jarak
+* Menara telepon seluler atau satelit GPS
+* GPX dan/atau berkas KML
+* Menampilkan notifikasi
+* Menggunakan waktu telepon dan satelit
+* Memerintah tampilan unit
+* Mulai otomatis pada boot
+* Email otomatis setiap beberapa jam
+* OpenStreetMap - unggah jejak GPS
+* Dropbox - unggah GPX/KML/ZIP
+
+
+Bug, permintaan fitur, pertanyaan - silakan kirim ke github.com/mendhak/gpslogger (pelacak isu).  
+
+***Catatan:
+
+GPSLogger bukanlah pengganti MyTracks.  MyTracks dimaksudkan untuk penggunaan pendek (ini punya banyak fitur yang berjalan), GPSLogger dimaksudkan untuk bertahan lebih lama.
+
+Sambungan data yang digunakan aplikasi ini hanya jika Anda menggunakan email otomatis atau fitur OpenStreetMap atau Dropbox.
+
+Meskipun aplikasi ini memungkinkan frekuensi 0 detik, hal itu tidak direkomendasikan karena rekaman dan logging yang terjadi sangat cepat; hal ini dapat menyebabkan kestabilan/hang. Cobalah 1-3 detik.
+
+Jika ada ciri yang anda harus memiliki, Anda dapat mengirimkan permintaan ciri pada situs github.
+
+***Penjelasan izin:
+
+Penyimpanan - membaca dan menulis berkas ke folder GPSLogger pada kartu SD anda
+
+Jaringan komunikasi - digunakan ketika meng-upload berkas (Dropbox, Openstreetmap) atau mengirim surel atau otorisasi Anda dengan Dropbox, Openstreetmap
+
+Lokasi Anda - digunakan untuk menentukan GPS atau Menara Anda berdasarkan lokasi
+
+Alat sistem (secara otomatis dimulai pada saat boot) - digunakan jika Anda memilih memulai bootup GPSLogger
+
+

@@ -1,0 +1,40 @@
+Um rastrador de gps com baixo uso de bateria. A finalidade deste app é registrar suas coordenadas GPS em intervalos especificos em um arquivo no cartão SD.  Este aplicativo é executado em segundo plano para que você possa usá-lo em uma longa caminhada, passeio de avião, sessão de fotos ou até mesmo ir comprar leite ou correr com o maior tempo possível de execução de bateria.   Você pode fazer o upload dos arquivos a partir do seu computador e usar os arquivos para fazer geocaching, adicionar localização nas fotos, além de ver os destinos no google earth. 
+
+***Recursos:
+
+* Especificar intervalos de tempo
+* Especificar intervalos de distância
+* Torres de telefonia móvel ou satélites GPS
+* Arquivos GPX e/ou KML
+* Mostrar notificações
+* Usar o relógio do telefone ou satélite
+* Unidade Imperial
+* Auto executar na inicialização
+* E-mail automático em intervalos configurados
+* OpenStreetMap - envio de coordenadas GPS
+* Dropbox - Envio de GPX/KML/ZIP
+
+
+Bugs, solicitações, perguntas - por favor envie-os para github.com/mendhak/gpslogger (issue tracker).  
+
+* * * Notas:
+
+GPSLogger não é um substituto de MyTracks.  MyTracks é destinada ao uso curto (como tem um monte de recursos de execução), GPSLogger é feito para durar muito tempo.
+
+Uma conexão de dados é usada por este app somente se você usar o auto e-mail ou funcionalidades do OpenStreetMap ou Dropbox.
+
+Embora o app nos permita frequências de 0 segundos, não é recomendado como gravação e log que ocorram muito rápido; Isto poderia causar instabilidade/travamento. Em vez disso, tente 1-3 segundos.
+
+Se existe uma função que você gostaria de ver adicionada no programa, você pode mandar uma requisição no site do GitHub.
+
+* * * Explicação de permissões:
+
+Armazenamento - leitura e gravação de arquivos para a pasta GPSLogger no seu cartão SD
+
+Comunicação de rede - usado ao fazer upload dos arquivos (Dropbox, Openstreetmap) ou envio de e-mails ou confirmando autorização no Dropbox ou Openstreetmap
+
+Sua localização - usado para determinar a localização com base no seu GPS ou torre
+
+Ferramentas de sistema (executar automaticamente na inicialização) - usado se você optar por iniciar o GPSLogger na inicialização
+
+

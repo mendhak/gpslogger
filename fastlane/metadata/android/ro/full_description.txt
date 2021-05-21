@@ -1,0 +1,40 @@
+GPS Logger este o aplicație eficientă, cu un consum minim de baterie. Scopul acestei aplicații este de a înregistra coordonatele voastre GPS, la intervale specificate, într-un fișier de pe cardul SD.  Această aplicație rulează în fundal, așa că o puteți folosi pe durata unei plimbări lungi, drumeții, zbor, sau sesiune foto, sau chiar când mergeți să cumpărați lapte și aveți nevoie ca această aplicație să ruleze cât de mult posibil.   Odată ce v-ați întors la computer, puteți utiliza fișierele să aplicați etichete de localizare pe fotografii, să vă încărcați traseele pe site-uri de călătorii, să le vizualizați în Google Earth și așa mai departe. 
+
+*** Caracteristici:
+
+* Specifică intervalele de timp
+* Specifică distanța dintre intervale
+* Relee GSM sau sateliți GPS
+* Fișiere GPX și/sau KML
+* Afișează o notificare
+* Utilizează ora din telefon sau de la satelit
+* Afișare în unități imperiale
+* Lansare automată la pornirea telefonului
+* Trimite automat e-mail la fiecare câteva ore
+* Încărcare trasee GPS pe OpenStreetMap
+* Dropbox - încărcare fișiere GPX/KML/ZIP
+
+
+Bug-uri, solicitări de caracteristici, întrebări - vă rugăm să le trimiteți la github.com/mendhak/gpslogger (detector de probleme).  
+
+*** Note:
+
+GPSLogger nu este un înlocuitor al aplicației MyTracks.  Aplicația MyTracks este destinată unei utilizări scurte (având o mulțime de caracteristici care rulează simultan), GPSLogger este realizat să poată funcționa mult timp, fără un consum mare din baterie.
+
+O conexiune de date este utilizată de această aplicație doar dacă utilizați funcția de trimitere automată prin e-mail sau la OpenStreetMap/Dropbox.
+
+Deși aplicația permite valoarea de 0 secunde la înregistrarea de date, ea nu este recomandată deoarece înregistrarea și autentificarea se vor petrece foarte rapid; acest fapt poate provoca instabilitate/blocare. Încercați în schimb 1-3 secunde.
+
+Dacă credeți că există o funcționalitate care ar trebui să fie disponibilă în aplicație, puteți trimite o solicitare în acest sens pe site-ul GitHub.
+
+*** Explicație pentru permisiuni:
+
+Stocare/Storage - citire și scriere de fișiere în directorul GPSLogger de pe cardul SD
+
+Comunicare în rețea/Network communication - se folosește când încărcați fișiere (Dropbox, Openstreetmap) sau trimiteți email-uri sau autorizați folosirea Dropbox, Openstreetmap
+
+Localizarea ta/Your location - folosit pentru a determina localizarea ta folosind relee GSM sau sateliți GPS
+
+Unelte de sistem/System tools (automatically start at boot) - folosite în cazul în care alegeți ca GPSLOgger să se lanseze la pornirea echipamentului
+
+

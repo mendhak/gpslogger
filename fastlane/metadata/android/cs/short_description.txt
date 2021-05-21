@@ -1,0 +1,1 @@
+Lehký GPS logger, nenáročný na energii, GPX/KML, přidat poznámky, sdílení, uplo

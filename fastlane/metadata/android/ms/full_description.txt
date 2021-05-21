@@ -1,0 +1,40 @@
+Satu pengelog GPS yang ringkas dan jimat kuasa. Aplikasi ini bertujuan untuk mengelog koordinat GPS anda dalam sela masa tertentu kedalam satu fail pada kad SD anda.  Aplikasi ini berjalan dibelakang tabir supaya anda boleh berjalan jauh, menaiki kapal terbang atau sesi fotografi atau pergi membeli belah sambil menjalankan aplikasi ini selama mungkin.   Sebaik mendapat akses komputer, anda boleh menggunkan fail tersebut untuk menanda lokasi foto, memuat naik kedalam laman web, melihat menerusi Google Earth, dan sebagainya. 
+
+***Ciri-ciri:
+
+* Tentukan selang masa
+* Tentukan selang jarak
+* Menggunakan data menara telefon atau satelit GPS
+* Fail GPX dan/atau KML
+* Menunjukkan notifikasi
+* Gunakan masa telefon atau satelit masa
+* Paparan unit imperial
+* Mula automatik semasa boot
+* E-mel automatik selang beberapa jam
+* OpenStreetMap - Muat naik jejak GPS
+* Dropbox - muat naikGPX/KML/ZIP
+
+
+Ralat, cadangan, soalan - boleh dihantar kepada github.com/mendhak/gpslogger (penjejak ralat).  
+
+*** Nota:
+
+GPSLogger bukanlah alternatif kepada MyTracks.  MyTracks digunakan untuk jangka masa singkat (kerana ia mempunyai banyak ciri-ciri berjalan serentak), GPSLogger direka untuk bertahan lebih lama.
+
+Sambungan data hanya digunakan sekiranya anda menggunakan fungsi OpenStreetMap atau Dropbox.
+
+Walaupun frekuensi log boleh diset serendah 0 saat, tetapi hal ini tidak digalakkan kerana aktiviti mengelog berlaku terlalu kerap.  Hal ini mungkin menyebabkan ralat. Digalakkan untuk menggunakan 1 hingga 3 saat.
+
+Jika ada ciri yang anda rasa aplikasinya perlu, anda boleh menyerahkan permintaan ciri pada tapak GitHub.
+
+*** Penerangan mengenai kebenaran:
+
+Simpanan - membaca dan menulis fail ke folder GPSLogger pada kad SD
+
+Rangkaian komunikasi - digunakan apabila memuat naik fail (Dropbox, Openstreetmap) atau menghantar e-mel atau mengesahkan anda pada Dropbox, Openstreetmap
+
+Lokasi anda - digunakan untuk menentukan lokasi berdasarkan GPS atau menara pemancar
+
+Peralatan sistem (bermula automatik ketika boot) - digunakan jika anda memilih untuk memulakan GPSLogger pada bootup
+
+

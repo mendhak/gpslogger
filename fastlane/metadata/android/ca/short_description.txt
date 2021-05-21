@@ -1,0 +1,1 @@
+Un lleuger entregistrador de posicions GPS, eficient en l'ús de la bateria, GPX

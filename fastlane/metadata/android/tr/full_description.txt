@@ -1,0 +1,39 @@
+Hafif, pil harcama verimli bir GPS günlük kaydedici. Bu uygulamanın amacı belirtilen aralıklarla alınan GPS koordinatlarınızı SD kartınızda bir dosyaya kaydetmektir.  Uygulama arka planda, piliniz bitene kadar çalışabildiği için telefonunuzu götürdüğünüz her yerde, yürüyüşte, sporda, bisiklet yada uçak ile seyahat ederken, kısacası her an nerede olduğunuzu kayıt altında tutar.   Bilgisayarınıza döndüğünüzde kaydedilen verileri fotoğraflarınıza konum bilgisi ekleme, gezi sitelerine yükleme ya da Google Earth'te görmek için kullanabilirsiniz. 
+
+***Özellikler:
+
+* Zaman aralıklarını ayarlayabilme
+* Mesafe aralıklarını ayarlayabilme
+* Baz istasyonu veya GPS uyduları
+* GPX ve/veya KML dosyaları
+* Bildirimleri gösterir
+* Telefon veya uydu saatlerini kullanır
+* Emperyal birimleri gösterir
+* Telefon açıldığında otomatik başlar
+* Bir kaç saatte bir otomatik eposta
+* OpenStreetMap'e GPS izleri yükler
+* Dropbox - GPX/KML/ZIP olarak yükler
+
+Uygulama hatalarını, özellik isteklerinizi, sorularınızı github.com/mendhak/gpslogger adresinde (issue tracker) başlığı altında gönderiniz.  
+
+***Notlar
+
+
+GPSKayıt programı MyTracks'ın yerine yapılmamıştır.    
+
+Bu program veri bağlantısını yalnızca kullanıcı oto-email, OpenStreetMap yada DropBox özelliklerini aktifleştirirse kullanır.
+
+Program kayıt frekansını sıfır saniyeye indirmeye izin verse dahi bu önerilmez çünkü bu durumda konum takibi kaydı çok hızlı gerçekleşir. Bu durum düzensizliklere ve donmalara sebebiyet verebilir. (Sıfır yerine bir - üç saniye aralığını deneyin).
+
+Eğer programda olmasını istediğiniz bir özellik varsa bunu GitHub sayfasında belirtin.
+
+***İzinlerin açıklaması:
+
+Saklama- verileri yazma ve okuma işlemi telefonunuzun SD kartında GPSLogger dosyasında gerçekleştirilir
+
+İnternet bağlantısı - kayıt dosyaları (DropBox, OpenMaps yada mail adresinize) gönderilirken kullanılır. Aynı zamanda DropBox ve OpenStreetMap hesabınıza erişirkende gerekecektir
+
+Konumunuz - GPS bazlı veya kitle kaynaklı konumuzu elde etmek için kullanılır
+
+Sistem araçları (Başlangıçta otomatik çalıştır) - Eğer GPSLogger'ı telefon açılır açılmaz çalıştırmak istiyorsanız seçmeniz gereken özellik
+

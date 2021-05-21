@@ -1,0 +1,39 @@
+Un registratore di tracce GPS semplice e con bassi consumi di batteria. Il suo scopo è quello di registrare le coordinate GPS ad intervalli specifici e salvarle in un file sulla scheda SD.  L'applicazione funziona in background così potete usare lo smartphone normalmente mentre camminate, andate in bicicletta, in auto, scattate foto o fate video.   Quando sarete di ritorno al vostro computer, potete usare i dati registrati per geotaggare le vostro foto, caricare il percorso su un sito di viaggi, vedere il tragitto in Google Earth e molto altro ancora. 
+
+*** Caratteristiche:
+
+* Specificare intervalli di tempo
+* Specificare intervalli di distanza
+* Coordinate determinate dalle celle telefoniche (meno preciso ma bassissimo consumo di batteria) o dai satelliti GPS
+* Dati salvati in formato GPX e/o KML
+* Mostra notifiche
+* Può usare l'ora della rete cellulare o quella dei satelliti GPS
+* Unità metriche o Imperiali (US/UK)
+* Può autoavviarsi all'accensione del telefono
+* Può autoinviare email con i dati ogni 'n' ore
+* Può inviare le tracce GPS su OpenStreetMap
+* Può inviare i file GPX/KML/ZIP su DropBox
+
+
+Errori, domande, richieste ? Lo potete fare qui: github.com/mendhak/gpslogger  
+
+***Note:
+
+GPSLogger non è un rimpiazzo di MyTracks.  MyTracks ha molte funzione ma è inteso per un uso nel breve periodo. GPSLogger è nato con l'idea di essere semplice e poter essere usato per un tempo molto lungo risparmiando le batterie il più possibile.
+
+La connessione dati viene usata solo se si usano le funzioni di autoinvio email o il caricamento su OpenStreetMap o DropBox.
+
+L'applicazione permette l'intervallo del tempo di registrazione pari a 0 (zero) registrando i dati in modo continuo molto velocemente. Questo non è raccomandato in quato può causare instabilità, crash ed alti consumi di batteria. Meglio usare un intervallo di 1-3 secondi.
+
+Se c'è una caratteristica che senti che l'app dovrebbe avere, puoi inviare una richiesta di funzionalità sul sito GitHub.
+
+***Autorizzazioni:
+
+Storage - legge e scrive files nella cartella GPSLogger sulla vostra scheda SD
+
+Network communication - usato quando si caricano files su OpenStreetMap o DropBox e quando si inviano email
+
+Your location - usato per determinare la vostra posizione
+
+System tools (automatically start at boot) - usato se attivate l'opzione di avvio automatico all'accensione del telefonino
+

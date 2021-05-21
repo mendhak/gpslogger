@@ -3,6 +3,7 @@
     <string name="title_drawer_uploadsettings">Yükləmə tənzimləmələri</string>
     <string name="navigation_drawer_open">Naviqasiya siyirməsini aç</string>
     <string name="navigation_drawer_close">Naviqasiya siyirməsini bağla</string>
+    <string name="app_name">GPSLogger</string>
     <string name="settings_screen_name">GPSLogger Tənzimləmələri</string>
     <string name="ok">Oldu</string>
     <string name="cancel">İmtina</string>
@@ -48,10 +49,12 @@
     <string name="providername_gps">GPS peykləri</string>
     <string name="providername_celltower">şəbəkə qüllələri</string>
     <string name="not_applicable">müəyyən deyil</string>
+    <string name="meters_per_second">&#160;m/s</string>
     <string name="feet_per_second">&#160;ft/sn</string>
     <string name="miles_per_hour">&#160;mi/sa</string>
     <string name="miles">&#160;mil</string>
     <string name="kilometers_per_hour">&#160;km/saat</string>
+    <string name="kilometers">&#160;km</string>
     <string name="unknown_direction">bilinmir</string>
     <string name="sorry">Təəssüf</string>
     <string name="success">Uğurlu</string>
@@ -98,6 +101,8 @@
     <string name="log_plain_text_summary">Yerlər CSV faylında saxlanılır</string>
     <string name="log_json_title">GeoJSON olaraq saxla</string>
     <string name="log_json_summary">Yerlər GeoJSON faylında saxlanılır</string>
+    <string name="new_file_creation_title">Yeni fayl yaratma</string>
+    <string name="new_file_creation_summary">Gündə bir dəfə və ya hər başlatdığınızda yeni bir fayl yarat.</string>
     <string name="new_file_creation_onceaday">Gündə bir dəfə</string>
     <string name="new_file_creation_everystart">Hər başlatdığımda</string>
     <string name="new_file_creation_custom">Xüsusi fayl</string>
@@ -112,7 +117,11 @@
     <string name="autoemail_frequency_whenistop">Dayan-a basdığımda</string>
     <string name="autoemail_smtp_category">E-poçt Tənzimləmələri</string>
     <string name="pref_general_summary">Başlatma və görüntülənmə seçimləri</string>
+    <string name="emailprovider_google">Google Mail</string>
+    <string name="emailprovider_yahoo">Yahoo! Mail</string>
+    <string name="emailprovider_msn">Windows Live Mail</string>
     <string name="emailprovider_manual">Əllə</string>
+    <string name="dropbox_setup_title">Dropbox</string>
     <string name="dropbox_authorize_description">Dropbox xüsusiyyətlərini istifadə etmək üçün, GPSLogger-ə
         hesabınıza fayl yükləmə icazəsi verməlisiniz.
     </string>
@@ -120,6 +129,7 @@
         \'Apps\\GPSLogger for Android\' ə yükləniləcək. İstəsəniz, Dropbox-da GPSLogger bağlantısını çıxara bilərsiniz.
     </string>
     <string name="dropbox_couldnotauthorize">Dropbox ilə səlahiyyətləndirilmədi, zəhmət olmasa daha sonra yenidən sınayın</string>
+    <string name="owncloud_setup_title">ownCloud</string>
     <string name="owncloud_server_summary">ownCloud Təməl URL</string>
     <string name="owncloud_directory_summary">ownCloud serverində istifadə ediləcək qovluq. Mövcud olduğundan əmin olun, əks halda yükləmə uğursuz olacaq.</string>
 </resources>
