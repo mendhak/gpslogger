@@ -1,0 +1,40 @@
+En let og batterieffektiv GPS-logger. Formålet med denne app er at logge dine GPS-koordinater til en fil på dit SD-kort jf. angivne intervaller.  App'en kører i baggrunden, så du på en lang gå-/vandretur, flyrejse, fotosession eller endda under et smut ned at købe mælk kan have denne app kørende så længe som muligt.   Når du er tilbage ved din computer, kan du så benytte filerne til at geotagge fotos, uploade til rejse-websteder, få dem vist i Google Earth og så videre. 
+
+*** Funktioner:
+
+* Tidsintervalangivelser
+* Angive afstandsintervaller
+* Mobiltelefonmast eller GPS-satellitter
+* GPX- og/eller KML-filer
+* Viser en notifikation
+* Benyt mobil- eller satellittid
+* Imperial display-enheder
+* Auto-start ved boot
+* Auto-e-mail med få timers mellemrum
+* OpenStreetMap - upload GPS-sporinger
+* Dropbox - upload GPX/KML/ZIP
+* Google Docs - upload GPX/KML/ZIP
+
+Fejl, funktionsanmodninger, spørgsmål - indsend venligst disse til github.com/mendhak/gpslogger (problemsporing).  
+
+***Noter:
+
+GPSLogger er ikke en MyTracks-erstatning.  MyTracks er beregnet til kortvarig brug (da den har mange kørende funktioner), GPSLogger er beregnet til langvarig brug.
+
+Denne app anvender kun en dataforbindelse, såfremt du benytter funktionerne auto-e-mail, OpenStreetMap eller Dropbox.
+
+Selvom app'en muliggør kontinuerlig optagelse og registrering, så anbefales dette ikke grundet den høje registreringsfrekvens, der kan medføre ustabil drift/frysninger. Prøv i stedet med 1-3 sekunder.
+
+Er der er en funktion, som du mener, at app'en bør have, kan du indsende en funktionsanmodning på GitHub-webstedet.
+
+***Forklaring af tilladelser:
+
+Lagerplads - læsning og skrivning af filer til mappen GPSLogger på dit SD-kort
+
+Netværkskommunikation - benyttes ved fil-uploading (Dropbox, OpenStreetMap), afsendelse af e-mails eller godkendelse af dig på Dropbox, OpenStreetMap
+
+Din placering - benyttes til at bestemme din GPS- eller mobilmast baserede placering
+
+Systemværktøjer (starter automatisk ved boot) - benyttes hvis du vælger at starte GPSLogger ved boot
+
+
