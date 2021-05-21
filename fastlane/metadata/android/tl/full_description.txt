@@ -1,0 +1,40 @@
+Ang magaan at mahusay sa baterya na GPS Logger. Ang layunin ng app na ito ay mai-log ang iyong GPS coordinates sa nakalaan na mga agwat sa isang file sa iyong SD card.  Itong app ay tumatakbo sa background para sa malayo mong paglakad, pag-hike, paglipad, pagsakay o photo sesyon o kaya ay pumunta't bumili ng gas at patakbuhin ito ng matagal-tagal.   Kung nakabalik ka na sa iyong computer, magagamit mo na ang mga file sa geotag phots, i-upload sa travel sites, tignan sa Google Earth at iba pa. 
+
+***Mga katangian:
+
+* Liwanagin ang agwat ng oras
+* Liwanagin ang kalayuan ng agwat
+* Tori ng Cell phone o GPS satellites
+* GPX at KML files
+* Pagpakita sa abiso
+* Gamitin ang oras ng telepono o oras ng satellite
+* Mge yunit ng Imperial display
+* Awtomatikong magsisimula pagkatapos mag-boot
+* Awtomatikong magpadala ng email pagkalipas ng kunting oras
+* OpenStreetMap - mag-upload ng mga bakas galing GPS
+* Dropbox - mag-upload ng GPX o KML o ZIP
+
+
+Pakiusap e sumita ang mga bug, hiling na mga katangian, mga tanong sa github.com/mendhak/gpslogger (issue tracker).  
+
+***Tandaan:
+
+Ang GPSLogger ay hindi pamalit sa MyTracks.  Ang MyTracks ay ginawa para sa pangmadaliang gamit (sapagkat marami syang mga katangiang tumatakbo), GPSLogger ay ginawa para sa pangmatagalang oras.
+
+Gagamit lang ang app na ito ng data connection kung gumamit ka ng owtomatikong email o OpenStreetMap o mga katangian ng Dropbox.
+
+Bagamat ang app ay magbibigay 0 segundo frequencies, hindi ito minumungkahi sa pagtatala at pangangalap maaring maging mabilis; ito'y nagdudulot ng alanganin. Subukin isa o tatlonfg segundo.
+
+Kung may imumungkahi kayong katangian na dapat sa app, pwede kayong magpadala sa inyung ideya sa GitHub site.
+
+***Pagpapaliwanag sa mga pahintulot:
+
+Nakaimbak - babasahing o susulating files sa GPSLogger folder sa inyong SD card
+
+Network komunikasyon - gamitin kapag nag magpapadala ng files (Dropbox, Openstreetmap) o mensahe sa emails o pahintulot sayo kasama ng Dropbox, Openstreetmap
+
+Ang lokasyon - gagamitin upang tukuyin ang iyong GPS o tore base sa iyong lokasyon
+
+Sistemang kasangkapan (awtomatikong magsisimula sa boot) - gamitin kung pipiliin mo ang GPSLogger sa bootup
+
+
