@@ -1,1 +1,1 @@
-Registador GPS eficiente em bateria
+GPS logger muito leve com suporte GPS/KML, notas e upload para web.
