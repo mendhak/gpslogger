@@ -1,0 +1,40 @@
+Baterii lekki, wydajny GPS Rejestrator. Celem tej aplikacji jest rejestrowanie współrzędnych GPS do pliku na karcie SD, w określonych odstępach czasu.  Ta aplikacja działa w tle, dzięki czemu można udać się na długi spacer, wycieczkę, lot samolotem, wyskoczyć na sesję zdjęciową lub iść i kupić trochę mleka a nasza aplikacja cały czas działa i rejestruje nasze współrzędne.   Po powrocie do domu możesz spokojnie na komputerze, skorzystać z plików do GEO-Tagowania swoich zdjęć, podziwiać widok w Google Earth lub przesłać trasę wycieczki do biura podróży itd. 
+
+*** Funkcje:
+
+* Określanie odstępu czasu
+* Określanie odstępu odległości
+* Maszty telefoniczne lub satelity GPS
+* Pliki GPX lub KML
+* Pokazuje powiadomienie
+* Używa czas telefonu lub satelity
+Brytyjskie jednostki  miar
+* Automatyczny start przy uruchamianiu systemu
+* Automatyczne e-maile co kilka godzin
+* OpenStreetMap - Przesyłaj ślady GPS
+* Dropbox - Przesyłaj pliki GPX/KML/ZIP
+
+
+Błędy, prośby, pytania - prześlij je do github.com/mendhak/gpslogger ("issue tracker").  
+
+***Uwagi:
+
+GPSLogger nie jest zamiennikiem MyTracks.  Z powodu bogatej funkcjonalności, MyTracks służy do użytku krótkotrwałego. Zadaniem GPSLogger jest działać jak najdłużej.
+
+Aplikacja wysyła dane wyłącznie, gdy użyte są funkcje OpenStreetMap, Dropbox lub automatycznych e-maili.
+
+Nie zaleca się ustawiana 0, z powodu szybkiego nagromadzania się danych, co może spowodować niestabilność aplikacji. Spróbuj od 1 do 3 sekund.
+
+Jeśli uważasz, że istnieje funkcja którą ta aplikacja powinna posiadać, możesz przesłać propozycję na naszej stronie w witrynie GitHub.
+
+***Objaśnienia uprawnień:
+
+Storage - odczyt i zapis plików do folderu GPSLogger na karcie SD
+
+Komunikacja sieciowa - używana podczas przesyłania plików (Dropbox, Openstreetmap), wysyłania e-maili lub autoryzacji Dropbox, Openstreetmap
+
+Lokalizacji - określana za pomocom wierzy telefonicznych lub GPS-u
+
+Uruchom automatycznie podczas startu systemu - Jeśli chcesz rozpocząć logowanie po starcie systemu.
+
+
