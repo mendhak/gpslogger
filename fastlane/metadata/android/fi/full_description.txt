@@ -1,0 +1,40 @@
+Kevyt, akkuystävällinen GPS Logger. Tämän sovelluksen tarkoitus on tallentaa GPS koordinaattisi tietyiltä aikaväleiltä SD-kortilla olevaan tiedostoon.  Sovellus pyörii taustalla, joten voit mennä kävelylle, vaeltamaan, lentämään, ajamaan tai valokuvaamaan - jopa ostamaan kaupasta maitoa - ja sovellus on aina käynnissä kun mahdollista.   Kun pääset takaisin tietokoneen ääreen, voit käyttää tiedostoja valokuvien sijaintien määrittämiseen, ladata ne matkustussivustoille, nähdä ne Google Earthissa ja niin edelleen. 
+
+***Ominaisuudet:
+
+* Määritä erityiset aikavälit
+* Määritä erityiset etäisyysvälit
+* Matkapuhelinverkko tai GPS sateliitti -paikannus
+* Luo GPX ja/tai KML tiedostot
+* Näyttää ilmoituksen
+* Käytä puhelimen aikaa tai sateliittiaikaa
+* Näyttää luvut myös imperiaaleissa
+* Käynnistyy puhelimen käynnistyessä
+* Automaattiset sähköpostit muutaman tunnin välein
+* OpenStreetMap - lataa GPS jäljet
+* Dropbox - tallenna GPX/KML/ZIP tiedostoina
+* Google Docs - tallenna GPX/KML/ZIP tiedostoina
+
+Bugi-ilmoitukset, ominaisuusehdotukset, kysymykset - lähetä ne tänne github.com/mendhak/gpslogger (issue välilehti).  
+
+***Huomiot:
+
+GPSLogger ei ole MyTracksin korvaaja.  MyTracks on tarkoitettu lyhyeen käyttöön (koska siinä on paljon akkuakäyttäviä toimintoja), GPSLogger on tarkoitettu kestämään pitkään (viemään vähän akkua).
+
+Tämä sovellus käyttää datayhteyttä ainoastaan silloin, kun sähköposti, OpenStreetMap tai Dropbox ominaisuus on käytössä.
+
+Vaikka sovellus salliikin 0 sekunnin päivitystaajuuden, niin sen käyttö ei ole suositeltavaa. Silloin lokiinkirjaus tapahtuu hyvin nopeasti; voi aiheuttaa epävakautta/jumiutumista. Kokeile 1-3 sekuntia sen sijaan.
+
+Jos toivoisit jonkin ominaisuuden löytyvän sovelluksesta, voit lähettää toiveesi GitHub-sivulla.
+
+***Selitykset sovelluksen tarvitsemille oikeuksille:
+
+Massamuisti - tiedostojen lukeminen ja kirjoittaminen GPSLogger kansiossa, sinun SD-kortillasi
+
+Nettiyhteys - käytetään kun lataat tiedostoja (Dropbox, Openstreetmap) tai sähköpostien lähettämiseen tai kun vahvistat Dropboxisi, Openstreetmappisi
+
+Sijaintisi - käytetään selvittääksesi sijaintisi perustuen joko GPS- tai mobiiliverkkosignaaliin
+
+Järjestelmätyökalut (käynnistä automaattisesti puhelimen käynnistyessä) - käytetään jos päätät käynnistää GPSLoggerin puhelimen käynnistyessä
+
+Tunnuksesi - käytetään kun sinut kirjataan sisään Google Docsiin ja kun lataat tiedostoja Google Docsiin
