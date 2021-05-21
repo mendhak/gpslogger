@@ -1,0 +1,40 @@
+Lehký, energeticky úsporný GPS logger. Účelem tohoto programu je zapisovat vaše GPS souřadnice v určených intervalech do souboru na vaší SD kartě.  Program běží na pozadí, takže můžete klidně absolvovat dlouhý pěší výlet, horskou turistiku, výlet letadlem nebo focení, nebo si prostě jen dojít koupit mléko a mít tentoo program spuštěný tak dlouho, jak je potřeba.   Jakmile se vrátíte zpět k počítači, můžete uložené soubory použít ke geotagování vašich fotek, uploadu na cestovatelské weby, zobrazení v Google Earth atd. 
+
+***Funkce:
+
+* Určení časového intervalu/ů
+* Určení intervalů vzdálenosti
+* určení pozice podle GSM stanic nebo GPS satelitů
+* GPX a/nebo KML soubory
+* Zobrazení oznámení
+* Použití času telefonu nebo satelitního času
+* Zobrazení v imperiálních jednotkách
+* Automatický start při bootu
+* Automatický email každých několik hodin
+* OpenStreetMap - upload GPS tras
+* Dropbox - upload GPX/KML/ZIP
+* Google Docs - upload GPX/KML/ZIP
+
+Hlášení chyb, žádosti o funkce - vkládejte prosím do github.com/mendhak/gpslogger (issue tracker).  
+
+***Poznámky:
+
+GPSLogger není náhrada MyTracks.  MyTracks je určeno pro krátkodobé použití (protože je spuštěno mnoho funkcí) zatímco GPSLogger je koncipován tak, aby vydržel běžet dlouhou dobu.
+
+Datové připojení používá program pouze pro funkce automatický email nebo OpenStreetMap nebo Dropbox.
+
+Přestože program umožňuje frekvence 0 sekund, nedoporučuje se to, protože záznam a logování probíhá velmi rychle a toto může způsobit nestabilitu nebo zatuhávání programu. Zkuste místo toho raději 1-3 sekund.
+
+Pokud tě napadá nějaká funkce, co si myslíš, že by v aplikaci měla být, tak o ni můžeš zažádat na naší GitHub stránce.
+
+*** Vysvětlení oprávnění:
+
+Ukládání - čtení  a zápis souborů do složky GPSLogger na vaší SD kartě
+
+Síťová komunikace - použitá pro upload souborů (Dropbox, Openstreetmap) nebo posílání emailů nebo autorizaci  - Dropbox, Openstreetmap
+
+Vaše umístění - použito pro určení vašeho umístění dle GPS nebo GSM
+
+Systémové nástroje (automatický start při bootu) - použito pokud jste zvolili spuštění GPSLoggeru při spuštění telefonu
+
+
