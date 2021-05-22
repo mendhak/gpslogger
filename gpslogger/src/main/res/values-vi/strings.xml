@@ -3,7 +3,6 @@
     <string name="title_drawer_uploadsettings">Cài đặt tải lên</string>
     <string name="navigation_drawer_open">Mở ngăn điều hướng</string>
     <string name="navigation_drawer_close">Đóng ngăn điều hướng</string>
-    <string name="app_name">GPSLogger</string>
     <string name="settings_screen_name">Cài đặt GPSLogger</string>
     <string name="ok">Ok</string>
     <string name="cancel">Hủy bỏ</string>
@@ -125,7 +124,6 @@
     <string name="startonbootup_summary">Chạy ứng dụng và log khi bật máy</string>
     <string name="startonapplaunch_title">Bắt đầu khi chạy ứng dụng</string>
     <string name="startonapplaunch_summary">Bắt đầu log khi chạy ứng dụng</string>
-    <string name="autoemail_title">Email</string>
     <string name="please_wait">Xin chờ.</string>
     <string name="autoemail_target">Địa chỉ email nhận</string>
     <string name="autosend_frequency_display">Sau %s phút</string>
@@ -253,7 +251,6 @@
     <string name="log_nmea_title">Ghi log vào NMEA</string>
     <string name="log_nmea_summary">Tạo một file NMEA khi cố gắng nhận điều chỉnh. Dung lượng file sẽ tăng rất nhanh. Chỉ dùng khi GPS đang được sử dụng.</string>
     <string name="autoopengts_accountname">Tên tài khoản</string>
-    <string name="listeners_gps">GPS</string>
     <string name="listeners_gps_title">Ghi vị trí GPS/GNSS</string>
     <string name="listeners_gps_summary">Ghi lại các vị trí từ bộ thu vị trí dựa trên vệ tinh trên thiết bị của bạn</string>
     <string name="listeners_cell">Mạng</string>
@@ -319,7 +316,6 @@
     <string name="ssl_certificate_add_to_keystore">Thêm chứng chỉ này vào kho khóa cục bộ?</string>
     <string name="ssl_certificate_is_valid">Chứng chỉ hợp lệ</string>
     <string name="hide_notification_from_status_bar">Ẩn thông báo khỏi thanh trạng thái</string>
-    <string name="sftp_setup_title">SFTP</string>
     <string name="sftp_private_key_path">Khóa riêng tư</string>
     <string name="sftp_private_key_passphrase">Cụm khóa riêng tư</string>
     <string name="sftp_validate_test_upload">Xác thực khóa máy chủ và kiểm tra tải lên</string>
