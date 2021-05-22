@@ -3,3 +3,4 @@
 * The permission workflow can be a bit annoying, sorry
 * A notification will now appear when the app launches
 * Adaptive icons, thanks to @kanru
+* Updated translations
