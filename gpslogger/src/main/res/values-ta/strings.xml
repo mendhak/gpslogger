@@ -3,7 +3,6 @@
     <string name="title_drawer_uploadsettings">பதிவேற்ற அமைப்புகள்</string>
     <string name="navigation_drawer_open">வழிசெலுத்தல் மெனுவைத் திற</string>
     <string name="navigation_drawer_close">வழிசெலுத்தல் மெனுவை மூடு</string>
-    <string name="app_name">GPSLogger</string>
     <string name="settings_screen_name">GPSLogger அமைப்புகள்</string>
     <string name="ok">சரி</string>
     <string name="cancel">ரத்து செய்</string>
@@ -111,7 +110,6 @@
     <string name="autoemail_testresult_success">மின்னஞ்சல் அனுப்பபட்டது</string>
     <string name="gps_stopped">GPS இடைநிறுத்தப்பட்டது</string>
     <string name="stopped">நிறுத்தப்பட்டது</string>
-    <string name="osm_setup_title">OpenStreetMap</string>
     <string name="osm_lbl_authorize">இந்த பயன்பாட்டை அங்கீகரப்படுத்தவும்</string>
     <string name="osm_resetauth">அங்கீகாரத்தை அழி</string>
     <string name="osm_visibility">காண்புநிலை</string>
@@ -125,12 +123,7 @@
     <string name="pref_general_title">பொது அமைப்புகள்</string>
     <string name="pref_general_summary">தொடக்கம் &amp; காட்சி விருப்பங்கள்</string>
     <string name="emailprovider_google">Gmail</string>
-    <string name="emailprovider_yahoo">Yahoo! Mail</string>
-    <string name="emailprovider_msn">Windows Live Mail</string>
     <string name="emailprovider_manual">கைமுறை</string>
-    <string name="dropbox_setup_title">Dropbox</string>
-    <string name="owncloud_setup_title">ownCloud</string>
-    <string name="owncloud_server_summary">ownCloud Base URL</string>
     <string name="owncloud_test_summary">ownCloud சர்வரில் ஒரு சோதனைக் கோப்பைப் பதிவேற்று</string>
     <string name="owncloud_testing">ownCloud பதிவேற்றத்தைச் சோதிக்கிறது</string>
     <string name="menu_upload">பதிவேற்று</string>
@@ -151,7 +144,6 @@
     <string name="shortcut_start">தொடங்கு</string>
     <string name="shortcut_stop">நிறுத்து</string>
     <string name="shortcut_pickaction">ஒரு செயலைத் தேர்ந்தெடு</string>
-    <string name="opengts_setup_title">OpenGTS</string>
     <string name="autoopengts_server_category">OpenGTS அமைப்புகள்</string>
     <string name="autoopengts_server">சேவையகம்</string>
     <string name="autoopengts_server_summary">சேவையகபெயர் அல்லது IP</string>
@@ -163,15 +155,11 @@
     <string name="autoftp_advanced_settings">மேம்பட்ட அமைப்புகள்</string>
     <string name="autoftp_port">முணையம்</string>
     <string name="autoftp_useftps">FTPS ஐ பயன்படுத்து</string>
-    <string name="autoftp_ssltls">SSL/TLS</string>
     <string name="autoftp_ssltls_summary">எதுவுமில்லை, SSL அல்லது TLS. பாதுகாப்பாற்ற இணைப்புகளுக்கு \'எதுவுமில்லை\' ஐ பயன்படுதூங்கள்.</string>
     <string name="autoftp_ssltls_none">அதுவுமில்லை</string>
-    <string name="autoftp_ssltls_ssl">SSL</string>
-    <string name="autoftp_ssltls_tls">TLS</string>
     <string name="autoftp_test_summary">FTP சர்வரில் ஒரு சோதனைக் கோப்பைப் பதிவேற்று</string>
     <string name="autoftp_testing">FTP பதிவேற்றத்தைச் சோதிக்கிறது</string>
     <string name="autoftp_invalid_settings">தவறான அமைப்புகள்</string>
-    <string name="autoftp_setup_title">FTP</string>
     <string name="menu_faq">உதவி &amp; FAQ</string>
     <string name="gpsf_missing">காணப்படாத சேவை</string>
     <string name="gpsf_missing_description">இந்த அம்சத்தை பயன்படுத்த, உங்களுக்கு Google Play Services Framework தேவை.</string>
@@ -191,12 +179,10 @@
     <string name="pref_filedetails_title">கோப்பு &amp; கோப்புறை தகவல்கள்</string>
     <string name="log_nmea_title">NMEA இற்கு பதிவுசெய்</string>
     <string name="autoopengts_accountname">கணக்குப் பெயர்</string>
-    <string name="listeners_gps">GPS</string>
     <string name="listeners_cell">பிணையம்</string>
     <string name="listeners_title">இருப்பிடம் வழங்குநர்கள்</string>
     <string name="autosend_frequency_hint">நிமிடங்களின் எண்ணிக்கை</string>
     <string name="donate_app">தானம் (செயலி)</string>
-    <string name="donate_bitcoin">Bitcoin</string>
     <string name="tip_coffee">எனக்கு ஒரு குழம்பி வாங்கிதா</string>
     <string name="no_network_message">எந்தப் பிணையமும் கிடைக்கவில்லை</string>
     <string name="hide_notification_buttons">அறிவிப்பு பொத்தானை மறை</string>
@@ -219,10 +205,8 @@
     <string name="gpslogger_permissions_rationale_title">அனுமதிகள் தேவை</string>
     <string name="privacy_policy">தனியுரிமை கொள்கை</string>
     <string name="change_language_title">மொழியை மாற்று (Change language)</string>
-    <string name="change_language_summary">Not all languages are fully translated! You must restart the app for the settings to take effect.</string>
     <string name="ssl_certificate_is_valid">இந்தச் சான்றிதழ் செயல்படும்</string>
     <string name="hide_notification_from_status_bar">நிலைப்பட்டியிலிருந்து அறிவிப்பை மறை</string>
-    <string name="sftp_setup_title">SFTP</string>
     <string name="sftp_private_key_path">தனிப்பட்ட விசை</string>
     <string name="sftp_validate_accept_host_key">இந்த ஹோஸ்ட் விசையை ஏற்றுக்கொள்ளவா?</string>
     <string name="txt_timestamp_epoch">நேரமுத்திரை (epoch)</string>
