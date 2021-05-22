@@ -3,7 +3,6 @@
     <string name="title_drawer_uploadsettings">Definições de envios</string>
     <string name="navigation_drawer_open">Abrir menu de navegação</string>
     <string name="navigation_drawer_close">Fechar menu de navegação</string>
-    <string name="app_name">GPSLogger</string>
     <string name="settings_screen_name">Configurações do GPSLogger</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancelar</string>
@@ -14,9 +13,6 @@
     <string name="menu_share">Partilhar</string>
     <string name="menu_exit">Sair</string>
     <!-- main form labels -->
-    <string name="txt_latitude">Latitude:</string>
-    <string name="txt_longitude">Longitude:</string>
-    <string name="txt_altitude">Altitude:</string>
     <string name="txt_speed">Velocidade:</string>
     <string name="txt_direction">Direção:</string>
     <string name="txt_satellites">Satélites:</string>
@@ -41,20 +37,13 @@
     <string name="meters">&#160;metros</string>
     <string name="error">Erro</string>
     <string name="error_connection">Erro de conexão. Por favor, verifique as configurações do telemóvel.</string>
-    <string name="seconds">&#160;s</string>
-    <string name="minutes">&#160;min</string>
-    <string name="hours">&#160;hrs</string>
     <string name="gpsprovider_unavailable">Sem acesso à localização. Por favor verifique as configurações de localização e ative o acesso à localização.</string>
     <string name="started">Iniciado</string>
     <string name="providername_gps">Satélites GPS</string>
     <string name="providername_celltower">torres de telemóveis</string>
-    <string name="not_applicable">n/a</string>
-    <string name="meters_per_second">&#160;m/s</string>
     <string name="feet_per_second">pés/s</string>
     <string name="miles_per_hour">mi/h</string>
     <string name="miles">mi</string>
-    <string name="kilometers_per_hour">&#160;km/h</string>
-    <string name="kilometers">&#160;km</string>
     <string name="unknown_direction">desconhecido(a)</string>
     <string name="sorry">Desculpe</string>
     <string name="success">Sucesso</string>
@@ -83,7 +72,6 @@
     <string name="time_halfhour">½ hora</string>
     <string name="time_oneandhalfhours">1½ horas</string>
     <string name="time_twoandhalfhours">duas horas e meia</string>
-    <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
     <string name="accuracy_within" formatted="false">dentro de %s %s</string>
     <!-- Settings activity -->
     <string name="settings_distance_in_meters">Distância em metros</string>
@@ -129,7 +117,6 @@ Nomes de ficheiro muito dinâmicos
     <string name="startonbootup_summary">Lançar a aplicação e iniciar o registo quando inicia o telemóvel</string>
     <string name="startonapplaunch_title">Arrancar ao iniciar a aplicação</string>
     <string name="startonapplaunch_summary">Iniciar o registo quando a aplicação for lançada</string>
-    <string name="autoemail_title">Email</string>
     <string name="please_wait">Por favor, aguarde</string>
     <string name="autoemail_target">Endereços de e-mail de destino</string>
     <string name="autosend_frequency_display">Depois de %s minutos</string>
@@ -149,7 +136,6 @@ Nomes de ficheiro muito dinâmicos
     <string name="started_waiting">GPS iniciado, a aguardar posição</string>
     <string name="gps_stopped">GPS em pausa</string>
     <string name="stopped">Parado</string>
-    <string name="osm_setup_title">OpenStreetMap</string>
     <string name="osm_lbl_authorize">Autorizar esta aplicação</string>
     <string name="osm_resetauth">Limpar autorização</string>
     <string name="osm_lbl_authorize_description">É necessário conceder a esta aplicação permissões para carregar trilhos GPS para o OpenStreetMap. Pode definir aqui etiquetas, descrições e visibilidade depois de autorizar esta aplicação.    </string>
@@ -172,12 +158,9 @@ Nomes de ficheiro muito dinâmicos
     <string name="emailprovider_google">Email do Google</string>
     <string name="emailprovider_yahoo">Email do Yahoo</string>
     <string name="emailprovider_msn">Email do Windows Live</string>
-    <string name="emailprovider_manual">Manual</string>
-    <string name="dropbox_setup_title">Dropbox</string>
     <string name="dropbox_authorize_description">Para usar as funcionalidades do Dropbox tem de autorizar o envio de ficheiros do GPSLogger na sua conta.    </string>
     <string name="dropbox_unauthorize_description">Está autorizado no Dropbox. Os ficheiros serão enviados para \'Apps\\GPSLogger for Android\' Pode desativar a autorização do GPSLogger no Dropbox se quiser.    </string>
     <string name="dropbox_couldnotauthorize">Não autorizado no Dropbox. Tente novamente mais tarde</string>
-    <string name="owncloud_setup_title">ownCloud</string>
     <string name="owncloud_server_summary">URL Base do ownCloud</string>
     <string name="owncloud_directory_summary">Pasta a usar no servidor ownCloud. Certifique-se que existe ou o envio falhará.</string>
     <string name="owncloud_test_summary">Enviar um ficheiro de teste para o servidor do ownCloud</string>
@@ -186,7 +169,6 @@ Nomes de ficheiro muito dinâmicos
     <string name="autoemail_from">Endereço \"de\"</string>
     <string name="autoemail_from_summary">Alguns fornecedores de e-mail exigem um endereço. Use isto apenas se precisar.     </string>
     <string name="gdocs_clearauthorization_summary">Esquecer configurações locais do Google Drive. Para revogar o acesso permanentemente, utilize as configurações da conta Google</string>
-    <string name="gdocs_setup_title">Google Drive</string>
     <string name="gdocs_test_summary">Enviar um ficheiro de teste para o Google Drive</string>
     <string name="gdocs_test_title">Testar envio</string>
     <string name="gdocs_testupload_success">Enviado. Verifique se tem um novo ficheiro no Google Documents.</string>
@@ -208,7 +190,6 @@ Nomes de ficheiro muito dinâmicos
     <string name="shortcut_pickaction">Escolher uma ação</string>
     <string name="log_opengts_title">Registar para o servidor OpenGTS</string>
     <string name="log_opengts_summary">Enviar dados GPRMC para o servidor OpenGTS ativo.</string>
-    <string name="opengts_setup_title">OpenGTS</string>
     <string name="autoopengts_server_category">Configurações do OpenGTS</string>
     <string name="autoopengts_server">Servidor</string>
     <string name="autoopengts_server_summary">Nome do host ou IP</string>
@@ -223,17 +204,13 @@ Nomes de ficheiro muito dinâmicos
     <string name="autoftp_port">Porta</string>
     <string name="autoftp_useftps">Usar FTPS</string>
     <string name="autoftp_useftps_summary">Ativar FTP sobre SSL. SSL/TLS e implícita são ignoradas se esta opção estiver desativada.</string>
-    <string name="autoftp_ssltls">SSL/TLS</string>
     <string name="autoftp_ssltls_summary">Nada, SSL ou TLS. Use nada para ligações normais sem segurança.</string>
     <string name="autoftp_ssltls_none">Nenhum</string>
-    <string name="autoftp_ssltls_ssl">SSL</string>
-    <string name="autoftp_ssltls_tls">TLS</string>
     <string name="autoftp_implicit">FTP sobre SSL implícito</string>
     <string name="autoftp_test_summary">Enviar ficheiro de teste para o servidor FTP</string>
     <string name="autoftp_testing">A testar envio por FTP</string>
     <string name="autoftp_invalid_settings">Configurações inválidas</string>
     <string name="autoftp_invalid_summary">Algumas das configurações são inválidas. Certifique-se que preencheu todos os campos relevantes.    </string>
-    <string name="autoftp_setup_title">FTP</string>
     <string name="menu_faq">Ajuda e FAQ</string>
     <string name="gpsf_missing">Serviço em falta</string>
     <string name="gpsf_missing_description">Precisará do Google Play Services Framework para usar esta capacidade.</string>
@@ -267,12 +244,9 @@ Nomes de ficheiro muito dinâmicos
     <string name="pref_filedetails_title">Detalhes de ficheiros e pastas</string>
     <string name="absolute_timeout_title">Tempo absoluto para fixar a posição GPS</string>
     <string name="absolute_timeout_summary">Número de segundos após o qual a aplicação deixa de tentar adquirir uma posição, independentemente de outras configurações. Isto é especialmente útil para quando estiver no interior de edifícios para evitar descarregar a bateria com o GPS. Use o valor 0 para nenhum tempo limite.</string>
-    <string name="txt_latitude_short">Lat</string>
-    <string name="txt_longitude_short">Lon</string>
     <string name="log_nmea_title">Registar em NMEA</string>
     <string name="log_nmea_summary">Cria um ficheiro base NMEA ao tentar obter uma posição. Este ficheiro cresce muito rapidamente de tamanho. Só funciona enquanto o GPS está a ser utilizado.</string>
     <string name="autoopengts_accountname">Nome da conta</string>
-    <string name="listeners_gps">GPS</string>
     <string name="listeners_gps_title">Registar localizações GPS/GNSS</string>
     <string name="listeners_gps_summary">Regista localizações fornecidas pelo receptor no seu dispositivo de localização baseada em satélites</string>
     <string name="listeners_cell">Rede</string>
@@ -291,7 +265,6 @@ Nomes de ficheiro muito dinâmicos
     <string name="new_file_custom_keep_changing_title">Permitir a alteração dinâmica do nome do ficheiro</string>
     <string name="new_file_custom_keep_changing_summary">A alteração de configurações de nomes de ficheiros, muda o nome do ficheiro. Por exemplo, se usar %HOUR, o novo ficheiro será criado a cada hora. Desmarque para manter estático.</string>
     <string name="donate_app">Donativo (app)</string>
-    <string name="donate_bitcoin">Bitcoin</string>
     <string name="tip_coffee">Compre-me um café</string>
     <string name="no_network_message">Não existe rede disponível</string>
     <string name="hide_notification_buttons">Ocultar botões de notificação</string>
@@ -338,7 +311,6 @@ Nomes de ficheiro muito dinâmicos
     <string name="ssl_certificate_add_to_keystore">Adicionar este certificado ao armazenamento local de chaves?</string>
     <string name="ssl_certificate_is_valid">O certificado é válido</string>
     <string name="hide_notification_from_status_bar">Esconder notificação da barra de estado</string>
-    <string name="sftp_setup_title">SFTP</string>
     <string name="sftp_private_key_path">Chave privada</string>
     <string name="sftp_private_key_passphrase">Passphrase da chave privada</string>
     <string name="sftp_validate_test_upload">Validar chave de host e testar envio</string>

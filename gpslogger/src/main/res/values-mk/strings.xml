@@ -14,17 +14,9 @@
     <string name="minutes">&#160;мин</string>
     <string name="hours">часа</string>
     <string name="providername_gps">GPS сателити</string>
-    <string name="not_applicable">n/a</string>
-    <string name="meters_per_second">&#160;m/s</string>
-    <string name="feet_per_second">&#160;ft/s</string>
-    <string name="miles_per_hour">&#160;mi/h</string>
-    <string name="miles">&#160;mi</string>
-    <string name="kilometers_per_hour">&#160;km/h</string>
-    <string name="kilometers">&#160;km</string>
     <!-- Settings activity -->
     <!-- Settings -->
     <string name="change_language_title">Промени јазик</string>
     <string name="change_language_summary">Не се сите јазици целосно преведени! Мора да ја рестатирате апликацијата за да има ефект промената на јазикот.</string>
     <string name="hide_notification_from_status_bar">Сокриј ги известувањата од статусната лента</string>
-    <string name="sftp_setup_title">SFTP</string>
 </resources>
