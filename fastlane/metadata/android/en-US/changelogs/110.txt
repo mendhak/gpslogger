@@ -3,4 +3,5 @@
 * The permission workflow can be a bit annoying, sorry
 * A notification will now appear when the app launches
 * Adaptive icons, thanks to @kanru
+* Added an option to reset the app (deletes all files and permissions for the app), in General settings
 * Updated translations

@@ -54,7 +54,6 @@
         android:key="debuglogtoemail"
         android:enabled="true"/>
 
-
     <com.afollestad.materialdialogs.prefs.MaterialListPreference
         android:key="changelanguage"
         android:title="@string/change_language_title"
@@ -62,7 +61,12 @@
         android:icon="@drawable/translate"
         />
 
-
+    <Preference
+        android:title="@string/reset_app_title"
+        android:summary="@string/reset_app_summary"
+        android:icon="@android:drawable/ic_delete"
+        android:key="resetapp"
+        android:enabled="true"/>
 
     <Preference android:key="about_version_info"></Preference>
 

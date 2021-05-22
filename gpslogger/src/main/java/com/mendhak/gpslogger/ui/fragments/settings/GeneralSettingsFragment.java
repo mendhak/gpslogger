@@ -19,6 +19,8 @@
 
 package com.mendhak.gpslogger.ui.fragments.settings;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -33,9 +35,9 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
-import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
+import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 
 import org.slf4j.Logger;
@@ -69,7 +71,12 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         findPreference("enableDisableGps").setOnPreferenceClickListener(this);
         findPreference("debuglogtoemail").setOnPreferenceClickListener(this);
 
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            findPreference("resetapp").setOnPreferenceClickListener(this);
+        }
+        else {
+            findPreference("resetapp").setEnabled(false);
+        }
 
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -123,6 +130,17 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         if (preference.getKey().equals("enableDisableGps")) {
             startActivity(new Intent("android.settings.LOCATION_SOURCE_SETTINGS"));
             return true;
+        }
+
+        if (preference.getKey().equals("resetapp")) {
+            Dialogs.alert(getString(R.string.reset_app_title), getString(R.string.reset_app_summary), getActivity(), true, new Dialogs.MessageBoxCallback() {
+                @Override
+                public void messageBoxResult(int which) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && which == Dialogs.AutoCompleteCallback.OK){
+                            ((ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE)).clearApplicationUserData();
+                    }
+                }
+            });
         }
 
         if(preference.getKey().equals("debuglogtoemail")){
