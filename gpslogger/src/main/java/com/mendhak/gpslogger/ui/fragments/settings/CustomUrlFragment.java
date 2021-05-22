@@ -94,8 +94,8 @@ public class CustomUrlFragment extends PreferenceFragment implements
             String legend1 = MessageFormat.format("{0} %LAT<br />{1} %LON<br />{2} %DESC<br />{3} %SAT<br />{4} %ALT<br />" +
                             "{5} %SPD<br />{6} %ACC<br />{7} %DIR<br />{8} %PROV<br />{9} %TIMESTAMP<br />" +
                             "{10} %TIME<br />{11} %DATE<br />{12} %STARTTIMESTAMP<br />{13} %BATT<br />{14} %AID<br />{15} %SER<br />" +
-                            "{16} %ACT<br />{17} %FILENAME<br />{18} %PROFILE<br />" +
-                            "{19} %HDOP<br />{20} %VDOP<br />{21} %PDOP<br />{22} %DIST",
+                            "{16} %FILENAME<br />{17} %PROFILE<br />" +
+                            "{18} %HDOP<br />{19} %VDOP<br />{20} %PDOP<br />{21} %DIST",
                     getString(R.string.txt_latitude), getString(R.string.txt_longitude), getString(R.string.txt_annotation),
                     getString(R.string.txt_satellites), getString(R.string.txt_altitude), getString(R.string.txt_speed),
                     getString(R.string.txt_accuracy), getString(R.string.txt_direction), getString(R.string.txt_provider),
@@ -103,7 +103,7 @@ public class CustomUrlFragment extends PreferenceFragment implements
                     getString(R.string.txt_time_isoformat),
                     getString(R.string.txt_date_isoformat),
                     getString(R.string.txt_starttimestamp_epoch),
-                    getString(R.string.txt_battery), "Android ID ", "Serial ", getString(R.string.txt_activity), getString(R.string.summary_current_filename), "Profile:", "HDOP:", "VDOP:", "PDOP:", getString(R.string.txt_travel_distance));
+                    getString(R.string.txt_battery), "Android ID ", "Serial ", getString(R.string.summary_current_filename), "Profile:", "HDOP:", "VDOP:", "PDOP:", getString(R.string.txt_travel_distance));
             Dialogs.alert(getString(R.string.parameters), legend1, getActivity());
 
         }

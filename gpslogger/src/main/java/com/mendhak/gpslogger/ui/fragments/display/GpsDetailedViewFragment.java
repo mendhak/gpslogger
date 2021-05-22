@@ -266,8 +266,6 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         TextView txtTravelled = (TextView) rootView.findViewById(R.id.detailedview_travelled_text);
         TextView txtTime = (TextView) rootView.findViewById(R.id.detailedview_duration_text);
 
-        TextView txtStill = (TextView) rootView.findViewById(R.id.detailedview_activity_text);
-
         tvLatitude.setText("");
         tvLongitude.setText("");
         tvDateTime.setText("");
@@ -278,8 +276,6 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         txtDirection.setText("");
         txtTravelled.setText("");
         txtTime.setText("");
-        txtStill.setText("");
-
 
     }
 
