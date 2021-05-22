@@ -386,7 +386,6 @@
     <string name="listeners_title">Location providers</string>
     <string name="autosend_frequency_hint">Number of minutes</string>
     <string name="pref_logging_file_no_permissions">That folder is not writable by GPSLogger. Please select another folder to write to.</string>
-    <string name="pref_gpsvisualizer">Visualize GPS log stats and graphs</string>
     <string name="new_file_custom_each_time_title">Ask for a file name on every start</string>
     <string name="new_file_custom_each_time_summary">Prompt for a custom file name each time the logging is started</string>
     <string name="new_file_custom_keep_changing_title">Allow custom file name to change dynamically</string>

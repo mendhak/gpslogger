@@ -67,7 +67,6 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         addPreferencesFromResource(R.xml.pref_general);
 
         findPreference("enableDisableGps").setOnPreferenceClickListener(this);
-        findPreference("gpsvisualizer_link").setOnPreferenceClickListener(this);
         findPreference("debuglogtoemail").setOnPreferenceClickListener(this);
 
 
@@ -152,13 +151,6 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
                 Toast.makeText(getActivity(), "debuglog.txt not found", Toast.LENGTH_LONG).show();
             }
 
-        }
-
-        if(preference.getKey().equalsIgnoreCase("gpsvisualizer_link")){
-            Intent intent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("market://details?id=com.mendhak.gpsvisualizer"));
-            startActivity(intent);
-            return true;
         }
 
         return false;
