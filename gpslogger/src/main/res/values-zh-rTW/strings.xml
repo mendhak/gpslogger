@@ -3,7 +3,6 @@
     <string name="title_drawer_uploadsettings">上傳設定</string>
     <string name="navigation_drawer_open">開啟導覽選單</string>
     <string name="navigation_drawer_close">關閉導覽選單</string>
-    <string name="app_name">GPSLogger</string>
     <string name="settings_screen_name">GPSLogger 設定</string>
     <string name="ok">確定</string>
     <string name="cancel">取消</string>
@@ -47,7 +46,6 @@
     <string name="gpsprovider_unavailable">沒有可用的 GPS 來源，請檢查您的位置設定並啟用定位功能。
     </string>
     <string name="started">已開始</string>
-    <string name="providername_gps"></string>
     <string name="providername_celltower">基站</string>
     <string name="not_applicable">無</string>
     <string name="meters_per_second">&#160;米/秒</string>
@@ -261,7 +259,6 @@
     <string name="log_nmea_title">記錄到 NMEA 檔案</string>
     <string name="log_nmea_summary">嘗試定位時建立 NMEA 源檔。這個檔案的大小長得很快！只對 GPS 有效。</string>
     <string name="autoopengts_accountname">帳戶名稱</string>
-    <string name="listeners_gps">GPS</string>
     <string name="listeners_gps_title">記錄 GPS/GNSS 所提供的位置</string>
     <string name="listeners_gps_summary">記錄裝置上基於衛星的位置接收器提供的位置</string>
     <string name="listeners_cell">網路</string>
@@ -337,9 +334,6 @@
     <string name="txt_timestamp_epoch">時間戳記 (epoch)</string>
     <string name="txt_starttimestamp_epoch">開始時間戳 (epoch)</string>
     <string name="txt_battery">電池</string>
-    <string name="customurl_http_body">HTTP Body</string>
-    <string name="customurl_http_headers">HTTP Headers</string>
-    <string name="customurl_http_method">HTTP Method</string>
     <string name="customurl_http_basicauthentication">基本認證</string>
     <string name="hide_notification_from_status_bar_disallowed">Android 8 Oreo 之後不允許將狀態列的通知隱藏</string>
 </resources>
