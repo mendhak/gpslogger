@@ -106,8 +106,6 @@
     <string name="pref_performance_title">ประสิทธิภาพ</string>
     <string name="pref_performance_summary">เวลา กรอง และผู้ฟัง</string>
     <string name="time_before_logging_title">ช่วงเวลาการบันทึก</string>
-    <string name="time_before_logging_summary">ใช้ 0 สำหรับความ ถี่สูงสุด แต่ช้ากว่าการใช้งานแบตเตอรี่เพื่อประหยัดพลังงาน
-    </string>
     <string name="time_before_logging_dialog_title">เวลาเป็นวินาที</string>
     <string name="time_before_logging_hint">ใส่ค่าเป็นวินาที (สูงสุด 9999)</string>
     <string name="keep_fix_summary">ระวัง เปิดค่านี้ทำให้แบตเตอรรี่หมดเร็วขึ้นกว่าเดิมมาก ใช้เฉพาะเมื่อต้องการความแม่นยำสูง แต่ระยะห่างระหว่างบันทึกต่ำ</string>
@@ -176,7 +174,6 @@
     <string name="autoftp_testing">กำลังทดสอบอัพโหลดผ่าน FTP</string>
     <string name="autoftp_invalid_settings">การตั้งค่าไม่ถูกต้อง</string>
     <string name="menu_faq">วิธีใช้และ FAQ</string>
-    <string name="gpsf_missing_description">คุณต้องการ Google Play Services Framework เพื่อใช้ความสามารถนี้</string>
     <string name="txt_travel_duration">ระยะเวลา:</string>
     <string name="view_simple">แสดงผลอย่างง่าย</string>
     <string name="view_detailed">แสดงผลละเอียด</string>
