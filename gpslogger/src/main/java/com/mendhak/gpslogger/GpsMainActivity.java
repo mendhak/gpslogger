@@ -99,6 +99,10 @@ public class GpsMainActivity extends AppCompatActivity
     AccountHeader drawerHeader;
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     private Session session = Session.getInstance();
+
+    // Flag to prevent the service from starting in case we're going through a permission workflow
+    // This is required because the service needs to start and show a notification, but the
+    // permission workflow causes the service to stop and start multiple times.
     private boolean permissionWorkflowInProgress;
 
     @Override
@@ -144,6 +148,7 @@ public class GpsMainActivity extends AppCompatActivity
                             LOG.debug("Background location permission was not granted");
                             Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
                                     getString(R.string.gpslogger_permissions_permanently_denied), this);
+                            permissionWorkflowInProgress=false;
                         }
                     });
 
@@ -155,6 +160,7 @@ public class GpsMainActivity extends AppCompatActivity
                             LOG.debug("At least one of the permissions was not granted");
                             Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
                                     getString(R.string.gpslogger_permissions_permanently_denied), this);
+                            permissionWorkflowInProgress=false;
                         } else {
                             LOG.debug("Basic permissions granted. Now ask for background location permissions.");
                             askUserForBackgroundPermissions();
@@ -234,7 +240,7 @@ public class GpsMainActivity extends AppCompatActivity
                     batteryOptimizationLauncher.launch(intent);
                 }
                 else {
-                    // On older Android versions, a device will report that it is already ignoring battery optimizations. It's wrong.
+                    // On older Android versions, a device might report that it is already ignoring battery optimizations. It's lying.
                     // https://stackoverflow.com/questions/50231908/powermanager-isignoringbatteryoptimizations-always-returns-true-even-if-is-remov
                     // https://issuetracker.google.com/issues/37067894?pli=1
                     LOG.debug("App is already ignoring battery optimization. On some earlier versions of Android this is incorrectly reported, it can only be corrected manually.");
@@ -1246,7 +1252,7 @@ public class GpsMainActivity extends AppCompatActivity
      */
     private void startAndBindService() {
         if(permissionWorkflowInProgress){
-            LOG.debug("Don't start service while permissions haven't been granted yet");
+            LOG.debug("Don't start service while permissions haven't been granted yet.");
             return;
         }
         serviceIntent = new Intent(this, GpsLoggingService.class);
