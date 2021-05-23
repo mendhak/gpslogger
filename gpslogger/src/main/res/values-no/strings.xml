@@ -182,8 +182,6 @@
     <string name="autoftp_invalid_settings">Ugyldige innstillinger</string>
     <string name="autoftp_invalid_summary">Innstillingene er ugyldige. Kontroller at du har fylt ut alle relevante felt.</string>
     <string name="menu_faq">Hjelp og FAQ</string>
-    <string name="gpsf_missing">Service mangler</string>
-    <string name="gpsf_missing_description">Du må ha Google Play Services Framework for å bruke denne funksjonen.</string>
     <string name="log_customurl_title">Logg til egendefinerte nettadresser</string>
     <string name="log_customurl_summary">Sende logg informasjon til din egen server over HTTP</string>
     <string name="txt_annotation">Merknad:</string>
@@ -214,7 +212,6 @@
     <string name="listeners_cell">Nettverk</string>
     <string name="listeners_passive">Passiv</string>
     <string name="autosend_frequency_hint">Antall minutter</string>
-    <string name="pref_gpsvisualizer">Visualiser GPS Logg statistikk og diagrammer</string>
     <string name="new_file_custom_each_time_title">Be om et filnavn ved hver oppstart</string>
     <string name="new_file_custom_each_time_summary">Be om et egendefinert filnavn hver gang logging startes</string>
     <string name="donate_app">Donere (app)</string>
@@ -222,15 +219,6 @@
     <string name="no_network_message">Ingen nettverk tilgjengelig</string>
     <string name="hide_notification_buttons">Skjul notifikasjonsknapp</string>
     <string name="restart_required">Du må starte GPSLogger på nytt for at denne innstillingen skal tre i kraft</string>
-    <string name="pref_performance_activityrecognition">Aktivitetsgjenkjennelse</string>
-    <string name="activityrecognition_dont_log_if_still">Ikke logg om jeg ikke beveger meg</string>
-    <string name="txt_activity">Aktivitet:</string>
-    <string name="activity_in_vehicle">I kjøretøy</string>
-    <string name="activity_on_bicycle">På sykkel</string>
-    <string name="activity_on_foot">Til fots</string>
-    <string name="activity_running">Løper</string>
-    <string name="activity_tilting">Vinkling</string>
-    <string name="activity_unknown">Ukjent</string>
     <string name="altitude_subtractgeoidheight_title">Bruk MSL i stedet for WGS84</string>
     <string name="upload_failure">Kunne ikke laste opp filen</string>
     <string name="inaccurate_point_discarded">Unøyaktig punkt forkastet</string>
