@@ -268,6 +268,8 @@
     <string name="profile_default">Profil default</string>
     <string name="profile_add_new">Menambahkan profil</string>
     <string name="gpslogger_permissions_rationale_title">Izin diperlukan</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Lokasi Perangkat</b> - perijinin ini mengijinkan membaca lokasi data dari menara selular dan hardware GPS pada perangkat.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b> Foto, media, file.</b> - perijinan ini mengijinkan membaca catatan file dan mengecek file ke penyimpanan, dan membaca dari daftar file untuk diunggah atau dibagi. aplikasi ini tidak akan mengakses foto atau media Anda.]]></string>
     <string name="privacy_policy">Kebijakan Privasi</string>
     <string name="debuglog_attach_to_email">Melampirkan catatan debug ke email</string>
     <string name="debuglog_attach_to_email_summary">Melampirkan catatan debug ke email dengan beberapa informasi diagnostik</string>
