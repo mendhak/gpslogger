@@ -268,6 +268,8 @@
     <string name="profile_default">Standaardprofiel</string>
     <string name="profile_add_new">Profiel toevoegen</string>
     <string name="gpslogger_permissions_rationale_title">Machtigingen vereist</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Apparaat locatie</b> - Deze machtiging laat toe locatiegegevens te lezen van gsm-masten en van de GPS hardware van het apparaat.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Foto\'s, media, bestanden</b> - Deze machtiging laat toe logbestanden en testbestanden in de opslagruimte te bewaren en een lijst van bestanden te lezen om te uploaden of te delen. Deze app zal uw foto\'s of media niet benaderen.]]></string>
     <string name="privacy_policy">Privacybeleid</string>
     <string name="debuglog_attach_to_email">Voeg debug-log toe aan e-mail</string>
     <string name="debuglog_attach_to_email_summary">Voegt debug-log toe aan e-mail, samen met wat diagnostische informatie</string>
