@@ -295,6 +295,9 @@
     <string name="profile_default">Профіль за замовчуванням</string>
     <string name="profile_add_new">Додати профіль</string>
     <string name="gpslogger_permissions_rationale_title">Потрібні дозволи</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Місцезнаходження</b> - Цей дозвіл дозволяє читати дані про місцезнаходження з антен мобільного зв\'язку та пристрою GPS.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Фото, мультимедія, файли</b> - Цей дозвіл дозволяє писати журнали й тестові файли для зберігання і читання зі списку файлів для завантаження або спільного використання. Це додаток не буде отримувати доступ до фото або медіа даних.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Ви не дали один або кілька дозволів, які вимагає дана програма. Щоб надати ці дозволи, потрібно перейти на екран налаштувань програми. <br /><br />Якщо у вас увімкнене постійне блокування дозволів ви можете скинути їх у системних налаштуваннях. ]]></string>
     <string name="privacy_policy">Політика конфіденційності</string>
     <string name="debuglog_attach_to_email">Прикріпляти журнал відлагодження до email</string>
     <string name="debuglog_attach_to_email_summary">Прикріпляє до e-mail журнал відлагодження разом з деякою діагностичною інформацією</string>
