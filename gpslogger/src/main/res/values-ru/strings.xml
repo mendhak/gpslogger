@@ -299,6 +299,9 @@
     <string name="profile_default">Профиль по умолчанию</string>
     <string name="profile_add_new">Добавить профиль</string>
     <string name="gpslogger_permissions_rationale_title">Необходимые разрешения</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Местоположение</b> - это разрешение позволяет считывать данные о местоположении по вышкам сети и данным GPS.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Фото, медиа, файлы</b> - это разрешение позволяет писать файлы лога и файлы тестов для хранения, чтения, загрузки или обмена. Этот приложение не имеет доступ к вашим фото или медиа.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Вы не предоставили одно или несколько разрешений, необходимых для этого приложения. Вам нужно перейти на экран настроек приложения, чтобы предоставить эти разрешения. <br /> <br /> Если у вас навсегда отказано в разрешениях, вы можете сбросить их в настройках системы.]]></string>
     <string name="privacy_policy">Политика конфиденциальности</string>
     <string name="debuglog_attach_to_email">Послать лог отладки по электронной почте</string>
     <string name="debuglog_attach_to_email_summary">Послать лог отладки по электронной почте, а также некоторых диагностические сведения</string>
