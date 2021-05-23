@@ -281,6 +281,9 @@ Nomes de ficheiro muito dinâmicos
     <string name="profile_default">Perfil padrão</string>
     <string name="profile_add_new">Adicionar perfil</string>
     <string name="gpslogger_permissions_rationale_title">Permissões necessárias</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Localização</b> - Esta permissão autoriza a leitura dos dados de localização da rede móvel e do equipamento GPS.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotos, media, ficheiros</b> - Esta permissão autoriza a escrita de ficheiros de registos e testes para o armazenamento, e a leitura de uma lista de ficheiros para carregamento ou partilha. Esta aplicação não acede aos seus ficheiros de fotos ou media.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Negou uma ou mais permissões que esta aplicação precisa. Terá de ir ao ecrã de definições de aplicações do Android para fornecer estas permissões.<br /><br />Se negou as permissões de forma permanente (opção não perguntar de novo), pode repo-las nas definições do sistema.]]></string>
     <string name="privacy_policy">Política de privacidade</string>
     <string name="debuglog_attach_to_email">Anexar o registo de depuração de erros ao e-mail</string>
     <string name="debuglog_attach_to_email_summary">Anexa o log de correcção de erros ao e-mail em conjunto com alguma informação de diagnóstico</string>
