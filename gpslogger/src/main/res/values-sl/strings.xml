@@ -81,8 +81,6 @@
  lahko ne dela tudi z avtomatskim  pošiljajem funkcije, ker samo pošilja zadnje datoteke.</string>
     <string name="pref_performance_title">Uspešno delovanje</string>
     <string name="pref_performance_summary">Časi, filtri in poslušalci</string>
-    <string name="time_before_logging_summary">Uporaba 0 za največjo frekvenco, vendar počasnejše je bolje za baterijo.
-    </string>
     <string name="time_before_logging_dialog_title">Čas v sekundah</string>
     <string name="time_before_logging_hint">Vnesite sekunde (max 9999)</string>
     <string name="keep_fix_title">GPS naprej med popravki</string>
@@ -152,7 +150,6 @@
     <string name="autoftp_ssltls_none">Nobena</string>
     <string name="autoftp_invalid_settings">Neveljavne nastavitve</string>
     <string name="menu_faq">Pomoč in pogosta vprašanja</string>
-    <string name="gpsf_missing">Manjka storitev</string>
     <string name="log_customurl_title">Prijavite URL po meri</string>
     <string name="autoftp_directory">Mapa</string>
     <string name="view_simple">Preprost pogled</string>
@@ -165,6 +162,5 @@
     <string name="autoopengts_accountname">Ime računa</string>
     <string name="listeners_cell">Omrežje</string>
     <string name="listeners_passive">Pasivni</string>
-    <string name="activity_on_foot">Peš</string>
     <string name="txt_battery">Baterija</string>
 </resources>
