@@ -288,6 +288,9 @@
     <string name="profile_default">기본 프로파일</string>
     <string name="profile_add_new">프로파일 추가</string>
     <string name="gpslogger_permissions_rationale_title">권한이 필요합니다</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>기기 위치 정보</b> - 이 권한은 기지국과 GPS 장치에서 위치 정보를 받아 올 수 있게 허용합니다.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>사진, 미디어, 파일</b> - 이 권한은 기록 파일과 테스트 파일의 저장을 허용하고, 업로드 및 공유를 위한 파일의 목록을 불러옵니다. 이 애플리케이션은 사용자의 사진이나 미디어에 접근하지 않습니다.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[하나 이상의 권한이 거절되었습니다. 거절된 권한을 승인하기 위해서는 권한 설정창으로 진행해야 합니다. <br /><br />권한이 영구적으로 거절되었다면, 시스템 설정에서 초기화할 수 있습니다.]]></string>
     <string name="privacy_policy">개인 정보 보호 정책</string>
     <string name="debuglog_attach_to_email">이메일에 디버그 로그 첨부</string>
     <string name="debuglog_attach_to_email_summary">진단 정보를 포함하여 이메일에 디버그 로그 첨부</string>
