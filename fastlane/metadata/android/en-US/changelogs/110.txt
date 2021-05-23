@@ -1,7 +1,6 @@
 * On Android 10+, the permission workflow will now ask for "allow all the time" permission
 * The permission workflow will also request disabling battery optimization
-* The permission workflow is annoying, sorry, it's necessary to help with numerous support requests about the same issue.
-* A notification will now appear when the app launches
+* The permission workflow is annoying, sorry, it's necessary to help with numerous support requests to allow logging in the background.
 * Adaptive icons, thanks to @kanru
 * Added an option to reset the app (deletes all files and permissions for the app), in General settings
 * Updated translations from Crowdin
