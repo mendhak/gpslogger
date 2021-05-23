@@ -145,7 +145,7 @@ public class GpsMainActivity extends AppCompatActivity
                             LOG.debug("Background permissions granted. Now request ignoring battery optimizations");
                             askUserToDisableBatteryOptimization();
                         } else {
-                            LOG.debug("Background location permission was not granted");
+                            LOG.warn("Background location permission was not granted");
                             Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
                                     getString(R.string.gpslogger_permissions_permanently_denied), this);
                             permissionWorkflowInProgress=false;
@@ -157,7 +157,7 @@ public class GpsMainActivity extends AppCompatActivity
                     grantResults -> {
                         LOG.debug("Launcher result: " + grantResults.toString());
                         if (grantResults.containsValue(false)) {
-                            LOG.debug("At least one of the permissions was not granted");
+                            LOG.warn("At least one of the permissions was not granted");
                             Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
                                     getString(R.string.gpslogger_permissions_permanently_denied), this);
                             permissionWorkflowInProgress=false;
@@ -174,7 +174,7 @@ public class GpsMainActivity extends AppCompatActivity
                 public void onActivityResult(ActivityResult result) {
                     LOG.debug(String.valueOf(result.getResultCode()));
                     if(result.getResultCode() != Activity.RESULT_OK){
-                        LOG.debug("Request to ignore battery optimization was denied.");
+                        LOG.warn("Request to ignore battery optimization was denied.");
                     }
                     else {
                         LOG.debug("Request to ignore battery optimization was granted.");
