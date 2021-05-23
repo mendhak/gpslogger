@@ -111,7 +111,6 @@
     <string name="pref_performance_title">性能</string>
     <string name="pref_performance_summary">定时器、过滤器和监听程序</string>
     <string name="time_before_logging_title">记录间隔</string>
-    <string name="time_before_logging_summary">使用 0 为最大频率，但降低速度可省电。</string>
     <string name="time_before_logging_dialog_title">以秒计的时间</string>
     <string name="time_before_logging_hint">输入秒数(最大 9999)</string>
     <string name="keep_fix_summary">注意，这将大大减少电池续航。请只以低频率使用以获得较高的精度。    </string>
@@ -223,8 +222,6 @@
     <string name="autoftp_invalid_settings">无效的设置</string>
     <string name="autoftp_invalid_summary">您的一些设置无效的。请确保您已经填写所有相关字段。</string>
     <string name="menu_faq">帮助和常见问题解答</string>
-    <string name="gpsf_missing">缺少服务</string>
-    <string name="gpsf_missing_description">您将需要 Google Play Services 以使用此功能。</string>
     <string name="log_customurl_title">记录到自定义 URL</string>
     <string name="log_customurl_summary">透过 HTTP 将日志消息发送到您自己的服务器</string>
     <string name="txt_annotation">注释︰</string>
@@ -272,7 +269,6 @@
     <string name="listeners_title">位置提供者</string>
     <string name="autosend_frequency_hint">分钟数</string>
     <string name="pref_logging_file_no_permissions">文件夹不可被 GPSLogger 写入。请另选一个文件夹。</string>
-    <string name="pref_gpsvisualizer">可视化 GPS 日志统计和图表</string>
     <string name="new_file_custom_each_time_title">每次开始时询问文件名</string>
     <string name="new_file_custom_each_time_summary">每次开始记录时询问自定义文件名</string>
     <string name="new_file_custom_keep_changing_title">允许自定义文件名动态更改</string>
@@ -283,19 +279,6 @@
     <string name="no_network_message">无可用网络</string>
     <string name="hide_notification_buttons">隐藏通知按钮</string>
     <string name="restart_required">需要重新启动 GPSLogger 后，此设置才会生效</string>
-    <string name="pref_performance_activityrecognition">活动识别</string>
-    <string name="activityrecognition_dont_log_if_still">如果我不在移动，不要记录</string>
-    <string name="activityrecognition_dont_log_if_still_summary">如果自最后一点以来没有加速度计运动, 则活动日志记录将暂停您的日志记录, 即使您在该时间之前开始移动也是如此。被动点仍可能被记录。</string>
-    <string name="txt_activity">活动︰</string>
-    <string name="activity_in_vehicle">坐车</string>
-    <string name="activity_confidence">确定性</string>
-    <string name="activity_still">静止</string>
-    <string name="activity_on_bicycle">骑自行车</string>
-    <string name="activity_on_foot">步行</string>
-    <string name="activity_running">跑步</string>
-    <string name="activity_tilting">倾斜</string>
-    <string name="activity_walking">行走</string>
-    <string name="activity_unknown">未知</string>
     <string name="altitude_subtractgeoidheight_summary">使用平均海平面（MSL）而非 WGS84 高度——从 GPS 高度中减去大地水准（geoid）高。只适用于 GPS 卫星定点，不用于网络或 NMEA。</string>
     <string name="altitude_subtractgeoidheight_title">使用 MSL 而不是 WGS84</string>
     <string name="altitude_subtractoffset_title">减去高度偏移量</string>
@@ -312,11 +295,6 @@
     <string name="profile_default">缺省配置文件</string>
     <string name="profile_add_new">添加配置文件</string>
     <string name="gpslogger_permissions_rationale_title">需要授权</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[本应用需要不少权限以便正确工作。<br />
-<b>设备位置</b>用于获取您的 GPS 或基站位置。<br />
-<b>文件媒介</b>用于读写 SD 卡上的 GPSLogger 文件夹，以供访问、上载、分享记录文件。本应用不会读取您的照片及其他媒介。<br />
-<br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA[您拒绝授予一个或多个此应用程序所需的权限。您需要前往应用程序设置页以授予这些权限。<br /><br />若您永久拒绝了这些权限，您可在系统设置中重置。 ]]></string>
     <string name="privacy_policy">隐私权政策</string>
     <string name="debuglog_attach_to_email">将调试日志文件附加到电子邮件</string>
     <string name="debuglog_attach_to_email_summary">将调试日志文件以及一些诊断信息附加到电子邮件</string>
