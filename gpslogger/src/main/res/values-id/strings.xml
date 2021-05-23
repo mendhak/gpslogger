@@ -106,7 +106,6 @@
     <string name="pref_performance_title">Kinerja</string>
     <string name="pref_performance_summary">Pemilihan waktu, filter dan pendengar</string>
     <string name="time_before_logging_title">Catatan interval</string>
-    <string name="time_before_logging_summary">Gunakan 0 untuk frekuensi maksimal, tapi lebih lambat lebih baik untuk baterai.    </string>
     <string name="time_before_logging_dialog_title">Waktu dalam detik</string>
     <string name="time_before_logging_hint">Masukkan detik (max 9999)</string>
     <string name="keep_fix_summary">Hati-hati, ini akan secara dramatis mengurangi masa pakai baterai. Gunakan hanya untuk presisi tinggi dengan frekuensi rendah.    </string>
@@ -208,8 +207,6 @@
     <string name="autoftp_invalid_settings">Pengaturan tidak valid</string>
     <string name="autoftp_invalid_summary">Beberapa pengaturan tidak valid. Pastikan bahwa Anda telah mengisi semua bidang yang relevan.    </string>
     <string name="menu_faq">Bantuan dan FAQ</string>
-    <string name="gpsf_missing">Layanan yang hilang</string>
-    <string name="gpsf_missing_description">Anda akan membutuhkan Google Play Services Framework untuk menggunakan fitur ini.</string>
     <string name="log_customurl_title">Masuk ke kustom URL</string>
     <string name="log_customurl_summary">Mengirim info masuk ke server Anda sendiri melalui HTTP</string>
     <string name="txt_annotation">Anotasi:</string>
@@ -246,7 +243,6 @@
     <string name="listeners_title">Penyedia lokasi</string>
     <string name="autosend_frequency_hint">Jumlah menit</string>
     <string name="pref_logging_file_no_permissions">Folder itu tidak bisa ditulisi oleh GPSLogger. Pilih folder lain untuk ditulis.</string>
-    <string name="pref_gpsvisualizer">Memvisualisasikan catatan statistik dan grafik GPS</string>
     <string name="new_file_custom_each_time_title">Minta nama file setiap kali memulai</string>
     <string name="new_file_custom_each_time_summary">Prompt untuk nama file kustom setiap kali pencatatan dimulai</string>
     <string name="new_file_custom_keep_changing_title">Memungkinkan nama file kustom untuk berubah secara dinamis</string>
@@ -256,18 +252,6 @@
     <string name="no_network_message">Tidak ada jaringan yang tersedia</string>
     <string name="hide_notification_buttons">Sembunyikan tombol pemberitahuan</string>
     <string name="restart_required">Anda akan perlu me restart GPSLogger agar pengaturan ini diterapkan</string>
-    <string name="pref_performance_activityrecognition">Mengenali kegiatan</string>
-    <string name="activityrecognition_dont_log_if_still">Jangan masuk jika saya tidak bergerak</string>
-    <string name="txt_activity">Aktivitas:</string>
-    <string name="activity_in_vehicle">Di kendaraan</string>
-    <string name="activity_confidence">Percaya diri</string>
-    <string name="activity_still">Masih</string>
-    <string name="activity_on_bicycle">Di sepeda</string>
-    <string name="activity_on_foot">Berjalan kaki</string>
-    <string name="activity_running">Berlari</string>
-    <string name="activity_tilting">Memiringkan</string>
-    <string name="activity_walking">Berjalan</string>
-    <string name="activity_unknown">Tidak diketahui</string>
     <string name="altitude_subtractgeoidheight_summary">Menggunakan berarti permukaan laut (MSL) bukan tinggi WGS84 dengan mengurangi tinggi geo dari ketinggian GPS. Hanya berlaku untuk GPS satelit poin, bukan jaringan atau NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">Gunakan MSL bukan WGS84</string>
     <string name="altitude_subtractoffset_title">Kurangi keseimbangan ketinggian</string>
@@ -284,7 +268,6 @@
     <string name="profile_default">Profil default</string>
     <string name="profile_add_new">Menambahkan profil</string>
     <string name="gpslogger_permissions_rationale_title">Izin diperlukan</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Aplikasi ini butuh bermacam ijin agar dapat berfungsi. <br /> <b>lokasi perangkat</b> - perijinin ini mengijinkan membaca lokasi data dari menara selular dan hardware GPS pada perangkat.<br /><b> Foto, media, file.</b> - perijinan ini mengijinkan membaca catatan file dan mengecek file ke penyimpanan, dan membaca dari daftar file untuk diunggah atau dibagi. aplikasi ini tidak akan mengakses foto atau media Anda.<br /><br/>  ]]></string>
     <string name="privacy_policy">Kebijakan Privasi</string>
     <string name="debuglog_attach_to_email">Melampirkan catatan debug ke email</string>
     <string name="debuglog_attach_to_email_summary">Melampirkan catatan debug ke email dengan beberapa informasi diagnostik</string>
