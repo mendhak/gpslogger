@@ -282,6 +282,8 @@ præcision ved lavere frekvenser.    </string>
     <string name="profile_default">Standardprofil</string>
     <string name="profile_add_new">Tilføj profil</string>
     <string name="gpslogger_permissions_rationale_title">Tilladelser kræves</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Enhedsplacering</b> - Denne rettighed tillader læsning af placeringsdata fra mobilmaster og enhedens GPS-hardware.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotos, medier, filer</b> - Denne rettighed tillader skrivning af log- og testfiler til lagerpladsen samt læsning fra en liste af filer til upload eller deling. Denne app vil ikke tilgå dine fotos eller medier.]]></string>
     <string name="privacy_policy">Fortrolighedspolitik</string>
     <string name="debuglog_attach_to_email">Vedhæft fejlfindingslogfil til e-mail</string>
     <string name="debuglog_attach_to_email_summary">Vedhæft fejlfindingslogfil til en e-mail sammen med nogle diagnostiskoplysninger</string>
