@@ -100,8 +100,6 @@
     <string name="pref_performance_title">Desempenho</string>
     <string name="pref_performance_summary">Sincronizações, Filtros e Interlocutores</string>
     <string name="time_before_logging_title">Intervalo de log</string>
-    <string name="time_before_logging_summary">Use 0 para a freqüência máxima, porém mais lento é melhor para a duração da bateria.
-    </string>
     <string name="time_before_logging_dialog_title">Tempo em segundos</string>
     <string name="time_before_logging_hint">Digite segundos (máximo de 9999)</string>
     <string name="keep_fix_summary">Cuidado, que isso irá diminuir drasticamente a vida da bateria. Uso apenas para maior precisão com frequências baixas. </string>
@@ -211,8 +209,6 @@
     <string name="autoftp_invalid_settings">Configurações inválidas</string>
     <string name="autoftp_invalid_summary">Algumas de suas configurações são inválidas. Certifique-se de que preencheu todos os campos relevantes.     </string>
     <string name="menu_faq">Ajuda e FAQ</string>
-    <string name="gpsf_missing">Falta de serviço</string>
-    <string name="gpsf_missing_description">Você vai precisar Services Framework do Google Play para usar esse recurso.</string>
     <string name="log_customurl_title">Log para URL personalizado</string>
     <string name="log_customurl_summary">Enviar informações de log para seu próprio servidor via HTTP</string>
     <string name="txt_annotation">Anotação:</string>
@@ -256,7 +252,6 @@
     <string name="listeners_title">Provedores de localização</string>
     <string name="autosend_frequency_hint">Número de minutos</string>
     <string name="pref_logging_file_no_permissions">Essa pasta não permite gravação pelo GPSLogger. Por favor, escolha outra pasta para gravar.</string>
-    <string name="pref_gpsvisualizer">Visualizar gráficos e estatísticas do log GPS</string>
     <string name="new_file_custom_each_time_title">Pedir um nome de arquivo em cada início</string>
     <string name="new_file_custom_each_time_summary">Solicitar um nome de arquivo personalizado cada vez que o Log é iniciado</string>
     <string name="new_file_custom_keep_changing_title">Permitir nome de arquivo customizado para modificar dinamicamente</string>
@@ -266,19 +261,6 @@
     <string name="no_network_message">Não existe rede disponível</string>
     <string name="hide_notification_buttons">Ocultar botões de notificação</string>
     <string name="restart_required">Você precisará reiniciar o GPSLogger para que esta configuração tenha efeito</string>
-    <string name="pref_performance_activityrecognition">Reconhecimento de Atividade</string>
-    <string name="activityrecognition_dont_log_if_still">Não registre se não estou em movimento</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Se não houver movimento de acelerômetro desde o último ponto, o registro ativo pausará, mesmo se você se mover novamente. Pontos passivos ainda podem ser registrados.</string>
-    <string name="txt_activity">Atividade:</string>
-    <string name="activity_in_vehicle">No Veículo</string>
-    <string name="activity_confidence">Confiabilidade</string>
-    <string name="activity_still">Parado</string>
-    <string name="activity_on_bicycle">De bicicleta</string>
-    <string name="activity_on_foot">A pé</string>
-    <string name="activity_running">Corrida</string>
-    <string name="activity_tilting">Inclinação</string>
-    <string name="activity_walking">Caminhada</string>
-    <string name="activity_unknown">Desconhecido</string>
     <string name="altitude_subtractgeoidheight_summary">Utiliza o Nível Médio do Mar (MSL) ao invés da altura WGS84, pela subtração da altura geoidal da altitude GPS. Aplicável somente a pontos do satélite GPS, excluíndo-se os de rede ou NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">Use MSL ao invés de WGS84</string>
     <string name="altitude_subtractoffset_title">Deduzir o desvio de altitude</string>
@@ -295,8 +277,6 @@
     <string name="profile_default">Perfil padrão</string>
     <string name="profile_add_new">Adicionar perfil</string>
     <string name="gpslogger_permissions_rationale_title">Permissões necessárias</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Este aplicativo precisa de várias permissões para funcionar corretamente. <br /> <b>Localização de dispositivo</b> - Esta permissão possibilita a leitura dos dados de localização de torres de celulares e do hardware GPS contido no dispostivo.<br /><b>Fotos, midia, arquivos</b> - Esta permissão possibilita a gravação de arquivos de log, checar arquivos para o armazenamento e leitura de uma lista de arquivos para carregamento ou compartilhamento. Este app não vai acessar as suas fotos ou midia.<br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Você negou uma ou mais permissões que este aplicativo requer. Você precisará ir para a tela de configurações do aplicativo para conceder essas permissões. <br /><br />Se você recusou essas permissões permanentemente, você pode as resetar nas configurações do sistema.]]></string>
     <string name="privacy_policy">Política de Privacidade</string>
     <string name="debuglog_attach_to_email">Anexar o log de depuração para o e-mail</string>
     <string name="debuglog_attach_to_email_summary">Anexa o log de depuração para um e-mail juntamente com algumas informações de diagnóstico</string>
