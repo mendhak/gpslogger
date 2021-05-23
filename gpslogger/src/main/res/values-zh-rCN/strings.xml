@@ -295,6 +295,9 @@
     <string name="profile_default">缺省配置文件</string>
     <string name="profile_add_new">添加配置文件</string>
     <string name="gpslogger_permissions_rationale_title">需要授权</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>设备位置</b>用于获取您的 GPS 或基站位置。]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>文件媒介</b>用于读写 SD 卡上的 GPSLogger 文件夹，以供访问、上载、分享记录文件。本应用不会读取您的照片及其他媒介。]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[您拒绝授予一个或多个此应用程序所需的权限。您需要前往应用程序设置页以授予这些权限。<br /><br />若您永久拒绝了这些权限，您可在系统设置中重置。 ]]></string>
     <string name="privacy_policy">隐私权政策</string>
     <string name="debuglog_attach_to_email">将调试日志文件附加到电子邮件</string>
     <string name="debuglog_attach_to_email_summary">将调试日志文件以及一些诊断信息附加到电子邮件</string>
