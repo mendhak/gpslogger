@@ -286,6 +286,9 @@
     <string name="profile_default">Hồ sơ mặc định</string>
     <string name="profile_add_new">Thêm hồ sơ</string>
     <string name="gpslogger_permissions_rationale_title">Quyền được yêu cầu</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b> Vị trí thiết bị </b> - Quyền này cho phép đọc dữ liệu vị trí từ tháp di động và phần cứng GPS của thiết bị.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b> Ảnh, phương tiện, tệp </b> - Quyền này cho phép ghi tệp nhật ký và tệp thử nghiệm vào bộ nhớ và đọc từ danh sách tệp để tải lên hoặc chia sẻ. Ứng dụng này sẽ không truy cập vào ảnh hoặc phương tiện của bạn.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Bạn đã từ chối một hoặc nhiều quyền mà ứng dụng này yêu cầu. Bạn sẽ cần phải chuyển đến màn hình cài đặt ứng dụng để cấp các quyền này. <br /> <br /> Nếu bạn đã từ chối vĩnh viễn các quyền, bạn có thể đặt lại chúng trong cài đặt hệ thống.]]></string>
     <string name="privacy_policy">Chính sách bảo mật</string>
     <string name="debuglog_attach_to_email">Đính kèm nhật ký gỡ lỗi vào email</string>
     <string name="debuglog_attach_to_email_summary">Đính kèm nhật ký gỡ lỗi vào email cùng với một số thông tin chẩn đoán</string>
