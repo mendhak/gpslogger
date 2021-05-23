@@ -102,7 +102,6 @@ Nomes de ficheiro muito dinâmicos
     <string name="pref_performance_title">Desempenho</string>
     <string name="pref_performance_summary">Temporizações, filtros e observadores</string>
     <string name="time_before_logging_title">Intervalo de registo</string>
-    <string name="time_before_logging_summary">Use 0 para a frequência máxima, mas mais lento é melhor para a vida da bateria.    </string>
     <string name="time_before_logging_dialog_title">Tempo em segundos</string>
     <string name="time_before_logging_hint">Digite segundos (máximo de 9999)</string>
     <string name="keep_fix_summary">Tome cuidado, isto consumirá muita bateria. Use apenas para alta precisão com baixa frequência.</string>
@@ -212,8 +211,6 @@ Nomes de ficheiro muito dinâmicos
     <string name="autoftp_invalid_settings">Configurações inválidas</string>
     <string name="autoftp_invalid_summary">Algumas das configurações são inválidas. Certifique-se que preencheu todos os campos relevantes.    </string>
     <string name="menu_faq">Ajuda e FAQ</string>
-    <string name="gpsf_missing">Serviço em falta</string>
-    <string name="gpsf_missing_description">Precisará do Google Play Services Framework para usar esta capacidade.</string>
     <string name="log_customurl_title">Registo para um URL personalizado</string>
     <string name="log_customurl_summary">Enviar informações de registo para seu próprio servidor por HTTP</string>
     <string name="txt_annotation">Anotação:</string>
@@ -259,7 +256,6 @@ Nomes de ficheiro muito dinâmicos
     <string name="listeners_title">Fornecedores de localização</string>
     <string name="autosend_frequency_hint">Número de minutos</string>
     <string name="pref_logging_file_no_permissions">Essa pasta não permite gravação pelo GPSLogger. Por favor, escolha outra pasta para gravação.</string>
-    <string name="pref_gpsvisualizer">Visualizar gráficos e estatísticas do registo GPS</string>
     <string name="new_file_custom_each_time_title">Pedir um nome de ficheiro em cada início</string>
     <string name="new_file_custom_each_time_summary">Solicitar um nome de ficheiro personalizado cada vez que o registo for iniciado</string>
     <string name="new_file_custom_keep_changing_title">Permitir a alteração dinâmica do nome do ficheiro</string>
@@ -269,19 +265,6 @@ Nomes de ficheiro muito dinâmicos
     <string name="no_network_message">Não existe rede disponível</string>
     <string name="hide_notification_buttons">Ocultar botões de notificação</string>
     <string name="restart_required">É necessário reiniciar o GPSLogger para que esta configuração tenha efeito</string>
-    <string name="pref_performance_activityrecognition">Reconhecimento de atividade</string>
-    <string name="activityrecognition_dont_log_if_still">Não registar se não estiver em movimento</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Se não houver movimento do acelerómetro desde o último ponto, o registo ativo fará uma pausa no intervalo de registo, mesmo que se mova antes de terminar o intervalo. Os pontos passivos ainda podem ser registados.</string>
-    <string name="txt_activity">Atividade:</string>
-    <string name="activity_in_vehicle">No veículo</string>
-    <string name="activity_confidence">Confiança</string>
-    <string name="activity_still">Parado</string>
-    <string name="activity_on_bicycle">De bicicleta</string>
-    <string name="activity_on_foot">A pé</string>
-    <string name="activity_running">A correr</string>
-    <string name="activity_tilting">Inclinação</string>
-    <string name="activity_walking">A caminhar</string>
-    <string name="activity_unknown">Desconhecido</string>
     <string name="altitude_subtractgeoidheight_summary">Utiliza o nível médio do mar (MSL) em vez da altura WGS84, subtraindo a altura geóide da altitude GPS. Aplicável apenas a pontos de satélite e não a rede ou NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">Usar MSL em vez de WGS84</string>
     <string name="altitude_subtractoffset_title">Subtrair a diferença de altitude</string>
@@ -298,8 +281,6 @@ Nomes de ficheiro muito dinâmicos
     <string name="profile_default">Perfil padrão</string>
     <string name="profile_add_new">Adicionar perfil</string>
     <string name="gpslogger_permissions_rationale_title">Permissões necessárias</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Esta aplicação necessita de várias permissões para funcionar corretamente. <br /> <b>Localização</b> - Esta permissão autoriza a leitura dos dados de localização da rede móvel e do equipamento GPS.<br /><b>Fotos, media, ficheiros</b> - Esta permissão autoriza a escrita de ficheiros de registos e testes para o armazenamento, e a leitura de uma lista de ficheiros para carregamento ou partilha. Esta aplicação não acede aos seus ficheiros de fotos ou media.<br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Negou uma ou mais permissões que esta aplicação precisa. Terá de ir ao ecrã de definições de aplicações do Android para fornecer estas permissões.<br /><br />Se negou as permissões de forma permanente (opção não perguntar de novo), pode repo-las nas definições do sistema. ]]></string>
     <string name="privacy_policy">Política de privacidade</string>
     <string name="debuglog_attach_to_email">Anexar o registo de depuração de erros ao e-mail</string>
     <string name="debuglog_attach_to_email_summary">Anexa o log de correcção de erros ao e-mail em conjunto com alguma informação de diagnóstico</string>
