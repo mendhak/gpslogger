@@ -294,6 +294,9 @@
     <string name="profile_default">預設配置檔案</string>
     <string name="profile_add_new">新增配置檔案</string>
     <string name="gpslogger_permissions_rationale_title">需要授權</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>裝置位置</b>用於取得您的 GPS 或基地臺位置。]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>檔案媒介</b>用於讀寫 SD 卡上的 GPSLogger 資料夾，以供存取、上載、分享記錄檔案。本程式不會讀取您的照片及其他媒介。]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[您已拒絕此程式所需的一個或多個權限。 您可能需要進入應用程式設定畫面手動授予這些權限。  <br /> <br />如果您永久拒絕了權限，則可能需在系統設定中將其重設。 ]]></string>
     <string name="privacy_policy">隱私權政策</string>
     <string name="debuglog_attach_to_email">將偵錯日誌檔案附加到電子郵件</string>
     <string name="debuglog_attach_to_email_summary">將偵錯日誌檔案以及一些診斷資訊附加到電子郵件</string>
