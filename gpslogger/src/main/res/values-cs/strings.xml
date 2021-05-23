@@ -273,6 +273,9 @@
     <string name="profile_default">Výchozí profil</string>
     <string name="profile_add_new">Přidat profil</string>
     <string name="gpslogger_permissions_rationale_title">Požadovaná oprávnění</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Poloha zařízení</b> - toto oprávnění umožňuje číst údaje o poloze z GSM vysílačů a GPS modulu zařízení.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotky, média, soubory</b> - toto oprávnění umožňuje zápis souborů záznamů a testovacích souborů na úložiště, a čtení ze seznamu souborů pro nahrávání nebo sdílení. Tato aplikace nebude přistupovat k vašim fotkám nebo médiím.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Zakázal(a) jste jedno nebo více práv, které tato aplikace vyžaduje. Je potřeba přejít do nastavení aplikace a udělit práva.  <br /><br />Pokud máte trvale zakázaná práva, můžete je resetovat v nastavení systému. ]]></string>
     <string name="privacy_policy">Zásady ochrany osobních údajů</string>
     <string name="debuglog_attach_to_email">Přiložit záznamy o ladění do emailu</string>
     <string name="debuglog_attach_to_email_summary">Přiloží záznam o ladění do emailu spolu s některými diagnostickými informacemi</string>
