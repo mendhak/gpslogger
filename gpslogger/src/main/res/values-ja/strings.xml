@@ -108,7 +108,6 @@
     <string name="pref_performance_title">パフォーマンス</string>
     <string name="pref_performance_summary">プロバイダ、周期、フィルタ</string>
     <string name="time_before_logging_title">記録間隔</string>
-    <string name="time_before_logging_summary">0にすると書き込み頻度が最大になりますが、間隔が長いほうがバッテリーの寿命のためにはいいでしょう。    </string>
     <string name="time_before_logging_dialog_title">記録間隔（秒）</string>
     <string name="time_before_logging_hint">時間（秒、最大9999）を入力してください</string>
     <string name="keep_fix_summary">注意。この設定はバッテリを著しく消費します。書込頻度を抑えて高精度を得たい場合のみ使用してください。</string>
@@ -220,8 +219,6 @@
     <string name="autoftp_invalid_settings">無効な設定です</string>
     <string name="autoftp_invalid_summary">無効な設定があります。関連する入力項目が記入されていることを確認してください。</string>
     <string name="menu_faq">ヘルプとFAQ</string>
-    <string name="gpsf_missing">不足しているサービス</string>
-    <string name="gpsf_missing_description">この機能を使用するには Google Playサービス フレームワークが必要になります。</string>
     <string name="log_customurl_title">カスタムURLに保存</string>
     <string name="log_customurl_summary">HTTPを利用してログをあなたのサーバへ送信します。</string>
     <string name="txt_annotation">注釈:</string>
@@ -269,7 +266,6 @@
     <string name="listeners_title">位置情報プロバイダ</string>
     <string name="autosend_frequency_hint">何分？</string>
     <string name="pref_logging_file_no_permissions">指定されたでディレクトリに書き込みできません。別のディレクトリを指定してください。</string>
-    <string name="pref_gpsvisualizer">GPS のログの統計情報とグラフ表示</string>
     <string name="new_file_custom_each_time_title">起動の度にファイル名の入力を要求する</string>
     <string name="new_file_custom_each_time_summary">ログを開始する度にカスタムファイル名の入力プロンプトを表示する</string>
     <string name="new_file_custom_keep_changing_title">ファイル名を自動的に変更</string>
@@ -280,19 +276,6 @@
     <string name="no_network_message">利用可能なネットワークがありません。</string>
     <string name="hide_notification_buttons">通知ボタンを非表示します。</string>
     <string name="restart_required">この設定を有効にするには GPSLogger を再起動する必要があります。</string>
-    <string name="pref_performance_activityrecognition">活動状況の自動認識</string>
-    <string name="activityrecognition_dont_log_if_still">移動していないときはログファイルを書かない</string>
-    <string name="activityrecognition_dont_log_if_still_summary">加速度計に変化がない時は、それ以前に移動し始めていたとしても次の記録間隔まで記録を一時停止します。パッシブ位置は記録され続ける可能性があります。</string>
-    <string name="txt_activity">活動状況:</string>
-    <string name="activity_in_vehicle">車で移動</string>
-    <string name="activity_confidence">確度</string>
-    <string name="activity_still">静止</string>
-    <string name="activity_on_bicycle">自転車で移動</string>
-    <string name="activity_on_foot">徒歩で移動</string>
-    <string name="activity_running">ランニング中</string>
-    <string name="activity_tilting">傾いています</string>
-    <string name="activity_walking">歩行中</string>
-    <string name="activity_unknown">不明</string>
     <string name="altitude_subtractgeoidheight_summary">GPSの高度情報から高さを求めるために、WGS84ではなく、MSL(平均海水面) を用いて計算します。これはGPS衛星の情報のみに適用され、ネットワークから得られた情報やNMEAには影響しません。</string>
     <string name="altitude_subtractgeoidheight_title">WGS84の代わりにMSLを使用</string>
     <string name="altitude_subtractoffset_title">高度からオフセットを差し引く</string>
@@ -310,8 +293,6 @@
     <string name="profile_default">既定のプロファイル</string>
     <string name="profile_add_new">プロファイルを追加</string>
     <string name="gpslogger_permissions_rationale_title">必須の権限</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[このアプリを正しく動作させるために、様々な権限を必要とします。<br /><b>位置情報</b> - この権限は基地局やGPSから位置情報を取得するのに必要です。<br /><b>画像/メディア/ファイル</b> - この権限は、ログやテストファイルの書き込みや、アップロードや共有をする際、ファイルのリストを読み込むために必要とされます。このアプリはあなたの写真やメディアファイルにアクセスすることはありません。<br /><br />  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA[このアプリの必要とする1つ以上の権限が拒否されています。アプリの設定画面からそれらの権限を許可する必要があるでしょう。<br /><br />もしもそれらの権限を永続的に拒否してしまったとしても、システム設定からリセットできます。 ]]></string>
     <string name="privacy_policy">プライバシーポリシー</string>
     <string name="debuglog_attach_to_email">デバッグ用ログをメールに添付する</string>
     <string name="debuglog_attach_to_email_summary">デバッグログの他に診断結果を添付する</string>
