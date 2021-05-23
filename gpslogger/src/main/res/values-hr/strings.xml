@@ -264,6 +264,8 @@
     <string name="profile_default">Zadani profil</string>
     <string name="profile_add_new">Dodaj profil</string>
     <string name="gpslogger_permissions_rationale_title">Potrebne dozvole</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Lokacija uređaja</b> - Ova dozvola omogućuje čitanje podataka o lokaciji iz bazne stanice i iz GPS hardvera uređaja.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Slike, mediji, datoteke</b> - Ova dozvola omogućuje pisanje zapisivane datoteke i test datoteke u pohranu, i čitanje iz popisa datoteka za prijenos ili dijeljenje. Ova aplikacija neće pristupiti vašoj slici ili mediji.]]></string>
     <string name="privacy_policy">Pravilnik o zaštiti privatnosti</string>
     <string name="debuglog_attach_to_email">Priloži zapisnik otklanjanja pogrešaka u e-pošti</string>
     <string name="debuglog_attach_to_email_summary">Priloži zapisnik otklanjanja pogrešaka u e-pošti uz neke dijagnostičke informacije</string>
