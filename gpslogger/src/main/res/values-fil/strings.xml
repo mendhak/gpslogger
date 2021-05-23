@@ -260,6 +260,8 @@
     <string name="profile_default">Default na Profile</string>
     <string name="profile_add_new">Magdagdag ng profile</string>
     <string name="gpslogger_permissions_rationale_title">Kinakailangan ang mga pahintulot</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Lokasyon ng aparato</b> - Ang permisong ito ay papayag sa pagbasa ng datos ng lokasyon galing sa mga tore ng cell at sa GPS hardware ng aparato.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Mga larawan, media, files</b> - Ang permisong ito ay papayag sa pagsulat ng files ng tala at files ng pagsusuri sa imbakan, at pagbasa mula sa isang listahan ng mga files para sa pag-upload o pagbahagi. Ang app na ito ay hindi mag-access ng iyong mga larawan o media.]]></string>
     <string name="privacy_policy">Patakaran sa Pagkapribado</string>
     <string name="debuglog_attach_to_email">Maglakip ng debug log sa email</string>
     <string name="debuglog_attach_to_email_summary">Nag-attach sa debug log sa isang email kasama ang ilang impormasyon sa diagnostic</string>
