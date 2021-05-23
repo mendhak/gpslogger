@@ -22,6 +22,7 @@ package com.mendhak.gpslogger;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.*;
@@ -32,6 +33,8 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.*;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -96,6 +99,7 @@ public class GpsMainActivity extends AppCompatActivity
     AccountHeader drawerHeader;
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     private Session session = Session.getInstance();
+    private boolean permissionWorkflowInProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +120,7 @@ public class GpsMainActivity extends AppCompatActivity
 
         if(!Systems.hasUserGrantedAllNecessaryPermissions(this)){
             LOG.debug("Permission check - missing permissions");
+            permissionWorkflowInProgress = true;
             askUserForBasicPermissions();
         }
         else {
@@ -142,7 +147,7 @@ public class GpsMainActivity extends AppCompatActivity
                         }
                     });
 
-    private final ActivityResultLauncher<String[]> permissionLauncher =
+    private final ActivityResultLauncher<String[]> basicPermissionsLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
                     grantResults -> {
                         LOG.debug("Launcher result: " + grantResults.toString());
@@ -155,6 +160,22 @@ public class GpsMainActivity extends AppCompatActivity
                             askUserForBackgroundPermissions();
                         }
                     });
+
+    private final ActivityResultLauncher<Intent> batteryOptimizationLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    LOG.debug(String.valueOf(result.getResultCode()));
+                    if(result.getResultCode() != Activity.RESULT_OK){
+                        LOG.debug("Request to ignore battery optimization was denied.");
+                    }
+                    else {
+                        LOG.debug("Request to ignore battery optimization was granted.");
+                    }
+                    permissionWorkflowInProgress=false;
+                }
+            });
 
     public void askUserForBasicPermissions() {
         ArrayList<String> permissions = new ArrayList<String>();
@@ -175,7 +196,7 @@ public class GpsMainActivity extends AppCompatActivity
                             + getString(R.string.privacy_policy) + "</a>",
                     this, then -> {
                         LOG.debug("Beginning request for multiple permissions");
-                        permissionLauncher.launch(permissions.toArray(new String[0]));
+                        basicPermissionsLauncher.launch(permissions.toArray(new String[0]));
 
                     });
         }
@@ -193,6 +214,10 @@ public class GpsMainActivity extends AppCompatActivity
 
                     });
         }
+        else {
+            LOG.debug("Not on Android R, proceed to battery optimization permission request");
+            askUserToDisableBatteryOptimization();
+        }
     }
 
     @SuppressLint("BatteryLife")
@@ -206,7 +231,14 @@ public class GpsMainActivity extends AppCompatActivity
                 if (!pm.isIgnoringBatteryOptimizations(packageName)){
                     intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
                     intent.setData(Uri.parse("package:" + packageName));
-                    startActivity(intent);
+                    batteryOptimizationLauncher.launch(intent);
+                }
+                else {
+                    // On older Android versions, a device will report that it is already ignoring battery optimizations. It's wrong.
+                    // https://stackoverflow.com/questions/50231908/powermanager-isignoringbatteryoptimizations-always-returns-true-even-if-is-remov
+                    // https://issuetracker.google.com/issues/37067894?pli=1
+                    LOG.debug("App is already ignoring battery optimization. On some earlier versions of Android this is incorrectly reported, it can only be corrected manually.");
+                    permissionWorkflowInProgress=false;
                 }
             }
             catch(Exception e){
@@ -332,7 +364,6 @@ public class GpsMainActivity extends AppCompatActivity
         transaction.commit();
         getSupportActionBar().hide();
     }
-
 
 
 
@@ -1214,6 +1245,10 @@ public class GpsMainActivity extends AppCompatActivity
      * Starts the service and binds the activity to it.
      */
     private void startAndBindService() {
+        if(permissionWorkflowInProgress){
+            LOG.debug("Don't start service while permissions haven't been granted yet");
+            return;
+        }
         serviceIntent = new Intent(this, GpsLoggingService.class);
         // Start the service in case it isn't already running
         ContextCompat.startForegroundService(getApplicationContext(), serviceIntent);
