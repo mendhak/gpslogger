@@ -198,6 +198,10 @@ public class GpsMainActivity extends AppCompatActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
                     getString(R.string.gpslogger_permissions_rationale_message_basic)
+                            + "<br />" + getString(R.string.gpslogger_permissions_rationale_message_location)
+                            + "<br />" + getString(R.string.gpslogger_permissions_rationale_message_storage)
+                            + "<br />" + getString(R.string.gpslogger_permissions_rationale_message_location_background)
+                            + "<br />" + getString(R.string.gpslogger_permissions_rationale_message_battery_optimization)
                             + "<br /> <a href='https://gpslogger.app/privacypolicy.html'>"
                             + getString(R.string.privacy_policy) + "</a>",
                     this, then -> {
