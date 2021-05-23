@@ -102,7 +102,6 @@
     <string name="pref_performance_title">Prestazioni</string>
     <string name="pref_performance_summary">Tempi, filtri e provider di posizione</string>
     <string name="time_before_logging_title">Intervallo di registrazione</string>
-    <string name="time_before_logging_summary">Usa 0 per la massima frequenza, più lento fa consumare meno la batteria.    </string>
     <string name="time_before_logging_dialog_title">Tempo in secondi</string>
     <string name="time_before_logging_hint">Inserisci i secondi (max 9999)</string>
     <string name="keep_fix_summary">Attenzione: riduce di molto la durata della batteria. Va usato solo per ottenere alte accuratezze con basse frequenze di campionatura.    </string>
@@ -207,8 +206,6 @@
     <string name="autoftp_invalid_settings">Impostazioni non valide</string>
     <string name="autoftp_invalid_summary">Alcune impostazioni non sono valide. Assicurati di avere compilato tutti i campi.</string>
     <string name="menu_faq">Aiuto e FAQ</string>
-    <string name="gpsf_missing">Servizio non presente/inattivo</string>
-    <string name="gpsf_missing_description">Per usare questa funzione devi avere installato Google Play Services.</string>
     <string name="log_customurl_title">Salva su server custom</string>
     <string name="log_customurl_summary">Invia i dati ad un server HTTP con URL personalizzata</string>
     <string name="txt_annotation">Annotazione:</string>
@@ -254,7 +251,6 @@
     <string name="listeners_title">Fornitori di posizione</string>
     <string name="autosend_frequency_hint">Numero di minuti</string>
     <string name="pref_logging_file_no_permissions">Questa cartella non è accessibile da GPSLogger. Si prega di selezionarne un\'altra.</string>
-    <string name="pref_gpsvisualizer">Visualizza statistiche e grafici</string>
     <string name="new_file_custom_each_time_title">Chiedi sempre il nome</string>
     <string name="new_file_custom_each_time_summary">Chiedi il nome del file sempre ogni volta che inizia una registrazione</string>
     <string name="new_file_custom_keep_changing_title">Permetti al nome del file di cambiare dinamicamente</string>
@@ -264,19 +260,6 @@
     <string name="no_network_message">Rete dati non disponibile</string>
     <string name="hide_notification_buttons">Nascondere i pulsanti di notifica</string>
     <string name="restart_required">Sarà necessario riavviare GPSLogger perchè questa impostazione abbia effetto</string>
-    <string name="pref_performance_activityrecognition">Riconoscimento movimento</string>
-    <string name="activityrecognition_dont_log_if_still">Non registrare se sono fermo</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Se non c\'è nessun movimento degli accelerometri dall\'ultimo punto, la registrazione attiva verrà messa in pausa per il tuo intervallo di registrazione, anche se inizierai a muoverti prima. I punti passivi possono continuare ad essere registrati.</string>
-    <string name="txt_activity">Attività:</string>
-    <string name="activity_in_vehicle">In auto</string>
-    <string name="activity_confidence">Fedeltà</string>
-    <string name="activity_still">Fermo</string>
-    <string name="activity_on_bicycle">In bici</string>
-    <string name="activity_on_foot">A piedi</string>
-    <string name="activity_running">Correndo</string>
-    <string name="activity_tilting">Inclinazione</string>
-    <string name="activity_walking">Camminando</string>
-    <string name="activity_unknown">Sconosciuta</string>
     <string name="altitude_subtractgeoidheight_summary">Utilizza altezza sul livello del mare (s. l. m.) anziché altezza WGS84. Viene sottratta l\'altezza del geoide dall\'altitudine GPS. Si applica solo ai punti acquisiti da GPS satellitare.</string>
     <string name="altitude_subtractgeoidheight_title">Uso S.L.M. invece di WGS84</string>
     <string name="altitude_subtractoffset_title">Sottrarre altitudine fissa</string>
@@ -293,7 +276,8 @@
     <string name="profile_default">Profilo predefinito</string>
     <string name="profile_add_new">Aggiungi profilo</string>
     <string name="gpslogger_permissions_rationale_title">Autorizzazioni necessarie</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Questa applicazione richiede varie autorizzazioni per funzionare correttamente. <br /> <b>Posizione dispositivo</b> - Questa autorizzazione permette di leggere la tua posizione basandosi sui ripetitori di telefonia mobile e sul tuo sensore GPS.<br /> <b>Foto, media, file</b> - Questa autorizzazione permette la scrittura di file di log e di test sul supporto di archiviazione locale, e la lettura di un elenco di file per il caricamento o la condivisione. Questa app non accederà alle tue foto o media.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Posizione dispositivo</b> - Questa autorizzazione permette di leggere la tua posizione basandosi sui ripetitori di telefonia mobile e sul tuo sensore GPS.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Foto, media, file</b> - Questa autorizzazione permette la scrittura di file di log e di test sul supporto di archiviazione locale, e la lettura di un elenco di file per il caricamento o la condivisione. Questa app non accederà alle tue foto o media.]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Hai negato uno o più permessi che l\'app richiede.  E\' necessario accedere alla schermata delle impostazioni dell\'app ed accordare questi permessi.  <br /><br />Se i permessi sono stati definitivamente negati, è possibile ripristinarli nelle impostazioni di sistema. ]]></string>
     <string name="privacy_policy">Informativa sulla privacy</string>
     <string name="debuglog_attach_to_email">Invia debug con Email</string>

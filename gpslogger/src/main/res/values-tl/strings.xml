@@ -106,7 +106,6 @@
     <string name="pref_performance_title">Pagganap</string>
     <string name="pref_performance_summary">Mga tiyempo, salaan at tagapakinig</string>
     <string name="time_before_logging_title">Pagtatala sa agwat</string>
-    <string name="time_before_logging_summary">Gumamit ng 0 para sa pinakamataas na frequency, subalit ang mas mabagal ay nakakabuti sa buhay ng baterya.    </string>
     <string name="time_before_logging_dialog_title">Oras sa segundo</string>
     <string name="time_before_logging_hint">E pasok ang segundo (pinaka mataas ay 9999)</string>
     <string name="keep_fix_summary">Mag-ingat, ito nagpapadali sa buhay ng baterya. Gamitin lang para sa 
@@ -204,8 +203,6 @@
         naayon na mga field.
     </string>
     <string name="menu_faq">Tulung at FAQ</string>
-    <string name="gpsf_missing">Nawawalang Serbisyo</string>
-    <string name="gpsf_missing_description">Kinakailangan ang Google Play Services Framework para magamit ang feature.</string>
     <string name="log_customurl_title">Pumunta sa custom URL</string>
     <string name="log_customurl_summary">Ipadala sa tagapagtala ng impormasyon sa inyung sever higit sa HTTP</string>
     <string name="txt_annotation">Palatandaan:</string>
@@ -238,18 +235,6 @@
     <string name="no_network_message">Walang magagamit na network</string>
     <string name="hide_notification_buttons">Itago ang button na pang abiso</string>
     <string name="restart_required">Kinakaylangan mong i-reset ang GPSLogger sa setting upang gumana</string>
-    <string name="pref_performance_activityrecognition">Aktibidad ng Pagkakilala</string>
-    <string name="activityrecognition_dont_log_if_still">Huwag itala kung hindi kumikilos</string>
-    <string name="txt_activity">Aktibidad:</string>
-    <string name="activity_in_vehicle">Sasakyan</string>
-    <string name="activity_confidence">Kompiyansa</string>
-    <string name="activity_still">Gayunpaman</string>
-    <string name="activity_on_bicycle">Sa bisekleta</string>
-    <string name="activity_on_foot">Lakad</string>
-    <string name="activity_running">Tumatakbo</string>
-    <string name="activity_tilting">Tagilid</string>
-    <string name="activity_walking">Maglakad</string>
-    <string name="activity_unknown">Hindi alam</string>
     <string name="altitude_subtractgeoidheight_title">Gamitin ang MSL kaysa sa WGS84</string>
     <string name="altitude_subtractoffset_title">Bawasan ang tayog</string>
     <string name="upload_failure">Hindi ma upload ang file</string>

@@ -109,7 +109,6 @@
     <string name="pref_performance_title">Hiệu suất</string>
     <string name="pref_performance_summary">Thời gian, bộ lọc, nhận</string>
     <string name="time_before_logging_title">Khoảng thời gian ghi</string>
-    <string name="time_before_logging_summary">Dùng không cho tần suất tối đa nhưng chậm hơn sẽ đỡ tốn pin.    </string>
     <string name="time_before_logging_dialog_title">Thời gian bằng giây</string>
     <string name="time_before_logging_hint">Nhập giây (tối đa 9999)</string>
     <string name="keep_fix_summary">Hãy cẩn thận, điều này sẽ làm giảm đáng kể tuổi thọ pin. Chỉ sử dụng cho độ chính xác cao với tần suất thấp.    </string>
@@ -215,7 +214,6 @@
     <string name="autoftp_invalid_settings">Cài đặt không hợp lệ</string>
     <string name="autoftp_invalid_summary">Một số cài đặt của bạn không hợp lệ. Xin vui lòng đảm bảo rằng bạn đã điền tất cả các thông tin có liên quan.     </string>
     <string name="menu_faq">Hướng dẫn và hỏi đáp</string>
-    <string name="gpsf_missing_description">Bạn cần Google Play Services Framework để sử dụng chức năng này.</string>
     <string name="log_customurl_title">Đăng nhập URL tuỳ chỉnh</string>
     <string name="log_customurl_summary">Gửi thông tin đăng nhập cho máy chủ của riêng bạn qua HTTP</string>
     <string name="txt_annotation">Chú thích:</string>
@@ -263,7 +261,6 @@
     <string name="listeners_title">Nhà cung cấp vị trí</string>
     <string name="autosend_frequency_hint">Số phút</string>
     <string name="pref_logging_file_no_permissions">Thư mục đó không thể ghi bởi GPSLogger. Vui lòng chọn thư mục khác để ghi vào.</string>
-    <string name="pref_gpsvisualizer">Hiển thị trạng thái và đồ họa GPS</string>
     <string name="new_file_custom_each_time_title">Yêu cầu tên file mỗi khi chạy</string>
     <string name="new_file_custom_each_time_summary">Nhắc nhập tên file mỗi khi chạy log</string>
     <string name="new_file_custom_keep_changing_title">Cho phép tên tệp tùy chỉnh thay đổi động</string>
@@ -273,19 +270,6 @@
     <string name="no_network_message">Không có mạng</string>
     <string name="hide_notification_buttons">Ẩn nút thông báo</string>
     <string name="restart_required">Bạn sẽ cần phải khởi động lại GPSLogger để cái đặt này có hiệu lực</string>
-    <string name="pref_performance_activityrecognition">Nhận dạng các hoạt động</string>
-    <string name="activityrecognition_dont_log_if_still">Không ghi nếu tôi không di chuyển</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Nếu không có chuyển động của gia tốc kế kể từ điểm cuối cùng, việc ghi nhật ký đang hoạt động sẽ tạm dừng trong khoảng thời gian ghi của bạn, ngay cả khi bạn bắt đầu di chuyển trước đó. Điểm bị động vẫn có thể được ghi lại.</string>
-    <string name="txt_activity">Hoạt động:</string>
-    <string name="activity_in_vehicle">Trên phương tiện di chuyển</string>
-    <string name="activity_confidence">Tự tin</string>
-    <string name="activity_still">Dừng</string>
-    <string name="activity_on_bicycle">Đạp xe</string>
-    <string name="activity_on_foot">Đi bộ</string>
-    <string name="activity_running">Chạy</string>
-    <string name="activity_tilting">Đứng</string>
-    <string name="activity_walking">Đi bộ</string>
-    <string name="activity_unknown">Không rõ</string>
     <string name="altitude_subtractgeoidheight_summary">Sử dụng  Mean Sea Level (MSL) thay vì WGS84 từ độ cao của GPS. Chỉ áp dụng cho các điểm GPS, không cho mạng hoặc NMEA</string>
     <string name="altitude_subtractgeoidheight_title">Sử dụng MSL thay vì WGS84</string>
     <string name="altitude_subtractoffset_title">Bù trừ độ cao</string>
@@ -302,8 +286,8 @@
     <string name="profile_default">Hồ sơ mặc định</string>
     <string name="profile_add_new">Thêm hồ sơ</string>
     <string name="gpslogger_permissions_rationale_title">Quyền được yêu cầu</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ứng dụng này yêu cầu các quyền sau để hoạt động bình thường. <br />
-<b> Vị trí thiết bị </b> - Quyền này cho phép đọc dữ liệu vị trí từ tháp di động và phần cứng GPS của thiết bị. <br /> <b> Ảnh, phương tiện, tệp </b> - Quyền này cho phép ghi tệp nhật ký và tệp thử nghiệm vào bộ nhớ và đọc từ danh sách tệp để tải lên hoặc chia sẻ.  Ứng dụng này sẽ không truy cập vào ảnh hoặc phương tiện của bạn. <br /> <br/>]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b> Vị trí thiết bị </b> - Quyền này cho phép đọc dữ liệu vị trí từ tháp di động và phần cứng GPS của thiết bị.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b> Ảnh, phương tiện, tệp </b> - Quyền này cho phép ghi tệp nhật ký và tệp thử nghiệm vào bộ nhớ và đọc từ danh sách tệp để tải lên hoặc chia sẻ. Ứng dụng này sẽ không truy cập vào ảnh hoặc phương tiện của bạn.]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Bạn đã từ chối một hoặc nhiều quyền mà ứng dụng này yêu cầu. Bạn sẽ cần phải chuyển đến màn hình cài đặt ứng dụng để cấp các quyền này. <br /> <br /> Nếu bạn đã từ chối vĩnh viễn các quyền, bạn có thể đặt lại chúng trong cài đặt hệ thống.]]></string>
     <string name="privacy_policy">Chính sách bảo mật</string>
     <string name="debuglog_attach_to_email">Đính kèm nhật ký gỡ lỗi vào email</string>

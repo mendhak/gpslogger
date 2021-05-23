@@ -99,7 +99,6 @@
     <string name="pref_performance_title">Performanse</string>
     <string name="pref_performance_summary">Vremenski rasporedi, filtri i prijamnici</string>
     <string name="time_before_logging_title">Vremenski period logovanja</string>
-    <string name="time_before_logging_summary">Koristi 0 za najbržu frekvenciju, ali sporije je bolje jer ne troši toliko bateriju.    </string>
     <string name="time_before_logging_dialog_title">Vrijeme u sekundama</string>
     <string name="time_before_logging_hint">Unos u sekundama(max 9999)</string>
     <string name="keep_fix_summary">Oprez, to će se dramatično smanjiti trajanje baterije. Koristite samo za         veću preciznost sa sporijim frekvencijama.    </string>
@@ -204,8 +203,6 @@
     <string name="autoftp_invalid_settings">Neispravne postavke</string>
     <string name="autoftp_invalid_summary">Neke postavke nisu valjane. Molimo vas da osigurajte da bude ispunjena sva         relevantna polja.    </string>
     <string name="menu_faq">Pomoć i FAQ</string>
-    <string name="gpsf_missing">Nedostaje servis</string>
-    <string name="gpsf_missing_description">Treba vam Google Play Services Framework da biste koristili ovu značajku.</string>
     <string name="log_customurl_title">Zapis na prilagođeni URL</string>
     <string name="log_customurl_summary">Slanje informacija o zapisanom datoteku na svoj poslužitelja preko HTTP</string>
     <string name="txt_annotation">Obilježavanje:</string>
@@ -244,7 +241,6 @@
     <string name="listeners_passive">Pasivni</string>
     <string name="listeners_title">Pružatelji lokacije</string>
     <string name="autosend_frequency_hint">Broj minuta</string>
-    <string name="pref_gpsvisualizer">Vizualizirajte GPS log statistike i grafove</string>
     <string name="new_file_custom_each_time_title">Pitati za ime datoteke kod svakog starta</string>
     <string name="new_file_custom_each_time_summary">Upitaj za naziv prilagođene datoteke svaki put kada počinje zapisivanje</string>
     <string name="donate_app">Donirajte (app)</string>
@@ -252,18 +248,6 @@
     <string name="no_network_message">Nema dostupne mreže</string>
     <string name="hide_notification_buttons">Sakrij obavijest gumbe</string>
     <string name="restart_required">Potrebno je ponovno pokrenuti GPSLogger da bi postavke stupile na snagu</string>
-    <string name="pref_performance_activityrecognition">Prepoznavanje aktivnosti</string>
-    <string name="activityrecognition_dont_log_if_still">Ne zapiši, ako ne krećem</string>
-    <string name="txt_activity">Aktivnost:</string>
-    <string name="activity_in_vehicle">U vozilu</string>
-    <string name="activity_confidence">Povjerenje</string>
-    <string name="activity_still">Nepomično</string>
-    <string name="activity_on_bicycle">Na biciklu</string>
-    <string name="activity_on_foot">Pješice</string>
-    <string name="activity_running">Trčanje</string>
-    <string name="activity_tilting">Nagibati</string>
-    <string name="activity_walking">Hodanje</string>
-    <string name="activity_unknown">Nepoznato</string>
     <string name="altitude_subtractgeoidheight_summary">Koristi srednja razina mora (MSL) umjesto WGS84 visine oduzimanjem geoidne visine iz GPS visine. Odnosi se samo na GPS satelit točke, ne za mrežu ili NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">Koristi MSL umjesto WGS84</string>
     <string name="altitude_subtractoffset_title">Oduzmite visina pomaka</string>
@@ -280,7 +264,8 @@
     <string name="profile_default">Zadani profil</string>
     <string name="profile_add_new">Dodaj profil</string>
     <string name="gpslogger_permissions_rationale_title">Potrebne dozvole</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ova aplikacija zahtijeva razne dozvole kako bi pravilno funkcionirala. <br /> <b>Lokacija uređaja</b> - Ova dozvola omogućuje čitanje podataka o lokaciji iz bazne stanice i iz GPS hardvera uređaja.<br /><b>Slike, mediji, datoteke</b> - Ova dozvola omogućuje pisanje zapisivane datoteke i test datoteke u pohranu, i čitanje iz popisa datoteka za prijenos ili dijeljenje. Ova aplikacija neće pristupiti vašoj slici ili mediji.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Lokacija uređaja</b> - Ova dozvola omogućuje čitanje podataka o lokaciji iz bazne stanice i iz GPS hardvera uređaja.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Slike, mediji, datoteke</b> - Ova dozvola omogućuje pisanje zapisivane datoteke i test datoteke u pohranu, i čitanje iz popisa datoteka za prijenos ili dijeljenje. Ova aplikacija neće pristupiti vašoj slici ili mediji.]]></string>
     <string name="privacy_policy">Pravilnik o zaštiti privatnosti</string>
     <string name="debuglog_attach_to_email">Priloži zapisnik otklanjanja pogrešaka u e-pošti</string>
     <string name="debuglog_attach_to_email_summary">Priloži zapisnik otklanjanja pogrešaka u e-pošti uz neke dijagnostičke informacije</string>

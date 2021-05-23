@@ -109,8 +109,6 @@
     <string name="pref_performance_title">Performans</string>
     <string name="pref_performance_summary">Zamanlamalar, filtreler ve dinleyiciler</string>
     <string name="time_before_logging_title">Günlüğe kaydetme aralığı</string>
-    <string name="time_before_logging_summary">En fazla sıklık için 0 kullan ancak daha yavaştır ama pil ömrü için daha iyidir.
-    </string>
     <string name="time_before_logging_dialog_title">Saniye olarak süre</string>
     <string name="time_before_logging_hint">Saniye girin (en fazla 9999)</string>
     <string name="keep_fix_summary">Dikkat ol, bu bariz pil ömrünü azaltacaktır. Sadece düşük sıklıklar ile daha yüksek kesinlik için kullanın.    </string>
@@ -220,8 +218,6 @@
     <string name="autoftp_invalid_settings">Geçersiz ayarlar</string>
     <string name="autoftp_invalid_summary">Bazı ayarlarınız geçersiz. Tüm ilgili alanları doldurduğunuzdan emin olun.    </string>
     <string name="menu_faq">Yardım ve SSS</string>
-    <string name="gpsf_missing">Eksik hizmet</string>
-    <string name="gpsf_missing_description">Bu özellikleri kullanmak için Google Play Services Framework\'e ihtiyacınız var.</string>
     <string name="log_customurl_title">Özel URL\'e kaydet</string>
     <string name="log_customurl_summary">Günlük bilgileri kendi sunucunuza HTTP üzerinden gönderir</string>
     <string name="txt_annotation">Ek açıklama:</string>
@@ -269,7 +265,6 @@
     <string name="listeners_title">Konum sağlayıcıları</string>
     <string name="autosend_frequency_hint">Dakika sayısı</string>
     <string name="pref_logging_file_no_permissions">Bu klasör GPSKayıt tarafından yazılabilir değil. Lütfen yazmak için başka klasör seçin.</string>
-    <string name="pref_gpsvisualizer">GPS günlüğü istatistiklerini ve grafiğini görselleştir</string>
     <string name="new_file_custom_each_time_title">Her başlangıçta dosya adını sor</string>
     <string name="new_file_custom_each_time_summary">Günlük başlatıldığında her zaman özel dosya adı sorulur</string>
     <string name="new_file_custom_keep_changing_title">Özel dosya adı dinamik değişime izin ver</string>
@@ -279,19 +274,6 @@
     <string name="no_network_message">Erişilebilir ağ yok</string>
     <string name="hide_notification_buttons">Bildirim düğmelerini gizle</string>
     <string name="restart_required">Bu ayarları etkinleştirmek için GPSKayıt uygulamasını yeniden başlatmalısınız</string>
-    <string name="pref_performance_activityrecognition">Etkinlik Tanıma</string>
-    <string name="activityrecognition_dont_log_if_still">Hareket etmediğimde günlük tutma</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Son noktadan bu yana ivmeölçer hareketi yoksa, o zamandan önce hareket etmeye başlasanız bile etkin günlük kaydı, kayıt aralığınız için duraklar. Pasif noktalar hala kaydedilebilir.</string>
-    <string name="txt_activity">Etkinlik:</string>
-    <string name="activity_in_vehicle">Araçta</string>
-    <string name="activity_confidence">Güven</string>
-    <string name="activity_still">Halen</string>
-    <string name="activity_on_bicycle">Bisiklette</string>
-    <string name="activity_on_foot">Yürüme</string>
-    <string name="activity_running">Koşma</string>
-    <string name="activity_tilting">Eğimli</string>
-    <string name="activity_walking">Yürüyüş</string>
-    <string name="activity_unknown">Bilinmiyor</string>
     <string name="altitude_subtractgeoidheight_summary">GPS yükseklikten geoid yükseklik çıkarılarak kullanılan WGS84 yüksekliğinin yerine Ortalama Deniz Seviyesi (MSL) kullan. Sadece GPS uydu noktaları için de geçerlidir, ağ veya NMEA için değil.</string>
     <string name="altitude_subtractgeoidheight_title">WGS84 yerine MSL kullan</string>
     <string name="altitude_subtractoffset_title">Rakım ofset çıkar</string>
@@ -308,7 +290,8 @@
     <string name="profile_default">Varsayılan profili</string>
     <string name="profile_add_new">Profil ekle</string>
     <string name="gpslogger_permissions_rationale_title">İzin gerekli</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Bu uygulama düzgün çalışması için çeşitli izinler gerekir. <br /> <b>Cihaz konumu</b> - Bu izin baz istasyonları ve cihaz GPS donanımının konum verilerini okumaya izin verir.<br /><b>Fotoğraflar, medya, dosyalar</b> - Bu izin günlük dosyalarını ve sınama dosyalarını yazma ve depolama, yükleme ve paylaşma için dosyaların bir listesini okumayı sağlar. Bu uygulama, fotoğraf veya medyalarınıza erişmez.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Cihaz konumu</b> - Bu izin baz istasyonları ve cihaz GPS donanımının konum verilerini okumaya izin verir.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotoğraflar, medya, dosyalar</b> - Bu izin günlük dosyalarını ve sınama dosyalarını yazma ve depolama, yükleme ve paylaşma için dosyaların bir listesini okumayı sağlar. Bu uygulama, fotoğraf veya medyalarınıza erişmez.]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Bu uygulamanın gerektirdiği bir veya daha fazla izni engellediniz. Bu izinleri vermek için uygulama ayarları ekranına gitmeniz gerekecek.  <br /> <br /> Kalıcı olarak izinleri reddettiyseniz, bunları sistem ayarlarından sıfırlayabilirsiniz. ]]></string>
     <string name="privacy_policy">Gizlilik Politikası</string>
     <string name="debuglog_attach_to_email">Hata ayıklama günlüğünü e-postaya ekleyin</string>

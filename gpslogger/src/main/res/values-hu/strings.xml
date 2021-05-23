@@ -104,7 +104,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
     <string name="pref_performance_title">Teljesítmény</string>
     <string name="pref_performance_summary">Időzítések, szűrők és figyelők</string>
     <string name="time_before_logging_title">Mentési időköz</string>
-    <string name="time_before_logging_summary">A 0 a legnagyobb gyakoriság, de a ritkább jótékonyan hat az akkumulátor élettartamára.</string>
     <string name="time_before_logging_dialog_title">Idő másodpercben</string>
     <string name="time_before_logging_hint">Adja meg másodpercben (max 9999)</string>
     <string name="keep_fix_summary">Legyen óvatos, ez drámaian csökkenteni fogja az akkumulátora élettartamát. A nagyobb pontossághoz használja alacsonyabb frekvencia használatával.</string>
@@ -210,8 +209,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
     <string name="autoftp_invalid_settings">Érvénytelen beállítások</string>
     <string name="autoftp_invalid_summary">Néhány beállításod érvénytelen. Kérlek ellenőrizd, hogy minden szükséges mezőt kitöltöttél.</string>
     <string name="menu_faq">Súgó és GYIK</string>
-    <string name="gpsf_missing">Hiányzó szolgáltatás</string>
-    <string name="gpsf_missing_description">Ehhez a szolgáltatáshoz a Google Play Services Framework-re lesz szükséged.</string>
     <string name="log_customurl_title">Mentés URL-re</string>
     <string name="log_customurl_summary">Helyinformációk küldése saját szerverre HTTP protokollal</string>
     <string name="txt_annotation">Jegyzet:</string>
@@ -259,7 +256,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
     <string name="listeners_title">Helyszolgáltatók</string>
     <string name="autosend_frequency_hint">Percek száma</string>
     <string name="pref_logging_file_no_permissions">A GPSLogger nem tudja írni a választott mappát. Kérlek válassz egy másik mappát.</string>
-    <string name="pref_gpsvisualizer">GPS napló statisztika és grafikák megjelenítése</string>
     <string name="new_file_custom_each_time_title">Fájlnév kérése minden indításkor</string>
     <string name="new_file_custom_each_time_summary">Egyedi fájlnevet kér a naplózás minden indításakor</string>
     <string name="new_file_custom_keep_changing_title">Dinamikus egyéni fájlnév</string>
@@ -269,19 +265,6 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
     <string name="no_network_message">Hálózat nem áll rendelkezésre</string>
     <string name="hide_notification_buttons">Gombok elrejtése az értesítési sávon</string>
     <string name="restart_required">A beállítás érvénybe léptetéséhez indítsa újra a GPSLoggert</string>
-    <string name="pref_performance_activityrecognition">Tevékenység felismerés</string>
-    <string name="activityrecognition_dont_log_if_still">Ne ments, ha nem mozgok</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Naplózás szüneteltetése, ha a gyorsulásmérő nem érzékelt mozgást az utolsó pont rögzítése óta. Passzív pontok ekkor is rögzítődhetnek.</string>
-    <string name="txt_activity">Tevékenység:</string>
-    <string name="activity_in_vehicle">Járműben</string>
-    <string name="activity_confidence">Megbízhatóság</string>
-    <string name="activity_still">Mozdulatlan</string>
-    <string name="activity_on_bicycle">Biciklin</string>
-    <string name="activity_on_foot">Séta</string>
-    <string name="activity_running">Futás</string>
-    <string name="activity_tilting">Billentés</string>
-    <string name="activity_walking">Gyaloglás</string>
-    <string name="activity_unknown">Ismeretlen</string>
     <string name="altitude_subtractgeoidheight_summary">Átlagos tengerszint feletti magasság (MSL) rögzítése WGS84 magasság helyett, levonja a geoid magasságot a GPS magasságból. Csak GPS pontok esetén, hálózati vagy NMEA pontokra nem vonatkozik.</string>
     <string name="altitude_subtractgeoidheight_title">MSL használata WGS84 helyett</string>
     <string name="altitude_subtractoffset_title">Kivonandó magassági eltolás</string>
@@ -298,9 +281,10 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
     <string name="profile_default">Alapértelmezett profil</string>
     <string name="profile_add_new">Profil hozzáadása</string>
     <string name="gpslogger_permissions_rationale_title">Szükséges jogosultságok</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ennek a programnak különböző engedélyekre van szüksége a megfelelő működéshez. <br /> <b>Készülék pozíciója</b> - Ez engedélyezi a mobiltornyokból és a GPS-ből származó pozíció olvasását<br /><b>Képek, média, fájlok</b> - Ez engedélyezi a naplófájlok és tesztfájlok írását, és a fájllista olvasását feltöltéshez vagy megosztáshoz. A program nem fog hozzáérni a fényképeihez vagy médiafájljaihoz.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Készülék pozíciója</b> - Ez engedélyezi a mobiltornyokból és a GPS-ből származó pozíció olvasását]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Képek, média, fájlok</b> - Ez engedélyezi a naplófájlok és tesztfájlok írását, és a fájllista olvasását feltöltéshez vagy megosztáshoz. A program nem fog hozzáérni a fényképeihez vagy médiafájljaihoz.]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Egy vagy több alkalmazás engedélyt elutasított, melyekre az alkalmazásnak szüksége van.
-Az engedélyek megadásához lépjen be az alkalmazás beállítások képernyőre. <br /> <br />Ha véglegesen megtagadta az engedélyeket, visszaállíthatja őket a rendszerbeállításokban. ]]></string>
+Az engedélyek megadásához lépjen be az alkalmazás beállítások képernyőre. <br /> <br />Ha véglegesen megtagadta az engedélyeket, visszaállíthatja őket a rendszerbeállításokban.]]></string>
     <string name="privacy_policy">Adatvédelmi irányelvek</string>
     <string name="debuglog_attach_to_email">Hibakeresési napló csatolása az e-mailhez</string>
     <string name="debuglog_attach_to_email_summary">Hibakeresési naplót mellékel az e-mailhez néhány diagnosztikai információval</string>

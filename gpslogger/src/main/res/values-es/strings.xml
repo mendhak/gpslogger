@@ -89,7 +89,6 @@
     <string name="new_file_creation_custom">Archivo personalizado</string>
     <string name="pref_performance_title">Rendimiento</string>
     <string name="time_before_logging_title">Tiempo entre cada registro</string>
-    <string name="time_before_logging_summary">Use 0 para máxima frecuencia, pero es mejor reducirla para conservar batería.</string>
     <string name="time_before_logging_dialog_title">Tiempo en segundos</string>
     <string name="time_before_logging_hint">Ingrese segundos (máx. 9999)</string>
     <string name="keep_fix_summary">Cuidado, esto reducira dramaticamente la duracion de su batteria. Use solamente para mayor precision con frequencias bajas.</string>
@@ -182,8 +181,6 @@
     <string name="autoftp_invalid_settings">Configuración no válida</string>
     <string name="autoftp_invalid_summary">Algunos ajustes no son válidos. Compruebe todos los valores importantes.</string>
     <string name="menu_faq">Ayuda y PPFF</string>
-    <string name="gpsf_missing">Servicio no disponible</string>
-    <string name="gpsf_missing_description">Esta funcionalidad necesita servicios de Google Play.</string>
     <string name="log_customurl_title">Enviar a URL personalizada</string>
     <string name="log_customurl_summary">Enviar datos a tu propio servidor via HTTP</string>
     <string name="txt_annotation">Comentarios:</string>

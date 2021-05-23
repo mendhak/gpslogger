@@ -101,7 +101,6 @@
            Je hebt de mogelijkheid om bijkomende dynamische parameters op te geven zoals serienummer, jaar, uur, minuut, enz. Té dynamische bestandsnamen werken minder goed met automatische verzending, aangezien die steeds het laatste bestand versturen.</string>
     <string name="pref_performance_title">Performantie</string>
     <string name="pref_performance_summary">Timings, filters en locatiebepaling</string>
-    <string name="time_before_logging_summary">Gebruik 0 voor maximale frequentie, maar een hogere waarde bevordert de accuduur.</string>
     <string name="time_before_logging_dialog_title">﻿Tijd in seconden</string>
     <string name="time_before_logging_hint">﻿Voer seconden in (max 9999)</string>
     <string name="keep_fix_summary">Pas op, verkort de accuduur sterk. Alleen gebruiken voor hogere nauwkeurigheid met lagere frequenties.</string>
@@ -204,8 +203,6 @@
     <string name="autoftp_invalid_settings">Ongeldige instellingen</string>
     <string name="autoftp_invalid_summary">Sommige instellingen zijn ongeldig. Controleer of alle noodzakelijke velden zijn ingevuld.    </string>
     <string name="menu_faq">Help en veel gestelde vragen (FAQ)</string>
-    <string name="gpsf_missing">Ontbrekende Service</string>
-    <string name="gpsf_missing_description">U hebt Google Play Services Framework nodig voor deze functie.</string>
     <string name="log_customurl_title">Log naar aangepaste URL</string>
     <string name="log_customurl_summary">Verstuur de log-informatie naar je eigen server via HTTP</string>
     <string name="txt_annotation">Aantekening:</string>
@@ -246,7 +243,6 @@
     <string name="listeners_title">Locatie-providers</string>
     <string name="autosend_frequency_hint">Aantal minuten</string>
     <string name="pref_logging_file_no_permissions">Deze map is niet beschrijfbaar met GPSLogger. Selecteer een andere map om naar te schrijven.</string>
-    <string name="pref_gpsvisualizer">GPS logs en grafieken visualiseren</string>
     <string name="new_file_custom_each_time_title">Vraag om een bestandsnaam bij elke start</string>
     <string name="new_file_custom_each_time_summary">Vraag om een bestandsnaam telkens als het loggen wordt gestart</string>
     <string name="new_file_custom_keep_changing_title">Sta dynamisch wijzigen van aangepaste bestandsnaam toe</string>
@@ -256,18 +252,6 @@
     <string name="no_network_message">Er is geen netwerk beschikbaar</string>
     <string name="hide_notification_buttons">Meldingen verbergen</string>
     <string name="restart_required">Je moet de GPSLogger opnieuw opstarten om deze instelling te laten werken</string>
-    <string name="pref_performance_activityrecognition">Activiteit herkenning</string>
-    <string name="activityrecognition_dont_log_if_still">Niet loggen als ik niet beweeg</string>
-    <string name="txt_activity">Activiteit:</string>
-    <string name="activity_in_vehicle">In voertuig</string>
-    <string name="activity_confidence">Zekerheid</string>
-    <string name="activity_still">Stil</string>
-    <string name="activity_on_bicycle">Op fiets</string>
-    <string name="activity_on_foot">Te voet</string>
-    <string name="activity_running">Rennen</string>
-    <string name="activity_tilting">Kantelen/draaien</string>
-    <string name="activity_walking">Wandelen</string>
-    <string name="activity_unknown">Onbekend</string>
     <string name="altitude_subtractgeoidheight_summary">Gebruikt Mean Sea Level (MSL, gemiddeld zeeniveau) in plaats van WGS84-hoogte, door de geoïdehoogte van de GPS-hoogte af te trekken. Geldt alleen voor GPS-satellietpunten, niet voor netwerk of NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">MSL gebruiken in plaats van WGS84</string>
     <string name="altitude_subtractoffset_title">Hoogte offset aftrekken</string>
@@ -284,7 +268,8 @@
     <string name="profile_default">Standaardprofiel</string>
     <string name="profile_add_new">Profiel toevoegen</string>
     <string name="gpslogger_permissions_rationale_title">Machtigingen vereist</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Deze app vereist allerlei machtigingen om goed te functioneren. <br /><b>Apparaat locatie</b> - Deze machtiging laat toe locatiegegevens te lezen van gsm-masten en van de GPS hardware van het apparaat.<br /><b>Foto\'s, media, bestanden</b> - Deze machtiging laat toe logbestanden en testbestanden in de opslagruimte te bewaren en een lijst van bestanden te lezen om te uploaden of te delen. Deze app zal uw foto\'s of media niet benaderen.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Apparaat locatie</b> - Deze machtiging laat toe locatiegegevens te lezen van gsm-masten en van de GPS hardware van het apparaat.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Foto\'s, media, bestanden</b> - Deze machtiging laat toe logbestanden en testbestanden in de opslagruimte te bewaren en een lijst van bestanden te lezen om te uploaden of te delen. Deze app zal uw foto\'s of media niet benaderen.]]></string>
     <string name="privacy_policy">Privacybeleid</string>
     <string name="debuglog_attach_to_email">Voeg debug-log toe aan e-mail</string>
     <string name="debuglog_attach_to_email_summary">Voegt debug-log toe aan e-mail, samen met wat diagnostische informatie</string>

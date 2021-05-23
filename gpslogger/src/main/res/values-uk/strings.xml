@@ -112,7 +112,6 @@
     <string name="pref_performance_title">Продуктивність</string>
     <string name="pref_performance_summary">Інтервали, фільтри та провайдери</string>
     <string name="time_before_logging_title">Інтервал запису</string>
-    <string name="time_before_logging_summary">Для запису в реальному часі використовуйте 0, але більший інтервал кращий для збереження заряду батареї.        </string>
     <string name="time_before_logging_dialog_title">Час в секундах</string>
     <string name="time_before_logging_hint">Введіть секунди (макс. 9999)</string>
     <string name="keep_fix_summary">Обережно, це суттєво зменшує заряд батареї. Використовуйте лише для більшої точності з малою частотою.</string>
@@ -224,8 +223,6 @@
     <string name="autoftp_invalid_settings">Неприпустимі параметри</string>
     <string name="autoftp_invalid_summary">Деякі параметри неприпустимі. Будь ласка, переконайтеся, що ви заповнили всі відповідні поля.     </string>
     <string name="menu_faq">Допомога і ЧаПи (FAQ)</string>
-    <string name="gpsf_missing">Сервіс відсутній</string>
-    <string name="gpsf_missing_description">Для використання цієї функції необхідний доступ до Google Play Services Framework.</string>
     <string name="log_customurl_title">Запис до обраного URL</string>
     <string name="log_customurl_summary">Надсилання даних до обраного сервера через HTTP</string>
     <string name="txt_annotation">Анотація:</string>
@@ -273,7 +270,6 @@
     <string name="listeners_title">Провайдери розташування</string>
     <string name="autosend_frequency_hint">Кількість хвилин</string>
     <string name="pref_logging_file_no_permissions">Ця тека не доступна програмі GPSLogger для запису. Будь ласка, виберіть іншу теку.</string>
-    <string name="pref_gpsvisualizer">Візуалізація статистики журналу GPS та перегляд графіків</string>
     <string name="new_file_custom_each_time_title">Запитувати ім\'я файлу при кожному старті</string>
     <string name="new_file_custom_each_time_summary">Запитувати власне ім\'я файлу кожного разу, коли починається запис</string>
     <string name="new_file_custom_keep_changing_title">Дозволити динамічно змінювати ім\'я файлу</string>
@@ -283,19 +279,6 @@
     <string name="no_network_message">Немає мережі</string>
     <string name="hide_notification_buttons">Сховати кнопки сповіщень</string>
     <string name="restart_required">Для застосування налаштувань Вам потрібно буде перезапустити GPSLogger</string>
-    <string name="pref_performance_activityrecognition">Розпізнавання активности</string>
-    <string name="activityrecognition_dont_log_if_still">Не записувати, якщо я не рухаюсь</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Якщо з моменту останнього точки немає руху акселерометру, активний запис призупиняється на тривалість інтервалу запису. Навіть, якщо ви знову почнете рух. Пасивні точки все ще можуть бути записані.</string>
-    <string name="txt_activity">Активність:</string>
-    <string name="activity_in_vehicle">У транспортному засобі</string>
-    <string name="activity_confidence">Впевненість</string>
-    <string name="activity_still">Нерухомий</string>
-    <string name="activity_on_bicycle">На велосипеді</string>
-    <string name="activity_on_foot">Пішки</string>
-    <string name="activity_running">Біг</string>
-    <string name="activity_tilting">Нахиляння</string>
-    <string name="activity_walking">Ходьба</string>
-    <string name="activity_unknown">Невідомо</string>
     <string name="altitude_subtractgeoidheight_summary">Використовує середній рівень моря (MSL) замість висоти WGS84 шляхом віднімання висоти геоїда від висоти GPS. Стосується лише GPS супутникових точок, не мережі або NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">Використання MSL замість WGS84</string>
     <string name="altitude_subtractoffset_title">Віднімання зміщення від висоти</string>
@@ -312,7 +295,8 @@
     <string name="profile_default">Профіль за замовчуванням</string>
     <string name="profile_add_new">Додати профіль</string>
     <string name="gpslogger_permissions_rationale_title">Потрібні дозволи</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ця програма вимагає різні дозволи для того, щоб працювати належним чином. <br /><b>Місцезнаходження</b> - Цей дозвіл дозволяє читати дані про місцезнаходження з антен мобільного зв\'язку та пристрою GPS.<br /><b>Фото, мультимедія, файли</b> - Цей дозвіл дозволяє писати журнали й тестові файли для зберігання і читання зі списку файлів для завантаження або спільного використання. Це додаток не буде отримувати доступ до фото або медіа даних.<br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Місцезнаходження</b> - Цей дозвіл дозволяє читати дані про місцезнаходження з антен мобільного зв\'язку та пристрою GPS.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Фото, мультимедія, файли</b> - Цей дозвіл дозволяє писати журнали й тестові файли для зберігання і читання зі списку файлів для завантаження або спільного використання. Це додаток не буде отримувати доступ до фото або медіа даних.]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Ви не дали один або кілька дозволів, які вимагає дана програма. Щоб надати ці дозволи, потрібно перейти на екран налаштувань програми. <br /><br />Якщо у вас увімкнене постійне блокування дозволів ви можете скинути їх у системних налаштуваннях. ]]></string>
     <string name="privacy_policy">Політика конфіденційності</string>
     <string name="debuglog_attach_to_email">Прикріпляти журнал відлагодження до email</string>

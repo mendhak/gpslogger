@@ -98,8 +98,6 @@
         ay maaaring hindi gumana ng ayos na may kasamang auto send na mga features dahil ito ay nagpapadala lamang ng pinakabagong file.</string>
     <string name="pref_performance_summary">Mga pagsasaoras, mga filters at mga tagapakinig</string>
     <string name="time_before_logging_title">Pagitan ng pagtatala</string>
-    <string name="time_before_logging_summary">Gamitin ang 0 para sa pinakamataas na frequency, pero ang mas mabagal ay mas mahusay para sa buhay ng baterya.
-    </string>
     <string name="time_before_logging_dialog_title">Oras sa segundo</string>
     <string name="time_before_logging_hint">Ilagay ang segundo (max 9999)</string>
     <string name="keep_fix_summary">Maging maingat, ito ay lubhang makakabawas sa buhay ng baterya. Gamitin lang para sa
@@ -202,8 +200,6 @@
     <string name="autoftp_invalid_summary">Ang ilan sa iyong mga settings ay imbalido. Mangyaring siguraduhin na napunan mo lahat         ang mga naaangkop na fields.
     </string>
     <string name="menu_faq">Tulong at FAQ</string>
-    <string name="gpsf_missing">Nawawalang Serbisyo</string>
-    <string name="gpsf_missing_description">Kakailanganin mo ang Google Play Services Framework upang magamit ang tampok na ito.</string>
     <string name="log_customurl_title">Mag-log sa custom na URL</string>
     <string name="log_customurl_summary">Magpadala ng impormasyon sa pag-log in sa iyong sariling server sa HTTP</string>
     <string name="txt_annotation">Anotasyon:</string>
@@ -240,7 +236,6 @@
     <string name="listeners_title">Mga nagbibigay ng lokasyon</string>
     <string name="autosend_frequency_hint">Bilang ng mga minuto</string>
     <string name="pref_logging_file_no_permissions">Ang folder na iyon ay hindi maaaring sulatan ng GPSLogger. Mangyaring pumili ng isa pang folder upang sumulat sa.</string>
-    <string name="pref_gpsvisualizer">I-visualize ang mga istatistika ng log ng GPS at mga graph</string>
     <string name="new_file_custom_each_time_title">Humingi ng isang pangalan ng file sa bawat simula</string>
     <string name="new_file_custom_each_time_summary">Mag-prompt para sa isang pasadyang pangalan ng file tuwing nagsisimula ang pag-log</string>
     <string name="new_file_custom_keep_changing_title">Payagan ang custom na pangalan ng file na baguhin nang pabago-bago</string>
@@ -250,17 +245,6 @@
     <string name="no_network_message">Walang available na network</string>
     <string name="hide_notification_buttons">Itago ang mga pindutan ng abiso</string>
     <string name="restart_required">Kakailanganin mong i-restart ang GPSLogger para magamit ang setting na ito</string>
-    <string name="pref_performance_activityrecognition">Pagkilala sa Aktibidad</string>
-    <string name="activityrecognition_dont_log_if_still">Huwag mag-log kung hindi ako gumagalaw</string>
-    <string name="txt_activity">Aktibidad:</string>
-    <string name="activity_in_vehicle">Nasa Sasakyan</string>
-    <string name="activity_confidence">Kumpiyansa</string>
-    <string name="activity_still">Nakatigil</string>
-    <string name="activity_on_bicycle">Nasa bisikleta</string>
-    <string name="activity_on_foot">Naka-paa</string>
-    <string name="activity_running">Tumatakbo</string>
-    <string name="activity_walking">Naglalakad</string>
-    <string name="activity_unknown">Hindi kilala</string>
     <string name="altitude_subtractgeoidheight_summary">Ginagamit ang Mean Sea Level (MSL) kaysa sa WGS84 na taas sa pagbawas ng geoidheight sa taas ng GPS. Angkop lamang sa mga punto ng GPS satellite, hindi network o NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">Gumamit ng MSL sa halip ng WGS84</string>
     <string name="altitude_subtractoffset_title">Bawasan ang altitude offset</string>
@@ -276,7 +260,8 @@
     <string name="profile_default">Default na Profile</string>
     <string name="profile_add_new">Magdagdag ng profile</string>
     <string name="gpslogger_permissions_rationale_title">Kinakailangan ang mga pahintulot</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ang app na ito ay nangangailangan ng iba\'t-ibang permiso upang gumana ng wasto. <br /><b>Lokasyon ng aparato</b> - Ang permisong ito ay papayag sa pagbasa ng datos ng lokasyon galing sa mga tore ng cell at sa GPS hardware ng aparato. <br /><b>Mga larawan, media, files</b> - Ang permisong ito ay papayag sa pagsulat ng files ng tala at files ng pagsusuri sa imbakan, at pagbasa mula sa isang listahan ng mga files para sa pag-upload o pagbahagi. Ang app na ito ay hindi mag-access ng iyong mga larawan o media. <br /><br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Lokasyon ng aparato</b> - Ang permisong ito ay papayag sa pagbasa ng datos ng lokasyon galing sa mga tore ng cell at sa GPS hardware ng aparato.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Mga larawan, media, files</b> - Ang permisong ito ay papayag sa pagsulat ng files ng tala at files ng pagsusuri sa imbakan, at pagbasa mula sa isang listahan ng mga files para sa pag-upload o pagbahagi. Ang app na ito ay hindi mag-access ng iyong mga larawan o media.]]></string>
     <string name="privacy_policy">Patakaran sa Pagkapribado</string>
     <string name="debuglog_attach_to_email">Maglakip ng debug log sa email</string>
     <string name="debuglog_attach_to_email_summary">Nag-attach sa debug log sa isang email kasama ang ilang impormasyon sa diagnostic</string>

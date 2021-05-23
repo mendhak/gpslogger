@@ -105,7 +105,6 @@
     <string name="pref_performance_title">Wydajność</string>
     <string name="pref_performance_summary">Opcje czasu, filtry i nasłuch</string>
     <string name="time_before_logging_title">Interwał rejestrowania</string>
-    <string name="time_before_logging_summary">Wpisz 0 dla maksymalnej częstotliwości; mniejsza częstotliwość zmniejsza zużycie baterii.    </string>
     <string name="time_before_logging_dialog_title">Czas w sekundach</string>
     <string name="time_before_logging_hint">Wprowadź czas (max 9999)</string>
     <string name="keep_fix_summary">Uważaj, zużycie baterii drastycznie wzrośnie. Używaj wyłącznie dla większej precyzji przy niskich częstotliwościach.    </string>
@@ -220,8 +219,6 @@
     <string name="autoftp_invalid_settings">Nieprawidłowe ustawienia</string>
     <string name="autoftp_invalid_summary">Niektóre ustawienia są nieprawidłowe. Upewnij się, czy wypełniłeś wszystkie istotne pola.     </string>
     <string name="menu_faq">Pomoc i FAQ</string>
-    <string name="gpsf_missing">Brak usługi</string>
-    <string name="gpsf_missing_description">Potrzebujesz Google Play Services Framework, aby użyć tej funkcji.</string>
     <string name="log_customurl_title">Zapisuj do niestandardowego URL-a</string>
     <string name="log_customurl_summary">Wysyłaj przez HTTP logi do własnego serwera</string>
     <string name="txt_annotation">Adnotacja:</string>
@@ -269,7 +266,6 @@
     <string name="listeners_title">Dostawcy usług lokalizacji</string>
     <string name="autosend_frequency_hint">Liczba minut</string>
     <string name="pref_logging_file_no_permissions">Ten katalog nie jest zapisywany przez GPSLogger. Wybierz inny katalog do zapisu.</string>
-    <string name="pref_gpsvisualizer">Wizualizuj statystyki logowania</string>
     <string name="new_file_custom_each_time_title">Pytaj o nazwę pliku przy każdym uruchomieniu</string>
     <string name="new_file_custom_each_time_summary">Pytaj o nazwę pliku za każdym razem kiedy rozpoczyna się rejestracja</string>
     <string name="new_file_custom_keep_changing_title">Zezwalaj na niestandardowe nazwy plików, aby zmieniać je dynamicznie</string>
@@ -279,19 +275,6 @@
     <string name="no_network_message">Sieć jest niedostępna</string>
     <string name="hide_notification_buttons">Ukryj przyciski powiadomień</string>
     <string name="restart_required">Musisz uruchomić ponownie GPSLogger aby użyć tych ustawień</string>
-    <string name="pref_performance_activityrecognition">Rozpoznawanie aktywności</string>
-    <string name="activityrecognition_dont_log_if_still">Nie loguj, jeśli się nie ruszam</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Jeżeli nie istnieje ruch akcelorometru od ostatniego punktu, aktywne rejestrowanie zostanie zatrzymane, do momentu w którym ponownie się przemieścisz. Pasywne punkty nadal mogą być rejestrowane.</string>
-    <string name="txt_activity">Aktywność:</string>
-    <string name="activity_in_vehicle">W pojeździe</string>
-    <string name="activity_confidence">Dokładność</string>
-    <string name="activity_still">W miejscu</string>
-    <string name="activity_on_bicycle">Na rowerze</string>
-    <string name="activity_on_foot">Pieszo</string>
-    <string name="activity_running">Bieg</string>
-    <string name="activity_tilting">Obrót</string>
-    <string name="activity_walking">Spacer</string>
-    <string name="activity_unknown">Nieznana</string>
     <string name="altitude_subtractgeoidheight_summary">Używa oznaczonego poziomu morza (MSL) zamiast wysokości WGS84 poprzez odjęcie wysokości geoid od wysokości GPS. Dotyczy tylko punktów satelitarnych GPS, nie sieci lub NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">Użyj MSL zamiast WGS84</string>
     <string name="altitude_subtractoffset_title">Odjąć przesunięcie wysokości</string>
@@ -308,8 +291,9 @@
     <string name="profile_default">Domyślny profil</string>
     <string name="profile_add_new">Dodaj profil</string>
     <string name="gpslogger_permissions_rationale_title">Wymagane uprawnienia</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ta aplikacja wymaga różnych uprawnień, aby funkcjonować prawidłowo.<br /><b>Lokalizacja urządzenia</b> - To uprawnienie zezwala na odczyt danych z masztów telefonicznych i sprzętu GPS urządzenia.<br /><b>Zdjęcia, multimedia, pliki</b> - To uprawnienie zezwala na zapisywanie plików rejestru na dysk, oraz na odczyt, przesyłanie lub udostępnianie. Aplikacja nie będzie miała dostępu do twoich zdjęć i multimediów.<br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Odmówiłeś jednego lub więcej uprawnień wymaganych przez tę aplikację.  Aby uzyskać te uprawnienia, musisz przejść do ekranu ustawień aplikacji.<br /><br />Jeśli na stałe odmówiono Ci uprawnień, możesz je zresetować w ustawieniach systemu. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Lokalizacja urządzenia</b> - To uprawnienie zezwala na odczyt danych z masztów telefonicznych i sprzętu GPS urządzenia.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Zdjęcia, multimedia, pliki</b> - To uprawnienie zezwala na zapisywanie plików rejestru na dysk, oraz na odczyt, przesyłanie lub udostępnianie. Aplikacja nie będzie miała dostępu do twoich zdjęć i multimediów.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Odmówiłeś jednego lub więcej uprawnień wymaganych przez tę aplikację. Aby uzyskać te uprawnienia, musisz przejść do ekranu ustawień aplikacji.<br /><br />Jeśli na stałe odmówiono Ci uprawnień, możesz je zresetować w ustawieniach systemu.]]></string>
     <string name="privacy_policy">Polityka prywatności</string>
     <string name="debuglog_attach_to_email">Dołącz do wiadomości e-mail rejestr debugowania</string>
     <string name="debuglog_attach_to_email_summary">Dołącza rejestr debugowania wraz z niektórymi informacjami diagnostycznymi do wiadomości email</string>

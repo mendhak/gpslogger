@@ -104,7 +104,6 @@
     <string name="pref_performance_title">Leistung</string>
     <string name="pref_performance_summary">Intervalle, Filter und Standortbestimmung</string>
     <string name="time_before_logging_title">Aufzeichnungsintervall</string>
-    <string name="time_before_logging_summary">0 (Null) für maximale Häufigkeit verwenden (größere Intervalle schonen Ihren Akku).    </string>
     <string name="time_before_logging_dialog_title">Zeit in Sekunden</string>
     <string name="time_before_logging_hint">Eingabe in Sekunden (max. 9999)</string>
     <string name="keep_fix_summary">Seien Sie vorsichtig - Diese Einstellung wird die Akkulaufzeit drastisch verkürzen. Nur für höhere Präzision bei geringer Häufigkeit verwenden.    </string>
@@ -210,8 +209,6 @@
     <string name="autoftp_invalid_settings">Ungültige Einstellungen</string>
     <string name="autoftp_invalid_summary">Einige Ihrer Einstellungen sind ungültig. Bitte stellen Sie sicher, dass Sie alle relevanten Felder ausgefüllt haben.    </string>
     <string name="menu_faq">Hilfe und Häufig gestellte Fragen</string>
-    <string name="gpsf_missing">Fehlender Service</string>
-    <string name="gpsf_missing_description">Für diese Funktion wird das „Google Play Services Framework” benötigt.</string>
     <string name="log_customurl_title">In eine benutzerdefinierten URL protokollieren</string>
     <string name="log_customurl_summary">Aufzeichnungsinformationen über HTTP an den eigenen Server senden</string>
     <string name="txt_annotation">Anmerkung:</string>
@@ -259,7 +256,6 @@
     <string name="listeners_title">Standortbestimmungsmethoden</string>
     <string name="autosend_frequency_hint">Minuten</string>
     <string name="pref_logging_file_no_permissions">GPSLogger besitzt für diesen Ordner keine Schreibrechte. Bitte einen anderen Speicherort festlegen.</string>
-    <string name="pref_gpsvisualizer">Darstellung von GPS-Protokollstatistiken und -Diagrammen</string>
     <string name="new_file_custom_each_time_title">Bei jedem Start nach einem Dateinamen fragen</string>
     <string name="new_file_custom_each_time_summary">Aufforderung zur Eingabe eines benutzerdefinierten Dateinamens bei jedem Start der Aufzeichnung</string>
     <string name="new_file_custom_keep_changing_title">Erlauben, dass sich benutzerdefinierte Dateinamen dynamisch ändern</string>
@@ -269,19 +265,6 @@
     <string name="no_network_message">Netzwerk nicht verfügbar</string>
     <string name="hide_notification_buttons">Benachrichtigungs-Schaltflächen ausblenden</string>
     <string name="restart_required">GPSLogger muss neu gestartet werden, damit diese Einstellung wirksam wird</string>
-    <string name="pref_performance_activityrecognition">Aktivitätserkennung</string>
-    <string name="activityrecognition_dont_log_if_still">Aufzeichnung pausieren, wenn keine Standortänderung erfolgt</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Wenn die Bewegungssensoren des Handys nach dem letzten aufgezeichneten nicht angeschlagen haben, wird das Aufzeichnen pausiert, auch wenn man sich tatsächlich bewegt. Passives Aufzeichnen wird nicht pausiert.</string>
-    <string name="txt_activity">Aktivität:</string>
-    <string name="activity_in_vehicle">Im Fahrzeug</string>
-    <string name="activity_confidence">Zuverlässigkeit</string>
-    <string name="activity_still">Ruhend</string>
-    <string name="activity_on_bicycle">Fahrrad fahrend</string>
-    <string name="activity_on_foot">Zu Fuß</string>
-    <string name="activity_running">Laufen</string>
-    <string name="activity_tilting">Neigung</string>
-    <string name="activity_walking">Gehen</string>
-    <string name="activity_unknown">Unbekannt</string>
     <string name="altitude_subtractgeoidheight_summary">Verwendet den „Mittleren Meeresspiegel” (MSL) anstelle der WGS84-Höhe (World Geodetic System 1984), indem die Geoidhöhe von der GPS-Höhe abgezogen wird. Gilt nur für Punkte, die mittels GPS-Satelliten und nicht über Netzwerk oder NMEA bestimmt wurden.</string>
     <string name="altitude_subtractgeoidheight_title">„Mittlerer Meeresspiegel”, statt WGS84 verwenden</string>
     <string name="altitude_subtractoffset_title">Höhenversatzes abziehen</string>
@@ -298,7 +281,8 @@
     <string name="profile_default">Standardprofil</string>
     <string name="profile_add_new">Neues Profil</string>
     <string name="gpslogger_permissions_rationale_title">Erforderliche Berechtigungen</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Diese Anwendung erfordert verschiedene Berechtigungen, um richtig funktionieren zu können.<br /> <b>Standort</b> - Diese Berechtigung ermöglicht der App das Lesen der aktuellen Standortdaten.<br /> <b>Fotos/Medien/Dateien</b> - Diese Berechtigung ermöglicht es, Protokolldateien und Test-Dateien zu speichern, wie auch das Lesen einer Liste von Dateien, um sie hochladen oder teilen zu können. Diese App greift nicht auf Ihre Fotos oder Medien zu.<br /> <br/>  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Standort</b> - Diese Berechtigung ermöglicht der App das Lesen der aktuellen Standortdaten.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotos/Medien/Dateien</b> - Diese Berechtigung ermöglicht es, Protokolldateien und Test-Dateien zu speichern, wie auch das Lesen einer Liste von Dateien, um sie hochladen oder teilen zu können. Diese App greift nicht auf Ihre Fotos oder Medien zu.]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Sie haben eine oder mehrere Berechtigungen abgelehnt, welche die App benötigt. Sie müssen in die Appeinstellungen wechseln und der App die benötigten Berechtigungen erteilen. <br /><br /> Falls Sie die Berechtigungen permanent abgelehnt haben, so können Sie diese in den Systemeinstellungen zurücksetzen.]]></string>
     <string name="privacy_policy">Datenschutzbestimmungen</string>
     <string name="debuglog_attach_to_email">Fehlerprotokolldatei an E-Mail anhängen</string>

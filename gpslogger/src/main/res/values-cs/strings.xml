@@ -100,8 +100,6 @@
     <string name="pref_performance_title">Výkon</string>
     <string name="pref_performance_summary">Časování, filtry a posluchači</string>
     <string name="time_before_logging_title">Interval záznamu</string>
-    <string name="time_before_logging_summary">Použijte 0 pro maximální frekvenci, ale pomalejší je lepší pro výdrž baterie.
-    </string>
     <string name="time_before_logging_dialog_title">Čas v sekundách</string>
     <string name="time_before_logging_hint">Zadejte sekundy (maximum 9999)</string>
     <string name="keep_fix_summary">Buďte opatrní, toto dramaticky sníží výdrž na baterii. Použijte pouze pro vyšší přesnost při nízkých frekvencích.</string>
@@ -205,8 +203,6 @@
     <string name="autoftp_invalid_settings">Neplatné nastavení</string>
     <string name="autoftp_invalid_summary">Některá nastavení jsou neplatné. Přesvědčte se, zda že jste vyplnili všechna příslušná pole.</string>
     <string name="menu_faq">Nejčastější dotazy a nápověda</string>
-    <string name="gpsf_missing">Chybí služba</string>
-    <string name="gpsf_missing_description">Potřebujete framework služeb Google Play pro použití této funkce.</string>
     <string name="log_customurl_title">Vlastní URL</string>
     <string name="log_customurl_summary">Odeslat informace o záznamech na svůj vlastní server pomocí HTTP</string>
     <string name="txt_annotation">Poznámka:</string>
@@ -252,7 +248,6 @@
     <string name="listeners_title">Zjišťování polohy</string>
     <string name="autosend_frequency_hint">Počet minut</string>
     <string name="pref_logging_file_no_permissions">GPSLogger nemůže do této složky nic zapisovat. Prosím zvol jinou složku pro zápis.</string>
-    <string name="pref_gpsvisualizer">Vizualizovat statistiky GPS záznamů a grafy</string>
     <string name="new_file_custom_each_time_title">Požádat o název souboru při každém spuštění</string>
     <string name="new_file_custom_each_time_summary">Při každém spuštění záznamu se dotázat na vlastní název souboru</string>
     <string name="new_file_custom_keep_changing_title">Povolit dynamickou změnu vlastního názvu souboru</string>
@@ -262,19 +257,6 @@
     <string name="no_network_message">Není dostupná žádná síť</string>
     <string name="hide_notification_buttons">Skrýt tlačítka notifikací</string>
     <string name="restart_required">Budete muset restartovat GPSLogger aby se toto nastavení projevilo</string>
-    <string name="pref_performance_activityrecognition">Rozpoznání aktivity</string>
-    <string name="activityrecognition_dont_log_if_still">Nezaznamenávat pokud se nehýbu</string>
-    <string name="activityrecognition_dont_log_if_still_summary">Pokud od posledního bodu akcelerometr nezaznamená žádný pohyb, aktivní záznam se pozastaví po dobu vašeho intervalu záznamu, ikdyž se jste se předtím hýbali. Záznam pasivních bodů může stále pokračovat.</string>
-    <string name="txt_activity">Aktivita:</string>
-    <string name="activity_in_vehicle">Ve vozidle</string>
-    <string name="activity_confidence">Důvěra</string>
-    <string name="activity_still">Stále</string>
-    <string name="activity_on_bicycle">Na kole</string>
-    <string name="activity_on_foot">Na noze</string>
-    <string name="activity_running">Běh</string>
-    <string name="activity_tilting">Naklánění</string>
-    <string name="activity_walking">Chůze</string>
-    <string name="activity_unknown">Neznámý</string>
     <string name="altitude_subtractgeoidheight_summary">Použije střední hodnotu úrovně hladiny moře místo WGS84 výšky odečtením výšky geoidu z GPS nadmořské výšky. Pouze se týká bodů z GPS satelitů, ne sítě nebo NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">Použít MSL místo WGS84.</string>
     <string name="altitude_subtractoffset_title">Odečíst posunutí nadmořské výšky</string>
@@ -291,7 +273,8 @@
     <string name="profile_default">Výchozí profil</string>
     <string name="profile_add_new">Přidat profil</string>
     <string name="gpslogger_permissions_rationale_title">Požadovaná oprávnění</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Tato aplikace vyžaduje různá oprávnění, aby mohla správně fungovat. <br /> <b>Poloha zařízení</b> - toto oprávnění umožňuje číst údaje o poloze z GSM vysílačů a GPS modulu zařízení. <br /><b>Fotky, média, soubory</b> - toto oprávnění umožňuje zápis souborů záznamů a testovacích souborů na úložiště, a čtení ze seznamu souborů pro nahrávání nebo sdílení. Tato aplikace nebude přistupovat k vašim fotkám nebo médiím.<br /><br />  ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Poloha zařízení</b> - toto oprávnění umožňuje číst údaje o poloze z GSM vysílačů a GPS modulu zařízení.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotky, média, soubory</b> - toto oprávnění umožňuje zápis souborů záznamů a testovacích souborů na úložiště, a čtení ze seznamu souborů pro nahrávání nebo sdílení. Tato aplikace nebude přistupovat k vašim fotkám nebo médiím.]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Zakázal(a) jste jedno nebo více práv, které tato aplikace vyžaduje. Je potřeba přejít do nastavení aplikace a udělit práva.  <br /><br />Pokud máte trvale zakázaná práva, můžete je resetovat v nastavení systému. ]]></string>
     <string name="privacy_policy">Zásady ochrany osobních údajů</string>
     <string name="debuglog_attach_to_email">Přiložit záznamy o ladění do emailu</string>

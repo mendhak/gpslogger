@@ -107,7 +107,6 @@
     <string name="pref_performance_title">عملکرد</string>
     <string name="pref_performance_summary">زمان بندی، فیلترها و شنوندگان</string>
     <string name="time_before_logging_title">فاصله میان لاگ ها</string>
-    <string name="time_before_logging_summary">برای فرکانس ماکزیمم از صفر استفاده کنید، اما برای عمر بهتر باطری مقادیر برداشت کمتر مناسب تر است.</string>
     <string name="time_before_logging_dialog_title">زمان (ثانیه)</string>
     <string name="time_before_logging_hint">ورود زمان برحسب ثانیه (حداکثر 9999)</string>
     <string name="keep_fix_summary">مراقب باشید، این حالت تا حد زیادی عمر باطری را کاهش خواهد داد. تنها برای دقت بالا با فرکانس های استفاده شود.</string>
@@ -128,11 +127,4 @@
     <string name="txt_longitude_short">طول جغرافیایی</string>
     <string name="listeners_cell">شبکه</string>
     <string name="donate_app">کمک مالی (گوگل پلی)</string>
-    <string name="activity_in_vehicle">سوار بر وسیله نقلیه</string>
-    <string name="activity_confidence">دقت</string>
-    <string name="activity_still">ایستاده</string>
-    <string name="activity_on_bicycle">دوچرخه</string>
-    <string name="activity_on_foot">پیاده</string>
-    <string name="activity_running">در حال دویدن</string>
-    <string name="activity_walking">حرکت پیاده</string>
 </resources>
