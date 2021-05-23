@@ -105,8 +105,6 @@
     <string name="pref_performance_title">Ydeevne</string>
     <string name="pref_performance_summary">Tidsindstillinger, filtre og lyttere</string>
     <string name="time_before_logging_title">Logningsinterval</string>
-    <string name="time_before_logging_summary">Benyt 0 til maksimumsfrekvens, langsommere giver dog længere batteritid.
-    </string>
     <string name="time_before_logging_dialog_title">Tid i sekunder</string>
     <string name="time_before_logging_hint">Angiv sekunder (maks. 9999)</string>
     <string name="keep_fix_summary">Benyt med omtanke, da dette vil reducere batteritiden drastisk. Benyt kun for større         
@@ -218,8 +216,6 @@ præcision ved lavere frekvenser.    </string>
         relevante felter.
     </string>
     <string name="menu_faq">Hjælp og FAQ</string>
-    <string name="gpsf_missing">Utilgængelig Tjeneste</string>
-    <string name="gpsf_missing_description">Denne funktion kræver adgang til Google Play Tjenesterammer.</string>
     <string name="log_customurl_title">Log til tilpasset URL</string>
     <string name="log_customurl_summary">Send logningsinfo til din egen server via HTTP</string>
     <string name="txt_annotation">Anmærkning:</string>
@@ -261,7 +257,6 @@ præcision ved lavere frekvenser.    </string>
     <string name="listeners_title">Placeringsudbydere</string>
     <string name="autosend_frequency_hint">Antal minutter</string>
     <string name="pref_logging_file_no_permissions">GPSLogger kan ikke skrive til denne mappe. Vælg venligst en andet mappe at skrive til.</string>
-    <string name="pref_gpsvisualizer">Visualisere GPS-logstatistik og grafer</string>
     <string name="new_file_custom_each_time_title">Spørg om filnavn ved hver opstart</string>
     <string name="new_file_custom_each_time_summary">Spørg om tilpasset filnavn, hver gang logføring påbegyndes</string>
     <string name="new_file_custom_keep_changing_title">Tillad dynamisk ændring af tilpasset filnavn</string>
@@ -271,18 +266,6 @@ præcision ved lavere frekvenser.    </string>
     <string name="no_network_message">Intet tilgængeligt netværk</string>
     <string name="hide_notification_buttons">Skjul notifikationsknapper</string>
     <string name="restart_required">Du er nødt til at genstarte GPSLogger for at effektuere denne indstilling</string>
-    <string name="pref_performance_activityrecognition">Aktivitetsgenkendelse</string>
-    <string name="activityrecognition_dont_log_if_still">Log ikke, hvis jeg ikke bevæger mig</string>
-    <string name="txt_activity">Aktivitet:</string>
-    <string name="activity_in_vehicle">I køretøj</string>
-    <string name="activity_confidence">Pålidelighed</string>
-    <string name="activity_still">Ubevægelig</string>
-    <string name="activity_on_bicycle">På cykel</string>
-    <string name="activity_on_foot">Til fods</string>
-    <string name="activity_running">Løber</string>
-    <string name="activity_tilting">Vipnet</string>
-    <string name="activity_walking">Spadserer</string>
-    <string name="activity_unknown">Ukendt</string>
     <string name="altitude_subtractgeoidheight_summary">Benytter MSL-højde (Mean Sea Level) i stedet for WGS84-højde ved at trække geo-ID-højde fra GPS-højde. Gælder kun for GPS-satellitpunkter, ikke for netværk eller NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">Benyt MSL i stedet for WGS84</string>
     <string name="altitude_subtractoffset_title">Fratræk højdeforskydning</string>
@@ -299,7 +282,6 @@ præcision ved lavere frekvenser.    </string>
     <string name="profile_default">Standardprofil</string>
     <string name="profile_add_new">Tilføj profil</string>
     <string name="gpslogger_permissions_rationale_title">Tilladelser kræves</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Denne app kræver forskellige rettigheder for at fungere korrekt. <br/><b>Enhedsplacering</b> - Denne rettighed tillader læsning af placeringsdata fra mobilmaster og enhedens GPS-hardware. <br/><b>Fotos, medier, filer</b> - Denne rettighed tillader skrivning af log- og testfiler til lagerpladsen samt læsning fra en liste af filer til upload eller deling. Denne app vil ikke tilgå dine fotos eller medier. <br/><br/>  ]]></string>
     <string name="privacy_policy">Fortrolighedspolitik</string>
     <string name="debuglog_attach_to_email">Vedhæft fejlfindingslogfil til e-mail</string>
     <string name="debuglog_attach_to_email_summary">Vedhæft fejlfindingslogfil til en e-mail sammen med nogle diagnostiskoplysninger</string>
