@@ -98,7 +98,6 @@
     <string name="new_file_custom_summary">Il est possible d\'utiliser un nom de fichier personnalisé. Ajouter éventuellement quelques paramètres dynamiques tels que le numéro de série, année, heure, minute, etc. Les noms de fichier très dynamiques peuvent ne pas fonctionner correctement avec la fonction d\'envoi automatique car seul le dernier fichier est envoyé.</string>
     <string name="pref_performance_summary">Délais, filtres et écouteurs</string>
     <string name="time_before_logging_title">Intervalle d’enregistrement</string>
-    <string name="time_before_logging_summary">Utiliser 0 pour la fréquence maximale, mais une fréquence plus faible augmente l\'autonomie de la batterie.    </string>
     <string name="time_before_logging_dialog_title">Temps en seconde</string>
     <string name="time_before_logging_hint">Saisir en seconde (max. 9999)</string>
     <string name="keep_fix_summary">Attention, cela va réduire considérablement l\'autonomie de la batterie. À utiliser uniquement pour
@@ -205,8 +204,6 @@ une plus grande précision à basses fréquences.    </string>
     <string name="autoftp_invalid_settings">Paramètres invalides</string>
     <string name="autoftp_invalid_summary">Certains des paramètres sont invalides. Merci de s\'assurer d\'avoir bien saisi tous les champs appropriés.</string>
     <string name="menu_faq">Aide et questions fréquemment posées</string>
-    <string name="gpsf_missing">Service absent</string>
-    <string name="gpsf_missing_description">Il faudra le Google Play Services Framework pour utiliser cette fonction.</string>
     <string name="log_customurl_title">Enregistrer vers une URL personnalisée</string>
     <string name="log_customurl_summary">Envoyer les infos d\'enregistrement par HTTP vers un serveur personnel</string>
     <string name="txt_annotation">Annotation :</string>
@@ -251,7 +248,6 @@ une plus grande précision à basses fréquences.    </string>
     <string name="listeners_title">Fournisseurs de positionnement</string>
     <string name="autosend_frequency_hint">Nombre de minutes</string>
     <string name="pref_logging_file_no_permissions">Ce dossier n’est pas accessible en écriture par GPSLogger. Merci de sélectionner un autre dossier où écrire.</string>
-    <string name="pref_gpsvisualizer">Visualiser les statistiques et graphiques des enregistrements GPS</string>
     <string name="new_file_custom_each_time_title">Demander un nom de fichier à chaque démarrage</string>
     <string name="new_file_custom_each_time_summary">Demander un nom de fichier à chaque fois que l\'enregistrement est lancé</string>
     <string name="new_file_custom_keep_changing_title">Autoriser le nom de fichier personnalisé à être modifié dynamiquement</string>
@@ -261,19 +257,6 @@ une plus grande précision à basses fréquences.    </string>
     <string name="no_network_message">Il n\'y a pas de réseau disponible</string>
     <string name="hide_notification_buttons">Masquer les boutons de notification</string>
     <string name="restart_required">Il faudra redémarrer GPSLogger pour que le changement soit effectif</string>
-    <string name="pref_performance_activityrecognition">Reconnaissance d\'activité</string>
-    <string name="activityrecognition_dont_log_if_still">Ne pas enregistrer en l\'absence de mouvement</string>
-    <string name="activityrecognition_dont_log_if_still_summary">S\'il n\'y a pas eu de mouvement d\'accélération depuis le dernier point, l\'enregistrement actif sera suspendu pendant ce laps de temps, même si un mouvement a été détecté avant. Les points passifs peuvent toujours être enregistrés.</string>
-    <string name="txt_activity">Activité :</string>
-    <string name="activity_in_vehicle">Dans un véhicule</string>
-    <string name="activity_confidence">Confiance</string>
-    <string name="activity_still">Immobile</string>
-    <string name="activity_on_bicycle">À vélo</string>
-    <string name="activity_on_foot">À pied</string>
-    <string name="activity_running">En courant</string>
-    <string name="activity_tilting">Incliné</string>
-    <string name="activity_walking">En marchant</string>
-    <string name="activity_unknown">Inconnu</string>
     <string name="altitude_subtractgeoidheight_summary">Utiliser le niveau moyen des mers (MSL) au lieu de l’altitude WGS84 en soustrayant « geoidheight » de l\'altitude GPS. S\'applique uniquement aux points GPS relevés par satellite, pas ceux de réseaux ou de NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">Utiliser le niveau moyen des mers au lieu de WGS84</string>
     <string name="altitude_subtractoffset_title">Soustraire le décalage d’altitude</string>
@@ -290,8 +273,6 @@ une plus grande précision à basses fréquences.    </string>
     <string name="profile_default">Profil par défaut</string>
     <string name="profile_add_new">Ajouter un profil</string>
     <string name="gpslogger_permissions_rationale_title">Autorisations requises</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Cette application nécessite diverses autorisations pour pouvoir fonctionner correctement. <br /> <b>Emplacement du périphérique</b> - Cette autorisation permet la lecture des données de localisation qui proviennent des relais téléphoniques et du GPS intégré à l’appareil.<br /><b>Photos, médias, fichiers</b> - Cette autorisation permet l’écriture pour le stockage des fichiers de journalisation et test, ainsi que la lecture d’une liste de fichiers pour leur envoi ou leur partage. Cette application n’accédera ni aux photos ni aux médias.<br /><br/>  ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Une ou plusieurs autorisations requises par cette application ont été refusées. Il sera nécessaire d’aller à l’écran des paramètres de l\'application pour les lui accorder.<br /><br />Si des autorisations ont été définitivement refusées, il est possible de les réinitialiser dans les paramètres du système. ]]></string>
     <string name="privacy_policy">Politique de confidentialité</string>
     <string name="debuglog_attach_to_email">Joindre le journal de débogage à un courriel</string>
     <string name="debuglog_attach_to_email_summary">Joindre le journal de débogage à un courriel avec quelques informations de diagnostic</string>
