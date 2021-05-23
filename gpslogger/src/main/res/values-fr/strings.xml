@@ -273,6 +273,9 @@ une plus grande précision à basses fréquences.    </string>
     <string name="profile_default">Profil par défaut</string>
     <string name="profile_add_new">Ajouter un profil</string>
     <string name="gpslogger_permissions_rationale_title">Autorisations requises</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Emplacement du périphérique</b> - Cette autorisation permet la lecture des données de localisation qui proviennent des relais téléphoniques et du GPS intégré à l’appareil.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Photos, médias, fichiers</b> - Cette autorisation permet l’écriture pour le stockage des fichiers de journalisation et test, ainsi que la lecture d’une liste de fichiers pour leur envoi ou leur partage. Cette application n’accédera ni aux photos ni aux médias.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Une ou plusieurs autorisations requises par cette application ont été refusées. Il sera nécessaire d’aller à l’écran des paramètres de l\'application pour les lui accorder.<br /><br />Si des autorisations ont été définitivement refusées, il est possible de les réinitialiser dans les paramètres du système. ]]></string>
     <string name="privacy_policy">Politique de confidentialité</string>
     <string name="debuglog_attach_to_email">Joindre le journal de débogage à un courriel</string>
     <string name="debuglog_attach_to_email_summary">Joindre le journal de débogage à un courriel avec quelques informations de diagnostic</string>
