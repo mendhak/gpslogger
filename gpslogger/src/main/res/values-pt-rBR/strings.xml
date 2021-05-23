@@ -277,6 +277,9 @@
     <string name="profile_default">Perfil padrão</string>
     <string name="profile_add_new">Adicionar perfil</string>
     <string name="gpslogger_permissions_rationale_title">Permissões necessárias</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Localização de dispositivo</b> - Esta permissão possibilita a leitura dos dados de localização de torres de celulares e do hardware GPS contido no dispostivo.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotos, midia, arquivos</b> - Esta permissão possibilita a gravação de arquivos de log, checar arquivos para o armazenamento e leitura de uma lista de arquivos para carregamento ou compartilhamento. Este app não vai acessar as suas fotos ou midia.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Você negou uma ou mais permissões que este aplicativo requer. Você precisará ir para a tela de configurações do aplicativo para conceder essas permissões. <br /><br />Se você recusou essas permissões permanentemente, você pode as resetar nas configurações do sistema.]]></string>
     <string name="privacy_policy">Política de Privacidade</string>
     <string name="debuglog_attach_to_email">Anexar o log de depuração para o e-mail</string>
     <string name="debuglog_attach_to_email_summary">Anexa o log de depuração para um e-mail juntamente com algumas informações de diagnóstico</string>
