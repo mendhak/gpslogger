@@ -275,6 +275,8 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="profile_default">Profil Lalai</string>
     <string name="profile_add_new">Tambahan profil</string>
     <string name="gpslogger_permissions_rationale_title">Kebenaran diperlukan</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Lokasi peranti</b> - Kebenaran ini membolehkan membaca data lokasi dari menara sel dan perkakasan GPS peranti.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Foto, media, fail</b> - Kebenaran ini membolehkan menulis fail log dan fail ujian ke penyimpanan, dan membaca dari senarai fail untuk dimuat naik atau dikongsi. Aplikasi ini tidak akan mengakses foto atau media anda.]]></string>
     <string name="privacy_policy">Dasar Privasi</string>
     <string name="debuglog_attach_to_email">Lampirkan log debug ke e-mel</string>
     <string name="debuglog_attach_to_email_summary">Melampirkan log debug ke e-mel bersama dengan beberapa maklumat diagnostik</string>
