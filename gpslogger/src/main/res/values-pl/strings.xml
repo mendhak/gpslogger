@@ -291,6 +291,9 @@
     <string name="profile_default">Domyślny profil</string>
     <string name="profile_add_new">Dodaj profil</string>
     <string name="gpslogger_permissions_rationale_title">Wymagane uprawnienia</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Lokalizacja urządzenia</b> - To uprawnienie zezwala na odczyt danych z masztów telefonicznych i sprzętu GPS urządzenia.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Zdjęcia, multimedia, pliki</b> - To uprawnienie zezwala na zapisywanie plików rejestru na dysk, oraz na odczyt, przesyłanie lub udostępnianie. Aplikacja nie będzie miała dostępu do twoich zdjęć i multimediów.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Odmówiłeś jednego lub więcej uprawnień wymaganych przez tę aplikację. Aby uzyskać te uprawnienia, musisz przejść do ekranu ustawień aplikacji.<br /><br />Jeśli na stałe odmówiono Ci uprawnień, możesz je zresetować w ustawieniach systemu.]]></string>
     <string name="privacy_policy">Polityka prywatności</string>
     <string name="debuglog_attach_to_email">Dołącz do wiadomości e-mail rejestr debugowania</string>
     <string name="debuglog_attach_to_email_summary">Dołącza rejestr debugowania wraz z niektórymi informacjami diagnostycznymi do wiadomości email</string>
