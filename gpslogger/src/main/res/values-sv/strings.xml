@@ -92,8 +92,6 @@
     <string name="new_file_custom_summary">Du kan använda ditt eget filnamn. Alternativt lägga till några dynamiska parametrar såsom serienummer, år, timme, minut, etc. Mycket dynamiska filnamn kan fungera dåligt eftersom den bara sänder den senaste filen.</string>
     <string name="pref_performance_title">Prestanda</string>
     <string name="time_before_logging_title">Tid innan loggning</string>
-    <string name="time_before_logging_summary">Använd 0 för maximal frekvens, men långsammare drar mindre batteri.
-    </string>
     <string name="time_before_logging_dialog_title">Tid i sekunder</string>
     <string name="time_before_logging_hint">Ange sekunder (max 9999)</string>
     <string name="keep_fix_summary">Observera att detta minskar batterilivslängden drastiskt. Använd endast för högre precision vid låga frekvenser.
@@ -193,8 +191,6 @@
     <string name="autoftp_invalid_summary">Några av dina inställningar är ogiltiga. Säkerställ att du fyllt i alla relevanta fält.
     </string>
     <string name="menu_faq">Hjälp och FAQ</string>
-    <string name="gpsf_missing">Saknad tjänst</string>
-    <string name="gpsf_missing_description">Du behöver ramverket Google Play Tjänster för att använda denna funktion.</string>
     <string name="log_customurl_title">Logga till valfri URL</string>
     <string name="log_customurl_summary">Skicka loggningsinfo till din egen server via HTTP</string>
     <string name="txt_annotation">Kommentar:</string>
