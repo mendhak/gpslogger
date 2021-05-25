@@ -313,7 +313,7 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
     <string name="profile_default">Alapértelmezett profil</string>
     <string name="profile_add_new">Profil hozzáadása</string>
     <string name="gpslogger_permissions_rationale_title">Szükséges jogosultságok</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ez az alkalmazás különféle engedélyeket igényel a megfelelő működéshez. Kérni fogja különféle engedélyek megadására (sajnálom). Itt olvasható az egyes engedélyek magyarázata.]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ez az alkalmazás különféle engedélyeket igényel a megfelelő működéshez. Kérni fogja az engedélyek megadását (sajnálom). Itt olvasható az egyes engedélyek magyarázata.]]></string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Készülék pozíciója</b> - Ez engedélyezi a mobiltornyokból és a GPS-ből származó pozíció olvasását]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Képek, média, fájlok</b> - Ez engedélyezi a naplófájlok és tesztfájlok írását, és a fájllista olvasását feltöltéshez vagy megosztáshoz. A program nem fog hozzáérni a fényképeihez vagy médiafájljaihoz.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Mindig engedélyezze</b> - Engedélyezze az alkalmazás számára, hogy a háttérben helyadatokat kapjon. ]]></string>
