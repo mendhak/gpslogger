@@ -114,6 +114,9 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
     <string name="pref_performance_title">Teljesítmény</string>
     <string name="pref_performance_summary">Időzítések, szűrők és figyelők</string>
     <string name="time_before_logging_title">Mentési időköz</string>
+    <string name="time_before_logging_summary">Használja a 0 értéket a maximális frekvenciához, akkumulátor élettartamát rövidíti. Rendszer
+        akkumulátor szintje felülírhatja ezt a beállítást, lásd: Súgó és GYIK.
+    </string>
     <string name="time_before_logging_dialog_title">Idő másodpercben</string>
     <string name="time_before_logging_hint">Adja meg másodpercben (max 9999)</string>
     <string name="keep_fix_summary">Legyen óvatos, ez drámaian csökkenteni fogja az akkumulátora élettartamát. A nagyobb pontossághoz használja alacsonyabb frekvencia használatával.</string>
@@ -175,6 +178,7 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
     <string name="dropbox_authorize_description">Dropbox funkciók használatához szüksége lesz hitelesítésre, hogy a GPSLogger fájlokat fel lehessen tölteni     </string>
     <string name="dropbox_unauthorize_description">A Dropbox hitelesítés megtörtént. Fájlok feltöltve, \"Apps\\GPSLogger for Android\" könyvtárból. Bármikor leállíthatja a további feltöltést     </string>
     <string name="dropbox_couldnotauthorize">Nem engedélyezett a Dropbox, próbálja meg később</string>
+    <string name="owncloud_setup_title">ownCloud</string>
     <string name="owncloud_server_summary">ownCloud URL</string>
     <string name="owncloud_directory_summary">Könyvtár az ownCould szerveren. Léteznie kell, különben a feltöltés meghiúsul.</string>
     <string name="owncloud_test_summary">Teszt fájl feltöltése az ownCloud szerverre</string>
@@ -313,8 +317,10 @@ Tetszés szerint adhat hozzá dinamikus paramétereket, mint a sorozatszám, év
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Készülék pozíciója</b> - Ez engedélyezi a mobiltornyokból és a GPS-ből származó pozíció olvasását]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Képek, média, fájlok</b> - Ez engedélyezi a naplófájlok és tesztfájlok írását, és a fájllista olvasását feltöltéshez vagy megosztáshoz. A program nem fog hozzáérni a fényképeihez vagy médiafájljaihoz.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Mindig engedélyezze</b> - Engedélyezze az alkalmazás számára, hogy a háttérben helyadatokat kapjon. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Akkumulátor optimalizálás figyelmen kívül hagyása<b> -Hagyja ezt az alkalmazást a háttérben futni, akkumulátor optimalizálás nélkül. ]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Egy vagy több alkalmazás engedélyt elutasított, melyekre az alkalmazásnak szüksége van.
 Az engedélyek megadásához lépjen be az alkalmazás beállítások képernyőre. <br /> <br />Ha véglegesen megtagadta az engedélyeket, visszaállíthatja őket a rendszerbeállításokban.]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Ahhoz, hogy a GPSLogger futhasson a háttérben, további engedélyt kell megadnia. A következő képernyőn válassza ki: ]]></string>
     <string name="privacy_policy">Adatvédelmi irányelvek</string>
     <string name="debuglog_attach_to_email">Hibakeresési napló csatolása az e-mailhez</string>
     <string name="debuglog_attach_to_email_summary">Hibakeresési naplót mellékel az e-mailhez néhány diagnosztikai információval</string>
@@ -326,6 +332,7 @@ Az engedélyek megadásához lépjen be az alkalmazás beállítások képernyő
     <string name="ssl_certificate_add_to_keystore">Hozzáadja a tanúsítványt a helyi kulcstárhoz?</string>
     <string name="ssl_certificate_is_valid">Ez a tanúsítvány érvényes</string>
     <string name="hide_notification_from_status_bar">Értesítés elrejtése az állapotsávról</string>
+    <string name="sftp_setup_title">SFTP</string>
     <string name="sftp_private_key_path">Privát kulcs</string>
     <string name="sftp_private_key_passphrase">Privát kulcs jelszava</string>
     <string name="sftp_validate_test_upload">Kiszolgáló ellenõrzése és próbafeltöltés</string>
@@ -338,4 +345,6 @@ Az engedélyek megadásához lépjen be az alkalmazás beállítások képernyő
     <string name="customurl_http_method">HTTP Eljárás</string>
     <string name="customurl_http_basicauthentication">Alapfokú hitelesítés</string>
     <string name="hide_notification_from_status_bar_disallowed">Értesítés elrejtése az Android Oreo-ban nem engedélyezett</string>
+    <string name="reset_app_summary">Ez visszaállítja az alkalmazást, törli az esetleges beállításokat, törli a GPSLogger fájlokat és visszavonja az alkalmazás számára biztosított engedélyeket. Minden adat elveszik!</string>
+    <string name="reset_app_title">Visszaállítás</string>
 </resources>
