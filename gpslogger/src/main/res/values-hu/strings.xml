@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_drawer_uploadsettings">Feltöltési beállítások</string>
-    <string name="navigation_drawer_open">Navigációs menü kinyitása</string>
+    <string name="navigation_drawer_open">Navigációs menü megnyitása</string>
     <string name="navigation_drawer_close">Navigációs menü bezárása</string>
     <string name="app_name">GPSLogger</string>
     <string name="settings_screen_name">GPSLogger beállítások</string>
@@ -25,7 +25,7 @@
     <string name="btn_start_logging">Naplózás elkezdése</string>
     <string name="btn_stop_logging">Naplózás leállítása</string>
     <string name="gpslogger_still_running">Még mindig működik a GPSLogger.</string>
-    <string name="summary_loggingto">Bejelentkezés:</string>
+    <string name="summary_loggingto">Rögzítés:</string>
     <string name="summary_loggingto_screen">csak a képernyőn</string>
     <string name="summary_freq_every">Frekvencia:</string>
     <string name="summary_freq_max">maximális</string>
