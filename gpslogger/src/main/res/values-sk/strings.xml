@@ -3,7 +3,9 @@
     <string name="title_drawer_uploadsettings">Nastavenia odosielania</string>
     <string name="navigation_drawer_open">Otvoriť vykresľovač navigácie</string>
     <string name="navigation_drawer_close">Zatvoriť vykresľovač navigácie</string>
+    <string name="app_name">GPSLogger</string>
     <string name="settings_screen_name">Nastavenia GPSLogger</string>
+    <string name="ok">OK</string>
     <string name="cancel">Zrušiť</string>
     <string name="could_not_write_to_file">Do súboru sa nedá zapísovať</string>
     <string name="add_description">Pridať popis</string>
@@ -26,6 +28,7 @@
     <string name="summary_loggingto">Záznam do:</string>
     <string name="summary_loggingto_screen">len obrazovka</string>
     <string name="summary_freq_every">Frekvencia:</string>
+    <string name="summary_freq_max">maximum</string>
     <string name="summary_dist">Vzdialen.:</string>
     <string name="summary_current_filename">Súbor:</string>
     <string name="sharing_location_only">Len polohu</string>
@@ -38,11 +41,21 @@
     <string name="meters">&#160;m</string>
     <string name="error">Chyba</string>
     <string name="error_connection">Chyba pripojenia. Prosím skontrolujte nastavenia telefónu.</string>
+    <string name="seconds">&#160;s</string>
+    <string name="minutes">&#160;min</string>
+    <string name="hours">&#160;hod</string>
     <string name="gpsprovider_unavailable">Nie je dostupný žiadny poskytovateľ GPS. Prosím skontrolujte nastavenia svojej pozície a zapnite poskytovateľa pozície.
     </string>
     <string name="started">Spustené</string>
     <string name="providername_gps">Satelity GPS</string>
     <string name="providername_celltower">vykrývače mobilným signálom</string>
+    <string name="not_applicable">nie je dostupné</string>
+    <string name="meters_per_second">&#160;m/s</string>
+    <string name="feet_per_second">&#160;stôp/s</string>
+    <string name="miles_per_hour">&#160;míľ/h</string>
+    <string name="miles">&#160;míľ</string>
+    <string name="kilometers_per_hour">&#160;km/h</string>
+    <string name="kilometers">&#160;km</string>
     <string name="unknown_direction">neznáme</string>
     <string name="sorry">Prepáčte</string>
     <string name="success">Úspech</string>
@@ -71,6 +84,7 @@
     <string name="time_halfhour">½ hodiny</string>
     <string name="time_oneandhalfhours">1½ hodiny</string>
     <string name="time_twoandhalfhours">2½ hodiny</string>
+    <string name="time_hms_format" formatted="false">%s hod. %s min. %s s</string>
     <string name="accuracy_within" formatted="false">v %s %s</string>
     <!-- Settings activity -->
     <string name="settings_distance_in_meters">Vzdialenosť v metroch</string>
@@ -90,6 +104,7 @@
     <string name="log_json_summary">Zaznamená polohy do súboru GeoJSON</string>
     <string name="new_file_creation_title">Vytvorenie nového súboru</string>
     <string name="new_file_creation_summary">Nastavte vytvorenie nového súboru jedenkrát denne alebo pri každom spustení.</string>
+    <string name="new_file_creation_onceamonth">Raz mesačne</string>
     <string name="new_file_creation_onceaday">Jedenkrát denne</string>
     <string name="new_file_creation_everystart">Pri každom spustení</string>
     <string name="new_file_creation_custom">Vlastný súbor</string>
@@ -100,6 +115,7 @@ súborov možno nebudú fungovať v kombinácii s automatickým odosielaním, pr
     <string name="pref_performance_title">Výkon</string>
     <string name="pref_performance_summary">Časovanie, filtre a poslucháči</string>
     <string name="time_before_logging_title">Interval zaznamenávania</string>
+    <string name="time_before_logging_summary">Pre maximálnu frekvenciu použite hodnotu 0. Pomalšie však znamená predĺženie životnosti batérie. Systémová        konfigurácia úrovne batérie môže toto nastavenie anulovať, pozrite si sekciu Pomocník (Help) a najčastejšie kladené otázky (FAQ).    </string>
     <string name="time_before_logging_dialog_title">Čas v sekundách</string>
     <string name="time_before_logging_hint">Zadajte sekundy (max. 9999)</string>
     <string name="keep_fix_summary">Buďte opatrní, dramaticky sa zníži výdrž batérie.
@@ -137,6 +153,7 @@ vyššiu presnosť s nízkymi frekvenciami.
     <string name="started_waiting">GPS spustené, čaká na korekciu (fix)</string>
     <string name="gps_stopped">GPS pozastavené</string>
     <string name="stopped">Zastavené</string>
+    <string name="osm_setup_title">OpenStreetMap</string>
     <string name="osm_lbl_authorize">Autorizovať túto aplikáciu</string>
     <string name="osm_resetauth">Odstrániť autorizáciu</string>
     <string name="osm_lbl_authorize_description">Ak chcete odoslať záznamy z GPS do služby OpenStreetMap, musíte
@@ -159,7 +176,11 @@ udeliť oprávnenia tejto aplikácii. Po autorizovaní môžete nastaviť tagy, 
     <string name="pref_logging_summary">Typy súborov, vytváranie a pomenovanie</string>
     <string name="pref_general_title">Všeobecné nastavenia</string>
     <string name="pref_general_summary">Možnosti spustenia a zobrazenia</string>
+    <string name="emailprovider_google">Google Mail</string>
+    <string name="emailprovider_yahoo">Yahoo! Mail</string>
+    <string name="emailprovider_msn">Windows Live Mail</string>
     <string name="emailprovider_manual">Manuálne</string>
+    <string name="dropbox_setup_title">Dropbox</string>
     <string name="dropbox_authorize_description">Ak chcete použiť funkcie služby Dropbox, musíte autorizovať GPSLogger na ukladanie súborov
 na váš účet.
     </string>
@@ -169,6 +190,7 @@ ukladať do zložky
 zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
          </string>
     <string name="dropbox_couldnotauthorize">Nemožno autorizovať Dropbox, prosím skúste to neskôr</string>
+    <string name="owncloud_setup_title">ownCloud</string>
     <string name="owncloud_server_summary">Základná URL pre ownCloud</string>
     <string name="owncloud_directory_summary">Priečinok v službe ownCloud. Musí existovať, inak bude odoslanie neúspešné.</string>
     <string name="owncloud_test_summary">Odoslať testovací súbor na server ownCloud</string>
@@ -178,6 +200,7 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
     <string name="autoemail_from_summary">Niektorí poskytovatelia služieb elektronickej pošty vyžadujú adresy odosielateľa. Použiť ju však iba vtedy, ak je to potrebné.
     </string>
     <string name="gdocs_clearauthorization_summary">Vymazať lokálne nastavenia Google Drive. Na permanentné odmietnutie prístupu prejdite na nastavenia účtu Google</string>
+    <string name="gdocs_setup_title">Google Drive</string>
     <string name="gdocs_test_summary">Odoslať testovací súbor do služby Google Drive</string>
     <string name="gdocs_test_title">Test odosielania</string>
     <string name="gdocs_testupload_success">Odoslané. Skontrolujte či služba Google Documents obsahuje nový súbor.</string>
@@ -196,10 +219,13 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
     <string name="pref_autosend_title">Odosielanie, email a upload</string>
     <string name="pref_autosend_summary">Možnosti pre e-mail, zdieľanie a odosielanie</string>
     <string name="shortcut_start">Štart</string>
+    <string name="shortcut_stop">Stop</string>
     <string name="shortcut_pickaction">Výber akcie</string>
     <string name="log_opengts_title">Záznam na server OpenGTS</string>
     <string name="log_opengts_summary">GPRMC údaje zaslať na online server OpenGTS.</string>
+    <string name="opengts_setup_title">OpenGTS</string>
     <string name="autoopengts_server_category">Nastavenia OpenGTS</string>
+    <string name="autoopengts_server">Server</string>
     <string name="autoopengts_server_summary">Meno hostiteľa alebo IP</string>
     <string name="opengts_server_communication_method">Spôsob komunikácie</string>
     <string name="opengts_server_communication_method_summary">Komunikácia založená na HTTP alebo raw-socket komunikácia</string>
@@ -209,10 +235,14 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
     <string name="autoftp_username">Meno používateľa</string>
     <string name="autoftp_password">Heslo</string>
     <string name="autoftp_advanced_settings">Rozšírené nastavenia</string>
+    <string name="autoftp_port">Port</string>
     <string name="autoftp_useftps">Použitie FTPS</string>
     <string name="autoftp_useftps_summary">Povoliť FTP cez SSL. SSL/TLS a predvolené voľby sú ignorované, ak nie je táto možnosť aktivovaná.</string>
+    <string name="autoftp_ssltls">SSL/TLS</string>
     <string name="autoftp_ssltls_summary">Žiadne, SSL alebo TLS. Pre bežné nezabezpečené pripojenia vyberte možnosť: Žiadne.</string>
     <string name="autoftp_ssltls_none">Žiadne</string>
+    <string name="autoftp_ssltls_ssl">SSL</string>
+    <string name="autoftp_ssltls_tls">TLS</string>
     <string name="autoftp_implicit">Predvolene FTP cez SSL</string>
     <string name="autoftp_test_summary">Odoslať testovací súbor na FTP server</string>
     <string name="autoftp_testing">Test odoslania na FTP</string>
@@ -221,11 +251,13 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
 všetky dôležité
 polia.
     </string>
+    <string name="autoftp_setup_title">FTP</string>
     <string name="menu_faq">Pomocník a FAQ</string>
     <string name="log_customurl_title">Zaznamenať s použitím vlastnej URL</string>
     <string name="log_customurl_summary">Odoslať zaznamenané informácie na váš vlastný server cez HTTP</string>
     <string name="txt_annotation">Poznámka:</string>
     <string name="txt_time_isoformat">Čas UTC (2011-12-25T15:27:33Z):</string>
+    <string name="txt_date_isoformat">Dátum (2011-12-25):</string>
     <string name="txt_provider">Poskytovateľ:</string>
     <string name="annotation_requires_logging">Poznámky vyžadujú zaznamenávanie do CSV/GPX/KML/na používateľskú URL/GeoJSON</string>
     <string name="gpslogger_folder_title">Uložiť do priečinka</string>
@@ -257,6 +289,7 @@ polia.
     <string name="log_nmea_title">Záznam do NMEA</string>
     <string name="log_nmea_summary">Počas pokusu o získanie korekcie sa vytvorí súbor NMEA. Tento súbor sa veľmi rýchlo zväčšuje. Nastavenie funguje iba pri používaním GPS.</string>
     <string name="autoopengts_accountname">Názov účtu</string>
+    <string name="listeners_gps">GPS</string>
     <string name="listeners_gps_title">Zaznamenať lokality GPS/GNSS</string>
     <string name="listeners_gps_summary">Zaznamená lokality poskytované prijímačom satelitných údajov vo vašom zariadení</string>
     <string name="listeners_cell">Sieť</string>
@@ -274,6 +307,7 @@ polia.
     <string name="new_file_custom_keep_changing_title">Povoliť používateľský názov súboru pre dynamickú zmenu</string>
     <string name="new_file_custom_keep_changing_summary">Pri zmene hodnoty používateľského názvu súboru, sa zmení názov aktuálneho súboru. Napríklad: ak použijete %HOUR, vytvorí sa každú hodinu nový súbor. Ak chcete ponechať statickú tvorbu, odznačte túto voľbu.</string>
     <string name="donate_app">Podporiť (ap.)</string>
+    <string name="donate_bitcoin">Bitcoin</string>
     <string name="tip_coffee">Kúpiť mi kávu</string>
     <string name="no_network_message">Nie je dostupná žiadna sieť</string>
     <string name="hide_notification_buttons">Skryť notifikačné tlačidlá</string>
@@ -289,11 +323,14 @@ polia.
     <string name="logview_showlocationsonly">Len polohy</string>
     <string name="logview_autoscroll">Autom. rolovanie</string>
     <string name="profile_create_new">Vytvoriť nový profil</string>
+    <string name="profile_add_from_url">Z adresy URL</string>
+    <string name="properties_file_url">URL súboru s vlastnosťami</string>
     <string name="profile_switch_before_delete">Pred vymazaním prosím prepnite na iný profil.</string>
     <string name="profile_delete">Vymazať profil?</string>
     <string name="profile_default">Predvolený profil</string>
     <string name="profile_add_new">Pridať profil</string>
     <string name="gpslogger_permissions_rationale_title">Vyžaduje sa oprávnenie</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Aplikácia vyžaduje pre svoje korektné fungovanie rôzne oprávnenia. Teraz vám bude viackrát položená otázka súvisiaca s oprávneniami (prepáčte). Tu je vysvetlenie každého oprávnenia: ]]></string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Umiestnenie zariadenia</b> - Toto oprávnenie umožňuje čítanie údajov o lokalite z vysielačov mobilného signálu a z hardvéru pre GPS.]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotografie, médiá, súbory</b> – Toto oprávnenie umožňuje zápis do súborov so záznamami a vykonávanie testu ukladania súborov, čítania zoznamu súborov pre odosielanie alebo zdieľanie. Táto aplikácia nepristupuje k vaším fotografiám alebo médiu.]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Odmietli ste udeliť jedno alebo niekoľko oprávnení, ktoré vyžaduje táto aplikácia. Na udelenie týchto oprávnení budete musieť prejsť na obrazovku s nastaveniami aplikácie. <br /><br />Ak ste odmietli udeliť oprávnenia natrvalo, môžete vykonať reset v nastaveniach systému. ]]></string>
