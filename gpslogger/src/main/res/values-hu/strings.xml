@@ -10,7 +10,7 @@
     <string name="could_not_write_to_file">A fájl nem írható!</string>
     <string name="add_description">Leírás hozzáadása</string>
     <string name="letters_numbers">Csak betűk és számok</string>
-    <string name="menu_annotate">Megjegyzések</string>
+    <string name="menu_annotate">Megjegyzés</string>
     <string name="menu_share">Megosztás</string>
     <string name="menu_exit">Kilépés</string>
     <!-- main form labels -->
