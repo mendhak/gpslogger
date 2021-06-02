@@ -50,9 +50,12 @@
     <string name="providername_gps">GPS Uyduları</string>
     <string name="providername_celltower">baz istasyonları</string>
     <string name="not_applicable">veri yok</string>
+    <string name="meters_per_second">&#160;m/s</string>
     <string name="feet_per_second">&#160;ft/dk</string>
     <string name="miles_per_hour">&#160;mi/sa</string>
+    <string name="miles">&#160;mi</string>
     <string name="kilometers_per_hour">km/sa</string>
+    <string name="kilometers">&#160;km</string>
     <string name="unknown_direction">bilinmeyen</string>
     <string name="sorry">Özür</string>
     <string name="success">Başarı</string>
@@ -101,6 +104,7 @@
     <string name="log_json_summary">Konumları bir GeoJSON dosyasına kaydeder</string>
     <string name="new_file_creation_title">Yeni dosya oluşturma</string>
     <string name="new_file_creation_summary">Günde bir veya her açılışta bir dosya oluşturma.</string>
+    <string name="new_file_creation_onceamonth">Ayda bir</string>
     <string name="new_file_creation_onceaday">Günde bir</string>
     <string name="new_file_creation_everystart">Her başlattığımda</string>
     <string name="new_file_creation_custom">Özel dosya</string>
@@ -109,6 +113,9 @@
     <string name="pref_performance_title">Performans</string>
     <string name="pref_performance_summary">Zamanlamalar, filtreler ve dinleyiciler</string>
     <string name="time_before_logging_title">Günlüğe kaydetme aralığı</string>
+    <string name="time_before_logging_summary">Maksimum frekans için 0 kullanın, ancak pil ömrü için daha yavaş olması daha iyidir. Sistem
+        düzeyinde pil yapılandırması bu ayarı geçersiz kılabilir, bkz. Yardım ve SSS.
+    </string>
     <string name="time_before_logging_dialog_title">Saniye olarak süre</string>
     <string name="time_before_logging_hint">Saniye girin (en fazla 9999)</string>
     <string name="keep_fix_summary">Dikkat ol, bu bariz pil ömrünü azaltacaktır. Sadece düşük sıklıklar ile daha yüksek kesinlik için kullanın.    </string>
@@ -143,6 +150,7 @@
     <string name="started_waiting">GPS başlatıldı, düzeltme bekleniyor</string>
     <string name="gps_stopped">GPS duraklatıldı</string>
     <string name="stopped">Durdu</string>
+    <string name="osm_setup_title">OpenStreetMap</string>
     <string name="osm_lbl_authorize">Bu uygulamaya yetki ver</string>
     <string name="osm_resetauth">Yetkilendirme sil</string>
     <string name="osm_lbl_authorize_description">OpenStreetMap\'a GPS izlerini yüklemek için bu uygulamaya izinleri vermek gerekir. Bu uygulamaya izin verdikten sonra burada etiketleri, açıklamaları ve görünürlüğü ayarlayabilirsiniz.    </string>
@@ -163,10 +171,13 @@
     <string name="pref_general_summary">Başlatma ve görüntüleme seçenekleri</string>
     <string name="emailprovider_google">Google Posta</string>
     <string name="emailprovider_yahoo">Yahoo! Posta</string>
+    <string name="emailprovider_msn">Windows Live Mail</string>
     <string name="emailprovider_manual">El ile</string>
+    <string name="dropbox_setup_title">Dropbox</string>
     <string name="dropbox_authorize_description">Dropbox özelliklerini kullanmak için GPSKayıt\'ın hesabınıza dosya yükleme iznini vermeniz gerekir.    </string>
     <string name="dropbox_unauthorize_description">Dropbox ile yetkilendirdiniz. Dosyalar \'Apps\\GPSLogger for Android\' e yüklenecek. İsterseniz Dropbox\'da GPSKayıt bağlantısını kaldırabilirsiniz.    </string>
     <string name="dropbox_couldnotauthorize">Dropbox ile yetkilendirilemedi. Lütfen daha sonra tekrar deneyin</string>
+    <string name="owncloud_setup_title">ownCloud</string>
     <string name="owncloud_server_summary">ownCloud Temel URL</string>
     <string name="owncloud_directory_summary">OwnCloud sunucuda kullanılacak klasör. Olduğundan emin olun yoksa yükleme başarısız olacaktır.</string>
     <string name="owncloud_test_summary">OwnCloud sunucuya bir sınama dosyası yükle</string>
@@ -175,6 +186,7 @@
     <string name="autoemail_from">Gönderen adresleri</string>
     <string name="autoemail_from_summary">Bazı e-posta sağlayıcıları gönderici adresi gerektirir. Yalnızca gerek duyulursa bunu kullanın.    </string>
     <string name="gdocs_clearauthorization_summary">Yerel Google Drive ayarları unutuyor. Kalıcı erişimi iptali için Google Hesap Ayarları\'na gidin</string>
+    <string name="gdocs_setup_title">Google Drive</string>
     <string name="gdocs_test_summary">Google Drive\'a bir sınama dosyası yükle</string>
     <string name="gdocs_test_title">Yüklemeyi sına</string>
     <string name="gdocs_testupload_success">Yüklendi. Lütfen yeni dosya için Google Dökümanları kontrol edin.</string>
@@ -196,6 +208,7 @@
     <string name="shortcut_pickaction">Bir eylem seç</string>
     <string name="log_opengts_title">OpenGTS Sunucusuna kaydet</string>
     <string name="log_opengts_summary">GPRMC verisini çevrimiçi OpenGTS sunucusuna gönderin.</string>
+    <string name="opengts_setup_title">OpenGTS</string>
     <string name="autoopengts_server_category">OpenGTS Ayarları</string>
     <string name="autoopengts_server">Sunucu</string>
     <string name="autoopengts_server_summary">Sunucu adı veya IP</string>
@@ -210,18 +223,23 @@
     <string name="autoftp_port">Bağlantı noktası</string>
     <string name="autoftp_useftps">FTPS Kullan</string>
     <string name="autoftp_useftps_summary">FTP yi SSL üzerinden aktif et. Eğer bu işaretlenmemişse SS/TLS ve Implicit görmezden gelinecek.</string>
+    <string name="autoftp_ssltls">SSL/TLS</string>
     <string name="autoftp_ssltls_summary">Hiçbiri, SSL ya da TLS. Düzenli güvenliksiz bağlantılarda hiçbiri kullan.</string>
     <string name="autoftp_ssltls_none">Hiçbiri</string>
+    <string name="autoftp_ssltls_ssl">SSL</string>
+    <string name="autoftp_ssltls_tls">TLS</string>
     <string name="autoftp_implicit">SSL üzerinden örtülü FTP</string>
     <string name="autoftp_test_summary">FTP sunucuya bir sınama dosyası yükle</string>
     <string name="autoftp_testing">FTP yüklemesi sınanıyor</string>
     <string name="autoftp_invalid_settings">Geçersiz ayarlar</string>
     <string name="autoftp_invalid_summary">Bazı ayarlarınız geçersiz. Tüm ilgili alanları doldurduğunuzdan emin olun.    </string>
+    <string name="autoftp_setup_title">FTP</string>
     <string name="menu_faq">Yardım ve SSS</string>
     <string name="log_customurl_title">Özel URL\'e kaydet</string>
     <string name="log_customurl_summary">Günlük bilgileri kendi sunucunuza HTTP üzerinden gönderir</string>
     <string name="txt_annotation">Ek açıklama:</string>
     <string name="txt_time_isoformat">Saat UTC (2011-12-25T15:27:33Z):</string>
+    <string name="txt_date_isoformat">Tarih (2011-12-25):</string>
     <string name="txt_provider">Sağlayıcı:</string>
     <string name="annotation_requires_logging">Açıklamalar CSV/GPX/KML/Özel URL/GeoJSON giriş gerektirir</string>
     <string name="gpslogger_folder_title">Klasöre kaydet</string>
@@ -253,6 +271,7 @@
     <string name="log_nmea_title">NMEA olarak kaydet</string>
     <string name="log_nmea_summary">Bir düzeltme alınırken bir ham NMEA dosyası oluşturur. Bu dosya çok hızlı bir şekilde büyür. Yalnızca GPS kullanılırken çalışır.</string>
     <string name="autoopengts_accountname">Hesap adı</string>
+    <string name="listeners_gps">GPS</string>
     <string name="listeners_gps_title">GPS/GNSS Konumlarınızın geçmiş kaydı</string>
     <string name="listeners_gps_summary">Uydu tabanlı konum alıcısı tarafından sağlanan konumları cihazınıza kaydeder</string>
     <string name="listeners_cell">Ağ</string>
@@ -270,6 +289,7 @@
     <string name="new_file_custom_keep_changing_title">Özel dosya adı dinamik değişime izin ver</string>
     <string name="new_file_custom_keep_changing_summary">Özel dosya adı değerleri değişikliği gibi, geçerli dosya adını değiştirir. Örneğin %HOUR kullanılırsa her saat yeni bir dosya oluşur. Bunun statik kalmasını istiyorsanız işareti kaldırın.</string>
     <string name="donate_app">Bağış (uyg)</string>
+    <string name="donate_bitcoin">Bitcoin</string>
     <string name="tip_coffee">Bana bir kahve satın al</string>
     <string name="no_network_message">Erişilebilir ağ yok</string>
     <string name="hide_notification_buttons">Bildirim düğmelerini gizle</string>
@@ -285,11 +305,14 @@
     <string name="logview_showlocationsonly">Yalnız konumlar</string>
     <string name="logview_autoscroll">Otomatik kaydır</string>
     <string name="profile_create_new">Yeni profil oluştur</string>
+    <string name="profile_add_from_url">URL\'den</string>
+    <string name="properties_file_url">Özellikler dosyası URL\'si</string>
     <string name="profile_switch_before_delete">Lütfen bunu silmeden önce başka bir profile geçin.</string>
     <string name="profile_delete">Profili sil?</string>
     <string name="profile_default">Varsayılan profili</string>
     <string name="profile_add_new">Profil ekle</string>
     <string name="gpslogger_permissions_rationale_title">İzin gerekli</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Bu uygulamanın düzgün çalışması için çeşitli izinler gerekir. Şimdi çeşitli izinler için birden çok kez sorulacak (üzgünüz). İşte her bir iznin bir açıklaması.]]></string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Cihaz konumu</b> - Bu izin baz istasyonları ve cihaz GPS donanımının konum verilerini okumaya izin verir.]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotoğraflar, medya, dosyalar</b> - Bu izin günlük dosyalarını ve sınama dosyalarını yazma ve depolama, yükleme ve paylaşma için dosyaların bir listesini okumayı sağlar. Bu uygulama, fotoğraf veya medyalarınıza erişmez.]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Bu uygulamanın gerektirdiği bir veya daha fazla izni engellediniz. Bu izinleri vermek için uygulama ayarları ekranına gitmeniz gerekecek.  <br /> <br /> Kalıcı olarak izinleri reddettiyseniz, bunları sistem ayarlarından sıfırlayabilirsiniz. ]]></string>
