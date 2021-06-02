@@ -94,6 +94,7 @@
     <string name="log_json_summary">Registra le posizioni in un file GeoJSON</string>
     <string name="new_file_creation_title">Creazione di nuovi file</string>
     <string name="new_file_creation_summary">Creare un nuovo file per ogni giorno oppure ad ogni avvio di registrazione.</string>
+    <string name="new_file_creation_onceamonth">Un file al mese</string>
     <string name="new_file_creation_onceaday">Un file al giorno</string>
     <string name="new_file_creation_everystart">Un file ad ogni avvio</string>
     <string name="new_file_creation_custom">File personalizzato</string>
