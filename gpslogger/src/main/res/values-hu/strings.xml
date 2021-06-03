@@ -92,30 +92,30 @@
     <!-- Settings -->
     <string name="pref_logging_title">Naplózási opciók</string>
     <string name="log_gpx_title">GPX formátum használata</string>
-    <string name="log_gpx_summary">Pozíciók rögzítése GPX v1.0 formátumban</string>
+    <string name="log_gpx_summary">Pozíciók rögzítése GPX v1.0 fájlformátumban</string>
     <string name="log_gpx_11_title">GPX 1.1 használata</string>
     <string name="log_gpx_11_summary">GPX 1.1 formátum használata GPX 1.0 helyett</string>
     <string name="log_kml_title">KLM formátum használata</string>
-    <string name="log_kml_summary">Pozíciók rögzítése KLM v2.2 formátumban</string>
+    <string name="log_kml_summary">Pozíciók rögzítése KLM v2.2 fájlformátumban</string>
     <string name="log_plain_text_title">CSV formátum használata</string>
-    <string name="log_plain_text_summary">Pozíciók rögzítése CSV formátumban</string>
-    <string name="log_json_title">Naplózás GeoJSON-ba</string>
-    <string name="log_json_summary">Pozíciók naplózása GeoJSON fájlba</string>
-    <string name="new_file_creation_title">Új fájl létrehozása</string>
-    <string name="new_file_creation_summary">Naponta hozzon létre egy új fájlt vagy minden induláskor.</string>
+    <string name="log_plain_text_summary">Pozíciók rögzítése CSV fájlformátumban</string>
+    <string name="log_json_title">Pozíciók rögzítése GeoJSON formátumban</string>
+    <string name="log_json_summary">Pozíciók rögzítése GeoJSON fájlformátumban</string>
+    <string name="new_file_creation_title">Naplófájlok létrehozása ...</string>
+    <string name="new_file_creation_summary">Megadhatja, hogy az alkalmazás milyen időközönként készítsen új naplófájlt.</string>
     <string name="new_file_creation_onceamonth">Havonta egyszer</string>
     <string name="new_file_creation_onceaday">Naponta egyszer</string>
-    <string name="new_file_creation_everystart">Minden egyes indításkor</string>
-    <string name="new_file_creation_custom">Egyéni fájlnév</string>
-    <string name="new_file_custom_title">Egyéni fájl neve</string>
-    <string name="new_file_custom_summary">Használhat tetszőleges fájlnevet. 
-        Tetszés szerint adhat hozzá paramétereket (sorozatszám, év, óra, perc, stb). A nagyon dinamikus fájlnevek
-        nem biztos, hogy jól működnek, mert az automatikus küldés csak az utolsó fájlt küldi el.</string>
+    <string name="new_file_creation_everystart">A GPS Logger indításakor</string>
+    <string name="new_file_creation_custom">Egyéni paraméterek</string>
+    <string name="new_file_custom_title">Fájlnév és paraméterek megadása</string>
+    <string name="new_file_custom_summary">Használhat bármilyen fáljnevet.
+        Tetszőlegesen hozzáadhat működési paramétereket, pl.: sorozatszám, év, óra, perc, stb. Ne használjon túl sok opciót, megeshet, hogy nem fog működni.
+        Az automatikus küldés funkció csak az utolsó fájlt küldi el!</string>
     <string name="pref_performance_title">Teljesítmény</string>
-    <string name="pref_performance_summary">Időzítések, szűrők</string>
-    <string name="time_before_logging_title">Mentési időköz</string>
-    <string name="time_before_logging_summary">Használja a 0 értéket a maximális frekvenciához, ekkor az akkumulátor élettartamát erősen rövidíti. Ez a beállítás a Rendszer
-        akkumulátor szintje felülírhatja, lásd: Súgó és GYIK.
+    <string name="pref_performance_summary">Időzítés- és szűrő beállítások</string>
+    <string name="time_before_logging_title">Rögzítési intervallum</string>
+    <string name="time_before_logging_summary">Használjon 0 értéket a folyamatos rögzítéshez. Az opció használata nagyban megnöveli az alkalmazás erőforrás igényét! Ezt a beállítást a Rendszer
+        akkumulátor beállításai felülírhatják! További információ: Súgó és GY.I.K.
     </string>
     <string name="time_before_logging_dialog_title">Mentési időköz (másodperc)</string>
     <string name="time_before_logging_hint">Adja meg másodpercben (max 9999)</string>
@@ -124,7 +124,7 @@
     </string>
     <string name="keep_fix_title">Tartsa a GPS-t bekapcsolva</string>
     <string name="retry_time_title">Pontosítási időkorlát</string>
-    <string name="retry_time_summary">Az első GPS jel után ennyi ideig próbáljon meg az app pontosabb pozíciót keresni, hogy a pozíció megfeleljen a pontosság szűrő beállításainak.</string>
+    <string name="retry_time_summary">Az első GPS jel vétele után ennyi ideig próbáljon meg az alkalmazás pontosabb pozíciót keresni, hogy az megfeleljen a \"pontossági szűrők\" beállításainak.</string>
     <string name="display_imperial_title">Angolszász mértékegységek használata</string>
     <string name="display_imperial_summary">Mérföld, láb, öl használata a modern metrikus cuccok helyett. (A beállításokat továbbra is metrikusan kell megadni)</string>
     <string name="enabledisablegps_title">GPS engedélyezése/tiltása</string>
@@ -135,15 +135,15 @@
     <string name="startonapplaunch_summary">Elindítja a naplózást az app indulásakor</string>
     <string name="autoemail_title">Email</string>
     <string name="please_wait">Kérem várjon</string>
-    <string name="autoemail_target">Cél e-mail cím</string>
+    <string name="autoemail_target">Fogadó e-mail címe</string>
     <string name="autosend_frequency_display">%s perc után</string>
     <string name="autoemail_frequency_whenistop">Küldés loggolás leállításakor</string>
     <string name="autoemail_smtp_category">E-mail beállítások</string>
     <string name="autoemail_username_summary">Felhasználóneve az e-mail szolgáltatónál</string>
     <string name="autoemail_password_summary">Jelszava az e-mail szolgáltatónál</string>
-    <string name="autoemail_ssl">Magától értetődő SSL</string>
+    <string name="autoemail_ssl">Alapértelmezett SSL</string>
     <string name="autoemail_ssl_summary">Próbálja meg ezt bekapcsolni, ha nem tud csatlakozni</string>
-    <string name="autoemail_choosepreset">Mail szolgáltató</string>
+    <string name="autoemail_choosepreset">Az Ön Email szolgáltatója</string>
     <string name="autoemail_choosepreset_summary">Válasszon ki szolgáltatót vagy írja be kézzel az adatait</string>
     <string name="autoemail_smtp_testemail">Teszt e-mail</string>
     <string name="autoemail_test">Küldjön tesztüzenetet a fenti beállításokkal</string>
