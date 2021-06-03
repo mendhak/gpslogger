@@ -315,7 +315,10 @@
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Bu uygulamanın düzgün çalışması için çeşitli izinler gerekir. Şimdi çeşitli izinler için birden çok kez sorulacak (üzgünüz). İşte her bir iznin bir açıklaması.]]></string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Cihaz konumu</b> - Bu izin baz istasyonları ve cihaz GPS donanımının konum verilerini okumaya izin verir.]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotoğraflar, medya, dosyalar</b> - Bu izin günlük dosyalarını ve sınama dosyalarını yazma ve depolama, yükleme ve paylaşma için dosyaların bir listesini okumayı sağlar. Bu uygulama, fotoğraf veya medyalarınıza erişmez.]]></string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Her zaman izin ver</b> - Bu uygulamanın arka planda çalışırken konumunuz hakkında bilgi almasına izin verin.]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Batarya optimizasyonunu görmezden gel</b> - Bu uygulamanın arka planda çalışarak batarya optimizasyonunu görmezden gelmesine izin verin.]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Bu uygulamanın gerektirdiği bir veya daha fazla izni engellediniz. Bu izinleri vermek için uygulama ayarları ekranına gitmeniz gerekecek.  <br /> <br /> Kalıcı olarak izinleri reddettiyseniz, bunları sistem ayarlarından sıfırlayabilirsiniz. ]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[GPSLogger'ın arka planda çalışmasına izin vermek için ona bir tane daha izin vermelisiniz. Lütfen sonraki ekranda şunu seçin: ]]></string>
     <string name="privacy_policy">Gizlilik Politikası</string>
     <string name="debuglog_attach_to_email">Hata ayıklama günlüğünü e-postaya ekleyin</string>
     <string name="debuglog_attach_to_email_summary">Hata ayıklama günlüğünü bazı bilgilerle birlikte bir e-postaya iliştir</string>
@@ -327,6 +330,7 @@
     <string name="ssl_certificate_add_to_keystore">Bu sertifikayı yerel anahtar deposuna ekle?</string>
     <string name="ssl_certificate_is_valid">Sertifika geçerli</string>
     <string name="hide_notification_from_status_bar">Durum çubuğunda bildirimleri gizle</string>
+    <string name="sftp_setup_title">SFTP</string>
     <string name="sftp_private_key_path">Özel anahtar</string>
     <string name="sftp_private_key_passphrase">Özel anahtarı parola</string>
     <string name="sftp_validate_test_upload">Sunucu anahtarını ve sınama yüklemesini onayla</string>
@@ -334,5 +338,10 @@
     <string name="txt_timestamp_epoch">Zaman damgası (dönem)</string>
     <string name="txt_starttimestamp_epoch">Başlatma zaman damgası (dönem)</string>
     <string name="txt_battery">Pil</string>
+    <string name="customurl_http_body">HTTP Gövdesi</string>
+    <string name="customurl_http_method">HTTP Metodu</string>
     <string name="customurl_http_basicauthentication">Temel Kimlik Doğrulama</string>
+    <string name="hide_notification_from_status_bar_disallowed">Bildirimleri gizlemek Android Oreo ve üstünde izin verilmemektedir.</string>
+    <string name="reset_app_summary">Bu uygulamayı sıfırlayacak, bütün tercihlerinizi silecek, GPSLogger dosyalarını silecek, ve verilen bütün yetkileri kaldıracak. Bütün veriler yok olacak!</string>
+    <string name="reset_app_title">Uygulamayı sıfırla</string>
 </resources>
