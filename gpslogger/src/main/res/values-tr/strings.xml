@@ -318,7 +318,7 @@
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Her zaman izin ver</b> - Bu uygulamanın arka planda çalışırken konumunuz hakkında bilgi almasına izin verin.]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Batarya optimizasyonunu görmezden gel</b> - Bu uygulamanın arka planda çalışarak batarya optimizasyonunu görmezden gelmesine izin verin.]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Bu uygulamanın gerektirdiği bir veya daha fazla izni engellediniz. Bu izinleri vermek için uygulama ayarları ekranına gitmeniz gerekecek.  <br /> <br /> Kalıcı olarak izinleri reddettiyseniz, bunları sistem ayarlarından sıfırlayabilirsiniz. ]]></string>
-    <string name="gpslogger_permissions_background_location"><![CDATA[GPSLogger'ın arka planda çalışmasına izin vermek için ona bir tane daha izin vermelisiniz. Lütfen sonraki ekranda şunu seçin: ]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[GPSLogger\'ın arka planda çalışmasına izin vermek için ona bir tane daha izin vermelisiniz. Lütfen sonraki ekranda şunu seçin: ]]></string>
     <string name="privacy_policy">Gizlilik Politikası</string>
     <string name="debuglog_attach_to_email">Hata ayıklama günlüğünü e-postaya ekleyin</string>
     <string name="debuglog_attach_to_email_summary">Hata ayıklama günlüğünü bazı bilgilerle birlikte bir e-postaya iliştir</string>
