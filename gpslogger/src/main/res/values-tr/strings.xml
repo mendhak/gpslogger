@@ -339,6 +339,7 @@
     <string name="txt_starttimestamp_epoch">Başlatma zaman damgası (dönem)</string>
     <string name="txt_battery">Pil</string>
     <string name="customurl_http_body">HTTP Gövdesi</string>
+    <string name="customurl_http_headers">HTTP Başlıkları</string>
     <string name="customurl_http_method">HTTP Metodu</string>
     <string name="customurl_http_basicauthentication">Temel Kimlik Doğrulama</string>
     <string name="hide_notification_from_status_bar_disallowed">Bildirimleri gizlemek Android Oreo ve üstünde izin verilmemektedir.</string>
