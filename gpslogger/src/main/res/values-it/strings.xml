@@ -103,6 +103,9 @@
     <string name="pref_performance_title">Prestazioni</string>
     <string name="pref_performance_summary">Tempi, filtri e provider di posizione</string>
     <string name="time_before_logging_title">Intervallo di registrazione</string>
+    <string name="time_before_logging_summary">Usare 0 per la massima frequenza. Minore frequenza è preferibile per la durata della batteria. La configurazione
+        di sistema sul risparmio energetico può invalidare l\'impostazione, leggere al riguardo Help e FAQ.
+    </string>
     <string name="time_before_logging_dialog_title">Tempo in secondi</string>
     <string name="time_before_logging_hint">Inserisci i secondi (max 9999)</string>
     <string name="keep_fix_summary">Attenzione: riduce di molto la durata della batteria. Va usato solo per ottenere alte accuratezze con basse frequenze di campionatura.    </string>
@@ -272,18 +275,24 @@
     <string name="logview_showlocationsonly">Solo posizioni</string>
     <string name="logview_autoscroll">Scorrimento automatico</string>
     <string name="profile_create_new">Crea nuovo profilo</string>
+    <string name="profile_add_from_url">Da URL</string>
     <string name="profile_switch_before_delete">Si prega di passare ad un altro profilo prima di eliminare il presente.</string>
     <string name="profile_delete">Eliminare il profilo?</string>
     <string name="profile_default">Profilo predefinito</string>
     <string name="profile_add_new">Aggiungi profilo</string>
     <string name="gpslogger_permissions_rationale_title">Autorizzazioni necessarie</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Questa app necessita di diversi permessi per funzionare correttamente. Ora verranno effettuate  differenti richieste per i diversi permessi (scusate..). Di seguito una spiegazione di ogni permesso. ]]></string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Posizione dispositivo</b> - Questa autorizzazione permette di leggere la tua posizione basandosi sui ripetitori di telefonia mobile e sul tuo sensore GPS.]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Foto, media, file</b> - Questa autorizzazione permette la scrittura di file di log e di test sul supporto di archiviazione locale, e la lettura di un elenco di file per il caricamento o la condivisione. Questa app non accederà alle tue foto o media.]]></string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Permetti sempre</b> - Permette all'app di ricevere aggiornamenti sulla posizione quando eseguita in background,]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignora ottimizzazione della batteria</b> - Permette all'app di essere eseguita in background riducendo l'ottimizzazione della batteria. ]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Hai negato uno o più permessi che l\'app richiede.  E\' necessario accedere alla schermata delle impostazioni dell\'app ed accordare questi permessi.  <br /><br />Se i permessi sono stati definitivamente negati, è possibile ripristinarli nelle impostazioni di sistema. ]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Per consentire a GPSLogger di essere eseguito in background, è necessario fornirgli ulteriori permessi.  Nella prossima schermata selezionare: ]]></string>
     <string name="privacy_policy">Informativa sulla privacy</string>
     <string name="debuglog_attach_to_email">Invia debug con Email</string>
     <string name="debuglog_attach_to_email_summary">Allega un file di debug ad una Email con ulteriori informazioni diagnostiche</string>
     <string name="change_language_title">Change Language</string>
+    <string name="change_language_summary">Non tutte le lingue sono state completamente tradotte! E\' necessario rilanciare l\'app perchè le impostazioni abbiano effetto.</string>
     <string name="coordinate_display_format">Formato coordinate</string>
     <string name="ssl_certificate_validate">Validare il certificato SSL</string>
     <string name="parameters">Parametri</string>
@@ -299,4 +308,5 @@
     <string name="customurl_http_method">Metodo HTTP</string>
     <string name="customurl_http_basicauthentication">Autenticazione di base</string>
     <string name="hide_notification_from_status_bar_disallowed">Da Android Oreo in poi non è consentito nascondere la notifica</string>
+    <string name="reset_app_summary">L\'operazione resetterà l\'app, cancellerà tutte le preferenze e annullerà tutti i permessi concessi a questa app. Tutti i dati saranno persi!</string>
 </resources>
