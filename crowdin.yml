@@ -2,3 +2,4 @@ files:
   - source: /gpslogger/src/main/res/values/strings.xml
     translation: /gpslogger/src/main/res/values-%two_letters_code%/strings.xml
     translate_attributes: 0
+    escape_quotes: 2
