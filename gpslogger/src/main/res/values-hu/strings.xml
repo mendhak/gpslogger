@@ -90,15 +90,15 @@
     <string name="settings_accuracy_in_meters">Pontosság-szűrő (méter)</string>
     <string name="settings_enter_meters">Adja meg méterben (max 9999)</string>
     <!-- Settings -->
-    <string name="pref_logging_title">Naplózási részletek</string>
-    <string name="log_gpx_title">GPX naplózás</string>
-    <string name="log_gpx_summary">Pozíciók naplózása GPX v1.0 fájlba</string>
+    <string name="pref_logging_title">Naplózási opciók</string>
+    <string name="log_gpx_title">GPX formátum használata</string>
+    <string name="log_gpx_summary">Pozíciók rögzítése GPX v1.0 formátumban</string>
     <string name="log_gpx_11_title">GPX 1.1 használata</string>
     <string name="log_gpx_11_summary">GPX 1.1 formátum használata GPX 1.0 helyett</string>
-    <string name="log_kml_title">KML naplózás</string>
-    <string name="log_kml_summary">Pozíciók naplózása KML v2.2 fájlba</string>
-    <string name="log_plain_text_title">Naplózás CSV-be</string>
-    <string name="log_plain_text_summary">Pozíciók naplózása CSV fájlba</string>
+    <string name="log_kml_title">KLM formátum használata</string>
+    <string name="log_kml_summary">Pozíciók rögzítése KLM v2.2 formátumban</string>
+    <string name="log_plain_text_title">CSV formátum használata</string>
+    <string name="log_plain_text_summary">Pozíciók rögzítése CSV formátumban</string>
     <string name="log_json_title">Naplózás GeoJSON-ba</string>
     <string name="log_json_summary">Pozíciók naplózása GeoJSON fájlba</string>
     <string name="new_file_creation_title">Új fájl létrehozása</string>
