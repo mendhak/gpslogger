@@ -1,4 +1,4 @@
-GPSLogger  [![githubactions](https://github.com/mendhak/gpslogger/workflows/Android%20CI/badge.svg)](https://github.com/mendhak/gpslogger/actions) [![pgp](assets/pgp.png)](https://keybase.io/mendhak)
+GPSLogger  [![githubactions](https://github.com/mendhak/gpslogger/workflows/Android%20CI/badge.svg)](https://github.com/mendhak/gpslogger/actions) [![pgp](assets/pgp.png)](https://keybase.io/mendhak) [![Crowdin](https://badges.crowdin.net/gpslogger-for-android/localized.svg)](https://crowdin.com/project/gpslogger-for-android)
 =========
 
 _Note: Development has paused, and the app is not available from the Play Store, [see this note](https://github.com/mendhak/gpslogger/issues/849).  The app is now on [F-Droid](https://f-droid.org/en/packages/com.mendhak.gpslogger/)._  
