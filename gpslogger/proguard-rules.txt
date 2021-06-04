@@ -219,6 +219,8 @@
 # --------------------------------------------------------------------------------- #
 -dontwarn javax.servlet.**
 -dontwarn org.apache.jackrabbit.**
+-keep class org.apache.commons.httpclient.auth.** { *; }
+-keep class org.apache.commons.httpclient.cookie.** { *; }
 
 
 # --------------------------------------------------------------------------------- #
