@@ -1,5 +1,6 @@
 * Fix for ownCloud/NextCloud upload not working
 * Due to new Android storage restrictions, you can only write to the app's own folders
+
 * On Android 10+, the permission workflow will now ask for "allow all the time" permission
 * The permission workflow will also request disabling battery optimization
 * The permission workflow is annoying, sorry, it's necessary to help with numerous support requests related to background limitations.
