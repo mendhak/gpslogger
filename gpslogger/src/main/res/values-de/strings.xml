@@ -3,6 +3,7 @@
     <string name="title_drawer_uploadsettings">Hochladen - Einstellungen</string>
     <string name="navigation_drawer_open">Navigationsmenü öffnen</string>
     <string name="navigation_drawer_close">Navigationsmenü schließen</string>
+    <string name="app_name">GPSLogger</string>
     <string name="settings_screen_name">GPSLogger - Einstellungen</string>
     <string name="ok">ok</string>
     <string name="cancel">Abbrechen</string>
@@ -156,7 +157,9 @@
     <string name="pref_logging_summary">Dateitypen, Erstellzeitpunkt und und Namensgebung</string>
     <string name="pref_general_title">Allgemeine Einstellungen</string>
     <string name="pref_general_summary">Start- und Anzeigeoptionen</string>
+    <string name="emailprovider_google">Google Mail</string>
     <string name="emailprovider_manual">Manuell</string>
+    <string name="dropbox_setup_title">Dropbox</string>
     <string name="dropbox_authorize_description">Um Dropbox-Funktionen nutzen zu können, müssen Sie GPSLogger berechtigen, Dateien in Ihr Konto hochzuladen zu dürfen.    </string>
     <string name="dropbox_unauthorize_description">Sie sind für Dropbox berechtigt. Die Dateien werden nach „Apps\\GPSLogger for Android” hochgeladen. Sie können bei Bedarf die Verbindung von GPSLogger zu Ihrer Dropbox trennen.    </string>
     <string name="dropbox_couldnotauthorize">Dropbox-Anmeldung fehlgeschlagen, bitte probiere es später noch einmal</string>
@@ -201,6 +204,7 @@
     <string name="autoftp_advanced_settings">Erweiterte Einstellungen</string>
     <string name="autoftp_useftps">FTPS verwenden</string>
     <string name="autoftp_useftps_summary">FTP über SSL aktivieren. SSL/TLS und Implizit werden ignoriert, wenn diese Option deaktiviert ist.</string>
+    <string name="autoftp_ssltls">SSL/TLS</string>
     <string name="autoftp_ssltls_summary">Verschlüsselung: Keine, SSL oder TLS. Verwenden Sie „Keine” für eine unverschlüsselte/unsichere Verbindungen.</string>
     <string name="autoftp_ssltls_none">Keine</string>
     <string name="autoftp_implicit">Implizites FTP über SSL</string>
@@ -244,6 +248,7 @@
     <string name="log_nmea_title">In eine NIMEA-Datei protokollieren</string>
     <string name="log_nmea_summary">Erstellt eine unbearbeitete NMEA-Datei, während man versucht, eine Positionsbestimmung zu erhalten. Diese Datei wächst sehr schnell. Dies funktioniert nur während der der Verwendung von GPS.</string>
     <string name="autoopengts_accountname">Benutzername</string>
+    <string name="listeners_gps">GPS</string>
     <string name="listeners_gps_title">GPS/GNSS Standorte aufzeichnen</string>
     <string name="listeners_gps_summary">Zeichnet Standorte auf, die durch das GPS Modul des Handys generiert wurden</string>
     <string name="listeners_cell">Netzwerk</string>
