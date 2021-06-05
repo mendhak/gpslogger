@@ -83,6 +83,7 @@
     <string name="time_halfhour">½ Stunde</string>
     <string name="time_oneandhalfhours">1 ½ Stunden</string>
     <string name="time_twoandhalfhours">2 ½ Stunden</string>
+    <string name="time_hms_format" formatted="false">%sst %sm %ss</string>
     <string name="accuracy_within" formatted="false">Im Umkreis von %s %s</string>
     <!-- Settings activity -->
     <string name="settings_distance_in_meters">Entfernung in Meter</string>
@@ -102,6 +103,7 @@
     <string name="log_json_summary">Aufzeichnen von Orten in eine GeoJSON-Datei</string>
     <string name="new_file_creation_title">Neue Datei erstellen</string>
     <string name="new_file_creation_summary">Ob eine neue Datei einmal am Tag erstellt werden soll oder nach jedem Start.</string>
+    <string name="new_file_creation_onceamonth">Monatlich</string>
     <string name="new_file_creation_onceaday">Einmal am Tag</string>
     <string name="new_file_creation_everystart">Bei jedem Start</string>
     <string name="new_file_creation_custom">Benutzerdefinierte Datei</string>
@@ -214,6 +216,7 @@
     <string name="autoftp_username">Benutzername</string>
     <string name="autoftp_password">Passwort</string>
     <string name="autoftp_advanced_settings">Erweiterte Einstellungen</string>
+    <string name="autoftp_port">Port</string>
     <string name="autoftp_useftps">FTPS verwenden</string>
     <string name="autoftp_useftps_summary">FTP über SSL aktivieren. SSL/TLS und Implizit werden ignoriert, wenn diese Option deaktiviert ist.</string>
     <string name="autoftp_ssltls">SSL/TLS</string>
@@ -298,6 +301,7 @@
     <string name="logview_showlocationsonly">Nur Orte</string>
     <string name="logview_autoscroll">Automatischer Bildlauf</string>
     <string name="profile_create_new">Neues Profil erstellen</string>
+    <string name="profile_add_from_url">aus URL</string>
     <string name="profile_switch_before_delete">Zu einem anderen Profil wechseln, um das aktuelle Profil löschen zu können.</string>
     <string name="profile_delete">Profil löschen?</string>
     <string name="profile_default">Standardprofil</string>
@@ -328,5 +332,7 @@
     <string name="customurl_http_body">HTTP-Text</string>
     <string name="customurl_http_headers">HTTP-Kopfzeilen</string>
     <string name="customurl_http_method">HTTP-Methode</string>
+    <string name="customurl_http_basicauthentication">Authentifizierung</string>
     <string name="hide_notification_from_status_bar_disallowed">Das Verbergen von Benachrichtigungen ist ab Android Oreo nicht mehr erlaubt.</string>
+    <string name="reset_app_title">Reset app</string>
 </resources>
