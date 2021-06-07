@@ -47,6 +47,7 @@
     <string name="gpsprovider_unavailable">没有 GPS 来源可供使用。请检查您的位置设置并激活定位功能。
     </string>
     <string name="started">已开始</string>
+    <string name="providername_gps">GPS卫星</string>
     <string name="providername_celltower">基站</string>
     <string name="not_applicable">无</string>
     <string name="meters_per_second">&#160;米/秒</string>
@@ -103,6 +104,7 @@
     <string name="log_json_summary">记录位置到 GeoJSON 文件</string>
     <string name="new_file_creation_title">新文件的创建</string>
     <string name="new_file_creation_summary">选择是一天仅创建一个文件呢还是每次开始都创建一个文件。</string>
+    <string name="new_file_creation_onceamonth">每月一次</string>
     <string name="new_file_creation_onceaday">一天仅一次</string>
     <string name="new_file_creation_everystart">每次我点击开始</string>
     <string name="new_file_creation_custom">自定义文件</string>
