@@ -346,7 +346,7 @@ Engedélyek megadásához lépjen be az alkalmazás beállítások képernyőre.
     <string name="customurl_http_headers">HTTP Fejlécek</string>
     <string name="customurl_http_method">HTTP Eljárás</string>
     <string name="customurl_http_basicauthentication">Egyszerű hitelesítés</string>
-    <string name="hide_notification_from_status_bar_disallowed">Értesítés elrejtése az Android Oreo-ban nem engedélyezett</string>
+    <string name="hide_notification_from_status_bar_disallowed">Értesítés elrejtése az Android Oreo-tól kezdve nem engedélyezett</string>
     <string name="reset_app_summary">Visszaállítja az alkalmazást, törli az esetleges beállításokat, törli a GPSLogger fájlokat és visszavonja az alkalmazás számára biztosított engedélyeket. Minden adat elveszik!</string>
     <string name="reset_app_title">Visszaállítás</string>
 </resources>
