@@ -112,6 +112,8 @@
     <string name="pref_performance_title">Leistung</string>
     <string name="pref_performance_summary">Intervalle, Filter und Standortbestimmung</string>
     <string name="time_before_logging_title">Aufzeichnungsintervall</string>
+    <string name="time_before_logging_summary">Verwenden Sie 0 für den maximalen Intervall, langsamer ist jedoch besser für die Akkulaufzeit.
+        Die Konfiguration des Akkuladestands im System kann diese Einstellung außer Kraft setzen, siehe auch Hilfe und FAQ.</string>
     <string name="time_before_logging_dialog_title">Zeit in Sekunden</string>
     <string name="time_before_logging_hint">Eingabe in Sekunden (max. 9999)</string>
     <string name="keep_fix_summary">Seien Sie vorsichtig - Diese Einstellung wird die Akkulaufzeit drastisch verkürzen. Nur für höhere Präzision bei geringer Häufigkeit verwenden.    </string>
@@ -302,14 +304,19 @@
     <string name="logview_autoscroll">Automatischer Bildlauf</string>
     <string name="profile_create_new">Neues Profil erstellen</string>
     <string name="profile_add_from_url">aus URL</string>
+    <string name="properties_file_url">Eigenschaften datei URL</string>
     <string name="profile_switch_before_delete">Zu einem anderen Profil wechseln, um das aktuelle Profil löschen zu können.</string>
     <string name="profile_delete">Profil löschen?</string>
     <string name="profile_default">Standardprofil</string>
     <string name="profile_add_new">Neues Profil</string>
     <string name="gpslogger_permissions_rationale_title">Erforderliche Berechtigungen</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Diese App benötigt verschiedene Berechtigungen, um ordnungsgemäß zu funktionieren. Sie werden nun mehrmals nach verschiedenen Berechtigungen gefragt (sorry). Hier ist eine Erklärung jeder Berechtigung. ]]></string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Standort</b> - Diese Berechtigung ermöglicht der App das Lesen der aktuellen Standortdaten.]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotos/Medien/Dateien</b> - Diese Berechtigung ermöglicht es, Protokolldateien und Test-Dateien zu speichern, wie auch das Lesen einer Liste von Dateien, um sie hochladen oder teilen zu können. Diese App greift nicht auf Ihre Fotos oder Medien zu.]]></string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Jederzeit zulassen</b> – Erlaube dieser App, Standortaktualisierungen zu empfangen, wenn sie im Hintergrund ausgeführt wird. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Akkuoptimierung ignorieren</b> – Lassen Sie diese App im Hintergrund laufen, indem Sie die Akkuoptimierung reduzieren. ]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Sie haben eine oder mehrere Berechtigungen abgelehnt, welche die App benötigt. Sie müssen in die Appeinstellungen wechseln und der App die benötigten Berechtigungen erteilen. <br /><br /> Falls Sie die Berechtigungen permanent abgelehnt haben, so können Sie diese in den Systemeinstellungen zurücksetzen.]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Damit GPSLogger im Hintergrund laufen kann, müssen Sie ihm eine zusätzliche Berechtigung erteilen. Auf dem nächsten Bildschirm wählen Sie bitte: ]]></string>
     <string name="privacy_policy">Datenschutzbestimmungen</string>
     <string name="debuglog_attach_to_email">Fehlerprotokolldatei an E-Mail anhängen</string>
     <string name="debuglog_attach_to_email_summary">Die Fehlerprotokolldatei wird zusammen mit anderen Diagnoseinformationen an die E-Mail angehängt</string>
@@ -334,5 +341,6 @@
     <string name="customurl_http_method">HTTP-Methode</string>
     <string name="customurl_http_basicauthentication">Authentifizierung</string>
     <string name="hide_notification_from_status_bar_disallowed">Das Verbergen von Benachrichtigungen ist ab Android Oreo nicht mehr erlaubt.</string>
+    <string name="reset_app_summary">Dadurch wird die App zurückgesetzt, alle Einstellungen und GPSLogger-Dateien werden gelöscht und die gewährten APP Berechtigungen widerrufen. Alle Daten gehen verloren!</string>
     <string name="reset_app_title">Reset app</string>
 </resources>
