@@ -9,7 +9,7 @@
     <string name="cancel">Mégse</string>
     <string name="could_not_write_to_file">A fájl nem írható!</string>
     <string name="add_description">Leírás hozzáadása</string>
-    <string name="letters_numbers">Csak betűk és számok</string>
+    <string name="letters_numbers">Csak betűket, számokat tartalmazhat</string>
     <string name="menu_annotate">Helyjelző</string>
     <string name="menu_share">Megosztás</string>
     <string name="menu_exit">Kilépés</string>
@@ -44,7 +44,7 @@
     <string name="seconds">&#160;mp</string>
     <string name="minutes">&#160;perc</string>
     <string name="hours">&#160;óra</string>
-    <string name="gpsprovider_unavailable">Nem található GPS kiszolgáló. Kérem ellnőrizze a telefon helymeghatározási beállításait!    </string>
+    <string name="gpsprovider_unavailable">Nem található GPS szolgáltató. Kérem ellenőrizze a telefon helymeghatározás beállítását!    </string>
     <string name="started">Elindult</string>
     <string name="providername_gps">GPS műholdak</string>
     <string name="providername_celltower">GSM adótornyok</string>
@@ -105,15 +105,15 @@
     <string name="new_file_creation_summary">Megadhatja, hogy az alkalmazás milyen időközönként készítsen új naplófájlt.</string>
     <string name="new_file_creation_onceamonth">Havonta egyszer</string>
     <string name="new_file_creation_onceaday">Naponta egyszer</string>
-    <string name="new_file_creation_everystart">A GPS Logger indításakor</string>
-    <string name="new_file_creation_custom">Egyéni paraméterek</string>
-    <string name="new_file_custom_title">Fájlnév és paraméterek megadása</string>
-    <string name="new_file_custom_summary">Használhat bármilyen fáljnevet.
-        Tetszőlegesen hozzáadhat működési paramétereket, pl.: sorozatszám, év, óra, perc, stb. Ne használjon túl sok opciót, megeshet, hogy nem fog működni.
-        Az automatikus küldés funkció csak az utolsó fájlt küldi el!</string>
+    <string name="new_file_creation_everystart">GPSLogger indításakor</string>
+    <string name="new_file_creation_custom">Egyedi fájlnév</string>
+    <string name="new_file_custom_title">Egyedi fájl neve</string>
+    <string name="new_file_custom_summary">Használhat tetszőleges fájlnevet. 
+        Tetszés szerint adhat hozzá paramétereket (sorozatszám, év, óra, perc, stb). A nagyon dinamikus fájlnevek
+        nem biztos, hogy jól működnek, mert az automatikus küldés csak az utolsó fájlt küldi el.</string>
     <string name="pref_performance_title">Teljesítmény</string>
     <string name="pref_performance_summary">Időzítés- és szűrő beállítások</string>
-    <string name="time_before_logging_title">Rögzítési intervallum</string>
+    <string name="time_before_logging_title">Naplózási időköz</string>
     <string name="time_before_logging_summary">Használjon 0 értéket a folyamatos rögzítéshez. Az opció használata nagyban megnöveli az alkalmazás erőforrás igényét! Ezt a beállítást a Rendszer
         akkumulátor beállításai felülírhatják! További információ: Súgó és GY.I.K.
     </string>
