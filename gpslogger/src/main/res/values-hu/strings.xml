@@ -114,7 +114,7 @@
     <string name="pref_performance_title">Teljesítmény</string>
     <string name="pref_performance_summary">Időzítés- és szűrő beállítások</string>
     <string name="time_before_logging_title">Naplózási időköz</string>
-    <string name="time_before_logging_summary">Használjon 0 értéket a folyamatos rögzítéshez. Az opció használata nagyban megnöveli az alkalmazás erőforrás igényét! Ezt a beállítást a Rendszer
+    <string name="time_before_logging_summary">Használjon 0 értéket a leggyorsabb naplózáshoz. Az opció használata nagyban megnöveli az alkalmazás erőforrás igényét! Ezt a beállítást a Rendszer
         akkumulátor beállításai felülírhatják! További információ: Súgó és GY.I.K.
     </string>
     <string name="time_before_logging_dialog_title">Mentési időköz (másodperc)</string>
@@ -124,7 +124,7 @@
     </string>
     <string name="keep_fix_title">Tartsa a GPS-t bekapcsolva</string>
     <string name="retry_time_title">Pontosítási időkorlát</string>
-    <string name="retry_time_summary">Az első GPS jel vétele után ennyi ideig próbáljon meg az alkalmazás pontosabb pozíciót keresni, hogy az megfeleljen a \"pontossági szűrők\" beállításainak.</string>
+    <string name="retry_time_summary">Az első GPS jel vétele után ennyi ideig próbáljon meg az alkalmazás pontosabb pozíciót keresni, hogy az megfeleljen a \"pontossági-szűrő\" beállításának.</string>
     <string name="display_imperial_title">Angolszász mértékegységek használata</string>
     <string name="display_imperial_summary">Mérföld, láb, öl használata a modern metrikus cuccok helyett. (A beállításokat továbbra is metrikusan kell megadni)</string>
     <string name="enabledisablegps_title">GPS engedélyezése/tiltása</string>
