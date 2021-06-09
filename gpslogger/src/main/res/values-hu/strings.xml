@@ -95,8 +95,8 @@
     <string name="log_gpx_summary">Pozíciók rögzítése GPX v1.0 fájlformátumban</string>
     <string name="log_gpx_11_title">GPX 1.1 használata</string>
     <string name="log_gpx_11_summary">GPX 1.1 formátum használata GPX 1.0 helyett</string>
-    <string name="log_kml_title">KLM formátum használata</string>
-    <string name="log_kml_summary">Pozíciók rögzítése KLM v2.2 fájlformátumban</string>
+    <string name="log_kml_title">KML formátum használata</string>
+    <string name="log_kml_summary">Pozíciók rögzítése KML v2.2 fájlformátumban</string>
     <string name="log_plain_text_title">CSV formátum használata</string>
     <string name="log_plain_text_summary">Pozíciók rögzítése CSV fájlformátumban</string>
     <string name="log_json_title">Pozíciók rögzítése GeoJSON formátumban</string>
@@ -114,7 +114,7 @@
     <string name="pref_performance_title">Teljesítmény</string>
     <string name="pref_performance_summary">Időzítés- és szűrő beállítások</string>
     <string name="time_before_logging_title">Naplózási időköz</string>
-    <string name="time_before_logging_summary">Használjon 0 értéket a leggyorsabb naplózáshoz. Az opció használata nagyban megnöveli az alkalmazás erőforrás igényét! Ezt a beállítást a Rendszer
+    <string name="time_before_logging_summary">Használjon 0 értéket a legsűrűbb rögzítéshez. Az opció használata nagyban megnöveli az alkalmazás erőforrás igényét! Ezt a beállítást a Rendszer
         akkumulátor beállításai felülírhatják! További információ: Súgó és GY.I.K.
     </string>
     <string name="time_before_logging_dialog_title">Mentési időköz (másodperc)</string>
@@ -225,13 +225,13 @@
     <string name="autoftp_advanced_settings">További beállítások</string>
     <string name="autoftp_port">Port</string>
     <string name="autoftp_useftps">FTPS használata</string>
-    <string name="autoftp_useftps_summary">Engedélyezze az FTP-t SSL-en keresztül. SSL/TLS-t és az Implicit-et figyelmen kívül hagyja, ha ez nincs bejelölve.</string>
+    <string name="autoftp_useftps_summary">Engedélyezze az FTP-t SSL-en keresztül. Alapértelmezett SSL/TLS-t figyelmen kívül hagyja, ha ez be van jelölve.</string>
     <string name="autoftp_ssltls">SSL/TLS</string>
-    <string name="autoftp_ssltls_summary">Nincs SSL vagy TLS beállítva. Így titkosítatlanok a kapcsolatok.</string>
+    <string name="autoftp_ssltls_summary">Nincs SSL vagy TLS beállítva. Így a kapcsolat titkosítatlan.</string>
     <string name="autoftp_ssltls_none">Egyik sem</string>
     <string name="autoftp_ssltls_ssl">SSL</string>
     <string name="autoftp_ssltls_tls">TLS</string>
-    <string name="autoftp_implicit">FTP SSL-en keresztül</string>
+    <string name="autoftp_implicit">Alapértelmezett FTP SSL-en keresztül</string>
     <string name="autoftp_test_summary">Teszt fájlt feltöltése FTP-kiszolgálóra</string>
     <string name="autoftp_testing">FTP feltöltés tesztelése</string>
     <string name="autoftp_invalid_settings">Érvénytelen beállítások</string>
@@ -267,7 +267,7 @@
     <string name="txt_number_of_points">Pontok száma</string>
     <string name="save">Mentés</string>
     <string name="pref_filedetails_title">Fájl- és mappa részletek</string>
-    <string name="absolute_timeout_title">Abszolút idő a GPS javításra</string>
+    <string name="absolute_timeout_title">Teljes idő a GPS javításra</string>
     <string name="absolute_timeout_summary">Időkorlát másodpercben, az app maximum ennyi ideig próbálkozik egy pontosabb pozíció megszerzésével, függetlenül más beállításoktól. Hasznos, ha épületben tartózkodik: így a GPS nem meríti le az akkut. Ha 0-t ad meg, nincs időkorlát.</string>
     <string name="txt_latitude_short">Sz</string>
     <string name="txt_longitude_short">H</string>
@@ -300,7 +300,7 @@
     <string name="altitude_subtractgeoidheight_summary">Átlagos tengerszint feletti magasság (MSL) használata WGS84 magasság helyett, levonja a geoid magasságot a GPS magasságból. Csak GPS pontok esetén, hálózati vagy NMEA pontokra nem vonatkozik.</string>
     <string name="altitude_subtractgeoidheight_title">MSL használata WGS84 helyett</string>
     <string name="altitude_subtractoffset_title">Kivonandó magasság eltolás</string>
-    <string name="altitude_subtractoffset_summary">Kivonjuk a GPS magasságából a méterben megadott értéket. Negatív számként adja meg. Csak a GPS műholdas pontokra vonatkozik, a hálózatira vagy az NMEA-ra nem.</string>
+    <string name="altitude_subtractoffset_summary">GPS magasságából kivonódik a méterben megadott érték. Negatív számként adja meg. Csak a GPS műholdas pontokra vonatkozik, a hálózatira vagy az NMEA-ra nem.</string>
     <string name="upload_failure">Nem sikerült feltölteni a fájlt</string>
     <string name="inaccurate_point_discarded">Pontatlan pozíció eldobva</string>
     <string name="not_enough_distance_traveled">Csak %s m elmozdulás történt. Pont elvetve.</string>
