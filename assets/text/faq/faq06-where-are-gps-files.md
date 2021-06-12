@@ -18,8 +18,16 @@ Finally, note that due to the [restrictions introduced in Android KitKat](http:/
 
 ## How to log to an external SD card?
 
-Under logging details, pick the 'save to folder' dialog.  Keep navigating upwards using the `..` until you see the label of your SD card.  Pick that and then navigate down into the GPSLogger data folder.  Your path may end up looking like this:
+Under logging details, pick the 'save to folder' dialog. You will need to use your SD card's serial number in the path - a file manager should be able to reveal this to you.  
 
-> Example: `/storage/1b04-100a/Android/data/com.mendhak.gpslogger/files`
+> `/storage/1b04-100a/Android/data/com.mendhak.gpslogger/files`
 
-Note that GPSLogger can only write to its application folders.  File explorers are able to write to any location but they make use of a special media hack which this app cannot rely on. 
+You can also try:
+
+> `/storage/2099-8403/Download/gpslogger`
+
+and
+
+> `/storage/2099-8403/DCIM/gpslogger`
+
+Note that GPSLogger can only write to its application folders.  Download and DCIM may be writeable, the app will warn you if it is not writeable.  File explorers are able to write to any location but they make use of a special media hack which this app cannot rely on. 

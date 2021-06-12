@@ -134,11 +134,19 @@
 <p>If you have a file explorer installed, you can click on the folder paths in the simple/detailed screens.</p>
 <p>To copy the GPSLogger files, you can connect your phone to your computer and mount the SD card, then copy straight from the above folder. You can also change the default folder in the app settings. </p>
 <p>Finally, note that due to the <a href="http://commonsware.com/blog/2014/04/09/storage-situation-removable-storage.html">restrictions introduced in Android KitKat</a>, any files in the default folder will be removed if you uninstall the app.</p>
-<h2><a name="howtologtoanexternalsdcard" href="#howtologtoanexternalsdcard">How to log to an external SD card?</a></h2><p>Under logging details, pick the &#39;save to folder&#39; dialog.  Keep navigating upwards using the <code>..</code> until you see the label of your SD card.  Pick that and then navigate down into the GPSLogger data folder.  Your path may end up looking like this:</p>
+<h2><a name="howtologtoanexternalsdcard" href="#howtologtoanexternalsdcard">How to log to an external SD card?</a></h2><p>Under logging details, pick the &#39;save to folder&#39; dialog. You will need to use your SD card&#39;s serial number in the path - a file manager should be able to reveal this to you.  </p>
 <blockquote>
-<p>Example: <code>/storage/1b04-100a/Android/data/com.mendhak.gpslogger/files</code></p>
+<p><code>/storage/1b04-100a/Android/data/com.mendhak.gpslogger/files</code></p>
 </blockquote>
-<p>Note that GPSLogger can only write to its application folders.  File explorers are able to write to any location but they make use of a special media hack which this app cannot rely on. </p>
+<p>You can also try:</p>
+<blockquote>
+<p><code>/storage/2099-8403/Download/gpslogger</code></p>
+</blockquote>
+<p>and</p>
+<blockquote>
+<p><code>/storage/2099-8403/DCIM/gpslogger</code></p>
+</blockquote>
+<p>Note that GPSLogger can only write to its application folders.  Download and DCIM may be writeable, the app will warn you if it is not writeable.  File explorers are able to write to any location but they make use of a special media hack which this app cannot rely on. </p>
 
 </div></section>
 
