@@ -24,10 +24,10 @@ Under logging details, pick the 'save to folder' dialog. You will need to use yo
 
 You can also try:
 
-> `/storage/2099-8403/Download/gpslogger`
+> `/storage/1b04-100a/Download/gpslogger`
 
 and
 
-> `/storage/2099-8403/DCIM/gpslogger`
+> `/storage/1b04-100a/DCIM/gpslogger`
 
 Note that GPSLogger can only write to its application folders.  Download and DCIM may be writeable, the app will warn you if it is not writeable.  File explorers are able to write to any location but they make use of a special media hack which this app cannot rely on. 
