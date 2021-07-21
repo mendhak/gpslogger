@@ -47,6 +47,7 @@
     <string name="gpsprovider_unavailable">没有 GPS 来源可供使用。请检查您的位置设置并激活定位功能。
     </string>
     <string name="started">已开始</string>
+    <string name="providername_gps">GPS卫星</string>
     <string name="providername_celltower">基站</string>
     <string name="not_applicable">无</string>
     <string name="meters_per_second">&#160;米/秒</string>
@@ -103,6 +104,7 @@
     <string name="log_json_summary">记录位置到 GeoJSON 文件</string>
     <string name="new_file_creation_title">新文件的创建</string>
     <string name="new_file_creation_summary">选择是一天仅创建一个文件呢还是每次开始都创建一个文件。</string>
+    <string name="new_file_creation_onceamonth">每月一次</string>
     <string name="new_file_creation_onceaday">一天仅一次</string>
     <string name="new_file_creation_everystart">每次我点击开始</string>
     <string name="new_file_creation_custom">自定义文件</string>
@@ -111,6 +113,7 @@
     <string name="pref_performance_title">性能</string>
     <string name="pref_performance_summary">定时器、过滤器和监听程序</string>
     <string name="time_before_logging_title">记录间隔</string>
+    <string name="time_before_logging_summary">0为最高频率，然而慢一点有助延长待机。系统级别的电池配置可能会凌驾此设置，请见帮助和常见问题。</string>
     <string name="time_before_logging_dialog_title">以秒计的时间</string>
     <string name="time_before_logging_hint">输入秒数(最大 9999)</string>
     <string name="keep_fix_summary">注意，这将大大减少电池续航。请只以低频率使用以获得较高的精度。    </string>
@@ -226,6 +229,7 @@
     <string name="log_customurl_summary">透过 HTTP 将日志消息发送到您自己的服务器</string>
     <string name="txt_annotation">注释︰</string>
     <string name="txt_time_isoformat">UTC 时间（2011-12-25T15:27:33Z）：</string>
+    <string name="txt_date_isoformat">日期(2011-12-25):</string>
     <string name="txt_provider">提供者：</string>
     <string name="annotation_requires_logging">只有这些记录方式支持注释：CSV/GPX/KML/ URL/GeoJSON</string>
     <string name="gpslogger_folder_title">保存到文件夹</string>
@@ -290,14 +294,20 @@
     <string name="logview_showlocationsonly">仅位置</string>
     <string name="logview_autoscroll">自动滚动</string>
     <string name="profile_create_new">创建新的配置文件</string>
+    <string name="profile_add_from_url">从URL</string>
+    <string name="properties_file_url">属性文件的URL</string>
     <string name="profile_switch_before_delete">请删除此配置文件之前切换到另一个配置文件。</string>
     <string name="profile_delete">是否要删除配置文件？</string>
     <string name="profile_default">缺省配置文件</string>
     <string name="profile_add_new">添加配置文件</string>
     <string name="gpslogger_permissions_rationale_title">需要授权</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[本应用需要一系列的权限以正常运行。您将会就这些权限而被多次提示询问(抱歉)。此处对每个权限用途进行解释。]]></string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>设备位置</b>用于获取您的 GPS 或基站位置。]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>文件媒介</b>用于读写 SD 卡上的 GPSLogger 文件夹，以供访问、上载、分享记录文件。本应用不会读取您的照片及其他媒介。]]></string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>总是允许</b>-允许本应用在后台运行时获取位置更新信息。]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>忽略电池优化</b>-不对本应用进行电池优化，使之可以在后台运行。]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[您拒绝授予一个或多个此应用程序所需的权限。您需要前往应用程序设置页以授予这些权限。<br /><br />若您永久拒绝了这些权限，您可在系统设置中重置。 ]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[为了允许GPS记录器在后台运行，您需要授予它一个额外的权限。在下一个屏幕，请选择: ]]></string>
     <string name="privacy_policy">隐私权政策</string>
     <string name="debuglog_attach_to_email">将调试日志文件附加到电子邮件</string>
     <string name="debuglog_attach_to_email_summary">将调试日志文件以及一些诊断信息附加到电子邮件</string>
@@ -321,4 +331,6 @@
     <string name="customurl_http_method">HTTP 方法</string>
     <string name="customurl_http_basicauthentication">基础认证</string>
     <string name="hide_notification_from_status_bar_disallowed">从安卓8起，不允许设置隐藏状态栏通知</string>
+    <string name="reset_app_summary">此功能将重置本应用，删除所有设置，删除GPS记录器文件，且取消授予此应用的所有权限。所有数据将会丢失！</string>
+    <string name="reset_app_title">重置本应用</string>
 </resources>

@@ -4,12 +4,12 @@
     <string name="navigation_drawer_open">Navigációs menü</string>
     <string name="navigation_drawer_close">Navigációs menü bezárása</string>
     <string name="app_name">GPSLogger</string>
-    <string name="settings_screen_name">Beállítások</string>
+    <string name="settings_screen_name">Általános beállítások</string>
     <string name="ok">OK</string>
     <string name="cancel">Mégse</string>
     <string name="could_not_write_to_file">A fájl nem írható!</string>
     <string name="add_description">Leírás hozzáadása</string>
-    <string name="letters_numbers">Csak betűk és számok</string>
+    <string name="letters_numbers">Csak (A-Z) és (0-9)</string>
     <string name="menu_annotate">Helyjelző</string>
     <string name="menu_share">Megosztás</string>
     <string name="menu_exit">Kilépés</string>
@@ -44,7 +44,7 @@
     <string name="seconds">&#160;mp</string>
     <string name="minutes">&#160;perc</string>
     <string name="hours">&#160;óra</string>
-    <string name="gpsprovider_unavailable">Nem található GPS kiszolgáló. Kérem ellnőrizze a telefon helymeghatározási beállításait!    </string>
+    <string name="gpsprovider_unavailable">Nem található GPS szolgáltató. Kérem ellenőrizze a telefon helymeghatározás beállítását!    </string>
     <string name="started">Elindult</string>
     <string name="providername_gps">GPS műholdak</string>
     <string name="providername_celltower">GSM adótornyok</string>
@@ -90,31 +90,31 @@
     <string name="settings_accuracy_in_meters">Pontosság-szűrő (méter)</string>
     <string name="settings_enter_meters">Adja meg méterben (max 9999)</string>
     <!-- Settings -->
-    <string name="pref_logging_title">Naplózási opciók</string>
+    <string name="pref_logging_title">Naplózási beállítások</string>
     <string name="log_gpx_title">GPX formátum használata</string>
     <string name="log_gpx_summary">Pozíciók rögzítése GPX v1.0 fájlformátumban</string>
     <string name="log_gpx_11_title">GPX 1.1 használata</string>
     <string name="log_gpx_11_summary">GPX 1.1 formátum használata GPX 1.0 helyett</string>
-    <string name="log_kml_title">KLM formátum használata</string>
-    <string name="log_kml_summary">Pozíciók rögzítése KLM v2.2 fájlformátumban</string>
+    <string name="log_kml_title">KML formátum használata</string>
+    <string name="log_kml_summary">Pozíciók rögzítése KML v2.2 fájlformátumban</string>
     <string name="log_plain_text_title">CSV formátum használata</string>
     <string name="log_plain_text_summary">Pozíciók rögzítése CSV fájlformátumban</string>
-    <string name="log_json_title">Pozíciók rögzítése GeoJSON formátumban</string>
+    <string name="log_json_title">GeoJSON formátum használata</string>
     <string name="log_json_summary">Pozíciók rögzítése GeoJSON fájlformátumban</string>
     <string name="new_file_creation_title">Naplófájlok létrehozása ...</string>
     <string name="new_file_creation_summary">Megadhatja, hogy az alkalmazás milyen időközönként készítsen új naplófájlt.</string>
     <string name="new_file_creation_onceamonth">Havonta egyszer</string>
     <string name="new_file_creation_onceaday">Naponta egyszer</string>
-    <string name="new_file_creation_everystart">A GPS Logger indításakor</string>
-    <string name="new_file_creation_custom">Egyéni paraméterek</string>
-    <string name="new_file_custom_title">Fájlnév és paraméterek megadása</string>
-    <string name="new_file_custom_summary">Használhat bármilyen fáljnevet.
-        Tetszőlegesen hozzáadhat működési paramétereket, pl.: sorozatszám, év, óra, perc, stb. Ne használjon túl sok opciót, megeshet, hogy nem fog működni.
-        Az automatikus küldés funkció csak az utolsó fájlt küldi el!</string>
+    <string name="new_file_creation_everystart">GPSLogger indításakor</string>
+    <string name="new_file_creation_custom">Egyedi fájlnév</string>
+    <string name="new_file_custom_title">Egyedi fájl neve</string>
+    <string name="new_file_custom_summary">Használhat tetszőleges fájlnevet. 
+        Tetszés szerint adhat hozzá paramétereket (sorozatszám, év, óra, perc, stb). A nagyon dinamikus fájlnevek
+        nem biztos, hogy jól működnek, mert az automatikus küldés csak az utolsó fájlt küldi el.</string>
     <string name="pref_performance_title">Teljesítmény</string>
     <string name="pref_performance_summary">Időzítés- és szűrő beállítások</string>
-    <string name="time_before_logging_title">Rögzítési intervallum</string>
-    <string name="time_before_logging_summary">Használjon 0 értéket a folyamatos rögzítéshez. Az opció használata nagyban megnöveli az alkalmazás erőforrás igényét! Ezt a beállítást a Rendszer
+    <string name="time_before_logging_title">Rögzítési időköz</string>
+    <string name="time_before_logging_summary">Használjon 0 értéket a legsűrűbb rögzítéshez. Az opció használata nagyban megnöveli az alkalmazás erőforrás igényét! Ezt a beállítást a Rendszer
         akkumulátor beállításai felülírhatják! További információ: Súgó és GY.I.K.
     </string>
     <string name="time_before_logging_dialog_title">Mentési időköz (másodperc)</string>
@@ -124,11 +124,11 @@
     </string>
     <string name="keep_fix_title">Tartsa a GPS-t bekapcsolva</string>
     <string name="retry_time_title">Pontosítási időkorlát</string>
-    <string name="retry_time_summary">Az első GPS jel vétele után ennyi ideig próbáljon meg az alkalmazás pontosabb pozíciót keresni, hogy az megfeleljen a \"pontossági szűrők\" beállításainak.</string>
+    <string name="retry_time_summary">Az első GPS jel vétele után ennyi ideig próbáljon meg az alkalmazás pontosabb pozíciót keresni, hogy az megfeleljen a \"pontossági-szűrő\" beállításának.</string>
     <string name="display_imperial_title">Angolszász mértékegységek használata</string>
     <string name="display_imperial_summary">Mérföld, láb, öl használata a modern metrikus cuccok helyett. (A beállításokat továbbra is metrikusan kell megadni)</string>
     <string name="enabledisablegps_title">GPS engedélyezése/tiltása</string>
-    <string name="enabledisablegps_summary">Megnyitja a telefon beállítását a helyhozzáférés engedélyezéséhez vagy tiltásához.</string>
+    <string name="enabledisablegps_summary">Készülékbeállítások megnyitása a helyhozzáférés engedélyezéséhez vagy tiltásához.</string>
     <string name="startonbootup_title">Boot-nál indul</string>
     <string name="startonbootup_summary">GPSlogger a telefon bekapcsolásakor induljon</string>
     <string name="startonapplaunch_title">Indítás app indításakor</string>
@@ -171,7 +171,7 @@
     <string name="debuglog_summary">Hibakeresési üzeneteket ír az SD-kártyán lévő fájlba. Figyelem: A fájl nagyon gyorsan növekszik.</string>
     <string name="pref_logging_summary">Fájl típusok, létrehozás és elnevezés</string>
     <string name="pref_general_title">Általános beállítások</string>
-    <string name="pref_general_summary">Indítási és megjelenítési beállítások</string>
+    <string name="pref_general_summary">Indítási, megjelenítési beállítások</string>
     <string name="emailprovider_google">Google Mail</string>
     <string name="emailprovider_yahoo">Yahoo! Mail</string>
     <string name="emailprovider_msn">Windows Live Mail</string>
@@ -225,13 +225,13 @@
     <string name="autoftp_advanced_settings">További beállítások</string>
     <string name="autoftp_port">Port</string>
     <string name="autoftp_useftps">FTPS használata</string>
-    <string name="autoftp_useftps_summary">Engedélyezze az FTP-t SSL-en keresztül. SSL/TLS-t és az Implicit-et figyelmen kívül hagyja, ha ez nincs bejelölve.</string>
+    <string name="autoftp_useftps_summary">Engedélyezze az FTP-t SSL-en keresztül. Alapértelmezett SSL/TLS-t figyelmen kívül hagyja, ha ez be van jelölve.</string>
     <string name="autoftp_ssltls">SSL/TLS</string>
-    <string name="autoftp_ssltls_summary">Nincs SSL vagy TLS beállítva. Így titkosítatlanok a kapcsolatok.</string>
+    <string name="autoftp_ssltls_summary">Nincs SSL vagy TLS beállítva. Így a kapcsolat titkosítatlan.</string>
     <string name="autoftp_ssltls_none">Egyik sem</string>
     <string name="autoftp_ssltls_ssl">SSL</string>
     <string name="autoftp_ssltls_tls">TLS</string>
-    <string name="autoftp_implicit">FTP SSL-en keresztül</string>
+    <string name="autoftp_implicit">Alapértelmezett FTP SSL-en keresztül</string>
     <string name="autoftp_test_summary">Teszt fájlt feltöltése FTP-kiszolgálóra</string>
     <string name="autoftp_testing">FTP feltöltés tesztelése</string>
     <string name="autoftp_invalid_settings">Érvénytelen beállítások</string>
@@ -267,7 +267,7 @@
     <string name="txt_number_of_points">Pontok száma</string>
     <string name="save">Mentés</string>
     <string name="pref_filedetails_title">Fájl- és mappa részletek</string>
-    <string name="absolute_timeout_title">Abszolút idő a GPS javításra</string>
+    <string name="absolute_timeout_title">Teljes idő a GPS javításra</string>
     <string name="absolute_timeout_summary">Időkorlát másodpercben, az app maximum ennyi ideig próbálkozik egy pontosabb pozíció megszerzésével, függetlenül más beállításoktól. Hasznos, ha épületben tartózkodik: így a GPS nem meríti le az akkut. Ha 0-t ad meg, nincs időkorlát.</string>
     <string name="txt_latitude_short">Sz</string>
     <string name="txt_longitude_short">H</string>
@@ -295,12 +295,12 @@
     <string name="donate_bitcoin">Bitcoin</string>
     <string name="tip_coffee">Hívjon meg egy kávéra</string>
     <string name="no_network_message">Nincs elérhető hálózat</string>
-    <string name="hide_notification_buttons">Gombok elrejtése az értesítési sávról</string>
+    <string name="hide_notification_buttons">Gombok elrejtése értesítésből</string>
     <string name="restart_required">Beállítás életbe léptetéséhez újra kell indítania a GPSLogger-t</string>
     <string name="altitude_subtractgeoidheight_summary">Átlagos tengerszint feletti magasság (MSL) használata WGS84 magasság helyett, levonja a geoid magasságot a GPS magasságból. Csak GPS pontok esetén, hálózati vagy NMEA pontokra nem vonatkozik.</string>
     <string name="altitude_subtractgeoidheight_title">MSL használata WGS84 helyett</string>
     <string name="altitude_subtractoffset_title">Kivonandó magasság eltolás</string>
-    <string name="altitude_subtractoffset_summary">Kivonjuk a GPS magasságából a méterben megadott értéket. Negatív számként adja meg. Csak a GPS műholdas pontokra vonatkozik, a hálózatira vagy az NMEA-ra nem.</string>
+    <string name="altitude_subtractoffset_summary">GPS magasságából kivonódik a méterben megadott érték. Negatív számként adja meg. Csak a GPS műholdas pontokra vonatkozik, a hálózatira vagy az NMEA-ra nem.</string>
     <string name="upload_failure">Nem sikerült feltölteni a fájlt</string>
     <string name="inaccurate_point_discarded">Pontatlan pozíció eldobva</string>
     <string name="not_enough_distance_traveled">Csak %s m elmozdulás történt. Pont elvetve.</string>
@@ -326,14 +326,14 @@ Engedélyek megadásához lépjen be az alkalmazás beállítások képernyőre.
     <string name="privacy_policy">Adatvédelmi irányelvek</string>
     <string name="debuglog_attach_to_email">Hibakeresési napló csatolása az e-mailhez</string>
     <string name="debuglog_attach_to_email_summary">Hibakeresési naplót mellékel az e-mailhez néhány diagnosztikai információval</string>
-    <string name="change_language_title">Nyelv választás</string>
+    <string name="change_language_title">Nyelvválasztás</string>
     <string name="change_language_summary">Nincs minden nyelvhez teljes fordítás! Újra kell indítani a programot a beállítás érvénybelépéséhez.</string>
     <string name="coordinate_display_format">Koordináta megjelenítés formátuma</string>
     <string name="ssl_certificate_validate">SSL Tanúsítvány Ellenőrzése</string>
     <string name="parameters">Paraméterek</string>
     <string name="ssl_certificate_add_to_keystore">Hozzáadja a tanúsítványt a helyi kulcstárhoz?</string>
     <string name="ssl_certificate_is_valid">Ez a tanúsítvány érvényes</string>
-    <string name="hide_notification_from_status_bar">Értesítés elrejtése az állapotsávról</string>
+    <string name="hide_notification_from_status_bar">Értesítés elrejtése</string>
     <string name="sftp_setup_title">SFTP</string>
     <string name="sftp_private_key_path">Privát kulcs</string>
     <string name="sftp_private_key_passphrase">Privát kulcs jelszava</string>
@@ -346,7 +346,7 @@ Engedélyek megadásához lépjen be az alkalmazás beállítások képernyőre.
     <string name="customurl_http_headers">HTTP Fejlécek</string>
     <string name="customurl_http_method">HTTP Eljárás</string>
     <string name="customurl_http_basicauthentication">Egyszerű hitelesítés</string>
-    <string name="hide_notification_from_status_bar_disallowed">Értesítés elrejtése az Android Oreo-ban nem engedélyezett</string>
-    <string name="reset_app_summary">Visszaállítja az alkalmazást, törli az esetleges beállításokat, törli a GPSLogger fájlokat és visszavonja az alkalmazás számára biztosított engedélyeket. Minden adat elveszik!</string>
+    <string name="hide_notification_from_status_bar_disallowed">Értesítés elrejtése az Android Oreo-tól kezdve nem engedélyezett</string>
+    <string name="reset_app_summary">Visszaállítja az alkalmazást, törli a beállításokat, GPSLogger fájlokat és visszavonja az alkalmazás számára biztosított engedélyeket. Minden adat elveszik!</string>
     <string name="reset_app_title">Visszaállítás</string>
 </resources>
