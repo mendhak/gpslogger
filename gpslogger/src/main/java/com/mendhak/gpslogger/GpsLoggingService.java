@@ -1049,10 +1049,10 @@ public class GpsLoggingService extends Service  {
 
     @EventBusHook
     public void onEvent(CommandEvents.GetStatus getStatus){
-        CommandEvents.GetStatus statusEvent = EventBus.getDefault().removeStickyEvent(CommandEvents.GetStatus.class);
-        if(statusEvent != null){
-            notifyStatus(session.isStarted());
-        }
+        LOG.debug("GetStatus Event.");
+
+        notifyStatus(session.isStarted());
+        EventBus.getDefault().removeStickyEvent(CommandEvents.GetStatus.class);
 
     }
 
