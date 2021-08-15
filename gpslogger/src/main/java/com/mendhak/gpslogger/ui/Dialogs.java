@@ -310,6 +310,7 @@ public class Dialogs {
         // show keyboard
         alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         alertDialog.show();
+        customAutocomplete.requestFocus();
 
     }
 
