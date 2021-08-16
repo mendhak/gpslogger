@@ -22,6 +22,7 @@ package com.mendhak.gpslogger.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import androidx.annotation.NonNull;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -307,12 +308,18 @@ public class Dialogs {
             }
         });
 
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                customAutocomplete.requestFocus();
+            }
+        });
+
         // show keyboard
         alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         alertDialog.show();
-        customAutocomplete.requestFocus();
 
-    }
+	}
 
     public interface MessageBoxCallback {
 
