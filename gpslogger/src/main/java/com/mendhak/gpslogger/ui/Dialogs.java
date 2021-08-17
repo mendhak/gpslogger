@@ -319,7 +319,7 @@ public class Dialogs {
         alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         alertDialog.show();
 
-	}
+    }
 
     public interface MessageBoxCallback {
 
