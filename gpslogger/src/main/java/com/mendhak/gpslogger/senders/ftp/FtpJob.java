@@ -118,6 +118,7 @@ public class FtpJob extends Job {
         try {
 
             client.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(new LoggingOutputStream(LOG))));
+            client.setControlEncoding("UTF-8");
             client.setDefaultTimeout(60000);
             client.setConnectTimeout(60000);
             client.connect(server, port);
