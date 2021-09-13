@@ -166,9 +166,18 @@ public class LoggingSettingsFragment extends PreferenceFragment
             try{
                 File chosenDirectory = new File(newValue.toString());
                 chosenDirectory.mkdirs();
+
+
+                //Let's do an actual file creation test.
+                File testFile = new File(chosenDirectory, "testfile.txt");
+                testFile.createNewFile();
+                if(testFile.exists()){
+                    testFile.delete();
+                    LOG.debug("Chosen directory tested, test file created and deleted.");
+                }
             }
             catch(Exception e){
-                LOG.error("Could not create chosen directory path", e);
+                LOG.error("Could not create chosen directory path or test file", e);
                 displayFileAccessError();
                 return false;
             }
