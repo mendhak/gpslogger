@@ -119,7 +119,7 @@
     <string name="keep_fix_summary">注意，这将大大减少电池续航。请只以低频率使用以获得较高的精度。    </string>
     <string name="keep_fix_title">在定位操作之间保持 GPS 开启</string>
     <string name="retry_time_title">达到足够精确度的等候时间</string>
-    <string name="retry_time_summary">取得一笔起始的定位后，持续定位得到符合精确度过滤器标准的时间。</string>
+    <string name="retry_time_summary">取得一个起始的定位后，持续定位以得到和设置的距离及精度过滤标准均符合的点的等候时间。</string>
     <string name="display_imperial_title">显示英制单位</string>
     <string name="display_imperial_summary">显示英尺、英里和品脱，没有其他新奇的度量标准。（设置仍然需要使用公制单位）</string>
     <string name="enabledisablegps_title">启用/禁用 GPS</string>
@@ -173,6 +173,7 @@
     <string name="dropbox_authorize_description">若要使用 Dropbox 功能，您需要授权 GPSLogger 将文件上传到您的帐户。</string>
     <string name="dropbox_unauthorize_description">您已在 Dropbox 授权。文件将上载至「Apps\\GPSLogger for Android」。若有需要，您可取消绑定。</string>
     <string name="dropbox_couldnotauthorize">未能在 Dropbox 授权，请稍后再试</string>
+    <string name="owncloud_setup_title">私有云存储</string>
     <string name="owncloud_server_summary">ownCloud 基于 URL</string>
     <string name="owncloud_directory_summary">ownCloud 服务器上使用的文件夹。请保证其存在，不然上传会失败。</string>
     <string name="owncloud_test_summary">上传一个测试文件到 ownCloud 服务器</string>
