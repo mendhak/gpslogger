@@ -44,3 +44,4 @@ Your location - used to determine your GPS or tower based location
 
 System tools (automatically start at boot) - used if you choose to start GPSLogger on bootup
 
+Shared storage permissions - in Android 11, used to allow writing files to custom file paths
