@@ -52,6 +52,7 @@ public class SFTPJob extends Job {
     public void onRun() throws Throwable {
         LOG.debug("SFTP Job onRun");
         com.jcraft.jsch.Session session = null;
+        JSch.setLogger(new SftpLogger());
         final JSch jsch = new JSch();
         FileInputStream fis = null;
 
@@ -73,6 +74,7 @@ public class SFTPJob extends Job {
             Properties prop = new Properties();
             prop.put("StrictHostKeyChecking", "yes");
             session.setConfig(prop);
+
 
             LOG.debug("Connecting...");
             session.connect();
@@ -140,4 +142,28 @@ public class SFTPJob extends Job {
     public static String getJobTag(File gpxFile) {
         return "SFTP" + gpxFile.getName();
     }
+
+
+    public static class SftpLogger implements com.jcraft.jsch.Logger {
+
+        public boolean isEnabled(int level){
+            return true;
+        }
+        public void log(int level, String message){
+            switch(level){
+                case FATAL:
+                case ERROR:
+                    LOG.error(message);
+                    break;
+                case WARN:
+                case INFO:
+                case DEBUG:
+                    LOG.debug(message);
+                    break;
+            }
+        }
+    }
+
 }
+
+
