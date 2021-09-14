@@ -204,6 +204,3 @@ Use the fdroidserver docker image.  Clone the fdroid metadata repo and make chan
     docker run --rm -v /home/mendhak/Android/Sdk:/opt/android-sdk -v $(pwd):/repo -e ANDROID_HOME:/opt/android-sdk registry.gitlab.com/fdroid/docker-executable-fdroidserver:master build -v -l com.mendhak.gpslogger
     
     
-I'll just aim for a static release.  Still some tasks remaining, need to clean up text references to GDocs, GDrive, Dropbox, activity recognition.  Need to hardcode the OSM keys into the code rather than an environment variable.   
-
-In the future may want to make it [auto update, and add screenshots too](https://gitlab.com/fdroid/fdroiddata/-/blob/master/CONTRIBUTING.md#after-you-added-your-app).  Example [fastlane snippet](https://gitlab.com/snippets/1895688).
