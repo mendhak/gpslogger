@@ -13,8 +13,10 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.Logger;
 import java.io.*;
+import java.security.Security;
 import java.util.Properties;
 
 public class SFTPJob extends Job {
@@ -31,6 +33,15 @@ public class SFTPJob extends Job {
 
     public SFTPJob(File localFile, String remoteDir, String host, int port, String pathToPrivateKey, String privateKeyPassphrase, String username, String password, String hostKey) {
         super(new Params(1).requireNetwork().persist().addTags(getJobTag(localFile)));
+
+        try {
+            Security.removeProvider(BouncyCastleProvider.PROVIDER_NAME);
+            Security.insertProviderAt(new BouncyCastleProvider(), 1);
+        }
+        catch(Exception ex){
+            LOG.error("Could not add BouncyCastle provider.", ex);
+        }
+
         this.localFile = localFile;
         this.remoteDir = remoteDir;
         this.host = host;
@@ -74,8 +85,6 @@ public class SFTPJob extends Job {
             Properties prop = new Properties();
             prop.put("StrictHostKeyChecking", "yes");
             session.setConfig(prop);
-//            session.setConfig("kex", "ssh-rsa,ssh-dss,aes128-ctr,aes128-cbc,3des-ctr,3des-cbc,blowfish-cbc,aes192-ctr,aes192-cbc,aes256-ctr,aes256-cbc,hmac-md5,hmac-sha1,hmac-sha2-256,hmac-sha1-96,hmac-md5-96,"+ session.getConfig("kex"));
-//            session.setConfig("kex", "aes128-ctr,hmac-sha1,"+ session.getConfig("kex"));
 
             LOG.debug("Connecting...");
             session.connect();

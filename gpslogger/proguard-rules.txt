@@ -61,7 +61,13 @@
 -keep class com.jcraft.jsch.Compression
 -keep class org.ietf.jgss.*
 -dontwarn org.ietf.jgss.**
-
+#
+# SpongyCastle/BouncyCastle
+#
+-keep class org.spongycastle.** { *; }
+-keep class com.madgag.spongycastle.** {*;}
+-keep class org.bouncycastle.jcajce.provider.** { *; }
+-keep class org.bouncycastle.jce.provider.** { *; }
 
 # --------------------------------------------------------------------------------- #
 # DropBox
