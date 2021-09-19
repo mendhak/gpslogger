@@ -50,7 +50,7 @@ android {
         targetSdkVersion 30
 
         versionCode 116
-        versionName "116"
+        versionName "116-issue902-ssh"
     }
 
     buildTypes {
