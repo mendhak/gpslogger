@@ -1,9 +1,18 @@
 package com.mendhak.gpslogger.ui.fragments.settings;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.provider.Settings;
+
 import androidx.core.content.ContextCompat;
+import com.codekidlabs.storagechooser.StorageChooser;
+import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -36,7 +45,8 @@ public class SFTPSettingsFragment extends PreferenceFragment implements Preferen
 
         findPreference("sftp_validateserver").setOnPreferenceClickListener(this);
         findPreference("sftp_reset_authorisation").setOnPreferenceClickListener(this);
-        findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setOnPreferenceChangeListener(this);
+//        findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setSummary(preferenceHelper.getSFTPPrivateKeyFilePath());
         registerEventBus();
     }
@@ -74,8 +84,57 @@ public class SFTPSettingsFragment extends PreferenceFragment implements Preferen
             preferenceHelper.setSFTPPrivateKeyFilePath("");
             getActivity().finish();
         }
+        else if(preference.getKey().equalsIgnoreCase(PreferenceNames.SFTP_PRIVATE_KEY_PATH)){
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+                Dialogs.alert(getString(R.string.error),getString(R.string.gpslogger_custom_path_need_permission),getActivity(), which -> {
+                    Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+                    getActivity().startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
+                });
+                return false;
+            }
+
+            StorageChooser.Theme scTheme = new StorageChooser.Theme(getActivity().getApplicationContext());
+            int[] myScheme = scTheme.getDefaultScheme();
+            myScheme[StorageChooser.Theme.OVERVIEW_HEADER_INDEX] = getResources().getColor(R.color.accentColor);
+            myScheme[StorageChooser.Theme.SEC_ADDRESS_BAR_BG] = getResources().getColor(R.color.accentColor);
+            myScheme[StorageChooser.Theme.SEC_FOLDER_TINT_INDEX] = getResources().getColor(R.color.primaryColor);
+            scTheme.setScheme(myScheme);
+
+            StorageChooser chooser = new StorageChooser.Builder()
+                    .withActivity(getActivity())
+                    .withFragmentManager(getFragmentManager())
+                    .withMemoryBar(false)
+                    .allowCustomPath(true)
+                    .skipOverview(false)
+                    .setTheme(scTheme)
+                    .setType(StorageChooser.FILE_PICKER)
+                    .build();
+
+
+            // get path that the user has chosen
+            chooser.setOnSelectListener(new StorageChooser.OnSelectListener() {
+                @Override
+                public void onSelect(String path) {
+                    LOG.debug(path);
+                    findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setSummary(path);
+                    preferenceHelper.setSFTPPrivateKeyFilePath(path);
+                }
+            });
+            chooser.show();
+        }
 
         return false;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 55 && resultCode == Activity.RESULT_OK) {
+
+            String folderLocation = data.getExtras().getString("data");
+            LOG.debug( folderLocation );
+
+        }
     }
 
     private void uploadTestFile() {

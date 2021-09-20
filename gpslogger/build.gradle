@@ -192,6 +192,10 @@ dependencies {
     implementation 'org.bouncycastle:bcpkix-jdk15to18:1.68'
     implementation 'org.bouncycastle:bcprov-jdk15to18:1.68'
 
+    //File Picker, but a patched version
+    //https://github.com/codekidX/storage-chooser/issues/127
+    //https://github.com/codekidX/storage-chooser/issues/134
+    implementation 'com.github.mendhak:storage-chooser:master-SNAPSHOT'
 
      //Libraries required for unit testing
     testImplementation 'junit:junit:4.12'
