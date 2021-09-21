@@ -134,8 +134,22 @@ public class LoggingSettingsFragment extends PreferenceFragment
                 if(Strings.isNullOrEmpty(path)) {
                     path = Files.storageFolder(getActivity()).getAbsolutePath();
                 }
+                File testFile = new File(path, "testfile.txt");
+                try {
+                    testFile.createNewFile();
+                    if(testFile.exists()){
+                        testFile.delete();
+                        LOG.debug("Test file successfully created and deleted.");
+                    }
+                } catch (Exception ex) {
+                    LOG.error("Could not create a test file in the chosen directory.", ex);
+                    path = preferenceHelper.getGpsLoggerFolder();
+                    Dialogs.alert(getString(R.string.error), getString(R.string.pref_logging_file_no_permissions), getActivity());
+                }
+
                 findPreference(PreferenceNames.GPSLOGGER_FOLDER).setSummary(path);
                 preferenceHelper.setGpsLoggerFolder(path);
+
             });
             chooser.show();
         }
