@@ -25,8 +25,6 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
@@ -122,7 +120,7 @@ public class Dialogs {
                 .withActivity(activity)
                 .withFragmentManager(fragmentManager)
                 .withMemoryBar(true)
-                .allowCustomPath(true)
+                .allowCustomPath(true) //If false, defaults to /storage/path. If true, lets user pick a subfolder.
                 .hideFreeSpaceLabel(false)
                 .skipOverview(false)
                 .setTheme(scTheme)

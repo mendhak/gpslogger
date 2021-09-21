@@ -45,7 +45,6 @@ public class SFTPSettingsFragment extends PreferenceFragment implements Preferen
 
         findPreference("sftp_validateserver").setOnPreferenceClickListener(this);
         findPreference("sftp_reset_authorisation").setOnPreferenceClickListener(this);
-//        findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setOnPreferenceChangeListener(this);
         findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setSummary(preferenceHelper.getSFTPPrivateKeyFilePath());
         registerEventBus();

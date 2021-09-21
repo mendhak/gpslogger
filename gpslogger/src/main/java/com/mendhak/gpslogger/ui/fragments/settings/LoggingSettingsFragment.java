@@ -19,9 +19,6 @@
 
 package com.mendhak.gpslogger.ui.fragments.settings;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -33,7 +30,6 @@ import android.provider.Settings;
 import android.text.Html;
 import android.text.InputType;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.codekidlabs.storagechooser.StorageChooser;
 import com.mendhak.gpslogger.BuildConfig;
@@ -142,7 +138,6 @@ public class LoggingSettingsFragment extends PreferenceFragment
                 preferenceHelper.setGpsLoggerFolder(path);
             });
             chooser.show();
-
         }
 
         if(preference.getKey().equalsIgnoreCase("new_file_custom_name")){
