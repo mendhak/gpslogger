@@ -21,9 +21,12 @@ package com.mendhak.gpslogger.ui;
 
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
@@ -35,6 +38,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.codekidlabs.storagechooser.StorageChooser;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.Files;
@@ -85,6 +89,50 @@ public class Dialogs {
 
         return sb.toString();
 
+    }
+
+    public static StorageChooser directoryChooser(Activity activity, FragmentManager fragmentManager){
+        return storageChooser(StorageChooser.DIRECTORY_CHOOSER, activity, fragmentManager);
+    }
+
+    public static StorageChooser filePicker(Activity activity, FragmentManager fragmentManager){
+        return storageChooser(StorageChooser.FILE_PICKER, activity, fragmentManager);
+    }
+
+    private static StorageChooser storageChooser(String chooserType, Activity activity, FragmentManager fragmentManager){
+        com.codekidlabs.storagechooser.Content scContent = new com.codekidlabs.storagechooser.Content();
+        scContent.setCreateLabel("Create");
+        scContent.setInternalStorageText("Internal Storage");
+        scContent.setCancelLabel(activity.getString(R.string.cancel));
+        scContent.setSelectLabel("Select");
+        scContent.setOverviewHeading("Choose Storage");
+        scContent.setNewFolderLabel("New Folder");
+        scContent.setFreeSpaceText("%s free");
+        scContent.setTextfieldErrorText(activity.getString(R.string.error));
+        scContent.setTextfieldHintText("Folder Name");
+
+        StorageChooser.Theme scTheme = new StorageChooser.Theme(activity.getApplicationContext());
+        int[] myScheme = scTheme.getDefaultScheme();
+        myScheme[StorageChooser.Theme.OVERVIEW_HEADER_INDEX] = activity.getResources().getColor(R.color.accentColor);
+        myScheme[StorageChooser.Theme.SEC_ADDRESS_BAR_BG] = activity.getResources().getColor(R.color.accentColor);
+        myScheme[StorageChooser.Theme.SEC_FOLDER_TINT_INDEX] = activity.getResources().getColor(R.color.primaryColor);
+        scTheme.setScheme(myScheme);
+
+        StorageChooser chooser = new StorageChooser.Builder()
+                .withActivity(activity)
+                .withFragmentManager(fragmentManager)
+                .withMemoryBar(true)
+                .allowCustomPath(true)
+                .hideFreeSpaceLabel(false)
+                .skipOverview(false)
+                .setTheme(scTheme)
+                .withContent(scContent)
+                .disableMultiSelect()
+                .allowAddFolder(true)
+                .setType(chooserType)
+                .build();
+
+        return chooser;
     }
 
     public static void error(String title, final String friendlyMessage, final String errorMessage, final Throwable throwable, final Context context){

@@ -94,47 +94,11 @@ public class SFTPSettingsFragment extends PreferenceFragment implements Preferen
                 return false;
             }
 
-            com.codekidlabs.storagechooser.Content scContent = new com.codekidlabs.storagechooser.Content();
-            scContent.setCreateLabel("Create");
-            scContent.setInternalStorageText("Internal Storage");
-            scContent.setCancelLabel(getString(R.string.cancel));
-            scContent.setSelectLabel("Select");
-            scContent.setOverviewHeading("Choose Storage");
-            scContent.setNewFolderLabel("New Folder");
-            scContent.setFreeSpaceText("%s free");
-            scContent.setTextfieldErrorText(getString(R.string.error));
-            scContent.setTextfieldHintText("Folder Name");
-
-            StorageChooser.Theme scTheme = new StorageChooser.Theme(getActivity().getApplicationContext());
-            int[] myScheme = scTheme.getDefaultScheme();
-            myScheme[StorageChooser.Theme.OVERVIEW_HEADER_INDEX] = getResources().getColor(R.color.accentColor);
-            myScheme[StorageChooser.Theme.SEC_ADDRESS_BAR_BG] = getResources().getColor(R.color.accentColor);
-            myScheme[StorageChooser.Theme.SEC_FOLDER_TINT_INDEX] = getResources().getColor(R.color.primaryColor);
-            scTheme.setScheme(myScheme);
-
-            StorageChooser chooser = new StorageChooser.Builder()
-                    .withActivity(getActivity())
-                    .withFragmentManager(getFragmentManager())
-                    .withMemoryBar(true)
-                    .allowCustomPath(true)
-                    .hideFreeSpaceLabel(false)
-                    .skipOverview(false)
-                    .setTheme(scTheme)
-                    .withContent(scContent)
-                    .disableMultiSelect()
-                    .allowAddFolder(true)
-                    .setType(StorageChooser.DIRECTORY_CHOOSER)
-                    .build();
-
-
-            // get path that the user has chosen
-            chooser.setOnSelectListener(new StorageChooser.OnSelectListener() {
-                @Override
-                public void onSelect(String path) {
-                    LOG.debug(path);
-                    findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setSummary(path);
-                    preferenceHelper.setSFTPPrivateKeyFilePath(path);
-                }
+            StorageChooser chooser = Dialogs.filePicker(getActivity(), getFragmentManager());
+            chooser.setOnSelectListener(path -> {
+                LOG.debug(path);
+                findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setSummary(path);
+                preferenceHelper.setSFTPPrivateKeyFilePath(path);
             });
             chooser.show();
         }
