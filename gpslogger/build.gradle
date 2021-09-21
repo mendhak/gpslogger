@@ -195,7 +195,7 @@ dependencies {
     //File Picker, but a patched version
     //https://github.com/codekidX/storage-chooser/issues/127
     //https://github.com/codekidX/storage-chooser/issues/134
-    implementation 'com.github.mendhak:storage-chooser:master-SNAPSHOT'
+    implementation 'com.github.mendhak:storage-chooser:2.0.4.4b'
 
      //Libraries required for unit testing
     testImplementation 'junit:junit:4.12'

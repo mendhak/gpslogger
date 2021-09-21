@@ -94,6 +94,17 @@ public class SFTPSettingsFragment extends PreferenceFragment implements Preferen
                 return false;
             }
 
+            com.codekidlabs.storagechooser.Content scContent = new com.codekidlabs.storagechooser.Content();
+            scContent.setCreateLabel("Create");
+            scContent.setInternalStorageText("Internal Storage");
+            scContent.setCancelLabel(getString(R.string.cancel));
+            scContent.setSelectLabel("Select");
+            scContent.setOverviewHeading("Choose Storage");
+            scContent.setNewFolderLabel("New Folder");
+            scContent.setFreeSpaceText("%s free");
+            scContent.setTextfieldErrorText(getString(R.string.error));
+            scContent.setTextfieldHintText("Folder Name");
+
             StorageChooser.Theme scTheme = new StorageChooser.Theme(getActivity().getApplicationContext());
             int[] myScheme = scTheme.getDefaultScheme();
             myScheme[StorageChooser.Theme.OVERVIEW_HEADER_INDEX] = getResources().getColor(R.color.accentColor);
@@ -104,11 +115,15 @@ public class SFTPSettingsFragment extends PreferenceFragment implements Preferen
             StorageChooser chooser = new StorageChooser.Builder()
                     .withActivity(getActivity())
                     .withFragmentManager(getFragmentManager())
-                    .withMemoryBar(false)
+                    .withMemoryBar(true)
                     .allowCustomPath(true)
+                    .hideFreeSpaceLabel(false)
                     .skipOverview(false)
                     .setTheme(scTheme)
-                    .setType(StorageChooser.FILE_PICKER)
+                    .withContent(scContent)
+                    .disableMultiSelect()
+                    .allowAddFolder(true)
+                    .setType(StorageChooser.DIRECTORY_CHOOSER)
                     .build();
 
 
