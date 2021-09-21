@@ -35,6 +35,7 @@ import android.text.InputType;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
+import com.codekidlabs.storagechooser.StorageChooser;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
@@ -63,13 +64,12 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
         addPreferencesFromResource(R.xml.pref_logging);
 
-        MaterialEditTextPreference gpsloggerFolder = (MaterialEditTextPreference) findPreference("gpslogger_folder");
+        Preference gpsloggerFolder = findPreference("gpslogger_folder");
 
         String gpsLoggerFolderPath = preferenceHelper.getGpsLoggerFolder();
         gpsloggerFolder.setDefaultValue(gpsLoggerFolderPath);
-        gpsloggerFolder.setText(gpsLoggerFolderPath);
         gpsloggerFolder.setSummary(gpsLoggerFolderPath);
-        gpsloggerFolder.setOnPreferenceChangeListener(this);
+        gpsloggerFolder.setOnPreferenceClickListener(this);
 
         if(!(new File(gpsLoggerFolderPath)).canWrite()){
             gpsloggerFolder.setSummary(Html.fromHtml("<font color='red'>" + gpsLoggerFolderPath + "</font>"));
@@ -122,6 +122,28 @@ public class LoggingSettingsFragment extends PreferenceFragment
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
+        if(preference.getKey().equalsIgnoreCase("gpslogger_folder")){
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+                Dialogs.alert(getString(R.string.error),getString(R.string.gpslogger_custom_path_need_permission),getActivity(), which -> {
+                    Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+                    getActivity().startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
+                });
+                return true;
+            }
+
+            StorageChooser chooser = Dialogs.directoryChooser(getActivity(), getFragmentManager());
+            chooser.setOnSelectListener(path -> {
+                LOG.debug(path);
+                if(Strings.isNullOrEmpty(path)) {
+                    path = Files.storageFolder(getActivity()).getAbsolutePath();
+                }
+                findPreference(PreferenceNames.GPSLOGGER_FOLDER).setSummary(path);
+                preferenceHelper.setGpsLoggerFolder(path);
+            });
+            chooser.show();
+
+        }
 
         if(preference.getKey().equalsIgnoreCase("new_file_custom_name")){
 
@@ -150,48 +172,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
     @Override
     public boolean onPreferenceChange(final Preference preference, Object newValue) {
 
-        if(preference.getKey().equalsIgnoreCase("gpslogger_folder")){
 
-            LOG.debug("Directory chosen - " + newValue);
-
-            if(Strings.isNullOrEmpty(newValue.toString())){
-                //Special case, reset the preference if value is empty
-                newValue = Files.storageFolder(getActivity()).getAbsolutePath();
-                ((MaterialEditTextPreference)findPreference("gpslogger_folder")).setText(newValue.toString());
-                findPreference("gpslogger_folder").setSummary(newValue.toString());
-                preferenceHelper.setGpsLoggerFolder(newValue.toString());
-                return false;
-            }
-
-            try{
-                File chosenDirectory = new File(newValue.toString());
-                chosenDirectory.mkdirs();
-
-
-                //Let's do an actual file creation test.
-                File testFile = new File(chosenDirectory, "testfile.txt");
-                testFile.createNewFile();
-                if(testFile.exists()){
-                    testFile.delete();
-                    LOG.debug("Chosen directory tested, test file created and deleted.");
-                }
-            }
-            catch(Exception e){
-                LOG.error("Could not create chosen directory path or test file", e);
-                displayFileAccessError();
-                return false;
-            }
-
-            if(! Files.isAllowedToWriteTo(newValue.toString())){
-                displayFileAccessError();
-                return false;
-            }
-            else {
-                findPreference("gpslogger_folder").setSummary(newValue.toString());
-                return true;
-            }
-
-        }
 
         if(preference.getKey().equalsIgnoreCase("log_gpx")){
             CustomSwitchPreference logGpx11 = (CustomSwitchPreference)findPreference("log_gpx_11");

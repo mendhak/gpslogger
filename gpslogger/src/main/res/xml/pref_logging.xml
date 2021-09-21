@@ -53,7 +53,7 @@
         >
 
 
-        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+        <Preference
             android:key="gpslogger_folder"
             android:title="@string/gpslogger_folder_title"
             android:summary="@string/gpslogger_folder_summary" />
