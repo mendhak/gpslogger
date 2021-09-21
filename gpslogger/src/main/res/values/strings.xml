@@ -389,6 +389,15 @@
     <string name="pref_logging_file_no_permissions">That folder is not writable by GPSLogger. Please select another folder to write to.</string>
     <string name="pref_logging_file_need_permission">That folder is not writable by GPSLogger. Please allow GPSLogger to manage all files on the next screen. Then try setting your folder path again.</string>
     <string name="gpslogger_custom_path_need_permission">In order to use custom paths in GPSLogger, please allow GPSLogger to manage all files on the next screen.  Then try performing the action again. This is required due to an Android 11+ restriction.</string>
+    <string name="storage_chooser_create_label">Create</string>
+    <string name="storage_chooser_internal_storage_text">Internal Storage</string>
+    <string name="storage_chooser_select_folder">Select</string>
+    <string name="storage_chooser_overview_heading">Choose Storage</string>
+    <string name="storage_chooser_new_folder_label">New Folder</string>
+    <string name="storage_chooser_free_space_text">free</string>
+    <string name="storage_chooser_text_field_error">Empty Folder Name</string>
+    <string name="storage_chooser_text_field_hint">Folder Name</string>
+
     <string name="new_file_custom_each_time_title">Ask for a file name on every start</string>
     <string name="new_file_custom_each_time_summary">Prompt for a custom file name each time the logging is started</string>
     <string name="new_file_custom_keep_changing_title">Allow custom file name to change dynamically</string>
