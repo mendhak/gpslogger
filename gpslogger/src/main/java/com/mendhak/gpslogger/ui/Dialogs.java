@@ -99,15 +99,15 @@ public class Dialogs {
 
     private static StorageChooser storageChooser(String chooserType, Activity activity, FragmentManager fragmentManager){
         com.codekidlabs.storagechooser.Content scContent = new com.codekidlabs.storagechooser.Content();
-        scContent.setCreateLabel("Create");
-        scContent.setInternalStorageText("Internal Storage");
+        scContent.setCreateLabel(activity.getString(R.string.storage_chooser_create_label));
+        scContent.setInternalStorageText(activity.getString(R.string.storage_chooser_internal_storage_text));
         scContent.setCancelLabel(activity.getString(R.string.cancel));
-        scContent.setSelectLabel("Select");
-        scContent.setOverviewHeading("Choose Storage");
-        scContent.setNewFolderLabel("New Folder");
-        scContent.setFreeSpaceText("%s free");
-        scContent.setTextfieldErrorText(activity.getString(R.string.error));
-        scContent.setTextfieldHintText("Folder Name");
+        scContent.setSelectLabel(activity.getString(R.string.storage_chooser_select_folder));
+        scContent.setOverviewHeading(activity.getString(R.string.storage_chooser_overview_heading));
+        scContent.setNewFolderLabel(activity.getString(R.string.storage_chooser_new_folder_label));
+        scContent.setFreeSpaceText("%s " + activity.getString(R.string.storage_chooser_free_space_text));
+        scContent.setTextfieldErrorText(activity.getString(R.string.storage_chooser_text_field_error));
+        scContent.setTextfieldHintText(activity.getString(R.string.storage_chooser_text_field_hint));
 
         StorageChooser.Theme scTheme = new StorageChooser.Theme(activity.getApplicationContext());
         int[] myScheme = scTheme.getDefaultScheme();
