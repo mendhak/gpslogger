@@ -214,16 +214,6 @@ public class LoggingSettingsFragment extends PreferenceFragment
         return false;
     }
 
-    private void displayFileAccessError() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
-            Dialogs.alert(getString(R.string.error),getString(R.string.pref_logging_file_need_permission),getActivity(), which -> {
-                Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
-                getActivity().startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
-            });
-        } else {
-            Dialogs.alert(getString(R.string.error), getString(R.string.pref_logging_file_no_permissions), getActivity());
-        }
-    }
 
     private void setPreferencesEnabledDisabled() {
 
