@@ -50,7 +50,7 @@ android {
         targetSdkVersion 30
 
         versionCode 117
-        versionName "117-rc1"
+        versionName "117"
     }
 
     buildTypes {
