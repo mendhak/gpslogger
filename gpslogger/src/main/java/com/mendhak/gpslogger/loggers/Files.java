@@ -23,6 +23,7 @@ package com.mendhak.gpslogger.loggers;
 import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -108,6 +109,15 @@ public class Files {
             storageFolder = context.getFilesDir();
         }
         return storageFolder;
+    }
+
+    public static boolean hasSDCard(Context context){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return context.getExternalFilesDirs(null).length > 1;
+        }else {
+            File storageDir = new File("/storage");
+            return  storageDir.listFiles().length > 1;
+        }
     }
 
     public static boolean isAllowedToWriteTo(String gpsLoggerFolder) {

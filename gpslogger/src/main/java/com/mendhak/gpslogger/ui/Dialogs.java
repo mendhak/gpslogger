@@ -118,13 +118,15 @@ public class Dialogs {
         myScheme[StorageChooser.Theme.SEC_FOLDER_TINT_INDEX] = activity.getResources().getColor(R.color.primaryColor);
         scTheme.setScheme(myScheme);
 
+        boolean showOverview = Files.hasSDCard(activity);
+
         StorageChooser chooser = new StorageChooser.Builder()
                 .withActivity(activity)
                 .withFragmentManager(fragmentManager)
                 .withMemoryBar(true)  //Just a bit fancy, a bar.
                 .allowCustomPath(true) //If false, defaults to /storage/path. If true, lets user pick a subfolder.
                 .hideFreeSpaceLabel(false) //Shows the "MiB" remaining
-                .skipOverview(false) //Always show the storage chooser. Maybe this should be smarter?
+                .skipOverview(!showOverview) //Always show the storage chooser. Maybe this should be smarter?
                 .setTheme(scTheme) //Make it bluish
                 .withContent(scContent) //Localizations
                 .disableMultiSelect() //Only allow one thing to be chosen
