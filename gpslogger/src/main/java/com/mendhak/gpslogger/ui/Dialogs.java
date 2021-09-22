@@ -121,15 +121,15 @@ public class Dialogs {
         StorageChooser chooser = new StorageChooser.Builder()
                 .withActivity(activity)
                 .withFragmentManager(fragmentManager)
-                .withMemoryBar(true)
+                .withMemoryBar(true)  //Just a bit fancy, a bar.
                 .allowCustomPath(true) //If false, defaults to /storage/path. If true, lets user pick a subfolder.
-                .hideFreeSpaceLabel(false)
-                .skipOverview(false)
-                .setTheme(scTheme)
-                .withContent(scContent)
-                .disableMultiSelect()
-                .allowAddFolder(true)
-                .setType(chooserType)
+                .hideFreeSpaceLabel(false) //Shows the "MiB" remaining
+                .skipOverview(false) //Always show the storage chooser. Maybe this should be smarter?
+                .setTheme(scTheme) //Make it bluish
+                .withContent(scContent) //Localizations
+                .disableMultiSelect() //Only allow one thing to be chosen
+                .allowAddFolder(true) //Let user create a folder using the + icon at the top
+                .setType(chooserType) //File picker or folder picker
                 .build();
 
         return chooser;
