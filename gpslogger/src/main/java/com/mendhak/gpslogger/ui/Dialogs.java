@@ -108,6 +108,8 @@ public class Dialogs {
         scContent.setFreeSpaceText("%s " + activity.getString(R.string.storage_chooser_free_space_text));
         scContent.setTextfieldErrorText(activity.getString(R.string.storage_chooser_text_field_error));
         scContent.setTextfieldHintText(activity.getString(R.string.storage_chooser_text_field_hint));
+        scContent.setFolderErrorToastText(activity.getString(R.string.pref_logging_file_no_permissions));
+
 
         StorageChooser.Theme scTheme = new StorageChooser.Theme(activity.getApplicationContext());
         int[] myScheme = scTheme.getDefaultScheme();
