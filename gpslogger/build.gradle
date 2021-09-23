@@ -138,6 +138,9 @@ dependencies {
         transitive = true
     }
 
+    // A new material dialog
+    implementation 'io.github.eltos:simpledialogfragments:3.4'
+
     //The material drawer
     implementation('com.mikepenz:materialdrawer:4.6.4@aar') {
         transitive = true

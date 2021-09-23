@@ -79,6 +79,7 @@ import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import de.greenrobot.event.EventBus;
+import eltos.simpledialogfragment.SimpleDialog;
 import org.slf4j.Logger;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -88,6 +89,7 @@ import java.util.*;
 public class GpsMainActivity extends AppCompatActivity
         implements
         Toolbar.OnMenuItemClickListener,
+        SimpleDialog.OnDialogResultListener,
         ActionBar.OnNavigationListener {
 
     private static boolean userInvokedUpload;
@@ -146,8 +148,10 @@ public class GpsMainActivity extends AppCompatActivity
                             askUserToDisableBatteryOptimization();
                         } else {
                             LOG.warn("Background location permission was not granted");
-                            Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
-                                    getString(R.string.gpslogger_permissions_permanently_denied), this);
+                            SimpleDialog.build()
+                                    .title(getString(R.string.gpslogger_permissions_rationale_title))
+                                    .msgHtml(getString(R.string.gpslogger_permissions_permanently_denied))
+                                    .show(this);
                             permissionWorkflowInProgress=false;
                         }
                     });
@@ -158,8 +162,10 @@ public class GpsMainActivity extends AppCompatActivity
                         LOG.debug("Launcher result: " + grantResults.toString());
                         if (grantResults.containsValue(false)) {
                             LOG.warn("At least one of the permissions was not granted");
-                            Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
-                                    getString(R.string.gpslogger_permissions_permanently_denied), this);
+                            SimpleDialog.build()
+                                    .title(getString(R.string.gpslogger_permissions_rationale_title))
+                                    .msgHtml(getString(R.string.gpslogger_permissions_permanently_denied))
+                                    .show(this);
                             permissionWorkflowInProgress=false;
                         } else {
                             LOG.debug("Basic permissions granted. Now ask for background location permissions.");
@@ -184,45 +190,71 @@ public class GpsMainActivity extends AppCompatActivity
             });
 
     public void askUserForBasicPermissions() {
-        ArrayList<String> permissions = new ArrayList<String>();
-        permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
-        permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
-        permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q) {
-            // Only on Android 10 (Q), the permission dialog can include an 'Allow all the time'
-            permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
-        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
-                    getString(R.string.gpslogger_permissions_rationale_message_basic)
+            SimpleDialog.build()
+                    .title(getString(R.string.gpslogger_permissions_rationale_title))
+                    .msgHtml(getString(R.string.gpslogger_permissions_rationale_message_basic)
                             + "<br />" + getString(R.string.gpslogger_permissions_rationale_message_location)
                             + "<br />" + getString(R.string.gpslogger_permissions_rationale_message_storage)
                             + "<br />" + getString(R.string.gpslogger_permissions_rationale_message_location_background)
                             + "<br />" + getString(R.string.gpslogger_permissions_rationale_message_battery_optimization)
-                            + "<br /> <a href='https://gpslogger.app/privacypolicy.html'>"
-                            + getString(R.string.privacy_policy) + "</a>",
-                    this, then -> {
-                        LOG.debug("Beginning request for multiple permissions");
-                        basicPermissionsLauncher.launch(permissions.toArray(new String[0]));
+                            )
+                    .neut(getString(R.string.privacy_policy))
+                    .show(this, "PERMISSIONS_START");
 
-                    });
         }
     }
+
+    @Override
+    public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
+        if (dialogTag.equalsIgnoreCase("PERMISSIONS_START")){
+            switch(which){
+                case BUTTON_NEUTRAL:
+                    String url = "https://gpslogger.app/privacypolicy.html";
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                    return true;
+                case BUTTON_POSITIVE:
+                    LOG.debug("Beginning request for multiple permissions");
+                    ArrayList<String> permissions = new ArrayList<String>();
+                    permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+                    permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+                    permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+                    permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+                    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q) {
+                        // Only on Android 10 (Q), the permission dialog can include an 'Allow all the time'
+                        permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+                    }
+                    basicPermissionsLauncher.launch(permissions.toArray(new String[0]));
+                    return true;
+            }
+        }
+        else if(dialogTag.equalsIgnoreCase("BACKGROUND_LOCATION")){
+            switch(which){
+                case BUTTON_POSITIVE:
+                    LOG.debug("Beginning request for Background Location permission");
+                    backgroundPermissionLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+                    return true;
+            }
+        }
+        return false;
+    }
+
 
     public void askUserForBackgroundPermissions() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
-            Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title),
-                    getString(R.string.gpslogger_permissions_background_location) + "<br /><br /><b>" + getPackageManager().getBackgroundPermissionOptionLabel() + "</b>",
-                    this, then -> {
-                        LOG.debug("Beginning request for Background Location permission");
-                        backgroundPermissionLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+            SimpleDialog.build()
+                    .title(getString(R.string.gpslogger_permissions_rationale_title))
+                    .msgHtml(getString(R.string.gpslogger_permissions_background_location) + "<br /><br /><b>" + getPackageManager().getBackgroundPermissionOptionLabel() + "</b>"
+                    )
+                    .show(this, "BACKGROUND_LOCATION");
 
-                    });
         }
         else {
             LOG.debug("Not on Android R, proceed to battery optimization permission request");
@@ -564,7 +596,10 @@ public class GpsMainActivity extends AppCompatActivity
                         if (iProfile.getIdentifier() > 150 ) {
 
                             if( preferenceHelper.getCurrentProfileName().equals(iProfile.getName().getText()) ){
-                                Dialogs.alert(getString(R.string.sorry), getString(R.string.profile_switch_before_delete), GpsMainActivity.this);
+                                SimpleDialog.build()
+                                        .title(getString(R.string.sorry))
+                                        .msgHtml(getString(R.string.profile_switch_before_delete))
+                                        .show(GpsMainActivity.this);
                             }
                             else {
                                 new MaterialDialog.Builder(GpsMainActivity.this)
@@ -1084,7 +1119,10 @@ public class GpsMainActivity extends AppCompatActivity
     private void showFileListDialog(final FileSender sender) {
 
         if (!Systems.isNetworkAvailable(this)) {
-            Dialogs.alert(getString(R.string.sorry), getString(R.string.no_network_message), this);
+            SimpleDialog.build()
+                    .title(getString(R.string.sorry))
+                    .msgHtml(getString(R.string.no_network_message))
+                    .show(this);
             return;
         }
 
@@ -1139,7 +1177,11 @@ public class GpsMainActivity extends AppCompatActivity
                     }).show();
 
         } else {
-            Dialogs.alert(getString(R.string.sorry), getString(R.string.no_files_found), this);
+            SimpleDialog.build()
+                    .title(getString(R.string.sorry))
+                    .msgHtml(getString(R.string.no_files_found))
+                    .show(this);
+
         }
     }
 
@@ -1226,7 +1268,10 @@ public class GpsMainActivity extends AppCompatActivity
 
 
             } else {
-                Dialogs.alert(getString(R.string.sorry), getString(R.string.no_files_found), this);
+                SimpleDialog.build()
+                        .title(getString(R.string.sorry))
+                        .msgHtml(getString(R.string.no_files_found))
+                        .show(this);
             }
         } catch (Exception ex) {
             LOG.error("Sharing problem", ex);
