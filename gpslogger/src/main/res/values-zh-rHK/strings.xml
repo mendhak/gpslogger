@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_drawer_uploadsettings">上傳設定</string>
+    <string name="navigation_drawer_open">打開巡覽列</string>
+    <string name="navigation_drawer_close">關閉巡覽列</string>
+    <string name="app_name">GPSLogger</string>
+    <string name="settings_screen_name">GPSLogger設定</string>
     <string name="ok">確定</string>
     <string name="cancel">取消</string>
+    <string name="could_not_write_to_file">無法寫入到檔案</string>
+    <string name="add_description">添加一個描述</string>
+    <string name="letters_numbers">只能使用英文字母和數位</string>
+    <string name="menu_annotate">注解</string>
+    <string name="menu_share">分享</string>
+    <string name="menu_exit">退出</string>
     <!-- main form labels -->
     <string name="txt_speed">速度：</string>
     <!-- general -->
+    <string name="error">错误</string>
     <string name="success">成功</string>
     <!-- Settings activity -->
     <!-- Settings -->
