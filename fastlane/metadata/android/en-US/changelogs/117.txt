@@ -1,4 +1,5 @@
 * Added a file and folder picker. Used for the GPSLogger save path.  Also for SFTP private key.
+* New SSH library to allow connecting using more modern SSH algorithms.
 * File permissions fix for Android 11+. You can now set a custom file path, and you will get prompted to give file manager permissions.
 * New permission added, MANAGE_EXTERNAL_STORAGE.  This is to allow the custom file path feature on Android 11+.
 * Bugfix: Allow UTF-8 characters in FTP folder name.
