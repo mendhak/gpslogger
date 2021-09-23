@@ -48,8 +48,12 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.SimpleProgressDialog;
+
 public class Dialogs {
     private static MaterialDialog pd;
+    private static SimpleDialog simpleProgress;
 
     protected static String getFormattedErrorMessageForDisplay(String message, Throwable throwable) {
         StringBuilder html = new StringBuilder();
@@ -259,6 +263,11 @@ public class Dialogs {
 
     }
 
+    public static void progress(androidx.fragment.app.FragmentActivity activity, String title){
+        simpleProgress = SimpleProgressDialog.bar().title(title);
+        simpleProgress.show(activity);
+    }
+
     public static void progress(Context context, String title, String message) {
         if (context != null) {
 
@@ -273,6 +282,9 @@ public class Dialogs {
     public static void hideProgress() {
         if (pd != null) {
             pd.dismiss();
+        }
+        if(simpleProgress!=null){
+            simpleProgress.dismiss();
         }
     }
 

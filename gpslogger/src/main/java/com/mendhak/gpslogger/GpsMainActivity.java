@@ -569,7 +569,7 @@ public class GpsMainActivity extends AppCompatActivity
                                         public void onInput(@NonNull MaterialDialog materialDialog, CharSequence charSequence) {
 
                                             EventBus.getDefault().post(new ProfileEvents.DownloadProfile(charSequence.toString()));
-                                            Dialogs.progress(GpsMainActivity.this,getString(R.string.please_wait),getString(R.string.please_wait));
+                                            Dialogs.progress(GpsMainActivity.this,getString(R.string.please_wait));
 
                                         }
                                     })
@@ -1008,7 +1008,7 @@ public class GpsMainActivity extends AppCompatActivity
         LOG.debug("User forced an auto send");
 
         if (preferenceHelper.isAutoSendEnabled()) {
-            Dialogs.progress(this, getString(R.string.autosend_sending), getString(R.string.please_wait));
+            Dialogs.progress(this, getString(R.string.autosend_sending));
             EventBus.getDefault().post(new CommandEvents.AutoSend(null));
 
         } else {
@@ -1167,7 +1167,7 @@ public class GpsMainActivity extends AppCompatActivity
                             }
 
                             if (chosenFiles.size() > 0) {
-                                Dialogs.progress(GpsMainActivity.this, getString(R.string.please_wait), getString(R.string.please_wait));
+                                Dialogs.progress(GpsMainActivity.this, getString(R.string.please_wait));
                                 userInvokedUpload = true;
                                 sender.uploadFile(chosenFiles);
 
@@ -1549,7 +1549,7 @@ public class GpsMainActivity extends AppCompatActivity
     @EventBusHook
     public void onEventMainThread(ProfileEvents.SaveProfile saveProfileEvent){
 
-        Dialogs.progress(GpsMainActivity.this, getString(R.string.please_wait), getString(R.string.please_wait));
+        Dialogs.progress(GpsMainActivity.this, getString(R.string.please_wait));
         File f = new File(Files.storageFolder(GpsMainActivity.this), preferenceHelper.getCurrentProfileName()+".properties");
         try {
             preferenceHelper.savePropertiesFromPreferences(f);
