@@ -112,6 +112,11 @@ public class DropBoxManager extends FileSender {
         return  preferenceHelper.isDropboxAutoSendEnabled();
     }
 
+    @Override
+    public String getName() {
+        return SenderNames.DROPBOX;
+    }
+
     public void uploadFile(final String fileName) {
 
         if(!Strings.isNullOrEmpty(preferenceHelper.getDropBoxOauth1Secret())){

@@ -24,6 +24,18 @@ import java.io.FilenameFilter;
 import java.util.List;
 
 public abstract class FileSender implements FilenameFilter {
+
+    public static class SenderNames {
+        public static final String AUTOEMAIL = "AUTO_EMAIL_SENDER";
+        public static final String DROPBOX = "DROPBOX_SENDER";
+        public static final String OPENGTS = "OPENGTS_SENDER";
+        public static final String FTP = "FTP_SENDER";
+        public static final String OWNCLOUD = "OWNCLOUD_SENDER";
+        public static final String SFTP = "SFTP_SENDER";
+        public static final String OPENSTREETMAP = "OSM_SENDER";
+    }
+
+
     /**
      * Upload or send these given files
      */
@@ -40,13 +52,17 @@ public abstract class FileSender implements FilenameFilter {
     public abstract boolean hasUserAllowedAutoSending();
 
     /**
+     * Name of the sender. To be used when searching or matching for this among all the senders.
+     */
+    public abstract String getName();
+
+    /**
      * Whether this sender is available and allowed to automatically send files.
      * It checks both {@link #isAvailable()} and {@link #hasUserAllowedAutoSending()}
      */
     public boolean isAutoSendAvailable() {
         return hasUserAllowedAutoSending() && isAvailable();
     }
-
 
 
 }

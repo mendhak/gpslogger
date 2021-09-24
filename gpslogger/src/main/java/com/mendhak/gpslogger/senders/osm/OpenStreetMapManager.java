@@ -106,6 +106,11 @@ public class OpenStreetMapManager extends FileSender {
         return preferenceHelper.isOsmAutoSendEnabled();
     }
 
+    @Override
+    public String getName() {
+        return SenderNames.OPENSTREETMAP;
+    }
+
     public void uploadFile(String fileName) {
         File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
         final File chosenFile = new File(gpxFolder, fileName);

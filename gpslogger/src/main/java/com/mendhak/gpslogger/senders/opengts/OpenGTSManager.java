@@ -229,6 +229,11 @@ public class OpenGTSManager extends FileSender {
         return preferenceHelper.isOpenGtsAutoSendEnabled();
     }
 
+    @Override
+    public String getName() {
+        return SenderNames.OPENGTS;
+    }
+
     private List<SerializableLocation> getLocationsFromGPX(File f) {
         List<SerializableLocation> locations = Collections.emptyList();
         try {

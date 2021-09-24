@@ -77,6 +77,11 @@ public class AutoEmailManager extends FileSender {
         return preferenceHelper.isEmailAutoSendEnabled();
     }
 
+    @Override
+    public String getName() {
+        return SenderNames.AUTOEMAIL;
+    }
+
 
     public void sendTestEmail(String smtpServer, String smtpPort,
                        String smtpUsername, String smtpPassword, boolean smtpUseSsl,

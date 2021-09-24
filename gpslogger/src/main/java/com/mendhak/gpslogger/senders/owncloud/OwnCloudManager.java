@@ -102,6 +102,11 @@ public class OwnCloudManager extends FileSender
         return preferenceHelper.isOwnCloudAutoSendEnabled();
     }
 
+    @Override
+    public String getName() {
+        return SenderNames.OWNCLOUD;
+    }
+
     public void uploadFile(final File f)
     {
         final JobManager jobManager = AppSettings.getJobManager();

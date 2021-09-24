@@ -82,6 +82,8 @@ import de.greenrobot.event.EventBus;
 import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
+import eltos.simpledialogfragment.list.CustomListDialog;
+import eltos.simpledialogfragment.list.SimpleListDialog;
 
 import org.slf4j.Logger;
 import java.io.File;
@@ -274,6 +276,25 @@ public class GpsMainActivity extends AppCompatActivity
             LOG.info("Annotation entered : " + enteredText);
             EventBus.getDefault().post(new CommandEvents.Annotate(enteredText));
             Files.addItemToCacheFile(enteredText, "annotations", GpsMainActivity.this);
+        }
+        else if(dialogTag.equalsIgnoreCase("FILE_UPLOAD_DIALOG") && which == BUTTON_POSITIVE){
+            final File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
+            List<File> chosenFiles = new ArrayList<>();
+            ArrayList<String> selectedItems = extras.getStringArrayList(SimpleListDialog.SELECTED_LABELS);
+            for (String item : selectedItems) {
+                LOG.info("Selected file to upload- " + item);
+                chosenFiles.add(new File(gpxFolder, item));
+            }
+            LOG.info("Using sender: " + extras.getString("SENDER_NAME"));
+
+            if (chosenFiles.size() > 0) {
+                Dialogs.progress(GpsMainActivity.this, getString(R.string.please_wait));
+                userInvokedUpload = true;
+                FileSender sender = FileSenderFactory.getSenderByName(extras.getString("SENDER_NAME"));
+                sender.uploadFile(chosenFiles);
+
+            }
+
         }
 
         return false;
@@ -1158,32 +1179,15 @@ public class GpsMainActivity extends AppCompatActivity
 
             final String[] files = fileList.toArray(new String[fileList.size()]);
 
-            new MaterialDialog.Builder(this)
+            Bundle extra = new Bundle();
+            extra.putString("SENDER_NAME", sender.getName());
+
+            SimpleListDialog.build()
                     .title(R.string.osm_pick_file)
+                    .extra(extra)
                     .items(files)
-                    .positiveText(R.string.ok)
-                    .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMultiChoice() {
-                        @Override
-                        public boolean onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
-
-                            List<Integer> selectedItems = Arrays.asList(integers);
-
-                            List<File> chosenFiles = new ArrayList<>();
-
-                            for (Object item : selectedItems) {
-                                LOG.info("Selected file to upload- " + files[Integer.parseInt(item.toString())]);
-                                chosenFiles.add(new File(gpxFolder, files[Integer.parseInt(item.toString())]));
-                            }
-
-                            if (chosenFiles.size() > 0) {
-                                Dialogs.progress(GpsMainActivity.this, getString(R.string.please_wait));
-                                userInvokedUpload = true;
-                                sender.uploadFile(chosenFiles);
-
-                            }
-                            return true;
-                        }
-                    }).show();
+                    .choiceMode(CustomListDialog.MULTI_CHOICE)
+                    .show(GpsMainActivity.this, "FILE_UPLOAD_DIALOG");
 
         } else {
             SimpleDialog.build()

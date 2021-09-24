@@ -97,7 +97,7 @@ public class FileSenderFactory {
             return;
         }
 
-        List<FileSender> senders = getFileAutosenders();
+        List<FileSender> senders = getAvailableFileAutoSenders();
 
         if (!senders.isEmpty() && preferenceHelper.shouldSendZipFile()) {
             File zipFile = new File(gpxFolder.getPath(), fileToSend + ".zip");
@@ -133,13 +133,45 @@ public class FileSenderFactory {
         }
     }
 
+    public static FileSender getSenderByName(String senderName) {
 
-    private static List<FileSender> getFileAutosenders() {
+        switch (senderName){
+            case FileSender.SenderNames.AUTOEMAIL:
+                return getEmailSender();
+            case FileSender.SenderNames.DROPBOX:
+                return getDropBoxSender();
+            case FileSender.SenderNames.FTP:
+                return getFtpSender();
+            case FileSender.SenderNames.OPENGTS:
+                return getOpenGTSSender();
+            case FileSender.SenderNames.OPENSTREETMAP:
+                return getOsmSender();
+            case FileSender.SenderNames.OWNCLOUD:
+                return getOwnCloudSender();
+            case FileSender.SenderNames.SFTP:
+                return getSFTPSender();
+            default:
+                return null;
+
+        }
+
+    }
+
+    private static List<FileSender> getAllFileSenders(){
+        List<FileSender> senders = new ArrayList<>();
+            senders.add(getOsmSender());
+            senders.add(getEmailSender());
+            senders.add(getDropBoxSender());
+            senders.add(getOpenGTSSender());
+            senders.add(getFtpSender());
+            senders.add(getOwnCloudSender());
+            senders.add(getSFTPSender());
+        return senders;
+    }
+
+    private static List<FileSender> getAvailableFileAutoSenders() {
 
         List<FileSender> senders = new ArrayList<>();
-
-
-
 
         if(getOsmSender().isAutoSendAvailable()){
             senders.add(getOsmSender());

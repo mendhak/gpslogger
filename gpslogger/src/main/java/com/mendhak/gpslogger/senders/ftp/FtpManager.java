@@ -96,6 +96,11 @@ public class FtpManager extends FileSender {
         return preferenceHelper.isFtpAutoSendEnabled();
     }
 
+    @Override
+    public String getName() {
+        return SenderNames.FTP;
+    }
+
     public void uploadFile(final File f) {
 
         final JobManager jobManager = AppSettings.getJobManager();

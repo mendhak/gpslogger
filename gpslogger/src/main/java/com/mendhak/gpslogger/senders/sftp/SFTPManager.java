@@ -61,6 +61,11 @@ public class SFTPManager extends FileSender {
     }
 
     @Override
+    public String getName() {
+        return SenderNames.SFTP;
+    }
+
+    @Override
     public boolean accept(File file, String s) {
         return true;
     }
