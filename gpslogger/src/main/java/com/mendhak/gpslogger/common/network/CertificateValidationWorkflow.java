@@ -19,9 +19,12 @@
 
 package com.mendhak.gpslogger.common.network;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+
 import android.text.Html;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -42,15 +45,15 @@ import java.util.List;
 public class CertificateValidationWorkflow implements Runnable {
 
     Handler postValidationHandler;
-    Context context;
+    Activity activity;
     String host;
     int port;
     ServerType serverType;
 
     private static final Logger LOG = Logs.of(CertificateValidationWorkflow.class);
 
-    CertificateValidationWorkflow(Context context, String host, int port, ServerType serverType, Handler postValidationHandler) {
-        this.context = context;
+    CertificateValidationWorkflow(Activity activity, String host, int port, ServerType serverType, Handler postValidationHandler) {
+        this.activity = activity;
         this.host = host;
         this.port = port;
         this.serverType = serverType;
@@ -70,7 +73,7 @@ public class CertificateValidationWorkflow implements Runnable {
                 postValidationHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        onWorkflowFinished(context, null, true);
+                        onWorkflowFinished(activity, null, true);
                     }
                 });
             } catch (final Exception e) {
@@ -85,7 +88,7 @@ public class CertificateValidationWorkflow implements Runnable {
                     postValidationHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            onWorkflowFinished(context, e, false);
+                            onWorkflowFinished(activity, e, false);
                         }
                     });
                     return;
@@ -133,7 +136,7 @@ public class CertificateValidationWorkflow implements Runnable {
                         postValidationHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                onWorkflowFinished(context, null, true);
+                                onWorkflowFinished(activity, null, true);
                             }
                         });
                         return;
@@ -144,7 +147,7 @@ public class CertificateValidationWorkflow implements Runnable {
                 postValidationHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        onWorkflowFinished(context, null, false);
+                        onWorkflowFinished(activity, null, false);
                     }
                 });
             }
@@ -155,7 +158,7 @@ public class CertificateValidationWorkflow implements Runnable {
             postValidationHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    onWorkflowFinished(context, e, false);
+                    onWorkflowFinished(activity, e, false);
                 }
             });
         }
@@ -163,7 +166,7 @@ public class CertificateValidationWorkflow implements Runnable {
     }
 
     private void connectToSSLSocket(Socket plainSocket) throws IOException {
-        SSLSocketFactory factory = Networks.getSocketFactory(context);
+        SSLSocketFactory factory = Networks.getSocketFactory(activity);
         SSLSocket socket = (SSLSocket) factory.createSocket(host, port);
         if(plainSocket!=null){
             socket = (SSLSocket)factory.createSocket(plainSocket,host,port,true);
@@ -182,7 +185,7 @@ public class CertificateValidationWorkflow implements Runnable {
 
     }
 
-    private static void onWorkflowFinished(final Context context, Exception e, boolean isValid) {
+    private static void onWorkflowFinished(final Activity activity, Exception e, boolean isValid) {
 
         Dialogs.hideProgress();
 
@@ -212,7 +215,7 @@ public class CertificateValidationWorkflow implements Runnable {
                     sb.append(String.format(msgformat,"Issued on",cve.getCertificate().getNotBefore()));
                     sb.append(String.format(msgformat,"Expires on",cve.getCertificate().getNotAfter()));
 
-                    new MaterialDialog.Builder(context)
+                    new MaterialDialog.Builder(activity)
                             .title(R.string.ssl_certificate_add_to_keystore)
                             .content(Html.fromHtml(sb.toString()))
                             .positiveText(R.string.ok)
@@ -221,8 +224,8 @@ public class CertificateValidationWorkflow implements Runnable {
                                 @Override
                                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                     try {
-                                        Networks.addCertToKnownServersStore(cve.getCertificate(), context.getApplicationContext());
-                                        Dialogs.alert("",context.getString(R.string.restart_required),context);
+                                        Networks.addCertToKnownServersStore(cve.getCertificate(), activity.getApplicationContext());
+                                        Dialogs.alert("", activity.getString(R.string.restart_required), activity);
                                     } catch (Exception e) {
                                         LOG.error("Could not add to the keystore", e);
                                     }
@@ -237,10 +240,10 @@ public class CertificateValidationWorkflow implements Runnable {
 
             } else {
                 LOG.error("Error while attempting to fetch server certificate", e);
-                Dialogs.error(context.getString(R.string.error), "Error while attempting to fetch server certificate", e!= null ? e.getMessage(): "", e, context);
+                Dialogs.showError(activity.getString(R.string.error), "Error while attempting to fetch server certificate", e!= null ? e.getMessage(): "", e, (FragmentActivity) activity);
             }
         } else {
-            Dialogs.alert(context.getString(R.string.success), context.getString(R.string.ssl_certificate_is_valid) , context);
+            Dialogs.alert(activity.getString(R.string.success), activity.getString(R.string.ssl_certificate_is_valid) , activity);
         }
     }
 }

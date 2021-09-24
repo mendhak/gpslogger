@@ -30,7 +30,7 @@ public class ProfileLinkReceiverActivity extends AppCompatActivity {
 
         LOG.info("Received a gpslogger properties file URL to be handled. " + propertiesUrl);
 
-        Dialogs.progress(ProfileLinkReceiverActivity.this,getString(R.string.please_wait),getString(R.string.please_wait));
+        Dialogs.progress(ProfileLinkReceiverActivity.this,getString(R.string.please_wait));
         new Thread(new DownloadProfileRunner(propertiesUrl)).start();
 
     }
@@ -73,7 +73,7 @@ public class ProfileLinkReceiverActivity extends AppCompatActivity {
                     public void run() {
                         Dialogs.hideProgress();
 
-                        Dialogs.error(getString(R.string.error), e.getMessage(),e.getMessage(),e, ProfileLinkReceiverActivity.this);
+                        Dialogs.showError(getString(R.string.error), e.getMessage(),e.getMessage(),e, ProfileLinkReceiverActivity.this);
                     }
                 });
 

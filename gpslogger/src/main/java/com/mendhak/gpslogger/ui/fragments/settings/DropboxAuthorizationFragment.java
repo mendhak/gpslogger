@@ -25,6 +25,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+
+import androidx.fragment.app.FragmentActivity;
+
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
@@ -116,7 +119,7 @@ public class DropboxAuthorizationFragment extends PreferenceFragment implements 
     }
 
     private void uploadTestFile() {
-        Dialogs.progress(getActivity(), getString(R.string.please_wait), getString(R.string.please_wait));
+        Dialogs.progress((FragmentActivity) getActivity(), getString(R.string.please_wait));
 
         try {
             File testFile = Files.createTestFile();
@@ -134,7 +137,7 @@ public class DropboxAuthorizationFragment extends PreferenceFragment implements 
         LOG.debug("Dropbox Event completed, success: " + d.success);
         Dialogs.hideProgress();
         if(!d.success){
-            Dialogs.error(getString(R.string.sorry), "Could not upload to Dropbox", d.message, d.throwable, getActivity());
+            Dialogs.showError(getString(R.string.sorry), "Could not upload to Dropbox", d.message, d.throwable,(FragmentActivity) getActivity());
         }
         else {
             Dialogs.alert(getString(R.string.success), "", getActivity());

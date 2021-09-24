@@ -274,16 +274,16 @@ public class Dialogs {
         simpleProgress.show(activity);
     }
 
-    public static void progress(Context context, String title, String message) {
-        if (context != null) {
-
-            pd = new MaterialDialog.Builder(context)
-                    .title(title)
-                    .content(message)
-                    .progress(true, 0)
-                    .show();
-        }
-    }
+//    public static void progress(Context context, String title, String message) {
+//        if (context != null) {
+//
+//            pd = new MaterialDialog.Builder(context.getApplicationContext())
+//                    .title(title)
+//                    .content(message)
+//                    .progress(true, 0)
+//                    .show();
+//        }
+//    }
 
     public static void hideProgress() {
         if (pd != null) {

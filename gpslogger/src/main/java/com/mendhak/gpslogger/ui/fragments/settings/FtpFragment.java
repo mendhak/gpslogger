@@ -24,6 +24,9 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.text.TextUtils;
+
+import androidx.fragment.app.FragmentActivity;
+
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import com.mendhak.gpslogger.R;
@@ -104,8 +107,7 @@ public class FtpFragment
                 return false;
             }
 
-            Dialogs.progress(getActivity(), getString(R.string.autoftp_testing),
-                    getString(R.string.please_wait));
+            Dialogs.progress((FragmentActivity) getActivity(), getString(R.string.autoftp_testing));
 
 
             helper.testFtp(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
@@ -132,7 +134,7 @@ public class FtpFragment
             Dialogs.hideProgress();
             if(!o.success){
                 String ftpMessages = (o.ftpMessages == null) ? "" : TextUtils.join("",o.ftpMessages);
-                Dialogs.error(getString(R.string.sorry), "FTP Test Failed", o.message + "\r\n" + ftpMessages, o.throwable, getActivity());
+                Dialogs.showError(getString(R.string.sorry), "FTP Test Failed", o.message + "\r\n" + ftpMessages, o.throwable, (FragmentActivity) getActivity());
             }
             else {
                 Dialogs.alert(getString(R.string.success), "FTP Test Succeeded", getActivity());

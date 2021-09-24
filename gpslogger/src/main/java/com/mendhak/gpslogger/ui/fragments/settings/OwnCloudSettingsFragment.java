@@ -25,6 +25,8 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
@@ -118,7 +120,7 @@ public class OwnCloudSettingsFragment
                 return false;
             }
 
-            Dialogs.progress(getActivity(), getString(R.string.owncloud_testing), getString(R.string.please_wait));
+            Dialogs.progress((FragmentActivity) getActivity(), getString(R.string.owncloud_testing));
             OwnCloudManager helper = new OwnCloudManager(PreferenceHelper.getInstance());
             helper.testOwnCloud(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
                     directoryPreference.getText());
@@ -135,7 +137,7 @@ public class OwnCloudSettingsFragment
 
         Dialogs.hideProgress();
         if(!o.success){
-            Dialogs.error(getString(R.string.sorry), "OwnCloud Test Failed", o.message, o.throwable, getActivity());
+            Dialogs.showError(getString(R.string.sorry), "OwnCloud Test Failed", o.message, o.throwable, (FragmentActivity) getActivity());
         }
         else {
             Dialogs.alert(getString(R.string.success), "OwnCloud Test Succeeded", getActivity());

@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import android.provider.Settings;
 import android.text.InputType;
@@ -241,7 +243,7 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
     }
 
     private void uploadTestFile() {
-        Dialogs.progress(getActivity(), getString(R.string.please_wait), getString(R.string.please_wait));
+        Dialogs.progress((FragmentActivity) getActivity(), getString(R.string.please_wait));
 
         File testFile = null;
         try {
@@ -283,7 +285,7 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
                 });
             }
             else {
-                Dialogs.error(getString(R.string.sorry), "SFTP Test Failed", o.message , o.throwable, getActivity());
+                Dialogs.showError(getString(R.string.sorry), "SFTP Test Failed", o.message , o.throwable, (FragmentActivity) getActivity());
             }
         }
         else {

@@ -25,6 +25,9 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import android.text.TextUtils;
+
+import androidx.fragment.app.FragmentActivity;
+
 import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.*;
@@ -109,8 +112,7 @@ public class AutoEmailFragment extends PreferenceFragment implements
                 return true;
             }
 
-            Dialogs.progress(getActivity(), getString(R.string.autoemail_sendingtest),
-                    getString(R.string.please_wait));
+            Dialogs.progress((FragmentActivity) getActivity(), getString(R.string.autoemail_sendingtest));
 
 
 
@@ -183,7 +185,7 @@ public class AutoEmailFragment extends PreferenceFragment implements
                     getString(R.string.autoemail_testresult_success), getActivity());
         } else {
             String smtpMessages = (o.smtpMessages == null) ? "" : TextUtils.join("", o.smtpMessages);
-            Dialogs.error(getString(R.string.sorry), getString(R.string.error_connection), o.message + "\r\n" + smtpMessages, o.throwable, getActivity());
+            Dialogs.showError(getString(R.string.sorry), getString(R.string.error_connection), o.message + "\r\n" + smtpMessages, o.throwable, (FragmentActivity) getActivity());
         }
     }
 }

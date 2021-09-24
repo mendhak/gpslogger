@@ -20,8 +20,12 @@
 package com.mendhak.gpslogger.common.network;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
+
+import androidx.fragment.app.FragmentActivity;
+
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
@@ -129,10 +133,10 @@ public class Networks {
         return null;
     }
 
-    public static void beginCertificateValidationWorkflow(Context context, String host, int port, ServerType serverType) {
+    public static void beginCertificateValidationWorkflow(Activity activity, String host, int port, ServerType serverType) {
         Handler postValidationHandler = new Handler();
-        Dialogs.progress(context, context.getString(R.string.please_wait), context.getString(R.string.please_wait));
-        new Thread(new CertificateValidationWorkflow(context, host, port, serverType, postValidationHandler)).start();
+        Dialogs.progress((FragmentActivity) activity, activity.getString(R.string.please_wait));
+        new Thread(new CertificateValidationWorkflow(activity, host, port, serverType, postValidationHandler)).start();
     }
 
 

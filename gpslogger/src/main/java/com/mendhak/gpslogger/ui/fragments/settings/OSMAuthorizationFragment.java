@@ -27,6 +27,8 @@ import android.os.Handler;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
@@ -66,7 +68,7 @@ public class OSMAuthorizationFragment extends PreferenceFragment implements Pref
                 && myURI.getQuery().length() > 0) {
             //User has returned! Read the verifier info from querystring
 
-            Dialogs.progress(getActivity(), getString(R.string.please_wait), getString(R.string.please_wait));
+            Dialogs.progress((FragmentActivity) getActivity(), getString(R.string.please_wait));
 
             LOG.debug("OAuth user has returned!");
             String oAuthVerifier = myURI.getQueryParameter("oauth_verifier");
@@ -177,7 +179,7 @@ public class OSMAuthorizationFragment extends PreferenceFragment implements Pref
                     public void run() {
                         Dialogs.hideProgress();
                         if(getActivity()!=null && isAdded()) {
-                            Dialogs.error(getString(R.string.sorry), getString(R.string.osm_auth_error), e.getMessage(), e, getActivity());
+                            Dialogs.showError(getString(R.string.sorry), getString(R.string.osm_auth_error), e.getMessage(), e, (FragmentActivity) getActivity());
                         }
                     }
                 });
@@ -209,8 +211,8 @@ public class OSMAuthorizationFragment extends PreferenceFragment implements Pref
                     @Override
                     public void run() {
                         if(getActivity()!=null && isAdded()){
-                            Dialogs.error(getString(R.string.sorry), getString(R.string.osm_auth_error), e.getMessage(), e,
-                                    getActivity());
+                            Dialogs.showError(getString(R.string.sorry), getString(R.string.osm_auth_error), e.getMessage(), e,
+                                    (FragmentActivity) getActivity());
                         }
                     }
                 });
