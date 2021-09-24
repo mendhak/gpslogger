@@ -1001,17 +1001,32 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.SFTP_HOST, "127.0.0.1");
     }
 
+    public void setSFTPHost(String host){
+        prefs.edit().putString(PreferenceNames.SFTP_HOST, host).apply();
+    }
+
     public int getSFTPPort(){
         return Strings.toInt(prefs.getString(PreferenceNames.SFTP_PORT, "22"),22);
+    }
+
+    public void setSFTPPort(String port){
+        prefs.edit().putString(PreferenceNames.SFTP_PORT, port).apply();
     }
 
     public String getSFTPUser(){
         return prefs.getString(PreferenceNames.SFTP_USER, "");
     }
 
+    public void setSFTPUser(String user){
+        prefs.edit().putString(PreferenceNames.SFTP_USER, user).apply();
+    }
 
     public String getSFTPPassword(){
         return prefs.getString(PreferenceNames.SFTP_PASSWORD, "");
+    }
+
+    public void setSFTPPassword(String pass){
+        prefs.edit().putString(PreferenceNames.SFTP_PASSWORD, pass).apply();
     }
 
     public String getSFTPPrivateKeyFilePath(){
@@ -1026,6 +1041,10 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE, "");
     }
 
+    public void setSFTPPrivateKeyPassphrase(String pass){
+        prefs.edit().putString(PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE, pass).apply();
+    }
+
     public String getSFTPKnownHostKey(){
         return prefs.getString(PreferenceNames.SFTP_KNOWN_HOST_KEY, "");
     }
@@ -1038,6 +1057,9 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.SFTP_REMOTE_SERVER_PATH, "/tmp");
     }
 
+    public void setSFTPRemoteServerPath(String path){
+        prefs.edit().putString(PreferenceNames.SFTP_REMOTE_SERVER_PATH, path).apply();
+    }
 
     @SuppressWarnings("unchecked")
     public void savePropertiesFromPreferences(File f) throws IOException {

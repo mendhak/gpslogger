@@ -21,6 +21,7 @@
 #-dontshrink
 -dontoptimize
 
+-keep class * extends androidx.fragment.app.Fragment { public *; }
 
 -keep,includedescriptorclasses class com.mendhak.gpslogger.** { *; }
 

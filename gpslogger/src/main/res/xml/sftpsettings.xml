@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:key="sftp_preferences">
 
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
         android:key="sftp_enabled"
         android:title="@string/autosend_enabled"/>
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <Preference
         android:key="sftp_host"
         android:title="@string/autoopengts_server_summary"
         android:defaultValue="127.0.0.1"
@@ -14,14 +14,14 @@
         />
 
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <Preference
         android:key="sftp_port"
         android:title="@string/autoftp_port"
         android:dialogTitle="@string/autoftp_port"
         android:defaultValue="22"
         android:inputType="number"/>
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <Preference
         android:key="sftp_remote_server_path"
         android:title="@string/autoftp_directory"
         android:defaultValue="/tmp"
@@ -29,7 +29,7 @@
         android:inputType="text"
         />
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <Preference
         android:key="sftp_user"
         android:title="@string/autoftp_username"
         android:defaultValue=""
@@ -37,12 +37,12 @@
         android:inputType="text"
         />
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <Preference
         android:key="sftp_password"
         android:title="@string/autoftp_password"
         android:defaultValue=""
         android:dialogTitle="@string/autoftp_password"
-        android:password="true"
+        android:inputType="textPassword"
         />
 
     <Preference
@@ -50,12 +50,12 @@
         android:title="@string/sftp_private_key_path"
         />
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <Preference
         android:key="sftp_private_key_passphrase"
         android:title="@string/sftp_private_key_passphrase"
         android:defaultValue=""
         android:dialogTitle="@string/sftp_private_key_passphrase"
-        android:password="true"
+        android:inputType="textPassword"
         />
 
 

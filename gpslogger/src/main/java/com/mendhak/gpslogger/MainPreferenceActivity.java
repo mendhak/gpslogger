@@ -23,6 +23,8 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceFragmentCompat;
+
 import android.view.MenuItem;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Systems;
@@ -38,6 +40,7 @@ public class MainPreferenceActivity extends AppCompatActivity {
     private static final Logger LOG = Logs.of(MainPreferenceActivity.class);
 
     PreferenceFragment preferenceFragment = null;
+    PreferenceFragmentCompat preferenceFragmentCompat = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,8 +118,9 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 break;
             case PREFERENCE_FRAGMENTS.SFTP:
                 setTitle(R.string.sftp_setup_title);
-                preferenceFragment = new SFTPSettingsFragment();
-                break;
+                preferenceFragmentCompat = new SFTPSettingsFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
+                return;
         }
 
         getFragmentManager().beginTransaction()
