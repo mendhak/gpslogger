@@ -48,12 +48,9 @@ import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.appcompat.widget.ActionMenuView;
 import androidx.appcompat.widget.Toolbar;
 import android.provider.Settings;
-import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.*;
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.Session;
@@ -265,17 +262,20 @@ public class GpsMainActivity extends AppCompatActivity
         else if(dialogTag.equalsIgnoreCase("PROFILE_DELETE") && which == BUTTON_POSITIVE){
             String profileName = extras.getString("PROFILE_DELETE");
             EventBus.getDefault().post(new ProfileEvents.DeleteProfile(profileName));
+            return true;
         }
         else if(dialogTag.equalsIgnoreCase("PROFILE_DOWNLOAD_URL") && which == BUTTON_POSITIVE){
             String profileDownloadUrl = extras.getString("PROFILE_DOWNLOAD_URL");
             EventBus.getDefault().post(new ProfileEvents.DownloadProfile(profileDownloadUrl));
             Dialogs.progress(GpsMainActivity.this,getString(R.string.please_wait));
+            return true;
         }
         else if(dialogTag.equalsIgnoreCase("annotations") && which == BUTTON_POSITIVE){
             String enteredText = extras.getString("annotations");
             LOG.info("Annotation entered : " + enteredText);
             EventBus.getDefault().post(new CommandEvents.Annotate(enteredText));
             Files.addItemToCacheFile(enteredText, "annotations", GpsMainActivity.this);
+            return true;
         }
         else if(dialogTag.equalsIgnoreCase("FILE_UPLOAD_DIALOG") && which == BUTTON_POSITIVE){
             final File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
@@ -292,9 +292,50 @@ public class GpsMainActivity extends AppCompatActivity
                 userInvokedUpload = true;
                 FileSender sender = FileSenderFactory.getSenderByName(extras.getString("SENDER_NAME"));
                 sender.uploadFile(chosenFiles);
-
+            }
+            return true;
+        }
+        else if(dialogTag.equalsIgnoreCase("FILE_SHARE_DIALOG") && which == BUTTON_POSITIVE){
+            ArrayList<String> selectedItems = extras.getStringArrayList(SimpleListDialog.SELECTED_LABELS);
+            if (selectedItems.size() <= 0) {
+                return true;
             }
 
+            if(selectedItems.contains(getString(R.string.sharing_location_only))){
+                final Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+
+                intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing_mylocation));
+                if (session.hasValidLocation()) {
+                    String bodyText = String.format("http://maps.google.com/maps?q=%s,%s",
+                            String.valueOf(session.getCurrentLatitude()),
+                            String.valueOf(session.getCurrentLongitude()));
+                    intent.putExtra(Intent.EXTRA_TEXT, bodyText);
+                    intent.putExtra("sms_body", bodyText);
+                    startActivity(Intent.createChooser(intent, getString(R.string.sharing_via)));
+                }
+            }
+            else {
+
+                final Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setAction(Intent.ACTION_SEND_MULTIPLE);
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Here are some files.");
+                intent.setType("*/*");
+
+                ArrayList<Uri> chosenFiles = new ArrayList<>();
+                final File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
+
+                for (String path : selectedItems) {
+                    File file = new File(gpxFolder, path);
+                    Uri providedUri = FileProvider.getUriForFile(getApplicationContext(),
+                            "com.mendhak.gpslogger.fileprovider", file);
+                    chosenFiles.add(providedUri);
+                }
+
+                intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, chosenFiles);
+                startActivity(Intent.createChooser(intent, getString(R.string.sharing_via)));
+            }
+            return true;
         }
 
         return false;
@@ -1228,56 +1269,11 @@ public class GpsMainActivity extends AppCompatActivity
                 fileList.add(0, locationOnly);
                 final String[] files = fileList.toArray(new String[fileList.size()]);
 
-                new MaterialDialog.Builder(this)
+                SimpleListDialog.build()
                         .title(R.string.osm_pick_file)
                         .items(files)
-                        .positiveText(R.string.ok)
-                        .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMultiChoice() {
-                            @Override
-                            public boolean onSelection(MaterialDialog materialDialog, Integer[] integers, CharSequence[] charSequences) {
-                                List<Integer> selectedItems = Arrays.asList(integers);
-
-                                final Intent intent = new Intent(Intent.ACTION_SEND);
-                                intent.setType("*/*");
-
-                                if (selectedItems.size() <= 0) {
-                                    return false;
-                                }
-
-                                if (selectedItems.contains(0)) {
-
-                                    intent.setType("text/plain");
-
-                                    intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing_mylocation));
-                                    if (session.hasValidLocation()) {
-                                        String bodyText = String.format("http://maps.google.com/maps?q=%s,%s",
-                                                String.valueOf(session.getCurrentLatitude()),
-                                                String.valueOf(session.getCurrentLongitude()));
-                                        intent.putExtra(Intent.EXTRA_TEXT, bodyText);
-                                        intent.putExtra("sms_body", bodyText);
-                                        startActivity(Intent.createChooser(intent, getString(R.string.sharing_via)));
-                                    }
-                                } else {
-
-                                    intent.setAction(Intent.ACTION_SEND_MULTIPLE);
-                                    intent.putExtra(Intent.EXTRA_SUBJECT, "Here are some files.");
-                                    intent.setType("*/*");
-
-                                    ArrayList<Uri> chosenFiles = new ArrayList<>();
-
-                                    for (Object path : selectedItems) {
-                                        File file = new File(gpxFolder, files[Integer.parseInt(path.toString())]);
-                                        Uri providedUri = FileProvider.getUriForFile(getApplicationContext(),
-                                                "com.mendhak.gpslogger.fileprovider", file);
-                                        chosenFiles.add(providedUri);
-                                    }
-
-                                    intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, chosenFiles);
-                                    startActivity(Intent.createChooser(intent, getString(R.string.sharing_via)));
-                                }
-                                return true;
-                            }
-                        }).show();
+                        .choiceMode(CustomListDialog.MULTI_CHOICE)
+                        .show(GpsMainActivity.this, "FILE_SHARE_DIALOG");
 
 
             } else {
