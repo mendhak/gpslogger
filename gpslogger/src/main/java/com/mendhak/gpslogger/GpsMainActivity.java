@@ -80,6 +80,9 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import de.greenrobot.event.EventBus;
 import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.Input;
+import eltos.simpledialogfragment.form.SimpleFormDialog;
+
 import org.slf4j.Logger;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -240,6 +243,31 @@ public class GpsMainActivity extends AppCompatActivity
                     backgroundPermissionLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
                     return true;
             }
+        }
+        else if(dialogTag.equalsIgnoreCase("NEW_PROFILE_NAME")){
+            switch(which){
+                case BUTTON_POSITIVE:
+
+                    String profileName = extras.getString("NEW_PROFILE_NAME");
+                    if(!Strings.isNullOrEmpty(profileName)) {
+                        final String[] ReservedChars = {"|", "\\", "?", "*", "<", "\"", ":", ">", ".", "/", "'", ";"};
+                        for (String c : ReservedChars) {
+                            profileName = profileName.replace(c,"");
+                        }
+                        EventBus.getDefault().post(new ProfileEvents.CreateNewProfile(profileName));
+                    }
+                    return true;
+
+            }
+        }
+        else if(dialogTag.equalsIgnoreCase("PROFILE_DELETE") && which == BUTTON_POSITIVE){
+            String profileName = extras.getString("PROFILE_DELETE");
+            EventBus.getDefault().post(new ProfileEvents.DeleteProfile(profileName));
+        }
+        else if(dialogTag.equalsIgnoreCase("PROFILE_DOWNLOAD_URL") && which == BUTTON_POSITIVE){
+            String profileDownloadUrl = extras.getString("PROFILE_DOWNLOAD_URL");
+            EventBus.getDefault().post(new ProfileEvents.DownloadProfile(profileDownloadUrl));
+            Dialogs.progress(GpsMainActivity.this,getString(R.string.please_wait));
         }
         return false;
     }
@@ -536,44 +564,26 @@ public class GpsMainActivity extends AppCompatActivity
 
                         //Add new profile
                         if (profile.getIdentifier() == 101) {
-                            new MaterialDialog.Builder(GpsMainActivity.this)
+                            new SimpleFormDialog()
                                     .title(getString(R.string.profile_create_new))
-                                    .inputType(InputType.TYPE_CLASS_TEXT)
-                                    .negativeText(R.string.cancel)
-                                    .input("", "", false, new MaterialDialog.InputCallback() {
-                                        @Override
-                                        public void onInput(@NonNull MaterialDialog materialDialog, CharSequence charSequence) {
-                                            String profileName = charSequence.toString().trim();
-                                            if(!Strings.isNullOrEmpty(profileName)){
-                                                final String[] ReservedChars = {"|", "\\", "?", "*", "<", "\"", ":", ">", ".", "/", "'", ";"};
+                                    .neg(R.string.cancel)
+                                    .pos(R.string.ok)
+                                    .fields(
+                                            Input.plain("NEW_PROFILE_NAME").required()
+                                    ).show(GpsMainActivity.this, "NEW_PROFILE_NAME");
 
-                                                for (String c : ReservedChars) {
-                                                    profileName = profileName.replace(c,"");
-                                                }
-
-                                                EventBus.getDefault().post(new ProfileEvents.CreateNewProfile(profileName));
-                                            }
-                                        }
-                                    })
-                                    .show();
                             return true;
                         }
 
                         if (profile.getIdentifier() == 102) {
-                            new MaterialDialog.Builder(GpsMainActivity.this)
+
+                            new SimpleFormDialog()
                                     .title(getString(R.string.properties_file_url))
-                                    .inputType(InputType.TYPE_CLASS_TEXT)
-                                    .negativeText(R.string.cancel)
-                                    .input("", "", false, new MaterialDialog.InputCallback() {
-                                        @Override
-                                        public void onInput(@NonNull MaterialDialog materialDialog, CharSequence charSequence) {
+                                    .neg(R.string.cancel)
+                                    .fields(
+                                            Input.plain("PROFILE_DOWNLOAD_URL").required()
+                                    ).show(GpsMainActivity.this, "PROFILE_DOWNLOAD_URL");
 
-                                            EventBus.getDefault().post(new ProfileEvents.DownloadProfile(charSequence.toString()));
-                                            Dialogs.progress(GpsMainActivity.this,getString(R.string.please_wait));
-
-                                        }
-                                    })
-                                    .show();
                             return true;
                         }
 
@@ -602,18 +612,17 @@ public class GpsMainActivity extends AppCompatActivity
                                         .show(GpsMainActivity.this);
                             }
                             else {
-                                new MaterialDialog.Builder(GpsMainActivity.this)
+
+                                Bundle p = new Bundle();
+                                p.putString("PROFILE_DELETE", iProfile.getName().getText());
+
+                                SimpleDialog.build()
                                         .title(getString(R.string.profile_delete))
-                                        .content(iProfile.getName().getText())
-                                        .positiveText(R.string.ok)
-                                        .negativeText(R.string.cancel)
-                                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                            @Override
-                                            public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                                                EventBus.getDefault().post(new ProfileEvents.DeleteProfile(iProfile.getName().getText()));
-                                            }
-                                        })
-                                        .show();
+                                        .msg(iProfile.getName().getText())
+                                        .pos(R.string.ok)
+                                        .neg(R.string.cancel)
+                                        .extra(p)
+                                        .show(GpsMainActivity.this, "PROFILE_DELETE");
                             }
                         }
                         return false;
@@ -1530,10 +1539,11 @@ public class GpsMainActivity extends AppCompatActivity
             EventBus.getDefault().post(new ProfileEvents.PopulateProfiles());
 
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOG.error("Could not download properties file", e);
+            Dialogs.hideProgress();
+            Dialogs.showError("Could not download properties file","Could not download properties file",e.getMessage(), e, this);
         }
-
 
     }
 
