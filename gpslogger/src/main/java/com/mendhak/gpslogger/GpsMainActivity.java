@@ -1370,7 +1370,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + getString(R.string.upload_failure));
 
             if(userInvokedUpload){
-                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                Dialogs.showError(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1386,7 +1386,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                Dialogs.showError(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1402,7 +1402,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                Dialogs.showError(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1418,7 +1418,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                Dialogs.showError(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1434,7 +1434,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                Dialogs.showError(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1449,7 +1449,7 @@ public class GpsMainActivity extends AppCompatActivity
         if(!upload.success){
             LOG.error(getString(R.string.sftp_setup_title) + "- " + getString(R.string.upload_failure));
             if(userInvokedUpload){
-                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                Dialogs.showError(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1466,7 +1466,7 @@ public class GpsMainActivity extends AppCompatActivity
                     + getString(R.string.upload_failure));
 
             if(userInvokedUpload){
-                Dialogs.error(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                Dialogs.showError(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
                 userInvokedUpload = false;
             }
         }
@@ -1554,7 +1554,7 @@ public class GpsMainActivity extends AppCompatActivity
         try {
             preferenceHelper.savePropertiesFromPreferences(f);
         } catch (Exception e) {
-            Dialogs.error(getString(R.string.error), e.getMessage(), e.getMessage(), e, this);
+            Dialogs.showError(getString(R.string.error), e.getMessage(), e.getMessage(), e, this);
             LOG.error("Could not save profile to file", e);
         }
 

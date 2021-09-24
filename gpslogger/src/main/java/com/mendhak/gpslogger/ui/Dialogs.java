@@ -25,6 +25,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
@@ -40,6 +41,7 @@ import com.codekidlabs.storagechooser.StorageChooser;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.Files;
+import com.mendhak.gpslogger.ui.components.SimpleErrorDialog;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 
 import java.io.PrintWriter;
@@ -139,6 +141,10 @@ public class Dialogs {
                 .build();
 
         return chooser;
+    }
+
+    public static void showError(String title, final String friendlyMessage, final String errorMessage, final Throwable throwable, final FragmentActivity activity){
+        SimpleErrorDialog.build().title(friendlyMessage).msg("TEST").msgHtml(getFormattedErrorMessageForDisplay(errorMessage,throwable)).show(activity);
     }
 
     public static void error(String title, final String friendlyMessage, final String errorMessage, final Throwable throwable, final Context context){
