@@ -269,6 +269,13 @@ public class GpsMainActivity extends AppCompatActivity
             EventBus.getDefault().post(new ProfileEvents.DownloadProfile(profileDownloadUrl));
             Dialogs.progress(GpsMainActivity.this,getString(R.string.please_wait));
         }
+        else if(dialogTag.equalsIgnoreCase("annotations") && which == BUTTON_POSITIVE){
+            String enteredText = extras.getString("annotations");
+            LOG.info("Annotation entered : " + enteredText);
+            EventBus.getDefault().post(new CommandEvents.Annotate(enteredText));
+            Files.addItemToCacheFile(enteredText, "annotations", GpsMainActivity.this);
+        }
+
         return false;
     }
 
@@ -564,7 +571,9 @@ public class GpsMainActivity extends AppCompatActivity
 
                         //Add new profile
                         if (profile.getIdentifier() == 101) {
-                            new SimpleFormDialog()
+
+                            SimpleFormDialog
+                                    .build()
                                     .title(getString(R.string.profile_create_new))
                                     .neg(R.string.cancel)
                                     .pos(R.string.ok)
@@ -577,7 +586,8 @@ public class GpsMainActivity extends AppCompatActivity
 
                         if (profile.getIdentifier() == 102) {
 
-                            new SimpleFormDialog()
+                            SimpleFormDialog
+                                    .build()
                                     .title(getString(R.string.properties_file_url))
                                     .neg(R.string.cancel)
                                     .fields(
@@ -1043,19 +1053,9 @@ public class GpsMainActivity extends AppCompatActivity
             return;
         }
 
-        Dialogs.autoCompleteText(GpsMainActivity.this, "annotations",
-                getString(R.string.add_description), getString(R.string.letters_numbers), "",
-                new Dialogs.AutoCompleteCallback() {
-                    @Override
-                    public void messageBoxResult(int which, MaterialDialog dialog, String enteredText) {
-                        if(which == Dialogs.AutoCompleteCallback.CANCEL){
-                            return;
-                        }
 
-                        LOG.info("Annotation entered : " + enteredText);
-                        EventBus.getDefault().post(new CommandEvents.Annotate(enteredText));
-                    }
-                });
+        Dialogs.autoSuggestDialog(GpsMainActivity.this, "annotations",
+                getString(R.string.add_description), getString(R.string.letters_numbers), "");
 
     }
 

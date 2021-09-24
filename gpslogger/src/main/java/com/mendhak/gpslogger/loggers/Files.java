@@ -34,6 +34,7 @@ import org.slf4j.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -242,6 +243,13 @@ public class Files {
 
         return baseFileName;
 
+    }
+
+    public static void addItemToCacheFile(String item, String cacheKey, Context ctx){
+        List<String> existingList = getListFromCacheFile(cacheKey, ctx);
+        final LinkedHashSet<String> set = new LinkedHashSet(existingList);
+        set.add(item);
+        saveListToCacheFile(new ArrayList<>(set), cacheKey, ctx);
     }
 
     public static void saveListToCacheFile(List<String> items, String cacheKey, Context ctx){

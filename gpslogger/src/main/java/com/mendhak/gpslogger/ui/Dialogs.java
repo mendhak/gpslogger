@@ -52,6 +52,8 @@ import java.util.List;
 
 import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.SimpleProgressDialog;
+import eltos.simpledialogfragment.form.Input;
+import eltos.simpledialogfragment.form.SimpleFormDialog;
 
 public class Dialogs {
     private static MaterialDialog pd;
@@ -294,6 +296,21 @@ public class Dialogs {
         }
     }
 
+    public static void autoSuggestDialog(final FragmentActivity activity, final String cacheKey,
+                                         String title, String hint, String text){
+
+        final List<String> cachedList = Files.getListFromCacheFile(cacheKey, activity);
+
+        SimpleFormDialog.build()
+                .fields(
+                        Input.plain(cacheKey)
+                                .suggest(new ArrayList<>(cachedList))
+                                .hint(hint)
+                                .text(text)
+                )
+                .title(title)
+                .show(activity, cacheKey);
+    }
 
     /**
      * Text input dialog, with auto complete entries stored in cache.
