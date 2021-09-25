@@ -124,10 +124,11 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
         else if(preference.getKey().equalsIgnoreCase(PreferenceNames.SFTP_PRIVATE_KEY_PATH)){
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
-                Dialogs.alert(getString(R.string.error),getString(R.string.gpslogger_custom_path_need_permission),getActivity(), which -> {
-                    Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
-                    getActivity().startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
-                });
+                SimpleDialog.build()
+                        .title(R.string.error)
+                        .msg(R.string.gpslogger_custom_path_need_permission)
+                        .show(this, "FILE_PERMISSIONS_REQUIRED");
+
                 return false;
             }
 
@@ -238,6 +239,13 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
             String hostKey = extras.getString(PreferenceNames.SFTP_KNOWN_HOST_KEY);
             preferenceHelper.setSFTPKnownHostKey(hostKey);
             uploadTestFile();
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase("FILE_PERMISSIONS_REQUIRED") && which == BUTTON_POSITIVE){
+            Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+            getActivity().startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
+            return true;
         }
 
 
@@ -301,7 +309,10 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
             }
         }
         else {
-            Dialogs.alert(getString(R.string.success), "SFTP Test Succeeded", getActivity());
+            SimpleDialog.build()
+                    .title(getString(R.string.success))
+                    .msg("SFTP Test Succeeded")
+                    .show(getActivity());
         }
     }
 
