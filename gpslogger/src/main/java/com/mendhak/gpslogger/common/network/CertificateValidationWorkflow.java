@@ -20,20 +20,15 @@
 package com.mendhak.gpslogger.common.network;
 
 import android.app.Activity;
-import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-
-import android.text.Html;
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.ui.Dialogs;
+import com.mendhak.gpslogger.ui.components.SimpleTLSValidationDialog;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
-
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
@@ -215,24 +210,16 @@ public class CertificateValidationWorkflow implements Runnable {
                     sb.append(String.format(msgformat,"Issued on",cve.getCertificate().getNotBefore()));
                     sb.append(String.format(msgformat,"Expires on",cve.getCertificate().getNotAfter()));
 
-                    new MaterialDialog.Builder(activity)
-                            .title(R.string.ssl_certificate_add_to_keystore)
-                            .content(Html.fromHtml(sb.toString()))
-                            .positiveText(R.string.ok)
-                            .negativeText(R.string.cancel)
-                            .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    try {
-                                        Networks.addCertToKnownServersStore(cve.getCertificate(), activity.getApplicationContext());
-                                        Dialogs.alert("", activity.getString(R.string.restart_required), activity);
-                                    } catch (Exception e) {
-                                        LOG.error("Could not add to the keystore", e);
-                                    }
+                    Bundle b = new Bundle();
+                    b.putSerializable("CERT",cve.getCertificate());
 
-                                    dialog.dismiss();
-                                }
-                            }).show();
+                    SimpleTLSValidationDialog.build()
+                            .title(R.string.ssl_certificate_add_to_keystore)
+                            .pos(R.string.ok)
+                            .neg(R.string.cancel)
+                            .msgHtml(sb.toString())
+                            .extra(b)
+                            .show((FragmentActivity)activity);
 
                 } catch (Exception e1) {
                     LOG.error("Could not get fingerprint of certificate", e1);
