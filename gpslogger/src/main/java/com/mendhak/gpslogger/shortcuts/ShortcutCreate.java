@@ -19,54 +19,61 @@
 
 package com.mendhak.gpslogger.shortcuts;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import com.afollestad.materialdialogs.MaterialDialog;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import com.mendhak.gpslogger.R;
+import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.list.CustomListDialog;
+import eltos.simpledialogfragment.list.SimpleListDialog;
 
-public class ShortcutCreate extends Activity {
+public class ShortcutCreate extends AppCompatActivity implements SimpleDialog.OnDialogResultListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        final CharSequence[] items = {getString(R.string.shortcut_start), getString(R.string.shortcut_stop)};
+        final String[] items = {getString(R.string.shortcut_start), getString(R.string.shortcut_stop)};
 
-        new MaterialDialog.Builder(this)
+        SimpleListDialog.build()
                 .title(R.string.shortcut_pickaction)
-                .items(items)
-                .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog materialDialog, View view, int item, CharSequence charSequence) {
-                        Intent shortcutIntent;
-                        String shortcutLabel;
-                        int shortcutIcon;
-
-                        if (item == 0) {
-                            shortcutIntent = new Intent(getApplicationContext(), ShortcutStart.class);
-                            shortcutLabel = getString(R.string.shortcut_start);
-                            shortcutIcon = R.drawable.gps_shortcut_start;
-
-                        } else {
-                            shortcutIntent = new Intent(getApplicationContext(), ShortcutStop.class);
-                            shortcutLabel = getString(R.string.shortcut_stop);
-                            shortcutIcon = R.drawable.gps_shortcut_stop;
-                        }
-
-                        Intent.ShortcutIconResource iconResource = Intent.ShortcutIconResource.fromContext
-                                (getApplicationContext(), shortcutIcon);
-                        Intent intent = new Intent();
-                        intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-                        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, shortcutLabel);
-                        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconResource);
-                        setResult(RESULT_OK, intent);
-
-                        finish();
-                        return true;
-                    }
-                }).show();
+                .items(items, new long[] {0L, 1L})
+                .choiceMode(CustomListDialog.SINGLE_CHOICE)
+                .show(this, "SHORTCUT_CREATE");
 
 
+    }
+
+    @Override
+    public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
+        if(dialogTag.equalsIgnoreCase("SHORTCUT_CREATE") && which == BUTTON_POSITIVE){
+            long id = extras.getLong(SimpleListDialog.SELECTED_SINGLE_ID);
+            Intent shortcutIntent;
+            String shortcutLabel;
+            int shortcutIcon;
+
+            if (id == 0) {
+                shortcutIntent = new Intent(getApplicationContext(), ShortcutStart.class);
+                shortcutLabel = getString(R.string.shortcut_start);
+                shortcutIcon = R.drawable.gps_shortcut_start;
+
+            } else {
+                shortcutIntent = new Intent(getApplicationContext(), ShortcutStop.class);
+                shortcutLabel = getString(R.string.shortcut_stop);
+                shortcutIcon = R.drawable.gps_shortcut_stop;
+            }
+
+            Intent.ShortcutIconResource iconResource = Intent.ShortcutIconResource.fromContext
+                    (getApplicationContext(), shortcutIcon);
+            Intent intent = new Intent();
+            intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+            intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, shortcutLabel);
+            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconResource);
+            setResult(RESULT_OK, intent);
+
+            finish();
+            return true;
+        }
+        return false;
     }
 }
