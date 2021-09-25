@@ -209,14 +209,12 @@ public class Dialogs {
      *
      * @param title
      * @param message
-     * @param context The calling class, such as GpsMainActivity.this or
+     * @param activity The calling class, such as GpsMainActivity.this or
      *                  mainActivity.
      */
-    public static void alert(String title, String message, Context context) {
-        alert(title, message, context, false, null);
+    public static void alert(String title, String message, Activity activity) {
+        SimpleDialog.build().title(title).msgHtml(message).show((FragmentActivity) activity);
     }
-
-
 
     public static void alert(String title, String message, Context context, final MessageBoxCallback msgCallback){
         alert(title, message, context, false, msgCallback);
