@@ -22,13 +22,8 @@ package com.mendhak.gpslogger.ui.fragments.display;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
-import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
-
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
@@ -41,6 +36,8 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.Dialogs;
 import de.greenrobot.event.EventBus;
+import eltos.simpledialogfragment.SimpleDialog;
+
 import org.slf4j.Logger;
 
 
@@ -82,28 +79,11 @@ public abstract class GenericViewFragment extends Fragment {
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LocationServicesUnavailable locationServicesUnavailable) {
-//        SimpleDialog.build().msg(R.string.gpsprovider_unavailable)
-//                .pos(R.string.ok)
-//                .neg(R.string.cancel)
-//                .show((FragmentActivity) getActivity(), "GPS_PROVIDER_UNAVAILABLE");
+        SimpleDialog.build().msg(R.string.gpsprovider_unavailable)
+                .pos(R.string.ok)
+                .neg(R.string.cancel)
+                .show((FragmentActivity) getActivity(), "GPS_PROVIDER_UNAVAILABLE");
 
-        new MaterialDialog.Builder(getActivity())
-                //.title("Location services unavailable")
-                .content(R.string.gpsprovider_unavailable)
-                .positiveText(R.string.ok)
-                .negativeText(R.string.cancel)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                        if(getActivity() != null){
-                            Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            getActivity().startActivity(settingsIntent);
-                        }
-
-                    }
-                })
-                .show();
     }
 
 

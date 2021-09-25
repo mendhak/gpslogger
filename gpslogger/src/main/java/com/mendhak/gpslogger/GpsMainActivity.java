@@ -348,6 +348,14 @@ public class GpsMainActivity extends AppCompatActivity
 
             getCurrentFragment().toggleLogging();
             Files.addItemToCacheFile(enteredText, "customfilename", GpsMainActivity.this);
+            return true;
+        }
+        else if(dialogTag.equalsIgnoreCase("GPS_PROVIDER_UNAVAILABLE") && which==BUTTON_POSITIVE){
+
+            Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(settingsIntent);
+            return true;
         }
 
         return false;
