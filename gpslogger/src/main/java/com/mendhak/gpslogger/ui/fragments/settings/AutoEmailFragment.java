@@ -20,15 +20,14 @@
 package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceFragment;
+import android.text.InputType;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-
-import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.UploadEvents;
@@ -37,11 +36,16 @@ import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.email.AutoEmailManager;
 import com.mendhak.gpslogger.ui.Dialogs;
-import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 import de.greenrobot.event.EventBus;
+import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.Input;
+import eltos.simpledialogfragment.form.SimpleFormDialog;
 
-public class AutoEmailFragment extends PreferenceFragment implements
-        OnPreferenceChangeListener,  OnPreferenceClickListener, PreferenceValidator {
+public class AutoEmailFragment extends PreferenceFragmentCompat implements
+        Preference.OnPreferenceChangeListener,
+        Preference.OnPreferenceClickListener,
+        PreferenceValidator,
+        SimpleDialog.OnDialogResultListener {
 
     private final PreferenceHelper preferenceHelper;
     AutoEmailManager aem;
@@ -56,16 +60,36 @@ public class AutoEmailFragment extends PreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.autoemailsettings);
+        findPreference(PreferenceNames.EMAIL_TARGET).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.EMAIL_TARGET).setSummary(preferenceHelper.getAutoEmailTargets());
+
+        findPreference(PreferenceNames.EMAIL_SMTP_USERNAME).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.EMAIL_SMTP_USERNAME).setSummary(preferenceHelper.getSmtpUsername());
+
+        findPreference(PreferenceNames.EMAIL_FROM).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.EMAIL_FROM).setSummary(preferenceHelper.getSmtpSenderAddress());
+
+        findPreference(PreferenceNames.EMAIL_SMTP_PASSWORD).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.EMAIL_SMTP_PASSWORD).setSummary(preferenceHelper.getSmtpPassword().replaceAll(".","*"));
+
+        findPreference(PreferenceNames.EMAIL_SMTP_SERVER).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.EMAIL_SMTP_SERVER).setSummary(preferenceHelper.getSmtpServer());
+
+        findPreference(PreferenceNames.EMAIL_SMTP_PORT).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.EMAIL_SMTP_PORT).setSummary(preferenceHelper.getSmtpPort());
+
 
         findPreference("autoemail_enabled").setOnPreferenceChangeListener(this);
         findPreference("autoemail_preset").setOnPreferenceChangeListener(this);
-        findPreference("smtp_server").setOnPreferenceChangeListener(this);
-        findPreference("smtp_port").setOnPreferenceChangeListener(this);
         findPreference("smtp_testemail").setOnPreferenceClickListener(this);
         findPreference("smtp_validatecustomsslcert").setOnPreferenceClickListener(this);
 
         registerEventBus();
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.autoemailsettings, rootKey);
     }
 
     @Override
@@ -90,17 +114,83 @@ public class AutoEmailFragment extends PreferenceFragment implements
 
         if(preference.getKey().equals("smtp_validatecustomsslcert")){
                 Networks.beginCertificateValidationWorkflow(getActivity(), preferenceHelper.getSmtpServer(), Strings.toInt(preferenceHelper.getSmtpPort(),25), ServerType.SMTP);
+                return true;
         }
-        else if (preference.getKey().equals("smtp_testemail")){
-            CustomSwitchPreference chkUseSsl = (CustomSwitchPreference) findPreference("smtp_ssl");
-            MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
-            MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
-            MaterialEditTextPreference txtUsername = (MaterialEditTextPreference) findPreference("smtp_username");
-            MaterialEditTextPreference txtPassword = (MaterialEditTextPreference) findPreference("smtp_password");
-            MaterialEditTextPreference txtTarget = (MaterialEditTextPreference) findPreference("autoemail_target");
-            MaterialEditTextPreference txtFrom = (MaterialEditTextPreference) findPreference("smtp_from");
 
-            if (!aem.isValid(txtSmtpServer.getText(), txtSmtpPort.getText(), txtUsername.getText(), txtPassword.getText(),txtTarget.getText())) {
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.EMAIL_SMTP_USERNAME)){
+            SimpleFormDialog.build()
+                    .title(R.string.autoftp_username)
+                    .msg(R.string.autoemail_username_summary)
+                    .fields(
+                            Input.plain(PreferenceNames.EMAIL_SMTP_USERNAME).text(preferenceHelper.getSmtpUsername())
+                    ).show(this, PreferenceNames.EMAIL_SMTP_USERNAME);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.EMAIL_TARGET)){
+            SimpleFormDialog.build()
+                    .title(R.string.autoemail_target)
+                    .msg(R.string.autoemail_sendto_csv)
+                    .fields(
+                            Input.plain(PreferenceNames.EMAIL_TARGET).text(preferenceHelper.getAutoEmailTargets())
+                    ).show(this,PreferenceNames.EMAIL_TARGET);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.EMAIL_FROM)){
+            SimpleFormDialog.build()
+                    .title(R.string.autoemail_from)
+                    .msg(R.string.autoemail_from_summary)
+                    .fields(
+                            Input.plain(PreferenceNames.EMAIL_FROM).text(preferenceHelper.getSmtpSenderAddress())
+                    ).show(this,PreferenceNames.EMAIL_FROM);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.EMAIL_SMTP_PASSWORD)){
+            SimpleFormDialog.build()
+                    .title(R.string.autoftp_password)
+                    .msg(R.string.autoemail_password_summary)
+                    .fields(
+                            Input.plain(PreferenceNames.EMAIL_SMTP_PASSWORD).text(preferenceHelper.getSmtpPassword()).showPasswordToggle().inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                    ).show(this,PreferenceNames.EMAIL_SMTP_PASSWORD);
+            return true;
+        }
+
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.EMAIL_SMTP_SERVER)){
+            SimpleFormDialog.build()
+                    .title(R.string.autoopengts_server)
+                    .msg(R.string.autoopengts_server_summary)
+                    .fields(
+                            Input.plain(PreferenceNames.EMAIL_SMTP_SERVER).text(preferenceHelper.getSmtpServer())
+                    ).show(this,PreferenceNames.EMAIL_SMTP_SERVER);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.EMAIL_SMTP_PORT)){
+            SimpleFormDialog.build()
+                    .title(R.string.autoftp_port)
+                    .fields(
+                            Input.plain(PreferenceNames.EMAIL_SMTP_PORT).required().text(String.valueOf(preferenceHelper.getSmtpPort())).inputType(InputType.TYPE_CLASS_NUMBER)
+
+                    ).show(this,PreferenceNames.EMAIL_SMTP_PORT);
+            return true;
+        }
+
+
+        if (preference.getKey().equals("smtp_testemail")){
+
+            boolean useSsl = preferenceHelper.isSmtpSsl();
+            String smtpServer = preferenceHelper.getSmtpServer();
+            String smtpPort = preferenceHelper.getSmtpPort();
+            String smtpUsername = preferenceHelper.getSmtpUsername();
+            String smtpPassword = preferenceHelper.getSmtpPassword();
+            String smtpTarget = preferenceHelper.getAutoEmailTargets();
+            String senderAddress = preferenceHelper.getSmtpSenderAddress();
+
+            if (!aem.isValid(smtpServer, smtpPort, smtpUsername, smtpPassword, smtpTarget)) {
                 Dialogs.alert(getString(R.string.autoftp_invalid_settings),
                         getString(R.string.autoftp_invalid_summary),
                         getActivity());
@@ -116,10 +206,13 @@ public class AutoEmailFragment extends PreferenceFragment implements
 
 
 
-            aem.sendTestEmail(txtSmtpServer.getText(), txtSmtpPort.getText(),
-                    txtUsername.getText(), txtPassword.getText(),
-                    chkUseSsl.isChecked(), txtTarget.getText(), txtFrom.getText());
+            aem.sendTestEmail(smtpServer, smtpPort,
+                    smtpUsername, smtpPassword,
+                    useSsl, smtpTarget, senderAddress);
+            return true;
         }
+
+
 
 
         return true;
@@ -156,17 +249,19 @@ public class AutoEmailFragment extends PreferenceFragment implements
 
     private void setSmtpValues(String server, String port, boolean useSsl) {
 
-        MaterialEditTextPreference txtSmtpServer = (MaterialEditTextPreference) findPreference("smtp_server");
-        MaterialEditTextPreference txtSmtpPort = (MaterialEditTextPreference) findPreference("smtp_port");
-        CustomSwitchPreference chkUseSsl = (CustomSwitchPreference) findPreference("smtp_ssl");
+        Preference txtSmtpServer = findPreference("smtp_server");
+        Preference txtSmtpPort = findPreference("smtp_port");
+        SwitchPreferenceCompat chkUseSsl = (SwitchPreferenceCompat) findPreference("smtp_ssl");
 
-        txtSmtpServer.setText(server);
         preferenceHelper.setSmtpServer(server);
+        txtSmtpServer.setSummary(server);
 
-        txtSmtpPort.setText(port);
         preferenceHelper.setSmtpPort(port);
-        chkUseSsl.setChecked(useSsl);
+        txtSmtpPort.setSummary(port);
+
         preferenceHelper.setSmtpSsl(useSsl);
+        chkUseSsl.setChecked(useSsl);
+
     }
 
 
@@ -187,5 +282,51 @@ public class AutoEmailFragment extends PreferenceFragment implements
             String smtpMessages = (o.smtpMessages == null) ? "" : TextUtils.join("", o.smtpMessages);
             Dialogs.showError(getString(R.string.sorry), getString(R.string.error_connection), o.message + "\r\n" + smtpMessages, o.throwable, (FragmentActivity) getActivity());
         }
+    }
+
+    @Override
+    public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.EMAIL_TARGET) && which == BUTTON_POSITIVE){
+            String emailCsv = extras.getString(PreferenceNames.EMAIL_TARGET);
+            preferenceHelper.setAutoEmailTargets(emailCsv);
+            findPreference(PreferenceNames.EMAIL_TARGET).setSummary(preferenceHelper.getAutoEmailTargets());
+            return true;
+        }
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.EMAIL_SMTP_USERNAME) && which == BUTTON_POSITIVE){
+            String smtpUsername = extras.getString(PreferenceNames.EMAIL_SMTP_USERNAME);
+            preferenceHelper.setSmtpUsername(smtpUsername);
+            findPreference(PreferenceNames.EMAIL_SMTP_USERNAME).setSummary(preferenceHelper.getSmtpUsername());
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.EMAIL_FROM) && which == BUTTON_POSITIVE){
+            String smtpFrom = extras.getString(PreferenceNames.EMAIL_FROM);
+            preferenceHelper.setSmtpFrom(smtpFrom);
+            findPreference(PreferenceNames.EMAIL_FROM).setSummary(preferenceHelper.getSmtpSenderAddress());
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.EMAIL_SMTP_PASSWORD) && which == BUTTON_POSITIVE){
+            String smtpPass = extras.getString(PreferenceNames.EMAIL_SMTP_PASSWORD);
+            preferenceHelper.setSmtpPassword(smtpPass);
+            findPreference(PreferenceNames.EMAIL_SMTP_PASSWORD).setSummary(preferenceHelper.getSmtpPassword().replaceAll(".","*"));
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.EMAIL_SMTP_SERVER) && which == BUTTON_POSITIVE){
+            String smtpServer = extras.getString(PreferenceNames.EMAIL_SMTP_SERVER);
+            preferenceHelper.setSmtpServer(smtpServer);
+            findPreference(PreferenceNames.EMAIL_SMTP_SERVER).setSummary(preferenceHelper.getSmtpServer());
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.EMAIL_SMTP_PORT) && which == BUTTON_POSITIVE){
+            String smtpPort = extras.getString(PreferenceNames.EMAIL_SMTP_PORT);
+            preferenceHelper.setSmtpPort(smtpPort);
+            findPreference(PreferenceNames.EMAIL_SMTP_PORT).setSummary(preferenceHelper.getSmtpPort());
+            return true;
+        }
+
+        return false;
     }
 }

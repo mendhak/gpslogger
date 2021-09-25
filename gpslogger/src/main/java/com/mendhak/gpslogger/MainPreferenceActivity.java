@@ -97,8 +97,9 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 break;
             case PREFERENCE_FRAGMENTS.EMAIL:
                 setTitle(R.string.autoemail_title);
-                preferenceFragment = new AutoEmailFragment();
-                break;
+                preferenceFragmentCompat = new AutoEmailFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
+                return;
             case PREFERENCE_FRAGMENTS.OPENGTS:
                 setTitle(R.string.opengts_setup_title);
                 preferenceFragment = new OpenGTSFragment();

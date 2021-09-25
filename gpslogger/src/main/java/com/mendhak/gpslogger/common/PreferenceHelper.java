@@ -132,6 +132,9 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.EMAIL_SMTP_USERNAME, "");
     }
 
+    public void setSmtpUsername(String user){
+        prefs.edit().putString(PreferenceNames.EMAIL_SMTP_USERNAME, user).apply();
+    }
 
     /**
      * SMTP Password to use when sending emails
@@ -139,6 +142,10 @@ public class PreferenceHelper {
     @ProfilePreference(name= PreferenceNames.EMAIL_SMTP_PASSWORD)
     public String getSmtpPassword() {
         return prefs.getString(PreferenceNames.EMAIL_SMTP_PASSWORD, "");
+    }
+
+    public void setSmtpPassword(String pass){
+        prefs.edit().putString(PreferenceNames.EMAIL_SMTP_PASSWORD, pass).apply();
     }
 
     /**
@@ -165,6 +172,10 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.EMAIL_TARGET, "");
     }
 
+    public void setAutoEmailTargets(String emailCsv) {
+        prefs.edit().putString(PreferenceNames.EMAIL_TARGET, emailCsv).apply();
+    }
+
 
     /**
      * SMTP from address to use
@@ -172,6 +183,10 @@ public class PreferenceHelper {
     @ProfilePreference(name= PreferenceNames.EMAIL_FROM)
     private String getSmtpFrom() {
         return prefs.getString(PreferenceNames.EMAIL_FROM, "");
+    }
+
+    public void setSmtpFrom(String from) {
+        prefs.edit().putString(PreferenceNames.EMAIL_FROM, from).apply();
     }
 
     /**
@@ -184,7 +199,6 @@ public class PreferenceHelper {
 
         return getSmtpUsername();
     }
-
 
 
     /**
