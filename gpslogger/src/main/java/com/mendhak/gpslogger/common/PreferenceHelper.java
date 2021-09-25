@@ -218,6 +218,9 @@ public class PreferenceHelper {
         return Strings.toInt(prefs.getString(PreferenceNames.FTP_PORT, "21"), 21);
     }
 
+    public void setFtpPort(String port){
+        prefs.edit().putString(PreferenceNames.FTP_PORT, port).apply();
+    }
 
     /**
      * FTP Username for auto send
@@ -234,6 +237,10 @@ public class PreferenceHelper {
     @ProfilePreference(name= PreferenceNames.FTP_PASSWORD)
     public String getFtpPassword() {
         return prefs.getString(PreferenceNames.FTP_PASSWORD, "");
+    }
+
+    public void setFtpPassword(String pass){
+        prefs.edit().putString(PreferenceNames.FTP_PASSWORD, pass).apply();
     }
 
     /**

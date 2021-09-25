@@ -93,8 +93,9 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 return;
             case PREFERENCE_FRAGMENTS.FTP:
                 setTitle(R.string.autoftp_setup_title);
-                preferenceFragment = new FtpFragment();
-                break;
+                preferenceFragmentCompat = new FtpFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
+                return;
             case PREFERENCE_FRAGMENTS.EMAIL:
                 setTitle(R.string.autoemail_title);
                 preferenceFragmentCompat = new AutoEmailFragment();

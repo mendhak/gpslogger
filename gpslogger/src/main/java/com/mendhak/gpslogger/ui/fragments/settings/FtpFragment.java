@@ -19,44 +19,69 @@
 
 package com.mendhak.gpslogger.ui.fragments.settings;
 
-import android.Manifest;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
+import android.text.InputType;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-
-import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
-import com.afollestad.materialdialogs.prefs.MaterialListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.ftp.FtpManager;
 import com.mendhak.gpslogger.ui.Dialogs;
-import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 import de.greenrobot.event.EventBus;
+import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.Input;
+import eltos.simpledialogfragment.form.SimpleFormDialog;
+
 import org.slf4j.Logger;
 
 public class FtpFragment
-        extends PreferenceFragment implements Preference.OnPreferenceClickListener, PreferenceValidator {
+        extends PreferenceFragmentCompat
+        implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener,
+        SimpleDialog.OnDialogResultListener,
+        PreferenceValidator {
     private static final Logger LOG = Logs.of(FtpFragment.class);
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.autoftpsettings);
+
+
+        findPreference(PreferenceNames.FTP_SERVER).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.FTP_SERVER).setSummary(preferenceHelper.getFtpServerName());
+
+        findPreference(PreferenceNames.FTP_USERNAME).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.FTP_USERNAME).setSummary(preferenceHelper.getFtpUsername());
+
+        findPreference(PreferenceNames.FTP_PASSWORD).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.FTP_PASSWORD).setSummary(preferenceHelper.getFtpPassword().replaceAll(".","*"));
+
+        findPreference(PreferenceNames.FTP_DIRECTORY).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.FTP_DIRECTORY).setSummary(preferenceHelper.getFtpDirectory());
+
+        findPreference(PreferenceNames.FTP_PORT).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.FTP_PORT).setSummary(String.valueOf(preferenceHelper.getFtpPort()));
+
 
         findPreference("autoftp_test").setOnPreferenceClickListener(this);
         findPreference("ftp_validatecustomsslcert").setOnPreferenceClickListener(this);
 
         registerEventBus();
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.autoftpsettings, rootKey);
     }
 
     @Override
@@ -82,25 +107,41 @@ public class FtpFragment
     public boolean onPreferenceClick(Preference preference) {
 
         if(preference.getKey().equals("ftp_validatecustomsslcert")){
-
             Networks.beginCertificateValidationWorkflow(getActivity(), preferenceHelper.getFtpServerName(), preferenceHelper.getFtpPort(), ServerType.FTP);
+            return true;
+        }
 
-        } else {
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_PASSWORD)){
+            SimpleFormDialog.build().title(R.string.autoftp_password)
+                    .fields(
+                            Input.plain(PreferenceNames.FTP_PASSWORD).text(preferenceHelper.getFtpPassword()).showPasswordToggle().inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                    ).show(this, PreferenceNames.FTP_PASSWORD);
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_PORT)){
+            SimpleFormDialog.build().title(R.string.autoftp_port)
+                    .fields(
+                            Input.plain(PreferenceNames.FTP_PORT).required().text(String.valueOf(preferenceHelper.getFtpPort())).inputType(InputType.TYPE_CLASS_NUMBER)
+                    )
+                    .show( this, PreferenceNames.FTP_PORT);
+        }
+
+        if (preference.getKey().equalsIgnoreCase("autoftp_test")) {
             FtpManager helper = new FtpManager(preferenceHelper);
 
-            MaterialEditTextPreference servernamePreference = (MaterialEditTextPreference) findPreference("autoftp_server");
-            MaterialEditTextPreference usernamePreference = (MaterialEditTextPreference) findPreference("autoftp_username");
-            MaterialEditTextPreference passwordPreference = (MaterialEditTextPreference) findPreference("autoftp_password");
-            MaterialEditTextPreference portPreference = (MaterialEditTextPreference) findPreference("autoftp_port");
-            CustomSwitchPreference useFtpsPreference = (CustomSwitchPreference) findPreference("autoftp_useftps");
-            MaterialListPreference sslTlsPreference = (MaterialListPreference) findPreference("autoftp_ssltls");
-            CustomSwitchPreference implicitPreference = (CustomSwitchPreference) findPreference("autoftp_implicit");
-            MaterialEditTextPreference directoryPreference = (MaterialEditTextPreference) findPreference("autoftp_directory");
+            String servernamePreference = preferenceHelper.getFtpServerName();
+            String usernamePreference = preferenceHelper.getFtpUsername();
+            String passwordPreference = preferenceHelper.getFtpPassword();
+            int portPreference = preferenceHelper.getFtpPort();
+            boolean useFtpsPreference = preferenceHelper.shouldFtpUseFtps();
+            String sslTlsPreference = preferenceHelper.getFtpProtocol();
+            boolean implicitPreference = preferenceHelper.isFtpImplicit();
+            String directoryPreference = preferenceHelper.getFtpDirectory();
 
-            if (!helper.validSettings(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
-                    Strings.toInt(portPreference.getText(), 21),
-                    useFtpsPreference.isChecked(), sslTlsPreference.getValue(),
-                    implicitPreference.isChecked())) {
+            if (!helper.validSettings(servernamePreference, usernamePreference, passwordPreference,
+                    portPreference,
+                    useFtpsPreference, sslTlsPreference,
+                    implicitPreference)) {
                 Dialogs.alert(getString(R.string.autoftp_invalid_settings),
                         getString(R.string.autoftp_invalid_summary),
                         getActivity());
@@ -110,9 +151,9 @@ public class FtpFragment
             Dialogs.progress((FragmentActivity) getActivity(), getString(R.string.autoftp_testing));
 
 
-            helper.testFtp(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
-                    directoryPreference.getText(), Strings.toInt(portPreference.getText(), 21), useFtpsPreference.isChecked(),
-                    sslTlsPreference.getValue(), implicitPreference.isChecked());
+            helper.testFtp(servernamePreference, usernamePreference, passwordPreference,
+                    directoryPreference, portPreference, useFtpsPreference,
+                    sslTlsPreference, implicitPreference);
         }
 
 
@@ -139,5 +180,43 @@ public class FtpFragment
             else {
                 Dialogs.alert(getString(R.string.success), "FTP Test Succeeded", getActivity());
             }
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_SERVER)){
+            preference.setSummary(newValue.toString());
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_USERNAME)){
+            preference.setSummary(newValue.toString());
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_DIRECTORY)){
+            preference.setSummary(newValue.toString());
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.FTP_PASSWORD) && which == BUTTON_POSITIVE){
+            String ftpPass = extras.getString(PreferenceNames.FTP_PASSWORD);
+            preferenceHelper.setFtpPassword(ftpPass);
+            findPreference(PreferenceNames.FTP_PASSWORD).setSummary(ftpPass.replaceAll(".","*"));
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.FTP_PORT) && which == BUTTON_POSITIVE){
+            String port = extras.getString(PreferenceNames.FTP_PORT);
+            preferenceHelper.setFtpPort(port);
+            findPreference(PreferenceNames.FTP_PORT).setSummary(port);
+            return true;
+        }
+        return false;
     }
 }
