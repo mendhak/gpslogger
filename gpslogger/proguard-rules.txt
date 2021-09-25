@@ -209,11 +209,6 @@
 #-keep class android.support.v7.widget.RoundRectDrawable { *; }
 
 
-# --------------------------------------------------------------------------------- #
-# Material Dialogs
-# --------------------------------------------------------------------------------- #
--dontnote com.afollestad.materialdialogs.internal.MDTintHelper
--keep,includedescriptorclasses class com.afollestad.materialdialogs.** { *; }
 
 # --------------------------------------------------------------------------------- #
 # Action button
