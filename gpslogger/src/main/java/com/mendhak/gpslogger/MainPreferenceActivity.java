@@ -105,8 +105,9 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 break;
             case PREFERENCE_FRAGMENTS.CUSTOMURL:
                 setTitle(R.string.log_customurl_title);
-                preferenceFragment = new CustomUrlFragment();
-                break;
+                preferenceFragmentCompat = new CustomUrlFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
+                return;
             case PREFERENCE_FRAGMENTS.DROPBOX:
                 setTitle(R.string.dropbox_setup_title);
                 preferenceFragment = new DropboxAuthorizationFragment();

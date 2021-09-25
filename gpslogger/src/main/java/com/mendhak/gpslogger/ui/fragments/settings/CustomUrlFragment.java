@@ -21,16 +21,13 @@
 package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.os.Bundle;
-import android.preference.EditTextPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatEditText;
-import android.view.WindowManager;
-import android.widget.EditText;
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
+import androidx.preference.EditTextPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import android.text.InputType;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
@@ -45,30 +42,52 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
 
+import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.Input;
+import eltos.simpledialogfragment.form.SimpleFormDialog;
 
 
-public class CustomUrlFragment extends PreferenceFragment implements
+public class CustomUrlFragment extends PreferenceFragmentCompat implements
+        SimpleDialog.OnDialogResultListener,
         PreferenceValidator,
         Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
     private static final Logger LOG = Logs.of(CustomUrlFragment.class);
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.customurlsettings);
+
 
         EditTextPreference urlPathPreference = (EditTextPreference)findPreference(PreferenceNames.LOG_TO_URL_PATH);
         urlPathPreference.setSummary(PreferenceHelper.getInstance().getCustomLoggingUrl());
         urlPathPreference.setText(PreferenceHelper.getInstance().getCustomLoggingUrl());
         urlPathPreference.setOnPreferenceChangeListener(this);
 
+        findPreference(PreferenceNames.LOG_TO_URL_HEADERS).setSummary(preferenceHelper.getCustomLoggingHTTPHeaders());
+        findPreference(PreferenceNames.LOG_TO_URL_HEADERS).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.LOG_TO_URL_METHOD).setSummary(preferenceHelper.getCustomLoggingHTTPMethod());
+        findPreference(PreferenceNames.LOG_TO_URL_METHOD).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.LOG_TO_URL_BODY).setSummary(preferenceHelper.getCustomLoggingHTTPBody());
+        findPreference(PreferenceNames.LOG_TO_URL_BODY).setOnPreferenceChangeListener(this);
+
         findPreference("customurl_legend_1").setOnPreferenceClickListener(this);
         findPreference("customurl_validatecustomsslcert").setOnPreferenceClickListener(this);
-        findPreference("log_customurl_basicauth").setOnPreferenceClickListener(this);
 
+        findPreference("log_customurl_basicauth").setOnPreferenceClickListener(this);
+        if(!Strings.isNullOrEmpty(preferenceHelper.getCustomLoggingBasicAuthUsername())){
+            findPreference("log_customurl_basicauth").setSummary(preferenceHelper.getCustomLoggingBasicAuthUsername() + ":" + preferenceHelper.getCustomLoggingBasicAuthPassword().replaceAll(".","*"));
+        }
+
+
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.customurlsettings, rootKey);
     }
 
 
@@ -76,7 +95,21 @@ public class CustomUrlFragment extends PreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if(preference.getKey().equals(PreferenceNames.LOG_TO_URL_PATH)){
             preference.setSummary(newValue.toString());
+            return true;
         }
+        if(preference.getKey().equals(PreferenceNames.LOG_TO_URL_HEADERS)){
+            preference.setSummary(newValue.toString());
+            return true;
+        }
+        if(preference.getKey().equals(PreferenceNames.LOG_TO_URL_METHOD)){
+            preference.setSummary(newValue.toString());
+            return true;
+        }
+        if(preference.getKey().equals(PreferenceNames.LOG_TO_URL_BODY)){
+            preference.setSummary(newValue.toString());
+            return true;
+        }
+
         return true;
     }
 
@@ -119,41 +152,17 @@ public class CustomUrlFragment extends PreferenceFragment implements
             return true;
         }
         else if(preference.getKey().equals("log_customurl_basicauth")){
-            MaterialDialog alertDialog = new MaterialDialog.Builder(getActivity())
+
+            SimpleFormDialog.build()
                     .title(R.string.customurl_http_basicauthentication)
-                    .customView(R.layout.customurl_basicauthview, true)
+                    .neg(R.string.cancel)
+                    .pos(R.string.ok)
+                    .fields(
+                            Input.plain(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME).text(preferenceHelper.getCustomLoggingBasicAuthUsername()).required(),
+                            Input.plain(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD).text(preferenceHelper.getCustomLoggingBasicAuthPassword()).showPasswordToggle().inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD).required()
+                    )
+                    .show(this,PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME);
 
-                    .autoDismiss(false)
-                    .negativeText(R.string.cancel)
-                    .positiveText(R.string.ok)
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                            String basicAuthUsername = ((EditText)materialDialog.getView().findViewById(R.id.basicauth_username)).getText().toString();
-                            PreferenceHelper.getInstance().setCustomLoggingBasicAuthUsername(basicAuthUsername);
-
-                            String basicAuthPassword = ((EditText)materialDialog.getView().findViewById(R.id.basicauth_pwd)).getText().toString();
-                            PreferenceHelper.getInstance().setCustomLoggingBasicAuthPassword(basicAuthPassword);
-
-                            materialDialog.dismiss();
-                        }
-                    })
-                    .onNegative(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                            materialDialog.dismiss();
-                        }
-                    })
-                    .build();
-
-
-            final AppCompatEditText bauthUsernameText = (AppCompatEditText) alertDialog.getCustomView().findViewById(R.id.basicauth_username);
-            bauthUsernameText.setText(PreferenceHelper.getInstance().getCustomLoggingBasicAuthUsername());
-            final AppCompatEditText bauthPwdText = (AppCompatEditText) alertDialog.getCustomView().findViewById(R.id.basicauth_pwd);
-            bauthPwdText.setText(PreferenceHelper.getInstance().getCustomLoggingBasicAuthPassword());
-
-            alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-            alertDialog.show();
             return true;
         }
 
@@ -161,6 +170,16 @@ public class CustomUrlFragment extends PreferenceFragment implements
     }
 
 
+    @Override
+    public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME) && which == BUTTON_POSITIVE){
+            String basicAuthUsername = extras.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME);
+            String basicAuthPass = extras.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD);
+            preferenceHelper.setCustomLoggingBasicAuthUsername(basicAuthUsername);
+            preferenceHelper.setCustomLoggingBasicAuthPassword(basicAuthPass);
+            findPreference("log_customurl_basicauth").setSummary(preferenceHelper.getCustomLoggingBasicAuthUsername() + ":" + preferenceHelper.getCustomLoggingBasicAuthPassword().replaceAll(".","*"));
 
-
+        }
+        return false;
+    }
 }
