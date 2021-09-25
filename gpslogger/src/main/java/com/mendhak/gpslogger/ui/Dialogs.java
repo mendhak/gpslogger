@@ -150,9 +150,6 @@ public class Dialogs {
     }
 
     public static void hideProgress() {
-        if (pd != null) {
-            pd.dismiss();
-        }
         if(simpleProgress!=null){
             simpleProgress.dismiss();
         }
