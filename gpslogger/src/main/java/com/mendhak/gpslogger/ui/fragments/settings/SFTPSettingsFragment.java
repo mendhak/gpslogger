@@ -184,55 +184,45 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
 
     @Override
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_HOST)){
-            if (which == BUTTON_POSITIVE) {
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_HOST) && which == BUTTON_POSITIVE){
                 String sftpHost = extras.getCharSequence(PreferenceNames.SFTP_HOST).toString();
                 preferenceHelper.setSFTPHost(sftpHost);
                 findPreference(PreferenceNames.SFTP_HOST).setSummary(sftpHost);
                 return true;
-            }
         }
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_PORT)){
-            if (which == BUTTON_POSITIVE) {
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_PORT) && which == BUTTON_POSITIVE){
                 String sftpPort = extras.getString(PreferenceNames.SFTP_PORT);
                 preferenceHelper.setSFTPPort(sftpPort);
                 findPreference(PreferenceNames.SFTP_PORT).setSummary(String.valueOf(sftpPort));
                 return true;
-            }
         }
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_REMOTE_SERVER_PATH)){
-            if (which==BUTTON_POSITIVE) {
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_REMOTE_SERVER_PATH) && which == BUTTON_POSITIVE){
                 String remoteServerPath = extras.getString(PreferenceNames.SFTP_REMOTE_SERVER_PATH);
                 preferenceHelper.setSFTPRemoteServerPath(remoteServerPath);
                 findPreference(PreferenceNames.SFTP_REMOTE_SERVER_PATH).setSummary(remoteServerPath);
                 return true;
-            }
         }
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_USER)){
-            if (which==BUTTON_POSITIVE) {
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_USER) && which == BUTTON_POSITIVE){
                 String sftpUser = extras.getString(PreferenceNames.SFTP_USER);
                 preferenceHelper.setSFTPUser(sftpUser);
                 findPreference(PreferenceNames.SFTP_USER).setSummary(sftpUser);
                 return true;
-            }
         }
 
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_PASSWORD)){
-            if (which==BUTTON_POSITIVE) {
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_PASSWORD) && which == BUTTON_POSITIVE){
                 String sftpPassword = extras.getString(PreferenceNames.SFTP_PASSWORD);
                 preferenceHelper.setSFTPPassword(sftpPassword);
                 findPreference(PreferenceNames.SFTP_PASSWORD).setSummary(sftpPassword.replaceAll(".","*"));
                 return true;
-            }
         }
 
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE)){
-            if (which==BUTTON_POSITIVE) {
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE) && which == BUTTON_POSITIVE){
                 String privKeyPass = extras.getString(PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE);
                 preferenceHelper.setSFTPPrivateKeyPassphrase(privKeyPass);
                 findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE).setSummary(privKeyPass.replaceAll(".","*"));
                 return true;
-            }
         }
 
         if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_KNOWN_HOST_KEY) && which == BUTTON_POSITIVE){

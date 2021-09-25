@@ -149,61 +149,6 @@ public class Dialogs {
         SimpleErrorDialog.build().title(friendlyMessage).msg("TEST").msgHtml(getFormattedErrorMessageForDisplay(errorMessage,throwable)).show(activity);
     }
 
-    public static void error(String title, final String friendlyMessage, final String errorMessage, final Throwable throwable, final Context context){
-
-        final String messageFormatted = getFormattedErrorMessageForDisplay(errorMessage, throwable);
-
-        MaterialDialog alertDialog = new MaterialDialog.Builder(context)
-                .title(title)
-                .customView(R.layout.error_alertview, true)
-                .autoDismiss(false)
-                .negativeText("Copy")
-                .positiveText(R.string.ok)
-                .neutralText("Details")
-                .onNeutral(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-
-                        final ExpandableTextView expTv1 = (ExpandableTextView) materialDialog.getCustomView().findViewById(R.id.error_expand_text_view);
-                        expTv1.findViewById(R.id.expand_collapse).performClick();
-
-                    }
-                })
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-
-                        android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                        android.content.ClipData clip = android.content.ClipData.newPlainText("Gpslogger error message", getFormattedErrorMessageForPlainText(friendlyMessage, throwable));
-                        clipboard.setPrimaryClip(clip);
-
-                        materialDialog.dismiss();
-                    }
-                })
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                        materialDialog.dismiss();
-                    }
-                })
-                .build();
-
-
-        final ExpandableTextView expTv1 = (ExpandableTextView) alertDialog.getCustomView().findViewById(R.id.error_expand_text_view);
-        expTv1.setText(Html.fromHtml(messageFormatted));
-        TextView tv = (TextView) expTv1.findViewById(R.id.expandable_text);
-        tv.setMovementMethod(LinkMovementMethod.getInstance());
-
-        TextView tvFriendly = (TextView)alertDialog.getCustomView().findViewById(R.id.error_friendly_message);
-        tvFriendly.setText(friendlyMessage);
-
-        if (context instanceof Activity && !((Activity) context).isFinishing()) {
-            alertDialog.show();
-        } else {
-            alertDialog.show();
-        }
-    }
-
     /**
      * Displays a message box to the user with an OK button.
      *
