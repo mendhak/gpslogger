@@ -5,6 +5,7 @@
     <string name="navigation_drawer_close">Fermer le menu de navigation</string>
     <string name="app_name">GPSLogger</string>
     <string name="settings_screen_name">Paramètres de GPSLogger</string>
+    <string name="ok">OK</string>
     <string name="cancel">Annuler</string>
     <string name="could_not_write_to_file">Impossible d\'écrire dans le fichier</string>
     <string name="add_description">Ajouter une description</string>
@@ -40,12 +41,20 @@
     <string name="meters">&#160;mètres</string>
     <string name="error">Erreur</string>
     <string name="error_connection">Erreur de connexion. Merci de vérifier les paramètres de l\'appareil.</string>
+    <string name="seconds">&#160;s</string>
+    <string name="minutes">&#160;min</string>
     <string name="hours">&#160;h</string>
     <string name="gpsprovider_unavailable">Aucun fournisseur de positionnement GPS disponible. Merci de vérifier les paramètres de position et de choisir un fournisseur.    </string>
     <string name="started">Débuté</string>
     <string name="providername_gps">Satellites GPS</string>
     <string name="providername_celltower">Relais téléphonique</string>
     <string name="not_applicable">n/d</string>
+    <string name="meters_per_second">&#160;m/s</string>
+    <string name="feet_per_second">&#160;ft/s</string>
+    <string name="miles_per_hour">&#160;mi/h</string>
+    <string name="miles">&#160;mi</string>
+    <string name="kilometers_per_hour">&#160;km/h</string>
+    <string name="kilometers">&#160;km</string>
     <string name="unknown_direction">inconnu</string>
     <string name="sorry">Désolé</string>
     <string name="success">Succès</string>
@@ -317,6 +326,7 @@ une plus grande précision à basses fréquences.    </string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Autoriser tout le temps</b> - Permettre à cette application de recevoir des mises à jour de localisation lors de l’exécution en arrière-plan. ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignorer l’optimisation de la batterie</b> - Permettre à cette application de s’exécuter en arrière-plan en réduisant l’optimisation de la batterie. ]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Une ou plusieurs autorisations requises par cette application ont été refusées. Il sera nécessaire d’aller à l’écran des paramètres de l\'application pour les lui accorder.<br /><br />Si des autorisations ont été définitivement refusées, il est possible de les réinitialiser dans les paramètres du système. ]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Pour permettre à GPSLogger de fonctionner en arrière-plan, vous devrez lui accorder une permission supplémentaire. À l’écran suivant, sélectionnez : ]]></string>
     <string name="privacy_policy">Politique de confidentialité</string>
     <string name="debuglog_attach_to_email">Joindre le journal de débogage à un courriel</string>
     <string name="debuglog_attach_to_email_summary">Joindre le journal de débogage à un courriel avec quelques informations de diagnostic</string>
@@ -328,6 +338,7 @@ une plus grande précision à basses fréquences.    </string>
     <string name="ssl_certificate_add_to_keystore">Ajouter ce certificat au magasin de clés local ?</string>
     <string name="ssl_certificate_is_valid">Le certificat est valide</string>
     <string name="hide_notification_from_status_bar">Masquer les notifications de la barre d’état</string>
+    <string name="sftp_setup_title">SFTP</string>
     <string name="sftp_private_key_path">Clé privée</string>
     <string name="sftp_private_key_passphrase">Mot de passe de clé privée</string>
     <string name="sftp_validate_test_upload">Valider la clé d’hôte et tester l\'envoi</string>
@@ -340,4 +351,6 @@ une plus grande précision à basses fréquences.    </string>
     <string name="customurl_http_method">Méthode HTTP</string>
     <string name="customurl_http_basicauthentication">Authentification de base</string>
     <string name="hide_notification_from_status_bar_disallowed">Masquer les notifications n’est pas autorisé dans Android Oreo ou supérieur</string>
+    <string name="reset_app_summary">Cela va réinitialiser l’application, supprimer toutes les préférences, supprimer les fichiers GPSLogger, et révoquer les autorisations accordées à cette application. Toutes les données seront perdues!</string>
+    <string name="reset_app_title">Réinitialiser l’application</string>
 </resources>
