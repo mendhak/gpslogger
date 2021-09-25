@@ -20,7 +20,6 @@
 package com.mendhak.gpslogger;
 
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.preference.PreferenceFragmentCompat;
@@ -39,7 +38,6 @@ public class MainPreferenceActivity extends AppCompatActivity {
 
     private static final Logger LOG = Logs.of(MainPreferenceActivity.class);
 
-    PreferenceFragment preferenceFragment = null;
     PreferenceFragmentCompat preferenceFragmentCompat = null;
 
     @Override
@@ -54,10 +52,6 @@ public class MainPreferenceActivity extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-
-
-
 
         String whichFragment = PREFERENCE_FRAGMENTS.GENERAL;
 
@@ -75,69 +69,54 @@ public class MainPreferenceActivity extends AppCompatActivity {
             case PREFERENCE_FRAGMENTS.GENERAL:
                 setTitle(R.string.settings_screen_name);
                 preferenceFragmentCompat = new GeneralSettingsFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
-                return;
+                break;
             case PREFERENCE_FRAGMENTS.LOGGING:
                 setTitle(R.string.pref_logging_title);
                 preferenceFragmentCompat = new LoggingSettingsFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
-                return;
+                break;
             case PREFERENCE_FRAGMENTS.PERFORMANCE:
                 setTitle(R.string.pref_performance_title);
                 preferenceFragmentCompat = new PerformanceSettingsFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
-                return;
+                break;
             case PREFERENCE_FRAGMENTS.UPLOAD:
                 setTitle(R.string.title_drawer_uploadsettings);
                 preferenceFragmentCompat = new UploadSettingsFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
-                return;
+                break;
             case PREFERENCE_FRAGMENTS.FTP:
                 setTitle(R.string.autoftp_setup_title);
                 preferenceFragmentCompat = new FtpFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
-                return;
+                break;
             case PREFERENCE_FRAGMENTS.EMAIL:
                 setTitle(R.string.autoemail_title);
                 preferenceFragmentCompat = new AutoEmailFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
-                return;
+                break;
             case PREFERENCE_FRAGMENTS.OPENGTS:
                 setTitle(R.string.opengts_setup_title);
                 preferenceFragmentCompat = new OpenGTSFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
-                return;
+                break;
             case PREFERENCE_FRAGMENTS.CUSTOMURL:
                 setTitle(R.string.log_customurl_title);
                 preferenceFragmentCompat = new CustomUrlFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
-                return;
+                break;
             case PREFERENCE_FRAGMENTS.DROPBOX:
                 setTitle(R.string.dropbox_setup_title);
                 preferenceFragmentCompat = new DropboxAuthorizationFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
-                return;
+                break;
             case PREFERENCE_FRAGMENTS.OSM:
                 setTitle(R.string.osm_setup_title);
                 preferenceFragmentCompat = new OSMAuthorizationFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
-                return;
+                break;
             case PREFERENCE_FRAGMENTS.OWNCLOUD:
                 setTitle(R.string.owncloud_setup_title);
                 preferenceFragmentCompat = new OwnCloudSettingsFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
-                return;
+                break;
             case PREFERENCE_FRAGMENTS.SFTP:
                 setTitle(R.string.sftp_setup_title);
                 preferenceFragmentCompat = new SFTPSettingsFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
-                return;
+                break;
         }
 
-        getFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, preferenceFragment)
-                .commit();
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
     }
 
 
@@ -150,8 +129,8 @@ public class MainPreferenceActivity extends AppCompatActivity {
     }
 
     private boolean isFormValid(){
-        if(preferenceFragment instanceof PreferenceValidator){
-            if( !((PreferenceValidator)preferenceFragment).isValid() ){
+        if(preferenceFragmentCompat instanceof PreferenceValidator){
+            if( !((PreferenceValidator)preferenceFragmentCompat).isValid() ){
                 Dialogs.alert(getString(R.string.autoftp_invalid_settings),
                         getString(R.string.autoftp_invalid_summary),
                         this);
