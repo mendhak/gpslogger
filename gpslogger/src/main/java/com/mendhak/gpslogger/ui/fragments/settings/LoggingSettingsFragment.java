@@ -131,11 +131,12 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
         if(preference.getKey().equalsIgnoreCase("gpslogger_folder")){
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
-                Dialogs.alert(getString(R.string.error),getString(R.string.gpslogger_custom_path_need_permission),getActivity(), which -> {
-                    Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
-                    getActivity().startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
-                });
-                return true;
+                SimpleDialog.build()
+                        .title(R.string.error)
+                        .msg(R.string.gpslogger_custom_path_need_permission)
+                        .show(this, "FILE_PERMISSIONS_REQUIRED");
+
+                return false;
             }
 
             StorageChooser chooser = Dialogs.directoryChooser(getActivity(), getActivity().getFragmentManager());
@@ -250,6 +251,13 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
             String customFilename = extras.getString("customfilename");
             preferenceHelper.setCustomFileName(customFilename);
         }
+
+        if(dialogTag.equalsIgnoreCase("FILE_PERMISSIONS_REQUIRED") && which == BUTTON_POSITIVE){
+            Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+            getActivity().startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
+            return true;
+        }
+
         return false;
     }
 }
