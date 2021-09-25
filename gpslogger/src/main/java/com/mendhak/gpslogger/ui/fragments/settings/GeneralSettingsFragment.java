@@ -26,47 +26,38 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
 import android.widget.Toast;
-import com.afollestad.materialdialogs.prefs.MaterialListPreference;
+
+import androidx.annotation.NonNull;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
-import com.mendhak.gpslogger.ui.Dialogs;
-import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 
 import org.slf4j.Logger;
 
 import java.io.File;
 import java.util.*;
 
-/**
- * A {@link PreferenceActivity} that presents a set of application settings. On
- * handset devices, settings are presented as a single list. On tablets,
- * settings are split by category, with category headers shown to the left of
- * the list of settings.
- * <p/>
- * See <a href="http://developer.android.com/design/patterns/settings.html">
- * Android Design: Settings</a> for design guidelines and the <a
- * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
- * API Guide</a> for more information on developing a Settings UI.
- */
+import eltos.simpledialogfragment.SimpleDialog;
 
-public class GeneralSettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
+
+public class GeneralSettingsFragment extends PreferenceFragmentCompat implements
+        SimpleDialog.OnDialogResultListener,
+        Preference.OnPreferenceClickListener,
+        Preference.OnPreferenceChangeListener {
 
     Logger LOG = Logs.of(GeneralSettingsFragment.class);
-    int aboutClickCounter = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        addPreferencesFromResource(R.xml.pref_general);
 
         findPreference("enableDisableGps").setOnPreferenceClickListener(this);
         findPreference("debuglogtoemail").setOnPreferenceClickListener(this);
@@ -80,10 +71,10 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
 
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            Preference hideNotificiationPreference = findPreference("hide_notification_from_status_bar");
+            SwitchPreferenceCompat hideNotificiationPreference = findPreference("hide_notification_from_status_bar");
             hideNotificiationPreference.setEnabled(false);
             hideNotificiationPreference.setDefaultValue(false);
-            ((CustomSwitchPreference)hideNotificiationPreference).setChecked(false);
+            hideNotificiationPreference.setChecked(false);
             hideNotificiationPreference.setSummary(getString(R.string.hide_notification_from_status_bar_disallowed));
         }
 
@@ -98,8 +89,13 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         }
     }
 
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.pref_general, rootKey);
+    }
+
     private void setLanguagesPreferenceItem() {
-        MaterialListPreference langs = (MaterialListPreference)findPreference("changelanguage");
+        ListPreference langs = findPreference("changelanguage");
 
         Map<String,String> localeDisplayNames = Strings.getAvailableLocales(getActivity());
 
@@ -113,7 +109,7 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
     }
 
     private void setCoordinatesFormatPreferenceItem() {
-        MaterialListPreference coordFormats = (MaterialListPreference)findPreference("coordinatedisplayformat");
+        ListPreference coordFormats = findPreference("coordinatedisplayformat");
         String[] coordinateDisplaySamples = new String[]{"12° 34' 56.7890\" S","12° 34.5678' S","-12.345678"};
         coordFormats.setEntries(coordinateDisplaySamples);
         coordFormats.setEntryValues(new String[]{PreferenceNames.DegreesDisplayFormat.DEGREES_MINUTES_SECONDS.toString(),PreferenceNames.DegreesDisplayFormat.DEGREES_DECIMAL_MINUTES.toString(),PreferenceNames.DegreesDisplayFormat.DECIMAL_DEGREES.toString()});
@@ -133,14 +129,12 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
         }
 
         if (preference.getKey().equals("resetapp")) {
-            Dialogs.alert(getString(R.string.reset_app_title), getString(R.string.reset_app_summary), getActivity(), true, new Dialogs.MessageBoxCallback() {
-                @Override
-                public void messageBoxResult(int which) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && which == Dialogs.AutoCompleteCallback.OK){
-                            ((ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE)).clearApplicationUserData();
-                    }
-                }
-            });
+            SimpleDialog.build()
+                    .title(getString(R.string.reset_app_title))
+                    .msgHtml(getString(R.string.reset_app_summary))
+                    .neg(R.string.cancel)
+                    .show(this, "RESET_APP");
+            return true;
         }
 
         if(preference.getKey().equals("debuglogtoemail")){
@@ -169,6 +163,8 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
                 Toast.makeText(getActivity(), "debuglog.txt not found", Toast.LENGTH_LONG).show();
             }
 
+            return true;
+
         }
 
         return false;
@@ -187,6 +183,16 @@ public class GeneralSettingsFragment extends PreferenceFragment implements Prefe
             LOG.debug("Coordinate format chosen: " + PreferenceHelper.getInstance().getDisplayLatLongFormat());
             setCoordinatesFormatPreferenceItem();
             return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
+        if(dialogTag.equalsIgnoreCase("RESET_APP") && which == BUTTON_POSITIVE){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+                    ((ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE)).clearApplicationUserData();
+            }
         }
         return false;
     }

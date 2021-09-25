@@ -4,31 +4,31 @@
 
 
 
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
         android:title="@string/startonbootup_title"
         android:summary="@string/startonbootup_summary"
         android:key="startonbootup"/>
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
         android:title="@string/startonapplaunch_title"
         android:summary="@string/startonapplaunch_summary"
         android:key="startonapplaunch"/>
 
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
         android:title="@string/display_imperial_title"
         android:summary="@string/display_imperial_summary"
         android:key="useImperial"/>
 
-    <com.afollestad.materialdialogs.prefs.MaterialListPreference
+    <ListPreference
         android:key="coordinatedisplayformat"
         android:title="@string/coordinate_display_format"
         />
 
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
         android:title="@string/hide_notification_buttons"
         android:summary="@string/restart_required"
         android:key="hide_notification_buttons"
         />
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
         android:title="@string/hide_notification_from_status_bar"
         android:summary="@string/restart_required"
         android:key="hide_notification_from_status_bar"
@@ -42,7 +42,7 @@
         android:key="enableDisableGps"
         android:defaultValue="false"/>
 
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
         android:title="@string/debuglog_title"
         android:summary="@string/debuglog_summary"
         android:key="debugtofile"
@@ -54,7 +54,7 @@
         android:key="debuglogtoemail"
         android:enabled="true"/>
 
-    <com.afollestad.materialdialogs.prefs.MaterialListPreference
+    <ListPreference
         android:key="changelanguage"
         android:title="@string/change_language_title"
         android:summary="@string/change_language_summary"
@@ -68,7 +68,7 @@
         android:key="resetapp"
         android:enabled="true"/>
 
-    <Preference android:key="about_version_info"></Preference>
+    <Preference android:key="about_version_info"/>
 
     <Preference
         android:key="gpslogger_privacypolicy"
@@ -82,7 +82,7 @@
         android:title="@string/tip_coffee"
         android:icon="@drawable/coffee" >
         <intent android:action="android.intent.action.VIEW"
-                android:data="market://details?id=com.mendhak.gpsloggerpro" />
+                android:data="https://paypal.me/mendhak" />
     </Preference>
 
     <Preference

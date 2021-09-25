@@ -22,20 +22,7 @@ package com.mendhak.gpslogger.ui;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.content.Context;
-import android.content.DialogInterface;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-import android.text.Html;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.codekidlabs.storagechooser.StorageChooser;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Strings;
@@ -45,7 +32,6 @@ import com.mendhak.gpslogger.ui.components.SimpleErrorDialog;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 import eltos.simpledialogfragment.SimpleDialog;
@@ -54,7 +40,6 @@ import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
 
 public class Dialogs {
-    private static MaterialDialog pd;
     private static SimpleDialog simpleProgress;
 
     protected static String getFormattedErrorMessageForDisplay(String message, Throwable throwable) {
@@ -159,56 +144,6 @@ public class Dialogs {
         SimpleDialog.build().title(title).msgHtml(message).show((FragmentActivity) activity);
     }
 
-
-    /**
-     * Displays a message box to the user with an OK button.
-     *
-     * @param title
-     * @param message
-     * @param context   The calling class, such as GpsMainActivity.this or
-     *                    mainActivity.
-     * @param msgCallback An object which implements IHasACallBack so that the
-     *                    click event can call the callback method.
-     */
-    public static void alert(String title, String message, Context context, boolean includeCancel, final MessageBoxCallback msgCallback) {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(context)
-                .title(title)
-                .content(Html.fromHtml(message))
-                .positiveText(R.string.ok)
-
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                        if (msgCallback != null) {
-                            msgCallback.messageBoxResult(MessageBoxCallback.OK);
-                        }
-                    }
-                })
-                ;
-
-        if(includeCancel){
-            builder.negativeText(R.string.cancel);
-            builder.onNegative(new MaterialDialog.SingleButtonCallback() {
-                @Override
-                public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-                    if (msgCallback != null) {
-                        msgCallback.messageBoxResult(MessageBoxCallback.CANCEL);
-                    }
-                }
-            });
-        }
-
-
-         MaterialDialog alertDialog = builder.build();
-
-        if (context instanceof Activity && !((Activity) context).isFinishing()) {
-            alertDialog.show();
-        } else {
-            alertDialog.show();
-        }
-
-    }
-
     public static void progress(androidx.fragment.app.FragmentActivity activity, String title){
         simpleProgress = SimpleProgressDialog.bar().title(title);
         simpleProgress.show(activity);
@@ -239,19 +174,4 @@ public class Dialogs {
                 .show(activity, cacheKey);
     }
 
-
-    public interface MessageBoxCallback {
-
-        int CANCEL = 0;
-        int OK = 1;
-
-        void messageBoxResult(int which);
-    }
-
-    public interface AutoCompleteCallback{
-        int CANCEL = 0;
-        int OK = 1;
-
-        void messageBoxResult(int which, MaterialDialog dialog, String enteredText);
-    }
 }
