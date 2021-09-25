@@ -769,6 +769,10 @@ public class PreferenceHelper {
     }
 
 
+    public void setOpenGTSServer(String server){
+        prefs.edit().putString(PreferenceNames.OPENGTS_SERVER, server).apply();
+    }
+
     /**
      * OpenGTS Server Port
      */
@@ -777,6 +781,9 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.OPENGTS_PORT, "");
     }
 
+    public void setOpenGTSServerPort(String port){
+        prefs.edit().putString(PreferenceNames.OPENGTS_PORT, port).apply();
+    }
 
     /**
      * Communication method when talking to OpenGTS (either UDP or HTTP)
@@ -795,6 +802,9 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.OPENGTS_SERVER_PATH, "");
     }
 
+    public void setOpenGTSServerPath(String path){
+        prefs.edit().putString(PreferenceNames.OPENGTS_SERVER_PATH, path).apply();
+    }
 
     /**
      * Device ID for OpenGTS communication

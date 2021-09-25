@@ -103,8 +103,9 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 return;
             case PREFERENCE_FRAGMENTS.OPENGTS:
                 setTitle(R.string.opengts_setup_title);
-                preferenceFragment = new OpenGTSFragment();
-                break;
+                preferenceFragmentCompat = new OpenGTSFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
+                return;
             case PREFERENCE_FRAGMENTS.CUSTOMURL:
                 setTitle(R.string.log_customurl_title);
                 preferenceFragmentCompat = new CustomUrlFragment();

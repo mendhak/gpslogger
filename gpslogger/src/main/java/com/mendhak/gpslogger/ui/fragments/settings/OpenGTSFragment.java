@@ -20,79 +20,123 @@
 package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceFragment;
+
+import android.text.InputType;
 import android.webkit.URLUtil;
-import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
-import com.afollestad.materialdialogs.prefs.MaterialListPreference;
+
+import androidx.annotation.NonNull;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.ui.Dialogs;
-import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 
-public class OpenGTSFragment extends PreferenceFragment implements
+
+import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.Input;
+import eltos.simpledialogfragment.form.SimpleFormDialog;
+
+public class OpenGTSFragment extends PreferenceFragmentCompat implements
+        SimpleDialog.OnDialogResultListener,
         PreferenceValidator,
-        OnPreferenceChangeListener,
-        OnPreferenceClickListener {
+        Preference.OnPreferenceChangeListener,
+        Preference.OnPreferenceClickListener {
+
+    PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.opengtssettings);
-
         findPreference("autoopengts_enabled").setOnPreferenceChangeListener(this);
-        findPreference("opengts_server").setOnPreferenceChangeListener(this);
-        findPreference("opengts_server_port").setOnPreferenceChangeListener(this);
-        findPreference("opengts_server_communication_method").setOnPreferenceChangeListener(this);
+
+        findPreference(PreferenceNames.OPENGTS_SERVER).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.OPENGTS_SERVER).setSummary(preferenceHelper.getOpenGTSServer());
+
+        findPreference(PreferenceNames.OPENGTS_PORT).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.OPENGTS_PORT).setSummary(preferenceHelper.getOpenGTSServerPort());
+
+
+        findPreference(PreferenceNames.OPENGTS_PROTOCOL).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.OPENGTS_PROTOCOL).setSummary(preferenceHelper.getOpenGTSServerCommunicationMethod());
+
+        findPreference(PreferenceNames.OPENGTS_SERVER_PATH).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.OPENGTS_SERVER_PATH).setSummary(preferenceHelper.getOpenGTSServerPath());
+
         findPreference("autoopengts_server_path").setOnPreferenceChangeListener(this);
         findPreference("opengts_device_id").setOnPreferenceChangeListener(this);
         findPreference("opengts_validatecustomsslcert").setOnPreferenceClickListener(this);
 
     }
 
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.opengtssettings, rootKey);
+    }
+
     public boolean onPreferenceClick(Preference preference) {
         if(preference.getKey().equals("opengts_validatecustomsslcert")){
+            if (!isFormValid()) {
+                Dialogs.alert(getString(R.string.autoftp_invalid_settings),
+                        getString(R.string.autoftp_invalid_summary),
+                        getActivity());
+                return true;
+            }
             Networks.beginCertificateValidationWorkflow(
                     getActivity(),
                     PreferenceHelper.getInstance().getOpenGTSServer(),
                     Strings.toInt(PreferenceHelper.getInstance().getOpenGTSServerPort(),443),
                     ServerType.HTTPS
             );
+            return true;
         }
-        if (!isFormValid()) {
-            Dialogs.alert(getString(R.string.autoftp_invalid_settings),
-                    getString(R.string.autoftp_invalid_summary),
-                    getActivity());
-            return false;
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENGTS_PORT)){
+            SimpleFormDialog.build().title(R.string.autoftp_port)
+                    .neg(R.string.cancel)
+                    .fields(
+                            Input.plain(PreferenceNames.OPENGTS_PORT).required().text(preferenceHelper.getOpenGTSServerPort()).inputType(InputType.TYPE_CLASS_NUMBER)
+                    )
+                    .show( this, PreferenceNames.OPENGTS_PORT);
+            return true;
         }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENGTS_SERVER_PATH)){
+            SimpleFormDialog.build().title(R.string.autoopengts_server_path)
+                    .neg(R.string.cancel)
+                    .msg(R.string.autoopengts_server_path_summary)
+                    .fields(
+                            Input.plain(PreferenceNames.OPENGTS_SERVER_PATH).required().text(preferenceHelper.getOpenGTSServerPath())
+                    )
+                    .show(this, PreferenceNames.OPENGTS_SERVER_PATH);
+        }
+
+
         return true;
     }
 
     private boolean isFormValid() {
 
-        CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("autoopengts_enabled");
-        if(!chkEnabled.isChecked()) {
+        if(!preferenceHelper.isOpenGtsAutoSendEnabled()) {
             return true;
         }
 
-        MaterialEditTextPreference txtOpenGTSServer = (MaterialEditTextPreference) findPreference("opengts_server");
-        MaterialEditTextPreference txtOpenGTSServerPort = (MaterialEditTextPreference) findPreference("opengts_server_port");
-        MaterialListPreference txtOpenGTSCommunicationMethod = (MaterialListPreference) findPreference("opengts_server_communication_method");
-        MaterialEditTextPreference txtOpenGTSServerPath = (MaterialEditTextPreference) findPreference("autoopengts_server_path");
-        MaterialEditTextPreference txtOpenGTSDeviceId = (MaterialEditTextPreference) findPreference("opengts_device_id");
+        String openGtsServer = preferenceHelper.getOpenGTSServer();
+        String openGtsPort = preferenceHelper.getOpenGTSServerPort();
+        String openGtsCommunication = preferenceHelper.getOpenGTSServerCommunicationMethod();
+        String openGtsServerPath = preferenceHelper.getOpenGTSServerPath();
+        String openGtsDeviceId = preferenceHelper.getOpenGTSDeviceId();
 
-        return  txtOpenGTSServer.getText() != null && txtOpenGTSServer.getText().length() > 0
-                && txtOpenGTSServerPort.getText() != null && isNumeric(txtOpenGTSServerPort.getText())
-                && txtOpenGTSCommunicationMethod.getValue() != null && txtOpenGTSCommunicationMethod.getValue().length() > 0
-                && txtOpenGTSDeviceId.getText() != null && txtOpenGTSDeviceId.getText().length() > 0
-                && URLUtil.isValidUrl("http://" + txtOpenGTSServer.getText() + ":" + txtOpenGTSServerPort.getText() + txtOpenGTSServerPath.getText());
+        return  openGtsServer != null && openGtsServer.length() > 0
+                && openGtsPort != null && isNumeric(openGtsPort)
+                && openGtsCommunication != null && openGtsCommunication.length() > 0
+                && openGtsDeviceId != null && openGtsDeviceId.length() > 0
+                && URLUtil.isValidUrl("http://" + openGtsServer + ":" + openGtsPort + openGtsServerPath);
 
     }
 
@@ -107,11 +151,36 @@ public class OpenGTSFragment extends PreferenceFragment implements
 
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENGTS_SERVER)){
+            preference.setSummary(newValue.toString());
+        }
         return true;
     }
 
     @Override
     public boolean isValid() {
         return isFormValid();
+    }
+
+    @Override
+    public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
+        if(which != BUTTON_POSITIVE){
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.OPENGTS_PORT)){
+            String port = extras.getString(PreferenceNames.OPENGTS_PORT);
+            preferenceHelper.setOpenGTSServerPort(port);
+            findPreference(PreferenceNames.OPENGTS_PORT).setSummary(port);
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.OPENGTS_SERVER_PATH)){
+            String path = extras.getString(PreferenceNames.OPENGTS_SERVER_PATH);
+            preferenceHelper.setOpenGTSServerPath(path);
+            findPreference(PreferenceNames.OPENGTS_SERVER_PATH).setSummary(path);
+            return true;
+        }
+        return false;
     }
 }
