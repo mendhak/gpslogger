@@ -112,8 +112,9 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 return;
             case PREFERENCE_FRAGMENTS.DROPBOX:
                 setTitle(R.string.dropbox_setup_title);
-                preferenceFragment = new DropboxAuthorizationFragment();
-                break;
+                preferenceFragmentCompat = new DropboxAuthorizationFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
+                return;
             case PREFERENCE_FRAGMENTS.OSM:
                 setTitle(R.string.osm_setup_title);
                 preferenceFragment = new OSMAuthorizationFragment();

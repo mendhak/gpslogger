@@ -23,10 +23,10 @@ package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
@@ -42,7 +42,7 @@ import org.slf4j.Logger;
 import java.io.File;
 
 
-public class DropboxAuthorizationFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
+public class DropboxAuthorizationFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceClickListener {
 
     private static final Logger LOG = Logs.of(DropboxAuthorizationFragment.class);
     DropBoxManager manager;
@@ -50,8 +50,6 @@ public class DropboxAuthorizationFragment extends PreferenceFragment implements 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        addPreferencesFromResource(R.xml.dropboxsettings);
 
         Preference pref = findPreference("dropbox_resetauth");
 
@@ -69,6 +67,11 @@ public class DropboxAuthorizationFragment extends PreferenceFragment implements 
         findPreference("dropbox_test_upload").setOnPreferenceClickListener(this);
         registerEventBus();
 
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.dropboxsettings, rootKey);
     }
 
     private void registerEventBus() {
