@@ -19,10 +19,10 @@
 
 package com.mendhak.gpslogger.ui.fragments.display;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.R;
@@ -82,7 +82,7 @@ public abstract class GenericViewFragment extends Fragment {
         SimpleDialog.build().msg(R.string.gpsprovider_unavailable)
                 .pos(R.string.ok)
                 .neg(R.string.cancel)
-                .show((FragmentActivity) getActivity(), "GPS_PROVIDER_UNAVAILABLE");
+                .show( getActivity(), "GPS_PROVIDER_UNAVAILABLE");
 
     }
 

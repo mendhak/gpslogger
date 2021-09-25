@@ -23,8 +23,6 @@ package com.mendhak.gpslogger;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.*;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -47,6 +45,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.appcompat.widget.ActionMenuView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.*;
@@ -518,7 +518,7 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
     private void removeFragmentsAndActionBar(){
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.remove(getCurrentFragment());
         transaction.commit();
         getSupportActionBar().hide();
@@ -919,7 +919,7 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
     private void loadFragmentView(int position){
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         switch (position) {
             default:
@@ -941,7 +941,7 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
     private GenericViewFragment getCurrentFragment(){
-        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.container);
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
         if (currentFragment instanceof GenericViewFragment) {
             return ((GenericViewFragment) currentFragment);
         }
