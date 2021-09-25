@@ -85,6 +85,7 @@ public class UploadSettingsFragment
                     .fields(
                             Input.plain(PreferenceNames.AUTOSEND_FREQUENCY)
                                     .required()
+                                    .hint(R.string.autosend_frequency_hint)
                                     .text(String.valueOf(preferenceHelper.getAutoSendInterval()))
                                     .inputType(InputType.TYPE_CLASS_NUMBER)
                     )
