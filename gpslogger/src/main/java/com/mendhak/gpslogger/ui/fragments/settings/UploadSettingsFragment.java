@@ -21,11 +21,21 @@ package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
+import android.text.InputType;
+
+import androidx.annotation.NonNull;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+
 import com.mendhak.gpslogger.MainPreferenceActivity;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
+
+import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.Input;
+import eltos.simpledialogfragment.form.SimpleFormDialog;
 
 /**
  * A {@link android.preference.PreferenceActivity} that presents a set of application settings. On
@@ -39,13 +49,18 @@ import com.mendhak.gpslogger.common.Strings;
  * API Guide</a> for more information on developing a Settings UI.
  */
 
-public class UploadSettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
+public class UploadSettingsFragment
+        extends PreferenceFragmentCompat
+        implements Preference.OnPreferenceClickListener, SimpleDialog.OnDialogResultListener {
+
+    PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.pref_upload);
+        findPreference(PreferenceNames.AUTOSEND_FREQUENCY).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.AUTOSEND_FREQUENCY).setSummary(preferenceHelper.getAutoSendInterval() + getString(R.string.minutes));
 
         findPreference("osm_setup").setOnPreferenceClickListener(this);
         findPreference("autoemail_setup").setOnPreferenceClickListener(this);
@@ -56,9 +71,25 @@ public class UploadSettingsFragment extends PreferenceFragment implements Prefer
         findPreference("sftp_setup").setOnPreferenceClickListener(this);
     }
 
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.pref_upload, rootKey);
+    }
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.AUTOSEND_FREQUENCY)){
+            SimpleFormDialog.build().title(R.string.autosend_frequency)
+                    .msg(R.string.autosend_frequency_summary)
+                    .fields(
+                            Input.plain(PreferenceNames.AUTOSEND_FREQUENCY)
+                                    .required()
+                                    .text(String.valueOf(preferenceHelper.getAutoSendInterval()))
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
+                    )
+                    .show(this, PreferenceNames.AUTOSEND_FREQUENCY);
+        }
 
         String launchFragment = "";
 
@@ -97,6 +128,17 @@ public class UploadSettingsFragment extends PreferenceFragment implements Prefer
             return true;
         }
 
+        return false;
+    }
+
+    @Override
+    public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.AUTOSEND_FREQUENCY) && which == BUTTON_POSITIVE){
+            String freq = extras.getString(PreferenceNames.AUTOSEND_FREQUENCY);
+            preferenceHelper.setAutoSendInterval(freq);
+            findPreference(PreferenceNames.AUTOSEND_FREQUENCY).setSummary(freq + getString(R.string.minutes));
+            return true;
+        }
         return false;
     }
 }

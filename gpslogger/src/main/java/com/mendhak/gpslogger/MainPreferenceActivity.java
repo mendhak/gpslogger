@@ -86,8 +86,9 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 break;
             case PREFERENCE_FRAGMENTS.UPLOAD:
                 setTitle(R.string.title_drawer_uploadsettings);
-                preferenceFragment = new UploadSettingsFragment();
-                break;
+                preferenceFragmentCompat = new UploadSettingsFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
+                return;
             case PREFERENCE_FRAGMENTS.FTP:
                 setTitle(R.string.autoftp_setup_title);
                 preferenceFragment = new FtpFragment();

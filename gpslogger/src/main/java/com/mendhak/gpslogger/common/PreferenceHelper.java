@@ -692,6 +692,10 @@ public class PreferenceHelper {
         return Math.round(Float.parseFloat(prefs.getString(PreferenceNames.AUTOSEND_FREQUENCY, "60")));
     }
 
+    public void setAutoSendInterval(String frequency){
+        prefs.edit().putString(PreferenceNames.AUTOSEND_FREQUENCY, frequency).apply();
+    }
+
 
     /**
      * Whether to auto send to targets when logging is stopped
