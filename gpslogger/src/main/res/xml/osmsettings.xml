@@ -2,7 +2,7 @@
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android" android:key="osm_preferences">
 
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
 		android:key="osm_enabled"
                                                                   android:title="@string/autosend_enabled"/>
  
@@ -10,17 +10,17 @@
 	 	android:title="@string/osm_resetauth"/>
  	
  	
-	 <com.afollestad.materialdialogs.prefs.MaterialListPreference android:key="osm_visibility"
+	 <Preference android:key="osm_visibility"
 		android:title="@string/osm_visibility" android:summary="@string/osm_visibility_summary"
 		android:entries="@array/osm_visibility_choices" android:defaultValue="private"
 		android:entryValues="@array/osm_visibility_choices" />
  
- 	<com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="osm_description"
+ 	<Preference android:key="osm_description"
 		android:title="@string/osm_description"
 		android:summary="@string/osm_description_summary"
 		android:dialogTitle="@string/osm_description" />
 			
-	<com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="osm_tags"
+	<Preference android:key="osm_tags"
 		android:title="@string/osm_tags"
 		android:summary="@string/osm_tags_summary"
 		android:dialogTitle="@string/osm_tags" />

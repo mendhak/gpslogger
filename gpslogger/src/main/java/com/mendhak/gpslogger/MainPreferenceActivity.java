@@ -118,8 +118,9 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 return;
             case PREFERENCE_FRAGMENTS.OSM:
                 setTitle(R.string.osm_setup_title);
-                preferenceFragment = new OSMAuthorizationFragment();
-                break;
+                preferenceFragmentCompat = new OSMAuthorizationFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
+                return;
             case PREFERENCE_FRAGMENTS.OWNCLOUD:
                 setTitle(R.string.owncloud_setup_title);
                 preferenceFragment = new OwnCloudSettingsFragment();

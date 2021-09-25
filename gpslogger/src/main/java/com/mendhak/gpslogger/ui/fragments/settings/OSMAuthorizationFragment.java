@@ -19,29 +19,39 @@
 
 package com.mendhak.gpslogger.ui.fragments.settings;
 
-import android.Manifest;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.osm.OpenStreetMapManager;
 import com.mendhak.gpslogger.ui.Dialogs;
+
+import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.Input;
+import eltos.simpledialogfragment.form.SimpleFormDialog;
+import eltos.simpledialogfragment.list.SimpleListDialog;
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import org.slf4j.Logger;
 
-public class OSMAuthorizationFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class OSMAuthorizationFragment extends PreferenceFragmentCompat
+        implements Preference.OnPreferenceClickListener, SimpleDialog.OnDialogResultListener {
 
     private static final Logger LOG = Logs.of(OSMAuthorizationFragment.class);
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
@@ -56,8 +66,6 @@ public class OSMAuthorizationFragment extends PreferenceFragment implements Pref
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        addPreferencesFromResource(R.xml.osmsettings);
 
         manager = new OpenStreetMapManager(preferenceHelper);
 
@@ -82,10 +90,25 @@ public class OSMAuthorizationFragment extends PreferenceFragment implements Pref
 
     }
 
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.osmsettings, rootKey);
+    }
+
     private void setPreferencesState() {
-        Preference visibilityPref = findPreference("osm_visibility");
-        Preference descriptionPref = findPreference("osm_description");
-        Preference tagsPref = findPreference("osm_tags");
+        Preference visibilityPref = findPreference(PreferenceNames.OPENSTREETMAP_VISIBILITY);
+        visibilityPref.setOnPreferenceClickListener(this);
+        visibilityPref.setSummary(preferenceHelper.getOSMVisibility());
+
+
+        Preference descriptionPref = findPreference(PreferenceNames.OPENSTREETMAP_DESCRIPTION);
+        descriptionPref.setOnPreferenceClickListener(this);
+        descriptionPref.setSummary(preferenceHelper.getOSMDescription());
+
+        Preference tagsPref = findPreference(PreferenceNames.OPENSTREETMAP_TAGS);
+        tagsPref.setOnPreferenceClickListener(this);
+        tagsPref.setSummary(preferenceHelper.getOSMTags());
+
         Preference resetPref = findPreference("osm_resetauth");
 
         if (!manager.isOsmAuthorized()) {
@@ -109,28 +132,98 @@ public class OSMAuthorizationFragment extends PreferenceFragment implements Pref
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (manager.isOsmAuthorized()) {
-            preferenceHelper.setOSMAccessToken("");
-            preferenceHelper.setOSMAccessTokenSecret("");
-            preferenceHelper.setOSMRequestToken("");
-            preferenceHelper.setOSMRequestTokenSecret("");
 
-            startActivity(new Intent(getActivity(), GpsMainActivity.class));
-            getActivity().finish();
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENSTREETMAP_VISIBILITY)){
 
-        } else {
+            String[] choices =  getResources().getStringArray(R.array.osm_visibility_choices);
+            ArrayList<String> choicesArray = new ArrayList<>(Arrays.asList(choices));
+            int chosenIndex = choicesArray.indexOf(preferenceHelper.getOSMVisibility());
 
-
-            //User clicks. Set the consumer and provider up.
-            consumer = manager.getOSMAuthConsumer();
-            provider = manager.getOSMAuthProvider();
-
-            new Thread(new OsmAuthorizationBeginWorkflow()).start();
-
-
+            SimpleListDialog.build()
+                    .title(R.string.osm_visibility)
+                    .msg(R.string.osm_visibility_summary)
+                    .items(getActivity(), R.array.osm_visibility_choices)
+                    .choiceMode(SimpleListDialog.SINGLE_CHOICE)
+                    .choicePreset(chosenIndex)
+                    .show(this, PreferenceNames.OPENSTREETMAP_VISIBILITY);
+            return true;
         }
 
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENSTREETMAP_DESCRIPTION)){
+            SimpleFormDialog.build()
+                    .title(R.string.osm_description)
+                    .msg(R.string.osm_description_summary)
+                    .fields(
+                            Input.plain(PreferenceNames.OPENSTREETMAP_DESCRIPTION).text(preferenceHelper.getOSMDescription())
+                    )
+                    .show(this, PreferenceNames.OPENSTREETMAP_DESCRIPTION);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENSTREETMAP_TAGS)){
+            SimpleFormDialog.build()
+                    .title(R.string.osm_tags)
+                    .msg(R.string.osm_tags_summary)
+                    .fields(
+                            Input.plain(PreferenceNames.OPENSTREETMAP_TAGS).text(preferenceHelper.getOSMTags())
+                    )
+                    .show(this, PreferenceNames.OPENSTREETMAP_TAGS);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase("osm_resetauth")){
+            if (manager.isOsmAuthorized()) {
+                preferenceHelper.setOSMAccessToken("");
+                preferenceHelper.setOSMAccessTokenSecret("");
+                preferenceHelper.setOSMRequestToken("");
+                preferenceHelper.setOSMRequestTokenSecret("");
+
+                startActivity(new Intent(getActivity(), GpsMainActivity.class));
+                getActivity().finish();
+
+            } else {
+
+
+                //User clicks. Set the consumer and provider up.
+                consumer = manager.getOSMAuthConsumer();
+                provider = manager.getOSMAuthProvider();
+                new Thread(new OsmAuthorizationBeginWorkflow()).start();
+            }
+            return true;
+        }
+
+
         return true;
+    }
+
+    @Override
+    public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
+        if(which != BUTTON_POSITIVE){
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.OPENSTREETMAP_VISIBILITY)){
+            String visibility = extras.getString(SimpleListDialog.SELECTED_SINGLE_LABEL);
+            preferenceHelper.setOSMVisibility(visibility);
+            findPreference(PreferenceNames.OPENSTREETMAP_VISIBILITY).setSummary(visibility);
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.OPENSTREETMAP_DESCRIPTION)){
+            String description = extras.getString(PreferenceNames.OPENSTREETMAP_DESCRIPTION);
+            preferenceHelper.setOSMDescription(description);
+            findPreference(PreferenceNames.OPENSTREETMAP_DESCRIPTION).setSummary(description);
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.OPENSTREETMAP_TAGS)){
+            String tags = extras.getString(PreferenceNames.OPENSTREETMAP_TAGS);
+            preferenceHelper.setOSMTags(tags);
+            findPreference(PreferenceNames.OPENSTREETMAP_TAGS).setSummary(tags);
+            return true;
+        }
+
+        return false;
     }
 
     private class OsmAuthorizationEndWorkflow implements Runnable {

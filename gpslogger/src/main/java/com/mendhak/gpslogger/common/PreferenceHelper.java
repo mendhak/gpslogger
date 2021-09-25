@@ -878,12 +878,20 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.OPENSTREETMAP_DESCRIPTION, "");
     }
 
+    public void setOSMDescription(String description){
+        prefs.edit().putString(PreferenceNames.OPENSTREETMAP_DESCRIPTION, description).apply();
+    }
+
     /**
      * Tags associated with uploaded trace on OpenStreetMap
      */
     @ProfilePreference(name= PreferenceNames.OPENSTREETMAP_TAGS)
     public String getOSMTags() {
         return prefs.getString(PreferenceNames.OPENSTREETMAP_TAGS, "");
+    }
+
+    public void setOSMTags(String tags){
+        prefs.edit().putString(PreferenceNames.OPENSTREETMAP_TAGS, tags).apply();
     }
 
     /**
@@ -894,7 +902,9 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.OPENSTREETMAP_VISIBILITY, "private");
     }
 
-
+    public void setOSMVisibility(String visibility){
+        prefs.edit().putString(PreferenceNames.OPENSTREETMAP_VISIBILITY, visibility).apply();
+    }
 
 
     /**
