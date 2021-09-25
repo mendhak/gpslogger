@@ -204,6 +204,7 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
                 String remoteServerPath = extras.getString(PreferenceNames.SFTP_REMOTE_SERVER_PATH);
                 preferenceHelper.setSFTPRemoteServerPath(remoteServerPath);
                 findPreference(PreferenceNames.SFTP_REMOTE_SERVER_PATH).setSummary(remoteServerPath);
+                return true;
             }
         }
         if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_USER)){
@@ -211,6 +212,7 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
                 String sftpUser = extras.getString(PreferenceNames.SFTP_USER);
                 preferenceHelper.setSFTPUser(sftpUser);
                 findPreference(PreferenceNames.SFTP_USER).setSummary(sftpUser);
+                return true;
             }
         }
 
@@ -219,6 +221,7 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
                 String sftpPassword = extras.getString(PreferenceNames.SFTP_PASSWORD);
                 preferenceHelper.setSFTPPassword(sftpPassword);
                 findPreference(PreferenceNames.SFTP_PASSWORD).setSummary(sftpPassword.replaceAll(".","*"));
+                return true;
             }
         }
 
@@ -227,8 +230,17 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
                 String privKeyPass = extras.getString(PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE);
                 preferenceHelper.setSFTPPrivateKeyPassphrase(privKeyPass);
                 findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE).setSummary(privKeyPass.replaceAll(".","*"));
+                return true;
             }
         }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.SFTP_KNOWN_HOST_KEY) && which == BUTTON_POSITIVE){
+            String hostKey = extras.getString(PreferenceNames.SFTP_KNOWN_HOST_KEY);
+            preferenceHelper.setSFTPKnownHostKey(hostKey);
+            uploadTestFile();
+        }
+
+
         return false;
     }
 
@@ -274,15 +286,15 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
                 String promptMessage = String.format("Fingerprint: <br /><font color='#%s' face='monospace'>%s</font> <br /><br /> Host Key: <br /><font color='#%s' face='monospace'>%s</font>",
                                                         codeGreen, o.fingerprint, codeGreen, o.hostKey);
 
-                Dialogs.alert(getString(R.string.sftp_validate_accept_host_key), promptMessage , getActivity(), true, new Dialogs.MessageBoxCallback() {
-                    @Override
-                    public void messageBoxResult(int which) {
-                        if(which==Dialogs.MessageBoxCallback.OK){
-                            preferenceHelper.setSFTPKnownHostKey(o.hostKey);
-                            uploadTestFile();
-                        }
-                    }
-                });
+                Bundle b = new Bundle();
+                b.putString(PreferenceNames.SFTP_KNOWN_HOST_KEY, o.hostKey);
+                SimpleDialog.build()
+                        .title(getString(R.string.sftp_validate_accept_host_key))
+                        .msgHtml(promptMessage)
+                        .neg(R.string.cancel)
+                        .extra(b)
+                        .show(this, PreferenceNames.SFTP_KNOWN_HOST_KEY);
+
             }
             else {
                 Dialogs.showError(getString(R.string.sorry), "SFTP Test Failed", o.message , o.throwable, (FragmentActivity) getActivity());
