@@ -945,6 +945,10 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.OWNCLOUD_PASSWORD, "");
     }
 
+    public void setOwnCloudPassword(String pass){
+        prefs.edit().putString(PreferenceNames.OWNCLOUD_PASSWORD, pass).apply();
+    }
+
 
     /**
      * OwnCloud target directory for autosend
@@ -954,6 +958,9 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.OWNCLOUD_DIRECTORY, "/gpslogger");
     }
 
+    public void setOwnCloudDirectory(String dir){
+        prefs.edit().putString(PreferenceNames.OWNCLOUD_DIRECTORY, dir).apply();
+    }
 
     /**
      * Whether to auto send to OwnCloud

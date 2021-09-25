@@ -123,8 +123,9 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 return;
             case PREFERENCE_FRAGMENTS.OWNCLOUD:
                 setTitle(R.string.owncloud_setup_title);
-                preferenceFragment = new OwnCloudSettingsFragment();
-                break;
+                preferenceFragmentCompat = new OwnCloudSettingsFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
+                return;
             case PREFERENCE_FRAGMENTS.SFTP:
                 setTitle(R.string.sftp_setup_title);
                 preferenceFragmentCompat = new SFTPSettingsFragment();

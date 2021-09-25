@@ -3,29 +3,30 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   android:key="owncloud_preferences">
 
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
         android:key="owncloud_enabled"
         android:title="@string/autosend_enabled" />
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <EditTextPreference
             android:key="owncloud_server"
             android:title="@string/owncloud_server_summary"
             android:defaultValue="http://127.0.0.1"
             android:dialogTitle="@string/owncloud_server_summary"
             android:hint="@string/owncloud_server_summary"/>
                 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <EditTextPreference
             android:key="owncloud_username"
             android:title="@string/autoftp_username"
             android:dialogTitle="@string/autoftp_username"/>
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <Preference
             android:key="owncloud_password"
             android:title="@string/autoftp_password"
             android:dialogTitle="@string/autoftp_password"
-            android:password="true"/>
+            android:inputType="textPassword"
+        android:password="true"/>
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <Preference
             android:key="owncloud_directory"
             android:title="@string/autoftp_directory"
             android:defaultValue="gpslogger"

@@ -19,17 +19,17 @@
 
 package com.mendhak.gpslogger.ui.fragments.settings;
 
-
-import android.Manifest;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
+import android.text.InputType;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
-import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.events.UploadEvents;
@@ -38,26 +38,48 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudManager;
 import com.mendhak.gpslogger.ui.Dialogs;
-import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 import de.greenrobot.event.EventBus;
+import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.Input;
+import eltos.simpledialogfragment.form.SimpleFormDialog;
+
 import org.slf4j.Logger;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class OwnCloudSettingsFragment
-        extends PreferenceFragment implements Preference.OnPreferenceClickListener, PreferenceValidator {
+        extends PreferenceFragmentCompat implements Preference.OnPreferenceClickListener,
+        SimpleDialog.OnDialogResultListener,
+        PreferenceValidator, Preference.OnPreferenceChangeListener {
 
     private static final Logger LOG = Logs.of(OwnCloudSettingsFragment.class);
+    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.owncloudsettings);
+
+        findPreference(PreferenceNames.OWNCLOUD_SERVER).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.OWNCLOUD_SERVER).setSummary(preferenceHelper.getOwnCloudServerName());
+
+        findPreference(PreferenceNames.OWNCLOUD_USERNAME).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.OWNCLOUD_USERNAME).setSummary(preferenceHelper.getOwnCloudUsername());
+
+        findPreference(PreferenceNames.OWNCLOUD_PASSWORD).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.OWNCLOUD_PASSWORD).setSummary(preferenceHelper.getOwnCloudPassword().replaceAll(".","*"));
+
+        findPreference(PreferenceNames.OWNCLOUD_DIRECTORY).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.OWNCLOUD_DIRECTORY).setSummary(preferenceHelper.getOwnCloudDirectory());
 
         findPreference("owncloud_test").setOnPreferenceClickListener(this);
         findPreference("owncloud_validatecustomsslcert").setOnPreferenceClickListener(this);
 
         registerEventBus();
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.owncloudsettings, rootKey);
     }
 
     @Override
@@ -81,18 +103,37 @@ public class OwnCloudSettingsFragment
 
     @Override
     public boolean isValid() {
-        CustomSwitchPreference chkEnabled = (CustomSwitchPreference) findPreference("owncloud_enabled");
-        MaterialEditTextPreference txtServer = (MaterialEditTextPreference) findPreference("owncloud_server");
-        MaterialEditTextPreference txtUserName = (MaterialEditTextPreference) findPreference("owncloud_username");
-        return !chkEnabled.isChecked() || (
-                txtServer.getText() != null && txtServer.getText().length() > 0 &&
-                txtUserName.getText() != null && txtUserName.getText().length() > 0
+        boolean isEnabled = preferenceHelper.isOwnCloudAutoSendEnabled();
+        String server = preferenceHelper.getOwnCloudServerName();
+        String user = preferenceHelper.getOwnCloudUsername();
+
+        return !isEnabled || (
+                server != null && server.length() > 0 &&
+                user != null && user.length() > 0
         );
     }
 
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OWNCLOUD_PASSWORD)){
+            SimpleFormDialog.build().title(R.string.autoftp_password)
+                    .fields(
+                            Input.plain(PreferenceNames.OWNCLOUD_PASSWORD).text(preferenceHelper.getOwnCloudPassword()).showPasswordToggle().inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                        )
+                    .show(this, PreferenceNames.OWNCLOUD_PASSWORD);
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OWNCLOUD_DIRECTORY)){
+            SimpleFormDialog.build()
+                    .title(R.string.autoftp_directory)
+                    .msg(R.string.owncloud_directory_summary)
+                    .fields(
+                            Input.plain(PreferenceNames.OWNCLOUD_DIRECTORY).text(preferenceHelper.getOwnCloudDirectory())
+                    )
+                    .show(this, PreferenceNames.OWNCLOUD_DIRECTORY);
+        }
 
         if(preference.getKey().equals("owncloud_validatecustomsslcert")){
             try {
@@ -104,16 +145,18 @@ public class OwnCloudSettingsFragment
 
         }
         else if(preference.getKey().equals("owncloud_test")){
-            MaterialEditTextPreference servernamePreference = (MaterialEditTextPreference) findPreference("owncloud_server");
-            MaterialEditTextPreference usernamePreference = (MaterialEditTextPreference) findPreference("owncloud_username");
-            MaterialEditTextPreference passwordPreference = (MaterialEditTextPreference) findPreference("owncloud_password");
-            MaterialEditTextPreference directoryPreference = (MaterialEditTextPreference) findPreference("owncloud_directory");
+            String server = preferenceHelper.getOwnCloudServerName();
+            String user = preferenceHelper.getOwnCloudUsername();
+            String pass = preferenceHelper.getOwnCloudPassword();
+            String directory = preferenceHelper.getOwnCloudDirectory();
+
+
 
             if (!OwnCloudManager.validSettings(
-                    servernamePreference.getText(),
-                    usernamePreference.getText(),
-                    passwordPreference.getText(),
-                    directoryPreference.getText())) {
+                    server,
+                    user,
+                    pass,
+                    directory)) {
                 Dialogs.alert(getString(R.string.autoftp_invalid_settings),
                         getString(R.string.autoftp_invalid_summary),
                         getActivity());
@@ -122,8 +165,7 @@ public class OwnCloudSettingsFragment
 
             Dialogs.progress((FragmentActivity) getActivity(), getString(R.string.owncloud_testing));
             OwnCloudManager helper = new OwnCloudManager(PreferenceHelper.getInstance());
-            helper.testOwnCloud(servernamePreference.getText(), usernamePreference.getText(), passwordPreference.getText(),
-                    directoryPreference.getText());
+            helper.testOwnCloud(server, user, pass, directory);
         }
 
 
@@ -142,6 +184,43 @@ public class OwnCloudSettingsFragment
         else {
             Dialogs.alert(getString(R.string.success), "OwnCloud Test Succeeded", getActivity());
         }
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OWNCLOUD_SERVER)){
+            preference.setSummary(newValue.toString());
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OWNCLOUD_USERNAME)){
+            preference.setSummary(newValue.toString());
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
+
+        if(which != BUTTON_POSITIVE){ return true; }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.OWNCLOUD_PASSWORD)){
+            String ocPass = extras.getString(PreferenceNames.OWNCLOUD_PASSWORD);
+            preferenceHelper.setOwnCloudPassword(ocPass);
+            findPreference(PreferenceNames.OWNCLOUD_PASSWORD).setSummary(ocPass.replaceAll(".","*"));
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.OWNCLOUD_DIRECTORY)){
+            String dir = extras.getString(PreferenceNames.OWNCLOUD_DIRECTORY);
+            preferenceHelper.setOwnCloudDirectory(dir);
+            findPreference(PreferenceNames.OWNCLOUD_DIRECTORY).setSummary(dir);
+            return  true;
+        }
+
+        return false;
     }
 }
 
