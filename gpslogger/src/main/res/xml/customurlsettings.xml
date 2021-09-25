@@ -20,7 +20,7 @@
         android:singleLine="false"
         android:defaultValue="lat=%LAT&amp;lon=%LON"
         android:title="@string/customurl_http_body" />
-    <EditTextPreference
+    <Preference
         android:key="log_customurl_headers"
         android:selectAllOnFocus="true"
         android:singleLine="false"

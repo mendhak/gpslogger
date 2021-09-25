@@ -68,7 +68,8 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
         urlPathPreference.setOnPreferenceChangeListener(this);
 
         findPreference(PreferenceNames.LOG_TO_URL_HEADERS).setSummary(preferenceHelper.getCustomLoggingHTTPHeaders());
-        findPreference(PreferenceNames.LOG_TO_URL_HEADERS).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.LOG_TO_URL_HEADERS).setOnPreferenceClickListener(this);
+
         findPreference(PreferenceNames.LOG_TO_URL_METHOD).setSummary(preferenceHelper.getCustomLoggingHTTPMethod());
         findPreference(PreferenceNames.LOG_TO_URL_METHOD).setOnPreferenceChangeListener(this);
         findPreference(PreferenceNames.LOG_TO_URL_BODY).setSummary(preferenceHelper.getCustomLoggingHTTPBody());
@@ -94,10 +95,6 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if(preference.getKey().equals(PreferenceNames.LOG_TO_URL_PATH)){
-            preference.setSummary(newValue.toString());
-            return true;
-        }
-        if(preference.getKey().equals(PreferenceNames.LOG_TO_URL_HEADERS)){
             preference.setSummary(newValue.toString());
             return true;
         }
@@ -165,6 +162,19 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
 
             return true;
         }
+        else if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_URL_HEADERS)){
+            SimpleFormDialog.build()
+                    .title(R.string.customurl_http_headers)
+                    .neg(R.string.cancel)
+                    .pos(R.string.ok)
+                    .fields(
+                            Input.plain(PreferenceNames.LOG_TO_URL_HEADERS)
+                                    .text(preferenceHelper.getCustomLoggingHTTPHeaders())
+                                    .hint("Content-Type: application/json\nAuthorization: Basic abcdefg\nApiToken: 12345")
+                                    .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE).required()
+                    )
+                    .show(this, PreferenceNames.LOG_TO_URL_HEADERS);
+        }
 
         return false;
     }
@@ -178,8 +188,17 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
             preferenceHelper.setCustomLoggingBasicAuthUsername(basicAuthUsername);
             preferenceHelper.setCustomLoggingBasicAuthPassword(basicAuthPass);
             findPreference("log_customurl_basicauth").setSummary(preferenceHelper.getCustomLoggingBasicAuthUsername() + ":" + preferenceHelper.getCustomLoggingBasicAuthPassword().replaceAll(".","*"));
-
+            return true;
         }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_HEADERS) && which == BUTTON_POSITIVE){
+            String headers = extras.getString(PreferenceNames.LOG_TO_URL_HEADERS);
+            preferenceHelper.setCustomLoggingHTTPHeaders(headers);
+            findPreference(PreferenceNames.LOG_TO_URL_HEADERS).setSummary(headers);
+            return true;
+        }
+
+
         return false;
     }
 }

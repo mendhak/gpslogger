@@ -538,6 +538,10 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.LOG_TO_URL_HEADERS,"");
     }
 
+    public void setCustomLoggingHTTPHeaders(String headers){
+        prefs.edit().putString(PreferenceNames.LOG_TO_URL_HEADERS, headers).apply();
+    }
+
     @ProfilePreference(name=PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME)
     public String getCustomLoggingBasicAuthUsername() {
         return prefs.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME, "");
