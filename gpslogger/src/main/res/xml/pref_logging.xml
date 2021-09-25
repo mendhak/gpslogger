@@ -5,45 +5,45 @@
                   android:summary="@string/pref_logging_summary">
 
 
-        <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
             android:key="log_gpx"
             android:title="@string/log_gpx_title"
             android:summary="@string/log_gpx_summary"
             android:defaultValue="true"/>
 
-        <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
             android:key="log_gpx_11"
             android:title="@string/log_gpx_11_title"
             android:summary="@string/log_gpx_11_summary"
             android:defaultValue="false"/>
 
-        <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
             android:key="log_kml"
             android:summary="@string/log_kml_summary"
             android:title="@string/log_kml_title"/>
 
-        <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
             android:title="@string/log_customurl_title"
             android:summary="@string/log_customurl_summary"
-            android:key="log_customurl_enabled">
-        </com.mendhak.gpslogger.ui.components.CustomSwitchPreference>
+            android:key="log_customurl_enabled" />
 
-        <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+
+    <SwitchPreferenceCompat
             android:key="log_opengts"
             android:summary="@string/log_opengts_summary"
             android:title="@string/log_opengts_title"/>
 
-        <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
             android:key="log_plain_text"
             android:summary="@string/log_plain_text_summary"
             android:title="@string/log_plain_text_title"/>
 
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
         android:key="log_geojson"
         android:summary="@string/log_json_summary"
         android:title="@string/log_json_title"/>
 
-        <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
             android:key="log_nmea"
             android:title="@string/log_nmea_title"
             android:summary="@string/log_nmea_summary" />
@@ -58,7 +58,7 @@
             android:title="@string/gpslogger_folder_title"
             android:summary="@string/gpslogger_folder_summary" />
 
-        <com.afollestad.materialdialogs.prefs.MaterialListPreference
+        <ListPreference
             android:key="new_file_creation"
             android:title="@string/new_file_creation_title"
             android:summary="@string/new_file_creation_summary"
@@ -73,17 +73,17 @@
             android:dialogMessage="@string/new_file_custom_message"
             android:defaultValue="gpslogger"
             />
-        <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+        <SwitchPreferenceCompat
             android:key="new_file_custom_keep_changing"
             android:title="@string/new_file_custom_keep_changing_title"
             android:summary="@string/new_file_custom_keep_changing_summary"
-            android:defaultValue="true"></com.mendhak.gpslogger.ui.components.CustomSwitchPreference>
-        <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+            android:defaultValue="true"/>
+        <SwitchPreferenceCompat
             android:key="new_file_custom_each_time"
             android:title="@string/new_file_custom_each_time_title"
             android:summary="@string/new_file_custom_each_time_summary"
-            android:defaultValue="true"></com.mendhak.gpslogger.ui.components.CustomSwitchPreference>
-        <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+            android:defaultValue="true"/>
+        <SwitchPreferenceCompat
             android:key="new_file_prefix_serial"
             android:title="@string/new_file_prefix_serial_title"
             android:summary="@string/new_file_prefix_serial_summary"

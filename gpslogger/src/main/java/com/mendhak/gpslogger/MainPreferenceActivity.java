@@ -78,8 +78,9 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 break;
             case PREFERENCE_FRAGMENTS.LOGGING:
                 setTitle(R.string.pref_logging_title);
-                preferenceFragment = new LoggingSettingsFragment();
-                break;
+                preferenceFragmentCompat = new LoggingSettingsFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
+                return;
             case PREFERENCE_FRAGMENTS.PERFORMANCE:
                 setTitle(R.string.pref_performance_title);
                 preferenceFragment = new PerformanceSettingsFragment();

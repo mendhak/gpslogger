@@ -24,13 +24,15 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.InputType;
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.prefs.MaterialListPreference;
+
+import androidx.annotation.NonNull;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 import com.codekidlabs.storagechooser.StorageChooser;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.MainPreferenceActivity;
@@ -41,14 +43,18 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.Dialogs;
-import com.mendhak.gpslogger.ui.components.CustomSwitchPreference;
 import org.slf4j.Logger;
 import java.io.File;
 
-public class LoggingSettingsFragment extends PreferenceFragment
+import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.Input;
+import eltos.simpledialogfragment.form.SimpleFormDialog;
+
+public class LoggingSettingsFragment extends PreferenceFragmentCompat
         implements
         Preference.OnPreferenceClickListener,
-        Preference.OnPreferenceChangeListener
+        Preference.OnPreferenceChangeListener,
+        SimpleDialog.OnDialogResultListener
 {
 
     private static final Logger LOG = Logs.of(LoggingSettingsFragment.class);
@@ -58,7 +64,6 @@ public class LoggingSettingsFragment extends PreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.pref_logging);
 
         Preference gpsloggerFolder = findPreference("gpslogger_folder");
 
@@ -71,8 +76,8 @@ public class LoggingSettingsFragment extends PreferenceFragment
             gpsloggerFolder.setSummary(Html.fromHtml("<font color='red'>" + gpsLoggerFolderPath + "</font>"));
         }
 
-        CustomSwitchPreference logGpx = (CustomSwitchPreference)findPreference("log_gpx");
-        CustomSwitchPreference logGpx11 = (CustomSwitchPreference)findPreference("log_gpx_11");
+        SwitchPreferenceCompat logGpx = findPreference("log_gpx");
+        SwitchPreferenceCompat logGpx11 = findPreference("log_gpx_11");
         logGpx11.setTitle("      " + logGpx11.getTitle());
         logGpx11.setSummary("      " + logGpx11.getSummary());
 
@@ -84,13 +89,13 @@ public class LoggingSettingsFragment extends PreferenceFragment
         /**
          * Logging Details - New file creation
          */
-        MaterialListPreference newFilePref = (MaterialListPreference) findPreference("new_file_creation");
+        ListPreference newFilePref = findPreference("new_file_creation");
         newFilePref.setOnPreferenceChangeListener(this);
         /* Trigger artificially the listener and perform validations. */
         newFilePref.getOnPreferenceChangeListener()
                 .onPreferenceChange(newFilePref, newFilePref.getValue());
 
-        CustomSwitchPreference chkfile_prefix_serial = (CustomSwitchPreference) findPreference("new_file_prefix_serial");
+        SwitchPreferenceCompat chkfile_prefix_serial = findPreference("new_file_prefix_serial");
         if (Strings.isNullOrEmpty(Strings.getBuildSerial())) {
             chkfile_prefix_serial.setEnabled(false);
             chkfile_prefix_serial.setSummary("This option not available on older phones or if a serial id is not present");
@@ -103,6 +108,11 @@ public class LoggingSettingsFragment extends PreferenceFragment
         findPreference("new_file_custom_name").setOnPreferenceClickListener(this);
         findPreference("log_customurl_enabled").setOnPreferenceChangeListener(this);
         findPreference("log_opengts").setOnPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.pref_logging, rootKey);
     }
 
 
@@ -128,7 +138,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
                 return true;
             }
 
-            StorageChooser chooser = Dialogs.directoryChooser(getActivity(), getFragmentManager());
+            StorageChooser chooser = Dialogs.directoryChooser(getActivity(), getActivity().getFragmentManager());
             chooser.setOnSelectListener(path -> {
                 LOG.debug(path);
                 if(Strings.isNullOrEmpty(path)) {
@@ -156,22 +166,15 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
         if(preference.getKey().equalsIgnoreCase("new_file_custom_name")){
 
-
-            new MaterialDialog.Builder(getActivity())
+            SimpleFormDialog.build()
                     .title(R.string.new_file_custom_title)
-                    .content(R.string.new_file_custom_message)
-                    .positiveText(R.string.ok)
-                    .negativeText(R.string.cancel)
-                    .inputType(InputType.TYPE_CLASS_TEXT)
-                    .negativeText(R.string.cancel)
-                    .input(getString(R.string.letters_numbers), preferenceHelper.getCustomFileName(), new MaterialDialog.InputCallback() {
-                        @Override
-                        public void onInput(MaterialDialog materialDialog, CharSequence input) {
-                            preferenceHelper.setCustomFileName(input.toString());
-                        }
-                    })
-                    .show();
-
+                    .msg(R.string.new_file_custom_message)
+                    .pos(R.string.ok)
+                    .neg(R.string.cancel)
+                    .fields(
+                            Input.plain("customfilename").hint(R.string.letters_numbers).text(preferenceHelper.getCustomFileName())
+                    )
+                    .show(this,"customfilename");
         }
 
         return false;
@@ -181,10 +184,8 @@ public class LoggingSettingsFragment extends PreferenceFragment
     @Override
     public boolean onPreferenceChange(final Preference preference, Object newValue) {
 
-
-
         if(preference.getKey().equalsIgnoreCase("log_gpx")){
-            CustomSwitchPreference logGpx11 = (CustomSwitchPreference)findPreference("log_gpx_11");
+            SwitchPreferenceCompat logGpx11 = findPreference("log_gpx_11");
             logGpx11.setEnabled((Boolean)newValue);
             return true;
         }
@@ -192,7 +193,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
         if (preference.getKey().equalsIgnoreCase("log_opengts")) {
 
-            if(!((CustomSwitchPreference) preference).isChecked() && (Boolean)newValue  ) {
+            if(!((SwitchPreferenceCompat) preference).isChecked() && (Boolean)newValue  ) {
 
                 Intent targetActivity = new Intent(getActivity(), MainPreferenceActivity.class);
                 targetActivity.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS);
@@ -206,7 +207,7 @@ public class LoggingSettingsFragment extends PreferenceFragment
 
             // Bug in SwitchPreference: http://stackoverflow.com/questions/19503931/switchpreferences-calls-multiple-times-the-onpreferencechange-method
             // Check if isChecked == false && newValue == true
-            if(!((CustomSwitchPreference) preference).isChecked() && (Boolean)newValue  ) {
+            if(!((SwitchPreferenceCompat) preference).isChecked() && (Boolean)newValue  ) {
                 Intent targetActivity = new Intent(getActivity(), MainPreferenceActivity.class);
                 targetActivity.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL);
                 startActivity(targetActivity);
@@ -243,4 +244,12 @@ public class LoggingSettingsFragment extends PreferenceFragment
     }
 
 
+    @Override
+    public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
+        if(dialogTag.equalsIgnoreCase("customfilename") && which==BUTTON_POSITIVE){
+            String customFilename = extras.getString("customfilename");
+            preferenceHelper.setCustomFileName(customFilename);
+        }
+        return false;
+    }
 }
