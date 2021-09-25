@@ -3,26 +3,26 @@
                   android:title="@string/pref_performance_title">
 
 
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
         android:key="log_satellite_locations"
         android:title="@string/listeners_gps_title"
         android:summary="@string/listeners_gps_summary"
         android:defaultValue="true" />
 
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
         android:key="log_network_locations"
         android:title="@string/listeners_cell_title"
         android:summary="@string/listeners_cell_summary"
         android:defaultValue="true" />
 
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
         android:key="log_passive_locations"
         android:title="@string/listeners_passive_title"
         android:summary="@string/listeners_passive_summary" />
 
 
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <Preference
         android:key="time_before_logging"
         android:title="@string/time_before_logging_title"
         android:summary="@string/time_before_logging_summary"
@@ -32,13 +32,13 @@
         android:hint="@string/time_before_logging_hint"
         android:defaultValue="60"/>
 
-    <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+    <SwitchPreferenceCompat
         android:key="keep_fix"
         android:summary="@string/keep_fix_summary"
         android:title="@string/keep_fix_title"/>
 
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <Preference
         android:key="distance_before_logging"
         android:title="@string/distance_filter_title"
         android:summary="@string/distance_filter_summary"
@@ -49,7 +49,7 @@
         android:hint="@string/settings_enter_meters"/>
 
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <Preference
         android:key="accuracy_before_logging"
         android:title="@string/accuracy_filter_title"
         android:summary="@string/accuracy_filter_summary"
@@ -59,7 +59,7 @@
         android:defaultValue="40"
         android:hint="@string/settings_enter_meters"/>
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <Preference
         android:key="retry_time"
         android:title="@string/retry_time_title"
         android:summary="@string/retry_time_summary"
@@ -69,7 +69,7 @@
         android:defaultValue="60"
         android:hint="@string/time_before_logging_hint"/>
 
-    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+    <Preference
         android:key="absolute_timeout"
         android:title="@string/absolute_timeout_title"
         android:summary="@string/absolute_timeout_summary"
@@ -80,12 +80,12 @@
         android:hint="@string/time_before_logging_hint"/>
 
     <PreferenceCategory android:title="Altitude">
-        <com.mendhak.gpslogger.ui.components.CustomSwitchPreference
+        <SwitchPreferenceCompat
             android:key="altitude_subtractgeoidheight"
             android:summary="@string/altitude_subtractgeoidheight_summary"
             android:title="@string/altitude_subtractgeoidheight_title"
             android:defaultValue="false"/>
-        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+        <Preference
             android:key="altitude_subtractoffset"
             android:title="@string/altitude_subtractoffset_title"
             android:summary="@string/altitude_subtractoffset_summary"

@@ -84,8 +84,9 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 return;
             case PREFERENCE_FRAGMENTS.PERFORMANCE:
                 setTitle(R.string.pref_performance_title);
-                preferenceFragment = new PerformanceSettingsFragment();
-                break;
+                preferenceFragmentCompat = new PerformanceSettingsFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
+                return;
             case PREFERENCE_FRAGMENTS.UPLOAD:
                 setTitle(R.string.title_drawer_uploadsettings);
                 preferenceFragmentCompat = new UploadSettingsFragment();

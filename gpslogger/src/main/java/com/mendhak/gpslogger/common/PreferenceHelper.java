@@ -999,6 +999,10 @@ public class PreferenceHelper {
         return Strings.toInt(prefs.getString(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET, "0"), 0);
     }
 
+    public void setSubtractAltitudeOffset(String offset){
+        prefs.edit().putString(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET, offset).apply();
+    }
+
 
     /**
      * Whether to autosend only if wifi is enabled
