@@ -211,6 +211,7 @@ public class GpsMainActivity extends AppCompatActivity
 
     @Override
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
+        LOG.debug(dialogTag);
         if (dialogTag.equalsIgnoreCase("PERMISSIONS_START")){
             switch(which){
                 case BUTTON_NEUTRAL:
@@ -336,6 +337,17 @@ public class GpsMainActivity extends AppCompatActivity
                 startActivity(Intent.createChooser(intent, getString(R.string.sharing_via)));
             }
             return true;
+        }
+        else if(dialogTag.equalsIgnoreCase("customfilename") && which == BUTTON_POSITIVE){
+            String enteredText = extras.getString("customfilename");
+            String originalFileName = preferenceHelper.getCustomFileName();
+
+            if(!originalFileName.equalsIgnoreCase(enteredText)){
+                preferenceHelper.setCustomFileName(enteredText);
+            }
+
+            getCurrentFragment().toggleLogging();
+            Files.addItemToCacheFile(enteredText, "customfilename", GpsMainActivity.this);
         }
 
         return false;

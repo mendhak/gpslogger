@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -81,6 +82,11 @@ public abstract class GenericViewFragment extends Fragment {
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LocationServicesUnavailable locationServicesUnavailable) {
+//        SimpleDialog.build().msg(R.string.gpsprovider_unavailable)
+//                .pos(R.string.ok)
+//                .neg(R.string.cancel)
+//                .show((FragmentActivity) getActivity(), "GPS_PROVIDER_UNAVAILABLE");
+
         new MaterialDialog.Builder(getActivity())
                 //.title("Location services unavailable")
                 .content(R.string.gpsprovider_unavailable)
@@ -121,27 +127,7 @@ public abstract class GenericViewFragment extends Fragment {
 
         if (preferenceHelper.shouldCreateCustomFile() && preferenceHelper.shouldAskCustomFileNameEachTime()) {
 
-            Dialogs.autoCompleteText(getActivity(), "customfilename",
-                    getString(R.string.new_file_custom_title), "gpslogger",
-                    preferenceHelper.getCustomFileName(), new Dialogs.AutoCompleteCallback() {
-
-                        @Override
-                        public void messageBoxResult(int which, MaterialDialog dialog, String enteredText) {
-
-                            if(which == Dialogs.AutoCompleteCallback.CANCEL){
-                                return;
-                            }
-
-                            String originalFileName = preferenceHelper.getCustomFileName();
-
-                            if(!originalFileName.equalsIgnoreCase(enteredText)){
-                                preferenceHelper.setCustomFileName(enteredText);
-                            }
-
-                            toggleLogging();
-                        }
-                    });
-
+            Dialogs.autoSuggestDialog( (FragmentActivity) getActivity(),"customfilename", getString(R.string.new_file_custom_title), "", preferenceHelper.getCustomFileName());
 
         } else {
             if(!session.isStarted()){

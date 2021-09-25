@@ -24,17 +24,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.KeyEvent;
-
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.mendhak.gpslogger.common.IntentConstants;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.ui.Dialogs;
-
 import org.slf4j.Logger;
 
-public class NotificationAnnotationActivity extends AppCompatActivity {
+import eltos.simpledialogfragment.SimpleDialog;
+
+public class NotificationAnnotationActivity extends AppCompatActivity implements SimpleDialog.OnDialogResultListener {
 
     //Called from the 'annotate' button in the Notification
     //This in turn captures user input and sends the input to the GPS Logging Service
@@ -45,21 +43,10 @@ public class NotificationAnnotationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Dialogs.autoCompleteText(NotificationAnnotationActivity.this, "annotations",
-                getString(R.string.add_description), getString(R.string.letters_numbers), "",
-                new Dialogs.AutoCompleteCallback() {
-                    @Override
-                    public void messageBoxResult(int which, MaterialDialog dialog, String enteredText) {
-                        if(which == Dialogs.AutoCompleteCallback.OK){
-                            LOG.info("Notification Annotation entered : " + enteredText);
-                            Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
-                            serviceIntent.putExtra(IntentConstants.SET_DESCRIPTION, enteredText);
-                            ContextCompat.startForegroundService(getApplicationContext(),  serviceIntent);
-                        }
 
-                        finish();
-                    }
-                });
+
+        Dialogs.autoSuggestDialog(NotificationAnnotationActivity.this, "annotations",
+                getString(R.string.add_description), getString(R.string.letters_numbers), "");
 
     }
 
@@ -77,5 +64,20 @@ public class NotificationAnnotationActivity extends AppCompatActivity {
         }
 
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
+         if(dialogTag.equalsIgnoreCase("annotations") && which == BUTTON_POSITIVE){
+            String enteredText = extras.getString("annotations");
+            LOG.info("Notification Annotation entered : " + enteredText);
+            Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
+            serviceIntent.putExtra(IntentConstants.SET_DESCRIPTION, enteredText);
+            ContextCompat.startForegroundService(getApplicationContext(),  serviceIntent);
+            finish();
+            return true;
+        }
+
+        return false;
     }
 }
