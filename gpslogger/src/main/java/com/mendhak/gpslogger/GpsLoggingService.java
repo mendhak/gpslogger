@@ -19,6 +19,7 @@
 
 package com.mendhak.gpslogger;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.*;
 import android.content.Context;
@@ -51,6 +52,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@SuppressLint("MissingPermission")
 public class GpsLoggingService extends Service  {
     private static NotificationManager notificationManager;
     private static int NOTIFICATION_ID = 8675309;
