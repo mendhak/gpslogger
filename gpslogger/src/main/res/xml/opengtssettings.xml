@@ -22,7 +22,7 @@
         <ListPreference android:key="opengts_server_communication_method"
                         android:title="@string/opengts_server_communication_method"
                         android:summary="@string/opengts_server_communication_method_summary"
-                        android:entries="@array/opengts_server_communication_methods_values" android:defaultValue="0"
+                        android:entries="@array/opengts_server_communication_methods_values" android:defaultValue=""
                         android:entryValues="@array/opengts_server_communication_methods_values"/>
         <Preference android:key="autoopengts_server_path"
                             android:title="@string/autoopengts_server_path"

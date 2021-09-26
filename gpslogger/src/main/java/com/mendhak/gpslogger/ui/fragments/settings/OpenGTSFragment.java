@@ -68,6 +68,12 @@ public class OpenGTSFragment extends PreferenceFragmentCompat implements
         findPreference(PreferenceNames.OPENGTS_SERVER_PATH).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.OPENGTS_SERVER_PATH).setSummary(preferenceHelper.getOpenGTSServerPath());
 
+        findPreference(PreferenceNames.OPENGTS_ACCOUNT_NAME).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.OPENGTS_ACCOUNT_NAME).setSummary(preferenceHelper.getOpenGTSAccountName());
+
+        findPreference(PreferenceNames.OPENGTS_DEVICE_ID).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.OPENGTS_DEVICE_ID).setSummary(preferenceHelper.getOpenGTSDeviceId());
+
         findPreference("autoopengts_server_path").setOnPreferenceChangeListener(this);
         findPreference("opengts_device_id").setOnPreferenceChangeListener(this);
         findPreference("opengts_validatecustomsslcert").setOnPreferenceClickListener(this);
@@ -154,6 +160,16 @@ public class OpenGTSFragment extends PreferenceFragmentCompat implements
         if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENGTS_SERVER)){
             preference.setSummary(newValue.toString());
         }
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENGTS_PROTOCOL)){
+            preference.setSummary(newValue.toString());
+        }
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENGTS_ACCOUNT_NAME)){
+            preference.setSummary(newValue.toString());
+        }
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENGTS_DEVICE_ID)){
+            preference.setSummary(newValue.toString());
+        }
+
         return true;
     }
 
