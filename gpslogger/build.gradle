@@ -130,16 +130,7 @@ dependencies {
     //Cardviews
     implementation 'androidx.cardview:cardview:1.0.0'
 
-    //Material dialogs
-    //Change to 0.8.5.7 when released
-    implementation('com.github.afollestad.material-dialogs:core:0.9.6.0@aar') {
-        transitive = true
-    }
-    implementation('com.github.afollestad.material-dialogs:commons:0.9.6.0@aar') {
-        transitive = true
-    }
-
-    // A new material dialog
+    // Simple Dialog Fragments, replacing Material Dialogs.
     implementation 'io.github.eltos:simpledialogfragments:3.4'
 
     //The material drawer
