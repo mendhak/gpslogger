@@ -155,7 +155,6 @@ public class DropBoxManager extends FileSender {
                     oAuth1AccessToken = new DbxOAuth1AccessToken(preferenceHelper.getDropBoxAccessKeyName(), preferenceHelper.getDropBoxOauth1Secret());
                     LOG.debug("Requesting Oauth2 token...");
                     String newToken = upgrader.createOAuth2AccessToken(oAuth1AccessToken);
-                    LOG.debug("New token is " + newToken);
                     LOG.debug("Disabling the old Oauth1 token ");
                     upgrader.disableOAuth1AccessToken(oAuth1AccessToken);
                     return newToken;
