@@ -11,6 +11,7 @@
     <string name="settings_screen_name">GPSLogger Settings</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="hide">Hide</string>
     <string name="could_not_write_to_file">Could not write to file</string>
     <string name="add_description">Add a description</string>
     <string name="letters_numbers">Use only letters and numbers</string>
@@ -459,6 +460,7 @@
     <string name="hide_notification_from_status_bar_disallowed">Hiding notification is disallowed in Android Oreo onwards</string>
     <string name="reset_app_summary">This will reset the app, delete any preferences, delete GPSLogger files, and revoke permissions granted to this app. All data will be lost!</string>
     <string name="reset_app_title">Reset app</string>
+
 
 
 </resources>

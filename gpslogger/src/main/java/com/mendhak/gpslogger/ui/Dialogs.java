@@ -21,8 +21,9 @@ package com.mendhak.gpslogger.ui;
 
 
 import android.app.Activity;
-import android.app.FragmentManager;
+
 import androidx.fragment.app.FragmentActivity;
+
 import com.codekidlabs.storagechooser.StorageChooser;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Strings;
@@ -80,15 +81,15 @@ public class Dialogs {
 
     }
 
-    public static StorageChooser directoryChooser(Activity activity, FragmentManager fragmentManager){
-        return storageChooser(StorageChooser.DIRECTORY_CHOOSER, activity, fragmentManager);
+    public static StorageChooser directoryChooser(Activity activity){
+        return storageChooser(StorageChooser.DIRECTORY_CHOOSER, (FragmentActivity) activity);
     }
 
-    public static StorageChooser filePicker(Activity activity, FragmentManager fragmentManager){
-        return storageChooser(StorageChooser.FILE_PICKER, activity, fragmentManager);
+    public static StorageChooser filePicker(FragmentActivity activity){
+        return storageChooser(StorageChooser.FILE_PICKER, (FragmentActivity) activity);
     }
 
-    private static StorageChooser storageChooser(String chooserType, Activity activity, FragmentManager fragmentManager){
+    private static StorageChooser storageChooser(String chooserType, FragmentActivity activity){
         com.codekidlabs.storagechooser.Content scContent = new com.codekidlabs.storagechooser.Content();
         scContent.setCreateLabel(activity.getString(R.string.storage_chooser_create_label));
         scContent.setInternalStorageText(activity.getString(R.string.storage_chooser_internal_storage_text));
@@ -113,7 +114,7 @@ public class Dialogs {
 
         StorageChooser chooser = new StorageChooser.Builder()
                 .withActivity(activity)
-                .withFragmentManager(fragmentManager)
+                .withFragmentManager(activity.getFragmentManager())
                 .withMemoryBar(true)  //Just a bit fancy, a bar.
                 .allowCustomPath(true) //If false, defaults to /storage/path. If true, lets user pick a subfolder.
                 .hideFreeSpaceLabel(false) //Shows the "MiB" remaining
@@ -129,7 +130,7 @@ public class Dialogs {
     }
 
     public static void showError(String title, final String friendlyMessage, final String errorMessage, final Throwable throwable, final FragmentActivity activity){
-        SimpleErrorDialog.build().title(friendlyMessage).msg("TEST").msgHtml(getFormattedErrorMessageForDisplay(errorMessage,throwable)).show(activity);
+        SimpleErrorDialog.build().title(friendlyMessage).msgHtml(getFormattedErrorMessageForDisplay(errorMessage,throwable)).show(activity);
     }
 
     /**
@@ -144,8 +145,8 @@ public class Dialogs {
         SimpleDialog.build().title(title).msgHtml(message).show((FragmentActivity) activity);
     }
 
-    public static void progress(androidx.fragment.app.FragmentActivity activity, String title){
-        simpleProgress = SimpleProgressDialog.bar().title(title);
+    public static void progress(FragmentActivity activity, String title){
+        simpleProgress = SimpleProgressDialog.bar().title(title).neut(R.string.hide);
         simpleProgress.show(activity);
     }
 

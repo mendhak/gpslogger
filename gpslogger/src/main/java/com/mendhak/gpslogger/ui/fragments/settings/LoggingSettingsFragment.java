@@ -139,7 +139,7 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
                 return false;
             }
 
-            StorageChooser chooser = Dialogs.directoryChooser(getActivity(), getActivity().getFragmentManager());
+            StorageChooser chooser = Dialogs.directoryChooser(getActivity());
             chooser.setOnSelectListener(path -> {
                 LOG.debug(path);
                 if(Strings.isNullOrEmpty(path)) {

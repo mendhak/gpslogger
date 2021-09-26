@@ -132,7 +132,7 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
                 return false;
             }
 
-            StorageChooser chooser = Dialogs.filePicker(getActivity(), getActivity().getFragmentManager());
+            StorageChooser chooser = Dialogs.filePicker(getActivity());
             chooser.setOnSelectListener(path -> {
                 LOG.debug(path);
                 findPreference(PreferenceNames.SFTP_PRIVATE_KEY_PATH).setSummary(path);
