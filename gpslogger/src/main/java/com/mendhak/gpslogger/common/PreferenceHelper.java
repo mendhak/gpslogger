@@ -22,8 +22,7 @@ package com.mendhak.gpslogger.common;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.location.LocationManager;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;

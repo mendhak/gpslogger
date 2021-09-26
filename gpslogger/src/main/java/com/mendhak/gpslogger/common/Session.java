@@ -22,7 +22,8 @@ package com.mendhak.gpslogger.common;
 
 import android.content.SharedPreferences;
 import android.location.Location;
-import android.preference.PreferenceManager;
+
+import androidx.preference.PreferenceManager;
 
 
 public class Session {
