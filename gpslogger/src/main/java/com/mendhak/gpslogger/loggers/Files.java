@@ -245,6 +245,7 @@ public class Files {
 
     }
 
+    @SuppressWarnings({"unchecked"})
     public static void addItemToCacheFile(String item, String cacheKey, Context ctx){
         List<String> existingList = getListFromCacheFile(cacheKey, ctx);
         final LinkedHashSet<String> set = new LinkedHashSet(existingList);
@@ -274,6 +275,8 @@ public class Files {
         }
     }
 
+
+    @SuppressWarnings({"unchecked"})
     public static List<String> getListFromCacheFile(String cacheKey, Context ctx){
         ArrayList<String> items = new ArrayList<>();
         try

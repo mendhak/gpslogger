@@ -61,7 +61,23 @@
 -keep class com.jcraft.jzlib.ZStream
 -keep class com.jcraft.jsch.Compression
 -keep class org.ietf.jgss.*
+-dontwarn com.sun.jna.Library
 -dontwarn org.ietf.jgss.**
+-dontwarn com.sun.jna.Memory
+-dontwarn com.sun.jna.Native
+-dontwarn com.sun.jna.Platform
+-dontwarn com.sun.jna.Pointer
+-dontwarn com.sun.jna.Structure
+-dontwarn com.sun.jna.platform.win32.Kernel32
+-dontwarn com.sun.jna.platform.win32.User32
+-dontwarn com.sun.jna.platform.win32.WinBase$SECURITY_ATTRIBUTES
+-dontwarn com.sun.jna.platform.win32.WinBase
+-dontwarn com.sun.jna.platform.win32.WinDef$HWND
+-dontwarn com.sun.jna.platform.win32.WinDef$WPARAM
+-dontwarn com.sun.jna.platform.win32.WinNT$HANDLE
+-dontwarn com.sun.jna.win32.W32APIOptions
+-dontwarn org.newsclub.net.unix.AFUNIXSocketAddress
+-dontwarn org.newsclub.net.unix.AFUNIXSocketChannel
 #
 # SpongyCastle/BouncyCastle
 #
