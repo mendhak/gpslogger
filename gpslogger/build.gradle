@@ -5,7 +5,6 @@ buildscript {
         maven {
             url "https://plugins.gradle.org/m2/"
         }
-        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.2'
@@ -30,8 +29,6 @@ apply plugin: 'com.moowork.node'
 
 repositories {
     mavenCentral()
-
-    jcenter()
 
     maven {
         url "https://jitpack.io"
@@ -102,8 +99,8 @@ android {
 dependencies {
 
 //    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation "androidx.activity:activity:1.2.3"
-    implementation "androidx.fragment:fragment:1.3.3"
+    implementation "androidx.activity:activity:1.3.1"
+    implementation "androidx.fragment:fragment:1.3.6"
     implementation "androidx.preference:preference:1.1.1"
 
 
@@ -122,10 +119,8 @@ dependencies {
 
 
     //Android lollipop/material features including the Toolbar
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
 
-    //Recycler view required by material dialog custom URL alert box
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
     //Cardviews
     implementation 'androidx.cardview:cardview:1.0.0'
@@ -163,7 +158,7 @@ dependencies {
     implementation 'com.ms-square:expandableTextView:0.1.4'
 
     //The single letter text icons
-    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    implementation 'com.github.amulyakhare:TextDrawable:558677ea31'
 
 
     //OKHTTP client
@@ -196,8 +191,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:3.10.0'
     testImplementation 'org.json:json:20180813'
-    testImplementation 'androidx.test:runner:1.3.0'
-    testImplementation 'androidx.test:rules:1.3.0'
+    testImplementation 'androidx.test:runner:1.4.0'
+    testImplementation 'androidx.test:rules:1.4.0'
 
 
 }
