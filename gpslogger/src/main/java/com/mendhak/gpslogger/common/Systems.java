@@ -34,18 +34,9 @@ import android.net.NetworkInfo;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.PowerManager;
-import android.preference.PreferenceFragment;
 import android.provider.Settings;
-
-import androidx.activity.ComponentActivity;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.ui.Dialogs;
 
 import org.slf4j.Logger;
 
