@@ -58,7 +58,7 @@
             android:title="@string/gpslogger_folder_title"
             android:summary="@string/gpslogger_folder_summary" />
 
-        <ListPreference
+        <Preference
             android:key="new_file_creation"
             android:title="@string/new_file_creation_title"
             android:summary="@string/new_file_creation_summary"

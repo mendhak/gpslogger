@@ -45,10 +45,13 @@ import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.Dialogs;
 import org.slf4j.Logger;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
+import eltos.simpledialogfragment.list.SimpleListDialog;
 
 public class LoggingSettingsFragment extends PreferenceFragmentCompat
         implements
@@ -65,7 +68,7 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
         super.onCreate(savedInstanceState);
 
 
-        Preference gpsloggerFolder = findPreference("gpslogger_folder");
+        Preference gpsloggerFolder = findPreference(PreferenceNames.GPSLOGGER_FOLDER);
 
         String gpsLoggerFolderPath = preferenceHelper.getGpsLoggerFolder();
         gpsloggerFolder.setDefaultValue(gpsLoggerFolderPath);
@@ -76,26 +79,21 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
             gpsloggerFolder.setSummary(Html.fromHtml("<font color='red'>" + gpsLoggerFolderPath + "</font>"));
         }
 
-        SwitchPreferenceCompat logGpx = findPreference("log_gpx");
-        SwitchPreferenceCompat logGpx11 = findPreference("log_gpx_11");
+
+        SwitchPreferenceCompat logGpx = findPreference(PreferenceNames.LOG_TO_GPX);
+        SwitchPreferenceCompat logGpx11 = findPreference(PreferenceNames.LOG_AS_GPX_11);
         logGpx11.setTitle("      " + logGpx11.getTitle());
         logGpx11.setSummary("      " + logGpx11.getSummary());
-
-
         logGpx.setOnPreferenceChangeListener(this);
         logGpx11.setEnabled(logGpx.isChecked());
 
 
-        /**
-         * Logging Details - New file creation
-         */
-        ListPreference newFilePref = findPreference("new_file_creation");
-        newFilePref.setOnPreferenceChangeListener(this);
-        /* Trigger artificially the listener and perform validations. */
-        newFilePref.getOnPreferenceChangeListener()
-                .onPreferenceChange(newFilePref, newFilePref.getValue());
+        Preference newFilePref = findPreference(PreferenceNames.NEW_FILE_CREATION_MODE);
+        newFilePref.setOnPreferenceClickListener(this);
+        newFilePref.setSummary(getFileCreationLabelFromValue(preferenceHelper.getNewFileCreationMode()));
 
-        SwitchPreferenceCompat chkfile_prefix_serial = findPreference("new_file_prefix_serial");
+
+        SwitchPreferenceCompat chkfile_prefix_serial = findPreference(PreferenceNames.PREFIX_SERIAL_TO_FILENAME);
         if (Strings.isNullOrEmpty(Strings.getBuildSerial())) {
             chkfile_prefix_serial.setEnabled(false);
             chkfile_prefix_serial.setSummary("This option not available on older phones or if a serial id is not present");
@@ -105,9 +103,13 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
         }
 
 
-        findPreference("new_file_custom_name").setOnPreferenceClickListener(this);
-        findPreference("log_customurl_enabled").setOnPreferenceChangeListener(this);
-        findPreference("log_opengts").setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.CUSTOM_FILE_NAME).setOnPreferenceClickListener(this);
+        if(!Strings.isNullOrEmpty(preferenceHelper.getCustomFileName())){
+            findPreference(PreferenceNames.CUSTOM_FILE_NAME).setSummary(preferenceHelper.getCustomFileName());
+        }
+
+        findPreference(PreferenceNames.LOG_TO_URL).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.LOG_TO_OPENGTS).setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -128,7 +130,23 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
-        if(preference.getKey().equalsIgnoreCase("gpslogger_folder")){
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.NEW_FILE_CREATION_MODE)){
+
+            String[] values = getResources().getStringArray(R.array.filecreation_values);
+            ArrayList<String> valuesArray = new ArrayList<>(Arrays.asList(values));
+            int position = valuesArray.indexOf(preferenceHelper.getNewFileCreationMode());
+
+            SimpleListDialog.build()
+                    .title(R.string.new_file_creation_title)
+                    .msg(R.string.new_file_creation_summary)
+                    .items(getActivity(), R.array.filecreation_entries)
+                    .choiceMode(SimpleListDialog.SINGLE_CHOICE)
+                    .choicePreset(position)
+                    .show(this, PreferenceNames.NEW_FILE_CREATION_MODE);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.GPSLOGGER_FOLDER)){
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
                 SimpleDialog.build()
@@ -165,17 +183,17 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
             chooser.show();
         }
 
-        if(preference.getKey().equalsIgnoreCase("new_file_custom_name")){
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.CUSTOM_FILE_NAME)){
 
             SimpleFormDialog.build()
                     .title(R.string.new_file_custom_title)
-                    .msg(R.string.new_file_custom_message)
+                    .msgHtml(getString(R.string.new_file_custom_summary) + "<br /><br/>" +  getString(R.string.new_file_custom_message))
                     .pos(R.string.ok)
                     .neg(R.string.cancel)
                     .fields(
-                            Input.plain("customfilename").hint(R.string.letters_numbers).text(preferenceHelper.getCustomFileName())
+                            Input.plain(PreferenceNames.CUSTOM_FILE_NAME).hint(R.string.letters_numbers).text(preferenceHelper.getCustomFileName()).required()
                     )
-                    .show(this,"customfilename");
+                    .show(this,PreferenceNames.CUSTOM_FILE_NAME);
         }
 
         return false;
@@ -185,14 +203,14 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
     @Override
     public boolean onPreferenceChange(final Preference preference, Object newValue) {
 
-        if(preference.getKey().equalsIgnoreCase("log_gpx")){
-            SwitchPreferenceCompat logGpx11 = findPreference("log_gpx_11");
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_GPX)){
+            SwitchPreferenceCompat logGpx11 = findPreference(PreferenceNames.LOG_AS_GPX_11);
             logGpx11.setEnabled((Boolean)newValue);
             return true;
         }
 
 
-        if (preference.getKey().equalsIgnoreCase("log_opengts")) {
+        if (preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_OPENGTS)) {
 
             if(!((SwitchPreferenceCompat) preference).isChecked() && (Boolean)newValue  ) {
 
@@ -204,7 +222,7 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
             return true;
         }
 
-        if(preference.getKey().equalsIgnoreCase("log_customurl_enabled") ){
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_URL) ){
 
             // Bug in SwitchPreference: http://stackoverflow.com/questions/19503931/switchpreferences-calls-multiple-times-the-onpreferencechange-method
             // Check if isChecked == false && newValue == true
@@ -217,16 +235,6 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
             return true;
         }
 
-        if (preference.getKey().equals("new_file_creation")) {
-
-            findPreference(PreferenceNames.ASK_CUSTOM_FILE_NAME).setEnabled(newValue.equals("custom"));
-            findPreference(PreferenceNames.CUSTOM_FILE_NAME).setEnabled(newValue.equals("custom"));
-            findPreference(PreferenceNames.CUSTOM_FILE_NAME_KEEP_CHANGING).setEnabled(newValue.equals("custom"));
-            findPreference(PreferenceNames.PREFIX_SERIAL_TO_FILENAME).setEnabled(!newValue.equals("custom"));
-
-
-            return true;
-        }
         return false;
     }
 
@@ -247,9 +255,10 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
 
     @Override
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
-        if(dialogTag.equalsIgnoreCase("customfilename") && which==BUTTON_POSITIVE){
-            String customFilename = extras.getString("customfilename");
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.CUSTOM_FILE_NAME) && which==BUTTON_POSITIVE){
+            String customFilename = extras.getString(PreferenceNames.CUSTOM_FILE_NAME);
             preferenceHelper.setCustomFileName(customFilename);
+            findPreference(PreferenceNames.CUSTOM_FILE_NAME).setSummary(preferenceHelper.getCustomFileName());
         }
 
         if(dialogTag.equalsIgnoreCase("FILE_PERMISSIONS_REQUIRED") && which == BUTTON_POSITIVE){
@@ -258,6 +267,35 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
             return true;
         }
 
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.NEW_FILE_CREATION_MODE) && which == BUTTON_POSITIVE){
+            String chosenLabel = extras.getString(SimpleListDialog.SELECTED_SINGLE_LABEL);
+            String chosenValue = getFileCreationValueFromLabel(chosenLabel);
+
+            preferenceHelper.setNewFileCreationMode(chosenValue);
+            findPreference(PreferenceNames.NEW_FILE_CREATION_MODE).setSummary(chosenLabel);
+            setPreferencesEnabledDisabled();
+        }
+
         return false;
     }
+
+    private String getFileCreationLabelFromValue(String value){
+        String[] values = getResources().getStringArray(R.array.filecreation_values);
+        ArrayList<String> valuesArray = new ArrayList<>(Arrays.asList(values));
+        int chosenIndex = valuesArray.indexOf(value);
+        String[] labels = getResources().getStringArray(R.array.filecreation_entries);
+        String chosenLabel = labels[chosenIndex];
+        return chosenLabel;
+    }
+
+    private String getFileCreationValueFromLabel(String label){
+        String[] labels = getResources().getStringArray(R.array.filecreation_entries);
+        ArrayList<String> valuesArray = new ArrayList<>(Arrays.asList(labels));
+        int chosenIndex = valuesArray.indexOf(label);
+
+        String[] values = getResources().getStringArray(R.array.filecreation_values);
+        String chosenValue = values[chosenIndex];
+        return chosenValue;
+    }
+
 }

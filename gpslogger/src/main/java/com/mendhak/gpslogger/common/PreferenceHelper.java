@@ -650,6 +650,10 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.NEW_FILE_CREATION_MODE, "onceaday");
     }
 
+    public void setNewFileCreationMode(String mode){
+        prefs.edit().putString(PreferenceNames.NEW_FILE_CREATION_MODE, mode).apply();
+    }
+
 
     /**
      * Whether a new file should be created daily
