@@ -35,7 +35,6 @@ public class GpsLoggerDrawerItem {
         .withDescription(resSummary)
         .withIcon(resIcon)
         .withIdentifier(identifier)
-        .withTextColorRes(R.color.primaryColorText)
         .withDescriptionTextColorRes(R.color.secondaryColorText)
         .withSelectable(false);
 
@@ -47,7 +46,6 @@ public class GpsLoggerDrawerItem {
                 .withName(resTitle)
                 .withIcon(resIcon)
                 .withIdentifier(identifier)
-                .withTextColorRes(R.color.secondaryColorText)
                 .withDescriptionTextColorRes(R.color.secondaryColorText)
                 .withSelectable(false);
 

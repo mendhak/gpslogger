@@ -841,28 +841,24 @@ public class GpsMainActivity extends AppCompatActivity
                         .withName(getString(R.string.profile_default))
                         .withIdentifier(100)
                         .withTag("PROFILE_DEFAULT")
-                        .withTextColorRes(R.color.primaryColorText)
                 ,
                 new ProfileSettingDrawerItem()
                         .withIcon(R.drawable.library_plus)
                         .withIdentifier(101)
                         .withName(getString(R.string.profile_add_new))
                         .withTag("PROFILE_ADD")
-                        .withTextColorRes(R.color.primaryColorText)
                 ,
                 new ProfileSettingDrawerItem()
                         .withIcon(R.drawable.link_plus)
                         .withIdentifier(102)
                         .withName(getString(R.string.profile_add_from_url))
                         .withTag("PROFILE_URL")
-                        .withTextColorRes(R.color.primaryColorText)
                 ,
                 new ProfileSettingDrawerItem()
                         .withIcon(R.drawable.download_outline)
                         .withIdentifier(103)
                         .withName(getString(R.string.save))
                         .withTag("PROFILE_SAVE")
-                        .withTextColorRes(R.color.primaryColorText)
 
         );
 
@@ -887,7 +883,11 @@ public class GpsMainActivity extends AppCompatActivity
                 name = name.substring(0, pos);
             }
 
-            ProfileDrawerItem pdi = new ProfileDrawerItem().withName(name).withTextColorRes(R.color.primaryColorText);
+            ProfileDrawerItem pdi = new ProfileDrawerItem().withName(name);
+
+            if(Systems.isDarkMode(this)){
+                pdi.withTextColorRes(R.color.primaryColorLight);
+            }
 
             drawerHeader.addProfile(pdi, 1);
 

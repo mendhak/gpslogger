@@ -28,6 +28,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.codekidlabs.storagechooser.StorageChooser;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.components.SimpleErrorDialog;
 
@@ -106,22 +107,15 @@ public class Dialogs {
 
         StorageChooser.Theme scTheme = new StorageChooser.Theme(activity.getApplicationContext());
 
-        int nightModeFlags = activity.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        switch (nightModeFlags) {
-            case Configuration.UI_MODE_NIGHT_YES:
-            case Configuration.UI_MODE_NIGHT_UNDEFINED:
-                scTheme.setScheme(activity.getResources().getIntArray(com.codekidlabs.storagechooser.R.array.default_dark));
-                break;
-
-            case Configuration.UI_MODE_NIGHT_NO:
-
-                int[] myScheme = scTheme.getDefaultScheme();
-                myScheme[StorageChooser.Theme.OVERVIEW_HEADER_INDEX] = activity.getResources().getColor(R.color.accentColor);
-                myScheme[StorageChooser.Theme.SEC_ADDRESS_BAR_BG] = activity.getResources().getColor(R.color.accentColor);
-                myScheme[StorageChooser.Theme.SEC_FOLDER_TINT_INDEX] = activity.getResources().getColor(R.color.primaryColor);
-                scTheme.setScheme(myScheme);
-                break;
-
+        if(Systems.isDarkMode(activity)){
+            scTheme.setScheme(activity.getResources().getIntArray(com.codekidlabs.storagechooser.R.array.default_dark));
+        }
+        else {
+            int[] myScheme = scTheme.getDefaultScheme();
+            myScheme[StorageChooser.Theme.OVERVIEW_HEADER_INDEX] = activity.getResources().getColor(R.color.accentColor);
+            myScheme[StorageChooser.Theme.SEC_ADDRESS_BAR_BG] = activity.getResources().getColor(R.color.accentColor);
+            myScheme[StorageChooser.Theme.SEC_FOLDER_TINT_INDEX] = activity.getResources().getColor(R.color.primaryColor);
+            scTheme.setScheme(myScheme);
         }
 
         boolean showOverview = Files.hasSDCard(activity);

@@ -22,12 +22,12 @@ package com.mendhak.gpslogger.common;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -36,6 +36,8 @@ import android.os.Build;
 import android.os.PowerManager;
 import android.provider.Settings;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import com.mendhak.gpslogger.common.slf4j.Logs;
 
 import org.slf4j.Logger;
@@ -162,6 +164,11 @@ public class Systems {
         boolean granted = ContextCompat.checkSelfPermission(context, permissionName) == PackageManager.PERMISSION_GRANTED;
         LOG.debug("Permission " + permissionName + " : " + granted);
         return granted;
+    }
+
+    public static boolean isDarkMode(FragmentActivity activity){
+        int nightModeFlags = activity.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
     }
 
 

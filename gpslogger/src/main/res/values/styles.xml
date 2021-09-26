@@ -24,8 +24,15 @@
         <!--No more actionbar, use toolbar instead-->
         <item name="windowActionBar">false</item>
 
+        <!--The preference screens-->
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
 
+        <!-- Material Drawer Colors, not all can be set via XML though, some are in code. -->
+        <item name="material_drawer_primary_text">@color/primaryColorText</item>
+        <item name="material_drawer_secondary_text">@color/secondaryColorText</item>
+        <item name="material_drawer_hint_text">@color/primaryColorLight</item>
+        <item name="material_drawer_header_selection_text">@color/primaryColorLight</item>
+        <item name="material_drawer_selected">@color/divider</item>
 
     </style>
 
@@ -57,7 +64,7 @@
         <item name="iconSpaceReserved">false</item>
     </style>
 
-
+    <!--    See values-night/styles.xml for dark theme overridden values.-->
 
     <color name="primaryColor">#607d8b</color>
     <color name="primaryColorDark">#455a64</color>
