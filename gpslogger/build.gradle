@@ -8,7 +8,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.2'
-        classpath "com.mendhak.gradlecrowdin:crowdin-plugin:0.1.0"
+
         classpath 'org.jacoco:org.jacoco.core:0.7.4.201502262128'
         classpath "com.moowork.gradle:gradle-node-plugin:0.13"
     }
@@ -17,8 +17,6 @@ buildscript {
 //Android
 apply plugin: 'com.android.application'
 
-//Crowdin task
-apply plugin: 'com.mendhak.gradlecrowdin'
 //Generating PGP
 apply plugin: 'signing'
 //Generating colorful output
@@ -248,52 +246,6 @@ tasks.whenTaskAdded { task ->
     }
 }
 
-
-//Download translations from Crowdin
-if (project.hasProperty("CROWDIN_API_KEY")) {
-
-    task crowdin1(group:"crowdin", type:com.mendhak.gradlecrowdin.DownloadTranslationsTask){
-
-            apiKey = CROWDIN_API_KEY
-            destination = "$projectDir/src/main/res"
-            projectId = 'gpslogger-for-android'
-
-            //Android projects
-            renameMapping = [
-                    from: '^([^-]*)/strings.xml$',
-                    to  : /values-\1\/strings.xml/
-            ]
-
-            excludePattern = '**/*.txt'
-    }
-
-    task crowdin2(group:"crowdin", type:com.mendhak.gradlecrowdin.DownloadTranslationsTask, dependsOn:"crowdin1"){
-
-        apiKey = CROWDIN_API_KEY
-        destination = "$projectDir/src/main/res"
-        projectId = 'gpslogger-for-android'
-
-        //Android projects
-        renameMapping = [
-                from: '^([^-]*)-([^-]*)/strings.xml$',
-                to  : /values-\1-r\2\/strings.xml/
-        ]
-
-        excludePattern = '**/*.txt'
-    }
-
-    task getallTranslations(group:"crowdin", dependsOn:"crowdin2")  {
-    }
-
-
-    crowdinUpload {
-        apiKey = CROWDIN_API_KEY
-        projectId = 'gpslogger-for-android'
-        files = [
-                [name: "strings.xml", source: "$projectDir/src/main/res/values/strings.xml"]
-        ]
-    }
-}
 
 task buildDocs(group: "docs", type: NodeTask, dependsOn:"installNodeModules") {
     script = file('../assets/generate-pages/index.js')
