@@ -22,7 +22,6 @@ package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
-import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import android.text.InputType;
