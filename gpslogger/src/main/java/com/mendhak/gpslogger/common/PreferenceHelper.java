@@ -208,6 +208,9 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.FTP_SERVER, "");
     }
 
+    public void setFtpServerName(String server){
+        prefs.edit().putString(PreferenceNames.FTP_SERVER, server).apply();
+    }
 
     /**
      * FTP Port for auto send
@@ -229,6 +232,10 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.FTP_USERNAME, "");
     }
 
+
+    public void setFtpUsername(String user){
+        prefs.edit().putString(PreferenceNames.FTP_USERNAME, user).apply();
+    }
 
     /**
      * FTP Password for auto send
@@ -284,6 +291,10 @@ public class PreferenceHelper {
     @ProfilePreference(name= PreferenceNames.FTP_DIRECTORY)
     public String getFtpDirectory() {
         return prefs.getString(PreferenceNames.FTP_DIRECTORY, "GPSLogger");
+    }
+
+    public void setFtpDirectory(String dir){
+        prefs.edit().putString(PreferenceNames.FTP_DIRECTORY, dir).apply();
     }
 
 

@@ -43,11 +43,12 @@ import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
 
+
 import org.slf4j.Logger;
 
 public class FtpFragment
         extends PreferenceFragmentCompat
-        implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener,
+        implements Preference.OnPreferenceClickListener,
         SimpleDialog.OnDialogResultListener,
         PreferenceValidator {
     private static final Logger LOG = Logs.of(FtpFragment.class);
@@ -57,16 +58,16 @@ public class FtpFragment
         super.onCreate(savedInstanceState);
 
 
-        findPreference(PreferenceNames.FTP_SERVER).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.FTP_SERVER).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.FTP_SERVER).setSummary(preferenceHelper.getFtpServerName());
 
-        findPreference(PreferenceNames.FTP_USERNAME).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.FTP_USERNAME).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.FTP_USERNAME).setSummary(preferenceHelper.getFtpUsername());
 
         findPreference(PreferenceNames.FTP_PASSWORD).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.FTP_PASSWORD).setSummary(preferenceHelper.getFtpPassword().replaceAll(".","*"));
 
-        findPreference(PreferenceNames.FTP_DIRECTORY).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.FTP_DIRECTORY).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.FTP_DIRECTORY).setSummary(preferenceHelper.getFtpDirectory());
 
         findPreference(PreferenceNames.FTP_PORT).setOnPreferenceClickListener(this);
@@ -111,11 +112,48 @@ public class FtpFragment
             return true;
         }
 
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_SERVER)){
+            SimpleFormDialog.build()
+                    .title(R.string.autoopengts_server)
+                    .msg(R.string.autoopengts_server_summary)
+                    .fields(
+                            Input.plain(PreferenceNames.FTP_SERVER)
+                                    .required()
+                                    .text(preferenceHelper.getFtpServerName())
+                                    .hint(R.string.autoopengts_server_summary)
+                    ).show(this, PreferenceNames.FTP_SERVER);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_USERNAME)){
+            SimpleFormDialog.build()
+                    .title(R.string.autoftp_username)
+                    .fields(
+                            Input.plain(PreferenceNames.FTP_USERNAME)
+                                    .required()
+                                    .text(preferenceHelper.getFtpUsername())
+                    ).show(this, PreferenceNames.FTP_USERNAME);
+            return true;
+        }
+
         if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_PASSWORD)){
             SimpleFormDialog.build().title(R.string.autoftp_password)
                     .fields(
                             Input.plain(PreferenceNames.FTP_PASSWORD).text(preferenceHelper.getFtpPassword()).showPasswordToggle().inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     ).show(this, PreferenceNames.FTP_PASSWORD);
+            return true;
+        }
+
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_DIRECTORY)){
+            SimpleFormDialog.build()
+                    .title(R.string.autoftp_directory)
+                    .fields(
+                            Input.plain(PreferenceNames.FTP_DIRECTORY)
+                                    .required()
+                                    .text(preferenceHelper.getFtpDirectory())
+                    ).show(this, PreferenceNames.FTP_DIRECTORY);
+            return true;
         }
 
         if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_PORT)){
@@ -124,6 +162,7 @@ public class FtpFragment
                             Input.plain(PreferenceNames.FTP_PORT).required().text(String.valueOf(preferenceHelper.getFtpPort())).inputType(InputType.TYPE_CLASS_NUMBER)
                     )
                     .show( this, PreferenceNames.FTP_PORT);
+            return true;
         }
 
         if (preference.getKey().equalsIgnoreCase("autoftp_test")) {
@@ -182,41 +221,47 @@ public class FtpFragment
             }
     }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_SERVER)){
-            preference.setSummary(newValue.toString());
-            return true;
-        }
-
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_USERNAME)){
-            preference.setSummary(newValue.toString());
-            return true;
-        }
-
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_DIRECTORY)){
-            preference.setSummary(newValue.toString());
-            return true;
-        }
-
-        return false;
-    }
 
     @Override
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.FTP_PASSWORD) && which == BUTTON_POSITIVE){
+
+        if(which != BUTTON_POSITIVE){ return true; }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.FTP_PASSWORD)){
             String ftpPass = extras.getString(PreferenceNames.FTP_PASSWORD);
             preferenceHelper.setFtpPassword(ftpPass);
             findPreference(PreferenceNames.FTP_PASSWORD).setSummary(ftpPass.replaceAll(".","*"));
             return true;
         }
 
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.FTP_PORT) && which == BUTTON_POSITIVE){
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.FTP_PORT)){
             String port = extras.getString(PreferenceNames.FTP_PORT);
             preferenceHelper.setFtpPort(port);
             findPreference(PreferenceNames.FTP_PORT).setSummary(port);
             return true;
         }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.FTP_SERVER)){
+            String server = extras.getString(PreferenceNames.FTP_SERVER);
+            preferenceHelper.setFtpServerName(server);
+            findPreference(PreferenceNames.FTP_SERVER).setSummary(server);
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.FTP_USERNAME)){
+            String user = extras.getString(PreferenceNames.FTP_USERNAME);
+            preferenceHelper.setFtpUsername(user);
+            findPreference(PreferenceNames.FTP_USERNAME).setSummary(user);
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.FTP_DIRECTORY)){
+            String dir = extras.getString(PreferenceNames.FTP_DIRECTORY);
+            preferenceHelper.setFtpDirectory(dir);
+            findPreference(PreferenceNames.FTP_DIRECTORY).setSummary(dir);
+            return true;
+        }
+
         return false;
     }
 }

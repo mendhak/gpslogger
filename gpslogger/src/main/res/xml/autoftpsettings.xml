@@ -8,14 +8,14 @@
         android:title="@string/autosend_enabled" />
 
 
-    <EditTextPreference
+    <Preference
             android:key="autoftp_server"
             android:title="@string/autoopengts_server"
             android:summary="@string/autoopengts_server_summary"
             android:dialogTitle="@string/autoopengts_server"
             android:hint="@string/autoopengts_server_summary"/>
 
-    <EditTextPreference
+    <Preference
             android:key="autoftp_username"
             android:title="@string/autoftp_username"
             android:dialogTitle="@string/autoftp_username"/>
@@ -26,7 +26,7 @@
             android:dialogTitle="@string/autoftp_password"
             android:password="true"/>
 
-    <EditTextPreference
+    <Preference
             android:key="autoftp_directory"
             android:title="@string/autoftp_directory"
             android:dialogTitle="@string/autoftp_directory"
