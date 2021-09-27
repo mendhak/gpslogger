@@ -792,7 +792,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.OPENGTS_PORT)
     public String getOpenGTSServerPort() {
-        return prefs.getString(PreferenceNames.OPENGTS_PORT, "");
+        return prefs.getString(PreferenceNames.OPENGTS_PORT, "443");
     }
 
     public void setOpenGTSServerPort(String port){
@@ -804,7 +804,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.OPENGTS_PROTOCOL)
     public String getOpenGTSServerCommunicationMethod() {
-        return prefs.getString(PreferenceNames.OPENGTS_PROTOCOL, "");
+        return prefs.getString(PreferenceNames.OPENGTS_PROTOCOL, "HTTPS");
     }
 
 
@@ -828,6 +828,10 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.OPENGTS_DEVICE_ID, "");
     }
 
+    public void setOpenGTSDeviceId(String deviceId){
+        prefs.edit().putString(PreferenceNames.OPENGTS_DEVICE_ID, deviceId).apply();
+    }
+
 
     /**
      * Account name for OpenGTS communication
@@ -837,7 +841,9 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.OPENGTS_ACCOUNT_NAME, "");
     }
 
-
+    public void setOpenGTSAccountName(String account){
+        prefs.edit().putString(PreferenceNames.OPENGTS_ACCOUNT_NAME, account).apply();
+    }
 
 
     /**

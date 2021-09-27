@@ -53,9 +53,9 @@ public class OpenGTSFragment extends PreferenceFragmentCompat implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        findPreference("autoopengts_enabled").setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.AUTOSEND_OPENGTS_ENABLED).setOnPreferenceChangeListener(this);
 
-        findPreference(PreferenceNames.OPENGTS_SERVER).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.OPENGTS_SERVER).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.OPENGTS_SERVER).setSummary(preferenceHelper.getOpenGTSServer());
 
         findPreference(PreferenceNames.OPENGTS_PORT).setOnPreferenceClickListener(this);
@@ -63,19 +63,23 @@ public class OpenGTSFragment extends PreferenceFragmentCompat implements
 
 
         findPreference(PreferenceNames.OPENGTS_PROTOCOL).setOnPreferenceChangeListener(this);
-        findPreference(PreferenceNames.OPENGTS_PROTOCOL).setSummary(preferenceHelper.getOpenGTSServerCommunicationMethod());
+        if(!Strings.isNullOrEmpty(preferenceHelper.getOpenGTSServerCommunicationMethod())){
+            findPreference(PreferenceNames.OPENGTS_PROTOCOL).setSummary(preferenceHelper.getOpenGTSServerCommunicationMethod());
+        }
+
 
         findPreference(PreferenceNames.OPENGTS_SERVER_PATH).setOnPreferenceClickListener(this);
-        findPreference(PreferenceNames.OPENGTS_SERVER_PATH).setSummary(preferenceHelper.getOpenGTSServerPath());
+        if(!Strings.isNullOrEmpty(preferenceHelper.getOpenGTSServerPath())){
+            findPreference(PreferenceNames.OPENGTS_SERVER_PATH).setSummary(preferenceHelper.getOpenGTSServerPath());
+        }
 
-        findPreference(PreferenceNames.OPENGTS_ACCOUNT_NAME).setOnPreferenceChangeListener(this);
+
+        findPreference(PreferenceNames.OPENGTS_ACCOUNT_NAME).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.OPENGTS_ACCOUNT_NAME).setSummary(preferenceHelper.getOpenGTSAccountName());
 
-        findPreference(PreferenceNames.OPENGTS_DEVICE_ID).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.OPENGTS_DEVICE_ID).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.OPENGTS_DEVICE_ID).setSummary(preferenceHelper.getOpenGTSDeviceId());
 
-        findPreference("autoopengts_server_path").setOnPreferenceChangeListener(this);
-        findPreference("opengts_device_id").setOnPreferenceChangeListener(this);
         findPreference("opengts_validatecustomsslcert").setOnPreferenceClickListener(this);
 
     }
@@ -106,7 +110,10 @@ public class OpenGTSFragment extends PreferenceFragmentCompat implements
             SimpleFormDialog.build().title(R.string.autoftp_port)
                     .neg(R.string.cancel)
                     .fields(
-                            Input.plain(PreferenceNames.OPENGTS_PORT).required().text(preferenceHelper.getOpenGTSServerPort()).inputType(InputType.TYPE_CLASS_NUMBER)
+                            Input.plain(PreferenceNames.OPENGTS_PORT)
+                                    .required().text(preferenceHelper
+                                    .getOpenGTSServerPort())
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
                     )
                     .show( this, PreferenceNames.OPENGTS_PORT);
             return true;
@@ -117,11 +124,44 @@ public class OpenGTSFragment extends PreferenceFragmentCompat implements
                     .neg(R.string.cancel)
                     .msg(R.string.autoopengts_server_path_summary)
                     .fields(
-                            Input.plain(PreferenceNames.OPENGTS_SERVER_PATH).required().text(preferenceHelper.getOpenGTSServerPath())
+                            Input.plain(PreferenceNames.OPENGTS_SERVER_PATH)
+                                    .required()
+                                    .text(preferenceHelper.getOpenGTSServerPath())
                     )
                     .show(this, PreferenceNames.OPENGTS_SERVER_PATH);
         }
 
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENGTS_SERVER)){
+            SimpleFormDialog.build().title(R.string.autoopengts_server)
+                    .neg(R.string.cancel)
+                    .fields(
+                            Input.plain(PreferenceNames.OPENGTS_SERVER)
+                                    .required()
+                                    .hint(R.string.autoopengts_server_summary)
+                                    .text(preferenceHelper.getOpenGTSServer())
+                    )
+                    .show(this, PreferenceNames.OPENGTS_SERVER);
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENGTS_ACCOUNT_NAME)){
+            SimpleFormDialog.build().title(R.string.autoopengts_accountname)
+                    .neg(R.string.cancel)
+                    .fields(
+                            Input.plain(PreferenceNames.OPENGTS_ACCOUNT_NAME)
+                                    .text(preferenceHelper.getOpenGTSAccountName())
+                    )
+                    .show(this, PreferenceNames.OPENGTS_ACCOUNT_NAME);
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENGTS_DEVICE_ID)){
+            SimpleFormDialog.build().title(R.string.autoopengts_device_id)
+                    .neg(R.string.cancel)
+                    .fields(
+                            Input.plain(PreferenceNames.OPENGTS_DEVICE_ID)
+                                    .text(preferenceHelper.getOpenGTSDeviceId())
+                    )
+                    .show(this, PreferenceNames.OPENGTS_DEVICE_ID);
+        }
 
         return true;
     }
@@ -157,16 +197,7 @@ public class OpenGTSFragment extends PreferenceFragmentCompat implements
 
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENGTS_SERVER)){
-            preference.setSummary(newValue.toString());
-        }
         if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENGTS_PROTOCOL)){
-            preference.setSummary(newValue.toString());
-        }
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENGTS_ACCOUNT_NAME)){
-            preference.setSummary(newValue.toString());
-        }
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OPENGTS_DEVICE_ID)){
             preference.setSummary(newValue.toString());
         }
 
@@ -197,6 +228,29 @@ public class OpenGTSFragment extends PreferenceFragmentCompat implements
             findPreference(PreferenceNames.OPENGTS_SERVER_PATH).setSummary(path);
             return true;
         }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.OPENGTS_SERVER)){
+            String server = extras.getString(PreferenceNames.OPENGTS_SERVER);
+            preferenceHelper.setOpenGTSServer(server);
+            findPreference(PreferenceNames.OPENGTS_SERVER).setSummary(server);
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.OPENGTS_ACCOUNT_NAME)){
+            String acct = extras.getString(PreferenceNames.OPENGTS_ACCOUNT_NAME);
+            preferenceHelper.setOpenGTSAccountName(acct);
+            findPreference(PreferenceNames.OPENGTS_ACCOUNT_NAME).setSummary(acct);
+            return true;
+        }
+
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.OPENGTS_DEVICE_ID)){
+            String dev = extras.getString(PreferenceNames.OPENGTS_DEVICE_ID);
+            preferenceHelper.setOpenGTSDeviceId(dev);
+            findPreference(PreferenceNames.OPENGTS_DEVICE_ID).setSummary(dev);
+            return true;
+        }
+
         return false;
     }
 }
