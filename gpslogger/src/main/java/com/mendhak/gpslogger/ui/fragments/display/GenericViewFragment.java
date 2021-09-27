@@ -79,7 +79,8 @@ public abstract class GenericViewFragment extends Fragment {
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LocationServicesUnavailable locationServicesUnavailable) {
-        SimpleDialog.build().msg(R.string.gpsprovider_unavailable)
+        SimpleDialog.build()
+                .msg(R.string.gpsprovider_unavailable)
                 .pos(R.string.ok)
                 .neg(R.string.cancel)
                 .show( getActivity(), "GPS_PROVIDER_UNAVAILABLE");

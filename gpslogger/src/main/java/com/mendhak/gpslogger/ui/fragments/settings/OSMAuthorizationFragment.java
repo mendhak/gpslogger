@@ -154,7 +154,8 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
                     .title(R.string.osm_description)
                     .msg(R.string.osm_description_summary)
                     .fields(
-                            Input.plain(PreferenceNames.OPENSTREETMAP_DESCRIPTION).text(preferenceHelper.getOSMDescription())
+                            Input.plain(PreferenceNames.OPENSTREETMAP_DESCRIPTION)
+                                    .text(preferenceHelper.getOSMDescription())
                     )
                     .show(this, PreferenceNames.OPENSTREETMAP_DESCRIPTION);
             return true;
@@ -165,7 +166,8 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
                     .title(R.string.osm_tags)
                     .msg(R.string.osm_tags_summary)
                     .fields(
-                            Input.plain(PreferenceNames.OPENSTREETMAP_TAGS).text(preferenceHelper.getOSMTags())
+                            Input.plain(PreferenceNames.OPENSTREETMAP_TAGS)
+                                    .text(preferenceHelper.getOSMTags())
                     )
                     .show(this, PreferenceNames.OPENSTREETMAP_TAGS);
             return true;

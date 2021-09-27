@@ -139,8 +139,14 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
                     .neg(R.string.cancel)
                     .pos(R.string.ok)
                     .fields(
-                            Input.plain(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME).text(preferenceHelper.getCustomLoggingBasicAuthUsername()).hint(R.string.autoftp_username),
-                            Input.plain(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD).text(preferenceHelper.getCustomLoggingBasicAuthPassword()).hint(R.string.autoftp_password).showPasswordToggle().inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                            Input.plain(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME)
+                                    .text(preferenceHelper.getCustomLoggingBasicAuthUsername())
+                                    .hint(R.string.autoftp_username),
+                            Input.plain(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD)
+                                    .text(preferenceHelper.getCustomLoggingBasicAuthPassword())
+                                    .hint(R.string.autoftp_password)
+                                    .showPasswordToggle()
+                                    .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     )
                     .show(this,PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME);
 

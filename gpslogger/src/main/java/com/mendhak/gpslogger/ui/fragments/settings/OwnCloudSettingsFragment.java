@@ -121,7 +121,10 @@ public class OwnCloudSettingsFragment
         if(preference.getKey().equalsIgnoreCase(PreferenceNames.OWNCLOUD_PASSWORD)){
             SimpleFormDialog.build().title(R.string.autoftp_password)
                     .fields(
-                            Input.plain(PreferenceNames.OWNCLOUD_PASSWORD).text(preferenceHelper.getOwnCloudPassword()).showPasswordToggle().inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                            Input.plain(PreferenceNames.OWNCLOUD_PASSWORD)
+                                    .text(preferenceHelper.getOwnCloudPassword())
+                                    .showPasswordToggle()
+                                    .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                         )
                     .show(this, PreferenceNames.OWNCLOUD_PASSWORD);
             return true;
@@ -132,7 +135,8 @@ public class OwnCloudSettingsFragment
                     .title(R.string.autoftp_directory)
                     .msg(R.string.owncloud_directory_summary)
                     .fields(
-                            Input.plain(PreferenceNames.OWNCLOUD_DIRECTORY).text(preferenceHelper.getOwnCloudDirectory())
+                            Input.plain(PreferenceNames.OWNCLOUD_DIRECTORY)
+                                    .text(preferenceHelper.getOwnCloudDirectory())
                     )
                     .show(this, PreferenceNames.OWNCLOUD_DIRECTORY);
             return true;
@@ -142,7 +146,8 @@ public class OwnCloudSettingsFragment
             SimpleFormDialog.build()
                     .title(R.string.owncloud_server_summary)
                     .fields(
-                            Input.plain(PreferenceNames.OWNCLOUD_BASE_URL).text(preferenceHelper.getOwnCloudBaseUrl())
+                            Input.plain(PreferenceNames.OWNCLOUD_BASE_URL)
+                                    .text(preferenceHelper.getOwnCloudBaseUrl())
                     )
                     .show(this, PreferenceNames.OWNCLOUD_BASE_URL);
             return true;
@@ -152,7 +157,8 @@ public class OwnCloudSettingsFragment
             SimpleFormDialog.build()
                     .title(R.string.autoftp_username)
                     .fields(
-                            Input.plain(PreferenceNames.OWNCLOUD_USERNAME).text(preferenceHelper.getOwnCloudUsername())
+                            Input.plain(PreferenceNames.OWNCLOUD_USERNAME)
+                                    .text(preferenceHelper.getOwnCloudUsername())
                     )
                     .show(this, PreferenceNames.OWNCLOUD_USERNAME);
             return true;

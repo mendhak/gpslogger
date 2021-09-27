@@ -123,7 +123,8 @@ public class AutoEmailFragment extends PreferenceFragmentCompat implements
                     .title(R.string.autoftp_username)
                     .msg(R.string.autoemail_username_summary)
                     .fields(
-                            Input.plain(PreferenceNames.EMAIL_SMTP_USERNAME).text(preferenceHelper.getSmtpUsername())
+                            Input.plain(PreferenceNames.EMAIL_SMTP_USERNAME)
+                                    .text(preferenceHelper.getSmtpUsername())
                     ).show(this, PreferenceNames.EMAIL_SMTP_USERNAME);
             return true;
         }
@@ -133,7 +134,8 @@ public class AutoEmailFragment extends PreferenceFragmentCompat implements
                     .title(R.string.autoemail_target)
                     .msg(R.string.autoemail_sendto_csv)
                     .fields(
-                            Input.plain(PreferenceNames.EMAIL_TARGET).text(preferenceHelper.getAutoEmailTargets())
+                            Input.plain(PreferenceNames.EMAIL_TARGET)
+                                    .text(preferenceHelper.getAutoEmailTargets())
                     ).show(this,PreferenceNames.EMAIL_TARGET);
             return true;
         }
@@ -143,7 +145,8 @@ public class AutoEmailFragment extends PreferenceFragmentCompat implements
                     .title(R.string.autoemail_from)
                     .msg(R.string.autoemail_from_summary)
                     .fields(
-                            Input.plain(PreferenceNames.EMAIL_FROM).text(preferenceHelper.getSmtpSenderAddress())
+                            Input.plain(PreferenceNames.EMAIL_FROM)
+                                    .text(preferenceHelper.getSmtpSenderAddress())
                     ).show(this,PreferenceNames.EMAIL_FROM);
             return true;
         }
@@ -153,7 +156,10 @@ public class AutoEmailFragment extends PreferenceFragmentCompat implements
                     .title(R.string.autoftp_password)
                     .msg(R.string.autoemail_password_summary)
                     .fields(
-                            Input.plain(PreferenceNames.EMAIL_SMTP_PASSWORD).text(preferenceHelper.getSmtpPassword()).showPasswordToggle().inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                            Input.plain(PreferenceNames.EMAIL_SMTP_PASSWORD)
+                                    .text(preferenceHelper.getSmtpPassword())
+                                    .showPasswordToggle()
+                                    .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     ).show(this,PreferenceNames.EMAIL_SMTP_PASSWORD);
             return true;
         }
@@ -164,7 +170,8 @@ public class AutoEmailFragment extends PreferenceFragmentCompat implements
                     .title(R.string.autoopengts_server)
                     .msg(R.string.autoopengts_server_summary)
                     .fields(
-                            Input.plain(PreferenceNames.EMAIL_SMTP_SERVER).text(preferenceHelper.getSmtpServer())
+                            Input.plain(PreferenceNames.EMAIL_SMTP_SERVER)
+                                    .text(preferenceHelper.getSmtpServer())
                     ).show(this,PreferenceNames.EMAIL_SMTP_SERVER);
             return true;
         }
@@ -173,7 +180,10 @@ public class AutoEmailFragment extends PreferenceFragmentCompat implements
             SimpleFormDialog.build()
                     .title(R.string.autoftp_port)
                     .fields(
-                            Input.plain(PreferenceNames.EMAIL_SMTP_PORT).required().text(String.valueOf(preferenceHelper.getSmtpPort())).inputType(InputType.TYPE_CLASS_NUMBER)
+                            Input.plain(PreferenceNames.EMAIL_SMTP_PORT)
+                                    .required()
+                                    .text(String.valueOf(preferenceHelper.getSmtpPort()))
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
 
                     ).show(this,PreferenceNames.EMAIL_SMTP_PORT);
             return true;

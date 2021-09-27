@@ -75,7 +75,12 @@ public class PerformanceSettingsFragment
                     .title(R.string.time_before_logging_dialog_title)
                     .msg(R.string.time_before_logging_summary)
                     .fields(
-                            Input.plain(PreferenceNames.MINIMUM_INTERVAL).hint(R.string.time_before_logging_hint).inputType(InputType.TYPE_CLASS_NUMBER).required().text(String.valueOf(preferenceHelper.getMinimumLoggingInterval())).max(4)
+                            Input.plain(PreferenceNames.MINIMUM_INTERVAL)
+                                    .hint(R.string.time_before_logging_hint)
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
+                                    .required()
+                                    .text(String.valueOf(preferenceHelper.getMinimumLoggingInterval()))
+                                    .max(4)
                     )
                     .show(this, PreferenceNames.MINIMUM_INTERVAL);
             return true;
@@ -86,7 +91,12 @@ public class PerformanceSettingsFragment
                     .title(R.string.settings_distance_in_meters)
                     .msg(R.string.distance_filter_summary)
                     .fields(
-                            Input.plain(PreferenceNames.MINIMUM_DISTANCE).hint(R.string.settings_enter_meters).inputType(InputType.TYPE_CLASS_NUMBER).required().text(String.valueOf(preferenceHelper.getMinimumDistanceInterval())).max(4)
+                            Input.plain(PreferenceNames.MINIMUM_DISTANCE)
+                                    .hint(R.string.settings_enter_meters)
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
+                                    .required()
+                                    .text(String.valueOf(preferenceHelper.getMinimumDistanceInterval()))
+                                    .max(4)
                     )
                     .show(this, PreferenceNames.MINIMUM_DISTANCE);
             return true;
@@ -97,7 +107,12 @@ public class PerformanceSettingsFragment
                     .title(R.string.settings_accuracy_in_meters)
                     .msg(R.string.accuracy_filter_summary)
                     .fields(
-                            Input.plain(PreferenceNames.MINIMUM_ACCURACY).hint(R.string.settings_enter_meters).inputType(InputType.TYPE_CLASS_NUMBER).required().text(String.valueOf(preferenceHelper.getMinimumAccuracy())).max(4)
+                            Input.plain(PreferenceNames.MINIMUM_ACCURACY)
+                                    .hint(R.string.settings_enter_meters)
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
+                                    .required()
+                                    .text(String.valueOf(preferenceHelper.getMinimumAccuracy()))
+                                    .max(4)
                     )
                     .show(this, PreferenceNames.MINIMUM_ACCURACY);
             return true;
@@ -108,7 +123,12 @@ public class PerformanceSettingsFragment
                     .title(R.string.time_before_logging_dialog_title)
                     .msg(R.string.retry_time_summary)
                     .fields(
-                            Input.plain(PreferenceNames.LOGGING_RETRY_TIME).hint(R.string.time_before_logging_hint).inputType(InputType.TYPE_CLASS_NUMBER).required().text(String.valueOf(preferenceHelper.getLoggingRetryPeriod())).max(4)
+                            Input.plain(PreferenceNames.LOGGING_RETRY_TIME)
+                                    .hint(R.string.time_before_logging_hint)
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
+                                    .required()
+                                    .text(String.valueOf(preferenceHelper.getLoggingRetryPeriod()))
+                                    .max(4)
                     )
                     .show(this, PreferenceNames.LOGGING_RETRY_TIME);
             return true;
@@ -119,7 +139,12 @@ public class PerformanceSettingsFragment
                     .title(R.string.time_before_logging_dialog_title)
                     .msg(R.string.absolute_timeout_summary)
                     .fields(
-                            Input.plain(PreferenceNames.ABSOLUTE_TIMEOUT).hint(R.string.time_before_logging_hint).inputType(InputType.TYPE_CLASS_NUMBER).required().text(String.valueOf(preferenceHelper.getAbsoluteTimeoutForAcquiringPosition())).max(4)
+                            Input.plain(PreferenceNames.ABSOLUTE_TIMEOUT)
+                                    .hint(R.string.time_before_logging_hint)
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
+                                    .required()
+                                    .text(String.valueOf(preferenceHelper.getAbsoluteTimeoutForAcquiringPosition()))
+                                    .max(4)
                     )
                     .show(this, PreferenceNames.ABSOLUTE_TIMEOUT);
             return true;
@@ -130,7 +155,10 @@ public class PerformanceSettingsFragment
                     .title(R.string.settings_enter_meters)
                     .msg(R.string.altitude_subtractoffset_summary)
                     .fields(
-                            Input.plain(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET).inputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED).required().text(String.valueOf(preferenceHelper.getSubtractAltitudeOffset()))
+                            Input.plain(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET)
+                                    .inputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED)
+                                    .required()
+                                    .text(String.valueOf(preferenceHelper.getSubtractAltitudeOffset()))
                     )
                     .show(this, PreferenceNames.ALTITUDE_SUBTRACT_OFFSET);
             return true;

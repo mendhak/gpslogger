@@ -191,7 +191,10 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
                     .pos(R.string.ok)
                     .neg(R.string.cancel)
                     .fields(
-                            Input.plain(PreferenceNames.CUSTOM_FILE_NAME).hint(R.string.letters_numbers).text(preferenceHelper.getCustomFileName()).required()
+                            Input.plain(PreferenceNames.CUSTOM_FILE_NAME)
+                                    .hint(R.string.letters_numbers)
+                                    .text(preferenceHelper.getCustomFileName())
+                                    .required()
                     )
                     .show(this,PreferenceNames.CUSTOM_FILE_NAME);
         }

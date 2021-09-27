@@ -143,39 +143,54 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
         else if(preference.getKey().equalsIgnoreCase(PreferenceNames.SFTP_HOST)){
             SimpleFormDialog.build().title(R.string.autoopengts_server_summary)
                     .fields(
-                            Input.plain(PreferenceNames.SFTP_HOST).required().text(preferenceHelper.getSFTPHost())
+                            Input.plain(PreferenceNames.SFTP_HOST)
+                                    .required()
+                                    .text(preferenceHelper.getSFTPHost())
                     )
                     .show(this, PreferenceNames.SFTP_HOST);
         }
         else if(preference.getKey().equalsIgnoreCase(PreferenceNames.SFTP_PORT)){
             SimpleFormDialog.build().title(R.string.autoftp_port)
                     .fields(
-                            Input.plain(PreferenceNames.SFTP_PORT).required().text(String.valueOf(preferenceHelper.getSFTPPort())).inputType(InputType.TYPE_CLASS_NUMBER)
+                            Input.plain(PreferenceNames.SFTP_PORT)
+                                    .required()
+                                    .text(String.valueOf(preferenceHelper.getSFTPPort()))
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
                     )
                     .show( this, PreferenceNames.SFTP_PORT);
         }
         else if(preference.getKey().equalsIgnoreCase(PreferenceNames.SFTP_REMOTE_SERVER_PATH)){
             SimpleFormDialog.build().title(R.string.autoftp_directory)
                     .fields(
-                            Input.plain(PreferenceNames.SFTP_REMOTE_SERVER_PATH).required().text(preferenceHelper.getSFTPRemoteServerPath())
+                            Input.plain(PreferenceNames.SFTP_REMOTE_SERVER_PATH)
+                                    .required()
+                                    .text(preferenceHelper.getSFTPRemoteServerPath())
                     ).show(this, PreferenceNames.SFTP_REMOTE_SERVER_PATH);
         }
         else if(preference.getKey().equalsIgnoreCase(PreferenceNames.SFTP_USER)){
             SimpleFormDialog.build().title(R.string.autoftp_username)
                     .fields(
-                            Input.plain(PreferenceNames.SFTP_USER).required().text(preferenceHelper.getSFTPUser())
+                            Input.plain(PreferenceNames.SFTP_USER)
+                                    .required()
+                                    .text(preferenceHelper.getSFTPUser())
                     ).show(this, PreferenceNames.SFTP_USER);
         }
         else if(preference.getKey().equalsIgnoreCase(PreferenceNames.SFTP_PASSWORD)){
             SimpleFormDialog.build().title(R.string.autoftp_password)
                     .fields(
-                            Input.plain(PreferenceNames.SFTP_PASSWORD).text(preferenceHelper.getSFTPPassword()).showPasswordToggle().inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                            Input.plain(PreferenceNames.SFTP_PASSWORD)
+                                    .text(preferenceHelper.getSFTPPassword())
+                                    .showPasswordToggle()
+                                    .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     ).show(this, PreferenceNames.SFTP_PASSWORD);
         }
         else if(preference.getKey().equalsIgnoreCase(PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE)){
             SimpleFormDialog.build().title(R.string.sftp_private_key_passphrase)
                     .fields(
-                            Input.plain(PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE).text(preferenceHelper.getSFTPPrivateKeyPassphrase()).showPasswordToggle().inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                            Input.plain(PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE)
+                                    .text(preferenceHelper.getSFTPPrivateKeyPassphrase())
+                                    .showPasswordToggle()
+                                    .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     ).show(this, PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE);
         }
 

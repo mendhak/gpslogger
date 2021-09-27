@@ -664,7 +664,8 @@ public class GpsMainActivity extends AppCompatActivity
                                     .neg(R.string.cancel)
                                     .pos(R.string.ok)
                                     .fields(
-                                            Input.plain("NEW_PROFILE_NAME").required()
+                                            Input.plain("NEW_PROFILE_NAME")
+                                                    .required()
                                     ).show(GpsMainActivity.this, "NEW_PROFILE_NAME");
 
                             return true;
@@ -677,7 +678,8 @@ public class GpsMainActivity extends AppCompatActivity
                                     .title(getString(R.string.properties_file_url))
                                     .neg(R.string.cancel)
                                     .fields(
-                                            Input.plain("PROFILE_DOWNLOAD_URL").required()
+                                            Input.plain("PROFILE_DOWNLOAD_URL")
+                                                    .required()
                                     ).show(GpsMainActivity.this, "PROFILE_DOWNLOAD_URL");
 
                             return true;

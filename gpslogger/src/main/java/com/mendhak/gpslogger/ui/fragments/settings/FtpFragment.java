@@ -139,7 +139,10 @@ public class FtpFragment
         if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_PASSWORD)){
             SimpleFormDialog.build().title(R.string.autoftp_password)
                     .fields(
-                            Input.plain(PreferenceNames.FTP_PASSWORD).text(preferenceHelper.getFtpPassword()).showPasswordToggle().inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                            Input.plain(PreferenceNames.FTP_PASSWORD)
+                                    .text(preferenceHelper.getFtpPassword())
+                                    .showPasswordToggle()
+                                    .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     ).show(this, PreferenceNames.FTP_PASSWORD);
             return true;
         }
@@ -159,7 +162,10 @@ public class FtpFragment
         if(preference.getKey().equalsIgnoreCase(PreferenceNames.FTP_PORT)){
             SimpleFormDialog.build().title(R.string.autoftp_port)
                     .fields(
-                            Input.plain(PreferenceNames.FTP_PORT).required().text(String.valueOf(preferenceHelper.getFtpPort())).inputType(InputType.TYPE_CLASS_NUMBER)
+                            Input.plain(PreferenceNames.FTP_PORT)
+                                    .required()
+                                    .text(String.valueOf(preferenceHelper.getFtpPort()))
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
                     )
                     .show( this, PreferenceNames.FTP_PORT);
             return true;

@@ -153,7 +153,10 @@ public class Dialogs {
      *                  mainActivity.
      */
     public static void alert(String title, String message, Activity activity) {
-        SimpleDialog.build().title(title).msgHtml(message).show((FragmentActivity) activity);
+        SimpleDialog.build()
+                .title(title)
+                .msgHtml(message)
+                .show((FragmentActivity) activity);
     }
 
     public static void progress(FragmentActivity activity, String title){
