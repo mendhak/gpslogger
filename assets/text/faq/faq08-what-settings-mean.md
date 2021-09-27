@@ -14,4 +14,3 @@
 
 **Keep GPS on between fixes** - Normally, the app stops using GPS between points, to save battery.  This means when it's time to log the next point, the GPS needs to be 'woken up' again and this takes a little time.  Keeping GPS on between fixes causes this 'wake up' time to be reduced.
 
-**Don't log if I'm not moving** - Some Android devices have motion sensors. If you enable this setting and the motion sensors indicate that you have stopped, then GPSLogger will not log any points for your logging interval, even if you start moving before then. 
