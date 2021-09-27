@@ -108,7 +108,10 @@ public class Dialogs {
         StorageChooser.Theme scTheme = new StorageChooser.Theme(activity.getApplicationContext());
 
         if(Systems.isDarkMode(activity)){
-            scTheme.setScheme(activity.getResources().getIntArray(com.codekidlabs.storagechooser.R.array.default_dark));
+            int[] paranoidScheme = activity.getResources().getIntArray(com.codekidlabs.storagechooser.R.array.default_dark);
+            paranoidScheme[StorageChooser.Theme.OVERVIEW_HEADER_INDEX] = activity.getResources().getColor(R.color.accentColor);
+            paranoidScheme[StorageChooser.Theme.SEC_ADDRESS_BAR_BG] = activity.getResources().getColor(R.color.accentColor);
+            scTheme.setScheme(paranoidScheme);
         }
         else {
             int[] myScheme = scTheme.getDefaultScheme();
