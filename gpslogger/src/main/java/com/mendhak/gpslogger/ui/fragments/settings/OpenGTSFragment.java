@@ -125,7 +125,6 @@ public class OpenGTSFragment extends PreferenceFragmentCompat implements
                     .msg(R.string.autoopengts_server_path_summary)
                     .fields(
                             Input.plain(PreferenceNames.OPENGTS_SERVER_PATH)
-                                    .required()
                                     .text(preferenceHelper.getOpenGTSServerPath())
                     )
                     .show(this, PreferenceNames.OPENGTS_SERVER_PATH);
