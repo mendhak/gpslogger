@@ -564,6 +564,10 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.LOG_TO_URL_BODY,"");
     }
 
+    public void setCustomLoggingHTTPBody(String body){
+        prefs.edit().putString(PreferenceNames.LOG_TO_URL_BODY, body).apply();
+    }
+
     @ProfilePreference(name=PreferenceNames.LOG_TO_URL_HEADERS)
     public String getCustomLoggingHTTPHeaders(){
         return prefs.getString(PreferenceNames.LOG_TO_URL_HEADERS,"");

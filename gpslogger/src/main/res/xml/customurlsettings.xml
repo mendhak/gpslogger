@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:key="customurl_preferences">
 
-    <EditTextPreference
+    <Preference
         android:key="log_customurl_url"
         android:singleLine="true"
         android:title="URL" />
@@ -14,11 +14,11 @@
         android:title="@string/parameters"
         android:summary="" />
 
-    <EditTextPreference
+    <Preference
         android:key="log_customurl_body"
         android:selectAllOnFocus="true"
         android:singleLine="false"
-        android:defaultValue="lat=%LAT&amp;lon=%LON"
+        android:defaultValue=""
         android:title="@string/customurl_http_body" />
     <Preference
         android:key="log_customurl_headers"
@@ -27,7 +27,7 @@
         android:defaultValue=""
         android:hint="Content-Type: application/json\nAuthorization: Basic abcdefg\nApiToken: 12345"
         android:title="@string/customurl_http_headers" />
-    <EditTextPreference
+    <Preference
         android:defaultValue="GET"
         android:key="log_customurl_method"
         android:selectAllOnFocus="true"

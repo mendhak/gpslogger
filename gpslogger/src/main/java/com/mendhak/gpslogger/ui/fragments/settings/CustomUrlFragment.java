@@ -50,7 +50,7 @@ import eltos.simpledialogfragment.form.SimpleFormDialog;
 public class CustomUrlFragment extends PreferenceFragmentCompat implements
         SimpleDialog.OnDialogResultListener,
         PreferenceValidator,
-        Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
+        Preference.OnPreferenceClickListener {
 
     private static final Logger LOG = Logs.of(CustomUrlFragment.class);
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
@@ -62,18 +62,19 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
 
 
 
-        EditTextPreference urlPathPreference = (EditTextPreference)findPreference(PreferenceNames.LOG_TO_URL_PATH);
+        Preference urlPathPreference = findPreference(PreferenceNames.LOG_TO_URL_PATH);
         urlPathPreference.setSummary(PreferenceHelper.getInstance().getCustomLoggingUrl());
-        urlPathPreference.setText(PreferenceHelper.getInstance().getCustomLoggingUrl());
-        urlPathPreference.setOnPreferenceChangeListener(this);
+        urlPathPreference.setOnPreferenceClickListener(this);
+
 
         findPreference(PreferenceNames.LOG_TO_URL_HEADERS).setSummary(preferenceHelper.getCustomLoggingHTTPHeaders());
         findPreference(PreferenceNames.LOG_TO_URL_HEADERS).setOnPreferenceClickListener(this);
 
         findPreference(PreferenceNames.LOG_TO_URL_METHOD).setSummary(preferenceHelper.getCustomLoggingHTTPMethod());
-        findPreference(PreferenceNames.LOG_TO_URL_METHOD).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.LOG_TO_URL_METHOD).setOnPreferenceClickListener(this);
+
         findPreference(PreferenceNames.LOG_TO_URL_BODY).setSummary(preferenceHelper.getCustomLoggingHTTPBody());
-        findPreference(PreferenceNames.LOG_TO_URL_BODY).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.LOG_TO_URL_BODY).setOnPreferenceClickListener(this);
 
         findPreference("customurl_legend_1").setOnPreferenceClickListener(this);
         findPreference("customurl_validatecustomsslcert").setOnPreferenceClickListener(this);
@@ -92,23 +93,6 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
     }
 
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if(preference.getKey().equals(PreferenceNames.LOG_TO_URL_PATH)){
-            preference.setSummary(newValue.toString());
-            return true;
-        }
-        if(preference.getKey().equals(PreferenceNames.LOG_TO_URL_METHOD)){
-            preference.setSummary(newValue.toString());
-            return true;
-        }
-        if(preference.getKey().equals(PreferenceNames.LOG_TO_URL_BODY)){
-            preference.setSummary(newValue.toString());
-            return true;
-        }
-
-        return true;
-    }
 
 
     @Override
@@ -135,9 +119,10 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
                     getString(R.string.txt_starttimestamp_epoch),
                     getString(R.string.txt_battery), "Android ID ", "Serial ", getString(R.string.summary_current_filename), "Profile:", "HDOP:", "VDOP:", "PDOP:", getString(R.string.txt_travel_distance));
             Dialogs.alert(getString(R.string.parameters), legend1, getActivity());
-
+            return true;
         }
-        else if(preference.getKey().equals("customurl_validatecustomsslcert")){
+
+        if(preference.getKey().equals("customurl_validatecustomsslcert")){
 
             try {
                 URL u = new URL(PreferenceHelper.getInstance().getCustomLoggingUrl());
@@ -145,35 +130,80 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
             } catch (MalformedURLException e) {
                 LOG.error("Could not start certificate validation", e);
             }
-
             return true;
         }
-        else if(preference.getKey().equals("log_customurl_basicauth")){
+
+        if(preference.getKey().equals("log_customurl_basicauth")){
 
             SimpleFormDialog.build()
                     .title(R.string.customurl_http_basicauthentication)
                     .neg(R.string.cancel)
                     .pos(R.string.ok)
                     .fields(
-                            Input.plain(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME).text(preferenceHelper.getCustomLoggingBasicAuthUsername()).hint(R.string.autoftp_username).required(),
-                            Input.plain(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD).text(preferenceHelper.getCustomLoggingBasicAuthPassword()).hint(R.string.autoftp_password).showPasswordToggle().inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD).required()
+                            Input.plain(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME).text(preferenceHelper.getCustomLoggingBasicAuthUsername()).hint(R.string.autoftp_username),
+                            Input.plain(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD).text(preferenceHelper.getCustomLoggingBasicAuthPassword()).hint(R.string.autoftp_password).showPasswordToggle().inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     )
                     .show(this,PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME);
 
             return true;
         }
-        else if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_URL_HEADERS)){
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_URL_HEADERS)){
             SimpleFormDialog.build()
                     .title(R.string.customurl_http_headers)
                     .neg(R.string.cancel)
                     .pos(R.string.ok)
+                    .msgHtml("<font face='monospace'>Content-Type: application/json</font><br /><font face='monospace'>Authorization: Basic abcdefg</font><br /><font face='monospace'>ApiToken: 12345</font>")
                     .fields(
                             Input.plain(PreferenceNames.LOG_TO_URL_HEADERS)
                                     .text(preferenceHelper.getCustomLoggingHTTPHeaders())
-                                    .hint("Content-Type: application/json\nAuthorization: Basic abcdefg\nApiToken: 12345")
-                                    .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE).required()
+                                    .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE)
                     )
                     .show(this, PreferenceNames.LOG_TO_URL_HEADERS);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_URL_PATH)){
+            SimpleFormDialog.build()
+                    .title("URL")
+                    .neg(R.string.cancel)
+                    .pos(R.string.ok)
+                    .fields(
+                            Input.plain(PreferenceNames.LOG_TO_URL_PATH)
+                                    .text(preferenceHelper.getCustomLoggingUrl())
+                                    .required()
+                    )
+                    .show(this, PreferenceNames.LOG_TO_URL_PATH);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_URL_METHOD)){
+            SimpleFormDialog.build()
+                    .title(R.string.customurl_http_method)
+                    .neg(R.string.cancel)
+                    .pos(R.string.ok)
+                    .fields(
+                            Input.plain(PreferenceNames.LOG_TO_URL_METHOD)
+                                    .text(preferenceHelper.getCustomLoggingHTTPMethod())
+                                    .required()
+                    )
+                    .show(this, PreferenceNames.LOG_TO_URL_METHOD);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_URL_BODY)){
+            SimpleFormDialog.build()
+                    .title(R.string.customurl_http_body)
+                    .neg(R.string.cancel)
+                    .pos(R.string.ok)
+                    .fields(
+                            Input.plain(PreferenceNames.LOG_TO_URL_BODY)
+                                    .text(preferenceHelper.getCustomLoggingHTTPBody())
+                                    .hint("lat=%LAT&lon=%LON")
+                                    .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE)
+                    )
+                    .show(this, PreferenceNames.LOG_TO_URL_BODY);
+            return true;
         }
 
         return false;
@@ -182,7 +212,10 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
 
     @Override
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME) && which == BUTTON_POSITIVE){
+
+        if(which != BUTTON_POSITIVE) { return true; }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME)){
             String basicAuthUsername = extras.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME);
             String basicAuthPass = extras.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD);
             preferenceHelper.setCustomLoggingBasicAuthUsername(basicAuthUsername);
@@ -191,10 +224,31 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
             return true;
         }
 
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_HEADERS) && which == BUTTON_POSITIVE){
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_HEADERS)){
             String headers = extras.getString(PreferenceNames.LOG_TO_URL_HEADERS);
             preferenceHelper.setCustomLoggingHTTPHeaders(headers);
             findPreference(PreferenceNames.LOG_TO_URL_HEADERS).setSummary(headers);
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_PATH)){
+            String url = extras.getString(PreferenceNames.LOG_TO_URL_PATH);
+            preferenceHelper.setCustomLoggingUrl(url);
+            findPreference(PreferenceNames.LOG_TO_URL_PATH).setSummary(url);
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_METHOD)){
+            String method = extras.getString(PreferenceNames.LOG_TO_URL_METHOD);
+            preferenceHelper.setCustomLoggingHTTPMethod(method);
+            findPreference(PreferenceNames.LOG_TO_URL_METHOD).setSummary(method);
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_BODY)){
+            String body = extras.getString(PreferenceNames.LOG_TO_URL_BODY);
+            preferenceHelper.setCustomLoggingHTTPBody(body);
+            findPreference(PreferenceNames.LOG_TO_URL_BODY).setSummary(body);
             return true;
         }
 
