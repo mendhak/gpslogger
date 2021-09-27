@@ -942,11 +942,14 @@ public class PreferenceHelper {
     /**
      * OwnCloud server for auto send
      */
-    @ProfilePreference(name= PreferenceNames.OWNCLOUD_SERVER)
-    public String getOwnCloudServerName() {
-        return prefs.getString(PreferenceNames.OWNCLOUD_SERVER, "");
+    @ProfilePreference(name= PreferenceNames.OWNCLOUD_BASE_URL)
+    public String getOwnCloudBaseUrl() {
+        return prefs.getString(PreferenceNames.OWNCLOUD_BASE_URL, "");
     }
 
+    public void setOwnCloudBaseUrl(String baseUrl){
+        prefs.edit().putString(PreferenceNames.OWNCLOUD_BASE_URL, baseUrl).apply();
+    }
 
     /**
      * OwnCloud username for auto send
@@ -956,6 +959,9 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.OWNCLOUD_USERNAME, "");
     }
 
+    public void setOwnCloudUsername(String user) {
+        prefs.edit().putString(PreferenceNames.OWNCLOUD_USERNAME, user).apply();
+    }
 
     /**
      * OwnCloud password for auto send

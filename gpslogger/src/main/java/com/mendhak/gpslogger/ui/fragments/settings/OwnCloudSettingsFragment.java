@@ -49,9 +49,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class OwnCloudSettingsFragment
-        extends PreferenceFragmentCompat implements Preference.OnPreferenceClickListener,
+        extends PreferenceFragmentCompat
+        implements Preference.OnPreferenceClickListener,
         SimpleDialog.OnDialogResultListener,
-        PreferenceValidator, Preference.OnPreferenceChangeListener {
+        PreferenceValidator {
 
     private static final Logger LOG = Logs.of(OwnCloudSettingsFragment.class);
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
@@ -59,10 +60,10 @@ public class OwnCloudSettingsFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        findPreference(PreferenceNames.OWNCLOUD_SERVER).setOnPreferenceChangeListener(this);
-        findPreference(PreferenceNames.OWNCLOUD_SERVER).setSummary(preferenceHelper.getOwnCloudServerName());
+        findPreference(PreferenceNames.OWNCLOUD_BASE_URL).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.OWNCLOUD_BASE_URL).setSummary(preferenceHelper.getOwnCloudBaseUrl());
 
-        findPreference(PreferenceNames.OWNCLOUD_USERNAME).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.OWNCLOUD_USERNAME).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.OWNCLOUD_USERNAME).setSummary(preferenceHelper.getOwnCloudUsername());
 
         findPreference(PreferenceNames.OWNCLOUD_PASSWORD).setOnPreferenceClickListener(this);
@@ -104,7 +105,7 @@ public class OwnCloudSettingsFragment
     @Override
     public boolean isValid() {
         boolean isEnabled = preferenceHelper.isOwnCloudAutoSendEnabled();
-        String server = preferenceHelper.getOwnCloudServerName();
+        String server = preferenceHelper.getOwnCloudBaseUrl();
         String user = preferenceHelper.getOwnCloudUsername();
 
         return !isEnabled || (
@@ -123,6 +124,7 @@ public class OwnCloudSettingsFragment
                             Input.plain(PreferenceNames.OWNCLOUD_PASSWORD).text(preferenceHelper.getOwnCloudPassword()).showPasswordToggle().inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                         )
                     .show(this, PreferenceNames.OWNCLOUD_PASSWORD);
+            return true;
         }
 
         if(preference.getKey().equalsIgnoreCase(PreferenceNames.OWNCLOUD_DIRECTORY)){
@@ -133,11 +135,32 @@ public class OwnCloudSettingsFragment
                             Input.plain(PreferenceNames.OWNCLOUD_DIRECTORY).text(preferenceHelper.getOwnCloudDirectory())
                     )
                     .show(this, PreferenceNames.OWNCLOUD_DIRECTORY);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OWNCLOUD_BASE_URL)){
+            SimpleFormDialog.build()
+                    .title(R.string.owncloud_server_summary)
+                    .fields(
+                            Input.plain(PreferenceNames.OWNCLOUD_BASE_URL).text(preferenceHelper.getOwnCloudBaseUrl())
+                    )
+                    .show(this, PreferenceNames.OWNCLOUD_BASE_URL);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OWNCLOUD_USERNAME)){
+            SimpleFormDialog.build()
+                    .title(R.string.autoftp_username)
+                    .fields(
+                            Input.plain(PreferenceNames.OWNCLOUD_USERNAME).text(preferenceHelper.getOwnCloudUsername())
+                    )
+                    .show(this, PreferenceNames.OWNCLOUD_USERNAME);
+            return true;
         }
 
         if(preference.getKey().equals("owncloud_validatecustomsslcert")){
             try {
-                URL u = new URL(PreferenceHelper.getInstance().getOwnCloudServerName());
+                URL u = new URL(PreferenceHelper.getInstance().getOwnCloudBaseUrl());
                 Networks.beginCertificateValidationWorkflow(getActivity(), u.getHost(), u.getPort() < 0 ? u.getDefaultPort() : u.getPort(), ServerType.HTTPS);
             } catch (MalformedURLException e) {
                 LOG.error("Could not validate certificate, OwnCloud URL is not valid", e);
@@ -145,7 +168,7 @@ public class OwnCloudSettingsFragment
 
         }
         else if(preference.getKey().equals("owncloud_test")){
-            String server = preferenceHelper.getOwnCloudServerName();
+            String server = preferenceHelper.getOwnCloudBaseUrl();
             String user = preferenceHelper.getOwnCloudUsername();
             String pass = preferenceHelper.getOwnCloudPassword();
             String directory = preferenceHelper.getOwnCloudDirectory();
@@ -186,20 +209,7 @@ public class OwnCloudSettingsFragment
         }
     }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OWNCLOUD_SERVER)){
-            preference.setSummary(newValue.toString());
-            return true;
-        }
 
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.OWNCLOUD_USERNAME)){
-            preference.setSummary(newValue.toString());
-            return true;
-        }
-
-        return false;
-    }
 
     @Override
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
@@ -217,6 +227,20 @@ public class OwnCloudSettingsFragment
             String dir = extras.getString(PreferenceNames.OWNCLOUD_DIRECTORY);
             preferenceHelper.setOwnCloudDirectory(dir);
             findPreference(PreferenceNames.OWNCLOUD_DIRECTORY).setSummary(dir);
+            return  true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.OWNCLOUD_BASE_URL)){
+            String base = extras.getString(PreferenceNames.OWNCLOUD_BASE_URL);
+            preferenceHelper.setOwnCloudBaseUrl(base);
+            findPreference(PreferenceNames.OWNCLOUD_BASE_URL).setSummary(base);
+            return  true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.OWNCLOUD_USERNAME)){
+            String user = extras.getString(PreferenceNames.OWNCLOUD_USERNAME);
+            preferenceHelper.setOwnCloudUsername(user);
+            findPreference(PreferenceNames.OWNCLOUD_USERNAME).setSummary(user);
             return  true;
         }
 

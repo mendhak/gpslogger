@@ -33,9 +33,7 @@ import com.mendhak.gpslogger.ui.fragments.settings.OwnCloudSettingsFragment;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.List;
 
 public class OwnCloudManager extends FileSender
@@ -91,7 +89,7 @@ public class OwnCloudManager extends FileSender
 
     @Override
     public boolean isAvailable() {
-        return validSettings(preferenceHelper.getOwnCloudServerName(),
+        return validSettings(preferenceHelper.getOwnCloudBaseUrl(),
                 preferenceHelper.getOwnCloudUsername(),
                 preferenceHelper.getOwnCloudPassword(),
                 preferenceHelper.getOwnCloudDirectory());
@@ -114,7 +112,7 @@ public class OwnCloudManager extends FileSender
             @Override
             public void onCancelled(CancelResult cancelResult) {
                 jobManager.addJobInBackground(new OwnCloudJob(
-                        preferenceHelper.getOwnCloudServerName(),
+                        preferenceHelper.getOwnCloudBaseUrl(),
                         preferenceHelper.getOwnCloudUsername(),
                         preferenceHelper.getOwnCloudPassword(),
                         preferenceHelper.getOwnCloudDirectory(),

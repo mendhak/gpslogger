@@ -22,10 +22,10 @@ public class OwnCloudManagerTest {
 
         assertThat("Default state is false", ocm.isAvailable(), is(false));
 
-        when(pm.getOwnCloudServerName()).thenReturn("");
+        when(pm.getOwnCloudBaseUrl()).thenReturn("");
         assertThat("Server name should not be empty", ocm.isAvailable(), is(false));
 
-        when(pm.getOwnCloudServerName()).thenReturn("sadfasdf");
+        when(pm.getOwnCloudBaseUrl()).thenReturn("sadfasdf");
         assertThat("Server name should not be empty", ocm.isAvailable(), is(true));
     }
 
@@ -35,7 +35,7 @@ public class OwnCloudManagerTest {
         PreferenceHelper pm = mock(PreferenceHelper.class);
         OwnCloudManager ocm = new OwnCloudManager(pm);
 
-        when(pm.getOwnCloudServerName()).thenReturn("sadfasdf");
+        when(pm.getOwnCloudBaseUrl()).thenReturn("sadfasdf");
         assertThat("Valid but unchecked - not available", ocm.isAutoSendAvailable(), is(false));
 
         when(pm.isOwnCloudAutoSendEnabled()).thenReturn(true);

@@ -95,7 +95,7 @@ public  class PreferenceNames {
     public static final String FTP_IMPLICIT = "autoftp_implicit";
     public static final String AUTOSEND_FTP_ENABLED = "autoftp_enabled";
     public static final String FTP_DIRECTORY = "autoftp_directory";
-    public static final String OWNCLOUD_SERVER = "owncloud_server";
+    public static final String OWNCLOUD_BASE_URL = "owncloud_server";
     public static final String OWNCLOUD_USERNAME = "owncloud_username";
     public static final String OWNCLOUD_PASSWORD = "owncloud_password";
     public static final String OWNCLOUD_DIRECTORY = "owncloud_directory";

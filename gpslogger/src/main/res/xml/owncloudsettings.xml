@@ -7,14 +7,14 @@
         android:key="owncloud_enabled"
         android:title="@string/autosend_enabled" />
 
-    <EditTextPreference
+    <Preference
             android:key="owncloud_server"
             android:title="@string/owncloud_server_summary"
             android:defaultValue="http://127.0.0.1"
             android:dialogTitle="@string/owncloud_server_summary"
             android:hint="@string/owncloud_server_summary"/>
                 
-    <EditTextPreference
+    <Preference
             android:key="owncloud_username"
             android:title="@string/autoftp_username"
             android:dialogTitle="@string/autoftp_username"/>
