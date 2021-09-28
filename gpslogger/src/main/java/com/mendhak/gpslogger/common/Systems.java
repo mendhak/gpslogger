@@ -35,6 +35,7 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.PowerManager;
 import android.provider.Settings;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -171,5 +172,18 @@ public class Systems {
         return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
     }
 
+    public static void setAppTheme(String appThemeSetting){
+
+        if(appThemeSetting.equalsIgnoreCase("system")){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        }
+        else if(appThemeSetting.equalsIgnoreCase("light")){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+        else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+
+    }
 
 }

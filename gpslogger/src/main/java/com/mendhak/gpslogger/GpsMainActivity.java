@@ -36,7 +36,6 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -114,16 +113,6 @@ public class GpsMainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set application to switch to dark mode, if the system is on dark mode.
-        if(preferenceHelper.getAppThemeSetting().equalsIgnoreCase("system")){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-        }
-        else if(preferenceHelper.getAppThemeSetting().equalsIgnoreCase("light")){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
-        else{
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }
 
         loadPresetProperties();
         loadVersionSpecificProperties();
@@ -150,6 +139,9 @@ public class GpsMainActivity extends AppCompatActivity
                 LOG.debug("Start logging on app launch");
                 EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
             }
+
+            Systems.setAppTheme(preferenceHelper.getAppThemeSetting());
+
         }
     }
 
