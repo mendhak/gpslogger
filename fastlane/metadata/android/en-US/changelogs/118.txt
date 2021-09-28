@@ -1,4 +1,5 @@
 * Dark Theme, uses the system to determine if it should switch to dark or light theme.
+* You can also choose to manually set Light/Dark theme, in General menu.
 * Slightly reworked settings screens, to show the the user selected values where possible.
 * Added a file and folder picker.  App will ask for MANAGE_EXTERNAL_STORAGE permission on Android 11+ to allow custom paths.
 * New SSH library to allow connecting using more modern SSH algorithms.
