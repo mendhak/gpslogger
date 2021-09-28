@@ -461,6 +461,8 @@
     <string name="reset_app_summary">This will reset the app, delete any preferences, delete GPSLogger files, and revoke permissions granted to this app. All data will be lost!</string>
     <string name="reset_app_title">Reset app</string>
 
-
+    <string name="app_theme_follow_system">Follow system</string>
+    <string name="app_theme_light">Light theme</string>
+    <string name="app_theme_dark">Dark theme</string>
 
 </resources>

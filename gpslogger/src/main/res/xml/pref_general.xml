@@ -35,6 +35,14 @@
         android:defaultValue="false"
         />
 
+    <ListPreference
+        android:key="app_theme_setting"
+        android:title="App Theme"
+        android:entries="@array/app_theme_options"
+        android:entryValues="@array/app_theme_values"
+        android:summary="Determines how to set the light or dark app theme"
+        android:defaultValue="system"
+        />
 
     <Preference
         android:title="@string/enabledisablegps_title"

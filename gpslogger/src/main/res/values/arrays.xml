@@ -62,6 +62,17 @@
     </string-array>
 
 
+    <string-array name="app_theme_options">
+        <item>@string/app_theme_follow_system</item>
+        <item>@string/app_theme_light</item>
+        <item>@string/app_theme_dark</item>
+    </string-array>
+
+    <string-array name="app_theme_values">
+        <item>system</item>
+        <item>light</item>
+        <item>dark</item>
+    </string-array>
 
 
 </resources>

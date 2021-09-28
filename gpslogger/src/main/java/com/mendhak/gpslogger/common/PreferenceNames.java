@@ -113,6 +113,7 @@ public  class PreferenceNames {
     public static final String USER_SPECIFIED_LANGUAGE = "user_specified_locale";
 
     public static final String LATLONG_DISPLAY_FORMAT="latlong_display_format";
+    public static final String APP_THEME_SETTING = "app_theme_setting";
 
 
     public static enum DegreesDisplayFormat {

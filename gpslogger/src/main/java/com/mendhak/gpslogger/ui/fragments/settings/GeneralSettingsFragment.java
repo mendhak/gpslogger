@@ -39,6 +39,7 @@ import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
+import com.mendhak.gpslogger.ui.Dialogs;
 
 import org.slf4j.Logger;
 
@@ -61,6 +62,8 @@ public class GeneralSettingsFragment extends PreferenceFragmentCompat implements
 
         findPreference("enableDisableGps").setOnPreferenceClickListener(this);
         findPreference("debuglogtoemail").setOnPreferenceClickListener(this);
+
+        findPreference(PreferenceNames.APP_THEME_SETTING).setOnPreferenceChangeListener(this);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             findPreference("resetapp").setOnPreferenceClickListener(this);
@@ -182,6 +185,10 @@ public class GeneralSettingsFragment extends PreferenceFragmentCompat implements
             PreferenceHelper.getInstance().setDisplayLatLongFormat(PreferenceNames.DegreesDisplayFormat.valueOf(newValue.toString()));
             LOG.debug("Coordinate format chosen: " + PreferenceHelper.getInstance().getDisplayLatLongFormat());
             setCoordinatesFormatPreferenceItem();
+            return true;
+        }
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.APP_THEME_SETTING)){
+            Dialogs.alert("", getString(R.string.restart_required), getActivity());
             return true;
         }
         return false;

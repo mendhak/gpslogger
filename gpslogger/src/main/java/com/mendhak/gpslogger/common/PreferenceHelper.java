@@ -475,6 +475,11 @@ public class PreferenceHelper {
         return prefs.getBoolean(PreferenceNames.DISPLAY_IMPERIAL, false);
     }
 
+    @ProfilePreference(name=PreferenceNames.APP_THEME_SETTING)
+    public String getAppThemeSetting() {
+        return prefs.getString(PreferenceNames.APP_THEME_SETTING, "system");
+    }
+
     /**
      * Display format to use for lat long coordinates on screen
      * DEGREES_MINUTES_SECONDS, DEGREES_DECIMAL_MINUTES, DECIMAL_DEGREES

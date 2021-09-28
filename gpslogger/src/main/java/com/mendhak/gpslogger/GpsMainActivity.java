@@ -115,7 +115,15 @@ public class GpsMainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         // Set application to switch to dark mode, if the system is on dark mode.
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        if(preferenceHelper.getAppThemeSetting().equalsIgnoreCase("system")){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        }
+        else if(preferenceHelper.getAppThemeSetting().equalsIgnoreCase("light")){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+        else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
 
         loadPresetProperties();
         loadVersionSpecificProperties();
