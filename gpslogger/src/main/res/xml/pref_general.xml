@@ -35,14 +35,7 @@
         android:defaultValue="false"
         />
 
-    <ListPreference
-        android:key="app_theme_setting"
-        android:title="App Theme"
-        android:entries="@array/app_theme_options"
-        android:entryValues="@array/app_theme_values"
-        android:summary="Determines how to set the light or dark app theme"
-        android:defaultValue="system"
-        />
+
 
     <Preference
         android:title="@string/enabledisablegps_title"
@@ -62,6 +55,18 @@
         android:key="debuglogtoemail"
         android:enabled="true"/>
 
+    <!--    https://www.flaticon.com/free-icon/dark-mode_5262027-->
+    <ListPreference
+        android:key="app_theme_setting"
+        android:title="App Theme"
+        android:entries="@array/app_theme_options"
+        android:entryValues="@array/app_theme_values"
+        android:summary="Determines how to set the light or dark app theme"
+        android:defaultValue="system"
+        android:icon="@drawable/dark_mode"
+        />
+
+    <!--    https://www.flaticon.com/free-icon/translate_889588-->
     <ListPreference
         android:key="changelanguage"
         android:title="@string/change_language_title"
@@ -69,10 +74,11 @@
         android:icon="@drawable/translate"
         />
 
+    <!--    https://www.flaticon.com/free-icon/close_463612-->
     <Preference
         android:title="@string/reset_app_title"
         android:summary="@string/reset_app_summary"
-        android:icon="@android:drawable/ic_delete"
+        android:icon="@drawable/reset"
         android:key="resetapp"
         android:enabled="true"/>
 
@@ -103,7 +109,7 @@
     </Preference>
 
     <Preference
-        android:key="gpslogger_repo"
+        android:key="gpslogger_site"
         android:title="https://gpslogger.app"
         android:icon="@mipmap/gpsloggericon3"
         >
