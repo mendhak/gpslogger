@@ -322,6 +322,7 @@
 
                         <ImageView
                             android:id="@+id/simpleview_imgGpx"
+                            android:paddingRight="2dp"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:contentDescription="@string/log_gpx_title"
@@ -330,6 +331,7 @@
 
                         <ImageView
                             android:id="@+id/simpleview_imgKml"
+                            android:paddingRight="2dp"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:contentDescription="@string/log_kml_title"
@@ -338,6 +340,7 @@
 
                         <ImageView
                             android:id="@+id/simpleview_imgCsv"
+                            android:paddingRight="2dp"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:contentDescription="@string/log_plain_text_title"
@@ -346,6 +349,7 @@
 
                         <ImageView
                             android:id="@+id/simpleview_imgNmea"
+                            android:paddingRight="4dp"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:contentDescription="@string/log_nmea_title"
@@ -353,20 +357,23 @@
                             android:visibility="invisible" />
 
                         <ImageView
-                            android:id="@+id/simpleview_imgLink"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:contentDescription="@string/log_customurl_title"
-                            android:src="@drawable/link"
-                            android:visibility="invisible" />
-
-                        <ImageView
                             android:id="@+id/simpleview_imgjson"
+                            android:paddingRight="2dp"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:contentDescription="@string/log_json_title"
                             android:src="@drawable/geojson"
                             android:visibility="invisible" />
+
+                        <ImageView
+                            android:id="@+id/simpleview_imgLink"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:contentDescription="@string/log_customurl_title"
+                            android:src="@drawable/customurl"
+                            android:visibility="invisible" />
+
+
                     </LinearLayout>
 
                     <Space

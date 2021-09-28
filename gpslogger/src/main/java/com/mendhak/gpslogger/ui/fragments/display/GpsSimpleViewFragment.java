@@ -413,7 +413,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
         TextView txtAccuracy = (TextView) rootView.findViewById(R.id.simpleview_txtAccuracy);
         txtAccuracy.setText("");
-        txtAccuracy.setTextColor(ContextCompat.getColor(context, android.R.color.black));
 
         ImageView imgAltitude = (ImageView)rootView.findViewById(R.id.simpleview_imgAltitude);
         clearColor(imgAltitude);

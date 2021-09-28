@@ -4,6 +4,7 @@
     <!--    https://stackoverflow.com/a/52289175/974369 to avoid errors about MeasureSpec.EXACT  -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
 
+        <item name="android:windowBackground">@color/surfaceDark</item>
         <!-- Material Drawer Colors, not all can be set via XML though, some are in code. -->
         <item name="material_drawer_background">@color/primaryColor</item>
         <item name="material_drawer_primary_text">@color/primaryColorLight</item>

@@ -78,4 +78,12 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
     <color name="golden">#ffff8100</color>
+
+
+    <color name="colorPrimaryBlack">#000000</color>
+    <color name="colorPrimaryBlackDark">#000000</color>
+    <color name="colorAccentBlack">#427add</color>
+    <color name="surfaceDark">#121212</color>
+
+
 </resources>
