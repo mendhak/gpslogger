@@ -154,10 +154,7 @@ public class GpsMainActivity extends AppCompatActivity
                             askUserToDisableBatteryOptimization();
                         } else {
                             LOG.warn("Background location permission was not granted");
-                            SimpleDialog.build()
-                                    .title(getString(R.string.gpslogger_permissions_rationale_title))
-                                    .msgHtml(getString(R.string.gpslogger_permissions_permanently_denied))
-                                    .show(this);
+                            Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title), getString(R.string.gpslogger_permissions_permanently_denied), this);
                             permissionWorkflowInProgress=false;
                         }
                     });
@@ -168,10 +165,7 @@ public class GpsMainActivity extends AppCompatActivity
                         LOG.debug("Launcher result: " + grantResults.toString());
                         if (grantResults.containsValue(false)) {
                             LOG.warn("At least one of the permissions was not granted");
-                            SimpleDialog.build()
-                                    .title(getString(R.string.gpslogger_permissions_rationale_title))
-                                    .msgHtml(getString(R.string.gpslogger_permissions_permanently_denied))
-                                    .show(this);
+                            Dialogs.alert(getString(R.string.gpslogger_permissions_rationale_title), getString(R.string.gpslogger_permissions_permanently_denied), this);
                             permissionWorkflowInProgress=false;
                         } else {
                             LOG.debug("Basic permissions granted. Now ask for background location permissions.");
@@ -704,10 +698,7 @@ public class GpsMainActivity extends AppCompatActivity
                         if (iProfile.getIdentifier() > 150 ) {
 
                             if( preferenceHelper.getCurrentProfileName().equals(iProfile.getName().getText()) ){
-                                SimpleDialog.build()
-                                        .title(getString(R.string.sorry))
-                                        .msgHtml(getString(R.string.profile_switch_before_delete))
-                                        .show(GpsMainActivity.this);
+                                Dialogs.alert(getString(R.string.sorry), getString(R.string.profile_switch_before_delete), GpsMainActivity.this);
                             }
                             else {
 
@@ -1216,10 +1207,7 @@ public class GpsMainActivity extends AppCompatActivity
     private void showFileListDialog(final FileSender sender) {
 
         if (!Systems.isNetworkAvailable(this)) {
-            SimpleDialog.build()
-                    .title(getString(R.string.sorry))
-                    .msgHtml(getString(R.string.no_network_message))
-                    .show(this);
+            Dialogs.alert(getString(R.string.sorry), getString(R.string.no_network_message), this);
             return;
         }
 
@@ -1257,10 +1245,7 @@ public class GpsMainActivity extends AppCompatActivity
                     .show(GpsMainActivity.this, "FILE_UPLOAD_DIALOG");
 
         } else {
-            SimpleDialog.build()
-                    .title(getString(R.string.sorry))
-                    .msgHtml(getString(R.string.no_files_found))
-                    .show(this);
+            Dialogs.alert(getString(R.string.sorry), getString(R.string.no_files_found), this);
 
         }
     }
@@ -1303,10 +1288,7 @@ public class GpsMainActivity extends AppCompatActivity
 
 
             } else {
-                SimpleDialog.build()
-                        .title(getString(R.string.sorry))
-                        .msgHtml(getString(R.string.no_files_found))
-                        .show(this);
+                Dialogs.alert(getString(R.string.sorry), getString(R.string.no_files_found), this);
             }
         } catch (Exception ex) {
             LOG.error("Sharing problem", ex);

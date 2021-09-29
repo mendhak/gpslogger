@@ -314,10 +314,7 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
             }
         }
         else {
-            SimpleDialog.build()
-                    .title(getString(R.string.success))
-                    .msg("SFTP Test Succeeded")
-                    .show(getActivity());
+            Dialogs.alert(getString(R.string.success), "SFTP Test Succeeded", getActivity());
         }
     }
 
