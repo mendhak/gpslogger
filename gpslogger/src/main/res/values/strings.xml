@@ -464,5 +464,6 @@
     <string name="app_theme_follow_system">Follow system</string>
     <string name="app_theme_light">Light theme</string>
     <string name="app_theme_dark">Dark theme</string>
+    <string name="app_theme_setting">Determines how to set the light or dark app theme</string>
 
 </resources>
