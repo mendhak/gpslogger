@@ -233,50 +233,50 @@ public class GpsMainActivity extends AppCompatActivity
                     basicPermissionsLauncher.launch(permissions.toArray(new String[0]));
                     return true;
             }
+            return true;
         }
-        else if(dialogTag.equalsIgnoreCase("BACKGROUND_LOCATION")){
-            switch(which){
-                case BUTTON_POSITIVE:
-                    LOG.debug("Beginning request for Background Location permission");
-                    backgroundPermissionLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
-                    return true;
-            }
-        }
-        else if(dialogTag.equalsIgnoreCase("NEW_PROFILE_NAME")){
-            switch(which){
-                case BUTTON_POSITIVE:
 
-                    String profileName = extras.getString("NEW_PROFILE_NAME");
-                    if(!Strings.isNullOrEmpty(profileName)) {
-                        final String[] ReservedChars = {"|", "\\", "?", "*", "<", "\"", ":", ">", ".", "/", "'", ";"};
-                        for (String c : ReservedChars) {
-                            profileName = profileName.replace(c,"");
-                        }
-                        EventBus.getDefault().post(new ProfileEvents.CreateNewProfile(profileName));
-                    }
-                    return true;
-
-            }
+        if(dialogTag.equalsIgnoreCase("BACKGROUND_LOCATION") && which == BUTTON_POSITIVE){
+            LOG.debug("Beginning request for Background Location permission");
+            backgroundPermissionLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+            return true;
         }
-        else if(dialogTag.equalsIgnoreCase("PROFILE_DELETE") && which == BUTTON_POSITIVE){
+
+        if(dialogTag.equalsIgnoreCase("NEW_PROFILE_NAME") && which == BUTTON_POSITIVE){
+
+            String profileName = extras.getString("NEW_PROFILE_NAME");
+            if(!Strings.isNullOrEmpty(profileName)) {
+                final String[] ReservedChars = {"|", "\\", "?", "*", "<", "\"", ":", ">", ".", "/", "'", ";"};
+                for (String c : ReservedChars) {
+                    profileName = profileName.replace(c,"");
+                }
+                EventBus.getDefault().post(new ProfileEvents.CreateNewProfile(profileName));
+            }
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase("PROFILE_DELETE") && which == BUTTON_POSITIVE){
             String profileName = extras.getString("PROFILE_DELETE");
             EventBus.getDefault().post(new ProfileEvents.DeleteProfile(profileName));
             return true;
         }
-        else if(dialogTag.equalsIgnoreCase("PROFILE_DOWNLOAD_URL") && which == BUTTON_POSITIVE){
+
+        if(dialogTag.equalsIgnoreCase("PROFILE_DOWNLOAD_URL") && which == BUTTON_POSITIVE){
             String profileDownloadUrl = extras.getString("PROFILE_DOWNLOAD_URL");
             EventBus.getDefault().post(new ProfileEvents.DownloadProfile(profileDownloadUrl));
             Dialogs.progress(GpsMainActivity.this,getString(R.string.please_wait));
             return true;
         }
-        else if(dialogTag.equalsIgnoreCase("annotations") && which == BUTTON_POSITIVE){
+
+        if(dialogTag.equalsIgnoreCase("annotations") && which == BUTTON_POSITIVE){
             String enteredText = extras.getString("annotations");
             LOG.info("Annotation entered : " + enteredText);
             EventBus.getDefault().post(new CommandEvents.Annotate(enteredText));
             Files.addItemToCacheFile(enteredText, "annotations", GpsMainActivity.this);
             return true;
         }
-        else if(dialogTag.equalsIgnoreCase("FILE_UPLOAD_DIALOG") && which == BUTTON_POSITIVE){
+
+        if(dialogTag.equalsIgnoreCase("FILE_UPLOAD_DIALOG") && which == BUTTON_POSITIVE){
             final File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
             List<File> chosenFiles = new ArrayList<>();
             ArrayList<String> selectedItems = extras.getStringArrayList(SimpleListDialog.SELECTED_LABELS);
@@ -294,7 +294,8 @@ public class GpsMainActivity extends AppCompatActivity
             }
             return true;
         }
-        else if(dialogTag.equalsIgnoreCase("FILE_SHARE_DIALOG") && which == BUTTON_POSITIVE){
+
+        if(dialogTag.equalsIgnoreCase("FILE_SHARE_DIALOG") && which == BUTTON_POSITIVE){
             ArrayList<String> selectedItems = extras.getStringArrayList(SimpleListDialog.SELECTED_LABELS);
             if (selectedItems.size() <= 0) {
                 return true;
@@ -336,7 +337,8 @@ public class GpsMainActivity extends AppCompatActivity
             }
             return true;
         }
-        else if(dialogTag.equalsIgnoreCase("customfilename") && which == BUTTON_POSITIVE){
+
+        if(dialogTag.equalsIgnoreCase("customfilename") && which == BUTTON_POSITIVE){
             String enteredText = extras.getString("customfilename");
             String originalFileName = preferenceHelper.getCustomFileName();
 
@@ -348,7 +350,8 @@ public class GpsMainActivity extends AppCompatActivity
             Files.addItemToCacheFile(enteredText, "customfilename", GpsMainActivity.this);
             return true;
         }
-        else if(dialogTag.equalsIgnoreCase("GPS_PROVIDER_UNAVAILABLE") && which==BUTTON_POSITIVE){
+
+        if(dialogTag.equalsIgnoreCase("GPS_PROVIDER_UNAVAILABLE") && which==BUTTON_POSITIVE){
 
             Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
