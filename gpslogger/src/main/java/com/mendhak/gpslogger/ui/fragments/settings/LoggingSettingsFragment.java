@@ -139,8 +139,9 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
             SimpleListDialog.build()
                     .title(R.string.new_file_creation_title)
                     .msg(R.string.new_file_creation_summary)
+                    .pos(R.string.ok)
                     .items(getActivity(), R.array.filecreation_entries)
-                    .choiceMode(SimpleListDialog.SINGLE_CHOICE)
+                    .choiceMode(SimpleListDialog.SINGLE_CHOICE_DIRECT)
                     .choicePreset(position)
                     .show(this, PreferenceNames.NEW_FILE_CREATION_MODE);
             return true;

@@ -142,8 +142,9 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
             SimpleListDialog.build()
                     .title(R.string.osm_visibility)
                     .msg(R.string.osm_visibility_summary)
+                    .pos(R.string.ok)
                     .items(getActivity(), R.array.osm_visibility_choices)
-                    .choiceMode(SimpleListDialog.SINGLE_CHOICE)
+                    .choiceMode(SimpleListDialog.SINGLE_CHOICE_DIRECT)
                     .choicePreset(chosenIndex)
                     .show(this, PreferenceNames.OPENSTREETMAP_VISIBILITY);
             return true;
