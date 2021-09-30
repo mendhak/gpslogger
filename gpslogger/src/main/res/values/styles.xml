@@ -24,7 +24,7 @@
         <!--No more actionbar, use toolbar instead-->
         <item name="windowActionBar">false</item>
 
-        <!--The preference screens-->
+        <!--The preference screens, see <style name="PreferenceThemeOverlay">-->
 
 
         <!-- Material Drawer Colors, not all can be set via XML though, some are in code. -->
