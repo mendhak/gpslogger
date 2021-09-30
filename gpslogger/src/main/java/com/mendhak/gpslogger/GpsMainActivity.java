@@ -470,20 +470,21 @@ public class GpsMainActivity extends AppCompatActivity
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
-        // Adding android:configChanges="uiMode" in AndroidManifest.xml prevents the light/dark mode change
-        // from restarting the Activity. It raises this event instead.
-        // Necessary, because restarting the Activity, with a foreground service was causing a crash.
-        // https://stackoverflow.com/q/44425584/974369
-        int currentNightMode = newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        switch (currentNightMode) {
-            case Configuration.UI_MODE_NIGHT_NO:
-            case Configuration.UI_MODE_NIGHT_YES:
-                if(preferenceHelper.getAppThemeSetting().equalsIgnoreCase("system")){
-                    LOG.info("Dark/Light Mode has changed, but will not take effect until the application is reopened.");
-                    Toast.makeText(this, R.string.restart_required, Toast.LENGTH_LONG).show();
-                }
-                break;
-        }
+        // !!!!!!In case battery saver mode starts causing crashes.!!!!!!
+//        // Adding android:configChanges="uiMode" in AndroidManifest.xml prevents the light/dark mode change
+//        // from restarting the Activity. It raises this event instead.
+//        // Necessary, because restarting the Activity, with a foreground service was causing a crash.
+//        // https://stackoverflow.com/q/44425584/974369
+//        int currentNightMode = newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+//        switch (currentNightMode) {
+//            case Configuration.UI_MODE_NIGHT_NO:
+//            case Configuration.UI_MODE_NIGHT_YES:
+//                if(preferenceHelper.getAppThemeSetting().equalsIgnoreCase("system")){
+//                    LOG.info("Dark/Light Mode has changed, but will not take effect until the application is reopened.");
+//                    Toast.makeText(this, R.string.restart_required, Toast.LENGTH_LONG).show();
+//                }
+//                break;
+//        }
 
     }
 
