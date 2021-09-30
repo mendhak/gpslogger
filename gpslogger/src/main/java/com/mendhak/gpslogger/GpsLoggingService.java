@@ -120,6 +120,16 @@ public class GpsLoggingService extends Service  {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                startForeground(NOTIFICATION_ID, getNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+            }
+            else {
+                startForeground(NOTIFICATION_ID, getNotification());
+            }
+        } catch (Exception ex) {
+            LOG.error("Could not start GPSLoggingService in foreground. ", ex);
+        }
         handleIntent(intent);
         return START_STICKY;
     }
@@ -442,7 +452,6 @@ public class GpsLoggingService extends Service  {
         cancelAlarm();
         session.setCurrentLocationInfo(null);
         session.setSinglePointMode(false);
-        stopForeground(true);
 
         removeNotification();
         stopAlarm();
@@ -452,7 +461,6 @@ public class GpsLoggingService extends Service  {
         notifyClientsStarted(false);
         session.setCurrentFileName("");
         session.setCurrentFormattedFileName("");
-        stopSelf();
     }
 
     /**
