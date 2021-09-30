@@ -175,7 +175,11 @@ public class Systems {
     public static void setAppTheme(String appThemeSetting){
 
         if(appThemeSetting.equalsIgnoreCase("system")){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY);
+            }
         }
         else if(appThemeSetting.equalsIgnoreCase("light")){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
