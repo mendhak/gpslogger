@@ -38,6 +38,7 @@ public class AppSettings extends Application {
 
     @Override
     public void onCreate() {
+        Systems.setAppTheme(PreferenceHelper.getInstance().getAppThemeSetting());
         super.onCreate();
 
         //Configure the slf4j logger
