@@ -58,7 +58,7 @@
     <!--    https://www.flaticon.com/free-icon/dark-mode_5262027-->
     <ListPreference
         android:key="app_theme_setting"
-        android:title="App Theme"
+        android:title="@string/app_theme_title"
         android:entries="@array/app_theme_options"
         android:entryValues="@array/app_theme_values"
         android:summary="@string/app_theme_setting"
