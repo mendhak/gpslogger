@@ -452,6 +452,7 @@ public class GpsLoggingService extends Service  {
         cancelAlarm();
         session.setCurrentLocationInfo(null);
         session.setSinglePointMode(false);
+        stopForeground(true);
 
         removeNotification();
         stopAlarm();
