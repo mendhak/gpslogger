@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Preference
         android:key="log_customurl_url"
         android:singleLine="true"
-        android:title="URL" />
+        android:title="URL"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:enabled="true"
         android:key="customurl_legend_1"
         android:summary=""
-        android:title="@string/parameters" />
+        android:title="@string/parameters"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:defaultValue=""
         android:key="log_customurl_body"
         android:selectAllOnFocus="true"
         android:singleLine="false"
-        android:title="@string/customurl_http_body" />
+        android:title="@string/customurl_http_body"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:defaultValue=""
@@ -25,21 +29,25 @@
         android:key="log_customurl_headers"
         android:selectAllOnFocus="true"
         android:singleLine="false"
-        android:title="@string/customurl_http_headers" />
+        android:title="@string/customurl_http_headers"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:defaultValue="GET"
         android:key="log_customurl_method"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="@string/customurl_http_method" />
+        android:title="@string/customurl_http_method"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:key="log_customurl_basicauth"
-        android:title="Basic Authentication" />
+        android:title="Basic Authentication"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:key="customurl_validatecustomsslcert"
-        android:title="@string/ssl_certificate_validate" />
+        android:title="@string/ssl_certificate_validate"
+        app:iconSpaceReserved="false" />
 
 </PreferenceScreen>

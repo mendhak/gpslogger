@@ -1,53 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <SwitchPreferenceCompat
         android:key="startonbootup"
         android:summary="@string/startonbootup_summary"
-        android:title="@string/startonbootup_title" />
+        android:title="@string/startonbootup_title"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
         android:key="startonapplaunch"
         android:summary="@string/startonapplaunch_summary"
-        android:title="@string/startonapplaunch_title" />
+        android:title="@string/startonapplaunch_title"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
         android:key="useImperial"
         android:summary="@string/display_imperial_summary"
-        android:title="@string/display_imperial_title" />
+        android:title="@string/display_imperial_title"
+        app:iconSpaceReserved="false" />
 
     <ListPreference
         android:key="coordinatedisplayformat"
-        android:title="@string/coordinate_display_format" />
+        android:title="@string/coordinate_display_format"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
         android:key="hide_notification_buttons"
         android:summary="@string/restart_required"
-        android:title="@string/hide_notification_buttons" />
+        android:title="@string/hide_notification_buttons"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="hide_notification_from_status_bar"
         android:summary="@string/restart_required"
-        android:title="@string/hide_notification_from_status_bar" />
+        android:title="@string/hide_notification_from_status_bar"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:defaultValue="false"
         android:key="enableDisableGps"
         android:summary="@string/enabledisablegps_summary"
-        android:title="@string/enabledisablegps_title" />
+        android:title="@string/enabledisablegps_title"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="debugtofile"
         android:summary="@string/debuglog_summary"
-        android:title="@string/debuglog_title" />
+        android:title="@string/debuglog_title"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:enabled="true"
         android:key="debuglogtoemail"
         android:summary="@string/debuglog_attach_to_email_summary"
-        android:title="@string/debuglog_attach_to_email" />
+        android:title="@string/debuglog_attach_to_email"
+        app:iconSpaceReserved="false" />
 
     <!--https://www.flaticon.com/free-icon/dark-mode_5262027-->
     <ListPreference
@@ -57,14 +67,16 @@
         android:icon="@drawable/dark_mode"
         android:key="app_theme_setting"
         android:summary="@string/app_theme_setting"
-        android:title="@string/app_theme_title" />
+        android:title="@string/app_theme_title"
+        app:iconSpaceReserved="false" />
 
     <!--https://www.flaticon.com/free-icon/translate_889588-->
     <ListPreference
         android:icon="@drawable/translate"
         android:key="changelanguage"
         android:summary="@string/change_language_summary"
-        android:title="@string/change_language_title" />
+        android:title="@string/change_language_title"
+        app:iconSpaceReserved="false" />
 
     <!--https://www.flaticon.com/free-icon/close_463612-->
     <Preference
@@ -72,13 +84,17 @@
         android:icon="@drawable/reset"
         android:key="resetapp"
         android:summary="@string/reset_app_summary"
-        android:title="@string/reset_app_title" />
+        android:title="@string/reset_app_title"
+        app:iconSpaceReserved="false" />
 
-    <Preference android:key="about_version_info" />
+    <Preference
+        android:key="about_version_info"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:key="gpslogger_privacypolicy"
-        android:title="@string/privacy_policy">
+        android:title="@string/privacy_policy"
+        app:iconSpaceReserved="false">
         <intent
             android:action="android.intent.action.VIEW"
             android:data="https://github.com/mendhak/gpslogger/blob/master/assets/text/privacypolicy.md#privacy-policy" />
@@ -87,7 +103,8 @@
     <Preference
         android:icon="@drawable/coffee"
         android:key="gpsloggerdonate_link"
-        android:title="@string/tip_coffee">
+        android:title="@string/tip_coffee"
+        app:iconSpaceReserved="false">
         <intent
             android:action="android.intent.action.VIEW"
             android:data="https://paypal.me/mendhak" />
@@ -96,7 +113,8 @@
     <Preference
         android:icon="@drawable/github"
         android:key="gpslogger_repo"
-        android:title="Source Code">
+        android:title="Source Code"
+        app:iconSpaceReserved="false">
         <intent
             android:action="android.intent.action.VIEW"
             android:data="https://github.com/mendhak/gpslogger/" />
@@ -105,7 +123,8 @@
     <Preference
         android:icon="@mipmap/gpsloggericon3"
         android:key="gpslogger_site"
-        android:title="https://gpslogger.app">
+        android:title="https://gpslogger.app"
+        app:iconSpaceReserved="false">
         <intent
             android:action="android.intent.action.VIEW"
             android:data="https://gpslogger.app/" />
@@ -113,7 +132,8 @@
 
     <Preference
         android:key="gpslogger_crowdin"
-        android:title="Translations">
+        android:title="Translations"
+        app:iconSpaceReserved="false">
         <intent
             android:action="android.intent.action.VIEW"
             android:data="https://crowdin.com/project/gpslogger-for-android" />
@@ -121,7 +141,8 @@
 
     <Preference
         android:key="gpslogger_thirdparty"
-        android:title="Open Source Libraries">
+        android:title="Open Source Libraries"
+        app:iconSpaceReserved="false">
         <intent
             android:action="android.intent.action.VIEW"
             android:data="https://github.com/mendhak/gpslogger/blob/master/assets/text/opensource.md#open-source-libraries" />

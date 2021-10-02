@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <SwitchPreferenceCompat
         android:key="osm_enabled"
-        android:title="@string/autosend_enabled" />
+        android:title="@string/autosend_enabled"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:key="osm_resetauth"
         android:summary="@string/osm_resetauth_summary"
-        android:title="@string/osm_resetauth" />
+        android:title="@string/osm_resetauth"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:defaultValue="private"
@@ -16,18 +19,21 @@
         android:entryValues="@array/osm_visibility_choices"
         android:key="osm_visibility"
         android:summary="@string/osm_visibility_summary"
-        android:title="@string/osm_visibility" />
+        android:title="@string/osm_visibility"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:dialogTitle="@string/osm_description"
         android:key="osm_description"
         android:summary="@string/osm_description_summary"
-        android:title="@string/osm_description" />
+        android:title="@string/osm_description"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:dialogTitle="@string/osm_tags"
         android:key="osm_tags"
         android:summary="@string/osm_tags_summary"
-        android:title="@string/osm_tags" />
+        android:title="@string/osm_tags"
+        app:iconSpaceReserved="false" />
 
 </PreferenceScreen>

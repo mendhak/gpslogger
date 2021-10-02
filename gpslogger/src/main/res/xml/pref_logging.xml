@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:summary="@string/pref_logging_summary"
     android:title="@string/pref_logging_title">
 
@@ -7,50 +8,61 @@
         android:defaultValue="true"
         android:key="log_gpx"
         android:summary="@string/log_gpx_summary"
-        android:title="@string/log_gpx_title" />
+        android:title="@string/log_gpx_title"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="log_gpx_11"
         android:summary="@string/log_gpx_11_summary"
-        android:title="@string/log_gpx_11_title" />
+        android:title="@string/log_gpx_11_title"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
         android:key="log_kml"
         android:summary="@string/log_kml_summary"
-        android:title="@string/log_kml_title" />
+        android:title="@string/log_kml_title"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
         android:key="log_customurl_enabled"
         android:summary="@string/log_customurl_summary"
-        android:title="@string/log_customurl_title" />
+        android:title="@string/log_customurl_title"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
         android:key="log_opengts"
         android:summary="@string/log_opengts_summary"
-        android:title="@string/log_opengts_title" />
+        android:title="@string/log_opengts_title"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
         android:key="log_plain_text"
         android:summary="@string/log_plain_text_summary"
-        android:title="@string/log_plain_text_title" />
+        android:title="@string/log_plain_text_title"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
         android:key="log_geojson"
         android:summary="@string/log_json_summary"
-        android:title="@string/log_json_title" />
+        android:title="@string/log_json_title"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
         android:key="log_nmea"
         android:summary="@string/log_nmea_summary"
-        android:title="@string/log_nmea_title" />
+        android:title="@string/log_nmea_title"
+        app:iconSpaceReserved="false" />
 
-    <PreferenceCategory android:title="@string/pref_filedetails_title">
+    <PreferenceCategory
+        android:title="@string/pref_filedetails_title"
+        app:iconSpaceReserved="false">
 
         <Preference
             android:key="gpslogger_folder"
             android:summary="@string/gpslogger_folder_summary"
-            android:title="@string/gpslogger_folder_title" />
+            android:title="@string/gpslogger_folder_title"
+            app:iconSpaceReserved="false" />
 
         <Preference
             android:defaultValue="onceaday"
@@ -58,7 +70,8 @@
             android:entryValues="@array/filecreation_values"
             android:key="new_file_creation"
             android:summary="@string/new_file_creation_summary"
-            android:title="@string/new_file_creation_title" />
+            android:title="@string/new_file_creation_title"
+            app:iconSpaceReserved="false" />
 
         <Preference
             android:defaultValue="gpslogger"
@@ -66,25 +79,29 @@
             android:dialogTitle="@string/new_file_custom_title"
             android:key="new_file_custom_name"
             android:summary="@string/new_file_custom_summary"
-            android:title="@string/new_file_custom_title" />
+            android:title="@string/new_file_custom_title"
+            app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="new_file_custom_keep_changing"
             android:summary="@string/new_file_custom_keep_changing_summary"
-            android:title="@string/new_file_custom_keep_changing_title" />
+            android:title="@string/new_file_custom_keep_changing_title"
+            app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="new_file_custom_each_time"
             android:summary="@string/new_file_custom_each_time_summary"
-            android:title="@string/new_file_custom_each_time_title" />
+            android:title="@string/new_file_custom_each_time_title"
+            app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="new_file_prefix_serial"
             android:summary="@string/new_file_prefix_serial_summary"
-            android:title="@string/new_file_prefix_serial_title" />
+            android:title="@string/new_file_prefix_serial_title"
+            app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
 

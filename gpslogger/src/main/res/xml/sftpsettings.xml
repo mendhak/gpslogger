@@ -1,62 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <SwitchPreferenceCompat
         android:key="sftp_enabled"
-        android:title="@string/autosend_enabled" />
+        android:title="@string/autosend_enabled"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:defaultValue="127.0.0.1"
         android:dialogTitle="@string/autoopengts_server_summary"
         android:inputType="text"
         android:key="sftp_host"
-        android:title="@string/autoopengts_server_summary" />
+        android:title="@string/autoopengts_server_summary"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:defaultValue="22"
         android:dialogTitle="@string/autoftp_port"
         android:inputType="number"
         android:key="sftp_port"
-        android:title="@string/autoftp_port" />
+        android:title="@string/autoftp_port"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:defaultValue="/tmp"
         android:dialogTitle="@string/autoftp_directory"
         android:inputType="text"
         android:key="sftp_remote_server_path"
-        android:title="@string/autoftp_directory" />
+        android:title="@string/autoftp_directory"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:defaultValue=""
         android:dialogTitle="@string/autoftp_username"
         android:inputType="text"
         android:key="sftp_user"
-        android:title="@string/autoftp_username" />
+        android:title="@string/autoftp_username"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:defaultValue=""
         android:dialogTitle="@string/autoftp_password"
         android:inputType="textPassword"
         android:key="sftp_password"
-        android:title="@string/autoftp_password" />
+        android:title="@string/autoftp_password"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:key="sftp_private_key_path"
-        android:title="@string/sftp_private_key_path" />
+        android:title="@string/sftp_private_key_path"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:defaultValue=""
         android:dialogTitle="@string/sftp_private_key_passphrase"
         android:inputType="textPassword"
         android:key="sftp_private_key_passphrase"
-        android:title="@string/sftp_private_key_passphrase" />
+        android:title="@string/sftp_private_key_passphrase"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:key="sftp_reset_authorisation"
-        android:title="@string/osm_resetauth" />
+        android:title="@string/osm_resetauth"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:key="sftp_validateserver"
-        android:title="@string/sftp_validate_test_upload" />
+        android:title="@string/sftp_validate_test_upload"
+        app:iconSpaceReserved="false" />
 
 </PreferenceScreen>
