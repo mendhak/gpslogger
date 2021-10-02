@@ -1,75 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:key="gpslogger_preferences" android:title="@string/pref_autosend_title" android:summary="@string/pref_autosend_summary">
-
-
-        <SwitchPreferenceCompat
-            android:key="autosend_enabled"
-            android:title="@string/autosend_enabled"
-            android:summary="@string/autosend_enabled_summary"/>
-
-
-        <Preference
-            android:key="autosend_frequency_minutes"
-            android:title="@string/autosend_frequency"
-            android:summary="@string/autosend_frequency_summary"
-            android:numeric="integer"
-            android:maxLength="4"
-            android:defaultValue="60"
-            android:hint="@string/autosend_frequency_hint"
-            />
+    android:summary="@string/pref_autosend_summary"
+    android:title="@string/pref_autosend_title">
 
     <SwitchPreferenceCompat
+        android:key="autosend_enabled"
+        android:summary="@string/autosend_enabled_summary"
+        android:title="@string/autosend_enabled" />
+
+    <Preference
+        android:defaultValue="60"
+        android:hint="@string/autosend_frequency_hint"
+        android:key="autosend_frequency_minutes"
+        android:maxLength="4"
+        android:numeric="integer"
+        android:summary="@string/autosend_frequency_summary"
+        android:title="@string/autosend_frequency" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
         android:key="autosend_frequency_whenstoppressed"
+        android:title="@string/autoemail_frequency_whenistop" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:key="autosend_sendzip"
+        android:summary="@string/autosend_sendzip_summary"
+        android:title="@string/autosend_sendzip_title" />
+
+    <SwitchPreferenceCompat
         android:defaultValue="false"
-        android:title="@string/autoemail_frequency_whenistop"
-
-        />
-
-    <SwitchPreferenceCompat
-            android:key="autosend_sendzip"
-            android:defaultValue="true"
-            android:title="@string/autosend_sendzip_title"
-            android:summary="@string/autosend_sendzip_summary"/>
-
-    <SwitchPreferenceCompat
         android:key="autosend_wifionly"
-        android:defaultValue="false"
         android:title="@string/autosend_wifionly_title" />
 
     <PreferenceCategory android:title="@string/autosend_targets_category">
 
         <Preference
-            android:title="@string/dropbox_setup_title"
-            android:key="dropbox_setup">
-        </Preference>
-        <Preference
-            android:title="@string/sftp_setup_title"
-            android:key="sftp_setup">
-        </Preference>
-        <Preference
-            android:title="@string/opengts_setup_title"
-            android:key="opengts_setup">
-        </Preference>
-        <Preference
-            android:title="@string/osm_setup_title"
-            android:key="osm_setup">
-        </Preference>
-        <Preference
-            android:title="@string/autoemail_title"
-            android:key="autoemail_setup">
-        </Preference>
-        <Preference
-            android:title="@string/owncloud_setup_title"
-            android:key="owncloud_setup">
-        </Preference>
-        <Preference
-            android:title="@string/autoftp_setup_title"
-            android:key="autoftp_setup">
-        </Preference>
+            android:key="dropbox_setup"
+            android:title="@string/dropbox_setup_title" />
 
+        <Preference
+            android:key="sftp_setup"
+            android:title="@string/sftp_setup_title" />
+
+        <Preference
+            android:key="opengts_setup"
+            android:title="@string/opengts_setup_title" />
+
+        <Preference
+            android:key="osm_setup"
+            android:title="@string/osm_setup_title" />
+
+        <Preference
+            android:key="autoemail_setup"
+            android:title="@string/autoemail_title" />
+
+        <Preference
+            android:key="owncloud_setup"
+            android:title="@string/owncloud_setup_title" />
+
+        <Preference
+            android:key="autoftp_setup"
+            android:title="@string/autoftp_setup_title" />
 
     </PreferenceCategory>
-
 
 </PreferenceScreen>

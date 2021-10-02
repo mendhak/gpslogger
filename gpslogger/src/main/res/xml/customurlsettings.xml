@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:key="customurl_preferences">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference
         android:key="log_customurl_url"
@@ -9,36 +7,39 @@
         android:title="URL" />
 
     <Preference
-        android:key="customurl_legend_1"
         android:enabled="true"
-        android:title="@string/parameters"
-        android:summary="" />
+        android:key="customurl_legend_1"
+        android:summary=""
+        android:title="@string/parameters" />
 
     <Preference
+        android:defaultValue=""
         android:key="log_customurl_body"
         android:selectAllOnFocus="true"
         android:singleLine="false"
-        android:defaultValue=""
         android:title="@string/customurl_http_body" />
+
     <Preference
+        android:defaultValue=""
+        android:hint="Content-Type: application/json\nAuthorization: Basic abcdefg\nApiToken: 12345"
         android:key="log_customurl_headers"
         android:selectAllOnFocus="true"
         android:singleLine="false"
-        android:defaultValue=""
-        android:hint="Content-Type: application/json\nAuthorization: Basic abcdefg\nApiToken: 12345"
         android:title="@string/customurl_http_headers" />
+
     <Preference
         android:defaultValue="GET"
         android:key="log_customurl_method"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:title="@string/customurl_http_method" />
+
     <Preference
         android:key="log_customurl_basicauth"
-        android:title="Basic Authentication"/>
+        android:title="Basic Authentication" />
 
-    <Preference android:key="customurl_validatecustomsslcert"
-                android:title="@string/ssl_certificate_validate" />
-
+    <Preference
+        android:key="customurl_validatecustomsslcert"
+        android:title="@string/ssl_certificate_validate" />
 
 </PreferenceScreen>

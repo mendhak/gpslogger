@@ -1,94 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:key="gpslogger_preferences"
-                  android:title="@string/pref_logging_title"
-                  android:summary="@string/pref_logging_summary">
-
+    android:summary="@string/pref_logging_summary"
+    android:title="@string/pref_logging_title">
 
     <SwitchPreferenceCompat
-            android:key="log_gpx"
-            android:title="@string/log_gpx_title"
-            android:summary="@string/log_gpx_summary"
-            android:defaultValue="true"/>
+        android:defaultValue="true"
+        android:key="log_gpx"
+        android:summary="@string/log_gpx_summary"
+        android:title="@string/log_gpx_title" />
 
     <SwitchPreferenceCompat
-            android:key="log_gpx_11"
-            android:title="@string/log_gpx_11_title"
-            android:summary="@string/log_gpx_11_summary"
-            android:defaultValue="false"/>
+        android:defaultValue="false"
+        android:key="log_gpx_11"
+        android:summary="@string/log_gpx_11_summary"
+        android:title="@string/log_gpx_11_title" />
 
     <SwitchPreferenceCompat
-            android:key="log_kml"
-            android:summary="@string/log_kml_summary"
-            android:title="@string/log_kml_title"/>
+        android:key="log_kml"
+        android:summary="@string/log_kml_summary"
+        android:title="@string/log_kml_title" />
 
     <SwitchPreferenceCompat
-            android:title="@string/log_customurl_title"
-            android:summary="@string/log_customurl_summary"
-            android:key="log_customurl_enabled" />
-
-
-    <SwitchPreferenceCompat
-            android:key="log_opengts"
-            android:summary="@string/log_opengts_summary"
-            android:title="@string/log_opengts_title"/>
+        android:key="log_customurl_enabled"
+        android:summary="@string/log_customurl_summary"
+        android:title="@string/log_customurl_title" />
 
     <SwitchPreferenceCompat
-            android:key="log_plain_text"
-            android:summary="@string/log_plain_text_summary"
-            android:title="@string/log_plain_text_title"/>
+        android:key="log_opengts"
+        android:summary="@string/log_opengts_summary"
+        android:title="@string/log_opengts_title" />
+
+    <SwitchPreferenceCompat
+        android:key="log_plain_text"
+        android:summary="@string/log_plain_text_summary"
+        android:title="@string/log_plain_text_title" />
 
     <SwitchPreferenceCompat
         android:key="log_geojson"
         android:summary="@string/log_json_summary"
-        android:title="@string/log_json_title"/>
+        android:title="@string/log_json_title" />
 
     <SwitchPreferenceCompat
-            android:key="log_nmea"
-            android:title="@string/log_nmea_title"
-            android:summary="@string/log_nmea_summary" />
+        android:key="log_nmea"
+        android:summary="@string/log_nmea_summary"
+        android:title="@string/log_nmea_title" />
 
-    <PreferenceCategory
-        android:title="@string/pref_filedetails_title"
-        >
-
+    <PreferenceCategory android:title="@string/pref_filedetails_title">
 
         <Preference
             android:key="gpslogger_folder"
-            android:title="@string/gpslogger_folder_title"
-            android:summary="@string/gpslogger_folder_summary" />
+            android:summary="@string/gpslogger_folder_summary"
+            android:title="@string/gpslogger_folder_title" />
 
         <Preference
-            android:key="new_file_creation"
-            android:title="@string/new_file_creation_title"
-            android:summary="@string/new_file_creation_summary"
-            android:entries="@array/filecreation_entries"
             android:defaultValue="onceaday"
-            android:entryValues="@array/filecreation_values"/>
+            android:entries="@array/filecreation_entries"
+            android:entryValues="@array/filecreation_values"
+            android:key="new_file_creation"
+            android:summary="@string/new_file_creation_summary"
+            android:title="@string/new_file_creation_title" />
+
         <Preference
-            android:key="new_file_custom_name"
-            android:title="@string/new_file_custom_title"
-            android:summary="@string/new_file_custom_summary"
-            android:dialogTitle="@string/new_file_custom_title"
-            android:dialogMessage="@string/new_file_custom_message"
             android:defaultValue="gpslogger"
-            />
+            android:dialogMessage="@string/new_file_custom_message"
+            android:dialogTitle="@string/new_file_custom_title"
+            android:key="new_file_custom_name"
+            android:summary="@string/new_file_custom_summary"
+            android:title="@string/new_file_custom_title" />
+
         <SwitchPreferenceCompat
+            android:defaultValue="true"
             android:key="new_file_custom_keep_changing"
-            android:title="@string/new_file_custom_keep_changing_title"
             android:summary="@string/new_file_custom_keep_changing_summary"
-            android:defaultValue="true"/>
+            android:title="@string/new_file_custom_keep_changing_title" />
+
         <SwitchPreferenceCompat
+            android:defaultValue="true"
             android:key="new_file_custom_each_time"
-            android:title="@string/new_file_custom_each_time_title"
             android:summary="@string/new_file_custom_each_time_summary"
-            android:defaultValue="true"/>
+            android:title="@string/new_file_custom_each_time_title" />
+
         <SwitchPreferenceCompat
-            android:key="new_file_prefix_serial"
-            android:title="@string/new_file_prefix_serial_title"
-            android:summary="@string/new_file_prefix_serial_summary"
             android:defaultValue="false"
-            />
+            android:key="new_file_prefix_serial"
+            android:summary="@string/new_file_prefix_serial_summary"
+            android:title="@string/new_file_prefix_serial_title" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

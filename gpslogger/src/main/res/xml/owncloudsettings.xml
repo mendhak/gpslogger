@@ -1,42 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:key="owncloud_preferences">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreferenceCompat
         android:key="owncloud_enabled"
         android:title="@string/autosend_enabled" />
 
     <Preference
-            android:key="owncloud_server"
-            android:title="@string/owncloud_server_summary"
-            android:defaultValue="http://127.0.0.1"
-            android:dialogTitle="@string/owncloud_server_summary"
-            android:hint="@string/owncloud_server_summary"/>
-                
-    <Preference
-            android:key="owncloud_username"
-            android:title="@string/autoftp_username"
-            android:dialogTitle="@string/autoftp_username"/>
+        android:defaultValue="http://127.0.0.1"
+        android:dialogTitle="@string/owncloud_server_summary"
+        android:hint="@string/owncloud_server_summary"
+        android:key="owncloud_server"
+        android:title="@string/owncloud_server_summary" />
 
     <Preference
-            android:key="owncloud_password"
-            android:title="@string/autoftp_password"
-            android:dialogTitle="@string/autoftp_password"
-            android:inputType="textPassword"
-        android:password="true"/>
+        android:dialogTitle="@string/autoftp_username"
+        android:key="owncloud_username"
+        android:title="@string/autoftp_username" />
 
     <Preference
-            android:key="owncloud_directory"
-            android:title="@string/autoftp_directory"
-            android:defaultValue="gpslogger"
-            android:dialogTitle="@string/autoftp_directory"
-            android:summary="@string/owncloud_directory_summary"
-            />
-    <Preference android:key="owncloud_validatecustomsslcert"
-                android:title="@string/ssl_certificate_validate" />
+        android:dialogTitle="@string/autoftp_password"
+        android:inputType="textPassword"
+        android:key="owncloud_password"
+        android:password="true"
+        android:title="@string/autoftp_password" />
 
-    <Preference android:title="@string/gdocs_test_title"
-                android:summary="@string/owncloud_test_summary" android:key="owncloud_test"/>
+    <Preference
+        android:defaultValue="gpslogger"
+        android:dialogTitle="@string/autoftp_directory"
+        android:key="owncloud_directory"
+        android:summary="@string/owncloud_directory_summary"
+        android:title="@string/autoftp_directory" />
+
+    <Preference
+        android:key="owncloud_validatecustomsslcert"
+        android:title="@string/ssl_certificate_validate" />
+
+    <Preference
+        android:key="owncloud_test"
+        android:summary="@string/owncloud_test_summary"
+        android:title="@string/gdocs_test_title" />
 
 </PreferenceScreen>
