@@ -1,74 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:key="autoftp_preferences">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <SwitchPreferenceCompat
         android:key="autoftp_enabled"
-        android:title="@string/autosend_enabled" />
-
-
-    <Preference
-            android:key="autoftp_server"
-            android:title="@string/autoopengts_server"
-            android:summary="@string/autoopengts_server_summary"
-            android:dialogTitle="@string/autoopengts_server"
-            android:hint="@string/autoopengts_server_summary"/>
+        android:title="@string/autosend_enabled"
+        app:iconSpaceReserved="false" />
 
     <Preference
-            android:key="autoftp_username"
-            android:title="@string/autoftp_username"
-            android:dialogTitle="@string/autoftp_username"/>
+        android:dialogTitle="@string/autoopengts_server"
+        android:hint="@string/autoopengts_server_summary"
+        android:key="autoftp_server"
+        android:summary="@string/autoopengts_server_summary"
+        android:title="@string/autoopengts_server"
+        app:iconSpaceReserved="false" />
 
     <Preference
-            android:key="autoftp_password"
-            android:title="@string/autoftp_password"
-            android:dialogTitle="@string/autoftp_password"
-            android:password="true"/>
+        android:dialogTitle="@string/autoftp_username"
+        android:key="autoftp_username"
+        android:title="@string/autoftp_username"
+        app:iconSpaceReserved="false" />
 
     <Preference
-            android:key="autoftp_directory"
-            android:title="@string/autoftp_directory"
-            android:dialogTitle="@string/autoftp_directory"
-            android:defaultValue="GPSLogger"
-            />
+        android:dialogTitle="@string/autoftp_password"
+        android:key="autoftp_password"
+        android:password="true"
+        android:title="@string/autoftp_password"
+        app:iconSpaceReserved="false" />
 
-    <Preference android:title="@string/gdocs_test_title"
-                android:summary="@string/autoftp_test_summary" android:key="autoftp_test"/>
+    <Preference
+        android:defaultValue="GPSLogger"
+        android:dialogTitle="@string/autoftp_directory"
+        android:key="autoftp_directory"
+        android:title="@string/autoftp_directory"
+        app:iconSpaceReserved="false" />
 
-    <PreferenceCategory android:title="@string/autoftp_advanced_settings">
+    <Preference
+        android:key="autoftp_test"
+        android:summary="@string/autoftp_test_summary"
+        android:title="@string/gdocs_test_title"
+        app:iconSpaceReserved="false" />
+
+    <PreferenceCategory
+        android:title="@string/autoftp_advanced_settings"
+        app:iconSpaceReserved="false">
+
         <Preference
-                android:key="autoftp_port"
-                android:title="@string/autoftp_port"
-                android:dialogTitle="@string/autoftp_port"
-                android:defaultValue="21"
-                android:inputType="number"/>
+            android:defaultValue="21"
+            android:dialogTitle="@string/autoftp_port"
+            android:inputType="number"
+            android:key="autoftp_port"
+            android:title="@string/autoftp_port"
+            app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
-                android:key="autoftp_useftps"
-                android:title="@string/autoftp_useftps"
-                android:defaultValue="false"
-                android:summary="@string/autoftp_useftps_summary"/>
+            android:defaultValue="false"
+            android:key="autoftp_useftps"
+            android:summary="@string/autoftp_useftps_summary"
+            android:title="@string/autoftp_useftps"
+            app:iconSpaceReserved="false" />
 
         <ListPreference
-                android:key="autoftp_ssltls"
-                android:title="@string/autoftp_ssltls"
-                android:summary="@string/autoftp_ssltls_summary"
-                android:entries="@array/autoftp_ssltls_entries"
-                android:entryValues="@array/autoftp_ssltls_values"
-                android:dialogTitle="@string/autoftp_ssltls"
-                android:defaultValue=""
-                android:shouldDisableView="false"/>
+            android:defaultValue=""
+            android:dialogTitle="@string/autoftp_ssltls"
+            android:entries="@array/autoftp_ssltls_entries"
+            android:entryValues="@array/autoftp_ssltls_values"
+            android:key="autoftp_ssltls"
+            android:shouldDisableView="false"
+            android:summary="@string/autoftp_ssltls_summary"
+            android:title="@string/autoftp_ssltls"
+            app:iconSpaceReserved="false" />
 
-        <Preference android:key="ftp_validatecustomsslcert"
-                    android:title="@string/ssl_certificate_validate" />
+        <Preference
+            android:key="ftp_validatecustomsslcert"
+            android:title="@string/ssl_certificate_validate"
+            app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
-                android:key="autoftp_implicit"
-                android:title="@string/autoftp_implicit"
-                android:defaultValue="false"
-                />
-
+            android:defaultValue="false"
+            android:key="autoftp_implicit"
+            android:title="@string/autoftp_implicit"
+            app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
 

@@ -47,25 +47,6 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 
-    <!--    Automatically gets applied to preference screens, equivalent to: -->
-    <!--    <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>-->
-    <style name="PreferenceThemeOverlay">
-        <item name="preferenceScreenStyle">@style/Preference.PreferenceScreen</item>
-        <item name="preferenceFragmentStyle">@style/PreferenceFragment</item>
-        <item name="preferenceCategoryStyle">@style/Preference.Category</item>
-        <item name="preferenceStyle">@style/Preference</item>
-        <item name="preferenceInformationStyle">@style/Preference.Information</item>
-        <item name="checkBoxPreferenceStyle">@style/Preference.CheckBoxPreference</item>
-        <item name="switchPreferenceCompatStyle">@style/Preference.SwitchPreferenceCompat</item>
-        <item name="dialogPreferenceStyle">@style/Preference.DialogPreference</item>
-        <item name="editTextPreferenceStyle">@style/Preference.DialogPreference.EditTextPreference</item>
-        <item name="preferenceFragmentListStyle">@style/PreferenceFragmentList</item>
-        <item name="android:dividerHeight">2dp</item>
-        <item name="allowDividerAbove">true</item>
-        <item name="allowDividerBelow">true</item>
-        <item name="iconSpaceReserved">false</item>
-    </style>
-
     <!--    See values-night/styles.xml for dark theme overridden values.-->
     <color name="primaryColor">#607d8b</color>
     <color name="primaryColorDark">#455a64</color>

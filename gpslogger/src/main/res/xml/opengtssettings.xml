@@ -1,42 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:key="opengts_preferences">
-
-
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <SwitchPreferenceCompat
         android:key="autoopengts_enabled"
-                        android:title="@string/autosend_enabled"/>
+        android:title="@string/autosend_enabled"
+        app:iconSpaceReserved="false" />
 
-    <PreferenceCategory android:title="@string/autoopengts_server_category">
+    <PreferenceCategory
+        android:title="@string/autoopengts_server_category"
+        app:iconSpaceReserved="false">
 
-        <Preference android:key="opengts_server"
-                            android:title="@string/autoopengts_server"
-                            android:inputType="textUri"
-                            android:hint="@string/autoopengts_server_summary"
-                            android:dialogTitle="@string/autoopengts_server"/>
-        <Preference android:key="opengts_server_port"
-                            android:title="@string/autoftp_port"
-                            android:inputType="number"
-                            android:defaultValue="443"
-                            android:dialogTitle="@string/autoftp_port"/>
-        <ListPreference android:key="opengts_server_communication_method"
-                        android:title="@string/opengts_server_communication_method"
-                        android:summary="@string/opengts_server_communication_method_summary"
-                        android:entries="@array/opengts_server_communication_methods_values" android:defaultValue="HTTPS"
-                        android:entryValues="@array/opengts_server_communication_methods_values"/>
-        <Preference android:key="autoopengts_server_path"
-                            android:title="@string/autoopengts_server_path"
-                            android:inputType="textUri"
-                            android:summary="@string/autoopengts_server_path_summary"
-                            android:dialogTitle="@string/autoopengts_server_path"/>
-        <Preference android:key="opengts_accountname" android:title="@string/autoopengts_accountname" />
+        <Preference
+            android:dialogTitle="@string/autoopengts_server"
+            android:hint="@string/autoopengts_server_summary"
+            android:inputType="textUri"
+            android:key="opengts_server"
+            android:title="@string/autoopengts_server"
+            app:iconSpaceReserved="false" />
 
+        <Preference
+            android:defaultValue="443"
+            android:dialogTitle="@string/autoftp_port"
+            android:inputType="number"
+            android:key="opengts_server_port"
+            android:title="@string/autoftp_port"
+            app:iconSpaceReserved="false" />
 
-        <Preference android:key="opengts_device_id" android:title="@string/autoopengts_device_id"
-                            android:dialogTitle="@string/autoopengts_device_id"/>
-        <Preference android:key="opengts_validatecustomsslcert"
-                    android:title="@string/ssl_certificate_validate" />
+        <ListPreference
+            android:defaultValue="HTTPS"
+            android:entries="@array/opengts_server_communication_methods_values"
+            android:entryValues="@array/opengts_server_communication_methods_values"
+            android:key="opengts_server_communication_method"
+            android:summary="@string/opengts_server_communication_method_summary"
+            android:title="@string/opengts_server_communication_method"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:dialogTitle="@string/autoopengts_server_path"
+            android:inputType="textUri"
+            android:key="autoopengts_server_path"
+            android:summary="@string/autoopengts_server_path_summary"
+            android:title="@string/autoopengts_server_path"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:key="opengts_accountname"
+            android:title="@string/autoopengts_accountname"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:dialogTitle="@string/autoopengts_device_id"
+            android:key="opengts_device_id"
+            android:title="@string/autoopengts_device_id"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:key="opengts_validatecustomsslcert"
+            android:title="@string/ssl_certificate_validate"
+            app:iconSpaceReserved="false" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

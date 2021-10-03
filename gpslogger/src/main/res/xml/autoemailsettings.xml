@@ -1,46 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:key="autoemail_preferences">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <SwitchPreferenceCompat
         android:key="autoemail_enabled"
-                        android:title="@string/autosend_enabled"/>
+        android:title="@string/autosend_enabled"
+        app:iconSpaceReserved="false" />
 
-    <Preference android:key="autoemail_target"
-                        android:title="@string/autoemail_target" android:summary="@string/autoemail_sendto_csv"
-                        android:dialogTitle="@string/autoemail_target" android:hint="@string/autoemail_sendto_csv"/>
+    <Preference
+        android:dialogTitle="@string/autoemail_target"
+        android:hint="@string/autoemail_sendto_csv"
+        android:key="autoemail_target"
+        android:summary="@string/autoemail_sendto_csv"
+        android:title="@string/autoemail_target"
+        app:iconSpaceReserved="false" />
 
-    <PreferenceCategory android:title="@string/autoemail_smtp_category">
-        <ListPreference android:key="autoemail_preset"
-                        android:title="@string/autoemail_choosepreset"
-                        android:summary="@string/autoemail_choosepreset_summary"
-                        android:entries="@array/autoemail_presets" android:defaultValue="0"
-                        android:entryValues="@array/autoemail_presetvalues"/>
+    <PreferenceCategory
+        android:title="@string/autoemail_smtp_category"
+        app:iconSpaceReserved="false">
 
-        <Preference android:key="smtp_username" android:title="@string/autoftp_username"
-                            android:summary="@string/autoemail_username_summary"
-                            android:dialogTitle="@string/autoftp_username"/>
-        <Preference android:key="smtp_from" android:title="@string/autoemail_from"
-                            android:summary="@string/autoemail_from_summary"
-                            android:dialogTitle="@string/autoemail_from" android:defaultValue=""/>
-        <Preference android:key="smtp_password" android:title="@string/autoftp_password"
-                            android:summary="@string/autoemail_password_summary"
-                            android:dialogTitle="@string/autoftp_password"
-                            android:password="true"
-                />
-        <Preference android:key="smtp_server" android:title="@string/autoopengts_server"
-                            android:summary="@string/autoopengts_server_summary"
-                            android:dialogTitle="@string/autoopengts_server"/>
-        <Preference android:key="smtp_port" android:title="@string/autoftp_port"
-                            android:defaultValue="25"
-                            android:dialogTitle="@string/autoftp_port"/>
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/autoemail_presets"
+            android:entryValues="@array/autoemail_presetvalues"
+            android:key="autoemail_preset"
+            android:summary="@string/autoemail_choosepreset_summary"
+            android:title="@string/autoemail_choosepreset"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:dialogTitle="@string/autoftp_username"
+            android:key="smtp_username"
+            android:summary="@string/autoemail_username_summary"
+            android:title="@string/autoftp_username"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:defaultValue=""
+            android:dialogTitle="@string/autoemail_from"
+            android:key="smtp_from"
+            android:summary="@string/autoemail_from_summary"
+            android:title="@string/autoemail_from"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:dialogTitle="@string/autoftp_password"
+            android:key="smtp_password"
+            android:password="true"
+            android:summary="@string/autoemail_password_summary"
+            android:title="@string/autoftp_password"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:dialogTitle="@string/autoopengts_server"
+            android:key="smtp_server"
+            android:summary="@string/autoopengts_server_summary"
+            android:title="@string/autoopengts_server"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:defaultValue="25"
+            android:dialogTitle="@string/autoftp_port"
+            android:key="smtp_port"
+            android:title="@string/autoftp_port"
+            app:iconSpaceReserved="false" />
+
         <SwitchPreferenceCompat
-            android:key="smtp_ssl" android:title="@string/autoemail_ssl"
-                            android:summary="@string/autoemail_ssl_summary"/>
-        <Preference android:key="smtp_validatecustomsslcert"
-                    android:title="@string/ssl_certificate_validate" />
-        <Preference android:title="@string/autoemail_smtp_testemail"
-                    android:summary="@string/autoemail_test" android:key="smtp_testemail"/>
+            android:key="smtp_ssl"
+            android:summary="@string/autoemail_ssl_summary"
+            android:title="@string/autoemail_ssl"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:key="smtp_validatecustomsslcert"
+            android:title="@string/ssl_certificate_validate"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:key="smtp_testemail"
+            android:summary="@string/autoemail_test"
+            android:title="@string/autoemail_smtp_testemail"
+            app:iconSpaceReserved="false" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
