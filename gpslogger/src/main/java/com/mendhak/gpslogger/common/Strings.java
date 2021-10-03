@@ -180,6 +180,19 @@ public class Strings {
         return desc;
     }
 
+    public static String getIsoDateTimeWithOffset(Date dateToFormat){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        SimpleDateFormat ISO_8601_DATE_TIME = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", Locale.US);
+        ISO_8601_DATE_TIME.setTimeZone(calendar.getTimeZone());
+        String dateTimeStringWithOffset = ISO_8601_DATE_TIME.format(dateToFormat);
+        //Fix for older Android where ZZZZZ does not include colon
+        if (!dateTimeStringWithOffset.substring(dateTimeStringWithOffset.length() - 3).startsWith(":")) {
+            dateTimeStringWithOffset = dateTimeStringWithOffset.substring(0, dateTimeStringWithOffset.length() - 2) + ":" + dateTimeStringWithOffset.substring(dateTimeStringWithOffset.length() - 2);
+        }
+        return dateTimeStringWithOffset;
+    }
+
     /**
      * Given a Date object, returns an ISO 8601 date time string in UTC.
      * Example: 2010-03-23T05:17:22Z but not 2010-03-23T05:17:22+04:00

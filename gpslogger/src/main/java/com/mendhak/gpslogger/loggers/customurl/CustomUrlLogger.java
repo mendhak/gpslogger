@@ -101,6 +101,7 @@ public class CustomUrlLogger implements FileLogger {
         logUrl = logUrl.replaceAll("(?i)%prov", String.valueOf(sLoc.getProvider()));
         logUrl = logUrl.replaceAll("(?i)%spd", String.valueOf(sLoc.getSpeed()));
         logUrl = logUrl.replaceAll("(?i)%timestamp", String.valueOf(sLoc.getTime()/1000));
+        logUrl = logUrl.replaceAll("(?i)%timeoffset", Strings.getIsoDateTimeWithOffset(new Date(sLoc.getTime())));
         logUrl = logUrl.replaceAll("(?i)%time", String.valueOf(Strings.getIsoDateTime(new Date(sLoc.getTime()))));
         logUrl = logUrl.replaceAll("(?i)%date", String.valueOf(Strings.getIsoCalendarDate(new Date(sLoc.getTime()))));
         logUrl = logUrl.replaceAll("(?i)%starttimestamp", String.valueOf(sessionStartTimeStamp/1000));

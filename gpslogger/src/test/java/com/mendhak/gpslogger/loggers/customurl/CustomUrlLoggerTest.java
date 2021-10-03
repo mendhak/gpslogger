@@ -10,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import java.time.ZoneOffset;
+import java.util.TimeZone;
 
 
 @SmallTest
@@ -80,6 +82,20 @@ public class CustomUrlLoggerTest {
         urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER&activity=%ACT&epoch=%TIMESTAMP000";
 
         assertThat("Unix timestamp with 000 to fake milliseconds", logger.getFormattedTextblock(urlTemplate, loc, "", "", 0, "", 0,"","", 0), is(expected));
+
+    }
+
+    @Test
+    public void getFormattedUrl_WhenTimeOffsetParameter_UseISODateFormat() throws Exception{
+        //This sets the timezone for the JVM
+        TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.ofHours(2)));
+
+        Location loc = MockLocations.builder("MOCK", 12.193, 19.456).withTime(1457205869949l).build();
+        CustomUrlLogger logger = new CustomUrlLogger("",0, "GET", "","");
+        String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&timeoff=2016-03-05T21:24:29.949+02:00";
+        String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&timeoff=%TIMEOFFSET";
+
+        assertThat("TIMEOFFSET parameter is substituted with ISO Date Format, with time offset", logger.getFormattedTextblock(urlTemplate,loc,"","",0,"",0,"","",0), is(expected));
 
     }
 
