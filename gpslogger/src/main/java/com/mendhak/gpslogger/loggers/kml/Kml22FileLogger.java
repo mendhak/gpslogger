@@ -20,6 +20,8 @@
 package com.mendhak.gpslogger.loggers.kml;
 
 import android.location.Location;
+
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -158,6 +160,9 @@ class Kml22WriteHandler implements Runnable {
             RandomAccessFile raf;
 
             String dateTimeString = Strings.getIsoDateTime(new Date(loc.getTime()));
+            if(PreferenceHelper.getInstance().shouldWriteTimeWithOffset()){
+                dateTimeString = Strings.getIsoDateTimeWithOffset(new Date(loc.getTime()));
+            }
             String placemarkHead = "<Placemark>\n<gx:Track>\n";
             String placemarkTail = "</gx:Track>\n</Placemark></Document></kml>\n";
 

@@ -58,7 +58,6 @@ public class Gpx10FileLogger implements FileLogger {
             time = System.currentTimeMillis();
         }
         String dateTimeString = Strings.getIsoDateTime(new Date(time));
-
         if(PreferenceHelper.getInstance().shouldWriteTimeWithOffset()){
             dateTimeString = Strings.getIsoDateTimeWithOffset(new Date(time));
         }
@@ -81,7 +80,6 @@ public class Gpx10FileLogger implements FileLogger {
             time = System.currentTimeMillis();
         }
         String dateTimeString = Strings.getIsoDateTime(new Date(time));
-
         if(PreferenceHelper.getInstance().shouldWriteTimeWithOffset()){
             dateTimeString = Strings.getIsoDateTimeWithOffset(new Date(time));
         }
