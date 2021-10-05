@@ -29,10 +29,10 @@ public class GeoJSONLoggerTest {
 
     @Test
     public void annotate() throws Exception {
-        GeoJSONWriterPoints geojson = new GeoJSONWriterPoints(null, getLocation(), "test", false);
+        GeoJSONWriterPoints geojson = new GeoJSONWriterPoints(null, getLocation(), "test", "2021-10-05T21:20:19Z");
         String result = geojson.getString(false);
         String expected = "{\"type\": \"FeatureCollection\",\"features\": [\n" +
-                "{\"type\": \"Feature\",\"properties\":{\"time\":\"1970-01-01T00:00:00.000Z\"," +
+                "{\"type\": \"Feature\",\"properties\":{\"time\":\"2021-10-05T21:20:19Z\"," +
                 "\"provider\":\"MOCK\",\"time_long\":0,\"description\":\"test\"" +
                 ",\"altitude\":9001.0,\"bearing\":91.88,\"speed\":188.44}," +
                 "\"geometry\":{\"type\":\"Point\",\"coordinates\":[19.111,12.193]}}\n]}";
@@ -41,10 +41,10 @@ public class GeoJSONLoggerTest {
 
     @Test
     public void annotate_with_remove_badchars() throws Exception {
-        GeoJSONWriterPoints geojson = new GeoJSONWriterPoints(null, getLocation(), "\"Double Quotes\" and \\Backslashes need to go\\", false);
+        GeoJSONWriterPoints geojson = new GeoJSONWriterPoints(null, getLocation(), "\"Double Quotes\" and \\Backslashes need to go\\", "2021-10-05T21:20:19.392+04:00");
         String result = geojson.getString(false);
         String expected = "{\"type\": \"FeatureCollection\",\"features\": [\n" +
-                "{\"type\": \"Feature\",\"properties\":{\"time\":\"1970-01-01T00:00:00.000Z\"," +
+                "{\"type\": \"Feature\",\"properties\":{\"time\":\"2021-10-05T21:20:19.392+04:00\"," +
                 "\"provider\":\"MOCK\",\"time_long\":0,\"description\":\"Double Quotes and Backslashes need to go\"" +
                 ",\"altitude\":9001.0,\"bearing\":91.88,\"speed\":188.44}," +
                 "\"geometry\":{\"type\":\"Point\",\"coordinates\":[19.111,12.193]}}\n]}";
@@ -54,10 +54,10 @@ public class GeoJSONLoggerTest {
 
     @Test
     public void testLocationString() throws Exception {
-        GeoJSONWriterPoints geojson = new GeoJSONWriterPoints(null, getLocation(), null, false);
+        GeoJSONWriterPoints geojson = new GeoJSONWriterPoints(null, getLocation(), null, "2021-10-05T21:20:19.392Z");
         String result = geojson.getString(false);
         String expected = "{\"type\": \"FeatureCollection\",\"features\": [\n" +
-                "{\"type\": \"Feature\",\"properties\":{\"time\":\"1970-01-01T00:00:00.000Z\"," +
+                "{\"type\": \"Feature\",\"properties\":{\"time\":\"2021-10-05T21:20:19.392Z\"," +
                 "\"provider\":\"MOCK\",\"time_long\":0,\"altitude\":9001.0," +
                 "\"bearing\":91.88,\"speed\":188.44}," +
                 "\"geometry\":{\"type\":\"Point\",\"coordinates\":[19.111,12.193]}}\n]}";
@@ -67,9 +67,9 @@ public class GeoJSONLoggerTest {
     }
     @Test
     public void testLocationStringAppend() throws Exception {
-        GeoJSONWriterPoints geojson = new GeoJSONWriterPoints(null, getLocation(), null, false);
+        GeoJSONWriterPoints geojson = new GeoJSONWriterPoints(null, getLocation(), null, "2021-10-05T21:20:19.392+04:00");
         String result = geojson.getString(true);
-        String expected = ",{\"type\": \"Feature\",\"properties\":{\"time\":\"1970-01-01T00:00:00.000Z\"," +
+        String expected = ",{\"type\": \"Feature\",\"properties\":{\"time\":\"2021-10-05T21:20:19.392+04:00\"," +
                 "\"provider\":\"MOCK\",\"time_long\":0,\"altitude\":9001.0," +
                 "\"bearing\":91.88,\"speed\":188.44}," +
                 "\"geometry\":{\"type\":\"Point\",\"coordinates\":[19.111,12.193]}}\n]}";

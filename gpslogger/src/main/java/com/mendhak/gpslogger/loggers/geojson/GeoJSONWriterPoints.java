@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.Date;
 
 /**
  * Created by clemens on 10.05.17.
@@ -36,14 +35,16 @@ public class GeoJSONWriterPoints implements Runnable {
     private final static String NUMERIC_ATTRIBUTE_TEMPLATE = ",\"%s\":%s";
     private final static String COORD_TEMPLATE = "[%s,%s]";
     private final static String DIVIDER = ",";
+    private final String dateTimeString;
     private String desc;
     private File file;
     private Location location;
 
-    public GeoJSONWriterPoints(File file, Location location, String desc, boolean addNewTrackSegment) {
+    public GeoJSONWriterPoints(File file, Location location, String desc, String dateTimeString) {
         this.file = file;
         this.location = location;
         this.desc = desc;
+        this.dateTimeString = dateTimeString;
     }
 
     @Override
@@ -86,7 +87,6 @@ public class GeoJSONWriterPoints implements Runnable {
         } else {
             value.append(HEADER);
         }
-        String dateTimeString = Strings.getIsoDateTime(new Date(location.getTime()));
         String extra = "";
         StringBuilder attributes = new StringBuilder();
         attributes.append("\"time\":\"").append(dateTimeString).append("\"");

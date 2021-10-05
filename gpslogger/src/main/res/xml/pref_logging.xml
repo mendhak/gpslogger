@@ -109,8 +109,8 @@
         <SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="file_logging_write_time_with_offset"
-            android:summary="Write the location's ISO 8601 time with timezone offset, instead of UTC. eg, 2021-12-25T09:15:37.132+05:00."
-            android:title="Write time with timezone offset"
+            android:summary="@string/file_logging_log_time_with_offset_summary"
+            android:title="@string/file_logging_log_time_with_offset_title"
             app:iconSpaceReserved="false"/>
 
     </PreferenceCategory>

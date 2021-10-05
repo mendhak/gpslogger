@@ -47,6 +47,7 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.form.Input;
@@ -110,7 +111,21 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
 
         findPreference(PreferenceNames.LOG_TO_URL).setOnPreferenceChangeListener(this);
         findPreference(PreferenceNames.LOG_TO_OPENGTS).setOnPreferenceChangeListener(this);
+
+        findPreference(PreferenceNames.LOGGING_WRITE_TIME_WITH_OFFSET).setOnPreferenceChangeListener(this);
+        setPreferenceTimeZoneOffsetSummary(preferenceHelper.shouldWriteTimeWithOffset());
+
     }
+
+    private void setPreferenceTimeZoneOffsetSummary(boolean shouldIncludeOffset){
+        String dateTimeString = Strings.getIsoDateTime(new Date());
+        if(shouldIncludeOffset){
+            dateTimeString = Strings.getIsoDateTimeWithOffset(new Date());
+        }
+
+        findPreference(PreferenceNames.LOGGING_WRITE_TIME_WITH_OFFSET).setSummary(getString(R.string.file_logging_log_time_with_offset_summary) + " " + dateTimeString);
+    }
+
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -213,6 +228,11 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
             return true;
         }
 
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOGGING_WRITE_TIME_WITH_OFFSET)){
+            setPreferenceTimeZoneOffsetSummary(Boolean.valueOf(newValue.toString()));
+            return true;
+        }
 
         if (preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_OPENGTS)) {
 

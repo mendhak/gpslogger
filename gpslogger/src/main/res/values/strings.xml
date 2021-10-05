@@ -466,5 +466,7 @@
     <string name="app_theme_light">Light theme</string>
     <string name="app_theme_dark">Dark theme</string>
     <string name="app_theme_setting">Determines how to set the light or dark app theme</string>
+    <string name="file_logging_log_time_with_offset_title">Log time with timezone offset</string>
+    <string name="file_logging_log_time_with_offset_summary">Write the ISO 8601 time with timezone offset instead of UTC.</string>
 
 </resources>
