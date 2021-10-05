@@ -7,6 +7,7 @@
     <string name="settings_screen_name">Nastavenia GPSLogger</string>
     <string name="ok">OK</string>
     <string name="cancel">Zrušiť</string>
+    <string name="hide">Skryť</string>
     <string name="could_not_write_to_file">Do súboru sa nedá zapísovať</string>
     <string name="add_description">Pridať popis</string>
     <string name="letters_numbers">Použite iba písmená a čísla</string>
@@ -302,6 +303,15 @@ polia.
     <string name="listeners_title">Poskytovatelia lokalizácie</string>
     <string name="autosend_frequency_hint">Počet minút</string>
     <string name="pref_logging_file_no_permissions">GPSLogger nemôže zapisovať do tohto priečinka. Prosím vyberte iný zapisovací priečinok.</string>
+    <string name="gpslogger_custom_path_need_permission">Aby ste v aplikácii GPSLogger mohli využívať používateľom určené cesty, prosím povoľte apl. GPSLogger na nasledujúcej obrazovke spravovanie všetkých súborov. Potom skúste vykonať akciu ešte raz. Je to vyžadované kvôli obmedzeniu v systémoch Android 11+.</string>
+    <string name="storage_chooser_create_label">Vytvoriť</string>
+    <string name="storage_chooser_internal_storage_text">Interné úložisko</string>
+    <string name="storage_chooser_select_folder">Vybrať</string>
+    <string name="storage_chooser_overview_heading">Vybrať úložisko</string>
+    <string name="storage_chooser_new_folder_label">Nový priečinok</string>
+    <string name="storage_chooser_free_space_text">voľné</string>
+    <string name="storage_chooser_text_field_error">Názov prázdneho priečinka</string>
+    <string name="storage_chooser_text_field_hint">Názov priečinka</string>
     <string name="new_file_custom_each_time_title">Pri každom spustení sa opýtať na názov súboru</string>
     <string name="new_file_custom_each_time_summary">Pri každom spustení zaznamenávania sa opýtať na používateľom určený názov súboru</string>
     <string name="new_file_custom_keep_changing_title">Povoliť používateľský názov súboru pre dynamickú zmenu</string>
@@ -363,4 +373,9 @@ polia.
     <string name="hide_notification_from_status_bar_disallowed">Skrytie notifikácie je vypnuté v systéme Oreo a novších</string>
     <string name="reset_app_summary">Týmto sa aplikácia resetuje, vymažú sa nastavenia, súbory GPSLogger a zrušia sa oprávnenia udelené aplikácii. Všetky údaje sa stratia!</string>
     <string name="reset_app_title">Reset aplikácie</string>
+    <string name="app_theme_title">Téma aplikácie</string>
+    <string name="app_theme_follow_system">Podľa systému</string>
+    <string name="app_theme_light">Svetlá téma</string>
+    <string name="app_theme_dark">Tmavá téma</string>
+    <string name="app_theme_setting">Určuje nastavenie svetlej alebo tmavej témy aplikácie</string>
 </resources>
