@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 
 import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.Maths;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.FileLogger;
@@ -104,6 +105,10 @@ public class CSVFileLogger implements FileLogger {
         BufferedOutputStream output = new BufferedOutputStream(writer);
 
         String dateTimeString = Strings.getIsoDateTime(new Date(loc.getTime()));
+        if(PreferenceHelper.getInstance().shouldWriteTimeWithOffset()){
+            dateTimeString = Strings.getIsoDateTimeWithOffset(new Date(loc.getTime()));
+        }
+
         String csvLine = getCsvLine(description, loc, dateTimeString);
 
 
