@@ -114,6 +114,7 @@ public  class PreferenceNames {
 
     public static final String LATLONG_DISPLAY_FORMAT="latlong_display_format";
     public static final String APP_THEME_SETTING = "app_theme_setting";
+    public static final String LOGGING_WRITE_TIME_WITH_OFFSET = "file_logging_write_time_with_offset";
 
 
     public static enum DegreesDisplayFormat {

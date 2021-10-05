@@ -546,6 +546,13 @@ public class PreferenceHelper {
         return prefs.getBoolean(PreferenceNames.LOG_TO_NMEA, false);
     }
 
+    /**
+     * Whether to write timestamps with a timezone offset (true), or as UTC (false, default)
+     */
+    public boolean shouldWriteTimeWithOffset() {
+        return prefs.getBoolean(PreferenceNames.LOGGING_WRITE_TIME_WITH_OFFSET, false);
+    }
+
 
     /**
      * Whether to log to a custom URL. The app will log to the URL returned by {@link #getCustomLoggingUrl()}

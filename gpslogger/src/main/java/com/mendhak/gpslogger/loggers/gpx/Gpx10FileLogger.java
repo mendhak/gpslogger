@@ -23,6 +23,7 @@ import android.location.Location;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.Maths;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -58,6 +59,10 @@ public class Gpx10FileLogger implements FileLogger {
         }
         String dateTimeString = Strings.getIsoDateTime(new Date(time));
 
+        if(PreferenceHelper.getInstance().shouldWriteTimeWithOffset()){
+            dateTimeString = Strings.getIsoDateTimeWithOffset(new Date(time));
+        }
+
         Runnable writeHandler = getWriteHandler(dateTimeString, gpxFile, loc, addNewTrackSegment);
         EXECUTOR.execute(writeHandler);
     }
@@ -76,6 +81,10 @@ public class Gpx10FileLogger implements FileLogger {
             time = System.currentTimeMillis();
         }
         String dateTimeString = Strings.getIsoDateTime(new Date(time));
+
+        if(PreferenceHelper.getInstance().shouldWriteTimeWithOffset()){
+            dateTimeString = Strings.getIsoDateTimeWithOffset(new Date(time));
+        }
 
         Runnable annotateHandler = getAnnotateHandler(description, gpxFile, loc, dateTimeString);
         EXECUTOR.execute(annotateHandler);

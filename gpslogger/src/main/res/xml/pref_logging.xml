@@ -105,4 +105,14 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/autoftp_advanced_settings" app:iconSpaceReserved="false">
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="file_logging_write_time_with_offset"
+            android:summary="Write the location's ISO 8601 time with timezone offset, instead of UTC. eg, 2021-12-25T09:15:37.132+05:00."
+            android:title="Write time with timezone offset"
+            app:iconSpaceReserved="false"/>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
