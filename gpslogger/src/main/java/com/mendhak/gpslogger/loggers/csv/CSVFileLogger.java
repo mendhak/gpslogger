@@ -34,7 +34,6 @@ import org.apache.commons.csv.CSVPrinter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Date;
-import java.util.Locale;
 
 
 public class CSVFileLogger implements FileLogger {
@@ -55,37 +54,6 @@ public class CSVFileLogger implements FileLogger {
         }
     }
 
-    String getCsvLine(Location loc, String dateTimeString) {
-        return getCsvLine("", loc, dateTimeString);
-    }
-
-    String getCsvLine(String description, Location loc, String dateTimeString) {
-
-        if (description.length() > 0) {
-            description = "\"" + description.replaceAll("\"", "\"\"") + "\"";
-        }
-
-        String outputString = String.format(Locale.US, "%s,%s,%s,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", dateTimeString,
-                loc.getLatitude(),
-                loc.getLongitude(),
-                loc.hasAltitude() ? loc.getAltitude() : "",
-                loc.hasAccuracy() ? loc.getAccuracy() : "",
-                loc.hasBearing() ? loc.getBearing() : "",
-                loc.hasSpeed() ? loc.getSpeed() : "",
-                Maths.getBundledSatelliteCount(loc),
-                loc.getProvider(),
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.HDOP))) ? loc.getExtras().getString(BundleConstants.HDOP) : "",
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.VDOP))) ? loc.getExtras().getString(BundleConstants.VDOP) : "",
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.PDOP))) ? loc.getExtras().getString(BundleConstants.PDOP) : "",
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.GEOIDHEIGHT))) ? loc.getExtras().getString(BundleConstants.GEOIDHEIGHT) : "",
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.AGEOFDGPSDATA))) ? loc.getExtras().getString(BundleConstants.AGEOFDGPSDATA) : "",
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.DGPSID))) ? loc.getExtras().getString(BundleConstants.DGPSID) : "",
-                (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY))) ? loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY) : "",
-                (batteryLevel != null) ? batteryLevel : "",
-                description
-        );
-        return outputString;
-    }
 
     @Override
     public void annotate(String description, Location loc) throws Exception {
