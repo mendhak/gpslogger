@@ -332,6 +332,7 @@
     <string name="menu_faq">Help and FAQ</string>
 
     <string name="log_customurl_title">Log to custom URL</string>
+    <string name="log_customurl_setup_title">Custom URL</string>
     <string name="log_customurl_summary">Send logging info to your own server over HTTP</string>
     <string name="txt_annotation">Annotation:</string>
     <string name="txt_time_isoformat">Time UTC (2011-12-25T15:27:33Z):</string>

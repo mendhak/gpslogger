@@ -2,6 +2,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <SwitchPreferenceCompat
+        android:key="autocustomurl_enabled"
+        android:title="@string/autosend_enabled"
+        app:iconSpaceReserved="false" />
+
     <Preference
         android:key="log_customurl_url"
         android:singleLine="true"

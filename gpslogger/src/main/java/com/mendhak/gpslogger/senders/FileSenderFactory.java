@@ -22,6 +22,7 @@ package com.mendhak.gpslogger.senders;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
+import com.mendhak.gpslogger.senders.customurl.CustomUrlManager;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxManager;
 import com.mendhak.gpslogger.senders.email.AutoEmailManager;
 import com.mendhak.gpslogger.senders.ftp.FtpManager;
@@ -50,7 +51,6 @@ public class FileSenderFactory {
         return new DropBoxManager(PreferenceHelper.getInstance());
     }
 
-
     public static FileSender getEmailSender() {
         return new AutoEmailManager(PreferenceHelper.getInstance());
     }
@@ -69,6 +69,10 @@ public class FileSenderFactory {
 
     public static FileSender getSFTPSender() {
         return new SFTPManager(PreferenceHelper.getInstance());
+    }
+
+    public static FileSender getCustomUrlSender(){
+        return new CustomUrlManager(PreferenceHelper.getInstance());
     }
 
     public static void autoSendFiles(final String fileToSend) {
@@ -150,6 +154,8 @@ public class FileSenderFactory {
                 return getOwnCloudSender();
             case FileSender.SenderNames.SFTP:
                 return getSFTPSender();
+            case FileSender.SenderNames.CUSTOMURL:
+                return getCustomUrlSender();
             default:
                 return null;
 
@@ -166,6 +172,7 @@ public class FileSenderFactory {
             senders.add(getFtpSender());
             senders.add(getOwnCloudSender());
             senders.add(getSFTPSender());
+            senders.add(getCustomUrlSender());
         return senders;
     }
 
@@ -199,6 +206,10 @@ public class FileSenderFactory {
 
         if(getSFTPSender().isAutoSendAvailable()){
             senders.add(getSFTPSender());
+        }
+
+        if(getCustomUrlSender().isAutoSendAvailable()){
+            senders.add(getCustomUrlSender());
         }
 
         return senders;

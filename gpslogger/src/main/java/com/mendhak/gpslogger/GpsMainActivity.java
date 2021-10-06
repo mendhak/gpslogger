@@ -742,6 +742,7 @@ public class GpsMainActivity extends AppCompatActivity
         materialDrawer.addItem(new DividerDrawerItem());
 
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.pref_autosend_title, R.string.pref_autosend_summary, R.drawable.autosend, 1003));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.log_customurl_setup_title, R.drawable.customurlsender, 1020));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.dropbox_setup_title, R.drawable.dropbox, 1005));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.sftp_setup_title, R.drawable.sftp, 1015));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.opengts_setup_title, R.drawable.opengts, 1008));
@@ -793,6 +794,9 @@ public class GpsMainActivity extends AppCompatActivity
                         break;
                     case 1015:
                         launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.SFTP);
+                        break;
+                    case 1020:
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL);
                         break;
                     case 9000:
                         Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
@@ -1097,6 +1101,9 @@ public class GpsMainActivity extends AppCompatActivity
             case R.id.mnuSFTP:
                 uploadToSFTP();
                 return true;
+            case R.id.mnuCustomUrl:
+                uploadToCustomURL();
+                return true;
             default:
                 return true;
         }
@@ -1159,6 +1166,15 @@ public class GpsMainActivity extends AppCompatActivity
         showFileListDialog(FileSenderFactory.getDropBoxSender());
     }
 
+
+    private void uploadToCustomURL(){
+        if(!FileSenderFactory.getCustomUrlSender().isAvailable()){
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL);
+            return;
+        }
+
+        showFileListDialog(FileSenderFactory.getCustomUrlSender());
+    }
 
     private void uploadToSFTP(){
         if(!FileSenderFactory.getSFTPSender().isAvailable()){

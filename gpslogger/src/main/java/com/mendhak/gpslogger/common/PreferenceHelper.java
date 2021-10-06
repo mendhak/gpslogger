@@ -622,6 +622,11 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.LOG_TO_URL_PATH, customLoggingUrl).apply();
     }
 
+    public boolean isCustomURLAutoSendEnabled() {
+        return prefs.getBoolean(PreferenceNames.AUTOSEND_CUSTOMURL_ENABLED, false);
+    }
+
+
     /**
      * Whether to log to OpenGTS.  See their <a href="http://opengts.sourceforge.net/OpenGTS_Config.pdf">installation guide</a>
      */
