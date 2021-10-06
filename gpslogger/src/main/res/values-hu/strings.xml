@@ -287,6 +287,13 @@
     <string name="listeners_title">Helyszolgáltatók</string>
     <string name="autosend_frequency_hint">Percek száma</string>
     <string name="pref_logging_file_no_permissions">A GPSLogger nem tudja írni a kiválasztott mappát. Kérem válasszon egy másik mappát.</string>
+    <string name="storage_chooser_create_label">Létrehozás</string>
+    <string name="storage_chooser_internal_storage_text">Belső tárolóhely</string>
+    <string name="storage_chooser_select_folder">Kiválaszt</string>
+    <string name="storage_chooser_overview_heading">Válasszon tárhelyet</string>
+    <string name="storage_chooser_new_folder_label">Új könyvtár</string>
+    <string name="storage_chooser_free_space_text">szabad</string>
+    <string name="storage_chooser_text_field_error">Mappa neve</string>
     <string name="new_file_custom_each_time_title">Kérjen fájlnevet minden indításkor</string>
     <string name="new_file_custom_each_time_summary">Egyedi fájlnevet kér a naplózás minden indításakor</string>
     <string name="new_file_custom_keep_changing_title">Egyedi fájlnév dinamikusan változzon</string>
