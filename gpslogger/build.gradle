@@ -186,14 +186,15 @@ dependencies {
     //https://github.com/codekidX/storage-chooser/issues/134
     implementation 'com.github.mendhak:storage-chooser:2.0.4.4b'
 
+    //CSV library
+    implementation('org.apache.commons:commons-csv:1.9.0')
+
      //Libraries required for unit testing
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:3.10.0'
     testImplementation 'org.json:json:20180813'
     testImplementation 'androidx.test:runner:1.4.0'
     testImplementation 'androidx.test:rules:1.4.0'
-
-
 }
 
 

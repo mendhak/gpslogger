@@ -29,10 +29,10 @@ import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.loggers.Files;
-
-import java.io.BufferedOutputStream;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.util.Date;
 import java.util.Locale;
 
@@ -89,32 +89,53 @@ public class CSVFileLogger implements FileLogger {
 
     @Override
     public void annotate(String description, Location loc) throws Exception {
-        if (!Files.reallyExists(file)) {
-            file.createNewFile();
 
-            FileOutputStream writer = new FileOutputStream(file, true);
-            BufferedOutputStream output = new BufferedOutputStream(writer);
-            String header = "time,lat,lon,elevation,accuracy,bearing,speed,satellites,provider,hdop,vdop,pdop,geoidheight,ageofdgpsdata,dgpsid,activity,battery,annotation\n";
-            output.write(header.getBytes());
-            output.flush();
-            output.close();
-
+        if(!Files.reallyExists(file)){
+            CSVFormat header = CSVFormat.DEFAULT.builder().setHeader("time", "lat", "lon", "elevation",
+                    "accuracy", "bearing", "speed", "satellites", "provider", "hdop", "vdop", "pdop",
+                    "geoidheight", "ageofdgpsdata", "dgpsid", "activity", "battery", "annotation")
+                    .setDelimiter(CSVFormat.DEFAULT.getDelimiterString())
+                    .build();
+            FileWriter out = new FileWriter(file);
+            CSVPrinter printer = new CSVPrinter(out, header);
+            printer.close();
+            out.close();
         }
-
-        FileOutputStream writer = new FileOutputStream(file, true);
-        BufferedOutputStream output = new BufferedOutputStream(writer);
 
         String dateTimeString = Strings.getIsoDateTime(new Date(loc.getTime()));
         if(PreferenceHelper.getInstance().shouldWriteTimeWithOffset()){
             dateTimeString = Strings.getIsoDateTimeWithOffset(new Date(loc.getTime()));
         }
 
-        String csvLine = getCsvLine(description, loc, dateTimeString);
+        CSVFormat header = CSVFormat.DEFAULT.builder().setSkipHeaderRecord(true)
+                .setDelimiter(CSVFormat.DEFAULT.getDelimiterString())
+                .build();
 
+        FileWriter out = new FileWriter(file, true);
+        try (CSVPrinter printer = new CSVPrinter(out, header)) {
+            printer.printRecord(
+                    dateTimeString,
+                    loc.getLatitude(),
+                    loc.getLongitude(),
+                    loc.hasAltitude() ? loc.getAltitude() : "",
+                    loc.hasAccuracy() ? loc.getAccuracy() : "",
+                    loc.hasBearing() ? loc.getBearing() : "",
+                    loc.hasSpeed() ? loc.getSpeed() : "",
+                    Maths.getBundledSatelliteCount(loc),
+                    loc.getProvider(),
+                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.HDOP))) ? loc.getExtras().getString(BundleConstants.HDOP) : "",
+                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.VDOP))) ? loc.getExtras().getString(BundleConstants.VDOP) : "",
+                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.PDOP))) ? loc.getExtras().getString(BundleConstants.PDOP) : "",
+                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.GEOIDHEIGHT))) ? loc.getExtras().getString(BundleConstants.GEOIDHEIGHT) : "",
+                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.AGEOFDGPSDATA))) ? loc.getExtras().getString(BundleConstants.AGEOFDGPSDATA) : "",
+                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.DGPSID))) ? loc.getExtras().getString(BundleConstants.DGPSID) : "",
+                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY))) ? loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY) : "",
+                    (batteryLevel != null) ? batteryLevel : "",
+                    description
+            );
+        }
+        out.close();
 
-        output.write(csvLine.getBytes());
-        output.flush();
-        output.close();
         Files.addToMediaDatabase(file, "text/csv");
     }
 
