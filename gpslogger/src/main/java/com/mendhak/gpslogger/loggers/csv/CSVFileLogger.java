@@ -61,18 +61,14 @@ public class CSVFileLogger implements FileLogger {
         if(!Files.reallyExists(file)){
             CSVFormat header = CSVFormat.DEFAULT.builder().setHeader("time", "lat", "lon", "elevation",
                     "accuracy", "bearing", "speed", "satellites", "provider", "hdop", "vdop", "pdop",
-                    "geoidheight", "ageofdgpsdata", "dgpsid", "activity", "battery", "annotation")
+                    "geoidheight", "ageofdgpsdata", "dgpsid", "activity", "battery", "annotation",
+                    "timestamp", "timewithoffset", "distance", "starttimestamp", "profilename")
                     .setDelimiter(CSVFormat.DEFAULT.getDelimiterString())
                     .build();
             FileWriter out = new FileWriter(file);
             CSVPrinter printer = new CSVPrinter(out, header);
             printer.close();
             out.close();
-        }
-
-        String dateTimeString = Strings.getIsoDateTime(new Date(loc.getTime()));
-        if(PreferenceHelper.getInstance().shouldWriteTimeWithOffset()){
-            dateTimeString = Strings.getIsoDateTimeWithOffset(new Date(loc.getTime()));
         }
 
         CSVFormat header = CSVFormat.DEFAULT.builder().setSkipHeaderRecord(true)
@@ -82,7 +78,7 @@ public class CSVFileLogger implements FileLogger {
         FileWriter out = new FileWriter(file, true);
         try (CSVPrinter printer = new CSVPrinter(out, header)) {
             printer.printRecord(
-                    dateTimeString,
+                    Strings.getIsoDateTime(new Date(loc.getTime())),
                     loc.getLatitude(),
                     loc.getLongitude(),
                     loc.hasAltitude() ? loc.getAltitude() : "",
@@ -99,7 +95,12 @@ public class CSVFileLogger implements FileLogger {
                     (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.DGPSID))) ? loc.getExtras().getString(BundleConstants.DGPSID) : "",
                     (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY))) ? loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY) : "",
                     (batteryLevel != null) ? batteryLevel : "",
-                    description
+                    description,
+                    loc.getTime()/1000,
+                    Strings.getIsoDateTimeWithOffset(new Date(loc.getTime())),
+                    Session.getInstance().getTotalTravelled(),
+                    Session.getInstance().getStartTimeStamp(),
+                    PreferenceHelper.getInstance().getCurrentProfileName()
             );
         }
         out.close();
