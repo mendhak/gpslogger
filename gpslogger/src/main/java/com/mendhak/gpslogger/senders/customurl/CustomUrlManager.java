@@ -37,10 +37,6 @@ public class CustomUrlManager extends FileSender {
 
     @Override
     public void uploadFile(List<File> files) {
-        //TODO: Read from CSV file.
-        // Convert each line to a Serializable Location.
-        // Send each location using JobManager Custom Url Job.
-
         for (File f : files) {
             if (f.getName().endsWith(".csv")) {
                 List<SerializableLocation> locations = getLocationsFromCSV(f);
