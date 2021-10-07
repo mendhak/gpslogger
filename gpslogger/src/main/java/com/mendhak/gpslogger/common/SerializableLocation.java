@@ -46,6 +46,7 @@ public class SerializableLocation implements Serializable {
     private long startTimeStamp;
     private double distance;
     private String profileName;
+    private final String timeWithOffset;
 
     public SerializableLocation(Location loc) {
 
@@ -75,6 +76,7 @@ public class SerializableLocation implements Serializable {
 
         fileName = extractExtra(loc, BundleConstants.FILE_NAME);
         profileName = extractExtra(loc, BundleConstants.PROFILE_NAME);
+        timeWithOffset = extractExtra(loc, BundleConstants.TIME_WITH_OFFSET);
     }
 
 
@@ -188,4 +190,6 @@ public class SerializableLocation implements Serializable {
     public double getDistance() { return distance; }
 
     public String getProfileName() { return profileName; }
+
+    public String getTimeWithOffset() { return timeWithOffset; }
 }

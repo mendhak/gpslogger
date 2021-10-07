@@ -4,18 +4,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import android.location.Location;
-
 import androidx.test.filters.SmallTest;
-
 import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.loggers.MockLocations;
-import com.mendhak.gpslogger.loggers.customurl.CustomUrlLogger;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
-
 import java.time.ZoneOffset;
 import java.util.TimeZone;
 
@@ -106,6 +101,20 @@ public class CustomUrlManagerTest {
 
         assertThat("TIMEOFFSET parameter is substituted with ISO Date Format, with time offset", manager.getFormattedTextblock(urlTemplate,new SerializableLocation(loc),"","",0,"",0,"","",0), is(expected));
 
+    }
+
+    @Test
+    public void getFormattedUrl_WhenSerializableLocationHasTimeStampWithOffset_PreferredOverDerivedTimeStamp() throws Exception {
+        //This sets the timezone for the JVM
+        TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.ofHours(2)));
+
+        Location loc = MockLocations.builder("MOCK", 12.193, 19.456).withTime(1457205869949l).putExtra(BundleConstants.TIME_WITH_OFFSET, "2016-05-02T20:14:19.349+03:00").build();
+
+        CustomUrlManager manager = new CustomUrlManager(null);
+        String expected="http://192.168.1.65:8000/test?lat=12.193&lon=19.456&timeoff=2016-05-02T20:14:19.349+03:00";
+        String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&timeoff=%TIMEOFFSET";
+
+        assertThat("TIMEOFFSET parameter is substituted with value from bundle", manager.getFormattedTextblock(urlTemplate,new SerializableLocation(loc),"","",0,"",0,"","",0), is(expected));
     }
 
 
