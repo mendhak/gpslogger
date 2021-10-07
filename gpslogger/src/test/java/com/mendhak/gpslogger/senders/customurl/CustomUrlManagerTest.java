@@ -34,13 +34,12 @@ public class CustomUrlManagerTest {
                 .withBearing(359)
                 .withSpeed(9001)
                 .withTime(1457205869949l)
-                .putExtra(BundleConstants.DETECTED_ACTIVITY, "TILTED")
                 .build();
 
 
         CustomUrlManager manager = new CustomUrlManager(null);
 
-        String expected ="http://192.168.1.65:8000/test?lat=12.193&lon=19.111&sat=9&desc=blah&alt=45.0&acc=8.0&dir=359.0&prov=MOCK&spd=9001.0&time=2016-03-05T19:24:29.949Z&battery=91.0&androidId=22&serial=SRS11&activity=TILTED";
+        String expected ="http://192.168.1.65:8000/test?lat=12.193&lon=19.111&sat=9&desc=blah&alt=45.0&acc=8.0&dir=359.0&prov=MOCK&spd=9001.0&time=2016-03-05T19:24:29.949Z&battery=91.0&androidId=22&serial=SRS11&activity=";
         String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER&activity=%act";
         assertThat("Placeholders are substituted", manager.getFormattedTextblock(urlTemplate, new SerializableLocation(loc), "blah", "22", 91, "SRS11", 0,"","", 27), is(expected));
     }
@@ -203,12 +202,11 @@ public class CustomUrlManagerTest {
                 .withBearing(359)
                 .withSpeed(9001)
                 .withTime(1457205869949l)
-                .putExtra(BundleConstants.DETECTED_ACTIVITY, "TILTED")
                 .build();
 
 
         CustomUrlManager manager = new CustomUrlManager(null);
-        String expected ="This my post body\nlat=12.193&lon=19.111&sat=9&desc=blah&alt=45.0&acc=8.0&dir=359.0&prov=MOCK&spd=9001.0&time=2016-03-05T19:24:29.949Z&battery=91.0&androidId=22&serial=SRS11&activity=TILTED&dist=27";
+        String expected ="This my post body\nlat=12.193&lon=19.111&sat=9&desc=blah&alt=45.0&acc=8.0&dir=359.0&prov=MOCK&spd=9001.0&time=2016-03-05T19:24:29.949Z&battery=91.0&androidId=22&serial=SRS11&activity=&dist=27";
         String urlTemplate = "This my post body\nlat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER&activity=%act&dist=%DIST";
         assertThat("Post body parameters are substituted", manager.getFormattedTextblock(urlTemplate,
                 new SerializableLocation(loc), "blah", "22", 91, "SRS11", 0,"","", 27.5), is(expected));

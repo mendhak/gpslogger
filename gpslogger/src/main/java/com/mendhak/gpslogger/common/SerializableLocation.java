@@ -37,7 +37,6 @@ public class SerializableLocation implements Serializable {
     private boolean hasBearing;
     private boolean hasSpeed;
     private int satelliteCount;
-    private String detectedActivity;
     private String hdop;
     private String vdop;
     private String pdop;
@@ -63,7 +62,6 @@ public class SerializableLocation implements Serializable {
         hasBearing = loc.hasBearing();
         hasSpeed = loc.hasSpeed();
         satelliteCount = Maths.getBundledSatelliteCount(loc);
-        detectedActivity = extractExtra (loc, BundleConstants.DETECTED_ACTIVITY);
         hdop = extractExtra(loc, BundleConstants.HDOP);
         vdop = extractExtra(loc, BundleConstants.VDOP);
         pdop = extractExtra(loc, BundleConstants.PDOP);
@@ -172,8 +170,6 @@ public class SerializableLocation implements Serializable {
     public int getSatelliteCount() {
         return satelliteCount;
     }
-
-    public String getDetectedActivity() { return detectedActivity; }
 
     public String getHDOP() { return hdop; }
 

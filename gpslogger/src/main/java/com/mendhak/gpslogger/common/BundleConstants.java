@@ -15,7 +15,6 @@ public class BundleConstants {
     public static final String PASSIVE = "PASSIVE";
     public static final String LISTENER = "LISTENER";
     public static final String SATELLITES_FIX = "SATELLITES_FIX";
-    public static final String DETECTED_ACTIVITY = "DETECTED_ACTIVITY";
 
     public static final String ACCELEROMETER = "ACCELEROMETER";
     public static final String COMPASS = "COMPASS";
