@@ -20,21 +20,14 @@
 package com.mendhak.gpslogger.loggers.customurl;
 
 import android.location.Location;
-
-import com.birbit.android.jobqueue.JobManager;
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
-import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.loggers.FileLogger;
+import com.mendhak.gpslogger.senders.customurl.CustomUrlManager;
 
-
-import java.net.URLEncoder;
-import java.util.Date;
-import java.util.HashMap;
 
 public class CustomUrlLogger implements FileLogger {
 
@@ -47,10 +40,7 @@ public class CustomUrlLogger implements FileLogger {
     private final String basicAuthUsername;
     private final String basicAuthPassword;
 
-    public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String httpMethod, String httpBody, String httpHeaders) {
-        this(customLoggingUrl,batteryLevel, httpMethod, httpBody, httpHeaders, "","");
 
-    }
 
     public CustomUrlLogger(String customLoggingUrl, int batteryLevel, String httpMethod, String httpBody, String httpHeaders, String basicAuthUsername, String basicAuthPassword) {
         this.customLoggingUrl = customLoggingUrl;
@@ -72,51 +62,32 @@ public class CustomUrlLogger implements FileLogger {
     @Override
     public void annotate(String description, Location loc) throws Exception {
 
-        String finalUrl = getFormattedTextblock(customLoggingUrl, loc, description, Systems.getAndroidId(), batteryLevel, Strings.getBuildSerial(),
-                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName(), Session.getInstance().getTotalTravelled());
-        String finalBody = getFormattedTextblock(httpBody, loc, description, Systems.getAndroidId(), batteryLevel, Strings.getBuildSerial(),
-                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName(), Session.getInstance().getTotalTravelled());
-        String finalHeaders = getFormattedTextblock(httpHeaders, loc, description, Systems.getAndroidId(), batteryLevel, Strings.getBuildSerial(),
-                Session.getInstance().getStartTimeStamp(), Session.getInstance().getCurrentFormattedFileName(), PreferenceHelper.getInstance().getCurrentProfileName(), Session.getInstance().getTotalTravelled());
+        CustomUrlManager manager = new CustomUrlManager(PreferenceHelper.getInstance());
 
-
-        JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(finalUrl,httpMethod, finalBody, finalHeaders, basicAuthUsername, basicAuthPassword), new UploadEvents.CustomUrl()));
-    }
-
-
-    public String getFormattedTextblock(String customLoggingUrl, Location loc, String description, String androidId,
-                                        float batteryLevel, String buildSerial, long sessionStartTimeStamp, String fileName, String profileName, double distance)
-            throws Exception {
-
-        String logUrl = customLoggingUrl;
         SerializableLocation sLoc = new SerializableLocation(loc);
-        logUrl = logUrl.replaceAll("(?i)%lat", String.valueOf(sLoc.getLatitude()));
-        logUrl = logUrl.replaceAll("(?i)%lon", String.valueOf(sLoc.getLongitude()));
-        logUrl = logUrl.replaceAll("(?i)%sat", String.valueOf(sLoc.getSatelliteCount()));
-        logUrl = logUrl.replaceAll("(?i)%desc", String.valueOf(URLEncoder.encode(Strings.htmlDecode(description), "UTF-8")));
-        logUrl = logUrl.replaceAll("(?i)%alt", String.valueOf(sLoc.getAltitude()));
-        logUrl = logUrl.replaceAll("(?i)%acc", String.valueOf(sLoc.getAccuracy()));
-        logUrl = logUrl.replaceAll("(?i)%dir", String.valueOf(sLoc.getBearing()));
-        logUrl = logUrl.replaceAll("(?i)%prov", String.valueOf(sLoc.getProvider()));
-        logUrl = logUrl.replaceAll("(?i)%spd", String.valueOf(sLoc.getSpeed()));
-        logUrl = logUrl.replaceAll("(?i)%timestamp", String.valueOf(sLoc.getTime()/1000));
-        logUrl = logUrl.replaceAll("(?i)%timeoffset", Strings.getIsoDateTimeWithOffset(new Date(sLoc.getTime())));
-        logUrl = logUrl.replaceAll("(?i)%time", String.valueOf(Strings.getIsoDateTime(new Date(sLoc.getTime()))));
-        logUrl = logUrl.replaceAll("(?i)%date", String.valueOf(Strings.getIsoCalendarDate(new Date(sLoc.getTime()))));
-        logUrl = logUrl.replaceAll("(?i)%starttimestamp", String.valueOf(sessionStartTimeStamp/1000));
-        logUrl = logUrl.replaceAll("(?i)%batt", String.valueOf(batteryLevel));
-        logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));
-        logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(buildSerial));
-        logUrl = logUrl.replaceAll("(?i)%act", String.valueOf(sLoc.getDetectedActivity()));
-        logUrl = logUrl.replaceAll("(?i)%filename", fileName);
-        logUrl = logUrl.replaceAll("(?i)%profile",URLEncoder.encode(profileName, "UTF-8"));
-        logUrl = logUrl.replaceAll("(?i)%hdop", sLoc.getHDOP());
-        logUrl = logUrl.replaceAll("(?i)%vdop", sLoc.getVDOP());
-        logUrl = logUrl.replaceAll("(?i)%pdop", sLoc.getPDOP());
-        logUrl = logUrl.replaceAll("(?i)%dist", String.valueOf((int)distance));
 
-        return logUrl;
+        String finalUrl = manager.getFormattedTextblock(customLoggingUrl, sLoc, description,
+                Systems.getAndroidId(), batteryLevel, Strings.getBuildSerial(),
+                Session.getInstance().getStartTimeStamp(),
+                Session.getInstance().getCurrentFormattedFileName(),
+                PreferenceHelper.getInstance().getCurrentProfileName(),
+                Session.getInstance().getTotalTravelled());
+        String finalBody = manager.getFormattedTextblock(httpBody, sLoc, description,
+                Systems.getAndroidId(), batteryLevel, Strings.getBuildSerial(),
+                Session.getInstance().getStartTimeStamp(),
+                Session.getInstance().getCurrentFormattedFileName(),
+                PreferenceHelper.getInstance().getCurrentProfileName(),
+                Session.getInstance().getTotalTravelled());
+        String finalHeaders = manager.getFormattedTextblock(httpHeaders, sLoc, description,
+                Systems.getAndroidId(), batteryLevel, Strings.getBuildSerial(),
+                Session.getInstance().getStartTimeStamp(),
+                Session.getInstance().getCurrentFormattedFileName(),
+                PreferenceHelper.getInstance().getCurrentProfileName(),
+                Session.getInstance().getTotalTravelled());
+
+
+        manager.sendByHttp(finalUrl,httpMethod, finalBody, finalHeaders, basicAuthUsername, basicAuthPassword);
+
     }
 
 

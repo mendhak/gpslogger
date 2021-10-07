@@ -1411,6 +1411,23 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
     @EventBusHook
+    public void onEventMainThread(UploadEvents.CustomUrl upload){
+        LOG.debug("Custom URL Event completed, success: " + upload.success);
+        Dialogs.hideProgress();
+
+        if(!upload.success){
+            LOG.error(getString(R.string.log_customurl_setup_title)
+                    + "-"
+                    + getString(R.string.upload_failure));
+
+            if(userInvokedUpload){
+                Dialogs.showError(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                userInvokedUpload = false;
+            }
+        }
+    }
+
+    @EventBusHook
     public void onEventMainThread(UploadEvents.AutoEmail upload){
         LOG.debug("Auto Email Event completed, success: " + upload.success);
         Dialogs.hideProgress();

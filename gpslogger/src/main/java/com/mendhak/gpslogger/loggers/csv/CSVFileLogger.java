@@ -99,7 +99,7 @@ public class CSVFileLogger implements FileLogger {
                     loc.getTime()/1000,
                     Strings.getIsoDateTimeWithOffset(new Date(loc.getTime())),
                     Session.getInstance().getTotalTravelled(),
-                    Session.getInstance().getStartTimeStamp(),
+                    Session.getInstance().getStartTimeStamp()/1000,
                     PreferenceHelper.getInstance().getCurrentProfileName()
             );
         }

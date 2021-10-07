@@ -9,23 +9,20 @@ import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlJob;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
-import com.mendhak.gpslogger.loggers.opengts.OpenGtsUdpJob;
 import com.mendhak.gpslogger.senders.FileSender;
-import com.mendhak.gpslogger.senders.GpxReader;
-
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -54,27 +51,6 @@ public class CustomUrlManager extends FileSender {
             }
         }
     }
-    public void sendLocations(SerializableLocation[] locations){
-//        if (locations.length > 0) {
-//
-//
-//            String server = preferenceHelper.getOpenGTSServer();
-//            int port = Integer.parseInt(preferenceHelper.getOpenGTSServerPort());
-//            String path = preferenceHelper.getOpenGTSServerPath();
-//            String deviceId = preferenceHelper.getOpenGTSDeviceId();
-//            String accountName = preferenceHelper.getOpenGTSAccountName();
-//            String communication = preferenceHelper.getOpenGTSServerCommunicationMethod();
-//
-//            if(communication.equalsIgnoreCase("udp")){
-//                JobManager jobManager = AppSettings.getJobManager();
-//                jobManager.addJobInBackground(new OpenGtsUdpJob(server, port, accountName, path, deviceId, communication, locations));
-//            }
-//            else {
-//                sendByHttp(deviceId, accountName, locations, communication, path, server, port);
-//            }
-//
-//        }
-    }
 
     private List<SerializableLocation> getLocationsFromCSV(File f) {
         List<SerializableLocation> locations = new ArrayList<>();
@@ -87,10 +63,11 @@ public class CustomUrlManager extends FileSender {
                     .setDelimiter(CSVFormat.DEFAULT.getDelimiterString())
                     .setSkipHeaderRecord(true)
                     .build();
+
             Iterable<CSVRecord> records = header.parse(in);
             for(CSVRecord record : records){
                 Location csvLoc = new Location(record.get("provider"));
-                csvLoc.setTime(Long.parseLong(record.get("timestamp")));
+                csvLoc.setTime(Long.parseLong(record.get("timestamp"))*1000);
                 csvLoc.setLatitude(Double.parseDouble(record.get("lat")));
                 csvLoc.setLongitude(Double.parseDouble(record.get("lon")));
                 csvLoc.setAltitude(Double.parseDouble(record.get("elevation")));
@@ -111,8 +88,9 @@ public class CustomUrlManager extends FileSender {
                 b.putString(BundleConstants.ANNOTATION, record.get("annotation"));
                 b.putString(BundleConstants.TIME_WITH_OFFSET, record.get("timewithoffset"));
                 b.putDouble(BundleConstants.DISTANCE, Double.parseDouble(record.get("distance")));
-                b.putLong(BundleConstants.STARTTIMESTAMP, Long.parseLong(record.get("starttimestamp")));
+                b.putLong(BundleConstants.STARTTIMESTAMP, Long.parseLong(record.get("starttimestamp"))*1000);
                 b.putString(BundleConstants.PROFILE_NAME, record.get("profilename"));
+                b.putString(BundleConstants.FILE_NAME, f.getName().replace(".csv",""));
 
                 csvLoc.setExtras(b);
 
@@ -126,12 +104,59 @@ public class CustomUrlManager extends FileSender {
         return locations;
     }
 
-    public String getFormattedTextblock(String customLoggingUrl, Location loc, String description, String androidId,
-                                        float batteryLevel, String buildSerial, long sessionStartTimeStamp, String fileName, String profileName, double distance)
+    private void sendLocations(SerializableLocation[] locations){
+        if(locations.length > 0){
+
+            String customLoggingUrl = preferenceHelper.getCustomLoggingUrl();
+            String httpBody = preferenceHelper.getCustomLoggingHTTPBody();
+            String httpHeaders = preferenceHelper.getCustomLoggingHTTPHeaders();
+            String httpMethod = preferenceHelper.getCustomLoggingHTTPMethod();
+
+            for(SerializableLocation loc: locations){
+
+                try {
+                    String finalUrl = getFormattedTextblock(customLoggingUrl, loc);
+                    String finalBody = getFormattedTextblock(httpBody, loc);
+                    String finalHeaders = getFormattedTextblock(httpHeaders, loc);
+
+                    sendByHttp(finalUrl, httpMethod, finalBody, finalHeaders,
+                            preferenceHelper.getCustomLoggingBasicAuthUsername(),
+                            preferenceHelper.getCustomLoggingBasicAuthPassword());
+
+                } catch (Exception e) {
+                    LOG.error("Could not build the Custom URL to send", e);
+                }
+            }
+        }
+
+    }
+
+    public void sendByHttp(String url, String method, String body, String headers, String username, String password){
+        JobManager jobManager = AppSettings.getJobManager();
+        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(url, method,
+                body, headers, username, password), new UploadEvents.CustomUrl()));
+    }
+
+
+
+    private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {
+        return getFormattedTextblock(textToFormat, loc, loc.getDescription(), Systems.getAndroidId(), loc.getBatteryLevel(), Strings.getBuildSerial(), loc.getStartTimeStamp(), loc.getFileName(), loc.getProfileName(), loc.getDistance());
+    }
+
+    public String getFormattedTextblock(String customLoggingUrl,
+                                        SerializableLocation sLoc,
+                                        String description,
+                                        String androidId,
+                                        float batteryLevel,
+                                        String buildSerial,
+                                        long sessionStartTimeStamp,
+                                        String fileName,
+                                        String profileName,
+                                        double distance)
             throws Exception {
 
         String logUrl = customLoggingUrl;
-        SerializableLocation sLoc = new SerializableLocation(loc);
+
         logUrl = logUrl.replaceAll("(?i)%lat", String.valueOf(sLoc.getLatitude()));
         logUrl = logUrl.replaceAll("(?i)%lon", String.valueOf(sLoc.getLongitude()));
         logUrl = logUrl.replaceAll("(?i)%sat", String.valueOf(sLoc.getSatelliteCount()));

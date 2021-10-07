@@ -30,4 +30,5 @@ public class BundleConstants {
     public static final String DISTANCE = "DISTANCE";
     public static final String STARTTIMESTAMP = "STARTTIMESTAMP";
     public static final String PROFILE_NAME = "PROFILE_NAME";
+    public static final String FILE_NAME = "FILE_NAME";
 }

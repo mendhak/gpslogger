@@ -20,8 +20,6 @@
 package com.mendhak.gpslogger.common;
 
 import android.location.Location;
-import android.os.Bundle;
-
 import java.io.Serializable;
 
 public class SerializableLocation implements Serializable {
@@ -43,7 +41,12 @@ public class SerializableLocation implements Serializable {
     private String hdop;
     private String vdop;
     private String pdop;
-
+    private String description;
+    private int batteryLevel;
+    private String fileName;
+    private long startTimeStamp;
+    private double distance;
+    private String profileName;
 
     public SerializableLocation(Location loc) {
 
@@ -64,7 +67,18 @@ public class SerializableLocation implements Serializable {
         hdop = extractExtra(loc, BundleConstants.HDOP);
         vdop = extractExtra(loc, BundleConstants.VDOP);
         pdop = extractExtra(loc, BundleConstants.PDOP);
+        description = extractExtra(loc,BundleConstants.ANNOTATION);
+
+        if(loc.getExtras() != null){
+            batteryLevel = loc.getExtras().getInt(BundleConstants.BATTERY_LEVEL, 0);
+            startTimeStamp = loc.getExtras().getLong(BundleConstants.STARTTIMESTAMP, 0);
+            distance = loc.getExtras().getDouble(BundleConstants.DISTANCE, 0);
+        }
+
+        fileName = extractExtra(loc, BundleConstants.FILE_NAME);
+        profileName = extractExtra(loc, BundleConstants.PROFILE_NAME);
     }
+
 
     private String extractExtra(Location loc, String key) {
         if (loc.getExtras() != null
@@ -166,4 +180,16 @@ public class SerializableLocation implements Serializable {
     public String getVDOP() { return vdop; }
 
     public String getPDOP() { return pdop; }
+
+    public String getDescription() { return description; }
+
+    public int getBatteryLevel() { return batteryLevel; }
+
+    public String getFileName() { return fileName; }
+
+    public long getStartTimeStamp() { return startTimeStamp; }
+
+    public double getDistance() { return distance; }
+
+    public String getProfileName() { return profileName; }
 }
