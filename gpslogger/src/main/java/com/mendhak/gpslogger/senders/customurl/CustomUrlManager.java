@@ -107,6 +107,12 @@ public class CustomUrlManager extends FileSender {
                 b.putString(BundleConstants.GEOIDHEIGHT, record.get("geoidheight"));
                 b.putString(BundleConstants.AGEOFDGPSDATA, record.get("ageofdgpsdata"));
                 b.putString(BundleConstants.DGPSID, record.get("dgpsid"));
+                b.putInt(BundleConstants.BATTERY_LEVEL, Integer.parseInt(record.get("battery")));
+                b.putString(BundleConstants.ANNOTATION, record.get("annotation"));
+                b.putString(BundleConstants.TIME_WITH_OFFSET, record.get("timewithoffset"));
+                b.putDouble(BundleConstants.DISTANCE, Double.parseDouble(record.get("distance")));
+                b.putLong(BundleConstants.STARTTIMESTAMP, Long.parseLong(record.get("starttimestamp")));
+                b.putString(BundleConstants.PROFILE_NAME, record.get("profilename"));
 
                 csvLoc.setExtras(b);
 
