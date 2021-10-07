@@ -62,7 +62,7 @@ public class CSVFileLogger implements FileLogger {
             CSVFormat header = CSVFormat.DEFAULT.builder().setHeader("time", "lat", "lon", "elevation",
                     "accuracy", "bearing", "speed", "satellites", "provider", "hdop", "vdop", "pdop",
                     "geoidheight", "ageofdgpsdata", "dgpsid", "activity", "battery", "annotation",
-                    "timestamp", "timewithoffset", "distance", "starttimestamp", "profilename")
+                    "timestamp_ms", "time_offset", "distance", "starttime_ms", "profile_name")
                     .setDelimiter(CSVFormat.DEFAULT.getDelimiterString())
                     .build();
             FileWriter out = new FileWriter(file);
@@ -96,10 +96,10 @@ public class CSVFileLogger implements FileLogger {
                     (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY))) ? loc.getExtras().getString(BundleConstants.DETECTED_ACTIVITY) : "",
                     (batteryLevel != null) ? batteryLevel : "",
                     description,
-                    loc.getTime()/1000,
+                    loc.getTime(),
                     Strings.getIsoDateTimeWithOffset(new Date(loc.getTime())),
                     Session.getInstance().getTotalTravelled(),
-                    Session.getInstance().getStartTimeStamp()/1000,
+                    Session.getInstance().getStartTimeStamp(),
                     PreferenceHelper.getInstance().getCurrentProfileName()
             );
         }

@@ -55,7 +55,7 @@ public class CustomUrlManager extends FileSender {
             CSVFormat header = CSVFormat.DEFAULT.builder().setHeader("time", "lat", "lon", "elevation",
                     "accuracy", "bearing", "speed", "satellites", "provider", "hdop", "vdop", "pdop",
                     "geoidheight", "ageofdgpsdata", "dgpsid", "activity", "battery", "annotation",
-                    "timestamp", "timewithoffset", "distance", "starttimestamp", "profilename")
+                    "timestamp_ms", "time_offset", "distance", "starttime_ms", "profile_name")
                     .setDelimiter(CSVFormat.DEFAULT.getDelimiterString())
                     .setSkipHeaderRecord(true)
                     .build();
@@ -63,16 +63,33 @@ public class CustomUrlManager extends FileSender {
             Iterable<CSVRecord> records = header.parse(in);
             for(CSVRecord record : records){
                 Location csvLoc = new Location(record.get("provider"));
-                csvLoc.setTime(Long.parseLong(record.get("timestamp"))*1000);
+                csvLoc.setTime(Long.parseLong(record.get("timestamp_ms")));
                 csvLoc.setLatitude(Double.parseDouble(record.get("lat")));
                 csvLoc.setLongitude(Double.parseDouble(record.get("lon")));
-                csvLoc.setAltitude(Double.parseDouble(record.get("elevation")));
-                csvLoc.setAccuracy(Float.parseFloat(record.get("accuracy")));
-                csvLoc.setBearing(Float.parseFloat(record.get("bearing")));
-                csvLoc.setSpeed(Float.parseFloat(record.get("speed")));
+
+                if(!Strings.isNullOrEmpty(record.get("elevation"))){
+                    csvLoc.setAltitude(Double.parseDouble(record.get("elevation")));
+                }
+
+                if(!Strings.isNullOrEmpty(record.get("accuracy"))){
+                    csvLoc.setAccuracy(Float.parseFloat(record.get("accuracy")));
+                }
+
+
+                if(!Strings.isNullOrEmpty(record.get("bearing"))){
+                    csvLoc.setBearing(Float.parseFloat(record.get("bearing")));
+                }
+
+                if(!Strings.isNullOrEmpty(record.get("speed"))){
+                    csvLoc.setSpeed(Float.parseFloat(record.get("speed")));
+                }
 
                 Bundle b = new Bundle();
-                b.putInt(BundleConstants.SATELLITES_FIX, Integer.parseInt(record.get("satellites")));
+
+                if(!Strings.isNullOrEmpty(record.get("satellites"))){
+                    b.putInt(BundleConstants.SATELLITES_FIX, Integer.parseInt(record.get("satellites")));
+                }
+
                 b.putString(BundleConstants.HDOP, record.get("hdop"));
                 b.putString(BundleConstants.VDOP, record.get("vdop"));
                 b.putString(BundleConstants.PDOP, record.get("pdop"));
@@ -80,12 +97,23 @@ public class CustomUrlManager extends FileSender {
                 b.putString(BundleConstants.GEOIDHEIGHT, record.get("geoidheight"));
                 b.putString(BundleConstants.AGEOFDGPSDATA, record.get("ageofdgpsdata"));
                 b.putString(BundleConstants.DGPSID, record.get("dgpsid"));
-                b.putInt(BundleConstants.BATTERY_LEVEL, Integer.parseInt(record.get("battery")));
+
+                if(!Strings.isNullOrEmpty(record.get("battery"))){
+                    b.putInt(BundleConstants.BATTERY_LEVEL, Integer.parseInt(record.get("battery")));
+                }
+
                 b.putString(BundleConstants.ANNOTATION, record.get("annotation"));
-                b.putString(BundleConstants.TIME_WITH_OFFSET, record.get("timewithoffset"));
-                b.putDouble(BundleConstants.DISTANCE, Double.parseDouble(record.get("distance")));
-                b.putLong(BundleConstants.STARTTIMESTAMP, Long.parseLong(record.get("starttimestamp"))*1000);
-                b.putString(BundleConstants.PROFILE_NAME, record.get("profilename"));
+                b.putString(BundleConstants.TIME_WITH_OFFSET, record.get("time_offset"));
+
+                if(!Strings.isNullOrEmpty(record.get("distance"))){
+                    b.putDouble(BundleConstants.DISTANCE, Double.parseDouble(record.get("distance")));
+                }
+
+                if(!Strings.isNullOrEmpty(record.get("starttime_ms"))){
+                    b.putLong(BundleConstants.STARTTIMESTAMP, Long.parseLong(record.get("starttime_ms")));
+                }
+
+                b.putString(BundleConstants.PROFILE_NAME, record.get("profile_name"));
                 b.putString(BundleConstants.FILE_NAME, f.getName().replace(".csv",""));
 
                 csvLoc.setExtras(b);
@@ -132,7 +160,6 @@ public class CustomUrlManager extends FileSender {
         jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(url, method,
                 body, headers, username, password), new UploadEvents.CustomUrl()));
     }
-
 
 
     private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {
