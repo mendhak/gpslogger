@@ -137,7 +137,7 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
                     getString(R.string.txt_accuracy), getString(R.string.txt_direction), getString(R.string.txt_provider),
                     getString(R.string.txt_timestamp_epoch),
                     getString(R.string.txt_time_isoformat),
-                    "Time Offset (2011-12-25T11:27:33+04:00):",
+                    getString(R.string.txt_time_with_offset_isoformat),
                     getString(R.string.txt_date_isoformat),
                     getString(R.string.txt_starttimestamp_epoch),
                     getString(R.string.txt_battery), "Android ID ", "Serial ", getString(R.string.summary_current_filename), "Profile:", "HDOP:", "VDOP:", "PDOP:", getString(R.string.txt_travel_distance));

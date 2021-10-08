@@ -336,6 +336,7 @@
     <string name="log_customurl_summary">Send logging info to your own server over HTTP</string>
     <string name="txt_annotation">Annotation:</string>
     <string name="txt_time_isoformat">Time UTC (2011-12-25T15:27:33Z):</string>
+    <string name="txt_time_with_offset_isoformat">Time Offset (2011-12-25T11:27:33+04:00):</string>
     <string name="txt_date_isoformat">Date (2011-12-25):</string>
     <string name="txt_provider">Provider:</string>
     <string name="annotation_requires_logging">Annotations require logging to CSV/GPX/KML/Custom URL/GeoJSON</string>
@@ -469,5 +470,6 @@
     <string name="app_theme_setting">Determines how to set the light or dark app theme</string>
     <string name="file_logging_log_time_with_offset_title">Log time with timezone offset</string>
     <string name="file_logging_log_time_with_offset_summary">Write the ISO 8601 time with timezone offset instead of UTC.</string>
+
 
 </resources>
