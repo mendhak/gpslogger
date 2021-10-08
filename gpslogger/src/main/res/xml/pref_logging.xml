@@ -113,6 +113,12 @@
             android:title="@string/file_logging_log_time_with_offset_title"
             app:iconSpaceReserved="false"/>
 
+        <Preference
+            android:title="@string/log_plain_text_title_csv_delimiter"
+            android:key="log_plain_text_csv_delimiter"
+            android:defaultValue=","
+            app:iconSpaceReserved="false" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

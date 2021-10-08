@@ -115,6 +115,9 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
         findPreference(PreferenceNames.LOGGING_WRITE_TIME_WITH_OFFSET).setOnPreferenceChangeListener(this);
         setPreferenceTimeZoneOffsetSummary(preferenceHelper.shouldWriteTimeWithOffset());
 
+        findPreference(PreferenceNames.LOG_TO_CSV_DELIMITER).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.LOG_TO_CSV_DELIMITER).setSummary(preferenceHelper.getCSVDelimiter());
+
     }
 
     private void setPreferenceTimeZoneOffsetSummary(boolean shouldIncludeOffset){
@@ -160,6 +163,19 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
                     .choicePreset(position)
                     .show(this, PreferenceNames.NEW_FILE_CREATION_MODE);
             return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_CSV_DELIMITER)){
+            SimpleFormDialog.build()
+                    .title(R.string.log_plain_text_title_csv_delimiter)
+                    .pos(R.string.ok)
+                    .neg(R.string.cancel)
+                    .fields(
+                            Input.plain(PreferenceNames.LOG_TO_CSV_DELIMITER)
+                                    .text(preferenceHelper.getCSVDelimiter())
+                                    .required()
+                    )
+                    .show(this,PreferenceNames.LOG_TO_CSV_DELIMITER);
         }
 
         if(preference.getKey().equalsIgnoreCase(PreferenceNames.GPSLOGGER_FOLDER)){
@@ -279,25 +295,35 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
 
     @Override
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.CUSTOM_FILE_NAME) && which==BUTTON_POSITIVE){
+        if(which != BUTTON_POSITIVE){ return true; }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.CUSTOM_FILE_NAME)){
             String customFilename = extras.getString(PreferenceNames.CUSTOM_FILE_NAME);
             preferenceHelper.setCustomFileName(customFilename);
             findPreference(PreferenceNames.CUSTOM_FILE_NAME).setSummary(preferenceHelper.getCustomFileName());
         }
 
-        if(dialogTag.equalsIgnoreCase("FILE_PERMISSIONS_REQUIRED") && which == BUTTON_POSITIVE){
+        if(dialogTag.equalsIgnoreCase("FILE_PERMISSIONS_REQUIRED")){
             Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
             getActivity().startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
             return true;
         }
 
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.NEW_FILE_CREATION_MODE) && which == BUTTON_POSITIVE){
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.NEW_FILE_CREATION_MODE)){
             String chosenLabel = extras.getString(SimpleListDialog.SELECTED_SINGLE_LABEL);
             String chosenValue = getFileCreationValueFromLabel(chosenLabel);
 
             preferenceHelper.setNewFileCreationMode(chosenValue);
             findPreference(PreferenceNames.NEW_FILE_CREATION_MODE).setSummary(chosenLabel);
             setPreferencesEnabledDisabled();
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_CSV_DELIMITER)){
+            String delimiter = extras.getString(PreferenceNames.LOG_TO_CSV_DELIMITER);
+            preferenceHelper.setCSVDelimiter(delimiter);
+            findPreference(PreferenceNames.LOG_TO_CSV_DELIMITER).setSummary(preferenceHelper.getCSVDelimiter());
+            return true;
         }
 
         return false;

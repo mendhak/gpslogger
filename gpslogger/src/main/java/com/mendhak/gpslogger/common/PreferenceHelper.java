@@ -529,6 +529,15 @@ public class PreferenceHelper {
         return prefs.getBoolean(PreferenceNames.LOG_TO_CSV, false);
     }
 
+    @ProfilePreference(name=PreferenceNames.LOG_TO_CSV_DELIMITER)
+    public String getCSVDelimiter() {
+        return prefs.getString(PreferenceNames.LOG_TO_CSV_DELIMITER, ",");
+    }
+
+    public void setCSVDelimiter(String delimiter) {
+        prefs.edit().putString(PreferenceNames.LOG_TO_CSV_DELIMITER, delimiter).apply();
+    }
+
     /**
      * Whether to log to a GeoJSON file
      */
