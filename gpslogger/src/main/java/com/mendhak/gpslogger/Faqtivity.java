@@ -74,7 +74,6 @@ public class Faqtivity extends AppCompatActivity {
             generalTopics.add(getTopic("faq/faq01-why-taking-so-long.md"));
             generalTopics.add(getTopic("faq/faq02-why-sometimes-inaccurate.md"));
             generalTopics.add(getTopic("faq/faq03-no-point-logged.md"));
-            generalTopics.add(getTopic("faq/faq04-what-timezone.md"));
             generalTopics.add(getTopic("faq/faq05-what-units.md"));
             generalTopics.add(getTopic("faq/faq06-where-are-gps-files.md"));
 
