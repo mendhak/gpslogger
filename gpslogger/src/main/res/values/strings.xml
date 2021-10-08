@@ -126,7 +126,9 @@
     <string name="log_kml_title">Log to KML</string>
     <string name="log_kml_summary">Logs locations to a KML v2.2 file</string>
     <string name="log_plain_text_title">Log to CSV</string>
-    <string name="log_plain_text_title_csv_delimiter">Log to CSV Delimiter</string>
+    <string name="log_plain_text_csv_advanced_title">Log to CSV settings</string>
+    <string name="log_plain_text_csv_field_delimiter">CSV field delimiter</string>
+    <string name="log_plain_text_decimal_comma">Use comma (,) as decimal separator instead of point (.)</string>
     <string name="log_plain_text_summary">Logs locations to a CSV file</string>
     <string name="log_json_title">Log to GeoJSON</string>
     <string name="log_json_summary">Logs locations to a GeoJSON file</string>

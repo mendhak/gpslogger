@@ -114,8 +114,8 @@
             app:iconSpaceReserved="false"/>
 
         <Preference
-            android:title="@string/log_plain_text_title_csv_delimiter"
-            android:key="log_plain_text_csv_delimiter"
+            android:title="@string/log_plain_text_csv_advanced_title"
+            android:key="log_plain_text_csv_advanced"
             android:defaultValue=","
             app:iconSpaceReserved="false" />
 

@@ -34,6 +34,7 @@ public  class PreferenceNames {
     public static final String LOG_AS_GPX_11 = "log_gpx_11";
     public static final String LOG_TO_CSV = "log_plain_text";
     public static final String LOG_TO_CSV_DELIMITER = "log_plain_text_csv_delimiter";
+    public static final String LOG_TO_CSV_DECIMAL_COMMA = "log_plain_text_csv_decimal_comma";
     public static final String LOG_TO_GEOJSON = "log_geojson";
     public static final String LOG_TO_NMEA = "log_nmea";
     public static final String LOG_TO_URL = "log_customurl_enabled";
@@ -117,6 +118,7 @@ public  class PreferenceNames {
     public static final String LATLONG_DISPLAY_FORMAT="latlong_display_format";
     public static final String APP_THEME_SETTING = "app_theme_setting";
     public static final String LOGGING_WRITE_TIME_WITH_OFFSET = "file_logging_write_time_with_offset";
+
 
 
     public static enum DegreesDisplayFormat {
