@@ -86,7 +86,14 @@ public class GpxReader {
                     pt.setAccuracy(Float.parseFloat(item2.getFirstChild().getNodeValue()) * 5);
                 }
                 if (name.equalsIgnoreCase("time")) {
-                    pt.setTime((getDateFormatter().parse(item2.getFirstChild().getNodeValue())).getTime());
+                    String dateTimeString = item2.getFirstChild().getNodeValue();
+                    if(dateTimeString.endsWith("Z")){
+                        pt.setTime((getDateTimeFormatter().parse(dateTimeString)).getTime());
+                    }
+                    else {
+                        pt.setTime(getDateTimeWithOffsetFormatter().parse(dateTimeString).getTime());
+                    }
+
                 }
 
             }
@@ -109,9 +116,14 @@ public class GpxReader {
         return points;
     }
 
-    public static SimpleDateFormat getDateFormatter() {
+    public static SimpleDateFormat getDateTimeFormatter() {
         SimpleDateFormat sdf = (SimpleDateFormat) gpxDate.clone();
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return sdf;
+    }
+
+    public static SimpleDateFormat getDateTimeWithOffsetFormatter() {
+        SimpleDateFormat sdf = new SimpleDateFormat(Strings.getIsoDateTimeWithOffsetFormat());
         return sdf;
     }
 

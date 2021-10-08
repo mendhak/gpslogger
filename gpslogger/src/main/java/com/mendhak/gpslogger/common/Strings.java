@@ -183,7 +183,7 @@ public class Strings {
     public static String getIsoDateTimeWithOffset(Date dateToFormat){
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        SimpleDateFormat ISO_8601_DATE_TIME = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", Locale.US);
+        SimpleDateFormat ISO_8601_DATE_TIME = new SimpleDateFormat(getIsoDateTimeWithOffsetFormat(), Locale.US);
         ISO_8601_DATE_TIME.setTimeZone(calendar.getTimeZone());
         String dateTimeStringWithOffset = ISO_8601_DATE_TIME.format(dateToFormat);
         //Fix for older Android where ZZZZZ does not include colon
@@ -221,6 +221,11 @@ public class Strings {
     public static String getIsoDateTimeFormat() {
         return "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
     }
+
+    public static String getIsoDateTimeWithOffsetFormat() {
+        return "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
+    }
+
 
     /**
      * Given a Date object, returns an ISO 8601 calendar date string.
