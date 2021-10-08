@@ -38,6 +38,33 @@ import java.util.Date;
 
 public class CSVFileLogger implements FileLogger {
 
+    public static class FIELDS{
+
+        public static final String TIME = "time";
+        public static final String LAT = "lat";
+        public static final String LON = "lon";
+        public static final String ELEVATION = "elevation";
+        public static final String ACCURACY = "accuracy";
+        public static final String BEARING = "bearing";
+        public static final String SPEED = "speed";
+        public static final String SATELLITES = "satellites";
+        public static final String PROVIDER = "provider";
+        public static final String HDOP = "hdop";
+        public static final String VDOP = "vdop";
+        public static final String PDOP = "pdop";
+        public static final String GEOID_HEIGHT = "geoidheight";
+        public static final String AGE_OF_DGPS_DATA = "ageofdgpsdata";
+        public static final String DGPS_ID = "dgpsid";
+        public static final String ACTIVITY = "activity";
+        public static final String BATTERY = "battery";
+        public static final String ANNOTATION = "annotation";
+        public static final String TIMESTAMP_MILLIS = "timestamp_ms";
+        public static final String TIME_WITH_OFFSET = "time_offset";
+        public static final String DISTANCE = "distance";
+        public static final String START_TIMESTAMP_MILLIS = "starttimestamp_ms";
+        public static final String PROFILE_NAME = "profile_name";
+    }
+
     private final Integer batteryLevel;
     private File file;
     protected final String name = "TXT";
@@ -54,15 +81,40 @@ public class CSVFileLogger implements FileLogger {
         }
     }
 
+    public static String[] getCSVFileHeaders(){
+        return new String[]{
+                CSVFileLogger.FIELDS.TIME,
+                CSVFileLogger.FIELDS.LAT,
+                CSVFileLogger.FIELDS.LON,
+                CSVFileLogger.FIELDS.ELEVATION,
+                CSVFileLogger.FIELDS.ACCURACY,
+                CSVFileLogger.FIELDS.BEARING,
+                CSVFileLogger.FIELDS.SPEED,
+                CSVFileLogger.FIELDS.SATELLITES,
+                CSVFileLogger.FIELDS.PROVIDER,
+                CSVFileLogger.FIELDS.HDOP,
+                CSVFileLogger.FIELDS.VDOP,
+                CSVFileLogger.FIELDS.PDOP,
+                CSVFileLogger.FIELDS.GEOID_HEIGHT,
+                CSVFileLogger.FIELDS.AGE_OF_DGPS_DATA,
+                CSVFileLogger.FIELDS.DGPS_ID,
+                CSVFileLogger.FIELDS.ACTIVITY,
+                CSVFileLogger.FIELDS.BATTERY,
+                CSVFileLogger.FIELDS.ANNOTATION,
+                CSVFileLogger.FIELDS.TIMESTAMP_MILLIS,
+                CSVFileLogger.FIELDS.TIME_WITH_OFFSET,
+                CSVFileLogger.FIELDS.DISTANCE,
+                CSVFileLogger.FIELDS.START_TIMESTAMP_MILLIS,
+                CSVFileLogger.FIELDS.PROFILE_NAME
+        };
+    }
 
     @Override
     public void annotate(String description, Location loc) throws Exception {
 
         if(!Files.reallyExists(file)){
-            CSVFormat header = CSVFormat.DEFAULT.builder().setHeader("time", "lat", "lon", "elevation",
-                    "accuracy", "bearing", "speed", "satellites", "provider", "hdop", "vdop", "pdop",
-                    "geoidheight", "ageofdgpsdata", "dgpsid", "activity", "battery", "annotation",
-                    "timestamp_ms", "time_offset", "distance", "starttime_ms", "profile_name")
+            CSVFormat header = CSVFormat.DEFAULT.builder()
+                    .setHeader(getCSVFileHeaders())
                     .setDelimiter(CSVFormat.DEFAULT.getDelimiterString())
                     .build();
             FileWriter out = new FileWriter(file);

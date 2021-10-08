@@ -12,6 +12,7 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.csv.CSVFileLogger;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlJob;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
 import com.mendhak.gpslogger.senders.FileSender;
@@ -52,68 +53,66 @@ public class CustomUrlManager extends FileSender {
         List<SerializableLocation> locations = new ArrayList<>();
         try {
             Reader in = new FileReader(f);
-            CSVFormat header = CSVFormat.DEFAULT.builder().setHeader("time", "lat", "lon", "elevation",
-                    "accuracy", "bearing", "speed", "satellites", "provider", "hdop", "vdop", "pdop",
-                    "geoidheight", "ageofdgpsdata", "dgpsid", "activity", "battery", "annotation",
-                    "timestamp_ms", "time_offset", "distance", "starttime_ms", "profile_name")
+            CSVFormat header = CSVFormat.DEFAULT.builder().setHeader(
+                    CSVFileLogger.getCSVFileHeaders())
                     .setDelimiter(CSVFormat.DEFAULT.getDelimiterString())
                     .setSkipHeaderRecord(true)
                     .build();
 
             Iterable<CSVRecord> records = header.parse(in);
             for(CSVRecord record : records){
-                Location csvLoc = new Location(record.get("provider"));
-                csvLoc.setTime(Long.parseLong(record.get("timestamp_ms")));
-                csvLoc.setLatitude(Double.parseDouble(record.get("lat")));
-                csvLoc.setLongitude(Double.parseDouble(record.get("lon")));
+                Location csvLoc = new Location(record.get(CSVFileLogger.FIELDS.PROVIDER));
+                csvLoc.setTime(Long.parseLong(record.get(CSVFileLogger.FIELDS.TIMESTAMP_MILLIS)));
+                csvLoc.setLatitude(Double.parseDouble(record.get(CSVFileLogger.FIELDS.LAT)));
+                csvLoc.setLongitude(Double.parseDouble(record.get(CSVFileLogger.FIELDS.LON)));
 
-                if(!Strings.isNullOrEmpty(record.get("elevation"))){
-                    csvLoc.setAltitude(Double.parseDouble(record.get("elevation")));
+                if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.ELEVATION))){
+                    csvLoc.setAltitude(Double.parseDouble(record.get(CSVFileLogger.FIELDS.ELEVATION)));
                 }
 
-                if(!Strings.isNullOrEmpty(record.get("accuracy"))){
-                    csvLoc.setAccuracy(Float.parseFloat(record.get("accuracy")));
+                if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.ACCURACY))){
+                    csvLoc.setAccuracy(Float.parseFloat(record.get(CSVFileLogger.FIELDS.ACCURACY)));
                 }
 
 
-                if(!Strings.isNullOrEmpty(record.get("bearing"))){
-                    csvLoc.setBearing(Float.parseFloat(record.get("bearing")));
+                if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.BEARING))){
+                    csvLoc.setBearing(Float.parseFloat(record.get(CSVFileLogger.FIELDS.BEARING)));
                 }
 
-                if(!Strings.isNullOrEmpty(record.get("speed"))){
-                    csvLoc.setSpeed(Float.parseFloat(record.get("speed")));
+                if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.SPEED))){
+                    csvLoc.setSpeed(Float.parseFloat(record.get(CSVFileLogger.FIELDS.SPEED)));
                 }
 
                 Bundle b = new Bundle();
 
-                if(!Strings.isNullOrEmpty(record.get("satellites"))){
-                    b.putInt(BundleConstants.SATELLITES_FIX, Integer.parseInt(record.get("satellites")));
+                if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.SATELLITES))){
+                    b.putInt(BundleConstants.SATELLITES_FIX, Integer.parseInt(record.get(CSVFileLogger.FIELDS.SATELLITES)));
                 }
 
-                b.putString(BundleConstants.HDOP, record.get("hdop"));
-                b.putString(BundleConstants.VDOP, record.get("vdop"));
-                b.putString(BundleConstants.PDOP, record.get("pdop"));
+                b.putString(BundleConstants.HDOP, record.get(CSVFileLogger.FIELDS.HDOP));
+                b.putString(BundleConstants.VDOP, record.get(CSVFileLogger.FIELDS.VDOP));
+                b.putString(BundleConstants.PDOP, record.get(CSVFileLogger.FIELDS.PDOP));
 
-                b.putString(BundleConstants.GEOIDHEIGHT, record.get("geoidheight"));
-                b.putString(BundleConstants.AGEOFDGPSDATA, record.get("ageofdgpsdata"));
-                b.putString(BundleConstants.DGPSID, record.get("dgpsid"));
+                b.putString(BundleConstants.GEOIDHEIGHT, record.get(CSVFileLogger.FIELDS.GEOID_HEIGHT));
+                b.putString(BundleConstants.AGEOFDGPSDATA, record.get(CSVFileLogger.FIELDS.AGE_OF_DGPS_DATA));
+                b.putString(BundleConstants.DGPSID, record.get(CSVFileLogger.FIELDS.DGPS_ID));
 
-                if(!Strings.isNullOrEmpty(record.get("battery"))){
-                    b.putInt(BundleConstants.BATTERY_LEVEL, Integer.parseInt(record.get("battery")));
+                if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.BATTERY))){
+                    b.putInt(BundleConstants.BATTERY_LEVEL, Integer.parseInt(record.get(CSVFileLogger.FIELDS.BATTERY)));
                 }
 
-                b.putString(BundleConstants.ANNOTATION, record.get("annotation"));
-                b.putString(BundleConstants.TIME_WITH_OFFSET, record.get("time_offset"));
+                b.putString(BundleConstants.ANNOTATION, record.get(CSVFileLogger.FIELDS.ANNOTATION));
+                b.putString(BundleConstants.TIME_WITH_OFFSET, record.get(CSVFileLogger.FIELDS.TIME_WITH_OFFSET));
 
-                if(!Strings.isNullOrEmpty(record.get("distance"))){
-                    b.putDouble(BundleConstants.DISTANCE, Double.parseDouble(record.get("distance")));
+                if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.DISTANCE))){
+                    b.putDouble(BundleConstants.DISTANCE, Double.parseDouble(record.get(CSVFileLogger.FIELDS.DISTANCE)));
                 }
 
-                if(!Strings.isNullOrEmpty(record.get("starttime_ms"))){
-                    b.putLong(BundleConstants.STARTTIMESTAMP, Long.parseLong(record.get("starttime_ms")));
+                if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.START_TIMESTAMP_MILLIS))){
+                    b.putLong(BundleConstants.STARTTIMESTAMP, Long.parseLong(record.get(CSVFileLogger.FIELDS.START_TIMESTAMP_MILLIS)));
                 }
 
-                b.putString(BundleConstants.PROFILE_NAME, record.get("profile_name"));
+                b.putString(BundleConstants.PROFILE_NAME, record.get(CSVFileLogger.FIELDS.PROFILE_NAME));
                 b.putString(BundleConstants.FILE_NAME, f.getName().replace(".csv",""));
 
                 csvLoc.setExtras(b);
