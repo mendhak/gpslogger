@@ -44,6 +44,11 @@
         app:iconSpaceReserved="false">
 
         <Preference
+            android:key="customurl_setup"
+            android:title="@string/log_customurl_setup_title"
+            app:iconSpaceReserved="false"/>
+
+        <Preference
             android:key="dropbox_setup"
             android:title="@string/dropbox_setup_title"
             app:iconSpaceReserved="false" />

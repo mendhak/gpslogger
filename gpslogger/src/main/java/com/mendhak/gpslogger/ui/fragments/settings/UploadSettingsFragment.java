@@ -69,6 +69,7 @@ public class UploadSettingsFragment
         findPreference("autoftp_setup").setOnPreferenceClickListener(this);
         findPreference("owncloud_setup").setOnPreferenceClickListener(this);
         findPreference("sftp_setup").setOnPreferenceClickListener(this);
+        findPreference("customurl_setup").setOnPreferenceClickListener(this);
     }
 
     @Override
@@ -100,6 +101,10 @@ public class UploadSettingsFragment
 
         if(preference.getKey().equalsIgnoreCase("autoemail_setup")){
             launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.EMAIL;
+        }
+
+        if(preference.getKey().equalsIgnoreCase("customurl_setup")){
+            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL;
         }
 
         if(preference.getKey().equalsIgnoreCase("dropbox_setup")){
