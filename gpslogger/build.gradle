@@ -44,8 +44,8 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
 
-        versionCode 118
-        versionName "118"
+        versionCode 119
+        versionName "119-rc1"
     }
 
     buildTypes {
