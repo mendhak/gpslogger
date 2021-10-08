@@ -116,7 +116,14 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
         setPreferenceTimeZoneOffsetSummary(preferenceHelper.shouldWriteTimeWithOffset());
 
         findPreference(PreferenceNames.LOG_TO_CSV_DELIMITER).setOnPreferenceClickListener(this);
-        findPreference(PreferenceNames.LOG_TO_CSV_DELIMITER).setSummary(preferenceHelper.getCSVDelimiter());
+        setPreferenceCsvSummary(preferenceHelper.getCSVDelimiter());
+
+    }
+
+    private void setPreferenceCsvSummary(String delimiter){
+        String sample = "aaa,bbb,25.189";
+        sample = sample.replaceAll(",", delimiter);
+        findPreference(PreferenceNames.LOG_TO_CSV_DELIMITER).setSummary(sample);
 
     }
 
@@ -173,6 +180,8 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
                     .fields(
                             Input.plain(PreferenceNames.LOG_TO_CSV_DELIMITER)
                                     .text(preferenceHelper.getCSVDelimiter())
+                                    .max(1)
+                                    .min(1)
                                     .required()
                     )
                     .show(this,PreferenceNames.LOG_TO_CSV_DELIMITER);
@@ -322,7 +331,7 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
         if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_CSV_DELIMITER)){
             String delimiter = extras.getString(PreferenceNames.LOG_TO_CSV_DELIMITER);
             preferenceHelper.setCSVDelimiter(delimiter);
-            findPreference(PreferenceNames.LOG_TO_CSV_DELIMITER).setSummary(preferenceHelper.getCSVDelimiter());
+            setPreferenceCsvSummary(preferenceHelper.getCSVDelimiter());
             return true;
         }
 

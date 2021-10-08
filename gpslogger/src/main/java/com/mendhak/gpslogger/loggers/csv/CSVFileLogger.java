@@ -115,7 +115,7 @@ public class CSVFileLogger implements FileLogger {
         if(!Files.reallyExists(file)){
             CSVFormat header = CSVFormat.DEFAULT.builder()
                     .setHeader(getCSVFileHeaders())
-                    .setDelimiter(CSVFormat.DEFAULT.getDelimiterString())
+                    .setDelimiter(PreferenceHelper.getInstance().getCSVDelimiter())
                     .build();
             FileWriter out = new FileWriter(file);
             CSVPrinter printer = new CSVPrinter(out, header);
@@ -124,7 +124,7 @@ public class CSVFileLogger implements FileLogger {
         }
 
         CSVFormat header = CSVFormat.DEFAULT.builder().setSkipHeaderRecord(true)
-                .setDelimiter(CSVFormat.DEFAULT.getDelimiterString())
+                .setDelimiter(PreferenceHelper.getInstance().getCSVDelimiter())
                 .build();
 
         FileWriter out = new FileWriter(file, true);

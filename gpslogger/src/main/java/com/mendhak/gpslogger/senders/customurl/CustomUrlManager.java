@@ -55,7 +55,7 @@ public class CustomUrlManager extends FileSender {
             Reader in = new FileReader(f);
             CSVFormat header = CSVFormat.DEFAULT.builder().setHeader(
                     CSVFileLogger.getCSVFileHeaders())
-                    .setDelimiter(CSVFormat.DEFAULT.getDelimiterString())
+                    .setDelimiter(preferenceHelper.getCSVDelimiter())
                     .setSkipHeaderRecord(true)
                     .build();
 
