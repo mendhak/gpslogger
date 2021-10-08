@@ -131,18 +131,18 @@ public class CSVFileLogger implements FileLogger {
         try (CSVPrinter printer = new CSVPrinter(out, header)) {
             printer.printRecord(
                     Strings.getIsoDateTime(new Date(loc.getTime())),
-                    loc.getLatitude(),
-                    loc.getLongitude(),
-                    loc.hasAltitude() ? loc.getAltitude() : "",
-                    loc.hasAccuracy() ? loc.getAccuracy() : "",
-                    loc.hasBearing() ? loc.getBearing() : "",
-                    loc.hasSpeed() ? loc.getSpeed() : "",
+                    applyDecimalComma(loc.getLatitude()),
+                    applyDecimalComma(loc.getLongitude()),
+                    loc.hasAltitude() ? applyDecimalComma(loc.getAltitude()) : "",
+                    loc.hasAccuracy() ? applyDecimalComma(loc.getAccuracy()) : "",
+                    loc.hasBearing() ? applyDecimalComma(loc.getBearing()) : "",
+                    loc.hasSpeed() ? applyDecimalComma(loc.getSpeed()) : "",
                     Maths.getBundledSatelliteCount(loc),
                     loc.getProvider(),
-                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.HDOP))) ? loc.getExtras().getString(BundleConstants.HDOP) : "",
-                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.VDOP))) ? loc.getExtras().getString(BundleConstants.VDOP) : "",
-                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.PDOP))) ? loc.getExtras().getString(BundleConstants.PDOP) : "",
-                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.GEOIDHEIGHT))) ? loc.getExtras().getString(BundleConstants.GEOIDHEIGHT) : "",
+                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.HDOP))) ? applyDecimalComma(loc.getExtras().getString(BundleConstants.HDOP)) : "",
+                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.VDOP))) ? applyDecimalComma(loc.getExtras().getString(BundleConstants.VDOP)) : "",
+                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.PDOP))) ? applyDecimalComma(loc.getExtras().getString(BundleConstants.PDOP)) : "",
+                    (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.GEOIDHEIGHT))) ? applyDecimalComma(loc.getExtras().getString(BundleConstants.GEOIDHEIGHT)) : "",
                     (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.AGEOFDGPSDATA))) ? loc.getExtras().getString(BundleConstants.AGEOFDGPSDATA) : "",
                     (loc.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.DGPSID))) ? loc.getExtras().getString(BundleConstants.DGPSID) : "",
                     "", //Activity detection was removed, but keeping this here for backward compatibility.
@@ -150,7 +150,7 @@ public class CSVFileLogger implements FileLogger {
                     description,
                     loc.getTime(),
                     Strings.getIsoDateTimeWithOffset(new Date(loc.getTime())),
-                    Session.getInstance().getTotalTravelled(),
+                    applyDecimalComma(Session.getInstance().getTotalTravelled()),
                     Session.getInstance().getStartTimeStamp(),
                     PreferenceHelper.getInstance().getCurrentProfileName()
             );
@@ -158,6 +158,17 @@ public class CSVFileLogger implements FileLogger {
         out.close();
 
         Files.addToMediaDatabase(file, "text/csv");
+    }
+
+    /**
+     * Apply user selected decimal comma, if that option was enabled.
+     */
+    private String applyDecimalComma(Object value) {
+        String returnValue = String.valueOf(value);
+        if(PreferenceHelper.getInstance().shouldCSVUseCommaInsteadOfPoint()){
+            returnValue = returnValue.replace(".",",");
+        }
+        return returnValue;
     }
 
     @Override

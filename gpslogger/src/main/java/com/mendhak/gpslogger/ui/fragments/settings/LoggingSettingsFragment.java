@@ -26,10 +26,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.text.Html;
-import android.text.InputType;
 
 import androidx.annotation.NonNull;
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
@@ -50,6 +48,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.Check;
 import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
 import eltos.simpledialogfragment.list.SimpleListDialog;
@@ -115,15 +114,19 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
         findPreference(PreferenceNames.LOGGING_WRITE_TIME_WITH_OFFSET).setOnPreferenceChangeListener(this);
         setPreferenceTimeZoneOffsetSummary(preferenceHelper.shouldWriteTimeWithOffset());
 
-        findPreference(PreferenceNames.LOG_TO_CSV_DELIMITER).setOnPreferenceClickListener(this);
-        setPreferenceCsvSummary(preferenceHelper.getCSVDelimiter());
+        findPreference("log_plain_text_csv_advanced").setOnPreferenceClickListener(this);
+        setPreferenceCsvSummary(preferenceHelper.getCSVDelimiter(), preferenceHelper.shouldCSVUseCommaInsteadOfPoint());
 
     }
 
-    private void setPreferenceCsvSummary(String delimiter){
-        String sample = "aaa,bbb,25.189";
+    private void setPreferenceCsvSummary(String delimiter, Boolean useComma){
+        String sample = "lorem,ipsum,";
+        String number = "12.345";
         sample = sample.replaceAll(",", delimiter);
-        findPreference(PreferenceNames.LOG_TO_CSV_DELIMITER).setSummary(sample);
+        if(useComma){
+            number = number.replace(".", ",");
+        }
+        findPreference("log_plain_text_csv_advanced").setSummary(sample+number);
 
     }
 
@@ -172,19 +175,23 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
             return true;
         }
 
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_CSV_DELIMITER)){
+        if(preference.getKey().equalsIgnoreCase("log_plain_text_csv_advanced")){
             SimpleFormDialog.build()
-                    .title(R.string.log_plain_text_title_csv_delimiter)
+                    .title(R.string.log_plain_text_csv_advanced_title)
                     .pos(R.string.ok)
                     .neg(R.string.cancel)
                     .fields(
                             Input.plain(PreferenceNames.LOG_TO_CSV_DELIMITER)
+                                    .hint(R.string.log_plain_text_csv_field_delimiter)
                                     .text(preferenceHelper.getCSVDelimiter())
                                     .max(1)
                                     .min(1)
-                                    .required()
+                                    .required(),
+                            Check.box(PreferenceNames.LOG_TO_CSV_DECIMAL_COMMA)
+                                    .label(R.string.log_plain_text_decimal_comma)
+                                    .check(preferenceHelper.shouldCSVUseCommaInsteadOfPoint())
                     )
-                    .show(this,PreferenceNames.LOG_TO_CSV_DELIMITER);
+                    .show(this,"log_plain_text_csv_advanced");
         }
 
         if(preference.getKey().equalsIgnoreCase(PreferenceNames.GPSLOGGER_FOLDER)){
@@ -328,10 +335,12 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
             return true;
         }
 
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_CSV_DELIMITER)){
+        if(dialogTag.equalsIgnoreCase("log_plain_text_csv_advanced")){
             String delimiter = extras.getString(PreferenceNames.LOG_TO_CSV_DELIMITER);
+            boolean useComma = extras.getBoolean(PreferenceNames.LOG_TO_CSV_DECIMAL_COMMA);
             preferenceHelper.setCSVDelimiter(delimiter);
-            setPreferenceCsvSummary(preferenceHelper.getCSVDelimiter());
+            preferenceHelper.setShouldCSVUseCommaInsteadOfDecimal(useComma);
+            setPreferenceCsvSummary(preferenceHelper.getCSVDelimiter(), preferenceHelper.shouldCSVUseCommaInsteadOfPoint());
             return true;
         }
 

@@ -538,6 +538,15 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.LOG_TO_CSV_DELIMITER, delimiter).apply();
     }
 
+    @ProfilePreference(name=PreferenceNames.LOG_TO_CSV_DECIMAL_COMMA)
+    public boolean shouldCSVUseCommaInsteadOfPoint(){
+        return prefs.getBoolean(PreferenceNames.LOG_TO_CSV_DECIMAL_COMMA, false);
+    }
+
+    public void setShouldCSVUseCommaInsteadOfDecimal(boolean useComma){
+        prefs.edit().putBoolean(PreferenceNames.LOG_TO_CSV_DECIMAL_COMMA, useComma).apply();
+    }
+
     /**
      * Whether to log to a GeoJSON file
      */

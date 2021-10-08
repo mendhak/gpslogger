@@ -63,24 +63,24 @@ public class CustomUrlManager extends FileSender {
             for(CSVRecord record : records){
                 Location csvLoc = new Location(record.get(CSVFileLogger.FIELDS.PROVIDER));
                 csvLoc.setTime(Long.parseLong(record.get(CSVFileLogger.FIELDS.TIMESTAMP_MILLIS)));
-                csvLoc.setLatitude(Double.parseDouble(record.get(CSVFileLogger.FIELDS.LAT)));
-                csvLoc.setLongitude(Double.parseDouble(record.get(CSVFileLogger.FIELDS.LON)));
+                csvLoc.setLatitude(Double.parseDouble( unApplyDecimalComma(record.get(CSVFileLogger.FIELDS.LAT)) ));
+                csvLoc.setLongitude(Double.parseDouble( unApplyDecimalComma(record.get(CSVFileLogger.FIELDS.LON)) ));
 
                 if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.ELEVATION))){
-                    csvLoc.setAltitude(Double.parseDouble(record.get(CSVFileLogger.FIELDS.ELEVATION)));
+                    csvLoc.setAltitude(Double.parseDouble( unApplyDecimalComma(record.get(CSVFileLogger.FIELDS.ELEVATION))));
                 }
 
                 if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.ACCURACY))){
-                    csvLoc.setAccuracy(Float.parseFloat(record.get(CSVFileLogger.FIELDS.ACCURACY)));
+                    csvLoc.setAccuracy(Float.parseFloat( unApplyDecimalComma(record.get(CSVFileLogger.FIELDS.ACCURACY))));
                 }
 
 
                 if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.BEARING))){
-                    csvLoc.setBearing(Float.parseFloat(record.get(CSVFileLogger.FIELDS.BEARING)));
+                    csvLoc.setBearing(Float.parseFloat( unApplyDecimalComma(record.get(CSVFileLogger.FIELDS.BEARING))));
                 }
 
                 if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.SPEED))){
-                    csvLoc.setSpeed(Float.parseFloat(record.get(CSVFileLogger.FIELDS.SPEED)));
+                    csvLoc.setSpeed(Float.parseFloat(unApplyDecimalComma(record.get(CSVFileLogger.FIELDS.SPEED))));
                 }
 
                 Bundle b = new Bundle();
@@ -89,11 +89,11 @@ public class CustomUrlManager extends FileSender {
                     b.putInt(BundleConstants.SATELLITES_FIX, Integer.parseInt(record.get(CSVFileLogger.FIELDS.SATELLITES)));
                 }
 
-                b.putString(BundleConstants.HDOP, record.get(CSVFileLogger.FIELDS.HDOP));
-                b.putString(BundleConstants.VDOP, record.get(CSVFileLogger.FIELDS.VDOP));
-                b.putString(BundleConstants.PDOP, record.get(CSVFileLogger.FIELDS.PDOP));
+                b.putString(BundleConstants.HDOP, unApplyDecimalComma(record.get(CSVFileLogger.FIELDS.HDOP)));
+                b.putString(BundleConstants.VDOP, unApplyDecimalComma(record.get(CSVFileLogger.FIELDS.VDOP)));
+                b.putString(BundleConstants.PDOP, unApplyDecimalComma(record.get(CSVFileLogger.FIELDS.PDOP)));
 
-                b.putString(BundleConstants.GEOIDHEIGHT, record.get(CSVFileLogger.FIELDS.GEOID_HEIGHT));
+                b.putString(BundleConstants.GEOIDHEIGHT, unApplyDecimalComma(record.get(CSVFileLogger.FIELDS.GEOID_HEIGHT)));
                 b.putString(BundleConstants.AGEOFDGPSDATA, record.get(CSVFileLogger.FIELDS.AGE_OF_DGPS_DATA));
                 b.putString(BundleConstants.DGPSID, record.get(CSVFileLogger.FIELDS.DGPS_ID));
 
@@ -105,7 +105,7 @@ public class CustomUrlManager extends FileSender {
                 b.putString(BundleConstants.TIME_WITH_OFFSET, record.get(CSVFileLogger.FIELDS.TIME_WITH_OFFSET));
 
                 if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.DISTANCE))){
-                    b.putDouble(BundleConstants.DISTANCE, Double.parseDouble(record.get(CSVFileLogger.FIELDS.DISTANCE)));
+                    b.putDouble(BundleConstants.DISTANCE, Double.parseDouble(unApplyDecimalComma(record.get(CSVFileLogger.FIELDS.DISTANCE))));
                 }
 
                 if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.START_TIMESTAMP_MILLIS))){
@@ -125,6 +125,14 @@ public class CustomUrlManager extends FileSender {
             LOG.error("Could not read locations from CSV file", e);
         }
         return locations;
+    }
+
+    /**
+     * Replace commas with points, in case the CSV contained decimal commas.
+     * This is necessary as all the subsequent processing expects decimals
+     */
+    private String unApplyDecimalComma(String recordValue) {
+        return recordValue.replace(",",".");
     }
 
     private void sendLocations(SerializableLocation[] locations){
