@@ -288,6 +288,7 @@ Nomes de ficheiro muito dinâmicos
     <string name="listeners_title">Fornecedores de localização</string>
     <string name="autosend_frequency_hint">Número de minutos</string>
     <string name="pref_logging_file_no_permissions">Essa pasta não permite gravação pelo GPSLogger. Por favor, escolha outra pasta para gravação.</string>
+    <string name="gpslogger_custom_path_need_permission">Por forma a utilizar caminhos personalizados no GPSLogger, conceda a permissão ao GPSLogger para gerir todos os ficheiros no ecrã seguinte.  Tente então executar a ação novamente. Isto é necessário devido a uma restrição do Android 11+.</string>
     <string name="storage_chooser_create_label">Criar</string>
     <string name="storage_chooser_internal_storage_text">Armazenamento interno</string>
     <string name="storage_chooser_select_folder">Selecionar</string>
@@ -361,4 +362,5 @@ Nomes de ficheiro muito dinâmicos
     <string name="app_theme_follow_system">Padrão do sistema</string>
     <string name="app_theme_light">Tema claro</string>
     <string name="app_theme_dark">Tema escuro</string>
+    <string name="app_theme_setting">Determina como definir o tema escuro ou claro</string>
 </resources>
