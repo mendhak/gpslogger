@@ -125,7 +125,7 @@ dependencies {
 
     // Simple Dialog Fragments, replacing Material Dialogs.
 //    implementation 'io.github.eltos:simpledialogfragments:3.4'
-    implementation 'com.github.eltos:SimpleDialogFragments:1028602dd618032aacfb8d486a3c506dd7cb2ed5'
+    implementation 'com.github.eltos:SimpleDialogFragments:v3.5'
 
     //The material drawer
     implementation('com.mikepenz:materialdrawer:4.6.4@aar') {
