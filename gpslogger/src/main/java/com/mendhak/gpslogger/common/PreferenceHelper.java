@@ -529,6 +529,10 @@ public class PreferenceHelper {
         return prefs.getBoolean(PreferenceNames.LOG_TO_CSV, false);
     }
 
+    public void setShouldLogToCSV(boolean enabled){
+        prefs.edit().putBoolean(PreferenceNames.LOG_TO_CSV, enabled).apply();
+    }
+
     @ProfilePreference(name=PreferenceNames.LOG_TO_CSV_DELIMITER)
     public String getCSVDelimiter() {
         return prefs.getString(PreferenceNames.LOG_TO_CSV_DELIMITER, ",");

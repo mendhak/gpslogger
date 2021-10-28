@@ -50,7 +50,7 @@ import eltos.simpledialogfragment.form.SimpleFormDialog;
 public class CustomUrlFragment extends PreferenceFragmentCompat implements
         SimpleDialog.OnDialogResultListener,
         PreferenceValidator,
-        Preference.OnPreferenceClickListener {
+        Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
     private static final Logger LOG = Logs.of(CustomUrlFragment.class);
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
@@ -75,6 +75,8 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
 
         findPreference(PreferenceNames.LOG_TO_URL_BODY).setSummary(preferenceHelper.getCustomLoggingHTTPBody());
         findPreference(PreferenceNames.LOG_TO_URL_BODY).setOnPreferenceClickListener(this);
+
+        findPreference(PreferenceNames.AUTOSEND_CUSTOMURL_ENABLED).setOnPreferenceChangeListener(this);
 
         findPreference("customurl_legend_1").setOnPreferenceClickListener(this);
         findPreference("customurl_validatecustomsslcert").setOnPreferenceClickListener(this);
@@ -282,6 +284,19 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
         }
 
 
+        return false;
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.AUTOSEND_CUSTOMURL_ENABLED)){
+            Boolean isEnabled = (Boolean)newValue;
+            if(isEnabled){
+                // Custom URL SENDER requires CSV logging. Custom URL logging is independent.
+                preferenceHelper.setShouldLogToCSV(true);
+            }
+            return true;
+        }
         return false;
     }
 }
