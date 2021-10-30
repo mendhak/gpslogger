@@ -113,9 +113,7 @@ public class GpsMainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         loadPresetProperties();
-        loadVersionSpecificProperties();
         Systems.setLocale(preferenceHelper.getUserSpecifiedLocale(), getBaseContext(),getResources());
 
         setContentView(R.layout.activity_gps_main);
@@ -526,27 +524,7 @@ public class GpsMainActivity extends AppCompatActivity
 
 
 
-    private void loadVersionSpecificProperties(){
-        PackageInfo packageInfo;
-        try {
-            packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-            int versionCode = packageInfo.versionCode;
 
-            if(preferenceHelper.getLastVersionSeen() <= 74){
-                LOG.debug("preferenceHelper.getLastVersionSeen() " + preferenceHelper.getLastVersionSeen());
-                LOG.debug("Overriding minimum accuracy to 40");
-
-                if(preferenceHelper.getMinimumAccuracy() == 0){
-                    preferenceHelper.setMinimumAccuracy(40);
-                }
-            }
-
-            preferenceHelper.setLastVersionSeen(versionCode);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     private void loadPresetProperties() {
 
