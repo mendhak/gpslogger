@@ -887,7 +887,8 @@ public class GpsLoggingService extends Service  {
         }
 
 
-        LOG.info(SessionLogcatAppender.MARKER_LOCATION, String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getLongitude()));
+        LOG.debug(String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getLongitude()));
+        LOG.info(SessionLogcatAppender.MARKER_LOCATION, getLocationDisplayForLogs(loc));
         loc = Locations.getLocationWithAdjustedAltitude(loc, preferenceHelper);
         loc = Locations.getLocationAdjustedForGPSWeekRollover(loc);
         resetCurrentFileName(false);
@@ -911,6 +912,28 @@ public class GpsLoggingService extends Service  {
             LOG.debug("Single point mode - stopping now");
             stopLogging();
         }
+    }
+
+    private String getLocationDisplayForLogs(Location loc) {
+
+        StringBuilder logLine = new StringBuilder();
+        logLine.append("\n");
+        logLine.append(Strings.getFormattedLatitude(loc.getLatitude()));
+        logLine.append(" ");
+        logLine.append(Strings.getFormattedLongitude(loc.getLongitude()));
+        if(loc.hasAltitude()){
+            logLine.append("\n");
+            logLine.append(getString(R.string.txt_altitude));
+            logLine.append(Strings.getDistanceDisplay(this,loc.getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), false));
+        }
+
+        if(loc.hasAccuracy()){
+            logLine.append("\n");
+            logLine.append(getString(R.string.txt_accuracy));
+            logLine.append(Strings.getDistanceDisplay(this, loc.getAccuracy(), preferenceHelper.shouldDisplayImperialUnits(), true));
+        }
+
+        return logLine.toString();
     }
 
     private boolean isFromValidListener(Location loc) {

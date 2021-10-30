@@ -119,20 +119,20 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
         for(ILoggingEvent message : SessionLogcatAppender.Statuses){
 
             if(message.getMarker() == SessionLogcatAppender.MARKER_LOCATION){
-                sb.append(getFormattedMessage(message.getMessage(), R.color.accentColorComplementary, message.getTimeStamp()));
+                sb.append(getFormattedMessage(message.getMessage(), R.color.accentColorComplementary, message.getTimeStamp(), true));
             }
 
             else if(!chkLocationsOnly.isChecked()){
                 if(message.getLevel() == Level.ERROR) {
-                    sb.append(getFormattedMessage(message.getMessage(), R.color.errorColor, message.getTimeStamp()));
+                    sb.append(getFormattedMessage(message.getMessage(), R.color.errorColor, message.getTimeStamp(), false));
 
                 }
                 else if(message.getLevel() == Level.WARN){
-                    sb.append(getFormattedMessage(message.getMessage(), R.color.warningColor, message.getTimeStamp()));
+                    sb.append(getFormattedMessage(message.getMessage(), R.color.warningColor, message.getTimeStamp(), false));
 
                 }
                 else {
-                    sb.append(getFormattedMessage(message.getMessage(), R.color.secondaryColorText, message.getTimeStamp()));
+                    sb.append(getFormattedMessage(message.getMessage(), R.color.secondaryColorText, message.getTimeStamp(), false));
                 }
             }
 
@@ -145,11 +145,13 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
 
     }
 
-    private String getFormattedMessage(String message, int colorResourceId, long timeStamp){
+    private String getFormattedMessage(String message, int colorResourceId, long timeStamp, boolean bold){
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String dateStamp = sdf.format(new Date(timeStamp)) + " ";
 
-        String messageFormat = "%s<font color='#%s'>%s</font><br />";
+        String messageFormat = "%s<font color='#%s'>" + (bold ? "<b>": "") + "%s" + (bold ? "</b>": "") + "</font><br />";
+
+        message = message.replaceAll("\n", "<br />");
 
         return String.format(messageFormat,
                 dateStamp,
