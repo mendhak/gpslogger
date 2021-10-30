@@ -915,7 +915,6 @@ public class GpsLoggingService extends Service  {
     private String getLocationDisplayForLogs(Location loc) {
 
         StringBuilder logLine = new StringBuilder();
-        logLine.append("\n");
         logLine.append(Strings.getFormattedLatitude(loc.getLatitude()));
         logLine.append(" ");
         logLine.append(Strings.getFormattedLongitude(loc.getLongitude()));
