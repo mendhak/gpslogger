@@ -1,0 +1,7 @@
+* Custom URL can be used as an autosender, to help with reliability.
+* Option to write times with timezone offset, under Logging details. (GPX, KML, GeoJSON, CSV)
+* Custom URL can use %TIMEOFFSET parameter
+* CSV Logging: more fields added.
+* CSV Logging: option to specify field delimiter and comma decimal separator.
+* Log view will show the coordinates in user preferred format.
+* If recovering from an unexpected stop, start logging if the app was previously logging.
