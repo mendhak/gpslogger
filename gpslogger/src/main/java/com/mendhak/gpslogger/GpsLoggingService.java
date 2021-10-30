@@ -161,9 +161,9 @@ public class GpsLoggingService extends Service  {
 
         if (intent != null) {
             Bundle bundle = intent.getExtras();
+            boolean needToStartGpsManager = false;
 
             if (bundle != null) {
-
 
                 if(!Systems.locationPermissionsGranted(this)){
                     LOG.error("User has not granted permission to access location services. Will not continue!");
@@ -171,8 +171,6 @@ public class GpsLoggingService extends Service  {
                     stopSelf();
                     return;
                 }
-
-                boolean needToStartGpsManager = false;
 
                 if (bundle.getBoolean(IntentConstants.IMMEDIATE_START)) {
                     LOG.info("Intent received - Start Logging Now");
@@ -276,12 +274,12 @@ public class GpsLoggingService extends Service  {
                     LOG.warn(SessionLogcatAppender.MARKER_INTERNAL, "Received a weird EXTRA_ALARM_COUNT value. Cannot continue.");
                     needToStartGpsManager = false;
                 }
-
-
-                if (needToStartGpsManager && session.isStarted()) {
-                    startGpsManager();
-                }
             }
+
+            if (needToStartGpsManager || session.isStarted()) {
+                startGpsManager();
+            }
+
         } else {
             // A null intent is passed in if the service has been killed and restarted.
             LOG.debug("Service restarted with null intent. Were we logging previously - " + session.isStarted());
