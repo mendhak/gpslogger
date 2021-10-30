@@ -10,13 +10,16 @@
         "content/07.general-settings.md",
         "content/08.logging-details.md",
         "content/09.logging-details.md",
-        "content/10.logging-details.md",
+        "content/09b.app-theme.md",
+        "content/10.performance-details.md",
         "content/11.auto-send.md",
         "content/12.ftp-setup.md",
         "content/13.auto-email.md",
         "content/14.open-gts.md",
         "content/15.openstreetmap.md",
-        "content/17.customurl.md"
+        "content/17.customurl.md",
+        "content/17b.customurl.md",
+        "content/18.sftp.md"
 
     ],
     "standalone": [
