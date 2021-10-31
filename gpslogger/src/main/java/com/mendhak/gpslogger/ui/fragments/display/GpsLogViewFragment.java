@@ -106,9 +106,19 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
         @Override
         public void run() {
             showLogcatMessages();
+            showCurrentLoggingStatusCheckbox();
             timerHandler.postDelayed(this, 1500);
         }
     };
+
+    private void showCurrentLoggingStatusCheckbox() {
+        CheckBox chkStartLogging = (CheckBox) rootView.findViewById(R.id.logview_startLogging);
+        if(session.isStarted() != chkStartLogging.isChecked()){
+            chkStartLogging.setOnCheckedChangeListener(null);
+            chkStartLogging.setChecked((session.isStarted()));
+            chkStartLogging.setOnCheckedChangeListener(this);
+        }
+    }
 
 
     void showLogcatMessages(){
