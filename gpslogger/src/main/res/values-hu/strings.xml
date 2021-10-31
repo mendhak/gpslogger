@@ -7,6 +7,7 @@
     <string name="settings_screen_name">Általános beállítások</string>
     <string name="ok">OK</string>
     <string name="cancel">Mégse</string>
+    <string name="hide">Elrejt</string>
     <string name="could_not_write_to_file">A fájl nem írható!</string>
     <string name="add_description">Leírás hozzáadása</string>
     <string name="letters_numbers">Csak (A-Z) és (0-9)</string>
@@ -287,6 +288,15 @@
     <string name="listeners_title">Helyszolgáltatók</string>
     <string name="autosend_frequency_hint">Percek száma</string>
     <string name="pref_logging_file_no_permissions">A GPSLogger nem tudja írni a kiválasztott mappát. Kérem válasszon egy másik mappát.</string>
+    <string name="gpslogger_custom_path_need_permission">Ha egyéni útvonalakat szeretne használni a GPSLogger alkalmazásban, a következő képernyőn engedélyezze a GPSLogger számára, hogy kezelje az összes fájlt. Ezután próbálja meg újra végrehajtani a műveletet. Erre az Android 11+ rendszer korlátozása miatt van szükség.</string>
+    <string name="storage_chooser_create_label">Létrehozás</string>
+    <string name="storage_chooser_internal_storage_text">Belső tárolóhely</string>
+    <string name="storage_chooser_select_folder">Kiválaszt</string>
+    <string name="storage_chooser_overview_heading">Válasszon tárhelyet</string>
+    <string name="storage_chooser_new_folder_label">Új mappa</string>
+    <string name="storage_chooser_free_space_text">szabad</string>
+    <string name="storage_chooser_text_field_error">Üres mappa neve</string>
+    <string name="storage_chooser_text_field_hint">Mappa neve</string>
     <string name="new_file_custom_each_time_title">Kérjen fájlnevet minden indításkor</string>
     <string name="new_file_custom_each_time_summary">Egyedi fájlnevet kér a naplózás minden indításakor</string>
     <string name="new_file_custom_keep_changing_title">Egyedi fájlnév dinamikusan változzon</string>
@@ -349,4 +359,9 @@ Engedélyek megadásához lépjen be az alkalmazás beállítások képernyőre.
     <string name="hide_notification_from_status_bar_disallowed">Értesítés elrejtése az Android Oreo-tól kezdve nem engedélyezett</string>
     <string name="reset_app_summary">Visszaállítja az alkalmazást, törli a beállításokat, GPSLogger fájlokat és visszavonja az alkalmazás számára biztosított engedélyeket. Minden adat elveszik!</string>
     <string name="reset_app_title">Visszaállítás</string>
+    <string name="app_theme_title">Téma</string>
+    <string name="app_theme_follow_system">Rendszerbeállítás</string>
+    <string name="app_theme_light">Világos téma</string>
+    <string name="app_theme_dark">Sötét téma</string>
+    <string name="app_theme_setting">Meghatározza, hogy világos vagy sötét legyen az alkalmazás felülete.</string>
 </resources>
