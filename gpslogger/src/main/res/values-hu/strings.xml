@@ -99,6 +99,9 @@
     <string name="log_kml_title">KML formátum használata</string>
     <string name="log_kml_summary">Pozíciók rögzítése KML v2.2 fájlformátumban</string>
     <string name="log_plain_text_title">CSV formátum használata</string>
+    <string name="log_plain_text_csv_advanced_title">CSV naplózás beállításai</string>
+    <string name="log_plain_text_csv_field_delimiter">CSV mezőhatároló</string>
+    <string name="log_plain_text_decimal_comma">Tizedes elválasztóként vessző (,) használata pont (.) helyett</string>
     <string name="log_plain_text_summary">Pozíciók rögzítése CSV fájlformátumban</string>
     <string name="log_json_title">GeoJSON formátum használata</string>
     <string name="log_json_summary">Pozíciók rögzítése GeoJSON fájlformátumban</string>
@@ -240,9 +243,11 @@
     <string name="autoftp_setup_title">FTP</string>
     <string name="menu_faq">Súgó és GYIK</string>
     <string name="log_customurl_title">Naplózás egyedi URL-re</string>
+    <string name="log_customurl_setup_title">Egyéni URL</string>
     <string name="log_customurl_summary">Helyinformációk küldése saját szerverre HTTP protokollal</string>
     <string name="txt_annotation">Helyjelző:</string>
     <string name="txt_time_isoformat">UTC idő (2011-12-25T15:27:33Z):</string>
+    <string name="txt_time_with_offset_isoformat">Időeltolódás (2011-12-25T11:27:33+04:00):</string>
     <string name="txt_date_isoformat">Dátum (2011-12-25):</string>
     <string name="txt_provider">Szolgáltató:</string>
     <string name="annotation_requires_logging">Helyjelzők naplózása CSV/GPX/KML/Egyedi URL/GeoJSON-ba</string>
@@ -364,4 +369,6 @@ Engedélyek megadásához lépjen be az alkalmazás beállítások képernyőre.
     <string name="app_theme_light">Világos téma</string>
     <string name="app_theme_dark">Sötét téma</string>
     <string name="app_theme_setting">Meghatározza, hogy világos vagy sötét legyen az alkalmazás felülete.</string>
+    <string name="file_logging_log_time_with_offset_title">Idő naplózása időzóna eltolással</string>
+    <string name="file_logging_log_time_with_offset_summary">Ahol lehetséges, UTC idő helyett ISO8601 időt írja időzóna eltolással.</string>
 </resources>
