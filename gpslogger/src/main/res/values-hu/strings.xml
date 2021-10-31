@@ -84,7 +84,7 @@
     <string name="time_halfhour">30 perc</string>
     <string name="time_oneandhalfhours">90 perc</string>
     <string name="time_twoandhalfhours">150 perc</string>
-    <string name="time_hms_format" formatted="false">%ó %p %mp</string>
+    <string name="time_hms_format" formatted="false">%só %sp %smp</string>
     <string name="accuracy_within" formatted="false">%s %s -en belül</string>
     <!-- Settings activity -->
     <string name="settings_distance_in_meters">Távolság-szűrő (méter)</string>
