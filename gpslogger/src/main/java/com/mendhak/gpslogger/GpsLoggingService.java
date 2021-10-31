@@ -132,7 +132,7 @@ public class GpsLoggingService extends Service  {
         }
 
         if(session.isStarted() && gpsLocationListener == null && towerLocationListener == null && passiveLocationListener == null) {
-            //We might be recovering from an unexpected stop.  Start logging again.
+            LOG.warn("App might be recovering from an unexpected stop.  Starting logging again.");
             startLogging();
         }
 
@@ -165,7 +165,6 @@ public class GpsLoggingService extends Service  {
 
         if (intent != null) {
             Bundle bundle = intent.getExtras();
-            boolean needToStartGpsManager = false;
 
             if (bundle != null) {
 
@@ -175,6 +174,8 @@ public class GpsLoggingService extends Service  {
                     stopSelf();
                     return;
                 }
+
+                boolean needToStartGpsManager = false;
 
                 if (bundle.getBoolean(IntentConstants.IMMEDIATE_START)) {
                     LOG.info("Intent received - Start Logging Now");
@@ -278,10 +279,10 @@ public class GpsLoggingService extends Service  {
                     LOG.warn(SessionLogcatAppender.MARKER_INTERNAL, "Received a weird EXTRA_ALARM_COUNT value. Cannot continue.");
                     needToStartGpsManager = false;
                 }
-            }
 
-            if (needToStartGpsManager) {
-                startGpsManager();
+                if (needToStartGpsManager) {
+                    startGpsManager();
+                }
             }
 
         } else {
