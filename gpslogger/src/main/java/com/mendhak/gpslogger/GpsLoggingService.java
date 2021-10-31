@@ -130,6 +130,12 @@ public class GpsLoggingService extends Service  {
         } catch (Exception ex) {
             LOG.error("Could not start GPSLoggingService in foreground. ", ex);
         }
+
+        if(session.isStarted() && gpsLocationListener == null && towerLocationListener == null && passiveLocationListener == null) {
+            //We might be recovering from an unexpected stop.  Start logging again.
+            startLogging();
+        }
+
         handleIntent(intent);
         return START_STICKY;
     }
@@ -156,8 +162,6 @@ public class GpsLoggingService extends Service  {
     }
 
     private void handleIntent(Intent intent) {
-
-
 
         if (intent != null) {
             Bundle bundle = intent.getExtras();
@@ -266,7 +270,7 @@ public class GpsLoggingService extends Service  {
                 }
 
                 try {
-                    if(bundle.get(Intent.EXTRA_ALARM_COUNT) != "0"){
+                    if(bundle.containsKey(Intent.EXTRA_ALARM_COUNT) && bundle.get(Intent.EXTRA_ALARM_COUNT) != "0"){
                         needToStartGpsManager = true;
                     }
                 }
@@ -276,7 +280,7 @@ public class GpsLoggingService extends Service  {
                 }
             }
 
-            if (needToStartGpsManager || session.isStarted()) {
+            if (needToStartGpsManager) {
                 startGpsManager();
             }
 
