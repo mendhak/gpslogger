@@ -280,7 +280,7 @@ public class GpsLoggingService extends Service  {
                     needToStartGpsManager = false;
                 }
 
-                if (needToStartGpsManager) {
+                if (needToStartGpsManager && session.isStarted()) {
                     startGpsManager();
                 }
             }
