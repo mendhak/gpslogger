@@ -5,3 +5,4 @@
 * CSV Logging: option to specify field delimiter and comma decimal separator.
 * Log view will show the coordinates in user preferred format.
 * If recovering from an unexpected stop, start logging if the app was previously logging.
+* Bugfix for Hungarian
