@@ -7,6 +7,7 @@
     <string name="settings_screen_name">Paramètres de GPSLogger</string>
     <string name="ok">OK</string>
     <string name="cancel">Annuler</string>
+    <string name="hide">Masquer</string>
     <string name="could_not_write_to_file">Impossible d\'écrire dans le fichier</string>
     <string name="add_description">Ajouter une description</string>
     <string name="letters_numbers">Utiliser uniquement des lettres et chiffres</string>
@@ -98,6 +99,9 @@
     <string name="log_kml_title">Enregistrer en KML</string>
     <string name="log_kml_summary">Enregistrer les localisations au format KML v2.2</string>
     <string name="log_plain_text_title">Enregistrer au format CSV</string>
+    <string name="log_plain_text_csv_advanced_title">Paramètres journalisation CSV</string>
+    <string name="log_plain_text_csv_field_delimiter">Délimiteur de champ CSV</string>
+    <string name="log_plain_text_decimal_comma">Utiliser la virgule (,) au lieu du point (.) comme séparateur décimal</string>
     <string name="log_plain_text_summary">Enregistrer les localisations au format CSV</string>
     <string name="log_json_title">Enregistrer en GeoJSON</string>
     <string name="log_json_summary">Enregistrer les localisations en fichier GeoJSON</string>
@@ -112,8 +116,8 @@
     <string name="pref_performance_title">Performance</string>
     <string name="pref_performance_summary">Délais, filtres et écouteurs</string>
     <string name="time_before_logging_title">Intervalle d’enregistrement</string>
-    <string name="time_before_logging_summary">Utilisez 0 pour la fréquence maximale, mais plus lent est mieux pour la vie de la batterie. Système
-        la configuration de la batterie de niveau peut surcharger ce paramètre, voir Aide et FAQ.</string>
+    <string name="time_before_logging_summary">Utiliser 0 pour la fréquence maximale. Une fréquence plus lente favorise la durée de la batterie.
+        La configuration système pour le niveau de batterie peut surcharger ce paramètre, voir l\'aide et la FAQ.</string>
     <string name="time_before_logging_dialog_title">Temps en seconde</string>
     <string name="time_before_logging_hint">Saisir en seconde (max. 9999)</string>
     <string name="keep_fix_summary">Attention, cela va réduire considérablement l\'autonomie de la batterie. À utiliser uniquement pour
@@ -235,10 +239,12 @@ une plus grande précision à basses fréquences.    </string>
     <string name="autoftp_setup_title">FTP</string>
     <string name="menu_faq">Aide et questions fréquemment posées</string>
     <string name="log_customurl_title">Enregistrer vers une URL personnalisée</string>
+    <string name="log_customurl_setup_title">URL personnalisée</string>
     <string name="log_customurl_summary">Envoyer les infos d\'enregistrement par HTTP vers un serveur personnel</string>
     <string name="txt_annotation">Annotation :</string>
     <string name="txt_time_isoformat">Heure UTC (2011-12-25T15:27:33Z) :</string>
-    <string name="txt_date_isoformat">Date (2011-12-25):</string>
+    <string name="txt_time_with_offset_isoformat">Décalage temps (2011-12-25T11:27:33+04:00) :</string>
+    <string name="txt_date_isoformat">Date (2011-12-25) :</string>
     <string name="txt_provider">Fournisseur :</string>
     <string name="annotation_requires_logging">Les annotations requièrent l\'enregistrement en CSV/GPX/KML/URL personnalisée/GeoJSON</string>
     <string name="gpslogger_folder_title">Enregistrer dans le dossier</string>
@@ -283,13 +289,13 @@ une plus grande précision à basses fréquences.    </string>
     <string name="listeners_title">Fournisseurs de positionnement</string>
     <string name="autosend_frequency_hint">Nombre de minutes</string>
     <string name="pref_logging_file_no_permissions">Ce dossier n’est pas accessible en écriture par GPSLogger. Merci de sélectionner un autre dossier où écrire.</string>
-    <string name="gpslogger_custom_path_need_permission">Afin d’utiliser des chemins personnalisés dans GPSLogger, veuillez permettre à GPSLogger de gérer tous les fichiers sur l’écran suivant. Ensuite, essayez à nouveau d’exécuter l’action. Ceci est nécessaire en raison d’une restriction Android 11+.</string>
+    <string name="gpslogger_custom_path_need_permission">Afin d’utiliser des chemins personnalisés dans GPSLogger, veuillez autoriser les gestion de tous les fichiers sur l’écran suivant. Puis réessayez d’exécuter l’action. Ceci est nécessaire en raison d’une restriction Android 11+.</string>
     <string name="storage_chooser_create_label">Créer</string>
     <string name="storage_chooser_internal_storage_text">Stockage Interne </string>
-    <string name="storage_chooser_select_folder">Sélectionnez</string>
-    <string name="storage_chooser_overview_heading">Choisissez le Stockage</string>
-    <string name="storage_chooser_new_folder_label">Nouveau Fichier</string>
-    <string name="storage_chooser_free_space_text">gratuit</string>
+    <string name="storage_chooser_select_folder">Sélectionner</string>
+    <string name="storage_chooser_overview_heading">Choix du stockage</string>
+    <string name="storage_chooser_new_folder_label">Nouveau fichier</string>
+    <string name="storage_chooser_free_space_text">libres</string>
     <string name="storage_chooser_text_field_error">Nom du dossier vide</string>
     <string name="storage_chooser_text_field_hint">Nom du dossier</string>
     <string name="new_file_custom_each_time_title">Demander un nom de fichier à chaque démarrage</string>
@@ -313,20 +319,20 @@ une plus grande précision à basses fréquences.    </string>
     <string name="logview_showlocationsonly">Localisations uniquement</string>
     <string name="logview_autoscroll">Défilement automatique</string>
     <string name="profile_create_new">Créer un nouveau profil</string>
-    <string name="profile_add_from_url">D\'une URL</string>
+    <string name="profile_add_from_url">Depuis une URL</string>
     <string name="properties_file_url">URL du fichier de propriétés</string>
     <string name="profile_switch_before_delete">Merci de changer de profil avant de supprimer celui-ci.</string>
     <string name="profile_delete">Supprimer le profil ?</string>
     <string name="profile_default">Profil par défaut</string>
     <string name="profile_add_new">Ajouter un profil</string>
     <string name="gpslogger_permissions_rationale_title">Autorisations requises</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Cette application nécessite diverses autorisations afin de fonctionner correctement. Vous serez maintenant invité plusieurs fois pour diverses autorisations (désolé).  Voici une explication de chaque permission. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Cette application nécessite diverses autorisations afin de fonctionner correctement. Vous allez maintenant être interrogé plusieurs fois pour diverses autorisations (désolé). Voici une explication pour chaque permission. ]]></string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Emplacement du périphérique</b> - Cette autorisation permet la lecture des données de localisation qui proviennent des relais téléphoniques et du GPS intégré à l’appareil.]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Photos, médias, fichiers</b> - Cette autorisation permet l’écriture pour le stockage des fichiers de journalisation et test, ainsi que la lecture d’une liste de fichiers pour leur envoi ou leur partage. Cette application n’accédera ni aux photos ni aux médias.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Autoriser tout le temps</b> - Permettre à cette application de recevoir des mises à jour de localisation lors de l’exécution en arrière-plan. ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignorer l’optimisation de la batterie</b> - Permettre à cette application de s’exécuter en arrière-plan en réduisant l’optimisation de la batterie. ]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Une ou plusieurs autorisations requises par cette application ont été refusées. Il sera nécessaire d’aller à l’écran des paramètres de l\'application pour les lui accorder.<br /><br />Si des autorisations ont été définitivement refusées, il est possible de les réinitialiser dans les paramètres du système. ]]></string>
-    <string name="gpslogger_permissions_background_location"><![CDATA[Pour permettre à GPSLogger de fonctionner en arrière-plan, vous devrez lui accorder une permission supplémentaire. À l’écran suivant, sélectionnez : ]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Pour permettre à GPSLogger de fonctionner en arrière-plan, vous devrez lui accorder une permission supplémentaire. À l’écran suivant, sélectionner : ]]></string>
     <string name="privacy_policy">Politique de confidentialité</string>
     <string name="debuglog_attach_to_email">Joindre le journal de débogage à un courriel</string>
     <string name="debuglog_attach_to_email_summary">Joindre le journal de débogage à un courriel avec quelques informations de diagnostic</string>
@@ -351,6 +357,13 @@ une plus grande précision à basses fréquences.    </string>
     <string name="customurl_http_method">Méthode HTTP</string>
     <string name="customurl_http_basicauthentication">Authentification de base</string>
     <string name="hide_notification_from_status_bar_disallowed">Masquer les notifications n’est pas autorisé dans Android Oreo ou supérieur</string>
-    <string name="reset_app_summary">Cela va réinitialiser l’application, supprimer toutes les préférences, supprimer les fichiers GPSLogger, et révoquer les autorisations accordées à cette application. Toutes les données seront perdues!</string>
+    <string name="reset_app_summary">Cela va réinitialiser l’application, supprimer toutes les préférences, supprimer les fichiers GPSLogger, et révoquer les autorisations accordées à cette application. Toutes les données seront perdues !</string>
     <string name="reset_app_title">Réinitialiser l’application</string>
+    <string name="app_theme_title">Thème</string>
+    <string name="app_theme_follow_system">Selon système</string>
+    <string name="app_theme_light">Thème clair</string>
+    <string name="app_theme_dark">Thème sombre</string>
+    <string name="app_theme_setting">Définir le thème clair ou sombre</string>
+    <string name="file_logging_log_time_with_offset_title">Journaliser le temps avec décalage de fuseau horaire</string>
+    <string name="file_logging_log_time_with_offset_summary">Quand c\'est possible, écrire le temps ISO8601 avec le décalage de fuseau horaire au lieu de UTC.</string>
 </resources>
