@@ -1,21 +1,13 @@
-owncloud-server:
-  container_name: gpslogger-owncloud-server
-  image: jchaney/owncloud
+nextcloud-server:
+  container_name: gpslogger-nextcloud-server
+  image: nextcloud:latest
   ports:
     - "80:80"
-    - "443:443"
-  volumes:
-    - ./owncloudstorage/data:/var/www/owncloud/data
-    - ./owncloudstorage/additional_apps:/var/www/owncloud/apps_persistent
-    - ./owncloudstorage/config:/owncloud
-    - /etc/ssl/certs/ssl-cert-snakeoil.pem:/owncloud.cert:ro
-    - /etc/ssl/private/ssl-cert-snakeoil.key:/owncloud.key:ro
   environment:
-    - OWNCLOUD_IN_ROOTPATH=1
-    - OWNCLOUD_SERVERNAME="${SERVERIP}"
-    - SSL_CERT="/owncloud.cert"
-    - SSL_KEY="/owncloud.key"
-
+    - SQLITE_DATABASE=whatever
+    - NEXTCLOUD_ADMIN_USER=admin
+    - NEXTCLOUD_ADMIN_PASSWORD=admin
+    - NEXTCLOUD_TRUSTED_DOMAINS=${SERVERIP}
 
 ftpd-server:
   container_name: gpslogger-ftpd-server
