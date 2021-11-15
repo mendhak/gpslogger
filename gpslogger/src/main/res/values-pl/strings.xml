@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_drawer_uploadsettings">Ustawienia wysyłania</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="settings_screen_name">Ustawienia GPSLogger</string>
     <string name="ok">Dobrze</string>
     <string name="cancel">Anuluj</string>
