@@ -3,9 +3,11 @@
     <string name="title_drawer_uploadsettings">Configuración de subidas</string>
     <string name="navigation_drawer_open">Abrir menú de navegación</string>
     <string name="navigation_drawer_close">Cerrar menú de navegación</string>
+    <string name="app_name">GPSLogger</string>
     <string name="settings_screen_name">Configuracion de GPSLogger</string>
     <string name="ok">Aceptar</string>
     <string name="cancel">Cancelar</string>
+    <string name="hide">Ocultar</string>
     <string name="could_not_write_to_file">No se pudo escribir al archivo</string>
     <string name="add_description">Añadir una descripción</string>
     <string name="letters_numbers">Utilice sólo letras y números</string>
@@ -38,14 +40,18 @@
     <string name="feet">&#160;pies</string>
     <string name="meter">&#160;metro</string>
     <string name="meters">&#160;metros</string>
+    <string name="error">Error</string>
     <string name="error_connection">Error de conexión. Compruebe la configuración del teléfono.</string>
     <string name="seconds">s</string>
+    <string name="minutes">&#160;min</string>
     <string name="hours">horas</string>
     <string name="gpsprovider_unavailable">No hay ningún proveedor GPS disponible. Es necesario comprobar los ajustes de ubicación y activar algún proveedor de ubicación.
     </string>
     <string name="started">Iniciado</string>
     <string name="providername_gps">Satélites GPS</string>
     <string name="providername_celltower">Torres Celulares</string>
+    <string name="not_applicable">n/a</string>
+    <string name="meters_per_second">&#160;m/s</string>
     <string name="miles">mi</string>
     <string name="kilometers_per_hour">km/h</string>
     <string name="kilometers">km</string>
@@ -57,6 +63,7 @@
     <string name="direction_northnortheast">Norte noreste</string>
     <string name="direction_northeast">Noreste</string>
     <string name="direction_eastnortheast">Oriente por noreste</string>
+    <string name="direction_east">Este</string>
     <string name="direction_eastsoutheast">Oriente por sureste</string>
     <string name="direction_southeast">Sureste</string>
     <string name="direction_southsoutheast">Sur sureste</string>
@@ -76,6 +83,7 @@
     <string name="time_halfhour">1½ horas</string>
     <string name="time_oneandhalfhours">2½ horas</string>
     <string name="time_twoandhalfhours">2½ horas</string>
+    <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
     <string name="accuracy_within" formatted="false">precisión de %s %s</string>
     <!-- Settings activity -->
     <string name="settings_distance_in_meters">Distancia en metros</string>
@@ -90,11 +98,14 @@
     <string name="log_kml_title">Registro a KML</string>
     <string name="log_kml_summary">Escribe las posiciones en un archivo KML v2.2</string>
     <string name="log_plain_text_title">Registro a CSV</string>
+    <string name="log_plain_text_csv_field_delimiter">CSV delimitador de campo</string>
+    <string name="log_plain_text_decimal_comma">Usar coma (,) como separador decimal en lugar del punto (.)</string>
     <string name="log_plain_text_summary">Escribe las posiciones en un archivo CSV</string>
     <string name="log_json_title">Registrarse en GeoJSON</string>
     <string name="log_json_summary">Escribe las posiciones en un archivo Csv</string>
     <string name="new_file_creation_title">Creación de archivos nuevos</string>
     <string name="new_file_creation_summary">Si desea crear un nuevo archivo una vez al día o cada vez que inicie.</string>
+    <string name="new_file_creation_onceamonth">Una vez al mes</string>
     <string name="new_file_creation_onceaday">Una vez al día</string>
     <string name="new_file_creation_everystart">En cada inicio</string>
     <string name="new_file_creation_custom">Archivo personalizado</string>
