@@ -434,7 +434,19 @@ public class GpsMainActivity extends AppCompatActivity
         startAndBindService();
     }
 
-
+    // Might need this - if the notification keeps reappearing - Issue #933
+//    @Override
+//    protected void onPause() {
+//        stopAndUnbindServiceIfRequired();
+//        super.onPause();
+//    }
+//
+//    protected void onStop() {
+//        super.onStop();
+//        if (!isFinishing()) {
+//            stopAndUnbindServiceIfRequired();
+//        }
+//    }
 
     @Override
     protected void onResume() {
@@ -499,6 +511,10 @@ public class GpsMainActivity extends AppCompatActivity
      * Handles the hardware back-button press
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && session.isBoundToService()) {
+            stopAndUnbindServiceIfRequired();
+        }
 
         if(keyCode == KeyEvent.KEYCODE_BACK){
             DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
