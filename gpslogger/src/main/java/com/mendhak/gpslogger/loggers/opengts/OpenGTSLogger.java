@@ -21,6 +21,8 @@ package com.mendhak.gpslogger.loggers.opengts;
 
 import android.content.Context;
 import android.location.Location;
+
+import com.mendhak.gpslogger.common.BatteryInfo;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Systems;
@@ -41,7 +43,8 @@ public class OpenGTSLogger implements FileLogger {
 
     public OpenGTSLogger(Context context) {
         this.context = context;
-        this.batteryLevel = Systems.getBatteryLevel(context);
+        BatteryInfo batteryInfo = Systems.getBatteryInfo(context);
+        this.batteryLevel = batteryInfo.BatteryLevel;
     }
 
     @Override

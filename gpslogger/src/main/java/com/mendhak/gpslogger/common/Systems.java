@@ -69,6 +69,26 @@ public class Systems {
 
     }
 
+    public static BatteryInfo getBatteryInfo(Context context){
+        Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        int level = batteryIntent != null ? batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) : 0;
+        int scale = batteryIntent != null ? batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1) : 0;
+
+        int status = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+        int batteryPercentage = -1;
+        boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                status == BatteryManager.BATTERY_STATUS_FULL;
+
+        if (level == -1 || scale == -1) {
+            batteryPercentage = 50;
+        }
+        else {
+            batteryPercentage = (int) (((float) level / (float) scale) * 100.0f);
+        }
+
+        return new BatteryInfo(batteryPercentage, isCharging);
+    }
+
     public static boolean isPackageInstalled(String targetPackage, Context context){
         List<ApplicationInfo> packages;
         PackageManager pm;
