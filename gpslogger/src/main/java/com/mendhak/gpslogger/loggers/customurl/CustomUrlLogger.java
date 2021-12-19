@@ -21,6 +21,8 @@ package com.mendhak.gpslogger.loggers.customurl;
 
 import android.content.Context;
 import android.location.Location;
+
+import com.mendhak.gpslogger.common.BatteryInfo;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Session;
@@ -41,11 +43,10 @@ public class CustomUrlLogger implements FileLogger {
     private final String basicAuthUsername;
     private final String basicAuthPassword;
 
-
-
     public CustomUrlLogger(String customLoggingUrl, Context context, String httpMethod, String httpBody, String httpHeaders, String basicAuthUsername, String basicAuthPassword) {
         this.customLoggingUrl = customLoggingUrl;
-        this.batteryLevel = Systems.getBatteryLevel(context);
+        BatteryInfo batteryInfo = Systems.getBatteryInfo(context);
+        this.batteryLevel = batteryInfo.BatteryLevel;
         this.httpMethod = httpMethod;
         this.httpBody = httpBody;
         this.httpHeaders = httpHeaders;

@@ -23,6 +23,7 @@ import android.content.Context;
 import android.location.Location;
 import androidx.annotation.Nullable;
 
+import com.mendhak.gpslogger.common.BatteryInfo;
 import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.Maths;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -73,7 +74,8 @@ public class CSVFileLogger implements FileLogger {
 
     public CSVFileLogger(File file, Context context) {
         this.file = file;
-        this.batteryLevel = Systems.getBatteryLevel(context);
+        BatteryInfo batteryInfo = Systems.getBatteryInfo(context);
+        this.batteryLevel = batteryInfo.BatteryLevel;
     }
 
     @Override

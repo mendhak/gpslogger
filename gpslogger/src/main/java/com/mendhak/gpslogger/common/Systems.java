@@ -51,17 +51,6 @@ public class Systems {
     private static final Logger LOG = Logs.of(Systems.class);
     public final static int REQUEST_PERMISSION_CODE=2191;
 
-    public static int getBatteryLevel(Context context) {
-        Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        int level = batteryIntent != null ? batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) : 0;
-        int scale = batteryIntent != null ? batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1) : 0;
-
-        if (level == -1 || scale == -1) {
-            return 50;
-        }
-
-        return (int) (((float) level / (float) scale) * 100.0f);
-    }
 
     public static String getAndroidId() {
         return Settings.Secure.getString(AppSettings.getInstance().getContentResolver(),
