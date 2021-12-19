@@ -458,6 +458,7 @@
     <string name="txt_timestamp_epoch">Timestamp (epoch)</string>
     <string name="txt_starttimestamp_epoch">Start timestamp (epoch)</string>
     <string name="txt_battery">Battery</string>
+    <string name="txt_battery_charging">Charging</string>
     <string name="customurl_http_body">HTTP Body</string>
     <string name="customurl_http_headers">HTTP Headers</string>
     <string name="customurl_http_method">HTTP Method</string>

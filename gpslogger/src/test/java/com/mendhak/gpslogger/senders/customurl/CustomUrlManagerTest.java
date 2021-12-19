@@ -206,7 +206,7 @@ public class CustomUrlManagerTest {
                 .withTime(1457205869949l).build();
         CustomUrlManager manager = new CustomUrlManager(null);
         String expected = "http://192.168.1.65:8000/test?lat=12.193&lon=19.456&fn=20170527abc&batt=81.0&charging=true";
-        String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&fn=%FILENAME&batt=%BATT&charging=%CHARGING";
+        String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&fn=%FILENAME&batt=%BATT&charging=%ISCHARGING";
         assertThat("Profile name is provided", manager.getFormattedTextblock(urlTemplate,
                 new SerializableLocation(loc), "", "", 81, true, "",
                 1495884681283l, "20170527abc", "Default Profile",

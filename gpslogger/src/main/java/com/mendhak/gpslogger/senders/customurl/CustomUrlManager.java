@@ -218,7 +218,7 @@ public class CustomUrlManager extends FileSender {
         logUrl = logUrl.replaceAll("(?i)%date", String.valueOf(Strings.getIsoCalendarDate(new Date(sLoc.getTime()))));
         logUrl = logUrl.replaceAll("(?i)%starttimestamp", String.valueOf(sessionStartTimeStamp/1000));
         logUrl = logUrl.replaceAll("(?i)%batt", String.valueOf(batteryLevel));
-        logUrl = logUrl.replaceAll("(?i)%charging", String.valueOf(isCharging));
+        logUrl = logUrl.replaceAll("(?i)%ischarging", String.valueOf(isCharging));
         logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));
         logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(buildSerial));
         logUrl = logUrl.replaceAll("(?i)%act", ""); //Activity detection was removed, but keeping this here for backward compatibility.
