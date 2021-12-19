@@ -42,6 +42,7 @@ public class SerializableLocation implements Serializable {
     private String pdop;
     private String description;
     private int batteryLevel;
+    private boolean batteryCharging;
     private String fileName;
     private long startTimeStamp;
     private double distance;
@@ -70,6 +71,7 @@ public class SerializableLocation implements Serializable {
 
         if(loc.getExtras() != null){
             batteryLevel = loc.getExtras().getInt(BundleConstants.BATTERY_LEVEL, 0);
+            batteryCharging = loc.getExtras().getBoolean(BundleConstants.BATTERY_CHARGING, false);
             startTimeStamp = loc.getExtras().getLong(BundleConstants.STARTTIMESTAMP, 0);
             distance = loc.getExtras().getDouble(BundleConstants.DISTANCE, 0);
         }
@@ -182,6 +184,8 @@ public class SerializableLocation implements Serializable {
     public String getDescription() { return description; }
 
     public int getBatteryLevel() { return batteryLevel; }
+
+    public boolean getBatteryCharging() { return batteryCharging; }
 
     public String getFileName() { return fileName; }
 

@@ -24,6 +24,7 @@ public class BundleConstants {
     public static final String RAW_MAGNETICFIELD = "RAW_MAGNETICFIELD";
 
     public static final String BATTERY_LEVEL = "BATTERY_LEVEL";
+    public static final String BATTERY_CHARGING = "BATTERY_CHARGING";
     public static final String ANNOTATION = "ANNOTATION";
     public static final String TIME_WITH_OFFSET = "TIME_WITH_OFFSET";
     public static final String DISTANCE = "DISTANCE";

@@ -102,6 +102,10 @@ public class CustomUrlManager extends FileSender {
                     b.putInt(BundleConstants.BATTERY_LEVEL, Integer.parseInt(record.get(CSVFileLogger.FIELDS.BATTERY)));
                 }
 
+                if(!Strings.isNullOrEmpty(record.get(CSVFileLogger.FIELDS.BATTERY_CHARGING))){
+                    b.putBoolean(BundleConstants.BATTERY_CHARGING, Boolean.parseBoolean(record.get(CSVFileLogger.FIELDS.BATTERY_CHARGING)));
+                }
+
                 b.putString(BundleConstants.ANNOTATION, record.get(CSVFileLogger.FIELDS.ANNOTATION));
                 b.putString(BundleConstants.TIME_WITH_OFFSET, record.get(CSVFileLogger.FIELDS.TIME_WITH_OFFSET));
 
@@ -171,7 +175,9 @@ public class CustomUrlManager extends FileSender {
 
 
     private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {
-        return getFormattedTextblock(textToFormat, loc, loc.getDescription(), Systems.getAndroidId(), loc.getBatteryLevel(), false, Strings.getBuildSerial(), loc.getStartTimeStamp(), loc.getFileName(), loc.getProfileName(), loc.getDistance());
+        return getFormattedTextblock(textToFormat, loc, loc.getDescription(), Systems.getAndroidId(),
+                loc.getBatteryLevel(), loc.getBatteryCharging(), Strings.getBuildSerial(),
+                loc.getStartTimeStamp(), loc.getFileName(), loc.getProfileName(), loc.getDistance());
     }
 
     public String getFormattedTextblock(String customLoggingUrl,

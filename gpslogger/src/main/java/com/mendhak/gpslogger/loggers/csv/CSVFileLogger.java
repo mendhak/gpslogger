@@ -66,9 +66,11 @@ public class CSVFileLogger implements FileLogger {
         public static final String DISTANCE = "distance";
         public static final String START_TIMESTAMP_MILLIS = "starttimestamp_ms";
         public static final String PROFILE_NAME = "profile_name";
+        public static final String BATTERY_CHARGING = "battery_charging";
     }
 
     private final Integer batteryLevel;
+    private final boolean batteryCharging;
     private File file;
     protected final String name = "TXT";
 
@@ -76,6 +78,7 @@ public class CSVFileLogger implements FileLogger {
         this.file = file;
         BatteryInfo batteryInfo = Systems.getBatteryInfo(context);
         this.batteryLevel = batteryInfo.BatteryLevel;
+        this.batteryCharging = batteryInfo.IsCharging;
     }
 
     @Override
@@ -109,7 +112,8 @@ public class CSVFileLogger implements FileLogger {
                 CSVFileLogger.FIELDS.TIME_WITH_OFFSET,
                 CSVFileLogger.FIELDS.DISTANCE,
                 CSVFileLogger.FIELDS.START_TIMESTAMP_MILLIS,
-                CSVFileLogger.FIELDS.PROFILE_NAME
+                CSVFileLogger.FIELDS.PROFILE_NAME,
+                CSVFileLogger.FIELDS.BATTERY_CHARGING
         };
     }
 
@@ -156,7 +160,8 @@ public class CSVFileLogger implements FileLogger {
                     Strings.getIsoDateTimeWithOffset(new Date(loc.getTime())),
                     applyDecimalComma(Session.getInstance().getTotalTravelled()),
                     Session.getInstance().getStartTimeStamp(),
-                    PreferenceHelper.getInstance().getCurrentProfileName()
+                    PreferenceHelper.getInstance().getCurrentProfileName(),
+                    batteryCharging
             );
         }
         out.close();
