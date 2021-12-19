@@ -1,5 +1,6 @@
 package com.mendhak.gpslogger.senders.customurl;
 
+import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 

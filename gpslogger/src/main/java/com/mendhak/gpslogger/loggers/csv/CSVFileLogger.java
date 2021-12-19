@@ -19,6 +19,7 @@
 
 package com.mendhak.gpslogger.loggers.csv;
 
+import android.content.Context;
 import android.location.Location;
 import androidx.annotation.Nullable;
 
@@ -27,6 +28,7 @@ import com.mendhak.gpslogger.common.Maths;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.loggers.Files;
 import org.apache.commons.csv.CSVFormat;
@@ -69,9 +71,9 @@ public class CSVFileLogger implements FileLogger {
     private File file;
     protected final String name = "TXT";
 
-    public CSVFileLogger(File file, @Nullable Integer batteryLevel) {
+    public CSVFileLogger(File file, Context context) {
         this.file = file;
-        this.batteryLevel = batteryLevel;
+        this.batteryLevel = Systems.getBatteryLevel(context);
     }
 
     @Override

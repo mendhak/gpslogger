@@ -24,7 +24,6 @@ import android.location.Location;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
-import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.loggers.csv.CSVFileLogger;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlLogger;
 import com.mendhak.gpslogger.loggers.geojson.GeoJSONLogger;
@@ -56,8 +55,6 @@ public class FileLoggerFactory {
             gpxFolder.mkdirs();
         }
 
-        int batteryLevel = Systems.getBatteryLevel(context);
-
         if (preferenceHelper.shouldLogToGpx()) {
             File gpxFile = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".gpx");
             if(preferenceHelper.shouldLogAsGpx11()) {
@@ -74,17 +71,17 @@ public class FileLoggerFactory {
 
         if (preferenceHelper.shouldLogToCSV()) {
             File file = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".csv");
-            loggers.add(new CSVFileLogger(file, batteryLevel));
+            loggers.add(new CSVFileLogger(file, context));
         }
 
         if (preferenceHelper.shouldLogToOpenGTS()) {
-            loggers.add(new OpenGTSLogger(context, batteryLevel));
+            loggers.add(new OpenGTSLogger(context));
         }
 
         if (preferenceHelper.shouldLogToCustomUrl()) {
 
             loggers.add(new CustomUrlLogger(preferenceHelper.getCustomLoggingUrl(),
-                    batteryLevel,
+                    context,
                     preferenceHelper.getCustomLoggingHTTPMethod(),
                     preferenceHelper.getCustomLoggingHTTPBody(),
                     preferenceHelper.getCustomLoggingHTTPHeaders(),
