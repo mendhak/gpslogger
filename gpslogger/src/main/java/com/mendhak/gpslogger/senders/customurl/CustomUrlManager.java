@@ -171,7 +171,7 @@ public class CustomUrlManager extends FileSender {
 
 
     private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {
-        return getFormattedTextblock(textToFormat, loc, loc.getDescription(), Systems.getAndroidId(), loc.getBatteryLevel(), Strings.getBuildSerial(), loc.getStartTimeStamp(), loc.getFileName(), loc.getProfileName(), loc.getDistance());
+        return getFormattedTextblock(textToFormat, loc, loc.getDescription(), Systems.getAndroidId(), loc.getBatteryLevel(), false, Strings.getBuildSerial(), loc.getStartTimeStamp(), loc.getFileName(), loc.getProfileName(), loc.getDistance());
     }
 
     public String getFormattedTextblock(String customLoggingUrl,
@@ -179,6 +179,7 @@ public class CustomUrlManager extends FileSender {
                                         String description,
                                         String androidId,
                                         float batteryLevel,
+                                        boolean isCharging,
                                         String buildSerial,
                                         long sessionStartTimeStamp,
                                         String fileName,
@@ -211,6 +212,7 @@ public class CustomUrlManager extends FileSender {
         logUrl = logUrl.replaceAll("(?i)%date", String.valueOf(Strings.getIsoCalendarDate(new Date(sLoc.getTime()))));
         logUrl = logUrl.replaceAll("(?i)%starttimestamp", String.valueOf(sessionStartTimeStamp/1000));
         logUrl = logUrl.replaceAll("(?i)%batt", String.valueOf(batteryLevel));
+        logUrl = logUrl.replaceAll("(?i)%charging", String.valueOf(isCharging));
         logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));
         logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(buildSerial));
         logUrl = logUrl.replaceAll("(?i)%act", ""); //Activity detection was removed, but keeping this here for backward compatibility.

@@ -42,11 +42,13 @@ public class CustomUrlLogger implements FileLogger {
     private final String httpHeaders;
     private final String basicAuthUsername;
     private final String basicAuthPassword;
+    private final boolean batteryCharging;
 
     public CustomUrlLogger(String customLoggingUrl, Context context, String httpMethod, String httpBody, String httpHeaders, String basicAuthUsername, String basicAuthPassword) {
         this.customLoggingUrl = customLoggingUrl;
         BatteryInfo batteryInfo = Systems.getBatteryInfo(context);
         this.batteryLevel = batteryInfo.BatteryLevel;
+        this.batteryCharging = batteryInfo.IsCharging;
         this.httpMethod = httpMethod;
         this.httpBody = httpBody;
         this.httpHeaders = httpHeaders;
@@ -69,19 +71,19 @@ public class CustomUrlLogger implements FileLogger {
         SerializableLocation sLoc = new SerializableLocation(loc);
 
         String finalUrl = manager.getFormattedTextblock(customLoggingUrl, sLoc, description,
-                Systems.getAndroidId(), batteryLevel, Strings.getBuildSerial(),
+                Systems.getAndroidId(), batteryLevel, batteryCharging, Strings.getBuildSerial(),
                 Session.getInstance().getStartTimeStamp(),
                 Session.getInstance().getCurrentFormattedFileName(),
                 PreferenceHelper.getInstance().getCurrentProfileName(),
                 Session.getInstance().getTotalTravelled());
         String finalBody = manager.getFormattedTextblock(httpBody, sLoc, description,
-                Systems.getAndroidId(), batteryLevel, Strings.getBuildSerial(),
+                Systems.getAndroidId(), batteryLevel, batteryCharging, Strings.getBuildSerial(),
                 Session.getInstance().getStartTimeStamp(),
                 Session.getInstance().getCurrentFormattedFileName(),
                 PreferenceHelper.getInstance().getCurrentProfileName(),
                 Session.getInstance().getTotalTravelled());
         String finalHeaders = manager.getFormattedTextblock(httpHeaders, sLoc, description,
-                Systems.getAndroidId(), batteryLevel, Strings.getBuildSerial(),
+                Systems.getAndroidId(), batteryLevel, batteryCharging, Strings.getBuildSerial(),
                 Session.getInstance().getStartTimeStamp(),
                 Session.getInstance().getCurrentFormattedFileName(),
                 PreferenceHelper.getInstance().getCurrentProfileName(),
