@@ -335,16 +335,31 @@ public class GpsMainActivity extends AppCompatActivity
             return true;
         }
 
-        if(dialogTag.equalsIgnoreCase("customfilename") && which == BUTTON_POSITIVE){
-            String enteredText = extras.getString("customfilename");
-            String originalFileName = preferenceHelper.getCustomFileName();
+        if(dialogTag.equalsIgnoreCase("shouldpromptbeforelogging") && which == BUTTON_POSITIVE){
 
-            if(!originalFileName.equalsIgnoreCase(enteredText)){
-                preferenceHelper.setCustomFileName(enteredText);
+            if(extras.containsKey(PreferenceNames.CUSTOM_FILE_NAME)){
+                String chosenFileName = extras.getString(PreferenceNames.CUSTOM_FILE_NAME);
+                if(!preferenceHelper.getCustomFileName().equalsIgnoreCase(chosenFileName)){
+                    preferenceHelper.setCustomFileName(chosenFileName);
+                    Files.addItemToCacheFile(chosenFileName, PreferenceNames.CUSTOM_FILE_NAME, GpsMainActivity.this);
+                }
+            }
+
+            if(extras.containsKey(PreferenceNames.OPENSTREETMAP_TAGS)){
+                String chosenOsmTags = extras.getString(PreferenceNames.OPENSTREETMAP_TAGS);
+                if(!preferenceHelper.getOSMTags().equalsIgnoreCase(chosenOsmTags)){
+                    preferenceHelper.setOSMTags(chosenOsmTags);
+                }
+            }
+
+            if(extras.containsKey(PreferenceNames.OPENSTREETMAP_DESCRIPTION)){
+                String chosenOsmDescription = extras.getString(PreferenceNames.OPENSTREETMAP_DESCRIPTION);
+                if(!preferenceHelper.getOSMDescription().equalsIgnoreCase(chosenOsmDescription)){
+                    preferenceHelper.setOSMDescription(chosenOsmDescription);
+                }
             }
 
             getCurrentFragment().toggleLogging();
-            Files.addItemToCacheFile(enteredText, "customfilename", GpsMainActivity.this);
             return true;
         }
 

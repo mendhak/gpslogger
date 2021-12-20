@@ -23,11 +23,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.CommandEvents;
@@ -37,6 +37,7 @@ import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.Dialogs;
 import de.greenrobot.event.EventBus;
 import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.FormElement;
 import eltos.simpledialogfragment.form.Hint;
 import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
@@ -112,26 +113,41 @@ public abstract class GenericViewFragment extends Fragment {
             return;
         }
 
+        ArrayList<FormElement> formElements = new ArrayList<>();
+
+        //If the user needs to be prompted about custom file name, build some form elements for it.
         if (preferenceHelper.shouldCreateCustomFile() && preferenceHelper.shouldAskCustomFileNameEachTime()) {
+            formElements.add(Hint.plain(R.string.new_file_custom_title));
+            formElements.add(Hint.plain(R.string.new_file_custom_message));
 
-            //Result handled in  GPSMainactivity onResult.
-            //Dialogs.autoSuggestDialog( (FragmentActivity) getActivity(),"customfilename", getString(R.string.new_file_custom_title), "", preferenceHelper.getCustomFileName());
+            final List<String> cachedList = Files.getListFromCacheFile(PreferenceNames.CUSTOM_FILE_NAME, getActivity());
+            formElements.add(Input.plain(PreferenceNames.CUSTOM_FILE_NAME)
+                    .suggest(new ArrayList<>(cachedList))
+                    .text(preferenceHelper.getCustomFileName()));
 
-            final List<String> cachedList = Files.getListFromCacheFile("customfilename", getActivity());
+        }
+
+        //If the user needs to be prompted about OpenStreetMap settings, build some form elements for it.
+        if(preferenceHelper.isAutoSendEnabled() && preferenceHelper.isOsmAutoSendEnabled()){
+            formElements.add(Hint.plain(R.string.osm_setup_title));
+            formElements.add(Input.plain(PreferenceNames.OPENSTREETMAP_DESCRIPTION)
+                    .hint(getString(R.string.osm_description))
+                    .text(preferenceHelper.getOSMDescription()));
+            formElements.add(Input.plain(PreferenceNames.OPENSTREETMAP_TAGS)
+                    .hint(R.string.osm_tags)
+                    .text(preferenceHelper.getOSMTags()));
+        }
+
+        //If the user needs to be prompted about any of the above, it's time to show a dialog
+        //The result is handled in GPSMainactivity onResult.
+        if(formElements.size() > 0){
 
             SimpleFormDialog.build()
-                    .fields(
-                            Hint.plain(R.string.new_file_custom_title),
-                            Hint.plain(R.string.new_file_custom_message),
-                            Input.plain("customfilename")
-                                    .suggest(new ArrayList<>(cachedList))
-                                    .text(preferenceHelper.getCustomFileName())
-
-                    )
-                    //.title(getString(R.string.new_file_custom_title))
-                    .show(getActivity(), "customfilename");
-
-        } else {
+                    .fields(formElements.toArray(new FormElement[0]))
+                    .show(getActivity(), "shouldpromptbeforelogging");
+        }
+        //Else it's just normal logging.
+        else {
             if(!session.isStarted()){
                 Intent serviceIntent = new Intent(getActivity().getApplicationContext(), GpsLoggingService.class);
                 ContextCompat.startForegroundService(getActivity().getApplicationContext(), serviceIntent);
