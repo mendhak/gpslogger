@@ -254,9 +254,9 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
             chooser.setOnMultipleSelectListener(selectedFilePaths -> {
                 Dialogs.progress(getActivity(), getString(R.string.please_wait));
                 for(String filePath : selectedFilePaths){
-                    LOG.debug(filePath);
                     File f = new File(filePath);
                     f.delete();
+                    LOG.warn("Deleted file: " + f.getName());
                 }
                 Dialogs.hideProgress();
             });
