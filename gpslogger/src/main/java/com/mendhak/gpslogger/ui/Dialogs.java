@@ -84,14 +84,18 @@ public class Dialogs {
     }
 
     public static StorageChooser directoryChooser(Activity activity){
-        return storageChooser(StorageChooser.DIRECTORY_CHOOSER, (FragmentActivity) activity);
+        return storageChooser(StorageChooser.DIRECTORY_CHOOSER, false, (FragmentActivity) activity);
     }
 
     public static StorageChooser filePicker(FragmentActivity activity){
-        return storageChooser(StorageChooser.FILE_PICKER, (FragmentActivity) activity);
+        return storageChooser(StorageChooser.FILE_PICKER, false, (FragmentActivity) activity);
     }
 
-    private static StorageChooser storageChooser(String chooserType, FragmentActivity activity){
+    public static StorageChooser multiFilePicker(FragmentActivity activity){
+        return storageChooser(StorageChooser.FILE_PICKER, true, (FragmentActivity) activity);
+    }
+
+    private static StorageChooser storageChooser(String chooserType, boolean allowMultiSelect, FragmentActivity activity){
         com.codekidlabs.storagechooser.Content scContent = new com.codekidlabs.storagechooser.Content();
         scContent.setCreateLabel(activity.getString(R.string.storage_chooser_create_label));
         scContent.setInternalStorageText(activity.getString(R.string.storage_chooser_internal_storage_text));
@@ -123,7 +127,7 @@ public class Dialogs {
 
         boolean showOverview = Files.hasSDCard(activity);
 
-        StorageChooser chooser = new StorageChooser.Builder()
+        StorageChooser.Builder builder = new StorageChooser.Builder()
                 .withActivity(activity)
                 .withFragmentManager(activity.getFragmentManager())
                 .withMemoryBar(true)  //Just a bit fancy, a bar.
@@ -132,10 +136,15 @@ public class Dialogs {
                 .skipOverview(!showOverview) //Always show the storage chooser. Maybe this should be smarter?
                 .setTheme(scTheme) //Make it bluish
                 .withContent(scContent) //Localizations
-                .disableMultiSelect() //Only allow one thing to be chosen
                 .allowAddFolder(true) //Let user create a folder using the + icon at the top
                 .setType(chooserType) //File picker or folder picker
-                .build();
+                ;
+
+        if(!allowMultiSelect){
+            builder.disableMultiSelect();
+        }
+
+        StorageChooser chooser = builder.build();
 
         return chooser;
     }
