@@ -37,8 +37,14 @@ import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.Dialogs;
 import de.greenrobot.event.EventBus;
 import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.Hint;
+import eltos.simpledialogfragment.form.Input;
+import eltos.simpledialogfragment.form.SimpleFormDialog;
 
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -108,7 +114,22 @@ public abstract class GenericViewFragment extends Fragment {
 
         if (preferenceHelper.shouldCreateCustomFile() && preferenceHelper.shouldAskCustomFileNameEachTime()) {
 
-            Dialogs.autoSuggestDialog( (FragmentActivity) getActivity(),"customfilename", getString(R.string.new_file_custom_title), "", preferenceHelper.getCustomFileName());
+            //Result handled in  GPSMainactivity onResult.
+            //Dialogs.autoSuggestDialog( (FragmentActivity) getActivity(),"customfilename", getString(R.string.new_file_custom_title), "", preferenceHelper.getCustomFileName());
+
+            final List<String> cachedList = Files.getListFromCacheFile("customfilename", getActivity());
+
+            SimpleFormDialog.build()
+                    .fields(
+                            Hint.plain(R.string.new_file_custom_title),
+                            Hint.plain(R.string.new_file_custom_message),
+                            Input.plain("customfilename")
+                                    .suggest(new ArrayList<>(cachedList))
+                                    .text(preferenceHelper.getCustomFileName())
+
+                    )
+                    //.title(getString(R.string.new_file_custom_title))
+                    .show(getActivity(), "customfilename");
 
         } else {
             if(!session.isStarted()){
