@@ -435,18 +435,18 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
     // Might need this - if the notification keeps reappearing - Issue #933
-//    @Override
-//    protected void onPause() {
-//        stopAndUnbindServiceIfRequired();
-//        super.onPause();
-//    }
-//
-//    protected void onStop() {
-//        super.onStop();
-//        if (!isFinishing()) {
-//            stopAndUnbindServiceIfRequired();
-//        }
-//    }
+    @Override
+    protected void onPause() {
+        stopAndUnbindServiceIfRequired();
+        super.onPause();
+    }
+
+    protected void onStop() {
+        super.onStop();
+        if (!isFinishing()) {
+            stopAndUnbindServiceIfRequired();
+        }
+    }
 
     @Override
     protected void onResume() {
