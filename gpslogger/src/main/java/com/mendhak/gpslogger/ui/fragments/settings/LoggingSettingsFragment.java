@@ -117,6 +117,8 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
         findPreference("log_plain_text_csv_advanced").setOnPreferenceClickListener(this);
         setPreferenceCsvSummary(preferenceHelper.getCSVDelimiter(), preferenceHelper.shouldCSVUseCommaInsteadOfPoint());
 
+        findPreference("delete_files").setOnPreferenceClickListener(this);
+
     }
 
     private void setPreferenceCsvSummary(String delimiter, Boolean useComma){
@@ -245,6 +247,21 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
                                     .required()
                     )
                     .show(this,PreferenceNames.CUSTOM_FILE_NAME);
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_DELETE_FILES)){
+            StorageChooser chooser = Dialogs.multiFilePicker(getActivity(), PreferenceHelper.getInstance().getGpsLoggerFolder());
+            chooser.setOnMultipleSelectListener(selectedFilePaths -> {
+                Dialogs.progress(getActivity(), getString(R.string.please_wait));
+                for(String filePath : selectedFilePaths){
+                    LOG.debug(filePath);
+                    File f = new File(filePath);
+                    f.delete();
+                }
+                Dialogs.hideProgress();
+            });
+
+            chooser.show();
         }
 
         return false;

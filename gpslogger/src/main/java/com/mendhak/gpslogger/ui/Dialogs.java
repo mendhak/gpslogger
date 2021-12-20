@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.codekidlabs.storagechooser.StorageChooser;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.loggers.Files;
@@ -84,18 +85,18 @@ public class Dialogs {
     }
 
     public static StorageChooser directoryChooser(Activity activity){
-        return storageChooser(StorageChooser.DIRECTORY_CHOOSER, false, (FragmentActivity) activity);
+        return storageChooser(StorageChooser.DIRECTORY_CHOOSER, false, null, (FragmentActivity) activity);
     }
 
     public static StorageChooser filePicker(FragmentActivity activity){
-        return storageChooser(StorageChooser.FILE_PICKER, false, (FragmentActivity) activity);
+        return storageChooser(StorageChooser.FILE_PICKER, false, null, (FragmentActivity) activity);
     }
 
-    public static StorageChooser multiFilePicker(FragmentActivity activity){
-        return storageChooser(StorageChooser.FILE_PICKER, true, (FragmentActivity) activity);
+    public static StorageChooser multiFilePicker(FragmentActivity activity, String startingPath){
+        return storageChooser(StorageChooser.FILE_PICKER, true, startingPath, (FragmentActivity) activity);
     }
 
-    private static StorageChooser storageChooser(String chooserType, boolean allowMultiSelect, FragmentActivity activity){
+    private static StorageChooser storageChooser(String chooserType, boolean allowMultiSelect, String startingPath, FragmentActivity activity){
         com.codekidlabs.storagechooser.Content scContent = new com.codekidlabs.storagechooser.Content();
         scContent.setCreateLabel(activity.getString(R.string.storage_chooser_create_label));
         scContent.setInternalStorageText(activity.getString(R.string.storage_chooser_internal_storage_text));
@@ -139,6 +140,10 @@ public class Dialogs {
                 .allowAddFolder(true) //Let user create a folder using the + icon at the top
                 .setType(chooserType) //File picker or folder picker
                 ;
+
+        if(!Strings.isNullOrEmpty(startingPath)){
+            builder.skipOverview(true, startingPath);
+        }
 
         if(!allowMultiSelect){
             builder.disableMultiSelect();

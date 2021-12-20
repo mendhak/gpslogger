@@ -119,6 +119,11 @@
             android:defaultValue=","
             app:iconSpaceReserved="false" />
 
+        <Preference
+            android:title="Delete selected files"
+            android:key="delete_files"
+            app:iconSpaceReserved="false" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
