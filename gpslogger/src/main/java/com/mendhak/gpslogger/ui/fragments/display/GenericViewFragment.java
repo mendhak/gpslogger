@@ -144,6 +144,7 @@ public abstract class GenericViewFragment extends Fragment {
 
             SimpleFormDialog.build()
                     .fields(formElements.toArray(new FormElement[0]))
+                    .pos(R.string.btn_start_logging)
                     .show(getActivity(), "shouldpromptbeforelogging");
         }
         //Else it's just normal logging.
