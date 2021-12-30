@@ -20,7 +20,7 @@ public class DropBoxManagerTest {
     @Test
     public void IsAvailable_WhenKeyPresent_ReturnsTrue(){
         PreferenceHelper pm = mock(PreferenceHelper.class);
-        when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
+        when(pm.getDropboxRefreshToken()).thenReturn("aaaaaa");
 
         DropBoxManager dropBoxManager = new DropBoxManager(pm);
         assertThat("All values present means is available", dropBoxManager.isAvailable(), is(true));
@@ -29,7 +29,7 @@ public class DropBoxManagerTest {
     @Test
     public void IsAvailable_WithKeyButAutoSendDisabled_ReturnsTrue(){
         PreferenceHelper pm = mock(PreferenceHelper.class);
-        when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
+        when(pm.getDropboxRefreshToken()).thenReturn("aaaaaa");
 
         DropBoxManager dropBoxManager = new DropBoxManager(pm);
         assertThat("Allow normal sending even if autosend disabled", dropBoxManager.isAvailable(), is(true));
@@ -44,7 +44,7 @@ public class DropBoxManagerTest {
         DropBoxManager dropBoxManager = new DropBoxManager(pm);
         dropBoxManager.unLink();
 
-        verify(pm).setDropBoxAccessKeyName(null);
+        verify(pm).setDropboxRefreshToken(null);
     }
 
 
@@ -64,7 +64,7 @@ public class DropBoxManagerTest {
     @Test
     public void IsAutoSendAvailable_WhenUserCheckedAutoSend_IsAvailable(){
         PreferenceHelper pm = mock(PreferenceHelper.class);
-        when(pm.getDropBoxAccessKeyName()).thenReturn("aaaaaa");
+        when(pm.getDropboxRefreshToken()).thenReturn("aaaaaa");
         when(pm.isDropboxAutoSendEnabled()).thenReturn(true);
 
         DropBoxManager dropBoxManager = new DropBoxManager(pm);

@@ -29,9 +29,11 @@ import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
 import com.dropbox.core.DbxRequestConfig;
+import com.dropbox.core.oauth.DbxCredential;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.WriteMode;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
@@ -70,8 +72,19 @@ public class DropboxJob extends Job {
             LOG.debug("Beginning upload to dropbox...");
             InputStream inputStream = new FileInputStream(gpxFile);
             DbxRequestConfig requestConfig = DbxRequestConfig.newBuilder("GPSLogger").build();
-            DbxClientV2 mDbxClient = new DbxClientV2(requestConfig, PreferenceHelper.getInstance().getDropBoxAccessKeyName());
+            DbxClientV2 mDbxClient;
+
+            if(!Strings.isNullOrEmpty(PreferenceHelper.getInstance().getDropboxRefreshToken())){
+                DbxCredential dropboxCred = DbxCredential.Reader.readFully(PreferenceHelper.getInstance().getDropboxRefreshToken());
+                mDbxClient = new DbxClientV2(requestConfig, dropboxCred);
+            }
+            else {
+                //For existing users that already have long lived access tokens stored.
+                mDbxClient = new DbxClientV2(requestConfig, PreferenceHelper.getInstance().getDropboxLongLivedAccessKey());
+            }
+
             mDbxClient.files().uploadBuilder("/" + fileName).withMode(WriteMode.OVERWRITE).uploadAndFinish(inputStream);
+
             EventBus.getDefault().post(new UploadEvents.Dropbox().succeeded());
             LOG.info("Dropbox - file uploaded");
         } catch (Exception e) {

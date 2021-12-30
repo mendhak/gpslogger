@@ -63,29 +63,26 @@ public class PreferenceHelper {
         return prefs.getBoolean(PreferenceNames.AUTOSEND_DROPBOX_ENABLED, false);
     }
 
-    public  String getDropBoxAccessKeyName() {
-        return prefs.getString(PreferenceNames.DROPBOX_ACCESS_KEY, null);
-    }
-
-    public  void setDropBoxAccessKeyName(String key) {
-        prefs.edit().putString(PreferenceNames.DROPBOX_ACCESS_KEY, key).apply();
-    }
-
-
     /**
-     * Legacy - only used to check if user is still on Oauth1 and to upgrade them.
-     * @return
+     * Long lived tokens were deprecated in 2021, but some users might still have these stored.
+     * https://developers.dropbox.com/oauth-guide
      */
-    public String getDropBoxOauth1Secret() {
-        return prefs.getString(PreferenceNames.DROPBOX_ACCESS_SECRET, null);
+    public String getDropboxLongLivedAccessKey() {
+        return prefs.getString(PreferenceNames.DROPBOX_LONG_LIVED_ACCESS_TOKEN, null);
     }
 
-    public void setDropBoxOauth1Secret(String secret) {
-        prefs.edit().putString(PreferenceNames.DROPBOX_ACCESS_SECRET, secret).apply();
+    public void setDropboxLongLivedAccessKey(String key) {
+        prefs.edit().putString(PreferenceNames.DROPBOX_LONG_LIVED_ACCESS_TOKEN, key).apply();
     }
 
 
+    public String getDropboxRefreshToken(){
+        return prefs.getString(PreferenceNames.DROPBOX_REFRESH_TOKEN, null);
+    }
 
+    public void setDropboxRefreshToken(String refreshToken){
+        prefs.edit().putString(PreferenceNames.DROPBOX_REFRESH_TOKEN, refreshToken).apply();
+    }
 
     /**
      * Whether automatic sending to email is enabled

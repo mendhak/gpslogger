@@ -21,20 +21,18 @@ package com.mendhak.gpslogger.senders.dropbox;
 
 
 import android.content.Context;
-import android.os.AsyncTask;
 
 import com.birbit.android.jobqueue.CancelResult;
 import com.birbit.android.jobqueue.JobManager;
 import com.birbit.android.jobqueue.TagConstraint;
 import com.dropbox.core.*;
 import com.dropbox.core.android.Auth;
+import com.dropbox.core.oauth.DbxCredential;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
-import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
-import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
 import java.io.File;
@@ -56,14 +54,15 @@ public class DropBoxManager extends FileSender {
      * @return True/False
      */
     public boolean isLinked() {
-        return !Strings.isNullOrEmpty(preferenceHelper.getDropBoxAccessKeyName());
+        return !Strings.isNullOrEmpty(preferenceHelper.getDropboxLongLivedAccessKey()) ||
+                !Strings.isNullOrEmpty(preferenceHelper.getDropboxRefreshToken());
     }
 
     public boolean finishAuthorization() {
         if(!isLinked()){
-            String accessToken = Auth.getOAuth2Token();
-            if(!Strings.isNullOrEmpty(accessToken)){
-                storeKeys(accessToken);
+            DbxCredential dbxCredential = Auth.getDbxCredential();
+            if(dbxCredential != null){
+                preferenceHelper.setDropboxRefreshToken(dbxCredential.toString());
                 return true;
             }
         }
@@ -71,26 +70,15 @@ public class DropBoxManager extends FileSender {
         return false;
     }
 
-
-    /**
-     * Shows keeping the access keys returned from Trusted Authenticator in a local
-     * store, rather than storing user name & password, and re-authenticating each
-     * time (which is not to be done, ever).
-     *
-     * @param key    The Access Key
-     */
-    private void storeKeys(String key) {
-        preferenceHelper.setDropBoxAccessKeyName(key);
-    }
-
     public void startAuthentication(Context context) {
-
-        Auth.startOAuth2Authentication(context, "0unjsn38gpe3rwv");
+        DbxRequestConfig dbxRequestConfig =  DbxRequestConfig.newBuilder("gpslogger").build();
+        Auth.startOAuth2PKCE(context, "0unjsn38gpe3rwv", dbxRequestConfig);
     }
 
     public void unLink() {
-        preferenceHelper.setDropBoxAccessKeyName(null);
-        preferenceHelper.setDropBoxOauth1Secret(null);
+        //Not used anymore but delete this if existing Long Lived Token users are clearing authorization
+        preferenceHelper.setDropboxLongLivedAccessKey(null);
+        preferenceHelper.setDropboxRefreshToken(null);
     }
 
     @Override
@@ -103,7 +91,7 @@ public class DropBoxManager extends FileSender {
 
     @Override
     public boolean isAvailable() {
-        return isLinked() && preferenceHelper.getDropBoxAccessKeyName() != null;
+        return isLinked();
     }
 
     @Override

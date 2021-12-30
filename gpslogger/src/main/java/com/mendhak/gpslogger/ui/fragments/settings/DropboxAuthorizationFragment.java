@@ -51,22 +51,28 @@ public class DropboxAuthorizationFragment extends PreferenceFragmentCompat imple
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Preference pref = findPreference("dropbox_resetauth");
-
         manager = new DropBoxManager(PreferenceHelper.getInstance());
 
-        if (manager.isLinked()) {
-            pref.setTitle(R.string.osm_resetauth);
-            pref.setSummary(R.string.dropbox_unauthorize_description);
-        } else {
-            pref.setTitle(R.string.osm_lbl_authorize);
-            pref.setSummary(R.string.dropbox_authorize_description);
-        }
+        resetPreferenceDescriptions();
 
-        pref.setOnPreferenceClickListener(this);
+        findPreference("dropbox_resetauth").setOnPreferenceClickListener(this);
         findPreference("dropbox_test_upload").setOnPreferenceClickListener(this);
-        registerEventBus();
 
+        registerEventBus();
+    }
+
+    private void resetPreferenceDescriptions(){
+        Preference resetAuthPref = findPreference("dropbox_resetauth");
+        if (manager.isLinked()) {
+            resetAuthPref.setTitle(R.string.osm_resetauth);
+            resetAuthPref.setSummary(R.string.dropbox_unauthorize_description);
+            findPreference("dropbox_test_upload").setEnabled(true);
+        } else {
+            resetAuthPref.setTitle(R.string.osm_lbl_authorize);
+            resetAuthPref.setSummary(R.string.dropbox_authorize_description);
+            findPreference("dropbox_test_upload").setEnabled(false);
+
+        }
     }
 
     @Override
@@ -84,8 +90,7 @@ public class DropboxAuthorizationFragment extends PreferenceFragmentCompat imple
 
         try {
             if (manager.finishAuthorization()) {
-                startActivity(new Intent(getActivity(), GpsMainActivity.class));
-                getActivity().finish();
+                resetPreferenceDescriptions();
             }
         } catch (Exception e) {
             Dialogs.alert(getString(R.string.error), getString(R.string.dropbox_couldnotauthorize),
@@ -106,8 +111,7 @@ public class DropboxAuthorizationFragment extends PreferenceFragmentCompat imple
             // This logs you out if you're logged in, or vice versa
             if (manager.isLinked()) {
                 manager.unLink();
-                startActivity(new Intent(getActivity(), GpsMainActivity.class));
-                getActivity().finish();
+                resetPreferenceDescriptions();
             } else {
                 try {
                     manager.startAuthentication(this.getActivity());
