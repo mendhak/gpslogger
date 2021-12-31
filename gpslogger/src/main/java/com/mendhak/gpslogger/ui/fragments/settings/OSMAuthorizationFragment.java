@@ -181,8 +181,7 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
                 preferenceHelper.setOSMRequestToken("");
                 preferenceHelper.setOSMRequestTokenSecret("");
 
-                startActivity(new Intent(getActivity(), GpsMainActivity.class));
-                getActivity().finish();
+                setPreferencesState();
 
             } else {
 

@@ -21,14 +21,12 @@
 
 package com.mendhak.gpslogger.ui.fragments.settings;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -53,7 +51,7 @@ public class DropboxAuthorizationFragment extends PreferenceFragmentCompat imple
 
         manager = new DropBoxManager(PreferenceHelper.getInstance());
 
-        resetPreferenceDescriptions();
+        setPreferencesState();
 
         findPreference("dropbox_resetauth").setOnPreferenceClickListener(this);
         findPreference("dropbox_test_upload").setOnPreferenceClickListener(this);
@@ -61,7 +59,7 @@ public class DropboxAuthorizationFragment extends PreferenceFragmentCompat imple
         registerEventBus();
     }
 
-    private void resetPreferenceDescriptions(){
+    private void setPreferencesState(){
         Preference resetAuthPref = findPreference("dropbox_resetauth");
         if (manager.isLinked()) {
             resetAuthPref.setTitle(R.string.osm_resetauth);
@@ -90,7 +88,7 @@ public class DropboxAuthorizationFragment extends PreferenceFragmentCompat imple
 
         try {
             if (manager.finishAuthorization()) {
-                resetPreferenceDescriptions();
+                setPreferencesState();
             }
         } catch (Exception e) {
             Dialogs.alert(getString(R.string.error), getString(R.string.dropbox_couldnotauthorize),
@@ -111,7 +109,7 @@ public class DropboxAuthorizationFragment extends PreferenceFragmentCompat imple
             // This logs you out if you're logged in, or vice versa
             if (manager.isLinked()) {
                 manager.unLink();
-                resetPreferenceDescriptions();
+                setPreferencesState();
             } else {
                 try {
                     manager.startAuthentication(this.getActivity());
