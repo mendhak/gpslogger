@@ -28,6 +28,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.codekidlabs.storagechooser.StorageChooser;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.loggers.Files;
@@ -40,6 +41,7 @@ import java.util.List;
 
 import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.SimpleProgressDialog;
+import eltos.simpledialogfragment.form.FormElement;
 import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
 
@@ -198,6 +200,21 @@ public class Dialogs {
                 )
                 .title(title)
                 .show(activity, cacheKey);
+    }
+
+    public static ArrayList<FormElement> getOpenStreetMapFormElementsForDialog(PreferenceHelper preferenceHelper){
+        ArrayList<FormElement> formElements = new ArrayList<>();
+        formElements.add(Input.plain(PreferenceNames.OPENSTREETMAP_DESCRIPTION)
+                .hint(R.string.osm_description)
+                .text(preferenceHelper.getOSMDescription()));
+        formElements.add(Input.plain(PreferenceNames.OPENSTREETMAP_TAGS)
+                .hint(R.string.osm_tags)
+                .text(preferenceHelper.getOSMTags()));
+        formElements.add(Input.spinner(PreferenceNames.OPENSTREETMAP_VISIBILITY)
+                .suggest(R.array.osm_visibility_choices)
+                .text(preferenceHelper.getOSMVisibility())
+                .hint(R.string.osm_visibility));
+        return formElements;
     }
 
 }

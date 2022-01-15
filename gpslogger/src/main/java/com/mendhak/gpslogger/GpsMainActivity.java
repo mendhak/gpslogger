@@ -276,14 +276,6 @@ public class GpsMainActivity extends AppCompatActivity
 
         if(dialogTag.equalsIgnoreCase("OSM_FILE_UPLOAD_DIALOG") && which == BUTTON_POSITIVE){
             //As a special case.  For OSM, let user set the description, tags, before passing details along to the actual upload step.
-            ArrayList<FormElement> formElements = new ArrayList<>();
-
-            formElements.add(Input.plain(PreferenceNames.OPENSTREETMAP_DESCRIPTION)
-                    .hint(getString(R.string.osm_description))
-                    .text(preferenceHelper.getOSMDescription()));
-            formElements.add(Input.plain(PreferenceNames.OPENSTREETMAP_TAGS)
-                    .hint(R.string.osm_tags)
-                    .text(preferenceHelper.getOSMTags()));
 
             Bundle extra = new Bundle();
             //Pass along the sender name and list of files, from the previous dialog.
@@ -293,7 +285,7 @@ public class GpsMainActivity extends AppCompatActivity
             SimpleFormDialog.build()
                     .title(R.string.osm_setup_title)
                     .extra(extra)
-                    .fields(formElements.toArray(new FormElement[0]))
+                    .fields(Dialogs.getOpenStreetMapFormElementsForDialog(preferenceHelper).toArray(new FormElement[0]))
                     .pos(R.string.ok)
                     .show(this, "FILE_UPLOAD_DIALOG");
             return true;
@@ -304,21 +296,7 @@ public class GpsMainActivity extends AppCompatActivity
             String senderName = extras.getString("SENDER_NAME");
 
             //As a special case, if it's an OpenStreetMap upload, save the preferences before uploading
-            if(senderName.equalsIgnoreCase(FileSender.SenderNames.OPENSTREETMAP)){
-                if(extras.containsKey(PreferenceNames.OPENSTREETMAP_TAGS)){
-                    String chosenOsmTags = extras.getString(PreferenceNames.OPENSTREETMAP_TAGS);
-                    if(!preferenceHelper.getOSMTags().equalsIgnoreCase(chosenOsmTags)){
-                        preferenceHelper.setOSMTags(chosenOsmTags);
-                    }
-                }
-
-                if(extras.containsKey(PreferenceNames.OPENSTREETMAP_DESCRIPTION)){
-                    String chosenOsmDescription = extras.getString(PreferenceNames.OPENSTREETMAP_DESCRIPTION);
-                    if(!preferenceHelper.getOSMDescription().equalsIgnoreCase(chosenOsmDescription)){
-                        preferenceHelper.setOSMDescription(chosenOsmDescription);
-                    }
-                }
-            }
+            setOpenStreetMapPreferencesFromDialogPrompt(extras);
 
             final File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
             List<File> chosenFiles = new ArrayList<>();
@@ -391,19 +369,8 @@ public class GpsMainActivity extends AppCompatActivity
                 }
             }
 
-            if(extras.containsKey(PreferenceNames.OPENSTREETMAP_TAGS)){
-                String chosenOsmTags = extras.getString(PreferenceNames.OPENSTREETMAP_TAGS);
-                if(!preferenceHelper.getOSMTags().equalsIgnoreCase(chosenOsmTags)){
-                    preferenceHelper.setOSMTags(chosenOsmTags);
-                }
-            }
 
-            if(extras.containsKey(PreferenceNames.OPENSTREETMAP_DESCRIPTION)){
-                String chosenOsmDescription = extras.getString(PreferenceNames.OPENSTREETMAP_DESCRIPTION);
-                if(!preferenceHelper.getOSMDescription().equalsIgnoreCase(chosenOsmDescription)){
-                    preferenceHelper.setOSMDescription(chosenOsmDescription);
-                }
-            }
+            setOpenStreetMapPreferencesFromDialogPrompt(extras);
 
             getCurrentFragment().toggleLogging();
             return true;
@@ -418,6 +385,29 @@ public class GpsMainActivity extends AppCompatActivity
         }
 
         return false;
+    }
+
+    private void setOpenStreetMapPreferencesFromDialogPrompt(Bundle extras) {
+        if(extras.containsKey(PreferenceNames.OPENSTREETMAP_TAGS)){
+            String chosenOsmTags = extras.getString(PreferenceNames.OPENSTREETMAP_TAGS);
+            if(!preferenceHelper.getOSMTags().equalsIgnoreCase(chosenOsmTags)){
+                preferenceHelper.setOSMTags(chosenOsmTags);
+            }
+        }
+
+        if(extras.containsKey(PreferenceNames.OPENSTREETMAP_DESCRIPTION)){
+            String chosenOsmDescription = extras.getString(PreferenceNames.OPENSTREETMAP_DESCRIPTION);
+            if(!preferenceHelper.getOSMDescription().equalsIgnoreCase(chosenOsmDescription)){
+                preferenceHelper.setOSMDescription(chosenOsmDescription);
+            }
+        }
+
+        if(extras.containsKey(PreferenceNames.OPENSTREETMAP_VISIBILITY)){
+            String chosenOsmVisibility = extras.getString(PreferenceNames.OPENSTREETMAP_VISIBILITY);
+            if(!preferenceHelper.getOSMVisibility().equalsIgnoreCase(chosenOsmVisibility)){
+                preferenceHelper.setOSMVisibility(chosenOsmVisibility);
+            }
+        }
     }
 
 

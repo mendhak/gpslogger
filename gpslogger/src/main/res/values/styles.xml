@@ -34,6 +34,7 @@
         <item name="material_drawer_header_selection_text">@color/primaryColorLight</item>
         <item name="material_drawer_selected">@color/divider</item>
 
+        <item name="colorSurface">#FFFFFF</item>
     </style>
 
     <!-- used by shortcut creation dialog -->

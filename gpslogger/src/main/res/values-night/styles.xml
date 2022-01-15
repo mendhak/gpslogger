@@ -11,6 +11,7 @@
         <item name="material_drawer_secondary_text">@color/secondaryColorText</item>
         <item name="material_drawer_selected">@color/accentColor</item>
         <item name="material_drawer_selected_text">@color/divider</item>
+        <item name="colorSurface">@color/primaryColor</item>
     </style>
 
 
