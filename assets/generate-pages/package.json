@@ -11,6 +11,6 @@
   "dependencies": {
     "async": "~2.0.1",
     "fs-extra": "~0.30.0",
-    "marked": "^0.3.19"
+    "marked": "^4.0.10"
   }
 }

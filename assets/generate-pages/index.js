@@ -106,9 +106,9 @@ function renderMainPage(callback){
           console.log('--------------------------------------------------------\r\n Processing ' + filename + '\r\n--------------------------------------------------------\r\n')
 
           if (!err) {
-            console.log(marked(content));
+            console.log(marked.parse(content));
             outFile.write("<section><div class='lead'>")
-            outFile.write( marked(content)+'\r\n');
+            outFile.write( marked.parse(content)+'\r\n');
             outFile.write("</div></section>\r\n\r\n");
           }
 
@@ -137,8 +137,8 @@ function renderFullPages(callback){
 
                 outFile.write(getTop(getTitleFromContents(content), false));
                 outFile.write("<section><div class='lead'>")
-                console.log(marked(content));
-                outFile.write(marked(content)+'\r\n')
+                console.log(marked.parse(content));
+                outFile.write(marked.parse(content)+'\r\n')
                 outFile.write("</div></section>\r\n\r\n");
                 outFile.write(getBottom(false));
                 outFile.end();

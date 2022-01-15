@@ -109,7 +109,7 @@
 <li>Grant all location permissions to the app.  This includes the background (&quot;Allow all the time&quot;) permission.</li>
 <li><a href="https://android.stackexchange.com/a/129075/14996">Disable battery optimization</a> for GPSLogger</li>
 <li>See the <a href="https://dontkillmyapp.com/?app=GPSLogger">Don&#39;t Kill My App site</a> website</li>
-<li>Keep the app in the foreground before locking the screen </li>
+<li>Keep the app in the foreground before locking the screen</li>
 </ol>
 
 </div></section>
@@ -202,7 +202,8 @@
 i.setPackage(&quot;com.mendhak.gpslogger&quot;);
 i.putExtra(&quot;immediatestart&quot;, true);
 sendBroadcast(i);
-</code></pre><p><strong>These are the extras you can send to GPSLogger</strong>:</p>
+</code></pre>
+<p><strong>These are the extras you can send to GPSLogger</strong>:</p>
 <blockquote>
 <p><code>immediatestart</code> - (true/false) Start logging<br><code>immediatestop</code> - (true/false) Stop logging<br><code>setnextpointdescription</code> - (text) Sets the annotation text to use for the next point logged<br><code>settimebeforelogging</code> - (number) Sets preference for logging interval option<br><code>setdistancebeforelogging</code> - (number) Sets preference for distance before logging option<br><code>setkeepbetweenfix</code> - (true/false) Sets preference whether to keep GPS on between fixes<br><code>setretrytime</code> - (number) Sets preference for duration to match accuracy<br><code>setabsolutetimeout</code> - (number) Sets preference for absolute timeout<br><code>setprefercelltower</code> - (true/false) Enables or disables the GPS or celltower listeners<br><code>logonce</code> - (true/false) Log a single point, then stop<br><code>switchprofile</code> - (text) The name of the profile to switch to<br><code>getstatus</code> - (true) Asks GPSLogger to send its current events broadcast  </p>
 </blockquote>
@@ -224,12 +225,14 @@ sendBroadcast(i);
 
 <section><div class='lead'><h2><a name="usingthecustomurlfeature" href="#usingthecustomurlfeature">Using the Custom URL feature</a></h2><p>The Custom URL feature allows you to log GPS points to a public URL.  This can be a third party API that accepts <code>GET</code> requests, or an application that you&#39;ve written and are hosting on your own server.</p>
 <pre><code>https://myserver.com/log?lat=%LAT&amp;long=%LON...
-</code></pre><p>If your phone goes <strong>offline</strong>, then the app will queue these requests until a data connection becomes available.     </p>
+</code></pre>
+<p>If your phone goes <strong>offline</strong>, then the app will queue these requests until a data connection becomes available.     </p>
 <p>You can add your HTTP body, HTTP header, HTTP method and basic authentication credentials in the Custom URL screen.      </p>
 <p>If you use a self signed <strong>SSL</strong> certificate, be sure to <a href="#customsslcertificates">validate it first</a>.</p>
 <p>If you check the &#39;POST&#39; checkbox, then the querystring parameters are sent in the HTTP POST body as:</p>
 <pre><code>a=b&amp;c=d&amp;e=f&amp;...
 </code></pre>
+
 </div></section>
 
 <section><div class='lead'><h2><a name="howcanthesegpslogfilesbeused" href="#howcanthesegpslogfilesbeused">How can these GPS log files be used?</a></h2><h2><a name="howdoigeotagphotoswithagpslogfile" href="#howdoigeotagphotoswithagpslogfile">How do I geotag photos with a GPS log file?</a></h2><p>The GPS files produced by this app are generally used for processing <em>other</em> things.  </p>
@@ -274,7 +277,8 @@ sendBroadcast(i);
 <p>Also note - the current profile&#39;s settings are automatically saved whenever you switch between profiles.</p>
 <h3><a name="creatingaprofilemanually" href="#creatingaprofilemanually">Creating a profile manually</a></h3><p>You can create your own <code>.properties</code> file and put your key value pairs in it. </p>
 <p>For example, in the file you can put <code>accuracy_before_logging=42</code> and that will reset the <em>Accuracy Filter</em> to 42 meters each time the application starts. There are many properties that can be applied and you can glean a <a href="https://github.com/mendhak/gpslogger/blob/master/gpslogger/src/main/java/com/mendhak/gpslogger/common/PreferenceNames.java">full list here</a>.</p>
-<p>The most common examples of properties would be <code>log_gpx</code>, <code>log_kml</code>, <code>time_before_logging</code>, <code>opengts_*</code> for OpenGTS settings, <code>smtp_*</code> for email settings.</p>
+<p>The most common examples of properties would be <code>log_gpx</code>, <code>log_kml</code>, <code>time_before_logging</code>, <code>opengts_*</code> for OpenGTS settings, <code>smtp_*</code> for email settings.
+  </p>
 
 </div></section>
 
@@ -283,7 +287,9 @@ sendBroadcast(i);
 <p> Create a <code>.properties</code> file with your settings in it - see <a href="#saveyourcurrentsettingsasaprofile">instructions</a>.  Host it at an accessible URL, self signed URLs will not work here.</p>
 <p> You will then need to host a web page with a hyperlink to that file in it, with this structure. </p>
 <pre><code> &lt;a href=&quot;gpslogger://properties/https://www.mendhak.com/test.properties&quot;&gt;Download this profile&lt;/a&gt;
-</code></pre><p>Basically <code>gpslogger://properties/</code> followed by the actual URL of your <code>.properties</code> file. </p>
+ 
+</code></pre>
+<p>Basically <code>gpslogger://properties/</code> followed by the actual URL of your <code>.properties</code> file. </p>
 <p>Due to deficiencies in the Chrome browser, this needs to be a hyperlink on a webpage.  The link must be clicked in a browser (Firefox, Chrome) on their Android device.     </p>
 
 </div></section>
@@ -429,7 +435,7 @@ sendBroadcast(i);
             <li><a href="https://www.flickr.com/photos/mendhak/37937678644/"><img width="150" height="150" alt="thumbnail" src="https://live.staticflickr.com/4521/37937678644_e569ddc8f6_q.jpg"></a></li>
         </ul>
       <section class="copy">
-        <p>&mdash; &copy; 2021 Mendhak &mdash;</p>
+        <p>&mdash; &copy; 2022 Mendhak &mdash;</p>
       </section>
     </footer>
   </body>
