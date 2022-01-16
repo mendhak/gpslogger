@@ -44,7 +44,7 @@ public class AppSettings extends Application {
         //Configure the slf4j logger
         Logs.configure();
         LOG = Logs.of(this.getClass());
-        LOG.debug("Log4J configured");
+        LOG.debug("SLF4J logging configured");
 
         //Configure the Event Bus
         EventBus.builder().logNoSubscriberMessages(false).sendNoSubscriberEvent(false).installDefaultEventBus();
@@ -56,7 +56,7 @@ public class AppSettings extends Application {
                 .consumerKeepAlive(60)
                 .minConsumerCount(0)
                 .maxConsumerCount(1)
-                .customLogger(jobQueueLogger)
+//                .customLogger(jobQueueLogger)
                 .build();
         jobManager = new JobManager(config);
         LOG.debug("Job Queue configured");

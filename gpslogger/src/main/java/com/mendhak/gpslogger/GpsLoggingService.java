@@ -808,23 +808,25 @@ public class GpsLoggingService extends Service  {
         boolean isPassiveLocation = loc.getExtras().getBoolean(BundleConstants.PASSIVE);
         long currentTimeStamp = System.currentTimeMillis();
 
-        LOG.debug("Has description? " + session.hasDescription() + ", Single point? " + session.isSinglePointMode() + ", Last timestamp: " + session.getLatestTimeStamp());
+        LOG.debug("Has description? " + session.hasDescription() + ", Single point? " + session.isSinglePointMode() + ", Last timestamp: " + session.getLatestTimeStamp() + ", Current timestamp: " + currentTimeStamp);
 
         // Don't log a point until the user-defined time has elapsed
         // However, if user has set an annotation, just log the point, disregard time and distance filters
         // However, if it's a passive location, disregard the time filter
         if (!isPassiveLocation && !session.hasDescription() && !session.isSinglePointMode() && (currentTimeStamp - session.getLatestTimeStamp()) < (preferenceHelper.getMinimumLoggingInterval() * 1000)) {
+            LOG.debug("Received location, but minimum logging interval has not passed. Ignoring.");
             return;
         }
 
         //Don't log a point if user has been still
         // However, if user has set an annotation, just log the point, disregard time and distance filters
         if(userHasBeenStillForTooLong()) {
-            LOG.info("Received location but the user hasn't moved, ignoring");
+            LOG.info("Received location, but the user hasn't moved. Ignoring.");
             return;
         }
 
         if(!isPassiveLocation && !isFromValidListener(loc)){
+            LOG.debug("Received location, but it's not from a selected listener. Ignoring.");
             return;
         }
 
@@ -844,6 +846,7 @@ public class GpsLoggingService extends Service  {
         if (preferenceHelper.getMinimumAccuracy() > 0) {
 
             if(!loc.hasAccuracy() || loc.getAccuracy() == 0){
+                LOG.debug("Received location, but it has no accuracy value. Ignoring.");
                 return;
             }
 
