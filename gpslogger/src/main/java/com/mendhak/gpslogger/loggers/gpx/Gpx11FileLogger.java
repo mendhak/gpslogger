@@ -33,16 +33,27 @@ class Gpx11WriteHandler extends Gpx10WriteHandler {
         initialXml.append("<gpx version=\"1.1\" creator=\"GPSLogger " + BuildConfig.VERSION_CODE + " - http://gpslogger.mendhak.com/\" ");
         initialXml.append("xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ");
         initialXml.append("xmlns=\"http://www.topografix.com/GPX/1/1\" ");
-        initialXml.append("xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 ");
-        initialXml.append("http://www.topografix.com/GPX/1/1/gpx.xsd\">");
+        initialXml.append("xmlns:gpxtpx=\"http://www.garmin.com/xmlschemas/TrackPointExtension/v2\" ");
+        initialXml.append("xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd ");
+        initialXml.append("http://www.garmin.com/xmlschemas/TrackPointExtension/v2 https://www8.garmin.com/xmlschemas/TrackPointExtensionv2.xsd ");
+        initialXml.append("\">");
         initialXml.append("<metadata><time>").append(dateTimeString).append("</time></metadata>");
         return initialXml.toString();
     }
 
     public void appendCourseAndSpeed(StringBuilder track, Location loc)
     {
-        // no-op
-        // course and speed are not part of the GPX 1.1 specification
-        // We could put them in an extensions such if we really wanted.
+
+        track.append("<extensions><gpxtpx:TrackPointExtension>");
+
+        if (loc.hasBearing()) {
+            track.append("<gpxtpx:bearing>").append(String.valueOf(loc.getBearing())).append("</gpxtpx:bearing>");
+        }
+
+        if (loc.hasSpeed()) {
+            track.append("<gpxtpx:speed>").append(String.valueOf(loc.getSpeed())).append("</gpxtpx:speed>");
+        }
+
+        track.append("</gpxtpx:TrackPointExtension></extensions>");
     }
 }
