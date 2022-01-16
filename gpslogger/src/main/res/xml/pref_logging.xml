@@ -120,7 +120,8 @@
             app:iconSpaceReserved="false" />
 
         <Preference
-            android:title="Delete selected files"
+            android:title="@string/logging_advanced_delete_files"
+            android:summary="@string/logging_advanced_delete_files_summary"
             android:key="delete_files"
             app:iconSpaceReserved="false" />
 

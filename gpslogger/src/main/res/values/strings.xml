@@ -474,6 +474,8 @@
     <string name="app_theme_setting">Determines how to set the light or dark app theme</string>
     <string name="file_logging_log_time_with_offset_title">Log time with timezone offset</string>
     <string name="file_logging_log_time_with_offset_summary">Where possible, write the ISO8601 time with timezone offset instead of UTC.</string>
+    <string name="logging_advanced_delete_files">Delete selected files</string>
+    <string name="logging_advanced_delete_files_summary">Long press to select multiple files.</string>
 
 
 </resources>
