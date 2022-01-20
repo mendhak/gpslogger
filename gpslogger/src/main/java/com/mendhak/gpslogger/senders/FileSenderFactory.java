@@ -89,8 +89,9 @@ public class FileSenderFactory {
 
         List<File> files = new ArrayList<>(Arrays.asList(Files.fromFolder(gpxFolder, new FilenameFilter() {
             @Override
-            public boolean accept(File file, String s) {
-                return s.contains(fileToSend) && !s.contains("zip");
+            public boolean accept(File folderPath, String fileName) {
+                return Files.getBaseName(fileName).equalsIgnoreCase(fileToSend) &&
+                        !fileName.endsWith("zip");
             }
         })));
 
