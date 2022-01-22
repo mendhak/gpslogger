@@ -99,6 +99,7 @@
     <string name="log_kml_title">In eine KML-Datei protokollieren</string>
     <string name="log_kml_summary">Aufzeichnen von Orten in eine KML v2.2-Datei</string>
     <string name="log_plain_text_title">In eine CSV-Datei protokollieren</string>
+    <string name="log_plain_text_csv_advanced_title">Speichern als CSV Einstellungen</string>
     <string name="log_plain_text_csv_field_delimiter">CSV-Feldtrennzeichen</string>
     <string name="log_plain_text_decimal_comma">Komma (,) als Dezimaltrennzeichen anstelle von Punkt (.) verwenden</string>
     <string name="log_plain_text_summary">Aufzeichnen von Orten in eine CSV-Datei</string>
@@ -350,6 +351,7 @@
     <string name="txt_timestamp_epoch">Zeitstempel (Epoch)</string>
     <string name="txt_starttimestamp_epoch">Epoch-Zeitstempel starten</string>
     <string name="txt_battery">Batterie</string>
+    <string name="txt_battery_charging">Batterieladung</string>
     <string name="customurl_http_body">HTTP-Text</string>
     <string name="customurl_http_headers">HTTP-Kopfzeilen</string>
     <string name="customurl_http_method">HTTP-Methode</string>
@@ -364,4 +366,6 @@
     <string name="app_theme_setting">Legt fest, wie das helle oder dunkle App-Thema eingestellt werden soll</string>
     <string name="file_logging_log_time_with_offset_title">Uhrzeit mit Zeitzonenverschiebung protokollieren</string>
     <string name="file_logging_log_time_with_offset_summary">Wenn möglich, geben Sie die ISO8601-Zeit mit Zeitzonen-Offset anstelle von UTC an.</string>
+    <string name="logging_advanced_delete_files">Lösche ausgewählte Dateien</string>
+    <string name="logging_advanced_delete_files_summary">Lang drücken zur Mehrfachauswahl von Dateien</string>
 </resources>
