@@ -99,7 +99,7 @@
     <string name="log_kml_title">In eine KML-Datei protokollieren</string>
     <string name="log_kml_summary">Aufzeichnen von Orten in eine KML v2.2-Datei</string>
     <string name="log_plain_text_title">In eine CSV-Datei protokollieren</string>
-    <string name="log_plain_text_csv_advanced_title">Speichern als CSV Einstellungen</string>
+    <string name="log_plain_text_csv_advanced_title">Speichern CSV Einstellungen</string>
     <string name="log_plain_text_csv_field_delimiter">CSV-Feldtrennzeichen</string>
     <string name="log_plain_text_decimal_comma">Komma (,) als Dezimaltrennzeichen anstelle von Punkt (.) verwenden</string>
     <string name="log_plain_text_summary">Aufzeichnen von Orten in eine CSV-Datei</string>
