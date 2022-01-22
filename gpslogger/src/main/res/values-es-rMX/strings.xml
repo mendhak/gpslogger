@@ -3,9 +3,11 @@
     <string name="title_drawer_uploadsettings">Configuración de subidas</string>
     <string name="navigation_drawer_open">Abrir menú de navegación</string>
     <string name="navigation_drawer_close">Cerrar menú de navegación</string>
+    <string name="app_name">GPSLogger</string>
     <string name="settings_screen_name">Configuracion de GPSLogger</string>
     <string name="ok">Aceptar</string>
     <string name="cancel">Cancelar</string>
+    <string name="hide">Ocultar</string>
     <string name="could_not_write_to_file">No se pudo escribir al archivo</string>
     <string name="add_description">Añadir una descripción</string>
     <string name="letters_numbers">Utilice sólo letras y números</string>
@@ -38,14 +40,20 @@
     <string name="feet">&#160;pies</string>
     <string name="meter">&#160;metro</string>
     <string name="meters">&#160;metros</string>
+    <string name="error">Error</string>
     <string name="error_connection">Error de conexión. Compruebe la configuración del teléfono.</string>
     <string name="seconds">s</string>
+    <string name="minutes">&#160;min</string>
     <string name="hours">horas</string>
     <string name="gpsprovider_unavailable">No hay ningún proveedor GPS disponible. Es necesario comprobar los ajustes de ubicación y activar algún proveedor de ubicación.
     </string>
     <string name="started">Iniciado</string>
     <string name="providername_gps">Satélites GPS</string>
     <string name="providername_celltower">Torres Celulares</string>
+    <string name="not_applicable">n/a</string>
+    <string name="meters_per_second">&#160;m/s</string>
+    <string name="feet_per_second">&#160;ft/s</string>
+    <string name="miles_per_hour">&#160;mi/h</string>
     <string name="miles">mi</string>
     <string name="kilometers_per_hour">km/h</string>
     <string name="kilometers">km</string>
@@ -57,6 +65,7 @@
     <string name="direction_northnortheast">Norte noreste</string>
     <string name="direction_northeast">Noreste</string>
     <string name="direction_eastnortheast">Oriente por noreste</string>
+    <string name="direction_east">Este</string>
     <string name="direction_eastsoutheast">Oriente por sureste</string>
     <string name="direction_southeast">Sureste</string>
     <string name="direction_southsoutheast">Sur sureste</string>
@@ -76,6 +85,7 @@
     <string name="time_halfhour">1½ horas</string>
     <string name="time_oneandhalfhours">2½ horas</string>
     <string name="time_twoandhalfhours">2½ horas</string>
+    <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
     <string name="accuracy_within" formatted="false">precisión de %s %s</string>
     <!-- Settings activity -->
     <string name="settings_distance_in_meters">Distancia en metros</string>
@@ -90,11 +100,15 @@
     <string name="log_kml_title">Registro a KML</string>
     <string name="log_kml_summary">Escribe las posiciones en un archivo KML v2.2</string>
     <string name="log_plain_text_title">Registro a CSV</string>
+    <string name="log_plain_text_csv_advanced_title">Registrar en las configuraciones CSV </string>
+    <string name="log_plain_text_csv_field_delimiter">CSV delimitador de campo</string>
+    <string name="log_plain_text_decimal_comma">Usar coma (,) como separador decimal en lugar del punto (.)</string>
     <string name="log_plain_text_summary">Escribe las posiciones en un archivo CSV</string>
     <string name="log_json_title">Registrarse en GeoJSON</string>
     <string name="log_json_summary">Escribe las posiciones en un archivo Csv</string>
     <string name="new_file_creation_title">Creación de archivos nuevos</string>
     <string name="new_file_creation_summary">Si desea crear un nuevo archivo una vez al día o cada vez que inicie.</string>
+    <string name="new_file_creation_onceamonth">Una vez al mes</string>
     <string name="new_file_creation_onceaday">Una vez al día</string>
     <string name="new_file_creation_everystart">En cada inicio</string>
     <string name="new_file_creation_custom">Archivo personalizado</string>
@@ -103,6 +117,8 @@
     <string name="pref_performance_title">Rendimiento</string>
     <string name="pref_performance_summary">Tiempos, filtros y orígenes</string>
     <string name="time_before_logging_title">Intervalo de registro</string>
+    <string name="time_before_logging_summary">Usar 0 para máxima frecuencia, pero despacio es mejor para la vida de la batería. La configuración de la batería a nivel de sistema puede anular está configuración, ver Ayuda y FAQ. 
+    </string>
     <string name="time_before_logging_dialog_title">Tiempo en segundos</string>
     <string name="time_before_logging_hint">Introduzca a segundos (máx. 9999)</string>
     <string name="keep_fix_summary">Con cuidado, esto disminuirá considerablemente la duración de la batería. Utilice únicamente para obtener mayor precisión usando frecuencias bajas.    </string>
@@ -137,6 +153,7 @@
     <string name="started_waiting">GPS comenzado, esperando fix</string>
     <string name="gps_stopped">GPS en pausa</string>
     <string name="stopped">Detenido</string>
+    <string name="osm_setup_title">OpenStreetMap</string>
     <string name="osm_lbl_authorize">Autorizar esta app</string>
     <string name="osm_resetauth">Remover Autorización</string>
     <string name="osm_lbl_authorize_description">Debe conceder los permisos de este app para cargar GPS traza a OpenStreetMap. Se pueden definir etiquetas, descripciones y visibilidad aquí después de que usted ha autorizado esta app.    </string>
@@ -155,9 +172,15 @@
     <string name="pref_logging_summary">Tipos de archivo, creación y momenclatura</string>
     <string name="pref_general_title">Opciones generales</string>
     <string name="pref_general_summary">Opciones de inicio y la pantalla</string>
+    <string name="emailprovider_google">Google Mail</string>
+    <string name="emailprovider_yahoo">Yahoo! Mail</string>
+    <string name="emailprovider_msn">Windows Live Mail</string>
+    <string name="emailprovider_manual">Manual</string>
+    <string name="dropbox_setup_title">Dropbox</string>
     <string name="dropbox_authorize_description">Para utilizar funciones de Dropbox, deberás autorizar GPSLogger para subir archivos a tu cuenta.    </string>
     <string name="dropbox_unauthorize_description">Usted está autorizado con Dropbox. Los archivos se cargan a \'Apps\\GPSLogger para Android\' puede desvincular GPSLogger desde Dropbox si lo desea.    </string>
     <string name="dropbox_couldnotauthorize">Podría no autorizar con Dropbox, por favor intente más tarde</string>
+    <string name="owncloud_setup_title">ownCloud</string>
     <string name="owncloud_server_summary">uRL base en ownCloud</string>
     <string name="owncloud_directory_summary">Carpeta a usar en el servidor de ownCloud. Asegúrate que exista o la subida fallará.</string>
     <string name="owncloud_test_summary">Cargar un archivo de prueba en el servidor de ownCloud</string>
@@ -166,6 +189,7 @@
     <string name="autoemail_from">De dirección</string>
     <string name="autoemail_from_summary">Algunos proveedores de correo electrónico requieren una dirección. Utilice esta opción sólo si lo necesita.    </string>
     <string name="gdocs_clearauthorization_summary">Se olvida de la configuración local de Google Drive Docs. Puedes revocar el acceso desde el menú de ajustes de tu cuenta de Google</string>
+    <string name="gdocs_setup_title">Google Drive</string>
     <string name="gdocs_test_summary">Subir un archivo de prueba a Google Drive</string>
     <string name="gdocs_test_title">Carga de prueba</string>
     <string name="gdocs_testupload_success">Cargado. Por favor revise sus documentos de Google para un nuevo archivo.</string>
@@ -187,6 +211,7 @@
     <string name="shortcut_pickaction">Elige una acción</string>
     <string name="log_opengts_title">Enviar a servidor OpenGTS</string>
     <string name="log_opengts_summary">Enviar datos GPRMC a un servidor OpenGTS.</string>
+    <string name="opengts_setup_title">OpenGTS</string>
     <string name="autoopengts_server_category">Ajustes de OpenGTS</string>
     <string name="autoopengts_server">Servidor</string>
     <string name="autoopengts_server_summary">Dirección IP o nombre de host</string>
@@ -201,18 +226,25 @@
     <string name="autoftp_port">Puerto</string>
     <string name="autoftp_useftps">Utilizar FTPS</string>
     <string name="autoftp_useftps_summary">Habilitar FTP sobre SSL. Las opciones SSL/TLS e Implícito se ignoran si se deshabilita.</string>
+    <string name="autoftp_ssltls">SSL/TLS</string>
     <string name="autoftp_ssltls_summary">Ninguna, SSL o TLS. Las conexiones normales no usan cifrado.</string>
     <string name="autoftp_ssltls_none">Ninguna</string>
+    <string name="autoftp_ssltls_ssl">SSL</string>
+    <string name="autoftp_ssltls_tls">TLS</string>
     <string name="autoftp_implicit">FTP implícito sobre SSL</string>
     <string name="autoftp_test_summary">Cargar un archivo de prueba en el servidor FTP</string>
     <string name="autoftp_testing">Probando subida a FTP</string>
     <string name="autoftp_invalid_settings">Los ajustes no son correctos</string>
     <string name="autoftp_invalid_summary">Algunas de las preferencias no son válidas. Por favor asegúrese que ha rellenado todos los campos pertinentes.</string>
+    <string name="autoftp_setup_title">FTP</string>
     <string name="menu_faq">Ayuda y FAQ</string>
     <string name="log_customurl_title">Registrar usando una URL personalizada</string>
+    <string name="log_customurl_setup_title">URL personalizada</string>
     <string name="log_customurl_summary">Enviar información de registros a tu propio servidor usando HTTP</string>
     <string name="txt_annotation">Anotación:</string>
     <string name="txt_time_isoformat">Hora UTC (2011-12-25T15:27:33Z):</string>
+    <string name="txt_time_with_offset_isoformat">Diferencia horaria (2011-12-25T11:27:33+04:00):  </string>
+    <string name="txt_date_isoformat">Fecha (2011-12-25):</string>
     <string name="txt_provider">Proveedor:</string>
     <string name="annotation_requires_logging">Para usar anotaciones es necesario registrar en formato GPX/KML ó URL personalizada</string>
     <string name="gpslogger_folder_title">Guardar en carpeta</string>
@@ -239,12 +271,17 @@
     <string name="pref_filedetails_title">Detalles de archivo y carpeta</string>
     <string name="absolute_timeout_title">Tiempo absoluto para fijar al GPS</string>
     <string name="absolute_timeout_summary">Número de segundos tras los que la aplicación cancela la búsqueda de posición, ignorando los demás ajustes. Especialmente útil cuando estás en interiores para evitar que el GPS gaste batería. Establecer en 0 para evitar el tiempo de espera.</string>
+    <string name="txt_latitude_short">Lat</string>
+    <string name="txt_longitude_short">Lon</string>
     <string name="log_nmea_title">Loguear a NMEA</string>
     <string name="log_nmea_summary">Crea un archivo NMEA en crudo durante la búsqueda de posición. Este archivo crece muy rápidamente. Sólo funciona mientras se está utilizando el GPS.</string>
     <string name="autoopengts_accountname">Nombre de cuenta</string>
+    <string name="listeners_gps">GPS</string>
     <string name="listeners_gps_title">Registrar ubicación GPS/GNSS</string>
+    <string name="listeners_gps_summary">Registra las ubicaciones provistas por el satélite basado en la ubicación del receptor de tu dispositivo</string>
     <string name="listeners_cell">Red</string>
     <string name="listeners_cell_title">Registrar ubicaciónes de la red</string>
+    <string name="listeners_cell_summary">Registra las ubicaciones provistas por la red móvil basado en la ubicación del receptor de tu dispositivo</string>
     <string name="listeners_passive">Pasivo</string>
     <string name="listeners_passive_title">Registrar ubicaciones pasivas</string>
     <string name="listeners_passive_summary">Registra las ubicaciones obtenidas de otras aplicaciones, pero tenga en cuenta que la mayoría de los filtros son ignorados. Este ajuste también es útil para los receptores GPS externos.</string>
@@ -252,12 +289,22 @@
     <string name="listeners_title">Proveedores de ubicación</string>
     <string name="autosend_frequency_hint">Número de minutos</string>
     <string name="pref_logging_file_no_permissions">Esa carpeta no se escribe por GPSLogger. Por favor, seleccione otra carpeta para escribir.</string>
+    <string name="gpslogger_custom_path_need_permission">Para usar rutas personalizadas en GPSLogger, por favor permite que GPSLogger tenga permisos de archivos en la siguiente pantalla. Luego intenta la acción nuevamente. Esto es requerido debido a una restricción en Android 11+. </string>
+    <string name="storage_chooser_create_label">Crear</string>
+    <string name="storage_chooser_internal_storage_text">Almacenamiento interno</string>
+    <string name="storage_chooser_select_folder">Seleccionar</string>
+    <string name="storage_chooser_overview_heading">Elegir almacenamiento</string>
+    <string name="storage_chooser_new_folder_label">Nueva carpeta</string>
+    <string name="storage_chooser_free_space_text">libre</string>
+    <string name="storage_chooser_text_field_error">Nombre de carpeta vacío</string>
+    <string name="storage_chooser_text_field_hint">Nombre de carpeta</string>
     <string name="new_file_custom_each_time_title">Pedir un nombre de archivo en cada inicio</string>
     <string name="new_file_custom_each_time_summary">Solicitar un nombre de archivo personalizado cada vez que se inicia el registro</string>
     <string name="new_file_custom_keep_changing_title">Permite que el nombre de archivo personalizado cambie dinamicamente</string>
     <string name="new_file_custom_keep_changing_summary">Cuando cambia alguno de los valores elegidos para personalizar el nombre de archivo, este tambien cambiara. Por ejemplo, si usas %HOUR, se creara un archivo nuevo cada hora.
 No marques esta opcion si quieres que el nombre de archivo sea estatico.</string>
     <string name="donate_app">Donar (aplicación)</string>
+    <string name="donate_bitcoin">Bitcoin</string>
     <string name="tip_coffee">Invitame a un cafe</string>
     <string name="no_network_message">No hay ninguna red disponible</string>
     <string name="hide_notification_buttons">Ocultar botones de notificación</string>
@@ -273,14 +320,20 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="logview_showlocationsonly">Solo ubicaciones</string>
     <string name="logview_autoscroll">Autodeslizamiento</string>
     <string name="profile_create_new">Crear nuevo perfil</string>
+    <string name="profile_add_from_url">Desde URL</string>
+    <string name="properties_file_url">Archivo de propiedades URL</string>
     <string name="profile_switch_before_delete">Por favor, cambia a otro perfil antes de eliminar este.</string>
     <string name="profile_delete">Eliminar perfil?</string>
     <string name="profile_default">Perfil por defecto</string>
     <string name="profile_add_new">Añadir perfil</string>
     <string name="gpslogger_permissions_rationale_title">Se necesitan permisos</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Está aplicación necesita varios permisos para funcionar correctamente. El sistema te preguntará varias veces para conceder algunos permisos(lo siento). Aquí hay una explicación de cada permiso. ]]></string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Ubicación del dispositivo </b>te permiso permite leer los datos de localización de las torres de celdas y el hardware GPS del dispositivo.]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotos, medios, archivos</b> - Este permiso permite escribir archivos de registro y archivos de prueba para almacenamiento, y lectura de una lista de archivos para subir o compartir. Esta aplicación no tendrá acceso a tus fotos o medios.]]></string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Permitir todo el tiempo</b> - Permite que está aplicación reciba actualizaciones de ubicación cuando esté corriendo en segundo plano. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignorar optimización de batería</b> - Permite que está aplicación corra en segundo plano reduciendo la optimización de la batería.]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Usted ha negado uno o más permisos que requiere esta aplicación.  Usted tendrá que ir a la pantalla de configuración de la aplicación para conceder estos permisos. <br /><br />Si tiene permisos denegados permanentemente, puede restablecerlos en la configuración del sistema. ]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Para permitir que GPSLogger corra en segundo plano, necesitas brindar un permiso adicional. En la siguiente pantalla por favor seleccione: ]]></string>
     <string name="privacy_policy">Política de Privacidad</string>
     <string name="debuglog_attach_to_email">Adjuntar el registro de depuración para correo electrónico</string>
     <string name="debuglog_attach_to_email_summary">Registro de depuración se conecta a un correo electrónico junto con algunos datos diagnóstico</string>
@@ -292,6 +345,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="ssl_certificate_add_to_keystore">¿Agregar certificado al almacén de claves local?</string>
     <string name="ssl_certificate_is_valid">El certificado es válido</string>
     <string name="hide_notification_from_status_bar">Ocultar la notificación de la barra de estado</string>
+    <string name="sftp_setup_title">SFTP</string>
     <string name="sftp_private_key_path">Clave privada</string>
     <string name="sftp_private_key_passphrase">Frase de contraseña de clave privada</string>
     <string name="sftp_validate_test_upload">Validar la clave del host y subir la prueba</string>
@@ -304,4 +358,13 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="customurl_http_method">Método HTTP</string>
     <string name="customurl_http_basicauthentication">Autenticación Básica</string>
     <string name="hide_notification_from_status_bar_disallowed">Ocultar notificaciones no está permitido en Android Oreo en adelante</string>
+    <string name="reset_app_summary">Esto va a reiniciar la aplicación, borrará todas las preferencias, archivos de GPSLogger y quitará todos los permisos brindados a la aplicación. ¡Todos los datos se perderán!</string>
+    <string name="reset_app_title">Reiniciar app</string>
+    <string name="app_theme_title">Tema</string>
+    <string name="app_theme_follow_system">Automático (sistema)</string>
+    <string name="app_theme_light">Tema claro</string>
+    <string name="app_theme_dark">Tema oscuro</string>
+    <string name="app_theme_setting">Determina si se quiere usar el tema claro o oscuro para la aplicación.</string>
+    <string name="file_logging_log_time_with_offset_title">Registrar tiempo con diferencia horaria</string>
+    <string name="file_logging_log_time_with_offset_summary">Donde sea posible, escriba el tiempo ISO8601 con diferencia horaria en lugar de UTC. </string>
 </resources>
