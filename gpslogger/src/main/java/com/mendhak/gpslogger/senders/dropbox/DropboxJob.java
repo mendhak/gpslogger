@@ -85,8 +85,8 @@ public class DropboxJob extends Job {
 
             mDbxClient.files().uploadBuilder("/" + fileName).withMode(WriteMode.OVERWRITE).uploadAndFinish(inputStream);
 
+            LOG.info("Dropbox - file {} uploaded", gpxFile.getName());
             EventBus.getDefault().post(new UploadEvents.Dropbox().succeeded());
-            LOG.info("Dropbox - file uploaded");
         } catch (Exception e) {
             LOG.error("Could not upload to Dropbox" , e);
             EventBus.getDefault().post(new UploadEvents.Dropbox().failed(e.getMessage(), e));

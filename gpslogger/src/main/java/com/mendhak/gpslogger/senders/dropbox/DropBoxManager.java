@@ -84,7 +84,6 @@ public class DropBoxManager extends FileSender {
     @Override
     public void uploadFile(List<File> files) {
         for (File f : files) {
-            LOG.debug(f.getName());
             uploadFile(f.getName());
         }
     }

@@ -105,7 +105,7 @@ public class SFTPJob extends Job {
                 channel.disconnect();
                 session.disconnect();
 
-                LOG.info("SFTP - file uploaded");
+                LOG.info("SFTP - file {} uploaded", this.localFile.getName());
                 EventBus.getDefault().post(new UploadEvents.SFTP().succeeded());
             } else {
                 EventBus.getDefault().post(new UploadEvents.SFTP().failed("Could not connect, unknown reasons", null));
