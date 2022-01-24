@@ -357,6 +357,7 @@ Engedélyek megadásához lépjen be az alkalmazás beállítások képernyőre.
     <string name="txt_timestamp_epoch">Időbélyeg (epoch)</string>
     <string name="txt_starttimestamp_epoch">Start időbélyeg (epoch)</string>
     <string name="txt_battery">Akkumulátor</string>
+    <string name="txt_battery_charging">Töltés</string>
     <string name="customurl_http_body">HTTP Törzs</string>
     <string name="customurl_http_headers">HTTP Fejlécek</string>
     <string name="customurl_http_method">HTTP Eljárás</string>
@@ -371,4 +372,6 @@ Engedélyek megadásához lépjen be az alkalmazás beállítások képernyőre.
     <string name="app_theme_setting">Meghatározza, hogy világos vagy sötét legyen az alkalmazás felülete.</string>
     <string name="file_logging_log_time_with_offset_title">Idő naplózása időzóna eltolással</string>
     <string name="file_logging_log_time_with_offset_summary">Ahol lehetséges, UTC idő helyett ISO8601 időt írja időzóna eltolással.</string>
+    <string name="logging_advanced_delete_files">Kijelölt fájlok törlése</string>
+    <string name="logging_advanced_delete_files_summary">Több fájl kiválasztásához nyomja hosszan.</string>
 </resources>
