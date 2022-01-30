@@ -6,4 +6,5 @@
     <!-- Settings activity -->
     <!-- Settings -->
     <string name="reset_app_title">Ibalik ang app</string>
+    <string name="direction_roughly"></string>
 </resources>
