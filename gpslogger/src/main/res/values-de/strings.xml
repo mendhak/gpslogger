@@ -36,26 +36,26 @@
     <string name="sharing_mylocation">Mein Standort</string>
     <string name="sharing_via">Teilen über</string>
     <!-- general -->
-    <string name="foot">&#160;Fuß</string>
-    <string name="feet">&#160;Fuß</string>
-    <string name="meter">&#160;Meter</string>
-    <string name="meters">&#160;Meter</string>
+    <string name="foot"> Fuß</string>
+    <string name="feet"> Fuß</string>
+    <string name="meter"> Meter</string>
+    <string name="meters"> Meter</string>
     <string name="error">Fehler</string>
     <string name="error_connection">Verbindungsfehler. Bitte prüfen Sie Ihre Telefoneinstellungen.</string>
-    <string name="seconds">&#160;Sek.</string>
-    <string name="minutes">&#160;Minute(n)</string>
+    <string name="seconds"> Sek.</string>
+    <string name="minutes"> Minute(n)</string>
     <string name="hours">Std.</string>
     <string name="gpsprovider_unavailable">Kein GPS-Anbieter verfügbar. Bitte überprüfen Sie Ihre Einstellungen für Standortdienste und aktivieren Sie einen Dienst für die Standortbestimmung.    </string>
     <string name="started">Gestartet</string>
     <string name="providername_gps">GPS-Satelliten</string>
     <string name="providername_celltower">Funkzellen</string>
     <string name="not_applicable">Nicht verfügbar</string>
-    <string name="meters_per_second">&#160;m/s</string>
-    <string name="feet_per_second">&#160;ft/s</string>
-    <string name="miles_per_hour">&#160;Meilen/h</string>
-    <string name="miles">&#160;Meilen</string>
-    <string name="kilometers_per_hour">&#160;km/h</string>
-    <string name="kilometers">&#160;km</string>
+    <string name="meters_per_second"> m/s</string>
+    <string name="feet_per_second"> ft/s</string>
+    <string name="miles_per_hour"> Meilen/h</string>
+    <string name="miles"> Meilen</string>
+    <string name="kilometers_per_hour"> km/h</string>
+    <string name="kilometers"> km</string>
     <string name="unknown_direction">unbekannt</string>
     <string name="sorry">Tut uns Leid</string>
     <string name="success">Erfolgreich</string>
@@ -356,7 +356,7 @@
     <string name="customurl_http_basicauthentication">Authentifizierung</string>
     <string name="hide_notification_from_status_bar_disallowed">Das Verbergen von Benachrichtigungen ist ab Android Oreo nicht mehr erlaubt.</string>
     <string name="reset_app_summary">Dadurch wird die App zurückgesetzt, alle Einstellungen und GPSLogger-Dateien werden gelöscht und die gewährten APP Berechtigungen widerrufen. Alle Daten gehen verloren!</string>
-    <string name="reset_app_title">Reset app</string>
+    <string name="reset_app_title">Anwendung zurücksetzen</string>
     <string name="app_theme_title">App Thema</string>
     <string name="app_theme_follow_system">wie Systemeinstellungen</string>
     <string name="app_theme_light">Helles Thema</string>
@@ -364,4 +364,8 @@
     <string name="app_theme_setting">Legt fest, wie das helle oder dunkle App-Thema eingestellt werden soll</string>
     <string name="file_logging_log_time_with_offset_title">Uhrzeit mit Zeitzonenverschiebung protokollieren</string>
     <string name="file_logging_log_time_with_offset_summary">Wenn möglich, geben Sie die ISO8601-Zeit mit Zeitzonen-Offset anstelle von UTC an.</string>
+    <string name="log_plain_text_csv_advanced_title">In CSV-Protokollierung-Einstellungen</string>
+    <string name="logging_advanced_delete_files">Ausgewählte Dateien löschen</string>
+    <string name="txt_battery_charging">Wird aufgeladen</string>
+    <string name="logging_advanced_delete_files_summary">Lange drücken, um mehrere Dateien auszuwählen.</string>
 </resources>
