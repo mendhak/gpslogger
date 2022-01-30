@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- main form labels -->
-    <string name="txt_speed">Paspas</string>
+    <string name="txt_speed">Paspas:</string>
     <!-- general -->
     <!-- Settings activity -->
     <!-- Settings -->
