@@ -5,4 +5,5 @@
     <!-- general -->
     <!-- Settings activity -->
     <!-- Settings -->
+    <string name="reset_app_title">Ibalik ang app</string>
 </resources>
