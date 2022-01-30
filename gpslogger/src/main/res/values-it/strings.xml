@@ -165,14 +165,14 @@
     <string name="owncloud_directory_summary">Cartella da utilizzare sul server ownCloud. Assicurarsi che esista o il caricamento avrà esito negativo.</string>
     <string name="owncloud_test_summary">Carica un file di test sul server ownCloud</string>
     <string name="owncloud_testing">Prova l\'upload su ownCloud</string>
-    <string name="menu_upload">Caricamento</string>
+    <string name="menu_upload">Carica</string>
     <string name="autoemail_from">Da: (mittente)</string>
     <string name="autoemail_from_summary">Alcuni provider di posta richiedono nella Email il mittente (Da:), usalo solo se richiesto.</string>
     <string name="gdocs_clearauthorization_summary">Dimentica le impostazioni locali di Google Drive. Per revocare definitivamente l\'accesso, vai nelle impostazioni di Google Account</string>
     <string name="gdocs_test_summary">Carica un file di test su Google Drive</string>
     <string name="gdocs_test_title">Test di caricamento</string>
     <string name="gdocs_testupload_success">Caricato! Vai su Google Drive e controlla il file.</string>
-    <string name="autoemail_sendto_csv">Indirizzi Email separati da una virgola</string>
+    <string name="autoemail_sendto_csv">Indirizzi e-mail separati da una virgola</string>
     <string name="autosend_enabled">Permetti invio automatico</string>
     <string name="autosend_enabled_summary">Permetti invio dei files a diversi destinatari</string>
     <string name="autosend_frequency_summary">Con quale frequenza dovrebbero essere inviati i file di log, in minuti. Imposta su 0 per disabilitare questa opzione.</string>
