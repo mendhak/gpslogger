@@ -1,4 +1,4 @@
-GPSLogger  [![githubactions](https://github.com/mendhak/gpslogger/workflows/Android%20CI/badge.svg)](https://github.com/mendhak/gpslogger/actions) [![pgp](assets/pgp.png)](https://keybase.io/mendhak) [![Crowdin](https://badges.crowdin.net/gpslogger-for-android/localized.svg)](https://crowdin.com/project/gpslogger-for-android)
+GPSLogger  [![githubactions](https://github.com/mendhak/gpslogger/workflows/Android%20CI/badge.svg)](https://github.com/mendhak/gpslogger/actions) [![pgp](assets/pgp.png)](https://keybase.io/mendhak) [![Weblate](https://hosted.weblate.org/widgets/gpslogger/-/android/svg-badge.svg)](https://hosted.weblate.org/engage/gpslogger/)
 =========
 
 GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, OpenStreetMap, Dropbox, Email). This app aims to be as battery efficient as possible.
@@ -15,7 +15,7 @@ You can download directly [from the releases](https://github.com/mendhak/gpslogg
 
 ## Contribute
 
-You can help with [translations](http://crowdin.net/project/gpslogger-for-android) on Crowdin.
+You can help with [translations](https://hosted.weblate.org/engage/gpslogger/) on Weblate.  (Currently this is on Crowdin but this should be moving to Weblate soon)  
 
 You can also submit [pull requests](https://help.github.com/articles/using-pull-requests) for bug fixes and new features.
 
