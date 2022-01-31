@@ -232,7 +232,6 @@
     <string name="autoftp_invalid_summary">Algunos ajustes no son válidos. Comprueba todos los valores importantes.</string>
     <string name="autoftp_setup_title">FTP</string>
     <string name="menu_faq">Ayuda y preguntas frecuentes</string>
-    <string name="gpsf_missing_description">Esta funcionalidad necesita servicios de Google Play.</string>
     <string name="log_customurl_title">Enviar a URL personalizada</string>
     <string name="log_customurl_summary">Enviar datos a tu propio servidor via HTTP</string>
     <string name="txt_annotation">Comentarios:</string>
@@ -292,11 +291,8 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="no_network_message">No hay ninguna red disponible</string>
     <string name="hide_notification_buttons">Ocultar botones de notificación</string>
     <string name="restart_required">Es necesario reiniciar GPSLogger para que la configuración surta efecto</string>
-    <string name="activityrecognition_dont_log_if_still">No registrar si no hay movimiento</string>
     <string name="txt_activity">Actividad:</string>
-    <string name="activity_confidence">Confianza</string>
     <string name="activity_on_bicycle">En bicicleta</string>
-    <string name="activity_running">Corriendo</string>
     <string name="activity_walking">Caminando</string>
     <string name="altitude_subtractgeoidheight_summary">Utilizar media del nivel del mar (MSL) en lugar de altura WGS84 restando a la altitud GPS. Sólo se aplica a los puntos GPS por satélite , y no a los de la red o NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">Usar MSL en vez de WGS84</string>
