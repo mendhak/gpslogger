@@ -36,26 +36,26 @@
     <string name="sharing_mylocation">Saját pozíció</string>
     <string name="sharing_via">Megosztás...</string>
     <!-- general -->
-    <string name="foot">&#160;láb</string>
-    <string name="feet">&#160;láb</string>
-    <string name="meter">&#160;méter</string>
-    <string name="meters">&#160;méter</string>
+    <string name="foot"> láb</string>
+    <string name="feet"> láb</string>
+    <string name="meter"> méter</string>
+    <string name="meters"> méter</string>
     <string name="error">Hiba!</string>
     <string name="error_connection">Csatlakozási hiba! Ellenőrizze a telefon beállításait.</string>
-    <string name="seconds">&#160;mp</string>
-    <string name="minutes">&#160;perc</string>
-    <string name="hours">&#160;óra</string>
+    <string name="seconds"> mp</string>
+    <string name="minutes"> perc</string>
+    <string name="hours"> óra</string>
     <string name="gpsprovider_unavailable">Nem található GPS szolgáltató. Kérem ellenőrizze a telefon helymeghatározás beállítását!    </string>
     <string name="started">Elindult</string>
     <string name="providername_gps">GPS műholdak</string>
     <string name="providername_celltower">GSM adótornyok</string>
     <string name="not_applicable">nincs adat</string>
-    <string name="meters_per_second">&#160;m/s</string>
-    <string name="feet_per_second">&#160;ft/s</string>
-    <string name="miles_per_hour">&#160;mi/h</string>
-    <string name="miles">&#160;mi</string>
-    <string name="kilometers_per_hour">&#160;km/h</string>
-    <string name="kilometers">&#160;km</string>
+    <string name="meters_per_second"> m/s</string>
+    <string name="feet_per_second"> ft/s</string>
+    <string name="miles_per_hour"> mi/h</string>
+    <string name="miles"> mi</string>
+    <string name="kilometers_per_hour"> km/h</string>
+    <string name="kilometers"> km</string>
     <string name="unknown_direction">ismeretlen</string>
     <string name="sorry">Sajnáljuk!</string>
     <string name="success">Siker!</string>
@@ -371,4 +371,7 @@ Engedélyek megadásához lépjen be az alkalmazás beállítások képernyőre.
     <string name="app_theme_setting">Meghatározza, hogy világos vagy sötét legyen az alkalmazás felülete.</string>
     <string name="file_logging_log_time_with_offset_title">Idő naplózása időzóna eltolással</string>
     <string name="file_logging_log_time_with_offset_summary">Ahol lehetséges, UTC idő helyett ISO8601 időt írja időzóna eltolással.</string>
+    <string name="txt_battery_charging">Töltés</string>
+    <string name="logging_advanced_delete_files">Kijelölt fájlok törlése</string>
+    <string name="logging_advanced_delete_files_summary">Több fájl kiválasztásához nyomja hosszan.</string>
 </resources>
