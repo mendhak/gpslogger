@@ -291,9 +291,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="no_network_message">No hay ninguna red disponible</string>
     <string name="hide_notification_buttons">Ocultar botones de notificación</string>
     <string name="restart_required">Es necesario reiniciar GPSLogger para que la configuración surta efecto</string>
-    <string name="txt_activity">Actividad:</string>
     <string name="activity_on_bicycle">En bicicleta</string>
-    <string name="activity_walking">Caminando</string>
     <string name="altitude_subtractgeoidheight_summary">Utilizar media del nivel del mar (MSL) en lugar de altura WGS84 restando a la altitud GPS. Sólo se aplica a los puntos GPS por satélite , y no a los de la red o NMEA.</string>
     <string name="altitude_subtractgeoidheight_title">Usar MSL en vez de WGS84</string>
     <string name="altitude_subtractoffset_title">Restar número a altitud</string>
