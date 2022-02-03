@@ -131,12 +131,12 @@
     </Preference>
 
     <Preference
-        android:key="gpslogger_crowdin"
+        android:key="gpslogger_translations"
         android:title="Translations"
         app:iconSpaceReserved="false">
         <intent
             android:action="android.intent.action.VIEW"
-            android:data="https://crowdin.com/project/gpslogger-for-android" />
+            android:data="https://hosted.weblate.org/engage/gpslogger/" />
     </Preference>
 
     <Preference

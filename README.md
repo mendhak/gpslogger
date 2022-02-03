@@ -15,7 +15,7 @@ You can download directly [from the releases](https://github.com/mendhak/gpslogg
 
 ## Contribute
 
-You can help with [translations](https://hosted.weblate.org/engage/gpslogger/) on Weblate.  (Currently this is on Crowdin but this should be moving to Weblate soon)  
+You can help with [translations](https://hosted.weblate.org/engage/gpslogger/) on Weblate.    
 
 You can also submit [pull requests](https://help.github.com/articles/using-pull-requests) for bug fixes and new features.
 

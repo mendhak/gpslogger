@@ -6,7 +6,7 @@ Please note that I work on GPSLogger in my spare time and I may not always have 
 
 ### [Source code](https://github.com/mendhak/gpslogger/)
 
-### [Contribute translations on Crowdin](https://crowdin.com/project/gpslogger-for-android)
+### [Contribute translations on Weblate](https://hosted.weblate.org/engage/gpslogger/)
 
 ### [Licensed under GPLv2](license.html)
 
