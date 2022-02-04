@@ -34,9 +34,9 @@
     <string name="sharing_mylocation">Min placering</string>
     <string name="sharing_via">Del via</string>
     <!-- general -->
-    <string name="foot">&#160;fod</string>
-    <string name="feet">&#160;fod</string>
-    <string name="meters">&#160;meter</string>
+    <string name="foot"> fod</string>
+    <string name="feet"> fod</string>
+    <string name="meters"> meter</string>
     <string name="error">Fejl</string>
     <string name="error_connection">Forbindelsesfejl. Kontrollere dine telefonindstillinger.</string>
     <string name="hours">t</string>
@@ -46,8 +46,8 @@
     <string name="providername_gps">GPS-satellitter</string>
     <string name="providername_celltower">mobilmaster</string>
     <string name="not_applicable">ikke tilgængelig</string>
-    <string name="miles_per_hour">&#160;mi/t</string>
-    <string name="kilometers_per_hour">&#160;km/t</string>
+    <string name="miles_per_hour"> mi/t</string>
+    <string name="kilometers_per_hour"> km/t</string>
     <string name="unknown_direction">ukendt</string>
     <string name="sorry">Beklager</string>
     <string name="success">Udført</string>
@@ -145,7 +145,7 @@ præcision ved lavere frekvenser.    </string>
     <string name="osm_resetauth_summary">Fjern den lokale tilladelse til at kommunikere med din OSM konto.</string>
     <string name="osm_auth_error">En fejl opstod under forsøget på at kontakte OpenStreetMap-serverne. Tjek venligst at din mobil er på nettet, eller forsøg igen senere.    </string>
     <string name="osm_visibility">Synlighed</string>
-    <string name="osm_visibility_summary">Indstil synligheden af ​​dine GPS sporings-uploads</string>
+    <string name="osm_visibility_summary">Indstil synligheden af dine GPS sporings-uploads</string>
     <string name="osm_description">Beskrivelse</string>
     <string name="osm_description_summary">Anvendt beskrivelse, når du uploader en sporing</string>
     <string name="osm_tags">Etiketter</string>
