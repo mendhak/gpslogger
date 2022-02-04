@@ -167,7 +167,7 @@
     <string name="osm_pick_file">Wählen Sie eine Datei zum Hochladen aus</string>
     <string name="debuglog_title">Fehlerprotokoll-Datei schreiben</string>
     <string name="debuglog_summary">Schreibe Fehlerprotokolle in eine Datei auf der SD-Karte. Warnung: Die Datei wird sehr schnell größer.</string>
-    <string name="pref_logging_summary">Dateitypen, Erstellzeitpunkt und und Namensgebung</string>
+    <string name="pref_logging_summary">Dateitypen, Erstellzeitpunkt und Namensgebung</string>
     <string name="pref_general_title">Allgemeine Einstellungen</string>
     <string name="pref_general_summary">Start- und Anzeigeoptionen</string>
     <string name="emailprovider_google">Google Mail</string>
@@ -272,7 +272,7 @@
     <string name="txt_latitude_short">Breite</string>
     <string name="txt_longitude_short">Länge</string>
     <string name="log_nmea_title">In eine NIMEA-Datei protokollieren</string>
-    <string name="log_nmea_summary">Erstellt eine unbearbeitete NMEA-Datei, während man versucht, eine Positionsbestimmung zu erhalten. Diese Datei wächst sehr schnell. Dies funktioniert nur während der der Verwendung von GPS.</string>
+    <string name="log_nmea_summary">Erstellt eine unbearbeitete NMEA-Datei, während man versucht, eine Positionsbestimmung zu erhalten. Diese Datei wächst sehr schnell. Dies funktioniert nur während der Verwendung von GPS.</string>
     <string name="autoopengts_accountname">Benutzername</string>
     <string name="listeners_gps">GPS</string>
     <string name="listeners_gps_title">GPS/GNSS Standorte aufzeichnen</string>
