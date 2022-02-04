@@ -34,10 +34,10 @@
     <string name="sharing_mylocation">ตำแหน่งของฉัน</string>
     <string name="sharing_via">แชร์ผ่าน</string>
     <!-- general -->
-    <string name="foot">&#160;ฟุต</string>
-    <string name="feet">&#160;ฟุต</string>
-    <string name="meter">&#160;เมตร</string>
-    <string name="meters">&#160;เมตร</string>
+    <string name="foot"> ฟุต</string>
+    <string name="feet"> ฟุต</string>
+    <string name="meter"> เมตร</string>
+    <string name="meters"> เมตร</string>
     <string name="error">ผิดพลาด</string>
     <string name="error_connection">การเชื่อมต่อผิดพลาด กรุณาตรวจสอบการตั้งค่าโทรศัพท์ของคุณ</string>
     <string name="seconds">ว</string>
@@ -48,12 +48,12 @@
     <string name="started">เริ่มแล้ว</string>
     <string name="providername_gps">ดาวเทียม GPS</string>
     <string name="providername_celltower">เสาสัญญานมือถือ</string>
-    <string name="meters_per_second">&#160;ม./วิ.</string>
-    <string name="feet_per_second">&#160;ฟุต./วิ.</string>
-    <string name="miles_per_hour">&#160;ไมล์/ชม.</string>
-    <string name="miles">&#160;ไมล์</string>
-    <string name="kilometers_per_hour">&#160;กม./ชม.</string>
-    <string name="kilometers">&#160;กิโลเมตร</string>
+    <string name="meters_per_second"> ม./วิ.</string>
+    <string name="feet_per_second"> ฟุต./วิ.</string>
+    <string name="miles_per_hour"> ไมล์/ชม.</string>
+    <string name="miles"> ไมล์</string>
+    <string name="kilometers_per_hour"> กม./ชม.</string>
+    <string name="kilometers"> กิโลเมตร</string>
     <string name="unknown_direction">ไม่รู้จัก</string>
     <string name="sorry">ขออภัย</string>
     <string name="success">ประสบความสำเร็จ</string>
@@ -143,9 +143,9 @@
     <string name="osm_pick_file">เลือกไฟล์ที่จะอัพโหลด</string>
     <string name="pref_general_title">ตัวเลือกทั่วไป</string>
     <string name="pref_general_summary">ตัวเลือกการเริ่มต้นระบบและแสดงผล</string>
-    <string name="emailprovider_manual">คู่มือ​</string>
+    <string name="emailprovider_manual">คู่มือ</string>
     <string name="menu_upload">อัพโหลด</string>
-    <string name="gdocs_test_summary">อัปโหลด​เทสไฟล์​ไป Google​ Drive​</string>
+    <string name="gdocs_test_summary">อัปโหลดเทสไฟล์ไป Google Drive</string>
     <string name="gdocs_test_title">ทดสอบอัพโหลด</string>
     <string name="gdocs_testupload_success">อัพโหลดแล้ว กรุณาตรวจสอบ Google Docs สำหรับไฟล์ใหม่</string>
     <string name="autoemail_sendto_csv">คั่นแต่ละอีเมล์ด้วยจุลภาค</string>
