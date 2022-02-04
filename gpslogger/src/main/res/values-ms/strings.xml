@@ -33,9 +33,9 @@
     <string name="sharing_mylocation">Lokasi saya</string>
     <string name="sharing_via">Kongsi melalui</string>
     <!-- general -->
-    <string name="foot">kaki&#160;</string>
-    <string name="feet">&#160;kaki</string>
-    <string name="meters">&#160;meter</string>
+    <string name="foot">kaki </string>
+    <string name="feet"> kaki</string>
+    <string name="meters"> meter</string>
     <string name="error">Ralat</string>
     <string name="error_connection">Ralat penyambungan. Sila semak tetapan telefon anda.</string>
     <string name="seconds">s</string>
@@ -45,10 +45,10 @@
     <string name="started">Bermula</string>
     <string name="providername_gps">Satelit GPS</string>
     <string name="providername_celltower">Menara pemancar</string>
-    <string name="feet_per_second">&#160;kaki/s</string>
-    <string name="miles_per_hour">&#160;batu/j</string>
-    <string name="miles">&#160;batu</string>
-    <string name="kilometers_per_hour">&#160;km/j</string>
+    <string name="feet_per_second"> kaki/s</string>
+    <string name="miles_per_hour"> batu/j</string>
+    <string name="miles"> batu</string>
+    <string name="kilometers_per_hour"> km/j</string>
     <string name="unknown_direction">tidak diketahui</string>
     <string name="sorry">maaf</string>
     <string name="success">Kejayaan</string>
@@ -223,7 +223,7 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="annotation_requires_logging">Anotasi memerlukan pembalakan ke URL CSV / GPX / KML / Custom / GeoJSON</string>
     <string name="gpslogger_folder_title">Simpan ke folder</string>
     <string name="gpslogger_folder_summary">Di mana untuk menyimpan fail log ke, lalai ke/sdcard/GPSLogger</string>
-    <string name="new_file_custom_message">Anda boleh menggunakan% SER untuk siri peranti,% TAHUN,% MONTH,% MONTHNAME, HARI%,% DAYNAME,% HOUR,% MIN,% PROFILE,% VER untuk versi</string>
+    <string name="new_file_custom_message">Anda boleh menggunakan%SER untuk siri peranti,%YEAR,%MONTH,%MONTHNAME, %DAY, %DAYNAME,%HOUR,%MIN,%PROFILE,%VER untuk versi</string>
     <string name="new_file_prefix_serial_title">Awalan nombor siri peranti ke nama fail</string>
     <string name="new_file_prefix_serial_summary">Ini adalah nombor siri yang terdapat dalam status telefon anda </string>
     <string name="txt_travel_duration">Tempoh:</string>
@@ -253,7 +253,7 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="new_file_custom_each_time_title">Minta nama fail pada setiap permulaan</string>
     <string name="new_file_custom_each_time_summary">Ajukan nama fail tersuai setiap kali pembalakan bermula</string>
     <string name="new_file_custom_keep_changing_title">Benarkan nama fail tersuai untuk berubah secara dinamik</string>
-    <string name="new_file_custom_keep_changing_summary">Apabila nilai nama fail tersuai berubah, tinggalkan nama fail semasa diubah. Contohnya, jika% CLOCK digunakan, fail baru dicipta setiap jam. Nyahtanda jika anda mahu kekal statik.</string>
+    <string name="new_file_custom_keep_changing_summary">Apabila nilai nama fail tersuai berubah, tinggalkan nama fail semasa diubah. Contohnya, jika %HOUR digunakan, fail baru dicipta setiap jam. Nyahtanda jika anda mahu kekal statik.</string>
     <string name="donate_app">Dermakan (app)</string>
     <string name="tip_coffee">Beli kopi saya</string>
     <string name="no_network_message">Tiada litar yang ada</string>
