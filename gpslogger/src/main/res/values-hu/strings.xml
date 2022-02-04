@@ -334,7 +334,7 @@
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Készülék pozíciója</b> - Ez engedélyezi a GSM tornyokból és a GPS-ből származó adatok olvasását]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Képek, média, fájlok</b> - Engedélyezi a naplófájlok és tesztfájlok írását, és a fájllista olvasását feltöltéshez vagy megosztáshoz. A program nem fog hozzányúlni a fényképeihez vagy médiafájljaihoz.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Mindig engedélyezze</b> - Engedélyezze az alkalmazás számára, hogy a háttérben helyadatokat kapjon. ]]></string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Akkumulátor optimalizálás figyelmen kívül hagyása<b> -Hagyja ezt az alkalmazást a háttérben futni, akkumulátor optimalizálás nélkül. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Akkumulátor optimalizálás figyelmen kívül hagyása</b> -Hagyja ezt az alkalmazást a háttérben futni, akkumulátor optimalizálás nélkül.</string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Egy vagy több alkalmazásengedélyt elutasított, melyekre az alkalmazásnak szüksége van.
 Engedélyek megadásához lépjen be az alkalmazás beállítások képernyőre. <br /> <br />Ha véglegesen megtagadta az engedélyeket, visszaállíthatja őket a rendszerbeállításokban.]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[Ahhoz, hogy a GPSLogger futhasson a háttérben, további engedélyt kell megadnia. A következő képernyőn válassza ki: ]]></string>
