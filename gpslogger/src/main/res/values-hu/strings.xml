@@ -8,7 +8,7 @@
     <string name="ok">OK</string>
     <string name="cancel">Mégse</string>
     <string name="hide">Elrejt</string>
-    <string name="could_not_write_to_file">A fájl nem írható!</string>
+    <string name="could_not_write_to_file">A fájl nem írható</string>
     <string name="add_description">Leírás hozzáadása</string>
     <string name="letters_numbers">Csak (A-Z) és (0-9)</string>
     <string name="menu_annotate">Helyjelző</string>
@@ -34,18 +34,18 @@
     <string name="summary_current_filename">Fájl:</string>
     <string name="sharing_location_only">Csak a pozíciót</string>
     <string name="sharing_mylocation">Saját pozíció</string>
-    <string name="sharing_via">Megosztás...</string>
+    <string name="sharing_via">Megosztás</string>
     <!-- general -->
     <string name="foot"> láb</string>
     <string name="feet"> láb</string>
     <string name="meter"> méter</string>
     <string name="meters"> méter</string>
-    <string name="error">Hiba!</string>
+    <string name="error">Hiba</string>
     <string name="error_connection">Csatlakozási hiba! Ellenőrizze a telefon beállításait.</string>
     <string name="seconds"> mp</string>
     <string name="minutes"> perc</string>
     <string name="hours"> óra</string>
-    <string name="gpsprovider_unavailable">Nem található GPS szolgáltató. Kérem ellenőrizze a telefon helymeghatározás beállítását!    </string>
+    <string name="gpsprovider_unavailable">Nem található GPS szolgáltató. Kérem ellenőrizze a telefon helymeghatározás beállítását.</string>
     <string name="started">Elindult</string>
     <string name="providername_gps">GPS műholdak</string>
     <string name="providername_celltower">GSM adótornyok</string>
@@ -57,8 +57,8 @@
     <string name="kilometers_per_hour"> km/h</string>
     <string name="kilometers"> km</string>
     <string name="unknown_direction">ismeretlen</string>
-    <string name="sorry">Sajnáljuk!</string>
-    <string name="success">Siker!</string>
+    <string name="sorry">Sajnáljuk</string>
+    <string name="success">Siker</string>
     <string name="direction_roughly">Körülbelül: %s</string>
     <string name="direction_north">É</string>
     <string name="direction_northnortheast">ÉÉK</string>
@@ -105,7 +105,7 @@
     <string name="log_plain_text_summary">Pozíciók rögzítése CSV fájlformátumban</string>
     <string name="log_json_title">GeoJSON formátum használata</string>
     <string name="log_json_summary">Pozíciók rögzítése GeoJSON fájlformátumban</string>
-    <string name="new_file_creation_title">Naplófájlok létrehozása ...</string>
+    <string name="new_file_creation_title">Naplófájlok létrehozása</string>
     <string name="new_file_creation_summary">Megadhatja, hogy az alkalmazás milyen időközönként készítsen új naplófájlt.</string>
     <string name="new_file_creation_onceamonth">Havonta egyszer</string>
     <string name="new_file_creation_onceaday">Naponta egyszer</string>
@@ -162,7 +162,7 @@
     <string name="osm_resetauth">Engedély törlése</string>
     <string name="osm_lbl_authorize_description">Engedélyeket kell megadnia ennek az alkalmazásnak, hogy GPS nyomvonalakat tölthessen fel az OpenStreetMap programba.</string>
     <string name="osm_resetauth_summary">Távolítsa el az OSM fiók helyi engedélyeit. </string>
-    <string name="osm_auth_error">Hiba történt az OpenStreetMap szerverekhez kapcsolódáskor. Ellenőrizze a telefon internet kapcsolatát, vagy kérjük, próbálkozzon később     </string>
+    <string name="osm_auth_error">Hiba történt az OpenStreetMap szerverekhez kapcsolódáskor. Ellenőrizze a telefon internet kapcsolatát, vagy kérjük, próbálkozzon később.</string>
     <string name="osm_visibility">Láthatóság</string>
     <string name="osm_visibility_summary">Állítsa be a GPS nyomvonal feltöltéseinek láthatóságát</string>
     <string name="osm_description">Leírás</string>
@@ -203,7 +203,7 @@
     <string name="autosend_frequency_summary">Naplófájlok elküldésének gyakorisága percben. Ennek letiltásához állítsa 0-ra.</string>
     <string name="autosend_frequency">Milyen gyakran?</string>
     <string name="autosend_sendzip_title">Küldés zip-fájlként</string>
-    <string name="autosend_sendzip_summary">Küldés zip fájlként, ha lehetséges. Kapcsolja ki, ha nem működik a zip fájl küldés.</string>
+    <string name="autosend_sendzip_summary">Küldés zip fájlként, ha lehetséges. Kapcsolja ki, ha nem működik a zip fájl küldés</string>
     <string name="autosend_targets_category">Automatikus küldés helyek</string>
     <string name="menu_autosend_now">Automatikus küldés most</string>
     <string name="autosend_sending">Automatikus küldés</string>
@@ -331,7 +331,7 @@
     <string name="profile_add_new">Profil hozzáadása</string>
     <string name="gpslogger_permissions_rationale_title">Szükséges engedélyek</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ez az alkalmazás különféle engedélyeket igényel a megfelelő működéshez. Kérni fogja az engedélyek megadását (sajnálom). Itt olvasható az egyes engedélyek magyarázata.]]></string>
-    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Készülék pozíciója</b> - Ez engedélyezi a GSM tornyokból és a GPS-ből származó adatok olvasását]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><b>Készülék pozíciója</b> - Ez engedélyezi a GSM tornyokból és a GPS-ből származó adatok olvasását.</string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Képek, média, fájlok</b> - Engedélyezi a naplófájlok és tesztfájlok írását, és a fájllista olvasását feltöltéshez vagy megosztáshoz. A program nem fog hozzányúlni a fényképeihez vagy médiafájljaihoz.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Mindig engedélyezze</b> - Engedélyezze az alkalmazás számára, hogy a háttérben helyadatokat kapjon. ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Akkumulátor optimalizálás figyelmen kívül hagyása</b> -Hagyja ezt az alkalmazást a háttérben futni, akkumulátor optimalizálás nélkül.</string>
@@ -368,7 +368,7 @@ Engedélyek megadásához lépjen be az alkalmazás beállítások képernyőre.
     <string name="app_theme_follow_system">Rendszerbeállítás</string>
     <string name="app_theme_light">Világos téma</string>
     <string name="app_theme_dark">Sötét téma</string>
-    <string name="app_theme_setting">Meghatározza, hogy világos vagy sötét legyen az alkalmazás felülete.</string>
+    <string name="app_theme_setting">Meghatározza, hogy világos vagy sötét legyen az alkalmazás felülete</string>
     <string name="file_logging_log_time_with_offset_title">Idő naplózása időzóna eltolással</string>
     <string name="file_logging_log_time_with_offset_summary">Ahol lehetséges, UTC idő helyett ISO8601 időt írja időzóna eltolással.</string>
     <string name="txt_battery_charging">Töltés</string>
