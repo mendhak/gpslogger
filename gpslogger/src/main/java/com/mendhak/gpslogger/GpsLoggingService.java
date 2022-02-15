@@ -211,6 +211,7 @@ public class GpsLoggingService extends Service  {
                 if(bundle.getString(IntentConstants.SWITCH_PROFILE) != null){
                     LOG.info("Intent received - switch profile: " + bundle.getString(IntentConstants.SWITCH_PROFILE));
                     EventBus.getDefault().post(new ProfileEvents.SwitchToProfile(bundle.getString(IntentConstants.SWITCH_PROFILE)));
+                    needToStartGpsManager = session.isStarted();
                 }
 
                 if (bundle.get(IntentConstants.PREFER_CELLTOWER) != null) {
