@@ -693,6 +693,7 @@ public class GpsMainActivity extends AppCompatActivity
                 .withSavedInstance(savedInstanceState)
                 .withProfileImagesVisible(false)
                 .withHeaderBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.accentColor)))
+                .withCloseDrawerOnProfileListClick(false)
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
 
                     @Override
