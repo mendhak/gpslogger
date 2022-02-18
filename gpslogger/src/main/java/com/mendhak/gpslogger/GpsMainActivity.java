@@ -675,6 +675,9 @@ public class GpsMainActivity extends AppCompatActivity
 
             public void onDrawerClosed(View view) {
                 invalidateOptionsMenu();
+                if(drawerHeader.isSelectionListShown()){
+                    drawerHeader.toggleSelectionList(getApplicationContext());
+                }
             }
 
             public void onDrawerOpened(View drawerView) {
