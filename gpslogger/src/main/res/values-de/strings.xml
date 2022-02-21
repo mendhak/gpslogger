@@ -72,7 +72,7 @@
     <string name="direction_southsouthwest">Süd-Südwest</string>
     <string name="direction_southwest">Südwest</string>
     <string name="direction_westsouthwest">West-Südwest</string>
-    <string name="direction_west">West</string>
+    <string name="direction_west">Westen</string>
     <string name="direction_westnorthwest">West-Nordwest</string>
     <string name="direction_northwest">Nordwest</string>
     <string name="direction_northnorthwest">Nord-Nordwest</string>
@@ -132,7 +132,7 @@
     <string name="startonapplaunch_title">Protokollierung beim Öffnen der App starten</string>
     <string name="startonapplaunch_summary">Aufzeichnung beginnt direkt nach Öffnen der App</string>
     <string name="autoemail_title">E-Mail senden</string>
-    <string name="please_wait">Bitte warten …</string>
+    <string name="please_wait">Bitte warten</string>
     <string name="autoemail_target">E-Mail-Empfänger</string>
     <string name="autosend_frequency_display">Nach %s Minuten</string>
     <string name="autoemail_frequency_whenistop">Beim Antippen von „❌ Beenden”</string>
@@ -140,7 +140,7 @@
     <string name="autoemail_username_summary">Benutzername bei Ihrem E-Mail-Anbieter</string>
     <string name="autoemail_password_summary">Passwort bei Ihrem E-Mail-Anbieter</string>
     <string name="autoemail_ssl">Implizites SSL</string>
-    <string name="autoemail_ssl_summary">Umzuschalten versuchen, wenn Sie keine Verbindung herstellen können.</string>
+    <string name="autoemail_ssl_summary">Versuchen Sie, dies umzuschalten, wenn Sie keine Verbindung herstellen können</string>
     <string name="autoemail_choosepreset">Mail-Provider</string>
     <string name="autoemail_choosepreset_summary">Einen Anbieter auswählen oder manuell eingeben</string>
     <string name="autoemail_smtp_testemail">E-Mail-Funktion testen</string>
@@ -195,9 +195,9 @@
     <string name="autosend_enabled">Automatisches Senden erlauben</string>
     <string name="autosend_enabled_summary">Ermöglicht das Senden der Dateien an verschiedene Ziele</string>
     <string name="autosend_frequency_summary">Zeiteinheit (in Minuten) festlegen, wie häufig Protokolldateien gesendet werden sollen. Wert auf „0” (Null) setzen, um diese Funktion zu deaktivieren.</string>
-    <string name="autosend_frequency">Häufigkeit festlegen</string>
+    <string name="autosend_frequency">Wie oft\?</string>
     <string name="autosend_sendzip_title">Als Zip-Datei senden</string>
-    <string name="autosend_sendzip_summary">Wenn möglich eine ZIP-Datei senden. Funktion deaktivieren, um einzelne Dateien zu versenden, oder wenn der ZIP-Versand bei Ihnen nicht funktioniert.    </string>
+    <string name="autosend_sendzip_summary">Wenn möglich eine ZIP-Datei senden. Funktion deaktivieren, um einzelne Dateien zu versenden, oder wenn der ZIP-Versand bei Ihnen nicht funktioniert</string>
     <string name="autosend_targets_category">Ziele für automatisches Senden</string>
     <string name="menu_autosend_now">Jetzt automatisch senden</string>
     <string name="autosend_sending">Automatisch senden</string>
@@ -250,7 +250,7 @@
     <string name="autoftp_directory">Ordner</string>
     <string name="new_file_custom_message">Sie können %SER für die Geräteseriennummer verwenden und %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER für die Version</string>
     <string name="new_file_prefix_serial_title">Geräteseriennummer dem Dateinamen voranstellen</string>
-    <string name="new_file_prefix_serial_summary">Die Seriennummer Ihres Gerätes lautet: </string>
+    <string name="new_file_prefix_serial_summary">Ab Android 8 wird eine eindeutige Android-ID verwendet. Vor Android 8 wird die Build-Seriennummer verwendet, die Sie in Ihrem Telefonstatus finden.</string>
     <string name="txt_travel_duration">Dauer:</string>
     <string name="menu_onepoint">Einzelnen Messpunkt protokollieren</string>
     <string name="view_simple">Einfache Ansicht</string>
@@ -354,7 +354,7 @@
     <string name="customurl_http_headers">HTTP-Kopfzeilen</string>
     <string name="customurl_http_method">HTTP-Methode</string>
     <string name="customurl_http_basicauthentication">Authentifizierung</string>
-    <string name="hide_notification_from_status_bar_disallowed">Das Verbergen von Benachrichtigungen ist ab Android Oreo nicht mehr erlaubt.</string>
+    <string name="hide_notification_from_status_bar_disallowed">Das Verbergen von Benachrichtigungen ist ab Android Oreo nicht mehr erlaubt</string>
     <string name="reset_app_summary">Dadurch wird die App zurückgesetzt, alle Einstellungen und GPSLogger-Dateien werden gelöscht und die gewährten APP Berechtigungen widerrufen. Alle Daten gehen verloren!</string>
     <string name="reset_app_title">Anwendung zurücksetzen</string>
     <string name="app_theme_title">App Thema</string>
