@@ -33,10 +33,10 @@
     <string name="sharing_mylocation">Locaţia mea</string>
     <string name="sharing_via">Distribuie prin</string>
     <!-- general -->
-    <string name="foot">&#160;picior</string>
-    <string name="feet">&#160;picioare</string>
-    <string name="meter">&#160;metru</string>
-    <string name="meters">&#160;metri</string>
+    <string name="foot"> picior</string>
+    <string name="feet"> picioare</string>
+    <string name="meter"> metru</string>
+    <string name="meters"> metri</string>
     <string name="error">Eroare</string>
     <string name="error_connection">Eroare de conexiune. Vă rugăm să verificaţi setările telefonului.</string>
     <string name="seconds">secunde</string>
@@ -236,4 +236,8 @@
     <string name="pref_filedetails_title">Detalii fișiere și directoare</string>
     <string name="absolute_timeout_title">Timp absolut pentru fixare GPS</string>
     <string name="autosend_frequency_hint">Număr de minute</string>
+    <string name="ok">ok</string>
+    <string name="hide">Ascunde</string>
+    <string name="app_name">GPSLogger</string>
+    <string name="not_applicable">nu este aplicabil</string>
 </resources>
