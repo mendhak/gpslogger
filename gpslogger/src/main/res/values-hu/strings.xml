@@ -274,7 +274,7 @@
     <string name="save">Mentés</string>
     <string name="pref_filedetails_title">Fájl- és mappa részletek</string>
     <string name="absolute_timeout_title">Teljes idő a GPS javításra</string>
-    <string name="absolute_timeout_summary">Időkorlát másodpercben, az app maximum ennyi ideig próbálkozik egy pontosabb pozíció megszerzésével, függetlenül más beállításoktól. Hasznos, ha épületben tartózkodik: így a GPS nem meríti le az akkut. Ha 0-t ad meg, nincs időkorlát.</string>
+    <string name="absolute_timeout_summary">Időkorlát másodpercben, az app maximum ennyi ideig próbálkozik pontosabb pozíció megszerzésével, függetlenül más beállításoktól. Hasznos, ha épületben tartózkodik: így a GPS nem meríti le az akkut. Ha 0-t ad meg, nincs időkorlát.</string>
     <string name="txt_latitude_short">Sz</string>
     <string name="txt_longitude_short">H</string>
     <string name="log_nmea_title">Naplózás NMEA-ba</string>
@@ -292,7 +292,7 @@
     <string name="listeners_summary">Használható helyszolgáltatók; GPS műhold, GSM/Wifi, Passzív - más alkalmazásokban lekérdezett pozíciókat figyeli.</string>
     <string name="listeners_title">Helyszolgáltatók</string>
     <string name="autosend_frequency_hint">Percek száma</string>
-    <string name="pref_logging_file_no_permissions">A GPSLogger nem tudja írni a kiválasztott mappát. Kérem válasszon egy másik mappát.</string>
+    <string name="pref_logging_file_no_permissions">A GPSLogger nem tudja írni a kiválasztott mappát. Kérem válasszon másik mappát.</string>
     <string name="gpslogger_custom_path_need_permission">Ha egyéni útvonalakat szeretne használni a GPSLogger alkalmazásban, a következő képernyőn engedélyezze a GPSLogger számára, hogy kezelje az összes fájlt. Ezután próbálja meg újra végrehajtani a műveletet. Erre az Android 11+ rendszer korlátozása miatt van szükség.</string>
     <string name="storage_chooser_create_label">Létrehozás</string>
     <string name="storage_chooser_internal_storage_text">Belső tárolóhely</string>
