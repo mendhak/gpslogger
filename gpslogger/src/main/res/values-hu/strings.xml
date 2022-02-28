@@ -254,7 +254,7 @@
     <string name="new_file_prefix_serial_title">Készülék sorszámának használata fájlnév előtagként</string>
     <string name="new_file_prefix_serial_summary">Android 8-tól kezdve egyedi Android azonosító van. 8 előtti verióknál a telefon build sorozatszámát használja.</string>
     <string name="txt_travel_duration">Időtartam:</string>
-    <string name="menu_onepoint">Pont hozzáadása</string>
+    <string name="menu_onepoint">Aktuális pozíció mentése</string>
     <string name="view_simple">Egyszerű nézet</string>
     <string name="view_detailed">Részletes nézet</string>
     <string name="view_big">Nagy nézet</string>
