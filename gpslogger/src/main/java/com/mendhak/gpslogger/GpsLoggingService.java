@@ -648,10 +648,14 @@ public class GpsLoggingService extends Service  {
 
         if(!session.isTowerEnabled() && !session.isGpsEnabled()) {
             LOG.error("No provider available!");
-            session.setUsingGps(false);
             LOG.error(getString(R.string.gpsprovider_unavailable));
-            stopLogging();
-            setLocationServiceUnavailable();
+            if(preferenceHelper.keepLog()) {
+                startAbsoluteTimer();
+            } else {
+                session.setUsingGps(false);
+                stopLogging();
+                setLocationServiceUnavailable();
+            }
             return;
         }
 
