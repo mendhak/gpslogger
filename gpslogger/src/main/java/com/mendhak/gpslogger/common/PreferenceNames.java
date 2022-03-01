@@ -49,6 +49,7 @@ public  class PreferenceNames {
     public static final String LOG_PASSIVE_LOCATIONS="log_passive_locations";
     public static final String LOG_SATELLITE_LOCATIONS = "log_satellite_locations";
     public static final String LOG_NETWORK_LOCATIONS="log_network_locations";
+    public static final String KEEP_LOG = "keep_log";
     public static final String NEW_FILE_CREATION_MODE = "new_file_creation";
     public static final String LOG_DELETE_FILES = "delete_files";
     public static final String CUSTOM_FILE_NAME = "new_file_custom_name";

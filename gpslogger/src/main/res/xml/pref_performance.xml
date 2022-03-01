@@ -18,6 +18,13 @@
         app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:key="keep_log"
+        android:summary="@string/keep_log_summary"
+        android:title="@string/keep_log_title"
+        app:iconSpaceReserved="false" />
+
+    <SwitchPreferenceCompat
         android:key="log_passive_locations"
         android:summary="@string/listeners_passive_summary"
         android:title="@string/listeners_passive_title"

@@ -334,4 +334,6 @@
     <string name="hide_notification_from_status_bar_disallowed">从安卓8起，不允许设置隐藏状态栏通知</string>
     <string name="reset_app_summary">此功能将重置本应用，删除所有设置，删除GPS记录器文件，且取消授予此应用的所有权限。所有数据将会丢失！</string>
     <string name="reset_app_title">重置本应用</string>
+    <string name="keep_log_title">保持记录</string>
+    <string name="keep_log_summary">即使提供者不可用也保持记录</string>
 </resources>

@@ -686,6 +686,15 @@ public class PreferenceHelper {
         prefs.edit().putBoolean(PreferenceNames.LOG_NETWORK_LOCATIONS, value).apply();
     }
 
+    @ProfilePreference(name = PreferenceNames.KEEP_LOG)
+    public boolean keepLog(){
+        return prefs.getBoolean(PreferenceNames.KEEP_LOG, true);
+    }
+
+    public void setKeepLog(boolean value){
+        prefs.edit().putBoolean(PreferenceNames.KEEP_LOG, value).apply();
+    }
+
 
 
 
