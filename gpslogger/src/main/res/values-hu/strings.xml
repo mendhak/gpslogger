@@ -32,7 +32,7 @@
     <string name="summary_freq_max">maximum</string>
     <string name="summary_dist">Távolság:</string>
     <string name="summary_current_filename">Fájl:</string>
-    <string name="sharing_location_only">Csak a pozíciót</string>
+    <string name="sharing_location_only">Csak a pozíció</string>
     <string name="sharing_mylocation">Pozícióm</string>
     <string name="sharing_via">Megosztás ezzel</string>
     <!-- general -->
@@ -166,7 +166,7 @@
     <string name="osm_tags">Címkék</string>
     <string name="osm_tags_summary">Nyomvonal feltöltésekor alkalmazandó címkék</string>
     <string name="no_files_found">Nem található fájl, nem lehet megosztani vagy feltölteni.</string>
-    <string name="osm_pick_file">Feltöltendő fájl kiválasztása</string>
+    <string name="osm_pick_file">Megosztandó kiválasztása</string>
     <string name="debuglog_title">Hibakeresési fájl készítése</string>
     <string name="debuglog_summary">Hibakeresési üzeneteket ír az SD-kártyán lévő fájlba. Figyelem: A fájl nagyon gyorsan növekszik.</string>
     <string name="pref_logging_summary">Fájl típusok, létrehozás és elnevezés</string>
