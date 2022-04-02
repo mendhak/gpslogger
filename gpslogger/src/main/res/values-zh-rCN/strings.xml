@@ -35,10 +35,10 @@
     <string name="sharing_mylocation">我的位置</string>
     <string name="sharing_via">分享方式</string>
     <!-- general -->
-    <string name="foot">&#160;英尺</string>
-    <string name="feet">&#160;英尺</string>
-    <string name="meter">&#160;米</string>
-    <string name="meters">&#160;米</string>
+    <string name="foot"> 英尺</string>
+    <string name="feet"> 英尺</string>
+    <string name="meter"> 米</string>
+    <string name="meters"> 米</string>
     <string name="error">错误</string>
     <string name="error_connection">连接错误。请检查你的手机设置。</string>
     <string name="seconds">秒</string>
@@ -50,8 +50,8 @@
     <string name="providername_gps">GPS卫星</string>
     <string name="providername_celltower">基站</string>
     <string name="not_applicable">无</string>
-    <string name="meters_per_second">&#160;米/秒</string>
-    <string name="feet_per_second">&#160;英尺/秒</string>
+    <string name="meters_per_second"> 米/秒</string>
+    <string name="feet_per_second"> 英尺/秒</string>
     <string name="miles_per_hour">英里/时</string>
     <string name="miles">英里</string>
     <string name="kilometers_per_hour">千米/时</string>
@@ -334,4 +334,5 @@
     <string name="hide_notification_from_status_bar_disallowed">从安卓8起，不允许设置隐藏状态栏通知</string>
     <string name="reset_app_summary">此功能将重置本应用，删除所有设置，删除GPS记录器文件，且取消授予此应用的所有权限。所有数据将会丢失！</string>
     <string name="reset_app_title">重置本应用</string>
+    <string name="hide">隐藏</string>
 </resources>

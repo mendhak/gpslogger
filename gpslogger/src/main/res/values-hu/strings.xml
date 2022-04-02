@@ -32,7 +32,7 @@
     <string name="summary_freq_max">maximum</string>
     <string name="summary_dist">Távolság:</string>
     <string name="summary_current_filename">Fájl:</string>
-    <string name="sharing_location_only">Csak a pozíciót</string>
+    <string name="sharing_location_only">Csak a pozíció</string>
     <string name="sharing_mylocation">Pozícióm</string>
     <string name="sharing_via">Megosztás ezzel</string>
     <!-- general -->
@@ -166,7 +166,7 @@
     <string name="osm_tags">Címkék</string>
     <string name="osm_tags_summary">Nyomvonal feltöltésekor alkalmazandó címkék</string>
     <string name="no_files_found">Nem található fájl, nem lehet megosztani vagy feltölteni.</string>
-    <string name="osm_pick_file">Feltöltendő fájl kiválasztása</string>
+    <string name="osm_pick_file">Megosztandó kiválasztása</string>
     <string name="debuglog_title">Hibakeresési fájl készítése</string>
     <string name="debuglog_summary">Hibakeresési üzeneteket ír az SD-kártyán lévő fájlba. Figyelem: A fájl nagyon gyorsan növekszik.</string>
     <string name="pref_logging_summary">Fájl típusok, létrehozás és elnevezés</string>
@@ -254,7 +254,7 @@
     <string name="new_file_prefix_serial_title">Készülék sorszámának használata fájlnév előtagként</string>
     <string name="new_file_prefix_serial_summary">Android 8-tól kezdve egyedi Android azonosító van. 8 előtti verióknál a telefon build sorozatszámát használja.</string>
     <string name="txt_travel_duration">Időtartam:</string>
-    <string name="menu_onepoint">Pont hozzáadása</string>
+    <string name="menu_onepoint">Aktuális pozíció mentése</string>
     <string name="view_simple">Egyszerű nézet</string>
     <string name="view_detailed">Részletes nézet</string>
     <string name="view_big">Nagy nézet</string>
