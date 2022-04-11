@@ -476,6 +476,7 @@
     <string name="file_logging_log_time_with_offset_summary">Where possible, write the ISO8601 time with timezone offset instead of UTC.</string>
     <string name="logging_advanced_delete_files">Delete selected files</string>
     <string name="logging_advanced_delete_files_summary">Long press to select multiple files.</string>
+    <string name="customurl_all_parameters">All parameters:</string>
 
 
 </resources>
