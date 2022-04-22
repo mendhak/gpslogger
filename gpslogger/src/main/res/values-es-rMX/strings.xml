@@ -43,7 +43,7 @@
     <string name="error">Error</string>
     <string name="error_connection">Error de conexión. Compruebe la configuración del teléfono.</string>
     <string name="seconds">s</string>
-    <string name="minutes"> min</string>
+    <string name="minutes"> minutos</string>
     <string name="hours">horas</string>
     <string name="gpsprovider_unavailable">No hay ningún proveedor GPS disponible. Es necesario comprobar los ajustes de ubicación y activar algún proveedor de ubicación.
     </string>
@@ -52,8 +52,8 @@
     <string name="providername_celltower">Torres Celulares</string>
     <string name="not_applicable">n/a</string>
     <string name="meters_per_second"> m/s</string>
-    <string name="feet_per_second"> ft/s</string>
-    <string name="miles_per_hour"> mi/h</string>
+    <string name="feet_per_second"> pies/s</string>
+    <string name="miles_per_hour"> millas/h</string>
     <string name="miles">mi</string>
     <string name="kilometers_per_hour">km/h</string>
     <string name="kilometers">km</string>
@@ -252,7 +252,7 @@
     <string name="autoftp_directory">Carpeta</string>
     <string name="new_file_custom_message">Puede utilizar %SER para dispositivo serial %YEAR %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER versión</string>
     <string name="new_file_prefix_serial_title">Utilizar el número de serie del dispositivo como prefijo para el nombre del archivo</string>
-    <string name="new_file_prefix_serial_summary">Este es el número de serie del teléfono </string>
+    <string name="new_file_prefix_serial_summary">A partir de Android 8, se utiliza una ID de Android única. Pre-Android 8, se usa el número de serie de compilación, que se encuentra en el estado de su teléfono.</string>
     <string name="txt_travel_duration">Duración:</string>
     <string name="menu_onepoint">Registrar un único punto</string>
     <string name="view_simple">Vista simple</string>
@@ -271,8 +271,8 @@
     <string name="pref_filedetails_title">Detalles de archivo y carpeta</string>
     <string name="absolute_timeout_title">Tiempo absoluto para fijar al GPS</string>
     <string name="absolute_timeout_summary">Número de segundos tras los que la aplicación cancela la búsqueda de posición, ignorando los demás ajustes. Especialmente útil cuando estás en interiores para evitar que el GPS gaste batería. Establecer en 0 para evitar el tiempo de espera.</string>
-    <string name="txt_latitude_short">Lat</string>
-    <string name="txt_longitude_short">Lon</string>
+    <string name="txt_latitude_short">Latitud</string>
+    <string name="txt_longitude_short">Longitud</string>
     <string name="log_nmea_title">Loguear a NMEA</string>
     <string name="log_nmea_summary">Crea un archivo NMEA en crudo durante la búsqueda de posición. Este archivo crece muy rápidamente. Sólo funciona mientras se está utilizando el GPS.</string>
     <string name="autoopengts_accountname">Nombre de cuenta</string>
@@ -364,7 +364,10 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="app_theme_follow_system">Automático (sistema)</string>
     <string name="app_theme_light">Tema claro</string>
     <string name="app_theme_dark">Tema oscuro</string>
-    <string name="app_theme_setting">Determina si se quiere usar el tema claro o oscuro para la aplicación.</string>
+    <string name="app_theme_setting">Determina cómo configurar el tema claro u oscuro de la aplicación</string>
     <string name="file_logging_log_time_with_offset_title">Registrar tiempo con diferencia horaria</string>
     <string name="file_logging_log_time_with_offset_summary">Donde sea posible, escriba el tiempo ISO8601 con diferencia horaria en lugar de UTC. </string>
+    <string name="txt_battery_charging">Cargando</string>
+    <string name="logging_advanced_delete_files">Eliminar archivos seleccionados</string>
+    <string name="logging_advanced_delete_files_summary">Pulsación larga para seleccionar varios archivos.</string>
 </resources>
