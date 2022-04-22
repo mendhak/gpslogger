@@ -675,6 +675,9 @@ public class GpsMainActivity extends AppCompatActivity
 
             public void onDrawerClosed(View view) {
                 invalidateOptionsMenu();
+                if(drawerHeader.isSelectionListShown()){
+                    drawerHeader.toggleSelectionList(getApplicationContext());
+                }
             }
 
             public void onDrawerOpened(View drawerView) {
@@ -690,6 +693,7 @@ public class GpsMainActivity extends AppCompatActivity
                 .withSavedInstance(savedInstanceState)
                 .withProfileImagesVisible(false)
                 .withHeaderBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.accentColor)))
+                .withCloseDrawerOnProfileListClick(false)
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
 
                     @Override
