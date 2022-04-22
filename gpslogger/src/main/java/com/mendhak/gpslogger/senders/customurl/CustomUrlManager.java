@@ -23,7 +23,6 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -202,7 +201,7 @@ public class CustomUrlManager extends FileSender {
         replacements.put("lat", String.valueOf(sLoc.getLatitude()));
         replacements.put("lon", String.valueOf(sLoc.getLongitude()));
         replacements.put("sat", String.valueOf(sLoc.getSatelliteCount()));
-        replacements.put("desc", String.valueOf(URLEncoder.encode(Strings.htmlDecode(description), "UTF-8")));
+        replacements.put("desc", String.valueOf(Strings.getUrlEncodedString(Strings.htmlDecode(description))));
         replacements.put("alt", String.valueOf(sLoc.getAltitude()));
         replacements.put("acc", String.valueOf(sLoc.getAccuracy()));
         replacements.put("dir", String.valueOf(sLoc.getBearing()));
@@ -211,13 +210,13 @@ public class CustomUrlManager extends FileSender {
         replacements.put("timestamp", String.valueOf(sLoc.getTime()/1000));
 
         if(!Strings.isNullOrEmpty(sLoc.getTimeWithOffset())){
-            replacements.put("timeoffset", sLoc.getTimeWithOffset());
+            replacements.put("timeoffset", Strings.getUrlEncodedString(sLoc.getTimeWithOffset()));
         }
         else {
-            replacements.put("timeoffset", Strings.getIsoDateTimeWithOffset(new Date(sLoc.getTime())));
+            replacements.put("timeoffset", Strings.getUrlEncodedString(Strings.getIsoDateTimeWithOffset(new Date(sLoc.getTime()))));
         }
 
-        replacements.put("time", String.valueOf(Strings.getIsoDateTime(new Date(sLoc.getTime()))));
+        replacements.put("time", String.valueOf(Strings.getUrlEncodedString(Strings.getIsoDateTime(new Date(sLoc.getTime())))));
         replacements.put("starttimestamp", String.valueOf(sessionStartTimeStamp/1000));
         replacements.put("date", String.valueOf(Strings.getIsoCalendarDate(new Date(sLoc.getTime()))));
         replacements.put("batt", String.valueOf(batteryLevel));
@@ -226,7 +225,7 @@ public class CustomUrlManager extends FileSender {
         replacements.put("ser", String.valueOf(buildSerial));
         replacements.put("act", ""); //Activity detection was removed, but keeping this here for backward compatibility.
         replacements.put("filename", fileName);
-        replacements.put("profile",URLEncoder.encode(profileName, "UTF-8"));
+        replacements.put("profile", Strings.getUrlEncodedString(profileName));
         replacements.put("hdop", sLoc.getHDOP());
         replacements.put("vdop", sLoc.getVDOP());
         replacements.put("pdop", sLoc.getPDOP());

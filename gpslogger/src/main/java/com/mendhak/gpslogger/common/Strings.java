@@ -25,6 +25,8 @@ import android.os.Build;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -509,6 +511,14 @@ public class Strings {
             default:
                 return getDecimalDegrees(decimaldegrees);
 
+        }
+    }
+
+    public static String getUrlEncodedString(String message){
+        try {
+            return URLEncoder.encode(message, "UTF-8").replace("%3A", ":");
+        } catch (Exception e) {
+            return message;
         }
     }
 
