@@ -45,7 +45,7 @@ android {
         targetSdkVersion 30
 
         versionCode 121
-        versionName "121-rc1"
+        versionName "121"
     }
 
     buildTypes {
