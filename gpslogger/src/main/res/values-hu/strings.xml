@@ -369,4 +369,5 @@
     <string name="txt_battery_charging">Töltés</string>
     <string name="logging_advanced_delete_files">Kijelölt fájlok törlése</string>
     <string name="logging_advanced_delete_files_summary">Több fájl kiválasztásához nyomja meg hosszan.</string>
+    <string name="customurl_all_parameters">Minden paraméter:</string>
 </resources>
