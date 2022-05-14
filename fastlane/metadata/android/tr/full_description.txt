@@ -19,7 +19,7 @@ Uygulama hatalarını, özellik isteklerinizi, sorularınızı github.com/mendha
 ***Notlar
 
 
-GPSKayıt programı MyTracks'ın yerine yapılmamıştır.    
+GPSKayıt programı OpenTracks'ın yerine yapılmamıştır.
 
 Bu program veri bağlantısını yalnızca kullanıcı oto-email, OpenStreetMap yada DropBox özelliklerini aktifleştirirse kullanır.
 

@@ -19,7 +19,7 @@ Mga bug, mga kahilingan na feature, mga tanong - mangyaring isumite ang mga ito 
 
 *** Mga Tala:
 
-Ang GPSLogger ay hindi isang kapalit ng MyTracks.  Ang MyTracks ay sinadya para sa maikling paggamit (ito ay may napakaraming mga features na tumatakbo), ang GPSLogger ay sinadya upang magtagal ng mahabang panahon.
+Ang GPSLogger ay hindi isang kapalit ng OpenTracks.  Ang OpenTracks ay sinadya para sa maikling paggamit (ito ay may napakaraming mga features na tumatakbo), ang GPSLogger ay sinadya upang magtagal ng mahabang panahon.
 
 Ang isang koneksyon ng datos ay ginagamit lamang ng app na ito kung gumagamit ka ng auto-email o OpenStreetMap o mga features ng Dropbox.
 

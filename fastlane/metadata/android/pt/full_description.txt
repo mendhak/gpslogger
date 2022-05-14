@@ -19,7 +19,7 @@ Bugs, pedidos de funcionalidades, questões - por favor enviar para github.com/m
 
 ***Notas:
 
-O GPSLogger não é uma substituição do MyTracks.  A aplicação MyTracks é usada para períodos curtos (uma vez que usa uma grande quantidade de funcionalidades enquanto corre), o GPSLogger ambiciona correr em background durante grandes períodos de tempo.
+O GPSLogger não é uma substituição do OpenTracks.  A aplicação OpenTracks é usada para períodos curtos (uma vez que usa uma grande quantidade de funcionalidades enquanto corre), o GPSLogger ambiciona correr em background durante grandes períodos de tempo.
 
 A aplicação usa uma ligação de dados apenas se for configurada para usar as funcionaldiades de envio automático de email, envio para Dropbox ou OpenStretMap.
 

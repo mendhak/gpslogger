@@ -19,7 +19,7 @@ Greške, zahtjevi, pitanja - molimo vas pošaljite ih na github.com/mendhak/gpsl
 
 ***Napomene:
 
-GPSLogger nije zamjena za MyTracks.  MyTracks je namijenjen za kratku uporabu (jer su pokrenuti puno sadržaja), GPSLogger je za korištenje dulje vremena.
+GPSLogger nije zamjena za OpenTracks.  OpenTracks je namijenjen za kratku uporabu (jer su pokrenuti puno sadržaja), GPSLogger je za korištenje dulje vremena.
 
 Ova aplikacija koristi podatkovnu vezu samo ako koristite automatski e-mail ili OpenStreetMap ili Dropbox značajke.
 

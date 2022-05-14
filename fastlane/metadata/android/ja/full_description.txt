@@ -20,7 +20,7 @@ github.com/mendhak/gpslogger (issue tracker).
 
 ***補足：
 
-GPSLoggerはMyTracksを置き換えるものではありません。  MyTracks は（多数の機能がありますが）短時間の使用を仮定しているのに対し、GPSLoggerは長時間での使用を考慮しています。
+GPSLoggerはOpenTracksを置き換えるものではありません。  OpenTracks は（多数の機能がありますが）短時間の使用を仮定しているのに対し、GPSLoggerは長時間での使用を考慮しています。
 
 このアプリのデータ接続は自動メール送信やOpneStreetMap、Dropboxにアップロードするためだけに使用されています。
 

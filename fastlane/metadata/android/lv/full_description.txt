@@ -19,7 +19,7 @@ Lūdzu rakstiet-kļūdas, iespēju ierosinājumus un jautājumus: github.com/man
 
 ***Piezīmes:
 
-GPSLogger nav MyTracks aplikācijas aizvietotājs. MyTracks aplikācija ir domāta īsa laika sprīža lietošanai (Jo tajā darbojas daudzi procesi), GPSLogger ir domāts tā, lai tas darbotos ilgu laiku.  MyTracks ir domāts priekš īsas lietošanas (Jo tas darbina vairākas opcijas), GPSLogger ir domātas ilgam laikam.
+GPSLogger nav OpenTracks aplikācijas aizvietotājs. OpenTracks aplikācija ir domāta īsa laika sprīža lietošanai (Jo tajā darbojas daudzi procesi), GPSLogger ir domāts tā, lai tas darbotos ilgu laiku.  OpenTracks ir domāts priekš īsas lietošanas (Jo tas darbina vairākas opcijas), GPSLogger ir domātas ilgam laikam.
 
 Šī aplikācija izmanto interneta datu savienojumu tikai, ja jūs izmantojat auto-epasta, OpenStreetMap vai Dropbox mākoņa opcijas.
 

@@ -19,7 +19,7 @@ Hibáknál, új funkciók kérésénél, kérdéseinél - kérjük, írjon: gith
 
 *** Megjegyzések:
 
-GPSLogger nem MyTracks helyettesítő.  A MyTracks célja a rövid ideig tartó adatrögzítés (ilyen például a futás), a GPSLogger inkább a hosszú távú nyomonkövetésre készült.
+GPSLogger nem OpenTracks helyettesítő.  A OpenTracks célja a rövid ideig tartó adatrögzítés (ilyen például a futás), a GPSLogger inkább a hosszú távú nyomonkövetésre készült.
 
 Adatkapcsolatot csak akkor használ a program, ha engedélyezi az automatikus e-mail küldést, az OpenStreetMap-ra vagy Dropbox-ra feltöltést.
 

@@ -19,7 +19,7 @@
 
 ***공지 사항:
 
-GPSLogger는 MyTrack의 대체본이 아닙니다.  MyTracks는 많은 기능이 내포되어 있어서 단기적 사용을 목적으로 하지만, GPSLogger는 장기적 사용을 목적으로 합니다.
+GPSLogger는 MyTrack의 대체본이 아닙니다.  OpenTracks는 많은 기능이 내포되어 있어서 단기적 사용을 목적으로 하지만, GPSLogger는 장기적 사용을 목적으로 합니다.
 
 자동 이메일, OpenStreetMap이나 Dropbox를 사용할 때에만 데이터 연결이 사용됩니다.
 

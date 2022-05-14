@@ -19,7 +19,7 @@ Hlášení chyb, žádosti o funkce - vkládejte prosím do github.com/mendhak/g
 
 ***Poznámky:
 
-GPSLogger není náhrada MyTracks.  MyTracks je určeno pro krátkodobé použití (protože je spuštěno mnoho funkcí) zatímco GPSLogger je koncipován tak, aby vydržel běžet dlouhou dobu.
+GPSLogger není náhrada OpenTracks.  OpenTracks je určeno pro krátkodobé použití (protože je spuštěno mnoho funkcí) zatímco GPSLogger je koncipován tak, aby vydržel běžet dlouhou dobu.
 
 Datové připojení používá program pouze pro funkce automatický email nebo OpenStreetMap nebo Dropbox.
 

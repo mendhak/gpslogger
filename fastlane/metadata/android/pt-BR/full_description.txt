@@ -19,7 +19,7 @@ Bugs, solicitações, perguntas - por favor envie-os para github.com/mendhak/gps
 
 * * * Notas:
 
-GPSLogger não é um substituto de MyTracks.  MyTracks é destinada ao uso curto (como tem um monte de recursos de execução), GPSLogger é feito para durar muito tempo.
+GPSLogger não é um substituto de OpenTracks.  OpenTracks é destinada ao uso curto (como tem um monte de recursos de execução), GPSLogger é feito para durar muito tempo.
 
 Uma conexão de dados é usada por este app somente se você usar o auto e-mail ou funcionalidades do OpenStreetMap ou Dropbox.
 

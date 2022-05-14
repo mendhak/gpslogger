@@ -19,7 +19,7 @@
 
 ***備註：
 
-GPSLogger 並非一個「我的足跡」（MyTracks）替代品。  「我的足跡」適合短期使用（同時執行的功能很多），GPSLogger 細水長流。
+GPSLogger 並非一個「我的足跡」（OpenTracks）替代品。  「我的足跡」適合短期使用（同時執行的功能很多），GPSLogger 細水長流。
 
 本程式只在閣下要求電子郵件、OpenStreetMap 或 Dropbox「自動送出」功能時使用網路連接。
 

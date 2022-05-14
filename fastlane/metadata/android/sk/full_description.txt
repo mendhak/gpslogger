@@ -19,7 +19,7 @@ Chyby, požiadavky na nové funkcie a otázky prosím zadávajte na stránke git
 
 *** Poznámky:
 
-GPSLogger nie je náhrada aplikácie MyTracks.  Aplikácia MyTracks je určená na krátke použitie (pretože má spustených mnoho funkcií súčasne), GPSLogger môžete používať dlhšiu dobu.
+GPSLogger nie je náhrada aplikácie OpenTracks.  Aplikácia OpenTracks je určená na krátke použitie (pretože má spustených mnoho funkcií súčasne), GPSLogger môžete používať dlhšiu dobu.
 
 Dátové pripojenie sa využíva iba ak máte aktívne zasielanie e-mailom alebo odosielanie do služby OpenStreetMap či Dropbox.
 

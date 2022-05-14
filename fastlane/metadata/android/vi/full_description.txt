@@ -19,7 +19,7 @@ Lỗi, yêu cầu tính năng, câu hỏi - vui lòng gửi đến github.com/me
 
 ***Ghi chú:
 
-GPSLogger không phải là phần mềm thay thế MyTracks.  MyTracks dùng để sử dụng trong thời gian ngắn (vì nó có rất nhiều tính năng chạy), GPSLogger có nghĩa là sử dụng trong một thời gian dài.
+GPSLogger không phải là phần mềm thay thế OpenTracks.  OpenTracks dùng để sử dụng trong thời gian ngắn (vì nó có rất nhiều tính năng chạy), GPSLogger có nghĩa là sử dụng trong một thời gian dài.
 
 Kết nối dữ liệu chỉ được sử dụng nếu bạn sử dụng tính năng tự động gửi email hoặc OpenStreetMap hoặc Dropbox.
 

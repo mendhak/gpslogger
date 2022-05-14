@@ -19,7 +19,7 @@ Para Errores / Fallos, Peticiones de nuevas funcionalidades o preguntas, por fav
 
 ***Notas:
 
-GPSLogger no es un sustituto de "MyTracks".  MyTracks está diseñado para ser usado durante periodos cortos de tiempo (ya que tiene muchas características ejecutándose), GPSLogger está diseñado para ejecutarse durante mucho tiempo.
+GPSLogger no es un sustituto de "OpenTracks".  OpenTracks está diseñado para ser usado durante periodos cortos de tiempo (ya que tiene muchas características ejecutándose), GPSLogger está diseñado para ejecutarse durante mucho tiempo.
 
 La conexión de datos es usada por esta aplicación sólo si se usa la opción "Auto-Email" en Dropbox u OpenStreetMap.
 

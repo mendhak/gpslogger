@@ -19,7 +19,7 @@ Pakiusap e sumita ang mga bug, hiling na mga katangian, mga tanong sa github.com
 
 ***Tandaan:
 
-Ang GPSLogger ay hindi pamalit sa MyTracks.  Ang MyTracks ay ginawa para sa pangmadaliang gamit (sapagkat marami syang mga katangiang tumatakbo), GPSLogger ay ginawa para sa pangmatagalang oras.
+Ang GPSLogger ay hindi pamalit sa OpenTracks.  Ang OpenTracks ay ginawa para sa pangmadaliang gamit (sapagkat marami syang mga katangiang tumatakbo), GPSLogger ay ginawa para sa pangmatagalang oras.
 
 Gagamit lang ang app na ito ng data connection kung gumamit ka ng owtomatikong email o OpenStreetMap o mga katangian ng Dropbox.
 
