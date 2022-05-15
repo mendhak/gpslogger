@@ -34,7 +34,7 @@
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="30"
+                        android:layout_weight="25"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/txt_latitude"
@@ -49,6 +49,7 @@
                         android:textSize="@dimen/detailedview_latlong_textsize"
                         android:id="@+id/detailedview_lat_text"
                         android:text=""
+                        android:maxLines="1"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
                         android:editable="false"
@@ -64,7 +65,7 @@
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="30"
+                        android:layout_weight="25"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/txt_longitude"
@@ -78,6 +79,7 @@
                         android:minWidth="200dp"
                         android:textSize="@dimen/detailedview_latlong_textsize"
                         android:text=""
+                        android:maxLines="1"
                         android:id="@+id/detailedview_lon_text"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
