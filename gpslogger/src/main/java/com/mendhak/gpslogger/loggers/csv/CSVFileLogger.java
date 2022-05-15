@@ -72,7 +72,7 @@ public class CSVFileLogger implements FileLogger {
     private final Integer batteryLevel;
     private final boolean batteryCharging;
     private File file;
-    protected final String name = "TXT";
+    protected final String name = "CSV";
 
     public CSVFileLogger(File file, Context context) {
         this.file = file;
