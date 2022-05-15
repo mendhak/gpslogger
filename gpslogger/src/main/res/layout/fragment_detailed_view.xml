@@ -48,7 +48,7 @@
                         android:minWidth="200dp"
                         android:textSize="@dimen/detailedview_latlong_textsize"
                         android:id="@+id/detailedview_lat_text"
-                        android:text=""
+                        android:text="00° 00' 00.0000&quot; N"
                         android:maxLines="1"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
