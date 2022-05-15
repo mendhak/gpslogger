@@ -32,10 +32,10 @@
     <string name="sharing_mylocation">Aking Lokasyon</string>
     <string name="sharing_via">Ibahagi sa pamamagitan ng</string>
     <!-- general -->
-    <string name="foot">&#160;piye</string>
-    <string name="feet">&#160;piye</string>
-    <string name="meter">&#160;metro</string>
-    <string name="meters">&#160;metro</string>
+    <string name="foot"> piye</string>
+    <string name="feet"> piye</string>
+    <string name="meter"> metro</string>
+    <string name="meters"> metro</string>
     <string name="error">Mali</string>
     <string name="error_connection">May mali sa koneksyon. Mangyaring suriin ang mga settings ng iyong telepono.</string>
     <string name="gpsprovider_unavailable">Walang provider ng GPS ang magagamit. Mangyaring suriin ang iyong mga settings ng lokasyon at paganahin ang isang provider ng lokasyon.    </string>
@@ -283,4 +283,20 @@
     <string name="customurl_http_body">HTTP Katawan</string>
     <string name="customurl_http_headers">Mga header ng HTTP</string>
     <string name="customurl_http_method">HTTP na Paraan</string>
+    <string name="app_name">GPSLogger</string>
+    <string name="ok">OK</string>
+    <string name="hide">Itago</string>
+    <string name="summary_current_filename">File:</string>
+    <string name="meters_per_second"> m/s</string>
+    <string name="seconds"> s</string>
+    <string name="minutes"> min</string>
+    <string name="hours"> oras</string>
+    <string name="feet_per_second"> ft/s</string>
+    <string name="not_applicable">n/a</string>
+    <string name="miles_per_hour"> mi/h</string>
+    <string name="miles"> mi</string>
+    <string name="kilometers_per_hour"> km/h</string>
+    <string name="kilometers"> km</string>
+    <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
+    <string name="log_plain_text_csv_advanced_title">Mag-log sa mga setting ng CSV</string>
 </resources>
