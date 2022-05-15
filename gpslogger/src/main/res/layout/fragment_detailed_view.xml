@@ -34,11 +34,10 @@
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="25"
+                        android:layout_weight="20"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/txt_latitude"
-                        android:textSize="@dimen/detailedview_latlong_labelsize"
                         android:id="@+id/detailedview_lat_label"/>
 
                     <EditText
@@ -65,11 +64,10 @@
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="25"
+                        android:layout_weight="20"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/txt_longitude"
-                        android:textSize="@dimen/detailedview_latlong_labelsize"
                         android:id="@+id/detailedview_lon_label"/>
 
                     <EditText
