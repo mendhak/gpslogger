@@ -992,7 +992,6 @@ public class GpsLoggingService extends Service  {
         nextPointAlarmManager.cancel(pi);
     }
 
-    @TargetApi(23)
     private void setAlarmForNextPoint() {
         LOG.debug("Set alarm for " + preferenceHelper.getMinimumLoggingInterval() + " seconds");
 
@@ -1000,8 +999,14 @@ public class GpsLoggingService extends Service  {
         i.putExtra(IntentConstants.GET_NEXT_POINT, true);
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
         nextPointAlarmManager.cancel(pi);
-        nextPointAlarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            nextPointAlarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
+        }
+        else {
+            nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
+        }
 
     }
 
