@@ -320,4 +320,10 @@
     <string name="autoftp_setup_title">FTP</string>
     <string name="txt_date_isoformat">Datum (2011-12-25):</string>
     <string name="txt_time_with_offset_isoformat">Časový posun (2011-12-25T11:27:33+04:00):</string>
+    <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
+    <string name="log_plain_text_csv_advanced_title">Nastavení záznamu do CSV</string>
+    <string name="log_plain_text_csv_field_delimiter">oddělovač pole CSV</string>
+    <string name="log_plain_text_decimal_comma">Použít čárku (,) jako desetinný oddělovač místo tečky (.)</string>
+    <string name="new_file_creation_onceamonth">Jednou za měsíc</string>
+    <string name="autoemail_title">Email</string>
 </resources>
