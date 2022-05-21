@@ -165,4 +165,5 @@
     <string name="osm_tags">Etiquetes</string>
     <string name="no_files_found">No s\'ha trobat cap arxiu, no hi ha res per compartir o pujar.</string>
     <string name="osm_tags_summary">Les etiquetes que s\'apliquen en pujar una traça</string>
+    <string name="pref_general_summary">Opcions d\'inici i visualització</string>
 </resources>
