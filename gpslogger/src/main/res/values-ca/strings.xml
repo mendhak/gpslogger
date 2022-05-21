@@ -160,4 +160,9 @@
     <string name="pref_logging_summary">Tipus d\'arxiu, creació i anomenada</string>
     <string name="pref_general_title">Opcions Generals</string>
     <string name="customurl_all_parameters">Tots els paràmetres:</string>
+    <string name="osm_visibility_summary">Establir la visibilitat de les traces GPS pujades</string>
+    <string name="osm_description_summary">Descripció de la traça a pujar</string>
+    <string name="osm_tags">Etiquetes</string>
+    <string name="no_files_found">No s\'ha trobat cap arxiu, no hi ha res per compartir o pujar.</string>
+    <string name="osm_tags_summary">Les etiquetes que s\'apliquen en pujar una traça</string>
 </resources>
