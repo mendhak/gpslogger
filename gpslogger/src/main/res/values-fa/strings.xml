@@ -35,10 +35,10 @@
     <string name="sharing_mylocation">مکان من</string>
     <string name="sharing_via">اشتراک از طریق</string>
     <!-- general -->
-    <string name="foot">&#160;فوت</string>
+    <string name="foot"> فوت</string>
     <string name="feet">فوت</string>
-    <string name="meter">&#160;متر</string>
-    <string name="meters">&#160;متر</string>
+    <string name="meter"> متر</string>
+    <string name="meters"> متر</string>
     <string name="error">خطا</string>
     <string name="error_connection">خطا در اتصال. لطفاً تنظیمات تلفن خود را بررسی کنید.</string>
     <string name="seconds">ثانیه</string>
@@ -127,4 +127,8 @@
     <string name="txt_longitude_short">طول جغرافیایی</string>
     <string name="listeners_cell">شبکه</string>
     <string name="donate_app">کمک مالی (گوگل پلی)</string>
+    <string name="hide">پنهان سازی</string>
+    <string name="log_plain_text_decimal_comma">از کاما (,) به جای نقطه (.) برای جداسازی اعداد اعشاری استفاده کنید</string>
+    <string name="new_file_creation_onceamonth">ماهی یک بار</string>
+    <string name="time_before_logging_summary">برای حداکثر فرکانس، از 0 استفاده کنید. اما آهسته تر برای عمر باتری بهتر است. تنظیمات باتری سیستم ممکن است اینها را لغو کند، برای اطلاعات بیشتر به راهنما یا سوالات متدوال مراجعه کنید.</string>
 </resources>
