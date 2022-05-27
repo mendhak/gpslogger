@@ -46,6 +46,10 @@ android {
 
         versionCode 122
         versionName "122-rc2"
+
+        manifestPlaceholders = [
+                appAuthRedirectScheme: 'com.mendhak.gpslogger'
+        ]
     }
 
     buildTypes {
@@ -102,6 +106,10 @@ dependencies {
     implementation "androidx.fragment:fragment:1.3.6"
     implementation "androidx.preference:preference:1.1.1"
 
+
+    //Google Drive Oauth
+    implementation 'com.auth0.android:jwtdecode:2.0.0'
+    implementation 'net.openid:appauth:0.9.1'
 
 
     //FTP operations
