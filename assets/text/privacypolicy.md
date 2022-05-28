@@ -1,6 +1,6 @@
 # Privacy Policy
 
-Last updated: 28^th May, 2022.
+Last updated: 28<sup>th</sup> May, 2022.
 
 #### In short - We do not collect any personal information from you.   
 
