@@ -138,7 +138,7 @@ Replace the Dropbox app key to your AndroidManifest.xml file
     <!-- Change this to be db- followed by your app key -->
     <data android:scheme="db-12341234"/>
 
-### Google Drive (optional)
+### Google Drive Setup (optional)
 
 Sign up to [Google Cloud Platform](https://console.cloud.google.com/).  Create a new project. 
 
