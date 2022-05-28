@@ -75,31 +75,7 @@ public class GoogleDriveJob extends Job {
                         EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed(ex.toJsonString(), ex));
                         return;
                     }
-
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                String gpsLoggerFolderId = getFileIdFromFileName(accessToken,
-                                        "GPSLOGGER", null);
-                                LOG.debug("GPSLogger folder ID - " + gpsLoggerFolderId);
-                                if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
-                                    LOG.debug("GPSLogger folder not found, will create.");
-                                    gpsLoggerFolderId = createEmptyFile(accessToken, "GPSLOGGER",
-                                            "application/vnd.google-apps.folder", "root");
-                                }
-
-                                EventBus.getDefault().post(new UploadEvents.GoogleDrive().succeeded());
-
-                            } catch (Exception e) {
-                                LOG.error(e.getMessage(), e);
-                                EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed(e.getMessage(), e));
-                            } finally {
-                                handlerThread.quit();
-                            }
-                        }
-                    });
-
+                    handler.post(new GoogleDriveUploadWorkflow(accessToken));
                 }
             });
         }
@@ -133,7 +109,6 @@ public class GoogleDriveJob extends Job {
         return fileId;
 
     }
-
 
     private String createEmptyFile(String accessToken, String fileName, String mimeType, String parentFolderId) throws Exception {
 
@@ -200,4 +175,37 @@ public class GoogleDriveJob extends Job {
 
         return authState;
     }
+
+    class GoogleDriveUploadWorkflow implements Runnable {
+
+        String accessToken;
+        GoogleDriveUploadWorkflow(String accessToken){
+            this.accessToken = accessToken;
+        }
+
+        @Override
+        public void run() {
+            try {
+                String gpsLoggerFolderId = getFileIdFromFileName(accessToken,
+                        "GPSLOGGER", null);
+
+                if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
+                    LOG.debug("GPSLogger folder not found, will create.");
+                    gpsLoggerFolderId = createEmptyFile(accessToken, "GPSLOGGER",
+                            "application/vnd.google-apps.folder", "root");
+                }
+
+                LOG.debug("GPSLogger folder ID - " + gpsLoggerFolderId);
+
+                EventBus.getDefault().post(new UploadEvents.GoogleDrive().succeeded());
+
+            } catch (Exception e) {
+                LOG.error(e.getMessage(), e);
+                EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed(e.getMessage(), e));
+            } finally {
+                handlerThread.quit();
+            }
+        }
+    }
+
 }
