@@ -76,7 +76,7 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
 
                 <data android:scheme="com.mendhak.gpslogger"
-                    android:path="/oauth2redirect"/>
+                    android:path="/oauth2googledrive"/>
             </intent-filter>
 
         </activity>

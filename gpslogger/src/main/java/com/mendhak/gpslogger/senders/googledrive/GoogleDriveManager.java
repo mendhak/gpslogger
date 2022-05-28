@@ -1,5 +1,8 @@
 package com.mendhak.gpslogger.senders.googledrive;
 
+import android.content.Context;
+import android.net.Uri;
+
 import com.birbit.android.jobqueue.CancelResult;
 import com.birbit.android.jobqueue.JobManager;
 import com.birbit.android.jobqueue.TagConstraint;
@@ -7,6 +10,10 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
+
+import net.openid.appauth.AppAuthConfiguration;
+import net.openid.appauth.AuthorizationService;
+import net.openid.appauth.AuthorizationServiceConfiguration;
 
 import org.slf4j.Logger;
 
@@ -20,6 +27,32 @@ public class GoogleDriveManager extends FileSender {
 
     public GoogleDriveManager(PreferenceHelper preferenceHelper) {
         this.preferenceHelper = preferenceHelper;
+    }
+
+    public static String getGoogleDriveApplicationClientID(){
+        return "207286146661-6kgeq88ktnjho995oetdv78lmcjfjrqc.apps.googleusercontent.com";
+    }
+
+    public static String getGoogleDriveApplicationOauth2Redirect(){
+        //Needs to match in androidmanifest.xml
+        return "com.mendhak.gpslogger:/oauth2googledrive";
+    }
+
+    public static String[] getGoogleDriveApplicationScopes(){
+        return new String[] {"https://www.googleapis.com/auth/drive.file"};
+    }
+
+    public static AuthorizationService getAuthorizationService(Context context){
+        return new AuthorizationService(context, new AppAuthConfiguration.Builder().build());
+    }
+
+    public static AuthorizationServiceConfiguration getAuthorizationServiceConfiguration() {
+        return new AuthorizationServiceConfiguration(
+                Uri.parse("https://accounts.google.com/o/oauth2/v2/auth"),
+                Uri.parse("https://www.googleapis.com/oauth2/v4/token"),
+                null,
+                Uri.parse("https://accounts.google.com/o/oauth2/revoke?token=")
+        );
     }
 
     @Override

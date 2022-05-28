@@ -30,13 +30,11 @@ import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.googledrive.GoogleDriveManager;
 import com.mendhak.gpslogger.ui.Dialogs;
 
-import net.openid.appauth.AppAuthConfiguration;
 import net.openid.appauth.AuthState;
 import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationRequest;
 import net.openid.appauth.AuthorizationResponse;
 import net.openid.appauth.AuthorizationService;
-import net.openid.appauth.AuthorizationServiceConfiguration;
 import net.openid.appauth.ResponseTypeValues;
 import net.openid.appauth.TokenRequest;
 import net.openid.appauth.TokenResponse;
@@ -63,7 +61,6 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
     private AuthState authState = new AuthState();
     private JWT jwt = null;
     private AuthorizationService authorizationService;
-    private AppAuthConfiguration appAuthConfiguration;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,15 +109,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                 return true;
             }
 
-            AuthorizationServiceConfiguration authServiceConfig = new AuthorizationServiceConfiguration(
-                    Uri.parse("https://accounts.google.com/o/oauth2/v2/auth"),
-                    Uri.parse("https://www.googleapis.com/oauth2/v4/token"),
-                    null,
-                    Uri.parse("https://accounts.google.com/o/oauth2/revoke?token=")
-            );
-
-            appAuthConfiguration = new AppAuthConfiguration.Builder().build();
-            authorizationService = new AuthorizationService(getActivity(), appAuthConfiguration);
+            authorizationService = GoogleDriveManager.getAuthorizationService(getActivity());
 
             SecureRandom sr = new SecureRandom();
             byte[] ba = new byte[64];
@@ -132,13 +121,14 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                 byte[] hash = digest.digest(codeVerifier.getBytes());
                 String codeChallenge = android.util.Base64.encodeToString(hash, Base64.URL_SAFE | Base64.NO_PADDING | Base64.NO_WRAP);
 
-                AuthorizationRequest.Builder requestBuilder = new AuthorizationRequest.Builder(authServiceConfig,
-                        "207286146661-6kgeq88ktnjho995oetdv78lmcjfjrqc.apps.googleusercontent.com",
+                AuthorizationRequest.Builder requestBuilder = new AuthorizationRequest.Builder(
+                        GoogleDriveManager.getAuthorizationServiceConfiguration(),
+                        GoogleDriveManager.getGoogleDriveApplicationClientID(),
                         ResponseTypeValues.CODE,
-                        Uri.parse("com.mendhak.gpslogger:/oauth2redirect")
+                        Uri.parse(GoogleDriveManager.getGoogleDriveApplicationOauth2Redirect())
                 ).setCodeVerifier(codeVerifier, codeChallenge, "S256");
 
-                requestBuilder.setScopes("https://www.googleapis.com/auth/drive.file");
+                requestBuilder.setScopes(GoogleDriveManager.getGoogleDriveApplicationScopes());
                 AuthorizationRequest authRequest = requestBuilder.build();
                 Intent authIntent = authorizationService.getAuthorizationRequestIntent(authRequest);
                 googleDriveAuthenticationWorkflow.launch(new IntentSenderRequest.Builder(
@@ -154,7 +144,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
 
         }
 
-        if (preference.getKey().equals("google_drive_test")){
+        if (preference.getKey().equals("google_drive_test")) {
             uploadTestFile();
             return true;
         }
@@ -251,13 +241,12 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
     }
 
     @EventBusHook
-    public void onEventMainThread(UploadEvents.GoogleDrive d){
+    public void onEventMainThread(UploadEvents.GoogleDrive d) {
         LOG.debug("Google Drive Event completed, success: " + d.success);
         Dialogs.hideProgress();
-        if(!d.success){
-            Dialogs.showError(getString(R.string.sorry), "Could not upload to Google Drive", d.message, d.throwable,(FragmentActivity) getActivity());
-        }
-        else {
+        if (!d.success) {
+            Dialogs.showError(getString(R.string.sorry), "Could not upload to Google Drive", d.message, d.throwable, (FragmentActivity) getActivity());
+        } else {
             Dialogs.alert(getString(R.string.success), "", getActivity());
         }
     }

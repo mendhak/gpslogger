@@ -1,6 +1,5 @@
 package com.mendhak.gpslogger.senders.googledrive;
 
-import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
 
@@ -16,11 +15,9 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 
-import net.openid.appauth.AppAuthConfiguration;
 import net.openid.appauth.AuthState;
 import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationService;
-import net.openid.appauth.AuthorizationServiceConfiguration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,17 +59,7 @@ public class GoogleDriveJob extends Job {
         LOG.debug(authState.jsonSerializeString());
         if (authState.isAuthorized()) {
 
-
-            AuthorizationServiceConfiguration authServiceConfig = new AuthorizationServiceConfiguration(
-                    Uri.parse("https://accounts.google.com/o/oauth2/v2/auth"),
-                    Uri.parse("https://www.googleapis.com/oauth2/v4/token"),
-                    null,
-                    Uri.parse("https://accounts.google.com/o/oauth2/revoke?token=")
-            );
-
-            AppAuthConfiguration appAuthConfiguration = new AppAuthConfiguration.Builder().build();
-            AuthorizationService authorizationService = new AuthorizationService(AppSettings.getInstance(),
-                    appAuthConfiguration);
+            AuthorizationService authorizationService = GoogleDriveManager.getAuthorizationService(AppSettings.getInstance());
 
             handlerThread = new HandlerThread("HandlerThread");
             handlerThread.start();
@@ -93,7 +80,6 @@ public class GoogleDriveJob extends Job {
                         @Override
                         public void run() {
                             try {
-                                LOG.debug(accessToken);
                                 String gpsLoggerFolderId = getFileIdFromFileName(accessToken,
                                         "GPSLOGGER", null);
                                 LOG.debug("GPSLogger folder ID - " + gpsLoggerFolderId);
