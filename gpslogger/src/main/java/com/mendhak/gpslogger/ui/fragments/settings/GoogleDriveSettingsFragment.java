@@ -157,6 +157,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                                 public void onTokenRequestCompleted(@Nullable TokenResponse response, @Nullable AuthorizationException ex) {
                                     if (ex != null) {
                                         authState = new AuthState();
+                                        LOG.error(ex.toJsonString(), ex);
                                     } else {
                                         if (response != null) {
                                             authState.update(response, ex);
