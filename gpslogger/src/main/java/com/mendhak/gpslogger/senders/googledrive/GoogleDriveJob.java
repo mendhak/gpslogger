@@ -96,10 +96,12 @@ public class GoogleDriveJob extends Job {
                                 LOG.debug(accessToken);
                                 String gpsLoggerFolderId = getFileIdFromFileName(accessToken,
                                         "GPSLOGGER", null);
-//                                String gpsLoggerFolderId = createEmptyFile(accessToken, "GPSLOGGER",
-//                                        "application/vnd.google-apps.folder", "root");
                                 LOG.debug("GPSLogger folder ID - " + gpsLoggerFolderId);
-
+                                if(Strings.isNullOrEmpty(gpsLoggerFolderId)){
+                                    LOG.debug("GPSLogger folder not found, will create.");
+                                    gpsLoggerFolderId = createEmptyFile(accessToken, "GPSLOGGER",
+                                        "application/vnd.google-apps.folder", "root");
+                                }
 
                                 EventBus.getDefault().post(new UploadEvents.GoogleDrive().succeeded());
 
