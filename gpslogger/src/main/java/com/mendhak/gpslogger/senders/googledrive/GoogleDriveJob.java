@@ -245,11 +245,11 @@ public class GoogleDriveJob extends Job {
         public void run() {
             try {
                 String gpsLoggerFolderId = getFileIdFromFileName(accessToken,
-                        "GPSLOGGER", null);
+                        preferenceHelper.getGoogleDriveFolderPath(), null);
 
                 if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
                     LOG.debug("GPSLogger folder not found, will create.");
-                    gpsLoggerFolderId = createEmptyFile(accessToken, "GPSLOGGER",
+                    gpsLoggerFolderId = createEmptyFile(accessToken, preferenceHelper.getGoogleDriveFolderPath(),
                             "application/vnd.google-apps.folder", "root");
                 }
 

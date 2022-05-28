@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Base64;
 
 import androidx.activity.result.ActivityResult;
@@ -48,6 +49,8 @@ import java.security.SecureRandom;
 
 import de.greenrobot.event.EventBus;
 import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.Input;
+import eltos.simpledialogfragment.form.SimpleFormDialog;
 
 public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implements
         SimpleDialog.OnDialogResultListener,
@@ -69,6 +72,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
         manager = new GoogleDriveManager(PreferenceHelper.getInstance());
 
         findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH).setOnPreferenceClickListener(this);
         findPreference("google_drive_test").setOnPreferenceClickListener(this);
         setPreferencesState();
 
@@ -98,6 +102,18 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
+        if(preference.getKey().equals(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH)){
+            SimpleFormDialog.build()
+                    .title(R.string.google_drive_folder_path)
+                    .neg(R.string.cancel)
+                    .pos(R.string.ok)
+                    .fields(
+                            Input.plain(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH)
+                                    .text(PreferenceHelper.getInstance().getGoogleDriveFolderPath())
+                    )
+                    .show(this, PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH);
+            return true;
+        }
 
         if (preference.getKey().equals(PreferenceNames.GOOGLE_DRIVE_RESETAUTH)) {
 
@@ -247,7 +263,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
         if (!d.success) {
             Dialogs.showError(getString(R.string.sorry), "Could not upload to Google Drive", d.message, d.throwable, (FragmentActivity) getActivity());
         } else {
-            Dialogs.alert(getString(R.string.success), "", getActivity());
+            Dialogs.alert(getString(R.string.success), getString(R.string.gdocs_testupload_success), getActivity());
         }
     }
 }

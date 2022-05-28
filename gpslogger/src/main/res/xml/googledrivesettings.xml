@@ -17,6 +17,10 @@
 <!--        android:defaultValue="GPSLogger for Android"-->
 <!--        />-->
 
+    <Preference android:key="google_drive_folder_path" android:title="@string/google_drive_folder_path"
+        android:defaultValue="GPSLogger"
+        app:iconSpaceReserved="false" />
+
     <Preference android:key="google_drive_test" android:summary="@string/gdocs_test_summary"
         android:title="@string/gdocs_test_title"
         app:iconSpaceReserved="false" />
