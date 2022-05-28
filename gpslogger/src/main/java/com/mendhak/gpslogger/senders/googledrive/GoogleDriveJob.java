@@ -97,10 +97,10 @@ public class GoogleDriveJob extends Job {
                                 String gpsLoggerFolderId = getFileIdFromFileName(accessToken,
                                         "GPSLOGGER", null);
                                 LOG.debug("GPSLogger folder ID - " + gpsLoggerFolderId);
-                                if(Strings.isNullOrEmpty(gpsLoggerFolderId)){
+                                if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
                                     LOG.debug("GPSLogger folder not found, will create.");
                                     gpsLoggerFolderId = createEmptyFile(accessToken, "GPSLOGGER",
-                                        "application/vnd.google-apps.folder", "root");
+                                            "application/vnd.google-apps.folder", "root");
                                 }
 
                                 EventBus.getDefault().post(new UploadEvents.GoogleDrive().succeeded());
@@ -144,8 +144,6 @@ public class GoogleDriveJob extends Job {
             LOG.debug("Found file with ID " + fileId);
         }
 
-//        JSONObject fileMetadataJson = new JSONObject(fileMetadata);
-//        fileId = fileMetadataJson.getString("id");
         return fileId;
 
     }
@@ -154,8 +152,6 @@ public class GoogleDriveJob extends Job {
     private String createEmptyFile(String accessToken, String fileName, String mimeType, String parentFolderId) throws Exception {
 
         String fileId = null;
-//        HttpURLConnection conn = null;
-
         String createFileUrl = "https://www.googleapis.com/drive/v3/files";
 
         String createFilePayload = "   {\n" +
@@ -182,55 +178,6 @@ public class GoogleDriveJob extends Job {
 
         JSONObject fileMetadataJson = new JSONObject(fileMetadata);
         fileId = fileMetadataJson.getString("id");
-
-
-        //            client.newCall(request).enqueue(new Callback() {
-        //                @Override
-        //                public void onFailure(Call call, IOException e) {
-        //                    LOG.debug("Failed");
-        //                    LOG.debug(e.getMessage(), e);
-        //                }
-        //
-        //                @Override
-        //                public void onResponse(Call call, Response response) throws IOException {
-        //                    LOG.debug(response.body().string());
-        //                    String fileMetadata = response.body().string();
-        //                    response.body().close();
-        //
-        //                    JSONObject fileMetadataJson = new JSONObject(fileMetadata);
-        //                    String fileId = fileMetadataJson.getString("id");
-        //                }
-        //            });
-
-        //            URL url = new URL(createFileUrl);
-        //
-        //            conn = (HttpURLConnection) url.openConnection();
-        //            conn.setRequestMethod("POST");
-        //            conn.setRequestProperty("User-Agent", "GPSLogger for Android");
-        //            conn.setRequestProperty("Authorization", "Bearer " + authToken);
-        //            conn.setRequestProperty("Content-Type", "application/json");
-        //
-        //            conn.setUseCaches(false);
-        //            conn.setDoInput(true);
-        //            conn.setDoOutput(true);
-        //
-        //            conn.setConnectTimeout(10000);
-        //            conn.setReadTimeout(30000);
-        //
-        //            DataOutputStream wr = new DataOutputStream(
-        //                    conn.getOutputStream());
-        //            wr.writeBytes(createFilePayload);
-        //            wr.flush();
-        //            wr.close();
-        //
-        //            fileId = null;
-        //
-        //            String fileMetadata = Streams.getStringFromInputStream(conn.getInputStream());
-        //
-        //            JSONObject fileMetadataJson = new JSONObject(fileMetadata);
-        //            fileId = fileMetadataJson.getString("id");
-        //            LOG.debug("File created with ID " + fileId + " of type " + mimeType);
-
 
         return fileId;
     }

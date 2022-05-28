@@ -193,14 +193,6 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                                     persistGoogleDriveAuthState();
                                     resetGoogleDriveAuthorizationPreference();
 
-                                    // Finally... get an access token
-
-                                    authState.performActionWithFreshTokens(authorizationService, new AuthState.AuthStateAction() {
-                                        @Override
-                                        public void execute(@Nullable String accessToken, @Nullable String idToken, @Nullable AuthorizationException ex) {
-                                            LOG.debug(accessToken);
-                                        }
-                                    });
                                 }
                             });
                         }

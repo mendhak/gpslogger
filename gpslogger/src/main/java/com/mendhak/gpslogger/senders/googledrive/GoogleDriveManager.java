@@ -18,7 +18,7 @@ public class GoogleDriveManager extends FileSender {
     private static final Logger LOG = Logs.of(GoogleDriveManager.class);
     private final PreferenceHelper preferenceHelper;
 
-    public GoogleDriveManager(PreferenceHelper preferenceHelper){
+    public GoogleDriveManager(PreferenceHelper preferenceHelper) {
         this.preferenceHelper = preferenceHelper;
     }
 
@@ -27,7 +27,7 @@ public class GoogleDriveManager extends FileSender {
 
     }
 
-    public void uploadFile(String fileName){
+    public void uploadFile(String fileName) {
         final JobManager jobManager = AppSettings.getJobManager();
         jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
             @Override
