@@ -102,6 +102,10 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 setTitle(R.string.dropbox_setup_title);
                 preferenceFragmentCompat = new DropboxAuthorizationFragment();
                 break;
+            case PREFERENCE_FRAGMENTS.GOOGLEDRIVE:
+                setTitle("Google Drive");
+                preferenceFragmentCompat = new GoogleDriveSettingsFragment();
+                break;
             case PREFERENCE_FRAGMENTS.OSM:
                 setTitle(R.string.osm_setup_title);
                 preferenceFragmentCompat = new OSMAuthorizationFragment();
@@ -159,6 +163,7 @@ public class MainPreferenceActivity extends AppCompatActivity {
         public static final String OPENGTS = "OpenGTSFragment";
         public static final String CUSTOMURL = "CustomUrlFragment";
         public static final String DROPBOX = "DropBoxAuthorizationFragment";
+        public static final String GOOGLEDRIVE = "GoogleDriveSEttingsFragment";
         public static final String OWNCLOUD = "OwnCloudAuthorizationFragment";
         public static final String OSM = "OSMAuthorizationFragment";
         public static final String SFTP = "SFTPSettingsFragment";

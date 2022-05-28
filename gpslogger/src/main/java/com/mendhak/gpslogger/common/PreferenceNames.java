@@ -89,6 +89,7 @@ public  class PreferenceNames {
     public static final String AUTOSEND_DROPBOX_ENABLED = "dropbox_enabled";
     public static final String DROPBOX_LONG_LIVED_ACCESS_TOKEN = "DROPBOX_ACCESS_KEY";
     public static final String DROPBOX_REFRESH_TOKEN = "DROPBOX_REFRESH_TOKEN";
+    public static final String GOOGLE_DRIVE_RESETAUTH = "google_drive_resetauth";
     public static final String AUTOSEND_OSM_ENABLED = "osm_enabled";
     public static final String FTP_SERVER = "autoftp_server";
     public static final String FTP_PORT = "autoftp_port";

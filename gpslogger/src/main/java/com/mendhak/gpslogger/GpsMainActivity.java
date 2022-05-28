@@ -235,10 +235,10 @@ public class GpsMainActivity extends AppCompatActivity
             requestBuilder.setScopes("https://www.googleapis.com/auth/drive.file");
             AuthorizationRequest authRequest = requestBuilder.build();
             Intent authIntent = authorizationService.getAuthorizationRequestIntent(authRequest);
-            googleDriveAuthenticationWorkflow.launch(new IntentSenderRequest.Builder(
-                    PendingIntent.getActivity(this, 0, authIntent, 0))
-                    .setFillInIntent(authIntent)
-                    .build());
+//            googleDriveAuthenticationWorkflow.launch(new IntentSenderRequest.Builder(
+//                    PendingIntent.getActivity(this, 0, authIntent, 0))
+//                    .setFillInIntent(authIntent)
+//                    .build());
 
         } catch (Exception e) {
             LOG.error(e.getMessage(),e);
@@ -940,6 +940,7 @@ public class GpsMainActivity extends AppCompatActivity
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.pref_autosend_title, R.string.pref_autosend_summary, R.drawable.autosend, 1003));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.log_customurl_setup_title, R.drawable.customurlsender, 1020));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.dropbox_setup_title, R.drawable.dropbox, 1005));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.gdocs_setup_title, R.drawable.ic_folder_icon, 1011));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.sftp_setup_title, R.drawable.sftp, 1015));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.opengts_setup_title, R.drawable.opengts, 1008));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.osm_setup_title, R.drawable.openstreetmap, 1009));
@@ -987,6 +988,9 @@ public class GpsMainActivity extends AppCompatActivity
                         break;
                     case 1010:
                         launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD);
+                        break;
+                    case 1011:
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GOOGLEDRIVE);
                         break;
                     case 1015:
                         launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.SFTP);

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        android:key="google_drive_enabled"
+        android:title="@string/autosend_enabled"
+        app:iconSpaceReserved="false" />
+
+    <Preference android:key="google_drive_resetauth"
+        android:title="@string/osm_lbl_authorize"
+        app:iconSpaceReserved="false" />
+
+<!--    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="gdocs_foldername"-->
+<!--        android:title="Folder name"-->
+<!--        android:defaultValue="GPSLogger for Android"-->
+<!--        />-->
+
+    <Preference android:key="google_drive_test" android:summary="@string/gdocs_test_summary"
+        android:title="@string/gdocs_test_title"
+        app:iconSpaceReserved="false" />
+
+
+</PreferenceScreen>
