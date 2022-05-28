@@ -73,7 +73,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
 
         findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setOnPreferenceClickListener(this);
         findPreference("google_drive_test").setOnPreferenceClickListener(this);
-        resetGoogleDriveAuthorizationPreference();
+        setPreferencesState();
 
         registerEventBus();
     }
@@ -82,7 +82,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
         EventBus.getDefault().register(this);
     }
 
-    private void resetGoogleDriveAuthorizationPreference() {
+    private void setPreferencesState() {
         restoreGoogleDriveAuthState();
         if (authState.isAuthorized()) {
             findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setTitle(R.string.osm_resetauth);
@@ -91,6 +91,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
             findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setTitle(R.string.osm_lbl_authorize);
             findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setSummary("");
         }
+        findPreference("google_drive_test").setEnabled(authState.isAuthorized());
     }
 
     @Override
@@ -107,7 +108,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
             if (authState.isAuthorized()) {
                 authState = new AuthState();
                 persistGoogleDriveAuthState();
-                resetGoogleDriveAuthorizationPreference();
+                setPreferencesState();
                 return true;
             }
 
@@ -132,7 +133,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                 String codeChallenge = android.util.Base64.encodeToString(hash, Base64.URL_SAFE | Base64.NO_PADDING | Base64.NO_WRAP);
 
                 AuthorizationRequest.Builder requestBuilder = new AuthorizationRequest.Builder(authServiceConfig,
-                        "1093493260603-e3ihdnva5qmg9deshbbi2ic8d3sqdvfk.apps.googleusercontent.com",
+                        "207286146661-6kgeq88ktnjho995oetdv78lmcjfjrqc.apps.googleusercontent.com",
                         ResponseTypeValues.CODE,
                         Uri.parse("com.mendhak.gpslogger:/oauth2redirect")
                 ).setCodeVerifier(codeVerifier, codeChallenge, "S256");
@@ -191,7 +192,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                                         }
                                     }
                                     persistGoogleDriveAuthState();
-                                    resetGoogleDriveAuthorizationPreference();
+                                    setPreferencesState();
 
                                 }
                             });
