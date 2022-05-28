@@ -21,6 +21,7 @@ import androidx.preference.PreferenceManager;
 import com.auth0.android.jwt.JWT;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -47,7 +48,6 @@ import eltos.simpledialogfragment.SimpleDialog;
 
 public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implements
         SimpleDialog.OnDialogResultListener,
-        PreferenceValidator,
         Preference.OnPreferenceChangeListener,
         Preference.OnPreferenceClickListener {
 
@@ -151,46 +151,51 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                         AuthorizationResponse authResponse = AuthorizationResponse.fromIntent(result.getData());
                         AuthorizationException authException = AuthorizationException.fromIntent(result.getData());
                         authState = new AuthState(authResponse, authException);
-                        TokenRequest tokenRequest = authResponse.createTokenExchangeRequest();
-                        authorizationService.performTokenRequest(tokenRequest, new AuthorizationService.TokenResponseCallback() {
-                            @Override
-                            public void onTokenRequestCompleted(@Nullable TokenResponse response, @Nullable AuthorizationException ex) {
-                                if (ex != null) {
-                                    authState = new AuthState();
-                                } else {
-                                    if (response != null) {
-                                        authState.update(response, ex);
-                                        if (!Strings.isNullOrEmpty(response.idToken)) {
-                                            jwt = new JWT(response.idToken);
+                        if(authException != null){
+                            LOG.error(authException.toJsonString(), authException);
+                        }
+                        if(authResponse != null){
+                            TokenRequest tokenRequest = authResponse.createTokenExchangeRequest();
+                            authorizationService.performTokenRequest(tokenRequest, new AuthorizationService.TokenResponseCallback() {
+                                @Override
+                                public void onTokenRequestCompleted(@Nullable TokenResponse response, @Nullable AuthorizationException ex) {
+                                    if (ex != null) {
+                                        authState = new AuthState();
+                                    } else {
+                                        if (response != null) {
+                                            authState.update(response, ex);
+                                            if (!Strings.isNullOrEmpty(response.idToken)) {
+                                                jwt = new JWT(response.idToken);
+                                            }
                                         }
                                     }
+                                    persistGoogleDriveAuthState();
+                                    resetGoogleDriveAuthorizationPreference();
+
+                                    // Finally... get an access token
+
+                                    authState.performActionWithFreshTokens(authorizationService, new AuthState.AuthStateAction() {
+                                        @Override
+                                        public void execute(@Nullable String accessToken, @Nullable String idToken, @Nullable AuthorizationException ex) {
+                                            LOG.debug(accessToken);
+                                        }
+                                    });
                                 }
-                                persistGoogleDriveAuthState();
-                                resetGoogleDriveAuthorizationPreference();
+                            });
+                        }
 
-                                // Finally... get an access token
-
-                                authState.performActionWithFreshTokens(authorizationService, new AuthState.AuthStateAction() {
-                                    @Override
-                                    public void execute(@Nullable String accessToken, @Nullable String idToken, @Nullable AuthorizationException ex) {
-                                        LOG.debug(accessToken);
-                                    }
-                                });
-                            }
-                        });
                     }
 
                 }
             });
 
     void persistGoogleDriveAuthState(){
-        PreferenceManager.getDefaultSharedPreferences(AppSettings.getInstance().getApplicationContext())
-                .edit().putString("google_drive_auth_state", authState.jsonSerializeString()).apply();
+        PreferenceHelper.getInstance().setGoogleDriveAuthState(authState.jsonSerializeString());
     }
 
     void restoreGoogleDriveAuthState(){
-        String google_drive_auth_state = PreferenceManager.getDefaultSharedPreferences(AppSettings.getInstance().getApplicationContext())
-                .getString("google_drive_auth_state", null);
+
+        String google_drive_auth_state = PreferenceHelper.getInstance().getGoogleDriveAuthState();
 
         if(!Strings.isNullOrEmpty(google_drive_auth_state)){
             try {
@@ -211,10 +216,6 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
         setPreferencesFromResource(R.xml.googledrivesettings, rootKey);
     }
 
-    @Override
-    public boolean isValid() {
-        return true;
-    }
 
     @Override
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {

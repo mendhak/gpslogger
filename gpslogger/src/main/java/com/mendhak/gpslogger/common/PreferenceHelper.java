@@ -84,6 +84,14 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.DROPBOX_REFRESH_TOKEN, refreshToken).apply();
     }
 
+    public String getGoogleDriveAuthState(){
+        return prefs.getString(PreferenceNames.GOOGLE_DRIVE_AUTH_STATE, null);
+    }
+
+    public void setGoogleDriveAuthState(String auth_state_json_serialized){
+        prefs.edit().putString(PreferenceNames.GOOGLE_DRIVE_AUTH_STATE, auth_state_json_serialized).apply();
+    }
+
     /**
      * Whether automatic sending to email is enabled
      */
