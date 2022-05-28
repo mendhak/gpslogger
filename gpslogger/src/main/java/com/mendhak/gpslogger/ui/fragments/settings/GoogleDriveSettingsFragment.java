@@ -16,16 +16,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 
 import com.auth0.android.jwt.JWT;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.senders.PreferenceValidator;
 
 import net.openid.appauth.AppAuthConfiguration;
 import net.openid.appauth.AuthState;
@@ -66,13 +63,12 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
 
     }
 
-    private void resetGoogleDriveAuthorizationPreference(){
+    private void resetGoogleDriveAuthorizationPreference() {
         restoreGoogleDriveAuthState();
-        if(authState.isAuthorized()){
+        if (authState.isAuthorized()) {
             findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setTitle(R.string.osm_resetauth);
             findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setSummary(R.string.gdocs_clearauthorization_summary);
-        }
-        else {
+        } else {
             findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setTitle(R.string.osm_lbl_authorize);
             findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setSummary("");
         }
@@ -86,10 +82,10 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
-        if(preference.getKey().equals(PreferenceNames.GOOGLE_DRIVE_RESETAUTH)){
+        if (preference.getKey().equals(PreferenceNames.GOOGLE_DRIVE_RESETAUTH)) {
 
 
-            if(authState.isAuthorized()){
+            if (authState.isAuthorized()) {
                 authState = new AuthState();
                 persistGoogleDriveAuthState();
                 resetGoogleDriveAuthorizationPreference();
@@ -125,10 +121,10 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                 requestBuilder.setScopes("https://www.googleapis.com/auth/drive.file");
                 AuthorizationRequest authRequest = requestBuilder.build();
                 Intent authIntent = authorizationService.getAuthorizationRequestIntent(authRequest);
-            googleDriveAuthenticationWorkflow.launch(new IntentSenderRequest.Builder(
-                    PendingIntent.getActivity(getActivity(), 0, authIntent, 0))
-                    .setFillInIntent(authIntent)
-                    .build());
+                googleDriveAuthenticationWorkflow.launch(new IntentSenderRequest.Builder(
+                        PendingIntent.getActivity(getActivity(), 0, authIntent, 0))
+                        .setFillInIntent(authIntent)
+                        .build());
 
             } catch (Exception e) {
                 LOG.error(e.getMessage(), e);
@@ -151,10 +147,10 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                         AuthorizationResponse authResponse = AuthorizationResponse.fromIntent(result.getData());
                         AuthorizationException authException = AuthorizationException.fromIntent(result.getData());
                         authState = new AuthState(authResponse, authException);
-                        if(authException != null){
+                        if (authException != null) {
                             LOG.error(authException.toJsonString(), authException);
                         }
-                        if(authResponse != null){
+                        if (authResponse != null) {
                             TokenRequest tokenRequest = authResponse.createTokenExchangeRequest();
                             authorizationService.performTokenRequest(tokenRequest, new AuthorizationService.TokenResponseCallback() {
                                 @Override
@@ -189,22 +185,22 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                 }
             });
 
-    void persistGoogleDriveAuthState(){
+    void persistGoogleDriveAuthState() {
         PreferenceHelper.getInstance().setGoogleDriveAuthState(authState.jsonSerializeString());
     }
 
-    void restoreGoogleDriveAuthState(){
+    void restoreGoogleDriveAuthState() {
 
         String google_drive_auth_state = PreferenceHelper.getInstance().getGoogleDriveAuthState();
 
-        if(!Strings.isNullOrEmpty(google_drive_auth_state)){
+        if (!Strings.isNullOrEmpty(google_drive_auth_state)) {
             try {
                 authState = AuthState.jsonDeserialize(google_drive_auth_state);
-                if(!Strings.isNullOrEmpty(authState.getIdToken())){
+                if (!Strings.isNullOrEmpty(authState.getIdToken())) {
                     jwt = new JWT(authState.getIdToken());
                 }
             } catch (JSONException e) {
-                LOG.debug(e.getMessage(),e);
+                LOG.debug(e.getMessage(), e);
             }
 
         }
