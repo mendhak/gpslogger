@@ -132,7 +132,8 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
                             "{21} <font color=''#{0}'' face=''monospace''>%HDOP</font><br />" +
                             "{22} <font color=''#{0}'' face=''monospace''>%VDOP</font><br />" +
                             "{23} <font color=''#{0}'' face=''monospace''>%PDOP</font><br />" +
-                            "{24} <font color=''#{0}'' face=''monospace''>%DIST</font>";
+                            "{24} <font color=''#{0}'' face=''monospace''>%DIST</font><br />" +
+                            "{25} <font color=''#{0}'' face=''monospace''>%ALL</font>";
             String legend1 = MessageFormat.format(legendFormat,
                     codeGreen,
                     getString(R.string.txt_latitude), getString(R.string.txt_longitude), getString(R.string.txt_annotation),
@@ -143,7 +144,9 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
                     getString(R.string.txt_time_with_offset_isoformat),
                     getString(R.string.txt_date_isoformat),
                     getString(R.string.txt_starttimestamp_epoch),
-                    getString(R.string.txt_battery), getString(R.string.txt_battery_charging), "Android ID ", "Serial ", getString(R.string.summary_current_filename), "Profile:", "HDOP:", "VDOP:", "PDOP:", getString(R.string.txt_travel_distance));
+                    getString(R.string.txt_battery), getString(R.string.txt_battery_charging), "Android ID ", "Serial ",
+                    getString(R.string.summary_current_filename), "Profile:", "HDOP:", "VDOP:", "PDOP:",
+                    getString(R.string.txt_travel_distance), getString(R.string.customurl_all_parameters));
             Dialogs.alert(getString(R.string.parameters), legend1, getActivity());
             return true;
         }

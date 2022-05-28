@@ -369,4 +369,5 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="file_logging_log_time_with_offset_summary">Dónde sea posible, escriba la hora ISO8601 con desplazamiento de zona horaria en lugar de UTC.</string>
     <string name="gpslogger_permissions_rationale_message_storage"><b>Fotos, medios, archivos</b> - Este permiso permite escribir archivos de registro y archivos de prueba en el almacenamiento y leer una lista de archivos para cargarlos o compartirlos. Esta aplicación no accederá a sus fotos o medios.</string>
     <string name="app_theme_dark">Tema oscuro</string>
+    <string name="customurl_all_parameters">Todos los parámetros:</string>
 </resources>

@@ -104,7 +104,7 @@ public class CustomUrlManagerTest {
         Location loc = MockLocations.builder("MOCK", 12.193, 19.456)
                 .withTime(1457205869949l).build();
         CustomUrlManager manager = new CustomUrlManager(null);
-        String expected = "http://192.168.1.65:8000/test?lat=12.193&lon=19.456&timeoff=2016-03-05T21:24:29.949+02:00";
+        String expected = "http://192.168.1.65:8000/test?lat=12.193&lon=19.456&timeoff=2016-03-05T21:24:29.949%2B02:00";
         String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&timeoff=%TIMEOFFSET";
 
         assertThat("TIMEOFFSET parameter is substituted with ISO Date Format, with time offset",
@@ -125,7 +125,7 @@ public class CustomUrlManagerTest {
                 .build();
 
         CustomUrlManager manager = new CustomUrlManager(null);
-        String expected = "http://192.168.1.65:8000/test?lat=12.193&lon=19.456&timeoff=2016-05-02T20:14:19.349+03:00";
+        String expected = "http://192.168.1.65:8000/test?lat=12.193&lon=19.456&timeoff=2016-05-02T20:14:19.349%2B03:00";
         String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&timeoff=%TIMEOFFSET";
 
         assertThat("TIMEOFFSET parameter is substituted with value from bundle",
@@ -280,6 +280,42 @@ public class CustomUrlManagerTest {
                         new SerializableLocation(loc), "blah", "22", 91,
                         false, "SRS11", 0,
                         "", "", 27.5),
+                is(expected));
+    }
+
+    @Test
+    public void getFormattedUrl_WhenALLParameters_AllKeyValuesAddedDirectly() throws Exception {
+        Location loc = MockLocations.builder("MOCK", 12.193, 19.456)
+                .putExtra(BundleConstants.VDOP, "19").withTime(1457205869949l).build();
+        CustomUrlManager manager = new CustomUrlManager(null);
+        String expected = "http://192.168.1.65:8000/test?lat=12.193&lon=19.456&sat=0&desc=&alt=0.0" +
+                "&acc=0.0&dir=0.0&prov=MOCK&spd=0.0&timestamp=1457205869" +
+                "&timeoffset=2016-03-05T21:24:29.949%2B02:00&time=2016-03-05T19:24:29.949Z" +
+                "&starttimestamp=1495884681&date=2016-03-05&batt=0.0&ischarging=false&aid=&ser=" +
+                "&act=&filename=20170527abc&profile=Default+Profile&hdop=&vdop=19&pdop=&dist=0&";
+        String urlTemplate = "http://192.168.1.65:8000/test?%ALL";
+        assertThat("ALL parameter is substituted by all key values", manager.getFormattedTextblock(urlTemplate,
+                new SerializableLocation(loc), "", "", 0,
+                false, "", 1495884681283l,
+                "20170527abc", "Default Profile", 0),
+                is(expected));
+    }
+
+    @Test
+    public void getFormattedUrl_WhenALLParametersInBody_AllKeyValuesAddedDirectly() throws Exception {
+        Location loc = MockLocations.builder("MOCK", 12.193, 19.456)
+                .putExtra(BundleConstants.VDOP, "19").withTime(1457205869949l).build();
+        CustomUrlManager manager = new CustomUrlManager(null);
+        String expected = "lat=12.193&lon=19.456&sat=0&desc=&alt=0.0&acc=0.0&dir=0.0&prov=MOCK" +
+                "&spd=0.0&timestamp=1457205869&timeoffset=2016-03-05T21:24:29.949%2B02:00" +
+                "&time=2016-03-05T19:24:29.949Z&starttimestamp=1495884681&date=2016-03-05" +
+                "&batt=0.0&ischarging=false&aid=&ser=&act=&filename=20170527abc" +
+                "&profile=Default+Profile&hdop=&vdop=19&pdop=&dist=0&";
+        String urlTemplate = "%ALL";
+        assertThat("ALL parameter is substituted by all key values", manager.getFormattedTextblock(urlTemplate,
+                new SerializableLocation(loc), "", "", 0,
+                false, "", 1495884681283l,
+                "20170527abc", "Default Profile", 0),
                 is(expected));
     }
 

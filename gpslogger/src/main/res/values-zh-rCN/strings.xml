@@ -336,4 +336,5 @@
     <string name="reset_app_title">重置本应用</string>
     <string name="keep_log_title">保持记录</string>
     <string name="keep_log_summary">即使提供者不可用也保持记录</string>
+    <string name="hide">隐藏</string>
 </resources>

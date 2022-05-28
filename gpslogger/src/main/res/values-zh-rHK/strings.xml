@@ -20,4 +20,15 @@
     <string name="success">成功</string>
     <!-- Settings activity -->
     <!-- Settings -->
+    <string name="txt_longitude">經度：</string>
+    <string name="txt_altitude">海拔 ：</string>
+    <string name="txt_direction">方向：</string>
+    <string name="txt_accuracy">準確度：</string>
+    <string name="txt_travel_distance">已去過：</string>
+    <string name="btn_stop_logging">停止紀錄</string>
+    <string name="gpslogger_still_running">GPS記錄器仍在運行。</string>
+    <string name="hide">隱藏</string>
+    <string name="txt_latitude">緯度:</string>
+    <string name="txt_satellites">衛星：</string>
+    <string name="btn_start_logging">開始紀錄：</string>
 </resources>

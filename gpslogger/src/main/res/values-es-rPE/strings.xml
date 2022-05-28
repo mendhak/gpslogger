@@ -47,7 +47,7 @@
     <string name="providername_gps">Satélites GPS</string>
     <string name="providername_celltower">torres de celular</string>
     <string name="meters_per_second">m/s</string>
-    <string name="feet_per_second">&#160;pies/s</string>
+    <string name="feet_per_second"> pies/s</string>
     <string name="unknown_direction">desconocido</string>
     <string name="sorry">Lo siento</string>
     <string name="success">Éxito</string>
@@ -275,4 +275,10 @@
     <string name="customurl_http_body">Cuerpo HTTP</string>
     <string name="customurl_http_headers">Encabezados HTTP</string>
     <string name="customurl_http_method">Método HTTP</string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><b>Permitir todo el tiempo</b> - Permite a la aplicación usar el GPS estando en segundo plano.</string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Ignorar optimizaciones de batería</b> -
+\nPermite la ejecución de la aplicación en segundo plano ignorando optimizaciones de batería.</string>
+    <string name="app_name">Registro GPS</string>
+    <string name="hide">Ocultar</string>
+    <string name="gpslogger_permissions_background_location">Permite el GPSLogger en segundo plano, concediendo un permiso adicional. En la siguiente pantalla selecciona:</string>
 </resources>

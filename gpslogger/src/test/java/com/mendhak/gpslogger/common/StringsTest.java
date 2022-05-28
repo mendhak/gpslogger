@@ -524,4 +524,39 @@ public class StringsTest {
 
     }
 
+    @Test
+    public void getUrlEncodedString_stringWithSpace_shouldBeReplacedWithPlus(){
+        String expected = "a+b+c%2C+x+y+z";
+        String actual = Strings.getUrlEncodedString("a b c, x y z");
+
+        assertThat("Spaces should be replaced by plus", actual, is(expected));
+    }
+
+    @Test
+    public void getUrlEncodedString_stringWithPlus_shouldBeReplacedWith2B(){
+        String expected = "a%2Bb%2Bc";
+        String actual = Strings.getUrlEncodedString("a+b+c");
+
+        assertThat("Plus should be replaced by 2B", actual, is(expected));
+    }
+
+    @Test
+    public void getUrlEncodedString_stringWithColon_shouldNotBeReplaced(){
+        String expected = "a:b:c";
+        String actual = Strings.getUrlEncodedString("a:b:c");
+
+        assertThat("Colon should not be replaced, it just looks nicer!", actual, is(expected));
+    }
+
+    @Test
+    public void getUrlEncodedString_stringWithTimestamp_shouldReplaceButNotColons(){
+        String expected = "2022-04-22T03:59:17%2B01:00";
+        String actual = Strings.getUrlEncodedString("2022-04-22T03:59:17+01:00");
+
+        assertThat("Timestamp should be encoded, except for the colons", actual, is(expected));
+    }
+
+
+
+
 }

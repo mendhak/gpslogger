@@ -38,25 +38,25 @@
     <!-- general -->
     <string name="foot">stopa</string>
     <string name="feet">stopy</string>
-    <string name="meter">&#160;m</string>
-    <string name="meters">&#160;m</string>
+    <string name="meter"> m</string>
+    <string name="meters"> m</string>
     <string name="error">Chyba</string>
     <string name="error_connection">Chyba pripojenia. Prosím skontrolujte nastavenia telefónu.</string>
-    <string name="seconds">&#160;s</string>
-    <string name="minutes">&#160;min</string>
-    <string name="hours">&#160;hod</string>
+    <string name="seconds"> s</string>
+    <string name="minutes"> min</string>
+    <string name="hours"> hod</string>
     <string name="gpsprovider_unavailable">Nie je dostupný žiadny poskytovateľ GPS. Prosím skontrolujte nastavenia svojej pozície a zapnite poskytovateľa pozície.
     </string>
     <string name="started">Spustené</string>
     <string name="providername_gps">Satelity GPS</string>
     <string name="providername_celltower">vykrývače mobilným signálom</string>
     <string name="not_applicable">nie je dostupné</string>
-    <string name="meters_per_second">&#160;m/s</string>
-    <string name="feet_per_second">&#160;stôp/s</string>
-    <string name="miles_per_hour">&#160;míľ/h</string>
-    <string name="miles">&#160;míľ</string>
-    <string name="kilometers_per_hour">&#160;km/h</string>
-    <string name="kilometers">&#160;km</string>
+    <string name="meters_per_second"> m/s</string>
+    <string name="feet_per_second"> stôp/s</string>
+    <string name="miles_per_hour"> míľ/h</string>
+    <string name="miles"> míľ</string>
+    <string name="kilometers_per_hour"> km/h</string>
+    <string name="kilometers"> km</string>
     <string name="unknown_direction">neznáme</string>
     <string name="sorry">Prepáčte</string>
     <string name="success">Úspech</string>
@@ -204,7 +204,7 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
     <string name="autoemail_from_summary">Niektorí poskytovatelia služieb elektronickej pošty vyžadujú adresy odosielateľa. Použiť ju však iba vtedy, ak je to potrebné.
     </string>
     <string name="gdocs_clearauthorization_summary">Vymazať lokálne nastavenia Google Drive. Na permanentné odmietnutie prístupu prejdite na nastavenia účtu Google</string>
-    <string name="gdocs_setup_title">Google Drive</string>
+    <string name="gdocs_setup_title">Google Disk</string>
     <string name="gdocs_test_summary">Odoslať testovací súbor do služby Google Drive</string>
     <string name="gdocs_test_title">Test odosielania</string>
     <string name="gdocs_testupload_success">Odoslané. Skontrolujte či služba Google Documents obsahuje nový súbor.</string>
@@ -271,7 +271,7 @@ polia.
     <string name="autoftp_directory">Priečinok</string>
     <string name="new_file_custom_message">Môžete použiť %SER pre sériové číslo zariadenia, %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER pre verziu</string>
     <string name="new_file_prefix_serial_title">Sériové číslo zariadenia pred názvom súboru</string>
-    <string name="new_file_prefix_serial_summary">Toto je sériové číslo, ktoré sa našlo vo vašom telefóne </string>
+    <string name="new_file_prefix_serial_summary">Od systému Android 8 sa používa unikátne Android ID. V starších verziách (pred Android 8) sa používa sériové číslo uvedené pri stave telefónu.</string>
     <string name="txt_travel_duration">Trvanie:</string>
     <string name="menu_onepoint">Zaznamenať jeden bod</string>
     <string name="view_simple">Jednoduchý náhľad</string>
@@ -345,7 +345,7 @@ polia.
     <string name="profile_default">Predvolený profil</string>
     <string name="profile_add_new">Pridať profil</string>
     <string name="gpslogger_permissions_rationale_title">Vyžaduje sa oprávnenie</string>
-    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Aplikácia vyžaduje pre svoje korektné fungovanie rôzne oprávnenia. Teraz vám bude viackrát položená otázka súvisiaca s oprávneniami (prepáčte). Tu je vysvetlenie každého oprávnenia: ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic">Aplikácia vyžaduje pre svoje korektné fungovanie rôzne oprávnenia. Teraz vám bude viackrát položená otázka súvisiaca s oprávneniami (prepáčte). Tu je vysvetlenie každého oprávnenia.</string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Umiestnenie zariadenia</b> - Toto oprávnenie umožňuje čítanie údajov o lokalite z vysielačov mobilného signálu a z hardvéru pre GPS.]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotografie, médiá, súbory</b> – Toto oprávnenie umožňuje zápis do súborov so záznamami a vykonávanie testu ukladania súborov, čítania zoznamu súborov pre odosielanie alebo zdieľanie. Táto aplikácia nepristupuje k vaším fotografiám alebo médiu.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Povoliť vždy</b> - umožní aplikácii získavať aktualizácie polohy aj vtedy, keď beží na pozadí. ]]></string>
@@ -385,4 +385,7 @@ polia.
     <string name="app_theme_setting">Určuje nastavenie svetlej alebo tmavej témy aplikácie</string>
     <string name="file_logging_log_time_with_offset_title">Zaznamenávač čas s posunom čas. zóny</string>
     <string name="file_logging_log_time_with_offset_summary">Ak je to možné zapisovať čas podľa ISO8601 s posunom čas. zóny, namiesto UTC.</string>
+    <string name="txt_battery_charging">Nabíja sa</string>
+    <string name="logging_advanced_delete_files">Vymazať vybrané súbory</string>
+    <string name="logging_advanced_delete_files_summary">Viac súborov vyberiete dlhým stlačením.</string>
 </resources>
