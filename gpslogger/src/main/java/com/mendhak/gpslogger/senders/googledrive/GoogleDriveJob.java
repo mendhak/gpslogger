@@ -1,5 +1,6 @@
 package com.mendhak.gpslogger.senders.googledrive;
 
+import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 
@@ -14,6 +15,7 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Streams;
 
 import net.openid.appauth.AuthState;
 import net.openid.appauth.AuthorizationException;
@@ -24,6 +26,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.net.URLEncoder;
 
 import de.greenrobot.event.EventBus;
@@ -122,7 +125,6 @@ public class GoogleDriveJob extends Job {
                 "            }";
 
 
-        //            OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
         OkHttpClient client = new OkHttpClient();
         Request.Builder requestBuilder = new Request.Builder().url(createFileUrl);
 
@@ -130,6 +132,34 @@ public class GoogleDriveJob extends Job {
         RequestBody body = RequestBody.create(MediaType.parse("application/json"), createFilePayload);
         requestBuilder = requestBuilder.method("POST", body);
 
+
+        Request request = requestBuilder.build();
+        Response response = client.newCall(request).execute();
+        String fileMetadata = response.body().string();
+        LOG.debug(fileMetadata);
+        response.body().close();
+
+        JSONObject fileMetadataJson = new JSONObject(fileMetadata);
+        fileId = fileMetadataJson.getString("id");
+
+        return fileId;
+    }
+
+    private String updateFileContents(String accessToken, String gpxFileId, String fileName) throws Exception {
+        FileInputStream fis = new FileInputStream(new File(preferenceHelper.getGpsLoggerFolder(), fileName));
+        String fileId = null;
+
+        String fileUpdateUrl = "https://www.googleapis.com/upload/drive/v3/files/" + gpxFileId + "?uploadType=media";
+
+        OkHttpClient client = new OkHttpClient();
+        Request.Builder requestBuilder = new Request.Builder().url(fileUpdateUrl);
+
+        requestBuilder.addHeader("Authorization", "Bearer " + accessToken);
+        RequestBody body = RequestBody.create(MediaType.parse(getMimeTypeFromFileName(fileName)), Streams.getByteArrayFromInputStream(fis));
+        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT){
+            requestBuilder.addHeader("X-HTTP-Method-Override", "PATCH");
+        }
+        requestBuilder = requestBuilder.method("PATCH", body);
 
         Request request = requestBuilder.build();
         Response response = client.newCall(request).execute();
@@ -176,6 +206,34 @@ public class GoogleDriveJob extends Job {
         return authState;
     }
 
+    private String getMimeTypeFromFileName(String fileName) {
+        if (fileName.endsWith("kml")) {
+            return "application/vnd.google-earth.kml+xml";
+        }
+
+        if (fileName.endsWith("gpx")) {
+            return "application/gpx+xml";
+        }
+
+        if (fileName.endsWith("zip")) {
+            return "application/zip";
+        }
+
+        if (fileName.endsWith("xml")) {
+            return "application/xml";
+        }
+
+        if (fileName.endsWith("nmea")) {
+            return "text/plain";
+        }
+
+        if (fileName.endsWith("geojson")){
+            return "application/vnd.geo+json";
+        }
+
+        return "application/vnd.google-apps.spreadsheet";
+    }
+
     class GoogleDriveUploadWorkflow implements Runnable {
 
         String accessToken;
@@ -196,11 +254,29 @@ public class GoogleDriveJob extends Job {
                 }
 
                 if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
-                    EventBus.getDefault().post(new UploadEvents.GDrive().failed("Could not create folder"));
+                    EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not create folder"));
                     return;
                 }
 
                 LOG.debug("GPSLogger folder ID - " + gpsLoggerFolderId);
+
+                //Now search for the file
+                String gpxFileId = getFileIdFromFileName(accessToken, fileName, gpsLoggerFolderId);
+
+                if (Strings.isNullOrEmpty(gpxFileId)) {
+                    //Create empty file first
+                    gpxFileId = createEmptyFile(accessToken, fileName, getMimeTypeFromFileName(fileName), gpsLoggerFolderId);
+
+                    if (Strings.isNullOrEmpty(gpxFileId)) {
+                        EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not create file"));
+                        return;
+                    }
+                }
+
+                if (!Strings.isNullOrEmpty(gpxFileId)) {
+                    //Set file's contents
+                    updateFileContents(accessToken, gpxFileId, fileName);
+                }
 
                 EventBus.getDefault().post(new UploadEvents.GoogleDrive().succeeded());
 
