@@ -87,7 +87,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
         restoreGoogleDriveAuthState();
         if (authState.isAuthorized()) {
             findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setTitle(R.string.osm_resetauth);
-            findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setSummary(R.string.gdocs_clearauthorization_summary);
+            findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setSummary(R.string.google_drive_clearauthorization_summary);
         } else {
             findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setTitle(R.string.osm_lbl_authorize);
             findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setSummary("");
@@ -253,6 +253,14 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
 
     @Override
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
+        if(which != BUTTON_POSITIVE) { return true; }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH)){
+            PreferenceHelper.getInstance().setGoogleDriveFolderPath(extras.getString(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH));
+            findPreference(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH).setSummary(PreferenceHelper.getInstance().getGoogleDriveFolderPath());
+            return true;
+        }
+
         return false;
     }
 
@@ -263,7 +271,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
         if (!d.success) {
             Dialogs.showError(getString(R.string.sorry), "Could not upload to Google Drive", d.message, d.throwable, (FragmentActivity) getActivity());
         } else {
-            Dialogs.alert(getString(R.string.success), getString(R.string.gdocs_testupload_success), getActivity());
+            Dialogs.alert(getString(R.string.success), getString(R.string.google_drive_testupload_success), getActivity());
         }
     }
 }
