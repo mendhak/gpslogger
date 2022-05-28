@@ -12,17 +12,12 @@
         android:title="@string/osm_lbl_authorize"
         app:iconSpaceReserved="false" />
 
-<!--    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference android:key="gdocs_foldername"-->
-<!--        android:title="Folder name"-->
-<!--        android:defaultValue="GPSLogger for Android"-->
-<!--        />-->
-
     <Preference android:key="google_drive_folder_path" android:title="@string/google_drive_folder_path"
         android:defaultValue="GPSLogger"
         app:iconSpaceReserved="false" />
 
-    <Preference android:key="google_drive_test" android:summary="@string/gdocs_test_summary"
-        android:title="@string/gdocs_test_title"
+    <Preference android:key="google_drive_test" android:summary="@string/google_drive_test_summary"
+        android:title="@string/google_drive_test_title"
         app:iconSpaceReserved="false" />
 
 

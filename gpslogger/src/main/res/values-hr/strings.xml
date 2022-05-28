@@ -159,11 +159,11 @@
     <string name="menu_upload">Prijenos</string>
     <string name="autoemail_from">S adrese</string>
     <string name="autoemail_from_summary">Neki pružatelji usluge e-pošte tražu adresu. Koristite ovo samo ako vam je potrebno.    </string>
-    <string name="gdocs_clearauthorization_summary">Zaboravlja lokalne Google Drive postavke. Za trajno ukidanje pristupa, idite na Google Account postavke</string>
-    <string name="gdocs_setup_title">Google disk</string>
-    <string name="gdocs_test_summary">Prijenos testne datoteke na Google disk</string>
-    <string name="gdocs_test_title">Prijenos test</string>
-    <string name="gdocs_testupload_success">Preneseno. Molimo vas da provjerite u Google dokumentima novu datoteku.</string>
+    <string name="google_drive_clearauthorization_summary">Zaboravlja lokalne Google Drive postavke. Za trajno ukidanje pristupa, idite na Google Account postavke</string>
+    <string name="google_drive_setup_title">Google disk</string>
+    <string name="google_drive_test_summary">Prijenos testne datoteke na Google disk</string>
+    <string name="google_drive_test_title">Prijenos test</string>
+    <string name="google_drive_testupload_success">Preneseno. Molimo vas da provjerite u Google dokumentima novu datoteku.</string>
     <string name="autoemail_sendto_csv">Adrese e-pošte odvojene zarezom</string>
     <string name="autosend_enabled">Omogući automatsko slanje</string>
     <string name="autosend_enabled_summary">Omogućuje slanje datoteke na različite ciljeve</string>

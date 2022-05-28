@@ -145,9 +145,9 @@
     <string name="menu_upload">Opplasting</string>
     <string name="autoemail_from">Fra adresse</string>
     <string name="autoemail_from_summary">Enkelte e-postleverandører krever en avsenderadresse. Bruk dette bare hvis du trenger det.</string>
-    <string name="gdocs_test_summary">Last opp en testfil til Google Drive</string>
-    <string name="gdocs_test_title">Test opplasting</string>
-    <string name="gdocs_testupload_success">Lastet opp. Sjekk Google dokumenter for ny fil.</string>
+    <string name="google_drive_test_summary">Last opp en testfil til Google Drive</string>
+    <string name="google_drive_test_title">Test opplasting</string>
+    <string name="google_drive_testupload_success">Lastet opp. Sjekk Google dokumenter for ny fil.</string>
     <string name="autoemail_sendto_csv">Kommaseparerte e-postadresser</string>
     <string name="autosend_enabled">Tillat automatisk sending</string>
     <string name="autosend_enabled_summary">Tillater å sende filer til ulike mål</string>
@@ -247,7 +247,7 @@
     <string name="osm_tags">Etiketter</string>
     <string name="emailprovider_yahoo">Yahoo Mail</string>
     <string name="emailprovider_msn">Windows Live Mail</string>
-    <string name="gdocs_setup_title">Google Drive</string>
+    <string name="google_drive_setup_title">Google Drive</string>
     <string name="log_customurl_setup_title">Egendefinert URL</string>
     <string name="storage_chooser_new_folder_label">Ny mappe</string>
     <string name="storage_chooser_overview_heading">Velg lagring</string>

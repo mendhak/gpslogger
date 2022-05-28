@@ -151,9 +151,9 @@
     <string name="menu_upload">Skicka</string>
     <string name="autoemail_from">Avsändaradress</string>
     <string name="autoemail_from_summary">Vissa e-postleverantörer kräver en avsändaradress. Använd detta endast om det behövs.</string>
-    <string name="gdocs_clearauthorization_summary">Glömmer lokala GDocs-inställningar. För att häva åtkomst permanent, gå till inställningar för Google-kontot</string>
-    <string name="gdocs_test_title">Testa uppladdning</string>
-    <string name="gdocs_testupload_success">Skickad. Se dina Google Dokuments för den nya filen.</string>
+    <string name="google_drive_clearauthorization_summary">Glömmer lokala Google Drive-inställningar. För att häva åtkomst permanent, gå till inställningar för Google-kontot</string>
+    <string name="google_drive_test_title">Testa uppladdning</string>
+    <string name="google_drive_testupload_success">Skickad. Se dina Google Dokuments för den nya filen.</string>
     <string name="autoemail_sendto_csv">E-postadresser separerade av kommatecken</string>
     <string name="autosend_enabled">Tillåt autosändning</string>
     <string name="autosend_enabled_summary">Tillåt att filerna skickas till valfritt mål</string>

@@ -168,10 +168,10 @@
     <string name="menu_upload">Carica</string>
     <string name="autoemail_from">Da: (mittente)</string>
     <string name="autoemail_from_summary">Alcuni provider di posta richiedono nella Email il mittente (Da:), usalo solo se richiesto.</string>
-    <string name="gdocs_clearauthorization_summary">Dimentica le impostazioni locali di Google Drive. Per revocare definitivamente l\'accesso, vai nelle impostazioni di Google Account</string>
-    <string name="gdocs_test_summary">Carica un file di test su Google Drive</string>
-    <string name="gdocs_test_title">Test di caricamento</string>
-    <string name="gdocs_testupload_success">Caricato! Vai su Google Drive e controlla il file.</string>
+    <string name="google_drive_clearauthorization_summary">Dimentica le impostazioni locali di Google Drive. Per revocare definitivamente l\'accesso, vai nelle impostazioni di Google Account</string>
+    <string name="google_drive_test_summary">Carica un file di test su Google Drive</string>
+    <string name="google_drive_test_title">Test di caricamento</string>
+    <string name="google_drive_testupload_success">Caricato! Vai su Google Drive e controlla il file.</string>
     <string name="autoemail_sendto_csv">Indirizzi e-mail separati da una virgola</string>
     <string name="autosend_enabled">Permetti invio automatico</string>
     <string name="autosend_enabled_summary">Permetti invio dei files a diversi destinatari</string>
@@ -325,7 +325,7 @@
     <string name="emailprovider_msn">Windows Live Mail</string>
     <string name="dropbox_setup_title">Dropbox</string>
     <string name="owncloud_setup_title">ownCloud</string>
-    <string name="gdocs_setup_title">Google Drive</string>
+    <string name="google_drive_setup_title">Google Drive</string>
     <string name="opengts_setup_title">OpenGTS</string>
     <string name="autoopengts_server">Server</string>
     <string name="autoftp_ssltls">SSL/TLS</string>

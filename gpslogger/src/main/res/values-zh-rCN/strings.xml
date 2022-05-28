@@ -181,11 +181,11 @@
     <string name="menu_upload">上传</string>
     <string name="autoemail_from">寄件人地址</string>
     <string name="autoemail_from_summary">一些邮件服务商要求您提供寄件人地址。请只在需要时使用。</string>
-    <string name="gdocs_clearauthorization_summary">清除本地 Google Drive 设置。要永久撤销访问权限，请转到谷歌帐户设置</string>
-    <string name="gdocs_setup_title">Google云端硬盘</string>
-    <string name="gdocs_test_summary">上传一个测试文件到Google云端硬盘</string>
-    <string name="gdocs_test_title">上传测试</string>
-    <string name="gdocs_testupload_success">已上传完成，请检查您的Google云端文档。</string>
+    <string name="google_drive_clearauthorization_summary">清除本地 Google Drive 设置。要永久撤销访问权限，请转到谷歌帐户设置</string>
+    <string name="google_drive_setup_title">Google云端硬盘</string>
+    <string name="google_drive_test_summary">上传一个测试文件到Google云端硬盘</string>
+    <string name="google_drive_test_title">上传测试</string>
+    <string name="google_drive_testupload_success">已上传完成，请检查您的Google云端文档。</string>
     <string name="autoemail_sendto_csv">用逗号隔开邮件地址</string>
     <string name="autosend_enabled">允许自动发送</string>
     <string name="autosend_enabled_summary">允许将文件发送到多处</string>

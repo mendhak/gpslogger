@@ -268,12 +268,12 @@
     <string name="autoemail_from_summary">Some email providers require a from address. Use this only if you need it.
     </string>
 
-    <string name="gdocs_clearauthorization_summary">Forgets local Google Drive settings. To permanently revoke access, go to Google Account settings</string>
-    <string name="gdocs_setup_title">Google Drive</string>
-    <string name="gdocs_test_summary">Upload a test file to Google Drive</string>
-    <string name="gdocs_test_title">Test upload</string>
+    <string name="google_drive_clearauthorization_summary">Forgets local Google Drive settings. To permanently revoke access, go to Google Account settings</string>
+    <string name="google_drive_setup_title">Google Drive</string>
+    <string name="google_drive_test_summary">Upload a test file to Google Drive</string>
+    <string name="google_drive_test_title">Test upload</string>
     <string name="google_drive_folder_path">"Google Drive folder path"</string>
-    <string name="gdocs_testupload_success">Uploaded. Please check your Google Drive for a new file.</string>
+    <string name="google_drive_testupload_success">Uploaded. Please check your Google Drive for a new file.</string>
 
     <string name="autoemail_sendto_csv">Comma separated email addresses</string>
 

@@ -174,10 +174,10 @@
     <string name="menu_upload">Subir</string>
     <string name="autoemail_from">Dirección de origen</string>
     <string name="autoemail_from_summary">Algunos proveedores requieren una dirección de origen. Use esto sólo si lo necesita.    </string>
-    <string name="gdocs_clearauthorization_summary">Olvida los ajustes locales de Google Drive. Para revocar el acceso permanentemente, diríjase a la configuración de Google Account</string>
-    <string name="gdocs_test_summary">Subir un archivo de prueba a Google Drive</string>
-    <string name="gdocs_test_title">Carga de prueba</string>
-    <string name="gdocs_testupload_success">Subido. Por favor verifique su Google Documents para un nuevo archivo.</string>
+    <string name="google_drive_clearauthorization_summary">Olvida los ajustes locales de Google Drive. Para revocar el acceso permanentemente, diríjase a la configuración de Google Account</string>
+    <string name="google_drive_test_summary">Subir un archivo de prueba a Google Drive</string>
+    <string name="google_drive_test_title">Carga de prueba</string>
+    <string name="google_drive_testupload_success">Subido. Por favor verifique su Google Documents para un nuevo archivo.</string>
     <string name="autoemail_sendto_csv">Direcciones de correos electrónicos separadas por comas</string>
     <string name="autosend_enabled">Permitir envío automático</string>
     <string name="autosend_enabled_summary">Permite enviar los archivos a varios destinos</string>

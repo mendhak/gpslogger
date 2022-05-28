@@ -162,11 +162,11 @@
     <string name="owncloud_testing">Testuji nahrání na ownCloud</string>
     <string name="autoemail_from">Z adresy</string>
     <string name="autoemail_from_summary">Někteří poskytovatelé e-mailu vyžadují adresu odesílatele. Použijte pouze tehdy, pokud ho budete potřebovat.     </string>
-    <string name="gdocs_clearauthorization_summary">Zapomene na místní nastavení Google Drive. Chcete-li trvale odebrat přístup, přejděte do nastavení účtu Google</string>
-    <string name="gdocs_setup_title">Disk Google</string>
-    <string name="gdocs_test_summary">Nahrát testovací soubor na Google disk</string>
-    <string name="gdocs_test_title">Test uploadu</string>
-    <string name="gdocs_testupload_success">Nahráno. Zkontrolujte prosím vaše dokumenty Google pro nový soubor.</string>
+    <string name="google_drive_clearauthorization_summary">Zapomene na místní nastavení Google Drive. Chcete-li trvale odebrat přístup, přejděte do nastavení účtu Google</string>
+    <string name="google_drive_setup_title">Disk Google</string>
+    <string name="google_drive_test_summary">Nahrát testovací soubor na Google disk</string>
+    <string name="google_drive_test_title">Test uploadu</string>
+    <string name="google_drive_testupload_success">Nahráno. Zkontrolujte prosím vaše dokumenty Google pro nový soubor.</string>
     <string name="autoemail_sendto_csv">E-mailové adresy oddělené čárkou</string>
     <string name="autosend_enabled">Povolit automatické odesílání</string>
     <string name="autosend_enabled_summary">Umožňuje odesílat soubory do různých umístění</string>

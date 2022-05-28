@@ -189,11 +189,11 @@ Nomes de ficheiro muito dinâmicos
     <string name="menu_upload">Enviar</string>
     <string name="autoemail_from">Endereço \"de\"</string>
     <string name="autoemail_from_summary">Alguns fornecedores de e-mail exigem um endereço. Use isto apenas se precisar.     </string>
-    <string name="gdocs_clearauthorization_summary">Esquecer configurações locais do Google Drive. Para revogar o acesso permanentemente, utilize as configurações da conta Google</string>
-    <string name="gdocs_setup_title">Google Drive</string>
-    <string name="gdocs_test_summary">Enviar um ficheiro de teste para o Google Drive</string>
-    <string name="gdocs_test_title">Testar envio</string>
-    <string name="gdocs_testupload_success">Enviado. Verifique se tem um novo ficheiro no Google Documents.</string>
+    <string name="google_drive_clearauthorization_summary">Esquecer configurações locais do Google Drive. Para revogar o acesso permanentemente, utilize as configurações da conta Google</string>
+    <string name="google_drive_setup_title">Google Drive</string>
+    <string name="google_drive_test_summary">Enviar um ficheiro de teste para o Google Drive</string>
+    <string name="google_drive_test_title">Testar envio</string>
+    <string name="google_drive_testupload_success">Enviado. Verifique se tem um novo ficheiro no Google Documents.</string>
     <string name="autoemail_sendto_csv">Endereços de e-mail separados por vírgula</string>
     <string name="autosend_enabled">Permitir o envio automático</string>
     <string name="autosend_enabled_summary">Permite enviar ficheiros para vários destinos</string>

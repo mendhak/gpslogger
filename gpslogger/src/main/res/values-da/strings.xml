@@ -171,11 +171,11 @@ præcision ved lavere frekvenser.    </string>
     <string name="owncloud_testing">Tester ownCloud-upload</string>
     <string name="autoemail_from">Fra adresse</string>
     <string name="autoemail_from_summary">Visse e-mail-udbydere kræver en fra-adresse. Benyt kun, hvis du har behov for det.    </string>
-    <string name="gdocs_clearauthorization_summary">Glemmer lokalindstillinger for Google Drev. For permanent at tilbagekalde adgang, gå til Google-kontoindstillinger</string>
-    <string name="gdocs_setup_title">Google Drev</string>
-    <string name="gdocs_test_summary">Upload en testfil til Google Drev</string>
-    <string name="gdocs_test_title">Test af upload</string>
-    <string name="gdocs_testupload_success">Uploadet. Se venligst efter en ny fil i dine Google Dokumenter.</string>
+    <string name="google_drive_clearauthorization_summary">Glemmer lokalindstillinger for Google Drev. For permanent at tilbagekalde adgang, gå til Google-kontoindstillinger</string>
+    <string name="google_drive_setup_title">Google Drev</string>
+    <string name="google_drive_test_summary">Upload en testfil til Google Drev</string>
+    <string name="google_drive_test_title">Test af upload</string>
+    <string name="google_drive_testupload_success">Uploadet. Se venligst efter en ny fil i dine Google Dokumenter.</string>
     <string name="autoemail_sendto_csv">Kommaseparerede e-mails</string>
     <string name="autosend_enabled">Tillad auto-afsendelse</string>
     <string name="autosend_enabled_summary">Tillad filafsendelser til forskellige adressater</string>

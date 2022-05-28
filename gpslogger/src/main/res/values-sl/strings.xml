@@ -120,9 +120,9 @@
     <string name="menu_upload">Nalaganje</string>
     <string name="autoemail_from">Iz naslova</string>
     <string name="autoemail_from_summary">Nekateri ponudniki e-pošte zahtevajo polje: iz naslova. To uporabite le, če potrebujete.     </string>
-    <string name="gdocs_test_summary">Naloži testno datoteko v Google Drive</string>
-    <string name="gdocs_test_title">Preskusni upload</string>
-    <string name="gdocs_testupload_success">Naloženo. Prosimo, preverite vaše Google Docs za novo datoteko.</string>
+    <string name="google_drive_test_summary">Naloži testno datoteko v Google Drive</string>
+    <string name="google_drive_test_title">Preskusni upload</string>
+    <string name="google_drive_testupload_success">Naloženo. Prosimo, preverite vaše Google Docs za novo datoteko.</string>
     <string name="autoemail_sendto_csv">E-poštni naslovi ločeni z vejicami</string>
     <string name="autosend_enabled">Omogoči samodejno pošiljanje</string>
     <string name="autosend_enabled_summary">Omogoča pošiljanje datotek na različne cilje</string>

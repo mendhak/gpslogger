@@ -128,11 +128,11 @@
     <string name="owncloud_testing">ownCloud பதிவேற்றத்தைச் சோதிக்கிறது</string>
     <string name="menu_upload">பதிவேற்று</string>
     <string name="autoemail_from">அனுப்புநர் முகவரி</string>
-    <string name="gdocs_clearauthorization_summary">லோக்கல் Google இயக்கம் அமைவுகளை மறக்கும். நிராந்திரமாக அணுகல் அங்கீகாரத்தைத் திரும்பப்பெறும், Google கணக்கு அமைப்புகளுக்குச் செல்க</string>
-    <string name="gdocs_setup_title">Google இயக்கம்</string>
-    <string name="gdocs_test_summary">Google இயக்கத்தில் ஒரு சோதனை கோப்பைப் பதிவேற்று</string>
-    <string name="gdocs_test_title">சோதனை பதிவேற்றம்</string>
-    <string name="gdocs_testupload_success">பதிவேற்றப்பட்டது. தயவுசெய்து புதியக் கோப்புக்காக உங்கள் Google Docs ஐ சரிபாருங்கள்.</string>
+    <string name="google_drive_clearauthorization_summary">லோக்கல் Google இயக்கம் அமைவுகளை மறக்கும். நிராந்திரமாக அணுகல் அங்கீகாரத்தைத் திரும்பப்பெறும், Google கணக்கு அமைப்புகளுக்குச் செல்க</string>
+    <string name="google_drive_setup_title">Google இயக்கம்</string>
+    <string name="google_drive_test_summary">Google இயக்கத்தில் ஒரு சோதனை கோப்பைப் பதிவேற்று</string>
+    <string name="google_drive_test_title">சோதனை பதிவேற்றம்</string>
+    <string name="google_drive_testupload_success">பதிவேற்றப்பட்டது. தயவுசெய்து புதியக் கோப்புக்காக உங்கள் Google Docs ஐ சரிபாருங்கள்.</string>
     <string name="autosend_enabled">தானாக அனுப்புவதை அனுமதி</string>
     <string name="autosend_frequency">அடிக்கடி எவ்வளவு?</string>
     <string name="autosend_sendzip_title">ZIP கோப்பை அனுப்பு</string>

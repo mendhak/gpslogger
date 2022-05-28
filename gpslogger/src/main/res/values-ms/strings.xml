@@ -170,11 +170,11 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="menu_upload">Muat naik</string>
     <string name="autoemail_from">Daripada alamat</string>
     <string name="autoemail_from_summary">Sesetengah penyedia memerlukan alamat emel pengirim.  Gunakan ini diperlukan. </string>
-    <string name="gdocs_clearauthorization_summary">Peruntukkan tetapan Google Drive setempat. Untuk membatalkan akses secara kekal, pergi ke tetapan Akun Google</string>
-    <string name="gdocs_setup_title">Google drive</string>
-    <string name="gdocs_test_summary">Muat naik fail ujian ke Google Drive</string>
-    <string name="gdocs_test_title">Ujian muat naik</string>
-    <string name="gdocs_testupload_success">Dimuat naik. Sila semak dokumen anda Google untuk fail baru.</string>
+    <string name="google_drive_clearauthorization_summary">Peruntukkan tetapan Google Drive setempat. Untuk membatalkan akses secara kekal, pergi ke tetapan Akun Google</string>
+    <string name="google_drive_setup_title">Google drive</string>
+    <string name="google_drive_test_summary">Muat naik fail ujian ke Google Drive</string>
+    <string name="google_drive_test_title">Ujian muat naik</string>
+    <string name="google_drive_testupload_success">Dimuat naik. Sila semak dokumen anda Google untuk fail baru.</string>
     <string name="autoemail_sendto_csv">Alamat e-mel dipisahkan koma</string>
     <string name="autosend_enabled">Benarkan penghantaran automatik</string>
     <string name="autosend_enabled_summary">Bolehkan penghantaran fail kepada pelbagai penerima</string>
