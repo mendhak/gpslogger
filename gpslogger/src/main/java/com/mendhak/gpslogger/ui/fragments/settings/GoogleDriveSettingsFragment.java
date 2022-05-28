@@ -14,15 +14,21 @@ import androidx.activity.result.IntentSenderRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.auth0.android.jwt.JWT;
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Files;
+import com.mendhak.gpslogger.senders.googledrive.GoogleDriveManager;
+import com.mendhak.gpslogger.ui.Dialogs;
 
 import net.openid.appauth.AppAuthConfiguration;
 import net.openid.appauth.AuthState;
@@ -38,9 +44,11 @@ import net.openid.appauth.TokenResponse;
 import org.json.JSONException;
 import org.slf4j.Logger;
 
+import java.io.File;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 
+import de.greenrobot.event.EventBus;
 import eltos.simpledialogfragment.SimpleDialog;
 
 public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implements
@@ -50,6 +58,8 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
 
     private static final Logger LOG = Logs.of(GoogleDriveSettingsFragment.class);
 
+    GoogleDriveManager manager;
+
     private AuthState authState = new AuthState();
     private JWT jwt = null;
     private AuthorizationService authorizationService;
@@ -58,9 +68,18 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        manager = new GoogleDriveManager(PreferenceHelper.getInstance());
+
         findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setOnPreferenceClickListener(this);
+        findPreference("google_drive_test").setOnPreferenceClickListener(this);
         resetGoogleDriveAuthorizationPreference();
 
+        registerEventBus();
+    }
+
+    private void registerEventBus() {
+        EventBus.getDefault().register(this);
     }
 
     private void resetGoogleDriveAuthorizationPreference() {
@@ -134,6 +153,11 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
 
         }
 
+        if (preference.getKey().equals("google_drive_test")){
+            uploadTestFile();
+            return true;
+        }
+
         return false;
     }
 
@@ -186,6 +210,21 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                 }
             });
 
+
+    private void uploadTestFile() {
+        Dialogs.progress((FragmentActivity) getActivity(), getString(R.string.please_wait));
+
+        try {
+            File testFile = Files.createTestFile();
+            manager.uploadFile(testFile.getName());
+
+        } catch (Exception ex) {
+            LOG.error("Could not create local test file", ex);
+            EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not create local test file", ex));
+        }
+
+    }
+
     void persistGoogleDriveAuthState() {
         PreferenceHelper.getInstance().setGoogleDriveAuthState(authState.jsonSerializeString());
     }
@@ -205,7 +244,6 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
             }
 
         }
-
     }
 
     @Override
@@ -217,5 +255,17 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
     @Override
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
         return false;
+    }
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.GoogleDrive d){
+        LOG.debug("Google Drive Event completed, success: " + d.success);
+        Dialogs.hideProgress();
+        if(!d.success){
+            Dialogs.showError(getString(R.string.sorry), "Could not upload to Google Drive", d.message, d.throwable,(FragmentActivity) getActivity());
+        }
+        else {
+            Dialogs.alert(getString(R.string.success), "", getActivity());
+        }
     }
 }
