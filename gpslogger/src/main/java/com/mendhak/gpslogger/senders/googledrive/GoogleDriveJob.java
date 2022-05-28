@@ -195,6 +195,11 @@ public class GoogleDriveJob extends Job {
                             "application/vnd.google-apps.folder", "root");
                 }
 
+                if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
+                    EventBus.getDefault().post(new UploadEvents.GDrive().failed("Could not create folder"));
+                    return;
+                }
+
                 LOG.debug("GPSLogger folder ID - " + gpsLoggerFolderId);
 
                 EventBus.getDefault().post(new UploadEvents.GoogleDrive().succeeded());
