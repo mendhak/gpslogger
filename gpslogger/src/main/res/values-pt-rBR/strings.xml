@@ -30,10 +30,10 @@
     <string name="sharing_mylocation">Minha localização</string>
     <string name="sharing_via">Compartilhar via</string>
     <!-- general -->
-    <string name="foot">&#160;pé</string>
-    <string name="feet">&#160;pés</string>
-    <string name="meter">&#160;metro</string>
-    <string name="meters">&#160;metros</string>
+    <string name="foot"> pé</string>
+    <string name="feet"> pés</string>
+    <string name="meter"> metro</string>
+    <string name="meters"> metros</string>
     <string name="error">Erro</string>
     <string name="error_connection">Erro de conexão. Favor verificar as opções do seu telefone.</string>
     <string name="gpsprovider_unavailable">Nenhum provedor GPS disponível. Por favor, verifique suas configurações de local e habilite um provedor local.</string>
@@ -41,8 +41,8 @@
     <string name="providername_gps">Satélites GPS</string>
     <string name="providername_celltower">Torres de celular</string>
     <string name="feet_per_second">pé/s</string>
-    <string name="miles_per_hour">&#160;Mi/h</string>
-    <string name="miles">&#160;Mi</string>
+    <string name="miles_per_hour"> Mi/h</string>
+    <string name="miles"> Mi</string>
     <string name="unknown_direction">desconhecido</string>
     <string name="sorry">Desculpe</string>
     <string name="success">Sucesso</string>
@@ -114,7 +114,7 @@
     <string name="startonbootup_summary">Rodar o app e gravar log quando telefone iniciar</string>
     <string name="startonapplaunch_title">Executar ao iniciar app</string>
     <string name="startonapplaunch_summary">Iniciar o log quando o aplicativo for aberto</string>
-    <string name="please_wait">Por favor, aguarde...</string>
+    <string name="please_wait">Por favor, aguarde</string>
     <string name="autoemail_target">Endereços de e-mail de destino</string>
     <string name="autosend_frequency_display">Depois de %s minutos</string>
     <string name="autoemail_frequency_whenistop">Quando eu pressionar Parar</string>
@@ -303,4 +303,12 @@
     <string name="customurl_http_method">Método HTTP</string>
     <string name="customurl_http_basicauthentication">Autenticação básica</string>
     <string name="hide_notification_from_status_bar_disallowed">Esconder notificações está desabilitado no Android Oreo e subsequentes.</string>
+    <string name="app_name">GPSLogger</string>
+    <string name="ok">OK</string>
+    <string name="log_plain_text_csv_field_delimiter">Delimitador de campo CSV</string>
+    <string name="log_plain_text_decimal_comma">Use vírgula (,) como separador decimal em vez de ponto (.)</string>
+    <string name="autoemail_title">Email</string>
+    <string name="owncloud_setup_title">ownCloud</string>
+    <string name="log_plain_text_csv_advanced_title">Fazer login nas configurações de CSV</string>
+    <string name="time_before_logging_summary">Use 0 para frequência máxima, mas mais lento é melhor para a vida útil da bateria. A configuração da bateria no nível do sistema pode substituir essa configuração, consulte a Ajuda e as Perguntas frequentes.</string>
 </resources>

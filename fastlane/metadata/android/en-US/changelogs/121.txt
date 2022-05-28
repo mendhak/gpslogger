@@ -1,0 +1,5 @@
+* New Custom URL parameter: %ALL which replaces every custom URL parameter available
+* Bugfix: escape the + in custom url timestamps
+* Bugfix: timer does not reset when switching profiles
+* Bugfix: when closing the drawer, close the profile list first.
+* Bugfix: when clicking item in profile list, keep drawer open

@@ -23,10 +23,12 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CustomUrlManager extends FileSender {
 
@@ -195,39 +197,51 @@ public class CustomUrlManager extends FileSender {
 
         String logUrl = customLoggingUrl;
 
-        logUrl = logUrl.replaceAll("(?i)%lat", String.valueOf(sLoc.getLatitude()));
-        logUrl = logUrl.replaceAll("(?i)%lon", String.valueOf(sLoc.getLongitude()));
-        logUrl = logUrl.replaceAll("(?i)%sat", String.valueOf(sLoc.getSatelliteCount()));
-        logUrl = logUrl.replaceAll("(?i)%desc", String.valueOf(URLEncoder.encode(Strings.htmlDecode(description), "UTF-8")));
-        logUrl = logUrl.replaceAll("(?i)%alt", String.valueOf(sLoc.getAltitude()));
-        logUrl = logUrl.replaceAll("(?i)%acc", String.valueOf(sLoc.getAccuracy()));
-        logUrl = logUrl.replaceAll("(?i)%dir", String.valueOf(sLoc.getBearing()));
-        logUrl = logUrl.replaceAll("(?i)%prov", String.valueOf(sLoc.getProvider()));
-        logUrl = logUrl.replaceAll("(?i)%spd", String.valueOf(sLoc.getSpeed()));
-        logUrl = logUrl.replaceAll("(?i)%timestamp", String.valueOf(sLoc.getTime()/1000));
+        Map<String, String> replacements = new LinkedHashMap<String, String>();
+        replacements.put("lat", String.valueOf(sLoc.getLatitude()));
+        replacements.put("lon", String.valueOf(sLoc.getLongitude()));
+        replacements.put("sat", String.valueOf(sLoc.getSatelliteCount()));
+        replacements.put("desc", String.valueOf(Strings.getUrlEncodedString(Strings.htmlDecode(description))));
+        replacements.put("alt", String.valueOf(sLoc.getAltitude()));
+        replacements.put("acc", String.valueOf(sLoc.getAccuracy()));
+        replacements.put("dir", String.valueOf(sLoc.getBearing()));
+        replacements.put("prov", String.valueOf(sLoc.getProvider()));
+        replacements.put("spd", String.valueOf(sLoc.getSpeed()));
+        replacements.put("timestamp", String.valueOf(sLoc.getTime()/1000));
 
         if(!Strings.isNullOrEmpty(sLoc.getTimeWithOffset())){
-            logUrl = logUrl.replaceAll("(?i)%timeoffset", sLoc.getTimeWithOffset());
+            replacements.put("timeoffset", Strings.getUrlEncodedString(sLoc.getTimeWithOffset()));
         }
         else {
-            logUrl = logUrl.replaceAll("(?i)%timeoffset", Strings.getIsoDateTimeWithOffset(new Date(sLoc.getTime())));
+            replacements.put("timeoffset", Strings.getUrlEncodedString(Strings.getIsoDateTimeWithOffset(new Date(sLoc.getTime()))));
         }
 
+        replacements.put("time", String.valueOf(Strings.getUrlEncodedString(Strings.getIsoDateTime(new Date(sLoc.getTime())))));
+        replacements.put("starttimestamp", String.valueOf(sessionStartTimeStamp/1000));
+        replacements.put("date", String.valueOf(Strings.getIsoCalendarDate(new Date(sLoc.getTime()))));
+        replacements.put("batt", String.valueOf(batteryLevel));
+        replacements.put("ischarging", String.valueOf(isCharging));
+        replacements.put("aid", String.valueOf(androidId));
+        replacements.put("ser", String.valueOf(buildSerial));
+        replacements.put("act", ""); //Activity detection was removed, but keeping this here for backward compatibility.
+        replacements.put("filename", fileName);
+        replacements.put("profile", Strings.getUrlEncodedString(profileName));
+        replacements.put("hdop", sLoc.getHDOP());
+        replacements.put("vdop", sLoc.getVDOP());
+        replacements.put("pdop", sLoc.getPDOP());
+        replacements.put("dist", String.valueOf((int)distance));
 
-        logUrl = logUrl.replaceAll("(?i)%time", String.valueOf(Strings.getIsoDateTime(new Date(sLoc.getTime()))));
-        logUrl = logUrl.replaceAll("(?i)%date", String.valueOf(Strings.getIsoCalendarDate(new Date(sLoc.getTime()))));
-        logUrl = logUrl.replaceAll("(?i)%starttimestamp", String.valueOf(sessionStartTimeStamp/1000));
-        logUrl = logUrl.replaceAll("(?i)%batt", String.valueOf(batteryLevel));
-        logUrl = logUrl.replaceAll("(?i)%ischarging", String.valueOf(isCharging));
-        logUrl = logUrl.replaceAll("(?i)%aid", String.valueOf(androidId));
-        logUrl = logUrl.replaceAll("(?i)%ser", String.valueOf(buildSerial));
-        logUrl = logUrl.replaceAll("(?i)%act", ""); //Activity detection was removed, but keeping this here for backward compatibility.
-        logUrl = logUrl.replaceAll("(?i)%filename", fileName);
-        logUrl = logUrl.replaceAll("(?i)%profile",URLEncoder.encode(profileName, "UTF-8"));
-        logUrl = logUrl.replaceAll("(?i)%hdop", sLoc.getHDOP());
-        logUrl = logUrl.replaceAll("(?i)%vdop", sLoc.getVDOP());
-        logUrl = logUrl.replaceAll("(?i)%pdop", sLoc.getPDOP());
-        logUrl = logUrl.replaceAll("(?i)%dist", String.valueOf((int)distance));
+        if(customLoggingUrl.toUpperCase().contains("%ALL")){
+            StringBuilder sbAll = new StringBuilder();
+            for (String q : replacements.keySet()){
+                sbAll.append(q + "=%" + q + "&");
+            }
+            logUrl = logUrl.replaceAll("(?i)%ALL", sbAll.toString());
+        }
+
+        for (String m : replacements.keySet()) {
+            logUrl = logUrl.replaceAll("(?i)%"+m, replacements.get(m));
+        }
 
         return logUrl;
     }
