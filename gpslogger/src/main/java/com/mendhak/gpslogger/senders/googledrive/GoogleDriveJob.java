@@ -264,7 +264,7 @@ public class GoogleDriveJob extends Job {
                 String gpxFileId = getFileIdFromFileName(accessToken, fileName, gpsLoggerFolderId);
 
                 if (Strings.isNullOrEmpty(gpxFileId)) {
-                    //Create empty file first
+                    LOG.debug("Creating an empty file first.");
                     gpxFileId = createEmptyFile(accessToken, fileName, getMimeTypeFromFileName(fileName), gpsLoggerFolderId);
 
                     if (Strings.isNullOrEmpty(gpxFileId)) {
@@ -274,7 +274,7 @@ public class GoogleDriveJob extends Job {
                 }
 
                 if (!Strings.isNullOrEmpty(gpxFileId)) {
-                    //Set file's contents
+                    LOG.debug("Uploading file contents");
                     updateFileContents(accessToken, gpxFileId, fileName);
                 }
 
