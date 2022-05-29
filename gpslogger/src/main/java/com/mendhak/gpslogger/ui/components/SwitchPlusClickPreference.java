@@ -11,6 +11,9 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
+// Originally from: https://gist.github.com/marchold/45e22839eb94aa14dfb5
+// Modified to work with SwitchPreferenceCompat
+
 /**
  * Custom preference for handling a switch with a clickable preference area as well
  */
