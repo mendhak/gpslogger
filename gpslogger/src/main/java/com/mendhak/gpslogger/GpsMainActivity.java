@@ -80,17 +80,6 @@ import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
-import net.openid.appauth.AppAuthConfiguration;
-import net.openid.appauth.AuthState;
-import net.openid.appauth.AuthorizationException;
-import net.openid.appauth.AuthorizationRequest;
-import net.openid.appauth.AuthorizationResponse;
-import net.openid.appauth.AuthorizationService;
-import net.openid.appauth.AuthorizationServiceConfiguration;
-import net.openid.appauth.ResponseTypeValues;
-import net.openid.appauth.TokenRequest;
-import net.openid.appauth.TokenResponse;
-
 import de.greenrobot.event.EventBus;
 import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.form.FormElement;
@@ -104,8 +93,6 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.SecureRandom;
 import java.util.*;
 
 public class GpsMainActivity extends AppCompatActivity
@@ -128,30 +115,6 @@ public class GpsMainActivity extends AppCompatActivity
     // This is required because the service needs to start and show a notification, but the
     // permission workflow causes the service to stop and start multiple times.
     private boolean permissionWorkflowInProgress;
-
-    private AuthState authState = new AuthState();
-    private AuthorizationService authorizationService;
-    private AppAuthConfiguration appAuthConfiguration;
-
-    void persistGoogleDriveAuthState(){
-        PreferenceManager.getDefaultSharedPreferences(AppSettings.getInstance().getApplicationContext())
-                .edit().putString("google_drive_auth_state", authState.jsonSerializeString()).apply();
-    }
-
-    void restoreGoogleDriveAuthState(){
-        String google_drive_auth_state = PreferenceManager.getDefaultSharedPreferences(AppSettings.getInstance().getApplicationContext())
-                .getString("google_drive_auth_state", null);
-
-        if(!Strings.isNullOrEmpty(google_drive_auth_state)){
-            try {
-                authState = AuthState.jsonDeserialize(google_drive_auth_state);
-            } catch (JSONException e) {
-                LOG.debug(e.getMessage(),e);
-            }
-
-        }
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
