@@ -21,7 +21,6 @@ import net.openid.appauth.AuthState;
 import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationService;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 
@@ -58,7 +57,7 @@ public class GoogleDriveJob extends Job {
     public void onRun() throws Throwable {
         File gpsDir = new File(preferenceHelper.getGpsLoggerFolder());
         File gpxFile = new File(gpsDir, fileName);
-        AuthState authState = getGoogleDriveAuthState();
+        AuthState authState = GoogleDriveManager.getAuthState();
         if (authState.isAuthorized()) {
 
             AuthorizationService authorizationService = GoogleDriveManager.getAuthorizationService(AppSettings.getInstance());
@@ -155,7 +154,7 @@ public class GoogleDriveJob extends Job {
 
         requestBuilder.addHeader("Authorization", "Bearer " + accessToken);
         RequestBody body = RequestBody.create(MediaType.parse(getMimeTypeFromFileName(fileName)), Streams.getByteArrayFromInputStream(fis));
-        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT){
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
             requestBuilder.addHeader("X-HTTP-Method-Override", "PATCH");
         }
         requestBuilder = requestBuilder.method("PATCH", body);
@@ -189,22 +188,6 @@ public class GoogleDriveJob extends Job {
         return "GOOGLEDRIVE" + fileName;
     }
 
-    AuthState getGoogleDriveAuthState() {
-        AuthState authState = new AuthState();
-        String google_drive_auth_state = preferenceHelper.getGoogleDriveAuthState();
-
-        if (!Strings.isNullOrEmpty(google_drive_auth_state)) {
-            try {
-                authState = AuthState.jsonDeserialize(google_drive_auth_state);
-
-            } catch (JSONException e) {
-                LOG.debug(e.getMessage(), e);
-            }
-        }
-
-        return authState;
-    }
-
     private String getMimeTypeFromFileName(String fileName) {
         if (fileName.endsWith("kml")) {
             return "application/vnd.google-earth.kml+xml";
@@ -226,7 +209,7 @@ public class GoogleDriveJob extends Job {
             return "text/plain";
         }
 
-        if (fileName.endsWith("geojson")){
+        if (fileName.endsWith("geojson")) {
             return "application/vnd.geo+json";
         }
 
@@ -236,7 +219,8 @@ public class GoogleDriveJob extends Job {
     class GoogleDriveUploadWorkflow implements Runnable {
 
         String accessToken;
-        GoogleDriveUploadWorkflow(String accessToken){
+
+        GoogleDriveUploadWorkflow(String accessToken) {
             this.accessToken = accessToken;
         }
 
@@ -249,9 +233,9 @@ public class GoogleDriveJob extends Job {
                 String[] pathParts = folderPath.split("/");
                 String parentFolderId = null;
                 String latestFolderId = null;
-                for(String part: pathParts){
+                for (String part : pathParts) {
                     latestFolderId = getFileIdFromFileName(accessToken, part, parentFolderId);
-                    if(!Strings.isNullOrEmpty(latestFolderId)){
+                    if (!Strings.isNullOrEmpty(latestFolderId)) {
                         LOG.debug("Folder " + part + " found, folder ID is " + latestFolderId);
                     } else {
                         LOG.debug("Folder " + part + " not found, creating.");

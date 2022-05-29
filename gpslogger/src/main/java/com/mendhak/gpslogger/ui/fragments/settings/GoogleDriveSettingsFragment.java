@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Base64;
 
 import androidx.activity.result.ActivityResult;
@@ -40,7 +39,6 @@ import net.openid.appauth.ResponseTypeValues;
 import net.openid.appauth.TokenRequest;
 import net.openid.appauth.TokenResponse;
 
-import org.json.JSONException;
 import org.slf4j.Logger;
 
 import java.io.File;
@@ -84,7 +82,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
     }
 
     private void setPreferencesState() {
-        restoreGoogleDriveAuthState();
+        authState = GoogleDriveManager.getAuthState();
         if (authState.isAuthorized()) {
             findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setTitle(R.string.osm_resetauth);
             findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setSummary(R.string.google_drive_clearauthorization_summary);
@@ -104,7 +102,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if(preference.getKey().equals(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH)){
+        if (preference.getKey().equals(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH)) {
             SimpleFormDialog.build()
                     .title(R.string.google_drive_folder_path)
                     .neg(R.string.cancel)
@@ -125,7 +123,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
 
             if (authState.isAuthorized()) {
                 authState = new AuthState();
-                persistGoogleDriveAuthState();
+                saveGoogleDriveAuthState();
                 setPreferencesState();
                 return true;
             }
@@ -202,7 +200,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                                             }
                                         }
                                     }
-                                    persistGoogleDriveAuthState();
+                                    saveGoogleDriveAuthState();
                                     setPreferencesState();
 
                                 }
@@ -229,25 +227,8 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
 
     }
 
-    void persistGoogleDriveAuthState() {
+    void saveGoogleDriveAuthState() {
         PreferenceHelper.getInstance().setGoogleDriveAuthState(authState.jsonSerializeString());
-    }
-
-    void restoreGoogleDriveAuthState() {
-
-        String google_drive_auth_state = PreferenceHelper.getInstance().getGoogleDriveAuthState();
-
-        if (!Strings.isNullOrEmpty(google_drive_auth_state)) {
-            try {
-                authState = AuthState.jsonDeserialize(google_drive_auth_state);
-                if (!Strings.isNullOrEmpty(authState.getIdToken())) {
-                    jwt = new JWT(authState.getIdToken());
-                }
-            } catch (JSONException e) {
-                LOG.debug(e.getMessage(), e);
-            }
-
-        }
     }
 
     @Override
@@ -258,9 +239,11 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
 
     @Override
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
-        if(which != BUTTON_POSITIVE) { return true; }
+        if (which != BUTTON_POSITIVE) {
+            return true;
+        }
 
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH)){
+        if (dialogTag.equalsIgnoreCase(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH)) {
             PreferenceHelper.getInstance().setGoogleDriveFolderPath(extras.getString(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH));
             findPreference(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH).setSummary(PreferenceHelper.getInstance().getGoogleDriveFolderPath());
             return true;
