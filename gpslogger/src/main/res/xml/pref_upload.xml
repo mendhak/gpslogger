@@ -53,11 +53,6 @@
             android:title="@string/dropbox_setup_title"
             app:icon="@drawable/dropbox" />
 
-        <Preference
-            android:key="googledrive_setup"
-            android:title="@string/google_drive_setup_title"
-            app:icon="@drawable/googledrive" />
-
         <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
             android:key="google_drive_enabled"
             android:title="@string/google_drive_setup_title"

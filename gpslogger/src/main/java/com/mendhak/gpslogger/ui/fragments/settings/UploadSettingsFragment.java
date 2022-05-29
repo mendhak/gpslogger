@@ -69,7 +69,6 @@ public class UploadSettingsFragment
         findPreference("osm_setup").setOnPreferenceClickListener(this);
         findPreference("autoemail_setup").setOnPreferenceClickListener(this);
         findPreference("dropbox_setup").setOnPreferenceClickListener(this);
-        findPreference("googledrive_setup").setOnPreferenceClickListener(this);
         findPreference("opengts_setup").setOnPreferenceClickListener(this);
         findPreference("autoftp_setup").setOnPreferenceClickListener(this);
         findPreference("owncloud_setup").setOnPreferenceClickListener(this);
@@ -132,10 +131,6 @@ public class UploadSettingsFragment
 
         if(preference.getKey().equalsIgnoreCase("dropbox_setup")){
             launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX;
-        }
-
-        if(preference.getKey().equalsIgnoreCase("googledrive_setup")){
-            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.GOOGLEDRIVE;
         }
 
         if(preference.getKey().equalsIgnoreCase("opengts_setup")){
