@@ -163,7 +163,7 @@ public class MainPreferenceActivity extends AppCompatActivity {
         public static final String OPENGTS = "OpenGTSFragment";
         public static final String CUSTOMURL = "CustomUrlFragment";
         public static final String DROPBOX = "DropBoxAuthorizationFragment";
-        public static final String GOOGLEDRIVE = "GoogleDriveSEttingsFragment";
+        public static final String GOOGLEDRIVE = "GoogleDriveSettingsFragment";
         public static final String OWNCLOUD = "OwnCloudAuthorizationFragment";
         public static final String OSM = "OSMAuthorizationFragment";
         public static final String SFTP = "SFTPSettingsFragment";
