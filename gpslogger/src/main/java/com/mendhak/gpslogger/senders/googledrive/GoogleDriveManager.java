@@ -94,7 +94,7 @@ public class GoogleDriveManager extends FileSender {
 
     @Override
     public boolean isAvailable() {
-        return GoogleDriveManager.getAuthState().isAuthorized();
+        return getAuthState().isAuthorized();
     }
 
     @Override
