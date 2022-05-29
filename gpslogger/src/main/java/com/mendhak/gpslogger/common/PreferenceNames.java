@@ -92,6 +92,7 @@ public  class PreferenceNames {
     public static final String GOOGLE_DRIVE_RESETAUTH = "google_drive_resetauth";
     public static final String GOOGLE_DRIVE_AUTH_STATE = "google_drive_auth_state";
     public static final String GOOGLE_DRIVE_FOLDER_PATH = "google_drive_folder_path";
+    public static final String AUTOSEND_GOOGLE_DRIVE_ENABLED = "google_drive_enabled";
     public static final String AUTOSEND_OSM_ENABLED = "osm_enabled";
     public static final String FTP_SERVER = "autoftp_server";
     public static final String FTP_PORT = "autoftp_port";

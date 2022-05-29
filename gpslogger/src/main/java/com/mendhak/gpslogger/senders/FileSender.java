@@ -28,6 +28,7 @@ public abstract class FileSender implements FilenameFilter {
     public static class SenderNames {
         public static final String AUTOEMAIL = "AUTO_EMAIL_SENDER";
         public static final String DROPBOX = "DROPBOX_SENDER";
+        public static final String GOOGLEDRIVE = "GOOGLE_DRIVE";
         public static final String OPENGTS = "OPENGTS_SENDER";
         public static final String FTP = "FTP_SENDER";
         public static final String OWNCLOUD = "OWNCLOUD_SENDER";

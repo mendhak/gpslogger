@@ -76,7 +76,10 @@ public class GoogleDriveManager extends FileSender {
 
     @Override
     public void uploadFile(List<File> files) {
-
+        for (File f : files) {
+            LOG.debug(f.getName());
+            uploadFile(f.getName());
+        }
     }
 
     public void uploadFile(String fileName) {
@@ -91,21 +94,21 @@ public class GoogleDriveManager extends FileSender {
 
     @Override
     public boolean isAvailable() {
-        return false;
+        return GoogleDriveManager.getAuthState().isAuthorized();
     }
 
     @Override
     public boolean hasUserAllowedAutoSending() {
-        return false;
+        return preferenceHelper.isGoogleDriveAutoSendEnabled();
     }
 
     @Override
     public String getName() {
-        return null;
+        return SenderNames.GOOGLEDRIVE;
     }
 
     @Override
     public boolean accept(File file, String s) {
-        return false;
+        return true;
     }
 }
