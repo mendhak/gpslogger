@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 
@@ -17,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.auth0.android.jwt.JWT;
 import com.mendhak.gpslogger.R;
@@ -68,6 +70,18 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
         super.onCreate(savedInstanceState);
 
         manager = new GoogleDriveManager(PreferenceHelper.getInstance());
+
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
+            findPreference(PreferenceNames.AUTOSEND_GOOGLE_DRIVE_ENABLED).setEnabled(false);
+            ((SwitchPreferenceCompat)findPreference(PreferenceNames.AUTOSEND_GOOGLE_DRIVE_ENABLED)).setChecked(false);
+            findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setEnabled(false);
+            //https://github.com/openid/AppAuth-Android/issues/299
+            findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setTitle("This feature does not work before Android 5 (Lollipop)");
+            findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setSummary("Due to a limitation in the OAuth2 workflow");
+            findPreference(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH).setEnabled(false);
+            findPreference("google_drive_test").setEnabled(false);
+            return;
+        }
 
         findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH).setOnPreferenceClickListener(this);
