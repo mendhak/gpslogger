@@ -22,8 +22,11 @@ package com.mendhak.gpslogger.ui.fragments.settings;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.View;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -32,6 +35,7 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference;
 
 import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.form.Input;
@@ -71,6 +75,24 @@ public class UploadSettingsFragment
         findPreference("owncloud_setup").setOnPreferenceClickListener(this);
         findPreference("sftp_setup").setOnPreferenceClickListener(this);
         findPreference("customurl_setup").setOnPreferenceClickListener(this);
+
+
+        ((SwitchPlusClickPreference)findPreference(PreferenceNames.AUTOSEND_GOOGLE_DRIVE_ENABLED)).setSwitchClickListener(new SwitchPlusClickPreference.SwitchPlusClickListener() {
+
+            @Override
+            public void onCheckedChanged(SwitchCompat buttonView, boolean isChecked) {
+                // No need to do anything, the value gets propagated.
+            }
+
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), MainPreferenceActivity.class);
+                intent.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.GOOGLEDRIVE);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
