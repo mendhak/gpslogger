@@ -1183,6 +1183,9 @@ public class GpsMainActivity extends AppCompatActivity
             case R.id.mnuDropBox:
                 uploadToDropBox();
                 return true;
+            case R.id.mnuGoogleDrive:
+                uploadToGoogleDrive();
+                return true;
             case R.id.mnuOpenGTS:
                 sendToOpenGTS();
                 return true;
@@ -1253,6 +1256,15 @@ public class GpsMainActivity extends AppCompatActivity
         }
 
         showFileListDialog(FileSenderFactory.getOsmSender());
+    }
+
+    private void uploadToGoogleDrive() {
+        if(!FileSenderFactory.getGoogleDriveSender().isAvailable()){
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GOOGLEDRIVE);
+            return;
+        }
+
+        showFileListDialog(FileSenderFactory.getGoogleDriveSender());
     }
 
     private void uploadToDropBox() {
@@ -1571,6 +1583,22 @@ public class GpsMainActivity extends AppCompatActivity
 
         if(!upload.success){
             LOG.error(getString(R.string.dropbox_setup_title)
+                    + "-"
+                    + getString(R.string.upload_failure));
+            if(userInvokedUpload){
+                Dialogs.showError(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                userInvokedUpload = false;
+            }
+        }
+    }
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.GoogleDrive upload){
+        LOG.debug("Google Drive Event completed, success: " + upload.success);
+        Dialogs.hideProgress();
+
+        if(!upload.success){
+            LOG.error(getString(R.string.google_drive_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){

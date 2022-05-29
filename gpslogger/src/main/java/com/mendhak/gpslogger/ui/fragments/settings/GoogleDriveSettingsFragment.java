@@ -77,6 +77,20 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
         registerEventBus();
     }
 
+    @Override
+    public void onDestroy() {
+        unregisterEventBus();
+        super.onDestroy();
+    }
+
+    private void unregisterEventBus(){
+        try {
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
+    }
+
     private void registerEventBus() {
         EventBus.getDefault().register(this);
     }

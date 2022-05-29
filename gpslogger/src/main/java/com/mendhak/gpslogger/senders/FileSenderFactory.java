@@ -26,6 +26,7 @@ import com.mendhak.gpslogger.senders.customurl.CustomUrlManager;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxManager;
 import com.mendhak.gpslogger.senders.email.AutoEmailManager;
 import com.mendhak.gpslogger.senders.ftp.FtpManager;
+import com.mendhak.gpslogger.senders.googledrive.GoogleDriveManager;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSManager;
 import com.mendhak.gpslogger.senders.osm.OpenStreetMapManager;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudManager;
@@ -49,6 +50,10 @@ public class FileSenderFactory {
 
     public static FileSender getDropBoxSender() {
         return new DropBoxManager(PreferenceHelper.getInstance());
+    }
+
+    public static FileSender getGoogleDriveSender() {
+        return new GoogleDriveManager(PreferenceHelper.getInstance());
     }
 
     public static FileSender getEmailSender() {
@@ -145,6 +150,8 @@ public class FileSenderFactory {
                 return getEmailSender();
             case FileSender.SenderNames.DROPBOX:
                 return getDropBoxSender();
+            case FileSender.SenderNames.GOOGLEDRIVE:
+                return getGoogleDriveSender();
             case FileSender.SenderNames.FTP:
                 return getFtpSender();
             case FileSender.SenderNames.OPENGTS:
