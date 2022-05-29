@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URLEncoder;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import de.greenrobot.event.EventBus;
 import okhttp3.MediaType;
@@ -42,9 +43,10 @@ public class GoogleDriveJob extends Job {
     String fileName;
     private Handler handler;
     private HandlerThread handlerThread;
+    final AtomicBoolean taskDone = new AtomicBoolean(false);
 
     protected GoogleDriveJob(String fileName) {
-        super(new Params(1).requireNetwork().persist().addTags(getJobTag(fileName)));
+        super(new Params(1).requireNetwork().persist().addTags(getJobTag(fileName)).groupBy("GoogleDrive"));
         this.fileName = fileName;
     }
 
@@ -66,9 +68,10 @@ public class GoogleDriveJob extends Job {
             handlerThread.start();
             handler = new Handler(handlerThread.getLooper());
 
-            //The performActionWithFreshTokens seems to happen on a UI thread! (Why??)
+            // The performActionWithFreshTokens seems to happen on a UI thread! (Why??)
             // So I can't do network calls on this thread.
-            //That's why I have to do a handlerThread and handler.post
+            // That's why I have to do a handlerThread and handler.post
+            // https://github.com/openid/AppAuth-Android/issues/123
             authState.performActionWithFreshTokens(authorizationService, new AuthState.AuthStateAction() {
                 @Override
                 public void execute(@Nullable String accessToken, @Nullable String idToken, @Nullable AuthorizationException ex) {
@@ -76,7 +79,28 @@ public class GoogleDriveJob extends Job {
                         EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed(ex.toJsonString(), ex));
                         return;
                     }
-                    handler.post(new GoogleDriveUploadWorkflow(accessToken));
+
+                    GoogleDriveUploadWorkflow task = new GoogleDriveUploadWorkflow(accessToken);
+                    handler.post(task);
+                    // I hate what I'm having to do here.
+                    // Because there is a handler.post here, which is async, execution of onRun continues and finishes.
+                    // The Job Queue scheduler notices that onRun finished, so it immediately starts executing the next Google Drive Job - each one with the same problem.
+                    // This results in multiple Google Drive workflow tasks attempting to create folder paths in Google Drive.
+                    // And since Google Drive is happy to not enforce unique folder names, this leads to multiple copies of the same folder appearing.
+                    //
+                    // The solution is to do a handler.post but then wait for the Runnable to notify() back.
+                    // The taskDone variable is added here just in case the Runnable posts a notify() before the while loop can get started.
+                    // https://stackoverflow.com/questions/20179193/calling-wait-after-posting-a-runnable-to-ui-thread-until-completion
+                    // And remember the handler is only here because the `performActionWithFreshTokens.execute` runs on the UI thread, which doesn't allow network calls, aargh!!
+                    synchronized(task) {
+                        while(!taskDone.get()) {
+                            try {
+                                task.wait();
+                            } catch (InterruptedException e) {
+                                LOG.warn("Exception while waiting for a Google Drive upload to complete.", e);
+                            }
+                        }
+                    }
                 }
             });
         }
@@ -278,6 +302,11 @@ public class GoogleDriveJob extends Job {
                 EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed(e.getMessage(), e));
             } finally {
                 handlerThread.quit();
+                taskDone.set(true);
+                synchronized (this){
+                    notify();
+                }
+
             }
         }
     }
