@@ -200,6 +200,10 @@ public class FileSenderFactory {
             senders.add(getDropBoxSender());
         }
 
+        if(getGoogleDriveSender().isAutoSendAvailable()){
+            senders.add(getGoogleDriveSender());
+        }
+
         if(getOpenGTSSender().isAutoSendAvailable()){
             senders.add(getOpenGTSSender());
         }
