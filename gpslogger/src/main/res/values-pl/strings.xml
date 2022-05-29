@@ -174,11 +174,11 @@
     <string name="menu_upload">Wysyłanie</string>
     <string name="autoemail_from">Adres nadawcy</string>
     <string name="autoemail_from_summary">Niektórzy dostawcy poczty wymagają adresu nadawcy. Należy używać tej opcji tylko, gdy jest to wymagane.</string>
-    <string name="gdocs_clearauthorization_summary">Zapomina lokalnych ustawień Dysku Google. Aby permanentnie odebrać dostęp, przejdź do ustawień Konta Google</string>
-    <string name="gdocs_setup_title">Dysk Google</string>
-    <string name="gdocs_test_summary">Wyślij plik testowy na Dysku Google</string>
-    <string name="gdocs_test_title">Test wysyłania</string>
-    <string name="gdocs_testupload_success">Wysłano. Proszę sprawdzić nowe pliki w Dokumentach Google.</string>
+    <string name="google_drive_clearauthorization_summary">Zapomina lokalnych ustawień Dysku Google. Aby permanentnie odebrać dostęp, przejdź do ustawień Konta Google</string>
+    <string name="google_drive_setup_title">Dysk Google</string>
+    <string name="google_drive_test_summary">Wyślij plik testowy na Dysku Google</string>
+    <string name="google_drive_test_title">Test wysyłania</string>
+    <string name="google_drive_testupload_success">Wysłano. Proszę sprawdzić nowe pliki w Dokumentach Google.</string>
     <string name="autoemail_sendto_csv">Adresy e-mail oddzielone przecinkiem.</string>
     <string name="autosend_enabled">Zezwól na automatyczne wysyłanie</string>
     <string name="autosend_enabled_summary">Zezwól na przesyłanie plików do różnych celów</string>

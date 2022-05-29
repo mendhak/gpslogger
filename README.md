@@ -138,6 +138,22 @@ Replace the Dropbox app key to your AndroidManifest.xml file
     <!-- Change this to be db- followed by your app key -->
     <data android:scheme="db-12341234"/>
 
+### Google Drive Setup (optional)
+
+Sign up to [Google Cloud Platform](https://console.cloud.google.com/).  Create a new project. 
+
+Under APIs and Services, [enable the Google Drive API](https://console.cloud.google.com/apis/library/drive.googleapis.com).  
+Next, go to the [Oauth Consent Screen](https://console.cloud.google.com/apis/credentials/consent), going through the steps until you reach scopes. 
+Add the `https://www.googleapis.com/auth/drive.file` scope.  
+
+![scopes](assets/googledrive_scope.png)
+
+[Create some OAuth credentials](https://console.cloud.google.com/apis/credentials), of type Android.  
+Under package name, use `com.mendhak.gpslogger`. For the SHA-1 Certificate fingerprint, get it using the `keytool -keystore ~/.android/debug.keystore -list -v` command.
+
+![oauth](assets/googledrive_oauthclient.png)
+
+
 Overview
 ======
 

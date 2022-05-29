@@ -163,9 +163,9 @@
     <string name="menu_upload">Uploaden</string>
     <string name="autoemail_from">Verzendadres</string>
     <string name="autoemail_from_summary">Sommige e-mailproviders vereisen een verzendadres. Gebruik dit alleen als je het nodig hebt.     </string>
-    <string name="gdocs_clearauthorization_summary">Vergeet de lokale instellingen van Google Drive. Permanente blokkade van toegang kunt u instellen bij de Google-Account instellingen</string>
-    <string name="gdocs_test_summary">Een testbestand uploaden naar Google Drive</string>
-    <string name="gdocs_testupload_success">Geüpload. Controleer uw Google documenten voor een nieuw bestand.</string>
+    <string name="google_drive_clearauthorization_summary">Vergeet de lokale instellingen van Google Drive. Permanente blokkade van toegang kunt u instellen bij de Google-Account instellingen</string>
+    <string name="google_drive_test_summary">Een testbestand uploaden naar Google Drive</string>
+    <string name="google_drive_testupload_success">Geüpload. Controleer uw Google documenten voor een nieuw bestand.</string>
     <string name="autoemail_sendto_csv">E-mailadressen gescheiden door een komma</string>
     <string name="autosend_enabled">Automatisch verzenden toestaan</string>
     <string name="autosend_enabled_summary">Staat het verzenden van de bestanden naar verschillende doelen toe</string>

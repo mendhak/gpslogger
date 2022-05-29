@@ -84,6 +84,28 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.DROPBOX_REFRESH_TOKEN, refreshToken).apply();
     }
 
+    @ProfilePreference(name=PreferenceNames.AUTOSEND_GOOGLE_DRIVE_ENABLED)
+    public boolean isGoogleDriveAutoSendEnabled() {
+        return prefs.getBoolean(PreferenceNames.AUTOSEND_GOOGLE_DRIVE_ENABLED, false);
+    }
+
+    public String getGoogleDriveAuthState(){
+        return prefs.getString(PreferenceNames.GOOGLE_DRIVE_AUTH_STATE, null);
+    }
+
+    public void setGoogleDriveAuthState(String auth_state_json_serialized){
+        prefs.edit().putString(PreferenceNames.GOOGLE_DRIVE_AUTH_STATE, auth_state_json_serialized).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH)
+    public String getGoogleDriveFolderPath() {
+        return prefs.getString(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH, "GPSLogger");
+    }
+
+    public void setGoogleDriveFolderPath(String folderPath){
+        prefs.edit().putString(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH, folderPath).apply();
+    }
+
     /**
      * Whether automatic sending to email is enabled
      */

@@ -176,11 +176,11 @@
     <string name="menu_upload">上傳</string>
     <string name="autoemail_from">寄件人地址</string>
     <string name="autoemail_from_summary">一些電子郵件供應商要求您提供寄件人地址。請只在需要時使用。    </string>
-    <string name="gdocs_clearauthorization_summary">忘記本機 Google 雲端硬碟設定。要永久移除存取許可權，請移至 Google 帳戶設定</string>
-    <string name="gdocs_setup_title">Google 雲端硬碟</string>
-    <string name="gdocs_test_summary">上傳一個測試檔到 Google 雲端硬碟</string>
-    <string name="gdocs_test_title">上傳測試</string>
-    <string name="gdocs_testupload_success">已上傳完成，請檢查您的 Google 雲端文件。</string>
+    <string name="google_drive_clearauthorization_summary">忘記本機 Google 雲端硬碟設定。要永久移除存取許可權，請移至 Google 帳戶設定</string>
+    <string name="google_drive_setup_title">Google 雲端硬碟</string>
+    <string name="google_drive_test_summary">上傳一個測試檔到 Google 雲端硬碟</string>
+    <string name="google_drive_test_title">上傳測試</string>
+    <string name="google_drive_testupload_success">已上傳完成，請檢查您的 Google 雲端文件。</string>
     <string name="autoemail_sendto_csv">請使用逗號隔開不同的電子郵件地址</string>
     <string name="autosend_enabled">允許自動傳送</string>
     <string name="autosend_enabled_summary">允許將檔案傳送到各處</string>

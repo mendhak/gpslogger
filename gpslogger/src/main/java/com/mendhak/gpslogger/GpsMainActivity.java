@@ -23,37 +23,61 @@ package com.mendhak.gpslogger;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.*;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.*;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.PowerManager;
+import android.provider.Settings;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.SpinnerAdapter;
+import android.widget.Toast;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.appcompat.widget.ActionMenuView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import android.provider.Settings;
-import android.util.DisplayMetrics;
-import android.view.*;
-import android.widget.*;
+
 import com.amulyakhare.textdrawable.TextDrawable;
-import com.mendhak.gpslogger.common.*;
+import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ProfileEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
@@ -65,7 +89,11 @@ import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.GpsLoggerDrawerItem;
-import com.mendhak.gpslogger.ui.fragments.display.*;
+import com.mendhak.gpslogger.ui.fragments.display.GenericViewFragment;
+import com.mendhak.gpslogger.ui.fragments.display.GpsBigViewFragment;
+import com.mendhak.gpslogger.ui.fragments.display.GpsDetailedViewFragment;
+import com.mendhak.gpslogger.ui.fragments.display.GpsLogViewFragment;
+import com.mendhak.gpslogger.ui.fragments.display.GpsSimpleViewFragment;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -75,6 +103,17 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+
+import org.slf4j.Logger;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 import de.greenrobot.event.EventBus;
 import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.form.FormElement;
@@ -82,12 +121,6 @@ import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
 import eltos.simpledialogfragment.list.CustomListDialog;
 import eltos.simpledialogfragment.list.SimpleListDialog;
-
-import org.slf4j.Logger;
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.util.*;
 
 public class GpsMainActivity extends AppCompatActivity
         implements
@@ -138,8 +171,6 @@ public class GpsMainActivity extends AppCompatActivity
                 LOG.debug("Start logging on app launch");
                 EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
             }
-
-
         }
     }
 
@@ -793,6 +824,7 @@ public class GpsMainActivity extends AppCompatActivity
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.pref_autosend_title, R.string.pref_autosend_summary, R.drawable.autosend, 1003));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.log_customurl_setup_title, R.drawable.customurlsender, 1020));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.dropbox_setup_title, R.drawable.dropbox, 1005));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.google_drive_setup_title, R.drawable.googledrive, 1011));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.sftp_setup_title, R.drawable.sftp, 1015));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.opengts_setup_title, R.drawable.opengts, 1008));
         materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.osm_setup_title, R.drawable.openstreetmap, 1009));
@@ -840,6 +872,9 @@ public class GpsMainActivity extends AppCompatActivity
                         break;
                     case 1010:
                         launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD);
+                        break;
+                    case 1011:
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GOOGLEDRIVE);
                         break;
                     case 1015:
                         launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.SFTP);
@@ -1133,6 +1168,9 @@ public class GpsMainActivity extends AppCompatActivity
             case R.id.mnuDropBox:
                 uploadToDropBox();
                 return true;
+            case R.id.mnuGoogleDrive:
+                uploadToGoogleDrive();
+                return true;
             case R.id.mnuOpenGTS:
                 sendToOpenGTS();
                 return true;
@@ -1203,6 +1241,15 @@ public class GpsMainActivity extends AppCompatActivity
         }
 
         showFileListDialog(FileSenderFactory.getOsmSender());
+    }
+
+    private void uploadToGoogleDrive() {
+        if(!FileSenderFactory.getGoogleDriveSender().isAvailable()){
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.GOOGLEDRIVE);
+            return;
+        }
+
+        showFileListDialog(FileSenderFactory.getGoogleDriveSender());
     }
 
     private void uploadToDropBox() {
@@ -1521,6 +1568,22 @@ public class GpsMainActivity extends AppCompatActivity
 
         if(!upload.success){
             LOG.error(getString(R.string.dropbox_setup_title)
+                    + "-"
+                    + getString(R.string.upload_failure));
+            if(userInvokedUpload){
+                Dialogs.showError(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                userInvokedUpload = false;
+            }
+        }
+    }
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.GoogleDrive upload){
+        LOG.debug("Google Drive Event completed, success: " + upload.success);
+        Dialogs.hideProgress();
+
+        if(!upload.success){
+            LOG.error(getString(R.string.google_drive_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
             if(userInvokedUpload){

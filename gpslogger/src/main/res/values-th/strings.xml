@@ -145,9 +145,9 @@
     <string name="pref_general_summary">ตัวเลือกการเริ่มต้นระบบและแสดงผล</string>
     <string name="emailprovider_manual">คู่มือ</string>
     <string name="menu_upload">อัพโหลด</string>
-    <string name="gdocs_test_summary">อัปโหลดเทสไฟล์ไป Google Drive</string>
-    <string name="gdocs_test_title">ทดสอบอัพโหลด</string>
-    <string name="gdocs_testupload_success">อัพโหลดแล้ว กรุณาตรวจสอบ Google Docs สำหรับไฟล์ใหม่</string>
+    <string name="google_drive_test_summary">อัปโหลดเทสไฟล์ไป Google Drive</string>
+    <string name="google_drive_test_title">ทดสอบอัพโหลด</string>
+    <string name="google_drive_testupload_success">อัพโหลดแล้ว กรุณาตรวจสอบ Google Docs สำหรับไฟล์ใหม่</string>
     <string name="autoemail_sendto_csv">คั่นแต่ละอีเมล์ด้วยจุลภาค</string>
     <string name="autosend_enabled">อนุญาตให้ส่งอัตโนมัติ</string>
     <string name="autosend_enabled_summary">อนุญาตให้ส่งไฟล์ไปยังเป้าหมายต่าง ๆ</string>

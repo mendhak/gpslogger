@@ -163,10 +163,10 @@
     <string name="menu_upload">I-upload</string>
     <string name="autoemail_from">Galing sa address</string>
     <string name="autoemail_from_summary">Ang ilang providers ng email ay nangangailangan ng galing sa address. Gamitin mo ito kung kailangan mo lamang.    </string>
-    <string name="gdocs_clearauthorization_summary">Nakalimutan ang lokal na mga settings ng Google Drive. Upang tuluyang mabawi ang access, pumunta sa mga settings ng Google Account</string>
-    <string name="gdocs_test_summary">Mag-upload ng test file sa Google Drive</string>
-    <string name="gdocs_test_title">Pag-upload ng pagsubok</string>
-    <string name="gdocs_testupload_success">Na-upload. Mangyaring suriin ang iyong Google Docs para sa isang bagong file.</string>
+    <string name="google_drive_clearauthorization_summary">Nakalimutan ang lokal na mga settings ng Google Drive. Upang tuluyang mabawi ang access, pumunta sa mga settings ng Google Account</string>
+    <string name="google_drive_test_summary">Mag-upload ng test file sa Google Drive</string>
+    <string name="google_drive_test_title">Pag-upload ng pagsubok</string>
+    <string name="google_drive_testupload_success">Na-upload. Mangyaring suriin ang iyong Google Docs para sa isang bagong file.</string>
     <string name="autoemail_sendto_csv">Mga email address na pinaghiwalay ng comma</string>
     <string name="autosend_enabled">Payagan ang auto na pagpapadala</string>
     <string name="autosend_enabled_summary">Pinapayagan ang pagpapadala ng mga file sa iba\'t ibang mga target</string>
