@@ -76,8 +76,8 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
             ((SwitchPreferenceCompat)findPreference(PreferenceNames.AUTOSEND_GOOGLE_DRIVE_ENABLED)).setChecked(false);
             findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setEnabled(false);
             //https://github.com/openid/AppAuth-Android/issues/299
-            findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setTitle("This feature does not work before Android 5 (Lollipop)");
-            findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setSummary("Due to a limitation in the OAuth2 workflow");
+            findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setTitle("This feature does not work on devices lower than Android 5 (Lollipop)");
+            findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setSummary("This is due to a limitation in the OAuth2 workflow.");
             findPreference(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH).setEnabled(false);
             findPreference("google_drive_test").setEnabled(false);
             return;
