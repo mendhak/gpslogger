@@ -59,7 +59,6 @@ public class GoogleDriveJob extends Job {
         File gpsDir = new File(preferenceHelper.getGpsLoggerFolder());
         File gpxFile = new File(gpsDir, fileName);
         AuthState authState = getGoogleDriveAuthState();
-        LOG.debug(authState.jsonSerializeString());
         if (authState.isAuthorized()) {
 
             AuthorizationService authorizationService = GoogleDriveManager.getAuthorizationService(AppSettings.getInstance());
@@ -244,23 +243,32 @@ public class GoogleDriveJob extends Job {
         @Override
         public void run() {
             try {
-                String gpsLoggerFolderId = getFileIdFromFileName(accessToken,
-                        preferenceHelper.getGoogleDriveFolderPath(), null);
 
-                if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
-                    LOG.debug("GPSLogger folder not found, will create.");
-                    gpsLoggerFolderId = createEmptyFile(accessToken, preferenceHelper.getGoogleDriveFolderPath(),
-                            "application/vnd.google-apps.folder", "root");
+                // Figure out the Folder ID to upload to, from the path; create if it doesn't exist.
+                String folderPath = preferenceHelper.getGoogleDriveFolderPath();
+                String[] pathParts = folderPath.split("/");
+                String parentFolderId = null;
+                String latestFolderId = null;
+                for(String part: pathParts){
+                    latestFolderId = getFileIdFromFileName(accessToken, part, parentFolderId);
+                    if(!Strings.isNullOrEmpty(latestFolderId)){
+                        LOG.debug("Folder " + part + " found, folder ID is " + latestFolderId);
+                    } else {
+                        LOG.debug("Folder " + part + " not found, creating.");
+                        latestFolderId = createEmptyFile(accessToken, part,
+                                "application/vnd.google-apps.folder", Strings.isNullOrEmpty(parentFolderId) ? "root" : parentFolderId);
+                    }
+                    parentFolderId = latestFolderId;
                 }
+
+                String gpsLoggerFolderId = latestFolderId;
 
                 if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
                     EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not create folder"));
                     return;
                 }
 
-                LOG.debug("GPSLogger folder ID - " + gpsLoggerFolderId);
-
-                //Now search for the file
+                // Now search for the file
                 String gpxFileId = getFileIdFromFileName(accessToken, fileName, gpsLoggerFolderId);
 
                 if (Strings.isNullOrEmpty(gpxFileId)) {
@@ -273,6 +281,7 @@ public class GoogleDriveJob extends Job {
                     }
                 }
 
+                // Upload contents to file
                 if (!Strings.isNullOrEmpty(gpxFileId)) {
                     LOG.debug("Uploading file contents");
                     updateFileContents(accessToken, gpxFileId, fileName);

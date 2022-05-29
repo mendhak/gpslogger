@@ -273,6 +273,8 @@
     <string name="google_drive_test_summary">Upload a test file to Google Drive</string>
     <string name="google_drive_test_title">Test upload</string>
     <string name="google_drive_folder_path">"Google Drive folder path"</string>
+    <string name="google_drive_folder_path_summary_1">Use a single folder name (eg. GPSLogger), or a folder path (eg. aaa/bbb/ccc). The folders must be created by this application.</string>
+    <string name="google_drive_folder_path_summary_2">If you use a single folder name, it can be moved elsewhere in Google Drive after creation. Folder paths are slower because each part of the path must be checked or created, before files are uploaded.</string>
     <string name="google_drive_testupload_success">Uploaded. Please check your Google Drive for a new file.</string>
 
     <string name="autoemail_sendto_csv">Comma separated email addresses</string>

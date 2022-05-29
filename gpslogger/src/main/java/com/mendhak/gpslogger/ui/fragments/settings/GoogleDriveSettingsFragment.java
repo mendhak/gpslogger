@@ -93,6 +93,8 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
             findPreference(PreferenceNames.GOOGLE_DRIVE_RESETAUTH).setSummary("");
         }
         findPreference("google_drive_test").setEnabled(authState.isAuthorized());
+        findPreference(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH).setEnabled(authState.isAuthorized());
+        findPreference(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH).setSummary(PreferenceHelper.getInstance().getGoogleDriveFolderPath());
     }
 
     @Override
@@ -107,6 +109,9 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                     .title(R.string.google_drive_folder_path)
                     .neg(R.string.cancel)
                     .pos(R.string.ok)
+                    .msgHtml(getString(R.string.google_drive_folder_path_summary_1)
+                            + "<br /><br />"
+                            + getString(R.string.google_drive_folder_path_summary_2))
                     .fields(
                             Input.plain(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH)
                                     .text(PreferenceHelper.getInstance().getGoogleDriveFolderPath())
