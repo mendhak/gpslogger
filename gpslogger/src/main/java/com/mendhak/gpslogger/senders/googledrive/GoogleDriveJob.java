@@ -1,8 +1,6 @@
 package com.mendhak.gpslogger.senders.googledrive;
 
 import android.os.Build;
-import android.os.Handler;
-import android.os.HandlerThread;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,10 +38,9 @@ public class GoogleDriveJob extends Job {
 
     private static final Logger LOG = Logs.of(GoogleDriveJob.class);
     private static final PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
-    String fileName;
-    private Handler handler;
-    private HandlerThread handlerThread;
-    final AtomicBoolean taskDone = new AtomicBoolean(false);
+    private String fileName;
+    private final AtomicBoolean taskDone = new AtomicBoolean(false);
+    private String googleDriveAccessToken;
 
     protected GoogleDriveJob(String fileName) {
         super(new Params(1).requireNetwork().persist().addTags(getJobTag(fileName)).groupBy("GoogleDrive"));
@@ -64,45 +61,88 @@ public class GoogleDriveJob extends Job {
 
             AuthorizationService authorizationService = GoogleDriveManager.getAuthorizationService(AppSettings.getInstance());
 
-            handlerThread = new HandlerThread("HandlerThread");
-            handlerThread.start();
-            handler = new Handler(handlerThread.getLooper());
-
             // The performActionWithFreshTokens seems to happen on a UI thread! (Why??)
             // So I can't do network calls on this thread.
-            // That's why I have to do a handlerThread and handler.post
+            // Instead, updating a class level variable, and waiting for it afterwards.
             // https://github.com/openid/AppAuth-Android/issues/123
             authState.performActionWithFreshTokens(authorizationService, new AuthState.AuthStateAction() {
                 @Override
                 public void execute(@Nullable String accessToken, @Nullable String idToken, @Nullable AuthorizationException ex) {
                     if (ex != null) {
                         EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed(ex.toJsonString(), ex));
+                        taskDone.set(true);
+                        LOG.error(ex.toJsonString(), ex);
                         return;
                     }
-
-                    GoogleDriveUploadWorkflow task = new GoogleDriveUploadWorkflow(accessToken);
-                    handler.post(task);
-                    // I hate what I'm having to do here.
-                    // Because there is a handler.post here, which is async, execution of onRun continues and finishes.
-                    // The Job Queue scheduler notices that onRun finished, so it immediately starts executing the next Google Drive Job - each one with the same problem.
-                    // This results in multiple Google Drive workflow tasks attempting to create folder paths in Google Drive.
-                    // And since Google Drive is happy to not enforce unique folder names, this leads to multiple copies of the same folder appearing.
-                    //
-                    // The solution is to do a handler.post but then wait for the Runnable to notify() back.
-                    // The taskDone variable is added here just in case the Runnable posts a notify() before the while loop can get started.
-                    // https://stackoverflow.com/questions/20179193/calling-wait-after-posting-a-runnable-to-ui-thread-until-completion
-                    // And remember the handler is only here because the `performActionWithFreshTokens.execute` runs on the UI thread, which doesn't allow network calls, aargh!!
-                    synchronized(task) {
-                        while(!taskDone.get()) {
-                            try {
-                                task.wait();
-                            } catch (InterruptedException e) {
-                                LOG.warn("Exception while waiting for a Google Drive upload to complete.", e);
-                            }
-                        }
-                    }
+                    googleDriveAccessToken = accessToken;
+                    taskDone.set(true);
                 }
             });
+
+            // Wait for the performActionWithFreshTokens.execute callback
+            // (which happens on the UI thread for some reason) to complete.
+            while (!taskDone.get()) {
+                Thread.sleep(500);
+            }
+
+            if (Strings.isNullOrEmpty(googleDriveAccessToken)) {
+                LOG.error("Failed to fetch Access Token for Google Drive. Stopping this job.");
+                return;
+            }
+
+
+            try {
+
+                // Figure out the Folder ID to upload to, from the path; recursively create if it doesn't exist.
+                String folderPath = preferenceHelper.getGoogleDriveFolderPath();
+                String[] pathParts = folderPath.split("/");
+                String parentFolderId = null;
+                String latestFolderId = null;
+                for (String part : pathParts) {
+                    latestFolderId = getFileIdFromFileName(googleDriveAccessToken, part, parentFolderId);
+                    if (!Strings.isNullOrEmpty(latestFolderId)) {
+                        LOG.debug("Folder " + part + " found, folder ID is " + latestFolderId);
+                    } else {
+                        LOG.debug("Folder " + part + " not found, creating.");
+                        latestFolderId = createEmptyFile(googleDriveAccessToken, part,
+                                "application/vnd.google-apps.folder", Strings.isNullOrEmpty(parentFolderId) ? "root" : parentFolderId);
+                    }
+                    parentFolderId = latestFolderId;
+                }
+
+                String gpsLoggerFolderId = latestFolderId;
+
+                if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
+                    EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not create folder"));
+                    return;
+                }
+
+                // Now search for the file
+                String gpxFileId = getFileIdFromFileName(googleDriveAccessToken, fileName, gpsLoggerFolderId);
+
+                if (Strings.isNullOrEmpty(gpxFileId)) {
+                    LOG.debug("Creating an empty file first.");
+                    gpxFileId = createEmptyFile(googleDriveAccessToken, fileName, getMimeTypeFromFileName(fileName), gpsLoggerFolderId);
+
+                    if (Strings.isNullOrEmpty(gpxFileId)) {
+                        EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not create file"));
+                        return;
+                    }
+                }
+
+                // Upload contents to file
+                if (!Strings.isNullOrEmpty(gpxFileId)) {
+                    LOG.debug("Uploading file contents");
+                    updateFileContents(googleDriveAccessToken, gpxFileId, fileName);
+                }
+
+                EventBus.getDefault().post(new UploadEvents.GoogleDrive().succeeded());
+
+            } catch (Exception e) {
+                LOG.error(e.getMessage(), e);
+                EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed(e.getMessage(), e));
+            }
+
         }
     }
 
@@ -132,7 +172,6 @@ public class GoogleDriveJob extends Job {
         }
 
         return fileId;
-
     }
 
     private String createEmptyFile(String accessToken, String fileName, String mimeType, String parentFolderId) throws Exception {
@@ -212,6 +251,11 @@ public class GoogleDriveJob extends Job {
         return "GOOGLEDRIVE" + fileName;
     }
 
+    @Override
+    protected int getRetryLimit() {
+        return 3;
+    }
+
     private String getMimeTypeFromFileName(String fileName) {
         if (fileName.endsWith("kml")) {
             return "application/vnd.google-earth.kml+xml";
@@ -238,77 +282,6 @@ public class GoogleDriveJob extends Job {
         }
 
         return "application/vnd.google-apps.spreadsheet";
-    }
-
-    class GoogleDriveUploadWorkflow implements Runnable {
-
-        String accessToken;
-
-        GoogleDriveUploadWorkflow(String accessToken) {
-            this.accessToken = accessToken;
-        }
-
-        @Override
-        public void run() {
-            try {
-
-                // Figure out the Folder ID to upload to, from the path; create if it doesn't exist.
-                String folderPath = preferenceHelper.getGoogleDriveFolderPath();
-                String[] pathParts = folderPath.split("/");
-                String parentFolderId = null;
-                String latestFolderId = null;
-                for (String part : pathParts) {
-                    latestFolderId = getFileIdFromFileName(accessToken, part, parentFolderId);
-                    if (!Strings.isNullOrEmpty(latestFolderId)) {
-                        LOG.debug("Folder " + part + " found, folder ID is " + latestFolderId);
-                    } else {
-                        LOG.debug("Folder " + part + " not found, creating.");
-                        latestFolderId = createEmptyFile(accessToken, part,
-                                "application/vnd.google-apps.folder", Strings.isNullOrEmpty(parentFolderId) ? "root" : parentFolderId);
-                    }
-                    parentFolderId = latestFolderId;
-                }
-
-                String gpsLoggerFolderId = latestFolderId;
-
-                if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
-                    EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not create folder"));
-                    return;
-                }
-
-                // Now search for the file
-                String gpxFileId = getFileIdFromFileName(accessToken, fileName, gpsLoggerFolderId);
-
-                if (Strings.isNullOrEmpty(gpxFileId)) {
-                    LOG.debug("Creating an empty file first.");
-                    gpxFileId = createEmptyFile(accessToken, fileName, getMimeTypeFromFileName(fileName), gpsLoggerFolderId);
-
-                    if (Strings.isNullOrEmpty(gpxFileId)) {
-                        EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not create file"));
-                        return;
-                    }
-                }
-
-                // Upload contents to file
-                if (!Strings.isNullOrEmpty(gpxFileId)) {
-                    LOG.debug("Uploading file contents");
-                    updateFileContents(accessToken, gpxFileId, fileName);
-                }
-
-                EventBus.getDefault().post(new UploadEvents.GoogleDrive().succeeded());
-
-            } catch (Exception e) {
-                LOG.error(e.getMessage(), e);
-                EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed(e.getMessage(), e));
-            } finally {
-                handlerThread.quit();
-                taskDone.set(true);
-                synchronized (this){
-                    notify();
-                }
-
-            }
-        }
     }
 
 }
