@@ -51,31 +51,35 @@ public class Files {
      * @param fileName
      * @return
      */
-    public static String getMimeType(String fileName) {
-
-        if (fileName == null || fileName.length() == 0) {
-            return "";
+    public static String getMimeTypeFromFileName(String fileName) {
+        if (fileName.endsWith("kml")) {
+            return "application/vnd.google-earth.kml+xml";
         }
 
-
-        int pos = fileName.lastIndexOf(".");
-        if (pos == -1) {
-            return "application/octet-stream";
-        } else {
-
-            String extension = fileName.substring(pos + 1, fileName.length());
-
-
-            if (extension.equalsIgnoreCase("gpx")) {
-                return "application/gpx+xml";
-            } else if (extension.equalsIgnoreCase("kml")) {
-                return "application/vnd.google-earth.kml+xml";
-            } else if (extension.equalsIgnoreCase("zip")) {
-                return "application/zip";
-            }
+        if (fileName.endsWith("gpx")) {
+            return "application/gpx+xml";
         }
 
-        //Unknown mime type
+        if (fileName.endsWith("zip")) {
+            return "application/zip";
+        }
+
+        if (fileName.endsWith("xml")) {
+            return "application/xml";
+        }
+
+        if (fileName.endsWith("nmea") || fileName.endsWith("txt")) {
+            return "text/plain";
+        }
+
+        if (fileName.endsWith("geojson")) {
+            return "application/vnd.geo+json";
+        }
+
+        if (fileName.endsWith("csv")){
+            return "application/vnd.google-apps.spreadsheet";
+        }
+
         return "application/octet-stream";
 
     }

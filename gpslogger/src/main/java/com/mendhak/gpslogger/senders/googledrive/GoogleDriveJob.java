@@ -13,6 +13,7 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.loggers.Streams;
 
 import net.openid.appauth.AuthState;
@@ -38,13 +39,17 @@ public class GoogleDriveJob extends Job {
 
     private static final Logger LOG = Logs.of(GoogleDriveJob.class);
     private static final PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
-    private String fileName;
     private final AtomicBoolean taskDone = new AtomicBoolean(false);
+    private final String fileName;
     private String googleDriveAccessToken;
 
     protected GoogleDriveJob(String fileName) {
         super(new Params(1).requireNetwork().persist().addTags(getJobTag(fileName)).groupBy("GoogleDrive"));
         this.fileName = fileName;
+    }
+
+    public static String getJobTag(String fileName) {
+        return "GOOGLEDRIVE" + fileName;
     }
 
     @Override
@@ -122,7 +127,7 @@ public class GoogleDriveJob extends Job {
 
                 if (Strings.isNullOrEmpty(gpxFileId)) {
                     LOG.debug("Creating an empty file first.");
-                    gpxFileId = createEmptyFile(googleDriveAccessToken, fileName, getMimeTypeFromFileName(fileName), gpsLoggerFolderId);
+                    gpxFileId = createEmptyFile(googleDriveAccessToken, fileName, Files.getMimeTypeFromFileName(fileName), gpsLoggerFolderId);
 
                     if (Strings.isNullOrEmpty(gpxFileId)) {
                         EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not create file"));
@@ -216,7 +221,7 @@ public class GoogleDriveJob extends Job {
         Request.Builder requestBuilder = new Request.Builder().url(fileUpdateUrl);
 
         requestBuilder.addHeader("Authorization", "Bearer " + accessToken);
-        RequestBody body = RequestBody.create(MediaType.parse(getMimeTypeFromFileName(fileName)), Streams.getByteArrayFromInputStream(fis));
+        RequestBody body = RequestBody.create(MediaType.parse(Files.getMimeTypeFromFileName(fileName)), Streams.getByteArrayFromInputStream(fis));
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
             requestBuilder.addHeader("X-HTTP-Method-Override", "PATCH");
         }
@@ -234,10 +239,10 @@ public class GoogleDriveJob extends Job {
         return fileId;
     }
 
-
     @Override
     protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
-
+        EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not send to Google Drive", throwable));
+        LOG.error("Google Drive: maximum attempts failed, giving up", throwable);
     }
 
     @Override
@@ -247,41 +252,11 @@ public class GoogleDriveJob extends Job {
         return RetryConstraint.CANCEL;
     }
 
-    public static String getJobTag(String fileName) {
-        return "GOOGLEDRIVE" + fileName;
-    }
-
     @Override
     protected int getRetryLimit() {
         return 3;
     }
 
-    private String getMimeTypeFromFileName(String fileName) {
-        if (fileName.endsWith("kml")) {
-            return "application/vnd.google-earth.kml+xml";
-        }
 
-        if (fileName.endsWith("gpx")) {
-            return "application/gpx+xml";
-        }
-
-        if (fileName.endsWith("zip")) {
-            return "application/zip";
-        }
-
-        if (fileName.endsWith("xml")) {
-            return "application/xml";
-        }
-
-        if (fileName.endsWith("nmea")) {
-            return "text/plain";
-        }
-
-        if (fileName.endsWith("geojson")) {
-            return "application/vnd.geo+json";
-        }
-
-        return "application/vnd.google-apps.spreadsheet";
-    }
 
 }
