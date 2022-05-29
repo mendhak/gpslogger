@@ -56,7 +56,6 @@ import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.*;
 import com.amulyakhare.textdrawable.TextDrawable;
-import com.auth0.android.jwt.JWT;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.events.CommandEvents;
@@ -131,7 +130,6 @@ public class GpsMainActivity extends AppCompatActivity
     private boolean permissionWorkflowInProgress;
 
     private AuthState authState = new AuthState();
-    private JWT jwt = null;
     private AuthorizationService authorizationService;
     private AppAuthConfiguration appAuthConfiguration;
 
@@ -147,9 +145,6 @@ public class GpsMainActivity extends AppCompatActivity
         if(!Strings.isNullOrEmpty(google_drive_auth_state)){
             try {
                 authState = AuthState.jsonDeserialize(google_drive_auth_state);
-                if(!Strings.isNullOrEmpty(authState.getIdToken())){
-                    jwt = new JWT(authState.getIdToken());
-                }
             } catch (JSONException e) {
                 LOG.debug(e.getMessage(),e);
             }

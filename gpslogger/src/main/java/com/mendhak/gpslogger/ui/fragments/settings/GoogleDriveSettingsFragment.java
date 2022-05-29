@@ -20,7 +20,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 
-import com.auth0.android.jwt.JWT;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -62,7 +61,6 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
     GoogleDriveManager manager;
 
     private AuthState authState = new AuthState();
-    private JWT jwt = null;
     private AuthorizationService authorizationService;
 
     @Override
@@ -223,9 +221,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                                     } else {
                                         if (response != null) {
                                             authState.update(response, ex);
-                                            if (!Strings.isNullOrEmpty(response.idToken)) {
-                                                jwt = new JWT(response.idToken);
-                                            }
+
                                         }
                                     }
                                     saveGoogleDriveAuthState();

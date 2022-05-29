@@ -108,7 +108,6 @@ dependencies {
 
 
     //Google Drive Oauth
-    implementation 'com.auth0.android:jwtdecode:2.0.0'
     implementation 'net.openid:appauth:0.9.1'
 
 
