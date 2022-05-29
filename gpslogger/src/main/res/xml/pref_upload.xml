@@ -53,6 +53,10 @@
             android:title="@string/dropbox_setup_title"
             app:icon="@drawable/dropbox" />
 
+        <Preference
+            android:key="googledrive_setup"
+            android:title="@string/google_drive_setup_title"
+            app:icon="@drawable/googledrive" />
 
         <Preference
             android:key="sftp_setup"
