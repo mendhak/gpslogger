@@ -58,8 +58,8 @@
             android:title="@string/google_drive_setup_title"
             android:icon="@drawable/googledrive"/>
 
-        <Preference
-            android:key="sftp_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="sftp_enabled"
             android:title="@string/sftp_setup_title"
             app:icon="@drawable/sftp" />
 
