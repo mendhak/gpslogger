@@ -161,7 +161,9 @@ public class UploadSettingsFragment
 
                     @Override
                     public void onCheckedChanged(SwitchCompat buttonView, boolean isChecked) {
-                        // No need to do anything, the value gets propagated.
+                        if(isChecked){
+                            preferenceHelper.setShouldLogToCSV(true);
+                        }
                     }
 
                     @Override
