@@ -240,4 +240,5 @@
     <string name="hide">Ascunde</string>
     <string name="app_name">GPSLogger</string>
     <string name="not_applicable">nu este aplicabil</string>
+    <string name="meters_per_second"> m/s</string>
 </resources>
