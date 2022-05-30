@@ -36,5 +36,3 @@ Komunikasyon ng network - ginagamit kapag nag-upload ng mga file (Dropbox, Opens
 Ang iyong lokasyon - ginagamit upang matukoy ang iyong GPS o lokasyon batay sa tower
 
 Mga tool ng system (awtomatikong magsisimula sa boot) - ginagamit kung pinili mong simulan ang GPSLogger sa bootup
-
-
