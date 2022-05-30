@@ -32,10 +32,10 @@
     <string name="sharing_mylocation">Moje umístění</string>
     <string name="sharing_via">Sdílet pomocí</string>
     <!-- general -->
-    <string name="foot">&#160;stopa</string>
-    <string name="feet">&#160;stop</string>
-    <string name="meter">&#160;metr</string>
-    <string name="meters">&#160;metrů</string>
+    <string name="foot"> stopa</string>
+    <string name="feet"> stop</string>
+    <string name="meter"> metr</string>
+    <string name="meters"> metrů</string>
     <string name="error">Chyba</string>
     <string name="error_connection">Chyba připojení. Zkontrolujte prosím nastavení telefonu.</string>
     <string name="seconds">s</string>
@@ -299,4 +299,31 @@
     <string name="customurl_http_method">Metoda HTTP</string>
     <string name="customurl_http_basicauthentication">Základní autentifikace</string>
     <string name="hide_notification_from_status_bar_disallowed">Skrytí notifikací není povoleno ve verzi Android Oreo a novějším</string>
+    <string name="app_name">GPSLogger</string>
+    <string name="ok">OK</string>
+    <string name="hide">Skrýt</string>
+    <string name="summary_freq_max">maximum</string>
+    <string name="not_applicable">n/a</string>
+    <string name="meters_per_second"> m/s</string>
+    <string name="feet_per_second"> ft/s</string>
+    <string name="miles_per_hour"> mi/h</string>
+    <string name="miles"> mi</string>
+    <string name="kilometers_per_hour"> km/h</string>
+    <string name="kilometers"> km</string>
+    <string name="opengts_setup_title">OpenGTS</string>
+    <string name="autoopengts_server">Server</string>
+    <string name="autoftp_port">Port</string>
+    <string name="autoftp_ssltls_tls">TLS</string>
+    <string name="autoftp_ssltls_ssl">SSL</string>
+    <string name="autoftp_ssltls">SSL/TLS</string>
+    <string name="log_customurl_setup_title">Vlastní URL</string>
+    <string name="autoftp_setup_title">FTP</string>
+    <string name="txt_date_isoformat">Datum (2011-12-25):</string>
+    <string name="txt_time_with_offset_isoformat">Časový posun (2011-12-25T11:27:33+04:00):</string>
+    <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
+    <string name="log_plain_text_csv_advanced_title">Nastavení záznamu do CSV</string>
+    <string name="log_plain_text_csv_field_delimiter">oddělovač pole CSV</string>
+    <string name="log_plain_text_decimal_comma">Použít čárku (,) jako desetinný oddělovač místo tečky (.)</string>
+    <string name="new_file_creation_onceamonth">Jednou za měsíc</string>
+    <string name="autoemail_title">Email</string>
 </resources>

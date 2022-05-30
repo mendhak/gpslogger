@@ -370,4 +370,5 @@
     <string name="storage_chooser_select_folder">Seç</string>
     <string name="app_theme_light">Açık tema</string>
     <string name="app_theme_dark">Koyu tema</string>
+    <string name="customurl_all_parameters">Tüm parametreler:</string>
 </resources>

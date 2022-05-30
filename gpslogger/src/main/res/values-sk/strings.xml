@@ -388,4 +388,5 @@ polia.
     <string name="txt_battery_charging">Nabíja sa</string>
     <string name="logging_advanced_delete_files">Vymazať vybrané súbory</string>
     <string name="logging_advanced_delete_files_summary">Viac súborov vyberiete dlhým stlačením.</string>
+    <string name="customurl_all_parameters">Všetky parametre:</string>
 </resources>

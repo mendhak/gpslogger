@@ -31,4 +31,16 @@
     <string name="success">Uspeh</string>
     <!-- Settings activity -->
     <!-- Settings -->
+    <string name="not_applicable">n/a</string>
+    <string name="meters_per_second"> m/s</string>
+    <string name="feet_per_second"> ft/s</string>
+    <string name="miles_per_hour"> mi/h</string>
+    <string name="miles"> mi</string>
+    <string name="kilometers_per_hour"> km/h</string>
+    <string name="unknown_direction">непознат</string>
+    <string name="direction_roughly">Око %s</string>
+    <string name="direction_north">Север</string>
+    <string name="direction_northnortheast">Север-североисток</string>
+    <string name="direction_northeast">Североисток</string>
+    <string name="kilometers"> km</string>
 </resources>

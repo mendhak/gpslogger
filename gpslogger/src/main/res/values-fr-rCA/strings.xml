@@ -6,4 +6,5 @@
     <!-- Settings activity -->
     <!-- Settings -->
     <string name="autoftp_directory">Dossier</string>
+    <string name="gpsprovider_unavailable">Aucun fournisseur de GPS disponible. S\'il vous plaît, vérifiez vos paramètres d\'emplacement et activez un fournisseur d\'emplacement.</string>
 </resources>

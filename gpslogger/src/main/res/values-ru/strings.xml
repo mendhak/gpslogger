@@ -374,4 +374,5 @@
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Игнорировать оптимизацию батареи</b> - Разрешить этому приложению работать в фоновом режиме, уменьшив оптимизацию батареи.</string>
     <string name="file_logging_log_time_with_offset_title">Запись времени в журнал со смещением часового пояса</string>
     <string name="file_logging_log_time_with_offset_summary">Где возможно, записывает время ISO8601 со смещением часового пояса вместо UTC.</string>
+    <string name="customurl_all_parameters">Все параметры:</string>
 </resources>
