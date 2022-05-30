@@ -78,8 +78,8 @@
             android:title="@string/autoemail_title"
             app:icon="@drawable/email" />
 
-        <Preference
-            android:key="owncloud_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="owncloud_enabled"
             android:title="@string/owncloud_setup_title"
             app:icon="@drawable/owncloud" />
 
