@@ -43,13 +43,13 @@
         android:title="@string/autosend_targets_category"
         app:iconSpaceReserved="false">
 
-        <Preference
-            android:key="customurl_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="autocustomurl_enabled"
             android:title="@string/log_customurl_setup_title"
             app:icon="@drawable/customurlsender"/>
 
-        <Preference
-            android:key="dropbox_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="dropbox_enabled"
             android:title="@string/dropbox_setup_title"
             app:icon="@drawable/dropbox" />
 

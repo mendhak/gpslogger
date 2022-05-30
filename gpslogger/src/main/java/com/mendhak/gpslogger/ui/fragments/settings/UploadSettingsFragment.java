@@ -68,15 +68,50 @@ public class UploadSettingsFragment
 
         findPreference("osm_setup").setOnPreferenceClickListener(this);
         findPreference("autoemail_setup").setOnPreferenceClickListener(this);
-        findPreference("dropbox_setup").setOnPreferenceClickListener(this);
+//        findPreference("dropbox_setup").setOnPreferenceClickListener(this);
         findPreference("opengts_setup").setOnPreferenceClickListener(this);
         findPreference("autoftp_setup").setOnPreferenceClickListener(this);
         findPreference("owncloud_setup").setOnPreferenceClickListener(this);
         findPreference("sftp_setup").setOnPreferenceClickListener(this);
-        findPreference("customurl_setup").setOnPreferenceClickListener(this);
+//        findPreference("customurl_setup").setOnPreferenceClickListener(this);
+
+        ((SwitchPlusClickPreference)findPreference(PreferenceNames.AUTOSEND_CUSTOMURL_ENABLED))
+                .setSwitchClickListener(new SwitchPlusClickPreference.SwitchPlusClickListener() {
+
+                    @Override
+                    public void onCheckedChanged(SwitchCompat buttonView, boolean isChecked) {
+                        // No need to do anything, the value gets propagated.
+                    }
+
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intent = new Intent(getActivity(), MainPreferenceActivity.class);
+                        intent.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL);
+                        startActivity(intent);
+                    }
+                });
+
+        ((SwitchPlusClickPreference)findPreference(PreferenceNames.AUTOSEND_DROPBOX_ENABLED))
+                .setSwitchClickListener(new SwitchPlusClickPreference.SwitchPlusClickListener() {
+
+                    @Override
+                    public void onCheckedChanged(SwitchCompat buttonView, boolean isChecked) {
+                        // No need to do anything, the value gets propagated.
+                    }
+
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intent = new Intent(getActivity(), MainPreferenceActivity.class);
+                        intent.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX);
+                        startActivity(intent);
+                    }
+                });
 
 
-        ((SwitchPlusClickPreference)findPreference(PreferenceNames.AUTOSEND_GOOGLE_DRIVE_ENABLED)).setSwitchClickListener(new SwitchPlusClickPreference.SwitchPlusClickListener() {
+        ((SwitchPlusClickPreference)findPreference(PreferenceNames.AUTOSEND_GOOGLE_DRIVE_ENABLED))
+                .setSwitchClickListener(new SwitchPlusClickPreference.SwitchPlusClickListener() {
 
             @Override
             public void onCheckedChanged(SwitchCompat buttonView, boolean isChecked) {
@@ -129,9 +164,9 @@ public class UploadSettingsFragment
             launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL;
         }
 
-        if(preference.getKey().equalsIgnoreCase("dropbox_setup")){
-            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX;
-        }
+//        if(preference.getKey().equalsIgnoreCase("dropbox_setup")){
+//            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX;
+//        }
 
         if(preference.getKey().equalsIgnoreCase("opengts_setup")){
             launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS;
