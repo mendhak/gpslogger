@@ -822,20 +822,20 @@ public class GpsMainActivity extends AppCompatActivity
         materialDrawer.addItem(new DividerDrawerItem());
 
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.pref_autosend_title, R.string.pref_autosend_summary, R.drawable.autosend, 1003));
-        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.log_customurl_setup_title, R.drawable.customurlsender, 1020));
-        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.dropbox_setup_title, R.drawable.dropbox, 1005));
-        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.google_drive_setup_title, R.drawable.googledrive, 1011));
-        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.sftp_setup_title, R.drawable.sftp, 1015));
-        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.opengts_setup_title, R.drawable.opengts, 1008));
-        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.osm_setup_title, R.drawable.openstreetmap, 1009));
-        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.autoemail_title, R.drawable.email, 1006));
-        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.owncloud_setup_title, R.drawable.owncloud, 1010));
-        materialDrawer.addItem(GpsLoggerDrawerItem.newSecondary(R.string.autoftp_setup_title, R.drawable.ftp, 1007));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.log_customurl_setup_title, null, R.drawable.customurlsender, 1020));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.dropbox_setup_title, null, R.drawable.dropbox, 1005));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.google_drive_setup_title, null, R.drawable.googledrive, 1011));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.sftp_setup_title, null, R.drawable.sftp, 1015));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.opengts_setup_title, null, R.drawable.opengts, 1008));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.osm_setup_title, null, R.drawable.openstreetmap, 1009));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.autoemail_title, null, R.drawable.email, 1006));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.owncloud_setup_title, null, R.drawable.owncloud, 1010));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.autoftp_setup_title, null, R.drawable.ftp, 1007));
 
         materialDrawer.addItem(new DividerDrawerItem());
 
-        materialDrawer.addStickyFooterItem(GpsLoggerDrawerItem.newSecondary(R.string.menu_faq, R.drawable.helpfaq, 9000));
-        materialDrawer.addStickyFooterItem(GpsLoggerDrawerItem.newSecondary(R.string.menu_exit, R.drawable.exit, 9001));
+        materialDrawer.addStickyFooterItem(GpsLoggerDrawerItem.newPrimary(R.string.menu_faq, null, R.drawable.helpfaq, 9000));
+        materialDrawer.addStickyFooterItem(GpsLoggerDrawerItem.newPrimary(R.string.menu_exit, null, R.drawable.exit, 9001));
 
 
         materialDrawer.setOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {

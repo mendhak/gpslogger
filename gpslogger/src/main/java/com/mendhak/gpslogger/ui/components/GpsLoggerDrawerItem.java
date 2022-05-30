@@ -20,36 +20,41 @@
 package com.mendhak.gpslogger.ui.components;
 
 
+import androidx.annotation.Nullable;
 import com.mendhak.gpslogger.R;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 
 
 public class GpsLoggerDrawerItem {
 
 
-    public static PrimaryDrawerItem newPrimary(int resTitle, int resSummary, int resIcon, int identifier) {
+    public static PrimaryDrawerItem newPrimary(int resTitle, @Nullable Integer resSummary, int resIcon, int identifier) {
 
-        return new PrimaryDrawerItem()
-        .withName(resTitle)
-        .withDescription(resSummary)
-        .withIcon(resIcon)
-        .withIdentifier(identifier)
-        .withDescriptionTextColorRes(R.color.secondaryColorText)
-        .withSelectable(false);
-
-    }
-
-    public static SecondaryDrawerItem newSecondary(int resTitle, int resIcon, int identifier) {
-
-        return new SecondaryDrawerItem()
+        PrimaryDrawerItem pdi = new PrimaryDrawerItem()
                 .withName(resTitle)
                 .withIcon(resIcon)
                 .withIdentifier(identifier)
                 .withDescriptionTextColorRes(R.color.secondaryColorText)
                 .withSelectable(false);
 
+        if (resSummary != null) {
+            pdi = pdi.withDescription(resSummary);
+        }
+        return pdi;
+
     }
+
+//    public static SecondaryDrawerItem newSecondary(int resTitle, int resIcon, int identifier) {
+//
+//        return new SecondaryDrawerItem()
+//                .withName(resTitle)
+//                .withIcon(resIcon)
+//                .withIdentifier(identifier)
+//                .withTextColorRes(Systems.isDarkMode(AppSettings.getInstance().getApplicationContext()) ? R.color.primaryColorLight : R.color.primaryColorText)
+//                .withDescriptionTextColorRes(R.color.secondaryColorText)
+//                .withSelectable(false);
+//
+//    }
 
 
 }
