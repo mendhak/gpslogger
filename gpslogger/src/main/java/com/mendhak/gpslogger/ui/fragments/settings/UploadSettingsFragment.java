@@ -66,15 +66,74 @@ public class UploadSettingsFragment
         findPreference(PreferenceNames.AUTOSEND_FREQUENCY).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.AUTOSEND_FREQUENCY).setSummary(preferenceHelper.getAutoSendInterval() + getString(R.string.minutes));
 
-        findPreference("osm_setup").setOnPreferenceClickListener(this);
-        findPreference("autoemail_setup").setOnPreferenceClickListener(this);
+//        findPreference("osm_setup").setOnPreferenceClickListener(this);
+//        findPreference("autoemail_setup").setOnPreferenceClickListener(this);
 //        findPreference("dropbox_setup").setOnPreferenceClickListener(this);
-        findPreference("opengts_setup").setOnPreferenceClickListener(this);
-        findPreference("autoftp_setup").setOnPreferenceClickListener(this);
+//        findPreference("opengts_setup").setOnPreferenceClickListener(this);
+//        findPreference("autoftp_setup").setOnPreferenceClickListener(this);
 //        findPreference("owncloud_setup").setOnPreferenceClickListener(this);
 //        findPreference("sftp_setup").setOnPreferenceClickListener(this);
 //        findPreference("customurl_setup").setOnPreferenceClickListener(this);
 
+        ((SwitchPlusClickPreference)findPreference(PreferenceNames.AUTOSEND_OSM_ENABLED))
+                .setSwitchClickListener(new SwitchPlusClickPreference.SwitchPlusClickListener() {
+                    @Override
+                    public void onCheckedChanged(SwitchCompat buttonView, boolean isChecked) {
+                        // No need to do anything, the value gets propagated.
+                    }
+
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), MainPreferenceActivity.class);
+                        intent.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.OSM);
+                        startActivity(intent);
+                    }
+                });
+
+        ((SwitchPlusClickPreference)findPreference(PreferenceNames.AUTOSEND_EMAIL_ENABLED))
+                .setSwitchClickListener(new SwitchPlusClickPreference.SwitchPlusClickListener() {
+                    @Override
+                    public void onCheckedChanged(SwitchCompat buttonView, boolean isChecked) {
+                        // No need to do anything, the value gets propagated.
+                    }
+
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), MainPreferenceActivity.class);
+                        intent.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.EMAIL);
+                        startActivity(intent);
+                    }
+                });
+
+        ((SwitchPlusClickPreference)findPreference(PreferenceNames.AUTOSEND_OPENGTS_ENABLED))
+                .setSwitchClickListener(new SwitchPlusClickPreference.SwitchPlusClickListener() {
+                    @Override
+                    public void onCheckedChanged(SwitchCompat buttonView, boolean isChecked) {
+                        // No need to do anything, the value gets propagated.
+                    }
+
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), MainPreferenceActivity.class);
+                        intent.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS);
+                        startActivity(intent);
+                    }
+                });
+
+        ((SwitchPlusClickPreference)findPreference(PreferenceNames.AUTOSEND_FTP_ENABLED))
+                .setSwitchClickListener(new SwitchPlusClickPreference.SwitchPlusClickListener() {
+                    @Override
+                    public void onCheckedChanged(SwitchCompat buttonView, boolean isChecked) {
+                        // No need to do anything, the value gets propagated.
+                    }
+
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), MainPreferenceActivity.class);
+                        intent.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.FTP);
+                        startActivity(intent);
+                    }
+                });
 
         ((SwitchPlusClickPreference)findPreference(PreferenceNames.AUTOSEND_OWNCLOUD_ENABLED))
                 .setSwitchClickListener(new SwitchPlusClickPreference.SwitchPlusClickListener() {
@@ -181,31 +240,31 @@ public class UploadSettingsFragment
                     .show(this, PreferenceNames.AUTOSEND_FREQUENCY);
         }
 
-        String launchFragment = "";
+//        String launchFragment = "";
 
-        if (preference.getKey().equalsIgnoreCase("osm_setup")) {
-            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.OSM;
-        }
-
-        if(preference.getKey().equalsIgnoreCase("autoemail_setup")){
-            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.EMAIL;
-        }
-
-        if(preference.getKey().equalsIgnoreCase("customurl_setup")){
-            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL;
-        }
+//        if (preference.getKey().equalsIgnoreCase("osm_setup")) {
+//            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.OSM;
+//        }
+//
+//        if(preference.getKey().equalsIgnoreCase("autoemail_setup")){
+//            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.EMAIL;
+//        }
+//
+//        if(preference.getKey().equalsIgnoreCase("customurl_setup")){
+//            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL;
+//        }
 
 //        if(preference.getKey().equalsIgnoreCase("dropbox_setup")){
 //            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.DROPBOX;
 //        }
 
-        if(preference.getKey().equalsIgnoreCase("opengts_setup")){
-            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS;
-        }
-
-        if(preference.getKey().equalsIgnoreCase("autoftp_setup")){
-            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.FTP;
-        }
+//        if(preference.getKey().equalsIgnoreCase("opengts_setup")){
+//            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS;
+//        }
+//
+//        if(preference.getKey().equalsIgnoreCase("autoftp_setup")){
+//            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.FTP;
+//        }
 
 //        if(preference.getKey().equalsIgnoreCase("owncloud_setup")) {
 //            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.OWNCLOUD;
@@ -215,12 +274,12 @@ public class UploadSettingsFragment
 //            launchFragment = MainPreferenceActivity.PREFERENCE_FRAGMENTS.SFTP;
 //        }
 
-        if(!Strings.isNullOrEmpty(launchFragment)){
-            Intent intent = new Intent(getActivity(), MainPreferenceActivity.class);
-            intent.putExtra("preference_fragment", launchFragment);
-            startActivity(intent);
-            return true;
-        }
+//        if(!Strings.isNullOrEmpty(launchFragment)){
+//            Intent intent = new Intent(getActivity(), MainPreferenceActivity.class);
+//            intent.putExtra("preference_fragment", launchFragment);
+//            startActivity(intent);
+//            return true;
+//        }
 
         return false;
     }

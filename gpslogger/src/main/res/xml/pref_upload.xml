@@ -63,18 +63,18 @@
             android:title="@string/sftp_setup_title"
             app:icon="@drawable/sftp" />
 
-        <Preference
-            android:key="opengts_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="autoopengts_enabled"
             android:title="@string/opengts_setup_title"
             app:icon="@drawable/opengts" />
 
-        <Preference
-            android:key="osm_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="osm_enabled"
             android:title="@string/osm_setup_title"
             app:icon="@drawable/openstreetmap" />
 
-        <Preference
-            android:key="autoemail_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="autoemail_enabled"
             android:title="@string/autoemail_title"
             app:icon="@drawable/email" />
 
@@ -83,8 +83,8 @@
             android:title="@string/owncloud_setup_title"
             app:icon="@drawable/owncloud" />
 
-        <Preference
-            android:key="autoftp_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="autoftp_enabled"
             android:title="@string/autoftp_setup_title"
             app:icon="@drawable/ftp" />
 
