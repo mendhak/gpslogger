@@ -1440,7 +1440,7 @@ public class GpsMainActivity extends AppCompatActivity
             bulb.setOnClickListener(null);
         } else {
             if (session.isLocationServiceUnavailable()) {
-                bulb.setImageResource(R.drawable.circle_red);
+                bulb.setImageResource(R.drawable.circle_warning);
                 bulb.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
