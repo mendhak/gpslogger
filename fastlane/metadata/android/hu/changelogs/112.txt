@@ -1,0 +1,1 @@
+* Hibajavítás: Tasker getstatus parancs nem küldött állapotüzenetet.

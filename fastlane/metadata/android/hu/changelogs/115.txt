@@ -1,0 +1,3 @@
+* Hibajavítás: UTF-8 karakterek engedélyezése az FTP mappa nevében
+* Görgetősáv hozzáadva az egyszerű nézethez, hogy alkalmazkodjon a rendszer megjelenítési méretéhez és betűméretéhez.
+* Billentyűzet automatikusan megjelenik a megjegyzés szövegdoboz használatakor.

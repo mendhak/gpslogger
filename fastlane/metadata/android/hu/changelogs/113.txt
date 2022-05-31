@@ -1,0 +1,1 @@
+* Görgetősáv hozzáadva az egyszerű nézethez, hogy alkalmazkodjon a rendszer megjelenítési méretéhez és betűméretéhez.
