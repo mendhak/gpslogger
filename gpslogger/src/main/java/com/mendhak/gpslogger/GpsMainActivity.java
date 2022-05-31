@@ -1107,7 +1107,7 @@ public class GpsMainActivity extends AppCompatActivity
     private void enableDisableMenuItems() {
 
         onWaitingForLocation(session.isWaitingForLocation());
-        setBulbStatus(session.isStarted());
+        setBulbStatus();
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarBottom);
         MenuItem mnuAnnotate = toolbar.getMenu().findItem(R.id.mnuAnnotate);
@@ -1432,6 +1432,29 @@ public class GpsMainActivity extends AppCompatActivity
     };
 
 
+    private void setBulbStatus() {
+        ImageView bulb = (ImageView) findViewById(R.id.notification_bulb);
+
+        if (!session.isStarted()) {
+            bulb.setImageResource(R.drawable.circle_none);
+            bulb.setOnClickListener(null);
+        } else {
+            if (session.isLocationServiceUnavailable()) {
+                bulb.setImageResource(R.drawable.circle_red);
+                bulb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(GpsMainActivity.this, R.string.gpsprovider_unavailable, Toast.LENGTH_LONG).show();
+                    }
+                });
+            } else {
+                bulb.setImageResource(session.isStarted() ? R.drawable.circle_green : R.drawable.circle_none);
+                bulb.setOnClickListener(null);
+            }
+
+        }
+    }
+
     /**
      * Starts the service and binds the activity to it.
      */
@@ -1472,11 +1495,6 @@ public class GpsMainActivity extends AppCompatActivity
                 LOG.error("Could not stop the service", e);
             }
         }
-    }
-
-    private void setBulbStatus(boolean started) {
-        ImageView bulb = (ImageView) findViewById(R.id.notification_bulb);
-        bulb.setImageResource(started ? R.drawable.circle_green : R.drawable.circle_none);
     }
 
     public void setAnnotationReady() {
@@ -1735,5 +1753,10 @@ public class GpsMainActivity extends AppCompatActivity
             }
         },800);
 
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ServiceEvents.LocationServicesUnavailable locationServicesUnavailable) {
+        setBulbStatus();
     }
 }

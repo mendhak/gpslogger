@@ -652,9 +652,11 @@ public class GpsLoggingService extends Service  {
             LOG.error("No provider available!");
             session.setUsingGps(false);
             LOG.error(getString(R.string.gpsprovider_unavailable));
-            stopLogging();
-            setLocationServiceUnavailable();
+            startAbsoluteTimer();
+            setLocationServiceUnavailable(true);
             return;
+        } else {
+            setLocationServiceUnavailable(false);
         }
 
         if(!preferenceHelper.shouldLogNetworkLocations() && !preferenceHelper.shouldLogSatelliteLocations() && !preferenceHelper.shouldLogPassiveLocations()){
@@ -780,7 +782,8 @@ public class GpsLoggingService extends Service  {
 
 
 
-    void setLocationServiceUnavailable(){
+    void setLocationServiceUnavailable(boolean unavailable){
+        session.setLocationServiceUnavailable(unavailable);
         EventBus.getDefault().post(new ServiceEvents.LocationServicesUnavailable());
     }
 
