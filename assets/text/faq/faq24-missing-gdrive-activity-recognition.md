@@ -1,3 +1,4 @@
+## Why has GPSLogger been removed from the Play Store?  
 ## What happened to the Google Drive feature?  
 ## What happened to the Activity Recognition feature?  
 
