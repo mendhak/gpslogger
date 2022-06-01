@@ -139,6 +139,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                     .fields(
                             Input.plain(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH)
                                     .text(PreferenceHelper.getInstance().getGoogleDriveFolderPath())
+                                    .min(1)
                     )
                     .show(this, PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH);
             return true;
