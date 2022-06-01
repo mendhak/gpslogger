@@ -652,6 +652,7 @@ public class GpsLoggingService extends Service  {
             LOG.error("No provider available!");
             session.setUsingGps(false);
             LOG.error(getString(R.string.gpsprovider_unavailable));
+            // Let the app check again, whether location services have returned, after the absolute-timer time has passed.
             startAbsoluteTimer();
             setLocationServiceUnavailable(true);
             return;
