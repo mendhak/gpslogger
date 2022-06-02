@@ -36,4 +36,3 @@ Hálózati kommunikáció - szükséges amikor feltölt fájlokat (Dropbox, Open
 Hely meghatározás - a GPS vagy GSM torony által szolgáltatott információ alapján
 
 System tools (a program készülék bekapcsoláskori indulásának engedélyezése) - Abban az esetben ha úgy dönt, hogy a GPSLogger, boot-oláskor induljon
-

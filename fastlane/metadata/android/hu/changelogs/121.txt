@@ -1,0 +1,5 @@
+* Új egyéni URL-paraméter: %ALL, amely minden elérhető egyéni URL-paramétert lecserél
+* Hibajavítás: az egyéni URL-időbélyegekben hagyja el a + jelet
+* Hibajavítás: időzítő nem állt alaphelyzetbe profilváltáskor
+* Hibajavítás: a fiók bezárásakor először a profillistát zárja be.
+* Hibajavítás: ha rákattint egy elemre a profillistában, tartsa nyitva a fiókot

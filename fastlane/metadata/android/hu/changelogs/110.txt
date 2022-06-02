@@ -1,0 +1,6 @@
+* Android 10+ esetén az engedélyezési folyamatban „mindig engedélyezést” fog kérni
+* Engedélyezési folyamat az akkumulátor optimalizálás tiltását is kéri
+* Engedélyezési folyamatban a háttérkorlátozásokkal kapcsolatos engedélyeket is igényel.
+* Adaptív ikonok @kanru-nak köszönhetően
+* Általános beállításokhoz hozzáadva egy lehetőség az alkalmazás visszaállítására (törli az alkalmazáshoz tartozó összes fájlt és engedélyt)
+* Frissített fordítások Crowdintól

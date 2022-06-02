@@ -370,4 +370,7 @@
     <string name="logging_advanced_delete_files">Kijelölt fájlok törlése</string>
     <string name="logging_advanced_delete_files_summary">Több fájl kiválasztásához nyomja meg hosszan.</string>
     <string name="customurl_all_parameters">Minden paraméter:</string>
+    <string name="google_drive_folder_path">Google Drive mappa elérési útja</string>
+    <string name="google_drive_folder_path_summary_1">Használjon egyetlen mappanevet (pl. GPSLogger) vagy egy mappa elérési utat (pl. aaa/bbb/ccc). A mappákat az alkalmazásnak kell létrehoznia.</string>
+    <string name="google_drive_folder_path_summary_2">Ha egyetlen mappanevet használ, létrehozása után áthelyezhető máshová a Google Drive-ban. A mappa elérése lassabb, mert az elérési út minden részét ellenőrizni kell vagy létre kell hozni a fájlok feltöltése előtt.</string>
 </resources>

@@ -1,0 +1,3 @@
+* Android 11+ felett fájlengedélyek javítása. Most beállíthat egy egyéni fájl elérési utat, és a rendszer kéri, hogy adja meg a fájlkezelő engedélyeit.
+* Új engedély hozzáadva, MANAGE_EXTERNAL_STORAGE. Ez lehetővé teszi az egyéni fájl elérési útját az Android 11+ rendszeren.
+* Hibajavítás: UTF-8 karakterek engedélyezése az FTP mappa nevében.

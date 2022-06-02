@@ -1,0 +1,2 @@
+* Görgetősáv hozzáadva az egyszerű nézethez, hogy alkalmazkodjon a rendszer megjelenítési méretéhez és betűméretéhez.
+* Billentyűzet automatikusan megjelenik a megjegyzés szövegdoboz használatakor.
