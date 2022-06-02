@@ -1,0 +1,5 @@
+* Új Sötét téma opció, automatikusan követi a rendszer nappali/éjszakai módját.
+* Általános beállításokban manuálisan beállítható a Világos/Sötét téma.
+* Átdolgozott beállítási képernyők, lehetőség szerint megjeleníti a felhasználó által kiválasztott értékeket.
+* Fájl- és mappaválasztó hozzáadva. Az alkalmazás extra engedélyt kér Android 11+ rendszeren az egyéni elérési úthoz.
+* Az SFTP-nek most már képesnek kell lennie a modern SSH-algoritmusokkal történő csatlakozásra.

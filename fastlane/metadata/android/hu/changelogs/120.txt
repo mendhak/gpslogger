@@ -1,0 +1,7 @@
+* Akkumulátor töltési állapota az egyéni URL-ben (%ISCHARGING) és CSV-ben (battery_charging).
+* Ha OSM és az automatikus küldés engedélyezve van, akkor a rendszer kéri az OSM nyomkövetési adatait indításkor és feltöltéskor.
+* Fájlok törlése naplózás alat (haladó).
+* GPX 1.1 naplózáshoz hozzáadvat gpxtpx:speed és gpxtpx:bearing bővítmények
+* Dropbox frissítette hitelesítési módszerét
+* Hibajavítás: több fájlt töltött fel, ha a név más fájlnevekben is szerepelt
+* Frissített fordítások

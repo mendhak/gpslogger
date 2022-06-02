@@ -1,0 +1,8 @@
+* Egyéni URL lehet automatikus küldő a megbízhatóság növelése miatt.
+* Idő időzóna-eltolásos írására Naplózás részleteiben. (GPX, KML, GeoJSON, CSV)
+* Egyéni URL használhat %TIMEOFFSET paramétert.
+* CSV naplózás: további mezők hozzáadva.
+* CSV naplózás: mezőhatárolók, vessző tizedeselválasztó.
+* Napló nézetben koordináták a felhasználó által preferált formátumban.
+* Ha váratlan leállásból áll helyre az alkalmazás és előtte naplózott, akkor automatikusan elindul a naplózás.
+* Magyar fordítás hibajavítása

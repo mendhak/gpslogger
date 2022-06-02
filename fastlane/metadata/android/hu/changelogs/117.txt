@@ -1,5 +1,5 @@
-* Fájl-, mappaválasztó hozzáadva. GPSLogger mentési útvonalához és SFTP privát kulcshoz kell.
-* SSH-könyvtár, modernebb SSH-algoritmusokkal történő csatlakozást biztosít SFTP funkció használatakor.
-* Android 11+ felett fájlengedélyek javítása. Beállíthat egyéni fájl elérési utat, és a rendszer kéri, hogy adja meg a fájlkezelő engedélyeit.
+* Fájl-, mappaválasztó hozzáadva. Mentési útvonalhoz és SFTP privát kulcshoz kell.
+* SSH-könyvtár, modern SSH-algoritmusokkal történő csatlakozást biztosít SFTP funkció használatakor.
+* Android 11+ felett fájlengedélyek javítása. Beállíthat egyéni fájl elérési utat. Szükséges lesz megadni a fájlkezelői engedélyt.
 * Új engedély hozzáadva, MANAGE_EXTERNAL_STORAGE. Lehetővé tesz egyéni fájl elérési utat az Android 11+ rendszeren.
 * Hibajavítás: UTF-8 karakterek engedélyezése az FTP mappa nevében.
