@@ -33,7 +33,10 @@ public class GoogleDriveManager extends FileSender {
     }
 
     public static String getGoogleDriveApplicationClientID() {
-        return "207286146661-6kgeq88ktnjho995oetdv78lmcjfjrqc.apps.googleusercontent.com";
+        //OAuth Client for F-Droid release key
+        return "889382808911-scco623dhspjbf5guflmg68f61jl1na3.apps.googleusercontent.com";
+        // The Client ID doesn't matter too much, it needs to exist, but for verification what Android
+        // does is match by SHA1 signing key + package name.
     }
 
     public static String getGoogleDriveApplicationOauth2Redirect() {

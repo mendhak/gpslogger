@@ -99,7 +99,7 @@ public class PreferenceHelper {
 
     @ProfilePreference(name=PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH)
     public String getGoogleDriveFolderPath() {
-        return prefs.getString(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH, "GPSLogger");
+        return prefs.getString(PreferenceNames.GOOGLE_DRIVE_FOLDER_PATH, "GPSLogger for Android");
     }
 
     public void setGoogleDriveFolderPath(String folderPath){
