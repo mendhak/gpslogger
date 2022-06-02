@@ -23,6 +23,7 @@
 
     <!-- To let the user disable battery optimization from within the app -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission-sdk-23 android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <!-- allow this to run as a foreground service -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />

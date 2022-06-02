@@ -208,11 +208,16 @@ public class GpsMainActivity extends AppCompatActivity
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     LOG.debug(String.valueOf(result.getResultCode()));
-                    if(result.getResultCode() != Activity.RESULT_OK){
-                        LOG.warn("Request to ignore battery optimization was denied.");
-                    }
-                    else {
-                        LOG.debug("Request to ignore battery optimization was granted.");
+                    String packageName = getPackageName();
+                    PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (!pm.isIgnoringBatteryOptimizations(packageName)){
+    //                    if(result.getResultCode() != Activity.RESULT_OK){
+                            LOG.warn("Request to ignore battery optimization was denied.");
+                        }
+                        else {
+                            LOG.debug("Request to ignore battery optimization was granted.");
+                        }
                     }
                     permissionWorkflowInProgress=false;
                 }
