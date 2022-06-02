@@ -19,7 +19,7 @@
 
 ***备注：
 
-GPSLogger 并非是“我的足迹”（MyTracks）的替代品。  “我的足迹”适合短期使用（同时运行的功能很多），GPSLogger 可以长期运行。
+GPSLogger 并非是“我的足迹”（OpenTracks）的替代品。  “我的足迹”适合短期使用（同时运行的功能很多），GPSLogger 可以长期运行。
 
 本程序只在阁下要求电子邮件、OpenStreetMap 或 Dropbox“自动发送”功能时使用网络连接。
 

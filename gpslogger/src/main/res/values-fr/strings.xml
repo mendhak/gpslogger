@@ -188,11 +188,11 @@ une plus grande précision à basses fréquences.    </string>
     <string name="menu_upload">Téléverser</string>
     <string name="autoemail_from">À partir de l\'adresse</string>
     <string name="autoemail_from_summary">Certains fournisseurs de messagerie électronique requièrent une adresse avec un champ « De ». Utiliser uniquement si nécessaire.    </string>
-    <string name="gdocs_clearauthorization_summary">Oublier les paramètres Google Drive locaux. Pour révoquer de façon définitive l\'accès, aller aux paramètres du compte Google</string>
-    <string name="gdocs_setup_title">Google Drive</string>
-    <string name="gdocs_test_summary">Tester l\'envoi d\'un fichier test vers Google Drive</string>
-    <string name="gdocs_test_title">Tester le téléversement</string>
-    <string name="gdocs_testupload_success">Téléversé. Merci de vérifier le nouveau fichier sur Google Documents.</string>
+    <string name="google_drive_clearauthorization_summary">Oublier les paramètres Google Drive locaux. Pour révoquer de façon définitive l\'accès, aller aux paramètres du compte Google</string>
+    <string name="google_drive_setup_title">Google Drive</string>
+    <string name="google_drive_test_summary">Tester l\'envoi d\'un fichier test vers Google Drive</string>
+    <string name="google_drive_test_title">Tester le téléversement</string>
+    <string name="google_drive_testupload_success">Téléversé. Merci de vérifier le nouveau fichier sur Google Documents.</string>
     <string name="autoemail_sendto_csv">Adresses de courriel séparées par une virgule</string>
     <string name="autosend_enabled">Autoriser l\'envoi automatique</string>
     <string name="autosend_enabled_summary">Autoriser l\'envoi de fichiers à différentes cibles</string>

@@ -152,7 +152,7 @@
     <string name="emailprovider_manual">دليل</string>
     <string name="menu_upload">تحميل</string>
     <string name="autoemail_from">من عنوان</string>
-    <string name="gdocs_test_title">إختبار التحميل</string>
+    <string name="google_drive_test_title">إختبار التحميل</string>
     <string name="autoemail_sendto_csv">عناوين البريد  مفصولة بفواصل</string>
     <string name="autosend_enabled">السماح بإرسال تلقائي</string>
     <string name="autosend_enabled_summary">يسمح بإرسال الملفات إلى أهداف مختلفة</string>

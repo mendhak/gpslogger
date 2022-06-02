@@ -18,7 +18,7 @@ Bugs, feature requests, vragen - maak een issue aan op github.com/mendhak/gpslog
 
 *** Opmerkingen:
 
-GPSLogger is geen vervanging van MyTracks.  MyTracks is bedoeld voor kort gebruik (en heeft veel features actief), GPSLogger is bedoeld om permanent actief te zijn.
+GPSLogger is geen vervanging van OpenTracks.  OpenTracks is bedoeld voor kort gebruik (en heeft veel features actief), GPSLogger is bedoeld om permanent actief te zijn.
 
 Een data-verbinding wordt alleen gebruikt door deze app als je gebruik maken van automatische e-mail of OpenStreetMap of Dropbox functies.
 

@@ -19,7 +19,7 @@ Bug, permintaan fitur, pertanyaan - silakan kirim ke github.com/mendhak/gpslogge
 
 ***Catatan:
 
-GPSLogger bukanlah pengganti MyTracks.  MyTracks dimaksudkan untuk penggunaan pendek (ini punya banyak fitur yang berjalan), GPSLogger dimaksudkan untuk bertahan lebih lama.
+GPSLogger bukanlah pengganti OpenTracks.  OpenTracks dimaksudkan untuk penggunaan pendek (ini punya banyak fitur yang berjalan), GPSLogger dimaksudkan untuk bertahan lebih lama.
 
 Sambungan data yang digunakan aplikasi ini hanya jika Anda menggunakan email otomatis atau fitur OpenStreetMap atau Dropbox.
 

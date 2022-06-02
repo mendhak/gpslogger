@@ -188,11 +188,11 @@
     <string name="menu_upload">Feltöltés</string>
     <string name="autoemail_from">Címről</string>
     <string name="autoemail_from_summary">Néhány e-mail szolgáltató megköveteli a feladó címét.  Ezt csak akkor használja, ha szükség van rá.</string>
-    <string name="gdocs_clearauthorization_summary">Elfelejti a Google Drive helyi beállításait. Hozzáférés végleges visszavonásához lépjen a Google-fiók beállításaihoz</string>
-    <string name="gdocs_setup_title">Google Drive</string>
-    <string name="gdocs_test_summary">Tesztfájl feltöltése Google Drive-ba</string>
-    <string name="gdocs_test_title">Teszt feltöltés</string>
-    <string name="gdocs_testupload_success">Feltöltés kész. Kérjük, ellenőrizze a Google dokumentumokban az új fájlt.</string>
+    <string name="google_drive_clearauthorization_summary">Elfelejti a Google Drive helyi beállításait. Hozzáférés végleges visszavonásához lépjen a Google-fiók beállításaihoz</string>
+    <string name="google_drive_setup_title">Google Drive</string>
+    <string name="google_drive_test_summary">Tesztfájl feltöltése Google Drive-ba</string>
+    <string name="google_drive_test_title">Teszt feltöltés</string>
+    <string name="google_drive_testupload_success">Feltöltés kész. Kérjük, ellenőrizze a Google dokumentumokban az új fájlt.</string>
     <string name="autoemail_sendto_csv">Vesszővel elválasztott e-mail címek</string>
     <string name="autosend_enabled">Automatikus küldés engedélyezése</string>
     <string name="autosend_enabled_summary">Lehetővé teszi a fájlok különböző helyekre küldését</string>

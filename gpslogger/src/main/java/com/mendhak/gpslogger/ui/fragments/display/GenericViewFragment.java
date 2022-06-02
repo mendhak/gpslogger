@@ -34,6 +34,7 @@ import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
+import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.ui.Dialogs;
 import de.greenrobot.event.EventBus;
 import eltos.simpledialogfragment.SimpleDialog;
@@ -86,12 +87,7 @@ public abstract class GenericViewFragment extends Fragment {
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.LocationServicesUnavailable locationServicesUnavailable) {
-        SimpleDialog.build()
-                .msg(R.string.gpsprovider_unavailable)
-                .pos(R.string.ok)
-                .neg(R.string.cancel)
-                .show( getActivity(), "GPS_PROVIDER_UNAVAILABLE");
-
+        //Literally keeping this here only because the eventbus requries at least one onEvent method in this class.
     }
 
 
@@ -128,7 +124,9 @@ public abstract class GenericViewFragment extends Fragment {
         }
 
         //If the user needs to be prompted about OpenStreetMap settings, build some form elements for it.
-        if(preferenceHelper.isAutoSendEnabled() && preferenceHelper.isOsmAutoSendEnabled()){
+        if(preferenceHelper.isAutoSendEnabled()
+                && preferenceHelper.isOsmAutoSendEnabled()
+                && FileSenderFactory.getOsmSender().isAutoSendAvailable()){
             formElements.add(Hint.plain(R.string.osm_setup_title));
             formElements.addAll(Dialogs.getOpenStreetMapFormElementsForDialog(preferenceHelper));
         }

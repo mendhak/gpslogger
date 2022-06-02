@@ -174,11 +174,11 @@
     <string name="menu_upload">アップロード</string>
     <string name="autoemail_from">From アドレス</string>
     <string name="autoemail_from_summary">一部のメール プロバイダーはFromアドレスを必要とします。必要な場合のみこの設定を行ってください。</string>
-    <string name="gdocs_clearauthorization_summary">Googleドライブの設定を破棄します。恒久的なアクセスを取り消すには、Googleアカウントの設定で行います。</string>
-    <string name="gdocs_setup_title">Google ドライブ</string>
-    <string name="gdocs_test_summary">Google ドライブにテストファイルをアップロードします。</string>
-    <string name="gdocs_test_title">テスト アップロード</string>
-    <string name="gdocs_testupload_success">アップロードしました。Google ドキュメントにファイルができていることを確認してください。</string>
+    <string name="google_drive_clearauthorization_summary">Googleドライブの設定を破棄します。恒久的なアクセスを取り消すには、Googleアカウントの設定で行います。</string>
+    <string name="google_drive_setup_title">Google ドライブ</string>
+    <string name="google_drive_test_summary">Google ドライブにテストファイルをアップロードします。</string>
+    <string name="google_drive_test_title">テスト アップロード</string>
+    <string name="google_drive_testupload_success">アップロードしました。Google ドキュメントにファイルができていることを確認してください。</string>
     <string name="autoemail_sendto_csv">カンマで区切られた電子メール アドレス</string>
     <string name="autosend_enabled">自動送信を許可</string>
     <string name="autosend_enabled_summary">自動送信を有効にします</string>

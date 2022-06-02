@@ -19,7 +19,7 @@ Bug-uri, solicitări de caracteristici, întrebări - vă rugăm să le trimite�
 
 *** Note:
 
-GPSLogger nu este un înlocuitor al aplicației MyTracks.  Aplicația MyTracks este destinată unei utilizări scurte (având o mulțime de caracteristici care rulează simultan), GPSLogger este realizat să poată funcționa mult timp, fără un consum mare din baterie.
+GPSLogger nu este un înlocuitor al aplicației OpenTracks.  Aplicația OpenTracks este destinată unei utilizări scurte (având o mulțime de caracteristici care rulează simultan), GPSLogger este realizat să poată funcționa mult timp, fără un consum mare din baterie.
 
 O conexiune de date este utilizată de această aplicație doar dacă utilizați funcția de trimitere automată prin e-mail sau la OpenStreetMap/Dropbox.
 

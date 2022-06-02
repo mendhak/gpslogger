@@ -165,10 +165,10 @@
     <string name="menu_upload">Fazer upload</string>
     <string name="autoemail_from">Do endereço</string>
     <string name="autoemail_from_summary">Alguns provedores de e-mail exigem um endereço. Use isso somente se você precisar dele.     </string>
-    <string name="gdocs_clearauthorization_summary">Ignorar as configurações locais do Google Drive. Para cancelar o acesso de forma permanente, utilize as configurações da conta do Google</string>
-    <string name="gdocs_test_summary">Carregar um arquivo de teste no Google Drive</string>
-    <string name="gdocs_test_title">Upload de teste</string>
-    <string name="gdocs_testupload_success">Enviado. Por favor, verifique seus documentos do Google.</string>
+    <string name="google_drive_clearauthorization_summary">Ignorar as configurações locais do Google Drive. Para cancelar o acesso de forma permanente, utilize as configurações da conta do Google</string>
+    <string name="google_drive_test_summary">Carregar um arquivo de teste no Google Drive</string>
+    <string name="google_drive_test_title">Upload de teste</string>
+    <string name="google_drive_testupload_success">Enviado. Por favor, verifique seus documentos do Google.</string>
     <string name="autoemail_sendto_csv">Endereços de e-mail separados por vírgula</string>
     <string name="autosend_enabled">Permitir o envio automático</string>
     <string name="autosend_enabled_summary">Permite enviar arquivos para vários destinos</string>

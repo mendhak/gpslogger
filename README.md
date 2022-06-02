@@ -1,7 +1,7 @@
 GPSLogger  [![githubactions](https://github.com/mendhak/gpslogger/workflows/Android%20CI/badge.svg)](https://github.com/mendhak/gpslogger/actions) [![pgp](assets/pgp.png)](https://keybase.io/mendhak) [![Weblate](https://hosted.weblate.org/widgets/gpslogger/-/android/svg-badge.svg)](https://hosted.weblate.org/engage/gpslogger/)
 =========
 
-GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, OpenStreetMap, Dropbox, Email). This app aims to be as battery efficient as possible.
+GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, OpenStreetMap, Google Drive, Dropbox, Email). This app aims to be as battery efficient as possible.
 
 [Read about GPSLogger's features here](https://gpslogger.app/)
 
@@ -137,6 +137,22 @@ Replace the Dropbox app key to your AndroidManifest.xml file
 
     <!-- Change this to be db- followed by your app key -->
     <data android:scheme="db-12341234"/>
+
+### Google Drive Setup (optional)
+
+Sign up to [Google Cloud Platform](https://console.cloud.google.com/).  Create a new project. 
+
+Under APIs and Services, [enable the Google Drive API](https://console.cloud.google.com/apis/library/drive.googleapis.com).  
+Next, go to the [Oauth Consent Screen](https://console.cloud.google.com/apis/credentials/consent), going through the steps until you reach scopes. 
+Add the `https://www.googleapis.com/auth/drive.file` scope.  
+
+![scopes](assets/googledrive_scope.png)
+
+[Create some OAuth credentials](https://console.cloud.google.com/apis/credentials), of type Android.  
+Under package name, use `com.mendhak.gpslogger`. For the SHA-1 Certificate fingerprint, get it using the `keytool -keystore ~/.android/debug.keystore -list -v` command.
+
+![oauth](assets/googledrive_oauthclient.png)
+
 
 Overview
 ======

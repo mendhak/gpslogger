@@ -112,6 +112,22 @@ public class Session {
     }
 
     /**
+     * @return whether location services are unavailable
+     */
+    public boolean isLocationServiceUnavailable() {
+        return Boolean.valueOf(get("isLocationServiceUnavailable", "false"));
+    }
+
+    /**
+     * @param unavailable whether location services are unavailable.
+     */
+    public void setLocationServiceUnavailable(boolean unavailable) {
+        set("isLocationServiceUnavailable", String.valueOf(unavailable));
+    }
+
+
+
+    /**
      * @return the isUsingGps
      */
     public boolean isUsingGps() {

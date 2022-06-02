@@ -170,10 +170,10 @@
     <string name="menu_upload">Tải lên</string>
     <string name="autoemail_from">Từ địa chỉ</string>
     <string name="autoemail_from_summary">Một số nhà cung cấp email yêu cầu địa chỉ gửi. Sử dụng điều này chỉ khi bạn cần nó.    </string>
-    <string name="gdocs_clearauthorization_summary">Xóa cài đặt Google Drive cục bộ. Để vĩnh viễn thu hồi quyền truy cập, hãy vào cài đặt Tài khoản Google</string>
-    <string name="gdocs_test_summary">Tải một file test lên Google Drive</string>
-    <string name="gdocs_test_title">Kiểm tra tải lên</string>
-    <string name="gdocs_testupload_success">Đã tải lên. Hãy kiểm tra Google Documents.</string>
+    <string name="google_drive_clearauthorization_summary">Xóa cài đặt Google Drive cục bộ. Để vĩnh viễn thu hồi quyền truy cập, hãy vào cài đặt Tài khoản Google</string>
+    <string name="google_drive_test_summary">Tải một file test lên Google Drive</string>
+    <string name="google_drive_test_title">Kiểm tra tải lên</string>
+    <string name="google_drive_testupload_success">Đã tải lên. Hãy kiểm tra Google Documents.</string>
     <string name="autoemail_sendto_csv">Dùng dấu phẩy ngăn cách các địa chỉ email</string>
     <string name="autosend_enabled">Cho phép tự động gửi</string>
     <string name="autosend_enabled_summary">Cho phép file tới nhiều địa chỉ</string>

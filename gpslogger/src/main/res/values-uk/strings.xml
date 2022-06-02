@@ -178,11 +178,11 @@
     <string name="menu_upload">Надіслати</string>
     <string name="autoemail_from">За адресою</string>
     <string name="autoemail_from_summary">Деякі постачальники послуг електронної пошти вимагають адреси відправника. Використовуйте цей параметр лише, якщо він вам потрібний.</string>
-    <string name="gdocs_clearauthorization_summary">Очистити налаштування Google Drive. Щоб повністю скасувати доступ, перейдіть до налаштувань вашого облікового запису Google</string>
-    <string name="gdocs_setup_title">Диск Google</string>
-    <string name="gdocs_test_summary">Завантажити тестовий файл на Диск Google</string>
-    <string name="gdocs_test_title">Тестове надсилання</string>
-    <string name="gdocs_testupload_success">Надіслано. Будь ласка, перевірте ваші Документи Google на наявність нового файлу.</string>
+    <string name="google_drive_clearauthorization_summary">Очистити налаштування Google Drive. Щоб повністю скасувати доступ, перейдіть до налаштувань вашого облікового запису Google</string>
+    <string name="google_drive_setup_title">Диск Google</string>
+    <string name="google_drive_test_summary">Завантажити тестовий файл на Диск Google</string>
+    <string name="google_drive_test_title">Тестове надсилання</string>
+    <string name="google_drive_testupload_success">Надіслано. Будь ласка, перевірте ваші Документи Google на наявність нового файлу.</string>
     <string name="autoemail_sendto_csv">Адреси, відокремлені комами</string>
     <string name="autosend_enabled">Дозволити автонадсилання</string>
     <string name="autosend_enabled_summary">Дозволяє надсилання файлів до різних отримувачів</string>

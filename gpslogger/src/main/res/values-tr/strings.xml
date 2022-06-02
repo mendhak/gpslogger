@@ -185,11 +185,11 @@
     <string name="menu_upload">Yükleme</string>
     <string name="autoemail_from">Gönderen adresleri</string>
     <string name="autoemail_from_summary">Bazı e-posta sağlayıcıları gönderici adresi gerektirir. Yalnızca gerek duyulursa bunu kullanın.    </string>
-    <string name="gdocs_clearauthorization_summary">Yerel Google Drive ayarları unutuyor. Kalıcı erişimi iptali için Google Hesap Ayarları\'na gidin</string>
-    <string name="gdocs_setup_title">Google Drive</string>
-    <string name="gdocs_test_summary">Google Drive\'a bir sınama dosyası yükle</string>
-    <string name="gdocs_test_title">Yüklemeyi sına</string>
-    <string name="gdocs_testupload_success">Yüklendi. Lütfen yeni dosya için Google Dökümanları kontrol edin.</string>
+    <string name="google_drive_clearauthorization_summary">Yerel Google Drive ayarları unutuyor. Kalıcı erişimi iptali için Google Hesap Ayarları\'na gidin</string>
+    <string name="google_drive_setup_title">Google Drive</string>
+    <string name="google_drive_test_summary">Google Drive\'a bir sınama dosyası yükle</string>
+    <string name="google_drive_test_title">Yüklemeyi sına</string>
+    <string name="google_drive_testupload_success">Yüklendi. Lütfen yeni dosya için Google Dökümanları kontrol edin.</string>
     <string name="autoemail_sendto_csv">Virgülle ayrılmış eposta adresleri</string>
     <string name="autosend_enabled">Otomatik göndermeye izin ver</string>
     <string name="autosend_enabled_summary">Dosyaları çeşitli hedeflere göndermeye izin verir</string>

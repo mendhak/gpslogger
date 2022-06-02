@@ -170,11 +170,11 @@
     <string name="menu_upload">업로드</string>
     <string name="autoemail_from">주소</string>
     <string name="autoemail_from_summary">몇몇 이메일 제공자는 발송 주소를 요구합니다. 필요할 때만 사용하세요.    </string>
-    <string name="gdocs_clearauthorization_summary">로컬 Google Drive 설정이 상실되었습니다. 접근 권한을 영구적으로 철회하려면, Google 계정 설정에서 작업하셔야 합니다.</string>
-    <string name="gdocs_setup_title">Google 드라이브</string>
-    <string name="gdocs_test_summary">Google 드라이브에 시험용 파일을 전송합니다</string>
-    <string name="gdocs_test_title">업로드 테스트</string>
-    <string name="gdocs_testupload_success">전송되었습니다. Google 드라이브의 새로운 문서목록을 확인해 보세요.</string>
+    <string name="google_drive_clearauthorization_summary">로컬 Google Drive 설정이 상실되었습니다. 접근 권한을 영구적으로 철회하려면, Google 계정 설정에서 작업하셔야 합니다.</string>
+    <string name="google_drive_setup_title">Google 드라이브</string>
+    <string name="google_drive_test_summary">Google 드라이브에 시험용 파일을 전송합니다</string>
+    <string name="google_drive_test_title">업로드 테스트</string>
+    <string name="google_drive_testupload_success">전송되었습니다. Google 드라이브의 새로운 문서목록을 확인해 보세요.</string>
     <string name="autoemail_sendto_csv">콤마는 이메일 주소를 구분합니다</string>
     <string name="autosend_enabled">자동 전송 허용</string>
     <string name="autosend_enabled_summary">다중 서버에 파일 전송하기</string>

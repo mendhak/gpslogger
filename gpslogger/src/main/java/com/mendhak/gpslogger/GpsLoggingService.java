@@ -457,6 +457,7 @@ public class GpsLoggingService extends Service  {
         session.setCurrentLocationInfo(null);
         session.setSinglePointMode(false);
         stopForeground(true);
+        stopSelf();
 
         removeNotification();
         stopAlarm();
@@ -651,9 +652,12 @@ public class GpsLoggingService extends Service  {
             LOG.error("No provider available!");
             session.setUsingGps(false);
             LOG.error(getString(R.string.gpsprovider_unavailable));
-            stopLogging();
-            setLocationServiceUnavailable();
+            // Let the app check again, whether location services have returned, after the absolute-timer time has passed.
+            startAbsoluteTimer();
+            setLocationServiceUnavailable(true);
             return;
+        } else {
+            setLocationServiceUnavailable(false);
         }
 
         if(!preferenceHelper.shouldLogNetworkLocations() && !preferenceHelper.shouldLogSatelliteLocations() && !preferenceHelper.shouldLogPassiveLocations()){
@@ -779,7 +783,8 @@ public class GpsLoggingService extends Service  {
 
 
 
-    void setLocationServiceUnavailable(){
+    void setLocationServiceUnavailable(boolean unavailable){
+        session.setLocationServiceUnavailable(unavailable);
         EventBus.getDefault().post(new ServiceEvents.LocationServicesUnavailable());
     }
 
@@ -992,7 +997,6 @@ public class GpsLoggingService extends Service  {
         nextPointAlarmManager.cancel(pi);
     }
 
-    @TargetApi(23)
     private void setAlarmForNextPoint() {
         LOG.debug("Set alarm for " + preferenceHelper.getMinimumLoggingInterval() + " seconds");
 
@@ -1000,15 +1004,15 @@ public class GpsLoggingService extends Service  {
         i.putExtra(IntentConstants.GET_NEXT_POINT, true);
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
         nextPointAlarmManager.cancel(pi);
-
-        if(Systems.isDozing(this)){
-            //Only invoked once per 15 minutes in doze mode
-            LOG.warn("Device is dozing, using infrequent alarm");
-            nextPointAlarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            nextPointAlarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
         }
         else {
-            nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
+            nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
         }
+
     }
 
 

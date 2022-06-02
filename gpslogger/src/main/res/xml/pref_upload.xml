@@ -43,45 +43,50 @@
         android:title="@string/autosend_targets_category"
         app:iconSpaceReserved="false">
 
-        <Preference
-            android:key="customurl_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="autocustomurl_enabled"
             android:title="@string/log_customurl_setup_title"
-            app:iconSpaceReserved="false"/>
+            app:icon="@drawable/customurlsender"/>
 
-        <Preference
-            android:key="dropbox_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="dropbox_enabled"
             android:title="@string/dropbox_setup_title"
-            app:iconSpaceReserved="false" />
+            app:icon="@drawable/dropbox" />
 
-        <Preference
-            android:key="sftp_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="google_drive_enabled"
+            android:title="@string/google_drive_setup_title"
+            android:icon="@drawable/googledrive"/>
+
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="sftp_enabled"
             android:title="@string/sftp_setup_title"
-            app:iconSpaceReserved="false" />
+            app:icon="@drawable/sftp" />
 
-        <Preference
-            android:key="opengts_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="autoopengts_enabled"
             android:title="@string/opengts_setup_title"
-            app:iconSpaceReserved="false" />
+            app:icon="@drawable/opengts" />
 
-        <Preference
-            android:key="osm_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="osm_enabled"
             android:title="@string/osm_setup_title"
-            app:iconSpaceReserved="false" />
+            app:icon="@drawable/openstreetmap" />
 
-        <Preference
-            android:key="autoemail_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="autoemail_enabled"
             android:title="@string/autoemail_title"
-            app:iconSpaceReserved="false" />
+            app:icon="@drawable/email" />
 
-        <Preference
-            android:key="owncloud_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="owncloud_enabled"
             android:title="@string/owncloud_setup_title"
-            app:iconSpaceReserved="false" />
+            app:icon="@drawable/owncloud" />
 
-        <Preference
-            android:key="autoftp_setup"
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="autoftp_enabled"
             android:title="@string/autoftp_setup_title"
-            app:iconSpaceReserved="false" />
+            app:icon="@drawable/ftp" />
 
     </PreferenceCategory>
 

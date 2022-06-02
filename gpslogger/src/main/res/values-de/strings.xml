@@ -186,11 +186,11 @@
     <string name="menu_upload">Hochladen</string>
     <string name="autoemail_from">Absenderadresse</string>
     <string name="autoemail_from_summary">Einige Email-Anbieter verlangen eine Absenderadresse. Verwenden Sie diese nur, wenn es erforderlich ist.    </string>
-    <string name="gdocs_clearauthorization_summary">Lokale Google Drive-Einstellungen wurden entfernt. Um den Zugriff dauerhaft zu widerrufen, müssen die Google-Kontoeinstellungen angepasst werden</string>
-    <string name="gdocs_setup_title">Google Drive</string>
-    <string name="gdocs_test_summary">Testdatei auf Google Drive hochladen</string>
-    <string name="gdocs_test_title">Hochladen testen</string>
-    <string name="gdocs_testupload_success">Hochgeladen. Bitte prüfen Sie Ihre Google-Dokumente auf eine neue Datei.</string>
+    <string name="google_drive_clearauthorization_summary">Lokale Google Drive-Einstellungen wurden entfernt. Um den Zugriff dauerhaft zu widerrufen, müssen die Google-Kontoeinstellungen angepasst werden</string>
+    <string name="google_drive_setup_title">Google Drive</string>
+    <string name="google_drive_test_summary">Testdatei auf Google Drive hochladen</string>
+    <string name="google_drive_test_title">Hochladen testen</string>
+    <string name="google_drive_testupload_success">Hochgeladen. Bitte prüfen Sie Ihre Google-Dokumente auf eine neue Datei.</string>
     <string name="autoemail_sendto_csv">Einzelne E-Mail-Adressen durch Kommata trennen</string>
     <string name="autosend_enabled">Automatisches Senden erlauben</string>
     <string name="autosend_enabled_summary">Ermöglicht das Senden der Dateien an verschiedene Ziele</string>

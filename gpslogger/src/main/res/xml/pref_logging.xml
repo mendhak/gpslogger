@@ -24,7 +24,7 @@
         android:title="@string/log_kml_title"
         app:iconSpaceReserved="false" />
 
-    <SwitchPreferenceCompat
+    <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
         android:key="log_customurl_enabled"
         android:summary="@string/log_customurl_summary"
         android:title="@string/log_customurl_title"

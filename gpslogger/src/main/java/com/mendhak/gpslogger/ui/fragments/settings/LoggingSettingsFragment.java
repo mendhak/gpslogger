@@ -26,8 +26,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.text.Html;
+import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
@@ -41,6 +43,8 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.Dialogs;
+import com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference;
+
 import org.slf4j.Logger;
 import java.io.File;
 import java.util.ArrayList;
@@ -108,8 +112,22 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
             findPreference(PreferenceNames.CUSTOM_FILE_NAME).setSummary(preferenceHelper.getCustomFileName());
         }
 
-        findPreference(PreferenceNames.LOG_TO_URL).setOnPreferenceChangeListener(this);
-        findPreference(PreferenceNames.LOG_TO_OPENGTS).setOnPreferenceChangeListener(this);
+        ((SwitchPlusClickPreference)findPreference(PreferenceNames.LOG_TO_URL))
+                .setSwitchClickListener(new SwitchPlusClickPreference.SwitchPlusClickListener() {
+
+                    @Override
+                    public void onCheckedChanged(SwitchCompat buttonView, boolean isChecked) {
+                        // No need to do anything, the value gets propagated.
+                    }
+
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent targetActivity = new Intent(getActivity(), MainPreferenceActivity.class);
+                        targetActivity.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL);
+                        startActivity(targetActivity);
+                    }
+                });
 
         findPreference(PreferenceNames.LOGGING_WRITE_TIME_WITH_OFFSET).setOnPreferenceChangeListener(this);
         setPreferenceTimeZoneOffsetSummary(preferenceHelper.shouldWriteTimeWithOffset());
@@ -291,19 +309,6 @@ public class LoggingSettingsFragment extends PreferenceFragmentCompat
                 targetActivity.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.OPENGTS);
                 startActivity(targetActivity);
             }
-
-            return true;
-        }
-
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_URL) ){
-
-            // Bug in SwitchPreference: http://stackoverflow.com/questions/19503931/switchpreferences-calls-multiple-times-the-onpreferencechange-method
-            // Check if isChecked == false && newValue == true
-            if(!((SwitchPreferenceCompat) preference).isChecked() && (Boolean)newValue  ) {
-                Intent targetActivity = new Intent(getActivity(), MainPreferenceActivity.class);
-                targetActivity.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL);
-                startActivity(targetActivity);
-           }
 
             return true;
         }

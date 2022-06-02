@@ -19,7 +19,7 @@ Bugi-ilmoitukset, ominaisuusehdotukset, kysymykset - lähetä ne tänne github.c
 
 ***Huomiot:
 
-GPSLogger ei ole MyTracksin korvaaja.  MyTracks on tarkoitettu lyhyeen käyttöön (koska siinä on paljon akkuakäyttäviä toimintoja), GPSLogger on tarkoitettu kestämään pitkään (viemään vähän akkua).
+GPSLogger ei ole OpenTracksin korvaaja.  OpenTracks on tarkoitettu lyhyeen käyttöön (koska siinä on paljon akkuakäyttäviä toimintoja), GPSLogger on tarkoitettu kestämään pitkään (viemään vähän akkua).
 
 Tämä sovellus käyttää datayhteyttä ainoastaan silloin, kun sähköposti, OpenStreetMap tai Dropbox ominaisuus on käytössä.
 

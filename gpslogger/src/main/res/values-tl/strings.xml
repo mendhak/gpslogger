@@ -167,9 +167,9 @@
     <string name="owncloud_testing">Suriin ang ownCloud upload</string>
     <string name="autoemail_from">Pinagmulang address</string>
     <string name="autoemail_from_summary">Mayroong mga tagapagtustos ng email na kumakailangan ng pinagmulang address. Gamitin lamang kung kakailanganin     </string>
-    <string name="gdocs_clearauthorization_summary">Kalimotan ang lokal Google Drive setting. Upang mapanatili mapawalang bisa ang access, pumunta lang sa Google Account settings</string>
-    <string name="gdocs_test_summary">Upload ang test file sa Google Drive</string>
-    <string name="gdocs_testupload_success">Uploaded. Paki suri kung may panibagong file sa Google Documents.</string>
+    <string name="google_drive_clearauthorization_summary">Kalimotan ang lokal Google Drive setting. Upang mapanatili mapawalang bisa ang access, pumunta lang sa Google Account settings</string>
+    <string name="google_drive_test_summary">Upload ang test file sa Google Drive</string>
+    <string name="google_drive_testupload_success">Uploaded. Paki suri kung may panibagong file sa Google Documents.</string>
     <string name="autoemail_sendto_csv">Hiwalay ang comma sa email addresses</string>
     <string name="autosend_enabled">Ipahintulot ang awtomatikong pagpadala</string>
     <string name="autosend_enabled_summary">Pahintulotin ang pagpapadala ng mga files sa karamihan</string>

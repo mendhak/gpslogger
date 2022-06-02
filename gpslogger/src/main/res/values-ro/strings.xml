@@ -164,10 +164,10 @@
     <string name="menu_upload">Încărcaţi</string>
     <string name="autoemail_from">De la adresa</string>
     <string name="autoemail_from_summary">Unii furnizori de e-mail necesită o adresă from. Folositi aceasta numai în cazul în care aveţi nevoie de ea.</string>
-    <string name="gdocs_clearauthorization_summary">Șterge setările locale Google Drive. Pentru a revoca permanent accesul, mergi la setările contului Google</string>
-    <string name="gdocs_test_summary">Încărcați un fișier de test în Google Drive</string>
-    <string name="gdocs_test_title">Test de încărcare fisier</string>
-    <string name="gdocs_testupload_success">Fisier incărcat. Vă rugăm să verificaţi documentele Google pentru un fişier nou.</string>
+    <string name="google_drive_clearauthorization_summary">Șterge setările locale Google Drive. Pentru a revoca permanent accesul, mergi la setările contului Google</string>
+    <string name="google_drive_test_summary">Încărcați un fișier de test în Google Drive</string>
+    <string name="google_drive_test_title">Test de încărcare fisier</string>
+    <string name="google_drive_testupload_success">Fisier incărcat. Vă rugăm să verificaţi documentele Google pentru un fişier nou.</string>
     <string name="autoemail_sendto_csv">Adrese de email separate prin virgulă</string>
     <string name="autosend_enabled">Permite trimitere automată</string>
     <string name="autosend_enabled_summary">Permite trimiterea fişierelor la diverse e-mails</string>

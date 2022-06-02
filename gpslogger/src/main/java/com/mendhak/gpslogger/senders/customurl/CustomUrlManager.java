@@ -41,14 +41,18 @@ public class CustomUrlManager extends FileSender {
 
     @Override
     public void uploadFile(List<File> files) {
+        boolean foundFileToSend = false;
         for (File f : files) {
             if (f.getName().endsWith(".csv")) {
+                foundFileToSend = true;
                 List<SerializableLocation> locations = getLocationsFromCSV(f);
                 LOG.debug(locations.size() + " points were read from " + f.getName());
-
                 sendLocations(locations.toArray(new SerializableLocation[locations.size()]));
-
             }
+        }
+
+        if(!foundFileToSend){
+            LOG.warn("Custom URL auto sender requires a CSV file to be present.");
         }
     }
 

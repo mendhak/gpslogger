@@ -166,10 +166,10 @@
     <string name="menu_upload">Unggah</string>
     <string name="autoemail_from">Dari alamat</string>
     <string name="autoemail_from_summary">Beberapa penyedia email menentukan dari alamat. Gunakan ini hanya jika Anda membutuhkannya.    </string>
-    <string name="gdocs_clearauthorization_summary">Lupa pengaturan Google Drive lokal. Untuk secara permanen mencabut akses, pergi ke setelan akun Google</string>
-    <string name="gdocs_test_summary">Unggah file tes ke Google Drive</string>
-    <string name="gdocs_test_title">Tes unggah</string>
-    <string name="gdocs_testupload_success">Terunggah. Silakan periksa dokumen Google Anda untuk file baru.</string>
+    <string name="google_drive_clearauthorization_summary">Lupa pengaturan Google Drive lokal. Untuk secara permanen mencabut akses, pergi ke setelan akun Google</string>
+    <string name="google_drive_test_summary">Unggah file tes ke Google Drive</string>
+    <string name="google_drive_test_title">Tes unggah</string>
+    <string name="google_drive_testupload_success">Terunggah. Silakan periksa dokumen Google Anda untuk file baru.</string>
     <string name="autoemail_sendto_csv">Koma memisahkan Alamat email</string>
     <string name="autosend_enabled">Mengijinkan mengirim otomatis</string>
     <string name="autosend_enabled_summary">Mengijinkan mengirim file ke berbagai target</string>

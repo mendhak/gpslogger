@@ -181,11 +181,11 @@
     <string name="menu_upload">Загрузить</string>
     <string name="autoemail_from">Адрес отправителя</string>
     <string name="autoemail_from_summary">Некоторые поставщики услуг электронной почты требуют адреса отправителя. Используйте эту опцию только если вы в ней нуждаетесь.     </string>
-    <string name="gdocs_clearauthorization_summary">Очистить настройки Google Drive. Чтобы полностью отменить доступ, перейдите в настройки Google аккаунта</string>
-    <string name="gdocs_setup_title">Диск Google</string>
-    <string name="gdocs_test_summary">Загрузить тестовый файл на Google-диск</string>
-    <string name="gdocs_test_title">Испытать загрузку файла</string>
-    <string name="gdocs_testupload_success">Загрузка завершена. Проверте наличее файла в ваших Google Documents.</string>
+    <string name="google_drive_clearauthorization_summary">Очистить настройки Google Drive. Чтобы полностью отменить доступ, перейдите в настройки Google аккаунта</string>
+    <string name="google_drive_setup_title">Диск Google</string>
+    <string name="google_drive_test_summary">Загрузить тестовый файл на Google-диск</string>
+    <string name="google_drive_test_title">Испытать загрузку файла</string>
+    <string name="google_drive_testupload_success">Загрузка завершена. Проверте наличее файла в ваших Google Documents.</string>
     <string name="autoemail_sendto_csv">Адреса электронной почты разделённые запятыми</string>
     <string name="autosend_enabled">Разрешить авто отправку</string>
     <string name="autosend_enabled_summary">Позволяет отправлять файлы в разные места</string>

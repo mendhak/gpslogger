@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        android:key="google_drive_enabled"
+        android:title="@string/autosend_enabled"
+        app:iconSpaceReserved="false" />
+
+    <Preference android:key="google_drive_resetauth"
+        android:title="@string/osm_lbl_authorize"
+        app:iconSpaceReserved="false" />
+
+    <Preference android:key="google_drive_folder_path" android:title="@string/google_drive_folder_path"
+        android:defaultValue="GPSLogger for Android"
+        app:iconSpaceReserved="false" />
+
+    <Preference android:key="google_drive_test" android:summary="@string/google_drive_test_summary"
+        android:title="@string/google_drive_test_title"
+        app:iconSpaceReserved="false" />
+
+
+</PreferenceScreen>

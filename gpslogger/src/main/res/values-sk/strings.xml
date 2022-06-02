@@ -203,11 +203,11 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
     <string name="autoemail_from">Z adresy</string>
     <string name="autoemail_from_summary">Niektorí poskytovatelia služieb elektronickej pošty vyžadujú adresy odosielateľa. Použiť ju však iba vtedy, ak je to potrebné.
     </string>
-    <string name="gdocs_clearauthorization_summary">Vymazať lokálne nastavenia Google Drive. Na permanentné odmietnutie prístupu prejdite na nastavenia účtu Google</string>
-    <string name="gdocs_setup_title">Google Disk</string>
-    <string name="gdocs_test_summary">Odoslať testovací súbor do služby Google Drive</string>
-    <string name="gdocs_test_title">Test odosielania</string>
-    <string name="gdocs_testupload_success">Odoslané. Skontrolujte či služba Google Documents obsahuje nový súbor.</string>
+    <string name="google_drive_clearauthorization_summary">Vymazať lokálne nastavenia Google Drive. Na permanentné odmietnutie prístupu prejdite na nastavenia účtu Google</string>
+    <string name="google_drive_setup_title">Google Disk</string>
+    <string name="google_drive_test_summary">Odoslať testovací súbor do služby Google Drive</string>
+    <string name="google_drive_test_title">Test odosielania</string>
+    <string name="google_drive_testupload_success">Odoslané. Skontrolujte či služba Google Documents obsahuje nový súbor.</string>
     <string name="autoemail_sendto_csv">E-mailové adresy oddelené čiarkou</string>
     <string name="autosend_enabled">Povoliť autom. odosielanie</string>
     <string name="autosend_enabled_summary">Umožňuje posielať súbory rôznym adresátom</string>

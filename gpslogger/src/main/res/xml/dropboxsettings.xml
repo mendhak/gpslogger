@@ -14,7 +14,7 @@
 
     <Preference
         android:key="dropbox_test_upload"
-        android:title="@string/gdocs_test_title"
+        android:title="@string/google_drive_test_title"
         app:iconSpaceReserved="false" />
 
 </PreferenceScreen>

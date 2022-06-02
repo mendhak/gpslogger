@@ -47,7 +47,7 @@
 <p><strong>Profiles</strong> - Group preferences under profile names, such as default, nighttime, trekking, etc.</p>
 <p><strong>General options</strong> - Startup, imperial, debug file and version info</p>
 <p><strong>Logging details</strong> - File formats, folder, new file creation, frequency, accuracy</p>
-<p><strong>Auto send, email and upload</strong> - Settings for various destinations such as Custom URL, SFTP, OpenStreetMap, FTP, Dropbox etc</p>
+<p><strong>Auto send, email and upload</strong> - Settings for various destinations such as Custom URL, SFTP, OpenStreetMap, FTP, Dropbox, Google Drive, etc</p>
 
 </div></section>
 
@@ -183,8 +183,8 @@
 
 </div></section>
 
-<section><div class='lead'><h2><a name="howisthisdifferentfromotherloggingapps" href="#howisthisdifferentfromotherloggingapps">How is this different from other logging apps?</a></h2><p>It&#39;s meant to be more battery efficient. A lot of other apps, such as MyTracks, usually go with the assumption that you have a data connection available and your routes won&#39;t be very long. They use CPU wakelocks and log points extremely frequently with high accuracy. The aim of GPSLogger is to log points and stay quiet.  </p>
-<p>To put it another way, MyTracks or similar are better suited for runs; GPSLogger is suited for days out, hiking, photography.</p>
+<section><div class='lead'><h2><a name="howisthisdifferentfromotherloggingapps" href="#howisthisdifferentfromotherloggingapps">How is this different from other logging apps?</a></h2><p>It&#39;s meant to be more battery efficient. A lot of other apps, such as <a href="https://github.com/OpenTracksApp/OpenTracks">OpenTracks</a>, usually go with the assumption that you have a data connection available and your routes won&#39;t be very long. They use CPU wakelocks and log points extremely frequently with high accuracy. The aim of GPSLogger is to log points and stay quiet.  </p>
+<p>To put it another way, OpenTracks or similar are better suited for runs; GPSLogger is suited for days out, hiking, photography.</p>
 
 </div></section>
 
@@ -337,9 +337,9 @@ sendBroadcast(i);
 
 </div></section>
 
-<section><div class='lead'><h2><a name="whathappenedtothegoogledrivefeature" href="#whathappenedtothegoogledrivefeature">What happened to the Google Drive feature?</a></h2><h2><a name="whathappenedtotheactivityrecognitionfeature" href="#whathappenedtotheactivityrecognitionfeature">What happened to the Activity Recognition feature?</a></h2><p>The app has been <a href="https://github.com/mendhak/gpslogger/issues/849">removed from Google Play</a> and has <a href="https://f-droid.org/en/packages/com.mendhak.gpslogger/">moved to F-Droid</a>.  As part of <a href="https://f-droid.org/en/docs/Inclusion_Policy/">F-Droid&#39;s Inclusion Policy</a>, proprietary libraries are not allowed, only open source libraries are allowed.  This meant that the Activity Recognition feature and the Google Drive feature had to be removed from the app.    </p>
-<p>While it may be possible to reimplement a Google Drive upload in the future, the Activity Recognition is unlikely to ever happen, unless an open source library for it gets created.  </p>
-<p>There may still be references to these features in screenshots, FAQ and dialogs.  Please ignore those for now. </p>
+<section><div class='lead'><h2><a name="whyhasgpsloggerbeenremovedfromtheplaystore" href="#whyhasgpsloggerbeenremovedfromtheplaystore">Why has GPSLogger been removed from the Play Store?</a></h2><h2><a name="whathappenedtothegoogledrivefeature" href="#whathappenedtothegoogledrivefeature">What happened to the Google Drive feature?</a></h2><h2><a name="whathappenedtotheactivityrecognitionfeature" href="#whathappenedtotheactivityrecognitionfeature">What happened to the Activity Recognition feature?</a></h2><p>The app has been <a href="https://github.com/mendhak/gpslogger/issues/849">removed from Google Play</a> and has <a href="https://f-droid.org/en/packages/com.mendhak.gpslogger/">moved to F-Droid</a>.  As part of <a href="https://f-droid.org/en/docs/Inclusion_Policy/">F-Droid&#39;s Inclusion Policy</a>, proprietary libraries are not allowed, only open source libraries are allowed.  This meant that the Activity Recognition feature and the Google Drive feature had to be removed from the app.    </p>
+<p>In May 2022 the Google Drive feature has been reimplemented in the app, but the Activity Recognition is unlikely to ever happen, unless an open source library for it gets created.  </p>
+<p>There may still be references to Activity Recognition in screenshots, FAQ and dialogs.  Please ignore those for now. </p>
 
 </div></section>
 
@@ -362,7 +362,7 @@ sendBroadcast(i);
 </div></section>
 
 <section><div class='lead'><h2><a name="features" href="#features">Features</a></h2><blockquote>
-<p>Can log to <em>GPX, KML, CSV, NMEA and CSV</em> formats. Can also log to a custom URL or just the screen.<br>Logs GPX points as tracks and track segments<br>Also logs <em>speed, direction and altitude</em> if available<br><em>Add a description</em> to a point using the annotate menu, gets added as a waypoint<br>Configure <em>time intervals</em> between points<br>Configure a <em>minimum distance</em> filter between points or an accuracy filter<br><em>Notification</em> icon with coordinates and quick actions<br>Uses cell towers for location when GPS is disabled<br>Selectively choose network, gps and passive <em>location providers</em><br>Automatically <em>upload or email</em> the file at set intervals to destinations such as <em>Email, FTP, SFTP, Dropbox, Custom URL, OpenStreetMap, ownCloud, OpenGTS</em>.<br>Share location or log files via SMS/Email (and other apps such as Facebook or Twitter depending on what you&#39;ve got installed)<br>Start logging on phone bootup<br>Invoke operations from Tasker or other automation apps.<br>You can give it a <em>preset file</em> with your own values for distribution<br><em>Multiple profiles</em> with different settings are possible  </p>
+<p>Can log to <em>GPX, KML, CSV, NMEA and CSV</em> formats. Can also log to a custom URL or just the screen.<br>Logs GPX points as tracks and track segments<br>Also logs <em>speed, direction and altitude</em> if available<br><em>Add a description</em> to a point using the annotate menu, gets added as a waypoint<br>Configure <em>time intervals</em> between points<br>Configure a <em>minimum distance</em> filter between points or an accuracy filter<br><em>Notification</em> icon with coordinates and quick actions<br>Uses cell towers for location when GPS is disabled<br>Selectively choose network, gps and passive <em>location providers</em><br>Automatically <em>upload or email</em> the file at set intervals to destinations such as <em>Email, FTP, SFTP, Dropbox, Google Drive, Custom URL, OpenStreetMap, ownCloud, OpenGTS</em>.<br>Share location or log files via SMS/Email (and other apps such as Facebook or Twitter depending on what you&#39;ve got installed)<br>Start logging on phone bootup<br>Invoke operations from Tasker or other automation apps.<br>You can give it a <em>preset file</em> with your own values for distribution<br><em>Multiple profiles</em> with different settings are possible  </p>
 </blockquote>
 
 </div></section>
@@ -414,6 +414,12 @@ sendBroadcast(i);
 </div></section>
 
 <section><div class='lead'><p><img src="images/17b.png" alt="17b"></p>
+
+</div></section>
+
+<section><div class='lead'><h3><a name="googledrive" href="#googledrive">Google Drive</a></h3><p><img src="images/21.png" alt="21"></p>
+<p>Google Drive upload.   </p>
+<p>Folder path must be created by this app. </p>
 
 </div></section>
 

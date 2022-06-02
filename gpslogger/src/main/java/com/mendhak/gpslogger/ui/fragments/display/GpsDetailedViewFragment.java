@@ -191,6 +191,11 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
             if(preferenceHelper.isAutoSendEnabled()){
                 StringBuilder sb = new StringBuilder();
+
+                if(FileSenderFactory.getCustomUrlSender().isAutoSendAvailable()){
+                    sb.append(getString(R.string.log_customurl_setup_title)).append("\n");
+                }
+
                 if (FileSenderFactory.getEmailSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.autoemail_title)).append("\n");
                 }
@@ -210,6 +215,10 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
                 if (FileSenderFactory.getDropBoxSender().isAutoSendAvailable()) {
                     sb.append(getString(R.string.dropbox_setup_title)).append("\n");
+                }
+
+                if(FileSenderFactory.getGoogleDriveSender().isAutoSendAvailable()) {
+                    sb.append(getString(R.string.google_drive_setup_title)).append("\n");
                 }
 
                 if (FileSenderFactory.getOpenGTSSender().isAutoSendAvailable()) {

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.mendhak.gpslogger"
-          android:installLocation="auto"
+    android:installLocation="auto"
     >
 
     <!-- Satellite and network location services -->
@@ -24,6 +23,7 @@
 
     <!-- To let the user disable battery optimization from within the app -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission-sdk-23 android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <!-- allow this to run as a foreground service -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -62,9 +62,26 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="com.mendhak.gpslogger.HANDLE_AUTHORIZATION_RESPONSE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
             <meta-data android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+
+        <activity android:name="net.openid.appauth.RedirectUriReceiverActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="com.mendhak.gpslogger"
+                    android:path="/oauth2googledrive"/>
+            </intent-filter>
+
+        </activity>
+
         <activity
             android:name=".MainPreferenceActivity"
             android:label="@string/settings_screen_name"

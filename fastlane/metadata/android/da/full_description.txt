@@ -19,7 +19,7 @@ Fejl, funktionsanmodninger, spørgsmål - indsend venligst disse til github.com/
 
 ***Noter:
 
-GPSLogger er ikke en MyTracks-erstatning.  MyTracks er beregnet til kortvarig brug (da den har mange kørende funktioner), GPSLogger er beregnet til langvarig brug.
+GPSLogger er ikke en OpenTracks-erstatning.  OpenTracks er beregnet til kortvarig brug (da den har mange kørende funktioner), GPSLogger er beregnet til langvarig brug.
 
 Denne app anvender kun en dataforbindelse, såfremt du benytter funktionerne auto-e-mail, OpenStreetMap eller Dropbox.
 
