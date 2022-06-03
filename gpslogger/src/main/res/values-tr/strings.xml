@@ -371,4 +371,7 @@
     <string name="app_theme_light">Açık tema</string>
     <string name="app_theme_dark">Koyu tema</string>
     <string name="customurl_all_parameters">Tüm parametreler:</string>
+    <string name="google_drive_folder_path">Google Drive klasörü yolu</string>
+    <string name="google_drive_folder_path_summary_1">Tek bir klasör adı (örn. GPSLogger) veya bir klasör yolu (örn. aaa/bbb/ccc) kullanın. Klasörler bu uygulama tarafından oluşturulmalıdır.</string>
+    <string name="google_drive_folder_path_summary_2">Tek bir klasör adı kullanırsanız, oluşturulduktan sonra Google Drive\'da başka bir yere taşınabilir. Dosyalar yüklenmeden önce yolun her bir bölümünün denetlenmesi veya oluşturulması gerektiğinden klasör yolları daha yavaştır.</string>
 </resources>

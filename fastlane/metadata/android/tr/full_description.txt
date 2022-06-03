@@ -1,39 +1,47 @@
-Hafif, pil harcama verimli bir GPS günlük kaydedici. Bu uygulamanın amacı belirtilen aralıklarla alınan GPS koordinatlarınızı SD kartınızda bir dosyaya kaydetmektir.  Uygulama arka planda, piliniz bitene kadar çalışabildiği için telefonunuzu götürdüğünüz her yerde, yürüyüşte, sporda, bisiklet yada uçak ile seyahat ederken, kısacası her an nerede olduğunuzu kayıt altında tutar.   Bilgisayarınıza döndüğünüzde kaydedilen verileri fotoğraflarınıza konum bilgisi ekleme, gezi sitelerine yükleme ya da Google Earth'te görmek için kullanabilirsiniz. 
-
-***Özellikler:
-
-* Zaman aralıklarını ayarlayabilme
-* Mesafe aralıklarını ayarlayabilme
-* Baz istasyonu veya GPS uyduları
-* GPX ve/veya KML dosyaları
-* Bildirimleri gösterir
-* Telefon veya uydu saatlerini kullanır
-* Emperyal birimleri gösterir
-* Telefon açıldığında otomatik başlar
-* Bir kaç saatte bir otomatik eposta
-* OpenStreetMap'e GPS izleri yükler
-* Dropbox - GPX/KML/ZIP olarak yükler
-
-Uygulama hatalarını, özellik isteklerinizi, sorularınızı github.com/mendhak/gpslogger adresinde (issue tracker) başlığı altında gönderiniz.  
-
-***Notlar
+Hafif, pili verimli kullanan bir GPS kaydedici. Bu uygulamanın amacı, GPS koordinatlarınızı belirli aralıklarla SD kartınızdaki bir dosyaya kaydetmektir.  Uygulama arka planda, piliniz bitene kadar çalışabildiği için telefonunuzu götürdüğünüz her yerde, yürüyüşte, sporda, bisiklet yada uçak ile seyahat ederken, kısacası her an nerede olduğunuzu kayıt altında tutar.   Bilgisayarınıza geri döndüğünüzde, dosyaları fotoğraflara coğrafi etiket eklemek, seyahat sitelerine yüklemek, Google Earth'te görüntülemek vb. için kullanabilirsiniz.
 
 
-GPSKayıt programı OpenTracks'ın yerine yapılmamıştır.
+Daha fazla bilgi için bkz: <a href="https://gpslogger.app">https://gpslogger.app</a>
 
-Bu program veri bağlantısını yalnızca kullanıcı oto-email, OpenStreetMap yada DropBox özelliklerini aktifleştirirse kullanır.
+<b>Not</b>: Arka planda konumları kaydetmesine izin vermek için lütfen işletim sistemi ayarlarınızda bu uygulama için <b>Her zaman izin ver</b> seçeneğini unutmayın.
 
-Program kayıt frekansını sıfır saniyeye indirmeye izin verse dahi bu önerilmez çünkü bu durumda konum takibi kaydı çok hızlı gerçekleşir. Bu durum düzensizliklere ve donmalara sebebiyet verebilir. (Sıfır yerine bir - üç saniye aralığını deneyin).
+<b>Özellikler</b>
 
-Eğer programda olmasını istediğiniz bir özellik varsa bunu GitHub sayfasında belirtin.
+<ul>
+<li>GPX, KML, CSV, NMEA ve CSV biçimlerinde kayıt tutabilir. Özel bir URL'ye veya yalnızca ekrana da kaydedebilir.</li>
+<li> GPX noktalarını yol ve yol bölümleri olarak kaydeder</li>
+<li>Varsa hız, yön ve rakımı da kaydeder</li>
+<li> Açıklama ekle menüsünü kullanarak bir noktaya açıklama ekleyin, bir yol noktası olarak eklenir</li>
+<li>Noktalar arasındaki zaman aralıklarını yapılandırın</li>
+<li>Noktalar arasında bir asgari mesafe filtresi veya bir doğruluk filtresi yapılandırın</li>
+<li>Koordinatlar ve hızlı eylemler içeren bildirim simgesi</li>
+<li>GPS devre dışı bırakıldığında konum için baz istasyonlarını kullanır</li>
+<li>Ağ, gps ve pasif konum sağlayıcılarını seçin</li>
+<li>Dosyayı belirlenen aralıklarla E-posta, FTP, Dropbox, OpenStreetMap, Google Drive, Özel URL gibi hedeflere otomatik olarak yükleyin veya e-posta ile gönderin.</li>
+<li>Konum veya günlük dosyalarını SMS/E-posta yoluyla (ve kurulu olmasına bağlı olarak Facebook veya Twitter gibi diğer uygulamalarla) paylaşın</li>
+<li>Telefon açılışında günlüğe kaydetmeyi başlat</li>
+<li>Tasker veya diğer otomasyon uygulamalarından işlemleri çağırın.</li>
+<li>Dağıtım için kendi değerlerinizi içeren bir ön ayar dosyası verebilirsiniz</li>
+<li>Farklı ayarlara sahip birden fazla profil mümkündür</li>
+</ul>
 
-***İzinlerin açıklaması:
+Hatalar, özellik istekleri, sorular - lütfen bunları github.com/mendhak/gpslogger (sorun izleyici) adresine gönderin.
 
-Saklama- verileri yazma ve okuma işlemi telefonunuzun SD kartında GPSLogger dosyasında gerçekleştirilir
+<b>Notlar</b>
 
-İnternet bağlantısı - kayıt dosyaları (DropBox, OpenMaps yada mail adresinize) gönderilirken kullanılır. Aynı zamanda DropBox ve OpenStreetMap hesabınıza erişirkende gerekecektir
+Veri bağlantısı bu uygulama tarafından yalnızca otomatik gönderme özelliklerini veya Özel URL özelliklerini kullanırsanız kullanılır
 
-Konumunuz - GPS bazlı veya kitle kaynaklı konumuzu elde etmek için kullanılır
+Uygulama 0 saniyelik sıklıklara izin verse de, kayıt ve günlük çok hızlı gerçekleştiğinden bu tavsiye edilmez; bu kararsızlığa/takılmalara neden olabilir. Bunun yerine 1-3 saniyeyi deneyin.
 
-Sistem araçları (Başlangıçta otomatik çalıştır) - Eğer GPSLogger'ı telefon açılır açılmaz çalıştırmak istiyorsanız seçmeniz gereken özellik
 
+<b>İzinlerin açıklanması</b>
+
+Depolama - SD kartınızdaki GPSLogger klasörüne dosya okuma ve yazma
+
+Ağ iletişimi - dosyaları yüklerken (Dropbox, Openstreetmap) veya e-posta gönderirken veya Dropbox, Openstreetmap ile sizi yetkilendirirken kullanılır
+
+Konumunuz - GPS veya baz istasyonu tabanlı konumunuzu belirlemek için kullanılır
+
+Sistem araçları (açılışta otomatik olarak başlar) - GPSLogger'ı açılışta başlatmayı seçerseniz kullanılır
+
+Paylaşılan depolama izinleri - Android 11'de, özel dosya yollarına dosya yazmaya izin vermek için kullanılır
