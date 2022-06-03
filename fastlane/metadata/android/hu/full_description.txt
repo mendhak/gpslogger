@@ -1,38 +1,48 @@
-Kevés erőforrást használó, akkumulátor kímélő GPS naplózó program. A program a GPS koordinátákat naplózza az SD kártyán egy fájlba megadott időközönként.  Működés közben a háttérben fut, lehetőleg legtovább legyen ideje sétálni, kirándulni, repülni vagy fotózni.   Ha számítógéphez visszatér, akkor a fájlokban gyűjtött adatokat használhatja geotag fényképekhez, feltöltheti az internetre. Megnézheti Google Earth-on és így tovább. 
-
-*** Jellemzők:
-
-* Beállítható az adatmentési időköz
-* Beállítható hogy milyen távolság megtétele után mentése az adatot
-* Telefontornyok vagy GPS műholdak alapján pozicionálhat
-* GPX és/vagy a KML-fájlokat készíthet
-* Értesítés megjelenítése
-* Választhat a telefon órája vagy műhold által megadott idő között
-* Brit mértékegységek támogatása
-* Automatikus indulás lehetősége a telefon bekapcsolásakor
-* Automatikus e-mail küldés néhány óránként
-* GPS útvonalak feltöltése OpenStreetMap-re
-* Dropbox-ra feltöltés GPX/KML/ZIP formátumban
+Kevés erőforrást használó, akkumulátor kímélő GPS naplózó program. Ennek az alkalmazásnak az a célja, hogy meghatározott időközönként naplózza a GPS-koordinátákat egy fájlba az SD-kártyán. Működés közben a háttérben fut, hogy lehetőleg legtovább legyen ideje sétálni, kirándulni, repülni vagy fotózni. Miután visszatért a számítógépéhez, használhatja a fájlokat fényképek földrajzi címkézésére, utazási webhelyekre való feltöltésre, megtekintésre a Google Földben és így tovább.
 
 
-Hibáknál, új funkciók kérésénél, kérdéseinél - kérjük, írjon: github.com/mendhak/gpslogger (issue tracker).  
+További információkért lásd: <a href="https://gpslogger.app">https://gpslogger.app</a>
 
-*** Megjegyzések:
+<b>Megjegyzés</b>: Ne felejtse el <b>Mindig engedélyezni</b> ezt az alkalmazást az operációs rendszer beállításaiban, hogy lehetővé tegye számára a helyadatok naplózását a háttérben.
 
-GPSLogger nem OpenTracks helyettesítő.  A OpenTracks célja a rövid ideig tartó adatrögzítés (ilyen például a futás), a GPSLogger inkább a hosszú távú nyomonkövetésre készült.
 
-Adatkapcsolatot csak akkor használ a program, ha engedélyezi az automatikus e-mail küldést, az OpenStreetMap-ra vagy Dropbox-ra feltöltést.
+<b>Jellemzők</b>
 
-Az alkalmazás lehetővé teszi a 0 másodperces gyakoriságot, de ez nem ajánlott, mert az adatgyűjtés és rögzítés túl gyors lesz. Ez instabilitást/lefagyást okozhat. Helyette érdemesebb 1-3 másodpercet megadni.
+<ul>
+<li>GPX, KML, CSV, NMEA és CSV formátumba tud menteni. Egyéni URL-re vagy csak a képernyőre is menthet.</li>
+<li>GPX-pontokat nyomvonalként és nyomvonalpontként is naplózza</li>
+<li>Sebességet, irányt és magasságot is naplózza, ha van elérhető adat</li>
+<li>Adjon hozzá leírást egy ponthoz a megjegyzés menü segítségével, rendszer útpontként adja hozzá</li>
+<li>Beállítható a pontok közötti időintervallum</li>
+<li>Állítson be minimális távolságszűrőt vagy pontosság szűrőt</li>
+<li>Értesítés ikon koordinátákkal és gyors műveletekkel</li>
+<li>Helymeghatározáshoz mobiltornyokat használ, ha a GPS ki van kapcsolva</li>
+<li>Válasszon szelektíven hálózat, GPS és a passzív helyszolgáltató között</li>
+<li>Automatikusan feltöltheti vagy e-mailben elküldheti a fájlt meghatározott időközönként olyan célhelyekre, mint például e-mail, FTP, Dropbox, OpenStreetMap, Google Drive vagy egyéni URL.</li>
+<li>Hely- vagy naplófájlok megosztása SMS-ben/e-mailben (és egyéb alkalmazásokban, például a Facebookon vagy a Twitteren, attól függően, hogy mit telepített)</li>
+<li>Indítsa el a Naplózást a telefon indításakor</li>
+<li>Műveletek előhívása a Taskerből vagy más automatizálási alkalmazásokból.</li>
+<li>Adhat neki egy előre beállított fájlt a saját értékeivel a terjesztéshez</li>
+<li>Több profil is lehetséges különböző beállításokkal</li>
+</ul>
 
-Ha van egy funkció, amit hiányol, akkor a funkciót kérje a GitHub oldalon.
+Hibák, funkciókra vonatkozó kérések, kérdések – kérjük, küldje el őket a github.com/mendhak/gpslogger (problémakövető) címre.
 
-*** A program által igényelt engedélyek:
+<b>Megjegyzések</b>
 
-Tároláshoz - fájlok olvasását és írását a GPSLogger mappába az SD kártyán
+Ez az alkalmazás csak akkor használ adatkapcsolatot, ha automatikus küldési vagy egyéni URL-funkciókat használ
 
-Hálózati kommunikáció - szükséges amikor feltölt fájlokat (Dropbox, Openstreetmap) vagy e-maileket küld vagy hitelesíti magát a Dropbox, Openstreetmap alkalmazásnál
+Bár az alkalmazás 0 másodperces frekvenciákat engedélyez, ez nem ajánlott, mivel a rögzítés és a naplózás nagyon gyorsan történik; ez instabilitást/leakadást okozhat. Próbáljon inkább 1-3 másodpercet.
 
-Hely meghatározás - a GPS vagy GSM torony által szolgáltatott információ alapján
 
-System tools (a program készülék bekapcsoláskori indulásának engedélyezése) - Abban az esetben ha úgy dönt, hogy a GPSLogger, boot-oláskor induljon
+<b>Engedélyek magyarázata</b>
+
+Tárolás – fájlok olvasása és írása az SD-kártya GPSLogger mappájába
+
+Hálózati kommunikáció – a fájlok feltöltésekor (Dropbox, Openstreetmap) vagy e-mailek küldésekor, illetve a Dropbox, Openstreetmap segítségével történő engedélyezéskor használatos
+
+Ön tartózkodási helye – GPS vagy mobil torony alapú helymeghatározására szolgál
+
+Rendszereszközök (automatikus indítás rendszerindításkor) – akkor használatos, ha a GPSLogger elindítását választja rendszerindításkor
+
+Megosztott tárolási engedélyek – Android 11 rendszerben, lehetővé teszik a fájlok egyéni fájlútvonalakra való írását
