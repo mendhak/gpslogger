@@ -1,6 +1,6 @@
-* Visszatért a Google Drive! Újraimplementálva zárt forráskódú könyvtárak nélkül
-* Hibajavítás: GPSLogger értesítés véletlenszerűen jelent meg, amikor nem volt használatban
-* Ha helymeghatározási szolgáltatás le van tiltva, az alkalmazás most egyszerűen csak várakozik (figyelmeztető ikonnal) és újraengedélyezés után folytatja a működést.
-* Beállítható betűméret a részletes nézetben, szélesség/hossz jobban illeszkedik
+* Google Drive visszatért! Újraimplementálva zárt forráskódú könyvtárak nélkül
+* Hibajavítás: Értesítés véletlenszerűen jelent meg, amikor nem volt használatban
+* Ha helymeghatározási szolgáltatás le van tiltva, most egyszerűen csak várakozik (figyelmeztető ikonnal) és újraengedélyezés után folytatja a működést.
+* Beállítható betűméret, szélesség/hossz jobban illeszkedik
 * Pontosabb riasztás elnyomott helyeken szunyókálás módban
 * Új kettős műveleti beállítás a Feltöltési beállítások között

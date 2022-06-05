@@ -5,7 +5,6 @@ További információkért lásd: <a href="https://gpslogger.app">https://gpslog
 
 <b>Megjegyzés</b>: Ne felejtse el <b>Mindig engedélyezni</b> ezt az alkalmazást az operációs rendszer beállításaiban, hogy lehetővé tegye számára a helyadatok naplózását a háttérben.
 
-
 <b>Jellemzők</b>
 
 <ul>
