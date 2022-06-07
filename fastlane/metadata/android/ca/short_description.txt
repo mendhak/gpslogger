@@ -1,1 +1,1 @@
-Un lleuger entregistrador de posicions GPS, eficient en l'ús de la bateria, GPX
+Enregistrador de posicions GPS lleuger, eficient en l'ús de la bateria, GPX/KML, afegeix anotacions, comparteix, puja.

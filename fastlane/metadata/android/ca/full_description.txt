@@ -1,0 +1,5 @@
+Enregistrador de posicions GPS lleuger, eficient en l'ús de la bateria. La finalitat d'aquesta app és enregistrar les teves coordinades en intervals a un arxiu a la tarja SD. Aquesta app corre en segon pla de manera que pots anar de passeig, corrent, volant, fer una sessió fotogràfica, o simplement sortir a comprar llet, i tenir-la en marxa tant de temps com sigui possible. Quan tornis a l'ordinador pots fer servir els arxius per geoetiquetar fotos, pujar-los a webs de viatges, veure a Google Earth, etc.
+
+Per més informació, veure <a href="https://gpslogger.app">https://gpslogger.app</a>
+
+<b>Nota</b>: Si us plau recorda <b>Permetre sempre</b> aquesta app en les opcions del mòbil per poder enregistrar posicions en segon pla.
