@@ -79,7 +79,7 @@
     <string name="osm_lbl_authorize">Autoritzar aquesta aplicació</string>
     <string name="osm_visibility">Visibilitat</string>
     <string name="osm_description">Descripció</string>
-    <string name="menu_upload">Carregar</string>
+    <string name="menu_upload">Pujar</string>
     <string name="google_drive_test_title">Càrrega de prova</string>
     <string name="enabledisablegps_summary">Anar a opcions del telèfon per activar o desactivar proveïdors.</string>
     <string name="title_drawer_uploadsettings">Pujar configuració</string>
@@ -167,4 +167,11 @@
     <string name="osm_tags_summary">Les etiquetes que s\'apliquen en pujar una traça</string>
     <string name="pref_general_summary">Opcions d\'inici i visualització</string>
     <string name="logging_advanced_delete_files_summary">Prem i manté per seleccionar més d\'un arxiu.</string>
+    <string name="dropbox_authorize_description">Per usar serveis de Dropbox hauràs d\'autoritzar a GPSLogger permís per pujar arxius al teu compte.</string>
+    <string name="dropbox_unauthorize_description">Estàs autoritzat a Dropbox. Els arxius es pujaran a \'Apps\\GPSLogger for Android\'. Pots deslligar GPSLogger de Dropbox quan vulguis.</string>
+    <string name="owncloud_server_summary">URL base d\'ownCloud</string>
+    <string name="owncloud_directory_summary">Carpeta a fer servir al servidor ownCloud. Assegura\'t que existeix o la pujada no funcionarà.</string>
+    <string name="dropbox_couldnotauthorize">No s\'ha pogut autoritzar amb Dropbox, si us plau prova un altre cop més tard</string>
+    <string name="owncloud_test_summary">Puja un arxiu de prova al servidor ownCloud</string>
+    <string name="owncloud_testing">Provant pujada a ownCloud</string>
 </resources>
