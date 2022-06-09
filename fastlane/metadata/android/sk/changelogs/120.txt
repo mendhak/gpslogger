@@ -1,0 +1,7 @@
+* Stav nabitia batérie v používateľskej adrese URL (%ISCHARGING) a CSV (battery_charging)
+* Ak je zapnuté OSM a autom, odosielanie, pri spustení a odoslaní sa vyžiadajú podrobnosti o sledovaní s použitím OSM
+* Možnosť vymazať súbor (v pokročilom zaznamenávaní)
+* Zaznamenávanie GPX 1.1, pridané rozšírenia gpxtpx:speed a gpxtpx:bearing
+* Dropbox aktualizoval spôsob autentifikácie
+* Oprava chyby: ak bol názov súboru obsiahnutý aj v iných názvoch, odoslali sa viaceré súbory
+* Aktualizované preklady

@@ -1,0 +1,5 @@
+* Nová voľba pre tmavú tému. Mala by sa vykonávať automaticky podľa režimu deň/noc.
+* Svetlá/tmavá téma sa dá nastaviť aj manuálne, vo všeobecných nastaveniach.
+* Prepracované nastavenia, kvôli zobrazeniu používateľských hodnôt tam, kde je to možné.
+* Pridaná súčasť pre výber súboru a priečinka. Aplikácia si vyžiada osobitné povolenie na Android 11+, pre používateľom určené cesty.
+* Pri SFTP by malo byť možné pripojenie s použitím moderných algoritmov SSH.

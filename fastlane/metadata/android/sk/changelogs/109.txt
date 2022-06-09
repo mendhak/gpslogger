@@ -1,0 +1,2 @@
+Osobitný balík GPSLogger pre F-Droid.
+Neobsahuje Google Drive, rozpoznávanie aktivity, závislosti na službách Play.
