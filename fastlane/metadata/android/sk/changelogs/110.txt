@@ -1,0 +1,6 @@
+* Na systéme Android 10+ bude systém oprávnení vyžadovať oprávnenie "Povoliť vždy"
+* Systém oprávnení bude tiež vyžadovať vypnutie optimalizácie batérie
+* Systém oprávnení spôsobuje nepríjemnosti, bohužiaľ je momentálne potrebné riešiť mnohé žiadosti o podporu týkajúce sa obmedzení na pozadí
+* Adaptívne ikony, vďaka @kanru
+* Pridaná možnosť resetu aplikácie (vymaže všetky súbory a oprávnenia pre aplikáciu) vo všeobecných nastaveniach
+* Aktualizované preklady zo systému Crowdin

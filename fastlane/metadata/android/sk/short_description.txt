@@ -1,1 +1,1 @@
-Jednoduchý GPS logger, energet. efektívny, GPX/KML, poznámky, zdieľanie, upload
+Nenáročný GPS logger, šetriaci batériu, GPX/KML, poznámky, zdieľanie, upload.

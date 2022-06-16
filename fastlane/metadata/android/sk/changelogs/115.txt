@@ -1,0 +1,3 @@
+* Oprava chyby: umožnenie znakov UTF-8 v názve priečinka na FTP
+* Pridaný posuvník do jednoduchého zobrazenia, kvôli prispôsobeniu veľkej veľkosti displeja a písma.
+* Pri použití textového poľa pre anotácie by sa mala automaticky zobraziť klávesnica.

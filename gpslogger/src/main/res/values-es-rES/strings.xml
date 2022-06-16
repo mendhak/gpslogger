@@ -370,4 +370,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="gpslogger_permissions_rationale_message_storage"><b>Fotos, medios, archivos</b> - Este permiso permite escribir archivos de registro y archivos de prueba en el almacenamiento y leer una lista de archivos para cargarlos o compartirlos. Esta aplicación no accederá a sus fotos o medios.</string>
     <string name="app_theme_dark">Tema oscuro</string>
     <string name="customurl_all_parameters">Todos los parámetros:</string>
+    <string name="google_drive_folder_path">Ruta al directorio de Google Drive</string>
+    <string name="google_drive_folder_path_summary_1">Utilice un nombre simple (ej. GPSLogger), o una ruta (ej. aaa/bbb/ccc). Los directorios deben ser creados por esta aplicación.</string>
+    <string name="google_drive_folder_path_summary_2">Si se usa un nombre de directorio simple, puede ser movido a cualquier otro lugar de Google Drive tras la creación. Rutas a directorios son mas lentas porque cada parte de la ruta debe ser comprobada o creada antes de que se suban los ficheros.</string>
 </resources>

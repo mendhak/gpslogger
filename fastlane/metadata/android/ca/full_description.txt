@@ -1,0 +1,47 @@
+Enregistrador de posicions GPS lleuger, eficient en l'ús de la bateria. La finalitat d'aquesta app és enregistrar les teves coordinades en intervals de temps a un arxiu a la tarja SD.  Aquesta app corre en segon pla de manera que pots anar de passeig, corrent, volant, fer una sessió fotogràfica, o simplement sortir a comprar llet, i tenir-la en marxa tant de temps com sigui possible.   Quan tornis a l'ordinador pots fer servir els arxius per geoetiquetar fotos, pujar-los a webs de viatges, veure a Google Earth, etc.
+
+
+Per més informació, veure <a href="https://gpslogger.app">https://gpslogger.app</a>
+
+<b>Nota</b>: Si us plau recorda <b>Permetre sempre</b> aquesta app en les opcions del mòbil per poder enregistrar posicions en segon pla.
+
+<b>Prestacions</b>
+
+<ul>
+<li>Pot enregistrar en format GPX, KML, CSV i NMEA. També ho pot fer a una adreça URL personalitzada o simplement a la pantalla.</li>
+<li>Enregistra punts GPX com a camins i segments de camins</li>
+<li>També enregistra velocitat, direcció i altitud si són disponibles</li>
+<li>Afegeix una descripció a un punt amb el menú anota, s'afegeix com un punt de pas</li>
+<li>Configura temps d'intervals entre punts</li>
+<li>Configura un filtre de distància mínima entre punts o un filtre de precisió</li>
+<li>Icona de notificació amb coordenades i accions ràpides</li>
+<li>Utilitza les torres de comunicació quan el GPS està desactivat</li>
+<li>Pots triar selectivament els proveïdors de xarxa, gps, i de posició passiva</li>
+<li>Puja automàticament o envia email de l'arxiu en intervals establerts a destinacions com Email, FTP, Dropbox, OpenStreetMap, Google Drive, URL personalitzada.</li>
+<li>Comparteix posició o arxius de posicions via SMS/Email (i d'altres apps com Facebook o Twitter depenent de què tens instal·lat)</li>
+<li>Començar a gravar tan bon punt el mòbil arrenqui</li>
+<li>Invocar operacions des de Tasker o altres apps d'automatització</li>
+<li>Pots configurar-la amb un arxiu d'opcions per facilitar la distribució</li>
+<li>Pots tenir perfils múltiples, cadascun amb les seves opcions</li>
+</ul>
+
+Errors, peticions de noves prestacions, qüestions - si us plau envia-les a github.com/mendhak/gpslogger (issue tracker).
+
+<b>Notes</b>
+
+Aquesta app només fa servir connexió de dades si l'has configurat per a que faci enviaments automàtics o URL personalitzades
+
+Malgrat l'app permet freqüències de 0 segons, no és recomanable perquè l'enregistrament i gravació van molt ràpid; això pot fer l'app inestable i que es penji. Tria 1-3 segons.
+
+
+<b>Explicació dels permisos</b>
+
+Magatzament - llegir i escriure arxius a la carpeta GPSLogger de la teva tarja SD
+
+Comunicació de xarxa - fet servir quan es pugen arxius (Dropbox, OpenStreetMap) o enviant emails o per l'autorització amb Dropbox, OpenStreetMap
+
+La teva posició - fet servir per determinar la posició de GPS or de torre de comunicacions
+
+Eines de sistema (començar a gravar en arrencar) - fet servir si tries obrir automàticament GPSLogger quan el mòbil arrenqui
+
+Permisos de magatzament compartit - en Android 11, fet servir per permetre escriure arxius a camins de carpetes personalitzats
