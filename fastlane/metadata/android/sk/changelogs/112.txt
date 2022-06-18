@@ -1,0 +1,1 @@
+* Oprava chyby: Príkaz getstatus súčasti Tasker neodosielal stav vysielania.

@@ -1,0 +1,5 @@
+* Nový parameter používateľskej adresy URL: %ALL nahrádza každý dostupný parameter používateľskej adresy URL
+* Oprava chyby: vypustenie + v časových pečiatkach používateľskej URL
+* Oprava chyby: časovač sa neresetoval pri prepnutí profilov
+* Oprava chyby: pri zatvorení vykresľovača sa zatvorí najskôr zoznam profilov
+* Oprava chyby: pri kliknutí na položku v zozname profilov zostane otvorený vykresľovač

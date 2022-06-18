@@ -1,0 +1,6 @@
+* Návrat Google Drive! Implementované bez knižníc s uzatvoreným kódom
+* Možná oprava chyby notifikácie GPSLogger, ktorá sa zobrazovala aj počas nepoužívania
+* Ak sú vypnuté lokalizačné služby, aplikácia čaká (s výstražnou ikonou) a pokračuje sa po ich opätovnom zapnutí.
+* Upravená veľkosť písma v podrobnostiach, údaje o zem. šírke a dĺžke sa zobrazia lepšie
+* Použitie presnejšieho alarmu na pomoc s potlačenými lokalizáciami v režime spánku
+* Nastavenie pre duálnu akciu v nastaveniach odosielania

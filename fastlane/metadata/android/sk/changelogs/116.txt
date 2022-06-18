@@ -1,0 +1,3 @@
+* Oprava súborových oprávnení pre Android 11+: teraz je možné nastaviť používateľskú cestu k súboru a vyžaduje sa udelenie oprávnení pre správcu súborov.
+* Pridané nové oprávnenie, MANAGE_EXTERNAL_STORAGE. Je potrebné kvôli umožneniu používateľom určenej cesty v Android 11+.
+* Oprava chyby: umožnenie znakov UTF-8 v názve priečinka FTP.
