@@ -35,6 +35,7 @@ import okhttp3.*;
 
 import org.slf4j.Logger;
 
+import javax.net.ssl.X509TrustManager;
 import java.util.Map;
 
 
@@ -62,7 +63,8 @@ public class CustomUrlJob extends Job {
         LOG.info("HTTP Request - " + urlRequest.getLogURL());
 
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
-        okBuilder.sslSocketFactory(Networks.getSocketFactory(AppSettings.getInstance()));
+        okBuilder.sslSocketFactory(Networks.getSocketFactory(AppSettings.getInstance()),
+                (X509TrustManager) Networks.getTrustManager(AppSettings.getInstance()));
         Request.Builder requestBuilder = new Request.Builder().url(urlRequest.getLogURL());
 
         for(Map.Entry<String,String> header : urlRequest.getHttpHeaders().entrySet()){

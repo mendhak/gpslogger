@@ -22,6 +22,7 @@ package com.mendhak.gpslogger.common.network;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.os.Handler;
 
 import androidx.fragment.app.FragmentActivity;
@@ -125,7 +126,12 @@ public class Networks {
 
             TrustManager[] tms = new TrustManager[] { atm };
             sslContext.init(null, tms, null);
-            return sslContext.getSocketFactory();
+            if(Build.VERSION.SDK_INT >= 16 && Build.VERSION.SDK_INT < 22){
+                return new Tls12SocketFactory(sslContext.getSocketFactory());
+            }
+            else {
+                return sslContext.getSocketFactory();
+            }
         } catch (Exception e) {
             LOG.error("Could not get SSL Socket factory ", e);
         }
