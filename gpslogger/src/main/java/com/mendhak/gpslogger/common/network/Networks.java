@@ -31,12 +31,15 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.Dialogs;
+
+import org.conscrypt.Conscrypt;
 import org.slf4j.Logger;
 import javax.net.ssl.*;
 import java.io.*;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.Security;
 import java.security.cert.CertStoreException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
@@ -119,6 +122,8 @@ public class Networks {
 
     public static SSLSocketFactory getSocketFactory(Context context){
         try {
+            //Use Conscrypt library to enable TLS 1.3 on pre-Android 10 devices
+            Security.insertProviderAt(Conscrypt.newProvider(), 1);
             SSLContext sslContext = SSLContext.getInstance("TLS");
             LocalX509TrustManager atm = null;
 
@@ -126,12 +131,7 @@ public class Networks {
 
             TrustManager[] tms = new TrustManager[] { atm };
             sslContext.init(null, tms, null);
-            if(Build.VERSION.SDK_INT >= 16 && Build.VERSION.SDK_INT < 22){
-                return new Tls12SocketFactory(sslContext.getSocketFactory());
-            }
-            else {
-                return sslContext.getSocketFactory();
-            }
+            return sslContext.getSocketFactory();
         } catch (Exception e) {
             LOG.error("Could not get SSL Socket factory ", e);
         }
