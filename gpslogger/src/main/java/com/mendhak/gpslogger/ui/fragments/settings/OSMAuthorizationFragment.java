@@ -45,8 +45,11 @@ import eltos.simpledialogfragment.list.SimpleListDialog;
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
+
+import org.conscrypt.Conscrypt;
 import org.slf4j.Logger;
 
+import java.security.Security;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -248,6 +251,8 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
                     consumer = OpenStreetMapManager.getOSMAuthConsumer();
                 }
 
+                //Use Conscrypt library to enable TLS 1.3 on pre-Android 10 devices
+                Security.insertProviderAt(Conscrypt.newProvider(), 1);
                 //Ask OpenStreetMap for the access token. This is the main event.
                 provider.retrieveAccessToken(consumer, oAuthVerifier);
 
