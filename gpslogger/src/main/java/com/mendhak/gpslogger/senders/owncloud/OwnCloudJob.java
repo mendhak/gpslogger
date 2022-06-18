@@ -45,12 +45,14 @@ import com.owncloud.android.lib.resources.files.UploadRemoteFileOperation;
 import de.greenrobot.event.EventBus;
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
+import org.conscrypt.Conscrypt;
 import org.slf4j.Logger;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import java.io.File;
 import java.security.GeneralSecurityException;
+import java.security.Security;
 
 public class OwnCloudJob extends Job implements OnRemoteOperationListener {
 
@@ -86,6 +88,9 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
     public void onRun() throws Throwable {
 
         LOG.debug("ownCloud Job: Uploading  '" + localFile.getName() + "'");
+
+        //Use Conscrypt library to enable TLS 1.3 on pre-Android 10 devices
+        Security.insertProviderAt(Conscrypt.newProvider(), 1);
 
         Protocol pr = Protocol.getProtocol("https");
 
