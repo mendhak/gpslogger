@@ -36,5 +36,3 @@ Comunicação de rede - usado ao fazer upload dos arquivos (Dropbox, Openstreetm
 Sua localização - usado para determinar a localização com base no seu GPS ou torre
 
 Ferramentas de sistema (executar automaticamente na inicialização) - usado se você optar por iniciar o GPSLogger na inicialização
-
-
