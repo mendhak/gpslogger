@@ -88,6 +88,9 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
 
         }
 
+        //Use Conscrypt library to enable TLS 1.3 on pre-Android 10 devices
+        //Required by provider.retrieveAccessToken() later, but need to provide it earlier.
+        Security.insertProviderAt(Conscrypt.newProvider(), 1);
 
         setPreferencesState();
 
@@ -251,8 +254,7 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
                     consumer = OpenStreetMapManager.getOSMAuthConsumer();
                 }
 
-                //Use Conscrypt library to enable TLS 1.3 on pre-Android 10 devices
-                Security.insertProviderAt(Conscrypt.newProvider(), 1);
+
                 //Ask OpenStreetMap for the access token. This is the main event.
                 provider.retrieveAccessToken(consumer, oAuthVerifier);
 
