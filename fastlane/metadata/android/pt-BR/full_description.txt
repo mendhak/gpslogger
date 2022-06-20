@@ -1,35 +1,42 @@
-Um rastrador de gps com baixo uso de bateria. A finalidade deste app é registrar suas coordenadas GPS em intervalos especificos em um arquivo no cartão SD.  Este aplicativo é executado em segundo plano para que você possa usá-lo em uma longa caminhada, passeio de avião, sessão de fotos ou até mesmo ir comprar leite ou correr com o maior tempo possível de execução de bateria.   Você pode fazer o upload dos arquivos a partir do seu computador e usar os arquivos para fazer geocaching, adicionar localização nas fotos, além de ver os destinos no google earth. 
-
-***Recursos:
-
-* Especificar intervalos de tempo
-* Especificar intervalos de distância
-* Torres de telefonia móvel ou satélites GPS
-* Arquivos GPX e/ou KML
-* Mostrar notificações
-* Usar o relógio do telefone ou satélite
-* Unidade Imperial
-* Auto executar na inicialização
-* E-mail automático em intervalos configurados
-* OpenStreetMap - envio de coordenadas GPS
-* Dropbox - Envio de GPX/KML/ZIP
+Um rastrador de gps com baixo consumo de bateria. A finalidade deste app é registrar suas coordenadas do GPS em intervalos especificos em arquivo no cartão SD.  Este app é executado em segundo plano para que você possa usá-lo em uma longa caminhada, passeio de avião, sessão de fotos ou até mesmo quando faz compras ou corridas alcançando o maior tempo possível de duração de bateria.   Você pode fazer o upload dos arquivos a partir do seu computador e usar os arquivos para fazer geocaching, adicionar localização em fotos, além de ver os destinos no google earth.
 
 
-Bugs, solicitações, perguntas - por favor envie-os para github.com/mendhak/gpslogger (issue tracker).  
+Para mais detalhes, veja <a href="https://gpslogger.app">https://gpslogger.app</a>
 
-* * * Notas:
+<b>Aviso</b>: Por favor, lembre-se de conceder a opção de <b>Permitir sempre</b> em configurações do Android, para poder registrar localizações em segundo plano.
 
-GPSLogger não é um substituto de OpenTracks.  OpenTracks é destinada ao uso curto (como tem um monte de recursos de execução), GPSLogger é feito para durar muito tempo.
+<b>Funcionalidades</b>
 
-Uma conexão de dados é usada por este app somente se você usar o auto e-mail ou funcionalidades do OpenStreetMap ou Dropbox.
+<ul>
+<li>Pode salvar em formatos GPX, KML, CSV, NMEA e CSV. Assim como em URL personalizada ou mostrar na tela.</li>
+<li>Registra posições do GPX como trilhos e segmentos de trilhos</li>
+<li>Também registra a velocidade, direção e altitude, se disponível</li>
+<li>Permite fazer uma descrição em uma posição usando a opção de anotar que é adicionada como um ponto de passagem</li>
+<li>Configurar os intervalos de tempo entre posições</li>
+<li>Configurar um filtro de distância mínima entre posições ou um filtro de precisão</li>
+<li>Mostra ícone de notificação com coordenadas e ações rápidas</li>
+<li>Utiliza torres de celular para localização quando o GPS é desativado</li>
+<li>Escolher seletivamente provedores de rede, gps e localização passiva</li>
+<li>Submeter automaticamente ou enviar o arquivo via e-mail em intervalos definidos para e-mail, FTP, Dropbox, OpenStreetMap, Google Drive, URL personalizada.</li>
+<li>Compartilhar arquivos de localização ou registros via SMS/Email (e outros apps como Facebook ou Twitter, dependendo que você tiver instalado)</li>
+<li>Auto executar na inicialização</li>
+<li>Invocar operações do Tasker ou outros apps de automação.</li>
+<li>Você pode carregar um arquivo pré-definido com seus próprios valores para divulgação</li>
+<li>Implantação de perfis múltiplos com diferentes configurações</li>
+</ul>
 
-Embora o app nos permita frequências de 0 segundos, não é recomendado como gravação e log que ocorram muito rápido; Isto poderia causar instabilidade/travamento. Em vez disso, tente 1-3 segundos.
+Problemas, pedidos de funcionalidades, perguntas - por favor, posta no github.com/mendhak/gpslogger (rastreador de problemas).
 
-Se existe uma função que você gostaria de ver adicionada no programa, você pode mandar uma requisição no site do GitHub.
+<b>Observações</b>
 
-* * * Explicação de permissões:
+Uma conexão de dados é usada somente se você usar funcionalidade de envio automático ou URL personalizada
 
-Armazenamento - leitura e gravação de arquivos para a pasta GPSLogger no seu cartão SD
+Embora o app permita frequências de 0-zero segundos, ela não é recomendada, pois os registros estão acontecendo muito rapidamente; isto poderia causar instabilidade/travamento. Use 1-3 segundos em vez disso.
+
+
+<b>Explicação das permissões</b>
+
+Armazenamento - leitura e gravação de arquivos para a pasta do GPSLogger no seu cartão SD
 
 Comunicação de rede - usado ao fazer upload dos arquivos (Dropbox, Openstreetmap) ou envio de e-mails ou confirmando autorização no Dropbox ou Openstreetmap
 
@@ -37,4 +44,4 @@ Sua localização - usado para determinar a localização com base no seu GPS ou
 
 Ferramentas de sistema (executar automaticamente na inicialização) - usado se você optar por iniciar o GPSLogger na inicialização
 
-
+Permissões de armazenamento compartilhado - no Android 11, usado para permitir a gravação de arquivos em pastas da sua escolha
