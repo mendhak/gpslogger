@@ -220,10 +220,10 @@
     <string name="new_file_prefix_serial_summary">No Android 8 em diante, é utilizada uma identificação única do Android. Pre-Android 8, é usado o número da série de compilação, encontrado no status de seu telefone.</string>
     <string name="txt_travel_duration">Duração:</string>
     <string name="menu_onepoint">Registrar um ponto</string>
-    <string name="view_simple">Visualização simples</string>
-    <string name="view_detailed">Visualização detalhada</string>
-    <string name="view_big">Visualização ampla</string>
-    <string name="view_log">Exibição do Log</string>
+    <string name="view_simple">Modo simples</string>
+    <string name="view_detailed">Modo detalhado</string>
+    <string name="view_big">Modo grande</string>
+    <string name="view_log">Mostrar logs</string>
     <string name="bigview_taptotoggle">Toque para iniciar/parar log</string>
     <string name="summary_autosendtargets">Enviar para:</string>
     <string name="accuracy_filter_title">Filtro de precisão</string>
