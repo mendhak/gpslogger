@@ -28,6 +28,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import android.text.InputType;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.network.ConscryptProviderInstaller;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
@@ -80,6 +81,9 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
 
         findPreference("customurl_legend_1").setOnPreferenceClickListener(this);
         findPreference("customurl_validatecustomsslcert").setOnPreferenceClickListener(this);
+
+        Preference conscryptPref = findPreference("install_conscrypt_provider");
+        conscryptPref.setVisible(ConscryptProviderInstaller.shouldPromptUserForInstallation());
 
         findPreference("log_customurl_basicauth").setOnPreferenceClickListener(this);
         if(!Strings.isNullOrEmpty(preferenceHelper.getCustomLoggingBasicAuthUsername())){

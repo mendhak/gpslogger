@@ -60,4 +60,15 @@
         android:title="@string/ssl_certificate_validate"
         app:iconSpaceReserved="false" />
 
+    <Preference
+        android:dialogTitle="Install Conscrypt Provider"
+        android:key="install_conscrypt_provider"
+        android:summary="If you are on older Android versions, or experiencing connectivity issues to services, installing the Conscrypt Provider might help."
+        android:title="Install Conscrypt Provider"
+        app:iconSpaceReserved="false">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://github.com/mendhak/Conscrypt-Provider/releases" />
+    </Preference>
+
 </PreferenceScreen>
