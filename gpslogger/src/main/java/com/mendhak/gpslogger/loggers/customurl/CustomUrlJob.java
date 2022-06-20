@@ -27,13 +27,13 @@ import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.network.ConscryptProviderInstaller;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
 import okhttp3.*;
 
-import org.conscrypt.Conscrypt;
 import org.slf4j.Logger;
 
 import javax.net.ssl.X509TrustManager;
@@ -66,7 +66,7 @@ public class CustomUrlJob extends Job {
         LOG.info("HTTP Request - " + urlRequest.getLogURL());
 
         //Use Conscrypt library to enable TLS 1.3 on pre-Android 10 devices
-        Security.insertProviderAt(Conscrypt.newProvider(), 1);
+        ConscryptProviderInstaller.installIfNeeded(AppSettings.getInstance());
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
         okBuilder.sslSocketFactory(Networks.getSocketFactory(AppSettings.getInstance()),
                 (X509TrustManager) Networks.getTrustManager(AppSettings.getInstance()));

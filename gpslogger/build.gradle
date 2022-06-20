@@ -190,8 +190,6 @@ dependencies {
     implementation 'org.bouncycastle:bcpkix-jdk15to18:1.68'
     implementation 'org.bouncycastle:bcprov-jdk15to18:1.68'
 
-    //Use Conscrypt library to enable TLS 1.3 on pre-Android 10 devices
-    implementation 'org.conscrypt:conscrypt-android:2.5.2'
 
     //File Picker, but a patched version
     //https://github.com/codekidX/storage-chooser/issues/127

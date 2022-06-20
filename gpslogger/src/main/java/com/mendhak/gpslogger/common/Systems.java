@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
@@ -43,6 +44,12 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 
 import org.slf4j.Logger;
 
+import java.io.ByteArrayInputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.util.List;
 import java.util.Locale;
 
@@ -88,6 +95,34 @@ public class Systems {
         }
         return false;
     }
+
+    public static String getPackageSignature(String targetPackage, Context context) throws PackageManager.NameNotFoundException, CertificateException, NoSuchAlgorithmException {
+        if(isPackageInstalled(targetPackage, context)){
+            Signature sig = context.getPackageManager().getPackageInfo(targetPackage, PackageManager.GET_SIGNATURES).signatures[0];
+            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+            X509Certificate cert = (X509Certificate) cf.generateCertificate(new ByteArrayInputStream(sig.toByteArray()));
+            String hexString = null;
+            MessageDigest md = MessageDigest.getInstance("SHA1");
+            byte[] publicKey = md.digest(cert.getEncoded());
+            hexString = byte2HexFormatted(publicKey);
+            return hexString;
+        }
+        return "";
+    }
+
+    static String byte2HexFormatted(byte[] arr) {
+        StringBuilder str = new StringBuilder(arr.length * 2);
+        for (int i = 0; i < arr.length; i++) {
+            String h = Integer.toHexString(arr[i]);
+            int l = h.length();
+            if (l == 1) h = "0" + h;
+            if (l > 2) h = h.substring(l - 2, l);
+            str.append(h.toUpperCase());
+            if (i < (arr.length - 1)) str.append(':');
+        }
+        return str.toString();
+    }
+
 
     private static NetworkInfo getActiveNetworkInfo(Context context) {
         if (context == null) {

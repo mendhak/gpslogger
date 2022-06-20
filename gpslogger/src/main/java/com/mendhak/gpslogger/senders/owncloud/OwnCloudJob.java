@@ -27,6 +27,7 @@ import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.network.ConscryptProviderInstaller;
 import com.mendhak.gpslogger.common.network.LocalX509TrustManager;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.events.UploadEvents;
@@ -45,7 +46,6 @@ import com.owncloud.android.lib.resources.files.UploadRemoteFileOperation;
 import de.greenrobot.event.EventBus;
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
-import org.conscrypt.Conscrypt;
 import org.slf4j.Logger;
 
 import javax.net.ssl.SSLContext;
@@ -90,7 +90,7 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
         LOG.debug("ownCloud Job: Uploading  '" + localFile.getName() + "'");
 
         //Use Conscrypt library to enable TLS 1.3 on pre-Android 10 devices
-        Security.insertProviderAt(Conscrypt.newProvider(), 1);
+        ConscryptProviderInstaller.installIfNeeded(AppSettings.getInstance());
 
         Protocol pr = Protocol.getProtocol("https");
 

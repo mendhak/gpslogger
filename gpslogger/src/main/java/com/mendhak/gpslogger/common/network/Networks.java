@@ -32,7 +32,6 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.Dialogs;
 
-import org.conscrypt.Conscrypt;
 import org.slf4j.Logger;
 import javax.net.ssl.*;
 import java.io.*;
@@ -123,7 +122,7 @@ public class Networks {
     public static SSLSocketFactory getSocketFactory(Context context){
         try {
             //Use Conscrypt library to enable TLS 1.3 on pre-Android 10 devices
-            Security.insertProviderAt(Conscrypt.newProvider(), 1);
+            ConscryptProviderInstaller.installIfNeeded(context);
             SSLContext sslContext = SSLContext.getInstance("TLS");
             LocalX509TrustManager atm = null;
 
