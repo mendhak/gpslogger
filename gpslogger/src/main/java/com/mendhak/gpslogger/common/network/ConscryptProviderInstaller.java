@@ -15,6 +15,15 @@ public class ConscryptProviderInstaller {
     private static final Logger LOG = Logs.of(ConscryptProviderInstaller.class);
     private static boolean installed = false;
 
+    public static boolean shouldPromptUserForInstallation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            //Android 10 has TLS 1.3 enabled.
+            return false;
+        }
+
+        return !installed;
+    }
+
     @SuppressWarnings("unchecked")
     public static void installIfNeeded(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -68,7 +77,7 @@ public class ConscryptProviderInstaller {
                 LOG.error("Could not install Conscrypt Provider", e);
             }
         } else {
-            LOG.info("GPSLogger Conscrypt Provider is not installed.");
+            LOG.debug("GPSLogger Conscrypt Provider is not installed.");
         }
     }
 }
