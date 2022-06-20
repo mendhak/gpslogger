@@ -121,8 +121,7 @@ public class Networks {
 
     public static SSLSocketFactory getSocketFactory(Context context){
         try {
-            //Use Conscrypt library to enable TLS 1.3 on pre-Android 10 devices
-            ConscryptProviderInstaller.installIfNeeded(context);
+
             SSLContext sslContext = SSLContext.getInstance("TLS");
             LocalX509TrustManager atm = null;
 

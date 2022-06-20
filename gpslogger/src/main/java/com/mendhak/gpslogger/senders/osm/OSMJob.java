@@ -75,8 +75,6 @@ public class OSMJob extends Job {
     @Override
     public void onRun() throws Throwable {
 
-        //Use Conscrypt library to enable TLS 1.3 on pre-Android 10 devices
-        ConscryptProviderInstaller.installIfNeeded(AppSettings.getInstance());
         OkHttpOAuthConsumer consumer = new OkHttpOAuthConsumer("NQ4ucS4F0RpQO1byUQB5JA", Strings.GetOSM());
         consumer.setTokenWithSecret(PreferenceHelper.getInstance().getOSMAccessToken(), PreferenceHelper.getInstance().getOSMAccessTokenSecret());
 

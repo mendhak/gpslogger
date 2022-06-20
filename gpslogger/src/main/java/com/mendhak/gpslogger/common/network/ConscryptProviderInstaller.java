@@ -27,7 +27,7 @@ public class ConscryptProviderInstaller {
         }
 
         //Threat modelling - we should ensure that only a package with a trusted signature provides Conscrypt.
-        //In this case, either the same signature as this package (eg debug)
+        //In this case, either the same signature as this package (eg debugging locally)
         //Or, the F-droid/github signatures.
         boolean signatureMatch = false;
 

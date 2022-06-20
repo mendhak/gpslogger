@@ -89,8 +89,6 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
 
         LOG.debug("ownCloud Job: Uploading  '" + localFile.getName() + "'");
 
-        //Use Conscrypt library to enable TLS 1.3 on pre-Android 10 devices
-        ConscryptProviderInstaller.installIfNeeded(AppSettings.getInstance());
 
         Protocol pr = Protocol.getProtocol("https");
 

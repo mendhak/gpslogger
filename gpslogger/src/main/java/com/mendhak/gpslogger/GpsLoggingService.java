@@ -37,6 +37,7 @@ import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ProfileEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
+import com.mendhak.gpslogger.common.network.ConscryptProviderInstaller;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
@@ -101,9 +102,13 @@ public class GpsLoggingService extends Service  {
         nextPointAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         registerEventBus();
+        registerConscryptProvider();
     }
 
 
+    private void registerConscryptProvider(){
+        ConscryptProviderInstaller.installIfNeeded(this);
+    }
 
     private void registerEventBus() {
         EventBus.getDefault().registerSticky(this);

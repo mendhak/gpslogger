@@ -88,9 +88,6 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
 
         }
 
-        //Use Conscrypt library to enable TLS 1.3 on pre-Android 10 devices
-        //Required by provider.retrieveAccessToken() later, but need to provide it earlier.
-        ConscryptProviderInstaller.installIfNeeded(getActivity());
         setPreferencesState();
 
     }

@@ -65,8 +65,6 @@ public class CustomUrlJob extends Job {
 
         LOG.info("HTTP Request - " + urlRequest.getLogURL());
 
-        //Use Conscrypt library to enable TLS 1.3 on pre-Android 10 devices
-        ConscryptProviderInstaller.installIfNeeded(AppSettings.getInstance());
         OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
         okBuilder.sslSocketFactory(Networks.getSocketFactory(AppSettings.getInstance()),
                 (X509TrustManager) Networks.getTrustManager(AppSettings.getInstance()));
