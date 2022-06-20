@@ -1,1 +1,1 @@
-Um leve GPS logger, consome pouca bateria, GPX/KML, compartilhe localização, etc
+Um leve GPS logger, consome pouca bateria, GPX/KML, compartilhe localização etc.
