@@ -1,9 +1,15 @@
 package com.mendhak.gpslogger.common.network;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
+import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 
@@ -79,5 +85,22 @@ public class ConscryptProviderInstaller {
         } else {
             LOG.debug("GPSLogger Conscrypt Provider is not installed.");
         }
+    }
+
+    /**
+     * Adds a preference item to the given preference screen, prompting user to install Conscrypt Provider
+     * if they are on an older Android device.
+     * @param screen - this.getPreferenceScreen()
+     */
+    public static void addConscryptPreferenceItemIfNeeded(PreferenceScreen screen){
+        if(shouldPromptUserForInstallation()){
+            Preference conscryptPreference = new Preference(screen.getContext());
+            conscryptPreference.setTitle(R.string.install_conscrypt_provider_title);
+            conscryptPreference.setSummary(R.string.install_conscrypt_provider_summary);
+            conscryptPreference.setIntent(new Intent("android.intent.action.VIEW", Uri.parse("https://github.com/mendhak/Conscrypt-Provider/releases")));
+            conscryptPreference.setIconSpaceReserved(false);
+            screen.addPreference(conscryptPreference);
+        }
+
     }
 }

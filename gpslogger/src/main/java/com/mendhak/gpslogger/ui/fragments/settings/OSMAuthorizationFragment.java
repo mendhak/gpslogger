@@ -111,8 +111,7 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
         tagsPref.setOnPreferenceClickListener(this);
         tagsPref.setSummary(preferenceHelper.getOSMTags());
 
-        Preference conscryptPref = findPreference("install_conscrypt_provider");
-        conscryptPref.setVisible(ConscryptProviderInstaller.shouldPromptUserForInstallation());
+        ConscryptProviderInstaller.addConscryptPreferenceItemIfNeeded(this.getPreferenceScreen());
 
         Preference resetPref = findPreference("osm_resetauth");
 
