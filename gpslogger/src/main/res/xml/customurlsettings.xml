@@ -61,9 +61,9 @@
         app:iconSpaceReserved="false" />
 
     <Preference
-        android:dialogTitle="Install Conscrypt Provider"
+        android:dialogTitle="@string/install_conscrypt_provider_title"
         android:key="install_conscrypt_provider"
-        android:summary="If you are on older Android versions, or experiencing connectivity issues to services, installing the Conscrypt Provider might help."
+        android:summary="@string/install_conscrypt_provider_summary"
         android:title="Install Conscrypt Provider"
         app:iconSpaceReserved="false">
         <intent
