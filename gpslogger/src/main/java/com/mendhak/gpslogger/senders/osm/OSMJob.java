@@ -21,6 +21,7 @@ package com.mendhak.gpslogger.senders.osm;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
@@ -28,21 +29,26 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
-import com.mendhak.gpslogger.common.network.ConscryptProviderInstaller;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import de.greenrobot.event.EventBus;
-import oauth.signpost.OAuthConsumer;
-import okhttp3.*;
 
 import org.slf4j.Logger;
-import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer;
-import se.akerfeldt.okhttp.signpost.SigningInterceptor;
 
 import java.io.File;
-import java.security.Security;
 
 import javax.net.ssl.X509TrustManager;
+
+import de.greenrobot.event.EventBus;
+import oauth.signpost.OAuthConsumer;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer;
+import se.akerfeldt.okhttp.signpost.SigningInterceptor;
 
 public class OSMJob extends Job {
 
