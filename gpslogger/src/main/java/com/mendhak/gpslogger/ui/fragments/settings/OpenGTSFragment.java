@@ -31,6 +31,7 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.network.ConscryptProviderInstaller;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
@@ -81,6 +82,8 @@ public class OpenGTSFragment extends PreferenceFragmentCompat implements
         findPreference(PreferenceNames.OPENGTS_DEVICE_ID).setSummary(preferenceHelper.getOpenGTSDeviceId());
 
         findPreference("opengts_validatecustomsslcert").setOnPreferenceClickListener(this);
+
+        ConscryptProviderInstaller.addConscryptPreferenceItemIfNeeded(this.getPreferenceScreen());
 
     }
 
