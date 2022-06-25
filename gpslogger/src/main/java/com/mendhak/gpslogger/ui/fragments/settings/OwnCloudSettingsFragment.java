@@ -29,25 +29,26 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.ConscryptProviderInstaller;
 import com.mendhak.gpslogger.common.network.Networks;
-import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudManager;
 import com.mendhak.gpslogger.ui.Dialogs;
-import de.greenrobot.event.EventBus;
-import eltos.simpledialogfragment.SimpleDialog;
-import eltos.simpledialogfragment.form.Input;
-import eltos.simpledialogfragment.form.SimpleFormDialog;
 
 import org.slf4j.Logger;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import de.greenrobot.event.EventBus;
+import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.Input;
+import eltos.simpledialogfragment.form.SimpleFormDialog;
 
 public class OwnCloudSettingsFragment
         extends PreferenceFragmentCompat
