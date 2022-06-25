@@ -27,7 +27,6 @@ import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.network.ConscryptProviderInstaller;
 import com.mendhak.gpslogger.common.network.LocalX509TrustManager;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.events.UploadEvents;
@@ -52,7 +51,6 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import java.io.File;
 import java.security.GeneralSecurityException;
-import java.security.Security;
 
 public class OwnCloudJob extends Job implements OnRemoteOperationListener {
 
