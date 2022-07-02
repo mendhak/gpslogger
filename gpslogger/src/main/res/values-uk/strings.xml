@@ -234,7 +234,7 @@
     <string name="autoftp_directory">Тека</string>
     <string name="new_file_custom_message">Ви можете використовувати %SER для серійного номеру пристрою, %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER для версії</string>
     <string name="new_file_prefix_serial_title">Приставляти серійний номер пристрою на початку імені файлу</string>
-    <string name="new_file_prefix_serial_summary">Цей серійний номер знайдено в статусі вашого телефону </string>
+    <string name="new_file_prefix_serial_summary">У Android 8 і вище використовується унікальний Android ID. До Android 8 – серійний номер збірки, що вказаний у стані вашого телефону.</string>
     <string name="txt_travel_duration">Тривалість:</string>
     <string name="menu_onepoint">Записати одну точку</string>
     <string name="view_simple">Простий вигляд</string>
