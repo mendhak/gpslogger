@@ -1,4 +1,4 @@
-GPSLogger  [![githubactions](https://github.com/mendhak/gpslogger/workflows/Android%20CI/badge.svg)](https://github.com/mendhak/gpslogger/actions) [![pgp](assets/pgp.png)](https://keybase.io/mendhak) [![Weblate](https://hosted.weblate.org/widgets/gpslogger/-/android/svg-badge.svg)](https://hosted.weblate.org/engage/gpslogger/)
+GPSLogger  [![githubactions](https://github.com/mendhak/gpslogger/workflows/Android%20CI/badge.svg)](https://github.com/mendhak/gpslogger/actions) [![pgp](assets/pgp.png)](https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95e7d75c76cbe9a9) [![Weblate](https://hosted.weblate.org/widgets/gpslogger/-/android/svg-badge.svg)](https://hosted.weblate.org/engage/gpslogger/)
 =========
 
 GPSLogger is an Android app that logs GPS information to various formats (GPX, KML, CSV, NMEA, Custom URL) and has options for uploading (SFTP, OpenStreetMap, Google Drive, Dropbox, Email). This app aims to be as battery efficient as possible.
@@ -32,7 +32,7 @@ I'm not very good at UIs, so any work with the layouts would be appreciated!
 
 It's good practice to verify downloads.  In recent releases, a PGP signature and an SHA256 checksum will accompany each `.apk`.
 
-Import PGP Public Key from [Keybase.io](https://keybase.io/mendhak) or just `gpg --recv-key 6989CF77490369CFFDCBCD8995E7D75C76CBE9A9`
+Import PGP Public Key from [the Ubuntu Keyserver](https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95e7d75c76cbe9a9) or just `gpg --recv-key 6989CF77490369CFFDCBCD8995E7D75C76CBE9A9`
 
 To verify the integrity and signature:
 
