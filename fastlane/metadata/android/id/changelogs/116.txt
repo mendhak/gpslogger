@@ -1,0 +1,3 @@
+* Perbaikan izin file untuk Android 11+. Anda sekarang dapat mengatur jalur file khusus, dan Anda akan diminta untuk memberikan izin pengelola file.
+* Izin baru ditambahkan, MANAGE_EXTERNAL_STORAGE. Ini untuk memungkinkan fitur jalur file khusus di Android 11+.
+* Perbaikan Bug: Izinkan karakter UTF-8 dalam nama folder FTP.

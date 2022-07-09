@@ -1,0 +1,1 @@
+* Bug diperbaiki: Perintah Pemberi tugas getstatus tidak mengirim siaran status.

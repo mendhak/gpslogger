@@ -1,0 +1,5 @@
+* Parameter URL Kostum baru: %ALL yang menggantikan setiap parameter URL kostum yang tersedia
+* Perbaikan bug: keluar dari + di timestamps url kostum
+* Perbaikan bug: waktu tidak diatur ulang saat berganti profil
+* Perbaikan bug: saat menutup laci, tutup daftar profil terlebih dahulu.
+* Perbaikan bug: saat mengklik item dalam daftar profil, biarkan laci tetap terbuka
