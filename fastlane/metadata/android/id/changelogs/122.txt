@@ -1,0 +1,6 @@
+* Google Drive kembali! implementasi ulang tanpa pustaka sumber tertutup
+* Mungkinan perbaikan bug untuk notifikasi GPSLogger yang tiba-tiba muncul saat tidak digunakan
+* Jika layanan lokasi nonaktif, aplikasi akan menunggu (dengan ikon peringatan), dan melanjutkan saat diaktifkan kembali.
+* Ukuran font yang disesuaikan dengan detail sehingga lat/long lebih pas
+* Menggunakan alarm yang tepat untuk membantu lokasi yang ditahan dalam mode tidur
+* Preferensi aksi ganda baru di Pengaturan Unggah

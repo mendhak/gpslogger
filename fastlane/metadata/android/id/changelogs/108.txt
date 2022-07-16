@@ -1,0 +1,2 @@
+mengemas ulang GPSLogger untuk F-Droid.
+Hapus Google Drive, Pengenalan Aktivitas, dependensi Layanan Play.

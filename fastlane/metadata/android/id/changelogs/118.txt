@@ -1,0 +1,5 @@
+* Pilihan Tema Gelap Baru, itu akan secara otomatis mengikuti mode siang / malam sistem.
+* Anda juga dapat mengatur Tema Terang/Gelap secara manual di pengaturan Umum.
+* Mengolah ulang Layar pengaturan, untuk menampilkan pada pengguna nilai yang dipilih  jika memungkinkan.
+* Menambahkan file dan folder picker. Aplikasi akan meminta izin tambahan di Android 11+ untuk jalur khusus.
+* SFTP sekarang dapat terhubung menggunakan algoritma SSH modern.

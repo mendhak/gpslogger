@@ -1,0 +1,8 @@
+* URL kostum bisa dipakai sebagai pengirim otomatis, untuk membantu keandalan.
+* Opsi untuk menulis waktu dengan offset zona waktu, di bawah Detail log. (GPX, KML, GeoJSON, CSV)
+* URL kostum bisa pakai parameter %TIMEOFFSET
+* CSV Logging: banyak tambahkan.
+* CSV Logging: opsi untuk tegaskan batas dan pemisah desimal koma.
+* Tampilan log akan Tampilkan koordinat dalam format pilihan pengguna.
+* Jika pulih dari berhenti tak terduga, masuk lagi jika sebelumnya masuk.
+* Perbaikan bug bahasa Hongaria
