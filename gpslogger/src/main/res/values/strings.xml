@@ -479,8 +479,8 @@
     <string name="logging_advanced_delete_files">Delete selected files</string>
     <string name="logging_advanced_delete_files_summary">Long press to select multiple files.</string>
     <string name="customurl_all_parameters">All parameters:</string>
-    <string name="install_conscrypt_provider_summary">If you are encountering SSL connectivity issues on older Android devices, installing the Conscrypt Provider might help. (Follow this link, install APK, then restart app)</string>
-    <string name="install_conscrypt_provider_title">Install Conscrypt Provider</string>
+    <string name="install_conscrypt_provider_summary">If you are encountering SSL/TLS connectivity issues on older Android devices, installing the Conscrypt Provider might help. (Follow this link, install APK, then restart app)</string>
+    <string name="install_conscrypt_provider_title">Install Conscrypt Provider (SSL/TLS)</string>
 
 
 </resources>
