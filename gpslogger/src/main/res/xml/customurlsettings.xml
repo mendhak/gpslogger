@@ -60,4 +60,5 @@
         android:title="@string/ssl_certificate_validate"
         app:iconSpaceReserved="false" />
 
+
 </PreferenceScreen>

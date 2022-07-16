@@ -30,13 +30,17 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import com.mendhak.gpslogger.GpsMainActivity;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.osm.OpenStreetMapManager;
 import com.mendhak.gpslogger.ui.Dialogs;
+
+import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.form.Input;
@@ -45,10 +49,6 @@ import eltos.simpledialogfragment.list.SimpleListDialog;
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
-import org.slf4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class OSMAuthorizationFragment extends PreferenceFragmentCompat
         implements Preference.OnPreferenceClickListener, SimpleDialog.OnDialogResultListener {
@@ -84,7 +84,6 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
             new Thread(new OsmAuthorizationEndWorkflow(oAuthVerifier)).start();
 
         }
-
 
         setPreferencesState();
 
@@ -247,6 +246,7 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
                     //In case consumer is null, re-initialize from stored values.
                     consumer = OpenStreetMapManager.getOSMAuthConsumer();
                 }
+
 
                 //Ask OpenStreetMap for the access token. This is the main event.
                 provider.retrieveAccessToken(consumer, oAuthVerifier);

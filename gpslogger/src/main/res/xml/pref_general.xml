@@ -45,6 +45,17 @@
         android:title="@string/enabledisablegps_title"
         app:iconSpaceReserved="false" />
 
+    <Preference
+        android:key="install_conscrypt_provider"
+        android:title="@string/install_conscrypt_provider_title"
+        android:summary="@string/install_conscrypt_provider_summary"
+        app:iconSpaceReserved="false"
+        >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://github.com/mendhak/Conscrypt-Provider/releases" />
+    </Preference>
+
     <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="debugtofile"

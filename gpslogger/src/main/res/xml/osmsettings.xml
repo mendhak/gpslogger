@@ -36,4 +36,5 @@
         android:title="@string/osm_tags"
         app:iconSpaceReserved="false" />
 
+
 </PreferenceScreen>

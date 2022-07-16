@@ -45,7 +45,7 @@ android {
         targetSdkVersion 30
 
         versionCode 122
-        versionName "122"
+        versionName "123-rc1"
 
         manifestPlaceholders = [
                 appAuthRedirectScheme: 'com.mendhak.gpslogger'
@@ -185,9 +185,11 @@ dependencies {
     //Markdown to HTML library
     implementation 'com.github.commonsguy:cwac-anddown:dedb48ec0f'
 
+    // A fork of JSCH used in SFTPJob.  It specifically requires bouncycastle to use modern algorithms.
     implementation 'com.github.mwiede:jsch:0.1.67'
     implementation 'org.bouncycastle:bcpkix-jdk15to18:1.68'
     implementation 'org.bouncycastle:bcprov-jdk15to18:1.68'
+
 
     //File Picker, but a patched version
     //https://github.com/codekidX/storage-chooser/issues/127

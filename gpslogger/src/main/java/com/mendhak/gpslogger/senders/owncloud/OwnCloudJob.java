@@ -20,6 +20,7 @@
 package com.mendhak.gpslogger.senders.owncloud;
 
 import android.net.Uri;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -27,9 +28,9 @@ import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.LocalX509TrustManager;
 import com.mendhak.gpslogger.common.network.Networks;
-import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.owncloud.android.lib.common.OwnCloudClient;
 import com.owncloud.android.lib.common.OwnCloudClientFactory;
@@ -42,15 +43,18 @@ import com.owncloud.android.lib.common.operations.RemoteOperationResult;
 import com.owncloud.android.lib.resources.files.CreateRemoteFolderOperation;
 import com.owncloud.android.lib.resources.files.FileUtils;
 import com.owncloud.android.lib.resources.files.UploadRemoteFileOperation;
-import de.greenrobot.event.EventBus;
+
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.slf4j.Logger;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
 import java.io.File;
 import java.security.GeneralSecurityException;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+
+import de.greenrobot.event.EventBus;
 
 public class OwnCloudJob extends Job implements OnRemoteOperationListener {
 
@@ -86,6 +90,7 @@ public class OwnCloudJob extends Job implements OnRemoteOperationListener {
     public void onRun() throws Throwable {
 
         LOG.debug("ownCloud Job: Uploading  '" + localFile.getName() + "'");
+
 
         Protocol pr = Protocol.getProtocol("https");
 

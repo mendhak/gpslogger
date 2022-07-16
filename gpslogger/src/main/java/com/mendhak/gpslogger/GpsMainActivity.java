@@ -82,6 +82,7 @@ import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ProfileEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.network.ConscryptProviderInstaller;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
 import com.mendhak.gpslogger.loggers.Files;
@@ -158,6 +159,7 @@ public class GpsMainActivity extends AppCompatActivity
         loadDefaultFragmentView();
         startAndBindService();
         registerEventBus();
+        registerConscryptProvider();
 
         if(!Systems.hasUserGrantedAllNecessaryPermissions(this)){
             LOG.debug("Permission check - missing permissions");
@@ -501,6 +503,10 @@ public class GpsMainActivity extends AppCompatActivity
         outState = drawerHeader.saveInstanceState(outState);
 
         super.onSaveInstanceState(outState);
+    }
+
+    private void registerConscryptProvider(){
+        ConscryptProviderInstaller.installIfNeeded(this);
     }
 
     private void registerEventBus() {

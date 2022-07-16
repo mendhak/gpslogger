@@ -30,15 +30,24 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.ui.Dialogs;
+
 import org.slf4j.Logger;
-import javax.net.ssl.*;
-import java.io.*;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertStoreException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
 
 public class Networks {
 
@@ -118,6 +127,7 @@ public class Networks {
 
     public static SSLSocketFactory getSocketFactory(Context context){
         try {
+
             SSLContext sslContext = SSLContext.getInstance("TLS");
             LocalX509TrustManager atm = null;
 
