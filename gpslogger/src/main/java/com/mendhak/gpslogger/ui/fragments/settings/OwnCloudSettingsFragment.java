@@ -32,7 +32,6 @@ import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.events.UploadEvents;
-import com.mendhak.gpslogger.common.network.ConscryptProviderInstaller;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -76,8 +75,6 @@ public class OwnCloudSettingsFragment
 
         findPreference("owncloud_test").setOnPreferenceClickListener(this);
         findPreference("owncloud_validatecustomsslcert").setOnPreferenceClickListener(this);
-
-        ConscryptProviderInstaller.addConscryptPreferenceItemIfNeeded(this.getPreferenceScreen());
 
         registerEventBus();
     }
