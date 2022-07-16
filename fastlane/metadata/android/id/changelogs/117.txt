@@ -1,0 +1,5 @@
+* Menambah Picker file dan folder. Dipakai untuk jalur simpan GPSLogger. Juga kunci pribadi SFTP.
+* Pustaka SSH baru untuk izinkan koneksi menggunakan algoritma SSH lebih modern, saat gunakan fitur SFTP.
+* Perbaikan izin file untuk Android 11+. Anda sekarang bisa mengatur jalur file kostum, dan Anda akan diminta izinkan pengelola file.
+* Izin baru ditambah, MANAGE_EXTERNAL_STORAGE. Ini untuk izin fitur jalur file khusus di Android 11+.
+* Perbaikan Bug: Izinkan karakter UTF-8 di nama folder FTP.

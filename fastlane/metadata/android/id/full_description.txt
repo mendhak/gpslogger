@@ -36,5 +36,3 @@ Jaringan komunikasi - digunakan ketika meng-upload berkas (Dropbox, Openstreetma
 Lokasi Anda - digunakan untuk menentukan GPS atau Menara Anda berdasarkan lokasi
 
 Alat sistem (secara otomatis dimulai pada saat boot) - digunakan jika Anda memilih memulai bootup GPSLogger
-
-

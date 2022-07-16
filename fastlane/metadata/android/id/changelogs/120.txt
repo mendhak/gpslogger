@@ -1,0 +1,7 @@
+* Status pengisian daya baterai di URL Kostum (%ISCHARGING) dan CSV (pengisian_baterai)
+* Jika OSM dan pengiriman otomatis diaktifkan, Anda akan dimintai detail pelacakan OSM saat memulai, dan mengunggah
+* Kemampuan untuk menghapus file (di bawah logging, lanjutan).
+* GPX 1.1 Logging, menambahkan gpxtpx:kecepatan dan gpxtpx:ekstensi bantalan
+* Dropbox telah memperbarui metode otentikasinya
+* Perbaikan Bug: banyak file diunggah jika nama berisikan nama file lain
+* Terjemahan diperbarui

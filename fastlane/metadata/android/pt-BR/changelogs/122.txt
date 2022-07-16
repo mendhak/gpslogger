@@ -1,0 +1,6 @@
+* Google Drive está de volta! Agora sem bibliotecas proprietárias
+* Corrigido erro de notificação aparecendo aleatoriamente quando app não está em uso
+* Ao desativar os serviços de localização, o app ficará em modo de espera (mostrando ícone de aviso) e retomará quando for reativado.
+* Tamanho de fonte foi ajustado em modo detalhado para melhorar exibição de lat/long
+* Uso de alarme mais preciso para ajudar com posições suprimidas na suspensão
+* Nova opção de dupla ação em configs de upload
