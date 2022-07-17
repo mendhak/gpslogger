@@ -1,6 +1,6 @@
-* Di Android 10+, perizinan alur kerja akan meminta "izinkan sepanjang waktu"
-* Perizinan Alur kerja juga akan meminta penonaktifan pengoptimalan baterai
-* Perizinan Alur kerja mengganggu, maaf, perlu membantu dengan banyak permintaan dukungan terkait dengan batasan latar belakang.
-* Ikon adaptif, terima kasih kepada @kanru
+* Di Android 10+, izin alur kerja akan meminta untuk "izinkan sepanjang waktu"
+* izin Alur kerja juga akan meminta penonaktifan pengoptimalan baterai
+* izin Alur kerja itu menyebalkan, maaf, tapi cukup membantu dengan banyaknya permintaan dukungan terkait dengan batasan latar belakang.
+* Ikon adaptif, terima kasih untuk @kanru
 * Menambahkan opsi untuk mengatur ulang aplikasi (menghapus semua file dan izin untuk aplikasi), dalam pengaturan Umum
 * Terjemahan yang diperbarui dari Crowdin
