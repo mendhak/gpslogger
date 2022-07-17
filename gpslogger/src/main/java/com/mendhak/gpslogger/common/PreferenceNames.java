@@ -77,6 +77,7 @@ public  class PreferenceNames {
     public static final String OPENGTS_ACCOUNT_NAME = "opengts_accountname";
     public static final String HIDE_NOTIFICATION_BUTTONS = "hide_notification_buttons";
     public static final String HIDE_NOTIFICATION_FROM_STATUS_BAR = "hide_notification_from_status_bar";
+    public static final String HIDE_NOTIFICATION_FROM_LOCK_SCREEN = "hide_notification_from_lock_screen";
     public static final String DISPLAY_IMPERIAL = "useImperial";
 
     public static final String OPENSTREETMAP_ACCESS_TOKEN = "osm_accesstoken";
