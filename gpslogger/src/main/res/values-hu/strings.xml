@@ -373,4 +373,6 @@
     <string name="google_drive_folder_path">Google Drive mappa elérési útja</string>
     <string name="google_drive_folder_path_summary_1">Használjon egyetlen mappanevet (pl. GPSLogger) vagy egy mappa elérési utat (pl. aaa/bbb/ccc). A mappákat az alkalmazásnak kell létrehoznia.</string>
     <string name="google_drive_folder_path_summary_2">Ha egyetlen mappanevet használ, létrehozása után áthelyezhető máshová a Google Drive-ban. A mappa elérése lassabb, mert az elérési út minden részét ellenőrizni kell vagy létre kell hozni a fájlok feltöltése előtt.</string>
+    <string name="install_conscrypt_provider_title">Conscrypt Provider (SSL/TLS) telepítése</string>
+    <string name="install_conscrypt_provider_summary">Ha régebbi Android-eszközökön SSL/TLS csatlakozási problémákat tapasztal, a Conscrypt Provider telepítése segíthet. (Kövesse ezt a linket, telepítse az APK-t, majd indítsa újra az alkalmazást)</string>
 </resources>
