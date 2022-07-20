@@ -371,4 +371,6 @@
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>abaikan pengoptimalan baterai</b> - mengizinkan aplikasi untuk berjalan dilatar belakang dengan mengurangi pengoptimalan baterai.</string>
     <string name="reset_app_summary">ini akan mengatur ulang aplikasi, menghapus beberapa pilihan, menghapus file GPSLogger, dan mencabut perizinan pada aplikasi ini. semua data akan hilang!</string>
     <string name="file_logging_log_time_with_offset_title">pencatat waktu dengan zona waktu pertimbangan</string>
+    <string name="install_conscrypt_provider_summary">jika anda menemui masalah sambungan SSL/TLS pada perangkat android yang lama, memasang Conscrypt Provider mungkin membantu. (ikuti tautan ini, pasang APK, lalu muat ulang aplikasi)</string>
+    <string name="install_conscrypt_provider_title">memasang Conscrypt Provider (SSL/TLS)</string>
 </resources>
