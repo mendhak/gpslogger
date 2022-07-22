@@ -9,9 +9,9 @@
     <string name="txt_direction">Правец:</string>
     <string name="txt_satellites">Сателити:</string>
     <!-- general -->
-    <string name="meter">&#160;метар</string>
-    <string name="seconds">&#160;с</string>
-    <string name="minutes">&#160;мин</string>
+    <string name="meter"> метар</string>
+    <string name="seconds"> с</string>
+    <string name="minutes"> мин</string>
     <string name="hours">часа</string>
     <string name="providername_gps">GPS сателити</string>
     <!-- Settings activity -->
@@ -19,4 +19,14 @@
     <string name="change_language_title">Промени јазик</string>
     <string name="change_language_summary">Не се сите јазици целосно преведени! Мора да ја рестатирате апликацијата за да има ефект промената на јазикот.</string>
     <string name="hide_notification_from_status_bar">Сокриј ги известувањата од статусната лента</string>
+    <string name="app_name">GPSLogger</string>
+    <string name="ok">ОК</string>
+    <string name="cancel">Откажи</string>
+    <string name="hide">Скриј</string>
+    <string name="menu_annotate">Забелешка</string>
+    <string name="txt_longitude">Должина:</string>
+    <string name="txt_altitude">Висина:</string>
+    <string name="txt_travel_distance">Патувано:</string>
+    <string name="txt_latitude">Ширина:</string>
+    <string name="txt_accuracy">Прецизност:</string>
 </resources>
