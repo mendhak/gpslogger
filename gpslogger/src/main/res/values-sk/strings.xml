@@ -392,4 +392,6 @@ polia.
     <string name="google_drive_folder_path_summary_2">Ak použijete názov jedného priečinka, bude sa dať po vytvorení presunúť kamkoľvek v rámci Google Drive. Cesty k priečinkom sú pomalšie, pretože sa musí skontrolovať alebo vytvoriť každá časť cesty a odoslanie súborov prebehne až potom.</string>
     <string name="google_drive_folder_path">Cesta k priečinku v službe Google Drive</string>
     <string name="google_drive_folder_path_summary_1">Použite názov jedného priečinka (napr. GPSLogger), alebo cesty k priečinku (napr. aaa/bbb/ccc). Priečinky musia byť vytvorené touto aplikáciou.</string>
+    <string name="install_conscrypt_provider_title">Nainštalovať Conscrypt Provider (SSL/TLS)</string>
+    <string name="install_conscrypt_provider_summary">Ak zaznamenávate problémy so SSL/TLS konektiviou na starších zariadenia Android, môže pomôcť nainštalovanie Conscrypt Provider. Kliknutím na tento odkaz nainštalujete APK, potom aplikáciu reštartujte</string>
 </resources>
