@@ -1,0 +1,3 @@
+* Kilit ekranında GPSLogger bildiriminin gösterilmesine izin verme seçeneği eklendi.
+* Android 10 öncesi aygıtlar için, GPSLogger'ın TLS 1.3 hizmetlerine bağlanmasına ihtiyacınız varsa veya SSL bağlantı sorunları yaşıyorsanız Conscrypt Provider'ı kurma seçeneği.
+* Weblate topluluğundan birçok çeviri güncellemeleri, hepinize her zamanki gibi teşekkürler.

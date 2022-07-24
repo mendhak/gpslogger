@@ -1,0 +1,2 @@
+F-Droid için GPSLogger yeniden paketlendi.
+Google Drive, Etkinlik Algılama, Play hizmetleri bağımlılıkları kaldırıldı.
