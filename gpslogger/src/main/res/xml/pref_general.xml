@@ -32,6 +32,13 @@
         app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
+        android:key="hide_notification_from_lock_screen"
+        android:title="Hide notification from lock screen"
+        android:summary="@string/restart_required"
+        android:defaultValue="true"
+        app:iconSpaceReserved="false"/>`
+
+    <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="hide_notification_from_status_bar"
         android:summary="@string/restart_required"
@@ -53,7 +60,7 @@
         >
         <intent
             android:action="android.intent.action.VIEW"
-            android:data="https://github.com/mendhak/Conscrypt-Provider/releases" />
+            android:data="https://f-droid.org/en/packages/com.mendhak.conscryptprovider/" />
     </Preference>
 
     <SwitchPreferenceCompat

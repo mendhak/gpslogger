@@ -1,0 +1,3 @@
+* Added option to allow showing GPSLogger notification on the lock screen.
+* For pre-Android 10 devices, option to install Conscrypt Provider if you need GPSLogger to connect to TLS 1.3 services or are having SSL connectivity issues.
+* Many updated translations from the Weblate community, thanks as always to all of you.

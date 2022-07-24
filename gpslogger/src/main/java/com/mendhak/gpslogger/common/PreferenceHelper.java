@@ -486,6 +486,12 @@ public class PreferenceHelper {
         return prefs.getBoolean(PreferenceNames.HIDE_NOTIFICATION_FROM_STATUS_BAR, false);
     }
 
+    @ProfilePreference(name=PreferenceNames.HIDE_NOTIFICATION_FROM_LOCK_SCREEN)
+    public boolean shouldHideNotificationFromLockScreen(){
+        return prefs.getBoolean(PreferenceNames.HIDE_NOTIFICATION_FROM_LOCK_SCREEN, true);
+    }
+
+
     /**
      * Whether to display certain values using imperial units
      */

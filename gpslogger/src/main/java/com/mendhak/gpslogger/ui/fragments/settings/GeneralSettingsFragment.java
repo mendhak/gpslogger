@@ -84,7 +84,11 @@ public class GeneralSettingsFragment extends PreferenceFragmentCompat implements
 
         setCoordinatesFormatPreferenceItem();
         setLanguagesPreferenceItem();
-        findPreference("install_conscrypt_provider").setEnabled(ConscryptProviderInstaller.shouldPromptUserForInstallation());
+        Preference conscryptPreference = findPreference("install_conscrypt_provider");
+        conscryptPreference.setEnabled(ConscryptProviderInstaller.shouldPromptUserForInstallation());
+        conscryptPreference.setIntent(ConscryptProviderInstaller.getConscryptInstallationIntent(getActivity()));
+
+
 
         Preference aboutInfo = findPreference("about_version_info");
         try {

@@ -1,7 +1,9 @@
 package com.mendhak.gpslogger.common.network;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -80,4 +82,17 @@ public class ConscryptProviderInstaller {
         }
     }
 
+    public static Intent getConscryptInstallationIntent(Context context) {
+        // Default to Github
+        Intent conscryptIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://f-droid.org/en/packages/com.mendhak.conscryptprovider/"));
+
+        // If F-Droid client is installed, go straight to app listing
+        if(Systems.isPackageInstalled("org.fdroid.fdroid", context)){
+            conscryptIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("fdroid.app://details?id=com.mendhak.conscryptprovider"));
+        }
+
+        conscryptIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        return conscryptIntent;
+
+    }
 }

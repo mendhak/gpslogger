@@ -530,7 +530,7 @@ public class GpsLoggingService extends Service  {
                 channel.enableLights(false);
                 channel.enableVibration(false);
                 channel.setSound(null,null);
-                channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+                channel.setLockscreenVisibility(preferenceHelper.shouldHideNotificationFromLockScreen() ? Notification.VISIBILITY_PRIVATE : Notification.VISIBILITY_PUBLIC);
 
                 channel.setShowBadge(true);
                 manager.createNotificationChannel(channel);
@@ -542,7 +542,7 @@ public class GpsLoggingService extends Service  {
                     .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.gpsloggericon3))
                     .setPriority( preferenceHelper.shouldHideNotificationFromStatusBar() ? NotificationCompat.PRIORITY_MIN : NotificationCompat.PRIORITY_LOW)
                     .setCategory(NotificationCompat.CATEGORY_SERVICE)
-                    .setVisibility(NotificationCompat.VISIBILITY_SECRET) //This hides the notification from lock screen
+                    .setVisibility(preferenceHelper.shouldHideNotificationFromLockScreen() ? NotificationCompat.VISIBILITY_SECRET : NotificationCompat.VISIBILITY_PUBLIC) //This hides the notification from lock screen
                     .setContentTitle(contentTitle)
                     .setContentText(contentText)
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(contentText).setBigContentTitle(contentTitle))
