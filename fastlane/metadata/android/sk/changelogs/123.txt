@@ -1,0 +1,3 @@
+* Pridaná možnosť povoliť zobrazenie notifikácie GPSLogger na obrazovke uzamknutia.
+* Pre zariadenia pre-Android 10: možnosť nainštalovania Conscrypt Provider, ak potrebujete, aby sa GPSLogger pripájal k službám TLS 1.3 alebo ak máte problémy so SSL konektivitou.
+* Viacero aktualizovaných prekladov z komunity Weblate, ako vždy - všetkým ďakujeme.
