@@ -369,4 +369,10 @@ une plus grande précision à basses fréquences.    </string>
     <string name="txt_battery_charging">En charge</string>
     <string name="logging_advanced_delete_files_summary">Appui long pour sélectionner plusieurs fichiers.</string>
     <string name="logging_advanced_delete_files">Supprimer les fichiers sélectionnés</string>
+    <string name="install_conscrypt_provider_summary">Si vous rencontrez des difficultés de connections SSL/TLS sur les anciens appareils Android, vous pouvez essayer d\'installer le Fournisseur Conscrypt. (Suivez le lien, installez l\'APK, puis redémarrer l\'application)</string>
+    <string name="install_conscrypt_provider_title">Installer Conscrypt Provider (SSL/TLS)</string>
+    <string name="google_drive_folder_path">Chemin du dossier de Google Drive</string>
+    <string name="google_drive_folder_path_summary_1">Utilisez un nom de dossier unique (par exemple GPSLogger), ou un chemin d\'accès (par exemple aaa/bbb/ccc). Les dossiers doivent être créés par cette application.</string>
+    <string name="google_drive_folder_path_summary_2">Si vous utilisez un simple nom de dossier, il peut être déplacé ailleurs dans Google Drive après sa création. Les chemins d\'accès au dossier sont plus lent car chaque partie du chemin doit être vérifiée ou créée, avant que les fichiers ne soit envoyé.</string>
+    <string name="customurl_all_parameters">Tous les paramètres :</string>
 </resources>

@@ -1,0 +1,3 @@
+* Új opció, amely lehetővé teszi a GPSLogger értesítések megjelenítése a lezárási képernyőn.
+* Android 10 előtti eszközökön lehetőség van a Conscrypt Provider telepítésére, akkor szükséges, ha SSL-kapcsolati problémái vannak vagy a TLS 1.3-as szolgáltatást használ.
+* Köszönjük a Weblate közösségnek a sok frissített fordítást.
