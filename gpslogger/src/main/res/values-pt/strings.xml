@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_drawer_uploadsettings">Definições de envios</string>
+    <string name="title_drawer_uploadsettings">Carregar configurações</string>
     <string name="navigation_drawer_open">Abrir menu de navegação</string>
     <string name="navigation_drawer_close">Fechar menu de navegação</string>
     <string name="app_name">GPSLogger</string>
@@ -36,26 +36,26 @@
     <string name="sharing_mylocation">Minha localização</string>
     <string name="sharing_via">Partilhar via</string>
     <!-- general -->
-    <string name="foot">&#160;pés</string>
-    <string name="feet">&#160;pés</string>
-    <string name="meter">&#160;metro</string>
-    <string name="meters">&#160;metros</string>
+    <string name="foot"> pés</string>
+    <string name="feet"> pés</string>
+    <string name="meter"> metro</string>
+    <string name="meters"> metros</string>
     <string name="error">Erro</string>
     <string name="error_connection">Erro de conexão. Por favor, verifique as configurações do telemóvel.</string>
-    <string name="seconds">&#160;s</string>
-    <string name="minutes">&#160;min</string>
-    <string name="hours">&#160;hrs</string>
+    <string name="seconds"> s</string>
+    <string name="minutes"> min</string>
+    <string name="hours"> hrs</string>
     <string name="gpsprovider_unavailable">Sem acesso à localização. Por favor verifique as configurações de localização e ative o acesso à localização.</string>
     <string name="started">Iniciado</string>
     <string name="providername_gps">Satélites GPS</string>
     <string name="providername_celltower">torres de telemóveis</string>
     <string name="not_applicable">n/a</string>
-    <string name="meters_per_second">&#160;m/s</string>
+    <string name="meters_per_second"> m/s</string>
     <string name="feet_per_second">pés/s</string>
     <string name="miles_per_hour">mi/h</string>
     <string name="miles">mi</string>
-    <string name="kilometers_per_hour">&#160;km/h</string>
-    <string name="kilometers">&#160;km</string>
+    <string name="kilometers_per_hour"> km/h</string>
+    <string name="kilometers"> km</string>
     <string name="unknown_direction">desconhecido(a)</string>
     <string name="sorry">Desculpe</string>
     <string name="success">Sucesso</string>
@@ -363,4 +363,20 @@ Nomes de ficheiro muito dinâmicos
     <string name="app_theme_light">Tema claro</string>
     <string name="app_theme_dark">Tema escuro</string>
     <string name="app_theme_setting">Determina como definir o tema escuro ou claro</string>
+    <string name="log_plain_text_csv_advanced_title">Fazer login nas configurações de CSV</string>
+    <string name="log_plain_text_csv_field_delimiter">delimitar de campo</string>
+    <string name="log_plain_text_decimal_comma">Use vírgula (,) como separador decimal em vez de ponto (.)</string>
+    <string name="txt_time_with_offset_isoformat">Diferença Horária (2011-12-25T11:27:33+04:00):</string>
+    <string name="txt_battery_charging">A carregar</string>
+    <string name="file_logging_log_time_with_offset_title">Tempo de registo com deslocamento de fuso horário</string>
+    <string name="file_logging_log_time_with_offset_summary">Sempre que possível, escreva a hora ISO8601 com da diferença horária em vez de UTC.</string>
+    <string name="logging_advanced_delete_files">Apagar ficheiros selecionados</string>
+    <string name="logging_advanced_delete_files_summary">Mantenha pressionado para selecionar vários ficheiros</string>
+    <string name="install_conscrypt_provider_summary">Se você estiver com problemas de conectividade SSL/TLS em dispositivos Android mais antigos, a instalação do Conscrypt Provider pode ajudar. (Siga este link, instale o APK e reinicie a aplicação)</string>
+    <string name="install_conscrypt_provider_title">Instale o fornecedor Conscrypt (SSL/TLS)</string>
+    <string name="google_drive_folder_path_summary_2">Se você usar um único nome na pasta, ele poderá ser movido para outro lugar no Google Drive após a criação. Os caminhos de pasta são mais lentos porque cada parte do caminho deve ser verificada ou criada antes que os arquivos sejam carregados.</string>
+    <string name="google_drive_folder_path">Caminho da pasta do Google Drive</string>
+    <string name="google_drive_folder_path_summary_1">Use um único nome na pasta (por exemplo, GPSLogger), ou um caminho para a pasta (por exemplo, aaa/bbb/ccc). As pastas devem ser criadas por esta aplicação.</string>
+    <string name="log_customurl_setup_title">URL personalizado</string>
+    <string name="customurl_all_parameters">Todos os parâmetros:</string>
 </resources>
