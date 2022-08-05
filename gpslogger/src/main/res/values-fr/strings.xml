@@ -252,7 +252,7 @@ une plus grande précision à basses fréquences.    </string>
     <string name="autoftp_directory">Dossier</string>
     <string name="new_file_custom_message">Il est possible d\'utiliser %SER pour le périphérique série, %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER pour la version</string>
     <string name="new_file_prefix_serial_title">Préfixer le numéro de série au nom de fichier</string>
-    <string name="new_file_prefix_serial_summary">Voici le numéro de série trouvé dans les paramètres de cet appareil </string>
+    <string name="new_file_prefix_serial_summary">A partir de Android 8, un ID Android unique est utilisé. Pour les versions ultérieures à Android 8, le numéro de série se trouvant dans les paramètres de l\'appareil est utilisé.</string>
     <string name="txt_travel_duration">Durée :</string>
     <string name="menu_onepoint">Enregistrer un point</string>
     <string name="view_simple">Vue simple</string>
