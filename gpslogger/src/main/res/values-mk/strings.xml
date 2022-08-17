@@ -61,4 +61,29 @@
     <string name="direction_north">Север</string>
     <string name="sharing_location_only">Само локација</string>
     <string name="sharing_mylocation">Моја локација</string>
+    <string name="accuracy_within" formatted="false">во %s %s</string>
+    <string name="log_kml_summary">Логирај локации во KML v2.2 фајл</string>
+    <string name="time_oneandhalfhours">1½ саати</string>
+    <string name="log_plain_text_summary">Логирај локации во CSV фајл</string>
+    <string name="time_oneminute">1 минута</string>
+    <string name="sharing_via">Сподели преку</string>
+    <string name="error_connection">Грешка при конекција. Молиме проверете ги подесувањата на телефонот.</string>
+    <string name="gpsprovider_unavailable">Нема достапен провајдер за GPS. Молиме проверете ги локациските подесувања и вклучете локациски провајдер.</string>
+    <string name="foot"> стапка</string>
+    <string name="feet"> стапки</string>
+    <string name="log_kml_title">Логирај во KML формат</string>
+    <string name="log_plain_text_title">Логирај во CSV формат</string>
+    <string name="log_plain_text_csv_advanced_title">Логирај во CSV подесувања</string>
+    <string name="log_plain_text_decimal_comma">Користи запирка (,) како децималка наместо точка (.)</string>
+    <string name="log_json_title">Логирај во GeoJSON формат</string>
+    <string name="log_gpx_title">Логирај во GPX формат</string>
+    <string name="time_onesecond">1 секунда</string>
+    <string name="time_halfminute">½ минута</string>
+    <string name="time_onehour">1 час</string>
+    <string name="time_quarterhour">15 минути</string>
+    <string name="time_halfhour">½ час</string>
+    <string name="time_twoandhalfhours">2½ саати</string>
+    <string name="time_hms_format" formatted="false">%sч %sм %sс</string>
+    <string name="owncloud_setup_title">ownCloud</string>
+    <string name="owncloud_server_summary">ownCloud УРЛ База</string>
 </resources>
