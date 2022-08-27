@@ -36,5 +36,3 @@ Acesso à rede - usado quando são enviadas as posições (Dropbox, OpenStreetMa
 Acesso a localização - usado para determinar localização do dispositivo
 
 Ferramentas do sistema (arranque automático) - necessário no caso em o GPSLogger é configurado para arrancar automaticamente
-
-

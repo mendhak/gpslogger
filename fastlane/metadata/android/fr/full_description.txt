@@ -1,39 +1,47 @@
-Un traceur GPS léger et économe en énergie. Le but de cette application est d'enregistrer vos coordonnées GPS à des intervalles spécifiés dans un fichier sur votre carte SD.  Cette application s'exécute en arrière-plan afin de fonctionner le plus longtemps possible. Que ce soit durant une longue marche, une randonnée, un vol en avion, une séance photo, ou même pour aller acheter le lait.   Une fois de retour devant votre ordinateur, vous pouvez utiliser les fichiers pour localiser vos photos, décharger les positions des sites visités pendant votre voyage, voir la trace dans Google Earth, etc. 
-
-*** Fonctionnalités :
-
-* Spécifier les intervalles de temps
-* Spécifier les intervalles de distance
-* Utiliser le réseau cellulaire ou le GPS
-* Fichiers GPX et/ou KML
-* Affiche une notification
-* Utiliser l'heure du satellite ou du téléphone
-* Afficher en unités Impériales
-* Lancement automatique au démarrage du téléphone
-* Envoi de courriel automatiquement
-* OpenStreetMap - Déchargement des traces GPS
-* Dropbox - Déchargement GPX, KML et ZIP
+Un enregistreur GPS léger et économe en batterie. Le but de cette application est d'enregistrer vos coordonnées GPS à des intervalles spécifiques dans un fichier sur votre carte SD.  Cette application fonctionne en arrière-plan, ce qui vous permet de faire une longue promenade, une randonnée, un vol ou une séance photo, ou même d'aller acheter du lait, et de la laisser fonctionner aussi longtemps que possible.   Une fois de retour à votre ordinateur, vous pouvez utiliser les fichiers pour géolocaliser des photos, les télécharger sur des sites de voyage, les visualiser dans Google Earth, etc.
 
 
-Pour les bogues, requêtes de fonctionnalité, questions, merci de les soumettre à github.com/mendhak/gpslogger (issue tracker).  
+Pour plus d'informations, consultez le site <a href="https://gpslogger.app">https://gpslogger.app</a>
 
-*** Notes :
+<b>Remarque</b>: N'oubliez pas d'autoriser <b>tout le temps</b> pour cette application dans les paramètres de votre système d'exploitation, afin de lui permettre d'enregistrer les emplacements en arrière-plan.
 
-GPSLogger n'est pas un remplaçant de OpenTracks.  OpenTracks est conçu pour usage court (parce qu'il a beaucoup de fonctionnalités en cours d'exécution), GPSLogger est conçu pour fonctionner plus longtemps.
+<b>Caractéristiques</b>
 
-Le trafic de données est utilisé par cette application uniquement si vous utilisez l'envoi de courriel automatique, les fonctionnalités OpenStreetMap ou Dropbox.
+<ul>
+<li>Peut enregistrer aux formats GPX, KML, CSV, NMEA et CSV. Peut également enregistrer vers une URL personnalisée ou juste l'écran.</li>
+<li>Enregistre les points GPX sous forme de traces et de segments de traces</li>
+<li>Enregistre également la vitesse, la direction et l'altitude si disponibles</li>
+<li>Ajoute une description à un point à l'aide du menu d'annotation, qui est ajouté comme point de cheminement</li>
+<li>Configure les intervalles de temps entre les points</li>
+<li>Configure un filtre de distance minimale entre les points ou un filtre de précision</li>
+<li>Icône de notification avec les coordonnées et les actions rapides</li>
+<li>Utilise les tours cellulaires pour la localisation lorsque le GPS est désactivé</li>
+<li>Choisit sélectivement le réseau, gps et fournisseurs de localisation passive</li>
+<li>Téléchargez automatiquement le fichier ou envoyez-le par e-mail à intervalles réguliers vers des destinations telles que Email, FTP, Dropbox, OpenStreetMap, Google Drive, URL personnalisée.</li>
+<li>Partagez l'emplacement ou les fichiers journaux par SMS/Email (et d'autres applications telles que Facebook ou Twitter, selon ce que vous avez installé)</li>
+<li>Démarrez la journalisation au démarrage du téléphone</li>
+<li>Lancez des opérations à partir de Tasker ou d'autres applications d'automatisation.</li>
+<li>Vous pouvez lui donner un fichier prédéfini avec vos propres valeurs pour la distribution</li>
+<li>Plusieurs profils avec différents paramètres sont possibles</li>
+</ul>
 
-Bien que l'application permette des intervalles d'enregistrement de 0 seconde, ce réglage n'est pas recommandé car l'enregistrement et la localisation serait très rapide. Ceci pourrait causer une instabilité ou des plantages. Essayer un réglage de 1 à 3 secondes à la place.
+Bugs, demandes de fonctionnalités, questions - veuillez les soumettre à github.com/mendhak/gpslogger (issue tracker).
 
-Si vous pensez que cette application peut s'enrichir de nouvelles fonctionnalités, vous pouvez en faire la demande sur le site GitHub.
+<b>Notes</b>
 
-*** Explication des autorisations :
+Une connexion de données est utilisée par cette application uniquement si vous utilisez les fonctions d'envoi automatique ou d'URL personnalisée.
 
-Stockage - Lecture et écriture de fichiers dans le dossier GPSLogger de votre carte SD
+Bien que l'application permette des fréquences de 0 seconde, cela n'est pas recommandé car l'enregistrement et la journalisation se font très rapidement ; cela pourrait causer de l'instabilité/des blocages. Essayez plutôt 1-3 secondes.
 
-Communication réseau - Utilisé lors de l'envoi de fichiers (Dropbox, OpenStreetMap) ou en envoyant des courriels automatiques ou en vous autorisant à Dropbox, OpenStreetMap
 
-Votre localisation - Utilisé pour déterminer votre position en utilisant le GPS ou le réseau cellulaire
+<b>Explication des permissions</b>
 
-Outils système (lancement automatique au démarrage) - Utilisé si vous choisissez de lancer GPSLogger au démarrage du téléphone
+Stockage - lecture et écriture de fichiers dans le dossier GPSLogger sur votre carte SD
 
+Communication réseau - utilisée lors du téléchargement des fichiers (Dropbox, Openstreetmap) ou de l'envoi d'e-mails ou de l'autorisation avec Dropbox, Openstreetmap
+
+Votre emplacement - utilisé pour déterminer votre emplacement par GPS ou par tour de contrôle
+
+Outils système (démarrage automatique au démarrage) - utilisés si vous choisissez de démarrer GPSLogger au démarrage.
+
+Autorisations de stockage partagé - dans Android 11, utilisées pour permettre l'écriture de fichiers dans des chemins de fichiers personnalisés.<li>
