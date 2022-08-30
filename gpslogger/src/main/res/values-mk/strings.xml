@@ -93,4 +93,8 @@
     <string name="direction_east">Запад</string>
     <string name="direction_southsoutheast">Југ-Југоисток</string>
     <string name="direction_south">Југ</string>
+    <string name="direction_northwest">Северозапад</string>
+    <string name="direction_westnorthwest">Запад-Северозапад</string>
+    <string name="direction_west">Запад</string>
+    <string name="direction_southwest">Југозапад</string>
 </resources>
