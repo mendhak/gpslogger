@@ -1,2 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="txt_latitude">緯：</string>
+    <string name="txt_speed">速度：</string>
+    <string name="txt_direction">方位：</string>
+    <string name="txt_accuracy">準繩：</string>
+    <string name="btn_stop_logging">停止紀錄</string>
+    <string name="gpslogger_still_running">GPSLogger 仲開緊工。</string>
+    <string name="summary_loggingto">紀低落：</string>
+    <string name="summary_loggingto_screen">畫面齋睇</string>
+    <string name="summary_freq_every">頻率：</string>
+    <string name="summary_freq_max">最高</string>
+    <string name="summary_dist">距離：</string>
+    <string name="summary_current_filename">檔案：</string>
+    <string name="sharing_location_only">淨係位置</string>
+    <string name="sharing_mylocation">我嘅位置</string>
+    <string name="sharing_via">分享方式</string>
+    <string name="meters"> 米</string>
+    <string name="error">錯誤</string>
+    <string name="error_connection">連線錯誤。請檢查下您手機嘅設定。</string>
+    <string name="seconds"> 秒</string>
+    <string name="minutes"> 分</string>
+    <string name="hours"> 時</string>
+    <string name="started">開始咗</string>
+    <string name="providername_gps">GPS 衛星</string>
+    <string name="providername_celltower">電訊基站</string>
+    <string name="not_applicable">欠奉</string>
+    <string name="meters_per_second"> 米/秒</string>
+    <string name="kilometers_per_hour"> 公里/個鐘</string>
+    <string name="kilometers"> 公里</string>
+    <string name="unknown_direction">未知</string>
+    <string name="sorry">唔好意思</string>
+    <string name="success">搞掂</string>
+    <string name="title_drawer_uploadsettings">上載設定</string>
+    <string name="txt_altitude">海拔：</string>
+    <string name="txt_longitude">經：</string>
+    <string name="btn_start_logging">開始紀錄</string>
+    <string name="txt_satellites">衛星數目：</string>
+    <string name="txt_travel_distance">行過：</string>
+</resources>
