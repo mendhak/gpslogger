@@ -34,10 +34,10 @@
     <string name="sharing_mylocation">Mano vieta</string>
     <string name="sharing_via">Dalintis per</string>
     <!-- general -->
-    <string name="foot">&#160;pėda</string>
-    <string name="feet">&#160;pėdos</string>
-    <string name="meter">&#160;metras</string>
-    <string name="meters">&#160;metrai</string>
+    <string name="foot"> pėda</string>
+    <string name="feet"> pėdos</string>
+    <string name="meter"> metras</string>
+    <string name="meters"> metrai</string>
     <string name="error">Klaida</string>
     <string name="error_connection">Klaida prisijungiant: Prašau patikrinti jūsų telefono nustatymus.</string>
     <string name="seconds">sek</string>
@@ -45,7 +45,7 @@
     <string name="hours">val</string>
     <string name="gpsprovider_unavailable">Nėra GPS teikėjo. Prašome patikrinti vietos nustatymo parametrus ir įgalinti vietos teikėją.    </string>
     <string name="started">Pradėta</string>
-    <string name="providername_gps">GPS satelitai</string>
+    <string name="providername_gps">GPS palydovai</string>
     <string name="providername_celltower">telefonų bokštai</string>
     <string name="unknown_direction">nežinoma</string>
     <string name="sorry">Atsiprašome</string>
@@ -131,4 +131,6 @@
     <string name="txt_time_isoformat">Laikas UTC (2011-12-25T15:27:33Z):</string>
     <string name="autoftp_directory">Aplankas</string>
     <string name="save">Išsaugoti</string>
+    <string name="hide">Slėpti</string>
+    <string name="app_name">GPSLogger</string>
 </resources>
