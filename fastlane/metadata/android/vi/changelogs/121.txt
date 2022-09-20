@@ -1,0 +1,5 @@
+* Thông số URL tùy chỉnh mới:% ALL thay thế mọi thông số URL tùy chỉnh có sẵn
+* Sửa lỗi: thoát dấu thời gian + trong url tùy chỉnh
+* Sửa lỗi: bộ hẹn giờ không đặt lại khi chuyển đổi cấu hình
+* Sửa lỗi: khi đóng ngăn kéo, trước tiên hãy đóng danh sách hồ sơ.
+* Sửa lỗi: khi nhấp vào mục trong danh sách hồ sơ, hãy giữ ngăn kéo mở

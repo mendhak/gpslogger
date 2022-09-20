@@ -1,0 +1,9 @@
+* Khắc phục sự cố tải lên ownCloud/NextCloud không hoạt động
+* Do các giới hạn lưu trữ mới của Android, bạn chỉ có thể ghi vào các thư mục riêng của ứng dụng
+
+* Trên Android 10+, quy trình cấp quyền hiện sẽ yêu cầu quyền "cho phép mọi lúc"
+* Quy trình cấp phép cũng sẽ yêu cầu tắt tối ưu hóa pin
+* Quy trình cấp phép thật khó chịu, xin lỗi, cần phải trợ giúp với nhiều yêu cầu hỗ trợ liên quan đến giới hạn nền.
+* Các biểu tượng thích ứng, nhờ @kanru
+* Đã thêm một tùy chọn để đặt lại ứng dụng (xóa tất cả các tệp và quyền đối với ứng dụng), trong Cài đặt chung
+* Bản dịch cập nhật từ Crowdin

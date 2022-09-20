@@ -1,0 +1,2 @@
+Đóng gói lại GPSLogger cho F-Droid.
+Xóa các phần phụ thuộc của Google Drive, Nhận dạng hoạt động, Dịch vụ Play.

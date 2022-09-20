@@ -1,0 +1,1 @@
+* Sửa lỗi: Lệnh Tasker getstatus không gửi một chương trình phát sóng trạng thái.

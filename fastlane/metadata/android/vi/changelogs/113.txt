@@ -1,0 +1,1 @@
+* Thêm thanh cuộn vào chế độ xem đơn giản để thích ứng với kích thước hiển thị hệ thống lớn và kích thước phông chữ.

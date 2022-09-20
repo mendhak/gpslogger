@@ -1,0 +1,6 @@
+* Trên Android 10+, quy trình cấp quyền hiện sẽ yêu cầu quyền "cho phép mọi lúc"
+* Quy trình cấp phép cũng sẽ yêu cầu tắt tối ưu hóa pin
+* Quy trình cấp phép thật khó chịu, xin lỗi, cần phải trợ giúp với nhiều yêu cầu hỗ trợ liên quan đến các giới hạn nền.
+* Các biểu tượng thích ứng, cám ơn @kanru
+* Đã thêm một tùy chọn để đặt lại ứng dụng (xóa tất cả các tệp và quyền đối với ứng dụng), trong Cài đặt chung
+* Cập nhật bản dịch từ Crowdin

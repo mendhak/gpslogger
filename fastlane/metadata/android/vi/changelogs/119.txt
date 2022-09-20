@@ -1,0 +1,8 @@
+* URL tùy chỉnh có thể được sử dụng như một trình tự động, để giúp tăng độ tin cậy.
+* Tùy chọn ghi thời gian với độ lệch múi giờ, trong Chi tiết ghi nhật ký. (GPX, KML, GeoJSON, CSV)
+* URL tùy chỉnh có thể sử dụng thông số %TIMEOFFSET
+* Ghi nhật ký CSV: thêm nhiều trường.
+* CSV Logging: tùy chọn để chỉ định dấu phân cách trường và dấu phân cách thập phân bằng dấu phẩy.
+* Chế độ xem nhật ký sẽ hiển thị các tọa độ ở định dạng người dùng ưa thích.
+* Nếu khôi phục từ một lần dừng đột ngột, hãy bắt đầu ghi nhật ký nếu ứng dụng đã ghi nhật ký trước đó.
+* Sửa lỗi cho tiếng Hungary

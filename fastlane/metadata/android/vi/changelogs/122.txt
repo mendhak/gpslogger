@@ -1,0 +1,6 @@
+* Google Drive trở lại! Được thực hiện lại mà không có thư viện nguồn đóng
+* Bản sửa lỗi có thể xảy ra cho thông báo GPSLogger xuất hiện ngẫu nhiên khi không sử dụng
+* Nếu dịch vụ định vị bị tắt, ứng dụng giờ sẽ tiếp tục chờ (có biểu tượng cảnh báo) và tiếp tục khi được bật lại.
+* Kích thước phông chữ được điều chỉnh trong chế độ xem chi tiết để vĩ độ / dài phù hợp hơn
+* Sử dụng báo thức chính xác hơn để giúp xử lý các vị trí bị hạn chế ở chế độ ngủ gật
+* Tùy chọn tác vụ kép mới trong Cài đặt tải lên
