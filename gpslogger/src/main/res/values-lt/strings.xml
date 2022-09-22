@@ -133,4 +133,9 @@
     <string name="save">Išsaugoti</string>
     <string name="hide">Slėpti</string>
     <string name="app_name">GPSLogger</string>
+    <string name="not_applicable">netaikoma</string>
+    <string name="meters_per_second"> m/s</string>
+    <string name="feet_per_second"> ft/s</string>
+    <string name="kilometers_per_hour"> km/h</string>
+    <string name="kilometers"> km</string>
 </resources>
