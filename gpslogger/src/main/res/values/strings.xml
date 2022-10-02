@@ -337,8 +337,11 @@
     <string name="menu_faq">Help and FAQ</string>
 
     <string name="log_customurl_title">Log to custom URL</string>
+    <string name="log_customurl_summary_detailed">Sends a request to the Custom URL whenever a location point is captured. Depends on the logging interval.</string>
     <string name="log_customurl_setup_title">Custom URL</string>
     <string name="log_customurl_summary">Send logging info to your own server over HTTP</string>
+    <string name="autosend_customurl_summary">(This feature enables CSV logging) Sends requests in bulk to the Custom URL, one for each line in the CSV file. Depends on the auto-send interval.</string>
+
     <string name="txt_annotation">Annotation:</string>
     <string name="txt_time_isoformat">Time UTC (2011-12-25T15:27:33Z):</string>
     <string name="txt_time_with_offset_isoformat">Time Offset (2011-12-25T11:27:33+04:00):</string>
@@ -481,6 +484,7 @@
     <string name="customurl_all_parameters">All parameters:</string>
     <string name="install_conscrypt_provider_summary">If you are encountering SSL/TLS connectivity issues on older Android devices, installing the Conscrypt Provider might help. (Follow this link, install APK, then restart app)</string>
     <string name="install_conscrypt_provider_title">Install Conscrypt Provider (SSL/TLS)</string>
+
 
 
 </resources>
