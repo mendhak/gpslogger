@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_drawer_uploadsettings">Ustawienia wysyłania</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_close">Zamknij szufladę nawigacyjną</string>
     <string name="settings_screen_name">Ustawienia GPSLogger</string>
     <string name="ok">Dobrze</string>
     <string name="cancel">Anuluj</string>
@@ -31,12 +31,12 @@
     <string name="summary_current_filename">Plik:</string>
     <string name="sharing_location_only">Tylko lokalizacja</string>
     <string name="sharing_mylocation">Moja lokalizacja</string>
-    <string name="sharing_via">Udostępnij przez...</string>
+    <string name="sharing_via">Udostępnij przez</string>
     <!-- general -->
-    <string name="foot">&#160;stopa</string>
-    <string name="feet">&#160;stóp</string>
-    <string name="meter">&#160;metr</string>
-    <string name="meters">&#160;metrów</string>
+    <string name="foot"> stopa</string>
+    <string name="feet"> stóp</string>
+    <string name="meter"> metr</string>
+    <string name="meters"> metrów</string>
     <string name="error">Błąd</string>
     <string name="error_connection">Błąd połączenia. Proszę Sprawdzić ustawienia telefonu.</string>
     <string name="gpsprovider_unavailable">Brak dostępnej usługi GPS. Sprawdź swoje ustawienia lokalizacji.</string>
@@ -97,7 +97,7 @@
     <string name="new_file_creation_title">Tworzenie nowego pliku</string>
     <string name="new_file_creation_summary">Tworzenie pliku raz na dzień lub za każdym uruchomieniem programu.</string>
     <string name="new_file_creation_onceaday">Raz na dzień</string>
-    <string name="new_file_creation_everystart">Za każdym uruchomieniem.</string>
+    <string name="new_file_creation_everystart">Za każdym uruchomieniem</string>
     <string name="new_file_creation_custom">Niestandardowy plik</string>
     <string name="new_file_custom_title">Niestandardowa nazwa pliku</string>
     <string name="new_file_custom_summary">Możesz nadać plikowi własną nazwę.
@@ -129,7 +129,7 @@
     <string name="autoemail_username_summary">Nazwa użytkownika wraz z dostawcą</string>
     <string name="autoemail_password_summary">Hasło dla nazwy użytkowania</string>
     <string name="autoemail_ssl">Domniemany SSL</string>
-    <string name="autoemail_ssl_summary">Należy włączyć w przypadku problemów z połączeniem.</string>
+    <string name="autoemail_ssl_summary">Należy włączyć w przypadku problemów z połączeniem</string>
     <string name="autoemail_choosepreset">Dostawca poczty</string>
     <string name="autoemail_choosepreset_summary">Wybór lub wprowadzenie ręczne</string>
     <string name="autoemail_smtp_testemail">Wysłanie próbnego e-maila</string>
@@ -140,7 +140,7 @@
     <string name="started_waiting">GPS uruchomiony, oczekiwanie na ustalenie pozycji</string>
     <string name="gps_stopped">GPS wstrzymany</string>
     <string name="stopped">Zatrzymany</string>
-    <string name="osm_lbl_authorize">Uprawnij ten program.</string>
+    <string name="osm_lbl_authorize">Uprawnij ten program</string>
     <string name="osm_resetauth">Wyczyść uprawnienia</string>
     <string name="osm_lbl_authorize_description">Należy udzielić uprawnień w celu przesyłania śladów GPS do OpenStreetMap. Istnieje możliwość ustawienia tagów, opisu i widoczność po przydzieleniu uprawnień.</string>
     <string name="osm_resetauth_summary">Usunięcie lokalnych uprawnień do komunikacji z twoim kontem OSM.</string>
@@ -166,7 +166,7 @@
     <string name="dropbox_unauthorize_description">GPSLogger został połączony z Dropboxem. Pliki będą przesyłane do 
         \'Apps\\GPSLogger for Android\'. Istnieje możliwość odłączenia GPSLoggera od Dropbox w razie konieczności.
     </string>
-    <string name="dropbox_couldnotauthorize">Nie można uzyskać autoryzacji Dropboxa, proszę spróbować ponownie.</string>
+    <string name="dropbox_couldnotauthorize">Nie można uzyskać autoryzacji Dropboxa, proszę spróbować ponownie</string>
     <string name="owncloud_server_summary">Bazowy URL ownCloud</string>
     <string name="owncloud_directory_summary">Katalog do użycia na serwerze ownCloud. Upewnij się, czy istnieje. W przeciwnym razie przesyłanie będzie nie możliwe.</string>
     <string name="owncloud_test_summary">Wyślij plik testowy na serwer ownCloud</string>
@@ -179,7 +179,7 @@
     <string name="google_drive_test_summary">Wyślij plik testowy na Dysku Google</string>
     <string name="google_drive_test_title">Test wysyłania</string>
     <string name="google_drive_testupload_success">Wysłano. Proszę sprawdzić nowe pliki w Dokumentach Google.</string>
-    <string name="autoemail_sendto_csv">Adresy e-mail oddzielone przecinkiem.</string>
+    <string name="autoemail_sendto_csv">Adresy e-mail oddzielone przecinkiem</string>
     <string name="autosend_enabled">Zezwól na automatyczne wysyłanie</string>
     <string name="autosend_enabled_summary">Zezwól na przesyłanie plików do różnych celów</string>
     <string name="autosend_frequency_summary">Jak często wysyłać pliki dziennika (w minutach). Ustaw 0, aby wyłączyć.</string>
@@ -231,7 +231,7 @@
     <string name="autoftp_directory">Katalog</string>
     <string name="new_file_custom_message">Można użyć %SER for device serial, %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER dla tej wersji</string>
     <string name="new_file_prefix_serial_title">Dodaj numer seryjny urządzenia przed nazwą pliku</string>
-    <string name="new_file_prefix_serial_summary">To numer seryjny, który został odczytany z Twojego telefonu </string>
+    <string name="new_file_prefix_serial_summary">W systemie Android 8 i nowszych używany jest unikalny identyfikator Androida. W starszych wersjach Androida używany jest numer seryjny kompilacji, który można znaleźć w statusie telefonu.</string>
     <string name="txt_travel_duration">Czas trwania:</string>
     <string name="menu_onepoint">Zapisz jedną pozycję</string>
     <string name="view_simple">Widok prosty</string>
@@ -317,4 +317,21 @@
     <string name="customurl_http_method">Metoda HTTP</string>
     <string name="customurl_http_basicauthentication">Podstawowe uwierzytelnianie</string>
     <string name="hide_notification_from_status_bar_disallowed">Ukrywanie powiadomienia jest zabronione w Androidzie Oreo</string>
+    <string name="navigation_drawer_open">Otwórz szufladę nawigacyjną</string>
+    <string name="app_name">GPSLogger</string>
+    <string name="minutes"> min</string>
+    <string name="seconds"> sek</string>
+    <string name="hours"> godz</string>
+    <string name="kilometers"> km</string>
+    <string name="time_hms_format" formatted="false">%sgodz %smin %ssek</string>
+    <string name="log_plain_text_csv_advanced_title">Ustawienia dziennika CSV</string>
+    <string name="new_file_creation_onceamonth">Raz w miesiącu</string>
+    <string name="osm_setup_title">OpenStreetMap</string>
+    <string name="dropbox_setup_title">Dropbox</string>
+    <string name="owncloud_setup_title">ownCloud</string>
+    <string name="hide">Ukryj</string>
+    <string name="log_plain_text_decimal_comma">Użyj przecinka (,) jako separatora dziesiętnego zamiast kropki (.)</string>
+    <string name="customurl_all_parameters">Wszystkie parametry:</string>
+    <string name="log_plain_text_csv_field_delimiter">Ogranicznik pola CSV</string>
+    <string name="google_drive_folder_path">Ścieżka folderu w Dysku Google</string>
 </resources>
