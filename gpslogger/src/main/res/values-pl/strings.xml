@@ -334,4 +334,11 @@
     <string name="customurl_all_parameters">Wszystkie parametry:</string>
     <string name="log_plain_text_csv_field_delimiter">Ogranicznik pola CSV</string>
     <string name="google_drive_folder_path">Ścieżka folderu w Dysku Google</string>
+    <string name="storage_chooser_create_label">Utwórz</string>
+    <string name="storage_chooser_internal_storage_text">Pamięć wewnętrzna</string>
+    <string name="storage_chooser_select_folder">Wybierz</string>
+    <string name="storage_chooser_overview_heading">Wybierz pamięć masową</string>
+    <string name="storage_chooser_new_folder_label">Nowy folder</string>
+    <string name="storage_chooser_text_field_hint">Nazwa folderu</string>
+    <string name="donate_bitcoin">Bitcoin</string>
 </resources>
