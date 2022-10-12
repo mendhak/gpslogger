@@ -90,6 +90,7 @@ import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.ui.Dialogs;
 import com.mendhak.gpslogger.ui.components.GpsLoggerDrawerItem;
+import com.mendhak.gpslogger.ui.fragments.display.AnnotationViewFragment;
 import com.mendhak.gpslogger.ui.fragments.display.GenericViewFragment;
 import com.mendhak.gpslogger.ui.fragments.display.GpsBigViewFragment;
 import com.mendhak.gpslogger.ui.fragments.display.GpsDetailedViewFragment;
@@ -1031,6 +1032,9 @@ public class GpsMainActivity extends AppCompatActivity
                 break;
             case 3:
                 transaction.replace(R.id.container, GpsLogViewFragment.newInstance());
+                break;
+            case 4:
+                transaction.replace(R.id.container, AnnotationViewFragment.newInstance());
                 break;
 
         }
