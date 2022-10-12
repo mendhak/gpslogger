@@ -1220,6 +1220,18 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.SFTP_REMOTE_SERVER_PATH, path).apply();
     }
 
+    /**
+     * Annotations Button Settings
+     */
+    @ProfilePreference(name= PreferenceNames.ANNOTATIONS_BUTTON_SETTINGS)
+    public String getAnnotationButtonSettings() {
+        return prefs.getString(PreferenceNames.ANNOTATIONS_BUTTON_SETTINGS, "");
+    }
+
+    public void setAnnotationButtonSettings(String settings){
+        prefs.edit().putString(PreferenceNames.ANNOTATIONS_BUTTON_SETTINGS, settings).apply();
+    }
+
     @SuppressWarnings("unchecked")
     public void savePropertiesFromPreferences(File f) throws IOException {
 
