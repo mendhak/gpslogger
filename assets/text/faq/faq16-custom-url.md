@@ -1,6 +1,6 @@
 ## Using the Custom URL feature
 
-The Custom URL feature allows you to log GPS points to a public URL.  This can be a third party API that accepts `GET` requests, or an application that you've written and are hosting on your own server, [a webhook](https://www.ilovefreesoftware.com/21/featured/free-webhook-creator-websites-to-create-test-webhooks-online.html), a third party API, an [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html).  
+The Custom URL feature allows you to log GPS points to a public URL.  This can be a third party API that accepts `GET` requests, or an application that you've written and are hosting on your own server, [a webhook](https://www.ilovefreesoftware.com/21/featured/free-webhook-creator-websites-to-create-test-webhooks-online.html), a third party API, an [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html), anything like that.  
 
     https://myserver.com/log?lat=%LAT&long=%LON...
 
