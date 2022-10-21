@@ -97,4 +97,12 @@
     <string name="direction_westnorthwest">Запад-Северозапад</string>
     <string name="direction_west">Запад</string>
     <string name="direction_southwest">Југозапад</string>
+    <string name="settings_enter_meters">Внесете метри(макс 9999)</string>
+    <string name="direction_eastsoutheast">Исток-Југоисток</string>
+    <string name="direction_southsouthwest">Југо-Југозапад</string>
+    <string name="direction_westsouthwest">Запад-Југозапад</string>
+    <string name="direction_northnorthwest">Север-Северозапад</string>
+    <string name="settings_distance_in_meters">Растојание во метри</string>
+    <string name="settings_accuracy_in_meters">Прецизност во метри</string>
+    <string name="pref_logging_title">Делати на логирање</string>
 </resources>
