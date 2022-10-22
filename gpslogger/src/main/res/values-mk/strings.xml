@@ -105,4 +105,10 @@
     <string name="settings_distance_in_meters">Растојание во метри</string>
     <string name="settings_accuracy_in_meters">Прецизност во метри</string>
     <string name="pref_logging_title">Делати на логирање</string>
+    <string name="log_gpx_summary">Логира локации во GPX v1.0 фајл</string>
+    <string name="log_gpx_11_title">Користи GPX 1.1</string>
+    <string name="log_gpx_11_summary">Користи GPX 1.1 фајл формат наместо GPX 1.0</string>
+    <string name="log_plain_text_csv_field_delimiter">CSV делимитер на полиња</string>
+    <string name="log_json_summary">Логира локации во GeoJSON фајл</string>
+    <string name="new_file_creation_title">Создавање на нов фајл</string>
 </resources>
