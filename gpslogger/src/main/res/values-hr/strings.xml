@@ -213,7 +213,7 @@
     <string name="autoftp_directory">Mapa</string>
     <string name="new_file_custom_message">Možete koristiti %SER za uređajnu seriju, %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER za verziju</string>
     <string name="new_file_prefix_serial_title">Prefiks serijskog broja uređaja za naziv datoteke</string>
-    <string name="new_file_prefix_serial_summary">Serijski broj nađen u statusu telefona </string>
+    <string name="new_file_prefix_serial_summary">Na Androidu 8 i nadalje koristi se jedinstveni Android ID. Prije Androida 8, koristi se serijski broj međuverzije koji se nalazi u stanju tvog telefona.</string>
     <string name="txt_travel_duration">Trajanje:</string>
     <string name="menu_onepoint">Zapis jedne točke</string>
     <string name="view_simple">Jednostavni prikaz</string>
