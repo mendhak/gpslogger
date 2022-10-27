@@ -1,0 +1,3 @@
+* Sửa lỗi: Cho phép ký tự UTF-8 trong tên thư mục FTP
+* Thêm thanh cuộn vào chế độ xem đơn giản để thích ứng với kích thước hiển thị hệ thống lớn và kích thước phông chữ.
+* Bàn phím sẽ tự động xuất hiện khi sử dụng hộp văn bản chú thích.

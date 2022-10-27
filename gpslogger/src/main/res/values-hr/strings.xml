@@ -33,13 +33,13 @@
     <string name="sharing_mylocation">Moja lokacija</string>
     <string name="sharing_via">Dijeli putem</string>
     <!-- general -->
-    <string name="foot">&#160;&#160;stopa</string>
-    <string name="feet">&#160;&#160;stopa</string>
-    <string name="meter">&#160;metar</string>
-    <string name="meters">&#160;metara</string>
+    <string name="foot">  stopa</string>
+    <string name="feet">  stopa</string>
+    <string name="meter"> metar</string>
+    <string name="meters"> metara</string>
     <string name="error">Pogreška</string>
     <string name="error_connection">Povezivanje greška. Provjerite postavke telefona.</string>
-    <string name="hours">&#160;sati</string>
+    <string name="hours"> sati</string>
     <string name="gpsprovider_unavailable">Nema dostupnog GPS pružatelja. Provjerite postavke lokacije i omogućite lociranje uređaja.    </string>
     <string name="started">Pokrenut</string>
     <string name="providername_gps">GPS sateliti</string>
@@ -213,7 +213,7 @@
     <string name="autoftp_directory">Mapa</string>
     <string name="new_file_custom_message">Možete koristiti %SER za uređajnu seriju, %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER za verziju</string>
     <string name="new_file_prefix_serial_title">Prefiks serijskog broja uređaja za naziv datoteke</string>
-    <string name="new_file_prefix_serial_summary">Serijski broj nađen u statusu telefona </string>
+    <string name="new_file_prefix_serial_summary">Na Androidu 8 i nadalje koristi se jedinstveni Android ID. Prije Androida 8, koristi se serijski broj međuverzije koji se nalazi u stanju tvog telefona.</string>
     <string name="txt_travel_duration">Trajanje:</string>
     <string name="menu_onepoint">Zapis jedne točke</string>
     <string name="view_simple">Jednostavni prikaz</string>
@@ -270,4 +270,7 @@
     <string name="debuglog_attach_to_email">Priloži zapisnik otklanjanja pogrešaka u e-pošti</string>
     <string name="debuglog_attach_to_email_summary">Priloži zapisnik otklanjanja pogrešaka u e-pošti uz neke dijagnostičke informacije</string>
     <string name="change_language_summary">Nisu svi jezici potpuno prevedeni! Morate ponovno pokrenuti aplikaciju kako bi postavke stupile na snagu.</string>
+    <string name="minutes"> min</string>
+    <string name="ssl_certificate_is_valid">Certifikat je ispravan</string>
+    <string name="change_language_title">Odaberi jezik</string>
 </resources>

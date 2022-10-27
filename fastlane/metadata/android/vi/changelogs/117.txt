@@ -1,0 +1,5 @@
+* Đã thêm bộ chọn tệp và thư mục. Được sử dụng cho đường dẫn lưu GPSLogger. Đối với khóa cá nhân SFTP cũng vậy.
+* Thư viện SSH mới cho phép kết nối bằng các thuật toán SSH hiện đại hơn khi sử dụng tính năng SFTP.
+* Sửa lỗi quyền đối với tệp cho Android 11+. Bây giờ bạn có thể đặt đường dẫn tệp tùy chỉnh và bạn sẽ được nhắc cấp quyền cho trình quản lý tệp.
+* Đã thêm quyền mới, MANAGE_EXTERNAL_STORAGE. Điều này là để cho phép tính năng đường dẫn tệp tùy chỉnh trên Android 11+.
+* Sửa lỗi: Cho phép ký tự UTF-8 trong tên thư mục FTP.

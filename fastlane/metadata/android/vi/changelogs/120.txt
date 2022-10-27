@@ -1,0 +1,7 @@
+* Trạng thái sạc pin trong URL tùy chỉnh (% ISCHARGING) và CSV (pin_charging)
+* Nếu OSM và tự động gửi được bật, bây giờ bạn sẽ được nhắc về chi tiết theo dõi OSM khi bắt đầu và tải lên
+* Khả năng xóa các tập tin (đang ghi nhật ký, nâng cao).
+* Ghi nhật ký GPX 1.1, thêm phần mở rộng gpxtpx: speed và gpxtpx: mang
+* Dropbox đã cập nhật phương thức xác thực của họ
+* Sửa lỗi: nhiều tệp đã được tải lên nếu tên được chứa trong các tên tệp khác
+* Cập nhật bản dịch

@@ -1,0 +1,6 @@
+* In Android 10+, i permessi di workflow chiederanno per il permesso "autorizza sempre"
+* Il permesso di workflow chiederà anche richieste per disabilitare l'ottimizzazione della batteria
+* Il permesso di workflow è fastidioso, scusate, è necessario per aiutare con numerose richieste di supporto limitazioni di background.
+* Icone adattive, grazie a @kanru
+* Aggiunta l'opzione di reset dell'app (cancella tutti i file e permessi dell'app), nelle impostazioni generali
+* Aggiunte le traduzioni da Crowdin

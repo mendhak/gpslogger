@@ -1,0 +1,3 @@
+* Thêm tùy chọn để cho phép hiển thị thông báo GPSLogger trên màn hình khóa.
+* Đối với các thiết bị chạy trước Android 10, tùy chọn cài đặt Nhà cung cấp Conscrypt nếu bạn cần GPSLogger để kết nối với các dịch vụ TLS 1.3 hoặc đang gặp sự cố kết nối SSL.
+* Nhiều bản dịch cập nhật từ cộng đồng Weblate, luôn cảm ơn tất cả các bạn.
