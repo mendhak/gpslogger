@@ -111,4 +111,7 @@
     <string name="log_plain_text_csv_field_delimiter">CSV делимитер на полиња</string>
     <string name="log_json_summary">Логира локации во GeoJSON фајл</string>
     <string name="new_file_creation_title">Создавање на нов фајл</string>
+    <string name="customurl_all_parameters">Сите параметри:</string>
+    <string name="install_conscrypt_provider_title">Инсталирај Conscrypt Провајдер (SSL/TLS)</string>
+    <string name="install_conscrypt_provider_summary">Ако имате SSL/TLS проблеми со конекција на постар верзии Андроид, инсталирањето на Conscrypt Провајдерот може да помогне. (Следете го линкот, инсталирајте го АПКто, и рестартирајте ја апликацијата)</string>
 </resources>
