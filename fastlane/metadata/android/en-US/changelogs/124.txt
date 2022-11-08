@@ -1,0 +1,3 @@
+* Bugfix - make the initial permission dialog undismissable
+* Bugfix - clarify the difference between the custom url logging feature, and auto-send feature
+* Bugfix - correctly check and load the conscrypt provider if installed from F-Droid
