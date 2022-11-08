@@ -376,4 +376,6 @@
     <string name="google_drive_folder_path_summary_2">Tek bir klasör adı kullanırsanız, oluşturulduktan sonra Google Drive\'da başka bir yere taşınabilir. Dosyalar yüklenmeden önce yolun her bir bölümünün denetlenmesi veya oluşturulması gerektiğinden klasör yolları daha yavaştır.</string>
     <string name="install_conscrypt_provider_summary">Eski Android aygıtlarda SSL/TLS bağlantı sorunlarıyla karşılaşıyorsanız, Conscrypt Provider kurmak yardımcı olabilir. (Bu bağlantıyı takip edin, APK\'yı kurun, ardından uygulamayı yeniden başlatın)</string>
     <string name="install_conscrypt_provider_title">Conscrypt Provider Kur (SSL/TLS)</string>
+    <string name="autosend_customurl_summary">(Bu özellik CSV kaydını etkinleştirir) CSV dosyasındaki her satır için bir tane olmak üzere özel bir URL\'ye toplu olarak istek gönderir. Otomatik gönderme aralığına bağlıdır.</string>
+    <string name="log_customurl_summary_detailed">Bir konum noktası yakalandığında özel bir URL\'ye bir istek gönderir. Günlüğe kaydetme aralığına bağlıdır.</string>
 </resources>
