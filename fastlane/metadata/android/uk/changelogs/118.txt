@@ -1,0 +1,5 @@
+* New Dark Theme option, it should automatically follow the system day/night mode.
+* You can also manually set Light/Dark Theme in General settings.
+* Reworked settings screens, to show the the user selected values where possible.
+* Added a file and folder picker.  App will ask for extra permission on Android 11+ for custom paths.
+* SFTP should now be able to connect using modern SSH algorithms.

@@ -1,0 +1,6 @@
+* Google Drive returns! Reimplemented without closed source libraries
+* Possible bugfix for GPSLogger notification randomly appearing when not in use
+* If location services are disabled, app will now simply keep waiting (with a warning icon), and resume when it's re-enabled.
+* Adjusted font size in detailed view so lat/long fit better
+* Using a more precise alarm to help with suppressed locations in doze mode
+* New dual-action preference in Upload Settings

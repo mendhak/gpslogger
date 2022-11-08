@@ -1,0 +1,7 @@
+* Battery charging status in Custom URL (%ISCHARGING) and CSV (battery_charging)
+* If OSM and auto sending is enabled, you will now be prompted for OSM trace details on start, and upload
+* Ability to delete files (under logging, advanced).
+* GPX 1.1 logging, added gpxtpx:speed and gpxtpx:bearing extensions
+* Dropbox have updated their authentication method
+* Bugfix: multiple files were uploaded if name was contained in other filenames
+* Updated translations
