@@ -54,7 +54,7 @@ public class ConscryptProviderInstaller {
                     String signature = Systems.getPackageSignature("com.mendhak.conscryptprovider", context);
                     if (
                             signature.equalsIgnoreCase("C7:90:8D:17:33:76:1D:F3:CD:EB:56:67:16:C8:00:B5:AF:C5:57:DB")
-                            || signature.equalsIgnoreCase("05:F2:E6:59:28:08:89:81:B3:17:FC:9A:6D:BF:E0:4B:0F:A1:3B:4E")
+                            || signature.equalsIgnoreCase("9D:E1:4D:DA:20:F0:5A:58:01:BE:23:CC:53:34:14:11:48:76:B7:5E")
                     ) {
                         signatureMatch = true;
                     }
