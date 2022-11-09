@@ -70,8 +70,7 @@
     <footer class="container">
         <ul class="photostream">
             {%- for photo in flickrphotos -%}
-            <li><a href="{{ photo.url }}"><img width="150" height="150"
-                alt="thumbnail" src="{{ photo.img }}"></a></li>
+            <li><a href="{{ photo.url }}"><img width="150" height="150" alt="thumbnail" src="{{ photo.img }}"></a></li>
             {%- endfor -%}
         </ul>
         <section class="copy">
