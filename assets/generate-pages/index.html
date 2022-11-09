@@ -65,18 +65,14 @@
 
         </main>
     </div>
+
+
     <footer class="container">
         <ul class="photostream">
-            <li><a href="https://www.flickr.com/photos/mendhak/30454355997/"><img width="150" height="150"
-                        alt="thumbnail" src="https://live.staticflickr.com/1932/30454355997_287063f84b_q.jpg"></a></li>
-            <li><a href="https://www.flickr.com/photos/mendhak/31366195988/"><img width="150" height="150"
-                        alt="thumbnail" src="https://live.staticflickr.com/1917/31366195988_3b8862fd7e_q.jpg"></a></li>
-            <li><a href="https://www.flickr.com/photos/mendhak/38225459035/"><img width="150" height="150"
-                        alt="thumbnail" src="https://live.staticflickr.com/4596/38225459035_db33403af9_q.jpg"></a></li>
-            <li><a href="https://www.flickr.com/photos/mendhak/23816072218/"><img width="150" height="150"
-                        alt="thumbnail" src="https://live.staticflickr.com/4478/23816072218_c6f2a65658_q.jpg"></a></li>
-            <li><a href="https://www.flickr.com/photos/mendhak/37937678644/"><img width="150" height="150"
-                        alt="thumbnail" src="https://live.staticflickr.com/4521/37937678644_e569ddc8f6_q.jpg"></a></li>
+            {%- for photo in flickrphotos -%}
+            <li><a href="{{ photo.url }}"><img width="150" height="150"
+                alt="thumbnail" src="{{ photo.img }}"></a></li>
+            {%- endfor -%}
         </ul>
         <section class="copy">
             <p>&mdash; &copy; ###YEAR### Mendhak &mdash;</p>
