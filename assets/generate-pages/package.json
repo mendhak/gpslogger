@@ -10,12 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@11ty/eleventy": "^1.0.2",
-    "async": ">=2.6.4",
-    "fs-extra": "~0.30.0",
-    "marked": "^4.0.10"
-  },
-  "devDependencies": {
-    "markdown-it-anchor": "^8.6.5",
-    "slugify": "^1.6.5"
+    "markdown-it-anchor": "^8.6.5"
   }
+
 }
