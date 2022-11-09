@@ -13,6 +13,8 @@ module.exports = (function (eleventyConfig) {
     //Don't process README.md, that's for me!
     eleventyConfig.ignores.add("README.md");
 
+    eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
+
     eleventyConfig.addCollection('tour', function (collectionApi) {
         return collectionApi.getFilteredByGlob('content/tour*.*');
     });
