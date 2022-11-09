@@ -10,15 +10,18 @@ module.exports = (function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({ "static/": "static" });
     eleventyConfig.addPassthroughCopy({ "content/images/": "images" });
 
-    //Don't process README.md, that's for me!
+    // Don't process README.md, that's for me!
     eleventyConfig.ignores.add("README.md");
 
+    // Show the current year using a shortcode
     eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
 
+    // Collect all the tour.*.md files to go into the top Quick Tour section.
     eleventyConfig.addCollection('tour', function (collectionApi) {
         return collectionApi.getFilteredByGlob('content/tour*.*');
     });
 
+    // Collect all the more.*.md files to go into the More Screenshots section
     eleventyConfig.addCollection('more', function (collectionApi) {
         return collectionApi.getFilteredByGlob('content/more*.*');
     });
