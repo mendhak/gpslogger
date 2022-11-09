@@ -1,10 +1,21 @@
-Generates the HTML content found in [/docs](../../docs)
+Generates documentation using eleventy. 
 
-    npm install
-    node index.js
+```
+npm install
+npx eleventy --watch --serve
+```
 
-The script reads from `filesToProcess.json` for the list of `mainpage` files and also reads the list of files from [the faq folder](../text/faq); it renders them to the main index.html and copies to [/docs](../../docs)   
+Then browse to http://localhost:8080/
 
-The script then reads the `standalone` files, each of which become a new `.html` file in [/docs](../../docs)
 
-Finally everything from static is copied over too.
+
+## TODO
+
+Need to read Markdown files from `../text/faq` to populate the middle section of the page. 
+
+Need to use a chain layout so that standalone pages can use the same stylesheet and layout.  
+
+Need to generate standalone pages for `../text/opensource.md`, `../text/privacypolicy.md`, and `../text/faq/pages/gps-fix-details.md`
+
+Need to generate standalone page for `../../LICENSE.md`
+
