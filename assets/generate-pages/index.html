@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>GPSLogger for Android</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
+    <link rel="stylesheet" href="static/main.css">
+    <link rel="shortcut icon" type="image/png" href="static/images/favicon.png">
+    <link rel="icon" type="image/png" href="static/images/favicon.png">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container"><img src="static/images/gps_icon05.png" class="pull-left logo">
+            <h1><a href="https://gpslogger.app/">GPSLogger for Android</a></h1>
+            <p class="description">A battery efficient GPS logging application</p>
+            <section class="blurb">GPSLogger uses the GPS capabilities of your Android phone to log coordinates to GPS
+                format files at regular intervals.
+                This can be particularly useful if you want to geotag your photos after a day out or share your travel
+                route with someone.
+                The purpose of this application is to be battery efficient to save you battery power when abroad and
+                last as long as
+                possible.</section>
+            <a href="#quick-tour" class="button">Tour</a> <a href="#frequentlyaskedquestionsandissues"
+                class="button">FAQ</a> <a href="#morescreenshots" class="button">Screenshots</a>
+
+            <a href="https://github.com/mendhak/gpslogger/" class="pull-right"><img src="static/images/GitHub_Logo.png"
+                    height="40px" class="pull-right" style="margin-top:10px;"> <img
+                    src="static/images/GitHub-Mark-64px.png" height="40px" class="pull-right"
+                    style="margin-top:10px;"></a><a href="https://f-droid.org/packages/com.mendhak.gpslogger">
+                <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="65px"
+                    class="pull-right">
+            </a>
+
+
+        </div>
+    </header>
+    <div class="container">
+        <main>
+
+            {%- for item in collections.tour -%}
+            <section>
+                <div class="lead">
+                    {{ item.templateContent }}
+
+                </div>
+            </section>
+            {%- endfor -%}
+
+            <hr />
+
+            {%- for item in collections.more -%}
+            <section>
+                <div class="lead">
+                    {{ item.templateContent }}
+
+                </div>
+            </section>
+            {%- endfor -%}
+
+
+        </main>
+    </div>
+    <footer class="container">
+        <ul class="photostream">
+            <li><a href="https://www.flickr.com/photos/mendhak/30454355997/"><img width="150" height="150"
+                        alt="thumbnail" src="https://live.staticflickr.com/1932/30454355997_287063f84b_q.jpg"></a></li>
+            <li><a href="https://www.flickr.com/photos/mendhak/31366195988/"><img width="150" height="150"
+                        alt="thumbnail" src="https://live.staticflickr.com/1917/31366195988_3b8862fd7e_q.jpg"></a></li>
+            <li><a href="https://www.flickr.com/photos/mendhak/38225459035/"><img width="150" height="150"
+                        alt="thumbnail" src="https://live.staticflickr.com/4596/38225459035_db33403af9_q.jpg"></a></li>
+            <li><a href="https://www.flickr.com/photos/mendhak/23816072218/"><img width="150" height="150"
+                        alt="thumbnail" src="https://live.staticflickr.com/4478/23816072218_c6f2a65658_q.jpg"></a></li>
+            <li><a href="https://www.flickr.com/photos/mendhak/37937678644/"><img width="150" height="150"
+                        alt="thumbnail" src="https://live.staticflickr.com/4521/37937678644_e569ddc8f6_q.jpg"></a></li>
+        </ul>
+        <section class="copy">
+            <p>&mdash; &copy; ###YEAR### Mendhak &mdash;</p>
+        </section>
+    </footer>
+</body>
+
+</html>
