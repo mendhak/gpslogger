@@ -4,7 +4,7 @@ services:
     image: node:16-slim
     volumes:
       - ${PWD}:/app
-      - ${PWD}/../text/faq:/app/faq
+      - ${PWD}/../text:/app/text
     working_dir: /app
     command:
       - /bin/sh
