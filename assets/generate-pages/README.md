@@ -15,6 +15,11 @@ To build, as a one-off,
 docker-compose run --rm --entrypoint "/bin/bash -c 'npm install;npx -p @11ty/eleventy eleventy'" eleventy
 ```
 
+or with npm:
+
+```
+npm run build
+```
 
 
 
