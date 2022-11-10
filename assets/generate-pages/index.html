@@ -26,7 +26,7 @@
                 last as long as
                 possible.</section>
             <a href="#quick-tour" class="button">Tour</a>
-            <a href="#frequentlyaskedquestionsandissues" class="button">FAQ</a>
+            <a href="#frequently-asked-questions-and-issues" class="button">FAQ</a>
             <a href="#more-screenshots" class="button">Screenshots</a>
 
             <a href="https://github.com/mendhak/gpslogger/" class="pull-right">
@@ -55,7 +55,7 @@
 
             <hr />
 
-            {%- for item in collections.more -%}
+            {%- for item in collections.faq -%}
             <section>
                 <div class="lead">
                     {{ item.templateContent }}
@@ -64,7 +64,16 @@
             </section>
             {%- endfor -%}
 
+            <hr />
 
+            {%- for item in collections.more -%}
+            <section>
+                <div class="lead">
+                    {{ item.templateContent }}
+
+                </div>
+            </section>
+            {%- endfor -%}
         </main>
     </div>
 

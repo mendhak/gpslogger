@@ -1,0 +1,16 @@
+version: "3"
+services:
+  eleventy:
+    image: node:16-slim
+    volumes:
+      - ${PWD}:/app
+      - ${PWD}/../text/faq:/app/faq
+    working_dir: /app
+    command:
+      - /bin/sh
+      - -c
+      - |
+        npm install
+        npx -p @11ty/eleventy eleventy --watch --serve
+    ports:
+      - 8080:8080
