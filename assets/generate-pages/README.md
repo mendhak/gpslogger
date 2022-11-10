@@ -22,4 +22,13 @@ npm run build
 ```
 
 
+### Caveats and TODO
+
+Ctrl+C on the docker container doesn't really work, it times out after 10 seconds. 
+
+The LICENSE.md copying is a bit of a headache as it appears as a 'new' file. 
+
+Heading 3 and 4 levels don't need to become anchors. 
+
+
 

@@ -7,7 +7,7 @@ module.exports = (function (eleventyConfig) {
     eleventyConfig.setLibrary("md", markdownLibrary);
 
     // Copies the static and image files straight into the output folder, so that the HTML can reference it. 
-    eleventyConfig.addPassthroughCopy({ "static/": "static" });
+    eleventyConfig.addPassthroughCopy({ "static/": "." });
     eleventyConfig.addPassthroughCopy({ "content/images/": "images" });
     eleventyConfig.addPassthroughCopy({ "text/faq/images/": "images" });
 
@@ -39,7 +39,7 @@ module.exports = (function (eleventyConfig) {
     return {
         dir: {
             input: ".",
-            output: "_site",
+            output: "docs",
             templateFormats: ["html"]
         }
     }
