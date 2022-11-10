@@ -14,6 +14,31 @@ module.exports = (function (eleventyConfig) {
     // Don't process README.md, that's for me!
     eleventyConfig.ignores.add("README.md");
 
+    //I'm just going to hardcode the titles here, instead of creating a "privacypolicy.11tydata.json" with the title in it. 
+    eleventyConfig.addFilter("titleFormat", function (pagename) {
+        switch (pagename.toLowerCase()) {
+            case "privacypolicy":
+                pagename = "Privacy Policy";
+                break;
+            case "opensource":
+                pagename = "Open Source Licenses";
+                break;
+            case "license":
+                pagename = "License";
+                break;
+            case "gps-fix-details":
+                pagename = "Why does GPS take a long time to find a fix?";
+            default:
+                break;
+        }
+        if (pagename) {
+            return `${pagename} — GPSLogger for Android`;
+        }
+
+        return "GPSLogger for Android";
+
+    });
+
     // Show the current year using a shortcode
     eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
 
