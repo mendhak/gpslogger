@@ -31,6 +31,10 @@ module.exports = (function (eleventyConfig) {
         return collectionApi.getFilteredByGlob('content/more*.*');
     });
 
+    // The docker compose copies LICENSE.md into text. But I don't want that committed in git, so it's added to .gitignore
+    // So I get eleventy to ignore gitignore and use the .eleventyignore instead.  What a mess!
+    eleventyConfig.setUseGitIgnore(false);
+
     // Config values that could be passed via arguments but it's just easier in here. 
     return {
         dir: {
