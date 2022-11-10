@@ -1,0 +1,4 @@
+{
+    "permalink": "{{ page.fileSlug }}.html",
+    "layout": "standalone.html"
+}
