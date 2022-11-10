@@ -9,6 +9,7 @@ module.exports = (function (eleventyConfig) {
     // Copies the static and image files straight into the output folder, so that the HTML can reference it. 
     eleventyConfig.addPassthroughCopy({ "static/": "static" });
     eleventyConfig.addPassthroughCopy({ "content/images/": "images" });
+    eleventyConfig.addPassthroughCopy({ "faq/images/": "images" });
 
     // Don't process README.md, that's for me!
     eleventyConfig.ignores.add("README.md");
@@ -19,6 +20,10 @@ module.exports = (function (eleventyConfig) {
     // Collect all the tour.*.md files to go into the top Quick Tour section.
     eleventyConfig.addCollection('tour', function (collectionApi) {
         return collectionApi.getFilteredByGlob('content/tour*.*');
+    });
+
+    eleventyConfig.addCollection('faq', function (collectionApi) {
+        return collectionApi.getFilteredByGlob('faq/*.*');
     });
 
     // Collect all the more.*.md files to go into the More Screenshots section
