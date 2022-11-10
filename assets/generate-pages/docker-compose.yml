@@ -5,6 +5,7 @@ services:
     volumes:
       - ${PWD}:/app
       - ${PWD}/../text:/app/text
+      - ${PWD}/../../LICENSE.md:/app/text/LICENSE.md
     working_dir: /app
     command:
       - /bin/sh

@@ -1,4 +1,4 @@
 {
-    "permalink": "{{ page.fileSlug }}.html",
+    "permalink": "{{ page.fileSlug | slugify }}.html",
     "layout": "standalone.html"
 }
