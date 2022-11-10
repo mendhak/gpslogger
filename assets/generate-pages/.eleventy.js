@@ -9,7 +9,7 @@ module.exports = (function (eleventyConfig) {
 
     // Copies the static and image files straight into the output folder, so that the HTML can reference it. 
     eleventyConfig.addPassthroughCopy({ "static/": "." });
-    eleventyConfig.addPassthroughCopy({ "content/images/": "images" });
+    eleventyConfig.addPassthroughCopy({ "text/content/images/": "images" });
     eleventyConfig.addPassthroughCopy({ "text/faq/images/": "images" });
 
     // Don't process README.md, that's for me!
@@ -45,7 +45,7 @@ module.exports = (function (eleventyConfig) {
 
     // Collect all the tour.*.md files to go into the top Quick Tour section.
     eleventyConfig.addCollection('tour', function (collectionApi) {
-        return collectionApi.getFilteredByGlob('content/tour*.*');
+        return collectionApi.getFilteredByGlob('text/content/tour*.*');
     });
 
     eleventyConfig.addCollection('faq', function (collectionApi) {
@@ -54,7 +54,7 @@ module.exports = (function (eleventyConfig) {
 
     // Collect all the more.*.md files to go into the More Screenshots section
     eleventyConfig.addCollection('more', function (collectionApi) {
-        return collectionApi.getFilteredByGlob('content/more*.*');
+        return collectionApi.getFilteredByGlob('text/content/more*.*');
     });
 
     // The docker compose copies LICENSE.md into text. But I don't want that committed in git, so it's added to .gitignore
