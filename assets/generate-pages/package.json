@@ -4,7 +4,7 @@
   "description": "Custom static site generator.",
   "main": "index.js",
   "scripts": {
-    "prebuild": "rm -rf text/ && rm -rf _site && rm -rf node_modules && cp -r ../text . && cp ../../LICENSE.md text/ && npm install", 
+    "prebuild": "rm -rf text/ && rm -rf _site && rm -rf node_modules && cp -r ../text . && cp ../../LICENSE.md text/extra/ && npm install", 
     "build": "npx eleventy"
   },
   "author": "",

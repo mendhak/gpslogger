@@ -5,7 +5,7 @@ services:
     volumes:
       - ${PWD}:/app
       - ${PWD}/../text:/app/text
-      - ${PWD}/../../LICENSE.md:/app/text/LICENSE.md
+      - ${PWD}/../../LICENSE.md:/app/text/extra/LICENSE.md
     working_dir: /app
     # environment:
     #   - DEBUG=Eleventy*
