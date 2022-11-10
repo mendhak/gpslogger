@@ -1,0 +1,10 @@
+<footer class="container">
+    <ul class="photostream">
+        {%- for photo in flickrphotos -%}
+        <li><a href="{{ photo.link }}"><img width="150" height="150" alt="thumbnail" src="{{ photo.img }}"></a></li>
+        {%- endfor -%}
+    </ul>
+    <section class="copy">
+        <p>&mdash; &copy; {% year %} Mendhak &mdash;</p>
+    </section>
+</footer>
