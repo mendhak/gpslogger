@@ -12,7 +12,7 @@ Please note that I work on GPSLogger in my spare time and I may not always have 
 
 ### [Read the privacy policy](privacypolicy.html)
 
-### [Open source libraries used](opensourcelibraries.html)
+### [Open source libraries used](opensource.html)
 
 ### [Donate Paypal](https://paypal.me/mendhak/)
 
