@@ -3,7 +3,8 @@ const markdownItAnchor = require("markdown-it-anchor");
 
 module.exports = (function (eleventyConfig) {
     // When generating headings, wrap it in a hyperlink, for easy accessibility. 
-    let markdownLibrary = markdownIt({ html: true }).use(markdownItAnchor, { permalink: markdownItAnchor.permalink.headerLink() });
+    // Only wrap it in hyperlink if it's h1, h2, h3.
+    let markdownLibrary = markdownIt({ html: true }).use(markdownItAnchor, { permalink: markdownItAnchor.permalink.headerLink(), level: [1,2,3] });
     eleventyConfig.setLibrary("md", markdownLibrary);
 
     // Copies the static and image files straight into the output folder, so that the HTML can reference it. 
