@@ -2,6 +2,29 @@ const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const slugify = require('slugify');
 
+// Custom plugin that adds loading=lazy to images. 
+function lazyImages (eleventyConfig, userOptions = {}) {
+    const {parse} = require('node-html-parser')
+  
+    const options = {
+      name: 'lazy-images',
+      ...userOptions
+    }
+  
+    eleventyConfig.addTransform(options.extensions, (content, outputPath) => {
+      if (outputPath && outputPath.endsWith('.html')) {
+        const root = parse(content);
+        const images = root.querySelectorAll('img');
+        images.forEach((img) => {
+          img.setAttribute('loading', 'lazy')
+        })
+        return root.toString()
+      }
+      return content;
+    })
+}
+
+
 module.exports = (function (eleventyConfig) {
     // When generating headings, wrap it in a hyperlink, for easy accessibility. 
     // Only wrap it in hyperlink if it's h1, h2, h3.
@@ -20,6 +43,9 @@ module.exports = (function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({ "static/": "." });
     eleventyConfig.addPassthroughCopy({ "text/content/images/": "images" });
     eleventyConfig.addPassthroughCopy({ "text/faq/images/": "images" });
+    
+    // Uses custom plugin (above) to add loading=lazy to images. 
+    eleventyConfig.addPlugin(lazyImages, {})
 
     // Don't process README.md, that's for me!
     eleventyConfig.ignores.add("README.md");
