@@ -3,7 +3,7 @@ Open Firefox
 
     Navigate to 'file:///app/docs/index.html'
 
-        On MDN {
+        On Page {
             props({
                 'Github Link': `selector 'a[href="https://github.com/mendhak/gpslogger/"]'`,
                 'FDroid Link': `selector 'a[href="https://f-droid.org/packages/com.mendhak.gpslogger"]'`,
