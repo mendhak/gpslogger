@@ -3,6 +3,7 @@ const markdownItAnchor = require("markdown-it-anchor");
 const slugify = require('slugify');
 
 // Custom plugin that adds loading=lazy to images. 
+// https://cri.dev/posts/2021-05-11-how-to-lazy-load-images-eleventy/
 function lazyImages (eleventyConfig, userOptions = {}) {
     const {parse} = require('node-html-parser')
   
