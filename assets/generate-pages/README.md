@@ -9,17 +9,7 @@ docker-compose up
 Then browse to http://localhost:8080/
 
 
-To build, as a one-off, 
-
-```
-docker-compose run --rm --entrypoint "/bin/bash -c 'npm install;npx -p @11ty/eleventy eleventy'" eleventy
-```
-
-or with npm:
-
-```
-npm run build
-```
+Not suitable for running directly because all the input and output folders are in parent paths which makes direct running a lot more difficult. 
 
 
 ### Caveats and TODO
