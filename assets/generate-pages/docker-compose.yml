@@ -1,19 +1,13 @@
 version: "3"
 services:
   eleventy:
-    image: node:16-slim
+    build: .
     volumes:
-      - ${PWD}:/app
-      - ${PWD}/../text:/app/text
-      - ${PWD}/../../LICENSE.md:/app/text/extra/LICENSE.md
-    working_dir: /app
+      - ${PWD}:/home/node/app
+      - ${PWD}/../text:/home/node/app/text
+      - ${PWD}/../../LICENSE.md:/home/node/app/text/extra/LICENSE.md
+    working_dir: /home/node/app
     # environment:
     #   - DEBUG=Eleventy*
-    command:
-      - /bin/sh
-      - -c
-      - |
-        npm install
-        npx -p @11ty/eleventy eleventy --watch --serve
     ports:
       - 8080:8080
