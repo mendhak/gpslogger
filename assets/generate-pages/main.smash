@@ -1,8 +1,22 @@
+
 Open Firefox
 
     Navigate to 'file:///app/docs/index.html'
 
-        Verify ['Frequently asked questions and issues'] is visible
+        On MDN {
+            props({
+                'Github Link': `a[href='https://github.com/mendhak/gpslogger/']`,
+                'F-Droid Link': `a[href='https://f-droid.org/packages/com.mendhak.gpslogger']`
+            })
+        }
 
-            Verify ['More screenshots'] is visible
 
+            Verify ['Frequently asked questions and issues'] is visible
+
+                Verify ['More screenshots'] is visible
+
+                    Verify ['Quick Tour'] is visible
+
+                        Verify 'Github Link' is visible
+
+                            Verify 'F-Droid Link' is visible
