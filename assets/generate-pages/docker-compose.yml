@@ -7,6 +7,7 @@ services:
       - ${PWD}:/app
       - ${PWD}/../text:/app/text
       - ${PWD}/../../LICENSE.md:/app/text/extra/LICENSE.md
+      - ${PWD}/../../docs:/app/docs
     working_dir: /app
     # environment:
     #   - DEBUG=Eleventy*

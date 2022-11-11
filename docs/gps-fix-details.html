@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
-    <title>Why does GPS take a long time to find a fix? -  GPSLogger for Android
-    </title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
+    <title>Why does GPS take a long time to find a fix? — GPSLogger for Android</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
     <link rel="stylesheet" href="main.css">
-    <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
-    <link rel="icon" type="image/png" href="/images/favicon.png">
-  </head>
-  <body>
-    
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+
+<body>
     <div class="container">
-      <main>
-
-
-<section><div class='lead'><h1><a name="whydoesgpstakealongtimetofindafix" href="#whydoesgpstakealongtimetofindafix">Why does GPS take a long time to find a fix?</a></h1><p>The gist of a phone using GPS is that it needs to know where every satellite in the GPS constellation is and it usually wants to use your data connection to do this. The GPS satellites do broadcast this information at different intervals; specifically, each satellite broadcasts almanac data and ephemeris data.</p>
+    <main>
+        <section>
+            <div class='lead'>
+                <h1 id="whydoesgpstakealongtimetofindafix"><a class="header-anchor" href="#whydoesgpstakealongtimetofindafix">Why does GPS take a long time to find a fix?</a></h1>
+<p>The gist of a phone using GPS is that it needs to know where every satellite in the GPS constellation is and it usually wants to use your data connection to do this. The GPS satellites do broadcast this information at different intervals; specifically, each satellite broadcasts almanac data and ephemeris data.</p>
 <p>The almanac is not very precise and gives a rough overview of the constellation and their positions over the next few months. A GPS receiver can use this to get a rough idea of where it is and which satellites to select. When a phone has been off for a long time, or suddenly shifted to a new location, it needs to reacquire almanac data.</p>
-<p>The ephemeris data is more precise; it is broadcast more frequently and goes stale quite quickly. It&#39;s only once a GPS receiver has its almanac data that it knows to look for the ephemeris data. Once the phone has both of these pieces of information, it can then figure out where it is. This process can take around 12 minutes and is known to be very flaky; any interference or interruption in the process means that the GPS receiver in the phone needs to start over. The satellites only broadcast at 50 bytes/second.</p>
+<p>The ephemeris data is more precise; it is broadcast more frequently and goes stale quite quickly. It's only once a GPS receiver has its almanac data that it knows to look for the ephemeris data. Once the phone has both of these pieces of information, it can then figure out where it is. This process can take around 12 minutes and is known to be very flaky; any interference or interruption in the process means that the GPS receiver in the phone needs to start over. The satellites only broadcast at 50 bytes/second.</p>
 <p>Because it takes so long, to assist with this, many mobile operators deploy aGPS servers; these servers have already downloaded the almanac and ephemeris data and your phone can download it from them at a faster rate then from the satellites. But it does mean that your phone has to be on a familiar network. Being on roaming or with a restricted data plan will prevent this from happening.</p>
 <p>All in all, there are a lot of factors at play. The problem could be anything from missing almanacs to data to hardware. GPSLogger simply waits for the OS to be ready with its information.</p>
 
-</div></section>
+            </div>
+        </section>
+    </main>
+</div>
 
-
-
-
- </main>
-    </div>
-    <footer class="container">
-      
-      <section class="copy">
+<footer class="container">
+    <section class="copy">
         <p>&mdash; &copy; 2022 Mendhak &mdash;</p>
-      </section>
-    </footer>
-  </body>
+    </section>
+</footer>
+</body>
+
 </html>
