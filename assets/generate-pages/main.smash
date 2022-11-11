@@ -2,4 +2,7 @@ Open Firefox
 
     Navigate to 'file:///app/docs/index.html'
 
-        Verify ['Quick Tour'] is visible
+        Verify ['Frequently asked questions and issues'] is visible
+
+            Verify ['More screenshots'] is visible
+
