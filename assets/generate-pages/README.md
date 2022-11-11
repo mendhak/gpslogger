@@ -26,6 +26,8 @@ npm run build
 
 Ctrl+C on the docker container doesn't really work, it times out after 10 seconds. 
 
+Some tests to ensure the page generated properly?
+
 
 
 

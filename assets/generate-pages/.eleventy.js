@@ -48,6 +48,7 @@ module.exports = (function (eleventyConfig) {
         return collectionApi.getFilteredByGlob('text/content/tour*.*');
     });
 
+    // Collect all the FAQ md files to go into the FAQ section
     eleventyConfig.addCollection('faq', function (collectionApi) {
         return collectionApi.getFilteredByGlob('text/faq/*.*');
     });
