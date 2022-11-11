@@ -1,10 +1,19 @@
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
+const slugify = require('slugify');
 
 module.exports = (function (eleventyConfig) {
     // When generating headings, wrap it in a hyperlink, for easy accessibility. 
     // Only wrap it in hyperlink if it's h1, h2, h3.
-    let markdownLibrary = markdownIt({ html: true }).use(markdownItAnchor, { permalink: markdownItAnchor.permalink.headerLink(), level: [1,2,3] });
+    // Replace spaces and special chars with empty string
+    // This is for backwards compatibility to match previous links.
+    let markdownLibrary = markdownIt({ html: true }).use(markdownItAnchor, 
+        { 
+            permalink: markdownItAnchor.permalink.headerLink(), 
+            level: [1, 2, 3], 
+            slugify: slug => slugify(slug, { replacement: '', lower:true, }), 
+            tabIndex: false,
+        });
     eleventyConfig.setLibrary("md", markdownLibrary);
 
     // Copies the static and image files straight into the output folder, so that the HTML can reference it. 
