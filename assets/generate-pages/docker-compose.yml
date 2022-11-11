@@ -4,10 +4,10 @@ services:
     image: node:16-slim
     volumes:
       - ${PWD}/node_modules
-      - ${PWD}:/home/node/app
-      - ${PWD}/../text:/home/node/app/text
-      - ${PWD}/../../LICENSE.md:/home/node/app/text/extra/LICENSE.md
-    working_dir: /home/node/app
+      - ${PWD}:/app
+      - ${PWD}/../text:/app/text
+      - ${PWD}/../../LICENSE.md:/app/text/extra/LICENSE.md
+    working_dir: /app
     # environment:
     #   - DEBUG=Eleventy*
     ports:
