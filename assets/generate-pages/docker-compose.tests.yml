@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  smashtest:
+    build:
+      context: .
+      dockerfile: Dockerfile.smashtest
+    volumes:
+      - ${PWD}:/app
+    command: smashtest --headless=true --screenshots=true

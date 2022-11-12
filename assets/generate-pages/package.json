@@ -4,13 +4,12 @@
   "description": "Custom static site generator.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": ">=2.6.4",
-    "fs-extra": "~0.30.0",
-    "marked": "^4.0.10"
+    "@11ty/eleventy": "^1.0.2",
+    "markdown-it-anchor": "^8.6.5",
+    "node-html-parser": "^6.1.1"
   }
 }

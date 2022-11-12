@@ -1,10 +1,39 @@
-Generates the HTML content found in [/docs](../../docs)
+Generates documentation using eleventy.
 
-    npm install
-    node index.js
+Docker compose volumes are used to ensure folders from parent directories are loaded into the working directory at the same level as the input folder configured in the .eleventy.js configuration.
 
-The script reads from `filesToProcess.json` for the list of `mainpage` files and also reads the list of files from [the faq folder](../text/faq); it renders them to the main index.html and copies to [/docs](../../docs)   
+To generate the pages and watch the Markdown continuously:
 
-The script then reads the `standalone` files, each of which become a new `.html` file in [/docs](../../docs)
+```
+docker-compose up
+```
 
-Finally everything from static is copied over too.
+Then browse to http://localhost:8080/
+
+
+To generate the output once, without web server:
+
+```
+docker-compose run --rm --entrypoint "/bin/bash -c 'npm install;npx eleventy'" eleventy
+```
+
+Always run through docker, not via npm, because all the input and output folders are in parent paths which makes npm running a lot more difficult. 
+
+After generating the HTML, to run tests: 
+
+```
+docker-compose -f docker-compose.tests.yml run --rm smashtest
+```
+
+
+### Caveats and TODO
+
+Ctrl+C on the docker container doesn't really work, it times out after 10 seconds. 
+
+Some tests to ensure the page generated properly?
+
+
+
+
+
+
