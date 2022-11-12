@@ -10,17 +10,50 @@ Open Firefox
             })
         }
 
+            Verify 'Github Link' is visible
 
-            Verify ['Frequently asked questions and issues'] is visible
+                Verify 'FDroid Link' is visible
 
-                Verify ['More screenshots'] is visible
+        Click [a, 'FAQ']
 
-                    Verify ['Quick Tour'] is visible
+            Verify at page '#frequentlyaskedquestionsandissues'
 
-                        Verify 'Github Link' is visible
+                Verify ['Frequently asked questions and issues'] is visible
 
-                            Verify 'FDroid Link' is visible
+                    Click [a, 'Screenshots']
+
+                        Verify at page '#morescreenshots'
+
+                            Verify ['More screenshots'] is visible
+
+                                Click [a, 'Tour']
+
+                                    Verify at page '#quicktour'
+
+                                        Verify ['Quick Tour'] is visible                
+
+
 
         Click ['Read the privacy policy']
 
             Verify at page 'privacypolicy.html'
+
+                Verify ['We do not collect any personal information from you.'] is visible
+
+        Click ['Licensed under GPLv2']
+
+            Verify at page 'license.html'
+
+                Verify ['Everyone is permitted to copy and distribute verbatim copies of this license document'] is visible
+
+        Click ['Open source libraries used']
+
+            Verify at page 'opensource.html'
+
+                Verify ['With many thanks.'] is visible
+
+        Click 'a[href="gps-fix-details.html"]'
+
+            Verify at page 'gps-fix-details.html'
+
+                Verify ['The almanac is not very precise'] is visible
