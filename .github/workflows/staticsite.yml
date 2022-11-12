@@ -1,0 +1,68 @@
+
+name: Build and Publish Github Pages
+
+# Trigger this workflow only when the main branches, assets folder is modified. 
+on:
+  push:
+    branches: [ "main", "master" ]
+    paths: 
+      - 'assets/**'
+      - 'LICENSE.md'    
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  deployments: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    defaults:
+      run:
+        working-directory: assets/generate-pages
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Set up Docker Layer caching
+        uses: satackey/action-docker-layer-caching@v0.0.11
+        # Ignore the failure of a step and avoid terminating the job.
+        continue-on-error: true
+
+      - name: Build the static site
+        run: docker-compose run --rm --entrypoint "/bin/bash -c 'npm install;npx eleventy'" eleventy
+
+      - name: Test the generated pages
+        run: |
+          mkdir -p smashtest
+          chmod -R a+rw smashtest
+          docker-compose -f docker-compose.tests.yml run --rm smashtest
+
+      - name: Upload Smashtest Report Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: smashtest-report
+          path: assets/generate-pages/smashtest/ 
+          
+      - name: Setup Github Pages
+        uses: actions/configure-pages@v2
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: 'docs'
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1        
