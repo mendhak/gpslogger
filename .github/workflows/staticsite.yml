@@ -61,7 +61,7 @@ jobs:
       - name: Upload Github Pages artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: '_site'
+          path: 'assets/generate-pages/_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
