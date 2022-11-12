@@ -15,5 +15,3 @@ Please note that I work on GPSLogger in my spare time and I may not always have 
 ### [Open source libraries used](opensource.html)
 
 ### [Donate Paypal](https://paypal.me/mendhak/)
-
-### [Donate Bitcoin](https://blockchain.info/payment_request?address=14bKk4sR1AD7avuJfBx2izy2FwyqMXEvcY)
