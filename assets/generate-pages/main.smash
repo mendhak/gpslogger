@@ -1,7 +1,7 @@
 
 Open Firefox
 
-    Navigate to 'file:///app/docs/index.html'
+    Navigate to 'file:///app/_site/index.html'
 
         On Page {
             props({

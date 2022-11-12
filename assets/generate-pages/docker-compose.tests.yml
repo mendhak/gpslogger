@@ -7,5 +7,4 @@ services:
       dockerfile: Dockerfile.smashtest
     volumes:
       - ${PWD}:/app
-      - ${PWD}/../../docs:/app/docs
     command: smashtest --headless=true --screenshots=true
