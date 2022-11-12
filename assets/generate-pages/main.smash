@@ -5,8 +5,8 @@ Open Firefox
 
         On Page {
             props({
-                'Github Link': `selector 'a[href="https://github.com/mendhak/gpslogger/"]'`,
                 'FDroid Link': `selector 'a[href="https://f-droid.org/packages/com.mendhak.gpslogger"]'`,
+                'Github Link': `selector 'a[href="https://github.com/mendhak/gpslogger/"]'`,
             })
         }
 
