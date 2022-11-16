@@ -376,4 +376,5 @@
     <string name="properties_file_url">URL - адреса файлу властивостей</string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Ігнорувати оптимізацію заряду акумулятора</b> - Дозволити цій програмі працювати у фоновому режимі, зменшивши оптимізацію заряду акумулятора.</string>
     <string name="log_customurl_summary_detailed">Надсилає запит на спеціальну URL-адресу щоразу, коли фіксується точка місцеперебування. Залежить від інтервалу реєстрації.</string>
+    <string name="autosend_customurl_summary">(Ця функція вмикає ведення журналу CSV) Надсилає запити масово на спеціальну URL-адресу, по одному для кожного рядка у файлі CSV. Залежить від інтервалу автоматичної відправки.</string>
 </resources>
