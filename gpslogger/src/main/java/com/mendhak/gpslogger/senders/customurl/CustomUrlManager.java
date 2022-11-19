@@ -1,10 +1,12 @@
 package com.mendhak.gpslogger.senders.customurl;
 
-import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 
+import com.birbit.android.jobqueue.CancelResult;
+import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.JobManager;
+import com.birbit.android.jobqueue.TagConstraint;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -24,8 +26,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -174,11 +176,31 @@ public class CustomUrlManager extends FileSender {
     }
 
     public void sendByHttp(String url, String method, String body, String headers, String username, String password){
-        JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(url, method,
-                body, headers, username, password), new UploadEvents.CustomUrl()));
+        sendByHttp(url, method, body, headers, username, password, null);
     }
 
+    public void sendByHttp(String url, String method, String body, String headers, String username, String password, String jobTag) {
+        JobManager jobManager = AppSettings.getJobManager();
+        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(url, method,
+                body, headers, username, password), new UploadEvents.CustomUrl(), jobTag));
+    }
+
+    public void cancelHttpRequests(Runnable cancelCallback, String jobTag) {
+        AppSettings.getJobManager().cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
+            @Override
+            public void onCancelled(CancelResult cancelResult) {
+                debugIfNotEmpty(cancelResult.getCancelledJobs(), "Custom URL: cancelled %d http requests with outdated locations");
+                debugIfNotEmpty(cancelResult.getFailedToCancel(), "Custom URL: failed to cancel %d http requests with outdated locations");
+                cancelCallback.run();
+            }
+        }, TagConstraint.ANY, jobTag);
+    }
+
+    private void debugIfNotEmpty(Collection<Job> jobs, String message) {
+        if (jobs.size() > 0) {
+            LOG.debug(String.format(message, jobs.size()));
+        }
+    }
 
     private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {
         return getFormattedTextblock(textToFormat, loc, loc.getDescription(), Systems.getAndroidId(),

@@ -14,6 +14,12 @@
         android:summary="@string/autosend_customurl_summary"
         app:iconSpaceReserved="false" />
 
+    <SwitchPreferenceCompat
+        android:key="log_customurl_discard_offline_locations_enabled"
+        android:title="@string/log_customurl_discard_offline_locations"
+        android:summary="@string/log_customurl_discard_offline_locations_summary"
+        app:iconSpaceReserved="false" />
+
     <Preference
         android:key="log_customurl_url"
         android:singleLine="true"

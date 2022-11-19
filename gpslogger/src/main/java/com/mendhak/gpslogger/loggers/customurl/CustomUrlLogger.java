@@ -19,6 +19,8 @@
 
 package com.mendhak.gpslogger.loggers.customurl;
 
+import static com.mendhak.gpslogger.loggers.customurl.CustomUrlJob.TAG_DISCARDABLE;
+
 import android.content.Context;
 import android.location.Location;
 
@@ -89,8 +91,13 @@ public class CustomUrlLogger implements FileLogger {
                 PreferenceHelper.getInstance().getCurrentProfileName(),
                 Session.getInstance().getTotalTravelled());
 
-
-        manager.sendByHttp(finalUrl,httpMethod, finalBody, finalHeaders, basicAuthUsername, basicAuthPassword);
+        if (PreferenceHelper.getInstance().shouldCustomURLLoggingDiscardOfflineLocations()) {
+            manager.cancelHttpRequests(() ->
+                    manager.sendByHttp(finalUrl, httpMethod, finalBody, finalHeaders, basicAuthUsername, basicAuthPassword, TAG_DISCARDABLE),
+                    TAG_DISCARDABLE);
+        } else {
+            manager.sendByHttp(finalUrl, httpMethod, finalBody, finalHeaders, basicAuthUsername, basicAuthPassword);
+        }
 
     }
 

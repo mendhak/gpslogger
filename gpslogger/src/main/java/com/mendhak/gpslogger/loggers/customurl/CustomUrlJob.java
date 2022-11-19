@@ -23,6 +23,7 @@ package com.mendhak.gpslogger.loggers.customurl;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.birbit.android.jobqueue.CancelReason;
 import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
@@ -48,14 +49,28 @@ public class CustomUrlJob extends Job {
 
     private static final Logger LOG = Logs.of(CustomUrlJob.class);
 
+    public static final String TAG_DISCARDABLE = "Discardable";
+
     private UploadEvents.BaseUploadEvent callbackEvent;
     private CustomUrlRequest urlRequest;
 
     public CustomUrlJob(CustomUrlRequest urlRequest, UploadEvents.BaseUploadEvent callbackEvent) {
-        super(new Params(1).requireNetwork().persist());
+        this(urlRequest, callbackEvent, null);
+    }
+
+    public CustomUrlJob(CustomUrlRequest urlRequest, UploadEvents.BaseUploadEvent callbackEvent, String tag) {
+        super(buildParams(tag));
 
         this.callbackEvent = callbackEvent;
         this.urlRequest = urlRequest;
+    }
+
+    private static Params buildParams(String tag) {
+        Params params = new Params(1).requireNetwork().persist();
+        if (tag != null && !"".equals(tag)) {
+            return params.addTags(tag);
+        }
+        return params;
     }
 
     @Override
@@ -98,8 +113,14 @@ public class CustomUrlJob extends Job {
 
     @Override
     protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
-        EventBus.getDefault().post(callbackEvent.failed("Could not send to custom URL", throwable));
-        LOG.error("Custom URL: maximum attempts failed, giving up", throwable);
+        if (CancelReason.CANCELLED_WHILE_RUNNING == cancelReason) {
+            if (getTags() != null && getTags().contains(TAG_DISCARDABLE)) {
+                LOG.debug("Custom URL: cancelled sending outdated location");
+            }
+        } else if (CancelReason.REACHED_RETRY_LIMIT == cancelReason) {
+            EventBus.getDefault().post(callbackEvent.failed("Could not send to custom URL", throwable));
+            LOG.error("Custom URL: maximum attempts failed, giving up", throwable);
+        }
     }
 
     @Override
