@@ -36,5 +36,15 @@
     <string name="txt_longitude">經：</string>
     <string name="btn_start_logging">開始紀錄</string>
     <string name="txt_satellites">衛星數目：</string>
-    <string name="txt_travel_distance">行過：</string>
+    <string name="txt_travel_distance">路程：</string>
+    <string name="accuracy_within" formatted="false">%s %s以內</string>
+    <string name="time_onesecond">1 秒</string>
+    <string name="time_halfminute">½ 分鐘</string>
+    <string name="time_oneminute">1 分鐘</string>
+    <string name="time_onehour">1 個鐘</string>
+    <string name="time_quarterhour">15 分鐘</string>
+    <string name="time_halfhour">½ 個鐘</string>
+    <string name="time_oneandhalfhours">1½ 個鐘</string>
+    <string name="time_twoandhalfhours">2½ 個鐘</string>
+    <string name="time_hms_format" formatted="false">%s 時 %s 分 %s 秒</string>
 </resources>
