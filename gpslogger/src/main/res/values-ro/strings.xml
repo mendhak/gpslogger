@@ -20,8 +20,8 @@
     <string name="txt_satellites">Sateliți:</string>
     <string name="txt_accuracy">Precizie:</string>
     <string name="txt_travel_distance">Parcurs:</string>
-    <string name="btn_start_logging">Începe inregistrarea</string>
-    <string name="btn_stop_logging">Sfarsit inregistrare</string>
+    <string name="btn_start_logging">Pornește înregistrarea</string>
+    <string name="btn_stop_logging">Oprește înregistrarea</string>
     <string name="gpslogger_still_running">GPSLogger încă rulează.</string>
     <string name="summary_loggingto">Inregistrare in:</string>
     <string name="summary_loggingto_screen">Doar pe ecran</string>
@@ -204,7 +204,7 @@
     <string name="autoftp_test_summary">Încărcaţi un fişier de test la serverul FTP</string>
     <string name="autoftp_testing">Testare incarcare fisier pe FTP</string>
     <string name="autoftp_invalid_settings">Setări invalide</string>
-    <string name="autoftp_invalid_summary">Unele dintre setări sunt incorecte. Asiguraţi-vă că aţi completat toate câmpurile relevante.     </string>
+    <string name="autoftp_invalid_summary">Unele setări sunt incorecte. Asigurați-vă că ați completat toate câmpurile relevante.</string>
     <string name="menu_faq">Ajutor si Întrebări frecvente</string>
     <string name="log_customurl_title">Logheaza in URL-ul personalizat</string>
     <string name="log_customurl_summary">Trimite informaţii de conectare pentru propriul server prin HTTP</string>
@@ -241,4 +241,10 @@
     <string name="app_name">GPSLogger</string>
     <string name="not_applicable">nu este aplicabil</string>
     <string name="meters_per_second"> m/s</string>
+    <string name="kilometers"> km</string>
+    <string name="feet_per_second"> ft/s</string>
+    <string name="kilometers_per_hour"> km/h</string>
+    <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
+    <string name="miles_per_hour"> mi/h</string>
+    <string name="miles"> mi</string>
 </resources>
