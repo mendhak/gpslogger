@@ -20,7 +20,6 @@
 package com.mendhak.gpslogger;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.*;
 import android.content.Context;
 import android.content.Intent;
@@ -304,7 +303,6 @@ public class GpsLoggingService extends Service  {
     /**
      * Sets up the auto email timers based on user preferences.
      */
-    @TargetApi(23)
     public void setupAutoSendTimers() {
         LOG.debug("Setting up autosend timers. Auto Send Enabled - " + String.valueOf(preferenceHelper.isAutoSendEnabled())
                 + ", Auto Send Delay - " + String.valueOf(session.getAutoSendDelay()));
@@ -317,8 +315,8 @@ public class GpsLoggingService extends Service  {
 
             PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-            if(Systems.isDozing(this)) {
-                am.setAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerTime, sender);
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                am.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerTime, sender);
             }
             else {
                 am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerTime, sender);
