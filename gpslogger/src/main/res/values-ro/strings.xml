@@ -20,10 +20,10 @@
     <string name="txt_satellites">Sateliți:</string>
     <string name="txt_accuracy">Precizie:</string>
     <string name="txt_travel_distance">Parcurs:</string>
-    <string name="btn_start_logging">Începe inregistrarea</string>
-    <string name="btn_stop_logging">Sfarsit inregistrare</string>
+    <string name="btn_start_logging">Pornește jurnalizarea</string>
+    <string name="btn_stop_logging">Oprește jurnalizarea</string>
     <string name="gpslogger_still_running">GPSLogger încă rulează.</string>
-    <string name="summary_loggingto">Inregistrare in:</string>
+    <string name="summary_loggingto">Jurnal:</string>
     <string name="summary_loggingto_screen">Doar pe ecran</string>
     <string name="summary_freq_every">Frecventa:</string>
     <string name="summary_freq_max">maxim</string>
@@ -80,17 +80,17 @@
     <string name="settings_accuracy_in_meters">Precizia în metri</string>
     <string name="settings_enter_meters">Introduceţi metri (max 9999)</string>
     <!-- Settings -->
-    <string name="pref_logging_title">Detalii de inregistrare</string>
-    <string name="log_gpx_title">Inregistreaza in GPX</string>
-    <string name="log_gpx_summary">Jurnalele de locații într-un fişier GPX de v1.0</string>
-    <string name="log_gpx_11_title">Folosește GPX 1.1</string>
-    <string name="log_gpx_11_summary">Folosește formatul de fișier GPS 1.1 în loc de GPX 1.0</string>
-    <string name="log_kml_title">Înregistrează in KML</string>
-    <string name="log_kml_summary">Jurnalele locațiilor într-un fişier KML v2.2</string>
-    <string name="log_plain_text_title">Jurnal CSV</string>
-    <string name="log_plain_text_summary">Jurnalele locațiilor într-un fişier CSV</string>
-    <string name="log_json_title">Jurnal GeojSON</string>
-    <string name="log_json_summary">Înregistrează în format GeojSON</string>
+    <string name="pref_logging_title">Detaliile jurnalizării</string>
+    <string name="log_gpx_title">Jurnalizează în GPX</string>
+    <string name="log_gpx_summary">Salvează jurnalul într-un fișier GPX v1.0</string>
+    <string name="log_gpx_11_title">Preferă GPX 1.1</string>
+    <string name="log_gpx_11_summary">Folosește formatul GPX v1.1 în loc de GPX v1.0</string>
+    <string name="log_kml_title">Jurnalizează în KML</string>
+    <string name="log_kml_summary">Salvează jurnalul într-un fișier KML v2.2</string>
+    <string name="log_plain_text_title">Jurnalizează în CSV</string>
+    <string name="log_plain_text_summary">Salvează jurnalul într-un fișier CSV</string>
+    <string name="log_json_title">Jurnalizează în GeoJSON</string>
+    <string name="log_json_summary">Salvează jurnalul într-un fișier GeoJSON</string>
     <string name="new_file_creation_title">Creare de fişier nou</string>
     <string name="new_file_creation_summary">Fişierul nou se creeaza in fiecare zi sau de fiecare dată când pornesti inregistrarea.</string>
     <string name="new_file_creation_onceaday">O dată pe zi</string>
@@ -204,16 +204,16 @@
     <string name="autoftp_test_summary">Încărcaţi un fişier de test la serverul FTP</string>
     <string name="autoftp_testing">Testare incarcare fisier pe FTP</string>
     <string name="autoftp_invalid_settings">Setări invalide</string>
-    <string name="autoftp_invalid_summary">Unele dintre setări sunt incorecte. Asiguraţi-vă că aţi completat toate câmpurile relevante.     </string>
+    <string name="autoftp_invalid_summary">Unele setări sunt incorecte. Asigurați-vă că ați completat toate câmpurile relevante.</string>
     <string name="menu_faq">Ajutor si Întrebări frecvente</string>
-    <string name="log_customurl_title">Logheaza in URL-ul personalizat</string>
-    <string name="log_customurl_summary">Trimite informaţii de conectare pentru propriul server prin HTTP</string>
+    <string name="log_customurl_title">Jurnalizează în URL personalizat</string>
+    <string name="log_customurl_summary">Trimite informațiile către propriul server prin HTTP</string>
     <string name="txt_annotation">Adnotare:</string>
     <string name="txt_time_isoformat">Ora UTC (2011-12-25T15:27:33Z):</string>
     <string name="txt_provider">Furnizor:</string>
     <string name="annotation_requires_logging">Adnotările necesită jurnalizare în formatele CSV/GPX/URL particular/GeoJSON</string>
     <string name="gpslogger_folder_title">Salvează în directorul</string>
-    <string name="gpslogger_folder_summary">Calea de salvare a fișierelor jurnal, implicit în /sdcard/GPSLogger</string>
+    <string name="gpslogger_folder_summary">Calea de salvare a jurnalelor, implicit /sdcard/GPSLogger</string>
     <string name="autoftp_directory">Director</string>
     <string name="new_file_custom_message">Poți folosi %SER pentru seria echipamentului, %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER pentru versiune</string>
     <string name="new_file_prefix_serial_title">Folosește seria echipamentului ca prefix la numele fișierului</string>
@@ -224,7 +224,7 @@
     <string name="view_detailed">Vizualizare detaliată</string>
     <string name="view_big">Vizualizare mare</string>
     <string name="view_log">Vedere ca jurnal</string>
-    <string name="bigview_taptotoggle">Atinge pentru a porni/opri înregistrarea</string>
+    <string name="bigview_taptotoggle">Atinge pentru a porni/opri jurnalizarea</string>
     <string name="summary_autosendtargets">Încarcă în:</string>
     <string name="accuracy_filter_title">Filtru precizie</string>
     <string name="accuracy_filter_summary">Preciza minimă necesară pentru ca un punct să fie salvat. Punctele care nu au această precizie nu vor fi salvate.</string>
@@ -241,4 +241,12 @@
     <string name="app_name">GPSLogger</string>
     <string name="not_applicable">nu este aplicabil</string>
     <string name="meters_per_second"> m/s</string>
+    <string name="kilometers"> km</string>
+    <string name="feet_per_second"> ft/s</string>
+    <string name="kilometers_per_hour"> km/h</string>
+    <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
+    <string name="miles_per_hour"> mi/h</string>
+    <string name="miles"> mi</string>
+    <string name="log_nmea_title">Jurnalizează în NMEA</string>
+    <string name="log_nmea_summary">Creează un fișier NMEA brut în timp ce se caută poziția. Acest fișier crește foarte repede. Funcționează doar cu GPS-ul pornit.</string>
 </resources>
